@@ -16,6 +16,7 @@ Collection of useful tools:
 # Features #
 - Set linestyle (Diagram, default, ..)
 - Easy navigating
+- Find & replace (with / without regex)
 - Ports
 - Favorites
 - History

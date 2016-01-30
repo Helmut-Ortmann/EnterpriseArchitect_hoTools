@@ -179,6 +179,11 @@ BundleArtifacts/
 ClientBin/
 ~$*
 *~
+# ho VS2015 mysterious file extension like
+# 8 characters after tilde ~
+# .csproj~5568MKSV
+*.*~*
+*.bak
 *.dbmdl
 *.dbproj.schemaview
 *.pfx
