@@ -31,7 +31,7 @@ using System.Runtime.InteropServices;
 //
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
-// [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.0")] // don't change Major, Minor, otherwise you have to update the component information in Files.wxs
+[assembly: AssemblyVersion("1.2.*")]
+//[assembly: AssemblyVersion("1.0.0.0")] // don't change Major, Minor, otherwise you have to update the component information in Files.wxs
 // possibly make same as ProductVersion in Product.wxs
-[assembly: AssemblyFileVersion("1.1.01.0")]
+[assembly: AssemblyFileVersion("1.2.01.0")]
