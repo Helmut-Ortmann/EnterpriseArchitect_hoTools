@@ -1,5 +1,4 @@
 ﻿using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
@@ -20,7 +19,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(true)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("ba1fc1f6-c147-4bc6-807d-cebb84686312")]
+[assembly: Guid("C426255F-50CF-429C-A627-FEA322C8E208")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -31,6 +30,11 @@ using System.Runtime.InteropServices;
 //
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
-[assembly: AssemblyVersion("1.2.*")]
-//[assembly: AssemblyVersion("1.0.0.0")]  // don't change or you have to make an update on the component entry 
-[assembly: AssemblyFileVersion("1.2.01.01")]  // use same as product version
+//[assembly: AssemblyVersion("1.2.*")] // this will cause the registration to change after every build
+
+// The AddinClass Assembly version is used to display the addin release
+// If you change something you have to update the component information in Files.wxs
+// If not: you get registration error and the Addin isn't loaded in EA
+// Assembly version is used to output release information for an assembly
+[assembly: AssemblyVersion("1.2.5.1")]
+[assembly: AssemblyFileVersion("1.2.5.1")]

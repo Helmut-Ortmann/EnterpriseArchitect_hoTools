@@ -17,13 +17,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Util", "Util\Util.csproj", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution", "Solution", "{2015668A-5B2E-43C9-9E24-F93D54600512}"
 	ProjectSection(SolutionItems) = preProject
-		ActiveX\bin\Release\Active.wxs = ActiveX\bin\Release\Active.wxs
+		ActiveX\bin\Release\ActiveX.wxs = ActiveX\bin\Release\ActiveX.wxs
 		ActiveX\bin\Release\ActiveXCollectRegistrationInfo.bat = ActiveX\bin\Release\ActiveXCollectRegistrationInfo.bat
 		Addin\bin\Release\AddinClass.wxs = Addin\bin\Release\AddinClass.wxs
 		Addin\bin\Release\AddinClassCollectRegistrationInfo.bat = Addin\bin\Release\AddinClassCollectRegistrationInfo.bat
+		Setup\src\Files.wxs = Setup\src\Files.wxs
 		FindAndReplace\bin\Release\FindAndReplace.wxs = FindAndReplace\bin\Release\FindAndReplace.wxs
 		FindAndReplace\bin\Release\FindAndReplaceCollectRegistrationInfo.bat = FindAndReplace\bin\Release\FindAndReplaceCollectRegistrationInfo.bat
+		Setup\src\Product.wxs = Setup\src\Product.wxs
 		README.md = README.md
+		Setup\bin\Release\Setup.msi = Setup\bin\Release\Setup.msi
 	EndProjectSection
 EndProject
 Global

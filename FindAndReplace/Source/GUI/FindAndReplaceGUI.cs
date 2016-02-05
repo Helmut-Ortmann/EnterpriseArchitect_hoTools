@@ -14,7 +14,7 @@ namespace hoTools.Find
 {
     [ComVisible(true)]
     [ClassInterface(ClassInterfaceType.None)]
-    [Guid("4B922F8E-7FAD-45ED-AD49-6004478EBDB3")]
+    [Guid("2703ED16-2C93-4B13-83DC-F72FB6EDBA9E")]
     [ProgId("hoTools.FindAndReplaceGUI")]
     [ComDefaultInterface(typeof(IFindAndReplaceGUI))]
 

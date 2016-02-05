@@ -4,6 +4,10 @@
  <!-- New release:
       1. Product.wxs:   Update ProductVersion (Major.Minor.Build.Revision not used )
          The last number is always 0 
+         This number is used for the installer and is shown as the installed product version
+         Note: Each *.dll has a AssemblyVersion which is defined in AssembleInfo.cs
+         Note: If you change the AssemblyVersion the registry is changed
+               You have to collect registry information and copy it in files.wxs
       2. Update File-Version of Addin.DLL File (Properties Assembly) but not Assembly-Version 
          (new registry of Assembly required)
          A new Assembly Version requires a new DLL-Registration
@@ -14,7 +18,7 @@
          (details in file ActiveX.dll.config). 
      
  -->
-  <?define ProductVersion="1.2.02.01" ?>  <!-- Also: Update AssemblyFileVersion in AddinClass AssemblyInfo.cs properties !!!-->
+  <?define ProductVersion="1.2.5.1" ?>  <!-- Also: Update AssemblyFileVersion in AddinClass AssemblyInfo.cs properties !!!, Update files.wxs because registry has changed-->
   <?define UpgradeCode="3543ED18-28F6-484C-AD8C-FA1A3B72C911" ?>
   <?define Manufacturer="ho" ?>
   <?define ProductName="hoTools" ?>

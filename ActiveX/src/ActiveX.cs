@@ -11,7 +11,7 @@ namespace hoTools.ActiveX
 {
     [ComVisible(true)]
     [ClassInterface(ClassInterfaceType.None)]
-    [Guid("97940198-1C2A-45B9-9CED-5BD780B99BB4")]
+    [Guid("82A06E9C-7568-4E4B-8D2C-A53B8D9A7272")]
     [ProgId("hoTools.ActiveXGUI")]
     [ComDefaultInterface(typeof(IAddinControl))]
 
