@@ -34,6 +34,7 @@ namespace hoTools.Settings
             this.chkAdvancedFeatures.Checked = settings.isAdvancedFeatures;
             this.chkSvnSupport.Checked = settings.isSvnSupport;
             this.chkVcSupport.Checked = settings.isVcSupport;
+            this.chkVcSupport.Checked = settings.isAdancedPorts;
             #endregion
 
             #region linestyle
@@ -522,6 +523,7 @@ namespace hoTools.Settings
             _settings.isSvnSupport = chkSvnSupport.Checked;
             _settings.isVcSupport = chkVcSupport.Checked;
             _settings.isAdvancedFeatures = chkAdvancedFeatures.Checked;
+            _settings.isAdancedPorts = chkPortAdvanced.Checked;
             #endregion
 
             #region Line style

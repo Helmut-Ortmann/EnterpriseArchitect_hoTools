@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using System.Deployment.Application;
 using System.Diagnostics;
 using System.Collections.Generic;
 using hoTools.Utils.Favorites;
@@ -180,7 +181,7 @@ namespace hoTools
         {
             HotkeyHandlers.SetupGlobalHotkeys();
             m_repository = rep;
-            int v = rep.LibraryVersion;
+            //int v = rep.LibraryVersion;
             if (rep.IsSecurityEnabled)
             {
                 //logInUser = Repository.GetCurrentLoginUser(false);
@@ -343,6 +344,7 @@ namespace hoTools
         }
         public override void EA_OnPostInitialized(EA.Repository rep)
         {
+            // gets the file 'AssemblyVersion' of file
             string productVersion = FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).ProductVersion;
             release = productVersion;
             Repository = rep;

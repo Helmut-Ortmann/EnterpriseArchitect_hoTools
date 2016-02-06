@@ -1,17 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Diagnostics;
-using System.Linq;
-using System.Xml.Linq;
-using System.Text;
 using System.Xml;
 using System.Text.RegularExpressions;
 using System.IO;
 using EA;
 using hoTools.Utils.svnUtil;
-
-using hoTools.Utils.Appls;
 
 namespace hoTools.Utils
 {

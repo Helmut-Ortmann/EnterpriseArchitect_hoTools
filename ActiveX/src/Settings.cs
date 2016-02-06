@@ -168,8 +168,33 @@ namespace hoTools.Settings
             }
         }
         #endregion
-        #region Property: isVcSupport
+        #region Property: isAdancedPorts
+
+        public bool isAdancedPorts
+        {
+            get
+            {
+                bool result;
+                if (bool.TryParse(this.currentConfig.AppSettings.Settings["isAdancedPorts"].Value, out result))
+                {
+                    return result;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            set
+            {
+                this.currentConfig.AppSettings.Settings["isAdancedPorts"].Value = value.ToString();
+
+            }
+
+        }
+        #endregion
         
+        #region Property: isVcSupport
+
         public bool isVcSupport
         {
             get

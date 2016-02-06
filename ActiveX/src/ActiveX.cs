@@ -1777,6 +1777,7 @@ namespace hoTools.ActiveX
             setSvnModuleTaggedValuesrecursiveToolStripMenuItem.Visible = visibleSvnVC;
             setSvnKeywordsToolStripMenuItem.Visible = visibleSvnVC;
 
+            // Vissible VC
             bool visibleVC = true;
             if (_addinSettings.isVcSupport == false)visibleVC = false;
            
@@ -1792,6 +1793,18 @@ namespace hoTools.ActiveX
             {
                 versionControlToolStripMenuItem.Visible = true;
             }
+
+            // Visual Port Support
+            bool visiblePorts = true;
+            if (_addinSettings.isAdancedPorts) visiblePorts = false;
+            btnLeft.Visible = visiblePorts;
+            btnRight.Visible = visiblePorts;
+            btnUp.Visible = visiblePorts;
+            btnDown.Visible = visiblePorts;
+
+            btnLabelLeft.Visible = visiblePorts;
+            btnLabelRight.Visible = visiblePorts;
+
 
         }
         #endregion

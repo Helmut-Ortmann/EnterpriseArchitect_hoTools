@@ -32,9 +32,8 @@ using System.Runtime.InteropServices;
 // by using the '*' as shown below:
 //[assembly: AssemblyVersion("1.2.*")] // this will cause the registration to change after every build
 
-// The AddinClass Assembly version is used to display the addin release
-// If you change something you have to update the component information in Files.wxs
+// If you change the AssemblyVersion you have to update the component information in Files.wxs
 // If not: you get registration error and the Addin isn't loaded in EA
-// Assembly version is used to output release information for an assembly
-[assembly: AssemblyVersion("1.2.5.1")]
-[assembly: AssemblyFileVersion("1.2.5.1")]
+[assembly: AssemblyVersion("1.2.5.2")]
+// The 'AddinClass' Assembly file version is used to output the version of the Addin
+[assembly: AssemblyFileVersion("1.2.5.5")]

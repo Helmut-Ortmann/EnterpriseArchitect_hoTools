@@ -139,6 +139,7 @@
             this.label30 = new System.Windows.Forms.Label();
             this.label32 = new System.Windows.Forms.Label();
             this.txtFileManagerPath = new System.Windows.Forms.TextBox();
+            this.chkVcSupport = new System.Windows.Forms.CheckBox();
             this.txtBtn1Text = new System.Windows.Forms.TextBox();
             this.txtBtn1SearchName = new System.Windows.Forms.TextBox();
             this.txtBtn1SearchTerm = new System.Windows.Forms.TextBox();
@@ -192,8 +193,17 @@
             this.chkSvnSupport = new System.Windows.Forms.CheckBox();
             this.chkAdvancedFeatures = new System.Windows.Forms.CheckBox();
             this.label34 = new System.Windows.Forms.Label();
-            this.chkVcSupport = new System.Windows.Forms.CheckBox();
             this.label35 = new System.Windows.Forms.Label();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.label36 = new System.Windows.Forms.Label();
+            this.label37 = new System.Windows.Forms.Label();
+            this.label38 = new System.Windows.Forms.Label();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.label39 = new System.Windows.Forms.Label();
+            this.checkBox3 = new System.Windows.Forms.CheckBox();
+            this.label40 = new System.Windows.Forms.Label();
+            this.label41 = new System.Windows.Forms.Label();
+            this.chkPortAdvanced = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -1389,6 +1399,16 @@
             this.toolTip1.SetToolTip(this.txtFileManagerPath, "Path to a file manager like:\r\n- Explorer.exe\r\n- Totalcmd.exe\r\n\r\nThingk if you hav" +
         "e to change the %PATH% environment variable");
             // 
+            // chkVcSupport
+            // 
+            this.chkVcSupport.AutoSize = true;
+            this.chkVcSupport.Location = new System.Drawing.Point(205, 71);
+            this.chkVcSupport.Name = "chkVcSupport";
+            this.chkVcSupport.Size = new System.Drawing.Size(18, 17);
+            this.chkVcSupport.TabIndex = 203;
+            this.toolTip1.SetToolTip(this.chkVcSupport, "If you have Version Control");
+            this.chkVcSupport.UseVisualStyleBackColor = true;
+            // 
             // txtBtn1Text
             // 
             this.txtBtn1Text.Location = new System.Drawing.Point(545, 63);
@@ -1922,16 +1942,6 @@
             this.label34.TabIndex = 200;
             this.label34.Text = "Path File-Manager";
             // 
-            // chkVcSupport
-            // 
-            this.chkVcSupport.AutoSize = true;
-            this.chkVcSupport.Location = new System.Drawing.Point(205, 71);
-            this.chkVcSupport.Name = "chkVcSupport";
-            this.chkVcSupport.Size = new System.Drawing.Size(18, 17);
-            this.chkVcSupport.TabIndex = 203;
-            this.toolTip1.SetToolTip(this.chkVcSupport, "If you have Version Control");
-            this.chkVcSupport.UseVisualStyleBackColor = true;
-            // 
             // label35
             // 
             this.label35.AutoSize = true;
@@ -1942,18 +1952,126 @@
             this.label35.TabIndex = 202;
             this.label35.Text = "VC Support";
             // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(964, 506);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(18, 17);
+            this.checkBox1.TabIndex = 205;
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // label36
+            // 
+            this.label36.AutoSize = true;
+            this.label36.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label36.Location = new System.Drawing.Point(773, 510);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(148, 20);
+            this.label36.TabIndex = 204;
+            this.label36.Text = "Advanced features";
+            // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label37.Location = new System.Drawing.Point(803, 508);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(148, 20);
+            this.label37.TabIndex = 206;
+            this.label37.Text = "Advanced features";
+            // 
+            // label38
+            // 
+            this.label38.AutoSize = true;
+            this.label38.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label38.Location = new System.Drawing.Point(811, 516);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(148, 20);
+            this.label38.TabIndex = 207;
+            this.label38.Text = "Advanced features";
+            // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Location = new System.Drawing.Point(972, 514);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(18, 17);
+            this.checkBox2.TabIndex = 209;
+            this.checkBox2.UseVisualStyleBackColor = true;
+            // 
+            // label39
+            // 
+            this.label39.AutoSize = true;
+            this.label39.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label39.Location = new System.Drawing.Point(781, 518);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(148, 20);
+            this.label39.TabIndex = 208;
+            this.label39.Text = "Advanced features";
+            // 
+            // checkBox3
+            // 
+            this.checkBox3.AutoSize = true;
+            this.checkBox3.Location = new System.Drawing.Point(980, 522);
+            this.checkBox3.Name = "checkBox3";
+            this.checkBox3.Size = new System.Drawing.Size(18, 17);
+            this.checkBox3.TabIndex = 211;
+            this.checkBox3.UseVisualStyleBackColor = true;
+            // 
+            // label40
+            // 
+            this.label40.AutoSize = true;
+            this.label40.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label40.Location = new System.Drawing.Point(789, 526);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(148, 20);
+            this.label40.TabIndex = 210;
+            this.label40.Text = "Advanced features";
+            // 
+            // label41
+            // 
+            this.label41.AutoSize = true;
+            this.label41.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label41.Location = new System.Drawing.Point(14, 165);
+            this.label41.Name = "label41";
+            this.label41.Size = new System.Drawing.Size(179, 20);
+            this.label41.TabIndex = 196;
+            this.label41.Text = "Advanced Port support";
+            this.toolTip1.SetToolTip(this.label41, "Add advanced toolsupport to GUI");
+            // 
+            // chkPortAdvanced
+            // 
+            this.chkPortAdvanced.AutoSize = true;
+            this.chkPortAdvanced.Location = new System.Drawing.Point(204, 168);
+            this.chkPortAdvanced.Name = "chkPortAdvanced";
+            this.chkPortAdvanced.Size = new System.Drawing.Size(18, 17);
+            this.chkPortAdvanced.TabIndex = 199;
+            this.toolTip1.SetToolTip(this.chkPortAdvanced, "Add advanced toolsupport to GUI");
+            this.chkPortAdvanced.UseVisualStyleBackColor = true;
+            // 
             // frmSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1755, 1036);
+            this.Controls.Add(this.checkBox3);
+            this.Controls.Add(this.label40);
+            this.Controls.Add(this.checkBox2);
+            this.Controls.Add(this.label39);
+            this.Controls.Add(this.label38);
+            this.Controls.Add(this.label37);
+            this.Controls.Add(this.checkBox1);
+            this.Controls.Add(this.label36);
             this.Controls.Add(this.chkVcSupport);
             this.Controls.Add(this.label35);
             this.Controls.Add(this.txtFileManagerPath);
             this.Controls.Add(this.label34);
+            this.Controls.Add(this.chkPortAdvanced);
             this.Controls.Add(this.chkAdvancedFeatures);
             this.Controls.Add(this.chkSvnSupport);
             this.Controls.Add(this.label33);
+            this.Controls.Add(this.label41);
             this.Controls.Add(this.label29);
             this.Controls.Add(this.cmbGlobalKeySearch5Mod4);
             this.Controls.Add(this.cmbGlobalKeySearch5Mod2);
@@ -2214,5 +2332,15 @@
         private System.Windows.Forms.Label label34;
         private System.Windows.Forms.CheckBox chkVcSupport;
         private System.Windows.Forms.Label label35;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.Label label36;
+        private System.Windows.Forms.Label label37;
+        private System.Windows.Forms.Label label38;
+        private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.Label label39;
+        private System.Windows.Forms.CheckBox checkBox3;
+        private System.Windows.Forms.Label label40;
+        private System.Windows.Forms.Label label41;
+        private System.Windows.Forms.CheckBox chkPortAdvanced;
     }
 }

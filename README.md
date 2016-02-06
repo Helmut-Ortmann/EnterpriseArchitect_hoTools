@@ -12,6 +12,11 @@ Collection of useful tools:
 - Intuitive GUI
 - Online help
 
+# Preconditions
+- .NET 4
+- EA 10 or greater
+- Visual Studio Debug: Select "Enable native code debugging"
+
 
 # Features #
 - Set linestyle (Diagram, default, ..)
