@@ -311,16 +311,18 @@ namespace hoTools.ActiveX
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            string configFilePath = _addinSettings.ConfigFilePath;
             switch (_addinSettings.Customer)
             {
+                
                 case AddinSettings.CustomerCfg.VAR1:
-                    EaService.aboutVAR1(m_release);
+                    EaService.aboutVAR1(m_release, configFilePath);
                     break;
                 case AddinSettings.CustomerCfg.hoTools:
-                    EaService.about(m_release);
+                    EaService.about(m_release, configFilePath);
                     break;
                 default:
-                    EaService.about(m_release);
+                    EaService.about(m_release, configFilePath);
                     break;
             }
 
@@ -898,7 +900,7 @@ namespace hoTools.ActiveX
             // 
             this.btnLocateOperation.Location = new System.Drawing.Point(-1, 197);
             this.btnLocateOperation.Name = "btnLocateOperation";
-            this.btnLocateOperation.Size = new System.Drawing.Size(116, 25);
+            this.btnLocateOperation.Size = new System.Drawing.Size(130, 25);
             this.btnLocateOperation.TabIndex = 8;
             this.btnLocateOperation.Text = "Locate Operation";
             this.toolTip.SetToolTip(this.btnLocateOperation, "Locate the operation for an action or behavior (statechart, activity, interaction" +
@@ -910,18 +912,18 @@ namespace hoTools.ActiveX
             // 
             this.btnAddElementNote.Location = new System.Drawing.Point(-2, 257);
             this.btnAddElementNote.Name = "btnAddElementNote";
-            this.btnAddElementNote.Size = new System.Drawing.Size(116, 25);
+            this.btnAddElementNote.Size = new System.Drawing.Size(130, 25);
             this.btnAddElementNote.TabIndex = 9;
             this.btnAddElementNote.Text = "Add Element Note";
-            this.toolTip.SetToolTip(this.btnAddElementNote, "Add a element note to an Element");
+            this.toolTip.SetToolTip(this.btnAddElementNote, "Add an element note to an Element in a diagram");
             this.btnAddElementNote.UseVisualStyleBackColor = true;
             this.btnAddElementNote.Click += new System.EventHandler(this.btnAddElementNote_Click);
             // 
             // btnAddDiagramNote
             // 
-            this.btnAddDiagramNote.Location = new System.Drawing.Point(120, 257);
+            this.btnAddDiagramNote.Location = new System.Drawing.Point(138, 257);
             this.btnAddDiagramNote.Name = "btnAddDiagramNote";
-            this.btnAddDiagramNote.Size = new System.Drawing.Size(105, 25);
+            this.btnAddDiagramNote.Size = new System.Drawing.Size(158, 25);
             this.btnAddDiagramNote.TabIndex = 10;
             this.btnAddDiagramNote.Text = "Add Diagram Note";
             this.toolTip.SetToolTip(this.btnAddDiagramNote, "Add a diagram note to the diagram (connected to diagram note)");
@@ -932,7 +934,7 @@ namespace hoTools.ActiveX
             // 
             this.btnLocateType.Location = new System.Drawing.Point(-2, 226);
             this.btnLocateType.Name = "btnLocateType";
-            this.btnLocateType.Size = new System.Drawing.Size(117, 25);
+            this.btnLocateType.Size = new System.Drawing.Size(131, 25);
             this.btnLocateType.TabIndex = 11;
             this.btnLocateType.Text = "Locate Type";
             this.toolTip.SetToolTip(this.btnLocateType, "Locate to the type, trigger,signal...  of the selected element/connector");
@@ -941,9 +943,9 @@ namespace hoTools.ActiveX
             // 
             // btnFindUsage
             // 
-            this.btnFindUsage.Location = new System.Drawing.Point(121, 197);
+            this.btnFindUsage.Location = new System.Drawing.Point(138, 197);
             this.btnFindUsage.Name = "btnFindUsage";
-            this.btnFindUsage.Size = new System.Drawing.Size(132, 25);
+            this.btnFindUsage.Size = new System.Drawing.Size(158, 25);
             this.btnFindUsage.TabIndex = 12;
             this.btnFindUsage.Text = "Find Usage";
             this.toolTip.SetToolTip(this.btnFindUsage, "Find the usage of the selected element");
@@ -954,7 +956,7 @@ namespace hoTools.ActiveX
             // 
             this.btnDisplaySpecification.Location = new System.Drawing.Point(-1, 166);
             this.btnDisplaySpecification.Name = "btnDisplaySpecification";
-            this.btnDisplaySpecification.Size = new System.Drawing.Size(116, 25);
+            this.btnDisplaySpecification.Size = new System.Drawing.Size(130, 25);
             this.btnDisplaySpecification.TabIndex = 13;
             this.btnDisplaySpecification.Text = "Specification";
             this.toolTip.SetToolTip(this.btnDisplaySpecification, "Display the Specification according to file property");
@@ -963,9 +965,9 @@ namespace hoTools.ActiveX
             // 
             // btnComposite
             // 
-            this.btnComposite.Location = new System.Drawing.Point(121, 226);
+            this.btnComposite.Location = new System.Drawing.Point(138, 226);
             this.btnComposite.Name = "btnComposite";
-            this.btnComposite.Size = new System.Drawing.Size(132, 25);
+            this.btnComposite.Size = new System.Drawing.Size(158, 25);
             this.btnComposite.TabIndex = 16;
             this.btnComposite.Text = "Composite";
             this.toolTip.SetToolTip(this.btnComposite, "Navigate between Element and Composite Diagram");
@@ -1018,9 +1020,9 @@ namespace hoTools.ActiveX
             // 
             // btnUpdateActivityParameter
             // 
-            this.btnUpdateActivityParameter.Location = new System.Drawing.Point(121, 166);
+            this.btnUpdateActivityParameter.Location = new System.Drawing.Point(138, 166);
             this.btnUpdateActivityParameter.Name = "btnUpdateActivityParameter";
-            this.btnUpdateActivityParameter.Size = new System.Drawing.Size(134, 25);
+            this.btnUpdateActivityParameter.Size = new System.Drawing.Size(160, 25);
             this.btnUpdateActivityParameter.TabIndex = 23;
             this.btnUpdateActivityParameter.Text = "UpdateParameter";
             this.toolTip.SetToolTip(this.btnUpdateActivityParameter, "Update Activity Parameter from operation");
@@ -1253,25 +1255,25 @@ namespace hoTools.ActiveX
             // btnLabelLeft
             // 
             this.btnLabelLeft.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnLabelLeft.Location = new System.Drawing.Point(121, 287);
+            this.btnLabelLeft.Location = new System.Drawing.Point(138, 287);
             this.btnLabelLeft.Name = "btnLabelLeft";
-            this.btnLabelLeft.Size = new System.Drawing.Size(101, 23);
+            this.btnLabelLeft.Size = new System.Drawing.Size(103, 23);
             this.btnLabelLeft.TabIndex = 36;
             this.btnLabelLeft.Text = "< Label left";
             this.btnLabelLeft.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.toolTip.SetToolTip(this.btnLabelLeft, "Move selected Port label left");
+            this.toolTip.SetToolTip(this.btnLabelLeft, "Move selected Ports label left");
             this.btnLabelLeft.UseVisualStyleBackColor = true;
             this.btnLabelLeft.Click += new System.EventHandler(this.movePortLableMinusPositionToolStripMenuItem_Click);
             // 
             // btnLabelRight
             // 
-            this.btnLabelRight.Location = new System.Drawing.Point(121, 314);
+            this.btnLabelRight.Location = new System.Drawing.Point(138, 314);
             this.btnLabelRight.Name = "btnLabelRight";
-            this.btnLabelRight.Size = new System.Drawing.Size(101, 23);
+            this.btnLabelRight.Size = new System.Drawing.Size(103, 23);
             this.btnLabelRight.TabIndex = 37;
             this.btnLabelRight.Text = "> Label right";
             this.btnLabelRight.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.toolTip.SetToolTip(this.btnLabelRight, "Move selected Port label right");
+            this.toolTip.SetToolTip(this.btnLabelRight, "Move selected Ports label right");
             this.btnLabelRight.UseVisualStyleBackColor = true;
             this.btnLabelRight.Click += new System.EventHandler(this.movePortLablePlusPositionToolStripMenuItem_Click);
             // 
@@ -1457,7 +1459,7 @@ namespace hoTools.ActiveX
     "vision\r\n\r\nSelect a package to proceed all recursive package.";
             this.setSvnModuleTaggedValuesrecursiveToolStripMenuItem.Click += new System.EventHandler(this.setSvnModuleTaggedValuesrecursiveToolStripMenuItem_Click);
             // 
-            // PortToolStripMenuItem
+            // portToolStripMenuItem
             // 
             this.portToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.movePortsToolStripMenuItem,
@@ -1483,9 +1485,10 @@ namespace hoTools.ActiveX
             this.movePortLabelRightToolStripMenuItem,
             this.toolStripSeparator9,
             this.orderDiagramItemsToolStripMenuItem});
-            this.portToolStripMenuItem.Name = "zFLTToolStripMenuItem";
+            this.portToolStripMenuItem.Name = "portToolStripMenuItem";
             this.portToolStripMenuItem.Size = new System.Drawing.Size(47, 24);
             this.portToolStripMenuItem.Text = "&Port";
+            this.portToolStripMenuItem.ToolTipText = "Functions related to port like:\r\n- Visibility\r\n- Move\r\n- Connect";
             // 
             // movePortsToolStripMenuItem
             // 
@@ -1661,15 +1664,17 @@ namespace hoTools.ActiveX
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(125, 26);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
             this.aboutToolStripMenuItem.Text = "&About";
+            this.aboutToolStripMenuItem.ToolTipText = "Information about hoTools";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem1
             // 
             this.helpToolStripMenuItem1.Name = "helpToolStripMenuItem1";
-            this.helpToolStripMenuItem1.Size = new System.Drawing.Size(125, 26);
+            this.helpToolStripMenuItem1.Size = new System.Drawing.Size(181, 26);
             this.helpToolStripMenuItem1.Text = "&Help";
+            this.helpToolStripMenuItem1.ToolTipText = "Help";
             this.helpToolStripMenuItem1.Click += new System.EventHandler(this.helpToolStripMenuItem1_Click);
             // 
             // lbl_Release
@@ -1682,6 +1687,7 @@ namespace hoTools.ActiveX
             this.lbl_Release.Size = new System.Drawing.Size(58, 20);
             this.lbl_Release.TabIndex = 26;
             this.lbl_Release.Text = "label2";
+            this.toolTip.SetToolTip(this.lbl_Release, "AddinClass.dll AssemblyFileVersion");
             // 
             // toolStripContainer1
             // 
@@ -1795,8 +1801,9 @@ namespace hoTools.ActiveX
             }
 
             // Visual Port Support
-            bool visiblePorts = true;
-            if (_addinSettings.isAdancedPorts) visiblePorts = false;
+            bool visiblePorts = false;
+            if (_addinSettings.isAdvancedPort) visiblePorts = true;
+
             btnLeft.Visible = visiblePorts;
             btnRight.Visible = visiblePorts;
             btnUp.Visible = visiblePorts;
@@ -1804,6 +1811,12 @@ namespace hoTools.ActiveX
 
             btnLabelLeft.Visible = visiblePorts;
             btnLabelRight.Visible = visiblePorts;
+
+            // Note in diagram support
+            bool visibleDiagramNote = false;
+            if (_addinSettings.isAdvancedDiagramNote) visibleDiagramNote = true;
+            btnAddDiagramNote.Visible = visibleDiagramNote;
+            btnAddElementNote.Visible = visibleDiagramNote;
 
 
         }

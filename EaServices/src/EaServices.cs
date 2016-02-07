@@ -4430,9 +4430,9 @@ namespace hoTools.EaServices
         }
         #endregion
 
-        public static void about(string release)
+        public static void about(string release, string configFilePath)
         {
-            string installDir = "Installed in:" + Path.GetDirectoryName(Assembly.GetAssembly(typeof(EaService)).CodeBase);
+            string installDir = Path.GetDirectoryName(Assembly.GetAssembly(typeof(EaService)).CodeBase);
             MessageBox.Show("!!!Make live with EA easier and more efficient!!!\n\n\n"+
                       "Helmut.Ortmann@t-online.de\n +49 172 / 51 79 16 7\n\n"+
                       " Workshops, Training Coaching, Project Work\n"+
@@ -4444,18 +4444,20 @@ namespace hoTools.EaServices
                       " -- Addin\n" +
                       " -- Query & Script\n\n\n"+
                       "!!!Make live with EA easier and more efficient!!!"+
-                      "\n\n"+installDir
-                    , "hoTools  " + release);
+                      "\n\nInstall:\t"+installDir +
+                      "\nConfig:\t" + configFilePath
+                    , "hoTools  " + release + " (AddinClass.dll AssemblyFileVersion)");
         }
-        public static void aboutVAR1(string release) {
-            string installDir = "Installed in:" + Path.GetDirectoryName(Assembly.GetAssembly(typeof(EaService)).CodeBase);
+        public static void aboutVAR1(string release, string configFilePath) {
+            string installDir = Path.GetDirectoryName(Assembly.GetAssembly(typeof(EaService)).CodeBase);
             MessageBox.Show("Helmut.Ortmann@t-online.de\n"+
-                            "external.Helmut.Ortmann@zf-lenksysteme.com\n" +
-                            "Schwäbisch Gemünd\n" +
+                            "Helmut.Ortmann@t-online.de\n" +
+                            "Germany\n" +
                             "privat: +49 172 / 51 79 16 7\n"+
-                            "ZF-LS:  31-7186" +
-                             "\n\n" + installDir
-                    , "hoTools for ZF-LS  " + release);
+                            "VAR1:  xx-xxxx" +
+                            "\n\nInstall:\t" + installDir +
+                            "\nConfig:\t" + configFilePath
+                    , "hoTools for VAR1  " + release);
         }
     }
 }

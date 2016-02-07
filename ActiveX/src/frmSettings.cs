@@ -1,24 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using Control.EaAddinShortcuts;
 using hoTools.ActiveX;
-using hoTools.EaServices;
 using GlobalHotkeys;
 
 
 namespace hoTools.Settings
 {
+    /// <summary>
+    /// frmSettings  Settings of hoTools
+    /// Reads from configuration, displays the content and write to configuration.
+    /// </summary>
     public partial class frmSettings : Form
-    {
+    {   
         private AddinSettings _settings;
         private AddinControlGUI _addinControl = null;
 
+        #region Constructor
+        /// <summary>
+        /// Constructor with
+        /// </summary>
+        /// <param name="settings">Object with settings</param>
+        /// <param name="addinControl">Object with Control</param>
         public frmSettings(AddinSettings settings, AddinControlGUI addinControl)
         {
             InitializeComponent();
@@ -26,15 +30,14 @@ namespace hoTools.Settings
             this._settings = settings;
             this._addinControl = addinControl;
 
-           
-
             #region miscellaneous
             this.txtQuickSearch.Text = settings.quickSearchName;
             this.txtFileManagerPath.Text = settings.FileManagerPath;
             this.chkAdvancedFeatures.Checked = settings.isAdvancedFeatures;
             this.chkSvnSupport.Checked = settings.isSvnSupport;
             this.chkVcSupport.Checked = settings.isVcSupport;
-            this.chkVcSupport.Checked = settings.isAdancedPorts;
+            this.chkAdvancedPort.Checked = settings.isAdvancedPort;
+            this.chkAdvancedDiagramNote.Checked = settings.isAdvancedDiagramNote;
             #endregion
 
             #region linestyle
@@ -514,7 +517,14 @@ namespace hoTools.Settings
 
 
         }
+        #endregion
 
+        #region StoreAll ButtonOkClick()
+        /// <summary>
+        /// Store the settings, ok button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnOk_Click(object sender, EventArgs e)
         {
             #region miscellaneous
@@ -523,7 +533,8 @@ namespace hoTools.Settings
             _settings.isSvnSupport = chkSvnSupport.Checked;
             _settings.isVcSupport = chkVcSupport.Checked;
             _settings.isAdvancedFeatures = chkAdvancedFeatures.Checked;
-            _settings.isAdancedPorts = chkPortAdvanced.Checked;
+            _settings.isAdvancedPort = chkAdvancedPort.Checked;
+            _settings.isAdvancedDiagramNote = chkAdvancedDiagramNote.Checked;
             #endregion
 
             #region Line style
@@ -683,6 +694,7 @@ namespace hoTools.Settings
             this.Close();
 
         }
+        #endregion
 
         private int serviceGetIndex(List<hoTools.EaServices.ServiceCall> l_services, string GUID)
         {
@@ -697,11 +709,5 @@ namespace hoTools.Settings
         {
             this.Close();
         }
-
-        private void groupBox2_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-       }
+    }
 }

@@ -228,16 +228,17 @@ namespace hoTools.Find
         #region aboutToolStripMenuItem_Click
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            string configFilePath = _addinSettings.ConfigFilePath;
             switch (_addinSettings.Customer)
             {
                 case AddinSettings.CustomerCfg.VAR1:
-                    EaService.aboutVAR1(_release);
+                    EaService.aboutVAR1(_release, configFilePath);
                     break;
                 case AddinSettings.CustomerCfg.hoTools:
-                    EaService.about(_release);
+                    EaService.about(_release, configFilePath);
                     break;
                 default:
-                    EaService.about(_release);
+                    EaService.about(_release, configFilePath);
                     break;
             }
         }

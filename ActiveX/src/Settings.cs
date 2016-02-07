@@ -25,15 +25,20 @@ namespace hoTools.Settings
     /// Read current setting
     /// Write current settings
     /// </summary>
-/// 
+    /// 
     //----------------------------------------------------------------------------------
     // Maintaining of configuration settings in 
-    // Current:   %appdata%\ho\ho_addin\user.config
+    // Current:   %appdata%\ho\hoTools\user.config
     // Default:   ..\Addin\ActiveX.dll.config   with copy to output directory             
     //----------------------------------------------------------------------------------
     // Make sure to copy the default settings in project output.
     public class AddinSettings
     {
+        // Filepath of configuration file
+        // %APPDATA%ho\hoTools\user.config
+        public string ConfigFilePath { get; }
+        public string ConfigPath { get; }
+
         // Configuration 5 button searches by key
         public EaAddinButtons[] buttonsSearch = null;
 
@@ -66,7 +71,7 @@ namespace hoTools.Settings
 
             //the roamingConfig now get a path such as C:\Users\<user>\AppData\Roaming\Sparx_Systems_Pty_Ltd\DefaultDomain_Path_2epjiwj3etsq5yyljkyqqi2yc4elkrkf\9,_2,_0,_921\user.config
             // which I don't like. So we move up three directories and then add a directory for the EA Navigator so that we get
-            // C:\Users\<user>\AppData\Roaming\GeertBellekens\EANavigator\user.config
+            // C:\Users\<user>\AppData\Roaming\ho\hoTools\user.config
             string configFileName = System.IO.Path.GetFileName(roamingConfig.FilePath);
             string configDirectory = System.IO.Directory.GetParent(roamingConfig.FilePath).Parent.Parent.Parent.FullName;
             string path = "";
@@ -82,13 +87,16 @@ namespace hoTools.Settings
                 break;
 
             }
-            string newConfigFilePath = configDirectory + path + configFileName;
+            // remember 
+            ConfigPath = configDirectory + path;
+            ConfigFilePath = ConfigPath + configFileName;
+
             // Map the roaming configuration file. This
             // enables the application to access 
             // the configuration file using the
             // System.Configuration.Configuration class
             ExeConfigurationFileMap configFileMap = new ExeConfigurationFileMap();
-            configFileMap.ExeConfigFilename = newConfigFilePath;
+            configFileMap.ExeConfigFilename = ConfigFilePath;
             // Get the mapped configuration file.
             currentConfig = ConfigurationManager.OpenMappedExeConfiguration(configFileMap, ConfigurationUserLevel.None);
             //merge the default settings
@@ -168,14 +176,14 @@ namespace hoTools.Settings
             }
         }
         #endregion
-        #region Property: isAdancedPorts
+        #region Property: isAdvancedPort
 
-        public bool isAdancedPorts
+        public bool isAdvancedPort
         {
             get
             {
                 bool result;
-                if (bool.TryParse(this.currentConfig.AppSettings.Settings["isAdancedPorts"].Value, out result))
+                if (bool.TryParse(this.currentConfig.AppSettings.Settings["isAdvancedPort"].Value, out result))
                 {
                     return result;
                 }
@@ -186,13 +194,37 @@ namespace hoTools.Settings
             }
             set
             {
-                this.currentConfig.AppSettings.Settings["isAdancedPorts"].Value = value.ToString();
+                this.currentConfig.AppSettings.Settings["isAdvancedPort"].Value = value.ToString();
 
             }
 
         }
         #endregion
-        
+        #region Property: isAdvancedDiagramNote
+
+        public bool isAdvancedDiagramNote
+        {
+            get
+            {
+                bool result;
+                if (bool.TryParse(this.currentConfig.AppSettings.Settings["isAdvancedDiagramNote"].Value, out result))
+                {
+                    return result;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            set
+            {
+                this.currentConfig.AppSettings.Settings["isAdvancedDiagramNote"].Value = value.ToString();
+
+            }
+
+        }
+        #endregion
+
         #region Property: isVcSupport
 
         public bool isVcSupport

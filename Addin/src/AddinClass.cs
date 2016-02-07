@@ -49,8 +49,10 @@ namespace hoTools
 {
     public class AddinClass : EAAddinFramework.EAAddinBase
     {
+        // Overwritten by AdinClass AssemblyFileVersion
+        // This should be identical to installed product version from WIX installer (ProductVersion)
         string release = "X.X.XXX.XX"; // Major, Minor, Build, free,
-                                       // overwritten by product version
+                                       
         // static due to global key definitions
         static EA.Repository Repository = null;
         static AddinSettings AddinSettings = null;
@@ -181,7 +183,7 @@ namespace hoTools
         {
             HotkeyHandlers.SetupGlobalHotkeys();
             m_repository = rep;
-            //int v = rep.LibraryVersion;
+            int v = rep.LibraryVersion;
             if (rep.IsSecurityEnabled)
             {
                 //logInUser = Repository.GetCurrentLoginUser(false);
@@ -344,7 +346,7 @@ namespace hoTools
         }
         public override void EA_OnPostInitialized(EA.Repository rep)
         {
-            // gets the file 'AssemblyVersion' of file
+            // gets the file 'AssemblyFileVersion' of file AddinClass.dll
             string productVersion = FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).ProductVersion;
             release = productVersion;
             Repository = rep;
