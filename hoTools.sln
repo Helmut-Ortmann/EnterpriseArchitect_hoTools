@@ -26,17 +26,21 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{71383584-777C-46C1-84EF-C4DA7F692189}"
 	ProjectSection(SolutionItems) = preProject
 		Addin\ActiveX.dll.config = Addin\ActiveX.dll.config
+		Addin\Properties\AssemblyInfo.cs = Addin\Properties\AssemblyInfo.cs
+		Setup\src\Product.wxs = Setup\src\Product.wxs
+		README.md = README.md
+		Setup\bin\Release\Setup.msi = Setup\bin\Release\Setup.msi
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Advanced", "Advanced", "{A9B0B204-36DD-466D-B5C1-A9FD55ED7A4B}"
+	ProjectSection(SolutionItems) = preProject
 		ActiveX\bin\Release\ActiveX.wxs = ActiveX\bin\Release\ActiveX.wxs
 		ActiveX\bin\Release\ActiveXCollectRegistrationInfo.bat = ActiveX\bin\Release\ActiveXCollectRegistrationInfo.bat
 		Addin\bin\Release\AddinClass.wxs = Addin\bin\Release\AddinClass.wxs
 		Addin\bin\Release\AddinClassCollectRegistrationInfo.bat = Addin\bin\Release\AddinClassCollectRegistrationInfo.bat
-		Addin\Properties\AssemblyInfo.cs = Addin\Properties\AssemblyInfo.cs
 		Setup\src\Files.wxs = Setup\src\Files.wxs
 		FindAndReplace\bin\Release\FindAndReplace.wxs = FindAndReplace\bin\Release\FindAndReplace.wxs
 		FindAndReplace\bin\Release\FindAndReplaceCollectRegistrationInfo.bat = FindAndReplace\bin\Release\FindAndReplaceCollectRegistrationInfo.bat
-		Setup\src\Product.wxs = Setup\src\Product.wxs
-		README.md = README.md
-		Setup\bin\Release\Setup.msi = Setup\bin\Release\Setup.msi
 	EndProjectSection
 EndProject
 Global
@@ -117,5 +121,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{2ABA072D-FD07-4FC5-82E8-3AC5704BDD5F} = {2015668A-5B2E-43C9-9E24-F93D54600512}
 		{71383584-777C-46C1-84EF-C4DA7F692189} = {2015668A-5B2E-43C9-9E24-F93D54600512}
+		{A9B0B204-36DD-466D-B5C1-A9FD55ED7A4B} = {71383584-777C-46C1-84EF-C4DA7F692189}
 	EndGlobalSection
 EndGlobal
