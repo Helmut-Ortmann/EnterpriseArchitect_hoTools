@@ -33,9 +33,7 @@
     <Folder Include="src" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ActiveX.dll.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="ActiveX.dll.config" />
     <Content Include="License.rtf" />
   </ItemGroup>
   <ItemGroup>

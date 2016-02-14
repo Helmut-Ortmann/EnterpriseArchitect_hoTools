@@ -14,7 +14,6 @@ Collection of useful tools:
 
 # Preconditions
 - .NET 4
-- EA 10 or greater
 - Visual Studio Debug: Select "Enable native code debugging"
 
 
@@ -25,12 +24,15 @@ Collection of useful tools:
 - Ports
 - Favorites
 - History
-- Keys
+- Shortcuts
 
 # Development #
 - C#
 - ActiveX for Addin GUI
 - BookMe for Online Help (powerful!)
+- Configuration (*.xml)
+- Installation via WIX
+- Shortcuts
 
 # Powerfeatures C/C++ for SPICE / FuSi #
 Inside code are many powerful features to Reverse Engineer C/C++ Code for e.g. SPICE or FuSi (Functional Safety). With the existing code and a little knowhow it's easy to develop SPICE or FuSi compatible Architecture and Design.

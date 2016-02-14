@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows.Forms;
-using System.Deployment.Application;
 using System.Diagnostics;
 using System.Collections.Generic;
 using hoTools.Utils.Favorites;
@@ -174,17 +173,17 @@ namespace hoTools
         /// The chief uses for EA_Connect are in initializing global Add-In data and for identifying the Add-In as an MDG Add-In.
         /// Also look at EA_Disconnect.
         /// </summary>
-        /// <param name="rep">An EA.Repository object representing the currently open Enterprise Architect model.
+        /// <param name="Repository">An EA.Repository object representing the currently open Enterprise Architect model.
         /// Poll its members to retrieve model data and user interface status information.</param>
         /// <returns>String identifying a specialized type of Add-In: 
         /// - "MDG" : MDG Add-Ins receive MDG Events and extra menu options.
         /// - "" : None-specialized Add-In.</returns>
-        public override string EA_Connect(EA.Repository rep)
+        public override string EA_Connect(EA.Repository Repository)
         {
             HotkeyHandlers.SetupGlobalHotkeys();
-            m_repository = rep;
-            int v = rep.LibraryVersion;
-            if (rep.IsSecurityEnabled)
+            m_repository = Repository;
+            int v = Repository.LibraryVersion;
+            if (Repository.IsSecurityEnabled)
             {
                 //logInUser = Repository.GetCurrentLoginUser(false);
                 //if ((logInUser.Contains("deexortm")) ||
@@ -344,51 +343,51 @@ namespace hoTools
             }
                       
         }
-        public override void EA_OnPostInitialized(EA.Repository rep)
+        public override void EA_OnPostInitialized(EA.Repository Repository)
         {
             // gets the file 'AssemblyFileVersion' of file AddinClass.dll
             string productVersion = FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).ProductVersion;
             release = productVersion;
-            Repository = rep;
-            m_repository = rep;
+            AddinClass.Repository = Repository;
+            m_repository = Repository;
             ShowAddinControlWindows();
         }
-        public override bool EA_OnPostNewConnector(EA.Repository rep, EA.EventProperties eventProperties)
+        public override bool EA_OnPostNewConnector(EA.Repository Repository, EA.EventProperties Info)
         {
-            EA.EventProperty eventProperty = eventProperties.Get(0);
+            EA.EventProperty eventProperty = Info.Get(0);
             string s = (string)eventProperty.Value;
             int connectorID = int.Parse(s);
-            EA.Diagram dia = rep.GetCurrentDiagram();
+            EA.Diagram dia = Repository.GetCurrentDiagram();
             switch (dia.Type)
             {
                 case "Activity":
-                    return updateLineStyle(rep, dia, connectorID, m_AddinSettings.ActivityLineStyle.Substring(0, 2));
+                    return updateLineStyle(Repository, dia, connectorID, m_AddinSettings.ActivityLineStyle.Substring(0, 2));
 
 
                 case "Statechart":
-                    return updateLineStyle(rep, dia, connectorID, m_AddinSettings.StatechartLineStyle.Substring(0, 2));
+                    return updateLineStyle(Repository, dia, connectorID, m_AddinSettings.StatechartLineStyle.Substring(0, 2));
 
                 case "Logical":
-                    return updateLineStyle(rep, dia, connectorID, m_AddinSettings.ClassLineStyle.Substring(0, 2));
+                    return updateLineStyle(Repository, dia, connectorID, m_AddinSettings.ClassLineStyle.Substring(0, 2));
 
 
                 case "Custom":
-                    return updateLineStyle(rep, dia, connectorID, m_AddinSettings.CustomLineStyle.Substring(0, 2));
+                    return updateLineStyle(Repository, dia, connectorID, m_AddinSettings.CustomLineStyle.Substring(0, 2));
 
                 case "Component":
-                    return updateLineStyle(rep, dia, connectorID, m_AddinSettings.ComponentLineStyle.Substring(0, 2));
+                    return updateLineStyle(Repository, dia, connectorID, m_AddinSettings.ComponentLineStyle.Substring(0, 2));
 
                 case "Deployment":
-                    return updateLineStyle(rep, dia, connectorID, m_AddinSettings.DeploymentLineStyle.Substring(0, 2));
+                    return updateLineStyle(Repository, dia, connectorID, m_AddinSettings.DeploymentLineStyle.Substring(0, 2));
 
                 case "Package":
-                    return updateLineStyle(rep, dia, connectorID, m_AddinSettings.PackageLineStyle.Substring(0, 2));
+                    return updateLineStyle(Repository, dia, connectorID, m_AddinSettings.PackageLineStyle.Substring(0, 2));
 
                 case "Use Case":
-                    return updateLineStyle(rep, dia, connectorID, m_AddinSettings.UseCaseLineStyle.Substring(0, 2));
+                    return updateLineStyle(Repository, dia, connectorID, m_AddinSettings.UseCaseLineStyle.Substring(0, 2));
 
                 case "CompositeStructure":
-                    return updateLineStyle(rep, dia, connectorID, m_AddinSettings.CompositeStructureLineStyle.Substring(0, 2));
+                    return updateLineStyle(Repository, dia, connectorID, m_AddinSettings.CompositeStructureLineStyle.Substring(0, 2));
 
                 default:
                     return false;
@@ -398,15 +397,14 @@ namespace hoTools
             }
         }
 
-        public override void EA_FileOpen(EA.Repository rep)
+        public override void EA_FileOpen(EA.Repository Repository)
         {
-            initializeForRepository(rep);
+            initializeForRepository(Repository);
         }
-        public override void EA_FileClose(EA.Repository rep)
+        public override void EA_FileClose(EA.Repository Repository)
         {
             if (m_MyControlGUI != null)  m_MyControlGUI.Save(); // save settings
             m_repository = null;
-            rep = null;
 
 
         }
@@ -438,15 +436,15 @@ namespace hoTools
         /// <summary>
         /// Called once Menu has been opened to see what menu items should active.
         /// </summary>
-        /// <param name="rep">the repository</param>
-        /// <param name="Location">the location of the menu</param>
+        /// <param name="Repository">the repository</param>
+        /// <param name="MenuLocation">the location of the menu</param>
         /// <param name="MenuName">the name of the menu</param>
         /// <param name="ItemName">the name of the menu item</param>
         /// <param name="IsEnabled">boolean indicating whethe the menu item is enabled</param>
         /// <param name="IsChecked">boolean indicating whether the menu is checked</param>
-        public override void EA_GetMenuState(EA.Repository rep, string Location, string MenuName, string ItemName, ref bool IsEnabled, ref bool IsChecked)
+        public override void EA_GetMenuState(EA.Repository Repository, string MenuLocation, string MenuName, string ItemName, ref bool IsEnabled, ref bool IsChecked)
         {
-            if (IsProjectOpen(rep))
+            if (IsProjectOpen(Repository))
             {
                 switch (ItemName)
                 {
@@ -575,14 +573,14 @@ namespace hoTools
         /// Called when user makes a selection in the menu.
         /// This is your main exit point to the rest of your Add-in
         /// </summary>
-        /// <param name="rep">the repository</param>
-        /// <param name="Location">the location of the menu</param>
+        /// <param name="Repository">the repository</param>
+        /// <param name="MenuLocation">the location of the menu</param>
         /// <param name="MenuName">the name of the menu</param>
         /// <param name="ItemName">the name of the selected menu item</param>
-        public override void EA_MenuClick(EA.Repository rep, string Location, string MenuName, string ItemName)
+        public override void EA_MenuClick(EA.Repository Repository, string MenuLocation, string MenuName, string ItemName)
         {
-            EA.ObjectType oType = rep.GetContextItemType();
-            EA.Diagram diaCurrent = rep.GetCurrentDiagram();
+            EA.ObjectType oType = Repository.GetContextItemType();
+            EA.Diagram diaCurrent = Repository.GetCurrentDiagram();
             EA.Connector conCurrent = null;
             EA.Element el = null;
 
@@ -607,32 +605,32 @@ namespace hoTools
 
                     // Line style: Lateral Horizontal 
                 case menuChangeXmlFile:
-                     EaService.setNewXmlPath(rep);
+                     EaService.setNewXmlPath(Repository);
                      break;
                 // Line style: Lateral Horizontal 
                 case menuLineStyleDiaLH:
-                     EaService.setLineStyle(rep, "LH");
+                     EaService.setLineStyle(Repository, "LH");
                    
                     break;
                 // Line style: Lateral Vertical 
                 case menuLineStyleDiaLV:
                     // all connections of diagram
-                    EaService.setLineStyle(rep, "LV");
+                    EaService.setLineStyle(Repository, "LV");
                     break;
                 // Line style: Tree Vertical 
                 case menuLineStyleDiaTV:
-                    EaService.setLineStyle(rep, "V");
+                    EaService.setLineStyle(Repository, "V");
                     
                     break;
 
                 // Line style: Tree Horizental 
                 case menuLineStyleDiaTH:
-                    EaService.setLineStyle(rep, "H");
+                    EaService.setLineStyle(Repository, "H");
                     
                     break;
                 // Line style: Orthogonal square 
                 case menuLineStyleDiaOS:
-                    EaService.setLineStyle(rep, "OS");
+                    EaService.setLineStyle(Repository, "OS");
                     
                     break;
 
@@ -650,9 +648,9 @@ namespace hoTools
                         {
                             string sql = @"update t_diagram set locked = 0" +
                            " where diagram_ID = " + diaCurrent.DiagramID.ToString();
-                            rep.Execute(sql);
+                            Repository.Execute(sql);
                             // reload view
-                            rep.ReloadDiagram(diaCurrent.DiagramID);
+                            Repository.ReloadDiagram(diaCurrent.DiagramID);
                         }
                         catch { }
                     }
@@ -661,7 +659,7 @@ namespace hoTools
 
                 // Start specification (file parameter)
                 case  menuShowSpecification:
-                      EaService.showSpecification(rep);
+                      EaService.showSpecification(Repository);
 
                     break;
 
@@ -670,21 +668,21 @@ namespace hoTools
                     // Check selected Elements in tree
                     if (oType.Equals(EA.ObjectType.otMethod))
                     {
-                        EA.Method m = (EA.Method)rep.GetContextObject();
+                        EA.Method m = (EA.Method)Repository.GetContextObject();
                         // test multiple selection
 
                         // Create Activity
-                        Appl.createInteractionForOperation(rep, m);
+                        Appl.createInteractionForOperation(Repository, m);
 
                     }
                     if (oType.Equals(EA.ObjectType.otElement))
                     {
-                        EA.Element cls = (EA.Element)rep.GetContextObject();
+                        EA.Element cls = (EA.Element)Repository.GetContextObject();
                         // over all operations of class
                         foreach (EA.Method m in cls.Methods)
                         {
                             // Create Activity
-                            Appl.createInteractionForOperation(rep, m);
+                            Appl.createInteractionForOperation(Repository, m);
 
                         }
                     }
@@ -696,11 +694,11 @@ namespace hoTools
                     // Check selected Elements in tree
                     if (oType.Equals(EA.ObjectType.otMethod))
                     {
-                        EA.Method m = (EA.Method)rep.GetContextObject();
+                        EA.Method m = (EA.Method)Repository.GetContextObject();
                         // test multiple selection
 
                         // Create State Machine
-                        Appl.createStateMachineForOperation(rep, m);
+                        Appl.createStateMachineForOperation(Repository, m);
 
                     }
                    break;
@@ -708,89 +706,89 @@ namespace hoTools
 
 
                 case menuLocateCompositeElementorDiagram:
-                   EaService.navigateComposite(rep);
+                   EaService.navigateComposite(Repository);
                     break;
                     
                 // 
                 case menuCorrectType:
                     if (oType.Equals(EA.ObjectType.otAttribute))
                     {
-                        EA.Attribute a = (EA.Attribute)rep.GetContextObject();
+                        EA.Attribute a = (EA.Attribute)Repository.GetContextObject();
 
-                        Util.updateAttribute(rep, a);
+                        Util.updateAttribute(Repository, a);
                     }
 
                     if (oType.Equals(EA.ObjectType.otMethod))
                     {
-                        EA.Method m = (EA.Method)rep.GetContextObject();
+                        EA.Method m = (EA.Method)Repository.GetContextObject();
 
-                        Util.updateMethod(rep, m);
+                        Util.updateMethod(Repository, m);
                     }
                     if (oType.Equals(EA.ObjectType.otElement))
                     {
-                        el = (EA.Element)rep.GetContextObject();
-                        Util.updateClass(rep, el);
+                        el = (EA.Element)Repository.GetContextObject();
+                        Util.updateClass(Repository, el);
                     }
                     if (oType.Equals(EA.ObjectType.otPackage))
                     {
-                        EA.Package pkg = (EA.Package)rep.GetContextObject();
-                        Util.updatePackage(rep, pkg);
+                        EA.Package pkg = (EA.Package)Repository.GetContextObject();
+                        Util.updatePackage(Repository, pkg);
                     }
                     break;
 
                 
                 case menuCreateActivityForOperation:
-                    EaService.CreateActivityForOperation(rep);
+                    EaService.CreateActivityForOperation(Repository);
 
                     break;
 
                     // get Parameter for Activity
                 case menuUpdateOperationParameter:
-                    EaService.UpdateActivityParameter(rep);
+                    EaService.UpdateActivityParameter(Repository);
                     break;
 
                 case menuUpdateActionPin:
                     if (oType.Equals(EA.ObjectType.otPackage))
                     {
-                        EA.Package pkg = (EA.Package)rep.GetContextObject();
-                        ActionPin.updateActionPinForPackage(rep, pkg);
+                        EA.Package pkg = (EA.Package)Repository.GetContextObject();
+                        ActionPin.updateActionPinForPackage(Repository, pkg);
                     }
                     if (oType.Equals(EA.ObjectType.otElement))
                     {
-                        el = (EA.Element)rep.GetContextObject();
-                        ActionPin.updateActionPinForElement(rep, el);
+                        el = (EA.Element)Repository.GetContextObject();
+                        ActionPin.updateActionPinForElement(Repository, el);
                     }
                     break;
                 
 
                 case menuAddLinkedDiagramNote:
-                    EaService.addDiagramNote(rep); 
+                    EaService.addDiagramNote(Repository); 
                                
                     break;
 
                 case menuAddLinkedNote:
-                    EaService.addElementNote(rep);
+                    EaService.addElementNote(Repository);
 
                     break;
 
                 case menuLocateType:
-                    EaService.locateType(rep);
+                    EaService.locateType(Repository);
                     
                     break;
 
                 case menuUsage:
-                    EaService.findUsage(rep);
+                    EaService.findUsage(Repository);
                     
                     break;
 
                 case menuPasteLinksFromClipboard:
                     if (oType.Equals(EA.ObjectType.otElement)) // only Element
                     {
-                        el = (EA.Element)rep.GetContextObject();
+                        el = (EA.Element)Repository.GetContextObject();
                         string conStr = Clipboard.GetText();  // get Clippboard
-                        if (conStr.StartsWith("{") && conStr.Substring(37,1)=="}" && conStr.EndsWith("\r\n")) {
-                            rep.CreateOutputTab("DEBUG");
-                            rep.EnsureOutputVisible("DEBUG");
+                        if (conStr.StartsWith("{", StringComparison.CurrentCulture) && conStr.Substring(37,1)=="}" && conStr.EndsWith("\r\n", StringComparison.CurrentCulture)) {
+                            Repository.CreateOutputTab("DEBUG");
+                            Repository.EnsureOutputVisible("DEBUG");
                             int countError = 0;
                             int countInserted = 0;
                             string[] conStrList = conStr.Split('\n');
@@ -799,7 +797,7 @@ namespace hoTools
                                 if (line.Length > 38)
                                 {
                                     string guid = line.Substring(0, 38);
-                                    EA.Connector con = rep.GetConnectorByGuid(guid);
+                                    EA.Connector con = Repository.GetConnectorByGuid(guid);
 
                                     // Client/Source
                                     if (line.Substring(38, 1) == "C")
@@ -813,9 +811,9 @@ namespace hoTools
                                         catch
                                         {
                                             countError = countError + 1;
-                                            EA.Element el1 = rep.GetElementByID(con.SupplierID);
+                                            EA.Element el1 = Repository.GetElementByID(con.SupplierID);
                                             string fText = String.Format("Error Name {0}, Error={1}", el1.Name, con.GetLastError());
-                                            rep.WriteOutput("Debug", fText, 0);
+                                            Repository.WriteOutput("Debug", fText, 0);
                                         }
                                     }
                                     //Supplier / Target
@@ -831,22 +829,22 @@ namespace hoTools
                                         catch
                                         {
                                             countError = countError + 1;
-                                            EA.Element el1 = rep.GetElementByID(con.ClientID);
+                                            EA.Element el1 = Repository.GetElementByID(con.ClientID);
                                             string fText = String.Format("Error Name {0}, Error={1}", el1.Name, con.GetLastError());
-                                            rep.WriteOutput("Debug",fText,0);
+                                            Repository.WriteOutput("Debug",fText,0);
                                         }
 
                                     }
                                 }
                             }
                             // update diagram
-                            EA.Diagram dia = rep.GetCurrentDiagram();
+                            EA.Diagram dia = Repository.GetCurrentDiagram();
                             if (dia != null)
                             {
                                 try
                                 {
                                     dia.Update();
-                                    rep.ReloadDiagram(dia.DiagramID);
+                                    Repository.ReloadDiagram(dia.DiagramID);
                                 }
                                 catch
                                 {
@@ -862,7 +860,7 @@ namespace hoTools
                     break;
 
                 case menuCopyGUIDToClipboard:
-                   EaService.copyGuidSqlToClipboard(rep);
+                   EaService.copyGuidSqlToClipboard(Repository);
                    break;
 
 
@@ -873,7 +871,7 @@ namespace hoTools
                 case menuCopyLinksToClipboard:
                     if (oType.Equals(EA.ObjectType.otElement)) // only Element
                     {
-                        el = (EA.Element)rep.GetContextObject();
+                        el = (EA.Element)Repository.GetContextObject();
                         string conStr = "";
                         foreach (EA.Connector con in el.Connectors)
                         {
@@ -891,11 +889,11 @@ namespace hoTools
                     break;
 
                 case menuDisplayMethodDefinition:
-                    EaService.DisplayOperationForSelectedElement(rep, EaService.displayMode.Method);
+                    EaService.DisplayOperationForSelectedElement(Repository, EaService.displayMode.Method);
                     break;
 
                 case menuDisplayBehavior:
-                    EaService.DisplayOperationForSelectedElement(rep, EaService.displayMode.Behavior);
+                    EaService.DisplayOperationForSelectedElement(Repository, EaService.displayMode.Behavior);
                     break;
 
                 
@@ -1019,10 +1017,10 @@ namespace hoTools
                 {
                     // If name is of the form: OperationName(..) the the operation is associated to an method
                     string opName = con.Name;
-                    if (opName.EndsWith(")"))
+                    if (opName.EndsWith(")", StringComparison.CurrentCulture))
                     {
                         // extract the name
-                        int pos = opName.IndexOf("(");
+                        int pos = opName.IndexOf("(", StringComparison.CurrentCulture);
                         opName = opName.Substring(0, pos);
                         EA.Element el = rep.GetElementByID(con.SupplierID);
                         // find operation by name
@@ -1137,7 +1135,7 @@ namespace hoTools
         private static void BehaviorForOperation(EA.Repository rep, EA.Method method)
         {
             string behavior = method.Behavior;
-            if (behavior.StartsWith("{") & behavior.EndsWith("}"))
+            if (behavior.StartsWith("{", StringComparison.CurrentCulture) & behavior.EndsWith("}", StringComparison.CurrentCulture))
             {
                 // get object according to behavior
                 EA.Element el = rep.GetElementByGuid(behavior);
@@ -1245,18 +1243,18 @@ namespace hoTools
         /// <summary>
         /// Called when EA start model validation. Just shows a message box
         /// </summary>
-        /// <param name="rep">the repository</param>
+        /// <param name="Repository">the repository</param>
         /// <param name="Args">the arguments</param>
-        public override void EA_OnStartValidation(EA.Repository rep, object Args)
+        public override void EA_OnStartValidation(EA.Repository Repository, object Args)
         {
             MessageBox.Show("Validation started");
         }
         /// <summary>
         /// Called when EA ends model validation. Just shows a message box
         /// </summary>
-        /// <param name="rep">the repository</param>
+        /// <param name="Repository">the repository</param>
         /// <param name="Args">the arguments</param>
-        public override void EA_OnEndValidation(EA.Repository rep, object Args)
+        public override void EA_OnEndValidation(EA.Repository Repository, object Args)
         {
             MessageBox.Show("Validation ended");
         }
@@ -1264,10 +1262,10 @@ namespace hoTools
         /// called when the selected item changes
         /// This operation will show the guid of the selected element in the eaControl
         /// </summary>
-        /// <param name="rep">the EA.Repository</param>
+        /// <param name="Repository">the EA.Repository</param>
         /// <param name="GUID">the guid of the selected item</param>
         /// <param name="ot">the object type of the selected item</param>
-        public override void EA_OnContextItemChanged(EA.Repository rep, string GUID, EA.ObjectType ot)
+        public override void EA_OnContextItemChanged(EA.Repository Repository, string GUID, EA.ObjectType ot)
         { }
         /// <summary>
         /// Say Hello to the world

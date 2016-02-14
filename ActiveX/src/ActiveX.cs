@@ -728,7 +728,7 @@ namespace hoTools.ActiveX
         #endregion
 
         #region InitializeComponent
-        private void InitializeComponent()
+        void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
             this.btnLH = new System.Windows.Forms.Button();
@@ -1785,7 +1785,7 @@ namespace hoTools.ActiveX
 
             // Vissible VC
             bool visibleVC = true;
-            if (_addinSettings.isVcSupport == false)visibleVC = false;
+            if (_addinSettings.isVcSupport == false) visibleVC = false;
            
             getVCLatesrecursiveToolStripMenuItem.Visible = visibleVC;
             changeXMLFileToolStripMenuItem.Visible = visibleVC;
@@ -1801,8 +1801,7 @@ namespace hoTools.ActiveX
             }
 
             // Visual Port Support
-            bool visiblePorts = false;
-            if (_addinSettings.isAdvancedPort) visiblePorts = true;
+            bool visiblePorts = false || _addinSettings.isAdvancedPort;
 
             btnLeft.Visible = visiblePorts;
             btnRight.Visible = visiblePorts;
@@ -1813,8 +1812,7 @@ namespace hoTools.ActiveX
             btnLabelRight.Visible = visiblePorts;
 
             // Note in diagram support
-            bool visibleDiagramNote = false;
-            if (_addinSettings.isAdvancedDiagramNote) visibleDiagramNote = true;
+            bool visibleDiagramNote = false || _addinSettings.isAdvancedDiagramNote;
             btnAddDiagramNote.Visible = visibleDiagramNote;
             btnAddElementNote.Visible = visibleDiagramNote;
 

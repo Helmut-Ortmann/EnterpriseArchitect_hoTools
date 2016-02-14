@@ -5,12 +5,9 @@ using System.Configuration;
 using System.Linq;
 using hoTools.EaServices;
 using hoTools.Connectors;
-using System.Collections.ObjectModel;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using Control.EaAddinShortcuts;
 using System.Text.RegularExpressions;
-using System.Text;
 using GlobalHotkeys;
 //using hoTools.Connectors;
 
@@ -19,9 +16,10 @@ namespace hoTools.Settings
     /// <summary>
     /// Merge default settings with current settings
     /// Default:   
-    ///    Debug:   ..\Addin\ActiveX.dll.config   with copy to output directory
-    ///    Release: DLL-Install library
+    ///    Debug:   Addin\ActiveX.dll.config      (With copy to output directory)
+    ///    Release: APPData\Local\Apps\hoTools\   (App DLL-Install library)
     ///    Make sure to copy the default settings in project output (VS Properties)
+    /// Settings:   %APPDATA%\ho\hoTools\ActiveX.dll.config
     /// Read current setting
     /// Write current settings
     /// </summary>

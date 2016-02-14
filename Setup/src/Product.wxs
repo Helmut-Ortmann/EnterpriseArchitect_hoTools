@@ -18,7 +18,9 @@
          (details in file ActiveX.dll.config). 
      
  -->
-  <?define ProductVersion="1.2.5.4" ?>  <!-- Also: Update AssemblyFileVersion in AddinClass AssemblyInfo.cs properties !!!, Update files.wxs because registry has changed-->
+  <!-- Also: Update AssemblyFileVersion in AddinClass AssemblyInfo.cs properties !!!
+  !!!Warning: If you update AssemblyVersion you must update the registration info!!!!!!!!-->
+  <?define ProductVersion="1.2.5.5" ?> 
   <?define UpgradeCode="3543ED18-28F6-484C-AD8C-FA1A3B72C911" ?>
   <?define Manufacturer="ho" ?>
   <?define ProductName="hoTools" ?>

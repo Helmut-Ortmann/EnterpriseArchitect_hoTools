@@ -23,13 +23,15 @@ namespace hoTools.EaServices
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = false) ]
 
     /// <summary>
-    /// Attribute to define services which might be called without parameters.
+    /// Attribute to define services which might be called without parameters
+    /// Example:
+    /// [ServiceOperation("{1C78E1C0-AAC8-4284-8C25-2D776FF373BC}", "Copy release information to clipboard", "Select Component", false)].
     /// </summary>
     /// <param name="GUID">GUID of the method</param>
     /// <param name="Description">the brief description for the service</param>
     /// <param name="Help">the help text / tooltip for the service </param>
     /// <param name="IsTextRequired">text is required, default false</param>
-       public class ServiceOperationAttribute : Attribute 
+    public class ServiceOperationAttribute : Attribute 
     {
         public ServiceOperationAttribute(String GUID, String Description, String Help, bool IsTextRequired = false)
         {
@@ -518,6 +520,16 @@ namespace hoTools.EaServices
                 Repository.ShowInProjectView(e.CompositeDiagram);
             }
         }
+        #region findUsage
+        /// <summary>
+        /// Find usage of selected item. The following searches are required
+        /// - "Element usage"
+        /// - "Method usage"
+        /// - "Diagram usage"
+        /// - "Connector usage"
+        /// </summary>
+        /// <param name="rep"></param>
+        [ServiceOperation("{755DD068-94A2-4AD9-84EE-F3D1350BC9B7}", "Find usage of Element,Method, Attribute, Diagram, Connector ", "Select item", false)]
         public static void findUsage(EA.Repository rep)
         {
             EA.ObjectType oType = rep.GetContextItemType();
@@ -547,7 +559,7 @@ namespace hoTools.EaServices
             }
             return;
         }
-
+        #endregion
         public static void showSpecification(EA.Repository rep)
         {
             EA.ObjectType oType = rep.GetContextItemType();
