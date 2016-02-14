@@ -16,7 +16,16 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Util", "Util\Util.csproj", "{9376680E-9420-4FC1-8DE8-4311FCA18EFC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution", "Solution", "{2015668A-5B2E-43C9-9E24-F93D54600512}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EA", "EA", "{2ABA072D-FD07-4FC5-82E8-3AC5704BDD5F}"
 	ProjectSection(SolutionItems) = preProject
+		EA\hoTools.eap = EA\hoTools.eap
+		EA\hoToolsSearch.xml = EA\hoToolsSearch.xml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{71383584-777C-46C1-84EF-C4DA7F692189}"
+	ProjectSection(SolutionItems) = preProject
+		Addin\ActiveX.dll.config = Addin\ActiveX.dll.config
 		ActiveX\bin\Release\ActiveX.wxs = ActiveX\bin\Release\ActiveX.wxs
 		ActiveX\bin\Release\ActiveXCollectRegistrationInfo.bat = ActiveX\bin\Release\ActiveXCollectRegistrationInfo.bat
 		Addin\bin\Release\AddinClass.wxs = Addin\bin\Release\AddinClass.wxs
@@ -104,5 +113,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2ABA072D-FD07-4FC5-82E8-3AC5704BDD5F} = {2015668A-5B2E-43C9-9E24-F93D54600512}
+		{71383584-777C-46C1-84EF-C4DA7F692189} = {2015668A-5B2E-43C9-9E24-F93D54600512}
 	EndGlobalSection
 EndGlobal
