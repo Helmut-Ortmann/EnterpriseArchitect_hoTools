@@ -36,4 +36,4 @@ using System.Runtime.InteropServices;
 // If not: you get registration error and the Addin isn't loaded in EA
 [assembly: AssemblyVersion("1.2.5.2")]
 // The 'AddinClass' Assembly file version is used to output the version of the Addin
-[assembly: AssemblyFileVersion("1.2.6.1")]
+[assembly: AssemblyFileVersion("1.2.10.1")]

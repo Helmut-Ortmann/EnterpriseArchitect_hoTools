@@ -40,7 +40,7 @@
       <Component Id="Help" Guid="7C6716FC-4A34-447B-BA42-1E632099D9F0">
         <File Id="Help" Name="hoTools.chm" Source="..\Addin\hoTools.chm"  KeyPath="yes" />
       </Component>
-      <Component Id="Utils" Guid="2B27E821-A105-4BDF-8E6A-C8CC43DB54ED">
+      <Component Id="Utils" Guid="260441DA-0826-4CF6-A6DA-5777C2BEEDE0">
         <File Id="Utils" KeyPath="yes" Name="Utils.dll" Source="$(var.Util.TargetPath)" /> 
       </Component>
       <Component Id="EaServices" Guid="EDB06D59-762F-4B7D-BCFF-7C59DDFC3519">
@@ -215,7 +215,7 @@
         <RegistryValue Root="HKCR" Key="Record\{BECFCA00-BA97-34D3-A732-F472AAA07269}\1.2.5.1" Name="CodeBase" Value="file:///[#filC7544EB9035A370953E9570607E467EE]" Type="string" Action="write" />
       </Component>
       <!-- Configuration  ActiveX.dll.config  -->
-      <Component Id="ActiveX.dll.config" Guid="357C0398-047E-4E8A-957C-C2F0607ED8E1">
+      <Component Id="ActiveX.dll.config" Guid="EA06E962-CDB3-4FDC-BB40-59F88BE5E7A2">
         <File Id="ActiveX.dll.config" Name="ActiveX.dll.config" KeyPath="yes" Source="..\Setup\ActiveX.dll.config" />
       </Component>
     </ComponentGroup>

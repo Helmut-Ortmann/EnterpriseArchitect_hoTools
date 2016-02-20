@@ -136,7 +136,8 @@ nnn          Count of found in current item
 </value>
   </data>
   <data name="btnFind.ToolTip" xml:space="preserve">
-    <value>Find all matching find strings in all selected Item Types like:
+    <value>Find in selected packages (recursive):
+All matching find strings in all selected Item Types like:
 - Package
 - Element
 - Diagram

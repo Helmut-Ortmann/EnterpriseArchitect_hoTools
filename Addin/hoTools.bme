@@ -1,8 +1,8 @@
-﻿BookME4706776hoTools	K000000K000011<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+﻿BookME4707644hoTools	K000000K000011<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML><HEAD><TITLE>hoTools</TITLE>
 <META content="text/html; charset=unicode" http-equiv=Content-Type>
 <META content=de-at http-equiv=Content-Language>
-<META name=GENERATOR content="MSHTML 11.00.9600.17344">
+<META name=GENERATOR content="MSHTML 11.00.10240.16683">
 <STYLE 
 type=text/css>a.bmeAnchor { background-color:#4682b4; color:white; }</STYLE>
 </HEAD>
@@ -32,9 +32,9 @@ href="bookme:{{00156}}">Find &amp;
 Replace</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
 </P>
 <P><IMG border=0 hspace=0 alt="" 
-src="C:\Users\ho\Documents\Visual Studio 2013\Projects\hoTools\Addin\image\Addin.PNG" 
+src="D:\hoData\Development\GitHub\EnterpriseArchitect_hoTools\Addin\image\Addin.PNG" 
 align=left><IMG style="HEIGHT: 466px; WIDTH: 502px" border=0 hspace=0 alt="" 
-src="file:///C:/Users/ho/Documents/Visual%20Studio%202013/Projects/hoTools/Addin/image/FindAndReplace.png" 
+src="D:\hoData\Development\GitHub\EnterpriseArchitect_hoTools\Addin\image\FindAndReplace.png" 
 align=left></P>
 <P>&nbsp;</P>
 <UL>
@@ -60,6 +60,10 @@ align=left></P>
   <LI></LI></UL>
 <P>&nbsp;</P>
 <UL>
+  <LI>
+  <LI>
+  <LI>
+  <LI>
   <LI><A href="bookme:{{00001}}">Addin</A> 
   <UL>
     <LI><A href="bookme:{{00156}}">Find &amp; Replace</A> 
@@ -132,9 +136,9 @@ Ortmann</FONT></P></FONT></TD>
     <LI>Context Menu</LI></UL>
   <LI>Online Help / <A href="bookme:{{00159}}">Regular Expression</A></LI></UL>
 <P><IMG style="HEIGHT: 469px; WIDTH: 416px" border=0 hspace=0 alt="" 
-src="file:///c:/Users/ho/Documents/Visual%20Studio%202013/Projects/hoTools/Addin/image/Addin.PNG" 
+src="D:\hoData\Development\GitHub\EnterpriseArchitect_hoTools\Addin\image\Addin.PNG" 
 align=left><IMG border=0 hspace=0 alt="" 
-src="C:\Users\ho\Documents\Visual Studio 2013\Projects\hoTools\Addin\image\FindAndReplace.png" 
+src="D:\hoData\Development\GitHub\EnterpriseArchitect_hoTools\Addin\image\FindAndReplace.png" 
 align=left></P>
 <P>&nbsp;</P>
 <P>&nbsp;</P>
@@ -148,7 +152,7 @@ align=left></P>
 <P>&nbsp;</P>
 <P>&nbsp;</P>
 <P><IMG border=0 hspace=0 alt="" 
-src="C:\Users\ho\Documents\Visual Studio 2013\Projects\hoTools\Addin\image\Settings.png" 
+src="D:\hoData\Development\GitHub\EnterpriseArchitect_hoTools\Addin\image\Settings.png" 
 align=baseline></P></BODY></HTML>
 Layout	K000011K000022<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML><HEAD><TITLE>Layout</TITLE>
@@ -183,7 +187,7 @@ cellSpacing=0 cellPadding=2 width="99%">
 <P><A class=bmeAnchor name=bookme_anchor2>Set</A> the linestyle of connectors in 
 a comfortable art.&nbsp;</P>
 <P><IMG border=0 hspace=0 alt="" 
-src="c:\Users\ho\Documents\Visual Studio 2013\Projects\hoTools\Addin\image\Line StylesExample.png" 
+src="D:\hoData\Development\GitHub\EnterpriseArchitect_hoTools\Addin\image\Line StylesExample.png" 
 align=baseline></P>
 <P>&nbsp;</P></BODY></HTML>
 General Layout	K000022K000043<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
@@ -234,7 +238,7 @@ cellSpacing=0 cellPadding=2 width="99%">
 <P>The selected connector becomes the choosen linestyle.</P>
 <P>All connectors of selected elements become the coosen linestyle.</P>
 <P><IMG border=0 hspace=0 alt="" align=baseline 
-src="c:\Users\ho\Documents\Visual Studio 2013\Projects\hoTools\Addin\image\Line StylesExample.png"></P></BODY></HTML>
+src="D:\hoData\Development\GitHub\EnterpriseArchitect_hoTools\Addin\image\Line StylesExample.png"></P></BODY></HTML>
 LV Lateral Vertical	K000022K000033<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML><HEAD><TITLE>LV Lateral Vertical</TITLE>
 <META content="text/html; charset=unicode" http-equiv=Content-Type>
@@ -739,7 +743,7 @@ cellSpacing=0 cellPadding=2 width="99%">
 <P>Allso see the <A href="bookme:{{00156}}">Find &amp; Replace Utility</A>.</P>
 <P>&nbsp;</P>
 <P><IMG border=0 hspace=0 alt="" 
-src="C:\Users\ho\Documents\Visual Studio 2013\Projects\hoTools\Addin\image\Addin.PNG" 
+src="D:\hoData\Development\GitHub\EnterpriseArchitect_hoTools\Addin\image\Addin.PNG" 
 align=baseline></P></BODY></HTML>
 Quick search	K000172K000183<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML><HEAD><TITLE>Quick search</TITLE>
@@ -1044,7 +1048,7 @@ cellSpacing=0 cellPadding=2 width="99%">
   <LI>-&nbsp; Remove Favorite</LI>
   <LI>F&nbsp; Show Favorites</LI></UL>
 <P><IMG border=0 hspace=0 alt="" 
-src="C:\Users\ho\Documents\Visual Studio 2013\Projects\hoTools\Addin\image\Favorite.png" 
+src="D:\hoData\Development\GitHub\EnterpriseArchitect_hoTools\Addin\image\Favorite.png" 
 align=baseline></P></BODY></HTML>
 Miscellanious	K000011K000772<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML><HEAD><TITLE>Miscellanious</TITLE>
@@ -1086,9 +1090,9 @@ cellSpacing=0 cellPadding=2 width="99%">
   <LI><A href="bookme:{{00155}}">Change author of element / package 
   (recursive)</A></LI></UL>
 <P><IMG border=0 hspace=0 alt="" 
-src="C:\Users\ho\Documents\Visual Studio 2013\Projects\hoTools\Addin\image\Do.png" 
+src="D:\hoData\Development\GitHub\EnterpriseArchitect_hoTools\Addin\image\Do.png" 
 align=baseline><IMG border=0 hspace=0 alt="" 
-src="C:\Users\ho\Documents\Visual Studio 2013\Projects\hoTools\Addin\image\Addin.PNG" 
+src="D:\hoData\Development\GitHub\EnterpriseArchitect_hoTools\Addin\image\Addin.PNG" 
 align=baseline></P></BODY></HTML>
 Add Element Note	K000772K000783<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML><HEAD><TITLE>Add Element Note</TITLE>
@@ -1526,9 +1530,9 @@ cellSpacing=0 cellPadding=2 width="99%">
   <LI>Move port (left, right, up, down) 
   <LI>Move port label (left, right)</LI></UL>
 <P><IMG border=0 hspace=0 alt="" 
-src="C:\Users\ho\Documents\Visual Studio 2013\Projects\hoTools\Addin\image\AddinPort.png" 
+src="D:\hoData\Development\GitHub\EnterpriseArchitect_hoTools\Addin\image\AddinPort.png" 
 align=baseline><IMG border=0 hspace=0 alt="" 
-src="C:\Users\ho\Documents\Visual Studio 2013\Projects\hoTools\Addin\image\MenuPort.png" 
+src="D:\hoData\Development\GitHub\EnterpriseArchitect_hoTools\Addin\image\MenuPort.png" 
 align=baseline></P></BODY></HTML>
 Copy Ports	K001752K001913<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML><HEAD><TITLE>Copy Ports</TITLE>
@@ -1573,7 +1577,7 @@ Port isn't copied.</FONT></P>
 Ports on Diagram' with selected target element.</FONT></P>
 <P><FONT size=2></FONT>&nbsp;</P>
 <P><IMG border=0 hspace=0 alt="" 
-src="C:\Users\ho\Documents\Visual Studio 2013\Projects\hoTools\Addin\image\PortCopy.png" 
+src="D:\hoData\Development\GitHub\EnterpriseArchitect_hoTools\Addin\image\PortCopy.png" 
 align=baseline></P></FONT></BODY></HTML>
 Delete Ports	K001752K001923<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML><HEAD><TITLE>Delete Ports</TITLE>
@@ -1639,9 +1643,9 @@ unspecified.</P>
   unspecified.</LI></UL>
 <P>&nbsp;</P>
 <P><IMG border=0 hspace=0 alt="" 
-src="C:\Users\ho\Documents\Visual Studio 2013\Projects\hoTools\Addin\image\PortAssociation1.png" 
+src="D:\hoData\Development\GitHub\EnterpriseArchitect_hoTools\Addin\image\PortAssociation1.png" 
 align=baseline><IMG border=0 hspace=0 alt="" 
-src="C:\Users\ho\Documents\Visual Studio 2013\Projects\hoTools\Addin\image\PortAssociation2.png" 
+src="D:\hoData\Development\GitHub\EnterpriseArchitect_hoTools\Addin\image\PortAssociation2.png" 
 align=baseline></P>
 <P>&nbsp;</P></BODY></HTML>
 Show Ports on Diagram	K001752K001953<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
@@ -1905,7 +1909,7 @@ time you will have a lot of benefits over time.</P>
 <P><A href="bookme:{{00066}}">4. Shortcuts</A></P>
 <P>5. Make a useful Windows Toolbar</P>
 <P><IMG border=0 hspace=0 alt="" align=baseline 
-src="c:\Users\ho\Documents\Visual Studio 2013\Projects\hoTools\Addin\image\DiagramToolbar.png"></P></BODY></HTML>
+src="D:\hoData\Development\GitHub\EnterpriseArchitect_hoTools\Addin\image\DiagramToolbar.png"></P></BODY></HTML>
 Shortcuts	K000632K000663<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML><HEAD><TITLE>Shortcuts</TITLE>
 <META content="text/html; charset=unicode" http-equiv=Content-Type>
@@ -2003,7 +2007,7 @@ cellSpacing=0 cellPadding=2 width="99%">
   (CTRL+Click)&nbsp; 
   <LI>Zoom (Ctrl+Mouse Wheel,..)</LI></UL>
 <P><IMG border=0 hspace=0 alt="" align=baseline 
-src="c:\Users\ho\Documents\Visual Studio 2013\Projects\hoTools\Addin\image\DiagramToolbar.png"></P>
+src="D:\hoData\Development\GitHub\EnterpriseArchitect_hoTools\Addin\image\DiagramToolbar.png"></P>
 <P>See also:<BR><A href="bookme:{{00071}}">Diagram Options</A><BR><A 
 href="bookme:{{00073}}">Diagram Appearance Options</A><BR><A 
 href="bookme:{{00072}}">Diagram Behavior Options</A></P></BODY></HTML>
@@ -2090,7 +2094,7 @@ parameter like size, alignment,...</P>
   <LI>Click your function</LI></UL>
 <P>&nbsp;</P>
 <P><IMG border=0 hspace=0 alt="" align=baseline 
-src="c:\Users\ho\Documents\Visual Studio 2013\Projects\hoTools\Addin\image\DiagramToolbar.png"></P></BODY></HTML>
+src="D:\hoData\Development\GitHub\EnterpriseArchitect_hoTools\Addin\image\DiagramToolbar.png"></P></BODY></HTML>
 Good looking	K000632K000833<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML><HEAD><TITLE>Good looking</TITLE>
 <META content="text/html; charset=unicode" http-equiv=Content-Type>
@@ -2196,7 +2200,7 @@ cellSpacing=0 cellPadding=2 width="99%">
       <P align=right><FONT size=1 face=Verdana>Dienstag, 4. Mrz 2014 
       07:41:55</FONT></P></TD></TR></TBODY></TABLE>
 <P><IMG border=0 hspace=0 alt="" align=baseline 
-src="c:\Users\ho\Documents\Visual Studio 2013\Projects\hoTools\Addin\image\Workspace100.png"></P></BODY></HTML>
+src="D:\hoData\Development\GitHub\EnterpriseArchitect_hoTools\Addin\image\Workspace100.png"></P></BODY></HTML>
 Suggested Windows	K000692K000703<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML><HEAD><TITLE>Suggested Windows</TITLE>
 <META content="text/html; charset=unicode" http-equiv=Content-Type>
@@ -2257,7 +2261,7 @@ cellSpacing=0 cellPadding=2 width="99%">
       <P align=right><FONT size=1 face=Verdana>Dienstag, 4. Mrz 2014 
       08:28:08</FONT></P></TD></TR></TBODY></TABLE>
 <P><IMG border=0 hspace=0 alt="" align=baseline 
-src="c:\Users\ho\Documents\Visual Studio 2013\Projects\hoTools\Addin\image\DiagramOptions.PNG"></P></BODY></HTML>
+src="D:\hoData\Development\GitHub\EnterpriseArchitect_hoTools\Addin\image\DiagramOptions.PNG"></P></BODY></HTML>
 Diagram Appearacne Options	K000692K000733<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML><HEAD><TITLE>Diagram Appearacne Options</TITLE>
 <META content="text/html; charset=unicode" http-equiv=Content-Type>
@@ -2285,7 +2289,7 @@ cellSpacing=0 cellPadding=2 width="99%">
       <P align=right><FONT size=1 face=Verdana>Dienstag, 4. Mrz 2014 
       08:30:47</FONT></P></TD></TR></TBODY></TABLE>
 <P><IMG border=0 hspace=0 alt="" align=baseline 
-src="c:\Users\ho\Documents\Visual Studio 2013\Projects\hoTools\Addin\image\DiagramAppearanceOptions.PNG"></P></BODY></HTML>
+src="D:\hoData\Development\GitHub\EnterpriseArchitect_hoTools\Addin\image\DiagramAppearanceOptions.PNG"></P></BODY></HTML>
 Diagram Behavior Options	K000692K000723<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML><HEAD><TITLE>Diagram Behavior Options</TITLE>
 <META content="text/html; charset=unicode" http-equiv=Content-Type>
@@ -2313,7 +2317,7 @@ cellSpacing=0 cellPadding=2 width="99%">
       <P align=right><FONT size=1 face=Verdana>Dienstag, 4. Mrz 2014 
       08:29:16</FONT></P></TD></TR></TBODY></TABLE>
 <P><IMG border=0 hspace=0 alt="" align=baseline 
-src="c:\Users\ho\Documents\Visual Studio 2013\Projects\hoTools\Addin\image\DiagramBehaviorOptions.PNG"></P></BODY></HTML>
+src="D:\hoData\Development\GitHub\EnterpriseArchitect_hoTools\Addin\image\DiagramBehaviorOptions.PNG"></P></BODY></HTML>
 Queries & Scripts	K000011K001152<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML><HEAD><TITLE>Queries & Scripts</TITLE>
 <META content="text/html; charset=unicode" http-equiv=Content-Type>
@@ -3377,7 +3381,7 @@ cellSpacing=0 cellPadding=2 width="99%">
       <P align=right><FONT size=1 face=Verdana>Sonntag, 16. Mrz 2014 
       16:23:16</FONT></P></TD></TR></TBODY></TABLE>
 <P><IMG border=0 hspace=0 alt="" 
-src="C:\Users\ho\Documents\Visual Studio 2013\Projects\hoTools\Addin\image\MenuVC.png" 
+src="D:\hoData\Development\GitHub\EnterpriseArchitect_hoTools\Addin\image\MenuVC.png" 
 align=baseline></P>
 <P>Functions:</P>
 <UL>
@@ -3690,7 +3694,7 @@ cellSpacing=0 cellPadding=2 width="99%">
 <P>&nbsp;</P>
 <UL>
   <LI><IMG style="HEIGHT: 1007px; WIDTH: 1710px" border=0 hspace=0 alt="" 
-  src="file:///C:/Users/ho/Documents/Visual%20Studio%202013/Projects/hoTools/Addin/image/Settings.png" 
+  src="D:\hoData\Development\GitHub\EnterpriseArchitect_hoTools\Addin\image\Settings.png" 
   align=baseline></LI></UL></BODY></HTML>
 Quick Search	K001472K001483<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML><HEAD><TITLE>Quick Search</TITLE>
@@ -4066,11 +4070,11 @@ up to you to decide if they will get you a benefit.</P>
   <LI>Split last selected Diagram object from previous selected Diagram Objects 
   <LI>Update VC-State of package(recursive)</LI></UL>
 <P>&nbsp;</P></BODY></HTML>
-Find & Search	K000011K001562<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<HTML><HEAD><TITLE>Find & Search</TITLE>
+Find & Replace	K000011K001562<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>Find & Replace</TITLE>
 <META content="text/html; charset=unicode" http-equiv=Content-Type>
 <META content=de-at http-equiv=Content-Language>
-<META name=GENERATOR content="MSHTML 11.00.9600.17344">
+<META name=GENERATOR content="MSHTML 11.00.10240.16683">
 <STYLE 
 type=text/css>a.bmeAnchor { background-color:#4682b4; color:white; }</STYLE>
 </HEAD>
@@ -4083,8 +4087,7 @@ cellSpacing=0 cellPadding=2 width="99%">
     <TD 
     style="BORDER-TOP: #c6c7c6 1px solid; BORDER-RIGHT: #c6c7c6 1px solid; BORDER-BOTTOM: #c6c7c6 1px solid; BORDER-LEFT: #c6c7c6 1px solid" 
     bgColor=#ffe77b width="100%" colSpan=2>
-      <P align=center><B><FONT id=BME_Title size=3 face=Verdana>Find &amp; 
-      Search</FONT></B></P></TD></TR>
+      <P align=center><B><FONT id=BME_Title size=3 face=Verdana>Find & Replace</FONT></B></P></TD></TR>
   <TR>
     <TD 
     style="BORDER-TOP: #c6c7c6 1px solid; BORDER-RIGHT: #c6c7c6 1px solid; BORDER-BOTTOM: #c6c7c6 1px solid; BORDER-LEFT: #c6c7c6 1px solid" 
@@ -4097,7 +4100,7 @@ cellSpacing=0 cellPadding=2 width="99%">
       17:53:00</FONT></P></TD></TR></TBODY></TABLE>
 <P>Find strings in fields of item types. Then you may replace them.</P>
 <P><IMG border=0 hspace=0 alt="" 
-src="C:\Users\ho\Documents\Visual Studio 2013\Projects\hoTools\Addin\image\FindAndReplace.png" 
+src="D:\hoData\Development\GitHub\EnterpriseArchitect_hoTools\Addin\image\FindAndReplace.png" 
 align=baseline></P>
 <UL>
   <LI><A href="bookme:{{00018}}">Quick Search</A> 
@@ -4185,7 +4188,7 @@ Ortmann</FONT></P></FONT></TD>
 (see example).</P>
 <P>&nbsp;</P>
 <P><IMG border=0 hspace=0 alt="" 
-src="C:\Users\ho\Documents\Visual Studio 2013\Projects\hoTools\Addin\image\FindAndReplace.png" 
+src="D:\hoData\Development\GitHub\EnterpriseArchitect_hoTools\Addin\image\FindAndReplace.png" 
 align=baseline></P></BODY></HTML>
 Item Types	K001562K001582<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML><HEAD><TITLE>Item Types</TITLE>
@@ -4553,11 +4556,11 @@ cellSpacing=0 cellPadding=2 width="99%">
   <LI><A href="bookme:{{00164}}">change all items</A> 
   <LI>see status of last operation<BR><IMG style="HEIGHT: 533px; WIDTH: 630px" 
   border=0 hspace=0 alt="" 
-  src="file:///C:/Users/ho/Documents/Visual%20Studio%202013/Projects/hoTools/Addin/image/ShowAndChangeItem.png" 
+  src="D:\hoData\Development\GitHub\EnterpriseArchitect_hoTools\Addin\image\ShowAndChangeItem.png" 
   align=baseline></LI></UL>
 <P>With Tagged Values</P>
 <P><IMG style="HEIGHT: 568px; WIDTH: 1074px" border=0 hspace=0 alt="" 
-src="file:///C:/Users/ho/Documents/Visual%20Studio%202013/Projects/hoTools/Addin/image/ShowAndChangeItemTaggedValues.png" 
+src="D:\hoData\Development\GitHub\EnterpriseArchitect_hoTools\Addin\image\ShowAndChangeItemTaggedValues.png" 
 align=baseline></P></BODY></HTML>
 Change Item	K001622K001633<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML><HEAD><TITLE>Change Item</TITLE>
@@ -4796,4 +4799,4 @@ cellSpacing=0 cellPadding=2 width="99%">
 <P>Helmut Ortmann<BR><A 
 href="mailto:Helmut.Ortmann@t-online.de">Helmut.Ortmann@t-online.de</A><BR>+49 
 172 / 51 79 16 7</P></BODY></HTML>
-!=!K002003UTF-8
+!=!K001562UTF-8
