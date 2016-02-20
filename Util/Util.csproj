@@ -82,6 +82,7 @@
       <DependentUpon>InvisibleHotKeyForm.cs</DependentUpon>
     </Compile>
     <Compile Include="src\MKS.cs" />
+    <Compile Include="src\Model.cs" />
     <Compile Include="src\Param.cs" />
     <Compile Include="src\RecursivePackages.cs" />
     <Compile Include="src\Run.cs" />
