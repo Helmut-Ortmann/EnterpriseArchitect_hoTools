@@ -15,6 +15,7 @@ using System.Reflection;
 using System.Xml;
 using Microsoft.Win32;
 using MSScriptControl;
+using EAAddinFramework.Utils;
 //using EAWrappers = TSF.UmlToolingFramework.Wrappers.EA;
 
 
@@ -34,7 +35,7 @@ namespace EAAddinFramework.EASpecific
 		private static List<Script> staticEAMaticScripts = new List<Script>();
 		private static Dictionary<string,string> modelIncludableScripts = new Dictionary<string, string>(); 
 		private static bool reloadModelIncludableScripts;
-		private EAWrappers.Model model;
+		private Model model;
 		private string scriptID;
 		private string _code;
 		public string errorMessage {get;set;}
@@ -97,7 +98,7 @@ namespace EAAddinFramework.EASpecific
 		/// <param name="code">the code</param>
 		/// <param name="language">the language the code is written in</param>
 		/// <param name="model">the model this script resides in</param>
-		public Script(string scriptID,string scriptName,string groupName, string code, string language, EAWrappers.Model model):this(scriptID, scriptName, groupName, code, language, false)
+		public Script(string scriptID,string scriptName,string groupName, string code, string language, Model model):this(scriptID, scriptName, groupName, code, language, false)
 		{
 			this.model = model;
 		}
@@ -130,7 +131,7 @@ namespace EAAddinFramework.EASpecific
 			//create new scriptcontroller
 			this.scriptController = new ScriptControl();
 			this.scriptController.Language = this.language.name;
-			this.scriptController.AddObject("Repository", model.getWrappedModel());
+			this.scriptController.AddObject("Repository", model.Repository);
 			//Add the actual code. This must be done in a try/catch because a syntax error in the script will result in an exception from AddCode
 			try
 			{
@@ -176,7 +177,7 @@ namespace EAAddinFramework.EASpecific
 		/// </summary>
 		private static void loadLocalScripts()
 		{
-			string scriptsDirectory = Path.GetDirectoryName(EAWrappers.Model.applicationFullPath) + "\\Scripts";
+			string scriptsDirectory = Path.GetDirectoryName(Model.applicationFullPath) + "\\Scripts";
 			string[] scriptFiles = Directory.GetFiles(scriptsDirectory,"*.*",SearchOption.AllDirectories);
 			foreach(string scriptfile in scriptFiles)
 			{
@@ -259,7 +260,7 @@ namespace EAAddinFramework.EASpecific
 		/// </summary>
 		private static void loadLocalMDGScripts()
 		{
-			string mdgDirectory = Path.GetDirectoryName(EAWrappers.Model.applicationFullPath) + "\\MDGTechnologies";
+			string mdgDirectory = Path.GetDirectoryName(Model.applicationFullPath) + "\\MDGTechnologies";
 			loadMDGScriptsFromFolder(mdgDirectory);
 		}
 		/// <summary>
@@ -410,7 +411,7 @@ namespace EAAddinFramework.EASpecific
 		/// </summary>
 		/// <param name="model"></param>
 		/// <returns></returns>
-		public static List<Script> getEAMaticScripts(EAWrappers.Model model)
+		public static List<Script> getEAMaticScripts(Model model)
 		{			
 			if (model != null)
 			{
@@ -554,5 +555,6 @@ namespace EAAddinFramework.EASpecific
 			string SQLUpdate = "update t_script set script = '"+ this.model.escapeSQLString(this._code) +"' where ScriptID = " + this.scriptID ;
 			this.model.executeSQL(SQLUpdate);
 		}
+
 	}
 }

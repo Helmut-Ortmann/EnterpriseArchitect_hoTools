@@ -9,6 +9,7 @@
 using System;
 using System.Collections;
 using MSScriptControl;
+using EAAddinFramework.Utils;
 
 namespace EAAddinFramework.EASpecific
 {

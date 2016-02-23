@@ -8,6 +8,7 @@
  */
 using System;
 using System.Reflection;
+using EAAddinFramework.Utils;
 
 namespace EAAddinFramework.EASpecific
 {

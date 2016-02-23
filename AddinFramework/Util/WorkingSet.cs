@@ -1,8 +1,7 @@
 ﻿
 using System;
-using EAWrappers = TSF.UmlToolingFramework.Wrappers.EA;
 
-namespace EAAddinFramework.EASpecific
+namespace EAAddinFramework.Utils
 {
 	/// <summary>
 	/// Description of WorkingSet.
@@ -11,10 +10,10 @@ namespace EAAddinFramework.EASpecific
 	{
 		public User user {get;set;}
 		public string name {get;set;}
-		public EAWrappers.Model model {get;set;}
+		public Model model {get;set;}
 		public string ID {get;set;}
 		
-		public WorkingSet(EAWrappers.Model model,string ID,User user, string name)
+		public WorkingSet(Model model,string ID,User user, string name)
 		{
 			this.model = model;
 			this.ID = ID;

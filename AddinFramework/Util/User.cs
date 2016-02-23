@@ -1,16 +1,13 @@
 ﻿
-using System;
-using EAWrappers = TSF.UmlToolingFramework.Wrappers.EA;
 
-
-namespace EAAddinFramework.EASpecific
+namespace EAAddinFramework.Utils
 {
 	/// <summary>
 	/// Description of User.
 	/// </summary>
 	public class User
 	{
-		public EAWrappers.Model model {get;set;}
+		public Model model {get;set;}
 		public string login {get;set;}
 		public string firstName {get;set;}
 		public string lastName {get;set;}
@@ -36,7 +33,7 @@ namespace EAAddinFramework.EASpecific
 		/// <param name="login">the string used to log in into the tool</param>
 		/// <param name="firstName">the first name of the user</param>
 		/// <param name="lastName">the last name of the user</param>
-		public User(EAWrappers.Model model,string login,string firstName,string lastName)
+		public User(Model model,string login,string firstName,string lastName)
 		{
 			this.model = model;
 			this.login = login;

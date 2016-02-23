@@ -1,25 +1,17 @@
-﻿/*
- * Created by SharpDevelop.
- * User: wij
- * Date: 15/03/2015
- * Time: 5:58
- * 
- * To change this template use Tools | Options | Coding | Edit Standard Headers.
- */
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Windows.Forms;
 
 using Microsoft.Win32;
 
 namespace EAAddinFramework.EASpecific
 {
-	/// <summary>
-	/// Description of EAAddin.
-	/// </summary>
-	public class EAAddin
+    /// <summary>
+    /// Description of EAAddin.
+    /// </summary>
+    public class EAAddin
 	{
 		private Assembly addinDLL;
 		private object wrappedAddin;
@@ -190,7 +182,8 @@ namespace EAAddinFramework.EASpecific
 				}
 				catch (Exception e)
 				{
-					EAAddinFramework.Utilities.Logger.logError ("Error occured executing " + methodName + " : " + e.Message + " stacktrace: " + e.StackTrace);
+                    MessageBox.Show("Error occured executing " + methodName + " : " + e.Message + " stacktrace: " + e.StackTrace);
+
 					return null;						
 				}
 			}
