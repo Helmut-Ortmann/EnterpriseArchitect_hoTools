@@ -149,7 +149,7 @@ namespace EAAddinFramework.EASpecific
 			catch (Exception e)
 			{
 				//the addCode didn't work, probably because of a syntax error, or unsupported syntaxt in the code
-				MSScriptControl.IScriptControl iscriptControl = this.scriptController as MSScriptControl.IScriptControl;
+				var iscriptControl = this.scriptController as MSScriptControl.IScriptControl;
 				this.errorMessage = e.Message + " ERROR : " + iscriptControl.Error.Description + " | Line of error: " + iscriptControl.Error.Line + " | Code error: " + iscriptControl.Error.Text;
                 MessageBox.Show("Error in loading code for script " + this.name + ": " + this.errorMessage, "Syntax error in Script");
 			}
@@ -219,7 +219,7 @@ namespace EAAddinFramework.EASpecific
 		private static void loadOtherMDGScripts()
 		{
 			//read the registry key to find the locations
-			string pathList = Registry.GetValue(@"HKEY_CURRENT_USER\Software\Sparx Systems\EA400\EA\OPTIONS", "MDGTechnology PathList", null) as string;    
+			var pathList = Registry.GetValue(@"HKEY_CURRENT_USER\Software\Sparx Systems\EA400\EA\OPTIONS", "MDGTechnology PathList", null) as string;    
 			if (pathList != null)
 			{
 				string[] mdgPaths = pathList.Split(',');
@@ -291,10 +291,10 @@ namespace EAAddinFramework.EASpecific
 		{
 			try
 			{
-				XmlDocument xmlDoc = new XmlDocument();
+				var xmlDoc = new XmlDocument();
 				xmlDoc.LoadXml(mdgXmlContent);
 				//first get the name of the MDG
-				XmlElement documentationElement = xmlDoc.SelectSingleNode("//Documentation") as XmlElement;
+				var documentationElement = xmlDoc.SelectSingleNode("//Documentation") as XmlElement;
 				if (documentationElement != null)
 				{
 					string mdgName = documentationElement.GetAttribute("id");
@@ -302,7 +302,7 @@ namespace EAAddinFramework.EASpecific
 					XmlNodeList scriptNodes = xmlDoc.SelectNodes("//Script");
 					foreach (XmlNode scriptNode in scriptNodes) 
 					{
-						XmlElement scriptElement = (XmlElement)scriptNode;
+						var scriptElement = (XmlElement)scriptNode;
 						//get the name of the script
 						string scriptName = scriptElement.GetAttribute("name");
 						//get the language of the script
@@ -329,7 +329,7 @@ namespace EAAddinFramework.EASpecific
 		{
 			if (scriptCode.Contains("EA-Matic"))
 			{
-				Script script = new Script(groupName + "." + scriptName,scriptName,groupName,scriptCode, language,true);
+				var script = new Script(groupName + "." + scriptName,scriptName,groupName,scriptCode, language,true);
 				staticEAMaticScripts.Add(script);
 			}
 		}
@@ -377,7 +377,7 @@ namespace EAAddinFramework.EASpecific
 		/// <returns>the contents of each line starting with "!INC"</returns>
 		private List<string> getIncludes(string code)
 		{
-			List<string> includes = new List<string>();
+			var includes = new List<string>();
 			using (StringReader reader = new StringReader(code))
 			{
 				string line;
@@ -461,7 +461,7 @@ namespace EAAddinFramework.EASpecific
 						{
 							scriptCode = string.Empty;
 						}
-						Script script = new Script(ScriptID,scriptName,groupName,scriptCode, language,model); 
+						var script = new Script(ScriptID,scriptName,groupName,scriptCode, language,model); 
 						//and create the script if both code and language are found
 						allScripts.Add(script);
 						//also add the script to the include dictionary

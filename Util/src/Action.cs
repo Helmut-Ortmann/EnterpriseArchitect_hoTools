@@ -42,7 +42,7 @@ namespace hoTools.Utils
             // not for macros
             if (! s.Substring(0, 1).Equals("#"))
             {
-                int i = s.IndexOf((string)@"(", 1);
+                int i = s.IndexOf((string)@"(", 1, StringComparison.CurrentCulture);
                 if (i >= 0)
                 {
                     s = s.Remove(i, 1);
@@ -67,7 +67,7 @@ namespace hoTools.Utils
         // modulePrefix_function(..) ==> function(..)
         public static string removeModuleNameFromCallString(string s)
         {
-            Regex pattern = new Regex(@"([a-zA-Z][a-zA-Z_0-9]*_)[a-zA-Z_0-9]*\(");
+            var pattern = new Regex(@"([a-zA-Z][a-zA-Z_0-9]*_)[a-zA-Z_0-9]*\(");
             Match regMatch = pattern.Match(s);
             if (regMatch.Success | regMatch.Groups.Count > 1)
             {
@@ -88,7 +88,7 @@ namespace hoTools.Utils
 
             // delete 1223ul (type suffixe)
             //s = Regex.Replace(s, @"([0-9])([uU][lL]*)", "");
-            Regex pattern = new Regex(@"[^a-zA-Z_]([0-9])([uU][lL]*)");
+            var pattern = new Regex(@"[^a-zA-Z_]([0-9])([uU][lL]*)");
             Match regMatch = pattern.Match(s);
             while (regMatch.Success)
             {
@@ -165,7 +165,7 @@ namespace hoTools.Utils
                       where o.name = '" + elementName + "' AND " +
                             "o.Object_Type = '" + elementType + "' ";
             string str = rep.SQLQuery(query);
-            XmlDocument XmlDoc = new XmlDocument();
+            var XmlDoc = new XmlDocument();
             XmlDoc.LoadXml(str);
 
             XmlNode operationGUIDNode = XmlDoc.SelectSingleNode("//EA_GUID");
@@ -180,7 +180,7 @@ namespace hoTools.Utils
 
         public static string getMethodNameFromCallString(string s)
         {
-            Regex pattern = new Regex(@"[a-zA-Z_][a-zA-Z_0-9]+\s*\(");
+            var pattern = new Regex(@"[a-zA-Z_][a-zA-Z_0-9]+\s*\(");
             Match regMatch = pattern.Match(s);
             if (regMatch.Success)
             {
@@ -197,7 +197,7 @@ namespace hoTools.Utils
                       from t_operation op 
                       where op.name = '" + methodName + "' ";
             string str = rep.SQLQuery(query);
-            XmlDocument XmlDoc = new XmlDocument();
+            var XmlDoc = new XmlDocument();
             XmlDoc.LoadXml(str);
 
             XmlNode operationGUIDNode = XmlDoc.SelectSingleNode("//EA_GUID");

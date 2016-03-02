@@ -35,7 +35,7 @@ namespace hoTools.Utils.Parameter
                         
                             
             string str = _rep.SQLQuery(query);
-            XmlDocument XmlDoc = new XmlDocument();
+            var XmlDoc = new XmlDocument();
             XmlDoc.LoadXml(str);
 
             // get existing t_xref and remember GUID/XrefID
@@ -58,7 +58,7 @@ namespace hoTools.Utils.Parameter
             public bool setParameterProperties(string propertyName, string propertyValue) {
                 if (propertyName == "direction")
                 {
-                    Regex rx = new Regex(@"@PROP=@NAME=direction@ENDNAME;@TYPE=ParameterDirectionKind@ENDTYPE;@VALU=[^@]+@ENDVALU;@PRMT=@ENDPRMT;@ENDPROP;");
+                    var rx = new Regex(@"@PROP=@NAME=direction@ENDNAME;@TYPE=ParameterDirectionKind@ENDTYPE;@VALU=[^@]+@ENDVALU;@PRMT=@ENDPRMT;@ENDPROP;");
                     Match regMatch = rx.Match(_properties);
                     while (regMatch.Success)
                     {
@@ -71,7 +71,7 @@ namespace hoTools.Utils.Parameter
                 }
                 if (propertyName == "constant")
                 {
-                    Regex rx = new Regex(@"@PROP=@NAME=isStream@ENDNAME;@TYPE=Boolean@ENDTYPE;@VALU=[^@]+@ENDVALU;@PRMT=@ENDPRMT;@ENDPROP;");
+                    var rx = new Regex(@"@PROP=@NAME=isStream@ENDNAME;@TYPE=Boolean@ENDTYPE;@VALU=[^@]+@ENDVALU;@PRMT=@ENDPRMT;@ENDPROP;");
                     Match regMatch = rx.Match(_properties);
                     while (regMatch.Success)
                     {

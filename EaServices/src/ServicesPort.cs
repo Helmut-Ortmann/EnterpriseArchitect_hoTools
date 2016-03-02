@@ -66,7 +66,7 @@ namespace hoTools.EAServicesPort
             // target object/element
             EA.DiagramObject srcObj;
             EA.Element srcEl;
-            EA.Element trgEl = (EA.Element)_rep.GetContextObject();
+            var trgEl = (EA.Element)_rep.GetContextObject();
             if (trgEl.Type != "Class" && trgEl.Type != "Component")
             {
                 MessageBox.Show("Target element has to be Class or Component", "");
@@ -210,7 +210,7 @@ namespace hoTools.EAServicesPort
             EA.Element el = _rep.GetElementByID(port.ParentID);
             for (int i = 0; i < el.EmbeddedElements.Count; i++)
             {
-                EA.Element p1 = (EA.Element)el.EmbeddedElements.GetAt((short)i);
+                var p1 = (EA.Element)el.EmbeddedElements.GetAt((short)i);
                 if (p1.ElementID == port.ElementID)
                 {
                     el.EmbeddedElements.Delete((short)i);
@@ -251,7 +251,7 @@ namespace hoTools.EAServicesPort
             if (count < 2) return;
             _rep.SaveDiagram(dia.DiagramID);
 
-            EADiagram eadia = new EADiagram(_rep);
+            var eadia = new EADiagram(_rep);
             eadia.sortSelectedObjects();
             eadia.ReloadSelectedObjectsAndConnector();
  
@@ -275,7 +275,7 @@ namespace hoTools.EAServicesPort
             {
                 Cursor.Current = Cursors.WaitCursor;
                 // get Diagram data
-                EADiagram eaDia = new EADiagram(_rep);
+                var eaDia = new EADiagram(_rep);
 
                 // hide all ports
                 removePortFromDiagramGUI();
@@ -366,7 +366,7 @@ namespace hoTools.EAServicesPort
         {
             for (int i= dia.DiagramObjects.Count-1; i>=0;i-=1)
             {
-                EA.DiagramObject obj = (EA.DiagramObject)dia.DiagramObjects.GetAt((short) i);
+                var obj = (EA.DiagramObject)dia.DiagramObjects.GetAt((short) i);
                 if (obj.ElementID == port.ElementID)
                 {
                     dia.DiagramObjects.Delete((short)i);
@@ -499,7 +499,7 @@ namespace hoTools.EAServicesPort
         #region setLabel
         private static void changeLabel(EA.DiagramObject portObj, string from, string to)
         {
-            string style = (string)portObj.Style;
+            var style = (string)portObj.Style;
 
             Match match = Regex.Match(style, from);
             if (match.Success)
@@ -554,7 +554,7 @@ namespace hoTools.EAServicesPort
                 el = _rep.GetElementByID(obj.ElementID);
                 for (int i1 = el.EmbeddedElements.Count -1; i1 >= 0; i1 = i1-1)
                 {
-                    EA.Element p = (EA.Element)el.EmbeddedElements.GetAt((short)i1);
+                    var p = (EA.Element)el.EmbeddedElements.GetAt((short)i1);
                     if (p.Type == "Port" ||
                         p.Type == "Part" && p.Stereotype == "CharacteristicCurve" ||
                         p.Type == "Part" && p.Stereotype == "CharacteristicData" )
@@ -578,7 +578,7 @@ namespace hoTools.EAServicesPort
             {
 
                 Cursor.Current = Cursors.WaitCursor;
-                EADiagram eaDia = new EADiagram(_rep);
+                var eaDia = new EADiagram(_rep);
                 doConnectPortsInsideGUI();
 
                 eaDia.ReloadSelectedObjectsAndConnector();
@@ -641,7 +641,7 @@ namespace hoTools.EAServicesPort
             {
 
                 Cursor.Current = Cursors.WaitCursor;
-                EADiagram eaDia = new EADiagram(_rep);
+                var eaDia = new EADiagram(_rep);
                 doConnectPortGUI();
 
                 eaDia.ReloadSelectedObjectsAndConnector();
@@ -668,7 +668,7 @@ namespace hoTools.EAServicesPort
         /// <returns></returns>
         public void doConnectPortGUI () 
         {
-            List<int> l_el_id = new List<int>();
+            var l_el_id = new List<int>();
             EA.Package pkg = _rep.GetTreeSelectedPackage();
             if (pkg == null) return;
             
@@ -684,7 +684,7 @@ namespace hoTools.EAServicesPort
             }
             else
             {
-                ElementRecursive rec = new ElementRecursive(_rep);
+                var rec = new ElementRecursive(_rep);
                 l_el_id = rec.getItemsRecursive(pkg);
             }
 
@@ -734,13 +734,13 @@ namespace hoTools.EAServicesPort
                             if (srcPort.Stereotype == "Server")
                                 if (trgtPort.Stereotype != "Client") continue;
 
-                            UtilSql sql = new UtilSql(_rep);
+                            var sql = new UtilSql(_rep);
                             if (sql.isConnectionAvailable(srcPort, trgtPort) == false)
                             {
                                 // direction of connector
                                 if (srcPort.Stereotype == "Sender" | srcPort.Stereotype == "Client")
                                 {
-                                    EA.Connector con = (EA.Connector)srcPort.Connectors.AddNew("", "Connector");
+                                    var con = (EA.Connector)srcPort.Connectors.AddNew("", "Connector");
                                     srcPort.Connectors.Refresh();
                                     con.SupplierID = trgtPort.ElementID;
                                     con.Update();
@@ -748,7 +748,7 @@ namespace hoTools.EAServicesPort
                                 }
                                 else
                                 {
-                                    EA.Connector con = (EA.Connector)trgtPort.Connectors.AddNew("", "Connector");
+                                    var con = (EA.Connector)trgtPort.Connectors.AddNew("", "Connector");
                                     trgtPort.Connectors.Refresh();
                                     con.SupplierID = srcPort.ElementID;
                                     con.Update();
@@ -768,7 +768,7 @@ namespace hoTools.EAServicesPort
         #region setConnectionDirectionUnspecifiedGUI
         public void setConnectionDirectionUnspecifiedGUI()
         {
-            EADiagram eaDia = new EADiagram(_rep);
+            var eaDia = new EADiagram(_rep);
             EA.Diagram dia = eaDia.Dia;
             if (eaDia.Dia == null) return;
             if (eaDia.SelectedObjectsCount == 0) return;

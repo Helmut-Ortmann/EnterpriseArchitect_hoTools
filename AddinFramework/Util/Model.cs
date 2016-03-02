@@ -42,14 +42,25 @@ namespace EAAddinFramework.Utils
             ACCESS2007,
             FIREBIRD
         }
-
+        #region Constructor
+        /// <summary>
+        /// Create a model on the first running EA instance
+        /// </summary>
         Model()
         {
             object obj = Marshal.GetActiveObject("EA.App");
             EaApp = obj as EA.App;
-            Repository = EaApp.Repository;
+            this.Repository = EaApp.Repository;
         }
-
+        /// <summary>
+        /// Create a Model
+        /// </summary>
+        /// <param name="Repository"></param>
+        Model(EA.Repository Repository)
+        {
+            this.Repository = Repository;
+        }
+        #endregion
         /// <summary>
         /// returns the full path of the running ea.exe
         /// </summary>
@@ -93,7 +104,7 @@ namespace EAAddinFramework.Utils
                 if //(true)
                     (this._mainEAWindow == null)
                 {
-                    List<Process> allProcesses = new List<Process>(Process.GetProcesses());
+                    var allProcesses = new List<Process>(Process.GetProcesses());
                     Process proc = allProcesses.Find(pr => pr.ProcessName == "EA");
                     //if we don't find the process then we set the mainwindow to null
                     if (proc == null
@@ -129,7 +140,7 @@ namespace EAAddinFramework.Utils
                 //if it is a .eap file we check the size of it. if less then 1 MB then it is a shortcut file and we have to open it as a text file to find the actual connection string
                 if (connectionString.ToLower().EndsWith(".eap"))
                 {
-                    System.IO.FileInfo fileInfo = new System.IO.FileInfo(connectionString);
+                    var fileInfo = new System.IO.FileInfo(connectionString);
                     if (fileInfo.Length > 1000)
                     {
                         //local .eap file, ms access syntax
@@ -138,8 +149,8 @@ namespace EAAddinFramework.Utils
                     else
                     {
                         //open the file as a text file to find the connectionstring.
-                        System.IO.FileStream fileStream = new System.IO.FileStream(connectionString, System.IO.FileMode.Open, System.IO.FileAccess.Read, System.IO.FileShare.ReadWrite);
-                        System.IO.StreamReader reader = new System.IO.StreamReader(fileStream);
+                        var fileStream = new System.IO.FileStream(connectionString, System.IO.FileMode.Open, System.IO.FileAccess.Read, System.IO.FileShare.ReadWrite);
+                        var reader = new System.IO.StreamReader(fileStream);
                         //replace connectionstring with the file contents
                         connectionString = reader.ReadToEnd();
                         reader.Close();
@@ -211,7 +222,7 @@ namespace EAAddinFramework.Utils
         public XmlDocument SQLQuery(string sqlQuery)
         {
             sqlQuery = this.formatSQL(sqlQuery);
-            XmlDocument results = new XmlDocument();
+            var results = new XmlDocument();
             results.LoadXml(this.Repository.SQLQuery(sqlQuery));
             return results;
         }
@@ -393,7 +404,7 @@ namespace EAAddinFramework.Utils
         {
             get
             {
-                List<WorkingSet> workingSetList = new List<WorkingSet>();
+                var workingSetList = new List<WorkingSet>();
                 string getWorkingSets = "select d.docid, d.DocName,d.Author from t_document d where d.DocType = 'WorkItem' order by d.Author, d.DocName";
                 XmlDocument workingSets = this.SQLQuery(getWorkingSets);
                 foreach (XmlNode workingSetNode in workingSets.SelectNodes("//Row"))
@@ -430,7 +441,7 @@ namespace EAAddinFramework.Utils
             get
             {
 
-                List<User> userList = new List<User>();
+                var userList = new List<User>();
                 if (this.isSecurityEnabled)
                 {
                     string getUsers = "select u.UserLogin, u.FirstName, u.Surname from t_secuser u";

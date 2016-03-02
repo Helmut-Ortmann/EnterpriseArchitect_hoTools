@@ -93,7 +93,7 @@ namespace hoTools.Settings
             // enables the application to access 
             // the configuration file using the
             // System.Configuration.Configuration class
-            ExeConfigurationFileMap configFileMap = new ExeConfigurationFileMap();
+            var configFileMap = new ExeConfigurationFileMap();
             configFileMap.ExeConfigFilename = ConfigFilePath;
             // Get the mapped configuration file.
             currentConfig = ConfigurationManager.OpenMappedExeConfiguration(configFileMap, ConfigurationUserLevel.None);
@@ -605,7 +605,7 @@ namespace hoTools.Settings
         #region refresh
         public void refresh()
         {
-            ExeConfigurationFileMap configFileMap = new ExeConfigurationFileMap();
+            var configFileMap = new ExeConfigurationFileMap();
             configFileMap.ExeConfigFilename = currentConfig.FilePath;
             // Get the mapped configuration file.
             currentConfig = ConfigurationManager.OpenMappedExeConfiguration(configFileMap, ConfigurationUserLevel.None);
@@ -620,7 +620,7 @@ namespace hoTools.Settings
                 if (l[i] is EaAddinShortcutSearch)
                 {
 
-                    EaAddinShortcutSearch el = (EaAddinShortcutSearch)l[i];
+                    var el = (EaAddinShortcutSearch)l[i];
                     string basicKey = "Key" + el.keyPos;
                     this.currentConfig.AppSettings.Settings[basicKey + "Text"].Value = el.keyText;
                     this.currentConfig.AppSettings.Settings[basicKey + "Type"].Value = "Search";
@@ -684,7 +684,7 @@ namespace hoTools.Settings
         #region getShortcutsServices
         private List<hoTools.EaServices.ServicesCallConfig> getShortcutsServices()
         {
-            List<hoTools.EaServices.ServicesCallConfig> l = new List<hoTools.EaServices.ServicesCallConfig>();
+            var l = new List<hoTools.EaServices.ServicesCallConfig>();
             int pos = 0;
             string sKey = "";
             string text = "";
@@ -792,7 +792,7 @@ namespace hoTools.Settings
         /// <returns></returns>
         private List<GlobalKeysConfig.GlobalKeysServiceConfig> getGlobalShortcutsService()
          {
-             List<GlobalKeysConfig.GlobalKeysServiceConfig> l = new List<GlobalKeysConfig.GlobalKeysServiceConfig>();
+             var l = new List<GlobalKeysConfig.GlobalKeysServiceConfig>();
              int pos = 0;
              string sKey = "";
              string key = "";
@@ -845,7 +845,7 @@ namespace hoTools.Settings
         #region getGlobalShortcutsSearch
         private List<GlobalKeysConfig.GlobalKeysSearchConfig> getGlobalShortcutsSearch()
         {
-            List<GlobalKeysConfig.GlobalKeysSearchConfig> l = new List<GlobalKeysConfig.GlobalKeysSearchConfig>();
+            var l = new List<GlobalKeysConfig.GlobalKeysSearchConfig>();
             int pos = 0;
             string sKey = "";
             string key = "";
@@ -1054,7 +1054,7 @@ namespace hoTools.Settings
                 if (l[i] is hoTools.EaServices.ServicesCallConfig)
                 {
 
-                    hoTools.EaServices.ServicesCallConfig el = (hoTools.EaServices.ServicesCallConfig)l[i];
+                    var el = (hoTools.EaServices.ServicesCallConfig)l[i];
                     string basicKey = "service" + (i + 1).ToString();
                     this.currentConfig.AppSettings.Settings[basicKey + "GUID"].Value = el.GUID;
                     this.currentConfig.AppSettings.Settings[basicKey + "Text"].Value = el.ButtonText;

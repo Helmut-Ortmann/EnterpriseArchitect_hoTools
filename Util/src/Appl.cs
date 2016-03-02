@@ -54,18 +54,18 @@ namespace hoTools.Utils.Appls
             EA.Package pkgSrc = rep.GetPackageByID(elClass.PackageID);
 
             // create a package with the name of the operation
-            EA.Package pkgTrg = (EA.Package)pkgSrc.Packages.AddNew(m.Name, "");
+            var pkgTrg = (EA.Package)pkgSrc.Packages.AddNew(m.Name, "");
             pkgTrg.Update();
             pkgSrc.Packages.Refresh();
 
             // create Class Sequence Diagram in target package
-            EA.Diagram pkgSeqDia = (EA.Diagram)pkgTrg.Diagrams.AddNew("Operation:" + m.Name + " Content", "Sequence");
+            var pkgSeqDia = (EA.Diagram)pkgTrg.Diagrams.AddNew("Operation:" + m.Name + " Content", "Sequence");
             pkgSeqDia.Update();
             pkgTrg.Diagrams.Refresh();
 
             // add frame in Sequence diagram
-            EA.DiagramObject frmObj = (EA.DiagramObject)pkgSeqDia.DiagramObjects.AddNew("l=100;r=400;t=25;b=50", "");
-            EA.Element frm = (EA.Element)pkgTrg.Elements.AddNew(m.Name, "UMLDiagram");
+            var frmObj = (EA.DiagramObject)pkgSeqDia.DiagramObjects.AddNew("l=100;r=400;t=25;b=50", "");
+            var frm = (EA.Element)pkgTrg.Elements.AddNew(m.Name, "UMLDiagram");
             frm.Update();
             frmObj.ElementID = frm.ElementID;
             //frmObj.Style = "fontsz=200;pitch=34;DUID=265D32D5;font=Arial Narrow;bold=0;italic=0;ul=0;charset=0;";
@@ -75,31 +75,31 @@ namespace hoTools.Utils.Appls
 
 
             // create Interaction with the name of the operation
-            EA.Element seq = (EA.Element)pkgTrg.Elements.AddNew(m.Name, "Interaction");
+            var seq = (EA.Element)pkgTrg.Elements.AddNew(m.Name, "Interaction");
             seq.Notes = "Generated from Operation:\r\n" + m.Visibility + " " + m.Name + ":" + m.ReturnType + ";\r\nDetails see Operation definition!!";
             seq.Update();
             pkgTrg.Elements.Refresh();
 
             // create sequence diagram beneath Interaction
-            EA.Diagram seqDia = (EA.Diagram)seq.Diagrams.AddNew(m.Name, "Sequence");
+            var seqDia = (EA.Diagram)seq.Diagrams.AddNew(m.Name, "Sequence");
             seqDia.Update();
             seq.Diagrams.Refresh();
 
             // create instance from class beneath Interaction
-            EA.Element obj = (EA.Element)seq.Elements.AddNew("", "Object");
+            var obj = (EA.Element)seq.Elements.AddNew("", "Object");
             seq.Elements.Refresh();
             obj.ClassfierID = elClass.ElementID;
             obj.Update();
 
             // add node object to Sequence Diagram  
-            EA.DiagramObject node = (EA.DiagramObject)seqDia.DiagramObjects.AddNew("l=100;r=180;t=50;b=70", "");
+            var node = (EA.DiagramObject)seqDia.DiagramObjects.AddNew("l=100;r=180;t=50;b=70", "");
             node.ElementID = obj.ElementID;
             node.Update();
 
 
             // Add Heading to diagram
-            EA.DiagramObject noteObj = (EA.DiagramObject)seqDia.DiagramObjects.AddNew("l=40;r=700;t=10;b=25", "");
-            EA.Element note = (EA.Element)pkgTrg.Elements.AddNew("Text", "Text");
+            var noteObj = (EA.DiagramObject)seqDia.DiagramObjects.AddNew("l=40;r=700;t=10;b=25", "");
+            var note = (EA.Element)pkgTrg.Elements.AddNew("Text", "Text");
 
             note.Notes = m.Visibility + " " + elClass.Name + "_" + m.Name + ":" + m.ReturnType;
             note.Update();
@@ -156,7 +156,7 @@ namespace hoTools.Utils.Appls
                 if (dia != null)
                 {
                     Util.addSequenceNumber(rep, dia);
-                    EA.DiagramObject initDiaNode = (EA.DiagramObject)dia.DiagramObjects.AddNew("l=295;r=315;t=125;b=135;", "");
+                    var initDiaNode = (EA.DiagramObject)dia.DiagramObjects.AddNew("l=295;r=315;t=125;b=135;", "");
                     initDiaNode.Sequence = 1;
                     initDiaNode.ElementID = initNode.ElementID;
                     initDiaNode.Update();
@@ -175,7 +175,7 @@ namespace hoTools.Utils.Appls
                 if (dia != null)
                 {
                     Util.addSequenceNumber(rep, dia);
-                    EA.DiagramObject finalDiaNode = (EA.DiagramObject)dia.DiagramObjects.AddNew("l=285;r=305;t=745;b=765;", "");
+                    var finalDiaNode = (EA.DiagramObject)dia.DiagramObjects.AddNew("l=285;r=305;t=745;b=765;", "");
                     finalDiaNode.Sequence = 1;
                     finalDiaNode.ElementID = finalNode.ElementID;
                     finalDiaNode.Update();
@@ -183,7 +183,7 @@ namespace hoTools.Utils.Appls
                 }
             }
             // create state node
-            EA.Element stateNode = (EA.Element)stateChart.Elements.AddNew("", "State");
+            var stateNode = (EA.Element)stateChart.Elements.AddNew("", "State");
             stateNode.Subtype = 0;// state
             stateNode.Name = "State1";
             stateNode.ParentID = stateChart.ElementID;
@@ -192,14 +192,14 @@ namespace hoTools.Utils.Appls
             {
                 Util.addSequenceNumber(rep, dia);
                 string pos = "l=300;r=400;t=-400;b=-470";
-                EA.DiagramObject stateDiaNode = (EA.DiagramObject)dia.DiagramObjects.AddNew(pos, "");
+                var stateDiaNode = (EA.DiagramObject)dia.DiagramObjects.AddNew(pos, "");
                 stateDiaNode.Sequence = 1;
                 stateDiaNode.ElementID = stateNode.ElementID;
                 stateDiaNode.Update();
                 Util.setSequenceNumber(rep, dia, stateDiaNode, "1");
 
                 // draw a transition
-                EA.Connector con = (EA.Connector)finalNode.Connectors.AddNew("", "StateFlow");
+                var con = (EA.Connector)finalNode.Connectors.AddNew("", "StateFlow");
                 con.SupplierID = stateNode.ElementID;
                 con.ClientID = initNode.ElementID;
                 con.Update();
@@ -224,18 +224,18 @@ namespace hoTools.Utils.Appls
             EA.Package pkgSrc = rep.GetPackageByID(elClass.PackageID);
 
             // create a package with the name of the operation
-            EA.Package pkgTrg = (EA.Package)pkgSrc.Packages.AddNew(m.Name, "");
+            var pkgTrg = (EA.Package)pkgSrc.Packages.AddNew(m.Name, "");
             pkgTrg.Update();
             pkgSrc.Packages.Refresh();
 
             // create Class StateMachine Diagram in target package
-            EA.Diagram pkgSeqDia = (EA.Diagram)pkgTrg.Diagrams.AddNew("Operation:" + m.Name + " Content", "Statechart");
+            var pkgSeqDia = (EA.Diagram)pkgTrg.Diagrams.AddNew("Operation:" + m.Name + " Content", "Statechart");
             pkgSeqDia.Update();
             pkgTrg.Diagrams.Refresh();
 
             // add frame in StateMachine diagram
-            EA.DiagramObject frmObj = (EA.DiagramObject)pkgSeqDia.DiagramObjects.AddNew("l=100;r=400;t=25;b=50", "");
-            EA.Element frm = (EA.Element)pkgTrg.Elements.AddNew(m.Name, "UMLDiagram");
+            var frmObj = (EA.DiagramObject)pkgSeqDia.DiagramObjects.AddNew("l=100;r=400;t=25;b=50", "");
+            var frm = (EA.Element)pkgTrg.Elements.AddNew(m.Name, "UMLDiagram");
             frm.Update();
             frmObj.ElementID = frm.ElementID;
             //frmObj.Style = "fontsz=200;pitch=34;DUID=265D32D5;font=Arial Narrow;bold=0;italic=0;ul=0;charset=0;";
@@ -245,18 +245,18 @@ namespace hoTools.Utils.Appls
 
 
             // create StateMachine with the name of the operation
-            EA.Element stateMachine = (EA.Element)pkgTrg.Elements.AddNew(m.Name, "StateMachine");
+            var stateMachine = (EA.Element)pkgTrg.Elements.AddNew(m.Name, "StateMachine");
             stateMachine.Notes = "Generated from Operation:\r\n" + m.Visibility + " " + m.Name + ":" + m.ReturnType + ";\r\nDetails see Operation definition!!";
             stateMachine.Update();
             pkgTrg.Elements.Refresh();
 
             // create Statechart diagram beneath Statemachine
-            EA.Diagram chartDia = (EA.Diagram)stateMachine.Diagrams.AddNew(m.Name, "Statechart");
+            var chartDia = (EA.Diagram)stateMachine.Diagrams.AddNew(m.Name, "Statechart");
             chartDia.Update();
             stateMachine.Diagrams.Refresh();
 
             // put the staemachine on the diagram
-            EA.DiagramObject chartObj = (EA.DiagramObject)chartDia.DiagramObjects.AddNew("l=50;r=600;t=100;b=800", "");
+            var chartObj = (EA.DiagramObject)chartDia.DiagramObjects.AddNew("l=50;r=600;t=100;b=800", "");
             chartObj.ElementID = stateMachine.ElementID;
             chartObj.Update();
             chartDia.DiagramObjects.Refresh();
@@ -265,8 +265,8 @@ namespace hoTools.Utils.Appls
             createDefaultElementsForStateDiagram(rep, chartDia, stateMachine);
 
             // Add Heading to diagram
-            EA.DiagramObject noteObj = (EA.DiagramObject)chartDia.DiagramObjects.AddNew("l=40;r=700;t=10;b=25", "");
-            EA.Element note = (EA.Element)pkgTrg.Elements.AddNew("Text", "Text");
+            var noteObj = (EA.DiagramObject)chartDia.DiagramObjects.AddNew("l=40;r=700;t=10;b=25", "");
+            var note = (EA.Element)pkgTrg.Elements.AddNew("Text", "Text");
 
             note.Notes = m.Visibility + " " + elClass.Name + "_" + m.Name + ":" + m.ReturnType;
             note.Update();

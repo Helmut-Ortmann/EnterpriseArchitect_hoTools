@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
-using System.Drawing;
 using hoTools.Settings;
 using hoTools.EaServices;
-using hoTools.Utils;
-using hoTools.Utils.Favorites;
 
 
 namespace hoTools.Find
@@ -219,7 +214,7 @@ namespace hoTools.Find
         #region btnShow_Click
         private void btnShow_Click(object sender, EventArgs e)
         {
-            ShowAndChangeItemGUI frmItem = new ShowAndChangeItemGUI(_fr);
+            var frmItem = new ShowAndChangeItemGUI(_fr);
             frmItem.Show();
             _fr.LocateCurrentElement();
             txtStatus.Text = _fr.ItemShortDescription();
@@ -290,7 +285,7 @@ namespace hoTools.Find
         #region regularExpressionToolStripMenuItem_Click
         private void regularExpressionToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            RegularExpression frmItem = new RegularExpression();
+            var frmItem = new RegularExpression();
             frmItem.Show();
         }
 #endregion       

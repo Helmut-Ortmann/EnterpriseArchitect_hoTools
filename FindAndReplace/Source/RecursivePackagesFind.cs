@@ -120,7 +120,7 @@ namespace hoTools.Find
 
 
                         }
-                        FindAndReplaceItemElement frItemEl = (FindAndReplaceItemElement)frItem;
+                        var frItemEl = (FindAndReplaceItemElement)frItem;
                         frItemEl.l_itemTag.Add(new FindAndReplaceItemTagElement(tag));
                         frItemEl.CountChanges = frItemEl.CountChanges + count;
                         
@@ -156,7 +156,7 @@ namespace hoTools.Find
 
 
                         }
-                        FindAndReplaceItemPackage frItemPkg = (FindAndReplaceItemPackage)frItem;
+                        var frItemPkg = (FindAndReplaceItemPackage)frItem;
                         frItemPkg.l_itemTag.Add(new FindAndReplaceItemTagPackage(tag));
                         frItemPkg.CountChanges = frItemPkg.CountChanges + count;
 
@@ -192,7 +192,7 @@ namespace hoTools.Find
 
                         }
 
-                        FindAndReplaceItemAttribute frItemAttr = (FindAndReplaceItemAttribute)frItem;
+                        var frItemAttr = (FindAndReplaceItemAttribute)frItem;
                         frItemAttr.l_itemTag.Add(new FindAndReplaceItemTagAttribute(tag));
                         frItemAttr.CountChanges = frItemAttr.CountChanges + count;
 
@@ -227,7 +227,7 @@ namespace hoTools.Find
 
                         }
 
-                        FindAndReplaceItemMethod frItemMeth = (FindAndReplaceItemMethod)frItem;
+                        var frItemMeth = (FindAndReplaceItemMethod)frItem;
                         frItemMeth.l_itemTag.Add(new FindAndReplaceItemTagMethod(tag));
                         frItemMeth.CountChanges = frItemMeth.CountChanges + count;
 

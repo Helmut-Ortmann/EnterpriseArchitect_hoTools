@@ -34,7 +34,7 @@ namespace hoTools.Utils.MksUtil
             // check nested packages
             foreach (EA.Package nestedPkg in _pkg.Packages)
             {
-                Mks mks = new Mks(_rep, nestedPkg);
+                var mks = new Mks(_rep, nestedPkg);
                 mks.getNewest();
             }
             if (_pkg.IsControlled)
@@ -44,7 +44,7 @@ namespace hoTools.Utils.MksUtil
                 try
                 {
                     // preference head revision
-                    Mks mks = new Mks(_rep, _pkg);
+                    var mks = new Mks(_rep, _pkg);
                     mks.Checkout();
 
                     // load package
@@ -98,7 +98,7 @@ namespace hoTools.Utils.MksUtil
         {
             string returnString = "";
             if (_vcPath == null) return returnString;
-            ProcessStartInfo psi = new ProcessStartInfo(@"si");
+            var psi = new ProcessStartInfo(@"si");
             psi.Arguments = cmd + " \"" + _vcPath + "\"";  // wrap file name in " to avoid problems with blank in name
             psi.RedirectStandardOutput = true;
             psi.RedirectStandardError = true;

@@ -68,7 +68,7 @@ namespace hoTools.Utils.svnUtil
         {
             string returnString = "";
             
-            ProcessStartInfo psi = new ProcessStartInfo(proc);
+            var psi = new ProcessStartInfo(proc);
             string path = _vcPath;
             if (!url.Equals("")) path = url;
             if (path == null) return returnString;

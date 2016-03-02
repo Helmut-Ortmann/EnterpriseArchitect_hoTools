@@ -56,8 +56,8 @@ namespace hoTools.Utils
             if (Math.Abs(obj1.left - obj2.left) > Math.Abs(obj1.top - obj2.top)) isVerticalSorted = false;
 
             // fill the diagram objects to sort by name / by position
-            List<DiagramObject> l_ids_by_name = new List<DiagramObject>();
-            List<DiagramObjectSelected> l_obj_by_position = new List<DiagramObjectSelected>();
+            var l_ids_by_name = new List<DiagramObject>();
+            var l_obj_by_position = new List<DiagramObjectSelected>();
             foreach (EA.DiagramObject obj in _selectedObjects)
             {
                 EA.Element el= _rep.GetElementByID(obj.ElementID);

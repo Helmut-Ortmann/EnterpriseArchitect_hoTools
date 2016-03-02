@@ -31,7 +31,7 @@ namespace hoTools.Utils.SQL
         /// <returns></returns>
         public List<int> getAndSortEmbeddedElements(EA.Element el, string objectType, string stereotype, string direction)
         {
-            List<int> l_ports = new List<int>();
+            var l_ports = new List<int>();
 
             string queryStereotype = "";
             string queryOrderBy = @" order by o.name ";
@@ -115,7 +115,7 @@ namespace hoTools.Utils.SQL
         /// <returns></returns>
         public List<string> getUsers()
         {
-            List<string> l = new List<string>();
+            var l = new List<string>();
             string query;
             if (_rep.IsSecurityEnabled)
             {

@@ -47,6 +47,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Advanced", "Advanced", "{A9
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddinFramework", "AddinFramework\AddinFramework.csproj", "{B08AE89B-5E8D-46FD-A5D8-B3DB4D33FB46}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptGui", "ScriptGui\ScriptGui.csproj", "{D83C4D98-7AA9-4B1A-ABED-EA8A9EAC210C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -130,6 +132,18 @@ Global
 		{B08AE89B-5E8D-46FD-A5D8-B3DB4D33FB46}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{B08AE89B-5E8D-46FD-A5D8-B3DB4D33FB46}.Release|x86.ActiveCfg = Release|Any CPU
 		{B08AE89B-5E8D-46FD-A5D8-B3DB4D33FB46}.Release|x86.Build.0 = Release|Any CPU
+		{D83C4D98-7AA9-4B1A-ABED-EA8A9EAC210C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D83C4D98-7AA9-4B1A-ABED-EA8A9EAC210C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D83C4D98-7AA9-4B1A-ABED-EA8A9EAC210C}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{D83C4D98-7AA9-4B1A-ABED-EA8A9EAC210C}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{D83C4D98-7AA9-4B1A-ABED-EA8A9EAC210C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D83C4D98-7AA9-4B1A-ABED-EA8A9EAC210C}.Debug|x86.Build.0 = Debug|Any CPU
+		{D83C4D98-7AA9-4B1A-ABED-EA8A9EAC210C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D83C4D98-7AA9-4B1A-ABED-EA8A9EAC210C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D83C4D98-7AA9-4B1A-ABED-EA8A9EAC210C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{D83C4D98-7AA9-4B1A-ABED-EA8A9EAC210C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{D83C4D98-7AA9-4B1A-ABED-EA8A9EAC210C}.Release|x86.ActiveCfg = Release|Any CPU
+		{D83C4D98-7AA9-4B1A-ABED-EA8A9EAC210C}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

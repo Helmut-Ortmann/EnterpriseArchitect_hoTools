@@ -12,11 +12,8 @@ namespace EAAddinFramework.Utils
             _hwnd = handle;
         }
 
-        public IntPtr Handle
-        {
-            get { return _hwnd; }
-        }
+        public IntPtr Handle => _hwnd;
 
-        private IntPtr _hwnd;
+        private readonly IntPtr _hwnd;
     }
 }

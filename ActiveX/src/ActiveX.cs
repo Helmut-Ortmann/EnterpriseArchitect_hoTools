@@ -398,7 +398,7 @@ namespace hoTools.ActiveX
             if (_addinSettings.buttonsSearch[pos] is EaAddinShortcutSearch)
             {
 
-                EaAddinShortcutSearch sh = (EaAddinShortcutSearch)_addinSettings.buttonsSearch[pos];
+                var sh = (EaAddinShortcutSearch)_addinSettings.buttonsSearch[pos];
                 if (sh.keySearchName == "") return;
                 try
                 {
@@ -416,7 +416,7 @@ namespace hoTools.ActiveX
             if (_addinSettings.buttonsServices[pos] is hoTools.EaServices.ServicesCallConfig)
             {
 
-                hoTools.EaServices.ServicesCallConfig sh = (hoTools.EaServices.ServicesCallConfig)_addinSettings.buttonsServices[pos];
+                var sh = (hoTools.EaServices.ServicesCallConfig)_addinSettings.buttonsServices[pos];
                 if (sh.Method == null) return;
                 sh.Invoke(m_repository, txtUserText.Text);
 
@@ -448,7 +448,7 @@ namespace hoTools.ActiveX
             EA.ObjectType oType = m_repository.GetContextItemType();
             if (!oType.Equals(EA.ObjectType.otPackage)) return;
 
-            EA.Package pkg = (EA.Package)m_repository.GetContextObject();
+            var pkg = (EA.Package)m_repository.GetContextObject();
             EaService.gotoSvnLog(m_repository, pkg);
         }
 
@@ -457,7 +457,7 @@ namespace hoTools.ActiveX
             EA.ObjectType oType = m_repository.GetContextItemType();
             if (!oType.Equals(EA.ObjectType.otPackage)) return;
 
-            EA.Package pkg = (EA.Package)m_repository.GetContextObject();
+            var pkg = (EA.Package)m_repository.GetContextObject();
             EaService.gotoSvnBrowser(m_repository, pkg);
         }
 
@@ -471,7 +471,7 @@ namespace hoTools.ActiveX
             EA.ObjectType oType = m_repository.GetContextItemType();
             if (!oType.Equals(EA.ObjectType.otPackage)) return;
 
-            EA.Package pkg = (EA.Package)m_repository.GetContextObject();
+            var pkg = (EA.Package)m_repository.GetContextObject();
             EaService.setSvnProperty(m_repository, pkg);
         }
 
@@ -480,7 +480,7 @@ namespace hoTools.ActiveX
             EA.ObjectType oType = m_repository.GetContextItemType();
             if (!oType.Equals(EA.ObjectType.otPackage)) return;
 
-            EA.Package pkg = (EA.Package)m_repository.GetContextObject();
+            var pkg = (EA.Package)m_repository.GetContextObject();
             EaService.setDirectoryTaggedValues(m_repository, pkg);
         }
 
@@ -517,7 +517,7 @@ namespace hoTools.ActiveX
         #region removePortsInDiagramToolStripMenuItem_Click
         private void removePortsInDiagramToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            PortServices port = new PortServices(m_repository);
+            var port = new PortServices(m_repository);
             port.removePortFromDiagramGUI();
            
         }
@@ -526,7 +526,7 @@ namespace hoTools.ActiveX
         #region showPortsInDiagramObjects
         private void showPortsInDiagramObjectsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            PortServices port = new PortServices(m_repository);
+            var port = new PortServices(m_repository);
             port.showPortsInDiagram(false);
 
            
@@ -535,7 +535,7 @@ namespace hoTools.ActiveX
         #region showReceivingPortsLeftSendingPortsRight
         private void showReceivingPortsLeftSendingPortsRightToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            PortServices port = new PortServices(m_repository);
+            var port = new PortServices(m_repository);
             port.showPortsInDiagram(true);
         }
         #endregion
@@ -543,7 +543,7 @@ namespace hoTools.ActiveX
         #region copyPorts
         private void copyPortsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            PortServices port = new PortServices(m_repository);
+            var port = new PortServices(m_repository);
             port.copyPortsGUI();
            
         }
@@ -551,7 +551,7 @@ namespace hoTools.ActiveX
         #region deletePortsWhichAreMarkedForDeletion
         private void deletePortsWhichAreMarkedForDeletionfutureToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            PortServices port = new PortServices(m_repository);
+            var port = new PortServices(m_repository);
             port.deletePortsMarkedPorts();
         }
         #endregion
@@ -568,7 +568,7 @@ namespace hoTools.ActiveX
         #region hidePortLabelToolStripMenuItem_Click
         private void hidePortLabelToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            PortServices port = new PortServices(m_repository);
+            var port = new PortServices(m_repository);
             port.changeLabelGUI(PortServices.LabelStyle.IS_HIDDEN);
         }
         #endregion
@@ -576,14 +576,14 @@ namespace hoTools.ActiveX
         #region viewPortLabelToolStripMenuItem_Click
         private void viewPortLabelToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            PortServices port = new PortServices(m_repository);
+            var port = new PortServices(m_repository);
             port.changeLabelGUI(PortServices.LabelStyle.IS_SHOWN);
        }
         #endregion
         #region movePortLableLeftPositionToolStripMenuItem_Click
         private void movePortLableLeftPositionToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            PortServices port = new PortServices(m_repository);
+            var port = new PortServices(m_repository);
             port.changeLabelGUI(PortServices.LabelStyle.POSITION_LEFT);
         }
         #endregion
@@ -591,7 +591,7 @@ namespace hoTools.ActiveX
         #region movePortLableRightPositionToolStripMenuItem_Click
         private void movePortLableRightPositionToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            PortServices port = new PortServices(m_repository);
+            var port = new PortServices(m_repository);
             port.changeLabelGUI(PortServices.LabelStyle.POSITION_RIGHT);
         }
         #endregion
@@ -600,7 +600,7 @@ namespace hoTools.ActiveX
         #region movePortLablePlusPositionToolStripMenuItem_Click
         private void movePortLablePlusPositionToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            PortServices port = new PortServices(m_repository);
+            var port = new PortServices(m_repository);
             port.changeLabelGUI(PortServices.LabelStyle.POSITION_PLUS);
         }
         #endregion
@@ -609,7 +609,7 @@ namespace hoTools.ActiveX
         #region movePortLableMinusPositionToolStripMenuItem_Click
         private void movePortLableMinusPositionToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            PortServices port = new PortServices(m_repository);
+            var port = new PortServices(m_repository);
             port.changeLabelGUI(PortServices.LabelStyle.POSITION_MINUS);
         }
         #endregion
@@ -617,20 +617,20 @@ namespace hoTools.ActiveX
 
         private void connectPortsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            PortServices port = new PortServices(m_repository);
+            var port = new PortServices(m_repository);
             port.connectPortsGUI();
             
         }
 
         private void connectPortsInsideComponentsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            PortServices port = new PortServices(m_repository);
+            var port = new PortServices(m_repository);
             port.connectPortsInsideGUI();
         }
 
         private void deletePortsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            PortServices port = new PortServices(m_repository);
+            var port = new PortServices(m_repository);
             port.deletePortsGUI();
         }
 
@@ -656,7 +656,7 @@ namespace hoTools.ActiveX
 
         private void makeConnectorsUnspecifiedDirectionToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            PortServices port = new PortServices(m_repository);
+            var port = new PortServices(m_repository);
             port.setConnectionDirectionUnspecifiedGUI();
         }
        

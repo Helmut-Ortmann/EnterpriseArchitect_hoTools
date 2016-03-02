@@ -43,13 +43,13 @@ namespace hoTools.Utils.ActivityParameter
         public static EA.DiagramObject CreateInitFinalNode(EA.Repository rep, EA.Diagram dia, EA.Element act, 
                                       int subType, string position)
         {
-            EA.Element initNode = (EA.Element)act.Elements.AddNew("", "StateNode");
+            var initNode = (EA.Element)act.Elements.AddNew("", "StateNode");
             initNode.Subtype = subType;
             initNode.Update();
             if (dia != null)
             {
                 Util.addSequenceNumber(rep, dia);
-                EA.DiagramObject initDiaNode = (EA.DiagramObject)dia.DiagramObjects.AddNew(position,"");
+                var initDiaNode = (EA.DiagramObject)dia.DiagramObjects.AddNew(position,"");
                 initDiaNode.ElementID = initNode.ElementID;
                 initDiaNode.Sequence = 1;
                 initDiaNode.Update();
@@ -69,7 +69,7 @@ namespace hoTools.Utils.ActivityParameter
             EA.Package pkgSrc = rep.GetPackageByID(elClass.PackageID);
 
             // create a package with the name of the operation
-            EA.Package pkgTrg = (EA.Package)pkgSrc.Packages.AddNew(m.Name, "");
+            var pkgTrg = (EA.Package)pkgSrc.Packages.AddNew(m.Name, "");
             pkgTrg.TreePos = treePos;
             pkgTrg.Update();
             pkgSrc.Packages.Refresh();
@@ -78,12 +78,12 @@ namespace hoTools.Utils.ActivityParameter
             if (activityIsSimple == false)
             {
                 // create Class Activity Diagram in target package
-                EA.Diagram pkgActDia = (EA.Diagram)pkgTrg.Diagrams.AddNew("Operation:" + m.Name + " Content", "Activity");
+                var pkgActDia = (EA.Diagram)pkgTrg.Diagrams.AddNew("Operation:" + m.Name + " Content", "Activity");
                 pkgActDia.Update();
                 pkgTrg.Diagrams.Refresh();
 
                 // add frame in Activity diagram
-                EA.DiagramObject frmObj = (EA.DiagramObject)pkgActDia.DiagramObjects.AddNew("l=100;r=400;t=25;b=50", "");
+                var frmObj = (EA.DiagramObject)pkgActDia.DiagramObjects.AddNew("l=100;r=400;t=25;b=50", "");
                 frm = (EA.Element)pkgTrg.Elements.AddNew(m.Name, "UMLDiagram");
                 frm.Update();
                 frmObj.ElementID = frm.ElementID;
@@ -94,7 +94,7 @@ namespace hoTools.Utils.ActivityParameter
 
             }
             // create activity with the name of the operation
-            EA.Element act = (EA.Element)pkgTrg.Elements.AddNew(m.Name, "Activity");
+            var act = (EA.Element)pkgTrg.Elements.AddNew(m.Name, "Activity");
             if (activityIsSimple == false)
             {
                 act.Notes = "Generated from Operation:\r\n" + m.Visibility + " " + m.Name + ":" + m.ReturnType + ";\r\nDetails see Operation definition!!";
@@ -104,7 +104,7 @@ namespace hoTools.Utils.ActivityParameter
             pkgTrg.Elements.Refresh();
 
             // create activity diagram beneath Activity
-            EA.Diagram actDia = (EA.Diagram)act.Diagrams.AddNew(m.Name, "Activity");
+            var actDia = (EA.Diagram)act.Diagrams.AddNew(m.Name, "Activity");
             // update diagram properties
             actDia.ShowDetails = 0; // hide details
             // scale page to din A4
@@ -130,7 +130,7 @@ namespace hoTools.Utils.ActivityParameter
             
             // put the activity on the diagram
             Util.addSequenceNumber(rep, actDia);
-            EA.DiagramObject actObj = (EA.DiagramObject)actDia.DiagramObjects.AddNew("l=30;r=780;t=30;b=1120", "");
+            var actObj = (EA.DiagramObject)actDia.DiagramObjects.AddNew("l=30;r=780;t=30;b=1120", "");
             actObj.ElementID = act.ElementID;
             actObj.Sequence = 1;
             actObj.Update();
@@ -144,8 +144,8 @@ namespace hoTools.Utils.ActivityParameter
             {
                 // Add Heading to diagram
                 Util.addSequenceNumber(rep, actDia);
-                EA.DiagramObject noteObj = (EA.DiagramObject)actDia.DiagramObjects.AddNew("l=40;r=700;t=25;b=50", "");
-                EA.Element note = (EA.Element)pkgTrg.Elements.AddNew("Text", "Text");
+                var noteObj = (EA.DiagramObject)actDia.DiagramObjects.AddNew("l=40;r=700;t=25;b=50", "");
+                var note = (EA.Element)pkgTrg.Elements.AddNew("Text", "Text");
 
                 note.Notes = m.Visibility + " " + elClass.Name + "_" + m.Name + ":" + m.ReturnType;
                 note.Update();
@@ -190,7 +190,7 @@ namespace hoTools.Utils.ActivityParameter
 
         public static EA.Diagram createActivityCompositeDiagram(EA.Repository rep, EA.Element act) {
             // create activity diagram beneath Activity
-            EA.Diagram actDia = (EA.Diagram)act.Diagrams.AddNew(act.Name, "Activity");
+            var actDia = (EA.Diagram)act.Diagrams.AddNew(act.Name, "Activity");
             // update diagram properties
             actDia.ShowDetails = 0; // hide details
             // scale page to din A4
@@ -215,7 +215,7 @@ namespace hoTools.Utils.ActivityParameter
 
             // put the activity on the diagram
             Util.addSequenceNumber(rep, actDia);
-            EA.DiagramObject actObj = (EA.DiagramObject)actDia.DiagramObjects.AddNew("l=30;r=780;t=30;b=1120", "");
+            var actObj = (EA.DiagramObject)actDia.DiagramObjects.AddNew("l=30;r=780;t=30;b=1120", "");
             actObj.ElementID = act.ElementID;
             actObj.Update();
             actDia.DiagramObjects.Refresh();
@@ -277,7 +277,7 @@ namespace hoTools.Utils.ActivityParameter
 
                 parTrgt.Update();
                 // update properties for returnvalue
-                Param par = new Param(rep, parTrgt);
+                var par = new Param(rep, parTrgt);
                 par.setParameterProperties("direction", "out");
                 par.save();
                 par = null;
@@ -341,7 +341,7 @@ namespace hoTools.Utils.ActivityParameter
                 parTrgt.Alias = "par_" + parSrc.Position.ToString() + ":" + parSrc.Type;
 
                 // update properties for parameter
-                Param par = new Param(rep, parTrgt);
+                var par = new Param(rep, parTrgt);
                 par.setParameterProperties("direction", parSrc.Kind);
                 if (parSrc.IsConst)  par.setParameterProperties("constant", "true");
                 par.save();
@@ -355,7 +355,7 @@ namespace hoTools.Utils.ActivityParameter
             // delete all unused parameter
             for (short i = (short)(act.EmbeddedElements.Count - 1); i >= 0; --i)
             {
-                EA.Element embeddedEl = (EA.Element)act.EmbeddedElements.GetAt(i);
+                var embeddedEl = (EA.Element)act.EmbeddedElements.GetAt(i);
                 if (embeddedEl.Type.Equals("ActivityParameter"))
                 {
                     if (! (guids.Contains(embeddedEl.ElementGUID) )) {
@@ -386,7 +386,7 @@ namespace hoTools.Utils.ActivityParameter
             top = top - 10 - pos * 10;
             bottom = top - length;
             string position = "l=" + left.ToString() + ";r=" + right.ToString() + ";t=" + top.ToString() + ";b=" + bottom.ToString() + ";";
-            EA.DiagramObject diaObject = (EA.DiagramObject)dia.DiagramObjects.AddNew(position, "");
+            var diaObject = (EA.DiagramObject)dia.DiagramObjects.AddNew(position, "");
             dia.Update();
             if (port.Type.Equals("Port"))
             {
@@ -407,7 +407,7 @@ namespace hoTools.Utils.ActivityParameter
             if (interf == null) return;
 
             // visualize interface
-            EA.DiagramObject diaObject2 = (EA.DiagramObject)dia.DiagramObjects.AddNew(position, "");
+            var diaObject2 = (EA.DiagramObject)dia.DiagramObjects.AddNew(position, "");
             dia.Update();
             diaObject.Style = "LBL=CX=69:CY=13:OX=-69:OY=0:HDN=0:BLD=0:ITA=0:UND=0:CLR=-1:ALN=0:ALT=0:ROT=0;";
             diaObject2.ElementID = interf.ElementID;

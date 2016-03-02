@@ -42,7 +42,7 @@ namespace hoTools.Settings
 
             #region linestyle
             // linestyle
-            string[] items = new string[]{"A Automatic","C Custom","D Direct","B Bezier",
+            var items = new string[]{"A Automatic","C Custom","D Direct","B Bezier",
                 "LV Lateral Vertical","LH Lateral Horizental","no","OR Orthogonal Rounded",
                 "OS Orthogonal Square","TH Tree Horizental","TV Tree Vertical"};
             string[] itemsActivity = new string[items.Length];
@@ -96,7 +96,7 @@ namespace hoTools.Settings
             #endregion
 
             #region load shortcuts search
-            EaAddinShortcutSearch sh = (EaAddinShortcutSearch)_settings.buttonsSearch[0];
+            var sh = (EaAddinShortcutSearch)_settings.buttonsSearch[0];
             txtBtn1Text.Text = sh.keyText;
             txtBtn1SearchName.Text = sh.keySearchName;
             txtBtn1SearchTerm.Text = sh.keySearchTerm;
@@ -128,15 +128,15 @@ namespace hoTools.Settings
             #endregion
 
             #region set possible services
-            List<hoTools.EaServices.ServiceCall> l_services1 = new List<hoTools.EaServices.ServiceCall>();
-            List<hoTools.EaServices.ServiceCall> l_services2 = new List<hoTools.EaServices.ServiceCall>();
-            List<hoTools.EaServices.ServiceCall> l_services3 = new List<hoTools.EaServices.ServiceCall>();
-            List<hoTools.EaServices.ServiceCall> l_services4 = new List<hoTools.EaServices.ServiceCall>();
-            List<hoTools.EaServices.ServiceCall> l_services11 = new List<hoTools.EaServices.ServiceCall>();
-            List<hoTools.EaServices.ServiceCall> l_services12 = new List<hoTools.EaServices.ServiceCall>();
-            List<hoTools.EaServices.ServiceCall> l_services13 = new List<hoTools.EaServices.ServiceCall>();
-            List<hoTools.EaServices.ServiceCall> l_services14 = new List<hoTools.EaServices.ServiceCall>();
-            List<hoTools.EaServices.ServiceCall> l_services15 = new List<hoTools.EaServices.ServiceCall>();
+            var l_services1 = new List<hoTools.EaServices.ServiceCall>();
+            var l_services2 = new List<hoTools.EaServices.ServiceCall>();
+            var l_services3 = new List<hoTools.EaServices.ServiceCall>();
+            var l_services4 = new List<hoTools.EaServices.ServiceCall>();
+            var l_services11 = new List<hoTools.EaServices.ServiceCall>();
+            var l_services12 = new List<hoTools.EaServices.ServiceCall>();
+            var l_services13 = new List<hoTools.EaServices.ServiceCall>();
+            var l_services14 = new List<hoTools.EaServices.ServiceCall>();
+            var l_services15 = new List<hoTools.EaServices.ServiceCall>();
 
 
             foreach (hoTools.EaServices.ServiceCall service in _settings.allServices)
@@ -550,7 +550,7 @@ namespace hoTools.Settings
             #endregion
 
             #region store shortcuts search
-            EaAddinShortcutSearch sh = (EaAddinShortcutSearch)_settings.buttonsSearch[0];
+            var sh = (EaAddinShortcutSearch)_settings.buttonsSearch[0];
             sh.keyText = txtBtn1Text.Text;
             sh.keySearchName = txtBtn1SearchName.Text;
             sh.keySearchTerm = txtBtn1SearchTerm.Text;

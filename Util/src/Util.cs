@@ -41,11 +41,11 @@ namespace hoTools.Utils
             switch (objectType)
             {
                 case EA.ObjectType.otAttribute:
-                    EA.Attribute a = (EA.Attribute)rep.GetContextObject();
+                    var a = (EA.Attribute)rep.GetContextObject();
                     el = rep.GetElementByID(a.ParentID);
                     break;
                 case EA.ObjectType.otMethod:
-                    EA.Method m = (EA.Method)rep.GetContextObject();
+                    var m = (EA.Method)rep.GetContextObject();
                     el = rep.GetElementByID(m.ParentID);
                     break;
                 case EA.ObjectType.otElement:
@@ -57,7 +57,7 @@ namespace hoTools.Utils
                     {
                         if (dia.SelectedObjects.Count == 1)
                         {
-                            EA.DiagramObject objSelected = (EA.DiagramObject)dia.SelectedObjects.GetAt(0);
+                            var objSelected = (EA.DiagramObject)dia.SelectedObjects.GetAt(0);
                             el = rep.GetElementByID(objSelected.ElementID);
                         }
                     }
@@ -70,7 +70,7 @@ namespace hoTools.Utils
         }
         public static void startApp(string app, string par)
         {
-            Process p = new Process();
+            var p = new Process();
             p.StartInfo.FileName = app;
             p.StartInfo.Arguments = par;
             try
@@ -92,7 +92,7 @@ namespace hoTools.Utils
 
             if (cnString.EndsWith(".EAP"))
             {
-                   FileInfo f = new FileInfo(cnString);
+                   var f = new FileInfo(cnString);
                    if (f.Length > 20000) return "*";
                         TextReader tr = new StreamReader(cnString);
                         string shortcut = tr.ReadLine().ToUpper();
@@ -136,7 +136,7 @@ namespace hoTools.Utils
                             "  where do.Diagram_ID = "+ dia.DiagramID.ToString() +
                             "  order by 1 desc";
             string str = rep.SQLQuery(query);
-            XmlDocument XmlDoc = new XmlDocument();
+            var XmlDoc = new XmlDocument();
             XmlDoc.LoadXml(str);
 
             XmlNode operationGUIDNode = XmlDoc.SelectSingleNode("//SEQUENCE_NUMBER");
@@ -498,7 +498,7 @@ namespace hoTools.Utils
                                From t_object o
                                         where Object_Type in ('Class','PrimitiveType','DataType','Enumeration') AND name = '" + name + "' ";
                 string str = rep.SQLQuery(query);
-                XmlDocument XmlDoc = new XmlDocument();
+                var XmlDoc = new XmlDocument();
                 XmlDoc.LoadXml(str);
 
                 XmlNode operationGUIDNode = XmlDoc.SelectSingleNode("//OBJECT_ID");
@@ -559,7 +559,7 @@ namespace hoTools.Utils
                       where o1.Object_ID = " + act.ElementID.ToString() + 
                              " AND  o2.Alias like '"+ aliasName + getWildCard(rep) + "'";
             string str = rep.SQLQuery(query); 
-            XmlDocument XmlDoc = new XmlDocument();
+            var XmlDoc = new XmlDocument();
             XmlDoc.LoadXml(str);
 
             XmlNode operationGUIDNode = XmlDoc.SelectSingleNode("//CLASSIFIER_GUID");
@@ -579,7 +579,7 @@ namespace hoTools.Utils
                       from t_object o 
                       where o.Object_ID = " + action.ElementID.ToString();
             string str = rep.SQLQuery(query);
-            XmlDocument XmlDoc = new XmlDocument();
+            var XmlDoc = new XmlDocument();
             XmlDoc.LoadXml(str);
 
             XmlNode operationGUIDNode = XmlDoc.SelectSingleNode("//CLASSIFIER_GUID");
@@ -597,7 +597,7 @@ namespace hoTools.Utils
 			    from t_object o  inner join t_operationparams par on (o.classifier_guid = par.ea_guid)
                 where o.ea_guid = '" + actionPinGuid + "' ";
             string str = rep.SQLQuery(query);
-            XmlDocument XmlDoc = new XmlDocument();
+            var XmlDoc = new XmlDocument();
             XmlDoc.LoadXml(str);
 
             XmlNode typeGUIDNode = XmlDoc.SelectSingleNode("//OPTYPE");
@@ -620,7 +620,7 @@ namespace hoTools.Utils
 			             x.description like '"+ wildCard + "CallOperation" + wildCard + 
                          "' and o.object_id = " + obj.ElementID;
             string str = rep.SQLQuery(query);
-            XmlDocument XmlDoc = new XmlDocument();
+            var XmlDoc = new XmlDocument();
             XmlDoc.LoadXml(str);
 
             XmlNode operationGUIDNode = XmlDoc.SelectSingleNode("//OPERATION");
@@ -639,7 +639,7 @@ namespace hoTools.Utils
                       from t_object o 
                       where o.EA_GUID = '" + GUID + "'";
             string str = rep.SQLQuery(query);
-            XmlDocument XmlDoc = new XmlDocument();
+            var XmlDoc = new XmlDocument();
             XmlDoc.LoadXml(str);
 
             XmlNode operationGUIDNode = XmlDoc.SelectSingleNode("//CLASSIFIER_GUID");
@@ -659,7 +659,7 @@ namespace hoTools.Utils
                       from t_xref x 
                       where x.Client = '" + GUID + "'    AND behavior = 'trigger' ";
             string str = rep.SQLQuery(query);
-            XmlDocument XmlDoc = new XmlDocument();
+            var XmlDoc = new XmlDocument();
             XmlDoc.LoadXml(str);
 
             XmlNode operationGUIDNode = XmlDoc.SelectSingleNode("//TRIGGER_GUID");
@@ -677,7 +677,7 @@ namespace hoTools.Utils
                       from t_xref x 
                       where x.Client = '" + GUID + "'    AND behavior = 'event' ";
             string str = rep.SQLQuery(query);
-            XmlDocument XmlDoc = new XmlDocument();
+            var XmlDoc = new XmlDocument();
             XmlDoc.LoadXml(str);
 
             XmlNode operationGUIDNode = XmlDoc.SelectSingleNode("//SIGNAL_GUID");
@@ -695,7 +695,7 @@ namespace hoTools.Utils
                       from t_xref x INNER JOIN t_object o on (x.client = o.ea_guid and type = 'element property')
                       where x.supplier = '" + diagramGUID + "'    ";
             string str = rep.SQLQuery(query);
-            XmlDocument XmlDoc = new XmlDocument();
+            var XmlDoc = new XmlDocument();
             XmlDoc.LoadXml(str);
 
             XmlNode operationGUIDNode = XmlDoc.SelectSingleNode("//COMPOSITE_GUID");
@@ -798,7 +798,7 @@ namespace hoTools.Utils
         {
             string s = "";
             string str = rep.SQLQuery(query);
-            XmlDocument XmlDoc = new XmlDocument();
+            var XmlDoc = new XmlDocument();
             XmlDoc.LoadXml(str);
 
             XmlNode node = XmlDoc.SelectSingleNode("//"+attributeName);
@@ -870,7 +870,7 @@ namespace hoTools.Utils
             }
 
             string str = rep.SQLQuery(query);
-            XmlDocument XmlDoc = new XmlDocument();
+            var XmlDoc = new XmlDocument();
             XmlDoc.LoadXml(str);
 
             XmlNode operationGUIDNode = XmlDoc.SelectSingleNode("//EA_GUID");
@@ -992,7 +992,7 @@ namespace hoTools.Utils
 
 
             string str = rep.SQLQuery(query);
-            XmlDocument XmlDoc = new XmlDocument();
+            var XmlDoc = new XmlDocument();
             XmlDoc.LoadXml(str);
 
             //string type = "";
@@ -1041,7 +1041,7 @@ namespace hoTools.Utils
                 flags = Regex.Replace(flags, @"CheckedOutTo=[^;]*;", "");
 
 
-                svn svnHandle = new svn(rep, pkg);
+                var svnHandle = new svn(rep, pkg);
                 userNameLockedPackage = svnHandle.getLockingUser();
                 svnHandle = null;
                 if (userNameLockedPackage != "") flags = flags + "CheckedOutTo=" + userNameLockedPackage + ";";
@@ -1083,7 +1083,7 @@ namespace hoTools.Utils
             {
                 // find                  VC=...;
                 string flags = pkg.Flags;
-                Regex pattern = new Regex(@"VCCFG=[^;]+;");
+                var pattern = new Regex(@"VCCFG=[^;]+;");
                 Match regMatch = pattern.Match(flags);
                 if (regMatch.Success)
                 {
@@ -1136,7 +1136,7 @@ namespace hoTools.Utils
                         try
                         {
                             string s = ""; 
-                             svn svnHandle = new svn(rep, pkg);
+                             var svnHandle = new svn(rep, pkg);
                              s = svnHandle.getLockingUser();
                             svnHandle = null;
                             if (s != "") s = "CheckedOutTo=" + s ;
@@ -1167,7 +1167,7 @@ namespace hoTools.Utils
                 TextReader tr = new StreamReader(s1);
                 string line = "";
                 Match regMatch;
-                Regex pattern = new Regex(@"(type=" + el.Gentype + ";id=" + localPathVar + @").+(path=[^;]+)");
+                var pattern = new Regex(@"(type=" + el.Gentype + ";id=" + localPathVar + @").+(path=[^;]+)");
                 while ((line = tr.ReadLine()) != null)
                 {
 
@@ -1190,7 +1190,7 @@ namespace hoTools.Utils
         public static string getVccRootPath(EA.Repository rep, EA.Package pkg)
         {
             string rootPath = "";
-            Regex pattern = new Regex(@"VCCFG=[^;]+");
+            var pattern = new Regex(@"VCCFG=[^;]+");
             Match regMatch = pattern.Match(pkg.Flags);
             string uniqueId = "";
             if (regMatch.Success)
@@ -1247,7 +1247,7 @@ namespace hoTools.Utils
                 string path = Util.getVccFilePath(rep, pkg);
                 string fText = "";
                 //rep.WriteOutput("Debug", "Path:" + pkg.Name + path, 0);
-                string sLevel = new string(' ', level * 2);
+                var sLevel = new string(' ', level * 2);
                 rep.WriteOutput("Debug", sLevel + (count+1).ToString(",0") + " Work for:" + path, 0);
                 if (path != "")
                 {
@@ -1256,8 +1256,8 @@ namespace hoTools.Utils
                     // delete a potential write protection
                     try
                     {
-                        FileInfo fileInfo = new FileInfo(path);
-                        FileAttributes attributes = (FileAttributes)(fileInfo.Attributes - FileAttributes.ReadOnly);
+                        var fileInfo = new FileInfo(path);
+                        var attributes = (FileAttributes)(fileInfo.Attributes - FileAttributes.ReadOnly);
                         System.IO.File.SetAttributes(fileInfo.FullName, attributes);
                         System.IO.File.Delete(path);
                     }
@@ -1323,7 +1323,7 @@ namespace hoTools.Utils
             }
             else
             {
-                FileInfo f = new FileInfo(s);
+                var f = new FileInfo(s);
                 if (f.Length > 1025)
                 {
                     return s;
@@ -1342,7 +1342,7 @@ namespace hoTools.Utils
             if (el.Diagrams.Count > 0)
             {
                 // get the diagram
-                EA.Diagram dia = (EA.Diagram)el.Diagrams.GetAt(0);
+                var dia = (EA.Diagram)el.Diagrams.GetAt(0);
                 // open diagram
                 Repository.OpenDiagram(dia.DiagramID);
             }
@@ -1362,7 +1362,7 @@ namespace hoTools.Utils
         }
         public static void SetReadOnlyAttribute(string fullName, bool readOnly)
         {
-            FileInfo filePath = new FileInfo(fullName);
+            var filePath = new FileInfo(fullName);
             FileAttributes attribute;
             if (readOnly)
                 attribute = filePath.Attributes | FileAttributes.ReadOnly;
@@ -1414,7 +1414,7 @@ namespace hoTools.Utils
             }
 
             string position = "l=" + leftPort.ToString() + ";r=" + rightPort.ToString() + ";t=" + topPort.ToString() + ";b=" + bottomPort.ToString() + ";";
-            EA.DiagramObject diaObjectPort = (EA.DiagramObject)dia.DiagramObjects.AddNew(position, "");
+            var diaObjectPort = (EA.DiagramObject)dia.DiagramObjects.AddNew(position, "");
             if (port.Type.Equals("Port"))
             {
                 // not showing label
@@ -1435,7 +1435,7 @@ namespace hoTools.Utils
             if (interf == null) return;
 
             // visualize interface
-            EA.DiagramObject diaObject2 = (EA.DiagramObject)dia.DiagramObjects.AddNew(position, "");
+            var diaObject2 = (EA.DiagramObject)dia.DiagramObjects.AddNew(position, "");
             dia.Update();
             diaObject2.Style = "LBL=CX=69:CY=13:OX=45:OY=0:HDN=0:BLD=0:ITA=0:UND=0:CLR=-1:ALN=0:ALT=0:ROT=0;";
             diaObject2.ElementID = interf.ElementID;
@@ -1495,7 +1495,7 @@ namespace hoTools.Utils
            
 
             string str = rep.SQLQuery(query);
-            XmlDocument XmlDoc = new XmlDocument();
+            var XmlDoc = new XmlDocument();
             XmlDoc.LoadXml(str);
 
             XmlNode operationGUIDNode = XmlDoc.SelectSingleNode("//EA_GUID");

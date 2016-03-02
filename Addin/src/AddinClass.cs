@@ -204,7 +204,7 @@ namespace hoTools
             public static void SetupGlobalHotkeys()
             {
                 // lest og global hotkeys
-                List<Hotkey> hotkeys = new List<Hotkey>();
+                var hotkeys = new List<Hotkey>();
 
                 Dictionary<string, Keys> keys = GlobalKeysConfig.getKeys();
                 Dictionary<string, Modifiers> modifiers = GlobalKeysConfig.getModifiers();
@@ -355,7 +355,7 @@ namespace hoTools
         public override bool EA_OnPostNewConnector(EA.Repository Repository, EA.EventProperties Info)
         {
             EA.EventProperty eventProperty = Info.Get(0);
-            string s = (string)eventProperty.Value;
+            var s = (string)eventProperty.Value;
             int connectorID = int.Parse(s);
             EA.Diagram dia = Repository.GetCurrentDiagram();
             switch (dia.Type)
@@ -598,7 +598,7 @@ namespace hoTools
                     break;
                 case menuAbout:
 
-                    About fAbout = new About();
+                    var fAbout = new About();
                     fAbout.lblTabName.Text = release;
                     fAbout.ShowDialog();
                     break;
@@ -668,7 +668,7 @@ namespace hoTools
                     // Check selected Elements in tree
                     if (oType.Equals(EA.ObjectType.otMethod))
                     {
-                        EA.Method m = (EA.Method)Repository.GetContextObject();
+                        var m = (EA.Method)Repository.GetContextObject();
                         // test multiple selection
 
                         // Create Activity
@@ -677,7 +677,7 @@ namespace hoTools
                     }
                     if (oType.Equals(EA.ObjectType.otElement))
                     {
-                        EA.Element cls = (EA.Element)Repository.GetContextObject();
+                        var cls = (EA.Element)Repository.GetContextObject();
                         // over all operations of class
                         foreach (EA.Method m in cls.Methods)
                         {
@@ -694,7 +694,7 @@ namespace hoTools
                     // Check selected Elements in tree
                     if (oType.Equals(EA.ObjectType.otMethod))
                     {
-                        EA.Method m = (EA.Method)Repository.GetContextObject();
+                        var m = (EA.Method)Repository.GetContextObject();
                         // test multiple selection
 
                         // Create State Machine
@@ -713,14 +713,14 @@ namespace hoTools
                 case menuCorrectType:
                     if (oType.Equals(EA.ObjectType.otAttribute))
                     {
-                        EA.Attribute a = (EA.Attribute)Repository.GetContextObject();
+                        var a = (EA.Attribute)Repository.GetContextObject();
 
                         Util.updateAttribute(Repository, a);
                     }
 
                     if (oType.Equals(EA.ObjectType.otMethod))
                     {
-                        EA.Method m = (EA.Method)Repository.GetContextObject();
+                        var m = (EA.Method)Repository.GetContextObject();
 
                         Util.updateMethod(Repository, m);
                     }
@@ -731,7 +731,7 @@ namespace hoTools
                     }
                     if (oType.Equals(EA.ObjectType.otPackage))
                     {
-                        EA.Package pkg = (EA.Package)Repository.GetContextObject();
+                        var pkg = (EA.Package)Repository.GetContextObject();
                         Util.updatePackage(Repository, pkg);
                     }
                     break;
@@ -750,7 +750,7 @@ namespace hoTools
                 case menuUpdateActionPin:
                     if (oType.Equals(EA.ObjectType.otPackage))
                     {
-                        EA.Package pkg = (EA.Package)Repository.GetContextObject();
+                        var pkg = (EA.Package)Repository.GetContextObject();
                         ActionPin.updateActionPinForPackage(Repository, pkg);
                     }
                     if (oType.Equals(EA.ObjectType.otElement))
@@ -974,7 +974,7 @@ namespace hoTools
             if (oType.Equals(EA.ObjectType.otDiagram))
             {
                 // find parent element
-                EA.Diagram dia = (EA.Diagram)rep.GetContextObject();
+                var dia = (EA.Diagram)rep.GetContextObject();
                 if (dia.ParentID > 0)
                 {
                     // find parent element
@@ -993,7 +993,7 @@ namespace hoTools
             // Connector / Message found
             if (oType.Equals(EA.ObjectType.otConnector))
             {
-                EA.Connector con = (EA.Connector)rep.GetContextObject();
+                var con = (EA.Connector)rep.GetContextObject();
                 if (con.Type.Equals("StateFlow"))
                 {
 
@@ -1061,7 +1061,7 @@ namespace hoTools
             // Element
             if (oType.Equals(EA.ObjectType.otElement))
             {
-                EA.Element el = (EA.Element)rep.GetContextObject();
+                var el = (EA.Element)rep.GetContextObject();
 
                 if (el.Type.Equals("Activity"))
                 {
