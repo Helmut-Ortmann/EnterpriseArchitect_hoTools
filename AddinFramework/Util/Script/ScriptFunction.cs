@@ -7,40 +7,29 @@
  * To change this template use Tools | Options | Coding | Edit Standard Headers.
  */
 using System;
-using System.Collections;
 using MSScriptControl;
-using EAAddinFramework.Utils;
 
-namespace EAAddinFramework.EASpecific
+
+namespace EAAddinFramework.Utils
 {
 	/// <summary>
 	/// Description of ScriptFunction.
+    /// A function in a Script
 	/// </summary>
 	public class ScriptFunction
 	{
 		private Script owner {get;set;}
-		public string name 
-		{get
-			{
-				return this.procedure.Name;
-			}
-		}
-		public string fullName
-		{get
-			{
-				return this.owner.name +"."+ this.procedure.Name;
-			}
-		}
-		public int numberOfParameters
-		{
-			get
-			{
-				return this.procedure.NumArgs;
-			}
-		}
-		private Procedure procedure {get;set;}
-		
-		public ScriptFunction(Script owner, Procedure procedure)
+        public string name => procedure.Name;
+        public string fullName => this.owner.name + "." + this.procedure.Name;
+        public int numberOfParameters => procedure.NumArgs;
+        Procedure procedure { get; set; }
+
+        /// <summary>
+        /// Constructor ScriptFunction
+        /// </summary>
+        /// <param name="owner">Script</param>
+        /// <param name="procedure">Funtion</param>
+        public ScriptFunction(Script owner, Procedure procedure)
 		{
 			this.owner = owner;
 			this.procedure = procedure;

@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("ScriptGui")]
-[assembly: AssemblyDescription("hoTools, run your own Script")]
+[assembly: AssemblyDescription("hoTools, run your own Scripts")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Helmut Ortmann")]
 [assembly: AssemblyProduct("hoTools, ScriptGui")]

@@ -11,7 +11,7 @@ namespace EAAddinFramework.Utils
     // Represents the current EA Model 
     public class Model
     {
-        public EA.Repository Repository { get; }
+        public EA.Repository Repository { get; set; }
         public EA.App EaApp { get; }
         private static string _applicationFullPath;
         private IWin32Window _mainEAWindow;
@@ -46,7 +46,7 @@ namespace EAAddinFramework.Utils
         /// <summary>
         /// Create a model on the first running EA instance
         /// </summary>
-        Model()
+        public Model()
         {
             object obj = Marshal.GetActiveObject("EA.App");
             EaApp = obj as EA.App;
@@ -56,7 +56,7 @@ namespace EAAddinFramework.Utils
         /// Create a Model
         /// </summary>
         /// <param name="Repository"></param>
-        Model(EA.Repository Repository)
+        public Model(EA.Repository Repository)
         {
             this.Repository = Repository;
         }

@@ -30,7 +30,7 @@ namespace hoTools.Find
         private int _index = -1;
 
         // list of all items with loaded values, expected changes and values as loaded
-        private List<FindAndReplaceItem> _l_items = new List<FindAndReplaceItem>();
+        private readonly List<FindAndReplaceItem> _l_items = new List<FindAndReplaceItem>();
 
         #region Constructor
         public FindAndReplace(EA.Repository rep, EA.Package pkg, string findString, 

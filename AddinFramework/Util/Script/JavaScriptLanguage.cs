@@ -6,10 +6,8 @@
  * 
  * To change this template use Tools | Options | Coding | Edit Standard Headers.
  */
-using System;
-using System.Reflection;
 
-namespace EAAddinFramework.EASpecific
+namespace EAAddinFramework.Utils
 {
 	/// <summary>
 	/// Description of JavaScriptLanguage.
@@ -19,12 +17,6 @@ namespace EAAddinFramework.EASpecific
 		public JavaScriptLanguage()
 		{
 		}
-		public override string name 
-		{
-			get 
-			{
-				return "JavaScript";
-			}
-		}
-	}
+        public override string name => "JavaScript";
+    }
 }

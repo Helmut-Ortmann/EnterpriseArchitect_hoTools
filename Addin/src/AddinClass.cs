@@ -11,6 +11,7 @@ using hoTools.Utils;
 using hoTools.Utils.Appls;
 using hoTools.Utils.ActionPins;
 using System.Reflection;
+using hoTools.Scripts;
 
 using hoTools.Find;
 
@@ -57,13 +58,18 @@ namespace hoTools
         static AddinSettings AddinSettings = null;
         static AddinControlGUI AddinControlGUI = null;
         static FindAndReplaceGUI FindAndReplaceGUI = null;
+        static ScriptGUI ScriptGUI = null;
 
         // ActiveX Controls
-        AddinControlGUI m_MyControlGUI = null;
-        FindAndReplaceGUI m_FindAndReplace = null;
-        AddinSettings m_AddinSettings = null;
+        AddinControlGUI _MyControlGUI = null;
+        FindAndReplaceGUI _FindAndReplaceGUI = null;
+        ScriptGUI _ScriptGUI = null;
 
-        EA.Repository m_repository = null;
+        // settings
+        AddinSettings _AddinSettings = null;
+ 
+
+        EA.Repository _repository = null;
         // define menu constants
         const string menuName = "-hoTools";
 
@@ -126,18 +132,17 @@ namespace hoTools
         /// constructor where we set the menuheader and menuOptions
         /// </summary>
         public AddinClass()
-            : base()
         {
             try
             {
-                this.m_AddinSettings = new AddinSettings();
-                AddinSettings = this.m_AddinSettings; // static
+                this._AddinSettings = new AddinSettings();
+                AddinSettings = this._AddinSettings; // static
             }
             catch (Exception e)
             {
                 MessageBox.Show("Error setup 'hoTools' Addin. Error:\n" + e.ToString(), "hoTools Installation error");
             }
-            this.menuHeader = "-" + m_AddinSettings.productName;
+            this.menuHeader = "-" + _AddinSettings.productName;
             this.menuOptions = new string[] { 
                 //-------------------------- General  --------------------------//
                 //    menuLocateCompositeElementorDiagram,
@@ -181,7 +186,7 @@ namespace hoTools
         public override string EA_Connect(EA.Repository Repository)
         {
             HotkeyHandlers.SetupGlobalHotkeys();
-            m_repository = Repository;
+            _repository = Repository;
             int v = Repository.LibraryVersion;
             if (Repository.IsSecurityEnabled)
             {
@@ -191,7 +196,7 @@ namespace hoTools
                 //     (logInUser.Equals(""))
                 //    ) logInUserRights = UserRights.ADMIN;
             }
-            Favorite.installSearches(m_repository); // install searches
+            Favorite.installSearches(_repository); // install searches
             return "a string";
         }
         public override void EA_OnOutputItemDoubleClicked(EA.Repository Repository, string TabName, string LineText, long ID)
@@ -349,7 +354,7 @@ namespace hoTools
             string productVersion = FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).ProductVersion;
             release = productVersion;
             AddinClass.Repository = Repository;
-            m_repository = Repository;
+            _repository = Repository;
             ShowAddinControlWindows();
         }
         public override bool EA_OnPostNewConnector(EA.Repository Repository, EA.EventProperties Info)
@@ -361,33 +366,33 @@ namespace hoTools
             switch (dia.Type)
             {
                 case "Activity":
-                    return updateLineStyle(Repository, dia, connectorID, m_AddinSettings.ActivityLineStyle.Substring(0, 2));
+                    return updateLineStyle(Repository, dia, connectorID, _AddinSettings.ActivityLineStyle.Substring(0, 2));
 
 
                 case "Statechart":
-                    return updateLineStyle(Repository, dia, connectorID, m_AddinSettings.StatechartLineStyle.Substring(0, 2));
+                    return updateLineStyle(Repository, dia, connectorID, _AddinSettings.StatechartLineStyle.Substring(0, 2));
 
                 case "Logical":
-                    return updateLineStyle(Repository, dia, connectorID, m_AddinSettings.ClassLineStyle.Substring(0, 2));
+                    return updateLineStyle(Repository, dia, connectorID, _AddinSettings.ClassLineStyle.Substring(0, 2));
 
 
                 case "Custom":
-                    return updateLineStyle(Repository, dia, connectorID, m_AddinSettings.CustomLineStyle.Substring(0, 2));
+                    return updateLineStyle(Repository, dia, connectorID, _AddinSettings.CustomLineStyle.Substring(0, 2));
 
                 case "Component":
-                    return updateLineStyle(Repository, dia, connectorID, m_AddinSettings.ComponentLineStyle.Substring(0, 2));
+                    return updateLineStyle(Repository, dia, connectorID, _AddinSettings.ComponentLineStyle.Substring(0, 2));
 
                 case "Deployment":
-                    return updateLineStyle(Repository, dia, connectorID, m_AddinSettings.DeploymentLineStyle.Substring(0, 2));
+                    return updateLineStyle(Repository, dia, connectorID, _AddinSettings.DeploymentLineStyle.Substring(0, 2));
 
                 case "Package":
-                    return updateLineStyle(Repository, dia, connectorID, m_AddinSettings.PackageLineStyle.Substring(0, 2));
+                    return updateLineStyle(Repository, dia, connectorID, _AddinSettings.PackageLineStyle.Substring(0, 2));
 
                 case "Use Case":
-                    return updateLineStyle(Repository, dia, connectorID, m_AddinSettings.UseCaseLineStyle.Substring(0, 2));
+                    return updateLineStyle(Repository, dia, connectorID, _AddinSettings.UseCaseLineStyle.Substring(0, 2));
 
                 case "CompositeStructure":
-                    return updateLineStyle(Repository, dia, connectorID, m_AddinSettings.CompositeStructureLineStyle.Substring(0, 2));
+                    return updateLineStyle(Repository, dia, connectorID, _AddinSettings.CompositeStructureLineStyle.Substring(0, 2));
 
                 default:
                     return false;
@@ -403,18 +408,23 @@ namespace hoTools
         }
         public override void EA_FileClose(EA.Repository Repository)
         {
-            if (m_MyControlGUI != null)  m_MyControlGUI.Save(); // save settings
-            m_repository = null;
+            if (_MyControlGUI != null)  _MyControlGUI.Save(); // save settings
+            initializeForRepository(null);
 
 
         }
         #region initializeForRepository
+        /// <summary>
+        /// Initialize repositories for all EA hoTools Addin Tablulators
+        /// </summary>
+        /// <param name="rep"></param>
         private void initializeForRepository(EA.Repository rep)
         {
-            m_repository = rep;
+            _repository = rep;
             Repository = rep;
-            if (m_MyControlGUI != null) m_MyControlGUI.repository = rep;
-            if (m_FindAndReplace != null) m_MyControlGUI.repository = rep;
+            if (_MyControlGUI != null) _MyControlGUI.Repository = rep;
+            if (_FindAndReplaceGUI != null) _FindAndReplaceGUI.Repository = rep;
+            if (_ScriptGUI != null) _ScriptGUI.Repository = rep;
 
 
         }
@@ -436,7 +446,7 @@ namespace hoTools
         /// <summary>
         /// Called once Menu has been opened to see what menu items should active.
         /// </summary>
-        /// <param name="Repository">the repository</param>
+        /// <param name="Repository">the Repository</param>
         /// <param name="MenuLocation">the location of the menu</param>
         /// <param name="MenuName">the name of the menu</param>
         /// <param name="ItemName">the name of the menu item</param>
@@ -573,7 +583,7 @@ namespace hoTools
         /// Called when user makes a selection in the menu.
         /// This is your main exit point to the rest of your Add-in
         /// </summary>
-        /// <param name="Repository">the repository</param>
+        /// <param name="Repository">the Repository</param>
         /// <param name="MenuLocation">the location of the menu</param>
         /// <param name="MenuName">the name of the menu</param>
         /// <param name="ItemName">the name of the selected menu item</param>
@@ -905,62 +915,70 @@ namespace hoTools
 
 
         #region ShowAddinControlWindows
+        /// <summary>
+        /// Show all AddinControl Addin Windows
+        /// </summary>
         private void ShowAddinControlWindows()
         {
-            if (m_MyControlGUI == null)
+            if (_MyControlGUI == null)
             {
 
                 try
                 {
+                    AddinControlGUI = addAddinControl<AddinControlGUI>(_AddinSettings.productName, AddinControlGUI.PROGID);
+                    _MyControlGUI = AddinControlGUI; // static + instance
 
-                    string tabName = m_AddinSettings.productName;
-                    m_MyControlGUI = (AddinControlGUI)m_repository.AddWindow(tabName, "hoTools.ActiveXGUI");
-                    if (m_MyControlGUI == null)
-                    {
-                        MessageBox.Show("Unable to start ActiveX window 'hoTools.ActiveXGUI'");
+                    // with Search & Replace EA Addin Windows
+                    if (_AddinSettings.isSearchAndReplace) { 
+                        FindAndReplaceGUI = addAddinControl<FindAndReplaceGUI>(FindAndReplaceGUI.TABULATOR, FindAndReplaceGUI.PROGID);
+                       _FindAndReplaceGUI = FindAndReplaceGUI; // static + instance
                     }
 
-                    AddinControlGUI = m_MyControlGUI; // static
-
-                    // Find & Replace
-                    m_FindAndReplace = (FindAndReplaceGUI)m_repository.AddWindow("Find&..", "hoTools.FindAndReplaceGUI");
-                    if (m_FindAndReplace == null)
+                    // with Script & Query EA Addin Windows
+                    if (_AddinSettings.isScriptAndQuery)
                     {
-                        MessageBox.Show("Unable to start ActiveX window 'hoTools.FindAndReplaceGUI'");
+                        ScriptGUI = addAddinControl<ScriptGUI>(ScriptGUI.TABULATOR, ScriptGUI.PROGID);
+                        _ScriptGUI = ScriptGUI; // static + instance
                     }
-                    FindAndReplaceGUI = m_FindAndReplace; // static
 
-                    
+
                 }
                 catch (Exception e)
                 {
                     MessageBox.Show(e.Message);
                 }
-                //m_MyControl.mStr_UserText = "testText";
-                //m_MyControl.UserText = "zweittext";
-
-                // ActiveX Main
-                if (m_MyControlGUI != null)
-                {
-                    m_MyControlGUI.repository = m_repository;
-                    m_MyControlGUI.Release = "V" + release;
-                    m_MyControlGUI.addinSettings = this.m_AddinSettings;
-                }
-                // Find & Replace
-                if (m_FindAndReplace != null)
-                {
-                    m_FindAndReplace.repository = m_repository;
-                    m_FindAndReplace.Release = "V" + release;
-                    m_FindAndReplace.addinSettings = this.m_AddinSettings;
-                }
-
-               
+                    
             }
+        }
+
+
+        
+        /// <summary>
+        /// Add AddinGUI as a tab to EA
+        /// </summary>
+        /// <param name="tabName">Tabulator name to show Addin</param>
+        /// <param name="progId">ProgID under which the addin is registered</param>
+        /// <returns>AddinGUI</returns>
+        private T addAddinControl<T>(string tabName, string progId)
+        {
+            var c = (T)_repository.AddWindow(tabName, progId);
+            AddinGUI control = c as AddinGUI;
+            if (null == control)
+            {
+                MessageBox.Show(string.Format("Unable to start progId='{progId}', tab='{tabName}'"));
+            }
+            else
+            {
+                control.Repository = _repository;
+                control.Release = "V" + release;
+                control.AddinSettings = this._AddinSettings;
+            }
+            return c;
         }
         #endregion
 
-       
-          // display behavior or definition for selected element
+
+        // display behavior or definition for selected element
         private static void DisplayOperationForSelectedElement(EA.Repository rep, displayMode showBehavior)
         {
             EA.ObjectType oType = rep.GetContextItemType();
@@ -1165,44 +1183,44 @@ namespace hoTools
 
         void btnLH_Click(object sender, EventArgs e)
         {
-            EaService.setLineStyle(m_repository, "LH");
+            EaService.setLineStyle(_repository, "LH");
         }
         void btnLV_Click(object sender, EventArgs e)
         {
-            EaService.setLineStyle(m_repository, "LV");
+            EaService.setLineStyle(_repository, "LV");
         }
         void btnTH_Click(object sender, EventArgs e)
         {
-            EaService.setLineStyle(m_repository, "H");
+            EaService.setLineStyle(_repository, "H");
         }
         void btnTV_Click(object sender, EventArgs e)
         {
-            EaService.setLineStyle(m_repository, "V");
+            EaService.setLineStyle(_repository, "V");
         }
         void btnOS_Click(object sender, EventArgs e)
         {
-            EaService.setLineStyle(m_repository, "OS");
+            EaService.setLineStyle(_repository, "OS");
         }
         void btnOR_Click(object sender, EventArgs e)
         {
-            EaService.setLineStyle(m_repository, "OR");
+            EaService.setLineStyle(_repository, "OR");
         }
         void btnA_Click(object sender, EventArgs e)
         {
-            EaService.setLineStyle(m_repository, "A");
+            EaService.setLineStyle(_repository, "A");
         }
         void btnD_Click(object sender, EventArgs e)
         {
-            EaService.setLineStyle(m_repository, "D");
+            EaService.setLineStyle(_repository, "D");
         }
         void btnC_Click(object sender, EventArgs e)
         {
-            EaService.setLineStyle(m_repository, "C");
+            EaService.setLineStyle(_repository, "C");
         }
 
         void btnComposite_Click(object sender, EventArgs e)
         {
-            EaService.navigateComposite(m_repository);
+            EaService.navigateComposite(_repository);
         }
 
 
@@ -1212,39 +1230,39 @@ namespace hoTools
 
         void btnDisplayBehavior_Click(object sender, EventArgs e)
         {
-            EaService.DisplayOperationForSelectedElement(m_repository, EaService.displayMode.Behavior);
+            EaService.DisplayOperationForSelectedElement(_repository, EaService.displayMode.Behavior);
         }
         void btnLocateOperation_Click(object sender, EventArgs e)
         {
-            EaService.DisplayOperationForSelectedElement(m_repository, EaService.displayMode.Method);
+            EaService.DisplayOperationForSelectedElement(_repository, EaService.displayMode.Method);
         }
         void btnAddElementNote_Click(object sender, EventArgs e)
         {
-            EaService.addElementNote(m_repository);
+            EaService.addElementNote(_repository);
         }
         void btnAddDiagramNote_Click(object sender, EventArgs e)
         {
-            EaService.addDiagramNote(m_repository);
+            EaService.addDiagramNote(_repository);
         }
 
         void btnLocateType_Click(object sender, EventArgs e)
         {
-            EaService.locateType(m_repository);
+            EaService.locateType(_repository);
         }
         void btnFindUsage_Click(object sender, EventArgs e)
         {
-            EaService.findUsage(m_repository);
+            EaService.findUsage(_repository);
         }
         void btnDisplaySpecification_Click(object sender, EventArgs e)
         {
-            EaService.showSpecification(m_repository);
+            EaService.showSpecification(_repository);
         }
 
                
         /// <summary>
         /// Called when EA start model validation. Just shows a message box
         /// </summary>
-        /// <param name="Repository">the repository</param>
+        /// <param name="Repository">the Repository</param>
         /// <param name="Args">the arguments</param>
         public override void EA_OnStartValidation(EA.Repository Repository, object Args)
         {
@@ -1253,7 +1271,7 @@ namespace hoTools
         /// <summary>
         /// Called when EA ends model validation. Just shows a message box
         /// </summary>
-        /// <param name="Repository">the repository</param>
+        /// <param name="Repository">the Repository</param>
         /// <param name="Args">the arguments</param>
         public override void EA_OnEndValidation(EA.Repository Repository, object Args)
         {

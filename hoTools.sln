@@ -49,6 +49,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddinFramework", "AddinFram
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptGui", "ScriptGui\ScriptGui.csproj", "{D83C4D98-7AA9-4B1A-ABED-EA8A9EAC210C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Reuse", "Reuse", "{F1F0E6B1-5463-4DBB-9120-282C921427E0}"
+	ProjectSection(SolutionItems) = preProject
+		Reuse\hoKeyPair.snk = Reuse\hoKeyPair.snk
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -152,5 +157,6 @@ Global
 		{2ABA072D-FD07-4FC5-82E8-3AC5704BDD5F} = {2015668A-5B2E-43C9-9E24-F93D54600512}
 		{71383584-777C-46C1-84EF-C4DA7F692189} = {2015668A-5B2E-43C9-9E24-F93D54600512}
 		{A9B0B204-36DD-466D-B5C1-A9FD55ED7A4B} = {71383584-777C-46C1-84EF-C4DA7F692189}
+		{F1F0E6B1-5463-4DBB-9120-282C921427E0} = {2015668A-5B2E-43C9-9E24-F93D54600512}
 	EndGlobalSection
 EndGlobal

@@ -15,11 +15,10 @@ using System.Reflection;
 using System.Xml;
 using Microsoft.Win32;
 using MSScriptControl;
-using EAAddinFramework.Utils;
 //using EAWrappers = TSF.UmlToolingFramework.Wrappers.EA;
 
 
-namespace EAAddinFramework.EASpecific
+namespace EAAddinFramework.Utils
 {
     /// <summary>
     /// Description of Script.
@@ -44,14 +43,9 @@ namespace EAAddinFramework.EASpecific
 		private ScriptLanguage language;
 		public string name{get;set;}
 		public string groupName {get;set;}
-		public string displayName 
-		{
-			get
-			{
-				return this.name + " - " + this.scriptController.Language;
-			}
-		}
-		public bool isStatic{get;private set;}
+        public string languageName => scriptController.Language;
+        public string displayName => name + " - " + scriptController.Language;
+        public bool isStatic{get;private set;}
 		static Script()
 		{
 			loadStaticIncludableScripts();
@@ -279,7 +273,7 @@ namespace EAAddinFramework.EASpecific
 			}
 			catch (Exception e)
 			{
-                MessageBox.Show("Error in loadMDGScriptsFromURL: " + e.Message);
+                MessageBox.Show("", "Error in loadMDGScriptsFromURL: " + e.Message);
                 
 			}
 		}
@@ -313,16 +307,22 @@ namespace EAAddinFramework.EASpecific
 						{
 							//the script itstelf is base64 endcoded in the content tag
 							string scriptcontent = System.Text.Encoding.Unicode.GetString( System.Convert.FromBase64String(contentNode.InnerText));
-							staticIncludableScripts.Add("!INC "+ mdgName + "." + scriptName,scriptcontent);
-							//also check if the script needs to be loaded as static EA-Matic script
-							loadStaticEAMaticScript(scriptName, mdgName, scriptcontent,scriptLanguage);
+                            string key = "!INC " + mdgName + "." + scriptName;
+                            // key exists
+                            if (! staticIncludableScripts.ContainsKey(key))
+                            {
+                                staticIncludableScripts.Add(key, scriptcontent);
+                                //also check if the script needs to be loaded as static EA-Matic script
+                                loadStaticEAMaticScript(scriptName, mdgName, scriptcontent, scriptLanguage);
+                            }
+						
 						}
 					}
 				}
 			}
 			catch (Exception e)
 			{
-                MessageBox.Show("Error in loadMDGScripts: " + e.Message);
+                MessageBox.Show(String.Format(""), "Error in loadMDGScripts: " + e.Message );
 			}
 		}
 		private static void loadStaticEAMaticScript(string scriptName, string groupName, string scriptCode, string language)
@@ -383,7 +383,7 @@ namespace EAAddinFramework.EASpecific
 				string line;
 			    while ((line = reader.ReadLine()) != null)
 			    {
-			    	if (line.StartsWith("!INC"))
+			    	if (line.StartsWith("!INC", StringComparison.Ordinal))
 		    	    {
 			    		includes.Add(line);
 		    	    }
@@ -498,8 +498,8 @@ namespace EAAddinFramework.EASpecific
 			string returnValue = string.Empty;
 			if (notesContent.Contains(name))
 		    {
-		    	int startName = notesContent.IndexOf(name) + name.Length;
-		    	int endName = notesContent.IndexOf("\"",startName);
+		    	int startName = notesContent.IndexOf(name, StringComparison.Ordinal) + name.Length;
+		    	int endName = notesContent.IndexOf("\"", startName, StringComparison.Ordinal);
 		    	if (endName > startName)
 		    	{
 		    		returnValue = notesContent.Substring(startName, endName - startName);
@@ -509,31 +509,27 @@ namespace EAAddinFramework.EASpecific
 			return returnValue;
 			
 		}
-		/// <summary>
-		/// executes the function with the given name
-		/// </summary>
-		/// <param name="functionName">name of the function to execute</param>
-		/// <param name="parameters">the parameters needed by this function</param>
-		/// <returns>whathever (if anything) the function returns</returns>
-		internal object executeFunction(string functionName, object[] parameters)
-		{
-			return this.scriptController.Run(functionName,parameters);
-		}
-		/// <summary>
-		/// executes the function with the given name
-		/// </summary>
-		/// <param name="functionName">name of the function to execute</param>
-		/// <returns>whathever (if anything) the function returns</returns>
-		internal object executeFunction(string functionName)
-		{
-			return this.scriptController.Run(functionName, new object[0]);
-		}
-		/// <summary>
-		/// add a function with based on the given operation
-		/// </summary>
-		/// <param name="operation">the operation to base this function on</param>
-		/// <returns>the new function</returns>
-		public ScriptFunction addFunction(MethodInfo operation)
+        /// <summary>
+        /// executes the function with the given name
+        /// </summary>
+        /// <param name="functionName">name of the function to execute</param>
+        /// <param name="parameters">the parameters needed by this function</param>
+        /// <returns>whathever (if anything) the function returns</returns>
+        internal object executeFunction(string functionName, object[] parameters)
+            => this.scriptController.Run(functionName, parameters);
+        /// <summary>
+        /// executes the function with the given name
+        /// </summary>
+        /// <param name="functionName">name of the function to execute</param>
+        /// <returns>whathever (if anything) the function returns</returns>
+        internal object executeFunction(string functionName) 
+            => this.scriptController.Run(functionName, new object[0]);
+        /// <summary>
+        /// add a function with based on the given operation
+        /// </summary>
+        /// <param name="operation">the operation to base this function on</param>
+        /// <returns>the new function</returns>
+        public ScriptFunction addFunction(MethodInfo operation)
 		{
 			//translate the methodeinfo into code
 			string functionCode = this.language.translate(operation);

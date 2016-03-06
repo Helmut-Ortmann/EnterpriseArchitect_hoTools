@@ -222,6 +222,54 @@ namespace hoTools.Settings
 
         }
         #endregion
+        #region Property: isScriptAndQuery
+
+        public bool isScriptAndQuery
+        {
+            get
+            {
+                bool result;
+                if (bool.TryParse(this.currentConfig.AppSettings.Settings["isScriptAndQuery"].Value, out result))
+                {
+                    return result;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            set
+            {
+                this.currentConfig.AppSettings.Settings["isScriptAndQuery"].Value = value.ToString();
+
+            }
+
+        }
+        #endregion
+        #region Property: isSearchAndReplace
+
+        public bool isSearchAndReplace
+        {
+            get
+            {
+                bool result;
+                if (bool.TryParse(this.currentConfig.AppSettings.Settings["isSearchAndReplace"].Value, out result))
+                {
+                    return result;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            set
+            {
+                this.currentConfig.AppSettings.Settings["isSearchAndReplace"].Value = value.ToString();
+
+            }
+
+        }
+        #endregion
 
         #region Property: isVcSupport
 
@@ -271,30 +319,8 @@ namespace hoTools.Settings
 
         }
         #endregion
-        #region Property: isSearchAndReplace
         
-        public bool isSearchAndReplace
-        {
-            get
-            {
-                bool result;
-                if (bool.TryParse(this.currentConfig.AppSettings.Settings["isSearchAndReplace"].Value, out result))
-                {
-                    return result;
-                }
-                else
-                {
-                    return true;
-                }
-            }
-            set
-            {
-                this.currentConfig.AppSettings.Settings["isSearchAndReplace"].Value = value.ToString();
-
-            }
-
-        }
-        #endregion
+        
         #region Property: FileManagerPath
         public string FileManagerPath
         {
@@ -971,12 +997,12 @@ namespace hoTools.Settings
                             break;
                         case "IsDefault":
                             isDefault = false;
-                            if (configEntry.Value == "True") isDefault = true;
+                            isDefault |= configEntry.Value == "True";
 
                             break;
                         case "IsEnabled":
                             isEnabled = false;
-                            if (configEntry.Value == "True") isEnabled = true;
+                            isEnabled |= configEntry.Value == "True";
                             l.Add(new Connector(type, stereotype, lineStyle, isDefault, isEnabled));
                             break;
                     }

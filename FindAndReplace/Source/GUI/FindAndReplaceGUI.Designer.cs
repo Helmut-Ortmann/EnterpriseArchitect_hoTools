@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FindAndReplaceGUI));
             this.txtFindString = new System.Windows.Forms.TextBox();
             this.txtReplaceString = new System.Windows.Forms.TextBox();
@@ -39,7 +38,6 @@
             this.chkRegularExpression = new System.Windows.Forms.CheckBox();
             this.chkName = new System.Windows.Forms.CheckBox();
             this.chkDescription = new System.Windows.Forms.CheckBox();
-            this.lblRelease = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -47,7 +45,7 @@
             this.helpToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.regularExpressionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.toolTip1 = new System.Windows.Forms.ToolTip();
             this.btnFindPrevious = new System.Windows.Forms.Button();
             this.txtStatus = new System.Windows.Forms.TextBox();
             this.btnShow = new System.Windows.Forms.Button();
@@ -60,6 +58,7 @@
             this.btnFind = new System.Windows.Forms.Button();
             this.lblFieldType = new System.Windows.Forms.Label();
             this.lblItemType = new System.Windows.Forms.Label();
+            this.txtUserText = new System.Windows.Forms.RichTextBox();
             this.chkPackage = new System.Windows.Forms.CheckBox();
             this.chkElement = new System.Windows.Forms.CheckBox();
             this.chkDiagram = new System.Windows.Forms.CheckBox();
@@ -67,7 +66,6 @@
             this.chkOperation = new System.Windows.Forms.CheckBox();
             this.chkAttribute = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.txtUserText = new System.Windows.Forms.RichTextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.Filter = new System.Windows.Forms.GroupBox();
@@ -77,7 +75,7 @@
             // txtFindString
             // 
             this.txtFindString.Location = new System.Drawing.Point(0, 282);
-            this.txtFindString.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtFindString.Margin = new System.Windows.Forms.Padding(2);
             this.txtFindString.Name = "txtFindString";
             this.txtFindString.Size = new System.Drawing.Size(215, 20);
             this.txtFindString.TabIndex = 0;
@@ -85,7 +83,7 @@
             // txtReplaceString
             // 
             this.txtReplaceString.Location = new System.Drawing.Point(224, 282);
-            this.txtReplaceString.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtReplaceString.Margin = new System.Windows.Forms.Padding(2);
             this.txtReplaceString.Name = "txtReplaceString";
             this.txtReplaceString.Size = new System.Drawing.Size(200, 20);
             this.txtReplaceString.TabIndex = 1;
@@ -93,7 +91,7 @@
             // btnFindNext
             // 
             this.btnFindNext.Location = new System.Drawing.Point(18, 305);
-            this.btnFindNext.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnFindNext.Margin = new System.Windows.Forms.Padding(2);
             this.btnFindNext.Name = "btnFindNext";
             this.btnFindNext.Size = new System.Drawing.Size(40, 19);
             this.btnFindNext.TabIndex = 2;
@@ -105,7 +103,7 @@
             // btnReplace
             // 
             this.btnReplace.Location = new System.Drawing.Point(175, 305);
-            this.btnReplace.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnReplace.Margin = new System.Windows.Forms.Padding(2);
             this.btnReplace.Name = "btnReplace";
             this.btnReplace.Size = new System.Drawing.Size(56, 19);
             this.btnReplace.TabIndex = 3;
@@ -119,7 +117,7 @@
             // btnReplaceAll
             // 
             this.btnReplaceAll.Location = new System.Drawing.Point(261, 305);
-            this.btnReplaceAll.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnReplaceAll.Margin = new System.Windows.Forms.Padding(2);
             this.btnReplaceAll.Name = "btnReplaceAll";
             this.btnReplaceAll.Size = new System.Drawing.Size(74, 19);
             this.btnReplaceAll.TabIndex = 4;
@@ -132,7 +130,7 @@
             // btnCancel
             // 
             this.btnCancel.Location = new System.Drawing.Point(365, 306);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(2);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(56, 19);
             this.btnCancel.TabIndex = 5;
@@ -145,7 +143,7 @@
             // 
             this.chkRegularExpression.AutoSize = true;
             this.chkRegularExpression.Location = new System.Drawing.Point(2, 220);
-            this.chkRegularExpression.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkRegularExpression.Margin = new System.Windows.Forms.Padding(2);
             this.chkRegularExpression.Name = "chkRegularExpression";
             this.chkRegularExpression.Size = new System.Drawing.Size(117, 17);
             this.chkRegularExpression.TabIndex = 6;
@@ -157,7 +155,7 @@
             // 
             this.chkName.AutoSize = true;
             this.chkName.Location = new System.Drawing.Point(2, 124);
-            this.chkName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkName.Margin = new System.Windows.Forms.Padding(2);
             this.chkName.Name = "chkName";
             this.chkName.Size = new System.Drawing.Size(54, 17);
             this.chkName.TabIndex = 7;
@@ -168,23 +166,12 @@
             // 
             this.chkDescription.AutoSize = true;
             this.chkDescription.Location = new System.Drawing.Point(2, 146);
-            this.chkDescription.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkDescription.Margin = new System.Windows.Forms.Padding(2);
             this.chkDescription.Name = "chkDescription";
             this.chkDescription.Size = new System.Drawing.Size(79, 17);
             this.chkDescription.TabIndex = 8;
             this.chkDescription.Text = "Description";
             this.chkDescription.UseVisualStyleBackColor = true;
-            // 
-            // lblRelease
-            // 
-            this.lblRelease.AutoSize = true;
-            this.lblRelease.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRelease.Location = new System.Drawing.Point(310, 0);
-            this.lblRelease.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblRelease.Name = "lblRelease";
-            this.lblRelease.Size = new System.Drawing.Size(41, 15);
-            this.lblRelease.TabIndex = 9;
-            this.lblRelease.Text = "V1.0.0";
             // 
             // menuStrip1
             // 
@@ -209,7 +196,7 @@
             // helpToolStripMenuItem1
             // 
             this.helpToolStripMenuItem1.Name = "helpToolStripMenuItem1";
-            this.helpToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.helpToolStripMenuItem1.Size = new System.Drawing.Size(99, 22);
             this.helpToolStripMenuItem1.Text = "Help";
             // 
             // helpToolStripMenuItem
@@ -246,7 +233,7 @@
             // btnFindPrevious
             // 
             this.btnFindPrevious.Location = new System.Drawing.Point(88, 305);
-            this.btnFindPrevious.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnFindPrevious.Margin = new System.Windows.Forms.Padding(2);
             this.btnFindPrevious.Name = "btnFindPrevious";
             this.btnFindPrevious.Size = new System.Drawing.Size(57, 19);
             this.btnFindPrevious.TabIndex = 24;
@@ -260,7 +247,7 @@
             // 
             this.txtStatus.Enabled = false;
             this.txtStatus.Location = new System.Drawing.Point(70, 346);
-            this.txtStatus.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtStatus.Margin = new System.Windows.Forms.Padding(2);
             this.txtStatus.Name = "txtStatus";
             this.txtStatus.Size = new System.Drawing.Size(354, 20);
             this.txtStatus.TabIndex = 25;
@@ -270,7 +257,7 @@
             // 
             this.btnShow.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnShow.Location = new System.Drawing.Point(2, 338);
-            this.btnShow.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnShow.Margin = new System.Windows.Forms.Padding(2);
             this.btnShow.Name = "btnShow";
             this.btnShow.Size = new System.Drawing.Size(58, 27);
             this.btnShow.TabIndex = 26;
@@ -283,7 +270,7 @@
             // 
             this.chkStereotype.AutoSize = true;
             this.chkStereotype.Location = new System.Drawing.Point(2, 168);
-            this.chkStereotype.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkStereotype.Margin = new System.Windows.Forms.Padding(2);
             this.chkStereotype.Name = "chkStereotype";
             this.chkStereotype.Size = new System.Drawing.Size(77, 17);
             this.chkStereotype.TabIndex = 27;
@@ -295,7 +282,7 @@
             // 
             this.chkTaggedValue.AutoSize = true;
             this.chkTaggedValue.Location = new System.Drawing.Point(2, 190);
-            this.chkTaggedValue.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkTaggedValue.Margin = new System.Windows.Forms.Padding(2);
             this.chkTaggedValue.Name = "chkTaggedValue";
             this.chkTaggedValue.Size = new System.Drawing.Size(98, 17);
             this.chkTaggedValue.TabIndex = 28;
@@ -308,7 +295,7 @@
             // txtTaggedValue
             // 
             this.txtTaggedValue.Location = new System.Drawing.Point(146, 188);
-            this.txtTaggedValue.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtTaggedValue.Margin = new System.Windows.Forms.Padding(2);
             this.txtTaggedValue.Name = "txtTaggedValue";
             this.txtTaggedValue.Size = new System.Drawing.Size(278, 20);
             this.txtTaggedValue.TabIndex = 29;
@@ -341,7 +328,7 @@
             // 
             this.chkIgnoreWhiteSpaces.AutoSize = true;
             this.chkIgnoreWhiteSpaces.Location = new System.Drawing.Point(249, 220);
-            this.chkIgnoreWhiteSpaces.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkIgnoreWhiteSpaces.Margin = new System.Windows.Forms.Padding(2);
             this.chkIgnoreWhiteSpaces.Name = "chkIgnoreWhiteSpaces";
             this.chkIgnoreWhiteSpaces.Size = new System.Drawing.Size(126, 17);
             this.chkIgnoreWhiteSpaces.TabIndex = 22;
@@ -353,7 +340,7 @@
             // 
             this.btnFind.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnFind.Location = new System.Drawing.Point(0, 254);
-            this.btnFind.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnFind.Margin = new System.Windows.Forms.Padding(2);
             this.btnFind.Name = "btnFind";
             this.btnFind.Size = new System.Drawing.Size(60, 27);
             this.btnFind.TabIndex = 23;
@@ -386,82 +373,6 @@
             this.toolTip1.SetToolTip(this.lblItemType, "Search in item types like:\r\n- Package\r\n- Element\r\n- Diagram\r\n- Attribute\r\n- Opera" +
         "tion");
             // 
-            // chkPackage
-            // 
-            this.chkPackage.AutoSize = true;
-            this.chkPackage.Location = new System.Drawing.Point(146, 124);
-            this.chkPackage.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.chkPackage.Name = "chkPackage";
-            this.chkPackage.Size = new System.Drawing.Size(74, 17);
-            this.chkPackage.TabIndex = 16;
-            this.chkPackage.Text = "Packages";
-            this.chkPackage.UseVisualStyleBackColor = true;
-            // 
-            // chkElement
-            // 
-            this.chkElement.AutoSize = true;
-            this.chkElement.Location = new System.Drawing.Point(146, 146);
-            this.chkElement.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.chkElement.Name = "chkElement";
-            this.chkElement.Size = new System.Drawing.Size(69, 17);
-            this.chkElement.TabIndex = 17;
-            this.chkElement.Text = "Elements";
-            this.chkElement.UseVisualStyleBackColor = true;
-            // 
-            // chkDiagram
-            // 
-            this.chkDiagram.AutoSize = true;
-            this.chkDiagram.Location = new System.Drawing.Point(146, 169);
-            this.chkDiagram.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.chkDiagram.Name = "chkDiagram";
-            this.chkDiagram.Size = new System.Drawing.Size(70, 17);
-            this.chkDiagram.TabIndex = 18;
-            this.chkDiagram.Text = "Diagrams";
-            this.chkDiagram.UseVisualStyleBackColor = true;
-            // 
-            // chkCaseSensetive
-            // 
-            this.chkCaseSensetive.AutoSize = true;
-            this.chkCaseSensetive.Location = new System.Drawing.Point(147, 220);
-            this.chkCaseSensetive.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.chkCaseSensetive.Name = "chkCaseSensetive";
-            this.chkCaseSensetive.Size = new System.Drawing.Size(94, 17);
-            this.chkCaseSensetive.TabIndex = 19;
-            this.chkCaseSensetive.Text = "Case sensitive";
-            this.chkCaseSensetive.UseVisualStyleBackColor = true;
-            // 
-            // chkOperation
-            // 
-            this.chkOperation.AutoSize = true;
-            this.chkOperation.Location = new System.Drawing.Point(219, 146);
-            this.chkOperation.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.chkOperation.Name = "chkOperation";
-            this.chkOperation.Size = new System.Drawing.Size(72, 17);
-            this.chkOperation.TabIndex = 21;
-            this.chkOperation.Text = "Operation";
-            this.chkOperation.UseVisualStyleBackColor = true;
-            // 
-            // chkAttribute
-            // 
-            this.chkAttribute.AutoSize = true;
-            this.chkAttribute.Location = new System.Drawing.Point(219, 124);
-            this.chkAttribute.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.chkAttribute.Name = "chkAttribute";
-            this.chkAttribute.Size = new System.Drawing.Size(65, 17);
-            this.chkAttribute.TabIndex = 20;
-            this.chkAttribute.Text = "Attribute";
-            this.chkAttribute.UseVisualStyleBackColor = true;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(30, 21);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(305, 37);
-            this.label4.TabIndex = 32;
-            this.label4.Text = "Search and Replace";
-            // 
             // txtUserText
             // 
             this.txtUserText.Location = new System.Drawing.Point(347, 41);
@@ -477,6 +388,82 @@
             this.txtUserText.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtUserText_KeyDown);
             this.txtUserText.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtUserText_KeyDown);
             this.txtUserText.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.txtUserText_MouseDoubleClick);
+            // 
+            // chkPackage
+            // 
+            this.chkPackage.AutoSize = true;
+            this.chkPackage.Location = new System.Drawing.Point(146, 124);
+            this.chkPackage.Margin = new System.Windows.Forms.Padding(2);
+            this.chkPackage.Name = "chkPackage";
+            this.chkPackage.Size = new System.Drawing.Size(74, 17);
+            this.chkPackage.TabIndex = 16;
+            this.chkPackage.Text = "Packages";
+            this.chkPackage.UseVisualStyleBackColor = true;
+            // 
+            // chkElement
+            // 
+            this.chkElement.AutoSize = true;
+            this.chkElement.Location = new System.Drawing.Point(146, 146);
+            this.chkElement.Margin = new System.Windows.Forms.Padding(2);
+            this.chkElement.Name = "chkElement";
+            this.chkElement.Size = new System.Drawing.Size(69, 17);
+            this.chkElement.TabIndex = 17;
+            this.chkElement.Text = "Elements";
+            this.chkElement.UseVisualStyleBackColor = true;
+            // 
+            // chkDiagram
+            // 
+            this.chkDiagram.AutoSize = true;
+            this.chkDiagram.Location = new System.Drawing.Point(146, 169);
+            this.chkDiagram.Margin = new System.Windows.Forms.Padding(2);
+            this.chkDiagram.Name = "chkDiagram";
+            this.chkDiagram.Size = new System.Drawing.Size(70, 17);
+            this.chkDiagram.TabIndex = 18;
+            this.chkDiagram.Text = "Diagrams";
+            this.chkDiagram.UseVisualStyleBackColor = true;
+            // 
+            // chkCaseSensetive
+            // 
+            this.chkCaseSensetive.AutoSize = true;
+            this.chkCaseSensetive.Location = new System.Drawing.Point(147, 220);
+            this.chkCaseSensetive.Margin = new System.Windows.Forms.Padding(2);
+            this.chkCaseSensetive.Name = "chkCaseSensetive";
+            this.chkCaseSensetive.Size = new System.Drawing.Size(94, 17);
+            this.chkCaseSensetive.TabIndex = 19;
+            this.chkCaseSensetive.Text = "Case sensitive";
+            this.chkCaseSensetive.UseVisualStyleBackColor = true;
+            // 
+            // chkOperation
+            // 
+            this.chkOperation.AutoSize = true;
+            this.chkOperation.Location = new System.Drawing.Point(219, 146);
+            this.chkOperation.Margin = new System.Windows.Forms.Padding(2);
+            this.chkOperation.Name = "chkOperation";
+            this.chkOperation.Size = new System.Drawing.Size(72, 17);
+            this.chkOperation.TabIndex = 21;
+            this.chkOperation.Text = "Operation";
+            this.chkOperation.UseVisualStyleBackColor = true;
+            // 
+            // chkAttribute
+            // 
+            this.chkAttribute.AutoSize = true;
+            this.chkAttribute.Location = new System.Drawing.Point(219, 124);
+            this.chkAttribute.Margin = new System.Windows.Forms.Padding(2);
+            this.chkAttribute.Name = "chkAttribute";
+            this.chkAttribute.Size = new System.Drawing.Size(65, 17);
+            this.chkAttribute.TabIndex = 20;
+            this.chkAttribute.Text = "Attribute";
+            this.chkAttribute.UseVisualStyleBackColor = true;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(30, 21);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(305, 37);
+            this.label4.TabIndex = 32;
+            this.label4.Text = "Search and Replace";
             // 
             // label1
             // 
@@ -536,7 +523,6 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtUserText);
-            this.Controls.Add(this.lblRelease);
             this.Controls.Add(this.chkDescription);
             this.Controls.Add(this.chkName);
             this.Controls.Add(this.chkRegularExpression);
@@ -548,7 +534,7 @@
             this.Controls.Add(this.txtFindString);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.Filter);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FindAndReplaceGUI";
             this.Size = new System.Drawing.Size(429, 379);
             this.toolTip1.SetToolTip(this, "Show details and allow changes");
@@ -571,7 +557,6 @@
         private System.Windows.Forms.CheckBox chkRegularExpression;
         private System.Windows.Forms.CheckBox chkName;
         private System.Windows.Forms.CheckBox chkDescription;
-        private System.Windows.Forms.Label lblRelease;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem1;

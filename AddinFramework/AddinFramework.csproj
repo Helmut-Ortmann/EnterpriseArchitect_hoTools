@@ -48,14 +48,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EASpecific\EAAddin.cs" />
-    <Compile Include="EASpecific\JavaScriptLanguage.cs" />
-    <Compile Include="EASpecific\JavaScriptLanguageBase.cs" />
-    <Compile Include="EASpecific\JScriptLanguage.cs" />
-    <Compile Include="EASpecific\Script.cs" />
-    <Compile Include="EASpecific\ScriptFunction.cs" />
-    <Compile Include="EASpecific\ScriptLanguage.cs" />
-    <Compile Include="EASpecific\ScriptType.cs" />
-    <Compile Include="EASpecific\VBScriptLanguage.cs" />
+    <Compile Include="Util\Script\JavaScriptLanguage.cs" />
+    <Compile Include="Util\Script\JavaScriptLanguageBase.cs" />
+    <Compile Include="Util\Script\JScriptLanguage.cs" />
+    <Compile Include="Util\Script\Script.cs" />
+    <Compile Include="Util\Script\ScriptFunction.cs" />
+    <Compile Include="Util\Script\ScriptLanguage.cs" />
+    <Compile Include="Util\Script\ScriptType.cs" />
+    <Compile Include="Util\Script\VBScriptLanguage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\Model.cs" />
     <Compile Include="Util\User.cs" />
@@ -78,6 +78,10 @@
       <Project>{9376680e-9420-4fc1-8de8-4311fca18efc}</Project>
       <Name>Util</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="hoKeyPair.snk" />
+    <None Include="LICENSE" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

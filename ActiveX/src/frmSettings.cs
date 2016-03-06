@@ -27,17 +27,19 @@ namespace hoTools.Settings
         {
             InitializeComponent();
 
-            this._settings = settings;
-            this._addinControl = addinControl;
+            _settings = settings;
+            _addinControl = addinControl;
 
             #region miscellaneous
-            this.txtQuickSearch.Text = settings.quickSearchName;
-            this.txtFileManagerPath.Text = settings.FileManagerPath;
-            this.chkAdvancedFeatures.Checked = settings.isAdvancedFeatures;
-            this.chkSvnSupport.Checked = settings.isSvnSupport;
-            this.chkVcSupport.Checked = settings.isVcSupport;
-            this.chkAdvancedPort.Checked = settings.isAdvancedPort;
-            this.chkAdvancedDiagramNote.Checked = settings.isAdvancedDiagramNote;
+            txtQuickSearch.Text = settings.quickSearchName;
+            txtFileManagerPath.Text = settings.FileManagerPath;
+            chkAdvancedFeatures.Checked = settings.isAdvancedFeatures;
+            chkSvnSupport.Checked = settings.isSvnSupport;
+            chkVcSupport.Checked = settings.isVcSupport;
+            chkAdvancedPort.Checked = settings.isAdvancedPort;
+            chkAdvancedDiagramNote.Checked = settings.isAdvancedDiagramNote;
+            chkScriptAndQuery.Checked = settings.isScriptAndQuery;
+            chkSearchAndReplace.Checked = settings.isSearchAndReplace;
             #endregion
 
             #region linestyle
@@ -535,6 +537,8 @@ namespace hoTools.Settings
             _settings.isAdvancedFeatures = chkAdvancedFeatures.Checked;
             _settings.isAdvancedPort = chkAdvancedPort.Checked;
             _settings.isAdvancedDiagramNote = chkAdvancedDiagramNote.Checked;
+            _settings.isScriptAndQuery = chkScriptAndQuery.Checked;
+            _settings.isSearchAndReplace = chkSearchAndReplace.Checked;
             #endregion
 
             #region Line style

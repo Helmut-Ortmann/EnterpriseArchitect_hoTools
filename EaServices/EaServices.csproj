@@ -43,7 +43,8 @@
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>hoKeyPair.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Interop.EA">
@@ -74,9 +75,6 @@
     <Compile Include="src\ServicesPort.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="hoKeyPair.snk" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="src\dlgUser.resx">
       <DependentUpon>dlgUser.cs</DependentUpon>
     </EmbeddedResource>
@@ -86,6 +84,9 @@
       <Project>{9376680e-9420-4fc1-8de8-4311fca18efc}</Project>
       <Name>Util</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="hoKeyPair.snk" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

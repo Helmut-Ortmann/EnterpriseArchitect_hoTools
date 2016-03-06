@@ -14,8 +14,8 @@ namespace EAAddinFramework.EASpecific
     public class EAAddin
 	{
 		private Assembly addinDLL;
-		private object wrappedAddin;
-		public string name {get;set;}
+        private readonly object wrappedAddin;
+        public string name {get;set;}
 		public List<string> lastMenuOptions {get;set;}
 		
 		public EAAddin(string fileName,string name):base()

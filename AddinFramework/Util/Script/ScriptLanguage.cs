@@ -8,9 +8,8 @@
  */
 using System;
 using System.Reflection;
-using EAAddinFramework.Utils;
 
-namespace EAAddinFramework.EASpecific
+namespace EAAddinFramework.Utils
 {
 	/// <summary>
 	/// Description of ScriptLanguage.

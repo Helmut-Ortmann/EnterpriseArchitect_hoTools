@@ -38,7 +38,7 @@ namespace EAAddinFramework
         /// <summary>
         /// returns true if a project is currently opened
         /// </summary>
-        /// <param name="Repository">the repository</param>
+        /// <param name="Repository">the Repository</param>
         /// <returns>true if a project is opened in EA</returns>
         protected virtual bool IsProjectOpen(EA.Repository Repository)
         {
@@ -853,7 +853,7 @@ namespace EAAddinFramework
         /// <summary>
         /// MDG_Connect enables the Add-In to handle user driven request to connect a model branch to an external application. This function is called when the user attempts to connect a particular Enterprise Architect package to an as yet unspecified external project. This event enables the Add-In to interact with the user to specify such a project.
         /// The Add-In is responsible for retaining the connection details, which should be stored on a per-user or per-workstation basis. That is, users who share a common Enterprise Architect model over a network should be able to connect and disconnect to external projects independently of one another.
-        /// The Add-In should therefore not store connection details in an Enterprise Architect repository. A suitable place to store such details would be:
+        /// The Add-In should therefore not store connection details in an Enterprise Architect Repository. A suitable place to store such details would be:
         /// SHGetFolderPath(..CSIDL_APPDATA..)\AddinName.
         /// The PackageGuid parameter is the same identifier as required for most events relating to the MDG Add-In. Therefore it is recommended that the connection details be indexed using the PackageGuid value.
         /// The PackageID parameter is provided to aid fast retrieval of package details from Enterprise Architect, should this be required.

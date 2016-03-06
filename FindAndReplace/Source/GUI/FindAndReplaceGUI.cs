@@ -3,23 +3,27 @@ using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using hoTools.Settings;
 using hoTools.EaServices;
+using hoTools.ActiveX;
 
 
 namespace hoTools.Find
 {
+    /// <summary>
+    /// ActiveX COM Component 'hoTools.FindAndReplaceGUI' to show as tab in the EA Addin window
+    /// </summary>
     [ComVisible(true)]
     [ClassInterface(ClassInterfaceType.None)]
     [Guid("2703ED16-2C93-4B13-83DC-F72FB6EDBA9E")]
-    [ProgId("hoTools.FindAndReplaceGUI")]
+    [ProgId(PROGID)]
     [ComDefaultInterface(typeof(IFindAndReplaceGUI))]
 
-    public partial class FindAndReplaceGUI : UserControl, IFindAndReplaceGUI
+    public partial class FindAndReplaceGUI : AddinGUI, IFindAndReplaceGUI
     {
-        private EA.Repository _rep = null;
-        private AddinSettings _addinSettings = null;
+        public const string PROGID = "hoTools.FindAndReplaceGUI";
+        public const string TABULATOR = "Find";
+
         private FindAndReplace _fr = null;
-        private string _projectGUID = "";
-        private string _release = "";
+
 
         #region Constructor
         public FindAndReplaceGUI()
@@ -40,40 +44,9 @@ namespace hoTools.Find
         }
         #endregion
         #region Properties
-        // needs to set just after creating Control
-        public EA.Repository repository
-        {
-            set
-            {
-                _rep = value;
-                _projectGUID = _rep.ProjectGUID;
-            }
-        }
-        public string Release
-        {
-            set
-            {
-                _release = value;
-                lblRelease.Text = value;
-            }
-        }
 
         public string getName() => "hoTools.FindAndReplace";
-        public AddinSettings addinSettings
-        {
-            get
-            {
-                return _addinSettings;
-            }
-            set
-            {
-                this._addinSettings = value;
-
-                //parameterizeMenusAndButtons();
-                //parameterizeShortCutsQueries();
-                //parameterizeShortCutsServices();
-            }
-        }
+       
         #endregion
         
         #region btnFind_Click
@@ -91,8 +64,8 @@ namespace hoTools.Find
                                             "Short find string (<3 characters)", MessageBoxButtons.OKCancel);
                 if (result == DialogResult.Cancel) return;
             }
-            EA.Package pkg = _rep.GetTreeSelectedPackage();
-            _fr = new FindAndReplace(_rep, pkg,
+            EA.Package pkg = Repository.GetTreeSelectedPackage();
+            _fr = new FindAndReplace(Repository, pkg,
                 txtFindString.Text,
                 txtReplaceString.Text,
                 chkCaseSensetive.Checked, chkRegularExpression.Checked, chkIgnoreWhiteSpaces.Checked,
@@ -223,17 +196,17 @@ namespace hoTools.Find
         #region aboutToolStripMenuItem_Click
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string configFilePath = _addinSettings.ConfigFilePath;
-            switch (_addinSettings.Customer)
+            string configFilePath = AddinSettings.ConfigFilePath;
+            switch (AddinSettings.Customer)
             {
                 case AddinSettings.CustomerCfg.VAR1:
-                    EaService.aboutVAR1(_release, configFilePath);
+                    EaService.aboutVAR1(Release, configFilePath);
                     break;
                 case AddinSettings.CustomerCfg.hoTools:
-                    EaService.about(_release, configFilePath);
+                    EaService.about(Release, configFilePath);
                     break;
                 default:
-                    EaService.about(_release, configFilePath);
+                    EaService.about(Release, configFilePath);
                     break;
             }
         }
@@ -270,7 +243,7 @@ namespace hoTools.Find
         {
             if (e.KeyCode == Keys.Enter)
             {
-                EaService.runQuickSearch(_rep, _addinSettings.quickSearchName, txtUserText.Text);
+                EaService.runQuickSearch(Repository, AddinSettings.quickSearchName, txtUserText.Text);
                 e.Handled = true;
             }
         }
@@ -279,7 +252,7 @@ namespace hoTools.Find
         private void txtUserText_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             txtUserText.Text = Clipboard.GetText();
-            EaService.runQuickSearch(_rep, _addinSettings.quickSearchName, txtUserText.Text);
+            EaService.runQuickSearch(Repository, AddinSettings.quickSearchName, txtUserText.Text);
         }
 #endregion
         #region regularExpressionToolStripMenuItem_Click

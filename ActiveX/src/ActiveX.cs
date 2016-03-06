@@ -15,12 +15,13 @@ namespace hoTools.ActiveX
     [ProgId("hoTools.ActiveXGUI")]
     [ComDefaultInterface(typeof(IAddinControl))]
 
-    public class AddinControlGUI : UserControl, IAddinControl
+    public class AddinControlGUI : AddinGUI, IAddinControl
     {
-        private EA.Repository m_repository = null;
-        private string m_GUID = "";
-        private string m_release = "";
-        private AddinSettings _addinSettings = null;
+        public const string PROGID = "hoTools.ActiveXGUI";
+        public const string TABULATOR = "Script";
+
+        private EA.Repository _repository = null;
+
 
         #region Generated
         private frmSettings frmSettings;
@@ -58,7 +59,6 @@ namespace hoTools.ActiveX
         private ToolStripMenuItem versionControlToolStripMenuItem;
         private ToolStripMenuItem changeXMLFileToolStripMenuItem;
         private ToolStripMenuItem helpToolStripMenuItem1;
-        private Label lbl_Release;
         private ToolStripContainer toolStripContainer1;
         private ToolStrip toolStrip1;
         private ToolStripButton toolStripBtn11;
@@ -116,6 +116,7 @@ namespace hoTools.ActiveX
         private ToolStripSeparator toolStripSeparator9;
         private ToolStripSeparator toolStripSeparator11;
         private ToolStripSeparator toolStripSeparator12;
+        private ToolStripMenuItem openScriptAndQueryToolStripMenuItem;
         private TextBox txtUserText;
         #endregion
 
@@ -126,66 +127,8 @@ namespace hoTools.ActiveX
 
         }
         #endregion
-        #region Properties
-        // needs to set just after creating Control
-        public EA.Repository repository
-        {
-            set
-            {
-                m_repository = value;
-                m_GUID = m_repository.ProjectGUID;
-                
-            }
-        }
-        public string Release
-        {
-            set { m_release = value; 
-            lbl_Release.Text = value;}
-        }
-
-        #region addinSettings
-        public AddinSettings addinSettings
-        {
-            get
-            {
-                return _addinSettings;
-            }
-            set
-            {
-                this._addinSettings = value;
-                
-                parameterizeMenusAndButtons();
-                parameterizeButtonQueries();
-                parameterizeButtonServices();
-
-                // Customer specific initialisation
-
-                switch (_addinSettings.Customer)
-                {
-                    case AddinSettings.CustomerCfg.VAR1:
-                        portToolStripMenuItem.Text = "Port";
-                        break;
-
-                    default:
-                        portToolStripMenuItem.Text = "Port";
-                        toolStripSeparator8.Visible = false;
-                        toolStripSeparator3.Visible = false;
-                        toolStripSeparator12.Visible = false;
-
-                        movePortLabelLeftToolStripMenuItem.Visible = false;
-                        movePortLabelRightPositionToolStripMenuItem.Visible = false;
-
-
-                        connectPortsToolStripMenuItem.Visible = false;
-                        connectPortsInsideComponentsToolStripMenuItem.Visible = false;
-                        break;
-                }
-                
-            }
-        }
-        #endregion
+       
         public string getText() => txtUserText.Text;
-        #endregion
 
         #region IActiveX Members
         public string getName() => "hoTools.AddinControl";
@@ -210,67 +153,67 @@ namespace hoTools.ActiveX
         #region Button & Menue
         void btnDisplayBehavior_Click(object sender, EventArgs e)
         {
-            EaService.DisplayOperationForSelectedElement(m_repository, EaService.displayMode.Behavior);
+            EaService.DisplayOperationForSelectedElement(_repository, EaService.displayMode.Behavior);
         }
         void btnLocateOperation_Click(object sender, EventArgs e)
         {
-            EaService.DisplayOperationForSelectedElement(m_repository, EaService.displayMode.Method);
+            EaService.DisplayOperationForSelectedElement(_repository, EaService.displayMode.Method);
         }
 
         void btnAddElementNote_Click(object sender, EventArgs e)
         {
-            EaService.addElementNote(m_repository);
+            EaService.addElementNote(_repository);
         }
 
         void btnAddDiagramNote_Click(object sender, EventArgs e)
         {
-            EaService.addDiagramNote(m_repository);
+            EaService.addDiagramNote(_repository);
         }
 
         void btnLocateType_Click(object sender, EventArgs e)
         {
-            EaService.locateType(m_repository);
+            EaService.locateType(_repository);
         }
 
 
         void btnShowSpecification_Click(object sender, EventArgs e)
         {
-            EaService.showSpecification(m_repository);
+            EaService.showSpecification(_repository);
         }
 
 
         void btnFindUsage_Click(object sender, EventArgs e)
         {
-            EaService.findUsage(m_repository);
+            EaService.findUsage(_repository);
         }
 
         void btnC_Click(object sender, EventArgs e)
         {
-            EaService.setLineStyle(m_repository, "C");
+            EaService.setLineStyle(_repository, "C");
         }
 
 
         void btnD_Click(object sender, EventArgs e)
         {
-            EaService.setLineStyle(m_repository, "D");
+            EaService.setLineStyle(_repository, "D");
         }
 
 
 
         void btnA_Click(object sender, EventArgs e)
         {
-            EaService.setLineStyle(m_repository, "A");
+            EaService.setLineStyle(_repository, "A");
         }
 
 
         void btnOR_Click(object sender, EventArgs e)
         {
-            EaService.setLineStyle(m_repository, "OR");
+            EaService.setLineStyle(_repository, "OR");
         }
 
         private void btnComposite_Click(object sender, EventArgs e)
         {
-            EaService.navigateComposite(m_repository);
+            EaService.navigateComposite(_repository);
         }
 
         private void label1_ControlRemoved(object sender, ControlEventArgs e)
@@ -280,49 +223,49 @@ namespace hoTools.ActiveX
 
         private void getAllLatestrecursiveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            EaService.getVcLatestRecursive(m_repository);
+            EaService.getVcLatestRecursive(_repository);
         }
 
         private void createActivityForOperationToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            EaService.CreateActivityForOperation(m_repository);
+            EaService.CreateActivityForOperation(_repository);
         }
 
         private void showFolderToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            EaService.ShowFolder(m_repository, isTotalCommander: false);
+            EaService.ShowFolder(_repository, isTotalCommander: false);
         }
 
         private void copyGUIDSQLToClipboardToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            EaService.copyGuidSqlToClipboard(m_repository);
+            EaService.copyGuidSqlToClipboard(_repository);
         }
 
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.frmSettings = new frmSettings(this.addinSettings, this);
+            this.frmSettings = new frmSettings(AddinSettings, this);
             this.frmSettings.ShowDialog();
         }
 
         private void btnUpdateActivityParametzer_Click(object sender, EventArgs e)
         {
-            EaService.UpdateActivityParameter(m_repository);
+            EaService.UpdateActivityParameter(_repository);
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string configFilePath = _addinSettings.ConfigFilePath;
-            switch (_addinSettings.Customer)
+            string configFilePath = AddinSettings.ConfigFilePath;
+            switch (AddinSettings.Customer)
             {
                 
                 case AddinSettings.CustomerCfg.VAR1:
-                    EaService.aboutVAR1(m_release, configFilePath);
+                    EaService.aboutVAR1(Release, configFilePath);
                     break;
                 case AddinSettings.CustomerCfg.hoTools:
-                    EaService.about(m_release, configFilePath);
+                    EaService.about(Release, configFilePath);
                     break;
                 default:
-                    EaService.about(m_release, configFilePath);
+                    EaService.about(Release, configFilePath);
                     break;
             }
 
@@ -330,12 +273,12 @@ namespace hoTools.ActiveX
 
         private void changeXMLFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            EaService.setNewXmlPath(m_repository);
+            EaService.setNewXmlPath(_repository);
         }
 
         private void btnBezier_Click(object sender, EventArgs e)
         {
-            EaService.setLineStyle(m_repository, "B");
+            EaService.setLineStyle(_repository, "B");
         }
 
         private void helpToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -395,14 +338,14 @@ namespace hoTools.ActiveX
         }
         private void runSearch(int pos)
         {
-            if (_addinSettings.buttonsSearch[pos] is EaAddinShortcutSearch)
+            if (AddinSettings.buttonsSearch[pos] is EaAddinShortcutSearch)
             {
 
-                var sh = (EaAddinShortcutSearch)_addinSettings.buttonsSearch[pos];
+                var sh = (EaAddinShortcutSearch)AddinSettings.buttonsSearch[pos];
                 if (sh.keySearchName == "") return;
                 try
                 {
-                    m_repository.RunModelSearch(sh.keySearchName, sh.keySearchTerm, "", "");
+                    _repository.RunModelSearch(sh.keySearchName, sh.keySearchTerm, "", "");
                 }
                 catch (Exception e)
                 {
@@ -413,24 +356,24 @@ namespace hoTools.ActiveX
         }
         private void runService(int pos)
         {
-            if (_addinSettings.buttonsServices[pos] is hoTools.EaServices.ServicesCallConfig)
+            if (AddinSettings.buttonsServices[pos] is hoTools.EaServices.ServicesCallConfig)
             {
 
-                var sh = (hoTools.EaServices.ServicesCallConfig)_addinSettings.buttonsServices[pos];
+                var sh = (hoTools.EaServices.ServicesCallConfig)AddinSettings.buttonsServices[pos];
                 if (sh.Method == null) return;
-                sh.Invoke(m_repository, txtUserText.Text);
+                sh.Invoke(_repository, txtUserText.Text);
 
             }
         }
 
         private void changeAuthorToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            EaService.changeAuthor(m_repository);
+            EaService.changeAuthor(_repository);
         }
 
         private void changeAuthorRecursiveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            EaService.changeUserRecursive(m_repository);
+            EaService.changeUserRecursive(_repository);
         }
 
         private void helpToolStripMenuItem_Click(object sender, EventArgs e)
@@ -440,68 +383,68 @@ namespace hoTools.ActiveX
 
         private void showFolderVCorCodeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            EaService.ShowFolder(m_repository, isTotalCommander: false);
+            EaService.ShowFolder(_repository, isTotalCommander: false);
         }
 
         private void showTortoiseLogToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            EA.ObjectType oType = m_repository.GetContextItemType();
+            EA.ObjectType oType = _repository.GetContextItemType();
             if (!oType.Equals(EA.ObjectType.otPackage)) return;
 
-            var pkg = (EA.Package)m_repository.GetContextObject();
-            EaService.gotoSvnLog(m_repository, pkg);
+            var pkg = (EA.Package)_repository.GetContextObject();
+            EaService.gotoSvnLog(_repository, pkg);
         }
 
         private void showTortoiseRepoBrowserToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            EA.ObjectType oType = m_repository.GetContextItemType();
+            EA.ObjectType oType = _repository.GetContextItemType();
             if (!oType.Equals(EA.ObjectType.otPackage)) return;
 
-            var pkg = (EA.Package)m_repository.GetContextObject();
-            EaService.gotoSvnBrowser(m_repository, pkg);
+            var pkg = (EA.Package)_repository.GetContextObject();
+            EaService.gotoSvnBrowser(_repository, pkg);
         }
 
         private void getVCLatesrecursiveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            EaService.getVcLatestRecursive(m_repository);
+            EaService.getVcLatestRecursive(_repository);
         }
 
         private void setSvnKeywordsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            EA.ObjectType oType = m_repository.GetContextItemType();
+            EA.ObjectType oType = _repository.GetContextItemType();
             if (!oType.Equals(EA.ObjectType.otPackage)) return;
 
-            var pkg = (EA.Package)m_repository.GetContextObject();
-            EaService.setSvnProperty(m_repository, pkg);
+            var pkg = (EA.Package)_repository.GetContextObject();
+            EaService.setSvnProperty(_repository, pkg);
         }
 
         private void setSvnModuleTaggedValuesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            EA.ObjectType oType = m_repository.GetContextItemType();
+            EA.ObjectType oType = _repository.GetContextItemType();
             if (!oType.Equals(EA.ObjectType.otPackage)) return;
 
-            var pkg = (EA.Package)m_repository.GetContextObject();
-            EaService.setDirectoryTaggedValues(m_repository, pkg);
+            var pkg = (EA.Package)_repository.GetContextObject();
+            EaService.setDirectoryTaggedValues(_repository, pkg);
         }
 
         private void setSvnModuleTaggedValuesrecursiveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            EaService.setTaggedValueGui(m_repository);
+            EaService.setTaggedValueGui(_repository);
         }
 
         private void btnAddFavorite_Click(object sender, EventArgs e)
         {
-            EaService.AddFavorite(m_repository);
+            EaService.AddFavorite(_repository);
         }
 
         private void btnRemoveFavorite_Click(object sender, EventArgs e)
         {
-            EaService.RemoveFavorite(m_repository);
+            EaService.RemoveFavorite(_repository);
         }
 
         private void btnFavorites_Click(object sender, EventArgs e)
         {
-            EaService.Favorites(m_repository);
+            EaService.Favorites(_repository);
         }
 
         
@@ -517,7 +460,7 @@ namespace hoTools.ActiveX
         #region removePortsInDiagramToolStripMenuItem_Click
         private void removePortsInDiagramToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var port = new PortServices(m_repository);
+            var port = new PortServices(_repository);
             port.removePortFromDiagramGUI();
            
         }
@@ -526,7 +469,7 @@ namespace hoTools.ActiveX
         #region showPortsInDiagramObjects
         private void showPortsInDiagramObjectsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var port = new PortServices(m_repository);
+            var port = new PortServices(_repository);
             port.showPortsInDiagram(false);
 
            
@@ -535,7 +478,7 @@ namespace hoTools.ActiveX
         #region showReceivingPortsLeftSendingPortsRight
         private void showReceivingPortsLeftSendingPortsRightToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var port = new PortServices(m_repository);
+            var port = new PortServices(_repository);
             port.showPortsInDiagram(true);
         }
         #endregion
@@ -543,7 +486,7 @@ namespace hoTools.ActiveX
         #region copyPorts
         private void copyPortsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var port = new PortServices(m_repository);
+            var port = new PortServices(_repository);
             port.copyPortsGUI();
            
         }
@@ -551,7 +494,7 @@ namespace hoTools.ActiveX
         #region deletePortsWhichAreMarkedForDeletion
         private void deletePortsWhichAreMarkedForDeletionfutureToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var port = new PortServices(m_repository);
+            var port = new PortServices(_repository);
             port.deletePortsMarkedPorts();
         }
         #endregion
@@ -568,7 +511,7 @@ namespace hoTools.ActiveX
         #region hidePortLabelToolStripMenuItem_Click
         private void hidePortLabelToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var port = new PortServices(m_repository);
+            var port = new PortServices(_repository);
             port.changeLabelGUI(PortServices.LabelStyle.IS_HIDDEN);
         }
         #endregion
@@ -576,14 +519,14 @@ namespace hoTools.ActiveX
         #region viewPortLabelToolStripMenuItem_Click
         private void viewPortLabelToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var port = new PortServices(m_repository);
+            var port = new PortServices(_repository);
             port.changeLabelGUI(PortServices.LabelStyle.IS_SHOWN);
        }
         #endregion
         #region movePortLableLeftPositionToolStripMenuItem_Click
         private void movePortLableLeftPositionToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var port = new PortServices(m_repository);
+            var port = new PortServices(_repository);
             port.changeLabelGUI(PortServices.LabelStyle.POSITION_LEFT);
         }
         #endregion
@@ -591,7 +534,7 @@ namespace hoTools.ActiveX
         #region movePortLableRightPositionToolStripMenuItem_Click
         private void movePortLableRightPositionToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var port = new PortServices(m_repository);
+            var port = new PortServices(_repository);
             port.changeLabelGUI(PortServices.LabelStyle.POSITION_RIGHT);
         }
         #endregion
@@ -600,7 +543,7 @@ namespace hoTools.ActiveX
         #region movePortLablePlusPositionToolStripMenuItem_Click
         private void movePortLablePlusPositionToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var port = new PortServices(m_repository);
+            var port = new PortServices(_repository);
             port.changeLabelGUI(PortServices.LabelStyle.POSITION_PLUS);
         }
         #endregion
@@ -609,7 +552,7 @@ namespace hoTools.ActiveX
         #region movePortLableMinusPositionToolStripMenuItem_Click
         private void movePortLableMinusPositionToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var port = new PortServices(m_repository);
+            var port = new PortServices(_repository);
             port.changeLabelGUI(PortServices.LabelStyle.POSITION_MINUS);
         }
         #endregion
@@ -617,46 +560,46 @@ namespace hoTools.ActiveX
 
         private void connectPortsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var port = new PortServices(m_repository);
+            var port = new PortServices(_repository);
             port.connectPortsGUI();
             
         }
 
         private void connectPortsInsideComponentsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var port = new PortServices(m_repository);
+            var port = new PortServices(_repository);
             port.connectPortsInsideGUI();
         }
 
         private void deletePortsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var port = new PortServices(m_repository);
+            var port = new PortServices(_repository);
             port.deletePortsGUI();
         }
 
         private void btnLeft_Click(object sender, EventArgs e)
         {
-            EaService.moveEmbeddedLeftGUI(m_repository);
+            EaService.moveEmbeddedLeftGUI(_repository);
         }
 
         private void btnRight_Click(object sender, EventArgs e)
         {
-            EaService.moveEmbeddedRightGUI(m_repository);
+            EaService.moveEmbeddedRightGUI(_repository);
         }
 
         private void btnUp_Click(object sender, EventArgs e)
         {
-            EaService.moveEmbeddedUpGUI(m_repository);
+            EaService.moveEmbeddedUpGUI(_repository);
         }
 
         private void btnDown_Click(object sender, EventArgs e)
         {
-            EaService.moveEmbeddedDownGUI(m_repository);
+            EaService.moveEmbeddedDownGUI(_repository);
         }
 
         private void makeConnectorsUnspecifiedDirectionToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var port = new PortServices(m_repository);
+            var port = new PortServices(_repository);
             port.setConnectionDirectionUnspecifiedGUI();
         }
        
@@ -675,23 +618,23 @@ namespace hoTools.ActiveX
         // OS = "Line Style: Orthogonal Square";
         void btnLH_Click(object sender, EventArgs e)
         {
-            EaService.setLineStyle(m_repository, "LH");
+            EaService.setLineStyle(_repository, "LH");
         }
         void btnLV_Click(object sender, EventArgs e)
         {
-            EaService.setLineStyle(m_repository, "LV");
+            EaService.setLineStyle(_repository, "LV");
         }
         void btnTH_Click(object sender, EventArgs e)
         {
-            EaService.setLineStyle(m_repository, "LH");
+            EaService.setLineStyle(_repository, "LH");
         }
         void btnTV_Click(object sender, EventArgs e)
         {
-            EaService.setLineStyle(m_repository, "TV");
+            EaService.setLineStyle(_repository, "TV");
         }
         void btnOS_Click(object sender, EventArgs e)
         {
-            EaService.setLineStyle(m_repository, "OS");
+            EaService.setLineStyle(_repository, "OS");
         }
         #endregion
         #region Keydown
@@ -713,7 +656,7 @@ namespace hoTools.ActiveX
         {
             if (e.KeyCode == Keys.Enter)
             {
-                EaService.runQuickSearch(m_repository, _addinSettings.quickSearchName, txtUserText.Text);
+                EaService.runQuickSearch(_repository, AddinSettings.quickSearchName, txtUserText.Text);
                 e.Handled = true;
             }
         }
@@ -722,7 +665,7 @@ namespace hoTools.ActiveX
         private void txtUserText_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             txtUserText.Text = Clipboard.GetText();
-            EaService.runQuickSearch(m_repository, _addinSettings.quickSearchName, txtUserText.Text);
+            EaService.runQuickSearch(_repository, AddinSettings.quickSearchName, txtUserText.Text);
         }
         #endregion
         #endregion
@@ -777,6 +720,7 @@ namespace hoTools.ActiveX
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openScriptAndQueryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.doToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.createActivityForOperationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -821,7 +765,6 @@ namespace hoTools.ActiveX
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.lbl_Release = new System.Windows.Forms.Label();
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this.toolStrip1.SuspendLayout();
             this.toolStrip2.SuspendLayout();
@@ -1044,7 +987,7 @@ namespace hoTools.ActiveX
             // 
             this.txtUserText.Location = new System.Drawing.Point(0, 24);
             this.txtUserText.Name = "txtUserText";
-            this.txtUserText.Size = new System.Drawing.Size(298, 22);
+            this.txtUserText.Size = new System.Drawing.Size(298, 20);
             this.txtUserText.TabIndex = 27;
             this.toolTip.SetToolTip(this.txtUserText, "Run EA Search \'Quick View\' with:\r\n- Input text + Enter\r\n- Double left Click with " +
         "insert Clipboard and start search\r\n\r\nSearch for:\r\n- Class / Component / Requirem" +
@@ -1065,7 +1008,7 @@ namespace hoTools.ActiveX
             this.toolStripBtn15});
             this.toolStrip1.Location = new System.Drawing.Point(3, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(127, 27);
+            this.toolStrip1.Size = new System.Drawing.Size(127, 25);
             this.toolStrip1.TabIndex = 0;
             this.toolTip.SetToolTip(this.toolStrip1, "Services (configurable by settings)");
             // 
@@ -1074,7 +1017,7 @@ namespace hoTools.ActiveX
             this.toolStripBtn11.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.toolStripBtn11.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripBtn11.Name = "toolStripBtn11";
-            this.toolStripBtn11.Size = new System.Drawing.Size(23, 24);
+            this.toolStripBtn11.Size = new System.Drawing.Size(23, 22);
             this.toolStripBtn11.Text = "1";
             this.toolStripBtn11.Click += new System.EventHandler(this.toolStripBtn11_Click);
             // 
@@ -1083,7 +1026,7 @@ namespace hoTools.ActiveX
             this.toolStripBtn12.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.toolStripBtn12.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripBtn12.Name = "toolStripBtn12";
-            this.toolStripBtn12.Size = new System.Drawing.Size(23, 24);
+            this.toolStripBtn12.Size = new System.Drawing.Size(23, 22);
             this.toolStripBtn12.Text = "2";
             this.toolStripBtn12.Click += new System.EventHandler(this.toolStripBtn12_Click);
             // 
@@ -1092,7 +1035,7 @@ namespace hoTools.ActiveX
             this.toolStripBtn13.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.toolStripBtn13.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripBtn13.Name = "toolStripBtn13";
-            this.toolStripBtn13.Size = new System.Drawing.Size(23, 24);
+            this.toolStripBtn13.Size = new System.Drawing.Size(23, 22);
             this.toolStripBtn13.Text = "3";
             this.toolStripBtn13.Click += new System.EventHandler(this.toolStripBtn13_Click);
             // 
@@ -1101,7 +1044,7 @@ namespace hoTools.ActiveX
             this.toolStripBtn14.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.toolStripBtn14.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripBtn14.Name = "toolStripBtn14";
-            this.toolStripBtn14.Size = new System.Drawing.Size(23, 24);
+            this.toolStripBtn14.Size = new System.Drawing.Size(23, 22);
             this.toolStripBtn14.Text = "4";
             this.toolStripBtn14.Click += new System.EventHandler(this.toolStripBtn14_Click);
             // 
@@ -1110,7 +1053,7 @@ namespace hoTools.ActiveX
             this.toolStripBtn15.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.toolStripBtn15.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripBtn15.Name = "toolStripBtn15";
-            this.toolStripBtn15.Size = new System.Drawing.Size(23, 24);
+            this.toolStripBtn15.Size = new System.Drawing.Size(23, 22);
             this.toolStripBtn15.Text = "5";
             this.toolStripBtn15.Click += new System.EventHandler(this.toolStripBtn15_Click);
             // 
@@ -1126,7 +1069,7 @@ namespace hoTools.ActiveX
             this.toolStripBtn5});
             this.toolStrip2.Location = new System.Drawing.Point(130, 0);
             this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Size = new System.Drawing.Size(127, 27);
+            this.toolStrip2.Size = new System.Drawing.Size(127, 25);
             this.toolStrip2.TabIndex = 1;
             this.toolTip.SetToolTip(this.toolStrip2, "Shortcuts (configurable by settings)");
             // 
@@ -1135,7 +1078,7 @@ namespace hoTools.ActiveX
             this.toolStripBtn1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.toolStripBtn1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripBtn1.Name = "toolStripBtn1";
-            this.toolStripBtn1.Size = new System.Drawing.Size(23, 24);
+            this.toolStripBtn1.Size = new System.Drawing.Size(23, 22);
             this.toolStripBtn1.Text = "1";
             this.toolStripBtn1.Click += new System.EventHandler(this.toolStripBtn1_Click);
             // 
@@ -1144,7 +1087,7 @@ namespace hoTools.ActiveX
             this.toolStripBtn2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.toolStripBtn2.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripBtn2.Name = "toolStripBtn2";
-            this.toolStripBtn2.Size = new System.Drawing.Size(23, 24);
+            this.toolStripBtn2.Size = new System.Drawing.Size(23, 22);
             this.toolStripBtn2.Text = "2";
             this.toolStripBtn2.Click += new System.EventHandler(this.toolStripBtn2_Click);
             // 
@@ -1153,7 +1096,7 @@ namespace hoTools.ActiveX
             this.toolStripBtn3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.toolStripBtn3.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripBtn3.Name = "toolStripBtn3";
-            this.toolStripBtn3.Size = new System.Drawing.Size(23, 24);
+            this.toolStripBtn3.Size = new System.Drawing.Size(23, 22);
             this.toolStripBtn3.Text = "3";
             this.toolStripBtn3.Click += new System.EventHandler(this.toolStripBtn3_Click);
             // 
@@ -1162,7 +1105,7 @@ namespace hoTools.ActiveX
             this.toolStripBtn4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.toolStripBtn4.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripBtn4.Name = "toolStripBtn4";
-            this.toolStripBtn4.Size = new System.Drawing.Size(23, 24);
+            this.toolStripBtn4.Size = new System.Drawing.Size(23, 22);
             this.toolStripBtn4.Text = "4";
             this.toolStripBtn4.Click += new System.EventHandler(this.toolStripBtn4_Click);
             // 
@@ -1171,7 +1114,7 @@ namespace hoTools.ActiveX
             this.toolStripBtn5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.toolStripBtn5.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripBtn5.Name = "toolStripBtn5";
-            this.toolStripBtn5.Size = new System.Drawing.Size(23, 24);
+            this.toolStripBtn5.Size = new System.Drawing.Size(23, 22);
             this.toolStripBtn5.Text = "5";
             this.toolStripBtn5.Click += new System.EventHandler(this.toolStripBtn5_Click);
             // 
@@ -1283,7 +1226,7 @@ namespace hoTools.ActiveX
             this.label1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(304, 27);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(94, 20);
+            this.label1.Size = new System.Drawing.Size(76, 15);
             this.label1.TabIndex = 21;
             this.label1.Text = "Quick Search";
             this.label1.ControlRemoved += new System.Windows.Forms.ControlEventHandler(this.label1_ControlRemoved);
@@ -1299,24 +1242,32 @@ namespace hoTools.ActiveX
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(398, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(398, 24);
             this.menuStrip1.TabIndex = 22;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.settingsToolStripMenuItem});
+            this.settingsToolStripMenuItem,
+            this.openScriptAndQueryToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(44, 24);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "&File";
             // 
             // settingsToolStripMenuItem
             // 
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(137, 26);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
             this.settingsToolStripMenuItem.Text = "&Settings";
             this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
+            // 
+            // openScriptAndQueryToolStripMenuItem
+            // 
+            this.openScriptAndQueryToolStripMenuItem.Name = "openScriptAndQueryToolStripMenuItem";
+            this.openScriptAndQueryToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
+            this.openScriptAndQueryToolStripMenuItem.Text = "&Open Script and Query";
+            this.openScriptAndQueryToolStripMenuItem.ToolTipText = "Open anothe Addin page Script and Query";
             // 
             // doToolStripMenuItem
             // 
@@ -1328,40 +1279,40 @@ namespace hoTools.ActiveX
             this.changeAuthorToolStripMenuItem,
             this.changeAuthorRecursiveToolStripMenuItem});
             this.doToolStripMenuItem.Name = "doToolStripMenuItem";
-            this.doToolStripMenuItem.Size = new System.Drawing.Size(41, 24);
+            this.doToolStripMenuItem.Size = new System.Drawing.Size(34, 20);
             this.doToolStripMenuItem.Text = "&Do";
             this.doToolStripMenuItem.ToolTipText = "Change Author of selected Package / Element";
             // 
             // createActivityForOperationToolStripMenuItem
             // 
             this.createActivityForOperationToolStripMenuItem.Name = "createActivityForOperationToolStripMenuItem";
-            this.createActivityForOperationToolStripMenuItem.Size = new System.Drawing.Size(296, 26);
+            this.createActivityForOperationToolStripMenuItem.Size = new System.Drawing.Size(242, 22);
             this.createActivityForOperationToolStripMenuItem.Text = "&Create Activity for Operation";
             this.createActivityForOperationToolStripMenuItem.Click += new System.EventHandler(this.createActivityForOperationToolStripMenuItem_Click);
             // 
             // showFolderToolStripMenuItem
             // 
             this.showFolderToolStripMenuItem.Name = "showFolderToolStripMenuItem";
-            this.showFolderToolStripMenuItem.Size = new System.Drawing.Size(296, 26);
+            this.showFolderToolStripMenuItem.Size = new System.Drawing.Size(242, 22);
             this.showFolderToolStripMenuItem.Text = "&Show Folder";
             this.showFolderToolStripMenuItem.Click += new System.EventHandler(this.showFolderToolStripMenuItem_Click);
             // 
             // copyGUIDSQLToClipboardToolStripMenuItem
             // 
             this.copyGUIDSQLToClipboardToolStripMenuItem.Name = "copyGUIDSQLToClipboardToolStripMenuItem";
-            this.copyGUIDSQLToClipboardToolStripMenuItem.Size = new System.Drawing.Size(296, 26);
+            this.copyGUIDSQLToClipboardToolStripMenuItem.Size = new System.Drawing.Size(242, 22);
             this.copyGUIDSQLToClipboardToolStripMenuItem.Text = "&SQL select & update/create/insert";
             this.copyGUIDSQLToClipboardToolStripMenuItem.Click += new System.EventHandler(this.copyGUIDSQLToClipboardToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(293, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(239, 6);
             // 
             // changeAuthorToolStripMenuItem
             // 
             this.changeAuthorToolStripMenuItem.Name = "changeAuthorToolStripMenuItem";
-            this.changeAuthorToolStripMenuItem.Size = new System.Drawing.Size(296, 26);
+            this.changeAuthorToolStripMenuItem.Size = new System.Drawing.Size(242, 22);
             this.changeAuthorToolStripMenuItem.Text = "Change Author";
             this.changeAuthorToolStripMenuItem.ToolTipText = "Change Author for:\r\n- Packages\r\n- Element";
             this.changeAuthorToolStripMenuItem.Click += new System.EventHandler(this.changeAuthorToolStripMenuItem_Click);
@@ -1369,7 +1320,7 @@ namespace hoTools.ActiveX
             // changeAuthorRecursiveToolStripMenuItem
             // 
             this.changeAuthorRecursiveToolStripMenuItem.Name = "changeAuthorRecursiveToolStripMenuItem";
-            this.changeAuthorRecursiveToolStripMenuItem.Size = new System.Drawing.Size(296, 26);
+            this.changeAuthorRecursiveToolStripMenuItem.Size = new System.Drawing.Size(242, 22);
             this.changeAuthorRecursiveToolStripMenuItem.Text = "Change Author recursive";
             this.changeAuthorRecursiveToolStripMenuItem.ToolTipText = "Change Author recursive for:\r\n- Packages\r\n- Elements";
             this.changeAuthorRecursiveToolStripMenuItem.Click += new System.EventHandler(this.changeAuthorRecursiveToolStripMenuItem_Click);
@@ -1387,14 +1338,14 @@ namespace hoTools.ActiveX
             this.setSvnModuleTaggedValuesToolStripMenuItem,
             this.setSvnModuleTaggedValuesrecursiveToolStripMenuItem});
             this.versionControlToolStripMenuItem.Name = "versionControlToolStripMenuItem";
-            this.versionControlToolStripMenuItem.Size = new System.Drawing.Size(39, 24);
+            this.versionControlToolStripMenuItem.Size = new System.Drawing.Size(34, 20);
             this.versionControlToolStripMenuItem.Text = "&VC";
             this.versionControlToolStripMenuItem.ToolTipText = "Functions related to Version Control";
             // 
             // changeXMLFileToolStripMenuItem
             // 
             this.changeXMLFileToolStripMenuItem.Name = "changeXMLFileToolStripMenuItem";
-            this.changeXMLFileToolStripMenuItem.Size = new System.Drawing.Size(356, 26);
+            this.changeXMLFileToolStripMenuItem.Size = new System.Drawing.Size(291, 22);
             this.changeXMLFileToolStripMenuItem.Text = "&Change XML file";
             this.changeXMLFileToolStripMenuItem.ToolTipText = "Change the *.xml file patch for a Version controlled package";
             this.changeXMLFileToolStripMenuItem.Click += new System.EventHandler(this.changeXMLFileToolStripMenuItem_Click);
@@ -1402,7 +1353,7 @@ namespace hoTools.ActiveX
             // showFolderVCorCodeToolStripMenuItem
             // 
             this.showFolderVCorCodeToolStripMenuItem.Name = "showFolderVCorCodeToolStripMenuItem";
-            this.showFolderVCorCodeToolStripMenuItem.Size = new System.Drawing.Size(356, 26);
+            this.showFolderVCorCodeToolStripMenuItem.Size = new System.Drawing.Size(291, 22);
             this.showFolderVCorCodeToolStripMenuItem.Text = "Show folder VC controlled package";
             this.showFolderVCorCodeToolStripMenuItem.ToolTipText = "Show the folder of the VC controlled package.\r\n\r\nNote:\r\nIn settings you may choos" +
     "e your file manager. \r\nDefault: Explorer.exe";
@@ -1411,7 +1362,7 @@ namespace hoTools.ActiveX
             // getVCLatesrecursiveToolStripMenuItem
             // 
             this.getVCLatesrecursiveToolStripMenuItem.Name = "getVCLatesrecursiveToolStripMenuItem";
-            this.getVCLatesrecursiveToolStripMenuItem.Size = new System.Drawing.Size(356, 26);
+            this.getVCLatesrecursiveToolStripMenuItem.Size = new System.Drawing.Size(291, 22);
             this.getVCLatesrecursiveToolStripMenuItem.Text = "Get VC latest (recursive)";
             this.getVCLatesrecursiveToolStripMenuItem.ToolTipText = "Get Version Control latest package (recursive).";
             this.getVCLatesrecursiveToolStripMenuItem.Click += new System.EventHandler(this.getVCLatesrecursiveToolStripMenuItem_Click);
@@ -1419,33 +1370,33 @@ namespace hoTools.ActiveX
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(353, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(288, 6);
             // 
             // showTortoiseLogToolStripMenuItem
             // 
             this.showTortoiseLogToolStripMenuItem.Name = "showTortoiseLogToolStripMenuItem";
-            this.showTortoiseLogToolStripMenuItem.Size = new System.Drawing.Size(356, 26);
+            this.showTortoiseLogToolStripMenuItem.Size = new System.Drawing.Size(291, 22);
             this.showTortoiseLogToolStripMenuItem.Text = "Show Tortoise Log";
             this.showTortoiseLogToolStripMenuItem.Click += new System.EventHandler(this.showTortoiseLogToolStripMenuItem_Click);
             // 
             // showTortoiseRepoBrowserToolStripMenuItem
             // 
             this.showTortoiseRepoBrowserToolStripMenuItem.Name = "showTortoiseRepoBrowserToolStripMenuItem";
-            this.showTortoiseRepoBrowserToolStripMenuItem.Size = new System.Drawing.Size(356, 26);
+            this.showTortoiseRepoBrowserToolStripMenuItem.Size = new System.Drawing.Size(291, 22);
             this.showTortoiseRepoBrowserToolStripMenuItem.Text = "Show Tortoise Repo Browser";
             this.showTortoiseRepoBrowserToolStripMenuItem.Click += new System.EventHandler(this.showTortoiseRepoBrowserToolStripMenuItem_Click);
             // 
             // setSvnKeywordsToolStripMenuItem
             // 
             this.setSvnKeywordsToolStripMenuItem.Name = "setSvnKeywordsToolStripMenuItem";
-            this.setSvnKeywordsToolStripMenuItem.Size = new System.Drawing.Size(356, 26);
+            this.setSvnKeywordsToolStripMenuItem.Size = new System.Drawing.Size(291, 22);
             this.setSvnKeywordsToolStripMenuItem.Text = "Set svn Keywords";
             this.setSvnKeywordsToolStripMenuItem.Click += new System.EventHandler(this.setSvnKeywordsToolStripMenuItem_Click);
             // 
             // setSvnModuleTaggedValuesToolStripMenuItem
             // 
             this.setSvnModuleTaggedValuesToolStripMenuItem.Name = "setSvnModuleTaggedValuesToolStripMenuItem";
-            this.setSvnModuleTaggedValuesToolStripMenuItem.Size = new System.Drawing.Size(356, 26);
+            this.setSvnModuleTaggedValuesToolStripMenuItem.Size = new System.Drawing.Size(291, 22);
             this.setSvnModuleTaggedValuesToolStripMenuItem.Text = "Set svn Module Tagged Values";
             this.setSvnModuleTaggedValuesToolStripMenuItem.ToolTipText = "Set the svn Tagged Values of module for:\r\n- svnDate\r\n- svnRevision";
             this.setSvnModuleTaggedValuesToolStripMenuItem.Click += new System.EventHandler(this.setSvnModuleTaggedValuesToolStripMenuItem_Click);
@@ -1453,7 +1404,7 @@ namespace hoTools.ActiveX
             // setSvnModuleTaggedValuesrecursiveToolStripMenuItem
             // 
             this.setSvnModuleTaggedValuesrecursiveToolStripMenuItem.Name = "setSvnModuleTaggedValuesrecursiveToolStripMenuItem";
-            this.setSvnModuleTaggedValuesrecursiveToolStripMenuItem.Size = new System.Drawing.Size(356, 26);
+            this.setSvnModuleTaggedValuesrecursiveToolStripMenuItem.Size = new System.Drawing.Size(291, 22);
             this.setSvnModuleTaggedValuesrecursiveToolStripMenuItem.Text = "Set svn Module Tagged Values (recursive)";
             this.setSvnModuleTaggedValuesrecursiveToolStripMenuItem.ToolTipText = "Set the svn Tagged Values of module (recursive packages) for:\r\n- svnDate\r\n- svnRe" +
     "vision\r\n\r\nSelect a package to proceed all recursive package.";
@@ -1486,14 +1437,14 @@ namespace hoTools.ActiveX
             this.toolStripSeparator9,
             this.orderDiagramItemsToolStripMenuItem});
             this.portToolStripMenuItem.Name = "portToolStripMenuItem";
-            this.portToolStripMenuItem.Size = new System.Drawing.Size(47, 24);
+            this.portToolStripMenuItem.Size = new System.Drawing.Size(41, 20);
             this.portToolStripMenuItem.Text = "&Port";
             this.portToolStripMenuItem.ToolTipText = "Functions related to port like:\r\n- Visibility\r\n- Move\r\n- Connect";
             // 
             // movePortsToolStripMenuItem
             // 
             this.movePortsToolStripMenuItem.Name = "movePortsToolStripMenuItem";
-            this.movePortsToolStripMenuItem.Size = new System.Drawing.Size(459, 26);
+            this.movePortsToolStripMenuItem.Size = new System.Drawing.Size(375, 22);
             this.movePortsToolStripMenuItem.Text = "&Copy ports";
             this.movePortsToolStripMenuItem.ToolTipText = "Copy Ports from selected sources to last selected target.\r\nSources:\r\n- 1 or more " +
     "Classes/Components\r\n- 1 or more Ports\r\nTarget (last selected item): \r\n- Class\r\n-" +
@@ -1503,12 +1454,12 @@ namespace hoTools.ActiveX
             // toolStripSeparator7
             // 
             this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new System.Drawing.Size(456, 6);
+            this.toolStripSeparator7.Size = new System.Drawing.Size(372, 6);
             // 
             // deletePortsToolStripMenuItem
             // 
             this.deletePortsToolStripMenuItem.Name = "deletePortsToolStripMenuItem";
-            this.deletePortsToolStripMenuItem.Size = new System.Drawing.Size(459, 26);
+            this.deletePortsToolStripMenuItem.Size = new System.Drawing.Size(375, 22);
             this.deletePortsToolStripMenuItem.Text = "&Delete Ports";
             this.deletePortsToolStripMenuItem.ToolTipText = "Delete Ports\r\n- selected Ports\r\n- all Ports of selected Elements \r\n-- Class, Comp" +
     "onent";
@@ -1517,12 +1468,12 @@ namespace hoTools.ActiveX
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(456, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(372, 6);
             // 
             // connectPortsToolStripMenuItem
             // 
             this.connectPortsToolStripMenuItem.Name = "connectPortsToolStripMenuItem";
-            this.connectPortsToolStripMenuItem.Size = new System.Drawing.Size(459, 26);
+            this.connectPortsToolStripMenuItem.Size = new System.Drawing.Size(375, 22);
             this.connectPortsToolStripMenuItem.Text = "&Connect Ports between Components";
             this.connectPortsToolStripMenuItem.ToolTipText = "Connect all Ports of:\r\n- Selected Class / Components\r\n- Selected Ports\r\nto each s" +
     "elected Class / Component / port with the same port name.\r\n";
@@ -1531,19 +1482,19 @@ namespace hoTools.ActiveX
             // connectPortsInsideComponentsToolStripMenuItem
             // 
             this.connectPortsInsideComponentsToolStripMenuItem.Name = "connectPortsInsideComponentsToolStripMenuItem";
-            this.connectPortsInsideComponentsToolStripMenuItem.Size = new System.Drawing.Size(459, 26);
+            this.connectPortsInsideComponentsToolStripMenuItem.Size = new System.Drawing.Size(375, 22);
             this.connectPortsInsideComponentsToolStripMenuItem.Text = "&Connect Ports inside Components";
             this.connectPortsInsideComponentsToolStripMenuItem.Click += new System.EventHandler(this.connectPortsInsideComponentsToolStripMenuItem_Click);
             // 
             // toolStripSeparator8
             // 
             this.toolStripSeparator8.Name = "toolStripSeparator8";
-            this.toolStripSeparator8.Size = new System.Drawing.Size(456, 6);
+            this.toolStripSeparator8.Size = new System.Drawing.Size(372, 6);
             // 
             // makeConnectorsUnspecifiedDirectionToolStripMenuItem
             // 
             this.makeConnectorsUnspecifiedDirectionToolStripMenuItem.Name = "makeConnectorsUnspecifiedDirectionToolStripMenuItem";
-            this.makeConnectorsUnspecifiedDirectionToolStripMenuItem.Size = new System.Drawing.Size(459, 26);
+            this.makeConnectorsUnspecifiedDirectionToolStripMenuItem.Size = new System.Drawing.Size(375, 22);
             this.makeConnectorsUnspecifiedDirectionToolStripMenuItem.Text = "&Make Connectors: Unspecified direction";
             this.makeConnectorsUnspecifiedDirectionToolStripMenuItem.ToolTipText = "Make all directions of connections of Port / Element unspecified.\r\n\r\nSelect Eleme" +
     "nt to make direction of all Port connections to unspecified.";
@@ -1552,12 +1503,12 @@ namespace hoTools.ActiveX
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(456, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(372, 6);
             // 
             // showPortsInDiagramObjectsToolStripMenuItem
             // 
             this.showPortsInDiagramObjectsToolStripMenuItem.Name = "showPortsInDiagramObjectsToolStripMenuItem";
-            this.showPortsInDiagramObjectsToolStripMenuItem.Size = new System.Drawing.Size(459, 26);
+            this.showPortsInDiagramObjectsToolStripMenuItem.Size = new System.Drawing.Size(375, 22);
             this.showPortsInDiagramObjectsToolStripMenuItem.Text = "&Show Ports on Diagram";
             this.showPortsInDiagramObjectsToolStripMenuItem.ToolTipText = "Show the ports on diagram of:\r\n- Selected Class / Component\r\n";
             this.showPortsInDiagramObjectsToolStripMenuItem.Click += new System.EventHandler(this.showPortsInDiagramObjectsToolStripMenuItem_Click);
@@ -1565,7 +1516,7 @@ namespace hoTools.ActiveX
             // showSendingPortsLeftRecievingPortsRightToolStripMenuItem
             // 
             this.showSendingPortsLeftRecievingPortsRightToolStripMenuItem.Name = "showSendingPortsLeftRecievingPortsRightToolStripMenuItem";
-            this.showSendingPortsLeftRecievingPortsRightToolStripMenuItem.Size = new System.Drawing.Size(459, 26);
+            this.showSendingPortsLeftRecievingPortsRightToolStripMenuItem.Size = new System.Drawing.Size(375, 22);
             this.showSendingPortsLeftRecievingPortsRightToolStripMenuItem.Text = "&Show receiving Ports left, sending Ports right on Diagram";
             this.showSendingPortsLeftRecievingPortsRightToolStripMenuItem.ToolTipText = "Show receiving Ports left, sending Ports right for selected Elements in Diagram\r\n" +
     "\r\n";
@@ -1574,7 +1525,7 @@ namespace hoTools.ActiveX
             // hidePortsInDiagramToolStripMenuItem
             // 
             this.hidePortsInDiagramToolStripMenuItem.Name = "hidePortsInDiagramToolStripMenuItem";
-            this.hidePortsInDiagramToolStripMenuItem.Size = new System.Drawing.Size(459, 26);
+            this.hidePortsInDiagramToolStripMenuItem.Size = new System.Drawing.Size(375, 22);
             this.hidePortsInDiagramToolStripMenuItem.Text = "&Remove Ports from Diagram";
             this.hidePortsInDiagramToolStripMenuItem.ToolTipText = "Remove ports from Diagram:\r\n- Ports from selected Diagramelements\r\n- Selected por" +
     "ts";
@@ -1583,12 +1534,12 @@ namespace hoTools.ActiveX
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(456, 6);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(372, 6);
             // 
             // unhidePortsToolStripMenuItem
             // 
             this.unhidePortsToolStripMenuItem.Name = "unhidePortsToolStripMenuItem";
-            this.unhidePortsToolStripMenuItem.Size = new System.Drawing.Size(459, 26);
+            this.unhidePortsToolStripMenuItem.Size = new System.Drawing.Size(375, 22);
             this.unhidePortsToolStripMenuItem.Text = "&Show Port label";
             this.unhidePortsToolStripMenuItem.ToolTipText = "Show Port labels of selected:\r\n- Class / Component\r\n- Ports (embedded Elements)";
             this.unhidePortsToolStripMenuItem.Click += new System.EventHandler(this.viewPortLabelToolStripMenuItem_Click);
@@ -1596,7 +1547,7 @@ namespace hoTools.ActiveX
             // hidePortsToolStripMenuItem
             // 
             this.hidePortsToolStripMenuItem.Name = "hidePortsToolStripMenuItem";
-            this.hidePortsToolStripMenuItem.Size = new System.Drawing.Size(459, 26);
+            this.hidePortsToolStripMenuItem.Size = new System.Drawing.Size(375, 22);
             this.hidePortsToolStripMenuItem.Text = "&Hide Port label";
             this.hidePortsToolStripMenuItem.ToolTipText = "Hide Port labels of selected:\r\n- Class / Component\r\n- Ports (embedded Elements)";
             this.hidePortsToolStripMenuItem.Click += new System.EventHandler(this.hidePortLabelToolStripMenuItem_Click);
@@ -1604,50 +1555,50 @@ namespace hoTools.ActiveX
             // toolStripSeparator11
             // 
             this.toolStripSeparator11.Name = "toolStripSeparator11";
-            this.toolStripSeparator11.Size = new System.Drawing.Size(456, 6);
+            this.toolStripSeparator11.Size = new System.Drawing.Size(372, 6);
             // 
             // movePortLabelLeftToolStripMenuItem
             // 
             this.movePortLabelLeftToolStripMenuItem.Name = "movePortLabelLeftToolStripMenuItem";
-            this.movePortLabelLeftToolStripMenuItem.Size = new System.Drawing.Size(459, 26);
+            this.movePortLabelLeftToolStripMenuItem.Size = new System.Drawing.Size(375, 22);
             this.movePortLabelLeftToolStripMenuItem.Text = "&Move Port label left position";
             this.movePortLabelLeftToolStripMenuItem.Click += new System.EventHandler(this.movePortLableLeftPositionToolStripMenuItem_Click);
             // 
             // movePortLabelRightPositionToolStripMenuItem
             // 
             this.movePortLabelRightPositionToolStripMenuItem.Name = "movePortLabelRightPositionToolStripMenuItem";
-            this.movePortLabelRightPositionToolStripMenuItem.Size = new System.Drawing.Size(459, 26);
+            this.movePortLabelRightPositionToolStripMenuItem.Size = new System.Drawing.Size(375, 22);
             this.movePortLabelRightPositionToolStripMenuItem.Text = "&Move port label right position";
             this.movePortLabelRightPositionToolStripMenuItem.Click += new System.EventHandler(this.movePortLableRightPositionToolStripMenuItem_Click);
             // 
             // toolStripSeparator12
             // 
             this.toolStripSeparator12.Name = "toolStripSeparator12";
-            this.toolStripSeparator12.Size = new System.Drawing.Size(456, 6);
+            this.toolStripSeparator12.Size = new System.Drawing.Size(372, 6);
             // 
             // movePortLabelLeftToolStripMenuItem1
             // 
             this.movePortLabelLeftToolStripMenuItem1.Name = "movePortLabelLeftToolStripMenuItem1";
-            this.movePortLabelLeftToolStripMenuItem1.Size = new System.Drawing.Size(459, 26);
+            this.movePortLabelLeftToolStripMenuItem1.Size = new System.Drawing.Size(375, 22);
             this.movePortLabelLeftToolStripMenuItem1.Text = "&Move Port label left";
             this.movePortLabelLeftToolStripMenuItem1.Click += new System.EventHandler(this.movePortLableMinusPositionToolStripMenuItem_Click);
             // 
             // movePortLabelRightToolStripMenuItem
             // 
             this.movePortLabelRightToolStripMenuItem.Name = "movePortLabelRightToolStripMenuItem";
-            this.movePortLabelRightToolStripMenuItem.Size = new System.Drawing.Size(459, 26);
+            this.movePortLabelRightToolStripMenuItem.Size = new System.Drawing.Size(375, 22);
             this.movePortLabelRightToolStripMenuItem.Text = "&Move Port label right";
             this.movePortLabelRightToolStripMenuItem.Click += new System.EventHandler(this.movePortLablePlusPositionToolStripMenuItem_Click);
             // 
             // toolStripSeparator9
             // 
             this.toolStripSeparator9.Name = "toolStripSeparator9";
-            this.toolStripSeparator9.Size = new System.Drawing.Size(456, 6);
+            this.toolStripSeparator9.Size = new System.Drawing.Size(372, 6);
             // 
             // orderDiagramItemsToolStripMenuItem
             // 
             this.orderDiagramItemsToolStripMenuItem.Name = "orderDiagramItemsToolStripMenuItem";
-            this.orderDiagramItemsToolStripMenuItem.Size = new System.Drawing.Size(459, 26);
+            this.orderDiagramItemsToolStripMenuItem.Size = new System.Drawing.Size(375, 22);
             this.orderDiagramItemsToolStripMenuItem.Text = "&Order Diagram items";
             this.orderDiagramItemsToolStripMenuItem.ToolTipText = "Order selected Diagram objects alphabetically.\r\n";
             // 
@@ -1657,14 +1608,14 @@ namespace hoTools.ActiveX
             this.aboutToolStripMenuItem,
             this.helpToolStripMenuItem1});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "&Help";
             this.helpToolStripMenuItem.Click += new System.EventHandler(this.helpToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.aboutToolStripMenuItem.Text = "&About";
             this.aboutToolStripMenuItem.ToolTipText = "Information about hoTools";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
@@ -1672,22 +1623,10 @@ namespace hoTools.ActiveX
             // helpToolStripMenuItem1
             // 
             this.helpToolStripMenuItem1.Name = "helpToolStripMenuItem1";
-            this.helpToolStripMenuItem1.Size = new System.Drawing.Size(181, 26);
+            this.helpToolStripMenuItem1.Size = new System.Drawing.Size(107, 22);
             this.helpToolStripMenuItem1.Text = "&Help";
             this.helpToolStripMenuItem1.ToolTipText = "Help";
             this.helpToolStripMenuItem1.Click += new System.EventHandler(this.helpToolStripMenuItem1_Click);
-            // 
-            // lbl_Release
-            // 
-            this.lbl_Release.AutoSize = true;
-            this.lbl_Release.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.lbl_Release.Location = new System.Drawing.Point(337, 7);
-            this.lbl_Release.Name = "lbl_Release";
-            this.lbl_Release.Padding = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lbl_Release.Size = new System.Drawing.Size(58, 20);
-            this.lbl_Release.TabIndex = 26;
-            this.lbl_Release.Text = "label2";
-            this.toolTip.SetToolTip(this.lbl_Release, "AddinClass.dll AssemblyFileVersion");
             // 
             // toolStripContainer1
             // 
@@ -1695,7 +1634,7 @@ namespace hoTools.ActiveX
             // 
             // toolStripContainer1.ContentPanel
             // 
-            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(395, 0);
+            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(395, 2);
             this.toolStripContainer1.LeftToolStripPanelVisible = false;
             this.toolStripContainer1.Location = new System.Drawing.Point(3, 47);
             this.toolStripContainer1.Name = "toolStripContainer1";
@@ -1722,7 +1661,6 @@ namespace hoTools.ActiveX
             this.Controls.Add(this.btnAddFavorite);
             this.Controls.Add(this.toolStripContainer1);
             this.Controls.Add(this.txtUserText);
-            this.Controls.Add(this.lbl_Release);
             this.Controls.Add(this.btnBezier);
             this.Controls.Add(this.btnUpdateActivityParameter);
             this.Controls.Add(this.label1);
@@ -1772,11 +1710,8 @@ namespace hoTools.ActiveX
         /// </summary>
         public void parameterizeMenusAndButtons()
         {
-            bool visibleSvnVC = true;
-            if (_addinSettings.isSvnSupport == false | _addinSettings.isVcSupport == false)
-            {
-                visibleSvnVC = false;
-            }
+            bool visibleSvnVC = true && !(AddinSettings.isSvnSupport == false | AddinSettings.isVcSupport == false);
+
             showTortoiseRepoBrowserToolStripMenuItem.Visible = visibleSvnVC;
             showTortoiseLogToolStripMenuItem.Visible = visibleSvnVC;
             setSvnModuleTaggedValuesToolStripMenuItem.Visible = visibleSvnVC;
@@ -1784,14 +1719,13 @@ namespace hoTools.ActiveX
             setSvnKeywordsToolStripMenuItem.Visible = visibleSvnVC;
 
             // Vissible VC
-            bool visibleVC = true;
-            if (_addinSettings.isVcSupport == false) visibleVC = false;
+            bool visibleVC = true && AddinSettings.isVcSupport != false;
            
             getVCLatesrecursiveToolStripMenuItem.Visible = visibleVC;
             changeXMLFileToolStripMenuItem.Visible = visibleVC;
             orderDiagramItemsToolStripMenuItem.Visible = visibleVC;
 
-            if (_addinSettings.isSvnSupport == false && _addinSettings.isVcSupport == false)
+            if (AddinSettings.isSvnSupport == false && AddinSettings.isVcSupport == false)
             {
                 versionControlToolStripMenuItem.Visible = false;
             }
@@ -1801,7 +1735,7 @@ namespace hoTools.ActiveX
             }
 
             // Visual Port Support
-            bool visiblePorts = false || _addinSettings.isAdvancedPort;
+            bool visiblePorts = false || AddinSettings.isAdvancedPort;
 
             btnLeft.Visible = visiblePorts;
             btnRight.Visible = visiblePorts;
@@ -1812,9 +1746,11 @@ namespace hoTools.ActiveX
             btnLabelRight.Visible = visiblePorts;
 
             // Note in diagram support
-            bool visibleDiagramNote = false || _addinSettings.isAdvancedDiagramNote;
+            bool visibleDiagramNote = false || AddinSettings.isAdvancedDiagramNote;
             btnAddDiagramNote.Visible = visibleDiagramNote;
             btnAddElementNote.Visible = visibleDiagramNote;
+
+            //bool visibleDiagramNote = false || _addinSettings.isAdvancedDiagramNote;
 
 
         }
@@ -1822,10 +1758,10 @@ namespace hoTools.ActiveX
         #region parameterizeButtonQueries
         public void parameterizeButtonQueries()
         {
-            for (int pos = 0; pos < _addinSettings.buttonsSearch.Length; pos++)
+            for (int pos = 0; pos < AddinSettings.buttonsSearch.Length; pos++)
             {
-                if (_addinSettings.buttonsSearch[pos] == null) continue;
-                EaAddinButtons shortcut = _addinSettings.buttonsSearch[pos];
+                if (AddinSettings.buttonsSearch[pos] == null) continue;
+                EaAddinButtons shortcut = AddinSettings.buttonsSearch[pos];
                 switch (pos)
                 {
                     case 0:
@@ -1856,10 +1792,10 @@ namespace hoTools.ActiveX
         #region parameterizeButtonServices
         public void parameterizeButtonServices()
         {
-            for (int pos = 0; pos < _addinSettings.buttonsServices.Count; pos++)
+            for (int pos = 0; pos < AddinSettings.buttonsServices.Count; pos++)
             {
-                if (_addinSettings.buttonsServices[pos] == null) continue;
-                ServicesCallConfig service = _addinSettings.buttonsServices[pos];
+                if (AddinSettings.buttonsServices[pos] == null) continue;
+                ServicesCallConfig service = AddinSettings.buttonsServices[pos];
                 switch (pos)
                 {
                     case 0:

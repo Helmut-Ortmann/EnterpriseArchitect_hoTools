@@ -43,7 +43,8 @@
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>hoKeyPair.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Interop.EA">
@@ -72,6 +73,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="src\ActiveX.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="src\AddinGUI.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="src\dlgUser.cs">
@@ -108,9 +112,10 @@
     <Folder Include="Resource\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="hoKeyPair.snk" />
-  </ItemGroup>
-  <ItemGroup>
+    <ProjectReference Include="..\AddinFramework\AddinFramework.csproj">
+      <Project>{b08ae89b-5e8d-46fd-a5d8-b3db4d33fb46}</Project>
+      <Name>AddinFramework</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EaServices\EaServices.csproj">
       <Project>{dfbedf5e-fc7f-4269-a0a6-f9b9e86dac90}</Project>
       <Name>EaServices</Name>
@@ -119,6 +124,9 @@
       <Project>{9376680e-9420-4fc1-8de8-4311fca18efc}</Project>
       <Name>Util</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="hoKeyPair.snk" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
