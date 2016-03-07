@@ -27,7 +27,6 @@ namespace hoTools.Scripts
         List<Script> _lscripts = null;  // list off all scripts
         DataTable _tableFunctions = null; // Scripts and Functions
 
-        Script _script = null;
 
         #region Constructor
         public ScriptGUI()
@@ -86,6 +85,8 @@ namespace hoTools.Scripts
         {
             dataGridViewScripts.DataSource = null;
             _tableFunctions = new DataTable();
+            DataColumn functionScriptObj = new DataColumn("ScriptObj", typeof(Script));
+            DataColumn functionFunctionObj = new DataColumn("FunctionObj", typeof(ScriptFunction));
             DataColumn functionScriptColumn = new DataColumn("Script", typeof(string));
             DataColumn functionLanguageColumn = new DataColumn("Language", typeof(string));
             DataColumn functionGroupColumn = new DataColumn("Group", typeof(string));
@@ -95,6 +96,8 @@ namespace hoTools.Scripts
             // add columns
             _tableFunctions.Columns.AddRange(new DataColumn[]
                 {
+                    functionScriptObj,
+                    functionFunctionObj,
                     functionScriptColumn,
                     functionLanguageColumn,
                     functionGroupColumn,
@@ -166,22 +169,34 @@ namespace hoTools.Scripts
 
         }
 
+        /// <summary>
+        /// Run the script under the button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnRunScript_Click(object sender, EventArgs e)
         {
+            //DataRow[] rowToRun = _tableFunctions.Select();
             foreach (DataGridViewRow row in this.dataGridViewScripts.SelectedRows)
             {
-                Script selScript = row.DataBoundItem as Script;
-                if (selScript != null)
-                {
-                    string s = "";
-                    foreach (ScriptFunction function in selScript.functions)
-                    {
-                        //s = string.Format("Function '{0}' function:'{1} NumberOfParameters:{2}", function.fullName, function.name, function.numberOfParameters);
-                        s = s + "\n" + $"Fullname '{function.fullName}' Function:'{ function.name} NumberOfParameters:{function.numberOfParameters}";
-                    }
-                    MessageBox.Show(s, "Script:" + selScript.displayName);
+                Object o = row.DataBoundItem;
+                DataRowView rowToRunView = row.DataBoundItem as DataRowView;
+                DataRow rowToRun = rowToRunView.Row;
+                string s1 = rowToRun["Script"] as string;
+                string s2 = rowToRun["Language"] as string;
+                int i3 = (int)rowToRun["ParCount"];
+                Object o1 = rowToRun["ScriptObj"] as object;
+                Object o2 = rowToRun["FunctionObj"] as object;
+                Object o3 = rowToRun[0] as object;
+                Object o4 = rowToRun[1] as object;
+                var o5 = rowToRun[0] as Script;
+                var o6 = rowToRun[1] as ScriptFunction;
 
-                }
+                ScriptFunction function = rowToRun["FunctionObj"] as ScriptFunction;
+                Script script = rowToRun["ScriptObj"] as Script;
+                String s = $"Fullname '{function.fullName}' Function:'{ function.name} NumberOfParameters:{function.numberOfParameters}";
+                MessageBox.Show(s, "Script:" + script.displayName);
+
             }
         }
     }
