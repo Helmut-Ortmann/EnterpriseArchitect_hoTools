@@ -42,12 +42,32 @@ namespace hoTools.Scripts
         private void initDataGrid()
         {
             dataGridViewScripts.AutoGenerateColumns = false;
+
             dataGridViewScripts.DataSource = null;
-            DataGridViewTextBoxColumn col = new DataGridViewTextBoxColumn();
+
+            DataGridViewTextBoxColumn col;
+
+            /*
+            // to harbour the Script object
+            col = new DataGridViewTextBoxColumn();
+            col.DataPropertyName = "ScriptObj";
+            col.Visible = false;
+            dataGridViewScripts.Columns.Add(col);
+
+            // to harbour the ScriptFunction object
+            col = new DataGridViewTextBoxColumn();
+            col.DataPropertyName = "FunctionObj";
+            col.Visible = false;
+            dataGridViewScripts.Columns.Add(col);
+            */
+
+
+            col = new DataGridViewTextBoxColumn();
             col.DataPropertyName = "Script";
             col.Name = "Script";
             col.HeaderText = "Script";
             dataGridViewScripts.Columns.Add(col);
+
 
             col = new DataGridViewTextBoxColumn();
             col.DataPropertyName = "Language";
@@ -152,12 +172,14 @@ namespace hoTools.Scripts
             foreach (Script script in _lscripts)
             {
                 DataRow newRow = _tableFunctions.NewRow();
+                newRow["ScriptObj"] = script;
                 newRow["Script"] = script.name;
                 newRow["Language"] = script.languageName;
                 newRow["Group"] = script.groupName;
                 newRow["Err"] = script.errorMessage;
                 foreach (ScriptFunction function in script.functions)
                 {
+                    newRow["FunctionObj"] = function;
                     newRow["Function"] = function.name;
                     newRow["ParCount"] = function.numberOfParameters;
                 }
@@ -179,23 +201,32 @@ namespace hoTools.Scripts
             //DataRow[] rowToRun = _tableFunctions.Select();
             foreach (DataGridViewRow row in this.dataGridViewScripts.SelectedRows)
             {
-                Object o = row.DataBoundItem;
                 DataRowView rowToRunView = row.DataBoundItem as DataRowView;
                 DataRow rowToRun = rowToRunView.Row;
-                string s1 = rowToRun["Script"] as string;
-                string s2 = rowToRun["Language"] as string;
-                int i3 = (int)rowToRun["ParCount"];
-                Object o1 = rowToRun["ScriptObj"] as object;
-                Object o2 = rowToRun["FunctionObj"] as object;
-                Object o3 = rowToRun[0] as object;
-                Object o4 = rowToRun[1] as object;
-                var o5 = rowToRun[0] as Script;
-                var o6 = rowToRun[1] as ScriptFunction;
+                var scriptName = rowToRun["Script"] as string;
+                var language = rowToRun["Language"] as string;
+                var functionName = rowToRun["Function"] as string;
+                var parCount = (int)rowToRun["ParCount"];
+                var script = rowToRun["ScriptObj"] as Script;
+                var scriptFunction = rowToRun["FunctionObj"] as ScriptFunction;
 
-                ScriptFunction function = rowToRun["FunctionObj"] as ScriptFunction;
-                Script script = rowToRun["ScriptObj"] as Script;
-                String s = $"Fullname '{function.fullName}' Function:'{ function.name} NumberOfParameters:{function.numberOfParameters}";
+                string s = $"Fullname '{scriptName}' Function:'{ functionName} NumberOfParameters:{parCount}";
                 MessageBox.Show(s, "Script:" + script.displayName);
+                object[] par = { script, "2222" };
+                var par1 = par[0] as Script;
+                string name = par1.name;
+                string par2 = par[1] as string;
+                try
+                {
+                    // run Script
+                    
+                    scriptFunction.execute(par);
+                    
+                }
+                catch (Exception e1)
+                {
+                    MessageBox.Show(e1.ToString(), $"Error run Script:{scriptName}:{functionName}()") ;
+                }
 
             }
         }
