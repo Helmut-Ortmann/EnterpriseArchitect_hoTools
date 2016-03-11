@@ -50,7 +50,7 @@ namespace EAAddinFramework.Utils
         {
             object obj = Marshal.GetActiveObject("EA.App");
             EaApp = obj as EA.App;
-            this.Repository = EaApp.Repository;
+            initialize(EaApp.Repository);
         }
         /// <summary>
         /// Create a Model
@@ -58,9 +58,20 @@ namespace EAAddinFramework.Utils
         /// <param name="Repository"></param>
         public Model(EA.Repository Repository)
         {
-            this.Repository = Repository;
+            initialize(Repository);
         }
         #endregion
+        /// <summary>
+        /// Initialize an Repository Model object
+        /// Intended to use from a scripting environment
+        /// </summary>
+        /// <param name="Repository"></param>
+        public void initialize(EA.Repository Repository)
+        {
+            this.Repository = Repository; 
+        }
+
+
         /// <summary>
         /// returns the full path of the running ea.exe
         /// </summary>

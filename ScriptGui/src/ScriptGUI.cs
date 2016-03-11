@@ -7,6 +7,8 @@ using hoTools.ActiveX;
 using System.Collections.Generic;
 using EAAddinFramework.Utils;
 
+using System.Drawing;
+
 
 
 namespace hoTools.Scripts
@@ -192,15 +194,25 @@ namespace hoTools.Scripts
         }
 
         /// <summary>
-        /// Run the script under the button
+        /// Run the selected scripts with:
+        /// - itemObject The selected item
+        /// - objectType ObjectType of the selected object
+        /// - Model object (only if parameter count = 3)
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnRunScript_Click(object sender, EventArgs e)
+        void btnRunScript_Click(object sender, EventArgs e)
         {
+            // get selected element and type
+            EA.ObjectType oType = Repository.GetContextItemType();
+            object oContext = Repository.GetContextObject();
+
+
+
             //DataRow[] rowToRun = _tableFunctions.Select();
-            foreach (DataGridViewRow row in this.dataGridViewScripts.SelectedRows)
+            foreach (DataGridViewRow row in dataGridViewScripts.SelectedRows)
             {
+                // get parameter of Script and selected function
                 DataRowView rowToRunView = row.DataBoundItem as DataRowView;
                 DataRow rowToRun = rowToRunView.Row;
                 var scriptName = rowToRun["Script"] as string;
@@ -210,25 +222,55 @@ namespace hoTools.Scripts
                 var script = rowToRun["ScriptObj"] as Script;
                 var scriptFunction = rowToRun["FunctionObj"] as ScriptFunction;
 
-                string s = $"Fullname '{scriptName}' Function:'{ functionName} NumberOfParameters:{parCount}";
-                MessageBox.Show(s, "Script:" + script.displayName);
-                object[] par = { script, "2222" };
-                var par1 = par[0] as Script;
-                string name = par1.name;
-                string par2 = par[1] as string;
                 try
                 {
-                    // run Script
-                    
-                    scriptFunction.execute(par);
-                    
+                    // run script according to parameter count
+                    switch (parCount) {
+                        case 2:
+                            object[] par2 = { oContext, oType };
+                            scriptFunction.execute(par2);
+                            break;
+                        case 3:
+                            object[] par3 = { oContext, oType, Model };
+                            scriptFunction.execute(par3);
+                            break;
+                        default:
+                            MessageBox.Show($"Script {scriptName} Function {functionName} has {parCount} parameter",
+                                "Script function parameter count not 2 or 3, Break!");
+                            break;
+                    }
                 }
                 catch (Exception e1)
                 {
-                    MessageBox.Show(e1.ToString(), $"Error run Script:{scriptName}:{functionName}()") ;
+                    MessageBox.Show(e1.ToString(), $"Error run Script  '{scriptName}:{functionName}()'");
                 }
+                // only one run
+                break;
 
             }
+        }
+
+        // Context item of dataGrid
+        private void contextMenuStripDataGrid_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+
+        }
+
+        private void runScriptToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow row in dataGridViewScripts.SelectedRows)
+            {
+
+            }
+        }
+
+        private void ShowErrorToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow row in dataGridViewScripts.SelectedRows)
+            {
+
+            }
+
         }
     }
 }

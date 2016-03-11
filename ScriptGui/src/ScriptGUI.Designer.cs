@@ -30,9 +30,9 @@ namespace hoTools.Scripts
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.btnLoadScripts = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -44,13 +44,22 @@ namespace hoTools.Scripts
             this.helpToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.dataGridViewScripts = new System.Windows.Forms.DataGridView();
             this.btnRunScript = new System.Windows.Forms.Button();
+            this.tabSqlPage1 = new System.Windows.Forms.TabPage();
+            this.tabSql = new System.Windows.Forms.TabControl();
+            this.txtPage1 = new System.Windows.Forms.TextBox();
+            this.contextMenuStripDataGrid = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.ShowErrorToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.runScriptToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewScripts)).BeginInit();
+            this.tabSqlPage1.SuspendLayout();
+            this.tabSql.SuspendLayout();
+            this.contextMenuStripDataGrid.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnLoadScripts
             // 
-            this.btnLoadScripts.Location = new System.Drawing.Point(16, 376);
+            this.btnLoadScripts.Location = new System.Drawing.Point(17, 435);
             this.btnLoadScripts.Name = "btnLoadScripts";
             this.btnLoadScripts.Size = new System.Drawing.Size(75, 23);
             this.btnLoadScripts.TabIndex = 2;
@@ -62,7 +71,7 @@ namespace hoTools.Scripts
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(94, 42);
+            this.label1.Location = new System.Drawing.Point(307, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(196, 25);
             this.label1.TabIndex = 1;
@@ -117,39 +126,42 @@ namespace hoTools.Scripts
             // dataGridViewScripts
             // 
             this.dataGridViewScripts.AllowUserToOrderColumns = true;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewScripts.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewScripts.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridViewScripts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewScripts.DefaultCellStyle = dataGridViewCellStyle5;
-            this.dataGridViewScripts.Location = new System.Drawing.Point(3, 205);
+            this.dataGridViewScripts.ContextMenuStrip = this.contextMenuStripDataGrid;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewScripts.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dataGridViewScripts.Location = new System.Drawing.Point(17, 279);
             this.dataGridViewScripts.Name = "dataGridViewScripts";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewScripts.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
-            this.dataGridViewScripts.Size = new System.Drawing.Size(512, 150);
+            this.dataGridViewScripts.ReadOnly = true;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewScripts.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.dataGridViewScripts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridViewScripts.Size = new System.Drawing.Size(730, 150);
             this.dataGridViewScripts.TabIndex = 3;
             // 
             // btnRunScript
             // 
-            this.btnRunScript.Location = new System.Drawing.Point(122, 375);
+            this.btnRunScript.Location = new System.Drawing.Point(98, 435);
             this.btnRunScript.Name = "btnRunScript";
             this.btnRunScript.Size = new System.Drawing.Size(75, 23);
             this.btnRunScript.TabIndex = 4;
@@ -157,10 +169,63 @@ namespace hoTools.Scripts
             this.btnRunScript.UseVisualStyleBackColor = true;
             this.btnRunScript.Click += new System.EventHandler(this.btnRunScript_Click);
             // 
+            // tabSqlPage1
+            // 
+            this.tabSqlPage1.Controls.Add(this.txtPage1);
+            this.tabSqlPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabSqlPage1.Name = "tabSqlPage1";
+            this.tabSqlPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabSqlPage1.Size = new System.Drawing.Size(736, 211);
+            this.tabSqlPage1.TabIndex = 0;
+            this.tabSqlPage1.Text = "NoName1.sql";
+            this.tabSqlPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabSql
+            // 
+            this.tabSql.Controls.Add(this.tabSqlPage1);
+            this.tabSql.Location = new System.Drawing.Point(3, 27);
+            this.tabSql.Name = "tabSql";
+            this.tabSql.SelectedIndex = 0;
+            this.tabSql.Size = new System.Drawing.Size(744, 237);
+            this.tabSql.TabIndex = 5;
+            // 
+            // txtPage1
+            // 
+            this.txtPage1.Location = new System.Drawing.Point(3, 0);
+            this.txtPage1.Multiline = true;
+            this.txtPage1.Name = "txtPage1";
+            this.txtPage1.Size = new System.Drawing.Size(733, 205);
+            this.txtPage1.TabIndex = 0;
+            // 
+            // contextMenuStripDataGrid
+            // 
+            this.contextMenuStripDataGrid.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ShowErrorToolStripMenuItem1,
+            this.runScriptToolStripMenuItem});
+            this.contextMenuStripDataGrid.Name = "contextMenuStripDataGrid";
+            this.contextMenuStripDataGrid.Size = new System.Drawing.Size(153, 70);
+            this.contextMenuStripDataGrid.Text = "C";
+            this.contextMenuStripDataGrid.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStripDataGrid_Opening);
+            // 
+            // ShowErrorToolStripMenuItem1
+            // 
+            this.ShowErrorToolStripMenuItem1.Name = "ShowErrorToolStripMenuItem1";
+            this.ShowErrorToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.ShowErrorToolStripMenuItem1.Text = "ShowError";
+            this.ShowErrorToolStripMenuItem1.Click += new System.EventHandler(this.ShowErrorToolStripMenuItem1_Click);
+            // 
+            // runScriptToolStripMenuItem
+            // 
+            this.runScriptToolStripMenuItem.Name = "runScriptToolStripMenuItem";
+            this.runScriptToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.runScriptToolStripMenuItem.Text = "RunScript";
+            this.runScriptToolStripMenuItem.Click += new System.EventHandler(this.runScriptToolStripMenuItem_Click);
+            // 
             // ScriptGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.tabSql);
             this.Controls.Add(this.btnRunScript);
             this.Controls.Add(this.dataGridViewScripts);
             this.Controls.Add(this.btnLoadScripts);
@@ -172,6 +237,10 @@ namespace hoTools.Scripts
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewScripts)).EndInit();
+            this.tabSqlPage1.ResumeLayout(false);
+            this.tabSqlPage1.PerformLayout();
+            this.tabSql.ResumeLayout(false);
+            this.contextMenuStripDataGrid.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -192,5 +261,11 @@ namespace hoTools.Scripts
         private System.Windows.Forms.Button btnLoadScripts;
         private System.Windows.Forms.DataGridView dataGridViewScripts;
         private System.Windows.Forms.Button btnRunScript;
+        private System.Windows.Forms.TabPage tabSqlPage1;
+        private System.Windows.Forms.TabControl tabSql;
+        private System.Windows.Forms.TextBox txtPage1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStripDataGrid;
+        private System.Windows.Forms.ToolStripMenuItem ShowErrorToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem runScriptToolStripMenuItem;
     }
 }
