@@ -7,7 +7,7 @@ using hoTools.ActiveX;
 using System.Collections.Generic;
 using EAAddinFramework.Utils;
 
-using System.Drawing;
+using System.IO;
 
 
 
@@ -338,7 +338,22 @@ namespace hoTools.Scripts
 
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Stream myStream;
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
 
+            saveFileDialog1.Filter = "sql files (*.sql)|*.txt|All files (*.*)|*.*";
+            saveFileDialog1.FilterIndex = 2;
+            //saveFileDialog1.DefaultExt = "sql";
+            saveFileDialog1.RestoreDirectory = true;
+
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                if ((myStream = saveFileDialog1.OpenFile()) != null)
+                {
+                    // Code to write the stream goes here.
+                    myStream.Close();
+                }
+            }
         }
     }
 }
