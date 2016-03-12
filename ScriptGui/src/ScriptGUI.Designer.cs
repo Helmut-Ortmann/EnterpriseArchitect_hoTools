@@ -43,18 +43,18 @@ namespace hoTools.Scripts
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.dataGridViewScripts = new System.Windows.Forms.DataGridView();
-            this.btnRunScript = new System.Windows.Forms.Button();
-            this.tabSqlPage1 = new System.Windows.Forms.TabPage();
-            this.tabSql = new System.Windows.Forms.TabControl();
-            this.txtPage1 = new System.Windows.Forms.TextBox();
             this.contextMenuStripDataGrid = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ShowErrorToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.runScriptToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnRunScript = new System.Windows.Forms.Button();
+            this.tabSqlPage1 = new System.Windows.Forms.TabPage();
+            this.txtPage1 = new System.Windows.Forms.TextBox();
+            this.tabSql = new System.Windows.Forms.TabControl();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewScripts)).BeginInit();
+            this.contextMenuStripDataGrid.SuspendLayout();
             this.tabSqlPage1.SuspendLayout();
             this.tabSql.SuspendLayout();
-            this.contextMenuStripDataGrid.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnLoadScripts
@@ -158,6 +158,31 @@ namespace hoTools.Scripts
             this.dataGridViewScripts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewScripts.Size = new System.Drawing.Size(730, 150);
             this.dataGridViewScripts.TabIndex = 3;
+            this.dataGridViewScripts.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dataGridViewScripts_MouseClick);
+            // 
+            // contextMenuStripDataGrid
+            // 
+            this.contextMenuStripDataGrid.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ShowErrorToolStripMenuItem1,
+            this.runScriptToolStripMenuItem});
+            this.contextMenuStripDataGrid.Name = "contextMenuStripDataGrid";
+            this.contextMenuStripDataGrid.Size = new System.Drawing.Size(129, 48);
+            this.contextMenuStripDataGrid.Text = "C";
+            this.contextMenuStripDataGrid.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStripDataGrid_Opening);
+            // 
+            // ShowErrorToolStripMenuItem1
+            // 
+            this.ShowErrorToolStripMenuItem1.Name = "ShowErrorToolStripMenuItem1";
+            this.ShowErrorToolStripMenuItem1.Size = new System.Drawing.Size(128, 22);
+            this.ShowErrorToolStripMenuItem1.Text = "ShowError";
+            this.ShowErrorToolStripMenuItem1.Click += new System.EventHandler(this.ShowErrorToolStripMenuItem1_Click);
+            // 
+            // runScriptToolStripMenuItem
+            // 
+            this.runScriptToolStripMenuItem.Name = "runScriptToolStripMenuItem";
+            this.runScriptToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
+            this.runScriptToolStripMenuItem.Text = "RunScript";
+            this.runScriptToolStripMenuItem.Click += new System.EventHandler(this.runScriptToolStripMenuItem_Click);
             // 
             // btnRunScript
             // 
@@ -180,15 +205,6 @@ namespace hoTools.Scripts
             this.tabSqlPage1.Text = "NoName1.sql";
             this.tabSqlPage1.UseVisualStyleBackColor = true;
             // 
-            // tabSql
-            // 
-            this.tabSql.Controls.Add(this.tabSqlPage1);
-            this.tabSql.Location = new System.Drawing.Point(3, 27);
-            this.tabSql.Name = "tabSql";
-            this.tabSql.SelectedIndex = 0;
-            this.tabSql.Size = new System.Drawing.Size(744, 237);
-            this.tabSql.TabIndex = 5;
-            // 
             // txtPage1
             // 
             this.txtPage1.Location = new System.Drawing.Point(3, 0);
@@ -197,29 +213,14 @@ namespace hoTools.Scripts
             this.txtPage1.Size = new System.Drawing.Size(733, 205);
             this.txtPage1.TabIndex = 0;
             // 
-            // contextMenuStripDataGrid
+            // tabSql
             // 
-            this.contextMenuStripDataGrid.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ShowErrorToolStripMenuItem1,
-            this.runScriptToolStripMenuItem});
-            this.contextMenuStripDataGrid.Name = "contextMenuStripDataGrid";
-            this.contextMenuStripDataGrid.Size = new System.Drawing.Size(153, 70);
-            this.contextMenuStripDataGrid.Text = "C";
-            this.contextMenuStripDataGrid.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStripDataGrid_Opening);
-            // 
-            // ShowErrorToolStripMenuItem1
-            // 
-            this.ShowErrorToolStripMenuItem1.Name = "ShowErrorToolStripMenuItem1";
-            this.ShowErrorToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
-            this.ShowErrorToolStripMenuItem1.Text = "ShowError";
-            this.ShowErrorToolStripMenuItem1.Click += new System.EventHandler(this.ShowErrorToolStripMenuItem1_Click);
-            // 
-            // runScriptToolStripMenuItem
-            // 
-            this.runScriptToolStripMenuItem.Name = "runScriptToolStripMenuItem";
-            this.runScriptToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.runScriptToolStripMenuItem.Text = "RunScript";
-            this.runScriptToolStripMenuItem.Click += new System.EventHandler(this.runScriptToolStripMenuItem_Click);
+            this.tabSql.Controls.Add(this.tabSqlPage1);
+            this.tabSql.Location = new System.Drawing.Point(3, 27);
+            this.tabSql.Name = "tabSql";
+            this.tabSql.SelectedIndex = 0;
+            this.tabSql.Size = new System.Drawing.Size(744, 237);
+            this.tabSql.TabIndex = 5;
             // 
             // ScriptGUI
             // 
@@ -237,10 +238,10 @@ namespace hoTools.Scripts
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewScripts)).EndInit();
+            this.contextMenuStripDataGrid.ResumeLayout(false);
             this.tabSqlPage1.ResumeLayout(false);
             this.tabSqlPage1.PerformLayout();
             this.tabSql.ResumeLayout(false);
-            this.contextMenuStripDataGrid.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 

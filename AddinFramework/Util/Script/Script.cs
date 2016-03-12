@@ -145,7 +145,8 @@ namespace EAAddinFramework.Utils
 				//the addCode didn't work, probably because of a syntax error, or unsupported syntaxt in the code
 				var iscriptControl = this.scriptController as MSScriptControl.IScriptControl;
 				this.errorMessage = e.Message + " ERROR : " + iscriptControl.Error.Description + " | Line of error: " + iscriptControl.Error.Line + " | Code error: " + iscriptControl.Error.Text;
-                MessageBox.Show("Error in loading code for script " + this.name + ": " + this.errorMessage, "Syntax error in Script");
+                // use only the error message in the Script object
+                //MessageBox.Show("Error in loading code for script " + this.name + ": " + this.errorMessage, "Syntax error in Script");
 			}
 		}
 		/// <summary>

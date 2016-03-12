@@ -29,19 +29,25 @@ namespace hoTools.Scripts
         List<Script> _lscripts = null;  // list off all scripts
         DataTable _tableFunctions = null; // Scripts and Functions
 
+        /// <summary>
+        /// The selected row in script list
+        /// </summary>
+        int rowScriptsIndex;
+
 
         #region Constructor
         public ScriptGUI()
         {
             InitializeComponent();
 
-            initDataGrid();
-            initDataTable();
+            // individual initialization
+            initScriptDataGrid();
+            initScriptDataTable();
 
         }
         #endregion
         #region initDataGrid
-        private void initDataGrid()
+        private void initScriptDataGrid()
         {
             dataGridViewScripts.AutoGenerateColumns = false;
 
@@ -49,21 +55,7 @@ namespace hoTools.Scripts
 
             DataGridViewTextBoxColumn col;
 
-            /*
-            // to harbour the Script object
-            col = new DataGridViewTextBoxColumn();
-            col.DataPropertyName = "ScriptObj";
-            col.Visible = false;
-            dataGridViewScripts.Columns.Add(col);
-
-            // to harbour the ScriptFunction object
-            col = new DataGridViewTextBoxColumn();
-            col.DataPropertyName = "FunctionObj";
-            col.Visible = false;
-            dataGridViewScripts.Columns.Add(col);
-            */
-
-
+            
             col = new DataGridViewTextBoxColumn();
             col.DataPropertyName = "Script";
             col.Name = "Script";
@@ -103,7 +95,7 @@ namespace hoTools.Scripts
         }
         #endregion
         #region initDataTable
-        private void initDataTable()
+        private void initScriptDataTable()
         {
             dataGridViewScripts.DataSource = null;
             _tableFunctions = new DataTable();
@@ -207,47 +199,42 @@ namespace hoTools.Scripts
             EA.ObjectType oType = Repository.GetContextItemType();
             object oContext = Repository.GetContextObject();
 
-
-
-            //DataRow[] rowToRun = _tableFunctions.Select();
             foreach (DataGridViewRow row in dataGridViewScripts.SelectedRows)
             {
                 // get parameter of Script and selected function
                 DataRowView rowToRunView = row.DataBoundItem as DataRowView;
                 DataRow rowToRun = rowToRunView.Row;
-                var scriptName = rowToRun["Script"] as string;
-                var language = rowToRun["Language"] as string;
-                var functionName = rowToRun["Function"] as string;
-                var parCount = (int)rowToRun["ParCount"];
-                var script = rowToRun["ScriptObj"] as Script;
                 var scriptFunction = rowToRun["FunctionObj"] as ScriptFunction;
-
-                try
-                {
-                    // run script according to parameter count
-                    switch (parCount) {
-                        case 2:
-                            object[] par2 = { oContext, oType };
-                            scriptFunction.execute(par2);
-                            break;
-                        case 3:
-                            object[] par3 = { oContext, oType, Model };
-                            scriptFunction.execute(par3);
-                            break;
-                        default:
-                            MessageBox.Show($"Script {scriptName} Function {functionName} has {parCount} parameter",
-                                "Script function parameter count not 2 or 3, Break!");
-                            break;
-                    }
-                }
-                catch (Exception e1)
-                {
-                    MessageBox.Show(e1.ToString(), $"Error run Script  '{scriptName}:{functionName}()'");
-                }
-                // only one run
-                break;
+                runScriptFromContext(scriptFunction, oType, oContext);
 
             }
+        }
+        /// <summary>
+        /// Run function for EA item of arbitrary type
+        /// - If parameter count = 2 it calls the function with oType, oContext
+        /// - If parameter count = 3 it calls the funtion with oType, oContext, Model
+        /// </summary>
+        /// <param name="function">Function</param>
+        /// <param name="oType">EA Object type</param>
+        /// <param name="oContext">EA Object</param>
+        /// <returns></returns>
+        private bool runScriptFromContext(ScriptFunction function, EA.ObjectType oType, object oContext)
+        {
+                // run script according to parameter count
+                switch (function.numberOfParameters)
+                {
+                    case 2:
+                        object[] par2 = { oContext, oType };
+                        return new ScriptFuntionWrapper(function).execute(par2);
+                    case 3:
+                        object[] par3 = { oContext, oType, Model };
+                        return new ScriptFuntionWrapper(function).execute(par3);
+                    default:
+                        MessageBox.Show($"Script {function.fullName}  has {function.numberOfParameters} parameter",
+                            "Script function parameter count not 2 or 3, Break!");
+                        return false;
+                }
+           
         }
 
         // Context item of dataGrid
@@ -258,19 +245,46 @@ namespace hoTools.Scripts
 
         private void runScriptToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            foreach (DataGridViewRow row in dataGridViewScripts.SelectedRows)
-            {
+            // get selected element and type
+            EA.ObjectType oType = Repository.GetContextItemType();
+            object oContext = Repository.GetContextObject();
 
-            }
+            DataGridViewRow rowToRun = dataGridViewScripts.Rows[rowScriptsIndex];
+            DataRow row = rowToRun.DataBoundItem as DataRow;
+            var scriptFunction = row["FunctionObj"] as ScriptFunction;
+            runScriptFromContext(scriptFunction, oType, oContext);
+
         }
 
+        /// <summary>
+        /// Show error of the selected Script
+        /// </summary>
         private void ShowErrorToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            foreach (DataGridViewRow row in dataGridViewScripts.SelectedRows)
-            {
+            DataGridViewRow row = dataGridViewScripts.Rows[rowScriptsIndex];
+            string scriptName = row.Cells["Script"].Value as string;
+            string functionName = row.Cells["Function"].Value as string;
+            string scriptLanguag = row.Cells["Language"].Value as string;
+            string err = row.Cells["Err"].Value as string;
+            if (err.Equals(""))
+            MessageBox.Show("", $"Funtion compiled fine {scriptName}.{functionName}");
+            else MessageBox.Show("Error:\n'" + err + "'", $"Error {scriptName}:{functionName}");
 
-            }
 
         }
+
+        /// <summary>
+        /// MouseClick in dataGridViewScripts
+        /// - Estiminate the clicked row
+        /// - store the current row
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dataGridViewScripts_MouseClick(object sender, MouseEventArgs e)
+        {
+            rowScriptsIndex = dataGridViewScripts.HitTest(e.X, e.Y).RowIndex;
+        }
+
+       
     }
 }
