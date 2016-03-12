@@ -155,7 +155,9 @@ namespace hoTools.Settings
             }
             #endregion
 
-
+            #region sql
+            txtSqlFolder.Text = settings.sqlFolder;
+            #endregion
 
 
             #region set services
@@ -539,6 +541,10 @@ namespace hoTools.Settings
             _settings.isAdvancedDiagramNote = chkAdvancedDiagramNote.Checked;
             _settings.isScriptAndQuery = chkScriptAndQuery.Checked;
             _settings.isSearchAndReplace = chkSearchAndReplace.Checked;
+            #endregion
+
+            #region sql
+            _settings.sqlFolder = txtSqlFolder.Text;
             #endregion
 
             #region Line style

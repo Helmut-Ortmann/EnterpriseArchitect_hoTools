@@ -36,7 +36,7 @@ namespace EAAddinFramework.Utils
 		private static bool reloadModelIncludableScripts;
 		private Model model;
 		private string scriptID;
-		private string _code;
+		public string _code { get; private set; }
 		public string errorMessage {get;set;}
 		private ScriptControl scriptController;
 		public List<ScriptFunction> functions {get;set;}

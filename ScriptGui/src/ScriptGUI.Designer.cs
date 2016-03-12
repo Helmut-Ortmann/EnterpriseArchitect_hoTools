@@ -46,14 +46,22 @@ namespace hoTools.Scripts
             this.contextMenuStripDataGrid = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ShowErrorToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.runScriptToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.showScriptToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnRunScript = new System.Windows.Forms.Button();
             this.tabSqlPage1 = new System.Windows.Forms.TabPage();
-            this.txtPage1 = new System.Windows.Forms.TextBox();
+            this.txtBoxSql = new System.Windows.Forms.TextBox();
+            this.contextMenuStripSql = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItemSqlElement = new System.Windows.Forms.ToolStripMenuItem();
+            this.diagramTemplateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.packageTemplateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabSql = new System.Windows.Forms.TabControl();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewScripts)).BeginInit();
             this.contextMenuStripDataGrid.SuspendLayout();
             this.tabSqlPage1.SuspendLayout();
+            this.contextMenuStripSql.SuspendLayout();
             this.tabSql.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -164,25 +172,32 @@ namespace hoTools.Scripts
             // 
             this.contextMenuStripDataGrid.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ShowErrorToolStripMenuItem1,
-            this.runScriptToolStripMenuItem});
+            this.runScriptToolStripMenuItem,
+            this.showScriptToolStripMenuItem});
             this.contextMenuStripDataGrid.Name = "contextMenuStripDataGrid";
-            this.contextMenuStripDataGrid.Size = new System.Drawing.Size(129, 48);
+            this.contextMenuStripDataGrid.Size = new System.Drawing.Size(134, 70);
             this.contextMenuStripDataGrid.Text = "C";
-            this.contextMenuStripDataGrid.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStripDataGrid_Opening);
             // 
             // ShowErrorToolStripMenuItem1
             // 
             this.ShowErrorToolStripMenuItem1.Name = "ShowErrorToolStripMenuItem1";
-            this.ShowErrorToolStripMenuItem1.Size = new System.Drawing.Size(128, 22);
-            this.ShowErrorToolStripMenuItem1.Text = "ShowError";
+            this.ShowErrorToolStripMenuItem1.Size = new System.Drawing.Size(133, 22);
+            this.ShowErrorToolStripMenuItem1.Text = "Show&Error";
             this.ShowErrorToolStripMenuItem1.Click += new System.EventHandler(this.ShowErrorToolStripMenuItem1_Click);
             // 
             // runScriptToolStripMenuItem
             // 
             this.runScriptToolStripMenuItem.Name = "runScriptToolStripMenuItem";
-            this.runScriptToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
-            this.runScriptToolStripMenuItem.Text = "RunScript";
+            this.runScriptToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.runScriptToolStripMenuItem.Text = "&RunScript";
             this.runScriptToolStripMenuItem.Click += new System.EventHandler(this.runScriptToolStripMenuItem_Click);
+            // 
+            // showScriptToolStripMenuItem
+            // 
+            this.showScriptToolStripMenuItem.Name = "showScriptToolStripMenuItem";
+            this.showScriptToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.showScriptToolStripMenuItem.Text = "&ShowScript";
+            this.showScriptToolStripMenuItem.Click += new System.EventHandler(this.showScriptToolStripMenuItem_Click);
             // 
             // btnRunScript
             // 
@@ -196,7 +211,7 @@ namespace hoTools.Scripts
             // 
             // tabSqlPage1
             // 
-            this.tabSqlPage1.Controls.Add(this.txtPage1);
+            this.tabSqlPage1.Controls.Add(this.txtBoxSql);
             this.tabSqlPage1.Location = new System.Drawing.Point(4, 22);
             this.tabSqlPage1.Name = "tabSqlPage1";
             this.tabSqlPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -205,13 +220,58 @@ namespace hoTools.Scripts
             this.tabSqlPage1.Text = "NoName1.sql";
             this.tabSqlPage1.UseVisualStyleBackColor = true;
             // 
-            // txtPage1
+            // txtBoxSql
             // 
-            this.txtPage1.Location = new System.Drawing.Point(3, 0);
-            this.txtPage1.Multiline = true;
-            this.txtPage1.Name = "txtPage1";
-            this.txtPage1.Size = new System.Drawing.Size(733, 205);
-            this.txtPage1.TabIndex = 0;
+            this.txtBoxSql.ContextMenuStrip = this.contextMenuStripSql;
+            this.txtBoxSql.Location = new System.Drawing.Point(3, 0);
+            this.txtBoxSql.Multiline = true;
+            this.txtBoxSql.Name = "txtBoxSql";
+            this.txtBoxSql.Size = new System.Drawing.Size(733, 205);
+            this.txtBoxSql.TabIndex = 0;
+            // 
+            // contextMenuStripSql
+            // 
+            this.contextMenuStripSql.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItemSqlElement,
+            this.diagramTemplateToolStripMenuItem,
+            this.packageTemplateToolStripMenuItem,
+            this.saveToolStripMenuItem,
+            this.saveAsToolStripMenuItem});
+            this.contextMenuStripSql.Name = "contextMenuStripSql";
+            this.contextMenuStripSql.Size = new System.Drawing.Size(169, 136);
+            // 
+            // toolStripMenuItemSqlElement
+            // 
+            this.toolStripMenuItemSqlElement.Name = "toolStripMenuItemSqlElement";
+            this.toolStripMenuItemSqlElement.Size = new System.Drawing.Size(168, 22);
+            this.toolStripMenuItemSqlElement.Text = "ElementTemplate";
+            this.toolStripMenuItemSqlElement.Click += new System.EventHandler(this.toolStripMenuItemSqlElement_Click);
+            // 
+            // diagramTemplateToolStripMenuItem
+            // 
+            this.diagramTemplateToolStripMenuItem.Name = "diagramTemplateToolStripMenuItem";
+            this.diagramTemplateToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.diagramTemplateToolStripMenuItem.Text = "DiagramTemplate";
+            this.diagramTemplateToolStripMenuItem.Click += new System.EventHandler(this.diagramTemplateToolStripMenuItem_Click);
+            // 
+            // packageTemplateToolStripMenuItem
+            // 
+            this.packageTemplateToolStripMenuItem.Name = "packageTemplateToolStripMenuItem";
+            this.packageTemplateToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.packageTemplateToolStripMenuItem.Text = "PackageTemplate";
+            // 
+            // saveToolStripMenuItem
+            // 
+            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.saveToolStripMenuItem.Text = "Save SQL";
+            // 
+            // saveAsToolStripMenuItem
+            // 
+            this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.saveAsToolStripMenuItem.Text = "Save SQL as";
+            this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 
             // tabSql
             // 
@@ -241,6 +301,7 @@ namespace hoTools.Scripts
             this.contextMenuStripDataGrid.ResumeLayout(false);
             this.tabSqlPage1.ResumeLayout(false);
             this.tabSqlPage1.PerformLayout();
+            this.contextMenuStripSql.ResumeLayout(false);
             this.tabSql.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -264,9 +325,16 @@ namespace hoTools.Scripts
         private System.Windows.Forms.Button btnRunScript;
         private System.Windows.Forms.TabPage tabSqlPage1;
         private System.Windows.Forms.TabControl tabSql;
-        private System.Windows.Forms.TextBox txtPage1;
+        private System.Windows.Forms.TextBox txtBoxSql;
         private System.Windows.Forms.ContextMenuStrip contextMenuStripDataGrid;
         private System.Windows.Forms.ToolStripMenuItem ShowErrorToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem runScriptToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem showScriptToolStripMenuItem;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStripSql;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemSqlElement;
+        private System.Windows.Forms.ToolStripMenuItem diagramTemplateToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem packageTemplateToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem;
     }
 }

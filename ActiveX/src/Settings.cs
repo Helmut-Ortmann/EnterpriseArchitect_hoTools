@@ -360,6 +360,30 @@ namespace hoTools.Settings
             }
         }
         #endregion
+        #region Property: sqlFolder
+        /// <summary>
+        /// Folder for SQL Searches
+        /// </summary>
+        public string sqlFolder
+        {
+            get
+            {
+                if (this.currentConfig.AppSettings.Settings["SqlFolder"].Value == null)
+                {
+                    return @"c:\temp\sql";
+                }
+                else {
+                    return (this.currentConfig.AppSettings.Settings["SqlFolder"].Value);
+                }
+            }
+            set
+            {
+                this.currentConfig.AppSettings.Settings["SqlFolder"].Value = value;
+
+            }
+        }
+        #endregion
+
         #region Property: productName
         public string productName
         {

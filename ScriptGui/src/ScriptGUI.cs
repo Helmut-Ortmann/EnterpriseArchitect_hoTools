@@ -75,11 +75,6 @@ namespace hoTools.Scripts
             col.HeaderText = "Group";
             dataGridViewScripts.Columns.Add(col);
 
-            col = new DataGridViewTextBoxColumn();
-            col.DataPropertyName = "Err";
-            col.Name = "Err";
-            col.HeaderText = "Err";
-            dataGridViewScripts.Columns.Add(col);
 
             col = new DataGridViewTextBoxColumn();
             col.DataPropertyName = "Function";
@@ -91,6 +86,12 @@ namespace hoTools.Scripts
             col.DataPropertyName = "ParCount";
             col.Name = "ParCount";
             col.HeaderText = "Par count";
+            dataGridViewScripts.Columns.Add(col);
+
+            col = new DataGridViewTextBoxColumn();
+            col.DataPropertyName = "Err";
+            col.Name = "Err";
+            col.HeaderText = "Err";
             dataGridViewScripts.Columns.Add(col);
         }
         #endregion
@@ -237,12 +238,7 @@ namespace hoTools.Scripts
            
         }
 
-        // Context item of dataGrid
-        private void contextMenuStripDataGrid_Opening(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-
-        }
-
+        
         private void runScriptToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // get selected element and type
@@ -250,7 +246,7 @@ namespace hoTools.Scripts
             object oContext = Repository.GetContextObject();
 
             DataGridViewRow rowToRun = dataGridViewScripts.Rows[rowScriptsIndex];
-            DataRow row = rowToRun.DataBoundItem as DataRow;
+            DataRowView row = rowToRun.DataBoundItem as DataRowView;
             var scriptFunction = row["FunctionObj"] as ScriptFunction;
             runScriptFromContext(scriptFunction, oType, oContext);
 
@@ -266,9 +262,10 @@ namespace hoTools.Scripts
             string functionName = row.Cells["Function"].Value as string;
             string scriptLanguag = row.Cells["Language"].Value as string;
             string err = row.Cells["Err"].Value as string;
-            if (err.Equals(""))
-            MessageBox.Show("", $"Funtion compiled fine {scriptName}.{functionName}");
-            else MessageBox.Show("Error:\n'" + err + "'", $"Error {scriptName}:{functionName}");
+            if (String.IsNullOrWhiteSpace(err))
+            { MessageBox.Show("", $"Funtion compiled fine {scriptName}.{functionName}"); }
+            else
+            { MessageBox.Show("Error:\n'" + err + "'", $"Error {scriptName}:{functionName}"); }
 
 
         }
@@ -285,6 +282,63 @@ namespace hoTools.Scripts
             rowScriptsIndex = dataGridViewScripts.HitTest(e.X, e.Y).RowIndex;
         }
 
-       
+        /// <summary>
+        /// Output the script code of the selected row
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void showScriptToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            DataGridViewRow rowToRun = dataGridViewScripts.Rows[rowScriptsIndex];
+            DataRowView row = rowToRun.DataBoundItem as DataRowView;
+            
+
+            var script = row["ScriptObj"] as Script;
+            MessageBox.Show(script._code, $"Code of {script.displayName}");
+
+        }
+
+        private void contextMenuStripSql_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+
+        }
+        /// <summary>
+        /// Insert Element Template
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void toolStripMenuItemSqlElement_Click(object sender, EventArgs e)
+        {
+            const string ELEMENT_TEMPLATE =
+                "select o.ea_guid AS CLASSGUID, o.object_type AS CLASSTYPE,o.Name AS Name,o.object_type As Type, * \r\n" +
+                "from t_object o\r\n" +
+                "where o.object_type in (\"Class\",\"Component\")";
+            insertText(txtBoxSql, ELEMENT_TEMPLATE);
+        }
+
+        private void insertText(TextBox txtBox, string ELEMENT_TEMPLATE)
+        {
+            var selectionIndex = txtBox.SelectionStart;
+            txtBox.Text = txtBox.Text.Insert(selectionIndex, ELEMENT_TEMPLATE);
+            txtBox.SelectionStart = selectionIndex + ELEMENT_TEMPLATE.Length;
+        }
+
+        private void diagramTemplateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            const string DIAGRAM_TEMPLATE =
+               "select d.ea_guid AS CLASSGUID, d.diagram_type AS CLASSTYPE,d.Name AS Name,d.diagram_type As Type, * \r\n" +
+               "from t_diagram d\r\n" +
+               "where d.diagram_type in \r\n" +
+               "(\"Activity\",\"Analysis\",\"Collaboration\",\"Component\",\"CompositeStructure\", \"Custom\",\"Deployment\",\"Logical\",\r\n"+
+               "\"Object\",\"Package\",  \"Sequence\",\"Statechart\",\"Timing\", \"UMLDiagram\", \"Use Case\", )";
+            insertText(txtBoxSql, DIAGRAM_TEMPLATE);
+
+        }
+
+        private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
