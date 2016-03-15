@@ -338,22 +338,95 @@ namespace hoTools.Scripts
 
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Stream myStream;
-            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+            safeTabAs(tabSqlPage1, txtBoxSql);
+        }
 
-            saveFileDialog1.Filter = "sql files (*.sql)|*.txt|All files (*.*)|*.*";
-            saveFileDialog1.FilterIndex = 2;
-            //saveFileDialog1.DefaultExt = "sql";
-            saveFileDialog1.RestoreDirectory = true;
+        Dictionary<string, string> a = null;
+        /// <summary>
+        /// Save sql string from TabPage with TextBox inside it to *.sql file.
+        /// - Update and save the list of sql files 
+        /// </summary>
+        /// <param name="tabPageSql">The TabPage</param>
+        /// <param name="txtBoxSql"></param>
+        private void safeTabAs(TabPage tabPageSql, TextBox txtBoxSql)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
 
-            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            saveFileDialog.InitialDirectory = @"c:\temp\sql";
+            saveFileDialog.FileName = tabPageSql.Text;
+            saveFileDialog.RestoreDirectory = true;
+            saveFileDialog.Filter = "sql files (*.sql)|*.sql|All files (*.*)|*.*";
+            saveFileDialog.FilterIndex = 1;
+            //saveFileDialog.DefaultExt = "sql";
+
+
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+
             {
-                if ((myStream = saveFileDialog1.OpenFile()) != null)
+                StreamWriter myStream = new StreamWriter(saveFileDialog.OpenFile());
+                if (myStream != null)
                 {
                     // Code to write the stream goes here.
+                    myStream.Write(txtBoxSql.Text);
                     myStream.Close();
+                    tabPageSql.Text = Path.GetFileName(saveFileDialog.FileName);
+
+                    // store the complete filename
+                    AddinSettings.sqlFiles.insert(saveFileDialog.FileName);
+                    AddinSettings.save();
                 }
             }
+        }
+        private void  safeTab(TabPage tabPageSql, TextBox txtBoxSql)
+        {
+
+        }
+
+
+        /// <summary>
+        /// Load sql string from *.sql file into TabPage with TextBox inside.
+        /// - Update and save the list of sql files 
+        /// </summary>
+        /// <param name="tabPageSql"></param>
+        /// <param name="txtBoxSql"></param>
+        private void loadTabFrom(TabPage tabPageSql, TextBox txtBoxSql)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+
+            openFileDialog.InitialDirectory = @"c:\temp\sql";
+            openFileDialog.RestoreDirectory = true;
+            openFileDialog.Filter = "sql files (*.sql)|*.sql|All files (*.*)|*.*";
+            openFileDialog.FilterIndex = 1;
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+
+            {
+                StreamReader myStream = new StreamReader(openFileDialog.OpenFile());
+                if (myStream != null)
+                {
+                    // Code to write the stream goes here.
+                    txtBoxSql.Text = myStream.ReadToEnd();
+                    myStream.Close();
+                    tabPageSql.Text = Path.GetFileName(openFileDialog.FileName);
+
+                    // store the complete filename
+                    AddinSettings.sqlFiles.insert(openFileDialog.FileName);
+                    AddinSettings.save();
+                }
+            }
+
+        }
+        private void addTabToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            TabPage tab = new TabPage() { Text = @"mySql.sql" };
+            tabControlSql.TabPages.Add(tab);
+            tabControlSql.SelectedTab = tab;
+            TextBox txtBox = new TextBox { Parent = tab, Dock = DockStyle.Fill };
+        }
+
+        private void loadSQLToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            loadTabFrom(tabSqlPage1, txtBoxSql);
         }
     }
 }

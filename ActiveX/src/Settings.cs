@@ -37,6 +37,9 @@ namespace hoTools.Settings
         public string ConfigFilePath { get; }
         public string ConfigPath { get; }
 
+        // 20 SQL files 
+        public SqlFilesCfg sqlFiles { get; }
+
         // Configuration 5 button searches by key
         public EaAddinButtons[] buttonsSearch = null;
 
@@ -103,10 +106,11 @@ namespace hoTools.Settings
             this.buttonsServices = getShortcutsServices();
             this.globalShortcutsService = getGlobalShortcutsService();
             this.globalShortcutsSearch = getGlobalShortcutsSearch();
-
             getConnector(_logicalConnectors);
             getConnector(_activityConnectors);
             getAllServices();
+            sqlFiles = new SqlFilesCfg(currentConfig);// sql files 
+
             updateSearchesAndServices();
         }
         #endregion
@@ -640,6 +644,7 @@ namespace hoTools.Settings
 
                 this.setConnector(_logicalConnectors);
                 this.setConnector(_activityConnectors);
+                sqlFiles.save();
                 this.currentConfig.Save();
 
 

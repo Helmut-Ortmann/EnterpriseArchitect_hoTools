@@ -56,14 +56,15 @@ namespace hoTools.Scripts
             this.packageTemplateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tabSql = new System.Windows.Forms.TabControl();
             this.loadSQLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.addTabToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tabControlSql = new System.Windows.Forms.TabControl();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewScripts)).BeginInit();
             this.contextMenuStripDataGrid.SuspendLayout();
             this.tabSqlPage1.SuspendLayout();
             this.contextMenuStripSql.SuspendLayout();
-            this.tabSql.SuspendLayout();
+            this.tabControlSql.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnLoadScripts
@@ -108,7 +109,7 @@ namespace hoTools.Scripts
             // settingsToolStripMenuItem
             // 
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.settingsToolStripMenuItem.Text = "&Settings";
             // 
             // helpToolStripMenuItem
@@ -224,10 +225,10 @@ namespace hoTools.Scripts
             // txtBoxSql
             // 
             this.txtBoxSql.ContextMenuStrip = this.contextMenuStripSql;
-            this.txtBoxSql.Location = new System.Drawing.Point(3, 0);
+            this.txtBoxSql.Location = new System.Drawing.Point(47, 0);
             this.txtBoxSql.Multiline = true;
             this.txtBoxSql.Name = "txtBoxSql";
-            this.txtBoxSql.Size = new System.Drawing.Size(733, 205);
+            this.txtBoxSql.Size = new System.Drawing.Size(689, 205);
             this.txtBoxSql.TabIndex = 0;
             // 
             // contextMenuStripSql
@@ -238,9 +239,10 @@ namespace hoTools.Scripts
             this.packageTemplateToolStripMenuItem,
             this.saveToolStripMenuItem,
             this.saveAsToolStripMenuItem,
-            this.loadSQLToolStripMenuItem});
+            this.loadSQLToolStripMenuItem,
+            this.addTabToolStripMenuItem});
             this.contextMenuStripSql.Name = "contextMenuStripSql";
-            this.contextMenuStripSql.Size = new System.Drawing.Size(169, 158);
+            this.contextMenuStripSql.Size = new System.Drawing.Size(169, 180);
             // 
             // toolStripMenuItemSqlElement
             // 
@@ -275,27 +277,35 @@ namespace hoTools.Scripts
             this.saveAsToolStripMenuItem.Text = "Save SQL as";
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 
-            // tabSql
-            // 
-            this.tabSql.Controls.Add(this.tabSqlPage1);
-            this.tabSql.Location = new System.Drawing.Point(3, 27);
-            this.tabSql.Name = "tabSql";
-            this.tabSql.SelectedIndex = 0;
-            this.tabSql.Size = new System.Drawing.Size(744, 237);
-            this.tabSql.TabIndex = 5;
-            // 
             // loadSQLToolStripMenuItem
             // 
             this.loadSQLToolStripMenuItem.Name = "loadSQLToolStripMenuItem";
             this.loadSQLToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
             this.loadSQLToolStripMenuItem.Text = "Load SQL";
             this.loadSQLToolStripMenuItem.ToolTipText = "Load *.sql from file";
+            this.loadSQLToolStripMenuItem.Click += new System.EventHandler(this.loadSQLToolStripMenuItem_Click);
+            // 
+            // addTabToolStripMenuItem
+            // 
+            this.addTabToolStripMenuItem.Name = "addTabToolStripMenuItem";
+            this.addTabToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.addTabToolStripMenuItem.Text = "AddTab";
+            this.addTabToolStripMenuItem.Click += new System.EventHandler(this.addTabToolStripMenuItem_Click);
+            // 
+            // tabControlSql
+            // 
+            this.tabControlSql.Controls.Add(this.tabSqlPage1);
+            this.tabControlSql.Location = new System.Drawing.Point(3, 27);
+            this.tabControlSql.Name = "tabControlSql";
+            this.tabControlSql.SelectedIndex = 0;
+            this.tabControlSql.Size = new System.Drawing.Size(744, 237);
+            this.tabControlSql.TabIndex = 5;
             // 
             // ScriptGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.tabSql);
+            this.Controls.Add(this.tabControlSql);
             this.Controls.Add(this.btnRunScript);
             this.Controls.Add(this.dataGridViewScripts);
             this.Controls.Add(this.btnLoadScripts);
@@ -311,7 +321,7 @@ namespace hoTools.Scripts
             this.tabSqlPage1.ResumeLayout(false);
             this.tabSqlPage1.PerformLayout();
             this.contextMenuStripSql.ResumeLayout(false);
-            this.tabSql.ResumeLayout(false);
+            this.tabControlSql.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -333,7 +343,7 @@ namespace hoTools.Scripts
         private System.Windows.Forms.DataGridView dataGridViewScripts;
         private System.Windows.Forms.Button btnRunScript;
         private System.Windows.Forms.TabPage tabSqlPage1;
-        private System.Windows.Forms.TabControl tabSql;
+        private System.Windows.Forms.TabControl tabControlSql;
         private System.Windows.Forms.TextBox txtBoxSql;
         private System.Windows.Forms.ContextMenuStrip contextMenuStripDataGrid;
         private System.Windows.Forms.ToolStripMenuItem ShowErrorToolStripMenuItem1;
@@ -346,5 +356,6 @@ namespace hoTools.Scripts
         private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem loadSQLToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem addTabToolStripMenuItem;
     }
 }
