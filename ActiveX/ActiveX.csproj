@@ -94,7 +94,7 @@
     <Compile Include="src\Settings.cs" />
     <Compile Include="src\IActiveX.cs" />
     <Compile Include="src\IActiveXSafety.cs" />
-    <Compile Include="src\SqlFileCfg.cs" />
+    <Compile Include="src\SqlHistoryFilesCfg.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">

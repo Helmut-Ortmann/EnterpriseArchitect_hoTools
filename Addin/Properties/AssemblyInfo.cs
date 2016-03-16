@@ -32,7 +32,7 @@ using System.Runtime.InteropServices;
 // by using the '*' as shown below:
 //[assembly: AssemblyVersion("1.2.*")] // this will cause the registration to change after every build
 
-// If you change the AssemblyVersion you have to update the component information in Files.wxs
+// If you change the AssemblyVersion you have to update the component information in File.wxs
 // If not: you get registration error and the Addin isn't loaded in EA
 [assembly: AssemblyVersion("1.2.5.2")]
 // The 'AddinClass' Assembly file version is used to output the version of the Addin

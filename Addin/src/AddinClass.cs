@@ -969,9 +969,11 @@ namespace hoTools
             }
             else
             {
-                control.Repository = _repository;
                 control.Release = "V" + release;
                 control.AddinSettings = this._AddinSettings;
+                control.Repository = _repository;
+
+
             }
             return c;
         }

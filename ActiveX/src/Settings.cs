@@ -38,7 +38,7 @@ namespace hoTools.Settings
         public string ConfigPath { get; }
 
         // 20 SQL files 
-        public SqlFilesCfg sqlFiles { get; }
+        public SqlHistoryFilesCfg sqlFiles { get; }
 
         // Configuration 5 button searches by key
         public EaAddinButtons[] buttonsSearch = null;
@@ -109,7 +109,7 @@ namespace hoTools.Settings
             getConnector(_logicalConnectors);
             getConnector(_activityConnectors);
             getAllServices();
-            sqlFiles = new SqlFilesCfg(currentConfig);// sql files 
+            sqlFiles = new SqlHistoryFilesCfg(currentConfig);// sql files 
 
             updateSearchesAndServices();
         }
