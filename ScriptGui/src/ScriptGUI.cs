@@ -6,6 +6,7 @@ using hoTools.ActiveX;
 
 using System.Collections.Generic;
 using EAAddinFramework.Utils;
+using hoTools.Settings;
 
 using System.IO;
 
@@ -25,8 +26,6 @@ namespace hoTools.Scripts
     {
         public const string PROGID = "hoTools.ScriptGUI";
         public const string TABULATOR = "Scripts";
-
-        List<File> lHistoryFiles = new List<File>();
 
         List<Script> _lscripts = null;  // list off all scripts
         DataTable _tableFunctions = null; // Scripts and Functions
@@ -57,15 +56,18 @@ namespace hoTools.Scripts
         /// <returns></returns>
         bool initializeSettings()
         {
-            foreach (string file in AddinSettings.sqlFiles.lSqlHistoryFilesCfg)
-            {
-                lHistoryFiles.Add(new File(file));
-            }
-            toolStripComboBoxHistory.ComboBox.DataSource = null;
-            toolStripComboBoxHistory.ComboBox.DisplayMember = "DisplayName";
-            toolStripComboBoxHistory.ComboBox.ValueMember = "FullName";
-            toolStripComboBoxHistory.ComboBox.DataSource = lHistoryFiles;
+            toolStripComboBoxHistoryUpdate(toolStripComboBoxHistory);
+
             return true;
+        }
+
+        private void toolStripComboBoxHistoryUpdate(ToolStripComboBox toolStripCombo)
+        {
+            toolStripCombo.ComboBox.DataSource = null;
+            toolStripCombo.ComboBox.BindingContext = this.BindingContext;
+            toolStripCombo.ComboBox.DisplayMember = "DisplayName";
+            toolStripCombo.ComboBox.ValueMember = "FullName";
+            toolStripCombo.ComboBox.DataSource = AddinSettings.sqlFiles.lSqlHistoryFilesCfg;
         }
 
 
@@ -156,23 +158,22 @@ namespace hoTools.Scripts
             set
             {
                 base.Repository = value;
-                initializeSettings();
                 // only if there is a repository available
                 if (value.ProjectGUID != "")
                 {
+                    initializeSettings();
                     _lscripts = Script.getEAMaticScripts(Model);
                     updateTableFunctions();
                 }
             }
         }
-        public override Addin
 
         private void ScriptGUI_Load(object sender, EventArgs e)
         {
-         
+
         }
 
-       
+
         /// <summary>
         /// Load all usable script
         /// </summary>

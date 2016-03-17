@@ -1977,7 +1977,7 @@
             this.label34.Name = "label34";
             this.label34.Size = new System.Drawing.Size(118, 16);
             this.label34.TabIndex = 200;
-            this.label34.Text = "Path File-Manager";
+            this.label34.Text = "Path FileHistory-Manager";
             // 
             // label35
             // 

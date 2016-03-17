@@ -11,10 +11,6 @@ namespace hoTools.Utils
 {
     public class Util
     {
-        public Util()
-        {
-
-        }
         public static string objectTypeToString(EA.ObjectType objectType)
         {
             switch (objectType)

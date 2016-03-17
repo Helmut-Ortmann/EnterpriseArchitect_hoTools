@@ -143,8 +143,8 @@ namespace hoTools.Utils.Appls
             bool final = false;
             foreach (EA.Element node in stateChart.Elements)
             {
-                if (node.Type == "StateNode" & node.Subtype == 100) init = true;
-                if (node.Type == "StateNode" & node.Subtype == 101) final = true;
+                init |= node.Type == "StateNode" & node.Subtype == 100;
+                final |= node.Type == "StateNode" & node.Subtype == 101;
             }
             EA.Element initNode = null;
             if (!init)

@@ -60,6 +60,7 @@ namespace hoTools.Scripts
             this.addTabToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripComboBoxHistory = new System.Windows.Forms.ToolStripComboBox();
             this.tabControlSql = new System.Windows.Forms.TabControl();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewScripts)).BeginInit();
             this.contextMenuStripDataGrid.SuspendLayout();
@@ -104,8 +105,8 @@ namespace hoTools.Scripts
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.settingsToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
-            this.fileToolStripMenuItem.Text = "&File";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(75, 20);
+            this.fileToolStripMenuItem.Text = "&FileHistory";
             // 
             // settingsToolStripMenuItem
             // 
@@ -242,9 +243,10 @@ namespace hoTools.Scripts
             this.saveAsToolStripMenuItem,
             this.loadSQLToolStripMenuItem,
             this.addTabToolStripMenuItem,
+            this.toolStripSeparator1,
             this.toolStripComboBoxHistory});
             this.contextMenuStripSql.Name = "contextMenuStripSql";
-            this.contextMenuStripSql.Size = new System.Drawing.Size(182, 207);
+            this.contextMenuStripSql.Size = new System.Drawing.Size(182, 213);
             // 
             // toolStripMenuItemSqlElement
             // 
@@ -308,6 +310,11 @@ namespace hoTools.Scripts
             this.tabControlSql.Size = new System.Drawing.Size(744, 237);
             this.tabControlSql.TabIndex = 5;
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(178, 6);
+            // 
             // ScriptGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -365,5 +372,6 @@ namespace hoTools.Scripts
         private System.Windows.Forms.ToolStripMenuItem loadSQLToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem addTabToolStripMenuItem;
         private System.Windows.Forms.ToolStripComboBox toolStripComboBoxHistory;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     }
 }

@@ -13,8 +13,9 @@ namespace hoTools.Settings
         /// <summary>
         /// List of files loaded in history
         /// </summary>
-        public List<string> lSqlHistoryFilesCfg => _lSqlHistoryFilesCfg;
-        List<string> _lSqlHistoryFilesCfg = new List<string>();
+        public List<FileHistory> lSqlHistoryFilesCfg => _lSqlHistoryFilesCfg;
+
+        readonly List<FileHistory> _lSqlHistoryFilesCfg = new List<FileHistory>();
 
 
         int _lSqlFilesCfgLength;
@@ -42,7 +43,7 @@ namespace hoTools.Settings
                 string key = entry.Key;
                 if (key.Substring(0,7).Equals(SQL_HISTORY_FILE_CFG_STRING))
                 {
-                    _lSqlHistoryFilesCfg.Add(entry.Value);
+                    _lSqlHistoryFilesCfg.Add(new FileHistory(entry.Value));
 
 
                 }
@@ -55,26 +56,30 @@ namespace hoTools.Settings
         public void save()
         {
             int i = 1;
-            foreach (string s in _lSqlHistoryFilesCfg)
+            foreach (FileHistory f in _lSqlHistoryFilesCfg)
             {
                 // SqlFile<i>
                 string key = $"{SQL_HISTORY_FILE_CFG_STRING}{i}";
-                _config.AppSettings.Settings[key].Value = s;
+                _config.AppSettings.Settings[key].Value = f.FullName;
                 i = i + 1;
                 // stop if element length reached
                 if (i > _lSqlFilesCfgLength) break;
             }
         }
         /// <summary>
-        /// Insert an SQL File to the beginning, an 
+        /// Insert an SQL FileHistory to the beginning, an 
         /// </summary>
         /// <param name="s"></param>
         public void insert(string s)
         {
             // delete an existing entry
             // add to first one
-            _lSqlHistoryFilesCfg.Remove(s);
-            _lSqlHistoryFilesCfg.Insert(0, s);
+            var index = _lSqlHistoryFilesCfg.FindIndex(x => x.FullName == s);  
+            if (index > -1)
+            {
+                _lSqlHistoryFilesCfg.RemoveAt(index);
+            }
+            _lSqlHistoryFilesCfg.Insert(0, new FileHistory(s));
 
         }
     }

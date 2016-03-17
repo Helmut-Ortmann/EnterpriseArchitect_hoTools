@@ -61,7 +61,7 @@ namespace hoTools.Connectors {
         private string _diagramType = "";
 
         public DiagramConnector(string DiagramType)
-            : base() {
+{
                 _diagramType = DiagramType;
             }
         public string DiagramType

@@ -1,17 +1,16 @@
 ﻿using System.IO;
 
-namespace hoTools.Scripts
+namespace hoTools.Settings
 {
     /// <summary>
     /// Stores a file properties like FullName, DisplayName
     /// </summary>
-    class File
+    public class FileHistory
     {
         public string FullName => _fullName;
         public string DisplayName => Path.GetFileName(_fullName);
-        string _displayName;
         string _fullName;
-        public File(string fullname)
+        public FileHistory(string fullname)
         {
             _fullName = fullname;
         }

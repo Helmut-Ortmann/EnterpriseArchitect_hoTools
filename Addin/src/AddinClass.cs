@@ -5,13 +5,13 @@ using System.Collections.Generic;
 using hoTools.Utils.Favorites;
 using hoTools.ActiveX;
 using hoTools.Settings;
+using hoTools.Scripts;
 
 using hoTools.EaServices;
 using hoTools.Utils;
 using hoTools.Utils.Appls;
 using hoTools.Utils.ActionPins;
 using System.Reflection;
-using hoTools.Scripts;
 
 using hoTools.Find;
 
@@ -969,9 +969,10 @@ namespace hoTools
             }
             else
             {
-                control.Release = "V" + release;
+
                 control.AddinSettings = this._AddinSettings;
                 control.Repository = _repository;
+                control.Release = "V" + release;
 
 
             }

@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 using EAAddinFramework.Utils;
 
-namespace hoTools.Scripts
+namespace hoTools.Settings
 {
     /// <summary>
     /// Wrapper for Script Functions:

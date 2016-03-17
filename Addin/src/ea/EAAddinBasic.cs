@@ -207,7 +207,7 @@ namespace EAAddinFramework
 
         #region EA Broadcast Events
         /// <summary>
-        /// The EA_FileOpen event enables the Add-In to respond to a File Open event. When Enterprise Architect opens a new model file, this event is raised and passed to all Add-Ins implementing this method.
+        /// The EA_FileOpen event enables the Add-In to respond to a FileHistory Open event. When Enterprise Architect opens a new model file, this event is raised and passed to all Add-Ins implementing this method.
         /// The event occurs when the model being viewed by the Enterprise Architect user changes, for whatever reason (through user interaction or Add-In activity).
         /// Also look at EA_FileClose and EA_FileNew.
         /// </summary>
@@ -216,7 +216,7 @@ namespace EAAddinFramework
         public virtual void EA_FileOpen(EA.Repository Repository) { }
 
         /// <summary>
-        /// The EA_FileClose event enables the Add-In to respond to a File Close event. When Enterprise Architect closes an opened Model file, this event is raised and passed to all Add-Ins implementing this method.
+        /// The EA_FileClose event enables the Add-In to respond to a FileHistory Close event. When Enterprise Architect closes an opened Model file, this event is raised and passed to all Add-Ins implementing this method.
         /// This event occurs when the model currently opened within Enterprise Architect is about to be closed (when another model is about to be opened or when Enterprise Architect is about to shutdown).
         /// Also look at EA_FileOpen and EA_FileNew.
         /// </summary>
@@ -225,7 +225,7 @@ namespace EAAddinFramework
         public virtual void EA_FileClose(EA.Repository Repository) { }
 
         /// <summary>
-        /// The EA_FileNew event enables the Add-In to respond to a File New event. When Enterprise Architect creates a new model file, this event is raised and passed to all Add-Ins implementing this method.
+        /// The EA_FileNew event enables the Add-In to respond to a FileHistory New event. When Enterprise Architect creates a new model file, this event is raised and passed to all Add-Ins implementing this method.
         /// The event occurs when the model being viewed by the Enterprise Architect user changes, for whatever reason (through user interaction or Add-In activity).
         /// Also look at EA_FileClose and EA_FileOpen.
         /// </summary>
@@ -832,7 +832,7 @@ namespace EAAddinFramework
         /// </summary>
         /// <param name="Repository">An EA.Repository object representing the currently open Enterprise Architect model.
         /// Poll its members to retrieve model data and user interface status information.</param>
-        /// <param name="sLocation">The name of the template requested. This should match the location attribute in the [ModelTemplates] section of an MDG Technology File. For more information, see the Incorporate Model Templates in a Technology topic.</param>	
+        /// <param name="sLocation">The name of the template requested. This should match the location attribute in the [ModelTemplates] section of an MDG Technology FileHistory. For more information, see the Incorporate Model Templates in a Technology topic.</param>	
         /// <returns>Return a string containing the XMI export of the model that is being used as a template.</returns>
         public virtual string EA_OnRetrieveModelTemplate(EA.Repository Repository, string sLocation) => string.Empty;
 
@@ -972,7 +972,7 @@ namespace EAAddinFramework
         /// MDG_PostMerge is called after a merge process has been completed.
         /// This function is called by Enterprise Architect after the merge process has been completed.
         /// Note:
-        /// File save checking should not be performed with this function, but should be handled by MDG_PreGenerate, MDG_PostGenerate and MDG_PreReverse.
+        /// FileHistory save checking should not be performed with this function, but should be handled by MDG_PreGenerate, MDG_PostGenerate and MDG_PreReverse.
         /// Also look at MDG_PreMerge and MDG_Merge.
         /// </summary>
         /// <param name="Repository">An EA.Repository object representing the currently open Enterprise Architect model.
@@ -998,7 +998,7 @@ namespace EAAddinFramework
         /// This event is called after a user has performed their interactions with the merge screen and has confirmed the merge with the OK button, but before Enterprise Architect performs the merge process using the data provided by the MDG_Merge call, before any changes have been made to the model or the connected project.
         /// This event is made available to provide the Add-In with the opportunity to generally set internal Add-In flags to augment the MDG_PreGenerate, MDG_PostGenerate and MDG_PreReverse events.
         /// Note:
-        /// File save checking should not be performed with this function, but should be handled by MDG_PreGenerate, MDG_PostGenerate and MDG_PreReverse.
+        /// FileHistory save checking should not be performed with this function, but should be handled by MDG_PreGenerate, MDG_PostGenerate and MDG_PreReverse.
         /// Also look at MDG_Merge and MDG_PostMerge.
         /// </summary>
         /// <param name="Repository">An EA.Repository object representing the currently open Enterprise Architect model.
