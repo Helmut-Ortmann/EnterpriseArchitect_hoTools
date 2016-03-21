@@ -45,8 +45,8 @@ namespace EAAddinFramework.Utils
 		public string groupName {get;set;}
         public string languageName => scriptController.Language;
         public string displayName => name + " - " + scriptController.Language;
-        public bool isStatic{get;private set;}
-		static Script()
+        public bool isStatic { get; }
+        static Script()
 		{
 			loadStaticIncludableScripts();
 		}

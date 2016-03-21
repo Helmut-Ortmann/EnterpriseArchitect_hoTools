@@ -1127,7 +1127,7 @@ namespace hoTools.EaServices
             rep.SaveDiagram(dia.DiagramID);
             diaObjSource = (EA.DiagramObject)dia.SelectedObjects.GetAt(0);
             elSource = rep.GetElementByID(diaObjSource.ElementID);
-            if (elSource.Type == "Component") isComponent = true;
+            isComponent |= elSource.Type == "Component";
             // remember selected object
 
             List<EA.Element> ifList = getInterfacesFromText(rep, pkg, text);
@@ -2683,7 +2683,7 @@ namespace hoTools.EaServices
 
                     a.Pos = el.Attributes.Count + 1;
                     if (!stereotype.Contains("")) a.Stereotype = stereotype;
-                    if (prefix.ToLower().Contains("static")) a.IsStatic = true;
+                    a.IsStatic |= prefix.ToLower().Contains("static");
                     a.Update();
                     continue;
                 }
@@ -2701,8 +2701,8 @@ namespace hoTools.EaServices
                     pointerValue = "**";
                 }
 
-                if (sRaw.Contains("const")) isConst = true;
-                if (sRaw.ToLower().Contains("static")) isStatic = true;
+                isConst |= sRaw.Contains("const");
+                isStatic |= sRaw.ToLower().Contains("static");
 
 
                 string sCompact = sRaw.Replace("*", "");
@@ -3432,8 +3432,8 @@ namespace hoTools.EaServices
             bool isRevision = false;
             bool isDate = false;
             foreach (EA.TaggedValue tag in el.TaggedValues) {
-                if (tag.Name == "svnRevision") isRevision = true;
-                if (tag.Name == "svnDate") isDate = true;
+                isRevision |= tag.Name == "svnRevision";
+                isDate |= tag.Name == "svnDate";
             }
             if (isRevision & isDate) return true;
             else return false;
@@ -3468,8 +3468,8 @@ namespace hoTools.EaServices
             bool createSvnRevision = true;
             foreach (EA.TaggedValue t in el.TaggedValues)
             {
-                if (t.Name == "svnDate") createSvnDate = false;
-                if (t.Name == "svnRevision") createSvnRevision = false;
+                createSvnDate &= t.Name != "svnDate";
+                createSvnRevision &= t.Name != "svnRevision";
 
             }
             EA.TaggedValue tag = null;

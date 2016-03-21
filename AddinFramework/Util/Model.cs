@@ -15,7 +15,7 @@ namespace EAAddinFramework.Utils
         public EA.App EaApp { get; }
         private static string _applicationFullPath;
         private IWin32Window _mainEAWindow;
-        public RepositoryType? _repositoryType;  // a nullable tpye
+        public RepositoryType? _repositoryType;  // a null able type
 
 
         /// <summary>

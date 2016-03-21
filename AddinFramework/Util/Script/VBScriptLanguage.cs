@@ -14,9 +14,6 @@ namespace EAAddinFramework.Utils
     /// </summary>
     public class VBScriptLanguage:ScriptLanguage
 	{
-		public VBScriptLanguage()
-		{
-		}
         protected override string functionStart => "function ";
         protected override string parameterListStart => "(";
         protected override string parameterSeparator => ", ";

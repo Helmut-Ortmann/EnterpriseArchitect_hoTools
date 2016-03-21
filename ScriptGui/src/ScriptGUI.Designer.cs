@@ -58,9 +58,12 @@ namespace hoTools.Scripts
             this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadSQLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addTabToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripComboBoxHistory = new System.Windows.Forms.ToolStripComboBox();
             this.tabControlSql = new System.Windows.Forms.TabControl();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.btnRun = new System.Windows.Forms.Button();
+            this.txtSearchText = new System.Windows.Forms.TextBox();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewScripts)).BeginInit();
             this.contextMenuStripDataGrid.SuspendLayout();
@@ -83,7 +86,7 @@ namespace hoTools.Scripts
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(307, 0);
+            this.label1.Location = new System.Drawing.Point(403, -1);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(196, 25);
             this.label1.TabIndex = 1;
@@ -111,7 +114,7 @@ namespace hoTools.Scripts
             // settingsToolStripMenuItem
             // 
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.settingsToolStripMenuItem.Text = "&Settings";
             // 
             // helpToolStripMenuItem
@@ -227,10 +230,10 @@ namespace hoTools.Scripts
             // txtBoxSql
             // 
             this.txtBoxSql.ContextMenuStrip = this.contextMenuStripSql;
-            this.txtBoxSql.Location = new System.Drawing.Point(47, 0);
+            this.txtBoxSql.Location = new System.Drawing.Point(10, 0);
             this.txtBoxSql.Multiline = true;
             this.txtBoxSql.Name = "txtBoxSql";
-            this.txtBoxSql.Size = new System.Drawing.Size(689, 205);
+            this.txtBoxSql.Size = new System.Drawing.Size(726, 205);
             this.txtBoxSql.TabIndex = 0;
             // 
             // contextMenuStripSql
@@ -246,7 +249,7 @@ namespace hoTools.Scripts
             this.toolStripSeparator1,
             this.toolStripComboBoxHistory});
             this.contextMenuStripSql.Name = "contextMenuStripSql";
-            this.contextMenuStripSql.Size = new System.Drawing.Size(182, 213);
+            this.contextMenuStripSql.Size = new System.Drawing.Size(182, 191);
             // 
             // toolStripMenuItemSqlElement
             // 
@@ -296,6 +299,11 @@ namespace hoTools.Scripts
             this.addTabToolStripMenuItem.Text = "AddTab";
             this.addTabToolStripMenuItem.Click += new System.EventHandler(this.addTabToolStripMenuItem_Click);
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(178, 6);
+            // 
             // toolStripComboBoxHistory
             // 
             this.toolStripComboBoxHistory.Name = "toolStripComboBoxHistory";
@@ -310,15 +318,35 @@ namespace hoTools.Scripts
             this.tabControlSql.Size = new System.Drawing.Size(744, 237);
             this.tabControlSql.TabIndex = 5;
             // 
-            // toolStripSeparator1
+            // btnRun
             // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(178, 6);
+            this.btnRun.Location = new System.Drawing.Point(208, 435);
+            this.btnRun.Name = "btnRun";
+            this.btnRun.Size = new System.Drawing.Size(75, 23);
+            this.btnRun.TabIndex = 6;
+            this.btnRun.Text = "Run";
+            this.btnRun.UseVisualStyleBackColor = true;
+            this.btnRun.Click += new System.EventHandler(this.btnRun_Click);
+            // 
+            // txtSearchText
+            // 
+            this.txtSearchText.Location = new System.Drawing.Point(160, 5);
+            this.txtSearchText.Name = "txtSearchText";
+            this.txtSearchText.Size = new System.Drawing.Size(237, 20);
+            this.txtSearchText.TabIndex = 7;
+            this.toolTip1.SetToolTip(this.txtSearchText, "Enter a search text");
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
             // ScriptGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.txtSearchText);
+            this.Controls.Add(this.btnRun);
             this.Controls.Add(this.tabControlSql);
             this.Controls.Add(this.btnRunScript);
             this.Controls.Add(this.dataGridViewScripts);
@@ -373,5 +401,8 @@ namespace hoTools.Scripts
         private System.Windows.Forms.ToolStripMenuItem addTabToolStripMenuItem;
         private System.Windows.Forms.ToolStripComboBox toolStripComboBoxHistory;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.Button btnRun;
+        private System.Windows.Forms.TextBox txtSearchText;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
     }
 }

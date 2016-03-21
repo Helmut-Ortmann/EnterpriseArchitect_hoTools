@@ -9,7 +9,8 @@ namespace hoTools.Settings
     {
         public string FullName => _fullName;
         public string DisplayName => Path.GetFileName(_fullName);
-        string _fullName;
+
+        readonly string _fullName;
         public FileHistory(string fullname)
         {
             _fullName = fullname;

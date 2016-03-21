@@ -18,11 +18,11 @@ namespace EAAddinFramework.Utils
 	/// </summary>
 	public class ScriptFunction
 	{
-		private Script owner {get;set;}
+		private Script owner { get; }
         public string name => procedure.Name;
         public string fullName => this.owner.name + "." + this.procedure.Name;
         public int numberOfParameters => procedure.NumArgs;
-        Procedure procedure { get; set; }
+        Procedure procedure { get; }
 
         /// <summary>
         /// Constructor ScriptFunction
