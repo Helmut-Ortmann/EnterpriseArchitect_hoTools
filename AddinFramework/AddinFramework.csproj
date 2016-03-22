@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EASpecific\EAAddin.cs" />
+    <Compile Include="Util\EaItem.cs" />
     <Compile Include="Util\Script\JavaScriptLanguage.cs" />
     <Compile Include="Util\Script\JavaScriptLanguageBase.cs" />
     <Compile Include="Util\Script\JScriptLanguage.cs" />

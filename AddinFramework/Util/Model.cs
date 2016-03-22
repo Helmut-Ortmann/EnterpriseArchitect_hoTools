@@ -4,6 +4,8 @@ using System.Diagnostics;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.Xml;
+using System.Xml.Linq;
+using System.Linq;
 
 
 namespace EAAddinFramework.Utils
@@ -228,18 +230,177 @@ namespace EAAddinFramework.Utils
             escapedString = escapedString.Replace("'", "''");
             return escapedString;
         }
-        /// generic query operation on the model.
-        /// Returns results in an xml format
+        /// <summary>
+        /// EA SQL Query with:
+        /// - formatSQL
+        /// - runSQL
+        /// - return SQL string as XmlDocument
+        /// </summary>
+        /// <param name="sqlQuery"></param>
+        /// <returns>XmlDocuement</returns>
         public XmlDocument SQLQuery(string sqlQuery)
         {
-            sqlQuery = this.formatSQL(sqlQuery);
             var results = new XmlDocument();
-            results.LoadXml(this.Repository.SQLQuery(sqlQuery));
+            results.LoadXml(SQLQueryNative(sqlQuery));
             return results;
+        }
+        /// <summary>
+        /// Run EA SQL Query with Exception handling
+        /// - return null if Exception
+        /// - return xml string if ok
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns>string</returns>
+        public string SqlQueryWithException(string query)
+        {
+            try
+            {
+                // run the query
+                return SQLQueryNative(query);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"SQL:\r\n{query}\r\n{ex.Message}", "Error SQL");
+                return null;
+            }
+
+
+        }
+        /// <summary>
+        /// EA SQL Query native with:
+        /// - formatSQL
+        /// - runSQL
+        /// - return SQL string
+        /// </summary>
+        /// <param name="sqlQuery"></param>
+        /// <returns>string</returns>
+        public string SQLQueryNative(string sqlQuery)
+        {
+            sqlQuery = this.formatSQL(sqlQuery);
+            return this.Repository.SQLQuery(sqlQuery);
         }
 
         /// <summary>
-        /// sets the correct wildcards depending on the database type.
+        /// Make EA XML output format from EA SQLQuery format (string)
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns>string</returns>
+        public string MakeEaXmlOutput(string x)
+        {
+            return MakeEaXmlOutput(XDocument.Parse(x));
+        }
+        /// <summary>
+        /// Make EA XML output format from EA SQLQuery XDocument format (Linq to XML)
+        /// </summary>
+        /// <param name="x">Output from EA SQLQuery</param>
+        /// <returns></returns>
+        public string MakeEaXmlOutput(XDocument x)
+        {
+            //---------------------------------------------------------------------
+            // make the output format:
+            // From Query:
+            //<EADATA><Dataset_0>
+            // <Data>
+            //  <Row>
+            //    <Name1>value1</name1>
+            //    <Name2>value2</name2>
+            //  </Row>
+            //  <Row>
+            //    <Name1>value1</name1>
+            //    <Name2>value2</name2>
+            //  </Row>
+            // </Data>
+            //</Dataset_0><EADATA>
+            //
+            //-----------------------------------
+            // To output EA XML:
+            //<ReportViewData>
+            // <Fields>
+            //   <Field name=""/>
+            //   <Field name=""/>
+            // </Fields>
+            // <Rows>
+            //   <Row>
+            //      <Field name="" value=""/>
+            //      <Field name="" value=""/>
+            // </Rows>
+            // <Rows>
+            //   <Row>
+            //      <Field name="" value=""/>
+            //      <Field name="" value=""/>
+            // </Rows>
+            //</reportViewData>
+            return new XDocument(
+                new XElement("ReportViewData",
+                    new XElement("Fields",
+                           from field in x.Descendants("Row").FirstOrDefault().Descendants()
+                           select new XElement("Field", new XAttribute("name", field.Name))
+                    ),
+                    new XElement("Rows",
+                                from row in x.Descendants("Row")
+                                select new XElement(row.Name,
+                                       from field in row.Nodes()
+                                       select new XElement("Field", new XAttribute("name", ((XElement)field).Name),
+                                                                    new XAttribute("value", ((XElement)field).Value)))
+
+                )
+            )).ToString();
+        }
+        /// <summary>
+        /// Make EA XML output format from EA SQLQuery XDocument format (Linq to XML)
+        /// </summary>
+        /// <param name="x">Output from EA SQLQuery</param>
+        /// <returns></returns>
+        public List<EaItem> MakeEaItemListFromQuery(XDocument x)
+        {
+            //---------------------------------------------------------------------
+            // make the output format:
+            // From Query:
+            //<EADATA><Dataset_0>
+            // <Data>
+            //  <Row>
+            //    <Name1>value1</name1>
+            //    <Name2>value2</name2>
+            //  </Row>
+            //  <Row>
+            //    <Name1>value1</name1>
+            //    <Name2>value2</name2>
+            //  </Row>
+            // </Data>
+            //</Dataset_0><EADATA>
+            //
+            //-----------------------------------
+            // To output EA XML:
+            //<ReportViewData>
+            // <Fields>
+            //   <Field name=""/>
+            //   <Field name=""/>
+            // </Fields>
+            // <Rows>
+            //   <Row>
+            //      <Field name="" value=""/>
+            //      <Field name="" value=""/>
+            // </Rows>
+            // <Rows>
+            //   <Row>
+            //      <Field name="" value=""/>
+            //      <Field name="" value=""/>
+            // </Rows>
+            //</reportViewData>
+
+            List<EaItem> eaItemList = new List<EaItem>();
+            var eaGuids = from guid in x.Descendants("Row").Descendants() where guid.Name.Equals("EACLASS") select guid;
+            foreach (string guid in eaGuids)
+            {
+                eaItemList.Add(new EaItem(guid, null));
+            }
+            return eaItemList;
+
+
+        }
+
+        /// <summary>
+        /// sets the correct wild cards depending on the database type.
         /// changes '%' into '*' if on ms access
         /// and _ into ? on msAccess
         /// </summary>

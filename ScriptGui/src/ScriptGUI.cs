@@ -11,7 +11,7 @@ using hoTools.Settings;
 using System.IO;
 using System.Xml;
 using System.Xml.Linq;
-using System.Linq;
+
 
 namespace hoTools.Scripts
 {
@@ -464,70 +464,25 @@ namespace hoTools.Scripts
         /// <param name="e"></param>
         private void btnRun_Click(object sender, EventArgs e)
         {
+            // run the query
+            string xml = Model.SqlQueryWithException(txtBoxSql.Text);
+            if (xml == null) return;
+           
+            // output the query in EA Search Window
+            string target = Model.MakeEaXmlOutput(xml);
+            Repository.RunModelSearch("", "", "", target);
+        }
 
-            try {
-                // run the query
-                XmlDocument xml = Model.SQLQuery(txtBoxSql.Text);
-            } catch (Exception ex)
+        private void btnRunScriptWithAsk_Click(object sender, EventArgs e)
+        {
+            string xml = Model.SqlQueryWithException(txtBoxSql.Text);
+            if (xml == null) return;
+            List<EaItem> eaItemList = Model.MakeEaItemListFromQuery(XDocument.Parse(xml));
+            foreach (EaItem item in eaItemList)
             {
-                MessageBox.Show($"SQL:\r\n{txtBoxSql.Text}\r\n{ex.Message}", "Error SQL");
-                return;
+                string s = item.ToString();
             }
-            XDocument x = XDocument.Parse(xml.OuterXml);
-            //---------------------------------------------------------------------
-            // make the output format:
-            // From Query:
-            //<EADATA><Dataset_0>
-            // <Data>
-            //  <Row>
-            //    <Name1>value1</name1>
-            //    <Name2>value2</name2>
-            //  </Row>
-            //  <Row>
-            //    <Name1>value1</name1>
-            //    <Name2>value2</name2>
-            //  </Row>
-            // </Data>
-            //</Dataset_0><EADATA>
-            //
-            //-----------------------------------
-            // To output EA XML:
-            //<ReportViewData>
-            // <Fields>
-            //   <Field name=""/>
-            //   <Field name=""/>
-            // </Fields>
-            // <Rows>
-            //   <Row>
-            //      <Field name="" value=""/>
-            //      <Field name="" value=""/>
-            // </Rows>
-            // <Rows>
-            //   <Row>
-            //      <Field name="" value=""/>
-            //      <Field name="" value=""/>
-            // </Rows>
-            //</reportViewData>
-            XDocument target = new XDocument(
-                new XElement("ReportViewData",
-                    new XElement("Fields",
-                           from field in x.Descendants("Row").FirstOrDefault().Descendants()
-                           select new XElement("Field", new XAttribute("name", field.Name))
-                    ),
-                    new XElement("Rows",
-                                from row in x.Descendants("Row")
-                                select new XElement(row.Name,
-                                       from field in row.Nodes()
-                                       select new XElement("Field", new XAttribute("name", ((XElement)field).Name),
-                                                                    new XAttribute("value", ((XElement)field).Value)))
-                    
-                )
-            ));
-            Repository.RunModelSearch("", "", "", target.ToString());
-
-            
-
-
-        }      
+        }
+        
     }
 }
