@@ -29,6 +29,7 @@ namespace hoTools.Utils
                     return "unknown object type";
             } 
         }
+       
 
 
         public static EA.Element getElementFromContextObject(EA.Repository rep)  {

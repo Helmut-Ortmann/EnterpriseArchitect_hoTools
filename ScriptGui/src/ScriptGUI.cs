@@ -9,8 +9,8 @@ using EAAddinFramework.Utils;
 using hoTools.Settings;
 
 using System.IO;
-using System.Xml;
 using System.Xml.Linq;
+using hoTools.Utils;
 
 
 namespace hoTools.Scripts
@@ -215,7 +215,7 @@ namespace hoTools.Scripts
         /// <summary>
         /// Run the selected scripts with:
         /// - itemObject The selected item
-        /// - objectType ObjectType of the selected object
+        /// - objectType SqlObjectType of the selected object
         /// - Model object (only if parameter count = 3)
         /// </summary>
         /// <param name="sender"></param>
@@ -477,10 +477,30 @@ namespace hoTools.Scripts
         {
             string xml = Model.SqlQueryWithException(txtBoxSql.Text);
             if (xml == null) return;
+            // get rows / items to call script
             List<EaItem> eaItemList = Model.MakeEaItemListFromQuery(XDocument.Parse(xml));
             foreach (EaItem item in eaItemList)
             {
-                string s = item.ToString();
+                // get selected element and type
+                EA.ObjectType oType = Repository.GetContextItemType();
+                object oContext = Repository.GetContextObject();
+
+                DataGridViewRow rowToRun = dataGridViewScripts.Rows[rowScriptsIndex];
+                DataRowView row = rowToRun.DataBoundItem as DataRowView;
+                var scriptFunction = row["FunctionObj"] as ScriptFunction;
+                int? scriptParCount = row["ParCount"] as int?;
+                switch (scriptParCount) {
+                    case 2:
+                    case 3:
+                        // run the script with two or three parameters
+                       runScriptFromContext(scriptFunction, item.EaObjectType, item.EaObject);
+                       continue;
+ 
+                    default:
+                        MessageBox.Show($"Script parameter count shall be 2 or 3, is {scriptParCount}", "Invalid count of script parameters, Break!!!!");
+                        break;
+
+                }
             }
         }
         

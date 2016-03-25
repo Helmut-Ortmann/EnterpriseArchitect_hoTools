@@ -8,6 +8,7 @@ using System.Xml.Linq;
 using System.Linq;
 
 
+
 namespace EAAddinFramework.Utils
 {
     // Represents the current EA Model 
@@ -389,11 +390,33 @@ namespace EAAddinFramework.Utils
             //</reportViewData>
 
             List<EaItem> eaItemList = new List<EaItem>();
-            var eaGuids = from guid in x.Descendants("Row").Descendants() where guid.Name.Equals("EACLASS") select guid;
-            foreach (string guid in eaGuids)
+            var rows = from row in x.Descendants("Row").Descendants()
+                     where row.Name == "CLASSGUID" ||
+                           row.Name == "CLASSTYPE"     // 'Class','Action','Diagram', 
+                     select row;
+            foreach (var row in rows)
             {
-                eaItemList.Add(new EaItem(guid, null));
+                string guid = null;
+                string sqlObjectType = null;
+                string fieldName = row.Name.ToString();
+                switch (fieldName) {
+                    case "CLASSGUID":
+                        guid = row.Value;
+                        continue;
+                    case "CLASSTYPE":
+                        // valid class type
+                        EA.ObjectType eaObjectType;
+                        object eaObject = Repository.GetEaObject(sqlObjectType, guid, out eaObjectType);
+                        eaItemList.Add(new EaItem(guid, sqlObjectType, eaObjectType, eaObject));
+                        guid = null;
+                        continue;
+
+                    default:
+                        MessageBox.Show($"Column'{row.Value}' not expected! (expected CLASSGUID or CLASSTYPE)", "Invalid SQL results, column not expected");
+                        return null;
+                }
             }
+
             return eaItemList;
 
 

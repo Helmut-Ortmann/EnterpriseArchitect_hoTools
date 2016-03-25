@@ -31,6 +31,12 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>hoKeyPair.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Interop.EA">
       <HintPath>C:\Program Files (x86)\Sparx Systems\EA\Interop.EA.dll</HintPath>
@@ -50,6 +56,7 @@
   <ItemGroup>
     <Compile Include="EASpecific\EAAddin.cs" />
     <Compile Include="Util\EaItem.cs" />
+    <Compile Include="Util\EaObjectType.cs" />
     <Compile Include="Util\Script\JavaScriptLanguage.cs" />
     <Compile Include="Util\Script\JavaScriptLanguageBase.cs" />
     <Compile Include="Util\Script\JScriptLanguage.cs" />
