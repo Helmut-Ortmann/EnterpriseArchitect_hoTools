@@ -8,6 +8,8 @@ namespace EAAddinFramework.Utils
     public static class EaObjectType
     {
          // Dictionary of SQL Types
+         // only use unambiguous types
+         // !!!!Package may be a Package as well as a Diagram!!!!!!
          static Dictionary<string, EA.ObjectType> eaObjectTypes = new Dictionary<string, EA.ObjectType>
         {
             { "Action",EA.ObjectType.otElement},
@@ -26,7 +28,6 @@ namespace EAAddinFramework.Utils
             { "Decision",EA.ObjectType.otElement},
             { "DiagramFrame",EA.ObjectType.otElement},
 
-            { "Package",EA.ObjectType.otPackage},
             { "Attribute",EA.ObjectType.otAttribute},
             { "Operation",EA.ObjectType.otMethod},
             { "Analysis",EA.ObjectType.otDiagram},
@@ -59,7 +60,8 @@ namespace EAAddinFramework.Utils
             EA.ObjectType eaObjectType;
             objectType = EA.ObjectType.otNone;
 
-            if (! (eaObjectTypes.TryGetValue(sqlObjectType, out eaObjectType) ) )
+            // eaObjectType found in dictionary
+            if ( eaObjectTypes.TryGetValue(sqlObjectType, out eaObjectType) )
             {
                 switch (eaObjectType)
                 {
@@ -87,11 +89,11 @@ namespace EAAddinFramework.Utils
 
             } else {
                 // by SQL
-                string where = $"where ea_guid = { GUID}";
-                string sql = $"select ea_guid, 'OBJECT'  as object_type from t_object  {where}      UNION " +
-                             $"       ea_guid, 'DIAGRAM'                from t_diagram {where}            ";
+                string where = $"where ea_guid = '{ GUID}'";
+                string sql = $"select 'OBJECT'  as object_type from t_object  {where}      UNION " +
+                             $"select 'DIAGRAM'                from t_diagram {where}            ";
                 XElement x = XElement.Parse(rep.SQLQuery(sql));
-                var oType = (from t in x.Descendants("Row")
+                var oType = (from t in x.Descendants("object_type")
                              select t).FirstOrDefault();
                 if (oType == null )
                 {

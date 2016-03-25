@@ -186,25 +186,31 @@ namespace hoTools.Scripts
             updateTableFunctions();
         }
 
-        void updateTableFunctions()
+        void updateTableFunctions(bool isWithAll=false)
         {
             _tableFunctions.Rows.Clear();
             // fill list
+            DataRow newRow;
             foreach (Script script in _lscripts)
             {
-                DataRow newRow = _tableFunctions.NewRow();
-                newRow["ScriptObj"] = script;
-                newRow["Script"] = script.name;
-                newRow["Language"] = script.languageName;
-                newRow["Group"] = script.groupName;
-                newRow["Err"] = script.errorMessage;
+
                 foreach (ScriptFunction function in script.functions)
                 {
-                    newRow["FunctionObj"] = function;
-                    newRow["Function"] = function.name;
-                    newRow["ParCount"] = function.numberOfParameters;
+                    if (isWithAll || (function.numberOfParameters > 1 && function.numberOfParameters < 4)) { 
+                        newRow = _tableFunctions.NewRow();
+                        newRow["ScriptObj"] = script;
+                        newRow["Script"] = script.name;
+                        newRow["Language"] = script.languageName;
+                        newRow["Group"] = script.groupName;
+                        newRow["Err"] = script.errorMessage;
+
+                        newRow["FunctionObj"] = function;
+                        newRow["Function"] = function.name;
+                        newRow["ParCount"] = function.numberOfParameters;
+                        _tableFunctions.Rows.Add(newRow);
+                    }
                 }
-                _tableFunctions.Rows.Add(newRow);
+                
             }
             // bind to grid
             // Select column to view
@@ -212,61 +218,15 @@ namespace hoTools.Scripts
 
         }
 
-        /// <summary>
-        /// Run the selected scripts with:
-        /// - itemObject The selected item
-        /// - objectType SqlObjectType of the selected object
-        /// - Model object (only if parameter count = 3)
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        void btnRunScript_Click(object sender, EventArgs e)
-        {
-         
-
-            // get selected element and type
-            EA.ObjectType oType = Repository.GetContextItemType();
-            object oContext = Repository.GetContextObject();
-
-            foreach (DataGridViewRow row in dataGridViewScripts.SelectedRows)
-            {
-                // get parameter of Script and selected function
-                DataRowView rowToRunView = row.DataBoundItem as DataRowView;
-                DataRow rowToRun = rowToRunView.Row;
-                var scriptFunction = rowToRun["FunctionObj"] as ScriptFunction;
-                runScriptFromContext(scriptFunction, oType, oContext);
-
-            }
-        }
-        /// <summary>
-        /// Run function for EA item of arbitrary type
-        /// - If parameter count = 2 it calls the function with oType, oContext
-        /// - If parameter count = 3 it calls the funtion with oType, oContext, Model
-        /// </summary>
-        /// <param name="function">Function</param>
-        /// <param name="oType">EA Object type</param>
-        /// <param name="oContext">EA Object</param>
-        /// <returns></returns>
-        private bool runScriptFromContext(ScriptFunction function, EA.ObjectType oType, object oContext)
-        {
-                // run script according to parameter count
-                switch (function.numberOfParameters)
-                {
-                    case 2:
-                        object[] par2 = { oContext, oType };
-                        return new ScriptFuntionWrapper(function).execute(par2);
-                    case 3:
-                        object[] par3 = { oContext, oType, Model };
-                        return new ScriptFuntionWrapper(function).execute(par3);
-                    default:
-                        MessageBox.Show($"Script {function.fullName}  has {function.numberOfParameters} parameter",
-                            "Script function parameter count not 2 or 3, Break!");
-                        return false;
-                }
-           
-        }
-
         
+        void btnRunSql_Click(object sender, EventArgs e)
+        {
+            Cursor.Current = Cursors.WaitCursor;
+            GuiFunction.RunSql(Model, txtBoxSql.Text);
+            Cursor.Current = Cursors.Default;
+        }
+
+
         private void runScriptToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // get selected element and type
@@ -276,7 +236,7 @@ namespace hoTools.Scripts
             DataGridViewRow rowToRun = dataGridViewScripts.Rows[rowScriptsIndex];
             DataRowView row = rowToRun.DataBoundItem as DataRowView;
             var scriptFunction = row["FunctionObj"] as ScriptFunction;
-            runScriptFromContext(scriptFunction, oType, oContext);
+            GuiFunction.RunScriptFunction(Model, scriptFunction, oType, oContext);
 
         }
 
@@ -291,7 +251,7 @@ namespace hoTools.Scripts
             string scriptLanguag = row.Cells["Language"].Value as string;
             string err = row.Cells["Err"].Value as string;
             if (String.IsNullOrWhiteSpace(err))
-            { MessageBox.Show("", $"Funtion compiled fine {scriptName}.{functionName}"); }
+            { MessageBox.Show("", $"Function compiled fine {scriptName}.{functionName}"); }
             else
             { MessageBox.Show("Error:\n'" + err + "'", $"Error {scriptName}:{functionName}"); }
 
@@ -300,7 +260,8 @@ namespace hoTools.Scripts
 
         /// <summary>
         /// MouseClick in dataGridViewScripts
-        /// - Estiminate the clicked row
+        /// - Estimate
+        /// mate the clicked row
         /// - store the current row
         /// </summary>
         /// <param name="sender"></param>
@@ -363,6 +324,33 @@ namespace hoTools.Scripts
             insertText(txtBoxSql, DIAGRAM_TEMPLATE);
 
         }
+        private void packageTemplateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            const string PACKAGE_TEMPLATE =
+            "select o.ea_guid AS CLASSGUID, o.object_type AS CLASSTYPE,o.Name AS Name,o.object_type As Type, * \r\n" +
+                           "from t_object o, t_package pkg \r\n" +
+                           "where o.object_type = 'Package' AND \r\n" +
+                           "      o.ea_guid = pkg.ea_guid";
+
+            insertText(txtBoxSql, PACKAGE_TEMPLATE);
+        }
+        private void toolStripMenuItemSqlAttribute_Click(object sender, EventArgs e)
+        {
+            const string ATTRIBUTE_TEMPLATE =
+                "select a.ea_guid AS CLASSGUID, 'Attribute' AS CLASSTYPE,a.Name AS Name, * \r\n" +
+                "from t_attribute o\r\n" +
+                "where a.name like '%' ";
+            insertText(txtBoxSql, ATTRIBUTE_TEMPLATE);
+        }
+        private void toolStripMenuItemSqlOperation_Click(object sender, EventArgs e)
+        {
+            const string OPERATION_TEMPLATE =
+                "select o.ea_guid AS CLASSGUID, 'Operation' AS CLASSTYPE,o.Name AS Name, * \r\n" +
+                "from t_operation o\r\n" +
+                "where o.name like '%' ";
+            insertText(txtBoxSql, OPERATION_TEMPLATE);
+        }
+
 
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -446,7 +434,7 @@ namespace hoTools.Scripts
         }
         private void addTabToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            TabPage tab = new TabPage() { Text = @"mySql.sql" };
+            TabPage tab = new TabPage { Text = @"mySql.sql" };
             tabControlSql.TabPages.Add(tab);
             tabControlSql.SelectedTab = tab;
             TextBox txtBox = new TextBox { Parent = tab, Dock = DockStyle.Fill };
@@ -462,47 +450,38 @@ namespace hoTools.Scripts
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnRun_Click(object sender, EventArgs e)
+        private void btnRunScriptForSql_Click(object sender, EventArgs e)
         {
-            // run the query
-            string xml = Model.SqlQueryWithException(txtBoxSql.Text);
-            if (xml == null) return;
-           
-            // output the query in EA Search Window
-            string target = Model.MakeEaXmlOutput(xml);
-            Repository.RunModelSearch("", "", "", target);
+
+            Cursor.Current = Cursors.WaitCursor;
+
+
+            // get Script and its parameter to run
+            DataGridViewRow rowToRun = dataGridViewScripts.Rows[rowScriptsIndex];
+            DataRowView row = rowToRun.DataBoundItem as DataRowView;
+            var scriptFunction = row["FunctionObj"] as ScriptFunction;
+
+            // run SQL, Script and ask whether to execute, skip script or break all together
+            GuiFunction.RunScriptWithAsk(Model, txtBoxSql.Text, scriptFunction, isWithAsk:false);
+            Cursor.Current = Cursors.Default;
+
         }
 
-        private void btnRunScriptWithAsk_Click(object sender, EventArgs e)
+        private void btnRunScriptForSqlWithAsk_Click(object sender, EventArgs e)
         {
-            string xml = Model.SqlQueryWithException(txtBoxSql.Text);
-            if (xml == null) return;
-            // get rows / items to call script
-            List<EaItem> eaItemList = Model.MakeEaItemListFromQuery(XDocument.Parse(xml));
-            foreach (EaItem item in eaItemList)
-            {
-                // get selected element and type
-                EA.ObjectType oType = Repository.GetContextItemType();
-                object oContext = Repository.GetContextObject();
+            Cursor.Current = Cursors.WaitCursor;
 
-                DataGridViewRow rowToRun = dataGridViewScripts.Rows[rowScriptsIndex];
-                DataRowView row = rowToRun.DataBoundItem as DataRowView;
-                var scriptFunction = row["FunctionObj"] as ScriptFunction;
-                int? scriptParCount = row["ParCount"] as int?;
-                switch (scriptParCount) {
-                    case 2:
-                    case 3:
-                        // run the script with two or three parameters
-                       runScriptFromContext(scriptFunction, item.EaObjectType, item.EaObject);
-                       continue;
- 
-                    default:
-                        MessageBox.Show($"Script parameter count shall be 2 or 3, is {scriptParCount}", "Invalid count of script parameters, Break!!!!");
-                        break;
+            // get Script and its parameter to run
+            DataGridViewRow rowToRun = dataGridViewScripts.Rows[rowScriptsIndex];
+            DataRowView row = rowToRun.DataBoundItem as DataRowView;
+            var scriptFunction = row["FunctionObj"] as ScriptFunction;
 
-                }
-            }
+            // run SQL, Script and ask whether to execute, skip script or break all together
+            GuiFunction.RunScriptWithAsk(Model, txtBoxSql.Text, scriptFunction, isWithAsk:true);
+
+            Cursor.Current = Cursors.Default;
         }
+
         
     }
 }

@@ -22,7 +22,7 @@ namespace EAAddinFramework.Utils
 
 
         /// <summary>
-        /// List of databses supported as backend for an EA repository
+        /// List of databases supported as backend for an EA repository
         /// 0 - MYSQL
         ///	1 - SQLSVR
         /// 2 - ADOJET
@@ -120,7 +120,7 @@ namespace EAAddinFramework.Utils
                 {
                     var allProcesses = new List<Process>(Process.GetProcesses());
                     Process proc = allProcesses.Find(pr => pr.ProcessName == "EA");
-                    //if we don't find the process then we set the mainwindow to null
+                    //if we don't find the process then we set the main window to null
                     if (proc == null
                            || proc.MainWindowHandle == null)
                     {
@@ -162,10 +162,10 @@ namespace EAAddinFramework.Utils
                     }
                     else
                     {
-                        //open the file as a text file to find the connectionstring.
+                        //open the file as a text file to find the connection string.
                         var fileStream = new System.IO.FileStream(connectionString, System.IO.FileMode.Open, System.IO.FileAccess.Read, System.IO.FileShare.ReadWrite);
                         var reader = new System.IO.StreamReader(fileStream);
-                        //replace connectionstring with the file contents
+                        //replace connection string with the file contents
                         connectionString = reader.ReadToEnd();
                         reader.Close();
                     }
@@ -192,7 +192,7 @@ namespace EAAddinFramework.Utils
             this.Repository.Execute(SQLString);
         }
         /// <summary>
-        /// formats an xpath accordign to the type of database.
+        /// formats an xpath according to the type of database.
         /// For Oracle and Firebird it should be ALL CAPS
         /// </summary>
         /// <param name="xpath">the xpath to format</param>
@@ -227,7 +227,7 @@ namespace EAAddinFramework.Utils
                     escapedString = escapedString.Replace(@"\", @"\\");
                     break;
             }
-            // ALL DBMS types: replace the single qoutes "'" by double single quotes "''"
+            // ALL DBMS types: replace the single quotes "'" by double single quotes "''"
             escapedString = escapedString.Replace("'", "''");
             return escapedString;
         }
@@ -390,29 +390,37 @@ namespace EAAddinFramework.Utils
             //</reportViewData>
 
             List<EaItem> eaItemList = new List<EaItem>();
-            var rows = from row in x.Descendants("Row").Descendants()
+            var fields = from row in x.Descendants("Row").Descendants()
                      where row.Name == "CLASSGUID" ||
                            row.Name == "CLASSTYPE"     // 'Class','Action','Diagram', 
                      select row;
-            foreach (var row in rows)
+            string guid = "";
+            string sqlObjectType = "";
+            foreach (var field in fields)
             {
-                string guid = null;
-                string sqlObjectType = null;
-                string fieldName = row.Name.ToString();
+
+                string fieldName = field.Name.ToString();
                 switch (fieldName) {
                     case "CLASSGUID":
-                        guid = row.Value;
+                        guid = field.Value;
                         continue;
                     case "CLASSTYPE":
                         // valid class type
+                        sqlObjectType = field.Value;
                         EA.ObjectType eaObjectType;
                         object eaObject = Repository.GetEaObject(sqlObjectType, guid, out eaObjectType);
+                        if (eaObject == null)
+                        {
+                            MessageBox.Show($"CLASSTYPE='{sqlObjectType}' GUID='{guid}' ObjectType={eaObjectType}", "Couldn't find EA item, Break!!!");
+                            return null;
+                        }
                         eaItemList.Add(new EaItem(guid, sqlObjectType, eaObjectType, eaObject));
-                        guid = null;
+                        guid = "";
+                        sqlObjectType = "";
                         continue;
 
                     default:
-                        MessageBox.Show($"Column'{row.Value}' not expected! (expected CLASSGUID or CLASSTYPE)", "Invalid SQL results, column not expected");
+                        MessageBox.Show($"Column'{field.Value}' not expected! (expected CLASSGUID or CLASSTYPE)", "Invalid SQL results, column not expected");
                         return null;
                 }
             }
@@ -444,7 +452,7 @@ namespace EAAddinFramework.Utils
         /// - lcase -> lower in T-SQL (SQLSVR and ASA)
         /// </summary>
         /// <param name="sqlQuery">the query to format</param>
-        /// <returns>a query with traslated functions</returns>
+        /// <returns>a query with translated functions</returns>
         private string formatSQLFunctions(string sqlQuery)
         {
             string formattedSQL = sqlQuery;
@@ -515,7 +523,7 @@ namespace EAAddinFramework.Utils
                             formattedQuery = formattedQuery + limitString;
                             break;
                         case RepositoryType.FIREBIRD:
-                            // in firebird top becomes first
+                            // in Firebird top becomes first
                             formattedQuery = formattedQuery.Replace(selectTopN, selectTopN.Replace("top", "first"));
                             break;
                     }
@@ -524,17 +532,17 @@ namespace EAAddinFramework.Utils
             return formattedQuery;
         }
         /// <summary>
-        /// replace the wildcards in the given sql query string to match either MSAccess or ANSI syntax
+        /// replace the wild cards in the given sql query string to match either MSAccess or ANSI syntax
         /// </summary>
         /// <param name="sqlQuery">the sql string to edit</param>
-        /// <returns>the same sql query, but with its wildcards replaced according to the required syntax</returns>
+        /// <returns>the same sql query, but with its wild cards replaced according to the required syntax</returns>
         private string replaceSQLWildCards(string sqlQuery)
         {
             bool msAccess = this.repositoryType == RepositoryType.ADOJET;
             int beginLike = sqlQuery.IndexOf("like", StringComparison.InvariantCultureIgnoreCase);
             if (beginLike > 1)
             {
-                int beginString = sqlQuery.IndexOf("'", beginLike + "like".Length);
+                int beginString = sqlQuery.IndexOf("'", beginLike + "like".Length, StringComparison.CurrentCulture);
                 if (beginString > 0)
                 {
                     int endString = sqlQuery.IndexOf("'", beginString + 1);

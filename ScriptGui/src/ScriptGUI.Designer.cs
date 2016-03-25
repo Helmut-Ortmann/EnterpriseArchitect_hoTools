@@ -30,11 +30,13 @@ namespace hoTools.Scripts
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.txtSearchText = new System.Windows.Forms.TextBox();
+            this.btnRunScriptForSql = new System.Windows.Forms.Button();
+            this.btnRunScriptForSqlWithAsk = new System.Windows.Forms.Button();
             this.btnLoadScripts = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -48,7 +50,6 @@ namespace hoTools.Scripts
             this.ShowErrorToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.runScriptToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showScriptToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnRunScript = new System.Windows.Forms.Button();
             this.tabSqlPage1 = new System.Windows.Forms.TabPage();
             this.txtBoxSql = new System.Windows.Forms.TextBox();
             this.contextMenuStripSql = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -62,9 +63,8 @@ namespace hoTools.Scripts
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripComboBoxHistory = new System.Windows.Forms.ToolStripComboBox();
             this.tabControlSql = new System.Windows.Forms.TabControl();
-            this.btnRun = new System.Windows.Forms.Button();
+            this.btnRunSql = new System.Windows.Forms.Button();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.btnRunScriptWithAsk = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewScripts)).BeginInit();
             this.contextMenuStripDataGrid.SuspendLayout();
@@ -80,6 +80,29 @@ namespace hoTools.Scripts
             this.txtSearchText.Size = new System.Drawing.Size(237, 20);
             this.txtSearchText.TabIndex = 7;
             this.toolTip1.SetToolTip(this.txtSearchText, "Enter a search text");
+            // 
+            // btnRunScriptForSql
+            // 
+            this.btnRunScriptForSql.Location = new System.Drawing.Point(206, 435);
+            this.btnRunScriptForSql.Name = "btnRunScriptForSql";
+            this.btnRunScriptForSql.Size = new System.Drawing.Size(173, 23);
+            this.btnRunScriptForSql.TabIndex = 4;
+            this.btnRunScriptForSql.Text = "Run Query and Script";
+            this.toolTip1.SetToolTip(this.btnRunScriptForSql, "Run Query and execurte Script for all found Elements");
+            this.btnRunScriptForSql.UseVisualStyleBackColor = true;
+            this.btnRunScriptForSql.Click += new System.EventHandler(this.btnRunScriptForSql_Click);
+            // 
+            // btnRunScriptForSqlWithAsk
+            // 
+            this.btnRunScriptForSqlWithAsk.Location = new System.Drawing.Point(395, 435);
+            this.btnRunScriptForSqlWithAsk.Name = "btnRunScriptForSqlWithAsk";
+            this.btnRunScriptForSqlWithAsk.Size = new System.Drawing.Size(173, 23);
+            this.btnRunScriptForSqlWithAsk.TabIndex = 8;
+            this.btnRunScriptForSqlWithAsk.Text = "Run Query, Script and ask";
+            this.toolTip1.SetToolTip(this.btnRunScriptForSqlWithAsk, "Run Query until next found element, execute Script for this element and ask to:\r\n" +
+        "- Break\r\n- Proceed next\r\n- Proceed all");
+            this.btnRunScriptForSqlWithAsk.UseVisualStyleBackColor = true;
+            this.btnRunScriptForSqlWithAsk.Click += new System.EventHandler(this.btnRunScriptForSqlWithAsk_Click);
             // 
             // btnLoadScripts
             // 
@@ -150,35 +173,35 @@ namespace hoTools.Scripts
             // dataGridViewScripts
             // 
             this.dataGridViewScripts.AllowUserToOrderColumns = true;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewScripts.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewScripts.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridViewScripts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewScripts.ContextMenuStrip = this.contextMenuStripDataGrid;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewScripts.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewScripts.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridViewScripts.Location = new System.Drawing.Point(17, 289);
             this.dataGridViewScripts.Name = "dataGridViewScripts";
             this.dataGridViewScripts.ReadOnly = true;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewScripts.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewScripts.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridViewScripts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewScripts.Size = new System.Drawing.Size(730, 140);
             this.dataGridViewScripts.TabIndex = 3;
@@ -215,17 +238,6 @@ namespace hoTools.Scripts
             this.showScriptToolStripMenuItem.Text = "&ShowScript";
             this.showScriptToolStripMenuItem.Click += new System.EventHandler(this.showScriptToolStripMenuItem_Click);
             // 
-            // btnRunScript
-            // 
-            this.btnRunScript.Location = new System.Drawing.Point(206, 435);
-            this.btnRunScript.Name = "btnRunScript";
-            this.btnRunScript.Size = new System.Drawing.Size(173, 23);
-            this.btnRunScript.TabIndex = 4;
-            this.btnRunScript.Text = "Run Query and Script";
-            this.toolTip1.SetToolTip(this.btnRunScript, "Run Query and execurte Script for all found Elements");
-            this.btnRunScript.UseVisualStyleBackColor = true;
-            this.btnRunScript.Click += new System.EventHandler(this.btnRunScript_Click);
-            // 
             // tabSqlPage1
             // 
             this.tabSqlPage1.Controls.Add(this.txtBoxSql);
@@ -243,6 +255,7 @@ namespace hoTools.Scripts
             this.txtBoxSql.Location = new System.Drawing.Point(10, 0);
             this.txtBoxSql.Multiline = true;
             this.txtBoxSql.Name = "txtBoxSql";
+            this.txtBoxSql.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.txtBoxSql.Size = new System.Drawing.Size(726, 205);
             this.txtBoxSql.TabIndex = 0;
             // 
@@ -259,7 +272,7 @@ namespace hoTools.Scripts
             this.toolStripSeparator1,
             this.toolStripComboBoxHistory});
             this.contextMenuStripSql.Name = "contextMenuStripSql";
-            this.contextMenuStripSql.Size = new System.Drawing.Size(182, 191);
+            this.contextMenuStripSql.Size = new System.Drawing.Size(182, 213);
             // 
             // toolStripMenuItemSqlElement
             // 
@@ -280,6 +293,7 @@ namespace hoTools.Scripts
             this.packageTemplateToolStripMenuItem.Name = "packageTemplateToolStripMenuItem";
             this.packageTemplateToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
             this.packageTemplateToolStripMenuItem.Text = "PackageTemplate";
+            this.packageTemplateToolStripMenuItem.Click += new System.EventHandler(this.packageTemplateToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
@@ -328,42 +342,30 @@ namespace hoTools.Scripts
             this.tabControlSql.Size = new System.Drawing.Size(744, 237);
             this.tabControlSql.TabIndex = 5;
             // 
-            // btnRun
+            // btnRunSql
             // 
-            this.btnRun.Location = new System.Drawing.Point(17, 260);
-            this.btnRun.Name = "btnRun";
-            this.btnRun.Size = new System.Drawing.Size(75, 23);
-            this.btnRun.TabIndex = 6;
-            this.btnRun.Text = "Run";
-            this.btnRun.UseVisualStyleBackColor = true;
-            this.btnRun.Click += new System.EventHandler(this.btnRun_Click);
+            this.btnRunSql.Location = new System.Drawing.Point(17, 260);
+            this.btnRunSql.Name = "btnRunSql";
+            this.btnRunSql.Size = new System.Drawing.Size(75, 23);
+            this.btnRunSql.TabIndex = 6;
+            this.btnRunSql.Text = "Run";
+            this.btnRunSql.UseVisualStyleBackColor = true;
+            this.btnRunSql.Click += new System.EventHandler(this.btnRunSql_Click);
             // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
-            // btnRunScriptWithAsk
-            // 
-            this.btnRunScriptWithAsk.Location = new System.Drawing.Point(395, 435);
-            this.btnRunScriptWithAsk.Name = "btnRunScriptWithAsk";
-            this.btnRunScriptWithAsk.Size = new System.Drawing.Size(173, 23);
-            this.btnRunScriptWithAsk.TabIndex = 8;
-            this.btnRunScriptWithAsk.Text = "Run Query, Script and ask";
-            this.toolTip1.SetToolTip(this.btnRunScriptWithAsk, "Run Query until next found element, execute Script for this element and ask to:\r\n" +
-        "- Break\r\n- Proceed next\r\n- Proceed all");
-            this.btnRunScriptWithAsk.UseVisualStyleBackColor = true;
-            this.btnRunScriptWithAsk.Click += new System.EventHandler(this.btnRunScriptWithAsk_Click);
-            // 
             // ScriptGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.btnRunScriptWithAsk);
+            this.Controls.Add(this.btnRunScriptForSqlWithAsk);
             this.Controls.Add(this.txtSearchText);
-            this.Controls.Add(this.btnRun);
+            this.Controls.Add(this.btnRunSql);
             this.Controls.Add(this.tabControlSql);
-            this.Controls.Add(this.btnRunScript);
+            this.Controls.Add(this.btnRunScriptForSql);
             this.Controls.Add(this.dataGridViewScripts);
             this.Controls.Add(this.btnLoadScripts);
             this.Controls.Add(this.label1);
@@ -398,7 +400,7 @@ namespace hoTools.Scripts
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnLoadScripts;
         private System.Windows.Forms.DataGridView dataGridViewScripts;
-        private System.Windows.Forms.Button btnRunScript;
+        private System.Windows.Forms.Button btnRunScriptForSql;
         private System.Windows.Forms.TabPage tabSqlPage1;
         private System.Windows.Forms.TabControl tabControlSql;
         private System.Windows.Forms.TextBox txtBoxSql;
@@ -416,9 +418,9 @@ namespace hoTools.Scripts
         private System.Windows.Forms.ToolStripMenuItem addTabToolStripMenuItem;
         private System.Windows.Forms.ToolStripComboBox toolStripComboBoxHistory;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.Button btnRun;
+        private System.Windows.Forms.Button btnRunSql;
         private System.Windows.Forms.TextBox txtSearchText;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
-        private System.Windows.Forms.Button btnRunScriptWithAsk;
+        private System.Windows.Forms.Button btnRunScriptForSqlWithAsk;
     }
 }
