@@ -1,11 +1,11 @@
 ﻿using System;
+using System.Windows.Forms;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using EAAddinFramework.Utils;
-using System.Windows.Forms;
+using hoTools.Utils.SQL;
+
 
 namespace hoTools.Scripts
 {
@@ -108,11 +108,19 @@ namespace hoTools.Scripts
             }
 
         }
-        public static bool RunSql(Model model, string sql)
+
+        public static bool RunSql(Model model, string sql, string searchTerm)
         {
+            // replace templates
+            sql = SqlTemplates.replaceSearchTerm(sql, searchTerm);
+
             // run the query
             string xml = model.SqlQueryWithException(sql);
-            if (xml == null) return true;
+            if (xml == null) 
+            {
+                MessageBox.Show(@"If error see %APPDATA%SPARX\EA\dberror.txt", "Nothing found or error!");
+                return true;
+            }
 
             // output the query in EA Search Window
             string target = model.MakeEaXmlOutput(xml);

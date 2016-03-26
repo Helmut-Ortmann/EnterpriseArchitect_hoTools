@@ -86,6 +86,8 @@
     <Compile Include="src\RecursivePackages.cs" />
     <Compile Include="src\Run.cs" />
     <Compile Include="src\Sql.cs" />
+    <Compile Include="src\SqlTemplate.cs" />
+    <Compile Include="src\SqlTemplates.cs" />
     <Compile Include="src\svn.cs" />
     <Compile Include="src\TaggedValue.cs" />
     <Compile Include="src\Util.cs" />

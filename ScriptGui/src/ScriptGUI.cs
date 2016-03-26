@@ -2,15 +2,16 @@
 using System.Data;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
+using System.Diagnostics;
 using hoTools.ActiveX;
 
 using System.Collections.Generic;
 using EAAddinFramework.Utils;
 using hoTools.Settings;
+using hoTools.Utils.SQL;
 
 using System.IO;
-using System.Xml.Linq;
-using hoTools.Utils;
+
 
 
 namespace hoTools.Scripts
@@ -222,7 +223,7 @@ namespace hoTools.Scripts
         void btnRunSql_Click(object sender, EventArgs e)
         {
             Cursor.Current = Cursors.WaitCursor;
-            GuiFunction.RunSql(Model, txtBoxSql.Text);
+            GuiFunction.RunSql(Model, txtBoxSql.Text, txtSearchTerm.Text);
             Cursor.Current = Cursors.Default;
         }
 
@@ -243,7 +244,7 @@ namespace hoTools.Scripts
         /// <summary>
         /// Show error of the selected Script
         /// </summary>
-        private void ShowErrorToolStripMenuItem1_Click(object sender, EventArgs e)
+        private void ShowScriptErrorToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DataGridViewRow row = dataGridViewScripts.Rows[rowScriptsIndex];
             string scriptName = row.Cells["Script"].Value as string;
@@ -292,64 +293,16 @@ namespace hoTools.Scripts
         {
 
         }
-        /// <summary>
-        /// Insert Element Template
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void toolStripMenuItemSqlElement_Click(object sender, EventArgs e)
-        {
-            const string ELEMENT_TEMPLATE =
-                "select o.ea_guid AS CLASSGUID, o.object_type AS CLASSTYPE,o.Name AS Name,o.object_type As Type, * \r\n" +
-                "from t_object o\r\n" +
-                "where o.object_type in (\"Class\",\"Component\")";
-            insertText(txtBoxSql, ELEMENT_TEMPLATE);
-        }
 
-        private void insertText(TextBox txtBox, string ELEMENT_TEMPLATE)
+
+        private void insertText(TextBox txtBox, string text)
         {
             var selectionIndex = txtBox.SelectionStart;
-            txtBox.Text = txtBox.Text.Insert(selectionIndex, ELEMENT_TEMPLATE);
-            txtBox.SelectionStart = selectionIndex + ELEMENT_TEMPLATE.Length;
+            txtBox.Text = txtBox.Text.Insert(selectionIndex, text);
+            txtBox.SelectionStart = selectionIndex + text.Length;
         }
 
-        private void diagramTemplateToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            const string DIAGRAM_TEMPLATE =
-               "select d.ea_guid AS CLASSGUID, d.diagram_type AS CLASSTYPE,d.Name AS Name,d.diagram_type As Type, * \r\n" +
-               "from t_diagram d\r\n" +
-               "where d.diagram_type in \r\n" +
-               "(\"Activity\",\"Analysis\",\"Collaboration\",\"Component\",\"CompositeStructure\", \"Custom\",\"Deployment\",\"Logical\",\r\n"+
-               "\"Object\",\"Package\",  \"Sequence\",\"Statechart\",\"Timing\", \"UMLDiagram\", \"Use Case\", )";
-            insertText(txtBoxSql, DIAGRAM_TEMPLATE);
-
-        }
-        private void packageTemplateToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            const string PACKAGE_TEMPLATE =
-            "select o.ea_guid AS CLASSGUID, o.object_type AS CLASSTYPE,o.Name AS Name,o.object_type As Type, * \r\n" +
-                           "from t_object o, t_package pkg \r\n" +
-                           "where o.object_type = 'Package' AND \r\n" +
-                           "      o.ea_guid = pkg.ea_guid";
-
-            insertText(txtBoxSql, PACKAGE_TEMPLATE);
-        }
-        private void toolStripMenuItemSqlAttribute_Click(object sender, EventArgs e)
-        {
-            const string ATTRIBUTE_TEMPLATE =
-                "select a.ea_guid AS CLASSGUID, 'Attribute' AS CLASSTYPE,a.Name AS Name, * \r\n" +
-                "from t_attribute o\r\n" +
-                "where a.name like '%' ";
-            insertText(txtBoxSql, ATTRIBUTE_TEMPLATE);
-        }
-        private void toolStripMenuItemSqlOperation_Click(object sender, EventArgs e)
-        {
-            const string OPERATION_TEMPLATE =
-                "select o.ea_guid AS CLASSGUID, 'Operation' AS CLASSTYPE,o.Name AS Name, * \r\n" +
-                "from t_operation o\r\n" +
-                "where o.name like '%' ";
-            insertText(txtBoxSql, OPERATION_TEMPLATE);
-        }
+       
 
 
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -482,6 +435,70 @@ namespace hoTools.Scripts
             Cursor.Current = Cursors.Default;
         }
 
-        
+        #region Insert in sql
+        private void elementTemplateToolStripMenu_Click(object sender, EventArgs e)
+        {
+            insertText(txtBoxSql, SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.ELEMENT_TEMPLATE));
+        }
+        private void diagramTemplateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            insertText(txtBoxSql, SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.DIAGRAM_TEMPLATE));
+
+        }
+        private void packageTemplateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            insertText(txtBoxSql, SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.PACKAGE_TEMPLATE));
+        }
+       
+        private void insertCurrentItemToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            insertText(txtBoxSql, SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.CURRENT_ITEM_ID));
+        }
+
+        private void insertSearchTermForStripMenuItem_Click(object sender, EventArgs e)
+        {
+            insertText(txtBoxSql, SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.SEARCH_TERM));
+
+        }
+
+        private void insertCurrentItemGUIDToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            insertText(txtBoxSql, SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.CURRENT_ITEM_GUID));
+        }
+
+        private void insertBranchToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            insertText(txtBoxSql, SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.BRANCH));
+        }
+
+        private void insertPackageToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            insertText(txtBoxSql, SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.PACKAGE));
+        }
+        private void operationTemplateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            insertText(txtBoxSql, SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.OPERATION_TEMPLATE));
+        }
+        private void attributeTemplateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            insertText(txtBoxSql, SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.ATTRIBUTE_TEMPLATE));
+        }
+        #endregion
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void showSqlErrorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string appData = Environment.GetEnvironmentVariable("appdata");
+            string filePath = appData + @"\Sparx Systems\EA\dberror.txt";
+            try {
+                Process.Start(filePath);
+            } catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}\nFile:'{filePath}'", $"Can't open EA SQL Error file dberror.tx");
+            }
+        }
     }
 }

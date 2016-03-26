@@ -248,6 +248,7 @@ namespace EAAddinFramework.Utils
         /// <summary>
         /// Run EA SQL Query with Exception handling
         /// - return null if Exception
+        /// . return "" if nothing found
         /// - return xml string if ok
         /// </summary>
         /// <param name="query"></param>
@@ -257,7 +258,10 @@ namespace EAAddinFramework.Utils
             try
             {
                 // run the query
-                return SQLQueryNative(query);
+                string xml = SQLQueryNative(query);
+                // nothing found
+                if (!xml.Contains("Row")) return null;
+                return xml;
             }
             catch (Exception ex)
             {
