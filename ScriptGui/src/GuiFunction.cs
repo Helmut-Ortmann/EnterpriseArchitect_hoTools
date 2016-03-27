@@ -112,7 +112,7 @@ namespace hoTools.Scripts
         public static bool RunSql(Model model, string sql, string searchTerm)
         {
             // replace templates
-            sql = SqlTemplates.replaceSearchTerm(sql, searchTerm);
+            sql = SqlTemplates.replaceSearchTerm(model.Repository, sql, searchTerm);
 
             // run the query
             string xml = model.SqlQueryWithException(sql);
@@ -127,6 +127,21 @@ namespace hoTools.Scripts
             model.Repository.RunModelSearch("", "", "", target);
             return true;
         }
+        /// <summary>
+        /// Get File Name from Caption
+        /// - " *" in a caption means content has changed
+        /// </summary>
+        /// <param name="caption"></param>
+        /// <returns></returns>
+        public static string getFileNameFromCaptionUnchanged(string caption) 
+            => caption.Replace("*", "").Trim();
+        public static string getFileNameCaptionChanged(string caption) 
+            => getFileNameFromCaptionUnchanged(caption) + " *";
+        public static bool isFileNameCaptionChanged(string caption) 
+            => caption == getFileNameFromCaptionUnchanged(caption);
+
+        public static bool getFileNameCaptionInitial(string caption)
+            => caption == "noName1.sql";
 
     }
 }

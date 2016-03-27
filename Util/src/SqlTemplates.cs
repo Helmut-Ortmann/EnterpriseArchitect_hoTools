@@ -2,6 +2,8 @@
 using System.Windows.Forms;
 using EA;
 
+using hoTools.Utils;
+
 
 namespace hoTools.Utils.SQL
 {
@@ -54,10 +56,12 @@ namespace hoTools.Utils.SQL
                     @"Template to search for Operations") },
             { SQL_TEMPLATE_ID.SEARCH_TERM,
                 new SqlTemplate(@"SEARCH_TERM", "<Search Term>","<Search Term> is a filed replaced at runtime by a variable string.") },
-            { SQL_TEMPLATE_ID.PACKAGE,
-                new SqlTemplate(@"PACKAGE", @"#Package#",@"Placeholder for the current selected package, use as PackageID\n pkg.Package_ID = #Package# ") },
-            { SQL_TEMPLATE_ID.BRANCH,
-                new SqlTemplate(@"BRANCH", @"#Branch#",@"Placeholder for the current selected package (recursive), use as PackageID\n pkg.Package_ID in (#Branch# ") },
+            { SQL_TEMPLATE_ID.PACKAGE_ID,
+                new SqlTemplate(@"PACKAGE_ID", @"#Package#",@"Placeholder for the current selected package, use as PackageID\n pkg.Package_ID = #Package# ") },
+            { SQL_TEMPLATE_ID.BRANCH_IDS,
+                new SqlTemplate(@"BRANCH_IDS", @"#Branch#",@"Placeholder for the current selected package (recursive), use as PackageID\n pkg.Package_ID in (#Branch# ") },
+            { SQL_TEMPLATE_ID.IN_BRANCH_IDS,
+                new SqlTemplate(@"IN_BRANCH_IDS", @"#InBranches#",@"Placeholder for sql in clause for the current selected package (recursive), use as PackageID\n pkg.Package_ID  (#InBranch# ") },
             { SQL_TEMPLATE_ID.CURRENT_ITEM_ID,
                 new SqlTemplate(@"CURRENT_ITEM_ID", @"#CurrentElementID#",@"Placeholder for the current selected item ID, use as ID\n obj.Object_ID = #CurrentElementID# ") },
             { SQL_TEMPLATE_ID.CURRENT_ITEM_GUID,
@@ -80,8 +84,9 @@ namespace hoTools.Utils.SQL
             ATTRIBUTE_TEMPLATE,
             OPERATION_TEMPLATE,
             SEARCH_TERM,
-            PACKAGE,
-            BRANCH,
+            PACKAGE_ID,
+            BRANCH_IDS,
+            IN_BRANCH_IDS,
             CURRENT_ITEM_ID,
             CURRENT_ITEM_GUID,
             AUTHOR,
@@ -148,6 +153,7 @@ namespace hoTools.Utils.SQL
 
         public static string replaceSearchTerm(Repository rep, string toUpdate, string searchTerm)
         {
+            // <Search Term>
             string sql = toUpdate.Replace(getTemplate(SQL_TEMPLATE_ID.SEARCH_TERM), searchTerm);
 
 
@@ -197,6 +203,56 @@ namespace hoTools.Utils.SQL
                         break;
                 }
                 sql = sql.Replace(currentGuidTemplate, guid);
+            }
+            // Package ID
+            string currentPackageTemplate = getTemplate(SQL_TEMPLATE_ID.PACKAGE_ID);
+            if (sql.Contains(currentPackageTemplate))
+            {
+                EA.ObjectType objectType = rep.GetContextItemType();
+                int id = 0;
+                switch (objectType)
+                {
+                    case EA.ObjectType.otDiagram:
+                        EA.Diagram dia = (EA.Diagram)rep.GetContextObject();
+                        id = dia.PackageID;
+                        break;
+                    case EA.ObjectType.otElement:
+                        EA.Element el = (EA.Element)rep.GetContextObject();
+                        id = el.PackageID;
+                        break;
+                    case EA.ObjectType.otPackage:
+                        EA.Package pkg = (EA.Package)rep.GetContextObject();
+                        id = pkg.PackageID;
+                        break;
+                }
+                sql = sql.Replace(currentPackageTemplate, $"{id}");
+            }
+            // Branch=Package IDs, Recursive
+            string currentBranchTemplate = getTemplate(SQL_TEMPLATE_ID.BRANCH_IDS);
+            if (sql.Contains(currentBranchTemplate))
+            {
+                EA.ObjectType objectType = rep.GetContextItemType();
+                int id = 0;
+                switch (objectType)
+                {
+                    case EA.ObjectType.otDiagram:
+                        EA.Diagram dia = (EA.Diagram)rep.GetContextObject();
+                        id = dia.PackageID;
+                        break;
+                    case EA.ObjectType.otElement:
+                        EA.Element el = (EA.Element)rep.GetContextObject();
+                        id = el.PackageID;
+                        break;
+                    case EA.ObjectType.otPackage:
+                        EA.Package pkg = (EA.Package)rep.GetContextObject();
+                        id = pkg.PackageID;
+                        break;
+                }
+                if (id > 0)
+                {
+                    string branch = Package.getBranch(rep, "", id);
+                    sql = sql.Replace(currentBranchTemplate, branch);
+                }
             }
 
 

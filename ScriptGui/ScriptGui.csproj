@@ -65,6 +65,8 @@
     <Compile Include="src\ScriptGUI.Designer.cs">
       <DependentUpon>ScriptGUI.cs</DependentUpon>
     </Compile>
+    <Compile Include="src\SqlTabCntrl.cs" />
+    <Compile Include="src\SqlTabCntrls.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ActiveX\ActiveX.csproj">

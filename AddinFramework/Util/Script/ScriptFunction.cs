@@ -28,7 +28,7 @@ namespace EAAddinFramework.Utils
         /// Constructor ScriptFunction
         /// </summary>
         /// <param name="owner">Script</param>
-        /// <param name="procedure">Funtion</param>
+        /// <param name="procedure">Function</param>
         public ScriptFunction(Script owner, Procedure procedure)
 		{
 			this.owner = owner;
@@ -38,7 +38,7 @@ namespace EAAddinFramework.Utils
 		/// execute this function
 		/// </summary>
 		/// <param name="parameters">the parameters needed by this function</param>
-		/// <returns>whatever gets returned by the the actual script function</returns>
+		/// <returns>whatever gets returned by the actual script function</returns>
 		public object execute(object[] parameters)
 		{
 			if (this.procedure.NumArgs == parameters.Length)

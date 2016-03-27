@@ -32,6 +32,8 @@ namespace hoTools.Scripts
         List<Script> _lscripts = null;  // list off all scripts
         DataTable _tableFunctions = null; // Scripts and Functions
 
+        SqlTabCntrls _sqlTabCntrls = null;  // TAB Control with its TabPages
+
         /// <summary>
         /// The selected row in script list
         /// </summary>
@@ -47,17 +49,22 @@ namespace hoTools.Scripts
             // Script
             initScriptDataGrid();
             initScriptDataTable();
+  
 
             
 
         }
         #endregion
         /// <summary>
-        /// Initialize setting
+        /// Initialize setting. Only call after
+        /// - Model
+        /// - Settings
+        /// updated
         /// </summary>
         /// <returns></returns>
         bool initializeSettings()
         {
+            _sqlTabCntrls = new SqlTabCntrls(Model, AddinSettings, tabControlSql);
             toolStripComboBoxHistoryUpdate(toolStripComboBoxHistory);
 
             return true;
@@ -289,12 +296,7 @@ namespace hoTools.Scripts
 
         }
 
-        private void contextMenuStripSql_Opening(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-
-        }
-
-
+        
         private void insertText(TextBox txtBox, string text)
         {
             var selectionIndex = txtBox.SelectionStart;
@@ -322,7 +324,8 @@ namespace hoTools.Scripts
             SaveFileDialog saveFileDialog = new SaveFileDialog();
 
             saveFileDialog.InitialDirectory = @"c:\temp\sql";
-            saveFileDialog.FileName = tabPageSql.Text;
+            // get file name
+            saveFileDialog.FileName = GuiFunction.getFileNameFromCaptionUnchanged(tabPageSql.Text);
             saveFileDialog.RestoreDirectory = true;
             saveFileDialog.Filter = "sql files (*.sql)|*.sql|All files (*.*)|*.*";
             saveFileDialog.FilterIndex = 1;
@@ -381,6 +384,7 @@ namespace hoTools.Scripts
                     // store the complete filename
                     AddinSettings.sqlFiles.insert(openFileDialog.FileName);
                     AddinSettings.save();
+                    tabPageSql.Text = Path.GetFileName(openFileDialog.FileName);
                 }
             }
 
@@ -395,6 +399,7 @@ namespace hoTools.Scripts
 
         private void loadSQLToolStripMenuItem_Click(object sender, EventArgs e)
         {
+
             loadTabFrom(tabSqlPage1, txtBoxSql);
         }
 
@@ -468,12 +473,12 @@ namespace hoTools.Scripts
 
         private void insertBranchToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            insertText(txtBoxSql, SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.BRANCH));
+            insertText(txtBoxSql, SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.BRANCH_IDS));
         }
 
         private void insertPackageToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            insertText(txtBoxSql, SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.PACKAGE));
+            insertText(txtBoxSql, SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.PACKAGE_ID));
         }
         private void operationTemplateToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -487,6 +492,10 @@ namespace hoTools.Scripts
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            ToolStripMenuItem menuItem = (ToolStripMenuItem)sender;
+            ToolStrip item = (ToolStrip)menuItem.GetCurrentParent();
+            TabPage tabPage = (TabPage)item.Parent;
+            safeTabAs(tabSqlPage1, txtBoxSql);
         }
 
         private void showSqlErrorToolStripMenuItem_Click(object sender, EventArgs e)
@@ -499,6 +508,18 @@ namespace hoTools.Scripts
             {
                 MessageBox.Show($"{ex.Message}\nFile:'{filePath}'", $"Can't open EA SQL Error file dberror.tx");
             }
+        }
+
+        private void txtBoxSql_TextChanged(object sender, EventArgs e)
+        {
+            TextBox txtBox = (TextBox)sender;
+            TabPage tabPage = (TabPage)txtBox.Parent;
+            if (!(tabPage.Text.Contains("*"))) tabPage.Text = tabPage.Text + " *";
+        }
+
+        private void FileNewTabToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _sqlTabCntrls.addTab();
         }
     }
 }

@@ -24,7 +24,7 @@ using GlobalHotkeys;
 //Tools developed by Helmut Ortmann
 //---------------------------------------------------------------
 //Configuration:
-//hoTools:    ..\Setp\ActiveXdll.config.xml 
+//hoTools:    ..\Setup\ActiveXdll.config.xml 
 //VAR1:        ..\SetpVAR1\ActiveXdll.config.xml 
 //
 //Customer=hoTools: "14F09211-3460-47A6-B837-A477491F0A67"
@@ -99,8 +99,8 @@ namespace hoTools
         const string menuDeviderInteraction = "-------------Create Interaction for Operation ---------------------------";
         const string menuCreateInteractionForOperation = "&Create Interaction for Operation (select operation or class)  ";
 
-        const string menuDeviderStateMachine = "-------------Create Statemachine for Operation ---------------------------";
-        const string menuCreateStateMachineForOperation = "&Create Statemachine for Operation (select operation)  ";
+        const string menuDeviderStateMachine = "-------------Create State Machine for Operation ---------------------------";
+        const string menuCreateStateMachineForOperation = "&Create State Machine for Operation (select operation)  ";
 
 
         const string menuCorrectTypes = "-------------Correct Type ---------------------------";
@@ -129,7 +129,7 @@ namespace hoTools
 
 
         /// <summary>
-        /// constructor where we set the menuheader and menuOptions
+        /// constructor where we set the menu header and menuOptions
         /// </summary>
         public AddinClass()
         {
@@ -208,7 +208,7 @@ namespace hoTools
         {
             public static void SetupGlobalHotkeys()
             {
-                // lest og global hotkeys
+                // global hot keys
                 var hotkeys = new List<Hotkey>();
 
                 Dictionary<string, Keys> keys = GlobalKeysConfig.getKeys();
@@ -415,7 +415,7 @@ namespace hoTools
         }
         #region initializeForRepository
         /// <summary>
-        /// Initialize repositories for all EA hoTools Addin Tablulators
+        /// Initialize repositories for all EA hoTools Addin Tabulators
         /// </summary>
         /// <param name="rep"></param>
         private void initializeForRepository(EA.Repository rep)
@@ -450,7 +450,7 @@ namespace hoTools
         /// <param name="MenuLocation">the location of the menu</param>
         /// <param name="MenuName">the name of the menu</param>
         /// <param name="ItemName">the name of the menu item</param>
-        /// <param name="IsEnabled">boolean indicating whethe the menu item is enabled</param>
+        /// <param name="IsEnabled">boolean indicating whether the menu item is enabled</param>
         /// <param name="IsChecked">boolean indicating whether the menu is checked</param>
         public override void EA_GetMenuState(EA.Repository Repository, string MenuLocation, string MenuName, string ItemName, ref bool IsEnabled, ref bool IsChecked)
         {
@@ -633,7 +633,7 @@ namespace hoTools
                     
                     break;
 
-                // Line style: Tree Horizental 
+                // Line style: Tree Horizontal 
                 case menuLineStyleDiaTH:
                     EaService.setLineStyle(Repository, "H");
                     
@@ -662,7 +662,9 @@ namespace hoTools
                             // reload view
                             Repository.ReloadDiagram(diaCurrent.DiagramID);
                         }
+                        #pragma warning disable RECS0022
                         catch { }
+                        #pragma warning restore RECS0022
                     }
 
                     break;
@@ -795,7 +797,7 @@ namespace hoTools
                     if (oType.Equals(EA.ObjectType.otElement)) // only Element
                     {
                         el = (EA.Element)Repository.GetContextObject();
-                        string conStr = Clipboard.GetText();  // get Clippboard
+                        string conStr = Clipboard.GetText();  // get Clipboard
                         if (conStr.StartsWith("{", StringComparison.CurrentCulture) && conStr.Substring(37,1)=="}" && conStr.EndsWith("\r\n", StringComparison.CurrentCulture)) {
                             Repository.CreateOutputTab("DEBUG");
                             Repository.EnsureOutputVisible("DEBUG");
@@ -856,13 +858,15 @@ namespace hoTools
                                     dia.Update();
                                     Repository.ReloadDiagram(dia.DiagramID);
                                 }
+                                #pragma warning disable RECS0022
                                 catch
+                                #pragma warning restore RECS0022
                                 {
-                                    
+
                                 }
                                 
                             }
-                            MessageBox.Show(string.Format("Kopiert:{0}\r\nErrors:{1}", countInserted,countError));
+                            MessageBox.Show(string.Format("Copied:{0}\r\nErrors:{1}", countInserted,countError));
                         }
 
                         
@@ -887,7 +891,7 @@ namespace hoTools
                         foreach (EA.Connector con in el.Connectors)
                         {
                             conStr = conStr + con.ConnectorGUID;
-                            // check if client or supllier
+                            // check if client or supplier
                             if (con.ClientID == el.ElementID) conStr = conStr + "Client  \r\n";
                             if (con.SupplierID == el.ElementID) conStr = conStr + "Supplier\r\n";
 
@@ -1037,7 +1041,7 @@ namespace hoTools
 
                 if (con.Type.Equals("Sequence"))
                 {
-                    // If name is of the form: OperationName(..) the the operation is associated to an method
+                    // If name is of the form: OperationName(..) the operation is associated to an method
                     string opName = con.Name;
                     if (opName.EndsWith(")", StringComparison.CurrentCulture))
                     {
@@ -1173,7 +1177,7 @@ namespace hoTools
             }
         }
         //---------------------------------------------------------------------------------------------------------------
-        // linestyle
+        // line style
         // LH = "Line Style: Lateral Horizontal";
         // LV = "Line Style: Lateral Vertical";
         // TH  = "Line Style: Tree Horizontal";
