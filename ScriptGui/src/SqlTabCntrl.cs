@@ -23,7 +23,7 @@ namespace hoTools.Scripts
         Boolean IsPersistant { get; set; }
 
 
-       
+        #region Constructor TabPage
         public SqlTabCntrl(TabPage tabPage, string fullName)
         {
             init(tabPage, fullName, false);
@@ -32,11 +32,14 @@ namespace hoTools.Scripts
         {
             init(tabPage, fullName, isPersistant);            
         }
+        #endregion
         private void init(TabPage tabPage, string fullName, bool isPersistant)
         {
             _tabPage = tabPage;
             FullName = fullName;
             IsPersistant = isPersistant;
+            tabPage.Text = FullName;  // set Tab name
+
         }
         /*
         public static string getFileNameFromCaptionUnchanged(string caption)

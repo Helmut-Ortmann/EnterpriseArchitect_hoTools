@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data;
+using System.Drawing;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
@@ -49,6 +50,8 @@ namespace hoTools.Scripts
             // Script
             initScriptDataGrid();
             initScriptDataTable();
+
+          
   
 
             
@@ -520,6 +523,50 @@ namespace hoTools.Scripts
         private void FileNewTabToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _sqlTabCntrls.addTab();
+        }
+
+        /// <summary>
+        /// Draw a 'x' in the tabPage at the end of the caption
+        /// Set property DrawMode to 'OwnerDrawFixed'
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tabControlSql_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            /*
+            e.Graphics.DrawString("x", e.Font, Brushes.Black, e.Bounds.Right - 15, e.Bounds.Top + 4);
+            e.Graphics.DrawString(tabControlSql.TabPages[e.Index].Text, e.Font, Brushes.Black, e.Bounds.Left + 12, e.Bounds.Top + 4);
+            e.DrawFocusRectangle();
+            */
+            e.Graphics.DrawString("x", e.Font, Brushes.Black, e.Bounds.Right -15 , e.Bounds.Top + 4);
+            e.Graphics.DrawString(tabControlSql.TabPages[e.Index].Text, e.Font, Brushes.Black, e.Bounds.Left + 12, e.Bounds.Top + 4);
+            e.DrawFocusRectangle();
+
+            /*
+            Rectangle r = e.Bounds;
+            r = this.tabControlSql.GetTabRect(e.Index);
+            r.Offset(2, 2);
+            r.Width = 5;
+            r.Height = 5;
+            Brush b = new SolidBrush(Color.Black);
+            Pen p = new Pen(b);
+            e.Graphics.DrawLine(p, r.X, r.Y, r.X + r.Width, r.Y + r.Height);
+            e.Graphics.DrawLine(p, r.X + r.Width, r.Y, r.X, r.Y + r.Height);
+
+            string titel = this.tabControlSql.TabPages[e.Index].Text;
+            Font f = this.Font;
+            e.Graphics.DrawString(titel, f, b, new PointF(r.X + 5, r.Y));
+            */
+        }
+
+        private void tabControlSql_MouseDown(object sender, MouseEventArgs e)
+        {
+
+            Rectangle r = tabControlSql.GetTabRect(this.tabControlSql.SelectedIndex);
+            Rectangle closeButton = new Rectangle(r.Right - 15, r.Top + 4, 9, 7);
+            if (closeButton.Contains(e.Location))
+                this.tabControlSql.TabPages.Remove(this.tabControlSql.SelectedTab);
+
         }
     }
 }
