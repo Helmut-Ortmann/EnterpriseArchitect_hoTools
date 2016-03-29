@@ -8,37 +8,46 @@ using System.Threading.Tasks;
 
 namespace hoTools.Scripts
 {
+    /// <summary>
+    /// Information to store and handle for a TabPage:
+    /// - FullName
+    /// - DisplayName
+    /// - isChanged
+    /// </summary>
     public class SqlTabCntrl
     {
-        TabPage _tabPage;
-        string FullName { get; set; }
-        string DisplayName
+        /// <summary>
+        /// Extra space for display name to draw 'x' to provide a simulated Close Button
+        /// Use a non proportional font like courier new
+        /// </summary>
+        const string DISPLAY_NAME_EXTRA_SPACE = "   ";
+        public string FullName { get; set; }
+        public string DirectoryName => Path.GetDirectoryName(FullName);
+        public string DisplayName
         { get
             {
                 string fileExtension = "";
-                if (IsPersistant) fileExtension = " *";
-                return Path.GetFileName(FullName) + fileExtension;
+                if (IsChanged) fileExtension = " *";
+                return Path.GetFileName(FullName) + fileExtension + DISPLAY_NAME_EXTRA_SPACE; 
             }
         }
-        Boolean IsPersistant { get; set; }
+        public bool IsChanged { get; set; }
 
 
         #region Constructor TabPage
-        public SqlTabCntrl(TabPage tabPage, string fullName)
+        public SqlTabCntrl(string fullName)
         {
-            init(tabPage, fullName, false);
+            init(fullName, false);
         }
-        public SqlTabCntrl(TabPage tabPage, string fullName, bool isPersistant)
+        public SqlTabCntrl(string fullName, bool isChanged)
         {
-            init(tabPage, fullName, isPersistant);            
+            init(fullName, isChanged);            
         }
         #endregion
-        private void init(TabPage tabPage, string fullName, bool isPersistant)
+        private void init(string fullName, bool isChanged)
         {
-            _tabPage = tabPage;
-            FullName = fullName;
-            IsPersistant = isPersistant;
-            tabPage.Text = FullName;  // set Tab name
+            FullName = fullName.Trim();
+            IsChanged = isChanged;
 
         }
         /*

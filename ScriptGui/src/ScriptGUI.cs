@@ -67,7 +67,7 @@ namespace hoTools.Scripts
         /// <returns></returns>
         bool initializeSettings()
         {
-            _sqlTabCntrls = new SqlTabCntrls(Model, AddinSettings, tabControlSql);
+            _sqlTabCntrls = new SqlTabCntrls(Model, AddinSettings, components, tabControlSql);
             toolStripComboBoxHistoryUpdate(toolStripComboBoxHistory);
 
             return true;
@@ -387,11 +387,20 @@ namespace hoTools.Scripts
                     // store the complete filename
                     AddinSettings.sqlFiles.insert(openFileDialog.FileName);
                     AddinSettings.save();
-                    tabPageSql.Text = Path.GetFileName(openFileDialog.FileName);
+                    tabPageSql.Text = Path.GetFileName(openFileDialog.FileName) + " ";
                 }
             }
 
         }
+
+
+
+
+
+
+
+
+        
         private void addTabToolStripMenuItem_Click(object sender, EventArgs e)
         {
             TabPage tab = new TabPage { Text = @"mySql.sql" };
@@ -526,46 +535,51 @@ namespace hoTools.Scripts
         }
 
         /// <summary>
-        /// Draw a 'x' in the tabPage at the end of the caption
+        /// Draw a 'x' in the tabPage at the end of the caption (Close Tab)
         /// Set property DrawMode to 'OwnerDrawFixed'
+        /// Note: Extend the 'Text' Property by 3 blanks to get space for the extra 'x'
+        ///       Use a non proportional font like courier new
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void tabControlSql_DrawItem(object sender, DrawItemEventArgs e)
         {
-            /*
-            e.Graphics.DrawString("x", e.Font, Brushes.Black, e.Bounds.Right - 15, e.Bounds.Top + 4);
-            e.Graphics.DrawString(tabControlSql.TabPages[e.Index].Text, e.Font, Brushes.Black, e.Bounds.Left + 12, e.Bounds.Top + 4);
-            e.DrawFocusRectangle();
-            */
             e.Graphics.DrawString("x", e.Font, Brushes.Black, e.Bounds.Right -15 , e.Bounds.Top + 4);
             e.Graphics.DrawString(tabControlSql.TabPages[e.Index].Text, e.Font, Brushes.Black, e.Bounds.Left + 12, e.Bounds.Top + 4);
             e.DrawFocusRectangle();
-
-            /*
-            Rectangle r = e.Bounds;
-            r = this.tabControlSql.GetTabRect(e.Index);
-            r.Offset(2, 2);
-            r.Width = 5;
-            r.Height = 5;
-            Brush b = new SolidBrush(Color.Black);
-            Pen p = new Pen(b);
-            e.Graphics.DrawLine(p, r.X, r.Y, r.X + r.Width, r.Y + r.Height);
-            e.Graphics.DrawLine(p, r.X + r.Width, r.Y, r.X, r.Y + r.Height);
-
-            string titel = this.tabControlSql.TabPages[e.Index].Text;
-            Font f = this.Font;
-            e.Graphics.DrawString(titel, f, b, new PointF(r.X + 5, r.Y));
-            */
         }
 
+        /// <summary>
+        /// Close TabPage if 'x' for close is selected
+        /// Note: Use a non proportional font like 'courier new'
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void tabControlSql_MouseDown(object sender, MouseEventArgs e)
         {
-
             Rectangle r = tabControlSql.GetTabRect(this.tabControlSql.SelectedIndex);
             Rectangle closeButton = new Rectangle(r.Right - 15, r.Top + 4, 9, 7);
             if (closeButton.Contains(e.Location))
                 this.tabControlSql.TabPages.Remove(this.tabControlSql.SelectedTab);
+
+            /*
+            for (int i = 0; i < this.tabControlSql.TabPages.Count; i++)
+            {
+                Rectangle r = tabControlSql.GetTabRect(i);
+                //Getting the position of the "x" mark.
+                Rectangle closeButton = new Rectangle(r.Right - 15, r.Top + 4, 9, 7);
+                if (closeButton.Contains(e.Location))
+                {
+                    this.tabControlSql.TabPages.RemoveAt(i);
+
+                }
+            }
+            */
+
+        }
+
+        private void tabControlSql_MouseHover(object sender, EventArgs e)
+        {
 
         }
     }
