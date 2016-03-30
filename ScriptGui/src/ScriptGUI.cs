@@ -229,11 +229,21 @@ namespace hoTools.Scripts
 
         }
 
-        
+        /// <summary>
+        /// Run SQL with replacing macros and sending the result to EA Search Window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void btnRunSql_Click(object sender, EventArgs e)
         {
             Cursor.Current = Cursors.WaitCursor;
-            GuiFunction.RunSql(Model, txtBoxSql.Text, txtSearchTerm.Text);
+
+            // get TabPage
+            TabPage tabPage = tabControlSql.TabPages[tabControlSql.SelectedIndex];
+
+            // get TextBox
+            TextBox textBox = (TextBox)tabPage.Controls[0];
+            GuiFunction.RunSql(Model, textBox.Text, txtSearchTerm.Text);
             Cursor.Current = Cursors.Default;
         }
 
@@ -455,50 +465,50 @@ namespace hoTools.Scripts
         #region Insert in sql
         private void elementTemplateToolStripMenu_Click(object sender, EventArgs e)
         {
-            insertText(txtBoxSql, SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.ELEMENT_TEMPLATE));
+            insertText(txtBoxSql, SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.ELEMENT_TEMPLATE));
         }
         private void diagramTemplateToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            insertText(txtBoxSql, SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.DIAGRAM_TEMPLATE));
+            insertText(txtBoxSql, SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.DIAGRAM_TEMPLATE));
 
         }
         private void packageTemplateToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            insertText(txtBoxSql, SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.PACKAGE_TEMPLATE));
+            insertText(txtBoxSql, SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.PACKAGE_TEMPLATE));
         }
        
         private void insertCurrentItemToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            insertText(txtBoxSql, SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.CURRENT_ITEM_ID));
+            insertText(txtBoxSql, SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.CURRENT_ITEM_ID));
         }
 
         private void insertSearchTermForStripMenuItem_Click(object sender, EventArgs e)
         {
-            insertText(txtBoxSql, SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.SEARCH_TERM));
+            insertText(txtBoxSql, SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.SEARCH_TERM));
 
         }
 
         private void insertCurrentItemGUIDToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            insertText(txtBoxSql, SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.CURRENT_ITEM_GUID));
+            insertText(txtBoxSql, SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.CURRENT_ITEM_GUID));
         }
 
         private void insertBranchToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            insertText(txtBoxSql, SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.BRANCH_IDS));
+            insertText(txtBoxSql, SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.BRANCH_IDS));
         }
 
         private void insertPackageToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            insertText(txtBoxSql, SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.PACKAGE_ID));
+            insertText(txtBoxSql, SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.PACKAGE_ID));
         }
         private void operationTemplateToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            insertText(txtBoxSql, SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.OPERATION_TEMPLATE));
+            insertText(txtBoxSql, SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.OPERATION_TEMPLATE));
         }
         private void attributeTemplateToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            insertText(txtBoxSql, SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.ATTRIBUTE_TEMPLATE));
+            insertText(txtBoxSql, SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.ATTRIBUTE_TEMPLATE));
         }
         #endregion
 

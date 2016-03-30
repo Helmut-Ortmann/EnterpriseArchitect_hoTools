@@ -5,17 +5,29 @@ using System.Text;
 
 namespace hoTools.Utils.SQL
 {
+    /// <summary>
+    /// Templates to insert into SQL:
+    /// - Template Text
+    /// - Template Name
+    /// - Template ToolTip
+    /// </summary>
     public class SqlTemplate
     {
 
-        public string Template { get; }
+        public string TemplateText { get; }
         public string TemplateName { get; }
         public string ToolTip { get; }
-        public SqlTemplate(string templateName, string template, string toolTip)
+        /// <summary>
+        /// Constructor SQL Template
+        /// </summary>
+        /// <param name="templateName"></param>
+        /// <param name="templateText"></param>
+        /// <param name="toolTip"></param>
+        public SqlTemplate(string templateName, string templateText, string toolTip)
         {
             TemplateName = templateName;
-            Template = template;
-            ToolTip = ToolTip;
+            TemplateText = templateText;
+            ToolTip = toolTip;
         }
     }
 }

@@ -123,10 +123,10 @@ namespace hoTools.Scripts
             this.txtBoxSql.Multiline = true;
             this.txtBoxSql.Name = "txtBoxSql";
             this.txtBoxSql.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtBoxSql.Size = new System.Drawing.Size(726, 205);
+            this.txtBoxSql.Size = new System.Drawing.Size(726, 231);
             this.txtBoxSql.TabIndex = 0;
-            this.toolTip1.SetToolTip(this.txtBoxSql, "Insert SQL.\r\n\r\nYou may use context menus for advanced features like:\r\n- template" +
-        "s\r\n- EA macros (#Branch#, #Package#,..)");
+            this.toolTip1.SetToolTip(this.txtBoxSql, "Insert SQL.\r\n\r\nYou may use context menus for advanced features like:\r\n- templates" +
+        "\r\n- EA macros (#Branch#, #Package#,..)");
             this.txtBoxSql.TextChanged += new System.EventHandler(this.txtBoxSql_TextChanged);
             // 
             // contextSqlTextMenuStrip
@@ -326,7 +326,7 @@ namespace hoTools.Scripts
             // 
             this.showLastSqlErrorToolStripTextBox1.Name = "showLastSqlErrorToolStripTextBox1";
             this.showLastSqlErrorToolStripTextBox1.Size = new System.Drawing.Size(100, 23);
-            this.showLastSqlErrorToolStripTextBox1.Text = "Show&LastSqlError";
+            this.showLastSqlErrorToolStripTextBox1.Text = "LastSqlError";
             this.showLastSqlErrorToolStripTextBox1.Click += new System.EventHandler(this.showSqlErrorToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
@@ -341,13 +341,13 @@ namespace hoTools.Scripts
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.aboutToolStripMenuItem.Text = "&About";
             // 
             // helpToolStripMenuItem1
             // 
             this.helpToolStripMenuItem1.Name = "helpToolStripMenuItem1";
-            this.helpToolStripMenuItem1.Size = new System.Drawing.Size(107, 22);
+            this.helpToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
             this.helpToolStripMenuItem1.Text = "&Help";
             // 
             // dataGridViewScripts
@@ -371,7 +371,7 @@ namespace hoTools.Scripts
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridViewScripts.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dataGridViewScripts.Location = new System.Drawing.Point(17, 289);
+            this.dataGridViewScripts.Location = new System.Drawing.Point(17, 325);
             this.dataGridViewScripts.Name = "dataGridViewScripts";
             this.dataGridViewScripts.ReadOnly = true;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -383,7 +383,7 @@ namespace hoTools.Scripts
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridViewScripts.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridViewScripts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewScripts.Size = new System.Drawing.Size(730, 140);
+            this.dataGridViewScripts.Size = new System.Drawing.Size(730, 104);
             this.dataGridViewScripts.TabIndex = 3;
             this.dataGridViewScripts.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dataGridViewScripts_MouseClick);
             // 
@@ -424,7 +424,7 @@ namespace hoTools.Scripts
             this.tabSqlPage1.Location = new System.Drawing.Point(4, 22);
             this.tabSqlPage1.Name = "tabSqlPage1";
             this.tabSqlPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabSqlPage1.Size = new System.Drawing.Size(736, 211);
+            this.tabSqlPage1.Size = new System.Drawing.Size(736, 237);
             this.tabSqlPage1.TabIndex = 0;
             this.tabSqlPage1.Text = "NoName1.sql      ";
             this.tabSqlPage1.UseVisualStyleBackColor = true;
@@ -438,14 +438,14 @@ namespace hoTools.Scripts
             this.tabControlSql.Location = new System.Drawing.Point(3, 27);
             this.tabControlSql.Name = "tabControlSql";
             this.tabControlSql.SelectedIndex = 0;
-            this.tabControlSql.Size = new System.Drawing.Size(744, 237);
+            this.tabControlSql.Size = new System.Drawing.Size(744, 263);
             this.tabControlSql.TabIndex = 5;
             this.tabControlSql.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.tabControlSql_DrawItem);
             this.tabControlSql.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tabControlSql_MouseDown);
             // 
             // btnRunSql
             // 
-            this.btnRunSql.Location = new System.Drawing.Point(17, 260);
+            this.btnRunSql.Location = new System.Drawing.Point(17, 296);
             this.btnRunSql.Name = "btnRunSql";
             this.btnRunSql.Size = new System.Drawing.Size(75, 23);
             this.btnRunSql.TabIndex = 6;
