@@ -176,6 +176,8 @@ namespace hoTools.Scripts
                     initializeSettings();
                     _lscripts = Script.getEAMaticScripts(Model);
                     updateTableFunctions();
+                    _sqlTabCntrls.addTab();
+
                 }
             }
         }
@@ -320,11 +322,7 @@ namespace hoTools.Scripts
        
 
 
-        private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            safeTabAs(tabSqlPage1, txtBoxSql);
-        }
-
+       
         Dictionary<string, string> a = null;
         /// <summary>
         /// Save sql string from TabPage with TextBox inside it to *.sql file.
@@ -419,12 +417,7 @@ namespace hoTools.Scripts
             TextBox txtBox = new TextBox { Parent = tab, Dock = DockStyle.Fill };
         }
 
-        private void loadSQLToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-            loadTabFrom(tabSqlPage1, txtBoxSql);
-        }
-
+       
         /// <summary>
         /// Run SQL and execute Script
         /// </summary>
@@ -434,7 +427,11 @@ namespace hoTools.Scripts
         {
 
             Cursor.Current = Cursors.WaitCursor;
+            // get TabPage
+            TabPage tabPage = tabControlSql.TabPages[tabControlSql.SelectedIndex];
 
+            // get TextBox
+            TextBox textBox = (TextBox)tabPage.Controls[0];
 
             // get Script and its parameter to run
             DataGridViewRow rowToRun = dataGridViewScripts.Rows[rowScriptsIndex];
@@ -442,7 +439,7 @@ namespace hoTools.Scripts
             var scriptFunction = row["FunctionObj"] as ScriptFunction;
 
             // run SQL, Script and ask whether to execute, skip script or break all together
-            GuiFunction.RunScriptWithAsk(Model, txtBoxSql.Text, scriptFunction, isWithAsk:false);
+            GuiFunction.RunScriptWithAsk(Model, textBox.Text, scriptFunction, isWithAsk:false);
             Cursor.Current = Cursors.Default;
 
         }
@@ -450,6 +447,11 @@ namespace hoTools.Scripts
         private void btnRunScriptForSqlWithAsk_Click(object sender, EventArgs e)
         {
             Cursor.Current = Cursors.WaitCursor;
+            // get TabPage
+            TabPage tabPage = tabControlSql.TabPages[tabControlSql.SelectedIndex];
+
+            // get TextBox
+            TextBox textBox = (TextBox)tabPage.Controls[0];
 
             // get Script and its parameter to run
             DataGridViewRow rowToRun = dataGridViewScripts.Rows[rowScriptsIndex];
@@ -457,69 +459,14 @@ namespace hoTools.Scripts
             var scriptFunction = row["FunctionObj"] as ScriptFunction;
 
             // run SQL, Script and ask whether to execute, skip script or break all together
-            GuiFunction.RunScriptWithAsk(Model, txtBoxSql.Text, scriptFunction, isWithAsk:true);
+            GuiFunction.RunScriptWithAsk(Model, textBox.Text, scriptFunction, isWithAsk:true);
 
             Cursor.Current = Cursors.Default;
         }
 
-        #region Insert in sql
-        private void elementTemplateToolStripMenu_Click(object sender, EventArgs e)
-        {
-            insertText(txtBoxSql, SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.ELEMENT_TEMPLATE));
-        }
-        private void diagramTemplateToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            insertText(txtBoxSql, SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.DIAGRAM_TEMPLATE));
-
-        }
-        private void packageTemplateToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            insertText(txtBoxSql, SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.PACKAGE_TEMPLATE));
-        }
        
-        private void insertCurrentItemToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            insertText(txtBoxSql, SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.CURRENT_ITEM_ID));
-        }
 
-        private void insertSearchTermForStripMenuItem_Click(object sender, EventArgs e)
-        {
-            insertText(txtBoxSql, SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.SEARCH_TERM));
-
-        }
-
-        private void insertCurrentItemGUIDToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            insertText(txtBoxSql, SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.CURRENT_ITEM_GUID));
-        }
-
-        private void insertBranchToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            insertText(txtBoxSql, SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.BRANCH_IDS));
-        }
-
-        private void insertPackageToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            insertText(txtBoxSql, SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.PACKAGE_ID));
-        }
-        private void operationTemplateToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            insertText(txtBoxSql, SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.OPERATION_TEMPLATE));
-        }
-        private void attributeTemplateToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            insertText(txtBoxSql, SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.ATTRIBUTE_TEMPLATE));
-        }
-        #endregion
-
-        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ToolStripMenuItem menuItem = (ToolStripMenuItem)sender;
-            ToolStrip item = (ToolStrip)menuItem.GetCurrentParent();
-            TabPage tabPage = (TabPage)item.Parent;
-            safeTabAs(tabSqlPage1, txtBoxSql);
-        }
-
+        
         private void showSqlErrorToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string appData = Environment.GetEnvironmentVariable("appdata");

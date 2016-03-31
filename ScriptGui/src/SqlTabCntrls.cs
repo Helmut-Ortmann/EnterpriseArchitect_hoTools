@@ -20,12 +20,24 @@ namespace hoTools.Scripts
         TabControl _tabControl;
 
         /// <summary>
+        /// Load Recent Files to load by ToolStripMenu
+        /// </summary>
+        ToolStripMenuItem _loadRecentFileItem = new ToolStripMenuItem();
+
+        /// <summary>
         /// List of TabPages in TabControl
         /// </summary>
         //List<SqlTabCntrl> _tabCntrls = new List<SqlTabCntrl>();
 
         const string DEFAULT_TAB_NAME = "noName";
 
+        /// <summary>
+        /// Constructor to initialize TabControl
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="settings"></param>
+        /// <param name="components"></param>
+        /// <param name="tabControl"></param>
         public SqlTabCntrls(Model model, AddinSettings settings, System.ComponentModel.IContainer components, TabControl tabControl)
         {
             _settings = settings;
@@ -93,8 +105,8 @@ namespace hoTools.Scripts
             closeMenuItem.Click += new System.EventHandler(this.closeMenuItem_Click);
 
             // Load Recent File
-            ToolStripMenuItem loadRecentFileItem = new ToolStripMenuItem();
-            loadRecentFileItem.Text = "Recent Files";
+            
+            _loadRecentFileItem.Text = "Recent Files";
 
 
 
@@ -103,7 +115,7 @@ namespace hoTools.Scripts
             fileSaveMenuItem,
             fileSaveAsMenuItem,
             newTabMenuItem,
-            loadRecentFileItem,
+            _loadRecentFileItem,
             closeMenuItem
             });
 
@@ -266,13 +278,84 @@ namespace hoTools.Scripts
             insertTemplateMenuItem,
             insertMacroMenuItem
             });
+            // load recent file items
+            loadRectFiles(_loadRecentFileItem);
             // Add ContextMenuStrip to text box
             textBox.ContextMenuStrip = textSqlContextMenuStrip; 
 
             tabPage.Controls.Add(textBox);
             return tabPage;
         }
-        
+        private void loadRectFiles(ToolStripMenuItem loadRecentFileItem)
+        {
+            // delete all previous entries
+            loadRecentFileItem.DropDownItems.Clear();
+            // over all history files
+            foreach (var file in _settings.sqlFiles.lSqlHistoryFilesCfg)
+            {
+                // ignore empty entries
+                if (file.FullName == "") continue;
+                ToolStripMenuItem historyEntry = new ToolStripMenuItem();
+                historyEntry.Text = file.DisplayName;
+                historyEntry.Tag = file;
+                historyEntry.ToolTipText = file.FullName;
+                historyEntry.Click += new System.EventHandler(loadFromHistoryEntry_Click);
+                loadRecentFileItem.DropDownItems.Add(historyEntry);
+
+            }
+        }
+        /// <summary>
+        /// Load from history item
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void loadFromHistoryEntry_Click(object sender, EventArgs e)
+        {
+            // get TabPage
+            TabPage tabPage = _tabControl.TabPages[_tabControl.SelectedIndex];
+            SqlTabCntrl sqlTabCntrl = (SqlTabCntrl)tabPage.Tag;
+
+            // get TextBox
+            TextBox textBox = (TextBox)tabPage.Controls[0];
+
+            // Contend changed, need to be stored first
+            if (sqlTabCntrl.IsChanged)
+            {
+                DialogResult result = MessageBox.Show($"Old file: '{sqlTabCntrl.FullName}'",
+                    "First store old file? ", MessageBoxButtons.YesNoCancel);
+                if (result == DialogResult.Cancel) return;
+                if (result == DialogResult.Yes)
+                    saveTabPage(tabPage, textBox);
+                {
+
+                }
+            }
+
+
+            // load file
+            FileHistory file = (FileHistory)((ToolStripMenuItem)sender).Tag;
+            try
+            {
+                StreamReader myStream = new StreamReader(file.FullName);
+                if (myStream != null)
+                {
+                    // Code to write the stream goes here.
+                    textBox.Text = myStream.ReadToEnd();
+                    myStream.Close();
+
+
+
+                    // set TabName
+                    sqlTabCntrl.FullName = file.FullName;
+                    sqlTabCntrl.IsChanged = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}", $"Error reading file {sqlTabCntrl.FullName}");
+                return;
+            }
+        }
         private void insertTemplate_Click(object sender, EventArgs e)
         {
             // get TabPage
@@ -414,6 +497,9 @@ namespace hoTools.Scripts
 
                     // set TabName
                     tabPageSql.Text = sqlTabCntrl.DisplayName;
+
+                    // load file history
+                    loadRectFiles(_loadRecentFileItem);
                 }
             }
 
@@ -434,8 +520,6 @@ namespace hoTools.Scripts
             saveFileDialog.RestoreDirectory = true;
             saveFileDialog.Filter = "sql files (*.sql)|*.sql|All files (*.*)|*.*";
             saveFileDialog.FilterIndex = 1;
-            //saveFileDialog.DefaultExt = "sql";
-
 
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
 
@@ -458,6 +542,9 @@ namespace hoTools.Scripts
 
                     // set TabName
                     tabPageSql.Text = sqlTabCntrl.DisplayName;
+
+                    // load file history
+                    loadRectFiles(_loadRecentFileItem);
                 }
             }
         }

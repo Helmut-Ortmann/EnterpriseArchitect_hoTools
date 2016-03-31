@@ -32,22 +32,31 @@ namespace hoTools.Settings
         }
 
         /// <summary>
-        ///  Loads sql history file names from configuration
+        ///  Loads sql history file names from configuration.
+        ///  Ignore exiting files
         /// </summary>
         public void load()
         {
+            // make file list unique
+            Dictionary<string, string> loadedFiles = new Dictionary<string, string>();
             // SqlFile<i> i=1..20
             foreach (KeyValueConfigurationElement entry in _config.AppSettings.Settings)
             {
-                // find key
+                // find key appropriate for file
                 string key = entry.Key;
                 if (key.Substring(0,7).Equals(SQL_HISTORY_FILE_CFG_STRING))
                 {
-                    _lSqlHistoryFilesCfg.Add(new FileHistory(entry.Value));
+                    // ignore duplicated files
+                    if (!(loadedFiles.ContainsKey(entry.Value)))
+                    {
+                        _lSqlHistoryFilesCfg.Add(new FileHistory(entry.Value));
+                        loadedFiles.Add(entry.Value,"");
+                    }
 
 
                 }
             }
+            loadedFiles = null;
             _lSqlFilesCfgLength = _lSqlHistoryFilesCfg.Count;
         }
         /// <summary>

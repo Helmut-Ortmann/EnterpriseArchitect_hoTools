@@ -37,7 +37,9 @@ namespace hoTools.Settings
         public string ConfigFilePath { get; }
         public string ConfigPath { get; }
 
-        // 20 SQL files 
+        /// <summary>
+        /// List of SQL History Files
+        /// </summary>
         public SqlHistoryFilesCfg sqlFiles { get; }
 
         // Configuration 5 button searches by key
