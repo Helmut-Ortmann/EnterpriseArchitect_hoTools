@@ -9,12 +9,9 @@ using System.Threading.Tasks;
 namespace hoTools.Scripts
 {
     /// <summary>
-    /// Information to store and handle for a TabPage:
-    /// - FullName
-    /// - DisplayName
-    /// - isChanged
+    /// Information of a *.sql file: FullName, DisplayName, isChanged
     /// </summary>
-    public class SqlTabCntrl
+    public class SqlFile
     {
         /// <summary>
         /// Extra space for display name to draw 'x' to provide a simulated Close Button
@@ -35,32 +32,35 @@ namespace hoTools.Scripts
 
 
         #region Constructor TabPage
-        public SqlTabCntrl(string fullName)
+        /// <summary>
+        /// Information of a TabPage: FullName, DisplayName, IsChanged
+        /// </summary>
+        /// <param name="fullName"></param>
+        public SqlFile(string fullName)
         {
             init(fullName, false);
         }
-        public SqlTabCntrl(string fullName, bool isChanged)
+        /// <summary>
+        /// Information of a TabPage: FullName, DisplayName, IsChanged
+        /// </summary>
+        /// <param name="fullName"></param>
+        /// <param name="isChanged"></param>
+        public SqlFile(string fullName, bool isChanged)
         {
             init(fullName, isChanged);            
         }
         #endregion
+        /// <summary>
+        /// Initialize the TabPage information.
+        /// </summary>
+        /// <param name="fullName"></param>
+        /// <param name="isChanged"></param>
         private void init(string fullName, bool isChanged)
         {
             FullName = fullName.Trim();
             IsChanged = isChanged;
 
         }
-        /*
-        public static string getFileNameFromCaptionUnchanged(string caption)
-          => caption.Replace("*", "").Trim();
-        public static string getFileNameCaptionChanged(string caption)
-            => getFileNameFromCaptionUnchanged(caption) + " *";
-        public static bool isFileNameCaptionChanged(string caption)
-            => caption == getFileNameFromCaptionUnchanged(caption);
-
-        public static bool getFileNameCaptionInitial(string caption)
-            => caption == "noName1.sql";
-        */
-
+       
     }
 }

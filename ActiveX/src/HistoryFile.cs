@@ -3,15 +3,15 @@
 namespace hoTools.Settings
 {
     /// <summary>
-    /// Stores a file properties like FullName, DisplayName
+    /// Stores file properties like FullName, DisplayName for recent files.
     /// </summary>
-    public class FileHistory
+    public class HistoryFile
     {
         public string FullName => _fullName;
         public string DisplayName => Path.GetFileName(_fullName);
 
         readonly string _fullName;
-        public FileHistory(string fullname)
+        public HistoryFile(string fullname)
         {
             _fullName = fullname;
         }

@@ -33,7 +33,7 @@ namespace hoTools.Scripts
         List<Script> _lscripts = null;  // list off all scripts
         DataTable _tableFunctions = null; // Scripts and Functions
 
-        SqlTabCntrls _sqlTabCntrls = null;  // TAB Control with its TabPages
+        SqlTabPagesCntrl _sqlTabCntrls = null;  // TAB Control with its TabPages
 
         /// <summary>
         /// The selected row in script list
@@ -50,12 +50,6 @@ namespace hoTools.Scripts
             // Script
             initScriptDataGrid();
             initScriptDataTable();
-
-          
-  
-
-            
-
         }
         #endregion
         /// <summary>
@@ -67,21 +61,11 @@ namespace hoTools.Scripts
         /// <returns></returns>
         bool initializeSettings()
         {
-            _sqlTabCntrls = new SqlTabCntrls(Model, AddinSettings, components, tabControlSql);
-            toolStripComboBoxHistoryUpdate(toolStripComboBoxHistory);
-
+            _sqlTabCntrls = new SqlTabPagesCntrl(Model, AddinSettings, components, tabControlSql);
             return true;
         }
 
-        private void toolStripComboBoxHistoryUpdate(ToolStripComboBox toolStripCombo)
-        {
-            toolStripCombo.ComboBox.DataSource = null;
-            toolStripCombo.ComboBox.BindingContext = this.BindingContext;
-            toolStripCombo.ComboBox.DisplayMember = "DisplayName";
-            toolStripCombo.ComboBox.ValueMember = "FullName";
-            toolStripCombo.ComboBox.DataSource = AddinSettings.sqlFiles.lSqlHistoryFilesCfg;
-        }
-
+        
 
         #region initDataGrid
         private void initScriptDataGrid()
@@ -401,14 +385,7 @@ namespace hoTools.Scripts
 
         }
 
-
-
-
-
-
-
-
-        
+     
         private void addTabToolStripMenuItem_Click(object sender, EventArgs e)
         {
             TabPage tab = new TabPage { Text = @"mySql.sql" };
@@ -535,8 +512,10 @@ namespace hoTools.Scripts
 
         }
 
+        
         private void tabControlSql_MouseHover(object sender, EventArgs e)
         {
+
 
         }
     }

@@ -83,7 +83,7 @@
     <Compile Include="src\dlgUser.Designer.cs">
       <DependentUpon>dlgUser.cs</DependentUpon>
     </Compile>
-    <Compile Include="src\FileHistory.cs" />
+    <Compile Include="src\HistoryFile.cs" />
     <Compile Include="src\frmSettings.cs">
       <SubType>Form</SubType>
     </Compile>

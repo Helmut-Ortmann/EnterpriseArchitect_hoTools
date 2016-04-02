@@ -13,9 +13,9 @@ namespace hoTools.Settings
         /// <summary>
         /// List of files loaded in history
         /// </summary>
-        public List<FileHistory> lSqlHistoryFilesCfg => _lSqlHistoryFilesCfg;
+        public List<HistoryFile> lSqlHistoryFilesCfg => _lSqlHistoryFilesCfg;
 
-        readonly List<FileHistory> _lSqlHistoryFilesCfg = new List<FileHistory>();
+        readonly List<HistoryFile> _lSqlHistoryFilesCfg = new List<HistoryFile>();
 
 
         int _lSqlFilesCfgLength;
@@ -49,7 +49,7 @@ namespace hoTools.Settings
                     // ignore duplicated files
                     if (!(loadedFiles.ContainsKey(entry.Value)))
                     {
-                        _lSqlHistoryFilesCfg.Add(new FileHistory(entry.Value));
+                        _lSqlHistoryFilesCfg.Add(new HistoryFile(entry.Value));
                         loadedFiles.Add(entry.Value,"");
                     }
 
@@ -65,7 +65,7 @@ namespace hoTools.Settings
         public void save()
         {
             int i = 1;
-            foreach (FileHistory f in _lSqlHistoryFilesCfg)
+            foreach (HistoryFile f in _lSqlHistoryFilesCfg)
             {
                 // SqlFile<i>
                 string key = $"{SQL_HISTORY_FILE_CFG_STRING}{i}";
@@ -88,7 +88,7 @@ namespace hoTools.Settings
             {
                 _lSqlHistoryFilesCfg.RemoveAt(index);
             }
-            _lSqlHistoryFilesCfg.Insert(0, new FileHistory(s));
+            _lSqlHistoryFilesCfg.Insert(0, new HistoryFile(s));
 
         }
     }

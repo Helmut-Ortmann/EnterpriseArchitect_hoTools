@@ -294,11 +294,15 @@ namespace EAAddinFramework.Utils
         {
             return MakeEaXmlOutput(XDocument.Parse(x));
         }
+
+
         /// <summary>
         /// Make EA XML output format from EA SQLQuery XDocument format (Linq to XML)
         /// </summary>
         /// <param name="x">Output from EA SQLQuery</param>
         /// <returns></returns>
+
+        #pragma warning disable CSE0003 // Use expression-bodied members
         public string MakeEaXmlOutput(XDocument x)
         {
             //---------------------------------------------------------------------
@@ -351,6 +355,8 @@ namespace EAAddinFramework.Utils
                 )
             )).ToString();
         }
+        #pragma warning restore CSE0003 // Use expression-bodied members
+
         /// <summary>
         /// Make EA XML output format from EA SQLQuery XDocument format (Linq to XML)
         /// </summary>

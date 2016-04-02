@@ -37,24 +37,6 @@ namespace hoTools.Scripts
             this.txtSearchTerm = new System.Windows.Forms.TextBox();
             this.btnRunScriptForSql = new System.Windows.Forms.Button();
             this.btnRunScriptForSqlWithAsk = new System.Windows.Forms.Button();
-            this.contextSqlTextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.toolStripMenuItemSqlElement = new System.Windows.Forms.ToolStripMenuItem();
-            this.diagramTemplateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.packageTemplateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.attributeTemplateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.operationTemplateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.insertToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.insertSearchTermForStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.insertPackageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.insertBranchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.insertCurrentItemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.insertCurrentItemGUIDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.loadSQLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.addTabToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripComboBoxHistory = new System.Windows.Forms.ToolStripComboBox();
             this.btnLoadScripts = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -72,8 +54,6 @@ namespace hoTools.Scripts
             this.showScriptToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControlSql = new System.Windows.Forms.TabControl();
             this.btnRunSql = new System.Windows.Forms.Button();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.contextSqlTextMenuStrip.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewScripts)).BeginInit();
             this.contextMenuStripDataGrid.SuspendLayout();
@@ -109,138 +89,6 @@ namespace hoTools.Scripts
         "- Break\r\n- Proceed next\r\n- Proceed all");
             this.btnRunScriptForSqlWithAsk.UseVisualStyleBackColor = true;
             this.btnRunScriptForSqlWithAsk.Click += new System.EventHandler(this.btnRunScriptForSqlWithAsk_Click);
-            // 
-            // contextSqlTextMenuStrip
-            // 
-            this.contextSqlTextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItemSqlElement,
-            this.diagramTemplateToolStripMenuItem,
-            this.packageTemplateToolStripMenuItem,
-            this.attributeTemplateToolStripMenuItem,
-            this.operationTemplateToolStripMenuItem,
-            this.insertToolStripMenuItem,
-            this.saveToolStripMenuItem,
-            this.saveAsToolStripMenuItem,
-            this.loadSQLToolStripMenuItem,
-            this.addTabToolStripMenuItem,
-            this.toolStripSeparator1,
-            this.toolStripComboBoxHistory});
-            this.contextSqlTextMenuStrip.Name = "contextMenuStripSql";
-            this.contextSqlTextMenuStrip.Size = new System.Drawing.Size(182, 257);
-            // 
-            // toolStripMenuItemSqlElement
-            // 
-            this.toolStripMenuItemSqlElement.Name = "toolStripMenuItemSqlElement";
-            this.toolStripMenuItemSqlElement.Size = new System.Drawing.Size(181, 22);
-            this.toolStripMenuItemSqlElement.Text = "ElementTemplate";
-
-            // 
-            // diagramTemplateToolStripMenuItem
-            // 
-            this.diagramTemplateToolStripMenuItem.Name = "diagramTemplateToolStripMenuItem";
-            this.diagramTemplateToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
-            this.diagramTemplateToolStripMenuItem.Text = "DiagramTemplate";
-            // 
-            // packageTemplateToolStripMenuItem
-            // 
-            this.packageTemplateToolStripMenuItem.Name = "packageTemplateToolStripMenuItem";
-            this.packageTemplateToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
-            this.packageTemplateToolStripMenuItem.Text = "PackageTemplate";
-            // 
-            // attributeTemplateToolStripMenuItem
-            // 
-            this.attributeTemplateToolStripMenuItem.Name = "attributeTemplateToolStripMenuItem";
-            this.attributeTemplateToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
-            this.attributeTemplateToolStripMenuItem.Text = "AttributeTemplate";
-            
-            // 
-            // operationTemplateToolStripMenuItem
-            // 
-            this.operationTemplateToolStripMenuItem.Name = "operationTemplateToolStripMenuItem";
-            this.operationTemplateToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
-            this.operationTemplateToolStripMenuItem.Text = "OperationTemplate";
-           
-            // 
-            // insertToolStripMenuItem
-            // 
-            this.insertToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.insertSearchTermForStripMenuItem,
-            this.insertPackageToolStripMenuItem,
-            this.insertBranchToolStripMenuItem,
-            this.insertCurrentItemToolStripMenuItem,
-            this.insertCurrentItemGUIDToolStripMenuItem});
-            this.insertToolStripMenuItem.Name = "insertToolStripMenuItem";
-            this.insertToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
-            this.insertToolStripMenuItem.Text = "Insert";
-            // 
-            // insertSearchTermForStripMenuItem
-            // 
-            this.insertSearchTermForStripMenuItem.Name = "insertSearchTermForStripMenuItem";
-            this.insertSearchTermForStripMenuItem.Size = new System.Drawing.Size(203, 22);
-            this.insertSearchTermForStripMenuItem.Text = "Insert Search Term";
-            
-            // 
-            // insertPackageToolStripMenuItem
-            // 
-            this.insertPackageToolStripMenuItem.Name = "insertPackageToolStripMenuItem";
-            this.insertPackageToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
-            this.insertPackageToolStripMenuItem.Text = "Insert Package";
-            // 
-            // insertBranchToolStripMenuItem
-            // 
-            this.insertBranchToolStripMenuItem.Name = "insertBranchToolStripMenuItem";
-            this.insertBranchToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
-            this.insertBranchToolStripMenuItem.Text = "Insert Branch";
-            // 
-            // insertCurrentItemToolStripMenuItem
-            // 
-            this.insertCurrentItemToolStripMenuItem.Name = "insertCurrentItemToolStripMenuItem";
-            this.insertCurrentItemToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
-            this.insertCurrentItemToolStripMenuItem.Text = "Insert Current Item";
-            
-            // 
-            // insertCurrentItemGUIDToolStripMenuItem
-            // 
-            this.insertCurrentItemGUIDToolStripMenuItem.Name = "insertCurrentItemGUIDToolStripMenuItem";
-            this.insertCurrentItemGUIDToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
-            this.insertCurrentItemGUIDToolStripMenuItem.Text = "Insert Current Item GUID";
-            
-            // 
-            // saveToolStripMenuItem
-            // 
-            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
-            this.saveToolStripMenuItem.Text = "Save SQL";
-            // 
-            // saveAsToolStripMenuItem
-            // 
-            this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
-            this.saveAsToolStripMenuItem.Text = "Save SQL as";            // 
-            // loadSQLToolStripMenuItem
-            // 
-            this.loadSQLToolStripMenuItem.Name = "loadSQLToolStripMenuItem";
-            this.loadSQLToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
-            this.loadSQLToolStripMenuItem.Text = "Load SQL";
-            this.loadSQLToolStripMenuItem.ToolTipText = "Load *.sql from file";
-
-            // 
-            // addTabToolStripMenuItem
-            // 
-            this.addTabToolStripMenuItem.Name = "addTabToolStripMenuItem";
-            this.addTabToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
-            this.addTabToolStripMenuItem.Text = "AddTab";
-            this.addTabToolStripMenuItem.Click += new System.EventHandler(this.addTabToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(178, 6);
-            // 
-            // toolStripComboBoxHistory
-            // 
-            this.toolStripComboBoxHistory.Name = "toolStripComboBoxHistory";
-            this.toolStripComboBoxHistory.Size = new System.Drawing.Size(121, 23);
             // 
             // btnLoadScripts
             // 
@@ -400,10 +248,12 @@ namespace hoTools.Scripts
             this.tabControlSql.Location = new System.Drawing.Point(3, 27);
             this.tabControlSql.Name = "tabControlSql";
             this.tabControlSql.SelectedIndex = 0;
+            this.tabControlSql.ShowToolTips = true;
             this.tabControlSql.Size = new System.Drawing.Size(744, 263);
             this.tabControlSql.TabIndex = 5;
             this.tabControlSql.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.tabControlSql_DrawItem);
             this.tabControlSql.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tabControlSql_MouseDown);
+            this.tabControlSql.MouseHover += new System.EventHandler(this.tabControlSql_MouseHover);
             // 
             // btnRunSql
             // 
@@ -414,11 +264,6 @@ namespace hoTools.Scripts
             this.btnRunSql.Text = "Run";
             this.btnRunSql.UseVisualStyleBackColor = true;
             this.btnRunSql.Click += new System.EventHandler(this.btnRunSql_Click);
-            // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
             // ScriptGUI
             // 
@@ -436,7 +281,6 @@ namespace hoTools.Scripts
             this.Name = "ScriptGUI";
             this.Size = new System.Drawing.Size(769, 461);
             this.Load += new System.EventHandler(this.ScriptGUI_Load);
-            this.contextSqlTextMenuStrip.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewScripts)).EndInit();
@@ -466,28 +310,9 @@ namespace hoTools.Scripts
         private System.Windows.Forms.ToolStripMenuItem ShowErrorToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem runScriptToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem showScriptToolStripMenuItem;
-        private System.Windows.Forms.ContextMenuStrip contextSqlTextMenuStrip;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemSqlElement;
-        private System.Windows.Forms.ToolStripMenuItem diagramTemplateToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem packageTemplateToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem loadSQLToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem addTabToolStripMenuItem;
-        private System.Windows.Forms.ToolStripComboBox toolStripComboBoxHistory;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.Button btnRunSql;
         private System.Windows.Forms.TextBox txtSearchTerm;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.Button btnRunScriptForSqlWithAsk;
-        private System.Windows.Forms.ToolStripMenuItem insertToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem insertSearchTermForStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem insertPackageToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem insertBranchToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem insertCurrentItemToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem insertCurrentItemGUIDToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem attributeTemplateToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem operationTemplateToolStripMenuItem;
         private System.Windows.Forms.ToolStripTextBox showLastSqlErrorToolStripTextBox1;
         private System.Windows.Forms.ToolStripMenuItem FileNewTabToolStripMenuItem;
     }
