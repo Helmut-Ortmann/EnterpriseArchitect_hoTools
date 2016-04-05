@@ -40,6 +40,12 @@ namespace hoTools.Scripts
         /// </summary>
         int rowScriptsIndex;
 
+        // Coordinates of Close Rectangle relative to TabPage Caption Rectangle TopRight Position
+        const int CLOSE_BUTTON_RECTANGLE_RIGHT_X = -15;
+        const int CLOSE_BUTTON_RECTANGLE_TOP_Y = 4;
+        const int CLOSE_BUTTON_RECTANGLE_WIDTH = 11;
+        const int CLOSE_BUTTON_RECTANGLE_HIGHT = 16;
+
 
         #region Constructor
         public ScriptGUI()
@@ -61,7 +67,12 @@ namespace hoTools.Scripts
         /// <returns></returns>
         bool initializeSettings()
         {
-            _sqlTabCntrls = new SqlTabPagesCntrl(Model, AddinSettings, components, tabControlSql);
+            _sqlTabCntrls = new SqlTabPagesCntrl(Model, AddinSettings, components, tabControlSql, txtSearchTerm);
+            fileToolStripMenuItem.DropDownItems.Add(_sqlTabCntrls.LoadRecentFileItem);
+            fileToolStripMenuItem.DropDownItems.Add(_sqlTabCntrls.NewTabAndLoadRecentFileItem);
+            fileToolStripMenuItem.ShowDropDown();
+            this.ResumeLayout(false);
+            this.PerformLayout();
             return true;
         }
 
@@ -222,17 +233,10 @@ namespace hoTools.Scripts
         /// <param name="e"></param>
         void btnRunSql_Click(object sender, EventArgs e)
         {
-            Cursor.Current = Cursors.WaitCursor;
-
-            // get TabPage
-            TabPage tabPage = tabControlSql.TabPages[tabControlSql.SelectedIndex];
-
-            // get TextBox
-            TextBox textBox = (TextBox)tabPage.Controls[0];
-            GuiFunction.RunSql(Model, textBox.Text, txtSearchTerm.Text);
-            Cursor.Current = Cursors.Default;
+            _sqlTabCntrls.runSqlForSelectedTabPage();
         }
 
+        
 
         private void runScriptToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -478,8 +482,15 @@ namespace hoTools.Scripts
         /// <param name="e"></param>
         private void tabControlSql_DrawItem(object sender, DrawItemEventArgs e)
         {
-            e.Graphics.DrawString("x", e.Font, Brushes.Black, e.Bounds.Right -15 , e.Bounds.Top + 4);
+            // Draw a Rectangle with the background color
+            Rectangle closeButton = new Rectangle(e.Bounds.Right + CLOSE_BUTTON_RECTANGLE_RIGHT_X,
+                                                  e.Bounds.Top + CLOSE_BUTTON_RECTANGLE_TOP_Y, 
+                                                  CLOSE_BUTTON_RECTANGLE_WIDTH, 
+                                                  CLOSE_BUTTON_RECTANGLE_HIGHT);
+            e.Graphics.FillRectangle(new SolidBrush(SystemColors.ControlDark), closeButton);
+            e.Graphics.DrawString("X", e.Font, Brushes.Black, e.Bounds.Right -15 , e.Bounds.Top + 4);
             e.Graphics.DrawString(tabControlSql.TabPages[e.Index].Text, e.Font, Brushes.Black, e.Bounds.Left + 12, e.Bounds.Top + 4);
+
             e.DrawFocusRectangle();
         }
 
@@ -492,30 +503,18 @@ namespace hoTools.Scripts
         private void tabControlSql_MouseDown(object sender, MouseEventArgs e)
         {
             Rectangle r = tabControlSql.GetTabRect(this.tabControlSql.SelectedIndex);
-            Rectangle closeButton = new Rectangle(r.Right - 15, r.Top + 4, 9, 7);
+            Rectangle closeButton = new Rectangle(r.Right + CLOSE_BUTTON_RECTANGLE_RIGHT_X, 
+                                                  r.Top + CLOSE_BUTTON_RECTANGLE_TOP_Y,
+                                                  CLOSE_BUTTON_RECTANGLE_WIDTH,
+                                                  CLOSE_BUTTON_RECTANGLE_HIGHT);
             if (closeButton.Contains(e.Location))
                 this.tabControlSql.TabPages.Remove(this.tabControlSql.SelectedTab);
-
-            /*
-            for (int i = 0; i < this.tabControlSql.TabPages.Count; i++)
-            {
-                Rectangle r = tabControlSql.GetTabRect(i);
-                //Getting the position of the "x" mark.
-                Rectangle closeButton = new Rectangle(r.Right - 15, r.Top + 4, 9, 7);
-                if (closeButton.Contains(e.Location))
-                {
-                    this.tabControlSql.TabPages.RemoveAt(i);
-
-                }
-            }
-            */
-
         }
 
         
-        private void tabControlSql_MouseHover(object sender, EventArgs e)
+        
+        private void tabControlSql_MouseMove(object sender, MouseEventArgs e)
         {
-
 
         }
     }

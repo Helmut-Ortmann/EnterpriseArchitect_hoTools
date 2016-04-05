@@ -5,6 +5,7 @@ using System.Linq;
 using System.Xml.Linq;
 using EAAddinFramework.Utils;
 using hoTools.Utils.SQL;
+using EA;
 
 
 namespace hoTools.Scripts
@@ -127,6 +128,10 @@ namespace hoTools.Scripts
             model.Repository.RunModelSearch("", "", "", target);
             return true;
         }
+
+
+
+
         /// <summary>
         /// Get File Name from Caption
         /// - " *" in a caption means content has changed

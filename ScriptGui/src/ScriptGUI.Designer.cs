@@ -43,6 +43,7 @@ namespace hoTools.Scripts
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.FileNewTabToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.newTabFromToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showLastSqlErrorToolStripTextBox1 = new System.Windows.Forms.ToolStripTextBox();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -126,13 +127,16 @@ namespace hoTools.Scripts
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.settingsToolStripMenuItem,
             this.FileNewTabToolStripMenuItem,
+            this.newTabFromToolStripMenuItem,
             this.showLastSqlErrorToolStripTextBox1});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "&File";
+            this.fileToolStripMenuItem.ToolTipText = "Create a new Tab from recent *.sql files";
             // 
             // settingsToolStripMenuItem
             // 
+            this.settingsToolStripMenuItem.BackColor = System.Drawing.SystemColors.Control;
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
             this.settingsToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.settingsToolStripMenuItem.Text = "&Settings";
@@ -144,11 +148,19 @@ namespace hoTools.Scripts
             this.FileNewTabToolStripMenuItem.Text = "&NewTab";
             this.FileNewTabToolStripMenuItem.Click += new System.EventHandler(this.FileNewTabToolStripMenuItem_Click);
             // 
+            // newTabFromToolStripMenuItem
+            // 
+            this.newTabFromToolStripMenuItem.Name = "newTabFromToolStripMenuItem";
+            this.newTabFromToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.newTabFromToolStripMenuItem.Text = "New &Tab from";
+            this.newTabFromToolStripMenuItem.ToolTipText = "Load new TabPage from recent *.sql file";
+            // 
             // showLastSqlErrorToolStripTextBox1
             // 
             this.showLastSqlErrorToolStripTextBox1.Name = "showLastSqlErrorToolStripTextBox1";
             this.showLastSqlErrorToolStripTextBox1.Size = new System.Drawing.Size(100, 23);
-            this.showLastSqlErrorToolStripTextBox1.Text = "LastSqlError";
+            this.showLastSqlErrorToolStripTextBox1.Text = "Last Sql &Error";
+            this.showLastSqlErrorToolStripTextBox1.ToolTipText = "Get the last *.sql error from %APPDATA%Sparx Systems\\EA\\DBError.txt";
             this.showLastSqlErrorToolStripTextBox1.Click += new System.EventHandler(this.showSqlErrorToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
@@ -253,7 +265,6 @@ namespace hoTools.Scripts
             this.tabControlSql.TabIndex = 5;
             this.tabControlSql.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.tabControlSql_DrawItem);
             this.tabControlSql.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tabControlSql_MouseDown);
-            this.tabControlSql.MouseHover += new System.EventHandler(this.tabControlSql_MouseHover);
             // 
             // btnRunSql
             // 
@@ -315,5 +326,6 @@ namespace hoTools.Scripts
         private System.Windows.Forms.Button btnRunScriptForSqlWithAsk;
         private System.Windows.Forms.ToolStripTextBox showLastSqlErrorToolStripTextBox1;
         private System.Windows.Forms.ToolStripMenuItem FileNewTabToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem newTabFromToolStripMenuItem;
     }
 }
