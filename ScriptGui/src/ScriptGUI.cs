@@ -35,6 +35,11 @@ namespace hoTools.Scripts
 
         SqlTabPagesCntrl _sqlTabCntrls = null;  // TAB Control with its TabPages
 
+
+        ToolStripMenuItem strip1;
+        ToolStripMenuItem strip2;
+        ToolStripMenuItem strip3;
+
         /// <summary>
         /// The selected row in script list
         /// </summary>
@@ -68,11 +73,15 @@ namespace hoTools.Scripts
         bool initializeSettings()
         {
             _sqlTabCntrls = new SqlTabPagesCntrl(Model, AddinSettings, components, tabControlSql, txtSearchTerm);
-            fileToolStripMenuItem.DropDownItems.Add(_sqlTabCntrls.LoadRecentFileItem);
-            fileToolStripMenuItem.DropDownItems.Add(_sqlTabCntrls.NewTabAndLoadRecentFileItem);
-            fileToolStripMenuItem.ShowDropDown();
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            _lscripts = Script.getEAMaticScripts(Model);
+            updateTableFunctions();
+            _sqlTabCntrls.addTab();
+
+            // Update File Menu
+            fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripMenuItem[] {
+                        _sqlTabCntrls.LoadRecentFileItem,
+                        _sqlTabCntrls.NewTabAndLoadRecentFileItem
+                });
             return true;
         }
 
@@ -169,9 +178,7 @@ namespace hoTools.Scripts
                 if (value.ProjectGUID != "")
                 {
                     initializeSettings();
-                    _lscripts = Script.getEAMaticScripts(Model);
-                    updateTableFunctions();
-                    _sqlTabCntrls.addTab();
+                    
 
                 }
             }
@@ -390,15 +397,7 @@ namespace hoTools.Scripts
         }
 
      
-        private void addTabToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            TabPage tab = new TabPage { Text = @"mySql.sql" };
-            tabControlSql.TabPages.Add(tab);
-            tabControlSql.SelectedTab = tab;
-            TextBox txtBox = new TextBox { Parent = tab, Dock = DockStyle.Fill };
-        }
-
-       
+              
         /// <summary>
         /// Run SQL and execute Script
         /// </summary>
