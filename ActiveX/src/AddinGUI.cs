@@ -6,7 +6,7 @@ using EAAddinFramework.Utils;
 namespace hoTools.ActiveX
 {
     /// <summary>
-    /// Basic class for EA Addin Controls which are visualized as a tab in the addin window
+    /// Basic class for EA Addin Controls which are visualized as a tab in the Addin window
     /// </summary>
     public class AddinGUI : UserControl
     {

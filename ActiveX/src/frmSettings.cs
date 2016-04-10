@@ -5,8 +5,8 @@ using Control.EaAddinShortcuts;
 using hoTools.ActiveX;
 using GlobalHotkeys;
 
-
 namespace hoTools.Settings
+
 {
     /// <summary>
     /// frmSettings  Settings of hoTools

@@ -83,6 +83,12 @@
     <Compile Include="src\dlgUser.Designer.cs">
       <DependentUpon>dlgUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="src\FrmQueryAndScript.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="src\FrmQueryAndScript.Designer.cs">
+      <DependentUpon>FrmQueryAndScript.cs</DependentUpon>
+    </Compile>
     <Compile Include="src\HistoryFile.cs" />
     <Compile Include="src\frmSettings.cs">
       <SubType>Form</SubType>
@@ -104,6 +110,9 @@
     <EmbeddedResource Include="src\ActiveX.resx" />
     <EmbeddedResource Include="src\dlgUser.resx">
       <DependentUpon>dlgUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\FrmQueryAndScript.resx">
+      <DependentUpon>FrmQueryAndScript.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="src\frmSettings.resx">
       <DependentUpon>frmSettings.cs</DependentUpon>

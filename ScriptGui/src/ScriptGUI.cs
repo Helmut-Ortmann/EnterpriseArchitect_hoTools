@@ -36,10 +36,6 @@ namespace hoTools.Scripts
         SqlTabPagesCntrl _sqlTabCntrls = null;  // TAB Control with its TabPages
 
 
-        ToolStripMenuItem strip1;
-        ToolStripMenuItem strip2;
-        ToolStripMenuItem strip3;
-
         /// <summary>
         /// The selected row in script list
         /// </summary>

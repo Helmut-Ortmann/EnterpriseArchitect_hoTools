@@ -22,9 +22,18 @@ namespace hoTools.ActiveX
 
         private EA.Repository _repository = null;
 
+        /// <summary>
+        /// Setting Query and Script
+        /// </summary>
+        FrmQueryAndScript frmQueryAndScript;
+
+        /// <summary>
+        /// Settings
+        /// </summary>
+        frmSettings frmSettings;
 
         #region Generated
-        private frmSettings frmSettings;
+
         private Button btnLH;
         private Button btnLV;
         private Button btnTV;
@@ -116,7 +125,9 @@ namespace hoTools.ActiveX
         private ToolStripSeparator toolStripSeparator9;
         private ToolStripSeparator toolStripSeparator11;
         private ToolStripSeparator toolStripSeparator12;
-        private ToolStripMenuItem openScriptAndQueryToolStripMenuItem;
+        private ToolStripMenuItem settingsQueryAndSctipToolStripMenuItem;
+        private ToolStripMenuItem settingGeneralToolStripMenuItem;
+        private ToolStripMenuItem settingsKeysToolStripMenuItem;
         private TextBox txtUserText;
         #endregion
 
@@ -674,27 +685,17 @@ namespace hoTools.ActiveX
         void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.btnLH = new System.Windows.Forms.Button();
-            this.btnLV = new System.Windows.Forms.Button();
-            this.btnTV = new System.Windows.Forms.Button();
-            this.btnTH = new System.Windows.Forms.Button();
-            this.btnOS = new System.Windows.Forms.Button();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.btnDisplayBehavior = new System.Windows.Forms.Button();
-            this.btnLocateOperation = new System.Windows.Forms.Button();
-            this.btnAddElementNote = new System.Windows.Forms.Button();
-            this.btnAddDiagramNote = new System.Windows.Forms.Button();
-            this.btnLocateType = new System.Windows.Forms.Button();
-            this.btnFindUsage = new System.Windows.Forms.Button();
-            this.btnDisplaySpecification = new System.Windows.Forms.Button();
-            this.btnComposite = new System.Windows.Forms.Button();
-            this.btnOR = new System.Windows.Forms.Button();
-            this.btnA = new System.Windows.Forms.Button();
-            this.btnD = new System.Windows.Forms.Button();
-            this.btnC = new System.Windows.Forms.Button();
-            this.btnUpdateActivityParameter = new System.Windows.Forms.Button();
-            this.btnBezier = new System.Windows.Forms.Button();
-            this.txtUserText = new System.Windows.Forms.TextBox();
+            this.btnLabelRight = new System.Windows.Forms.Button();
+            this.btnLabelLeft = new System.Windows.Forms.Button();
+            this.btnUp = new System.Windows.Forms.Button();
+            this.btnDown = new System.Windows.Forms.Button();
+            this.btnLeft = new System.Windows.Forms.Button();
+            this.btnRight = new System.Windows.Forms.Button();
+            this.btnFavorites = new System.Windows.Forms.Button();
+            this.btnRemoveFavorite = new System.Windows.Forms.Button();
+            this.btnAddFavorite = new System.Windows.Forms.Button();
+            this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripBtn11 = new System.Windows.Forms.ToolStripButton();
             this.toolStripBtn12 = new System.Windows.Forms.ToolStripButton();
@@ -707,20 +708,31 @@ namespace hoTools.ActiveX
             this.toolStripBtn3 = new System.Windows.Forms.ToolStripButton();
             this.toolStripBtn4 = new System.Windows.Forms.ToolStripButton();
             this.toolStripBtn5 = new System.Windows.Forms.ToolStripButton();
-            this.btnAddFavorite = new System.Windows.Forms.Button();
-            this.btnRemoveFavorite = new System.Windows.Forms.Button();
-            this.btnFavorites = new System.Windows.Forms.Button();
-            this.btnRight = new System.Windows.Forms.Button();
-            this.btnLeft = new System.Windows.Forms.Button();
-            this.btnUp = new System.Windows.Forms.Button();
-            this.btnDown = new System.Windows.Forms.Button();
-            this.btnLabelLeft = new System.Windows.Forms.Button();
-            this.btnLabelRight = new System.Windows.Forms.Button();
+            this.txtUserText = new System.Windows.Forms.TextBox();
+            this.btnBezier = new System.Windows.Forms.Button();
+            this.btnUpdateActivityParameter = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.btnC = new System.Windows.Forms.Button();
+            this.btnD = new System.Windows.Forms.Button();
+            this.btnA = new System.Windows.Forms.Button();
+            this.btnOR = new System.Windows.Forms.Button();
+            this.btnComposite = new System.Windows.Forms.Button();
+            this.btnDisplaySpecification = new System.Windows.Forms.Button();
+            this.btnFindUsage = new System.Windows.Forms.Button();
+            this.btnLocateType = new System.Windows.Forms.Button();
+            this.btnAddDiagramNote = new System.Windows.Forms.Button();
+            this.btnAddElementNote = new System.Windows.Forms.Button();
+            this.btnLocateOperation = new System.Windows.Forms.Button();
+            this.btnDisplayBehavior = new System.Windows.Forms.Button();
+            this.btnOS = new System.Windows.Forms.Button();
+            this.btnTV = new System.Windows.Forms.Button();
+            this.btnTH = new System.Windows.Forms.Button();
+            this.btnLV = new System.Windows.Forms.Button();
+            this.btnLH = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.openScriptAndQueryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.settingsQueryAndSctipToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.doToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.createActivityForOperationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -765,236 +777,136 @@ namespace hoTools.ActiveX
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
+            this.settingGeneralToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.settingsKeysToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
+            this.toolStripContainer1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.toolStrip2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
-            this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
-            this.toolStripContainer1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // btnLH
+            // btnLabelRight
             // 
-            this.btnLH.Location = new System.Drawing.Point(49, 80);
-            this.btnLH.Name = "btnLH";
-            this.btnLH.Size = new System.Drawing.Size(43, 23);
-            this.btnLH.TabIndex = 0;
-            this.btnLH.Text = "LH";
-            this.toolTip.SetToolTip(this.btnLH, "Lateral Horizontal");
-            this.btnLH.UseVisualStyleBackColor = true;
-            this.btnLH.Click += new System.EventHandler(this.btnLH_Click);
+            this.btnLabelRight.Location = new System.Drawing.Point(138, 314);
+            this.btnLabelRight.Name = "btnLabelRight";
+            this.btnLabelRight.Size = new System.Drawing.Size(103, 23);
+            this.btnLabelRight.TabIndex = 37;
+            this.btnLabelRight.Text = "> Label right";
+            this.btnLabelRight.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.toolTip.SetToolTip(this.btnLabelRight, "Move selected Ports label right");
+            this.btnLabelRight.UseVisualStyleBackColor = true;
+            this.btnLabelRight.Click += new System.EventHandler(this.movePortLablePlusPositionToolStripMenuItem_Click);
             // 
-            // btnLV
+            // btnLabelLeft
             // 
-            this.btnLV.Location = new System.Drawing.Point(-2, 80);
-            this.btnLV.Name = "btnLV";
-            this.btnLV.Size = new System.Drawing.Size(45, 23);
-            this.btnLV.TabIndex = 2;
-            this.btnLV.Text = "LV";
-            this.toolTip.SetToolTip(this.btnLV, "Lateral Vertical");
-            this.btnLV.UseVisualStyleBackColor = true;
-            this.btnLV.Click += new System.EventHandler(this.btnLV_Click);
+            this.btnLabelLeft.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnLabelLeft.Location = new System.Drawing.Point(138, 287);
+            this.btnLabelLeft.Name = "btnLabelLeft";
+            this.btnLabelLeft.Size = new System.Drawing.Size(103, 23);
+            this.btnLabelLeft.TabIndex = 36;
+            this.btnLabelLeft.Text = "< Label left";
+            this.btnLabelLeft.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.toolTip.SetToolTip(this.btnLabelLeft, "Move selected Ports label left");
+            this.btnLabelLeft.UseVisualStyleBackColor = true;
+            this.btnLabelLeft.Click += new System.EventHandler(this.movePortLableMinusPositionToolStripMenuItem_Click);
             // 
-            // btnTV
+            // btnUp
             // 
-            this.btnTV.Location = new System.Drawing.Point(98, 80);
-            this.btnTV.Name = "btnTV";
-            this.btnTV.Size = new System.Drawing.Size(35, 23);
-            this.btnTV.TabIndex = 4;
-            this.btnTV.Text = "TV";
-            this.toolTip.SetToolTip(this.btnTV, "Tree Vertical");
-            this.btnTV.UseVisualStyleBackColor = true;
-            this.btnTV.Click += new System.EventHandler(this.btnTV_Click);
+            this.btnUp.Location = new System.Drawing.Point(0, 314);
+            this.btnUp.Name = "btnUp";
+            this.btnUp.Size = new System.Drawing.Size(24, 23);
+            this.btnUp.TabIndex = 35;
+            this.btnUp.Text = "/\\";
+            this.toolTip.SetToolTip(this.btnUp, "Move selected Ports down");
+            this.btnUp.UseVisualStyleBackColor = true;
+            this.btnUp.Click += new System.EventHandler(this.btnUp_Click);
             // 
-            // btnTH
+            // btnDown
             // 
-            this.btnTH.Location = new System.Drawing.Point(142, 80);
-            this.btnTH.Name = "btnTH";
-            this.btnTH.Size = new System.Drawing.Size(41, 23);
-            this.btnTH.TabIndex = 3;
-            this.btnTH.Text = "TH";
-            this.toolTip.SetToolTip(this.btnTH, "Tree Horizontal");
-            this.btnTH.UseVisualStyleBackColor = true;
-            this.btnTH.Click += new System.EventHandler(this.btnTH_Click);
+            this.btnDown.Location = new System.Drawing.Point(36, 315);
+            this.btnDown.Name = "btnDown";
+            this.btnDown.Size = new System.Drawing.Size(24, 23);
+            this.btnDown.TabIndex = 34;
+            this.btnDown.Text = "\\/";
+            this.toolTip.SetToolTip(this.btnDown, "Move selected Ports up");
+            this.btnDown.UseVisualStyleBackColor = true;
+            this.btnDown.Click += new System.EventHandler(this.btnDown_Click);
             // 
-            // btnOS
+            // btnLeft
             // 
-            this.btnOS.Location = new System.Drawing.Point(51, 109);
-            this.btnOS.Name = "btnOS";
-            this.btnOS.Size = new System.Drawing.Size(38, 24);
-            this.btnOS.TabIndex = 5;
-            this.btnOS.Text = "OS";
-            this.toolTip.SetToolTip(this.btnOS, "Orthogonal Square");
-            this.btnOS.UseVisualStyleBackColor = true;
-            this.btnOS.Click += new System.EventHandler(this.btnOS_Click);
+            this.btnLeft.Location = new System.Drawing.Point(0, 287);
+            this.btnLeft.Name = "btnLeft";
+            this.btnLeft.Size = new System.Drawing.Size(24, 23);
+            this.btnLeft.TabIndex = 33;
+            this.btnLeft.Text = "<";
+            this.toolTip.SetToolTip(this.btnLeft, "Move selected Ports left");
+            this.btnLeft.UseVisualStyleBackColor = true;
+            this.btnLeft.Click += new System.EventHandler(this.btnLeft_Click);
             // 
-            // btnDisplayBehavior
+            // btnRight
             // 
-            this.btnDisplayBehavior.Location = new System.Drawing.Point(108, 136);
-            this.btnDisplayBehavior.Name = "btnDisplayBehavior";
-            this.btnDisplayBehavior.Size = new System.Drawing.Size(119, 25);
-            this.btnDisplayBehavior.TabIndex = 7;
-            this.btnDisplayBehavior.Text = "DisplayBehavior";
-            this.toolTip.SetToolTip(this.btnDisplayBehavior, "Display behavior of an operation (activity, statemachine, interaction)");
-            this.btnDisplayBehavior.UseVisualStyleBackColor = true;
-            this.btnDisplayBehavior.Click += new System.EventHandler(this.btnDisplayBehavior_Click);
+            this.btnRight.Location = new System.Drawing.Point(36, 288);
+            this.btnRight.Name = "btnRight";
+            this.btnRight.Size = new System.Drawing.Size(24, 23);
+            this.btnRight.TabIndex = 32;
+            this.btnRight.Text = ">";
+            this.toolTip.SetToolTip(this.btnRight, "Move selected Ports right");
+            this.btnRight.UseVisualStyleBackColor = true;
+            this.btnRight.Click += new System.EventHandler(this.btnRight_Click);
             // 
-            // btnLocateOperation
+            // btnFavorites
             // 
-            this.btnLocateOperation.Location = new System.Drawing.Point(-1, 197);
-            this.btnLocateOperation.Name = "btnLocateOperation";
-            this.btnLocateOperation.Size = new System.Drawing.Size(130, 25);
-            this.btnLocateOperation.TabIndex = 8;
-            this.btnLocateOperation.Text = "Locate Operation";
-            this.toolTip.SetToolTip(this.btnLocateOperation, "Locate the operation for an action or behavior (statechart, activity, interaction" +
-        ")");
-            this.btnLocateOperation.UseVisualStyleBackColor = true;
-            this.btnLocateOperation.Click += new System.EventHandler(this.btnLocateOperation_Click);
+            this.btnFavorites.Location = new System.Drawing.Point(72, 137);
+            this.btnFavorites.Name = "btnFavorites";
+            this.btnFavorites.Size = new System.Drawing.Size(31, 23);
+            this.btnFavorites.TabIndex = 31;
+            this.btnFavorites.Text = "F";
+            this.toolTip.SetToolTip(this.btnFavorites, "Display Favorites");
+            this.btnFavorites.UseVisualStyleBackColor = true;
+            this.btnFavorites.Click += new System.EventHandler(this.btnFavorites_Click);
             // 
-            // btnAddElementNote
+            // btnRemoveFavorite
             // 
-            this.btnAddElementNote.Location = new System.Drawing.Point(-2, 257);
-            this.btnAddElementNote.Name = "btnAddElementNote";
-            this.btnAddElementNote.Size = new System.Drawing.Size(130, 25);
-            this.btnAddElementNote.TabIndex = 9;
-            this.btnAddElementNote.Text = "Add Element Note";
-            this.toolTip.SetToolTip(this.btnAddElementNote, "Add an element note to an Element in a diagram");
-            this.btnAddElementNote.UseVisualStyleBackColor = true;
-            this.btnAddElementNote.Click += new System.EventHandler(this.btnAddElementNote_Click);
+            this.btnRemoveFavorite.Location = new System.Drawing.Point(36, 137);
+            this.btnRemoveFavorite.Name = "btnRemoveFavorite";
+            this.btnRemoveFavorite.Size = new System.Drawing.Size(30, 23);
+            this.btnRemoveFavorite.TabIndex = 30;
+            this.btnRemoveFavorite.Text = "-";
+            this.toolTip.SetToolTip(this.btnRemoveFavorite, "Remove from to Favorite");
+            this.btnRemoveFavorite.UseVisualStyleBackColor = true;
+            this.btnRemoveFavorite.Click += new System.EventHandler(this.btnRemoveFavorite_Click);
             // 
-            // btnAddDiagramNote
+            // btnAddFavorite
             // 
-            this.btnAddDiagramNote.Location = new System.Drawing.Point(138, 257);
-            this.btnAddDiagramNote.Name = "btnAddDiagramNote";
-            this.btnAddDiagramNote.Size = new System.Drawing.Size(158, 25);
-            this.btnAddDiagramNote.TabIndex = 10;
-            this.btnAddDiagramNote.Text = "Add Diagram Note";
-            this.toolTip.SetToolTip(this.btnAddDiagramNote, "Add a diagram note to the diagram (connected to diagram note)");
-            this.btnAddDiagramNote.UseVisualStyleBackColor = true;
-            this.btnAddDiagramNote.Click += new System.EventHandler(this.btnAddDiagramNote_Click);
+            this.btnAddFavorite.Location = new System.Drawing.Point(0, 138);
+            this.btnAddFavorite.Name = "btnAddFavorite";
+            this.btnAddFavorite.Size = new System.Drawing.Size(30, 23);
+            this.btnAddFavorite.TabIndex = 29;
+            this.btnAddFavorite.Text = "+";
+            this.toolTip.SetToolTip(this.btnAddFavorite, "Add to Favorite");
+            this.btnAddFavorite.UseVisualStyleBackColor = true;
+            this.btnAddFavorite.Click += new System.EventHandler(this.btnAddFavorite_Click);
             // 
-            // btnLocateType
+            // toolStripContainer1
             // 
-            this.btnLocateType.Location = new System.Drawing.Point(-2, 226);
-            this.btnLocateType.Name = "btnLocateType";
-            this.btnLocateType.Size = new System.Drawing.Size(131, 25);
-            this.btnLocateType.TabIndex = 11;
-            this.btnLocateType.Text = "Locate Type";
-            this.toolTip.SetToolTip(this.btnLocateType, "Locate to the type, trigger,signal...  of the selected element/connector");
-            this.btnLocateType.UseVisualStyleBackColor = true;
-            this.btnLocateType.Click += new System.EventHandler(this.btnLocateType_Click);
+            this.toolStripContainer1.BottomToolStripPanelVisible = false;
             // 
-            // btnFindUsage
+            // toolStripContainer1.ContentPanel
             // 
-            this.btnFindUsage.Location = new System.Drawing.Point(138, 197);
-            this.btnFindUsage.Name = "btnFindUsage";
-            this.btnFindUsage.Size = new System.Drawing.Size(158, 25);
-            this.btnFindUsage.TabIndex = 12;
-            this.btnFindUsage.Text = "Find Usage";
-            this.toolTip.SetToolTip(this.btnFindUsage, "Find the usage of the selected element");
-            this.btnFindUsage.UseVisualStyleBackColor = true;
-            this.btnFindUsage.Click += new System.EventHandler(this.btnFindUsage_Click);
+            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(395, 2);
+            this.toolStripContainer1.LeftToolStripPanelVisible = false;
+            this.toolStripContainer1.Location = new System.Drawing.Point(3, 47);
+            this.toolStripContainer1.Name = "toolStripContainer1";
+            this.toolStripContainer1.RightToolStripPanelVisible = false;
+            this.toolStripContainer1.Size = new System.Drawing.Size(395, 27);
+            this.toolStripContainer1.TabIndex = 28;
+            this.toolStripContainer1.Text = "toolStripContainer1";
             // 
-            // btnDisplaySpecification
+            // toolStripContainer1.TopToolStripPanel
             // 
-            this.btnDisplaySpecification.Location = new System.Drawing.Point(-1, 166);
-            this.btnDisplaySpecification.Name = "btnDisplaySpecification";
-            this.btnDisplaySpecification.Size = new System.Drawing.Size(130, 25);
-            this.btnDisplaySpecification.TabIndex = 13;
-            this.btnDisplaySpecification.Text = "Specification";
-            this.toolTip.SetToolTip(this.btnDisplaySpecification, "Display the Specification according to file property");
-            this.btnDisplaySpecification.UseVisualStyleBackColor = true;
-            this.btnDisplaySpecification.Click += new System.EventHandler(this.btnShowSpecification_Click);
-            // 
-            // btnComposite
-            // 
-            this.btnComposite.Location = new System.Drawing.Point(138, 226);
-            this.btnComposite.Name = "btnComposite";
-            this.btnComposite.Size = new System.Drawing.Size(158, 25);
-            this.btnComposite.TabIndex = 16;
-            this.btnComposite.Text = "Composite";
-            this.toolTip.SetToolTip(this.btnComposite, "Navigate between Element and Composite Diagram");
-            this.btnComposite.UseVisualStyleBackColor = true;
-            this.btnComposite.Click += new System.EventHandler(this.btnComposite_Click);
-            // 
-            // btnOR
-            // 
-            this.btnOR.Location = new System.Drawing.Point(95, 109);
-            this.btnOR.Name = "btnOR";
-            this.btnOR.Size = new System.Drawing.Size(38, 24);
-            this.btnOR.TabIndex = 17;
-            this.btnOR.Text = "OR";
-            this.toolTip.SetToolTip(this.btnOR, "Orthogonal Rounded");
-            this.btnOR.UseVisualStyleBackColor = true;
-            this.btnOR.Click += new System.EventHandler(this.btnOR_Click);
-            // 
-            // btnA
-            // 
-            this.btnA.Location = new System.Drawing.Point(139, 109);
-            this.btnA.Name = "btnA";
-            this.btnA.Size = new System.Drawing.Size(44, 23);
-            this.btnA.TabIndex = 18;
-            this.btnA.Text = "A";
-            this.toolTip.SetToolTip(this.btnA, "Orthogonal Rounded");
-            this.btnA.UseVisualStyleBackColor = true;
-            this.btnA.Click += new System.EventHandler(this.btnA_Click);
-            // 
-            // btnD
-            // 
-            this.btnD.Location = new System.Drawing.Point(189, 109);
-            this.btnD.Name = "btnD";
-            this.btnD.Size = new System.Drawing.Size(38, 23);
-            this.btnD.TabIndex = 19;
-            this.btnD.Text = "D";
-            this.toolTip.SetToolTip(this.btnD, "Direct");
-            this.btnD.UseVisualStyleBackColor = true;
-            this.btnD.Click += new System.EventHandler(this.btnD_Click);
-            // 
-            // btnC
-            // 
-            this.btnC.Location = new System.Drawing.Point(189, 80);
-            this.btnC.Name = "btnC";
-            this.btnC.Size = new System.Drawing.Size(38, 23);
-            this.btnC.TabIndex = 20;
-            this.btnC.Text = "C";
-            this.toolTip.SetToolTip(this.btnC, "Custom line");
-            this.btnC.UseVisualStyleBackColor = true;
-            this.btnC.Click += new System.EventHandler(this.btnC_Click);
-            // 
-            // btnUpdateActivityParameter
-            // 
-            this.btnUpdateActivityParameter.Location = new System.Drawing.Point(138, 166);
-            this.btnUpdateActivityParameter.Name = "btnUpdateActivityParameter";
-            this.btnUpdateActivityParameter.Size = new System.Drawing.Size(160, 25);
-            this.btnUpdateActivityParameter.TabIndex = 23;
-            this.btnUpdateActivityParameter.Text = "UpdateParameter";
-            this.toolTip.SetToolTip(this.btnUpdateActivityParameter, "Update Activity Parameter from operation");
-            this.btnUpdateActivityParameter.UseVisualStyleBackColor = true;
-            this.btnUpdateActivityParameter.Click += new System.EventHandler(this.btnUpdateActivityParametzer_Click);
-            // 
-            // btnBezier
-            // 
-            this.btnBezier.Location = new System.Drawing.Point(-2, 109);
-            this.btnBezier.Name = "btnBezier";
-            this.btnBezier.Size = new System.Drawing.Size(45, 23);
-            this.btnBezier.TabIndex = 25;
-            this.btnBezier.Text = "B";
-            this.toolTip.SetToolTip(this.btnBezier, "Bezier");
-            this.btnBezier.UseVisualStyleBackColor = true;
-            this.btnBezier.Click += new System.EventHandler(this.btnBezier_Click);
-            // 
-            // txtUserText
-            // 
-            this.txtUserText.Location = new System.Drawing.Point(0, 24);
-            this.txtUserText.Name = "txtUserText";
-            this.txtUserText.Size = new System.Drawing.Size(298, 20);
-            this.txtUserText.TabIndex = 27;
-            this.toolTip.SetToolTip(this.txtUserText, "Run EA Search \'Quick View\' with:\r\n- Input text + Enter\r\n- Double left Click with " +
-        "insert Clipboard and start search\r\n\r\nSearch for:\r\n- Class / Component / Requirem" +
-        "ent\r\n- GUID\r\n- Port");
-            this.txtUserText.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtUserText_KeyDown);
-            this.txtUserText.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtUserText_KeyDown);
-            this.txtUserText.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.txtUserText_MouseDoubleClick);
+            this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.toolStrip1);
+            this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.toolStrip2);
             // 
             // toolStrip1
             // 
@@ -1118,107 +1030,40 @@ namespace hoTools.ActiveX
             this.toolStripBtn5.Text = "5";
             this.toolStripBtn5.Click += new System.EventHandler(this.toolStripBtn5_Click);
             // 
-            // btnAddFavorite
+            // txtUserText
             // 
-            this.btnAddFavorite.Location = new System.Drawing.Point(0, 138);
-            this.btnAddFavorite.Name = "btnAddFavorite";
-            this.btnAddFavorite.Size = new System.Drawing.Size(30, 23);
-            this.btnAddFavorite.TabIndex = 29;
-            this.btnAddFavorite.Text = "+";
-            this.toolTip.SetToolTip(this.btnAddFavorite, "Add to Favorite");
-            this.btnAddFavorite.UseVisualStyleBackColor = true;
-            this.btnAddFavorite.Click += new System.EventHandler(this.btnAddFavorite_Click);
+            this.txtUserText.Location = new System.Drawing.Point(0, 24);
+            this.txtUserText.Name = "txtUserText";
+            this.txtUserText.Size = new System.Drawing.Size(298, 20);
+            this.txtUserText.TabIndex = 27;
+            this.toolTip.SetToolTip(this.txtUserText, "Run EA Search \'Quick View\' with:\r\n- Input text + Enter\r\n- Double left Click with " +
+        "insert Clipboard and start search\r\n\r\nSearch for:\r\n- Class / Component / Requirem" +
+        "ent\r\n- GUID\r\n- Port");
+            this.txtUserText.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtUserText_KeyDown);
+            this.txtUserText.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtUserText_KeyDown);
+            this.txtUserText.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.txtUserText_MouseDoubleClick);
             // 
-            // btnRemoveFavorite
+            // btnBezier
             // 
-            this.btnRemoveFavorite.Location = new System.Drawing.Point(36, 137);
-            this.btnRemoveFavorite.Name = "btnRemoveFavorite";
-            this.btnRemoveFavorite.Size = new System.Drawing.Size(30, 23);
-            this.btnRemoveFavorite.TabIndex = 30;
-            this.btnRemoveFavorite.Text = "-";
-            this.toolTip.SetToolTip(this.btnRemoveFavorite, "Remove from to Favorite");
-            this.btnRemoveFavorite.UseVisualStyleBackColor = true;
-            this.btnRemoveFavorite.Click += new System.EventHandler(this.btnRemoveFavorite_Click);
+            this.btnBezier.Location = new System.Drawing.Point(-2, 109);
+            this.btnBezier.Name = "btnBezier";
+            this.btnBezier.Size = new System.Drawing.Size(45, 23);
+            this.btnBezier.TabIndex = 25;
+            this.btnBezier.Text = "B";
+            this.toolTip.SetToolTip(this.btnBezier, "Bezier");
+            this.btnBezier.UseVisualStyleBackColor = true;
+            this.btnBezier.Click += new System.EventHandler(this.btnBezier_Click);
             // 
-            // btnFavorites
+            // btnUpdateActivityParameter
             // 
-            this.btnFavorites.Location = new System.Drawing.Point(72, 137);
-            this.btnFavorites.Name = "btnFavorites";
-            this.btnFavorites.Size = new System.Drawing.Size(31, 23);
-            this.btnFavorites.TabIndex = 31;
-            this.btnFavorites.Text = "F";
-            this.toolTip.SetToolTip(this.btnFavorites, "Display Favorites");
-            this.btnFavorites.UseVisualStyleBackColor = true;
-            this.btnFavorites.Click += new System.EventHandler(this.btnFavorites_Click);
-            // 
-            // btnRight
-            // 
-            this.btnRight.Location = new System.Drawing.Point(36, 288);
-            this.btnRight.Name = "btnRight";
-            this.btnRight.Size = new System.Drawing.Size(24, 23);
-            this.btnRight.TabIndex = 32;
-            this.btnRight.Text = ">";
-            this.toolTip.SetToolTip(this.btnRight, "Move selected Ports right");
-            this.btnRight.UseVisualStyleBackColor = true;
-            this.btnRight.Click += new System.EventHandler(this.btnRight_Click);
-            // 
-            // btnLeft
-            // 
-            this.btnLeft.Location = new System.Drawing.Point(0, 287);
-            this.btnLeft.Name = "btnLeft";
-            this.btnLeft.Size = new System.Drawing.Size(24, 23);
-            this.btnLeft.TabIndex = 33;
-            this.btnLeft.Text = "<";
-            this.toolTip.SetToolTip(this.btnLeft, "Move selected Ports left");
-            this.btnLeft.UseVisualStyleBackColor = true;
-            this.btnLeft.Click += new System.EventHandler(this.btnLeft_Click);
-            // 
-            // btnUp
-            // 
-            this.btnUp.Location = new System.Drawing.Point(0, 314);
-            this.btnUp.Name = "btnUp";
-            this.btnUp.Size = new System.Drawing.Size(24, 23);
-            this.btnUp.TabIndex = 35;
-            this.btnUp.Text = "/\\";
-            this.toolTip.SetToolTip(this.btnUp, "Move selected Ports down");
-            this.btnUp.UseVisualStyleBackColor = true;
-            this.btnUp.Click += new System.EventHandler(this.btnUp_Click);
-            // 
-            // btnDown
-            // 
-            this.btnDown.Location = new System.Drawing.Point(36, 315);
-            this.btnDown.Name = "btnDown";
-            this.btnDown.Size = new System.Drawing.Size(24, 23);
-            this.btnDown.TabIndex = 34;
-            this.btnDown.Text = "\\/";
-            this.toolTip.SetToolTip(this.btnDown, "Move selected Ports up");
-            this.btnDown.UseVisualStyleBackColor = true;
-            this.btnDown.Click += new System.EventHandler(this.btnDown_Click);
-            // 
-            // btnLabelLeft
-            // 
-            this.btnLabelLeft.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnLabelLeft.Location = new System.Drawing.Point(138, 287);
-            this.btnLabelLeft.Name = "btnLabelLeft";
-            this.btnLabelLeft.Size = new System.Drawing.Size(103, 23);
-            this.btnLabelLeft.TabIndex = 36;
-            this.btnLabelLeft.Text = "< Label left";
-            this.btnLabelLeft.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.toolTip.SetToolTip(this.btnLabelLeft, "Move selected Ports label left");
-            this.btnLabelLeft.UseVisualStyleBackColor = true;
-            this.btnLabelLeft.Click += new System.EventHandler(this.movePortLableMinusPositionToolStripMenuItem_Click);
-            // 
-            // btnLabelRight
-            // 
-            this.btnLabelRight.Location = new System.Drawing.Point(138, 314);
-            this.btnLabelRight.Name = "btnLabelRight";
-            this.btnLabelRight.Size = new System.Drawing.Size(103, 23);
-            this.btnLabelRight.TabIndex = 37;
-            this.btnLabelRight.Text = "> Label right";
-            this.btnLabelRight.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.toolTip.SetToolTip(this.btnLabelRight, "Move selected Ports label right");
-            this.btnLabelRight.UseVisualStyleBackColor = true;
-            this.btnLabelRight.Click += new System.EventHandler(this.movePortLablePlusPositionToolStripMenuItem_Click);
+            this.btnUpdateActivityParameter.Location = new System.Drawing.Point(138, 166);
+            this.btnUpdateActivityParameter.Name = "btnUpdateActivityParameter";
+            this.btnUpdateActivityParameter.Size = new System.Drawing.Size(160, 25);
+            this.btnUpdateActivityParameter.TabIndex = 23;
+            this.btnUpdateActivityParameter.Text = "UpdateParameter";
+            this.toolTip.SetToolTip(this.btnUpdateActivityParameter, "Update Activity Parameter from operation");
+            this.btnUpdateActivityParameter.UseVisualStyleBackColor = true;
+            this.btnUpdateActivityParameter.Click += new System.EventHandler(this.btnUpdateActivityParametzer_Click);
             // 
             // label1
             // 
@@ -1230,6 +1075,194 @@ namespace hoTools.ActiveX
             this.label1.TabIndex = 21;
             this.label1.Text = "Quick Search";
             this.label1.ControlRemoved += new System.Windows.Forms.ControlEventHandler(this.label1_ControlRemoved);
+            // 
+            // btnC
+            // 
+            this.btnC.Location = new System.Drawing.Point(189, 80);
+            this.btnC.Name = "btnC";
+            this.btnC.Size = new System.Drawing.Size(38, 23);
+            this.btnC.TabIndex = 20;
+            this.btnC.Text = "C";
+            this.toolTip.SetToolTip(this.btnC, "Custom line");
+            this.btnC.UseVisualStyleBackColor = true;
+            this.btnC.Click += new System.EventHandler(this.btnC_Click);
+            // 
+            // btnD
+            // 
+            this.btnD.Location = new System.Drawing.Point(189, 109);
+            this.btnD.Name = "btnD";
+            this.btnD.Size = new System.Drawing.Size(38, 23);
+            this.btnD.TabIndex = 19;
+            this.btnD.Text = "D";
+            this.toolTip.SetToolTip(this.btnD, "Direct");
+            this.btnD.UseVisualStyleBackColor = true;
+            this.btnD.Click += new System.EventHandler(this.btnD_Click);
+            // 
+            // btnA
+            // 
+            this.btnA.Location = new System.Drawing.Point(139, 109);
+            this.btnA.Name = "btnA";
+            this.btnA.Size = new System.Drawing.Size(44, 23);
+            this.btnA.TabIndex = 18;
+            this.btnA.Text = "A";
+            this.toolTip.SetToolTip(this.btnA, "Orthogonal Rounded");
+            this.btnA.UseVisualStyleBackColor = true;
+            this.btnA.Click += new System.EventHandler(this.btnA_Click);
+            // 
+            // btnOR
+            // 
+            this.btnOR.Location = new System.Drawing.Point(95, 109);
+            this.btnOR.Name = "btnOR";
+            this.btnOR.Size = new System.Drawing.Size(38, 24);
+            this.btnOR.TabIndex = 17;
+            this.btnOR.Text = "OR";
+            this.toolTip.SetToolTip(this.btnOR, "Orthogonal Rounded");
+            this.btnOR.UseVisualStyleBackColor = true;
+            this.btnOR.Click += new System.EventHandler(this.btnOR_Click);
+            // 
+            // btnComposite
+            // 
+            this.btnComposite.Location = new System.Drawing.Point(138, 226);
+            this.btnComposite.Name = "btnComposite";
+            this.btnComposite.Size = new System.Drawing.Size(158, 25);
+            this.btnComposite.TabIndex = 16;
+            this.btnComposite.Text = "Composite";
+            this.toolTip.SetToolTip(this.btnComposite, "Navigate between Element and Composite Diagram");
+            this.btnComposite.UseVisualStyleBackColor = true;
+            this.btnComposite.Click += new System.EventHandler(this.btnComposite_Click);
+            // 
+            // btnDisplaySpecification
+            // 
+            this.btnDisplaySpecification.Location = new System.Drawing.Point(-1, 166);
+            this.btnDisplaySpecification.Name = "btnDisplaySpecification";
+            this.btnDisplaySpecification.Size = new System.Drawing.Size(130, 25);
+            this.btnDisplaySpecification.TabIndex = 13;
+            this.btnDisplaySpecification.Text = "Specification";
+            this.toolTip.SetToolTip(this.btnDisplaySpecification, "Display the Specification according to file property");
+            this.btnDisplaySpecification.UseVisualStyleBackColor = true;
+            this.btnDisplaySpecification.Click += new System.EventHandler(this.btnShowSpecification_Click);
+            // 
+            // btnFindUsage
+            // 
+            this.btnFindUsage.Location = new System.Drawing.Point(138, 197);
+            this.btnFindUsage.Name = "btnFindUsage";
+            this.btnFindUsage.Size = new System.Drawing.Size(158, 25);
+            this.btnFindUsage.TabIndex = 12;
+            this.btnFindUsage.Text = "Find Usage";
+            this.toolTip.SetToolTip(this.btnFindUsage, "Find the usage of the selected element");
+            this.btnFindUsage.UseVisualStyleBackColor = true;
+            this.btnFindUsage.Click += new System.EventHandler(this.btnFindUsage_Click);
+            // 
+            // btnLocateType
+            // 
+            this.btnLocateType.Location = new System.Drawing.Point(-2, 226);
+            this.btnLocateType.Name = "btnLocateType";
+            this.btnLocateType.Size = new System.Drawing.Size(131, 25);
+            this.btnLocateType.TabIndex = 11;
+            this.btnLocateType.Text = "Locate Type";
+            this.toolTip.SetToolTip(this.btnLocateType, "Locate to the type, trigger,signal...  of the selected element/connector");
+            this.btnLocateType.UseVisualStyleBackColor = true;
+            this.btnLocateType.Click += new System.EventHandler(this.btnLocateType_Click);
+            // 
+            // btnAddDiagramNote
+            // 
+            this.btnAddDiagramNote.Location = new System.Drawing.Point(138, 257);
+            this.btnAddDiagramNote.Name = "btnAddDiagramNote";
+            this.btnAddDiagramNote.Size = new System.Drawing.Size(158, 25);
+            this.btnAddDiagramNote.TabIndex = 10;
+            this.btnAddDiagramNote.Text = "Add Diagram Note";
+            this.toolTip.SetToolTip(this.btnAddDiagramNote, "Add a diagram note to the diagram (connected to diagram note)");
+            this.btnAddDiagramNote.UseVisualStyleBackColor = true;
+            this.btnAddDiagramNote.Click += new System.EventHandler(this.btnAddDiagramNote_Click);
+            // 
+            // btnAddElementNote
+            // 
+            this.btnAddElementNote.Location = new System.Drawing.Point(-2, 257);
+            this.btnAddElementNote.Name = "btnAddElementNote";
+            this.btnAddElementNote.Size = new System.Drawing.Size(130, 25);
+            this.btnAddElementNote.TabIndex = 9;
+            this.btnAddElementNote.Text = "Add Element Note";
+            this.toolTip.SetToolTip(this.btnAddElementNote, "Add an element note to an Element in a diagram");
+            this.btnAddElementNote.UseVisualStyleBackColor = true;
+            this.btnAddElementNote.Click += new System.EventHandler(this.btnAddElementNote_Click);
+            // 
+            // btnLocateOperation
+            // 
+            this.btnLocateOperation.Location = new System.Drawing.Point(-1, 197);
+            this.btnLocateOperation.Name = "btnLocateOperation";
+            this.btnLocateOperation.Size = new System.Drawing.Size(130, 25);
+            this.btnLocateOperation.TabIndex = 8;
+            this.btnLocateOperation.Text = "Locate Operation";
+            this.toolTip.SetToolTip(this.btnLocateOperation, "Locate the operation for an action or behavior (statechart, activity, interaction" +
+        ")");
+            this.btnLocateOperation.UseVisualStyleBackColor = true;
+            this.btnLocateOperation.Click += new System.EventHandler(this.btnLocateOperation_Click);
+            // 
+            // btnDisplayBehavior
+            // 
+            this.btnDisplayBehavior.Location = new System.Drawing.Point(108, 136);
+            this.btnDisplayBehavior.Name = "btnDisplayBehavior";
+            this.btnDisplayBehavior.Size = new System.Drawing.Size(119, 25);
+            this.btnDisplayBehavior.TabIndex = 7;
+            this.btnDisplayBehavior.Text = "DisplayBehavior";
+            this.toolTip.SetToolTip(this.btnDisplayBehavior, "Display behavior of an operation (activity, statemachine, interaction)");
+            this.btnDisplayBehavior.UseVisualStyleBackColor = true;
+            this.btnDisplayBehavior.Click += new System.EventHandler(this.btnDisplayBehavior_Click);
+            // 
+            // btnOS
+            // 
+            this.btnOS.Location = new System.Drawing.Point(51, 109);
+            this.btnOS.Name = "btnOS";
+            this.btnOS.Size = new System.Drawing.Size(38, 24);
+            this.btnOS.TabIndex = 5;
+            this.btnOS.Text = "OS";
+            this.toolTip.SetToolTip(this.btnOS, "Orthogonal Square");
+            this.btnOS.UseVisualStyleBackColor = true;
+            this.btnOS.Click += new System.EventHandler(this.btnOS_Click);
+            // 
+            // btnTV
+            // 
+            this.btnTV.Location = new System.Drawing.Point(98, 80);
+            this.btnTV.Name = "btnTV";
+            this.btnTV.Size = new System.Drawing.Size(35, 23);
+            this.btnTV.TabIndex = 4;
+            this.btnTV.Text = "TV";
+            this.toolTip.SetToolTip(this.btnTV, "Tree Vertical");
+            this.btnTV.UseVisualStyleBackColor = true;
+            this.btnTV.Click += new System.EventHandler(this.btnTV_Click);
+            // 
+            // btnTH
+            // 
+            this.btnTH.Location = new System.Drawing.Point(142, 80);
+            this.btnTH.Name = "btnTH";
+            this.btnTH.Size = new System.Drawing.Size(41, 23);
+            this.btnTH.TabIndex = 3;
+            this.btnTH.Text = "TH";
+            this.toolTip.SetToolTip(this.btnTH, "Tree Horizontal");
+            this.btnTH.UseVisualStyleBackColor = true;
+            this.btnTH.Click += new System.EventHandler(this.btnTH_Click);
+            // 
+            // btnLV
+            // 
+            this.btnLV.Location = new System.Drawing.Point(-2, 80);
+            this.btnLV.Name = "btnLV";
+            this.btnLV.Size = new System.Drawing.Size(45, 23);
+            this.btnLV.TabIndex = 2;
+            this.btnLV.Text = "LV";
+            this.toolTip.SetToolTip(this.btnLV, "Lateral Vertical");
+            this.btnLV.UseVisualStyleBackColor = true;
+            this.btnLV.Click += new System.EventHandler(this.btnLV_Click);
+            // 
+            // btnLH
+            // 
+            this.btnLH.Location = new System.Drawing.Point(49, 80);
+            this.btnLH.Name = "btnLH";
+            this.btnLH.Size = new System.Drawing.Size(43, 23);
+            this.btnLH.TabIndex = 0;
+            this.btnLH.Text = "LH";
+            this.toolTip.SetToolTip(this.btnLH, "Lateral Horizontal");
+            this.btnLH.UseVisualStyleBackColor = true;
+            this.btnLH.Click += new System.EventHandler(this.btnLH_Click);
             // 
             // menuStrip1
             // 
@@ -1249,25 +1282,27 @@ namespace hoTools.ActiveX
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.settingGeneralToolStripMenuItem,
+            this.settingsQueryAndSctipToolStripMenuItem,
             this.settingsToolStripMenuItem,
-            this.openScriptAndQueryToolStripMenuItem});
+            this.settingsKeysToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
-            this.fileToolStripMenuItem.Text = "&FileHistory";
+            this.fileToolStripMenuItem.Text = "&File";
             // 
             // settingsToolStripMenuItem
             // 
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
-            this.settingsToolStripMenuItem.Text = "&Settings";
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
+            this.settingsToolStripMenuItem.Text = "Settings &Linestyle";
             this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
             // 
-            // openScriptAndQueryToolStripMenuItem
+            // settingsQueryAndSctipToolStripMenuItem
             // 
-            this.openScriptAndQueryToolStripMenuItem.Name = "openScriptAndQueryToolStripMenuItem";
-            this.openScriptAndQueryToolStripMenuItem.Size = new System.Drawing.Size(194, 22);
-            this.openScriptAndQueryToolStripMenuItem.Text = "&Open Script and Query";
-            this.openScriptAndQueryToolStripMenuItem.ToolTipText = "Open anothe Addin page Script and Query";
+            this.settingsQueryAndSctipToolStripMenuItem.Name = "settingsQueryAndSctipToolStripMenuItem";
+            this.settingsQueryAndSctipToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
+            this.settingsQueryAndSctipToolStripMenuItem.Text = "Settings &Query and Script";
+            this.settingsQueryAndSctipToolStripMenuItem.Click += new System.EventHandler(this.settingsQueryAndSctipToolStripMenuItem_Click);
             // 
             // doToolStripMenuItem
             // 
@@ -1628,25 +1663,17 @@ namespace hoTools.ActiveX
             this.helpToolStripMenuItem1.ToolTipText = "Help";
             this.helpToolStripMenuItem1.Click += new System.EventHandler(this.helpToolStripMenuItem1_Click);
             // 
-            // toolStripContainer1
+            // settingGeneralToolStripMenuItem
             // 
-            this.toolStripContainer1.BottomToolStripPanelVisible = false;
+            this.settingGeneralToolStripMenuItem.Name = "settingGeneralToolStripMenuItem";
+            this.settingGeneralToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
+            this.settingGeneralToolStripMenuItem.Text = "Setting &General";
             // 
-            // toolStripContainer1.ContentPanel
+            // settingsKeysToolStripMenuItem
             // 
-            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(395, 2);
-            this.toolStripContainer1.LeftToolStripPanelVisible = false;
-            this.toolStripContainer1.Location = new System.Drawing.Point(3, 47);
-            this.toolStripContainer1.Name = "toolStripContainer1";
-            this.toolStripContainer1.RightToolStripPanelVisible = false;
-            this.toolStripContainer1.Size = new System.Drawing.Size(395, 27);
-            this.toolStripContainer1.TabIndex = 28;
-            this.toolStripContainer1.Text = "toolStripContainer1";
-            // 
-            // toolStripContainer1.TopToolStripPanel
-            // 
-            this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.toolStrip1);
-            this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.toolStrip2);
+            this.settingsKeysToolStripMenuItem.Name = "settingsKeysToolStripMenuItem";
+            this.settingsKeysToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
+            this.settingsKeysToolStripMenuItem.Text = "Settings &Keys";
             // 
             // AddinControlGUI
             // 
@@ -1685,16 +1712,16 @@ namespace hoTools.ActiveX
             this.Name = "AddinControlGUI";
             this.Size = new System.Drawing.Size(398, 342);
             this.Load += new System.EventHandler(this.AddinControlGUI_Load);
+            this.toolStripContainer1.TopToolStripPanel.ResumeLayout(false);
+            this.toolStripContainer1.TopToolStripPanel.PerformLayout();
+            this.toolStripContainer1.ResumeLayout(false);
+            this.toolStripContainer1.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.toolStrip2.ResumeLayout(false);
             this.toolStrip2.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.toolStripContainer1.TopToolStripPanel.ResumeLayout(false);
-            this.toolStripContainer1.TopToolStripPanel.PerformLayout();
-            this.toolStripContainer1.ResumeLayout(false);
-            this.toolStripContainer1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1829,6 +1856,22 @@ namespace hoTools.ActiveX
         private void AddinControlGUI_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void openScriptAndQueryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        /// <summary>
+        /// Open Query and Scripts
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void settingsQueryAndSctipToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.frmQueryAndScript = new FrmQueryAndScript(AddinSettings);
+            this.frmQueryAndScript.ShowDialog();
         }
     }
 }
