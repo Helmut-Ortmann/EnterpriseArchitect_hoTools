@@ -331,7 +331,7 @@ namespace hoTools.Scripts
 
             saveFileDialog.InitialDirectory = @"c:\temp\sql";
             // get file name
-            saveFileDialog.FileName = GuiFunction.getFileNameFromCaptionUnchanged(tabPageSql.Text);
+            saveFileDialog.FileName = tabPageSql.Text;
             saveFileDialog.RestoreDirectory = true;
             saveFileDialog.Filter = "sql files (*.sql)|*.sql|All files (*.*)|*.*";
             saveFileDialog.FilterIndex = 1;

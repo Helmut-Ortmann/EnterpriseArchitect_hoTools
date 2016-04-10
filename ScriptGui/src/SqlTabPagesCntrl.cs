@@ -32,19 +32,16 @@ namespace hoTools.Scripts
         TabControl _tabControl;
         TextBox _sqlTextBoxSearchTerm;
 
-        /// <summary>
-        /// Reusable ToolStripMenuItem: Load Recent Files 
-        /// </summary>
-        ToolStripMenuItem _loadRecentFileItem = new ToolStripMenuItem("Recent Files");
-        //_loadRecentFileItem.Text = "Recent Files";
 
         /// <summary>
         /// Reusable ToolStripMenuItem: New Tab and Load Recent Files 
         /// </summary>
-        ToolStripMenuItem _newTabAndLoadRecentFileItem = new ToolStripMenuItem("New Tab from");
+        public ToolStripMenuItem NewTabAndLoadRecentFileItem { get; }
 
-        public ToolStripMenuItem NewTabAndLoadRecentFileItem => _newTabAndLoadRecentFileItem;
-        public ToolStripMenuItem LoadRecentFileItem => _loadRecentFileItem;
+        /// <summary>
+        /// Reusable ToolStripMenuItem: Load Recent Files 
+        /// </summary>
+        public ToolStripMenuItem LoadRecentFileItem   { get; }
 
         /// <summary>
         /// List of TabPages in TabControl
@@ -68,10 +65,13 @@ namespace hoTools.Scripts
             _components = components;
             _sqlTextBoxSearchTerm = sqlTextBoxSearchTerm;
 
+            NewTabAndLoadRecentFileItem = new ToolStripMenuItem("New Tab from");
+            LoadRecentFileItem = new ToolStripMenuItem("Recent Files");
+
             // load File history in ToolStripMenuItem
-            loadRecentFilesMenuItems(_loadRecentFileItem, loadFromHistoryEntry_Click);
+            loadRecentFilesMenuItems(LoadRecentFileItem, loadFromHistoryEntry_Click);
             // New Tab with File History in ToolStripMenuItem
-            loadRecentFilesMenuItems(_newTabAndLoadRecentFileItem, newTabAnLoadFromHistoryEntry_Click);
+            loadRecentFilesMenuItems(NewTabAndLoadRecentFileItem, newTabAnLoadFromHistoryEntry_Click);
 
         }
         /// <summary>
@@ -281,9 +281,9 @@ namespace hoTools.Scripts
             //----------------------------------------------------------------------------------------------------------
 
             // load File history in ToolStripMenuItem
-            loadRecentFilesMenuItems(_loadRecentFileItem, loadFromHistoryEntry_Click);
+            loadRecentFilesMenuItems(LoadRecentFileItem, loadFromHistoryEntry_Click);
             // New Tab with File History in ToolStripMenuItem
-            loadRecentFilesMenuItems(_newTabAndLoadRecentFileItem, newTabAnLoadFromHistoryEntry_Click);
+            loadRecentFilesMenuItems(NewTabAndLoadRecentFileItem, newTabAnLoadFromHistoryEntry_Click);
 
             //----------------------------------------------------------------------------------------------------------
             // ToolStripItem for
@@ -291,9 +291,9 @@ namespace hoTools.Scripts
             // - SQL TextBox
             ToolStripItem[] toolStripItems = {
                 fileLoadMenuItem,
-                _loadRecentFileItem,           // Reusable LoadRecentFileItem (contains menuItems of recent files)
+                LoadRecentFileItem,           // Reusable LoadRecentFileItem (contains menuItems of recent files)
                 newTabMenuItem,
-                _newTabAndLoadRecentFileItem,  // Reusable NewTabAndLoadItem (contains menuItems of recent files)
+                NewTabAndLoadRecentFileItem,  // Reusable NewTabAndLoadItem (contains menuItems of recent files)
                 insertTemplateMenuItem,
                 insertMacroMenuItem,
                 fileRunMenuItem,
@@ -597,9 +597,9 @@ namespace hoTools.Scripts
                     tabPageSql.Text = sqlFile.DisplayName;
 
                     // load File history in ToolStripMenuItem
-                    loadRecentFilesMenuItems(_loadRecentFileItem, loadFromHistoryEntry_Click);
+                    loadRecentFilesMenuItems(LoadRecentFileItem, loadFromHistoryEntry_Click);
                     // New Tab with File History in ToolStripMenuItem
-                    loadRecentFilesMenuItems(_newTabAndLoadRecentFileItem, newTabAnLoadFromHistoryEntry_Click);
+                    loadRecentFilesMenuItems(NewTabAndLoadRecentFileItem, newTabAnLoadFromHistoryEntry_Click);
                 }
             }
 
@@ -644,9 +644,9 @@ namespace hoTools.Scripts
                     tabPageSql.Text = sqlFile.DisplayName;
 
                     // load File history in ToolStripMenuItem
-                    loadRecentFilesMenuItems(_loadRecentFileItem, loadFromHistoryEntry_Click);
+                    loadRecentFilesMenuItems(LoadRecentFileItem, loadFromHistoryEntry_Click);
                     // New Tab with File History in ToolStripMenuItem
-                    loadRecentFilesMenuItems(_newTabAndLoadRecentFileItem, newTabAnLoadFromHistoryEntry_Click);
+                    loadRecentFilesMenuItems(NewTabAndLoadRecentFileItem, newTabAnLoadFromHistoryEntry_Click);
                 }
             }
         }

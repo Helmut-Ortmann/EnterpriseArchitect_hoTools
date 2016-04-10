@@ -130,23 +130,6 @@ namespace hoTools.Scripts
         }
 
 
-
-
-        /// <summary>
-        /// Get File Name from Caption
-        /// - " *" in a caption means content has changed
-        /// </summary>
-        /// <param name="caption"></param>
-        /// <returns></returns>
-        public static string getFileNameFromCaptionUnchanged(string caption) 
-            => caption.Replace("*", "").Trim();
-        public static string getFileNameCaptionChanged(string caption) 
-            => getFileNameFromCaptionUnchanged(caption) + " *";
-        public static bool isFileNameCaptionChanged(string caption) 
-            => caption == getFileNameFromCaptionUnchanged(caption);
-
-        public static bool getFileNameCaptionInitial(string caption)
-            => caption == "noName1.sql";
-
+        
     }
 }
