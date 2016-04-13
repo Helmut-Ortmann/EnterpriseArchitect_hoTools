@@ -22,6 +22,9 @@ namespace hoTools.Settings
         {
             InitializeComponent();
             _settings = settings;
+
+            chkScriptAndQuery.Checked = settings.isScriptAndQuery;
+            chkOnlyQuery.Checked = settings.isOnlyQuery;
         }
         #endregion
 
@@ -32,6 +35,8 @@ namespace hoTools.Settings
 
         private void btnOk_Click(object sender, EventArgs e)
         {
+            _settings.isOnlyQuery = chkOnlyQuery.Checked;
+            _settings.isScriptAndQuery = chkScriptAndQuery.Checked;
             Close();
         }
     }

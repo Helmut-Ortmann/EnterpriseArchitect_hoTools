@@ -19,6 +19,9 @@ namespace hoTools.Scripts
 {
     /// <summary>
     /// ActiveX COM Component 'hoTools.ScriptGUI' to show as tab in the EA Addin window
+    /// this.Tag object with string of:
+    /// - TABULATOR_QUERY if Query mode is used
+    /// - TABULATOR_SCRPT if Script mode is used
     /// </summary>
     [ComVisible(true)]
     [ClassInterface(ClassInterfaceType.None)]
@@ -28,7 +31,8 @@ namespace hoTools.Scripts
     public partial class ScriptGUI : AddinGUI, IScriptGUI
     {
         public const string PROGID = "hoTools.ScriptGUI";
-        public const string TABULATOR = "Scripts";
+        public const string TABULATOR_SCRIPT = "Scripts";
+        public const string TABULATOR_QUERY = "Query";
 
         List<Script> _lscripts = null;  // list off all scripts
         DataTable _tableFunctions = null; // Scripts and Functions
@@ -68,16 +72,30 @@ namespace hoTools.Scripts
         /// <returns></returns>
         bool initializeSettings()
         {
+
+            // Tab Pages for *.sql queries update
             _sqlTabCntrls = new SqlTabPagesCntrl(Model, AddinSettings, components, tabControlSql, txtSearchTerm);
-            _lscripts = Script.getEAMaticScripts(Model);
-            updateTableFunctions();
             _sqlTabCntrls.addTab();
 
-            // Update File Menu
+            // Update File Menu for queries
             fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripMenuItem[] {
                         _sqlTabCntrls.LoadRecentFileItem,
                         _sqlTabCntrls.NewTabAndLoadRecentFileItem
                 });
+
+            // run for query
+            if ((string)this.Tag == TABULATOR_QUERY)
+            {
+                // don't show Script container
+                splitContainer.Panel2Collapsed = true; 
+            } else // run for Script (includes Query)
+            {
+
+                splitContainer.SplitterDistance = 330; 
+                // available script updates
+                _lscripts = Script.getEAMaticScripts(Model);
+                updateTableFunctions();
+            }
             return true;
         }
 

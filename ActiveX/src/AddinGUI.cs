@@ -17,7 +17,7 @@ namespace hoTools.ActiveX
         AddinSettings _addinSettings = null;
         // needs to set just after creating Control
 
-      
+
         #region Model
         public Model Model
         {

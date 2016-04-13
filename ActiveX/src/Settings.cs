@@ -252,6 +252,30 @@ namespace hoTools.Settings
 
         }
         #endregion
+        #region Property: isScriptAndQuery
+
+        public bool isOnlyQuery
+        {
+            get
+            {
+                bool result;
+                if (bool.TryParse(this.currentConfig.AppSettings.Settings["isOnlyQuery"].Value, out result))
+                {
+                    return result;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            set
+            {
+                this.currentConfig.AppSettings.Settings["isOnlyQuery"].Value = value.ToString();
+
+            }
+
+        }
+        #endregion
         #region Property: isSearchAndReplace
 
         public bool isSearchAndReplace

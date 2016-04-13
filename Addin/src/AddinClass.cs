@@ -59,11 +59,13 @@ namespace hoTools
         static AddinControlGUI AddinControlGUI = null;
         static FindAndReplaceGUI FindAndReplaceGUI = null;
         static ScriptGUI ScriptGUI = null;
+        static ScriptGUI QueryGUI = null;
 
         // ActiveX Controls
         AddinControlGUI _MyControlGUI = null;
         FindAndReplaceGUI _FindAndReplaceGUI = null;
         ScriptGUI _ScriptGUI = null;
+        ScriptGUI _QueryGUI = null;
 
         // settings
         AddinSettings _AddinSettings = null;
@@ -425,6 +427,7 @@ namespace hoTools
             if (_MyControlGUI != null) _MyControlGUI.Repository = rep;
             if (_FindAndReplaceGUI != null) _FindAndReplaceGUI.Repository = rep;
             if (_ScriptGUI != null) _ScriptGUI.Repository = rep;
+            if (_QueryGUI != null) _QueryGUI.Repository = rep;
 
 
         }
@@ -929,20 +932,28 @@ namespace hoTools
 
                 try
                 {
-                    AddinControlGUI = addAddinControl<AddinControlGUI>(_AddinSettings.productName, AddinControlGUI.PROGID);
+                    AddinControlGUI = addAddinControl<AddinControlGUI>(_AddinSettings.productName, AddinControlGUI.PROGID, null);
                     _MyControlGUI = AddinControlGUI; // static + instance
 
                     // with Search & Replace EA Addin Windows
                     if (_AddinSettings.isSearchAndReplace) { 
-                        FindAndReplaceGUI = addAddinControl<FindAndReplaceGUI>(FindAndReplaceGUI.TABULATOR, FindAndReplaceGUI.PROGID);
+                        FindAndReplaceGUI = addAddinControl<FindAndReplaceGUI>(FindAndReplaceGUI.TABULATOR, FindAndReplaceGUI.PROGID, null);
                        _FindAndReplaceGUI = FindAndReplaceGUI; // static + instance
                     }
 
+                    // with Query EA Addin Windows
+                    if (_AddinSettings.isOnlyQuery)
+                    {
+                        // Run as Query
+                        QueryGUI = addAddinControl<ScriptGUI>(ScriptGUI.TABULATOR_QUERY, ScriptGUI.PROGID, ScriptGUI.TABULATOR_QUERY);
+                        _QueryGUI = QueryGUI; // static + instance
+                    }
                     // with Script & Query EA Addin Windows
                     if (_AddinSettings.isScriptAndQuery)
                     {
-                        ScriptGUI = addAddinControl<ScriptGUI>(ScriptGUI.TABULATOR, ScriptGUI.PROGID);
-                        _ScriptGUI = ScriptGUI; // static + instance
+                        // Run as Script
+                        ScriptGUI = addAddinControl<ScriptGUI>(ScriptGUI.TABULATOR_SCRIPT, ScriptGUI.PROGID, ScriptGUI.TABULATOR_SCRIPT);
+                    _ScriptGUI = ScriptGUI; // static + instance
                     }
 
 
@@ -956,14 +967,15 @@ namespace hoTools
         }
 
 
-        
+
         /// <summary>
         /// Add AddinGUI as a tab to EA
         /// </summary>
         /// <param name="tabName">Tabulator name to show Addin</param>
-        /// <param name="progId">ProgID under which the addin is registered</param>
+        /// <param name="progId">ProgID under which the Addin is registered</param>
+        /// <param name="tag">Information to pass to Control</param>
         /// <returns>AddinGUI</returns>
-        private T addAddinControl<T>(string tabName, string progId)
+        private T addAddinControl<T>(string tabName, string progId, object tag)
         {
             var c = (T)_repository.AddWindow(tabName, progId);
             AddinGUI control = c as AddinGUI;
@@ -973,10 +985,11 @@ namespace hoTools
             }
             else
             {
-
+                control.Tag = tag;
                 control.AddinSettings = this._AddinSettings;
-                control.Repository = _repository;
                 control.Release = "V" + release;
+                control.Repository = _repository;
+
 
 
             }

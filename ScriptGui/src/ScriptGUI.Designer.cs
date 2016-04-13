@@ -38,6 +38,12 @@ namespace hoTools.Scripts
             this.txtSearchTerm = new System.Windows.Forms.TextBox();
             this.btnRunScriptForSql = new System.Windows.Forms.Button();
             this.btnRunScriptForSqlWithAsk = new System.Windows.Forms.Button();
+            this.dataGridViewScripts = new System.Windows.Forms.DataGridView();
+            this.contextMenuStripDataGrid = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.ShowErrorToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.runScriptToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.showScriptToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tabControlSql = new System.Windows.Forms.TabControl();
             this.btnLoadScripts = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -48,20 +54,14 @@ namespace hoTools.Scripts
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.lastsqlErrorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.dataGridViewScripts = new System.Windows.Forms.DataGridView();
-            this.contextMenuStripDataGrid = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.ShowErrorToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.runScriptToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.showScriptToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tabControlSql = new System.Windows.Forms.TabControl();
             this.btnRunSql = new System.Windows.Forms.Button();
             this.splitContainer = new System.Windows.Forms.SplitContainer();
             this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
             this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
-            this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewScripts)).BeginInit();
             this.contextMenuStripDataGrid.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
             this.splitContainer.Panel2.SuspendLayout();
@@ -102,92 +102,6 @@ namespace hoTools.Scripts
             this.btnRunScriptForSqlWithAsk.UseVisualStyleBackColor = true;
             this.btnRunScriptForSqlWithAsk.Click += new System.EventHandler(this.btnRunScriptForSqlWithAsk_Click);
             // 
-            // btnLoadScripts
-            // 
-            this.btnLoadScripts.Location = new System.Drawing.Point(3, 3);
-            this.btnLoadScripts.Name = "btnLoadScripts";
-            this.btnLoadScripts.Size = new System.Drawing.Size(120, 23);
-            this.btnLoadScripts.TabIndex = 2;
-            this.btnLoadScripts.Text = "Load Scripts";
-            this.btnLoadScripts.UseVisualStyleBackColor = true;
-            this.btnLoadScripts.Click += new System.EventHandler(this.btnLoadScripts_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(321, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(196, 25);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Scripts && Queries";
-            // 
-            // menuStrip1
-            // 
-            this.menuStrip1.Dock = System.Windows.Forms.DockStyle.None;
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem,
-            this.helpToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(89, 24);
-            this.menuStrip1.TabIndex = 0;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
-            // fileToolStripMenuItem
-            // 
-            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.settingsToolStripMenuItem,
-            this.FileNewTabToolStripMenuItem});
-            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
-            this.fileToolStripMenuItem.Text = "&File";
-            this.fileToolStripMenuItem.ToolTipText = "Create a new Tab from recent *.sql files";
-            // 
-            // settingsToolStripMenuItem
-            // 
-            this.settingsToolStripMenuItem.BackColor = System.Drawing.SystemColors.Control;
-            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.settingsToolStripMenuItem.Text = "&Settings";
-            // 
-            // FileNewTabToolStripMenuItem
-            // 
-            this.FileNewTabToolStripMenuItem.Name = "FileNewTabToolStripMenuItem";
-            this.FileNewTabToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.FileNewTabToolStripMenuItem.Text = "&NewTab";
-            this.FileNewTabToolStripMenuItem.Click += new System.EventHandler(this.FileNewTabToolStripMenuItem_Click);
-            // 
-            // helpToolStripMenuItem
-            // 
-            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.aboutToolStripMenuItem,
-            this.helpToolStripMenuItem1,
-            this.lastsqlErrorToolStripMenuItem});
-            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.helpToolStripMenuItem.Text = "&Help";
-            // 
-            // aboutToolStripMenuItem
-            // 
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
-            this.aboutToolStripMenuItem.Text = "&About";
-            // 
-            // helpToolStripMenuItem1
-            // 
-            this.helpToolStripMenuItem1.Name = "helpToolStripMenuItem1";
-            this.helpToolStripMenuItem1.Size = new System.Drawing.Size(141, 22);
-            this.helpToolStripMenuItem1.Text = "&Help";
-            // 
-            // lastsqlErrorToolStripMenuItem
-            // 
-            this.lastsqlErrorToolStripMenuItem.Name = "lastsqlErrorToolStripMenuItem";
-            this.lastsqlErrorToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
-            this.lastsqlErrorToolStripMenuItem.Text = "Last &sql error";
-            this.lastsqlErrorToolStripMenuItem.ToolTipText = "Get the last EA sql error from %APPDATA%Sparx Systems\\EA\\DBError.txt";
-            this.lastsqlErrorToolStripMenuItem.Click += new System.EventHandler(this.showSqlErrorToolStripMenuItem_Click);
-            // 
             // dataGridViewScripts
             // 
             this.dataGridViewScripts.AllowUserToOrderColumns = true;
@@ -224,7 +138,7 @@ namespace hoTools.Scripts
             this.dataGridViewScripts.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridViewScripts.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
             this.dataGridViewScripts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewScripts.Size = new System.Drawing.Size(769, 241);
+            this.dataGridViewScripts.Size = new System.Drawing.Size(767, 146);
             this.dataGridViewScripts.TabIndex = 3;
             this.toolTip1.SetToolTip(this.dataGridViewScripts, resources.GetString("dataGridViewScripts.ToolTip"));
             this.dataGridViewScripts.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dataGridViewScripts_MouseClick);
@@ -272,12 +186,98 @@ namespace hoTools.Scripts
             this.tabControlSql.Name = "tabControlSql";
             this.tabControlSql.SelectedIndex = 0;
             this.tabControlSql.ShowToolTips = true;
-            this.tabControlSql.Size = new System.Drawing.Size(769, 218);
+            this.tabControlSql.Size = new System.Drawing.Size(769, 307);
             this.tabControlSql.TabIndex = 5;
             this.toolTip1.SetToolTip(this.tabControlSql, "Enter SQL code. EA macros like:\r\n- #Branch#\r\n- #ObjectID#\r\n- #ObjectGUID#\r\n- #Pac" +
         "kage#\r\n- \'Search Term\'\r\n\r\nare allowed.");
             this.tabControlSql.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.tabControlSql_DrawItem);
             this.tabControlSql.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tabControlSql_MouseDown);
+            // 
+            // btnLoadScripts
+            // 
+            this.btnLoadScripts.Location = new System.Drawing.Point(3, 3);
+            this.btnLoadScripts.Name = "btnLoadScripts";
+            this.btnLoadScripts.Size = new System.Drawing.Size(120, 23);
+            this.btnLoadScripts.TabIndex = 2;
+            this.btnLoadScripts.Text = "Load Scripts";
+            this.btnLoadScripts.UseVisualStyleBackColor = true;
+            this.btnLoadScripts.Click += new System.EventHandler(this.btnLoadScripts_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(321, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(196, 25);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Scripts && Queries";
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Dock = System.Windows.Forms.DockStyle.None;
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem,
+            this.helpToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(89, 24);
+            this.menuStrip1.TabIndex = 0;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // fileToolStripMenuItem
+            // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.settingsToolStripMenuItem,
+            this.FileNewTabToolStripMenuItem});
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Text = "&File";
+            this.fileToolStripMenuItem.ToolTipText = "Create a new Tab from recent *.sql files";
+            // 
+            // settingsToolStripMenuItem
+            // 
+            this.settingsToolStripMenuItem.BackColor = System.Drawing.SystemColors.Control;
+            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
+            this.settingsToolStripMenuItem.Text = "&Settings";
+            // 
+            // FileNewTabToolStripMenuItem
+            // 
+            this.FileNewTabToolStripMenuItem.Name = "FileNewTabToolStripMenuItem";
+            this.FileNewTabToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
+            this.FileNewTabToolStripMenuItem.Text = "&NewTab";
+            this.FileNewTabToolStripMenuItem.Click += new System.EventHandler(this.FileNewTabToolStripMenuItem_Click);
+            // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aboutToolStripMenuItem,
+            this.helpToolStripMenuItem1,
+            this.lastsqlErrorToolStripMenuItem});
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.helpToolStripMenuItem.Text = "&Help";
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.aboutToolStripMenuItem.Text = "&About";
+            // 
+            // helpToolStripMenuItem1
+            // 
+            this.helpToolStripMenuItem1.Name = "helpToolStripMenuItem1";
+            this.helpToolStripMenuItem1.Size = new System.Drawing.Size(141, 22);
+            this.helpToolStripMenuItem1.Text = "&Help";
+            // 
+            // lastsqlErrorToolStripMenuItem
+            // 
+            this.lastsqlErrorToolStripMenuItem.Name = "lastsqlErrorToolStripMenuItem";
+            this.lastsqlErrorToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.lastsqlErrorToolStripMenuItem.Text = "Last &sql error";
+            this.lastsqlErrorToolStripMenuItem.ToolTipText = "Get the last EA sql error from %APPDATA%Sparx Systems\\EA\\DBError.txt";
+            this.lastsqlErrorToolStripMenuItem.Click += new System.EventHandler(this.showSqlErrorToolStripMenuItem_Click);
             // 
             // btnRunSql
             // 
@@ -291,6 +291,7 @@ namespace hoTools.Scripts
             // 
             // splitContainer
             // 
+            this.splitContainer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.splitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer.Location = new System.Drawing.Point(0, 25);
             this.splitContainer.Name = "splitContainer";
@@ -306,16 +307,17 @@ namespace hoTools.Scripts
             this.splitContainer.Panel2.Controls.Add(this.dataGridViewScripts);
             this.splitContainer.Panel2.Controls.Add(this.flowLayoutPanel4);
             this.splitContainer.Size = new System.Drawing.Size(769, 513);
-            this.splitContainer.SplitterDistance = 243;
+            this.splitContainer.SplitterDistance = 334;
+            this.splitContainer.SplitterWidth = 6;
             this.splitContainer.TabIndex = 9;
             // 
             // flowLayoutPanel3
             // 
             this.flowLayoutPanel3.Controls.Add(this.btnRunSql);
             this.flowLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel3.Location = new System.Drawing.Point(0, 218);
+            this.flowLayoutPanel3.Location = new System.Drawing.Point(0, 307);
             this.flowLayoutPanel3.Name = "flowLayoutPanel3";
-            this.flowLayoutPanel3.Size = new System.Drawing.Size(769, 25);
+            this.flowLayoutPanel3.Size = new System.Drawing.Size(767, 25);
             this.flowLayoutPanel3.TabIndex = 12;
             // 
             // flowLayoutPanel4
@@ -324,9 +326,9 @@ namespace hoTools.Scripts
             this.flowLayoutPanel4.Controls.Add(this.btnRunScriptForSql);
             this.flowLayoutPanel4.Controls.Add(this.btnRunScriptForSqlWithAsk);
             this.flowLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel4.Location = new System.Drawing.Point(0, 241);
+            this.flowLayoutPanel4.Location = new System.Drawing.Point(0, 146);
             this.flowLayoutPanel4.Name = "flowLayoutPanel4";
-            this.flowLayoutPanel4.Size = new System.Drawing.Size(769, 25);
+            this.flowLayoutPanel4.Size = new System.Drawing.Size(767, 25);
             this.flowLayoutPanel4.TabIndex = 13;
             // 
             // flowLayoutPanel2
@@ -349,10 +351,10 @@ namespace hoTools.Scripts
             this.Name = "ScriptGUI";
             this.Size = new System.Drawing.Size(769, 538);
             this.Load += new System.EventHandler(this.ScriptGUI_Load);
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewScripts)).EndInit();
             this.contextMenuStripDataGrid.ResumeLayout(false);
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.splitContainer.Panel1.ResumeLayout(false);
             this.splitContainer.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).EndInit();

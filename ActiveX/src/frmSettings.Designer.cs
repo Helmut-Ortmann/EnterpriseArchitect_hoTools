@@ -144,10 +144,10 @@
             this.chkAdvancedPort = new System.Windows.Forms.CheckBox();
             this.chkAdvancedDiagramNote = new System.Windows.Forms.CheckBox();
             this.label36 = new System.Windows.Forms.Label();
-            this.chkScriptAndQuery = new System.Windows.Forms.CheckBox();
-            this.label37 = new System.Windows.Forms.Label();
             this.chkSearchAndReplace = new System.Windows.Forms.CheckBox();
             this.label38 = new System.Windows.Forms.Label();
+            this.btnSqlFolder = new System.Windows.Forms.Button();
+            this.txtSqlFolder = new System.Windows.Forms.TextBox();
             this.txtBtn1Text = new System.Windows.Forms.TextBox();
             this.txtBtn1SearchName = new System.Windows.Forms.TextBox();
             this.txtBtn1SearchTerm = new System.Windows.Forms.TextBox();
@@ -202,8 +202,6 @@
             this.chkAdvancedFeatures = new System.Windows.Forms.CheckBox();
             this.label34 = new System.Windows.Forms.Label();
             this.label35 = new System.Windows.Forms.Label();
-            this.btnSqlFolder = new System.Windows.Forms.Button();
-            this.txtSqlFolder = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -1407,29 +1405,6 @@
             this.label36.Text = "Diagram Note support";
             this.toolTip1.SetToolTip(this.label36, "Allow add Note to element and Diagram");
             // 
-            // chkScriptAndQuery
-            // 
-            this.chkScriptAndQuery.AutoSize = true;
-            this.chkScriptAndQuery.Location = new System.Drawing.Point(154, 211);
-            this.chkScriptAndQuery.Margin = new System.Windows.Forms.Padding(2);
-            this.chkScriptAndQuery.Name = "chkScriptAndQuery";
-            this.chkScriptAndQuery.Size = new System.Drawing.Size(15, 14);
-            this.chkScriptAndQuery.TabIndex = 207;
-            this.toolTip1.SetToolTip(this.chkScriptAndQuery, "Scripts & Query lab");
-            this.chkScriptAndQuery.UseVisualStyleBackColor = true;
-            // 
-            // label37
-            // 
-            this.label37.AutoSize = true;
-            this.label37.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label37.Location = new System.Drawing.Point(11, 209);
-            this.label37.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(124, 16);
-            this.label37.TabIndex = 206;
-            this.label37.Text = "Script && Query  Tab";
-            this.toolTip1.SetToolTip(this.label37, "Show \'Script and Query\' Addin Tab in EA Addin Window \r\n");
-            // 
             // chkSearchAndReplace
             // 
             this.chkSearchAndReplace.AutoSize = true;
@@ -1452,6 +1427,24 @@
             this.label38.TabIndex = 208;
             this.label38.Text = "Search & Replace Tab";
             this.toolTip1.SetToolTip(this.label38, "Show \'Search && Replace\' Tab in EA Addin window");
+            // 
+            // btnSqlFolder
+            // 
+            this.btnSqlFolder.Location = new System.Drawing.Point(15, 225);
+            this.btnSqlFolder.Name = "btnSqlFolder";
+            this.btnSqlFolder.Size = new System.Drawing.Size(54, 23);
+            this.btnSqlFolder.TabIndex = 211;
+            this.btnSqlFolder.Text = "*.sql";
+            this.toolTip1.SetToolTip(this.btnSqlFolder, "Select the *.sql folder for your searches");
+            this.btnSqlFolder.UseVisualStyleBackColor = true;
+            // 
+            // txtSqlFolder
+            // 
+            this.txtSqlFolder.Location = new System.Drawing.Point(84, 227);
+            this.txtSqlFolder.Name = "txtSqlFolder";
+            this.txtSqlFolder.Size = new System.Drawing.Size(222, 20);
+            this.txtSqlFolder.TabIndex = 212;
+            this.toolTip1.SetToolTip(this.txtSqlFolder, "Folder to store *.sql script to use in Search");
             // 
             // txtBtn1Text
             // 
@@ -1975,7 +1968,7 @@
             this.label34.Location = new System.Drawing.Point(10, 33);
             this.label34.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(118, 16);
+            this.label34.Size = new System.Drawing.Size(160, 16);
             this.label34.TabIndex = 200;
             this.label34.Text = "Path FileHistory-Manager";
             // 
@@ -1990,24 +1983,6 @@
             this.label35.TabIndex = 202;
             this.label35.Text = "VC Support";
             // 
-            // btnSqlFolder
-            // 
-            this.btnSqlFolder.Location = new System.Drawing.Point(15, 225);
-            this.btnSqlFolder.Name = "btnSqlFolder";
-            this.btnSqlFolder.Size = new System.Drawing.Size(54, 23);
-            this.btnSqlFolder.TabIndex = 211;
-            this.btnSqlFolder.Text = "*.sql";
-            this.toolTip1.SetToolTip(this.btnSqlFolder, "Select the *.sql folder for your searches");
-            this.btnSqlFolder.UseVisualStyleBackColor = true;
-            // 
-            // txtSqlFolder
-            // 
-            this.txtSqlFolder.Location = new System.Drawing.Point(84, 227);
-            this.txtSqlFolder.Name = "txtSqlFolder";
-            this.txtSqlFolder.Size = new System.Drawing.Size(222, 20);
-            this.txtSqlFolder.TabIndex = 212;
-            this.toolTip1.SetToolTip(this.txtSqlFolder, "Folder to store *.sql script to use in Search");
-            // 
             // frmSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2017,8 +1992,6 @@
             this.Controls.Add(this.btnSqlFolder);
             this.Controls.Add(this.chkSearchAndReplace);
             this.Controls.Add(this.label38);
-            this.Controls.Add(this.chkScriptAndQuery);
-            this.Controls.Add(this.label37);
             this.Controls.Add(this.chkAdvancedDiagramNote);
             this.Controls.Add(this.label36);
             this.Controls.Add(this.chkVcSupport);
@@ -2294,8 +2267,6 @@
         private System.Windows.Forms.CheckBox chkAdvancedPort;
         private System.Windows.Forms.CheckBox chkAdvancedDiagramNote;
         private System.Windows.Forms.Label label36;
-        private System.Windows.Forms.CheckBox chkScriptAndQuery;
-        private System.Windows.Forms.Label label37;
         private System.Windows.Forms.CheckBox chkSearchAndReplace;
         private System.Windows.Forms.Label label38;
         private System.Windows.Forms.Button btnSqlFolder;

@@ -38,7 +38,7 @@ namespace hoTools.Settings
             chkVcSupport.Checked = settings.isVcSupport;
             chkAdvancedPort.Checked = settings.isAdvancedPort;
             chkAdvancedDiagramNote.Checked = settings.isAdvancedDiagramNote;
-            chkScriptAndQuery.Checked = settings.isScriptAndQuery;
+            //chkScriptAndQuery.Checked = settings.isScriptAndQuery;
             chkSearchAndReplace.Checked = settings.isSearchAndReplace;
             #endregion
 
@@ -539,7 +539,7 @@ namespace hoTools.Settings
             _settings.isAdvancedFeatures = chkAdvancedFeatures.Checked;
             _settings.isAdvancedPort = chkAdvancedPort.Checked;
             _settings.isAdvancedDiagramNote = chkAdvancedDiagramNote.Checked;
-            _settings.isScriptAndQuery = chkScriptAndQuery.Checked;
+            //_settings.isScriptAndQuery = chkScriptAndQuery.Checked;
             _settings.isSearchAndReplace = chkSearchAndReplace.Checked;
             #endregion
 
