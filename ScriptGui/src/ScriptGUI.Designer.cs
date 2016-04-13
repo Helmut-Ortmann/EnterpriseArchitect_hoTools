@@ -73,7 +73,7 @@ namespace hoTools.Scripts
             // 
             // txtSearchTerm
             // 
-            this.txtSearchTerm.Location = new System.Drawing.Point(92, 3);
+            this.txtSearchTerm.Location = new System.Drawing.Point(184, 3);
             this.txtSearchTerm.Name = "txtSearchTerm";
             this.txtSearchTerm.Size = new System.Drawing.Size(223, 20);
             this.txtSearchTerm.TabIndex = 7;
@@ -207,7 +207,7 @@ namespace hoTools.Scripts
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(321, 0);
+            this.label1.Location = new System.Drawing.Point(413, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(196, 25);
             this.label1.TabIndex = 1;
@@ -221,7 +221,7 @@ namespace hoTools.Scripts
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(89, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(181, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -239,13 +239,14 @@ namespace hoTools.Scripts
             // 
             this.settingsToolStripMenuItem.BackColor = System.Drawing.SystemColors.Control;
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.settingsToolStripMenuItem.Text = "&Settings";
+            this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
             // 
             // FileNewTabToolStripMenuItem
             // 
             this.FileNewTabToolStripMenuItem.Name = "FileNewTabToolStripMenuItem";
-            this.FileNewTabToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
+            this.FileNewTabToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.FileNewTabToolStripMenuItem.Text = "&NewTab";
             this.FileNewTabToolStripMenuItem.Click += new System.EventHandler(this.FileNewTabToolStripMenuItem_Click);
             // 

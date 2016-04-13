@@ -39,6 +39,9 @@ namespace hoTools.Scripts
 
         SqlTabPagesCntrl _sqlTabCntrls = null;  // TAB Control with its TabPages
 
+        // settings
+        FrmQueryAndScript _frmQueryAndScript = null;
+
 
         /// <summary>
         /// The selected row in script list
@@ -529,6 +532,12 @@ namespace hoTools.Scripts
         private void tabControlSql_MouseMove(object sender, MouseEventArgs e)
         {
 
+        }
+
+        private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _frmQueryAndScript = new FrmQueryAndScript(AddinSettings);
+            _frmQueryAndScript.ShowDialog();
         }
     }
 }
