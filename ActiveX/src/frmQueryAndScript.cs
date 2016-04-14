@@ -23,8 +23,33 @@ namespace hoTools.Settings
             InitializeComponent();
             _settings = settings;
 
-            chkScriptAndQuery.Checked = _settings.isScriptAndQuery;
-            chkOnlyQuery.Checked = _settings.isOnlyQuery;
+            // Query window without script
+            switch (_settings.OnlyQueryWindow) {
+                case AddinSettings.ShowInWindow.AddinWindow:
+                    rbOnlyQueryAddinWindow.Checked = true;
+                    break;
+                case AddinSettings.ShowInWindow.TabWindow:
+                    rbOnlyQueryTabWindow.Checked = true;
+                    break;
+                default:
+                    rbOnlyQueryDisableWindow.Checked = true;
+                    break;
+            }
+            // Query window wit script
+            switch (_settings.ScriptAndQueryWindow)
+            {
+                case AddinSettings.ShowInWindow.AddinWindow:
+                    rbScriptAndQueryAddinWindow.Checked = true;
+                    break;
+                case AddinSettings.ShowInWindow.TabWindow:
+                    rbScriptAndQueryTabWindow.Checked = true;
+                    break;
+                default:
+                    rbScriptAndQueryDisableWindow.Checked = true;
+                    break;
+            }
+
+
         }
         #endregion
 
@@ -35,8 +60,17 @@ namespace hoTools.Settings
 
         private void btnOk_Click(object sender, EventArgs e)
         {
-            _settings.isOnlyQuery = chkOnlyQuery.Checked;
-            _settings.isScriptAndQuery = chkScriptAndQuery.Checked;
+            // only SQL query window
+            _settings.OnlyQueryWindow = AddinSettings.ShowInWindow.Disabled;
+            if (rbOnlyQueryAddinWindow.Checked) _settings.OnlyQueryWindow = AddinSettings.ShowInWindow.AddinWindow;
+            if (rbOnlyQueryTabWindow.Checked) _settings.OnlyQueryWindow = AddinSettings.ShowInWindow.TabWindow;
+
+            // SQL query + script window
+            _settings.ScriptAndQueryWindow = AddinSettings.ShowInWindow.Disabled;
+            if (rbScriptAndQueryAddinWindow.Checked) _settings.ScriptAndQueryWindow = AddinSettings.ShowInWindow.AddinWindow;
+            if (rbScriptAndQueryTabWindow.Checked) _settings.ScriptAndQueryWindow = AddinSettings.ShowInWindow.TabWindow;
+
+
 
             // save setting
             this._settings.save();

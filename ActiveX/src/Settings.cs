@@ -32,6 +32,8 @@ namespace hoTools.Settings
     // Make sure to copy the default settings in project output.
     public class AddinSettings
     {
+        public enum ShowInWindow { AddinWindow, TabWindow,Disabled};
+
         // Filepath of configuration file
         // %APPDATA%ho\hoTools\user.config
         public string ConfigFilePath { get; }
@@ -228,49 +230,50 @@ namespace hoTools.Settings
 
         }
         #endregion
-        #region Property: isScriptAndQuery
 
-        public bool isScriptAndQuery
+
+        #region Property: ScriptAndQueryWindow
+        public ShowInWindow ScriptAndQueryWindow
         {
             get
             {
-                bool result;
-                if (bool.TryParse(this.currentConfig.AppSettings.Settings["isScriptAndQuery"].Value, out result))
+                ShowInWindow result;
+                if (Enum.TryParse<ShowInWindow>(this.currentConfig.AppSettings.Settings["ScriptAndQueryWindow"].Value, out result))
                 {
-                    return result;
+                    return (ShowInWindow)result;
                 }
                 else
                 {
-                    return true;
+                    return ShowInWindow.Disabled;
                 }
             }
             set
             {
-                this.currentConfig.AppSettings.Settings["isScriptAndQuery"].Value = value.ToString();
+                this.currentConfig.AppSettings.Settings["ScriptAndQueryWindow"].Value = value.ToString();
 
             }
 
         }
         #endregion
-        #region Property: isScriptAndQuery
 
-        public bool isOnlyQuery
+        #region Property: OnlyQueryWindow
+        public ShowInWindow OnlyQueryWindow
         {
             get
             {
-                bool result;
-                if (bool.TryParse(this.currentConfig.AppSettings.Settings["isOnlyQuery"].Value, out result))
+                ShowInWindow result;
+                if (Enum.TryParse<ShowInWindow>(this.currentConfig.AppSettings.Settings["OnlyQueryWindow"].Value, out result))
                 {
-                    return result;
+                    return (ShowInWindow)result;
                 }
                 else
                 {
-                    return true;
+                    return ShowInWindow.Disabled;
                 }
             }
             set
             {
-                this.currentConfig.AppSettings.Settings["isOnlyQuery"].Value = value.ToString();
+                this.currentConfig.AppSettings.Settings["OnlyQueryWindow"].Value = value.ToString();
 
             }
 

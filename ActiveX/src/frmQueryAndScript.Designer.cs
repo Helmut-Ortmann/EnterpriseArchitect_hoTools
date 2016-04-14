@@ -28,13 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.btnOk = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.chkOnlyQuery = new System.Windows.Forms.CheckBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.chkScriptAndQuery = new System.Windows.Forms.CheckBox();
-            this.label3 = new System.Windows.Forms.Label();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.rbOnlyQueryAddinWindow = new System.Windows.Forms.RadioButton();
+            this.rbOnlyQueryTabWindow = new System.Windows.Forms.RadioButton();
+            this.rbOnlyQueryDisableWindow = new System.Windows.Forms.RadioButton();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.rbScriptAndQueryDisableWindow = new System.Windows.Forms.RadioButton();
+            this.rbScriptAndQueryTabWindow = new System.Windows.Forms.RadioButton();
+            this.rbScriptAndQueryAddinWindow = new System.Windows.Forms.RadioButton();
+            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnOk
@@ -67,62 +75,120 @@
             this.label1.TabIndex = 2;
             this.label1.Text = "Settings Query and Script";
             // 
-            // chkOnlyQuery
+            // groupBox1
             // 
-            this.chkOnlyQuery.AutoSize = true;
-            this.chkOnlyQuery.Location = new System.Drawing.Point(166, 88);
-            this.chkOnlyQuery.Margin = new System.Windows.Forms.Padding(2);
-            this.chkOnlyQuery.Name = "chkOnlyQuery";
-            this.chkOnlyQuery.Size = new System.Drawing.Size(15, 14);
-            this.chkOnlyQuery.TabIndex = 207;
-            this.chkOnlyQuery.UseVisualStyleBackColor = true;
+            this.groupBox1.Controls.Add(this.rbOnlyQueryDisableWindow);
+            this.groupBox1.Controls.Add(this.rbOnlyQueryTabWindow);
+            this.groupBox1.Controls.Add(this.rbOnlyQueryAddinWindow);
+            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox1.Location = new System.Drawing.Point(26, 63);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(334, 43);
+            this.groupBox1.TabIndex = 210;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Edit SQL Query and run it";
             // 
-            // label2
+            // rbOnlyQueryAddinWindow
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(23, 86);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(75, 16);
-            this.label2.TabIndex = 206;
-            this.label2.Text = "Query  Tab";
+            this.rbOnlyQueryAddinWindow.AutoSize = true;
+            this.rbOnlyQueryAddinWindow.Location = new System.Drawing.Point(11, 19);
+            this.rbOnlyQueryAddinWindow.Name = "rbOnlyQueryAddinWindow";
+            this.rbOnlyQueryAddinWindow.Size = new System.Drawing.Size(62, 22);
+            this.rbOnlyQueryAddinWindow.TabIndex = 208;
+            this.rbOnlyQueryAddinWindow.TabStop = true;
+            this.rbOnlyQueryAddinWindow.Text = "Addin";
+            this.toolTip1.SetToolTip(this.rbOnlyQueryAddinWindow, "Show SQL Query in Addin Window");
+            this.rbOnlyQueryAddinWindow.UseVisualStyleBackColor = true;
             // 
-            // chkScriptAndQuery
+            // rbOnlyQueryTabWindow
             // 
-            this.chkScriptAndQuery.AutoSize = true;
-            this.chkScriptAndQuery.Location = new System.Drawing.Point(166, 113);
-            this.chkScriptAndQuery.Margin = new System.Windows.Forms.Padding(2);
-            this.chkScriptAndQuery.Name = "chkScriptAndQuery";
-            this.chkScriptAndQuery.Size = new System.Drawing.Size(15, 14);
-            this.chkScriptAndQuery.TabIndex = 209;
-            this.chkScriptAndQuery.UseVisualStyleBackColor = true;
+            this.rbOnlyQueryTabWindow.AutoSize = true;
+            this.rbOnlyQueryTabWindow.Location = new System.Drawing.Point(70, 19);
+            this.rbOnlyQueryTabWindow.Name = "rbOnlyQueryTabWindow";
+            this.rbOnlyQueryTabWindow.Size = new System.Drawing.Size(51, 22);
+            this.rbOnlyQueryTabWindow.TabIndex = 209;
+            this.rbOnlyQueryTabWindow.TabStop = true;
+            this.rbOnlyQueryTabWindow.Text = "Tab";
+            this.toolTip1.SetToolTip(this.rbOnlyQueryTabWindow, "Show SQL Query in Tab Window");
+            this.rbOnlyQueryTabWindow.UseVisualStyleBackColor = true;
             // 
-            // label3
+            // rbOnlyQueryDisableWindow
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(23, 111);
-            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(124, 16);
-            this.label3.TabIndex = 208;
-            this.label3.Text = "Script && Query  Tab";
+            this.rbOnlyQueryDisableWindow.AutoSize = true;
+            this.rbOnlyQueryDisableWindow.Location = new System.Drawing.Point(121, 19);
+            this.rbOnlyQueryDisableWindow.Name = "rbOnlyQueryDisableWindow";
+            this.rbOnlyQueryDisableWindow.Size = new System.Drawing.Size(75, 22);
+            this.rbOnlyQueryDisableWindow.TabIndex = 210;
+            this.rbOnlyQueryDisableWindow.TabStop = true;
+            this.rbOnlyQueryDisableWindow.Text = "Disable";
+            this.toolTip1.SetToolTip(this.rbOnlyQueryDisableWindow, "Disable SQL Query");
+            this.rbOnlyQueryDisableWindow.UseVisualStyleBackColor = true;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.rbScriptAndQueryDisableWindow);
+            this.groupBox2.Controls.Add(this.rbScriptAndQueryTabWindow);
+            this.groupBox2.Controls.Add(this.rbScriptAndQueryAddinWindow);
+            this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox2.Location = new System.Drawing.Point(26, 121);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(334, 43);
+            this.groupBox2.TabIndex = 211;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Edit SQL Query and run Script with results";
+            // 
+            // rbScriptAndQueryDisableWindow
+            // 
+            this.rbScriptAndQueryDisableWindow.AutoSize = true;
+            this.rbScriptAndQueryDisableWindow.Location = new System.Drawing.Point(121, 19);
+            this.rbScriptAndQueryDisableWindow.Name = "rbScriptAndQueryDisableWindow";
+            this.rbScriptAndQueryDisableWindow.Size = new System.Drawing.Size(75, 22);
+            this.rbScriptAndQueryDisableWindow.TabIndex = 210;
+            this.rbScriptAndQueryDisableWindow.TabStop = true;
+            this.rbScriptAndQueryDisableWindow.Text = "Disable";
+            this.toolTip1.SetToolTip(this.rbScriptAndQueryDisableWindow, "Disable SQL Query and run Script");
+            this.rbScriptAndQueryDisableWindow.UseVisualStyleBackColor = true;
+            // 
+            // rbScriptAndQueryTabWindow
+            // 
+            this.rbScriptAndQueryTabWindow.AutoSize = true;
+            this.rbScriptAndQueryTabWindow.Location = new System.Drawing.Point(70, 19);
+            this.rbScriptAndQueryTabWindow.Name = "rbScriptAndQueryTabWindow";
+            this.rbScriptAndQueryTabWindow.Size = new System.Drawing.Size(51, 22);
+            this.rbScriptAndQueryTabWindow.TabIndex = 209;
+            this.rbScriptAndQueryTabWindow.TabStop = true;
+            this.rbScriptAndQueryTabWindow.Text = "Tab";
+            this.toolTip1.SetToolTip(this.rbScriptAndQueryTabWindow, "Show SQL Query and run Script in Tab Windows");
+            this.rbScriptAndQueryTabWindow.UseVisualStyleBackColor = true;
+            // 
+            // rbScriptAndQueryAddinWindow
+            // 
+            this.rbScriptAndQueryAddinWindow.AutoSize = true;
+            this.rbScriptAndQueryAddinWindow.Location = new System.Drawing.Point(11, 19);
+            this.rbScriptAndQueryAddinWindow.Name = "rbScriptAndQueryAddinWindow";
+            this.rbScriptAndQueryAddinWindow.Size = new System.Drawing.Size(62, 22);
+            this.rbScriptAndQueryAddinWindow.TabIndex = 208;
+            this.rbScriptAndQueryAddinWindow.TabStop = true;
+            this.rbScriptAndQueryAddinWindow.Text = "Addin";
+            this.toolTip1.SetToolTip(this.rbScriptAndQueryAddinWindow, "Show SQL Query and run Script in Addin Windows");
+            this.rbScriptAndQueryAddinWindow.UseVisualStyleBackColor = true;
             // 
             // FrmQueryAndScript
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(468, 306);
-            this.Controls.Add(this.chkScriptAndQuery);
-            this.Controls.Add(this.label3);
+            this.ClientSize = new System.Drawing.Size(576, 306);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOk);
-            this.Controls.Add(this.chkOnlyQuery);
-            this.Controls.Add(this.label2);
             this.Name = "FrmQueryAndScript";
             this.Text = "Settings Query and Script";
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -133,9 +199,14 @@
         private System.Windows.Forms.Button btnOk;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.CheckBox chkOnlyQuery;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.CheckBox chkScriptAndQuery;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.RadioButton rbOnlyQueryDisableWindow;
+        private System.Windows.Forms.RadioButton rbOnlyQueryTabWindow;
+        private System.Windows.Forms.RadioButton rbOnlyQueryAddinWindow;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.RadioButton rbScriptAndQueryDisableWindow;
+        private System.Windows.Forms.RadioButton rbScriptAndQueryTabWindow;
+        private System.Windows.Forms.RadioButton rbScriptAndQueryAddinWindow;
     }
 }
