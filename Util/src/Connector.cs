@@ -48,12 +48,12 @@ namespace hoTools.Connectors {
         public bool IsDefault
         {
             get { return _isDefault; }
-            set { IsDefault = value; }
+            set { _isDefault = value; }
         }
         public bool IsEnabled
         {
             get { return _isEnabled; }
-            set { IsEnabled = value; }
+            set { _isEnabled = value; }
         }
     }
     public class DiagramConnector : BindingList<Connector>

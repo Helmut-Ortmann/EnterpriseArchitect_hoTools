@@ -31,7 +31,7 @@ namespace hoTools.Utils.Parameter
                             FROM  t_object  o inner JOIN t_xref x on (o.ea_guid = x.client)
                             where x.Name = 'CustomProperties' AND
                                   x.Type = 'element property' AND
-                                  o.object_ID = " + _parTrgt.ElementID.ToString() ;
+                                  o.object_ID = " + _parTrgt.ElementID;
                         
                             
             string str = _rep.SQLQuery(query);

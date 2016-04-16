@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using hoTools.Utils.Favorites;
 using hoTools.ActiveX;
 using hoTools.Settings;
-using hoTools.Scripts;
+using hoTools.Query;
 
 using hoTools.EaServices;
 using hoTools.Utils;
@@ -58,14 +58,14 @@ namespace hoTools
         static AddinSettings AddinSettings = null;
         static AddinControlGUI AddinControlGUI = null;
         static FindAndReplaceGUI FindAndReplaceGUI = null;
-        static ScriptGUI ScriptGUI = null;
-        static ScriptGUI QueryGUI = null;
+        static QueryGUI ScriptGUI = null;
+        static QueryGUI QueryGUI = null;
 
         // ActiveX Controls
         AddinControlGUI _MyControlGUI = null;
         FindAndReplaceGUI _FindAndReplaceGUI = null;
-        ScriptGUI _ScriptGUI = null;
-        ScriptGUI _QueryGUI = null;
+        QueryGUI _ScriptGUI = null;
+        QueryGUI _QueryGUI = null;
 
         // settings
         AddinSettings _AddinSettings = null;
@@ -193,7 +193,7 @@ namespace hoTools
             if (Repository.IsSecurityEnabled)
             {
                 //logInUser = Repository.GetCurrentLoginUser(false);
-                //if ((logInUser.Contains("deexortm")) ||
+                //if ((logInUser.Contains("ho")) ||
                 //     (logInUser.Contains("admin")) ||
                 //     (logInUser.Equals(""))
                 //    ) logInUserRights = UserRights.ADMIN;
@@ -660,7 +660,7 @@ namespace hoTools
                         try
                         {
                             string sql = @"update t_diagram set locked = 0" +
-                           " where diagram_ID = " + diaCurrent.DiagramID.ToString();
+                           " where diagram_ID = " + diaCurrent.DiagramID;
                             Repository.Execute(sql);
                             // reload view
                             Repository.ReloadDiagram(diaCurrent.DiagramID);
@@ -938,7 +938,7 @@ namespace hoTools
                     _MyControlGUI = AddinControlGUI; // static + instance
 
                     // with Search & Replace EA Addin Windows
-                    if (_AddinSettings.isSearchAndReplace) { 
+                    if (!  (_AddinSettings.SearchAndReplaceWindow == AddinSettings.ShowInWindow.Disabled) ) { 
                         FindAndReplaceGUI = addAddinControl<FindAndReplaceGUI>(FindAndReplaceGUI.TABULATOR, 
                             FindAndReplaceGUI.PROGID, null, 
                             AddinSettings.ShowInWindow.AddinWindow);
@@ -949,8 +949,8 @@ namespace hoTools
                     if (! (_AddinSettings.OnlyQueryWindow == AddinSettings.ShowInWindow.Disabled) )
                     {
                         // Run as Query
-                        QueryGUI = addAddinControl<ScriptGUI>(ScriptGUI.TABULATOR_QUERY, 
-                            ScriptGUI.PROGID, ScriptGUI.TABULATOR_QUERY, 
+                        QueryGUI = addAddinControl<QueryGUI>(QueryGUI.TABULATOR_QUERY, 
+                            QueryGUI.PROGID, QueryGUI.TABULATOR_QUERY, 
                             _AddinSettings.OnlyQueryWindow);
                         _QueryGUI = QueryGUI; // static + instance
                     }
@@ -959,8 +959,8 @@ namespace hoTools
                     if (!(_AddinSettings.ScriptAndQueryWindow == AddinSettings.ShowInWindow.Disabled))
                     {
                         // Run as Script
-                        ScriptGUI = addAddinControl<ScriptGUI>(ScriptGUI.TABULATOR_SCRIPT, 
-                            ScriptGUI.PROGID, ScriptGUI.TABULATOR_SCRIPT, 
+                        ScriptGUI = addAddinControl<QueryGUI>(QueryGUI.TABULATOR_SCRIPT, 
+                            QueryGUI.PROGID, QueryGUI.TABULATOR_SCRIPT, 
                             _AddinSettings.ScriptAndQueryWindow);
                     _ScriptGUI = ScriptGUI; // static + instance
                     }
@@ -999,7 +999,7 @@ namespace hoTools
             AddinGUI control = c as AddinGUI;
             if (null == control)
             {
-                MessageBox.Show(string.Format("Unable to start progId='{progId}', tab='{tabName}'"));
+                MessageBox.Show($"Unable to start progId='{progId}', tab='{tabName}'");
             }
             else
             {
@@ -1219,84 +1219,124 @@ namespace hoTools
         // D =               Direct
         // C =               Customer
 
+        #pragma warning disable RECS0154
         void btnLH_Click(object sender, EventArgs e)
         {
             EaService.setLineStyle(_repository, "LH");
         }
+        #pragma warning restore RECS0154
+
+        #pragma warning disable RECS0154
         void btnLV_Click(object sender, EventArgs e)
         {
             EaService.setLineStyle(_repository, "LV");
         }
+        #pragma warning restore RECS0154
+
+        #pragma warning disable RECS0154
         void btnTH_Click(object sender, EventArgs e)
         {
             EaService.setLineStyle(_repository, "H");
         }
+        #pragma warning restore RECS0154
+
+        #pragma warning disable RECS0154
         void btnTV_Click(object sender, EventArgs e)
         {
             EaService.setLineStyle(_repository, "V");
         }
+        #pragma warning restore RECS0154
+
+        #pragma warning disable RECS0154
         void btnOS_Click(object sender, EventArgs e)
         {
             EaService.setLineStyle(_repository, "OS");
         }
+        #pragma warning restore RECS0154
+
+        #pragma warning disable RECS0154
         void btnOR_Click(object sender, EventArgs e)
         {
             EaService.setLineStyle(_repository, "OR");
         }
+        #pragma warning restore RECS0154
+
+        #pragma warning disable RECS0154
         void btnA_Click(object sender, EventArgs e)
         {
             EaService.setLineStyle(_repository, "A");
         }
+        #pragma warning restore RECS0154
+
+        #pragma warning disable RECS0154    
         void btnD_Click(object sender, EventArgs e)
         {
             EaService.setLineStyle(_repository, "D");
         }
+        #pragma warning restore RECS0154
+
+        #pragma warning disable RECS0154
         void btnC_Click(object sender, EventArgs e)
         {
             EaService.setLineStyle(_repository, "C");
         }
-
+        #pragma warning restore RECS0154
+        #pragma warning disable RECS0154
         void btnComposite_Click(object sender, EventArgs e)
         {
             EaService.navigateComposite(_repository);
         }
+        #pragma warning restore RECS0154
 
-
-
-
-
-
+        #pragma warning disable RECS0154
         void btnDisplayBehavior_Click(object sender, EventArgs e)
         {
             EaService.DisplayOperationForSelectedElement(_repository, EaService.displayMode.Behavior);
         }
+        #pragma warning restore RECS0154
+
+        #pragma warning disable RECS0154
         void btnLocateOperation_Click(object sender, EventArgs e)
         {
             EaService.DisplayOperationForSelectedElement(_repository, EaService.displayMode.Method);
         }
+        #pragma warning restore RECS0154
+
+        #pragma warning disable RECS0154
         void btnAddElementNote_Click(object sender, EventArgs e)
         {
             EaService.addElementNote(_repository);
         }
+        #pragma warning restore RECS0154
+
+        #pragma warning disable RECS0154
         void btnAddDiagramNote_Click(object sender, EventArgs e)
         {
             EaService.addDiagramNote(_repository);
         }
+        #pragma warning restore RECS0154
 
+        #pragma warning disable RECS0154
         void btnLocateType_Click(object sender, EventArgs e)
         {
             EaService.locateType(_repository);
         }
+        #pragma warning restore RECS0154
+
+        #pragma warning disable RECS0154
         void btnFindUsage_Click(object sender, EventArgs e)
         {
             EaService.findUsage(_repository);
         }
+        #pragma warning restore RECS0154
+
+        #pragma warning disable RECS0154
         void btnDisplaySpecification_Click(object sender, EventArgs e)
         {
             EaService.showSpecification(_repository);
         }
+        #pragma warning restore RECS0154
 
-               
         /// <summary>
         /// Called when EA start model validation. Just shows a message box
         /// </summary>

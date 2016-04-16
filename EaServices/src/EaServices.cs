@@ -113,7 +113,7 @@ namespace hoTools.EaServices
                 int bottom = top + 120;
                 //int right = diaObj.right + 2 * (diaObj.right - diaObj.left);
 
-                string position = "l=" + left.ToString() + ";r=" + right.ToString() + ";t=" + top.ToString() + ";b=" + bottom.ToString() + ";";
+                string position = "l=" + left + ";r=" + right + ";t=" + top + ";b=" + bottom + ";";
 
                 var diaObject = (EA.DiagramObject)dia.DiagramObjects.AddNew(position, "");
                 dia.Update();
@@ -979,7 +979,7 @@ namespace hoTools.EaServices
                 }
                 // limit values
                 if (left < 5) left = 5;
-                string position = "l=" + left.ToString() + ";r=" + right.ToString() + ";t=" + top.ToString() + ";b=" + bottom.ToString() + ";";
+                string position = "l=" + left + ";r=" + right + ";t=" + top + ";b=" + bottom + ";";
                 // end note
                 if ( elParent != null && elParent.Type == "Activity" && extension == "101")
                 {
@@ -1010,7 +1010,7 @@ namespace hoTools.EaServices
                     if (name.Length > 25) length = 25 * WidthPerCharacter / 10;
                     else length = (int)(name.Length * WidthPerCharacter / 10);
                     // string s = "DUID=E2352ABC;LBL=CX=180:CY=13:OX=29:OY=-4:HDN=0:BLD=0:ITA=0:UND=0:CLR=-1:ALN=0:ALT=0:ROT=0;;"; 
-                    string s = "DUID=E2352ABC;LBL=CX=180:CY=13:OX=-"+ length.ToString()+ ":OY=-4:HDN=0:BLD=0:ITA=0:UND=0:CLR=-1:ALN=0:ALT=0:ROT=0;;"; 
+                    string s = "DUID=E2352ABC;LBL=CX=180:CY=13:OX=-"+ length + ":OY=-4:HDN=0:BLD=0:ITA=0:UND=0:CLR=-1:ALN=0:ALT=0:ROT=0;;"; 
                     Util.setDiagramObjectLabel(rep,
                         diaObjTarget.ElementID, diaObjTarget.DiagramID, diaObjTarget.InstanceID, s);
                 }
@@ -1023,7 +1023,7 @@ namespace hoTools.EaServices
                     int initRight = initLeft + 20;
                     int initTop = top - 25;
                     int initBottom = initTop - 20;
-                    string initPosition = "l=" + initLeft.ToString() + ";r=" + initRight.ToString() + ";t=" + initTop.ToString() + ";b=" + initBottom.ToString() + ";";
+                    string initPosition = "l=" + initLeft + ";r=" + initRight + ";t=" + initTop + ";b=" + initBottom + ";";
                     initDiaObj = ActivityPar.CreateInitFinalNode(rep, dia,
                         elTarget, 100, initPosition);
                     
@@ -1196,7 +1196,7 @@ namespace hoTools.EaServices
 
                 top = top - 20 - pos * 70;
                 bottom = top - 50;
-                string position = "l=" + left.ToString() + ";r=" + right.ToString() + ";t=" + top.ToString() + ";b=" + bottom.ToString() + ";";
+                string position = "l=" + left + ";r=" + right + ";t=" + top + ";b=" + bottom + ";";
 
 
 
@@ -1627,7 +1627,7 @@ namespace hoTools.EaServices
                 int top = diaObj.top;
                 int bottom = top - 100;
 
-                string position = "l=" + left.ToString() + ";r=" + right.ToString() + ";t=" + top.ToString() + ";b=" + bottom.ToString() + ";";
+                string position = "l=" + left + ";r=" + right + ";t=" + top + ";b=" + bottom + ";";
                 var diaObject = (EA.DiagramObject)dia.DiagramObjects.AddNew(position, "");
                 dia.Update();
                 diaObject.ElementID = elNote.ElementID;
@@ -1916,7 +1916,7 @@ namespace hoTools.EaServices
                 var pkg = (EA.Package)rep.GetContextObject();
                 Util.getLatest(rep, pkg, true, ref count, 0, ref errorCount);
                 string s = "";
-                if (errorCount > 0) s = " with " + errorCount.ToString() + " errors";
+                if (errorCount > 0) s = " with " + errorCount + " errors";
 
                 // finished
                 TimeSpan span = DateTime.Now - startTime;
@@ -2000,7 +2000,7 @@ namespace hoTools.EaServices
                         if (diaObj.ElementID == el.ElementID)
                         {
                             str = str + "\r\n\r\n" +
-                                "select * from t_diagramobjects where object_id = " + diaObj.ElementID.ToString();
+                                "select * from t_diagramobjects where object_id = " + diaObj.ElementID;
                             break;
 
                         }
@@ -2535,7 +2535,7 @@ namespace hoTools.EaServices
                 int bottom = top + 100;
                 //int right = diaObj.right + 2 * (diaObj.right - diaObj.left);
                 rep.SaveDiagram(dia.DiagramID);
-                string position = "l=" + left.ToString() + ";r=" + right.ToString() + ";t=" + top.ToString() + ";b=" + bottom.ToString() + ";";
+                string position = "l=" + left + ";r=" + right + ";t=" + top + ";b=" + bottom + ";";
                 var diaObj = (EA.DiagramObject)dia.DiagramObjects.AddNew(position, "");
                 dia.DiagramObjects.Refresh();
                 diaObj.ElementID = elTypedef.ElementID;

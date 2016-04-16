@@ -59,7 +59,7 @@ namespace hoTools.Utils.Favorites
         #region search
         public void search()
         {
-            string search = Resources.Strings.SearchFavorite;
+            
             _rep.RunModelSearch(Resources.Strings.SearchFavoriteName, "", "","");
         }
         #endregion

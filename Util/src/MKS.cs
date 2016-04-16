@@ -118,7 +118,7 @@ namespace hoTools.Utils.MksUtil
                 {
                     if (p.ExitCode != 0)
                     {
-                        MessageBox.Show("ErrorCode:"+p.ExitCode.ToString() + "\r\n" + standardError.ReadToEnd(),"mks");
+                        MessageBox.Show("ErrorCode:"+p.ExitCode + "\r\n" + standardError.ReadToEnd(),"mks");
                        return "Error";
                     }
                     return output.ReadToEnd();

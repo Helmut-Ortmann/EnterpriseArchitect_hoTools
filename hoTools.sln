@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddinClass", "Addin\AddinClass.csproj", "{6D5DEEEF-0897-4494-9857-5BEE2BF0D0AF}"
 EndProject
@@ -47,7 +47,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Advanced", "Advanced", "{A9
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddinFramework", "AddinFramework\AddinFramework.csproj", "{B08AE89B-5E8D-46FD-A5D8-B3DB4D33FB46}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptGui", "ScriptGui\ScriptGui.csproj", "{D83C4D98-7AA9-4B1A-ABED-EA8A9EAC210C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QueryGui", "ScriptGui\QueryGui.csproj", "{D83C4D98-7AA9-4B1A-ABED-EA8A9EAC210C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Reuse", "Reuse", "{F1F0E6B1-5463-4DBB-9120-282C921427E0}"
 	ProjectSection(SolutionItems) = preProject

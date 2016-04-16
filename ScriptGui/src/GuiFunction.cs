@@ -1,14 +1,12 @@
-﻿using System;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 using System.Collections.Generic;
-using System.Linq;
 using System.Xml.Linq;
 using EAAddinFramework.Utils;
 using hoTools.Utils.SQL;
-using EA;
 
 
-namespace hoTools.Scripts
+
+namespace hoTools.Query
 {
     /// <summary>
     /// GUI Layer for ScriptGUI
@@ -66,14 +64,14 @@ namespace hoTools.Scripts
                             if (result.Equals(DialogResult.No)) run = false;
                             if (result.Equals(DialogResult.Cancel)) return false;
                         }
-                            if (run)  // run script
-                            {
-                                countCurrent += 1;
-                                if (countCurrent%20 == 0)
-                                        model.Repository.WriteOutput("Script", $"{functionName}: {countCurrent} of {count}", 0);
-                                if (RunScriptFunction(model, function, item.EaObjectType, item.EaObject) == false) return false;
-                            }
-                            continue;
+                        if (run)  // run script
+                        {
+                            countCurrent += 1;
+                            if (countCurrent%20 == 0)
+                                    model.Repository.WriteOutput("Script", $"{functionName}: {countCurrent} of {count}", 0);
+                            if (RunScriptFunction(model, function, item.EaObjectType, item.EaObject) == false) return false;
+                        }
+                        continue;
                     default:
                         MessageBox.Show($"Script parameter count shall be 2 or 3, is {scriptParCount}", "Invalid count of function parameters, Break!!!!");
                         break;
@@ -83,8 +81,8 @@ namespace hoTools.Scripts
             return true;
         }
         /// <summary>
-        /// Run function for EA item of arbitrary type
-        /// - If parameter count = 2 it calls the function with oType, oContext
+        /// Run function for EA item of arbitrary type<par></par>
+        /// - If parameter count = 2 it calls the function with oType, oContext<par></par>
         /// - If parameter count = 3 it calls the function with oType, oContext, Model
         /// </summary>
         /// <param name="function">Function</param>

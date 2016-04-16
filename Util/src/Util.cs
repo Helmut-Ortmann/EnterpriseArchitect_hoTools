@@ -87,7 +87,7 @@ namespace hoTools.Utils
         {
            string cnString = rep.ConnectionString.ToUpper();
 
-            if (cnString.EndsWith(".EAP"))
+            if (cnString.EndsWith(".EAP", StringComparison.CurrentCulture))
             {
                    var f = new FileInfo(cnString);
                    if (f.Length > 20000) return "*";
@@ -106,11 +106,11 @@ namespace hoTools.Utils
             EA.DiagramObject obj, string sequence )
         {
             string s = "";
-            if (!(obj == null)) s = " AND instance_id = " + obj.InstanceID.ToString();
+            if (!(obj == null)) s = " AND instance_id = " + obj.InstanceID;
 
             string updateStr = @"update t_DiagramObjects set sequence = " + sequence +
-                       " where diagram_id = " + dia.DiagramID.ToString() + 
-                       " AND instance_id = " + obj.InstanceID.ToString(); 
+                       " where diagram_id = " + dia.DiagramID + 
+                       " AND instance_id = " + obj.InstanceID; 
 
             rep.Execute(updateStr);
             return;
@@ -120,7 +120,7 @@ namespace hoTools.Utils
         public static void addSequenceNumber (EA.Repository rep, EA.Diagram dia) {
              
             string updateStr = @"update t_DiagramObjects set sequence = sequence + 1 "+
-                       " where diagram_id = " + dia.DiagramID.ToString(); 
+                       " where diagram_id = " + dia.DiagramID; 
 
             rep.Execute(updateStr);
             return;
@@ -130,7 +130,7 @@ namespace hoTools.Utils
         {
             int sequenceNumber = 0;
             string query = @"select sequence from t_diagramobjects do " +
-                            "  where do.Diagram_ID = "+ dia.DiagramID.ToString() +
+                            "  where do.Diagram_ID = "+ dia.DiagramID +
                             "  order by 1 desc";
             string str = rep.SQLQuery(query);
             var XmlDoc = new XmlDocument();
@@ -514,7 +514,7 @@ namespace hoTools.Utils
             id = Util.getTypeID(rep, type);
             if (id == 0 & type.Contains("*"))
             {
-                type = type.Remove(type.IndexOf("*"), 1);
+                type = type.Remove(type.IndexOf("*", StringComparison.CurrentCulture), 1);
                 name = "*" + name;
                 id = Util.getTypeID(rep, type);
                 if (id == 0 & type.Contains("*"))
@@ -547,13 +547,13 @@ namespace hoTools.Utils
             }
             else
             {
-                aliasName = "par_" + par.Position.ToString();
+                aliasName = "par_" + par.Position;
             }
 
             EA.Element parTrgt = null;
             string query = @"select o2.ea_guid AS CLASSIFIER_GUID
                       from t_object o1 INNER JOIN t_object o2 on ( o2.parentID = o1.object_id)
-                      where o1.Object_ID = " + act.ElementID.ToString() + 
+                      where o1.Object_ID = " + act.ElementID + 
                              " AND  o2.Alias like '"+ aliasName + getWildCard(rep) + "'";
             string str = rep.SQLQuery(query); 
             var XmlDoc = new XmlDocument();
@@ -574,7 +574,7 @@ namespace hoTools.Utils
             EA.Method method = null;
             string query = @"select o.Classifier_guid AS CLASSIFIER_GUID
                       from t_object o 
-                      where o.Object_ID = " + action.ElementID.ToString();
+                      where o.Object_ID = " + action.ElementID;
             string str = rep.SQLQuery(query);
             var XmlDoc = new XmlDocument();
             XmlDoc.LoadXml(str);
@@ -708,7 +708,7 @@ namespace hoTools.Utils
         public static Boolean setShowBehaviorInDiagram(EA.Repository rep, EA.Method m)
         {
             string updateStr = @"update t_operation set StyleEx = 'ShowBeh=1;'"  +
-                       " where operationID = " + m.MethodID.ToString();
+                       " where operationID = " + m.MethodID;
             rep.Execute(updateStr);
             return true;
         }
@@ -716,21 +716,21 @@ namespace hoTools.Utils
         public static Boolean setFrameLinksToDiagram(EA.Repository rep, EA.Element frm, EA.Diagram dia)
         {
             string updateStr = @"update t_object set pdata1 = "+ dia.DiagramID + 
-                       " where object_ID = " + frm.ElementID.ToString();
+                       " where object_ID = " + frm.ElementID;
             rep.Execute(updateStr);
             return true;
         }
         public static Boolean setActivityCompositeDiagram(EA.Repository rep, EA.Element el, string s)
         {
             string updateStr = @"update t_object set pdata1 = '"+ s +"', ntype = 8 " +
-                       " where object_ID = " + el.ElementID.ToString();
+                       " where object_ID = " + el.ElementID;
             rep.Execute(updateStr);
             return true;
         }
         public static Boolean setElementPDATA1(EA.Repository rep, EA.Element el, string s)
         {
             string updateStr = @"update t_object set pdata1 = '" + s + "' " +
-                       " where object_ID = " + el.ElementID.ToString();
+                       " where object_ID = " + el.ElementID;
             rep.Execute(updateStr);
             return true;
         }
@@ -738,7 +738,7 @@ namespace hoTools.Utils
         {
 
             string updateStr = @"update t_connector set pdata2 = '" + connectorGuard + "' " +
-           " where Connector_Id = " + connectorID.ToString();
+           " where Connector_Id = " + connectorID;
             rep.Execute(updateStr);
 
 
@@ -753,15 +753,15 @@ namespace hoTools.Utils
         public static Boolean setVCFlags (EA.Repository rep, EA.Package pkg, string flags)
         {
             string updateStr = @"update t_package set packageflags = '" + flags +"' " +
-                       " where package_ID = " + pkg.PackageID.ToString();
+                       " where package_ID = " + pkg.PackageID;
             rep.Execute(updateStr);
             return true;
         }
 
         public static Boolean setElementHasAttchaedLink(EA.Repository rep, EA.Element el, EA.Element elNote)
         {
-            string updateStr = @"update t_object set pdata1 = 'Element Note', pdata2 = '" + el.ElementID.ToString()  + "', pdata4='Yes' " +
-           " where object_ID = " + elNote.ElementID.ToString() ;
+            string updateStr = @"update t_object set pdata1 = 'Element Note', pdata2 = '" + el.ElementID  + "', pdata4='Yes' " +
+           " where object_ID = " + elNote.ElementID ;
             rep.Execute(updateStr);
 
 
@@ -772,7 +772,7 @@ namespace hoTools.Utils
         {
             
             string updateStr = @"update t_operation set behaviour = '" + act.ElementGUID + "' " +
-           " where operationID = " + op.MethodID.ToString();
+           " where operationID = " + op.MethodID;
             rep.Execute(updateStr);
 
 
@@ -784,9 +784,9 @@ namespace hoTools.Utils
             string attributeName = "OBJECT_STYLE";
             string query = @"select ObjectStyle AS " + attributeName + 
                     @" from t_diagramobjects
-                      where Object_ID = " + objectID.ToString() + @" AND 
-                            Diagram_ID = " + diagramID.ToString() + @" AND 
-                            Instance_ID = " + instanceID.ToString() ;
+                      where Object_ID = " + objectID + @" AND 
+                            Diagram_ID = " + diagramID + @" AND 
+                            Instance_ID = " + instanceID ;
 
             return getSingleSQLValue(rep, query, attributeName);
         }
@@ -810,10 +810,10 @@ namespace hoTools.Utils
         {
 
             string updateStr = @"update t_diagramObjects set ObjectStyle = '" + s + "' " +
-           " where Object_ID = " + objectID.ToString() + " AND "+
-                " Diagram_ID = " + diagramID.ToString() + " AND " +
-                " Instance_ID = " + instanceID.ToString() ;
-               ;
+           " where Object_ID = " + objectID + " AND "+
+                " Diagram_ID = " + diagramID + " AND " +
+                " Instance_ID = " + instanceID ;
+               
             rep.Execute(updateStr);
 
 
@@ -1410,7 +1410,7 @@ namespace hoTools.Utils
                 diaObjSource.Update();
             }
 
-            string position = "l=" + leftPort.ToString() + ";r=" + rightPort.ToString() + ";t=" + topPort.ToString() + ";b=" + bottomPort.ToString() + ";";
+            string position = "l=" + leftPort + ";r=" + rightPort + ";t=" + topPort + ";b=" + bottomPort + ";";
             var diaObjectPort = (EA.DiagramObject)dia.DiagramObjects.AddNew(position, "");
             if (port.Type.Equals("Port"))
             {

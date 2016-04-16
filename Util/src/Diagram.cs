@@ -49,7 +49,7 @@ namespace hoTools.Utils
         #region sortSelectedObjects
         public void sortSelectedObjects()
         {
-            // estiminate sort criteria (left/right, top/bottom)
+            // esteminate sort criteria (left/right, top/bottom)
             bool isVerticalSorted = true;
             EA.DiagramObject obj1 = _dia.SelectedObjects.GetAt(0);
             EA.DiagramObject obj2 = _dia.SelectedObjects.GetAt(1);
@@ -127,7 +127,7 @@ namespace hoTools.Utils
             if (x == null && y == null) return 0;
             if (x == null) return 1;
             if (y == null) return -1;
-            return x.Name.CompareTo(y.Name);
+            return string.Compare(x.Name, y.Name, StringComparison.CurrentCulture);
         }
     }
     public class DiagramObjectSelected

@@ -10,7 +10,7 @@ using hoTools.Settings;
 using hoTools.Utils.SQL;
 using EAAddinFramework.Utils;
 
-namespace hoTools.Scripts
+namespace hoTools.Query
 {
     /// <summary>
     /// Create and handle TabPages of a ControlTab to work with *.sql files.
@@ -84,7 +84,7 @@ namespace hoTools.Scripts
             TabPage tabPage = new TabPage();
             _tabControl.Controls.Add(tabPage);
 
-            SqlFile sqlFile = new SqlFile(DEFAULT_TAB_NAME + _tabControl.Controls.Count.ToString() + ".sql", false);
+            SqlFile sqlFile = new SqlFile($"{DEFAULT_TAB_NAME}{_tabControl.Controls.Count}.sql", false);
             tabPage.Tag = sqlFile;
             tabPage.Text = sqlFile.DisplayName;
             tabPage.ToolTipText = sqlFile.FullName;

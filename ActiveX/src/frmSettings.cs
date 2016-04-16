@@ -30,18 +30,7 @@ namespace hoTools.Settings
             _settings = settings;
             _addinControl = addinControl;
 
-            #region miscellaneous
-            txtQuickSearch.Text = settings.quickSearchName;
-            txtFileManagerPath.Text = settings.FileManagerPath;
-            chkAdvancedFeatures.Checked = settings.isAdvancedFeatures;
-            chkSvnSupport.Checked = settings.isSvnSupport;
-            chkVcSupport.Checked = settings.isVcSupport;
-            chkAdvancedPort.Checked = settings.isAdvancedPort;
-            chkAdvancedDiagramNote.Checked = settings.isAdvancedDiagramNote;
-            //chkScriptAndQuery.Checked = settings.isScriptAndQuery;
-            chkSearchAndReplace.Checked = settings.isSearchAndReplace;
-            #endregion
-
+          
             #region linestyle
             // linestyle
             var items = new string[]{"A Automatic","C Custom","D Direct","B Bezier",
@@ -531,17 +520,7 @@ namespace hoTools.Settings
         /// <param name="e"></param>
         private void btnOk_Click(object sender, EventArgs e)
         {
-            #region miscellaneous
-            _settings.quickSearchName = txtQuickSearch.Text;
-            _settings.FileManagerPath = txtFileManagerPath.Text;
-            _settings.isSvnSupport = chkSvnSupport.Checked;
-            _settings.isVcSupport = chkVcSupport.Checked;
-            _settings.isAdvancedFeatures = chkAdvancedFeatures.Checked;
-            _settings.isAdvancedPort = chkAdvancedPort.Checked;
-            _settings.isAdvancedDiagramNote = chkAdvancedDiagramNote.Checked;
-            //_settings.isScriptAndQuery = chkScriptAndQuery.Checked;
-            _settings.isSearchAndReplace = chkSearchAndReplace.Checked;
-            #endregion
+           
 
             #region sql
             _settings.sqlFolder = txtSqlFolder.Text;
@@ -695,7 +674,7 @@ namespace hoTools.Settings
             _settings.globalShortcutsSearch[4].SearchTerm = cmbGlobalKeySearch5SearchTerm.Text;
             #endregion
 
-            _addinControl.parameterizeMenusAndButtons(); // hide/unhide Menues & Buttons
+            _addinControl.parameterizeMenusAndButtons(); // hide / unhide Menus & Buttons
             _addinControl.parameterizeButtonQueries(); // sets the shortcuts
             _addinControl.parameterizeButtonServices(); // sets the shortcuts
 

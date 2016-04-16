@@ -20,7 +20,7 @@ namespace hoTools.Utils
             {
                 // add current package id
                 if (branch == "") branch = id.ToString();
-                else branch = branch + ", " + id.ToString();
+                else branch = branch + ", " + id;
 
                 EA.Package pkg = rep.GetPackageByID(id);
                 foreach (EA.Package p in pkg.Packages)

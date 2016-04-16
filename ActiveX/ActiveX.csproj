@@ -100,6 +100,12 @@
     <Compile Include="src\Settings.cs" />
     <Compile Include="src\IActiveX.cs" />
     <Compile Include="src\IActiveXSafety.cs" />
+    <Compile Include="src\SettingsGeneral\frmSettingsGeneral.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="src\SettingsGeneral\frmSettingsGeneral.Designer.cs">
+      <DependentUpon>frmSettingsGeneral.cs</DependentUpon>
+    </Compile>
     <Compile Include="src\SqlHistoryFilesCfg.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -117,6 +123,9 @@
     <EmbeddedResource Include="src\frmSettings.resx">
       <DependentUpon>frmSettings.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="src\SettingsGeneral\frmSettingsGeneral.resx">
+      <DependentUpon>frmSettingsGeneral.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resource\" />
@@ -129,6 +138,7 @@
     <ProjectReference Include="..\EaServices\EaServices.csproj">
       <Project>{dfbedf5e-fc7f-4269-a0a6-f9b9e86dac90}</Project>
       <Name>EaServices</Name>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
     </ProjectReference>
     <ProjectReference Include="..\Util\Util.csproj">
       <Project>{9376680e-9420-4fc1-8de8-4311fca18efc}</Project>

@@ -15,7 +15,7 @@ using System.IO;
 
 
 
-namespace hoTools.Scripts
+namespace hoTools.Query
 {
     /// <summary>
     /// ActiveX COM Component 'hoTools.ScriptGUI' to show as tab in the EA Addin window
@@ -28,7 +28,7 @@ namespace hoTools.Scripts
     [Guid("23722D72-7C6A-4246-B8B8-8D421CEBCD65")]
     [ProgId(PROGID)]
     [ComDefaultInterface(typeof(IScriptGUI))]
-    public partial class ScriptGUI : AddinGUI, IScriptGUI
+    public partial class QueryGUI : AddinGUI, IScriptGUI
     {
         public const string PROGID = "hoTools.ScriptGUI";
         public const string TABULATOR_SCRIPT = "Scripts";
@@ -56,7 +56,7 @@ namespace hoTools.Scripts
 
 
         #region Constructor
-        public ScriptGUI()
+        public QueryGUI()
         {
             InitializeComponent();
 
@@ -331,11 +331,7 @@ namespace hoTools.Scripts
             txtBox.SelectionStart = selectionIndex + text.Length;
         }
 
-       
-
-
-       
-        Dictionary<string, string> a = null;
+      
         /// <summary>
         /// Save sql string from TabPage with TextBox inside it to *.sql file.
         /// - Update and save the list of sql files 
@@ -372,10 +368,7 @@ namespace hoTools.Scripts
                 }
             }
         }
-        private void  safeTab(TabPage tabPageSql, TextBox txtBoxSql)
-        {
-
-        }
+        
 
 
         /// <summary>

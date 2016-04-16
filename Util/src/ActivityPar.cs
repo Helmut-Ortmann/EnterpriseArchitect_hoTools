@@ -119,7 +119,7 @@ namespace hoTools.Utils.ActivityParameter
             }
             // Hide Qualifier
             if (actDia.ExtendedStyle.Length > 0)
-            { actDia.ExtendedStyle = actDia.ExtendedStyle.Replace("ScalePI=0", "ScalePI=1"); ; }
+            { actDia.ExtendedStyle = actDia.ExtendedStyle.Replace("ScalePI=0", "ScalePI=1"); }
             else 
             {  
                 actDia.ExtendedStyle = "ScalePI=1;";
@@ -205,7 +205,7 @@ namespace hoTools.Utils.ActivityParameter
             }
             // Hide Qualifier
             if (actDia.ExtendedStyle.Length > 0)
-            { actDia.ExtendedStyle = actDia.ExtendedStyle.Replace("ScalePI=0", "ScalePI=1"); ; }
+            { actDia.ExtendedStyle = actDia.ExtendedStyle.Replace("ScalePI=0", "ScalePI=1"); }
             else 
             {  
                 actDia.ExtendedStyle = "ScalePI=1;";
@@ -257,7 +257,7 @@ namespace hoTools.Utils.ActivityParameter
             else
             {
                 methodReturnTypID = Convert.ToInt32(Util.getTypeID(rep, m.ReturnType));
-            };
+            }
 
             bool withActivityReturnParameter = false;
             if (withActivityReturnParameter)
@@ -306,7 +306,7 @@ namespace hoTools.Utils.ActivityParameter
                 if (parSrc.IsConst) prefixTyp = " const";
                 postfixName = "";
                 if (parSrc.Kind.Contains("out")) postfixName = "*";
-                parName = parSrc.Position.ToString() + ":" + parSrc.Name + postfixName + prefixTyp + direction;
+                parName = parSrc.Position + ":" + parSrc.Name + postfixName + prefixTyp + direction;
 
                 // check if parameter already exists (last parameter = false)
                 parTrgt = Util.getParameterFromActivity(rep, parSrc, act);
@@ -335,10 +335,10 @@ namespace hoTools.Utils.ActivityParameter
                     parTrgt.ClassifierID = Convert.ToInt32(Util.getTypeID(rep, parSrc.Type));
                     // use type in name (no classifier found)
                     if (parTrgt.ClassifierID == 0) parTrgt.Name = parTrgt.Name + ":" + parSrc.Type;
-                };
+                }
 
                 parTrgt.Notes = parSrc.Notes;
-                parTrgt.Alias = "par_" + parSrc.Position.ToString() + ":" + parSrc.Type;
+                parTrgt.Alias = "par_" + parSrc.Position + ":" + parSrc.Type;
 
                 // update properties for parameter
                 var par = new Param(rep, parTrgt);
@@ -385,7 +385,7 @@ namespace hoTools.Utils.ActivityParameter
 
             top = top - 10 - pos * 10;
             bottom = top - length;
-            string position = "l=" + left.ToString() + ";r=" + right.ToString() + ";t=" + top.ToString() + ";b=" + bottom.ToString() + ";";
+            string position = "l=" + left + ";r=" + right + ";t=" + top + ";b=" + bottom + ";";
             var diaObject = (EA.DiagramObject)dia.DiagramObjects.AddNew(position, "");
             dia.Update();
             if (port.Type.Equals("Port"))

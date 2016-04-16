@@ -1,7 +1,7 @@
 ﻿
-namespace hoTools.Scripts
+namespace hoTools.Query
 {
-    partial class ScriptGUI
+    partial class QueryGUI
     {
         /// <summary> 
         /// Required designer variable.
@@ -33,7 +33,7 @@ namespace hoTools.Scripts
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ScriptGUI));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(QueryGUI));
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.txtSearchTerm = new System.Windows.Forms.TextBox();
             this.btnRunScriptForSql = new System.Windows.Forms.Button();

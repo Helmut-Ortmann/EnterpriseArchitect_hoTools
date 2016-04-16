@@ -14,27 +14,19 @@ using GlobalHotkeys;
 namespace hoTools.Settings
 {
     /// <summary>
-    /// Merge default settings with current settings
-    /// Default:   
-    ///    Debug:   Addin\ActiveX.dll.config      (With copy to output directory)
-    ///    Release: APPData\Local\Apps\hoTools\   (App DLL-Install library)
-    ///    Make sure to copy the default settings in project output (VS Properties)
-    /// Settings:   %APPDATA%\ho\hoTools\ActiveX.dll.config
-    /// Read current setting
-    /// Write current settings
+    /// Settings for hoTools.
+    /// It merges default settings (ActiveX.dll.config) with current settings in install directory to the current settings. 
     /// </summary>
-    /// 
-    //----------------------------------------------------------------------------------
-    // Maintaining of configuration settings in 
-    // Current:   %appdata%\ho\hoTools\user.config
-    // Default:   ..\Addin\ActiveX.dll.config   with copy to output directory             
-    //----------------------------------------------------------------------------------
-    // Make sure to copy the default settings in project output.
+    /// <code>
+    /// Default:         ..\Addin\ActiveX.dll.config   with copy to output directory       
+    /// Current Debug:   Addin\ActiveX.dll.config      (With copy to output directory) 
+    /// Current Release: APPData\Local\Apps\hoTools\   (App DLL-Install library) 
+    /// </code>
     public class AddinSettings
     {
         public enum ShowInWindow { AddinWindow, TabWindow,Disabled};
 
-        // Filepath of configuration file
+        // File path of configuration file
         // %APPDATA%ho\hoTools\user.config
         public string ConfigFilePath { get; }
         public string ConfigPath { get; }
@@ -279,25 +271,25 @@ namespace hoTools.Settings
 
         }
         #endregion
-        #region Property: isSearchAndReplace
 
-        public bool isSearchAndReplace
+        #region Property: SearchAndReplaceWindow
+        public ShowInWindow SearchAndReplaceWindow
         {
             get
             {
-                bool result;
-                if (bool.TryParse(this.currentConfig.AppSettings.Settings["isSearchAndReplace"].Value, out result))
+                ShowInWindow result;
+                if (Enum.TryParse<ShowInWindow>(this.currentConfig.AppSettings.Settings["SearchAndReplaceWindow"].Value, out result))
                 {
-                    return result;
+                    return (ShowInWindow)result;
                 }
                 else
                 {
-                    return true;
+                    return ShowInWindow.Disabled;
                 }
             }
             set
             {
-                this.currentConfig.AppSettings.Settings["isSearchAndReplace"].Value = value.ToString();
+                currentConfig.AppSettings.Settings["SearchAndReplaceWindow"].Value = value.ToString();
 
             }
 
@@ -798,7 +790,7 @@ namespace hoTools.Settings
         }
         #endregion
         #region getAllServices
-        // get all possible sevrices
+        // get all possible services
         private void getAllServices()
         {
             ServiceOperationAttribute ServiceOperation;
@@ -827,7 +819,7 @@ namespace hoTools.Settings
         /// - Global keys / global shortcuts / keyboard keys
         /// by 
         /// - Method
-        /// - Tooltip
+        /// - Tool tip
         /// </summary>
         public void updateSearchesAndServices()
         {
@@ -990,7 +982,7 @@ namespace hoTools.Settings
             {
                 if (l[i] == null) continue;
                     GlobalKeysConfig.GlobalKeysSearchConfig el = l[i];
-                    string basicKey = "globalKeySearch" + (i+1).ToString();
+                    string basicKey = "globalKeySearch" + (i+1);
                     this.currentConfig.AppSettings.Settings[basicKey + "Key"].Value = el.Key;
                     this.currentConfig.AppSettings.Settings[basicKey + "Modifier1"].Value = el.Modifier1;
                     this.currentConfig.AppSettings.Settings[basicKey + "Modifier2"].Value = el.Modifier2;
@@ -1011,7 +1003,7 @@ namespace hoTools.Settings
             {
                 if (l[i] == null) continue;
                 GlobalKeysConfig.GlobalKeysServiceConfig el = l[i];
-                string basicKey = "globalKeyService" + (i+1).ToString();
+                string basicKey = "globalKeyService" + (i+1);
                 this.currentConfig.AppSettings.Settings[basicKey + "Key"].Value = el.Key;
                 this.currentConfig.AppSettings.Settings[basicKey + "Modifier1"].Value = el.Modifier1;
                 this.currentConfig.AppSettings.Settings[basicKey + "Modifier2"].Value = el.Modifier2;
@@ -1081,7 +1073,7 @@ namespace hoTools.Settings
             {
                 if (l[i] == null) continue;
                 Connector el = l[i];
-                basicKey = DiagramType + "Connector" + (i + 1).ToString();
+                basicKey = DiagramType + "Connector" + (i + 1);
 
                 key = basicKey+ "Type";
                 if (! this.currentConfig.AppSettings.Settings.AllKeys.Contains(key))
@@ -1114,7 +1106,7 @@ namespace hoTools.Settings
             int index = l.Count +1;
             while (true)
             {
-            basicKey = DiagramType + "Connector" + index.ToString();
+            basicKey = DiagramType + "Connector" + index;
             if (this.currentConfig.AppSettings.Settings.AllKeys.Contains(basicKey+"Type"))
             {
                 this.currentConfig.AppSettings.Settings.Remove(basicKey + "IsEnabled");
@@ -1139,7 +1131,7 @@ namespace hoTools.Settings
                 {
 
                     var el = (hoTools.EaServices.ServicesCallConfig)l[i];
-                    string basicKey = "service" + (i + 1).ToString();
+                    string basicKey = "service" + (i + 1);
                     this.currentConfig.AppSettings.Settings[basicKey + "GUID"].Value = el.GUID;
                     this.currentConfig.AppSettings.Settings[basicKey + "Text"].Value = el.ButtonText;
                 }

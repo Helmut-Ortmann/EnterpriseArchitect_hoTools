@@ -17,7 +17,7 @@ namespace hoTools.Utils
             // set CallOperation
             string CallOperationProperty = "@PROP=@NAME=kind@ENDNAME;@TYPE=ActionKind@ENDTYPE;@VALU=CallOperation@ENDVALU;@PRMT=@ENDPRMT;@ENDPROP;";
             Guid g = Guid.NewGuid();
-            string xrefid = "{" + g.ToString() + "}";
+            string xrefid = "{" + g + "}";
             string insertIntoT_xref = @"insert into t_xref 
                 (XrefID,            Name,               Type,              Visibility, Namespace, Requirement, [Constraint], Behavior, Partition, Description, Client, Supplier, Link)
                 VALUES('" + xrefid + "', 'CustomProperties', 'element property','Public', '','','', '',0, '" + CallOperationProperty + "', '" + action.ElementGUID + "', null,'')";
@@ -25,7 +25,7 @@ namespace hoTools.Utils
 
             // Link Call Operation to operation
                 g = Guid.NewGuid();
-                xrefid = "{" + g.ToString() + "}";
+                xrefid = "{" + g + "}";
                 insertIntoT_xref = @"insert into t_xref 
                 (XrefID,            Name,               Type,              Visibility, Namespace, Requirement, [Constraint], Behavior, Partition, Description, Client, Supplier, Link)
                 VALUES('" + xrefid + "', 'MOFProps', 'element property','Public', '','','', 'target',0, '  null ', '" + method.MethodGUID + "', null,'')";

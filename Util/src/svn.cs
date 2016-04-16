@@ -95,7 +95,7 @@ namespace hoTools.Utils.svnUtil
                 {
                     if (p.ExitCode != 0)
                     {
-                        MessageBox.Show("ErrorCode:"+p.ExitCode.ToString() + "\r\n" + standardError.ReadToEnd(),"svn");
+                        MessageBox.Show("ErrorCode:"+p.ExitCode + "\r\n" + standardError.ReadToEnd(),"svn");
                        return "Error";
                     }
                     return output.ReadToEnd();

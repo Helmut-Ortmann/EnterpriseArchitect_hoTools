@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace hoTools.Scripts
+namespace hoTools.Query
 {
     /// <summary>
     /// Information of a *.sql file: FullName, DisplayName, isChanged

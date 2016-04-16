@@ -28,6 +28,11 @@ namespace hoTools.ActiveX
         FrmQueryAndScript frmQueryAndScript;
 
         /// <summary>
+        /// Addin Settings General
+        /// </summary>
+        FrmSettingsGeneral frmSettingsGeneral; 
+
+        /// <summary>
         /// Settings
         /// </summary>
         frmSettings frmSettings;
@@ -695,7 +700,6 @@ namespace hoTools.ActiveX
             this.btnFavorites = new System.Windows.Forms.Button();
             this.btnRemoveFavorite = new System.Windows.Forms.Button();
             this.btnAddFavorite = new System.Windows.Forms.Button();
-            this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripBtn11 = new System.Windows.Forms.ToolStripButton();
             this.toolStripBtn12 = new System.Windows.Forms.ToolStripButton();
@@ -711,7 +715,6 @@ namespace hoTools.ActiveX
             this.txtUserText = new System.Windows.Forms.TextBox();
             this.btnBezier = new System.Windows.Forms.Button();
             this.btnUpdateActivityParameter = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.btnC = new System.Windows.Forms.Button();
             this.btnD = new System.Windows.Forms.Button();
             this.btnA = new System.Windows.Forms.Button();
@@ -729,10 +732,14 @@ namespace hoTools.ActiveX
             this.btnTH = new System.Windows.Forms.Button();
             this.btnLV = new System.Windows.Forms.Button();
             this.btnLH = new System.Windows.Forms.Button();
+            this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
+            this.label1 = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.settingGeneralToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsQueryAndSctipToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.settingsKeysToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.doToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.createActivityForOperationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -777,12 +784,10 @@ namespace hoTools.ActiveX
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.settingGeneralToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.settingsKeysToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
-            this.toolStripContainer1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.toolStrip2.SuspendLayout();
+            this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
+            this.toolStripContainer1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -887,26 +892,6 @@ namespace hoTools.ActiveX
             this.toolTip.SetToolTip(this.btnAddFavorite, "Add to Favorite");
             this.btnAddFavorite.UseVisualStyleBackColor = true;
             this.btnAddFavorite.Click += new System.EventHandler(this.btnAddFavorite_Click);
-            // 
-            // toolStripContainer1
-            // 
-            this.toolStripContainer1.BottomToolStripPanelVisible = false;
-            // 
-            // toolStripContainer1.ContentPanel
-            // 
-            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(395, 2);
-            this.toolStripContainer1.LeftToolStripPanelVisible = false;
-            this.toolStripContainer1.Location = new System.Drawing.Point(3, 47);
-            this.toolStripContainer1.Name = "toolStripContainer1";
-            this.toolStripContainer1.RightToolStripPanelVisible = false;
-            this.toolStripContainer1.Size = new System.Drawing.Size(395, 27);
-            this.toolStripContainer1.TabIndex = 28;
-            this.toolStripContainer1.Text = "toolStripContainer1";
-            // 
-            // toolStripContainer1.TopToolStripPanel
-            // 
-            this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.toolStrip1);
-            this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.toolStrip2);
             // 
             // toolStrip1
             // 
@@ -1064,17 +1049,6 @@ namespace hoTools.ActiveX
             this.toolTip.SetToolTip(this.btnUpdateActivityParameter, "Update Activity Parameter from operation");
             this.btnUpdateActivityParameter.UseVisualStyleBackColor = true;
             this.btnUpdateActivityParameter.Click += new System.EventHandler(this.btnUpdateActivityParametzer_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(304, 27);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(76, 15);
-            this.label1.TabIndex = 21;
-            this.label1.Text = "Quick Search";
-            this.label1.ControlRemoved += new System.Windows.Forms.ControlEventHandler(this.label1_ControlRemoved);
             // 
             // btnC
             // 
@@ -1264,6 +1238,37 @@ namespace hoTools.ActiveX
             this.btnLH.UseVisualStyleBackColor = true;
             this.btnLH.Click += new System.EventHandler(this.btnLH_Click);
             // 
+            // toolStripContainer1
+            // 
+            this.toolStripContainer1.BottomToolStripPanelVisible = false;
+            // 
+            // toolStripContainer1.ContentPanel
+            // 
+            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(395, 2);
+            this.toolStripContainer1.LeftToolStripPanelVisible = false;
+            this.toolStripContainer1.Location = new System.Drawing.Point(3, 47);
+            this.toolStripContainer1.Name = "toolStripContainer1";
+            this.toolStripContainer1.RightToolStripPanelVisible = false;
+            this.toolStripContainer1.Size = new System.Drawing.Size(395, 27);
+            this.toolStripContainer1.TabIndex = 28;
+            this.toolStripContainer1.Text = "toolStripContainer1";
+            // 
+            // toolStripContainer1.TopToolStripPanel
+            // 
+            this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.toolStrip1);
+            this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.toolStrip2);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(304, 27);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(76, 15);
+            this.label1.TabIndex = 21;
+            this.label1.Text = "Quick Search";
+            this.label1.ControlRemoved += new System.Windows.Forms.ControlEventHandler(this.label1_ControlRemoved);
+            // 
             // menuStrip1
             // 
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
@@ -1290,12 +1295,12 @@ namespace hoTools.ActiveX
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "&File";
             // 
-            // settingsToolStripMenuItem
+            // settingGeneralToolStripMenuItem
             // 
-            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
-            this.settingsToolStripMenuItem.Text = "Settings &Linestyle";
-            this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
+            this.settingGeneralToolStripMenuItem.Name = "settingGeneralToolStripMenuItem";
+            this.settingGeneralToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
+            this.settingGeneralToolStripMenuItem.Text = "Setting &General";
+            this.settingGeneralToolStripMenuItem.Click += new System.EventHandler(this.settingGeneralToolStripMenuItem_Click);
             // 
             // settingsQueryAndSctipToolStripMenuItem
             // 
@@ -1303,6 +1308,19 @@ namespace hoTools.ActiveX
             this.settingsQueryAndSctipToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
             this.settingsQueryAndSctipToolStripMenuItem.Text = "Settings &Query and Script";
             this.settingsQueryAndSctipToolStripMenuItem.Click += new System.EventHandler(this.settingsQueryAndSctipToolStripMenuItem_Click);
+            // 
+            // settingsToolStripMenuItem
+            // 
+            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
+            this.settingsToolStripMenuItem.Text = "Settings &Linestyle";
+            this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
+            // 
+            // settingsKeysToolStripMenuItem
+            // 
+            this.settingsKeysToolStripMenuItem.Name = "settingsKeysToolStripMenuItem";
+            this.settingsKeysToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
+            this.settingsKeysToolStripMenuItem.Text = "Settings &Keys";
             // 
             // doToolStripMenuItem
             // 
@@ -1663,18 +1681,6 @@ namespace hoTools.ActiveX
             this.helpToolStripMenuItem1.ToolTipText = "Help";
             this.helpToolStripMenuItem1.Click += new System.EventHandler(this.helpToolStripMenuItem1_Click);
             // 
-            // settingGeneralToolStripMenuItem
-            // 
-            this.settingGeneralToolStripMenuItem.Name = "settingGeneralToolStripMenuItem";
-            this.settingGeneralToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
-            this.settingGeneralToolStripMenuItem.Text = "Setting &General";
-            // 
-            // settingsKeysToolStripMenuItem
-            // 
-            this.settingsKeysToolStripMenuItem.Name = "settingsKeysToolStripMenuItem";
-            this.settingsKeysToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
-            this.settingsKeysToolStripMenuItem.Text = "Settings &Keys";
-            // 
             // AddinControlGUI
             // 
             this.Controls.Add(this.btnLabelRight);
@@ -1712,14 +1718,14 @@ namespace hoTools.ActiveX
             this.Name = "AddinControlGUI";
             this.Size = new System.Drawing.Size(398, 342);
             this.Load += new System.EventHandler(this.AddinControlGUI_Load);
-            this.toolStripContainer1.TopToolStripPanel.ResumeLayout(false);
-            this.toolStripContainer1.TopToolStripPanel.PerformLayout();
-            this.toolStripContainer1.ResumeLayout(false);
-            this.toolStripContainer1.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.toolStrip2.ResumeLayout(false);
             this.toolStrip2.PerformLayout();
+            this.toolStripContainer1.TopToolStripPanel.ResumeLayout(false);
+            this.toolStripContainer1.TopToolStripPanel.PerformLayout();
+            this.toolStripContainer1.ResumeLayout(false);
+            this.toolStripContainer1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -1872,6 +1878,13 @@ namespace hoTools.ActiveX
         {
             this.frmQueryAndScript = new FrmQueryAndScript(AddinSettings);
             this.frmQueryAndScript.ShowDialog();
+        }
+
+        private void settingGeneralToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.frmSettingsGeneral = new FrmSettingsGeneral(AddinSettings);
+            this.frmSettingsGeneral.ShowDialog();
+
         }
     }
 }

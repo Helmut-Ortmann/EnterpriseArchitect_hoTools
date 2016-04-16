@@ -19,7 +19,7 @@ namespace hoTools.Utils.Appls
         {
             EA.Element returnValue = null;
             string behavior = method.Behavior;
-            if (behavior.StartsWith("{") & behavior.EndsWith("}"))
+            if (behavior.StartsWith("{", StringComparison.Ordinal) & behavior.EndsWith("}", StringComparison.Ordinal))
             {
                 // get object according to behavior
                 EA.Element el = Repository.GetElementByGuid(behavior);
@@ -31,7 +31,7 @@ namespace hoTools.Utils.Appls
         public static void DisplayBehaviorForOperation(EA.Repository Repository, EA.Method method)
         {
             string behavior = method.Behavior;
-            if (behavior.StartsWith("{") & behavior.EndsWith("}"))
+            if (behavior.StartsWith("{", StringComparison.Ordinal) & behavior.EndsWith("}", StringComparison.Ordinal))
             {
                 // get object according to behavior
                 EA.Element el = Repository.GetElementByGuid(behavior);

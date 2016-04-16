@@ -111,8 +111,7 @@ namespace hoTools.Utils.SQL
         /// Get users of EA element
         /// - t_secuser
         /// </summary>
-        /// <param name="rep"></param>
-        /// <returns></returns>
+         /// <returns></returns>
         public List<string> getUsers()
         {
             var l = new List<string>();

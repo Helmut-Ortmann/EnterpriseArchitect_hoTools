@@ -316,7 +316,6 @@ namespace hoTools.Find
         /// Optional you may use your own 'newString' parameter.
         /// </summary>
         /// <param name="stringToChange"></param>
-        /// <param name="item"></param>
         /// <param name="newString">"Change the found values to 'neString'."</param>
         /// <returns></returns>
         public string ChangeString(string stringToChange,  string newString="")
