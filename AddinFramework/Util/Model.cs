@@ -145,7 +145,7 @@ namespace EAAddinFramework.Utils
             RepositoryType repoType = RepositoryType.ADOJET; //default to .eap file
 
             // if it is a .feap file then it surely is a firebird db
-            if (connectionString.ToLower().EndsWith(".feap"))
+            if (connectionString.ToLower().EndsWith(".feap", StringComparison.Ordinal))
             {
                 repoType = RepositoryType.FIREBIRD;
             }
@@ -170,10 +170,10 @@ namespace EAAddinFramework.Utils
                         reader.Close();
                     }
                 }
-                if (!connectionString.ToLower().EndsWith(".eap"))
+                if (!connectionString.ToLower().EndsWith(".eap", StringComparison.CurrentCulture))
                 {
                     string dbTypeString = "DBType=";
-                    int dbIndex = connectionString.IndexOf(dbTypeString) + dbTypeString.Length;
+                    int dbIndex = connectionString.IndexOf(dbTypeString, StringComparison.CurrentCulture) + dbTypeString.Length;
                     if (dbIndex > dbTypeString.Length)
                     {
                         int dbNumber;

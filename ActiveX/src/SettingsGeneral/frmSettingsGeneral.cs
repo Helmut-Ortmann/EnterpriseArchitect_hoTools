@@ -7,16 +7,18 @@ namespace hoTools.Settings
     public partial class FrmSettingsGeneral : Form
     {
         AddinSettings _settings;
+        AddinControlGUI _addinControl;
 
         #region Constructor
         /// <summary>
         /// Constructor with
         /// </summary>
         /// <param name="settings">Object with settings</param>
-        public FrmSettingsGeneral(AddinSettings settings)
+        public FrmSettingsGeneral(AddinSettings settings, AddinControlGUI addinControl)
         {
             InitializeComponent();
             _settings = settings;
+            _addinControl = addinControl;
 
 
             #region miscellaneous
@@ -59,12 +61,13 @@ namespace hoTools.Settings
 
             #region SearchAndReplaceWindow
             _settings.SearchAndReplaceWindow = AddinSettings.ShowInWindow.Disabled;
-            if (rbSearchAndReplaceAddinWindow.Checked) _settings.OnlyQueryWindow = AddinSettings.ShowInWindow.AddinWindow;
-            if (rbSearchAndReplaceTabWindow.Checked) _settings.OnlyQueryWindow = AddinSettings.ShowInWindow.TabWindow;
+            if (rbSearchAndReplaceAddinWindow.Checked) _settings.SearchAndReplaceWindow = AddinSettings.ShowInWindow.AddinWindow;
+            if (rbSearchAndReplaceTabWindow.Checked) _settings.SearchAndReplaceWindow = AddinSettings.ShowInWindow.TabWindow;
             #endregion
 
             // save setting
             _settings.save();
+            _addinControl.initializeSettings(); // update settings
             Close();
         }
 

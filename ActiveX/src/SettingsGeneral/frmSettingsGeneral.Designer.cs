@@ -155,7 +155,7 @@
             this.chkVcSupport.Name = "chkVcSupport";
             this.chkVcSupport.Size = new System.Drawing.Size(15, 14);
             this.chkVcSupport.TabIndex = 220;
-            this.toolTip1.SetToolTip(this.chkVcSupport, "Add Version Control supprt");
+            this.toolTip1.SetToolTip(this.chkVcSupport, "Add Version Control support");
             this.chkVcSupport.UseVisualStyleBackColor = true;
             // 
             // label35
@@ -198,9 +198,9 @@
             this.label33.Location = new System.Drawing.Point(29, 205);
             this.label33.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(87, 18);
+            this.label33.Size = new System.Drawing.Size(94, 18);
             this.label33.TabIndex = 216;
-            this.label33.Text = "svn Support";
+            this.label33.Text = "SVN Support";
             // 
             // label41
             // 
@@ -287,7 +287,7 @@
             this.label34.TabIndex = 225;
             this.label34.Text = "Path File Manager / Explorer";
             // 
-            // frmSettingsGeneral
+            // FrmSettingsGeneral
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -311,7 +311,7 @@
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOk);
-            this.Name = "frmSettingsGeneral";
+            this.Name = "FrmSettingsGeneral";
             this.Text = "frmSettingsGeneral";
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();

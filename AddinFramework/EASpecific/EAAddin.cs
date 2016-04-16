@@ -51,7 +51,7 @@ namespace EAAddinFramework.EASpecific
 				bool foundit = false;
 				foreach ( MethodInfo method in candidateClass.GetMethods())
 				{
-					if (method.Name.StartsWith("EA_"))
+					if (method.Name.StartsWith("EA_", StringComparison.CurrentCulture))
 				    {
 				    	foundit = true;
 				    	break;

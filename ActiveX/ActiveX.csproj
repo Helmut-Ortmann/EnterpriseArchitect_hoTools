@@ -129,6 +129,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resource\" />
+    <Folder Include="src\SettingsKey\" />
+    <Folder Include="src\SettingsLineStyle\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AddinFramework\AddinFramework.csproj">

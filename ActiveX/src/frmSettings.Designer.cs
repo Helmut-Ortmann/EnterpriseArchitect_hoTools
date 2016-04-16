@@ -30,8 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSettings));
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtQuickSearch = new System.Windows.Forms.TextBox();
             this.btnOK = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
@@ -138,16 +136,6 @@
             this.label31 = new System.Windows.Forms.Label();
             this.label30 = new System.Windows.Forms.Label();
             this.label32 = new System.Windows.Forms.Label();
-            this.txtFileManagerPath = new System.Windows.Forms.TextBox();
-            this.chkVcSupport = new System.Windows.Forms.CheckBox();
-            this.label41 = new System.Windows.Forms.Label();
-            this.chkAdvancedPort = new System.Windows.Forms.CheckBox();
-            this.chkAdvancedDiagramNote = new System.Windows.Forms.CheckBox();
-            this.label36 = new System.Windows.Forms.Label();
-            this.chkSearchAndReplace = new System.Windows.Forms.CheckBox();
-            this.label38 = new System.Windows.Forms.Label();
-            this.btnSqlFolder = new System.Windows.Forms.Button();
-            this.txtSqlFolder = new System.Windows.Forms.TextBox();
             this.txtBtn1Text = new System.Windows.Forms.TextBox();
             this.txtBtn1SearchName = new System.Windows.Forms.TextBox();
             this.txtBtn1SearchTerm = new System.Windows.Forms.TextBox();
@@ -196,12 +184,6 @@
             this.label27 = new System.Windows.Forms.Label();
             this.label28 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.label29 = new System.Windows.Forms.Label();
-            this.label33 = new System.Windows.Forms.Label();
-            this.chkSvnSupport = new System.Windows.Forms.CheckBox();
-            this.chkAdvancedFeatures = new System.Windows.Forms.CheckBox();
-            this.label34 = new System.Windows.Forms.Label();
-            this.label35 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -209,32 +191,13 @@
             this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(10, 11);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(88, 16);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Quick Search";
-            // 
-            // txtQuickSearch
-            // 
-            this.txtQuickSearch.Location = new System.Drawing.Point(153, 7);
-            this.txtQuickSearch.Margin = new System.Windows.Forms.Padding(2);
-            this.txtQuickSearch.Name = "txtQuickSearch";
-            this.txtQuickSearch.Size = new System.Drawing.Size(153, 20);
-            this.txtQuickSearch.TabIndex = 1;
-            this.toolTip1.SetToolTip(this.txtQuickSearch, "Search Name for searching the value of the entry field after using enter");
-            // 
             // btnOK
             // 
+            this.btnOK.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnOK.Location = new System.Drawing.Point(13, 761);
             this.btnOK.Margin = new System.Windows.Forms.Padding(2);
             this.btnOK.Name = "btnOK";
-            this.btnOK.Size = new System.Drawing.Size(56, 19);
+            this.btnOK.Size = new System.Drawing.Size(72, 27);
             this.btnOK.TabIndex = 2;
             this.btnOK.Text = "OK";
             this.btnOK.UseVisualStyleBackColor = true;
@@ -242,10 +205,11 @@
             // 
             // btnCancel
             // 
+            this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancel.Location = new System.Drawing.Point(104, 761);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(2);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(56, 19);
+            this.btnCancel.Size = new System.Drawing.Size(75, 27);
             this.btnCancel.TabIndex = 3;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -1338,114 +1302,6 @@
             this.label32.TabIndex = 188;
             this.label32.Text = "Hotkeys Searches";
             // 
-            // txtFileManagerPath
-            // 
-            this.txtFileManagerPath.Location = new System.Drawing.Point(153, 29);
-            this.txtFileManagerPath.Margin = new System.Windows.Forms.Padding(2);
-            this.txtFileManagerPath.Name = "txtFileManagerPath";
-            this.txtFileManagerPath.Size = new System.Drawing.Size(153, 20);
-            this.txtFileManagerPath.TabIndex = 201;
-            this.toolTip1.SetToolTip(this.txtFileManagerPath, "Path to a file manager like:\r\n- Explorer.exe\r\n- Totalcmd.exe\r\n\r\nThingk if you hav" +
-        "e to change the %PATH% environment variable");
-            // 
-            // chkVcSupport
-            // 
-            this.chkVcSupport.AutoSize = true;
-            this.chkVcSupport.Location = new System.Drawing.Point(154, 58);
-            this.chkVcSupport.Margin = new System.Windows.Forms.Padding(2);
-            this.chkVcSupport.Name = "chkVcSupport";
-            this.chkVcSupport.Size = new System.Drawing.Size(15, 14);
-            this.chkVcSupport.TabIndex = 203;
-            this.toolTip1.SetToolTip(this.chkVcSupport, "If you have Version Control");
-            this.chkVcSupport.UseVisualStyleBackColor = true;
-            // 
-            // label41
-            // 
-            this.label41.AutoSize = true;
-            this.label41.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label41.Location = new System.Drawing.Point(10, 134);
-            this.label41.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label41.Name = "label41";
-            this.label41.Size = new System.Drawing.Size(145, 16);
-            this.label41.TabIndex = 196;
-            this.label41.Text = "Advanced Port support";
-            this.toolTip1.SetToolTip(this.label41, "Add advanced toolsupport to GUI");
-            // 
-            // chkAdvancedPort
-            // 
-            this.chkAdvancedPort.AutoSize = true;
-            this.chkAdvancedPort.Location = new System.Drawing.Point(153, 136);
-            this.chkAdvancedPort.Margin = new System.Windows.Forms.Padding(2);
-            this.chkAdvancedPort.Name = "chkAdvancedPort";
-            this.chkAdvancedPort.Size = new System.Drawing.Size(15, 14);
-            this.chkAdvancedPort.TabIndex = 199;
-            this.toolTip1.SetToolTip(this.chkAdvancedPort, "Add advanced toolsupport to GUI");
-            this.chkAdvancedPort.UseVisualStyleBackColor = true;
-            // 
-            // chkAdvancedDiagramNote
-            // 
-            this.chkAdvancedDiagramNote.AutoSize = true;
-            this.chkAdvancedDiagramNote.Location = new System.Drawing.Point(153, 158);
-            this.chkAdvancedDiagramNote.Margin = new System.Windows.Forms.Padding(2);
-            this.chkAdvancedDiagramNote.Name = "chkAdvancedDiagramNote";
-            this.chkAdvancedDiagramNote.Size = new System.Drawing.Size(15, 14);
-            this.chkAdvancedDiagramNote.TabIndex = 205;
-            this.toolTip1.SetToolTip(this.chkAdvancedDiagramNote, "Add advanced toolsupport to GUI");
-            this.chkAdvancedDiagramNote.UseVisualStyleBackColor = true;
-            // 
-            // label36
-            // 
-            this.label36.AutoSize = true;
-            this.label36.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label36.Location = new System.Drawing.Point(10, 156);
-            this.label36.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label36.Name = "label36";
-            this.label36.Size = new System.Drawing.Size(140, 16);
-            this.label36.TabIndex = 204;
-            this.label36.Text = "Diagram Note support";
-            this.toolTip1.SetToolTip(this.label36, "Allow add Note to element and Diagram");
-            // 
-            // chkSearchAndReplace
-            // 
-            this.chkSearchAndReplace.AutoSize = true;
-            this.chkSearchAndReplace.Location = new System.Drawing.Point(153, 303);
-            this.chkSearchAndReplace.Margin = new System.Windows.Forms.Padding(2);
-            this.chkSearchAndReplace.Name = "chkSearchAndReplace";
-            this.chkSearchAndReplace.Size = new System.Drawing.Size(15, 14);
-            this.chkSearchAndReplace.TabIndex = 209;
-            this.toolTip1.SetToolTip(this.chkSearchAndReplace, "Scripts & Query lab");
-            this.chkSearchAndReplace.UseVisualStyleBackColor = true;
-            // 
-            // label38
-            // 
-            this.label38.AutoSize = true;
-            this.label38.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label38.Location = new System.Drawing.Point(10, 301);
-            this.label38.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label38.Name = "label38";
-            this.label38.Size = new System.Drawing.Size(137, 16);
-            this.label38.TabIndex = 208;
-            this.label38.Text = "Search & Replace Tab";
-            this.toolTip1.SetToolTip(this.label38, "Show \'Search && Replace\' Tab in EA Addin window");
-            // 
-            // btnSqlFolder
-            // 
-            this.btnSqlFolder.Location = new System.Drawing.Point(15, 225);
-            this.btnSqlFolder.Name = "btnSqlFolder";
-            this.btnSqlFolder.Size = new System.Drawing.Size(54, 23);
-            this.btnSqlFolder.TabIndex = 211;
-            this.btnSqlFolder.Text = "*.sql";
-            this.toolTip1.SetToolTip(this.btnSqlFolder, "Select the *.sql folder for your searches");
-            this.btnSqlFolder.UseVisualStyleBackColor = true;
-            // 
-            // txtSqlFolder
-            // 
-            this.txtSqlFolder.Location = new System.Drawing.Point(84, 227);
-            this.txtSqlFolder.Name = "txtSqlFolder";
-            this.txtSqlFolder.Size = new System.Drawing.Size(222, 20);
-            this.txtSqlFolder.TabIndex = 212;
-            this.toolTip1.SetToolTip(this.txtSqlFolder, "Folder to store *.sql script to use in Search");
-            // 
             // txtBtn1Text
             // 
             this.txtBtn1Text.Location = new System.Drawing.Point(409, 51);
@@ -1919,91 +1775,11 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Services on EA global hotkeys / shortcuts";
             // 
-            // label29
-            // 
-            this.label29.AutoSize = true;
-            this.label29.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label29.Location = new System.Drawing.Point(10, 110);
-            this.label29.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(121, 16);
-            this.label29.TabIndex = 196;
-            this.label29.Text = "Advanced features";
-            // 
-            // label33
-            // 
-            this.label33.AutoSize = true;
-            this.label33.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label33.Location = new System.Drawing.Point(10, 88);
-            this.label33.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(79, 16);
-            this.label33.TabIndex = 197;
-            this.label33.Text = "svn Support";
-            // 
-            // chkSvnSupport
-            // 
-            this.chkSvnSupport.AutoSize = true;
-            this.chkSvnSupport.Location = new System.Drawing.Point(153, 84);
-            this.chkSvnSupport.Margin = new System.Windows.Forms.Padding(2);
-            this.chkSvnSupport.Name = "chkSvnSupport";
-            this.chkSvnSupport.Size = new System.Drawing.Size(15, 14);
-            this.chkSvnSupport.TabIndex = 198;
-            this.chkSvnSupport.UseVisualStyleBackColor = true;
-            // 
-            // chkAdvancedFeatures
-            // 
-            this.chkAdvancedFeatures.AutoSize = true;
-            this.chkAdvancedFeatures.Location = new System.Drawing.Point(153, 106);
-            this.chkAdvancedFeatures.Margin = new System.Windows.Forms.Padding(2);
-            this.chkAdvancedFeatures.Name = "chkAdvancedFeatures";
-            this.chkAdvancedFeatures.Size = new System.Drawing.Size(15, 14);
-            this.chkAdvancedFeatures.TabIndex = 199;
-            this.chkAdvancedFeatures.UseVisualStyleBackColor = true;
-            // 
-            // label34
-            // 
-            this.label34.AutoSize = true;
-            this.label34.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label34.Location = new System.Drawing.Point(10, 33);
-            this.label34.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(160, 16);
-            this.label34.TabIndex = 200;
-            this.label34.Text = "Path FileHistory-Manager";
-            // 
-            // label35
-            // 
-            this.label35.AutoSize = true;
-            this.label35.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label35.Location = new System.Drawing.Point(10, 61);
-            this.label35.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label35.Name = "label35";
-            this.label35.Size = new System.Drawing.Size(76, 16);
-            this.label35.TabIndex = 202;
-            this.label35.Text = "VC Support";
-            // 
             // frmSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1316, 842);
-            this.Controls.Add(this.txtSqlFolder);
-            this.Controls.Add(this.btnSqlFolder);
-            this.Controls.Add(this.chkSearchAndReplace);
-            this.Controls.Add(this.label38);
-            this.Controls.Add(this.chkAdvancedDiagramNote);
-            this.Controls.Add(this.label36);
-            this.Controls.Add(this.chkVcSupport);
-            this.Controls.Add(this.label35);
-            this.Controls.Add(this.txtFileManagerPath);
-            this.Controls.Add(this.label34);
-            this.Controls.Add(this.chkAdvancedPort);
-            this.Controls.Add(this.chkAdvancedFeatures);
-            this.Controls.Add(this.chkSvnSupport);
-            this.Controls.Add(this.label33);
-            this.Controls.Add(this.label41);
-            this.Controls.Add(this.label29);
             this.Controls.Add(this.cmbGlobalKeySearch5Mod4);
             this.Controls.Add(this.cmbGlobalKeySearch5Mod2);
             this.Controls.Add(this.cmbGlobalKeySearch5Mod3);
@@ -2074,8 +1850,6 @@
             this.Controls.Add(this.txtBtn1Text);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOK);
-            this.Controls.Add(this.txtQuickSearch);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox3);
@@ -2098,9 +1872,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtQuickSearch;
         private System.Windows.Forms.Button btnOK;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Label label2;
@@ -2255,21 +2026,5 @@
         private System.Windows.Forms.ComboBox cmbGlobalKeySearch1Mod1;
         private System.Windows.Forms.ComboBox cmbGlobalKeySearch1Key;
         private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.Label label29;
-        private System.Windows.Forms.Label label33;
-        private System.Windows.Forms.CheckBox chkSvnSupport;
-        private System.Windows.Forms.CheckBox chkAdvancedFeatures;
-        private System.Windows.Forms.TextBox txtFileManagerPath;
-        private System.Windows.Forms.Label label34;
-        private System.Windows.Forms.CheckBox chkVcSupport;
-        private System.Windows.Forms.Label label35;
-        private System.Windows.Forms.Label label41;
-        private System.Windows.Forms.CheckBox chkAdvancedPort;
-        private System.Windows.Forms.CheckBox chkAdvancedDiagramNote;
-        private System.Windows.Forms.Label label36;
-        private System.Windows.Forms.CheckBox chkSearchAndReplace;
-        private System.Windows.Forms.Label label38;
-        private System.Windows.Forms.Button btnSqlFolder;
-        private System.Windows.Forms.TextBox txtSqlFolder;
     }
 }

@@ -31,11 +31,11 @@ namespace hoTools.Settings
             _addinControl = addinControl;
 
           
-            #region linestyle
-            // linestyle
-            var items = new string[]{"A Automatic","C Custom","D Direct","B Bezier",
-                "LV Lateral Vertical","LH Lateral Horizental","no","OR Orthogonal Rounded",
-                "OS Orthogonal Square","TH Tree Horizental","TV Tree Vertical"};
+            #region line style
+            // line style
+            var items = new string[]{"A Automatic","C Custom","D Direct","B Bezier curve",
+                "LV Lateral Vertical","LH Lateral Horizontal","no","OR Orthogonal Rounded",
+                "OS Orthogonal Square","TH Tree Horizontal","TV Tree Vertical"};
             string[] itemsActivity = new string[items.Length];
             items.CopyTo(itemsActivity, 0);
 
@@ -144,10 +144,7 @@ namespace hoTools.Settings
             }
             #endregion
 
-            #region sql
-            txtSqlFolder.Text = settings.sqlFolder;
-            #endregion
-
+           
 
             #region set services
             cmbService1.DataSource = _settings.allServices;
@@ -522,9 +519,6 @@ namespace hoTools.Settings
         {
            
 
-            #region sql
-            _settings.sqlFolder = txtSqlFolder.Text;
-            #endregion
 
             #region Line style
             _settings.ActivityLineStyle = this.cboActivityLineStyle.Text;

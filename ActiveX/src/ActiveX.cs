@@ -20,7 +20,6 @@ namespace hoTools.ActiveX
         public const string PROGID = "hoTools.ActiveXGUI";
         public const string TABULATOR = "Script";
 
-        private EA.Repository _repository = null;
 
         /// <summary>
         /// Setting Query and Script
@@ -141,21 +140,41 @@ namespace hoTools.ActiveX
         {
             InitializeComponent();
 
+           
+
         }
         #endregion
        
         public string getText() => txtUserText.Text;
 
+        public override EA.Repository Repository
+        {
+            set
+            {
+                base.Repository = value;
+                // only if there is a repository available
+                if (value.ProjectGUID != "")
+                {
+                    initializeSettings();
+
+
+                }
+            }
+        }
+        /// <summary>
+        /// Initialize Setting. Be sure Repository is loaded!
+        /// </summary>
+        public void initializeSettings()
+        {
+            // initialize GUI
+            parameterizeMenusAndButtons();
+            parameterizeButtonQueries();
+            parameterizeButtonServices();
+        }
+
         #region IActiveX Members
         public string getName() => "hoTools.AddinControl";
 
-
-
-        //public int ShowDialog()
-        //{
-        //    MessageBox.Show("MessageBox text");
-        //    return 0;
-        //}
 
         #endregion
 
@@ -166,70 +185,70 @@ namespace hoTools.ActiveX
         }
         #endregion
         #region User Actions
-        #region Button & Menue
+        #region Button & Menu
         void btnDisplayBehavior_Click(object sender, EventArgs e)
         {
-            EaService.DisplayOperationForSelectedElement(_repository, EaService.displayMode.Behavior);
+            EaService.DisplayOperationForSelectedElement(Repository, EaService.displayMode.Behavior);
         }
         void btnLocateOperation_Click(object sender, EventArgs e)
         {
-            EaService.DisplayOperationForSelectedElement(_repository, EaService.displayMode.Method);
+            EaService.DisplayOperationForSelectedElement(Repository, EaService.displayMode.Method);
         }
 
         void btnAddElementNote_Click(object sender, EventArgs e)
         {
-            EaService.addElementNote(_repository);
+            EaService.addElementNote(Repository);
         }
 
         void btnAddDiagramNote_Click(object sender, EventArgs e)
         {
-            EaService.addDiagramNote(_repository);
+            EaService.addDiagramNote(Repository);
         }
 
         void btnLocateType_Click(object sender, EventArgs e)
         {
-            EaService.locateType(_repository);
+            EaService.locateType(Repository);
         }
 
 
         void btnShowSpecification_Click(object sender, EventArgs e)
         {
-            EaService.showSpecification(_repository);
+            EaService.showSpecification(Repository);
         }
 
 
         void btnFindUsage_Click(object sender, EventArgs e)
         {
-            EaService.findUsage(_repository);
+            EaService.findUsage(Repository);
         }
 
         void btnC_Click(object sender, EventArgs e)
         {
-            EaService.setLineStyle(_repository, "C");
+            EaService.setLineStyle(Repository, "C");
         }
 
 
         void btnD_Click(object sender, EventArgs e)
         {
-            EaService.setLineStyle(_repository, "D");
+            EaService.setLineStyle(Repository, "D");
         }
 
 
 
         void btnA_Click(object sender, EventArgs e)
         {
-            EaService.setLineStyle(_repository, "A");
+            EaService.setLineStyle(Repository, "A");
         }
 
 
         void btnOR_Click(object sender, EventArgs e)
         {
-            EaService.setLineStyle(_repository, "OR");
+            EaService.setLineStyle(Repository, "OR");
         }
 
         private void btnComposite_Click(object sender, EventArgs e)
         {
-            EaService.navigateComposite(_repository);
+            EaService.navigateComposite(Repository);
         }
 
         private void label1_ControlRemoved(object sender, ControlEventArgs e)
@@ -239,22 +258,22 @@ namespace hoTools.ActiveX
 
         private void getAllLatestrecursiveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            EaService.getVcLatestRecursive(_repository);
+            EaService.getVcLatestRecursive(Repository);
         }
 
         private void createActivityForOperationToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            EaService.CreateActivityForOperation(_repository);
+            EaService.CreateActivityForOperation(Repository);
         }
 
         private void showFolderToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            EaService.ShowFolder(_repository, isTotalCommander: false);
+            EaService.ShowFolder(Repository, isTotalCommander: false);
         }
 
         private void copyGUIDSQLToClipboardToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            EaService.copyGuidSqlToClipboard(_repository);
+            EaService.copyGuidSqlToClipboard(Repository);
         }
 
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -265,7 +284,7 @@ namespace hoTools.ActiveX
 
         private void btnUpdateActivityParametzer_Click(object sender, EventArgs e)
         {
-            EaService.UpdateActivityParameter(_repository);
+            EaService.UpdateActivityParameter(Repository);
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
@@ -289,12 +308,12 @@ namespace hoTools.ActiveX
 
         private void changeXMLFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            EaService.setNewXmlPath(_repository);
+            EaService.setNewXmlPath(Repository);
         }
 
         private void btnBezier_Click(object sender, EventArgs e)
         {
-            EaService.setLineStyle(_repository, "B");
+            EaService.setLineStyle(Repository, "B");
         }
 
         private void helpToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -361,7 +380,7 @@ namespace hoTools.ActiveX
                 if (sh.keySearchName == "") return;
                 try
                 {
-                    _repository.RunModelSearch(sh.keySearchName, sh.keySearchTerm, "", "");
+                    Repository.RunModelSearch(sh.keySearchName, sh.keySearchTerm, "", "");
                 }
                 catch (Exception e)
                 {
@@ -377,19 +396,19 @@ namespace hoTools.ActiveX
 
                 var sh = (hoTools.EaServices.ServicesCallConfig)AddinSettings.buttonsServices[pos];
                 if (sh.Method == null) return;
-                sh.Invoke(_repository, txtUserText.Text);
+                sh.Invoke(Repository, txtUserText.Text);
 
             }
         }
 
         private void changeAuthorToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            EaService.changeAuthor(_repository);
+            EaService.changeAuthor(Repository);
         }
 
         private void changeAuthorRecursiveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            EaService.changeUserRecursive(_repository);
+            EaService.changeUserRecursive(Repository);
         }
 
         private void helpToolStripMenuItem_Click(object sender, EventArgs e)
@@ -399,68 +418,68 @@ namespace hoTools.ActiveX
 
         private void showFolderVCorCodeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            EaService.ShowFolder(_repository, isTotalCommander: false);
+            EaService.ShowFolder(Repository, isTotalCommander: false);
         }
 
         private void showTortoiseLogToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            EA.ObjectType oType = _repository.GetContextItemType();
+            EA.ObjectType oType = Repository.GetContextItemType();
             if (!oType.Equals(EA.ObjectType.otPackage)) return;
 
-            var pkg = (EA.Package)_repository.GetContextObject();
-            EaService.gotoSvnLog(_repository, pkg);
+            var pkg = (EA.Package)Repository.GetContextObject();
+            EaService.gotoSvnLog(Repository, pkg);
         }
 
         private void showTortoiseRepoBrowserToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            EA.ObjectType oType = _repository.GetContextItemType();
+            EA.ObjectType oType = Repository.GetContextItemType();
             if (!oType.Equals(EA.ObjectType.otPackage)) return;
 
-            var pkg = (EA.Package)_repository.GetContextObject();
-            EaService.gotoSvnBrowser(_repository, pkg);
+            var pkg = (EA.Package)Repository.GetContextObject();
+            EaService.gotoSvnBrowser(Repository, pkg);
         }
 
         private void getVCLatesrecursiveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            EaService.getVcLatestRecursive(_repository);
+            EaService.getVcLatestRecursive(Repository);
         }
 
         private void setSvnKeywordsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            EA.ObjectType oType = _repository.GetContextItemType();
+            EA.ObjectType oType = Repository.GetContextItemType();
             if (!oType.Equals(EA.ObjectType.otPackage)) return;
 
-            var pkg = (EA.Package)_repository.GetContextObject();
-            EaService.setSvnProperty(_repository, pkg);
+            var pkg = (EA.Package)Repository.GetContextObject();
+            EaService.setSvnProperty(Repository, pkg);
         }
 
         private void setSvnModuleTaggedValuesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            EA.ObjectType oType = _repository.GetContextItemType();
+            EA.ObjectType oType = Repository.GetContextItemType();
             if (!oType.Equals(EA.ObjectType.otPackage)) return;
 
-            var pkg = (EA.Package)_repository.GetContextObject();
-            EaService.setDirectoryTaggedValues(_repository, pkg);
+            var pkg = (EA.Package)Repository.GetContextObject();
+            EaService.setDirectoryTaggedValues(Repository, pkg);
         }
 
         private void setSvnModuleTaggedValuesrecursiveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            EaService.setTaggedValueGui(_repository);
+            EaService.setTaggedValueGui(Repository);
         }
 
         private void btnAddFavorite_Click(object sender, EventArgs e)
         {
-            EaService.AddFavorite(_repository);
+            EaService.AddFavorite(Repository);
         }
 
         private void btnRemoveFavorite_Click(object sender, EventArgs e)
         {
-            EaService.RemoveFavorite(_repository);
+            EaService.RemoveFavorite(Repository);
         }
 
         private void btnFavorites_Click(object sender, EventArgs e)
         {
-            EaService.Favorites(_repository);
+            EaService.Favorites(Repository);
         }
 
         
@@ -469,14 +488,14 @@ namespace hoTools.ActiveX
         /// - Selected Elements
         /// - Selected Ports
         /// 
-        /// Note: Selection isn't restored because selected objects might be deletet
+        /// Note: Selection isn't restored because selected objects might be deleted
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         #region removePortsInDiagramToolStripMenuItem_Click
         private void removePortsInDiagramToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var port = new PortServices(_repository);
+            var port = new PortServices(Repository);
             port.removePortFromDiagramGUI();
            
         }
@@ -485,7 +504,7 @@ namespace hoTools.ActiveX
         #region showPortsInDiagramObjects
         private void showPortsInDiagramObjectsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var port = new PortServices(_repository);
+            var port = new PortServices(Repository);
             port.showPortsInDiagram(false);
 
            
@@ -494,7 +513,7 @@ namespace hoTools.ActiveX
         #region showReceivingPortsLeftSendingPortsRight
         private void showReceivingPortsLeftSendingPortsRightToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var port = new PortServices(_repository);
+            var port = new PortServices(Repository);
             port.showPortsInDiagram(true);
         }
         #endregion
@@ -502,7 +521,7 @@ namespace hoTools.ActiveX
         #region copyPorts
         private void copyPortsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var port = new PortServices(_repository);
+            var port = new PortServices(Repository);
             port.copyPortsGUI();
            
         }
@@ -510,7 +529,7 @@ namespace hoTools.ActiveX
         #region deletePortsWhichAreMarkedForDeletion
         private void deletePortsWhichAreMarkedForDeletionfutureToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var port = new PortServices(_repository);
+            var port = new PortServices(Repository);
             port.deletePortsMarkedPorts();
         }
         #endregion
@@ -520,14 +539,14 @@ namespace hoTools.ActiveX
         /// - Selected Elements
         /// - Selected Ports
         /// 
-        /// Note: Selection isn't restored because selected objects might be deletet
+        /// Note: Selection isn't restored because selected objects might be deleted
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         #region hidePortLabelToolStripMenuItem_Click
         private void hidePortLabelToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var port = new PortServices(_repository);
+            var port = new PortServices(Repository);
             port.changeLabelGUI(PortServices.LabelStyle.IS_HIDDEN);
         }
         #endregion
@@ -535,14 +554,14 @@ namespace hoTools.ActiveX
         #region viewPortLabelToolStripMenuItem_Click
         private void viewPortLabelToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var port = new PortServices(_repository);
+            var port = new PortServices(Repository);
             port.changeLabelGUI(PortServices.LabelStyle.IS_SHOWN);
        }
         #endregion
         #region movePortLableLeftPositionToolStripMenuItem_Click
         private void movePortLableLeftPositionToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var port = new PortServices(_repository);
+            var port = new PortServices(Repository);
             port.changeLabelGUI(PortServices.LabelStyle.POSITION_LEFT);
         }
         #endregion
@@ -550,7 +569,7 @@ namespace hoTools.ActiveX
         #region movePortLableRightPositionToolStripMenuItem_Click
         private void movePortLableRightPositionToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var port = new PortServices(_repository);
+            var port = new PortServices(Repository);
             port.changeLabelGUI(PortServices.LabelStyle.POSITION_RIGHT);
         }
         #endregion
@@ -559,7 +578,7 @@ namespace hoTools.ActiveX
         #region movePortLablePlusPositionToolStripMenuItem_Click
         private void movePortLablePlusPositionToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var port = new PortServices(_repository);
+            var port = new PortServices(Repository);
             port.changeLabelGUI(PortServices.LabelStyle.POSITION_PLUS);
         }
         #endregion
@@ -568,7 +587,7 @@ namespace hoTools.ActiveX
         #region movePortLableMinusPositionToolStripMenuItem_Click
         private void movePortLableMinusPositionToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var port = new PortServices(_repository);
+            var port = new PortServices(Repository);
             port.changeLabelGUI(PortServices.LabelStyle.POSITION_MINUS);
         }
         #endregion
@@ -576,46 +595,46 @@ namespace hoTools.ActiveX
 
         private void connectPortsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var port = new PortServices(_repository);
+            var port = new PortServices(Repository);
             port.connectPortsGUI();
             
         }
 
         private void connectPortsInsideComponentsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var port = new PortServices(_repository);
+            var port = new PortServices(Repository);
             port.connectPortsInsideGUI();
         }
 
         private void deletePortsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var port = new PortServices(_repository);
+            var port = new PortServices(Repository);
             port.deletePortsGUI();
         }
 
         private void btnLeft_Click(object sender, EventArgs e)
         {
-            EaService.moveEmbeddedLeftGUI(_repository);
+            EaService.moveEmbeddedLeftGUI(Repository);
         }
 
         private void btnRight_Click(object sender, EventArgs e)
         {
-            EaService.moveEmbeddedRightGUI(_repository);
+            EaService.moveEmbeddedRightGUI(Repository);
         }
 
         private void btnUp_Click(object sender, EventArgs e)
         {
-            EaService.moveEmbeddedUpGUI(_repository);
+            EaService.moveEmbeddedUpGUI(Repository);
         }
 
         private void btnDown_Click(object sender, EventArgs e)
         {
-            EaService.moveEmbeddedDownGUI(_repository);
+            EaService.moveEmbeddedDownGUI(Repository);
         }
 
         private void makeConnectorsUnspecifiedDirectionToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var port = new PortServices(_repository);
+            var port = new PortServices(Repository);
             port.setConnectionDirectionUnspecifiedGUI();
         }
        
@@ -626,7 +645,7 @@ namespace hoTools.ActiveX
 
 
         //---------------------------------------------------------------------------------------------------------------
-        // linestyle
+        // line style
         // LH = "Line Style: Lateral Horizontal";
         // LV = "Line Style: Lateral Vertical";
         // TH = "Line Style: Tree Horizontal";
@@ -634,26 +653,26 @@ namespace hoTools.ActiveX
         // OS = "Line Style: Orthogonal Square";
         void btnLH_Click(object sender, EventArgs e)
         {
-            EaService.setLineStyle(_repository, "LH");
+            EaService.setLineStyle(Repository, "LH");
         }
         void btnLV_Click(object sender, EventArgs e)
         {
-            EaService.setLineStyle(_repository, "LV");
+            EaService.setLineStyle(Repository, "LV");
         }
         void btnTH_Click(object sender, EventArgs e)
         {
-            EaService.setLineStyle(_repository, "LH");
+            EaService.setLineStyle(Repository, "LH");
         }
         void btnTV_Click(object sender, EventArgs e)
         {
-            EaService.setLineStyle(_repository, "TV");
+            EaService.setLineStyle(Repository, "TV");
         }
         void btnOS_Click(object sender, EventArgs e)
         {
-            EaService.setLineStyle(_repository, "OS");
+            EaService.setLineStyle(Repository, "OS");
         }
         #endregion
-        #region Keydown
+        #region Key down
         public class EnterTextBox : TextBox
         {
             protected override bool IsInputKey(Keys keyData)
@@ -667,12 +686,12 @@ namespace hoTools.ActiveX
         // text field
         // There are special keys like "Enter" which require an enabling by 
         //---------------------------------------------------------
-        // see at:  protected override bool IsInputKey(Keys keyData)
+        // see at:  protected override boolean IsInputKey(Keys keyData)
         void txtUserText_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-                EaService.runQuickSearch(_repository, AddinSettings.quickSearchName, txtUserText.Text);
+                EaService.runQuickSearch(Repository, AddinSettings.quickSearchName, txtUserText.Text);
                 e.Handled = true;
             }
         }
@@ -681,7 +700,7 @@ namespace hoTools.ActiveX
         private void txtUserText_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             txtUserText.Text = Clipboard.GetText();
-            EaService.runQuickSearch(_repository, AddinSettings.quickSearchName, txtUserText.Text);
+            EaService.runQuickSearch(Repository, AddinSettings.quickSearchName, txtUserText.Text);
         }
         #endregion
         #endregion
@@ -1751,7 +1770,7 @@ namespace hoTools.ActiveX
             setSvnModuleTaggedValuesrecursiveToolStripMenuItem.Visible = visibleSvnVC;
             setSvnKeywordsToolStripMenuItem.Visible = visibleSvnVC;
 
-            // Vissible VC
+            // Visible VC
             bool visibleVC = true && AddinSettings.isVcSupport != false;
            
             getVCLatesrecursiveToolStripMenuItem.Visible = visibleVC;
@@ -1882,7 +1901,7 @@ namespace hoTools.ActiveX
 
         private void settingGeneralToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.frmSettingsGeneral = new FrmSettingsGeneral(AddinSettings);
+            this.frmSettingsGeneral = new FrmSettingsGeneral(AddinSettings, this);
             this.frmSettingsGeneral.ShowDialog();
 
         }
