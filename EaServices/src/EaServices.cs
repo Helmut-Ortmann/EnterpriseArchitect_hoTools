@@ -701,10 +701,10 @@ namespace hoTools.EaServices
                 {
                     // If name is of the form: OperationName(..) the the operation is associated to an method
                     string opName = con.Name;
-                    if (opName.EndsWith(")"))
+                    if (opName.EndsWith(")", StringComparison.Ordinal))
                     {
                         // extract the name
-                        int pos = opName.IndexOf("(");
+                        int pos = opName.IndexOf("(", StringComparison.Ordinal);
                         opName = opName.Substring(0, pos);
                         EA.Element el = Repository.GetElementByID(con.SupplierID);
                         // find operation by name
@@ -823,7 +823,7 @@ namespace hoTools.EaServices
         private static void BehaviorForOperation(EA.Repository Repository, EA.Method method)
         {
             string behavior = method.Behavior;
-            if (behavior.StartsWith("{") & behavior.EndsWith("}"))
+            if (behavior.StartsWith("{", StringComparison.Ordinal) & behavior.EndsWith("}", StringComparison.Ordinal))
             {
                 // get object according to behavior
                 EA.Element el = Repository.GetElementByGuid(behavior);
@@ -1375,7 +1375,7 @@ namespace hoTools.EaServices
                 //if (Regex.IsMatch(old, @"#[\s]*(if|elseif|else)", RegexOptions.Singleline)) continue;
                     //s0 = s0.Replace(match.Groups[1].Value, Regex.Replace(old, "\r\n", ""));
                     // check if this is no if(..)
-                    if (match.Value.StartsWith("if")) { }
+                    if (match.Value.StartsWith("if", StringComparison.CurrentCulture)) { }
                     else s0 = s0.Replace(match.Value, Regex.Replace(match.Value, "\r\n", ""));
                 }
                 match = match.NextMatch();
@@ -1391,7 +1391,7 @@ namespace hoTools.EaServices
             string guardString = "";
             if (lines.Length > 0) {
                 string line0 = lines[0].Trim();
-                if (line0.StartsWith("else") |
+                if (line0.StartsWith("else", StringComparison.Ordinal) |
                     Regex.IsMatch(lines[0],"#[ ]*else") )                     
                 {
                     
@@ -1413,7 +1413,7 @@ namespace hoTools.EaServices
                 lineNumber += 1;
                 s1 = s.Trim();
                 // case: of switch case
-                if (isSwitchCase & (s1.StartsWith("case") | s1.StartsWith("default")))
+                if (isSwitchCase & (s1.StartsWith("case", StringComparison.Ordinal) | s1.StartsWith("default", StringComparison.Ordinal)))
                 {   // set the selected element to the switch case
                     int l = dia.SelectedObjects.Count;
                     for (int i = l - 1; i >= 0; i--)
@@ -1460,19 +1460,19 @@ namespace hoTools.EaServices
                 {
                     if (s1.Length > 1)
                     {
-                        if (s1.StartsWith("case") | s1.StartsWith("default"))
+                        if (s1.StartsWith("case", StringComparison.Ordinal) | s1.StartsWith("default", StringComparison.Ordinal))
                         {
-                            if (s1.StartsWith("case")) s1 = s1.Substring(4);
+                            if (s1.StartsWith("case", StringComparison.Ordinal)) s1 = s1.Substring(4);
                             guardString = s1.Replace(":", "").Trim();
                             offsetHorizontal = 300;
                             offsetVertical = offsetVertical - 80; // room for two actions (40 = one action)
                         }
                         else
                         {
-                            if (s1.StartsWith("break;") & isSwitchCase & lineNumber > 0)
+                            if (s1.StartsWith("break;", StringComparison.Ordinal) & isSwitchCase & lineNumber > 0)
                             {
                                 string s2 = lines[lineNumber - 1].Trim();
-                                if (s2.StartsWith("case") | s2.StartsWith("default") )
+                                if (s2.StartsWith("case", StringComparison.Ordinal) | s2.StartsWith("default", StringComparison.Ordinal))
                                     s1 = "nothing to do";
                                 else s1 = "";
                             } 
@@ -1581,7 +1581,7 @@ namespace hoTools.EaServices
                 decisionName = decisionName.Replace(match.Value, "");
                 guardString = "no";
             }
-            if (decisionName.StartsWith("if")) {
+            if (decisionName.StartsWith("if", StringComparison.Ordinal)) {
                 decisionName = decisionName.Substring(2).Trim();
             }
             
@@ -1760,7 +1760,7 @@ namespace hoTools.EaServices
                 case EA.ObjectType.otConnector:
                     var con = (EA.Connector)rep.GetContextObject();
                     trigger_GUID = Util.getTrigger(rep, con.ConnectorGUID);
-                    if (trigger_GUID.StartsWith("{") && trigger_GUID.EndsWith("}"))
+                    if (trigger_GUID.StartsWith("{", StringComparison.Ordinal) && trigger_GUID.EndsWith("}", StringComparison.Ordinal))
                     {
                         EA.Element trigger = rep.GetElementByGuid(trigger_GUID);
 
@@ -1827,7 +1827,7 @@ namespace hoTools.EaServices
                         if (locateTextOrFrame(rep, el)) return;
 
                         string GUID = el.get_MiscData(0);
-                        if (GUID.EndsWith("}"))
+                        if (GUID.EndsWith("}", StringComparison.Ordinal))
                         {
                             el = rep.GetElementByGuid(GUID);
                             rep.ShowInProjectView(el);
@@ -1842,7 +1842,7 @@ namespace hoTools.EaServices
                                     {
                                         // get the trigger
                                         trigger_GUID = Util.getTrigger(rep, el.ElementGUID);
-                                        if (trigger_GUID.StartsWith("{") && trigger_GUID.EndsWith("}"))
+                                        if (trigger_GUID.StartsWith("{", StringComparison.Ordinal) && trigger_GUID.EndsWith("}", StringComparison.Ordinal))
                                         {
                                             EA.Element trigger = rep.GetElementByGuid(trigger_GUID);
                                             rep.ShowInProjectView(trigger);
@@ -1857,7 +1857,7 @@ namespace hoTools.EaServices
                             {
                                 // get the signal
                                 string signal_GUID = Util.getSignal(rep, el.ElementGUID);
-                                if (signal_GUID.StartsWith("RefGUID={"))
+                                if (signal_GUID.StartsWith("RefGUID={", StringComparison.Ordinal))
                                 {
                                     EA.Element signal = rep.GetElementByGuid(signal_GUID.Substring(8, 38));
                                     rep.ShowInProjectView(signal);
@@ -1963,7 +1963,7 @@ namespace hoTools.EaServices
                 el = (EA.Element)rep.GetContextObject();
                 string PDATA1 = el.get_MiscData(0);
                 string PDATA1string = "";
-                if (PDATA1.EndsWith("}"))
+                if (PDATA1.EndsWith("}", StringComparison.Ordinal))
                 {
                     PDATA1string = "/" + PDATA1;
                 }
@@ -2207,7 +2207,7 @@ namespace hoTools.EaServices
                 txt = l_txt[i].Trim();
                 if (!txt.Equals(""))
                 {
-                    if (! txt.EndsWith(")")) txt = txt + ")";
+                    if (!txt.EndsWith(")", StringComparison.Ordinal)) txt = txt + ")";
                     
                     createOperationFromText(rep, el, txt);
 
@@ -2284,7 +2284,7 @@ namespace hoTools.EaServices
                 typeClassifier = Util.getTypeFromName(rep, ref functionName, ref functionType);
                 if (typeClassifier == 0 & functionType.Contains("*"))
                 {
-                    functionType = functionType.Remove(functionName.IndexOf("*"), 1);
+                    functionType = functionType.Remove(functionName.IndexOf("*", StringComparison.Ordinal), 1);
                     functionName = "*" + functionName;
                     typeClassifier = Util.getTypeID(rep, functionType);
                     if (typeClassifier == 0 & functionType.Contains("*"))
@@ -2345,14 +2345,14 @@ namespace hoTools.EaServices
                     par = par.Replace("const", "");
                 }
                 pointer = "";
-                if (par.IndexOf("*") > -1)
+                if (par.IndexOf("*", StringComparison.Ordinal) > -1)
                 {
                     pointer = "*";
-                    par = par.Remove(par.IndexOf("*"),1);
-                    if (par.IndexOf("*") > -1)
+                    par = par.Remove(par.IndexOf("*", StringComparison.Ordinal), 1);
+                    if (par.IndexOf("*", StringComparison.Ordinal) > -1)
                     {
                         pointer = "**";
-                        par = par.Remove(par.IndexOf("*"),1);
+                        par = par.Remove(par.IndexOf("*", StringComparison.Ordinal), 1);
                     }
                 }
                 par = Regex.Replace(par.Trim(),@"[\s]+", " ");
@@ -2626,7 +2626,7 @@ namespace hoTools.EaServices
                 string pointerValue = "";
                 int pos;
                 // remove everything behind ";"
-                pos = sRaw.IndexOf(";");
+                pos = sRaw.IndexOf(";", StringComparison.Ordinal);
                 if (pos >=0 & pos >= sRaw.Length) sRaw = sRaw.Substring(pos+1);
 
 
@@ -2688,13 +2688,13 @@ namespace hoTools.EaServices
                     continue;
                 }
                 
-                pos = sRaw.IndexOf("*");
+                pos = sRaw.IndexOf("*", StringComparison.Ordinal);
                 if (pos > -1)
                 {
                     sRaw = sRaw.Remove(pos, 1);
                     pointerValue = "*";
                 }
-                pos = sRaw.IndexOf("*");
+                pos = sRaw.IndexOf("*", StringComparison.Ordinal);
                 if (pos > -1)
                 {
                     sRaw = sRaw.Remove(pos, 1);
@@ -2721,7 +2721,7 @@ namespace hoTools.EaServices
                     defaultValue = match.Groups[1].Value.Trim();
                     sCompact = sCompact.Remove(match.Groups[1].Index, match.Groups[1].Length); 
                     sCompact = sCompact.Replace("=", "");
-                    if (!sCompact.EndsWith(";")) sCompact = sCompact + ";";
+                    if (!sCompact.EndsWith(";", StringComparison.Ordinal)) sCompact = sCompact + ";";
                 }
                 
 
@@ -2733,7 +2733,7 @@ namespace hoTools.EaServices
                 {
                     collectionValue = match.Groups[1].Value.Trim();
                     sCompact = sCompact.Remove(match.Groups[1].Index, match.Groups[1].Length); 
-                    if (!sCompact.EndsWith(";")) sCompact = sCompact + ";";
+                    if (!sCompact.EndsWith(";", StringComparison.Ordinal)) sCompact = sCompact + ";";
                 }
 
                 
@@ -3059,16 +3059,16 @@ namespace hoTools.EaServices
                 // get the type
                 // find type from type_name
                 classifierID = Util.getTypeID(rep, parType);
-                // type not definded
+                // type not defined
                 if (classifierID == 0)
                 {
-                    if (parType.EndsWith("*"))
+                    if (parType.EndsWith("*", StringComparison.Ordinal))
                     {
                         parType = parType.Substring(0, parType.Length - 1);
                         parName = "*" + parName;
 
                     }
-                    if (parType.EndsWith("*"))
+                    if (parType.EndsWith("*", StringComparison.Ordinal))
                     {
                         parType = parType.Substring(0, parType.Length - 1);
                         parName = "*" + parName;
@@ -3113,7 +3113,7 @@ namespace hoTools.EaServices
                     string rootPath = Util.getVccRootPath(rep, pkg);
                     // delete root path and an preceding '\'
                     string shortPath = path.Replace(rootPath, "");
-                    if (shortPath.StartsWith(@"\")) shortPath = shortPath.Substring(1);
+                    if (shortPath.StartsWith(@"\", StringComparison.Ordinal)) shortPath = shortPath.Substring(1);
                     
                     // write to repository
                     Util.setXmlPath(rep, guid, shortPath);
@@ -3981,7 +3981,7 @@ namespace hoTools.EaServices
             {
                 elTarget = rep.GetElementByID(obj.ElementID);
                 if (! ("Class Interface".Contains(elTarget.Type))) continue;
-                if (!(elTarget.Name.EndsWith("_i")))
+                if (!(elTarget.Name.EndsWith("_i", StringComparison.Ordinal)))
                 {
                     addPortToComponent(pos, elSource, elTarget, dia, diaObjSource);
                     pos = pos + 1;
@@ -3991,7 +3991,7 @@ namespace hoTools.EaServices
                     List<EA.Element> l_el =  getIncludedHeaderFiles(rep, elTarget);
                     foreach ( EA.Element el in l_el) {
                         if (el == null) continue; 
-                        if (!(el.Name.EndsWith("_i")))
+                        if (!(el.Name.EndsWith("_i", StringComparison.Ordinal)))
                         {
                             addPortToComponent(pos, elSource, el, dia, diaObjSource);
                             pos = pos + 1;

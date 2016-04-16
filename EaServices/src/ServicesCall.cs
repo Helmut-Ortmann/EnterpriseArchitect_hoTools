@@ -43,7 +43,7 @@ namespace hoTools.EaServices
             if (x == null && y == null) return 0;
             if (x == null) return 1;
             if (y == null) return -1;
-            return x.Description.CompareTo(y.Description);
+            return string.Compare(x.Description, y.Description, StringComparison.Ordinal);
         } 
     }
     /// <summary>
@@ -58,7 +58,7 @@ namespace hoTools.EaServices
             if (x == null && y == null) return 0;
             if (x == null) return 1;
             if (y == null) return -1;
-            return x.GUID.CompareTo(y.GUID);
+            return string.Compare(x.GUID, y.GUID, StringComparison.Ordinal);
         }
     }
     /// <summary>

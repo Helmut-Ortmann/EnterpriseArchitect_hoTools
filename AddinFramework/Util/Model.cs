@@ -152,7 +152,7 @@ namespace EAAddinFramework.Utils
             else
             {
                 //if it is a .eap file we check the size of it. if less then 1 MB then it is a shortcut file and we have to open it as a text file to find the actual connection string
-                if (connectionString.ToLower().EndsWith(".eap"))
+                if (connectionString.ToLower().EndsWith(".eap", StringComparison.CurrentCulture))
                 {
                     var fileInfo = new System.IO.FileInfo(connectionString);
                     if (fileInfo.Length > 1000)
@@ -503,11 +503,11 @@ namespace EAAddinFramework.Utils
         {
             string formattedQuery = sqlQuery;
             string selectTop = "select top ";
-            int begintop = sqlQuery.ToLower().IndexOf(selectTop);
+            int begintop = sqlQuery.ToLower().IndexOf(selectTop, StringComparison.CurrentCulture);
             if (begintop >= 0)
             {
                 int beginN = begintop + selectTop.Length;
-                int endN = sqlQuery.ToLower().IndexOf(" ", beginN) + 1;
+                int endN = sqlQuery.ToLower().IndexOf(" ", beginN, StringComparison.Ordinal) + 1;
                 if (endN > beginN)
                 {
                     string N = sqlQuery.ToLower().Substring(beginN, endN - beginN);
@@ -519,7 +519,7 @@ namespace EAAddinFramework.Utils
                             formattedQuery = formattedQuery.Replace(selectTopN, "select ");
                             // find where clause
                             string whereString = "where ";
-                            int beginWhere = formattedQuery.ToLower().IndexOf(whereString);
+                            int beginWhere = formattedQuery.ToLower().IndexOf(whereString, StringComparison.CurrentCulture);
                             string rowcountCondition = "rownum <= " + N + " and ";
                             // add the rowcount condition
                             formattedQuery = formattedQuery.Insert(beginWhere + whereString.Length, rowcountCondition);
@@ -555,7 +555,7 @@ namespace EAAddinFramework.Utils
                 int beginString = sqlQuery.IndexOf("'", beginLike + "like".Length, StringComparison.CurrentCulture);
                 if (beginString > 0)
                 {
-                    int endString = sqlQuery.IndexOf("'", beginString + 1);
+                    int endString = sqlQuery.IndexOf("'", beginString + 1, StringComparison.CurrentCulture);
                     if (endString > beginString)
                     {
                         string originalLikeString = sqlQuery.Substring(beginString + 1, endString - beginString);
