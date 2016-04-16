@@ -83,18 +83,24 @@
     <Compile Include="src\dlgUser.Designer.cs">
       <DependentUpon>dlgUser.cs</DependentUpon>
     </Compile>
-    <Compile Include="src\FrmQueryAndScript.cs">
+    <Compile Include="src\SettingsGeneral\FrmQueryAndScript.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="src\FrmQueryAndScript.Designer.cs">
+    <Compile Include="src\SettingsGeneral\FrmQueryAndScript.Designer.cs">
       <DependentUpon>FrmQueryAndScript.cs</DependentUpon>
     </Compile>
     <Compile Include="src\HistoryFile.cs" />
-    <Compile Include="src\frmSettings.cs">
+    <Compile Include="src\SettingsKey\FrmSettingsKey.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="src\frmSettings.Designer.cs">
-      <DependentUpon>frmSettings.cs</DependentUpon>
+    <Compile Include="src\SettingsKey\FrmSettingsKey.Designer.cs">
+      <DependentUpon>FrmSettingsKey.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\SettingsLineStyle\frmSettingsLineStyle.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="src\SettingsLineStyle\frmSettingsLineStyle.Designer.cs">
+      <DependentUpon>frmSettingsLineStyle.cs</DependentUpon>
     </Compile>
     <Compile Include="src\Keys.cs" />
     <Compile Include="src\Settings.cs" />
@@ -117,11 +123,14 @@
     <EmbeddedResource Include="src\dlgUser.resx">
       <DependentUpon>dlgUser.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="src\FrmQueryAndScript.resx">
+    <EmbeddedResource Include="src\SettingsGeneral\FrmQueryAndScript.resx">
       <DependentUpon>FrmQueryAndScript.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="src\frmSettings.resx">
-      <DependentUpon>frmSettings.cs</DependentUpon>
+    <EmbeddedResource Include="src\SettingsKey\FrmSettingsKey.resx">
+      <DependentUpon>FrmSettingsKey.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\SettingsLineStyle\frmSettingsLineStyle.resx">
+      <DependentUpon>frmSettingsLineStyle.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="src\SettingsGeneral\frmSettingsGeneral.resx">
       <DependentUpon>frmSettingsGeneral.cs</DependentUpon>
@@ -129,8 +138,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resource\" />
-    <Folder Include="src\SettingsKey\" />
-    <Folder Include="src\SettingsLineStyle\" />
+    <Folder Include="src\SettingsQuery\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AddinFramework\AddinFramework.csproj">

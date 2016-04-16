@@ -34,7 +34,7 @@ namespace hoTools.ActiveX
         /// <summary>
         /// Settings
         /// </summary>
-        frmSettings frmSettings;
+        frmSettingsKey frmSettings;
 
         #region Generated
 
@@ -278,7 +278,7 @@ namespace hoTools.ActiveX
 
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.frmSettings = new frmSettings(AddinSettings, this);
+            this.frmSettings = new frmSettingsKey(AddinSettings, this);
             this.frmSettings.ShowDialog();
         }
 
