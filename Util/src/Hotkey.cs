@@ -31,8 +31,10 @@ namespace GlobalHotkeys
         /// </summary>
         public void Register(IWin32Window window)
         {
-            if (window == null) 
+            if (window == null)
+                #pragma warning disable RECS0143 // Cannot resolve symbol in text argument
                 throw new ArgumentNullException("window ", "You must provide a form or window to register the hotkey against.");
+                #pragma warning restore RECS0143 // Cannot resolve symbol in text argument
             if (!RegisterHotKey(window.Handle, Id, (int)Modifiers, (int)Key))
                 throw new GlobalHotkeyException("Hotkey " + Modifiers + " + " + (char)Key + " failed to register.");
             _registered = true;

@@ -30,14 +30,14 @@ namespace hoTools.EaServices.Dlg
                 _isSecurityEnabled = true;
 
                 // check if user has the rights to manage users
-                if (_sql.userHasPermission(rep.GetCurrentLoginUser(true), 1))
+                if (_sql.userHasPermission(rep.GetCurrentLoginUser(true)))
                 {
                     users = _sql.getUsers();
-                    txtStatus.Text = "Security is enababled: Choose user";
+                    txtStatus.Text = "Security is enabled: Choose user";
                 }
                 else
                 {
-                    txtStatus.Text = "Security is enababled: Only person with 'Manage User' are allowed to change users!";
+                    txtStatus.Text = "Security is enabled: Only person with 'Manage User' are allowed to change users!";
 
                     MessageBox.Show("User has no 'Manage Users' right", "Insufficient user rights");
                     btnOk.Enabled = false;
@@ -47,7 +47,7 @@ namespace hoTools.EaServices.Dlg
             else
             {
                 users = _sql.getUsers();
-                txtStatus.Text = "Security isn't enababled: Choose or enter your desired author name!";
+                txtStatus.Text = "Security isn't enabled: Choose or enter your desired author name!";
             }
             
             

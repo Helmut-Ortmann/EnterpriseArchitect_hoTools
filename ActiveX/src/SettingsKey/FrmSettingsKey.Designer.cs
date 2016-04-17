@@ -32,25 +32,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmSettingsKey));
             this.btnOK = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.cboStatechartLineStyle = new System.Windows.Forms.ComboBox();
-            this.cboClassLineStyle = new System.Windows.Forms.ComboBox();
-            this.cboPackageLineStyle = new System.Windows.Forms.ComboBox();
-            this.cboUseCaseLineStyle = new System.Windows.Forms.ComboBox();
-            this.cboDeploymentLineStyle = new System.Windows.Forms.ComboBox();
-            this.cboCustomLineStyle = new System.Windows.Forms.ComboBox();
-            this.cboCompositeStructureLineStyle = new System.Windows.Forms.ComboBox();
-            this.cboComponentLineStyle = new System.Windows.Forms.ComboBox();
-            this.cboActivityLineStyle = new System.Windows.Forms.ComboBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.cmbService1 = new System.Windows.Forms.ComboBox();
             this.txtButton5TextService = new System.Windows.Forms.TextBox();
@@ -184,7 +165,7 @@
             this.label27 = new System.Windows.Forms.Label();
             this.label28 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.groupBox1.SuspendLayout();
+            this.label1 = new System.Windows.Forms.Label();
             this.groupBox5.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -194,7 +175,7 @@
             // btnOK
             // 
             this.btnOK.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnOK.Location = new System.Drawing.Point(13, 761);
+            this.btnOK.Location = new System.Drawing.Point(11, 786);
             this.btnOK.Margin = new System.Windows.Forms.Padding(2);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(72, 27);
@@ -206,7 +187,7 @@
             // btnCancel
             // 
             this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancel.Location = new System.Drawing.Point(104, 761);
+            this.btnCancel.Location = new System.Drawing.Point(97, 786);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(2);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 27);
@@ -215,325 +196,111 @@
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(13, 49);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(50, 16);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "Activity";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(13, 253);
-            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(68, 16);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "Statechart";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(13, 20);
-            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(96, 16);
-            this.label4.TabIndex = 6;
-            this.label4.Text = "Class / Logical";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(13, 77);
-            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(77, 16);
-            this.label5.TabIndex = 7;
-            this.label5.Text = "Component";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(13, 162);
-            this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(81, 16);
-            this.label6.TabIndex = 8;
-            this.label6.Text = "Deployment";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(13, 223);
-            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(63, 16);
-            this.label7.TabIndex = 9;
-            this.label7.Text = "Package";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(13, 191);
-            this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(68, 16);
-            this.label8.TabIndex = 10;
-            this.label8.Text = "Use Case";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(13, 134);
-            this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(53, 16);
-            this.label9.TabIndex = 11;
-            this.label9.Text = "Custom";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(13, 106);
-            this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(128, 16);
-            this.label10.TabIndex = 12;
-            this.label10.Text = "Composite Structure";
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.label10);
-            this.groupBox1.Controls.Add(this.cboStatechartLineStyle);
-            this.groupBox1.Controls.Add(this.cboClassLineStyle);
-            this.groupBox1.Controls.Add(this.label9);
-            this.groupBox1.Controls.Add(this.cboPackageLineStyle);
-            this.groupBox1.Controls.Add(this.label6);
-            this.groupBox1.Controls.Add(this.label8);
-            this.groupBox1.Controls.Add(this.cboUseCaseLineStyle);
-            this.groupBox1.Controls.Add(this.label7);
-            this.groupBox1.Controls.Add(this.cboDeploymentLineStyle);
-            this.groupBox1.Controls.Add(this.cboCustomLineStyle);
-            this.groupBox1.Controls.Add(this.cboCompositeStructureLineStyle);
-            this.groupBox1.Controls.Add(this.cboComponentLineStyle);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.cboActivityLineStyle);
-            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(9, 407);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Size = new System.Drawing.Size(312, 287);
-            this.groupBox1.TabIndex = 13;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Default line styles Diagram:";
-            // 
-            // cboStatechartLineStyle
-            // 
-            this.cboStatechartLineStyle.FormattingEnabled = true;
-            this.cboStatechartLineStyle.Location = new System.Drawing.Point(144, 251);
-            this.cboStatechartLineStyle.Margin = new System.Windows.Forms.Padding(2);
-            this.cboStatechartLineStyle.Name = "cboStatechartLineStyle";
-            this.cboStatechartLineStyle.Size = new System.Drawing.Size(153, 26);
-            this.cboStatechartLineStyle.TabIndex = 8;
-            this.toolTip1.SetToolTip(this.cboStatechartLineStyle, "Set Default line style for Activity Diagram");
-            // 
-            // cboClassLineStyle
-            // 
-            this.cboClassLineStyle.FormattingEnabled = true;
-            this.cboClassLineStyle.Location = new System.Drawing.Point(144, 18);
-            this.cboClassLineStyle.Margin = new System.Windows.Forms.Padding(2);
-            this.cboClassLineStyle.Name = "cboClassLineStyle";
-            this.cboClassLineStyle.Size = new System.Drawing.Size(153, 26);
-            this.cboClassLineStyle.TabIndex = 1;
-            this.toolTip1.SetToolTip(this.cboClassLineStyle, "Set Default line style for Activity Diagram");
-            // 
-            // cboPackageLineStyle
-            // 
-            this.cboPackageLineStyle.FormattingEnabled = true;
-            this.cboPackageLineStyle.Location = new System.Drawing.Point(144, 221);
-            this.cboPackageLineStyle.Margin = new System.Windows.Forms.Padding(2);
-            this.cboPackageLineStyle.Name = "cboPackageLineStyle";
-            this.cboPackageLineStyle.Size = new System.Drawing.Size(153, 26);
-            this.cboPackageLineStyle.TabIndex = 7;
-            this.toolTip1.SetToolTip(this.cboPackageLineStyle, "Set Default line style for Activity Diagram");
-            // 
-            // cboUseCaseLineStyle
-            // 
-            this.cboUseCaseLineStyle.FormattingEnabled = true;
-            this.cboUseCaseLineStyle.Location = new System.Drawing.Point(144, 189);
-            this.cboUseCaseLineStyle.Margin = new System.Windows.Forms.Padding(2);
-            this.cboUseCaseLineStyle.Name = "cboUseCaseLineStyle";
-            this.cboUseCaseLineStyle.Size = new System.Drawing.Size(153, 26);
-            this.cboUseCaseLineStyle.TabIndex = 6;
-            this.toolTip1.SetToolTip(this.cboUseCaseLineStyle, "Set Default line style for Activity Diagram");
-            // 
-            // cboDeploymentLineStyle
-            // 
-            this.cboDeploymentLineStyle.FormattingEnabled = true;
-            this.cboDeploymentLineStyle.Location = new System.Drawing.Point(144, 160);
-            this.cboDeploymentLineStyle.Margin = new System.Windows.Forms.Padding(2);
-            this.cboDeploymentLineStyle.Name = "cboDeploymentLineStyle";
-            this.cboDeploymentLineStyle.Size = new System.Drawing.Size(153, 26);
-            this.cboDeploymentLineStyle.TabIndex = 5;
-            this.toolTip1.SetToolTip(this.cboDeploymentLineStyle, "Set Default line style for Activity Diagram");
-            // 
-            // cboCustomLineStyle
-            // 
-            this.cboCustomLineStyle.FormattingEnabled = true;
-            this.cboCustomLineStyle.Location = new System.Drawing.Point(144, 132);
-            this.cboCustomLineStyle.Margin = new System.Windows.Forms.Padding(2);
-            this.cboCustomLineStyle.Name = "cboCustomLineStyle";
-            this.cboCustomLineStyle.Size = new System.Drawing.Size(153, 26);
-            this.cboCustomLineStyle.TabIndex = 4;
-            this.toolTip1.SetToolTip(this.cboCustomLineStyle, "Set Default line style for Activity Diagram");
-            // 
-            // cboCompositeStructureLineStyle
-            // 
-            this.cboCompositeStructureLineStyle.FormattingEnabled = true;
-            this.cboCompositeStructureLineStyle.Location = new System.Drawing.Point(144, 104);
-            this.cboCompositeStructureLineStyle.Margin = new System.Windows.Forms.Padding(2);
-            this.cboCompositeStructureLineStyle.Name = "cboCompositeStructureLineStyle";
-            this.cboCompositeStructureLineStyle.Size = new System.Drawing.Size(153, 26);
-            this.cboCompositeStructureLineStyle.TabIndex = 3;
-            this.toolTip1.SetToolTip(this.cboCompositeStructureLineStyle, "Set Default line style for Activity Diagram");
-            // 
-            // cboComponentLineStyle
-            // 
-            this.cboComponentLineStyle.FormattingEnabled = true;
-            this.cboComponentLineStyle.Location = new System.Drawing.Point(144, 75);
-            this.cboComponentLineStyle.Margin = new System.Windows.Forms.Padding(2);
-            this.cboComponentLineStyle.Name = "cboComponentLineStyle";
-            this.cboComponentLineStyle.Size = new System.Drawing.Size(153, 26);
-            this.cboComponentLineStyle.TabIndex = 2;
-            this.toolTip1.SetToolTip(this.cboComponentLineStyle, "Set Default line style for Activity Diagram");
-            // 
-            // cboActivityLineStyle
-            // 
-            this.cboActivityLineStyle.FormattingEnabled = true;
-            this.cboActivityLineStyle.Location = new System.Drawing.Point(144, 47);
-            this.cboActivityLineStyle.Margin = new System.Windows.Forms.Padding(2);
-            this.cboActivityLineStyle.Name = "cboActivityLineStyle";
-            this.cboActivityLineStyle.Size = new System.Drawing.Size(153, 26);
-            this.cboActivityLineStyle.TabIndex = 0;
-            this.toolTip1.SetToolTip(this.cboActivityLineStyle, "Set Default line style for Activity Diagram");
-            // 
             // cmbService1
             // 
-            this.cmbService1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbService1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbService1.FormattingEnabled = true;
-            this.cmbService1.ItemHeight = 15;
+            this.cmbService1.ItemHeight = 18;
             this.cmbService1.Location = new System.Drawing.Point(327, 46);
             this.cmbService1.Name = "cmbService1";
-            this.cmbService1.Size = new System.Drawing.Size(317, 23);
+            this.cmbService1.Size = new System.Drawing.Size(317, 26);
             this.cmbService1.TabIndex = 42;
             this.toolTip1.SetToolTip(this.cmbService1, "Choose your service Function");
             // 
             // txtButton5TextService
             // 
-            this.txtButton5TextService.Location = new System.Drawing.Point(406, 336);
+            this.txtButton5TextService.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtButton5TextService.Location = new System.Drawing.Point(79, 147);
             this.txtButton5TextService.Margin = new System.Windows.Forms.Padding(2);
             this.txtButton5TextService.Name = "txtButton5TextService";
-            this.txtButton5TextService.Size = new System.Drawing.Size(76, 20);
+            this.txtButton5TextService.Size = new System.Drawing.Size(179, 24);
             this.txtButton5TextService.TabIndex = 51;
             this.toolTip1.SetToolTip(this.txtButton5TextService, "Visualized text on button");
             // 
             // txtButton4TextService
             // 
-            this.txtButton4TextService.Location = new System.Drawing.Point(406, 315);
+            this.txtButton4TextService.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtButton4TextService.Location = new System.Drawing.Point(91, 342);
             this.txtButton4TextService.Margin = new System.Windows.Forms.Padding(2);
             this.txtButton4TextService.Name = "txtButton4TextService";
-            this.txtButton4TextService.Size = new System.Drawing.Size(76, 20);
+            this.txtButton4TextService.Size = new System.Drawing.Size(179, 24);
             this.txtButton4TextService.TabIndex = 50;
             this.toolTip1.SetToolTip(this.txtButton4TextService, "Visualized text on button");
             // 
             // txtButton3TextService
             // 
-            this.txtButton3TextService.Location = new System.Drawing.Point(406, 291);
+            this.txtButton3TextService.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtButton3TextService.Location = new System.Drawing.Point(91, 318);
             this.txtButton3TextService.Margin = new System.Windows.Forms.Padding(2);
             this.txtButton3TextService.Name = "txtButton3TextService";
-            this.txtButton3TextService.Size = new System.Drawing.Size(76, 20);
+            this.txtButton3TextService.Size = new System.Drawing.Size(179, 24);
             this.txtButton3TextService.TabIndex = 49;
             this.toolTip1.SetToolTip(this.txtButton3TextService, "Visualized text on button");
             // 
             // txtButton2TextService
             // 
-            this.txtButton2TextService.Location = new System.Drawing.Point(406, 264);
+            this.txtButton2TextService.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtButton2TextService.Location = new System.Drawing.Point(91, 291);
             this.txtButton2TextService.Margin = new System.Windows.Forms.Padding(2);
             this.txtButton2TextService.Name = "txtButton2TextService";
-            this.txtButton2TextService.Size = new System.Drawing.Size(76, 20);
+            this.txtButton2TextService.Size = new System.Drawing.Size(179, 24);
             this.txtButton2TextService.TabIndex = 48;
             this.toolTip1.SetToolTip(this.txtButton2TextService, "Visualized text on button");
             // 
             // txtButton1TextService
             // 
-            this.txtButton1TextService.Location = new System.Drawing.Point(406, 240);
+            this.txtButton1TextService.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtButton1TextService.Location = new System.Drawing.Point(91, 267);
             this.txtButton1TextService.Margin = new System.Windows.Forms.Padding(2);
             this.txtButton1TextService.Name = "txtButton1TextService";
-            this.txtButton1TextService.Size = new System.Drawing.Size(76, 20);
+            this.txtButton1TextService.Size = new System.Drawing.Size(179, 24);
             this.txtButton1TextService.TabIndex = 47;
             this.toolTip1.SetToolTip(this.txtButton1TextService, "Visualized text on button");
             // 
             // cmbService5
             // 
-            this.cmbService5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbService5.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbService5.FormattingEnabled = true;
-            this.cmbService5.Location = new System.Drawing.Point(327, 144);
+            this.cmbService5.Location = new System.Drawing.Point(327, 149);
             this.cmbService5.Name = "cmbService5";
-            this.cmbService5.Size = new System.Drawing.Size(317, 23);
+            this.cmbService5.Size = new System.Drawing.Size(317, 26);
             this.cmbService5.TabIndex = 46;
             this.toolTip1.SetToolTip(this.cmbService5, "Choose your service Function");
             // 
             // cmbService4
             // 
-            this.cmbService4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbService4.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbService4.FormattingEnabled = true;
             this.cmbService4.Location = new System.Drawing.Point(327, 121);
             this.cmbService4.Name = "cmbService4";
-            this.cmbService4.Size = new System.Drawing.Size(317, 23);
+            this.cmbService4.Size = new System.Drawing.Size(317, 26);
             this.cmbService4.TabIndex = 45;
             this.toolTip1.SetToolTip(this.cmbService4, "Choose your service Function");
             // 
             // cmbService3
             // 
-            this.cmbService3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbService3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbService3.FormattingEnabled = true;
             this.cmbService3.Location = new System.Drawing.Point(327, 98);
             this.cmbService3.Name = "cmbService3";
-            this.cmbService3.Size = new System.Drawing.Size(317, 23);
+            this.cmbService3.Size = new System.Drawing.Size(317, 26);
             this.cmbService3.TabIndex = 44;
             this.toolTip1.SetToolTip(this.cmbService3, "Choose your service Function");
             // 
             // cmbService2
             // 
-            this.cmbService2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbService2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbService2.FormattingEnabled = true;
             this.cmbService2.Location = new System.Drawing.Point(327, 72);
             this.cmbService2.Name = "cmbService2";
-            this.cmbService2.Size = new System.Drawing.Size(317, 23);
+            this.cmbService2.Size = new System.Drawing.Size(317, 26);
             this.cmbService2.TabIndex = 43;
             this.toolTip1.SetToolTip(this.cmbService2, "Choose your service Function");
             // 
             // cmbGlobalKeyService5Mod4
             // 
             this.cmbGlobalKeyService5Mod4.FormattingEnabled = true;
-            this.cmbGlobalKeyService5Mod4.Location = new System.Drawing.Point(591, 532);
+            this.cmbGlobalKeyService5Mod4.Location = new System.Drawing.Point(276, 559);
             this.cmbGlobalKeyService5Mod4.Name = "cmbGlobalKeyService5Mod4";
             this.cmbGlobalKeyService5Mod4.Size = new System.Drawing.Size(44, 21);
             this.cmbGlobalKeyService5Mod4.TabIndex = 148;
@@ -544,7 +311,7 @@
             // cmbGlobalKeyService5Mod2
             // 
             this.cmbGlobalKeyService5Mod2.FormattingEnabled = true;
-            this.cmbGlobalKeyService5Mod2.Location = new System.Drawing.Point(491, 532);
+            this.cmbGlobalKeyService5Mod2.Location = new System.Drawing.Point(176, 559);
             this.cmbGlobalKeyService5Mod2.Name = "cmbGlobalKeyService5Mod2";
             this.cmbGlobalKeyService5Mod2.Size = new System.Drawing.Size(44, 21);
             this.cmbGlobalKeyService5Mod2.TabIndex = 147;
@@ -555,7 +322,7 @@
             // cmbGlobalKeyService5Mod3
             // 
             this.cmbGlobalKeyService5Mod3.FormattingEnabled = true;
-            this.cmbGlobalKeyService5Mod3.Location = new System.Drawing.Point(541, 532);
+            this.cmbGlobalKeyService5Mod3.Location = new System.Drawing.Point(226, 559);
             this.cmbGlobalKeyService5Mod3.Name = "cmbGlobalKeyService5Mod3";
             this.cmbGlobalKeyService5Mod3.Size = new System.Drawing.Size(44, 21);
             this.cmbGlobalKeyService5Mod3.TabIndex = 146;
@@ -566,7 +333,7 @@
             // cmbGlobalKeyService5Mod1
             // 
             this.cmbGlobalKeyService5Mod1.FormattingEnabled = true;
-            this.cmbGlobalKeyService5Mod1.Location = new System.Drawing.Point(442, 532);
+            this.cmbGlobalKeyService5Mod1.Location = new System.Drawing.Point(127, 559);
             this.cmbGlobalKeyService5Mod1.Name = "cmbGlobalKeyService5Mod1";
             this.cmbGlobalKeyService5Mod1.Size = new System.Drawing.Size(44, 21);
             this.cmbGlobalKeyService5Mod1.TabIndex = 145;
@@ -577,7 +344,7 @@
             // cmbGlobalKeyService5Key
             // 
             this.cmbGlobalKeyService5Key.FormattingEnabled = true;
-            this.cmbGlobalKeyService5Key.Location = new System.Drawing.Point(334, 532);
+            this.cmbGlobalKeyService5Key.Location = new System.Drawing.Point(19, 559);
             this.cmbGlobalKeyService5Key.Name = "cmbGlobalKeyService5Key";
             this.cmbGlobalKeyService5Key.Size = new System.Drawing.Size(88, 21);
             this.cmbGlobalKeyService5Key.TabIndex = 144;
@@ -588,7 +355,7 @@
             // cmbGlobalKey5Tooltip
             // 
             this.cmbGlobalKey5Tooltip.Enabled = false;
-            this.cmbGlobalKey5Tooltip.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbGlobalKey5Tooltip.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKey5Tooltip.Location = new System.Drawing.Point(666, 133);
             this.cmbGlobalKey5Tooltip.Margin = new System.Windows.Forms.Padding(2);
             this.cmbGlobalKey5Tooltip.Multiline = true;
@@ -600,18 +367,18 @@
             // 
             // cmbGlobalKey5Service
             // 
-            this.cmbGlobalKey5Service.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbGlobalKey5Service.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKey5Service.FormattingEnabled = true;
             this.cmbGlobalKey5Service.Location = new System.Drawing.Point(327, 134);
             this.cmbGlobalKey5Service.Name = "cmbGlobalKey5Service";
-            this.cmbGlobalKey5Service.Size = new System.Drawing.Size(312, 23);
+            this.cmbGlobalKey5Service.Size = new System.Drawing.Size(312, 26);
             this.cmbGlobalKey5Service.TabIndex = 142;
             this.toolTip1.SetToolTip(this.cmbGlobalKey5Service, "Choose your service Function");
             // 
             // cmbGlobalKeyService4Mod4
             // 
             this.cmbGlobalKeyService4Mod4.FormattingEnabled = true;
-            this.cmbGlobalKeyService4Mod4.Location = new System.Drawing.Point(591, 508);
+            this.cmbGlobalKeyService4Mod4.Location = new System.Drawing.Point(276, 535);
             this.cmbGlobalKeyService4Mod4.Name = "cmbGlobalKeyService4Mod4";
             this.cmbGlobalKeyService4Mod4.Size = new System.Drawing.Size(44, 21);
             this.cmbGlobalKeyService4Mod4.TabIndex = 141;
@@ -622,7 +389,7 @@
             // cmbGlobalKeyService4Mod2
             // 
             this.cmbGlobalKeyService4Mod2.FormattingEnabled = true;
-            this.cmbGlobalKeyService4Mod2.Location = new System.Drawing.Point(491, 508);
+            this.cmbGlobalKeyService4Mod2.Location = new System.Drawing.Point(176, 535);
             this.cmbGlobalKeyService4Mod2.Name = "cmbGlobalKeyService4Mod2";
             this.cmbGlobalKeyService4Mod2.Size = new System.Drawing.Size(44, 21);
             this.cmbGlobalKeyService4Mod2.TabIndex = 140;
@@ -633,7 +400,7 @@
             // cmbGlobalKeyService4Mod3
             // 
             this.cmbGlobalKeyService4Mod3.FormattingEnabled = true;
-            this.cmbGlobalKeyService4Mod3.Location = new System.Drawing.Point(541, 508);
+            this.cmbGlobalKeyService4Mod3.Location = new System.Drawing.Point(226, 535);
             this.cmbGlobalKeyService4Mod3.Name = "cmbGlobalKeyService4Mod3";
             this.cmbGlobalKeyService4Mod3.Size = new System.Drawing.Size(44, 21);
             this.cmbGlobalKeyService4Mod3.TabIndex = 139;
@@ -644,7 +411,7 @@
             // cmbGlobalKeyService4Mod1
             // 
             this.cmbGlobalKeyService4Mod1.FormattingEnabled = true;
-            this.cmbGlobalKeyService4Mod1.Location = new System.Drawing.Point(442, 508);
+            this.cmbGlobalKeyService4Mod1.Location = new System.Drawing.Point(127, 535);
             this.cmbGlobalKeyService4Mod1.Name = "cmbGlobalKeyService4Mod1";
             this.cmbGlobalKeyService4Mod1.Size = new System.Drawing.Size(44, 21);
             this.cmbGlobalKeyService4Mod1.TabIndex = 138;
@@ -655,7 +422,7 @@
             // cmbGlobalKeyService4Key
             // 
             this.cmbGlobalKeyService4Key.FormattingEnabled = true;
-            this.cmbGlobalKeyService4Key.Location = new System.Drawing.Point(334, 508);
+            this.cmbGlobalKeyService4Key.Location = new System.Drawing.Point(19, 535);
             this.cmbGlobalKeyService4Key.Name = "cmbGlobalKeyService4Key";
             this.cmbGlobalKeyService4Key.Size = new System.Drawing.Size(88, 21);
             this.cmbGlobalKeyService4Key.TabIndex = 137;
@@ -666,7 +433,7 @@
             // cmbGlobalKey4Tooltip
             // 
             this.cmbGlobalKey4Tooltip.Enabled = false;
-            this.cmbGlobalKey4Tooltip.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbGlobalKey4Tooltip.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKey4Tooltip.Location = new System.Drawing.Point(666, 110);
             this.cmbGlobalKey4Tooltip.Margin = new System.Windows.Forms.Padding(2);
             this.cmbGlobalKey4Tooltip.Multiline = true;
@@ -678,18 +445,18 @@
             // 
             // cmbGlobalKey4Service
             // 
-            this.cmbGlobalKey4Service.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbGlobalKey4Service.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKey4Service.FormattingEnabled = true;
             this.cmbGlobalKey4Service.Location = new System.Drawing.Point(327, 110);
             this.cmbGlobalKey4Service.Name = "cmbGlobalKey4Service";
-            this.cmbGlobalKey4Service.Size = new System.Drawing.Size(312, 23);
+            this.cmbGlobalKey4Service.Size = new System.Drawing.Size(312, 26);
             this.cmbGlobalKey4Service.TabIndex = 135;
             this.toolTip1.SetToolTip(this.cmbGlobalKey4Service, "Choose your service Function");
             // 
             // cmbGlobalKeyService3Mod4
             // 
             this.cmbGlobalKeyService3Mod4.FormattingEnabled = true;
-            this.cmbGlobalKeyService3Mod4.Location = new System.Drawing.Point(591, 484);
+            this.cmbGlobalKeyService3Mod4.Location = new System.Drawing.Point(276, 511);
             this.cmbGlobalKeyService3Mod4.Name = "cmbGlobalKeyService3Mod4";
             this.cmbGlobalKeyService3Mod4.Size = new System.Drawing.Size(44, 21);
             this.cmbGlobalKeyService3Mod4.TabIndex = 134;
@@ -700,7 +467,7 @@
             // cmbGlobalKeyService3Mod2
             // 
             this.cmbGlobalKeyService3Mod2.FormattingEnabled = true;
-            this.cmbGlobalKeyService3Mod2.Location = new System.Drawing.Point(491, 484);
+            this.cmbGlobalKeyService3Mod2.Location = new System.Drawing.Point(176, 511);
             this.cmbGlobalKeyService3Mod2.Name = "cmbGlobalKeyService3Mod2";
             this.cmbGlobalKeyService3Mod2.Size = new System.Drawing.Size(44, 21);
             this.cmbGlobalKeyService3Mod2.TabIndex = 133;
@@ -711,7 +478,7 @@
             // cmbGlobalKeyService3Mod3
             // 
             this.cmbGlobalKeyService3Mod3.FormattingEnabled = true;
-            this.cmbGlobalKeyService3Mod3.Location = new System.Drawing.Point(541, 484);
+            this.cmbGlobalKeyService3Mod3.Location = new System.Drawing.Point(226, 511);
             this.cmbGlobalKeyService3Mod3.Name = "cmbGlobalKeyService3Mod3";
             this.cmbGlobalKeyService3Mod3.Size = new System.Drawing.Size(44, 21);
             this.cmbGlobalKeyService3Mod3.TabIndex = 132;
@@ -722,7 +489,7 @@
             // cmbGlobalKeyService3Mod1
             // 
             this.cmbGlobalKeyService3Mod1.FormattingEnabled = true;
-            this.cmbGlobalKeyService3Mod1.Location = new System.Drawing.Point(442, 484);
+            this.cmbGlobalKeyService3Mod1.Location = new System.Drawing.Point(127, 511);
             this.cmbGlobalKeyService3Mod1.Name = "cmbGlobalKeyService3Mod1";
             this.cmbGlobalKeyService3Mod1.Size = new System.Drawing.Size(44, 21);
             this.cmbGlobalKeyService3Mod1.TabIndex = 131;
@@ -733,7 +500,7 @@
             // cmbGlobalKeyService3Key
             // 
             this.cmbGlobalKeyService3Key.FormattingEnabled = true;
-            this.cmbGlobalKeyService3Key.Location = new System.Drawing.Point(334, 484);
+            this.cmbGlobalKeyService3Key.Location = new System.Drawing.Point(19, 511);
             this.cmbGlobalKeyService3Key.Name = "cmbGlobalKeyService3Key";
             this.cmbGlobalKeyService3Key.Size = new System.Drawing.Size(88, 21);
             this.cmbGlobalKeyService3Key.TabIndex = 130;
@@ -744,7 +511,7 @@
             // cmbGlobalKey3Tooltip
             // 
             this.cmbGlobalKey3Tooltip.Enabled = false;
-            this.cmbGlobalKey3Tooltip.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbGlobalKey3Tooltip.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKey3Tooltip.Location = new System.Drawing.Point(666, 86);
             this.cmbGlobalKey3Tooltip.Margin = new System.Windows.Forms.Padding(2);
             this.cmbGlobalKey3Tooltip.Multiline = true;
@@ -756,18 +523,18 @@
             // 
             // cmbGlobalKey3Service
             // 
-            this.cmbGlobalKey3Service.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbGlobalKey3Service.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKey3Service.FormattingEnabled = true;
             this.cmbGlobalKey3Service.Location = new System.Drawing.Point(327, 86);
             this.cmbGlobalKey3Service.Name = "cmbGlobalKey3Service";
-            this.cmbGlobalKey3Service.Size = new System.Drawing.Size(312, 23);
+            this.cmbGlobalKey3Service.Size = new System.Drawing.Size(312, 26);
             this.cmbGlobalKey3Service.TabIndex = 128;
             this.toolTip1.SetToolTip(this.cmbGlobalKey3Service, "Choose your service Function");
             // 
             // cmbGlobalKeyService2Mod4
             // 
             this.cmbGlobalKeyService2Mod4.FormattingEnabled = true;
-            this.cmbGlobalKeyService2Mod4.Location = new System.Drawing.Point(591, 460);
+            this.cmbGlobalKeyService2Mod4.Location = new System.Drawing.Point(276, 487);
             this.cmbGlobalKeyService2Mod4.Name = "cmbGlobalKeyService2Mod4";
             this.cmbGlobalKeyService2Mod4.Size = new System.Drawing.Size(44, 21);
             this.cmbGlobalKeyService2Mod4.TabIndex = 127;
@@ -778,7 +545,7 @@
             // cmbGlobalKeyService2Mod2
             // 
             this.cmbGlobalKeyService2Mod2.FormattingEnabled = true;
-            this.cmbGlobalKeyService2Mod2.Location = new System.Drawing.Point(491, 460);
+            this.cmbGlobalKeyService2Mod2.Location = new System.Drawing.Point(176, 487);
             this.cmbGlobalKeyService2Mod2.Name = "cmbGlobalKeyService2Mod2";
             this.cmbGlobalKeyService2Mod2.Size = new System.Drawing.Size(44, 21);
             this.cmbGlobalKeyService2Mod2.TabIndex = 126;
@@ -789,7 +556,7 @@
             // cmbGlobalKeyService2Mod3
             // 
             this.cmbGlobalKeyService2Mod3.FormattingEnabled = true;
-            this.cmbGlobalKeyService2Mod3.Location = new System.Drawing.Point(541, 460);
+            this.cmbGlobalKeyService2Mod3.Location = new System.Drawing.Point(226, 487);
             this.cmbGlobalKeyService2Mod3.Name = "cmbGlobalKeyService2Mod3";
             this.cmbGlobalKeyService2Mod3.Size = new System.Drawing.Size(44, 21);
             this.cmbGlobalKeyService2Mod3.TabIndex = 125;
@@ -800,7 +567,7 @@
             // cmbGlobalKeyService2Mod1
             // 
             this.cmbGlobalKeyService2Mod1.FormattingEnabled = true;
-            this.cmbGlobalKeyService2Mod1.Location = new System.Drawing.Point(442, 460);
+            this.cmbGlobalKeyService2Mod1.Location = new System.Drawing.Point(127, 487);
             this.cmbGlobalKeyService2Mod1.Name = "cmbGlobalKeyService2Mod1";
             this.cmbGlobalKeyService2Mod1.Size = new System.Drawing.Size(44, 21);
             this.cmbGlobalKeyService2Mod1.TabIndex = 124;
@@ -811,7 +578,7 @@
             // cmbGlobalKeyService2Key
             // 
             this.cmbGlobalKeyService2Key.FormattingEnabled = true;
-            this.cmbGlobalKeyService2Key.Location = new System.Drawing.Point(334, 460);
+            this.cmbGlobalKeyService2Key.Location = new System.Drawing.Point(19, 487);
             this.cmbGlobalKeyService2Key.Name = "cmbGlobalKeyService2Key";
             this.cmbGlobalKeyService2Key.Size = new System.Drawing.Size(88, 21);
             this.cmbGlobalKeyService2Key.TabIndex = 123;
@@ -822,7 +589,7 @@
             // cmbGlobalKey2Tooltip
             // 
             this.cmbGlobalKey2Tooltip.Enabled = false;
-            this.cmbGlobalKey2Tooltip.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbGlobalKey2Tooltip.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKey2Tooltip.Location = new System.Drawing.Point(666, 61);
             this.cmbGlobalKey2Tooltip.Margin = new System.Windows.Forms.Padding(2);
             this.cmbGlobalKey2Tooltip.Multiline = true;
@@ -834,18 +601,18 @@
             // 
             // cmbGlobalKey2Service
             // 
-            this.cmbGlobalKey2Service.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbGlobalKey2Service.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKey2Service.FormattingEnabled = true;
             this.cmbGlobalKey2Service.Location = new System.Drawing.Point(327, 62);
             this.cmbGlobalKey2Service.Name = "cmbGlobalKey2Service";
-            this.cmbGlobalKey2Service.Size = new System.Drawing.Size(312, 23);
+            this.cmbGlobalKey2Service.Size = new System.Drawing.Size(312, 26);
             this.cmbGlobalKey2Service.TabIndex = 121;
             this.toolTip1.SetToolTip(this.cmbGlobalKey2Service, "Choose your service Function");
             // 
             // cmbGlobalKeyService1Mod4
             // 
             this.cmbGlobalKeyService1Mod4.FormattingEnabled = true;
-            this.cmbGlobalKeyService1Mod4.Location = new System.Drawing.Point(591, 436);
+            this.cmbGlobalKeyService1Mod4.Location = new System.Drawing.Point(276, 463);
             this.cmbGlobalKeyService1Mod4.Name = "cmbGlobalKeyService1Mod4";
             this.cmbGlobalKeyService1Mod4.Size = new System.Drawing.Size(44, 21);
             this.cmbGlobalKeyService1Mod4.TabIndex = 120;
@@ -856,7 +623,7 @@
             // cmbGlobalKeyService1Mod2
             // 
             this.cmbGlobalKeyService1Mod2.FormattingEnabled = true;
-            this.cmbGlobalKeyService1Mod2.Location = new System.Drawing.Point(491, 436);
+            this.cmbGlobalKeyService1Mod2.Location = new System.Drawing.Point(176, 463);
             this.cmbGlobalKeyService1Mod2.Name = "cmbGlobalKeyService1Mod2";
             this.cmbGlobalKeyService1Mod2.Size = new System.Drawing.Size(44, 21);
             this.cmbGlobalKeyService1Mod2.TabIndex = 119;
@@ -867,7 +634,7 @@
             // cmbGlobalKeyService1Mod3
             // 
             this.cmbGlobalKeyService1Mod3.FormattingEnabled = true;
-            this.cmbGlobalKeyService1Mod3.Location = new System.Drawing.Point(541, 436);
+            this.cmbGlobalKeyService1Mod3.Location = new System.Drawing.Point(226, 463);
             this.cmbGlobalKeyService1Mod3.Name = "cmbGlobalKeyService1Mod3";
             this.cmbGlobalKeyService1Mod3.Size = new System.Drawing.Size(44, 21);
             this.cmbGlobalKeyService1Mod3.TabIndex = 118;
@@ -878,7 +645,7 @@
             // cmbGlobalKeyService1Mod1
             // 
             this.cmbGlobalKeyService1Mod1.FormattingEnabled = true;
-            this.cmbGlobalKeyService1Mod1.Location = new System.Drawing.Point(442, 436);
+            this.cmbGlobalKeyService1Mod1.Location = new System.Drawing.Point(127, 463);
             this.cmbGlobalKeyService1Mod1.Name = "cmbGlobalKeyService1Mod1";
             this.cmbGlobalKeyService1Mod1.Size = new System.Drawing.Size(44, 21);
             this.cmbGlobalKeyService1Mod1.TabIndex = 117;
@@ -889,7 +656,7 @@
             // cmbGlobalKeyService1Key
             // 
             this.cmbGlobalKeyService1Key.FormattingEnabled = true;
-            this.cmbGlobalKeyService1Key.Location = new System.Drawing.Point(334, 436);
+            this.cmbGlobalKeyService1Key.Location = new System.Drawing.Point(19, 463);
             this.cmbGlobalKeyService1Key.Name = "cmbGlobalKeyService1Key";
             this.cmbGlobalKeyService1Key.Size = new System.Drawing.Size(88, 21);
             this.cmbGlobalKeyService1Key.TabIndex = 116;
@@ -900,7 +667,7 @@
             // cmbGlobalKey1Tooltip
             // 
             this.cmbGlobalKey1Tooltip.Enabled = false;
-            this.cmbGlobalKey1Tooltip.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbGlobalKey1Tooltip.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKey1Tooltip.Location = new System.Drawing.Point(666, 37);
             this.cmbGlobalKey1Tooltip.Margin = new System.Windows.Forms.Padding(2);
             this.cmbGlobalKey1Tooltip.Multiline = true;
@@ -912,11 +679,11 @@
             // 
             // cmbGlobalKey1Service
             // 
-            this.cmbGlobalKey1Service.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbGlobalKey1Service.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKey1Service.FormattingEnabled = true;
             this.cmbGlobalKey1Service.Location = new System.Drawing.Point(327, 38);
             this.cmbGlobalKey1Service.Name = "cmbGlobalKey1Service";
-            this.cmbGlobalKey1Service.Size = new System.Drawing.Size(312, 23);
+            this.cmbGlobalKey1Service.Size = new System.Drawing.Size(312, 26);
             this.cmbGlobalKey1Service.TabIndex = 112;
             this.toolTip1.SetToolTip(this.cmbGlobalKey1Service, "Choose your service Function");
             // 
@@ -926,7 +693,7 @@
             this.cmbGlobalKeySearch5SearchTerm.Location = new System.Drawing.Point(665, 131);
             this.cmbGlobalKeySearch5SearchTerm.Margin = new System.Windows.Forms.Padding(2);
             this.cmbGlobalKeySearch5SearchTerm.Name = "cmbGlobalKeySearch5SearchTerm";
-            this.cmbGlobalKeySearch5SearchTerm.Size = new System.Drawing.Size(145, 21);
+            this.cmbGlobalKeySearch5SearchTerm.Size = new System.Drawing.Size(280, 21);
             this.cmbGlobalKeySearch5SearchTerm.TabIndex = 162;
             this.toolTip1.SetToolTip(this.cmbGlobalKeySearch5SearchTerm, "Search text");
             // 
@@ -936,14 +703,14 @@
             this.cmbGlobalKeySearch5SearchName.Location = new System.Drawing.Point(329, 131);
             this.cmbGlobalKeySearch5SearchName.Margin = new System.Windows.Forms.Padding(2);
             this.cmbGlobalKeySearch5SearchName.Name = "cmbGlobalKeySearch5SearchName";
-            this.cmbGlobalKeySearch5SearchName.Size = new System.Drawing.Size(298, 21);
+            this.cmbGlobalKeySearch5SearchName.Size = new System.Drawing.Size(309, 21);
             this.cmbGlobalKeySearch5SearchName.TabIndex = 161;
             this.toolTip1.SetToolTip(this.cmbGlobalKeySearch5SearchName, "Search name");
             // 
             // cmbGlobalKeySearch5Mod4
             // 
             this.cmbGlobalKeySearch5Mod4.FormattingEnabled = true;
-            this.cmbGlobalKeySearch5Mod4.Location = new System.Drawing.Point(592, 699);
+            this.cmbGlobalKeySearch5Mod4.Location = new System.Drawing.Point(277, 726);
             this.cmbGlobalKeySearch5Mod4.Name = "cmbGlobalKeySearch5Mod4";
             this.cmbGlobalKeySearch5Mod4.Size = new System.Drawing.Size(44, 21);
             this.cmbGlobalKeySearch5Mod4.TabIndex = 187;
@@ -955,14 +722,14 @@
             this.cmbGlobalKeySearch4SearchTerm.Location = new System.Drawing.Point(664, 109);
             this.cmbGlobalKeySearch4SearchTerm.Margin = new System.Windows.Forms.Padding(2);
             this.cmbGlobalKeySearch4SearchTerm.Name = "cmbGlobalKeySearch4SearchTerm";
-            this.cmbGlobalKeySearch4SearchTerm.Size = new System.Drawing.Size(146, 21);
+            this.cmbGlobalKeySearch4SearchTerm.Size = new System.Drawing.Size(281, 21);
             this.cmbGlobalKeySearch4SearchTerm.TabIndex = 160;
             this.toolTip1.SetToolTip(this.cmbGlobalKeySearch4SearchTerm, "Search text");
             // 
             // cmbGlobalKeySearch5Mod2
             // 
             this.cmbGlobalKeySearch5Mod2.FormattingEnabled = true;
-            this.cmbGlobalKeySearch5Mod2.Location = new System.Drawing.Point(492, 699);
+            this.cmbGlobalKeySearch5Mod2.Location = new System.Drawing.Point(177, 726);
             this.cmbGlobalKeySearch5Mod2.Name = "cmbGlobalKeySearch5Mod2";
             this.cmbGlobalKeySearch5Mod2.Size = new System.Drawing.Size(44, 21);
             this.cmbGlobalKeySearch5Mod2.TabIndex = 186;
@@ -981,7 +748,7 @@
             // cmbGlobalKeySearch5Mod3
             // 
             this.cmbGlobalKeySearch5Mod3.FormattingEnabled = true;
-            this.cmbGlobalKeySearch5Mod3.Location = new System.Drawing.Point(542, 699);
+            this.cmbGlobalKeySearch5Mod3.Location = new System.Drawing.Point(227, 726);
             this.cmbGlobalKeySearch5Mod3.Name = "cmbGlobalKeySearch5Mod3";
             this.cmbGlobalKeySearch5Mod3.Size = new System.Drawing.Size(44, 21);
             this.cmbGlobalKeySearch5Mod3.TabIndex = 185;
@@ -993,14 +760,14 @@
             this.cmbGlobalKeySearch3SearchTerm.Location = new System.Drawing.Point(664, 86);
             this.cmbGlobalKeySearch3SearchTerm.Margin = new System.Windows.Forms.Padding(2);
             this.cmbGlobalKeySearch3SearchTerm.Name = "cmbGlobalKeySearch3SearchTerm";
-            this.cmbGlobalKeySearch3SearchTerm.Size = new System.Drawing.Size(146, 21);
+            this.cmbGlobalKeySearch3SearchTerm.Size = new System.Drawing.Size(281, 21);
             this.cmbGlobalKeySearch3SearchTerm.TabIndex = 158;
             this.toolTip1.SetToolTip(this.cmbGlobalKeySearch3SearchTerm, "Search text");
             // 
             // cmbGlobalKeySearch5Mod1
             // 
             this.cmbGlobalKeySearch5Mod1.FormattingEnabled = true;
-            this.cmbGlobalKeySearch5Mod1.Location = new System.Drawing.Point(443, 699);
+            this.cmbGlobalKeySearch5Mod1.Location = new System.Drawing.Point(128, 726);
             this.cmbGlobalKeySearch5Mod1.Name = "cmbGlobalKeySearch5Mod1";
             this.cmbGlobalKeySearch5Mod1.Size = new System.Drawing.Size(44, 21);
             this.cmbGlobalKeySearch5Mod1.TabIndex = 184;
@@ -1019,7 +786,7 @@
             // cmbGlobalKeySearch5Key
             // 
             this.cmbGlobalKeySearch5Key.FormattingEnabled = true;
-            this.cmbGlobalKeySearch5Key.Location = new System.Drawing.Point(335, 699);
+            this.cmbGlobalKeySearch5Key.Location = new System.Drawing.Point(20, 726);
             this.cmbGlobalKeySearch5Key.Name = "cmbGlobalKeySearch5Key";
             this.cmbGlobalKeySearch5Key.Size = new System.Drawing.Size(88, 21);
             this.cmbGlobalKeySearch5Key.TabIndex = 183;
@@ -1031,14 +798,14 @@
             this.cmbGlobalKeySearch2SearchTerm.Location = new System.Drawing.Point(665, 61);
             this.cmbGlobalKeySearch2SearchTerm.Margin = new System.Windows.Forms.Padding(2);
             this.cmbGlobalKeySearch2SearchTerm.Name = "cmbGlobalKeySearch2SearchTerm";
-            this.cmbGlobalKeySearch2SearchTerm.Size = new System.Drawing.Size(146, 21);
+            this.cmbGlobalKeySearch2SearchTerm.Size = new System.Drawing.Size(280, 21);
             this.cmbGlobalKeySearch2SearchTerm.TabIndex = 156;
             this.toolTip1.SetToolTip(this.cmbGlobalKeySearch2SearchTerm, "Search text");
             // 
             // cmbGlobalKeySearch4Mod4
             // 
             this.cmbGlobalKeySearch4Mod4.FormattingEnabled = true;
-            this.cmbGlobalKeySearch4Mod4.Location = new System.Drawing.Point(592, 675);
+            this.cmbGlobalKeySearch4Mod4.Location = new System.Drawing.Point(277, 702);
             this.cmbGlobalKeySearch4Mod4.Name = "cmbGlobalKeySearch4Mod4";
             this.cmbGlobalKeySearch4Mod4.Size = new System.Drawing.Size(44, 21);
             this.cmbGlobalKeySearch4Mod4.TabIndex = 182;
@@ -1057,7 +824,7 @@
             // cmbGlobalKeySearch4Mod2
             // 
             this.cmbGlobalKeySearch4Mod2.FormattingEnabled = true;
-            this.cmbGlobalKeySearch4Mod2.Location = new System.Drawing.Point(492, 675);
+            this.cmbGlobalKeySearch4Mod2.Location = new System.Drawing.Point(177, 702);
             this.cmbGlobalKeySearch4Mod2.Name = "cmbGlobalKeySearch4Mod2";
             this.cmbGlobalKeySearch4Mod2.Size = new System.Drawing.Size(44, 21);
             this.cmbGlobalKeySearch4Mod2.TabIndex = 181;
@@ -1069,14 +836,14 @@
             this.cmbGlobalKeySearch1SearchTerm.Location = new System.Drawing.Point(665, 36);
             this.cmbGlobalKeySearch1SearchTerm.Margin = new System.Windows.Forms.Padding(2);
             this.cmbGlobalKeySearch1SearchTerm.Name = "cmbGlobalKeySearch1SearchTerm";
-            this.cmbGlobalKeySearch1SearchTerm.Size = new System.Drawing.Size(146, 21);
+            this.cmbGlobalKeySearch1SearchTerm.Size = new System.Drawing.Size(280, 21);
             this.cmbGlobalKeySearch1SearchTerm.TabIndex = 153;
             this.toolTip1.SetToolTip(this.cmbGlobalKeySearch1SearchTerm, "Search text");
             // 
             // cmbGlobalKeySearch4Mod3
             // 
             this.cmbGlobalKeySearch4Mod3.FormattingEnabled = true;
-            this.cmbGlobalKeySearch4Mod3.Location = new System.Drawing.Point(542, 675);
+            this.cmbGlobalKeySearch4Mod3.Location = new System.Drawing.Point(227, 702);
             this.cmbGlobalKeySearch4Mod3.Name = "cmbGlobalKeySearch4Mod3";
             this.cmbGlobalKeySearch4Mod3.Size = new System.Drawing.Size(44, 21);
             this.cmbGlobalKeySearch4Mod3.TabIndex = 180;
@@ -1095,7 +862,7 @@
             // cmbGlobalKeySearch4Mod1
             // 
             this.cmbGlobalKeySearch4Mod1.FormattingEnabled = true;
-            this.cmbGlobalKeySearch4Mod1.Location = new System.Drawing.Point(443, 675);
+            this.cmbGlobalKeySearch4Mod1.Location = new System.Drawing.Point(128, 702);
             this.cmbGlobalKeySearch4Mod1.Name = "cmbGlobalKeySearch4Mod1";
             this.cmbGlobalKeySearch4Mod1.Size = new System.Drawing.Size(44, 21);
             this.cmbGlobalKeySearch4Mod1.TabIndex = 179;
@@ -1104,7 +871,7 @@
             // cmbGlobalKeySearch4Key
             // 
             this.cmbGlobalKeySearch4Key.FormattingEnabled = true;
-            this.cmbGlobalKeySearch4Key.Location = new System.Drawing.Point(335, 675);
+            this.cmbGlobalKeySearch4Key.Location = new System.Drawing.Point(20, 702);
             this.cmbGlobalKeySearch4Key.Name = "cmbGlobalKeySearch4Key";
             this.cmbGlobalKeySearch4Key.Size = new System.Drawing.Size(88, 21);
             this.cmbGlobalKeySearch4Key.TabIndex = 178;
@@ -1113,7 +880,7 @@
             // cmbGlobalKeySearch3Mod4
             // 
             this.cmbGlobalKeySearch3Mod4.FormattingEnabled = true;
-            this.cmbGlobalKeySearch3Mod4.Location = new System.Drawing.Point(592, 651);
+            this.cmbGlobalKeySearch3Mod4.Location = new System.Drawing.Point(277, 678);
             this.cmbGlobalKeySearch3Mod4.Name = "cmbGlobalKeySearch3Mod4";
             this.cmbGlobalKeySearch3Mod4.Size = new System.Drawing.Size(44, 21);
             this.cmbGlobalKeySearch3Mod4.TabIndex = 177;
@@ -1122,7 +889,7 @@
             // cmbGlobalKeySearch3Mod2
             // 
             this.cmbGlobalKeySearch3Mod2.FormattingEnabled = true;
-            this.cmbGlobalKeySearch3Mod2.Location = new System.Drawing.Point(492, 651);
+            this.cmbGlobalKeySearch3Mod2.Location = new System.Drawing.Point(177, 678);
             this.cmbGlobalKeySearch3Mod2.Name = "cmbGlobalKeySearch3Mod2";
             this.cmbGlobalKeySearch3Mod2.Size = new System.Drawing.Size(44, 21);
             this.cmbGlobalKeySearch3Mod2.TabIndex = 176;
@@ -1131,7 +898,7 @@
             // cmbGlobalKeySearch3Mod3
             // 
             this.cmbGlobalKeySearch3Mod3.FormattingEnabled = true;
-            this.cmbGlobalKeySearch3Mod3.Location = new System.Drawing.Point(542, 651);
+            this.cmbGlobalKeySearch3Mod3.Location = new System.Drawing.Point(227, 678);
             this.cmbGlobalKeySearch3Mod3.Name = "cmbGlobalKeySearch3Mod3";
             this.cmbGlobalKeySearch3Mod3.Size = new System.Drawing.Size(44, 21);
             this.cmbGlobalKeySearch3Mod3.TabIndex = 175;
@@ -1140,7 +907,7 @@
             // cmbGlobalKeySearch3Mod1
             // 
             this.cmbGlobalKeySearch3Mod1.FormattingEnabled = true;
-            this.cmbGlobalKeySearch3Mod1.Location = new System.Drawing.Point(443, 651);
+            this.cmbGlobalKeySearch3Mod1.Location = new System.Drawing.Point(128, 678);
             this.cmbGlobalKeySearch3Mod1.Name = "cmbGlobalKeySearch3Mod1";
             this.cmbGlobalKeySearch3Mod1.Size = new System.Drawing.Size(44, 21);
             this.cmbGlobalKeySearch3Mod1.TabIndex = 174;
@@ -1149,7 +916,7 @@
             // cmbGlobalKeySearch3Key
             // 
             this.cmbGlobalKeySearch3Key.FormattingEnabled = true;
-            this.cmbGlobalKeySearch3Key.Location = new System.Drawing.Point(335, 651);
+            this.cmbGlobalKeySearch3Key.Location = new System.Drawing.Point(20, 678);
             this.cmbGlobalKeySearch3Key.Name = "cmbGlobalKeySearch3Key";
             this.cmbGlobalKeySearch3Key.Size = new System.Drawing.Size(88, 21);
             this.cmbGlobalKeySearch3Key.TabIndex = 173;
@@ -1158,7 +925,7 @@
             // cmbGlobalKeySearch2Mod4
             // 
             this.cmbGlobalKeySearch2Mod4.FormattingEnabled = true;
-            this.cmbGlobalKeySearch2Mod4.Location = new System.Drawing.Point(592, 627);
+            this.cmbGlobalKeySearch2Mod4.Location = new System.Drawing.Point(277, 654);
             this.cmbGlobalKeySearch2Mod4.Name = "cmbGlobalKeySearch2Mod4";
             this.cmbGlobalKeySearch2Mod4.Size = new System.Drawing.Size(44, 21);
             this.cmbGlobalKeySearch2Mod4.TabIndex = 172;
@@ -1167,7 +934,7 @@
             // cmbGlobalKeySearch2Mod2
             // 
             this.cmbGlobalKeySearch2Mod2.FormattingEnabled = true;
-            this.cmbGlobalKeySearch2Mod2.Location = new System.Drawing.Point(492, 627);
+            this.cmbGlobalKeySearch2Mod2.Location = new System.Drawing.Point(177, 654);
             this.cmbGlobalKeySearch2Mod2.Name = "cmbGlobalKeySearch2Mod2";
             this.cmbGlobalKeySearch2Mod2.Size = new System.Drawing.Size(44, 21);
             this.cmbGlobalKeySearch2Mod2.TabIndex = 171;
@@ -1176,7 +943,7 @@
             // cmbGlobalKeySearch2Mod3
             // 
             this.cmbGlobalKeySearch2Mod3.FormattingEnabled = true;
-            this.cmbGlobalKeySearch2Mod3.Location = new System.Drawing.Point(542, 627);
+            this.cmbGlobalKeySearch2Mod3.Location = new System.Drawing.Point(227, 654);
             this.cmbGlobalKeySearch2Mod3.Name = "cmbGlobalKeySearch2Mod3";
             this.cmbGlobalKeySearch2Mod3.Size = new System.Drawing.Size(44, 21);
             this.cmbGlobalKeySearch2Mod3.TabIndex = 170;
@@ -1185,7 +952,7 @@
             // cmbGlobalKeySearch2Mod1
             // 
             this.cmbGlobalKeySearch2Mod1.FormattingEnabled = true;
-            this.cmbGlobalKeySearch2Mod1.Location = new System.Drawing.Point(443, 627);
+            this.cmbGlobalKeySearch2Mod1.Location = new System.Drawing.Point(128, 654);
             this.cmbGlobalKeySearch2Mod1.Name = "cmbGlobalKeySearch2Mod1";
             this.cmbGlobalKeySearch2Mod1.Size = new System.Drawing.Size(44, 21);
             this.cmbGlobalKeySearch2Mod1.TabIndex = 169;
@@ -1194,7 +961,7 @@
             // cmbGlobalKeySearch2Key
             // 
             this.cmbGlobalKeySearch2Key.FormattingEnabled = true;
-            this.cmbGlobalKeySearch2Key.Location = new System.Drawing.Point(335, 627);
+            this.cmbGlobalKeySearch2Key.Location = new System.Drawing.Point(20, 654);
             this.cmbGlobalKeySearch2Key.Name = "cmbGlobalKeySearch2Key";
             this.cmbGlobalKeySearch2Key.Size = new System.Drawing.Size(88, 21);
             this.cmbGlobalKeySearch2Key.TabIndex = 168;
@@ -1203,7 +970,7 @@
             // cmbGlobalKeySearch1Mod4
             // 
             this.cmbGlobalKeySearch1Mod4.FormattingEnabled = true;
-            this.cmbGlobalKeySearch1Mod4.Location = new System.Drawing.Point(592, 603);
+            this.cmbGlobalKeySearch1Mod4.Location = new System.Drawing.Point(277, 630);
             this.cmbGlobalKeySearch1Mod4.Name = "cmbGlobalKeySearch1Mod4";
             this.cmbGlobalKeySearch1Mod4.Size = new System.Drawing.Size(44, 21);
             this.cmbGlobalKeySearch1Mod4.TabIndex = 167;
@@ -1212,7 +979,7 @@
             // cmbGlobalKeySearch1Mod2
             // 
             this.cmbGlobalKeySearch1Mod2.FormattingEnabled = true;
-            this.cmbGlobalKeySearch1Mod2.Location = new System.Drawing.Point(492, 603);
+            this.cmbGlobalKeySearch1Mod2.Location = new System.Drawing.Point(177, 630);
             this.cmbGlobalKeySearch1Mod2.Name = "cmbGlobalKeySearch1Mod2";
             this.cmbGlobalKeySearch1Mod2.Size = new System.Drawing.Size(44, 21);
             this.cmbGlobalKeySearch1Mod2.TabIndex = 166;
@@ -1221,7 +988,7 @@
             // cmbGlobalKeySearch1Mod3
             // 
             this.cmbGlobalKeySearch1Mod3.FormattingEnabled = true;
-            this.cmbGlobalKeySearch1Mod3.Location = new System.Drawing.Point(542, 603);
+            this.cmbGlobalKeySearch1Mod3.Location = new System.Drawing.Point(227, 630);
             this.cmbGlobalKeySearch1Mod3.Name = "cmbGlobalKeySearch1Mod3";
             this.cmbGlobalKeySearch1Mod3.Size = new System.Drawing.Size(44, 21);
             this.cmbGlobalKeySearch1Mod3.TabIndex = 165;
@@ -1230,7 +997,7 @@
             // cmbGlobalKeySearch1Mod1
             // 
             this.cmbGlobalKeySearch1Mod1.FormattingEnabled = true;
-            this.cmbGlobalKeySearch1Mod1.Location = new System.Drawing.Point(443, 603);
+            this.cmbGlobalKeySearch1Mod1.Location = new System.Drawing.Point(128, 630);
             this.cmbGlobalKeySearch1Mod1.Name = "cmbGlobalKeySearch1Mod1";
             this.cmbGlobalKeySearch1Mod1.Size = new System.Drawing.Size(44, 21);
             this.cmbGlobalKeySearch1Mod1.TabIndex = 164;
@@ -1239,7 +1006,7 @@
             // cmbGlobalKeySearch1Key
             // 
             this.cmbGlobalKeySearch1Key.FormattingEnabled = true;
-            this.cmbGlobalKeySearch1Key.Location = new System.Drawing.Point(335, 603);
+            this.cmbGlobalKeySearch1Key.Location = new System.Drawing.Point(20, 630);
             this.cmbGlobalKeySearch1Key.Name = "cmbGlobalKeySearch1Key";
             this.cmbGlobalKeySearch1Key.Size = new System.Drawing.Size(88, 21);
             this.cmbGlobalKeySearch1Key.TabIndex = 163;
@@ -1261,9 +1028,9 @@
             this.groupBox5.Controls.Add(this.cmbGlobalKeySearch1SearchName);
             this.groupBox5.Controls.Add(this.cmbGlobalKeySearch2SearchName);
             this.groupBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox5.Location = new System.Drawing.Point(328, 562);
+            this.groupBox5.Location = new System.Drawing.Point(13, 589);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(958, 184);
+            this.groupBox5.Size = new System.Drawing.Size(958, 168);
             this.groupBox5.TabIndex = 195;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Searches on EA global hotkeys / shortcuts";
@@ -1304,24 +1071,26 @@
             // 
             // txtBtn1Text
             // 
-            this.txtBtn1Text.Location = new System.Drawing.Point(409, 51);
+            this.txtBtn1Text.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBtn1Text.Location = new System.Drawing.Point(94, 78);
             this.txtBtn1Text.Name = "txtBtn1Text";
-            this.txtBtn1Text.Size = new System.Drawing.Size(73, 20);
+            this.txtBtn1Text.Size = new System.Drawing.Size(73, 24);
             this.txtBtn1Text.TabIndex = 14;
             // 
             // txtBtn1SearchName
             // 
-            this.txtBtn1SearchName.Location = new System.Drawing.Point(498, 51);
+            this.txtBtn1SearchName.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBtn1SearchName.Location = new System.Drawing.Point(183, 78);
             this.txtBtn1SearchName.Name = "txtBtn1SearchName";
-            this.txtBtn1SearchName.Size = new System.Drawing.Size(278, 20);
+            this.txtBtn1SearchName.Size = new System.Drawing.Size(278, 24);
             this.txtBtn1SearchName.TabIndex = 15;
             // 
             // txtBtn1SearchTerm
             // 
-            this.txtBtn1SearchTerm.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBtn1SearchTerm.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBtn1SearchTerm.Location = new System.Drawing.Point(471, 41);
             this.txtBtn1SearchTerm.Name = "txtBtn1SearchTerm";
-            this.txtBtn1SearchTerm.Size = new System.Drawing.Size(174, 21);
+            this.txtBtn1SearchTerm.Size = new System.Drawing.Size(174, 24);
             this.txtBtn1SearchTerm.TabIndex = 16;
             // 
             // txtBtn1SearchTooltip
@@ -1340,24 +1109,26 @@
             // 
             // txtBtn2SearchTerm
             // 
-            this.txtBtn2SearchTerm.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBtn2SearchTerm.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBtn2SearchTerm.Location = new System.Drawing.Point(471, 66);
             this.txtBtn2SearchTerm.Name = "txtBtn2SearchTerm";
-            this.txtBtn2SearchTerm.Size = new System.Drawing.Size(174, 21);
+            this.txtBtn2SearchTerm.Size = new System.Drawing.Size(174, 24);
             this.txtBtn2SearchTerm.TabIndex = 20;
             // 
             // txtBtn2SearchName
             // 
-            this.txtBtn2SearchName.Location = new System.Drawing.Point(498, 76);
+            this.txtBtn2SearchName.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBtn2SearchName.Location = new System.Drawing.Point(183, 103);
             this.txtBtn2SearchName.Name = "txtBtn2SearchName";
-            this.txtBtn2SearchName.Size = new System.Drawing.Size(278, 20);
+            this.txtBtn2SearchName.Size = new System.Drawing.Size(278, 24);
             this.txtBtn2SearchName.TabIndex = 19;
             // 
             // txtBtn2Text
             // 
-            this.txtBtn2Text.Location = new System.Drawing.Point(409, 76);
+            this.txtBtn2Text.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBtn2Text.Location = new System.Drawing.Point(94, 103);
             this.txtBtn2Text.Name = "txtBtn2Text";
-            this.txtBtn2Text.Size = new System.Drawing.Size(73, 20);
+            this.txtBtn2Text.Size = new System.Drawing.Size(73, 24);
             this.txtBtn2Text.TabIndex = 18;
             // 
             // txtBtn3SearchTooltip
@@ -1369,24 +1140,26 @@
             // 
             // txtBtn3SearchTerm
             // 
-            this.txtBtn3SearchTerm.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBtn3SearchTerm.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBtn3SearchTerm.Location = new System.Drawing.Point(471, 92);
             this.txtBtn3SearchTerm.Name = "txtBtn3SearchTerm";
-            this.txtBtn3SearchTerm.Size = new System.Drawing.Size(174, 21);
+            this.txtBtn3SearchTerm.Size = new System.Drawing.Size(174, 24);
             this.txtBtn3SearchTerm.TabIndex = 24;
             // 
             // txtBtn3SearchName
             // 
-            this.txtBtn3SearchName.Location = new System.Drawing.Point(498, 102);
+            this.txtBtn3SearchName.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBtn3SearchName.Location = new System.Drawing.Point(183, 129);
             this.txtBtn3SearchName.Name = "txtBtn3SearchName";
-            this.txtBtn3SearchName.Size = new System.Drawing.Size(278, 20);
+            this.txtBtn3SearchName.Size = new System.Drawing.Size(278, 24);
             this.txtBtn3SearchName.TabIndex = 23;
             // 
             // txtBtn3Text
             // 
-            this.txtBtn3Text.Location = new System.Drawing.Point(409, 102);
+            this.txtBtn3Text.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBtn3Text.Location = new System.Drawing.Point(94, 129);
             this.txtBtn3Text.Name = "txtBtn3Text";
-            this.txtBtn3Text.Size = new System.Drawing.Size(73, 20);
+            this.txtBtn3Text.Size = new System.Drawing.Size(73, 24);
             this.txtBtn3Text.TabIndex = 22;
             // 
             // txtBtn4SearchTooltip
@@ -1398,24 +1171,26 @@
             // 
             // txtBtn4SearchTerm
             // 
-            this.txtBtn4SearchTerm.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBtn4SearchTerm.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBtn4SearchTerm.Location = new System.Drawing.Point(471, 118);
             this.txtBtn4SearchTerm.Name = "txtBtn4SearchTerm";
-            this.txtBtn4SearchTerm.Size = new System.Drawing.Size(174, 21);
+            this.txtBtn4SearchTerm.Size = new System.Drawing.Size(174, 24);
             this.txtBtn4SearchTerm.TabIndex = 28;
             // 
             // txtBtn4SearchName
             // 
-            this.txtBtn4SearchName.Location = new System.Drawing.Point(498, 128);
+            this.txtBtn4SearchName.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBtn4SearchName.Location = new System.Drawing.Point(183, 155);
             this.txtBtn4SearchName.Name = "txtBtn4SearchName";
-            this.txtBtn4SearchName.Size = new System.Drawing.Size(278, 20);
+            this.txtBtn4SearchName.Size = new System.Drawing.Size(278, 24);
             this.txtBtn4SearchName.TabIndex = 27;
             // 
             // txtBtn4Text
             // 
-            this.txtBtn4Text.Location = new System.Drawing.Point(409, 128);
+            this.txtBtn4Text.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBtn4Text.Location = new System.Drawing.Point(94, 155);
             this.txtBtn4Text.Name = "txtBtn4Text";
-            this.txtBtn4Text.Size = new System.Drawing.Size(73, 20);
+            this.txtBtn4Text.Size = new System.Drawing.Size(73, 24);
             this.txtBtn4Text.TabIndex = 26;
             // 
             // txtBtn5SearchTooltip
@@ -1427,24 +1202,26 @@
             // 
             // txtBtn5SearchTerm
             // 
-            this.txtBtn5SearchTerm.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBtn5SearchTerm.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBtn5SearchTerm.Location = new System.Drawing.Point(471, 144);
             this.txtBtn5SearchTerm.Name = "txtBtn5SearchTerm";
-            this.txtBtn5SearchTerm.Size = new System.Drawing.Size(174, 21);
+            this.txtBtn5SearchTerm.Size = new System.Drawing.Size(174, 24);
             this.txtBtn5SearchTerm.TabIndex = 32;
             // 
             // txtBtn5SearchName
             // 
-            this.txtBtn5SearchName.Location = new System.Drawing.Point(498, 154);
+            this.txtBtn5SearchName.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBtn5SearchName.Location = new System.Drawing.Point(183, 181);
             this.txtBtn5SearchName.Name = "txtBtn5SearchName";
-            this.txtBtn5SearchName.Size = new System.Drawing.Size(278, 20);
+            this.txtBtn5SearchName.Size = new System.Drawing.Size(278, 24);
             this.txtBtn5SearchName.TabIndex = 31;
             // 
             // txtBtn5Text
             // 
-            this.txtBtn5Text.Location = new System.Drawing.Point(409, 154);
+            this.txtBtn5Text.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBtn5Text.Location = new System.Drawing.Point(94, 181);
             this.txtBtn5Text.Name = "txtBtn5Text";
-            this.txtBtn5Text.Size = new System.Drawing.Size(73, 20);
+            this.txtBtn5Text.Size = new System.Drawing.Size(73, 24);
             this.txtBtn5Text.TabIndex = 30;
             // 
             // Button1
@@ -1561,7 +1338,7 @@
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(8, 136);
+            this.label21.Location = new System.Drawing.Point(5, 149);
             this.label21.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(63, 18);
@@ -1571,7 +1348,7 @@
             // label22
             // 
             this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(8, 111);
+            this.label22.Location = new System.Drawing.Point(5, 121);
             this.label22.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(63, 18);
@@ -1581,7 +1358,7 @@
             // label23
             // 
             this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(8, 88);
+            this.label23.Location = new System.Drawing.Point(8, 98);
             this.label23.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(63, 18);
@@ -1591,7 +1368,7 @@
             // label24
             // 
             this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(8, 64);
+            this.label24.Location = new System.Drawing.Point(8, 71);
             this.label24.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(63, 18);
@@ -1601,7 +1378,7 @@
             // label25
             // 
             this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(8, 39);
+            this.label25.Location = new System.Drawing.Point(8, 46);
             this.label25.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(63, 18);
@@ -1630,9 +1407,9 @@
             this.groupBox2.Controls.Add(this.txtBtn3SearchTerm);
             this.groupBox2.Controls.Add(this.txtBtn4SearchTerm);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(326, 13);
+            this.groupBox2.Location = new System.Drawing.Point(11, 40);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(960, 174);
+            this.groupBox2.Size = new System.Drawing.Size(960, 177);
             this.groupBox2.TabIndex = 59;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Search Shortcuts";
@@ -1657,10 +1434,11 @@
             this.groupBox3.Controls.Add(this.cmbService3);
             this.groupBox3.Controls.Add(this.cmbService4);
             this.groupBox3.Controls.Add(this.cmbService5);
+            this.groupBox3.Controls.Add(this.txtButton5TextService);
             this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox3.Location = new System.Drawing.Point(327, 193);
+            this.groupBox3.Location = new System.Drawing.Point(12, 220);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(959, 186);
+            this.groupBox3.Size = new System.Drawing.Size(959, 189);
             this.groupBox3.TabIndex = 60;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Services Shortcuts";
@@ -1668,7 +1446,7 @@
             // label26
             // 
             this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(656, 14);
+            this.label26.Location = new System.Drawing.Point(662, 27);
             this.label26.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(101, 18);
@@ -1677,54 +1455,54 @@
             // 
             // txtServiceTooltip5
             // 
-            this.txtServiceTooltip5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtServiceTooltip5.Location = new System.Drawing.Point(659, 133);
+            this.txtServiceTooltip5.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtServiceTooltip5.Location = new System.Drawing.Point(659, 152);
             this.txtServiceTooltip5.Name = "txtServiceTooltip5";
             this.txtServiceTooltip5.ReadOnly = true;
-            this.txtServiceTooltip5.Size = new System.Drawing.Size(287, 21);
+            this.txtServiceTooltip5.Size = new System.Drawing.Size(287, 24);
             this.txtServiceTooltip5.TabIndex = 65;
             // 
             // txtServiceTooltip1
             // 
-            this.txtServiceTooltip1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtServiceTooltip1.Location = new System.Drawing.Point(659, 35);
+            this.txtServiceTooltip1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtServiceTooltip1.Location = new System.Drawing.Point(659, 48);
             this.txtServiceTooltip1.Name = "txtServiceTooltip1";
             this.txtServiceTooltip1.ReadOnly = true;
-            this.txtServiceTooltip1.Size = new System.Drawing.Size(287, 21);
+            this.txtServiceTooltip1.Size = new System.Drawing.Size(287, 24);
             this.txtServiceTooltip1.TabIndex = 61;
             // 
             // txtServiceTooltip4
             // 
-            this.txtServiceTooltip4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtServiceTooltip4.Location = new System.Drawing.Point(659, 110);
+            this.txtServiceTooltip4.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtServiceTooltip4.Location = new System.Drawing.Point(659, 123);
             this.txtServiceTooltip4.Name = "txtServiceTooltip4";
             this.txtServiceTooltip4.ReadOnly = true;
-            this.txtServiceTooltip4.Size = new System.Drawing.Size(287, 21);
+            this.txtServiceTooltip4.Size = new System.Drawing.Size(287, 24);
             this.txtServiceTooltip4.TabIndex = 64;
             // 
             // txtServiceTooltip2
             // 
-            this.txtServiceTooltip2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtServiceTooltip2.Location = new System.Drawing.Point(659, 60);
+            this.txtServiceTooltip2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtServiceTooltip2.Location = new System.Drawing.Point(659, 72);
             this.txtServiceTooltip2.Name = "txtServiceTooltip2";
             this.txtServiceTooltip2.ReadOnly = true;
-            this.txtServiceTooltip2.Size = new System.Drawing.Size(287, 21);
+            this.txtServiceTooltip2.Size = new System.Drawing.Size(287, 24);
             this.txtServiceTooltip2.TabIndex = 62;
             // 
             // txtServiceTooltip3
             // 
-            this.txtServiceTooltip3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtServiceTooltip3.Location = new System.Drawing.Point(659, 86);
+            this.txtServiceTooltip3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtServiceTooltip3.Location = new System.Drawing.Point(659, 98);
             this.txtServiceTooltip3.Name = "txtServiceTooltip3";
             this.txtServiceTooltip3.ReadOnly = true;
-            this.txtServiceTooltip3.Size = new System.Drawing.Size(287, 21);
+            this.txtServiceTooltip3.Size = new System.Drawing.Size(287, 24);
             this.txtServiceTooltip3.TabIndex = 63;
             // 
             // Hotkeys
             // 
             this.Hotkeys.AutoSize = true;
             this.Hotkeys.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Hotkeys.Location = new System.Drawing.Point(331, 418);
+            this.Hotkeys.Location = new System.Drawing.Point(16, 445);
             this.Hotkeys.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.Hotkeys.Name = "Hotkeys";
             this.Hotkeys.Size = new System.Drawing.Size(124, 18);
@@ -1768,18 +1546,30 @@
             this.groupBox4.Controls.Add(this.cmbGlobalKey4Service);
             this.groupBox4.Controls.Add(this.cmbGlobalKey5Service);
             this.groupBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox4.Location = new System.Drawing.Point(327, 398);
+            this.groupBox4.Location = new System.Drawing.Point(12, 425);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(959, 158);
+            this.groupBox4.Size = new System.Drawing.Size(959, 161);
             this.groupBox4.TabIndex = 150;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Services on EA global hotkeys / shortcuts";
             // 
-            // frmSettings
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(227, 13);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(311, 29);
+            this.label1.TabIndex = 196;
+            this.label1.Text = "Settings Keys and Shortcuts";
+            // 
+            // FrmSettingsKey
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1316, 842);
+            this.AutoSize = true;
+            this.ClientSize = new System.Drawing.Size(1015, 842);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.cmbGlobalKeySearch5Mod4);
             this.Controls.Add(this.cmbGlobalKeySearch5Mod2);
             this.Controls.Add(this.cmbGlobalKeySearch5Mod3);
@@ -1833,7 +1623,6 @@
             this.Controls.Add(this.cmbGlobalKeyService1Mod1);
             this.Controls.Add(this.cmbGlobalKeyService1Key);
             this.Controls.Add(this.groupBox4);
-            this.Controls.Add(this.txtButton5TextService);
             this.Controls.Add(this.txtButton4TextService);
             this.Controls.Add(this.txtButton3TextService);
             this.Controls.Add(this.txtButton2TextService);
@@ -1850,14 +1639,11 @@
             this.Controls.Add(this.txtBtn1Text);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOK);
-            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox3);
             this.Margin = new System.Windows.Forms.Padding(2);
-            this.Name = "frmSettings";
-            this.Text = "frmSettings";
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.Name = "FrmSettingsKey";
+            this.Text = "hoTools: Settings Keys / Shortcuts";
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -1874,26 +1660,7 @@
         #endregion
         private System.Windows.Forms.Button btnOK;
         private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.ComboBox cboStatechartLineStyle;
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.ComboBox cboPackageLineStyle;
-        private System.Windows.Forms.ComboBox cboUseCaseLineStyle;
-        private System.Windows.Forms.ComboBox cboDeploymentLineStyle;
-        private System.Windows.Forms.ComboBox cboCustomLineStyle;
-        private System.Windows.Forms.ComboBox cboCompositeStructureLineStyle;
-        private System.Windows.Forms.ComboBox cboComponentLineStyle;
-        private System.Windows.Forms.ComboBox cboClassLineStyle;
-        private System.Windows.Forms.ComboBox cboActivityLineStyle;
         private System.Windows.Forms.TextBox txtBtn1Text;
         private System.Windows.Forms.TextBox txtBtn1SearchName;
         private System.Windows.Forms.TextBox txtBtn1SearchTerm;
@@ -2026,5 +1793,6 @@
         private System.Windows.Forms.ComboBox cmbGlobalKeySearch1Mod1;
         private System.Windows.Forms.ComboBox cmbGlobalKeySearch1Key;
         private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.Label label1;
     }
 }

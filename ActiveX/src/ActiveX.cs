@@ -247,38 +247,39 @@ namespace hoTools.ActiveX
             // think about informing Addin of this event
         }
 
-        private void getAllLatestrecursiveToolStripMenuItem_Click(object sender, EventArgs e)
+        #pragma warning disable RECS0154
+        void getAllLatestrecursiveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             EaService.getVcLatestRecursive(Repository);
         }
-
-        private void createActivityForOperationToolStripMenuItem_Click(object sender, EventArgs e)
+        #pragma warning restore RECS0154
+        void createActivityForOperationToolStripMenuItem_Click(object sender, EventArgs e)
         {
             EaService.CreateActivityForOperation(Repository);
         }
 
-        private void showFolderToolStripMenuItem_Click(object sender, EventArgs e)
+        void showFolderToolStripMenuItem_Click(object sender, EventArgs e)
         {
             EaService.ShowFolder(Repository, isTotalCommander: false);
         }
 
-        private void copyGUIDSQLToClipboardToolStripMenuItem_Click(object sender, EventArgs e)
+        void copyGUIDSQLToClipboardToolStripMenuItem_Click(object sender, EventArgs e)
         {
             EaService.copyGuidSqlToClipboard(Repository);
         }
 
-        private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
+        void settingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this._frmSettingsLineStyle = new FrmSettingsLineStyle(AddinSettings, this);
             this._frmSettingsLineStyle.ShowDialog();
         }
 
-        private void btnUpdateActivityParametzer_Click(object sender, EventArgs e)
+        void btnUpdateActivityParametzer_Click(object sender, EventArgs e)
         {
             EaService.UpdateActivityParameter(Repository);
         }
 
-        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string configFilePath = AddinSettings.ConfigFilePath;
             switch (AddinSettings.Customer)
@@ -518,11 +519,13 @@ namespace hoTools.ActiveX
         }
         #endregion
         #region deletePortsWhichAreMarkedForDeletion
-        private void deletePortsWhichAreMarkedForDeletionfutureToolStripMenuItem_Click(object sender, EventArgs e)
+        #pragma warning disable RECS0154
+        void deletePortsWhichAreMarkedForDeletionfutureToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var port = new PortServices(Repository);
             port.deletePortsMarkedPorts();
         }
+       #pragma warning restore RECS0154
         #endregion
 
         /// <summary>
@@ -1290,7 +1293,7 @@ namespace hoTools.ActiveX
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(398, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(401, 24);
             this.menuStrip1.TabIndex = 22;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -1694,6 +1697,7 @@ namespace hoTools.ActiveX
             // 
             // AddinControlGUI
             // 
+            this.AutoSize = true;
             this.Controls.Add(this.btnLabelRight);
             this.Controls.Add(this.btnLabelLeft);
             this.Controls.Add(this.btnUp);
@@ -1727,7 +1731,7 @@ namespace hoTools.ActiveX
             this.Controls.Add(this.btnLH);
             this.Controls.Add(this.menuStrip1);
             this.Name = "AddinControlGUI";
-            this.Size = new System.Drawing.Size(398, 342);
+            this.Size = new System.Drawing.Size(401, 342);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.toolStrip2.ResumeLayout(false);
@@ -1746,7 +1750,7 @@ namespace hoTools.ActiveX
 
         #region parameterizeMenusAndButtons
         /// <summary>
-        /// Parameterize menu & buttons to visible/hidden due to
+        /// Parameterize menu and buttons to visible/hidden due to
         /// - isAdvanced
         /// - isSvnSupported
         /// - isVcSupported
@@ -1873,20 +1877,20 @@ namespace hoTools.ActiveX
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void settingsQueryAndSctipToolStripMenuItem_Click(object sender, EventArgs e)
+        void settingsQueryAndSctipToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _frmQueryAndScript = new FrmQueryAndScript(AddinSettings);
             _frmQueryAndScript.ShowDialog();
         }
 
-        private void settingGeneralToolStripMenuItem_Click(object sender, EventArgs e)
+        void settingGeneralToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _frmSettingsGeneral = new FrmSettingsGeneral(AddinSettings, this);
             _frmSettingsGeneral.ShowDialog();
 
         }
 
-        private void settingsKeysToolStripMenuItem_Click(object sender, EventArgs e)
+        void settingsKeysToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _frmSettingsKey = new FrmSettingsKey(AddinSettings, this);
             _frmSettingsKey.ShowDialog();

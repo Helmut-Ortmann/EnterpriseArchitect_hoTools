@@ -94,12 +94,12 @@ namespace hoTools.Utils.MksUtil
             return txt;
         }
 
-        private string cmd(string cmd)
+        private string cmd(string command)
         {
             string returnString = "";
             if (_vcPath == null) return returnString;
             var psi = new ProcessStartInfo(@"si");
-            psi.Arguments = cmd + " \"" + _vcPath + "\"";  // wrap file name in " to avoid problems with blank in name
+            psi.Arguments = command + " \"" + _vcPath + "\"";  // wrap file name in " to avoid problems with blank in name
             psi.RedirectStandardOutput = true;
             psi.RedirectStandardError = true;
             psi.WindowStyle = ProcessWindowStyle.Hidden;

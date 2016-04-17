@@ -11,7 +11,7 @@ namespace hoTools.Utils.Parameter
     //---------------------------------------------------------------------------------------
     // Param Allows to set properties for Activity Parameter
     //---------------------------------------------------------------------------------------
-    // update properties for returnvalue
+    // update properties for return value
     //            Param par = new Param(rep, parTrgt);
     //            par.setParameterProperties("direction", "out");
     //            par.save();
@@ -46,7 +46,7 @@ namespace hoTools.Utils.Parameter
 
                 // get description
                 XmlNode xrefDESC = XmlDoc.SelectSingleNode("//DESCR");
-                string _properties = null;
+                _properties = null;
                 if (xrefDESC != null) _properties = xrefDESC.InnerText;
             }
         }

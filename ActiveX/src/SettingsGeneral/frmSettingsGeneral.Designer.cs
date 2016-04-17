@@ -312,7 +312,7 @@
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOk);
             this.Name = "FrmSettingsGeneral";
-            this.Text = "frmSettingsGeneral";
+            this.Text = "hoTools: General Settings";
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.ResumeLayout(false);

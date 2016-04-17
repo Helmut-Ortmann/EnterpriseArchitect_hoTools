@@ -814,7 +814,7 @@ namespace hoTools.Settings
         #endregion
         #region updateSearchesAndServices
         /// <summary>
-        /// Update the services & searches for:
+        /// Update the services and searches for:
         /// - Buttons
         /// - Global keys / global shortcuts / keyboard keys
         /// by 

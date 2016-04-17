@@ -118,16 +118,14 @@ namespace hoTools.Utils
     /// <summary>
     /// Sort diagramObject
     /// </summary>
-    /// <param name="x">first value of Name to compare</param>
-    /// <param name="y">second value of Name to compare</param>
     public class DiagramObjectComparer : IComparer<DiagramObject>
     {
-        public int Compare(DiagramObject x, DiagramObject y)
+        public int Compare(DiagramObject firstValue, DiagramObject secondValue)
         {
-            if (x == null && y == null) return 0;
-            if (x == null) return 1;
-            if (y == null) return -1;
-            return string.Compare(x.Name, y.Name, StringComparison.CurrentCulture);
+            if (firstValue == null && secondValue == null) return 0;
+            if (firstValue == null) return 1;
+            if (secondValue == null) return -1;
+            return string.Compare(firstValue.Name, secondValue.Name, StringComparison.CurrentCulture);
         }
     }
     public class DiagramObjectSelected
@@ -153,31 +151,27 @@ namespace hoTools.Utils
     /// <summary>
     /// Sort diagramObjectSelectedLeftComparer
     /// </summary>
-    /// <param name="x">first value of Name to compare</param>
-    /// <param name="y">second value of Name to compare</param>
     public class DiagramObjectSelectedHorizontalComparer : IComparer<DiagramObjectSelected>
     {
-        public int Compare(DiagramObjectSelected x, DiagramObjectSelected y)
+        public int Compare(DiagramObjectSelected firstValue, DiagramObjectSelected secondValue)
         {
-            if (x == null && y == null) return 0;
-            if (x == null) return 1;
-            if (y == null) return -1;
-            return x.Position.CompareTo(y.Position);
+            if (firstValue == null && secondValue == null) return 0;
+            if (firstValue == null) return 1;
+            if (secondValue == null) return -1;
+            return firstValue.Position.CompareTo(secondValue.Position);
         }
     }
     /// <summary>
     /// Sort diagramObjectSelectedLeftComparer
     /// </summary>
-    /// <param name="x">first value of Name to compare</param>
-    /// <param name="y">second value of Name to compare</param>
     public class DiagramObjectSelectedVerticalComparer : IComparer<DiagramObjectSelected>
     {
-        public int Compare(DiagramObjectSelected x, DiagramObjectSelected y)
+        public int Compare(DiagramObjectSelected firstValue, DiagramObjectSelected secondValue)
         {
-            if (x == null && y == null) return 0;
-            if (x == null) return 1;
-            if (y == null) return -1;
-            if (x.Position < y.Position) return 1;
+            if (firstValue == null && secondValue == null) return 0;
+            if (firstValue == null) return 1;
+            if (secondValue == null) return -1;
+            if (firstValue.Position < secondValue.Position) return 1;
             return -1;
          }
     }

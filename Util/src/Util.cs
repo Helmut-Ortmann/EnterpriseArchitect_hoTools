@@ -1148,7 +1148,9 @@ namespace hoTools.Utils
                         }
 
         }
+        #pragma warning disable RECS0154 // Parameter is never used
         public static string getGenFilePath(EA.Repository rep, EA.Element el)
+        #pragma warning restore RECS0154 // Parameter is never used
         {
             string path = el.Genfile;
             string localPathVar = "";

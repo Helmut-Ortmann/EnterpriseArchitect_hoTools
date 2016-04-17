@@ -69,7 +69,7 @@ namespace hoTools.EaServices
         // Search for Elements, Operation, Attributes, GUID
         public static void runQuickSearch(EA.Repository rep, string searchName, string searchString)
         {
-            // get the search vom setting
+            // get the search from setting
             try
             {
                 rep.RunModelSearch(searchName, searchString, "", "");
@@ -394,7 +394,7 @@ namespace hoTools.EaServices
                 rep.ShowInProjectView(dia);
                 return true;
             }
-            // display the origianl diagram on what the frame is based
+            // display the original diagram on what the frame is based
             if (el.Type == "UMLDiagram")
             {
                 int id = Convert.ToInt32(el.get_MiscData(0));
@@ -699,7 +699,7 @@ namespace hoTools.EaServices
 
                 if (con.Type.Equals("Sequence"))
                 {
-                    // If name is of the form: OperationName(..) the the operation is associated to an method
+                    // If name is of the form: OperationName(..) the operation is associated to an method
                     string opName = con.Name;
                     if (opName.EndsWith(")", StringComparison.Ordinal))
                     {
@@ -1140,7 +1140,7 @@ namespace hoTools.EaServices
                 }
                 if (isComponent)
                 {
-                    addPortToComponent(pos, elSource, elTarget, dia, diaObjSource);
+                    addPortToComponent(elSource, elTarget);
                     
                 }
                 else
@@ -1158,7 +1158,7 @@ namespace hoTools.EaServices
                 EaService.showEmbeddedElementsGUI(rep);
             }
             else
-            {// set linestyle
+            {// set line style
                 
             }
 
@@ -1206,7 +1206,7 @@ namespace hoTools.EaServices
 
                 diaObjTarget.ElementID = elTarget.ElementID;
                 diaObjTarget.Sequence = 1;
-                // supress attributes/operations
+                // suppress attributes/operations
                 diaObjTarget.Style = "DUID=1263D775;AttPro=0;AttPri=0;AttPub=0;AttPkg=0;AttCustom=0;OpCustom=0;PType=0;RzO=1;OpPro=0;OpPri=0;OpPub=0;OpPkg=0;";
                 diaObjTarget.Update();
             }
@@ -1256,7 +1256,7 @@ namespace hoTools.EaServices
 
         }
         
-        private static void addPortToComponent(int pos, EA.Element elSource, EA.Element elInterface, EA.Diagram dia, EA.DiagramObject diaObjSource)
+        static void addPortToComponent(EA.Element elSource, EA.Element elInterface)
         {
             EA.Element port = null;
             EA.Element interf = null;
@@ -1351,7 +1351,7 @@ namespace hoTools.EaServices
  
 
 
-            // concatinate lines =..;
+            // concatenate lines =..;
             match = Regex.Match(s0, @"[^=]*(=[^;{}]*)", RegexOptions.Singleline);
             
             while (match.Success)
@@ -1365,7 +1365,7 @@ namespace hoTools.EaServices
                 }
                 match = match.NextMatch();
             }
-            // concatinate lines nnnn(..);
+            // concatenate lines nnnn(..);
             match = Regex.Match(s0, @"[A-Za-z0-9_]+[\s]*\([^;}{]*\)", RegexOptions.Singleline);
             while (match.Success)
             {
@@ -1380,7 +1380,7 @@ namespace hoTools.EaServices
                 }
                 match = match.NextMatch();
             }
-            // remove emty lines
+            // remove empty lines
             s0 = Regex.Replace(s0, @"\r\n\s*\r\n", "\r\n"); 
             
            string[] lines = Regex.Split(s0, "\r\n");
@@ -1674,7 +1674,7 @@ namespace hoTools.EaServices
                 var el = (EA.Element)rep.GetContextObject();
                 if (el.Type.Equals("Activity"))
                 {
-                    // get the accociated operation
+                    // get the associated operation
                     EA.Method m = Util.getOperationFromBrehavior(rep, el);
                     if (el.Locked) return;
                     if (m == null) return;
@@ -1821,7 +1821,7 @@ namespace hoTools.EaServices
                     else
                     {//MiscData(0) PDATA1,PDATA2,
                         // pdata1 GUID for parts, UmlElement
-                        // object_id   for text with Hyperlink to diagram
+                        // object_id   for text with Hyper link to diagram
 
                         // locate text or frame
                         if (locateTextOrFrame(rep, el)) return;
@@ -1894,8 +1894,6 @@ namespace hoTools.EaServices
                 s0 = Regex.Replace(s0, @"\/\*", "//"); // /* ==> //
                 s0 = Regex.Replace(s0, @"\*\/", "");   // delete */
                 el.Notes = s0;
-                //el.Notes = el.Notes + "\r\n Text1 ssssssssssss fffffffffff\r\nText2 ggggggg gggggggggggggggg";
-
                 el.Update();
             }
         }
@@ -2581,7 +2579,7 @@ namespace hoTools.EaServices
 
 
             if (el == null ) {
-                MessageBox.Show("No Element selected, probably nothing or an attribut/operation");
+                MessageBox.Show("No Element selected, probably nothing or an attribute / operation");
                 return;
             }
             if (el.Type.Equals("Class") | el.Type.Equals("Interface")) createClassAttributesFromText(rep, el, txt);
@@ -2606,8 +2604,6 @@ namespace hoTools.EaServices
             txt = Regex.Replace(txt, @"^[\s]*(#[\s]*if|#[\s]*else|#[\s]*end)[^\n]*\n", "", RegexOptions.Multiline);
 
 
-            // remove all \r\n
-            //txt = Regex.Replace(txt, @"(\r|\n)", "");
 
             // get all lines
             string[] lines = Regex.Split(txt, "\r\n");
@@ -2802,12 +2798,12 @@ namespace hoTools.EaServices
                     }
                     catch (Exception e)
                     {
-                        MessageBox.Show(e.ToString(), "Error updating attribut");
+                        MessageBox.Show(e.ToString(), "Error updating attribute");
                     }
                 }
                 else
                 {
-                    MessageBox.Show(s+"\n\n"+sCompact, "Couldn't understand attribute systax");
+                    MessageBox.Show(s+"\n\n"+sCompact, "Couldn't understand attribute syntax");
                 }
             }
 
@@ -2820,7 +2816,7 @@ namespace hoTools.EaServices
              EA.Attribute a = null;
              bool isNewAttribute = true;
 
-             // delete spaces betwenn parameters
+             // delete spaces between parameters
             s = Regex.Replace(s, @",[\s]+",",");
             s = Regex.Replace(s, @"[\s]+,", ",");
 
@@ -3048,8 +3044,10 @@ namespace hoTools.EaServices
                     if (el.Name != parType) el = null;
                 }
                 // empty catch, el = null
+                #pragma warning disable RECS0022
                 catch //(Exception e)
                 { }
+                #pragma warning restore RECS0022
 
             }
 
@@ -3132,7 +3130,7 @@ namespace hoTools.EaServices
 
                         // checkout + checkin to make the change permanent
                         pkg.VersionControlCheckout();
-                        pkg.VersionControlCheckin("Reorganisation *.xml files");
+                        pkg.VersionControlCheckin("Re- organization *.xml files");
                     }
                     catch (Exception e1)
                     {
@@ -3146,7 +3144,7 @@ namespace hoTools.EaServices
             return true;
         }
         #region VcReconcile
-        [ServiceOperation("{EAC9246F-96FA-40E7-885A-A572E907AF86}", "Scan XMI and reconcile", "no selction required", false)]
+        [ServiceOperation("{EAC9246F-96FA-40E7-885A-A572E907AF86}", "Scan XMI and reconcile", "no selection required", false)]
         public static void VcReconcile(EA.Repository rep)
         {
                  //
@@ -3571,7 +3569,7 @@ namespace hoTools.EaServices
             EA.DiagramObject trgObj = EaService.createDiagramObjectFromContext(rep, "", type, subType,0,0,guardString, originalSrcEl);
             EA.Element trgtEl = rep.GetElementByID(trgObj.ElementID);
 
-            // if connection to more than one element make sure the new elemenet is on the deepest position
+            // if connection to more than one element make sure the new element is on the deepest position
             int offset = 50;
             if (guardString == "yes") offset = 0;
             int bottom = 1000;
@@ -3666,7 +3664,7 @@ namespace hoTools.EaServices
                 srcEl.Connectors.Refresh();
                 trgEl.Connectors.Refresh();
                 dia.DiagramLinks.Refresh();
-                // set linestyle
+                // set line style
                 EA.DiagramLink link = getDiagramLinkForConnector(dia, con.ConnectorID);
                 if (link != null) Util.setLineStyleForDiagramLink("LV", link);
                
@@ -3677,6 +3675,7 @@ namespace hoTools.EaServices
         }
         #endregion
         public static Connector getConnectionDefault(EA.Diagram dia) => new Connector("DataFlow", "");
+
         #region splitDiagramObjectsToLastSelected
         [ServiceOperation("{521FCFEB-984B-43F0-A710-E97C29E4C8EE}", "Split last selected Diagram object from previous selected Diagram Objects", "Incoming and outgoing connections", false)]
         public static void splitDiagramObjectsToLastSelected(EA.Repository rep)
@@ -3983,7 +3982,7 @@ namespace hoTools.EaServices
                 if (! ("Class Interface".Contains(elTarget.Type))) continue;
                 if (!(elTarget.Name.EndsWith("_i", StringComparison.Ordinal)))
                 {
-                    addPortToComponent(pos, elSource, elTarget, dia, diaObjSource);
+                    addPortToComponent(elSource, elTarget);
                     pos = pos + 1;
                 }
 
@@ -3993,7 +3992,7 @@ namespace hoTools.EaServices
                         if (el == null) continue; 
                         if (!(el.Name.EndsWith("_i", StringComparison.Ordinal)))
                         {
-                            addPortToComponent(pos, elSource, el, dia, diaObjSource);
+                            addPortToComponent(elSource, el);
                             pos = pos + 1;
                         }
                     }
@@ -4465,8 +4464,7 @@ namespace hoTools.EaServices
             MessageBox.Show("Helmut.Ortmann@t-online.de\n"+
                             "Helmut.Ortmann@t-online.de\n" +
                             "Germany\n" +
-                            "privat: +49 172 / 51 79 16 7\n"+
-                            "VAR1:  xx-xxxx" +
+                            "private: +49 172 / 51 79 16 7\n"+
                             "\n\nInstall:\t" + installDir +
                             "\nConfig:\t" + configFilePath
                     , "hoTools for VAR1  " + release);

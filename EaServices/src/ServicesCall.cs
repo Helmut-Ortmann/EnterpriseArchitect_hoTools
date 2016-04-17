@@ -34,37 +34,32 @@ namespace hoTools.EaServices
     /// <summary>
     /// Sort ServicesCalls against column Description. Use Interface IComparable.
     /// </summary>
-    /// <param name="x">first value of Description to compare</param>
-    /// <param name="y">second value of Description to compare</param>
     public class ServicesCallDescriptionComparer : IComparer<ServiceCall>
     {
-        public int Compare(ServiceCall x, ServiceCall y)
+        public int Compare(ServiceCall firstValue, ServiceCall secondValue)
         {
-            if (x == null && y == null) return 0;
-            if (x == null) return 1;
-            if (y == null) return -1;
-            return string.Compare(x.Description, y.Description, StringComparison.Ordinal);
+            if (firstValue == null && secondValue == null) return 0;
+            if (firstValue == null) return 1;
+            if (secondValue == null) return -1;
+            return string.Compare(firstValue.Description, secondValue.Description, StringComparison.Ordinal);
         } 
     }
     /// <summary>
     /// Sort/Search ServicesCalls against column GUID. Use Interface IComparable.
     /// </summary>
-    /// <param name="x">first value of Description to compare</param>
-    /// <param name="y">second value of Description to compare</param>
     public class ServicesCallGUIDComparer : IComparer<ServiceCall>
     {
-        public int Compare(ServiceCall x, ServiceCall y)
+        public int Compare(ServiceCall firstValue, ServiceCall secondValue)
         {
-            if (x == null && y == null) return 0;
-            if (x == null) return 1;
-            if (y == null) return -1;
-            return string.Compare(x.GUID, y.GUID, StringComparison.Ordinal);
+            if (firstValue == null && secondValue == null) return 0;
+            if (firstValue == null) return 1;
+            if (secondValue == null) return -1;
+            return string.Compare(firstValue.GUID, secondValue.GUID, StringComparison.Ordinal);
         }
     }
     /// <summary>
     /// Class to define the configurable services
     /// </summary>
-    /// <param name="GUID">GUID of service</param>
     public class ServicesCallConfig
     {
         private MethodInfo _method = null;

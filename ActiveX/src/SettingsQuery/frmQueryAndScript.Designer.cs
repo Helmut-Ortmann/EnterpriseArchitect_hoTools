@@ -36,10 +36,10 @@
             this.rbOnlyQueryAddinWindow = new System.Windows.Forms.RadioButton();
             this.rbOnlyQueryTabWindow = new System.Windows.Forms.RadioButton();
             this.rbOnlyQueryDisableWindow = new System.Windows.Forms.RadioButton();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.rbScriptAndQueryAddinWindow = new System.Windows.Forms.RadioButton();
             this.rbScriptAndQueryTabWindow = new System.Windows.Forms.RadioButton();
             this.rbScriptAndQueryDisableWindow = new System.Windows.Forms.RadioButton();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -47,7 +47,7 @@
             // 
             // btnOk
             // 
-            this.btnOk.Location = new System.Drawing.Point(36, 251);
+            this.btnOk.Location = new System.Drawing.Point(26, 188);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(75, 23);
             this.btnOk.TabIndex = 0;
@@ -57,7 +57,7 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(166, 250);
+            this.btnCancel.Location = new System.Drawing.Point(107, 188);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 1;
@@ -111,19 +111,6 @@
             this.toolTip1.SetToolTip(this.rbOnlyQueryDisableWindow, "Disable SQL Query");
             this.rbOnlyQueryDisableWindow.UseVisualStyleBackColor = true;
             // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.rbOnlyQueryDisableWindow);
-            this.groupBox1.Controls.Add(this.rbOnlyQueryTabWindow);
-            this.groupBox1.Controls.Add(this.rbOnlyQueryAddinWindow);
-            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(26, 63);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(334, 43);
-            this.groupBox1.TabIndex = 210;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Edit SQL Query and run it";
-            // 
             // rbScriptAndQueryAddinWindow
             // 
             this.rbScriptAndQueryAddinWindow.AutoSize = true;
@@ -160,6 +147,19 @@
             this.toolTip1.SetToolTip(this.rbScriptAndQueryDisableWindow, "Disable SQL Query and run Script");
             this.rbScriptAndQueryDisableWindow.UseVisualStyleBackColor = true;
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.rbOnlyQueryDisableWindow);
+            this.groupBox1.Controls.Add(this.rbOnlyQueryTabWindow);
+            this.groupBox1.Controls.Add(this.rbOnlyQueryAddinWindow);
+            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox1.Location = new System.Drawing.Point(26, 63);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(334, 43);
+            this.groupBox1.TabIndex = 210;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Edit SQL Query and run it";
+            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.rbScriptAndQueryDisableWindow);
@@ -177,14 +177,15 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(576, 306);
+            this.AutoSize = true;
+            this.ClientSize = new System.Drawing.Size(476, 225);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOk);
             this.Name = "FrmQueryAndScript";
-            this.Text = "Settings Query and Script";
+            this.Text = "hoTools: Settings Query and Script";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);

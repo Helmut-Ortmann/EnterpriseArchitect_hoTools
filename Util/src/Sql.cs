@@ -68,7 +68,7 @@ namespace hoTools.Utils.SQL
         #endregion
 
         #region userHasPermission
-        public Boolean userHasPermission(string userGUID, int permissionID)
+        public Boolean userHasPermission(string userGUID)
         {
          bool result  =false;
          string query = @"SELECT 'Group' As PermissionType " +
