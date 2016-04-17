@@ -21,21 +21,12 @@ namespace hoTools.ActiveX
         public const string TABULATOR = "Script";
 
 
-        /// <summary>
-        /// Setting Query and Script
-        /// </summary>
-        FrmQueryAndScript frmQueryAndScript;
+        FrmQueryAndScript _frmQueryAndScript;
+        FrmSettingsGeneral _frmSettingsGeneral;
+        FrmSettingsKey _frmSettingsKey;
+        FrmSettingsLineStyle _frmSettingsLineStyle;
 
-        /// <summary>
-        /// Addin Settings General
-        /// </summary>
-        FrmSettingsGeneral frmSettingsGeneral; 
-
-        /// <summary>
-        /// Settings
-        /// </summary>
-        frmSettingsKey frmSettings;
-
+       
         #region Generated
 
         private Button btnLH;
@@ -278,8 +269,8 @@ namespace hoTools.ActiveX
 
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.frmSettings = new frmSettingsKey(AddinSettings, this);
-            this.frmSettings.ShowDialog();
+            this._frmSettingsLineStyle = new FrmSettingsLineStyle(AddinSettings, this);
+            this._frmSettingsLineStyle.ShowDialog();
         }
 
         private void btnUpdateActivityParametzer_Click(object sender, EventArgs e)
@@ -1340,6 +1331,7 @@ namespace hoTools.ActiveX
             this.settingsKeysToolStripMenuItem.Name = "settingsKeysToolStripMenuItem";
             this.settingsKeysToolStripMenuItem.Size = new System.Drawing.Size(207, 22);
             this.settingsKeysToolStripMenuItem.Text = "Settings &Keys";
+            this.settingsKeysToolStripMenuItem.Click += new System.EventHandler(this.settingsKeysToolStripMenuItem_Click);
             // 
             // doToolStripMenuItem
             // 
@@ -1736,7 +1728,6 @@ namespace hoTools.ActiveX
             this.Controls.Add(this.menuStrip1);
             this.Name = "AddinControlGUI";
             this.Size = new System.Drawing.Size(398, 342);
-            this.Load += new System.EventHandler(this.AddinControlGUI_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.toolStrip2.ResumeLayout(false);
@@ -1755,7 +1746,7 @@ namespace hoTools.ActiveX
 
         #region parameterizeMenusAndButtons
         /// <summary>
-        /// Parametrerize menue & buttons to visible/hidden due to
+        /// Parameterize menu & buttons to visible/hidden due to
         /// - isAdvanced
         /// - isSvnSupported
         /// - isVcSupported
@@ -1802,7 +1793,7 @@ namespace hoTools.ActiveX
             btnAddDiagramNote.Visible = visibleDiagramNote;
             btnAddElementNote.Visible = visibleDiagramNote;
 
-            //bool visibleDiagramNote = false || _addinSettings.isAdvancedDiagramNote;
+            //boolean visibleDiagramNote = false || _addinSettings.isAdvancedDiagramNote;
 
 
         }
@@ -1876,18 +1867,7 @@ namespace hoTools.ActiveX
         }
         #endregion
 
-        
-
-        private void AddinControlGUI_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void openScriptAndQueryToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
+         
         /// <summary>
         /// Open Query and Scripts
         /// </summary>
@@ -1895,15 +1875,21 @@ namespace hoTools.ActiveX
         /// <param name="e"></param>
         private void settingsQueryAndSctipToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.frmQueryAndScript = new FrmQueryAndScript(AddinSettings);
-            this.frmQueryAndScript.ShowDialog();
+            _frmQueryAndScript = new FrmQueryAndScript(AddinSettings);
+            _frmQueryAndScript.ShowDialog();
         }
 
         private void settingGeneralToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.frmSettingsGeneral = new FrmSettingsGeneral(AddinSettings, this);
-            this.frmSettingsGeneral.ShowDialog();
+            _frmSettingsGeneral = new FrmSettingsGeneral(AddinSettings, this);
+            _frmSettingsGeneral.ShowDialog();
 
+        }
+
+        private void settingsKeysToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _frmSettingsKey = new FrmSettingsKey(AddinSettings, this);
+            _frmSettingsKey.ShowDialog();
         }
     }
 }

@@ -12,7 +12,7 @@ namespace hoTools.Settings
     /// frmSettings  Settings of hoTools
     /// Reads from configuration, displays the content and write to configuration.
     /// </summary>
-    public partial class frmSettingsLineStyle : Form
+    public partial class FrmSettingsLineStyle : Form
     {   
         private AddinSettings _settings;
         private AddinControlGUI _addinControl = null;
@@ -23,7 +23,7 @@ namespace hoTools.Settings
         /// </summary>
         /// <param name="settings">Object with settings</param>
         /// <param name="addinControl">Object with Control</param>
-        public frmSettingsLineStyle(AddinSettings settings, AddinControlGUI addinControl)
+        public FrmSettingsLineStyle(AddinSettings settings, AddinControlGUI addinControl)
         {
             InitializeComponent();
 
