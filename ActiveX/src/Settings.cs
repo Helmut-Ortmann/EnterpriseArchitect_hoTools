@@ -143,9 +143,121 @@ namespace hoTools.Settings
             currentConfig.Save();
         }
         #endregion
-        
-        
+
+
         #region Properties
+
+        #region Property: isLineStyleSupport
+        public bool isLineStyleSupport
+        {
+            get
+            {
+                bool result;
+                if (bool.TryParse(this.currentConfig.AppSettings.Settings["isLineStyleSupport"].Value, out result))
+                {
+                    return result;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            set
+            {
+                this.currentConfig.AppSettings.Settings["isLineStyleSupport"].Value = value.ToString();
+            }
+        }
+        #endregion
+
+        #region Property: isShortKeySupport
+        public bool isShortKeySupport
+        {
+            get
+            {
+                bool result;
+                if (bool.TryParse(this.currentConfig.AppSettings.Settings["isShortKeySupport"].Value, out result))
+                {
+                    return result;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            set
+            {
+                this.currentConfig.AppSettings.Settings["isShortKeySupport"].Value = value.ToString();
+            }
+        }
+        #endregion
+        #region Property: isShowServiceButton
+        public bool isShowServiceButton
+        {
+            get
+            {
+                bool result;
+                if (bool.TryParse(this.currentConfig.AppSettings.Settings["isShowServiceButton"].Value, out result))
+                {
+                    return result;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            set
+            {
+                this.currentConfig.AppSettings.Settings["isShowServiceButton"].Value = value.ToString();
+            }
+        }
+        #endregion
+        #region Property: isShowQueryButton
+        public bool isShowQueryButton
+        {
+            get
+            {
+                bool result;
+                if (bool.TryParse(this.currentConfig.AppSettings.Settings["isShowQueryButton"].Value, out result))
+                {
+                    return result;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            set
+            {
+                this.currentConfig.AppSettings.Settings["isShowQueryButton"].Value = value.ToString();
+            }
+        }
+        #endregion
+        #region Property: isFavoriteSupport
+        public bool isFavoriteSupport
+        {
+            get
+            {
+                bool result;
+                if (bool.TryParse(this.currentConfig.AppSettings.Settings["isFavoriteSupport"].Value, out result))
+                {
+                    return result;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            set
+            {
+                this.currentConfig.AppSettings.Settings["isFavoriteSupport"].Value = value.ToString();
+            }
+        }
+        #endregion
+
+
+
+
+
         #region CustomerCfg (possible customer) 
         public enum CustomerCfg
         {
@@ -290,6 +402,29 @@ namespace hoTools.Settings
             set
             {
                 currentConfig.AppSettings.Settings["SearchAndReplaceWindow"].Value = value.ToString();
+
+            }
+
+        }
+        #endregion
+        #region Property: SearchAndReplaceWindow
+        public ShowInWindow LineStyleAndMoreWindow
+        {
+            get
+            {
+                ShowInWindow result;
+                if (Enum.TryParse<ShowInWindow>(this.currentConfig.AppSettings.Settings["LineStyleAndMoreWindow"].Value, out result))
+                {
+                    return (ShowInWindow)result;
+                }
+                else
+                {
+                    return ShowInWindow.Disabled;
+                }
+            }
+            set
+            {
+                currentConfig.AppSettings.Settings["LineStyleAndMoreWindow"].Value = value.ToString();
 
             }
 

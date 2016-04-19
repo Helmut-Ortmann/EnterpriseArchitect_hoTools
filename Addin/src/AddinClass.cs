@@ -932,10 +932,14 @@ namespace hoTools
 
                 try
                 {
-                    AddinControlGUI = addAddinControl<AddinControlGUI>(_AddinSettings.productName, 
-                        AddinControlGUI.PROGID, null, 
+                    // LineStyle and more
+                    if (!(_AddinSettings.SearchAndReplaceWindow == AddinSettings.ShowInWindow.Disabled))
+                    {
+                        AddinControlGUI = addAddinControl<AddinControlGUI>(_AddinSettings.productName,
+                        AddinControlGUI.PROGID, null,
                         AddinSettings.ShowInWindow.AddinWindow);
-                    _MyControlGUI = AddinControlGUI; // static + instance
+                        _MyControlGUI = AddinControlGUI; // static + instance
+                    }
 
                     // with Search & Replace EA Addin Windows
                     if (!  (_AddinSettings.SearchAndReplaceWindow == AddinSettings.ShowInWindow.Disabled) ) { 

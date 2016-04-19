@@ -22,6 +22,13 @@ namespace hoTools.Settings
 
 
             #region miscellaneous
+            chkLineStyleSupport.Checked = settings.isLineStyleSupport;
+            chkShortKeySupport.Checked = settings.isShortKeySupport;
+            chkShowServiceButtons.Checked = settings.isShowServiceButton;
+            chkShowQueryButtons.Checked = settings.isShowQueryButton;
+            chkFavoriteSupport.Checked = settings.isFavoriteSupport;
+
+
             txtQuickSearch.Text = settings.quickSearchName;
             txtFileManagerPath.Text = settings.FileManagerPath;
             chkAdvancedFeatures.Checked = settings.isAdvancedFeatures;
@@ -53,11 +60,25 @@ namespace hoTools.Settings
         {
             _settings.quickSearchName = txtQuickSearch.Text;
             _settings.FileManagerPath = txtFileManagerPath.Text;
+
+
+            _settings.isLineStyleSupport = chkLineStyleSupport.Checked;
+            _settings.isShortKeySupport = chkShortKeySupport.Checked;
+            _settings.isShowServiceButton = chkShowServiceButtons.Checked ;
+            _settings.isShowQueryButton = chkShowQueryButtons.Checked;
+            _settings.isFavoriteSupport = chkFavoriteSupport.Checked;
+
             _settings.isSvnSupport = chkSvnSupport.Checked;
             _settings.isVcSupport = chkVcSupport.Checked;
             _settings.isAdvancedFeatures = chkAdvancedFeatures.Checked;
             _settings.isAdvancedPort = chkAdvancedPort.Checked;
             _settings.isAdvancedDiagramNote = chkAdvancedDiagramNote.Checked;
+
+            #region LineStyleAndMoreWindow
+            _settings.LineStyleAndMoreWindow = AddinSettings.ShowInWindow.Disabled;
+            if (rbLineStyleAndMoreAddinWindow.Checked) _settings.LineStyleAndMoreWindow = AddinSettings.ShowInWindow.AddinWindow;
+            if (rbLineStyleAndMoreTabWindow.Checked) _settings.LineStyleAndMoreWindow = AddinSettings.ShowInWindow.TabWindow;
+            #endregion
 
             #region SearchAndReplaceWindow
             _settings.SearchAndReplaceWindow = AddinSettings.ShowInWindow.Disabled;
@@ -74,6 +95,16 @@ namespace hoTools.Settings
         private void btnCancel_Click(object sender, System.EventArgs e)
         {
             Close();
+        }
+
+        private void label7_Click(object sender, System.EventArgs e)
+        {
+
+        }
+
+        private void checkBox1_CheckedChanged(object sender, System.EventArgs e)
+        {
+
         }
     }
 }
