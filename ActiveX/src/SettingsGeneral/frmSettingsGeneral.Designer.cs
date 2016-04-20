@@ -51,8 +51,6 @@
             this.chkAdvancedPort = new System.Windows.Forms.CheckBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.txtFileManagerPath = new System.Windows.Forms.TextBox();
-            this.label34 = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.rbLineStyleAndMoreDisableWindow = new System.Windows.Forms.RadioButton();
             this.rbLineStyleAndMoreTabWindow = new System.Windows.Forms.RadioButton();
             this.rbLineStyleAndMoreAddinWindow = new System.Windows.Forms.RadioButton();
@@ -66,6 +64,8 @@
             this.chkShowQueryButtons = new System.Windows.Forms.CheckBox();
             this.chkFavoriteSupport = new System.Windows.Forms.CheckBox();
             this.label7 = new System.Windows.Forms.Label();
+            this.label34 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox3.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -251,11 +251,11 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(29, 117);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(158, 16);
+            this.label1.Size = new System.Drawing.Size(176, 18);
             this.label1.TabIndex = 212;
             this.label1.Text = "(Quick) EA-Search Name";
             this.toolTip1.SetToolTip(this.label1, "Search Name for searching the value of the entry field after using enter");
@@ -290,30 +290,6 @@
             this.txtFileManagerPath.Size = new System.Drawing.Size(314, 20);
             this.txtFileManagerPath.TabIndex = 226;
             this.toolTip1.SetToolTip(this.txtFileManagerPath, resources.GetString("txtFileManagerPath.ToolTip"));
-            // 
-            // label34
-            // 
-            this.label34.AutoSize = true;
-            this.label34.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label34.Location = new System.Drawing.Point(29, 278);
-            this.label34.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(177, 16);
-            this.label34.TabIndex = 225;
-            this.label34.Text = "Path File Manager / Explorer";
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.rbLineStyleAndMoreDisableWindow);
-            this.groupBox1.Controls.Add(this.rbLineStyleAndMoreTabWindow);
-            this.groupBox1.Controls.Add(this.rbLineStyleAndMoreAddinWindow);
-            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(32, 49);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(334, 43);
-            this.groupBox1.TabIndex = 212;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Linestyle and more";
             // 
             // rbLineStyleAndMoreDisableWindow
             // 
@@ -469,6 +445,30 @@
             this.toolTip1.SetToolTip(this.label7, "Add buttons to handle Favorites:\r\n- Element\r\n- Package\r\n- Diagram\r\nadd, remove, s" +
         "how");
             this.label7.Click += new System.EventHandler(this.label7_Click);
+            // 
+            // label34
+            // 
+            this.label34.AutoSize = true;
+            this.label34.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label34.Location = new System.Drawing.Point(29, 278);
+            this.label34.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(177, 16);
+            this.label34.TabIndex = 225;
+            this.label34.Text = "Path File Manager / Explorer";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.rbLineStyleAndMoreDisableWindow);
+            this.groupBox1.Controls.Add(this.rbLineStyleAndMoreTabWindow);
+            this.groupBox1.Controls.Add(this.rbLineStyleAndMoreAddinWindow);
+            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox1.Location = new System.Drawing.Point(32, 49);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(334, 43);
+            this.groupBox1.TabIndex = 212;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Linestyle and more";
             // 
             // FrmSettingsGeneral
             // 
