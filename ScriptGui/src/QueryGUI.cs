@@ -27,8 +27,8 @@ namespace hoTools.Query
     [ClassInterface(ClassInterfaceType.None)]
     [Guid("23722D72-7C6A-4246-B8B8-8D421CEBCD65")]
     [ProgId(PROGID)]
-    [ComDefaultInterface(typeof(IScriptGUI))]
-    public partial class QueryGUI : AddinGUI, IScriptGUI
+    [ComDefaultInterface(typeof(IQueryGUI))]
+    public partial class QueryGUI : AddinGUI, IQueryGUI
     {
         public const string PROGID = "hoTools.ScriptGUI";
         public const string TABULATOR_SCRIPT = "Scripts";
