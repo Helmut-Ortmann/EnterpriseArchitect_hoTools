@@ -88,7 +88,7 @@
       <Project>{5089f046-2f1a-49f2-bf76-f8dda89fd0be}</Project>
       <Name>FindAndReplace</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ScriptGui\QueryGui.csproj">
+    <ProjectReference Include="..\QueryGui\QueryGui.csproj">
       <Project>{d83c4d98-7aa9-4b1a-abed-ea8a9eac210c}</Project>
       <Name>QueryGui</Name>
     </ProjectReference>
