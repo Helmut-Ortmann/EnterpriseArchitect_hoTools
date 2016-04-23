@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("ScriptGui")]
-[assembly: AssemblyDescription("hoTools, run your own Scripts")]
+[assembly: AssemblyTitle("QueryGUI")]
+[assembly: AssemblyDescription("hoTools, run your own Query / Scripts")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Helmut Ortmann")]
-[assembly: AssemblyProduct("hoTools, ScriptGui")]
+[assembly: AssemblyProduct("hoTools, QueryGUI")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(true)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("d83c4d98-7aa9-4b1a-abed-ea8a9eac210c")]
+[assembly: Guid("2105715A-B2A5-4DBB-B65C-C7F362010111")]
 
 // Version information for an assembly consists of the following four values:
 //

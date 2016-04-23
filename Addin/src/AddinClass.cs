@@ -933,9 +933,9 @@ namespace hoTools
                 try
                 {
                     // LineStyle and more
-                    if (!(_AddinSettings.SearchAndReplaceWindow == AddinSettings.ShowInWindow.Disabled))
+                    if (!(_AddinSettings.LineStyleAndMoreWindow == AddinSettings.ShowInWindow.Disabled))
                     {
-                        AddinControlGUI = addAddinControl<AddinControlGUI>(_AddinSettings.productName,
+                    AddinControlGUI = addAddinControl<AddinControlGUI>(_AddinSettings.productName,
                         AddinControlGUI.PROGID, null,
                         AddinSettings.ShowInWindow.AddinWindow);
                         _MyControlGUI = AddinControlGUI; // static + instance

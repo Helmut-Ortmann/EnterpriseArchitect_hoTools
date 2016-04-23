@@ -38,6 +38,23 @@ namespace hoTools.Settings
             chkAdvancedDiagramNote.Checked = settings.isAdvancedDiagramNote;
             #endregion
 
+
+            #region LineStyleAndMoreWindow
+            // Initialize LineStyle Window
+            switch (_settings.LineStyleAndMoreWindow)
+            {
+                case AddinSettings.ShowInWindow.AddinWindow:
+                    rbLineStyleAndMoreAddinWindow.Checked = true;
+                    break;
+                case AddinSettings.ShowInWindow.TabWindow:
+                    rbLineStyleAndMoreTabWindow.Checked = true;
+                    break;
+                default:
+                    rbLineStyleAndMoreDisableWindow.Checked = true;
+                    break;
+            }
+            #endregion
+
             #region SearchAndReplaceWindow
             // Initialize Search and Replace Window
             switch (_settings.SearchAndReplaceWindow)

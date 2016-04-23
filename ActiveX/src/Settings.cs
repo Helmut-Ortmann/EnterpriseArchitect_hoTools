@@ -153,7 +153,9 @@ namespace hoTools.Settings
             get
             {
                 bool result;
-                if (bool.TryParse(this.currentConfig.AppSettings.Settings["isLineStyleSupport"].Value, out result))
+                var p = currentConfig.AppSettings.Settings["isLineStyleSupport"];
+                if (p == null) return true;
+                if (bool.TryParse(p.Value, out result))
                 {
                     return result;
                 }
@@ -407,7 +409,7 @@ namespace hoTools.Settings
 
         }
         #endregion
-        #region Property: SearchAndReplaceWindow
+        #region Property: LineStyleAndMoreWindow
         public ShowInWindow LineStyleAndMoreWindow
         {
             get

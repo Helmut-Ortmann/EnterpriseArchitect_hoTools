@@ -352,7 +352,6 @@ namespace hoTools.Query
             this.Controls.Add(this.flowLayoutPanel2);
             this.Name = "QueryGUI";
             this.Size = new System.Drawing.Size(769, 538);
-            this.Load += new System.EventHandler(this.ScriptGUI_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewScripts)).EndInit();
             this.contextMenuStripDataGrid.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);

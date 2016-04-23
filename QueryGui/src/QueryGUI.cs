@@ -18,19 +18,19 @@ using System.IO;
 namespace hoTools.Query
 {
     /// <summary>
-    /// ActiveX COM Component 'hoTools.ScriptGUI' to show as tab in the EA Addin window
+    /// ActiveX COM Component 'hoTools.QueryGUI' to show as tab in the EA Addin window
     /// this.Tag object with string of:
     /// - TABULATOR_QUERY if Query mode is used
     /// - TABULATOR_SCRPT if Script mode is used
     /// </summary>
     [ComVisible(true)]
     [ClassInterface(ClassInterfaceType.None)]
-    [Guid("23722D72-7C6A-4246-B8B8-8D421CEBCD65")]
+    [Guid("3F23B705-62F1-43D7-9F6F-085105FDF752")]
     [ProgId(PROGID)]
     [ComDefaultInterface(typeof(IQueryGUI))]
     public partial class QueryGUI : AddinGUI, IQueryGUI
     {
-        public const string PROGID = "hoTools.ScriptGUI";
+        public const string PROGID = "hoTools.QueryGUI";
         public const string TABULATOR_SCRIPT = "Scripts";
         public const string TABULATOR_QUERY = "Query";
 
@@ -183,8 +183,8 @@ namespace hoTools.Query
         #endregion
 
 
-        // Interface IScriptGUI implementation
-        public string getName() => "hoTools.ScriptGUI";
+        // Interface IQueryGUI implementation
+        public string getName() => "hoTools.QueryGUI";
 
         public override EA.Repository Repository
         {
@@ -201,10 +201,7 @@ namespace hoTools.Query
             }
         }
 
-        private void ScriptGUI_Load(object sender, EventArgs e)
-        {
-
-        }
+        
 
 
         /// <summary>

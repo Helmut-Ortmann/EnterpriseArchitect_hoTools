@@ -9,7 +9,7 @@ using hoTools.Utils.SQL;
 namespace hoTools.Query
 {
     /// <summary>
-    /// GUI Layer for ScriptGUI
+    /// GUI Layer for QueryGUI
     /// </summary>
     public static class GuiFunction
     {
