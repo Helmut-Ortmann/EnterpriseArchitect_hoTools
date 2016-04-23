@@ -46,6 +46,9 @@
       <Component Id="EaServices" Guid="EDB06D59-762F-4B7D-BCFF-7C59DDFC3519">
         <File Id="EaServices" KeyPath="yes" Name="EaServices.dll"  Source="$(var.EaServices.TargetPath)" />
       </Component>
+      <Component Id="AddinFramework" Guid="2D0DD439-7CE9-4EBE-BF29-CD4EBA09CD44">
+        <File Id="AddinFramework" KeyPath="yes" Name="AddinFramework.dll"  Source="$(var.AddinFramework.TargetPath)" />
+      </Component>
       <!--
       Name="AddinClass.dll" Source="$(var.AddinClass.TargetPath)" />
       Update if Assembly, Visual Studio Version changed
@@ -100,6 +103,9 @@
         <Class Id="{4E317EAA-B98E-3D12-987C-F00B53FBBA68}" Context="InprocServer32" Description="hoTools.EaServices.Dlg.dlgUser" ThreadingModel="both" ForeignServer="mscoree.dll">
           <ProgId Id="hoTools.EaServices.Dlg.dlgUser" Description="hoTools.EaServices.Dlg.dlgUser" />
         </Class>
+        <Class Id="{62F3A722-8268-3F10-825E-48239B7B5E90}" Context="InprocServer32" Description="hoTools.ActiveX.AddinGUI" ThreadingModel="both" ForeignServer="mscoree.dll">
+          <ProgId Id="hoTools.ActiveX.AddinGUI" Description="hoTools.ActiveX.AddinGUI" />
+        </Class>
         <Class Id="{82A06E9C-7568-4E4B-8D2C-A53B8D9A7272}" Context="InprocServer32" Description="hoTools.ActiveX.AddinControlGUI" ThreadingModel="both" ForeignServer="mscoree.dll">
           <ProgId Id="hoTools.ActiveXGUI" Description="hoTools.ActiveX.AddinControlGUI" />
         </Class>
@@ -132,6 +138,15 @@
         <RegistryValue Root="HKCR" Key="CLSID\{4E317EAA-B98E-3D12-987C-F00B53FBBA68}\InprocServer32" Name="Assembly" Value="ActiveX, Version=1.2.5.1, Culture=neutral, PublicKeyToken=37ea3d95ffcb87e1" Type="string" Action="write" />
         <RegistryValue Root="HKCR" Key="CLSID\{4E317EAA-B98E-3D12-987C-F00B53FBBA68}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
         <RegistryValue Root="HKCR" Key="CLSID\{4E317EAA-B98E-3D12-987C-F00B53FBBA68}\InprocServer32" Name="CodeBase" Value="file:///[#fil4D76395855488B9776C467C9F435A58D]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{62F3A722-8268-3F10-825E-48239B7B5E90}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{62F3A722-8268-3F10-825E-48239B7B5E90}\InprocServer32\1.2.5.1" Name="Class" Value="hoTools.ActiveX.AddinGUI" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{62F3A722-8268-3F10-825E-48239B7B5E90}\InprocServer32\1.2.5.1" Name="Assembly" Value="ActiveX, Version=1.2.5.1, Culture=neutral, PublicKeyToken=37ea3d95ffcb87e1" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{62F3A722-8268-3F10-825E-48239B7B5E90}\InprocServer32\1.2.5.1" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{62F3A722-8268-3F10-825E-48239B7B5E90}\InprocServer32\1.2.5.1" Name="CodeBase" Value="file:///[#fil4D76395855488B9776C467C9F435A58D]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{62F3A722-8268-3F10-825E-48239B7B5E90}\InprocServer32" Name="Class" Value="hoTools.ActiveX.AddinGUI" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{62F3A722-8268-3F10-825E-48239B7B5E90}\InprocServer32" Name="Assembly" Value="ActiveX, Version=1.2.5.1, Culture=neutral, PublicKeyToken=37ea3d95ffcb87e1" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{62F3A722-8268-3F10-825E-48239B7B5E90}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{62F3A722-8268-3F10-825E-48239B7B5E90}\InprocServer32" Name="CodeBase" Value="file:///[#fil4D76395855488B9776C467C9F435A58D]" Type="string" Action="write" />
         <RegistryValue Root="HKCR" Key="CLSID\{82A06E9C-7568-4E4B-8D2C-A53B8D9A7272}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
         <RegistryValue Root="HKCR" Key="CLSID\{82A06E9C-7568-4E4B-8D2C-A53B8D9A7272}\InprocServer32\1.2.5.1" Name="Class" Value="hoTools.ActiveX.AddinControlGUI" Type="string" Action="write" />
         <RegistryValue Root="HKCR" Key="CLSID\{82A06E9C-7568-4E4B-8D2C-A53B8D9A7272}\InprocServer32\1.2.5.1" Name="Assembly" Value="ActiveX, Version=1.2.5.1, Culture=neutral, PublicKeyToken=37ea3d95ffcb87e1" Type="string" Action="write" />
@@ -141,6 +156,10 @@
         <RegistryValue Root="HKCR" Key="CLSID\{82A06E9C-7568-4E4B-8D2C-A53B8D9A7272}\InprocServer32" Name="Assembly" Value="ActiveX, Version=1.2.5.1, Culture=neutral, PublicKeyToken=37ea3d95ffcb87e1" Type="string" Action="write" />
         <RegistryValue Root="HKCR" Key="CLSID\{82A06E9C-7568-4E4B-8D2C-A53B8D9A7272}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
         <RegistryValue Root="HKCR" Key="CLSID\{82A06E9C-7568-4E4B-8D2C-A53B8D9A7272}\InprocServer32" Name="CodeBase" Value="file:///[#fil4D76395855488B9776C467C9F435A58D]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="Record\{0ECAA154-1AC2-3B8F-9341-C6FF45BB20D2}\1.2.5.1" Name="Class" Value="hoTools.Settings.AddinSettings+ShowInWindow" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="Record\{0ECAA154-1AC2-3B8F-9341-C6FF45BB20D2}\1.2.5.1" Name="Assembly" Value="ActiveX, Version=1.2.5.1, Culture=neutral, PublicKeyToken=37ea3d95ffcb87e1" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="Record\{0ECAA154-1AC2-3B8F-9341-C6FF45BB20D2}\1.2.5.1" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="Record\{0ECAA154-1AC2-3B8F-9341-C6FF45BB20D2}\1.2.5.1" Name="CodeBase" Value="file:///[#fil4D76395855488B9776C467C9F435A58D]" Type="string" Action="write" />
         <RegistryValue Root="HKCR" Key="Record\{5E1E504C-95C7-4B14-A0F6-70329F70084A}\1.2.5.1" Name="Class" Value="EA.ObjectType" Type="string" Action="write" />
         <RegistryValue Root="HKCR" Key="Record\{5E1E504C-95C7-4B14-A0F6-70329F70084A}\1.2.5.1" Name="Assembly" Value="ActiveX, Version=1.2.5.1, Culture=neutral, PublicKeyToken=37ea3d95ffcb87e1" Type="string" Action="write" />
         <RegistryValue Root="HKCR" Key="Record\{5E1E504C-95C7-4B14-A0F6-70329F70084A}\1.2.5.1" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
@@ -214,9 +233,30 @@
         <RegistryValue Root="HKCR" Key="Record\{BECFCA00-BA97-34D3-A732-F472AAA07269}\1.2.5.1" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
         <RegistryValue Root="HKCR" Key="Record\{BECFCA00-BA97-34D3-A732-F472AAA07269}\1.2.5.1" Name="CodeBase" Value="file:///[#filC7544EB9035A370953E9570607E467EE]" Type="string" Action="write" />
       </Component>
+      <!--
+      Name="QueryGui.dll" Source="$(var.QueryGui.TargetPath)" />
+      Update if Assembly, Visual Studio Version changed
+      -->
       <!-- Configuration  ActiveX.dll.config  -->
-      <Component Id="ActiveX.dll.config" Guid="EA06E962-CDB3-4FDC-BB40-59F88BE5E7A2">
-        <File Id="ActiveX.dll.config" Name="ActiveX.dll.config" KeyPath="yes" Source="..\Setup\ActiveX.dll.config" />
+      <Component Id="cmp9219910A95E4A97E0FB63CFC68DBF972" Guid="*">
+        <Class Id="{23722D72-7C6A-4246-B8B8-8D421CEBCD65}" Context="InprocServer32" Description="hoTools.Query.QueryGUI" ThreadingModel="both" ForeignServer="mscoree.dll">
+          <ProgId Id="hoTools.ScriptGUI" Description="hoTools.Query.QueryGUI" />
+        </Class>
+        <File Id="filA37F4A5CC1095CD95C25F0B032E07EA0" KeyPath="yes"  Name="QueryGui.dll" Source="$(var.QueryGui.TargetPath)" />
+        <ProgId Id="Record" />
+        <RegistryValue Root="HKCR" Key="CLSID\{23722D72-7C6A-4246-B8B8-8D421CEBCD65}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{23722D72-7C6A-4246-B8B8-8D421CEBCD65}\InprocServer32\1.2.5.2" Name="Class" Value="hoTools.Query.QueryGUI" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{23722D72-7C6A-4246-B8B8-8D421CEBCD65}\InprocServer32\1.2.5.2" Name="Assembly" Value="QueryGui, Version=1.2.5.2, Culture=neutral, PublicKeyToken=37ea3d95ffcb87e1" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{23722D72-7C6A-4246-B8B8-8D421CEBCD65}\InprocServer32\1.2.5.2" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{23722D72-7C6A-4246-B8B8-8D421CEBCD65}\InprocServer32\1.2.5.2" Name="CodeBase" Value="file:///[#filA37F4A5CC1095CD95C25F0B032E07EA0]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{23722D72-7C6A-4246-B8B8-8D421CEBCD65}\InprocServer32" Name="Class" Value="hoTools.Query.QueryGUI" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{23722D72-7C6A-4246-B8B8-8D421CEBCD65}\InprocServer32" Name="Assembly" Value="QueryGui, Version=1.2.5.2, Culture=neutral, PublicKeyToken=37ea3d95ffcb87e1" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{23722D72-7C6A-4246-B8B8-8D421CEBCD65}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{23722D72-7C6A-4246-B8B8-8D421CEBCD65}\InprocServer32" Name="CodeBase" Value="file:///[#filA37F4A5CC1095CD95C25F0B032E07EA0]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="Record\{5E1E504C-95C7-4B14-A0F6-70329F70084A}\1.2.5.2" Name="Class" Value="EA.ObjectType" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="Record\{5E1E504C-95C7-4B14-A0F6-70329F70084A}\1.2.5.2" Name="Assembly" Value="QueryGui, Version=1.2.5.2, Culture=neutral, PublicKeyToken=37ea3d95ffcb87e1" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="Record\{5E1E504C-95C7-4B14-A0F6-70329F70084A}\1.2.5.2" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="Record\{5E1E504C-95C7-4B14-A0F6-70329F70084A}\1.2.5.2" Name="CodeBase" Value="file:///[#filA37F4A5CC1095CD95C25F0B032E07EA0]" Type="string" Action="write" />
       </Component>
     </ComponentGroup>
   </Fragment>

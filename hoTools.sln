@@ -43,6 +43,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Advanced", "Advanced", "{A9
 		Setup\src\Files.wxs = Setup\src\Files.wxs
 		FindAndReplace\bin\Release\FindAndReplace.wxs = FindAndReplace\bin\Release\FindAndReplace.wxs
 		FindAndReplace\bin\Release\FindAndReplaceCollectRegistrationInfo.bat = FindAndReplace\bin\Release\FindAndReplaceCollectRegistrationInfo.bat
+		QueryGui\bin\Release\QueryGUI.wxs = QueryGui\bin\Release\QueryGUI.wxs
+		QueryGui\bin\Release\QueryGUICollectRegistrationInfo.bat = QueryGui\bin\Release\QueryGUICollectRegistrationInfo.bat
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddinFramework", "AddinFramework\AddinFramework.csproj", "{B08AE89B-5E8D-46FD-A5D8-B3DB4D33FB46}"

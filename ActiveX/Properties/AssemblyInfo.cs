@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using hoTools;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
@@ -36,6 +36,6 @@ using System.Runtime.InteropServices;
 // If you change something you have to update the component information in Files.wxs
 // If not: you get registration error and the Addin isn't loaded in EA
 // Assembly version is used to output release information for an assembly
-[assembly: AssemblyVersion("1.2.5.1")] 
+[assembly: AssemblyVersion("2.0.0.1")] 
 // possibly make same as ProductVersion in Product.wxs
-[assembly: AssemblyFileVersion("1.2.01.0")]
+[assembly: AssemblyFileVersion("2.0.0.1")]
