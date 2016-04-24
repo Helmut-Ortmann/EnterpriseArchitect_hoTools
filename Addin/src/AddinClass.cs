@@ -187,7 +187,8 @@ namespace hoTools
         /// - "" : None-specialized Add-In.</returns>
         public override string EA_Connect(EA.Repository Repository)
         {
-            HotkeyHandlers.SetupGlobalHotkeys();
+            // register only if configured
+            if (AddinSettings.isShortKeySupport) HotkeyHandlers.SetupGlobalHotkeys();
             _repository = Repository;
             int v = Repository.LibraryVersion;
             if (Repository.IsSecurityEnabled)

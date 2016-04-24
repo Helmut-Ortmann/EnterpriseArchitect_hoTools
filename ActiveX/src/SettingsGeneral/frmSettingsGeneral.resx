@@ -120,13 +120,28 @@
   <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
   <data name="txtQuickSearch.ToolTip" xml:space="preserve">
     <value>EA Model Search Name for Quick Search
 - Simple (EA Standard Search)  or
-- Nother EA Model Search or
+- Other EA Model Search or
 - Your own Search for your most important EA Model Items
 
-Your most frequently Model Items at your finger tip.</value>
+Your most frequently Model Items at your finger tip.
+
+Keep it empty to hide Quick Search support</value>
+  </data>
+  <data name="label1.ToolTip" xml:space="preserve">
+    <value>EA Model Search Name for Quick Search
+- Simple (EA Standard Search)  or
+- Other EA Model Search or
+- Your own Search for your most important EA Model Items
+
+Your most frequently Model Items at your finger tip.
+
+Keep it empty to hide Quick Search support</value>
   </data>
   <data name="txtFileManagerPath.ToolTip" xml:space="preserve">
     <value>Path to a File Manager like:
@@ -136,6 +151,6 @@ Your most frequently Model Items at your finger tip.</value>
 Example:
 c:\Program Files (x86)\totalcmd\TOTALCMD64.EXE
 
-Thingk if you have to change the %PATH% environment variable</value>
+Think if you have to change the %PATH% environment variable</value>
   </data>
 </root>

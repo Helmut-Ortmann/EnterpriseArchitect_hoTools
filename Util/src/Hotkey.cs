@@ -3,9 +3,13 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
+
 namespace GlobalHotkeys
 {
     public delegate void HotkeyHandler();
+    /// <summary>
+    /// Definition of Keys to register and react to. Only keys nor registered by EA are available.
+    /// </summary>
     public class Hotkey : IDisposable
     {
         public const int WM_HOTKEY_MSG_ID = 0x0312;
@@ -17,6 +21,7 @@ namespace GlobalHotkeys
         private IWin32Window _registeredWindow = null;
         private bool _registered = false;
 
+        #region Constructor
         public Hotkey(Keys key, Modifiers modifiers, HotkeyHandler handler)
         {
             this.Key = key;
@@ -24,7 +29,7 @@ namespace GlobalHotkeys
             this.Handler = handler;
             Id = GetHashCode();
         }
-
+        #endregion
         /// <summary>
         /// Registers the current hotkey with Windows.
         /// Note! You must override the WndProc method in your window that registers the hotkey, or you will not receive any hotkey notifications.

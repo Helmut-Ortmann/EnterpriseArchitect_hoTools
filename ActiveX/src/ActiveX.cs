@@ -89,7 +89,7 @@ namespace hoTools.ActiveX
         private ToolStripMenuItem showFolderVCorCodeToolStripMenuItem;
         private Button btnAddFavorite;
         private Button btnRemoveFavorite;
-        private Button btnFavorites;
+        private Button btnShowFavorites;
         private ToolStripMenuItem portToolStripMenuItem;
         private ToolStripMenuItem showPortsInDiagramObjectsToolStripMenuItem;
         private ToolStripMenuItem movePortsToolStripMenuItem;
@@ -137,18 +137,16 @@ namespace hoTools.ActiveX
         public AddinControlGUI()
         {
             InitializeComponent();
-            // visible after initialization
-            panelQuickSearch.Visible = false;
-            panelButtons.Visible = false;
-
-
-
-
+            
         }
         #endregion
        
         public string getText() => txtUserText.Text;
 
+
+        /// <summary>
+        /// Repository. Make sure settings are updated before.
+        /// </summary>
         public override EA.Repository Repository
         {
             set
@@ -158,29 +156,64 @@ namespace hoTools.ActiveX
                 if (value.ProjectGUID != "")
                 {
                     initializeSettings();
-                    
-
-
                 }
             }
         }
         /// <summary>
-        /// Initialize Setting. Be sure Repository is loaded!
+        /// Initialize Setting. Be sure Repository is loaded! Also don't change the sequence of hide/visible
         /// </summary>
         public void initializeSettings()
         {
-            // initialize GUI
-            panelQuickSearch.Visible = true;
-            panelButtons.Visible = true;
-            panelLineStyle.Visible = true;
-            panelFavorite.Visible = true;
-            panelNote.Visible = true;
-            panelPort.Visible = true;
-            panelAdvanced.Visible = true;
+            // The order
+            panelPort.Visible = false;
+            panelNote.Visible = false;
+            panelAdvanced.Visible = false;
+            panelFavorite.Visible = false;
+            panelLineStyle.Visible = false;
+            panelButtons.Visible = false;
+            panelQuickSearch.Visible = false;
+
+           
+            // Port
+            panelPort.Visible = AddinSettings.isAdvancedPort;
+            panelNote.Visible = AddinSettings.isAdvancedDiagramNote;
 
 
-            toolStripService.Visible = true;
-            toolStripQuery.Visible = true;
+
+           
+            // Advanced
+            panelAdvanced.Visible = AddinSettings.isAdvancedFeatures;
+
+            // Advanced Features
+            btnDisplayBehavior.Visible = AddinSettings.isAdvancedFeatures;
+            btnDisplaySpecification.Visible = AddinSettings.isAdvancedFeatures;
+            btnUpdateActivityParameter.Visible = AddinSettings.isAdvancedFeatures;
+            btnLocateOperation.Visible = AddinSettings.isAdvancedFeatures;
+            btnFindUsage.Visible = AddinSettings.isAdvancedFeatures;
+            btnLocateType.Visible = AddinSettings.isAdvancedFeatures;
+            btnComposite.Visible = AddinSettings.isAdvancedFeatures;
+
+            // Favorite
+            panelFavorite.Visible = AddinSettings.isFavoriteSupport || AddinSettings.isAdvancedFeatures;
+            btnAddFavorite.Visible = AddinSettings.isFavoriteSupport;
+            btnRemoveFavorite.Visible = AddinSettings.isFavoriteSupport;
+            btnShowFavorites.Visible = AddinSettings.isFavoriteSupport;
+
+            // Linestyle Panel
+            panelLineStyle.Visible = AddinSettings.isLineStyleSupport;
+
+            // no quick search defined
+            panelQuickSearch.Visible = (AddinSettings.quickSearchName.Trim() != "");
+
+            // Buttons for queries and services
+            panelButtons.Visible = AddinSettings.isShowQueryButton || AddinSettings.isShowServiceButton;
+            toolStripService.Visible = AddinSettings.isShowServiceButton;
+            toolStripQuery.Visible = AddinSettings.isShowQueryButton;
+
+
+
+
+
             parameterizeMenusAndButtons();
             parameterizeButtonQueries();
             parameterizeButtonServices();
@@ -733,7 +766,7 @@ namespace hoTools.ActiveX
             this.btnDown = new System.Windows.Forms.Button();
             this.btnLeft = new System.Windows.Forms.Button();
             this.btnRight = new System.Windows.Forms.Button();
-            this.btnFavorites = new System.Windows.Forms.Button();
+            this.btnShowFavorites = new System.Windows.Forms.Button();
             this.btnRemoveFavorite = new System.Windows.Forms.Button();
             this.btnAddFavorite = new System.Windows.Forms.Button();
             this.toolStripService = new System.Windows.Forms.ToolStrip();
@@ -910,16 +943,16 @@ namespace hoTools.ActiveX
             this.btnRight.UseVisualStyleBackColor = true;
             this.btnRight.Click += new System.EventHandler(this.btnRight_Click);
             // 
-            // btnFavorites
+            // btnShowFavorites
             // 
-            this.btnFavorites.Location = new System.Drawing.Point(96, 0);
-            this.btnFavorites.Name = "btnFavorites";
-            this.btnFavorites.Size = new System.Drawing.Size(38, 23);
-            this.btnFavorites.TabIndex = 31;
-            this.btnFavorites.Text = "F";
-            this.toolTip.SetToolTip(this.btnFavorites, "Display Favorites");
-            this.btnFavorites.UseVisualStyleBackColor = true;
-            this.btnFavorites.Click += new System.EventHandler(this.btnFavorites_Click);
+            this.btnShowFavorites.Location = new System.Drawing.Point(96, 0);
+            this.btnShowFavorites.Name = "btnShowFavorites";
+            this.btnShowFavorites.Size = new System.Drawing.Size(38, 23);
+            this.btnShowFavorites.TabIndex = 31;
+            this.btnShowFavorites.Text = "F";
+            this.toolTip.SetToolTip(this.btnShowFavorites, "Display Favorites");
+            this.btnShowFavorites.UseVisualStyleBackColor = true;
+            this.btnShowFavorites.Click += new System.EventHandler(this.btnFavorites_Click);
             // 
             // btnRemoveFavorite
             // 
@@ -1741,6 +1774,7 @@ namespace hoTools.ActiveX
             this.panelQuickSearch.Name = "panelQuickSearch";
             this.panelQuickSearch.Size = new System.Drawing.Size(401, 24);
             this.panelQuickSearch.TabIndex = 38;
+            this.panelQuickSearch.Visible = false;
             // 
             // panelButtons
             // 
@@ -1750,6 +1784,7 @@ namespace hoTools.ActiveX
             this.panelButtons.Name = "panelButtons";
             this.panelButtons.Size = new System.Drawing.Size(401, 33);
             this.panelButtons.TabIndex = 39;
+            this.panelButtons.Visible = false;
             // 
             // panelLineStyle
             // 
@@ -1768,18 +1803,20 @@ namespace hoTools.ActiveX
             this.panelLineStyle.Name = "panelLineStyle";
             this.panelLineStyle.Size = new System.Drawing.Size(401, 52);
             this.panelLineStyle.TabIndex = 40;
+            this.panelLineStyle.Visible = false;
             // 
             // panelFavorite
             // 
             this.panelFavorite.Controls.Add(this.btnAddFavorite);
             this.panelFavorite.Controls.Add(this.btnRemoveFavorite);
-            this.panelFavorite.Controls.Add(this.btnFavorites);
+            this.panelFavorite.Controls.Add(this.btnShowFavorites);
             this.panelFavorite.Controls.Add(this.btnDisplayBehavior);
             this.panelFavorite.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelFavorite.Location = new System.Drawing.Point(0, 133);
             this.panelFavorite.Name = "panelFavorite";
             this.panelFavorite.Size = new System.Drawing.Size(401, 24);
             this.panelFavorite.TabIndex = 41;
+            this.panelFavorite.Visible = false;
             // 
             // panelNote
             // 
@@ -1790,6 +1827,7 @@ namespace hoTools.ActiveX
             this.panelNote.Name = "panelNote";
             this.panelNote.Size = new System.Drawing.Size(401, 25);
             this.panelNote.TabIndex = 42;
+            this.panelNote.Visible = false;
             // 
             // panelPort
             // 
@@ -1804,6 +1842,7 @@ namespace hoTools.ActiveX
             this.panelPort.Name = "panelPort";
             this.panelPort.Size = new System.Drawing.Size(401, 50);
             this.panelPort.TabIndex = 43;
+            this.panelPort.Visible = false;
             // 
             // panelAdvanced
             // 
@@ -1818,6 +1857,7 @@ namespace hoTools.ActiveX
             this.panelAdvanced.Name = "panelAdvanced";
             this.panelAdvanced.Size = new System.Drawing.Size(401, 79);
             this.panelAdvanced.TabIndex = 44;
+            this.panelAdvanced.Visible = false;
             // 
             // AddinControlGUI
             // 
@@ -1920,7 +1960,7 @@ namespace hoTools.ActiveX
             // Favorite
             btnAddFavorite.Visible = AddinSettings.isFavoriteSupport;
             btnRemoveFavorite.Visible = AddinSettings.isFavoriteSupport;
-            btnFavorites.Visible = AddinSettings.isFavoriteSupport;
+            btnShowFavorites.Visible = AddinSettings.isFavoriteSupport;
 
             // Advance features
             btnDisplayBehavior.Visible = AddinSettings.isAdvancedFeatures;

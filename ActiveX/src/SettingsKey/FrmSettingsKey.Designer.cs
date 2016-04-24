@@ -181,6 +181,7 @@
             this.btnOK.Size = new System.Drawing.Size(72, 27);
             this.btnOK.TabIndex = 2;
             this.btnOK.Text = "OK";
+            this.toolTip1.SetToolTip(this.btnOK, "Store Buttons and Keys. Keys are only available after restart EA.");
             this.btnOK.UseVisualStyleBackColor = true;
             this.btnOK.Click += new System.EventHandler(this.btnOk_Click);
             // 
@@ -1412,7 +1413,7 @@
             this.groupBox2.Size = new System.Drawing.Size(960, 177);
             this.groupBox2.TabIndex = 59;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Search Shortcuts";
+            this.groupBox2.Text = "Search Buttons";
             // 
             // groupBox3
             // 
@@ -1441,7 +1442,7 @@
             this.groupBox3.Size = new System.Drawing.Size(959, 189);
             this.groupBox3.TabIndex = 60;
             this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Services Shortcuts";
+            this.groupBox3.Text = "Services Buttons";
             // 
             // label26
             // 
@@ -1559,9 +1560,9 @@
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(227, 13);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(311, 29);
+            this.label1.Size = new System.Drawing.Size(472, 29);
             this.label1.TabIndex = 196;
-            this.label1.Text = "Settings Keys and Shortcuts";
+            this.label1.Text = "Settings Buttons & Keys for Search & Services";
             // 
             // FrmSettingsKey
             // 
