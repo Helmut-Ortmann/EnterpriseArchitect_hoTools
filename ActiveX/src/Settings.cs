@@ -261,6 +261,9 @@ namespace hoTools.Settings
 
 
         #region CustomerCfg (possible customer) 
+        /// <summary>
+        /// To define different customer
+        /// </summary>
         public enum CustomerCfg
         {
             VAR1,
@@ -762,8 +765,10 @@ namespace hoTools.Settings
         {
             get
             {
-                string s = this.defaultConfig.AppSettings.Settings["Customer"].Value;
-                switch (s)
+                // get customer
+                var s = this.defaultConfig.AppSettings.Settings["Customer"];
+                if (s == null)  return CustomerCfg.hoTools;
+                switch (s.Value)
                 {
                     case "F52AB09A-8ED0-4159-9AB4-FFD986983280":
                         return CustomerCfg.VAR1;

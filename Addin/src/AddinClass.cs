@@ -28,7 +28,7 @@ using GlobalHotkeys;
 //VAR1:        ..\SetpVAR1\ActiveXdll.config.xml 
 //
 //Customer=hoTools: "14F09211-3460-47A6-B837-A477491F0A67"
-//         ZF_LS:    "F52AB09A-8ED0-4159-9AB4-FFD986983280"
+//         VAR1:    "F52AB09A-8ED0-4159-9AB4-FFD986983280"
 //
 //To initialize configuration:
 //1. Delete: 
@@ -131,14 +131,17 @@ namespace hoTools
 
 
         /// <summary>
-        /// constructor where we set the menu header and menuOptions
+        /// Constructor: Reade settings, set the menu header and menuOptions
         /// </summary>
         public AddinClass()
         {
             try
             {
-                this._AddinSettings = new AddinSettings();
-                AddinSettings = this._AddinSettings; // static
+                string s = $"0:AddinConstructor {DateTime.Now}";
+                System.IO.File.WriteAllText(@"D:\temp\AddinClass.log", s);
+
+                _AddinSettings = new AddinSettings();
+                AddinSettings = _AddinSettings; // static
             }
             catch (Exception e)
             {

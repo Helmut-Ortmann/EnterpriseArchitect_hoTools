@@ -48,7 +48,6 @@ namespace hoTools.ActiveX
         private Button btnA;
         private Button btnD;
         private Button btnC;
-        private Label label1;
         private MenuStrip menuStrip1;
         private ToolStripMenuItem fileToolStripMenuItem;
         private ToolStripMenuItem doToolStripMenuItem;
@@ -130,6 +129,7 @@ namespace hoTools.ActiveX
         private Panel panelNote;
         private Panel panelPort;
         private Panel panelAdvanced;
+        private TextBox txtUserTextName;
         private TextBox txtUserText;
         #endregion
 
@@ -159,65 +159,17 @@ namespace hoTools.ActiveX
                 }
             }
         }
+        #region initializingSettings
         /// <summary>
-        /// Initialize Setting. Be sure Repository is loaded! Also don't change the sequence of hide/visible
+        /// Initialize Setting (not Keys). Be sure Repository is loaded! Also don't change the sequence of hide/visible.
         /// </summary>
         public void initializeSettings()
         {
-            // The order
-            panelPort.Visible = false;
-            panelNote.Visible = false;
-            panelAdvanced.Visible = false;
-            panelFavorite.Visible = false;
-            panelLineStyle.Visible = false;
-            panelButtons.Visible = false;
-            panelQuickSearch.Visible = false;
-
-           
-            // Port
-            panelPort.Visible = AddinSettings.isAdvancedPort;
-            panelNote.Visible = AddinSettings.isAdvancedDiagramNote;
-
-
-
-           
-            // Advanced
-            panelAdvanced.Visible = AddinSettings.isAdvancedFeatures;
-
-            // Advanced Features
-            btnDisplayBehavior.Visible = AddinSettings.isAdvancedFeatures;
-            btnDisplaySpecification.Visible = AddinSettings.isAdvancedFeatures;
-            btnUpdateActivityParameter.Visible = AddinSettings.isAdvancedFeatures;
-            btnLocateOperation.Visible = AddinSettings.isAdvancedFeatures;
-            btnFindUsage.Visible = AddinSettings.isAdvancedFeatures;
-            btnLocateType.Visible = AddinSettings.isAdvancedFeatures;
-            btnComposite.Visible = AddinSettings.isAdvancedFeatures;
-
-            // Favorite
-            panelFavorite.Visible = AddinSettings.isFavoriteSupport || AddinSettings.isAdvancedFeatures;
-            btnAddFavorite.Visible = AddinSettings.isFavoriteSupport;
-            btnRemoveFavorite.Visible = AddinSettings.isFavoriteSupport;
-            btnShowFavorites.Visible = AddinSettings.isFavoriteSupport;
-
-            // Linestyle Panel
-            panelLineStyle.Visible = AddinSettings.isLineStyleSupport;
-
-            // no quick search defined
-            panelQuickSearch.Visible = (AddinSettings.quickSearchName.Trim() != "");
-
-            // Buttons for queries and services
-            panelButtons.Visible = AddinSettings.isShowQueryButton || AddinSettings.isShowServiceButton;
-            toolStripService.Visible = AddinSettings.isShowServiceButton;
-            toolStripQuery.Visible = AddinSettings.isShowQueryButton;
-
-
-
-
-
             parameterizeMenusAndButtons();
             parameterizeButtonQueries();
             parameterizeButtonServices();
         }
+        #endregion
 
         #region IActiveX Members
         public string getName() => "hoTools.AddinControl";
@@ -802,7 +754,6 @@ namespace hoTools.ActiveX
             this.btnLV = new System.Windows.Forms.Button();
             this.btnLH = new System.Windows.Forms.Button();
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
-            this.label1 = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingGeneralToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -860,6 +811,7 @@ namespace hoTools.ActiveX
             this.panelNote = new System.Windows.Forms.Panel();
             this.panelPort = new System.Windows.Forms.Panel();
             this.panelAdvanced = new System.Windows.Forms.Panel();
+            this.txtUserTextName = new System.Windows.Forms.TextBox();
             this.toolStripService.SuspendLayout();
             this.toolStripQuery.SuspendLayout();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
@@ -1341,17 +1293,6 @@ namespace hoTools.ActiveX
             this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.toolStripService);
             this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.toolStripQuery);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(307, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(76, 15);
-            this.label1.TabIndex = 21;
-            this.label1.Text = "Quick Search";
-            this.label1.ControlRemoved += new System.Windows.Forms.ControlEventHandler(this.label1_ControlRemoved);
-            // 
             // menuStrip1
             // 
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
@@ -1767,8 +1708,8 @@ namespace hoTools.ActiveX
             // 
             // panelQuickSearch
             // 
+            this.panelQuickSearch.Controls.Add(this.txtUserTextName);
             this.panelQuickSearch.Controls.Add(this.txtUserText);
-            this.panelQuickSearch.Controls.Add(this.label1);
             this.panelQuickSearch.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelQuickSearch.Location = new System.Drawing.Point(0, 24);
             this.panelQuickSearch.Name = "panelQuickSearch";
@@ -1859,6 +1800,17 @@ namespace hoTools.ActiveX
             this.panelAdvanced.TabIndex = 44;
             this.panelAdvanced.Visible = false;
             // 
+            // txtUserTextName
+            // 
+            this.txtUserTextName.Location = new System.Drawing.Point(307, 0);
+            this.txtUserTextName.Name = "txtUserTextName";
+            this.txtUserTextName.ReadOnly = true;
+            this.txtUserTextName.Size = new System.Drawing.Size(88, 20);
+            this.txtUserTextName.TabIndex = 28;
+            this.toolTip.SetToolTip(this.txtUserTextName, "Name EA Search to quickly find your most interesting stuff:\r\n- Input text + Enter" +
+        "\r\n- Double left Click with insert Clipboard and start search\r\n\r\nSearch for:\r\n- Y" +
+        "our stuff at your finger tip\r\n");
+            // 
             // AddinControlGUI
             // 
             this.AutoSize = true;
@@ -1905,6 +1857,77 @@ namespace hoTools.ActiveX
         /// </summary>
         public void parameterizeMenusAndButtons()
         {
+            // Don't change the order
+            panelPort.Visible = false;
+            panelNote.Visible = false;
+            panelAdvanced.Visible = false;
+            panelFavorite.Visible = false;
+            panelLineStyle.Visible = false;
+            panelQuickSearch.Visible = false;
+            panelButtons.Visible = false;
+
+
+
+            panelPort.ResumeLayout(false);
+            panelPort.PerformLayout();
+            panelNote.ResumeLayout(false);
+            panelNote.PerformLayout();
+            panelAdvanced.ResumeLayout(false);
+            panelAdvanced.PerformLayout();
+            panelFavorite.ResumeLayout(false);
+            panelFavorite.PerformLayout();
+            panelLineStyle.ResumeLayout(false);
+            panelLineStyle.PerformLayout();
+            panelQuickSearch.ResumeLayout(false);
+            panelQuickSearch.PerformLayout();
+            panelButtons.ResumeLayout(false);
+            panelButtons.PerformLayout();
+
+
+
+
+
+            this.panelAdvanced.ResumeLayout(false);
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+
+            // Port
+            panelPort.Visible = AddinSettings.isAdvancedPort;
+            panelNote.Visible = AddinSettings.isAdvancedDiagramNote;
+
+
+            // Advanced
+            panelAdvanced.Visible = AddinSettings.isAdvancedFeatures;
+
+            // Advanced Features
+            btnDisplayBehavior.Visible = AddinSettings.isAdvancedFeatures;
+            btnDisplaySpecification.Visible = AddinSettings.isAdvancedFeatures;
+            btnUpdateActivityParameter.Visible = AddinSettings.isAdvancedFeatures;
+            btnLocateOperation.Visible = AddinSettings.isAdvancedFeatures;
+            btnFindUsage.Visible = AddinSettings.isAdvancedFeatures;
+            btnLocateType.Visible = AddinSettings.isAdvancedFeatures;
+            btnComposite.Visible = AddinSettings.isAdvancedFeatures;
+
+            // Favorite
+            panelFavorite.Visible = AddinSettings.isFavoriteSupport || AddinSettings.isAdvancedFeatures;
+            btnAddFavorite.Visible = AddinSettings.isFavoriteSupport;
+            btnRemoveFavorite.Visible = AddinSettings.isFavoriteSupport;
+            btnShowFavorites.Visible = AddinSettings.isFavoriteSupport;
+
+            // Linestyle Panel
+            panelLineStyle.Visible = AddinSettings.isLineStyleSupport;
+
+            // no quick search defined
+            panelQuickSearch.Visible = (AddinSettings.quickSearchName.Trim() != "");
+            txtUserTextName.Text = AddinSettings.quickSearchName.Trim();
+
+            // Buttons for queries and services
+            panelButtons.Visible = AddinSettings.isShowQueryButton || AddinSettings.isShowServiceButton;
+            toolStripService.Visible = AddinSettings.isShowServiceButton;
+            toolStripQuery.Visible = AddinSettings.isShowQueryButton;
+
+
             // SVN support
             bool visibleSvnVC = true && !(AddinSettings.isSvnSupport == false | AddinSettings.isVcSupport == false);
             showTortoiseRepoBrowserToolStripMenuItem.Visible = visibleSvnVC;
@@ -1964,8 +1987,6 @@ namespace hoTools.ActiveX
 
             // Advance features
             btnDisplayBehavior.Visible = AddinSettings.isAdvancedFeatures;
-
-
 
             //boolean visibleDiagramNote = false || _addinSettings.isAdvancedDiagramNote;
 
