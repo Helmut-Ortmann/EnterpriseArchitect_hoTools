@@ -12,7 +12,7 @@ namespace hoTools.Utils.ActivityParameter
     // Create / Update Activity Parameter from Operation
     //--------------------------------------------------------------------------------------------
 
-    public class ActivityPar
+    public static class ActivityPar
     {
         //------------------------------------------------------------------------------
         // Create default Elements for Activity

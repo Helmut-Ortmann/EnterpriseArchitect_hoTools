@@ -14,9 +14,7 @@ namespace EAAddinFramework.Utils
     /// </summary>
     public class JScriptLanguage:JavaScriptLanguageBase
 	{
-		public JScriptLanguage()
-		{
-		}
+		
         public override string name => "JScript";
     }
 }

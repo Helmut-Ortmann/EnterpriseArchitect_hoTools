@@ -2003,24 +2003,24 @@ namespace hoTools.ActiveX
                 switch (pos)
                 {
                     case 0:
-                        toolStripBtn11.Text = shortcut.keyText.ToString();
-                        toolStripBtn11.ToolTipText = shortcut.keySearchTooltip.ToString();
+                        toolStripBtn11.Text = shortcut.keyText;
+                        toolStripBtn11.ToolTipText = shortcut.keySearchTooltip;
                         break;
                     case 1:
-                        toolStripBtn12.Text = shortcut.keyText.ToString();
-                        toolStripBtn12.ToolTipText = shortcut.keySearchTooltip.ToString();
+                        toolStripBtn12.Text = shortcut.keyText;
+                        toolStripBtn12.ToolTipText = shortcut.keySearchTooltip;
                         break;
                     case 2:
-                        toolStripBtn13.Text = shortcut.keyText.ToString();
-                        toolStripBtn13.ToolTipText = shortcut.keySearchTooltip.ToString();
+                        toolStripBtn13.Text = shortcut.keyText;
+                        toolStripBtn13.ToolTipText = shortcut.keySearchTooltip;
                         break;
                     case 3:
-                        toolStripBtn14.Text = shortcut.keyText.ToString();
-                        toolStripBtn14.ToolTipText = shortcut.keySearchTooltip.ToString();
+                        toolStripBtn14.Text = shortcut.keyText;
+                        toolStripBtn14.ToolTipText = shortcut.keySearchTooltip;
                         break;
                     case 4:
-                        toolStripBtn15.Text = shortcut.keyText.ToString();
-                        toolStripBtn15.ToolTipText = shortcut.keySearchTooltip.ToString();
+                        toolStripBtn15.Text = shortcut.keyText;
+                        toolStripBtn15.ToolTipText = shortcut.keySearchTooltip;
                         break;
 
                 }

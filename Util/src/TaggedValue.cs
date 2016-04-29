@@ -5,7 +5,7 @@ using System.Text;
 
 namespace hoTools.Utils
 {
-    public class TaggedValue
+    public static class TaggedValue
     {
         public static EA.TaggedValue addTaggedValue(EA.Element shm, string name)
         {

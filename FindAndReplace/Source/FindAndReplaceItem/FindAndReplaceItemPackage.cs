@@ -7,8 +7,8 @@ namespace hoTools.Find
 {
     class FindAndReplaceItemPackage : FindAndReplaceItem
     {
-        private EA.Package _pkg = null;
-        private EA.Element _el = null;
+        EA.Package _pkg;
+        EA.Element _el ;
         #region Contructor
         /// <summary>
         /// Create a package element. Be aware that a package element also contains an element to support

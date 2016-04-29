@@ -7,8 +7,8 @@ namespace hoTools.Find
 {
     public class FindAndReplaceItemTag
     {
-        protected string _name = null;
-        protected string _value = null;
+        protected string _name ;
+        protected string _value;
         #region Constructor
         public FindAndReplaceItemTag(string name, string value)
         {
@@ -45,7 +45,7 @@ namespace hoTools.Find
     }
     public class FindAndReplaceItemTagElement : FindAndReplaceItemTag
     {
-        private EA.TaggedValue _tag = null;
+        private EA.TaggedValue _tag ;
         #region Constructor
         public FindAndReplaceItemTagElement(EA.TaggedValue tag) :base(tag.Name, tag.Value)
         {
@@ -75,7 +75,7 @@ namespace hoTools.Find
     }
     public class FindAndReplaceItemTagAttribute : FindAndReplaceItemTag
     {
-        EA.AttributeTag _tag = null;
+        EA.AttributeTag _tag;
         #region Constructor
         public FindAndReplaceItemTagAttribute(EA.AttributeTag tag) :base(tag.Name, tag.Value)
         {
@@ -106,7 +106,7 @@ namespace hoTools.Find
 
     public class FindAndReplaceItemTagMethod : FindAndReplaceItemTag
     {
-        EA.MethodTag _tag = null;
+        EA.MethodTag _tag;
         #region Constructor
         public FindAndReplaceItemTagMethod(EA.MethodTag tag) :base(tag.Name, tag.Value)
         {
@@ -136,7 +136,7 @@ namespace hoTools.Find
     }
     public class FindAndReplaceItemTagPackage : FindAndReplaceItemTag
     {
-        private EA.TaggedValue _tag = null;
+        private EA.TaggedValue _tag;
         #region Constructor
         public FindAndReplaceItemTagPackage(EA.TaggedValue tag)
             : base(tag.Name, tag.Value)

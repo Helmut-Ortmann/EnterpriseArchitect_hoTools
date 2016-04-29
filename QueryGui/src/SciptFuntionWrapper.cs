@@ -13,7 +13,7 @@ namespace hoTools.Query
     /// </summary>
     public class ScriptFuntionWrapper
     {
-        ScriptFunction _function = null;
+        readonly ScriptFunction _function;
         bool _isErrorOutput = true;
 
         public ScriptFuntionWrapper(ScriptFunction function)

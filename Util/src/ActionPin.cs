@@ -13,7 +13,7 @@ namespace hoTools.Utils.ActionPins
     // Update Action Pins from Operation
     //--------------------------------------------------------------------------------------------
 
-    public class ActionPin
+    public static class ActionPin
     {
 
         //---------------------------------------------------------------------------------------------

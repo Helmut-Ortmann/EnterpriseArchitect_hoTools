@@ -54,24 +54,24 @@ namespace hoTools
         string release = "X.X.XXX.XX"; // Major, Minor, Build, free,
                                        
         // static due to global key definitions
-        static EA.Repository Repository = null;
-        static AddinSettings AddinSettings = null;
-        static AddinControlGUI AddinControlGUI = null;
-        static FindAndReplaceGUI FindAndReplaceGUI = null;
-        static QueryGUI ScriptGUI = null;
-        static QueryGUI QueryGUI = null;
+        static EA.Repository Repository ;
+        static AddinSettings AddinSettings;
+        static AddinControlGUI AddinControlGUI;
+        static FindAndReplaceGUI FindAndReplaceGUI;
+        static QueryGUI ScriptGUI;
+        static QueryGUI QueryGUI;
 
         // ActiveX Controls
-        AddinControlGUI _MyControlGUI = null;
-        FindAndReplaceGUI _FindAndReplaceGUI = null;
-        QueryGUI _ScriptGUI = null;
-        QueryGUI _QueryGUI = null;
+        AddinControlGUI _MyControlGUI;
+        FindAndReplaceGUI _FindAndReplaceGUI;
+        QueryGUI _ScriptGUI;
+        QueryGUI _QueryGUI;
 
         // settings
-        AddinSettings _AddinSettings = null;
+        AddinSettings _AddinSettings;
  
 
-        EA.Repository _repository = null;
+        EA.Repository _repository;
         // define menu constants
         const string menuName = "-hoTools";
 
@@ -137,15 +137,18 @@ namespace hoTools
         {
             try
             {
-                string s = $"0:AddinConstructor {DateTime.Now}";
-                System.IO.File.WriteAllText(@"D:\temp\AddinClass.log", s);
+                // To check if addin is started
+                // If the constructor has an exception th Addin isn't loaded, EA error is unspecific
+                // Try{} Catch() don't always help
+                //string s = $"0:AddinConstructor {DateTime.Now}";
+                //System.IO.File.WriteAllText(@"D:\temp\AddinClass.log", s);
 
                 _AddinSettings = new AddinSettings();
                 AddinSettings = _AddinSettings; // static
             }
             catch (Exception e)
             {
-                MessageBox.Show("Error setup 'hoTools' Addin. Error:\n" + e.ToString(), "hoTools Installation error");
+                MessageBox.Show("Error setup 'hoTools' Addin. Error:\n" + e, "hoTools Installation error");
             }
             this.menuHeader = "-" + _AddinSettings.productName;
             this.menuOptions = new string[] { 

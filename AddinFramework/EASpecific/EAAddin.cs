@@ -18,7 +18,7 @@ namespace EAAddinFramework.EASpecific
         public string name {get;set;}
 		public List<string> lastMenuOptions {get;set;}
 		
-		public EAAddin(string fileName,string name):base()
+		public EAAddin(string fileName,string name)
 		{
 			this.lastMenuOptions = new List<string>();
 			this.name = name;
@@ -127,12 +127,12 @@ namespace EAAddinFramework.EASpecific
 			return isAlreadyRegistered;
 		}
 		
-		private bool isAlreadyRegisteredInHKCR(Type type)
+		bool isAlreadyRegisteredInHKCR(Type type)
 		{
 			return (Registry.ClassesRoot.OpenSubKey(type.FullName) != null);
 		}
 		
-		private void cleanRegistry(Type type)
+		void cleanRegistry(Type type)
 		{
 			if (isComVisible(type))
 			{

@@ -275,7 +275,7 @@ namespace hoTools.Query
                 insertBranchMenuItem,
                 insertCurrentIdMenuItem,
                 insertCurrentGuidMenuItem,
-                insertWcMenuItem,
+                insertWcMenuItem
                 });
 
             //----------------------------------------------------------------------------------------------------------

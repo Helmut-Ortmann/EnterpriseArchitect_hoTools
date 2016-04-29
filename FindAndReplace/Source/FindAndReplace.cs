@@ -11,23 +11,23 @@ namespace hoTools.Find
 {
     public class FindAndReplace
     {
-        private EA.Repository _rep = null;
-        private EA.Package _pkg = null;
-        private string _findString = "";
-        private string _replaceString = "";
-        private string[] _taggedValueNames;
-        private bool _isRegularExpression = false;
-        private bool _isCaseSensitive;
-        private bool _isIgnoreWhiteSpace;
-        private FindAndReplaceItem.FieldType _searchFieldTypes;
-        private bool _isPackageSearch = false;
-        private bool _isElementSearch = false;
-        private bool _isDiagramSearch = false;
-        private bool _isAttributeSearch = false;
-        private bool _isOperationSearch = false;
-        private bool _isTagSearch = false;
-        private Regex _regExPattern = null;
-        private int _index = -1;
+        EA.Repository _rep;
+         EA.Package _pkg;
+         string _findString = "";
+         string _replaceString = "";
+         string[] _taggedValueNames;
+         bool _isRegularExpression;
+         bool _isCaseSensitive;
+         bool _isIgnoreWhiteSpace;
+         FindAndReplaceItem.FieldType _searchFieldTypes;
+         bool _isPackageSearch;
+         bool _isElementSearch;
+         bool _isDiagramSearch;
+         bool _isAttributeSearch;
+         bool _isOperationSearch;
+         bool _isTagSearch;
+         Regex _regExPattern;
+         int _index = -1;
 
         // list of all items with loaded values, expected changes and values as loaded
         private readonly List<FindAndReplaceItem> _l_items = new List<FindAndReplaceItem>();
@@ -397,7 +397,7 @@ namespace hoTools.Find
         public string ItemShortDescription()
         {
             if (_index < 0) return "0\0";
-            return String.Format(@"{0}\{1}: {2}", _index+1, _l_items.Count, _l_items[_index].ToString());
+            return string.Format(@"{0}\{1}: {2}", _index+1, _l_items.Count, _l_items[_index]);
         }
         #endregion
 

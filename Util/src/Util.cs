@@ -9,7 +9,7 @@ using hoTools.Utils.svnUtil;
 
 namespace hoTools.Utils
 {
-    public class Util
+    public static class Util
     {
         public static string objectTypeToString(EA.ObjectType objectType)
         {
@@ -79,8 +79,8 @@ namespace hoTools.Utils
             {
                 MessageBox.Show(p.StartInfo.FileName + " " +
                                 p.StartInfo.Arguments + "\n\n" +
-                                "Have you set the %path% environment variable?\n\n" + e.ToString(),
-                                "Can't show controled package");
+                                "Have you set the %path% environment variable?\n\n" + e,
+                                "Can't show controlled package");
             }
         }
         public static string getWildCard(Repository rep)
@@ -1262,13 +1262,13 @@ namespace hoTools.Utils
                     }
                     catch (FileNotFoundException e)
                     {
-                        fText = path + " " + e.Message.ToString();
+                        fText = path + " " + e.Message;
                         rep.WriteOutput("Debug", fText, 0);
                         errorCount = errorCount + 1;
                     }
                     catch (DirectoryNotFoundException e)
                     {
-                        fText = path + " " + e.Message.ToString();
+                        fText = path + " " + e.Message;
                         rep.WriteOutput("Debug", fText, 0);
                         errorCount = errorCount + 1;
                     }

@@ -11,7 +11,7 @@ namespace hoTools.Utils.RUN
 
     public class Run
     {
-        Stopwatch _stopWatch = null;
+        readonly Stopwatch _stopWatch;
 
         #region Constructor
         public Run()

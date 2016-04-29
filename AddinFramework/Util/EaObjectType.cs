@@ -7,10 +7,10 @@ namespace EAAddinFramework.Utils
 {
     public static class EaObjectType
     {
-         // Dictionary of SQL Types
-         // only use unambiguous types
-         // !!!!Package may be a Package as well as a Diagram!!!!!!
-         static Dictionary<string, EA.ObjectType> eaObjectTypes = new Dictionary<string, EA.ObjectType>
+        // Dictionary of SQL Types
+        // only use unambiguous types
+        // !!!!Package may be a Package as well as a Diagram!!!!!!
+        static readonly Dictionary<string, EA.ObjectType> eaObjectTypes = new Dictionary<string, EA.ObjectType>
         {
             { "Action",EA.ObjectType.otElement},
             { "ActionPin",EA.ObjectType.otElement},
@@ -38,22 +38,22 @@ namespace EAAddinFramework.Utils
             { "InteractionLogical",EA.ObjectType.otDiagram},
             { "Statechart",EA.ObjectType.otDiagram},
             { "Timing",EA.ObjectType.otDiagram},
-            { "Use Case",EA.ObjectType.otDiagram},
+            { "Use Case",EA.ObjectType.otDiagram}
 
           };
 
 
-            /// <summary>
-            /// Extension Method EA.Repository to get:
-            /// - EA Object
-            /// - EA.ObjectType
-            /// from Object Type in Table and GUID
-            /// </summary>
-            /// <param name="rep"></param>
-            /// <param name="sqlObjectType"></param>
-            /// <param name="GUID"></param>
-            /// <param name="objectType"></param>
-            /// <returns></returns>
+        /// <summary>
+        /// Extension Method EA.Repository to get:
+        /// - EA Object
+        /// - EA.ObjectType
+        /// from Object Type in Table and GUID
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <param name="sqlObjectType"></param>
+        /// <param name="GUID"></param>
+        /// <param name="objectType"></param>
+        /// <returns></returns>
         public static object GetEaObject(this EA.Repository rep, string  sqlObjectType, string GUID, out EA.ObjectType objectType)
         {
            

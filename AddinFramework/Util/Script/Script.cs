@@ -35,8 +35,8 @@ namespace EAAddinFramework.Utils
 		private static Dictionary<string,string> modelIncludableScripts = new Dictionary<string, string>(); 
 		private static bool reloadModelIncludableScripts;
 		private Model model;
-		private string scriptID;
-		public string _code { get; private set; }
+        readonly string scriptID;
+        public string _code { get; private set; }
 		public string errorMessage {get;set;}
 		private ScriptControl scriptController;
 		public List<ScriptFunction> functions {get;set;}
@@ -97,14 +97,13 @@ namespace EAAddinFramework.Utils
 			this.model = model;
 		}
 		/// <summary>
-		/// creaates a new script
+		/// creates a new script
 		/// </summary>
 		/// <param name="scriptID">the id of the script</param>
 		/// <param name="scriptName">the name of the script</param>
 		/// <param name="groupName">the name of the scriptgroup</param>
 		/// <param name="code">the code</param>
 		/// <param name="language">the language the code is written in</param>
-		/// <param name="model">the model this script resides in</param>
 		public Script(string scriptID,string scriptName,string groupName, string code, string language, bool isStatic)
 		{
 			this.scriptID = scriptID;

@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using hoTools.Utils;
 using System.Text.RegularExpressions;
 
 namespace hoTools.Find
@@ -13,8 +10,8 @@ namespace hoTools.Find
     public class FindAndReplaceItem
     {
         protected string _GUID;
-        protected String _Name;
-        protected String _Description;
+        protected string _Name;
+        protected string _Description;
         protected string _Stereotype; // from .Sterotype.Ex
         protected int _countChanges;
         protected bool _isUpdated;

@@ -14,8 +14,8 @@ namespace hoTools.Settings
     /// </summary>
     public partial class FrmSettingsLineStyle : Form
     {   
-        private AddinSettings _settings;
-        private AddinControlGUI _addinControl = null;
+        AddinSettings _settings;
+        AddinControlGUI _addinControl;
 
         #region Constructor
         /// <summary>

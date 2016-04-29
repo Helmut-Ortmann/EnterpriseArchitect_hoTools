@@ -5,7 +5,7 @@ using System.Text;
 
 namespace hoTools.Utils
 {
-    public class Package
+    public static class Package
     {
         /// <summary>
         /// Get list of package ids as comma separated list

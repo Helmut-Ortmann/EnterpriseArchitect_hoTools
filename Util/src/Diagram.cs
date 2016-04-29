@@ -7,11 +7,11 @@ namespace hoTools.Utils
 {
     public class EADiagram
     {
-        private EA.Repository _rep = null;
-        private EA.Diagram _dia = null;
-        private List<EA.DiagramObject> _selectedObjects = new List<EA.DiagramObject>();
+        readonly EA.Repository _rep;
+        readonly EA.Diagram _dia;
+        List<EA.DiagramObject> _selectedObjects = new List<EA.DiagramObject>();
 
-        private EA.Connector _selectedConnector = null;
+        EA.Connector _selectedConnector;
         #region Constructor
         public EADiagram(EA.Repository rep)
         {
@@ -101,7 +101,7 @@ namespace hoTools.Utils
     public class DiagramObject
     {
         string _name = "";
-        int _id = 0;
+        readonly int _id;
         #region Constructor
         public DiagramObject(string Name, int Id)
         {
@@ -130,9 +130,9 @@ namespace hoTools.Utils
     }
     public class DiagramObjectSelected
     {
-        EA.DiagramObject _obj = null;
-        int _position = 0;
-        int _left;
+        EA.DiagramObject _obj;
+        int _position;
+        readonly int _left;
         #region Constructor
         public DiagramObjectSelected(EA.DiagramObject Obj, int position, int Left)
         {

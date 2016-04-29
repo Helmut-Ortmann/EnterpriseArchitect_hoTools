@@ -14,9 +14,9 @@ namespace hoTools.EAServicesPort
 {
     public class PortServices
     {
-        private EA.Repository _rep = null;
-        private int _count = 0; // a variable to count the amout of something
-        private const string EMBEDDED_ELEMENT_TYPES ="Port Parameter Pin";
+        EA.Repository _rep;
+        int _count; // a variable to count the amount of something
+        const string EMBEDDED_ELEMENT_TYPES ="Port Parameter Pin";
               
         
 

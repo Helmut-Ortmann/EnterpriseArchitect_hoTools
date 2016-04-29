@@ -7,7 +7,7 @@ using hoTools.Utils;
 
 namespace hoTools.Utils.SQL
 {
-    public class SqlTemplates
+    public static class SqlTemplates
     {
         #region Template Dictionary SqlTemplare
         static Dictionary<SQL_TEMPLATE_ID, SqlTemplate> SqlTemplate = new Dictionary<SQL_TEMPLATE_ID, SqlTemplate>

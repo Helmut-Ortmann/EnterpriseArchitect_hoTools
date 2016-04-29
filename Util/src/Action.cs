@@ -5,7 +5,7 @@ using System.Xml;
 
 namespace hoTools.Utils
 {
-    public class CallOperationAction
+    public static class CallOperationAction
     {
         public static bool createCallAction(EA.Repository rep, EA.Element action, EA.Method method)
         {

@@ -7,7 +7,7 @@ namespace hoTools.Find
 {
     class FindAndReplaceItemElement : FindAndReplaceItem
     {
-        private EA.Element _el = null;
+        readonly EA.Element _el;
         #region Constructor
         public  FindAndReplaceItemElement(EA.Repository rep, string GUID)  :base(rep, GUID)
         {

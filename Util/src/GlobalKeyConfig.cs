@@ -61,7 +61,7 @@ namespace GlobalHotkeys
         #endregion
 
         public static Dictionary<string, Keys> getKeys() => 
-            new Dictionary<string, Keys>()
+            new Dictionary<string, Keys>
             {
               {"None",Keys.None },
               {"A",Keys.A}, {"B",Keys.B}, {"C",Keys.C}, {"D",Keys.D}, {"E",Keys.E}, {"F",Keys.F},
@@ -73,17 +73,17 @@ namespace GlobalHotkeys
               {"Left",Keys.Left}, {"Right",Keys.Right},{"Up",Keys.Up},{"Down",Keys.Down},
               {"NumPad0",Keys.NumPad0}, {"NumPad1",Keys.NumPad1}, {"NumPad2",Keys.NumPad2}, {"NumPad3",Keys.NumPad3},
               {"NumPad4",Keys.NumPad4}, {"NumPad5",Keys.NumPad5}, {"NumPad6",Keys.NumPad6}, {"NumPad7",Keys.NumPad7},
-              {"NumPad8",Keys.NumPad8}, {"NumPad9",Keys.NumPad9},
+              {"NumPad8",Keys.NumPad8}, {"NumPad9",Keys.NumPad9}
 
             };
 
         public static Dictionary<string, Modifiers> getModifiers() => 
-            new Dictionary<string, Modifiers>()
+            new Dictionary<string, Modifiers>
             { {"Alt",Modifiers.Alt},
               {"Ctrl",Modifiers.Ctrl},
               {"No",Modifiers.NoMod},
               {"Shift",Modifiers.Shift},
-              {"Win",Modifiers.Win},
+              {"Win",Modifiers.Win}
             };
 
         public class GlobalKeysServiceConfig : GlobalKeysConfig
@@ -91,7 +91,7 @@ namespace GlobalHotkeys
             private MethodInfo _method;
             private string _GUID = "";
             private string _description = "";
-            private bool _isTextRequired = false;
+            private bool _isTextRequired;
 
             public GlobalKeysServiceConfig(string Key, string Modifier1, string Modifier2, string Modifier3, string Modifier4, string Help,
                 string GUID, string Description, bool IsTextRequired)
@@ -176,7 +176,7 @@ namespace GlobalHotkeys
                     }
                     catch (Exception e)
                     {
-                        MessageBox.Show(e.ToString() + "\nCan't invoke " + _method.Name + "Return:'" + _method.ReturnParameter + "' " + _method.ToString(), "Error Invoking service");
+                        MessageBox.Show(e + "\nCan't invoke " + _method.Name + "Return:'" + _method.ReturnParameter + "' " + _method, "Error Invoking service");
                         return (string)s;
                     }
                 }

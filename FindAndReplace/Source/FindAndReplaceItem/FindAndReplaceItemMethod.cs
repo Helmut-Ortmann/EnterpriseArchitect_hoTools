@@ -7,7 +7,7 @@ namespace hoTools.Find
 {
     class FindAndReplaceItemMethod : FindAndReplaceItem
     {
-        private EA.Method _meth = null;
+        EA.Method _meth;
         #region Constructor
         public  FindAndReplaceItemMethod(EA.Repository rep, string GUID)  :base(rep, GUID)
         {

@@ -10,7 +10,7 @@ using hoTools.Utils.ActivityParameter;
 
 namespace hoTools.Utils.Appls
 {
-    public class Appl
+    public static class Appl
     {
         
 

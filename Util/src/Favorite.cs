@@ -11,9 +11,9 @@ namespace hoTools.Utils.Favorites
     /// </summary>
     public class Favorite
     {
-        private EA.Repository _rep = null;
-        private string _xref_GUID = "";
-        private string _client_GUID = "";
+        readonly EA.Repository _rep;
+        string _xref_GUID = "";
+        string _client_GUID = "";
 
         #region Constructor
         /// <summary>

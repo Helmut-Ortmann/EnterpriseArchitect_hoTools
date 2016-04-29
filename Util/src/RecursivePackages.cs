@@ -7,8 +7,8 @@ namespace hoTools.Utils
 {
     public class ElementRecursive
     {
-        EA.Repository _rep = null;
-        List<int> _l_el_id = null;
+        EA.Repository _rep;
+        readonly List<int> _l_el_id;
 
         #region Constructor
         public ElementRecursive(EA.Repository rep)
@@ -41,7 +41,7 @@ namespace hoTools.Utils
         }
  
     }
-    public class RecursivePackages
+    public static class RecursivePackages
     {
         public delegate void setPackage(EA.Repository rep, EA.Package pkg, string[] s);
         public delegate void setElement(EA.Repository rep, EA.Element el, string[] s);

@@ -34,13 +34,13 @@ namespace hoTools.Query
         public const string TABULATOR_SCRIPT = "Scripts";
         public const string TABULATOR_QUERY = "Query";
 
-        List<Script> _lscripts = null;  // list off all scripts
-        DataTable _tableFunctions = null; // Scripts and Functions
+        List<Script> _lscripts;  // list off all scripts
+        DataTable _tableFunctions; // Scripts and Functions
 
-        SqlTabPagesCntrl _sqlTabCntrls = null;  // TAB Control with its TabPages
+        SqlTabPagesCntrl _sqlTabCntrls;  // TAB Control with its TabPages
 
         // settings
-        FrmQueryAndScript _frmQueryAndScript = null;
+        FrmQueryAndScript _frmQueryAndScript;
 
 
         /// <summary>

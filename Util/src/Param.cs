@@ -18,8 +18,8 @@ namespace hoTools.Utils.Parameter
     //            par = null;
     public class Param
     {
-        EA.Repository _rep = null;
-        EA.Element _parTrgt = null; // parameter
+        readonly EA.Repository _rep;
+        readonly EA.Element _parTrgt; // parameter
         string _xrefid = "";        // GUID of t_xref
         string _properties = "";    // the properties
         public Param(EA.Repository rep, EA.Element parTrgt) {

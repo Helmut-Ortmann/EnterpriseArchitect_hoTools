@@ -144,7 +144,7 @@ namespace EAAddinFramework.Utils
             string connectionString = this.Repository.ConnectionString;
             RepositoryType repoType = RepositoryType.ADOJET; //default to .eap file
 
-            // if it is a .feap file then it surely is a firebird db
+            // if it is a .feap file then it surely is a Firebird db
             if (connectionString.ToLower().EndsWith(".feap", StringComparison.Ordinal))
             {
                 repoType = RepositoryType.FIREBIRD;
@@ -499,7 +499,7 @@ namespace EAAddinFramework.Utils
         /// </summary>
         /// <param name="sqlQuery">the sql query to format</param>
         /// <returns>the formatted sql query </returns>
-        private string formatSQLTop(string sqlQuery)
+        string formatSQLTop(string sqlQuery)
         {
             string formattedQuery = sqlQuery;
             string selectTop = "select top ";

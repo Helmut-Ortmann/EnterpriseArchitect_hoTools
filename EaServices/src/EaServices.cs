@@ -51,7 +51,7 @@ namespace hoTools.EaServices
     }
     #endregion
 
-    public class EaService 
+    public static class EaService 
     {
           public static string release = "1.0.01";
           private const string EMBEDDED_ELEMENT_TYPES = "Port Parameter Pin"; 
@@ -1977,11 +1977,11 @@ namespace hoTools.EaServices
                 {
                     if (el.Type.Equals("ActionPin"))
                     {
-                        str = str + "\r\n Typ:\r\nSelect ea_guid As CLASSGUID, 'Parameter' As CLASSTYPE,* from t_operationparams op where ea_guid = '" + classifier + "'";
+                        str = str + "\r\n Type:\r\nSelect ea_guid As CLASSGUID, 'Parameter' As CLASSTYPE,* from t_operationparams op where ea_guid = '" + classifier + "'";
                     }
                     else
                     {
-                        str = str + "\r\n Typ:\r\nSelect ea_guid As CLASSGUID, object_type As CLASSTYPE,* from t_object o where ea_guid = '" + classifier + "'";
+                        str = str + "\r\n Type:\r\nSelect ea_guid As CLASSGUID, object_type As CLASSTYPE,* from t_object o where ea_guid = '" + classifier + "'";
                     }
                 }
                 if (PDATA1 != "")
@@ -2245,7 +2245,7 @@ namespace hoTools.EaServices
             }
             else
             {
-                MessageBox.Show(txt, "No functionn definition");
+                MessageBox.Show(txt, "No function definition");
                 return;
             }
             // get parameters
@@ -2384,7 +2384,7 @@ namespace hoTools.EaServices
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show(e.ToString() + "\n\n"+elPar.GetLastError(), "Error creating parameter:" + type +" " + name);
+                    MessageBox.Show(e + "\n\n"+elPar.GetLastError(), "Error creating parameter:" + type +" " + name);
                 }
                 pos = pos + 1;
 
@@ -2964,8 +2964,6 @@ namespace hoTools.EaServices
         /// <summary> 
         /// Update the types of the operation
         /// </summary>
-        /// <param name="EA.Repository">EA Repository</param>
-        /// <param name="EA.Method">EA Method</param>
         public static void updateOperationType(EA.Repository rep, EA.Method m)
         {
             // update method type
@@ -2980,7 +2978,7 @@ namespace hoTools.EaServices
             {
                 if (methodType == "")
                 {
-                    MessageBox.Show("Method " + m.Name + " Typ '" + m.ReturnType + "' ",
+                    MessageBox.Show("Method " + m.Name + " Type '" + m.ReturnType + "' ",
                         "Method type undefined");
                 }
                 else
@@ -3156,7 +3154,7 @@ namespace hoTools.EaServices
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show(e.ToString() + "\n\n" , "Error VC reconcile");
+                    MessageBox.Show(e + "\n\n" , "Error VC reconcile");
                 }
                 finally
                 {
@@ -3212,7 +3210,7 @@ namespace hoTools.EaServices
                 Cursor.Current = Cursors.Default;
             } catch (Exception e) 
             {
-                MessageBox.Show(e.ToString() + "\n\n"+ pkg.GetLastError(), "Error Checkout");
+                MessageBox.Show(e + "\n\n"+ pkg.GetLastError(), "Error Checkout");
             }
             finally
             {
@@ -3300,7 +3298,7 @@ namespace hoTools.EaServices
                     }
                     catch (Exception e)
                     {
-                        MessageBox.Show(e.ToString() + "\n\n" + pkg.GetLastError(), "Error Checkin");
+                        MessageBox.Show(e + "\n\n" + pkg.GetLastError(), "Error Checkin");
                         return;
                     }
                     finally
@@ -4018,7 +4016,7 @@ namespace hoTools.EaServices
             catch (Exception e)
             {
                 Clipboard.SetText(e.ToString());
-                MessageBox.Show(e.ToString() + "\n\nsee Clipboard!", "Error Reading file '" + el.Name + "':" + el.Type);
+                MessageBox.Show(e + "\n\nsee Clipboard!", "Error Reading file '" + el.Name + "':" + el.Type);
                 return l_el;
             }
             l_el = getInterfacesFromText(rep, null, text, false);

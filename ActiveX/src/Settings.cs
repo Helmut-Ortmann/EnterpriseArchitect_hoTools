@@ -37,10 +37,10 @@ namespace hoTools.Settings
         public SqlHistoryFilesCfg sqlFiles { get; }
 
         // Configuration 5 button searches by key
-        public EaAddinButtons[] buttonsSearch = null;
+        public EaAddinButtons[] buttonsSearch;
 
         // Configuration 5 button services by key
-        public List<hoTools.EaServices.ServicesCallConfig> buttonsServices = null;
+        public List<hoTools.EaServices.ServicesCallConfig> buttonsServices;
         // all available services
         public List<hoTools.EaServices.ServiceCall> allServices = new List<hoTools.EaServices.ServiceCall>();
 

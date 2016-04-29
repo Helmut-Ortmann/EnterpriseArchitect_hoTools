@@ -11,8 +11,8 @@ namespace hoTools.Utils.MksUtil
 {
     class Mks
     {
-        private string _vcPath;
-        private EA.Package _pkg;
+        readonly string _vcPath;
+        EA.Package _pkg;
         private EA.Repository _rep;
 
         // constructor
@@ -132,8 +132,8 @@ namespace hoTools.Utils.MksUtil
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.ToString() +
-                    "\r\n\r\nCommand:" + psi.ToString() + " " + psi.Arguments, "Error mks");
+                MessageBox.Show(e +
+                    "\r\n\r\nCommand:" + psi + " " + psi.Arguments, "Error mks");
             }
 
 

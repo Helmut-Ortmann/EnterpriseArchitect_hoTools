@@ -13,13 +13,13 @@ namespace GlobalHotkeys
     public class Hotkey : IDisposable
     {
         public const int WM_HOTKEY_MSG_ID = 0x0312;
-        private Keys Key { get; }
-        private Modifiers Modifiers { get; }
+        Keys Key { get; }
+        Modifiers Modifiers { get; }
         public HotkeyHandler Handler { get; }
-        private int Id { get; }
+        int Id { get; }
 
-        private IWin32Window _registeredWindow = null;
-        private bool _registered = false;
+        IWin32Window _registeredWindow;
+        bool _registered;
 
         #region Constructor
         public Hotkey(Keys key, Modifiers modifiers, HotkeyHandler handler)

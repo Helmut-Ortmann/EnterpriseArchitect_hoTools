@@ -5,7 +5,7 @@ using System.Text;
 
 namespace hoTools.Utils
 {
-    public class Element
+    public static class Element
     {
         /// <summary>
         /// 

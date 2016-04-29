@@ -9,11 +9,11 @@ namespace hoTools.EaServices
 {
     public class ServiceCall
     {
-        private MethodInfo _method;
-        private string _GUID = "";
-        private string _Description = "";
-        private string _Help = "";
-        private bool _IsTextRequired = false;
+        MethodInfo _method;
+        string _GUID = "";
+        string _Description = "";
+        string _Help = "";
+        bool _IsTextRequired;
 
         public ServiceCall(MethodInfo Method, string GUID, string Description, string Help, bool IsTextRequired)
         {
@@ -62,13 +62,13 @@ namespace hoTools.EaServices
     /// </summary>
     public class ServicesCallConfig
     {
-        private MethodInfo _method = null;
-        private string _GUID;
-        private int _pos;
-        private string _buttonText;
-        private string _description;
-        private string _help;
-        private bool _IsTextRequired;
+        MethodInfo _method;
+        string _GUID;
+        int _pos;
+        string _buttonText;
+        string _description;
+        string _help;
+        bool _IsTextRequired;
         public ServicesCallConfig(int Pos, string GUID, string ButtonText)
         {
             _GUID = GUID;
@@ -124,7 +124,7 @@ namespace hoTools.EaServices
                     }
                 } catch (Exception e)
                 {
-                    MessageBox.Show(e.ToString() +  "\nCan't invoke " + _method.Name + "Return:'"+ _method.ReturnParameter + "' "+_method.ToString(),"Error Invoking service");
+                    MessageBox.Show(e +  "\nCan't invoke " + _method.Name + "Return:'"+ _method.ReturnParameter + "' "+_method,"Error Invoking service");
                     return (string)s;
                 }
             }

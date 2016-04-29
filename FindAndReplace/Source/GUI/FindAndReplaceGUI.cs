@@ -22,7 +22,7 @@ namespace hoTools.Find
         public const string PROGID = "hoTools.FindAndReplaceGUI";
         public const string TABULATOR = "Find";
 
-        private FindAndReplace _fr = null;
+        FindAndReplace _fr ;
 
 
         #region Constructor

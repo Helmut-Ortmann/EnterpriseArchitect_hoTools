@@ -7,7 +7,7 @@ namespace hoTools.Find
 {
     class FindAndReplaceItemDiagram : FindAndReplaceItem
     {
-        EA.Diagram _dia = null;
+        readonly EA.Diagram _dia;
         public  FindAndReplaceItemDiagram(EA.Repository rep, string GUID)  :base( rep, GUID)
         {
             this._dia = rep.GetDiagramByGuid(GUID);

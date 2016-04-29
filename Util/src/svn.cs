@@ -13,9 +13,9 @@ namespace hoTools.Utils.svnUtil
 {
     public class svn
     {
-        private string _vcPath;
-        private EA.Package _pkg;
-        private EA.Repository _rep;
+        readonly string _vcPath;
+        EA.Package _pkg;
+        EA.Repository _rep;
 
         // constructor
         public svn(EA.Repository rep, EA.Package pkg)  {
@@ -63,17 +63,17 @@ namespace hoTools.Utils.svnUtil
             return url;
         }
 
-        //proc: svn, tortoiseProc
-        public string cmd(string proc, string cmd, string url="")
+        // proc: svn, tortoiseProc
+        public string cmd(string procInfo, string cmd, string url="")
         {
             string returnString = "";
             
-            var psi = new ProcessStartInfo(proc);
+            var psi = new ProcessStartInfo(procInfo);
             string path = _vcPath;
             if (!url.Equals("")) path = url;
             if (path == null) return returnString;
             string space = "";
-            if (proc.ToUpper().Equals("SVN")) space = " "; 
+            if (procInfo.ToUpper().Equals("SVN")) space = " "; 
 
             psi.Arguments = cmd + space + "\"" + path + "\"";  // wrap file name in " to avoid problems with blank in name
             psi.RedirectStandardOutput = true;
@@ -109,8 +109,8 @@ namespace hoTools.Utils.svnUtil
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.ToString() +
-                    "\r\n\r\nCommand:" + psi.ToString() + " " + psi.Arguments, "Error svn");
+                MessageBox.Show(e +
+                    "\r\n\r\nCommand:" + psi + " " + psi.Arguments, "Error svn");
             }
 
 

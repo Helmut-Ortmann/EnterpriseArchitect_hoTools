@@ -12,8 +12,8 @@ namespace hoTools.Find
 {
     public partial class ShowAndChangeItemGUI : Form
     {
-        FindAndReplace _fr = null;
-        FindAndReplaceItem _frItem = null;
+        FindAndReplace _fr;
+        FindAndReplaceItem _frItem ;
         #region Constructor
         public ShowAndChangeItemGUI(FindAndReplace fr)
         {
@@ -39,7 +39,6 @@ namespace hoTools.Find
         /// <summary>
         /// Show the current item
         /// </summary>
-        /// <param name="f"></param>
         private void ShowItem()
         {
             // fill information

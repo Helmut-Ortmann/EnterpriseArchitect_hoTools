@@ -9,8 +9,7 @@ namespace hoTools.Utils.SQL
 
     public class UtilSql
     {
-        
-        EA.Repository _rep = null;
+        readonly EA.Repository _rep;
         #region Constructor
         public UtilSql(EA.Repository rep)
         {

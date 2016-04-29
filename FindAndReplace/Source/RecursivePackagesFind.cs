@@ -12,7 +12,7 @@ namespace hoTools.Find
     /// - Recursive Package
     /// - Recursive Element
     /// </summary>
-    public class RecursivePackageFind
+    public static class RecursivePackageFind
     {
         #region doRecursivePkg
         public static void doRecursivePkg(EA.Repository rep, EA.Package pkg, FindAndReplace fr)

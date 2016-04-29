@@ -14,8 +14,8 @@ namespace hoTools.Settings
     /// </summary>
     public partial class FrmSettingsKey : Form
     {   
-        private AddinSettings _settings;
-        private AddinControlGUI _addinControl = null;
+        AddinSettings _settings;
+        AddinControlGUI _addinControl ;
 
         #region Constructor
         /// <summary>
@@ -506,15 +506,15 @@ namespace hoTools.Settings
 
             #region store shortcut services
             _settings.buttonsServices[0].GUID = cmbService1.SelectedValue.ToString();
-            _settings.buttonsServices[0].ButtonText = txtButton1TextService.Text.ToString();
+            _settings.buttonsServices[0].ButtonText = txtButton1TextService.Text;
             _settings.buttonsServices[1].GUID = cmbService2.SelectedValue.ToString();
-            _settings.buttonsServices[1].ButtonText = txtButton2TextService.Text.ToString();
+            _settings.buttonsServices[1].ButtonText = txtButton2TextService.Text;
             _settings.buttonsServices[2].GUID = cmbService3.SelectedValue.ToString();
-            _settings.buttonsServices[2].ButtonText = txtButton3TextService.Text.ToString();
+            _settings.buttonsServices[2].ButtonText = txtButton3TextService.Text;
             _settings.buttonsServices[3].GUID = cmbService4.SelectedValue.ToString();
-            _settings.buttonsServices[3].ButtonText = txtButton4TextService.Text.ToString();
+            _settings.buttonsServices[3].ButtonText = txtButton4TextService.Text;
             _settings.buttonsServices[4].GUID = cmbService5.SelectedValue.ToString();
-            _settings.buttonsServices[4].ButtonText = txtButton5TextService.Text.ToString();
+            _settings.buttonsServices[4].ButtonText = txtButton5TextService.Text;
             #endregion
 
             #region store global services

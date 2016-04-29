@@ -5,12 +5,12 @@ using System.ComponentModel;
 namespace hoTools.Connectors {
     public class Connector
     {
-        private string _type = "";
-        private string _stereotype = "";
-        private bool _isDefault = false;
-        private bool _isEnabled = true;
-        private int _pos = 0;
-        private string _lineStyle = "LV";
+        string _type = "";
+        string _stereotype = "";
+        bool _isDefault;
+        bool _isEnabled = true;
+        int _pos;
+        string _lineStyle = "LV";
        
 
         public Connector(string Type, string Stereotype, string LineStyle="LV", bool IsDefault=false, bool IsEnabled = true)
@@ -79,7 +79,9 @@ namespace hoTools.Connectors {
            
         }
         public List<string> getConnectorTypes() => new List<string> {
-                "Abstraction", "Accociate", "Aggregate", "Compose","Delegate", "Dependency","Generalize", "InformationFlow",  "Nesting", "NoteLink", "Realisation", "Usage"
+                "Abstraction", "Aggregation", "Assembly", "Association", "Collaboration", "Connector","ControlFlow", "Delegate","Deployment", "ERLink",
+                "Extension", "InformationFlow",  "Instantiation", "InterruptFlow", "Manifast", "Nesting", "NoteLink", "ObjectFlow", "Package", "Realisation",
+                "Sequence", "StateFlow", "Substitution", "Usage", "UseCase"
             };
         public List<String> getStandardStereotypes() => new List<String> {
                 "trace", "trace1", "trace2"

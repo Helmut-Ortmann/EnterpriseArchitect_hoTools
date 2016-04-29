@@ -14,11 +14,11 @@ namespace hoTools.EaServices.Dlg
 
     public partial class dlgUser : Form
     {
-        List<string> users = null;
-        private string _user = "";
-        private EA.Repository _rep = null;
-        private bool _isSecurityEnabled = false;
-        private UtilSql _sql = null;
+        List<string> users;
+        string _user = "";
+        EA.Repository _rep;
+        bool _isSecurityEnabled;
+        UtilSql _sql;
 
         public dlgUser(EA.Repository rep)
         {

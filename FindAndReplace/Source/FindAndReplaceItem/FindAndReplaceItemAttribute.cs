@@ -7,7 +7,7 @@ namespace hoTools.Find
 {
     class FindAndReplaceItemAttribute : FindAndReplaceItem
     {
-        private EA.Attribute _attr = null;
+        EA.Attribute _attr ;
         #region Constructor
         public  FindAndReplaceItemAttribute(EA.Repository rep, string GUID)  :base(rep, GUID)
         {

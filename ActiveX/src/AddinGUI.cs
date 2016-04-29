@@ -10,11 +10,11 @@ namespace hoTools.ActiveX
     /// </summary>
     public class AddinGUI : UserControl
     {
-        EA.Repository _rep = null;
-        string _release = null;
-        string _projectGUID = null;
-        Model _model = null;
-        AddinSettings _addinSettings = null;
+        EA.Repository _rep;
+        string _release;
+        string _projectGUID;
+        Model _model;
+        AddinSettings _addinSettings;
         // needs to set just after creating Control
 
 
