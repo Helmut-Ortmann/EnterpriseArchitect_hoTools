@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.Collections.Generic;
@@ -129,7 +130,7 @@ namespace hoTools
             Method
         }
 
-
+        #region Constructor
         /// <summary>
         /// Constructor: Reade settings, set the menu header and menuOptions
         /// </summary>
@@ -180,39 +181,12 @@ namespace hoTools
                 //---------------------------- About -------------------------------//
                 menuDevider, menuAbout };
         }
+        #endregion
+
+        #region HotkeyHandlers
         /// <summary>
-        /// EA_Connect events enable Add-Ins to identify their type and to respond to Enterprise Architect start up.
-        /// This event occurs when Enterprise Architect first loads your Add-In. Enterprise Architect itself is loading at this time so that while a Repository object is supplied, there is limited information that you can extract from it.
-        /// The chief uses for EA_Connect are in initializing global Add-In data and for identifying the Add-In as an MDG Add-In.
-        /// Also look at EA_Disconnect.
+        /// Handle Hotkeys
         /// </summary>
-        /// <param name="Repository">An EA.Repository object representing the currently open Enterprise Architect model.
-        /// Poll its members to retrieve model data and user interface status information.</param>
-        /// <returns>String identifying a specialized type of Add-In: 
-        /// - "MDG" : MDG Add-Ins receive MDG Events and extra menu options.
-        /// - "" : None-specialized Add-In.</returns>
-        public override string EA_Connect(EA.Repository Repository)
-        {
-            // register only if configured
-            if (AddinSettings.isShortKeySupport) HotkeyHandlers.SetupGlobalHotkeys();
-            _repository = Repository;
-            int v = Repository.LibraryVersion;
-            if (Repository.IsSecurityEnabled)
-            {
-                //logInUser = Repository.GetCurrentLoginUser(false);
-                //if ((logInUser.Contains("ho")) ||
-                //     (logInUser.Contains("admin")) ||
-                //     (logInUser.Equals(""))
-                //    ) logInUserRights = UserRights.ADMIN;
-            }
-            Favorite.installSearches(_repository); // install searches
-            return "a string";
-        }
-        public override void EA_OnOutputItemDoubleClicked(EA.Repository Repository, string TabName, string LineText, long ID)
-        {
-
-        }
-
         internal static class HotkeyHandlers
         {
             public static void SetupGlobalHotkeys()
@@ -357,6 +331,28 @@ namespace hoTools
             }
                       
         }
+        #endregion
+
+
+        #region EA_On
+        #region EA_OnContextItemChanged
+        /// <summary>
+        /// called when the selected item changes
+        /// This operation will show the guid of the selected element in the eaControl
+        /// </summary>
+        /// <param name="Repository">the EA.Repository</param>
+        /// <param name="GUID">the guid of the selected item</param>
+        /// <param name="ot">the object type of the selected item</param>
+        public override void EA_OnContextItemChanged(EA.Repository Repository, string GUID, EA.ObjectType ot)
+        { }
+        #endregion
+        #region EA_OnOutputItemDoubleClicked
+        public override void EA_OnOutputItemDoubleClicked(EA.Repository Repository, string TabName, string LineText, long ID)
+        {
+
+        }
+        #endregion
+        #region EA_OnPostInitialized
         public override void EA_OnPostInitialized(EA.Repository Repository)
         {
             // gets the file 'AssemblyFileVersion' of file AddinClass.dll
@@ -366,6 +362,8 @@ namespace hoTools
             _repository = Repository;
             ShowAddinControlWindows();
         }
+        #endregion
+        #region EA_OnPostNewConnector
         public override bool EA_OnPostNewConnector(EA.Repository Repository, EA.EventProperties Info)
         {
             EA.EventProperty eventProperty = Info.Get(0);
@@ -410,7 +408,39 @@ namespace hoTools
 
             }
         }
-
+        #endregion
+        #endregion
+        #region EA_ Connect File Open/Close
+        #region EA_Connect
+        /// <summary>
+        /// EA_Connect events enable Add-Ins to identify their type and to respond to Enterprise Architect start up.
+        /// This event occurs when Enterprise Architect first loads your Add-In. Enterprise Architect itself is loading at this time so that while a Repository object is supplied, there is limited information that you can extract from it.
+        /// The chief uses for EA_Connect are in initializing global Add-In data and for identifying the Add-In as an MDG Add-In.
+        /// Also look at EA_Disconnect.
+        /// </summary>
+        /// <param name="Repository">An EA.Repository object representing the currently open Enterprise Architect model.
+        /// Poll its members to retrieve model data and user interface status information.</param>
+        /// <returns>String identifying a specialized type of Add-In: 
+        /// - "MDG" : MDG Add-Ins receive MDG Events and extra menu options.
+        /// - "" : None-specialized Add-In.</returns>
+        public override string EA_Connect(EA.Repository Repository)
+        {
+            // register only if configured
+            if (AddinSettings.isShortKeySupport) HotkeyHandlers.SetupGlobalHotkeys();
+            _repository = Repository;
+            int v = Repository.LibraryVersion;
+            if (Repository.IsSecurityEnabled)
+            {
+                //logInUser = Repository.GetCurrentLoginUser(false);
+                //if ((logInUser.Contains("ho")) ||
+                //     (logInUser.Contains("admin")) ||
+                //     (logInUser.Equals(""))
+                //    ) logInUserRights = UserRights.ADMIN;
+            }
+            Favorite.installSearches(_repository); // install searches
+            return "a string";
+        }
+        #endregion
         public override void EA_FileOpen(EA.Repository Repository)
         {
             initializeForRepository(Repository);
@@ -422,6 +452,56 @@ namespace hoTools
 
 
         }
+        #endregion
+        #region EA Validation
+        /// <summary>
+        /// Called when EA start model validation. Just shows a message box
+        /// </summary>
+        /// <param name="Repository">the Repository</param>
+        /// <param name="Args">the arguments</param>
+        public override void EA_OnStartValidation(EA.Repository Repository, object Args)
+        {
+            MessageBox.Show("Validation started");
+        }
+        /// <summary>
+        /// Called when EA ends model validation. Just shows a message box
+        /// </summary>
+        /// <param name="Repository">the Repository</param>
+        /// <param name="Args">the arguments</param>
+        public override void EA_OnEndValidation(EA.Repository Repository, object Args)
+        {
+            MessageBox.Show("Validation ended");
+        }
+        #endregion
+        #region EA Technology Events
+        /// <summary>
+        /// Returns xml string for MDG to load. Possible values: Basic, Compilation, No). See AddinSettings.AutoLoadMdgXml.
+        /// </summary>
+        /// <param name="Repository"></param>
+        /// <returns></returns>
+        public override object EA_OnInitializeTechnologies(EA.Repository Repository) {
+           
+
+            string fileNameMdg;
+            switch (AddinSettings.AutoLoadMdgXml)
+            {
+                case AddinSettings.AutoLoadMdg.Basic:
+                    fileNameMdg = "hoToolsBasic.xml";
+                    break;
+                case AddinSettings.AutoLoadMdg.Compilation:
+                    fileNameMdg = "hoToolsCompilation.xml";
+                    break;
+                default:
+                    fileNameMdg = null;
+                    break;
+            }
+            if (fileNameMdg == null) return null;
+            string assemblyFolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            string combinedPathMdg = Path.Combine(assemblyFolder, fileNameMdg);
+            return System.IO.File.ReadAllText(combinedPathMdg);
+        }
+        #endregion
+
         #region initializeForRepository
         /// <summary>
         /// Initialize repositories for all EA hoTools Addin Tabulators
@@ -440,6 +520,7 @@ namespace hoTools
         }
         #endregion
 
+        #region updateLineStyle
         private bool updateLineStyle(EA.Repository rep, EA.Diagram dia, int connectorID, string style)
         {
             if (style.ToUpper() == "NO") return false;
@@ -453,6 +534,9 @@ namespace hoTools
             }
             return false;
         }
+        #endregion
+
+        #region EA_GetMenuState
         /// <summary>
         /// Called once Menu has been opened to see what menu items should active.
         /// </summary>
@@ -588,7 +672,9 @@ namespace hoTools
                 IsEnabled = false;
             }
         }
+        #endregion
 
+        #region EA_MenuClick
         /// <summary>
         /// Called when user makes a selection in the menu.
         /// This is your main exit point to the rest of your Add-in
@@ -924,8 +1010,8 @@ namespace hoTools
                 
             }
         }
+        #endregion
 
-       
 
 
         #region ShowAddinControlWindows
@@ -1027,7 +1113,12 @@ namespace hoTools
         #endregion
 
 
-        // display behavior or definition for selected element
+        #region Display Behavior
+        /// <summary>
+        /// Display behavior or definition for selected element
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <param name="showBehavior"></param>
         private static void DisplayOperationForSelectedElement(EA.Repository rep, displayMode showBehavior)
         {
             EA.ObjectType oType = rep.GetContextItemType();
@@ -1152,7 +1243,7 @@ namespace hoTools
                     {
                         if (custproperty.Name.Equals("kind") && custproperty.Value.Equals("CallOperation"))
                         {
-                            showFromElement(rep, el, showBehavior);
+                            showMethodFromAction(rep, el, showBehavior);
                         }
                         if (custproperty.Name.Equals("kind") && custproperty.Value.Equals("CallBehavior"))
                         {
@@ -1168,8 +1259,16 @@ namespace hoTools
                 }
             }
         }
+        #endregion
 
-        private static void showFromElement(EA.Repository rep, EA.Element el, displayMode showBehavior)
+        #region showMethodFromAction
+        /// <summary>
+        /// Show for Action: Behavior or Method in Browser
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <param name="el"></param>
+        /// <param name="showBehavior"></param>
+        static void showMethodFromAction(EA.Repository rep, EA.Element el, displayMode showBehavior)
         {
             EA.Method method = Util.getOperationFromAction(rep, el);
             if (method != null)
@@ -1184,8 +1283,9 @@ namespace hoTools
                 }
             }
         }
-
-        private static void locateOperationFromBehavior(EA.Repository rep, EA.Element el, displayMode showBehavior)
+        #endregion
+        #region locateOperationFromBehavior
+        static void locateOperationFromBehavior(EA.Repository rep, EA.Element el, displayMode showBehavior)
         {
             EA.Method method = Util.getOperationFromBrehavior(rep, el);
             if (method != null)
@@ -1200,7 +1300,9 @@ namespace hoTools
                 }
             }
         }
-        private static void BehaviorForOperation(EA.Repository rep, EA.Method method)
+        #endregion
+        #region BehaviorForOperation
+        static void BehaviorForOperation(EA.Repository rep, EA.Method method)
         {
             string behavior = method.Behavior;
             if (behavior.StartsWith("{", StringComparison.CurrentCulture) & behavior.EndsWith("}", StringComparison.CurrentCulture))
@@ -1218,6 +1320,9 @@ namespace hoTools
                 }
             }
         }
+        #endregion
+
+        #region LineStyle
         //---------------------------------------------------------------------------------------------------------------
         // line style
         // LH = "Line Style: Lateral Horizontal";
@@ -1230,7 +1335,7 @@ namespace hoTools
         // D =               Direct
         // C =               Customer
 
-        #pragma warning disable RECS0154
+#pragma warning disable RECS0154
         void btnLH_Click(object sender, EventArgs e)
         {
             EaService.setLineStyle(_repository, "LH");
@@ -1347,37 +1452,8 @@ namespace hoTools
             EaService.showSpecification(_repository);
         }
         #pragma warning restore RECS0154
+        #endregion
 
-        /// <summary>
-        /// Called when EA start model validation. Just shows a message box
-        /// </summary>
-        /// <param name="Repository">the Repository</param>
-        /// <param name="Args">the arguments</param>
-        public override void EA_OnStartValidation(EA.Repository Repository, object Args)
-        {
-            MessageBox.Show("Validation started");
-        }
-        /// <summary>
-        /// Called when EA ends model validation. Just shows a message box
-        /// </summary>
-        /// <param name="Repository">the Repository</param>
-        /// <param name="Args">the arguments</param>
-        public override void EA_OnEndValidation(EA.Repository Repository, object Args)
-        {
-            MessageBox.Show("Validation ended");
-        }
-        /// <summary>
-        /// called when the selected item changes
-        /// This operation will show the guid of the selected element in the eaControl
-        /// </summary>
-        /// <param name="Repository">the EA.Repository</param>
-        /// <param name="GUID">the guid of the selected item</param>
-        /// <param name="ot">the object type of the selected item</param>
-        public override void EA_OnContextItemChanged(EA.Repository Repository, string GUID, EA.ObjectType ot)
-        { }
-        /// <summary>
-        /// Say Hello to the world
-        /// </summary>
 
     }
 }

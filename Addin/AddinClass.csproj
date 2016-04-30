@@ -101,6 +101,12 @@
     <EmbeddedResource Include="src\About.resx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="hoToolsBasic.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="hoToolsCompilation.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="image\ActivityWithDifferentConstructs.png" />
     <Content Include="image\ActivityWithLotText.png" />
     <Content Include="image\Activity_Do_While_Loop.png" />

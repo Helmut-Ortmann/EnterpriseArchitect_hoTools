@@ -25,6 +25,7 @@ namespace hoTools.Settings
     public class AddinSettings
     {
         public enum ShowInWindow { AddinWindow, TabWindow,Disabled};
+        public enum AutoLoadMdg { Basic, Compilation, No};
 
         // File path of configuration file
         // %APPDATA%ho\hoTools\user.config
@@ -97,11 +98,11 @@ namespace hoTools.Settings
             // Get the mapped configuration file.
             currentConfig = ConfigurationManager.OpenMappedExeConfiguration(configFileMap, ConfigurationUserLevel.None);
             //merge the default settings
-            this.mergeDefaultSettings();
-            this.buttonsSearch = getShortcutsSearch();
-            this.buttonsServices = getShortcutsServices();
-            this.globalShortcutsService = getGlobalShortcutsService();
-            this.globalShortcutsSearch = getGlobalShortcutsSearch();
+            mergeDefaultSettings();
+            buttonsSearch = getShortcutsSearch();
+            buttonsServices = getShortcutsServices();
+            globalShortcutsService = getGlobalShortcutsService();
+            globalShortcutsSearch = getGlobalShortcutsSearch();
             getConnector(_logicalConnectors);
             getConnector(_activityConnectors);
             getAllServices();
@@ -359,6 +360,33 @@ namespace hoTools.Settings
             set
             {
                 this.currentConfig.AppSettings.Settings["ScriptAndQueryWindow"].Value = value.ToString();
+
+            }
+
+        }
+        #endregion
+
+        #region Property: AutoLoadMdgXml
+        /// <summary>
+        /// Property which MDG to load (Basic, Compilation, No)
+        /// </summary>
+        public AutoLoadMdg AutoLoadMdgXml
+        {
+            get
+            {
+                AutoLoadMdg result;
+                if (Enum.TryParse<AutoLoadMdg>(currentConfig.AppSettings.Settings["AutoLoadMdg"].Value, out result))
+                {
+                    return (AutoLoadMdg)result;
+                }
+                else
+                {
+                    return AutoLoadMdg.No;
+                }
+            }
+            set
+            {
+                currentConfig.AppSettings.Settings["AutoLoadMdg"].Value = value.ToString();
 
             }
 

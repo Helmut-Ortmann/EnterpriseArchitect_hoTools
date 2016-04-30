@@ -38,6 +38,21 @@ namespace hoTools.Settings
             chkAdvancedDiagramNote.Checked = settings.isAdvancedDiagramNote;
             #endregion
 
+            #region AutoLoadMdg
+            // Initialize Auto Load MDG
+            switch (_settings.AutoLoadMdgXml)
+            {
+                case AddinSettings.AutoLoadMdg.Basic:
+                    chkAutoLoadMdgBasic.Checked = true;
+                    break;
+                case AddinSettings.AutoLoadMdg.Compilation:
+                    chkAutoLoadMdgCompilation.Checked = true;
+                    break;
+                default:
+                    chkAutoLoadMdgNo.Checked = true;
+                    break;
+            }
+            #endregion
 
             #region LineStyleAndMoreWindow
             // Initialize LineStyle Window
@@ -90,6 +105,12 @@ namespace hoTools.Settings
             _settings.isAdvancedFeatures = chkAdvancedFeatures.Checked;
             _settings.isAdvancedPort = chkAdvancedPort.Checked;
             _settings.isAdvancedDiagramNote = chkAdvancedDiagramNote.Checked;
+
+            #region AutoLoadMdg
+            _settings.AutoLoadMdgXml = AddinSettings.AutoLoadMdg.No;
+            if (chkAutoLoadMdgBasic.Checked) _settings.AutoLoadMdgXml = AddinSettings.AutoLoadMdg.Basic;
+            if (chkAutoLoadMdgCompilation.Checked) _settings.AutoLoadMdgXml = AddinSettings.AutoLoadMdg.Compilation;
+            #endregion
 
             #region LineStyleAndMoreWindow
             _settings.LineStyleAndMoreWindow = AddinSettings.ShowInWindow.Disabled;
