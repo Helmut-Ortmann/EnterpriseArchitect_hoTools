@@ -31,6 +31,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{71383584
 	ProjectSection(SolutionItems) = preProject
 		Addin\ActiveX.dll.config = Addin\ActiveX.dll.config
 		Addin\Properties\AssemblyInfo.cs = Addin\Properties\AssemblyInfo.cs
+		hoToolsRemove.ps1 = hoToolsRemove.ps1
 		Setup\src\Product.wxs = Setup\src\Product.wxs
 		README.md = README.md
 		Setup\bin\Release\Setup.msi = Setup\bin\Release\Setup.msi
