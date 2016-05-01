@@ -36,4 +36,4 @@ using System.Runtime.InteropServices;
 // If not: you get registration error and the Addin isn't loaded in EA
 [assembly: AssemblyVersion("2.0.0.1")]
 // possibly make same as ProductVersion in Product.wxs
-[assembly: AssemblyFileVersion("2.0.0.1")]
+[assembly: AssemblyFileVersion("2.0.1.1")]

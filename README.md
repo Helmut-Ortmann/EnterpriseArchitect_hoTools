@@ -17,6 +17,7 @@ Collection of useful tools:
 - Setting to adapt GUI and available features 
 - Intuitive GUI
 - Online help
+- ..
 
 # Preconditions
 - .NET 4
@@ -31,6 +32,7 @@ Collection of useful tools:
 - BookMe for Online Help (powerful!)
 - Configuration (*.xml)
 - Installation via WIX
+- Load MDG during starup
 - Keys
 - Integrated Geert Bellekens VBScript Library
 - Useful Searches
@@ -43,7 +45,8 @@ Some features:
 - Generate Activity Diagram from code snippets
 
 # Installation #
-- hoTools.msi
+- hoTools.msi or hoTools.msi.lnk
+- hoToolsRemove.ps1 (deinstall with PowerShell)
 
 
 

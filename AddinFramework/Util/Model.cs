@@ -477,25 +477,24 @@ namespace EAAddinFramework.Utils
             }
             return formattedSQL;
         }
-
+        //"SELECT TOP N" is used on
+        // SQLSVR
+        // ADOJET
+        // ASA
+        // OPENEDGE
+        // ACCESS2007
+        // 
+        // "WHERE rowcount <= N" is used on
+        // ORACLE
+        // 
+        // "LIMIT N" is used on
+        // MYSQL
+        // POSTGRES
+        // <summary>
+        // limiting the number of results in an sql query is different on different platforms.
+        // 
         /// <summary>
-        /// limiting the number of results in an sql query is different on different platforms.
-        /// 
-        /// "SELECT TOP N" is used on
-        /// SQLSVR
-        /// ADOJET
-        /// ASA
-        /// OPENEDGE
-        /// ACCESS2007
-        /// 
-        /// "WHERE rowcount <= N" is used on
-        /// ORACLE
-        /// 
-        /// "LIMIT N" is used on
-        /// MYSQL
-        /// POSTGRES
-        /// 
-        /// This operation will replace the SELECT TOP N by the appropriate sql syntax depending on the repositorytype
+        /// This operation will replace the SELECT TOP N by the appropriate sql syntax depending on the repository type
         /// </summary>
         /// <param name="sqlQuery">the sql query to format</param>
         /// <returns>the formatted sql query </returns>

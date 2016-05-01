@@ -2808,7 +2808,7 @@ namespace hoTools.EaServices
             }
 
         }
-
+        #region createMacro
         public static void createMacro(EA.Repository rep, EA.Element el, string s, string stereotype) {
 
              string name = "";
@@ -2861,21 +2861,8 @@ namespace hoTools.EaServices
              }
 
         }
-        public static string createStereotype(EA.Repository rep, EA.Element el, string s) {
-
-            string stereotype = "";
-            if (s.Contains("TARGET_CPU_1")) stereotype = "SOFTWARE_VALID_FOR_CPU_1";
-            if (s.Contains("TARGET_CPU_2")) stereotype = "SOFTWARE_VALID_FOR_CPU_2";
-            if (stereotype == "") {
-                string regexStereotype = @"if[\s]+([^]*)";
-                Match match = Regex.Match(s, regexStereotype);
-                if (match.Success)
-                {
-                    stereotype = match.Groups[1].Value.Trim();
-                }
-            }
-            return stereotype;
-        }
+        #endregion
+       
         public static void createEnumerationAttributesFromText(EA.Repository rep, EA.Element el, string txt)
         {
             // delete comment
