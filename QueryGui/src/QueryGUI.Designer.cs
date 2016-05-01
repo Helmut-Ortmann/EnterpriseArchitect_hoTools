@@ -73,7 +73,7 @@ namespace hoTools.Query
             // 
             // txtSearchTerm
             // 
-            this.txtSearchTerm.Location = new System.Drawing.Point(92, 3);
+            this.txtSearchTerm.Location = new System.Drawing.Point(184, 3);
             this.txtSearchTerm.Name = "txtSearchTerm";
             this.txtSearchTerm.Size = new System.Drawing.Size(223, 20);
             this.txtSearchTerm.TabIndex = 7;
@@ -207,7 +207,7 @@ namespace hoTools.Query
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(321, 0);
+            this.label1.Location = new System.Drawing.Point(413, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(196, 25);
             this.label1.TabIndex = 1;
@@ -221,7 +221,7 @@ namespace hoTools.Query
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(89, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(181, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -239,14 +239,14 @@ namespace hoTools.Query
             // 
             this.settingsToolStripMenuItem.BackColor = System.Drawing.SystemColors.Control;
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
             this.settingsToolStripMenuItem.Text = "&Settings";
             this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
             // 
             // FileNewTabToolStripMenuItem
             // 
             this.FileNewTabToolStripMenuItem.Name = "FileNewTabToolStripMenuItem";
-            this.FileNewTabToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.FileNewTabToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
             this.FileNewTabToolStripMenuItem.Text = "&NewTab";
             this.FileNewTabToolStripMenuItem.Click += new System.EventHandler(this.FileNewTabToolStripMenuItem_Click);
             // 
@@ -263,19 +263,21 @@ namespace hoTools.Query
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.aboutToolStripMenuItem.Text = "&About";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem1
             // 
             this.helpToolStripMenuItem1.Name = "helpToolStripMenuItem1";
-            this.helpToolStripMenuItem1.Size = new System.Drawing.Size(141, 22);
+            this.helpToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
             this.helpToolStripMenuItem1.Text = "&Help";
+            this.helpToolStripMenuItem1.Click += new System.EventHandler(this.helpToolStripMenuItem1_Click);
             // 
             // lastsqlErrorToolStripMenuItem
             // 
             this.lastsqlErrorToolStripMenuItem.Name = "lastsqlErrorToolStripMenuItem";
-            this.lastsqlErrorToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.lastsqlErrorToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.lastsqlErrorToolStripMenuItem.Text = "Last &sql error";
             this.lastsqlErrorToolStripMenuItem.ToolTipText = "Get the last EA sql error from %APPDATA%Sparx Systems\\EA\\DBError.txt";
             this.lastsqlErrorToolStripMenuItem.Click += new System.EventHandler(this.showSqlErrorToolStripMenuItem_Click);

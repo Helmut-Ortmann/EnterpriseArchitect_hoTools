@@ -9,6 +9,7 @@ using hoTools.ActiveX;
 using System.Collections.Generic;
 using EAAddinFramework.Utils;
 using hoTools.Settings;
+using hoTools.EaServices;
 using hoTools.Utils.SQL;
 
 using System.IO;
@@ -105,7 +106,7 @@ namespace hoTools.Query
         
 
         #region initDataGrid
-        private void initScriptDataGrid()
+        void initScriptDataGrid()
         {
             dataGridViewScripts.AutoGenerateColumns = false;
 
@@ -154,7 +155,7 @@ namespace hoTools.Query
         }
         #endregion
         #region initDataTable
-        private void initScriptDataTable()
+        void initScriptDataTable()
         {
             dataGridViewScripts.DataSource = null;
             _tableFunctions = new DataTable();
@@ -209,7 +210,7 @@ namespace hoTools.Query
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnLoadScripts_Click(object sender, EventArgs e)
+        void btnLoadScripts_Click(object sender, EventArgs e)
         {
             _lscripts = Script.getEAMaticScripts(Model);
             updateTableFunctions();
@@ -259,7 +260,7 @@ namespace hoTools.Query
 
         
 
-        private void runScriptToolStripMenuItem_Click(object sender, EventArgs e)
+        void runScriptToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // get selected element and type
             EA.ObjectType oType = Repository.GetContextItemType();
@@ -275,7 +276,7 @@ namespace hoTools.Query
         /// <summary>
         /// Show error of the selected Script
         /// </summary>
-        private void ShowScriptErrorToolStripMenuItem_Click(object sender, EventArgs e)
+        void ShowScriptErrorToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DataGridViewRow row = dataGridViewScripts.Rows[rowScriptsIndex];
             string scriptName = row.Cells["Script"].Value as string;
@@ -298,7 +299,7 @@ namespace hoTools.Query
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void dataGridViewScripts_MouseClick(object sender, MouseEventArgs e)
+        void dataGridViewScripts_MouseClick(object sender, MouseEventArgs e)
         {
             rowScriptsIndex = dataGridViewScripts.HitTest(e.X, e.Y).RowIndex;
         }
@@ -308,7 +309,7 @@ namespace hoTools.Query
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void showScriptToolStripMenuItem_Click(object sender, EventArgs e)
+        void showScriptToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
             DataGridViewRow rowToRun = dataGridViewScripts.Rows[rowScriptsIndex];
@@ -321,7 +322,7 @@ namespace hoTools.Query
         }
 
         
-        private void insertText(TextBox txtBox, string text)
+        void insertText(TextBox txtBox, string text)
         {
             var selectionIndex = txtBox.SelectionStart;
             txtBox.Text = txtBox.Text.Insert(selectionIndex, text);
@@ -335,7 +336,7 @@ namespace hoTools.Query
         /// </summary>
         /// <param name="tabPageSql">The TabPage</param>
         /// <param name="txtBoxSql"></param>
-        private void safeTabAs(TabPage tabPageSql, TextBox txtBoxSql)
+        void safeTabAs(TabPage tabPageSql, TextBox txtBoxSql)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
 
@@ -374,7 +375,7 @@ namespace hoTools.Query
         /// </summary>
         /// <param name="tabPageSql"></param>
         /// <param name="txtBoxSql"></param>
-        private void loadTabFrom(TabPage tabPageSql, TextBox txtBoxSql)
+        void loadTabFrom(TabPage tabPageSql, TextBox txtBoxSql)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
 
@@ -410,7 +411,7 @@ namespace hoTools.Query
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnRunScriptForSql_Click(object sender, EventArgs e)
+        void btnRunScriptForSql_Click(object sender, EventArgs e)
         {
 
             Cursor.Current = Cursors.WaitCursor;
@@ -431,7 +432,7 @@ namespace hoTools.Query
 
         }
 
-        private void btnRunScriptForSqlWithAsk_Click(object sender, EventArgs e)
+        void btnRunScriptForSqlWithAsk_Click(object sender, EventArgs e)
         {
             Cursor.Current = Cursors.WaitCursor;
             // get TabPage
@@ -454,7 +455,7 @@ namespace hoTools.Query
        
 
         
-        private void showSqlErrorToolStripMenuItem_Click(object sender, EventArgs e)
+        void showSqlErrorToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string appData = Environment.GetEnvironmentVariable("appdata");
             string filePath = appData + @"\Sparx Systems\EA\dberror.txt";
@@ -466,14 +467,14 @@ namespace hoTools.Query
             }
         }
 
-        private void txtBoxSql_TextChanged(object sender, EventArgs e)
+        void txtBoxSql_TextChanged(object sender, EventArgs e)
         {
             TextBox txtBox = (TextBox)sender;
             TabPage tabPage = (TabPage)txtBox.Parent;
             if (!(tabPage.Text.Contains("*"))) tabPage.Text = tabPage.Text + " *";
         }
 
-        private void FileNewTabToolStripMenuItem_Click(object sender, EventArgs e)
+        void FileNewTabToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _sqlTabCntrls.addTab();
         }
@@ -486,7 +487,7 @@ namespace hoTools.Query
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void tabControlSql_DrawItem(object sender, DrawItemEventArgs e)
+        void tabControlSql_DrawItem(object sender, DrawItemEventArgs e)
         {
             // Draw a Rectangle with the background color
             Rectangle closeButton = new Rectangle(e.Bounds.Right + CLOSE_BUTTON_RECTANGLE_RIGHT_X,
@@ -506,7 +507,7 @@ namespace hoTools.Query
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void tabControlSql_MouseDown(object sender, MouseEventArgs e)
+        void tabControlSql_MouseDown(object sender, MouseEventArgs e)
         {
             Rectangle r = tabControlSql.GetTabRect(this.tabControlSql.SelectedIndex);
             Rectangle closeButton = new Rectangle(r.Right + CLOSE_BUTTON_RECTANGLE_RIGHT_X, 
@@ -519,15 +520,49 @@ namespace hoTools.Query
 
         
         
-        private void tabControlSql_MouseMove(object sender, MouseEventArgs e)
-        {
-
-        }
-
-        private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
+       
+        void settingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _frmQueryAndScript = new FrmQueryAndScript(AddinSettings);
             _frmQueryAndScript.ShowDialog();
         }
+
+        #region About
+        /// <summary>
+        /// About Window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            string configFilePath = AddinSettings.ConfigFilePath;
+            switch (AddinSettings.Customer)
+            {
+
+                case AddinSettings.CustomerCfg.VAR1:
+                    EaService.aboutVAR1(Release, configFilePath);
+                    break;
+                case AddinSettings.CustomerCfg.hoTools:
+                    EaService.about(Release, configFilePath);
+                    break;
+                default:
+                    EaService.about(Release, configFilePath);
+                    break;
+            }
+        }
+        #endregion
+
+        #region Help
+        /// <summary>
+        /// ShowHelp
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void helpToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Help.ShowHelp(this, EaService.getAssemblyPath() + "\\" + "hoTools.chm");
+        }
+        #endregion
     }
 }

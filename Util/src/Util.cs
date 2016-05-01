@@ -182,6 +182,7 @@ namespace hoTools.Utils
         // NO=               make nothing
         public static void setLineStyleForDiagramLink(string lineStyle, EA.DiagramLink link)
         {
+            #pragma warning disable RECS0012
             lineStyle = lineStyle + "  "; 
             if (lineStyle.Substring(0, 2).ToUpper() == "NO") return;
             if (lineStyle.Substring(0,2) == "TH") lineStyle = "H ";
@@ -197,23 +198,24 @@ namespace hoTools.Utils
 
             }
             link.Update();
+            #pragma warning restore RECS0012
         }
 
 
-         //--------------------------------------------------------------------------------------------------------------
+        //--------------------------------------------------------------------------------------------------------------
         // SetLineStyleDiagramObjectsAndConnectors  Set line style for diagram objects and connectors
-         //--------------------------------------------------------------------------------------------------------------
-         // linestyle
-         // LH = "Line Style: Lateral Horizontal";
-         // LV = "Line Style: Lateral Vertical";
-         // TH  = "Line Style: Tree Horizontal";
-         // TV = "Line Style: Tree Vertical";
-         // OS = "Line Style: Orthogonal Square";
-         // OR =              Orthogonal Round
-         // A =               Automatic
-         // D =               Direct
-         // C =               Customer 
-         // B =               Bezier
+        //--------------------------------------------------------------------------------------------------------------
+        // linestyle
+        // LH = "Line Style: Lateral Horizontal";
+        // LV = "Line Style: Lateral Vertical";
+        // TH  = "Line Style: Tree Horizontal";
+        // TV = "Line Style: Tree Vertical";
+        // OS = "Line Style: Orthogonal Square";
+        // OR =              Orthogonal Round
+        // A =               Automatic
+        // D =               Direct
+        // C =               Customer 
+        // B =               Bezier
         public static void SetLineStyleDiagramObjectsAndConnectors(EA.Repository rep, EA.Diagram d, string lineStyle)
          {
              EA.Collection selectedObjects = d.SelectedObjects;

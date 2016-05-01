@@ -4439,6 +4439,12 @@ namespace hoTools.EaServices
         }
         #endregion
 
+        #region About
+        /// <summary>
+        /// Outputs the About window
+        /// </summary>
+        /// <param name="release"></param>
+        /// <param name="configFilePath"></param>
         public static void about(string release, string configFilePath)
         {
             string installDir = Path.GetDirectoryName(Assembly.GetAssembly(typeof(EaService)).CodeBase);
@@ -4457,6 +4463,8 @@ namespace hoTools.EaServices
                       "\nConfig:\t" + configFilePath
                     , "hoTools  " + release + " (AddinClass.dll AssemblyFileVersion)");
         }
+        #endregion
+
         public static void aboutVAR1(string release, string configFilePath) {
             string installDir = Path.GetDirectoryName(Assembly.GetAssembly(typeof(EaService)).CodeBase);
             MessageBox.Show("Helmut.Ortmann@t-online.de\n"+
