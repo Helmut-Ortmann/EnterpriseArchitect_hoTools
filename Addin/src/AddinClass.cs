@@ -1074,7 +1074,7 @@ namespace hoTools
 
 
         /// <summary>
-        /// Add AddinGUI as a tab to EA
+        /// Add AddinGUI as a tab to EA. It sets the following properties in the following sequence: Tag, AddinSettings, Release, Repository. 
         /// </summary>
         /// <param name="tabName">Tabulator name to show Addin</param>
         /// <param name="progId">ProgID under which the Addin is registered</param>

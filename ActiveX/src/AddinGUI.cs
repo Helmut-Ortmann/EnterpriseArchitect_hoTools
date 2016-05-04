@@ -6,7 +6,11 @@ using EAAddinFramework.Utils;
 namespace hoTools.ActiveX
 {
     /// <summary>
-    /// Basic class for EA Addin Controls which are visualized as a tab in the Addin window
+    /// Basic class for EA Addin Controls which are visualized as a tab in the Addin window. Set properties in sequence of: 
+    /// <para/>- Object Tag (defined in ActiveX Control as object, meaning according to target class
+    /// <para/>- AddinSettings Settings
+    /// <para/>- string Release
+    /// <para/>- EA.Repository Repository
     /// </summary>
     public class AddinGUI : UserControl
     {
