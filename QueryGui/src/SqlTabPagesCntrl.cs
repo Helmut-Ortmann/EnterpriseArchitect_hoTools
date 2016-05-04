@@ -37,13 +37,13 @@ namespace hoTools.Query
         /// Reusable ToolStripMenuItem: New Tab and Load Recent Files 
         /// </summary>
         public ToolStripMenuItem NewTabAndLoadRecentFileItem => _newTabAndLoadRecentFileItem;
-        readonly ToolStripMenuItem _newTabAndLoadRecentFileItem = new ToolStripMenuItem("Recent Files");
+        readonly ToolStripMenuItem _newTabAndLoadRecentFileItem = new ToolStripMenuItem("New Tab from...");
 
         /// <summary>
         /// Reusable ToolStripMenuItem: Load Recent Files 
         /// </summary>
         public ToolStripMenuItem LoadRecentFileItem => _loadRecentFileItem;
-        readonly ToolStripMenuItem _loadRecentFileItem  = new ToolStripMenuItem("Recent Files");
+        readonly ToolStripMenuItem _loadRecentFileItem  = new ToolStripMenuItem("Load from...");
 
 
         const string DEFAULT_TAB_NAME = "noName";

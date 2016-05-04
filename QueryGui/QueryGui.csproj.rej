@@ -1,0 +1,11 @@
+diff a/QueryGui/QueryGui.csproj b/QueryGui/QueryGui.csproj	(rejected hunks)
+@@ -59,9 +59,6 @@
+     <Compile Include="src\GuiFunction.cs" />
+     <Compile Include="src\IQueryGUI.cs" />
+     <Compile Include="src\SciptFuntionWrapper.cs" />
+-    <Compile Include="src\QueryGUI.cs">
+-      <SubType>UserControl</SubType>
+-    </Compile>
+     <Compile Include="src\QueryGUI.cs" />
+     <Compile Include="src\QueryGUI.Designer.cs">
+       <DependentUpon>QueryGUI.cs</DependentUpon>
