@@ -111,7 +111,7 @@ namespace hoTools.Query
         public static bool RunSql(Model model, string sql, string searchTerm)
         {
             // replace templates
-            sql = SqlTemplates.replaceSearchTerm(model.Repository, sql, searchTerm);
+            sql = SqlTemplates.replaceMacro(model.Repository, sql, searchTerm);
 
             // run the query
             string xml = model.SqlQueryWithException(sql);

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Forms;
+using System.Text.RegularExpressions;
 using EA;
 
 using hoTools.Utils;
@@ -212,11 +213,17 @@ namespace hoTools.Utils.SQL
         }
 
 
-
-        public static string replaceSearchTerm(Repository rep, string toUpdate, string searchTerm)
+        /// <summary>
+        /// Replace Macro by value. Possible Macros are: Search Term, ID, GUID, Package ID, Branch ID. 
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <param name="sqlString">The complete SQL string</param>
+        /// <param name="searchTerm">The Search Term from the text entry field</param>
+        /// <returns></returns>
+        public static string replaceMacro(Repository rep, string sqlString, string searchTerm)
         {
             // <Search Term>
-            string sql = toUpdate.Replace(getTemplateText(SQL_TEMPLATE_ID.SEARCH_TERM), searchTerm);
+            string sql = sqlString.Replace(getTemplateText(SQL_TEMPLATE_ID.SEARCH_TERM), searchTerm);
 
 
             // replace ID
@@ -317,9 +324,29 @@ namespace hoTools.Utils.SQL
                 }
             }
 
-
-            return sql;
+            // delete Comments
+            return deleteC_Comments(sql);
              
         }
+        #region deleteC_Comments 
+        /// <summary>
+        /// Delete C-Comment
+        /// </summary>
+        /// <param name="sql">SQL to delete C-Comments in </param>
+        /// <returns></returns>
+        static string deleteC_Comments(string sql)
+        {
+            //s = Regex.Replace(s, @"/\*[^\n]*\*/", "", RegexOptions.Singleline);
+            // ? for greedy behavior (find shortest matching string)
+            string s = Regex.Replace(sql, @"/\*.*?\*/", "", RegexOptions.Singleline);
+            // delete comments //....
+            s = Regex.Replace(s, @"//[^\n]*\n", "\r\n");
+            // delete comments /*....
+            s = Regex.Replace(s, @"/\*[^\n]*\n", "\r\n");
+            // delete empty lines
+            s = Regex.Replace(s, "(\r\n){2,100}", "\r\n");
+            return s;
+        }
+        #endregion
     }
 }

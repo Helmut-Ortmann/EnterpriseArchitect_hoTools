@@ -13,7 +13,7 @@ using EAAddinFramework.Utils;
 namespace hoTools.Query
 {
     /// <summary>
-    /// Create and handle TabPages of a ControlTab to work with *.sql files.
+    /// SqlTabPagesCntrl creates and handles TabPages of a ControlTab to work with *.sql files.
     /// - Create Menu Items
     /// -- Templates SQL
     /// -- Templates Macros
@@ -24,7 +24,7 @@ namespace hoTools.Query
     public class SqlTabPagesCntrl
     {
         /// <summary>
-        /// File History is used to ease usage
+        /// Setting with the file history.
         /// </summary>
         AddinSettings _settings;
         Model _model;
@@ -36,28 +36,28 @@ namespace hoTools.Query
         /// <summary>
         /// Reusable ToolStripMenuItem: New Tab and Load Recent Files 
         /// </summary>
-        public ToolStripMenuItem NewTabAndLoadRecentFileItem { get; }
+        public ToolStripMenuItem NewTabAndLoadRecentFileItem => _newTabAndLoadRecentFileItem;
+        readonly ToolStripMenuItem _newTabAndLoadRecentFileItem = new ToolStripMenuItem("Recent Files");
 
         /// <summary>
         /// Reusable ToolStripMenuItem: Load Recent Files 
         /// </summary>
-        public ToolStripMenuItem LoadRecentFileItem   { get; }
+        public ToolStripMenuItem LoadRecentFileItem => _loadRecentFileItem;
+        readonly ToolStripMenuItem _loadRecentFileItem  = new ToolStripMenuItem("Recent Files");
 
-        /// <summary>
-        /// List of TabPages in TabControl
-        /// </summary>
-        //List<SqlTabPage> _tabCntrls = new List<SqlTabPage>();
 
         const string DEFAULT_TAB_NAME = "noName";
 
         /// <summary>
-        /// Constructor to initialize TabControl
+        /// Constructor to initialize TabControl, create ToolStripItems (New Tab from, Recent Files) with file history. 
         /// </summary>
         /// <param name="model"></param>
         /// <param name="settings"></param>
         /// <param name="components"></param>
         /// <param name="tabControl"></param>
-        public SqlTabPagesCntrl(Model model, AddinSettings settings, System.ComponentModel.IContainer components, TabControl tabControl, TextBox sqlTextBoxSearchTerm)
+        public SqlTabPagesCntrl(Model model, AddinSettings settings, 
+            System.ComponentModel.IContainer components, 
+            TabControl tabControl, TextBox sqlTextBoxSearchTerm)
         {
             _settings = settings;
             _model = model;
@@ -65,13 +65,11 @@ namespace hoTools.Query
             _components = components;
             _sqlTextBoxSearchTerm = sqlTextBoxSearchTerm;
 
-            NewTabAndLoadRecentFileItem = new ToolStripMenuItem("New Tab from");
-            LoadRecentFileItem = new ToolStripMenuItem("Recent Files");
+            // ToolStripItem 'New Tab from' with history of files
+            loadRecentFilesMenuItems(_newTabAndLoadRecentFileItem, newTabAnLoadFromHistoryEntry_Click);
 
-            // load File history in ToolStripMenuItem
-            loadRecentFilesMenuItems(LoadRecentFileItem, loadFromHistoryEntry_Click);
-            // New Tab with File History in ToolStripMenuItem
-            loadRecentFilesMenuItems(NewTabAndLoadRecentFileItem, newTabAnLoadFromHistoryEntry_Click);
+            // ToolStripItem 'Recent Files' with history of files
+            loadRecentFilesMenuItems(_loadRecentFileItem, loadFromHistoryEntry_Click);
 
         }
         /// <summary>
@@ -122,7 +120,7 @@ namespace hoTools.Query
 
             // Save As sql File from TabPage
             ToolStripMenuItem fileSaveAsMenuItem = new ToolStripMenuItem();
-            fileSaveAsMenuItem.Text = "Save as File";
+            fileSaveAsMenuItem.Text = "Save File As..";
             fileSaveAsMenuItem.Click += new System.EventHandler(this.fileSaveAsMenuItem_Click);
 
             // New TabPage
@@ -269,7 +267,7 @@ namespace hoTools.Query
             insertWcMenuItem.Tag = SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.WC);
             insertWcMenuItem.Click += new System.EventHandler(insertTemplate_Click);
 
-            insertMacroMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            insertMacroMenuItem.DropDownItems.AddRange(new ToolStripItem[] {
                 insertMacroSearchTermMenuItem,
                 insertPackageMenuItem,
                 insertBranchMenuItem,
@@ -289,7 +287,7 @@ namespace hoTools.Query
             // ToolStripItem for
             // - TabPage
             // - SQL TextBox
-            ToolStripItem[] toolStripItems = {
+            var toolStripItems = new ToolStripItem[] {
                 fileLoadMenuItem,
                 LoadRecentFileItem,           // Reusable LoadRecentFileItem (contains menuItems of recent files)
                 newTabMenuItem,

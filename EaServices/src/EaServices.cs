@@ -1487,7 +1487,7 @@ namespace hoTools.EaServices
                 }
             }
         }
-        private static string deleteCurleyBrackets(string s)
+        static string deleteCurleyBrackets(string s)
         {
            s = Regex.Replace(s, @"{[^{}]*}", "", RegexOptions.Multiline);
            s = Regex.Replace(s, @"{[^{}]*}", "", RegexOptions.Multiline);
@@ -1501,7 +1501,13 @@ namespace hoTools.EaServices
            return s;
         }
 
-        private static string deleteComment(string s)
+        #region deleteComment
+        /// <summary>
+        /// Delete Comment for C like languages.
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        static string deleteComment(string s)
         {
             // delete comments /* to */
 
@@ -1516,6 +1522,7 @@ namespace hoTools.EaServices
             s = Regex.Replace(s, "(\r\n){2,100}", "\r\n");
             return s;
         }
+        #endregion
         #region createActionFromText
         private static void createActionFromText(EA.Repository rep, string s1, int offsetHorizental = 0, int offsetVertical = 0, string guardString = "", 
             bool removeModuleNameFromMethodName= false)

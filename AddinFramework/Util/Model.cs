@@ -259,7 +259,7 @@ namespace EAAddinFramework.Utils
             {
                 // run the query
                 string xml = SQLQueryNative(query);
-                // nothing found
+                // nothing found or error
                 if (!xml.Contains("Row")) return null;
                 return xml;
             }
@@ -281,8 +281,8 @@ namespace EAAddinFramework.Utils
         /// <returns>string</returns>
         public string SQLQueryNative(string sqlQuery)
         {
-            sqlQuery = this.formatSQL(sqlQuery);
-            return this.Repository.SQLQuery(sqlQuery);
+            sqlQuery = formatSQL(sqlQuery);
+            return Repository.SQLQuery(sqlQuery);// no error, only no result rows
         }
 
         /// <summary>
