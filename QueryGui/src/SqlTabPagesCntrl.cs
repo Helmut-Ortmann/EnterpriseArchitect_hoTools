@@ -24,8 +24,13 @@ namespace hoTools.Query
         AddinSettings _settings;
         Model _model;
         System.ComponentModel.IContainer _components;
+
+        static TabControl tabControl;
         TabControl _tabControl;
         TextBox _sqlTextBoxSearchTerm;
+
+        // watch for changes
+        FileSystemWatcher watcher = new FileSystemWatcher();
 
 
         /// <summary>
@@ -65,6 +70,7 @@ namespace hoTools.Query
             _settings = settings;
             _model = model;
             _tabControl = tabControl;
+            tabControl = tabControl;
             _components = components;
             _sqlTextBoxSearchTerm = sqlTextBoxSearchTerm;
 
@@ -535,7 +541,7 @@ namespace hoTools.Query
 
             
 
-            loadTabPage(tabPage);
+            loadTabPagePerFileDialog(tabPage);
             tabPage.ToolTipText = ((SqlFile)tabPage.Tag).FullName;
             tabPage.Text = ((SqlFile)tabPage.Tag).DisplayName;
 
@@ -575,10 +581,10 @@ namespace hoTools.Query
 
         /// <summary>
         /// Load sql string from *.sql File into TabPage with TextBox inside.
-        /// - Update and save the list of sql files 
+        /// <para/>- Update and save the list of sql files 
         /// </summary>
         /// <param name="tabPage"></param>
-        void loadTabPage(TabPage tabPage)
+        void loadTabPagePerFileDialog(TabPage tabPage)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
 
@@ -620,10 +626,22 @@ namespace hoTools.Query
 
         }
         /// <summary>
+        /// Re-Load Tab Page from file
+        /// </summary>
+        /// <param name="tabPage"></param>
+        void reLoadTabPage(TabPage tabPage)
+        {
+            SqlFile sqlFile = (SqlFile)tabPage.Tag;
+            loadFileForTabPage(tabPage, sqlFile.FullName);
+
+
+        }
+        
+        /// <summary>
         /// Save As... TabPage in *.sql File.
         /// </summary>
         /// <param name="tabPage></param>
-         void saveAs(TabPage tabPage)
+        void saveAs(TabPage tabPage)
         {
 
             SqlFile sqlFile = (SqlFile)tabPage.Tag;
@@ -774,6 +792,32 @@ namespace hoTools.Query
         void fileRunMenuItem_Click(object sender, EventArgs e)
         {
             runSqlTabPage();
+        }
+
+        /// <summary>
+        /// File has changed outside EA. Ask if reload file.
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="e"></param>
+        void OnChangedFile(object source, FileSystemEventArgs e)
+        {
+            string fileNameChanged = e.FullPath;
+            // get TabPage
+            foreach (TabPage tabPage in _tabControl.TabPages)
+            {
+                if (fileNameChanged == ((SqlFile)tabPage.Tag).DisplayName)
+                {
+                    DialogResult result = MessageBox.Show($"'{fileNameChanged}'\nYes: Reload\nNo: Do nothing", "File has changed outside EA", MessageBoxButtons.YesNo);
+                    if (result == DialogResult.Yes)
+                    {
+                        loadFileForTabPage(tabPage, fileNameChanged);
+                    }
+
+                    break;
+                }
+            }
+
+            
         }
 
 
