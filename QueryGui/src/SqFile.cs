@@ -9,7 +9,10 @@ using System.Threading.Tasks;
 namespace hoTools.Query
 {
     /// <summary>
-    /// Information of a *.sql file: FullName, DisplayName, isChanged
+    /// Information of a *.sql file:
+    /// <para/>-FullName
+    /// <para/>-DisplayName
+    /// <para/>-isChanged
     /// </summary>
     public class SqlFile
     {
@@ -18,6 +21,20 @@ namespace hoTools.Query
         /// Use a non proportional font like courier new
         /// </summary>
         const string DISPLAY_NAME_EXTRA_SPACE = "   ";
+
+        #region Constructors SqlFile
+        /// <summary>
+        /// Constructor 
+        /// </summary>
+        /// <param name="fullName"></param>
+        /// <param name="isChanged">Default=true</param>
+        public SqlFile(string fullName, bool isChanged = true)
+        {
+            init(fullName, isChanged);
+        }
+        #endregion
+
+
         public string FullName { get; set; }
         public string DirectoryName => Path.GetDirectoryName(FullName);
         public string DisplayName
@@ -30,26 +47,14 @@ namespace hoTools.Query
         }
         public bool IsChanged { get; set; }
 
+        /// <summary>
+        /// True if a complete path exists (once stored to file system)
+        /// </summary>
+        public bool IsPersistant => File.Exists(FullName);
 
-        #region Constructor TabPage
-        /// <summary>
-        /// Information of a TabPage: FullName, DisplayName, IsChanged
-        /// </summary>
-        /// <param name="fullName"></param>
-        public SqlFile(string fullName)
-        {
-            init(fullName, false);
-        }
-        /// <summary>
-        /// Information of a TabPage: FullName, DisplayName, IsChanged
-        /// </summary>
-        /// <param name="fullName"></param>
-        /// <param name="isChanged"></param>
-        public SqlFile(string fullName, bool isChanged)
-        {
-            init(fullName, isChanged);            
-        }
-        #endregion
+
+       
+              
         /// <summary>
         /// Initialize the TabPage information.
         /// </summary>

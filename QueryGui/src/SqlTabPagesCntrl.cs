@@ -1,10 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Drawing;
 using System.Windows.Forms;
 using hoTools.Settings;
 using hoTools.Utils.SQL;
@@ -77,7 +72,7 @@ namespace hoTools.Query
             _fileLoadRecentFileItem = fileLoadRecentFileItem;
 
             // Load recent files into ToolStripMenu
-            loadRecentFilesIntoToolStripItem();
+            loadRecentFilesIntoToolStripItems();
 
         }
         /// <summary>
@@ -285,7 +280,7 @@ namespace hoTools.Query
                 });
 
             // Load recent files into toolStrip menu
-            loadRecentFilesIntoToolStripItem();
+            loadRecentFilesIntoToolStripItems();
 
 
             //----------------------------------------------------------------------------------------------------------
@@ -334,7 +329,7 @@ namespace hoTools.Query
         /// <summary>
         /// Load RecentFiles MenuItems into MenuItemStrip
         /// </summary>
-        /// <param name="loadRecentFileStripMenuItem">Item to load recent files as dropdown items</param>
+        /// <param name="loadRecentFileStripMenuItem">Item to load recent files as drop down items</param>
         /// <param name="eventHandler_Click">Function to handle event</param>
          void loadRecentFilesMenuItems(ToolStripMenuItem loadRecentFileStripMenuItem, EventHandler eventHandler_Click)
         {
@@ -378,7 +373,7 @@ namespace hoTools.Query
                 if (result == DialogResult.Cancel) return;
                 if (result == DialogResult.Yes)
                 {
-                    saveTabPage(tabPage, textBox);
+                    save(tabPage);
                     sqlFile.IsChanged = false;
                     tabPage.ToolTipText = ((SqlFile)tabPage.Tag).FullName;
                 }
@@ -443,7 +438,7 @@ namespace hoTools.Query
                     "First store old File? ", MessageBoxButtons.YesNoCancel);
                 if (result == DialogResult.Cancel) return;
                 if (result == DialogResult.Yes) { 
-                    saveTabPage(tabPage, textBox);
+                    saveAs(tabPage);
                     sqlFile.IsChanged = false;
                     tabPage.ToolTipText = ((SqlFile)tabPage.Tag).FullName;
                 }
@@ -487,23 +482,8 @@ namespace hoTools.Query
             saveSqlTabAs();
 
         }
-        #region saveTab
-        /// <summary>
-        /// Save Tab into file. If no file is assigned use FileDialog to choose file.
-        /// </summary>
-        public void saveSqlTab()
-        {
-            // get TabPage
-            TabPage tabPage = _tabControl.TabPages[_tabControl.SelectedIndex];
 
-            // get TextBox
-            TextBox textBox = (TextBox)tabPage.Controls[0];
-
-            saveTabPage(tabPage, textBox);
-            tabPage.ToolTipText = ((SqlFile)tabPage.Tag).FullName;
-            tabPage.Text = ((SqlFile)tabPage.Tag).DisplayName;
-        }
-        #endregion
+        
         #region saveTabAs
         /// <summary>
         /// Save current Tab into desired file
@@ -515,7 +495,7 @@ namespace hoTools.Query
 
             // get TextBox
             TextBox textBox = (TextBox)tabPage.Controls[0];
-            saveAsTabPage(tabPage, textBox);
+            saveAs(tabPage);
             tabPage.ToolTipText = ((SqlFile)tabPage.Tag).FullName;
             tabPage.Text = ((SqlFile)tabPage.Tag).DisplayName;
         }
@@ -528,10 +508,21 @@ namespace hoTools.Query
         /// <param name="e"></param>
         void fileSaveMenuItem_Click(object sender, EventArgs e)
         {
-            saveSqlTab();
+            TabPage tabPage = _tabControl.TabPages[_tabControl.SelectedIndex];
+            save(tabPage);
         }
        
-
+        /// <summary>
+        /// Save all unchanged Tabs. 
+        /// </summary>
+        public void saveAll()
+        {
+            foreach (TabPage tabPage in _tabControl.TabPages)
+            {
+                save(tabPage);
+            }
+        }
+       
         /// <summary>
         /// Event File Load fired by TabControl
         /// </summary>
@@ -542,10 +533,9 @@ namespace hoTools.Query
             // get TabPage
             TabPage tabPage = _tabControl.TabPages[_tabControl.SelectedIndex];
 
-            // get TextBox
-            TextBox textBox = (TextBox)tabPage.Controls[0];
+            
 
-            loadTabPage(tabPage, textBox);
+            loadTabPage(tabPage);
             tabPage.ToolTipText = ((SqlFile)tabPage.Tag).FullName;
             tabPage.Text = ((SqlFile)tabPage.Tag).DisplayName;
 
@@ -569,7 +559,7 @@ namespace hoTools.Query
         }
 
         /// <summary>
-        /// Event Close TabPage As
+        /// Event Close TabPage 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -577,10 +567,7 @@ namespace hoTools.Query
         {
             // get TabPage
             TabPage tabPage = _tabControl.TabPages[_tabControl.SelectedIndex];
-
-            // get TextBox
-            TextBox textBox = (TextBox)tabPage.Controls[0];
-            closeTabPage(tabPage, textBox);
+            close(tabPage);
 
         }
 
@@ -590,9 +577,8 @@ namespace hoTools.Query
         /// Load sql string from *.sql File into TabPage with TextBox inside.
         /// - Update and save the list of sql files 
         /// </summary>
-        /// <param name="tabPageSql"></param>
-        /// <param name="txtBoxSql"></param>
-         void loadTabPage(TabPage tabPageSql, TextBox txtBoxSql)
+        /// <param name="tabPage"></param>
+        void loadTabPage(TabPage tabPage)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
 
@@ -608,9 +594,11 @@ namespace hoTools.Query
                 if (myStream != null)
                 {
                     // Code to write the stream goes here.
-                    txtBoxSql.Text = myStream.ReadToEnd();
+                    // get TextBox
+                    TextBox textBox = (TextBox)tabPage.Controls[0];
+                    textBox.Text = myStream.ReadToEnd();
                     myStream.Close();
-                    tabPageSql.Text = Path.GetFileName(openFileDialog.FileName);
+                    tabPage.Text = Path.GetFileName(openFileDialog.FileName);
 
                     // store the complete filename in settings
                     _settings.sqlFiles.insert(openFileDialog.FileName);
@@ -619,26 +607,26 @@ namespace hoTools.Query
                     // Store TabData in TabPage
                     SqlFile sqlFile = new SqlFile(openFileDialog.FileName);
                     sqlFile.IsChanged = true;
-                    tabPageSql.Tag = sqlFile;
+                    tabPage.Tag = sqlFile;
 
                     // set TabName
-                    tabPageSql.Text = sqlFile.DisplayName;
+                    tabPage.Text = sqlFile.DisplayName;
 
                     // Load recent files into ToolStripMenu
-                    loadRecentFilesIntoToolStripItem();
+                    loadRecentFilesIntoToolStripItems();
                     
                 }
             }
 
         }
         /// <summary>
-        /// Save As sql TabPage in *.sql File.
+        /// Save As... TabPage in *.sql File.
         /// </summary>
-        /// <param name="tabPageSql"></param>
-        /// <param name="txtBoxSql"></param>
-         void saveAsTabPage(TabPage tabPageSql, TextBox txtBoxSql)
+        /// <param name="tabPage></param>
+         void saveAs(TabPage tabPage)
         {
-            SqlFile sqlFile = (SqlFile)tabPageSql.Tag;
+
+            SqlFile sqlFile = (SqlFile)tabPage.Tag;
             SaveFileDialog saveFileDialog = new SaveFileDialog();
 
             saveFileDialog.InitialDirectory = sqlFile.DirectoryName;
@@ -655,9 +643,10 @@ namespace hoTools.Query
                 if (myStream != null)
                 {
                     // Code to write the stream goes here.
-                    myStream.Write(txtBoxSql.Text);
+                    TextBox textBox = (TextBox)tabPage.Controls[0];
+                    myStream.Write(textBox.Text);
                     myStream.Close();
-                    tabPageSql.Text = Path.GetFileName(saveFileDialog.FileName);
+                    tabPage.Text = Path.GetFileName(saveFileDialog.FileName);
 
                     // store the complete filename in settings
                     _settings.sqlFiles.insert(saveFileDialog.FileName);
@@ -668,9 +657,9 @@ namespace hoTools.Query
                     sqlFile.IsChanged = false;
 
                     // set TabName
-                    tabPageSql.Text = sqlFile.DisplayName;
-
-                    loadRecentFilesIntoToolStripItem();
+                    tabPage.Text = sqlFile.DisplayName;
+                    tabPage.ToolTipText = ((SqlFile)tabPage.Tag).FullName;
+                    loadRecentFilesIntoToolStripItems();
                 }
             }
         }
@@ -681,7 +670,7 @@ namespace hoTools.Query
         /// <para/>-Tab,  Load Tab from..
         /// <para/>-Tab,  Add Tab from..
         /// </summary>
-        void loadRecentFilesIntoToolStripItem()
+        void loadRecentFilesIntoToolStripItems()
         {
             // File, Load Tab from
             loadRecentFilesMenuItems(_fileLoadRecentFileItem, loadFromHistoryEntry_Click);
@@ -697,15 +686,13 @@ namespace hoTools.Query
         /// <summary>
         /// Save sql TabPage in *.sql File.
         /// </summary>
-        /// <param name="tabPageSql"></param>
-        /// <param name="txtBoxSql"></param>
-        void saveTabPage(TabPage tabPageSql, TextBox txtBoxSql)
+        /// <param name="tabPage"></param>
+        public void save(TabPage tabPage)
         {
-
-            SqlFile sqlFile = (SqlFile)tabPageSql.Tag;
-            if (sqlFile.FullName.Substring(0,6) == "noName" )
+            SqlFile sqlFile = (SqlFile)tabPage.Tag;
+            if (! sqlFile.IsPersistant )
             {
-                saveAsTabPage(tabPageSql, txtBoxSql);
+                saveAs(tabPage);
                 return;
             }
 
@@ -713,14 +700,14 @@ namespace hoTools.Query
                 StreamWriter myStream = new StreamWriter(sqlFile.FullName);
                 if (myStream != null)
                 {
-                    // Code to write the stream goes here.
-                    myStream.Write(txtBoxSql.Text);
+                    TextBox textBox = (TextBox)tabPage.Controls[0];
+                    myStream.Write(textBox.Text);
                     myStream.Close();
                     sqlFile.IsChanged = false;
 
 
                     // set TabName
-                    tabPageSql.Text = sqlFile.DisplayName;
+                    tabPage.Text = sqlFile.DisplayName;
                 }
             } catch (Exception ex)
             {
@@ -728,23 +715,33 @@ namespace hoTools.Query
                 return;
             }
         }
+
+        /// <summary>
+        /// Close all Tab Pages
+        /// </summary>
+        public void closeAll()
+        {
+            foreach (TabPage tabPage in _tabControl.TabPages)
+            {
+                close(tabPage);
+            }
+        }
         /// <summary>
         /// Close TabPage
         /// - Ask to store content if changed
         /// </summary>
-        /// <param name="tabPageSql"></param>
-        /// <param name="txtBoxSql"></param>
-         void closeTabPage(TabPage tabPageSql, TextBox txtBoxSql)
+        /// <param name="tabPage"></param>
+        public void close(TabPage tabPage)
         {
 
-            SqlFile sqlFile = (SqlFile)tabPageSql.Tag;
+            SqlFile sqlFile = (SqlFile)tabPage.Tag;
             if (sqlFile.IsChanged)
             {
 
                 DialogResult result = MessageBox.Show($"", "Close TabPage: Sql has changed, store content?", MessageBoxButtons.YesNoCancel);
                 switch (result) {
                     case DialogResult.OK:
-                        saveTabPage(tabPageSql, txtBoxSql);
+                        save(tabPage);
                         break;
                     case DialogResult.No:
                         break;
@@ -753,7 +750,7 @@ namespace hoTools.Query
 
                 }
             }
-            _tabControl.TabPages.Remove(_tabControl.SelectedTab);
+            _tabControl.TabPages.Remove(tabPage);
         }
 
         #region runSqlTabPage

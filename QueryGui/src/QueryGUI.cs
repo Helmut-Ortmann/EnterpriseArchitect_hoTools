@@ -214,8 +214,14 @@ namespace hoTools.Query
         }
         #endregion
 
+    /// <summary>
+    /// Close Addin:
+    /// <para/>- Close not stored files
+    /// </summary>
+      void close()
+        {
 
-      
+        }
 
 
 
@@ -427,7 +433,7 @@ namespace hoTools.Query
         /// <param name="e"></param>
          void btnRunScriptForSql_Click(object sender, EventArgs e)
         {
-
+            if (tabControlSql.SelectedIndex == -1) return;
             Cursor.Current = Cursors.WaitCursor;
             // get TabPage
             TabPage tabPage = tabControlSql.TabPages[tabControlSql.SelectedIndex];
@@ -448,6 +454,7 @@ namespace hoTools.Query
 
          void btnRunScriptForSqlWithAsk_Click(object sender, EventArgs e)
         {
+            if (tabControlSql.SelectedIndex == -1) return;
             Cursor.Current = Cursors.WaitCursor;
             // get TabPage
             TabPage tabPage = tabControlSql.TabPages[tabControlSql.SelectedIndex];
@@ -526,13 +533,18 @@ namespace hoTools.Query
         /// <param name="e"></param>
          void tabControlSql_MouseDown(object sender, MouseEventArgs e)
         {
+            if (tabControlSql.SelectedIndex == -1) return;
             Rectangle r = tabControlSql.GetTabRect(this.tabControlSql.SelectedIndex);
             Rectangle closeButton = new Rectangle(r.Right + CLOSE_BUTTON_RECTANGLE_RIGHT_X, 
                                                   r.Top + CLOSE_BUTTON_RECTANGLE_TOP_Y,
                                                   CLOSE_BUTTON_RECTANGLE_WIDTH,
                                                   CLOSE_BUTTON_RECTANGLE_HIGHT);
             if (closeButton.Contains(e.Location))
-                this.tabControlSql.TabPages.Remove(this.tabControlSql.SelectedTab);
+            {
+                TabPage tabPage = tabControlSql.SelectedTab;
+                _sqlTabCntrls.close(tabPage);
+
+            }
         }
 
         
@@ -589,7 +601,9 @@ namespace hoTools.Query
 
         void saveSqlTabToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            _sqlTabCntrls.saveSqlTab();
+            if (tabControlSql.SelectedIndex == -1) return;
+            TabPage tabPage = tabControlSql.TabPages[tabControlSql.SelectedIndex];
+            _sqlTabCntrls.save(tabPage);
         }
 
         void saveSqlTabAsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -611,6 +625,11 @@ namespace hoTools.Query
                 _sqlTabCntrls.runSqlTabPage();
                 e.Handled = true;
             }
+        }
+
+        void saveAllToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _sqlTabCntrls.saveAll();
         }
     }
 }
