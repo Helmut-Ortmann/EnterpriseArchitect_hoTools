@@ -115,12 +115,8 @@ namespace hoTools.Query
 
             // run the query
             string xml = model.SqlQueryWithException(sql);
-            if (xml == null) 
-            {
-                MessageBox.Show(@"If error see %APPDATA%SPARX\EA\dberror.txt", "Nothing found or error!");
-                return true;
-            }
-
+            if (xml == null) xml = ""; // error message already output
+           
             // output the query in EA Search Window
             string target = model.MakeEaXmlOutput(xml);
             model.Repository.RunModelSearch("", "", "", target);

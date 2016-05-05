@@ -7,6 +7,8 @@ using System.Xml;
 using System.Xml.Linq;
 using System.Linq;
 
+using hoTools.Utils.SQL;
+
 
 
 namespace EAAddinFramework.Utils
@@ -247,21 +249,29 @@ namespace EAAddinFramework.Utils
         }
         /// <summary>
         /// Run EA SQL Query with Exception handling
-        /// - return null if Exception
-        /// . return "" if nothing found
-        /// - return xml string if ok
+        /// <para/>return null if error, it also displays the error message in MessageBox
+        /// <para/>return "" if nothing found
+        /// <para/>return xml string if ok
         /// </summary>
         /// <param name="query"></param>
         /// <returns>string</returns>
         public string SqlQueryWithException(string query)
         {
+            // delete an existing error file
+            SqlError.deleteEaSqlErrorFile();
             try
             {
                 // run the query
                 string xml = SQLQueryNative(query);
-                // nothing found or error
-                if (!xml.Contains("Row")) return null;
-                return xml;
+                if (! SqlError.existsEaSqlErrorFile() )
+                {
+                    return xml;
+                }
+                else
+                {
+                    MessageBox.Show(SqlError.getEaSqlError(), "Error SQL");
+                    return null;
+                }
             }
             catch (Exception ex)
             {
@@ -295,13 +305,12 @@ namespace EAAddinFramework.Utils
             return MakeEaXmlOutput(XDocument.Parse(x));
         }
 
-
+        #region MakeEaXmlOutput
         /// <summary>
-        /// Make EA XML output format from EA SQLQuery XDocument format (Linq to XML)
+        /// Make EA XML output format from EA SQLQuery XDocument format (Linq to XML). If nothing found or an error has occurred nothing is displayed.
         /// </summary>
         /// <param name="x">Output from EA SQLQuery</param>
         /// <returns></returns>
-
         #pragma warning disable CSE0003 // Use expression-bodied members
         public string MakeEaXmlOutput(XDocument x)
         {
@@ -339,23 +348,43 @@ namespace EAAddinFramework.Utils
             //      <Field name="" value=""/>
             // </Rows>
             //</reportViewData>
-            return new XDocument(
-                new XElement("ReportViewData",
-                    new XElement("Fields",
-                           from field in x.Descendants("Row").FirstOrDefault().Descendants()
-                           select new XElement("Field", new XAttribute("name", field.Name))
-                    ),
-                    new XElement("Rows",
-                                from row in x.Descendants("Row")
-                                select new XElement(row.Name,
-                                       from field in row.Nodes()
-                                       select new XElement("Field", new XAttribute("name", ((XElement)field).Name),
-                                                                    new XAttribute("value", ((XElement)field).Value)))
+            try
+            {
+                return new XDocument(
+                    new XElement("ReportViewData",
+                        new XElement("Fields",
+                               from field in x.Descendants("Row").FirstOrDefault().Descendants()
+                               select new XElement("Field", new XAttribute("name", field.Name))
+                        ),
+                        new XElement("Rows",
+                                    from row in x.Descendants("Row")
+                                    select new XElement(row.Name,
+                                           from field in row.Nodes()
+                                           select new XElement("Field", new XAttribute("name", ((XElement)field).Name),
+                                                                        new XAttribute("value", ((XElement)field).Value)))
 
-                )
-            )).ToString();
+                    )
+                )).ToString();
+            } catch (Exception e)
+            {
+                return new XDocument(
+                    new XElement("ReportViewData",
+                        new XElement("Fields",
+                               new XElement("Field", new XAttribute("name", "Empty"))
+                        ),
+                        new XElement("Rows",
+                            new XElement ("Row",
+                                    new XElement("Field", 
+                                                        new XAttribute("name", "Empty"),
+                                                        new XAttribute("value", "__empty___")))
+
+                    )
+                )).ToString();
+
+            }
         }
         #pragma warning restore CSE0003 // Use expression-bodied members
+        #endregion
 
         /// <summary>
         /// Make EA XML output format from EA SQLQuery XDocument format (Linq to XML)

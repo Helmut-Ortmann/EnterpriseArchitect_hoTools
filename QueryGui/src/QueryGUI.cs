@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
 using hoTools.ActiveX;
+using hoTools.Utils.SQL;
 
 using System.Collections.Generic;
 using EAAddinFramework.Utils;
@@ -268,7 +269,7 @@ namespace hoTools.Query
         /// <param name="e"></param>
          void btnRunSql_Click(object sender, EventArgs e)
         {
-            _sqlTabCntrls.runSqlForSelectedTabPage();
+            _sqlTabCntrls.runSqlTabPage();
         }
 
         
@@ -470,17 +471,20 @@ namespace hoTools.Query
         
          void showSqlErrorToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string appData = Environment.GetEnvironmentVariable("appdata");
-            string filePath = appData + @"\Sparx Systems\EA\dberror.txt";
-            try {
-                Process.Start(filePath);
-            } catch (Exception ex)
+            string filePath = SqlError.getEaSqlErrorFilePath();
+            try
             {
-                MessageBox.Show($"{ex.Message}\nFile:'{filePath}'", $"Can't open EA SQL Error file dberror.tx");
+                Process.Start(filePath);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"No SQL Error?\n\n{ex.Message}\nFile:'{filePath}'", $"Can't open EA SQL Error file dberror.txt");
             }
         }
 
-         void txtBoxSql_TextChanged(object sender, EventArgs e)
+       
+
+        void txtBoxSql_TextChanged(object sender, EventArgs e)
         {
             TextBox txtBox = (TextBox)sender;
             TabPage tabPage = (TabPage)txtBox.Parent;
@@ -577,5 +581,36 @@ namespace hoTools.Query
             Help.ShowHelp(this, EaService.getAssemblyPath() + "\\" + "hoTools.chm");
         }
         #endregion
+
+        void runSqlTabToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _sqlTabCntrls.runSqlTabPage();
+        }
+
+        void saveSqlTabToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _sqlTabCntrls.saveSqlTab();
+        }
+
+        void saveSqlTabAsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _sqlTabCntrls.saveSqlTabAs();
+        }
+
+
+        void txtSearchTerm_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            txtSearchTerm.Text = Clipboard.GetText();
+            _sqlTabCntrls.runSqlTabPage();
+        }
+
+        private void txtSearchTerm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                _sqlTabCntrls.runSqlTabPage();
+                e.Handled = true;
+            }
+        }
     }
 }

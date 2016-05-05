@@ -34,19 +34,16 @@ namespace hoTools.Query
 
 
         /// <summary>
-        /// Reusable ToolStripMenuItem: New Tab and Load Recent Files 
+        /// Reusable ToolStripMenuItem: File Menu: New Tab and Load Recent Files 
         /// </summary>
         public ToolStripMenuItem FileNewTabAndLoadRecentFileItem => _fileNewTabAndLoadRecentFileItem;
         readonly ToolStripMenuItem _fileNewTabAndLoadRecentFileItem;
-        //readonly ToolStripMenuItem _fileNewTabAndLoadRecentFileItem = new ToolStripMenuItem("New Tab from...");
 
         /// <summary>
-        /// Reusable ToolStripMenuItem: Load Recent Files 
+        /// Reusable ToolStripMenuItem: File Menu: Load Recent Files in current Tab
         /// </summary>
         public ToolStripMenuItem FileLoadRecentFileItem => _fileLoadRecentFileItem;
         readonly ToolStripMenuItem _fileLoadRecentFileItem;
-        //readonly ToolStripMenuItem _fileLoadRecentFileItem = new ToolStripMenuItem("Load from...");
-
 
         readonly ToolStripMenuItem _newTabFromItem = new ToolStripMenuItem("New Tab from...");
         readonly ToolStripMenuItem _loadTabFromFileItem  = new ToolStripMenuItem("Load from...");
@@ -487,22 +484,14 @@ namespace hoTools.Query
         /// <param name="e"></param>
          void fileSaveAsMenuItem_Click(object sender,  EventArgs e)
         {
-            // get TabPage
-            TabPage tabPage = _tabControl.TabPages[_tabControl.SelectedIndex];
-
-            // get TextBox
-            TextBox textBox = (TextBox)tabPage.Controls[0];
-            saveAsTabPage(tabPage, textBox);
-            tabPage.ToolTipText = ((SqlFile)tabPage.Tag).FullName;
-            tabPage.Text = ((SqlFile)tabPage.Tag).DisplayName;
+            saveSqlTabAs();
 
         }
+        #region saveTab
         /// <summary>
-        /// Event File Save
+        /// Save Tab into file. If no file is assigned use FileDialog to choose file.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-         void fileSaveMenuItem_Click(object sender, EventArgs e)
+        public void saveSqlTab()
         {
             // get TabPage
             TabPage tabPage = _tabControl.TabPages[_tabControl.SelectedIndex];
@@ -514,12 +503,41 @@ namespace hoTools.Query
             tabPage.ToolTipText = ((SqlFile)tabPage.Tag).FullName;
             tabPage.Text = ((SqlFile)tabPage.Tag).DisplayName;
         }
+        #endregion
+        #region saveTabAs
+        /// <summary>
+        /// Save current Tab into desired file
+        /// </summary>
+        public void saveSqlTabAs()
+        {
+            // get TabPage
+            TabPage tabPage = _tabControl.TabPages[_tabControl.SelectedIndex];
+
+            // get TextBox
+            TextBox textBox = (TextBox)tabPage.Controls[0];
+            saveAsTabPage(tabPage, textBox);
+            tabPage.ToolTipText = ((SqlFile)tabPage.Tag).FullName;
+            tabPage.Text = ((SqlFile)tabPage.Tag).DisplayName;
+        }
+        #endregion
+
+        /// <summary>
+        /// Event File Save
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void fileSaveMenuItem_Click(object sender, EventArgs e)
+        {
+            saveSqlTab();
+        }
+       
+
         /// <summary>
         /// Event File Load fired by TabControl
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-         void fileLoadMenuItem_Click(object sender, EventArgs e)
+        void fileLoadMenuItem_Click(object sender, EventArgs e)
         {
             // get TabPage
             TabPage tabPage = _tabControl.TabPages[_tabControl.SelectedIndex];
@@ -738,10 +756,11 @@ namespace hoTools.Query
             _tabControl.TabPages.Remove(_tabControl.SelectedTab);
         }
 
+        #region runSqlTabPage
         /// <summary>
         /// Run SQL for selected TabPage
         /// </summary>
-        public void runSqlForSelectedTabPage()
+        public void runSqlTabPage()
         {
             Cursor.Current = Cursors.WaitCursor;
 
@@ -753,9 +772,11 @@ namespace hoTools.Query
             GuiFunction.RunSql(_model, textBox.Text, _sqlTextBoxSearchTerm.Text);
             Cursor.Current = Cursors.Default;
         }
+        #endregion
+
         void fileRunMenuItem_Click(object sender, EventArgs e)
         {
-            runSqlForSelectedTabPage();
+            runSqlTabPage();
         }
 
 

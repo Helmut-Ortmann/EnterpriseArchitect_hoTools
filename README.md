@@ -5,16 +5,16 @@ Addin with Tools for SPARX Enterprise Architect
 Collection of useful tools:
 
 - Booster for everyday work
-  - Set diagram line style 
+  - Set diagram line style
   - Define your personal keys & buttons for searches and services
   - Quick search at your finger tip
   - Favorites,..
-  - Create powerful SQL queries (tab window, templates, macros and more) 
+  - Create powerful SQL queries (tab window, templates, macros and more)
   - Search & Replace, regular expression supported
   - Run Scripts with SQL Search results
 - Administration of EA
   - Version Control
-- Setting to adapt GUI and available features 
+- Setting to adapt GUI and available features
 - Intuitive GUI
 - Online help
 - ..
@@ -48,5 +48,7 @@ Some features:
 - hoTools.msi or hoTools.msi.lnk
 - hoToolsRemove.ps1 (deinstall with PowerShell)
 
-
-
+# ToDo
+- Save SQLs when closed
+- Update SQL file when changed
+- Remember opened SQL files to reopen it after new load

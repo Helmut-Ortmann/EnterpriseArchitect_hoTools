@@ -214,7 +214,7 @@ namespace hoTools.Utils.SQL
 
 
         /// <summary>
-        /// Replace Macro by value. Possible Macros are: Search Term, ID, GUID, Package ID, Branch ID. 
+        /// Replace Macro by value. Possible Macros are: Search Term, ID, GUID, Package ID, Branch ID,... 
         /// </summary>
         /// <param name="rep"></param>
         /// <param name="sqlString">The complete SQL string</param>
@@ -323,6 +323,13 @@ namespace hoTools.Utils.SQL
                     sql = sql.Replace(currentBranchTemplate, branch);
                 }
             }
+            // Replace #WC#
+            string currentTemplate = getTemplateText(SQL_TEMPLATE_ID.WC);
+            if (sql.Contains(currentTemplate))
+            {
+                sql = sql.Replace(currentTemplate, "*"); 
+            }
+
 
             // delete Comments
             return deleteC_Comments(sql);
