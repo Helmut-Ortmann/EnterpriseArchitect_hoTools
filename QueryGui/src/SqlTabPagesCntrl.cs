@@ -21,11 +21,16 @@ namespace hoTools.Query
         /// <summary>
         /// Setting with the file history.
         /// </summary>
-        AddinSettings _settings;
+        /// 
+
+        // delegate to call update page from a different thread (SqlFile)
+        public delegate void UpdatePage(TabPage tabPage, string fileNameChanged);
+        public UpdatePage UpdatePageDelegate = new UpdatePage(loadFileForTabPage);
+
+        public AddinSettings Settings { get; }
         Model _model;
         System.ComponentModel.IContainer _components;
 
-        static TabControl tabControl;
         TabControl _tabControl;
         TextBox _sqlTextBoxSearchTerm;
 
@@ -67,10 +72,9 @@ namespace hoTools.Query
             ToolStripMenuItem fileNewTabAndLoadRecentFileItem,
             ToolStripMenuItem fileLoadRecentFileItem)
         {
-            _settings = settings;
+            Settings = settings;
             _model = model;
             _tabControl = tabControl;
-            tabControl = tabControl;
             _components = components;
             _sqlTextBoxSearchTerm = sqlTextBoxSearchTerm;
 
@@ -79,6 +83,9 @@ namespace hoTools.Query
 
             // Load recent files into ToolStripMenu
             loadRecentFilesIntoToolStripItems();
+
+
+
 
         }
         /// <summary>
@@ -91,7 +98,7 @@ namespace hoTools.Query
             TabPage tabPage = new TabPage();
             _tabControl.Controls.Add(tabPage);
 
-            SqlFile sqlFile = new SqlFile($"{DEFAULT_TAB_NAME}{_tabControl.Controls.Count}.sql", false);
+            SqlFile sqlFile = new SqlFile(this, tabPage, $"{DEFAULT_TAB_NAME}{_tabControl.Controls.Count}.sql", false);
             tabPage.Tag = sqlFile;
             tabPage.Text = sqlFile.DisplayName;
             tabPage.ToolTipText = sqlFile.FullName;
@@ -342,7 +349,7 @@ namespace hoTools.Query
             // delete all previous entries
             loadRecentFileStripMenuItem.DropDownItems.Clear();
             // over all history files
-            foreach (HistoryFile historyFile in _settings.sqlFiles.lSqlHistoryFilesCfg)
+            foreach (HistoryFile historyFile in Settings.sqlFiles.lSqlHistoryFilesCfg)
             {
                 // ignore empty entries
                 if (historyFile.FullName == "") continue;
@@ -393,30 +400,25 @@ namespace hoTools.Query
         /// Load file for tab Page
         /// </summary>
         /// <param name="tabPage"></param>
-        /// <param name="file"></param>
-         static void loadFileForTabPage(TabPage tabPage, string file)
+        /// <param name="fileName"></param>
+         public static void loadFileForTabPage(TabPage tabPage, string fileName)
         {
             
             try
             {
-                StreamReader myStream = new StreamReader(file);
-                if (myStream != null)
-                {
                     TextBox textBox = (TextBox)tabPage.Controls[0];
-                    textBox.Text = myStream.ReadToEnd();
-                    myStream.Close();
+                    textBox.Text = File.ReadAllText(fileName);
 
                     // set TabName
                     SqlFile sqlFile = (SqlFile)tabPage.Tag;
-                    sqlFile.FullName = file;
+                    sqlFile.FullName = fileName;
                     sqlFile.IsChanged = false;
                     tabPage.ToolTipText = ((SqlFile)tabPage.Tag).FullName;
                     tabPage.Text = sqlFile.DisplayName;
-                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"{ex.Message}", $"Error reading File {file}");
+                MessageBox.Show($"{ex.Message}", $"Error reading File {fileName}");
                 return;
             }
         }
@@ -599,7 +601,6 @@ namespace hoTools.Query
                 StreamReader myStream = new StreamReader(openFileDialog.OpenFile());
                 if (myStream != null)
                 {
-                    // Code to write the stream goes here.
                     // get TextBox
                     TextBox textBox = (TextBox)tabPage.Controls[0];
                     textBox.Text = myStream.ReadToEnd();
@@ -607,11 +608,11 @@ namespace hoTools.Query
                     tabPage.Text = Path.GetFileName(openFileDialog.FileName);
 
                     // store the complete filename in settings
-                    _settings.sqlFiles.insert(openFileDialog.FileName);
-                    _settings.save();
+                    Settings.sqlFiles.insert(openFileDialog.FileName);
+                    Settings.save();
 
                     // Store TabData in TabPage
-                    SqlFile sqlFile = new SqlFile(openFileDialog.FileName);
+                    SqlFile sqlFile = new SqlFile(this, tabPage, openFileDialog.FileName);
                     sqlFile.IsChanged = true;
                     tabPage.Tag = sqlFile;
 
@@ -660,15 +661,14 @@ namespace hoTools.Query
                 StreamWriter myStream = new StreamWriter(saveFileDialog.OpenFile());
                 if (myStream != null)
                 {
-                    // Code to write the stream goes here.
                     TextBox textBox = (TextBox)tabPage.Controls[0];
                     myStream.Write(textBox.Text);
                     myStream.Close();
                     tabPage.Text = Path.GetFileName(saveFileDialog.FileName);
 
                     // store the complete filename in settings
-                    _settings.sqlFiles.insert(saveFileDialog.FileName);
-                    _settings.save();
+                    Settings.sqlFiles.insert(saveFileDialog.FileName);
+                    Settings.save();
 
                     // Store TabData in TabPage
                     sqlFile.FullName = saveFileDialog.FileName;

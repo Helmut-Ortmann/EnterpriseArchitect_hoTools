@@ -41,13 +41,18 @@
             this.rbScriptAndQueryDisableWindow = new System.Windows.Forms.RadioButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.chkIsAskForUpdate = new System.Windows.Forms.CheckBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.txtSqlEditor = new System.Windows.Forms.TextBox();
+            this.btnSqlEditor = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnOk
             // 
-            this.btnOk.Location = new System.Drawing.Point(26, 188);
+            this.btnOk.Location = new System.Drawing.Point(24, 293);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(75, 23);
             this.btnOk.TabIndex = 0;
@@ -57,7 +62,7 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(107, 188);
+            this.btnCancel.Location = new System.Drawing.Point(105, 293);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 1;
@@ -173,12 +178,64 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Edit SQL Query and run Script with results";
             // 
+            // chkIsAskForUpdate
+            // 
+            this.chkIsAskForUpdate.AutoSize = true;
+            this.chkIsAskForUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkIsAskForUpdate.Location = new System.Drawing.Point(321, 169);
+            this.chkIsAskForUpdate.Name = "chkIsAskForUpdate";
+            this.chkIsAskForUpdate.Size = new System.Drawing.Size(122, 22);
+            this.chkIsAskForUpdate.TabIndex = 212;
+            this.chkIsAskForUpdate.Text = "Ask for update";
+            this.toolTip1.SetToolTip(this.chkIsAskForUpdate, "If checked: Query will ask to update  query display content if file has changed o" +
+        "utside.");
+            this.chkIsAskForUpdate.UseVisualStyleBackColor = true;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(26, 169);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(224, 18);
+            this.label2.TabIndex = 213;
+            this.label2.Text = "Ask for update if file has changed";
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // txtSqlEditor
+            // 
+            this.txtSqlEditor.Location = new System.Drawing.Point(29, 191);
+            this.txtSqlEditor.Name = "txtSqlEditor";
+            this.txtSqlEditor.Size = new System.Drawing.Size(270, 20);
+            this.txtSqlEditor.TabIndex = 214;
+            this.toolTip1.SetToolTip(this.txtSqlEditor, "Enter path of your beloved SQL Editor. You also can use the button to define your" +
+        " favorable Editor.\r\n\r\nIf nothing is entered hoTools uses the Windows preferences" +
+        " for *.sql type.");
+            // 
+            // btnSqlEditor
+            // 
+            this.btnSqlEditor.Location = new System.Drawing.Point(321, 191);
+            this.btnSqlEditor.Name = "btnSqlEditor";
+            this.btnSqlEditor.Size = new System.Drawing.Size(94, 23);
+            this.btnSqlEditor.TabIndex = 215;
+            this.btnSqlEditor.Text = "Find sql editor";
+            this.toolTip1.SetToolTip(this.btnSqlEditor, "Click to specify your beloved SQL editor. If nothing is entered hoTools uses the " +
+        "Windows preferences for *.sql type.");
+            this.btnSqlEditor.UseVisualStyleBackColor = true;
+            // 
             // FrmQueryAndScript
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(476, 225);
+            this.ClientSize = new System.Drawing.Size(476, 328);
+            this.Controls.Add(this.btnSqlEditor);
+            this.Controls.Add(this.txtSqlEditor);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.chkIsAskForUpdate);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label1);
@@ -209,5 +266,10 @@
         private System.Windows.Forms.RadioButton rbScriptAndQueryTabWindow;
         private System.Windows.Forms.RadioButton rbScriptAndQueryDisableWindow;
         private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.CheckBox chkIsAskForUpdate;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.TextBox txtSqlEditor;
+        private System.Windows.Forms.Button btnSqlEditor;
     }
 }

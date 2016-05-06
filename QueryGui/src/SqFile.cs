@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
+using System.Windows.Forms;
 
 
 namespace hoTools.Query
@@ -8,54 +10,86 @@ namespace hoTools.Query
     /// <para/>-FullName
     /// <para/>-DisplayName
     /// <para/>-isChanged
+    /// <para/>-TabPage
+    /// <para/>-SqlTabPages (for calling the delegate to update the text box with sql)
     /// </summary>
-    public class SqlFile
+    public class SqlFile :IDisposable
     {
         /// <summary>
         /// Extra space for display name to draw 'x' to provide a simulated Close Button
         /// Use a non proportional font like courier new
         /// </summary>
         const string DISPLAY_NAME_EXTRA_SPACE = "   ";
+        SqlTabPagesCntrl _sqlTabPagesCntrl;
+        TabPage _tabPage;
+        public delegate void UpdatePage(TabPage tabPage, string fileNameChanged);
+
+        /// <summary>
+        /// Time file last read. Used to debounce FileSystemWatcher Events
+        /// </summary>
+        DateTime _lastRead = DateTime.MinValue; // Time
+
+        /// <summary>
+        /// File System watcher to observe changes of the *.sql file.
+        /// </summary>
         FileSystemWatcher watcher { get; }
 
         #region Constructors SqlFile
         /// <summary>
-        /// Constructor 
+        /// Constructor.
+        /// <para/>- Initialize file system watcher
         /// </summary>
         /// <param name="fullName"></param>
         /// <param name="isChanged">Default=true</param>
-        public SqlFile(string fullName, bool isChanged = true)
+        public SqlFile(SqlTabPagesCntrl sqlTabPagesCntrl, TabPage tabPage, string fullName,  bool isChanged = true)
         {
+            _tabPage = tabPage;
+            _sqlTabPagesCntrl = sqlTabPagesCntrl;
+            //
             watcher = new FileSystemWatcher();
+            watcher.Changed += OnChanged;
             init(fullName, isChanged);
         }
         #endregion
 
-
+        public void Dispose()
+        {
+            watcher.Dispose();
+        }
+        string _fullName;
         public string FullName
         {
-            get { return FullName; } 
+            get { return _fullName; } 
             set
             {
-                FullName = value;
-                // set FileSystemWatcher
-                if (IsPersistant)
-                {
-                    watcher.Path = FullName;
-                    watcher.NotifyFilter = NotifyFilters.LastWrite | NotifyFilters.FileName;
-                    watcher.Changed += new FileSystemEventHandler(OnChanged);
-                    watcher.EnableRaisingEvents = true;
-                }
+                _fullName = value;
+                watcherUpdate();
             }
         }
-        public string DirectoryName => Path.GetDirectoryName(FullName);
+
+        /// <summary>
+        /// File Watcher update with current file.
+        /// </summary>
+        void watcherUpdate()
+        {
+            // set FileSystemWatcher
+            if (IsPersistant)
+            {
+                watcher.Path = Path.GetDirectoryName(_fullName);
+                watcher.NotifyFilter = NotifyFilters.LastWrite | NotifyFilters.FileName;
+                watcher.Filter = Path.GetFileName(_fullName);
+                watcher.EnableRaisingEvents = true;
+            }
+        }
+
+        public string DirectoryName => Path.GetDirectoryName(_fullName);
         public string DisplayName
         {
             get
             {
                 string fileExtension = "";
                 if (IsChanged) fileExtension = " *";
-                return Path.GetFileName(FullName) + fileExtension + DISPLAY_NAME_EXTRA_SPACE;
+                return Path.GetFileName(_fullName) + fileExtension + DISPLAY_NAME_EXTRA_SPACE;
             }
         }
         public bool IsChanged { get; set; }
@@ -63,7 +97,7 @@ namespace hoTools.Query
         /// <summary>
         /// True if a complete path exists (once stored to file system)
         /// </summary>
-        public bool IsPersistant => File.Exists(FullName);
+        public bool IsPersistant => File.Exists(_fullName);
 
 
 
@@ -73,15 +107,47 @@ namespace hoTools.Query
         /// </summary>
         /// <param name="fullName"></param>
         /// <param name="isChanged"></param>
-        private void init(string fullName, bool isChanged)
+        void init(string fullName, bool isChanged)
         {
-            FullName = fullName.Trim();
             IsChanged = isChanged;
+            _fullName = fullName;
+           
 
         }
-        private static void OnChanged(object source, FileSystemEventArgs e)
+        #region OnChanged FileSystemEventArgs
+        /// <summary>
+        /// Handle Change Event of the *.sql file.
+        /// <para/>- If configured ask for update when file has changed
+        /// <para/>- Debounce changes of the file if multiple events occur
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="e"></param>
+        void OnChanged(object source, FileSystemEventArgs e)
         {
+            string fileNameChanged = e.FullPath;
+            if (_fullName == fileNameChanged)
+            {
+                // debounce multiple events of Watcher
+                DateTime lastWriteTime = File.GetLastWriteTime(_fullName);
+                TimeSpan diff = lastWriteTime.Subtract(_lastRead);
+                if (diff.TotalMilliseconds < 100) return;
+                _lastRead = lastWriteTime;
 
+                // update with or without asking
+                bool updateSqlPage = true;
+                bool askForUpdate = _sqlTabPagesCntrl.Settings.isAskForQueryUpdateOutside;
+                if (askForUpdate)
+                {
+                    DialogResult result = MessageBox.Show($"'{fileNameChanged}'\nYes: Reload\nNo: Do nothing", "File has changed outside EA", MessageBoxButtons.YesNo);
+                    if (result == DialogResult.No) updateSqlPage = false;
+                }
+                if (updateSqlPage) {
+                    _tabPage.Invoke(_sqlTabPagesCntrl.UpdatePageDelegate,      // delegate
+                                    new object[] { _tabPage, fileNameChanged } // Parameter
+                                   );
+                }
+            }
         }
+        #endregion
     }
 }

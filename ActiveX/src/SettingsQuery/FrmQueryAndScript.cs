@@ -5,7 +5,10 @@ namespace hoTools.Settings
 {
     public partial class FrmQueryAndScript : Form
     {
-        private AddinSettings _settings;
+        /// <summary>
+        /// Global Settings of hoTools
+        /// </summary>
+        AddinSettings _settings;
 
         #region Constructor
         /// <summary>
@@ -42,15 +45,23 @@ namespace hoTools.Settings
                     break;
             }
 
+            // Ask for update if sql file has changed
+            chkIsAskForUpdate.Checked = _settings.isAskForQueryUpdateOutside;
+            // SQL editor
+            txtSqlEditor.Text = _settings.SqlEditor;
+
 
         }
         #endregion
 
+        #region Button Close
         private void btnCancel_Click(object sender, EventArgs e)
         {
             Close();
         }
+        #endregion
 
+        #region Button ok
         private void btnOk_Click(object sender, EventArgs e)
         {
             // only SQL query window
@@ -63,11 +74,15 @@ namespace hoTools.Settings
             if (rbScriptAndQueryAddinWindow.Checked) _settings.ScriptAndQueryWindow = AddinSettings.ShowInWindow.AddinWindow;
             if (rbScriptAndQueryTabWindow.Checked) _settings.ScriptAndQueryWindow = AddinSettings.ShowInWindow.TabWindow;
 
+            _settings.isAskForQueryUpdateOutside = chkIsAskForUpdate.Checked;
+            _settings.SqlEditor = txtSqlEditor.Text;
 
 
             // save setting
             this._settings.save();
             Close();
         }
+        #endregion
+
     }
 }
