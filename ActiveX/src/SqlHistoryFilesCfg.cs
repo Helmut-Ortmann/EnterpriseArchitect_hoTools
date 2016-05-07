@@ -1,17 +1,18 @@
-﻿using System;
+﻿
 using System.Collections.Generic;
 using System.Configuration;
 
 namespace hoTools.Settings
 {
     /// <summary>
-    /// Administer sql history file names of config file
+    /// Administer the recent 20 used SQL files
+    /// <para/>- Store and read them in config-file
     /// </summary>
     public class SqlHistoryFilesCfg
     {
         const string SQL_HISTORY_FILE_CFG_STRING = "SqlFile";
         /// <summary>
-        /// List of files loaded in history
+        /// List of files loaded in history. Recent used files
         /// </summary>
         public List<HistoryFile> lSqlHistoryFilesCfg => _lSqlHistoryFilesCfg;
 
@@ -44,8 +45,11 @@ namespace hoTools.Settings
             {
                 // find key appropriate for file
                 string key = entry.Key;
-                if (key.Substring(0,7).Equals(SQL_HISTORY_FILE_CFG_STRING))
+                if (key.Length <= SQL_HISTORY_FILE_CFG_STRING.Length) continue;
+                if (key.Substring(0, SQL_HISTORY_FILE_CFG_STRING.Length).Equals(SQL_HISTORY_FILE_CFG_STRING))
                 {
+                    // skip empty entries
+                    if (entry.Value.Trim() == "") continue;
                     // ignore duplicated files
                     if (!(loadedFiles.ContainsKey(entry.Value)))
                     {
@@ -76,7 +80,7 @@ namespace hoTools.Settings
             }
         }
         /// <summary>
-        /// Insert an SQL FileHistory to the beginning, an 
+        /// Insert a SQL file to the beginning of SqlFileHistory 
         /// </summary>
         /// <param name="s"></param>
         public void insert(string s)

@@ -50,5 +50,6 @@ Some features:
 
 # ToDo
 - Save SQLs when closed
-- Update SQL file when changed
-- Remember opened SQL files to reopen it after new load
+- Remember opened SQL files to reopen them after new load
+- Drag SQL file on canvas
+  (seems impossible with EA, no drag and drop for ActiveX supported)

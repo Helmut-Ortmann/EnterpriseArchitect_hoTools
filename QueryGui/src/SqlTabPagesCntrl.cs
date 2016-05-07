@@ -24,8 +24,8 @@ namespace hoTools.Query
         /// 
 
         // delegate to call update page from a different thread (SqlFile)
-        public delegate void UpdatePage(TabPage tabPage, string fileNameChanged);
-        public UpdatePage UpdatePageDelegate = new UpdatePage(loadFileForTabPage);
+        public delegate void UpdatePageFromFile(TabPage tabPage, string fileNameChanged, bool notUpdateLastOpenedList);
+        public UpdatePageFromFile UpdatePageDelegate;
 
         public AddinSettings Settings { get; }
         Model _model;
@@ -34,10 +34,7 @@ namespace hoTools.Query
         TabControl _tabControl;
         TextBox _sqlTextBoxSearchTerm;
 
-        // watch for changes
-        FileSystemWatcher watcher = new FileSystemWatcher();
-
-
+        
         /// <summary>
         /// Reusable ToolStripMenuItem: File Menu: New Tab and Load Recent Files 
         /// </summary>
@@ -81,12 +78,41 @@ namespace hoTools.Query
             _fileNewTabAndLoadRecentFileItem = fileNewTabAndLoadRecentFileItem;
             _fileLoadRecentFileItem = fileLoadRecentFileItem;
 
+            UpdatePageDelegate = new UpdatePageFromFile(loadTabPageFromFile);
+
+            loadOpenedTabsLastSession();
+
             // Load recent files into ToolStripMenu
             loadRecentFilesIntoToolStripItems();
 
+        }
 
+        /// <summary>
+        /// Load all tabs which were opened in the last session
+        /// </summary>
+        void loadOpenedTabsLastSession()
+        {
+            // load last opened files into tab pages
+            foreach (HistoryFile lastOpenedFile in Settings.sqlLastOpenedFiles.lSqlLastOpenedFilesCfg)
+            {
+                if (lastOpenedFile.FullName.Trim() == "") continue;
+                TabPage tabPage = addTab();
+                // load 
+                loadTabPageFromFile(tabPage, lastOpenedFile.FullName, notUpdateLastOpenedList: true);
 
+            }
+        }
 
+        /// <summary>
+        /// Add a tab to the tab control a load content into the tab
+        /// </summary>
+        /// <param name="content">Content of the Tab</param>
+        /// <returns></returns>
+        public TabPage addTab(string content)
+        {
+            TabPage tabPage = addTab();
+            loadTabPage(tabPage, content);
+            return tabPage;
         }
         /// <summary>
         /// Add a tab to the tab control
@@ -98,6 +124,7 @@ namespace hoTools.Query
             TabPage tabPage = new TabPage();
             _tabControl.Controls.Add(tabPage);
 
+            // default file name
             SqlFile sqlFile = new SqlFile(this, tabPage, $"{DEFAULT_TAB_NAME}{_tabControl.Controls.Count}.sql", false);
             tabPage.Tag = sqlFile;
             tabPage.Text = sqlFile.DisplayName;
@@ -393,7 +420,7 @@ namespace hoTools.Query
             }
             HistoryFile historyFile = (HistoryFile)((ToolStripMenuItem)sender).Tag;
             string file = historyFile.FullName;
-            loadFileForTabPage(tabPage, file);
+            loadTabPageFromFile(tabPage, file);
         }
 
         /// <summary>
@@ -401,7 +428,8 @@ namespace hoTools.Query
         /// </summary>
         /// <param name="tabPage"></param>
         /// <param name="fileName"></param>
-         public static void loadFileForTabPage(TabPage tabPage, string fileName)
+        /// <param name="notUpdateLastOpenedList">Don't update list of the opened files</param>
+        public void loadTabPageFromFile(TabPage tabPage, string fileName, bool notUpdateLastOpenedList=false)
         {
             
             try
@@ -415,12 +443,28 @@ namespace hoTools.Query
                     sqlFile.IsChanged = false;
                     tabPage.ToolTipText = ((SqlFile)tabPage.Tag).FullName;
                     tabPage.Text = sqlFile.DisplayName;
+                    if (! notUpdateLastOpenedList)
+                    {
+                        Settings.sqlLastOpenedFiles.insert(fileName);
+                        Settings.save();
+                    }
+                    
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"{ex.Message}", $"Error reading File {fileName}");
                 return;
             }
+        }
+        /// <summary>
+        /// Load file for tab Page
+        /// </summary>
+        /// <param name="tabPage"></param>
+        /// <param name="tabContent">What do load in Tab</param>
+        public void loadTabPage(TabPage tabPage, string tabContent)
+        {
+                TextBox textBox = (TextBox)tabPage.Controls[0];
+                textBox.Text = tabContent;
         }
 
 
@@ -442,6 +486,7 @@ namespace hoTools.Query
             // Contend changed, need to be stored first
             if (sqlFile.IsChanged)
             {
+                Settings.sqlLastOpenedFiles.remove(sqlFile.FullName);
                 DialogResult result = MessageBox.Show($"Old File: '{sqlFile.FullName}'",
                     "First store old File? ", MessageBoxButtons.YesNoCancel);
                 if (result == DialogResult.Cancel) return;
@@ -456,7 +501,7 @@ namespace hoTools.Query
             // load File
             HistoryFile historyFile = (HistoryFile)((ToolStripMenuItem)sender).Tag;
             string file = historyFile.FullName;
-            loadFileForTabPage(tabPage, file);
+            loadTabPageFromFile(tabPage, file);
         }
          void insertTemplate_Click(object sender, EventArgs e)
         {
@@ -561,7 +606,7 @@ namespace hoTools.Query
             // get TextBox
             TextBox textBox = (TextBox)tabPage.Controls[0];
 
-            addTab();
+            addTab(SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.ELEMENT_TEMPLATE));
 
 
         }
@@ -633,7 +678,7 @@ namespace hoTools.Query
         void reLoadTabPage(TabPage tabPage)
         {
             SqlFile sqlFile = (SqlFile)tabPage.Tag;
-            loadFileForTabPage(tabPage, sqlFile.FullName);
+            loadTabPage(tabPage, sqlFile.FullName);
 
 
         }
@@ -678,6 +723,8 @@ namespace hoTools.Query
                     tabPage.Text = sqlFile.DisplayName;
                     tabPage.ToolTipText = ((SqlFile)tabPage.Tag).FullName;
                     loadRecentFilesIntoToolStripItems();
+                    Settings.sqlLastOpenedFiles.insert(sqlFile.FullName);
+                    Settings.save();
                 }
             }
         }
@@ -722,6 +769,8 @@ namespace hoTools.Query
                     myStream.Write(textBox.Text);
                     myStream.Close();
                     sqlFile.IsChanged = false;
+                    Settings.sqlLastOpenedFiles.insert(sqlFile.FullName);
+                    Settings.save();
 
 
                     // set TabName
@@ -768,6 +817,8 @@ namespace hoTools.Query
 
                 }
             }
+            Settings.sqlLastOpenedFiles.remove(sqlFile.FullName);
+            Settings.save();
             _tabControl.TabPages.Remove(tabPage);
         }
 
@@ -794,33 +845,7 @@ namespace hoTools.Query
             runSqlTabPage();
         }
 
-        /// <summary>
-        /// File has changed outside EA. Ask if reload file.
-        /// </summary>
-        /// <param name="source"></param>
-        /// <param name="e"></param>
-        void OnChangedFile(object source, FileSystemEventArgs e)
-        {
-            string fileNameChanged = e.FullPath;
-            // get TabPage
-            foreach (TabPage tabPage in _tabControl.TabPages)
-            {
-                if (fileNameChanged == ((SqlFile)tabPage.Tag).DisplayName)
-                {
-                    DialogResult result = MessageBox.Show($"'{fileNameChanged}'\nYes: Reload\nNo: Do nothing", "File has changed outside EA", MessageBoxButtons.YesNo);
-                    if (result == DialogResult.Yes)
-                    {
-                        loadFileForTabPage(tabPage, fileNameChanged);
-                    }
-
-                    break;
-                }
-            }
-
-            
-        }
-
-
+        
 
     }
 }

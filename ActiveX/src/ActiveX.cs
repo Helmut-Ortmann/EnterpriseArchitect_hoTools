@@ -671,6 +671,9 @@ namespace hoTools.ActiveX
         }
         #endregion
         #region Key down
+        /// <summary>
+        /// Overrides TextBox to handle the enter key. Per default it isn't passed
+        /// </summary>
         public class EnterTextBox : TextBox
         {
             protected override bool IsInputKey(Keys keyData)

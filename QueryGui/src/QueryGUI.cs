@@ -114,8 +114,11 @@ namespace hoTools.Query
                 newTabFromToolStripMenuItem, 
                 loadTabFromToolStripMenuItem);
 
-            // first tab
-            _sqlTabCntrls.addTab();
+            if (tabControlSql.TabPages.Count == 0)
+            {
+                // first tab with Element Template
+                _sqlTabCntrls.addTab(SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.ELEMENT_TEMPLATE));
+            }
 
 
             // run for query
@@ -132,6 +135,13 @@ namespace hoTools.Query
                 _lscripts = Script.getEAMaticScripts(Model);
                 updateTableFunctions();
             }
+
+            // enable drag and drop
+            AllowDrop = true;
+            DragEnter += new DragEventHandler(tabControlSql_DragEnter);
+            DragDrop += new DragEventHandler(tabControlSql_DragDrop);
+
+            tabControlSql.AllowDrop = true;
             return true;
         }
 
@@ -500,7 +510,7 @@ namespace hoTools.Query
 
          void FileNewTabToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            _sqlTabCntrls.addTab();
+            _sqlTabCntrls.addTab(SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.ELEMENT_TEMPLATE));
         }
 
         /// <summary>
@@ -618,7 +628,27 @@ namespace hoTools.Query
             _sqlTabCntrls.runSqlTabPage();
         }
 
-        private void txtSearchTerm_KeyDown(object sender, KeyEventArgs e)
+
+        #region Key down
+        /// <summary>
+        /// Overrides TextBox to handle the enter key. Per default it isn't passed
+        /// </summary>
+        public class EnterTextBox : TextBox
+        {
+            protected override bool IsInputKey(Keys keyData)
+            {
+                if (keyData == Keys.Return)
+                    return true;
+                return base.IsInputKey(keyData);
+            }
+
+        }
+        #endregion
+        // text field
+        // There are special keys like "Enter" which require an enabling by 
+        //---------------------------------------------------------
+        // see at:  protected override boolean IsInputKey(Keys keyData)
+        void txtSearchTerm_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
@@ -630,6 +660,46 @@ namespace hoTools.Query
         void saveAllToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _sqlTabCntrls.saveAll();
+        }
+
+        #region Drag one or more into TextBox
+        /// <summary>
+        /// Drag one or more files into TextBox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void tabControlSql_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop)) e.Effect = DragDropEffects.Copy;
+
+        }
+        #endregion
+
+        void tabControlSql_DragDrop(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+                foreach (string filePath in files)
+                {
+                    Console.WriteLine(filePath);
+                }
+            }
+        }
+
+        private void splitContainer_DragOver(object sender, DragEventArgs e)
+        {
+            Repository.WriteOutput("Test", e.ToString(),0);
+        }
+
+        private void splitContainer_DragDrop(object sender, DragEventArgs e)
+        {
+            Repository.WriteOutput("Test", e.ToString(), 0);
+        }
+
+        private void tabControlSql_DragLeave(object sender, EventArgs e)
+        {
+            Repository.WriteOutput("Test", e.ToString(), 0);
         }
     }
 }

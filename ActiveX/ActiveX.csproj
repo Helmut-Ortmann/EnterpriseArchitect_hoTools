@@ -112,6 +112,7 @@
     <Compile Include="src\SettingsGeneral\FrmSettingsGeneral.Designer.cs">
       <DependentUpon>FrmSettingsGeneral.cs</DependentUpon>
     </Compile>
+    <Compile Include="src\SqlLastOpenedFilesCfg.cs" />
     <Compile Include="src\SqlHistoryFilesCfg.cs" />
   </ItemGroup>
   <ItemGroup>

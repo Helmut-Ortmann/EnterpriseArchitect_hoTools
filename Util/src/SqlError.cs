@@ -36,7 +36,7 @@ namespace hoTools.Utils.SQL
             }
             catch (Exception e)
             {
-                MessageBox.Show($"{e.Message}\nFile:'{filePath}'", $"Can't read EA SQL Error file dberror.tx, nor error occurred?");
+                MessageBox.Show($"{e.Message}\r\nFile:'{filePath}'", $"Can't read EA SQL Error file dberror.tx, nor error occurred?");
                 return "";
             }
         }

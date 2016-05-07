@@ -15,9 +15,13 @@ namespace hoTools.Utils.SQL
         {
              { SQL_TEMPLATE_ID.ELEMENT_TEMPLATE,
                 new SqlTemplate("Element Template",
+                "//\r\n" +
+                "// Template Element\r\n" +
+                "//\r\n" +
                 "select o.ea_guid AS CLASSGUID, o.object_type AS CLASSTYPE,o.Name AS Name,o.object_type As Type, * \r\n" +
                 "from t_object o\r\n" +
-                "where o.object_type in \r\n"+
+                "where o.name like '<Search Term>#WC#' AND "+
+                "     o.object_type in \r\n"+
                 "     (\r\n"+
                 "      \"Class\",\"Component\"\r\n" +
                 "      )\r\n" +

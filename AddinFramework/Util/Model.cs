@@ -269,7 +269,7 @@ namespace EAAddinFramework.Utils
                 }
                 else
                 {
-                    MessageBox.Show(SqlError.getEaSqlError(), "Error SQL");
+                    MessageBox.Show(SqlError.getEaSqlError(), "Error SQL (CTRL+C to copy it!!)");
                     return null;
                 }
             }

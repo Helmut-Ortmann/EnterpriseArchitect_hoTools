@@ -143,7 +143,9 @@ namespace hoTools.Query
                 }
                 if (updateSqlPage) {
                     _tabPage.Invoke(_sqlTabPagesCntrl.UpdatePageDelegate,      // delegate
-                                    new object[] { _tabPage, fileNameChanged } // Parameter
+                                    new object[] { _tabPage,
+                                        fileNameChanged,
+                                        true }                                  // don't update last opened file
                                    );
                 }
             }

@@ -33,9 +33,14 @@ namespace hoTools.Settings
         public string ConfigPath { get; }
 
         /// <summary>
-        /// List of SQL History Files
+        /// List of history sql files (recent 20 used sql files)
         /// </summary>
         public SqlHistoryFilesCfg sqlFiles { get; }
+
+        /// <summary>
+        /// List of 10 last opened sql files
+        /// </summary>
+        public SqlLastOpenedFilesCfg sqlLastOpenedFiles { get; }
 
         // Configuration 5 button searches by key
         public EaAddinButtons[] buttonsSearch;
@@ -57,6 +62,7 @@ namespace hoTools.Settings
         /// <para/>c:\Users\<user>\AppData\Local\Apps\hoTools\ActiveX.dll.config
         /// </summary>
         protected Configuration _defaultConfig { get; set; }
+
         /// <summary>
         /// Configuration stored in Roaming of the user
         /// <para/>c:\Users\<user>\AppData\Roaming\ho\hoTools\user.config
@@ -113,7 +119,8 @@ namespace hoTools.Settings
             getConnector(_logicalConnectors);
             getConnector(_activityConnectors);
             getAllServices();
-            sqlFiles = new SqlHistoryFilesCfg(_currentConfig);// sql files 
+            sqlFiles = new SqlHistoryFilesCfg(_currentConfig);// history of sql files 
+            sqlLastOpenedFiles = new SqlLastOpenedFilesCfg(_currentConfig); // last opened files
 
             updateSearchesAndServices();
         }
@@ -885,10 +892,8 @@ namespace hoTools.Settings
                 setConnector(_logicalConnectors);
                 setConnector(_activityConnectors);
                 sqlFiles.save();
+                sqlLastOpenedFiles.save();
                 _currentConfig.Save();
-
-
-
                 _currentConfig.Save();
             }
             catch (Exception e)

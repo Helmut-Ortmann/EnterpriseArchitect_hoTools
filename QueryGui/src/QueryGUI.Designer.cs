@@ -57,6 +57,7 @@ namespace hoTools.Query
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -68,7 +69,6 @@ namespace hoTools.Query
             this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
             this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
-            this.saveAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewScripts)).BeginInit();
             this.contextMenuStripDataGrid.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -83,7 +83,7 @@ namespace hoTools.Query
             // 
             // txtSearchTerm
             // 
-            this.txtSearchTerm.Location = new System.Drawing.Point(184, 3);
+            this.txtSearchTerm.Location = new System.Drawing.Point(92, 3);
             this.txtSearchTerm.Name = "txtSearchTerm";
             this.txtSearchTerm.Size = new System.Drawing.Size(223, 20);
             this.txtSearchTerm.TabIndex = 7;
@@ -204,6 +204,10 @@ namespace hoTools.Query
             this.toolTip1.SetToolTip(this.tabControlSql, "Enter SQL code. EA macros like:\r\n- #Branch#\r\n- #ObjectID#\r\n- #ObjectGUID#\r\n- #Pac" +
         "kage#\r\n- \'Search Term\'\r\n\r\nare allowed.");
             this.tabControlSql.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.tabControlSql_DrawItem);
+            this.tabControlSql.DragDrop += new System.Windows.Forms.DragEventHandler(this.tabControlSql_DragDrop);
+            this.tabControlSql.DragEnter += new System.Windows.Forms.DragEventHandler(this.tabControlSql_DragEnter);
+            this.tabControlSql.DragOver += new System.Windows.Forms.DragEventHandler(this.splitContainer_DragOver);
+            this.tabControlSql.DragLeave += new System.EventHandler(this.tabControlSql_DragLeave);
             this.tabControlSql.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tabControlSql_MouseDown);
             // 
             // btnLoadScripts
@@ -220,7 +224,7 @@ namespace hoTools.Query
             // 
             this.lblTitle.AutoSize = true;
             this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitle.Location = new System.Drawing.Point(413, 0);
+            this.lblTitle.Location = new System.Drawing.Point(321, 0);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(196, 25);
             this.lblTitle.TabIndex = 1;
@@ -234,7 +238,7 @@ namespace hoTools.Query
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(181, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(89, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -316,6 +320,13 @@ namespace hoTools.Query
             this.saveAsToolStripMenuItem.Text = "Save As..";
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveSqlTabAsToolStripMenuItem_Click);
             // 
+            // saveAllToolStripMenuItem
+            // 
+            this.saveAllToolStripMenuItem.Name = "saveAllToolStripMenuItem";
+            this.saveAllToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.saveAllToolStripMenuItem.Text = "Save All";
+            this.saveAllToolStripMenuItem.Click += new System.EventHandler(this.saveAllToolStripMenuItem_Click);
+            // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
@@ -393,6 +404,8 @@ namespace hoTools.Query
             this.splitContainer.SplitterDistance = 334;
             this.splitContainer.SplitterWidth = 6;
             this.splitContainer.TabIndex = 9;
+            this.splitContainer.DragDrop += new System.Windows.Forms.DragEventHandler(this.splitContainer_DragDrop);
+            this.splitContainer.DragOver += new System.Windows.Forms.DragEventHandler(this.splitContainer_DragOver);
             // 
             // flowLayoutPanel3
             // 
@@ -424,13 +437,6 @@ namespace hoTools.Query
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
             this.flowLayoutPanel2.Size = new System.Drawing.Size(769, 25);
             this.flowLayoutPanel2.TabIndex = 11;
-            // 
-            // saveAllToolStripMenuItem
-            // 
-            this.saveAllToolStripMenuItem.Name = "saveAllToolStripMenuItem";
-            this.saveAllToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
-            this.saveAllToolStripMenuItem.Text = "Save All";
-            this.saveAllToolStripMenuItem.Click += new System.EventHandler(this.saveAllToolStripMenuItem_Click);
             // 
             // QueryGUI
             // 
