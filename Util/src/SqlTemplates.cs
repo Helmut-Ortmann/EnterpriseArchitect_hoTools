@@ -11,8 +11,33 @@ namespace hoTools.Utils.SQL
     public static class SqlTemplates
     {
         #region Template Dictionary SqlTemplare
+        /// <summary>
+        /// Dictionary of the available Templates
+        /// </summary>
         static Dictionary<SQL_TEMPLATE_ID, SqlTemplate> SqlTemplate = new Dictionary<SQL_TEMPLATE_ID, SqlTemplate>
         {
+             { SQL_TEMPLATE_ID.MACROS_HELP,
+                new SqlTemplate("Macros help",
+                "//\r\n" +
+                "// Help to available Macros\r\n" +
+                "// - #Branch#                    Replaced by the package ID of the selected package and all nested package like '512, 31,613' \r\n" +
+                "// - #CurrentElementGUID#        Replaced by the GUID of the selected item (Element, Diagram, Package, Attribute, Operation \r\n" +
+                "// - #CurrentElementID#          Replaced by the ID of the selected item (Element, Diagram, Package, Attribute, Operation\r\n" +
+                "// - #InBranch#                  like Branch (nested package recursive), but with SQL IN clause like 'IN (512, 31,613)'\r\n" +
+                "// - #Package#                   Replaced by the package ID of the selected package\r\n" +
+                "// - <Search Term>               Replaced by the string in the 'Search Term' entry field\r\n" +
+                "// -  #WC#                       \r\n" +
+
+                "//\r\n" +
+                "select o.ea_guid AS CLASSGUID, o.object_type AS CLASSTYPE,o.Name AS Name,o.object_type As Type, * \r\n" +
+                "from t_object o\r\n" +
+                "where o.name like '<Search Term>#WC#' AND "+
+                "     o.object_type in \r\n"+
+                "     (\r\n"+
+                "      \"Class\",\"Component\"\r\n" +
+                "      )\r\n" +
+                "ORDER BY o.Name\r\n",
+                     "Template available Macros") },
              { SQL_TEMPLATE_ID.ELEMENT_TEMPLATE,
                 new SqlTemplate("Element Template",
                 "//\r\n" +
@@ -29,6 +54,12 @@ namespace hoTools.Utils.SQL
                      "Template to search for Elements") },
               { SQL_TEMPLATE_ID.ELEMENT_TYPE_TEMPLATE,
                 new SqlTemplate("Element Type Template Text",
+                "//\r\n" +
+                "// Template Element types\r\n" +
+                "// - Group by \r\n" +
+                "// - Aggregate function: count(*) \r\n" +
+                "//\r\n" +
+                "//\r\n" +
                 "select o.object_type As Type, count(*) As Count \r\n" +
                 "from t_object o\r\n" +
                 "GROUP BY o.object_type\r\n" +
@@ -37,6 +68,12 @@ namespace hoTools.Utils.SQL
 
                { SQL_TEMPLATE_ID.DIAGRAM_TYPE_TEMPLATE,
                 new SqlTemplate("Diagram Type Template ",
+                "//\r\n" +
+                "// Template Diagram types\r\n" +
+                "// - Group by \r\n" +
+                "// - Aggregate function: count(*) \r\n" +
+                "//\r\n" +
+                "//\r\n" +
                 "select d.diagram_type As Type, count(*) As Count\r\n" +
                 "from t_diagram d\r\n" +
                 "GROUP BY d.diagram_type\r\n" +
@@ -45,6 +82,10 @@ namespace hoTools.Utils.SQL
 
              { SQL_TEMPLATE_ID.DIAGRAM_TEMPLATE,
                 new SqlTemplate("Diagram TemplateText",
+                "//\r\n" +
+                "// Template Diagram of type\r\n" +
+                "//\r\n" +
+                "//\r\n" +
                      "select d.ea_guid AS CLASSGUID, d.diagram_type AS CLASSTYPE,d.Name AS Name,d.diagram_type As Type, * \r\n" +
                      "from t_diagram d\r\n" +
                      "where d.diagram_type in \r\n" +
@@ -56,6 +97,13 @@ namespace hoTools.Utils.SQL
                    "TemplateText to search for Diagrams") },
              { SQL_TEMPLATE_ID.PACKAGE_TEMPLATE,
                 new SqlTemplate("Package TemplateText",
+                           "//\r\n" +
+                            "// Template Package with\r\n" +
+                            "// join between \r\n" +
+                            "// - t_object\r\n" +
+                            "// - t_package\r\n" +
+                            "//\r\n" +
+                            "//\r\n" +
                            "select o.ea_guid AS CLASSGUID, o.object_type AS CLASSTYPE,o.Name AS Name,o.object_type As Type, * \r\n" +
                            "from t_object o, t_package pkg \r\n" +
                            "where o.object_type = 'Package' AND \r\n" +
@@ -63,17 +111,26 @@ namespace hoTools.Utils.SQL
                            "ORDER BY o.Name\r\n",
                     "TemplateText to search for Packages") },
              { SQL_TEMPLATE_ID.DIAGRAM_OBJECT_TEMPLATE,
-                new SqlTemplate(@"Diagram Object TemplateText", 
+                new SqlTemplate(@"Diagram Object TemplateText",
+                    "//\r\n" +
+                    "// Template Diagram Object with\r\n" +
+                    "//  \r\n" +
                     "<Search Term>",
                     "TemplateText to search Diagram Object Packages") },
              { SQL_TEMPLATE_ID.ATTRIBUTE_TEMPLATE,
                 new SqlTemplate(@"Attribute TemplateText",
+                     "//\r\n" +
+                    "// Template Attribute\r\n" +
+                    "//  \r\n" +
                     "select o.ea_guid AS CLASSGUID, 'Attribute' AS CLASSTYPE,o.Name AS Name, * \r\n" +
                     "from t_attribute o\r\n" +
                     "where o.name like '%' ",
                     "TemplateText to search for Attributes") },
              { SQL_TEMPLATE_ID.OPERATION_TEMPLATE,
                 new SqlTemplate(@"OPERATION TemplateText",
+                     "//\r\n" +
+                      "// Template Operation\r\n" +
+                     "//  \r\n" +
                       "select o.ea_guid AS CLASSGUID, 'Operation' AS CLASSTYPE,o.Name AS Name, * \r\n" +
                       "from t_operation o\r\n" +
                       "where o.name like '%' ",
@@ -91,11 +148,11 @@ namespace hoTools.Utils.SQL
             { SQL_TEMPLATE_ID.BRANCH_IDS,
                 new SqlTemplate("BRANCH_IDS", 
                     "#Branch#",
-                    "Placeholder for the current selected package (recursive), use as PackageID\nExample: pkg.Package_ID in (#Branch#)\nExpands to in (512,513,..) ")  },
+                    "Placeholder for the current selected package (recursive), use as PackageID\nExample: pkg.Package_ID in (#Branch#)\nExpands to in '512,513,..' ")  },
             { SQL_TEMPLATE_ID.IN_BRANCH_IDS,
                 new SqlTemplate("IN_BRANCH_IDS", 
                     "#InBranch#",
-                    "Placeholder for sql in clause for the current selected package (recursive), use as PackageID\nExample: pkg.Package_ID  (#InBranch#)\nExpands to in (512,513,..) ") },
+                    "Placeholder for sql in clause for the current selected package (recursive), use as PackageID\nExample: pkg.Package_ID  (#InBranch#)\nExpands to 'IN (512,513,..)' ") },
             { SQL_TEMPLATE_ID.CURRENT_ITEM_ID,
                 new SqlTemplate("CURRENT_ITEM_ID", 
                     "#CurrentElementID#","Placeholder for the current selected item ID, use as ID\nExample: obj.Object_ID = #CurrentElementID# ") },
@@ -106,7 +163,11 @@ namespace hoTools.Utils.SQL
             { SQL_TEMPLATE_ID.WC,
                 new SqlTemplate("DB Wild Card", 
                     "#WC#", 
-                    "Placeholder for the Database Wild Card (% or *)\nExample like 'MyClass#WC#' ") },
+                    "Placeholder for the Database Wild Card (% or *)\r\n"+
+                    "Example like 'MyClass#WC#'\r\n " +
+                    "Remark: Just for compatibility with EA Searches.You may simple use the familiar wild cards '*' or '%'\r\n " +
+                    "        hoTools take care of the correct usage for the current database\r\n "
+                    ) },
             { SQL_TEMPLATE_ID.NOW,
                 new SqlTemplate("NOW date/time", 
                     "#NOW(not implemented)#", 
@@ -118,8 +179,12 @@ namespace hoTools.Utils.SQL
         };
         #endregion
         #region public Enum SQL_TEMPLATE_ID
+        /// <summary>
+        /// Available Templates
+        /// </summary>
         public enum SQL_TEMPLATE_ID
         {
+            MACROS_HELP,        // Help to macros
             ELEMENT_TEMPLATE,
             ELEMENT_TYPE_TEMPLATE,
             DIAGRAM_TEMPLATE,
@@ -130,8 +195,8 @@ namespace hoTools.Utils.SQL
             OPERATION_TEMPLATE,
             SEARCH_TERM,
             PACKAGE_ID,
-            BRANCH_IDS,
-            IN_BRANCH_IDS,
+            BRANCH_IDS,     // Package (nested, recursive) ids separated by ','  like '20,21,47,1'
+            IN_BRANCH_IDS,  // Package (nested, recursive), complete SQL in clause, ids separated by ','  like 'IN (20,21,47,1)', just a shortcut for #BRANCH_ID#
             CURRENT_ITEM_ID,
             CURRENT_ITEM_GUID,
             AUTHOR,

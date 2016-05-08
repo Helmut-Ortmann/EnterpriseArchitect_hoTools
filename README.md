@@ -8,6 +8,10 @@ Collection of useful tools:
   - Set diagram line style
   - Define your personal keys & buttons for searches and services
   - Quick search at your finger tip
+    -- Tabw Windows and more
+    -- Templates
+    -- Macros
+    -- See error
   - Favorites,..
   - Create powerful SQL queries (tab window, templates, macros and more)
   - Search & Replace, regular expression supported
@@ -49,7 +53,5 @@ Some features:
 - hoToolsRemove.ps1 (deinstall with PowerShell)
 
 # ToDo
-- Save SQLs when closed
-- Remember opened SQL files to reopen them after new load
 - Drag SQL file on canvas
   (seems impossible with EA, no drag and drop for ActiveX supported)
