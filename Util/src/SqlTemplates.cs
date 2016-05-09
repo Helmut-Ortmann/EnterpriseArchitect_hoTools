@@ -121,7 +121,7 @@ namespace hoTools.Utils.SQL
                 new SqlTemplate(@"Attribute TemplateText",
                      "//\r\n" +
                     "// Template Attribute\r\n" +
-                    "//  \r\n" +
+                    "//\r\n" +
                     "select o.ea_guid AS CLASSGUID, 'Attribute' AS CLASSTYPE,o.Name AS Name, * \r\n" +
                     "from t_attribute o\r\n" +
                     "where o.name like '%' ",
@@ -130,7 +130,7 @@ namespace hoTools.Utils.SQL
                 new SqlTemplate(@"OPERATION TemplateText",
                      "//\r\n" +
                       "// Template Operation\r\n" +
-                     "//  \r\n" +
+                     "//\r\n" +
                       "select o.ea_guid AS CLASSGUID, 'Operation' AS CLASSTYPE,o.Name AS Name, * \r\n" +
                       "from t_operation o\r\n" +
                       "where o.name like '%' ",
@@ -365,18 +365,27 @@ namespace hoTools.Utils.SQL
                 }
                 sql = sql.Replace(currentPackageTemplate, $"{id}");
             }
-            // Branch=Package IDs, Recursive
+            // Branch=comma separated Package IDs, Recursive:
+            // Example for 3 Packages with their PackageID 7,29,128
+            // 7,29,128
+            //
+            // Branch: complete SQL IN statement ' IN (comma separated Package IDs, Recursive):
+            // IN (7,29,128)
+             
             string currentBranchTemplate = getTemplateText(SQL_TEMPLATE_ID.BRANCH_IDS);
-            if (sql.Contains(currentBranchTemplate))
+            string currrentInBranchTemplate = getTemplateText(SQL_TEMPLATE_ID.IN_BRANCH_IDS);
+            if (sql.Contains(currentBranchTemplate) | sql.Contains(currrentInBranchTemplate))
             {
                 EA.ObjectType objectType = rep.GetContextItemType();
                 int id = 0;
                 switch (objectType)
                 {
+                    // use Package of diagram
                     case EA.ObjectType.otDiagram:
                         EA.Diagram dia = (EA.Diagram)rep.GetContextObject();
                         id = dia.PackageID;
                         break;
+                    // use Package of element
                     case EA.ObjectType.otElement:
                         EA.Element el = (EA.Element)rep.GetContextObject();
                         id = el.PackageID;
@@ -386,13 +395,16 @@ namespace hoTools.Utils.SQL
                         id = pkg.PackageID;
                         break;
                 }
+                // Context element available
                 if (id > 0)
                 {
                     string branch = Package.getBranch(rep, "", id);
                     sql = sql.Replace(currentBranchTemplate, branch);
+                    sql = sql.Replace(currrentInBranchTemplate, branch);
                 }
             }
-            // Replace #WC#
+            // Replace #WC# (DB wile card)
+            // Later '*' is changed to the wild card of the current DB
             string currentTemplate = getTemplateText(SQL_TEMPLATE_ID.WC);
             if (sql.Contains(currentTemplate))
             {

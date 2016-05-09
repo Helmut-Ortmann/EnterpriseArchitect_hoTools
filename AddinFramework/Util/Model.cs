@@ -302,6 +302,7 @@ namespace EAAddinFramework.Utils
         /// <returns>string</returns>
         public string MakeEaXmlOutput(string x)
         {
+            if (x == "" || x == null ) return emptyQueryResult();
             return MakeEaXmlOutput(XDocument.Parse(x));
         }
 
@@ -367,23 +368,34 @@ namespace EAAddinFramework.Utils
                 )).ToString();
             } catch (Exception e)
             {
-                return new XDocument(
-                    new XElement("ReportViewData",
-                        new XElement("Fields",
-                               new XElement("Field", new XAttribute("name", "Empty"))
-                        ),
-                        new XElement("Rows",
-                            new XElement ("Row",
-                                    new XElement("Field", 
-                                                        new XAttribute("name", "Empty"),
-                                                        new XAttribute("value", "__empty___")))
-
-                    )
-                )).ToString();
+                // empty query result
+                return emptyQueryResult();
 
             }
         }
-        #pragma warning restore CSE0003 // Use expression-bodied members
+        #region Empty Query Result
+        /// <summary>
+        /// Empty Query Result
+        /// </summary>
+        /// <returns></returns>
+        static string emptyQueryResult()
+        {
+            return new XDocument(
+                new XElement("ReportViewData",
+                    new XElement("Fields",
+                           new XElement("Field", new XAttribute("name", "Empty"))
+                    ),
+                    new XElement("Rows",
+                        new XElement("Row",
+                                new XElement("Field",
+                                                    new XAttribute("name", "Empty"),
+                                                    new XAttribute("value", "__empty___")))
+
+                )
+            )).ToString();
+            #endregion
+        }
+#pragma warning restore CSE0003 // Use expression-bodied members
         #endregion
 
         /// <summary>
