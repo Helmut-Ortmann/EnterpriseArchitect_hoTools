@@ -134,18 +134,8 @@ namespace hoTools.Query
             //-----------------------------------------------------------------
             // Tab with ContextMenuStrip
             // Create a text box in TabPage for the SQL string
-            TextBox sqlTextBox = new TextBox();
-            sqlTextBox.Multiline = true;
-            sqlTextBox.ScrollBars = ScrollBars.Both;
-            sqlTextBox.AcceptsReturn = true;
-            sqlTextBox.AcceptsTab = true;
-            sqlTextBox.TextChanged += sqlTextBox_TextChanged;
-
-                        // Set WordWrap to true to allow text to wrap to the next line.
-            sqlTextBox.WordWrap = true;
-            sqlTextBox.Modified = false;
-            sqlTextBox.Dock = DockStyle.Fill;
-
+            var sqlTextBox = new TextBoxUndo(tabPage);
+            
             tabPage.Controls.Add(sqlTextBox);
 
             // ContextMenu
@@ -360,6 +350,7 @@ namespace hoTools.Query
          void sqlTextBox_TextChanged(object sender, EventArgs e)
         {
             // get TabPage
+
             TabPage tabPage = _tabControl.TabPages[_tabControl.SelectedIndex];
             SqlFile sqlFile = (SqlFile)tabPage.Tag;
             sqlFile.IsChanged = true;
@@ -422,6 +413,32 @@ namespace hoTools.Query
             string file = historyFile.FullName;
             loadTabPageFromFile(tabPage, file);
         }
+        #region
+        /// <summary>
+        ///Undo changes in current active TextBoxUndo
+        /// </summary>
+        public void UndoText()
+        {
+            if (_tabControl.SelectedIndex < 0) return;
+            TabPage tabPage = _tabControl.TabPages[_tabControl.SelectedIndex];
+            TextBoxUndo textBox = (TextBoxUndo)tabPage.Controls[0];
+            textBox.UndoText();
+        }
+        #endregion
+
+        #region
+        /// <summary>
+        /// Redo changes in current active TextBoxUndo
+        /// </summary>
+        public void RedoText()
+        {
+            if (_tabControl.SelectedIndex < 0) return;
+            TabPage tabPage = _tabControl.TabPages[_tabControl.SelectedIndex];
+            TextBoxUndo textBox = (TextBoxUndo)tabPage.Controls[0];
+            textBox.RedoText();
+        }
+        #endregion
+
 
         /// <summary>
         /// Load file for tab Page
@@ -434,7 +451,7 @@ namespace hoTools.Query
             
             try
             {
-                    TextBox textBox = (TextBox)tabPage.Controls[0];
+                    TextBoxUndo textBox = (TextBoxUndo)tabPage.Controls[0];
                     textBox.Text = File.ReadAllText(fileName);
 
                     // set TabName
@@ -477,11 +494,12 @@ namespace hoTools.Query
         void loadFromHistoryEntry_Click(object sender, EventArgs e)
         {
             // get TabPage
+            if (_tabControl.SelectedIndex < 0) return;
             TabPage tabPage = _tabControl.TabPages[_tabControl.SelectedIndex];
             SqlFile sqlFile = (SqlFile)tabPage.Tag;
 
             // get TextBox
-            TextBox textBox = (TextBox)tabPage.Controls[0];
+            TextBoxUndo textBox = (TextBoxUndo)tabPage.Controls[0];
 
             // Contend changed, need to be stored first
             if (sqlFile.IsChanged)
@@ -506,10 +524,11 @@ namespace hoTools.Query
          void insertTemplate_Click(object sender, EventArgs e)
         {
             // get TabPage
+            if (_tabControl.SelectedIndex < 0) return;
             TabPage tabPage = _tabControl.TabPages[_tabControl.SelectedIndex];
 
             // get TextBox
-            TextBox textBox = (TextBox)tabPage.Controls[0];
+            var textBox = (TextBoxUndo)tabPage.Controls[0];
 
             // get the template to insert text
             ToolStripMenuItem menuItem = (ToolStripMenuItem)sender;
@@ -544,10 +563,11 @@ namespace hoTools.Query
         public void saveSqlTabAs()
         {
             // get TabPage
+            if (_tabControl.SelectedIndex < 0) return;
             TabPage tabPage = _tabControl.TabPages[_tabControl.SelectedIndex];
 
             // get TextBox
-            TextBox textBox = (TextBox)tabPage.Controls[0];
+            var textBox = (TextBoxUndo)tabPage.Controls[0];
             saveAs(tabPage);
             tabPage.ToolTipText = ((SqlFile)tabPage.Tag).FullName;
             tabPage.Text = ((SqlFile)tabPage.Tag).DisplayName;
@@ -561,6 +581,7 @@ namespace hoTools.Query
         /// <param name="e"></param>
         void fileSaveMenuItem_Click(object sender, EventArgs e)
         {
+            if (_tabControl.SelectedIndex < 0) return;
             TabPage tabPage = _tabControl.TabPages[_tabControl.SelectedIndex];
             save(tabPage);
         }
@@ -584,6 +605,7 @@ namespace hoTools.Query
         void fileLoadMenuItem_Click(object sender, EventArgs e)
         {
             // get TabPage
+            if (_tabControl.SelectedIndex < 0) return;
             TabPage tabPage = _tabControl.TabPages[_tabControl.SelectedIndex];
 
             
@@ -601,10 +623,11 @@ namespace hoTools.Query
          void addTabMenuItem_Click(object sender, EventArgs e)
         {
             // get TabPage
+            if (_tabControl.SelectedIndex < 0) return;
             TabPage tabPage = _tabControl.TabPages[_tabControl.SelectedIndex];
 
             // get TextBox
-            TextBox textBox = (TextBox)tabPage.Controls[0];
+            var textBox = (TextBoxUndo)tabPage.Controls[0];
 
             addTab(SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.ELEMENT_TEMPLATE));
 
@@ -619,6 +642,7 @@ namespace hoTools.Query
          void closeMenuItem_Click(object sender, EventArgs e)
         {
             // get TabPage
+            if (_tabControl.SelectedIndex < 0) return;
             TabPage tabPage = _tabControl.TabPages[_tabControl.SelectedIndex];
             close(tabPage);
 
@@ -647,7 +671,7 @@ namespace hoTools.Query
                 if (myStream != null)
                 {
                     // get TextBox
-                    TextBox textBox = (TextBox)tabPage.Controls[0];
+                    var textBox = (TextBoxUndo)tabPage.Controls[0];
                     textBox.Text = myStream.ReadToEnd();
                     myStream.Close();
                     tabPage.Text = Path.GetFileName(openFileDialog.FileName);
@@ -706,7 +730,7 @@ namespace hoTools.Query
                 StreamWriter myStream = new StreamWriter(saveFileDialog.OpenFile());
                 if (myStream != null)
                 {
-                    TextBox textBox = (TextBox)tabPage.Controls[0];
+                    var textBox = (TextBox)tabPage.Controls[0];
                     myStream.Write(textBox.Text);
                     myStream.Close();
                     tabPage.Text = Path.GetFileName(saveFileDialog.FileName);
@@ -765,7 +789,7 @@ namespace hoTools.Query
                 StreamWriter myStream = new StreamWriter(sqlFile.FullName);
                 if (myStream != null)
                 {
-                    TextBox textBox = (TextBox)tabPage.Controls[0];
+                    var textBox = (TextBox)tabPage.Controls[0];
                     myStream.Write(textBox.Text);
                     myStream.Close();
                     sqlFile.IsChanged = false;
@@ -828,13 +852,13 @@ namespace hoTools.Query
         /// </summary>
         public void runSqlTabPage()
         {
-            Cursor.Current = Cursors.WaitCursor;
-
+            if (_tabControl.SelectedIndex < 0) return;
             // get TabPage
+            Cursor.Current = Cursors.WaitCursor;
             TabPage tabPage = _tabControl.TabPages[_tabControl.SelectedIndex];
 
             // get TextBox
-            TextBox textBox = (TextBox)tabPage.Controls[0];
+            var textBox = (TextBox)tabPage.Controls[0];
             GuiFunction.RunSql(_model, textBox.Text, _sqlTextBoxSearchTerm.Text);
             Cursor.Current = Cursors.Default;
         }

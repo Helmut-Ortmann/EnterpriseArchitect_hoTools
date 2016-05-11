@@ -701,5 +701,19 @@ namespace hoTools.Query
         {
             Repository.WriteOutput("Test", e.ToString(), 0);
         }
+
+        #region Undo SQL Text
+        void btnUndo_Click(object sender, EventArgs e)
+        {
+            _sqlTabCntrls.UndoText();
+        }
+        #endregion
+
+        #region Redo SQL Text
+        void btnRedo_Click(object sender, EventArgs e)
+        {
+            _sqlTabCntrls.RedoText();
+        }
+        #endregion
     }
 }
