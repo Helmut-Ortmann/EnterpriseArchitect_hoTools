@@ -141,6 +141,14 @@ namespace hoTools.Utils.SQL
                 new SqlTemplate("SEARCH_TERM", 
                     "<Search Term>",
                     "<Search Term> is a string replaced at runtime by a variable string.\nExample: Name = '<Search Term>'") },
+            { SQL_TEMPLATE_ID.CONNECTOR_ID,
+                new SqlTemplate("CONNECTOR_ID",
+                    "#CONNECTOR_ID#",
+                    "Placeholder for the current selected connector ID\nExample: ConnectorID = #CONNECTOR_ID# ") },
+             { SQL_TEMPLATE_ID.CONVEYED_ITEM_IDS,
+                new SqlTemplate("CONVEDYED_ITEM_IDS",
+                    "#CONVEYED_ITEM_IDS#",
+                    "Placeholder for the current conveyed item IDs as comma separated list\nExample: elementID in (#CONVEYED_ITEM_IDS#)") },
             { SQL_TEMPLATE_ID.PACKAGE_ID,
                 new SqlTemplate("PACKAGE_ID", 
                     "#Package#",
@@ -175,7 +183,41 @@ namespace hoTools.Utils.SQL
             { SQL_TEMPLATE_ID.AUTHOR,
                 new SqlTemplate("Author",
                     "#Author(not implemented)#",
-                    "Author, Takes the name from the 'Author' field in the 'Options' dialog 'General' page.") }
+                    "Author, Takes the name from the 'Author' field in the 'Options' dialog 'General' page.") },
+            { SQL_TEMPLATE_ID.DB_OTHER,
+                new SqlTemplate("DB_OTHER",
+                    "#DB_OTHER#                             #DB_OTHER#",
+                    "The SQL string for other DBs included by #DB_OTHER#, #DB_OTHER#     ...my db_other sql....#DB_OTHER#") },
+            { SQL_TEMPLATE_ID.DB_MYSQL,
+               new SqlTemplate("DB_MYSQL",
+                    "#DB_MYSQL#                             #DB_MYSQL#",
+                    "The SQL string for other DBs included by #DB_MYSQL#, #DB_MYSQL#     ...my db sql....#DB_MYSQL#") },
+            { SQL_TEMPLATE_ID.DB_JET,
+                new SqlTemplate("DB_JET",
+                    "#DB_JET#                             #DB_JET#",
+                    "The SQL string for other DBs included by #DB_JET#, #DB_JET#     ...my db sql....#DB_JET#") },
+            { SQL_TEMPLATE_ID.DB_ORACLE,
+                new SqlTemplate("DB_ORACLE",
+                    "#DB_ORACLE#                             #DB_ORACLE#",
+                    "The SQL string for other DBs included by #DB_ORACLE#, #DB_ORACLE#     ...my db sql....#DB_ORACLE#") },
+            { SQL_TEMPLATE_ID.DB_SQLSVR,
+                new SqlTemplate("DB_SQLSVR",
+                    "#DB_SQLSVR#                             #DB_SQLSVR#",
+                    "The SQL string for other DBs included by #DB_SQLSVR#, #DB_SQLSVR#     ...my db sql....#DB_SQLSVR#") },
+            { SQL_TEMPLATE_ID.DB_ASA,
+                new SqlTemplate("DB_ASA",
+                    "#DB_ASA#                             #DB_ASA#",
+                    "The SQL string for other DBs included by #DB_ASA#, #DB_ASA#     ...my db sql....#DB_ASA#") },
+                        { SQL_TEMPLATE_ID.DB_OTHER,
+                new SqlTemplate("DB_POSTGRES",
+                    "#DB_POSTGRES#                             #DB_POSTGRES#",
+                    "The SQL string for other DBs included by #DB_POSTGRES#, #DB_POSTGRES#     ...my db sql....#DB_POSTGRES#") },
+            { SQL_TEMPLATE_ID.DB_OPENEDGE,
+                new SqlTemplate("DB_OPENEDGE",
+                    "#DB_OPENEDGE#                             #DB_OPENEDGE#",
+                    "The SQL string for other DBs included by #DB_OPENEDGE#, #DB_OPENEDGE#     ...my db sql....#DB_OPENEDGE#") }
+
+
         };
         #endregion
         #region public Enum SQL_TEMPLATE_ID
@@ -184,6 +226,15 @@ namespace hoTools.Utils.SQL
         /// </summary>
         public enum SQL_TEMPLATE_ID
         {
+            DB_OTHER,           // Macros for special DBs
+            DB_ORACLE,
+            DB_ASA,
+            DB_SQLSVR,
+            DB_MYSQL,
+            DB_POSTGRES,
+            DB_FIREBIRD,
+            DB_JET,
+            DB_OPENEDGE,
             MACROS_HELP,        // Help to macros
             ELEMENT_TEMPLATE,
             ELEMENT_TYPE_TEMPLATE,
@@ -194,6 +245,8 @@ namespace hoTools.Utils.SQL
             ATTRIBUTE_TEMPLATE,
             OPERATION_TEMPLATE,
             SEARCH_TERM,
+            CONNECTOR_ID,   // Get's the connector
+            CONVEYED_ITEM_IDS, // Get's the conveyed Items of the connector as a comma separated ID list of elementIDs
             PACKAGE_ID,
             BRANCH_IDS,     // Package (nested, recursive) ids separated by ','  like '20,21,47,1'
             IN_BRANCH_IDS,  // Package (nested, recursive), complete SQL in clause, ids separated by ','  like 'IN (20,21,47,1)', just a shortcut for #BRANCH_ID#
@@ -281,7 +334,6 @@ namespace hoTools.Utils.SQL
 
         }
 
-
         /// <summary>
         /// Replace Macro by value. Possible Macros are: Search Term, ID, GUID, Package ID, Branch ID,... 
         /// </summary>
@@ -365,14 +417,45 @@ namespace hoTools.Utils.SQL
                 }
                 sql = sql.Replace(currentPackageTemplate, $"{id}");
             }
-            // Branch=comma separated Package IDs, Recursive:
-            // Example for 3 Packages with their PackageID 7,29,128
-            // 7,29,128
-            //
-            // Branch: complete SQL IN statement ' IN (comma separated Package IDs, Recursive):
-            // IN (7,29,128)
-             
-            string currentBranchTemplate = getTemplateText(SQL_TEMPLATE_ID.BRANCH_IDS);
+            // CONNECTOR ID
+            // CONVEYED_ITEM_ID
+            string currentConnectorTemplate = getTemplateText(SQL_TEMPLATE_ID.CONNECTOR_ID);
+            //string currentDLinkTemplate = getTemplateText(SQL_TEMPLATE_ID.DLINK_ID);
+            string currentConveyedItemTemplate = getTemplateText(SQL_TEMPLATE_ID.CONVEYED_ITEM_IDS);
+            // connector
+            if (rep.GetContextItemType() == EA.ObjectType.otConnector)
+            {
+                // connector ID
+                if (sql.Contains(currentConnectorTemplate))
+                {
+                    int id = rep.GetContextObject();
+                    sql = sql.Replace(currentConnectorTemplate, $"{id}");
+                }
+                // conveyed items are a comma separated list of elementIDs
+                if (sql.Contains(currentConveyedItemTemplate))
+                {
+                    var con = (EA.Connector)rep.GetContextObject();
+                    string s = "";
+                    string del = "";
+                    foreach (EA.Element el in con.ConveyedItems)
+                    {
+                        s = s + del + el.ElementID;
+                        del = ", ";
+                    }
+                    sql = sql.Replace(currentConnectorTemplate, $"{s}");
+                }
+            }
+               
+
+
+                // Branch=comma separated Package IDs, Recursive:
+                // Example for 3 Packages with their PackageID 7,29,128
+                // 7,29,128
+                //
+                // Branch: complete SQL IN statement ' IN (comma separated Package IDs, Recursive):
+                // IN (7,29,128)
+
+                string currentBranchTemplate = getTemplateText(SQL_TEMPLATE_ID.BRANCH_IDS);
             string currrentInBranchTemplate = getTemplateText(SQL_TEMPLATE_ID.IN_BRANCH_IDS);
             if (sql.Contains(currentBranchTemplate) | sql.Contains(currrentInBranchTemplate))
             {
