@@ -74,10 +74,13 @@ namespace hoTools.Settings
         /// </summary>
         public void save()
         {
-            for (int i = 0; i < _openFileCount;i++)
+            int maxOpenFileCount = _openFileCount;
+            if (_lSqlLastOpenedFilesCfg.Count > maxOpenFileCount) maxOpenFileCount = _lSqlLastOpenedFilesCfg.Count;
+            for (int i = 0; i < maxOpenFileCount; i++)
             {
                 string key = $"{SQL_LAST_OPENED_FILE_CFG_STRING}{i + 1}";
                 string value = "";
+                // store the opened files
                 if (i < _lSqlLastOpenedFilesCfg.Count)
                 {
                     HistoryFile f = _lSqlLastOpenedFilesCfg[i];
