@@ -208,14 +208,18 @@ namespace hoTools.Utils.SQL
                 new SqlTemplate("DB_ASA",
                     "#DB_ASA#                             #DB_ASA#",
                     "The SQL string for other DBs included by #DB_ASA#, #DB_ASA#     ...my db sql....#DB_ASA#") },
-                        { SQL_TEMPLATE_ID.DB_OTHER,
+            { SQL_TEMPLATE_ID.DB_POSTGRES,
                 new SqlTemplate("DB_POSTGRES",
                     "#DB_POSTGRES#                             #DB_POSTGRES#",
                     "The SQL string for other DBs included by #DB_POSTGRES#, #DB_POSTGRES#     ...my db sql....#DB_POSTGRES#") },
             { SQL_TEMPLATE_ID.DB_OPENEDGE,
                 new SqlTemplate("DB_OPENEDGE",
                     "#DB_OPENEDGE#                             #DB_OPENEDGE#",
-                    "The SQL string for other DBs included by #DB_OPENEDGE#, #DB_OPENEDGE#     ...my db sql....#DB_OPENEDGE#") }
+                    "The SQL string for other DBs included by #DB_OPENEDGE#, #DB_OPENEDGE#     ...my db sql....#DB_OPENEDGE#") },
+             { SQL_TEMPLATE_ID.DB_FIREBIRD,
+                new SqlTemplate("DB_FIREBIRD",
+                    "#DB_FIREBIRD#                             #DB_FIREBIRD#",
+                    "The SQL string for other DBs included by #DB_FIREBIRD#, #DB_FIREBIRD#     ...my db sql....#DB_FIREBIRD#") }
 
 
         };
@@ -310,7 +314,7 @@ namespace hoTools.Utils.SQL
                 return template.ToolTip;
             }
             else {
-                MessageBox.Show("ID={templateID}", "Invalid templateID");
+                MessageBox.Show($"ID={templateID.ToString()}", "Invalid templateID");
                 return null;
             }
 
@@ -343,8 +347,11 @@ namespace hoTools.Utils.SQL
         /// <returns></returns>
         public static string replaceMacro(Repository rep, string sqlString, string searchTerm)
         {
+            // delete Comments
+            string sql = deleteC_Comments(sqlString);
+
             // <Search Term>
-            string sql = sqlString.Replace(getTemplateText(SQL_TEMPLATE_ID.SEARCH_TERM), searchTerm);
+            sql = sql.Replace(getTemplateText(SQL_TEMPLATE_ID.SEARCH_TERM), searchTerm);
 
 
             // replace ID
@@ -368,7 +375,17 @@ namespace hoTools.Utils.SQL
                         id = pkg.PackageID;
                         break;
                 }
-                sql = sql.Replace(currentIdTemplate, $"{id}");
+                
+                if (id > 0)
+                {
+                    sql = sql.Replace(currentIdTemplate, $"{id}");
+                }
+                else
+                // no diagram, element or package selected
+                {
+                    MessageBox.Show(sql, $"No element, diagram or package selected!");
+                }
+
             }
             // replace GUID
             // replace ID
@@ -392,7 +409,15 @@ namespace hoTools.Utils.SQL
                         guid = pkg.PackageGUID;
                         break;
                 }
-                sql = sql.Replace(currentGuidTemplate, guid);
+                if (guid != "")
+                {
+                    sql = sql.Replace(currentGuidTemplate, guid);
+                }
+                else
+                // no diagram, element or package selected
+                {
+                    MessageBox.Show(sql, $"No element, diagram or package selected!");
+                }
             }
             // Package ID
             string currentPackageTemplate = getTemplateText(SQL_TEMPLATE_ID.PACKAGE_ID);
@@ -415,47 +440,62 @@ namespace hoTools.Utils.SQL
                         id = pkg.PackageID;
                         break;
                 }
-                sql = sql.Replace(currentPackageTemplate, $"{id}");
+                if (id >  0)
+                {
+                    sql = sql.Replace(currentPackageTemplate, $"{id}");
+                } else
+                // no diagram, element or package selected
+                {
+                    MessageBox.Show(sql, $"No element, diagram or package selected!");
+                }
+
             }
+            //--------------------------------------------------------------------------------------------
             // CONNECTOR ID
             // CONVEYED_ITEM_ID
             string currentConnectorTemplate = getTemplateText(SQL_TEMPLATE_ID.CONNECTOR_ID);
-            //string currentDLinkTemplate = getTemplateText(SQL_TEMPLATE_ID.DLINK_ID);
             string currentConveyedItemTemplate = getTemplateText(SQL_TEMPLATE_ID.CONVEYED_ITEM_IDS);
-            // connector
-            if (rep.GetContextItemType() == EA.ObjectType.otConnector)
+
+            if ((sql.Contains(currentConnectorTemplate) | sql.Contains(currentConveyedItemTemplate)))
             {
-                // connector ID
-                if (sql.Contains(currentConnectorTemplate))
+                // connector
+                if (rep.GetContextItemType() == EA.ObjectType.otConnector)
                 {
-                    int id = rep.GetContextObject();
-                    sql = sql.Replace(currentConnectorTemplate, $"{id}");
-                }
-                // conveyed items are a comma separated list of elementIDs
-                if (sql.Contains(currentConveyedItemTemplate))
-                {
-                    var con = (EA.Connector)rep.GetContextObject();
-                    string s = "";
-                    string del = "";
-                    foreach (EA.Element el in con.ConveyedItems)
+                    // connector ID
+                    EA.Connector con = rep.GetContextObject();
+                    if (sql.Contains(currentConnectorTemplate))
                     {
-                        s = s + del + el.ElementID;
-                        del = ", ";
+                        
+                        sql = sql.Replace(currentConnectorTemplate, $"{con.ConnectorID}");
                     }
-                    sql = sql.Replace(currentConnectorTemplate, $"{s}");
+                    // conveyed items are a comma separated list of elementIDs
+                    if (sql.Contains(currentConveyedItemTemplate))
+                    {
+                        string s = "";
+                        string del = "";
+                        foreach (EA.Element el in con.ConveyedItems)
+                        {
+                            s = s + del + el.ElementID;
+                            del = ", ";
+                        }
+                        sql = sql.Replace(currentConveyedItemTemplate, $"{s}");
+                    }
+                } else
+                // no connector selected
+                {
+                    MessageBox.Show(sql, $"No connector selected!");
                 }
             }
                
 
 
-                // Branch=comma separated Package IDs, Recursive:
-                // Example for 3 Packages with their PackageID 7,29,128
-                // 7,29,128
-                //
-                // Branch: complete SQL IN statement ' IN (comma separated Package IDs, Recursive):
-                // IN (7,29,128)
-
-                string currentBranchTemplate = getTemplateText(SQL_TEMPLATE_ID.BRANCH_IDS);
+            // Branch=comma separated Package IDs, Recursive:
+            // Example for 3 Packages with their PackageID 7,29,128
+            // 7,29,128
+            //
+            // Branch: complete SQL IN statement ' IN (comma separated Package IDs, Recursive):
+            // IN (7,29,128)
+            string currentBranchTemplate = getTemplateText(SQL_TEMPLATE_ID.BRANCH_IDS);
             string currrentInBranchTemplate = getTemplateText(SQL_TEMPLATE_ID.IN_BRANCH_IDS);
             if (sql.Contains(currentBranchTemplate) | sql.Contains(currrentInBranchTemplate))
             {
@@ -484,6 +524,10 @@ namespace hoTools.Utils.SQL
                     string branch = Package.getBranch(rep, "", id);
                     sql = sql.Replace(currentBranchTemplate, branch);
                     sql = sql.Replace(currrentInBranchTemplate, branch);
+                } else
+                // no diagram, element or package selected
+                {
+                    MessageBox.Show(sql, $"No element, diagram or package selected!");
                 }
             }
             // Replace #WC# (DB wile card)
@@ -494,9 +538,8 @@ namespace hoTools.Utils.SQL
                 sql = sql.Replace(currentTemplate, "*"); 
             }
 
-
-            // delete Comments
-            return deleteC_Comments(sql);
+            return sql;
+            
              
         }
         #region deleteC_Comments 

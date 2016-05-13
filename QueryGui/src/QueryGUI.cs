@@ -514,25 +514,58 @@ namespace hoTools.Query
         }
 
         /// <summary>
-        /// Draw a 'x' in the tabPage at the end of the caption (Close Tab)
+        /// Draw all the Tab after change of TAB (focus, text,.. changed)
+        /// <para/>
+        /// If active than change TAB properties for easier seeing the active tab
+        /// <para/>
+        /// Draw an 'x' in the tabPage at the end of the caption (Close Tab)
         /// Set property DrawMode to 'OwnerDrawFixed'
         /// Note: Extend the 'Text' Property by 3 blanks to get space for the extra 'x'
         ///       Use a non proportional font like courier new
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-         void tabControlSql_DrawItem(object sender, DrawItemEventArgs e)
+        void tabControlSql_DrawItem(object sender, DrawItemEventArgs e)
         {
             // Draw a Rectangle with the background color
             Rectangle closeButton = new Rectangle(e.Bounds.Right + CLOSE_BUTTON_RECTANGLE_RIGHT_X,
-                                                  e.Bounds.Top + CLOSE_BUTTON_RECTANGLE_TOP_Y, 
-                                                  CLOSE_BUTTON_RECTANGLE_WIDTH, 
+                                                  e.Bounds.Top + CLOSE_BUTTON_RECTANGLE_TOP_Y,
+                                                  CLOSE_BUTTON_RECTANGLE_WIDTH,
                                                   CLOSE_BUTTON_RECTANGLE_HIGHT);
-            e.Graphics.FillRectangle(new SolidBrush(SystemColors.ControlDark), closeButton);
-            e.Graphics.DrawString("X", e.Font, Brushes.Black, e.Bounds.Right -15 , e.Bounds.Top + 4);
-            e.Graphics.DrawString(tabControlSql.TabPages[e.Index].Text, e.Font, Brushes.Black, e.Bounds.Left + 12, e.Bounds.Top + 4);
+            
+            // Output Close simulated button
+            if (e.Index == tabControlSql.SelectedIndex)
+            {   // selected Tab
+                //change background color
+                e = new DrawItemEventArgs(e.Graphics,
+                                e.Font,
+                                e.Bounds,
+                                e.Index,
+                                e.State ^ DrawItemState.Selected,
+                                e.ForeColor,
+                                Color.LightGray);//Choose the color
+                e.DrawBackground();
+                e.Graphics.DrawString(tabControlSql.TabPages[e.Index].Text, e.Font, Brushes.Black, e.Bounds.Left + 12, e.Bounds.Top + 4);
+                //e.DrawFocusRectangle();
+                e.Graphics.FillRectangle(new SolidBrush(SystemColors.ActiveCaption), closeButton);
+                e.Graphics.DrawString("X", e.Font, Brushes.Red, e.Bounds.Right - 15, e.Bounds.Top + 4);
 
+                // Draw the background of the ListBox control for each item.
+
+            }
+
+            else
+            {   // not selected tab
+                // output TAB Caption
+                e.Graphics.DrawString(tabControlSql.TabPages[e.Index].Text, e.Font, Brushes.Black, e.Bounds.Left + 12, e.Bounds.Top + 4);
+                e.Graphics.FillRectangle(new SolidBrush(SystemColors.InactiveCaption), closeButton);
+                e.Graphics.DrawString("X", e.Font, Brushes.Black, e.Bounds.Right - 15, e.Bounds.Top + 4); }
+
+            
+            // If the TAB has focus, draw a focus rectangle around the selected item.
             e.DrawFocusRectangle();
+    
+
         }
 
         /// <summary>

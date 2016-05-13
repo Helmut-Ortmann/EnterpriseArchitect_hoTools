@@ -65,6 +65,7 @@ namespace hoTools.Settings
 
                 }
             }
+            // only needed to ensure unique file names
             loadedFiles = null;
         }
         /// <summary>

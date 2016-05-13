@@ -25,6 +25,9 @@ namespace hoTools.Query
 
         // delegate to call update page from a different thread (SqlFile)
         public delegate void UpdatePageFromFile(TabPage tabPage, string fileNameChanged, bool notUpdateLastOpenedList);
+        /// <summary>
+        /// Delegate to update TAB Page
+        /// </summary>
         public UpdatePageFromFile UpdatePageDelegate;
 
         public AddinSettings Settings { get; }
@@ -78,6 +81,7 @@ namespace hoTools.Query
             _fileNewTabAndLoadRecentFileItem = fileNewTabAndLoadRecentFileItem;
             _fileLoadRecentFileItem = fileLoadRecentFileItem;
 
+            // Set Function to update Tab Page
             UpdatePageDelegate = new UpdatePageFromFile(loadTabPageFromFile);
 
             loadOpenedTabsLastSession();
@@ -104,7 +108,7 @@ namespace hoTools.Query
         }
 
         /// <summary>
-        /// Add a tab to the tab control a load content into the tab
+        /// Add a tab to the tab control and load content into the tab
         /// </summary>
         /// <param name="content">Content of the Tab</param>
         /// <returns></returns>
@@ -115,7 +119,7 @@ namespace hoTools.Query
             return tabPage;
         }
         /// <summary>
-        /// Add a tab to the tab control
+        /// Add a tab empty Tab to the tab control
         /// </summary>
         /// <returns></returns>
         public TabPage addTab()
@@ -235,63 +239,63 @@ namespace hoTools.Query
 
             // Insert Macro
             ToolStripMenuItem insertMacroSearchTermMenuItem = new ToolStripMenuItem();
-            insertMacroSearchTermMenuItem.Text = "Insert " + SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.SEARCH_TERM);
+            insertMacroSearchTermMenuItem.Text = "Insert " + SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.SEARCH_TERM);
             insertMacroSearchTermMenuItem.ToolTipText = SqlTemplates.getTooltip(SqlTemplates.SQL_TEMPLATE_ID.SEARCH_TERM);
             insertMacroSearchTermMenuItem.Tag = SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.SEARCH_TERM);
             insertMacroSearchTermMenuItem.Click += new System.EventHandler(insertTemplate_Click);
 
             // Insert Package
             ToolStripMenuItem insertPackageMenuItem = new ToolStripMenuItem();
-            insertPackageMenuItem.Text = "Insert " + SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.PACKAGE_ID);
+            insertPackageMenuItem.Text = "Insert " + SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.PACKAGE_ID);
             insertPackageMenuItem.ToolTipText = SqlTemplates.getTooltip(SqlTemplates.SQL_TEMPLATE_ID.PACKAGE_ID);
             insertPackageMenuItem.Tag = SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.PACKAGE_ID);
             insertPackageMenuItem.Click += new System.EventHandler(insertTemplate_Click);
 
             // Insert Branch
             ToolStripMenuItem insertBranchMenuItem = new ToolStripMenuItem();
-            insertBranchMenuItem.Text = "Insert " + SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.BRANCH_IDS); 
+            insertBranchMenuItem.Text = "Insert " + SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.BRANCH_IDS); 
             insertBranchMenuItem.ToolTipText = SqlTemplates.getTooltip(SqlTemplates.SQL_TEMPLATE_ID.BRANCH_IDS);
             insertBranchMenuItem.Tag = SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.BRANCH_IDS);
             insertBranchMenuItem.Click += new System.EventHandler(insertTemplate_Click);
 
             // Insert InBranch
             ToolStripMenuItem insertInBranchMenuItem = new ToolStripMenuItem();
-            insertInBranchMenuItem.Text = "Insert " + SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.IN_BRANCH_IDS);
+            insertInBranchMenuItem.Text = "Insert " + SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.IN_BRANCH_IDS);
             insertInBranchMenuItem.ToolTipText = SqlTemplates.getTooltip(SqlTemplates.SQL_TEMPLATE_ID.IN_BRANCH_IDS);
             insertInBranchMenuItem.Tag = SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.IN_BRANCH_IDS);
             insertInBranchMenuItem.Click += new System.EventHandler(insertTemplate_Click);
 
             // Insert CurrentID
             ToolStripMenuItem insertCurrentIdMenuItem = new ToolStripMenuItem();
-            insertCurrentIdMenuItem.Text = "Insert " + SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.CURRENT_ITEM_ID);
+            insertCurrentIdMenuItem.Text = "Insert " + SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.CURRENT_ITEM_ID);
             insertCurrentIdMenuItem.ToolTipText = SqlTemplates.getTooltip(SqlTemplates.SQL_TEMPLATE_ID.CURRENT_ITEM_ID);
             insertCurrentIdMenuItem.Tag = SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.CURRENT_ITEM_ID);
             insertCurrentIdMenuItem.Click += new System.EventHandler(insertTemplate_Click);
 
             // Insert CurrentGUID
             ToolStripMenuItem insertCurrentGuidMenuItem = new ToolStripMenuItem();
-            insertCurrentGuidMenuItem.Text = "Insert " + SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.CURRENT_ITEM_GUID);
+            insertCurrentGuidMenuItem.Text = "Insert " + SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.CURRENT_ITEM_GUID);
             insertCurrentGuidMenuItem.ToolTipText = SqlTemplates.getTooltip(SqlTemplates.SQL_TEMPLATE_ID.CURRENT_ITEM_GUID);
             insertCurrentGuidMenuItem.Tag = SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.CURRENT_ITEM_GUID);
             insertCurrentGuidMenuItem.Click += new System.EventHandler(insertTemplate_Click);
 
             // Insert ConnectorID
             ToolStripMenuItem insertConnectorIdMenuItem = new ToolStripMenuItem();
-            insertCurrentIdMenuItem.Text = "Insert " + SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.CONNECTOR_ID);
-            insertCurrentIdMenuItem.ToolTipText = SqlTemplates.getTooltip(SqlTemplates.SQL_TEMPLATE_ID.CONNECTOR_ID);
-            insertCurrentIdMenuItem.Tag = SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.CONNECTOR_ID);
-            insertCurrentIdMenuItem.Click += new System.EventHandler(insertTemplate_Click);
+            insertConnectorIdMenuItem.Text = "Insert " + SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.CONNECTOR_ID);
+            insertConnectorIdMenuItem.ToolTipText = SqlTemplates.getTooltip(SqlTemplates.SQL_TEMPLATE_ID.CONNECTOR_ID);
+            insertConnectorIdMenuItem.Tag = SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.CONNECTOR_ID);
+            insertConnectorIdMenuItem.Click += new System.EventHandler(insertTemplate_Click);
 
             // Insert Conveyed Item IDs
             ToolStripMenuItem insertConveyedItemIdsMenuItem = new ToolStripMenuItem();
-            insertCurrentIdMenuItem.Text = "Insert " + SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.CONVEYED_ITEM_IDS);
-            insertCurrentIdMenuItem.ToolTipText = SqlTemplates.getTooltip(SqlTemplates.SQL_TEMPLATE_ID.CONVEYED_ITEM_IDS);
-            insertCurrentIdMenuItem.Tag = SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.CONVEYED_ITEM_IDS);
-            insertCurrentIdMenuItem.Click += new System.EventHandler(insertTemplate_Click);
+            insertConveyedItemIdsMenuItem.Text = "Insert " + SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.CONVEYED_ITEM_IDS);
+            insertConveyedItemIdsMenuItem.ToolTipText = SqlTemplates.getTooltip(SqlTemplates.SQL_TEMPLATE_ID.CONVEYED_ITEM_IDS);
+            insertConveyedItemIdsMenuItem.Tag = SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.CONVEYED_ITEM_IDS);
+            insertConveyedItemIdsMenuItem.Click += new System.EventHandler(insertTemplate_Click);
 
             // Insert #WC#
             ToolStripMenuItem insertWcMenuItem = new ToolStripMenuItem();
-            insertWcMenuItem.Text = "Insert #CurrentElementGUID#";
+            insertWcMenuItem.Text = "Insert "+ SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.WC);
             insertWcMenuItem.ToolTipText = SqlTemplates.getTooltip(SqlTemplates.SQL_TEMPLATE_ID.WC);
             insertWcMenuItem.Tag = SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.WC);
             insertWcMenuItem.Click += new System.EventHandler(insertTemplate_Click);
@@ -326,7 +330,8 @@ namespace hoTools.Query
             // Insert Element Template
             ToolStripMenuItem insertElementTemplateMenuItem = new ToolStripMenuItem();
             insertElementTemplateMenuItem.Text = "Insert Element Template";
-            insertElementTemplateMenuItem.ToolTipText = SqlTemplates.getTooltip(SqlTemplates.SQL_TEMPLATE_ID.ELEMENT_TEMPLATE);
+            var id = SqlTemplates.SQL_TEMPLATE_ID.ELEMENT_TEMPLATE;
+            insertElementTemplateMenuItem.ToolTipText = SqlTemplates.getTooltip(id);
             insertElementTemplateMenuItem.Tag = SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.ELEMENT_TEMPLATE);
             insertElementTemplateMenuItem.Click += new System.EventHandler(insertTemplate_Click);
 
