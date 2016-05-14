@@ -184,10 +184,6 @@ namespace hoTools.Utils.SQL
                 new SqlTemplate("Author",
                     "#Author(not implemented)#",
                     "Author, Takes the name from the 'Author' field in the 'Options' dialog 'General' page.") },
-            { SQL_TEMPLATE_ID.DB_OTHER,
-                new SqlTemplate("DB_OTHER",
-                    "#DB_OTHER#                             #DB_OTHER#",
-                    "The SQL string for other DBs included by #DB_OTHER#, #DB_OTHER#     ...my db_other sql....#DB_OTHER#") },
             { SQL_TEMPLATE_ID.DB_MYSQL,
                new SqlTemplate("DB_MYSQL",
                     "#DB_MYSQL#                             #DB_MYSQL#",
@@ -212,10 +208,10 @@ namespace hoTools.Utils.SQL
                 new SqlTemplate("DB_POSTGRES",
                     "#DB_POSTGRES#                             #DB_POSTGRES#",
                     "The SQL string for other DBs included by #DB_POSTGRES#, #DB_POSTGRES#     ...my db sql....#DB_POSTGRES#") },
-            { SQL_TEMPLATE_ID.DB_OPENEDGE,
-                new SqlTemplate("DB_OPENEDGE",
-                    "#DB_OPENEDGE#                             #DB_OPENEDGE#",
-                    "The SQL string for other DBs included by #DB_OPENEDGE#, #DB_OPENEDGE#     ...my db sql....#DB_OPENEDGE#") },
+            { SQL_TEMPLATE_ID.DB_ACCESS2007,
+                new SqlTemplate("DB_ACCESS2007",
+                    "#DB_ACCESS2007#                             #DB_ACCESS2007#",
+                    "The SQL string for other DBs included by #DB_ACCESS2007#, #DB_ACCESS2007#     ...my db sql....#DB_ACCESS2007#") },
              { SQL_TEMPLATE_ID.DB_FIREBIRD,
                 new SqlTemplate("DB_FIREBIRD",
                     "#DB_FIREBIRD#                             #DB_FIREBIRD#",
@@ -231,6 +227,7 @@ namespace hoTools.Utils.SQL
         public enum SQL_TEMPLATE_ID
         {
             DB_OTHER,           // Macros for special DBs
+            DB_ACCESS2007,
             DB_ORACLE,
             DB_ASA,
             DB_SQLSVR,
@@ -238,7 +235,6 @@ namespace hoTools.Utils.SQL
             DB_POSTGRES,
             DB_FIREBIRD,
             DB_JET,
-            DB_OPENEDGE,
             MACROS_HELP,        // Help to macros
             ELEMENT_TEMPLATE,
             ELEMENT_TYPE_TEMPLATE,

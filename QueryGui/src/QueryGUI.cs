@@ -58,7 +58,9 @@ namespace hoTools.Query
 
         #region Constructor
         /// <summary>
-        /// Constructor QueryGUI. Constructor make the basic initialization. The real initialization is done after Setting the Repository
+        /// Constructor QueryGUI. Constructor make the basic initialization. 
+        /// The real initialization is done after Setting the Repository in setter of property:
+        /// 'Repository'
         /// </summary>
         public QueryGUI()
         {

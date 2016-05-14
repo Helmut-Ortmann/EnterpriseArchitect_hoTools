@@ -33,13 +33,12 @@ CTRL+SHFT+S             Store sql All
 #InBranch#              Selected Package, Replaced by nested recursive as comma separated list of PackageIDs  like 'IN (13,14,15)'
 #Package#               Selected Package, Replaced by Package ID
 #WC#                    Wild card, you can also simple use * (will automatically replaced by the DB specific wild card)
+#DB_ACCESS2007#         DB specif SQL for ACCESS2007
 #DB_ASA#                DB specif SQL for ASA
 #DB_FIREBIRD#           DB specif SQL for FIREBIRD
 #DB_JET#                DB specif SQL for JET
 #DB_MYSQL#              DB specif SQL for My SQL
-#DB_OPENEDGE#           DB specif SQL for OPENEDGE
 #DB_ORACLE#             DB specif SQL for Oracle
-#DB_OTHER#              DB specif SQL for not mentioned DB
 #DB_POSTGRES#           DB specif SQL for POSTGRES
 #DB_SQLSVR#             DB specif SQL for SQL Server
 ";
@@ -194,7 +193,7 @@ CTRL+SHFT+S             Store sql All
 
             // New TabPage
             ToolStripMenuItem _newTabMenuItem = new ToolStripMenuItem();
-            _newTabMenuItem.Text = "New Tab (CTRL+N)";
+            _newTabMenuItem.Text = "New Tab ";
             _newTabMenuItem.Click += addTabMenuItem_Click;
 
             // Close TabPage
@@ -421,12 +420,12 @@ CTRL+SHFT+S             Store sql All
             ToolStripMenuItem insertDBTemplateMenuItem = new ToolStripMenuItem();
             insertDBTemplateMenuItem.Text = "Insert DB dependent";
 
-            // DB Other
-            ToolStripMenuItem insertDBOtherTemplateMenuItem = new ToolStripMenuItem();
-            insertDBOtherTemplateMenuItem.Text = "Other";
-            insertDBOtherTemplateMenuItem.ToolTipText = SqlTemplates.getTooltip(SqlTemplates.SQL_TEMPLATE_ID.DB_OTHER);
-            insertDBOtherTemplateMenuItem.Tag = SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.DB_OTHER);
-            insertDBOtherTemplateMenuItem.Click += new System.EventHandler(insertTemplate_Click);
+            // DB ACESS7007
+            ToolStripMenuItem insertDBACCESS2007TemplateMenuItem = new ToolStripMenuItem();
+            insertDBACCESS2007TemplateMenuItem.Text = "ACCESS2007";
+            insertDBACCESS2007TemplateMenuItem.ToolTipText = SqlTemplates.getTooltip(SqlTemplates.SQL_TEMPLATE_ID.DB_ACCESS2007);
+            insertDBACCESS2007TemplateMenuItem.Tag = SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.DB_ACCESS2007);
+            insertDBACCESS2007TemplateMenuItem.Click += new System.EventHandler(insertTemplate_Click);
 
             // DB ASA
             ToolStripMenuItem insertDBAsaTemplateMenuItem = new ToolStripMenuItem();
@@ -456,13 +455,6 @@ CTRL+SHFT+S             Store sql All
             insertDBMySQLTemplateMenuItem.Tag = SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.DB_MYSQL);
             insertDBMySQLTemplateMenuItem.Click += new System.EventHandler(insertTemplate_Click);
 
-            // DB OpenEdge
-            ToolStripMenuItem insertDBOpenEdgeTemplateMenuItem = new ToolStripMenuItem();
-            insertDBOpenEdgeTemplateMenuItem.Text = "OPENEDG";
-            insertDBOpenEdgeTemplateMenuItem.ToolTipText = SqlTemplates.getTooltip(SqlTemplates.SQL_TEMPLATE_ID.DB_OPENEDGE);
-            insertDBOpenEdgeTemplateMenuItem.Tag = SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.DB_OPENEDGE);
-            insertDBOpenEdgeTemplateMenuItem.Click += new System.EventHandler(insertTemplate_Click);
-
             // DB Oracle
             ToolStripMenuItem insertDBOracleTemplateMenuItem = new ToolStripMenuItem();
             insertDBOracleTemplateMenuItem.Text = "ORACLE";
@@ -488,9 +480,9 @@ CTRL+SHFT+S             Store sql All
             insertDBTemplateMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             insertDBJetTemplateMenuItem,
                 insertDBAsaTemplateMenuItem,
+                insertDBACCESS2007TemplateMenuItem,
                 insertDBFirebirdTemplateMenuItem,
                 insertDBMySQLTemplateMenuItem,
-                insertDBOpenEdgeTemplateMenuItem,
                 insertDBOracleTemplateMenuItem,
                 insertDBPostgresTemplateMenuItem,
                 insertDBSqlServerTemplateMenuItem

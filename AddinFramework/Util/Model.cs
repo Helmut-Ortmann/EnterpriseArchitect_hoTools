@@ -6,6 +6,7 @@ using System.Runtime.InteropServices;
 using System.Xml;
 using System.Xml.Linq;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 using hoTools.Utils.SQL;
 
@@ -496,6 +497,7 @@ namespace EAAddinFramework.Utils
             sqlQuery = replaceSQLWildCards(sqlQuery);
             sqlQuery = formatSQLTop(sqlQuery);
             sqlQuery = formatSQLFunctions(sqlQuery);
+            sqlQuery = formatSQLDBspecific(sqlQuery); // DB specifics like #DB_ORACLE#.... #DB_ORACLE#
             return sqlQuery;
         }
 
@@ -584,6 +586,49 @@ namespace EAAddinFramework.Utils
             }
             return formattedQuery;
         }
+        /// <summary>
+        /// Format DB specific by removing unnecessary DB specific string parts.
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <returns></returns>
+        //#DB_ASA#                DB specif SQL for ASA
+        //#DB_FIREBIRD#           DB specif SQL for FIREBIRD
+        //#DB_JET#                DB specif SQL for JET
+        //#DB_MYSQL#              DB specif SQL for My SQL
+        //#DB_ACCESS2007#         DB specif SQL for ACCESS2007
+        //#DB_ORACLE#             DB specif SQL for Oracle
+        //#DB_POSTGRES#           DB specif SQL for POSTGRES
+        //#DB_SQLSVR#             DB specif SQL for SQL Server
+        string formatSQLDBspecific(string sql) {
+            // available DBs
+            var dbs = new Dictionary<RepositoryType, string>()
+            {
+                { RepositoryType.ACCESS2007, "#DB=ACCESS007" },
+                { RepositoryType.ASA, "#DB=ASA#" },
+                { RepositoryType.FIREBIRD, "#DB=FIREBIRD#" },
+                { RepositoryType.ADOJET, "#DB=JET#" },
+                { RepositoryType.MYSQL, "#DB=MYSQL#" },
+                { RepositoryType.ORACLE, "#DB=ORACLE#" },
+                { RepositoryType.POSTGRES, "#DB_POSTGRES#" },
+                { RepositoryType.SQLSVR, "#DB_SQLSVR#" },
+            };
+            RepositoryType dbType = getRepositoryType();
+            string s = sql;
+            foreach (var curDb in dbs )
+            {
+                if (curDb.Key != dbType)
+                {   // delete not used DBs
+                    string delete = $"{curDb.Value}.*?{curDb.Value}";
+                    s = Regex.Replace(s, delete, "", RegexOptions.Multiline | RegexOptions.IgnoreCase);
+                }
+                
+            }
+            // delete remaining DB identifying string
+            s = Regex.Replace(s, @"#DB_[ASA|FIREBIRD|JET|MYSQL|ORACLE|ACCESS2007|POSTGRES|SQLSVR]#", "", RegexOptions.Multiline | RegexOptions.IgnoreCase);
+            return s;
+        }
+
+
         /// <summary>
         /// replace the wild cards in the given sql query string to match either MSAccess or ANSI syntax
         /// </summary>

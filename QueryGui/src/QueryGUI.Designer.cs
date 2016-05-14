@@ -50,6 +50,7 @@ namespace hoTools.Query
             this.lblTitle = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadTabCTRLLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadTabFromToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.newTabToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -72,7 +73,6 @@ namespace hoTools.Query
             this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
             this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
-            this.loadTabCTRLLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewScripts)).BeginInit();
             this.contextMenuStripDataGrid.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -87,7 +87,7 @@ namespace hoTools.Query
             // 
             // txtSearchTerm
             // 
-            this.txtSearchTerm.Location = new System.Drawing.Point(259, 3);
+            this.txtSearchTerm.Location = new System.Drawing.Point(167, 3);
             this.txtSearchTerm.Name = "txtSearchTerm";
             this.txtSearchTerm.Size = new System.Drawing.Size(223, 20);
             this.txtSearchTerm.TabIndex = 7;
@@ -217,7 +217,7 @@ namespace hoTools.Query
             // btnUndo
             // 
             this.btnUndo.Image = global::hoTools.Query.Properties.Resources.icon_undo_h;
-            this.btnUndo.Location = new System.Drawing.Point(184, 3);
+            this.btnUndo.Location = new System.Drawing.Point(92, 3);
             this.btnUndo.Name = "btnUndo";
             this.btnUndo.Size = new System.Drawing.Size(32, 23);
             this.btnUndo.TabIndex = 9;
@@ -228,7 +228,7 @@ namespace hoTools.Query
             // btnRedo
             // 
             this.btnRedo.Image = global::hoTools.Query.Properties.Resources.icon_redo_h;
-            this.btnRedo.Location = new System.Drawing.Point(222, 3);
+            this.btnRedo.Location = new System.Drawing.Point(130, 3);
             this.btnRedo.Name = "btnRedo";
             this.btnRedo.Size = new System.Drawing.Size(31, 23);
             this.btnRedo.TabIndex = 11;
@@ -250,7 +250,7 @@ namespace hoTools.Query
             // 
             this.lblTitle.AutoSize = true;
             this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitle.Location = new System.Drawing.Point(488, 0);
+            this.lblTitle.Location = new System.Drawing.Point(396, 0);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(196, 25);
             this.lblTitle.TabIndex = 1;
@@ -264,7 +264,7 @@ namespace hoTools.Query
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(181, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(89, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -289,6 +289,13 @@ namespace hoTools.Query
             this.fileToolStripMenuItem.Text = "&File";
             this.fileToolStripMenuItem.ToolTipText = "Create a new Tab from recent *.sql files";
             // 
+            // loadTabCTRLLToolStripMenuItem
+            // 
+            this.loadTabCTRLLToolStripMenuItem.Name = "loadTabCTRLLToolStripMenuItem";
+            this.loadTabCTRLLToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
+            this.loadTabCTRLLToolStripMenuItem.Text = "&Load Tab (CTRL+L)";
+            this.loadTabCTRLLToolStripMenuItem.Click += new System.EventHandler(this.loadTabCTRLLToolStripMenuItem_Click);
+            // 
             // loadTabFromToolStripMenuItem
             // 
             this.loadTabFromToolStripMenuItem.Name = "loadTabFromToolStripMenuItem";
@@ -305,7 +312,7 @@ namespace hoTools.Query
             // 
             this.newTabToolStripMenuItem.Name = "newTabToolStripMenuItem";
             this.newTabToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
-            this.newTabToolStripMenuItem.Text = "&NewTab (CTRL+N)";
+            this.newTabToolStripMenuItem.Text = "&NewTab ";
             this.newTabToolStripMenuItem.ToolTipText = "New empty tab";
             this.newTabToolStripMenuItem.Click += new System.EventHandler(this.FileNewTabToolStripMenuItem_Click);
             // 
@@ -476,13 +483,6 @@ namespace hoTools.Query
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
             this.flowLayoutPanel2.Size = new System.Drawing.Size(769, 25);
             this.flowLayoutPanel2.TabIndex = 11;
-            // 
-            // loadTabCTRLLToolStripMenuItem
-            // 
-            this.loadTabCTRLLToolStripMenuItem.Name = "loadTabCTRLLToolStripMenuItem";
-            this.loadTabCTRLLToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
-            this.loadTabCTRLLToolStripMenuItem.Text = "&Load Tab (CTRL+L)";
-            this.loadTabCTRLLToolStripMenuItem.Click += new System.EventHandler(this.loadTabCTRLLToolStripMenuItem_Click);
             // 
             // QueryGUI
             // 
