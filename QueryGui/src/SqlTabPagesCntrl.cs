@@ -19,9 +19,10 @@ namespace hoTools.Query
     public class SqlTabPagesCntrl
     {
         const string SQL_TEXT_BOX_TOOLTIP =
-@"CTRL+R                Run sql
-CTRL+S                  Store
-CTRL+SHFT+S             Store All
+@"CTRL+L                Load sql from File
+CTRL+R                  Run sql
+CTRL+S                  Store sql
+CTRL+SHFT+S             Store sql All
 \\ Comment              Just your comment as you may know from C, Java, C#,..
 <Search Term>           Replaced by Text from the Search Text
 #Branch#                Selected Package, Replaced by nested recursive as comma separated list of PackageIDs            
@@ -128,11 +129,11 @@ CTRL+SHFT+S             Store All
         public TabPage addTab(string content)
         {
             TabPage tabPage = addTab();
-            loadTabPage(tabPage, content);
+            loadTabPage(content);
             return tabPage;
         }
         /// <summary>
-        /// Add a tab empty Tab to the tab control
+        /// Add a tab empty Tab to the tab control and load the element template
         /// </summary>
         /// <returns></returns>
         public TabPage addTab()
@@ -148,10 +149,13 @@ CTRL+SHFT+S             Store All
             tabPage.ToolTipText = sqlFile.FullName;
             _tabControl.SelectTab(tabPage);
 
+
             //-----------------------------------------------------------------
             // Tab with ContextMenuStrip
             // Create a text box in TabPage for the SQL string
             var sqlTextBox = new TextBoxUndo(tabPage);
+            // load element template
+            sqlTextBox.Text = SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.ELEMENT_TEMPLATE);
 
             // register CTRL+S (store SQL) and CTRL+R (run SQL)
             sqlTextBox.KeyUp += sqlTextBox_KeyUp;
@@ -170,38 +174,38 @@ CTRL+SHFT+S             Store All
 
             // Load sql File into TabPage
             ToolStripMenuItem _loadTabMenuItem = new ToolStripMenuItem();
-            _loadTabMenuItem.Text = "Load File";
-            _loadTabMenuItem.Click += new System.EventHandler(this.fileLoadMenuItem_Click);
+            _loadTabMenuItem.Text = "Load File (CTRL+L)";
+            _loadTabMenuItem.Click += fileLoadMenuItem_Click;
 
             // Save sql File from TabPage
             ToolStripMenuItem fileSaveMenuItem = new ToolStripMenuItem();
             fileSaveMenuItem.Text = "Save File (CTRL+S)";
-            fileSaveMenuItem.Click += new System.EventHandler(this.fileSaveMenuItem_Click);
+            fileSaveMenuItem.Click += fileSaveMenuItem_Click;
 
             // Save all sql files 
             ToolStripMenuItem fileSaveAllMenuItem = new ToolStripMenuItem();
             fileSaveAllMenuItem.Text = "Save All File (CTRL+SHFT+S)";
-            fileSaveAllMenuItem.Click += new System.EventHandler(this.fileSaveMenuItem_Click);
+            fileSaveAllMenuItem.Click += fileSaveMenuItem_Click;
 
             // Save As sql File from TabPage
             ToolStripMenuItem fileSaveAsMenuItem = new ToolStripMenuItem();
             fileSaveAsMenuItem.Text = "Save File As..";
-            fileSaveAsMenuItem.Click += new System.EventHandler(this.fileSaveAsMenuItem_Click);
+            fileSaveAsMenuItem.Click += fileSaveAsMenuItem_Click;
 
             // New TabPage
             ToolStripMenuItem _newTabMenuItem = new ToolStripMenuItem();
-            _newTabMenuItem.Text = "New Tab";
-            _newTabMenuItem.Click += new System.EventHandler(this.addTabMenuItem_Click);
+            _newTabMenuItem.Text = "New Tab (CTRL+N)";
+            _newTabMenuItem.Click += addTabMenuItem_Click;
 
             // Close TabPage
             ToolStripMenuItem closeMenuItem = new ToolStripMenuItem();
             closeMenuItem.Text = "Close Tab";
-            closeMenuItem.Click += new System.EventHandler(this.closeMenuItem_Click);
+            closeMenuItem.Click += closeMenuItem_Click;
 
             // Run sql File 
             ToolStripMenuItem fileRunMenuItem = new ToolStripMenuItem();
             fileRunMenuItem.Text = "Run sql (CTRL+R)";
-            fileRunMenuItem.Click += new System.EventHandler(this.fileRunMenuItem_Click);
+            fileRunMenuItem.Click += fileRunMenuItem_Click;
 
 
             //------------------------------------------------------------------------------------------------------------------
@@ -638,14 +642,18 @@ CTRL+SHFT+S             Store All
             }
         }
         /// <summary>
-        /// Load file for tab Page
+        /// Load string for tab Page
         /// </summary>
-        /// <param name="tabPage"></param>
         /// <param name="tabContent">What do load in Tab</param>
-        public void loadTabPage(TabPage tabPage, string tabContent)
+        public void loadTabPage(string tabContent)
         {
-                TextBox textBox = (TextBox)tabPage.Controls[0];
-                textBox.Text = tabContent;
+            // get TabPage
+            if (_tabControl.SelectedIndex < 0) return;
+            TabPage tabPage = _tabControl.TabPages[_tabControl.SelectedIndex];
+            TextBoxUndo textBox = (TextBoxUndo)tabPage.Controls[0];
+            textBox.Text = tabContent;
+   
+            
         }
 
 
@@ -776,15 +784,8 @@ CTRL+SHFT+S             Store All
         /// <param name="e"></param>
         void fileLoadMenuItem_Click(object sender, EventArgs e)
         {
-            // get TabPage
-            if (_tabControl.SelectedIndex < 0) return;
-            TabPage tabPage = _tabControl.TabPages[_tabControl.SelectedIndex];
-
+            loadTabPagePerFileDialog();
             
-
-            loadTabPagePerFileDialog(tabPage);
-            tabPage.ToolTipText = ((SqlFile)tabPage.Tag).FullName;
-            tabPage.Text = ((SqlFile)tabPage.Tag).DisplayName;
 
         }
         /// <summary>
@@ -794,14 +795,7 @@ CTRL+SHFT+S             Store All
         /// <param name="e"></param>
          void addTabMenuItem_Click(object sender, EventArgs e)
         {
-            // get TabPage
-            if (_tabControl.SelectedIndex < 0) return;
-            TabPage tabPage = _tabControl.TabPages[_tabControl.SelectedIndex];
-
-            // get TextBox
-            var textBox = (TextBoxUndo)tabPage.Controls[0];
-
-            addTab(SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.ELEMENT_TEMPLATE));
+            addTab();
 
 
         }
@@ -823,12 +817,15 @@ CTRL+SHFT+S             Store All
 
 
         /// <summary>
-        /// Load sql string from *.sql File into TabPage with TextBox inside.
+        /// Load sql string from *.sql File into active TabPage with TextBox inside.
         /// <para/>- Update and save the list of sql files 
         /// </summary>
-        /// <param name="tabPage"></param>
-        void loadTabPagePerFileDialog(TabPage tabPage)
+        public void loadTabPagePerFileDialog()
         {
+            // get TabPage
+            if (_tabControl.SelectedIndex < 0) return;
+            TabPage tabPage = _tabControl.TabPages[_tabControl.SelectedIndex];
+
             OpenFileDialog openFileDialog = new OpenFileDialog();
 
             openFileDialog.InitialDirectory = @"c:\temp\sql";
@@ -865,6 +862,9 @@ CTRL+SHFT+S             Store All
                     
                 }
             }
+            // update Tab Caption
+            tabPage.ToolTipText = ((SqlFile)tabPage.Tag).FullName;
+            tabPage.Text = ((SqlFile)tabPage.Tag).DisplayName;
 
         }
         /// <summary>
@@ -874,7 +874,7 @@ CTRL+SHFT+S             Store All
         void reLoadTabPage(TabPage tabPage)
         {
             SqlFile sqlFile = (SqlFile)tabPage.Tag;
-            loadTabPage(tabPage, sqlFile.FullName);
+            loadTabPageFromFile(tabPage, sqlFile.FullName);
 
 
         }
@@ -1094,12 +1094,36 @@ CTRL+SHFT+S             Store All
         /// <param name="e"></param>
         void sqlTextBox_KeyUp(object sender, KeyEventArgs e)
         {
+            // New Tab, add tab
+            if (e.KeyData == (Keys.Control | Keys.N))
+            {
+
+                loadTabPagePerFileDialog();
+                e.Handled = true;
+                return;
+            }
+            // Load Tab from File
+            if (e.KeyData == (Keys.Control | Keys.L))
+            {
+
+                loadTabPagePerFileDialog();
+                e.Handled = true;
+                return;
+            }
 
             // store SQL
             if (e.KeyData == (Keys.Control | Keys.S))
             {
                 
                 save();
+                e.Handled = true;
+                return;
+            }
+            // store All SQL
+            if (e.KeyData == (Keys.Control | Keys.Shift| Keys.S))
+            {
+
+                saveAll();
                 e.Handled = true;
                 return;
             }

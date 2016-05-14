@@ -12,14 +12,73 @@ namespace hoTools.Utils.SQL
     /// </summary>
     public static class SqlError
     {
+        const string DBERROR_FILE_NAME = "dberror.txt";
+        const string hoTools_SQL_FILE_NAME = "hoTools_LastSql.sql";
+
         #region getEaSqlErrorFilePatch
+        /// <summary>
+        /// Get the error string which EA stores.
+        /// </summary>
+        /// <returns>Error message + SQL the error is based on</returns>
         public static string getEaSqlErrorFilePath()
         {
-            string appData = Environment.GetEnvironmentVariable("appdata");
-            string filePath = appData + @"\Sparx Systems\EA\dberror.txt";
-            return filePath;
+            string path = getEaSqlErrorPath();
+            return Path.Combine(path, DBERROR_FILE_NAME);
         }
         #endregion
+        #region getHoToolsSqlFilePath
+        /// <summary>
+        /// Get the sql string which is sent to EA.
+        /// </summary>
+        /// <returns>The SQL sent to EA</returns>
+        public static string getHoToolsSqlFilePath()
+        {
+            string path = getEaSqlErrorPath();
+            return Path.Combine(path, hoTools_SQL_FILE_NAME);
+        }
+        #endregion
+        #region writeEaSqlFile
+        /// <summary>
+        /// Writes the sql-file before sending it to EA.
+        /// </summary>
+        public static void writeEaSqlFile(string sql)
+        {
+            string path = getHoToolsSqlFilePath();
+            try
+            {
+                File.WriteAllText(path, sql);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.ToString(),$"Error writing file '{path}'");
+            }
+        }
+        #endregion
+        #region readEaSqlFile
+        /// <summary>
+        /// Read the sql-file before it was sent to EA.
+        /// </summary>
+        /// <returns>The SQL sent to EA</returns>
+        public static string readEaSqlFile()
+        {
+            string path = getHoToolsSqlFilePath();
+            try
+            {
+                return File.ReadAllText(path);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.ToString(), $"Error writing file '{path}'");
+                return "";
+            }
+        }
+        #endregion
+
+        public static string getEaSqlErrorPath()
+        {
+            return Environment.GetEnvironmentVariable("appdata") + @"\Sparx Systems\EA";
+
+        }
 
         #region getEaSqlError
         /// <summary>

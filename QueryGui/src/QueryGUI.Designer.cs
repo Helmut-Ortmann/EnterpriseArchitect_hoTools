@@ -66,11 +66,13 @@ namespace hoTools.Query
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.lastsqlErrorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lastSqlStringSentToEAToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnRunSql = new System.Windows.Forms.Button();
             this.splitContainer = new System.Windows.Forms.SplitContainer();
             this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
             this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+            this.loadTabCTRLLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewScripts)).BeginInit();
             this.contextMenuStripDataGrid.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -269,6 +271,7 @@ namespace hoTools.Query
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.loadTabCTRLLToolStripMenuItem,
             this.loadTabFromToolStripMenuItem,
             this.toolStripSeparator2,
             this.newTabToolStripMenuItem,
@@ -290,7 +293,7 @@ namespace hoTools.Query
             // 
             this.loadTabFromToolStripMenuItem.Name = "loadTabFromToolStripMenuItem";
             this.loadTabFromToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
-            this.loadTabFromToolStripMenuItem.Text = "Load Tab from...";
+            this.loadTabFromToolStripMenuItem.Text = "Load Tab from...  ";
             this.loadTabFromToolStripMenuItem.ToolTipText = "Load current Tab from recent file.";
             // 
             // toolStripSeparator2
@@ -302,7 +305,7 @@ namespace hoTools.Query
             // 
             this.newTabToolStripMenuItem.Name = "newTabToolStripMenuItem";
             this.newTabToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
-            this.newTabToolStripMenuItem.Text = "&NewTab";
+            this.newTabToolStripMenuItem.Text = "&NewTab (CTRL+N)";
             this.newTabToolStripMenuItem.ToolTipText = "New empty tab";
             this.newTabToolStripMenuItem.Click += new System.EventHandler(this.FileNewTabToolStripMenuItem_Click);
             // 
@@ -334,7 +337,7 @@ namespace hoTools.Query
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
-            this.saveToolStripMenuItem.Text = "Save (CTRL+S)";
+            this.saveToolStripMenuItem.Text = "&Save (CTRL+S)";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveSqlTabToolStripMenuItem_Click);
             // 
             // saveAsToolStripMenuItem
@@ -370,7 +373,8 @@ namespace hoTools.Query
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.aboutToolStripMenuItem,
             this.helpToolStripMenuItem1,
-            this.lastsqlErrorToolStripMenuItem});
+            this.lastsqlErrorToolStripMenuItem,
+            this.lastSqlStringSentToEAToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "&Help";
@@ -378,24 +382,33 @@ namespace hoTools.Query
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
             this.aboutToolStripMenuItem.Text = "&About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem1
             // 
             this.helpToolStripMenuItem1.Name = "helpToolStripMenuItem1";
-            this.helpToolStripMenuItem1.Size = new System.Drawing.Size(141, 22);
+            this.helpToolStripMenuItem1.Size = new System.Drawing.Size(202, 22);
             this.helpToolStripMenuItem1.Text = "&Help";
             this.helpToolStripMenuItem1.Click += new System.EventHandler(this.helpToolStripMenuItem1_Click);
             // 
             // lastsqlErrorToolStripMenuItem
             // 
             this.lastsqlErrorToolStripMenuItem.Name = "lastsqlErrorToolStripMenuItem";
-            this.lastsqlErrorToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.lastsqlErrorToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
             this.lastsqlErrorToolStripMenuItem.Text = "Last &sql error";
             this.lastsqlErrorToolStripMenuItem.ToolTipText = "Get the last EA sql error from %APPDATA%Sparx Systems\\EA\\DBError.txt";
             this.lastsqlErrorToolStripMenuItem.Click += new System.EventHandler(this.showSqlErrorToolStripMenuItem_Click);
+            // 
+            // lastSqlStringSentToEAToolStripMenuItem
+            // 
+            this.lastSqlStringSentToEAToolStripMenuItem.Name = "lastSqlStringSentToEAToolStripMenuItem";
+            this.lastSqlStringSentToEAToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
+            this.lastSqlStringSentToEAToolStripMenuItem.Text = "Last sql string sent to EA";
+            this.lastSqlStringSentToEAToolStripMenuItem.ToolTipText = "Get the last sql string sent by hoTools Query\r\nto EA.\r\n%APPDATA%Sparx Systems\\EA\\" +
+    "hoTools_LastSql.sql";
+            this.lastSqlStringSentToEAToolStripMenuItem.Click += new System.EventHandler(this.lastSqlStringSentToEAToolStripMenuItem_Click);
             // 
             // btnRunSql
             // 
@@ -464,6 +477,13 @@ namespace hoTools.Query
             this.flowLayoutPanel2.Size = new System.Drawing.Size(769, 25);
             this.flowLayoutPanel2.TabIndex = 11;
             // 
+            // loadTabCTRLLToolStripMenuItem
+            // 
+            this.loadTabCTRLLToolStripMenuItem.Name = "loadTabCTRLLToolStripMenuItem";
+            this.loadTabCTRLLToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
+            this.loadTabCTRLLToolStripMenuItem.Text = "&Load Tab (CTRL+L)";
+            this.loadTabCTRLLToolStripMenuItem.Click += new System.EventHandler(this.loadTabCTRLLToolStripMenuItem_Click);
+            // 
             // QueryGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -530,5 +550,7 @@ namespace hoTools.Query
         private System.Windows.Forms.ToolStripMenuItem saveAllToolStripMenuItem;
         private System.Windows.Forms.Button btnUndo;
         private System.Windows.Forms.Button btnRedo;
+        private System.Windows.Forms.ToolStripMenuItem lastSqlStringSentToEAToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem loadTabCTRLLToolStripMenuItem;
     }
 }

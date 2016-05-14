@@ -292,6 +292,9 @@ namespace EAAddinFramework.Utils
         public string SQLQueryNative(string sqlQuery)
         {
             sqlQuery = formatSQL(sqlQuery);
+            // store final query which is executed
+            SqlError.writeEaSqlFile(sqlQuery);
+
             return Repository.SQLQuery(sqlQuery);// no error, only no result rows
         }
 

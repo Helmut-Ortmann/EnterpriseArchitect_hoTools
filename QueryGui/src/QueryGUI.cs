@@ -486,18 +486,7 @@ namespace hoTools.Query
        
 
         
-         void showSqlErrorToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            string filePath = SqlError.getEaSqlErrorFilePath();
-            try
-            {
-                Process.Start(filePath);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"No SQL Error?\n\n{ex.Message}\nFile:'{filePath}'", $"Can't open EA SQL Error file dberror.txt");
-            }
-        }
+
 
        
 
@@ -510,7 +499,7 @@ namespace hoTools.Query
 
          void FileNewTabToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            _sqlTabCntrls.addTab(SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.ELEMENT_TEMPLATE));
+            _sqlTabCntrls.addTab();
         }
 
         /// <summary>
@@ -746,5 +735,59 @@ namespace hoTools.Query
             _sqlTabCntrls.RedoText();
         }
         #endregion
+
+
+        #region Start File
+        /// <summary>
+        /// Start file
+        /// </summary>
+        /// <param name="filePath"></param>
+        static void StartFile(string filePath)
+        {
+            try
+            {
+                // start file with the program defined in Windows for this file
+                Process.Start(filePath);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}\n\nFile:'{filePath}'", $"Can't open file {Path.GetFileName(filePath)}");
+            }
+        }
+        #endregion
+
+
+        /// <summary>
+        /// Output the last EA SQL error
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void showSqlErrorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            StartFile(SqlError.getEaSqlErrorFilePath());
+        }
+
+        
+
+        /// <summary>
+        /// Output the last from hoTools Query sent sql string to EA
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void lastSqlStringSentToEAToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            StartFile(SqlError.getHoToolsSqlFilePath());
+           
+        }
+
+        /// <summary>
+        /// CTRL+L Load TabPage from File
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void loadTabCTRLLToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _sqlTabCntrls.loadTabPagePerFileDialog();
+        }
     }
 }
