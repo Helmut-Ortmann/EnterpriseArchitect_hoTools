@@ -391,7 +391,7 @@ namespace hoTools.Query
                     tabPageSql.Text = Path.GetFileName(saveFileDialog.FileName);
 
                     // store the complete filename
-                    AddinSettings.sqlFiles.insert(saveFileDialog.FileName);
+                    AddinSettings.historySqlFiles.insert(saveFileDialog.FileName);
                     AddinSettings.save();
                 }
             }
@@ -426,7 +426,7 @@ namespace hoTools.Query
                     tabPageSql.Text = Path.GetFileName(openFileDialog.FileName);
 
                     // store the complete filename
-                    AddinSettings.sqlFiles.insert(openFileDialog.FileName);
+                    AddinSettings.historySqlFiles.insert(openFileDialog.FileName);
                     AddinSettings.save();
                     tabPageSql.Text = Path.GetFileName(openFileDialog.FileName) + " ";
                 }
@@ -644,9 +644,7 @@ namespace hoTools.Query
 
         void saveSqlTabToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (tabControlSql.SelectedIndex == -1) return;
-            TabPage tabPage = tabControlSql.TabPages[tabControlSql.SelectedIndex];
-            _sqlTabCntrls.save(tabPage);
+            _sqlTabCntrls.save();
         }
 
         void saveSqlTabAsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -662,9 +660,9 @@ namespace hoTools.Query
         }
 
 
-        #region Key down
+        #region Key down & Enter
         /// <summary>
-        /// Overrides TextBox to handle the enter key. Per default it isn't passed
+        /// Overrides TextBox 'IsInputKey' to handle the enter key. Per default it isn't passed
         /// </summary>
         public class EnterTextBox : TextBox
         {

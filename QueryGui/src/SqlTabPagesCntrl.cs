@@ -18,6 +18,31 @@ namespace hoTools.Query
     /// </summary>
     public class SqlTabPagesCntrl
     {
+        const string SQL_TEXT_BOX_TOOLTIP =
+@"CTRL+R                Run sql
+CTRL+S                  Store
+CTRL+SHFT+S             Store All
+\\ Comment              Just your comment as you may know from C, Java, C#,..
+<Search Term>           Replaced by Text from the Search Text
+#Branch#                Selected Package, Replaced by nested recursive as comma separated list of PackageIDs            
+#CONNECTOR_ID#          Selected Connector, Replaced by ConnectorID
+#CONVEYED_ITEM_IDS#     Selected Connector, Replaced by the Conveyed Items as comma separated list of ElementIDs
+#CurrentElementGUID#    Selected Element, Diagram, Replaced by the GUID
+#CurrentElementID#      Selected Element, Diagram, Replaced by the ID
+#InBranch#              Selected Package, Replaced by nested recursive as comma separated list of PackageIDs  like 'IN (13,14,15)'
+#Package#               Selected Package, Replaced by Package ID
+#WC#                    Wild card, you can also simple use * (will automatically replaced by the DB specific wild card)
+#DB_ASA#                DB specif SQL for ASA
+#DB_FIREBIRD#           DB specif SQL for FIREBIRD
+#DB_JET#                DB specif SQL for JET
+#DB_MYSQL#              DB specif SQL for My SQL
+#DB_OPENEDGE#           DB specif SQL for OPENEDGE
+#DB_ORACLE#             DB specif SQL for Oracle
+#DB_OTHER#              DB specif SQL for not mentioned DB
+#DB_POSTGRES#           DB specif SQL for POSTGRES
+#DB_SQLSVR#             DB specif SQL for SQL Server
+";
+
         /// <summary>
         /// Setting with the file history.
         /// </summary>
@@ -37,7 +62,8 @@ namespace hoTools.Query
         TabControl _tabControl;
         TextBox _sqlTextBoxSearchTerm;
 
-        
+
+
         /// <summary>
         /// Reusable ToolStripMenuItem: File Menu: New Tab and Load Recent Files 
         /// </summary>
@@ -91,21 +117,8 @@ namespace hoTools.Query
 
         }
 
-        /// <summary>
-        /// Load all tabs which were opened in the last session
-        /// </summary>
-        void loadOpenedTabsLastSession()
-        {
-            // load last opened files into tab pages
-            foreach (HistoryFile lastOpenedFile in Settings.sqlLastOpenedFiles.lSqlLastOpenedFilesCfg)
-            {
-                if (lastOpenedFile.FullName.Trim() == "") continue;
-                TabPage tabPage = addTab();
-                // load 
-                loadTabPageFromFile(tabPage, lastOpenedFile.FullName, notUpdateLastOpenedList: true);
-
-            }
-        }
+        
+        
 
         /// <summary>
         /// Add a tab to the tab control and load content into the tab
@@ -140,7 +153,17 @@ namespace hoTools.Query
             // Create a text box in TabPage for the SQL string
             var sqlTextBox = new TextBoxUndo(tabPage);
 
+            // register CTRL+S (store SQL) and CTRL+R (run SQL)
+            sqlTextBox.KeyUp += sqlTextBox_KeyUp;
+            ToolTip toolTip = new ToolTip();
+            toolTip.IsBalloon = true;
+            toolTip.InitialDelay = 0;
+            toolTip.ShowAlways = true;
+            toolTip.SetToolTip(sqlTextBox, SQL_TEXT_BOX_TOOLTIP);
+
+
             tabPage.Controls.Add(sqlTextBox);
+
 
             // ContextMenu
             ContextMenuStrip tabPageContextMenuStrip = new ContextMenuStrip(_components);
@@ -152,8 +175,13 @@ namespace hoTools.Query
 
             // Save sql File from TabPage
             ToolStripMenuItem fileSaveMenuItem = new ToolStripMenuItem();
-            fileSaveMenuItem.Text = "Save File";
+            fileSaveMenuItem.Text = "Save File (CTRL+S)";
             fileSaveMenuItem.Click += new System.EventHandler(this.fileSaveMenuItem_Click);
+
+            // Save all sql files 
+            ToolStripMenuItem fileSaveAllMenuItem = new ToolStripMenuItem();
+            fileSaveAllMenuItem.Text = "Save All File (CTRL+SHFT+S)";
+            fileSaveAllMenuItem.Click += new System.EventHandler(this.fileSaveMenuItem_Click);
 
             // Save As sql File from TabPage
             ToolStripMenuItem fileSaveAsMenuItem = new ToolStripMenuItem();
@@ -172,7 +200,7 @@ namespace hoTools.Query
 
             // Run sql File 
             ToolStripMenuItem fileRunMenuItem = new ToolStripMenuItem();
-            fileRunMenuItem.Text = "Run sql";
+            fileRunMenuItem.Text = "Run sql (CTRL+R)";
             fileRunMenuItem.Click += new System.EventHandler(this.fileRunMenuItem_Click);
 
 
@@ -503,7 +531,7 @@ namespace hoTools.Query
             // delete all previous entries
             loadRecentFileStripMenuItem.DropDownItems.Clear();
             // over all history files
-            foreach (HistoryFile historyFile in Settings.sqlFiles.lSqlHistoryFilesCfg)
+            foreach (HistoryFile historyFile in Settings.historySqlFiles.lSqlHistoryFilesCfg)
             {
                 // ignore empty entries
                 if (historyFile.FullName == "") continue;
@@ -598,7 +626,7 @@ namespace hoTools.Query
                     tabPage.Text = sqlFile.DisplayName;
                     if (! notUpdateLastOpenedList)
                     {
-                        Settings.sqlLastOpenedFiles.insert(fileName);
+                        Settings.lastOpenedFiles.insert(fileName);
                         Settings.save();
                     }
                     
@@ -640,7 +668,7 @@ namespace hoTools.Query
             // Contend changed, need to be stored first
             if (sqlFile.IsChanged)
             {
-                Settings.sqlLastOpenedFiles.remove(sqlFile.FullName);
+                Settings.lastOpenedFiles.remove(sqlFile.FullName);
                 DialogResult result = MessageBox.Show($"Old File: '{sqlFile.FullName}'",
                     "First store old File? ", MessageBoxButtons.YesNoCancel);
                 if (result == DialogResult.Cancel) return;
@@ -717,11 +745,18 @@ namespace hoTools.Query
         /// <param name="e"></param>
         void fileSaveMenuItem_Click(object sender, EventArgs e)
         {
-            if (_tabControl.SelectedIndex < 0) return;
-            TabPage tabPage = _tabControl.TabPages[_tabControl.SelectedIndex];
-            save(tabPage);
+            save();
         }
-       
+        /// <summary>
+        /// Event File Save
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void fileSaveAllMenuItem_Click(object sender, EventArgs e)
+        {
+            saveAll();
+        }
+
         /// <summary>
         /// Save all unchanged Tabs. 
         /// </summary>
@@ -729,8 +764,9 @@ namespace hoTools.Query
         {
             foreach (TabPage tabPage in _tabControl.TabPages)
             {
-                save(tabPage);
+                save(tabPage,configSave: false);
             }
+            Settings.save();
         }
        
         /// <summary>
@@ -813,7 +849,7 @@ namespace hoTools.Query
                     tabPage.Text = Path.GetFileName(openFileDialog.FileName);
 
                     // store the complete filename in settings
-                    Settings.sqlFiles.insert(openFileDialog.FileName);
+                    InsertRecentFileLists(openFileDialog.FileName);
                     Settings.save();
 
                     // Store TabData in TabPage
@@ -871,9 +907,8 @@ namespace hoTools.Query
                     myStream.Close();
                     tabPage.Text = Path.GetFileName(saveFileDialog.FileName);
 
-                    // store the complete filename in settings
-                    Settings.sqlFiles.insert(saveFileDialog.FileName);
-                    Settings.save();
+                    // update files
+                    InsertRecentFileLists(saveFileDialog.FileName);
 
                     // Store TabData in TabPage
                     sqlFile.FullName = saveFileDialog.FileName;
@@ -882,12 +917,25 @@ namespace hoTools.Query
                     // set TabName
                     tabPage.Text = sqlFile.DisplayName;
                     tabPage.ToolTipText = ((SqlFile)tabPage.Tag).FullName;
-                    loadRecentFilesIntoToolStripItems();
-                    Settings.sqlLastOpenedFiles.insert(sqlFile.FullName);
+
+
                     Settings.save();
                 }
             }
         }
+
+        #region InsertRecentFilesList
+        /// <summary>
+        /// Insert recent file lists
+        /// <para/>- SqlFile
+        /// <para/>-OpenedTabs
+        /// </summary>
+        void InsertRecentFileLists(string fileName)
+        {
+            Settings.historySqlFiles.insert(fileName);
+            Settings.lastOpenedFiles.insert(fileName);
+        }
+        #endregion
         /// <summary>
         /// Update the following Menu Items with recent files:
         /// <para/>-File, Load Tab from..
@@ -909,10 +957,40 @@ namespace hoTools.Query
         }
 
         /// <summary>
+        /// Load all tabs which were opened in the last session
+        /// </summary>
+        void loadOpenedTabsLastSession()
+        {
+            // load last opened files into tab pages
+            foreach (HistoryFile lastOpenedFile in Settings.lastOpenedFiles.lSqlLastOpenedFilesCfg)
+            {
+                if (lastOpenedFile.FullName.Trim() == "") continue;
+                TabPage tabPage = addTab();
+                // load 
+                loadTabPageFromFile(tabPage, lastOpenedFile.FullName, notUpdateLastOpenedList: true);
+
+            }
+        }
+        #region save active Tab Page
+        /// <summary>
+        /// Save current active TabPage
+        /// </summary>
+        ///  <param name="configSave">Default: true, whether to store the configuration</param>
+        public void save(bool configSave = true)
+        {
+            if (_tabControl.SelectedIndex < 0) return;
+            TabPage tabPage = _tabControl.TabPages[_tabControl.SelectedIndex];
+            save(tabPage, configSave);
+        }
+        #endregion
+
+        #region Save Tab Page
+        /// <summary>
         /// Save sql TabPage in *.sql File.
         /// </summary>
         /// <param name="tabPage"></param>
-        public void save(TabPage tabPage)
+        ///  <param name="configSave">Default: true, whether to store the configuration</param>
+        void save(TabPage tabPage, bool configSave=true)
         {
             SqlFile sqlFile = (SqlFile)tabPage.Tag;
             if (! sqlFile.IsPersistant )
@@ -929,8 +1007,10 @@ namespace hoTools.Query
                     myStream.Write(textBox.Text);
                     myStream.Close();
                     sqlFile.IsChanged = false;
-                    Settings.sqlLastOpenedFiles.insert(sqlFile.FullName);
-                    Settings.save();
+                    // update history
+                    InsertRecentFileLists(sqlFile.FullName);
+                    // save configuration
+                    if (configSave) Settings.save();
 
 
                     // set TabName
@@ -942,6 +1022,7 @@ namespace hoTools.Query
                 return;
             }
         }
+        #endregion
 
         /// <summary>
         /// Close all Tab Pages
@@ -977,7 +1058,7 @@ namespace hoTools.Query
 
                 }
             }
-            Settings.sqlLastOpenedFiles.remove(sqlFile.FullName);
+            Settings.lastOpenedFiles.remove(sqlFile.FullName);
             Settings.save();
             _tabControl.TabPages.Remove(tabPage);
         }
@@ -1005,7 +1086,35 @@ namespace hoTools.Query
             runSqlTabPage();
         }
 
-        
+        #region Key up
+        /// <summary>
+        /// Handle CTRL sequences for CTRL+S (Store sql) and CTRL+R (RUN sql)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void sqlTextBox_KeyUp(object sender, KeyEventArgs e)
+        {
+
+            // store SQL
+            if (e.KeyData == (Keys.Control | Keys.S))
+            {
+                
+                save();
+                e.Handled = true;
+                return;
+            }
+            // run SQL
+            if (e.KeyData == (Keys.Control | Keys.R))
+            {
+                runSqlTabPage();
+                e.Handled = true;
+                return;
+            }
+
+        }
+        #endregion
+
+
 
     }
 }

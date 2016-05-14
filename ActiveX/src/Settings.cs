@@ -35,12 +35,12 @@ namespace hoTools.Settings
         /// <summary>
         /// List of history sql files (recent 20 used sql files)
         /// </summary>
-        public SqlHistoryFilesCfg sqlFiles { get; }
+        public SqlHistoryFilesCfg historySqlFiles { get; }
 
         /// <summary>
         /// List of 10 last opened sql files
         /// </summary>
-        public SqlLastOpenedFilesCfg sqlLastOpenedFiles { get; }
+        public SqlLastOpenedFilesCfg lastOpenedFiles { get; }
 
         // Configuration 5 button searches by key
         public EaAddinButtons[] buttonsSearch;
@@ -119,8 +119,8 @@ namespace hoTools.Settings
             getConnector(_logicalConnectors);
             getConnector(_activityConnectors);
             getAllServices();
-            sqlFiles = new SqlHistoryFilesCfg(_currentConfig);// history of sql files 
-            sqlLastOpenedFiles = new SqlLastOpenedFilesCfg(_currentConfig); // last opened files
+            historySqlFiles = new SqlHistoryFilesCfg(_currentConfig);// history of sql files 
+            lastOpenedFiles = new SqlLastOpenedFilesCfg(_currentConfig); // last opened files
 
             updateSearchesAndServices();
         }
@@ -891,8 +891,8 @@ namespace hoTools.Settings
 
                 setConnector(_logicalConnectors);
                 setConnector(_activityConnectors);
-                sqlFiles.save();
-                sqlLastOpenedFiles.save();
+                historySqlFiles.save();
+                lastOpenedFiles.save();
                 _currentConfig.Save();
                 _currentConfig.Save();
             }

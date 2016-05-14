@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace hoTools.Query
@@ -21,7 +18,7 @@ namespace hoTools.Query
         List<Item> LastData = new List<Item>();
         int undoCount = 0;
         bool undo;
-
+        
         #region Constructor
         /// <summary>
         /// Constructor
@@ -79,31 +76,34 @@ namespace hoTools.Query
                 undo = false;
         }
         #endregion
-        #region Override ProcessCmdKey
+
+        #region Key up
         /// <summary>
-        /// Override ProcessCmdKey. Handle CTRL+Z (undo) and CTRL+Y (redo).
-        /// <para/> Don't works in the context of EA!
+        /// Handle CTRL sequences for CTRL+Z (Undo) and CTRL+Y (Redo)
         /// </summary>
-        /// <param name="msg"></param>
-        /// <param name="keyData"></param>
-        /// <returns></returns>
-        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void text_KeyUp(object sender, KeyEventArgs e)
         {
             
-            if (keyData == (Keys.Control | Keys.Z))
-            {
-                UndoText();
-                return true;
-            }
-
-            if (keyData == (Keys.Control | Keys.Y))
+            if (e.KeyData == (Keys.Control | Keys.Z))
             {
                 RedoText();
-                return true;
+                e.Handled = true;
+                return;
             }
-            return base.ProcessCmdKey(ref msg, keyData);
+
+            if (e.KeyData == (Keys.Control | Keys.Y))
+            {
+                RedoText();
+                e.Handled = true;
+                return;
+            }
+
         }
         #endregion
+       
+       
 
         #region Event TextChanged
         /// <summary>
@@ -147,6 +147,8 @@ namespace hoTools.Query
             Dock = DockStyle.Fill;
 
             TextChanged += textBoxUndo_TextChanged;
+            KeyUp += text_KeyUp;  // handle CTRL+Z (Undo) and CTRL+Y (Redo)
+
         }
         #endregion
 

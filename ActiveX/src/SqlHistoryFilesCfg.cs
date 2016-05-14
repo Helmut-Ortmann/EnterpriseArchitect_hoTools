@@ -18,8 +18,8 @@ namespace hoTools.Settings
 
         readonly List<HistoryFile> _lSqlHistoryFilesCfg = new List<HistoryFile>();
 
-
-        int _lSqlFilesCfgLength;
+        // count of SqlFile in *.cfg files
+        const int SQL_FILE_COUNT = 20;
         Configuration _config;
 
         /// <summary>
@@ -61,10 +61,9 @@ namespace hoTools.Settings
                 }
             }
             loadedFiles = null;
-            _lSqlFilesCfgLength = _lSqlHistoryFilesCfg.Count;
         }
         /// <summary>
-        /// Save sql file names to configuration
+        /// Save history / recent sql file names to configuration
         /// </summary>
         public void save()
         {
@@ -76,7 +75,7 @@ namespace hoTools.Settings
                 _config.AppSettings.Settings[key].Value = f.FullName;
                 i = i + 1;
                 // stop if element length reached
-                if (i > _lSqlFilesCfgLength) break;
+                if (i > SQL_FILE_COUNT) break;
             }
         }
         /// <summary>
