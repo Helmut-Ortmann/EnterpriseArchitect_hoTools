@@ -235,6 +235,28 @@ namespace EAAddinFramework.Utils
             return escapedString;
         }
         /// <summary>
+        /// Run an SQL string and output the results in the EA Search Window
+        /// <para/>- replacement of macros
+        /// <para/>- run query
+        /// <para/>- format to output
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <param name="searchText">Search Text to replace 'Search Term' macro</param>
+        public void SQLRun(string sql, string searchText)
+        {
+            // replace templates
+            sql = SqlTemplates.replaceMacro(Repository, sql, searchText);
+            if (sql == "") return;
+
+            // run the query
+            string xml = SqlQueryWithException(sql);
+            if (xml == null) xml = ""; // error message already output
+
+            // output the query in EA Search Window
+            string target = MakeEaXmlOutput(xml);
+            Repository.RunModelSearch("", "", "", target);
+        }
+        /// <summary>
         /// EA SQL Query with:
         /// - formatSQL
         /// - runSQL

@@ -1204,7 +1204,7 @@ Search for:
 1. Select Element
 2. Click Button CI Connector (Conveyed Item Connector)
 3. EA outputs Search with Source Element of connector
-4. Right Click, Show Diagram
+4. Right Click, Find in Diagram
 5. EA Shows all Diagrams where the Source Element 
 6. Explore the diagrams
 
@@ -1240,7 +1240,7 @@ There is no interface to directly access the connector (as far as I'm aware of)<
 1. Select Connector
 2. Click Button CI Element (Conveyed Elements)
 3. EA outputs Search with Elements
-4. Right Click, Locate Element
+4. Right Click, Find in Project Browser
 
 There is no interface to directly select more than one Browser Element (as far as I'm aware off)
 </value>

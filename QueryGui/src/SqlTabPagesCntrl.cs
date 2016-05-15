@@ -1096,7 +1096,7 @@ CTRL+SHFT+S             Store sql All
 
             // get TextBox
             var textBox = (TextBox)tabPage.Controls[0];
-            GuiFunction.RunSql(_model, textBox.Text, _sqlTextBoxSearchTerm.Text);
+            _model.SQLRun(textBox.Text, _sqlTextBoxSearchTerm.Text);
             Cursor.Current = Cursors.Default;
         }
         #endregion

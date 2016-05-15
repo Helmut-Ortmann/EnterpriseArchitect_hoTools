@@ -107,24 +107,6 @@ namespace hoTools.Query
             }
 
         }
-
-        public static bool RunSql(Model model, string sql, string searchTerm)
-        {
-            // replace templates
-            sql = SqlTemplates.replaceMacro(model.Repository, sql, searchTerm);
-            if (sql == "") return false;
-
-            // run the query
-            string xml = model.SqlQueryWithException(sql);
-            if (xml == null) xml = ""; // error message already output
-           
-            // output the query in EA Search Window
-            string target = model.MakeEaXmlOutput(xml);
-            model.Repository.RunModelSearch("", "", "", target);
-            return true;
-        }
-
-
-        
+                       
     }
 }

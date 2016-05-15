@@ -1739,7 +1739,7 @@ namespace hoTools.ActiveX
             btnConveyedItemConnector.Visible = AddinSettings.isConveyedItemsSupport;
             btnConveyedItemElement.Visible = AddinSettings.isConveyedItemsSupport;
 
-            // Linestyle Panel
+            // Line style Panel
             panelLineStyle.Visible = AddinSettings.isLineStyleSupport;
 
             // no quick search defined
@@ -1928,7 +1928,6 @@ namespace hoTools.ActiveX
             EA.ObjectType type = Model.Repository.GetContextItemType();
             if (type == EA.ObjectType.otElement)
             {
-                EA.Element el = (EA.Element)Model.Repository.GetContextObject();
                 string sql = @"
                         select  s.ea_guid AS CLASSGUID, s.object_type AS CLASSTYPE, s.name As Source , d.name As Destination
                         from t_xref x,   // a lot of things like properties,..
@@ -1943,20 +1942,11 @@ namespace hoTools.ActiveX
                         and    c.ea_guid = x.client
                         and    c.start_object_id = s.object_id
                         and    c.end_object_id = d.object_id
+                        ORDER BY 3,4
                 ";
-                string searchText = "";
-                // replace templates
-                sql = SqlTemplates.replaceMacro(Model.Repository, sql, searchText);
-                if (sql == "") return;
-
-                // run the query
-                string xml = Model.SqlQueryWithException(sql);
-                if (xml == null) xml = ""; // error message already output
-
-                // output the query in EA Search Window
-                string target = Model.MakeEaXmlOutput(xml);
-                Model.Repository.RunModelSearch("", "", "", target);
-
+                // Run SQL with macro replacement
+                Model.SQLRun(sql, "");
+               
             } else
             {
                 MessageBox.Show("To get the connectors which convey Elements you have to select an Element.", "No Element is selected, break!!!");
@@ -1971,9 +1961,24 @@ namespace hoTools.ActiveX
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnConveyedItemElement_Click(object sender, EventArgs e)
+        void btnConveyedItemElement_Click(object sender, EventArgs e)
         {
+            EA.ObjectType type = Model.Repository.GetContextItemType();
+            if (type == EA.ObjectType.otConnector)
+            {
+                string sql = @"
+                        select  o.ea_guid AS CLASSGUID, o.object_type AS CLASSTYPE, o.name As Element
+                        from t_object o,
+                        where  o.element_id in ( #CONVEYED_ITEM_IDS# )
+                        ORDER BY 3
+                ";
+                // Run SQL with macro replacement
+                Model.SQLRun(sql, "");
 
-        }
+        } else
+            {
+                MessageBox.Show("To get the Elements on the Connector you have to select an Connector.", "No Connector is selected, break!!!");
+            }
+}
     }
 }
