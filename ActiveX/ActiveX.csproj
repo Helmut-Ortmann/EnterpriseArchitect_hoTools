@@ -122,11 +122,8 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="src\ActiveX.en.resx">
-      <DependentUpon>ActiveX.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="src\ActiveX.resx">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <DependentUpon>ActiveX.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="src\dlgUser.resx">
       <DependentUpon>dlgUser.cs</DependentUpon>
@@ -166,7 +163,7 @@
     <None Include="hoKeyPair.snk" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>

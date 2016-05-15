@@ -27,6 +27,7 @@ namespace hoTools.Settings
             chkShowServiceButtons.Checked = settings.isShowServiceButton;
             chkShowQueryButtons.Checked = settings.isShowQueryButton;
             chkFavoriteSupport.Checked = settings.isFavoriteSupport;
+            chkConveyedItemSupport.Checked = settings.isConveyedItemsSupport;
 
 
             txtQuickSearch.Text = settings.quickSearchName;
@@ -99,6 +100,7 @@ namespace hoTools.Settings
             _settings.isShowServiceButton = chkShowServiceButtons.Checked ;
             _settings.isShowQueryButton = chkShowQueryButtons.Checked;
             _settings.isFavoriteSupport = chkFavoriteSupport.Checked;
+            _settings.isConveyedItemsSupport = chkConveyedItemSupport.Checked;
 
             _settings.isSvnSupport = chkSvnSupport.Checked;
             _settings.isVcSupport = chkVcSupport.Checked;

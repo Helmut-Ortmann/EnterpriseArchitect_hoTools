@@ -150,7 +150,7 @@ c:\Program Files (x86)\totalcmd\TOTALCMD64.EXE
 
 Think if you have to change the %PATH% environment variable</value>
   </data>
-  <data name="chkConveyedItem.ToolTip" xml:space="preserve">
+  <data name="chkConveyedItemSupport.ToolTip" xml:space="preserve">
     <value>Buttons to support Conveyed Items on connectors like information flow:
 - Get Connector Items for selected connector
 - Get Connector for selected item

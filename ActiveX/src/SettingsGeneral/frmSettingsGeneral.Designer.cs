@@ -68,10 +68,10 @@
             this.chkAutoLoadMdgNo = new System.Windows.Forms.CheckBox();
             this.chkAutoLoadMdgCompilation = new System.Windows.Forms.CheckBox();
             this.chkAutoLoadMdgBasic = new System.Windows.Forms.CheckBox();
+            this.chkConveyedItemSupport = new System.Windows.Forms.CheckBox();
             this.label34 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.chkConveyedItem = new System.Windows.Forms.CheckBox();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -506,6 +506,18 @@
         "a\\Local\\Apps\\hoTools\\..");
             this.chkAutoLoadMdgBasic.UseVisualStyleBackColor = true;
             // 
+            // chkConveyedItemSupport
+            // 
+            this.chkConveyedItemSupport.AutoSize = true;
+            this.chkConveyedItemSupport.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkConveyedItemSupport.Location = new System.Drawing.Point(285, 112);
+            this.chkConveyedItemSupport.Name = "chkConveyedItemSupport";
+            this.chkConveyedItemSupport.Size = new System.Drawing.Size(187, 22);
+            this.chkConveyedItemSupport.TabIndex = 239;
+            this.chkConveyedItemSupport.Text = "Conveyed Items support";
+            this.toolTip1.SetToolTip(this.chkConveyedItemSupport, resources.GetString("chkConveyedItemSupport.ToolTip"));
+            this.chkConveyedItemSupport.UseVisualStyleBackColor = true;
+            // 
             // label34
             // 
             this.label34.AutoSize = true;
@@ -540,25 +552,13 @@
             this.label8.TabIndex = 237;
             this.label8.Text = "- Blank to hide it";
             // 
-            // chkConveyedItem
-            // 
-            this.chkConveyedItem.AutoSize = true;
-            this.chkConveyedItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkConveyedItem.Location = new System.Drawing.Point(285, 112);
-            this.chkConveyedItem.Name = "chkConveyedItem";
-            this.chkConveyedItem.Size = new System.Drawing.Size(187, 22);
-            this.chkConveyedItem.TabIndex = 239;
-            this.chkConveyedItem.Text = "Conveyed Items support";
-            this.toolTip1.SetToolTip(this.chkConveyedItem, resources.GetString("chkConveyedItem.ToolTip"));
-            this.chkConveyedItem.UseVisualStyleBackColor = true;
-            // 
             // FrmSettingsGeneral
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(844, 458);
-            this.Controls.Add(this.chkConveyedItem);
+            this.Controls.Add(this.chkConveyedItemSupport);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.chkFavoriteSupport);
@@ -646,6 +646,6 @@
         private System.Windows.Forms.CheckBox chkAutoLoadMdgNo;
         private System.Windows.Forms.CheckBox chkAutoLoadMdgCompilation;
         private System.Windows.Forms.CheckBox chkAutoLoadMdgBasic;
-        private System.Windows.Forms.CheckBox chkConveyedItem;
+        private System.Windows.Forms.CheckBox chkConveyedItemSupport;
     }
 }
