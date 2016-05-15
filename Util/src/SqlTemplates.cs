@@ -149,6 +149,10 @@ namespace hoTools.Utils.SQL
                 new SqlTemplate("CONVEDYED_ITEM_IDS",
                     "#CONVEYED_ITEM_IDS#",
                     "Placeholder for the current conveyed item IDs as comma separated list\nExample: elementID in (#CONVEYED_ITEM_IDS#)") },
+              { SQL_TEMPLATE_ID.TREE_SELECTED_GUIDS,
+                new SqlTemplate("TREE_SELECTED_GUIDS",
+                    "#TREE_SELECTED_GUIDS#",
+                    "Placeholder for selected Browser Elements  as comma separated list of GUIDs\nExample: eaGUID in (#TREE_SELECTED_GUIDS#)") },
             { SQL_TEMPLATE_ID.PACKAGE_ID,
                 new SqlTemplate("PACKAGE_ID", 
                     "#Package#",
@@ -253,6 +257,7 @@ namespace hoTools.Utils.SQL
             CURRENT_ITEM_ID,
             CURRENT_ITEM_GUID,
             AUTHOR,
+            TREE_SELECTED_GUIDS, // get all the GUIDs of the selected items (otDiagram, otElement, otPackage, otAttribute, otMethod
             NOW,
             WC
         }
@@ -340,7 +345,7 @@ namespace hoTools.Utils.SQL
         /// <param name="rep"></param>
         /// <param name="sqlString">The complete SQL string</param>
         /// <param name="searchTerm">The Search Term from the text entry field</param>
-        /// <returns></returns>
+        /// <returns>"" if error occurred</returns>
         public static string replaceMacro(Repository rep, string sqlString, string searchTerm)
         {
             // delete Comments
@@ -380,6 +385,7 @@ namespace hoTools.Utils.SQL
                 // no diagram, element or package selected
                 {
                     MessageBox.Show(sql, $"No element, diagram or package selected!");
+                    return "";
                 }
 
             }
@@ -413,6 +419,7 @@ namespace hoTools.Utils.SQL
                 // no diagram, element or package selected
                 {
                     MessageBox.Show(sql, $"No element, diagram or package selected!");
+                    return "";
                 }
             }
             // Package ID
@@ -443,6 +450,7 @@ namespace hoTools.Utils.SQL
                 // no diagram, element or package selected
                 {
                     MessageBox.Show(sql, $"No element, diagram or package selected!");
+                    return "";
                 }
 
             }
@@ -480,10 +488,48 @@ namespace hoTools.Utils.SQL
                 // no connector selected
                 {
                     MessageBox.Show(sql, $"No connector selected!");
+                    return "";
                 }
             }
-               
+            //--------------------------------------------------------------------------------------------
+            // Tree selected items
+            // CONVEYED_ITEM_ID
+            string currentTreeSelectedTemplate = getTemplateText(SQL_TEMPLATE_ID.TREE_SELECTED_GUIDS);
 
+
+            if (sql.Contains(currentTreeSelectedTemplate))
+            {
+                // get the selected elements (Element)
+                string GUIDs = "";
+                string GUID = "";
+                string comma = "";
+                EA.Collection col = rep.GetTreeSelectedElements();
+                foreach (var el in col)
+                {
+                    GUID = ((EA.Element)el).ElementGUID;
+                   
+                    // make list
+
+                    if (GUID != "")
+                    {
+                        GUIDs = GUIDs + comma + "'"+ GUID + "'";
+                        comma = ", ";
+                    }
+
+                }
+                if (GUIDs != "")
+                {
+                    // replace by list of GUIDs
+                    sql = sql.Replace(currentTreeSelectedTemplate, $"{GUIDs}");
+                }
+                else// no element in Browser selected
+                {
+                    MessageBox.Show(sql, $"No elements in browser of type Element(Class, Activity,..) selected!");
+                    return "";
+                }
+            }
+        
+            
 
             // Branch=comma separated Package IDs, Recursive:
             // Example for 3 Packages with their PackageID 7,29,128
@@ -524,6 +570,7 @@ namespace hoTools.Utils.SQL
                 // no diagram, element or package selected
                 {
                     MessageBox.Show(sql, $"No element, diagram or package selected!");
+                    return "";
                 }
             }
             // Replace #WC# (DB wile card)

@@ -32,6 +32,7 @@ CTRL+SHFT+S             Store sql All
 #CurrentElementID#      Selected Element, Diagram, Replaced by the ID
 #InBranch#              Selected Package, Replaced by nested recursive as comma separated list of PackageIDs  like 'IN (13,14,15)'
 #Package#               Selected Package, Replaced by Package ID
+#TREE_SELECTED_GUIDS#   In Browser selected Elements as a list of comma separated GUIDS like 'IN (#TREE_SELECTED_GUIDS#)'
 #WC#                    Wild card, you can also simple use * (will automatically replaced by the DB specific wild card)
 #DB=ACCESS2007#         DB specif SQL for ACCESS2007
 #DB=ASA#                DB specif SQL for ASA
@@ -159,7 +160,7 @@ CTRL+SHFT+S             Store sql All
             // register CTRL+S (store SQL) and CTRL+R (run SQL)
             sqlTextBox.KeyUp += sqlTextBox_KeyUp;
             ToolTip toolTip = new ToolTip();
-            toolTip.IsBalloon = true;
+            toolTip.IsBalloon = false;
             toolTip.InitialDelay = 0;
             toolTip.ShowAlways = true;
             toolTip.SetToolTip(sqlTextBox, SQL_TEXT_BOX_TOOLTIP);
@@ -273,56 +274,64 @@ CTRL+SHFT+S             Store sql All
             insertMacroSearchTermMenuItem.Text = "Insert " + SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.SEARCH_TERM);
             insertMacroSearchTermMenuItem.ToolTipText = SqlTemplates.getTooltip(SqlTemplates.SQL_TEMPLATE_ID.SEARCH_TERM);
             insertMacroSearchTermMenuItem.Tag = SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.SEARCH_TERM);
-            insertMacroSearchTermMenuItem.Click += new System.EventHandler(insertTemplate_Click);
+            insertMacroSearchTermMenuItem.Click += insertTemplate_Click;
 
             // Insert Package
             ToolStripMenuItem insertPackageMenuItem = new ToolStripMenuItem();
             insertPackageMenuItem.Text = "Insert " + SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.PACKAGE_ID);
             insertPackageMenuItem.ToolTipText = SqlTemplates.getTooltip(SqlTemplates.SQL_TEMPLATE_ID.PACKAGE_ID);
             insertPackageMenuItem.Tag = SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.PACKAGE_ID);
-            insertPackageMenuItem.Click += new System.EventHandler(insertTemplate_Click);
+            insertPackageMenuItem.Click += insertTemplate_Click;
 
             // Insert Branch
             ToolStripMenuItem insertBranchMenuItem = new ToolStripMenuItem();
             insertBranchMenuItem.Text = "Insert " + SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.BRANCH_IDS); 
             insertBranchMenuItem.ToolTipText = SqlTemplates.getTooltip(SqlTemplates.SQL_TEMPLATE_ID.BRANCH_IDS);
             insertBranchMenuItem.Tag = SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.BRANCH_IDS);
-            insertBranchMenuItem.Click += new System.EventHandler(insertTemplate_Click);
+            insertBranchMenuItem.Click += insertTemplate_Click;
 
             // Insert InBranch
             ToolStripMenuItem insertInBranchMenuItem = new ToolStripMenuItem();
             insertInBranchMenuItem.Text = "Insert " + SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.IN_BRANCH_IDS);
             insertInBranchMenuItem.ToolTipText = SqlTemplates.getTooltip(SqlTemplates.SQL_TEMPLATE_ID.IN_BRANCH_IDS);
             insertInBranchMenuItem.Tag = SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.IN_BRANCH_IDS);
-            insertInBranchMenuItem.Click += new System.EventHandler(insertTemplate_Click);
+            insertInBranchMenuItem.Click += insertTemplate_Click;
 
             // Insert CurrentID
             ToolStripMenuItem insertCurrentIdMenuItem = new ToolStripMenuItem();
             insertCurrentIdMenuItem.Text = "Insert " + SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.CURRENT_ITEM_ID);
             insertCurrentIdMenuItem.ToolTipText = SqlTemplates.getTooltip(SqlTemplates.SQL_TEMPLATE_ID.CURRENT_ITEM_ID);
             insertCurrentIdMenuItem.Tag = SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.CURRENT_ITEM_ID);
-            insertCurrentIdMenuItem.Click += new System.EventHandler(insertTemplate_Click);
+            insertCurrentIdMenuItem.Click += insertTemplate_Click;
 
             // Insert CurrentGUID
             ToolStripMenuItem insertCurrentGuidMenuItem = new ToolStripMenuItem();
             insertCurrentGuidMenuItem.Text = "Insert " + SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.CURRENT_ITEM_GUID);
             insertCurrentGuidMenuItem.ToolTipText = SqlTemplates.getTooltip(SqlTemplates.SQL_TEMPLATE_ID.CURRENT_ITEM_GUID);
             insertCurrentGuidMenuItem.Tag = SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.CURRENT_ITEM_GUID);
-            insertCurrentGuidMenuItem.Click += new System.EventHandler(insertTemplate_Click);
+            insertCurrentGuidMenuItem.Click += insertTemplate_Click;
 
             // Insert ConnectorID
             ToolStripMenuItem insertConnectorIdMenuItem = new ToolStripMenuItem();
             insertConnectorIdMenuItem.Text = "Insert " + SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.CONNECTOR_ID);
             insertConnectorIdMenuItem.ToolTipText = SqlTemplates.getTooltip(SqlTemplates.SQL_TEMPLATE_ID.CONNECTOR_ID);
             insertConnectorIdMenuItem.Tag = SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.CONNECTOR_ID);
-            insertConnectorIdMenuItem.Click += new System.EventHandler(insertTemplate_Click);
+            insertConnectorIdMenuItem.Click += insertTemplate_Click;
 
             // Insert Conveyed Item IDs
             ToolStripMenuItem insertConveyedItemIdsMenuItem = new ToolStripMenuItem();
             insertConveyedItemIdsMenuItem.Text = "Insert " + SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.CONVEYED_ITEM_IDS);
             insertConveyedItemIdsMenuItem.ToolTipText = SqlTemplates.getTooltip(SqlTemplates.SQL_TEMPLATE_ID.CONVEYED_ITEM_IDS);
             insertConveyedItemIdsMenuItem.Tag = SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.CONVEYED_ITEM_IDS);
-            insertConveyedItemIdsMenuItem.Click += new System.EventHandler(insertTemplate_Click);
+            insertConveyedItemIdsMenuItem.Click += insertTemplate_Click;
+
+
+            // Tree selected GUIDs
+            ToolStripMenuItem insertTreeSelectedGUIDSMenuItem = new ToolStripMenuItem();
+            insertTreeSelectedGUIDSMenuItem.Text = "Insert " + SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.TREE_SELECTED_GUIDS);
+            insertTreeSelectedGUIDSMenuItem.ToolTipText = SqlTemplates.getTooltip(SqlTemplates.SQL_TEMPLATE_ID.TREE_SELECTED_GUIDS);
+            insertTreeSelectedGUIDSMenuItem.Tag = SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.TREE_SELECTED_GUIDS);
+            insertTreeSelectedGUIDSMenuItem.Click += insertTemplate_Click;
 
             // Insert #WC#
             ToolStripMenuItem insertWcMenuItem = new ToolStripMenuItem();
@@ -339,6 +348,7 @@ CTRL+SHFT+S             Store sql All
                 insertCurrentGuidMenuItem,
                 insertConnectorIdMenuItem,
                 insertConveyedItemIdsMenuItem,
+                insertTreeSelectedGUIDSMenuItem,
                 insertWcMenuItem
                 });
             return insertMacroMenuItem;

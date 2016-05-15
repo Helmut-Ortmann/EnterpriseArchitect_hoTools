@@ -185,25 +185,25 @@ Repository object is always available. See example vbScripts.</value>
         pEcv5qW3gbJA/ONXfEN/o5pa3hyREeIfqp4Udc9L/wCiROQT8LDubAAAAABJRU5ErkJggg==
 </value>
   </data>
+  <data name="btnRun.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAlBJREFUOE9j
+        oDoQKHAQEC2zrZSptL8kUW73WbLM9ptspf1DqUrbTtFSBwmoMuxArNjWXbLM7n3AwuBvTcfS/s+7U/h/
+        xvX8/3WHU/5HLA/7LVlu91281C4JqhwVgDTL1zh+rD6Y9H/pzY7/m+/P+t93PgsFg+TUm1w+ihXZZkK1
+        QQDI2eJldl/SNkT9rz2Y/H/exa7/ILDr3howHxkX70r4D/TOW9FCSxWodgYG8VLbVqs+rx+5W2L/g/Ck
+        421gA0Dg2KP9//O3JoDFYdhrdsAvqUr79VDtDAxSFXa3vWcH/I9ZHgbGrXsboNoh4MqLS/9TVsfB5SOX
+        hP4XK7X9ANUO9H+pzU+PGX7/vWf5g3HF5mqoVgR4/P7x/6TlqXA1wMB+K1TmIAM2QLTE5odtn9d/GM5b
+        VQ7Vhgom7p8JVwP09keJAgcFsAHiJbaPbHq9/ztM8AHjgjWVUC0Q8PPPz/+N2zrh8rZ93v9Fim1+gzWD
+        gFiJ7TS9Vre/zpN9/4Nw0boqqNb//99+ffc/Z3UJWByGTTo9gF6wPQLVDvQCMErES2w+Ok/x++82zf9/
+        yQZIGNx/+/B/7OJUsBgMuwDVSJTbfhMpsXGAaocAoCtK5aocP7pODfiftiLn/8kHp/8HzY387zkjEI49
+        gFi5zumrRKndQqg2VCBRatsIDJwfdhMDgCEd+t9ndjAc207w/S9dZf8aGGMLGRocWKBaMIFoqZUBMBPt
+        BQWSZIX9Z9kqB6Am2y8SZXYnhYtsnaHKCAOFBgcOUDSBwkc0y4EHKowGGBgAE5Wcl9VjTy8AAAAASUVO
+        RK5CYII=
+</value>
+  </data>
   <metadata name="menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <data name="btnRun.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAJQSURBVDhPY6A6EChwEBAts62UqbS/JFFu91myzPabbKX9Q6lK207RUgcJqDLsQKzY1l2yzO59
-        wMLgb03H0v7Pu1P4f8b1/P91h1P+RywP+y1ZbvddvNQuCaocFYA0y9c4fqw+mPR/6c2O/5vvz/rfdz4L
-        BYPk1JtcPooV2WZCtUEAyNniZXZf0jZE/a89mPx/3sWu/yCw694aMB8ZF+9K+A/0zlvRQksVqHYGBvFS
-        21arPq8fuVti/4PwpONtYANA4Nij/f/ztyaAxWHYa3bAL6lK+/VQ7QwMUhV2t71nB/yPWR4Gxq17G6Da
-        IeDKi0v/U1bHweUjl4T+Fyu1/QDVDvR/qc1Pjxl+/71n+YNxxeZqqFYEePz+8f+k5alwNcDAfitU5iAD
-        NkC0xOaHbZ/XfxjOW1UO1YYKJu6fCVcD9PZHiQIHBbAB4iW2j2x6vf87TPAB44I1lVAtEPDzz8//jds6
-        4fK2fd7/RYptfoM1g4BYie00vVa3v86Tff+DcNG6KqjW///ffn33P2d1CVgchk06PYBesD0C1Q70AjBK
-        xEtsPjpP8fvvNs3/f8kGSBjcf/vwf+ziVLAYDLsA1UiU234TKbFxgGqHAKArSuWqHD+6Tg34n7Yi5//J
-        B6f/B82N/O85IxCOPYBYuc7pq0Sp3UKoNlQgUWrbCAycH3YTA4AhHfrfZ3YwHNtO8P0vXWX/GhhjCxka
-        HFigWjCBaKmVATAT7QUFkmSF/WfZKgegJtsvEmV2J4WLbJ2hyggDhQYHDlA0gcJHNMuBByqMBhgYABOV
-        nJfVY08vAAAAAElFTkSuQmCC
-</value>
-  </data>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>153</value>
   </metadata>

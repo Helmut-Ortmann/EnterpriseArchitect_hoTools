@@ -49,6 +49,7 @@ namespace hoTools.Query
             this.btnSave = new System.Windows.Forms.Button();
             this.btnSaveAll = new System.Windows.Forms.Button();
             this.btnSaveAs = new System.Windows.Forms.Button();
+            this.btnRun = new System.Windows.Forms.Button();
             this.btnLoadScripts = new System.Windows.Forms.Button();
             this.lblTitle = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -71,13 +72,10 @@ namespace hoTools.Query
             this.helpToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.lastsqlErrorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lastSqlStringSentToEAToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnRunSql = new System.Windows.Forms.Button();
             this.splitContainer = new System.Windows.Forms.SplitContainer();
-            this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
             this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.button4 = new System.Windows.Forms.Button();
-            this.btnRun = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewScripts)).BeginInit();
             this.contextMenuStripDataGrid.SuspendLayout();
@@ -86,7 +84,6 @@ namespace hoTools.Query
             this.splitContainer.Panel1.SuspendLayout();
             this.splitContainer.Panel2.SuspendLayout();
             this.splitContainer.SuspendLayout();
-            this.flowLayoutPanel3.SuspendLayout();
             this.flowLayoutPanel4.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
@@ -209,7 +206,7 @@ namespace hoTools.Query
             this.tabControlSql.Name = "tabControlSql";
             this.tabControlSql.SelectedIndex = 0;
             this.tabControlSql.ShowToolTips = true;
-            this.tabControlSql.Size = new System.Drawing.Size(767, 307);
+            this.tabControlSql.Size = new System.Drawing.Size(767, 332);
             this.tabControlSql.TabIndex = 5;
             this.toolTip1.SetToolTip(this.tabControlSql, "Enter SQL code. EA macros like:\r\n- #Branch#\r\n- #ObjectID#\r\n- #ObjectGUID#\r\n- #Pac" +
         "kage#\r\n- \'Search Term\'\r\n\r\nare allowed.");
@@ -279,6 +276,19 @@ namespace hoTools.Query
             this.toolTip1.SetToolTip(this.btnSaveAs, "Save SQL Tabs AS ...\r\n\r\nSave it to a choosable *.sql file location.");
             this.btnSaveAs.UseVisualStyleBackColor = true;
             this.btnSaveAs.Click += new System.EventHandler(this.btnSaveAs_Click);
+            // 
+            // btnRun
+            // 
+            this.btnRun.Image = ((System.Drawing.Image)(resources.GetObject("btnRun.Image")));
+            this.btnRun.Location = new System.Drawing.Point(273, 3);
+            this.btnRun.Name = "btnRun";
+            this.btnRun.Size = new System.Drawing.Size(23, 23);
+            this.btnRun.TabIndex = 16;
+            this.toolTip1.SetToolTip(this.btnRun, "Run SQL of the current Tab (CTRL+R).\r\n\r\nIn case of Errors: Help, Last sql Error!\r" +
+        "\nYou want to see the SQL after replacing macros: Help, Last sql string sent to E" +
+        "A");
+            this.btnRun.UseVisualStyleBackColor = true;
+            this.btnRun.Click += new System.EventHandler(this.btnRun_Click);
             // 
             // btnLoadScripts
             // 
@@ -466,16 +476,6 @@ namespace hoTools.Query
     "hoTools_LastSql.sql";
             this.lastSqlStringSentToEAToolStripMenuItem.Click += new System.EventHandler(this.lastSqlStringSentToEAToolStripMenuItem_Click);
             // 
-            // btnRunSql
-            // 
-            this.btnRunSql.Location = new System.Drawing.Point(3, 3);
-            this.btnRunSql.Name = "btnRunSql";
-            this.btnRunSql.Size = new System.Drawing.Size(100, 23);
-            this.btnRunSql.TabIndex = 6;
-            this.btnRunSql.Text = "Run";
-            this.btnRunSql.UseVisualStyleBackColor = true;
-            this.btnRunSql.Click += new System.EventHandler(this.btnRunSql_Click);
-            // 
             // splitContainer
             // 
             this.splitContainer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -487,7 +487,6 @@ namespace hoTools.Query
             // splitContainer.Panel1
             // 
             this.splitContainer.Panel1.Controls.Add(this.tabControlSql);
-            this.splitContainer.Panel1.Controls.Add(this.flowLayoutPanel3);
             // 
             // splitContainer.Panel2
             // 
@@ -499,15 +498,6 @@ namespace hoTools.Query
             this.splitContainer.TabIndex = 9;
             this.splitContainer.DragDrop += new System.Windows.Forms.DragEventHandler(this.splitContainer_DragDrop);
             this.splitContainer.DragOver += new System.Windows.Forms.DragEventHandler(this.splitContainer_DragOver);
-            // 
-            // flowLayoutPanel3
-            // 
-            this.flowLayoutPanel3.Controls.Add(this.btnRunSql);
-            this.flowLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel3.Location = new System.Drawing.Point(0, 307);
-            this.flowLayoutPanel3.Name = "flowLayoutPanel3";
-            this.flowLayoutPanel3.Size = new System.Drawing.Size(767, 25);
-            this.flowLayoutPanel3.TabIndex = 12;
             // 
             // flowLayoutPanel4
             // 
@@ -548,19 +538,6 @@ namespace hoTools.Query
             this.button4.Text = "button4";
             this.button4.UseVisualStyleBackColor = true;
             // 
-            // btnRun
-            // 
-            this.btnRun.Image = ((System.Drawing.Image)(resources.GetObject("btnRun.Image")));
-            this.btnRun.Location = new System.Drawing.Point(273, 3);
-            this.btnRun.Name = "btnRun";
-            this.btnRun.Size = new System.Drawing.Size(23, 23);
-            this.btnRun.TabIndex = 16;
-            this.toolTip1.SetToolTip(this.btnRun, "Run SQL of the current Tab (CTRL+R).\r\n\r\nIn case of Errors: Help, Last sql Error!\r" +
-        "\nYou want to see the SQL after replacing macros: Help, Last sql string sent to E" +
-        "A");
-            this.btnRun.UseVisualStyleBackColor = true;
-            this.btnRun.Click += new System.EventHandler(this.btnRun_Click);
-            // 
             // button2
             // 
             this.button2.Location = new System.Drawing.Point(84, 41);
@@ -587,7 +564,6 @@ namespace hoTools.Query
             this.splitContainer.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).EndInit();
             this.splitContainer.ResumeLayout(false);
-            this.flowLayoutPanel3.ResumeLayout(false);
             this.flowLayoutPanel4.ResumeLayout(false);
             this.flowLayoutPanel2.ResumeLayout(false);
             this.flowLayoutPanel2.PerformLayout();
@@ -615,14 +591,12 @@ namespace hoTools.Query
         private System.Windows.Forms.ToolStripMenuItem ShowErrorToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem runScriptToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem showScriptToolStripMenuItem;
-        private System.Windows.Forms.Button btnRunSql;
         private System.Windows.Forms.TextBox txtSearchTerm;
         private System.Windows.Forms.Button btnRunScriptForSqlWithAsk;
         private System.Windows.Forms.ToolStripMenuItem newTabToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem lastsqlErrorToolStripMenuItem;
         private System.Windows.Forms.SplitContainer splitContainer;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel3;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel4;
         private System.Windows.Forms.ToolStripMenuItem loadTabFromToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newTabFromToolStripMenuItem;

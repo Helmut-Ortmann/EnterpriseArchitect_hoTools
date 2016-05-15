@@ -112,6 +112,7 @@ namespace hoTools.Query
         {
             // replace templates
             sql = SqlTemplates.replaceMacro(model.Repository, sql, searchTerm);
+            if (sql == "") return false;
 
             // run the query
             string xml = model.SqlQueryWithException(sql);
