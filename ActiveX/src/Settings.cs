@@ -312,6 +312,29 @@ namespace hoTools.Settings
             }
         }
         #endregion
+        #region Property: isConveyedItemsSupport
+        public bool isConveyedItemsSupport
+        {
+            get
+            {
+                bool result;
+                var cfgPar = _currentConfig.AppSettings.Settings["isConveyedItemsSupport"];
+                if (cfgPar == null) return false;
+                if (bool.TryParse(cfgPar.Value, out result))
+                {
+                    return result;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            set
+            {
+                _currentConfig.AppSettings.Settings["isConveyedItemsSupport"].Value = value.ToString();
+            }
+        }
+        #endregion
 
 
 

@@ -92,7 +92,9 @@ namespace hoTools.Settings
                     value = f.FullName;
 
                 }
-                _config.AppSettings.Settings[key].Value = value;
+                // make sure the key exists
+                var parCfg = _config.AppSettings.Settings[key];
+                if (parCfg != null) parCfg.Value = value;
 
             }
         }

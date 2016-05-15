@@ -117,47 +117,52 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
-  <data name="txtQuickSearch.ToolTip" xml:space="preserve">
-    <value>EA Model Search Name for Quick Search
-- Simple (EA Standard Search)  or
-- Other EA Model Search or
-- Your own Search for your most important EA Model Items
-
-Your most frequently Model Items at your finger tip.
-
-Keep it empty to hide Quick Search support</value>
+  <data name="toolStripContainer1.BottomToolStripPanel.ToolTip" xml:space="preserve">
+    <value />
   </data>
-  <data name="label1.ToolTip" xml:space="preserve">
-    <value>EA Model Search Name for Quick Search
-- Simple (EA Standard Search)  or
-- Other EA Model Search or
-- Your own Search for your most important EA Model Items
-
-Your most frequently Model Items at your finger tip.
-
-Keep it empty to hide Quick Search support</value>
+  <data name="toolStripContainer1.ContentPanel.ToolTip" xml:space="preserve">
+    <value />
   </data>
-  <data name="txtFileManagerPath.ToolTip" xml:space="preserve">
-    <value>Path to a File Manager like:
-- Explorer.exe (default, leave it empty)
-- Totalcmd.exe
-
-Example:
-c:\Program Files (x86)\totalcmd\TOTALCMD64.EXE
-
-Think if you have to change the %PATH% environment variable</value>
+  <data name="toolStripContainer1.LeftToolStripPanel.ToolTip" xml:space="preserve">
+    <value />
   </data>
-  <data name="chkConveyedItem.ToolTip" xml:space="preserve">
-    <value>Buttons to support Conveyed Items on connectors like information flow:
-- Get Connector Items for selected connector
-- Get Connector for selected item
-
-You can easily implement such functions by search and macros like:
-- '#CONVEYED_ITEMS#'
-
-</value>
+  <data name="toolStripContainer1.RightToolStripPanel.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="toolStripContainer1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="toolStripContainer1.TopToolStripPanel.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="menuStrip1.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="panelQuickSearch.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="panelButtons.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="panelLineStyle.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="panelFavorite.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="panelNote.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="panelPort.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="panelAdvanced.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="panelConveyedItems.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="$this.ToolTip" xml:space="preserve">
+    <value />
   </data>
 </root>

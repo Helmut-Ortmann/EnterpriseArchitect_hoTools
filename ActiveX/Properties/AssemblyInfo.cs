@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Resources;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using hoTools;
 
@@ -39,3 +40,5 @@ using hoTools;
 [assembly: AssemblyVersion("2.0.0.1")] 
 // possibly make same as ProductVersion in Product.wxs
 [assembly: AssemblyFileVersion("2.0.1.1")]
+[assembly: NeutralResourcesLanguage("")]
+
