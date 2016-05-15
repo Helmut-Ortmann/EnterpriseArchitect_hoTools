@@ -497,7 +497,7 @@ namespace EAAddinFramework.Utils
             sqlQuery = replaceSQLWildCards(sqlQuery);
             sqlQuery = formatSQLTop(sqlQuery);
             sqlQuery = formatSQLFunctions(sqlQuery);
-            sqlQuery = formatSQLDBspecific(sqlQuery); // DB specifics like #DB_ORACLE#.... #DB_ORACLE#
+            sqlQuery = formatSQLDBspecific(sqlQuery); // DB specifics like #DB=ORACLE#.... #DB=ORACLE#
             return sqlQuery;
         }
 
@@ -591,26 +591,26 @@ namespace EAAddinFramework.Utils
         /// </summary>
         /// <param name="sql"></param>
         /// <returns></returns>
-        //#DB_ASA#                DB specif SQL for ASA
-        //#DB_FIREBIRD#           DB specif SQL for FIREBIRD
-        //#DB_JET#                DB specif SQL for JET
-        //#DB_MYSQL#              DB specif SQL for My SQL
-        //#DB_ACCESS2007#         DB specif SQL for ACCESS2007
-        //#DB_ORACLE#             DB specif SQL for Oracle
-        //#DB_POSTGRES#           DB specif SQL for POSTGRES
-        //#DB_SQLSVR#             DB specif SQL for SQL Server
+        //#DB=ASA#                DB specif SQL for ASA
+        //#DB=FIREBIRD#           DB specif SQL for FIREBIRD
+        //#DB=JET#                DB specif SQL for JET
+        //#DB=MYSQL#              DB specif SQL for My SQL
+        //#DB=ACCESS2007#         DB specif SQL for ACCESS2007
+        //#DB=ORACLE#             DB specif SQL for Oracle
+        //#DB=POSTGRES#           DB specif SQL for POSTGRES
+        //#DB=SQLSVR#             DB specif SQL for SQL Server
         string formatSQLDBspecific(string sql) {
             // available DBs
             var dbs = new Dictionary<RepositoryType, string>()
             {
-                { RepositoryType.ACCESS2007, "#DB=ACCESS007" },
+                { RepositoryType.ACCESS2007, "#DB=ACCESS2007#" },
                 { RepositoryType.ASA, "#DB=ASA#" },
                 { RepositoryType.FIREBIRD, "#DB=FIREBIRD#" },
                 { RepositoryType.ADOJET, "#DB=JET#" },
                 { RepositoryType.MYSQL, "#DB=MYSQL#" },
                 { RepositoryType.ORACLE, "#DB=ORACLE#" },
-                { RepositoryType.POSTGRES, "#DB_POSTGRES#" },
-                { RepositoryType.SQLSVR, "#DB_SQLSVR#" },
+                { RepositoryType.POSTGRES, "#DB=POSTGRES#" },
+                { RepositoryType.SQLSVR, "#DB=SQLSVR#" },
             };
             RepositoryType dbType = getRepositoryType();
             string s = sql;
@@ -624,7 +624,13 @@ namespace EAAddinFramework.Utils
                 
             }
             // delete remaining DB identifying string
-            s = Regex.Replace(s, @"#DB_[ASA|FIREBIRD|JET|MYSQL|ORACLE|ACCESS2007|POSTGRES|SQLSVR]#", "", RegexOptions.Multiline | RegexOptions.IgnoreCase);
+            s = Regex.Replace(s, @"#DB=(ASA|FIREBIRD|JET|MYSQL|ORACLE|ACCESS2007|POSTGRES|SQLSVR)#", "", RegexOptions.Multiline | RegexOptions.IgnoreCase);
+            
+            // delete multiple empty lines
+            for (int i = 0;  i < 4;i++)
+            {
+                s = Regex.Replace(s, "\r\n\r\n", "", RegexOptions.Multiline | RegexOptions.IgnoreCase);
+            }
             return s;
         }
 

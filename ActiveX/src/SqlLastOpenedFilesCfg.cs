@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.IO;
 using System.Collections.Generic;
 using System.Configuration;
 
@@ -10,6 +10,7 @@ namespace hoTools.Settings
     /// </summary>
     public class SqlLastOpenedFilesCfg
     {
+        const int MAX_OPEN_FILE_COUNT_TO_REMEMBER = 10;
         const string SQL_LAST_OPENED_FILE_CFG_STRING = "SqlLastOpenedFile";
         /// <summary>
         /// List of files last opened before EA closed
@@ -17,11 +18,6 @@ namespace hoTools.Settings
         public List<HistoryFile> lSqlLastOpenedFilesCfg => _lSqlLastOpenedFilesCfg;
 
         readonly List<HistoryFile> _lSqlLastOpenedFilesCfg = new List<HistoryFile>();
-
-        /// <summary>
-        /// Count of open files to remember. This is the minimum to save.
-        /// </summary>
-        int _openFileCount = 0;
 
 
         Configuration _config;
@@ -38,6 +34,7 @@ namespace hoTools.Settings
 
         /// <summary>
         ///  Loads last opened sql file names from configuration.
+        ///  File that don't exists are removed from the list.
         /// </summary>
         public void load()
         {
@@ -51,10 +48,18 @@ namespace hoTools.Settings
                 if (key.Length <= SQL_LAST_OPENED_FILE_CFG_STRING.Length) continue;
                 if (key.Substring(0, SQL_LAST_OPENED_FILE_CFG_STRING.Length).Equals(SQL_LAST_OPENED_FILE_CFG_STRING))
                 {
-                    // key found
-                    _openFileCount += 1;
+                    // key with fileName found
+                    string fileName = entry.Value.Trim();
+ 
+
                     // skip empty entries
-                    if (entry.Value.Trim() == "") continue;
+                    if (fileName == "") continue;
+
+                    // file isn't available, delete it from list of last opened filed
+                    if (!File.Exists(fileName))
+                    {
+                        continue;
+                    }
                     // ignore duplicated files
                     if (!(loadedFiles.ContainsKey(entry.Value)))
                     {
@@ -74,7 +79,7 @@ namespace hoTools.Settings
         /// </summary>
         public void save()
         {
-            int maxOpenFileCount = _openFileCount;
+            int maxOpenFileCount = MAX_OPEN_FILE_COUNT_TO_REMEMBER;
             if (_lSqlLastOpenedFilesCfg.Count > maxOpenFileCount) maxOpenFileCount = _lSqlLastOpenedFilesCfg.Count;
             for (int i = 0; i < maxOpenFileCount; i++)
             {

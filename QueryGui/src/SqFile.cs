@@ -13,7 +13,7 @@ namespace hoTools.Query
     /// <para/>-TabPage
     /// <para/>-SqlTabPages (for calling the delegate to update the text box with sql)
     /// </summary>
-    public class SqlFile :IDisposable
+    public class SqlFile : IDisposable
     {
         /// <summary>
         /// Extra space for display name to draw 'x' to provide a simulated Close Button
@@ -41,7 +41,7 @@ namespace hoTools.Query
         /// </summary>
         /// <param name="fullName"></param>
         /// <param name="isChanged">Default=true</param>
-        public SqlFile(SqlTabPagesCntrl sqlTabPagesCntrl, TabPage tabPage, string fullName,  bool isChanged = true)
+        public SqlFile(SqlTabPagesCntrl sqlTabPagesCntrl, TabPage tabPage, string fullName, bool isChanged = true)
         {
             _tabPage = tabPage;
             _sqlTabPagesCntrl = sqlTabPagesCntrl;
@@ -59,7 +59,7 @@ namespace hoTools.Query
         string _fullName;
         public string FullName
         {
-            get { return _fullName; } 
+            get { return _fullName; }
             set
             {
                 _fullName = value;
@@ -95,12 +95,9 @@ namespace hoTools.Query
         public bool IsChanged { get; set; }
 
         /// <summary>
-        /// True if a complete path exists (once stored to file system)
+        /// True if a complete path exists (isPathRouted) and the file exists
         /// </summary>
-        public bool IsPersistant => File.Exists(_fullName);
-
-
-
+        public bool IsPersistant => (Path.IsPathRooted(_fullName)  && File.Exists(_fullName));
 
         /// <summary>
         /// Initialize the TabPage information.

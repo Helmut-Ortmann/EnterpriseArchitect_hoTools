@@ -791,5 +791,43 @@ namespace hoTools.Query
         {
             _sqlTabCntrls.loadTabPagePerFileDialog();
         }
+
+        /// <summary>
+        /// Save sql Tab
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void btnSave_Click(object sender, EventArgs e)
+        {
+            _sqlTabCntrls.save();
+        }
+        /// <summary>
+        /// Save all sql Tabs
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void btnSaveAll_Click(object sender, EventArgs e)
+        {
+            _sqlTabCntrls.saveAll();
+        }
+        /// <summary>
+        /// Save sql Tab As
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void btnSaveAs_Click(object sender, EventArgs e)
+        {
+            _sqlTabCntrls.saveAs();
+        }
+
+        /// <summary>
+        /// Run sql
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnRun_Click(object sender, EventArgs e)
+        {
+            _sqlTabCntrls.runSqlTabPage();
+        }
     }
 }

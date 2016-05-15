@@ -33,14 +33,14 @@ CTRL+SHFT+S             Store sql All
 #InBranch#              Selected Package, Replaced by nested recursive as comma separated list of PackageIDs  like 'IN (13,14,15)'
 #Package#               Selected Package, Replaced by Package ID
 #WC#                    Wild card, you can also simple use * (will automatically replaced by the DB specific wild card)
-#DB_ACCESS2007#         DB specif SQL for ACCESS2007
-#DB_ASA#                DB specif SQL for ASA
-#DB_FIREBIRD#           DB specif SQL for FIREBIRD
-#DB_JET#                DB specif SQL for JET
-#DB_MYSQL#              DB specif SQL for My SQL
-#DB_ORACLE#             DB specif SQL for Oracle
-#DB_POSTGRES#           DB specif SQL for POSTGRES
-#DB_SQLSVR#             DB specif SQL for SQL Server
+#DB=ACCESS2007#         DB specif SQL for ACCESS2007
+#DB=ASA#                DB specif SQL for ASA
+#DB=FIREBIRD#           DB specif SQL for FIREBIRD
+#DB=JET#                DB specif SQL for JET
+#DB=MYSQL#              DB specif SQL for My SQL
+#DB=ORACLE#             DB specif SQL for Oracle
+#DB=POSTGRES#           DB specif SQL for POSTGRES
+#DB=SQLSVR#             DB specif SQL for SQL Server
 ";
 
         /// <summary>
@@ -110,7 +110,7 @@ CTRL+SHFT+S             Store sql All
             // Set Function to update Tab Page
             UpdatePageDelegate = new UpdatePageFromFile(loadTabPageFromFile);
 
-            loadOpenedTabsLastSession();
+            loadOpenedTabsFromLastSession();
 
             // Load recent files into ToolStripMenu
             loadRecentFilesIntoToolStripItems();
@@ -870,7 +870,17 @@ CTRL+SHFT+S             Store sql All
 
 
         }
-        
+        /// <summary>
+        /// Save sql Tab As...
+        /// </summary>
+        public void saveAs()
+        {
+
+            // get TabPage
+            if (_tabControl.SelectedIndex < 0) return;
+            TabPage tabPage = _tabControl.TabPages[_tabControl.SelectedIndex];
+            saveAs(tabPage);
+        }
         /// <summary>
         /// Save As... TabPage in *.sql File.
         /// </summary>
@@ -951,12 +961,20 @@ CTRL+SHFT+S             Store sql All
         /// <summary>
         /// Load all tabs which were opened in the last session
         /// </summary>
-        void loadOpenedTabsLastSession()
+        void loadOpenedTabsFromLastSession()
         {
             // load last opened files into tab pages
             foreach (HistoryFile lastOpenedFile in Settings.lastOpenedFiles.lSqlLastOpenedFilesCfg)
             {
-                if (lastOpenedFile.FullName.Trim() == "") continue;
+                string fileName = lastOpenedFile.FullName.Trim();
+                if (fileName == "") continue;
+                // file isn't available, delete it from list of last opened filed
+                if (! File.Exists(fileName))
+                {
+                    Settings.lastOpenedFiles.remove(fileName);
+                    continue;
+                }
+
                 TabPage tabPage = addTab();
                 // load 
                 loadTabPageFromFile(tabPage, lastOpenedFile.FullName, notUpdateLastOpenedList: true);

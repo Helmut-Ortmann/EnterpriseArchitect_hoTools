@@ -1,6 +1,7 @@
 ﻿
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
 
 namespace hoTools.Settings
 {
@@ -10,6 +11,7 @@ namespace hoTools.Settings
     /// </summary>
     public class SqlHistoryFilesCfg
     {
+        int MAX_FILE_COUNT_TO_REMEMBER = 20;
         const string SQL_HISTORY_FILE_CFG_STRING = "SqlFile";
         /// <summary>
         /// List of files loaded in history. Recent used files
@@ -34,7 +36,7 @@ namespace hoTools.Settings
 
         /// <summary>
         ///  Loads sql history file names from configuration.
-        ///  Ignore exiting files
+        ///  Ignore not exiting files
         /// </summary>
         public void load()
         {
@@ -48,8 +50,16 @@ namespace hoTools.Settings
                 if (key.Length <= SQL_HISTORY_FILE_CFG_STRING.Length) continue;
                 if (key.Substring(0, SQL_HISTORY_FILE_CFG_STRING.Length).Equals(SQL_HISTORY_FILE_CFG_STRING))
                 {
+                    // filename found
+                    string fileName = entry.Value.Trim();
                     // skip empty entries
-                    if (entry.Value.Trim() == "") continue;
+                    if (fileName == "") continue;
+
+                    // file isn't available, delete it from list 
+                    if (!File.Exists(fileName))
+                    {
+                        continue;
+                    }
                     // ignore duplicated files
                     if (!(loadedFiles.ContainsKey(entry.Value)))
                     {
@@ -63,19 +73,25 @@ namespace hoTools.Settings
             loadedFiles = null;
         }
         /// <summary>
-        /// Save history / recent sql file names to configuration
+        /// Save history / recent sql file names to configuration. It stores all entries in the history list. The remaining files are reset to "":
         /// </summary>
         public void save()
         {
-            int i = 1;
-            foreach (HistoryFile f in _lSqlHistoryFilesCfg)
+            int maxFileCount = MAX_FILE_COUNT_TO_REMEMBER;
+            if (_lSqlHistoryFilesCfg.Count > maxFileCount) maxFileCount = _lSqlHistoryFilesCfg.Count;
+            for (int i = 0; i < maxFileCount; i++)
             {
-                // SqlFile<i>
-                string key = $"{SQL_HISTORY_FILE_CFG_STRING}{i}";
-                _config.AppSettings.Settings[key].Value = f.FullName;
-                i = i + 1;
-                // stop if element length reached
-                if (i > SQL_FILE_COUNT) break;
+                string key = $"{SQL_HISTORY_FILE_CFG_STRING}{i + 1}";
+                string value = "";
+                // store the existing history files
+                if (i < _lSqlHistoryFilesCfg.Count)
+                {
+                    HistoryFile f = _lSqlHistoryFilesCfg[i];
+                    value = f.FullName;
+
+                }
+                _config.AppSettings.Settings[key].Value = value;
+
             }
         }
         /// <summary>

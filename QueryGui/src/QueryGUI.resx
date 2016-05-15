@@ -143,9 +143,67 @@ in (&lt;Search Term&gt; ) // 1,2,3 SQL in clause</value>
 
 Repository object is always available. See example vbScripts.</value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="btnSave.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAdpJREFUOE+t
+        kI9LE2EYx/tz+i/8Q4RqFCUsLIoiymOVs4mbrqEMRdyvrt3udJo0LKmRBQllJubAYFO7sY2Z67z1as7A
+        vvW8r+8hHCOCDj68vM/z4fPCnfov31As1TE4kWgNjMcwm3/1V8gLx1PN0Fj8NA9EEqpt2U2w/R+YeZHH
+        r6OfbaE9edsNC0N/IjwQTqSZ1dwDoc/N4+CwhaJpuqA57aX7YDQOHghOaOyrxUCoszns7h20hfbSvR9N
+        iEBgPMOqO99BxLIzqNv7WF4vuqA57aXrG06KgH9UZ2bdBjGWMWA2WFv4/tjtiaRE4G7UYKXKLogRVcPm
+        VgFbX9yUNtYQTevcI26FH4mAMmywz+Y3EAtLBfq7GIwlXTxMqlhcLXKPuBE6DtyJGGxts4F/5dqAKgI3
+        w5NspbgDSe5tCZf7c/AGnjpcDc4h/8F0HKK7/7EIXA9NsqX1bUg8vizKNRuVepOjP/+EjbKFi/4njkN4
+        +9IicCU4xRYLdUg6bxt49q7qIO90nvS6ejUR8Aay7M1qDRIStdc1B3mn86R34V5GBC71TrGXyxXkP1Y5
+        /KWVgsOItsBPmktn/n0Z531Giwe6/NOdZxX96EyPDoLEc4obmkvHoxgtjzLd8RsTF9u1sbbwQQAAAABJ
+        RU5ErkJggg==
+</value>
+  </data>
+  <data name="btnSaveAll.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAfZJREFUOE+t
+        kltP0wAcxf0YfgS/BR+EROFBUdAYog9EIKJsmYsLF2NUAoGB3SYdm7A6Z90YKIJEEnFc5OLm1m1sbZZd
+        S4wPbsf+u1HWxhcJJzkP56T/k1/TXjgXDU3OtIxMMaKHD/1ZWFyu+po8HwpXqR+ZZgTb2NSlxoletgn7
+        77QoIfDxE+RjGcVySTNl6vfjCQzbGaFxopfpuR358rH64JjLDe/7EHyLS+DCy5oXlOzhg/gnycDTaWTz
+        FSivgjOR9I3OICmWcULybmXt/0h6hl4imi7CSPI6GEZFrqBQKmqmTL2O5M5jBnuJPIwkbIBHrvILglTQ
+        TJn6REaCdZzJqQO3HzkQieZgJHFwfsSORBykMpp/pLJw+QM4TIowv3DUB7rMTmzsSzCSbOxE4fRxcHLN
+        9mPrUMD3WBYPnjnrA9cHXdXV7SyMJOTduITtaEbznpKp3zw4Qv8TV32g0+JtvWGak40kZH49hlvWN+iy
+        cOi2vcXKt5Taf9lNo2e4MUBqG2AvdhhIyO33PUhmSspXKSOWLOCaaV7tVyMp3LW9Oh0gGUnIrfdYMMGf
+        GJz8jFE2ombql74K6LbO6gdIzSRrO6J6ENn8gInZAHzKD0SZen49jpsWVmyc6XVK4pHpoL2frV3uddeu
+        9LlrlKnvNM+Vrj70tvwFnHd8tSp0LpIAAAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="btnSaveAs.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAActJREFUOE+9
+        kHFLGnEcxvdy2qvoBQTbC2g0ZJBBwWprEKNj1ZSMRNuIrdhYamd5hnZmSDKaESZEodxqTetynrPrxFqm
+        1vonnt3vt6tDTuqf6IEP34d77nk47sGdyPHF0zw2xSqh5RhuYszNSvbJqSatpsv+2XVRUIqY/7qMarWC
+        TDZbR61WpVn6Vw5OFytpNV2Wjy4cn9bARaKonP9tCMlychEjn9iSVtM1MO7G4VEFbGgRh+UzbP7cq4M8
+        I9mupMA64TUO9L/zIK+U4Qry2FNOIRYrdWTkE7j5Bezsyxj8MGMc6HNMQyycICGk4Q74MR3g6vCoJLcE
+        pDIHYN7PGgdejrLYyR3fyvqPAvqcDQae27wQxBIlkhDRZVtE53CY0j0awbdNiWZrwm/02n3GgU7rDDbS
+        RUqXLYy8XEZB/Rfc0nfs5/+g3cLTLJaU0DPCGQfMQ7NY21YoZusC+Hie0vraf31JFl3PqV/lNw48G/Bd
+        xpIHWEnJ6LCGsJoSKaR4dUkWjmdhtswpWk1XhyXY+pThLtv6OTxRX24f5Cgm5v8lAyQzMf4LExNs1mr3
+        pEcv5qW3gbJA/ONXfEN/o5pa3hyREeIfqp4Udc9L/wCiROQT8LDubAAAAABJRU5ErkJggg==
+</value>
+  </data>
   <metadata name="menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <data name="btnRun.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAJQSURBVDhPY6A6EChwEBAts62UqbS/JFFu91myzPabbKX9Q6lK207RUgcJqDLsQKzY1l2yzO59
+        wMLgb03H0v7Pu1P4f8b1/P91h1P+RywP+y1ZbvddvNQuCaocFYA0y9c4fqw+mPR/6c2O/5vvz/rfdz4L
+        BYPk1JtcPooV2WZCtUEAyNniZXZf0jZE/a89mPx/3sWu/yCw694aMB8ZF+9K+A/0zlvRQksVqHYGBvFS
+        21arPq8fuVti/4PwpONtYANA4Nij/f/ztyaAxWHYa3bAL6lK+/VQ7QwMUhV2t71nB/yPWR4Gxq17G6Da
+        IeDKi0v/U1bHweUjl4T+Fyu1/QDVDvR/qc1Pjxl+/71n+YNxxeZqqFYEePz+8f+k5alwNcDAfitU5iAD
+        NkC0xOaHbZ/XfxjOW1UO1YYKJu6fCVcD9PZHiQIHBbAB4iW2j2x6vf87TPAB44I1lVAtEPDzz8//jds6
+        4fK2fd7/RYptfoM1g4BYie00vVa3v86Tff+DcNG6KqjW///ffn33P2d1CVgchk06PYBesD0C1Q70AjBK
+        xEtsPjpP8fvvNs3/f8kGSBjcf/vwf+ziVLAYDLsA1UiU234TKbFxgGqHAKArSuWqHD+6Tg34n7Yi5//J
+        B6f/B82N/O85IxCOPYBYuc7pq0Sp3UKoNlQgUWrbCAycH3YTA4AhHfrfZ3YwHNtO8P0vXWX/GhhjCxka
+        HFigWjCBaKmVATAT7QUFkmSF/WfZKgegJtsvEmV2J4WLbJ2hyggDhQYHDlA0gcJHNMuBByqMBhgYABOV
+        nJfVY08vAAAAAElFTkSuQmCC
+</value>
+  </data>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>153</value>
   </metadata>

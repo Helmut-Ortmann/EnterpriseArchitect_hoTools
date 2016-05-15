@@ -13,7 +13,7 @@ namespace hoTools.Utils.SQL
     public static class SqlError
     {
         const string DBERROR_FILE_NAME = "dberror.txt";
-        const string hoTools_SQL_FILE_NAME = "hoTools_LastSql.sql";
+        const string hoTools_SQL_FILE_NAME = "hoTools_LastSql.txt";
 
         #region getEaSqlErrorFilePatch
         /// <summary>
