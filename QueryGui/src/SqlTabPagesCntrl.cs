@@ -28,12 +28,14 @@ CTRL+SHFT+S                     Store sql All
 #Branch#                        Selected Package, Replaced by nested recursive as comma separated list of PackageIDs            
 #CONNECTOR_ID#                  Selected Connector, Replaced by ConnectorID
 #CONVEYED_ITEM_IDS#             Selected Connector, Replaced by the Conveyed Items as comma separated list of ElementIDs
-#CurrentElementGUID#            Selected Element, Diagram, Replaced by the GUID
-#CurrentElementID#              Selected Element, Diagram, Replaced by the ID
-#DiagramObjects_IDS#            Diagram Objects of selected Diagram / current Diagram
-#DiagramSelectedObjects_IDS#    Selected Diagram Objects of selected Diagram / current Diagram 
+#CurrentElementGUID#            Alias for #CurrentItemGUID# (EA compatibility)
+#CurrentElementID#              Alias for #CurrentItemID# (EA compatibility)
+#CurrentItemGUID#               Selected Element, Diagram, Replaced by the GUID
+#CurrentItemID#                 Selected Element, Diagram, Replaced by the ID
+#DiagramElements_IDS#            Diagram Objects of selected Diagram / current Diagram
+#DiagramSelectedElements_IDS#    Selected Diagram Objects of selected Diagram / current Diagram 
 #InBranch#                      Selected Package, Replaced by nested recursive as comma separated list of PackageIDs  like 'IN (13,14,15)'
-#Package#                       Selected Package, Replaced by Package ID
+#Package#                       Selected Package, Diagram, Element, Attribute, Operation, Replaced by containing Package ID
 #TREE_SELECTED_GUIDS#           In Browser selected Elements as a list of comma separated GUIDS like 'IN (#TREE_SELECTED_GUIDS#)'
 #WC#                            Wild card, you can also simple use * (will automatically replaced by the DB specific wild card)
 #DB=ACCESS2007#                 DB specif SQL for ACCESS2007
@@ -329,18 +331,18 @@ CTRL+SHFT+S                     Store sql All
 
 
             // Insert Diagram Selected Objects_IDS Item IDs
-            ToolStripMenuItem insertDiagramSelectedObjects_IDSMenuItem = new ToolStripMenuItem();
-            insertDiagramSelectedObjects_IDSMenuItem.Text = "Insert " + SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.DiagramSelectedObjects_IDS);
-            insertDiagramSelectedObjects_IDSMenuItem.ToolTipText = SqlTemplates.getTooltip(SqlTemplates.SQL_TEMPLATE_ID.DiagramSelectedObjects_IDS);
-            insertDiagramSelectedObjects_IDSMenuItem.Tag = SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.DiagramSelectedObjects_IDS);
-            insertDiagramSelectedObjects_IDSMenuItem.Click += insertTemplate_Click;
+            ToolStripMenuItem insertDiagramSelectedElements_IDSMenuItem = new ToolStripMenuItem();
+            insertDiagramSelectedElements_IDSMenuItem.Text = "Insert " + SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.DiagramSelectedElements_IDS);
+            insertDiagramSelectedElements_IDSMenuItem.ToolTipText = SqlTemplates.getTooltip(SqlTemplates.SQL_TEMPLATE_ID.DiagramSelectedElements_IDS);
+            insertDiagramSelectedElements_IDSMenuItem.Tag = SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.DiagramSelectedElements_IDS);
+            insertDiagramSelectedElements_IDSMenuItem.Click += insertTemplate_Click;
 
             // Insert Diagram Objects_IDS Item IDs
-            ToolStripMenuItem insertDiagramObjects_IDSMenuItem = new ToolStripMenuItem();
-            insertDiagramObjects_IDSMenuItem.Text = "Insert " + SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.DiagramObjects_IDS);
-            insertDiagramObjects_IDSMenuItem.ToolTipText = SqlTemplates.getTooltip(SqlTemplates.SQL_TEMPLATE_ID.DiagramObjects_IDS);
-            insertDiagramObjects_IDSMenuItem.Tag = SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.DiagramObjects_IDS);
-            insertDiagramObjects_IDSMenuItem.Click += insertTemplate_Click;
+            ToolStripMenuItem insertDiagramElements_IDSMenuItem = new ToolStripMenuItem();
+            insertDiagramElements_IDSMenuItem.Text = "Insert " + SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.DiagramElements_IDS);
+            insertDiagramElements_IDSMenuItem.ToolTipText = SqlTemplates.getTooltip(SqlTemplates.SQL_TEMPLATE_ID.DiagramElements_IDS);
+            insertDiagramElements_IDSMenuItem.Tag = SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.DiagramElements_IDS);
+            insertDiagramElements_IDSMenuItem.Click += insertTemplate_Click;
 
 
             // Tree selected GUIDs
@@ -365,8 +367,8 @@ CTRL+SHFT+S                     Store sql All
                 insertCurrentGuidMenuItem,
                 insertConnectorIdMenuItem,
                 insertConveyedItemIdsMenuItem,
-                insertDiagramObjects_IDSMenuItem,
-                insertDiagramSelectedObjects_IDSMenuItem,
+                insertDiagramElements_IDSMenuItem,
+                insertDiagramSelectedElements_IDSMenuItem,
                 insertTreeSelectedGUIDSMenuItem,
                 insertWcMenuItem
                 });

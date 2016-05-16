@@ -1935,7 +1935,7 @@ namespace hoTools.ActiveX
                              t_object s, // Source element
                              t_object d  // destination element
 
-                        where  x.description like  '#WC##CurrentElementGUID##WC#' AND
+                        where  x.description like  '#WC##CurrentItemGUID##WC#' AND
                                x.Behavior = 'conveyed' AND
                                c.ea_guid = x.client    
 

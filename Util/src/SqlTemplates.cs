@@ -23,13 +23,15 @@ namespace hoTools.Utils.SQL
                 "// - #Branch#                    Replaced by the package ID of the selected package and all nested package like '512, 31,613' \r\n" +
                 "// - #CONNECTOR_ID#              Selected Connector, Replaced by ConnectorID\r\n" +
                 "// - #CONVEYED_ITEM_IDS#         Selected Connector, Replaced by the Conveyed Items as comma separated list of ElementIDs\r\n" +
-                "// - #CurrentElementGUID#        Replaced by the GUID of the selected item (Element, Diagram, Package, Attribute, Operation \r\n" +
-                "// - #CurrentElementID#          Replaced by the ID of the selected item (Element, Diagram, Package, Attribute, Operation\r\n" +
-                "// - #DiagramObjectS_IDS#         Diagram Objects of selected Diagram / current Diagram\r\n"+
-                "// - #DiagramSelectedObjectS_IDS# Selected Diagram Objects of selected Diagram / current Diagram \r\n" +   
+                "// - #CurrentElementGUID#        Alias for #CurrentItemGUID# (compatible to EA)\r\n" +
+                "// - #CurrentElementID#          Alias for #CurrentItemID# (compatible to EA)\r\n" +
+                "// - #CurrentItemGUID#           Replaced by the GUID of the selected item (Element, Diagram, Package, Attribute, Operation) \r\n" +
+                "// - #CurrentItemID#             Replaced by the ID of the selected item (Element, Diagram, Package, Attribute, Operation)\r\n" +
+                "// - #DiagramElements_IDS#         Diagram Elements of selected Diagram / current Diagram\r\n"+
+                "// - #DiagramSelectedElements_IDS# Selected Diagram Elements of selected Diagram / current Diagram \r\n" +
                 "// - #InBranch#                  like Branch (nested package recursive), but with SQL IN clause like 'IN (512, 31,613)'\r\n" +
-                "// - #Package#                   Replaced by the package ID of the selected package\r\n" +
-                "// - #TREE_SELECTED_GUIDS#       In Browser selected Elements as a list of comma separated GUIDS like 'IN (#TREE_SELECTED_GUIDS#)'\region\n" +
+                "// - #Package#                   Replaced by the package ID of the containing package of selected Package, Element, Diagram, Operation, Attribute\r\n" +
+                "// - #TREE_SELECTED_GUIDS#       In Browser selected Elements as a list of comma separated GUIDS like 'IN (#TREE_SELECTED_GUIDS#)'\r\n" +
                 "// - <Search Term>               Replaced by the string in the 'Search Term' entry field\r\n" +
                 "// - #WC#  or *                  Wild card depending of the current DB. You may simple use '*'\r\n" +
                 "// - #DB=ACCESS2007#             DB specif SQL for ACCESS2007\r\n"+
@@ -151,7 +153,7 @@ namespace hoTools.Utils.SQL
              //--------------------------------------------------------------------------------
              // Insert Macros
             { SQL_TEMPLATE_ID.SEARCH_TERM,
-                new SqlTemplate("SEARCH_TERM", 
+                new SqlTemplate("SEARCH_TERM",
                     "<Search Term>",
                     "<Search Term> is a string replaced at runtime by a variable string.\nExample: Name = '<Search Term>'") },
             { SQL_TEMPLATE_ID.CONNECTOR_ID,
@@ -167,34 +169,34 @@ namespace hoTools.Utils.SQL
                     "#TREE_SELECTED_GUIDS#",
                     "Placeholder for selected Browser Elements  as comma separated list of GUIDs\nExample: eaGUID in (#TREE_SELECTED_GUIDS#)") },
             { SQL_TEMPLATE_ID.PACKAGE_ID,
-                new SqlTemplate("PACKAGE_ID", 
+                new SqlTemplate("PACKAGE_ID",
                     "#Package#",
-                    "Placeholder for the current selected package, use as PackageID\nExample: pkg.Package_ID = #Package# ") },
+                    "Placeholder for the package the selected Item (Package, Diagram, Element, Operation, Attribute) is contained, use as PackageID\nExample: pkg.Package_ID = #Package# ") },
             { SQL_TEMPLATE_ID.BRANCH_IDS,
-                new SqlTemplate("BRANCH_IDS", 
+                new SqlTemplate("BRANCH_IDS",
                     "#Branch#",
                     "Placeholder for the current selected package (recursive), use as PackageID\nExample: pkg.Package_ID in (#Branch#)\nExpands to in '512,513,..' ")  },
             { SQL_TEMPLATE_ID.IN_BRANCH_IDS,
-                new SqlTemplate("IN_BRANCH_IDS", 
+                new SqlTemplate("IN_BRANCH_IDS",
                     "#InBranch#",
                     "Placeholder for sql in clause for the current selected package (recursive), use as PackageID\nExample: pkg.Package_ID  (#InBranch#)\nExpands to 'IN (512,513,..)' ") },
             { SQL_TEMPLATE_ID.CURRENT_ITEM_ID,
-                new SqlTemplate("CURRENT_ITEM_ID", 
-                    "#CurrentElementID#","Placeholder for the current selected item ID, use as ID\nExample: obj.Object_ID = #CurrentElementID# ") },
+                new SqlTemplate("CURRENT_ITEM_ID",
+                    "#CurrentItemID#","Placeholder for the current selected item ID (Element, Package, Diagram, Attribute, Operation, may be ambiguous, GUID is more secure), use as ID\nExample: obj.Object_ID = #CurrentItemID#; Alias: #CurrentElementID#") },
             { SQL_TEMPLATE_ID.CURRENT_ITEM_GUID,
                 new SqlTemplate( "CURRENT_ITEM_GUID",
-                    "#CurrentElementGUID#",
-                    "Placeholder for the current selected item GUID, use as GUID\nExample: obj.ea_GUID = #CurrentElementGUID# ") },
+                    "#CurrentItemGUID#",
+                    "Placeholder for the current selected item GUID (Element, Package, Diagram, Attribute, Operation), use as GUID\nExample: obj.ea_GUID = #CurrentItemGUID#; Alias: #CurrentElementGUID# ") },
 
-            { SQL_TEMPLATE_ID.DiagramSelectedObjects_IDS,
-                new SqlTemplate( "DiagramSelectedObjects_IDS",
-                    "#DiagramSelectedObjects_IDS#",
-                    "Placeholder for the current selected items in the diagram, as ID\nExample: elementID in (#DiagramSelectedObjects_IDS# ") },
+            { SQL_TEMPLATE_ID.DiagramSelectedElements_IDS,
+                new SqlTemplate( "DiagramSelectedElements_IDS",
+                    "#DiagramSelectedElements_IDS#",
+                    "Placeholder for the current selected items in the diagram, as ID\nExample: elementID in (#DiagramSelectedElements_IDS# ") },
 
-            { SQL_TEMPLATE_ID.DiagramObjects_IDS,
-                new SqlTemplate( "DiagramObjects_IDS",
-                    "#DiagramObjects_IDS#",
-                    "Placeholder for the diagram Elements in the selected diagram, as ID\nExample: elementID in (#DiagramObjects_IDS# ") },
+            { SQL_TEMPLATE_ID.DiagramElements_IDS,
+                new SqlTemplate( "DiagramElements_IDS",
+                    "#DiagramElements_IDS#",
+                    "Placeholder for the diagram Elements in the selected diagram, as ID\nExample: elementID in (#DiagramElements_IDS# ") },
 
 
 
@@ -269,7 +271,7 @@ namespace hoTools.Utils.SQL
             DB_POSTGRES,
             DB_FIREBIRD,
             DB_JET,
-            MACROS_HELP,        // Help to macros
+
             ELEMENT_TEMPLATE,
             ELEMENT_TYPE_TEMPLATE,
             DIAGRAM_TEMPLATE,
@@ -279,15 +281,18 @@ namespace hoTools.Utils.SQL
             ATTRIBUTE_TEMPLATE,
             OPERATION_TEMPLATE,
             SEARCH_TERM,
+            //-------------------------
+            // macros
+            MACROS_HELP,        // Help to macros
             CONNECTOR_ID,   // Get's the connector
             CONVEYED_ITEM_IDS, // Get's the conveyed Items of the connector as a comma separated ID list of elementIDs
-            PACKAGE_ID,
+            PACKAGE_ID,      // The containing package of Package, Diagram, Element, Attribute, Operation
             BRANCH_IDS,     // Package (nested, recursive) ids separated by ','  like '20,21,47,1'
             IN_BRANCH_IDS,  // Package (nested, recursive), complete SQL in clause, ids separated by ','  like 'IN (20,21,47,1)', just a shortcut for #BRANCH_ID#
-            CURRENT_ITEM_ID,
-            CURRENT_ITEM_GUID,
-            DiagramSelectedObjects_IDS,// Selected Diagram objects as a comma separated list of IDs
-            DiagramObjects_IDS,        // Diagram objects (selected diagram) as a comma separated list of IDs
+            CURRENT_ITEM_ID,     // ALIAS CURRENT_ELEMENT_ID exists (compatible to EA)
+            CURRENT_ITEM_GUID,  // ALIAS CURRENT_ELEMENT_GUID exists (compatible to EA)
+            DiagramSelectedElements_IDS,// Selected Diagram objects as a comma separated list of IDs
+            DiagramElements_IDS,        // Diagram objects (selected diagram) as a comma separated list of IDs
             AUTHOR,
             TREE_SELECTED_GUIDS, // get all the GUIDs of the selected items (otDiagram, otElement, otPackage, otAttribute, otMethod
             NOW,
@@ -386,225 +391,41 @@ namespace hoTools.Utils.SQL
             // <Search Term>
             sql = sql.Replace(getTemplateText(SQL_TEMPLATE_ID.SEARCH_TERM), searchTerm);
 
+            // replace #DiagramElements_IDS# by IDs of diagram
+            sql = macroDiagramElements_IDS(rep, sql);
+            if (sql == "") return "";
 
-            // replace ID
-            string currentIdTemplate = getTemplateText(SQL_TEMPLATE_ID.CURRENT_ITEM_ID);
-            if (sql.Contains(currentIdTemplate))
-            {
-                EA.ObjectType objectType = rep.GetContextItemType();
-                int id = 0;
-                switch (objectType)
-                {
-                    case EA.ObjectType.otElement:
-                        EA.Element el = (EA.Element)rep.GetContextObject();
-                        id = el.ElementID;
-                        break;
-                    case EA.ObjectType.otDiagram:
-                        EA.Diagram dia = (EA.Diagram)rep.GetContextObject();
-                        id = dia.DiagramID;
-                        break;
-                    case EA.ObjectType.otPackage:
-                        EA.Package pkg = (EA.Package)rep.GetContextObject();
-                        id = pkg.PackageID;
-                        break;
-                }
-                
-                if (id > 0)
-                {
-                    sql = sql.Replace(currentIdTemplate, $"{id}");
-                }
-                else
-                // no diagram, element or package selected
-                {
-                    MessageBox.Show(sql, $"No element, diagram or package selected!");
-                    return "";
-                }
+            // replace #DiagramSelectedElements_IDS# by IDs of diagram
+            sql = macroDiagramSelectedElements_IDS(rep, sql);
+            if (sql == "") return "";
 
-            }
-            // replace GUID
-            // replace ID
-            string currentGuidTemplate = getTemplateText(SQL_TEMPLATE_ID.CURRENT_ITEM_GUID);
-            if (sql.Contains(currentGuidTemplate))
-            {
-                EA.ObjectType objectType = rep.GetContextItemType();
-                string guid = "";
-                switch (objectType)
-                {
-                    case EA.ObjectType.otElement:
-                        EA.Element el = (EA.Element)rep.GetContextObject();
-                        guid = el.ElementGUID;
-                        break;
-                    case EA.ObjectType.otDiagram:
-                        EA.Diagram dia = (EA.Diagram)rep.GetContextObject();
-                        guid = dia.DiagramGUID;
-                        break;
-                    case EA.ObjectType.otPackage:
-                        EA.Package pkg = (EA.Package)rep.GetContextObject();
-                        guid = pkg.PackageGUID;
-                        break;
-                }
-                if (guid != "")
-                {
-                    sql = sql.Replace(currentGuidTemplate, guid);
-                }
-                else
-                // no diagram, element or package selected
-                {
-                    MessageBox.Show(sql, $"No element, diagram or package selected!");
-                    return "";
-                }
-            }
-            // Package ID
-            string currentPackageTemplate = getTemplateText(SQL_TEMPLATE_ID.PACKAGE_ID);
-            if (sql.Contains(currentPackageTemplate))
-            {
-                EA.ObjectType objectType = rep.GetContextItemType();
-                int id = 0;
-                switch (objectType)
-                {
-                    case EA.ObjectType.otDiagram:
-                        EA.Diagram dia = (EA.Diagram)rep.GetContextObject();
-                        id = dia.PackageID;
-                        break;
-                    case EA.ObjectType.otElement:
-                        EA.Element el = (EA.Element)rep.GetContextObject();
-                        id = el.PackageID;
-                        break;
-                    case EA.ObjectType.otPackage:
-                        EA.Package pkg = (EA.Package)rep.GetContextObject();
-                        id = pkg.PackageID;
-                        break;
-                }
-                if (id >  0)
-                {
-                    sql = sql.Replace(currentPackageTemplate, $"{id}");
-                } else
-                // no diagram, element or package selected
-                {
-                    MessageBox.Show(sql, $"No element, diagram or package selected!");
-                    return "";
-                }
+            // replace #CurrentItemID# by ID of the selected element
+            // Alias: #CurrentElementID#
+            sql = macroItem_ID(rep, sql);
+            if (sql == "") return "";
 
-            }
-            //--------------------------------------------------------------------------------------------
-            // CONNECTOR ID
-            // CONVEYED_ITEM_ID
-            string currentConnectorTemplate = getTemplateText(SQL_TEMPLATE_ID.CONNECTOR_ID);
-            string currentConveyedItemTemplate = getTemplateText(SQL_TEMPLATE_ID.CONVEYED_ITEM_IDS);
+            // replace #CurrentItemGUID# by ID of the selected element
+            // Alias: #CurrentElementGUID#
+            sql = macroItem_GUID(rep, sql);
+            if (sql == "") return "";
 
-            if ((sql.Contains(currentConnectorTemplate) | sql.Contains(currentConveyedItemTemplate)))
-            {
-                // connector
-                if (rep.GetContextItemType() == EA.ObjectType.otConnector)
-                {
-                    // connector ID
-                    EA.Connector con = rep.GetContextObject();
-                    if (sql.Contains(currentConnectorTemplate))
-                    {
-                        
-                        sql = sql.Replace(currentConnectorTemplate, $"{con.ConnectorID}");
-                    }
-                    // conveyed items are a comma separated list of elementIDs
-                    if (sql.Contains(currentConveyedItemTemplate))
-                    {
-                        string s = "";
-                        string del = "";
-                        foreach (EA.Element el in con.ConveyedItems)
-                        {
-                            s = s + del + el.ElementID;
-                            del = ", ";
-                        }
-                        sql = sql.Replace(currentConveyedItemTemplate, $"{s}");
-                    }
-                } else
-                // no connector selected
-                {
-                    MessageBox.Show(sql, $"No connector selected!");
-                    return "";
-                }
-            }
-            //--------------------------------------------------------------------------------------------
-            // Tree selected items
-            // CONVEYED_ITEM_ID
-            string currentTreeSelectedTemplate = getTemplateText(SQL_TEMPLATE_ID.TREE_SELECTED_GUIDS);
+            // replace #Package# by ID of the package the selected item is contained (Element, Package, Diagram, Attribute, Operation)
+            sql = macroPackageID(rep, sql);
+            if (sql == "") return "";
+
+            // replace #ConnectorID#, #ConveyedItemIDS# 
+            sql = macroConnector(rep, sql);
+            if (sql == "") return "";
+
+            // replace #TreeSelectedGUIDS#
+            sql = macroTreeSelected(rep, sql);
+            if (sql == "") return "";
+
+            // replace #TreeSelectedGUIDS#
+            sql = macroBranch(rep, sql);
+            if (sql == "") return "";
 
 
-            if (sql.Contains(currentTreeSelectedTemplate))
-            {
-                // get the selected elements (Element)
-                string GUIDs = "";
-                string GUID = "";
-                string comma = "";
-                EA.Collection col = rep.GetTreeSelectedElements();
-                foreach (var el in col)
-                {
-                    GUID = ((EA.Element)el).ElementGUID;
-                   
-                    // make list
-
-                    if (GUID != "")
-                    {
-                        GUIDs = GUIDs + comma + "'"+ GUID + "'";
-                        comma = ", ";
-                    }
-
-                }
-                if (GUIDs != "")
-                {
-                    // replace by list of GUIDs
-                    sql = sql.Replace(currentTreeSelectedTemplate, $"{GUIDs}");
-                }
-                else// no element in Browser selected
-                {
-                    MessageBox.Show(sql, $"No elements in browser of type Element(Class, Activity,..) selected!");
-                    return "";
-                }
-            }
-        
-            
-
-            // Branch=comma separated Package IDs, Recursive:
-            // Example for 3 Packages with their PackageID 7,29,128
-            // 7,29,128
-            //
-            // Branch: complete SQL IN statement ' IN (comma separated Package IDs, Recursive):
-            // IN (7,29,128)
-            string currentBranchTemplate = getTemplateText(SQL_TEMPLATE_ID.BRANCH_IDS);
-            string currrentInBranchTemplate = getTemplateText(SQL_TEMPLATE_ID.IN_BRANCH_IDS);
-            if (sql.Contains(currentBranchTemplate) | sql.Contains(currrentInBranchTemplate))
-            {
-                EA.ObjectType objectType = rep.GetContextItemType();
-                int id = 0;
-                switch (objectType)
-                {
-                    // use Package of diagram
-                    case EA.ObjectType.otDiagram:
-                        EA.Diagram dia = (EA.Diagram)rep.GetContextObject();
-                        id = dia.PackageID;
-                        break;
-                    // use Package of element
-                    case EA.ObjectType.otElement:
-                        EA.Element el = (EA.Element)rep.GetContextObject();
-                        id = el.PackageID;
-                        break;
-                    case EA.ObjectType.otPackage:
-                        EA.Package pkg = (EA.Package)rep.GetContextObject();
-                        id = pkg.PackageID;
-                        break;
-                }
-                // Context element available
-                if (id > 0)
-                {
-                    string branch = Package.getBranch(rep, "", id);
-                    sql = sql.Replace(currentBranchTemplate, branch);
-                    sql = sql.Replace(currrentInBranchTemplate, branch);
-                } else
-                // no diagram, element or package selected
-                {
-                    MessageBox.Show(sql, $"No element, diagram or package selected!");
-                    return "";
-                }
-            }
             // Replace #WC# (DB wile card)
             // Later '*' is changed to the wild card of the current DB
             string currentTemplate = getTemplateText(SQL_TEMPLATE_ID.WC);
@@ -637,5 +458,430 @@ namespace hoTools.Utils.SQL
             return s;
         }
         #endregion
+
+
+        /// <summary>
+        /// Replace macro #DiagramElements_IDS# by a comma separated list of all Element IDs in diagram.
+        /// <para/>
+        /// If no Element is in the diagram it return '0' for an empty list (not existing ID).
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <param name="sql">The sql string to replace the macro by the found list of Diagram Element IDs</param>
+        /// <returns>sql string with replaced macro</returns>
+        static string macroDiagramElements_IDS(Repository rep, string sql) {
+            // get template
+            string template = getTemplateText(SQL_TEMPLATE_ID.DiagramElements_IDS);
+
+            // template is used
+            if (sql.Contains(template))
+            {
+                // get the diagram
+                EA.Diagram dia;
+                if (rep.GetContextItemType() == EA.ObjectType.otDiagram)
+                {
+                    dia = rep.GetContextObject();
+                } else
+                {
+                    dia = rep.GetCurrentDiagram();
+                }
+                // Diagram selected?
+                if (dia == null)
+                {
+                    MessageBox.Show(sql, $"No Diagram  for '{template}' selected!");
+                    sql = "";
+                }
+                else
+                {
+                    // make a list of comma separated IDs
+                    string listId = "0";
+                    foreach (var el in dia.DiagramObjects)
+                    {
+                        int id = ((EA.DiagramObject)el).ElementID;
+                        listId = $"{listId},{id}";
+                    }
+
+                    // replace by list of IDs
+                    sql = sql.Replace(template, $"{listId}");
+                }
+                
+            }
+            return sql;
+        }
+        /// <summary>
+        /// Replace macro #DiagramElements_IDS# by a comma separated list of all Element IDs in diagram.
+        /// <para/>
+        /// If no Element is in the diagram it return '0' for an empty list (not existing ID).
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <param name="sql">The sql string to replace the macro by the found list of Diagram Element IDs</param>
+        /// <returns>sql string with replaced macro</returns>
+        static string macroDiagramSelectedElements_IDS(Repository rep, string sql)
+        {
+            // get template
+            string template = getTemplateText(SQL_TEMPLATE_ID.DiagramSelectedElements_IDS);
+
+            // template is used
+            if (sql.Contains(template))
+            {
+                // get the diagram
+                EA.Diagram dia;
+                if (rep.GetContextItemType() == EA.ObjectType.otDiagram)
+                {
+                    dia = rep.GetContextObject();
+                }
+                else
+                {
+                    dia = rep.GetCurrentDiagram();
+                }
+                // Diagram selected?
+                if (dia == null)
+                {
+                    MessageBox.Show(sql, $"No Diagram  for '{template}' selected!");
+                    sql = "";
+                }
+                else
+                {
+                    // make a list of comma separated IDs
+                    string listId = "0";
+                    foreach (var el in dia.SelectedObjects)
+                    {
+                        int id = ((EA.DiagramObject)el).ElementID;
+                        listId = $"{listId},{id}";
+
+                    }
+
+                    // replace by list of IDs
+                    sql = sql.Replace(template, $"{listId}");
+                }
+
+            }
+            return sql;
+        }
+        /// <summary>
+        /// Replace macro #CURRENT_ITEM_ID# by the ID of the currently selected Item.
+        /// Because ID is ambiguous better use #CurrentItemGuid#
+        /// Alias: #CurrentElementID#
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <param name="sql">The sql string to replace the macro by the found ID</param>
+        /// <returns>sql string with replaced macro</returns>
+        static string macroItem_ID(Repository rep, string sql)
+        {
+            // replace ID
+            string template = getTemplateText(SQL_TEMPLATE_ID.CURRENT_ITEM_ID);
+            if (sql.Contains(template) | sql.Contains("#CurrentElementID#"))
+            {
+                EA.ObjectType objectType = rep.GetContextItemType();
+                int id = 0;
+                switch (objectType)
+                {
+                    case EA.ObjectType.otElement:
+                        EA.Element el = (EA.Element)rep.GetContextObject();
+                        id = el.ElementID;
+                        break;
+                    case EA.ObjectType.otDiagram:
+                        EA.Diagram dia = (EA.Diagram)rep.GetContextObject();
+                        id = dia.DiagramID;
+                        break;
+                    case EA.ObjectType.otPackage:
+                        EA.Package pkg = (EA.Package)rep.GetContextObject();
+                        id = pkg.PackageID;
+                        break;
+                    case EA.ObjectType.otAttribute:
+                        EA.Attribute attr = (EA.Attribute)rep.GetContextObject();
+                        id = attr.AttributeID;
+                        break;
+                    case EA.ObjectType.otMethod:
+                        EA.Method method = (EA.Method)rep.GetContextObject();
+                        id = method.MethodID;
+                        break;
+                }
+
+                if (id > 0)
+                {
+                    sql = sql.Replace(template, $"{id}");
+                }
+                else
+                // no diagram, element or package selected
+                {
+                    MessageBox.Show(sql, $"No item (Package, Element, Diagram, Operation, Attribute) selected!");
+                    sql = "";
+                }
+
+            }
+            return sql;
+        }
+        /// <summary>
+        /// Replace macro #CurrentItemGUID# by the GUID of the currently selected Item.
+        /// Alias: #CurrentElementGUID#
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <param name="sql">The sql string to replace the macro by the found ID</param>
+        /// <returns>sql string with replaced macro</returns>
+        static string macroItem_GUID(Repository rep, string sql)
+        {
+            // replace ID
+            string template = getTemplateText(SQL_TEMPLATE_ID.CURRENT_ITEM_GUID);
+            if (sql.Contains(template) | sql.Contains("#CurrentElementGUID#")) 
+            {
+                EA.ObjectType objectType = rep.GetContextItemType();
+                string guid = "";
+                switch (objectType)
+                {
+                    case EA.ObjectType.otElement:
+                        EA.Element el = (EA.Element)rep.GetContextObject();
+                        guid = el.ElementGUID;
+                        break;
+                    case EA.ObjectType.otDiagram:
+                        EA.Diagram dia = (EA.Diagram)rep.GetContextObject();
+                        guid = dia.DiagramGUID;
+                        break;
+                    case EA.ObjectType.otPackage:
+                        EA.Package pkg = (EA.Package)rep.GetContextObject();
+                        guid = pkg.PackageGUID;
+                        break;
+                    case EA.ObjectType.otAttribute:
+                        EA.Attribute attr = (EA.Attribute)rep.GetContextObject();
+                        guid = attr.AttributeGUID;
+                        break;
+                    case EA.ObjectType.otMethod:
+                        EA.Method method = (EA.Method)rep.GetContextObject();
+                        guid = method.MethodGUID;
+                        break;
+                }
+
+                if (guid != "")
+                {
+                    sql = sql.Replace(template, $"{guid}");
+                }
+                else
+                // no diagram, element or package selected
+                {
+                    MessageBox.Show(sql, $"No item (Package, Element, Diagram, Operation, Attribute) selected!");
+                    sql = "";
+                }
+
+            }
+            return sql;
+        }
+        /// <summary>
+        /// Replace macro #PackageID# of the selected Diagram, Element, Package, Attribute, Operation by the ID of the containing Package.
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <param name="sql">The sql string to replace the macro by the found ID</param>
+        /// <returns>sql string with replaced macro</returns>
+        static string macroPackageID(Repository rep, string sql)
+        {
+            // Package ID
+            string currentPackageTemplate = getTemplateText(SQL_TEMPLATE_ID.PACKAGE_ID);
+            if (sql.Contains(currentPackageTemplate))
+            {
+                // get Package id
+                int id = getParentPackageIdFromContextElement(rep);
+                if (id > 0)
+                {
+                    sql = sql.Replace(currentPackageTemplate, $"{id}");
+                }
+                else
+                // no diagram, element or package selected
+                {
+                    MessageBox.Show(sql, $"No element, diagram, package, attribute, operation selected!");
+                    sql = "";
+                }
+
+            }
+            return sql;
+        }
+
+        /// <summary>
+        /// Get containing Package ID from context element of Package, Element, Diagram, Attribute, Operation
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <returns></returns>
+        static int getParentPackageIdFromContextElement(Repository rep)
+        {
+            EA.ObjectType objectType = rep.GetContextItemType();
+            int id = 0;
+            switch (objectType)
+            {
+                case EA.ObjectType.otDiagram:
+                    EA.Diagram dia = (EA.Diagram)rep.GetContextObject();
+                    id = dia.PackageID;
+                    break;
+                case EA.ObjectType.otElement:
+                    EA.Element el = (EA.Element)rep.GetContextObject();
+                    id = el.PackageID;
+                    break;
+                case EA.ObjectType.otPackage:
+                    EA.Package pkg = (EA.Package)rep.GetContextObject();
+                    id = pkg.ParentID;
+                    break;
+                case EA.ObjectType.otAttribute:
+                    EA.Attribute attr = (EA.Attribute)rep.GetContextObject();
+                    EA.Element elOfAttr = rep.GetElementByID(attr.ParentID);
+                    id = elOfAttr.PackageID;
+                    break;
+                case EA.ObjectType.otMethod:
+                    EA.Method meth = (EA.Method)rep.GetContextObject();
+                    EA.Element elOfMeth = rep.GetElementByID(meth.ParentID);
+                    id = elOfMeth.PackageID;
+                    break;
+            }
+
+            return id;
+        }
+
+        /// <summary>
+        /// Connector macros: ConnectorID and ConveyedItemIDS
+        /// <para/>
+        /// Replace macro #ConnectorID# by the ID of the selected connector.
+        /// <para/>
+        /// Replace macro #ConveyedItemIDS# by the IDs of conveyed Elements of the selected connector.
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <param name="sql">The sql string to replace the macro by the found ID</param>
+        /// <returns>sql string with replaced macro</returns>
+        static string macroConnector(Repository rep, string sql)
+        {
+            //--------------------------------------------------------------------------------------------
+            // CONNECTOR ID
+            // CONVEYED_ITEM_ID
+            string currentConnectorTemplate = getTemplateText(SQL_TEMPLATE_ID.CONNECTOR_ID);
+            string currentConveyedItemTemplate = getTemplateText(SQL_TEMPLATE_ID.CONVEYED_ITEM_IDS);
+
+            if ((sql.Contains(currentConnectorTemplate) | sql.Contains(currentConveyedItemTemplate)))
+            {
+                // connector
+                if (rep.GetContextItemType() == EA.ObjectType.otConnector)
+                {
+                    // connector ID
+                    EA.Connector con = rep.GetContextObject();
+                    if (sql.Contains(currentConnectorTemplate))
+                    {
+                        
+                        sql = sql.Replace(currentConnectorTemplate, $"{con.ConnectorID}");
+                    }
+                    // conveyed items are a comma separated list of elementIDs
+                    if (sql.Contains(currentConveyedItemTemplate))
+                    {
+                        // to avoid syntax error
+                        string s = "0";
+                        foreach (EA.Element el in con.ConveyedItems)
+                        {
+                            s = $"{s}, {el.ElementID}";
+                        }
+                        sql = sql.Replace(currentConveyedItemTemplate, $"{s}");
+                    }
+                } else
+                // no connector selected
+                {
+                    MessageBox.Show(sql, $"No connector selected!");
+                    sql = "";
+                }
+            }
+            return sql;
+        }
+
+
+        /// <summary>
+        /// Replace macro #TreeSelectedGUIDS# by GUIDs of selected Items of Browser
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <param name="sql">The sql string to replace the macro by the found ID</param>
+        /// <returns>sql string with replaced macro</returns>
+        static string macroTreeSelected(Repository rep, string sql)
+        {
+            //--------------------------------------------------------------------------------------------
+            // Tree selected items
+            // CONVEYED_ITEM_ID
+            string template = getTemplateText(SQL_TEMPLATE_ID.TREE_SELECTED_GUIDS);
+
+
+            if (sql.Contains(template))
+            {
+                // get the selected elements (Element)
+                string GUIDs = "";  
+                string GUID = "";
+                string comma = "";
+                EA.Collection col = rep.GetTreeSelectedElements();
+                foreach (var el in col)
+                {
+                    GUID = ((EA.Element)el).ElementGUID;
+                   
+                    // make list
+                    if (GUID != "")
+                    {
+                        GUIDs = $"{GUIDs}{comma}'{GUID}'";
+                        comma = ", ";
+                    }
+
+                }
+                // at least one element selected
+                if (GUIDs != "")
+                {
+                    // replace by list of GUIDs
+                    sql = sql.Replace(template, $"{GUIDs}");
+                }
+                else// no element in Browser selected
+                {
+                    MessageBox.Show(sql, $"No elements in browser of type Element(Class, Activity,..) selected!");
+                    sql = "";
+                }
+            }
+            return sql;
+        }
+
+        /// <summary>
+        /// Replace macro #Branch# an #InBranch# by IDs of selected packages, recursive nested 
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <param name="sql">The sql string to replace the macro by the found ID</param>
+        /// <returns>sql string with replaced macro</returns>
+        static string macroBranch(Repository rep, string sql) { 
+        // Branch=comma separated Package IDs, Recursive:
+        // Example for 3 Packages with their PackageID 7,29,128
+        // 7,29,128
+        //
+        // Branch: complete SQL IN statement ' IN (comma separated Package IDs, Recursive):
+        // IN (7,29,128)
+            string currentBranchTemplate = getTemplateText(SQL_TEMPLATE_ID.BRANCH_IDS);
+            string currrentInBranchTemplate = getTemplateText(SQL_TEMPLATE_ID.IN_BRANCH_IDS);
+            if (sql.Contains(currentBranchTemplate) | sql.Contains(currrentInBranchTemplate))
+            {
+                EA.ObjectType objectType = rep.GetContextItemType();
+                int id = 0;
+                switch (objectType)
+                {
+                    // use Package of diagram
+                    case EA.ObjectType.otDiagram:
+                        EA.Diagram dia = (EA.Diagram)rep.GetContextObject();
+                        id = dia.PackageID;
+                        break;
+                    // use Package of element
+                    case EA.ObjectType.otElement:
+                        EA.Element el = (EA.Element)rep.GetContextObject();
+                        id = el.PackageID;
+                        break;
+                    case EA.ObjectType.otPackage:
+                        EA.Package pkg = (EA.Package)rep.GetContextObject();
+                        id = pkg.PackageID;
+                        break;
+                }
+                // Context element available
+                if (id > 0)
+                {
+                    // get package recursive
+                    string branch = Package.getBranch(rep, "", id);
+                    sql = sql.Replace(currentBranchTemplate, branch);
+                    sql = sql.Replace(currrentInBranchTemplate, branch);
+                } else
+                // no diagram, element or package selected
+                {
+                    MessageBox.Show(sql, $"No element, diagram or package selected!");
+                    sql =  "";
+                }
+            }
+            return sql;
+        }
     }
 }
