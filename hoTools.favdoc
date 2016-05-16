@@ -3,36 +3,6 @@
   <folders />
   <favorites>
     <Favorite>
-      <name>ScriptGUI.cs</name>
-      <path>scriptgui\src\scriptgui.cs</path>
-      <absolutePath>d:\hodata\development\github\enterprisearchitect_hotools\scriptgui\src\scriptgui.cs</absolutePath>
-      <position>
-        <line>24</line>
-        <column>50</column>
-        <lineHash>Szr7Hb4orI2TVjXB0gGgxOfz0jhWQtnFsxeMETB+gkI=</lineHash>
-      </position>
-    </Favorite>
-    <Favorite>
-      <name>AddinClass.cs</name>
-      <path>Addin\src\AddinClass.cs</path>
-      <absolutePath>D:\hoData\Development\GitHub\EnterpriseArchitect_hoTools\Addin\src\AddinClass.cs</absolutePath>
-      <position>
-        <line>962</line>
-        <column>28</column>
-        <lineHash>yPXiBxT3AZaRVrb8OrB9xW2CCJZDPUgYBECXtm786Ug=</lineHash>
-      </position>
-    </Favorite>
-    <Favorite>
-      <name>FindAndReplaceGUI.cs</name>
-      <path>findandreplace\source\gui\findandreplacegui.cs</path>
-      <absolutePath>d:\hodata\development\github\enterprisearchitect_hotools\findandreplace\source\gui\findandreplacegui.cs</absolutePath>
-      <position>
-        <line>21</line>
-        <column>53</column>
-        <lineHash>AF5Ny85xKauGtcIKadO9IZ+AVab1UaiQTGcJUgYwBAM=</lineHash>
-      </position>
-    </Favorite>
-    <Favorite>
       <name>ActiveX.cs</name>
       <path>activex\src\activex.cs</path>
       <absolutePath>d:\hodata\development\github\enterprisearchitect_hotools\activex\src\activex.cs</absolutePath>
@@ -43,13 +13,43 @@
       </position>
     </Favorite>
     <Favorite>
-      <name>AddinGUI.cs</name>
-      <path>Addin\src\AddinGUI.cs</path>
-      <absolutePath>D:\hoData\Development\GitHub\EnterpriseArchitect_hoTools\Addin\src\AddinGUI.cs</absolutePath>
+      <name>QueryGUI.cs</name>
+      <path>querygui\src\querygui.cs</path>
+      <absolutePath>d:\hodata\development\github\enterprisearchitect_hotools\querygui\src\querygui.cs</absolutePath>
+      <position>
+        <line>97</line>
+        <column>22</column>
+        <lineHash>Zv/ZvoFLBbcocj07QqCdt9IYYn5L//sfLnHMnPfoaHg=</lineHash>
+      </position>
+    </Favorite>
+    <Favorite>
+      <name>SqlTabPagesCntrl.cs</name>
+      <path>querygui\src\sqltabpagescntrl.cs</path>
+      <absolutePath>d:\hodata\development\github\enterprisearchitect_hotools\querygui\src\sqltabpagescntrl.cs</absolutePath>
+      <position>
+        <line>1099</line>
+        <column>23</column>
+        <lineHash>c7d9qqtjX+CrPH7JpF+ZqthgGKJtmM6wU9JdkO4YQhc=</lineHash>
+      </position>
+    </Favorite>
+    <Favorite>
+      <name>SqlTemplates.cs</name>
+      <path>Util\src\SqlTemplates.cs</path>
+      <absolutePath>D:\hoData\Development\GitHub\EnterpriseArchitect_hoTools\Util\src\SqlTemplates.cs</absolutePath>
       <position>
         <line>1</line>
         <column>1</column>
-        <lineHash>+C3wS7Ft5DyHeLCyPV9r1wsaOWkxFdQYa1IzhmbnvNw=</lineHash>
+        <lineHash>doMFAGjbOu7uiJN9tt5UKFEvEPJsula2yaJW1o9yfPE=</lineHash>
+      </position>
+    </Favorite>
+    <Favorite>
+      <name>Model.cs</name>
+      <path>addinframework\util\model.cs</path>
+      <absolutePath>d:\hodata\development\github\enterprisearchitect_hotools\addinframework\util\model.cs</absolutePath>
+      <position>
+        <line>244</line>
+        <column>74</column>
+        <lineHash>TDGrYreQIv6qzNclWo/4XX8rJG0kNesiToTR/i+hxvs=</lineHash>
       </position>
     </Favorite>
   </favorites>

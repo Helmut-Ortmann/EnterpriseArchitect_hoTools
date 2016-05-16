@@ -21,12 +21,25 @@ namespace hoTools.Utils.SQL
                 "//\r\n" +
                 "// Help to available Macros\r\n" +
                 "// - #Branch#                    Replaced by the package ID of the selected package and all nested package like '512, 31,613' \r\n" +
+                "// - #CONNECTOR_ID#              Selected Connector, Replaced by ConnectorID\r\n" +
+                "// - #CONVEYED_ITEM_IDS#         Selected Connector, Replaced by the Conveyed Items as comma separated list of ElementIDs\r\n" +
                 "// - #CurrentElementGUID#        Replaced by the GUID of the selected item (Element, Diagram, Package, Attribute, Operation \r\n" +
                 "// - #CurrentElementID#          Replaced by the ID of the selected item (Element, Diagram, Package, Attribute, Operation\r\n" +
+                "// - #DiagramObjectS_IDS#         Diagram Objects of selected Diagram / current Diagram\r\n"+
+                "// - #DiagramSelectedObjectS_IDS# Selected Diagram Objects of selected Diagram / current Diagram \r\n" +   
                 "// - #InBranch#                  like Branch (nested package recursive), but with SQL IN clause like 'IN (512, 31,613)'\r\n" +
                 "// - #Package#                   Replaced by the package ID of the selected package\r\n" +
+                "// - #TREE_SELECTED_GUIDS#       In Browser selected Elements as a list of comma separated GUIDS like 'IN (#TREE_SELECTED_GUIDS#)'\region\n" +
                 "// - <Search Term>               Replaced by the string in the 'Search Term' entry field\r\n" +
-                "// -  #WC#                       \r\n" +
+                "// - #WC#  or *                  Wild card depending of the current DB. You may simple use '*'\r\n" +
+                "// - #DB=ACCESS2007#             DB specif SQL for ACCESS2007\r\n"+
+                "// - #DB=ASA#                    DB specif SQL for ASA\r\n"+
+                "// - #DB=FIREBIRD#               DB specif SQL for FIREBIRD\r\n"+
+                "// - #DB=JET#                    DB specif SQL for JET\r\n"+
+                "// - #DB=MYSQL#                  DB specif SQL for My SQL\r\n"+
+                "// - DB=ORACLE#                  DB specif SQL for Oracle\r\n"+
+                "// - #DB=POSTGRES#               DB specif SQL for POSTGRES\r\n"+
+                "// - #DB=SQLSVR#                 DB specif SQL for SQL Serve\r\n"+
 
                 "//\r\n" +
                 "select o.ea_guid AS CLASSGUID, o.object_type AS CLASSTYPE,o.Name AS Name,o.object_type As Type, * \r\n" +
@@ -172,6 +185,23 @@ namespace hoTools.Utils.SQL
                 new SqlTemplate( "CURRENT_ITEM_GUID",
                     "#CurrentElementGUID#",
                     "Placeholder for the current selected item GUID, use as GUID\nExample: obj.ea_GUID = #CurrentElementGUID# ") },
+
+            { SQL_TEMPLATE_ID.DiagramSelectedObjects_IDS,
+                new SqlTemplate( "DiagramSelectedObjects_IDS",
+                    "#DiagramSelectedObjects_IDS#",
+                    "Placeholder for the current selected items in the diagram, as ID\nExample: elementID in (#DiagramSelectedObjects_IDS# ") },
+
+            { SQL_TEMPLATE_ID.DiagramObjects_IDS,
+                new SqlTemplate( "DiagramObjects_IDS",
+                    "#DiagramObjects_IDS#",
+                    "Placeholder for the diagram Elements in the selected diagram, as ID\nExample: elementID in (#DiagramObjects_IDS# ") },
+
+
+
+
+
+
+
             { SQL_TEMPLATE_ID.WC,
                 new SqlTemplate("DB Wild Card", 
                     "#WC#", 
@@ -256,6 +286,8 @@ namespace hoTools.Utils.SQL
             IN_BRANCH_IDS,  // Package (nested, recursive), complete SQL in clause, ids separated by ','  like 'IN (20,21,47,1)', just a shortcut for #BRANCH_ID#
             CURRENT_ITEM_ID,
             CURRENT_ITEM_GUID,
+            DiagramSelectedObjects_IDS,// Selected Diagram objects as a comma separated list of IDs
+            DiagramObjects_IDS,        // Diagram objects (selected diagram) as a comma separated list of IDs
             AUTHOR,
             TREE_SELECTED_GUIDS, // get all the GUIDs of the selected items (otDiagram, otElement, otPackage, otAttribute, otMethod
             NOW,

@@ -19,29 +19,31 @@ namespace hoTools.Query
     public class SqlTabPagesCntrl
     {
         const string SQL_TEXT_BOX_TOOLTIP =
-@"CTRL+L                Load sql from File
-CTRL+R                  Run sql
-CTRL+S                  Store sql
-CTRL+SHFT+S             Store sql All
-\\ Comment              Just your comment as you may know from C, Java, C#,..
-<Search Term>           Replaced by Text from the Search Text
-#Branch#                Selected Package, Replaced by nested recursive as comma separated list of PackageIDs            
-#CONNECTOR_ID#          Selected Connector, Replaced by ConnectorID
-#CONVEYED_ITEM_IDS#     Selected Connector, Replaced by the Conveyed Items as comma separated list of ElementIDs
-#CurrentElementGUID#    Selected Element, Diagram, Replaced by the GUID
-#CurrentElementID#      Selected Element, Diagram, Replaced by the ID
-#InBranch#              Selected Package, Replaced by nested recursive as comma separated list of PackageIDs  like 'IN (13,14,15)'
-#Package#               Selected Package, Replaced by Package ID
-#TREE_SELECTED_GUIDS#   In Browser selected Elements as a list of comma separated GUIDS like 'IN (#TREE_SELECTED_GUIDS#)'
-#WC#                    Wild card, you can also simple use * (will automatically replaced by the DB specific wild card)
-#DB=ACCESS2007#         DB specif SQL for ACCESS2007
-#DB=ASA#                DB specif SQL for ASA
-#DB=FIREBIRD#           DB specif SQL for FIREBIRD
-#DB=JET#                DB specif SQL for JET
-#DB=MYSQL#              DB specif SQL for My SQL
-#DB=ORACLE#             DB specif SQL for Oracle
-#DB=POSTGRES#           DB specif SQL for POSTGRES
-#DB=SQLSVR#             DB specif SQL for SQL Server
+@"CTRL+L                        Load sql from File
+CTRL+R                          Run sql
+CTRL+S                          Store sql
+CTRL+SHFT+S                     Store sql All
+\\ Comment                      Just your comment as you may know from C, Java, C#,..
+<Search Term>                   Replaced by Text from the Search Text
+#Branch#                        Selected Package, Replaced by nested recursive as comma separated list of PackageIDs            
+#CONNECTOR_ID#                  Selected Connector, Replaced by ConnectorID
+#CONVEYED_ITEM_IDS#             Selected Connector, Replaced by the Conveyed Items as comma separated list of ElementIDs
+#CurrentElementGUID#            Selected Element, Diagram, Replaced by the GUID
+#CurrentElementID#              Selected Element, Diagram, Replaced by the ID
+#DiagramObjects_IDS#            Diagram Objects of selected Diagram / current Diagram
+#DiagramSelectedObjects_IDS#    Selected Diagram Objects of selected Diagram / current Diagram 
+#InBranch#                      Selected Package, Replaced by nested recursive as comma separated list of PackageIDs  like 'IN (13,14,15)'
+#Package#                       Selected Package, Replaced by Package ID
+#TREE_SELECTED_GUIDS#           In Browser selected Elements as a list of comma separated GUIDS like 'IN (#TREE_SELECTED_GUIDS#)'
+#WC#                            Wild card, you can also simple use * (will automatically replaced by the DB specific wild card)
+#DB=ACCESS2007#                 DB specif SQL for ACCESS2007
+#DB=ASA#                        DB specif SQL for ASA
+#DB=FIREBIRD#                   DB specif SQL for FIREBIRD
+#DB=JET#                        DB specif SQL for JET
+#DB=MYSQL#                      DB specif SQL for My SQL
+#DB=ORACLE#                     DB specif SQL for Oracle
+#DB=POSTGRES#                   DB specif SQL for POSTGRES
+#DB=SQLSVR#                     DB specif SQL for SQL Server
 ";
 
         /// <summary>
@@ -326,6 +328,21 @@ CTRL+SHFT+S             Store sql All
             insertConveyedItemIdsMenuItem.Click += insertTemplate_Click;
 
 
+            // Insert Diagram Selected Objects_IDS Item IDs
+            ToolStripMenuItem insertDiagramSelectedObjects_IDSMenuItem = new ToolStripMenuItem();
+            insertDiagramSelectedObjects_IDSMenuItem.Text = "Insert " + SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.DiagramSelectedObjects_IDS);
+            insertDiagramSelectedObjects_IDSMenuItem.ToolTipText = SqlTemplates.getTooltip(SqlTemplates.SQL_TEMPLATE_ID.DiagramSelectedObjects_IDS);
+            insertDiagramSelectedObjects_IDSMenuItem.Tag = SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.DiagramSelectedObjects_IDS);
+            insertDiagramSelectedObjects_IDSMenuItem.Click += insertTemplate_Click;
+
+            // Insert Diagram Objects_IDS Item IDs
+            ToolStripMenuItem insertDiagramObjects_IDSMenuItem = new ToolStripMenuItem();
+            insertDiagramObjects_IDSMenuItem.Text = "Insert " + SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.DiagramObjects_IDS);
+            insertDiagramObjects_IDSMenuItem.ToolTipText = SqlTemplates.getTooltip(SqlTemplates.SQL_TEMPLATE_ID.DiagramObjects_IDS);
+            insertDiagramObjects_IDSMenuItem.Tag = SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.DiagramObjects_IDS);
+            insertDiagramObjects_IDSMenuItem.Click += insertTemplate_Click;
+
+
             // Tree selected GUIDs
             ToolStripMenuItem insertTreeSelectedGUIDSMenuItem = new ToolStripMenuItem();
             insertTreeSelectedGUIDSMenuItem.Text = "Insert " + SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.TREE_SELECTED_GUIDS);
@@ -348,6 +365,8 @@ CTRL+SHFT+S             Store sql All
                 insertCurrentGuidMenuItem,
                 insertConnectorIdMenuItem,
                 insertConveyedItemIdsMenuItem,
+                insertDiagramObjects_IDSMenuItem,
+                insertDiagramSelectedObjects_IDSMenuItem,
                 insertTreeSelectedGUIDSMenuItem,
                 insertWcMenuItem
                 });
