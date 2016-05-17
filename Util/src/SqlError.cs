@@ -14,7 +14,27 @@ namespace hoTools.Utils.SQL
     {
         const string DBERROR_FILE_NAME = "dberror.txt";
         const string hoTools_SQL_FILE_NAME = "hoTools_LastSql.txt";
+        const string hoTools_SQL_HELP_FILE_NAME = "hoTools_SqlTemplatesAndMacros.txt";
 
+
+        public static string getSqlTemplatesAndMacrosFilePath()
+        {
+            string path = getEaSqlErrorPath();
+            return Path.Combine(path, hoTools_SQL_HELP_FILE_NAME);
+        }
+        public static void  writeSqlTemplatesAndMacros(string text)
+        {
+            string fileName = getSqlTemplatesAndMacrosFilePath();
+            write(fileName, text);
+        }
+        public static void viewSqlTemplatesAndMacros()
+        {
+
+
+        }
+        #region getSqlTemplatesAndMacros
+        
+        #endregion
         #region getEaSqlErrorFilePatch
         /// <summary>
         /// Get the error string which EA stores.
@@ -37,6 +57,44 @@ namespace hoTools.Utils.SQL
             return Path.Combine(path, hoTools_SQL_FILE_NAME);
         }
         #endregion
+        /// <summary>
+        /// write content to file
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <param name="content"></param>
+        static void write(string fileName, string content)
+        {
+            string path = getEaSqlErrorPath();
+            path = Path.Combine(path, fileName);
+            try
+            {
+                File.WriteAllText(path, content);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.ToString(), $"Error writing file '{path}'");
+            }
+        }
+        /// <summary>
+        /// read content from file
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <param name="content"></param>
+        static string read(string fileName)
+        {
+            string path = getEaSqlErrorPath();
+            path = Path.Combine(path, fileName);
+            try
+            {
+                return File.ReadAllText(path);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.ToString(), $"Error reading from file '{path}'");
+                return "";
+            }
+        }
+
         #region writeEaSqlFile
         /// <summary>
         /// Writes the sql-file before sending it to EA.

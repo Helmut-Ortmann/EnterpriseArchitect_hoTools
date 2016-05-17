@@ -600,6 +600,7 @@ namespace hoTools.Utils.SQL
                 if (id > 0)
                 {
                     sql = sql.Replace(template, $"{id}");
+                    sql = sql.Replace("#CurrentElementID#", $"{id}");// Alias for EA compatibility
                 }
                 else
                 // no diagram, element or package selected
@@ -652,7 +653,8 @@ namespace hoTools.Utils.SQL
 
                 if (guid != "")
                 {
-                    sql = sql.Replace(template, $"{guid}");
+                    sql = sql.Replace(template, $"'{guid}'");
+                    sql = sql.Replace("#CurrentElementGUID#", $"'{guid}'");// Alias for EA compatibility
                 }
                 else
                 // no diagram, element or package selected

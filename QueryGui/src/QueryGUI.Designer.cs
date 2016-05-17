@@ -77,6 +77,7 @@ namespace hoTools.Query
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.button4 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.templatesAndMacrosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewScripts)).BeginInit();
             this.contextMenuStripDataGrid.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -90,7 +91,7 @@ namespace hoTools.Query
             // 
             // txtSearchTerm
             // 
-            this.txtSearchTerm.Location = new System.Drawing.Point(302, 3);
+            this.txtSearchTerm.Location = new System.Drawing.Point(394, 3);
             this.txtSearchTerm.Name = "txtSearchTerm";
             this.txtSearchTerm.Size = new System.Drawing.Size(223, 20);
             this.txtSearchTerm.TabIndex = 7;
@@ -220,7 +221,7 @@ namespace hoTools.Query
             // btnUndo
             // 
             this.btnUndo.Image = global::hoTools.Query.Properties.Resources.icon_undo_h;
-            this.btnUndo.Location = new System.Drawing.Point(198, 3);
+            this.btnUndo.Location = new System.Drawing.Point(290, 3);
             this.btnUndo.Name = "btnUndo";
             this.btnUndo.Size = new System.Drawing.Size(32, 23);
             this.btnUndo.TabIndex = 9;
@@ -231,7 +232,7 @@ namespace hoTools.Query
             // btnRedo
             // 
             this.btnRedo.Image = global::hoTools.Query.Properties.Resources.icon_redo_h;
-            this.btnRedo.Location = new System.Drawing.Point(236, 3);
+            this.btnRedo.Location = new System.Drawing.Point(328, 3);
             this.btnRedo.Name = "btnRedo";
             this.btnRedo.Size = new System.Drawing.Size(31, 23);
             this.btnRedo.TabIndex = 11;
@@ -243,7 +244,7 @@ namespace hoTools.Query
             // 
             this.btnSave.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.Image")));
             this.btnSave.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnSave.Location = new System.Drawing.Point(84, 3);
+            this.btnSave.Location = new System.Drawing.Point(176, 3);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(32, 32);
             this.btnSave.TabIndex = 12;
@@ -256,7 +257,7 @@ namespace hoTools.Query
             // 
             this.btnSaveAll.Image = ((System.Drawing.Image)(resources.GetObject("btnSaveAll.Image")));
             this.btnSaveAll.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnSaveAll.Location = new System.Drawing.Point(122, 3);
+            this.btnSaveAll.Location = new System.Drawing.Point(214, 3);
             this.btnSaveAll.Name = "btnSaveAll";
             this.btnSaveAll.Size = new System.Drawing.Size(32, 32);
             this.btnSaveAll.TabIndex = 13;
@@ -269,7 +270,7 @@ namespace hoTools.Query
             // 
             this.btnSaveAs.Image = ((System.Drawing.Image)(resources.GetObject("btnSaveAs.Image")));
             this.btnSaveAs.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnSaveAs.Location = new System.Drawing.Point(160, 3);
+            this.btnSaveAs.Location = new System.Drawing.Point(252, 3);
             this.btnSaveAs.Name = "btnSaveAs";
             this.btnSaveAs.Size = new System.Drawing.Size(32, 32);
             this.btnSaveAs.TabIndex = 14;
@@ -280,7 +281,7 @@ namespace hoTools.Query
             // btnRun
             // 
             this.btnRun.Image = ((System.Drawing.Image)(resources.GetObject("btnRun.Image")));
-            this.btnRun.Location = new System.Drawing.Point(273, 3);
+            this.btnRun.Location = new System.Drawing.Point(365, 3);
             this.btnRun.Name = "btnRun";
             this.btnRun.Size = new System.Drawing.Size(23, 23);
             this.btnRun.TabIndex = 16;
@@ -304,7 +305,7 @@ namespace hoTools.Query
             // 
             this.lblTitle.AutoSize = true;
             this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitle.Location = new System.Drawing.Point(531, 0);
+            this.lblTitle.Location = new System.Drawing.Point(3, 38);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(196, 25);
             this.lblTitle.TabIndex = 1;
@@ -318,7 +319,7 @@ namespace hoTools.Query
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(81, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(173, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -439,7 +440,8 @@ namespace hoTools.Query
             this.aboutToolStripMenuItem,
             this.helpToolStripMenuItem1,
             this.lastsqlErrorToolStripMenuItem,
-            this.lastSqlStringSentToEAToolStripMenuItem});
+            this.lastSqlStringSentToEAToolStripMenuItem,
+            this.templatesAndMacrosToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             this.helpToolStripMenuItem.Padding = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
@@ -531,7 +533,7 @@ namespace hoTools.Query
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(3, 41);
+            this.button4.Location = new System.Drawing.Point(205, 41);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(75, 23);
             this.button4.TabIndex = 15;
@@ -540,12 +542,20 @@ namespace hoTools.Query
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(84, 41);
+            this.button2.Location = new System.Drawing.Point(286, 41);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 17;
             this.button2.Text = "button2";
             this.button2.UseVisualStyleBackColor = true;
+            // 
+            // templatesAndMacrosToolStripMenuItem
+            // 
+            this.templatesAndMacrosToolStripMenuItem.Name = "templatesAndMacrosToolStripMenuItem";
+            this.templatesAndMacrosToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
+            this.templatesAndMacrosToolStripMenuItem.Text = "Templates and macros";
+            this.templatesAndMacrosToolStripMenuItem.ToolTipText = "View Templates and Macors in Editor";
+            this.templatesAndMacrosToolStripMenuItem.Click += new System.EventHandler(this.templatesAndMacrosToolStripMenuItem_Click);
             // 
             // QueryGUI
             // 
@@ -618,5 +628,6 @@ namespace hoTools.Query
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button btnRun;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.ToolStripMenuItem templatesAndMacrosToolStripMenuItem;
     }
 }

@@ -52,5 +52,16 @@
         <lineHash>TDGrYreQIv6qzNclWo/4XX8rJG0kNesiToTR/i+hxvs=</lineHash>
       </position>
     </Favorite>
+    <Favorite>
+      <name>QueryGUI.cs [Design]</name>
+      <path>querygui\src\querygui.cs</path>
+      <absolutePath>d:\hodata\development\github\enterprisearchitect_hotools\querygui\src\querygui.cs</absolutePath>
+      <viewKind>7651a702-06e5-11d1-8ebd-00a0c90f26ea</viewKind>
+      <position>
+        <line>59</line>
+        <column>10</column>
+        <lineHash>xckYJ56bTkozVo0nvYj02iADPs48qxBKFCjQ7paffyM=</lineHash>
+      </position>
+    </Favorite>
   </favorites>
 </Favorites>

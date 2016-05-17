@@ -12,10 +12,14 @@ Collection of useful tools:
     -- Templates
     -- Macros
     -- See error
+  - Conveyed Items
   - Favorites,..
   - Create powerful SQL queries (tab window, templates, macros and more)
   - Search & Replace, regular expression supported
   - Run Scripts with SQL Search results
+- Configure
+-- Buttons
+-- Searches
 - Administration of EA
   - Version Control
 - Setting to adapt GUI and available features
@@ -28,7 +32,19 @@ Collection of useful tools:
 - Visual Studio 2015
 - Visual Studio Debug: Select "Enable native code debugging"
 
+# SQL Query
+- Tabbed Editor
+- Macro replacement (ID, GUID, Branch, DiagramSelectObject, ConveyedItem,..)
+- DB specific (#DB=ORACLE#,..)
+- Comment your sql
+- Easy find SQ
+- Load / Save
+- History / Last opened
+- Easy cooperation with your beloved editor (try e.g. atom,..)
+- etc.
 
+# SQL Query + Script (VB, JScript, JavaScript)
+- Run SQL and do something by script with the results
 
 # Development #
 - C#

@@ -829,5 +829,14 @@ namespace hoTools.Query
         {
             _sqlTabCntrls.runSqlTabPage();
         }
+
+        void templatesAndMacrosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string content = SqlTemplates.getTooltip(SqlTemplates.SQL_TEMPLATE_ID.MACROS_HELP);
+            SqlError.writeSqlTemplatesAndMacros(content);
+
+            StartFile(SqlError.getSqlTemplatesAndMacrosFilePath());
+
+        }
     }
 }
