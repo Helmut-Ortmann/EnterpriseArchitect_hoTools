@@ -3,7 +3,7 @@ using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
-using System.Diagnostics;
+using hoTools.Utils;
 using hoTools.ActiveX;
 using hoTools.Utils.SQL;
 
@@ -18,6 +18,8 @@ using System.IO;
 
 namespace hoTools.Query
 {
+
+
     /// <summary>
     /// ActiveX COM Component 'hoTools.QueryGUI' to show as tab in the EA Addin window
     /// this.Tag object with string of:
@@ -739,24 +741,6 @@ namespace hoTools.Query
         #endregion
 
 
-        #region Start File
-        /// <summary>
-        /// Start file
-        /// </summary>
-        /// <param name="filePath"></param>
-        static void StartFile(string filePath)
-        {
-            try
-            {
-                // start file with the program defined in Windows for this file
-                Process.Start(filePath);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"{ex.Message}\n\nFile:'{filePath}'", $"Can't open file {Path.GetFileName(filePath)}");
-            }
-        }
-        #endregion
 
 
         /// <summary>
@@ -766,7 +750,7 @@ namespace hoTools.Query
         /// <param name="e"></param>
         void showSqlErrorToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            StartFile(SqlError.getEaSqlErrorFilePath());
+            Util.StartFile(SqlError.getEaSqlErrorFilePath());
         }
 
         
@@ -778,7 +762,7 @@ namespace hoTools.Query
         /// <param name="e"></param>
         void lastSqlStringSentToEAToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            StartFile(SqlError.getHoToolsSqlFilePath());
+            Util.StartFile(SqlError.getHoToolsLastSqlFilePath());
            
         }
 
@@ -830,12 +814,19 @@ namespace hoTools.Query
             _sqlTabCntrls.runSqlTabPage();
         }
 
+        /// <summary>
+        /// Output Help of macros and templates in a text editor
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void templatesAndMacrosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string content = SqlTemplates.getTooltip(SqlTemplates.SQL_TEMPLATE_ID.MACROS_HELP);
-            SqlError.writeSqlTemplatesAndMacros(content);
 
-            StartFile(SqlError.getSqlTemplatesAndMacrosFilePath());
+            string content = SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.MACROS_HELP);
+            // write it do EA home (%appdata%Sparx System\EA\hoTools_SqlTemplatesAndMacros.txt)
+            SqlError.writeSqlTemplatesAndMacros(content);
+            // Show it in Editor
+            Util.StartFile(SqlError.getSqlTemplatesAndMacrosFilePath());
 
         }
     }

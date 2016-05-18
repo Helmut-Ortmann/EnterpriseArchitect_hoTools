@@ -26,8 +26,8 @@ CTRL+SHFT+S                     Store sql All
 \\ Comment                      Just your comment as you may know from C, Java, C#,..
 <Search Term>                   Replaced by Text from the Search Text
 #Branch#                        Selected Package, Replaced by nested recursive as comma separated list of PackageIDs            
-#CONNECTOR_ID#                  Selected Connector, Replaced by ConnectorID
-#CONVEYED_ITEM_IDS#             Selected Connector, Replaced by the Conveyed Items as comma separated list of ElementIDs
+#ConnectorID#                  Selected Connector, Replaced by ConnectorID
+#ConveyedItemsIDS#             Selected Connector, Replaced by the Conveyed Items as comma separated list of ElementIDs
 #CurrentElementGUID#            Alias for #CurrentItemGUID# (EA compatibility)
 #CurrentElementID#              Alias for #CurrentItemID# (EA compatibility)
 #CurrentItemGUID#               Selected Element, Diagram, Replaced by the GUID
@@ -36,7 +36,7 @@ CTRL+SHFT+S                     Store sql All
 #DiagramSelectedElements_IDS#    Selected Diagram Objects of selected Diagram / current Diagram 
 #InBranch#                      Selected Package, Replaced by nested recursive as comma separated list of PackageIDs  like 'IN (13,14,15)'
 #Package#                       Selected Package, Diagram, Element, Attribute, Operation, Replaced by containing Package ID
-#TREE_SELECTED_GUIDS#           In Browser selected Elements as a list of comma separated GUIDS like 'IN (#TREE_SELECTED_GUIDS#)'
+##TreeSelectedGUIDS##           In Browser selected Elements as a list of comma separated GUIDS like 'IN (##TreeSelectedGUIDS##)'
 #WC#                            Wild card, you can also simple use * (will automatically replaced by the DB specific wild card)
 #DB=ACCESS2007#                 DB specif SQL for ACCESS2007
 #DB=ASA#                        DB specif SQL for ASA
@@ -389,6 +389,14 @@ CTRL+SHFT+S                     Store sql All
         {
             ToolStripMenuItem insertTemplateMenuItem = new ToolStripMenuItem("Insert &Template");
 
+            // Insert Branch Template
+            ToolStripMenuItem insertBranchTemplateMenuItem = new ToolStripMenuItem();
+            insertBranchTemplateMenuItem.Text = "Insert Branch Template";
+            var id = SqlTemplates.SQL_TEMPLATE_ID.ELEMENT_TEMPLATE;
+            insertBranchTemplateMenuItem.ToolTipText = SqlTemplates.getTooltip(id);
+            insertBranchTemplateMenuItem.Tag = SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.BRANCH_IDS);
+            insertBranchTemplateMenuItem.Click += new System.EventHandler(insertTemplate_Click);
+
             // Insert Element Template
             ToolStripMenuItem insertElementTemplateMenuItem = new ToolStripMenuItem();
             insertElementTemplateMenuItem.Text = "Insert Element Template";
@@ -522,6 +530,7 @@ CTRL+SHFT+S                     Store sql All
 
             // Build item content Template
             insertTemplateMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+                insertBranchTemplateMenuItem,
                 insertElementTemplateMenuItem,
                 insertElementTypeTemplateMenuItem,
                 insertDiagramTemplateMenuItem,

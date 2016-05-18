@@ -281,7 +281,7 @@ namespace EAAddinFramework.Utils
         public string SqlQueryWithException(string query)
         {
             // delete an existing error file
-            SqlError.deleteEaSqlErrorFile();
+            SqlError.deleteEaSqlError();
             try
             {
                 // run the query
@@ -292,7 +292,7 @@ namespace EAAddinFramework.Utils
                 }
                 else
                 {
-                    MessageBox.Show(SqlError.getEaSqlError(), "Error SQL (CTRL+C to copy it!!)");
+                    MessageBox.Show(SqlError.readEaSqlError(), "Error SQL (CTRL+C to copy it!!)");
                     return null;
                 }
             }
@@ -315,8 +315,8 @@ namespace EAAddinFramework.Utils
         public string SQLQueryNative(string sqlQuery)
         {
             sqlQuery = formatSQL(sqlQuery);
-            // store final query which is executed
-            SqlError.writeEaSqlFile(sqlQuery);
+            // store final/last query which is executed
+            SqlError.writeHoToolsLastSql(sqlQuery);
 
             return Repository.SQLQuery(sqlQuery);// no error, only no result rows
         }

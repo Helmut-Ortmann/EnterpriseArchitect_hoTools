@@ -72,12 +72,12 @@ namespace hoTools.Query
             this.helpToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.lastsqlErrorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lastSqlStringSentToEAToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.templatesAndMacrosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer = new System.Windows.Forms.SplitContainer();
             this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.button4 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.templatesAndMacrosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewScripts)).BeginInit();
             this.contextMenuStripDataGrid.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -478,6 +478,14 @@ namespace hoTools.Query
     "hoTools_LastSql.sql";
             this.lastSqlStringSentToEAToolStripMenuItem.Click += new System.EventHandler(this.lastSqlStringSentToEAToolStripMenuItem_Click);
             // 
+            // templatesAndMacrosToolStripMenuItem
+            // 
+            this.templatesAndMacrosToolStripMenuItem.Name = "templatesAndMacrosToolStripMenuItem";
+            this.templatesAndMacrosToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
+            this.templatesAndMacrosToolStripMenuItem.Text = "Templates and macros";
+            this.templatesAndMacrosToolStripMenuItem.ToolTipText = "View Templates and Macors in Editor";
+            this.templatesAndMacrosToolStripMenuItem.Click += new System.EventHandler(this.templatesAndMacrosToolStripMenuItem_Click);
+            // 
             // splitContainer
             // 
             this.splitContainer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -548,14 +556,6 @@ namespace hoTools.Query
             this.button2.TabIndex = 17;
             this.button2.Text = "button2";
             this.button2.UseVisualStyleBackColor = true;
-            // 
-            // templatesAndMacrosToolStripMenuItem
-            // 
-            this.templatesAndMacrosToolStripMenuItem.Name = "templatesAndMacrosToolStripMenuItem";
-            this.templatesAndMacrosToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
-            this.templatesAndMacrosToolStripMenuItem.Text = "Templates and macros";
-            this.templatesAndMacrosToolStripMenuItem.ToolTipText = "View Templates and Macors in Editor";
-            this.templatesAndMacrosToolStripMenuItem.Click += new System.EventHandler(this.templatesAndMacrosToolStripMenuItem_Click);
             // 
             // QueryGUI
             // 

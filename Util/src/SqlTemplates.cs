@@ -16,22 +16,35 @@ namespace hoTools.Utils.SQL
         /// </summary>
         static Dictionary<SQL_TEMPLATE_ID, SqlTemplate> SqlTemplate = new Dictionary<SQL_TEMPLATE_ID, SqlTemplate>
         {
+
+             { SQL_TEMPLATE_ID.BRANCH_IDS,
+                new SqlTemplate("Branch",@"
+//
+// Template #Branch#
+//
+select pkg.ea_guid AS CLASSGUID, 'Package' AS CLASSTYPE,pkg.Name AS Name,'Package' As Type
+from t_package pkg
+where pkg.package_ID in (#Branch#)
+     
+ORDER BY pkg.Name
+            ", "Template Package recursive") },
+
              { SQL_TEMPLATE_ID.MACROS_HELP,
                 new SqlTemplate("Macros help",
                 "//\r\n" +
                 "// Help to available Macros\r\n" +
                 "// - #Branch#                    Replaced by the package ID of the selected package and all nested package like '512, 31,613' \r\n" +
-                "// - #CONNECTOR_ID#              Selected Connector, Replaced by ConnectorID\r\n" +
-                "// - #CONVEYED_ITEM_IDS#         Selected Connector, Replaced by the Conveyed Items as comma separated list of ElementIDs\r\n" +
+                "// - #ConnectorID#              Selected Connector, Replaced by ConnectorID\r\n" +
+                "// - #ConveyedItemID#         Selected Connector, Replaced by the Conveyed Items as comma separated list of ElementIDs\r\n" +
                 "// - #CurrentElementGUID#        Alias for #CurrentItemGUID# (compatible to EA)\r\n" +
                 "// - #CurrentElementID#          Alias for #CurrentItemID# (compatible to EA)\r\n" +
                 "// - #CurrentItemGUID#           Replaced by the GUID of the selected item (Element, Diagram, Package, Attribute, Operation) \r\n" +
                 "// - #CurrentItemID#             Replaced by the ID of the selected item (Element, Diagram, Package, Attribute, Operation)\r\n" +
                 "// - #DiagramElements_IDS#         Diagram Elements of selected Diagram / current Diagram\r\n"+
                 "// - #DiagramSelectedElements_IDS# Selected Diagram Elements of selected Diagram / current Diagram \r\n" +
-                "// - #InBranch#                  like Branch (nested package recursive), but with SQL IN clause like 'IN (512, 31,613)'\r\n" +
-                "// - #Package#                   Replaced by the package ID of the containing package of selected Package, Element, Diagram, Operation, Attribute\r\n" +
-                "// - #TREE_SELECTED_GUIDS#       In Browser selected Elements as a list of comma separated GUIDS like 'IN (#TREE_SELECTED_GUIDS#)'\r\n" +
+                "// - #InBranch#                  like Branch (nested package recursive), but with SQL IN clause like 'package_ID IN (512, 31,613)'\r\n" +
+                "// - #Package#                   Replaced by the package ID of the containing package of selected Package like: 'package_ID in (#Branch)'\r\n" +
+                "// - #TreeSelectedGUIDS#       In Browser selected Elements as a list of comma separated GUIDS like 'IN (#TreeSelectedGUIDS#)'\r\n" +
                 "// - <Search Term>               Replaced by the string in the 'Search Term' entry field\r\n" +
                 "// - #WC#  or *                  Wild card depending of the current DB. You may simple use '*'\r\n" +
                 "// - #DB=ACCESS2007#             DB specif SQL for ACCESS2007\r\n"+
@@ -158,16 +171,16 @@ namespace hoTools.Utils.SQL
                     "<Search Term> is a string replaced at runtime by a variable string.\nExample: Name = '<Search Term>'") },
             { SQL_TEMPLATE_ID.CONNECTOR_ID,
                 new SqlTemplate("CONNECTOR_ID",
-                    "#CONNECTOR_ID#",
-                    "Placeholder for the current selected connector ID\nExample: ConnectorID = #CONNECTOR_ID# ") },
+                    "#ConnectorID#",
+                    "Placeholder for the current selected connector ID\nExample: ConnectorID = #ConnectorID# ") },
              { SQL_TEMPLATE_ID.CONVEYED_ITEM_IDS,
                 new SqlTemplate("CONVEDYED_ITEM_IDS",
-                    "#CONVEYED_ITEM_IDS#",
-                    "Placeholder for the current conveyed item IDs as comma separated list\nExample: elementID in (#CONVEYED_ITEM_IDS#)") },
-              { SQL_TEMPLATE_ID.TREE_SELECTED_GUIDS,
+                    "#ConveyedItemID#",
+                    "Placeholder for the current conveyed item IDs as comma separated list\nExample: elementID in (#ConveyedItemID#)") },
+             { SQL_TEMPLATE_ID.TREE_SELECTED_GUIDS,
                 new SqlTemplate("TREE_SELECTED_GUIDS",
-                    "#TREE_SELECTED_GUIDS#",
-                    "Placeholder for selected Browser Elements  as comma separated list of GUIDs\nExample: eaGUID in (#TREE_SELECTED_GUIDS#)") },
+                    "#TreeSelectedGUIDS#",
+                    "Placeholder for selected Browser Elements  as comma separated list of GUIDs\nExample: ea_GUID in (#TreeSelectedGUIDS#)") },
             { SQL_TEMPLATE_ID.PACKAGE_ID,
                 new SqlTemplate("PACKAGE_ID",
                     "#Package#",

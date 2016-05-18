@@ -11,6 +11,25 @@ namespace hoTools.Utils
 {
     public static class Util
     {
+
+        #region Start File
+        /// <summary>
+        /// Start file
+        /// </summary>
+        /// <param name="filePath"></param>
+        public static void StartFile(string filePath)
+        {
+            try
+            {
+                // start file with the program defined in Windows for this file
+                Process.Start(filePath);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}\n\nFile:'{filePath}'", $"Can't open file {Path.GetFileName(filePath)}");
+            }
+        }
+        #endregion
         public static string objectTypeToString(EA.ObjectType objectType)
         {
             switch (objectType)

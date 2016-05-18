@@ -1969,7 +1969,7 @@ namespace hoTools.ActiveX
                 string sql = @"
                         select  o.ea_guid AS CLASSGUID, o.object_type AS CLASSTYPE, o.name As Element
                         from t_object o,
-                        where  o.element_id in ( #CONVEYED_ITEM_IDS# )
+                        where  o.element_id in ( #ConveyedItemsIDS# )
                         ORDER BY 3
                 ";
                 // Run SQL with macro replacement

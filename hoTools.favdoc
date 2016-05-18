@@ -63,5 +63,15 @@
         <lineHash>xckYJ56bTkozVo0nvYj02iADPs48qxBKFCjQ7paffyM=</lineHash>
       </position>
     </Favorite>
+    <Favorite>
+      <name>SqlError.cs</name>
+      <path>Util\src\SqlError.cs</path>
+      <absolutePath>D:\hoData\Development\GitHub\EnterpriseArchitect_hoTools\Util\src\SqlError.cs</absolutePath>
+      <position>
+        <line>130</line>
+        <column>30</column>
+        <lineHash>5+obWEMuHaopxcz4zj6nOWbxQXD85sDzYgO3YMTYm1Q=</lineHash>
+      </position>
+    </Favorite>
   </favorites>
 </Favorites>
