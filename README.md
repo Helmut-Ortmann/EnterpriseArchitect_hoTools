@@ -28,7 +28,8 @@ Collection of useful tools:
 - ..
 
 # Preconditions
-- .NET 4
+- >= .NET 4
+- >=  EA 9.0
 - Visual Studio 2015
 - Visual Studio Debug: Select "Enable native code debugging"
 
@@ -39,7 +40,7 @@ Collection of useful tools:
 - Comment your sql
 - Easy find SQ
 - Load / Save
-- History / Last opened
+- History / Last openedt
 - Easy cooperation with your beloved editor (try e.g. atom,..)
 - etc.
 

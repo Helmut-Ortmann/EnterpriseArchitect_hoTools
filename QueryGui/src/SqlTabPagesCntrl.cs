@@ -392,17 +392,17 @@ CTRL+SHFT+S                     Store sql All
             // Insert Branch Template
             ToolStripMenuItem insertBranchTemplateMenuItem = new ToolStripMenuItem();
             insertBranchTemplateMenuItem.Text = "Insert Branch Template";
-            var id = SqlTemplates.SQL_TEMPLATE_ID.ELEMENT_TEMPLATE;
+            var id = SqlTemplates.SQL_TEMPLATE_ID.BRANCH_TEMPLATE;
             insertBranchTemplateMenuItem.ToolTipText = SqlTemplates.getTooltip(id);
-            insertBranchTemplateMenuItem.Tag = SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.BRANCH_IDS);
+            insertBranchTemplateMenuItem.Tag = SqlTemplates.getTemplate(id);
             insertBranchTemplateMenuItem.Click += new System.EventHandler(insertTemplate_Click);
 
             // Insert Element Template
             ToolStripMenuItem insertElementTemplateMenuItem = new ToolStripMenuItem();
             insertElementTemplateMenuItem.Text = "Insert Element Template";
-            var id = SqlTemplates.SQL_TEMPLATE_ID.ELEMENT_TEMPLATE;
+            id = SqlTemplates.SQL_TEMPLATE_ID.ELEMENT_TEMPLATE;
             insertElementTemplateMenuItem.ToolTipText = SqlTemplates.getTooltip(id);
-            insertElementTemplateMenuItem.Tag = SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.ELEMENT_TEMPLATE);
+            insertElementTemplateMenuItem.Tag = SqlTemplates.getTemplate(id);
             insertElementTemplateMenuItem.Click += new System.EventHandler(insertTemplate_Click);
 
             // Insert Element Type Template

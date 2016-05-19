@@ -17,7 +17,7 @@ namespace hoTools.Utils.SQL
         static Dictionary<SQL_TEMPLATE_ID, SqlTemplate> SqlTemplate = new Dictionary<SQL_TEMPLATE_ID, SqlTemplate>
         {
 
-             { SQL_TEMPLATE_ID.BRANCH_IDS,
+             { SQL_TEMPLATE_ID.BRANCH_TEMPLATE,
                 new SqlTemplate("Branch",@"
 //
 // Template #Branch#
@@ -285,6 +285,7 @@ ORDER BY pkg.Name
             DB_FIREBIRD,
             DB_JET,
 
+            BRANCH_TEMPLATE,   // Branch Template
             ELEMENT_TEMPLATE,
             ELEMENT_TYPE_TEMPLATE,
             DIAGRAM_TEMPLATE,
