@@ -1172,15 +1172,7 @@ CTRL+SHFT+S                     Store sql All
         /// <param name="e"></param>
         void sqlTextBox_KeyDown(object sender, KeyEventArgs e)
         {
-            // CTRL + A
-            if (e.KeyData == (Keys.Control | Keys.A))
-            {
-                // select all
-                ((TextBoxUndo)sender).SelectAll();
-                e.Handled = true;
-                return;
-            }
-
+           
         }
         /// <summary>
         /// Handle CTRL sequences for CTRL+S (Store sql) and CTRL+R (RUN sql)
@@ -1229,8 +1221,6 @@ CTRL+SHFT+S                     Store sql All
                 e.Handled = true;
                 return;
             }
-           
-
 
         }
         #endregion

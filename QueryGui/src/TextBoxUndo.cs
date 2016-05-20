@@ -85,7 +85,6 @@ namespace hoTools.Query
         /// <param name="e"></param>
         void text_KeyUp(object sender, KeyEventArgs e)
         {
-            
             if (e.KeyData == (Keys.Control | Keys.Z))
             {
                 RedoText();
@@ -104,8 +103,9 @@ namespace hoTools.Query
             {
                 // select all
                 SelectAll();
+                //ctrlA = true;
                 
-                e.Handled = true;
+                e.SuppressKeyPress = e.Handled = true;
                 return;
             }
 
@@ -113,22 +113,21 @@ namespace hoTools.Query
         #endregion
         void text_KeyDown(object sender, KeyEventArgs e)
         {
-
            
+
             // CTRL + A
             if (e.KeyData == (Keys.Control | Keys.A))
             {
-
-                // select all
-                SelectionStart = 0;
-                SelectionLength = Text.Length;
-                //SelectAll();
+                SelectAll();
                 e.Handled = true;
                 e.SuppressKeyPress = true;
-                
-                return;
+
             }
 
+        }
+        void text_KeyPress(object sender, KeyPressEventArgs e)
+        {
+          
         }
 
 
@@ -177,6 +176,7 @@ namespace hoTools.Query
             TextChanged += textBoxUndo_TextChanged;
             KeyUp += text_KeyUp;  // handle CTRL+Z (Undo) and CTRL+Y (Redo)
             KeyDown += text_KeyDown;  // handle CTRL+Z (Undo) and CTRL+Y (Redo)
+            //KeyPress += text_KeyPress;
 
         }
         #endregion
