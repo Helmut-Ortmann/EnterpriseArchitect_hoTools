@@ -163,6 +163,7 @@ CTRL+SHFT+S                     Store sql All
 
             // register CTRL+S (store SQL) and CTRL+R (run SQL)
             sqlTextBox.KeyUp += sqlTextBox_KeyUp;
+            //sqlTextBox.KeyDown += sqlTextBox_KeyDown;
             ToolTip toolTip = new ToolTip();
             toolTip.IsBalloon = false;
             toolTip.InitialDelay = 0;
@@ -397,6 +398,22 @@ CTRL+SHFT+S                     Store sql All
             insertBranchTemplateMenuItem.Tag = SqlTemplates.getTemplate(id);
             insertBranchTemplateMenuItem.Click += new System.EventHandler(insertTemplate_Click);
 
+            // Insert CurrentItemId Template
+            ToolStripMenuItem insertCurrentItemIdTemplateMenuItem = new ToolStripMenuItem();
+            insertCurrentItemIdTemplateMenuItem.Text = "Insert CurrentItemId Template";
+            id = SqlTemplates.SQL_TEMPLATE_ID.CURRENT_ITEM_ID_TEMPLATE;
+            insertCurrentItemIdTemplateMenuItem.ToolTipText = SqlTemplates.getTooltip(id);
+            insertCurrentItemIdTemplateMenuItem.Tag = SqlTemplates.getTemplate(id);
+            insertCurrentItemIdTemplateMenuItem.Click += new System.EventHandler(insertTemplate_Click);
+
+            // Insert CurrentItemGuid Template
+            ToolStripMenuItem insertCurrentItemGuidTemplateMenuItem = new ToolStripMenuItem();
+            insertCurrentItemGuidTemplateMenuItem.Text = "Insert CurrentItemGuid Template";
+            id = SqlTemplates.SQL_TEMPLATE_ID.CURRENT_ITEM_GUID_TEMPLATE;
+            insertCurrentItemGuidTemplateMenuItem.ToolTipText = SqlTemplates.getTooltip(id);
+            insertCurrentItemGuidTemplateMenuItem.Tag = SqlTemplates.getTemplate(id);
+            insertCurrentItemGuidTemplateMenuItem.Click += new System.EventHandler(insertTemplate_Click);
+
             // Insert Element Template
             ToolStripMenuItem insertElementTemplateMenuItem = new ToolStripMenuItem();
             insertElementTemplateMenuItem.Text = "Insert Element Template";
@@ -531,6 +548,8 @@ CTRL+SHFT+S                     Store sql All
             // Build item content Template
             insertTemplateMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
                 insertBranchTemplateMenuItem,
+                insertCurrentItemIdTemplateMenuItem,
+                insertCurrentItemGuidTemplateMenuItem,
                 insertElementTemplateMenuItem,
                 insertElementTypeTemplateMenuItem,
                 insertDiagramTemplateMenuItem,
@@ -738,11 +757,20 @@ CTRL+SHFT+S                     Store sql All
             ToolStripMenuItem menuItem = (ToolStripMenuItem)sender;
             SqlTemplate template = (SqlTemplate)menuItem.Tag;
 
-            // Insert text
-            var selectionIndex = textBox.SelectionStart;
+
+            // insert text and replace a selected range
             var templateText = template.TemplateText;
-            textBox.Text = textBox.Text.Insert(selectionIndex, templateText);
-            textBox.SelectionStart = selectionIndex + templateText.Length;
+            int iSelectionStart = textBox.SelectionStart;
+            string sBefore = textBox.Text.Substring(0, iSelectionStart);
+            string sAfter = textBox.Text.Substring(iSelectionStart + textBox.SelectionLength);
+            textBox.Text = sBefore + templateText + sAfter;
+            // select string
+            textBox.SelectionStart = iSelectionStart;
+            textBox.SelectionLength = templateText.Length;
+
+
+
+
 
 
         }
@@ -1142,6 +1170,23 @@ CTRL+SHFT+S                     Store sql All
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        void sqlTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            // CTRL + A
+            if (e.KeyData == (Keys.Control | Keys.A))
+            {
+                // select all
+                ((TextBoxUndo)sender).SelectAll();
+                e.Handled = true;
+                return;
+            }
+
+        }
+        /// <summary>
+        /// Handle CTRL sequences for CTRL+S (Store sql) and CTRL+R (RUN sql)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void sqlTextBox_KeyUp(object sender, KeyEventArgs e)
         {
             // New Tab, add tab
@@ -1184,6 +1229,8 @@ CTRL+SHFT+S                     Store sql All
                 e.Handled = true;
                 return;
             }
+           
+
 
         }
         #endregion

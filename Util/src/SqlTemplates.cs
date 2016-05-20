@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Forms;
+using System.Resources;
+using System.Reflection;
 using System.Text.RegularExpressions;
 using EA;
 
@@ -17,7 +19,20 @@ namespace hoTools.Utils.SQL
         static Dictionary<SQL_TEMPLATE_ID, SqlTemplate> SqlTemplate = new Dictionary<SQL_TEMPLATE_ID, SqlTemplate>
         {
 
-             { SQL_TEMPLATE_ID.BRANCH_TEMPLATE,
+             {  SQL_TEMPLATE_ID.CURRENT_ITEM_ID_TEMPLATE,
+                new SqlTemplate("CurrentItemIdTemplate",
+                    "CurrentItemIdTemplate",
+                    "Template to select current selected item (Package, Diagram, Element, Attribute, Operation) by an ID",
+                    isResource:true
+                    ) },
+              {  SQL_TEMPLATE_ID.CURRENT_ITEM_GUID_TEMPLATE,
+                new SqlTemplate("CurrentItemGuidTemplate",
+                    "CurrentItemGuidTemplate",
+                    "Template to select current selected item (Package, Diagram, Element, Attribute, Operation) by a GUID",
+                    isResource:true
+                    ) },
+
+            {  SQL_TEMPLATE_ID.BRANCH_TEMPLATE,
                 new SqlTemplate("Branch",@"
 //
 // Template #Branch#
@@ -304,6 +319,8 @@ ORDER BY pkg.Name
             BRANCH_IDS,     // Package (nested, recursive) ids separated by ','  like '20,21,47,1'
             IN_BRANCH_IDS,  // Package (nested, recursive), complete SQL in clause, ids separated by ','  like 'IN (20,21,47,1)', just a shortcut for #BRANCH_ID#
             CURRENT_ITEM_ID,     // ALIAS CURRENT_ELEMENT_ID exists (compatible to EA)
+            CURRENT_ITEM_ID_TEMPLATE,   // Template for usage of #CurrentItemId#
+            CURRENT_ITEM_GUID_TEMPLATE, // Template for usage of #CurrentItemGUID#
             CURRENT_ITEM_GUID,  // ALIAS CURRENT_ELEMENT_GUID exists (compatible to EA)
             DiagramSelectedElements_IDS,// Selected Diagram objects as a comma separated list of IDs
             DiagramElements_IDS,        // Diagram objects (selected diagram) as a comma separated list of IDs
@@ -336,7 +353,7 @@ ORDER BY pkg.Name
 
         }
         /// <summary>
-        /// Get TemplateText or null according to templateID
+        /// Get TemplateText (the template) or null according to templateID. 
         /// </summary>
         /// <param name="templateID"></param>
         /// <returns></returns>
@@ -345,7 +362,12 @@ ORDER BY pkg.Name
             SqlTemplate template;
             if (SqlTemplate.TryGetValue(templateID, out template))
             {
-                return template.TemplateText;
+                // get string from class or from resource
+                if (template.IsResource)
+                {
+                    ResourceManager rm = new ResourceManager("hoTools.Utils.Resources.Strings", Assembly.GetExecutingAssembly());
+                    return rm.GetString(template.TemplateText); 
+                }  else return template.TemplateText;
             }
             else {
                 MessageBox.Show("ID={templateID}", "Invalid templateID");

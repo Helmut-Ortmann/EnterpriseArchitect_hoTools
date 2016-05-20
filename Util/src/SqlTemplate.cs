@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Resources;
+using System.Reflection;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,11 +16,24 @@ namespace hoTools.Utils.SQL
     public class SqlTemplate
     {
 
-        public string TemplateText { get; }
+        public string TemplateText {
+            get
+            {
+                if (IsResource)
+                {
+                    ResourceManager rm = new ResourceManager("hoTools.Utils.Resources.Strings", Assembly.GetExecutingAssembly());
+                    return rm.GetString(_templateText);
+                }
+                return _templateText;
+            }
+           
+        }
+        string _templateText;
         public string TemplateName { get; }
         public string ToolTip { get; }
+        public Boolean IsResource { get; }
         /// <summary>
-        /// Constructor SQL Template
+        /// Constructor SQL Template with the resource as Text
         /// </summary>
         /// <param name="templateName"></param>
         /// <param name="templateText"></param>
@@ -26,8 +41,22 @@ namespace hoTools.Utils.SQL
         public SqlTemplate(string templateName, string templateText, string toolTip)
         {
             TemplateName = templateName;
-            TemplateText = templateText;
+            _templateText = templateText;
             ToolTip = toolTip;
+            IsResource = false;
+        }
+        /// <summary>
+        /// Constructor SQL Template with the resource as Resource name
+        /// </summary>
+        /// <param name="templateName"></param>
+        /// <param name="templateText"></param>
+        /// <param name="toolTip"></param>
+        public SqlTemplate(string templateName, string templateText, string toolTip, bool isResource)
+        {
+            TemplateName = templateName;
+            _templateText = templateText;
+            ToolTip = toolTip;
+            IsResource = isResource;
         }
     }
 }

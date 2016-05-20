@@ -117,6 +117,102 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CurrentItemGuidTemplate" xml:space="preserve">
+    <value>//
+// Get current Item GUID (Package, Diagram, Element, Attribut, Operation)
+//
+// Template for macro: #CurrentItemGUID# or Alias #CurrentElementGUID#
+//
+// V1.00 17. May 2016 created
+//
+
+// As Element
+select o.ea_guid AS CLASSGUID, o.object_type AS CLASSTYPE,o.Name AS Name,o.object_type As Type 
+from t_object o
+where o.ea_guid = #CurrentElementGUID#
+
+UNION
+
+// As Diagram
+select dia.ea_guid AS CLASSGUID, dia.diagram_type AS CLASSTYPE,dia.Name AS Name,dia.diagram_type As Type 
+from t_diagram dia
+where dia.ea_guid = #CurrentElementGUID#
+
+UNION
+
+// As Package
+select pkg.ea_guid AS CLASSGUID, 'Package' AS CLASSTYPE,pkg.Name AS Name,'Package' As Type 
+from t_package pkg
+where pkg.ea_guid = #CurrentElementGUID#
+
+
+
+UNION
+// As Attribute
+select attr.ea_guid AS CLASSGUID,'Attribute',attr.Name AS Name,'Attribute' 
+from t_attribute attr
+where attr.ea_guid = #CurrentElementGUID#
+
+UNION
+
+// As operation
+select opr.ea_guid AS CLASSGUID,'P',opr.Name AS Name,'Operation' 
+from t_operation opr
+where opr.ea_guid = #CurrentElementGUID#
+
+
+  
+
+
+
+ORDER BY Name</value>
+  </data>
+  <data name="CurrentItemIdTemplate" xml:space="preserve">
+    <value>//
+// Get current Item ID (Package, Diagram, Element, Attribut, Operation)
+//
+// Template for macro: #CurrentItemID# or Alias #CurrentElementID#
+// Pay Attention: ID may be ambiguous. Better use #CurrentItemId#
+//
+// V1.00 17. May 2016 created
+//
+
+// As Element
+select o.ea_guid AS CLASSGUID, o.object_type AS CLASSTYPE,o.Name AS Name,o.object_type As Type 
+from t_object o
+where o.object_ID = #CurrentElementID#
+
+UNION
+
+// As Diagram
+select dia.ea_guid AS CLASSGUID, dia.diagram_type AS CLASSTYPE,dia.Name AS Name,dia.diagram_type As Type 
+from t_diagram dia
+where dia.diagram_ID = #CurrentElementID#
+
+UNION
+
+// As Package
+select pkg.ea_guid AS CLASSGUID, 'Package' AS CLASSTYPE,pkg.Name AS Name,'Package' As Type 
+from t_package pkg
+where pkg.package_ID = #CurrentElementID#
+
+
+
+UNION
+// As Attribute
+select attr.ea_guid AS CLASSGUID,'Attribute',attr.Name AS Name,'Attribute' 
+from t_attribute attr
+where attr.object_ID = #CurrentElementID#
+
+UNION
+
+// As operation
+select opr.ea_guid AS CLASSGUID,'P',opr.Name AS Name,'Operation' 
+from t_operation opr
+where opr.object_ID = #CurrentElementID#
+
+ORDER BY Name</value>
+  </data>
   <data name="SearchFavorite" xml:space="preserve">
     <value>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;RootSearch&gt;&lt;Search Name="Favorites" GUID="{A70B9F0E-14CD-4c03-B8FE-21C644DC2D5E}" 

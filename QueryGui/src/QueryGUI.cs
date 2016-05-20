@@ -66,6 +66,7 @@ namespace hoTools.Query
         /// </summary>
         public QueryGUI()
         {
+            Application.EnableVisualStyles();
             InitializeComponent();
 
             // individual initialization

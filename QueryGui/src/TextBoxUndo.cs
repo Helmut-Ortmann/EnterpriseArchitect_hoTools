@@ -99,11 +99,38 @@ namespace hoTools.Query
                 e.Handled = true;
                 return;
             }
+            // CTRL + A
+            if (e.KeyData == (Keys.Control | Keys.A))
+            {
+                // select all
+                SelectAll();
+                
+                e.Handled = true;
+                return;
+            }
 
         }
         #endregion
-       
-       
+        void text_KeyDown(object sender, KeyEventArgs e)
+        {
+
+           
+            // CTRL + A
+            if (e.KeyData == (Keys.Control | Keys.A))
+            {
+
+                // select all
+                SelectionStart = 0;
+                SelectionLength = Text.Length;
+                //SelectAll();
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+                
+                return;
+            }
+
+        }
+
 
         #region Event TextChanged
         /// <summary>
@@ -140,6 +167,7 @@ namespace hoTools.Query
             ScrollBars = ScrollBars.Both;
             AcceptsReturn = true;
             AcceptsTab = true;
+            ShortcutsEnabled = true; // enable keys
 
             // Set WordWrap to true to allow text to wrap to the next line.
             WordWrap = true;
@@ -148,6 +176,7 @@ namespace hoTools.Query
 
             TextChanged += textBoxUndo_TextChanged;
             KeyUp += text_KeyUp;  // handle CTRL+Z (Undo) and CTRL+Y (Redo)
+            KeyDown += text_KeyDown;  // handle CTRL+Z (Undo) and CTRL+Y (Redo)
 
         }
         #endregion

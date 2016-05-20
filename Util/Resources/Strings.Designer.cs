@@ -61,6 +61,58 @@ namespace hoTools.Utils.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to //
+        ///// Get current Item GUID (Package, Diagram, Element, Attribut, Operation)
+        /////
+        ///// Template for macro: #CurrentItemGUID# or Alias #CurrentElementGUID#
+        /////
+        ///// V1.00 17. May 2016 created
+        /////
+        ///
+        ///// As Element
+        ///select o.ea_guid AS CLASSGUID, o.object_type AS CLASSTYPE,o.Name AS Name,o.object_type As Type 
+        ///from t_object o
+        ///where o.ea_guid = #CurrentElementGUID#
+        ///
+        ///UNION
+        ///
+        ///// As Diagram
+        ///select dia.ea_guid AS CLASSGUID, dia.diagram_type AS CLASSTYPE,dia.Name AS Name,dia.diagram_type As Type 
+        ///from t_diagram [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string CurrentItemGuidTemplate {
+            get {
+                return ResourceManager.GetString("CurrentItemGuidTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to //
+        ///// Get current Item ID (Package, Diagram, Element, Attribut, Operation)
+        /////
+        ///// Template for macro: #CurrentItemID# or Alias #CurrentElementID#
+        ///// Pay Attention: ID may be ambiguous. Better use #CurrentItemId#
+        /////
+        ///// V1.00 17. May 2016 created
+        /////
+        ///
+        ///// As Element
+        ///select o.ea_guid AS CLASSGUID, o.object_type AS CLASSTYPE,o.Name AS Name,o.object_type As Type 
+        ///from t_object o
+        ///where o.object_ID = #CurrentElementID#
+        ///
+        ///UNION
+        ///
+        ///// As Diagram
+        ///select dia.ea_guid AS CLASSGUID, dia.diagram_type AS CLASSTY [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string CurrentItemIdTemplate {
+            get {
+                return ResourceManager.GetString("CurrentItemIdTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
         ///&lt;RootSearch&gt;&lt;Search Name=&quot;Favorites&quot; GUID=&quot;{A70B9F0E-14CD-4c03-B8FE-21C644DC2D5E}&quot; 
         ///PkgGUID=&quot;-1&quot; Type=&quot;0&quot; LnksToObj=&quot;0&quot; CustomSearch=&quot;1&quot; AddinAndMethodName=&quot;&quot;&gt;&lt;SrchOn&gt;
