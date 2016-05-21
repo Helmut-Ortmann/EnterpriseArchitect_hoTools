@@ -370,14 +370,19 @@ CTRL+SHFT+S                     Store sql All
 
             insertMacroMenuItem.DropDownItems.AddRange(new ToolStripItem[] {
                 insertMacroSearchTermMenuItem,
+                new ToolStripSeparator(),
                 insertPackageMenuItem,
                 insertBranchMenuItem,
+                new ToolStripSeparator(),
                 insertCurrentIdMenuItem,
                 insertCurrentGuidMenuItem,
+                new ToolStripSeparator(),
                 insertConnectorIdMenuItem,
                 insertConveyedItemIdsMenuItem,
+                new ToolStripSeparator(),
                 insertDiagramElements_IDSMenuItem,
                 insertDiagramSelectedElements_IDSMenuItem,
+                new ToolStripSeparator(),
                 insertTreeSelectedGUIDSMenuItem,
                 insertWcMenuItem
                 });
@@ -422,6 +427,23 @@ CTRL+SHFT+S                     Store sql All
             insertCurrentItemGuidTemplateMenuItem.Tag = SqlTemplates.getTemplate(id);
             insertCurrentItemGuidTemplateMenuItem.Click += new System.EventHandler(insertTemplate_Click);
 
+            // Insert ConveyedItemIDS Template
+            ToolStripMenuItem insertConveyedtemIDSTemplateMenuItem = new ToolStripMenuItem();
+            insertConveyedtemIDSTemplateMenuItem.Text = "Insert ConveyedItemTemplate Template";
+            id = SqlTemplates.SQL_TEMPLATE_ID.CONVEYED_ITEM_IDS_TEMPLATE;
+            insertConveyedtemIDSTemplateMenuItem.ToolTipText = SqlTemplates.getTooltip(id);
+            insertConveyedtemIDSTemplateMenuItem.Tag = SqlTemplates.getTemplate(id);
+            insertConveyedtemIDSTemplateMenuItem.Click += new System.EventHandler(insertTemplate_Click);
+
+            // Insert Connectors from Element Template
+            ToolStripMenuItem insertConnectorsFromElementTemplateMenuItem = new ToolStripMenuItem();
+            insertConnectorsFromElementTemplateMenuItem.Text = "Insert Connectors from Element Template";
+            id = SqlTemplates.SQL_TEMPLATE_ID.CONNECTORS_FROM_ELEMENT_TEMPLATE;
+            insertConnectorsFromElementTemplateMenuItem.ToolTipText = SqlTemplates.getTooltip(id);
+            insertConnectorsFromElementTemplateMenuItem.Tag = SqlTemplates.getTemplate(id);
+            insertConnectorsFromElementTemplateMenuItem.Click += new System.EventHandler(insertTemplate_Click);
+
+
             // Insert Element Template
             ToolStripMenuItem insertElementTemplateMenuItem = new ToolStripMenuItem();
             insertElementTemplateMenuItem.Text = "Insert Element Template";
@@ -436,6 +458,24 @@ CTRL+SHFT+S                     Store sql All
             insertElementTypeTemplateMenuItem.ToolTipText = SqlTemplates.getTooltip(SqlTemplates.SQL_TEMPLATE_ID.ELEMENT_TYPE_TEMPLATE);
             insertElementTypeTemplateMenuItem.Tag = SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.ELEMENT_TYPE_TEMPLATE);
             insertElementTypeTemplateMenuItem.Click += new System.EventHandler(insertTemplate_Click);
+
+
+            // Insert Diagram Elements Template
+            ToolStripMenuItem insertDiagramElementTemplateMenuItem = new ToolStripMenuItem();
+            insertDiagramElementTemplateMenuItem.Text = "Insert Diagram Elements Template";
+            id = SqlTemplates.SQL_TEMPLATE_ID.DIAGRAM_ELEMENTS_IDS_TEMPLATE;
+            insertDiagramElementTemplateMenuItem.ToolTipText = SqlTemplates.getTooltip(id);
+            insertDiagramElementTemplateMenuItem.Tag = SqlTemplates.getTemplate(id);
+            insertDiagramElementTemplateMenuItem.Click += new System.EventHandler(insertTemplate_Click);
+
+            // Insert Diagram Selected Elements Template
+            ToolStripMenuItem insertDiagramSelectedElementTemplateMenuItem = new ToolStripMenuItem();
+            insertDiagramSelectedElementTemplateMenuItem.Text = "Insert Diagram selected Elements Template";
+            id = SqlTemplates.SQL_TEMPLATE_ID.DIAGRAM_SELECTED_ELEMENTS_IDS_TEMPLATE;
+            insertDiagramSelectedElementTemplateMenuItem.ToolTipText = SqlTemplates.getTooltip(id);
+            insertDiagramSelectedElementTemplateMenuItem.Tag = SqlTemplates.getTemplate(id);
+            insertDiagramSelectedElementTemplateMenuItem.Click += new System.EventHandler(insertTemplate_Click);
+
 
             // Insert Diagram Template
             ToolStripMenuItem insertDiagramTemplateMenuItem = new ToolStripMenuItem();
@@ -556,16 +596,27 @@ CTRL+SHFT+S                     Store sql All
             // Build item content Template
             insertTemplateMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
                 insertBranchTemplateMenuItem,
+                insertPackageTemplateMenuItem,
+                new ToolStripSeparator(),
                 insertCurrentItemIdTemplateMenuItem,
                 insertCurrentItemGuidTemplateMenuItem,
+                new ToolStripSeparator(),
+                insertConveyedtemIDSTemplateMenuItem,
+                insertConnectorsFromElementTemplateMenuItem,
+                new ToolStripSeparator(),
                 insertElementTemplateMenuItem,
                 insertElementTypeTemplateMenuItem,
+                new ToolStripSeparator(),
                 insertDiagramTemplateMenuItem,
                 insertDiagramTypeTemplateMenuItem,
-                insertPackageTemplateMenuItem,
                 insertDiagramObjectTemplateMenuItem,
+                new ToolStripSeparator(),
+                insertDiagramElementTemplateMenuItem,
+                insertDiagramSelectedElementTemplateMenuItem,
+                new ToolStripSeparator(),
                 insertAttributeTemplateMenuItem,
                 insertOperationTemplateMenuItem,
+                new ToolStripSeparator(),
                 insertDBTemplateMenuItem
                 });
 

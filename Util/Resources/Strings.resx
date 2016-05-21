@@ -117,6 +117,34 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ConnectorsFromElementTemplate" xml:space="preserve">
+    <value>//
+// Get Connector (conveyed items) from selected Elements
+// Select Element and get diagram
+//
+select  s.ea_guid AS CLASSGUID, s.object_type AS CLASSTYPE, s.name As Source , d.name As Destination
+from t_xref x,   // a lot of things like properties,..
+     t_connector c,
+     t_object s, // Souce element
+     t_object d  // destination element
+
+where  x.description like  '#WC##CurrentElementGUID##WC#' AND
+       x.Behavior = 'conveyed' AND
+       c.ea_guid = x.client    
+
+and    c.ea_guid = x.client
+and    c.start_object_id = s.object_id
+and    c.end_object_id = d.object_id</value>
+  </data>
+  <data name="ConveyedItemsIdsTemplate" xml:space="preserve">
+    <value>//
+// Get Elements from selected Connector (conveyed Items)
+//
+select  o.ea_guid AS CLASSGUID, o.object_type AS CLASSTYPE, o.name As Element
+from t_object o
+
+where  o.Object_ID in ( #ConveyedItemIDS# )</value>
+  </data>
   <data name="CurrentItemGuidTemplate" xml:space="preserve">
     <value>//
 // Get current Item GUID (Package, Diagram, Element, Attribut, Operation)
@@ -129,21 +157,21 @@
 // As Element
 select o.ea_guid AS CLASSGUID, o.object_type AS CLASSTYPE,o.Name AS Name,o.object_type As Type 
 from t_object o
-where o.ea_guid = #CurrentElementGUID#
+where o.ea_guid = '#CurrentElementGUID#'
 
 UNION
 
 // As Diagram
 select dia.ea_guid AS CLASSGUID, dia.diagram_type AS CLASSTYPE,dia.Name AS Name,dia.diagram_type As Type 
 from t_diagram dia
-where dia.ea_guid = #CurrentElementGUID#
+where dia.ea_guid = '#CurrentElementGUID#'
 
 UNION
 
 // As Package
 select pkg.ea_guid AS CLASSGUID, 'Package' AS CLASSTYPE,pkg.Name AS Name,'Package' As Type 
 from t_package pkg
-where pkg.ea_guid = #CurrentElementGUID#
+where pkg.ea_guid = '#CurrentElementGUID#'
 
 
 
@@ -151,19 +179,14 @@ UNION
 // As Attribute
 select attr.ea_guid AS CLASSGUID,'Attribute',attr.Name AS Name,'Attribute' 
 from t_attribute attr
-where attr.ea_guid = #CurrentElementGUID#
+where attr.ea_guid = '#CurrentElementGUID#'
 
 UNION
 
 // As operation
 select opr.ea_guid AS CLASSGUID,'P',opr.Name AS Name,'Operation' 
 from t_operation opr
-where opr.ea_guid = #CurrentElementGUID#
-
-
-  
-
-
+where opr.ea_guid = '#CurrentElementGUID#'
 
 ORDER BY Name</value>
   </data>
@@ -212,6 +235,26 @@ from t_operation opr
 where opr.object_ID = #CurrentElementID#
 
 ORDER BY Name</value>
+  </data>
+  <data name="DiagramElementsIdsTemplate" xml:space="preserve">
+    <value>//
+// Template DiagramElements_IDS
+//
+select o.ea_guid AS CLASSGUID, o.object_type AS CLASSTYPE,o.Name AS Name,o.object_type As Type 
+from t_object o
+where o.object_ID in (#DiagramElements_IDS#)
+  
+ORDER BY o.Name</value>
+  </data>
+  <data name="DiagramSelectedElementsIdsTemplate" xml:space="preserve">
+    <value>//
+// Template DiagramElements_IDS
+//
+select o.ea_guid AS CLASSGUID, o.object_type AS CLASSTYPE,o.Name AS Name,o.object_type As Type 
+from t_object o
+where o.object_ID in (#DiagramSelectedElements_IDS#)
+  
+ORDER BY o.Name</value>
   </data>
   <data name="SearchFavorite" xml:space="preserve">
     <value>&lt;?xml version="1.0" encoding="UTF-8"?&gt;

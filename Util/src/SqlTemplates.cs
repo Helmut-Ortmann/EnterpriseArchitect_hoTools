@@ -20,17 +20,46 @@ namespace hoTools.Utils.SQL
         {
 
              {  SQL_TEMPLATE_ID.CURRENT_ITEM_ID_TEMPLATE,
-                new SqlTemplate("CurrentItemIdTemplate",
-                    "CurrentItemIdTemplate",
+                new SqlTemplate("Current Item Id Template", // Name
+                    "CurrentItemIdTemplate",                // String ID of Resource
                     "Template to select current selected item (Package, Diagram, Element, Attribute, Operation) by an ID",
                     isResource:true
                     ) },
               {  SQL_TEMPLATE_ID.CURRENT_ITEM_GUID_TEMPLATE,
-                new SqlTemplate("CurrentItemGuidTemplate",
-                    "CurrentItemGuidTemplate",
+                new SqlTemplate("Current Item Guid Template", // Name
+                    "CurrentItemGuidTemplate",       // String ID of Resource
                     "Template to select current selected item (Package, Diagram, Element, Attribute, Operation) by a GUID",
                     isResource:true
                     ) },
+              {  SQL_TEMPLATE_ID.CONVEYED_ITEM_IDS_TEMPLATE,
+                new SqlTemplate("Conveyed Item IDS Template", // Name
+                    "ConveyedItemsIdsTemplate",           // String ID of Resource
+                    "Template to get Conveyed Items from the selected connector like: 'ElementID IN ( #ConveyedItemsIDS# )",
+                    isResource:true
+                    ) },
+              {  SQL_TEMPLATE_ID.CONNECTORS_FROM_ELEMENT_TEMPLATE,
+                new SqlTemplate("Connectors from Element",    // Name
+                    "ConnectorsFromElementTemplate",          // String ID of Resource
+                    "Template to get connectors with Conveyed Items from the selected Element. Gets list of Elements which are source of connector. Right Click, Goto Diagram to get the Source element in the Diagram",
+                    isResource:true
+                    ) },
+
+                {  SQL_TEMPLATE_ID.DIAGRAM_ELEMENTS_IDS_TEMPLATE,
+                new SqlTemplate("Diagram Elements IDS template",    // Name
+                    "DiagramElementsIdsTemplate",          // String ID of Resource
+                    "Template to get all Diagram Elements",
+                    isResource:true
+                    ) },
+
+                {  SQL_TEMPLATE_ID.DIAGRAM_SELECTED_ELEMENTS_IDS_TEMPLATE,
+                new SqlTemplate("Diagram selected Elements IDS template",    // Name
+                    "DiagramSelectedElementsIdsTemplate",          // String ID of Resource
+                    "Template to get selected Diagram Elements",
+                    isResource:true
+                    ) },
+
+
+
 
             {  SQL_TEMPLATE_ID.BRANCH_TEMPLATE,
                 new SqlTemplate("Branch",@"
@@ -50,7 +79,7 @@ ORDER BY pkg.Name
                 "// Help to available Macros\r\n" +
                 "// - #Branch#                    Replaced by the package ID of the selected package and all nested package like '512, 31,613' \r\n" +
                 "// - #ConnectorID#              Selected Connector, Replaced by ConnectorID\r\n" +
-                "// - #ConveyedItemID#         Selected Connector, Replaced by the Conveyed Items as comma separated list of ElementIDs\r\n" +
+                "// - #ConveyedItemIDS#           Selected Connector, Replaced by the Conveyed Items as comma separated list of ElementIDs like ' IN (#ConveyedItemIDS#)'\r\n" +
                 "// - #CurrentElementGUID#        Alias for #CurrentItemGUID# (compatible to EA)\r\n" +
                 "// - #CurrentElementID#          Alias for #CurrentItemID# (compatible to EA)\r\n" +
                 "// - #CurrentItemGUID#           Replaced by the GUID of the selected item (Element, Diagram, Package, Attribute, Operation) \r\n" +
@@ -190,8 +219,8 @@ ORDER BY pkg.Name
                     "Placeholder for the current selected connector ID\nExample: ConnectorID = #ConnectorID# ") },
              { SQL_TEMPLATE_ID.CONVEYED_ITEM_IDS,
                 new SqlTemplate("CONVEDYED_ITEM_IDS",
-                    "#ConveyedItemID#",
-                    "Placeholder for the current conveyed item IDs as comma separated list\nExample: elementID in (#ConveyedItemID#)") },
+                    "#ConveyedItemIDS#",
+                    "Placeholder for the current conveyed item IDs as comma separated list\nExample: 'elementID in (#ConveyedItemIDS#)'") },
              { SQL_TEMPLATE_ID.TREE_SELECTED_GUIDS,
                 new SqlTemplate("TREE_SELECTED_GUIDS",
                     "#TreeSelectedGUIDS#",
@@ -315,6 +344,8 @@ ORDER BY pkg.Name
             MACROS_HELP,        // Help to macros
             CONNECTOR_ID,   // Get's the connector
             CONVEYED_ITEM_IDS, // Get's the conveyed Items of the connector as a comma separated ID list of elementIDs
+            CONVEYED_ITEM_IDS_TEMPLATE, // Template Conveyed Items of the selected connector
+            CONNECTORS_FROM_ELEMENT_TEMPLATE, // Template to get the Connector with Conveyed Items from Element
             PACKAGE_ID,      // The containing package of Package, Diagram, Element, Attribute, Operation
             BRANCH_IDS,     // Package (nested, recursive) ids separated by ','  like '20,21,47,1'
             IN_BRANCH_IDS,  // Package (nested, recursive), complete SQL in clause, ids separated by ','  like 'IN (20,21,47,1)', just a shortcut for #BRANCH_ID#
@@ -324,6 +355,8 @@ ORDER BY pkg.Name
             CURRENT_ITEM_GUID,  // ALIAS CURRENT_ELEMENT_GUID exists (compatible to EA)
             DiagramSelectedElements_IDS,// Selected Diagram objects as a comma separated list of IDs
             DiagramElements_IDS,        // Diagram objects (selected diagram) as a comma separated list of IDs
+            DIAGRAM_ELEMENTS_IDS_TEMPLATE,
+            DIAGRAM_SELECTED_ELEMENTS_IDS_TEMPLATE,
             AUTHOR,
             TREE_SELECTED_GUIDS, // get all the GUIDs of the selected items (otDiagram, otElement, otPackage, otAttribute, otMethod
             NOW,
@@ -414,6 +447,7 @@ ORDER BY pkg.Name
 
         /// <summary>
         /// Replace Macro by value. Possible Macros are: Search Term, ID, GUID, Package ID, Branch ID,... 
+        /// <para/>- convert all macros to lower case
         /// </summary>
         /// <param name="rep"></param>
         /// <param name="sqlString">The complete SQL string</param>
@@ -689,8 +723,8 @@ ORDER BY pkg.Name
 
                 if (guid != "")
                 {
-                    sql = sql.Replace(template, $"'{guid}'");
-                    sql = sql.Replace("#CurrentElementGUID#", $"'{guid}'");// Alias for EA compatibility
+                    sql = sql.Replace(template, $"{guid}");
+                    sql = sql.Replace("#CurrentElementGUID#", $"{guid}");// Alias for EA compatibility
                 }
                 else
                 // no diagram, element or package selected

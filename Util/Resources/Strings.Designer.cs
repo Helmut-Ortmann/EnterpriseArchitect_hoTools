@@ -62,6 +62,44 @@ namespace hoTools.Utils.Resources {
         
         /// <summary>
         ///   Looks up a localized string similar to //
+        ///// Get Connector (conveyed items) from selected Elements
+        ///// Select Element and get diagram
+        /////
+        ///select  s.ea_guid AS CLASSGUID, s.object_type AS CLASSTYPE, s.name As Source , d.name As Destination
+        ///from t_xref x,   // a lot of things like properties,..
+        ///     t_connector c,
+        ///     t_object s, // Souce element
+        ///     t_object d  // destination element
+        ///
+        ///where  x.description like  &apos;#WC##CurrentElementGUID##WC#&apos; AND
+        ///       x.Behavior = &apos;conveyed&apos; AND
+        ///       c.ea_guid = x.client    
+        ///
+        ///and    c.ea_guid = x [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string ConnectorsFromElementTemplate {
+            get {
+                return ResourceManager.GetString("ConnectorsFromElementTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to //
+        ///// Get Elements from selected Connector (conveyed Items)
+        /////
+        ///select  o.ea_guid AS CLASSGUID, o.object_type AS CLASSTYPE, o.name As Element
+        ///from t_object o
+        ///
+        ///where  o.Object_ID in ( #ConveyedItemIDS# ).
+        /// </summary>
+        internal static string ConveyedItemsIdsTemplate {
+            get {
+                return ResourceManager.GetString("ConveyedItemsIdsTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to //
         ///// Get current Item GUID (Package, Diagram, Element, Attribut, Operation)
         /////
         ///// Template for macro: #CurrentItemGUID# or Alias #CurrentElementGUID#
@@ -72,13 +110,13 @@ namespace hoTools.Utils.Resources {
         ///// As Element
         ///select o.ea_guid AS CLASSGUID, o.object_type AS CLASSTYPE,o.Name AS Name,o.object_type As Type 
         ///from t_object o
-        ///where o.ea_guid = #CurrentElementGUID#
+        ///where o.ea_guid = &apos;#CurrentElementGUID#&apos;
         ///
         ///UNION
         ///
         ///// As Diagram
         ///select dia.ea_guid AS CLASSGUID, dia.diagram_type AS CLASSTYPE,dia.Name AS Name,dia.diagram_type As Type 
-        ///from t_diagram [rest of string was truncated]&quot;;.
+        ///from t_diagr [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string CurrentItemGuidTemplate {
             get {
@@ -109,6 +147,38 @@ namespace hoTools.Utils.Resources {
         internal static string CurrentItemIdTemplate {
             get {
                 return ResourceManager.GetString("CurrentItemIdTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to //
+        ///// Template DiagramElements_IDS
+        /////
+        ///select o.ea_guid AS CLASSGUID, o.object_type AS CLASSTYPE,o.Name AS Name,o.object_type As Type 
+        ///from t_object o
+        ///where o.object_ID in (#DiagramElements_IDS#)
+        ///  
+        ///ORDER BY o.Name.
+        /// </summary>
+        internal static string DiagramElementsIdsTemplate {
+            get {
+                return ResourceManager.GetString("DiagramElementsIdsTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to //
+        ///// Template DiagramElements_IDS
+        /////
+        ///select o.ea_guid AS CLASSGUID, o.object_type AS CLASSTYPE,o.Name AS Name,o.object_type As Type 
+        ///from t_object o
+        ///where o.object_ID in (#DiagramSelectedElements_IDS#)
+        ///  
+        ///ORDER BY o.Name.
+        /// </summary>
+        internal static string DiagramSelectedElementsIdsTemplate {
+            get {
+                return ResourceManager.GetString("DiagramSelectedElementsIdsTemplate", resourceCulture);
             }
         }
         
