@@ -213,6 +213,12 @@ CTRL+SHFT+S                     Store sql All
             fileRunMenuItem.Click += fileRunMenuItem_Click;
 
 
+            // Run selected sql 
+            ToolStripMenuItem fileRunSelectedMenuItem = new ToolStripMenuItem();
+            fileRunSelectedMenuItem.Text = "Run selected sql";
+            fileRunSelectedMenuItem.Click += fileRunSelectedMenuItem_Click;
+
+
             //------------------------------------------------------------------------------------------------------------------
             // Insert Template
             ToolStripMenuItem insertTemplateMenuItem = getTemplateMenuItems();
@@ -240,7 +246,9 @@ CTRL+SHFT+S                     Store sql All
                 insertTemplateMenuItem,             // insert template
                 insertMacroMenuItem,                // insert macro
                 new ToolStripSeparator(),
-                fileRunMenuItem,                    // run query
+                fileRunMenuItem,                    // run sql
+                fileRunSelectedMenuItem,            // run sql for selected area
+                // run query
                 new ToolStripSeparator(),
                 fileSaveMenuItem,                   // save query
                 fileSaveAsMenuItem,                 // save query as..
@@ -1141,6 +1149,7 @@ CTRL+SHFT+S                     Store sql All
             _tabControl.TabPages.Remove(tabPage);
         }
 
+       
         #region runSqlTabPage
         /// <summary>
         /// Run SQL for selected TabPage
@@ -1162,6 +1171,25 @@ CTRL+SHFT+S                     Store sql All
         void fileRunMenuItem_Click(object sender, EventArgs e)
         {
             runSqlTabPage();
+        }
+
+        /// <summary>
+        /// Run sql for selected Text
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void fileRunSelectedMenuItem_Click(object sender, EventArgs e)
+        {
+            if (_tabControl.SelectedIndex < 0) return;
+            // get TabPage
+            Cursor.Current = Cursors.WaitCursor;
+            TabPage tabPage = _tabControl.TabPages[_tabControl.SelectedIndex];
+
+            // get TextBox
+            var textBox = (TextBox)tabPage.Controls[0];
+            
+           _model.SQLRun(textBox.SelectedText, _sqlTextBoxSearchTerm.Text);
+            Cursor.Current = Cursors.Default;
         }
 
         #region Key up
