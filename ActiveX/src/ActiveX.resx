@@ -131,7 +131,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="toolStripContainer1.ContentPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>395, 2</value>
+    <value>405, 2</value>
   </data>
   <data name="&gt;&gt;toolStripContainer1.ContentPanel.Name" xml:space="preserve">
     <value>toolStripContainer1.ContentPanel</value>
@@ -158,7 +158,7 @@
     <value>1</value>
   </data>
   <data name="toolStripContainer1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
+    <value>1, 0</value>
   </data>
   <data name="&gt;&gt;toolStripContainer1.RightToolStripPanel.Name" xml:space="preserve">
     <value>toolStripContainer1.RightToolStripPanel</value>
@@ -173,7 +173,7 @@
     <value>2</value>
   </data>
   <data name="toolStripContainer1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>395, 27</value>
+    <value>405, 27</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="toolStripContainer1.TabIndex" type="System.Int32, mscorlib">
@@ -182,147 +182,119 @@
   <data name="toolStripContainer1.Text" xml:space="preserve">
     <value>toolStripContainer1</value>
   </data>
-  <metadata name="toolStripService.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <metadata name="toolStripQuery.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="toolStripService.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+  <data name="toolStripQuery.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>None</value>
   </data>
-  <data name="toolStripBtn11.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+  <data name="toolStripSearchBtn1.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
-  <data name="toolStripBtn11.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="toolStripSearchBtn1.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 22</value>
   </data>
-  <data name="toolStripBtn11.Text" xml:space="preserve">
+  <data name="toolStripSearchBtn1.Text" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="toolStripBtn12.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
-  </data>
-  <data name="toolStripBtn12.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="toolStripSearchBtn2.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 22</value>
   </data>
-  <data name="toolStripBtn12.Text" xml:space="preserve">
+  <data name="toolStripSearchBtn3.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="toolStripSearchBtn3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 22</value>
+  </data>
+  <data name="toolStripSearchBtn3.Text" xml:space="preserve">
+    <value>F3</value>
+  </data>
+  <data name="toolStripSearchBtn4.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="toolStripSearchBtn4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 22</value>
+  </data>
+  <data name="toolStripSearchBtn4.Text" xml:space="preserve">
+    <value>F4</value>
+  </data>
+  <data name="toolStripSearchBtn5.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="toolStripSearchBtn5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 22</value>
+  </data>
+  <data name="toolStripSearchBtn5.Text" xml:space="preserve">
+    <value>F5</value>
+  </data>
+  <data name="toolStripSeparator6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 25</value>
+  </data>
+  <data name="toolStripServiceBtn1.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="toolStripServiceBtn1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 22</value>
+  </data>
+  <data name="toolStripServiceBtn1.Text" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="toolStripServiceBtn2.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="toolStripServiceBtn2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 22</value>
+  </data>
+  <data name="toolStripServiceBtn2.Text" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="toolStripBtn13.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+  <data name="toolStripServiceBtn3.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
-  <data name="toolStripBtn13.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="toolStripServiceBtn3.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 22</value>
   </data>
-  <data name="toolStripBtn13.Text" xml:space="preserve">
+  <data name="toolStripServiceBtn3.Text" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="toolStripBtn14.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+  <data name="toolStripServiceBtn4.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
-  <data name="toolStripBtn14.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="toolStripServiceBtn4.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 22</value>
   </data>
-  <data name="toolStripBtn14.Text" xml:space="preserve">
+  <data name="toolStripServiceBtn4.Text" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="toolStripBtn15.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+  <data name="toolStripServiceBtn5.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
-  <data name="toolStripBtn15.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="toolStripServiceBtn5.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 22</value>
   </data>
-  <data name="toolStripBtn15.Text" xml:space="preserve">
+  <data name="toolStripServiceBtn5.Text" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="toolStripService.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="toolStripQuery.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 0</value>
   </data>
-  <data name="toolStripService.Size" type="System.Drawing.Size, System.Drawing">
-    <value>127, 25</value>
+  <data name="toolStripQuery.Size" type="System.Drawing.Size, System.Drawing">
+    <value>248, 25</value>
   </data>
-  <data name="toolStripService.TabIndex" type="System.Int32, mscorlib">
+  <data name="toolStripQuery.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <metadata name="toolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>286, 17</value>
   </metadata>
-  <data name="toolStripService.ToolTip" xml:space="preserve">
-    <value>Services (configurable by settings)</value>
-  </data>
-  <data name="&gt;&gt;toolStripService.Name" xml:space="preserve">
-    <value>toolStripService</value>
-  </data>
-  <data name="&gt;&gt;toolStripService.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripService.Parent" xml:space="preserve">
-    <value>toolStripContainer1.TopToolStripPanel</value>
-  </data>
-  <data name="&gt;&gt;toolStripService.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <metadata name="toolStripQuery.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>154, 17</value>
-  </metadata>
-  <data name="toolStripQuery.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>None</value>
-  </data>
-  <data name="toolStripBtn1.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
-  </data>
-  <data name="toolStripBtn1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
-  </data>
-  <data name="toolStripBtn1.Text" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="toolStripBtn2.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
-  </data>
-  <data name="toolStripBtn2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
-  </data>
-  <data name="toolStripBtn2.Text" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="toolStripBtn3.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
-  </data>
-  <data name="toolStripBtn3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
-  </data>
-  <data name="toolStripBtn3.Text" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="toolStripBtn4.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
-  </data>
-  <data name="toolStripBtn4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
-  </data>
-  <data name="toolStripBtn4.Text" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="toolStripBtn5.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
-  </data>
-  <data name="toolStripBtn5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
-  </data>
-  <data name="toolStripBtn5.Text" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="toolStripQuery.Location" type="System.Drawing.Point, System.Drawing">
-    <value>130, 0</value>
-  </data>
-  <data name="toolStripQuery.Size" type="System.Drawing.Size, System.Drawing">
-    <value>127, 25</value>
-  </data>
-  <data name="toolStripQuery.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
   <data name="toolStripQuery.ToolTip" xml:space="preserve">
-    <value>Shortcuts (configurable by settings)</value>
+    <value>5 Buttons Model Searches  +
+5 Buttons Services
+
+Buttons to quickly start an configurable 
+- EA Model Search
+- Service</value>
   </data>
   <data name="&gt;&gt;toolStripQuery.Name" xml:space="preserve">
     <value>toolStripQuery</value>
@@ -334,7 +306,7 @@
     <value>toolStripContainer1.TopToolStripPanel</value>
   </data>
   <data name="&gt;&gt;toolStripQuery.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;toolStripContainer1.TopToolStripPanel.Name" xml:space="preserve">
     <value>toolStripContainer1.TopToolStripPanel</value>
@@ -1261,28 +1233,28 @@ There is no interface to directly select more than one Browser Element (as far a
     <value>376, 17</value>
   </metadata>
   <data name="settingGeneralToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>207, 22</value>
+    <value>345, 22</value>
   </data>
   <data name="settingGeneralToolStripMenuItem.Text" xml:space="preserve">
     <value>Setting &amp;General</value>
   </data>
   <data name="settingsQueryAndSctipToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>207, 22</value>
+    <value>345, 22</value>
   </data>
   <data name="settingsQueryAndSctipToolStripMenuItem.Text" xml:space="preserve">
     <value>Settings &amp;Query and Script</value>
   </data>
   <data name="settingsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>207, 22</value>
+    <value>345, 22</value>
   </data>
   <data name="settingsToolStripMenuItem.Text" xml:space="preserve">
     <value>Settings &amp;Linestyle</value>
   </data>
   <data name="settingsKeysToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>207, 22</value>
+    <value>345, 22</value>
   </data>
   <data name="settingsKeysToolStripMenuItem.Text" xml:space="preserve">
-    <value>Settings &amp;Keys</value>
+    <value>Settings Buttons and Keys for Searches and Services</value>
   </data>
   <data name="fileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>37, 20</value>
@@ -1882,64 +1854,70 @@ Select Element to make direction of all Port connections to unspecified.</value>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>409, 407</value>
   </data>
-  <data name="&gt;&gt;toolStripBtn11.Name" xml:space="preserve">
-    <value>toolStripBtn11</value>
+  <data name="&gt;&gt;toolStripSearchBtn1.Name" xml:space="preserve">
+    <value>toolStripSearchBtn1</value>
   </data>
-  <data name="&gt;&gt;toolStripBtn11.Type" xml:space="preserve">
+  <data name="&gt;&gt;toolStripSearchBtn1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripBtn12.Name" xml:space="preserve">
-    <value>toolStripBtn12</value>
+  <data name="&gt;&gt;toolStripSearchBtn2.Name" xml:space="preserve">
+    <value>toolStripSearchBtn2</value>
   </data>
-  <data name="&gt;&gt;toolStripBtn12.Type" xml:space="preserve">
+  <data name="&gt;&gt;toolStripSearchBtn2.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripBtn13.Name" xml:space="preserve">
-    <value>toolStripBtn13</value>
+  <data name="&gt;&gt;toolStripSearchBtn3.Name" xml:space="preserve">
+    <value>toolStripSearchBtn3</value>
   </data>
-  <data name="&gt;&gt;toolStripBtn13.Type" xml:space="preserve">
+  <data name="&gt;&gt;toolStripSearchBtn3.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripBtn14.Name" xml:space="preserve">
-    <value>toolStripBtn14</value>
+  <data name="&gt;&gt;toolStripSearchBtn4.Name" xml:space="preserve">
+    <value>toolStripSearchBtn4</value>
   </data>
-  <data name="&gt;&gt;toolStripBtn14.Type" xml:space="preserve">
+  <data name="&gt;&gt;toolStripSearchBtn4.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripBtn15.Name" xml:space="preserve">
-    <value>toolStripBtn15</value>
+  <data name="&gt;&gt;toolStripSearchBtn5.Name" xml:space="preserve">
+    <value>toolStripSearchBtn5</value>
   </data>
-  <data name="&gt;&gt;toolStripBtn15.Type" xml:space="preserve">
+  <data name="&gt;&gt;toolStripSearchBtn5.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripBtn1.Name" xml:space="preserve">
-    <value>toolStripBtn1</value>
+  <data name="&gt;&gt;toolStripSeparator6.Name" xml:space="preserve">
+    <value>toolStripSeparator6</value>
   </data>
-  <data name="&gt;&gt;toolStripBtn1.Type" xml:space="preserve">
+  <data name="&gt;&gt;toolStripSeparator6.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripServiceBtn1.Name" xml:space="preserve">
+    <value>toolStripServiceBtn1</value>
+  </data>
+  <data name="&gt;&gt;toolStripServiceBtn1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripBtn2.Name" xml:space="preserve">
-    <value>toolStripBtn2</value>
+  <data name="&gt;&gt;toolStripServiceBtn2.Name" xml:space="preserve">
+    <value>toolStripServiceBtn2</value>
   </data>
-  <data name="&gt;&gt;toolStripBtn2.Type" xml:space="preserve">
+  <data name="&gt;&gt;toolStripServiceBtn2.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripBtn3.Name" xml:space="preserve">
-    <value>toolStripBtn3</value>
+  <data name="&gt;&gt;toolStripServiceBtn3.Name" xml:space="preserve">
+    <value>toolStripServiceBtn3</value>
   </data>
-  <data name="&gt;&gt;toolStripBtn3.Type" xml:space="preserve">
+  <data name="&gt;&gt;toolStripServiceBtn3.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripBtn4.Name" xml:space="preserve">
-    <value>toolStripBtn4</value>
+  <data name="&gt;&gt;toolStripServiceBtn4.Name" xml:space="preserve">
+    <value>toolStripServiceBtn4</value>
   </data>
-  <data name="&gt;&gt;toolStripBtn4.Type" xml:space="preserve">
+  <data name="&gt;&gt;toolStripServiceBtn4.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripBtn5.Name" xml:space="preserve">
-    <value>toolStripBtn5</value>
+  <data name="&gt;&gt;toolStripServiceBtn5.Name" xml:space="preserve">
+    <value>toolStripServiceBtn5</value>
   </data>
-  <data name="&gt;&gt;toolStripBtn5.Type" xml:space="preserve">
+  <data name="&gt;&gt;toolStripServiceBtn5.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolTip.Name" xml:space="preserve">

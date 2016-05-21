@@ -67,18 +67,12 @@ namespace hoTools.ActiveX
         private ToolStripMenuItem changeXMLFileToolStripMenuItem;
         private ToolStripMenuItem helpToolStripMenuItem1;
         private ToolStripContainer toolStripContainer1;
-        private ToolStrip toolStripService;
-        private ToolStripButton toolStripBtn11;
-        private ToolStripButton toolStripBtn12;
-        private ToolStripButton toolStripBtn13;
-        private ToolStripButton toolStripBtn14;
-        private ToolStripButton toolStripBtn15;
         private ToolStrip toolStripQuery;
-        private ToolStripButton toolStripBtn1;
-        private ToolStripButton toolStripBtn2;
-        private ToolStripButton toolStripBtn3;
-        private ToolStripButton toolStripBtn4;
-        private ToolStripButton toolStripBtn5;
+        private ToolStripButton toolStripSearchBtn1;
+        private ToolStripButton toolStripSearchBtn2;
+        private ToolStripButton toolStripSearchBtn3;
+        private ToolStripButton toolStripSearchBtn4;
+        private ToolStripButton toolStripSearchBtn5;
         private ToolStripSeparator toolStripSeparator1;
         private ToolStripMenuItem changeAuthorToolStripMenuItem;
         private ToolStripMenuItem changeAuthorRecursiveToolStripMenuItem;
@@ -137,6 +131,12 @@ namespace hoTools.ActiveX
         private Panel panelConveyedItems;
         private Button btnConveyedItemElement;
         private Button btnConveyedItemConnector;
+        private ToolStripSeparator toolStripSeparator6;
+        private ToolStripButton toolStripServiceBtn1;
+        private ToolStripButton toolStripServiceBtn2;
+        private ToolStripButton toolStripServiceBtn3;
+        private ToolStripButton toolStripServiceBtn4;
+        private ToolStripButton toolStripServiceBtn5;
         private TextBox txtUserText;
         #endregion
 
@@ -180,8 +180,8 @@ namespace hoTools.ActiveX
         public void initializeSettings()
         {
             parameterizeMenusAndButtons();
-            parameterizeButtonQueries();
-            parameterizeButtonServices();
+            parameterizeSearchButton();
+            parameterizeServiceButton();
         }
         #endregion
 
@@ -726,18 +726,18 @@ namespace hoTools.ActiveX
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddinControlGUI));
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
-            this.toolStripService = new System.Windows.Forms.ToolStrip();
-            this.toolStripBtn11 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripBtn12 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripBtn13 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripBtn14 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripBtn15 = new System.Windows.Forms.ToolStripButton();
             this.toolStripQuery = new System.Windows.Forms.ToolStrip();
-            this.toolStripBtn1 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripBtn2 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripBtn3 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripBtn4 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripBtn5 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSearchBtn1 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSearchBtn2 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSearchBtn3 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSearchBtn4 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSearchBtn5 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripServiceBtn1 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripServiceBtn2 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripServiceBtn3 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripServiceBtn4 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripServiceBtn5 = new System.Windows.Forms.ToolStripButton();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.btnLabelRight = new System.Windows.Forms.Button();
             this.btnLabelLeft = new System.Windows.Forms.Button();
@@ -831,7 +831,6 @@ namespace hoTools.ActiveX
             this.panelConveyedItems = new System.Windows.Forms.Panel();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
-            this.toolStripService.SuspendLayout();
             this.toolStripQuery.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.panelQuickSearch.SuspendLayout();
@@ -858,104 +857,96 @@ namespace hoTools.ActiveX
             // 
             // toolStripContainer1.TopToolStripPanel
             // 
-            this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.toolStripService);
             this.toolStripContainer1.TopToolStripPanel.Controls.Add(this.toolStripQuery);
-            // 
-            // toolStripService
-            // 
-            resources.ApplyResources(this.toolStripService, "toolStripService");
-            this.toolStripService.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.toolStripService.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripBtn11,
-            this.toolStripBtn12,
-            this.toolStripBtn13,
-            this.toolStripBtn14,
-            this.toolStripBtn15});
-            this.toolStripService.Name = "toolStripService";
-            this.toolTip.SetToolTip(this.toolStripService, resources.GetString("toolStripService.ToolTip"));
-            // 
-            // toolStripBtn11
-            // 
-            this.toolStripBtn11.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            resources.ApplyResources(this.toolStripBtn11, "toolStripBtn11");
-            this.toolStripBtn11.Name = "toolStripBtn11";
-            this.toolStripBtn11.Click += new System.EventHandler(this.toolStripBtn11_Click);
-            // 
-            // toolStripBtn12
-            // 
-            this.toolStripBtn12.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            resources.ApplyResources(this.toolStripBtn12, "toolStripBtn12");
-            this.toolStripBtn12.Name = "toolStripBtn12";
-            this.toolStripBtn12.Click += new System.EventHandler(this.toolStripBtn12_Click);
-            // 
-            // toolStripBtn13
-            // 
-            this.toolStripBtn13.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            resources.ApplyResources(this.toolStripBtn13, "toolStripBtn13");
-            this.toolStripBtn13.Name = "toolStripBtn13";
-            this.toolStripBtn13.Click += new System.EventHandler(this.toolStripBtn13_Click);
-            // 
-            // toolStripBtn14
-            // 
-            this.toolStripBtn14.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            resources.ApplyResources(this.toolStripBtn14, "toolStripBtn14");
-            this.toolStripBtn14.Name = "toolStripBtn14";
-            this.toolStripBtn14.Click += new System.EventHandler(this.toolStripBtn14_Click);
-            // 
-            // toolStripBtn15
-            // 
-            this.toolStripBtn15.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            resources.ApplyResources(this.toolStripBtn15, "toolStripBtn15");
-            this.toolStripBtn15.Name = "toolStripBtn15";
-            this.toolStripBtn15.Click += new System.EventHandler(this.toolStripBtn15_Click);
             // 
             // toolStripQuery
             // 
             resources.ApplyResources(this.toolStripQuery, "toolStripQuery");
             this.toolStripQuery.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStripQuery.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripBtn1,
-            this.toolStripBtn2,
-            this.toolStripBtn3,
-            this.toolStripBtn4,
-            this.toolStripBtn5});
+            this.toolStripSearchBtn1,
+            this.toolStripSearchBtn2,
+            this.toolStripSearchBtn3,
+            this.toolStripSearchBtn4,
+            this.toolStripSearchBtn5,
+            this.toolStripSeparator6,
+            this.toolStripServiceBtn1,
+            this.toolStripServiceBtn2,
+            this.toolStripServiceBtn3,
+            this.toolStripServiceBtn4,
+            this.toolStripServiceBtn5});
             this.toolStripQuery.Name = "toolStripQuery";
             this.toolTip.SetToolTip(this.toolStripQuery, resources.GetString("toolStripQuery.ToolTip"));
             // 
-            // toolStripBtn1
+            // toolStripSearchBtn1
             // 
-            this.toolStripBtn1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            resources.ApplyResources(this.toolStripBtn1, "toolStripBtn1");
-            this.toolStripBtn1.Name = "toolStripBtn1";
-            this.toolStripBtn1.Click += new System.EventHandler(this.toolStripBtn1_Click);
+            this.toolStripSearchBtn1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            resources.ApplyResources(this.toolStripSearchBtn1, "toolStripSearchBtn1");
+            this.toolStripSearchBtn1.Name = "toolStripSearchBtn1";
+            this.toolStripSearchBtn1.Click += new System.EventHandler(this.toolStripBtn11_Click);
             // 
-            // toolStripBtn2
+            // toolStripSearchBtn2
             // 
-            this.toolStripBtn2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            resources.ApplyResources(this.toolStripBtn2, "toolStripBtn2");
-            this.toolStripBtn2.Name = "toolStripBtn2";
-            this.toolStripBtn2.Click += new System.EventHandler(this.toolStripBtn2_Click);
+            this.toolStripSearchBtn2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripSearchBtn2.Name = "toolStripSearchBtn2";
+            resources.ApplyResources(this.toolStripSearchBtn2, "toolStripSearchBtn2");
+            this.toolStripSearchBtn2.Click += new System.EventHandler(this.toolStripBtn12_Click);
             // 
-            // toolStripBtn3
+            // toolStripSearchBtn3
             // 
-            this.toolStripBtn3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            resources.ApplyResources(this.toolStripBtn3, "toolStripBtn3");
-            this.toolStripBtn3.Name = "toolStripBtn3";
-            this.toolStripBtn3.Click += new System.EventHandler(this.toolStripBtn3_Click);
+            this.toolStripSearchBtn3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            resources.ApplyResources(this.toolStripSearchBtn3, "toolStripSearchBtn3");
+            this.toolStripSearchBtn3.Name = "toolStripSearchBtn3";
+            this.toolStripSearchBtn3.Click += new System.EventHandler(this.toolStripBtn13_Click);
             // 
-            // toolStripBtn4
+            // toolStripSearchBtn4
             // 
-            this.toolStripBtn4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            resources.ApplyResources(this.toolStripBtn4, "toolStripBtn4");
-            this.toolStripBtn4.Name = "toolStripBtn4";
-            this.toolStripBtn4.Click += new System.EventHandler(this.toolStripBtn4_Click);
+            this.toolStripSearchBtn4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            resources.ApplyResources(this.toolStripSearchBtn4, "toolStripSearchBtn4");
+            this.toolStripSearchBtn4.Name = "toolStripSearchBtn4";
+            this.toolStripSearchBtn4.Click += new System.EventHandler(this.toolStripBtn14_Click);
             // 
-            // toolStripBtn5
+            // toolStripSearchBtn5
             // 
-            this.toolStripBtn5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            resources.ApplyResources(this.toolStripBtn5, "toolStripBtn5");
-            this.toolStripBtn5.Name = "toolStripBtn5";
-            this.toolStripBtn5.Click += new System.EventHandler(this.toolStripBtn5_Click);
+            this.toolStripSearchBtn5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            resources.ApplyResources(this.toolStripSearchBtn5, "toolStripSearchBtn5");
+            this.toolStripSearchBtn5.Name = "toolStripSearchBtn5";
+            this.toolStripSearchBtn5.Click += new System.EventHandler(this.toolStripBtn15_Click);
+            // 
+            // toolStripSeparator6
+            // 
+            this.toolStripSeparator6.Name = "toolStripSeparator6";
+            resources.ApplyResources(this.toolStripSeparator6, "toolStripSeparator6");
+            // 
+            // toolStripServiceBtn1
+            // 
+            this.toolStripServiceBtn1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            resources.ApplyResources(this.toolStripServiceBtn1, "toolStripServiceBtn1");
+            this.toolStripServiceBtn1.Name = "toolStripServiceBtn1";
+            // 
+            // toolStripServiceBtn2
+            // 
+            this.toolStripServiceBtn2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            resources.ApplyResources(this.toolStripServiceBtn2, "toolStripServiceBtn2");
+            this.toolStripServiceBtn2.Name = "toolStripServiceBtn2";
+            // 
+            // toolStripServiceBtn3
+            // 
+            this.toolStripServiceBtn3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            resources.ApplyResources(this.toolStripServiceBtn3, "toolStripServiceBtn3");
+            this.toolStripServiceBtn3.Name = "toolStripServiceBtn3";
+            // 
+            // toolStripServiceBtn4
+            // 
+            this.toolStripServiceBtn4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            resources.ApplyResources(this.toolStripServiceBtn4, "toolStripServiceBtn4");
+            this.toolStripServiceBtn4.Name = "toolStripServiceBtn4";
+            // 
+            // toolStripServiceBtn5
+            // 
+            this.toolStripServiceBtn5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            resources.ApplyResources(this.toolStripServiceBtn5, "toolStripServiceBtn5");
+            this.toolStripServiceBtn5.Name = "toolStripServiceBtn5";
             // 
             // btnLabelRight
             // 
@@ -1643,8 +1634,6 @@ namespace hoTools.ActiveX
             this.toolStripContainer1.TopToolStripPanel.PerformLayout();
             this.toolStripContainer1.ResumeLayout(false);
             this.toolStripContainer1.PerformLayout();
-            this.toolStripService.ResumeLayout(false);
-            this.toolStripService.PerformLayout();
             this.toolStripQuery.ResumeLayout(false);
             this.toolStripQuery.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
@@ -1748,8 +1737,6 @@ namespace hoTools.ActiveX
 
             // Buttons for queries and services
             panelButtons.Visible = AddinSettings.isShowQueryButton || AddinSettings.isShowServiceButton;
-            toolStripService.Visible = AddinSettings.isShowServiceButton;
-            toolStripQuery.Visible = AddinSettings.isShowQueryButton;
 
 
             // SVN support
@@ -1822,33 +1809,51 @@ namespace hoTools.ActiveX
         }
         #endregion
         #region parameterizeButtonQueries
-        public void parameterizeButtonQueries()
+        /// <summary>
+        /// Parametrize 5 quick buttons for search with:
+        /// <para/>- Search Name
+        /// <para/>- Search Tooltip
+        /// </summary>
+        public void parameterizeSearchButton()
         {
             for (int pos = 0; pos < AddinSettings.buttonsSearch.Length; pos++)
             {
-                if (AddinSettings.buttonsSearch[pos] == null) continue;
-                EaAddinButtons shortcut = AddinSettings.buttonsSearch[pos];
+                const string defaultHelptext = "Free Model Searches, Model Search not parametrized.";
+                string buttonText = "";
+                string helpText = defaultHelptext;
+                if (AddinSettings.buttonsSearch[pos] != null)
+                {
+                    EaAddinButtons search = AddinSettings.buttonsSearch[pos];
+                    {
+                        if (search.keyText.Trim() != "")
+                        {
+                            buttonText = search.keyText;
+                            helpText = search.keySearchTooltip;
+                        }
+                    }
+                }
+                
                 switch (pos)
                 {
                     case 0:
-                        toolStripBtn11.Text = shortcut.keyText;
-                        toolStripBtn11.ToolTipText = shortcut.keySearchTooltip;
+                        toolStripSearchBtn1.Text = buttonText;
+                        toolStripSearchBtn1.ToolTipText = helpText;
                         break;
                     case 1:
-                        toolStripBtn12.Text = shortcut.keyText;
-                        toolStripBtn12.ToolTipText = shortcut.keySearchTooltip;
+                        toolStripSearchBtn2.Text = buttonText;
+                        toolStripSearchBtn2.ToolTipText = helpText;
                         break;
                     case 2:
-                        toolStripBtn13.Text = shortcut.keyText;
-                        toolStripBtn13.ToolTipText = shortcut.keySearchTooltip;
+                        toolStripSearchBtn3.Text = buttonText;
+                        toolStripSearchBtn3.ToolTipText = helpText;
                         break;
                     case 3:
-                        toolStripBtn14.Text = shortcut.keyText;
-                        toolStripBtn14.ToolTipText = shortcut.keySearchTooltip;
+                        toolStripSearchBtn4.Text = buttonText;
+                        toolStripSearchBtn4.ToolTipText = helpText;
                         break;
                     case 4:
-                        toolStripBtn15.Text = shortcut.keyText;
-                        toolStripBtn15.ToolTipText = shortcut.keySearchTooltip;
+                        toolStripSearchBtn5.Text = buttonText;
+                        toolStripSearchBtn5.ToolTipText = helpText;
                         break;
 
                 }
@@ -1856,33 +1861,43 @@ namespace hoTools.ActiveX
         }
         #endregion
         #region parameterizeButtonServices
-        public void parameterizeButtonServices()
+        public void parameterizeServiceButton()
         {
             for (int pos = 0; pos < AddinSettings.buttonsServices.Count; pos++)
             {
-                if (AddinSettings.buttonsServices[pos] == null) continue;
-                ServicesCallConfig service = AddinSettings.buttonsServices[pos];
+                string buttonText= "";
+                string helpText = "free Service, Service not parametrized";
+                if (AddinSettings.buttonsServices[pos] != null)
+                {
+                    ServicesCallConfig service = AddinSettings.buttonsServices[pos];
+                    if (service.ButtonText.Trim() != "")
+                    {
+                        buttonText = service.ButtonText;
+                        helpText = service.Help;
+                    }
+                }
+
                 switch (pos)
                 {
                     case 0:
-                        toolStripBtn1.Text = service.ButtonText;
-                        toolStripBtn1.ToolTipText = service.Help;
+                        toolStripServiceBtn1.Text = buttonText;
+                        toolStripServiceBtn1.ToolTipText = helpText;
                         break;
                     case 1:
-                        toolStripBtn2.Text = service.ButtonText;
-                        toolStripBtn2.ToolTipText = service.Help;
+                        toolStripServiceBtn2.Text = buttonText;
+                        toolStripServiceBtn2.ToolTipText = helpText;
                         break;
                     case 2:
-                        toolStripBtn3.Text = service.ButtonText;
-                        toolStripBtn3.ToolTipText = service.Help;
+                        toolStripServiceBtn3.Text = buttonText; ;
+                        toolStripServiceBtn3.ToolTipText = helpText;
                         break;
                     case 3:
-                        toolStripBtn4.Text = service.ButtonText;
-                        toolStripBtn4.ToolTipText = service.Help;
+                        toolStripServiceBtn4.Text = buttonText; ;
+                        toolStripServiceBtn4.ToolTipText = helpText;
                         break;
                     case 4:
-                        toolStripBtn5.Text = service.ButtonText;
-                        toolStripBtn5.ToolTipText = service.Help;
+                        toolStripServiceBtn5.Text = buttonText; ;
+                        toolStripServiceBtn5.ToolTipText = helpText;
                         break;
 
                 }
