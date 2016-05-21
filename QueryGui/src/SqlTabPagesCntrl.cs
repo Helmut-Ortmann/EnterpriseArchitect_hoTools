@@ -354,6 +354,14 @@ CTRL+SHFT+S                     Store sql All
             insertDiagramElements_IDSMenuItem.Click += insertTemplate_Click;
 
 
+            // Insert Diagram IDs
+            ToolStripMenuItem insertDiagramElements_IDMenuItem = new ToolStripMenuItem();
+            var id = SqlTemplates.SQL_TEMPLATE_ID.DIAGRAM_ID;
+            insertDiagramElements_IDMenuItem.Text = "Insert " + SqlTemplates.getTemplateText(id);
+            insertDiagramElements_IDMenuItem.ToolTipText = SqlTemplates.getTooltip(id);
+            insertDiagramElements_IDMenuItem.Tag = SqlTemplates.getTemplate(id);
+            insertDiagramElements_IDMenuItem.Click += insertTemplate_Click;
+
             // Tree selected GUIDs
             ToolStripMenuItem insertTreeSelectedGUIDSMenuItem = new ToolStripMenuItem();
             insertTreeSelectedGUIDSMenuItem.Text = "Insert " + SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.TREE_SELECTED_GUIDS);
@@ -380,6 +388,7 @@ CTRL+SHFT+S                     Store sql All
                 insertConnectorIdMenuItem,
                 insertConveyedItemIdsMenuItem,
                 new ToolStripSeparator(),
+                insertDiagramElements_IDMenuItem,
                 insertDiagramElements_IDSMenuItem,
                 insertDiagramSelectedElements_IDSMenuItem,
                 new ToolStripSeparator(),

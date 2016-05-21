@@ -86,6 +86,7 @@ ORDER BY pkg.Name
                 "// - #CurrentItemID#             Replaced by the ID of the selected item (Element, Diagram, Package, Attribute, Operation)\r\n" +
                 "// - #DiagramElements_IDS#         Diagram Elements of selected Diagram / current Diagram\r\n"+
                 "// - #DiagramSelectedElements_IDS# Selected Diagram Elements of selected Diagram / current Diagram \r\n" +
+                "// - #Diagram_ID                 Current Diagram or selected Diagram \r\n" +
                 "// - #InBranch#                  like Branch (nested package recursive), but with SQL IN clause like 'package_ID IN (512, 31,613)'\r\n" +
                 "// - #Package#                   Replaced by the package ID of the containing package of selected Package like: 'package_ID in (#Branch)'\r\n" +
                 "// - #TreeSelectedGUIDS#       In Browser selected Elements as a list of comma separated GUIDS like 'IN (#TreeSelectedGUIDS#)'\r\n" +
@@ -183,12 +184,20 @@ ORDER BY pkg.Name
                            "ORDER BY o.Name\r\n",
                     "TemplateText to search for Packages") },
              { SQL_TEMPLATE_ID.DIAGRAM_OBJECT_TEMPLATE,
-                new SqlTemplate(@"Diagram Object TemplateText",
-                    "//\r\n" +
-                    "// Template Diagram Object with\r\n" +
-                    "//  \r\n" +
-                    "<Search Term>",
+                new SqlTemplate(@"Diagram Object Template",@"
+//
+// Diagram Object Template
+//
+select o.ea_guid AS CLASSGUID, o.object_type AS CLASSTYPE, o.name, o.object_type, do.Diagram_ID, do.Object_ID, 
+do.RectTop, do.RectLeft, do.RectRight, do.RectBottom,
+Sequence, ObjectStyle, Instance_ID
+from t_diagramobjects do, t_object o
+where do.object_id = o.object_ID     AND
+      do.diagram_id = #Diagram_ID#
+ORDER BY 3",
                     "TemplateText to search Diagram Object Packages") },
+
+
              { SQL_TEMPLATE_ID.ATTRIBUTE_TEMPLATE,
                 new SqlTemplate(@"Attribute TemplateText",
                      "//\r\n" +
@@ -197,7 +206,7 @@ ORDER BY pkg.Name
                     "select o.ea_guid AS CLASSGUID, 'Attribute' AS CLASSTYPE,o.Name AS Name, * \r\n" +
                     "from t_attribute o\r\n" +
                     "where o.name like '%' ",
-                    "TemplateText to search for Attributes") },
+                    "Diagram objects of current or selected Diagram") },
              { SQL_TEMPLATE_ID.OPERATION_TEMPLATE,
                 new SqlTemplate(@"OPERATION TemplateText",
                      "//\r\n" +
@@ -248,18 +257,17 @@ ORDER BY pkg.Name
             { SQL_TEMPLATE_ID.DiagramSelectedElements_IDS,
                 new SqlTemplate( "DiagramSelectedElements_IDS",
                     "#DiagramSelectedElements_IDS#",
-                    "Placeholder for the current selected items in the diagram, as ID\nExample: elementID in (#DiagramSelectedElements_IDS# ") },
+                    "Placeholder for the current selected items in the diagram, as ID\nExample: elementID in (#DiagramSelectedElements_IDS# )") },
 
             { SQL_TEMPLATE_ID.DiagramElements_IDS,
                 new SqlTemplate( "DiagramElements_IDS",
                     "#DiagramElements_IDS#",
-                    "Placeholder for the diagram Elements in the selected diagram, as ID\nExample: elementID in (#DiagramElements_IDS# ") },
+                    "Placeholder for the diagram Elements in the selected diagram, as ID\nExample: elementID in (#DiagramElements_IDS#) ") },
 
-
-
-
-
-
+             { SQL_TEMPLATE_ID.DIAGRAM_ID,
+                new SqlTemplate( "Diagram ID", // Name
+                    "#Diagram_ID#",            // Macro
+                    "Placeholder for the diagram ID of the current diagram, as ID\nExample: diagramID in (#Diagram_ID#) ") },
 
             { SQL_TEMPLATE_ID.WC,
                 new SqlTemplate("DB Wild Card", 
@@ -357,6 +365,7 @@ ORDER BY pkg.Name
             DiagramElements_IDS,        // Diagram objects (selected diagram) as a comma separated list of IDs
             DIAGRAM_ELEMENTS_IDS_TEMPLATE,
             DIAGRAM_SELECTED_ELEMENTS_IDS_TEMPLATE,
+            DIAGRAM_ID,                 // Diagram ID
             AUTHOR,
             TREE_SELECTED_GUIDS, // get all the GUIDs of the selected items (otDiagram, otElement, otPackage, otAttribute, otMethod
             NOW,
@@ -461,6 +470,9 @@ ORDER BY pkg.Name
             // <Search Term>
             sql = sql.Replace(getTemplateText(SQL_TEMPLATE_ID.SEARCH_TERM), searchTerm);
 
+            sql = macroDiagram_ID(rep, sql);
+            if (sql == "") return "";
+
             // replace #DiagramElements_IDS# by IDs of diagram
             sql = macroDiagramElements_IDS(rep, sql);
             if (sql == "") return "";
@@ -528,6 +540,45 @@ ORDER BY pkg.Name
             return s;
         }
         #endregion
+        /// <summary>
+        /// Replace macro #Diagram_ID# by Diagram_Id of the current diagram or selected Diagram.
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <param name="sql"></param>
+        /// <returns>sql string with replaced macro</returns>
+        static string macroDiagram_ID(Repository rep, string sql)
+        {
+            // get template
+            string template = getTemplateText(SQL_TEMPLATE_ID.DIAGRAM_ID);
+
+            // template is used
+            if (sql.Contains(template))
+            {
+                // get the diagram
+                EA.Diagram dia;
+                if (rep.GetContextItemType() == EA.ObjectType.otDiagram)
+                {
+                    dia = rep.GetContextObject();
+                }
+                else
+                {
+                    dia = rep.GetCurrentDiagram();
+                }
+                // Diagram selected?
+                if (dia == null)
+                {
+                    MessageBox.Show(sql, $"No Diagram  for '{template}' selected!");
+                    sql = "";
+                }
+                else
+                {
+                    // replace by list of IDs
+                    sql = sql.Replace(template, $"{dia.DiagramID}");
+                }
+
+            }
+            return sql;
+        }
 
 
         /// <summary>
