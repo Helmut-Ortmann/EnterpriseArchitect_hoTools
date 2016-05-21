@@ -66,7 +66,7 @@ Some features:
 - Generate Activity Diagram from code snippets
 
 # Installation #
-- hoTools.msi or hoTools.msi.lnk
+- hoTools.msi  (Setup\bin\Release\hoTools.msi V2.0.1) 
 - hoToolsRemove.ps1 (deinstall with PowerShell)
 
 # ToDo
