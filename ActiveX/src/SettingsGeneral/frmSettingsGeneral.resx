@@ -120,6 +120,9 @@
   <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
   <data name="txtQuickSearch.ToolTip" xml:space="preserve">
     <value>EA Model Search Name for Quick Search
 - Simple (EA Standard Search)  or
@@ -149,6 +152,15 @@ Example:
 c:\Program Files (x86)\totalcmd\TOTALCMD64.EXE
 
 Think if you have to change the %PATH% environment variable</value>
+  </data>
+  <data name="groupBox2.ToolTip" xml:space="preserve">
+    <value>Define the MDG you want to load:
+- No MDG
+- hoToolsBasic.xml MDG (Basic queries and Scripts)
+- hoToolsCompilation.xml   MDG (all queries &amp; script) 
+
+Note:
+Searches usually are project or organisation specific. </value>
   </data>
   <data name="chkConveyedItemSupport.ToolTip" xml:space="preserve">
     <value>Buttons to support Conveyed Items on connectors like information flow:

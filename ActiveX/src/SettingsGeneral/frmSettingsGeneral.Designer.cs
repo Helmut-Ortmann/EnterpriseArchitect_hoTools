@@ -65,13 +65,13 @@
             this.chkFavoriteSupport = new System.Windows.Forms.CheckBox();
             this.label7 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.chkAutoLoadMdgNo = new System.Windows.Forms.CheckBox();
-            this.chkAutoLoadMdgCompilation = new System.Windows.Forms.CheckBox();
-            this.chkAutoLoadMdgBasic = new System.Windows.Forms.CheckBox();
             this.chkConveyedItemSupport = new System.Windows.Forms.CheckBox();
             this.label34 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label8 = new System.Windows.Forms.Label();
+            this.rbAutoLoadMdgBasic = new System.Windows.Forms.RadioButton();
+            this.rbAutoLoadMdgCompilation = new System.Windows.Forms.RadioButton();
+            this.rbAutoLoadMdgNo = new System.Windows.Forms.RadioButton();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -458,53 +458,17 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.chkAutoLoadMdgNo);
-            this.groupBox2.Controls.Add(this.chkAutoLoadMdgCompilation);
-            this.groupBox2.Controls.Add(this.chkAutoLoadMdgBasic);
+            this.groupBox2.Controls.Add(this.rbAutoLoadMdgNo);
+            this.groupBox2.Controls.Add(this.rbAutoLoadMdgCompilation);
+            this.groupBox2.Controls.Add(this.rbAutoLoadMdgBasic);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.Location = new System.Drawing.Point(268, 227);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(295, 100);
             this.groupBox2.TabIndex = 238;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "MDG to load";
-            this.toolTip1.SetToolTip(this.groupBox2, "Define the MDG you want to load:\r\n- No MDG\r\n- hoToolsBasic.xml MDG (Basic queries" +
-        " and Scripts)\r\n- hoToolsCompilation.xml   MDG (all queries & script) ");
-            // 
-            // chkAutoLoadMdgNo
-            // 
-            this.chkAutoLoadMdgNo.AutoSize = true;
-            this.chkAutoLoadMdgNo.Location = new System.Drawing.Point(11, 70);
-            this.chkAutoLoadMdgNo.Name = "chkAutoLoadMdgNo";
-            this.chkAutoLoadMdgNo.Size = new System.Drawing.Size(87, 22);
-            this.chkAutoLoadMdgNo.TabIndex = 2;
-            this.chkAutoLoadMdgNo.Text = "No MDG";
-            this.toolTip1.SetToolTip(this.chkAutoLoadMdgNo, "No autoload of MDG.");
-            this.chkAutoLoadMdgNo.UseVisualStyleBackColor = true;
-            // 
-            // chkAutoLoadMdgCompilation
-            // 
-            this.chkAutoLoadMdgCompilation.AutoSize = true;
-            this.chkAutoLoadMdgCompilation.Location = new System.Drawing.Point(11, 46);
-            this.chkAutoLoadMdgCompilation.Name = "chkAutoLoadMdgCompilation";
-            this.chkAutoLoadMdgCompilation.Size = new System.Drawing.Size(188, 22);
-            this.chkAutoLoadMdgCompilation.TabIndex = 1;
-            this.chkAutoLoadMdgCompilation.Text = "hoToolsCompilation.xml";
-            this.toolTip1.SetToolTip(this.chkAutoLoadMdgCompilation, "Compilation of useful queries & scripts\r\n\r\nSee in installation folder:\r\nc:\\user\\<" +
-        "userName>\\AppData\\Local\\Apps\\hoTools\\..");
-            this.chkAutoLoadMdgCompilation.UseVisualStyleBackColor = true;
-            // 
-            // chkAutoLoadMdgBasic
-            // 
-            this.chkAutoLoadMdgBasic.AutoSize = true;
-            this.chkAutoLoadMdgBasic.Location = new System.Drawing.Point(11, 22);
-            this.chkAutoLoadMdgBasic.Name = "chkAutoLoadMdgBasic";
-            this.chkAutoLoadMdgBasic.Size = new System.Drawing.Size(146, 22);
-            this.chkAutoLoadMdgBasic.TabIndex = 0;
-            this.chkAutoLoadMdgBasic.Text = "hoToolsBasic.xml";
-            this.toolTip1.SetToolTip(this.chkAutoLoadMdgBasic, "Basic queries & scripts\r\n\r\nSee in installation folder:\r\nc:\\user\\<userName>\\AppDat" +
-        "a\\Local\\Apps\\hoTools\\..");
-            this.chkAutoLoadMdgBasic.UseVisualStyleBackColor = true;
+            this.groupBox2.Text = "hoTools MDG to load";
+            this.toolTip1.SetToolTip(this.groupBox2, resources.GetString("groupBox2.ToolTip"));
             // 
             // chkConveyedItemSupport
             // 
@@ -551,6 +515,44 @@
             this.label8.Size = new System.Drawing.Size(113, 18);
             this.label8.TabIndex = 237;
             this.label8.Text = "- Blank to hide it";
+            // 
+            // rbAutoLoadMdgBasic
+            // 
+            this.rbAutoLoadMdgBasic.AutoSize = true;
+            this.rbAutoLoadMdgBasic.Location = new System.Drawing.Point(11, 24);
+            this.rbAutoLoadMdgBasic.Name = "rbAutoLoadMdgBasic";
+            this.rbAutoLoadMdgBasic.Size = new System.Drawing.Size(145, 22);
+            this.rbAutoLoadMdgBasic.TabIndex = 0;
+            this.rbAutoLoadMdgBasic.TabStop = true;
+            this.rbAutoLoadMdgBasic.Text = "hoToolsBasic.xml";
+            this.toolTip1.SetToolTip(this.rbAutoLoadMdgBasic, "Basic queries & scripts\r\n\r\nSee in installation folder:\r\nc:\\user\\<userName>\\AppDat" +
+        "a\\Local\\Apps\\hoTools\\..");
+            this.rbAutoLoadMdgBasic.UseVisualStyleBackColor = true;
+            // 
+            // rbAutoLoadMdgCompilation
+            // 
+            this.rbAutoLoadMdgCompilation.AutoSize = true;
+            this.rbAutoLoadMdgCompilation.Location = new System.Drawing.Point(11, 49);
+            this.rbAutoLoadMdgCompilation.Name = "rbAutoLoadMdgCompilation";
+            this.rbAutoLoadMdgCompilation.Size = new System.Drawing.Size(187, 22);
+            this.rbAutoLoadMdgCompilation.TabIndex = 1;
+            this.rbAutoLoadMdgCompilation.TabStop = true;
+            this.rbAutoLoadMdgCompilation.Text = "hoToolsCompilation.xml";
+            this.toolTip1.SetToolTip(this.rbAutoLoadMdgCompilation, "Compilation of useful queries & scripts\r\n\r\nSee in installation folder:\r\nc:\\user\\<" +
+        "userName>\\AppData\\Local\\Apps\\hoTools\\..");
+            this.rbAutoLoadMdgCompilation.UseVisualStyleBackColor = true;
+            // 
+            // rbAutoLoadMdgNo
+            // 
+            this.rbAutoLoadMdgNo.AutoSize = true;
+            this.rbAutoLoadMdgNo.Location = new System.Drawing.Point(11, 77);
+            this.rbAutoLoadMdgNo.Name = "rbAutoLoadMdgNo";
+            this.rbAutoLoadMdgNo.Size = new System.Drawing.Size(86, 22);
+            this.rbAutoLoadMdgNo.TabIndex = 2;
+            this.rbAutoLoadMdgNo.TabStop = true;
+            this.rbAutoLoadMdgNo.Text = "No MDG";
+            this.toolTip1.SetToolTip(this.rbAutoLoadMdgNo, "No autoload of MDG.");
+            this.rbAutoLoadMdgNo.UseVisualStyleBackColor = true;
             // 
             // FrmSettingsGeneral
             // 
@@ -643,9 +645,9 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.CheckBox chkAutoLoadMdgNo;
-        private System.Windows.Forms.CheckBox chkAutoLoadMdgCompilation;
-        private System.Windows.Forms.CheckBox chkAutoLoadMdgBasic;
         private System.Windows.Forms.CheckBox chkConveyedItemSupport;
+        private System.Windows.Forms.RadioButton rbAutoLoadMdgNo;
+        private System.Windows.Forms.RadioButton rbAutoLoadMdgCompilation;
+        private System.Windows.Forms.RadioButton rbAutoLoadMdgBasic;
     }
 }
