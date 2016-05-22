@@ -76,8 +76,6 @@ namespace hoTools.Query
             this.splitContainer = new System.Windows.Forms.SplitContainer();
             this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewScripts)).BeginInit();
             this.contextMenuStripDataGrid.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -102,9 +100,9 @@ namespace hoTools.Query
             // 
             // btnRunScriptForSql
             // 
-            this.btnRunScriptForSql.Location = new System.Drawing.Point(129, 3);
+            this.btnRunScriptForSql.Location = new System.Drawing.Point(201, 3);
             this.btnRunScriptForSql.Name = "btnRunScriptForSql";
-            this.btnRunScriptForSql.Size = new System.Drawing.Size(120, 23);
+            this.btnRunScriptForSql.Size = new System.Drawing.Size(192, 23);
             this.btnRunScriptForSql.TabIndex = 4;
             this.btnRunScriptForSql.Text = "Run Query and Script";
             this.toolTip1.SetToolTip(this.btnRunScriptForSql, "Run Query and execute Script for all found Elements");
@@ -113,9 +111,9 @@ namespace hoTools.Query
             // 
             // btnRunScriptForSqlWithAsk
             // 
-            this.btnRunScriptForSqlWithAsk.Location = new System.Drawing.Point(255, 3);
+            this.btnRunScriptForSqlWithAsk.Location = new System.Drawing.Point(399, 3);
             this.btnRunScriptForSqlWithAsk.Name = "btnRunScriptForSqlWithAsk";
-            this.btnRunScriptForSqlWithAsk.Size = new System.Drawing.Size(120, 23);
+            this.btnRunScriptForSqlWithAsk.Size = new System.Drawing.Size(192, 23);
             this.btnRunScriptForSqlWithAsk.TabIndex = 8;
             this.btnRunScriptForSqlWithAsk.Text = "Run Query, Script and ask";
             this.toolTip1.SetToolTip(this.btnRunScriptForSqlWithAsk, "Run Query until next found element, execute Script for this element and ask to:\r\n" +
@@ -295,7 +293,7 @@ namespace hoTools.Query
             // 
             this.btnLoadScripts.Location = new System.Drawing.Point(3, 3);
             this.btnLoadScripts.Name = "btnLoadScripts";
-            this.btnLoadScripts.Size = new System.Drawing.Size(120, 23);
+            this.btnLoadScripts.Size = new System.Drawing.Size(192, 23);
             this.btnLoadScripts.TabIndex = 2;
             this.btnLoadScripts.Text = "Load Scripts";
             this.btnLoadScripts.UseVisualStyleBackColor = true;
@@ -531,31 +529,11 @@ namespace hoTools.Query
             this.flowLayoutPanel2.Controls.Add(this.btnRun);
             this.flowLayoutPanel2.Controls.Add(this.txtSearchTerm);
             this.flowLayoutPanel2.Controls.Add(this.lblTitle);
-            this.flowLayoutPanel2.Controls.Add(this.button4);
-            this.flowLayoutPanel2.Controls.Add(this.button2);
             this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.flowLayoutPanel2.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
             this.flowLayoutPanel2.Size = new System.Drawing.Size(769, 25);
             this.flowLayoutPanel2.TabIndex = 11;
-            // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(3, 41);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 15;
-            this.button4.Text = "button4";
-            this.button4.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(84, 41);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 17;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
             // 
             // QueryGUI
             // 
@@ -625,9 +603,7 @@ namespace hoTools.Query
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnSaveAll;
         private System.Windows.Forms.Button btnSaveAs;
-        private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button btnRun;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.ToolStripMenuItem templatesAndMacrosToolStripMenuItem;
     }
 }

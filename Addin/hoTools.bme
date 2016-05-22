@@ -1,8 +1,8 @@
-﻿BookME4707644hoTools	K000000K000011<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+﻿BookME4705138hoTools	K000000K000011<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML><HEAD><TITLE>hoTools</TITLE>
 <META content="text/html; charset=unicode" http-equiv=Content-Type>
 <META content=de-at http-equiv=Content-Language>
-<META name=GENERATOR content="MSHTML 11.00.10240.16683">
+<META name=GENERATOR content="MSHTML 11.00.10586.306">
 <STYLE 
 type=text/css>a.bmeAnchor { background-color:#4682b4; color:white; }</STYLE>
 </HEAD>
@@ -27,33 +27,47 @@ cellSpacing=0 cellPadding=2 width="99%">
     bgColor=#f7f7f7 width="50%">
       <P align=right><FONT size=1 face=Verdana>Donnerstag, 27. Feb 2014 
       15:06:56</FONT></P></TD></TR></TBODY></TABLE>
-<P>General:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A 
-href="bookme:{{00156}}">Find &amp; 
-Replace</A>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-</P>
+<P><FONT size=5>hoTools to optimize every day work with EA</FONT></P>
+<P><FONT size=5>&nbsp;</P></FONT>
+<P><FONT size=3><STRONG>Tab: hoTools</STRONG></FONT></P>
+<UL>
+  <LI><FONT size=3>Buttons for&nbsp;one click&nbsp;EA Model Searches (here 
+  'Simple')</FONT> 
+  <LI><FONT size=3>One line Search with Search Text (here 'Simple')</FONT> 
+  <LI><FONT size=3>Line style of diagrams</FONT> 
+  <LI><FONT size=3>Favorites</FONT> 
+  <LI><FONT size=3>and more... (not seen here)</FONT></LI></UL>
 <P><IMG border=0 hspace=0 alt="" 
-src="D:\hoData\Development\GitHub\EnterpriseArchitect_hoTools\Addin\image\Addin.PNG" 
-align=left><IMG style="HEIGHT: 466px; WIDTH: 502px" border=0 hspace=0 alt="" 
-src="D:\hoData\Development\GitHub\EnterpriseArchitect_hoTools\Addin\image\FindAndReplace.png" 
+src="file:///D:/hoData/Development/GitHub/EnterpriseArchitect_hoTools/Addin/image/Addin.PNG" 
 align=left></P>
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</P>
+<P>&nbsp;</P>
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+</P>
+<P>&nbsp;</P>
 <P>&nbsp;</P>
 <UL>
   <LI>
   <LI>
-  <LI>
-  <LI>
-  <LI>
-  <LI>
-  <LI>
-  <LI>
-  <LI>
-  <LI>
-  <LI>
-  <LI>
-  <LI>
-  <LI>
-  <LI>
-  <LI>
+  <LI></LI></UL>
+<P><FONT size=3><STRONG>Tab: SQL Query</STRONG></FONT></P>
+<UL>
+  <LI><FONT size=3>Edit and run your SQL Query</FONT> 
+  <LI><FONT size=3>Load and Save from file</FONT> 
+  <LI><FONT size=3>A lot of templates</FONT> 
+  <LI><FONT size=3>A lot of macros</FONT></LI></UL>
+<P><IMG border=0 hspace=0 alt="SQL Query" 
+src="file:///D:/hoData/Development/GitHub/EnterpriseArchitect_hoTools/Addin/image/SqlQuery.PNG" 
+align=baseline>&nbsp;</P>
+<P><FONT size=3><STRONG>Tab: Search and Replace</STRONG></FONT></P>
+<UL>
+  <LI><FONT size=3>Search and Replace</FONT> 
+  <LI><FONT size=3>Regular Expression Support</FONT></LI></UL>
+<P><FONT size=3></FONT>&nbsp;</P>
+<UL>
+  <LI><IMG style="HEIGHT: 466px; WIDTH: 502px" border=0 hspace=0 alt="" 
+  src="file:///D:/hoData/Development/GitHub/EnterpriseArchitect_hoTools/Addin/image/FindAndReplace.png" 
+  align=left> 
   <LI>
   <LI>
   <LI>
@@ -63,42 +77,30 @@ align=left></P>
   <LI>
   <LI>
   <LI>
-  <LI>
-  <LI><A href="bookme:{{00001}}">Addin</A> 
-  <UL>
-    <LI><A href="bookme:{{00156}}">Find &amp; Replace</A> 
-    <LI><A href="bookme:{{00002}}">LineStyle </A>
-    <LI><A href="bookme:{{00017}}">Find &amp; Navigation </A>
-    <LI><A href="bookme:{{00149}}">Buttons´(Search &amp; Services) </A>
-    <LI><A href="bookme:{{00149}}">Hot keys / shortcuts (Search &amp; 
-    Services)</A> 
-    <LI>Activity Diagram support for Specification of C-Code Operations 
-    <LI>Header File support (usage of header files from code) 
-    <LI>Change author 
-    <LI><A href="bookme:{{00146}}">Change *.xml file of a controlled 
-    package</A></LI></UL>
-  <LI><A href="bookme:{{00017}}">Searches</A> 
-  <UL>
-    <LI>Artifacts 
-    <LI>Elements 
-    <LI>Diagrams 
-    <LI>Quick Search 
-    <LI>Method usage 
-    <LI>Stereotypes 
-    <LI>Tagged Values 
-    <LI>Usage</LI></UL>
-  <LI><A href="bookme:{{00014}}">Scripts to start searches from Context Menue 
-  </A>
-  <UL>
-    <LI>Elements in Package (recursive) 
-    <LI>Diagrams in Package (recursive) 
-    <LI>Locate Type&nbsp; 
-    <LI>Show Specification</LI></UL></LI></UL></BODY></HTML>
+  <LI></LI></UL>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P><FONT size=3><STRONG>TAB: SQL Query and Script</STRONG></FONT></P>
+<UL>
+  <LI><FONT size=3>Run Script (VB, JavaScript, JScript) on query result 
+  rows</FONT></LI></UL>
+<P><IMG border=0 hspace=0 
+alt="Run Script (VB, JavaScript, JScript) on query result rows" 
+src="D:\hoData\Development\GitHub\EnterpriseArchitect_hoTools\Addin\image\SqlQueryAndScript.png" 
+align=baseline></P>
+<P><STRONG><FONT size=3></FONT></STRONG>&nbsp;</P>
+<P><STRONG><FONT size=3></FONT></STRONG>&nbsp;</P></BODY></HTML>
 General	K000011K000582<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML><HEAD><TITLE>General</TITLE>
 <META content="text/html; charset=unicode" http-equiv=Content-Type>
 <META content=de-at http-equiv=Content-Language>
-<META name=GENERATOR content="MSHTML 11.00.9600.17344">
+<META name=GENERATOR content="MSHTML 11.00.10586.306">
 <STYLE 
 type=text/css>a.bmeAnchor { background-color:#4682b4; color:white; }</STYLE>
 </HEAD>
@@ -4799,4 +4801,4 @@ cellSpacing=0 cellPadding=2 width="99%">
 <P>Helmut Ortmann<BR><A 
 href="mailto:Helmut.Ortmann@t-online.de">Helmut.Ortmann@t-online.de</A><BR>+49 
 172 / 51 79 16 7</P></BODY></HTML>
-!=!K001562UTF-8
+!=!K000011UTF-8
