@@ -85,6 +85,12 @@
     <Compile Include="src\dlgUser.Designer.cs">
       <DependentUpon>dlgUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="src\SettingSearchAndService\FrmSettingsToolbar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="src\SettingSearchAndService\FrmSettingsToolbar.Designer.cs">
+      <DependentUpon>FrmSettingsToolbar.cs</DependentUpon>
+    </Compile>
     <Compile Include="src\SettingsQuery\FrmQueryAndScript.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -127,6 +133,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="src\dlgUser.resx">
       <DependentUpon>dlgUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\SettingSearchAndService\FrmSettingsToolbar.resx">
+      <DependentUpon>FrmSettingsToolbar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="src\SettingsQuery\FrmQueryAndScript.resx">
       <DependentUpon>FrmQueryAndScript.cs</DependentUpon>

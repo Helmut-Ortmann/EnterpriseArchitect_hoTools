@@ -5,6 +5,9 @@ using hoTools.Settings;
 using hoTools.EaServices;
 using hoTools.EAServicesPort;
 using Control.EaAddinShortcuts;
+using hoTools.Settings.Key;
+using hoTools.Settings.Toolbar;
+
 using hoTools.Utils.SQL;
 
 using System.Threading;
@@ -27,6 +30,8 @@ namespace hoTools.ActiveX
         // Windows/Frames
         FrmQueryAndScript _frmQueryAndScript;
         FrmSettingsGeneral _frmSettingsGeneral;
+
+        FrmSettingsToolbar _frmSettingsToolbar;
         FrmSettingsKey _frmSettingsKey;
         FrmSettingsLineStyle _frmSettingsLineStyle;
 
@@ -119,7 +124,7 @@ namespace hoTools.ActiveX
         private ToolStripSeparator toolStripSeparator12;
         private ToolStripMenuItem settingsQueryAndSctipToolStripMenuItem;
         private ToolStripMenuItem settingGeneralToolStripMenuItem;
-        private ToolStripMenuItem settingsKeysToolStripMenuItem;
+        private ToolStripMenuItem settingsToolbarToolStripMenuItem;
         private Panel panelQuickSearch;
         private Panel panelButtons;
         private Panel panelLineStyle;
@@ -137,6 +142,7 @@ namespace hoTools.ActiveX
         private ToolStripButton toolStripServiceBtn3;
         private ToolStripButton toolStripServiceBtn4;
         private ToolStripButton toolStripServiceBtn5;
+        private ToolStripMenuItem settingsGlobalKeysToolStripMenuItem;
         private TextBox txtUserText;
         #endregion
 
@@ -778,7 +784,8 @@ namespace hoTools.ActiveX
             this.settingGeneralToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsQueryAndSctipToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.settingsKeysToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.settingsToolbarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.settingsGlobalKeysToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.doToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.createActivityForOperationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -1224,7 +1231,8 @@ namespace hoTools.ActiveX
             this.settingGeneralToolStripMenuItem,
             this.settingsQueryAndSctipToolStripMenuItem,
             this.settingsToolStripMenuItem,
-            this.settingsKeysToolStripMenuItem});
+            this.settingsToolbarToolStripMenuItem,
+            this.settingsGlobalKeysToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             resources.ApplyResources(this.fileToolStripMenuItem, "fileToolStripMenuItem");
             // 
@@ -1246,11 +1254,17 @@ namespace hoTools.ActiveX
             resources.ApplyResources(this.settingsToolStripMenuItem, "settingsToolStripMenuItem");
             this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
             // 
-            // settingsKeysToolStripMenuItem
+            // settingsToolbarToolStripMenuItem
             // 
-            this.settingsKeysToolStripMenuItem.Name = "settingsKeysToolStripMenuItem";
-            resources.ApplyResources(this.settingsKeysToolStripMenuItem, "settingsKeysToolStripMenuItem");
-            this.settingsKeysToolStripMenuItem.Click += new System.EventHandler(this.settingsKeysToolStripMenuItem_Click);
+            this.settingsToolbarToolStripMenuItem.Name = "settingsToolbarToolStripMenuItem";
+            resources.ApplyResources(this.settingsToolbarToolStripMenuItem, "settingsToolbarToolStripMenuItem");
+            this.settingsToolbarToolStripMenuItem.Click += new System.EventHandler(this.settingsToolbarToolStripMenuItem_Click);
+            // 
+            // settingsGlobalKeysToolStripMenuItem
+            // 
+            this.settingsGlobalKeysToolStripMenuItem.Name = "settingsGlobalKeysToolStripMenuItem";
+            resources.ApplyResources(this.settingsGlobalKeysToolStripMenuItem, "settingsGlobalKeysToolStripMenuItem");
+            this.settingsGlobalKeysToolStripMenuItem.Click += new System.EventHandler(this.settingsKeysToolStripMenuItem_Click);
             // 
             // doToolStripMenuItem
             // 
@@ -1937,6 +1951,11 @@ namespace hoTools.ActiveX
 
         }
 
+        void settingsToolbarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _frmSettingsToolbar = new FrmSettingsToolbar(AddinSettings, this);
+            _frmSettingsToolbar.ShowDialog();
+        }
         void settingsKeysToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _frmSettingsKey = new FrmSettingsKey(AddinSettings, this);

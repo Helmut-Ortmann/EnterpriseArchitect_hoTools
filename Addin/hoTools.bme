@@ -25,7 +25,7 @@ cellSpacing=0 cellPadding=2 width="99%">
     <TD 
     style="BORDER-TOP: #c6c7c6 1px solid; BORDER-RIGHT: #c6c7c6 1px solid; BORDER-BOTTOM: #c6c7c6 1px solid; BORDER-LEFT: #c6c7c6 1px solid" 
     bgColor=#f7f7f7 width="50%">
-      <P align=right><FONT size=1 face=Verdana>Donnerstag, 27. Feb 2014 
+      <P align=right><FONT size=1 face=Verdana>Donnerstag, 27. Feb 2016 
       15:06:56</FONT></P></TD></TR></TBODY></TABLE>
 <P><FONT size=5>hoTools to optimize every day work with EA</FONT></P>
 <P><FONT size=5>&nbsp;</P></FONT>
@@ -107,7 +107,19 @@ align=baseline></P>
 <P><IMG border=0 hspace=0 alt="Settings Query and Script" 
 src="D:\hoData\Development\GitHub\EnterpriseArchitect_hoTools\Addin\image\SettingsQueryAndScript.png" 
 align=baseline></P>
-<P><STRONG><FONT size=3></FONT></STRONG>&nbsp;</P></BODY></HTML>
+<UL>
+  <LI><STRONG><FONT size=3>Toolbar for Model Search &amp; 
+  Service</FONT></STRONG></LI></UL>
+<P><IMG border=0 hspace=0 alt="Settings Toolbar for Model Search &amp; Service" 
+src="D:\hoData\Development\GitHub\EnterpriseArchitect_hoTools\Addin\image\SettingsToolbar.png" 
+align=baseline></P>
+<UL>
+  <LI><FONT size=3><STRONG>Global Keys for Model Search &amp; 
+  Services</STRONG></FONT></LI></UL>
+<P><IMG border=0 hspace=0 
+alt="Settings global Keys for Model Search &amp; Services" 
+src="D:\hoData\Development\GitHub\EnterpriseArchitect_hoTools\Addin\image\SettingsGlobalKeys.png" 
+align=baseline></P></BODY></HTML>
 General	K000011K000582<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML><HEAD><TITLE>General</TITLE>
 <META content="text/html; charset=unicode" http-equiv=Content-Type>
