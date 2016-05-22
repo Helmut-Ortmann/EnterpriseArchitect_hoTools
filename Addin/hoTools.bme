@@ -55,7 +55,8 @@ align=left></P>
   <LI><FONT size=3>Edit and run your SQL Query</FONT> 
   <LI><FONT size=3>Load and Save from file</FONT> 
   <LI><FONT size=3>A lot of templates</FONT> 
-  <LI><FONT size=3>A lot of macros</FONT></LI></UL>
+  <LI><FONT size=3>A lot of macros (#Package#,.. #ConveyedItemIDS#,..)</FONT> 
+  <LI><FONT size=3>Comment your SQL</FONT></LI></UL>
 <P><IMG border=0 hspace=0 alt="SQL Query" 
 src="file:///D:/hoData/Development/GitHub/EnterpriseArchitect_hoTools/Addin/image/SqlQuery.PNG" 
 align=baseline>&nbsp;</P>
@@ -95,6 +96,17 @@ alt="Run Script (VB, JavaScript, JScript) on query result rows"
 src="D:\hoData\Development\GitHub\EnterpriseArchitect_hoTools\Addin\image\SqlQueryAndScript.png" 
 align=baseline></P>
 <P><STRONG><FONT size=3></FONT></STRONG>&nbsp;</P>
+<P><STRONG><FONT size=3>Customizable:</FONT></STRONG></P>
+<UL>
+  <LI><STRONG><FONT size=3>General Settings</FONT></STRONG></LI></UL>
+<P><IMG border=0 hspace=0 alt="Genaral Settings" 
+src="D:\hoData\Development\GitHub\EnterpriseArchitect_hoTools\Addin\image\GeneralSettings.png" 
+align=baseline></P>
+<UL>
+  <LI><STRONG><FONT size=3>Query and Script</FONT></STRONG></LI></UL>
+<P><IMG border=0 hspace=0 alt="Settings Query and Script" 
+src="D:\hoData\Development\GitHub\EnterpriseArchitect_hoTools\Addin\image\SettingsQueryAndScript.png" 
+align=baseline></P>
 <P><STRONG><FONT size=3></FONT></STRONG>&nbsp;</P></BODY></HTML>
 General	K000011K000582<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML><HEAD><TITLE>General</TITLE>
@@ -156,6 +168,98 @@ align=left></P>
 <P><IMG border=0 hspace=0 alt="" 
 src="D:\hoData\Development\GitHub\EnterpriseArchitect_hoTools\Addin\image\Settings.png" 
 align=baseline></P></BODY></HTML>
+SQL Query	K000011K002032<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Language" content="de-at">
+<title>SQL Query</title>
+</head>
+<body bgcolor="#FFFFFF" style="font-size:10pt; font-family:Times New Roman;">
+<table cellpadding="2" cellspacing="0" width="99%" style="border:1px solid #C6C7C6; border-collapse:collapse; font-size:10pt">
+<tr>
+<td width="100%" colspan="2" bgcolor="#FFE77B" style="border:1px solid #C6C7C6">
+<p align="center"><b><font id="BME_Title" size="3" face="Verdana">SQL Query</font></b></p></td>
+</tr>
+<tr>
+<td width="50%" bgcolor="#F7F7F7" style="border:1px solid #C6C7C6">
+<p align="left"><font size="1" face="Verdana">helmu_000</font></p></td>
+<td width="50%" bgcolor="#F7F7F7" style="border:1px solid #C6C7C6">
+<p align="right"><font size="1" face="Verdana">Sunday, 22. May 2016 21:02:54</font></p>
+</td>
+</tr>
+</table>
+<p>Hier Text eingeben...</p>
+</body>
+</html>
+SQL Query and Script	K000011K002052<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Language" content="de-at">
+<title>SQL Query and Script</title>
+</head>
+<body bgcolor="#FFFFFF" style="font-size:10pt; font-family:Times New Roman;">
+<table cellpadding="2" cellspacing="0" width="99%" style="border:1px solid #C6C7C6; border-collapse:collapse; font-size:10pt">
+<tr>
+<td width="100%" colspan="2" bgcolor="#FFE77B" style="border:1px solid #C6C7C6">
+<p align="center"><b><font id="BME_Title" size="3" face="Verdana">SQL Query and Script</font></b></p></td>
+</tr>
+<tr>
+<td width="50%" bgcolor="#F7F7F7" style="border:1px solid #C6C7C6">
+<p align="left"><font size="1" face="Verdana">helmu_000</font></p></td>
+<td width="50%" bgcolor="#F7F7F7" style="border:1px solid #C6C7C6">
+<p align="right"><font size="1" face="Verdana">Sunday, 22. May 2016 21:03:39</font></p>
+</td>
+</tr>
+</table>
+<p>Hier Text eingeben...</p>
+</body>
+</html>
+Find and Replace	K000011K002042<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Language" content="de-at">
+<title>Find and Replace</title>
+</head>
+<body bgcolor="#FFFFFF" style="font-size:10pt; font-family:Times New Roman;">
+<table cellpadding="2" cellspacing="0" width="99%" style="border:1px solid #C6C7C6; border-collapse:collapse; font-size:10pt">
+<tr>
+<td width="100%" colspan="2" bgcolor="#FFE77B" style="border:1px solid #C6C7C6">
+<p align="center"><b><font id="BME_Title" size="3" face="Verdana">Find and Replace</font></b></p></td>
+</tr>
+<tr>
+<td width="50%" bgcolor="#F7F7F7" style="border:1px solid #C6C7C6">
+<p align="left"><font size="1" face="Verdana">helmu_000</font></p></td>
+<td width="50%" bgcolor="#F7F7F7" style="border:1px solid #C6C7C6">
+<p align="right"><font size="1" face="Verdana">Sunday, 22. May 2016 21:03:15</font></p>
+</td>
+</tr>
+</table>
+<p>Hier Text eingeben...</p>
+</body>
+</html>
+hoTools	K000011K002022<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Language" content="de-at">
+<title>hoTools</title>
+</head>
+<body bgcolor="#FFFFFF" style="font-size:10pt; font-family:Times New Roman;">
+<table cellpadding="2" cellspacing="0" width="99%" style="border:1px solid #C6C7C6; border-collapse:collapse; font-size:10pt">
+<tr>
+<td width="100%" colspan="2" bgcolor="#FFE77B" style="border:1px solid #C6C7C6">
+<p align="center"><b><font id="BME_Title" size="3" face="Verdana">hoTools</font></b></p></td>
+</tr>
+<tr>
+<td width="50%" bgcolor="#F7F7F7" style="border:1px solid #C6C7C6">
+<p align="left"><font size="1" face="Verdana">helmu_000</font></p></td>
+<td width="50%" bgcolor="#F7F7F7" style="border:1px solid #C6C7C6">
+<p align="right"><font size="1" face="Verdana">Sunday, 22. May 2016 21:02:37</font></p>
+</td>
+</tr>
+</table>
+<p>Hier Text eingeben...</p>
+</body>
+</html>
 Layout	K000011K000022<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML><HEAD><TITLE>Layout</TITLE>
 <META content="text/html; charset=unicode" http-equiv=Content-Type>

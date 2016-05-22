@@ -123,6 +123,7 @@
     <Content Include="image\DiagramToolbar.png" />
     <Content Include="image\DocumentationPackageStructure.PNG" />
     <Content Include="image\FinalNode.PNG" />
+    <Content Include="image\FindAndReplace.png" />
     <Content Include="image\GenerateDocumentation.PNG" />
     <Content Include="image\GenerateDocumentationDiagram.PNG" />
     <Content Include="image\History.PNG" />
@@ -143,6 +144,8 @@
     <Content Include="image\OperationBehaviorAssignment.PNG" />
     <Content Include="image\PackageStructureModule.PNG" />
     <Content Include="image\QuickSearch.PNG" />
+    <Content Include="image\SqlQuery.PNG" />
+    <Content Include="image\SqlQueryAndScript.png" />
     <Content Include="image\StructureDependencies.PNG" />
     <Content Include="image\StructureDetail.PNG" />
     <Content Include="image\StructureModule.PNG" />
