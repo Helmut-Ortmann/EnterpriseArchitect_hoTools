@@ -66,8 +66,10 @@ Some features:
 - Generate Activity Diagram from code snippets
 
 # Installation #
-- hoTools.msi  (Setup\bin\Release\hoTools.msi V2.0.1) 
+- uninstall hoTools
+- hoTools.msi  (Setup\bin\Release\hoTools.msi V2.0.1)
 - hoToolsRemove.ps1 (deinstall with PowerShell)
+- make sure only one instance is installed
 
 # ToDo
 - Drag SQL file on canvas

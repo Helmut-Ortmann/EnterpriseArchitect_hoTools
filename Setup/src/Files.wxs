@@ -262,10 +262,10 @@
         <File Id="ActiveX.dll.config" Name="ActiveX.dll.config" KeyPath="yes" Source="..\Setup\ActiveX.dll.config" />
       </Component>
       <Component Id="hoToolsBasic.xml" Guid="DD837398-1240-45E4-A5BE-D218A42E2E5B">
-        <File Id="hoToolsBasic.xml" Name="hoToolsBasic.xml" KeyPath="yes" Source="..\AddinClass\hoToolsBasic.xml" />
+        <File Id="hoToolsBasic.xml" Name="hoToolsBasic.xml" KeyPath="yes" Source="..\Addin\hoToolsBasic.xml" />
       </Component>
       <Component Id="hoToolsCompilation.xml" Guid="21C131ED-2D03-48F1-A6FF-1B1127612DE1">
-        <File Id="hoToolsCompilation.xml" Name="hoToolsCompilation.xml" KeyPath="yes" Source="..\AddinClass\hoToolsCompilation.xml" />
+        <File Id="hoToolsCompilation.xml" Name="hoToolsCompilation.xml" KeyPath="yes" Source="..\Addin\hoToolsCompilation.xml" />
       </Component>
     </ComponentGroup>
   </Fragment>

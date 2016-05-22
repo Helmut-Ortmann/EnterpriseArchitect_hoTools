@@ -24,7 +24,7 @@ namespace hoTools.ActiveX
         public const string PROGID = "hoTools.ActiveXGUI";
         public const string TABULATOR = "Script";
 
-
+        // Windows/Frames
         FrmQueryAndScript _frmQueryAndScript;
         FrmSettingsGeneral _frmSettingsGeneral;
         FrmSettingsKey _frmSettingsKey;
@@ -180,7 +180,9 @@ namespace hoTools.ActiveX
         public void initializeSettings()
         {
             parameterizeMenusAndButtons();
+            // parameterize 5 Buttons to quickly run search
             parameterizeSearchButton();
+            // parameterize 5 Buttons to quickly run services
             parameterizeServiceButton();
         }
         #endregion
@@ -1808,7 +1810,7 @@ namespace hoTools.ActiveX
 
         }
         #endregion
-        #region parameterizeButtonQueries
+        #region parameterizeSearchButtons
         /// <summary>
         /// Parametrize 5 quick buttons for search with:
         /// <para/>- Search Name
@@ -1816,6 +1818,12 @@ namespace hoTools.ActiveX
         /// </summary>
         public void parameterizeSearchButton()
         {
+            toolStripSearchBtn1.Visible = AddinSettings.isShowQueryButton;
+            toolStripSearchBtn2.Visible = AddinSettings.isShowQueryButton;
+            toolStripSearchBtn3.Visible = AddinSettings.isShowQueryButton;
+            toolStripSearchBtn4.Visible = AddinSettings.isShowQueryButton;
+            toolStripSearchBtn5.Visible = AddinSettings.isShowQueryButton;
+
             for (int pos = 0; pos < AddinSettings.buttonsSearch.Length; pos++)
             {
                 const string defaultHelptext = "Free Model Searches, Model Search not parametrized.";
@@ -1860,9 +1868,14 @@ namespace hoTools.ActiveX
             }
         }
         #endregion
-        #region parameterizeButtonServices
+        #region parameterizeServiceButton
         public void parameterizeServiceButton()
         {
+            toolStripServiceBtn1.Visible = AddinSettings.isShowServiceButton;
+            toolStripServiceBtn2.Visible = AddinSettings.isShowServiceButton;
+            toolStripServiceBtn3.Visible = AddinSettings.isShowServiceButton;
+            toolStripServiceBtn4.Visible = AddinSettings.isShowServiceButton;
+            toolStripServiceBtn5.Visible = AddinSettings.isShowServiceButton;
             for (int pos = 0; pos < AddinSettings.buttonsServices.Count; pos++)
             {
                 string buttonText= "";
