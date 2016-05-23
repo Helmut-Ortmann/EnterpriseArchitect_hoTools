@@ -27,29 +27,31 @@ cellSpacing=0 cellPadding=2 width="99%">
     bgColor=#f7f7f7 width="50%">
       <P align=right><FONT size=1 face=Verdana>Donnerstag, 27. Feb 2016 
       15:06:56</FONT></P></TD></TR></TBODY></TABLE>
-<P><FONT size=5>hoTools to optimize every day work with EA</FONT></P>
-<P><FONT size=5>&nbsp;</P></FONT>
+<P><FONT size=5>hoTools to optimize every day work with EA!</FONT></P>
+<P><FONT size=4><STRONG>General:</STRONG></FONT></P>
+<UL>
+  <LI><FONT size=3>Configurable</FONT></LI>
+  <LI><FONT size=3>Tooltip</FONT></LI></UL>
 <P><FONT size=3><STRONG>Tab: hoTools</STRONG></FONT></P>
 <UL>
-  <LI><FONT size=3>Buttons for&nbsp;one click&nbsp;EA Model Searches (here 
-  'Simple')</FONT> 
-  <LI><FONT size=3>One line Search with Search Text (here 'Simple')</FONT> 
+  <LI><FONT size=3>Toolbar Buttons&nbsp;to Search for and Services</FONT> 
+  <LI><FONT size=3>Quick Search (here 'Simple')</FONT> 
   <LI><FONT size=3>Line style of diagrams</FONT> 
   <LI><FONT size=3>Favorites</FONT> 
-  <LI><FONT size=3>and more... (not seen here)</FONT></LI></UL>
-<P><IMG border=0 hspace=0 alt="" 
+  <LI><FONT size=3>Conveyed Items&nbsp;(from Connector to Item and vice 
+  versa)</FONT> 
+  <LI><FONT size=3>Quick Notes</FONT> 
+  <LI><FONT size=3>Ports move (Port+Label)</FONT> 
+  <LI><FONT size=3>and more... </FONT>
+  <LI><FONT size=3></FONT></LI></UL>
+<P><IMG style="HEIGHT: 218px; WIDTH: 400px" border=0 hspace=0 
+alt="Basic functionality hoTools" 
 src="file:///D:/hoData/Development/GitHub/EnterpriseArchitect_hoTools/Addin/image/Addin.PNG" 
 align=left></P>
-<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</P>
-<P>&nbsp;</P>
-<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-</P>
-<P>&nbsp;</P>
-<P>&nbsp;</P>
-<UL>
-  <LI>
-  <LI>
-  <LI></LI></UL>
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<IMG style="HEIGHT: 337px; WIDTH: 646px" 
+border=0 hspace=0 alt="" 
+src="file:///D:/hoData/Development/GitHub/EnterpriseArchitect_hoTools/Addin/image/AddinComplete.png" 
+align=baseline>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</P>
 <P><FONT size=3><STRONG>Tab: SQL Query</STRONG></FONT></P>
 <UL>
   <LI><FONT size=3>Edit and run your SQL Query</FONT> 
@@ -120,8 +122,387 @@ align=baseline></P>
 alt="Settings global Keys for Model Search &amp; Services" 
 src="D:\hoData\Development\GitHub\EnterpriseArchitect_hoTools\Addin\image\SettingsGlobalKeys.png" 
 align=baseline></P></BODY></HTML>
-General	K000011K000582<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<HTML><HEAD><TITLE>General</TITLE>
+hoTools	K000011K002022<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Language" content="de-at">
+<title>hoTools</title>
+</head>
+<body bgcolor="#FFFFFF" style="font-size:10pt; font-family:Times New Roman;">
+<table cellpadding="2" cellspacing="0" width="99%" style="border:1px solid #C6C7C6; border-collapse:collapse; font-size:10pt">
+<tr>
+<td width="100%" colspan="2" bgcolor="#FFE77B" style="border:1px solid #C6C7C6">
+<p align="center"><b><font id="BME_Title" size="3" face="Verdana">hoTools</font></b></p></td>
+</tr>
+<tr>
+<td width="50%" bgcolor="#F7F7F7" style="border:1px solid #C6C7C6">
+<p align="left"><font size="1" face="Verdana">helmu_000</font></p></td>
+<td width="50%" bgcolor="#F7F7F7" style="border:1px solid #C6C7C6">
+<p align="right"><font size="1" face="Verdana">Sunday, 22. May 2016 21:02:37</font></p>
+</td>
+</tr>
+</table>
+<p>Hier Text eingeben...</p>
+</body>
+</html>
+Menu Features	K002022K002112<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Language" content="de-at">
+<title>Menu Features</title>
+</head>
+<body bgcolor="#FFFFFF" style="font-size:10pt; font-family:Times New Roman;">
+<table cellpadding="2" cellspacing="0" width="99%" style="border:1px solid #C6C7C6; border-collapse:collapse; font-size:10pt">
+<tr>
+<td width="100%" colspan="2" bgcolor="#FFE77B" style="border:1px solid #C6C7C6">
+<p align="center"><b><font id="BME_Title" size="3" face="Verdana">Menu Features</font></b></p></td>
+</tr>
+<tr>
+<td width="50%" bgcolor="#F7F7F7" style="border:1px solid #C6C7C6">
+<p align="left"><font size="1" face="Verdana">helmu_000</font></p></td>
+<td width="50%" bgcolor="#F7F7F7" style="border:1px solid #C6C7C6">
+<p align="right"><font size="1" face="Verdana">Monday, 23. May 2016 20:21:46</font></p>
+</td>
+</tr>
+</table>
+<p>Hier Text eingeben...</p>
+</body>
+</html>
+Menu File	K002112K002123<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>Menu File</TITLE>
+<META content="text/html; charset=unicode" http-equiv=Content-Type>
+<META content=de-at http-equiv=Content-Language>
+<META name=GENERATOR content="MSHTML 11.00.10586.306">
+<STYLE 
+type=text/css>a.bmeAnchor { background-color:#4682b4; color:white; }</STYLE>
+</HEAD>
+<BODY style="FONT-SIZE: 10pt; FONT-FAMILY: Times New Roman" bgColor=#ffffff>
+<TABLE 
+style="FONT-SIZE: 10pt; BORDER-TOP: #c6c7c6 1px solid; BORDER-RIGHT: #c6c7c6 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: #c6c7c6 1px solid; BORDER-LEFT: #c6c7c6 1px solid" 
+cellSpacing=0 cellPadding=2 width="99%">
+  <TBODY>
+  <TR>
+    <TD 
+    style="BORDER-TOP: #c6c7c6 1px solid; BORDER-RIGHT: #c6c7c6 1px solid; BORDER-BOTTOM: #c6c7c6 1px solid; BORDER-LEFT: #c6c7c6 1px solid" 
+    bgColor=#ffe77b width="100%" colSpan=2>
+      <P align=center><B><FONT id=BME_Title size=3 face=Verdana>Menu 
+      File</FONT></B></P></TD></TR>
+  <TR>
+    <TD 
+    style="BORDER-TOP: #c6c7c6 1px solid; BORDER-RIGHT: #c6c7c6 1px solid; BORDER-BOTTOM: #c6c7c6 1px solid; BORDER-LEFT: #c6c7c6 1px solid" 
+    bgColor=#f7f7f7 width="50%">
+      <P align=left><FONT size=1 face=Verdana>helmu_000</FONT></P></TD>
+    <TD 
+    style="BORDER-TOP: #c6c7c6 1px solid; BORDER-RIGHT: #c6c7c6 1px solid; BORDER-BOTTOM: #c6c7c6 1px solid; BORDER-LEFT: #c6c7c6 1px solid" 
+    bgColor=#f7f7f7 width="50%">
+      <P align=right><FONT size=1 face=Verdana>Monday, 23. May 2016 
+      20:27:31</FONT></P></TD></TR></TBODY></TABLE>
+<P><FONT size=4><STRONG>File Menu to configure Settings:</STRONG></FONT></P>
+<UL>
+  <LI><FONT size=4>Settings General </FONT></LI>
+  <LI><FONT size=4>Settings Linestyle </FONT>
+  <LI><FONT size=4>Settings Toolbar foer Searches and Services </FONT>
+  <LI><FONT size=4>Settings Query and Script </FONT>
+  <LI><FONT size=4>Setting Global Keys</FONT></LI></UL>
+<P><FONT size=4><IMG style="HEIGHT: 163px; WIDTH: 313px" border=0 hspace=0 
+alt="" 
+src="file:///D:/hoData/Development/GitHub/EnterpriseArchitect_hoTools/Addin/image/hoToolsMenuFile.png" 
+align=absMiddle></FONT></P></BODY></HTML>
+Menu Do	K002112K002133<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>Menu Do</TITLE>
+<META content="text/html; charset=unicode" http-equiv=Content-Type>
+<META content=de-at http-equiv=Content-Language>
+<META name=GENERATOR content="MSHTML 11.00.10586.306">
+<STYLE 
+type=text/css>a.bmeAnchor { background-color:#4682b4; color:white; }</STYLE>
+</HEAD>
+<BODY style="FONT-SIZE: 10pt; FONT-FAMILY: Times New Roman" bgColor=#ffffff>
+<TABLE 
+style="FONT-SIZE: 10pt; BORDER-TOP: #c6c7c6 1px solid; BORDER-RIGHT: #c6c7c6 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: #c6c7c6 1px solid; BORDER-LEFT: #c6c7c6 1px solid" 
+cellSpacing=0 cellPadding=2 width="99%">
+  <TBODY>
+  <TR>
+    <TD 
+    style="BORDER-TOP: #c6c7c6 1px solid; BORDER-RIGHT: #c6c7c6 1px solid; BORDER-BOTTOM: #c6c7c6 1px solid; BORDER-LEFT: #c6c7c6 1px solid" 
+    bgColor=#ffe77b width="100%" colSpan=2>
+      <P align=center><B><FONT id=BME_Title size=3 face=Verdana>Menu 
+      Do</FONT></B></P></TD></TR>
+  <TR>
+    <TD 
+    style="BORDER-TOP: #c6c7c6 1px solid; BORDER-RIGHT: #c6c7c6 1px solid; BORDER-BOTTOM: #c6c7c6 1px solid; BORDER-LEFT: #c6c7c6 1px solid" 
+    bgColor=#f7f7f7 width="50%">
+      <P align=left><FONT size=1 face=Verdana>helmu_000</FONT></P></TD>
+    <TD 
+    style="BORDER-TOP: #c6c7c6 1px solid; BORDER-RIGHT: #c6c7c6 1px solid; BORDER-BOTTOM: #c6c7c6 1px solid; BORDER-LEFT: #c6c7c6 1px solid" 
+    bgColor=#f7f7f7 width="50%">
+      <P align=right><FONT size=1 face=Verdana>Monday, 23. May 2016 
+      20:27:42</FONT></P></TD></TR></TBODY></TABLE>
+<P><FONT size=4><STRONG>Do Menu:</STRONG></FONT></P>
+<UL>
+  <LI><FONT size=4>Create Activity for selected Operation</FONT>
+  <LI><FONT size=4>Show folder&nbsp;</FONT><FONT size=4> </FONT>
+  <LI><FONT size=4>SQL selects update/create/insert for selected Item</FONT>
+  <LI><FONT size=4>Change Author</FONT>
+  <LI><FONT size=4>Change Author recursive</FONT></LI></UL>
+<P><IMG border=0 hspace=0 alt="" 
+src="D:\hoData\Development\GitHub\EnterpriseArchitect_hoTools\Addin\image\hoToolsMenuDo.png" 
+align=baseline></P></BODY></HTML>
+Menu Port	K002112K002153<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>Menu Port</TITLE>
+<META content="text/html; charset=unicode" http-equiv=Content-Type>
+<META content=de-at http-equiv=Content-Language>
+<META name=GENERATOR content="MSHTML 11.00.10586.306">
+<STYLE 
+type=text/css>a.bmeAnchor { background-color:#4682b4; color:white; }</STYLE>
+</HEAD>
+<BODY style="FONT-SIZE: 10pt; FONT-FAMILY: Times New Roman" bgColor=#ffffff>
+<TABLE 
+style="FONT-SIZE: 10pt; BORDER-TOP: #c6c7c6 1px solid; BORDER-RIGHT: #c6c7c6 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: #c6c7c6 1px solid; BORDER-LEFT: #c6c7c6 1px solid" 
+cellSpacing=0 cellPadding=2 width="99%">
+  <TBODY>
+  <TR>
+    <TD 
+    style="BORDER-TOP: #c6c7c6 1px solid; BORDER-RIGHT: #c6c7c6 1px solid; BORDER-BOTTOM: #c6c7c6 1px solid; BORDER-LEFT: #c6c7c6 1px solid" 
+    bgColor=#ffe77b width="100%" colSpan=2>
+      <P align=center><B><FONT id=BME_Title size=3 face=Verdana>Menu 
+      Port</FONT></B></P></TD></TR>
+  <TR>
+    <TD 
+    style="BORDER-TOP: #c6c7c6 1px solid; BORDER-RIGHT: #c6c7c6 1px solid; BORDER-BOTTOM: #c6c7c6 1px solid; BORDER-LEFT: #c6c7c6 1px solid" 
+    bgColor=#f7f7f7 width="50%">
+      <P align=left><FONT size=1 face=Verdana>helmu_000</FONT></P></TD>
+    <TD 
+    style="BORDER-TOP: #c6c7c6 1px solid; BORDER-RIGHT: #c6c7c6 1px solid; BORDER-BOTTOM: #c6c7c6 1px solid; BORDER-LEFT: #c6c7c6 1px solid" 
+    bgColor=#f7f7f7 width="50%">
+      <P align=right><FONT size=1 face=Verdana>Monday, 23. May 2016 
+      20:27:57</FONT></P></TD></TR></TBODY></TABLE>
+<P><FONT size=4><STRONG>Port&nbsp;Menu:</STRONG></FONT></P>
+<UL>
+  <LI><FONT size=4>Copy Port</FONT>
+  <LI><FONT size=4>Delete Ports</FONT>
+  <LI><FONT size=4>Connect Ports</FONT>&nbsp;
+  <LI><FONT size=4>etc.</FONT></LI></UL>
+<P><IMG border=0 hspace=0 alt="" 
+src="D:\hoData\Development\GitHub\EnterpriseArchitect_hoTools\Addin\image\hoToolsMenuPort.png" 
+align=baseline></P></BODY></HTML>
+Menu VC	K002112K002143<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>Menu VC</TITLE>
+<META content="text/html; charset=unicode" http-equiv=Content-Type>
+<META content=de-at http-equiv=Content-Language>
+<META name=GENERATOR content="MSHTML 11.00.10586.306">
+<STYLE 
+type=text/css>a.bmeAnchor { background-color:#4682b4; color:white; }</STYLE>
+</HEAD>
+<BODY style="FONT-SIZE: 10pt; FONT-FAMILY: Times New Roman" bgColor=#ffffff>
+<TABLE 
+style="FONT-SIZE: 10pt; BORDER-TOP: #c6c7c6 1px solid; BORDER-RIGHT: #c6c7c6 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: #c6c7c6 1px solid; BORDER-LEFT: #c6c7c6 1px solid" 
+cellSpacing=0 cellPadding=2 width="99%">
+  <TBODY>
+  <TR>
+    <TD 
+    style="BORDER-TOP: #c6c7c6 1px solid; BORDER-RIGHT: #c6c7c6 1px solid; BORDER-BOTTOM: #c6c7c6 1px solid; BORDER-LEFT: #c6c7c6 1px solid" 
+    bgColor=#ffe77b width="100%" colSpan=2>
+      <P align=center><B><FONT id=BME_Title size=3 face=Verdana>Menu 
+      VC</FONT></B></P></TD></TR>
+  <TR>
+    <TD 
+    style="BORDER-TOP: #c6c7c6 1px solid; BORDER-RIGHT: #c6c7c6 1px solid; BORDER-BOTTOM: #c6c7c6 1px solid; BORDER-LEFT: #c6c7c6 1px solid" 
+    bgColor=#f7f7f7 width="50%">
+      <P align=left><FONT size=1 face=Verdana>helmu_000</FONT></P></TD>
+    <TD 
+    style="BORDER-TOP: #c6c7c6 1px solid; BORDER-RIGHT: #c6c7c6 1px solid; BORDER-BOTTOM: #c6c7c6 1px solid; BORDER-LEFT: #c6c7c6 1px solid" 
+    bgColor=#f7f7f7 width="50%">
+      <P align=right><FONT size=1 face=Verdana>Monday, 23. May 2016 
+      20:27:50</FONT></P></TD></TR></TBODY></TABLE>
+<P><FONT size=4><STRONG>VC&nbsp;Menu:</STRONG></FONT></P>
+<UL>
+  <LI><FONT size=4>Change the *.xml file patch of selected controlled 
+  package</FONT><FONT size=4>&nbsp;</FONT><FONT size=4> </FONT>
+  <LI><FONT size=4>Show folder VC controlled Package for selected 
+package</FONT>&nbsp;
+  <LI><FONT size=4>Get VC latest (recursive) of and beneath selected 
+  package</FONT>
+  <LI><FONT size=4>Show Tortoise Log of selected Package</FONT>
+  <LI><FONT size=4>Show Tortoise Repo Browser</FONT>
+  <LI><FONT size=4>Set SVN Keywords for selected packages</FONT>
+  <LI><FONT size=4>Set SVN Module Tagged Values</FONT>
+  <LI><FONT size=4>Set SVN Module Tagged Values (recursive) for selected and 
+  beneatch selected Package</FONT></LI></UL>
+<P><IMG border=0 hspace=0 alt="" 
+src="D:\hoData\Development\GitHub\EnterpriseArchitect_hoTools\Addin\image\hoToolsMenuVC.png" 
+align=baseline></P></BODY></HTML>
+Settings General	K002022K002042<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>Settings General</TITLE>
+<META content="text/html; charset=unicode" http-equiv=Content-Type>
+<META content=de-at http-equiv=Content-Language>
+<META name=GENERATOR content="MSHTML 11.00.10586.306"></HEAD>
+<BODY style="FONT-SIZE: 10pt; FONT-FAMILY: Times New Roman" bgColor=#ffffff>
+<TABLE 
+style="FONT-SIZE: 10pt; BORDER-TOP: #c6c7c6 1px solid; BORDER-RIGHT: #c6c7c6 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: #c6c7c6 1px solid; BORDER-LEFT: #c6c7c6 1px solid" 
+cellSpacing=0 cellPadding=2 width="99%">
+  <TBODY>
+  <TR>
+    <TD 
+    style="BORDER-TOP: #c6c7c6 1px solid; BORDER-RIGHT: #c6c7c6 1px solid; BORDER-BOTTOM: #c6c7c6 1px solid; BORDER-LEFT: #c6c7c6 1px solid" 
+    bgColor=#ffe77b width="100%" colSpan=2>
+      <P align=center><B><FONT id=BME_Title size=3 face=Verdana>Settings 
+      General</FONT></B></P></TD></TR>
+  <TR>
+    <TD 
+    style="BORDER-TOP: #c6c7c6 1px solid; BORDER-RIGHT: #c6c7c6 1px solid; BORDER-BOTTOM: #c6c7c6 1px solid; BORDER-LEFT: #c6c7c6 1px solid" 
+    bgColor=#f7f7f7 width="50%">
+      <P align=left><FONT size=1 face=Verdana>helmu_000</FONT></P></TD>
+    <TD 
+    style="BORDER-TOP: #c6c7c6 1px solid; BORDER-RIGHT: #c6c7c6 1px solid; BORDER-BOTTOM: #c6c7c6 1px solid; BORDER-LEFT: #c6c7c6 1px solid" 
+    bgColor=#f7f7f7 width="50%">
+      <P align=right><FONT size=1 face=Verdana>Sunday, 22. May 2016 
+      21:03:15</FONT></P></TD></TR></TBODY></TABLE>
+<P><IMG border=0 hspace=0 alt="" 
+src="D:\hoData\Development\GitHub\EnterpriseArchitect_hoTools\Addin\image\GeneralSettings.png" 
+align=baseline></P></BODY></HTML>
+Settings Default Linestyle 	K002022K002072<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>Settings Default Linestyle </TITLE>
+<META content="text/html; charset=unicode" http-equiv=Content-Type>
+<META content=de-at http-equiv=Content-Language>
+<META name=GENERATOR content="MSHTML 11.00.10586.306"></HEAD>
+<BODY style="FONT-SIZE: 10pt; FONT-FAMILY: Times New Roman" bgColor=#ffffff>
+<TABLE 
+style="FONT-SIZE: 10pt; BORDER-TOP: #c6c7c6 1px solid; BORDER-RIGHT: #c6c7c6 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: #c6c7c6 1px solid; BORDER-LEFT: #c6c7c6 1px solid" 
+cellSpacing=0 cellPadding=2 width="99%">
+  <TBODY>
+  <TR>
+    <TD 
+    style="BORDER-TOP: #c6c7c6 1px solid; BORDER-RIGHT: #c6c7c6 1px solid; BORDER-BOTTOM: #c6c7c6 1px solid; BORDER-LEFT: #c6c7c6 1px solid" 
+    bgColor=#ffe77b width="100%" colSpan=2>
+      <P align=center><B><FONT id=BME_Title size=3 face=Verdana>Settings Default Linestyle </FONT></B></P></TD></TR>
+  <TR>
+    <TD 
+    style="BORDER-TOP: #c6c7c6 1px solid; BORDER-RIGHT: #c6c7c6 1px solid; BORDER-BOTTOM: #c6c7c6 1px solid; BORDER-LEFT: #c6c7c6 1px solid" 
+    bgColor=#f7f7f7 width="50%">
+      <P align=left><FONT size=1 face=Verdana>helmu_000</FONT></P></TD>
+    <TD 
+    style="BORDER-TOP: #c6c7c6 1px solid; BORDER-RIGHT: #c6c7c6 1px solid; BORDER-BOTTOM: #c6c7c6 1px solid; BORDER-LEFT: #c6c7c6 1px solid" 
+    bgColor=#f7f7f7 width="50%">
+      <P align=right><FONT size=1 face=Verdana>Monday, 23. May 2016 
+      19:50:20</FONT></P></TD></TR></TBODY></TABLE>
+<P><IMG border=0 hspace=0 alt="" 
+src="D:\hoData\Development\GitHub\EnterpriseArchitect_hoTools\Addin\image\SettingsDefaultLineStyles.png" 
+align=baseline></P></BODY></HTML>
+Settings Toolbar for Query and Searches	K002022K002082<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>Settings Toolbar for Query and Searches</TITLE>
+<META content="text/html; charset=unicode" http-equiv=Content-Type>
+<META content=de-at http-equiv=Content-Language>
+<META name=GENERATOR content="MSHTML 11.00.10586.306">
+<STYLE 
+type=text/css>a.bmeAnchor { background-color:#4682b4; color:white; }</STYLE>
+</HEAD>
+<BODY style="FONT-SIZE: 10pt; FONT-FAMILY: Times New Roman" bgColor=#ffffff>
+<TABLE 
+style="FONT-SIZE: 10pt; BORDER-TOP: #c6c7c6 1px solid; BORDER-RIGHT: #c6c7c6 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: #c6c7c6 1px solid; BORDER-LEFT: #c6c7c6 1px solid" 
+cellSpacing=0 cellPadding=2 width="99%">
+  <TBODY>
+  <TR>
+    <TD 
+    style="BORDER-TOP: #c6c7c6 1px solid; BORDER-RIGHT: #c6c7c6 1px solid; BORDER-BOTTOM: #c6c7c6 1px solid; BORDER-LEFT: #c6c7c6 1px solid" 
+    bgColor=#ffe77b width="100%" colSpan=2>
+      <P align=center><B><FONT id=BME_Title size=3 face=Verdana>Settings Toolbar 
+      for Query and Searches</FONT></B></P></TD></TR>
+  <TR>
+    <TD 
+    style="BORDER-TOP: #c6c7c6 1px solid; BORDER-RIGHT: #c6c7c6 1px solid; BORDER-BOTTOM: #c6c7c6 1px solid; BORDER-LEFT: #c6c7c6 1px solid" 
+    bgColor=#f7f7f7 width="50%">
+      <P align=left><FONT size=1 face=Verdana>helmu_000</FONT></P></TD>
+    <TD 
+    style="BORDER-TOP: #c6c7c6 1px solid; BORDER-RIGHT: #c6c7c6 1px solid; BORDER-BOTTOM: #c6c7c6 1px solid; BORDER-LEFT: #c6c7c6 1px solid" 
+    bgColor=#f7f7f7 width="50%">
+      <P align=right><FONT size=1 face=Verdana>Monday, 23. May 2016 
+      19:50:44</FONT></P></TD></TR></TBODY></TABLE>
+<P><IMG border=0 hspace=0 alt="" 
+src="D:\hoData\Development\GitHub\EnterpriseArchitect_hoTools\Addin\image\SettingsToolbar.png" 
+align=baseline></P></BODY></HTML>
+Settings Query and Script	K002022K002092<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>Settings Query and Script</TITLE>
+<META content="text/html; charset=unicode" http-equiv=Content-Type>
+<META content=de-at http-equiv=Content-Language>
+<META name=GENERATOR content="MSHTML 11.00.10586.306"></HEAD>
+<BODY style="FONT-SIZE: 10pt; FONT-FAMILY: Times New Roman" bgColor=#ffffff>
+<TABLE 
+style="FONT-SIZE: 10pt; BORDER-TOP: #c6c7c6 1px solid; BORDER-RIGHT: #c6c7c6 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: #c6c7c6 1px solid; BORDER-LEFT: #c6c7c6 1px solid" 
+cellSpacing=0 cellPadding=2 width="99%">
+  <TBODY>
+  <TR>
+    <TD 
+    style="BORDER-TOP: #c6c7c6 1px solid; BORDER-RIGHT: #c6c7c6 1px solid; BORDER-BOTTOM: #c6c7c6 1px solid; BORDER-LEFT: #c6c7c6 1px solid" 
+    bgColor=#ffe77b width="100%" colSpan=2>
+      <P align=center><B><FONT id=BME_Title size=3 face=Verdana>Settings Query 
+      and Script</FONT></B></P></TD></TR>
+  <TR>
+    <TD 
+    style="BORDER-TOP: #c6c7c6 1px solid; BORDER-RIGHT: #c6c7c6 1px solid; BORDER-BOTTOM: #c6c7c6 1px solid; BORDER-LEFT: #c6c7c6 1px solid" 
+    bgColor=#f7f7f7 width="50%">
+      <P align=left><FONT size=1 face=Verdana>helmu_000</FONT></P></TD>
+    <TD 
+    style="BORDER-TOP: #c6c7c6 1px solid; BORDER-RIGHT: #c6c7c6 1px solid; BORDER-BOTTOM: #c6c7c6 1px solid; BORDER-LEFT: #c6c7c6 1px solid" 
+    bgColor=#f7f7f7 width="50%">
+      <P align=right><FONT size=1 face=Verdana>Monday, 23. May 2016 
+      19:51:25</FONT></P></TD></TR></TBODY></TABLE>
+<P><IMG border=0 hspace=0 alt="" 
+src="D:\hoData\Development\GitHub\EnterpriseArchitect_hoTools\Addin\image\SettingsQueryAndScript.png" 
+align=baseline></P></BODY></HTML>
+Settings Global Keys	K002022K002102<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>Settings Global Keys</TITLE>
+<META content="text/html; charset=unicode" http-equiv=Content-Type>
+<META content=de-at http-equiv=Content-Language>
+<META name=GENERATOR content="MSHTML 11.00.10586.306"></HEAD>
+<BODY style="FONT-SIZE: 10pt; FONT-FAMILY: Times New Roman" bgColor=#ffffff>
+<TABLE 
+style="FONT-SIZE: 10pt; BORDER-TOP: #c6c7c6 1px solid; BORDER-RIGHT: #c6c7c6 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: #c6c7c6 1px solid; BORDER-LEFT: #c6c7c6 1px solid" 
+cellSpacing=0 cellPadding=2 width="99%">
+  <TBODY>
+  <TR>
+    <TD 
+    style="BORDER-TOP: #c6c7c6 1px solid; BORDER-RIGHT: #c6c7c6 1px solid; BORDER-BOTTOM: #c6c7c6 1px solid; BORDER-LEFT: #c6c7c6 1px solid" 
+    bgColor=#ffe77b width="100%" colSpan=2>
+      <P align=center><B><FONT id=BME_Title size=3 face=Verdana>Settings Global 
+      Keys</FONT></B></P></TD></TR>
+  <TR>
+    <TD 
+    style="BORDER-TOP: #c6c7c6 1px solid; BORDER-RIGHT: #c6c7c6 1px solid; BORDER-BOTTOM: #c6c7c6 1px solid; BORDER-LEFT: #c6c7c6 1px solid" 
+    bgColor=#f7f7f7 width="50%">
+      <P align=left><FONT size=1 face=Verdana>helmu_000</FONT></P></TD>
+    <TD 
+    style="BORDER-TOP: #c6c7c6 1px solid; BORDER-RIGHT: #c6c7c6 1px solid; BORDER-BOTTOM: #c6c7c6 1px solid; BORDER-LEFT: #c6c7c6 1px solid" 
+    bgColor=#f7f7f7 width="50%">
+      <P align=right><FONT size=1 face=Verdana>Monday, 23. May 2016 
+      19:52:50</FONT></P></TD></TR></TBODY></TABLE>
+<P><IMG border=0 hspace=0 alt="" 
+src="D:\hoData\Development\GitHub\EnterpriseArchitect_hoTools\Addin\image\SettingsGlobalKeys.png" 
+align=baseline></P></BODY></HTML>
+SQL Query	K000011K002062<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Language" content="de-at">
+<title>SQL Query</title>
+</head>
+<body bgcolor="#FFFFFF" style="font-size:10pt; font-family:Times New Roman;">
+<table cellpadding="2" cellspacing="0" width="99%" style="border:1px solid #C6C7C6; border-collapse:collapse; font-size:10pt">
+<tr>
+<td width="100%" colspan="2" bgcolor="#FFE77B" style="border:1px solid #C6C7C6">
+<p align="center"><b><font id="BME_Title" size="3" face="Verdana">SQL Query</font></b></p></td>
+</tr>
+<tr>
+<td width="50%" bgcolor="#F7F7F7" style="border:1px solid #C6C7C6">
+<p align="left"><font size="1" face="Verdana">helmu_000</font></p></td>
+<td width="50%" bgcolor="#F7F7F7" style="border:1px solid #C6C7C6">
+<p align="right"><font size="1" face="Verdana">Monday, 23. May 2016 19:48:08</font></p>
+</td>
+</tr>
+</table>
+<p>Hier Text eingeben...</p>
+</body>
+</html>
+SQL Query and Scripts	K000011K000582<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>SQL Query and Scripts</TITLE>
 <META content="text/html; charset=unicode" http-equiv=Content-Type>
 <META content=de-at http-equiv=Content-Language>
 <META name=GENERATOR content="MSHTML 11.00.10586.306">
@@ -138,7 +519,7 @@ cellSpacing=0 cellPadding=2 width="99%">
     style="BORDER-TOP: #c6c7c6 1px solid; BORDER-RIGHT: #c6c7c6 1px solid; BORDER-BOTTOM: #c6c7c6 1px solid; BORDER-LEFT: #c6c7c6 1px solid" 
     bgColor=#ffe77b width="100%" colSpan=2>
       <P align=center><B><FONT id=BME_Title size=3 
-      face=Verdana>General</FONT></B></P></TD></TR>
+      face=Verdana>SQL Query and Scripts</FONT></B></P></TD></TR>
   <TR>
     <TD 
     style="BORDER-TOP: #c6c7c6 1px solid; BORDER-RIGHT: #c6c7c6 1px solid; BORDER-BOTTOM: #c6c7c6 1px solid; BORDER-LEFT: #c6c7c6 1px solid" 
@@ -180,17 +561,17 @@ align=left></P>
 <P><IMG border=0 hspace=0 alt="" 
 src="D:\hoData\Development\GitHub\EnterpriseArchitect_hoTools\Addin\image\Settings.png" 
 align=baseline></P></BODY></HTML>
-SQL Query	K000011K002032<html>
+Find and Replace	K000011K002032<html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="Content-Language" content="de-at">
-<title>SQL Query</title>
+<title>Find and Replace</title>
 </head>
 <body bgcolor="#FFFFFF" style="font-size:10pt; font-family:Times New Roman;">
 <table cellpadding="2" cellspacing="0" width="99%" style="border:1px solid #C6C7C6; border-collapse:collapse; font-size:10pt">
 <tr>
 <td width="100%" colspan="2" bgcolor="#FFE77B" style="border:1px solid #C6C7C6">
-<p align="center"><b><font id="BME_Title" size="3" face="Verdana">SQL Query</font></b></p></td>
+<p align="center"><b><font id="BME_Title" size="3" face="Verdana">Find and Replace</font></b></p></td>
 </tr>
 <tr>
 <td width="50%" bgcolor="#F7F7F7" style="border:1px solid #C6C7C6">
@@ -220,52 +601,6 @@ align=baseline></P></BODY></HTML>
 <p align="left"><font size="1" face="Verdana">helmu_000</font></p></td>
 <td width="50%" bgcolor="#F7F7F7" style="border:1px solid #C6C7C6">
 <p align="right"><font size="1" face="Verdana">Sunday, 22. May 2016 21:03:39</font></p>
-</td>
-</tr>
-</table>
-<p>Hier Text eingeben...</p>
-</body>
-</html>
-Find and Replace	K000011K002042<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta http-equiv="Content-Language" content="de-at">
-<title>Find and Replace</title>
-</head>
-<body bgcolor="#FFFFFF" style="font-size:10pt; font-family:Times New Roman;">
-<table cellpadding="2" cellspacing="0" width="99%" style="border:1px solid #C6C7C6; border-collapse:collapse; font-size:10pt">
-<tr>
-<td width="100%" colspan="2" bgcolor="#FFE77B" style="border:1px solid #C6C7C6">
-<p align="center"><b><font id="BME_Title" size="3" face="Verdana">Find and Replace</font></b></p></td>
-</tr>
-<tr>
-<td width="50%" bgcolor="#F7F7F7" style="border:1px solid #C6C7C6">
-<p align="left"><font size="1" face="Verdana">helmu_000</font></p></td>
-<td width="50%" bgcolor="#F7F7F7" style="border:1px solid #C6C7C6">
-<p align="right"><font size="1" face="Verdana">Sunday, 22. May 2016 21:03:15</font></p>
-</td>
-</tr>
-</table>
-<p>Hier Text eingeben...</p>
-</body>
-</html>
-hoTools	K000011K002022<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta http-equiv="Content-Language" content="de-at">
-<title>hoTools</title>
-</head>
-<body bgcolor="#FFFFFF" style="font-size:10pt; font-family:Times New Roman;">
-<table cellpadding="2" cellspacing="0" width="99%" style="border:1px solid #C6C7C6; border-collapse:collapse; font-size:10pt">
-<tr>
-<td width="100%" colspan="2" bgcolor="#FFE77B" style="border:1px solid #C6C7C6">
-<p align="center"><b><font id="BME_Title" size="3" face="Verdana">hoTools</font></b></p></td>
-</tr>
-<tr>
-<td width="50%" bgcolor="#F7F7F7" style="border:1px solid #C6C7C6">
-<p align="left"><font size="1" face="Verdana">helmu_000</font></p></td>
-<td width="50%" bgcolor="#F7F7F7" style="border:1px solid #C6C7C6">
-<p align="right"><font size="1" face="Verdana">Sunday, 22. May 2016 21:02:37</font></p>
 </td>
 </tr>
 </table>
@@ -4917,4 +5252,4 @@ cellSpacing=0 cellPadding=2 width="99%">
 <P>Helmut Ortmann<BR><A 
 href="mailto:Helmut.Ortmann@t-online.de">Helmut.Ortmann@t-online.de</A><BR>+49 
 172 / 51 79 16 7</P></BODY></HTML>
-!=!K000011UTF-8
+!=!K002102UTF-8

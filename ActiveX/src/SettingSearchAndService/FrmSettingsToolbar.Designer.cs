@@ -245,14 +245,14 @@
             // 
             this.txtBtn1SearchTooltip.Location = new System.Drawing.Point(660, 41);
             this.txtBtn1SearchTooltip.Name = "txtBtn1SearchTooltip";
-            this.txtBtn1SearchTooltip.Size = new System.Drawing.Size(287, 24);
+            this.txtBtn1SearchTooltip.Size = new System.Drawing.Size(460, 24);
             this.txtBtn1SearchTooltip.TabIndex = 17;
             // 
             // txtBtn2SearchTooltip
             // 
             this.txtBtn2SearchTooltip.Location = new System.Drawing.Point(660, 66);
             this.txtBtn2SearchTooltip.Name = "txtBtn2SearchTooltip";
-            this.txtBtn2SearchTooltip.Size = new System.Drawing.Size(287, 24);
+            this.txtBtn2SearchTooltip.Size = new System.Drawing.Size(460, 24);
             this.txtBtn2SearchTooltip.TabIndex = 21;
             // 
             // txtBtn2SearchTerm
@@ -283,7 +283,7 @@
             // 
             this.txtBtn3SearchTooltip.Location = new System.Drawing.Point(660, 92);
             this.txtBtn3SearchTooltip.Name = "txtBtn3SearchTooltip";
-            this.txtBtn3SearchTooltip.Size = new System.Drawing.Size(287, 24);
+            this.txtBtn3SearchTooltip.Size = new System.Drawing.Size(460, 24);
             this.txtBtn3SearchTooltip.TabIndex = 25;
             // 
             // txtBtn3SearchTerm
@@ -314,7 +314,7 @@
             // 
             this.txtBtn4SearchTooltip.Location = new System.Drawing.Point(660, 118);
             this.txtBtn4SearchTooltip.Name = "txtBtn4SearchTooltip";
-            this.txtBtn4SearchTooltip.Size = new System.Drawing.Size(287, 24);
+            this.txtBtn4SearchTooltip.Size = new System.Drawing.Size(460, 24);
             this.txtBtn4SearchTooltip.TabIndex = 29;
             // 
             // txtBtn4SearchTerm
@@ -345,7 +345,7 @@
             // 
             this.txtBtn5SearchTooltip.Location = new System.Drawing.Point(660, 144);
             this.txtBtn5SearchTooltip.Name = "txtBtn5SearchTooltip";
-            this.txtBtn5SearchTooltip.Size = new System.Drawing.Size(287, 24);
+            this.txtBtn5SearchTooltip.Size = new System.Drawing.Size(460, 24);
             this.txtBtn5SearchTooltip.TabIndex = 33;
             // 
             // txtBtn5SearchTerm
@@ -557,7 +557,7 @@
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.Location = new System.Drawing.Point(11, 40);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(960, 177);
+            this.groupBox2.Size = new System.Drawing.Size(1126, 177);
             this.groupBox2.TabIndex = 59;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Search Buttons";
@@ -586,7 +586,7 @@
             this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox3.Location = new System.Drawing.Point(12, 220);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(959, 189);
+            this.groupBox3.Size = new System.Drawing.Size(1125, 189);
             this.groupBox3.TabIndex = 60;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Services Buttons";
@@ -607,7 +607,7 @@
             this.txtServiceTooltip5.Location = new System.Drawing.Point(659, 152);
             this.txtServiceTooltip5.Name = "txtServiceTooltip5";
             this.txtServiceTooltip5.ReadOnly = true;
-            this.txtServiceTooltip5.Size = new System.Drawing.Size(287, 24);
+            this.txtServiceTooltip5.Size = new System.Drawing.Size(460, 24);
             this.txtServiceTooltip5.TabIndex = 65;
             // 
             // txtServiceTooltip1
@@ -616,7 +616,7 @@
             this.txtServiceTooltip1.Location = new System.Drawing.Point(659, 48);
             this.txtServiceTooltip1.Name = "txtServiceTooltip1";
             this.txtServiceTooltip1.ReadOnly = true;
-            this.txtServiceTooltip1.Size = new System.Drawing.Size(287, 24);
+            this.txtServiceTooltip1.Size = new System.Drawing.Size(460, 24);
             this.txtServiceTooltip1.TabIndex = 61;
             // 
             // txtServiceTooltip4
@@ -625,7 +625,7 @@
             this.txtServiceTooltip4.Location = new System.Drawing.Point(659, 123);
             this.txtServiceTooltip4.Name = "txtServiceTooltip4";
             this.txtServiceTooltip4.ReadOnly = true;
-            this.txtServiceTooltip4.Size = new System.Drawing.Size(287, 24);
+            this.txtServiceTooltip4.Size = new System.Drawing.Size(460, 24);
             this.txtServiceTooltip4.TabIndex = 64;
             // 
             // txtServiceTooltip2
@@ -634,7 +634,7 @@
             this.txtServiceTooltip2.Location = new System.Drawing.Point(659, 72);
             this.txtServiceTooltip2.Name = "txtServiceTooltip2";
             this.txtServiceTooltip2.ReadOnly = true;
-            this.txtServiceTooltip2.Size = new System.Drawing.Size(287, 24);
+            this.txtServiceTooltip2.Size = new System.Drawing.Size(460, 24);
             this.txtServiceTooltip2.TabIndex = 62;
             // 
             // txtServiceTooltip3
@@ -643,7 +643,7 @@
             this.txtServiceTooltip3.Location = new System.Drawing.Point(659, 98);
             this.txtServiceTooltip3.Name = "txtServiceTooltip3";
             this.txtServiceTooltip3.ReadOnly = true;
-            this.txtServiceTooltip3.Size = new System.Drawing.Size(287, 24);
+            this.txtServiceTooltip3.Size = new System.Drawing.Size(460, 24);
             this.txtServiceTooltip3.TabIndex = 63;
             // 
             // label1
@@ -661,7 +661,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1015, 498);
+            this.ClientSize = new System.Drawing.Size(1149, 498);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtButton4TextService);
             this.Controls.Add(this.txtButton3TextService);

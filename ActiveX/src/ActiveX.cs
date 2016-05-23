@@ -143,6 +143,7 @@ namespace hoTools.ActiveX
         private ToolStripButton toolStripServiceBtn4;
         private ToolStripButton toolStripServiceBtn5;
         private ToolStripMenuItem settingsGlobalKeysToolStripMenuItem;
+        private Label lblPorts;
         private TextBox txtUserText;
         #endregion
 
@@ -782,9 +783,9 @@ namespace hoTools.ActiveX
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingGeneralToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.settingsQueryAndSctipToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolbarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.settingsQueryAndSctipToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsGlobalKeysToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.doToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.createActivityForOperationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -836,6 +837,7 @@ namespace hoTools.ActiveX
             this.panelFavorite = new System.Windows.Forms.Panel();
             this.panelNote = new System.Windows.Forms.Panel();
             this.panelPort = new System.Windows.Forms.Panel();
+            this.lblPorts = new System.Windows.Forms.Label();
             this.panelAdvanced = new System.Windows.Forms.Panel();
             this.panelConveyedItems = new System.Windows.Forms.Panel();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
@@ -885,7 +887,6 @@ namespace hoTools.ActiveX
             this.toolStripServiceBtn4,
             this.toolStripServiceBtn5});
             this.toolStripQuery.Name = "toolStripQuery";
-            this.toolTip.SetToolTip(this.toolStripQuery, resources.GetString("toolStripQuery.ToolTip"));
             // 
             // toolStripSearchBtn1
             // 
@@ -1229,9 +1230,9 @@ namespace hoTools.ActiveX
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.settingGeneralToolStripMenuItem,
-            this.settingsQueryAndSctipToolStripMenuItem,
             this.settingsToolStripMenuItem,
             this.settingsToolbarToolStripMenuItem,
+            this.settingsQueryAndSctipToolStripMenuItem,
             this.settingsGlobalKeysToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             resources.ApplyResources(this.fileToolStripMenuItem, "fileToolStripMenuItem");
@@ -1241,12 +1242,6 @@ namespace hoTools.ActiveX
             this.settingGeneralToolStripMenuItem.Name = "settingGeneralToolStripMenuItem";
             resources.ApplyResources(this.settingGeneralToolStripMenuItem, "settingGeneralToolStripMenuItem");
             this.settingGeneralToolStripMenuItem.Click += new System.EventHandler(this.settingGeneralToolStripMenuItem_Click);
-            // 
-            // settingsQueryAndSctipToolStripMenuItem
-            // 
-            this.settingsQueryAndSctipToolStripMenuItem.Name = "settingsQueryAndSctipToolStripMenuItem";
-            resources.ApplyResources(this.settingsQueryAndSctipToolStripMenuItem, "settingsQueryAndSctipToolStripMenuItem");
-            this.settingsQueryAndSctipToolStripMenuItem.Click += new System.EventHandler(this.settingsQueryAndSctipToolStripMenuItem_Click);
             // 
             // settingsToolStripMenuItem
             // 
@@ -1259,6 +1254,12 @@ namespace hoTools.ActiveX
             this.settingsToolbarToolStripMenuItem.Name = "settingsToolbarToolStripMenuItem";
             resources.ApplyResources(this.settingsToolbarToolStripMenuItem, "settingsToolbarToolStripMenuItem");
             this.settingsToolbarToolStripMenuItem.Click += new System.EventHandler(this.settingsToolbarToolStripMenuItem_Click);
+            // 
+            // settingsQueryAndSctipToolStripMenuItem
+            // 
+            this.settingsQueryAndSctipToolStripMenuItem.Name = "settingsQueryAndSctipToolStripMenuItem";
+            resources.ApplyResources(this.settingsQueryAndSctipToolStripMenuItem, "settingsQueryAndSctipToolStripMenuItem");
+            this.settingsQueryAndSctipToolStripMenuItem.Click += new System.EventHandler(this.settingsQueryAndSctipToolStripMenuItem_Click);
             // 
             // settingsGlobalKeysToolStripMenuItem
             // 
@@ -1606,6 +1607,7 @@ namespace hoTools.ActiveX
             // 
             // panelPort
             // 
+            this.panelPort.Controls.Add(this.lblPorts);
             this.panelPort.Controls.Add(this.btnLeft);
             this.panelPort.Controls.Add(this.btnUp);
             this.panelPort.Controls.Add(this.btnRight);
@@ -1614,6 +1616,11 @@ namespace hoTools.ActiveX
             this.panelPort.Controls.Add(this.btnLabelRight);
             resources.ApplyResources(this.panelPort, "panelPort");
             this.panelPort.Name = "panelPort";
+            // 
+            // lblPorts
+            // 
+            resources.ApplyResources(this.lblPorts, "lblPorts");
+            this.lblPorts.Name = "lblPorts";
             // 
             // panelAdvanced
             // 
@@ -1661,6 +1668,7 @@ namespace hoTools.ActiveX
             this.panelFavorite.ResumeLayout(false);
             this.panelNote.ResumeLayout(false);
             this.panelPort.ResumeLayout(false);
+            this.panelPort.PerformLayout();
             this.panelAdvanced.ResumeLayout(false);
             this.panelConveyedItems.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -1715,10 +1723,21 @@ namespace hoTools.ActiveX
             this.ResumeLayout(false);
             this.PerformLayout();
 
+            // Don't change the order
+            panelPort.Visible = false;
+            panelNote.Visible = false;
+            panelAdvanced.Visible = false;
+            panelFavorite.Visible = false;
+            panelConveyedItems.Visible = false;
+            panelLineStyle.Visible = false;
+            panelQuickSearch.Visible = false;
+            panelButtons.Visible = false;
+
 
             // Port
             panelPort.Visible = AddinSettings.isAdvancedPort;
             panelNote.Visible = AddinSettings.isAdvancedDiagramNote;
+            lblPorts.Visible = AddinSettings.isAdvancedPort;
 
 
             // Advanced
@@ -1900,7 +1919,7 @@ namespace hoTools.ActiveX
                     if (service.ButtonText.Trim() != "")
                     {
                         buttonText = service.ButtonText;
-                        helpText = service.Help;
+                        helpText = service.HelpTextLong; //  Long Helptext
                     }
                 }
 
