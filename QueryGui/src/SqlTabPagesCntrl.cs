@@ -528,6 +528,14 @@ CTRL+SHFT+S                     Store sql All
             insertOperationTemplateMenuItem.Tag = SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.OPERATION_TEMPLATE);
             insertOperationTemplateMenuItem.Click += new System.EventHandler(insertTemplate_Click);
 
+            // Insert Operation Template
+            ToolStripMenuItem insertDemoRunScriptTemplateMenuItem = new ToolStripMenuItem();
+            insertDemoRunScriptTemplateMenuItem.Text = "Insert Demo run script";
+            id = SqlTemplates.SQL_TEMPLATE_ID.DEMO_RUN_SCRIPT_TEMPLATE;
+            insertDemoRunScriptTemplateMenuItem.ToolTipText = SqlTemplates.getTooltip(id);
+            insertDemoRunScriptTemplateMenuItem.Tag = SqlTemplates.getTemplate(id);
+            insertDemoRunScriptTemplateMenuItem.Click += insertTemplate_Click;
+
             //---------------------------------------------------------------------------------------------------------
             // DB Templates
             ToolStripMenuItem insertDBTemplateMenuItem = new ToolStripMenuItem();
@@ -626,6 +634,7 @@ CTRL+SHFT+S                     Store sql All
                 insertAttributeTemplateMenuItem,
                 insertOperationTemplateMenuItem,
                 new ToolStripSeparator(),
+                insertDemoRunScriptTemplateMenuItem,
                 insertDBTemplateMenuItem
                 });
 

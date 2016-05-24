@@ -120,11 +120,8 @@
   <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
   <data name="txtQuickSearch.ToolTip" xml:space="preserve">
-    <value>EA Model Search Name for Quick Search
+    <value>EA Model Search Name for Quick Search (Tip: Quick Search from MDG hoTools)
 - Simple (EA Standard Search)  or
 - Other EA Model Search or
 - Your own Search for your most important EA Model Items

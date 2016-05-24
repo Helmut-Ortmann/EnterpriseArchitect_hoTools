@@ -57,7 +57,13 @@ namespace hoTools.Utils.SQL
                     "Template to get selected Diagram Elements",
                     isResource:true
                     ) },
-
+                
+             {  SQL_TEMPLATE_ID.DEMO_RUN_SCRIPT_TEMPLATE,
+                new SqlTemplate("Demo Query to run Scripts on results ",    // Name
+                    "DemoRunScript",          // String ID of Resource
+                    "Demo Query to run Scripts on results (needs exactly one GUID in result column) ",
+                    isResource:true
+                    ) },
 
 
 
@@ -369,7 +375,8 @@ ORDER BY 3",
             AUTHOR,
             TREE_SELECTED_GUIDS, // get all the GUIDs of the selected items (otDiagram, otElement, otPackage, otAttribute, otMethod
             NOW,
-            WC
+            WC,
+            DEMO_RUN_SCRIPT_TEMPLATE
         }
         #endregion
 

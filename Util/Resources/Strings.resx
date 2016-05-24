@@ -236,6 +236,23 @@ where opr.object_ID = #CurrentElementID#
 
 ORDER BY Name</value>
   </data>
+  <data name="DemoRunScript" xml:space="preserve">
+    <value>//
+// Template DemoRunScript
+// use Script: 
+// - hoDemoScript (3 parameters)
+// - hoDemoPrintContext (2 parameters)
+//
+//
+select o.ea_guid AS CLASSGUID, o.object_type AS CLASSTYPE,o.Name AS Name,o.object_type As Type 
+from t_object o
+where o.name like '&lt;Search Term&gt;#WC#' AND      o.object_type in 
+     (
+      "Class","Component"
+      )
+ORDER BY o.Name</value>
+    <comment>Demo Query to run and test Script to performs operations on found rows.</comment>
+  </data>
   <data name="DiagramElementsIdsTemplate" xml:space="preserve">
     <value>//
 // Template DiagramElements_IDS

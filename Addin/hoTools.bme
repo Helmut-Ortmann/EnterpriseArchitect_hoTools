@@ -1,4 +1,4 @@
-﻿BookME4705138hoTools	K000000K000011<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+﻿BookME4703752hoTools	K000000K000011<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML><HEAD><TITLE>hoTools</TITLE>
 <META content="text/html; charset=unicode" http-equiv=Content-Type>
 <META content=de-at http-equiv=Content-Language>
@@ -30,20 +30,27 @@ cellSpacing=0 cellPadding=2 width="99%">
 <P><FONT size=5>hoTools to optimize every day work with EA!</FONT></P>
 <P><FONT size=4><STRONG>General:</STRONG></FONT></P>
 <UL>
-  <LI><FONT size=3>Configurable</FONT></LI>
-  <LI><FONT size=3>Tooltip</FONT></LI></UL>
+  <LI><FONT size=3>Configurable / Settings</FONT> 
+  <LI><FONT size=3>Tooltip</FONT> 
+  <LI><FONT size=3>Online Help</FONT></LI></UL>
 <P><FONT size=3><STRONG>Tab: hoTools</STRONG></FONT></P>
 <UL>
   <LI><FONT size=3>Toolbar Buttons&nbsp;to Search for and Services</FONT> 
-  <LI><FONT size=3>Quick Search (here 'Simple')</FONT> 
+  <LI><FONT size=3>Quick Search (here 'Simple'), tip: use Quick&nbsp;Search from 
+  MDG hoTools</FONT> 
+  <LI><FONT size=3>Global Keys for EA Searches and hoTools Services</FONT> 
   <LI><FONT size=3>Line style of diagrams</FONT> 
   <LI><FONT size=3>Favorites</FONT> 
   <LI><FONT size=3>Conveyed Items&nbsp;(from Connector to Item and vice 
   versa)</FONT> 
   <LI><FONT size=3>Quick Notes</FONT> 
-  <LI><FONT size=3>Ports move (Port+Label)</FONT> 
+  <LI><FONT size=3>Ports move (Port+Label, Connect, Show, Hide,..))</FONT> 
+  <LI><FONT size=3>Version Control / SVN support</FONT> 
+  <LI><FONT size=3>Create Activity with parameters for Operation</FONT> 
+  <LI><FONT size=3>Navigate</FONT> 
   <LI><FONT size=3>and more... </FONT>
-  <LI><FONT size=3></FONT></LI></UL>
+  <LI><FONT size=3>MDG hoTools with example Scripts and Model Searches </FONT>
+  <LI><FONT size=3>etc.</FONT></LI></UL>
 <P><IMG style="HEIGHT: 218px; WIDTH: 400px" border=0 hspace=0 
 alt="Basic functionality hoTools" 
 src="file:///D:/hoData/Development/GitHub/EnterpriseArchitect_hoTools/Addin/image/Addin.PNG" 
@@ -57,8 +64,14 @@ align=baseline>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp
   <LI><FONT size=3>Edit and run your SQL Query</FONT> 
   <LI><FONT size=3>Load and Save from file</FONT> 
   <LI><FONT size=3>A lot of templates</FONT> 
-  <LI><FONT size=3>A lot of macros (#Package#,.. #ConveyedItemIDS#,..)</FONT> 
-  <LI><FONT size=3>Comment your SQL</FONT></LI></UL>
+  <LI><FONT size=3>A lot of additional macros (#Package#,.. 
+  #ConveyedItemIDS#,..)</FONT> 
+  <LI><FONT size=3>Comment your SQL</FONT> 
+  <LI><FONT size=3>Read EA-SQL error from %appdata%...\dberror.txt</FONT>
+  <LI><FONT size=3>Read last sent EA-SQL string 
+  %appdata%...\hoTools_LastSql.txt</FONT>
+  <LI><FONT size=3>View Macros and Templates (also on 
+  %appdata%...\hoTools_SqlTemplatesAndMacros.txt)</FONT></LI></UL>
 <P><IMG border=0 hspace=0 alt="SQL Query" 
 src="file:///D:/hoData/Development/GitHub/EnterpriseArchitect_hoTools/Addin/image/SqlQuery.PNG" 
 align=baseline>&nbsp;</P>
@@ -122,52 +135,105 @@ align=baseline></P>
 alt="Settings global Keys for Model Search &amp; Services" 
 src="D:\hoData\Development\GitHub\EnterpriseArchitect_hoTools\Addin\image\SettingsGlobalKeys.png" 
 align=baseline></P></BODY></HTML>
-hoTools	K000011K002022<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta http-equiv="Content-Language" content="de-at">
-<title>hoTools</title>
-</head>
-<body bgcolor="#FFFFFF" style="font-size:10pt; font-family:Times New Roman;">
-<table cellpadding="2" cellspacing="0" width="99%" style="border:1px solid #C6C7C6; border-collapse:collapse; font-size:10pt">
-<tr>
-<td width="100%" colspan="2" bgcolor="#FFE77B" style="border:1px solid #C6C7C6">
-<p align="center"><b><font id="BME_Title" size="3" face="Verdana">hoTools</font></b></p></td>
-</tr>
-<tr>
-<td width="50%" bgcolor="#F7F7F7" style="border:1px solid #C6C7C6">
-<p align="left"><font size="1" face="Verdana">helmu_000</font></p></td>
-<td width="50%" bgcolor="#F7F7F7" style="border:1px solid #C6C7C6">
-<p align="right"><font size="1" face="Verdana">Sunday, 22. May 2016 21:02:37</font></p>
-</td>
-</tr>
-</table>
-<p>Hier Text eingeben...</p>
-</body>
-</html>
-Menu Features	K002022K002112<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta http-equiv="Content-Language" content="de-at">
-<title>Menu Features</title>
-</head>
-<body bgcolor="#FFFFFF" style="font-size:10pt; font-family:Times New Roman;">
-<table cellpadding="2" cellspacing="0" width="99%" style="border:1px solid #C6C7C6; border-collapse:collapse; font-size:10pt">
-<tr>
-<td width="100%" colspan="2" bgcolor="#FFE77B" style="border:1px solid #C6C7C6">
-<p align="center"><b><font id="BME_Title" size="3" face="Verdana">Menu Features</font></b></p></td>
-</tr>
-<tr>
-<td width="50%" bgcolor="#F7F7F7" style="border:1px solid #C6C7C6">
-<p align="left"><font size="1" face="Verdana">helmu_000</font></p></td>
-<td width="50%" bgcolor="#F7F7F7" style="border:1px solid #C6C7C6">
-<p align="right"><font size="1" face="Verdana">Monday, 23. May 2016 20:21:46</font></p>
-</td>
-</tr>
-</table>
-<p>Hier Text eingeben...</p>
-</body>
-</html>
+hoTools	K000011K002022<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>hoTools</TITLE>
+<META content="text/html; charset=unicode" http-equiv=Content-Type>
+<META content=de-at http-equiv=Content-Language>
+<META name=GENERATOR content="MSHTML 11.00.10586.306">
+<STYLE 
+type=text/css>a.bmeAnchor { background-color:#4682b4; color:white; }</STYLE>
+</HEAD>
+<BODY style="FONT-SIZE: 10pt; FONT-FAMILY: Times New Roman" bgColor=#ffffff>
+<TABLE 
+style="FONT-SIZE: 10pt; BORDER-TOP: #c6c7c6 1px solid; BORDER-RIGHT: #c6c7c6 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: #c6c7c6 1px solid; BORDER-LEFT: #c6c7c6 1px solid" 
+cellSpacing=0 cellPadding=2 width="99%">
+  <TBODY>
+  <TR>
+    <TD 
+    style="BORDER-TOP: #c6c7c6 1px solid; BORDER-RIGHT: #c6c7c6 1px solid; BORDER-BOTTOM: #c6c7c6 1px solid; BORDER-LEFT: #c6c7c6 1px solid" 
+    bgColor=#ffe77b width="100%" colSpan=2>
+      <P align=center><B><FONT id=BME_Title size=3 
+      face=Verdana>hoTools</FONT></B></P></TD></TR>
+  <TR>
+    <TD 
+    style="BORDER-TOP: #c6c7c6 1px solid; BORDER-RIGHT: #c6c7c6 1px solid; BORDER-BOTTOM: #c6c7c6 1px solid; BORDER-LEFT: #c6c7c6 1px solid" 
+    bgColor=#f7f7f7 width="50%">
+      <P align=left><FONT size=1 face=Verdana>helmu_000</FONT></P></TD>
+    <TD 
+    style="BORDER-TOP: #c6c7c6 1px solid; BORDER-RIGHT: #c6c7c6 1px solid; BORDER-BOTTOM: #c6c7c6 1px solid; BORDER-LEFT: #c6c7c6 1px solid" 
+    bgColor=#f7f7f7 width="50%">
+      <P align=right><FONT size=1 face=Verdana>Sunday, 22. May 2016 
+      21:02:37</FONT></P></TD></TR></TBODY></TABLE>
+<P><FONT size=5 face=Verdana>hoTools to optimize every day work with 
+EA!</FONT></P>
+<P><FONT size=4 face=Verdana><STRONG>General:</STRONG></FONT></P>
+<UL>
+  <LI><FONT size=3 face=Verdana>Configurable / Settings </FONT>
+  <LI><FONT size=3 face=Verdana>Tooltip </FONT>
+  <LI><FONT size=3 face=Verdana>Online Help</FONT></LI></UL>
+<P><STRONG><FONT size=4 face=Verdana>Tab: hoTools</FONT></STRONG></P>
+<UL>
+  <LI><FONT size=3 face=Verdana>Toolbar Buttons&nbsp;to Search for and Services 
+  </FONT>
+  <LI><FONT face=Verdana><FONT size=3>Global Keys for EA Searches and hoTools 
+  Services</FONT> </FONT>
+  <LI><FONT size=3 face=Verdana>Quick Search (here 'Simple'), tip: use 
+  Quick&nbsp;Search from MDG hoTools&nbsp; </FONT>
+  <LI><FONT size=3 face=Verdana>Line style of diagrams </FONT>
+  <LI><FONT size=3 face=Verdana>Favorites </FONT>
+  <LI><FONT size=3 face=Verdana>Conveyed Items&nbsp;(from Connector to Item and 
+  vice versa) </FONT>
+  <LI><FONT size=3 face=Verdana>Quick Notes </FONT>
+  <LI><FONT size=3 face=Verdana>Ports move (Port+Label, Connect, Show, Hide,..)) 
+  </FONT>
+  <LI><FONT size=3 face=Verdana>Version Control / SVN support </FONT>
+  <LI><FONT size=3 face=Verdana>Create Activity with parameters for Operation 
+  </FONT>
+  <LI><FONT size=3 face=Verdana>Navigate </FONT>
+  <LI><FONT size=3 face=Verdana>and more... </FONT>
+  <LI><FONT size=3 face=Verdana>MDG hoTools with example Scripts and Model 
+  Searches </FONT>
+  <LI><FONT size=3 face=Verdana>etc.</FONT></LI></UL>
+<P><IMG style="HEIGHT: 218px; WIDTH: 400px" border=0 hspace=0 
+alt="Basic functionality hoTools" 
+src="file:///D:/hoData/Development/GitHub/EnterpriseArchitect_hoTools/Addin/image/Addin.PNG" 
+align=left></P>
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<IMG style="HEIGHT: 337px; WIDTH: 646px" 
+border=0 hspace=0 alt="" 
+src="file:///D:/hoData/Development/GitHub/EnterpriseArchitect_hoTools/Addin/image/AddinComplete.png" 
+align=baseline></P></BODY></HTML>
+Menu Features	K002022K002112<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>Menu Features</TITLE>
+<META content="text/html; charset=unicode" http-equiv=Content-Type>
+<META content=de-at http-equiv=Content-Language>
+<META name=GENERATOR content="MSHTML 11.00.10586.306">
+<STYLE 
+type=text/css>a.bmeAnchor { background-color:#4682b4; color:white; }</STYLE>
+</HEAD>
+<BODY style="FONT-SIZE: 10pt; FONT-FAMILY: Times New Roman" bgColor=#ffffff>
+<TABLE 
+style="FONT-SIZE: 10pt; BORDER-TOP: #c6c7c6 1px solid; BORDER-RIGHT: #c6c7c6 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: #c6c7c6 1px solid; BORDER-LEFT: #c6c7c6 1px solid" 
+cellSpacing=0 cellPadding=2 width="99%">
+  <TBODY>
+  <TR>
+    <TD 
+    style="BORDER-TOP: #c6c7c6 1px solid; BORDER-RIGHT: #c6c7c6 1px solid; BORDER-BOTTOM: #c6c7c6 1px solid; BORDER-LEFT: #c6c7c6 1px solid" 
+    bgColor=#ffe77b width="100%" colSpan=2>
+      <P align=center><B><FONT id=BME_Title size=3 face=Verdana>Menu 
+      Features</FONT></B></P></TD></TR>
+  <TR>
+    <TD 
+    style="BORDER-TOP: #c6c7c6 1px solid; BORDER-RIGHT: #c6c7c6 1px solid; BORDER-BOTTOM: #c6c7c6 1px solid; BORDER-LEFT: #c6c7c6 1px solid" 
+    bgColor=#f7f7f7 width="50%">
+      <P align=left><FONT size=1 face=Verdana>helmu_000</FONT></P></TD>
+    <TD 
+    style="BORDER-TOP: #c6c7c6 1px solid; BORDER-RIGHT: #c6c7c6 1px solid; BORDER-BOTTOM: #c6c7c6 1px solid; BORDER-LEFT: #c6c7c6 1px solid" 
+    bgColor=#f7f7f7 width="50%">
+      <P align=right><FONT size=1 face=Verdana>Monday, 23. May 2016 
+      20:21:46</FONT></P></TD></TR></TBODY></TABLE>
+<P><FONT size=5 face=Verdana></FONT>&nbsp;</P>
+<P><FONT size=5 face=Verdana></FONT>&nbsp;</P>
+<P>&nbsp;</P></BODY></HTML>
 Menu File	K002112K002123<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML><HEAD><TITLE>Menu File</TITLE>
 <META content="text/html; charset=unicode" http-equiv=Content-Type>
@@ -360,34 +426,6 @@ cellSpacing=0 cellPadding=2 width="99%">
 <P><IMG border=0 hspace=0 alt="" 
 src="D:\hoData\Development\GitHub\EnterpriseArchitect_hoTools\Addin\image\GeneralSettings.png" 
 align=baseline></P></BODY></HTML>
-Settings Default Linestyle 	K002022K002072<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<HTML><HEAD><TITLE>Settings Default Linestyle </TITLE>
-<META content="text/html; charset=unicode" http-equiv=Content-Type>
-<META content=de-at http-equiv=Content-Language>
-<META name=GENERATOR content="MSHTML 11.00.10586.306"></HEAD>
-<BODY style="FONT-SIZE: 10pt; FONT-FAMILY: Times New Roman" bgColor=#ffffff>
-<TABLE 
-style="FONT-SIZE: 10pt; BORDER-TOP: #c6c7c6 1px solid; BORDER-RIGHT: #c6c7c6 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: #c6c7c6 1px solid; BORDER-LEFT: #c6c7c6 1px solid" 
-cellSpacing=0 cellPadding=2 width="99%">
-  <TBODY>
-  <TR>
-    <TD 
-    style="BORDER-TOP: #c6c7c6 1px solid; BORDER-RIGHT: #c6c7c6 1px solid; BORDER-BOTTOM: #c6c7c6 1px solid; BORDER-LEFT: #c6c7c6 1px solid" 
-    bgColor=#ffe77b width="100%" colSpan=2>
-      <P align=center><B><FONT id=BME_Title size=3 face=Verdana>Settings Default Linestyle </FONT></B></P></TD></TR>
-  <TR>
-    <TD 
-    style="BORDER-TOP: #c6c7c6 1px solid; BORDER-RIGHT: #c6c7c6 1px solid; BORDER-BOTTOM: #c6c7c6 1px solid; BORDER-LEFT: #c6c7c6 1px solid" 
-    bgColor=#f7f7f7 width="50%">
-      <P align=left><FONT size=1 face=Verdana>helmu_000</FONT></P></TD>
-    <TD 
-    style="BORDER-TOP: #c6c7c6 1px solid; BORDER-RIGHT: #c6c7c6 1px solid; BORDER-BOTTOM: #c6c7c6 1px solid; BORDER-LEFT: #c6c7c6 1px solid" 
-    bgColor=#f7f7f7 width="50%">
-      <P align=right><FONT size=1 face=Verdana>Monday, 23. May 2016 
-      19:50:20</FONT></P></TD></TR></TBODY></TABLE>
-<P><IMG border=0 hspace=0 alt="" 
-src="D:\hoData\Development\GitHub\EnterpriseArchitect_hoTools\Addin\image\SettingsDefaultLineStyles.png" 
-align=baseline></P></BODY></HTML>
 Settings Toolbar for Query and Searches	K002022K002082<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML><HEAD><TITLE>Settings Toolbar for Query and Searches</TITLE>
 <META content="text/html; charset=unicode" http-equiv=Content-Type>
@@ -420,8 +458,8 @@ cellSpacing=0 cellPadding=2 width="99%">
 <P><IMG border=0 hspace=0 alt="" 
 src="D:\hoData\Development\GitHub\EnterpriseArchitect_hoTools\Addin\image\SettingsToolbar.png" 
 align=baseline></P></BODY></HTML>
-Settings Query and Script	K002022K002092<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<HTML><HEAD><TITLE>Settings Query and Script</TITLE>
+Settings Default Linestyle 	K002022K002072<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>Settings Default Linestyle </TITLE>
 <META content="text/html; charset=unicode" http-equiv=Content-Type>
 <META content=de-at http-equiv=Content-Language>
 <META name=GENERATOR content="MSHTML 11.00.10586.306"></HEAD>
@@ -434,8 +472,7 @@ cellSpacing=0 cellPadding=2 width="99%">
     <TD 
     style="BORDER-TOP: #c6c7c6 1px solid; BORDER-RIGHT: #c6c7c6 1px solid; BORDER-BOTTOM: #c6c7c6 1px solid; BORDER-LEFT: #c6c7c6 1px solid" 
     bgColor=#ffe77b width="100%" colSpan=2>
-      <P align=center><B><FONT id=BME_Title size=3 face=Verdana>Settings Query 
-      and Script</FONT></B></P></TD></TR>
+      <P align=center><B><FONT id=BME_Title size=3 face=Verdana>Settings Default Linestyle </FONT></B></P></TD></TR>
   <TR>
     <TD 
     style="BORDER-TOP: #c6c7c6 1px solid; BORDER-RIGHT: #c6c7c6 1px solid; BORDER-BOTTOM: #c6c7c6 1px solid; BORDER-LEFT: #c6c7c6 1px solid" 
@@ -445,9 +482,9 @@ cellSpacing=0 cellPadding=2 width="99%">
     style="BORDER-TOP: #c6c7c6 1px solid; BORDER-RIGHT: #c6c7c6 1px solid; BORDER-BOTTOM: #c6c7c6 1px solid; BORDER-LEFT: #c6c7c6 1px solid" 
     bgColor=#f7f7f7 width="50%">
       <P align=right><FONT size=1 face=Verdana>Monday, 23. May 2016 
-      19:51:25</FONT></P></TD></TR></TBODY></TABLE>
+      19:50:20</FONT></P></TD></TR></TBODY></TABLE>
 <P><IMG border=0 hspace=0 alt="" 
-src="D:\hoData\Development\GitHub\EnterpriseArchitect_hoTools\Addin\image\SettingsQueryAndScript.png" 
+src="D:\hoData\Development\GitHub\EnterpriseArchitect_hoTools\Addin\image\SettingsDefaultLineStyles.png" 
 align=baseline></P></BODY></HTML>
 Settings Global Keys	K002022K002102<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML><HEAD><TITLE>Settings Global Keys</TITLE>
@@ -478,38 +515,12 @@ cellSpacing=0 cellPadding=2 width="99%">
 <P><IMG border=0 hspace=0 alt="" 
 src="D:\hoData\Development\GitHub\EnterpriseArchitect_hoTools\Addin\image\SettingsGlobalKeys.png" 
 align=baseline></P></BODY></HTML>
-SQL Query	K000011K002062<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta http-equiv="Content-Language" content="de-at">
-<title>SQL Query</title>
-</head>
-<body bgcolor="#FFFFFF" style="font-size:10pt; font-family:Times New Roman;">
-<table cellpadding="2" cellspacing="0" width="99%" style="border:1px solid #C6C7C6; border-collapse:collapse; font-size:10pt">
-<tr>
-<td width="100%" colspan="2" bgcolor="#FFE77B" style="border:1px solid #C6C7C6">
-<p align="center"><b><font id="BME_Title" size="3" face="Verdana">SQL Query</font></b></p></td>
-</tr>
-<tr>
-<td width="50%" bgcolor="#F7F7F7" style="border:1px solid #C6C7C6">
-<p align="left"><font size="1" face="Verdana">helmu_000</font></p></td>
-<td width="50%" bgcolor="#F7F7F7" style="border:1px solid #C6C7C6">
-<p align="right"><font size="1" face="Verdana">Monday, 23. May 2016 19:48:08</font></p>
-</td>
-</tr>
-</table>
-<p>Hier Text eingeben...</p>
-</body>
-</html>
-SQL Query and Scripts	K000011K000582<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<HTML><HEAD><TITLE>SQL Query and Scripts</TITLE>
+Settings Query and Script	K002022K002092<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>Settings Query and Script</TITLE>
 <META content="text/html; charset=unicode" http-equiv=Content-Type>
 <META content=de-at http-equiv=Content-Language>
-<META name=GENERATOR content="MSHTML 11.00.10586.306">
-<STYLE 
-type=text/css>a.bmeAnchor { background-color:#4682b4; color:white; }</STYLE>
-</HEAD>
-<BODY style="FONT-SIZE: 10pt; FONT-FAMILY: Verdana" bgColor=#ffffff>
+<META name=GENERATOR content="MSHTML 11.00.10586.306"></HEAD>
+<BODY style="FONT-SIZE: 10pt; FONT-FAMILY: Times New Roman" bgColor=#ffffff>
 <TABLE 
 style="FONT-SIZE: 10pt; BORDER-TOP: #c6c7c6 1px solid; BORDER-RIGHT: #c6c7c6 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: #c6c7c6 1px solid; BORDER-LEFT: #c6c7c6 1px solid" 
 cellSpacing=0 cellPadding=2 width="99%">
@@ -518,95 +529,204 @@ cellSpacing=0 cellPadding=2 width="99%">
     <TD 
     style="BORDER-TOP: #c6c7c6 1px solid; BORDER-RIGHT: #c6c7c6 1px solid; BORDER-BOTTOM: #c6c7c6 1px solid; BORDER-LEFT: #c6c7c6 1px solid" 
     bgColor=#ffe77b width="100%" colSpan=2>
-      <P align=center><B><FONT id=BME_Title size=3 
-      face=Verdana>SQL Query and Scripts</FONT></B></P></TD></TR>
+      <P align=center><B><FONT id=BME_Title size=3 face=Verdana>Settings Query 
+      and Script</FONT></B></P></TD></TR>
   <TR>
     <TD 
     style="BORDER-TOP: #c6c7c6 1px solid; BORDER-RIGHT: #c6c7c6 1px solid; BORDER-BOTTOM: #c6c7c6 1px solid; BORDER-LEFT: #c6c7c6 1px solid" 
-    bgColor=#f7f7f7 width="50%"><FONT size=1 face=Verdana>
-      <P align=left><FONT size=1 face=Verdana>Helmut 
-Ortmann</FONT></P></FONT></TD>
+    bgColor=#f7f7f7 width="50%">
+      <P align=left><FONT size=1 face=Verdana>helmu_000</FONT></P></TD>
     <TD 
     style="BORDER-TOP: #c6c7c6 1px solid; BORDER-RIGHT: #c6c7c6 1px solid; BORDER-BOTTOM: #c6c7c6 1px solid; BORDER-LEFT: #c6c7c6 1px solid" 
     bgColor=#f7f7f7 width="50%">
-      <P align=right><FONT size=1 face=Verdana>Montag, 3. Mrz 2014 
-      10:51:56</FONT></P></TD></TR></TBODY></TABLE>
-<P>GUI elements:</P>
-<UL>
-  <LI>GUI elements have a tool tip 
-  <LI>A Menu for general functions 
-  <LI>Buttons to quickly access a function 
-  <LI>Text field 
-  <UL>
-    <LI>Enter to start Quick Search 
-    <LI>Double Left Click to start insert from text into Activity Diagram 
-    <LI>Context Menu</LI></UL>
-  <LI>Online Help / <A href="bookme:{{00159}}">Regular Expression</A></LI></UL>
-<P><IMG style="HEIGHT: 469px; WIDTH: 416px" border=0 hspace=0 alt="" 
-src="D:\hoData\Development\GitHub\EnterpriseArchitect_hoTools\Addin\image\Addin.PNG" 
-align=left><IMG border=0 hspace=0 alt="" 
-src="D:\hoData\Development\GitHub\EnterpriseArchitect_hoTools\Addin\image\FindAndReplace.png" 
-align=left></P>
-<P>&nbsp;</P>
-<P>&nbsp;</P>
-<P>&nbsp;</P>
-<P>&nbsp;</P>
-<P>&nbsp;</P>
-<P>&nbsp;</P>
-<P>&nbsp;</P>
-<P>&nbsp;</P>
-<P>&nbsp;</P>
-<P>&nbsp;</P>
-<P>&nbsp;</P>
+      <P align=right><FONT size=1 face=Verdana>Monday, 23. May 2016 
+      19:51:25</FONT></P></TD></TR></TBODY></TABLE>
 <P><IMG border=0 hspace=0 alt="" 
-src="D:\hoData\Development\GitHub\EnterpriseArchitect_hoTools\Addin\image\Settings.png" 
+src="D:\hoData\Development\GitHub\EnterpriseArchitect_hoTools\Addin\image\SettingsQueryAndScript.png" 
 align=baseline></P></BODY></HTML>
-Find and Replace	K000011K002032<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta http-equiv="Content-Language" content="de-at">
-<title>Find and Replace</title>
-</head>
-<body bgcolor="#FFFFFF" style="font-size:10pt; font-family:Times New Roman;">
-<table cellpadding="2" cellspacing="0" width="99%" style="border:1px solid #C6C7C6; border-collapse:collapse; font-size:10pt">
-<tr>
-<td width="100%" colspan="2" bgcolor="#FFE77B" style="border:1px solid #C6C7C6">
-<p align="center"><b><font id="BME_Title" size="3" face="Verdana">Find and Replace</font></b></p></td>
-</tr>
-<tr>
-<td width="50%" bgcolor="#F7F7F7" style="border:1px solid #C6C7C6">
-<p align="left"><font size="1" face="Verdana">helmu_000</font></p></td>
-<td width="50%" bgcolor="#F7F7F7" style="border:1px solid #C6C7C6">
-<p align="right"><font size="1" face="Verdana">Sunday, 22. May 2016 21:02:54</font></p>
-</td>
-</tr>
-</table>
-<p>Hier Text eingeben...</p>
-</body>
-</html>
-SQL Query and Script	K000011K002052<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta http-equiv="Content-Language" content="de-at">
-<title>SQL Query and Script</title>
-</head>
-<body bgcolor="#FFFFFF" style="font-size:10pt; font-family:Times New Roman;">
-<table cellpadding="2" cellspacing="0" width="99%" style="border:1px solid #C6C7C6; border-collapse:collapse; font-size:10pt">
-<tr>
-<td width="100%" colspan="2" bgcolor="#FFE77B" style="border:1px solid #C6C7C6">
-<p align="center"><b><font id="BME_Title" size="3" face="Verdana">SQL Query and Script</font></b></p></td>
-</tr>
-<tr>
-<td width="50%" bgcolor="#F7F7F7" style="border:1px solid #C6C7C6">
-<p align="left"><font size="1" face="Verdana">helmu_000</font></p></td>
-<td width="50%" bgcolor="#F7F7F7" style="border:1px solid #C6C7C6">
-<p align="right"><font size="1" face="Verdana">Sunday, 22. May 2016 21:03:39</font></p>
-</td>
-</tr>
-</table>
-<p>Hier Text eingeben...</p>
-</body>
-</html>
+SQL Query	K000011K002062<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>SQL Query</TITLE>
+<META content="text/html; charset=unicode" http-equiv=Content-Type>
+<META content=de-at http-equiv=Content-Language>
+<META name=GENERATOR content="MSHTML 11.00.10586.306">
+<STYLE 
+type=text/css>a.bmeAnchor { background-color:#4682b4; color:white; }</STYLE>
+</HEAD>
+<BODY style="FONT-SIZE: 10pt; FONT-FAMILY: Times New Roman" bgColor=#ffffff>
+<TABLE 
+style="FONT-SIZE: 10pt; BORDER-TOP: #c6c7c6 1px solid; BORDER-RIGHT: #c6c7c6 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: #c6c7c6 1px solid; BORDER-LEFT: #c6c7c6 1px solid" 
+cellSpacing=0 cellPadding=2 width="99%">
+  <TBODY>
+  <TR>
+    <TD 
+    style="BORDER-TOP: #c6c7c6 1px solid; BORDER-RIGHT: #c6c7c6 1px solid; BORDER-BOTTOM: #c6c7c6 1px solid; BORDER-LEFT: #c6c7c6 1px solid" 
+    bgColor=#ffe77b width="100%" colSpan=2>
+      <P align=center><B><FONT id=BME_Title size=3 face=Verdana>SQL 
+      Query</FONT></B></P></TD></TR>
+  <TR>
+    <TD 
+    style="BORDER-TOP: #c6c7c6 1px solid; BORDER-RIGHT: #c6c7c6 1px solid; BORDER-BOTTOM: #c6c7c6 1px solid; BORDER-LEFT: #c6c7c6 1px solid" 
+    bgColor=#f7f7f7 width="50%">
+      <P align=left><FONT size=1 face=Verdana>helmu_000</FONT></P></TD>
+    <TD 
+    style="BORDER-TOP: #c6c7c6 1px solid; BORDER-RIGHT: #c6c7c6 1px solid; BORDER-BOTTOM: #c6c7c6 1px solid; BORDER-LEFT: #c6c7c6 1px solid" 
+    bgColor=#f7f7f7 width="50%">
+      <P align=right><FONT size=1 face=Verdana>Monday, 23. May 2016 
+      19:48:08</FONT></P></TD></TR></TBODY></TABLE><FONT size=3>
+<P><FONT size=3><STRONG>Tab: SQL Query</STRONG></FONT></P>
+<UL>
+  <LI><FONT size=3>Edit and run your SQL Query</FONT> 
+  <LI><FONT size=3>Load and Save from file</FONT> 
+  <LI><FONT size=3>A lot of templates</FONT> 
+  <LI><FONT size=3>A lot of additional macros (#Package#,.. 
+  #ConveyedItemIDS#,..)</FONT> 
+  <LI><FONT size=3>Comment your SQL</FONT> 
+  <LI><FONT size=3>Read EA-SQL error from %appdata%...\dberror.txt</FONT> 
+  <LI><FONT size=3>Read last sent EA-SQL string 
+  %appdata%...\hoTools_LastSql.txt</FONT> 
+  <LI><FONT size=3>View Macros and Templates (also on 
+  %appdata%...\hoTools_SqlTemplatesAndMacros.txt)</FONT></LI></UL>
+<P><IMG border=0 hspace=0 alt="SQL Query" 
+src="file:///D:/hoData/Development/GitHub/EnterpriseArchitect_hoTools/Addin/image/SqlQuery.PNG" 
+align=baseline></P></FONT></BODY></HTML>
+SQL Query and Script	K000011K002052<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>SQL Query and Script</TITLE>
+<META content="text/html; charset=unicode" http-equiv=Content-Type>
+<META content=de-at http-equiv=Content-Language>
+<META name=GENERATOR content="MSHTML 11.00.10586.306">
+<STYLE 
+type=text/css>a.bmeAnchor { background-color:#4682b4; color:white; }</STYLE>
+</HEAD>
+<BODY style="FONT-SIZE: 10pt; FONT-FAMILY: Times New Roman" bgColor=#ffffff>
+<TABLE 
+style="FONT-SIZE: 10pt; BORDER-TOP: #c6c7c6 1px solid; BORDER-RIGHT: #c6c7c6 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: #c6c7c6 1px solid; BORDER-LEFT: #c6c7c6 1px solid" 
+cellSpacing=0 cellPadding=2 width="99%">
+  <TBODY>
+  <TR>
+    <TD 
+    style="BORDER-TOP: #c6c7c6 1px solid; BORDER-RIGHT: #c6c7c6 1px solid; BORDER-BOTTOM: #c6c7c6 1px solid; BORDER-LEFT: #c6c7c6 1px solid" 
+    bgColor=#ffe77b width="100%" colSpan=2>
+      <P align=center><B><FONT id=BME_Title size=3 face=Verdana>SQL Query and 
+      Script</FONT></B></P></TD></TR>
+  <TR>
+    <TD 
+    style="BORDER-TOP: #c6c7c6 1px solid; BORDER-RIGHT: #c6c7c6 1px solid; BORDER-BOTTOM: #c6c7c6 1px solid; BORDER-LEFT: #c6c7c6 1px solid" 
+    bgColor=#f7f7f7 width="50%">
+      <P align=left><FONT size=1 face=Verdana>helmu_000</FONT></P></TD>
+    <TD 
+    style="BORDER-TOP: #c6c7c6 1px solid; BORDER-RIGHT: #c6c7c6 1px solid; BORDER-BOTTOM: #c6c7c6 1px solid; BORDER-LEFT: #c6c7c6 1px solid" 
+    bgColor=#f7f7f7 width="50%">
+      <P align=right><FONT size=1 face=Verdana>Sunday, 22. May 2016 
+      21:03:39</FONT></P></TD></TR></TBODY></TABLE>
+<P><FONT size=3><STRONG>TAB: SQL Query and Script</STRONG></FONT></P>
+<UL>
+  <LI><FONT size=3>Run Script (VB, JavaScript, JScript) on query result 
+  rows</FONT> 
+  <LI><FONT size=3>Start with Template 'DemoRunScript'</FONT></LI></UL>
+<P><IMG border=0 hspace=0 
+alt="Run Script (VB, JavaScript, JScript) on query result rows" 
+src="file:///D:/hoData/Development/GitHub/EnterpriseArchitect_hoTools/Addin/image/SqlQueryAndScript.png" 
+align=baseline></P>
+<P><FONT size=4><STRONG>Procedure:</STRONG></FONT></P>
+<UL style="MARGIN-RIGHT: 0px" dir=ltr>
+  <LI><FONT size=4>Develop a Query which contains exactly one GUID in one of the 
+  columns:</FONT> 
+  <UL>
+    <LI><FONT size=4><IMG style="HEIGHT: 183px; WIDTH: 363px" border=0 hspace=0 
+    alt="" 
+    src="file:///D:/hoData/Development/GitHub/EnterpriseArchitect_hoTools/Addin/image/ScriptingView.png" 
+    align=right>Tip: Start query with ... </FONT>
+    <LI><FONT size=4>select o.ea_guid AS CLASSGUID, o.object_type AS 
+    CLASSTYPE</FONT></LI></UL>
+  <LI><FONT size=4>Develop a&nbsp;Script to execute&nbsp;every found row of the 
+  query</FONT> 
+  <UL>
+    <LI><FONT size=4>Fix tag to identify Script at the beginning (compatible to 
+    Geerts Scripting):</FONT> 
+    <UL>
+      <LI><FONT size=4>'EA-Matic&nbsp; </FONT></LI></UL>
+    <LI><FONT size=4>Exactly one GUID has to be inside the query results</FONT> 
+    <LI><FONT size=4>Tip: Use example of Scripting View (Group=hoTools...Basic 
+    or...)</FONT> 
+    <LI><FONT size=4>Parameter count = 3:</FONT> 
+    <UL>
+      <LI><FONT size=4>&nbsp;1. Model (Model.Repository contains 
+      Repository)</FONT> 
+      <LI><FONT size=4>&nbsp;2. Object of type EA.Element, EA.Diagram, 
+      EA.Package, EA.Attribute, EA.Operation)</FONT> 
+      <LI><FONT size=4>&nbsp;3. ObjectType like (otElement, otPackage, 
+      otDiagram, otAttribute, otOperation)</FONT></LI></UL>
+    <LI><FONT size=4>Parameter count = 2:</FONT> 
+    <UL>
+      <LI><FONT size=4>1. Object of type EA.Element, EA.Diagram, EA.Package, 
+      EA.Attribute, EA.Operation)</FONT> 
+      <LI><FONT size=4>2.. ObjectType like (otElement, otPackage, otDiagram, 
+      otAttribute, otOperation)</FONT></LI></UL></LI></UL>
+  <LI><FONT size=4>Run row for row with asking or all at once</FONT> 
+  <LI><FONT size=4>Script errors are shown in Err</FONT> 
+  <LI><FONT size=4>Only Scripts with 2 or 3 parameters are shown</FONT></LI></UL>
+<P><FONT size=5><STRONG>Setup:</STRONG></FONT></P>
+<P><FONT size=3>In MDG:</FONT></P>
+<UL>
+  <LI><FONT size=3>hoToolsBasic</FONT> 
+  <LI><FONT size=3>hoToolsCompilation</FONT></LI></UL>
+<P><FONT size=3>you find the Script Group 'hoToolsBasic' with the VB 
+Scripts:</FONT></P>
+<UL>
+  <LI><FONT size=3>hoDemoPrintContext</FONT> 
+  <LI><FONT size=3>hoDemoScript</FONT></LI></UL></BODY></HTML>
+Find and Replace	K000011K002032<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML><HEAD><TITLE>Find and Replace</TITLE>
+<META content="text/html; charset=unicode" http-equiv=Content-Type>
+<META content=de-at http-equiv=Content-Language>
+<META name=GENERATOR content="MSHTML 11.00.10586.306"></HEAD>
+<BODY style="FONT-SIZE: 10pt; FONT-FAMILY: Times New Roman" bgColor=#ffffff>
+<TABLE 
+style="FONT-SIZE: 10pt; BORDER-TOP: #c6c7c6 1px solid; BORDER-RIGHT: #c6c7c6 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: #c6c7c6 1px solid; BORDER-LEFT: #c6c7c6 1px solid" 
+cellSpacing=0 cellPadding=2 width="99%">
+  <TBODY>
+  <TR>
+    <TD 
+    style="BORDER-TOP: #c6c7c6 1px solid; BORDER-RIGHT: #c6c7c6 1px solid; BORDER-BOTTOM: #c6c7c6 1px solid; BORDER-LEFT: #c6c7c6 1px solid" 
+    bgColor=#ffe77b width="100%" colSpan=2>
+      <P align=center><B><FONT id=BME_Title size=3 face=Verdana>Find and 
+      Replace</FONT></B></P></TD></TR>
+  <TR>
+    <TD 
+    style="BORDER-TOP: #c6c7c6 1px solid; BORDER-RIGHT: #c6c7c6 1px solid; BORDER-BOTTOM: #c6c7c6 1px solid; BORDER-LEFT: #c6c7c6 1px solid" 
+    bgColor=#f7f7f7 width="50%">
+      <P align=left><FONT size=1 face=Verdana>helmu_000</FONT></P></TD>
+    <TD 
+    style="BORDER-TOP: #c6c7c6 1px solid; BORDER-RIGHT: #c6c7c6 1px solid; BORDER-BOTTOM: #c6c7c6 1px solid; BORDER-LEFT: #c6c7c6 1px solid" 
+    bgColor=#f7f7f7 width="50%">
+      <P align=right><FONT size=1 face=Verdana>Sunday, 22. May 2016 
+      21:02:54</FONT></P></TD></TR></TBODY></TABLE>
+<P><FONT size=4><STRONG>Tab: Search and Replace</STRONG></FONT></P>
+<UL>
+  <LI><FONT size=4>Search and Replace </FONT>
+  <LI><FONT size=4>Regular Expression Support</FONT></LI></UL>
+<P><FONT size=3></FONT>&nbsp;</P>
+<UL>
+  <LI><IMG style="HEIGHT: 466px; WIDTH: 502px" border=0 hspace=0 alt="" 
+  src="file:///D:/hoData/Development/GitHub/EnterpriseArchitect_hoTools/Addin/image/FindAndReplace.png" 
+  align=left> 
+  <LI>
+  <LI>
+  <LI>
+  <LI></LI></UL>
+<P>&nbsp;</P>
+<UL>
+  <LI>
+  <LI>
+  <LI>
+  <LI></LI></UL>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P>
+<P>&nbsp;</P></BODY></HTML>
 Layout	K000011K000022<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML><HEAD><TITLE>Layout</TITLE>
 <META content="text/html; charset=unicode" http-equiv=Content-Type>
@@ -5252,4 +5372,4 @@ cellSpacing=0 cellPadding=2 width="99%">
 <P>Helmut Ortmann<BR><A 
 href="mailto:Helmut.Ortmann@t-online.de">Helmut.Ortmann@t-online.de</A><BR>+49 
 172 / 51 79 16 7</P></BODY></HTML>
-!=!K002102UTF-8
+!=!K002052UTF-8

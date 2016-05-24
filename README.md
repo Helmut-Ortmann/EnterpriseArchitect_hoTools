@@ -68,8 +68,10 @@ Some features:
 # Installation #
 - uninstall hoTools
 - hoTools.msi  (Setup\bin\Release\hoTools.msi V2.0.1)
+- In EA: Extension, Addin Windows is selected
+- In EA: Manage Addins, MDG: hoTools is selected
 - hoToolsRemove.ps1 (deinstall with PowerShell)
-- make sure only one instance is installed
+- make sure only one instance hoToolsis installed
 
 # ToDo
 - Drag SQL file on canvas

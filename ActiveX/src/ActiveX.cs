@@ -1919,7 +1919,7 @@ namespace hoTools.ActiveX
                     if (service.ButtonText.Trim() != "")
                     {
                         buttonText = service.ButtonText;
-                        helpText = service.HelpTextLong; //  Long Helptext
+                        helpText = service.HelpTextLong; //  Long Help text
                     }
                 }
 

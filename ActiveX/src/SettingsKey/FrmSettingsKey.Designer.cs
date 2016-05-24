@@ -119,7 +119,7 @@
             // btnOK
             // 
             this.btnOK.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnOK.Location = new System.Drawing.Point(23, 411);
+            this.btnOK.Location = new System.Drawing.Point(22, 477);
             this.btnOK.Margin = new System.Windows.Forms.Padding(2);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(72, 27);
@@ -132,7 +132,7 @@
             // btnCancel
             // 
             this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancel.Location = new System.Drawing.Point(109, 411);
+            this.btnCancel.Location = new System.Drawing.Point(108, 477);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(2);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 27);
@@ -143,10 +143,12 @@
             // 
             // cmbGlobalKeyService5Mod4
             // 
+            this.cmbGlobalKeyService5Mod4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeyService5Mod4.FormattingEnabled = true;
-            this.cmbGlobalKeyService5Mod4.Location = new System.Drawing.Point(288, 184);
+            this.cmbGlobalKeyService5Mod4.ItemHeight = 15;
+            this.cmbGlobalKeyService5Mod4.Location = new System.Drawing.Point(264, 154);
             this.cmbGlobalKeyService5Mod4.Name = "cmbGlobalKeyService5Mod4";
-            this.cmbGlobalKeyService5Mod4.Size = new System.Drawing.Size(44, 21);
+            this.cmbGlobalKeyService5Mod4.Size = new System.Drawing.Size(44, 23);
             this.cmbGlobalKeyService5Mod4.TabIndex = 148;
             this.toolTip1.SetToolTip(this.cmbGlobalKeyService5Mod4, "Choose key to access service by an shortcut / hotkey.\r\nYou can use a key with mod" +
         "ifiers like Ctrl,Shif, Window Key, ALT to access a service.\r\nNote: The key + mod" +
@@ -154,10 +156,12 @@
             // 
             // cmbGlobalKeyService5Mod2
             // 
+            this.cmbGlobalKeyService5Mod2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeyService5Mod2.FormattingEnabled = true;
-            this.cmbGlobalKeyService5Mod2.Location = new System.Drawing.Point(188, 184);
+            this.cmbGlobalKeyService5Mod2.ItemHeight = 15;
+            this.cmbGlobalKeyService5Mod2.Location = new System.Drawing.Point(164, 154);
             this.cmbGlobalKeyService5Mod2.Name = "cmbGlobalKeyService5Mod2";
-            this.cmbGlobalKeyService5Mod2.Size = new System.Drawing.Size(44, 21);
+            this.cmbGlobalKeyService5Mod2.Size = new System.Drawing.Size(44, 23);
             this.cmbGlobalKeyService5Mod2.TabIndex = 147;
             this.toolTip1.SetToolTip(this.cmbGlobalKeyService5Mod2, "Choose key to access service by an shortcut / hotkey.\r\nYou can use a key with mod" +
         "ifiers like Ctrl,Shif, Window Key, ALT to access a service.\r\nNote: The key + mod" +
@@ -165,10 +169,12 @@
             // 
             // cmbGlobalKeyService5Mod3
             // 
+            this.cmbGlobalKeyService5Mod3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeyService5Mod3.FormattingEnabled = true;
-            this.cmbGlobalKeyService5Mod3.Location = new System.Drawing.Point(238, 184);
+            this.cmbGlobalKeyService5Mod3.ItemHeight = 15;
+            this.cmbGlobalKeyService5Mod3.Location = new System.Drawing.Point(214, 154);
             this.cmbGlobalKeyService5Mod3.Name = "cmbGlobalKeyService5Mod3";
-            this.cmbGlobalKeyService5Mod3.Size = new System.Drawing.Size(44, 21);
+            this.cmbGlobalKeyService5Mod3.Size = new System.Drawing.Size(44, 23);
             this.cmbGlobalKeyService5Mod3.TabIndex = 146;
             this.toolTip1.SetToolTip(this.cmbGlobalKeyService5Mod3, "Choose key to access service by an shortcut / hotkey.\r\nYou can use a key with mod" +
         "ifiers like Ctrl,Shif, Window Key, ALT to access a service.\r\nNote: The key + mod" +
@@ -176,10 +182,12 @@
             // 
             // cmbGlobalKeyService5Mod1
             // 
+            this.cmbGlobalKeyService5Mod1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeyService5Mod1.FormattingEnabled = true;
-            this.cmbGlobalKeyService5Mod1.Location = new System.Drawing.Point(139, 184);
+            this.cmbGlobalKeyService5Mod1.ItemHeight = 15;
+            this.cmbGlobalKeyService5Mod1.Location = new System.Drawing.Point(115, 154);
             this.cmbGlobalKeyService5Mod1.Name = "cmbGlobalKeyService5Mod1";
-            this.cmbGlobalKeyService5Mod1.Size = new System.Drawing.Size(44, 21);
+            this.cmbGlobalKeyService5Mod1.Size = new System.Drawing.Size(44, 23);
             this.cmbGlobalKeyService5Mod1.TabIndex = 145;
             this.toolTip1.SetToolTip(this.cmbGlobalKeyService5Mod1, "Choose key to access service by an shortcut / hotkey.\r\nYou can use a key with mod" +
         "ifiers like Ctrl,Shif, Window Key, ALT to access a service.\r\nNote: The key + mod" +
@@ -187,10 +195,12 @@
             // 
             // cmbGlobalKeyService5Key
             // 
+            this.cmbGlobalKeyService5Key.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeyService5Key.FormattingEnabled = true;
-            this.cmbGlobalKeyService5Key.Location = new System.Drawing.Point(31, 184);
+            this.cmbGlobalKeyService5Key.ItemHeight = 15;
+            this.cmbGlobalKeyService5Key.Location = new System.Drawing.Point(7, 154);
             this.cmbGlobalKeyService5Key.Name = "cmbGlobalKeyService5Key";
-            this.cmbGlobalKeyService5Key.Size = new System.Drawing.Size(88, 21);
+            this.cmbGlobalKeyService5Key.Size = new System.Drawing.Size(88, 23);
             this.cmbGlobalKeyService5Key.TabIndex = 144;
             this.toolTip1.SetToolTip(this.cmbGlobalKeyService5Key, "Choose key to access service by an shortcut / hotkey.\r\nYou can use a key with mod" +
         "ifiers like Ctrl,Shif, Window Key, ALT to access a service.\r\nNote: The key + mod" +
@@ -199,32 +209,34 @@
             // cmbGlobalKey5Tooltip
             // 
             this.cmbGlobalKey5Tooltip.Enabled = false;
-            this.cmbGlobalKey5Tooltip.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbGlobalKey5Tooltip.Location = new System.Drawing.Point(666, 133);
+            this.cmbGlobalKey5Tooltip.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbGlobalKey5Tooltip.Location = new System.Drawing.Point(660, 157);
             this.cmbGlobalKey5Tooltip.Margin = new System.Windows.Forms.Padding(2);
             this.cmbGlobalKey5Tooltip.Multiline = true;
             this.cmbGlobalKey5Tooltip.Name = "cmbGlobalKey5Tooltip";
             this.cmbGlobalKey5Tooltip.ReadOnly = true;
-            this.cmbGlobalKey5Tooltip.Size = new System.Drawing.Size(280, 20);
+            this.cmbGlobalKey5Tooltip.Size = new System.Drawing.Size(280, 21);
             this.cmbGlobalKey5Tooltip.TabIndex = 143;
             this.toolTip1.SetToolTip(this.cmbGlobalKey5Tooltip, "Tooltip");
             // 
             // cmbGlobalKey5Service
             // 
-            this.cmbGlobalKey5Service.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbGlobalKey5Service.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKey5Service.FormattingEnabled = true;
-            this.cmbGlobalKey5Service.Location = new System.Drawing.Point(327, 134);
+            this.cmbGlobalKey5Service.Location = new System.Drawing.Point(321, 154);
             this.cmbGlobalKey5Service.Name = "cmbGlobalKey5Service";
-            this.cmbGlobalKey5Service.Size = new System.Drawing.Size(312, 26);
+            this.cmbGlobalKey5Service.Size = new System.Drawing.Size(312, 23);
             this.cmbGlobalKey5Service.TabIndex = 142;
             this.toolTip1.SetToolTip(this.cmbGlobalKey5Service, "Choose your service Function");
             // 
             // cmbGlobalKeyService4Mod4
             // 
+            this.cmbGlobalKeyService4Mod4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeyService4Mod4.FormattingEnabled = true;
-            this.cmbGlobalKeyService4Mod4.Location = new System.Drawing.Point(288, 160);
+            this.cmbGlobalKeyService4Mod4.ItemHeight = 15;
+            this.cmbGlobalKeyService4Mod4.Location = new System.Drawing.Point(264, 130);
             this.cmbGlobalKeyService4Mod4.Name = "cmbGlobalKeyService4Mod4";
-            this.cmbGlobalKeyService4Mod4.Size = new System.Drawing.Size(44, 21);
+            this.cmbGlobalKeyService4Mod4.Size = new System.Drawing.Size(44, 23);
             this.cmbGlobalKeyService4Mod4.TabIndex = 141;
             this.toolTip1.SetToolTip(this.cmbGlobalKeyService4Mod4, "Choose key to access service by an shortcut / hotkey.\r\nYou can use a key with mod" +
         "ifiers like Ctrl,Shif, Window Key, ALT to access a service.\r\nNote: The key + mod" +
@@ -232,10 +244,12 @@
             // 
             // cmbGlobalKeyService4Mod2
             // 
+            this.cmbGlobalKeyService4Mod2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeyService4Mod2.FormattingEnabled = true;
-            this.cmbGlobalKeyService4Mod2.Location = new System.Drawing.Point(188, 160);
+            this.cmbGlobalKeyService4Mod2.ItemHeight = 15;
+            this.cmbGlobalKeyService4Mod2.Location = new System.Drawing.Point(164, 130);
             this.cmbGlobalKeyService4Mod2.Name = "cmbGlobalKeyService4Mod2";
-            this.cmbGlobalKeyService4Mod2.Size = new System.Drawing.Size(44, 21);
+            this.cmbGlobalKeyService4Mod2.Size = new System.Drawing.Size(44, 23);
             this.cmbGlobalKeyService4Mod2.TabIndex = 140;
             this.toolTip1.SetToolTip(this.cmbGlobalKeyService4Mod2, "Choose key to access service by an shortcut / hotkey.\r\nYou can use a key with mod" +
         "ifiers like Ctrl,Shif, Window Key, ALT to access a service.\r\nNote: The key + mod" +
@@ -243,10 +257,12 @@
             // 
             // cmbGlobalKeyService4Mod3
             // 
+            this.cmbGlobalKeyService4Mod3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeyService4Mod3.FormattingEnabled = true;
-            this.cmbGlobalKeyService4Mod3.Location = new System.Drawing.Point(238, 160);
+            this.cmbGlobalKeyService4Mod3.ItemHeight = 15;
+            this.cmbGlobalKeyService4Mod3.Location = new System.Drawing.Point(214, 130);
             this.cmbGlobalKeyService4Mod3.Name = "cmbGlobalKeyService4Mod3";
-            this.cmbGlobalKeyService4Mod3.Size = new System.Drawing.Size(44, 21);
+            this.cmbGlobalKeyService4Mod3.Size = new System.Drawing.Size(44, 23);
             this.cmbGlobalKeyService4Mod3.TabIndex = 139;
             this.toolTip1.SetToolTip(this.cmbGlobalKeyService4Mod3, "Choose key to access service by an shortcut / hotkey.\r\nYou can use a key with mod" +
         "ifiers like Ctrl,Shif, Window Key, ALT to access a service.\r\nNote: The key + mod" +
@@ -254,10 +270,12 @@
             // 
             // cmbGlobalKeyService4Mod1
             // 
+            this.cmbGlobalKeyService4Mod1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeyService4Mod1.FormattingEnabled = true;
-            this.cmbGlobalKeyService4Mod1.Location = new System.Drawing.Point(139, 160);
+            this.cmbGlobalKeyService4Mod1.ItemHeight = 15;
+            this.cmbGlobalKeyService4Mod1.Location = new System.Drawing.Point(115, 130);
             this.cmbGlobalKeyService4Mod1.Name = "cmbGlobalKeyService4Mod1";
-            this.cmbGlobalKeyService4Mod1.Size = new System.Drawing.Size(44, 21);
+            this.cmbGlobalKeyService4Mod1.Size = new System.Drawing.Size(44, 23);
             this.cmbGlobalKeyService4Mod1.TabIndex = 138;
             this.toolTip1.SetToolTip(this.cmbGlobalKeyService4Mod1, "Choose key to access service by an shortcut / hotkey.\r\nYou can use a key with mod" +
         "ifiers like Ctrl,Shif, Window Key, ALT to access a service.\r\nNote: The key + mod" +
@@ -265,10 +283,12 @@
             // 
             // cmbGlobalKeyService4Key
             // 
+            this.cmbGlobalKeyService4Key.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeyService4Key.FormattingEnabled = true;
-            this.cmbGlobalKeyService4Key.Location = new System.Drawing.Point(31, 160);
+            this.cmbGlobalKeyService4Key.ItemHeight = 15;
+            this.cmbGlobalKeyService4Key.Location = new System.Drawing.Point(7, 130);
             this.cmbGlobalKeyService4Key.Name = "cmbGlobalKeyService4Key";
-            this.cmbGlobalKeyService4Key.Size = new System.Drawing.Size(88, 21);
+            this.cmbGlobalKeyService4Key.Size = new System.Drawing.Size(88, 23);
             this.cmbGlobalKeyService4Key.TabIndex = 137;
             this.toolTip1.SetToolTip(this.cmbGlobalKeyService4Key, "Choose key to access service by an shortcut / hotkey.\r\nYou can use a key with mod" +
         "ifiers like Ctrl,Shif, Window Key, ALT to access a service.\r\nNote: The key + mod" +
@@ -277,32 +297,34 @@
             // cmbGlobalKey4Tooltip
             // 
             this.cmbGlobalKey4Tooltip.Enabled = false;
-            this.cmbGlobalKey4Tooltip.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbGlobalKey4Tooltip.Location = new System.Drawing.Point(666, 110);
+            this.cmbGlobalKey4Tooltip.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbGlobalKey4Tooltip.Location = new System.Drawing.Point(660, 133);
             this.cmbGlobalKey4Tooltip.Margin = new System.Windows.Forms.Padding(2);
             this.cmbGlobalKey4Tooltip.Multiline = true;
             this.cmbGlobalKey4Tooltip.Name = "cmbGlobalKey4Tooltip";
             this.cmbGlobalKey4Tooltip.ReadOnly = true;
-            this.cmbGlobalKey4Tooltip.Size = new System.Drawing.Size(280, 20);
+            this.cmbGlobalKey4Tooltip.Size = new System.Drawing.Size(280, 21);
             this.cmbGlobalKey4Tooltip.TabIndex = 136;
             this.toolTip1.SetToolTip(this.cmbGlobalKey4Tooltip, "Tooltip");
             // 
             // cmbGlobalKey4Service
             // 
-            this.cmbGlobalKey4Service.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbGlobalKey4Service.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKey4Service.FormattingEnabled = true;
-            this.cmbGlobalKey4Service.Location = new System.Drawing.Point(327, 110);
+            this.cmbGlobalKey4Service.Location = new System.Drawing.Point(321, 130);
             this.cmbGlobalKey4Service.Name = "cmbGlobalKey4Service";
-            this.cmbGlobalKey4Service.Size = new System.Drawing.Size(312, 26);
+            this.cmbGlobalKey4Service.Size = new System.Drawing.Size(312, 23);
             this.cmbGlobalKey4Service.TabIndex = 135;
             this.toolTip1.SetToolTip(this.cmbGlobalKey4Service, "Choose your service Function");
             // 
             // cmbGlobalKeyService3Mod4
             // 
+            this.cmbGlobalKeyService3Mod4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeyService3Mod4.FormattingEnabled = true;
-            this.cmbGlobalKeyService3Mod4.Location = new System.Drawing.Point(288, 136);
+            this.cmbGlobalKeyService3Mod4.ItemHeight = 15;
+            this.cmbGlobalKeyService3Mod4.Location = new System.Drawing.Point(264, 106);
             this.cmbGlobalKeyService3Mod4.Name = "cmbGlobalKeyService3Mod4";
-            this.cmbGlobalKeyService3Mod4.Size = new System.Drawing.Size(44, 21);
+            this.cmbGlobalKeyService3Mod4.Size = new System.Drawing.Size(44, 23);
             this.cmbGlobalKeyService3Mod4.TabIndex = 134;
             this.toolTip1.SetToolTip(this.cmbGlobalKeyService3Mod4, "Choose key to access service by an shortcut / hotkey.\r\nYou can use a key with mod" +
         "ifiers like Ctrl,Shif, Window Key, ALT to access a service.\r\nNote: The key + mod" +
@@ -310,10 +332,12 @@
             // 
             // cmbGlobalKeyService3Mod2
             // 
+            this.cmbGlobalKeyService3Mod2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeyService3Mod2.FormattingEnabled = true;
-            this.cmbGlobalKeyService3Mod2.Location = new System.Drawing.Point(188, 136);
+            this.cmbGlobalKeyService3Mod2.ItemHeight = 15;
+            this.cmbGlobalKeyService3Mod2.Location = new System.Drawing.Point(164, 106);
             this.cmbGlobalKeyService3Mod2.Name = "cmbGlobalKeyService3Mod2";
-            this.cmbGlobalKeyService3Mod2.Size = new System.Drawing.Size(44, 21);
+            this.cmbGlobalKeyService3Mod2.Size = new System.Drawing.Size(44, 23);
             this.cmbGlobalKeyService3Mod2.TabIndex = 133;
             this.toolTip1.SetToolTip(this.cmbGlobalKeyService3Mod2, "Choose key to access service by an shortcut / hotkey.\r\nYou can use a key with mod" +
         "ifiers like Ctrl,Shif, Window Key, ALT to access a service.\r\nNote: The key + mod" +
@@ -321,10 +345,12 @@
             // 
             // cmbGlobalKeyService3Mod3
             // 
+            this.cmbGlobalKeyService3Mod3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeyService3Mod3.FormattingEnabled = true;
-            this.cmbGlobalKeyService3Mod3.Location = new System.Drawing.Point(238, 136);
+            this.cmbGlobalKeyService3Mod3.ItemHeight = 15;
+            this.cmbGlobalKeyService3Mod3.Location = new System.Drawing.Point(214, 106);
             this.cmbGlobalKeyService3Mod3.Name = "cmbGlobalKeyService3Mod3";
-            this.cmbGlobalKeyService3Mod3.Size = new System.Drawing.Size(44, 21);
+            this.cmbGlobalKeyService3Mod3.Size = new System.Drawing.Size(44, 23);
             this.cmbGlobalKeyService3Mod3.TabIndex = 132;
             this.toolTip1.SetToolTip(this.cmbGlobalKeyService3Mod3, "Choose key to access service by an shortcut / hotkey.\r\nYou can use a key with mod" +
         "ifiers like Ctrl,Shif, Window Key, ALT to access a service.\r\nNote: The key + mod" +
@@ -332,10 +358,12 @@
             // 
             // cmbGlobalKeyService3Mod1
             // 
+            this.cmbGlobalKeyService3Mod1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeyService3Mod1.FormattingEnabled = true;
-            this.cmbGlobalKeyService3Mod1.Location = new System.Drawing.Point(139, 136);
+            this.cmbGlobalKeyService3Mod1.ItemHeight = 15;
+            this.cmbGlobalKeyService3Mod1.Location = new System.Drawing.Point(115, 106);
             this.cmbGlobalKeyService3Mod1.Name = "cmbGlobalKeyService3Mod1";
-            this.cmbGlobalKeyService3Mod1.Size = new System.Drawing.Size(44, 21);
+            this.cmbGlobalKeyService3Mod1.Size = new System.Drawing.Size(44, 23);
             this.cmbGlobalKeyService3Mod1.TabIndex = 131;
             this.toolTip1.SetToolTip(this.cmbGlobalKeyService3Mod1, "Choose key to access service by an shortcut / hotkey.\r\nYou can use a key with mod" +
         "ifiers like Ctrl,Shif, Window Key, ALT to access a service.\r\nNote: The key + mod" +
@@ -343,10 +371,12 @@
             // 
             // cmbGlobalKeyService3Key
             // 
+            this.cmbGlobalKeyService3Key.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeyService3Key.FormattingEnabled = true;
-            this.cmbGlobalKeyService3Key.Location = new System.Drawing.Point(31, 136);
+            this.cmbGlobalKeyService3Key.ItemHeight = 15;
+            this.cmbGlobalKeyService3Key.Location = new System.Drawing.Point(7, 106);
             this.cmbGlobalKeyService3Key.Name = "cmbGlobalKeyService3Key";
-            this.cmbGlobalKeyService3Key.Size = new System.Drawing.Size(88, 21);
+            this.cmbGlobalKeyService3Key.Size = new System.Drawing.Size(88, 23);
             this.cmbGlobalKeyService3Key.TabIndex = 130;
             this.toolTip1.SetToolTip(this.cmbGlobalKeyService3Key, "Choose key to access service by an shortcut / hotkey.\r\nYou can use a key with mod" +
         "ifiers like Ctrl,Shif, Window Key, ALT to access a service.\r\nNote: The key + mod" +
@@ -355,32 +385,34 @@
             // cmbGlobalKey3Tooltip
             // 
             this.cmbGlobalKey3Tooltip.Enabled = false;
-            this.cmbGlobalKey3Tooltip.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbGlobalKey3Tooltip.Location = new System.Drawing.Point(666, 86);
+            this.cmbGlobalKey3Tooltip.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbGlobalKey3Tooltip.Location = new System.Drawing.Point(660, 106);
             this.cmbGlobalKey3Tooltip.Margin = new System.Windows.Forms.Padding(2);
             this.cmbGlobalKey3Tooltip.Multiline = true;
             this.cmbGlobalKey3Tooltip.Name = "cmbGlobalKey3Tooltip";
             this.cmbGlobalKey3Tooltip.ReadOnly = true;
-            this.cmbGlobalKey3Tooltip.Size = new System.Drawing.Size(280, 20);
+            this.cmbGlobalKey3Tooltip.Size = new System.Drawing.Size(280, 21);
             this.cmbGlobalKey3Tooltip.TabIndex = 129;
             this.toolTip1.SetToolTip(this.cmbGlobalKey3Tooltip, "Tooltip");
             // 
             // cmbGlobalKey3Service
             // 
-            this.cmbGlobalKey3Service.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbGlobalKey3Service.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKey3Service.FormattingEnabled = true;
-            this.cmbGlobalKey3Service.Location = new System.Drawing.Point(327, 86);
+            this.cmbGlobalKey3Service.Location = new System.Drawing.Point(321, 106);
             this.cmbGlobalKey3Service.Name = "cmbGlobalKey3Service";
-            this.cmbGlobalKey3Service.Size = new System.Drawing.Size(312, 26);
+            this.cmbGlobalKey3Service.Size = new System.Drawing.Size(312, 23);
             this.cmbGlobalKey3Service.TabIndex = 128;
             this.toolTip1.SetToolTip(this.cmbGlobalKey3Service, "Choose your service Function");
             // 
             // cmbGlobalKeyService2Mod4
             // 
+            this.cmbGlobalKeyService2Mod4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeyService2Mod4.FormattingEnabled = true;
-            this.cmbGlobalKeyService2Mod4.Location = new System.Drawing.Point(288, 112);
+            this.cmbGlobalKeyService2Mod4.ItemHeight = 15;
+            this.cmbGlobalKeyService2Mod4.Location = new System.Drawing.Point(264, 82);
             this.cmbGlobalKeyService2Mod4.Name = "cmbGlobalKeyService2Mod4";
-            this.cmbGlobalKeyService2Mod4.Size = new System.Drawing.Size(44, 21);
+            this.cmbGlobalKeyService2Mod4.Size = new System.Drawing.Size(44, 23);
             this.cmbGlobalKeyService2Mod4.TabIndex = 127;
             this.toolTip1.SetToolTip(this.cmbGlobalKeyService2Mod4, "Choose key to access service by an shortcut / hotkey.\r\nYou can use a key with mod" +
         "ifiers like Ctrl,Shif, Window Key, ALT to access a service.\r\nNote: The key + mod" +
@@ -388,10 +420,12 @@
             // 
             // cmbGlobalKeyService2Mod2
             // 
+            this.cmbGlobalKeyService2Mod2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeyService2Mod2.FormattingEnabled = true;
-            this.cmbGlobalKeyService2Mod2.Location = new System.Drawing.Point(188, 112);
+            this.cmbGlobalKeyService2Mod2.ItemHeight = 15;
+            this.cmbGlobalKeyService2Mod2.Location = new System.Drawing.Point(164, 82);
             this.cmbGlobalKeyService2Mod2.Name = "cmbGlobalKeyService2Mod2";
-            this.cmbGlobalKeyService2Mod2.Size = new System.Drawing.Size(44, 21);
+            this.cmbGlobalKeyService2Mod2.Size = new System.Drawing.Size(44, 23);
             this.cmbGlobalKeyService2Mod2.TabIndex = 126;
             this.toolTip1.SetToolTip(this.cmbGlobalKeyService2Mod2, "Choose key to access service by an shortcut / hotkey.\r\nYou can use a key with mod" +
         "ifiers like Ctrl,Shif, Window Key, ALT to access a service.\r\nNote: The key + mod" +
@@ -399,10 +433,12 @@
             // 
             // cmbGlobalKeyService2Mod3
             // 
+            this.cmbGlobalKeyService2Mod3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeyService2Mod3.FormattingEnabled = true;
-            this.cmbGlobalKeyService2Mod3.Location = new System.Drawing.Point(238, 112);
+            this.cmbGlobalKeyService2Mod3.ItemHeight = 15;
+            this.cmbGlobalKeyService2Mod3.Location = new System.Drawing.Point(214, 82);
             this.cmbGlobalKeyService2Mod3.Name = "cmbGlobalKeyService2Mod3";
-            this.cmbGlobalKeyService2Mod3.Size = new System.Drawing.Size(44, 21);
+            this.cmbGlobalKeyService2Mod3.Size = new System.Drawing.Size(44, 23);
             this.cmbGlobalKeyService2Mod3.TabIndex = 125;
             this.toolTip1.SetToolTip(this.cmbGlobalKeyService2Mod3, "Choose key to access service by an shortcut / hotkey.\r\nYou can use a key with mod" +
         "ifiers like Ctrl,Shif, Window Key, ALT to access a service.\r\nNote: The key + mod" +
@@ -410,10 +446,12 @@
             // 
             // cmbGlobalKeyService2Mod1
             // 
+            this.cmbGlobalKeyService2Mod1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeyService2Mod1.FormattingEnabled = true;
-            this.cmbGlobalKeyService2Mod1.Location = new System.Drawing.Point(139, 112);
+            this.cmbGlobalKeyService2Mod1.ItemHeight = 15;
+            this.cmbGlobalKeyService2Mod1.Location = new System.Drawing.Point(115, 82);
             this.cmbGlobalKeyService2Mod1.Name = "cmbGlobalKeyService2Mod1";
-            this.cmbGlobalKeyService2Mod1.Size = new System.Drawing.Size(44, 21);
+            this.cmbGlobalKeyService2Mod1.Size = new System.Drawing.Size(44, 23);
             this.cmbGlobalKeyService2Mod1.TabIndex = 124;
             this.toolTip1.SetToolTip(this.cmbGlobalKeyService2Mod1, "Choose key to access service by an shortcut / hotkey.\r\nYou can use a key with mod" +
         "ifiers like Ctrl,Shif, Window Key, ALT to access a service.\r\nNote: The key + mod" +
@@ -421,10 +459,12 @@
             // 
             // cmbGlobalKeyService2Key
             // 
+            this.cmbGlobalKeyService2Key.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeyService2Key.FormattingEnabled = true;
-            this.cmbGlobalKeyService2Key.Location = new System.Drawing.Point(31, 112);
+            this.cmbGlobalKeyService2Key.ItemHeight = 15;
+            this.cmbGlobalKeyService2Key.Location = new System.Drawing.Point(7, 82);
             this.cmbGlobalKeyService2Key.Name = "cmbGlobalKeyService2Key";
-            this.cmbGlobalKeyService2Key.Size = new System.Drawing.Size(88, 21);
+            this.cmbGlobalKeyService2Key.Size = new System.Drawing.Size(88, 23);
             this.cmbGlobalKeyService2Key.TabIndex = 123;
             this.toolTip1.SetToolTip(this.cmbGlobalKeyService2Key, "Choose key to access service by an shortcut / hotkey.\r\nYou can use a key with mod" +
         "ifiers like Ctrl,Shif, Window Key, ALT to access a service.\r\nNote: The key + mod" +
@@ -433,32 +473,34 @@
             // cmbGlobalKey2Tooltip
             // 
             this.cmbGlobalKey2Tooltip.Enabled = false;
-            this.cmbGlobalKey2Tooltip.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbGlobalKey2Tooltip.Location = new System.Drawing.Point(666, 61);
+            this.cmbGlobalKey2Tooltip.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbGlobalKey2Tooltip.Location = new System.Drawing.Point(660, 81);
             this.cmbGlobalKey2Tooltip.Margin = new System.Windows.Forms.Padding(2);
             this.cmbGlobalKey2Tooltip.Multiline = true;
             this.cmbGlobalKey2Tooltip.Name = "cmbGlobalKey2Tooltip";
             this.cmbGlobalKey2Tooltip.ReadOnly = true;
-            this.cmbGlobalKey2Tooltip.Size = new System.Drawing.Size(280, 20);
+            this.cmbGlobalKey2Tooltip.Size = new System.Drawing.Size(280, 21);
             this.cmbGlobalKey2Tooltip.TabIndex = 122;
             this.toolTip1.SetToolTip(this.cmbGlobalKey2Tooltip, "Tooltip");
             // 
             // cmbGlobalKey2Service
             // 
-            this.cmbGlobalKey2Service.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbGlobalKey2Service.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKey2Service.FormattingEnabled = true;
-            this.cmbGlobalKey2Service.Location = new System.Drawing.Point(327, 62);
+            this.cmbGlobalKey2Service.Location = new System.Drawing.Point(321, 82);
             this.cmbGlobalKey2Service.Name = "cmbGlobalKey2Service";
-            this.cmbGlobalKey2Service.Size = new System.Drawing.Size(312, 26);
+            this.cmbGlobalKey2Service.Size = new System.Drawing.Size(312, 23);
             this.cmbGlobalKey2Service.TabIndex = 121;
             this.toolTip1.SetToolTip(this.cmbGlobalKey2Service, "Choose your service Function");
             // 
             // cmbGlobalKeyService1Mod4
             // 
+            this.cmbGlobalKeyService1Mod4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeyService1Mod4.FormattingEnabled = true;
-            this.cmbGlobalKeyService1Mod4.Location = new System.Drawing.Point(288, 88);
+            this.cmbGlobalKeyService1Mod4.ItemHeight = 15;
+            this.cmbGlobalKeyService1Mod4.Location = new System.Drawing.Point(264, 58);
             this.cmbGlobalKeyService1Mod4.Name = "cmbGlobalKeyService1Mod4";
-            this.cmbGlobalKeyService1Mod4.Size = new System.Drawing.Size(44, 21);
+            this.cmbGlobalKeyService1Mod4.Size = new System.Drawing.Size(44, 23);
             this.cmbGlobalKeyService1Mod4.TabIndex = 120;
             this.toolTip1.SetToolTip(this.cmbGlobalKeyService1Mod4, "Choose key to access service by an shortcut / hotkey.\r\nYou can use a key with mod" +
         "ifiers like Ctrl,Shif, Window Key, ALT to access a service.\r\nNote: The key + mod" +
@@ -466,10 +508,12 @@
             // 
             // cmbGlobalKeyService1Mod2
             // 
+            this.cmbGlobalKeyService1Mod2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeyService1Mod2.FormattingEnabled = true;
-            this.cmbGlobalKeyService1Mod2.Location = new System.Drawing.Point(188, 88);
+            this.cmbGlobalKeyService1Mod2.ItemHeight = 15;
+            this.cmbGlobalKeyService1Mod2.Location = new System.Drawing.Point(164, 58);
             this.cmbGlobalKeyService1Mod2.Name = "cmbGlobalKeyService1Mod2";
-            this.cmbGlobalKeyService1Mod2.Size = new System.Drawing.Size(44, 21);
+            this.cmbGlobalKeyService1Mod2.Size = new System.Drawing.Size(44, 23);
             this.cmbGlobalKeyService1Mod2.TabIndex = 119;
             this.toolTip1.SetToolTip(this.cmbGlobalKeyService1Mod2, "Choose key to access service by an shortcut / hotkey.\r\nYou can use a key with mod" +
         "ifiers like Ctrl,Shif, Window Key, ALT to access a service.\r\nNote: The key + mod" +
@@ -477,10 +521,12 @@
             // 
             // cmbGlobalKeyService1Mod3
             // 
+            this.cmbGlobalKeyService1Mod3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeyService1Mod3.FormattingEnabled = true;
-            this.cmbGlobalKeyService1Mod3.Location = new System.Drawing.Point(238, 88);
+            this.cmbGlobalKeyService1Mod3.ItemHeight = 15;
+            this.cmbGlobalKeyService1Mod3.Location = new System.Drawing.Point(214, 58);
             this.cmbGlobalKeyService1Mod3.Name = "cmbGlobalKeyService1Mod3";
-            this.cmbGlobalKeyService1Mod3.Size = new System.Drawing.Size(44, 21);
+            this.cmbGlobalKeyService1Mod3.Size = new System.Drawing.Size(44, 23);
             this.cmbGlobalKeyService1Mod3.TabIndex = 118;
             this.toolTip1.SetToolTip(this.cmbGlobalKeyService1Mod3, "Choose key to access service by an shortcut / hotkey.\r\nYou can use a key with mod" +
         "ifiers like Ctrl,Shif, Window Key, ALT to access a service.\r\nNote: The key + mod" +
@@ -488,10 +534,12 @@
             // 
             // cmbGlobalKeyService1Mod1
             // 
+            this.cmbGlobalKeyService1Mod1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeyService1Mod1.FormattingEnabled = true;
-            this.cmbGlobalKeyService1Mod1.Location = new System.Drawing.Point(139, 88);
+            this.cmbGlobalKeyService1Mod1.ItemHeight = 15;
+            this.cmbGlobalKeyService1Mod1.Location = new System.Drawing.Point(115, 58);
             this.cmbGlobalKeyService1Mod1.Name = "cmbGlobalKeyService1Mod1";
-            this.cmbGlobalKeyService1Mod1.Size = new System.Drawing.Size(44, 21);
+            this.cmbGlobalKeyService1Mod1.Size = new System.Drawing.Size(44, 23);
             this.cmbGlobalKeyService1Mod1.TabIndex = 117;
             this.toolTip1.SetToolTip(this.cmbGlobalKeyService1Mod1, "Choose key to access service by an shortcut / hotkey.\r\nYou can use a key with mod" +
         "ifiers like Ctrl,Shif, Window Key, ALT to access a service.\r\nNote: The key + mod" +
@@ -499,10 +547,12 @@
             // 
             // cmbGlobalKeyService1Key
             // 
+            this.cmbGlobalKeyService1Key.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeyService1Key.FormattingEnabled = true;
-            this.cmbGlobalKeyService1Key.Location = new System.Drawing.Point(31, 88);
+            this.cmbGlobalKeyService1Key.ItemHeight = 15;
+            this.cmbGlobalKeyService1Key.Location = new System.Drawing.Point(7, 58);
             this.cmbGlobalKeyService1Key.Name = "cmbGlobalKeyService1Key";
-            this.cmbGlobalKeyService1Key.Size = new System.Drawing.Size(88, 21);
+            this.cmbGlobalKeyService1Key.Size = new System.Drawing.Size(88, 23);
             this.cmbGlobalKeyService1Key.TabIndex = 116;
             this.toolTip1.SetToolTip(this.cmbGlobalKeyService1Key, "Choose key to access service by an shortcut / hotkey.\r\nYou can use a key with mod" +
         "ifiers like Ctrl,Shif, Window Key, ALT to access a service.\r\nNote: The key + mod" +
@@ -511,30 +561,30 @@
             // cmbGlobalKey1Tooltip
             // 
             this.cmbGlobalKey1Tooltip.Enabled = false;
-            this.cmbGlobalKey1Tooltip.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbGlobalKey1Tooltip.Location = new System.Drawing.Point(666, 37);
+            this.cmbGlobalKey1Tooltip.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbGlobalKey1Tooltip.Location = new System.Drawing.Point(660, 57);
             this.cmbGlobalKey1Tooltip.Margin = new System.Windows.Forms.Padding(2);
             this.cmbGlobalKey1Tooltip.Multiline = true;
             this.cmbGlobalKey1Tooltip.Name = "cmbGlobalKey1Tooltip";
             this.cmbGlobalKey1Tooltip.ReadOnly = true;
-            this.cmbGlobalKey1Tooltip.Size = new System.Drawing.Size(280, 20);
+            this.cmbGlobalKey1Tooltip.Size = new System.Drawing.Size(280, 21);
             this.cmbGlobalKey1Tooltip.TabIndex = 114;
             this.toolTip1.SetToolTip(this.cmbGlobalKey1Tooltip, "Tooltip");
             // 
             // cmbGlobalKey1Service
             // 
-            this.cmbGlobalKey1Service.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbGlobalKey1Service.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKey1Service.FormattingEnabled = true;
-            this.cmbGlobalKey1Service.Location = new System.Drawing.Point(327, 38);
+            this.cmbGlobalKey1Service.Location = new System.Drawing.Point(321, 58);
             this.cmbGlobalKey1Service.Name = "cmbGlobalKey1Service";
-            this.cmbGlobalKey1Service.Size = new System.Drawing.Size(312, 26);
+            this.cmbGlobalKey1Service.Size = new System.Drawing.Size(312, 23);
             this.cmbGlobalKey1Service.TabIndex = 112;
             this.toolTip1.SetToolTip(this.cmbGlobalKey1Service, "Choose your service Function");
             // 
             // cmbGlobalKeySearch5SearchTerm
             // 
             this.cmbGlobalKeySearch5SearchTerm.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbGlobalKeySearch5SearchTerm.Location = new System.Drawing.Point(665, 131);
+            this.cmbGlobalKeySearch5SearchTerm.Location = new System.Drawing.Point(660, 158);
             this.cmbGlobalKeySearch5SearchTerm.Margin = new System.Windows.Forms.Padding(2);
             this.cmbGlobalKeySearch5SearchTerm.Name = "cmbGlobalKeySearch5SearchTerm";
             this.cmbGlobalKeySearch5SearchTerm.Size = new System.Drawing.Size(280, 21);
@@ -544,7 +594,7 @@
             // cmbGlobalKeySearch5SearchName
             // 
             this.cmbGlobalKeySearch5SearchName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbGlobalKeySearch5SearchName.Location = new System.Drawing.Point(329, 131);
+            this.cmbGlobalKeySearch5SearchName.Location = new System.Drawing.Point(324, 158);
             this.cmbGlobalKeySearch5SearchName.Margin = new System.Windows.Forms.Padding(2);
             this.cmbGlobalKeySearch5SearchName.Name = "cmbGlobalKeySearch5SearchName";
             this.cmbGlobalKeySearch5SearchName.Size = new System.Drawing.Size(309, 21);
@@ -553,17 +603,18 @@
             // 
             // cmbGlobalKeySearch5Mod4
             // 
+            this.cmbGlobalKeySearch5Mod4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeySearch5Mod4.FormattingEnabled = true;
-            this.cmbGlobalKeySearch5Mod4.Location = new System.Drawing.Point(289, 351);
+            this.cmbGlobalKeySearch5Mod4.Location = new System.Drawing.Point(286, 408);
             this.cmbGlobalKeySearch5Mod4.Name = "cmbGlobalKeySearch5Mod4";
-            this.cmbGlobalKeySearch5Mod4.Size = new System.Drawing.Size(44, 21);
+            this.cmbGlobalKeySearch5Mod4.Size = new System.Drawing.Size(44, 23);
             this.cmbGlobalKeySearch5Mod4.TabIndex = 187;
             this.toolTip1.SetToolTip(this.cmbGlobalKeySearch5Mod4, resources.GetString("cmbGlobalKeySearch5Mod4.ToolTip"));
             // 
             // cmbGlobalKeySearch4SearchTerm
             // 
             this.cmbGlobalKeySearch4SearchTerm.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbGlobalKeySearch4SearchTerm.Location = new System.Drawing.Point(664, 109);
+            this.cmbGlobalKeySearch4SearchTerm.Location = new System.Drawing.Point(659, 136);
             this.cmbGlobalKeySearch4SearchTerm.Margin = new System.Windows.Forms.Padding(2);
             this.cmbGlobalKeySearch4SearchTerm.Name = "cmbGlobalKeySearch4SearchTerm";
             this.cmbGlobalKeySearch4SearchTerm.Size = new System.Drawing.Size(281, 21);
@@ -572,17 +623,18 @@
             // 
             // cmbGlobalKeySearch5Mod2
             // 
+            this.cmbGlobalKeySearch5Mod2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeySearch5Mod2.FormattingEnabled = true;
-            this.cmbGlobalKeySearch5Mod2.Location = new System.Drawing.Point(189, 351);
+            this.cmbGlobalKeySearch5Mod2.Location = new System.Drawing.Point(186, 408);
             this.cmbGlobalKeySearch5Mod2.Name = "cmbGlobalKeySearch5Mod2";
-            this.cmbGlobalKeySearch5Mod2.Size = new System.Drawing.Size(44, 21);
+            this.cmbGlobalKeySearch5Mod2.Size = new System.Drawing.Size(44, 23);
             this.cmbGlobalKeySearch5Mod2.TabIndex = 186;
             this.toolTip1.SetToolTip(this.cmbGlobalKeySearch5Mod2, resources.GetString("cmbGlobalKeySearch5Mod2.ToolTip"));
             // 
             // cmbGlobalKeySearch4SearchName
             // 
             this.cmbGlobalKeySearch4SearchName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbGlobalKeySearch4SearchName.Location = new System.Drawing.Point(329, 109);
+            this.cmbGlobalKeySearch4SearchName.Location = new System.Drawing.Point(324, 136);
             this.cmbGlobalKeySearch4SearchName.Margin = new System.Windows.Forms.Padding(2);
             this.cmbGlobalKeySearch4SearchName.Name = "cmbGlobalKeySearch4SearchName";
             this.cmbGlobalKeySearch4SearchName.Size = new System.Drawing.Size(309, 21);
@@ -591,17 +643,18 @@
             // 
             // cmbGlobalKeySearch5Mod3
             // 
+            this.cmbGlobalKeySearch5Mod3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeySearch5Mod3.FormattingEnabled = true;
-            this.cmbGlobalKeySearch5Mod3.Location = new System.Drawing.Point(239, 351);
+            this.cmbGlobalKeySearch5Mod3.Location = new System.Drawing.Point(236, 408);
             this.cmbGlobalKeySearch5Mod3.Name = "cmbGlobalKeySearch5Mod3";
-            this.cmbGlobalKeySearch5Mod3.Size = new System.Drawing.Size(44, 21);
+            this.cmbGlobalKeySearch5Mod3.Size = new System.Drawing.Size(44, 23);
             this.cmbGlobalKeySearch5Mod3.TabIndex = 185;
             this.toolTip1.SetToolTip(this.cmbGlobalKeySearch5Mod3, resources.GetString("cmbGlobalKeySearch5Mod3.ToolTip"));
             // 
             // cmbGlobalKeySearch3SearchTerm
             // 
             this.cmbGlobalKeySearch3SearchTerm.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbGlobalKeySearch3SearchTerm.Location = new System.Drawing.Point(664, 86);
+            this.cmbGlobalKeySearch3SearchTerm.Location = new System.Drawing.Point(659, 113);
             this.cmbGlobalKeySearch3SearchTerm.Margin = new System.Windows.Forms.Padding(2);
             this.cmbGlobalKeySearch3SearchTerm.Name = "cmbGlobalKeySearch3SearchTerm";
             this.cmbGlobalKeySearch3SearchTerm.Size = new System.Drawing.Size(281, 21);
@@ -610,17 +663,18 @@
             // 
             // cmbGlobalKeySearch5Mod1
             // 
+            this.cmbGlobalKeySearch5Mod1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeySearch5Mod1.FormattingEnabled = true;
-            this.cmbGlobalKeySearch5Mod1.Location = new System.Drawing.Point(140, 351);
+            this.cmbGlobalKeySearch5Mod1.Location = new System.Drawing.Point(137, 408);
             this.cmbGlobalKeySearch5Mod1.Name = "cmbGlobalKeySearch5Mod1";
-            this.cmbGlobalKeySearch5Mod1.Size = new System.Drawing.Size(44, 21);
+            this.cmbGlobalKeySearch5Mod1.Size = new System.Drawing.Size(44, 23);
             this.cmbGlobalKeySearch5Mod1.TabIndex = 184;
             this.toolTip1.SetToolTip(this.cmbGlobalKeySearch5Mod1, resources.GetString("cmbGlobalKeySearch5Mod1.ToolTip"));
             // 
             // cmbGlobalKeySearch3SearchName
             // 
             this.cmbGlobalKeySearch3SearchName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbGlobalKeySearch3SearchName.Location = new System.Drawing.Point(329, 86);
+            this.cmbGlobalKeySearch3SearchName.Location = new System.Drawing.Point(324, 113);
             this.cmbGlobalKeySearch3SearchName.Margin = new System.Windows.Forms.Padding(2);
             this.cmbGlobalKeySearch3SearchName.Name = "cmbGlobalKeySearch3SearchName";
             this.cmbGlobalKeySearch3SearchName.Size = new System.Drawing.Size(309, 21);
@@ -629,17 +683,18 @@
             // 
             // cmbGlobalKeySearch5Key
             // 
+            this.cmbGlobalKeySearch5Key.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeySearch5Key.FormattingEnabled = true;
-            this.cmbGlobalKeySearch5Key.Location = new System.Drawing.Point(32, 351);
+            this.cmbGlobalKeySearch5Key.Location = new System.Drawing.Point(29, 408);
             this.cmbGlobalKeySearch5Key.Name = "cmbGlobalKeySearch5Key";
-            this.cmbGlobalKeySearch5Key.Size = new System.Drawing.Size(88, 21);
+            this.cmbGlobalKeySearch5Key.Size = new System.Drawing.Size(88, 23);
             this.cmbGlobalKeySearch5Key.TabIndex = 183;
             this.toolTip1.SetToolTip(this.cmbGlobalKeySearch5Key, resources.GetString("cmbGlobalKeySearch5Key.ToolTip"));
             // 
             // cmbGlobalKeySearch2SearchTerm
             // 
             this.cmbGlobalKeySearch2SearchTerm.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbGlobalKeySearch2SearchTerm.Location = new System.Drawing.Point(665, 61);
+            this.cmbGlobalKeySearch2SearchTerm.Location = new System.Drawing.Point(660, 88);
             this.cmbGlobalKeySearch2SearchTerm.Margin = new System.Windows.Forms.Padding(2);
             this.cmbGlobalKeySearch2SearchTerm.Name = "cmbGlobalKeySearch2SearchTerm";
             this.cmbGlobalKeySearch2SearchTerm.Size = new System.Drawing.Size(280, 21);
@@ -648,17 +703,18 @@
             // 
             // cmbGlobalKeySearch4Mod4
             // 
+            this.cmbGlobalKeySearch4Mod4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeySearch4Mod4.FormattingEnabled = true;
-            this.cmbGlobalKeySearch4Mod4.Location = new System.Drawing.Point(289, 327);
+            this.cmbGlobalKeySearch4Mod4.Location = new System.Drawing.Point(286, 384);
             this.cmbGlobalKeySearch4Mod4.Name = "cmbGlobalKeySearch4Mod4";
-            this.cmbGlobalKeySearch4Mod4.Size = new System.Drawing.Size(44, 21);
+            this.cmbGlobalKeySearch4Mod4.Size = new System.Drawing.Size(44, 23);
             this.cmbGlobalKeySearch4Mod4.TabIndex = 182;
             this.toolTip1.SetToolTip(this.cmbGlobalKeySearch4Mod4, resources.GetString("cmbGlobalKeySearch4Mod4.ToolTip"));
             // 
             // cmbGlobalKeySearch2SearchName
             // 
             this.cmbGlobalKeySearch2SearchName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbGlobalKeySearch2SearchName.Location = new System.Drawing.Point(329, 61);
+            this.cmbGlobalKeySearch2SearchName.Location = new System.Drawing.Point(324, 88);
             this.cmbGlobalKeySearch2SearchName.Margin = new System.Windows.Forms.Padding(2);
             this.cmbGlobalKeySearch2SearchName.Name = "cmbGlobalKeySearch2SearchName";
             this.cmbGlobalKeySearch2SearchName.Size = new System.Drawing.Size(309, 21);
@@ -667,17 +723,18 @@
             // 
             // cmbGlobalKeySearch4Mod2
             // 
+            this.cmbGlobalKeySearch4Mod2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeySearch4Mod2.FormattingEnabled = true;
-            this.cmbGlobalKeySearch4Mod2.Location = new System.Drawing.Point(189, 327);
+            this.cmbGlobalKeySearch4Mod2.Location = new System.Drawing.Point(186, 384);
             this.cmbGlobalKeySearch4Mod2.Name = "cmbGlobalKeySearch4Mod2";
-            this.cmbGlobalKeySearch4Mod2.Size = new System.Drawing.Size(44, 21);
+            this.cmbGlobalKeySearch4Mod2.Size = new System.Drawing.Size(44, 23);
             this.cmbGlobalKeySearch4Mod2.TabIndex = 181;
             this.toolTip1.SetToolTip(this.cmbGlobalKeySearch4Mod2, resources.GetString("cmbGlobalKeySearch4Mod2.ToolTip"));
             // 
             // cmbGlobalKeySearch1SearchTerm
             // 
             this.cmbGlobalKeySearch1SearchTerm.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbGlobalKeySearch1SearchTerm.Location = new System.Drawing.Point(665, 36);
+            this.cmbGlobalKeySearch1SearchTerm.Location = new System.Drawing.Point(660, 63);
             this.cmbGlobalKeySearch1SearchTerm.Margin = new System.Windows.Forms.Padding(2);
             this.cmbGlobalKeySearch1SearchTerm.Name = "cmbGlobalKeySearch1SearchTerm";
             this.cmbGlobalKeySearch1SearchTerm.Size = new System.Drawing.Size(280, 21);
@@ -686,17 +743,18 @@
             // 
             // cmbGlobalKeySearch4Mod3
             // 
+            this.cmbGlobalKeySearch4Mod3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeySearch4Mod3.FormattingEnabled = true;
-            this.cmbGlobalKeySearch4Mod3.Location = new System.Drawing.Point(239, 327);
+            this.cmbGlobalKeySearch4Mod3.Location = new System.Drawing.Point(236, 384);
             this.cmbGlobalKeySearch4Mod3.Name = "cmbGlobalKeySearch4Mod3";
-            this.cmbGlobalKeySearch4Mod3.Size = new System.Drawing.Size(44, 21);
+            this.cmbGlobalKeySearch4Mod3.Size = new System.Drawing.Size(44, 23);
             this.cmbGlobalKeySearch4Mod3.TabIndex = 180;
             this.toolTip1.SetToolTip(this.cmbGlobalKeySearch4Mod3, resources.GetString("cmbGlobalKeySearch4Mod3.ToolTip"));
             // 
             // cmbGlobalKeySearch1SearchName
             // 
             this.cmbGlobalKeySearch1SearchName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbGlobalKeySearch1SearchName.Location = new System.Drawing.Point(329, 36);
+            this.cmbGlobalKeySearch1SearchName.Location = new System.Drawing.Point(324, 63);
             this.cmbGlobalKeySearch1SearchName.Margin = new System.Windows.Forms.Padding(2);
             this.cmbGlobalKeySearch1SearchName.Name = "cmbGlobalKeySearch1SearchName";
             this.cmbGlobalKeySearch1SearchName.Size = new System.Drawing.Size(309, 21);
@@ -705,107 +763,118 @@
             // 
             // cmbGlobalKeySearch4Mod1
             // 
+            this.cmbGlobalKeySearch4Mod1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeySearch4Mod1.FormattingEnabled = true;
-            this.cmbGlobalKeySearch4Mod1.Location = new System.Drawing.Point(140, 327);
+            this.cmbGlobalKeySearch4Mod1.Location = new System.Drawing.Point(137, 384);
             this.cmbGlobalKeySearch4Mod1.Name = "cmbGlobalKeySearch4Mod1";
-            this.cmbGlobalKeySearch4Mod1.Size = new System.Drawing.Size(44, 21);
+            this.cmbGlobalKeySearch4Mod1.Size = new System.Drawing.Size(44, 23);
             this.cmbGlobalKeySearch4Mod1.TabIndex = 179;
             this.toolTip1.SetToolTip(this.cmbGlobalKeySearch4Mod1, resources.GetString("cmbGlobalKeySearch4Mod1.ToolTip"));
             // 
             // cmbGlobalKeySearch4Key
             // 
+            this.cmbGlobalKeySearch4Key.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeySearch4Key.FormattingEnabled = true;
-            this.cmbGlobalKeySearch4Key.Location = new System.Drawing.Point(32, 327);
+            this.cmbGlobalKeySearch4Key.Location = new System.Drawing.Point(29, 384);
             this.cmbGlobalKeySearch4Key.Name = "cmbGlobalKeySearch4Key";
-            this.cmbGlobalKeySearch4Key.Size = new System.Drawing.Size(88, 21);
+            this.cmbGlobalKeySearch4Key.Size = new System.Drawing.Size(88, 23);
             this.cmbGlobalKeySearch4Key.TabIndex = 178;
             this.toolTip1.SetToolTip(this.cmbGlobalKeySearch4Key, resources.GetString("cmbGlobalKeySearch4Key.ToolTip"));
             // 
             // cmbGlobalKeySearch3Mod4
             // 
+            this.cmbGlobalKeySearch3Mod4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeySearch3Mod4.FormattingEnabled = true;
-            this.cmbGlobalKeySearch3Mod4.Location = new System.Drawing.Point(289, 303);
+            this.cmbGlobalKeySearch3Mod4.Location = new System.Drawing.Point(286, 360);
             this.cmbGlobalKeySearch3Mod4.Name = "cmbGlobalKeySearch3Mod4";
-            this.cmbGlobalKeySearch3Mod4.Size = new System.Drawing.Size(44, 21);
+            this.cmbGlobalKeySearch3Mod4.Size = new System.Drawing.Size(44, 23);
             this.cmbGlobalKeySearch3Mod4.TabIndex = 177;
             this.toolTip1.SetToolTip(this.cmbGlobalKeySearch3Mod4, resources.GetString("cmbGlobalKeySearch3Mod4.ToolTip"));
             // 
             // cmbGlobalKeySearch3Mod2
             // 
+            this.cmbGlobalKeySearch3Mod2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeySearch3Mod2.FormattingEnabled = true;
-            this.cmbGlobalKeySearch3Mod2.Location = new System.Drawing.Point(189, 303);
+            this.cmbGlobalKeySearch3Mod2.Location = new System.Drawing.Point(186, 360);
             this.cmbGlobalKeySearch3Mod2.Name = "cmbGlobalKeySearch3Mod2";
-            this.cmbGlobalKeySearch3Mod2.Size = new System.Drawing.Size(44, 21);
+            this.cmbGlobalKeySearch3Mod2.Size = new System.Drawing.Size(44, 23);
             this.cmbGlobalKeySearch3Mod2.TabIndex = 176;
             this.toolTip1.SetToolTip(this.cmbGlobalKeySearch3Mod2, resources.GetString("cmbGlobalKeySearch3Mod2.ToolTip"));
             // 
             // cmbGlobalKeySearch3Mod3
             // 
+            this.cmbGlobalKeySearch3Mod3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeySearch3Mod3.FormattingEnabled = true;
-            this.cmbGlobalKeySearch3Mod3.Location = new System.Drawing.Point(239, 303);
+            this.cmbGlobalKeySearch3Mod3.Location = new System.Drawing.Point(236, 360);
             this.cmbGlobalKeySearch3Mod3.Name = "cmbGlobalKeySearch3Mod3";
-            this.cmbGlobalKeySearch3Mod3.Size = new System.Drawing.Size(44, 21);
+            this.cmbGlobalKeySearch3Mod3.Size = new System.Drawing.Size(44, 23);
             this.cmbGlobalKeySearch3Mod3.TabIndex = 175;
             this.toolTip1.SetToolTip(this.cmbGlobalKeySearch3Mod3, resources.GetString("cmbGlobalKeySearch3Mod3.ToolTip"));
             // 
             // cmbGlobalKeySearch3Mod1
             // 
+            this.cmbGlobalKeySearch3Mod1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeySearch3Mod1.FormattingEnabled = true;
-            this.cmbGlobalKeySearch3Mod1.Location = new System.Drawing.Point(140, 303);
+            this.cmbGlobalKeySearch3Mod1.Location = new System.Drawing.Point(137, 360);
             this.cmbGlobalKeySearch3Mod1.Name = "cmbGlobalKeySearch3Mod1";
-            this.cmbGlobalKeySearch3Mod1.Size = new System.Drawing.Size(44, 21);
+            this.cmbGlobalKeySearch3Mod1.Size = new System.Drawing.Size(44, 23);
             this.cmbGlobalKeySearch3Mod1.TabIndex = 174;
             this.toolTip1.SetToolTip(this.cmbGlobalKeySearch3Mod1, resources.GetString("cmbGlobalKeySearch3Mod1.ToolTip"));
             // 
             // cmbGlobalKeySearch3Key
             // 
+            this.cmbGlobalKeySearch3Key.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeySearch3Key.FormattingEnabled = true;
-            this.cmbGlobalKeySearch3Key.Location = new System.Drawing.Point(32, 303);
+            this.cmbGlobalKeySearch3Key.Location = new System.Drawing.Point(29, 360);
             this.cmbGlobalKeySearch3Key.Name = "cmbGlobalKeySearch3Key";
-            this.cmbGlobalKeySearch3Key.Size = new System.Drawing.Size(88, 21);
+            this.cmbGlobalKeySearch3Key.Size = new System.Drawing.Size(88, 23);
             this.cmbGlobalKeySearch3Key.TabIndex = 173;
             this.toolTip1.SetToolTip(this.cmbGlobalKeySearch3Key, resources.GetString("cmbGlobalKeySearch3Key.ToolTip"));
             // 
             // cmbGlobalKeySearch2Mod4
             // 
+            this.cmbGlobalKeySearch2Mod4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeySearch2Mod4.FormattingEnabled = true;
-            this.cmbGlobalKeySearch2Mod4.Location = new System.Drawing.Point(289, 279);
+            this.cmbGlobalKeySearch2Mod4.Location = new System.Drawing.Point(286, 336);
             this.cmbGlobalKeySearch2Mod4.Name = "cmbGlobalKeySearch2Mod4";
-            this.cmbGlobalKeySearch2Mod4.Size = new System.Drawing.Size(44, 21);
+            this.cmbGlobalKeySearch2Mod4.Size = new System.Drawing.Size(44, 23);
             this.cmbGlobalKeySearch2Mod4.TabIndex = 172;
             this.toolTip1.SetToolTip(this.cmbGlobalKeySearch2Mod4, resources.GetString("cmbGlobalKeySearch2Mod4.ToolTip"));
             // 
             // cmbGlobalKeySearch2Mod2
             // 
+            this.cmbGlobalKeySearch2Mod2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeySearch2Mod2.FormattingEnabled = true;
-            this.cmbGlobalKeySearch2Mod2.Location = new System.Drawing.Point(189, 279);
+            this.cmbGlobalKeySearch2Mod2.Location = new System.Drawing.Point(186, 336);
             this.cmbGlobalKeySearch2Mod2.Name = "cmbGlobalKeySearch2Mod2";
-            this.cmbGlobalKeySearch2Mod2.Size = new System.Drawing.Size(44, 21);
+            this.cmbGlobalKeySearch2Mod2.Size = new System.Drawing.Size(44, 23);
             this.cmbGlobalKeySearch2Mod2.TabIndex = 171;
             this.toolTip1.SetToolTip(this.cmbGlobalKeySearch2Mod2, resources.GetString("cmbGlobalKeySearch2Mod2.ToolTip"));
             // 
             // cmbGlobalKeySearch2Mod3
             // 
+            this.cmbGlobalKeySearch2Mod3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeySearch2Mod3.FormattingEnabled = true;
-            this.cmbGlobalKeySearch2Mod3.Location = new System.Drawing.Point(239, 279);
+            this.cmbGlobalKeySearch2Mod3.Location = new System.Drawing.Point(236, 336);
             this.cmbGlobalKeySearch2Mod3.Name = "cmbGlobalKeySearch2Mod3";
-            this.cmbGlobalKeySearch2Mod3.Size = new System.Drawing.Size(44, 21);
+            this.cmbGlobalKeySearch2Mod3.Size = new System.Drawing.Size(44, 23);
             this.cmbGlobalKeySearch2Mod3.TabIndex = 170;
             this.toolTip1.SetToolTip(this.cmbGlobalKeySearch2Mod3, resources.GetString("cmbGlobalKeySearch2Mod3.ToolTip"));
             // 
             // cmbGlobalKeySearch2Mod1
             // 
+            this.cmbGlobalKeySearch2Mod1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeySearch2Mod1.FormattingEnabled = true;
-            this.cmbGlobalKeySearch2Mod1.Location = new System.Drawing.Point(140, 279);
+            this.cmbGlobalKeySearch2Mod1.Location = new System.Drawing.Point(137, 336);
             this.cmbGlobalKeySearch2Mod1.Name = "cmbGlobalKeySearch2Mod1";
-            this.cmbGlobalKeySearch2Mod1.Size = new System.Drawing.Size(44, 21);
+            this.cmbGlobalKeySearch2Mod1.Size = new System.Drawing.Size(44, 23);
             this.cmbGlobalKeySearch2Mod1.TabIndex = 169;
             this.toolTip1.SetToolTip(this.cmbGlobalKeySearch2Mod1, resources.GetString("cmbGlobalKeySearch2Mod1.ToolTip"));
             // 
             // cmbGlobalKeySearch2Key
             // 
             this.cmbGlobalKeySearch2Key.FormattingEnabled = true;
-            this.cmbGlobalKeySearch2Key.Location = new System.Drawing.Point(32, 279);
+            this.cmbGlobalKeySearch2Key.Location = new System.Drawing.Point(29, 336);
             this.cmbGlobalKeySearch2Key.Name = "cmbGlobalKeySearch2Key";
             this.cmbGlobalKeySearch2Key.Size = new System.Drawing.Size(88, 21);
             this.cmbGlobalKeySearch2Key.TabIndex = 168;
@@ -813,46 +882,51 @@
             // 
             // cmbGlobalKeySearch1Mod4
             // 
+            this.cmbGlobalKeySearch1Mod4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeySearch1Mod4.FormattingEnabled = true;
-            this.cmbGlobalKeySearch1Mod4.Location = new System.Drawing.Point(289, 255);
+            this.cmbGlobalKeySearch1Mod4.Location = new System.Drawing.Point(286, 312);
             this.cmbGlobalKeySearch1Mod4.Name = "cmbGlobalKeySearch1Mod4";
-            this.cmbGlobalKeySearch1Mod4.Size = new System.Drawing.Size(44, 21);
+            this.cmbGlobalKeySearch1Mod4.Size = new System.Drawing.Size(44, 23);
             this.cmbGlobalKeySearch1Mod4.TabIndex = 167;
             this.toolTip1.SetToolTip(this.cmbGlobalKeySearch1Mod4, resources.GetString("cmbGlobalKeySearch1Mod4.ToolTip"));
             // 
             // cmbGlobalKeySearch1Mod2
             // 
+            this.cmbGlobalKeySearch1Mod2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeySearch1Mod2.FormattingEnabled = true;
-            this.cmbGlobalKeySearch1Mod2.Location = new System.Drawing.Point(189, 255);
+            this.cmbGlobalKeySearch1Mod2.Location = new System.Drawing.Point(186, 312);
             this.cmbGlobalKeySearch1Mod2.Name = "cmbGlobalKeySearch1Mod2";
-            this.cmbGlobalKeySearch1Mod2.Size = new System.Drawing.Size(44, 21);
+            this.cmbGlobalKeySearch1Mod2.Size = new System.Drawing.Size(44, 23);
             this.cmbGlobalKeySearch1Mod2.TabIndex = 166;
             this.toolTip1.SetToolTip(this.cmbGlobalKeySearch1Mod2, resources.GetString("cmbGlobalKeySearch1Mod2.ToolTip"));
             // 
             // cmbGlobalKeySearch1Mod3
             // 
+            this.cmbGlobalKeySearch1Mod3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeySearch1Mod3.FormattingEnabled = true;
-            this.cmbGlobalKeySearch1Mod3.Location = new System.Drawing.Point(239, 255);
+            this.cmbGlobalKeySearch1Mod3.Location = new System.Drawing.Point(236, 312);
             this.cmbGlobalKeySearch1Mod3.Name = "cmbGlobalKeySearch1Mod3";
-            this.cmbGlobalKeySearch1Mod3.Size = new System.Drawing.Size(44, 21);
+            this.cmbGlobalKeySearch1Mod3.Size = new System.Drawing.Size(44, 23);
             this.cmbGlobalKeySearch1Mod3.TabIndex = 165;
             this.toolTip1.SetToolTip(this.cmbGlobalKeySearch1Mod3, resources.GetString("cmbGlobalKeySearch1Mod3.ToolTip"));
             // 
             // cmbGlobalKeySearch1Mod1
             // 
+            this.cmbGlobalKeySearch1Mod1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeySearch1Mod1.FormattingEnabled = true;
-            this.cmbGlobalKeySearch1Mod1.Location = new System.Drawing.Point(140, 255);
+            this.cmbGlobalKeySearch1Mod1.Location = new System.Drawing.Point(137, 312);
             this.cmbGlobalKeySearch1Mod1.Name = "cmbGlobalKeySearch1Mod1";
-            this.cmbGlobalKeySearch1Mod1.Size = new System.Drawing.Size(44, 21);
+            this.cmbGlobalKeySearch1Mod1.Size = new System.Drawing.Size(44, 23);
             this.cmbGlobalKeySearch1Mod1.TabIndex = 164;
             this.toolTip1.SetToolTip(this.cmbGlobalKeySearch1Mod1, resources.GetString("cmbGlobalKeySearch1Mod1.ToolTip"));
             // 
             // cmbGlobalKeySearch1Key
             // 
+            this.cmbGlobalKeySearch1Key.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeySearch1Key.FormattingEnabled = true;
-            this.cmbGlobalKeySearch1Key.Location = new System.Drawing.Point(32, 255);
+            this.cmbGlobalKeySearch1Key.Location = new System.Drawing.Point(29, 312);
             this.cmbGlobalKeySearch1Key.Name = "cmbGlobalKeySearch1Key";
-            this.cmbGlobalKeySearch1Key.Size = new System.Drawing.Size(88, 21);
+            this.cmbGlobalKeySearch1Key.Size = new System.Drawing.Size(88, 23);
             this.cmbGlobalKeySearch1Key.TabIndex = 163;
             this.toolTip1.SetToolTip(this.cmbGlobalKeySearch1Key, resources.GetString("cmbGlobalKeySearch1Key.ToolTip"));
             // 
@@ -871,10 +945,10 @@
             this.groupBox5.Controls.Add(this.cmbGlobalKeySearch4SearchTerm);
             this.groupBox5.Controls.Add(this.cmbGlobalKeySearch1SearchName);
             this.groupBox5.Controls.Add(this.cmbGlobalKeySearch2SearchName);
-            this.groupBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox5.Location = new System.Drawing.Point(25, 214);
+            this.groupBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox5.Location = new System.Drawing.Point(22, 251);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(958, 168);
+            this.groupBox5.Size = new System.Drawing.Size(958, 188);
             this.groupBox5.TabIndex = 195;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Searches on EA global hotkeys / shortcuts";
@@ -884,7 +958,7 @@
             // 
             this.label31.AutoSize = true;
             this.label31.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label31.Location = new System.Drawing.Point(325, 18);
+            this.label31.Location = new System.Drawing.Point(320, 39);
             this.label31.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label31.Name = "label31";
             this.label31.Size = new System.Drawing.Size(96, 18);
@@ -895,7 +969,7 @@
             // 
             this.label30.AutoSize = true;
             this.label30.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label30.Location = new System.Drawing.Point(661, 15);
+            this.label30.Location = new System.Drawing.Point(656, 36);
             this.label30.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label30.Name = "label30";
             this.label30.Size = new System.Drawing.Size(89, 18);
@@ -906,7 +980,7 @@
             // 
             this.label32.AutoSize = true;
             this.label32.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label32.Location = new System.Drawing.Point(4, 18);
+            this.label32.Location = new System.Drawing.Point(4, 36);
             this.label32.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label32.Name = "label32";
             this.label32.Size = new System.Drawing.Size(130, 18);
@@ -917,7 +991,7 @@
             // 
             this.Hotkeys.AutoSize = true;
             this.Hotkeys.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Hotkeys.Location = new System.Drawing.Point(28, 70);
+            this.Hotkeys.Location = new System.Drawing.Point(5, 36);
             this.Hotkeys.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.Hotkeys.Name = "Hotkeys";
             this.Hotkeys.Size = new System.Drawing.Size(124, 18);
@@ -928,7 +1002,7 @@
             // 
             this.label27.AutoSize = true;
             this.label27.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label27.Location = new System.Drawing.Point(663, 17);
+            this.label27.Location = new System.Drawing.Point(657, 37);
             this.label27.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(101, 18);
@@ -939,7 +1013,7 @@
             // 
             this.label28.AutoSize = true;
             this.label28.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label28.Location = new System.Drawing.Point(324, 16);
+            this.label28.Location = new System.Drawing.Point(318, 36);
             this.label28.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label28.Name = "label28";
             this.label28.Size = new System.Drawing.Size(98, 18);
@@ -960,10 +1034,36 @@
             this.groupBox4.Controls.Add(this.cmbGlobalKey3Service);
             this.groupBox4.Controls.Add(this.cmbGlobalKey4Service);
             this.groupBox4.Controls.Add(this.cmbGlobalKey5Service);
-            this.groupBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox4.Location = new System.Drawing.Point(24, 50);
+            this.groupBox4.Controls.Add(this.Hotkeys);
+            this.groupBox4.Controls.Add(this.cmbGlobalKeyService5Mod4);
+            this.groupBox4.Controls.Add(this.cmbGlobalKeyService1Key);
+            this.groupBox4.Controls.Add(this.cmbGlobalKeyService1Mod1);
+            this.groupBox4.Controls.Add(this.cmbGlobalKeyService1Mod3);
+            this.groupBox4.Controls.Add(this.cmbGlobalKeyService1Mod2);
+            this.groupBox4.Controls.Add(this.cmbGlobalKeyService1Mod4);
+            this.groupBox4.Controls.Add(this.cmbGlobalKeyService2Key);
+            this.groupBox4.Controls.Add(this.cmbGlobalKeyService2Mod1);
+            this.groupBox4.Controls.Add(this.cmbGlobalKeyService2Mod3);
+            this.groupBox4.Controls.Add(this.cmbGlobalKeyService2Mod2);
+            this.groupBox4.Controls.Add(this.cmbGlobalKeyService2Mod4);
+            this.groupBox4.Controls.Add(this.cmbGlobalKeyService3Key);
+            this.groupBox4.Controls.Add(this.cmbGlobalKeyService3Mod1);
+            this.groupBox4.Controls.Add(this.cmbGlobalKeyService3Mod3);
+            this.groupBox4.Controls.Add(this.cmbGlobalKeyService3Mod2);
+            this.groupBox4.Controls.Add(this.cmbGlobalKeyService5Mod2);
+            this.groupBox4.Controls.Add(this.cmbGlobalKeyService3Mod4);
+            this.groupBox4.Controls.Add(this.cmbGlobalKeyService5Mod3);
+            this.groupBox4.Controls.Add(this.cmbGlobalKeyService4Key);
+            this.groupBox4.Controls.Add(this.cmbGlobalKeyService5Mod1);
+            this.groupBox4.Controls.Add(this.cmbGlobalKeyService4Mod1);
+            this.groupBox4.Controls.Add(this.cmbGlobalKeyService5Key);
+            this.groupBox4.Controls.Add(this.cmbGlobalKeyService4Mod3);
+            this.groupBox4.Controls.Add(this.cmbGlobalKeyService4Mod4);
+            this.groupBox4.Controls.Add(this.cmbGlobalKeyService4Mod2);
+            this.groupBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox4.Location = new System.Drawing.Point(22, 40);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(959, 161);
+            this.groupBox4.Size = new System.Drawing.Size(959, 205);
             this.groupBox4.TabIndex = 150;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Services on EA global hotkeys / shortcuts";
@@ -983,7 +1083,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1015, 464);
+            this.ClientSize = new System.Drawing.Size(1015, 515);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cmbGlobalKeySearch5Mod4);
             this.Controls.Add(this.cmbGlobalKeySearch5Mod2);
@@ -1011,32 +1111,6 @@
             this.Controls.Add(this.cmbGlobalKeySearch1Mod1);
             this.Controls.Add(this.cmbGlobalKeySearch1Key);
             this.Controls.Add(this.groupBox5);
-            this.Controls.Add(this.Hotkeys);
-            this.Controls.Add(this.cmbGlobalKeyService5Mod4);
-            this.Controls.Add(this.cmbGlobalKeyService5Mod2);
-            this.Controls.Add(this.cmbGlobalKeyService5Mod3);
-            this.Controls.Add(this.cmbGlobalKeyService5Mod1);
-            this.Controls.Add(this.cmbGlobalKeyService5Key);
-            this.Controls.Add(this.cmbGlobalKeyService4Mod4);
-            this.Controls.Add(this.cmbGlobalKeyService4Mod2);
-            this.Controls.Add(this.cmbGlobalKeyService4Mod3);
-            this.Controls.Add(this.cmbGlobalKeyService4Mod1);
-            this.Controls.Add(this.cmbGlobalKeyService4Key);
-            this.Controls.Add(this.cmbGlobalKeyService3Mod4);
-            this.Controls.Add(this.cmbGlobalKeyService3Mod2);
-            this.Controls.Add(this.cmbGlobalKeyService3Mod3);
-            this.Controls.Add(this.cmbGlobalKeyService3Mod1);
-            this.Controls.Add(this.cmbGlobalKeyService3Key);
-            this.Controls.Add(this.cmbGlobalKeyService2Mod4);
-            this.Controls.Add(this.cmbGlobalKeyService2Mod2);
-            this.Controls.Add(this.cmbGlobalKeyService2Mod3);
-            this.Controls.Add(this.cmbGlobalKeyService2Mod1);
-            this.Controls.Add(this.cmbGlobalKeyService2Key);
-            this.Controls.Add(this.cmbGlobalKeyService1Mod4);
-            this.Controls.Add(this.cmbGlobalKeyService1Mod2);
-            this.Controls.Add(this.cmbGlobalKeyService1Mod3);
-            this.Controls.Add(this.cmbGlobalKeyService1Mod1);
-            this.Controls.Add(this.cmbGlobalKeyService1Key);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOK);

@@ -152,6 +152,28 @@ namespace hoTools.Utils.Resources {
         
         /// <summary>
         ///   Looks up a localized string similar to //
+        ///// Template DemoRunScript
+        ///// use Script: 
+        ///// - hoDemoScript (3 parameters)
+        ///// - hoDemoPrintContext (2 parameters)
+        /////
+        /////
+        ///select o.ea_guid AS CLASSGUID, o.object_type AS CLASSTYPE,o.Name AS Name,o.object_type As Type 
+        ///from t_object o
+        ///where o.name like &apos;&lt;Search Term&gt;#WC#&apos; AND      o.object_type in 
+        ///     (
+        ///      &quot;Class&quot;,&quot;Component&quot;
+        ///      )
+        ///ORDER BY o.Name.
+        /// </summary>
+        internal static string DemoRunScript {
+            get {
+                return ResourceManager.GetString("DemoRunScript", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to //
         ///// Template DiagramElements_IDS
         /////
         ///select o.ea_guid AS CLASSGUID, o.object_type AS CLASSTYPE,o.Name AS Name,o.object_type As Type 

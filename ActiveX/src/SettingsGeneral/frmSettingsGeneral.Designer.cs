@@ -65,13 +65,13 @@
             this.chkFavoriteSupport = new System.Windows.Forms.CheckBox();
             this.label7 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.rbAutoLoadMdgNo = new System.Windows.Forms.RadioButton();
+            this.rbAutoLoadMdgCompilation = new System.Windows.Forms.RadioButton();
+            this.rbAutoLoadMdgBasic = new System.Windows.Forms.RadioButton();
             this.chkConveyedItemSupport = new System.Windows.Forms.CheckBox();
             this.label34 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.rbAutoLoadMdgBasic = new System.Windows.Forms.RadioButton();
-            this.rbAutoLoadMdgCompilation = new System.Windows.Forms.RadioButton();
-            this.rbAutoLoadMdgNo = new System.Windows.Forms.RadioButton();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -470,6 +470,44 @@
             this.groupBox2.Text = "hoTools MDG to load";
             this.toolTip1.SetToolTip(this.groupBox2, resources.GetString("groupBox2.ToolTip"));
             // 
+            // rbAutoLoadMdgNo
+            // 
+            this.rbAutoLoadMdgNo.AutoSize = true;
+            this.rbAutoLoadMdgNo.Location = new System.Drawing.Point(11, 77);
+            this.rbAutoLoadMdgNo.Name = "rbAutoLoadMdgNo";
+            this.rbAutoLoadMdgNo.Size = new System.Drawing.Size(86, 22);
+            this.rbAutoLoadMdgNo.TabIndex = 2;
+            this.rbAutoLoadMdgNo.TabStop = true;
+            this.rbAutoLoadMdgNo.Text = "No MDG";
+            this.toolTip1.SetToolTip(this.rbAutoLoadMdgNo, "No autoload of MDG.");
+            this.rbAutoLoadMdgNo.UseVisualStyleBackColor = true;
+            // 
+            // rbAutoLoadMdgCompilation
+            // 
+            this.rbAutoLoadMdgCompilation.AutoSize = true;
+            this.rbAutoLoadMdgCompilation.Location = new System.Drawing.Point(11, 49);
+            this.rbAutoLoadMdgCompilation.Name = "rbAutoLoadMdgCompilation";
+            this.rbAutoLoadMdgCompilation.Size = new System.Drawing.Size(187, 22);
+            this.rbAutoLoadMdgCompilation.TabIndex = 1;
+            this.rbAutoLoadMdgCompilation.TabStop = true;
+            this.rbAutoLoadMdgCompilation.Text = "hoToolsCompilation.xml";
+            this.toolTip1.SetToolTip(this.rbAutoLoadMdgCompilation, "Compilation of useful queries & scripts\r\n\r\nSee in installation folder:\r\nc:\\user\\<" +
+        "userName>\\AppData\\Local\\Apps\\hoTools\\..");
+            this.rbAutoLoadMdgCompilation.UseVisualStyleBackColor = true;
+            // 
+            // rbAutoLoadMdgBasic
+            // 
+            this.rbAutoLoadMdgBasic.AutoSize = true;
+            this.rbAutoLoadMdgBasic.Location = new System.Drawing.Point(11, 24);
+            this.rbAutoLoadMdgBasic.Name = "rbAutoLoadMdgBasic";
+            this.rbAutoLoadMdgBasic.Size = new System.Drawing.Size(145, 22);
+            this.rbAutoLoadMdgBasic.TabIndex = 0;
+            this.rbAutoLoadMdgBasic.TabStop = true;
+            this.rbAutoLoadMdgBasic.Text = "hoToolsBasic.xml";
+            this.toolTip1.SetToolTip(this.rbAutoLoadMdgBasic, "Basic queries & scripts\r\n\r\nSee in installation folder:\r\nc:\\user\\<userName>\\AppDat" +
+        "a\\Local\\Apps\\hoTools\\..");
+            this.rbAutoLoadMdgBasic.UseVisualStyleBackColor = true;
+            // 
             // chkConveyedItemSupport
             // 
             this.chkConveyedItemSupport.AutoSize = true;
@@ -515,44 +553,6 @@
             this.label8.Size = new System.Drawing.Size(113, 18);
             this.label8.TabIndex = 237;
             this.label8.Text = "- Blank to hide it";
-            // 
-            // rbAutoLoadMdgBasic
-            // 
-            this.rbAutoLoadMdgBasic.AutoSize = true;
-            this.rbAutoLoadMdgBasic.Location = new System.Drawing.Point(11, 24);
-            this.rbAutoLoadMdgBasic.Name = "rbAutoLoadMdgBasic";
-            this.rbAutoLoadMdgBasic.Size = new System.Drawing.Size(145, 22);
-            this.rbAutoLoadMdgBasic.TabIndex = 0;
-            this.rbAutoLoadMdgBasic.TabStop = true;
-            this.rbAutoLoadMdgBasic.Text = "hoToolsBasic.xml";
-            this.toolTip1.SetToolTip(this.rbAutoLoadMdgBasic, "Basic queries & scripts\r\n\r\nSee in installation folder:\r\nc:\\user\\<userName>\\AppDat" +
-        "a\\Local\\Apps\\hoTools\\..");
-            this.rbAutoLoadMdgBasic.UseVisualStyleBackColor = true;
-            // 
-            // rbAutoLoadMdgCompilation
-            // 
-            this.rbAutoLoadMdgCompilation.AutoSize = true;
-            this.rbAutoLoadMdgCompilation.Location = new System.Drawing.Point(11, 49);
-            this.rbAutoLoadMdgCompilation.Name = "rbAutoLoadMdgCompilation";
-            this.rbAutoLoadMdgCompilation.Size = new System.Drawing.Size(187, 22);
-            this.rbAutoLoadMdgCompilation.TabIndex = 1;
-            this.rbAutoLoadMdgCompilation.TabStop = true;
-            this.rbAutoLoadMdgCompilation.Text = "hoToolsCompilation.xml";
-            this.toolTip1.SetToolTip(this.rbAutoLoadMdgCompilation, "Compilation of useful queries & scripts\r\n\r\nSee in installation folder:\r\nc:\\user\\<" +
-        "userName>\\AppData\\Local\\Apps\\hoTools\\..");
-            this.rbAutoLoadMdgCompilation.UseVisualStyleBackColor = true;
-            // 
-            // rbAutoLoadMdgNo
-            // 
-            this.rbAutoLoadMdgNo.AutoSize = true;
-            this.rbAutoLoadMdgNo.Location = new System.Drawing.Point(11, 77);
-            this.rbAutoLoadMdgNo.Name = "rbAutoLoadMdgNo";
-            this.rbAutoLoadMdgNo.Size = new System.Drawing.Size(86, 22);
-            this.rbAutoLoadMdgNo.TabIndex = 2;
-            this.rbAutoLoadMdgNo.TabStop = true;
-            this.rbAutoLoadMdgNo.Text = "No MDG";
-            this.toolTip1.SetToolTip(this.rbAutoLoadMdgNo, "No autoload of MDG.");
-            this.rbAutoLoadMdgNo.UseVisualStyleBackColor = true;
             // 
             // FrmSettingsGeneral
             // 
