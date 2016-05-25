@@ -126,18 +126,18 @@ CTRL+SHFT+S                     Store sql All
         
 
         /// <summary>
-        /// Add a tab to the tab control and load content into the tab
+        /// Add a tab to the tab control and load content into the tab.If the content is empty nothing is loaded. 
         /// </summary>
         /// <param name="content">Content of the Tab</param>
         /// <returns></returns>
         public TabPage addTab(string content)
         {
             TabPage tabPage = addTab();
-            loadTabPage(content);
+            if (content != "") loadTabPage(content);
             return tabPage;
         }
         /// <summary>
-        /// Add a tab empty Tab to the tab control and load the element template
+        /// Add an Tab to the tab control and load the element template as default
         /// </summary>
         /// <returns></returns>
         public TabPage addTab()
@@ -528,9 +528,9 @@ CTRL+SHFT+S                     Store sql All
             insertOperationTemplateMenuItem.Tag = SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.OPERATION_TEMPLATE);
             insertOperationTemplateMenuItem.Click += new System.EventHandler(insertTemplate_Click);
 
-            // Insert Operation Template
+            // Insert Demo Run Script Template
             ToolStripMenuItem insertDemoRunScriptTemplateMenuItem = new ToolStripMenuItem();
-            insertDemoRunScriptTemplateMenuItem.Text = "Insert Demo run script";
+            insertDemoRunScriptTemplateMenuItem.Text = "Insert Demo Run Script Template";
             id = SqlTemplates.SQL_TEMPLATE_ID.DEMO_RUN_SCRIPT_TEMPLATE;
             insertDemoRunScriptTemplateMenuItem.ToolTipText = SqlTemplates.getTooltip(id);
             insertDemoRunScriptTemplateMenuItem.Tag = SqlTemplates.getTemplate(id);
@@ -684,7 +684,7 @@ CTRL+SHFT+S                     Store sql All
          void newTabAnLoadFromHistoryEntry_Click(object sender, EventArgs e)
         {
             // Add a new Tab
-            TabPage tabPage = addTab();
+            TabPage tabPage = addTab("");
 
             // get TabPage
             SqlFile sqlFile = (SqlFile)tabPage.Tag;
@@ -775,9 +775,19 @@ CTRL+SHFT+S                     Store sql All
         /// <param name="tabContent">What do load in Tab</param>
         public void loadTabPage(string tabContent)
         {
-            // get TabPage
-            if (_tabControl.SelectedIndex < 0) return;
-            TabPage tabPage = _tabControl.TabPages[_tabControl.SelectedIndex];
+            TabPage tabPage;
+            // no tab exists
+            if (_tabControl.TabPages.Count == 0)
+            {
+                tabPage = addTab();
+            }
+            else
+            {
+
+                // get TabPage
+                if (_tabControl.SelectedIndex < 0) return;
+                tabPage = _tabControl.TabPages[_tabControl.SelectedIndex];
+            }
             TextBoxUndo textBox = (TextBoxUndo)tabPage.Controls[0];
             textBox.Text = tabContent;
    
@@ -787,16 +797,29 @@ CTRL+SHFT+S                     Store sql All
 
 
         /// <summary>
-        /// Load from history item
+        /// Load from history item in active tab. If no active tab exists create one.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         void loadFromHistoryEntry_Click(object sender, EventArgs e)
         {
-            // get TabPage
-            if (_tabControl.SelectedIndex < 0) return;
-            TabPage tabPage = _tabControl.TabPages[_tabControl.SelectedIndex];
-            SqlFile sqlFile = (SqlFile)tabPage.Tag;
+            TabPage tabPage;
+            SqlFile sqlFile;
+            // no tab exists
+            if (_tabControl.TabPages.Count == 0)
+            {
+                tabPage = addTab("");
+                sqlFile = (SqlFile)tabPage.Tag;
+                sqlFile.IsChanged = false; // new tab just created
+            }
+            else
+            {
+                // get TabPage
+                if (_tabControl.SelectedIndex < 0) return;
+                tabPage = _tabControl.TabPages[_tabControl.SelectedIndex];
+                sqlFile = (SqlFile)tabPage.Tag;
+            }
+
 
             // get TextBox
             TextBoxUndo textBox = (TextBoxUndo)tabPage.Controls[0];
@@ -954,15 +977,23 @@ CTRL+SHFT+S                     Store sql All
 
 
         /// <summary>
-        /// Load sql string from *.sql File into active TabPage with TextBox inside.
+        /// Load sql string from *.sql File into active TabPage with TextBox inside. 
         /// <para/>- Update and save the list of sql files 
         /// </summary>
         public void loadTabPagePerFileDialog()
         {
-            // get TabPage
-            if (_tabControl.SelectedIndex < 0) return;
-            TabPage tabPage = _tabControl.TabPages[_tabControl.SelectedIndex];
-
+            TabPage tabPage;
+            // no tab page exists
+            if (_tabControl.TabPages.Count == 0)
+            {
+                tabPage = addTab();
+            }
+            else
+            {
+                // get TabPage
+                if (_tabControl.SelectedIndex < 0) return;
+                tabPage = _tabControl.TabPages[_tabControl.SelectedIndex];
+            }
             OpenFileDialog openFileDialog = new OpenFileDialog();
 
             openFileDialog.InitialDirectory = @"c:\temp\sql";

@@ -622,8 +622,16 @@ cellSpacing=0 cellPadding=2 width="99%">
 <UL>
   <LI><FONT size=3>Run Script (VB, JavaScript, JScript) on query result 
   rows</FONT> 
-  <LI><FONT size=3>Start with Template 'DemoRunScript'</FONT></LI></UL>
-<P><IMG border=0 hspace=0 
+  <LI><FONT size=3>Start with Template 'DemoRunScript'</FONT> 
+  <LI><FONT size=3>Show Script error</FONT> 
+  <LI><FONT size=3>Run Script</FONT> 
+  <LI><FONT size=3>Show Script</FONT> 
+  <LI><FONT size=3>Help:</FONT> 
+  <UL>
+    <LI><FONT size=3>Template "DemoRunScript" für SQL Query</FONT> 
+    <LI><FONT size=3>2 Demo Scripts (hoDemoPrintContext, hoDemoScript) in MDG 
+    hoTools...</FONT></LI></UL></LI></UL>
+<P><IMG style="HEIGHT: 452px; WIDTH: 747px" border=0 hspace=0 
 alt="Run Script (VB, JavaScript, JScript) on query result rows" 
 src="file:///D:/hoData/Development/GitHub/EnterpriseArchitect_hoTools/Addin/image/SqlQueryAndScript.png" 
 align=baseline></P>
@@ -635,16 +643,14 @@ align=baseline></P>
     <LI><FONT size=4><IMG style="HEIGHT: 183px; WIDTH: 363px" border=0 hspace=0 
     alt="" 
     src="file:///D:/hoData/Development/GitHub/EnterpriseArchitect_hoTools/Addin/image/ScriptingView.png" 
-    align=right>Tip: Start query with ... </FONT>
-    <LI><FONT size=4>select o.ea_guid AS CLASSGUID, o.object_type AS 
+    align=right>Tip: Start with Template "DemoRunScript"</FONT> 
+    <LI><FONT size=4>e.g.: select o.ea_guid AS CLASSGUID, o.object_type AS 
     CLASSTYPE</FONT></LI></UL>
   <LI><FONT size=4>Develop a&nbsp;Script to execute&nbsp;every found row of the 
-  query</FONT> 
+  query</FONT> </LI>
   <UL>
-    <LI><FONT size=4>Fix tag to identify Script at the beginning (compatible to 
-    Geerts Scripting):</FONT> 
-    <UL>
-      <LI><FONT size=4>'EA-Matic&nbsp; </FONT></LI></UL>
+    <LI><FONT size=4>Fix tag "EA-Matic" somewhere inside Script (compatible to 
+    Geerts Scripting)</FONT></LI>
     <LI><FONT size=4>Exactly one GUID has to be inside the query results</FONT> 
     <LI><FONT size=4>Tip: Use example of Scripting View (Group=hoTools...Basic 
     or...)</FONT> 
@@ -670,11 +676,13 @@ align=baseline></P>
 <UL>
   <LI><FONT size=3>hoToolsBasic</FONT> 
   <LI><FONT size=3>hoToolsCompilation</FONT></LI></UL>
-<P><FONT size=3>you find the Script Group 'hoToolsBasic' with the VB 
-Scripts:</FONT></P>
+<P><FONT size=3>you find the Script Group 'hoToolsBasic' or 'hoToolsCompilation' 
+with the VB Scripts (One line with "EA-Matic"):</FONT></P>
 <UL>
   <LI><FONT size=3>hoDemoPrintContext</FONT> 
-  <LI><FONT size=3>hoDemoScript</FONT></LI></UL></BODY></HTML>
+  <LI><FONT size=3>hoDemoScript</FONT></LI></UL>
+<P><FONT size=3>The SQL Query template "DemoRunScript" is an example how to 
+build an SQL Query.</FONT></P></BODY></HTML>
 Find and Replace	K000011K002032<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML><HEAD><TITLE>Find and Replace</TITLE>
 <META content="text/html; charset=unicode" http-equiv=Content-Type>
