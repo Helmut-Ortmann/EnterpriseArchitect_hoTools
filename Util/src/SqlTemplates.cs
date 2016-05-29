@@ -462,7 +462,7 @@ ORDER BY 3",
         }
 
         /// <summary>
-        /// Replace Macro by value. Possible Macros are: Search Term, ID, GUID, Package ID, Branch ID,... 
+        /// Replace Macro and 'Search Term' by value. Possible Macros are: Search Term, ID, GUID, Package ID, Branch ID,... 
         /// <para/>- convert all macros to lower case
         /// </summary>
         /// <param name="rep"></param>

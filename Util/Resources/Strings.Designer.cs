@@ -205,6 +205,49 @@ namespace hoTools.Utils.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &apos;EA-Matic
+        ///&apos;[path=\Framework\ho\hoTools]
+        ///&apos;[group=hoTools]
+        ///!INC Local Scripts.EAConstants-VBScript
+        ///&apos; Dim doesn&apos;t work (syntax error)
+        ///&apos; Object &apos;Session&apos; doesn&apos;t exist (use  Repository.WriteOutput &quot;Script&quot;, &quot;MyTest&quot;,0)
+        ///&apos; Var &apos;Repository&apos; is loaded
+        ///&apos; You may create an instance &apos;EAAddinFramework.Utils.Model&apos; of the first running EA-Instance
+        ///
+        ///function hoDemoPrintContext(modelItem, objectType)
+        ///    &apos;Dim itemType as 5
+        ///	itemType = &quot;unknown&quot;
+        ///	Select Case objectType
+        ///	    Case otElement
+        ///			itemType = &quot;Eleme [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string hoDemo2ParScript {
+            get {
+                return ResourceManager.GetString("hoDemo2ParScript", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;EA-Matic
+        ///&apos; Usage of Geert Bellekens Script Framework to administer Scripts recommended
+        ///&apos;[path=\Framework\ho\hoTools]
+        ///&apos;[group=hoTools]
+        ///&apos;option explicit
+        ///
+        ///!INC Local Scripts.EAConstants-VBScript
+        ///&apos;----------------------------------------------------------------------
+        ///&apos; Dim doesn&apos;t work (syntax error, used in EA for intellissense)
+        ///&apos; Object &apos;Session&apos; doesn&apos;t exist (use  Repository.WriteOutput &quot;Script&quot;, &quot;MyTest&quot;,0)
+        ///&apos; Var &apos;Repository&apos; is loaded by script environment
+        ///&apos; You may create an instance &apos;EAAddin [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string hoDemo3ParScript {
+            get {
+                return ResourceManager.GetString("hoDemo3ParScript", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
         ///&lt;RootSearch&gt;&lt;Search Name=&quot;Favorites&quot; GUID=&quot;{A70B9F0E-14CD-4c03-B8FE-21C644DC2D5E}&quot; 
         ///PkgGUID=&quot;-1&quot; Type=&quot;0&quot; LnksToObj=&quot;0&quot; CustomSearch=&quot;1&quot; AddinAndMethodName=&quot;&quot;&gt;&lt;SrchOn&gt;

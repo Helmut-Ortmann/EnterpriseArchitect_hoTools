@@ -84,7 +84,7 @@ namespace EAAddinFramework.Utils
 
 		}
 		/// <summary>
-		/// creaates a new script
+		/// creates a new script
 		/// </summary>
 		/// <param name="scriptID">the id of the script</param>
 		/// <param name="scriptName">the name of the script</param>
@@ -141,7 +141,7 @@ namespace EAAddinFramework.Utils
 			}
 			catch (Exception e)
 			{
-				//the addCode didn't work, probably because of a syntax error, or unsupported syntaxt in the code
+				//the addCode didn't work, probably because of a syntax error, or unsupported syntax in the code
 				var iscriptControl = this.scriptController as MSScriptControl.IScriptControl;
 				this.errorMessage = e.Message + " ERROR : " + iscriptControl.Error.Description + " | Line of error: " + iscriptControl.Error.Line + " | Code error: " + iscriptControl.Error.Text;
                 // use only the error message in the Script object
@@ -206,9 +206,9 @@ namespace EAAddinFramework.Utils
 		}
 			
 		/// <summary>
-		/// loads the mdg scripts from the locations added from MDG Technologies|Advanced. 
+		/// loads the MDG scripts from the locations added from MDG Technologies|Advanced. 
 		/// these locations are stored as a comma separated string in the registry
-		/// a location can either be a directory, or an url
+		/// a location can either be a directory, or an URL
 		/// </summary>
 		private static void loadOtherMDGScripts()
 		{
@@ -219,10 +219,10 @@ namespace EAAddinFramework.Utils
 				string[] mdgPaths = pathList.Split(',');
 				foreach (string mdgPath in mdgPaths) 
 				{
-					//figure out it we have a folderpath or an url
+					//figure out it we have a folder path or an URL
 					if (mdgPath.StartsWith("http",StringComparison.InvariantCultureIgnoreCase))
 				    {
-						//url
+						//URL
 						loadMDGScriptsFromURL(mdgPath);
 				    }
 					else
@@ -235,9 +235,9 @@ namespace EAAddinFramework.Utils
 	
 		}
 		/// <summary>
-		/// load the mdg scripts from the mdg file located at the given url
+		/// load the MDG scripts from the MDG file located at the given URL
 		/// </summary>
-		/// <param name="url">the url pointing to the mdg file</param>
+		/// <param name="url">the URL pointing to the MDG file</param>
 		private static void loadMDGScriptsFromURL(string url)
 		{
 			try
@@ -250,7 +250,7 @@ namespace EAAddinFramework.Utils
 			}
 		}
 		/// <summary>
-		/// get the mdg files in the local MDGtechnologies folder
+		/// get the MDG files in the local MDGtechnologies folder
 		/// </summary>
 		private static void loadLocalMDGScripts()
 		{
@@ -258,7 +258,7 @@ namespace EAAddinFramework.Utils
 			loadMDGScriptsFromFolder(mdgDirectory);
 		}
 		/// <summary>
-		/// load the scripts from the mdg files in the given directory
+		/// load the scripts from the MDG files in the given directory
 		/// </summary>
 		/// <param name="folderPath">the path to the directory</param>
 		private static void loadMDGScriptsFromFolder(string folderPath)
@@ -277,11 +277,11 @@ namespace EAAddinFramework.Utils
                 
 			}
 		}
-		/// <summary>
-		/// loads the scripts described in the MDG file into the includable scripts
-		/// </summary>
-		/// <param name="mdgXmlContent">the string content of the mdg file</param>
-		private static void loadMDGScripts(string mdgXmlContent)
+        /// <summary>
+        /// loads the scripts described in the MDG file into the includable scripts
+        /// </summary>
+        /// <param name="mdgXmlContent">the string content of the MDG file</param>
+        private static void loadMDGScripts(string mdgXmlContent)
 		{
 			try
 			{
@@ -305,7 +305,7 @@ namespace EAAddinFramework.Utils
 						XmlNode contentNode = scriptElement.SelectSingleNode("Content");
 						if (contentNode != null)
 						{
-							//the script itstelf is base64 endcoded in the content tag
+							//the script itself is base64 encoded in the content tag
 							string scriptcontent = System.Text.Encoding.Unicode.GetString( System.Convert.FromBase64String(contentNode.InnerText));
                             string key = "!INC " + mdgName + "." + scriptName;
                             // key exists
@@ -424,7 +424,7 @@ namespace EAAddinFramework.Utils
 			 //otherwise we returned the cached scripts
 			 if (newHash != scriptHash)
 			 {
-			  //set the new hashcode
+			  //set the new hash code
 			  scriptHash = newHash;
 			  //reset scripts
 		 	  allScripts = new List<Script>();
@@ -436,7 +436,7 @@ namespace EAAddinFramework.Utils
 		 	  XmlNodeList scriptNodes = xmlScripts.SelectNodes("//Row");
               foreach (XmlNode scriptNode in scriptNodes)
               {
-              	//get the <notes> node. If it countaints "Group Type=" then it is a group. Else we need to find "Language=" 
+              	//get the <notes> node. If it contains "Group Type=" then it is a group. Else we need to find "Language=" 
               	XmlNode notesNode = scriptNode.SelectSingleNode(model.formatXPath("Notes"));
               	if (notesNode.InnerText.Contains(scriptLanguageIndicator))
           	    {
@@ -451,7 +451,7 @@ namespace EAAddinFramework.Utils
 					//get the group
 					XmlNode groupNode = scriptNode.SelectSingleNode(model.formatXPath("SCRIPTGROUP"));
 					string groupName = groupNode.InnerText;
-					//then get teh code
+					//then get the code
 					XmlNode codeNode = scriptNode.SelectSingleNode(model.formatXPath("Script"));	
 					if (codeNode != null && language != string.Empty)
 					{
@@ -514,14 +514,14 @@ namespace EAAddinFramework.Utils
         /// </summary>
         /// <param name="functionName">name of the function to execute</param>
         /// <param name="parameters">the parameters needed by this function</param>
-        /// <returns>whathever (if anything) the function returns</returns>
+        /// <returns>whatever (if anything) the function returns</returns>
         internal object executeFunction(string functionName, object[] parameters)
             => this.scriptController.Run(functionName, parameters);
         /// <summary>
         /// executes the function with the given name
         /// </summary>
         /// <param name="functionName">name of the function to execute</param>
-        /// <returns>whathever (if anything) the function returns</returns>
+        /// <returns>whatever (if anything) the function returns</returns>
         internal object executeFunction(string functionName) 
             => this.scriptController.Run(functionName, new object[0]);
         /// <summary>
@@ -531,7 +531,7 @@ namespace EAAddinFramework.Utils
         /// <returns>the new function</returns>
         public ScriptFunction addFunction(MethodInfo operation)
 		{
-			//translate the methodeinfo into code
+			//translate the method info into code
 			string functionCode = this.language.translate(operation);
 			//add the code to the script
 			this.addCode(functionCode);

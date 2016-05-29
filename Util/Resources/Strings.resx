@@ -273,6 +273,91 @@ where o.object_ID in (#DiagramSelectedElements_IDS#)
   
 ORDER BY o.Name</value>
   </data>
+  <data name="hoDemo2ParScript" xml:space="preserve">
+    <value>'EA-Matic
+'[path=\Framework\ho\hoTools]
+'[group=hoTools]
+!INC Local Scripts.EAConstants-VBScript
+' Dim doesn't work (syntax error)
+' Object 'Session' doesn't exist (use  Repository.WriteOutput "Script", "MyTest",0)
+' Var 'Repository' is loaded
+' You may create an instance 'EAAddinFramework.Utils.Model' of the first running EA-Instance
+
+function hoDemoPrintContext(modelItem, objectType)
+    'Dim itemType as 5
+	itemType = "unknown"
+	Select Case objectType
+	    Case otElement
+			itemType = "Element"
+		Case otPackage
+			itemType = "Package"
+		Case otDiagram
+			itemType = "Diagram"
+		Case otAttribute
+			itemType = "Attribute"
+		Case otOperation
+			itemType = "Operation"
+	End Select
+	Dim s 
+	s = "hoDemoPrintContext: Context item is: '" + modelItem.Name + "' of type '" + itemType + "'"
+    ' Output to EA			
+    Repository.EnsureOutputVisible("Script") 
+	Repository.WriteOutput "Script", s, 0
+end function</value>
+    <comment>Demo Script to show Script functionality with 2 Parameters</comment>
+  </data>
+  <data name="hoDemo3ParScript" xml:space="preserve">
+    <value>'EA-Matic
+' Usage of Geert Bellekens Script Framework to administer Scripts recommended
+'[path=\Framework\ho\hoTools]
+'[group=hoTools]
+'option explicit
+
+!INC Local Scripts.EAConstants-VBScript
+'----------------------------------------------------------------------
+' Dim doesn't work (syntax error, used in EA for intellissense)
+' Object 'Session' doesn't exist (use  Repository.WriteOutput "Script", "MyTest",0)
+' Var 'Repository' is loaded by script environment
+' You may create an instance 'EAAddinFramework.Utils.Model' of the first running EA-Instance
+
+'---------------------------------------------------------------------
+' Par1: ModelItem (diagram, package, element)
+' Par2: ObjectType
+' Par3: Model (methods and attributes see code in https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools.git)
+function hoDemo3Parameter(ModelItem, ObjectType, Model)
+   ' The EA default variable 'Repository'
+    'Repository.ClearOutput("Script")
+    Repository.EnsureOutputVisible("Script") 
+
+    ' just output the parameters
+	Repository.WriteOutput "Script","Par1: '"+ CStr(ObjectType) + "' Par2: '" + ModelItem.Name + "' Par3: '" + Model + "'",0
+	
+	' Get Repository via Model object.
+    set m = CreateObject("EAAddinFramework.Utils.Model")
+    ' Create new Model Object with the first running EA instance
+	set rep = m.Repository
+	rep.EnsureOutputVisible("Script") 
+	rep.WriteOutput "Script","Par1: '"+ CStr(ObjectType) + "' Par2: '" + ModelItem.Name + "' Par3: '" + Model + "'",0
+	
+	itemType = "unknown"
+	Select Case ObjectType
+	    Case otElement
+			itemType = "Element"
+		Case otPackage
+			itemType = "Package"
+		Case otDiagram
+			itemType = "Diagram"
+		Case otAttribute
+			itemType = "Attribute"
+		Case otOperation
+			itemType = "Operation"
+	End Select
+	rep.WriteOutput "Script", "hoDemo3Parameter: item type='" + itemType + "', name='" + ModelItem.Name + "' found.",0
+	rep.WriteOutput "Script","----------------------------------------------------",0
+
+end function</value>
+    <comment>Demo Script to show Script functionality with 3 Parameters</comment>
+  </data>
   <data name="SearchFavorite" xml:space="preserve">
     <value>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;RootSearch&gt;&lt;Search Name="Favorites" GUID="{A70B9F0E-14CD-4c03-B8FE-21C644DC2D5E}" 
@@ -283,5 +368,6 @@ PkgGUID="-1" Type="0" LnksToObj="0" CustomSearch="1" AddinAndMethodName=""&gt;&l
   </data>
   <data name="SearchFavoriteName" xml:space="preserve">
     <value>Favorites</value>
+    <comment>Demo script to show functionality of scripts</comment>
   </data>
 </root>
