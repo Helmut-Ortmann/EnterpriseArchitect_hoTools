@@ -190,9 +190,20 @@ namespace EAAddinFramework.Utils
             }
             return repoType;
         }
+        /// <summary>
+        /// Execute SQL and catch Exception
+        /// </summary>
+        /// <param name="SQLString"></param>
         public void executeSQL(string SQLString)
         {
-            this.Repository.Execute(SQLString);
+            try
+            {
+                this.Repository.Execute(SQLString);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($"SQL execute:\r\n{SQLString}\r\n{e.Message}", "Error SQL execute");
+            }
         }
         /// <summary>
         /// formats an xpath according to the type of database.
