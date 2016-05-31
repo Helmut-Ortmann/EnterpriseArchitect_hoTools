@@ -73,5 +73,25 @@
         <lineHash>5+obWEMuHaopxcz4zj6nOWbxQXD85sDzYgO3YMTYm1Q=</lineHash>
       </position>
     </Favorite>
+    <Favorite>
+      <name>EaScriptGroup.cs</name>
+      <path>addinframework\util\script\eascriptgroup.cs</path>
+      <absolutePath>d:\hodata\development\github\enterprisearchitect_hotools\addinframework\util\script\eascriptgroup.cs</absolutePath>
+      <position>
+        <line>20</line>
+        <column>1</column>
+        <lineHash>ECtRuXZaVqPomffPDuOOUlH5xQOzV7MwpJGD63sVVgQ=</lineHash>
+      </position>
+    </Favorite>
+    <Favorite>
+      <name>EaScript.cs</name>
+      <path>AddinFramework\Util\Script\EaScript.cs</path>
+      <absolutePath>D:\hoData\Development\GitHub\EnterpriseArchitect_hoTools\AddinFramework\Util\Script\EaScript.cs</absolutePath>
+      <position>
+        <line>23</line>
+        <column>5</column>
+        <lineHash>uD0z6/4Gimz211bpZGlmR+7A0WzHv2T8Ocp9dpyO3XE=</lineHash>
+      </position>
+    </Favorite>
   </favorites>
 </Favorites>

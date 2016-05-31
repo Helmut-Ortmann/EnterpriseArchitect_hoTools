@@ -71,6 +71,7 @@ namespace hoTools.Query
             this.saveAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadStandardScriptsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -80,7 +81,6 @@ namespace hoTools.Query
             this.splitContainer = new System.Windows.Forms.SplitContainer();
             this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
-            this.loadStandardScriptsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewScripts)).BeginInit();
             this.contextMenuStripDataGrid.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -477,6 +477,13 @@ namespace hoTools.Query
             this.settingsToolStripMenuItem.ToolTipText = "View and change settings of Scripts and Queries";
             this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
             // 
+            // loadStandardScriptsToolStripMenuItem
+            // 
+            this.loadStandardScriptsToolStripMenuItem.Name = "loadStandardScriptsToolStripMenuItem";
+            this.loadStandardScriptsToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
+            this.loadStandardScriptsToolStripMenuItem.Text = "LoadStandardScripts";
+            this.loadStandardScriptsToolStripMenuItem.Click += new System.EventHandler(this.loadStandardScriptsToolStripMenuItem_Click);
+            // 
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -579,13 +586,6 @@ namespace hoTools.Query
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
             this.flowLayoutPanel2.Size = new System.Drawing.Size(769, 25);
             this.flowLayoutPanel2.TabIndex = 11;
-            // 
-            // loadStandardScriptsToolStripMenuItem
-            // 
-            this.loadStandardScriptsToolStripMenuItem.Name = "loadStandardScriptsToolStripMenuItem";
-            this.loadStandardScriptsToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
-            this.loadStandardScriptsToolStripMenuItem.Text = "LoadStandardScripts";
-            this.loadStandardScriptsToolStripMenuItem.Click += new System.EventHandler(this.loadStandardScriptsToolStripMenuItem_Click);
             // 
             // QueryGUI
             // 

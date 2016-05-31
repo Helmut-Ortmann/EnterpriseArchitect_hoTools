@@ -836,7 +836,12 @@ namespace hoTools.Query
         {
             // new script group
             var group = new EaScriptGroup(Model, "hoTools",EaScriptGroup.EaScriptGroupType.NORMAL);
-            if (! group.exists()) group.save(); 
+            if (! group.exists()) group.save();
+
+            // new script for script group
+            var script = new EaScript(Model, "hoDemo2Par", "Internal", "VBScript", group.GUID);
+            if (!script.exists()) script.save();
+            script.save();
         }
     }
 }

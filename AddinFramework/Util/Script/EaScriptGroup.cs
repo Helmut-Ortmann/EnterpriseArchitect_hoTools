@@ -16,22 +16,26 @@ namespace EAAddinFramework.Utils
             MODELSEARCH
         }
         // Script Category of a Script
-        const string SCRIPT_GROUP_ID = "3955A83E-9E54-4810-8053-FACC68CD4782";
+        const string SCRIPT_GROUP_CATEGORY = "3955A83E-9E54-4810-8053-FACC68CD4782";
+
+        public string Name => _name;
+        public int ID => _id;
+        public string GUID => _guid;
 
         #region Constructor
-        string _groupName;  // Group Name
-        string _scriptName; // GUID of Script or Group
-        int _scriptId;      // Script ID
+        string _name;  // Group Name
+        string _guid; // GUID of Script or Group
+        int _id;      // Script ID
         string _note;
         Model _model;
         EaScriptGroupType _groupType;
-        public EaScriptGroup(Model model, string groupName, EaScriptGroupType groupType)
+        public EaScriptGroup(Model model, string name, EaScriptGroupType groupType)
         {
-            init(model, groupName, groupType, "");
+            init(model, name, groupType, "");
         }
-        public EaScriptGroup(Model model, string groupName, EaScriptGroupType groupType, string note)
+        public EaScriptGroup(Model model, string name, EaScriptGroupType groupType, string note)
         {
-            init(model, groupName, groupType, note);
+            init(model, name, groupType, note);
         }
     /// <summary>
     /// Initialize ScriptGroup
@@ -43,25 +47,25 @@ namespace EAAddinFramework.Utils
         void init(Model model, string groupName, EaScriptGroupType groupType, string note)
         {
             _model = model;
-            _groupName = groupName;
+            _name = groupName;
             _groupType = groupType;
             _note = note;
         }
 
         public bool exists()
         {
-            getScriptInfo();
-            return (_scriptId > 0);
+            getInfo();
+            return (_id > 0);
 
             
         }
 
-        void getScriptInfo()
+        void getInfo()
         {
             string sql = "select s.[ScriptID], s.[ScriptName] " +
                          " from t_script s " +
                          $" where s.Notes like '<Group Type=\"{getGroupType()}\"*'    AND " +
-                         $"       s.Script = '{_groupName}'  ";
+                         $"       s.Script = '{_name}'  ";
             // run query into XDocument to proceed with LinQ
             string xml = _model.SQLQueryNative(sql);
             var x = new XDocument(XDocument.Parse(xml));
@@ -69,12 +73,12 @@ namespace EAAddinFramework.Utils
             // get scriptID
             var scriptIDNode = x.Descendants("ScriptID").FirstOrDefault();
             if (scriptIDNode == null) return;
-            _scriptId = (int)scriptIDNode;
+            _id = (int)scriptIDNode;
 
             // get scriptName
             var scriptNameNode = x.Descendants("ScriptName").FirstOrDefault();
             if (scriptNameNode == null) return;
-            _scriptName = scriptNameNode.Value;
+            _guid = scriptNameNode.Value;
             return; 
 
         }
@@ -87,9 +91,9 @@ namespace EAAddinFramework.Utils
         {
             var GUID = "{" + Guid.NewGuid() + "}";
             string sql = "insert into t_script (ScriptCategory, ScriptName,Notes, Script) " +
-                    $" Values ('{SCRIPT_GROUP_ID}','{GUID}','<Group Type=\"{getGroupType()}\" Notes=\"\"/>','{_groupName}')";
+                    $" Values ('{SCRIPT_GROUP_CATEGORY}','{GUID}','<Group Type=\"{getGroupType()}\" Notes=\"\"/>','{_name}')";
             _model.executeSQL(sql);
-            getScriptInfo();
+            getInfo();
             return true;
         }
         string getGroupType()
