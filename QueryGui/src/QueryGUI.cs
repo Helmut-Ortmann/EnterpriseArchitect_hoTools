@@ -11,8 +11,10 @@ using System.Collections.Generic;
 using EAAddinFramework.Utils;
 using hoTools.Settings;
 using hoTools.EaServices;
+using System.Resources;
 
 using System.IO;
+using System.Reflection; // Resource Manager
 
 
 
@@ -834,13 +836,21 @@ namespace hoTools.Query
         /// <param name="e"></param>
         void loadStandardScriptsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // new script group
+            // new script group "hoTools"
             var group = new EaScriptGroup(Model, "hoTools",EaScriptGroup.EaScriptGroupType.NORMAL);
             if (! group.exists()) group.save();
 
-            // new script for script group
-            var script = new EaScript(Model, "hoDemo2Par", "Internal", "VBScript", group.GUID);
-            if (!script.exists()) script.save();
+            // get scripts to create
+            ResourceManager rm = new ResourceManager("hoTools.Query.Resources.Scripts", Assembly.GetExecutingAssembly());
+
+            // new script for script group "hoTools"
+            string code = rm.GetString("hoDemo2ParScript");
+            var script = new EaScript(Model, "hoDemo2Par", "Internal", "VBScript", group.GUID, code);
+            script.save();
+
+            // new script for script group "hoTools"
+            code = rm.GetString("hoDemo3ParScript");
+            script = new EaScript(Model, "hoDemo3Par", "Internal", "VBScript", group.GUID, code);
             script.save();
         }
     }
