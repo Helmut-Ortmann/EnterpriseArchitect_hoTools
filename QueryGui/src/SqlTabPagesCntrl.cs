@@ -36,6 +36,7 @@ CTRL+SHFT+S                     Store sql All
 #DiagramSelectedElements_IDS#    Selected Diagram Objects of selected Diagram / current Diagram 
 #InBranch#                      Selected Package, Replaced by nested recursive as comma separated list of PackageIDs  like 'IN (13,14,15)'
 #Package#                       Selected Package, Diagram, Element, Attribute, Operation, Replaced by containing Package ID
+#PackageID#                     Selected Package, Diagram, Element, Attribute, Operation, Replaced by containing Package ID
 ##TreeSelectedGUIDS##           In Browser selected Elements as a list of comma separated GUIDS like 'IN (##TreeSelectedGUIDS##)'
 #WC#                            Wild card, you can also simple use * (will automatically replaced by the DB specific wild card)
 #DB=ACCESS2007#                 DB specif SQL for ACCESS2007
@@ -369,6 +370,14 @@ CTRL+SHFT+S                     Store sql All
             insertTreeSelectedGUIDSMenuItem.Tag = SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.TREE_SELECTED_GUIDS);
             insertTreeSelectedGUIDSMenuItem.Click += insertTemplate_Click;
 
+            // newGuid
+            ToolStripMenuItem insertNewGuid = new ToolStripMenuItem();
+            id = SqlTemplates.SQL_TEMPLATE_ID.NEW_GUID;
+            insertNewGuid.Text = "Insert " + SqlTemplates.getTemplateText(id);
+            insertNewGuid.ToolTipText = SqlTemplates.getTooltip(id);
+            insertNewGuid.Tag = SqlTemplates.getTemplate(id);
+            insertNewGuid.Click += insertTemplate_Click;
+
             // Insert #WC#
             ToolStripMenuItem insertWcMenuItem = new ToolStripMenuItem();
             insertWcMenuItem.Text = "Insert "+ SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.WC);
@@ -391,6 +400,8 @@ CTRL+SHFT+S                     Store sql All
                 insertDiagramElements_IDMenuItem,
                 insertDiagramElements_IDSMenuItem,
                 insertDiagramSelectedElements_IDSMenuItem,
+                new ToolStripSeparator(),
+                insertNewGuid,
                 new ToolStripSeparator(),
                 insertTreeSelectedGUIDSMenuItem,
                 insertWcMenuItem
@@ -536,6 +547,31 @@ CTRL+SHFT+S                     Store sql All
             insertDemoRunScriptTemplateMenuItem.Tag = SqlTemplates.getTemplate(id);
             insertDemoRunScriptTemplateMenuItem.Click += insertTemplate_Click;
 
+            //----------------------------------------------------------------------------------
+            // Insert Element in current Package
+            ToolStripMenuItem insertItemIntoPackageMenuItem = new ToolStripMenuItem();
+            id = SqlTemplates.SQL_TEMPLATE_ID.INSERT_ITEM_IN_PACKAGE_TEMPLATE;
+            insertItemIntoPackageMenuItem.Text = "Insert Insert Template";
+            insertItemIntoPackageMenuItem.ToolTipText = SqlTemplates.getTooltip(id);
+            insertItemIntoPackageMenuItem.Tag = SqlTemplates.getTemplate(id);
+            insertItemIntoPackageMenuItem.Click += insertTemplate_Click;
+
+            // Update current selected Item
+            ToolStripMenuItem updateCurrentElementMenuItem = new ToolStripMenuItem();
+            id = SqlTemplates.SQL_TEMPLATE_ID.UPDATE_ITEM_TEMPLATE;
+            updateCurrentElementMenuItem.Text = "Insert Update Template";
+            updateCurrentElementMenuItem.ToolTipText = SqlTemplates.getTooltip(id);
+            updateCurrentElementMenuItem.Tag = SqlTemplates.getTemplate(id);
+            updateCurrentElementMenuItem.Click += insertTemplate_Click;
+
+            // Delete tree selected Items
+            ToolStripMenuItem deleteTreeSelectedItemsMenuItem = new ToolStripMenuItem();
+            id = SqlTemplates.SQL_TEMPLATE_ID.DELETED_TREE_SELECTED_ITEMS;
+            deleteTreeSelectedItemsMenuItem.Text = "Insert Delete Template";
+            deleteTreeSelectedItemsMenuItem.ToolTipText = SqlTemplates.getTooltip(id);
+            deleteTreeSelectedItemsMenuItem.Tag = SqlTemplates.getTemplate(id);
+            deleteTreeSelectedItemsMenuItem.Click += insertTemplate_Click;
+
             //---------------------------------------------------------------------------------------------------------
             // DB Templates
             ToolStripMenuItem insertDBTemplateMenuItem = new ToolStripMenuItem();
@@ -633,6 +669,11 @@ CTRL+SHFT+S                     Store sql All
                 new ToolStripSeparator(),
                 insertAttributeTemplateMenuItem,
                 insertOperationTemplateMenuItem,
+
+                new ToolStripSeparator(),  // Insert, Update, Delete
+                insertItemIntoPackageMenuItem,
+                updateCurrentElementMenuItem,
+                deleteTreeSelectedItemsMenuItem,
                 new ToolStripSeparator(),
                 insertDemoRunScriptTemplateMenuItem,
                 insertDBTemplateMenuItem

@@ -94,9 +94,11 @@ namespace hoTools.Query
             // 
             // txtSearchTerm
             // 
-            this.txtSearchTerm.Location = new System.Drawing.Point(394, 3);
+            this.txtSearchTerm.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtSearchTerm.Location = new System.Drawing.Point(302, 3);
+            this.txtSearchTerm.MinimumSize = new System.Drawing.Size(50, 0);
             this.txtSearchTerm.Name = "txtSearchTerm";
-            this.txtSearchTerm.Size = new System.Drawing.Size(223, 20);
+            this.txtSearchTerm.Size = new System.Drawing.Size(100, 20);
             this.txtSearchTerm.TabIndex = 7;
             this.toolTip1.SetToolTip(this.txtSearchTerm, resources.GetString("txtSearchTerm.ToolTip"));
             this.txtSearchTerm.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSearchTerm_KeyDown);
@@ -162,7 +164,7 @@ namespace hoTools.Query
             this.dataGridViewScripts.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridViewScripts.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
             this.dataGridViewScripts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewScripts.Size = new System.Drawing.Size(767, 146);
+            this.dataGridViewScripts.Size = new System.Drawing.Size(767, 147);
             this.dataGridViewScripts.TabIndex = 3;
             this.toolTip1.SetToolTip(this.dataGridViewScripts, resources.GetString("dataGridViewScripts.ToolTip"));
             this.dataGridViewScripts.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dataGridViewScripts_MouseClick);
@@ -260,7 +262,7 @@ namespace hoTools.Query
             // btnUndo
             // 
             this.btnUndo.Image = global::hoTools.Query.Properties.Resources.icon_undo_h;
-            this.btnUndo.Location = new System.Drawing.Point(290, 3);
+            this.btnUndo.Location = new System.Drawing.Point(198, 3);
             this.btnUndo.Name = "btnUndo";
             this.btnUndo.Size = new System.Drawing.Size(32, 23);
             this.btnUndo.TabIndex = 9;
@@ -271,7 +273,7 @@ namespace hoTools.Query
             // btnRedo
             // 
             this.btnRedo.Image = global::hoTools.Query.Properties.Resources.icon_redo_h;
-            this.btnRedo.Location = new System.Drawing.Point(328, 3);
+            this.btnRedo.Location = new System.Drawing.Point(236, 3);
             this.btnRedo.Name = "btnRedo";
             this.btnRedo.Size = new System.Drawing.Size(31, 23);
             this.btnRedo.TabIndex = 11;
@@ -283,7 +285,7 @@ namespace hoTools.Query
             // 
             this.btnSave.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.Image")));
             this.btnSave.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnSave.Location = new System.Drawing.Point(176, 3);
+            this.btnSave.Location = new System.Drawing.Point(84, 3);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(32, 32);
             this.btnSave.TabIndex = 12;
@@ -296,7 +298,7 @@ namespace hoTools.Query
             // 
             this.btnSaveAll.Image = ((System.Drawing.Image)(resources.GetObject("btnSaveAll.Image")));
             this.btnSaveAll.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnSaveAll.Location = new System.Drawing.Point(214, 3);
+            this.btnSaveAll.Location = new System.Drawing.Point(122, 3);
             this.btnSaveAll.Name = "btnSaveAll";
             this.btnSaveAll.Size = new System.Drawing.Size(32, 32);
             this.btnSaveAll.TabIndex = 13;
@@ -309,7 +311,7 @@ namespace hoTools.Query
             // 
             this.btnSaveAs.Image = ((System.Drawing.Image)(resources.GetObject("btnSaveAs.Image")));
             this.btnSaveAs.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnSaveAs.Location = new System.Drawing.Point(252, 3);
+            this.btnSaveAs.Location = new System.Drawing.Point(160, 3);
             this.btnSaveAs.Name = "btnSaveAs";
             this.btnSaveAs.Size = new System.Drawing.Size(32, 32);
             this.btnSaveAs.TabIndex = 14;
@@ -320,7 +322,7 @@ namespace hoTools.Query
             // btnRun
             // 
             this.btnRun.Image = ((System.Drawing.Image)(resources.GetObject("btnRun.Image")));
-            this.btnRun.Location = new System.Drawing.Point(365, 3);
+            this.btnRun.Location = new System.Drawing.Point(273, 3);
             this.btnRun.Name = "btnRun";
             this.btnRun.Size = new System.Drawing.Size(23, 23);
             this.btnRun.TabIndex = 16;
@@ -346,12 +348,13 @@ namespace hoTools.Query
             // lblTitle
             // 
             this.lblTitle.AutoSize = true;
+            this.lblTitle.Dock = System.Windows.Forms.DockStyle.Right;
             this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitle.Location = new System.Drawing.Point(3, 38);
+            this.lblTitle.Location = new System.Drawing.Point(408, 0);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(196, 25);
+            this.lblTitle.Size = new System.Drawing.Size(85, 38);
             this.lblTitle.TabIndex = 1;
-            this.lblTitle.Text = "Scripts && Queries";
+            this.lblTitle.Text = "Scripts";
             // 
             // menuStrip1
             // 
@@ -361,7 +364,7 @@ namespace hoTools.Query
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(173, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(81, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -540,7 +543,7 @@ namespace hoTools.Query
             // 
             this.splitContainer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.splitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer.Location = new System.Drawing.Point(0, 25);
+            this.splitContainer.Location = new System.Drawing.Point(0, 24);
             this.splitContainer.Name = "splitContainer";
             this.splitContainer.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -552,7 +555,7 @@ namespace hoTools.Query
             // 
             this.splitContainer.Panel2.Controls.Add(this.dataGridViewScripts);
             this.splitContainer.Panel2.Controls.Add(this.flowLayoutPanel4);
-            this.splitContainer.Size = new System.Drawing.Size(769, 513);
+            this.splitContainer.Size = new System.Drawing.Size(769, 514);
             this.splitContainer.SplitterDistance = 334;
             this.splitContainer.SplitterWidth = 6;
             this.splitContainer.TabIndex = 9;
@@ -565,7 +568,7 @@ namespace hoTools.Query
             this.flowLayoutPanel4.Controls.Add(this.btnRunScriptForSql);
             this.flowLayoutPanel4.Controls.Add(this.btnRunScriptForSqlWithAsk);
             this.flowLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel4.Location = new System.Drawing.Point(0, 146);
+            this.flowLayoutPanel4.Location = new System.Drawing.Point(0, 147);
             this.flowLayoutPanel4.Name = "flowLayoutPanel4";
             this.flowLayoutPanel4.Size = new System.Drawing.Size(767, 25);
             this.flowLayoutPanel4.TabIndex = 13;
@@ -584,7 +587,7 @@ namespace hoTools.Query
             this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.flowLayoutPanel2.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(769, 25);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(769, 24);
             this.flowLayoutPanel2.TabIndex = 11;
             // 
             // QueryGUI
@@ -596,6 +599,7 @@ namespace hoTools.Query
             this.Controls.Add(this.flowLayoutPanel2);
             this.Name = "QueryGUI";
             this.Size = new System.Drawing.Size(769, 538);
+            this.Resize += new System.EventHandler(this.QueryGUI_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewScripts)).EndInit();
             this.contextMenuStripDataGrid.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);

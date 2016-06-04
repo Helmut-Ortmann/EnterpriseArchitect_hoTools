@@ -248,7 +248,7 @@ namespace EAAddinFramework.Utils
             return escapedString;
         }
         /// <summary>
-        /// Run an SQL string and if query output the result in EA Search Window. If update, insert, delete execute SQL without output.
+        /// Run an SQL string and if query output the result in EA Search Window. If update, insert, delete execute SQL.
         /// <para/>- replacement of macros
         /// <para/>- run query
         /// <para/>- format to output
@@ -275,7 +275,12 @@ namespace EAAddinFramework.Utils
             {
                 // run the update, delete, insert sql
                 bool ret = SqlExecuteWithException(sql);
-                if (ret) MessageBox.Show(SqlError.readEaSqlError(), "SQL executed");
+                // if ok output the SQL
+                if (ret)
+                {
+                    string sqlText = $"Path SQL:\r\n{SqlError.getHoToolsLastSqlFilePath()}\r\n\r\n{SqlError.readHoToolsLastSql()}";
+                    MessageBox.Show(sqlText, "SQL executed! Ctrl+C to copy it to clipboard (ignore beep).");
+                }
 
             }
         }

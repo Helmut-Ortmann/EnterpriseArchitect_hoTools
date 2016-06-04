@@ -132,7 +132,7 @@ namespace hoTools.ActiveX
         private Panel panelNote;
         private Panel panelPort;
         private Panel panelAdvanced;
-        private TextBox txtUserTextName;
+        private TextBox txtSearchName;
         private Panel panelConveyedItems;
         private Button btnConveyedItemElement;
         private Button btnConveyedItemConnector;
@@ -144,7 +144,8 @@ namespace hoTools.ActiveX
         private ToolStripButton toolStripServiceBtn5;
         private ToolStripMenuItem settingsGlobalKeysToolStripMenuItem;
         private Label lblPorts;
-        private TextBox txtUserText;
+        private Label lblConveyedItems;
+        private TextBox txtSearchText;
         #endregion
 
         #region Constructor
@@ -155,7 +156,7 @@ namespace hoTools.ActiveX
         }
         #endregion
        
-        public string getText() => txtUserText.Text;
+        public string getText() => txtSearchText.Text;
 
 
         /// <summary>
@@ -415,7 +416,7 @@ namespace hoTools.ActiveX
 
                 var sh = (hoTools.EaServices.ServicesCallConfig)AddinSettings.buttonsServices[pos];
                 if (sh.Method == null) return;
-                sh.Invoke(Repository, txtUserText.Text);
+                sh.Invoke(Repository, txtSearchText.Text);
 
             }
         }
@@ -715,16 +716,47 @@ namespace hoTools.ActiveX
         {
             if (e.KeyCode == Keys.Enter)
             {
-                EaService.runQuickSearch(Repository, AddinSettings.quickSearchName, txtUserText.Text);
+                EaService.runQuickSearch(Repository, getSearchName(), txtSearchText.Text);
                 e.Handled = true;
             }
         }
         #endregion
         #region Mouse
-        void txtUserText_MouseDoubleClick(object sender, MouseEventArgs e)
+        /// <summary>
+        /// Double Mouse Click in SearchText inserts Clipboard content and runs the query
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void txtSearchText_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            txtUserText.Text = Clipboard.GetText();
-            EaService.runQuickSearch(Repository, AddinSettings.quickSearchName, txtUserText.Text);
+            txtSearchText.Text = Clipboard.GetText();
+            EaService.runQuickSearch(Repository, getSearchName(), txtSearchText.Text);
+        }
+
+        /// <summary>
+        /// Double Mouse Click in SearchName runs the query
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void txtSearchName_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            EaService.runQuickSearch(Repository, getSearchName(), txtSearchText.Text);
+        }
+
+        /// <summary>
+        /// Get Search Name from GUI text field. If empty use Search name from settings
+        /// </summary>
+        /// <returns></returns>
+        string getSearchName()
+        {
+            string searchName = txtSearchName.Text.Trim();
+            if (searchName == "")
+            {
+                searchName = AddinSettings.quickSearchName;
+                txtSearchName.Text = searchName;
+            }
+
+            return searchName;
         }
         #endregion
         #endregion
@@ -757,7 +789,7 @@ namespace hoTools.ActiveX
             this.btnShowFavorites = new System.Windows.Forms.Button();
             this.btnRemoveFavorite = new System.Windows.Forms.Button();
             this.btnAddFavorite = new System.Windows.Forms.Button();
-            this.txtUserText = new System.Windows.Forms.TextBox();
+            this.txtSearchText = new System.Windows.Forms.TextBox();
             this.btnBezier = new System.Windows.Forms.Button();
             this.btnUpdateActivityParameter = new System.Windows.Forms.Button();
             this.btnC = new System.Windows.Forms.Button();
@@ -777,7 +809,7 @@ namespace hoTools.ActiveX
             this.btnTH = new System.Windows.Forms.Button();
             this.btnLV = new System.Windows.Forms.Button();
             this.btnLH = new System.Windows.Forms.Button();
-            this.txtUserTextName = new System.Windows.Forms.TextBox();
+            this.txtSearchName = new System.Windows.Forms.TextBox();
             this.btnConveyedItemConnector = new System.Windows.Forms.Button();
             this.btnConveyedItemElement = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -840,6 +872,7 @@ namespace hoTools.ActiveX
             this.lblPorts = new System.Windows.Forms.Label();
             this.panelAdvanced = new System.Windows.Forms.Panel();
             this.panelConveyedItems = new System.Windows.Forms.Panel();
+            this.lblConveyedItems = new System.Windows.Forms.Label();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
             this.toolStripQuery.SuspendLayout();
@@ -861,8 +894,8 @@ namespace hoTools.ActiveX
             // toolStripContainer1.ContentPanel
             // 
             resources.ApplyResources(this.toolStripContainer1.ContentPanel, "toolStripContainer1.ContentPanel");
-            this.toolStripContainer1.LeftToolStripPanelVisible = false;
             resources.ApplyResources(this.toolStripContainer1, "toolStripContainer1");
+            this.toolStripContainer1.LeftToolStripPanelVisible = false;
             this.toolStripContainer1.Name = "toolStripContainer1";
             this.toolStripContainer1.RightToolStripPanelVisible = false;
             // 
@@ -1030,14 +1063,13 @@ namespace hoTools.ActiveX
             this.btnAddFavorite.UseVisualStyleBackColor = true;
             this.btnAddFavorite.Click += new System.EventHandler(this.btnAddFavorite_Click);
             // 
-            // txtUserText
+            // txtSearchText
             // 
-            resources.ApplyResources(this.txtUserText, "txtUserText");
-            this.txtUserText.Name = "txtUserText";
-            this.toolTip.SetToolTip(this.txtUserText, resources.GetString("txtUserText.ToolTip"));
-            this.txtUserText.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtUserText_KeyDown);
-            this.txtUserText.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtUserText_KeyDown);
-            this.txtUserText.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.txtUserText_MouseDoubleClick);
+            resources.ApplyResources(this.txtSearchText, "txtSearchText");
+            this.txtSearchText.Name = "txtSearchText";
+            this.toolTip.SetToolTip(this.txtSearchText, resources.GetString("txtSearchText.ToolTip"));
+            this.txtSearchText.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtUserText_KeyDown);
+            this.txtSearchText.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.txtSearchText_MouseDoubleClick);
             // 
             // btnBezier
             // 
@@ -1191,12 +1223,15 @@ namespace hoTools.ActiveX
             this.btnLH.UseVisualStyleBackColor = true;
             this.btnLH.Click += new System.EventHandler(this.btnLH_Click);
             // 
-            // txtUserTextName
+            // txtSearchName
             // 
-            resources.ApplyResources(this.txtUserTextName, "txtUserTextName");
-            this.txtUserTextName.Name = "txtUserTextName";
-            this.txtUserTextName.ReadOnly = true;
-            this.toolTip.SetToolTip(this.txtUserTextName, resources.GetString("txtUserTextName.ToolTip"));
+            this.txtSearchName.BackColor = System.Drawing.SystemColors.Control;
+            resources.ApplyResources(this.txtSearchName, "txtSearchName");
+            this.txtSearchName.Name = "txtSearchName";
+            this.toolTip.SetToolTip(this.txtSearchName, resources.GetString("txtSearchName.ToolTip"));
+            this.txtSearchName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtUserText_KeyDown);
+            this.txtSearchName.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtUserText_KeyDown);
+            this.txtSearchName.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.txtSearchName_MouseDoubleClick);
             // 
             // btnConveyedItemConnector
             // 
@@ -1563,8 +1598,8 @@ namespace hoTools.ActiveX
             // 
             // panelQuickSearch
             // 
-            this.panelQuickSearch.Controls.Add(this.txtUserTextName);
-            this.panelQuickSearch.Controls.Add(this.txtUserText);
+            this.panelQuickSearch.Controls.Add(this.txtSearchName);
+            this.panelQuickSearch.Controls.Add(this.txtSearchText);
             resources.ApplyResources(this.panelQuickSearch, "panelQuickSearch");
             this.panelQuickSearch.Name = "panelQuickSearch";
             // 
@@ -1635,10 +1670,16 @@ namespace hoTools.ActiveX
             // 
             // panelConveyedItems
             // 
+            this.panelConveyedItems.Controls.Add(this.lblConveyedItems);
             this.panelConveyedItems.Controls.Add(this.btnConveyedItemElement);
             this.panelConveyedItems.Controls.Add(this.btnConveyedItemConnector);
             resources.ApplyResources(this.panelConveyedItems, "panelConveyedItems");
             this.panelConveyedItems.Name = "panelConveyedItems";
+            // 
+            // lblConveyedItems
+            // 
+            resources.ApplyResources(this.lblConveyedItems, "lblConveyedItems");
+            this.lblConveyedItems.Name = "lblConveyedItems";
             // 
             // AddinControlGUI
             // 
@@ -1649,8 +1690,8 @@ namespace hoTools.ActiveX
             this.Controls.Add(this.panelFavorite);
             this.Controls.Add(this.panelConveyedItems);
             this.Controls.Add(this.panelLineStyle);
-            this.Controls.Add(this.panelButtons);
             this.Controls.Add(this.panelQuickSearch);
+            this.Controls.Add(this.panelButtons);
             this.Controls.Add(this.menuStrip1);
             this.Name = "AddinControlGUI";
             this.toolStripContainer1.TopToolStripPanel.ResumeLayout(false);
@@ -1671,6 +1712,7 @@ namespace hoTools.ActiveX
             this.panelPort.PerformLayout();
             this.panelAdvanced.ResumeLayout(false);
             this.panelConveyedItems.ResumeLayout(false);
+            this.panelConveyedItems.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1762,13 +1804,14 @@ namespace hoTools.ActiveX
             panelConveyedItems.Visible = AddinSettings.isConveyedItemsSupport;
             btnConveyedItemConnector.Visible = AddinSettings.isConveyedItemsSupport;
             btnConveyedItemElement.Visible = AddinSettings.isConveyedItemsSupport;
+            lblConveyedItems.Visible = true;
 
             // Line style Panel
             panelLineStyle.Visible = AddinSettings.isLineStyleSupport;
 
             // no quick search defined
             panelQuickSearch.Visible = (AddinSettings.quickSearchName.Trim() != "");
-            txtUserTextName.Text = AddinSettings.quickSearchName.Trim();
+            txtSearchName.Text = AddinSettings.quickSearchName.Trim();
 
             // Buttons for queries and services
             panelButtons.Visible = AddinSettings.isShowQueryButton || AddinSettings.isShowServiceButton;

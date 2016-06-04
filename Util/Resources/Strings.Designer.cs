@@ -152,6 +152,19 @@ namespace hoTools.Utils.Resources {
         
         /// <summary>
         ///   Looks up a localized string similar to //
+        ///// Template delete tree selected 
+        /////
+        ///delete from t_object 
+        ///where ea_guid in (#TreeSelectedGUIDS#).
+        /// </summary>
+        internal static string DeleteTreeSelectedItemsTemplate {
+            get {
+                return ResourceManager.GetString("DeleteTreeSelectedItemsTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to //
         ///// Template DemoRunScript
         ///// use Script: 
         ///// - hoDemoScript (3 parameters)
@@ -205,45 +218,17 @@ namespace hoTools.Utils.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &apos;EA-Matic
-        ///&apos;[path=\Framework\ho\hoTools]
-        ///&apos;[group=hoTools]
-        ///!INC Local Scripts.EAConstants-VBScript
-        ///&apos; Dim doesn&apos;t work (syntax error)
-        ///&apos; Object &apos;Session&apos; doesn&apos;t exist (use  Repository.WriteOutput &quot;Script&quot;, &quot;MyTest&quot;,0)
-        ///&apos; Var &apos;Repository&apos; is loaded
-        ///&apos; You may create an instance &apos;EAAddinFramework.Utils.Model&apos; of the first running EA-Instance
-        ///
-        ///function hoDemoPrintContext(modelItem, objectType)
-        ///    &apos;Dim itemType as 5
-        ///	itemType = &quot;unknown&quot;
-        ///	Select Case objectType
-        ///	    Case otElement
-        ///			itemType = &quot;Eleme [rest of string was truncated]&quot;;.
+        ///   Looks up a localized string similar to //
+        ///// Template Insert Element into current selected Package (direct or indirect selected via Element, Diagram, Operation, Attribute in Package)
+        /////
+        ///insert into t_object 
+        ///   (ea_guid, object_type, Name, Package_ID)
+        ///values
+        ///   (&apos;#NewGuid#&apos;, &apos;Class&apos;, &apos;XXXX&apos;, #Package#).
         /// </summary>
-        internal static string hoDemo2ParScript {
+        internal static string InsertElementIntoCurrentPackage {
             get {
-                return ResourceManager.GetString("hoDemo2ParScript", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to &apos;EA-Matic
-        ///&apos; Usage of Geert Bellekens Script Framework to administer Scripts recommended
-        ///&apos;[path=\Framework\ho\hoTools]
-        ///&apos;[group=hoTools]
-        ///&apos;option explicit
-        ///
-        ///!INC Local Scripts.EAConstants-VBScript
-        ///&apos;----------------------------------------------------------------------
-        ///&apos; Dim doesn&apos;t work (syntax error, used in EA for intellissense)
-        ///&apos; Object &apos;Session&apos; doesn&apos;t exist (use  Repository.WriteOutput &quot;Script&quot;, &quot;MyTest&quot;,0)
-        ///&apos; Var &apos;Repository&apos; is loaded by script environment
-        ///&apos; You may create an instance &apos;EAAddin [rest of string was truncated]&quot;;.
-        /// </summary>
-        internal static string hoDemo3ParScript {
-            get {
-                return ResourceManager.GetString("hoDemo3ParScript", resourceCulture);
+                return ResourceManager.GetString("InsertElementIntoCurrentPackage", resourceCulture);
             }
         }
         
@@ -265,6 +250,20 @@ namespace hoTools.Utils.Resources {
         internal static string SearchFavoriteName {
             get {
                 return ResourceManager.GetString("SearchFavoriteName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to //
+        ///// Template Update Current selected Item (Element, Diagram, Attribute, Operation) 
+        /////
+        ///update t_object set
+        ///   name = &apos;XXXClass55&apos;
+        ///where object_ID = #CurrentItemID#.
+        /// </summary>
+        internal static string UpdateCurrentSelectedItemTemplate {
+            get {
+                return ResourceManager.GetString("UpdateCurrentSelectedItemTemplate", resourceCulture);
             }
         }
     }

@@ -37,7 +37,7 @@ namespace hoTools.Query
     {
         public const string PROGID = "hoTools.QueryGUI";
         public const string TABULATOR_SCRIPT = "Scripts";
-        public const string TABULATOR_QUERY = "SQL Query";
+        public const string TABULATOR_QUERY = "SQL";
 
         List<Script> _lscripts;  // list off all scripts
         DataTable _tableFunctions; // Scripts and Functions
@@ -852,6 +852,12 @@ namespace hoTools.Query
             code = rm.GetString("hoDemo3ParScript");
             script = new EaScript(Model, "hoDemo3Par", "Internal", "VBScript", group.GUID, code);
             script.save();
+        }
+
+        void QueryGUI_Resize(object sender, EventArgs e)
+        {
+
+
         }
     }
 }

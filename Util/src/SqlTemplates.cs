@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Resources;
 using System.Reflection;
@@ -14,7 +15,8 @@ namespace hoTools.Utils.SQL
     {
         #region Template Dictionary SqlTemplare
         /// <summary>
-        /// Dictionary of the available Templates
+        /// Dictionary of the available Templates. Note: If error like duplicate key the constructor breaks without exception.
+        /// Not easy to find errors.
         /// </summary>
         static Dictionary<SQL_TEMPLATE_ID, SqlTemplate> SqlTemplate = new Dictionary<SQL_TEMPLATE_ID, SqlTemplate>
         {
@@ -57,11 +59,30 @@ namespace hoTools.Utils.SQL
                     "Template to get selected Diagram Elements",
                     isResource:true
                     ) },
-                
+
              {  SQL_TEMPLATE_ID.DEMO_RUN_SCRIPT_TEMPLATE,
                 new SqlTemplate("Demo Query to run Scripts on results ",    // Name
                     "DemoRunScript",          // String ID of Resource
                     "Demo Query to run Scripts on results (needs exactly one GUID in result column) ",
+                    isResource:true
+                    ) },
+
+             {  SQL_TEMPLATE_ID.DELETED_TREE_SELECTED_ITEMS,
+                new SqlTemplate("Demo Delete Tree selected Items ",    // Name
+                    "DeleteTreeSelectedItemsTemplate",          // String ID of Resource
+                    "Demo delete SQL to delete the selected Items in browser (Diagram, Element, Attribute, Operation). Be careful! This might cause damage! ",
+                    isResource:true
+                    ) },
+             {  SQL_TEMPLATE_ID.UPDATE_ITEM_TEMPLATE,
+                new SqlTemplate("Demo Update current selected Item ",    // Name
+                    "UpdateCurrentSelectedItemTemplate",          // String ID of Resource
+                    "Demo update SQL the selected Item (Diagram, Element, Attribute, Operation). Be careful! This might cause damage! ",
+                    isResource:true
+                    ) },
+             {  SQL_TEMPLATE_ID.INSERT_ITEM_IN_PACKAGE_TEMPLATE,
+                new SqlTemplate("Demo Insert into Package ",    // Name
+                    "InsertElementIntoCurrentPackage",          // String ID of Resource
+                    "Demo insert SQL in current selected package (Package of Diagram, Element, Attribute, Operation). Be careful! This might cause damage! ",
                     isResource:true
                     ) },
 
@@ -94,7 +115,9 @@ ORDER BY pkg.Name
                 "// - #DiagramSelectedElements_IDS# Selected Diagram Elements of selected Diagram / current Diagram \r\n" +
                 "// - #Diagram_ID                 Current Diagram or selected Diagram \r\n" +
                 "// - #InBranch#                  like Branch (nested package recursive), but with SQL IN clause like 'package_ID IN (512, 31,613)'\r\n" +
+                "// - #NewGuid#                   replace by a new GUID surrounded by brackets ('{...}'). This is useful for SQL 'insert' statements.\r\n" +
                 "// - #Package#                   Replaced by the package ID of the containing package of selected Package like: 'package_ID in (#Branch)'\r\n" +
+                "// - #PackageID#                 Replaced by the package ID of the containing package of selected Package like: 'package_ID in (#Branch)'\r\n"   +
                 "// - #TreeSelectedGUIDS#       In Browser selected Elements as a list of comma separated GUIDS like 'IN (#TreeSelectedGUIDS#)'\r\n" +
                 "// - <Search Term>               Replaced by the string in the 'Search Term' entry field\r\n" +
                 "// - #WC#  or *                  Wild card depending of the current DB. You may simple use '*'\r\n" +
@@ -240,10 +263,14 @@ ORDER BY 3",
                 new SqlTemplate("TREE_SELECTED_GUIDS",
                     "#TreeSelectedGUIDS#",
                     "Placeholder for selected Browser Elements  as comma separated list of GUIDs\nExample: ea_GUID in (#TreeSelectedGUIDS#)") },
-            { SQL_TEMPLATE_ID.PACKAGE_ID,
+              { SQL_TEMPLATE_ID.PACKAGE_ID,
                 new SqlTemplate("PACKAGE_ID",
                     "#Package#",
                     "Placeholder for the package the selected Item (Package, Diagram, Element, Operation, Attribute) is contained, use as PackageID\nExample: pkg.Package_ID = #Package# ") },
+            { SQL_TEMPLATE_ID.PACKAGE,
+                new SqlTemplate("PACKAGE_ID",
+                    "#PackageID#",
+                    "Placeholder for the package the selected Item (Package, Diagram, Element, Operation, Attribute) is contained, use as PackageID\nExample: pkg.Package_ID = #PackageID# ") },
             { SQL_TEMPLATE_ID.BRANCH_IDS,
                 new SqlTemplate("BRANCH_IDS",
                     "#Branch#",
@@ -252,6 +279,10 @@ ORDER BY 3",
                 new SqlTemplate("IN_BRANCH_IDS",
                     "#InBranch#",
                     "Placeholder for sql in clause for the current selected package (recursive), use as PackageID\nExample: pkg.Package_ID  (#InBranch#)\nExpands to 'IN (512,513,..)' ") },
+            { SQL_TEMPLATE_ID.NEW_GUID,
+                new SqlTemplate("NewGuid",
+                    "#NewGuid#",
+                    "Placeholder for a new created GUID to use in SQL INSERT statement.") },
             { SQL_TEMPLATE_ID.CURRENT_ITEM_ID,
                 new SqlTemplate("CURRENT_ITEM_ID",
                     "#CurrentItemID#","Placeholder for the current selected item ID (Element, Package, Diagram, Attribute, Operation, may be ambiguous, GUID is more secure), use as ID\nExample: obj.Object_ID = #CurrentItemID#; Alias: #CurrentElementID#") },
@@ -353,6 +384,12 @@ ORDER BY 3",
             ATTRIBUTE_TEMPLATE,
             OPERATION_TEMPLATE,
             SEARCH_TERM,
+
+            // SQL modifying
+            INSERT_ITEM_IN_PACKAGE_TEMPLATE,
+            UPDATE_ITEM_TEMPLATE,
+            DELETED_TREE_SELECTED_ITEMS,
+               
             //-------------------------
             // macros
             MACROS_HELP,        // Help to macros
@@ -361,6 +398,7 @@ ORDER BY 3",
             CONVEYED_ITEM_IDS_TEMPLATE, // Template Conveyed Items of the selected connector
             CONNECTORS_FROM_ELEMENT_TEMPLATE, // Template to get the Connector with Conveyed Items from Element
             PACKAGE_ID,      // The containing package of Package, Diagram, Element, Attribute, Operation
+            PACKAGE,         // The containing package of Package, Diagram, Element, Attribute, Operation (compatible with EA)
             BRANCH_IDS,     // Package (nested, recursive) ids separated by ','  like '20,21,47,1'
             IN_BRANCH_IDS,  // Package (nested, recursive), complete SQL in clause, ids separated by ','  like 'IN (20,21,47,1)', just a shortcut for #BRANCH_ID#
             CURRENT_ITEM_ID,     // ALIAS CURRENT_ELEMENT_ID exists (compatible to EA)
@@ -374,6 +412,7 @@ ORDER BY 3",
             DIAGRAM_ID,                 // Diagram ID
             AUTHOR,
             TREE_SELECTED_GUIDS, // get all the GUIDs of the selected items (otDiagram, otElement, otPackage, otAttribute, otMethod
+            NEW_GUID,            // create a new GUIDs to use in insert statement
             NOW,
             WC,
             DEMO_RUN_SCRIPT_TEMPLATE
@@ -521,6 +560,13 @@ ORDER BY 3",
             if (sql.Contains(currentTemplate))
             {
                 sql = sql.Replace(currentTemplate, "*"); 
+            }
+
+            // replace #NewGuid" by a newly created GUID (global unique identifier
+            string newGuidTemplate = getTemplateText(SQL_TEMPLATE_ID.NEW_GUID);
+            if (sql.Contains(newGuidTemplate))
+            {
+                sql = sql.Replace(newGuidTemplate, "{" + Guid.NewGuid() + "}");
             }
 
             return sql;
@@ -844,7 +890,7 @@ ORDER BY 3",
                     break;
                 case EA.ObjectType.otPackage:
                     EA.Package pkg = (EA.Package)rep.GetContextObject();
-                    id = pkg.ParentID;
+                    id = pkg.PackageID;
                     break;
                 case EA.ObjectType.otAttribute:
                     EA.Attribute attr = (EA.Attribute)rep.GetContextObject();
@@ -954,7 +1000,7 @@ ORDER BY 3",
                 }
                 else// no element in Browser selected
                 {
-                    MessageBox.Show(sql, $"No elements in browser of type Element(Class, Activity,..) selected!");
+                    MessageBox.Show(sql, $"No elements in browser of type Element(Class, Activity,..) selected, Break!!!!");
                     sql = "";
                 }
             }
