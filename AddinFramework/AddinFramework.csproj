@@ -59,6 +59,8 @@
     <Compile Include="EASpecific\EAAddin.cs" />
     <Compile Include="Util\EaItem.cs" />
     <Compile Include="Util\EaObjectType.cs" />
+    <Compile Include="Util\Script\EaScript.cs" />
+    <Compile Include="Util\Script\EaScriptGroup.cs" />
     <Compile Include="Util\Script\JavaScriptLanguage.cs" />
     <Compile Include="Util\Script\JavaScriptLanguageBase.cs" />
     <Compile Include="Util\Script\JScriptLanguage.cs" />

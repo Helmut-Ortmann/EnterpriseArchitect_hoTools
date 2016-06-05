@@ -476,6 +476,10 @@ namespace hoTools
         #region EA Technology Events
         /// <summary>
         /// Returns xml string for MDG to load. Possible values: Basic, Compilation, No). See AddinSettings.AutoLoadMdgXml.
+        /// It loads the *.xml from the *.dll install directory
+        /// <para/>- DEBUG  Addin\bin\debug\
+        /// <para/>- RELEASE  AppData\Local\Apps\hoTools\
+        /// 
         /// </summary>
         /// <param name="Repository"></param>
         /// <returns></returns>
@@ -496,6 +500,7 @@ namespace hoTools
                     break;
             }
             if (fileNameMdg == null) return null;
+
             string assemblyFolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             string combinedPathMdg = Path.Combine(assemblyFolder, fileNameMdg);
             return System.IO.File.ReadAllText(combinedPathMdg);

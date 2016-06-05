@@ -11,24 +11,24 @@ namespace hoTools.EaServices
     {
         MethodInfo _method;
         string _GUID = "";
-        string _Description = "";
-        string _Help = "";
-        bool _IsTextRequired;
+        string _description = "";
+        string _help = "";
+        bool _isTextRequired;
 
-        public ServiceCall(MethodInfo Method, string GUID, string Description, string Help, bool IsTextRequired)
+        public ServiceCall(MethodInfo method, string guid, string description, string help, bool isTextRequired)
         {
-            _method = Method;
-            _Description = Description;
-            _GUID = GUID;
-            _Help = Help;
-            _IsTextRequired = IsTextRequired;
+            _method = method;
+            _description = description;
+            _GUID = guid;
+            _help = help;
+            _isTextRequired = isTextRequired;
         }
 
 
 
-        public String Description => this._Description;
+        public String Description => this._description;
         public MethodInfo Method => this._method;
-        public string Help => this._Help;
+        public string Help => this._help;
         public String GUID => this._GUID;
     }
     /// <summary>
@@ -181,7 +181,7 @@ namespace hoTools.EaServices
             get
             {
                 if (MethodName == "") return "";
-                return "MethodName\t:\t"+ MethodName + "()\nDescription1\t:\t" + Description + "\nDescription2\t:\t" + this._help;
+                return $"Service\t\t: {_buttonText} / {MethodName}()\nService Name\t: {_description}\nDescription\t: {_help}";
             }
 
         }

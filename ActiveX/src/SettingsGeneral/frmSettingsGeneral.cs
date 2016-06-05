@@ -44,13 +44,13 @@ namespace hoTools.Settings
             switch (_settings.AutoLoadMdgXml)
             {
                 case AddinSettings.AutoLoadMdg.Basic:
-                    chkAutoLoadMdgBasic.Checked = true;
+                    rbAutoLoadMdgBasic.Checked = true;
                     break;
                 case AddinSettings.AutoLoadMdg.Compilation:
-                    chkAutoLoadMdgCompilation.Checked = true;
+                    rbAutoLoadMdgCompilation.Checked = true;
                     break;
                 default:
-                    chkAutoLoadMdgNo.Checked = true;
+                    rbAutoLoadMdgNo.Checked = true;
                     break;
             }
             #endregion
@@ -110,8 +110,8 @@ namespace hoTools.Settings
 
             #region AutoLoadMdg
             _settings.AutoLoadMdgXml = AddinSettings.AutoLoadMdg.No;
-            if (chkAutoLoadMdgBasic.Checked) _settings.AutoLoadMdgXml = AddinSettings.AutoLoadMdg.Basic;
-            if (chkAutoLoadMdgCompilation.Checked) _settings.AutoLoadMdgXml = AddinSettings.AutoLoadMdg.Compilation;
+            if (rbAutoLoadMdgBasic.Checked) _settings.AutoLoadMdgXml = AddinSettings.AutoLoadMdg.Basic;
+            if (rbAutoLoadMdgCompilation.Checked) _settings.AutoLoadMdgXml = AddinSettings.AutoLoadMdg.Compilation;
             #endregion
 
             #region LineStyleAndMoreWindow

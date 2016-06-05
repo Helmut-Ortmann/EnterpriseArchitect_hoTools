@@ -190,9 +190,22 @@ namespace EAAddinFramework.Utils
             }
             return repoType;
         }
-        public void executeSQL(string SQLString)
+        /// <summary>
+        /// Execute SQL and catch Exception
+        /// </summary>
+        /// <param name="SQLString"></param>
+        public bool executeSQL(string SQLString)
         {
-            this.Repository.Execute(SQLString);
+            try
+            {
+                this.Repository.Execute(SQLString);
+                return true;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($"SQL execute:\r\n{SQLString}\r\n{e.Message}", "Error SQL execute");
+                return false;
+            }
         }
         /// <summary>
         /// formats an xpath according to the type of database.
@@ -235,7 +248,7 @@ namespace EAAddinFramework.Utils
             return escapedString;
         }
         /// <summary>
-        /// Run an SQL string and output the results in the EA Search Window
+        /// Run an SQL string and if query output the result in EA Search Window. If update, insert, delete execute SQL.
         /// <para/>- replacement of macros
         /// <para/>- run query
         /// <para/>- format to output
@@ -248,13 +261,28 @@ namespace EAAddinFramework.Utils
             sql = SqlTemplates.replaceMacro(Repository, sql, searchText);
             if (sql == "") return;
 
-            // run the query
-            string xml = SqlQueryWithException(sql);
-            if (xml == null) xml = ""; // error message already output
+            // check whether select or update, delete, insert sql
+            if (Regex.IsMatch(sql, @"^\s*select ", RegexOptions.IgnoreCase | RegexOptions.Multiline))
+            {
+                // run the select query
+                string xml = SqlQueryWithException(sql);
+                if (xml == null) xml = ""; // error message already output
 
-            // output the query in EA Search Window
-            string target = MakeEaXmlOutput(xml);
-            Repository.RunModelSearch("", "", "", target);
+                // output the query in EA Search Window
+                string target = MakeEaXmlOutput(xml);
+                Repository.RunModelSearch("", "", "", target);
+            } else
+            {
+                // run the update, delete, insert sql
+                bool ret = SqlExecuteWithException(sql);
+                // if ok output the SQL
+                if (ret)
+                {
+                    string sqlText = $"Path SQL:\r\n{SqlError.getHoToolsLastSqlFilePath()}\r\n\r\n{SqlError.readHoToolsLastSql()}";
+                    MessageBox.Show(sqlText, "SQL executed! Ctrl+C to copy it to clipboard (ignore beep).");
+                }
+
+            }
         }
         /// <summary>
         /// EA SQL Query with:
@@ -271,7 +299,7 @@ namespace EAAddinFramework.Utils
             return results;
         }
         /// <summary>
-        /// Run EA SQL Query with Exception handling
+        /// Run EA SQL Query with Exception handling. It deletes the error file and reads it back to detect errors.
         /// <para/>return null if error, it also displays the error message in MessageBox
         /// <para/>return "" if nothing found
         /// <para/>return xml string if ok
@@ -284,12 +312,14 @@ namespace EAAddinFramework.Utils
             SqlError.deleteEaSqlError();
             try
             {
-                // run the query
+                // is query or a changing SQL?
+                //if (Regex.IsMatch(query, "^\s*select ", RegexOptions.IgnoreCase | RegexOptions.Multiline)) {
+                    // run the query (select * .. from
                 string xml = SQLQueryNative(query);
-                if (! SqlError.existsEaSqlErrorFile() )
-                {
-                    return xml;
-                }
+                if (!SqlError.existsEaSqlErrorFile())
+                    {
+                        return xml;
+                    }
                 else
                 {
                     MessageBox.Show(SqlError.readEaSqlError(), "Error SQL (CTRL+C to copy it!!)");
@@ -301,9 +331,49 @@ namespace EAAddinFramework.Utils
                 MessageBox.Show($"SQL:\r\n{query}\r\n{ex.Message}", "Error SQL");
                 return null;
             }
+        }
+        /// <summary>
+        /// Run EA SQL Query with Exception handling
+        /// <para/>return null if error, it also displays the error message in MessageBox
+        /// <para/>return "" if nothing found
+        /// <para/>return xml string if ok
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns>string</returns>
+        public bool SqlExecuteWithException(string sql)
+        {
+            // delete an existing error file
+            SqlError.deleteEaSqlError();
+            try
+            {
+                // run the query (select * .. from
+                sql = formatSQL(sql);
+                // store final/last query which is executed
+                SqlError.writeHoToolsLastSql(sql);
+
+                Repository.Execute(sql);
+                if (!SqlError.existsEaSqlErrorFile())
+                {
+                    return true;
+                }
+                else
+                {
+                    MessageBox.Show(SqlError.readEaSqlError(), "Error SQL (CTRL+C to copy it!!)");
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"SQL:\r\n{sql}\r\n{ex.Message}", "Error SQL");
+                return false;
+            }
 
 
         }
+
+
+
+
         /// <summary>
         /// EA SQL Query native with:
         /// - formatSQL
@@ -320,6 +390,22 @@ namespace EAAddinFramework.Utils
 
             return Repository.SQLQuery(sqlQuery);// no error, only no result rows
         }
+        /// <summary>
+        /// EA Execute SQL:
+        /// - formatSQL
+        /// - runSQL
+        /// - return SQL string
+        /// </summary>
+        /// <param name="sqlQuery"></param>
+        /// <returns>false=error</returns>
+        public bool SQLExecuteNative(string sqlExecute)
+        {
+            sqlExecute = formatSQL(sqlExecute);
+            // store final/last query which is executed
+            SqlError.writeHoToolsLastSql(sqlExecute);
+
+            return executeSQL(sqlExecute);// no error, only no result rows
+        }
 
         /// <summary>
         /// Make EA XML output format from EA SQLQuery format (string)
@@ -334,7 +420,7 @@ namespace EAAddinFramework.Utils
 
         #region MakeEaXmlOutput
         /// <summary>
-        /// Make EA XML output format from EA SQLQuery XDocument format (Linq to XML). If nothing found or an error has occurred nothing is displayed.
+        /// Make EA XML output format from EA SQLQuery XDocument format (LINQ to XML). If nothing found or an error has occurred nothing is displayed.
         /// </summary>
         /// <param name="x">Output from EA SQLQuery</param>
         /// <returns></returns>
@@ -425,7 +511,7 @@ namespace EAAddinFramework.Utils
         #endregion
 
         /// <summary>
-        /// Make EA XML output format from EA SQLQuery XDocument format (Linq to XML)
+        /// Make EA XML output format from EA SQLQuery XDocument format (LINQ to XML)
         /// </summary>
         /// <param name="x">Output from EA SQLQuery</param>
         /// <returns></returns>

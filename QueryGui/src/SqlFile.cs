@@ -97,7 +97,7 @@ namespace hoTools.Query
         /// <summary>
         /// True if a complete path exists (isPathRouted) and the file exists
         /// </summary>
-        public bool IsPersistant => (Path.IsPathRooted(_fullName)  && File.Exists(_fullName));
+        public bool IsPersistant => (Path.IsPathRooted(_fullName) && File.Exists(_fullName));
 
         /// <summary>
         /// Initialize the TabPage information.
@@ -108,7 +108,7 @@ namespace hoTools.Query
         {
             IsChanged = isChanged;
             _fullName = fullName;
-           
+
 
         }
         #region OnChanged FileSystemEventArgs
@@ -138,7 +138,8 @@ namespace hoTools.Query
                     DialogResult result = MessageBox.Show($"'{fileNameChanged}'\nYes: Reload\nNo: Do nothing", "File has changed outside EA", MessageBoxButtons.YesNo);
                     if (result == DialogResult.No) updateSqlPage = false;
                 }
-                if (updateSqlPage) {
+                if (updateSqlPage)
+                {
                     _tabPage.Invoke(_sqlTabPagesCntrl.UpdatePageDelegate,      // delegate
                                     new object[] { _tabPage,
                                         fileNameChanged,

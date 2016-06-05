@@ -11,8 +11,10 @@ using System.Collections.Generic;
 using EAAddinFramework.Utils;
 using hoTools.Settings;
 using hoTools.EaServices;
+using System.Resources;
 
 using System.IO;
+using System.Reflection; // Resource Manager
 
 
 
@@ -34,8 +36,8 @@ namespace hoTools.Query
     public partial class QueryGUI : AddinGUI, IQueryGUI
     {
         public const string PROGID = "hoTools.QueryGUI";
-        public const string TABULATOR_SCRIPT = "Scripts";
-        public const string TABULATOR_QUERY = "SQL Query";
+        public const string TABULATOR_SCRIPT = "Script";
+        public const string TABULATOR_QUERY = "SQL";
 
         List<Script> _lscripts;  // list off all scripts
         DataTable _tableFunctions; // Scripts and Functions
@@ -67,6 +69,17 @@ namespace hoTools.Query
         public QueryGUI()
         {
             InitializeComponent();
+
+            // set properties to enable drawing tab caption
+            tabControlSql.Multiline = false;
+            tabControlSql.SizeMode = TabSizeMode.FillToRight;
+            tabControlSql.DrawMode = TabDrawMode.OwnerDrawFixed;
+            ResumeLayout(false);
+            PerformLayout();
+
+            ResizeRedraw = true;
+            //SetStyle(ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint | ControlStyles.DoubleBuffer| ControlStyles.ResizeRedraw, true);
+            //tabControlSql.SetStyle(ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint | ControlStyles.DoubleBuffer, true);
 
             // individual initialization
             // Script
@@ -240,7 +253,7 @@ namespace hoTools.Query
 
 
         /// <summary>
-        /// Load all usable script
+        /// Load all usable script. They shall contain 'EA-Matic'
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -249,7 +262,12 @@ namespace hoTools.Query
             _lscripts = Script.getEAMaticScripts(Model);
             updateTableFunctions();
         }
-
+        /// <summary>
+        /// Compile, load script with may run on SQL Query result rows. The conditions:
+        /// <para/>- Contains string 'EA-Matic'
+        /// <para/>- With 2 or 3 parameters
+        /// </summary>
+        /// <param name="isWithAll"></param>
          void updateTableFunctions(bool isWithAll=false)
         {
             _tableFunctions.Rows.Clear();
@@ -260,6 +278,7 @@ namespace hoTools.Query
 
                 foreach (ScriptFunction function in script.functions)
                 {
+                    // 2 or 3 parameters
                     if (isWithAll || (function.numberOfParameters > 1 && function.numberOfParameters < 4)) { 
                         newRow = _tableFunctions.NewRow();
                         newRow["ScriptObj"] = script;
@@ -293,24 +312,10 @@ namespace hoTools.Query
         }
 
         
-
-         void runScriptToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            // get selected element and type
-            EA.ObjectType oType = Repository.GetContextItemType();
-            object oContext = Repository.GetContextObject();
-
-            DataGridViewRow rowToRun = dataGridViewScripts.Rows[rowScriptsIndex];
-            DataRowView row = rowToRun.DataBoundItem as DataRowView;
-            var scriptFunction = row["FunctionObj"] as ScriptFunction;
-            GuiFunction.RunScriptFunction(Model, scriptFunction, oType, oContext);
-
-        }
-
         /// <summary>
         /// Show error of the selected Script
         /// </summary>
-         void ShowScriptErrorToolStripMenuItem_Click(object sender, EventArgs e)
+        void ShowScriptErrorToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DataGridViewRow row = dataGridViewScripts.Rows[rowScriptsIndex];
             string scriptName = row.Cells["Script"].Value as string;
@@ -447,26 +452,23 @@ namespace hoTools.Query
         /// <param name="e"></param>
          void btnRunScriptForSql_Click(object sender, EventArgs e)
         {
-            if (tabControlSql.SelectedIndex == -1) return;
-            Cursor.Current = Cursors.WaitCursor;
-            // get TabPage
-            TabPage tabPage = tabControlSql.TabPages[tabControlSql.SelectedIndex];
-
-            // get TextBox
-            TextBox textBox = (TextBox)tabPage.Controls[0];
-
-            // get Script and its parameter to run
-            DataGridViewRow rowToRun = dataGridViewScripts.Rows[rowScriptsIndex];
-            DataRowView row = rowToRun.DataBoundItem as DataRowView;
-            var scriptFunction = row["FunctionObj"] as ScriptFunction;
-
-            // run SQL, Script and ask whether to execute, skip script or break all together
-            GuiFunction.RunScriptWithAsk(Model, textBox.Text, scriptFunction, isWithAsk:false);
-            Cursor.Current = Cursors.Default;
+            RunScriptWithAskGui(isWithAsk: false);
 
         }
-
-         void btnRunScriptForSqlWithAsk_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Run sql query and execute Script for found rows. Ask if script is to execute.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void btnRunScriptForSqlWithAsk_Click(object sender, EventArgs e)
+        {
+            RunScriptWithAskGui(isWithAsk:true);
+        }
+        /// <summary>
+        /// Run sql query and execute Script for found rows. This function is intended to use from Dialog.
+        /// </summary>
+        /// <param name="isWithAsk">True: Ask for each found rows if to execute</param>
+        void RunScriptWithAskGui(bool isWithAsk = false)
         {
             if (tabControlSql.SelectedIndex == -1) return;
             Cursor.Current = Cursors.WaitCursor;
@@ -481,18 +483,21 @@ namespace hoTools.Query
             DataRowView row = rowToRun.DataBoundItem as DataRowView;
             var scriptFunction = row["FunctionObj"] as ScriptFunction;
 
+            // replace templates, search term and more
+            string sql = SqlTemplates.replaceMacro(Repository, textBox.Text, txtSearchTerm.Text);
+            if (sql == "") return;
+
             // run SQL, Script and ask whether to execute, skip script or break all together
-            GuiFunction.RunScriptWithAsk(Model, textBox.Text, scriptFunction, isWithAsk:true);
+            GuiFunction.RunScriptWithAsk(Model, sql, scriptFunction, isWithAsk: isWithAsk);
 
             Cursor.Current = Cursors.Default;
         }
 
-       
-
-        
 
 
-       
+
+
+
 
         void txtBoxSql_TextChanged(object sender, EventArgs e)
         {
@@ -694,21 +699,13 @@ namespace hoTools.Query
         /// <param name="e"></param>
         void tabControlSql_DragEnter(object sender, DragEventArgs e)
         {
-            if (e.Data.GetDataPresent(DataFormats.FileDrop)) e.Effect = DragDropEffects.Copy;
 
         }
         #endregion
 
         void tabControlSql_DragDrop(object sender, DragEventArgs e)
         {
-            if (e.Data.GetDataPresent(DataFormats.FileDrop))
-            {
-                string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
-                foreach (string filePath in files)
-                {
-                    Console.WriteLine(filePath);
-                }
-            }
+
         }
 
         private void splitContainer_DragOver(object sender, DragEventArgs e)
@@ -829,5 +826,73 @@ namespace hoTools.Query
             Util.StartFile(SqlError.getSqlTemplatesAndMacrosFilePath());
 
         }
+
+        private void contextMenuStripDataGrid_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+
+        }
+
+        /// <summary>
+        /// Load Standard Scripts into EA 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void loadStandardScriptsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // new script group "hoTools"
+            var group = new EaScriptGroup(Model, "hoTools",EaScriptGroup.EaScriptGroupType.NORMAL);
+            if (! group.exists()) group.save();
+
+            // get scripts to create
+            ResourceManager rm = new ResourceManager("hoTools.Query.Resources.Scripts", Assembly.GetExecutingAssembly());
+
+            // new script for script group "hoTools"
+            string code = rm.GetString("hoDemo2ParScript");
+            var script = new EaScript(Model, "hoDemo2Par", "Internal", "VBScript", group.GUID, code);
+            script.save();
+
+            // new script for script group "hoTools"
+            code = rm.GetString("hoDemo3ParScript");
+            script = new EaScript(Model, "hoDemo3Par", "Internal", "VBScript", group.GUID, code);
+            script.save();
+        }
+
+        void QueryGUI_Resize(object sender, EventArgs e)
+        {
+            tabControlSql.Invalidate();
+
+        }
+
+        private void txtSearchTerm_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        /// <summary>
+        /// Make sure the DrawEvent is fired when resizing window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void tabControlSql_Resize(object sender, EventArgs e)
+        {
+            tabControlSql.Invalidate();
+            //tabControlSql.Refresh();
+            //foreach (var tab in tabControlSql.TabPages)
+            //{
+            //    ((TabPage)tab).Invalidate();
+            //    ((TabPage)tab).Refresh();
+            //}
+        }
+
+        //void splitContainer_SplitterMoved(object sender, SplitterEventArgs e)
+        //{
+            //splitContainer.Refresh();
+            //tabControlSql.Refresh();
+        //}
+        //protected override void OnPaintBackground(PaintEventArgs pevent)
+        //{
+        //    Graphics g = pevent.Graphics;
+          
+        //}
     }
 }

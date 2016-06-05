@@ -131,7 +131,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="toolStripContainer1.ContentPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>405, 2</value>
+    <value>458, 0</value>
   </data>
   <data name="&gt;&gt;toolStripContainer1.ContentPanel.Name" xml:space="preserve">
     <value>toolStripContainer1.ContentPanel</value>
@@ -144,6 +144,10 @@
   </data>
   <data name="&gt;&gt;toolStripContainer1.ContentPanel.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="toolStripContainer1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
   </data>
   <data name="&gt;&gt;toolStripContainer1.LeftToolStripPanel.Name" xml:space="preserve">
     <value>toolStripContainer1.LeftToolStripPanel</value>
@@ -158,7 +162,7 @@
     <value>1</value>
   </data>
   <data name="toolStripContainer1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 0</value>
+    <value>0, 0</value>
   </data>
   <data name="&gt;&gt;toolStripContainer1.RightToolStripPanel.Name" xml:space="preserve">
     <value>toolStripContainer1.RightToolStripPanel</value>
@@ -173,7 +177,7 @@
     <value>2</value>
   </data>
   <data name="toolStripContainer1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>405, 27</value>
+    <value>458, 25</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="toolStripContainer1.TabIndex" type="System.Int32, mscorlib">
@@ -185,7 +189,6 @@
   <metadata name="toolStripQuery.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="toolStripQuery.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>None</value>
   </data>
@@ -285,17 +288,6 @@
   <data name="toolStripQuery.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <metadata name="toolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>286, 17</value>
-  </metadata>
-  <data name="toolStripQuery.ToolTip" xml:space="preserve">
-    <value>5 Buttons Model Searches  +
-5 Buttons Services
-
-Buttons to quickly start an configurable 
-- EA Model Search
-- Service</value>
-  </data>
   <data name="&gt;&gt;toolStripQuery.Name" xml:space="preserve">
     <value>toolStripQuery</value>
   </data>
@@ -332,11 +324,17 @@ Buttons to quickly start an configurable
   <data name="&gt;&gt;toolStripContainer1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <metadata name="toolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>286, 17</value>
+  </metadata>
+  <data name="btnLabelRight.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9.75pt</value>
+  </data>
   <data name="btnLabelRight.Location" type="System.Drawing.Point, System.Drawing">
     <value>141, 24</value>
   </data>
   <data name="btnLabelRight.Size" type="System.Drawing.Size, System.Drawing">
-    <value>103, 23</value>
+    <value>159, 23</value>
   </data>
   <data name="btnLabelRight.TabIndex" type="System.Int32, mscorlib">
     <value>37</value>
@@ -360,7 +358,10 @@ Buttons to quickly start an configurable
     <value>panelPort</value>
   </data>
   <data name="&gt;&gt;btnLabelRight.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
+  </data>
+  <data name="btnLabelLeft.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9.75pt</value>
   </data>
   <data name="btnLabelLeft.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
@@ -369,7 +370,7 @@ Buttons to quickly start an configurable
     <value>141, 0</value>
   </data>
   <data name="btnLabelLeft.Size" type="System.Drawing.Size, System.Drawing">
-    <value>103, 23</value>
+    <value>159, 23</value>
   </data>
   <data name="btnLabelLeft.TabIndex" type="System.Int32, mscorlib">
     <value>36</value>
@@ -393,7 +394,7 @@ Buttons to quickly start an configurable
     <value>panelPort</value>
   </data>
   <data name="&gt;&gt;btnLabelLeft.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="btnUp.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 24</value>
@@ -420,7 +421,7 @@ Buttons to quickly start an configurable
     <value>panelPort</value>
   </data>
   <data name="&gt;&gt;btnUp.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="btnDown.Location" type="System.Drawing.Point, System.Drawing">
     <value>41, 24</value>
@@ -447,7 +448,10 @@ Buttons to quickly start an configurable
     <value>panelPort</value>
   </data>
   <data name="&gt;&gt;btnDown.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
+  </data>
+  <data name="btnLeft.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 12pt</value>
   </data>
   <data name="btnLeft.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 0</value>
@@ -474,7 +478,10 @@ Buttons to quickly start an configurable
     <value>panelPort</value>
   </data>
   <data name="&gt;&gt;btnLeft.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
+  </data>
+  <data name="btnRight.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 12pt</value>
   </data>
   <data name="btnRight.Location" type="System.Drawing.Point, System.Drawing">
     <value>41, 0</value>
@@ -501,7 +508,10 @@ Buttons to quickly start an configurable
     <value>panelPort</value>
   </data>
   <data name="&gt;&gt;btnRight.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
+  </data>
+  <data name="btnShowFavorites.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9pt</value>
   </data>
   <data name="btnShowFavorites.Location" type="System.Drawing.Point, System.Drawing">
     <value>96, 0</value>
@@ -530,6 +540,9 @@ Buttons to quickly start an configurable
   <data name="&gt;&gt;btnShowFavorites.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="btnRemoveFavorite.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9pt</value>
+  </data>
   <data name="btnRemoveFavorite.Location" type="System.Drawing.Point, System.Drawing">
     <value>51, 0</value>
   </data>
@@ -556,6 +569,9 @@ Buttons to quickly start an configurable
   </data>
   <data name="&gt;&gt;btnRemoveFavorite.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="btnAddFavorite.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9pt</value>
   </data>
   <data name="btnAddFavorite.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
@@ -584,35 +600,42 @@ Buttons to quickly start an configurable
   <data name="&gt;&gt;btnAddFavorite.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="txtUserText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 0</value>
+  <data name="txtSearchText.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
   </data>
-  <data name="txtUserText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>298, 20</value>
+  <data name="txtSearchText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1, 1</value>
   </data>
-  <data name="txtUserText.TabIndex" type="System.Int32, mscorlib">
+  <data name="txtSearchText.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="txtSearchText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>306, 20</value>
+  </data>
+  <data name="txtSearchText.TabIndex" type="System.Int32, mscorlib">
     <value>27</value>
   </data>
-  <data name="txtUserText.ToolTip" xml:space="preserve">
-    <value>Run EA Search 'Quick View' with:
+  <data name="txtSearchText.ToolTip" xml:space="preserve">
+    <value>Run EA Search (see right) with:
 - Input text + Enter
 - Double left Click with insert Clipboard and start search
 
-Search for:
+Search for (Tip Quick Search from MDG hoTools):
 - Class / Component / Requirement
 - GUID
-- Port</value>
+- Port
+- etc.</value>
   </data>
-  <data name="&gt;&gt;txtUserText.Name" xml:space="preserve">
-    <value>txtUserText</value>
+  <data name="&gt;&gt;txtSearchText.Name" xml:space="preserve">
+    <value>txtSearchText</value>
   </data>
-  <data name="&gt;&gt;txtUserText.Type" xml:space="preserve">
+  <data name="&gt;&gt;txtSearchText.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;txtUserText.Parent" xml:space="preserve">
+  <data name="&gt;&gt;txtSearchText.Parent" xml:space="preserve">
     <value>panelQuickSearch</value>
   </data>
-  <data name="&gt;&gt;txtUserText.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;txtSearchText.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="btnBezier.Location" type="System.Drawing.Point, System.Drawing">
@@ -641,6 +664,9 @@ Search for:
   </data>
   <data name="&gt;&gt;btnBezier.ZOrder" xml:space="preserve">
     <value>5</value>
+  </data>
+  <data name="btnUpdateActivityParameter.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9pt</value>
   </data>
   <data name="btnUpdateActivityParameter.Location" type="System.Drawing.Point, System.Drawing">
     <value>141, 3</value>
@@ -777,6 +803,9 @@ Search for:
   <data name="&gt;&gt;btnOR.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
+  <data name="btnComposite.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9pt</value>
+  </data>
   <data name="btnComposite.Location" type="System.Drawing.Point, System.Drawing">
     <value>141, 54</value>
   </data>
@@ -803,6 +832,9 @@ Search for:
   </data>
   <data name="&gt;&gt;btnComposite.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="btnDisplaySpecification.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9pt</value>
   </data>
   <data name="btnDisplaySpecification.Location" type="System.Drawing.Point, System.Drawing">
     <value>1, 3</value>
@@ -831,6 +863,9 @@ Search for:
   <data name="&gt;&gt;btnDisplaySpecification.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
+  <data name="btnFindUsage.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9pt</value>
+  </data>
   <data name="btnFindUsage.Location" type="System.Drawing.Point, System.Drawing">
     <value>140, 29</value>
   </data>
@@ -857,6 +892,9 @@ Search for:
   </data>
   <data name="&gt;&gt;btnFindUsage.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="btnLocateType.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9pt</value>
   </data>
   <data name="btnLocateType.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 54</value>
@@ -885,6 +923,9 @@ Search for:
   <data name="&gt;&gt;btnLocateType.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <data name="btnAddDiagramNote.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9pt</value>
+  </data>
   <data name="btnAddDiagramNote.Location" type="System.Drawing.Point, System.Drawing">
     <value>141, 0</value>
   </data>
@@ -911,6 +952,9 @@ Search for:
   </data>
   <data name="&gt;&gt;btnAddDiagramNote.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="btnAddElementNote.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9pt</value>
   </data>
   <data name="btnAddElementNote.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
@@ -939,6 +983,9 @@ Search for:
   <data name="&gt;&gt;btnAddElementNote.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="btnLocateOperation.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9pt</value>
+  </data>
   <data name="btnLocateOperation.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 29</value>
   </data>
@@ -965,6 +1012,9 @@ Search for:
   </data>
   <data name="&gt;&gt;btnLocateOperation.ZOrder" xml:space="preserve">
     <value>4</value>
+  </data>
+  <data name="btnDisplayBehavior.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9pt</value>
   </data>
   <data name="btnDisplayBehavior.Location" type="System.Drawing.Point, System.Drawing">
     <value>141, -1</value>
@@ -1128,34 +1178,48 @@ Search for:
   <data name="&gt;&gt;btnLH.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="txtUserTextName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>307, 0</value>
+  <data name="txtSearchName.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
   </data>
-  <data name="txtUserTextName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>88, 20</value>
+  <data name="txtSearchName.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 9pt</value>
   </data>
-  <data name="txtUserTextName.TabIndex" type="System.Int32, mscorlib">
+  <data name="txtSearchName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>309, 1</value>
+  </data>
+  <data name="txtSearchName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="txtSearchName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>148, 21</value>
+  </data>
+  <data name="txtSearchName.TabIndex" type="System.Int32, mscorlib">
     <value>28</value>
   </data>
-  <data name="txtUserTextName.ToolTip" xml:space="preserve">
+  <data name="txtSearchName.Text" xml:space="preserve">
+    <value>Simple</value>
+  </data>
+  <data name="txtSearchName.ToolTip" xml:space="preserve">
     <value>Name EA Search to quickly find your most interesting stuff:
-- Input text + Enter
-- Double left Click with insert Clipboard and start search
+- Insert search name
+- If blank the default from configuration is used
+- Douple Mouse Click starts the Search
+- Enter starts the Search
 
 Search for:
 - Your stuff at your finger tip
 </value>
   </data>
-  <data name="&gt;&gt;txtUserTextName.Name" xml:space="preserve">
-    <value>txtUserTextName</value>
+  <data name="&gt;&gt;txtSearchName.Name" xml:space="preserve">
+    <value>txtSearchName</value>
   </data>
-  <data name="&gt;&gt;txtUserTextName.Type" xml:space="preserve">
+  <data name="&gt;&gt;txtSearchName.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;txtUserTextName.Parent" xml:space="preserve">
+  <data name="&gt;&gt;txtSearchName.Parent" xml:space="preserve">
     <value>panelQuickSearch</value>
   </data>
-  <data name="&gt;&gt;txtUserTextName.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;txtSearchName.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="btnConveyedItemConnector.Location" type="System.Drawing.Point, System.Drawing">
@@ -1192,7 +1256,7 @@ There is no interface to directly access the connector (as far as I'm aware of)<
     <value>panelConveyedItems</value>
   </data>
   <data name="&gt;&gt;btnConveyedItemConnector.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="btnConveyedItemElement.Location" type="System.Drawing.Point, System.Drawing">
     <value>96, -1</value>
@@ -1227,34 +1291,43 @@ There is no interface to directly select more than one Browser Element (as far a
     <value>panelConveyedItems</value>
   </data>
   <data name="&gt;&gt;btnConveyedItemElement.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <metadata name="menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>376, 17</value>
   </metadata>
   <data name="settingGeneralToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>345, 22</value>
+    <value>294, 22</value>
   </data>
   <data name="settingGeneralToolStripMenuItem.Text" xml:space="preserve">
     <value>Setting &amp;General</value>
   </data>
+  <data name="settingsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>294, 22</value>
+  </data>
+  <data name="settingsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Settings Default &amp;Linestyle</value>
+  </data>
+  <data name="settingsToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Setting the default linestyle of Diagram Types</value>
+  </data>
+  <data name="settingsToolbarToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>294, 22</value>
+  </data>
+  <data name="settingsToolbarToolStripMenuItem.Text" xml:space="preserve">
+    <value>Settings Toolbar for Searches and Services</value>
+  </data>
   <data name="settingsQueryAndSctipToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>345, 22</value>
+    <value>294, 22</value>
   </data>
   <data name="settingsQueryAndSctipToolStripMenuItem.Text" xml:space="preserve">
     <value>Settings &amp;Query and Script</value>
   </data>
-  <data name="settingsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>345, 22</value>
+  <data name="settingsGlobalKeysToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>294, 22</value>
   </data>
-  <data name="settingsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Settings &amp;Linestyle</value>
-  </data>
-  <data name="settingsKeysToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>345, 22</value>
-  </data>
-  <data name="settingsKeysToolStripMenuItem.Text" xml:space="preserve">
-    <value>Settings Buttons and Keys for Searches and Services</value>
+  <data name="settingsGlobalKeysToolStripMenuItem.Text" xml:space="preserve">
+    <value>Settings Global Keys</value>
   </data>
   <data name="fileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>37, 20</value>
@@ -1321,7 +1394,7 @@ There is no interface to directly select more than one Browser Element (as far a
     <value>&amp;Change XML file</value>
   </data>
   <data name="changeXMLFileToolStripMenuItem.ToolTipText" xml:space="preserve">
-    <value>Change the *.xml file patch for a Version controlled package</value>
+    <value>Change the *.xml file path for a Version controlled package</value>
   </data>
   <data name="showFolderVCorCodeToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>291, 22</value>
@@ -1609,7 +1682,7 @@ Select Element to make direction of all Port connections to unspecified.</value>
     <value>0, 0</value>
   </data>
   <data name="menuStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>409, 24</value>
+    <value>458, 24</value>
   </data>
   <data name="menuStrip1.TabIndex" type="System.Int32, mscorlib">
     <value>22</value>
@@ -1629,41 +1702,17 @@ Select Element to make direction of all Port connections to unspecified.</value>
   <data name="&gt;&gt;menuStrip1.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
-  <data name="panelQuickSearch.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Top</value>
-  </data>
-  <data name="panelQuickSearch.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 24</value>
-  </data>
-  <data name="panelQuickSearch.Size" type="System.Drawing.Size, System.Drawing">
-    <value>409, 24</value>
-  </data>
-  <data name="panelQuickSearch.TabIndex" type="System.Int32, mscorlib">
-    <value>38</value>
-  </data>
-  <data name="panelQuickSearch.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;panelQuickSearch.Name" xml:space="preserve">
-    <value>panelQuickSearch</value>
-  </data>
-  <data name="&gt;&gt;panelQuickSearch.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;panelQuickSearch.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;panelQuickSearch.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
   <data name="panelButtons.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
   </data>
   <data name="panelButtons.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 48</value>
+    <value>0, 24</value>
+  </data>
+  <data name="panelButtons.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
   </data>
   <data name="panelButtons.Size" type="System.Drawing.Size, System.Drawing">
-    <value>409, 33</value>
+    <value>458, 25</value>
   </data>
   <data name="panelButtons.TabIndex" type="System.Int32, mscorlib">
     <value>39</value>
@@ -1681,16 +1730,16 @@ Select Element to make direction of all Port connections to unspecified.</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;panelButtons.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="panelLineStyle.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
   </data>
   <data name="panelLineStyle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 81</value>
+    <value>0, 71</value>
   </data>
   <data name="panelLineStyle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>409, 52</value>
+    <value>458, 52</value>
   </data>
   <data name="panelLineStyle.TabIndex" type="System.Int32, mscorlib">
     <value>40</value>
@@ -1714,10 +1763,10 @@ Select Element to make direction of all Port connections to unspecified.</value>
     <value>Top</value>
   </data>
   <data name="panelFavorite.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 158</value>
+    <value>0, 148</value>
   </data>
   <data name="panelFavorite.Size" type="System.Drawing.Size, System.Drawing">
-    <value>409, 24</value>
+    <value>458, 24</value>
   </data>
   <data name="panelFavorite.TabIndex" type="System.Int32, mscorlib">
     <value>41</value>
@@ -1741,10 +1790,10 @@ Select Element to make direction of all Port connections to unspecified.</value>
     <value>Top</value>
   </data>
   <data name="panelNote.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 261</value>
+    <value>0, 251</value>
   </data>
   <data name="panelNote.Size" type="System.Drawing.Size, System.Drawing">
-    <value>409, 25</value>
+    <value>458, 25</value>
   </data>
   <data name="panelNote.TabIndex" type="System.Int32, mscorlib">
     <value>42</value>
@@ -1764,14 +1813,44 @@ Select Element to make direction of all Port connections to unspecified.</value>
   <data name="&gt;&gt;panelNote.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="lblPorts.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblPorts.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 12pt</value>
+  </data>
+  <data name="lblPorts.Location" type="System.Drawing.Point, System.Drawing">
+    <value>80, 7</value>
+  </data>
+  <data name="lblPorts.Size" type="System.Drawing.Size, System.Drawing">
+    <value>46, 20</value>
+  </data>
+  <data name="lblPorts.TabIndex" type="System.Int32, mscorlib">
+    <value>38</value>
+  </data>
+  <data name="lblPorts.Text" xml:space="preserve">
+    <value>Ports</value>
+  </data>
+  <data name="&gt;&gt;lblPorts.Name" xml:space="preserve">
+    <value>lblPorts</value>
+  </data>
+  <data name="&gt;&gt;lblPorts.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblPorts.Parent" xml:space="preserve">
+    <value>panelPort</value>
+  </data>
+  <data name="&gt;&gt;lblPorts.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="panelPort.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
   </data>
   <data name="panelPort.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 286</value>
+    <value>0, 276</value>
   </data>
   <data name="panelPort.Size" type="System.Drawing.Size, System.Drawing">
-    <value>409, 50</value>
+    <value>458, 50</value>
   </data>
   <data name="panelPort.TabIndex" type="System.Int32, mscorlib">
     <value>43</value>
@@ -1795,10 +1874,10 @@ Select Element to make direction of all Port connections to unspecified.</value>
     <value>Top</value>
   </data>
   <data name="panelAdvanced.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 182</value>
+    <value>0, 172</value>
   </data>
   <data name="panelAdvanced.Size" type="System.Drawing.Size, System.Drawing">
-    <value>409, 79</value>
+    <value>458, 79</value>
   </data>
   <data name="panelAdvanced.TabIndex" type="System.Int32, mscorlib">
     <value>44</value>
@@ -1818,14 +1897,41 @@ Select Element to make direction of all Port connections to unspecified.</value>
   <data name="&gt;&gt;panelAdvanced.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="lblConveyedItems.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblConveyedItems.Location" type="System.Drawing.Point, System.Drawing">
+    <value>192, 6</value>
+  </data>
+  <data name="lblConveyedItems.Size" type="System.Drawing.Size, System.Drawing">
+    <value>83, 13</value>
+  </data>
+  <data name="lblConveyedItems.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="lblConveyedItems.Text" xml:space="preserve">
+    <value>Conveyed Items</value>
+  </data>
+  <data name="&gt;&gt;lblConveyedItems.Name" xml:space="preserve">
+    <value>lblConveyedItems</value>
+  </data>
+  <data name="&gt;&gt;lblConveyedItems.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblConveyedItems.Parent" xml:space="preserve">
+    <value>panelConveyedItems</value>
+  </data>
+  <data name="&gt;&gt;lblConveyedItems.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="panelConveyedItems.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
   </data>
   <data name="panelConveyedItems.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 133</value>
+    <value>0, 123</value>
   </data>
   <data name="panelConveyedItems.Size" type="System.Drawing.Size, System.Drawing">
-    <value>409, 25</value>
+    <value>458, 25</value>
   </data>
   <data name="panelConveyedItems.TabIndex" type="System.Int32, mscorlib">
     <value>45</value>
@@ -1845,6 +1951,39 @@ Select Element to make direction of all Port connections to unspecified.</value>
   <data name="&gt;&gt;panelConveyedItems.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
+  <data name="panelQuickSearch.ColumnCount" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="panelQuickSearch.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="panelQuickSearch.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 49</value>
+  </data>
+  <data name="panelQuickSearch.RowCount" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="panelQuickSearch.Size" type="System.Drawing.Size, System.Drawing">
+    <value>458, 22</value>
+  </data>
+  <data name="panelQuickSearch.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;panelQuickSearch.Name" xml:space="preserve">
+    <value>panelQuickSearch</value>
+  </data>
+  <data name="&gt;&gt;panelQuickSearch.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;panelQuickSearch.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;panelQuickSearch.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="panelQuickSearch.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="txtSearchName" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="txtSearchText" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100,Absolute,150" /&gt;&lt;Rows Styles="Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -1852,7 +1991,7 @@ Select Element to make direction of all Port connections to unspecified.</value>
     <value>True</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>409, 407</value>
+    <value>458, 407</value>
   </data>
   <data name="&gt;&gt;toolStripSearchBtn1.Name" xml:space="preserve">
     <value>toolStripSearchBtn1</value>
@@ -1938,22 +2077,28 @@ Select Element to make direction of all Port connections to unspecified.</value>
   <data name="&gt;&gt;settingGeneralToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;settingsQueryAndSctipToolStripMenuItem.Name" xml:space="preserve">
-    <value>settingsQueryAndSctipToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;settingsQueryAndSctipToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;settingsToolStripMenuItem.Name" xml:space="preserve">
     <value>settingsToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;settingsToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;settingsKeysToolStripMenuItem.Name" xml:space="preserve">
-    <value>settingsKeysToolStripMenuItem</value>
+  <data name="&gt;&gt;settingsToolbarToolStripMenuItem.Name" xml:space="preserve">
+    <value>settingsToolbarToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;settingsKeysToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;settingsToolbarToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;settingsQueryAndSctipToolStripMenuItem.Name" xml:space="preserve">
+    <value>settingsQueryAndSctipToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;settingsQueryAndSctipToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;settingsGlobalKeysToolStripMenuItem.Name" xml:space="preserve">
+    <value>settingsGlobalKeysToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;settingsGlobalKeysToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;doToolStripMenuItem.Name" xml:space="preserve">

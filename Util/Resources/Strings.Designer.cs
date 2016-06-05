@@ -152,6 +152,41 @@ namespace hoTools.Utils.Resources {
         
         /// <summary>
         ///   Looks up a localized string similar to //
+        ///// Template delete tree selected 
+        /////
+        ///delete from t_object 
+        ///where ea_guid in (#TreeSelectedGUIDS#).
+        /// </summary>
+        internal static string DeleteTreeSelectedItemsTemplate {
+            get {
+                return ResourceManager.GetString("DeleteTreeSelectedItemsTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to //
+        ///// Template DemoRunScript
+        ///// use Script: 
+        ///// - hoDemoScript (3 parameters)
+        ///// - hoDemoPrintContext (2 parameters)
+        /////
+        /////
+        ///select o.ea_guid AS CLASSGUID, o.object_type AS CLASSTYPE,o.Name AS Name,o.object_type As Type 
+        ///from t_object o
+        ///where o.name like &apos;&lt;Search Term&gt;#WC#&apos; AND      o.object_type in 
+        ///     (
+        ///      &quot;Class&quot;,&quot;Component&quot;
+        ///      )
+        ///ORDER BY o.Name.
+        /// </summary>
+        internal static string DemoRunScript {
+            get {
+                return ResourceManager.GetString("DemoRunScript", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to //
         ///// Template DiagramElements_IDS
         /////
         ///select o.ea_guid AS CLASSGUID, o.object_type AS CLASSTYPE,o.Name AS Name,o.object_type As Type 
@@ -183,6 +218,21 @@ namespace hoTools.Utils.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to //
+        ///// Template Insert Element into current selected Package (direct or indirect selected via Element, Diagram, Operation, Attribute in Package)
+        /////
+        ///insert into t_object 
+        ///   (ea_guid, object_type, Name, Package_ID)
+        ///values
+        ///   (&apos;#NewGuid#&apos;, &apos;Class&apos;, &apos;XXXX&apos;, #Package#).
+        /// </summary>
+        internal static string InsertElementIntoCurrentPackage {
+            get {
+                return ResourceManager.GetString("InsertElementIntoCurrentPackage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
         ///&lt;RootSearch&gt;&lt;Search Name=&quot;Favorites&quot; GUID=&quot;{A70B9F0E-14CD-4c03-B8FE-21C644DC2D5E}&quot; 
         ///PkgGUID=&quot;-1&quot; Type=&quot;0&quot; LnksToObj=&quot;0&quot; CustomSearch=&quot;1&quot; AddinAndMethodName=&quot;&quot;&gt;&lt;SrchOn&gt;
@@ -200,6 +250,20 @@ namespace hoTools.Utils.Resources {
         internal static string SearchFavoriteName {
             get {
                 return ResourceManager.GetString("SearchFavoriteName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to //
+        ///// Template Update Current selected Item (Element, Diagram, Attribute, Operation) 
+        /////
+        ///update t_object set
+        ///   name = &apos;XXXClass55&apos;
+        ///where object_ID = #CurrentItemID#.
+        /// </summary>
+        internal static string UpdateCurrentSelectedItemTemplate {
+            get {
+                return ResourceManager.GetString("UpdateCurrentSelectedItemTemplate", resourceCulture);
             }
         }
     }

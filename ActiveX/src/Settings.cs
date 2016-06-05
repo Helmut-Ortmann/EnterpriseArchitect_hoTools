@@ -1080,6 +1080,7 @@ namespace hoTools.Settings
                         {
                             service.Method = s.Method;
                             service.Help = s.Help;
+                            service.Description = s.Description;
                             break;
                         }
                     }

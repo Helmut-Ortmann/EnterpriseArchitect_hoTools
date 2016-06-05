@@ -117,56 +117,89 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
-  <data name="txtQuickSearch.ToolTip" xml:space="preserve">
-    <value>EA Model Search Name for Quick Search (Tip: Quick Search from MDG hoTools)
-- Simple (EA Standard Search)  or
-- Other EA Model Search or
-- Your own Search for your most important EA Model Items
+  <data name="hoDemo2ParScript" xml:space="preserve">
+    <value>'EA-Matic
+'[path=\Framework\ho\hoTools]
+'[group=hoTools]
+!INC Local Scripts.EAConstants-VBScript
+' Dim doesn't work (syntax error)
+' Object 'Session' doesn't exist (use  Repository.WriteOutput "Script", "MyTest",0)
+' Var 'Repository' is loaded
+' You may create an instance 'EAAddinFramework.Utils.Model' of the first running EA-Instance
 
-Your most frequently Model Items at your finger tip.
-
-Keep it empty to hide Quick Search support</value>
+function hoDemoPrintContext(modelItem, objectType)
+    'Dim itemType as 5
+	itemType = "unknown"
+	Select Case objectType
+	    Case otElement
+			itemType = "Element"
+		Case otPackage
+			itemType = "Package"
+		Case otDiagram
+			itemType = "Diagram"
+		Case otAttribute
+			itemType = "Attribute"
+		Case otOperation
+			itemType = "Operation"
+	End Select
+	Dim s 
+	s = "hoDemoPrintContext: Context item is: '" + modelItem.Name + "' of type '" + itemType + "'"
+    ' Output to EA			
+    Repository.EnsureOutputVisible("Script") 
+	Repository.WriteOutput "Script", s, 0
+end function</value>
+    <comment>Demo Script to show Query with Script functionality with 2 Parameters</comment>
   </data>
-  <data name="label1.ToolTip" xml:space="preserve">
-    <value>EA Model Search Name for Quick Search
-- Simple (EA Standard Search)  or
-- Other EA Model Search or
-- Your own Search for your most important EA Model Items
+  <data name="hoDemo3ParScript" xml:space="preserve">
+    <value>'EA-Matic
+' Usage of Geert Bellekens Script Framework to administer Scripts recommended
+'[path=\Framework\ho\hoTools]
+'[group=hoTools]
+'option explicit
 
-Your most frequently Model Items at your finger tip.
+!INC Local Scripts.EAConstants-VBScript
+'----------------------------------------------------------------------
+' Dim doesn't work (syntax error, used in EA for intellissense)
+' Object 'Session' doesn't exist (use  Repository.WriteOutput "Script", "MyTest",0)
+' Var 'Repository' is loaded by script environment
+' You may create an instance 'EAAddinFramework.Utils.Model' of the first running EA-Instance
 
-Keep it empty to hide Quick Search support</value>
-  </data>
-  <data name="txtFileManagerPath.ToolTip" xml:space="preserve">
-    <value>Path to a File Manager like:
-- Explorer.exe (default, leave it empty)
-- Totalcmd.exe
+'---------------------------------------------------------------------
+' Par1: ModelItem (diagram, package, element)
+' Par2: ObjectType
+' Par3: Model (methods and attributes see code in https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools.git)
+function hoDemo3Parameter(ModelItem, ObjectType, Model)
+   ' The EA default variable 'Repository'
+    'Repository.ClearOutput("Script")
+    Repository.EnsureOutputVisible("Script") 
 
-Example:
-c:\Program Files (x86)\totalcmd\TOTALCMD64.EXE
+    ' just output the parameters
+	Repository.WriteOutput "Script","Par1: '"+ CStr(ObjectType) + "' Par2: '" + ModelItem.Name + "' Par3: '" + Model + "'",0
+	
+	' Get Repository via Model object.
+    set m = CreateObject("EAAddinFramework.Utils.Model")
+    ' Create new Model Object with the first running EA instance
+	set rep = m.Repository
+	rep.EnsureOutputVisible("Script") 
+	rep.WriteOutput "Script","Par1: '"+ CStr(ObjectType) + "' Par2: '" + ModelItem.Name + "' Par3: '" + Model + "'",0
+	
+	itemType = "unknown"
+	Select Case ObjectType
+	    Case otElement
+			itemType = "Element"
+		Case otPackage
+			itemType = "Package"
+		Case otDiagram
+			itemType = "Diagram"
+		Case otAttribute
+			itemType = "Attribute"
+		Case otOperation
+			itemType = "Operation"
+	End Select
+	rep.WriteOutput "Script", "hoDemo3Parameter: item type='" + itemType + "', name='" + ModelItem.Name + "' found.",0
+	rep.WriteOutput "Script","----------------------------------------------------",0
 
-Think if you have to change the %PATH% environment variable</value>
-  </data>
-  <data name="groupBox2.ToolTip" xml:space="preserve">
-    <value>Define the MDG you want to load:
-- No MDG
-- hoToolsBasic.xml MDG (Basic queries and Scripts)
-- hoToolsCompilation.xml   MDG (all queries &amp; script) 
-
-Note:
-Searches usually are project or organisation specific. </value>
-  </data>
-  <data name="chkConveyedItemSupport.ToolTip" xml:space="preserve">
-    <value>Buttons to support Conveyed Items on connectors like information flow:
-- Get Connector Items for selected connector
-- Get Connector for selected item
-
-You can easily implement such functions by search and macros like:
-- '#CONVEYED_ITEMS#'
-
-</value>
+end function</value>
+    <comment>Demo Script to show Query with Script functionality with 3 Parameters</comment>
   </data>
 </root>

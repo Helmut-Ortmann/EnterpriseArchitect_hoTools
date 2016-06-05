@@ -40,9 +40,13 @@ namespace hoTools.Query
             this.btnRunScriptForSqlWithAsk = new System.Windows.Forms.Button();
             this.dataGridViewScripts = new System.Windows.Forms.DataGridView();
             this.contextMenuStripDataGrid = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.ShowErrorToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.runScriptToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.runScriptAndAskToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.loadScriptsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.showScriptToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ShowErrorToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControlSql = new System.Windows.Forms.TabControl();
             this.btnUndo = new System.Windows.Forms.Button();
             this.btnRedo = new System.Windows.Forms.Button();
@@ -67,6 +71,7 @@ namespace hoTools.Query
             this.saveAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadStandardScriptsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -76,8 +81,7 @@ namespace hoTools.Query
             this.splitContainer = new System.Windows.Forms.SplitContainer();
             this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewScripts)).BeginInit();
             this.contextMenuStripDataGrid.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -87,13 +91,16 @@ namespace hoTools.Query
             this.splitContainer.SuspendLayout();
             this.flowLayoutPanel4.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtSearchTerm
             // 
-            this.txtSearchTerm.Location = new System.Drawing.Point(302, 3);
+            this.txtSearchTerm.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtSearchTerm.Location = new System.Drawing.Point(258, 3);
+            this.txtSearchTerm.MinimumSize = new System.Drawing.Size(50, 4);
             this.txtSearchTerm.Name = "txtSearchTerm";
-            this.txtSearchTerm.Size = new System.Drawing.Size(223, 20);
+            this.txtSearchTerm.Size = new System.Drawing.Size(428, 20);
             this.txtSearchTerm.TabIndex = 7;
             this.toolTip1.SetToolTip(this.txtSearchTerm, resources.GetString("txtSearchTerm.ToolTip"));
             this.txtSearchTerm.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSearchTerm_KeyDown);
@@ -102,24 +109,24 @@ namespace hoTools.Query
             // 
             // btnRunScriptForSql
             // 
-            this.btnRunScriptForSql.Location = new System.Drawing.Point(129, 3);
+            this.btnRunScriptForSql.Location = new System.Drawing.Point(121, 3);
             this.btnRunScriptForSql.Name = "btnRunScriptForSql";
-            this.btnRunScriptForSql.Size = new System.Drawing.Size(120, 23);
+            this.btnRunScriptForSql.Size = new System.Drawing.Size(108, 23);
             this.btnRunScriptForSql.TabIndex = 4;
-            this.btnRunScriptForSql.Text = "Run Query and Script";
-            this.toolTip1.SetToolTip(this.btnRunScriptForSql, "Run Query and execute Script for all found Elements");
+            this.btnRunScriptForSql.Text = "Run Script";
+            this.toolTip1.SetToolTip(this.btnRunScriptForSql, "Run current Query and execute Script for all found Elements (rows)");
             this.btnRunScriptForSql.UseVisualStyleBackColor = true;
             this.btnRunScriptForSql.Click += new System.EventHandler(this.btnRunScriptForSql_Click);
             // 
             // btnRunScriptForSqlWithAsk
             // 
-            this.btnRunScriptForSqlWithAsk.Location = new System.Drawing.Point(255, 3);
+            this.btnRunScriptForSqlWithAsk.Location = new System.Drawing.Point(235, 3);
             this.btnRunScriptForSqlWithAsk.Name = "btnRunScriptForSqlWithAsk";
-            this.btnRunScriptForSqlWithAsk.Size = new System.Drawing.Size(120, 23);
+            this.btnRunScriptForSqlWithAsk.Size = new System.Drawing.Size(123, 23);
             this.btnRunScriptForSqlWithAsk.TabIndex = 8;
-            this.btnRunScriptForSqlWithAsk.Text = "Run Query, Script and ask";
-            this.toolTip1.SetToolTip(this.btnRunScriptForSqlWithAsk, "Run Query until next found element, execute Script for this element and ask to:\r\n" +
-        "- Break\r\n- Proceed next\r\n- Proceed all");
+            this.btnRunScriptForSqlWithAsk.Text = "Run Script and ask";
+            this.toolTip1.SetToolTip(this.btnRunScriptForSqlWithAsk, "Run current / active Query until next found element, execute Script for this elem" +
+        "ent and ask to:\r\n- Break\r\n- Execute Script on current row\r\n- Skip current row");
             this.btnRunScriptForSqlWithAsk.UseVisualStyleBackColor = true;
             this.btnRunScriptForSqlWithAsk.Click += new System.EventHandler(this.btnRunScriptForSqlWithAsk_Click);
             // 
@@ -159,7 +166,7 @@ namespace hoTools.Query
             this.dataGridViewScripts.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridViewScripts.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
             this.dataGridViewScripts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewScripts.Size = new System.Drawing.Size(767, 146);
+            this.dataGridViewScripts.Size = new System.Drawing.Size(767, 148);
             this.dataGridViewScripts.TabIndex = 3;
             this.toolTip1.SetToolTip(this.dataGridViewScripts, resources.GetString("dataGridViewScripts.ToolTip"));
             this.dataGridViewScripts.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dataGridViewScripts_MouseClick);
@@ -167,33 +174,69 @@ namespace hoTools.Query
             // contextMenuStripDataGrid
             // 
             this.contextMenuStripDataGrid.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ShowErrorToolStripMenuItem1,
             this.runScriptToolStripMenuItem,
-            this.showScriptToolStripMenuItem});
+            this.runScriptAndAskToolStripMenuItem,
+            this.toolStripSeparator5,
+            this.loadScriptsToolStripMenuItem,
+            this.toolStripSeparator6,
+            this.showScriptToolStripMenuItem,
+            this.ShowErrorToolStripMenuItem1});
             this.contextMenuStripDataGrid.Name = "contextMenuStripDataGrid";
-            this.contextMenuStripDataGrid.Size = new System.Drawing.Size(162, 70);
+            this.contextMenuStripDataGrid.Size = new System.Drawing.Size(331, 126);
             this.contextMenuStripDataGrid.Text = "C";
-            // 
-            // ShowErrorToolStripMenuItem1
-            // 
-            this.ShowErrorToolStripMenuItem1.Name = "ShowErrorToolStripMenuItem1";
-            this.ShowErrorToolStripMenuItem1.Size = new System.Drawing.Size(161, 22);
-            this.ShowErrorToolStripMenuItem1.Text = "Show&Script Error";
-            this.ShowErrorToolStripMenuItem1.Click += new System.EventHandler(this.ShowScriptErrorToolStripMenuItem_Click);
+            this.contextMenuStripDataGrid.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStripDataGrid_Opening);
             // 
             // runScriptToolStripMenuItem
             // 
             this.runScriptToolStripMenuItem.Name = "runScriptToolStripMenuItem";
-            this.runScriptToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
-            this.runScriptToolStripMenuItem.Text = "&RunScript";
-            this.runScriptToolStripMenuItem.Click += new System.EventHandler(this.runScriptToolStripMenuItem_Click);
+            this.runScriptToolStripMenuItem.Size = new System.Drawing.Size(330, 22);
+            this.runScriptToolStripMenuItem.Text = "&Run Script for Query";
+            this.runScriptToolStripMenuItem.ToolTipText = "Run current Query and execute Script for all found Elements (rows)";
+            this.runScriptToolStripMenuItem.Click += new System.EventHandler(this.btnRunScriptForSql_Click);
+            // 
+            // runScriptAndAskToolStripMenuItem
+            // 
+            this.runScriptAndAskToolStripMenuItem.Name = "runScriptAndAskToolStripMenuItem";
+            this.runScriptAndAskToolStripMenuItem.Size = new System.Drawing.Size(330, 22);
+            this.runScriptAndAskToolStripMenuItem.Text = "Run Script for Query results and ask for each row";
+            this.runScriptAndAskToolStripMenuItem.ToolTipText = "Run current / active Query until next found element, execute Script for this elem" +
+    "ent and ask to:\r\n- Break\r\n- Execute Script on current row\r\n- Skip current row";
+            this.runScriptAndAskToolStripMenuItem.Click += new System.EventHandler(this.btnRunScriptForSqlWithAsk_Click);
+            // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(327, 6);
+            // 
+            // loadScriptsToolStripMenuItem
+            // 
+            this.loadScriptsToolStripMenuItem.Name = "loadScriptsToolStripMenuItem";
+            this.loadScriptsToolStripMenuItem.Size = new System.Drawing.Size(330, 22);
+            this.loadScriptsToolStripMenuItem.Text = "Load  Scripts";
+            this.loadScriptsToolStripMenuItem.ToolTipText = "Load, compile and show Scripts with:\r\n- Contains string \'EA-Matic\'\r\n- Have 2 or 3" +
+    " parameters\r\n- JScript\r\n- vbScript\r\n- JavaScript";
+            this.loadScriptsToolStripMenuItem.Click += new System.EventHandler(this.btnLoadScripts_Click);
+            // 
+            // toolStripSeparator6
+            // 
+            this.toolStripSeparator6.Name = "toolStripSeparator6";
+            this.toolStripSeparator6.Size = new System.Drawing.Size(327, 6);
             // 
             // showScriptToolStripMenuItem
             // 
             this.showScriptToolStripMenuItem.Name = "showScriptToolStripMenuItem";
-            this.showScriptToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
+            this.showScriptToolStripMenuItem.Size = new System.Drawing.Size(330, 22);
             this.showScriptToolStripMenuItem.Text = "&ShowScript";
             this.showScriptToolStripMenuItem.Click += new System.EventHandler(this.showScriptToolStripMenuItem_Click);
+            // 
+            // ShowErrorToolStripMenuItem1
+            // 
+            this.ShowErrorToolStripMenuItem1.Name = "ShowErrorToolStripMenuItem1";
+            this.ShowErrorToolStripMenuItem1.Size = new System.Drawing.Size(330, 22);
+            this.ShowErrorToolStripMenuItem1.Text = "Show&Script Error";
+            this.ShowErrorToolStripMenuItem1.ToolTipText = "Show errors of Script.\r\n\r\nNote:\r\n1. Some errors results in not showing in this li" +
+    "st\r\n2. Just run Script in EA to check for errors";
+            this.ShowErrorToolStripMenuItem1.Click += new System.EventHandler(this.ShowScriptErrorToolStripMenuItem_Click);
             // 
             // tabControlSql
             // 
@@ -207,7 +250,7 @@ namespace hoTools.Query
             this.tabControlSql.Name = "tabControlSql";
             this.tabControlSql.SelectedIndex = 0;
             this.tabControlSql.ShowToolTips = true;
-            this.tabControlSql.Size = new System.Drawing.Size(767, 332);
+            this.tabControlSql.Size = new System.Drawing.Size(767, 330);
             this.tabControlSql.TabIndex = 5;
             this.toolTip1.SetToolTip(this.tabControlSql, "Enter SQL code. EA macros like:\r\n- #Branch#\r\n- #ObjectID#\r\n- #ObjectGUID#\r\n- #Pac" +
         "kage#\r\n- \'Search Term\'\r\n\r\nare allowed.");
@@ -220,10 +263,12 @@ namespace hoTools.Query
             // 
             // btnUndo
             // 
+            this.btnUndo.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnUndo.Image = global::hoTools.Query.Properties.Resources.icon_undo_h;
-            this.btnUndo.Location = new System.Drawing.Point(198, 3);
+            this.btnUndo.Location = new System.Drawing.Point(163, 0);
+            this.btnUndo.Margin = new System.Windows.Forms.Padding(0);
             this.btnUndo.Name = "btnUndo";
-            this.btnUndo.Size = new System.Drawing.Size(32, 23);
+            this.btnUndo.Size = new System.Drawing.Size(32, 24);
             this.btnUndo.TabIndex = 9;
             this.toolTip1.SetToolTip(this.btnUndo, "Undo Text change (CTRL+Z)");
             this.btnUndo.UseVisualStyleBackColor = true;
@@ -231,10 +276,12 @@ namespace hoTools.Query
             // 
             // btnRedo
             // 
+            this.btnRedo.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnRedo.Image = global::hoTools.Query.Properties.Resources.icon_redo_h;
-            this.btnRedo.Location = new System.Drawing.Point(236, 3);
+            this.btnRedo.Location = new System.Drawing.Point(196, 1);
+            this.btnRedo.Margin = new System.Windows.Forms.Padding(1);
             this.btnRedo.Name = "btnRedo";
-            this.btnRedo.Size = new System.Drawing.Size(31, 23);
+            this.btnRedo.Size = new System.Drawing.Size(31, 22);
             this.btnRedo.TabIndex = 11;
             this.toolTip1.SetToolTip(this.btnRedo, "Redo Text change (CTRL+Y)");
             this.btnRedo.UseVisualStyleBackColor = true;
@@ -242,11 +289,13 @@ namespace hoTools.Query
             // 
             // btnSave
             // 
+            this.btnSave.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnSave.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.Image")));
             this.btnSave.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnSave.Location = new System.Drawing.Point(84, 3);
+            this.btnSave.Location = new System.Drawing.Point(67, 0);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(0);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(32, 32);
+            this.btnSave.Size = new System.Drawing.Size(32, 24);
             this.btnSave.TabIndex = 12;
             this.toolTip1.SetToolTip(this.btnSave, "Save active SQL Tabs at its current location (CTRL+S). If unsaved you are asked t" +
         "o choose a location.");
@@ -255,11 +304,13 @@ namespace hoTools.Query
             // 
             // btnSaveAll
             // 
+            this.btnSaveAll.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnSaveAll.Image = ((System.Drawing.Image)(resources.GetObject("btnSaveAll.Image")));
             this.btnSaveAll.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnSaveAll.Location = new System.Drawing.Point(122, 3);
+            this.btnSaveAll.Location = new System.Drawing.Point(99, 0);
+            this.btnSaveAll.Margin = new System.Windows.Forms.Padding(0);
             this.btnSaveAll.Name = "btnSaveAll";
-            this.btnSaveAll.Size = new System.Drawing.Size(32, 32);
+            this.btnSaveAll.Size = new System.Drawing.Size(32, 24);
             this.btnSaveAll.TabIndex = 13;
             this.toolTip1.SetToolTip(this.btnSaveAll, "Save all SQL Tabs at their current location (CTRL+SHFT+S). If unsaved Tabs you ar" +
         "e asked to choose a location.\r\n");
@@ -268,11 +319,13 @@ namespace hoTools.Query
             // 
             // btnSaveAs
             // 
+            this.btnSaveAs.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnSaveAs.Image = ((System.Drawing.Image)(resources.GetObject("btnSaveAs.Image")));
             this.btnSaveAs.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnSaveAs.Location = new System.Drawing.Point(160, 3);
+            this.btnSaveAs.Location = new System.Drawing.Point(131, 0);
+            this.btnSaveAs.Margin = new System.Windows.Forms.Padding(0);
             this.btnSaveAs.Name = "btnSaveAs";
-            this.btnSaveAs.Size = new System.Drawing.Size(32, 32);
+            this.btnSaveAs.Size = new System.Drawing.Size(32, 24);
             this.btnSaveAs.TabIndex = 14;
             this.toolTip1.SetToolTip(this.btnSaveAs, "Save SQL Tabs AS ...\r\n\r\nSave it to a choosable *.sql file location.");
             this.btnSaveAs.UseVisualStyleBackColor = true;
@@ -280,10 +333,12 @@ namespace hoTools.Query
             // 
             // btnRun
             // 
+            this.btnRun.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnRun.Image = ((System.Drawing.Image)(resources.GetObject("btnRun.Image")));
-            this.btnRun.Location = new System.Drawing.Point(273, 3);
+            this.btnRun.Location = new System.Drawing.Point(228, 0);
+            this.btnRun.Margin = new System.Windows.Forms.Padding(0);
             this.btnRun.Name = "btnRun";
-            this.btnRun.Size = new System.Drawing.Size(23, 23);
+            this.btnRun.Size = new System.Drawing.Size(23, 24);
             this.btnRun.TabIndex = 16;
             this.toolTip1.SetToolTip(this.btnRun, "Run SQL of the current Tab (CTRL+R).\r\n\r\nIn case of Errors: Help, Last sql Error!\r" +
         "\nYou want to see the SQL after replacing macros: Help, Last sql string sent to E" +
@@ -295,21 +350,25 @@ namespace hoTools.Query
             // 
             this.btnLoadScripts.Location = new System.Drawing.Point(3, 3);
             this.btnLoadScripts.Name = "btnLoadScripts";
-            this.btnLoadScripts.Size = new System.Drawing.Size(120, 23);
+            this.btnLoadScripts.Size = new System.Drawing.Size(112, 23);
             this.btnLoadScripts.TabIndex = 2;
             this.btnLoadScripts.Text = "Load Scripts";
+            this.toolTip1.SetToolTip(this.btnLoadScripts, "Load, compile and show Scripts with:\r\n- Contains string \'EA-Matic\'\r\n- Have 2 or 3" +
+        " parameters\r\n- No errors in Script (just run Script in EA to see errors)\r\n- JScr" +
+        "ipt\r\n- vbScript\r\n- JavaScript");
             this.btnLoadScripts.UseVisualStyleBackColor = true;
             this.btnLoadScripts.Click += new System.EventHandler(this.btnLoadScripts_Click);
             // 
             // lblTitle
             // 
             this.lblTitle.AutoSize = true;
+            this.lblTitle.Dock = System.Windows.Forms.DockStyle.Left;
             this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitle.Location = new System.Drawing.Point(531, 0);
+            this.lblTitle.Location = new System.Drawing.Point(692, 0);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(196, 25);
+            this.lblTitle.Size = new System.Drawing.Size(73, 25);
             this.lblTitle.TabIndex = 1;
-            this.lblTitle.Text = "Scripts && Queries";
+            this.lblTitle.Text = "Scripts";
             // 
             // menuStrip1
             // 
@@ -319,7 +378,8 @@ namespace hoTools.Query
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(81, 24);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(0);
+            this.menuStrip1.Size = new System.Drawing.Size(67, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -338,10 +398,11 @@ namespace hoTools.Query
             this.saveAsToolStripMenuItem,
             this.saveAllToolStripMenuItem,
             this.toolStripSeparator4,
-            this.settingsToolStripMenuItem});
+            this.settingsToolStripMenuItem,
+            this.loadStandardScriptsToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Padding = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(33, 20);
+            this.fileToolStripMenuItem.Padding = new System.Windows.Forms.Padding(0);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(29, 24);
             this.fileToolStripMenuItem.Text = "&File";
             this.fileToolStripMenuItem.ToolTipText = "Create a new Tab from recent *.sql files";
             // 
@@ -434,6 +495,13 @@ namespace hoTools.Query
             this.settingsToolStripMenuItem.ToolTipText = "View and change settings of Scripts and Queries";
             this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
             // 
+            // loadStandardScriptsToolStripMenuItem
+            // 
+            this.loadStandardScriptsToolStripMenuItem.Name = "loadStandardScriptsToolStripMenuItem";
+            this.loadStandardScriptsToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
+            this.loadStandardScriptsToolStripMenuItem.Text = "LoadStandardScripts";
+            this.loadStandardScriptsToolStripMenuItem.Click += new System.EventHandler(this.loadStandardScriptsToolStripMenuItem_Click);
+            // 
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -443,8 +511,8 @@ namespace hoTools.Query
             this.lastSqlStringSentToEAToolStripMenuItem,
             this.templatesAndMacrosToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Padding = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
+            this.helpToolStripMenuItem.Padding = new System.Windows.Forms.Padding(0);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(36, 24);
             this.helpToolStripMenuItem.Text = "&Help";
             // 
             // aboutToolStripMenuItem
@@ -503,7 +571,7 @@ namespace hoTools.Query
             this.splitContainer.Panel2.Controls.Add(this.dataGridViewScripts);
             this.splitContainer.Panel2.Controls.Add(this.flowLayoutPanel4);
             this.splitContainer.Size = new System.Drawing.Size(769, 513);
-            this.splitContainer.SplitterDistance = 334;
+            this.splitContainer.SplitterDistance = 332;
             this.splitContainer.SplitterWidth = 6;
             this.splitContainer.TabIndex = 9;
             this.splitContainer.DragDrop += new System.Windows.Forms.DragEventHandler(this.splitContainer_DragDrop);
@@ -515,7 +583,7 @@ namespace hoTools.Query
             this.flowLayoutPanel4.Controls.Add(this.btnRunScriptForSql);
             this.flowLayoutPanel4.Controls.Add(this.btnRunScriptForSqlWithAsk);
             this.flowLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel4.Location = new System.Drawing.Point(0, 146);
+            this.flowLayoutPanel4.Location = new System.Drawing.Point(0, 148);
             this.flowLayoutPanel4.Name = "flowLayoutPanel4";
             this.flowLayoutPanel4.Size = new System.Drawing.Size(767, 25);
             this.flowLayoutPanel4.TabIndex = 13;
@@ -529,33 +597,30 @@ namespace hoTools.Query
             this.flowLayoutPanel2.Controls.Add(this.btnUndo);
             this.flowLayoutPanel2.Controls.Add(this.btnRedo);
             this.flowLayoutPanel2.Controls.Add(this.btnRun);
-            this.flowLayoutPanel2.Controls.Add(this.txtSearchTerm);
-            this.flowLayoutPanel2.Controls.Add(this.lblTitle);
-            this.flowLayoutPanel2.Controls.Add(this.button4);
-            this.flowLayoutPanel2.Controls.Add(this.button2);
             this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.flowLayoutPanel2.Location = new System.Drawing.Point(0, 0);
+            this.flowLayoutPanel2.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(769, 25);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(255, 25);
             this.flowLayoutPanel2.TabIndex = 11;
             // 
-            // button4
+            // tableLayoutPanel1
             // 
-            this.button4.Location = new System.Drawing.Point(3, 41);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 15;
-            this.button4.Text = "button4";
-            this.button4.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(84, 41);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 17;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
+            this.tableLayoutPanel1.ColumnCount = 3;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 255F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+            this.tableLayoutPanel1.Controls.Add(this.lblTitle, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.txtSearchTerm, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel2, 0, 0);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 1;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(769, 25);
+            this.tableLayoutPanel1.TabIndex = 12;
             // 
             // QueryGUI
             // 
@@ -563,9 +628,10 @@ namespace hoTools.Query
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.Controls.Add(this.splitContainer);
-            this.Controls.Add(this.flowLayoutPanel2);
+            this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "QueryGUI";
             this.Size = new System.Drawing.Size(769, 538);
+            this.Resize += new System.EventHandler(this.QueryGUI_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewScripts)).EndInit();
             this.contextMenuStripDataGrid.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
@@ -577,6 +643,8 @@ namespace hoTools.Query
             this.flowLayoutPanel4.ResumeLayout(false);
             this.flowLayoutPanel2.ResumeLayout(false);
             this.flowLayoutPanel2.PerformLayout();
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -625,9 +693,13 @@ namespace hoTools.Query
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnSaveAll;
         private System.Windows.Forms.Button btnSaveAs;
-        private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button btnRun;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.ToolStripMenuItem templatesAndMacrosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem runScriptAndAskToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+        private System.Windows.Forms.ToolStripMenuItem loadScriptsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
+        private System.Windows.Forms.ToolStripMenuItem loadStandardScriptsToolStripMenuItem;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
     }
 }

@@ -39,6 +39,10 @@ namespace hoTools.Query
             string xml = model.SqlQueryWithException(sql);
             if (xml == null) return false;
 
+            // Output the query in EA Search Window
+            string target = model.MakeEaXmlOutput(xml);
+            model.Repository.RunModelSearch("", "", "", target);
+
             // get rows / items to call function
             List<EaItem> eaItemList = model.MakeEaItemListFromQuery(XDocument.Parse(xml));
             int countCurrent = 0;

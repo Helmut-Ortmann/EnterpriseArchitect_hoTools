@@ -120,53 +120,7 @@
   <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <data name="txtQuickSearch.ToolTip" xml:space="preserve">
-    <value>EA Model Search Name for Quick Search (Tip: Quick Search from MDG hoTools)
-- Simple (EA Standard Search)  or
-- Other EA Model Search or
-- Your own Search for your most important EA Model Items
-
-Your most frequently Model Items at your finger tip.
-
-Keep it empty to hide Quick Search support</value>
-  </data>
-  <data name="label1.ToolTip" xml:space="preserve">
-    <value>EA Model Search Name for Quick Search
-- Simple (EA Standard Search)  or
-- Other EA Model Search or
-- Your own Search for your most important EA Model Items
-
-Your most frequently Model Items at your finger tip.
-
-Keep it empty to hide Quick Search support</value>
-  </data>
-  <data name="txtFileManagerPath.ToolTip" xml:space="preserve">
-    <value>Path to a File Manager like:
-- Explorer.exe (default, leave it empty)
-- Totalcmd.exe
-
-Example:
-c:\Program Files (x86)\totalcmd\TOTALCMD64.EXE
-
-Think if you have to change the %PATH% environment variable</value>
-  </data>
-  <data name="groupBox2.ToolTip" xml:space="preserve">
-    <value>Define the MDG you want to load:
-- No MDG
-- hoToolsBasic.xml MDG (Basic queries and Scripts)
-- hoToolsCompilation.xml   MDG (all queries &amp; script) 
-
-Note:
-Searches usually are project or organisation specific. </value>
-  </data>
-  <data name="chkConveyedItemSupport.ToolTip" xml:space="preserve">
-    <value>Buttons to support Conveyed Items on connectors like information flow:
-- Get Connector Items for selected connector
-- Get Connector for selected item
-
-You can easily implement such functions by search and macros like:
-- '#CONVEYED_ITEMS#'
-
-</value>
-  </data>
+  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>25</value>
+  </metadata>
 </root>

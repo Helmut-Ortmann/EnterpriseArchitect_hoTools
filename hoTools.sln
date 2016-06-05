@@ -21,9 +21,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EA", "EA", "{2ABA072D-FD07-
 	ProjectSection(SolutionItems) = preProject
 		EA\hoTools.eap = EA\hoTools.eap
 		EA\hoTools.mts = EA\hoTools.mts
-		EA\hoTools.xml = EA\hoTools.xml
-		EA\hoToolsBasic.xml = EA\hoToolsBasic.xml
-		EA\hoToolsCompilation.xml = EA\hoToolsCompilation.xml
+		Addin\hoToolsBasic.xml = Addin\hoToolsBasic.xml
+		Addin\hoToolsCompilation.xml = Addin\hoToolsCompilation.xml
 		EA\hoToolsSearch.xml = EA\hoToolsSearch.xml
 	EndProjectSection
 EndProject

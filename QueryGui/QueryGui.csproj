@@ -65,6 +65,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Resources\Scripts.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Scripts.resx</DependentUpon>
+    </Compile>
     <Compile Include="src\GuiFunction.cs" />
     <Compile Include="src\IQueryGUI.cs" />
     <Compile Include="src\SciptFuntionWrapper.cs" />
@@ -74,7 +79,7 @@
     <Compile Include="src\QueryGUI.Designer.cs">
       <DependentUpon>QueryGUI.cs</DependentUpon>
     </Compile>
-    <Compile Include="src\SqFile.cs" />
+    <Compile Include="src\SqlFile.cs" />
     <Compile Include="src\SqlTabPagesCntrl.cs" />
     <Compile Include="src\TextBoxUndo.cs">
       <SubType>Component</SubType>
@@ -104,6 +109,10 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Scripts.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Scripts.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="src\QueryGUI.resx">
       <DependentUpon>QueryGUI.cs</DependentUpon>
