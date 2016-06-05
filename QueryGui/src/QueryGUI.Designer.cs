@@ -96,7 +96,7 @@ namespace hoTools.Query
             // 
             this.txtSearchTerm.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtSearchTerm.Location = new System.Drawing.Point(302, 3);
-            this.txtSearchTerm.MinimumSize = new System.Drawing.Size(50, 0);
+            this.txtSearchTerm.MinimumSize = new System.Drawing.Size(50, 4);
             this.txtSearchTerm.Name = "txtSearchTerm";
             this.txtSearchTerm.Size = new System.Drawing.Size(100, 20);
             this.txtSearchTerm.TabIndex = 7;

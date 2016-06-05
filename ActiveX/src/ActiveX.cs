@@ -35,7 +35,7 @@ namespace hoTools.ActiveX
         FrmSettingsKey _frmSettingsKey;
         FrmSettingsLineStyle _frmSettingsLineStyle;
 
-       
+
         #region Generated
 
         private Button btnLH;
@@ -125,7 +125,6 @@ namespace hoTools.ActiveX
         private ToolStripMenuItem settingsQueryAndSctipToolStripMenuItem;
         private ToolStripMenuItem settingGeneralToolStripMenuItem;
         private ToolStripMenuItem settingsToolbarToolStripMenuItem;
-        private Panel panelQuickSearch;
         private Panel panelButtons;
         private Panel panelLineStyle;
         private Panel panelFavorite;
@@ -145,6 +144,7 @@ namespace hoTools.ActiveX
         private ToolStripMenuItem settingsGlobalKeysToolStripMenuItem;
         private Label lblPorts;
         private Label lblConveyedItems;
+        private TableLayoutPanel panelQuickSearch;
         private TextBox txtSearchText;
         #endregion
 
@@ -152,10 +152,10 @@ namespace hoTools.ActiveX
         public AddinControlGUI()
         {
             InitializeComponent();
-            
+
         }
         #endregion
-       
+
         public string getText() => txtSearchText.Text;
 
 
@@ -274,13 +274,13 @@ namespace hoTools.ActiveX
             EaService.navigateComposite(Repository);
         }
 
-       
-        #pragma warning disable RECS0154
+
+#pragma warning disable RECS0154
         void getAllLatestrecursiveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             EaService.getVcLatestRecursive(Repository);
         }
-        #pragma warning restore RECS0154
+#pragma warning restore RECS0154
         void createActivityForOperationToolStripMenuItem_Click(object sender, EventArgs e)
         {
             EaService.CreateActivityForOperation(Repository);
@@ -312,7 +312,7 @@ namespace hoTools.ActiveX
             string configFilePath = AddinSettings.ConfigFilePath;
             switch (AddinSettings.Customer)
             {
-                
+
                 case AddinSettings.CustomerCfg.VAR1:
                     EaService.aboutVAR1(Release, configFilePath);
                     break;
@@ -348,11 +348,11 @@ namespace hoTools.ActiveX
             runService(0);
         }
 
-         void toolStripBtn2_Click(object sender, EventArgs e)
+        void toolStripBtn2_Click(object sender, EventArgs e)
         {
             runService(1);
         }
-         void toolStripBtn3_Click(object sender, EventArgs e)
+        void toolStripBtn3_Click(object sender, EventArgs e)
         {
             runService(2);
         }
@@ -502,7 +502,7 @@ namespace hoTools.ActiveX
             EaService.Favorites(Repository);
         }
 
-        
+
         /// <summary>
         /// Remove ports from elements by:
         /// - Selected Elements
@@ -517,7 +517,7 @@ namespace hoTools.ActiveX
         {
             var port = new PortServices(Repository);
             port.removePortFromDiagramGUI();
-           
+
         }
         #endregion
 
@@ -527,7 +527,7 @@ namespace hoTools.ActiveX
             var port = new PortServices(Repository);
             port.showPortsInDiagram(false);
 
-           
+
         }
         #endregion
         #region showReceivingPortsLeftSendingPortsRight
@@ -543,17 +543,17 @@ namespace hoTools.ActiveX
         {
             var port = new PortServices(Repository);
             port.copyPortsGUI();
-           
+
         }
         #endregion
         #region deletePortsWhichAreMarkedForDeletion
-        #pragma warning disable RECS0154
+#pragma warning disable RECS0154
         void deletePortsWhichAreMarkedForDeletionfutureToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var port = new PortServices(Repository);
             port.deletePortsMarkedPorts();
         }
-       #pragma warning restore RECS0154
+#pragma warning restore RECS0154
         #endregion
 
         /// <summary>
@@ -578,7 +578,7 @@ namespace hoTools.ActiveX
         {
             var port = new PortServices(Repository);
             port.changeLabelGUI(PortServices.LabelStyle.IS_SHOWN);
-       }
+        }
         #endregion
         #region movePortLableLeftPositionToolStripMenuItem_Click
         void movePortLableLeftPositionToolStripMenuItem_Click(object sender, EventArgs e)
@@ -619,7 +619,7 @@ namespace hoTools.ActiveX
         {
             var port = new PortServices(Repository);
             port.connectPortsGUI();
-            
+
         }
 
         void connectPortsInsideComponentsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -659,11 +659,11 @@ namespace hoTools.ActiveX
             var port = new PortServices(Repository);
             port.setConnectionDirectionUnspecifiedGUI();
         }
-       
-        
-       
 
-       
+
+
+
+
 
 
         //---------------------------------------------------------------------------------------------------------------
@@ -863,7 +863,6 @@ namespace hoTools.ActiveX
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.panelQuickSearch = new System.Windows.Forms.Panel();
             this.panelButtons = new System.Windows.Forms.Panel();
             this.panelLineStyle = new System.Windows.Forms.Panel();
             this.panelFavorite = new System.Windows.Forms.Panel();
@@ -873,11 +872,11 @@ namespace hoTools.ActiveX
             this.panelAdvanced = new System.Windows.Forms.Panel();
             this.panelConveyedItems = new System.Windows.Forms.Panel();
             this.lblConveyedItems = new System.Windows.Forms.Label();
+            this.panelQuickSearch = new System.Windows.Forms.TableLayoutPanel();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
             this.toolStripQuery.SuspendLayout();
             this.menuStrip1.SuspendLayout();
-            this.panelQuickSearch.SuspendLayout();
             this.panelButtons.SuspendLayout();
             this.panelLineStyle.SuspendLayout();
             this.panelFavorite.SuspendLayout();
@@ -885,6 +884,7 @@ namespace hoTools.ActiveX
             this.panelPort.SuspendLayout();
             this.panelAdvanced.SuspendLayout();
             this.panelConveyedItems.SuspendLayout();
+            this.panelQuickSearch.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStripContainer1
@@ -1596,13 +1596,6 @@ namespace hoTools.ActiveX
             resources.ApplyResources(this.helpToolStripMenuItem1, "helpToolStripMenuItem1");
             this.helpToolStripMenuItem1.Click += new System.EventHandler(this.helpToolStripMenuItem1_Click);
             // 
-            // panelQuickSearch
-            // 
-            this.panelQuickSearch.Controls.Add(this.txtSearchName);
-            this.panelQuickSearch.Controls.Add(this.txtSearchText);
-            resources.ApplyResources(this.panelQuickSearch, "panelQuickSearch");
-            this.panelQuickSearch.Name = "panelQuickSearch";
-            // 
             // panelButtons
             // 
             this.panelButtons.Controls.Add(this.toolStripContainer1);
@@ -1681,6 +1674,13 @@ namespace hoTools.ActiveX
             resources.ApplyResources(this.lblConveyedItems, "lblConveyedItems");
             this.lblConveyedItems.Name = "lblConveyedItems";
             // 
+            // panelQuickSearch
+            // 
+            resources.ApplyResources(this.panelQuickSearch, "panelQuickSearch");
+            this.panelQuickSearch.Controls.Add(this.txtSearchName, 0, 0);
+            this.panelQuickSearch.Controls.Add(this.txtSearchText, 0, 0);
+            this.panelQuickSearch.Name = "panelQuickSearch";
+            // 
             // AddinControlGUI
             // 
             resources.ApplyResources(this, "$this");
@@ -1702,8 +1702,6 @@ namespace hoTools.ActiveX
             this.toolStripQuery.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.panelQuickSearch.ResumeLayout(false);
-            this.panelQuickSearch.PerformLayout();
             this.panelButtons.ResumeLayout(false);
             this.panelLineStyle.ResumeLayout(false);
             this.panelFavorite.ResumeLayout(false);
@@ -1713,6 +1711,8 @@ namespace hoTools.ActiveX
             this.panelAdvanced.ResumeLayout(false);
             this.panelConveyedItems.ResumeLayout(false);
             this.panelConveyedItems.PerformLayout();
+            this.panelQuickSearch.ResumeLayout(false);
+            this.panelQuickSearch.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1827,7 +1827,7 @@ namespace hoTools.ActiveX
 
             // Visible VC
             bool visibleVC = true && AddinSettings.isVcSupport != false;
-           
+
             getVCLatesrecursiveToolStripMenuItem.Visible = visibleVC;
             changeXMLFileToolStripMenuItem.Visible = visibleVC;
             orderDiagramItemsToolStripMenuItem.Visible = visibleVC;
@@ -1916,7 +1916,7 @@ namespace hoTools.ActiveX
                         }
                     }
                 }
-                
+
                 switch (pos)
                 {
                     case 0:
@@ -1954,7 +1954,7 @@ namespace hoTools.ActiveX
             toolStripServiceBtn5.Visible = AddinSettings.isShowServiceButton;
             for (int pos = 0; pos < AddinSettings.buttonsServices.Count; pos++)
             {
-                string buttonText= "";
+                string buttonText = "";
                 string helpText = "free Service, Service not parametrized";
                 if (AddinSettings.buttonsServices[pos] != null)
                 {
@@ -1994,7 +1994,7 @@ namespace hoTools.ActiveX
         }
         #endregion
 
-         
+
         /// <summary>
         /// Open Query and Scripts
         /// </summary>
@@ -2055,8 +2055,9 @@ namespace hoTools.ActiveX
                 ";
                 // Run SQL with macro replacement
                 Model.SQLRun(sql, "");
-               
-            } else
+
+            }
+            else
             {
                 MessageBox.Show("To get the connectors which convey Elements you have to select an Element.", "No Element is selected, break!!!");
             }
@@ -2084,10 +2085,11 @@ namespace hoTools.ActiveX
                 // Run SQL with macro replacement
                 Model.SQLRun(sql, "");
 
-        } else
+            }
+            else
             {
                 MessageBox.Show("To get the Elements on the Connector you have to select an Connector.", "No Connector is selected, break!!!");
             }
-}
+        }
     }
 }

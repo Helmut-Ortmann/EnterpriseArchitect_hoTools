@@ -83,7 +83,7 @@ CTRL+SHFT+S                     Store sql All
         readonly ToolStripMenuItem _fileLoadRecentFileItem;
 
         readonly ToolStripMenuItem _newTabFromItem = new ToolStripMenuItem("New Tab from...");
-        readonly ToolStripMenuItem _loadTabFromFileItem  = new ToolStripMenuItem("Load from...");
+        readonly ToolStripMenuItem _loadTabFromFileItem = new ToolStripMenuItem("Load from...");
 
 
         const string DEFAULT_TAB_NAME = "noName";
@@ -98,8 +98,8 @@ CTRL+SHFT+S                     Store sql All
         /// <param name="sqlTextBoxSearchTerm"></param>
         /// <param name="fileNewTabAndLoadRecentFileItem">File, New Tab from recent files</param>
         /// <param name="fileLoadRecentFileItem">File, Load Tab from recent files</param>
-        public SqlTabPagesCntrl(Model model, AddinSettings settings, 
-            System.ComponentModel.IContainer components, 
+        public SqlTabPagesCntrl(Model model, AddinSettings settings,
+            System.ComponentModel.IContainer components,
             TabControl tabControl, TextBox sqlTextBoxSearchTerm,
             ToolStripMenuItem fileNewTabAndLoadRecentFileItem,
             ToolStripMenuItem fileLoadRecentFileItem)
@@ -123,8 +123,8 @@ CTRL+SHFT+S                     Store sql All
 
         }
 
-        
-        
+
+
 
         /// <summary>
         /// Add a tab to the tab control and load content into the tab.If the content is empty nothing is loaded. 
@@ -145,14 +145,19 @@ CTRL+SHFT+S                     Store sql All
         {
             // create a new TabPage in TabControl
             TabPage tabPage = new TabPage();
-            _tabControl.Controls.Add(tabPage);
 
             // default file name
             SqlFile sqlFile = new SqlFile(this, tabPage, $"{DEFAULT_TAB_NAME}{_tabControl.Controls.Count}.sql", false);
             tabPage.Tag = sqlFile;
             tabPage.Text = sqlFile.DisplayName;
             tabPage.ToolTipText = sqlFile.FullName;
+
+            _tabControl.Controls.Add(tabPage);
+            _tabControl.PerformLayout();
+            tabPage.PerformLayout();
             _tabControl.SelectTab(tabPage);
+
+
 
 
             //-----------------------------------------------------------------
@@ -299,7 +304,7 @@ CTRL+SHFT+S                     Store sql All
 
             // Insert Branch
             ToolStripMenuItem insertBranchMenuItem = new ToolStripMenuItem();
-            insertBranchMenuItem.Text = "Insert " + SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.BRANCH_IDS); 
+            insertBranchMenuItem.Text = "Insert " + SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.BRANCH_IDS);
             insertBranchMenuItem.ToolTipText = SqlTemplates.getTooltip(SqlTemplates.SQL_TEMPLATE_ID.BRANCH_IDS);
             insertBranchMenuItem.Tag = SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.BRANCH_IDS);
             insertBranchMenuItem.Click += insertTemplate_Click;
@@ -380,7 +385,7 @@ CTRL+SHFT+S                     Store sql All
 
             // Insert #WC#
             ToolStripMenuItem insertWcMenuItem = new ToolStripMenuItem();
-            insertWcMenuItem.Text = "Insert "+ SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.WC);
+            insertWcMenuItem.Text = "Insert " + SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.WC);
             insertWcMenuItem.ToolTipText = SqlTemplates.getTooltip(SqlTemplates.SQL_TEMPLATE_ID.WC);
             insertWcMenuItem.Tag = SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.WC);
             insertWcMenuItem.Click += new System.EventHandler(insertTemplate_Click);
@@ -679,7 +684,7 @@ CTRL+SHFT+S                     Store sql All
                 insertDBTemplateMenuItem
                 });
 
-            
+
             return insertTemplateMenuItem;
         }
         #endregion
@@ -699,7 +704,7 @@ CTRL+SHFT+S                     Store sql All
         /// </summary>
         /// <param name="loadRecentFileStripMenuItem">Item to load recent files as drop down items</param>
         /// <param name="eventHandler_Click">Function to handle event</param>
-         void loadRecentFilesMenuItems(ToolStripMenuItem loadRecentFileStripMenuItem, EventHandler eventHandler_Click)
+        void loadRecentFilesMenuItems(ToolStripMenuItem loadRecentFileStripMenuItem, EventHandler eventHandler_Click)
         {
             // delete all previous entries
             loadRecentFileStripMenuItem.DropDownItems.Clear();
@@ -722,7 +727,7 @@ CTRL+SHFT+S                     Store sql All
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-         void newTabAnLoadFromHistoryEntry_Click(object sender, EventArgs e)
+        void newTabAnLoadFromHistoryEntry_Click(object sender, EventArgs e)
         {
             // Add a new Tab
             TabPage tabPage = addTab("");
@@ -783,26 +788,26 @@ CTRL+SHFT+S                     Store sql All
         /// <param name="tabPage"></param>
         /// <param name="fileName"></param>
         /// <param name="notUpdateLastOpenedList">Don't update list of the opened files</param>
-        public void loadTabPageFromFile(TabPage tabPage, string fileName, bool notUpdateLastOpenedList=false)
+        public void loadTabPageFromFile(TabPage tabPage, string fileName, bool notUpdateLastOpenedList = false)
         {
-            
+
             try
             {
-                    TextBoxUndo textBox = (TextBoxUndo)tabPage.Controls[0];
-                    textBox.Text = File.ReadAllText(fileName);
+                TextBoxUndo textBox = (TextBoxUndo)tabPage.Controls[0];
+                textBox.Text = File.ReadAllText(fileName);
 
-                    // set TabName
-                    SqlFile sqlFile = (SqlFile)tabPage.Tag;
-                    sqlFile.FullName = fileName;
-                    sqlFile.IsChanged = false;
-                    tabPage.ToolTipText = ((SqlFile)tabPage.Tag).FullName;
-                    tabPage.Text = sqlFile.DisplayName;
-                    if (! notUpdateLastOpenedList)
-                    {
-                        Settings.lastOpenedFiles.insert(fileName);
-                        Settings.save();
-                    }
-                    
+                // set TabName
+                SqlFile sqlFile = (SqlFile)tabPage.Tag;
+                sqlFile.FullName = fileName;
+                sqlFile.IsChanged = false;
+                tabPage.ToolTipText = ((SqlFile)tabPage.Tag).FullName;
+                tabPage.Text = sqlFile.DisplayName;
+                if (!notUpdateLastOpenedList)
+                {
+                    Settings.lastOpenedFiles.insert(fileName);
+                    Settings.save();
+                }
+
             }
             catch (Exception ex)
             {
@@ -831,8 +836,8 @@ CTRL+SHFT+S                     Store sql All
             }
             TextBoxUndo textBox = (TextBoxUndo)tabPage.Controls[0];
             textBox.Text = tabContent;
-   
-            
+
+
         }
 
 
@@ -872,7 +877,8 @@ CTRL+SHFT+S                     Store sql All
                 DialogResult result = MessageBox.Show($"Old File: '{sqlFile.FullName}'",
                     "First store old File? ", MessageBoxButtons.YesNoCancel);
                 if (result == DialogResult.Cancel) return;
-                if (result == DialogResult.Yes) { 
+                if (result == DialogResult.Yes)
+                {
                     saveAs(tabPage);
                     sqlFile.IsChanged = false;
                     tabPage.ToolTipText = ((SqlFile)tabPage.Tag).FullName;
@@ -885,7 +891,7 @@ CTRL+SHFT+S                     Store sql All
             string file = historyFile.FullName;
             loadTabPageFromFile(tabPage, file);
         }
-         void insertTemplate_Click(object sender, EventArgs e)
+        void insertTemplate_Click(object sender, EventArgs e)
         {
             // get TabPage
             if (_tabControl.SelectedIndex < 0) return;
@@ -915,20 +921,20 @@ CTRL+SHFT+S                     Store sql All
 
 
         }
-       
+
 
         /// <summary>
         /// Event File Save As
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-         void fileSaveAsMenuItem_Click(object sender,  EventArgs e)
+        void fileSaveAsMenuItem_Click(object sender, EventArgs e)
         {
             saveSqlTabAs();
 
         }
 
-        
+
         #region saveTabAs
         /// <summary>
         /// Save current Tab into desired file
@@ -973,11 +979,11 @@ CTRL+SHFT+S                     Store sql All
         {
             foreach (TabPage tabPage in _tabControl.TabPages)
             {
-                save(tabPage,configSave: false);
+                save(tabPage, configSave: false);
             }
             Settings.save();
         }
-       
+
         /// <summary>
         /// Event File Load fired by TabControl
         /// </summary>
@@ -986,7 +992,7 @@ CTRL+SHFT+S                     Store sql All
         void fileLoadMenuItem_Click(object sender, EventArgs e)
         {
             loadTabPagePerFileDialog();
-            
+
 
         }
         /// <summary>
@@ -994,7 +1000,7 @@ CTRL+SHFT+S                     Store sql All
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-         void addTabMenuItem_Click(object sender, EventArgs e)
+        void addTabMenuItem_Click(object sender, EventArgs e)
         {
             addTab();
 
@@ -1006,7 +1012,7 @@ CTRL+SHFT+S                     Store sql All
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-         void closeMenuItem_Click(object sender, EventArgs e)
+        void closeMenuItem_Click(object sender, EventArgs e)
         {
             // get TabPage
             if (_tabControl.SelectedIndex < 0) return;
@@ -1068,7 +1074,7 @@ CTRL+SHFT+S                     Store sql All
 
                     // Load recent files into ToolStripMenu
                     loadRecentFilesIntoToolStripItems();
-                    
+
                 }
             }
             // update Tab Caption
@@ -1186,7 +1192,7 @@ CTRL+SHFT+S                     Store sql All
                 string fileName = lastOpenedFile.FullName.Trim();
                 if (fileName == "") continue;
                 // file isn't available, delete it from list of last opened filed
-                if (! File.Exists(fileName))
+                if (!File.Exists(fileName))
                 {
                     Settings.lastOpenedFiles.remove(fileName);
                     continue;
@@ -1217,16 +1223,17 @@ CTRL+SHFT+S                     Store sql All
         /// </summary>
         /// <param name="tabPage"></param>
         ///  <param name="configSave">Default: true, whether to store the configuration</param>
-        void save(TabPage tabPage, bool configSave=true)
+        void save(TabPage tabPage, bool configSave = true)
         {
             SqlFile sqlFile = (SqlFile)tabPage.Tag;
-            if (! sqlFile.IsPersistant )
+            if (!sqlFile.IsPersistant)
             {
                 saveAs(tabPage);
                 return;
             }
 
-            try {
+            try
+            {
                 StreamWriter myStream = new StreamWriter(sqlFile.FullName);
                 if (myStream != null)
                 {
@@ -1243,7 +1250,8 @@ CTRL+SHFT+S                     Store sql All
                     // set TabName
                     tabPage.Text = sqlFile.DisplayName;
                 }
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show($"{ex.Message}", $"Error writing File {sqlFile.FullName}");
                 return;
@@ -1274,7 +1282,8 @@ CTRL+SHFT+S                     Store sql All
             {
 
                 DialogResult result = MessageBox.Show($"", "Close TabPage: Sql has changed, store content?", MessageBoxButtons.YesNoCancel);
-                switch (result) {
+                switch (result)
+                {
                     case DialogResult.OK:
                         save(tabPage);
                         break;
@@ -1290,7 +1299,7 @@ CTRL+SHFT+S                     Store sql All
             _tabControl.TabPages.Remove(tabPage);
         }
 
-       
+
         #region runSqlTabPage
         /// <summary>
         /// Run SQL for selected TabPage
@@ -1328,8 +1337,8 @@ CTRL+SHFT+S                     Store sql All
 
             // get TextBox
             var textBox = (TextBox)tabPage.Controls[0];
-            
-           _model.SQLRun(textBox.SelectedText, _sqlTextBoxSearchTerm.Text);
+
+            _model.SQLRun(textBox.SelectedText, _sqlTextBoxSearchTerm.Text);
             Cursor.Current = Cursors.Default;
         }
 
@@ -1341,7 +1350,7 @@ CTRL+SHFT+S                     Store sql All
         /// <param name="e"></param>
         void sqlTextBox_KeyDown(object sender, KeyEventArgs e)
         {
-           
+
         }
         /// <summary>
         /// Handle CTRL sequences for CTRL+S (Store sql) and CTRL+R (RUN sql)
@@ -1370,13 +1379,13 @@ CTRL+SHFT+S                     Store sql All
             // store SQL
             if (e.KeyData == (Keys.Control | Keys.S))
             {
-                
+
                 save();
                 e.Handled = true;
                 return;
             }
             // store All SQL
-            if (e.KeyData == (Keys.Control | Keys.Shift| Keys.S))
+            if (e.KeyData == (Keys.Control | Keys.Shift | Keys.S))
             {
 
                 saveAll();
