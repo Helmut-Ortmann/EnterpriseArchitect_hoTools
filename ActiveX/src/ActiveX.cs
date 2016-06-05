@@ -125,7 +125,6 @@ namespace hoTools.ActiveX
         private ToolStripMenuItem settingsQueryAndSctipToolStripMenuItem;
         private ToolStripMenuItem settingGeneralToolStripMenuItem;
         private ToolStripMenuItem settingsToolbarToolStripMenuItem;
-        private Panel panelQuickSearch;
         private Panel panelButtons;
         private Panel panelLineStyle;
         private Panel panelFavorite;
@@ -145,6 +144,7 @@ namespace hoTools.ActiveX
         private ToolStripMenuItem settingsGlobalKeysToolStripMenuItem;
         private Label lblPorts;
         private Label lblConveyedItems;
+        private TableLayoutPanel panelQuickSearch;
         private TextBox txtSearchText;
         #endregion
 
@@ -863,7 +863,6 @@ namespace hoTools.ActiveX
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.panelQuickSearch = new System.Windows.Forms.Panel();
             this.panelButtons = new System.Windows.Forms.Panel();
             this.panelLineStyle = new System.Windows.Forms.Panel();
             this.panelFavorite = new System.Windows.Forms.Panel();
@@ -873,11 +872,11 @@ namespace hoTools.ActiveX
             this.panelAdvanced = new System.Windows.Forms.Panel();
             this.panelConveyedItems = new System.Windows.Forms.Panel();
             this.lblConveyedItems = new System.Windows.Forms.Label();
+            this.panelQuickSearch = new System.Windows.Forms.TableLayoutPanel();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
             this.toolStripQuery.SuspendLayout();
             this.menuStrip1.SuspendLayout();
-            this.panelQuickSearch.SuspendLayout();
             this.panelButtons.SuspendLayout();
             this.panelLineStyle.SuspendLayout();
             this.panelFavorite.SuspendLayout();
@@ -885,6 +884,7 @@ namespace hoTools.ActiveX
             this.panelPort.SuspendLayout();
             this.panelAdvanced.SuspendLayout();
             this.panelConveyedItems.SuspendLayout();
+            this.panelQuickSearch.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStripContainer1
@@ -1596,13 +1596,6 @@ namespace hoTools.ActiveX
             resources.ApplyResources(this.helpToolStripMenuItem1, "helpToolStripMenuItem1");
             this.helpToolStripMenuItem1.Click += new System.EventHandler(this.helpToolStripMenuItem1_Click);
             // 
-            // panelQuickSearch
-            // 
-            this.panelQuickSearch.Controls.Add(this.txtSearchName);
-            this.panelQuickSearch.Controls.Add(this.txtSearchText);
-            resources.ApplyResources(this.panelQuickSearch, "panelQuickSearch");
-            this.panelQuickSearch.Name = "panelQuickSearch";
-            // 
             // panelButtons
             // 
             this.panelButtons.Controls.Add(this.toolStripContainer1);
@@ -1681,6 +1674,13 @@ namespace hoTools.ActiveX
             resources.ApplyResources(this.lblConveyedItems, "lblConveyedItems");
             this.lblConveyedItems.Name = "lblConveyedItems";
             // 
+            // panelQuickSearch
+            // 
+            resources.ApplyResources(this.panelQuickSearch, "panelQuickSearch");
+            this.panelQuickSearch.Controls.Add(this.txtSearchName, 0, 0);
+            this.panelQuickSearch.Controls.Add(this.txtSearchText, 0, 0);
+            this.panelQuickSearch.Name = "panelQuickSearch";
+            // 
             // AddinControlGUI
             // 
             resources.ApplyResources(this, "$this");
@@ -1702,8 +1702,6 @@ namespace hoTools.ActiveX
             this.toolStripQuery.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.panelQuickSearch.ResumeLayout(false);
-            this.panelQuickSearch.PerformLayout();
             this.panelButtons.ResumeLayout(false);
             this.panelLineStyle.ResumeLayout(false);
             this.panelFavorite.ResumeLayout(false);
@@ -1713,6 +1711,8 @@ namespace hoTools.ActiveX
             this.panelAdvanced.ResumeLayout(false);
             this.panelConveyedItems.ResumeLayout(false);
             this.panelConveyedItems.PerformLayout();
+            this.panelQuickSearch.ResumeLayout(false);
+            this.panelQuickSearch.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 

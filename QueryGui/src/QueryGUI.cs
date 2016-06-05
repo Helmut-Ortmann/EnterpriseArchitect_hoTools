@@ -36,7 +36,7 @@ namespace hoTools.Query
     public partial class QueryGUI : AddinGUI, IQueryGUI
     {
         public const string PROGID = "hoTools.QueryGUI";
-        public const string TABULATOR_SCRIPT = "Scripts";
+        public const string TABULATOR_SCRIPT = "Script";
         public const string TABULATOR_QUERY = "SQL";
 
         List<Script> _lscripts;  // list off all scripts
@@ -69,6 +69,17 @@ namespace hoTools.Query
         public QueryGUI()
         {
             InitializeComponent();
+
+            // set properties to enable drawing tab caption
+            tabControlSql.Multiline = false;
+            tabControlSql.SizeMode = TabSizeMode.FillToRight;
+            tabControlSql.DrawMode = TabDrawMode.OwnerDrawFixed;
+            ResumeLayout(false);
+            PerformLayout();
+
+            ResizeRedraw = true;
+            //SetStyle(ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint | ControlStyles.DoubleBuffer| ControlStyles.ResizeRedraw, true);
+            //tabControlSql.SetStyle(ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint | ControlStyles.DoubleBuffer, true);
 
             // individual initialization
             // Script
@@ -688,21 +699,13 @@ namespace hoTools.Query
         /// <param name="e"></param>
         void tabControlSql_DragEnter(object sender, DragEventArgs e)
         {
-            if (e.Data.GetDataPresent(DataFormats.FileDrop)) e.Effect = DragDropEffects.Copy;
 
         }
         #endregion
 
         void tabControlSql_DragDrop(object sender, DragEventArgs e)
         {
-            if (e.Data.GetDataPresent(DataFormats.FileDrop))
-            {
-                string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
-                foreach (string filePath in files)
-                {
-                    Console.WriteLine(filePath);
-                }
-            }
+
         }
 
         private void splitContainer_DragOver(object sender, DragEventArgs e)
@@ -856,8 +859,40 @@ namespace hoTools.Query
 
         void QueryGUI_Resize(object sender, EventArgs e)
         {
-
+            tabControlSql.Invalidate();
 
         }
+
+        private void txtSearchTerm_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        /// <summary>
+        /// Make sure the DrawEvent is fired when resizing window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void tabControlSql_Resize(object sender, EventArgs e)
+        {
+            tabControlSql.Invalidate();
+            //tabControlSql.Refresh();
+            //foreach (var tab in tabControlSql.TabPages)
+            //{
+            //    ((TabPage)tab).Invalidate();
+            //    ((TabPage)tab).Refresh();
+            //}
+        }
+
+        //void splitContainer_SplitterMoved(object sender, SplitterEventArgs e)
+        //{
+            //splitContainer.Refresh();
+            //tabControlSql.Refresh();
+        //}
+        //protected override void OnPaintBackground(PaintEventArgs pevent)
+        //{
+        //    Graphics g = pevent.Graphics;
+          
+        //}
     }
 }

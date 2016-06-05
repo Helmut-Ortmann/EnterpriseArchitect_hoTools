@@ -145,20 +145,25 @@ CTRL+SHFT+S                     Store sql All
         {
             // create a new TabPage in TabControl
             TabPage tabPage = new TabPage();
-            _tabControl.Controls.Add(tabPage);
 
             // default file name
             SqlFile sqlFile = new SqlFile(this, tabPage, $"{DEFAULT_TAB_NAME}{_tabControl.Controls.Count}.sql", false);
             tabPage.Tag = sqlFile;
             tabPage.Text = sqlFile.DisplayName;
             tabPage.ToolTipText = sqlFile.FullName;
+
+            _tabControl.Controls.Add(tabPage);
+            _tabControl.PerformLayout();
+            tabPage.PerformLayout();
             _tabControl.SelectTab(tabPage);
 
 
-            //-----------------------------------------------------------------
-            // Tab with ContextMenuStrip
-            // Create a text box in TabPage for the SQL string
-            var sqlTextBox = new TextBoxUndo(tabPage);
+
+
+           //-----------------------------------------------------------------
+           // Tab with ContextMenuStrip
+           // Create a text box in TabPage for the SQL string
+           var sqlTextBox = new TextBoxUndo(tabPage);
             // load element template
             sqlTextBox.Text = SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.ELEMENT_TEMPLATE);
 
