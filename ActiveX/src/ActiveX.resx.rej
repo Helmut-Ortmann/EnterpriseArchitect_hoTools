@@ -1,0 +1,128 @@
+diff a/ActiveX/src/ActiveX.resx b/ActiveX/src/ActiveX.resx	(rejected hunks)
+@@ -190,7 +190,7 @@
+     <value>17, 17</value>
+   </metadata>
+   <data name="toolStripQuery.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+-    <value>Fill</value>
++    <value>None</value>
+   </data>
+   <data name="toolStripSearchBtn1.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+     <value>Magenta</value>
+@@ -600,11 +600,14 @@
+   <data name="&gt;&gt;btnAddFavorite.ZOrder" xml:space="preserve">
+     <value>0</value>
+   </data>
++  <data name="txtSearchText.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
++    <value>Fill</value>
++  </data>
+   <data name="txtSearchText.Location" type="System.Drawing.Point, System.Drawing">
+-    <value>3, 0</value>
++    <value>3, 3</value>
+   </data>
+   <data name="txtSearchText.Size" type="System.Drawing.Size, System.Drawing">
+-    <value>177, 20</value>
++    <value>302, 20</value>
+   </data>
+   <data name="txtSearchText.TabIndex" type="System.Int32, mscorlib">
+     <value>27</value>
+@@ -1172,18 +1175,24 @@
+   <data name="&gt;&gt;btnLH.ZOrder" xml:space="preserve">
+     <value>1</value>
+   </data>
++  <data name="txtSearchName.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
++    <value>Fill</value>
++  </data>
+   <data name="txtSearchName.Font" type="System.Drawing.Font, System.Drawing">
+     <value>Microsoft Sans Serif, 9pt</value>
+   </data>
+   <data name="txtSearchName.Location" type="System.Drawing.Point, System.Drawing">
+-    <value>188, 0</value>
++    <value>311, 3</value>
+   </data>
+   <data name="txtSearchName.Size" type="System.Drawing.Size, System.Drawing">
+-    <value>159, 21</value>
++    <value>144, 21</value>
+   </data>
+   <data name="txtSearchName.TabIndex" type="System.Int32, mscorlib">
+     <value>28</value>
+   </data>
++  <data name="txtSearchName.Text" xml:space="preserve">
++    <value>Simple</value>
++  </data>
+   <data name="txtSearchName.ToolTip" xml:space="preserve">
+     <value>Name EA Search to quickly find your most interesting stuff:
+ - Insert search name
+@@ -1687,33 +1696,6 @@
+   <data name="&gt;&gt;menuStrip1.ZOrder" xml:space="preserve">
+     <value>8</value>
+   </data>
+-  <data name="panelQuickSearch.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+-    <value>Top</value>
+-  </data>
+-  <data name="panelQuickSearch.Location" type="System.Drawing.Point, System.Drawing">
+-    <value>0, 57</value>
+-  </data>
+-  <data name="panelQuickSearch.Size" type="System.Drawing.Size, System.Drawing">
+-    <value>458, 24</value>
+-  </data>
+-  <data name="panelQuickSearch.TabIndex" type="System.Int32, mscorlib">
+-    <value>38</value>
+-  </data>
+-  <data name="panelQuickSearch.Visible" type="System.Boolean, mscorlib">
+-    <value>False</value>
+-  </data>
+-  <data name="&gt;&gt;panelQuickSearch.Name" xml:space="preserve">
+-    <value>panelQuickSearch</value>
+-  </data>
+-  <data name="&gt;&gt;panelQuickSearch.Type" xml:space="preserve">
+-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+-  </data>
+-  <data name="&gt;&gt;panelQuickSearch.Parent" xml:space="preserve">
+-    <value>$this</value>
+-  </data>
+-  <data name="&gt;&gt;panelQuickSearch.ZOrder" xml:space="preserve">
+-    <value>6</value>
+-  </data>
+   <data name="panelButtons.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+     <value>Top</value>
+   </data>
+@@ -1960,6 +1942,39 @@
+   <data name="&gt;&gt;panelConveyedItems.ZOrder" xml:space="preserve">
+     <value>4</value>
+   </data>
++  <data name="panelQuickSearch.ColumnCount" type="System.Int32, mscorlib">
++    <value>2</value>
++  </data>
++  <data name="panelQuickSearch.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
++    <value>Top</value>
++  </data>
++  <data name="panelQuickSearch.Location" type="System.Drawing.Point, System.Drawing">
++    <value>0, 57</value>
++  </data>
++  <data name="panelQuickSearch.RowCount" type="System.Int32, mscorlib">
++    <value>1</value>
++  </data>
++  <data name="panelQuickSearch.Size" type="System.Drawing.Size, System.Drawing">
++    <value>458, 24</value>
++  </data>
++  <data name="panelQuickSearch.TabIndex" type="System.Int32, mscorlib">
++    <value>0</value>
++  </data>
++  <data name="&gt;&gt;panelQuickSearch.Name" xml:space="preserve">
++    <value>panelQuickSearch</value>
++  </data>
++  <data name="&gt;&gt;panelQuickSearch.Type" xml:space="preserve">
++    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
++  </data>
++  <data name="&gt;&gt;panelQuickSearch.Parent" xml:space="preserve">
++    <value>$this</value>
++  </data>
++  <data name="&gt;&gt;panelQuickSearch.ZOrder" xml:space="preserve">
++    <value>6</value>
++  </data>
++  <data name="panelQuickSearch.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
++    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="txtSearchName" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="txtSearchText" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100,Absolute,150" /&gt;&lt;Rows Styles="Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
++  </data>
+   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+     <value>True</value>
+   </metadata>
