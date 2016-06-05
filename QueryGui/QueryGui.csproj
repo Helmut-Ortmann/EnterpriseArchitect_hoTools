@@ -79,7 +79,7 @@
     <Compile Include="src\QueryGUI.Designer.cs">
       <DependentUpon>QueryGUI.cs</DependentUpon>
     </Compile>
-    <Compile Include="src\SqFile.cs" />
+    <Compile Include="src\SqlFile.cs" />
     <Compile Include="src\SqlTabPagesCntrl.cs" />
     <Compile Include="src\TextBoxUndo.cs">
       <SubType>Component</SubType>

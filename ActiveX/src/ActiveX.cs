@@ -35,7 +35,7 @@ namespace hoTools.ActiveX
         FrmSettingsKey _frmSettingsKey;
         FrmSettingsLineStyle _frmSettingsLineStyle;
 
-       
+
         #region Generated
 
         private Button btnLH;
@@ -152,10 +152,10 @@ namespace hoTools.ActiveX
         public AddinControlGUI()
         {
             InitializeComponent();
-            
+
         }
         #endregion
-       
+
         public string getText() => txtSearchText.Text;
 
 
@@ -274,13 +274,13 @@ namespace hoTools.ActiveX
             EaService.navigateComposite(Repository);
         }
 
-       
-        #pragma warning disable RECS0154
+
+#pragma warning disable RECS0154
         void getAllLatestrecursiveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             EaService.getVcLatestRecursive(Repository);
         }
-        #pragma warning restore RECS0154
+#pragma warning restore RECS0154
         void createActivityForOperationToolStripMenuItem_Click(object sender, EventArgs e)
         {
             EaService.CreateActivityForOperation(Repository);
@@ -312,7 +312,7 @@ namespace hoTools.ActiveX
             string configFilePath = AddinSettings.ConfigFilePath;
             switch (AddinSettings.Customer)
             {
-                
+
                 case AddinSettings.CustomerCfg.VAR1:
                     EaService.aboutVAR1(Release, configFilePath);
                     break;
@@ -348,11 +348,11 @@ namespace hoTools.ActiveX
             runService(0);
         }
 
-         void toolStripBtn2_Click(object sender, EventArgs e)
+        void toolStripBtn2_Click(object sender, EventArgs e)
         {
             runService(1);
         }
-         void toolStripBtn3_Click(object sender, EventArgs e)
+        void toolStripBtn3_Click(object sender, EventArgs e)
         {
             runService(2);
         }
@@ -502,7 +502,7 @@ namespace hoTools.ActiveX
             EaService.Favorites(Repository);
         }
 
-        
+
         /// <summary>
         /// Remove ports from elements by:
         /// - Selected Elements
@@ -517,7 +517,7 @@ namespace hoTools.ActiveX
         {
             var port = new PortServices(Repository);
             port.removePortFromDiagramGUI();
-           
+
         }
         #endregion
 
@@ -527,7 +527,7 @@ namespace hoTools.ActiveX
             var port = new PortServices(Repository);
             port.showPortsInDiagram(false);
 
-           
+
         }
         #endregion
         #region showReceivingPortsLeftSendingPortsRight
@@ -543,17 +543,17 @@ namespace hoTools.ActiveX
         {
             var port = new PortServices(Repository);
             port.copyPortsGUI();
-           
+
         }
         #endregion
         #region deletePortsWhichAreMarkedForDeletion
-        #pragma warning disable RECS0154
+#pragma warning disable RECS0154
         void deletePortsWhichAreMarkedForDeletionfutureToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var port = new PortServices(Repository);
             port.deletePortsMarkedPorts();
         }
-       #pragma warning restore RECS0154
+#pragma warning restore RECS0154
         #endregion
 
         /// <summary>
@@ -578,7 +578,7 @@ namespace hoTools.ActiveX
         {
             var port = new PortServices(Repository);
             port.changeLabelGUI(PortServices.LabelStyle.IS_SHOWN);
-       }
+        }
         #endregion
         #region movePortLableLeftPositionToolStripMenuItem_Click
         void movePortLableLeftPositionToolStripMenuItem_Click(object sender, EventArgs e)
@@ -619,7 +619,7 @@ namespace hoTools.ActiveX
         {
             var port = new PortServices(Repository);
             port.connectPortsGUI();
-            
+
         }
 
         void connectPortsInsideComponentsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -659,11 +659,11 @@ namespace hoTools.ActiveX
             var port = new PortServices(Repository);
             port.setConnectionDirectionUnspecifiedGUI();
         }
-       
-        
-       
 
-       
+
+
+
+
 
 
         //---------------------------------------------------------------------------------------------------------------
@@ -1827,7 +1827,7 @@ namespace hoTools.ActiveX
 
             // Visible VC
             bool visibleVC = true && AddinSettings.isVcSupport != false;
-           
+
             getVCLatesrecursiveToolStripMenuItem.Visible = visibleVC;
             changeXMLFileToolStripMenuItem.Visible = visibleVC;
             orderDiagramItemsToolStripMenuItem.Visible = visibleVC;
@@ -1916,7 +1916,7 @@ namespace hoTools.ActiveX
                         }
                     }
                 }
-                
+
                 switch (pos)
                 {
                     case 0:
@@ -1954,7 +1954,7 @@ namespace hoTools.ActiveX
             toolStripServiceBtn5.Visible = AddinSettings.isShowServiceButton;
             for (int pos = 0; pos < AddinSettings.buttonsServices.Count; pos++)
             {
-                string buttonText= "";
+                string buttonText = "";
                 string helpText = "free Service, Service not parametrized";
                 if (AddinSettings.buttonsServices[pos] != null)
                 {
@@ -1994,7 +1994,7 @@ namespace hoTools.ActiveX
         }
         #endregion
 
-         
+
         /// <summary>
         /// Open Query and Scripts
         /// </summary>
@@ -2055,8 +2055,9 @@ namespace hoTools.ActiveX
                 ";
                 // Run SQL with macro replacement
                 Model.SQLRun(sql, "");
-               
-            } else
+
+            }
+            else
             {
                 MessageBox.Show("To get the connectors which convey Elements you have to select an Element.", "No Element is selected, break!!!");
             }
@@ -2084,10 +2085,11 @@ namespace hoTools.ActiveX
                 // Run SQL with macro replacement
                 Model.SQLRun(sql, "");
 
-        } else
+            }
+            else
             {
                 MessageBox.Show("To get the Elements on the Connector you have to select an Connector.", "No Connector is selected, break!!!");
             }
-}
+        }
     }
 }

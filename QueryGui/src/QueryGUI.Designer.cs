@@ -80,7 +80,7 @@ namespace hoTools.Query
             this.templatesAndMacrosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer = new System.Windows.Forms.SplitContainer();
             this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewScripts)).BeginInit();
             this.contextMenuStripDataGrid.SuspendLayout();
@@ -90,20 +90,19 @@ namespace hoTools.Query
             this.splitContainer.Panel2.SuspendLayout();
             this.splitContainer.SuspendLayout();
             this.flowLayoutPanel4.SuspendLayout();
-            this.flowLayoutPanel1.SuspendLayout();
+            this.flowLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtSearchTerm
             // 
             this.txtSearchTerm.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtSearchTerm.Location = new System.Drawing.Point(261, 1);
-            this.txtSearchTerm.Margin = new System.Windows.Forms.Padding(1);
+            this.txtSearchTerm.Location = new System.Drawing.Point(283, 3);
+            this.txtSearchTerm.MinimumSize = new System.Drawing.Size(50, 4);
             this.txtSearchTerm.Name = "txtSearchTerm";
-            this.txtSearchTerm.Size = new System.Drawing.Size(263, 20);
+            this.txtSearchTerm.Size = new System.Drawing.Size(403, 20);
             this.txtSearchTerm.TabIndex = 7;
             this.toolTip1.SetToolTip(this.txtSearchTerm, resources.GetString("txtSearchTerm.ToolTip"));
-            this.txtSearchTerm.TextChanged += new System.EventHandler(this.txtSearchTerm_TextChanged);
             this.txtSearchTerm.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSearchTerm_KeyDown);
             this.txtSearchTerm.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtSearchTerm_KeyDown);
             this.txtSearchTerm.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.txtSearchTerm_MouseDoubleClick);
@@ -167,7 +166,7 @@ namespace hoTools.Query
             this.dataGridViewScripts.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.dataGridViewScripts.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
             this.dataGridViewScripts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewScripts.Size = new System.Drawing.Size(598, 156);
+            this.dataGridViewScripts.Size = new System.Drawing.Size(767, 148);
             this.dataGridViewScripts.TabIndex = 3;
             this.toolTip1.SetToolTip(this.dataGridViewScripts, resources.GetString("dataGridViewScripts.ToolTip"));
             this.dataGridViewScripts.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dataGridViewScripts_MouseClick);
@@ -251,46 +250,53 @@ namespace hoTools.Query
             this.tabControlSql.Name = "tabControlSql";
             this.tabControlSql.SelectedIndex = 0;
             this.tabControlSql.ShowToolTips = true;
-            this.tabControlSql.Size = new System.Drawing.Size(598, 347);
-            this.tabControlSql.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
+            this.tabControlSql.Size = new System.Drawing.Size(767, 330);
             this.tabControlSql.TabIndex = 5;
             this.toolTip1.SetToolTip(this.tabControlSql, "Enter SQL code. EA macros like:\r\n- #Branch#\r\n- #ObjectID#\r\n- #ObjectGUID#\r\n- #Pac" +
         "kage#\r\n- \'Search Term\'\r\n\r\nare allowed.");
             this.tabControlSql.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.tabControlSql_DrawItem);
+            this.tabControlSql.DragDrop += new System.Windows.Forms.DragEventHandler(this.tabControlSql_DragDrop);
+            this.tabControlSql.DragEnter += new System.Windows.Forms.DragEventHandler(this.tabControlSql_DragEnter);
+            this.tabControlSql.DragOver += new System.Windows.Forms.DragEventHandler(this.splitContainer_DragOver);
+            this.tabControlSql.DragLeave += new System.EventHandler(this.tabControlSql_DragLeave);
             this.tabControlSql.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tabControlSql_MouseDown);
             // 
             // btnUndo
             // 
+            this.btnUndo.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnUndo.Image = global::hoTools.Query.Properties.Resources.icon_undo_h;
-            this.btnUndo.Location = new System.Drawing.Point(72, 0);
+            this.btnUndo.Location = new System.Drawing.Point(163, 0);
             this.btnUndo.Margin = new System.Windows.Forms.Padding(0);
             this.btnUndo.Name = "btnUndo";
             this.btnUndo.Size = new System.Drawing.Size(32, 24);
-            this.btnUndo.TabIndex = 0;
+            this.btnUndo.TabIndex = 9;
             this.toolTip1.SetToolTip(this.btnUndo, "Undo Text change (CTRL+Z)");
             this.btnUndo.UseVisualStyleBackColor = true;
             this.btnUndo.Click += new System.EventHandler(this.btnUndo_Click);
             // 
             // btnRedo
             // 
+            this.btnRedo.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnRedo.Image = global::hoTools.Query.Properties.Resources.icon_redo_h;
-            this.btnRedo.Location = new System.Drawing.Point(104, 0);
-            this.btnRedo.Margin = new System.Windows.Forms.Padding(0);
+            this.btnRedo.Location = new System.Drawing.Point(196, 1);
+            this.btnRedo.Margin = new System.Windows.Forms.Padding(1);
             this.btnRedo.Name = "btnRedo";
-            this.btnRedo.Size = new System.Drawing.Size(31, 24);
-            this.btnRedo.TabIndex = 0;
+            this.btnRedo.Size = new System.Drawing.Size(31, 22);
+            this.btnRedo.TabIndex = 11;
             this.toolTip1.SetToolTip(this.btnRedo, "Redo Text change (CTRL+Y)");
             this.btnRedo.UseVisualStyleBackColor = true;
             this.btnRedo.Click += new System.EventHandler(this.btnRedo_Click);
             // 
             // btnSave
             // 
+            this.btnSave.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnSave.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.Image")));
-            this.btnSave.Location = new System.Drawing.Point(135, 0);
+            this.btnSave.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnSave.Location = new System.Drawing.Point(67, 0);
             this.btnSave.Margin = new System.Windows.Forms.Padding(0);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(32, 24);
-            this.btnSave.TabIndex = 0;
+            this.btnSave.TabIndex = 12;
             this.toolTip1.SetToolTip(this.btnSave, "Save active SQL Tabs at its current location (CTRL+S). If unsaved you are asked t" +
         "o choose a location.");
             this.btnSave.UseVisualStyleBackColor = true;
@@ -298,8 +304,10 @@ namespace hoTools.Query
             // 
             // btnSaveAll
             // 
+            this.btnSaveAll.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnSaveAll.Image = ((System.Drawing.Image)(resources.GetObject("btnSaveAll.Image")));
-            this.btnSaveAll.Location = new System.Drawing.Point(199, 0);
+            this.btnSaveAll.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnSaveAll.Location = new System.Drawing.Point(99, 0);
             this.btnSaveAll.Margin = new System.Windows.Forms.Padding(0);
             this.btnSaveAll.Name = "btnSaveAll";
             this.btnSaveAll.Size = new System.Drawing.Size(32, 24);
@@ -311,8 +319,10 @@ namespace hoTools.Query
             // 
             // btnSaveAs
             // 
+            this.btnSaveAs.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnSaveAs.Image = ((System.Drawing.Image)(resources.GetObject("btnSaveAs.Image")));
-            this.btnSaveAs.Location = new System.Drawing.Point(167, 0);
+            this.btnSaveAs.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnSaveAs.Location = new System.Drawing.Point(131, 0);
             this.btnSaveAs.Margin = new System.Windows.Forms.Padding(0);
             this.btnSaveAs.Name = "btnSaveAs";
             this.btnSaveAs.Size = new System.Drawing.Size(32, 24);
@@ -323,8 +333,9 @@ namespace hoTools.Query
             // 
             // btnRun
             // 
+            this.btnRun.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnRun.Image = ((System.Drawing.Image)(resources.GetObject("btnRun.Image")));
-            this.btnRun.Location = new System.Drawing.Point(231, 0);
+            this.btnRun.Location = new System.Drawing.Point(228, 0);
             this.btnRun.Margin = new System.Windows.Forms.Padding(0);
             this.btnRun.Name = "btnRun";
             this.btnRun.Size = new System.Drawing.Size(23, 24);
@@ -351,28 +362,24 @@ namespace hoTools.Query
             // lblTitle
             // 
             this.lblTitle.AutoSize = true;
-            this.lblTitle.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblTitle.Dock = System.Windows.Forms.DockStyle.Left;
             this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitle.Location = new System.Drawing.Point(525, 0);
-            this.lblTitle.Margin = new System.Windows.Forms.Padding(0);
+            this.lblTitle.Location = new System.Drawing.Point(693, 0);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(75, 24);
+            this.lblTitle.Size = new System.Drawing.Size(73, 29);
             this.lblTitle.TabIndex = 1;
-            this.lblTitle.Text = "Script";
+            this.lblTitle.Text = "Scripts";
             // 
             // menuStrip1
             // 
-            this.menuStrip1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.menuStrip1.GripMargin = new System.Windows.Forms.Padding(0);
-            this.menuStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Visible;
+            this.menuStrip1.Dock = System.Windows.Forms.DockStyle.None;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(0);
-            this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.menuStrip1.Size = new System.Drawing.Size(72, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(67, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -393,7 +400,6 @@ namespace hoTools.Query
             this.toolStripSeparator4,
             this.settingsToolStripMenuItem,
             this.loadStandardScriptsToolStripMenuItem});
-            this.fileToolStripMenuItem.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Padding = new System.Windows.Forms.Padding(0);
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(29, 24);
@@ -498,7 +504,6 @@ namespace hoTools.Query
             // 
             // helpToolStripMenuItem
             // 
-            this.helpToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.aboutToolStripMenuItem,
             this.helpToolStripMenuItem1,
@@ -553,7 +558,7 @@ namespace hoTools.Query
             // 
             this.splitContainer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.splitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer.Location = new System.Drawing.Point(0, 25);
             this.splitContainer.Name = "splitContainer";
             this.splitContainer.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -565,8 +570,8 @@ namespace hoTools.Query
             // 
             this.splitContainer.Panel2.Controls.Add(this.dataGridViewScripts);
             this.splitContainer.Panel2.Controls.Add(this.flowLayoutPanel4);
-            this.splitContainer.Size = new System.Drawing.Size(600, 538);
-            this.splitContainer.SplitterDistance = 349;
+            this.splitContainer.Size = new System.Drawing.Size(769, 513);
+            this.splitContainer.SplitterDistance = 332;
             this.splitContainer.SplitterWidth = 6;
             this.splitContainer.TabIndex = 9;
             this.splitContainer.DragDrop += new System.Windows.Forms.DragEventHandler(this.splitContainer_DragDrop);
@@ -578,56 +583,55 @@ namespace hoTools.Query
             this.flowLayoutPanel4.Controls.Add(this.btnRunScriptForSql);
             this.flowLayoutPanel4.Controls.Add(this.btnRunScriptForSqlWithAsk);
             this.flowLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanel4.Location = new System.Drawing.Point(0, 156);
+            this.flowLayoutPanel4.Location = new System.Drawing.Point(0, 148);
             this.flowLayoutPanel4.Name = "flowLayoutPanel4";
-            this.flowLayoutPanel4.Size = new System.Drawing.Size(598, 25);
+            this.flowLayoutPanel4.Size = new System.Drawing.Size(767, 25);
             this.flowLayoutPanel4.TabIndex = 13;
             // 
-            // flowLayoutPanel1
+            // flowLayoutPanel2
             // 
-            this.flowLayoutPanel1.AutoSize = true;
-            this.flowLayoutPanel1.Controls.Add(this.menuStrip1);
-            this.flowLayoutPanel1.Controls.Add(this.btnUndo);
-            this.flowLayoutPanel1.Controls.Add(this.btnRedo);
-            this.flowLayoutPanel1.Controls.Add(this.btnSave);
-            this.flowLayoutPanel1.Controls.Add(this.btnSaveAs);
-            this.flowLayoutPanel1.Controls.Add(this.btnSaveAll);
-            this.flowLayoutPanel1.Controls.Add(this.btnRun);
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(260, 24);
-            this.flowLayoutPanel1.TabIndex = 14;
+            this.flowLayoutPanel2.Controls.Add(this.menuStrip1);
+            this.flowLayoutPanel2.Controls.Add(this.btnSave);
+            this.flowLayoutPanel2.Controls.Add(this.btnSaveAll);
+            this.flowLayoutPanel2.Controls.Add(this.btnSaveAs);
+            this.flowLayoutPanel2.Controls.Add(this.btnUndo);
+            this.flowLayoutPanel2.Controls.Add(this.btnRedo);
+            this.flowLayoutPanel2.Controls.Add(this.btnRun);
+            this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(0, 0);
+            this.flowLayoutPanel2.Margin = new System.Windows.Forms.Padding(0);
+            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(253, 25);
+            this.flowLayoutPanel2.TabIndex = 11;
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.AutoSize = true;
             this.tableLayoutPanel1.ColumnCount = 3;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 260F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 255F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 75F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
             this.tableLayoutPanel1.Controls.Add(this.lblTitle, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.txtSearchTerm, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel2, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tableLayoutPanel1.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.FixedSize;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(600, 24);
-            this.tableLayoutPanel1.TabIndex = 8;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(769, 25);
+            this.tableLayoutPanel1.TabIndex = 12;
             // 
             // QueryGUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.splitContainer);
+            this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "QueryGUI";
-            this.Size = new System.Drawing.Size(600, 538);
+            this.Size = new System.Drawing.Size(769, 538);
+            this.Resize += new System.EventHandler(this.QueryGUI_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewScripts)).EndInit();
             this.contextMenuStripDataGrid.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
@@ -637,12 +641,11 @@ namespace hoTools.Query
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).EndInit();
             this.splitContainer.ResumeLayout(false);
             this.flowLayoutPanel4.ResumeLayout(false);
-            this.flowLayoutPanel1.ResumeLayout(false);
-            this.flowLayoutPanel1.PerformLayout();
+            this.flowLayoutPanel2.ResumeLayout(false);
+            this.flowLayoutPanel2.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -671,6 +674,7 @@ namespace hoTools.Query
         private System.Windows.Forms.ToolStripMenuItem newTabToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem lastsqlErrorToolStripMenuItem;
         private System.Windows.Forms.SplitContainer splitContainer;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel4;
         private System.Windows.Forms.ToolStripMenuItem loadTabFromToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newTabFromToolStripMenuItem;
@@ -696,7 +700,6 @@ namespace hoTools.Query
         private System.Windows.Forms.ToolStripMenuItem loadScriptsToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
         private System.Windows.Forms.ToolStripMenuItem loadStandardScriptsToolStripMenuItem;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
     }
 }
