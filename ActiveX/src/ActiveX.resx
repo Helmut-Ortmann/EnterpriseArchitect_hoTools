@@ -131,7 +131,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="toolStripContainer1.ContentPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>458, 8</value>
+    <value>458, 0</value>
   </data>
   <data name="&gt;&gt;toolStripContainer1.ContentPanel.Name" xml:space="preserve">
     <value>toolStripContainer1.ContentPanel</value>
@@ -177,7 +177,7 @@
     <value>2</value>
   </data>
   <data name="toolStripContainer1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>458, 33</value>
+    <value>458, 25</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="toolStripContainer1.TabIndex" type="System.Int32, mscorlib">
@@ -604,10 +604,13 @@
     <value>Fill</value>
   </data>
   <data name="txtSearchText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
+    <value>1, 1</value>
+  </data>
+  <data name="txtSearchText.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
   </data>
   <data name="txtSearchText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>302, 20</value>
+    <value>306, 20</value>
   </data>
   <data name="txtSearchText.TabIndex" type="System.Int32, mscorlib">
     <value>27</value>
@@ -1182,10 +1185,13 @@ Search for (Tip Quick Search from MDG hoTools):
     <value>Microsoft Sans Serif, 9pt</value>
   </data>
   <data name="txtSearchName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>311, 3</value>
+    <value>309, 1</value>
+  </data>
+  <data name="txtSearchName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
   </data>
   <data name="txtSearchName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>144, 21</value>
+    <value>148, 21</value>
   </data>
   <data name="txtSearchName.TabIndex" type="System.Int32, mscorlib">
     <value>28</value>
@@ -1702,8 +1708,11 @@ Select Element to make direction of all Port connections to unspecified.</value>
   <data name="panelButtons.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 24</value>
   </data>
+  <data name="panelButtons.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
   <data name="panelButtons.Size" type="System.Drawing.Size, System.Drawing">
-    <value>458, 33</value>
+    <value>458, 25</value>
   </data>
   <data name="panelButtons.TabIndex" type="System.Int32, mscorlib">
     <value>39</value>
@@ -1727,7 +1736,7 @@ Select Element to make direction of all Port connections to unspecified.</value>
     <value>Top</value>
   </data>
   <data name="panelLineStyle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 81</value>
+    <value>0, 71</value>
   </data>
   <data name="panelLineStyle.Size" type="System.Drawing.Size, System.Drawing">
     <value>458, 52</value>
@@ -1754,7 +1763,7 @@ Select Element to make direction of all Port connections to unspecified.</value>
     <value>Top</value>
   </data>
   <data name="panelFavorite.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 158</value>
+    <value>0, 148</value>
   </data>
   <data name="panelFavorite.Size" type="System.Drawing.Size, System.Drawing">
     <value>458, 24</value>
@@ -1781,7 +1790,7 @@ Select Element to make direction of all Port connections to unspecified.</value>
     <value>Top</value>
   </data>
   <data name="panelNote.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 261</value>
+    <value>0, 251</value>
   </data>
   <data name="panelNote.Size" type="System.Drawing.Size, System.Drawing">
     <value>458, 25</value>
@@ -1838,7 +1847,7 @@ Select Element to make direction of all Port connections to unspecified.</value>
     <value>Top</value>
   </data>
   <data name="panelPort.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 286</value>
+    <value>0, 276</value>
   </data>
   <data name="panelPort.Size" type="System.Drawing.Size, System.Drawing">
     <value>458, 50</value>
@@ -1865,7 +1874,7 @@ Select Element to make direction of all Port connections to unspecified.</value>
     <value>Top</value>
   </data>
   <data name="panelAdvanced.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 182</value>
+    <value>0, 172</value>
   </data>
   <data name="panelAdvanced.Size" type="System.Drawing.Size, System.Drawing">
     <value>458, 79</value>
@@ -1919,7 +1928,7 @@ Select Element to make direction of all Port connections to unspecified.</value>
     <value>Top</value>
   </data>
   <data name="panelConveyedItems.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 133</value>
+    <value>0, 123</value>
   </data>
   <data name="panelConveyedItems.Size" type="System.Drawing.Size, System.Drawing">
     <value>458, 25</value>
@@ -1949,13 +1958,13 @@ Select Element to make direction of all Port connections to unspecified.</value>
     <value>Top</value>
   </data>
   <data name="panelQuickSearch.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 57</value>
+    <value>0, 49</value>
   </data>
   <data name="panelQuickSearch.RowCount" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
   <data name="panelQuickSearch.Size" type="System.Drawing.Size, System.Drawing">
-    <value>458, 24</value>
+    <value>458, 22</value>
   </data>
   <data name="panelQuickSearch.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
