@@ -110,8 +110,15 @@ namespace hoTools.Settings
             configFileMap.ExeConfigFilename = ConfigFilePath;
             // Get the mapped configuration file.
             _currentConfig = ConfigurationManager.OpenMappedExeConfiguration(configFileMap, ConfigurationUserLevel.None);
+
+
             //merge the default settings
+            // - For simple values that's all to do
+            //   they uses Getter/Setter, no special handling here
             mergeDefaultSettings();
+
+            // get list from config
+            // for simple values nothing is to do here (there exists only a getter/setter)
             buttonsSearch = getShortcutsSearch();
             buttonsServices = getShortcutsServices();
             globalShortcutsService = getGlobalShortcutsService();
@@ -122,7 +129,11 @@ namespace hoTools.Settings
             historySqlFiles = new SqlHistoryFilesCfg(_currentConfig);// history of sql files 
             lastOpenedFiles = new SqlLastOpenedFilesCfg(_currentConfig); // last opened files
 
+            // update lists
             updateSearchesAndServices();
+
+            //-------------------------------------------
+            // Simple values uses Getter/Setter, no special handling here
         }
         #endregion
 
@@ -168,21 +179,11 @@ namespace hoTools.Settings
         {
             get
             {
-                bool result;
-                var p = _currentConfig.AppSettings.Settings["isAskForQueryUpdateOutside"];
-                if (p == null) return false;// default
-                if (bool.TryParse(p.Value, out result))
-                {
-                    return result;
-                }
-                else
-                {
-                    return true;
-                }
+                return getBoolConfigValue("isAskForQueryUpdateOutside");
             }
             set
             {
-                _currentConfig.AppSettings.Settings["isAskForQueryUpdateOutside"].Value = value.ToString();
+                setBoolConfigValue("isAskForQueryUpdateOutside", value);
             }
         }
         #endregion
@@ -192,16 +193,15 @@ namespace hoTools.Settings
         {
             get
             {
-                var p = _currentConfig.AppSettings.Settings["SqlEditor"];
-                if (p == null) return "";// default
-                return p.Value;
+                return getStringConfigValue("SqlEditor");
             }
             set
             {
-                _currentConfig.AppSettings.Settings["SqlEditor"].Value = value;
+                setStringConfigValue("SqlEditor", value);
             }
         }
-        #endregion
+
+      
 
 
         #region Property: isLineStyleSupport
@@ -317,21 +317,11 @@ namespace hoTools.Settings
         {
             get
             {
-                bool result;
-                var cfgPar = _currentConfig.AppSettings.Settings["isConveyedItemsSupport"];
-                if (cfgPar == null) return false;
-                if (bool.TryParse(cfgPar.Value, out result))
-                {
-                    return result;
-                }
-                else
-                {
-                    return true;
-                }
+                return getBoolConfigValue("isConveyedItemsSupport");
             }
             set
             {
-                _currentConfig.AppSettings.Settings["isConveyedItemsSupport"].Value = value.ToString();
+                setBoolConfigValue("isConveyedItemsSupport", value);
             }
         }
         #endregion
@@ -465,7 +455,13 @@ namespace hoTools.Settings
             }
             set
             {
-                _currentConfig.AppSettings.Settings["AutoLoadMdg"].Value = value.ToString();
+                if (_currentConfig.AppSettings.Settings["AutoLoadMdg"] != null)
+                {
+                    _currentConfig.AppSettings.Settings["AutoLoadMdg"].Value = value.ToString();
+                } else
+                {
+                    messageConfigValueNotExists("AutoLoadMdg", value.ToString());
+                }
 
             }
 
@@ -489,7 +485,14 @@ namespace hoTools.Settings
             }
             set
             {
-                _currentConfig.AppSettings.Settings["OnlyQueryWindow"].Value = value.ToString();
+                if (_currentConfig.AppSettings.Settings["OnlyQueryWindow"] != null)
+                {
+                    _currentConfig.AppSettings.Settings["OnlyQueryWindow"].Value = value.ToString();
+                }
+                else
+                {
+                    messageConfigValueNotExists("OnlyQueryWindow", value.ToString());
+                }
 
             }
 
@@ -1387,6 +1390,82 @@ namespace hoTools.Settings
 
         }
         #endregion
+
+
+        /// <summary>
+        /// Get bool config value. If the value don't exists return a false.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        bool getBoolConfigValue(string name)
+        {
+            bool result;
+            var p = _currentConfig.AppSettings.Settings[name];
+            if (p == null) return false;// default
+            if (bool.TryParse(p.Value, out result))
+            {
+                return result;
+            }
+            else
+            {
+                return true;
+            }
+        }
+        /// <summary>
+        /// Set bool config value. If error output a message
+        /// </summary>
+        /// <param name="value"></param>
+        void setBoolConfigValue(string name, bool value)
+        {
+            var cfgValue = _currentConfig.AppSettings.Settings[name];
+            if (cfgValue != null)
+            {
+                cfgValue.Value = value.ToString();
+            }else
+            {
+                messageConfigValueNotExists(name, value.ToString());
+            }
+        }
+        #endregion
+        /// <summary>
+        /// Get string value from configuration
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        string getStringConfigValue(string name)
+        {
+            var p = _currentConfig.AppSettings.Settings[name];
+            if (p == null) return "";// default
+            return p.Value;
+        }
+        /// <summary>
+        /// Set string value in configuration. If error output error message
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="value"></param>
+        void setStringConfigValue(string name, string value)
+        {
+            var p = _currentConfig.AppSettings.Settings[name];
+            if (p !=  null)
+            {
+                p.Value = value;
+            }
+            else
+            {
+                messageConfigValueNotExists(name, value);
+            }
+        }
+
+        /// <summary>
+        /// Output error Message box for not existent configuration parameter or invalid value
+        /// </summary>
+        /// <param name="name"></param>
+        void messageConfigValueNotExists(string name, string value)
+        {
+            MessageBox.Show($"Parameter '{name}' with value '{value}' don't exists in configuration or is invalid!");
+        }
+
+        
     }
 }
 
