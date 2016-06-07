@@ -55,7 +55,7 @@ cellSpacing=0 cellPadding=2 width="99%">
 alt="Basic functionality hoTools" 
 src="file:///D:/hoData/Development/GitHub/EnterpriseArchitect_hoTools/Addin/image/Addin.PNG" 
 align=left></P>
-<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<IMG style="HEIGHT: 337px; WIDTH: 646px" 
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<IMG style="HEIGHT: 559px; WIDTH: 703px" 
 border=0 hspace=0 alt="" 
 src="file:///D:/hoData/Development/GitHub/EnterpriseArchitect_hoTools/Addin/image/AddinComplete.png" 
 align=baseline>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</P>
@@ -67,9 +67,9 @@ align=baseline>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp
   <LI><FONT size=3>A lot of additional macros (#Package#,.. 
   #ConveyedItemIDS#,..)</FONT> 
   <LI><FONT size=3>Comment your SQL</FONT> 
-  <LI><FONT size=3>Read EA-SQL error from %appdata%...\dberror.txt</FONT>
+  <LI><FONT size=3>Read EA-SQL error from %appdata%...\dberror.txt</FONT> 
   <LI><FONT size=3>Read last sent EA-SQL string 
-  %appdata%...\hoTools_LastSql.txt</FONT>
+  %appdata%...\hoTools_LastSql.txt</FONT> 
   <LI><FONT size=3>View Macros and Templates (also on 
   %appdata%...\hoTools_SqlTemplatesAndMacros.txt)</FONT></LI></UL>
 <P><IMG border=0 hspace=0 alt="SQL Query" 
@@ -198,7 +198,7 @@ EA!</FONT></P>
 alt="Basic functionality hoTools" 
 src="file:///D:/hoData/Development/GitHub/EnterpriseArchitect_hoTools/Addin/image/Addin.PNG" 
 align=left></P>
-<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<IMG style="HEIGHT: 337px; WIDTH: 646px" 
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<IMG style="HEIGHT: 466px; WIDTH: 676px" 
 border=0 hspace=0 alt="" 
 src="file:///D:/hoData/Development/GitHub/EnterpriseArchitect_hoTools/Addin/image/AddinComplete.png" 
 align=baseline></P></BODY></HTML>
@@ -587,7 +587,7 @@ cellSpacing=0 cellPadding=2 width="99%">
   <LI><FONT size=3>View Macros and Templates (also on 
   %appdata%...\hoTools_SqlTemplatesAndMacros.txt)</FONT></LI></UL>
 <P><IMG border=0 hspace=0 alt="SQL Query" 
-src="file:///D:/hoData/Development/GitHub/EnterpriseArchitect_hoTools/Addin/image/SqlQuery.PNG" 
+src="D:\hoData\Development\GitHub\EnterpriseArchitect_hoTools\Addin\image\SqlMacros.png" 
 align=baseline></P></FONT></BODY></HTML>
 SQL Query and Script	K000011K002052<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML><HEAD><TITLE>SQL Query and Script</TITLE>
@@ -5380,4 +5380,4 @@ cellSpacing=0 cellPadding=2 width="99%">
 <P>Helmut Ortmann<BR><A 
 href="mailto:Helmut.Ortmann@t-online.de">Helmut.Ortmann@t-online.de</A><BR>+49 
 172 / 51 79 16 7</P></BODY></HTML>
-!=!K002052UTF-8
+!=!K002022UTF-8

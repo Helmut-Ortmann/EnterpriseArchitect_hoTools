@@ -32,12 +32,12 @@ CTRL+SHFT+S                     Store sql All
 #CurrentElementID#              Alias for #CurrentItemID# (EA compatibility)
 #CurrentItemGUID#               Selected Element, Diagram, Replaced by the GUID
 #CurrentItemID#                 Selected Element, Diagram, Replaced by the ID
-#DiagramElements_IDS#            Diagram Objects of selected Diagram / current Diagram
+#DiagramElements_IDS#            Diagram Elements of selected Diagram / current Diagram
 #DiagramSelectedElements_IDS#    Selected Diagram Objects of selected Diagram / current Diagram 
 #InBranch#                      Selected Package, Replaced by nested recursive as comma separated list of PackageIDs  like 'IN (13,14,15)'
 #Package#                       Selected Package, Diagram, Element, Attribute, Operation, Replaced by containing Package ID
 #PackageID#                     Selected Package, Diagram, Element, Attribute, Operation, Replaced by containing Package ID
-##TreeSelectedGUIDS##           In Browser selected Elements as a list of comma separated GUIDS like 'IN (##TreeSelectedGUIDS##)'
+#TreeSelectedGUIDS#             In Browser selected Elements as a list of comma separated GUIDS like 'IN (##TreeSelectedGUIDS##)'
 #WC#                            Wild card, you can also simple use * (will automatically replaced by the DB specific wild card)
 #DB=ACCESS2007#                 DB specif SQL for ACCESS2007
 #DB=ASA#                        DB specif SQL for ASA
@@ -47,6 +47,9 @@ CTRL+SHFT+S                     Store sql All
 #DB=ORACLE#                     DB specif SQL for Oracle
 #DB=POSTGRES#                   DB specif SQL for POSTGRES
 #DB=SQLSVR#                     DB specif SQL for SQL Server
+* or %                          DB specific Wild Card (automatic transformed into DB format)
+? or _                          DB specific Wild Card (automatic transformed into DB format)
+^ or !                          DB specific Wild Card (automatic transformed into DB format)
 ";
 
         /// <summary>
