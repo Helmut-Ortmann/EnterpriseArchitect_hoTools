@@ -138,23 +138,22 @@ CTRL+SHFT+S                     Store sql All
             return tabPage;
         }
         /// <summary>
-        /// Add an Tab to the tab control and load the element template as default
+        /// Add an Tab to the tab control and load the Element Template as default
         /// </summary>
         /// <returns></returns>
-        public TabPage addTab()
+        public TabPage addTab(bool withDefaultTabContent = true)
         {
             // create a new TabPage in TabControl
             TabPage tabPage = new TabPage();
 
-            // default file name
-            SqlFile sqlFile = new SqlFile(this, tabPage, $"{DEFAULT_TAB_NAME}{_tabControl.Controls.Count}.sql", false);
+            // Create a new empty file
+            SqlFile sqlFile = new SqlFile(this, tabPage, $"{DEFAULT_TAB_NAME}{_tabControl.Controls.Count}.sql", isChanged:false);
             tabPage.Tag = sqlFile;
             tabPage.Text = sqlFile.DisplayName;
             tabPage.ToolTipText = sqlFile.FullName;
 
+            // add tab to TabControl
             _tabControl.Controls.Add(tabPage);
-            _tabControl.PerformLayout();
-            tabPage.PerformLayout();
             _tabControl.SelectTab(tabPage);
 
 
@@ -727,7 +726,7 @@ CTRL+SHFT+S                     Store sql All
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        void newTabAnLoadFromHistoryEntry_Click(object sender, EventArgs e)
+        void newTabAndLoadFromHistoryEntry_Click(object sender, EventArgs e)
         {
             // Add a new Tab
             TabPage tabPage = addTab("");
@@ -738,19 +737,7 @@ CTRL+SHFT+S                     Store sql All
             // get TextBox
             TextBox textBox = (TextBox)tabPage.Controls[0];
 
-            // Contend changed, need to be stored first
-            if (sqlFile.IsChanged)
-            {
-                DialogResult result = MessageBox.Show($"Old File: '{sqlFile.FullName}'",
-                    "First store old File? ", MessageBoxButtons.YesNoCancel);
-                if (result == DialogResult.Cancel) return;
-                if (result == DialogResult.Yes)
-                {
-                    save(tabPage);
-                    sqlFile.IsChanged = false;
-                    tabPage.ToolTipText = ((SqlFile)tabPage.Tag).FullName;
-                }
-            }
+            
             HistoryFile historyFile = (HistoryFile)((ToolStripMenuItem)sender).Tag;
             string file = historyFile.FullName;
             loadTabPageFromFile(tabPage, file);
@@ -1040,6 +1027,23 @@ CTRL+SHFT+S                     Store sql All
                 // get TabPage
                 if (_tabControl.SelectedIndex < 0) return;
                 tabPage = _tabControl.TabPages[_tabControl.SelectedIndex];
+
+                // If contend changed: Store first
+                SqlFile sqlFile = (SqlFile)tabPage.Tag;
+                if (sqlFile.IsChanged)
+                {
+                    DialogResult result = MessageBox.Show($"Old File: '{sqlFile.FullName}'",
+                        "First store old File? ", MessageBoxButtons.YesNoCancel);
+                    if (result == DialogResult.Cancel) return;
+                    if (result == DialogResult.Yes)
+                    {
+                        save(tabPage);
+                        sqlFile.IsChanged = false;
+                        tabPage.ToolTipText = ((SqlFile)tabPage.Tag).FullName;
+                    }
+                }
+
+
             }
             OpenFileDialog openFileDialog = new OpenFileDialog();
 
@@ -1064,9 +1068,8 @@ CTRL+SHFT+S                     Store sql All
                     InsertRecentFileLists(openFileDialog.FileName);
                     Settings.save();
 
-                    // Store TabData in TabPage
-                    SqlFile sqlFile = new SqlFile(this, tabPage, openFileDialog.FileName);
-                    sqlFile.IsChanged = true;
+                    // Store file information in TabPage
+                    SqlFile sqlFile = new SqlFile(this, tabPage, openFileDialog.FileName, isChanged:false);
                     tabPage.Tag = sqlFile;
 
                     // set TabName
@@ -1173,12 +1176,12 @@ CTRL+SHFT+S                     Store sql All
             // File, Load Tab from
             loadRecentFilesMenuItems(_fileLoadRecentFileItem, loadFromHistoryEntry_Click);
             // File, Add Tab from..
-            loadRecentFilesMenuItems(_fileNewTabAndLoadRecentFileItem, newTabAnLoadFromHistoryEntry_Click);
+            loadRecentFilesMenuItems(_fileNewTabAndLoadRecentFileItem, newTabAndLoadFromHistoryEntry_Click);
 
             // Tab,  Load Tab from..
             loadRecentFilesMenuItems(_loadTabFromFileItem, loadFromHistoryEntry_Click);
             // Tab,  Add Tab from..
-            loadRecentFilesMenuItems(_newTabFromItem, newTabAnLoadFromHistoryEntry_Click);
+            loadRecentFilesMenuItems(_newTabFromItem, newTabAndLoadFromHistoryEntry_Click);
         }
 
         /// <summary>

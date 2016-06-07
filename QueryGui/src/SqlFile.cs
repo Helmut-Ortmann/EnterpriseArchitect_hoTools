@@ -48,7 +48,7 @@ namespace hoTools.Query
             //
             watcher = new FileSystemWatcher();
             watcher.Changed += OnChanged;
-            init(fullName, isChanged);
+            initTapPageCaption(fullName, isChanged);
         }
         #endregion
 
@@ -104,7 +104,7 @@ namespace hoTools.Query
         /// </summary>
         /// <param name="fullName"></param>
         /// <param name="isChanged"></param>
-        void init(string fullName, bool isChanged)
+        void initTapPageCaption(string fullName, bool isChanged)
         {
             IsChanged = isChanged;
             _fullName = fullName;

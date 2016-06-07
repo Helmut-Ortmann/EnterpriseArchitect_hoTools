@@ -496,14 +496,22 @@ namespace hoTools
                     fileNameMdg = "hoToolsCompilation.xml";
                     break;
                 default:
-                    fileNameMdg = null;
+                    fileNameMdg = "";
                     break;
             }
-            if (fileNameMdg == null) return null;
+            if (fileNameMdg == "") return "";
 
             string assemblyFolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             string combinedPathMdg = Path.Combine(assemblyFolder, fileNameMdg);
-            return System.IO.File.ReadAllText(combinedPathMdg);
+
+            try
+            {
+                return System.IO.File.ReadAllText(combinedPathMdg);
+            } catch (Exception e)
+            {
+                MessageBox.Show($"MDG file='{combinedPathMdg}'\r\n{e.ToString()}", $"Can't load MDG '{fileNameMdg}'");
+                return "";
+            } 
         }
         #endregion
 
