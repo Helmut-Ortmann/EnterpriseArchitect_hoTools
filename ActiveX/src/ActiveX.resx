@@ -1321,7 +1321,7 @@ There is no interface to directly select more than one Browser Element (as far a
     <value>294, 22</value>
   </data>
   <data name="settingsQueryAndSctipToolStripMenuItem.Text" xml:space="preserve">
-    <value>Settings &amp;Query and Script</value>
+    <value>Settings SQL and Script</value>
   </data>
   <data name="settingsGlobalKeysToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>294, 22</value>

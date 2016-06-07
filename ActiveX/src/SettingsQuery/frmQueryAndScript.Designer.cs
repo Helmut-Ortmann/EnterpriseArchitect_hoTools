@@ -163,8 +163,8 @@
             this.chkIsAskForUpdate.Size = new System.Drawing.Size(122, 22);
             this.chkIsAskForUpdate.TabIndex = 212;
             this.chkIsAskForUpdate.Text = "Ask for update";
-            this.toolTip1.SetToolTip(this.chkIsAskForUpdate, "If checked: Query will ask to update  query display content if file has changed o" +
-        "utside.");
+            this.toolTip1.SetToolTip(this.chkIsAskForUpdate, "If checked: SQL will ask to update  query display content if file has changed out" +
+        "side.");
             this.chkIsAskForUpdate.UseVisualStyleBackColor = true;
             // 
             // txtSqlEditor
@@ -186,7 +186,7 @@
             this.btnSqlEditor.TabIndex = 215;
             this.btnSqlEditor.Text = "Find SQL editor";
             this.toolTip1.SetToolTip(this.btnSqlEditor, "Click to specify your beloved SQL editor. If nothing is entered hoTools uses the " +
-        "Windows preferences for *.sql type.");
+        "Windows preferences for *.sql type.\r\n\r\nCurrently not supported.");
             this.btnSqlEditor.UseVisualStyleBackColor = true;
             // 
             // groupBox1
@@ -245,7 +245,7 @@
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOk);
             this.Name = "FrmQueryAndScript";
-            this.Text = "hoTools: Settings Query and Script";
+            this.Text = "hoTools: Settings SQL and Script";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
