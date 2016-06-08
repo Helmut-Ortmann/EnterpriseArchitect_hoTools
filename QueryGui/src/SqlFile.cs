@@ -121,6 +121,7 @@ namespace hoTools.Query
         /// <param name="e"></param>
         void OnChanged(object source, FileSystemEventArgs e)
         {
+            return; // currently not used
             string fileNameChanged = e.FullPath;
             if (_fullName == fileNameChanged)
             {

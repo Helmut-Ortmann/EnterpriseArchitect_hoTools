@@ -819,7 +819,7 @@ namespace hoTools.Query
             code = rm.GetString("hoDemo3ParScript");
             script = new EaScript(Model, "hoDemo3Par", "Internal", "VBScript", group.GUID, code);
             script.save();
-            MessageBox.Show("ScriptGroup: hoTools\r\nScript1: hoDemo2Par\r\rScript2: hoDemo3Par","Scripts loaded.");
+            MessageBox.Show("ScriptGroup: hoTools\r\n- Script1: hoDemo2Par\r\n- Script2: hoDemo3Par","Demo Scripts to run on query loaded.");
         }
 
         void QueryGUI_Resize(object sender, EventArgs e)
