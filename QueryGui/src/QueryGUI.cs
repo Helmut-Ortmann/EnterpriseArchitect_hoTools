@@ -143,6 +143,8 @@ namespace hoTools.Query
             {
                 // don't show Script container
                 splitContainer.Panel2Collapsed = true;
+                // don't show Menu item LoadScripts
+                loadStandardScriptsToolStripMenuItem.Visible = false;
             }
             else // run for Script (includes Query)
             {
@@ -153,12 +155,6 @@ namespace hoTools.Query
                 updateTableFunctions();
             }
 
-            // enable drag and drop
-            AllowDrop = true;
-            DragEnter += new DragEventHandler(tabControlSql_DragEnter);
-            DragDrop += new DragEventHandler(tabControlSql_DragDrop);
-
-            tabControlSql.AllowDrop = true;
             return true;
         }
 
@@ -691,38 +687,6 @@ namespace hoTools.Query
             _sqlTabCntrls.saveAll();
         }
 
-        #region Drag one or more into TextBox
-        /// <summary>
-        /// Drag one or more files into TextBox
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        void tabControlSql_DragEnter(object sender, DragEventArgs e)
-        {
-
-        }
-        #endregion
-
-        void tabControlSql_DragDrop(object sender, DragEventArgs e)
-        {
-
-        }
-
-        private void splitContainer_DragOver(object sender, DragEventArgs e)
-        {
-            Repository.WriteOutput("Test", e.ToString(),0);
-        }
-
-        private void splitContainer_DragDrop(object sender, DragEventArgs e)
-        {
-            Repository.WriteOutput("Test", e.ToString(), 0);
-        }
-
-        private void tabControlSql_DragLeave(object sender, EventArgs e)
-        {
-            Repository.WriteOutput("Test", e.ToString(), 0);
-        }
-
         #region Undo SQL Text
         void btnUndo_Click(object sender, EventArgs e)
         {
@@ -833,7 +797,7 @@ namespace hoTools.Query
         }
 
         /// <summary>
-        /// Load Standard Scripts into EA 
+        /// Load Standard Scripts into EA: ScriptGroup:hoTools, Script: hoDemo2Par, hoDemo3Par 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -855,6 +819,7 @@ namespace hoTools.Query
             code = rm.GetString("hoDemo3ParScript");
             script = new EaScript(Model, "hoDemo3Par", "Internal", "VBScript", group.GUID, code);
             script.save();
+            MessageBox.Show("ScriptGroup: hoTools\r\nScript1: hoDemo2Par\r\rScript2: hoDemo3Par","Scripts loaded.");
         }
 
         void QueryGUI_Resize(object sender, EventArgs e)
@@ -876,23 +841,9 @@ namespace hoTools.Query
         void tabControlSql_Resize(object sender, EventArgs e)
         {
             tabControlSql.Invalidate();
-            //tabControlSql.Refresh();
-            //foreach (var tab in tabControlSql.TabPages)
-            //{
-            //    ((TabPage)tab).Invalidate();
-            //    ((TabPage)tab).Refresh();
-            //}
+            
         }
 
-        //void splitContainer_SplitterMoved(object sender, SplitterEventArgs e)
-        //{
-            //splitContainer.Refresh();
-            //tabControlSql.Refresh();
-        //}
-        //protected override void OnPaintBackground(PaintEventArgs pevent)
-        //{
-        //    Graphics g = pevent.Graphics;
-          
-        //}
+       
     }
 }

@@ -198,7 +198,7 @@ EA!</FONT></P>
 alt="Basic functionality hoTools" 
 src="file:///D:/hoData/Development/GitHub/EnterpriseArchitect_hoTools/Addin/image/Addin.PNG" 
 align=left></P>
-<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<IMG style="HEIGHT: 466px; WIDTH: 676px" 
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<IMG style="HEIGHT: 466px; WIDTH: 565px" 
 border=0 hspace=0 alt="" 
 src="file:///D:/hoData/Development/GitHub/EnterpriseArchitect_hoTools/Addin/image/AddinComplete.png" 
 align=baseline></P></BODY></HTML>
@@ -401,7 +401,10 @@ align=baseline></P></BODY></HTML>
 <HTML><HEAD><TITLE>Settings General</TITLE>
 <META content="text/html; charset=unicode" http-equiv=Content-Type>
 <META content=de-at http-equiv=Content-Language>
-<META name=GENERATOR content="MSHTML 11.00.10586.306"></HEAD>
+<META name=GENERATOR content="MSHTML 11.00.10586.306">
+<STYLE 
+type=text/css>a.bmeAnchor { background-color:#4682b4; color:white; }</STYLE>
+</HEAD>
 <BODY style="FONT-SIZE: 10pt; FONT-FAMILY: Times New Roman" bgColor=#ffffff>
 <TABLE 
 style="FONT-SIZE: 10pt; BORDER-TOP: #c6c7c6 1px solid; BORDER-RIGHT: #c6c7c6 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: #c6c7c6 1px solid; BORDER-LEFT: #c6c7c6 1px solid" 
@@ -519,7 +522,10 @@ align=baseline></P></BODY></HTML>
 <HTML><HEAD><TITLE>Settings Query and Script</TITLE>
 <META content="text/html; charset=unicode" http-equiv=Content-Type>
 <META content=de-at http-equiv=Content-Language>
-<META name=GENERATOR content="MSHTML 11.00.10586.306"></HEAD>
+<META name=GENERATOR content="MSHTML 11.00.10586.306">
+<STYLE 
+type=text/css>a.bmeAnchor { background-color:#4682b4; color:white; }</STYLE>
+</HEAD>
 <BODY style="FONT-SIZE: 10pt; FONT-FAMILY: Times New Roman" bgColor=#ffffff>
 <TABLE 
 style="FONT-SIZE: 10pt; BORDER-TOP: #c6c7c6 1px solid; BORDER-RIGHT: #c6c7c6 1px solid; BORDER-COLLAPSE: collapse; BORDER-BOTTOM: #c6c7c6 1px solid; BORDER-LEFT: #c6c7c6 1px solid" 
@@ -5380,4 +5386,4 @@ cellSpacing=0 cellPadding=2 width="99%">
 <P>Helmut Ortmann<BR><A 
 href="mailto:Helmut.Ortmann@t-online.de">Helmut.Ortmann@t-online.de</A><BR>+49 
 172 / 51 79 16 7</P></BODY></HTML>
-!=!K002022UTF-8
+!=!K002042UTF-8

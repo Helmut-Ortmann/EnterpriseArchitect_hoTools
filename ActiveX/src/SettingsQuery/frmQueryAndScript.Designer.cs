@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmQueryAndScript));
             this.btnOk = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -173,21 +174,21 @@
             this.txtSqlEditor.Name = "txtSqlEditor";
             this.txtSqlEditor.Size = new System.Drawing.Size(270, 20);
             this.txtSqlEditor.TabIndex = 214;
-            this.toolTip1.SetToolTip(this.txtSqlEditor, "Enter path of your beloved SQL Editor. You also can use the button to define your" +
-        " favorable Editor.\r\n\r\nIf nothing is entered hoTools uses the Windows preferences" +
-        " for *.sql type.");
+            this.toolTip1.SetToolTip(this.txtSqlEditor, resources.GetString("txtSqlEditor.ToolTip"));
+            this.txtSqlEditor.Visible = false;
             // 
             // btnSqlEditor
             // 
             this.btnSqlEditor.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSqlEditor.Location = new System.Drawing.Point(321, 191);
             this.btnSqlEditor.Name = "btnSqlEditor";
-            this.btnSqlEditor.Size = new System.Drawing.Size(94, 23);
+            this.btnSqlEditor.Size = new System.Drawing.Size(183, 23);
             this.btnSqlEditor.TabIndex = 215;
             this.btnSqlEditor.Text = "Find SQL editor";
             this.toolTip1.SetToolTip(this.btnSqlEditor, "Click to specify your beloved SQL editor. If nothing is entered hoTools uses the " +
         "Windows preferences for *.sql type.\r\n\r\nCurrently not supported.");
             this.btnSqlEditor.UseVisualStyleBackColor = true;
+            this.btnSqlEditor.Visible = false;
             // 
             // groupBox1
             // 
@@ -234,7 +235,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(476, 328);
+            this.ClientSize = new System.Drawing.Size(577, 328);
             this.Controls.Add(this.btnSqlEditor);
             this.Controls.Add(this.txtSqlEditor);
             this.Controls.Add(this.label2);

@@ -1300,7 +1300,14 @@ There is no interface to directly select more than one Browser Element (as far a
     <value>294, 22</value>
   </data>
   <data name="settingGeneralToolStripMenuItem.Text" xml:space="preserve">
-    <value>Setting &amp;General</value>
+    <value>Settings &amp;General</value>
+  </data>
+  <data name="settingGeneralToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Configure:
+- Buttons on hoTools
+- Quick Search Name
+- Tabs to show
+- MDG to load</value>
   </data>
   <data name="settingsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>294, 22</value>

@@ -594,50 +594,59 @@ CTRL+SHFT+S                     Store sql All
             // DB ASA
             ToolStripMenuItem insertDBAsaTemplateMenuItem = new ToolStripMenuItem();
             insertDBAsaTemplateMenuItem.Text = "ASA";
-            insertDBAsaTemplateMenuItem.ToolTipText = SqlTemplates.getTooltip(SqlTemplates.SQL_TEMPLATE_ID.DB_ASA);
-            insertDBAsaTemplateMenuItem.Tag = SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.DB_ASA);
+
+
+            id = SqlTemplates.SQL_TEMPLATE_ID.DB_ASA;
+            insertDBAsaTemplateMenuItem.ToolTipText = SqlTemplates.getTooltip(id);
+            insertDBAsaTemplateMenuItem.Tag = SqlTemplates.getTemplate(id);
             insertDBAsaTemplateMenuItem.Click += new System.EventHandler(insertTemplate_Click);
 
             // DB Firebird
             ToolStripMenuItem insertDBFirebirdTemplateMenuItem = new ToolStripMenuItem();
             insertDBFirebirdTemplateMenuItem.Text = "Firebird";
-            insertDBFirebirdTemplateMenuItem.ToolTipText = SqlTemplates.getTooltip(SqlTemplates.SQL_TEMPLATE_ID.DB_FIREBIRD);
-            insertDBFirebirdTemplateMenuItem.Tag = SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.DB_FIREBIRD);
+            id = SqlTemplates.SQL_TEMPLATE_ID.DB_FIREBIRD;
+            insertDBFirebirdTemplateMenuItem.ToolTipText = SqlTemplates.getTooltip(id);
+            insertDBFirebirdTemplateMenuItem.Tag = SqlTemplates.getTemplate(id);
             insertDBFirebirdTemplateMenuItem.Click += new System.EventHandler(insertTemplate_Click);
 
             // DB Jet
             ToolStripMenuItem insertDBJetTemplateMenuItem = new ToolStripMenuItem();
-            insertDBJetTemplateMenuItem.Text = "DB JET";
-            insertDBJetTemplateMenuItem.ToolTipText = SqlTemplates.getTooltip(SqlTemplates.SQL_TEMPLATE_ID.DB_JET);
-            insertDBJetTemplateMenuItem.Tag = SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.DB_JET);
+            insertDBJetTemplateMenuItem.Text = "JET";
+            id = SqlTemplates.SQL_TEMPLATE_ID.DB_JET;
+            insertDBJetTemplateMenuItem.ToolTipText = SqlTemplates.getTooltip(id);
+            insertDBJetTemplateMenuItem.Tag = SqlTemplates.getTemplate(id);
             insertDBJetTemplateMenuItem.Click += new System.EventHandler(insertTemplate_Click);
 
             // DB MySQL
             ToolStripMenuItem insertDBMySQLTemplateMenuItem = new ToolStripMenuItem();
             insertDBMySQLTemplateMenuItem.Text = "MYSQL";
-            insertDBMySQLTemplateMenuItem.ToolTipText = SqlTemplates.getTooltip(SqlTemplates.SQL_TEMPLATE_ID.DB_MYSQL);
-            insertDBMySQLTemplateMenuItem.Tag = SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.DB_MYSQL);
+            id = SqlTemplates.SQL_TEMPLATE_ID.DB_MYSQL;
+            insertDBMySQLTemplateMenuItem.ToolTipText = SqlTemplates.getTooltip(id);
+            insertDBMySQLTemplateMenuItem.Tag = SqlTemplates.getTemplate(id);
             insertDBMySQLTemplateMenuItem.Click += new System.EventHandler(insertTemplate_Click);
 
             // DB Oracle
             ToolStripMenuItem insertDBOracleTemplateMenuItem = new ToolStripMenuItem();
             insertDBOracleTemplateMenuItem.Text = "ORACLE";
-            insertDBOracleTemplateMenuItem.ToolTipText = SqlTemplates.getTooltip(SqlTemplates.SQL_TEMPLATE_ID.DB_ORACLE);
-            insertDBOracleTemplateMenuItem.Tag = SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.DB_ORACLE);
+            id = SqlTemplates.SQL_TEMPLATE_ID.DB_ORACLE;
+            insertDBOracleTemplateMenuItem.ToolTipText = SqlTemplates.getTooltip(id);
+            insertDBOracleTemplateMenuItem.Tag = SqlTemplates.getTemplate(id);
             insertDBOracleTemplateMenuItem.Click += new System.EventHandler(insertTemplate_Click);
 
             // DB POSTGRES
             ToolStripMenuItem insertDBPostgresTemplateMenuItem = new ToolStripMenuItem();
             insertDBPostgresTemplateMenuItem.Text = "POSTGRES";
-            insertDBPostgresTemplateMenuItem.ToolTipText = SqlTemplates.getTooltip(SqlTemplates.SQL_TEMPLATE_ID.DB_POSTGRES);
-            insertDBPostgresTemplateMenuItem.Tag = SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.DB_POSTGRES);
+            id = SqlTemplates.SQL_TEMPLATE_ID.DB_POSTGRES;
+            insertDBPostgresTemplateMenuItem.ToolTipText = SqlTemplates.getTooltip(id);
+            insertDBPostgresTemplateMenuItem.Tag = SqlTemplates.getTemplate(id);
             insertDBPostgresTemplateMenuItem.Click += new System.EventHandler(insertTemplate_Click);
 
             // DB SQL Server
             ToolStripMenuItem insertDBSqlServerTemplateMenuItem = new ToolStripMenuItem();
             insertDBSqlServerTemplateMenuItem.Text = "SQL Server";
-            insertDBSqlServerTemplateMenuItem.ToolTipText = SqlTemplates.getTooltip(SqlTemplates.SQL_TEMPLATE_ID.DB_SQLSVR);
-            insertDBSqlServerTemplateMenuItem.Tag = SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.DB_SQLSVR);
+            id = SqlTemplates.SQL_TEMPLATE_ID.DB_SQLSVR;
+            insertDBSqlServerTemplateMenuItem.ToolTipText = SqlTemplates.getTooltip(id);
+            insertDBSqlServerTemplateMenuItem.Tag = SqlTemplates.getTemplate(id);
             insertDBSqlServerTemplateMenuItem.Click += new System.EventHandler(insertTemplate_Click);
 
             // DB dependent SQL
