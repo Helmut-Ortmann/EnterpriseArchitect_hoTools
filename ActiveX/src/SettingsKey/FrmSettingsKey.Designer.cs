@@ -972,9 +972,10 @@
             this.label30.Location = new System.Drawing.Point(656, 36);
             this.label30.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(89, 18);
+            this.label30.Size = new System.Drawing.Size(112, 18);
             this.label30.TabIndex = 154;
-            this.label30.Text = "Search term";
+            this.label30.Text = "<Search Term>";
+            this.toolTip1.SetToolTip(this.label30, "The EA <Search Term> to find the <Search Term>");
             // 
             // label32
             // 
