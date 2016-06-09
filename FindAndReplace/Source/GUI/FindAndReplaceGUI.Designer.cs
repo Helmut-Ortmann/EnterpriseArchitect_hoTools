@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FindAndReplaceGUI));
             this.txtFindString = new System.Windows.Forms.TextBox();
             this.txtReplaceString = new System.Windows.Forms.TextBox();
@@ -45,7 +46,7 @@
             this.helpToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.regularExpressionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolTip1 = new System.Windows.Forms.ToolTip();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.btnFindPrevious = new System.Windows.Forms.Button();
             this.txtStatus = new System.Windows.Forms.TextBox();
             this.btnShow = new System.Windows.Forms.Button();
@@ -74,15 +75,16 @@
             // 
             // txtFindString
             // 
-            this.txtFindString.Location = new System.Drawing.Point(0, 282);
+            this.txtFindString.Location = new System.Drawing.Point(17, 323);
             this.txtFindString.Margin = new System.Windows.Forms.Padding(2);
             this.txtFindString.Name = "txtFindString";
             this.txtFindString.Size = new System.Drawing.Size(215, 20);
             this.txtFindString.TabIndex = 0;
+            this.toolTip1.SetToolTip(this.txtFindString, "Ender the string or regular expression to find");
             // 
             // txtReplaceString
             // 
-            this.txtReplaceString.Location = new System.Drawing.Point(224, 282);
+            this.txtReplaceString.Location = new System.Drawing.Point(241, 323);
             this.txtReplaceString.Margin = new System.Windows.Forms.Padding(2);
             this.txtReplaceString.Name = "txtReplaceString";
             this.txtReplaceString.Size = new System.Drawing.Size(200, 20);
@@ -90,7 +92,7 @@
             // 
             // btnFindNext
             // 
-            this.btnFindNext.Location = new System.Drawing.Point(18, 305);
+            this.btnFindNext.Location = new System.Drawing.Point(35, 346);
             this.btnFindNext.Margin = new System.Windows.Forms.Padding(2);
             this.btnFindNext.Name = "btnFindNext";
             this.btnFindNext.Size = new System.Drawing.Size(40, 19);
@@ -102,7 +104,7 @@
             // 
             // btnReplace
             // 
-            this.btnReplace.Location = new System.Drawing.Point(175, 305);
+            this.btnReplace.Location = new System.Drawing.Point(192, 346);
             this.btnReplace.Margin = new System.Windows.Forms.Padding(2);
             this.btnReplace.Name = "btnReplace";
             this.btnReplace.Size = new System.Drawing.Size(56, 19);
@@ -116,7 +118,7 @@
             // 
             // btnReplaceAll
             // 
-            this.btnReplaceAll.Location = new System.Drawing.Point(261, 305);
+            this.btnReplaceAll.Location = new System.Drawing.Point(278, 346);
             this.btnReplaceAll.Margin = new System.Windows.Forms.Padding(2);
             this.btnReplaceAll.Name = "btnReplaceAll";
             this.btnReplaceAll.Size = new System.Drawing.Size(74, 19);
@@ -129,7 +131,7 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(365, 306);
+            this.btnCancel.Location = new System.Drawing.Point(382, 347);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(2);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(56, 19);
@@ -142,7 +144,7 @@
             // chkRegularExpression
             // 
             this.chkRegularExpression.AutoSize = true;
-            this.chkRegularExpression.Location = new System.Drawing.Point(2, 220);
+            this.chkRegularExpression.Location = new System.Drawing.Point(19, 261);
             this.chkRegularExpression.Margin = new System.Windows.Forms.Padding(2);
             this.chkRegularExpression.Name = "chkRegularExpression";
             this.chkRegularExpression.Size = new System.Drawing.Size(117, 17);
@@ -154,7 +156,7 @@
             // chkName
             // 
             this.chkName.AutoSize = true;
-            this.chkName.Location = new System.Drawing.Point(2, 124);
+            this.chkName.Location = new System.Drawing.Point(19, 165);
             this.chkName.Margin = new System.Windows.Forms.Padding(2);
             this.chkName.Name = "chkName";
             this.chkName.Size = new System.Drawing.Size(54, 17);
@@ -165,7 +167,7 @@
             // chkDescription
             // 
             this.chkDescription.AutoSize = true;
-            this.chkDescription.Location = new System.Drawing.Point(2, 146);
+            this.chkDescription.Location = new System.Drawing.Point(19, 187);
             this.chkDescription.Margin = new System.Windows.Forms.Padding(2);
             this.chkDescription.Name = "chkDescription";
             this.chkDescription.Size = new System.Drawing.Size(79, 17);
@@ -181,7 +183,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(429, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(484, 24);
             this.menuStrip1.TabIndex = 10;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -190,13 +192,13 @@
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.helpToolStripMenuItem1});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(75, 20);
             this.fileToolStripMenuItem.Text = "FileHistory";
             // 
             // helpToolStripMenuItem1
             // 
             this.helpToolStripMenuItem1.Name = "helpToolStripMenuItem1";
-            this.helpToolStripMenuItem1.Size = new System.Drawing.Size(99, 22);
+            this.helpToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
             this.helpToolStripMenuItem1.Text = "Help";
             // 
             // helpToolStripMenuItem
@@ -232,7 +234,7 @@
             // 
             // btnFindPrevious
             // 
-            this.btnFindPrevious.Location = new System.Drawing.Point(88, 305);
+            this.btnFindPrevious.Location = new System.Drawing.Point(105, 346);
             this.btnFindPrevious.Margin = new System.Windows.Forms.Padding(2);
             this.btnFindPrevious.Name = "btnFindPrevious";
             this.btnFindPrevious.Size = new System.Drawing.Size(57, 19);
@@ -246,7 +248,7 @@
             // txtStatus
             // 
             this.txtStatus.Enabled = false;
-            this.txtStatus.Location = new System.Drawing.Point(70, 346);
+            this.txtStatus.Location = new System.Drawing.Point(92, 391);
             this.txtStatus.Margin = new System.Windows.Forms.Padding(2);
             this.txtStatus.Name = "txtStatus";
             this.txtStatus.Size = new System.Drawing.Size(354, 20);
@@ -256,12 +258,12 @@
             // btnShow
             // 
             this.btnShow.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnShow.Location = new System.Drawing.Point(2, 338);
+            this.btnShow.Location = new System.Drawing.Point(17, 387);
             this.btnShow.Margin = new System.Windows.Forms.Padding(2);
             this.btnShow.Name = "btnShow";
             this.btnShow.Size = new System.Drawing.Size(58, 27);
             this.btnShow.TabIndex = 26;
-            this.btnShow.Text = "Show";
+            this.btnShow.Text = "State";
             this.toolTip1.SetToolTip(this.btnShow, "Show details of found item and allow changes");
             this.btnShow.UseVisualStyleBackColor = true;
             this.btnShow.Click += new System.EventHandler(this.btnShow_Click);
@@ -269,7 +271,7 @@
             // chkStereotype
             // 
             this.chkStereotype.AutoSize = true;
-            this.chkStereotype.Location = new System.Drawing.Point(2, 168);
+            this.chkStereotype.Location = new System.Drawing.Point(19, 209);
             this.chkStereotype.Margin = new System.Windows.Forms.Padding(2);
             this.chkStereotype.Name = "chkStereotype";
             this.chkStereotype.Size = new System.Drawing.Size(77, 17);
@@ -281,7 +283,7 @@
             // chkTaggedValue
             // 
             this.chkTaggedValue.AutoSize = true;
-            this.chkTaggedValue.Location = new System.Drawing.Point(2, 190);
+            this.chkTaggedValue.Location = new System.Drawing.Point(19, 231);
             this.chkTaggedValue.Margin = new System.Windows.Forms.Padding(2);
             this.chkTaggedValue.Name = "chkTaggedValue";
             this.chkTaggedValue.Size = new System.Drawing.Size(98, 17);
@@ -294,7 +296,7 @@
             // 
             // txtTaggedValue
             // 
-            this.txtTaggedValue.Location = new System.Drawing.Point(146, 188);
+            this.txtTaggedValue.Location = new System.Drawing.Point(163, 229);
             this.txtTaggedValue.Margin = new System.Windows.Forms.Padding(2);
             this.txtTaggedValue.Name = "txtTaggedValue";
             this.txtTaggedValue.Size = new System.Drawing.Size(278, 20);
@@ -305,7 +307,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(101, 262);
+            this.label2.Location = new System.Drawing.Point(118, 303);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(57, 13);
@@ -316,7 +318,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(289, 262);
+            this.label3.Location = new System.Drawing.Point(306, 303);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(61, 13);
@@ -327,7 +329,7 @@
             // chkIgnoreWhiteSpaces
             // 
             this.chkIgnoreWhiteSpaces.AutoSize = true;
-            this.chkIgnoreWhiteSpaces.Location = new System.Drawing.Point(249, 220);
+            this.chkIgnoreWhiteSpaces.Location = new System.Drawing.Point(266, 261);
             this.chkIgnoreWhiteSpaces.Margin = new System.Windows.Forms.Padding(2);
             this.chkIgnoreWhiteSpaces.Name = "chkIgnoreWhiteSpaces";
             this.chkIgnoreWhiteSpaces.Size = new System.Drawing.Size(126, 17);
@@ -339,7 +341,7 @@
             // btnFind
             // 
             this.btnFind.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnFind.Location = new System.Drawing.Point(0, 254);
+            this.btnFind.Location = new System.Drawing.Point(17, 295);
             this.btnFind.Margin = new System.Windows.Forms.Padding(2);
             this.btnFind.Name = "btnFind";
             this.btnFind.Size = new System.Drawing.Size(60, 27);
@@ -352,7 +354,7 @@
             // lblFieldType
             // 
             this.lblFieldType.AutoSize = true;
-            this.lblFieldType.Location = new System.Drawing.Point(4, 108);
+            this.lblFieldType.Location = new System.Drawing.Point(21, 149);
             this.lblFieldType.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblFieldType.Name = "lblFieldType";
             this.lblFieldType.Size = new System.Drawing.Size(56, 13);
@@ -364,7 +366,7 @@
             // lblItemType
             // 
             this.lblItemType.AutoSize = true;
-            this.lblItemType.Location = new System.Drawing.Point(143, 108);
+            this.lblItemType.Location = new System.Drawing.Point(160, 149);
             this.lblItemType.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblItemType.Name = "lblItemType";
             this.lblItemType.Size = new System.Drawing.Size(54, 13);
@@ -375,7 +377,7 @@
             // 
             // txtUserText
             // 
-            this.txtUserText.Location = new System.Drawing.Point(347, 41);
+            this.txtUserText.Location = new System.Drawing.Point(364, 82);
             this.txtUserText.Margin = new System.Windows.Forms.Padding(2);
             this.txtUserText.Name = "txtUserText";
             this.txtUserText.Size = new System.Drawing.Size(67, 20);
@@ -392,7 +394,7 @@
             // chkPackage
             // 
             this.chkPackage.AutoSize = true;
-            this.chkPackage.Location = new System.Drawing.Point(146, 124);
+            this.chkPackage.Location = new System.Drawing.Point(163, 165);
             this.chkPackage.Margin = new System.Windows.Forms.Padding(2);
             this.chkPackage.Name = "chkPackage";
             this.chkPackage.Size = new System.Drawing.Size(74, 17);
@@ -403,7 +405,7 @@
             // chkElement
             // 
             this.chkElement.AutoSize = true;
-            this.chkElement.Location = new System.Drawing.Point(146, 146);
+            this.chkElement.Location = new System.Drawing.Point(163, 187);
             this.chkElement.Margin = new System.Windows.Forms.Padding(2);
             this.chkElement.Name = "chkElement";
             this.chkElement.Size = new System.Drawing.Size(69, 17);
@@ -414,7 +416,7 @@
             // chkDiagram
             // 
             this.chkDiagram.AutoSize = true;
-            this.chkDiagram.Location = new System.Drawing.Point(146, 169);
+            this.chkDiagram.Location = new System.Drawing.Point(163, 210);
             this.chkDiagram.Margin = new System.Windows.Forms.Padding(2);
             this.chkDiagram.Name = "chkDiagram";
             this.chkDiagram.Size = new System.Drawing.Size(70, 17);
@@ -425,7 +427,7 @@
             // chkCaseSensetive
             // 
             this.chkCaseSensetive.AutoSize = true;
-            this.chkCaseSensetive.Location = new System.Drawing.Point(147, 220);
+            this.chkCaseSensetive.Location = new System.Drawing.Point(164, 261);
             this.chkCaseSensetive.Margin = new System.Windows.Forms.Padding(2);
             this.chkCaseSensetive.Name = "chkCaseSensetive";
             this.chkCaseSensetive.Size = new System.Drawing.Size(94, 17);
@@ -436,7 +438,7 @@
             // chkOperation
             // 
             this.chkOperation.AutoSize = true;
-            this.chkOperation.Location = new System.Drawing.Point(219, 146);
+            this.chkOperation.Location = new System.Drawing.Point(236, 187);
             this.chkOperation.Margin = new System.Windows.Forms.Padding(2);
             this.chkOperation.Name = "chkOperation";
             this.chkOperation.Size = new System.Drawing.Size(72, 17);
@@ -447,7 +449,7 @@
             // chkAttribute
             // 
             this.chkAttribute.AutoSize = true;
-            this.chkAttribute.Location = new System.Drawing.Point(219, 124);
+            this.chkAttribute.Location = new System.Drawing.Point(236, 165);
             this.chkAttribute.Margin = new System.Windows.Forms.Padding(2);
             this.chkAttribute.Name = "chkAttribute";
             this.chkAttribute.Size = new System.Drawing.Size(65, 17);
@@ -459,11 +461,11 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(30, 21);
+            this.label4.Location = new System.Drawing.Point(54, 40);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(305, 37);
+            this.label4.Size = new System.Drawing.Size(235, 37);
             this.label4.TabIndex = 32;
-            this.label4.Text = "Search and Replace";
+            this.label4.Text = "Find && Replace";
             // 
             // label1
             // 
@@ -481,7 +483,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(16, 58);
+            this.label5.Location = new System.Drawing.Point(20, 77);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(319, 24);
             this.label5.TabIndex = 33;
@@ -490,7 +492,7 @@
             // Filter
             // 
             this.Filter.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Filter.Location = new System.Drawing.Point(0, 85);
+            this.Filter.Location = new System.Drawing.Point(17, 126);
             this.Filter.Name = "Filter";
             this.Filter.Size = new System.Drawing.Size(429, 164);
             this.Filter.TabIndex = 34;
@@ -536,7 +538,7 @@
             this.Controls.Add(this.Filter);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FindAndReplaceGUI";
-            this.Size = new System.Drawing.Size(429, 379);
+            this.Size = new System.Drawing.Size(484, 449);
             this.toolTip1.SetToolTip(this, "Show details and allow changes");
             this.Load += new System.EventHandler(this.FindAndReplaceGUI_Load);
             this.menuStrip1.ResumeLayout(false);
