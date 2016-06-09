@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FindAndReplaceGUI));
             this.txtFindString = new System.Windows.Forms.TextBox();
             this.txtReplaceString = new System.Windows.Forms.TextBox();
@@ -46,7 +45,7 @@
             this.helpToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.regularExpressionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.toolTip1 = new System.Windows.Forms.ToolTip();
             this.btnFindPrevious = new System.Windows.Forms.Button();
             this.txtStatus = new System.Windows.Forms.TextBox();
             this.btnShow = new System.Windows.Forms.Button();
@@ -263,8 +262,8 @@
             this.btnShow.Name = "btnShow";
             this.btnShow.Size = new System.Drawing.Size(58, 27);
             this.btnShow.TabIndex = 26;
-            this.btnShow.Text = "State";
-            this.toolTip1.SetToolTip(this.btnShow, "Show details of found item and allow changes");
+            this.btnShow.Text = "Show";
+            this.toolTip1.SetToolTip(this.btnShow, "Show details in seperate Window:\r\n- See the details\r\n- Decide what to do");
             this.btnShow.UseVisualStyleBackColor = true;
             this.btnShow.Click += new System.EventHandler(this.btnShow_Click);
             // 

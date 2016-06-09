@@ -1324,17 +1324,33 @@ There is no interface to directly select more than one Browser Element (as far a
   <data name="settingsToolbarToolStripMenuItem.Text" xml:space="preserve">
     <value>Settings Toolbar for Searches and Services</value>
   </data>
+  <data name="settingsToolbarToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Define Toolbar for:
+- at max 5 Searches
+- at max 5 Services</value>
+  </data>
   <data name="settingsQueryAndSctipToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>294, 22</value>
   </data>
   <data name="settingsQueryAndSctipToolStripMenuItem.Text" xml:space="preserve">
     <value>Settings SQL and Script</value>
   </data>
+  <data name="settingsQueryAndSctipToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Define for SQL and Run Script for SQL rows:
+- Addin Window
+- Own EA Tab Window
+- Disable</value>
+  </data>
   <data name="settingsGlobalKeysToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>294, 22</value>
   </data>
   <data name="settingsGlobalKeysToolStripMenuItem.Text" xml:space="preserve">
     <value>Settings Global Keys</value>
+  </data>
+  <data name="settingsGlobalKeysToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Define your global keys for:
+- Searches with &lt;Search Term&gt;
+- Sevices (fix implemented in hoTools)</value>
   </data>
   <data name="fileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>37, 20</value>
