@@ -2,6 +2,7 @@
 using System.IO;
 using System.Windows.Forms;
 using System.Threading;
+using FileSystem;
 
 
 namespace hoTools.Query
@@ -17,12 +18,12 @@ namespace hoTools.Query
     public class SqlFile : IDisposable
     {
         #region local fields
-        
+
+        readonly FileMonitor _fileMonitor; 
         /// the name with complete file path is used as Mutex object 
         string _fullName; 
         DateTime _saveTime = DateTime.MinValue; // mostly diagnostic purpose
         DateTime _readTime = DateTime.MinValue; // mostly diagnostic purpose
-        DateTime _onChangeTime;
         /// <summary>
         /// File System watcher to observe changes of the *.sql file.
         /// </summary>
@@ -83,7 +84,6 @@ namespace hoTools.Query
 
         #region Configuration
         readonly SynchronizationContext _syncContext = SynchronizationContext.Current;
-        readonly int TIME_SPAN_DIFFERENT_SAVE_EVENTS_MS = 1000;
         /// <summary>
         /// Extra space for display name to draw 'x' to provide a simulated Close Button
         /// Use a non proportional font like courier new
@@ -105,18 +105,16 @@ namespace hoTools.Query
             initTabPageCaption(fullName, isChanged);
             ReadTime = DateTime.Now;
 
-            // create Watcher
-            _watcher = new FileSystemWatcher();
-            _watcher.Changed += OnChanged;
-            watcherUpdate();
-
+            // create FileMonitor
+            _fileMonitor = new FileMonitor(_fullName);
+            _fileMonitor.Change += OnChanged;
 
         }
         #endregion
 
         public void Dispose()
         {
-            _watcher.Dispose();
+           
         }
         
 
@@ -166,78 +164,29 @@ namespace hoTools.Query
 
 
         }
-        #region OnChanged FileSystemEventArgs
+        #region OnChanged 
         /// <summary>
-        /// Handle Change Event of the *.sql file. Events may fire multiple times on different threads. Therefore a Mutex with the instance field _fullname is used to synchronize access.
-        /// <para/>- If configured ask for update when file has changed
-        /// <para/>- Debounce changes of the file if multiple events occur
+        /// Wait for event from FileSystemMonitor. 
         /// </summary>
-        /// <param name="source"></param>
-        /// <param name="e"></param>
-        void OnChanged(object source, FileSystemEventArgs e)
+        /// <param name="path"></param>
+        void OnChanged(string path)
         {
-            if ( (!_sqlTabPagesCntrl.Settings.isAskForQueryUpdateOutside) && (_fullName != e.FullPath) ) return;
-            var lockObject = _fullName; // Mutex
+            if ( (!_sqlTabPagesCntrl.Settings.isAskForQueryUpdateOutside) && (_fullName != path) ) return;
+
             try
             {
-                if (Monitor.TryEnter(lockObject))
-                {
-                    try
-                    {
-                        TimeSpan d2 = DateTime.Now.Subtract(_onChangeTime);
-                        if (Math.Abs(d2.TotalMilliseconds) > TIME_SPAN_DIFFERENT_SAVE_EVENTS_MS)
-                        {
-                           onChangeFileSingleThread();
-                        } else
-                        {
+                TextBox t = (TextBox)_tabPage.Controls[0];
+                // run update TextBox in syncContext to make sure it works
+                _syncContext.Post(o => _sqlTabPagesCntrl.ReloadTabPageWithAsk(), null);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($"{e.ToString()}", "Error invoke foreign thread");
+                return;
+            }
 
-                        }
-                    }
-                    finally
-                    {
-                        _onChangeTime = DateTime.Now;
-                        Monitor.Exit(lockObject);
-                    }
-                }
-                else
-                // Was locked
-                {
-                    // multiple events in the same file
-                    return;
-                }
-            }
-            catch (SynchronizationLockException syncEx)
-            {
-                MessageBox.Show($"File:'{_fullName}'\r\n{syncEx}", "Error Watcher File changes");
-            }
         }
-        /// <summary>
-        /// Execute the onChange event as single thread for the Resource '_fullName'.
-        /// If the Resource is already locked do nothing because the user will decide about file.
-        /// </summary>
-        void onChangeFileSingleThread()
-        {
-            // was own write what was notified
-            TimeSpan diff = DateTime.Now.Subtract(_onChangeTime);
-            
-            if (Math.Abs(diff.TotalMilliseconds) < TIME_SPAN_DIFFERENT_SAVE_EVENTS_MS)
-            {
-                _onChangeTime = DateTime.Now; // to avoid multiple events for the same event
-                return;
-            }
-                try
-                {
-                    TextBox t = (TextBox)_tabPage.Controls[0];
-                    // run update TextBox in syncContext to make sure it works
-                    _syncContext.Post(o => _sqlTabPagesCntrl.ReloadTabPageWithAsk(), null);
-                    _onChangeTime = DateTime.Now; // to avoid multiple events
-                } catch (Exception e)
-                {
-                    MessageBox.Show($"{e.ToString()}", "Error invoke foreign thread");
-                    return;
-                }
-                return;
-        }
+        
         /// <summary>
         /// Save to file
         /// </summary>

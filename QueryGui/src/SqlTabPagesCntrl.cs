@@ -19,8 +19,6 @@ namespace hoTools.Query
     /// </summary>
     public class SqlTabPagesCntrl
     {
-        //static Mutex mutex = new Mutex(true);
-        //static Semaphore sem = new Semaphore(1,1);
         const string SQL_TEXT_BOX_TOOLTIP =
 @"CTRL+L                        Load sql from File
 CTRL+R                          Run sql
@@ -1034,25 +1032,6 @@ CTRL+SHFT+S                     Store sql All
             var textBox = (TextBox)tabPage.Controls[0];
             SqlFile sqlFile = (SqlFile)tabPage.Tag;
 
-                reloadUpdate(textBox, sqlFile);
-           
-
-            //bool gotMonitor = false;
-            //try
-            //{
-            //    Monitor.TryEnter(lockObject, ref gotMonitor);
-            //    if (gotMonitor) 
-            //                reloadUpdate(textBox, sqlFile);
-            //}
-            //finally
-            //{
-            //    if (gotMonitor)  Monitor.Exit(lockObject);
-
-            //}  
-
-
-        }
-        void reloadUpdate(TextBox textBox, SqlFile sqlFile) {
             // check if really changed
             string sNew = sqlFile.load().Trim();
             string sOld = textBox.Text.Trim();
@@ -1061,7 +1040,6 @@ CTRL+SHFT+S                     Store sql All
             string sDetails = $"File '{sqlFile.FullName}' changed outside hoTools!\r\nReload:Yes\r\nIgnore:No";
             string sCaption = "ReLoad file because of changed outside?";
             DialogResult result = MessageBox.Show(textBox, sDetails, sCaption, MessageBoxButtons.YesNo);
-            //DialogResult result = BackgroundThreadMessageBox(tabPage, sDetails, sCaption, MessageBoxButtons.YesNo);
             if (result == DialogResult.Yes)
             {
                 // update textBox with changed content
