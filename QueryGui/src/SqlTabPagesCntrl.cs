@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using hoTools.Settings;
 using hoTools.Utils.SQL;
 using EAAddinFramework.Utils;
+using System.Threading;
 
 namespace hoTools.Query
 {
@@ -18,6 +19,8 @@ namespace hoTools.Query
     /// </summary>
     public class SqlTabPagesCntrl
     {
+        //static Mutex mutex = new Mutex(true);
+        //static Semaphore sem = new Semaphore(1,1);
         const string SQL_TEXT_BOX_TOOLTIP =
 @"CTRL+L                        Load sql from File
 CTRL+R                          Run sql
@@ -56,13 +59,6 @@ CTRL+SHFT+S                     Store sql All
         /// Setting with the file history.
         /// </summary>
         /// 
-
-        // delegate to call update page from a different thread (SqlFile)
-        public delegate void UpdatePageFromFile(TabPage tabPage, string fileNameChanged, bool notUpdateLastOpenedList);
-        /// <summary>
-        /// Delegate to update TAB Page
-        /// </summary>
-        public UpdatePageFromFile UpdatePageDelegate;
 
         public AddinSettings Settings { get; }
         Model _model;
@@ -115,9 +111,6 @@ CTRL+SHFT+S                     Store sql All
 
             _fileNewTabAndLoadRecentFileItem = fileNewTabAndLoadRecentFileItem;
             _fileLoadRecentFileItem = fileLoadRecentFileItem;
-
-            // Set Function to update Tab Page
-            UpdatePageDelegate = new UpdatePageFromFile(loadTabPageFromFile);
 
             loadOpenedTabsFromLastSession();
 
@@ -792,8 +785,7 @@ CTRL+SHFT+S                     Store sql All
 
             try
             {
-                TextBoxUndo textBox = (TextBoxUndo)tabPage.Controls[0];
-                textBox.Text = File.ReadAllText(fileName);
+                 TextBoxUndo textBox = (TextBoxUndo)tabPage.Controls[0];
 
                 // set TabName
                 SqlFile sqlFile = (SqlFile)tabPage.Tag;
@@ -801,12 +793,14 @@ CTRL+SHFT+S                     Store sql All
                 sqlFile.IsChanged = false;
                 tabPage.ToolTipText = ((SqlFile)tabPage.Tag).FullName;
                 tabPage.Text = sqlFile.DisplayName;
+
+                textBox.Text = sqlFile.load();
                 if (!notUpdateLastOpenedList)
                 {
                     Settings.lastOpenedFiles.insert(fileName);
                     Settings.save();
                 }
-
+               
             }
             catch (Exception ex)
             {
@@ -1021,6 +1015,60 @@ CTRL+SHFT+S                     Store sql All
         }
 
 
+        public void ReloadTabPage()
+        {
+            if (_tabControl.SelectedIndex < 0) return;
+            TabPage tabPage = _tabControl.TabPages[_tabControl.SelectedIndex];
+            var textBox = (TextBox)tabPage.Controls[0];
+            SqlFile sqlFile = (SqlFile)tabPage.Tag;
+
+            textBox.Text = sqlFile.load();
+        }
+
+        
+
+        public void ReloadTabPageWithAsk()
+        {
+            if (_tabControl.SelectedIndex < 0 || (!Settings.isAskForQueryUpdateOutside) ) return;
+            TabPage tabPage = _tabControl.TabPages[_tabControl.SelectedIndex];
+            var textBox = (TextBox)tabPage.Controls[0];
+            SqlFile sqlFile = (SqlFile)tabPage.Tag;
+
+                reloadUpdate(textBox, sqlFile);
+           
+
+            //bool gotMonitor = false;
+            //try
+            //{
+            //    Monitor.TryEnter(lockObject, ref gotMonitor);
+            //    if (gotMonitor) 
+            //                reloadUpdate(textBox, sqlFile);
+            //}
+            //finally
+            //{
+            //    if (gotMonitor)  Monitor.Exit(lockObject);
+
+            //}  
+
+
+        }
+        void reloadUpdate(TextBox textBox, SqlFile sqlFile) {
+            // check if really changed
+            string sNew = sqlFile.load().Trim();
+            string sOld = textBox.Text.Trim();
+            if (sNew.Equals(sOld)) return;
+
+            string sDetails = $"File '{sqlFile.FullName}' changed outside hoTools!\r\nReload:Yes\r\nIgnore:No";
+            string sCaption = "ReLoad file because of changed outside?";
+            DialogResult result = MessageBox.Show(textBox, sDetails, sCaption, MessageBoxButtons.YesNo);
+            //DialogResult result = BackgroundThreadMessageBox(tabPage, sDetails, sCaption, MessageBoxButtons.YesNo);
+            if (result == DialogResult.Yes)
+            {
+                // update textBox with changed content
+                textBox.Text = sqlFile.load();
+            }
+
+        }
 
         /// <summary>
         /// Load sql string from *.sql File into active TabPage with TextBox inside. 
@@ -1067,25 +1115,19 @@ CTRL+SHFT+S                     Store sql All
             if (openFileDialog.ShowDialog() == DialogResult.OK)
 
             {
-                StreamReader myStream = new StreamReader(openFileDialog.OpenFile());
-                if (myStream != null)
+                string fileName = openFileDialog.FileName;
+                if (fileName != null && fileName != "")
                 {
                     // get TextBox
                     var textBox = (TextBoxUndo)tabPage.Controls[0];
-                    textBox.Text = myStream.ReadToEnd();
-                    myStream.Close();
-                    tabPage.Text = Path.GetFileName(openFileDialog.FileName);
+                    SqlFile sqlFile = new SqlFile(this, tabPage, fileName, isChanged: false);
+                    tabPage.Tag = sqlFile;
+                    tabPage.Text = sqlFile.DisplayName;
+                    textBox.Text = sqlFile.load();
 
                     // store the complete filename in settings
                     InsertRecentFileLists(openFileDialog.FileName);
                     Settings.save();
-
-                    // Store file information in TabPage
-                    SqlFile sqlFile = new SqlFile(this, tabPage, openFileDialog.FileName, isChanged:false);
-                    tabPage.Tag = sqlFile;
-
-                    // set TabName
-                    tabPage.Text = sqlFile.DisplayName;
 
                     // Load recent files into ToolStripMenu
                     loadRecentFilesIntoToolStripItems();
@@ -1139,24 +1181,24 @@ CTRL+SHFT+S                     Store sql All
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
 
             {
-                StreamWriter myStream = new StreamWriter(saveFileDialog.OpenFile());
-                if (myStream != null)
+                string fileName = saveFileDialog.FileName;
+                if (fileName != null && fileName != "")
                 {
+                    sqlFile.FullName = fileName;
                     var textBox = (TextBox)tabPage.Controls[0];
-                    myStream.Write(textBox.Text);
-                    myStream.Close();
-                    tabPage.Text = Path.GetFileName(saveFileDialog.FileName);
+
+                    tabPage.Text = sqlFile.DisplayName;
+                    tabPage.ToolTipText = ((SqlFile)tabPage.Tag).FullName;
+                    sqlFile.save(textBox.Text);
 
                     // update files
                     InsertRecentFileLists(saveFileDialog.FileName);
 
                     // Store TabData in TabPage
                     sqlFile.FullName = saveFileDialog.FileName;
-                    sqlFile.IsChanged = false;
 
-                    // set TabName
-                    tabPage.Text = sqlFile.DisplayName;
-                    tabPage.ToolTipText = ((SqlFile)tabPage.Tag).FullName;
+
+
 
 
                     Settings.save();
@@ -1234,7 +1276,7 @@ CTRL+SHFT+S                     Store sql All
 
         #region Save Tab Page
         /// <summary>
-        /// Save sql TabPage in *.sql File.
+        /// Save sql TabPage in *.sql File. Store the save time to distinguish hoTools writes from other
         /// </summary>
         /// <param name="tabPage"></param>
         ///  <param name="configSave">Default: true, whether to store the configuration</param>
@@ -1249,22 +1291,16 @@ CTRL+SHFT+S                     Store sql All
 
             try
             {
-                StreamWriter myStream = new StreamWriter(sqlFile.FullName);
-                if (myStream != null)
-                {
-                    var textBox = (TextBox)tabPage.Controls[0];
-                    myStream.Write(textBox.Text);
-                    myStream.Close();
-                    sqlFile.IsChanged = false;
-                    // update history
-                    InsertRecentFileLists(sqlFile.FullName);
-                    // save configuration
-                    if (configSave) Settings.save();
+                var textBox = (TextBox)tabPage.Controls[0];
+                sqlFile.save(textBox.Text);
+                
 
-
-                    // set TabName
-                    tabPage.Text = sqlFile.DisplayName;
-                }
+                // update history
+                InsertRecentFileLists(sqlFile.FullName);
+                // save configuration
+                if (configSave) Settings.save();
+                // set TabName
+                tabPage.Text = sqlFile.DisplayName;
             }
             catch (Exception ex)
             {
@@ -1272,6 +1308,8 @@ CTRL+SHFT+S                     Store sql All
                 return;
             }
         }
+
+        
         #endregion
 
         /// <summary>
@@ -1417,6 +1455,27 @@ CTRL+SHFT+S                     Store sql All
 
         }
         #endregion
+
+        /// <summary>
+        /// Output the MessageBox in the required context. 
+        /// </summary>
+        /// <param name="owner"></param>
+        /// <param name="details"></param>
+        /// <param name="caption"></param>
+        /// <param name="buttons"></param>
+        /// <returns></returns>
+        DialogResult BackgroundThreadMessageBox(System.Windows.Forms.Control owner, string details, string caption,MessageBoxButtons buttons )
+        {
+            //if (owner.InvokeRequired)
+            //{
+                return (DialogResult)owner.Invoke(new Func<DialogResult>(
+                                       () => { return MessageBox.Show(owner, details, caption, buttons); }));
+            //}
+            //else
+            //{
+            //    return MessageBox.Show(owner, details, caption, buttons);
+            //}
+        }
 
 
 

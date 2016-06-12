@@ -70,6 +70,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Scripts.resx</DependentUpon>
     </Compile>
+    <Compile Include="src\FileMonitor.cs" />
     <Compile Include="src\GuiFunction.cs" />
     <Compile Include="src\IQueryGUI.cs" />
     <Compile Include="src\SciptFuntionWrapper.cs" />

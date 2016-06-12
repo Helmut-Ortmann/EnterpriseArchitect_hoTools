@@ -365,79 +365,9 @@ namespace hoTools.Query
         }
 
       
-        /// <summary>
-        /// Save sql string from TabPage with TextBox inside it to *.sql file.
-        /// - Update and save the list of sql files 
-        /// </summary>
-        /// <param name="tabPageSql">The TabPage</param>
-        /// <param name="txtBoxSql"></param>
-        void safeTabAs(TabPage tabPageSql, TextBox txtBoxSql)
-        {
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-
-            saveFileDialog.InitialDirectory = @"c:\temp\sql";
-            // get file name
-            saveFileDialog.FileName = tabPageSql.Text;
-            saveFileDialog.RestoreDirectory = true;
-            saveFileDialog.Filter = "sql files (*.sql)|*.sql|All files (*.*)|*.*";
-            saveFileDialog.FilterIndex = 1;
-            //saveFileDialog.DefaultExt = "sql";
+             
 
 
-            if (saveFileDialog.ShowDialog() == DialogResult.OK)
-
-            {
-                StreamWriter myStream = new StreamWriter(saveFileDialog.OpenFile());
-                if (myStream != null)
-                {
-                    // Code to write the stream goes here.
-                    myStream.Write(txtBoxSql.Text);
-                    myStream.Close();
-                    tabPageSql.Text = Path.GetFileName(saveFileDialog.FileName);
-
-                    // store the complete filename
-                    AddinSettings.historySqlFiles.insert(saveFileDialog.FileName);
-                    AddinSettings.save();
-                }
-            }
-        }
-        
-
-
-        /// <summary>
-        /// Load sql string from *.sql file into TabPage with TextBox inside.
-        /// - Update and save the list of sql files 
-        /// </summary>
-        /// <param name="tabPageSql"></param>
-        /// <param name="txtBoxSql"></param>
-         void loadTabFrom(TabPage tabPageSql, TextBox txtBoxSql)
-        {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-
-            openFileDialog.InitialDirectory = @"c:\temp\sql";
-            openFileDialog.RestoreDirectory = true;
-            openFileDialog.Filter = "sql files (*.sql)|*.sql|All files (*.*)|*.*";
-            openFileDialog.FilterIndex = 1;
-
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
-
-            {
-                StreamReader myStream = new StreamReader(openFileDialog.OpenFile());
-                if (myStream != null)
-                {
-                    // Code to write the stream goes here.
-                    txtBoxSql.Text = myStream.ReadToEnd();
-                    myStream.Close();
-                    tabPageSql.Text = Path.GetFileName(openFileDialog.FileName);
-
-                    // store the complete filename
-                    AddinSettings.historySqlFiles.insert(openFileDialog.FileName);
-                    AddinSettings.save();
-                    tabPageSql.Text = Path.GetFileName(openFileDialog.FileName) + " ";
-                }
-            }
-
-        }
 
      
               
@@ -732,7 +662,7 @@ namespace hoTools.Query
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        void loadTabCTRLLToolStripMenuItem_Click(object sender, EventArgs e)
+        void loadTabCtrlLToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _sqlTabCntrls.loadTabPagePerFileDialog();
         }
@@ -844,6 +774,9 @@ namespace hoTools.Query
             
         }
 
-       
+        void reloadTabToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _sqlTabCntrls.ReloadTabPage();
+        }
     }
 }
