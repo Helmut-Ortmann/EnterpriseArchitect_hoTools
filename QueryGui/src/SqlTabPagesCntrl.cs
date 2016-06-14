@@ -4,7 +4,6 @@ using System.Windows.Forms;
 using hoTools.Settings;
 using hoTools.Utils.SQL;
 using EAAddinFramework.Utils;
-using System.Threading;
 
 namespace hoTools.Query
 {
@@ -57,7 +56,6 @@ CTRL+SHFT+S                     Store sql All
         /// Setting with the file history.
         /// </summary>
         /// 
-
         public AddinSettings Settings { get; }
         Model _model;
         System.ComponentModel.IContainer _components;
@@ -65,7 +63,10 @@ CTRL+SHFT+S                     Store sql All
         TabControl _tabControl;
         TextBox _sqlTextBoxSearchTerm;
 
-
+        /// <summary>
+        /// The tab name of Addin (SQL or Script)
+        /// </summary>
+        string _addinTabName;
 
         /// <summary>
         /// Reusable ToolStripMenuItem: File Menu: New Tab and Load Recent Files 
@@ -99,7 +100,8 @@ CTRL+SHFT+S                     Store sql All
             System.ComponentModel.IContainer components,
             TabControl tabControl, TextBox sqlTextBoxSearchTerm,
             ToolStripMenuItem fileNewTabAndLoadRecentFileItem,
-            ToolStripMenuItem fileLoadRecentFileItem)
+            ToolStripMenuItem fileLoadRecentFileItem, 
+            string addinTabName)
         {
             Settings = settings;
             _model = model;
@@ -114,6 +116,7 @@ CTRL+SHFT+S                     Store sql All
 
             // Load recent files into ToolStripMenu
             loadRecentFilesIntoToolStripItems();
+            _addinTabName = addinTabName;
 
         }
 
@@ -789,7 +792,7 @@ CTRL+SHFT+S                     Store sql All
                 SqlFile sqlFile = (SqlFile)tabPage.Tag;
                 sqlFile.FullName = fileName;
                 sqlFile.IsChanged = false;
-                tabPage.ToolTipText = ((SqlFile)tabPage.Tag).FullName;
+                tabPage.ToolTipText = sqlFile.FullName;
                 tabPage.Text = sqlFile.DisplayName;
 
                 textBox.Text = sqlFile.load();
@@ -1012,7 +1015,9 @@ CTRL+SHFT+S                     Store sql All
 
         }
 
-
+        /// <summary>
+        /// Reload current Tab
+        /// </summary>
         public void ReloadTabPage()
         {
             if (_tabControl.SelectedIndex < 0) return;
@@ -1024,7 +1029,9 @@ CTRL+SHFT+S                     Store sql All
         }
 
         
-
+        /// <summary>
+        /// Reload current tab and ask if the user wants it. It checks the file for differences before asking.
+        /// </summary>
         public void ReloadTabPageWithAsk()
         {
             if (_tabControl.SelectedIndex < 0 || (!Settings.isAskForQueryUpdateOutside) ) return;
@@ -1037,8 +1044,8 @@ CTRL+SHFT+S                     Store sql All
             string sOld = textBox.Text.Trim();
             if (sNew.Equals(sOld)) return;
 
-            string sDetails = $"File '{sqlFile.FullName}' changed outside hoTools!\r\nReload:Yes\r\nIgnore:No";
-            string sCaption = "ReLoad file because of changed outside?";
+            string sDetails = $"{_addinTabName}: File '{sqlFile.FullName}' changed outside hoTools!\r\nReload:Yes\r\nIgnore:No";
+            string sCaption = $"{_addinTabName}: ReLoad file because of changed outside?";
             DialogResult result = MessageBox.Show(textBox, sDetails, sCaption, MessageBoxButtons.YesNo);
             if (result == DialogResult.Yes)
             {

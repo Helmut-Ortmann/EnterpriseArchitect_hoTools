@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Threading;
+using System.Diagnostics;
+
 namespace FileSystem
 {
     // Credit to:
@@ -17,14 +19,30 @@ namespace FileSystem
         // the event which is fired after consolidating / debouncing all events related to one save
         event FileSystemEvent Change;
         void Start();
+        void Stop();
+        void Update(string fileName);
     }
-
+    /// <summary>
+    /// Monitors a file for changes. It uses the FileSystemWatcher and debounce the events to make sure only one event is fired for a change of a file.
+    /// Note:
+    /// If a file is used in different contexts than FileMonitor will fire for each context.
+    /// </summary>
     public class FileMonitor : IFileMonitor
     {
+        const int EVENT_OBSERVE_START_AFTER_MS = 100; // start checking after 200ms
+        const int EVENT_OBSERVE_NEXT_INTERVAL_MS = 100;    // check every 100ms
+        const int TIME_WITOUT_EVENT_MS = 75;            // if 100ms without event than fire 
+
         readonly FileSystemWatcher _fileSystemWatcher = new FileSystemWatcher();
-        readonly Dictionary<string, DateTime> _pendingEvents = new Dictionary<string, DateTime>();
+
+        /// <summary>
+        /// The pending files. All file which are waiting for time in which no further event occurs
+        /// </summary>
+        Dictionary<string, DateTime> _pendingEvents = new Dictionary<string, DateTime>();
+
         readonly Timer _timer;
         bool _timerStarted = false;
+        string _filePath;
 
         /// <summary>
         /// Parameterize FileSystemWatcher
@@ -32,14 +50,28 @@ namespace FileSystem
         /// <param name="filePath"></param>
         public FileMonitor(string filePath)
         {
+            _filePath = filePath;
             _fileSystemWatcher.Path = Path.GetDirectoryName(filePath);
             _fileSystemWatcher.NotifyFilter = NotifyFilters.LastWrite | NotifyFilters.FileName;
             _fileSystemWatcher.IncludeSubdirectories = false;
             _fileSystemWatcher.Changed += new FileSystemEventHandler(OnChange);
+            _fileSystemWatcher.Error += OnFileError;
 
+            // timer to debounce multiple events for the same file
             _timer = new Timer(OnTimeout, null, Timeout.Infinite, Timeout.Infinite);
 
+
         }
+        /// <summary>
+        /// Handle error from FileSystemWatcher
+        /// </summary>
+        /// <param name="o"></param>
+        /// <param name="e"></param>
+        void OnFileError (object o, ErrorEventArgs e)
+        {
+            System.Windows.Forms.MessageBox.Show($"Error file: '{_filePath}'\r\n{e.GetException().Message}");
+        }
+        // The event to fire
         public event FileSystemEvent Change;
 
         /// <summary>
@@ -47,7 +79,13 @@ namespace FileSystem
         /// </summary>
         public void Start()
         {
-            _fileSystemWatcher.EnableRaisingEvents = true;
+            try
+            {
+                _fileSystemWatcher.EnableRaisingEvents = true;
+            } catch (Exception e)
+            {
+                System.Windows.Forms.MessageBox.Show($"File: {_filePath}'\r\n{e.ToString()}", "Invalid monitoring of file");
+            }
         }
         /// <summary>
         /// Stop watching the file
@@ -57,9 +95,22 @@ namespace FileSystem
             _fileSystemWatcher.EnableRaisingEvents = false;
         }
 
+        /// <summary>
+        /// Update the fileName to watch for changes
+        /// </summary>
+        /// <param name="fileName"></param>
+        public void Update(string filePath)
+        {
+            _filePath = filePath;
+            _fileSystemWatcher.Path = Path.GetDirectoryName(filePath);
+            _fileSystemWatcher.Filter = Path.GetFileName(filePath);
+            _fileSystemWatcher.NotifyFilter = NotifyFilters.LastWrite | NotifyFilters.FileName;
+            _fileSystemWatcher.EnableRaisingEvents = true;
+
+        }
 
         /// <summary>
-        /// OnChange Event
+        /// OnChange Event from System FileSystemWatcher after file has changed. It enters all events with the last event time in the pending event list.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -68,13 +119,13 @@ namespace FileSystem
             // Don't want other threads messing with the pending events right now 
             lock (_pendingEvents)
             {
-                // Save a timestamp for the most recent event for this path
+                // Save a timestamp for the most recent event for this filePath
                 _pendingEvents[e.FullPath] = DateTime.Now;
                 // Start a timer if not already started 
                 if (!_timerStarted)
                 {
                     // Start time + Interval in ms (after 100ms for 100ms)
-                    _timer.Change(100, 100);
+                    _timer.Change(EVENT_OBSERVE_START_AFTER_MS, EVENT_OBSERVE_NEXT_INTERVAL_MS);
                     _timerStarted = true;
                 }
             }
@@ -87,29 +138,55 @@ namespace FileSystem
         /// <param name="state"></param>
         void OnTimeout(object state)
         {
+            // list of paths which are ready to fire events (timeout without new event)
             List<string> paths;
 
             // Don't want other threads messing with the pending events right now 
             lock (_pendingEvents)
-            { // Get a list of all paths that should have events thrown 
-                paths = FindReadyPaths(_pendingEvents); 
-                // Remove paths that are going to be used now 
-                paths.ForEach(delegate(string path) { _pendingEvents.Remove(path); }); 
+            {
+                if (! _timerStarted) return;
+                // Get a list of all paths that are ready to fire
+                paths = FindReadyPaths(_pendingEvents);
+                // Remove paths that are ready to fire
+                foreach (string path in paths)
+                {
+
+                }
+                paths.ForEach(
+                        (path) =>
+                        {
+                            _pendingEvents.Remove(path);
+                        }
+                ); 
                 // Stop the timer if there are no more events pending 
                 if (_pendingEvents.Count == 0)
                 {
                     _timer.Change(Timeout.Infinite, Timeout.Infinite);
                     _timerStarted = false;
+
                 }
                 // Fire an event for each path that has changed paths
-                paths.ForEach(delegate (string path) 
+                foreach (string path in paths)
                 {
-                     FireEvent(path);
-                });
+
+                }
+                paths.ForEach(
+                   
+                    (path) => {
+                        FireEvent(path);
+                    }
+                 
+                );
+                return;
             
             }
         }
 
+        /// <summary>
+        /// Return list of files which haven't received an change event for TIME_WITOUT_EVENT_MS.
+        /// </summary>
+        /// <param name="events"></param>
+        /// <returns></returns>
         List<string> FindReadyPaths(Dictionary<string, DateTime> events)
         {
             List<string> results = new List<string>();
@@ -119,10 +196,7 @@ namespace FileSystem
                 // If the path has not received a new event in the last 75ms 
                 // an event for the path should be fired 
                 double diff = now.Subtract(entry.Value).TotalMilliseconds;
-                if (diff >= 75)
-                {
-                    results.Add(entry.Key);
-                }
+                if (diff >= TIME_WITOUT_EVENT_MS)  results.Add(entry.Key);
             }
             return results;
         }
@@ -130,10 +204,8 @@ namespace FileSystem
         void FireEvent(string path)
         {
             FileSystemEvent evt = Change;
-            if (evt != null)
-            {
-                evt(path);
-            }
+            evt(path);
+               
         }
     }
 }

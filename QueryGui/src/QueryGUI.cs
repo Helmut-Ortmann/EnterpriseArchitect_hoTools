@@ -39,6 +39,14 @@ namespace hoTools.Query
         public const string TABULATOR_SCRIPT = "Script";
         public const string TABULATOR_QUERY = "SQL";
 
+        /// <summary>
+        /// Type of Addin. Use the same string for enum as the string to visualize
+        /// </summary>
+        public enum AddinType { SQL, Script};
+        // default value for Addin Tab Name
+        AddinType _addinType = AddinType.SQL;
+        string _addinTabName = TABULATOR_QUERY;
+
         List<Script> _lscripts;  // list off all scripts
         DataTable _tableFunctions; // Scripts and Functions
 
@@ -119,17 +127,18 @@ namespace hoTools.Query
         /// <returns></returns>
         bool initializeSettings()
         {
-            // set title
-            if ((string)Tag == TABULATOR_QUERY)
+            if ((string)Tag != TABULATOR_QUERY)
             {
-                lblTitle.Text = TABULATOR_QUERY;
+                _addinType = AddinType.Script;
+                _addinTabName = TABULATOR_SCRIPT;
             }
-            else { lblTitle.Text = TABULATOR_SCRIPT; }
+            // set title
+            lblTitle.Text = _addinTabName;
 
             // Tab Pages for *.sql queries update
             _sqlTabCntrls = new SqlTabPagesCntrl(Model, AddinSettings, components, tabControlSql, txtSearchTerm,
                 newTabFromToolStripMenuItem, 
-                loadTabFromToolStripMenuItem);
+                loadTabFromToolStripMenuItem, _addinTabName);
 
             if (tabControlSql.TabPages.Count == 0)
             {

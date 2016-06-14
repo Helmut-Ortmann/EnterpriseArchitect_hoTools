@@ -19,17 +19,14 @@ namespace hoTools.Query
     {
         #region local fields
 
-        readonly FileMonitor _fileMonitor; 
+
         /// the name with complete file path is used as Mutex object 
         string _fullName; 
         DateTime _saveTime = DateTime.MinValue; // mostly diagnostic purpose
         DateTime _readTime = DateTime.MinValue; // mostly diagnostic purpose
-        /// <summary>
-        /// File System watcher to observe changes of the *.sql file.
-        /// </summary>
-        readonly FileSystemWatcher _watcher;
         readonly SqlTabPagesCntrl _sqlTabPagesCntrl;
         readonly TabPage _tabPage;
+        readonly FileMonitor _fileMonitor;
         #endregion
 
         #region properties
@@ -45,7 +42,7 @@ namespace hoTools.Query
             set
             {
                 _fullName = value;
-                watcherUpdate();
+                if (IsPersistant) _fileMonitor.Update(_fullName);
             }
         }
         /// <summary>
@@ -108,6 +105,11 @@ namespace hoTools.Query
             // create FileMonitor
             _fileMonitor = new FileMonitor(_fullName);
             _fileMonitor.Change += OnChanged;
+            if (IsPersistant)
+            {
+
+                _fileMonitor.Start();
+            }
 
         }
         #endregion
@@ -118,21 +120,7 @@ namespace hoTools.Query
         }
         
 
-        /// <summary>
-        /// If current file is persistent update File Watcher with current file.
-        /// </summary>
-        void watcherUpdate()
-        {
-            // set FileSystemWatcher
-            if (IsPersistant)
-            {
-                _watcher.Path = Path.GetDirectoryName(_fullName);
-                _watcher.NotifyFilter = NotifyFilters.LastWrite | NotifyFilters.FileName;
-                _watcher.Filter = Path.GetFileName(_fullName);
-                _watcher.EnableRaisingEvents = true;
-            }
-        }
-
+       
         public string DirectoryName => Path.GetDirectoryName(_fullName);
         public string DisplayName
         {
@@ -186,7 +174,8 @@ namespace hoTools.Query
             }
 
         }
-        
+        #endregion
+
         /// <summary>
         /// Save to file
         /// </summary>
@@ -225,6 +214,5 @@ namespace hoTools.Query
                 return "";
             }
         }
-        #endregion
     }
 }
