@@ -278,10 +278,11 @@ namespace hoTools.EaServices
         }
 #endregion
         #region ShowFolder
-        // show folder for:
-        // - controlled package
-        // - file
-        [ServiceOperation("{C007C59A-FABA-4280-9B66-5AD10ACB4B13}", "Show folder of *.xml, *.h,*.c", "Select VC controlled package or element with file path", IsTextRequired: false)]
+        // Show folder with Explorer or Total Commander for:
+        // - Package: If Version Controlled package
+        // - File: If Source Code implementation exists
+        // See also: Global Settings
+        [ServiceOperation("{C007C59A-FABA-4280-9B66-5AD10ACB4B13}", "Show folder of *.xml, *.h,*.c", "Select VC controlled package or element with file path (Source Code Generation)", IsTextRequired: false)]
         public static void ShowFolder(EA.Repository rep, bool isTotalCommander=false)
         {
             string path;
@@ -560,6 +561,11 @@ namespace hoTools.EaServices
             return;
         }
         #endregion
+        /// <summary>
+        /// Show all specifications of selected Element. It shows all files in specified in properties.
+        /// </summary>
+        /// <param name="rep"></param>
+        [ServiceOperation("{899C9C5F-39B8-47E3-B253-7C5730F1AA7D}", "Show all specifications of selected element (all files defined in properties)", "Select item", false)]
         public static void showSpecification(EA.Repository rep)
         {
             EA.ObjectType oType = rep.GetContextItemType();

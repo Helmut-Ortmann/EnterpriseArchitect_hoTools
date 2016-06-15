@@ -192,6 +192,51 @@
   <data name="toolStripQuery.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>None</value>
   </data>
+  <data name="toolStripQuery.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 0</value>
+  </data>
+  <data name="toolStripQuery.Size" type="System.Drawing.Size, System.Drawing">
+    <value>248, 25</value>
+  </data>
+  <data name="toolStripQuery.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;toolStripQuery.Name" xml:space="preserve">
+    <value>toolStripQuery</value>
+  </data>
+  <data name="&gt;&gt;toolStripQuery.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripQuery.Parent" xml:space="preserve">
+    <value>toolStripContainer1.TopToolStripPanel</value>
+  </data>
+  <data name="&gt;&gt;toolStripQuery.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;toolStripContainer1.TopToolStripPanel.Name" xml:space="preserve">
+    <value>toolStripContainer1.TopToolStripPanel</value>
+  </data>
+  <data name="&gt;&gt;toolStripContainer1.TopToolStripPanel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripContainer1.TopToolStripPanel.Parent" xml:space="preserve">
+    <value>toolStripContainer1</value>
+  </data>
+  <data name="&gt;&gt;toolStripContainer1.TopToolStripPanel.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;toolStripContainer1.Name" xml:space="preserve">
+    <value>toolStripContainer1</value>
+  </data>
+  <data name="&gt;&gt;toolStripContainer1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripContainer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripContainer1.Parent" xml:space="preserve">
+    <value>panelButtons</value>
+  </data>
+  <data name="&gt;&gt;toolStripContainer1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="toolStripSearchBtn1.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
@@ -278,51 +323,6 @@
   </data>
   <data name="toolStripServiceBtn5.Text" xml:space="preserve">
     <value>5</value>
-  </data>
-  <data name="toolStripQuery.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 0</value>
-  </data>
-  <data name="toolStripQuery.Size" type="System.Drawing.Size, System.Drawing">
-    <value>248, 25</value>
-  </data>
-  <data name="toolStripQuery.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;toolStripQuery.Name" xml:space="preserve">
-    <value>toolStripQuery</value>
-  </data>
-  <data name="&gt;&gt;toolStripQuery.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripQuery.Parent" xml:space="preserve">
-    <value>toolStripContainer1.TopToolStripPanel</value>
-  </data>
-  <data name="&gt;&gt;toolStripQuery.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;toolStripContainer1.TopToolStripPanel.Name" xml:space="preserve">
-    <value>toolStripContainer1.TopToolStripPanel</value>
-  </data>
-  <data name="&gt;&gt;toolStripContainer1.TopToolStripPanel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripContainer1.TopToolStripPanel.Parent" xml:space="preserve">
-    <value>toolStripContainer1</value>
-  </data>
-  <data name="&gt;&gt;toolStripContainer1.TopToolStripPanel.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;toolStripContainer1.Name" xml:space="preserve">
-    <value>toolStripContainer1</value>
-  </data>
-  <data name="&gt;&gt;toolStripContainer1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripContainer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripContainer1.Parent" xml:space="preserve">
-    <value>panelButtons</value>
-  </data>
-  <data name="&gt;&gt;toolStripContainer1.ZOrder" xml:space="preserve">
-    <value>0</value>
   </data>
   <metadata name="toolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>286, 17</value>
@@ -846,10 +846,10 @@ Search for (Tip Quick Search from MDG hoTools):
     <value>13</value>
   </data>
   <data name="btnDisplaySpecification.Text" xml:space="preserve">
-    <value>Specification</value>
+    <value>Specifications</value>
   </data>
   <data name="btnDisplaySpecification.ToolTip" xml:space="preserve">
-    <value>Display the Specification according to file property</value>
+    <value>Display the Specifications of the selected Element. It outputs all files specified in it's properties.</value>
   </data>
   <data name="&gt;&gt;btnDisplaySpecification.Name" xml:space="preserve">
     <value>btnDisplaySpecification</value>
@@ -1296,6 +1296,36 @@ There is no interface to directly select more than one Browser Element (as far a
   <metadata name="menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>376, 17</value>
   </metadata>
+  <data name="menuStrip1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="menuStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>458, 24</value>
+  </data>
+  <data name="menuStrip1.TabIndex" type="System.Int32, mscorlib">
+    <value>22</value>
+  </data>
+  <data name="menuStrip1.Text" xml:space="preserve">
+    <value>menuStrip1</value>
+  </data>
+  <data name="&gt;&gt;menuStrip1.Name" xml:space="preserve">
+    <value>menuStrip1</value>
+  </data>
+  <data name="&gt;&gt;menuStrip1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.MenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;menuStrip1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;menuStrip1.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="fileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>37, 20</value>
+  </data>
+  <data name="fileToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;File</value>
+  </data>
   <data name="settingGeneralToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>294, 22</value>
   </data>
@@ -1317,6 +1347,17 @@ There is no interface to directly select more than one Browser Element (as far a
   </data>
   <data name="settingsToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>Setting the default linestyle of Diagram Types</value>
+  </data>
+  <data name="settingsGlobalKeysToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>294, 22</value>
+  </data>
+  <data name="settingsGlobalKeysToolStripMenuItem.Text" xml:space="preserve">
+    <value>Settings Global Keys</value>
+  </data>
+  <data name="settingsGlobalKeysToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Define your global keys for:
+- Searches with &lt;Search Term&gt;
+- Sevices (fix implemented in hoTools)</value>
   </data>
   <data name="settingsToolbarToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>294, 22</value>
@@ -1341,22 +1382,14 @@ There is no interface to directly select more than one Browser Element (as far a
 - Own EA Tab Window
 - Disable</value>
   </data>
-  <data name="settingsGlobalKeysToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>294, 22</value>
+  <data name="doToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>34, 20</value>
   </data>
-  <data name="settingsGlobalKeysToolStripMenuItem.Text" xml:space="preserve">
-    <value>Settings Global Keys</value>
+  <data name="doToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Do</value>
   </data>
-  <data name="settingsGlobalKeysToolStripMenuItem.ToolTipText" xml:space="preserve">
-    <value>Define your global keys for:
-- Searches with &lt;Search Term&gt;
-- Sevices (fix implemented in hoTools)</value>
-  </data>
-  <data name="fileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>37, 20</value>
-  </data>
-  <data name="fileToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;File</value>
+  <data name="doToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Change Author of selected Package / Element</value>
   </data>
   <data name="createActivityForOperationToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>242, 22</value>
@@ -1369,6 +1402,13 @@ There is no interface to directly select more than one Browser Element (as far a
   </data>
   <data name="showFolderToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Show Folder</value>
+  </data>
+  <data name="showFolderToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Show Folder for selected:
+- Package under Version Control
+- Element which has Source Code
+
+The application to open the folder: See global Settings</value>
   </data>
   <data name="copyGUIDSQLToClipboardToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>242, 22</value>
@@ -1401,14 +1441,14 @@ There is no interface to directly select more than one Browser Element (as far a
 - Packages
 - Elements</value>
   </data>
-  <data name="doToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="versionControlToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>34, 20</value>
   </data>
-  <data name="doToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Do</value>
+  <data name="versionControlToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;VC</value>
   </data>
-  <data name="doToolStripMenuItem.ToolTipText" xml:space="preserve">
-    <value>Change Author of selected Package / Element</value>
+  <data name="versionControlToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Functions related to Version Control</value>
   </data>
   <data name="changeXMLFileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>291, 22</value>
@@ -1486,14 +1526,17 @@ Default: Explorer.exe</value>
 
 Select a package to proceed all recursive package.</value>
   </data>
-  <data name="versionControlToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>34, 20</value>
+  <data name="portToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>41, 20</value>
   </data>
-  <data name="versionControlToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;VC</value>
+  <data name="portToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Port</value>
   </data>
-  <data name="versionControlToolStripMenuItem.ToolTipText" xml:space="preserve">
-    <value>Functions related to Version Control</value>
+  <data name="portToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Functions related to port like:
+- Visibility
+- Move
+- Connect</value>
   </data>
   <data name="movePortsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>375, 22</value>
@@ -1665,17 +1708,11 @@ Select Element to make direction of all Port connections to unspecified.</value>
     <value>Order selected Diagram objects alphabetically.
 </value>
   </data>
-  <data name="portToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>41, 20</value>
+  <data name="helpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>44, 20</value>
   </data>
-  <data name="portToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Port</value>
-  </data>
-  <data name="portToolStripMenuItem.ToolTipText" xml:space="preserve">
-    <value>Functions related to port like:
-- Visibility
-- Move
-- Connect</value>
+  <data name="helpToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Help</value>
   </data>
   <data name="aboutToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>107, 22</value>
@@ -1694,36 +1731,6 @@ Select Element to make direction of all Port connections to unspecified.</value>
   </data>
   <data name="helpToolStripMenuItem1.ToolTipText" xml:space="preserve">
     <value>Help</value>
-  </data>
-  <data name="helpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>44, 20</value>
-  </data>
-  <data name="helpToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Help</value>
-  </data>
-  <data name="menuStrip1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="menuStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>458, 24</value>
-  </data>
-  <data name="menuStrip1.TabIndex" type="System.Int32, mscorlib">
-    <value>22</value>
-  </data>
-  <data name="menuStrip1.Text" xml:space="preserve">
-    <value>menuStrip1</value>
-  </data>
-  <data name="&gt;&gt;menuStrip1.Name" xml:space="preserve">
-    <value>menuStrip1</value>
-  </data>
-  <data name="&gt;&gt;menuStrip1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.MenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;menuStrip1.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;menuStrip1.ZOrder" xml:space="preserve">
-    <value>8</value>
   </data>
   <data name="panelButtons.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
@@ -1836,24 +1843,6 @@ Select Element to make direction of all Port connections to unspecified.</value>
   <data name="&gt;&gt;panelNote.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="lblPorts.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblPorts.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 12pt</value>
-  </data>
-  <data name="lblPorts.Location" type="System.Drawing.Point, System.Drawing">
-    <value>80, 7</value>
-  </data>
-  <data name="lblPorts.Size" type="System.Drawing.Size, System.Drawing">
-    <value>46, 20</value>
-  </data>
-  <data name="lblPorts.TabIndex" type="System.Int32, mscorlib">
-    <value>38</value>
-  </data>
-  <data name="lblPorts.Text" xml:space="preserve">
-    <value>Ports</value>
-  </data>
   <data name="&gt;&gt;lblPorts.Name" xml:space="preserve">
     <value>lblPorts</value>
   </data>
@@ -1893,6 +1882,36 @@ Select Element to make direction of all Port connections to unspecified.</value>
   <data name="&gt;&gt;panelPort.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="lblPorts.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblPorts.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 12pt</value>
+  </data>
+  <data name="lblPorts.Location" type="System.Drawing.Point, System.Drawing">
+    <value>80, 7</value>
+  </data>
+  <data name="lblPorts.Size" type="System.Drawing.Size, System.Drawing">
+    <value>46, 20</value>
+  </data>
+  <data name="lblPorts.TabIndex" type="System.Int32, mscorlib">
+    <value>38</value>
+  </data>
+  <data name="lblPorts.Text" xml:space="preserve">
+    <value>Ports</value>
+  </data>
+  <data name="&gt;&gt;lblPorts.Name" xml:space="preserve">
+    <value>lblPorts</value>
+  </data>
+  <data name="&gt;&gt;lblPorts.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblPorts.Parent" xml:space="preserve">
+    <value>panelPort</value>
+  </data>
+  <data name="&gt;&gt;lblPorts.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="panelAdvanced.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
   </data>
@@ -1919,21 +1938,6 @@ Select Element to make direction of all Port connections to unspecified.</value>
   </data>
   <data name="&gt;&gt;panelAdvanced.ZOrder" xml:space="preserve">
     <value>2</value>
-  </data>
-  <data name="lblConveyedItems.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblConveyedItems.Location" type="System.Drawing.Point, System.Drawing">
-    <value>192, 6</value>
-  </data>
-  <data name="lblConveyedItems.Size" type="System.Drawing.Size, System.Drawing">
-    <value>83, 13</value>
-  </data>
-  <data name="lblConveyedItems.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="lblConveyedItems.Text" xml:space="preserve">
-    <value>Conveyed Items</value>
   </data>
   <data name="&gt;&gt;lblConveyedItems.Name" xml:space="preserve">
     <value>lblConveyedItems</value>
@@ -1973,6 +1977,33 @@ Select Element to make direction of all Port connections to unspecified.</value>
   </data>
   <data name="&gt;&gt;panelConveyedItems.ZOrder" xml:space="preserve">
     <value>4</value>
+  </data>
+  <data name="lblConveyedItems.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblConveyedItems.Location" type="System.Drawing.Point, System.Drawing">
+    <value>192, 6</value>
+  </data>
+  <data name="lblConveyedItems.Size" type="System.Drawing.Size, System.Drawing">
+    <value>83, 13</value>
+  </data>
+  <data name="lblConveyedItems.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="lblConveyedItems.Text" xml:space="preserve">
+    <value>Conveyed Items</value>
+  </data>
+  <data name="&gt;&gt;lblConveyedItems.Name" xml:space="preserve">
+    <value>lblConveyedItems</value>
+  </data>
+  <data name="&gt;&gt;lblConveyedItems.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblConveyedItems.Parent" xml:space="preserve">
+    <value>panelConveyedItems</value>
+  </data>
+  <data name="&gt;&gt;lblConveyedItems.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="panelQuickSearch.ColumnCount" type="System.Int32, mscorlib">
     <value>2</value>
@@ -2106,6 +2137,12 @@ Select Element to make direction of all Port connections to unspecified.</value>
   <data name="&gt;&gt;settingsToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;settingsGlobalKeysToolStripMenuItem.Name" xml:space="preserve">
+    <value>settingsGlobalKeysToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;settingsGlobalKeysToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;settingsToolbarToolStripMenuItem.Name" xml:space="preserve">
     <value>settingsToolbarToolStripMenuItem</value>
   </data>
@@ -2116,12 +2153,6 @@ Select Element to make direction of all Port connections to unspecified.</value>
     <value>settingsQueryAndSctipToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;settingsQueryAndSctipToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;settingsGlobalKeysToolStripMenuItem.Name" xml:space="preserve">
-    <value>settingsGlobalKeysToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;settingsGlobalKeysToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;doToolStripMenuItem.Name" xml:space="preserve">

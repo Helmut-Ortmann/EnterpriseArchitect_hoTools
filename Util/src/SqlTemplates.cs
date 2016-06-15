@@ -33,10 +33,10 @@ namespace hoTools.Utils.SQL
                     "Template to select current selected item (Package, Diagram, Element, Attribute, Operation) by a GUID",
                     isResource:true
                     ) },
-              {  SQL_TEMPLATE_ID.CONVEYED_ITEM_IDS_TEMPLATE,
-                new SqlTemplate("Conveyed Item IDS Template", // Name
+              {  SQL_TEMPLATE_ID.CONVEYED_ITEMS_FROM_CONNECTOR_TEMPLATE,
+                new SqlTemplate("Conveyed Items from selected Connector Template", // Name
                     "ConveyedItemsIdsTemplate",           // String ID of Resource
-                    "Template to get Conveyed Items from the selected connector like: 'ElementID IN ( #ConveyedItemsIDS# )",
+                    "Template to get Conveyed Items from the selected Connector like: 'ElementID IN ( #ConveyedItemsIDS# )",
                     isResource:true
                     ) },
               {  SQL_TEMPLATE_ID.CONNECTORS_FROM_ELEMENT_TEMPLATE,
@@ -395,7 +395,7 @@ ORDER BY 3",
             MACROS_HELP,        // Help to macros
             CONNECTOR_ID,   // Get's the connector
             CONVEYED_ITEM_IDS, // Get's the conveyed Items of the connector as a comma separated ID list of elementIDs
-            CONVEYED_ITEM_IDS_TEMPLATE, // Template Conveyed Items of the selected connector
+            CONVEYED_ITEMS_FROM_CONNECTOR_TEMPLATE, // Template Conveyed Items of the selected connector
             CONNECTORS_FROM_ELEMENT_TEMPLATE, // Template to get the Connector with Conveyed Items from Element
             PACKAGE_ID,      // The containing package of Package, Diagram, Element, Attribute, Operation
             PACKAGE,         // The containing package of Package, Diagram, Element, Attribute, Operation (compatible with EA)

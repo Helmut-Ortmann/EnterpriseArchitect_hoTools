@@ -1,37 +1,40 @@
 # EnterpriseArchitect_hoTools
 Addin with Tools for SPARX Enterprise Architect
 
-# Abstract #
-Collection of useful tools:
+# Abstract
+Collection of useful tools (see also [WiKi](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/home)):
 
-- Booster for everyday work
+- [hoTools](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/hoTools) Assortment of tools
+  - Toolbar for Searches and Services
+  - Keys for Searches and Services 
   - Set diagram line style
-  - Define your personal keys & buttons for searches and services
-  - Quick search at your finger tip
-    -- Tabw Windows and more
+  - Version Control + SVN
+  - Port support
+  - Favorites
+  - ..
+- [SQL](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/SQL) with tabbed Windows
+    -- Select, Insert, Delete, Update
     -- Templates
     -- Macros
     -- See error
   - Conveyed Items
-  - Favorites,..
-  - Create powerful SQL queries (tab window, templates, macros and more)
-  - Search & Replace, regular expression supported
-  - Run Scripts with SQL Search results
+- Your [Script](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/Script) which runs for SQL results (vbScript, JScript, JavaScript) 
 - Configure
--- Buttons
--- Searches
+ - Buttons
+ - Searches
+ - GUI appearance
 - Administration of EA
   - Version Control
-- Setting to adapt GUI and available features
 - Intuitive GUI
 - Online help
 - ..
 
-# Preconditions
-- >= .NET 4
-- >=  EA 9.0
-- Visual Studio 2015
-- Visual Studio Debug: Select "Enable native code debugging"
+# Requirements
+- Windows
+- .NET 4.5 or greater
+- EA 9.0 or greater
+- Local administration rights for installation (register COM dll)
+
 
 # SQL Query
 - Tabbed Editor
@@ -40,24 +43,26 @@ Collection of useful tools:
 - Comment your sql
 - Easy find SQ
 - Load / Save
-- History / Last openedt
+- History / Last opened
 - Easy cooperation with your beloved editor (try e.g. atom,..)
 - etc.
 
 # SQL Query + Script (VB, JScript, JavaScript)
 - Run SQL and do something by script with the results
 
-# Development #
+# Development
 - C#
 - ActiveX for Addin GUI
 - BookMe for Online Help (powerful!)
 - Configuration (*.xml)
 - Installation via WIX
-- Load MDG during starup
-- Keys
+- Load MDG during startup
+- Handling Keys
 - Integrated Geert Bellekens VBScript Library
 - Useful Searches
 - Installable for different customers (brands)
+- Visual Studio 2015
+- Visual Studio Debug: Select "Enable native code debugging"
 
 # Power features C/C++ for SPICE / FuSi #
 Inside code are many powerful features to Reverse Engineer C/C++ Code for e.g. SPICE or FuSi (Functional Safety). With the existing code and a little knowhow it's easy to develop SPICE or FuSi compatible Architecture and Design.
@@ -65,13 +70,14 @@ Inside code are many powerful features to Reverse Engineer C/C++ Code for e.g. S
 Some features:
 - Generate Activity Diagram from code snippets
 
-# Installation #
+# Installation 
 - uninstall hoTools
 - hoTools.msi  (Setup\bin\Release\hoTools.msi V2.0.1)
 - In EA: Extension, Addin Windows is selected
 - In EA: Manage Addins, MDG: hoTools is selected
 - hoToolsRemove.ps1 (deinstall with PowerShell)
-- make sure only one instance hoToolsis installed
+- Make sure only one instance of hoTools is installed
+- See also: [Installation](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/Installation)
 
 # ToDo
 - Drag SQL file on canvas

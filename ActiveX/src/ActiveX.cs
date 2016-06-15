@@ -286,6 +286,12 @@ namespace hoTools.ActiveX
             EaService.CreateActivityForOperation(Repository);
         }
 
+
+        /// <summary>
+        /// Show Folder
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void showFolderToolStripMenuItem_Click(object sender, EventArgs e)
         {
             EaService.ShowFolder(Repository, isTotalCommander: false);
@@ -816,9 +822,9 @@ namespace hoTools.ActiveX
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingGeneralToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.settingsGlobalKeysToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolbarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsQueryAndSctipToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.settingsGlobalKeysToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.doToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.createActivityForOperationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -1266,9 +1272,9 @@ namespace hoTools.ActiveX
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.settingGeneralToolStripMenuItem,
             this.settingsToolStripMenuItem,
+            this.settingsGlobalKeysToolStripMenuItem,
             this.settingsToolbarToolStripMenuItem,
-            this.settingsQueryAndSctipToolStripMenuItem,
-            this.settingsGlobalKeysToolStripMenuItem});
+            this.settingsQueryAndSctipToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             resources.ApplyResources(this.fileToolStripMenuItem, "fileToolStripMenuItem");
             // 
@@ -1284,6 +1290,12 @@ namespace hoTools.ActiveX
             resources.ApplyResources(this.settingsToolStripMenuItem, "settingsToolStripMenuItem");
             this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
             // 
+            // settingsGlobalKeysToolStripMenuItem
+            // 
+            this.settingsGlobalKeysToolStripMenuItem.Name = "settingsGlobalKeysToolStripMenuItem";
+            resources.ApplyResources(this.settingsGlobalKeysToolStripMenuItem, "settingsGlobalKeysToolStripMenuItem");
+            this.settingsGlobalKeysToolStripMenuItem.Click += new System.EventHandler(this.settingsKeysToolStripMenuItem_Click);
+            // 
             // settingsToolbarToolStripMenuItem
             // 
             this.settingsToolbarToolStripMenuItem.Name = "settingsToolbarToolStripMenuItem";
@@ -1295,12 +1307,6 @@ namespace hoTools.ActiveX
             this.settingsQueryAndSctipToolStripMenuItem.Name = "settingsQueryAndSctipToolStripMenuItem";
             resources.ApplyResources(this.settingsQueryAndSctipToolStripMenuItem, "settingsQueryAndSctipToolStripMenuItem");
             this.settingsQueryAndSctipToolStripMenuItem.Click += new System.EventHandler(this.settingsQueryAndSctipToolStripMenuItem_Click);
-            // 
-            // settingsGlobalKeysToolStripMenuItem
-            // 
-            this.settingsGlobalKeysToolStripMenuItem.Name = "settingsGlobalKeysToolStripMenuItem";
-            resources.ApplyResources(this.settingsGlobalKeysToolStripMenuItem, "settingsGlobalKeysToolStripMenuItem");
-            this.settingsGlobalKeysToolStripMenuItem.Click += new System.EventHandler(this.settingsKeysToolStripMenuItem_Click);
             // 
             // doToolStripMenuItem
             // 
@@ -2078,8 +2084,8 @@ namespace hoTools.ActiveX
             {
                 string sql = @"
                         select  o.ea_guid AS CLASSGUID, o.object_type AS CLASSTYPE, o.name As Element
-                        from t_object o,
-                        where  o.element_id in ( #ConveyedItemsIDS# )
+                        from t_object o
+                        where  o.element_id in ( #ConveyedItemIDS# )
                         ORDER BY 3
                 ";
                 // Run SQL with macro replacement

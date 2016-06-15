@@ -1170,6 +1170,14 @@ namespace hoTools.Utils
 
         }
         #pragma warning disable RECS0154 // Parameter is never used
+
+        /// <summary>
+        /// Get file path for an implementation file which uses code generation. It transforms the path into the local path.
+        /// Note: A file might have one or no implementation language.
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <param name="el"></param>
+        /// <returns></returns>
         public static string getGenFilePath(EA.Repository rep, EA.Element el)
         #pragma warning restore RECS0154 // Parameter is never used
         {

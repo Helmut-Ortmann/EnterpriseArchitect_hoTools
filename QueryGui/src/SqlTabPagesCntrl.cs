@@ -450,8 +450,8 @@ CTRL+SHFT+S                     Store sql All
 
             // Insert ConveyedItemIDS Template
             ToolStripMenuItem insertConveyedtemIDSTemplateMenuItem = new ToolStripMenuItem();
-            insertConveyedtemIDSTemplateMenuItem.Text = "Insert ConveyedItemTemplate Template";
-            id = SqlTemplates.SQL_TEMPLATE_ID.CONVEYED_ITEM_IDS_TEMPLATE;
+            insertConveyedtemIDSTemplateMenuItem.Text = "Insert ConveyedItems from selected Connector Template";
+            id = SqlTemplates.SQL_TEMPLATE_ID.CONVEYED_ITEMS_FROM_CONNECTOR_TEMPLATE;
             insertConveyedtemIDSTemplateMenuItem.ToolTipText = SqlTemplates.getTooltip(id);
             insertConveyedtemIDSTemplateMenuItem.Tag = SqlTemplates.getTemplate(id);
             insertConveyedtemIDSTemplateMenuItem.Click += new System.EventHandler(insertTemplate_Click);
