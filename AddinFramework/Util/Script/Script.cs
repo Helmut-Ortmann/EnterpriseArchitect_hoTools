@@ -54,7 +54,7 @@ namespace EAAddinFramework.Utils
 		/// A dictionary with all the includable script.
 		/// The key is the complete !INC statement, the value is the code
 		/// </summary>
-		private static Dictionary<string,string> includableScripts 
+		static Dictionary<string,string> includableScripts 
 		{
 			get
 			{
@@ -151,7 +151,7 @@ namespace EAAddinFramework.Utils
 		/// <summary>
 		/// loads all static includable scripts. These scripts are stored outside the model and can not be changed by the user
 		/// </summary>
-		private static void loadStaticIncludableScripts()
+		static void loadStaticIncludableScripts()
 		{
 			staticIncludableScripts = new Dictionary<string, string>();
 			//local scripts
@@ -219,6 +219,7 @@ namespace EAAddinFramework.Utils
 				string[] mdgPaths = pathList.Split(',');
 				foreach (string mdgPath in mdgPaths) 
 				{
+                    if (mdgPath.Trim() == "") continue;
 					//figure out it we have a folder path or an URL
 					if (mdgPath.StartsWith("http",StringComparison.InvariantCultureIgnoreCase))
 				    {
@@ -238,7 +239,7 @@ namespace EAAddinFramework.Utils
 		/// load the MDG scripts from the MDG file located at the given URL
 		/// </summary>
 		/// <param name="url">the URL pointing to the MDG file</param>
-		private static void loadMDGScriptsFromURL(string url)
+		static void loadMDGScriptsFromURL(string url)
 		{
 			try
 			{
@@ -246,13 +247,14 @@ namespace EAAddinFramework.Utils
 			}
 			catch (Exception e)
 			{
-                MessageBox.Show("Error in loadMDGScriptsFromURL: " + e.Message);
-			}
+                MessageBox.Show($"URL='{url}' skipped (see: Extensions, MDGTechnology,Advanced).\r\n{e.Message}", "Error in load *.xml MDGScripts from url! ");
+            }
 		}
 		/// <summary>
-		/// get the MDG files in the local MDGtechnologies folder
+		/// get the MDG files in the local MDGtechnologies folder.
+        /// In EA .\EA\MDGTechnologies\...
 		/// </summary>
-		private static void loadLocalMDGScripts()
+		static void loadLocalMDGScripts()
 		{
 			string mdgDirectory = Path.GetDirectoryName(Model.applicationFullPath) + "\\MDGTechnologies";
 			loadMDGScriptsFromFolder(mdgDirectory);
@@ -261,19 +263,20 @@ namespace EAAddinFramework.Utils
 		/// load the scripts from the MDG files in the given directory
 		/// </summary>
 		/// <param name="folderPath">the path to the directory</param>
-		private static void loadMDGScriptsFromFolder(string folderPath)
+		static void loadMDGScriptsFromFolder(string folderPath)
 		{
-			try
+            string[] mdgFiles = Directory.GetFiles(folderPath, "*.xml", SearchOption.TopDirectoryOnly);
+            try
 			{
-				string[] mdgFiles = Directory.GetFiles(folderPath,"*.xml",SearchOption.TopDirectoryOnly);
-				foreach(string mdgfile in mdgFiles)
+				
+				foreach(string mdgFile in mdgFiles)
 				{
-					loadMDGScripts(File.ReadAllText(mdgfile));
+					loadMDGScripts(File.ReadAllText(mdgFile));
 				}
 			}
 			catch (Exception e)
 			{
-                MessageBox.Show("", "Error in loadMDGScriptsFromURL: " + e.Message);
+                MessageBox.Show($"Folder '{folderPath}' skipped\r\n{e.Message}", "Error in load *.xml MDGScripts from file! " );
                 
 			}
 		}

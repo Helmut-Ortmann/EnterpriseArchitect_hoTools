@@ -520,14 +520,20 @@ namespace hoTools
         /// Initialize repositories for all EA hoTools Addin Tabulators
         /// </summary>
         /// <param name="rep"></param>
-        private void initializeForRepository(EA.Repository rep)
+        void initializeForRepository(EA.Repository rep)
         {
             _repository = rep;
             Repository = rep;
-            if (_MyControlGUI != null) _MyControlGUI.Repository = rep;
-            if (_FindAndReplaceGUI != null) _FindAndReplaceGUI.Repository = rep;
-            if (_ScriptGUI != null) _ScriptGUI.Repository = rep;
-            if (_QueryGUI != null) _QueryGUI.Repository = rep;
+            try
+            {
+                if (_MyControlGUI != null) _MyControlGUI.Repository = rep;
+                if (_FindAndReplaceGUI != null) _FindAndReplaceGUI.Repository = rep;
+                if (_ScriptGUI != null) _ScriptGUI.Repository = rep;
+                if (_QueryGUI != null) _QueryGUI.Repository = rep;
+            } catch (Exception e)
+            {
+                MessageBox.Show($"{e.Message}","hoTools: Error initializing Addin Tabs");
+            }
 
 
         }
@@ -1059,8 +1065,8 @@ namespace hoTools
                     if (! (_AddinSettings.OnlyQueryWindow == AddinSettings.ShowInWindow.Disabled) )
                     {
                         // Run as Query
-                        QueryGUI = addAddinControl<QueryGUI>(QueryGUI.TABULATOR_QUERY, 
-                            QueryGUI.PROGID, QueryGUI.TABULATOR_QUERY, 
+                        QueryGUI = addAddinControl<QueryGUI>(QueryGUI.TABULATOR_SQL, 
+                            QueryGUI.PROGID, QueryGUI.TABULATOR_SQL, 
                             _AddinSettings.OnlyQueryWindow);
                         _QueryGUI = QueryGUI; // static + instance
                     }

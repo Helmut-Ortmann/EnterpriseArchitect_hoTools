@@ -37,15 +37,16 @@ namespace hoTools.Query
     {
         public const string PROGID = "hoTools.QueryGUI";
         public const string TABULATOR_SCRIPT = "Script";
-        public const string TABULATOR_QUERY = "SQL";
+        public const string TABULATOR_SQL = "SQL";
 
         /// <summary>
         /// Type of Addin. Use the same string for enum as the string to visualize
         /// </summary>
         public enum AddinType { SQL, Script};
+
         // default value for Addin Tab Name
         AddinType _addinType = AddinType.SQL;
-        string _addinTabName = TABULATOR_QUERY;
+        string _addinTabName = TABULATOR_SQL;
 
         List<Script> _lscripts;  // list off all scripts
         DataTable _tableFunctions; // Scripts and Functions
@@ -86,8 +87,6 @@ namespace hoTools.Query
             PerformLayout();
 
             ResizeRedraw = true;
-            //SetStyle(ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint | ControlStyles.DoubleBuffer| ControlStyles.ResizeRedraw, true);
-            //tabControlSql.SetStyle(ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint | ControlStyles.DoubleBuffer, true);
 
             // individual initialization
             // Script
@@ -108,11 +107,15 @@ namespace hoTools.Query
             {
                 base.Repository = value;
                 // only if there is a repository available
-                if (value.ProjectGUID != "")
+                if (Repository == null || value.ProjectGUID == "") return;
+
+                try
                 {
                     initializeSettings();
-
-
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.ToString(), "SQL,Script: Error Initialization");
                 }
             }
         }
@@ -127,7 +130,10 @@ namespace hoTools.Query
         /// <returns></returns>
         bool initializeSettings()
         {
-            if ((string)Tag != TABULATOR_QUERY)
+            // default 
+            _addinType = AddinType.SQL;
+            _addinTabName = TABULATOR_SQL;
+            if ((string)Tag != TABULATOR_SQL)
             {
                 _addinType = AddinType.Script;
                 _addinTabName = TABULATOR_SCRIPT;
@@ -147,15 +153,15 @@ namespace hoTools.Query
             }
 
 
-            // run for query
-            if ((string)this.Tag == TABULATOR_QUERY)
+            // run for SQL / Query
+            if (_addinType == AddinType.SQL)
             {
                 // don't show Script container
                 splitContainer.Panel2Collapsed = true;
                 // don't show Menu item LoadScripts
                 loadStandardScriptsToolStripMenuItem.Visible = false;
             }
-            else // run for Script (includes Query)
+            else // run for Script (includes SQL / Query)
             {
 
                 splitContainer.SplitterDistance = 330;
@@ -271,6 +277,7 @@ namespace hoTools.Query
         /// Compile, load script with may run on SQL Query result rows. The conditions:
         /// <para/>- Contains string 'EA-Matic'
         /// <para/>- With 2 or 3 parameters
+        /// <para/>From Repository, MDG Technology folder, Registry (Tools, MDG, Advanced,..)
         /// </summary>
         /// <param name="isWithAll"></param>
          void updateTableFunctions(bool isWithAll=false)

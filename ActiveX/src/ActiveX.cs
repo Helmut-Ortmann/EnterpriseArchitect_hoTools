@@ -25,7 +25,6 @@ namespace hoTools.ActiveX
     public class AddinControlGUI : AddinGUI, IAddinControl
     {
         public const string PROGID = "hoTools.ActiveXGUI";
-        public const string TABULATOR = "Script";
 
         // Windows/Frames
         FrmQueryAndScript _frmQueryAndScript;
@@ -168,17 +167,17 @@ namespace hoTools.ActiveX
             {
                 base.Repository = value;
                 // only if there is a repository available
-                if (value.ProjectGUID != "")
+                if (Repository == null || value.ProjectGUID == "" ) return;
+
+                try
                 {
-                    try
-                    {
-                        initializeSettings();
-                    }
-                    catch (Exception e)
-                    {
-                        MessageBox.Show(e.ToString(), "ActiveX: Error Initialization");
-                    }
+                    initializeSettings();
                 }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.ToString(), "ActiveX: Error Initialization");
+                }
+
             }
         }
         #region initializingSettings

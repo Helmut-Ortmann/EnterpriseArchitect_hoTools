@@ -135,7 +135,7 @@ CTRL+SHFT+S                     Store sql All
             return tabPage;
         }
         /// <summary>
-        /// Add an Tab to the tab control and load the Element Template as default
+        /// Add an Tab to the tab control and load the Element Template as default. The Textbox is unchanged because it's just a template.
         /// </summary>
         /// <returns></returns>
         public TabPage addTab(bool withDefaultTabContent = true)
@@ -162,6 +162,7 @@ CTRL+SHFT+S                     Store sql All
             var sqlTextBox = new TextBoxUndo(tabPage);
             // load element template
             sqlTextBox.Text = SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.ELEMENT_TEMPLATE);
+            sqlFile.IsChanged = false;
 
             // register CTRL+S (store SQL) and CTRL+R (run SQL)
             sqlTextBox.KeyUp += sqlTextBox_KeyUp;
@@ -791,11 +792,12 @@ CTRL+SHFT+S                     Store sql All
                 // set TabName
                 SqlFile sqlFile = (SqlFile)tabPage.Tag;
                 sqlFile.FullName = fileName;
+                textBox.Text = sqlFile.load(); // don't move behind sqlFile.IsChange=false !!!!
                 sqlFile.IsChanged = false;
                 tabPage.ToolTipText = sqlFile.FullName;
                 tabPage.Text = sqlFile.DisplayName;
 
-                textBox.Text = sqlFile.load();
+
                 if (!notUpdateLastOpenedList)
                 {
                     Settings.lastOpenedFiles.insert(fileName);

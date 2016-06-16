@@ -41,6 +41,7 @@ namespace hoTools.ActiveX
             set
             {
                 _rep = value;
+                if (Repository == null) return;
                 if (_model == null) _model = new Model(value);
                 {
                     _model.Repository = value;
