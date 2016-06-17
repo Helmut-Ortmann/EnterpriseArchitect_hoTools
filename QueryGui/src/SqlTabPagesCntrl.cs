@@ -149,6 +149,7 @@ CTRL+SHFT+S                     Store sql All
             tabPage.Text = sqlFile.DisplayName;
             tabPage.ToolTipText = sqlFile.FullName;
 
+
             // add tab to TabControl
             _tabControl.Controls.Add(tabPage);
             _tabControl.SelectTab(tabPage);
@@ -163,6 +164,7 @@ CTRL+SHFT+S                     Store sql All
             // load element template
             sqlTextBox.Text = SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.ELEMENT_TEMPLATE);
             sqlFile.IsChanged = false;
+            tabPage.Text = sqlFile.DisplayName;  // after isChanged = false
 
             // register CTRL+S (store SQL) and CTRL+R (run SQL)
             sqlTextBox.KeyUp += sqlTextBox_KeyUp;

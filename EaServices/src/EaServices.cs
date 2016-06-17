@@ -385,7 +385,7 @@ namespace hoTools.EaServices
             }
             
         }
-        private static bool locateTextOrFrame(EA.Repository rep, EA.Element el)
+        static bool locateTextOrFrame(EA.Repository rep, EA.Element el)
         {
             if (el.Type == "Text")
             {
@@ -795,7 +795,7 @@ namespace hoTools.EaServices
             }
         }
         #endregion
-        private static void showFromElement(EA.Repository Repository, EA.Element el, displayMode showBehavior)
+        static void showFromElement(EA.Repository Repository, EA.Element el, displayMode showBehavior)
         {
             EA.Method method = Util.getOperationFromAction(Repository, el);
             if (method != null)
@@ -811,7 +811,7 @@ namespace hoTools.EaServices
             }
         }
 
-        private static void locateOperationFromBehavior(EA.Repository Repository, EA.Element el, displayMode showBehavior)
+        static void locateOperationFromBehavior(EA.Repository Repository, EA.Element el, displayMode showBehavior)
         {
             EA.Method method = Util.getOperationFromBrehavior(Repository, el);
             if (method != null)
@@ -826,7 +826,7 @@ namespace hoTools.EaServices
                 }
             }
         }
-        private static void BehaviorForOperation(EA.Repository Repository, EA.Method method)
+        static void BehaviorForOperation(EA.Repository Repository, EA.Method method)
         {
             string behavior = method.Behavior;
             if (behavior.StartsWith("{", StringComparison.Ordinal) & behavior.EndsWith("}", StringComparison.Ordinal))
@@ -1180,7 +1180,7 @@ namespace hoTools.EaServices
 
         }
         #endregion
-        private static void addInterfaceToElement(EA.Repository rep, int pos, EA.Element elSource, EA.Element elTarget, EA.Diagram dia, EA.DiagramObject diaObjSource)
+        static void addInterfaceToElement(EA.Repository rep, int pos, EA.Element elSource, EA.Element elTarget, EA.Diagram dia, EA.DiagramObject diaObjSource)
         {
             EA.DiagramObject diaObjTarget = null;
             
@@ -1730,7 +1730,7 @@ namespace hoTools.EaServices
         }
         #endregion
 
-        private static void updateActivityParameterForElement(EA.Repository rep, EA.Element el)
+        static void updateActivityParameterForElement(EA.Repository rep, EA.Element el)
         {
             foreach (EA.Method m in el.Methods)
             {
@@ -2923,6 +2923,8 @@ namespace hoTools.EaServices
         }
 
         // update the types of operations
+        #region CreateActivityForOperation
+        [ServiceOperation("{AC0111AB-10AE-4FC6-92DE-CD58F610C4E6}", "Update Activity Parameter from Operation, Class/Interface", "Select Package, Class/Interface or operation", IsTextRequired: false)]
         public static void updateOperationTypes(EA.Repository rep)
         {
             EA.ObjectType oType = rep.GetContextItemType();
@@ -4475,5 +4477,6 @@ namespace hoTools.EaServices
                             "\nConfig:\t" + configFilePath
                     , "hoTools for VAR1  " + release);
         }
+        #endregion
     }
 }

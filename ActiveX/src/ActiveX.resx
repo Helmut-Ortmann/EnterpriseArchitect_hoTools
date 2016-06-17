@@ -1364,6 +1364,37 @@ There is no interface to directly select more than one Browser Element (as far a
   <data name="createActivityForOperationToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Create Activity for Operation</value>
   </data>
+  <data name="createActivityForOperationToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Create Activity for operation in a new Package with:
+- Activity with Parameter according to operation
+- Diagram which contains the Activity
+- Link between Operation and Activity for Traceability
+
+Select:
+- Package
+- Class / Element
+- Operation</value>
+  </data>
+  <data name="updateActivityFromOperationToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>242, 22</value>
+  </data>
+  <data name="updateActivityFromOperationToolStripMenuItem.Text" xml:space="preserve">
+    <value>Update Activity from Operation</value>
+  </data>
+  <data name="updateActivityFromOperationToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Update Activity from operation:
+- Return Type
+- Parameter
+- Activity Name
+
+Select:
+- Package
+- Element / Class
+- Operation </value>
+  </data>
+  <data name="toolStripSeparator10.Size" type="System.Drawing.Size, System.Drawing">
+    <value>239, 6</value>
+  </data>
   <data name="showFolderToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>242, 22</value>
   </data>
@@ -2142,6 +2173,18 @@ Select Element to make direction of all Port connections to unspecified.</value>
   </data>
   <data name="&gt;&gt;createActivityForOperationToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;updateActivityFromOperationToolStripMenuItem.Name" xml:space="preserve">
+    <value>updateActivityFromOperationToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;updateActivityFromOperationToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator10.Name" xml:space="preserve">
+    <value>toolStripSeparator10</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator10.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;showFolderToolStripMenuItem.Name" xml:space="preserve">
     <value>showFolderToolStripMenuItem</value>

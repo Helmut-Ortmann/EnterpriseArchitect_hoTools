@@ -144,6 +144,8 @@ namespace hoTools.ActiveX
         private Label lblPorts;
         private Label lblConveyedItems;
         private TableLayoutPanel panelQuickSearch;
+        private ToolStripMenuItem updateActivityFromOperationToolStripMenuItem;
+        private ToolStripSeparator toolStripSeparator10;
         private TextBox txtSearchText;
         #endregion
 
@@ -280,9 +282,15 @@ namespace hoTools.ActiveX
             EaService.getVcLatestRecursive(Repository);
         }
 #pragma warning restore RECS0154
+
         void createActivityForOperationToolStripMenuItem_Click(object sender, EventArgs e)
         {
             EaService.CreateActivityForOperation(Repository);
+        }
+
+        void updateActivityFromOperationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EaService.updateOperationTypes(Repository);
         }
 
 
@@ -826,6 +834,8 @@ namespace hoTools.ActiveX
             this.settingsQueryAndSctipToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.doToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.createActivityForOperationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.updateActivityFromOperationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
             this.showFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.copyGUIDSQLToClipboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -1311,6 +1321,8 @@ namespace hoTools.ActiveX
             // 
             this.doToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.createActivityForOperationToolStripMenuItem,
+            this.updateActivityFromOperationToolStripMenuItem,
+            this.toolStripSeparator10,
             this.showFolderToolStripMenuItem,
             this.copyGUIDSQLToClipboardToolStripMenuItem,
             this.toolStripSeparator1,
@@ -1324,6 +1336,17 @@ namespace hoTools.ActiveX
             this.createActivityForOperationToolStripMenuItem.Name = "createActivityForOperationToolStripMenuItem";
             resources.ApplyResources(this.createActivityForOperationToolStripMenuItem, "createActivityForOperationToolStripMenuItem");
             this.createActivityForOperationToolStripMenuItem.Click += new System.EventHandler(this.createActivityForOperationToolStripMenuItem_Click);
+            // 
+            // updateActivityFromOperationToolStripMenuItem
+            // 
+            this.updateActivityFromOperationToolStripMenuItem.Name = "updateActivityFromOperationToolStripMenuItem";
+            resources.ApplyResources(this.updateActivityFromOperationToolStripMenuItem, "updateActivityFromOperationToolStripMenuItem");
+            this.updateActivityFromOperationToolStripMenuItem.Click += new System.EventHandler(this.updateActivityFromOperationToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator10
+            // 
+            this.toolStripSeparator10.Name = "toolStripSeparator10";
+            resources.ApplyResources(this.toolStripSeparator10, "toolStripSeparator10");
             // 
             // showFolderToolStripMenuItem
             // 
@@ -2096,5 +2119,7 @@ namespace hoTools.ActiveX
                 MessageBox.Show("To get the Elements on the Connector you have to select an Connector.", "No Connector is selected, break!!!");
             }
         }
+
+        
     }
 }

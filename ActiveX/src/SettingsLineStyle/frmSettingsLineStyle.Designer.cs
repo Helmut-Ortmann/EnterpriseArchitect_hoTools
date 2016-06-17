@@ -203,10 +203,10 @@
             this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Size = new System.Drawing.Size(371, 301);
+            this.groupBox1.Size = new System.Drawing.Size(512, 301);
             this.groupBox1.TabIndex = 13;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Default line styles Diagram:";
+            this.groupBox1.Text = "Default Styles:";
             // 
             // cboStatechartLineStyle
             // 
@@ -214,7 +214,7 @@
             this.cboStatechartLineStyle.Location = new System.Drawing.Point(180, 262);
             this.cboStatechartLineStyle.Margin = new System.Windows.Forms.Padding(2);
             this.cboStatechartLineStyle.Name = "cboStatechartLineStyle";
-            this.cboStatechartLineStyle.Size = new System.Drawing.Size(153, 28);
+            this.cboStatechartLineStyle.Size = new System.Drawing.Size(311, 28);
             this.cboStatechartLineStyle.TabIndex = 8;
             this.toolTip1.SetToolTip(this.cboStatechartLineStyle, "Set Default line style for Statechart Diagram");
             // 
@@ -224,7 +224,7 @@
             this.cboClassLineStyle.Location = new System.Drawing.Point(180, 29);
             this.cboClassLineStyle.Margin = new System.Windows.Forms.Padding(2);
             this.cboClassLineStyle.Name = "cboClassLineStyle";
-            this.cboClassLineStyle.Size = new System.Drawing.Size(153, 28);
+            this.cboClassLineStyle.Size = new System.Drawing.Size(311, 28);
             this.cboClassLineStyle.TabIndex = 1;
             this.toolTip1.SetToolTip(this.cboClassLineStyle, "Set Default line style for Class- or Logical -Diagram");
             // 
@@ -234,7 +234,7 @@
             this.cboPackageLineStyle.Location = new System.Drawing.Point(180, 232);
             this.cboPackageLineStyle.Margin = new System.Windows.Forms.Padding(2);
             this.cboPackageLineStyle.Name = "cboPackageLineStyle";
-            this.cboPackageLineStyle.Size = new System.Drawing.Size(153, 28);
+            this.cboPackageLineStyle.Size = new System.Drawing.Size(311, 28);
             this.cboPackageLineStyle.TabIndex = 7;
             this.toolTip1.SetToolTip(this.cboPackageLineStyle, "Set Default line style for Package Diagram");
             // 
@@ -244,7 +244,7 @@
             this.cboUseCaseLineStyle.Location = new System.Drawing.Point(180, 200);
             this.cboUseCaseLineStyle.Margin = new System.Windows.Forms.Padding(2);
             this.cboUseCaseLineStyle.Name = "cboUseCaseLineStyle";
-            this.cboUseCaseLineStyle.Size = new System.Drawing.Size(153, 28);
+            this.cboUseCaseLineStyle.Size = new System.Drawing.Size(311, 28);
             this.cboUseCaseLineStyle.TabIndex = 6;
             this.toolTip1.SetToolTip(this.cboUseCaseLineStyle, "Set Default line style for Use Case Diagram");
             // 
@@ -254,7 +254,7 @@
             this.cboDeploymentLineStyle.Location = new System.Drawing.Point(180, 171);
             this.cboDeploymentLineStyle.Margin = new System.Windows.Forms.Padding(2);
             this.cboDeploymentLineStyle.Name = "cboDeploymentLineStyle";
-            this.cboDeploymentLineStyle.Size = new System.Drawing.Size(153, 28);
+            this.cboDeploymentLineStyle.Size = new System.Drawing.Size(311, 28);
             this.cboDeploymentLineStyle.TabIndex = 5;
             this.toolTip1.SetToolTip(this.cboDeploymentLineStyle, "Set Default line style for Deployment Diagram");
             // 
@@ -264,7 +264,7 @@
             this.cboCustomLineStyle.Location = new System.Drawing.Point(180, 143);
             this.cboCustomLineStyle.Margin = new System.Windows.Forms.Padding(2);
             this.cboCustomLineStyle.Name = "cboCustomLineStyle";
-            this.cboCustomLineStyle.Size = new System.Drawing.Size(153, 28);
+            this.cboCustomLineStyle.Size = new System.Drawing.Size(311, 28);
             this.cboCustomLineStyle.TabIndex = 4;
             this.toolTip1.SetToolTip(this.cboCustomLineStyle, "Set Default line style for Custom Diagram");
             // 
@@ -274,7 +274,7 @@
             this.cboCompositeStructureLineStyle.Location = new System.Drawing.Point(180, 115);
             this.cboCompositeStructureLineStyle.Margin = new System.Windows.Forms.Padding(2);
             this.cboCompositeStructureLineStyle.Name = "cboCompositeStructureLineStyle";
-            this.cboCompositeStructureLineStyle.Size = new System.Drawing.Size(153, 28);
+            this.cboCompositeStructureLineStyle.Size = new System.Drawing.Size(311, 28);
             this.cboCompositeStructureLineStyle.TabIndex = 3;
             this.toolTip1.SetToolTip(this.cboCompositeStructureLineStyle, "Set Default line style for Composite Structure Diagram");
             // 
@@ -284,7 +284,7 @@
             this.cboComponentLineStyle.Location = new System.Drawing.Point(180, 86);
             this.cboComponentLineStyle.Margin = new System.Windows.Forms.Padding(2);
             this.cboComponentLineStyle.Name = "cboComponentLineStyle";
-            this.cboComponentLineStyle.Size = new System.Drawing.Size(153, 28);
+            this.cboComponentLineStyle.Size = new System.Drawing.Size(311, 28);
             this.cboComponentLineStyle.TabIndex = 2;
             this.toolTip1.SetToolTip(this.cboComponentLineStyle, "Set Default line style forComponent Diagram");
             // 
@@ -294,7 +294,7 @@
             this.cboActivityLineStyle.Location = new System.Drawing.Point(180, 58);
             this.cboActivityLineStyle.Margin = new System.Windows.Forms.Padding(2);
             this.cboActivityLineStyle.Name = "cboActivityLineStyle";
-            this.cboActivityLineStyle.Size = new System.Drawing.Size(153, 28);
+            this.cboActivityLineStyle.Size = new System.Drawing.Size(311, 28);
             this.cboActivityLineStyle.TabIndex = 0;
             this.toolTip1.SetToolTip(this.cboActivityLineStyle, "Set Default line style for Activity Diagram");
             // 
