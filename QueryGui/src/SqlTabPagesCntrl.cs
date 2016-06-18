@@ -135,7 +135,7 @@ CTRL+SHFT+S                     Store sql All
             return tabPage;
         }
         /// <summary>
-        /// Add an Tab to the tab control and load the Element Template as default. The Textbox is unchanged because it's just a template.
+        /// Add an Tab to the tab control and load the Element Template as default. The Text box is unchanged because it's just a template.
         /// </summary>
         /// <returns></returns>
         public TabPage addTab(bool withDefaultTabContent = true)

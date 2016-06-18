@@ -168,6 +168,8 @@
             this.label36.Size = new System.Drawing.Size(154, 18);
             this.label36.TabIndex = 221;
             this.label36.Text = "Diagram Note support";
+            this.toolTip1.SetToolTip(this.label36, "Add support for Nots on Diagrams:\r\n- Add Element Note with Element Note content\r\n" +
+        "- Add Diagram Note with Diagram Note content");
             // 
             // chkVcSupport
             // 
@@ -177,7 +179,9 @@
             this.chkVcSupport.Name = "chkVcSupport";
             this.chkVcSupport.Size = new System.Drawing.Size(15, 14);
             this.chkVcSupport.TabIndex = 220;
-            this.toolTip1.SetToolTip(this.chkVcSupport, "Add Version Control support");
+            this.toolTip1.SetToolTip(this.chkVcSupport, "Add Version Control support:\r\n- Change *.xml file of selected package\r\n- Show fol" +
+        "der for selected package with Vesrion Control\r\n- Get VC latest for selected fold" +
+        "er (package recursive)\r\n");
             this.chkVcSupport.UseVisualStyleBackColor = true;
             // 
             // label35
@@ -190,6 +194,9 @@
             this.label35.Size = new System.Drawing.Size(84, 18);
             this.label35.TabIndex = 219;
             this.label35.Text = "VC Support";
+            this.toolTip1.SetToolTip(this.label35, "Add Version Control support:\r\n- Change *.xml file of selected package\r\n- Show fol" +
+        "der for selected package with Vesrion Control\r\n- Get VC latest for selected fold" +
+        "er (package recursive)");
             // 
             // chkAdvancedFeatures
             // 
@@ -199,7 +206,7 @@
             this.chkAdvancedFeatures.Name = "chkAdvancedFeatures";
             this.chkAdvancedFeatures.Size = new System.Drawing.Size(15, 14);
             this.chkAdvancedFeatures.TabIndex = 218;
-            this.toolTip1.SetToolTip(this.chkAdvancedFeatures, "Add advanved features");
+            this.toolTip1.SetToolTip(this.chkAdvancedFeatures, resources.GetString("chkAdvancedFeatures.ToolTip"));
             this.chkAdvancedFeatures.UseVisualStyleBackColor = true;
             // 
             // chkSvnSupport
@@ -210,7 +217,8 @@
             this.chkSvnSupport.Name = "chkSvnSupport";
             this.chkSvnSupport.Size = new System.Drawing.Size(15, 14);
             this.chkSvnSupport.TabIndex = 217;
-            this.toolTip1.SetToolTip(this.chkSvnSupport, "Add SVN support");
+            this.toolTip1.SetToolTip(this.chkSvnSupport, "Add SVN support\r\n- Show Tortoise Log for Package\r\n- Show Tortoise Repos Browser f" +
+        "or Package\r\n");
             this.chkSvnSupport.UseVisualStyleBackColor = true;
             // 
             // label33
@@ -223,6 +231,7 @@
             this.label33.Size = new System.Drawing.Size(94, 18);
             this.label33.TabIndex = 216;
             this.label33.Text = "SVN Support";
+            this.toolTip1.SetToolTip(this.label33, "Add SVN support");
             // 
             // label41
             // 
@@ -234,6 +243,8 @@
             this.label41.Size = new System.Drawing.Size(158, 18);
             this.label41.TabIndex = 214;
             this.label41.Text = "Advanced Port support";
+            this.toolTip1.SetToolTip(this.label41, "Add Tool support to easily handle multiple ports on an Element like:\r\n- Move left" +
+        "\r\n- Move right\r\n- Move up\r\n- Move down");
             // 
             // label29
             // 
@@ -245,6 +256,7 @@
             this.label29.Size = new System.Drawing.Size(129, 18);
             this.label29.TabIndex = 215;
             this.label29.Text = "Advanced features";
+            this.toolTip1.SetToolTip(this.label29, resources.GetString("label29.ToolTip"));
             // 
             // txtQuickSearch
             // 
@@ -438,7 +450,7 @@
             this.chkFavoriteSupport.Size = new System.Drawing.Size(15, 14);
             this.chkFavoriteSupport.TabIndex = 236;
             this.toolTip1.SetToolTip(this.chkFavoriteSupport, "Add buttons to handle Favorites:\r\n- Element\r\n- Package\r\n- Diagram\r\nadd, remove, s" +
-        "how");
+        "how/find");
             this.chkFavoriteSupport.UseVisualStyleBackColor = true;
             this.chkFavoriteSupport.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
@@ -453,7 +465,7 @@
             this.label7.TabIndex = 235;
             this.label7.Text = "Favorites Supports";
             this.toolTip1.SetToolTip(this.label7, "Add buttons to handle Favorites:\r\n- Element\r\n- Package\r\n- Diagram\r\nadd, remove, s" +
-        "how");
+        "how/find");
             this.label7.Click += new System.EventHandler(this.label7_Click);
             // 
             // groupBox2
@@ -479,7 +491,7 @@
             this.rbAutoLoadMdgNo.TabIndex = 2;
             this.rbAutoLoadMdgNo.TabStop = true;
             this.rbAutoLoadMdgNo.Text = "No MDG";
-            this.toolTip1.SetToolTip(this.rbAutoLoadMdgNo, "No autoload of MDG.");
+            this.toolTip1.SetToolTip(this.rbAutoLoadMdgNo, "No install of MDG.");
             this.rbAutoLoadMdgNo.UseVisualStyleBackColor = true;
             // 
             // rbAutoLoadMdgCompilation
@@ -491,8 +503,8 @@
             this.rbAutoLoadMdgCompilation.TabIndex = 1;
             this.rbAutoLoadMdgCompilation.TabStop = true;
             this.rbAutoLoadMdgCompilation.Text = "hoToolsCompilation.xml";
-            this.toolTip1.SetToolTip(this.rbAutoLoadMdgCompilation, "Compilation of useful queries & scripts\r\n\r\nSee in installation folder:\r\nc:\\user\\<" +
-        "userName>\\AppData\\Local\\Apps\\hoTools\\..");
+            this.toolTip1.SetToolTip(this.rbAutoLoadMdgCompilation, "Install compilation of useful queries & scripts\r\n\r\nSee in installation folder:\r\nc" +
+        ":\\user\\<userName>\\AppData\\Local\\Apps\\hoTools\\..");
             this.rbAutoLoadMdgCompilation.UseVisualStyleBackColor = true;
             // 
             // rbAutoLoadMdgBasic
@@ -504,8 +516,8 @@
             this.rbAutoLoadMdgBasic.TabIndex = 0;
             this.rbAutoLoadMdgBasic.TabStop = true;
             this.rbAutoLoadMdgBasic.Text = "hoToolsBasic.xml";
-            this.toolTip1.SetToolTip(this.rbAutoLoadMdgBasic, "Basic queries & scripts\r\n\r\nSee in installation folder:\r\nc:\\user\\<userName>\\AppDat" +
-        "a\\Local\\Apps\\hoTools\\..");
+            this.toolTip1.SetToolTip(this.rbAutoLoadMdgBasic, "Install Basic queries & scripts\r\n\r\nSee in installation folder:\r\nc:\\user\\<userName" +
+        ">\\AppData\\Local\\Apps\\hoTools\\..");
             this.rbAutoLoadMdgBasic.UseVisualStyleBackColor = true;
             // 
             // chkConveyedItemSupport
@@ -553,6 +565,7 @@
             this.label8.Size = new System.Drawing.Size(113, 18);
             this.label8.TabIndex = 237;
             this.label8.Text = "- Blank to hide it";
+            this.toolTip1.SetToolTip(this.label8, resources.GetString("label8.ToolTip"));
             // 
             // FrmSettingsGeneral
             // 

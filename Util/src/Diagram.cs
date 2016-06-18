@@ -5,6 +5,11 @@ using System.Text;
 
 namespace hoTools.Utils
 {
+    /// <summary>
+    /// The Current diagram with:
+    /// <para/>Selected Objects
+    /// <para/>Selected Connector
+    /// </summary>
     public class EADiagram
     {
         readonly EA.Repository _rep;
@@ -13,6 +18,10 @@ namespace hoTools.Utils
 
         EA.Connector _selectedConnector;
         #region Constructor
+        /// <summary>
+        /// Get the current Diagram with it's selected objects and connectors.
+        /// </summary>
+        /// <param name="rep"></param>
         public EADiagram(EA.Repository rep)
         {
             _rep = rep;
@@ -49,7 +58,7 @@ namespace hoTools.Utils
         #region sortSelectedObjects
         public void sortSelectedObjects()
         {
-            // esteminate sort criteria (left/right, top/bottom)
+            // estimate sort criteria (left/right, top/bottom)
             bool isVerticalSorted = true;
             EA.DiagramObject obj1 = _dia.SelectedObjects.GetAt(0);
             EA.DiagramObject obj2 = _dia.SelectedObjects.GetAt(1);
@@ -69,7 +78,7 @@ namespace hoTools.Utils
             
             // sort name list and position list
             l_ids_by_name.Sort(new DiagramObjectComparer());
-            // sort diagram objects according to position and vertical/horizental sorting
+            // sort diagram objects according to position and vertical / horizontal sorting
             if (isVerticalSorted) l_obj_by_position.Sort(new DiagramObjectSelectedVerticalComparer());
             else l_obj_by_position.Sort(new DiagramObjectSelectedHorizontalComparer());
 

@@ -92,7 +92,7 @@
             this.rbOnlyQueryAddinWindow.TabIndex = 208;
             this.rbOnlyQueryAddinWindow.TabStop = true;
             this.rbOnlyQueryAddinWindow.Text = "Addin";
-            this.toolTip1.SetToolTip(this.rbOnlyQueryAddinWindow, "Show SQL in Addin Window");
+            this.toolTip1.SetToolTip(this.rbOnlyQueryAddinWindow, "Show SQL in Addin Window / Addin Tab");
             this.rbOnlyQueryAddinWindow.UseVisualStyleBackColor = true;
             // 
             // rbOnlyQueryTabWindow
@@ -159,13 +159,12 @@
             // 
             this.chkIsAskForUpdate.AutoSize = true;
             this.chkIsAskForUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkIsAskForUpdate.Location = new System.Drawing.Point(321, 169);
+            this.chkIsAskForUpdate.Location = new System.Drawing.Point(321, 171);
             this.chkIsAskForUpdate.Name = "chkIsAskForUpdate";
-            this.chkIsAskForUpdate.Size = new System.Drawing.Size(122, 22);
+            this.chkIsAskForUpdate.Size = new System.Drawing.Size(15, 14);
             this.chkIsAskForUpdate.TabIndex = 212;
-            this.chkIsAskForUpdate.Text = "Ask for update";
             this.toolTip1.SetToolTip(this.chkIsAskForUpdate, "If checked: SQL will ask to update  query display content if file has changed out" +
-        "side.");
+        "side.\r\n\r\nYou may use your beloved Editor.");
             this.chkIsAskForUpdate.UseVisualStyleBackColor = true;
             // 
             // txtSqlEditor
@@ -202,6 +201,7 @@
             this.groupBox1.TabIndex = 210;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Edit and run SQL";
+            this.toolTip1.SetToolTip(this.groupBox1, "Select if you want to show:\r\n- As Addin Tab\r\n- As Own Window\r\n- Not");
             // 
             // groupBox2
             // 
@@ -214,7 +214,8 @@
             this.groupBox2.Size = new System.Drawing.Size(334, 43);
             this.groupBox2.TabIndex = 211;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Edit SQL Query and run Script with results";
+            this.groupBox2.Text = "Run Script on SQL results";
+            this.toolTip1.SetToolTip(this.groupBox2, "Select if you want to show:\r\n- As Addin Tab\r\n- As Own Window\r\n- Not");
             // 
             // label2
             // 
@@ -222,9 +223,10 @@
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(26, 169);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(224, 18);
+            this.label2.Size = new System.Drawing.Size(276, 18);
             this.label2.TabIndex = 213;
-            this.label2.Text = "Ask for update if file has changed";
+            this.label2.Text = "Ask for update if file has changed outside";
+            this.toolTip1.SetToolTip(this.label2, "Ask for update if File has changed outside hoTools.");
             // 
             // openFileDialog1
             // 

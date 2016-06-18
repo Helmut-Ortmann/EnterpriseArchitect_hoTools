@@ -142,6 +142,11 @@ namespace hoTools.Query
             lblTitle.Text = _addinTabName;
 
             // Tab Pages for *.sql queries update
+            // Make sure the Container is initialized
+            if (components == null)
+            {
+                components = new System.ComponentModel.Container();
+            }
             _sqlTabCntrls = new SqlTabPagesCntrl(Model, AddinSettings, components, tabControlSql, txtSearchTerm,
                 newTabFromToolStripMenuItem, 
                 loadTabFromToolStripMenuItem, _addinTabName);

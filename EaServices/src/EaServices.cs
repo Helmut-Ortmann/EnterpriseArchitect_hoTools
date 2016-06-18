@@ -76,7 +76,7 @@ namespace hoTools.EaServices
             }
             catch (Exception e1)
             {
-                MessageBox.Show(e1.ToString(), "Search name:'" + searchName + "'");
+                MessageBox.Show( $"Search name:'{searchName}' not available", "Error run search, break!");
             }
         }
         #endregion
@@ -649,7 +649,7 @@ namespace hoTools.EaServices
         #endregion
         #region DisplayOperationForSelectedElement
         // display behavior or definition for selected element
-        // displayMode: "Behavior" or "Method"
+        // enum displayMode: "Behavior" or "Method"
         public static void DisplayOperationForSelectedElement(EA.Repository Repository, displayMode showBehavior)
         {
             EA.ObjectType oType = Repository.GetContextItemType();
@@ -683,68 +683,8 @@ namespace hoTools.EaServices
             if (oType.Equals(EA.ObjectType.otConnector))
             {
                 var con = (EA.Connector)Repository.GetContextObject();
-                if (con.Type.Equals("StateFlow"))
-                {
-
-                    EA.Method m = Util.getOperationFromConnector(Repository, con);
-                    if (m != null)
-                    {
-                        if (showBehavior.Equals(displayMode.Behavior))
-                        {
-                            Appl.DisplayBehaviorForOperation(Repository, m);
-                        }
-                        else
-                        {
-                            Repository.ShowInProjectView(m);
-                        }
-
-                    }
-
-
-                }
-
-                if (con.Type.Equals("Sequence"))
-                {
-                    // If name is of the form: OperationName(..) the operation is associated to an method
-                    string opName = con.Name;
-                    if (opName.EndsWith(")", StringComparison.Ordinal))
-                    {
-                        // extract the name
-                        int pos = opName.IndexOf("(", StringComparison.Ordinal);
-                        opName = opName.Substring(0, pos);
-                        EA.Element el = Repository.GetElementByID(con.SupplierID);
-                        // find operation by name
-                        foreach (EA.Method op in el.Methods)
-                        {
-                            if (op.Name == opName)
-                            {
-                                Repository.ShowInProjectView(op);
-                                //Appl.DisplayBehaviorForOperation(Repository, op);
-                                return;
-                            }
-                        }
-                        if ((el.Type.Equals("Sequence") || el.Type.Equals("Object")) && el.ClassfierID > 0)
-                        {
-                            el = (EA.Element)Repository.GetElementByID(el.ClassifierID);
-                            foreach (EA.Method op in el.Methods)
-                            {
-                                if (op.Name == opName)
-                                {
-                                    if (showBehavior.Equals(displayMode.Behavior))
-                                    {
-                                        Appl.DisplayBehaviorForOperation(Repository, op);
-                                    }
-                                    else
-                                    {
-                                        Repository.ShowInProjectView(op);
-                                    }
-
-                                }
-                            }
-                        }
-
-                    }
-                }
+                selectBehaviorFromConnector(Repository, con, showBehavior);
+                
             }
 
             // Element
@@ -795,6 +735,79 @@ namespace hoTools.EaServices
             }
         }
         #endregion
+
+        /// <summary>
+        /// Display behavior or definition for selected connector ("StateFlow","Sequence"). It Displays the operation (displayMode=Method) or the Behavior (displayMode=Behavior).
+        /// <para/>- enum displayMode: "Behavior" or "Method"
+        /// </summary>
+        /// <param name="con"></param>
+        static void selectBehaviorFromConnector(EA.Repository Repository, EA.Connector con, displayMode showBehavior)
+        {
+            if (con.Type.Equals("StateFlow"))
+            {
+
+                EA.Method m = Util.getOperationFromConnector(Repository, con);
+                if (m != null)
+                {
+                    if (showBehavior.Equals(displayMode.Behavior))
+                    {
+                        Appl.DisplayBehaviorForOperation(Repository, m);
+                    }
+                    else
+                    {
+                        Repository.ShowInProjectView(m);
+                    }
+
+                }
+
+
+            }
+
+            if (con.Type.Equals("Sequence"))
+            {
+                // If name is of the form: OperationName(..) the operation is associated to an method
+                string opName = con.Name;
+                if (opName.EndsWith(")", StringComparison.Ordinal))
+                {
+                    // extract the name
+                    int pos = opName.IndexOf("(", StringComparison.Ordinal);
+                    opName = opName.Substring(0, pos);
+                    EA.Element el = Repository.GetElementByID(con.SupplierID);
+                    // find operation by name
+                    foreach (EA.Method op in el.Methods)
+                    {
+                        if (op.Name == opName)
+                        {
+                            Repository.ShowInProjectView(op);
+                            //Appl.DisplayBehaviorForOperation(Repository, op);
+                            return;
+                        }
+                    }
+                    if ((el.Type.Equals("Sequence") || el.Type.Equals("Object")) && el.ClassfierID > 0)
+                    {
+                        el = (EA.Element)Repository.GetElementByID(el.ClassifierID);
+                        foreach (EA.Method op in el.Methods)
+                        {
+                            if (op.Name == opName)
+                            {
+                                if (showBehavior.Equals(displayMode.Behavior))
+                                {
+                                    Appl.DisplayBehaviorForOperation(Repository, op);
+                                }
+                                else
+                                {
+                                    Repository.ShowInProjectView(op);
+                                }
+
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
+
+
         static void showFromElement(EA.Repository Repository, EA.Element el, displayMode showBehavior)
         {
             EA.Method method = Util.getOperationFromAction(Repository, el);
@@ -1759,6 +1772,10 @@ namespace hoTools.EaServices
 
         }
 
+        /// <summary>
+        /// Locate the type for Connector, Method, Attribute, Diagram, Element, Package
+        /// </summary>
+        /// <param name="rep"></param>
         public static void locateType(EA.Repository rep)
         {
             EA.ObjectType oType = rep.GetContextItemType();
@@ -1779,6 +1796,10 @@ namespace hoTools.EaServices
 
                         if (trigger != null) rep.ShowInProjectView(trigger);
 
+                    }
+                    else
+                    {
+                        selectBehaviorFromConnector(rep, con, displayMode.Method);
                     }
                     break;
 

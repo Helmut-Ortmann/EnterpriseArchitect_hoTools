@@ -192,6 +192,51 @@
   <data name="toolStripQuery.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>None</value>
   </data>
+  <data name="toolStripQuery.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 0</value>
+  </data>
+  <data name="toolStripQuery.Size" type="System.Drawing.Size, System.Drawing">
+    <value>248, 25</value>
+  </data>
+  <data name="toolStripQuery.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;toolStripQuery.Name" xml:space="preserve">
+    <value>toolStripQuery</value>
+  </data>
+  <data name="&gt;&gt;toolStripQuery.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripQuery.Parent" xml:space="preserve">
+    <value>toolStripContainer1.TopToolStripPanel</value>
+  </data>
+  <data name="&gt;&gt;toolStripQuery.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;toolStripContainer1.TopToolStripPanel.Name" xml:space="preserve">
+    <value>toolStripContainer1.TopToolStripPanel</value>
+  </data>
+  <data name="&gt;&gt;toolStripContainer1.TopToolStripPanel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripContainer1.TopToolStripPanel.Parent" xml:space="preserve">
+    <value>toolStripContainer1</value>
+  </data>
+  <data name="&gt;&gt;toolStripContainer1.TopToolStripPanel.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;toolStripContainer1.Name" xml:space="preserve">
+    <value>toolStripContainer1</value>
+  </data>
+  <data name="&gt;&gt;toolStripContainer1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripContainer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripContainer1.Parent" xml:space="preserve">
+    <value>panelButtons</value>
+  </data>
+  <data name="&gt;&gt;toolStripContainer1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="toolStripSearchBtn1.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
@@ -279,51 +324,6 @@
   <data name="toolStripServiceBtn5.Text" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="toolStripQuery.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 0</value>
-  </data>
-  <data name="toolStripQuery.Size" type="System.Drawing.Size, System.Drawing">
-    <value>248, 25</value>
-  </data>
-  <data name="toolStripQuery.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;toolStripQuery.Name" xml:space="preserve">
-    <value>toolStripQuery</value>
-  </data>
-  <data name="&gt;&gt;toolStripQuery.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripQuery.Parent" xml:space="preserve">
-    <value>toolStripContainer1.TopToolStripPanel</value>
-  </data>
-  <data name="&gt;&gt;toolStripQuery.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;toolStripContainer1.TopToolStripPanel.Name" xml:space="preserve">
-    <value>toolStripContainer1.TopToolStripPanel</value>
-  </data>
-  <data name="&gt;&gt;toolStripContainer1.TopToolStripPanel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripContainer1.TopToolStripPanel.Parent" xml:space="preserve">
-    <value>toolStripContainer1</value>
-  </data>
-  <data name="&gt;&gt;toolStripContainer1.TopToolStripPanel.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;toolStripContainer1.Name" xml:space="preserve">
-    <value>toolStripContainer1</value>
-  </data>
-  <data name="&gt;&gt;toolStripContainer1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripContainer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripContainer1.Parent" xml:space="preserve">
-    <value>panelButtons</value>
-  </data>
-  <data name="&gt;&gt;toolStripContainer1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <metadata name="toolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>286, 17</value>
   </metadata>
@@ -340,13 +340,13 @@
     <value>37</value>
   </data>
   <data name="btnLabelRight.Text" xml:space="preserve">
-    <value>&gt; Label right</value>
+    <value>&gt; Labels right</value>
   </data>
   <data name="btnLabelRight.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
   <data name="btnLabelRight.ToolTip" xml:space="preserve">
-    <value>Move selected Ports label right</value>
+    <value>Move selected Ports labels right</value>
   </data>
   <data name="&gt;&gt;btnLabelRight.Name" xml:space="preserve">
     <value>btnLabelRight</value>
@@ -376,13 +376,13 @@
     <value>36</value>
   </data>
   <data name="btnLabelLeft.Text" xml:space="preserve">
-    <value>&lt; Label left</value>
+    <value>&lt; Labels left</value>
   </data>
   <data name="btnLabelLeft.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
   <data name="btnLabelLeft.ToolTip" xml:space="preserve">
-    <value>Move selected Ports label left</value>
+    <value>Move selected Ports labels left</value>
   </data>
   <data name="&gt;&gt;btnLabelLeft.Name" xml:space="preserve">
     <value>btnLabelLeft</value>
@@ -409,7 +409,7 @@
     <value>/\</value>
   </data>
   <data name="btnUp.ToolTip" xml:space="preserve">
-    <value>Move selected Ports down</value>
+    <value>Move selected Ports up, around the corner</value>
   </data>
   <data name="&gt;&gt;btnUp.Name" xml:space="preserve">
     <value>btnUp</value>
@@ -436,7 +436,7 @@
     <value>\/</value>
   </data>
   <data name="btnDown.ToolTip" xml:space="preserve">
-    <value>Move selected Ports up</value>
+    <value>Move selected Ports down, round the corner</value>
   </data>
   <data name="&gt;&gt;btnDown.Name" xml:space="preserve">
     <value>btnDown</value>
@@ -816,10 +816,10 @@ Search for (Tip Quick Search from MDG hoTools):
     <value>16</value>
   </data>
   <data name="btnComposite.Text" xml:space="preserve">
-    <value>Composite</value>
+    <value>Composite &lt;=&gt;</value>
   </data>
   <data name="btnComposite.ToolTip" xml:space="preserve">
-    <value>Navigate between Element and Composite Diagram</value>
+    <value>Navigate between Element and its Composite Diagram and vice versa</value>
   </data>
   <data name="&gt;&gt;btnComposite.Name" xml:space="preserve">
     <value>btnComposite</value>
@@ -909,7 +909,7 @@ Search for (Tip Quick Search from MDG hoTools):
     <value>Locate Type</value>
   </data>
   <data name="btnLocateType.ToolTip" xml:space="preserve">
-    <value>Locate to the type, trigger,signal...  of the selected element/connector</value>
+    <value>Locate the type, trigger,signal...  of the selected element/connector</value>
   </data>
   <data name="&gt;&gt;btnLocateType.Name" xml:space="preserve">
     <value>btnLocateType</value>
@@ -1296,6 +1296,36 @@ There is no interface to directly select more than one Browser Element (as far a
   <metadata name="menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>376, 17</value>
   </metadata>
+  <data name="menuStrip1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="menuStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>458, 24</value>
+  </data>
+  <data name="menuStrip1.TabIndex" type="System.Int32, mscorlib">
+    <value>22</value>
+  </data>
+  <data name="menuStrip1.Text" xml:space="preserve">
+    <value>menuStrip1</value>
+  </data>
+  <data name="&gt;&gt;menuStrip1.Name" xml:space="preserve">
+    <value>menuStrip1</value>
+  </data>
+  <data name="&gt;&gt;menuStrip1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.MenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;menuStrip1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;menuStrip1.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="fileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>37, 20</value>
+  </data>
+  <data name="fileToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;File</value>
+  </data>
   <data name="settingGeneralToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>294, 22</value>
   </data>
@@ -1352,11 +1382,14 @@ There is no interface to directly select more than one Browser Element (as far a
 - Own EA Tab Window
 - Disable</value>
   </data>
-  <data name="fileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>37, 20</value>
+  <data name="doToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>34, 20</value>
   </data>
-  <data name="fileToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;File</value>
+  <data name="doToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Do</value>
+  </data>
+  <data name="doToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Change Author of selected Package / Element</value>
   </data>
   <data name="createActivityForOperationToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>242, 22</value>
@@ -1439,14 +1472,14 @@ The application to open the folder: See global Settings</value>
 - Packages
 - Elements</value>
   </data>
-  <data name="doToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="versionControlToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>34, 20</value>
   </data>
-  <data name="doToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Do</value>
+  <data name="versionControlToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;VC</value>
   </data>
-  <data name="doToolStripMenuItem.ToolTipText" xml:space="preserve">
-    <value>Change Author of selected Package / Element</value>
+  <data name="versionControlToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Functions related to Version Control</value>
   </data>
   <data name="changeXMLFileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>291, 22</value>
@@ -1511,6 +1544,9 @@ Default: Explorer.exe</value>
 - svnDate
 - svnRevision</value>
   </data>
+  <data name="setSvnModuleTaggedValuesToolStripMenuItem.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="setSvnModuleTaggedValuesrecursiveToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>291, 22</value>
   </data>
@@ -1524,14 +1560,20 @@ Default: Explorer.exe</value>
 
 Select a package to proceed all recursive package.</value>
   </data>
-  <data name="versionControlToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>34, 20</value>
+  <data name="setSvnModuleTaggedValuesrecursiveToolStripMenuItem.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
-  <data name="versionControlToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;VC</value>
+  <data name="portToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>41, 20</value>
   </data>
-  <data name="versionControlToolStripMenuItem.ToolTipText" xml:space="preserve">
-    <value>Functions related to Version Control</value>
+  <data name="portToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Port</value>
+  </data>
+  <data name="portToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Functions related to port like:
+- Visibility
+- Move
+- Connect</value>
   </data>
   <data name="movePortsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>375, 22</value>
@@ -1573,9 +1615,10 @@ Target (last selected item):
     <value>&amp;Connect Ports between Components</value>
   </data>
   <data name="connectPortsToolStripMenuItem.ToolTipText" xml:space="preserve">
-    <value>Connect all Ports of:
-- Selected Class / Components
+    <value>Connect all Ports mit the same name between selected Elements or Ports:
+- Selected Elements
 - Selected Ports
+
 to each selected Class / Component / port with the same port name.
 </value>
   </data>
@@ -1584,6 +1627,9 @@ to each selected Class / Component / port with the same port name.
   </data>
   <data name="connectPortsInsideComponentsToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Connect Ports inside Components</value>
+  </data>
+  <data name="connectPortsInsideComponentsToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Connect ports with the same name inside an Element</value>
   </data>
   <data name="toolStripSeparator8.Size" type="System.Drawing.Size, System.Drawing">
     <value>372, 6</value>
@@ -1597,7 +1643,7 @@ to each selected Class / Component / port with the same port name.
   <data name="makeConnectorsUnspecifiedDirectionToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>Make all directions of connections of Port / Element unspecified.
 
-Select Element to make direction of all Port connections to unspecified.</value>
+Select Elements to make direction of all Port connections to unspecified.</value>
   </data>
   <data name="toolStripSeparator4.Size" type="System.Drawing.Size, System.Drawing">
     <value>372, 6</value>
@@ -1642,7 +1688,7 @@ Select Element to make direction of all Port connections to unspecified.</value>
     <value>375, 22</value>
   </data>
   <data name="unhidePortsToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Show Port label</value>
+    <value>&amp;Show Ports Labels</value>
   </data>
   <data name="unhidePortsToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>Show Port labels of selected:
@@ -1653,7 +1699,7 @@ Select Element to make direction of all Port connections to unspecified.</value>
     <value>375, 22</value>
   </data>
   <data name="hidePortsToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Hide Port label</value>
+    <value>&amp;Hide Ports Labels</value>
   </data>
   <data name="hidePortsToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>Hide Port labels of selected:
@@ -1667,13 +1713,29 @@ Select Element to make direction of all Port connections to unspecified.</value>
     <value>375, 22</value>
   </data>
   <data name="movePortLabelLeftToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Move Port label left position</value>
+    <value>&amp;Move Port Labels left to a Left Position</value>
+  </data>
+  <data name="movePortLabelLeftToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Select Ports: It Moves Port Labels to a Left Position from the Port.
+
+Tip:
+- Select Ports
+- Move Port Labels to Left Position
+- Fine tune position by a step/bit left or right</value>
   </data>
   <data name="movePortLabelRightPositionToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>375, 22</value>
   </data>
   <data name="movePortLabelRightPositionToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Move port label right position</value>
+    <value>&amp;Move Port Labels to a Right Position </value>
+  </data>
+  <data name="movePortLabelRightPositionToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Select Ports: It Moves Port Labels to a Right Position from the Port
+
+Tip:
+- Select Ports
+- Move Port Labels to Righ Position
+- Fine tune position by a step/bit left or right</value>
   </data>
   <data name="toolStripSeparator12.Size" type="System.Drawing.Size, System.Drawing">
     <value>372, 6</value>
@@ -1682,13 +1744,19 @@ Select Element to make direction of all Port connections to unspecified.</value>
     <value>375, 22</value>
   </data>
   <data name="movePortLabelLeftToolStripMenuItem1.Text" xml:space="preserve">
-    <value>&amp;Move Port label left</value>
+    <value>&amp;Move Port Labels a step left</value>
+  </data>
+  <data name="movePortLabelLeftToolStripMenuItem1.ToolTipText" xml:space="preserve">
+    <value>Ports selected: It moves the selecte Ports a little left</value>
   </data>
   <data name="movePortLabelRightToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>375, 22</value>
   </data>
   <data name="movePortLabelRightToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Move Port label right</value>
+    <value>&amp;Move Port Labels a step right</value>
+  </data>
+  <data name="movePortLabelRightToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Ports selected: It moves the selected Ports a little right</value>
   </data>
   <data name="toolStripSeparator9.Size" type="System.Drawing.Size, System.Drawing">
     <value>372, 6</value>
@@ -1703,20 +1771,14 @@ Select Element to make direction of all Port connections to unspecified.</value>
     <value>Order selected Diagram objects alphabetically.
 </value>
   </data>
-  <data name="portToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>41, 20</value>
+  <data name="helpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>44, 20</value>
   </data>
-  <data name="portToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Port</value>
-  </data>
-  <data name="portToolStripMenuItem.ToolTipText" xml:space="preserve">
-    <value>Functions related to port like:
-- Visibility
-- Move
-- Connect</value>
+  <data name="helpToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Help</value>
   </data>
   <data name="aboutToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>107, 22</value>
+    <value>152, 22</value>
   </data>
   <data name="aboutToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;About</value>
@@ -1725,43 +1787,13 @@ Select Element to make direction of all Port connections to unspecified.</value>
     <value>Information about hoTools</value>
   </data>
   <data name="helpToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>107, 22</value>
+    <value>152, 22</value>
   </data>
   <data name="helpToolStripMenuItem1.Text" xml:space="preserve">
     <value>&amp;Help</value>
   </data>
   <data name="helpToolStripMenuItem1.ToolTipText" xml:space="preserve">
     <value>Help</value>
-  </data>
-  <data name="helpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>44, 20</value>
-  </data>
-  <data name="helpToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Help</value>
-  </data>
-  <data name="menuStrip1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="menuStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>458, 24</value>
-  </data>
-  <data name="menuStrip1.TabIndex" type="System.Int32, mscorlib">
-    <value>22</value>
-  </data>
-  <data name="menuStrip1.Text" xml:space="preserve">
-    <value>menuStrip1</value>
-  </data>
-  <data name="&gt;&gt;menuStrip1.Name" xml:space="preserve">
-    <value>menuStrip1</value>
-  </data>
-  <data name="&gt;&gt;menuStrip1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.MenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;menuStrip1.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;menuStrip1.ZOrder" xml:space="preserve">
-    <value>8</value>
   </data>
   <data name="panelButtons.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
@@ -1874,24 +1906,6 @@ Select Element to make direction of all Port connections to unspecified.</value>
   <data name="&gt;&gt;panelNote.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="lblPorts.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblPorts.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 12pt</value>
-  </data>
-  <data name="lblPorts.Location" type="System.Drawing.Point, System.Drawing">
-    <value>80, 7</value>
-  </data>
-  <data name="lblPorts.Size" type="System.Drawing.Size, System.Drawing">
-    <value>46, 20</value>
-  </data>
-  <data name="lblPorts.TabIndex" type="System.Int32, mscorlib">
-    <value>38</value>
-  </data>
-  <data name="lblPorts.Text" xml:space="preserve">
-    <value>Ports</value>
-  </data>
   <data name="&gt;&gt;lblPorts.Name" xml:space="preserve">
     <value>lblPorts</value>
   </data>
@@ -1931,6 +1945,36 @@ Select Element to make direction of all Port connections to unspecified.</value>
   <data name="&gt;&gt;panelPort.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="lblPorts.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblPorts.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 12pt</value>
+  </data>
+  <data name="lblPorts.Location" type="System.Drawing.Point, System.Drawing">
+    <value>80, 7</value>
+  </data>
+  <data name="lblPorts.Size" type="System.Drawing.Size, System.Drawing">
+    <value>46, 20</value>
+  </data>
+  <data name="lblPorts.TabIndex" type="System.Int32, mscorlib">
+    <value>38</value>
+  </data>
+  <data name="lblPorts.Text" xml:space="preserve">
+    <value>Ports</value>
+  </data>
+  <data name="&gt;&gt;lblPorts.Name" xml:space="preserve">
+    <value>lblPorts</value>
+  </data>
+  <data name="&gt;&gt;lblPorts.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblPorts.Parent" xml:space="preserve">
+    <value>panelPort</value>
+  </data>
+  <data name="&gt;&gt;lblPorts.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="panelAdvanced.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
   </data>
@@ -1957,21 +2001,6 @@ Select Element to make direction of all Port connections to unspecified.</value>
   </data>
   <data name="&gt;&gt;panelAdvanced.ZOrder" xml:space="preserve">
     <value>2</value>
-  </data>
-  <data name="lblConveyedItems.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblConveyedItems.Location" type="System.Drawing.Point, System.Drawing">
-    <value>192, 6</value>
-  </data>
-  <data name="lblConveyedItems.Size" type="System.Drawing.Size, System.Drawing">
-    <value>83, 13</value>
-  </data>
-  <data name="lblConveyedItems.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="lblConveyedItems.Text" xml:space="preserve">
-    <value>Conveyed Items</value>
   </data>
   <data name="&gt;&gt;lblConveyedItems.Name" xml:space="preserve">
     <value>lblConveyedItems</value>
@@ -2012,6 +2041,33 @@ Select Element to make direction of all Port connections to unspecified.</value>
   <data name="&gt;&gt;panelConveyedItems.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
+  <data name="lblConveyedItems.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblConveyedItems.Location" type="System.Drawing.Point, System.Drawing">
+    <value>192, 6</value>
+  </data>
+  <data name="lblConveyedItems.Size" type="System.Drawing.Size, System.Drawing">
+    <value>83, 13</value>
+  </data>
+  <data name="lblConveyedItems.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="lblConveyedItems.Text" xml:space="preserve">
+    <value>Conveyed Items</value>
+  </data>
+  <data name="&gt;&gt;lblConveyedItems.Name" xml:space="preserve">
+    <value>lblConveyedItems</value>
+  </data>
+  <data name="&gt;&gt;lblConveyedItems.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblConveyedItems.Parent" xml:space="preserve">
+    <value>panelConveyedItems</value>
+  </data>
+  <data name="&gt;&gt;lblConveyedItems.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="panelQuickSearch.ColumnCount" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
@@ -2044,6 +2100,15 @@ Select Element to make direction of all Port connections to unspecified.</value>
   </data>
   <data name="panelQuickSearch.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
     <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="txtSearchName" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="txtSearchText" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100,Absolute,150" /&gt;&lt;Rows Styles="Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <data name="getLastSQLErrorToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>165, 22</value>
+  </data>
+  <data name="getLastSQLErrorToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Get last SQL Error</value>
+  </data>
+  <data name="getLastSQLErrorToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Get the last EA sql error from %APPDATA%Sparx Systems\EA\DBError.txt</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -2436,6 +2501,12 @@ Select Element to make direction of all Port connections to unspecified.</value>
     <value>helpToolStripMenuItem1</value>
   </data>
   <data name="&gt;&gt;helpToolStripMenuItem1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;getLastSQLErrorToolStripMenuItem.Name" xml:space="preserve">
+    <value>getLastSQLErrorToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;getLastSQLErrorToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">

@@ -21,6 +21,10 @@ namespace hoTools.EAServicesPort
         
 
         #region Constructor
+        /// <summary>
+        /// Port services like: Label, Connect, Copy, Delete,..
+        /// </summary>
+        /// <param name="rep"></param>
         public PortServices(EA.Repository rep)
         {
             _rep = rep;
@@ -33,6 +37,9 @@ namespace hoTools.EAServicesPort
        
 
         #region copyPortsGUI
+        /// <summary>
+        /// Copy Ports
+        /// </summary>
         public void copyPortsGUI()
         {
             try
@@ -274,9 +281,9 @@ namespace hoTools.EAServicesPort
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
-                // get Diagram data
+                // remember Diagram data of current selected diagram
                 var eaDia = new EADiagram(_rep);
-
+                
                 // hide all ports
                 removePortFromDiagramGUI();
                 // show all ports
@@ -635,6 +642,10 @@ namespace hoTools.EAServicesPort
 
 
         #region connectPortsGUID
+        /// <summary>
+        /// Connect Ports between selected Elements from GUI with Mouse Wait
+        /// It connects Ports of different elements with the same name with a not directed connector
+        /// </summary>
         public void connectPortsGUI()
         {
             try
@@ -688,11 +699,12 @@ namespace hoTools.EAServicesPort
                 l_el_id = rec.getItemsRecursive(pkg);
             }
 
-            // between all components
+            // between all components / classes
             for (int i1 = 0; i1 < l_el_id.Count -1; i1 +=1)
             {
+                // source id
                 int srcId = l_el_id[i1];
-                _rep.ShowInProjectView(_rep.GetElementByID(i1) );
+                _rep.ShowInProjectView(_rep.GetElementByID(srcId) );
                 EA.Element srcEl = _rep.GetElementByID(srcId);
                 for (int i2 = i1+1; i2 < l_el_id.Count; i2 += 1)
                 {
@@ -719,20 +731,20 @@ namespace hoTools.EAServicesPort
                     // don't connect to itself
                     if (srcPort.Name == trgtPort.Name && srcPort.ElementID != trgtPort.ElementID)
                     {
-                        if (srcPort.Stereotype != trgtEl.Stereotype)
-                        {
-                            // only connect:
-                            // sender to receiver
-                            // client to server
-                            // check if connection already exists
-                            if (srcPort.Stereotype == "Sender")
-                                if (trgtPort.Stereotype != "Receiver") continue;
-                            if (srcPort.Stereotype == "Receiver")
-                                if (trgtPort.Stereotype != "Sender") continue;
-                            if (srcPort.Stereotype == "Client")
-                                if (trgtPort.Stereotype != "Server") continue;
-                            if (srcPort.Stereotype == "Server")
-                                if (trgtPort.Stereotype != "Client") continue;
+                        //if (srcPort.Stereotype != trgtEl.Stereotype)
+                        //{
+                        //    // only connect:
+                        //    // sender to receiver
+                        //    // client to server
+                        //    // check if connection already exists
+                        //    if (srcPort.Stereotype == "Sender")
+                        //        if (trgtPort.Stereotype != "Receiver") continue;
+                        //    if (srcPort.Stereotype == "Receiver")
+                        //        if (trgtPort.Stereotype != "Sender") continue;
+                        //    if (srcPort.Stereotype == "Client")
+                        //        if (trgtPort.Stereotype != "Server") continue;
+                        //    if (srcPort.Stereotype == "Server")
+                        //        if (trgtPort.Stereotype != "Client") continue;
 
                             var sql = new UtilSql(_rep);
                             if (sql.isConnectionAvailable(srcPort, trgtPort) == false)
@@ -755,7 +767,7 @@ namespace hoTools.EAServicesPort
                                     _count += 1;
                                 }
                             }
-                        }
+                        //}
                     }
                 }
             }

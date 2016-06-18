@@ -9,9 +9,8 @@ using hoTools.Settings.Key;
 using hoTools.Settings.Toolbar;
 
 using hoTools.Utils.SQL;
+using hoTools.Utils;
 
-using System.Threading;
-using System.Globalization;
 
 
 namespace hoTools.ActiveX
@@ -146,6 +145,7 @@ namespace hoTools.ActiveX
         private TableLayoutPanel panelQuickSearch;
         private ToolStripMenuItem updateActivityFromOperationToolStripMenuItem;
         private ToolStripSeparator toolStripSeparator10;
+        private ToolStripMenuItem getLastSQLErrorToolStripMenuItem;
         private TextBox txtSearchText;
         #endregion
 
@@ -635,6 +635,11 @@ namespace hoTools.ActiveX
 
         }
 
+        /// <summary>
+        /// Connect ports with the same name in a component / class
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void connectPortsInsideComponentsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var port = new PortServices(Repository);
@@ -888,6 +893,7 @@ namespace hoTools.ActiveX
             this.panelConveyedItems = new System.Windows.Forms.Panel();
             this.lblConveyedItems = new System.Windows.Forms.Label();
             this.panelQuickSearch = new System.Windows.Forms.TableLayoutPanel();
+            this.getLastSQLErrorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
             this.toolStripQuery.SuspendLayout();
@@ -1607,6 +1613,7 @@ namespace hoTools.ActiveX
             // 
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.aboutToolStripMenuItem,
+            this.getLastSQLErrorToolStripMenuItem,
             this.helpToolStripMenuItem1});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             resources.ApplyResources(this.helpToolStripMenuItem, "helpToolStripMenuItem");
@@ -1708,6 +1715,12 @@ namespace hoTools.ActiveX
             this.panelQuickSearch.Controls.Add(this.txtSearchName, 0, 0);
             this.panelQuickSearch.Controls.Add(this.txtSearchText, 0, 0);
             this.panelQuickSearch.Name = "panelQuickSearch";
+            // 
+            // getLastSQLErrorToolStripMenuItem
+            // 
+            this.getLastSQLErrorToolStripMenuItem.Name = "getLastSQLErrorToolStripMenuItem";
+            resources.ApplyResources(this.getLastSQLErrorToolStripMenuItem, "getLastSQLErrorToolStripMenuItem");
+            this.getLastSQLErrorToolStripMenuItem.Click += new System.EventHandler(this.getLastSQLErrorToolStripMenuItem_Click);
             // 
             // AddinControlGUI
             // 
@@ -2107,7 +2120,7 @@ namespace hoTools.ActiveX
                 string sql = @"
                         select  o.ea_guid AS CLASSGUID, o.object_type AS CLASSTYPE, o.name As Element
                         from t_object o
-                        where  o.element_id in ( #ConveyedItemIDS# )
+                        where  o.object_id in ( #ConveyedItemIDS# )
                         ORDER BY 3
                 ";
                 // Run SQL with macro replacement
@@ -2120,6 +2133,9 @@ namespace hoTools.ActiveX
             }
         }
 
-        
+        void getLastSQLErrorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Util.StartFile(SqlError.getEaSqlErrorFilePath());
+        }
     }
 }
