@@ -66,14 +66,7 @@ namespace hoTools.Query
         {
             get
             {
-                if (IsPersistant)
-                {
-                    _saveTime = File.GetLastWriteTime(_fullName);
-                }
-                else
-                {
-                    _saveTime = DateTime.MinValue;
-                }
+                _saveTime = IsPersistant ? File.GetLastWriteTime(_fullName) : DateTime.MinValue;
                 return _saveTime;
             }
         }
@@ -89,17 +82,19 @@ namespace hoTools.Query
         #endregion
 
         #region Constructors SqlFile
+
         /// <summary>
         /// Constructor. If the file is persistent then register a Watcher
         /// <para/>- Initialize file system watcher
         /// </summary>
         /// <param name="fullName"></param>
         /// <param name="isChanged">Default=true</param>
+        /// <param name="sqlTabPagesCntrl"></param>
         public SqlFile(SqlTabPagesCntrl sqlTabPagesCntrl, TabPage tabPage, string fullName, bool isChanged = true)
         {
             _tabPage = tabPage;
             _sqlTabPagesCntrl = sqlTabPagesCntrl;
-            initTabPageCaption(fullName, isChanged);
+            InitTabPageCaption(fullName, isChanged);
             ReadTime = DateTime.Now;
 
             // create FileMonitor
@@ -145,7 +140,7 @@ namespace hoTools.Query
         /// </summary>
         /// <param name="fullName"></param>
         /// <param name="isChanged"></param>
-        void initTabPageCaption(string fullName, bool isChanged)
+        void InitTabPageCaption(string fullName, bool isChanged)
         {
             IsChanged = isChanged;
             _fullName = fullName;
@@ -163,14 +158,12 @@ namespace hoTools.Query
 
             try
             {
-                TextBox t = (TextBox)_tabPage.Controls[0];
                 // run update TextBox in syncContext to make sure it works
                 _syncContext.Post(o => _sqlTabPagesCntrl.ReloadTabPageWithAsk(), null);
             }
             catch (Exception e)
             {
-                MessageBox.Show($"{e.ToString()}", "Error invoke foreign thread");
-                return;
+                MessageBox.Show($"{e}", @"Error invoke foreign thread");
             }
 
         }
@@ -181,7 +174,7 @@ namespace hoTools.Query
         /// </summary>
         /// <param name="text"></param>
         /// <returns></returns>
-        public bool save(string text)
+        public bool Save(string text)
         {
             try
             {
@@ -189,9 +182,9 @@ namespace hoTools.Query
                 _saveTime = DateTime.Now; // avoid 
                 IsChanged = false;
                 return true;
-            } catch (Exception e)
+            } catch (Exception)
             {
-                MessageBox.Show($"File '{_fullName}'\r\ne.toString()", "Error writing file!");
+                MessageBox.Show($"File '{_fullName}'\r\ne.toString()", @"Error writing file!");
                 return false;
             }
         }
@@ -199,7 +192,7 @@ namespace hoTools.Query
         /// Load from file.
         /// </summary>
         /// <returns>File content</returns>
-        public string load()
+        public string Load()
         {
             try
             {
@@ -208,9 +201,9 @@ namespace hoTools.Query
                 IsChanged = false;
                 return s;
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                MessageBox.Show($"File '{_fullName}'\r\ne.toString()", "Error reading file!");
+                MessageBox.Show($"File '{_fullName}'\r\ne.toString()", @"Error reading file!");
                 return "";
             }
         }
