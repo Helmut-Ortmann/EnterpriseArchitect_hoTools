@@ -17,7 +17,7 @@ namespace hoTools.Find
     [ProgId(PROGID)]
     [ComDefaultInterface(typeof(IFindAndReplaceGUI))]
 
-    public partial class FindAndReplaceGUI : AddinGUI, IFindAndReplaceGUI
+    public partial class FindAndReplaceGUI : AddinGui, IFindAndReplaceGUI
     {
         public const string PROGID = "hoTools.FindAndReplaceGUI";
         public const string TABULATOR = "Find";
@@ -199,10 +199,10 @@ namespace hoTools.Find
             string configFilePath = AddinSettings.ConfigFilePath;
             switch (AddinSettings.Customer)
             {
-                case AddinSettings.CustomerCfg.VAR1:
+                case AddinSettings.CustomerCfg.Var1:
                     EaService.aboutVAR1(Release, configFilePath);
                     break;
-                case AddinSettings.CustomerCfg.hoTools:
+                case AddinSettings.CustomerCfg.HoTools:
                     EaService.about(Release, configFilePath);
                     break;
                 default:
@@ -243,7 +243,7 @@ namespace hoTools.Find
         {
             if (e.KeyCode == Keys.Enter)
             {
-                EaService.runQuickSearch(Repository, AddinSettings.quickSearchName, txtUserText.Text);
+                EaService.runQuickSearch(Repository, AddinSettings.QuickSearchName, txtUserText.Text);
                 e.Handled = true;
             }
         }
@@ -252,7 +252,7 @@ namespace hoTools.Find
         private void txtUserText_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             txtUserText.Text = Clipboard.GetText();
-            EaService.runQuickSearch(Repository, AddinSettings.quickSearchName, txtUserText.Text);
+            EaService.runQuickSearch(Repository, AddinSettings.QuickSearchName, txtUserText.Text);
         }
 #endregion
         #region regularExpressionToolStripMenuItem_Click

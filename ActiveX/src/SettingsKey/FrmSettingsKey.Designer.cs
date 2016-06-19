@@ -1,11 +1,14 @@
-﻿namespace hoTools.Settings.Key
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace hoTools.Settings.Key
 {
     partial class FrmSettingsKey
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -1128,87 +1131,87 @@
         }
 
         #endregion
-        private System.Windows.Forms.Button btnOK;
-        private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.Label Hotkeys;
-        private System.Windows.Forms.ComboBox cmbGlobalKeyService5Mod4;
-        private System.Windows.Forms.ComboBox cmbGlobalKeyService5Mod2;
-        private System.Windows.Forms.ComboBox cmbGlobalKeyService5Mod3;
-        private System.Windows.Forms.ComboBox cmbGlobalKeyService5Mod1;
-        private System.Windows.Forms.ComboBox cmbGlobalKeyService5Key;
-        private System.Windows.Forms.TextBox cmbGlobalKey5Tooltip;
-        private System.Windows.Forms.ComboBox cmbGlobalKey5Service;
-        private System.Windows.Forms.ComboBox cmbGlobalKeyService4Mod4;
-        private System.Windows.Forms.ComboBox cmbGlobalKeyService4Mod2;
-        private System.Windows.Forms.ComboBox cmbGlobalKeyService4Mod3;
-        private System.Windows.Forms.ComboBox cmbGlobalKeyService4Mod1;
-        private System.Windows.Forms.ComboBox cmbGlobalKeyService4Key;
-        private System.Windows.Forms.TextBox cmbGlobalKey4Tooltip;
-        private System.Windows.Forms.ComboBox cmbGlobalKey4Service;
-        private System.Windows.Forms.ComboBox cmbGlobalKeyService3Mod4;
-        private System.Windows.Forms.ComboBox cmbGlobalKeyService3Mod2;
-        private System.Windows.Forms.ComboBox cmbGlobalKeyService3Mod3;
-        private System.Windows.Forms.ComboBox cmbGlobalKeyService3Mod1;
-        private System.Windows.Forms.ComboBox cmbGlobalKeyService3Key;
-        private System.Windows.Forms.TextBox cmbGlobalKey3Tooltip;
-        private System.Windows.Forms.ComboBox cmbGlobalKey3Service;
-        private System.Windows.Forms.ComboBox cmbGlobalKeyService2Mod4;
-        private System.Windows.Forms.ComboBox cmbGlobalKeyService2Mod2;
-        private System.Windows.Forms.ComboBox cmbGlobalKeyService2Mod3;
-        private System.Windows.Forms.ComboBox cmbGlobalKeyService2Mod1;
-        private System.Windows.Forms.ComboBox cmbGlobalKeyService2Key;
-        private System.Windows.Forms.TextBox cmbGlobalKey2Tooltip;
-        private System.Windows.Forms.ComboBox cmbGlobalKey2Service;
-        private System.Windows.Forms.ComboBox cmbGlobalKeyService1Mod4;
-        private System.Windows.Forms.ComboBox cmbGlobalKeyService1Mod2;
-        private System.Windows.Forms.ComboBox cmbGlobalKeyService1Mod3;
-        private System.Windows.Forms.ComboBox cmbGlobalKeyService1Mod1;
-        private System.Windows.Forms.ComboBox cmbGlobalKeyService1Key;
-        private System.Windows.Forms.TextBox cmbGlobalKey1Tooltip;
-        private System.Windows.Forms.Label label27;
-        private System.Windows.Forms.Label label28;
-        private System.Windows.Forms.ComboBox cmbGlobalKey1Service;
-        private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.Label label30;
-        private System.Windows.Forms.Label label31;
-        private System.Windows.Forms.TextBox cmbGlobalKeySearch5SearchTerm;
-        private System.Windows.Forms.Label label32;
-        private System.Windows.Forms.TextBox cmbGlobalKeySearch5SearchName;
-        private System.Windows.Forms.ComboBox cmbGlobalKeySearch5Mod4;
-        private System.Windows.Forms.TextBox cmbGlobalKeySearch4SearchTerm;
-        private System.Windows.Forms.ComboBox cmbGlobalKeySearch5Mod2;
-        private System.Windows.Forms.TextBox cmbGlobalKeySearch4SearchName;
-        private System.Windows.Forms.ComboBox cmbGlobalKeySearch5Mod3;
-        private System.Windows.Forms.TextBox cmbGlobalKeySearch3SearchTerm;
-        private System.Windows.Forms.ComboBox cmbGlobalKeySearch5Mod1;
-        private System.Windows.Forms.TextBox cmbGlobalKeySearch3SearchName;
-        private System.Windows.Forms.ComboBox cmbGlobalKeySearch5Key;
-        private System.Windows.Forms.TextBox cmbGlobalKeySearch2SearchTerm;
-        private System.Windows.Forms.ComboBox cmbGlobalKeySearch4Mod4;
-        private System.Windows.Forms.TextBox cmbGlobalKeySearch2SearchName;
-        private System.Windows.Forms.ComboBox cmbGlobalKeySearch4Mod2;
-        private System.Windows.Forms.TextBox cmbGlobalKeySearch1SearchTerm;
-        private System.Windows.Forms.ComboBox cmbGlobalKeySearch4Mod3;
-        private System.Windows.Forms.TextBox cmbGlobalKeySearch1SearchName;
-        private System.Windows.Forms.ComboBox cmbGlobalKeySearch4Mod1;
-        private System.Windows.Forms.ComboBox cmbGlobalKeySearch4Key;
-        private System.Windows.Forms.ComboBox cmbGlobalKeySearch3Mod4;
-        private System.Windows.Forms.ComboBox cmbGlobalKeySearch3Mod2;
-        private System.Windows.Forms.ComboBox cmbGlobalKeySearch3Mod3;
-        private System.Windows.Forms.ComboBox cmbGlobalKeySearch3Mod1;
-        private System.Windows.Forms.ComboBox cmbGlobalKeySearch3Key;
-        private System.Windows.Forms.ComboBox cmbGlobalKeySearch2Mod4;
-        private System.Windows.Forms.ComboBox cmbGlobalKeySearch2Mod2;
-        private System.Windows.Forms.ComboBox cmbGlobalKeySearch2Mod3;
-        private System.Windows.Forms.ComboBox cmbGlobalKeySearch2Mod1;
-        private System.Windows.Forms.ComboBox cmbGlobalKeySearch2Key;
-        private System.Windows.Forms.ComboBox cmbGlobalKeySearch1Mod4;
-        private System.Windows.Forms.ComboBox cmbGlobalKeySearch1Mod2;
-        private System.Windows.Forms.ComboBox cmbGlobalKeySearch1Mod3;
-        private System.Windows.Forms.ComboBox cmbGlobalKeySearch1Mod1;
-        private System.Windows.Forms.ComboBox cmbGlobalKeySearch1Key;
-        private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.Label label1;
+        private Button btnOK;
+        private Button btnCancel;
+        private ToolTip toolTip1;
+        private Label Hotkeys;
+        private ComboBox cmbGlobalKeyService5Mod4;
+        private ComboBox cmbGlobalKeyService5Mod2;
+        private ComboBox cmbGlobalKeyService5Mod3;
+        private ComboBox cmbGlobalKeyService5Mod1;
+        private ComboBox cmbGlobalKeyService5Key;
+        private TextBox cmbGlobalKey5Tooltip;
+        private ComboBox cmbGlobalKey5Service;
+        private ComboBox cmbGlobalKeyService4Mod4;
+        private ComboBox cmbGlobalKeyService4Mod2;
+        private ComboBox cmbGlobalKeyService4Mod3;
+        private ComboBox cmbGlobalKeyService4Mod1;
+        private ComboBox cmbGlobalKeyService4Key;
+        private TextBox cmbGlobalKey4Tooltip;
+        private ComboBox cmbGlobalKey4Service;
+        private ComboBox cmbGlobalKeyService3Mod4;
+        private ComboBox cmbGlobalKeyService3Mod2;
+        private ComboBox cmbGlobalKeyService3Mod3;
+        private ComboBox cmbGlobalKeyService3Mod1;
+        private ComboBox cmbGlobalKeyService3Key;
+        private TextBox cmbGlobalKey3Tooltip;
+        private ComboBox cmbGlobalKey3Service;
+        private ComboBox cmbGlobalKeyService2Mod4;
+        private ComboBox cmbGlobalKeyService2Mod2;
+        private ComboBox cmbGlobalKeyService2Mod3;
+        private ComboBox cmbGlobalKeyService2Mod1;
+        private ComboBox cmbGlobalKeyService2Key;
+        private TextBox cmbGlobalKey2Tooltip;
+        private ComboBox cmbGlobalKey2Service;
+        private ComboBox cmbGlobalKeyService1Mod4;
+        private ComboBox cmbGlobalKeyService1Mod2;
+        private ComboBox cmbGlobalKeyService1Mod3;
+        private ComboBox cmbGlobalKeyService1Mod1;
+        private ComboBox cmbGlobalKeyService1Key;
+        private TextBox cmbGlobalKey1Tooltip;
+        private Label label27;
+        private Label label28;
+        private ComboBox cmbGlobalKey1Service;
+        private GroupBox groupBox4;
+        private Label label30;
+        private Label label31;
+        private TextBox cmbGlobalKeySearch5SearchTerm;
+        private Label label32;
+        private TextBox cmbGlobalKeySearch5SearchName;
+        private ComboBox cmbGlobalKeySearch5Mod4;
+        private TextBox cmbGlobalKeySearch4SearchTerm;
+        private ComboBox cmbGlobalKeySearch5Mod2;
+        private TextBox cmbGlobalKeySearch4SearchName;
+        private ComboBox cmbGlobalKeySearch5Mod3;
+        private TextBox cmbGlobalKeySearch3SearchTerm;
+        private ComboBox cmbGlobalKeySearch5Mod1;
+        private TextBox cmbGlobalKeySearch3SearchName;
+        private ComboBox cmbGlobalKeySearch5Key;
+        private TextBox cmbGlobalKeySearch2SearchTerm;
+        private ComboBox cmbGlobalKeySearch4Mod4;
+        private TextBox cmbGlobalKeySearch2SearchName;
+        private ComboBox cmbGlobalKeySearch4Mod2;
+        private TextBox cmbGlobalKeySearch1SearchTerm;
+        private ComboBox cmbGlobalKeySearch4Mod3;
+        private TextBox cmbGlobalKeySearch1SearchName;
+        private ComboBox cmbGlobalKeySearch4Mod1;
+        private ComboBox cmbGlobalKeySearch4Key;
+        private ComboBox cmbGlobalKeySearch3Mod4;
+        private ComboBox cmbGlobalKeySearch3Mod2;
+        private ComboBox cmbGlobalKeySearch3Mod3;
+        private ComboBox cmbGlobalKeySearch3Mod1;
+        private ComboBox cmbGlobalKeySearch3Key;
+        private ComboBox cmbGlobalKeySearch2Mod4;
+        private ComboBox cmbGlobalKeySearch2Mod2;
+        private ComboBox cmbGlobalKeySearch2Mod3;
+        private ComboBox cmbGlobalKeySearch2Mod1;
+        private ComboBox cmbGlobalKeySearch2Key;
+        private ComboBox cmbGlobalKeySearch1Mod4;
+        private ComboBox cmbGlobalKeySearch1Mod2;
+        private ComboBox cmbGlobalKeySearch1Mod3;
+        private ComboBox cmbGlobalKeySearch1Mod1;
+        private ComboBox cmbGlobalKeySearch1Key;
+        private GroupBox groupBox5;
+        private Label label1;
     }
 }

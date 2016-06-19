@@ -117,505 +117,505 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="&gt;&gt;toolStripContainer1.BottomToolStripPanel.Name" xml:space="preserve">
+  <data name="&gt;&gt;_toolStripContainer1.BottomToolStripPanel.Name" xml:space="preserve">
     <value>toolStripContainer1.BottomToolStripPanel</value>
   </data>
-  <data name="&gt;&gt;toolStripContainer1.BottomToolStripPanel.Type" xml:space="preserve">
+  <data name="&gt;&gt;_toolStripContainer1.BottomToolStripPanel.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripContainer1.BottomToolStripPanel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;_toolStripContainer1.BottomToolStripPanel.Parent" xml:space="preserve">
     <value>toolStripContainer1</value>
   </data>
-  <data name="&gt;&gt;toolStripContainer1.BottomToolStripPanel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_toolStripContainer1.BottomToolStripPanel.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="toolStripContainer1.ContentPanel.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_toolStripContainer1.ContentPanel.Size" type="System.Drawing.Size, System.Drawing">
     <value>458, 0</value>
   </data>
-  <data name="&gt;&gt;toolStripContainer1.ContentPanel.Name" xml:space="preserve">
+  <data name="&gt;&gt;_toolStripContainer1.ContentPanel.Name" xml:space="preserve">
     <value>toolStripContainer1.ContentPanel</value>
   </data>
-  <data name="&gt;&gt;toolStripContainer1.ContentPanel.Type" xml:space="preserve">
+  <data name="&gt;&gt;_toolStripContainer1.ContentPanel.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripContentPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripContainer1.ContentPanel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;_toolStripContainer1.ContentPanel.Parent" xml:space="preserve">
     <value>toolStripContainer1</value>
   </data>
-  <data name="&gt;&gt;toolStripContainer1.ContentPanel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_toolStripContainer1.ContentPanel.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="toolStripContainer1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+  <data name="_toolStripContainer1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="&gt;&gt;toolStripContainer1.LeftToolStripPanel.Name" xml:space="preserve">
+  <data name="&gt;&gt;_toolStripContainer1.LeftToolStripPanel.Name" xml:space="preserve">
     <value>toolStripContainer1.LeftToolStripPanel</value>
   </data>
-  <data name="&gt;&gt;toolStripContainer1.LeftToolStripPanel.Type" xml:space="preserve">
+  <data name="&gt;&gt;_toolStripContainer1.LeftToolStripPanel.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripContainer1.LeftToolStripPanel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;_toolStripContainer1.LeftToolStripPanel.Parent" xml:space="preserve">
     <value>toolStripContainer1</value>
   </data>
-  <data name="&gt;&gt;toolStripContainer1.LeftToolStripPanel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_toolStripContainer1.LeftToolStripPanel.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="toolStripContainer1.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_toolStripContainer1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
-  <data name="&gt;&gt;toolStripContainer1.RightToolStripPanel.Name" xml:space="preserve">
+  <data name="&gt;&gt;_toolStripContainer1.RightToolStripPanel.Name" xml:space="preserve">
     <value>toolStripContainer1.RightToolStripPanel</value>
   </data>
-  <data name="&gt;&gt;toolStripContainer1.RightToolStripPanel.Type" xml:space="preserve">
+  <data name="&gt;&gt;_toolStripContainer1.RightToolStripPanel.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripContainer1.RightToolStripPanel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;_toolStripContainer1.RightToolStripPanel.Parent" xml:space="preserve">
     <value>toolStripContainer1</value>
   </data>
-  <data name="&gt;&gt;toolStripContainer1.RightToolStripPanel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_toolStripContainer1.RightToolStripPanel.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="toolStripContainer1.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_toolStripContainer1.Size" type="System.Drawing.Size, System.Drawing">
     <value>458, 25</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="toolStripContainer1.TabIndex" type="System.Int32, mscorlib">
+  <data name="_toolStripContainer1.TabIndex" type="System.Int32, mscorlib">
     <value>28</value>
   </data>
-  <data name="toolStripContainer1.Text" xml:space="preserve">
+  <data name="_toolStripContainer1.Text" xml:space="preserve">
     <value>toolStripContainer1</value>
   </data>
-  <metadata name="toolStripQuery.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <metadata name="_toolStripQuery.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <data name="toolStripQuery.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+  <data name="_toolStripQuery.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>None</value>
   </data>
-  <data name="toolStripQuery.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_toolStripQuery.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 0</value>
   </data>
-  <data name="toolStripQuery.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_toolStripQuery.Size" type="System.Drawing.Size, System.Drawing">
     <value>248, 25</value>
   </data>
-  <data name="toolStripQuery.TabIndex" type="System.Int32, mscorlib">
+  <data name="_toolStripQuery.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;toolStripQuery.Name" xml:space="preserve">
-    <value>toolStripQuery</value>
+  <data name="&gt;&gt;_toolStripQuery.Name" xml:space="preserve">
+    <value>_toolStripQuery</value>
   </data>
-  <data name="&gt;&gt;toolStripQuery.Type" xml:space="preserve">
+  <data name="&gt;&gt;_toolStripQuery.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripQuery.Parent" xml:space="preserve">
+  <data name="&gt;&gt;_toolStripQuery.Parent" xml:space="preserve">
     <value>toolStripContainer1.TopToolStripPanel</value>
   </data>
-  <data name="&gt;&gt;toolStripQuery.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_toolStripQuery.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;toolStripContainer1.TopToolStripPanel.Name" xml:space="preserve">
+  <data name="&gt;&gt;_toolStripContainer1.TopToolStripPanel.Name" xml:space="preserve">
     <value>toolStripContainer1.TopToolStripPanel</value>
   </data>
-  <data name="&gt;&gt;toolStripContainer1.TopToolStripPanel.Type" xml:space="preserve">
+  <data name="&gt;&gt;_toolStripContainer1.TopToolStripPanel.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripContainer1.TopToolStripPanel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;_toolStripContainer1.TopToolStripPanel.Parent" xml:space="preserve">
     <value>toolStripContainer1</value>
   </data>
-  <data name="&gt;&gt;toolStripContainer1.TopToolStripPanel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_toolStripContainer1.TopToolStripPanel.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="&gt;&gt;toolStripContainer1.Name" xml:space="preserve">
-    <value>toolStripContainer1</value>
+  <data name="&gt;&gt;_toolStripContainer1.Name" xml:space="preserve">
+    <value>_toolStripContainer1</value>
   </data>
-  <data name="&gt;&gt;toolStripContainer1.Type" xml:space="preserve">
+  <data name="&gt;&gt;_toolStripContainer1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripContainer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripContainer1.Parent" xml:space="preserve">
-    <value>panelButtons</value>
+  <data name="&gt;&gt;_toolStripContainer1.Parent" xml:space="preserve">
+    <value>_panelButtons</value>
   </data>
-  <data name="&gt;&gt;toolStripContainer1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_toolStripContainer1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="toolStripSearchBtn1.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+  <data name="_toolStripSearchBtn1.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
-  <data name="toolStripSearchBtn1.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_toolStripSearchBtn1.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 22</value>
   </data>
-  <data name="toolStripSearchBtn1.Text" xml:space="preserve">
+  <data name="_toolStripSearchBtn1.Text" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="toolStripSearchBtn2.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_toolStripSearchBtn2.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 22</value>
   </data>
-  <data name="toolStripSearchBtn3.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+  <data name="_toolStripSearchBtn3.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
-  <data name="toolStripSearchBtn3.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_toolStripSearchBtn3.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 22</value>
   </data>
-  <data name="toolStripSearchBtn3.Text" xml:space="preserve">
+  <data name="_toolStripSearchBtn3.Text" xml:space="preserve">
     <value>F3</value>
   </data>
-  <data name="toolStripSearchBtn4.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+  <data name="_toolStripSearchBtn4.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
-  <data name="toolStripSearchBtn4.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_toolStripSearchBtn4.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 22</value>
   </data>
-  <data name="toolStripSearchBtn4.Text" xml:space="preserve">
+  <data name="_toolStripSearchBtn4.Text" xml:space="preserve">
     <value>F4</value>
   </data>
-  <data name="toolStripSearchBtn5.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+  <data name="_toolStripSearchBtn5.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
-  <data name="toolStripSearchBtn5.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_toolStripSearchBtn5.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 22</value>
   </data>
-  <data name="toolStripSearchBtn5.Text" xml:space="preserve">
+  <data name="_toolStripSearchBtn5.Text" xml:space="preserve">
     <value>F5</value>
   </data>
-  <data name="toolStripSeparator6.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_toolStripSeparator6.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 25</value>
   </data>
-  <data name="toolStripServiceBtn1.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+  <data name="_toolStripServiceBtn1.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
-  <data name="toolStripServiceBtn1.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_toolStripServiceBtn1.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 22</value>
   </data>
-  <data name="toolStripServiceBtn1.Text" xml:space="preserve">
+  <data name="_toolStripServiceBtn1.Text" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="toolStripServiceBtn2.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+  <data name="_toolStripServiceBtn2.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
-  <data name="toolStripServiceBtn2.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_toolStripServiceBtn2.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 22</value>
   </data>
-  <data name="toolStripServiceBtn2.Text" xml:space="preserve">
+  <data name="_toolStripServiceBtn2.Text" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="toolStripServiceBtn3.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+  <data name="_toolStripServiceBtn3.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
-  <data name="toolStripServiceBtn3.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_toolStripServiceBtn3.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 22</value>
   </data>
-  <data name="toolStripServiceBtn3.Text" xml:space="preserve">
+  <data name="_toolStripServiceBtn3.Text" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="toolStripServiceBtn4.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+  <data name="_toolStripServiceBtn4.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
-  <data name="toolStripServiceBtn4.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_toolStripServiceBtn4.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 22</value>
   </data>
-  <data name="toolStripServiceBtn4.Text" xml:space="preserve">
+  <data name="_toolStripServiceBtn4.Text" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="toolStripServiceBtn5.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+  <data name="_toolStripServiceBtn5.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
-  <data name="toolStripServiceBtn5.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_toolStripServiceBtn5.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 22</value>
   </data>
-  <data name="toolStripServiceBtn5.Text" xml:space="preserve">
+  <data name="_toolStripServiceBtn5.Text" xml:space="preserve">
     <value>5</value>
   </data>
-  <metadata name="toolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <metadata name="_toolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>286, 17</value>
   </metadata>
-  <data name="btnLabelRight.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="_btnLabelRight.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 9.75pt</value>
   </data>
-  <data name="btnLabelRight.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_btnLabelRight.Location" type="System.Drawing.Point, System.Drawing">
     <value>141, 24</value>
   </data>
-  <data name="btnLabelRight.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_btnLabelRight.Size" type="System.Drawing.Size, System.Drawing">
     <value>159, 23</value>
   </data>
-  <data name="btnLabelRight.TabIndex" type="System.Int32, mscorlib">
+  <data name="_btnLabelRight.TabIndex" type="System.Int32, mscorlib">
     <value>37</value>
   </data>
-  <data name="btnLabelRight.Text" xml:space="preserve">
+  <data name="_btnLabelRight.Text" xml:space="preserve">
     <value>&gt; Labels right</value>
   </data>
-  <data name="btnLabelRight.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+  <data name="_btnLabelRight.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="btnLabelRight.ToolTip" xml:space="preserve">
+  <data name="_btnLabelRight.ToolTip" xml:space="preserve">
     <value>Move selected Ports labels right</value>
   </data>
-  <data name="&gt;&gt;btnLabelRight.Name" xml:space="preserve">
-    <value>btnLabelRight</value>
+  <data name="&gt;&gt;_btnLabelRight.Name" xml:space="preserve">
+    <value>_btnLabelRight</value>
   </data>
-  <data name="&gt;&gt;btnLabelRight.Type" xml:space="preserve">
+  <data name="&gt;&gt;_btnLabelRight.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;btnLabelRight.Parent" xml:space="preserve">
-    <value>panelPort</value>
+  <data name="&gt;&gt;_btnLabelRight.Parent" xml:space="preserve">
+    <value>_panelPort</value>
   </data>
-  <data name="&gt;&gt;btnLabelRight.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_btnLabelRight.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="btnLabelLeft.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="_btnLabelLeft.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 9.75pt</value>
   </data>
-  <data name="btnLabelLeft.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+  <data name="_btnLabelLeft.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="btnLabelLeft.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_btnLabelLeft.Location" type="System.Drawing.Point, System.Drawing">
     <value>141, 0</value>
   </data>
-  <data name="btnLabelLeft.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_btnLabelLeft.Size" type="System.Drawing.Size, System.Drawing">
     <value>159, 23</value>
   </data>
-  <data name="btnLabelLeft.TabIndex" type="System.Int32, mscorlib">
+  <data name="_btnLabelLeft.TabIndex" type="System.Int32, mscorlib">
     <value>36</value>
   </data>
-  <data name="btnLabelLeft.Text" xml:space="preserve">
+  <data name="_btnLabelLeft.Text" xml:space="preserve">
     <value>&lt; Labels left</value>
   </data>
-  <data name="btnLabelLeft.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+  <data name="_btnLabelLeft.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
-  <data name="btnLabelLeft.ToolTip" xml:space="preserve">
+  <data name="_btnLabelLeft.ToolTip" xml:space="preserve">
     <value>Move selected Ports labels left</value>
   </data>
-  <data name="&gt;&gt;btnLabelLeft.Name" xml:space="preserve">
-    <value>btnLabelLeft</value>
+  <data name="&gt;&gt;_btnLabelLeft.Name" xml:space="preserve">
+    <value>_btnLabelLeft</value>
   </data>
-  <data name="&gt;&gt;btnLabelLeft.Type" xml:space="preserve">
+  <data name="&gt;&gt;_btnLabelLeft.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;btnLabelLeft.Parent" xml:space="preserve">
-    <value>panelPort</value>
+  <data name="&gt;&gt;_btnLabelLeft.Parent" xml:space="preserve">
+    <value>_panelPort</value>
   </data>
-  <data name="&gt;&gt;btnLabelLeft.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_btnLabelLeft.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="btnUp.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_btnUp.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 24</value>
   </data>
-  <data name="btnUp.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_btnUp.Size" type="System.Drawing.Size, System.Drawing">
     <value>32, 23</value>
   </data>
-  <data name="btnUp.TabIndex" type="System.Int32, mscorlib">
+  <data name="_btnUp.TabIndex" type="System.Int32, mscorlib">
     <value>35</value>
   </data>
-  <data name="btnUp.Text" xml:space="preserve">
+  <data name="_btnUp.Text" xml:space="preserve">
     <value>/\</value>
   </data>
-  <data name="btnUp.ToolTip" xml:space="preserve">
+  <data name="_btnUp.ToolTip" xml:space="preserve">
     <value>Move selected Ports up, around the corner</value>
   </data>
-  <data name="&gt;&gt;btnUp.Name" xml:space="preserve">
-    <value>btnUp</value>
+  <data name="&gt;&gt;_btnUp.Name" xml:space="preserve">
+    <value>_btnUp</value>
   </data>
-  <data name="&gt;&gt;btnUp.Type" xml:space="preserve">
+  <data name="&gt;&gt;_btnUp.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;btnUp.Parent" xml:space="preserve">
-    <value>panelPort</value>
+  <data name="&gt;&gt;_btnUp.Parent" xml:space="preserve">
+    <value>_panelPort</value>
   </data>
-  <data name="&gt;&gt;btnUp.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_btnUp.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="btnDown.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_btnDown.Location" type="System.Drawing.Point, System.Drawing">
     <value>41, 24</value>
   </data>
-  <data name="btnDown.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_btnDown.Size" type="System.Drawing.Size, System.Drawing">
     <value>32, 23</value>
   </data>
-  <data name="btnDown.TabIndex" type="System.Int32, mscorlib">
+  <data name="_btnDown.TabIndex" type="System.Int32, mscorlib">
     <value>34</value>
   </data>
-  <data name="btnDown.Text" xml:space="preserve">
+  <data name="_btnDown.Text" xml:space="preserve">
     <value>\/</value>
   </data>
-  <data name="btnDown.ToolTip" xml:space="preserve">
+  <data name="_btnDown.ToolTip" xml:space="preserve">
     <value>Move selected Ports down, round the corner</value>
   </data>
-  <data name="&gt;&gt;btnDown.Name" xml:space="preserve">
-    <value>btnDown</value>
+  <data name="&gt;&gt;_btnDown.Name" xml:space="preserve">
+    <value>_btnDown</value>
   </data>
-  <data name="&gt;&gt;btnDown.Type" xml:space="preserve">
+  <data name="&gt;&gt;_btnDown.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;btnDown.Parent" xml:space="preserve">
-    <value>panelPort</value>
+  <data name="&gt;&gt;_btnDown.Parent" xml:space="preserve">
+    <value>_panelPort</value>
   </data>
-  <data name="&gt;&gt;btnDown.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_btnDown.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="btnLeft.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="_btnLeft.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 12pt</value>
   </data>
-  <data name="btnLeft.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_btnLeft.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 0</value>
   </data>
-  <data name="btnLeft.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_btnLeft.Size" type="System.Drawing.Size, System.Drawing">
     <value>32, 23</value>
   </data>
-  <data name="btnLeft.TabIndex" type="System.Int32, mscorlib">
+  <data name="_btnLeft.TabIndex" type="System.Int32, mscorlib">
     <value>33</value>
   </data>
-  <data name="btnLeft.Text" xml:space="preserve">
+  <data name="_btnLeft.Text" xml:space="preserve">
     <value>&lt;</value>
   </data>
-  <data name="btnLeft.ToolTip" xml:space="preserve">
+  <data name="_btnLeft.ToolTip" xml:space="preserve">
     <value>Move selected Ports left</value>
   </data>
-  <data name="&gt;&gt;btnLeft.Name" xml:space="preserve">
-    <value>btnLeft</value>
+  <data name="&gt;&gt;_btnLeft.Name" xml:space="preserve">
+    <value>_btnLeft</value>
   </data>
-  <data name="&gt;&gt;btnLeft.Type" xml:space="preserve">
+  <data name="&gt;&gt;_btnLeft.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;btnLeft.Parent" xml:space="preserve">
-    <value>panelPort</value>
+  <data name="&gt;&gt;_btnLeft.Parent" xml:space="preserve">
+    <value>_panelPort</value>
   </data>
-  <data name="&gt;&gt;btnLeft.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_btnLeft.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="btnRight.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="_btnRight.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 12pt</value>
   </data>
-  <data name="btnRight.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_btnRight.Location" type="System.Drawing.Point, System.Drawing">
     <value>41, 0</value>
   </data>
-  <data name="btnRight.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_btnRight.Size" type="System.Drawing.Size, System.Drawing">
     <value>32, 23</value>
   </data>
-  <data name="btnRight.TabIndex" type="System.Int32, mscorlib">
+  <data name="_btnRight.TabIndex" type="System.Int32, mscorlib">
     <value>32</value>
   </data>
-  <data name="btnRight.Text" xml:space="preserve">
+  <data name="_btnRight.Text" xml:space="preserve">
     <value>&gt;</value>
   </data>
-  <data name="btnRight.ToolTip" xml:space="preserve">
+  <data name="_btnRight.ToolTip" xml:space="preserve">
     <value>Move selected Ports right</value>
   </data>
-  <data name="&gt;&gt;btnRight.Name" xml:space="preserve">
-    <value>btnRight</value>
+  <data name="&gt;&gt;_btnRight.Name" xml:space="preserve">
+    <value>_btnRight</value>
   </data>
-  <data name="&gt;&gt;btnRight.Type" xml:space="preserve">
+  <data name="&gt;&gt;_btnRight.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;btnRight.Parent" xml:space="preserve">
-    <value>panelPort</value>
+  <data name="&gt;&gt;_btnRight.Parent" xml:space="preserve">
+    <value>_panelPort</value>
   </data>
-  <data name="&gt;&gt;btnRight.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_btnRight.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="btnShowFavorites.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="_btnShowFavorites.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 9pt</value>
   </data>
-  <data name="btnShowFavorites.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_btnShowFavorites.Location" type="System.Drawing.Point, System.Drawing">
     <value>96, 0</value>
   </data>
-  <data name="btnShowFavorites.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_btnShowFavorites.Size" type="System.Drawing.Size, System.Drawing">
     <value>38, 23</value>
   </data>
-  <data name="btnShowFavorites.TabIndex" type="System.Int32, mscorlib">
+  <data name="_btnShowFavorites.TabIndex" type="System.Int32, mscorlib">
     <value>31</value>
   </data>
-  <data name="btnShowFavorites.Text" xml:space="preserve">
+  <data name="_btnShowFavorites.Text" xml:space="preserve">
     <value>F</value>
   </data>
-  <data name="btnShowFavorites.ToolTip" xml:space="preserve">
+  <data name="_btnShowFavorites.ToolTip" xml:space="preserve">
     <value>Display Favorites</value>
   </data>
-  <data name="&gt;&gt;btnShowFavorites.Name" xml:space="preserve">
-    <value>btnShowFavorites</value>
+  <data name="&gt;&gt;_btnShowFavorites.Name" xml:space="preserve">
+    <value>_btnShowFavorites</value>
   </data>
-  <data name="&gt;&gt;btnShowFavorites.Type" xml:space="preserve">
+  <data name="&gt;&gt;_btnShowFavorites.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;btnShowFavorites.Parent" xml:space="preserve">
-    <value>panelFavorite</value>
+  <data name="&gt;&gt;_btnShowFavorites.Parent" xml:space="preserve">
+    <value>_panelFavorite</value>
   </data>
-  <data name="&gt;&gt;btnShowFavorites.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_btnShowFavorites.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="btnRemoveFavorite.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="_btnRemoveFavorite.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 9pt</value>
   </data>
-  <data name="btnRemoveFavorite.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_btnRemoveFavorite.Location" type="System.Drawing.Point, System.Drawing">
     <value>51, 0</value>
   </data>
-  <data name="btnRemoveFavorite.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_btnRemoveFavorite.Size" type="System.Drawing.Size, System.Drawing">
     <value>38, 23</value>
   </data>
-  <data name="btnRemoveFavorite.TabIndex" type="System.Int32, mscorlib">
+  <data name="_btnRemoveFavorite.TabIndex" type="System.Int32, mscorlib">
     <value>30</value>
   </data>
-  <data name="btnRemoveFavorite.Text" xml:space="preserve">
+  <data name="_btnRemoveFavorite.Text" xml:space="preserve">
     <value>-</value>
   </data>
-  <data name="btnRemoveFavorite.ToolTip" xml:space="preserve">
+  <data name="_btnRemoveFavorite.ToolTip" xml:space="preserve">
     <value>Remove from to Favorite</value>
   </data>
-  <data name="&gt;&gt;btnRemoveFavorite.Name" xml:space="preserve">
-    <value>btnRemoveFavorite</value>
+  <data name="&gt;&gt;_btnRemoveFavorite.Name" xml:space="preserve">
+    <value>_btnRemoveFavorite</value>
   </data>
-  <data name="&gt;&gt;btnRemoveFavorite.Type" xml:space="preserve">
+  <data name="&gt;&gt;_btnRemoveFavorite.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;btnRemoveFavorite.Parent" xml:space="preserve">
-    <value>panelFavorite</value>
+  <data name="&gt;&gt;_btnRemoveFavorite.Parent" xml:space="preserve">
+    <value>_panelFavorite</value>
   </data>
-  <data name="&gt;&gt;btnRemoveFavorite.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_btnRemoveFavorite.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="btnAddFavorite.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="_btnAddFavorite.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 9pt</value>
   </data>
-  <data name="btnAddFavorite.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_btnAddFavorite.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
-  <data name="btnAddFavorite.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_btnAddFavorite.Size" type="System.Drawing.Size, System.Drawing">
     <value>38, 23</value>
   </data>
-  <data name="btnAddFavorite.TabIndex" type="System.Int32, mscorlib">
+  <data name="_btnAddFavorite.TabIndex" type="System.Int32, mscorlib">
     <value>29</value>
   </data>
-  <data name="btnAddFavorite.Text" xml:space="preserve">
+  <data name="_btnAddFavorite.Text" xml:space="preserve">
     <value>+</value>
   </data>
-  <data name="btnAddFavorite.ToolTip" xml:space="preserve">
+  <data name="_btnAddFavorite.ToolTip" xml:space="preserve">
     <value>Add to Favorite</value>
   </data>
-  <data name="&gt;&gt;btnAddFavorite.Name" xml:space="preserve">
-    <value>btnAddFavorite</value>
+  <data name="&gt;&gt;_btnAddFavorite.Name" xml:space="preserve">
+    <value>_btnAddFavorite</value>
   </data>
-  <data name="&gt;&gt;btnAddFavorite.Type" xml:space="preserve">
+  <data name="&gt;&gt;_btnAddFavorite.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;btnAddFavorite.Parent" xml:space="preserve">
-    <value>panelFavorite</value>
+  <data name="&gt;&gt;_btnAddFavorite.Parent" xml:space="preserve">
+    <value>_panelFavorite</value>
   </data>
-  <data name="&gt;&gt;btnAddFavorite.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_btnAddFavorite.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="txtSearchText.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+  <data name="_txtSearchText.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="txtSearchText.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_txtSearchText.Location" type="System.Drawing.Point, System.Drawing">
     <value>1, 1</value>
   </data>
-  <data name="txtSearchText.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="_txtSearchText.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="txtSearchText.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_txtSearchText.Size" type="System.Drawing.Size, System.Drawing">
     <value>306, 20</value>
   </data>
-  <data name="txtSearchText.TabIndex" type="System.Int32, mscorlib">
+  <data name="_txtSearchText.TabIndex" type="System.Int32, mscorlib">
     <value>27</value>
   </data>
-  <data name="txtSearchText.ToolTip" xml:space="preserve">
+  <data name="_txtSearchText.ToolTip" xml:space="preserve">
     <value>Run EA Search (see right) with:
 - Input text + Enter
 - Double left Click with insert Clipboard and start search
@@ -626,580 +626,580 @@ Search for (Tip Quick Search from MDG hoTools):
 - Port
 - etc.</value>
   </data>
-  <data name="&gt;&gt;txtSearchText.Name" xml:space="preserve">
-    <value>txtSearchText</value>
+  <data name="&gt;&gt;_txtSearchText.Name" xml:space="preserve">
+    <value>_txtSearchText</value>
   </data>
-  <data name="&gt;&gt;txtSearchText.Type" xml:space="preserve">
+  <data name="&gt;&gt;_txtSearchText.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;txtSearchText.Parent" xml:space="preserve">
-    <value>panelQuickSearch</value>
+  <data name="&gt;&gt;_txtSearchText.Parent" xml:space="preserve">
+    <value>_panelQuickSearch</value>
   </data>
-  <data name="&gt;&gt;txtSearchText.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_txtSearchText.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="btnBezier.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_btnBezier.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 26</value>
   </data>
-  <data name="btnBezier.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_btnBezier.Size" type="System.Drawing.Size, System.Drawing">
     <value>38, 23</value>
   </data>
-  <data name="btnBezier.TabIndex" type="System.Int32, mscorlib">
+  <data name="_btnBezier.TabIndex" type="System.Int32, mscorlib">
     <value>25</value>
   </data>
-  <data name="btnBezier.Text" xml:space="preserve">
+  <data name="_btnBezier.Text" xml:space="preserve">
     <value>B</value>
   </data>
-  <data name="btnBezier.ToolTip" xml:space="preserve">
+  <data name="_btnBezier.ToolTip" xml:space="preserve">
     <value>Bezier</value>
   </data>
-  <data name="&gt;&gt;btnBezier.Name" xml:space="preserve">
-    <value>btnBezier</value>
+  <data name="&gt;&gt;_btnBezier.Name" xml:space="preserve">
+    <value>_btnBezier</value>
   </data>
-  <data name="&gt;&gt;btnBezier.Type" xml:space="preserve">
+  <data name="&gt;&gt;_btnBezier.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;btnBezier.Parent" xml:space="preserve">
-    <value>panelLineStyle</value>
+  <data name="&gt;&gt;_btnBezier.Parent" xml:space="preserve">
+    <value>_panelLineStyle</value>
   </data>
-  <data name="&gt;&gt;btnBezier.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_btnBezier.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="btnUpdateActivityParameter.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="_btnUpdateActivityParameter.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 9pt</value>
   </data>
-  <data name="btnUpdateActivityParameter.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_btnUpdateActivityParameter.Location" type="System.Drawing.Point, System.Drawing">
     <value>141, 3</value>
   </data>
-  <data name="btnUpdateActivityParameter.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_btnUpdateActivityParameter.Size" type="System.Drawing.Size, System.Drawing">
     <value>160, 25</value>
   </data>
-  <data name="btnUpdateActivityParameter.TabIndex" type="System.Int32, mscorlib">
+  <data name="_btnUpdateActivityParameter.TabIndex" type="System.Int32, mscorlib">
     <value>23</value>
   </data>
-  <data name="btnUpdateActivityParameter.Text" xml:space="preserve">
+  <data name="_btnUpdateActivityParameter.Text" xml:space="preserve">
     <value>UpdateParameter</value>
   </data>
-  <data name="btnUpdateActivityParameter.ToolTip" xml:space="preserve">
+  <data name="_btnUpdateActivityParameter.ToolTip" xml:space="preserve">
     <value>Update Activity Parameter from operation</value>
   </data>
-  <data name="&gt;&gt;btnUpdateActivityParameter.Name" xml:space="preserve">
-    <value>btnUpdateActivityParameter</value>
+  <data name="&gt;&gt;_btnUpdateActivityParameter.Name" xml:space="preserve">
+    <value>_btnUpdateActivityParameter</value>
   </data>
-  <data name="&gt;&gt;btnUpdateActivityParameter.Type" xml:space="preserve">
+  <data name="&gt;&gt;_btnUpdateActivityParameter.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;btnUpdateActivityParameter.Parent" xml:space="preserve">
-    <value>panelAdvanced</value>
+  <data name="&gt;&gt;_btnUpdateActivityParameter.Parent" xml:space="preserve">
+    <value>_panelAdvanced</value>
   </data>
-  <data name="&gt;&gt;btnUpdateActivityParameter.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_btnUpdateActivityParameter.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="btnC.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_btnC.Location" type="System.Drawing.Point, System.Drawing">
     <value>188, 0</value>
   </data>
-  <data name="btnC.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_btnC.Size" type="System.Drawing.Size, System.Drawing">
     <value>39, 23</value>
   </data>
-  <data name="btnC.TabIndex" type="System.Int32, mscorlib">
+  <data name="_btnC.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
   </data>
-  <data name="btnC.Text" xml:space="preserve">
+  <data name="_btnC.Text" xml:space="preserve">
     <value>C</value>
   </data>
-  <data name="btnC.ToolTip" xml:space="preserve">
+  <data name="_btnC.ToolTip" xml:space="preserve">
     <value>Custom line</value>
   </data>
-  <data name="&gt;&gt;btnC.Name" xml:space="preserve">
-    <value>btnC</value>
+  <data name="&gt;&gt;_btnC.Name" xml:space="preserve">
+    <value>_btnC</value>
   </data>
-  <data name="&gt;&gt;btnC.Type" xml:space="preserve">
+  <data name="&gt;&gt;_btnC.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;btnC.Parent" xml:space="preserve">
-    <value>panelLineStyle</value>
+  <data name="&gt;&gt;_btnC.Parent" xml:space="preserve">
+    <value>_panelLineStyle</value>
   </data>
-  <data name="&gt;&gt;btnC.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_btnC.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="btnD.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_btnD.Location" type="System.Drawing.Point, System.Drawing">
     <value>188, 26</value>
   </data>
-  <data name="btnD.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_btnD.Size" type="System.Drawing.Size, System.Drawing">
     <value>38, 23</value>
   </data>
-  <data name="btnD.TabIndex" type="System.Int32, mscorlib">
+  <data name="_btnD.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
   </data>
-  <data name="btnD.Text" xml:space="preserve">
+  <data name="_btnD.Text" xml:space="preserve">
     <value>D</value>
   </data>
-  <data name="btnD.ToolTip" xml:space="preserve">
+  <data name="_btnD.ToolTip" xml:space="preserve">
     <value>Direct</value>
   </data>
-  <data name="&gt;&gt;btnD.Name" xml:space="preserve">
-    <value>btnD</value>
+  <data name="&gt;&gt;_btnD.Name" xml:space="preserve">
+    <value>_btnD</value>
   </data>
-  <data name="&gt;&gt;btnD.Type" xml:space="preserve">
+  <data name="&gt;&gt;_btnD.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;btnD.Parent" xml:space="preserve">
-    <value>panelLineStyle</value>
+  <data name="&gt;&gt;_btnD.Parent" xml:space="preserve">
+    <value>_panelLineStyle</value>
   </data>
-  <data name="&gt;&gt;btnD.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_btnD.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
-  <data name="btnA.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_btnA.Location" type="System.Drawing.Point, System.Drawing">
     <value>141, 26</value>
   </data>
-  <data name="btnA.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_btnA.Size" type="System.Drawing.Size, System.Drawing">
     <value>38, 23</value>
   </data>
-  <data name="btnA.TabIndex" type="System.Int32, mscorlib">
+  <data name="_btnA.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
   </data>
-  <data name="btnA.Text" xml:space="preserve">
+  <data name="_btnA.Text" xml:space="preserve">
     <value>A</value>
   </data>
-  <data name="btnA.ToolTip" xml:space="preserve">
+  <data name="_btnA.ToolTip" xml:space="preserve">
     <value>Orthogonal Rounded</value>
   </data>
-  <data name="&gt;&gt;btnA.Name" xml:space="preserve">
-    <value>btnA</value>
+  <data name="&gt;&gt;_btnA.Name" xml:space="preserve">
+    <value>_btnA</value>
   </data>
-  <data name="&gt;&gt;btnA.Type" xml:space="preserve">
+  <data name="&gt;&gt;_btnA.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;btnA.Parent" xml:space="preserve">
-    <value>panelLineStyle</value>
+  <data name="&gt;&gt;_btnA.Parent" xml:space="preserve">
+    <value>_panelLineStyle</value>
   </data>
-  <data name="&gt;&gt;btnA.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_btnA.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
-  <data name="btnOR.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_btnOr.Location" type="System.Drawing.Point, System.Drawing">
     <value>96, 26</value>
   </data>
-  <data name="btnOR.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_btnOr.Size" type="System.Drawing.Size, System.Drawing">
     <value>38, 23</value>
   </data>
-  <data name="btnOR.TabIndex" type="System.Int32, mscorlib">
+  <data name="_btnOr.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
   </data>
-  <data name="btnOR.Text" xml:space="preserve">
+  <data name="_btnOr.Text" xml:space="preserve">
     <value>OR</value>
   </data>
-  <data name="btnOR.ToolTip" xml:space="preserve">
+  <data name="_btnOr.ToolTip" xml:space="preserve">
     <value>Orthogonal Rounded</value>
   </data>
-  <data name="&gt;&gt;btnOR.Name" xml:space="preserve">
-    <value>btnOR</value>
+  <data name="&gt;&gt;_btnOr.Name" xml:space="preserve">
+    <value>_btnOr</value>
   </data>
-  <data name="&gt;&gt;btnOR.Type" xml:space="preserve">
+  <data name="&gt;&gt;_btnOr.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;btnOR.Parent" xml:space="preserve">
-    <value>panelLineStyle</value>
+  <data name="&gt;&gt;_btnOr.Parent" xml:space="preserve">
+    <value>_panelLineStyle</value>
   </data>
-  <data name="&gt;&gt;btnOR.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_btnOr.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
-  <data name="btnComposite.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="_btnComposite.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 9pt</value>
   </data>
-  <data name="btnComposite.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_btnComposite.Location" type="System.Drawing.Point, System.Drawing">
     <value>141, 54</value>
   </data>
-  <data name="btnComposite.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_btnComposite.Size" type="System.Drawing.Size, System.Drawing">
     <value>160, 25</value>
   </data>
-  <data name="btnComposite.TabIndex" type="System.Int32, mscorlib">
+  <data name="_btnComposite.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
   </data>
-  <data name="btnComposite.Text" xml:space="preserve">
+  <data name="_btnComposite.Text" xml:space="preserve">
     <value>Composite &lt;=&gt;</value>
   </data>
-  <data name="btnComposite.ToolTip" xml:space="preserve">
+  <data name="_btnComposite.ToolTip" xml:space="preserve">
     <value>Navigate between Element and its Composite Diagram and vice versa</value>
   </data>
-  <data name="&gt;&gt;btnComposite.Name" xml:space="preserve">
-    <value>btnComposite</value>
+  <data name="&gt;&gt;_btnComposite.Name" xml:space="preserve">
+    <value>_btnComposite</value>
   </data>
-  <data name="&gt;&gt;btnComposite.Type" xml:space="preserve">
+  <data name="&gt;&gt;_btnComposite.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;btnComposite.Parent" xml:space="preserve">
-    <value>panelAdvanced</value>
+  <data name="&gt;&gt;_btnComposite.Parent" xml:space="preserve">
+    <value>_panelAdvanced</value>
   </data>
-  <data name="&gt;&gt;btnComposite.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_btnComposite.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="btnDisplaySpecification.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="_btnDisplaySpecification.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 9pt</value>
   </data>
-  <data name="btnDisplaySpecification.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_btnDisplaySpecification.Location" type="System.Drawing.Point, System.Drawing">
     <value>1, 3</value>
   </data>
-  <data name="btnDisplaySpecification.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_btnDisplaySpecification.Size" type="System.Drawing.Size, System.Drawing">
     <value>133, 25</value>
   </data>
-  <data name="btnDisplaySpecification.TabIndex" type="System.Int32, mscorlib">
+  <data name="_btnDisplaySpecification.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
   </data>
-  <data name="btnDisplaySpecification.Text" xml:space="preserve">
+  <data name="_btnDisplaySpecification.Text" xml:space="preserve">
     <value>Specifications</value>
   </data>
-  <data name="btnDisplaySpecification.ToolTip" xml:space="preserve">
+  <data name="_btnDisplaySpecification.ToolTip" xml:space="preserve">
     <value>Display the Specifications of the selected Element. It outputs all files specified in it's properties.</value>
   </data>
-  <data name="&gt;&gt;btnDisplaySpecification.Name" xml:space="preserve">
-    <value>btnDisplaySpecification</value>
+  <data name="&gt;&gt;_btnDisplaySpecification.Name" xml:space="preserve">
+    <value>_btnDisplaySpecification</value>
   </data>
-  <data name="&gt;&gt;btnDisplaySpecification.Type" xml:space="preserve">
+  <data name="&gt;&gt;_btnDisplaySpecification.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;btnDisplaySpecification.Parent" xml:space="preserve">
-    <value>panelAdvanced</value>
+  <data name="&gt;&gt;_btnDisplaySpecification.Parent" xml:space="preserve">
+    <value>_panelAdvanced</value>
   </data>
-  <data name="&gt;&gt;btnDisplaySpecification.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_btnDisplaySpecification.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="btnFindUsage.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="_btnFindUsage.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 9pt</value>
   </data>
-  <data name="btnFindUsage.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_btnFindUsage.Location" type="System.Drawing.Point, System.Drawing">
     <value>140, 29</value>
   </data>
-  <data name="btnFindUsage.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_btnFindUsage.Size" type="System.Drawing.Size, System.Drawing">
     <value>160, 25</value>
   </data>
-  <data name="btnFindUsage.TabIndex" type="System.Int32, mscorlib">
+  <data name="_btnFindUsage.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
   </data>
-  <data name="btnFindUsage.Text" xml:space="preserve">
+  <data name="_btnFindUsage.Text" xml:space="preserve">
     <value>Find Usage</value>
   </data>
-  <data name="btnFindUsage.ToolTip" xml:space="preserve">
+  <data name="_btnFindUsage.ToolTip" xml:space="preserve">
     <value>Find the usage of the selected element</value>
   </data>
-  <data name="&gt;&gt;btnFindUsage.Name" xml:space="preserve">
-    <value>btnFindUsage</value>
+  <data name="&gt;&gt;_btnFindUsage.Name" xml:space="preserve">
+    <value>_btnFindUsage</value>
   </data>
-  <data name="&gt;&gt;btnFindUsage.Type" xml:space="preserve">
+  <data name="&gt;&gt;_btnFindUsage.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;btnFindUsage.Parent" xml:space="preserve">
-    <value>panelAdvanced</value>
+  <data name="&gt;&gt;_btnFindUsage.Parent" xml:space="preserve">
+    <value>_panelAdvanced</value>
   </data>
-  <data name="&gt;&gt;btnFindUsage.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_btnFindUsage.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="btnLocateType.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="_btnLocateType.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 9pt</value>
   </data>
-  <data name="btnLocateType.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_btnLocateType.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 54</value>
   </data>
-  <data name="btnLocateType.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_btnLocateType.Size" type="System.Drawing.Size, System.Drawing">
     <value>134, 25</value>
   </data>
-  <data name="btnLocateType.TabIndex" type="System.Int32, mscorlib">
+  <data name="_btnLocateType.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
   </data>
-  <data name="btnLocateType.Text" xml:space="preserve">
+  <data name="_btnLocateType.Text" xml:space="preserve">
     <value>Locate Type</value>
   </data>
-  <data name="btnLocateType.ToolTip" xml:space="preserve">
+  <data name="_btnLocateType.ToolTip" xml:space="preserve">
     <value>Locate the type, trigger,signal...  of the selected element/connector</value>
   </data>
-  <data name="&gt;&gt;btnLocateType.Name" xml:space="preserve">
-    <value>btnLocateType</value>
+  <data name="&gt;&gt;_btnLocateType.Name" xml:space="preserve">
+    <value>_btnLocateType</value>
   </data>
-  <data name="&gt;&gt;btnLocateType.Type" xml:space="preserve">
+  <data name="&gt;&gt;_btnLocateType.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;btnLocateType.Parent" xml:space="preserve">
-    <value>panelAdvanced</value>
+  <data name="&gt;&gt;_btnLocateType.Parent" xml:space="preserve">
+    <value>_panelAdvanced</value>
   </data>
-  <data name="&gt;&gt;btnLocateType.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_btnLocateType.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="btnAddDiagramNote.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="_btnAddDiagramNote.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 9pt</value>
   </data>
-  <data name="btnAddDiagramNote.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_btnAddDiagramNote.Location" type="System.Drawing.Point, System.Drawing">
     <value>141, 0</value>
   </data>
-  <data name="btnAddDiagramNote.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_btnAddDiagramNote.Size" type="System.Drawing.Size, System.Drawing">
     <value>160, 25</value>
   </data>
-  <data name="btnAddDiagramNote.TabIndex" type="System.Int32, mscorlib">
+  <data name="_btnAddDiagramNote.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
-  <data name="btnAddDiagramNote.Text" xml:space="preserve">
+  <data name="_btnAddDiagramNote.Text" xml:space="preserve">
     <value>Add Diagram Note</value>
   </data>
-  <data name="btnAddDiagramNote.ToolTip" xml:space="preserve">
+  <data name="_btnAddDiagramNote.ToolTip" xml:space="preserve">
     <value>Add a diagram note to the diagram (connected to diagram note)</value>
   </data>
-  <data name="&gt;&gt;btnAddDiagramNote.Name" xml:space="preserve">
-    <value>btnAddDiagramNote</value>
+  <data name="&gt;&gt;_btnAddDiagramNote.Name" xml:space="preserve">
+    <value>_btnAddDiagramNote</value>
   </data>
-  <data name="&gt;&gt;btnAddDiagramNote.Type" xml:space="preserve">
+  <data name="&gt;&gt;_btnAddDiagramNote.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;btnAddDiagramNote.Parent" xml:space="preserve">
-    <value>panelNote</value>
+  <data name="&gt;&gt;_btnAddDiagramNote.Parent" xml:space="preserve">
+    <value>_panelNote</value>
   </data>
-  <data name="&gt;&gt;btnAddDiagramNote.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_btnAddDiagramNote.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="btnAddElementNote.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="_btnAddElementNote.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 9pt</value>
   </data>
-  <data name="btnAddElementNote.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_btnAddElementNote.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
-  <data name="btnAddElementNote.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_btnAddElementNote.Size" type="System.Drawing.Size, System.Drawing">
     <value>134, 25</value>
   </data>
-  <data name="btnAddElementNote.TabIndex" type="System.Int32, mscorlib">
+  <data name="_btnAddElementNote.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
-  <data name="btnAddElementNote.Text" xml:space="preserve">
+  <data name="_btnAddElementNote.Text" xml:space="preserve">
     <value>Add Element Note</value>
   </data>
-  <data name="btnAddElementNote.ToolTip" xml:space="preserve">
+  <data name="_btnAddElementNote.ToolTip" xml:space="preserve">
     <value>Add an element note to an Element in a diagram</value>
   </data>
-  <data name="&gt;&gt;btnAddElementNote.Name" xml:space="preserve">
-    <value>btnAddElementNote</value>
+  <data name="&gt;&gt;_btnAddElementNote.Name" xml:space="preserve">
+    <value>_btnAddElementNote</value>
   </data>
-  <data name="&gt;&gt;btnAddElementNote.Type" xml:space="preserve">
+  <data name="&gt;&gt;_btnAddElementNote.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;btnAddElementNote.Parent" xml:space="preserve">
-    <value>panelNote</value>
+  <data name="&gt;&gt;_btnAddElementNote.Parent" xml:space="preserve">
+    <value>_panelNote</value>
   </data>
-  <data name="&gt;&gt;btnAddElementNote.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_btnAddElementNote.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="btnLocateOperation.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="_btnLocateOperation.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 9pt</value>
   </data>
-  <data name="btnLocateOperation.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_btnLocateOperation.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 29</value>
   </data>
-  <data name="btnLocateOperation.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_btnLocateOperation.Size" type="System.Drawing.Size, System.Drawing">
     <value>133, 25</value>
   </data>
-  <data name="btnLocateOperation.TabIndex" type="System.Int32, mscorlib">
+  <data name="_btnLocateOperation.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
-  <data name="btnLocateOperation.Text" xml:space="preserve">
+  <data name="_btnLocateOperation.Text" xml:space="preserve">
     <value>Locate Operation</value>
   </data>
-  <data name="btnLocateOperation.ToolTip" xml:space="preserve">
+  <data name="_btnLocateOperation.ToolTip" xml:space="preserve">
     <value>Locate the operation for an action or behavior (statechart, activity, interaction)</value>
   </data>
-  <data name="&gt;&gt;btnLocateOperation.Name" xml:space="preserve">
-    <value>btnLocateOperation</value>
+  <data name="&gt;&gt;_btnLocateOperation.Name" xml:space="preserve">
+    <value>_btnLocateOperation</value>
   </data>
-  <data name="&gt;&gt;btnLocateOperation.Type" xml:space="preserve">
+  <data name="&gt;&gt;_btnLocateOperation.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;btnLocateOperation.Parent" xml:space="preserve">
-    <value>panelAdvanced</value>
+  <data name="&gt;&gt;_btnLocateOperation.Parent" xml:space="preserve">
+    <value>_panelAdvanced</value>
   </data>
-  <data name="&gt;&gt;btnLocateOperation.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_btnLocateOperation.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="btnDisplayBehavior.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="_btnDisplayBehavior.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 9pt</value>
   </data>
-  <data name="btnDisplayBehavior.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_btnDisplayBehavior.Location" type="System.Drawing.Point, System.Drawing">
     <value>141, -1</value>
   </data>
-  <data name="btnDisplayBehavior.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_btnDisplayBehavior.Size" type="System.Drawing.Size, System.Drawing">
     <value>160, 25</value>
   </data>
-  <data name="btnDisplayBehavior.TabIndex" type="System.Int32, mscorlib">
+  <data name="_btnDisplayBehavior.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
   </data>
-  <data name="btnDisplayBehavior.Text" xml:space="preserve">
+  <data name="_btnDisplayBehavior.Text" xml:space="preserve">
     <value>DisplayBehavior</value>
   </data>
-  <data name="btnDisplayBehavior.ToolTip" xml:space="preserve">
+  <data name="_btnDisplayBehavior.ToolTip" xml:space="preserve">
     <value>Display behavior of an operation (activity, statemachine, interaction)</value>
   </data>
-  <data name="&gt;&gt;btnDisplayBehavior.Name" xml:space="preserve">
-    <value>btnDisplayBehavior</value>
+  <data name="&gt;&gt;_btnDisplayBehavior.Name" xml:space="preserve">
+    <value>_btnDisplayBehavior</value>
   </data>
-  <data name="&gt;&gt;btnDisplayBehavior.Type" xml:space="preserve">
+  <data name="&gt;&gt;_btnDisplayBehavior.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;btnDisplayBehavior.Parent" xml:space="preserve">
-    <value>panelFavorite</value>
+  <data name="&gt;&gt;_btnDisplayBehavior.Parent" xml:space="preserve">
+    <value>_panelFavorite</value>
   </data>
-  <data name="&gt;&gt;btnDisplayBehavior.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_btnDisplayBehavior.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="btnOS.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_btnOs.Location" type="System.Drawing.Point, System.Drawing">
     <value>51, 26</value>
   </data>
-  <data name="btnOS.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_btnOs.Size" type="System.Drawing.Size, System.Drawing">
     <value>38, 23</value>
   </data>
-  <data name="btnOS.TabIndex" type="System.Int32, mscorlib">
+  <data name="_btnOs.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="btnOS.Text" xml:space="preserve">
+  <data name="_btnOs.Text" xml:space="preserve">
     <value>OS</value>
   </data>
-  <data name="btnOS.ToolTip" xml:space="preserve">
+  <data name="_btnOs.ToolTip" xml:space="preserve">
     <value>Orthogonal Square</value>
   </data>
-  <data name="&gt;&gt;btnOS.Name" xml:space="preserve">
-    <value>btnOS</value>
+  <data name="&gt;&gt;_btnOs.Name" xml:space="preserve">
+    <value>_btnOs</value>
   </data>
-  <data name="&gt;&gt;btnOS.Type" xml:space="preserve">
+  <data name="&gt;&gt;_btnOs.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;btnOS.Parent" xml:space="preserve">
-    <value>panelLineStyle</value>
+  <data name="&gt;&gt;_btnOs.Parent" xml:space="preserve">
+    <value>_panelLineStyle</value>
   </data>
-  <data name="&gt;&gt;btnOS.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_btnOs.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="btnTV.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_btnTv.Location" type="System.Drawing.Point, System.Drawing">
     <value>96, 0</value>
   </data>
-  <data name="btnTV.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_btnTv.Size" type="System.Drawing.Size, System.Drawing">
     <value>39, 23</value>
   </data>
-  <data name="btnTV.TabIndex" type="System.Int32, mscorlib">
+  <data name="_btnTv.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="btnTV.Text" xml:space="preserve">
+  <data name="_btnTv.Text" xml:space="preserve">
     <value>TV</value>
   </data>
-  <data name="btnTV.ToolTip" xml:space="preserve">
+  <data name="_btnTv.ToolTip" xml:space="preserve">
     <value>Tree Vertical</value>
   </data>
-  <data name="&gt;&gt;btnTV.Name" xml:space="preserve">
-    <value>btnTV</value>
+  <data name="&gt;&gt;_btnTv.Name" xml:space="preserve">
+    <value>_btnTv</value>
   </data>
-  <data name="&gt;&gt;btnTV.Type" xml:space="preserve">
+  <data name="&gt;&gt;_btnTv.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;btnTV.Parent" xml:space="preserve">
-    <value>panelLineStyle</value>
+  <data name="&gt;&gt;_btnTv.Parent" xml:space="preserve">
+    <value>_panelLineStyle</value>
   </data>
-  <data name="&gt;&gt;btnTV.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_btnTv.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="btnTH.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="BtnTh.Location" type="System.Drawing.Point, System.Drawing">
     <value>141, 0</value>
   </data>
-  <data name="btnTH.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="BtnTh.Size" type="System.Drawing.Size, System.Drawing">
     <value>39, 23</value>
   </data>
-  <data name="btnTH.TabIndex" type="System.Int32, mscorlib">
+  <data name="BtnTh.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="btnTH.Text" xml:space="preserve">
+  <data name="BtnTh.Text" xml:space="preserve">
     <value>TH</value>
   </data>
-  <data name="btnTH.ToolTip" xml:space="preserve">
+  <data name="BtnTh.ToolTip" xml:space="preserve">
     <value>Tree Horizontal</value>
   </data>
-  <data name="&gt;&gt;btnTH.Name" xml:space="preserve">
-    <value>btnTH</value>
+  <data name="&gt;&gt;BtnTh.Name" xml:space="preserve">
+    <value>BtnTh</value>
   </data>
-  <data name="&gt;&gt;btnTH.Type" xml:space="preserve">
+  <data name="&gt;&gt;BtnTh.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;btnTH.Parent" xml:space="preserve">
-    <value>panelLineStyle</value>
+  <data name="&gt;&gt;BtnTh.Parent" xml:space="preserve">
+    <value>_panelLineStyle</value>
   </data>
-  <data name="&gt;&gt;btnTH.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;BtnTh.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="btnLV.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_btnLv.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
-  <data name="btnLV.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_btnLv.Size" type="System.Drawing.Size, System.Drawing">
     <value>39, 23</value>
   </data>
-  <data name="btnLV.TabIndex" type="System.Int32, mscorlib">
+  <data name="_btnLv.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="btnLV.Text" xml:space="preserve">
+  <data name="_btnLv.Text" xml:space="preserve">
     <value>LV</value>
   </data>
-  <data name="btnLV.ToolTip" xml:space="preserve">
+  <data name="_btnLv.ToolTip" xml:space="preserve">
     <value>Lateral Vertical</value>
   </data>
-  <data name="&gt;&gt;btnLV.Name" xml:space="preserve">
-    <value>btnLV</value>
+  <data name="&gt;&gt;_btnLv.Name" xml:space="preserve">
+    <value>_btnLv</value>
   </data>
-  <data name="&gt;&gt;btnLV.Type" xml:space="preserve">
+  <data name="&gt;&gt;_btnLv.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;btnLV.Parent" xml:space="preserve">
-    <value>panelLineStyle</value>
+  <data name="&gt;&gt;_btnLv.Parent" xml:space="preserve">
+    <value>_panelLineStyle</value>
   </data>
-  <data name="&gt;&gt;btnLV.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_btnLv.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="btnLH.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_btnLh.Location" type="System.Drawing.Point, System.Drawing">
     <value>51, 0</value>
   </data>
-  <data name="btnLH.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_btnLh.Size" type="System.Drawing.Size, System.Drawing">
     <value>39, 23</value>
   </data>
-  <data name="btnLH.TabIndex" type="System.Int32, mscorlib">
+  <data name="_btnLh.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="btnLH.Text" xml:space="preserve">
+  <data name="_btnLh.Text" xml:space="preserve">
     <value>LH</value>
   </data>
-  <data name="btnLH.ToolTip" xml:space="preserve">
+  <data name="_btnLh.ToolTip" xml:space="preserve">
     <value>Lateral Horizontal</value>
   </data>
-  <data name="&gt;&gt;btnLH.Name" xml:space="preserve">
-    <value>btnLH</value>
+  <data name="&gt;&gt;_btnLh.Name" xml:space="preserve">
+    <value>_btnLh</value>
   </data>
-  <data name="&gt;&gt;btnLH.Type" xml:space="preserve">
+  <data name="&gt;&gt;_btnLh.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;btnLH.Parent" xml:space="preserve">
-    <value>panelLineStyle</value>
+  <data name="&gt;&gt;_btnLh.Parent" xml:space="preserve">
+    <value>_panelLineStyle</value>
   </data>
-  <data name="&gt;&gt;btnLH.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_btnLh.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="txtSearchName.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+  <data name="_txtSearchName.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="txtSearchName.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="_txtSearchName.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 9pt</value>
   </data>
-  <data name="txtSearchName.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_txtSearchName.Location" type="System.Drawing.Point, System.Drawing">
     <value>309, 1</value>
   </data>
-  <data name="txtSearchName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="_txtSearchName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="txtSearchName.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_txtSearchName.Size" type="System.Drawing.Size, System.Drawing">
     <value>148, 21</value>
   </data>
-  <data name="txtSearchName.TabIndex" type="System.Int32, mscorlib">
+  <data name="_txtSearchName.TabIndex" type="System.Int32, mscorlib">
     <value>28</value>
   </data>
-  <data name="txtSearchName.Text" xml:space="preserve">
+  <data name="_txtSearchName.Text" xml:space="preserve">
     <value>Simple</value>
   </data>
-  <data name="txtSearchName.ToolTip" xml:space="preserve">
+  <data name="_txtSearchName.ToolTip" xml:space="preserve">
     <value>Name EA Search to quickly find your most interesting stuff:
 - Insert search name
 - If blank the default from configuration is used
@@ -1210,31 +1210,31 @@ Search for:
 - Your stuff at your finger tip
 </value>
   </data>
-  <data name="&gt;&gt;txtSearchName.Name" xml:space="preserve">
-    <value>txtSearchName</value>
+  <data name="&gt;&gt;_txtSearchName.Name" xml:space="preserve">
+    <value>_txtSearchName</value>
   </data>
-  <data name="&gt;&gt;txtSearchName.Type" xml:space="preserve">
+  <data name="&gt;&gt;_txtSearchName.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;txtSearchName.Parent" xml:space="preserve">
-    <value>panelQuickSearch</value>
+  <data name="&gt;&gt;_txtSearchName.Parent" xml:space="preserve">
+    <value>_panelQuickSearch</value>
   </data>
-  <data name="&gt;&gt;txtSearchName.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_txtSearchName.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="btnConveyedItemConnector.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_btnConveyedItemConnector.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, -1</value>
   </data>
-  <data name="btnConveyedItemConnector.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_btnConveyedItemConnector.Size" type="System.Drawing.Size, System.Drawing">
     <value>89, 23</value>
   </data>
-  <data name="btnConveyedItemConnector.TabIndex" type="System.Int32, mscorlib">
+  <data name="_btnConveyedItemConnector.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="btnConveyedItemConnector.Text" xml:space="preserve">
+  <data name="_btnConveyedItemConnector.Text" xml:space="preserve">
     <value>CI Connnectors</value>
   </data>
-  <data name="btnConveyedItemConnector.ToolTip" xml:space="preserve">
+  <data name="_btnConveyedItemConnector.ToolTip" xml:space="preserve">
     <value>Get connectors  Conveyed Item from selected Element.
 
 1. Select Element
@@ -1246,31 +1246,31 @@ Search for:
 
 There is no interface to directly access the connector (as far as I'm aware of)</value>
   </data>
-  <data name="&gt;&gt;btnConveyedItemConnector.Name" xml:space="preserve">
-    <value>btnConveyedItemConnector</value>
+  <data name="&gt;&gt;_btnConveyedItemConnector.Name" xml:space="preserve">
+    <value>_btnConveyedItemConnector</value>
   </data>
-  <data name="&gt;&gt;btnConveyedItemConnector.Type" xml:space="preserve">
+  <data name="&gt;&gt;_btnConveyedItemConnector.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;btnConveyedItemConnector.Parent" xml:space="preserve">
-    <value>panelConveyedItems</value>
+  <data name="&gt;&gt;_btnConveyedItemConnector.Parent" xml:space="preserve">
+    <value>_panelConveyedItems</value>
   </data>
-  <data name="&gt;&gt;btnConveyedItemConnector.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_btnConveyedItemConnector.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="btnConveyedItemElement.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_btnConveyedItemElement.Location" type="System.Drawing.Point, System.Drawing">
     <value>96, -1</value>
   </data>
-  <data name="btnConveyedItemElement.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_btnConveyedItemElement.Size" type="System.Drawing.Size, System.Drawing">
     <value>89, 23</value>
   </data>
-  <data name="btnConveyedItemElement.TabIndex" type="System.Int32, mscorlib">
+  <data name="_btnConveyedItemElement.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="btnConveyedItemElement.Text" xml:space="preserve">
+  <data name="_btnConveyedItemElement.Text" xml:space="preserve">
     <value>CI Elements</value>
   </data>
-  <data name="btnConveyedItemElement.ToolTip" xml:space="preserve">
+  <data name="_btnConveyedItemElement.ToolTip" xml:space="preserve">
     <value>Get Element Conveyed Item from selected Connector
 
 1. Select Connector
@@ -1281,123 +1281,123 @@ There is no interface to directly access the connector (as far as I'm aware of)<
 There is no interface to directly select more than one Browser Element (as far as I'm aware off)
 </value>
   </data>
-  <data name="&gt;&gt;btnConveyedItemElement.Name" xml:space="preserve">
-    <value>btnConveyedItemElement</value>
+  <data name="&gt;&gt;_btnConveyedItemElement.Name" xml:space="preserve">
+    <value>_btnConveyedItemElement</value>
   </data>
-  <data name="&gt;&gt;btnConveyedItemElement.Type" xml:space="preserve">
+  <data name="&gt;&gt;_btnConveyedItemElement.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;btnConveyedItemElement.Parent" xml:space="preserve">
-    <value>panelConveyedItems</value>
+  <data name="&gt;&gt;_btnConveyedItemElement.Parent" xml:space="preserve">
+    <value>_panelConveyedItems</value>
   </data>
-  <data name="&gt;&gt;btnConveyedItemElement.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_btnConveyedItemElement.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <metadata name="menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <metadata name="_menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>376, 17</value>
   </metadata>
-  <data name="menuStrip1.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_menuStrip1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
-  <data name="menuStrip1.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_menuStrip1.Size" type="System.Drawing.Size, System.Drawing">
     <value>458, 24</value>
   </data>
-  <data name="menuStrip1.TabIndex" type="System.Int32, mscorlib">
+  <data name="_menuStrip1.TabIndex" type="System.Int32, mscorlib">
     <value>22</value>
   </data>
-  <data name="menuStrip1.Text" xml:space="preserve">
+  <data name="_menuStrip1.Text" xml:space="preserve">
     <value>menuStrip1</value>
   </data>
-  <data name="&gt;&gt;menuStrip1.Name" xml:space="preserve">
-    <value>menuStrip1</value>
+  <data name="&gt;&gt;_menuStrip1.Name" xml:space="preserve">
+    <value>_menuStrip1</value>
   </data>
-  <data name="&gt;&gt;menuStrip1.Type" xml:space="preserve">
+  <data name="&gt;&gt;_menuStrip1.Type" xml:space="preserve">
     <value>System.Windows.Forms.MenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;menuStrip1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;_menuStrip1.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;menuStrip1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_menuStrip1.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
-  <data name="fileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_fileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>37, 20</value>
   </data>
-  <data name="fileToolStripMenuItem.Text" xml:space="preserve">
+  <data name="_fileToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;File</value>
   </data>
-  <data name="settingGeneralToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_settingGeneralToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>294, 22</value>
   </data>
-  <data name="settingGeneralToolStripMenuItem.Text" xml:space="preserve">
+  <data name="_settingGeneralToolStripMenuItem.Text" xml:space="preserve">
     <value>Settings &amp;General</value>
   </data>
-  <data name="settingGeneralToolStripMenuItem.ToolTipText" xml:space="preserve">
+  <data name="_settingGeneralToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>Configure:
 - Buttons on hoTools
 - Quick Search Name
 - Tabs to show
 - MDG to load</value>
   </data>
-  <data name="settingsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_settingsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>294, 22</value>
   </data>
-  <data name="settingsToolStripMenuItem.Text" xml:space="preserve">
+  <data name="_settingsToolStripMenuItem.Text" xml:space="preserve">
     <value>Settings Default &amp;Linestyle</value>
   </data>
-  <data name="settingsToolStripMenuItem.ToolTipText" xml:space="preserve">
+  <data name="_settingsToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>Setting the default linestyle of Diagram Types</value>
   </data>
-  <data name="settingsGlobalKeysToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_settingsGlobalKeysToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>294, 22</value>
   </data>
-  <data name="settingsGlobalKeysToolStripMenuItem.Text" xml:space="preserve">
+  <data name="_settingsGlobalKeysToolStripMenuItem.Text" xml:space="preserve">
     <value>Settings Global Keys</value>
   </data>
-  <data name="settingsGlobalKeysToolStripMenuItem.ToolTipText" xml:space="preserve">
+  <data name="_settingsGlobalKeysToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>Define your global keys for:
 - Searches with &lt;Search Term&gt;
 - Sevices (fix implemented in hoTools)</value>
   </data>
-  <data name="settingsToolbarToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_settingsToolbarToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>294, 22</value>
   </data>
-  <data name="settingsToolbarToolStripMenuItem.Text" xml:space="preserve">
+  <data name="_settingsToolbarToolStripMenuItem.Text" xml:space="preserve">
     <value>Settings Toolbar for Searches and Services</value>
   </data>
-  <data name="settingsToolbarToolStripMenuItem.ToolTipText" xml:space="preserve">
+  <data name="_settingsToolbarToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>Define Toolbar for:
 - at max 5 Searches
 - at max 5 Services</value>
   </data>
-  <data name="settingsQueryAndSctipToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_settingsQueryAndSctipToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>294, 22</value>
   </data>
-  <data name="settingsQueryAndSctipToolStripMenuItem.Text" xml:space="preserve">
+  <data name="_settingsQueryAndSctipToolStripMenuItem.Text" xml:space="preserve">
     <value>Settings SQL and Script</value>
   </data>
-  <data name="settingsQueryAndSctipToolStripMenuItem.ToolTipText" xml:space="preserve">
+  <data name="_settingsQueryAndSctipToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>Define for SQL and Run Script for SQL rows:
 - Addin Window
 - Own EA Tab Window
 - Disable</value>
   </data>
-  <data name="doToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_doToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>34, 20</value>
   </data>
-  <data name="doToolStripMenuItem.Text" xml:space="preserve">
+  <data name="_doToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Do</value>
   </data>
-  <data name="doToolStripMenuItem.ToolTipText" xml:space="preserve">
+  <data name="_doToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>Change Author of selected Package / Element</value>
   </data>
-  <data name="createActivityForOperationToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_createActivityForOperationToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>242, 22</value>
   </data>
-  <data name="createActivityForOperationToolStripMenuItem.Text" xml:space="preserve">
+  <data name="_createActivityForOperationToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Create Activity for Operation</value>
   </data>
-  <data name="createActivityForOperationToolStripMenuItem.ToolTipText" xml:space="preserve">
+  <data name="_createActivityForOperationToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>Create Activity for operation in a new Package with:
 - Activity with Parameter according to operation
 - Diagram which contains the Activity
@@ -1408,13 +1408,13 @@ Select:
 - Class / Element
 - Operation</value>
   </data>
-  <data name="updateActivityFromOperationToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_updateActivityFromOperationToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>242, 22</value>
   </data>
-  <data name="updateActivityFromOperationToolStripMenuItem.Text" xml:space="preserve">
+  <data name="_updateActivityFromOperationToolStripMenuItem.Text" xml:space="preserve">
     <value>Update Activity from Operation</value>
   </data>
-  <data name="updateActivityFromOperationToolStripMenuItem.ToolTipText" xml:space="preserve">
+  <data name="_updateActivityFromOperationToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>Update Activity from operation:
 - Return Type
 - Parameter
@@ -1425,163 +1425,163 @@ Select:
 - Element / Class
 - Operation </value>
   </data>
-  <data name="toolStripSeparator10.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_toolStripSeparator10.Size" type="System.Drawing.Size, System.Drawing">
     <value>239, 6</value>
   </data>
-  <data name="showFolderToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_showFolderToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>242, 22</value>
   </data>
-  <data name="showFolderToolStripMenuItem.Text" xml:space="preserve">
+  <data name="_showFolderToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Show Folder</value>
   </data>
-  <data name="showFolderToolStripMenuItem.ToolTipText" xml:space="preserve">
+  <data name="_showFolderToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>Show Folder for selected:
 - Package under Version Control
 - Element which has Source Code
 
 The application to open the folder: See global Settings</value>
   </data>
-  <data name="copyGUIDSQLToClipboardToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_copyGuidsqlToClipboardToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>242, 22</value>
   </data>
-  <data name="copyGUIDSQLToClipboardToolStripMenuItem.Text" xml:space="preserve">
+  <data name="_copyGuidsqlToClipboardToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;SQL select &amp; update/create/insert</value>
   </data>
-  <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
     <value>239, 6</value>
   </data>
-  <data name="changeAuthorToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_changeAuthorToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>242, 22</value>
   </data>
-  <data name="changeAuthorToolStripMenuItem.Text" xml:space="preserve">
+  <data name="_changeAuthorToolStripMenuItem.Text" xml:space="preserve">
     <value>Change Author</value>
   </data>
-  <data name="changeAuthorToolStripMenuItem.ToolTipText" xml:space="preserve">
+  <data name="_changeAuthorToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>Change Author for:
 - Packages
 - Element</value>
   </data>
-  <data name="changeAuthorRecursiveToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_changeAuthorRecursiveToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>242, 22</value>
   </data>
-  <data name="changeAuthorRecursiveToolStripMenuItem.Text" xml:space="preserve">
+  <data name="_changeAuthorRecursiveToolStripMenuItem.Text" xml:space="preserve">
     <value>Change Author recursive</value>
   </data>
-  <data name="changeAuthorRecursiveToolStripMenuItem.ToolTipText" xml:space="preserve">
+  <data name="_changeAuthorRecursiveToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>Change Author recursive for:
 - Packages
 - Elements</value>
   </data>
-  <data name="versionControlToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_versionControlToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>34, 20</value>
   </data>
-  <data name="versionControlToolStripMenuItem.Text" xml:space="preserve">
+  <data name="_versionControlToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;VC</value>
   </data>
-  <data name="versionControlToolStripMenuItem.ToolTipText" xml:space="preserve">
+  <data name="_versionControlToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>Functions related to Version Control</value>
   </data>
-  <data name="changeXMLFileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_changeXmlFileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>291, 22</value>
   </data>
-  <data name="changeXMLFileToolStripMenuItem.Text" xml:space="preserve">
+  <data name="_changeXmlFileToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Change XML file</value>
   </data>
-  <data name="changeXMLFileToolStripMenuItem.ToolTipText" xml:space="preserve">
+  <data name="_changeXmlFileToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>Change the *.xml file path for a Version controlled package</value>
   </data>
-  <data name="showFolderVCorCodeToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_showFolderVCorCodeToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>291, 22</value>
   </data>
-  <data name="showFolderVCorCodeToolStripMenuItem.Text" xml:space="preserve">
+  <data name="_showFolderVCorCodeToolStripMenuItem.Text" xml:space="preserve">
     <value>Show folder VC controlled package</value>
   </data>
-  <data name="showFolderVCorCodeToolStripMenuItem.ToolTipText" xml:space="preserve">
+  <data name="_showFolderVCorCodeToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>Show the folder of the VC controlled package.
 
 Note:
 In settings you may choose your file manager. 
 Default: Explorer.exe</value>
   </data>
-  <data name="getVCLatesrecursiveToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_getVcLatesrecursiveToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>291, 22</value>
   </data>
-  <data name="getVCLatesrecursiveToolStripMenuItem.Text" xml:space="preserve">
+  <data name="_getVcLatesrecursiveToolStripMenuItem.Text" xml:space="preserve">
     <value>Get VC latest (recursive)</value>
   </data>
-  <data name="getVCLatesrecursiveToolStripMenuItem.ToolTipText" xml:space="preserve">
+  <data name="_getVcLatesrecursiveToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>Get Version Control latest package (recursive).</value>
   </data>
-  <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
     <value>288, 6</value>
   </data>
-  <data name="showTortoiseLogToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_showTortoiseLogToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>291, 22</value>
   </data>
-  <data name="showTortoiseLogToolStripMenuItem.Text" xml:space="preserve">
+  <data name="_showTortoiseLogToolStripMenuItem.Text" xml:space="preserve">
     <value>Show Tortoise Log</value>
   </data>
-  <data name="showTortoiseRepoBrowserToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_showTortoiseRepoBrowserToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>291, 22</value>
   </data>
-  <data name="showTortoiseRepoBrowserToolStripMenuItem.Text" xml:space="preserve">
+  <data name="_showTortoiseRepoBrowserToolStripMenuItem.Text" xml:space="preserve">
     <value>Show Tortoise Repo Browser</value>
   </data>
-  <data name="setSvnKeywordsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_setSvnKeywordsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>291, 22</value>
   </data>
-  <data name="setSvnKeywordsToolStripMenuItem.Text" xml:space="preserve">
+  <data name="_setSvnKeywordsToolStripMenuItem.Text" xml:space="preserve">
     <value>Set svn Keywords</value>
   </data>
-  <data name="setSvnModuleTaggedValuesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_setSvnModuleTaggedValuesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>291, 22</value>
   </data>
-  <data name="setSvnModuleTaggedValuesToolStripMenuItem.Text" xml:space="preserve">
+  <data name="_setSvnModuleTaggedValuesToolStripMenuItem.Text" xml:space="preserve">
     <value>Set svn Module Tagged Values</value>
   </data>
-  <data name="setSvnModuleTaggedValuesToolStripMenuItem.ToolTipText" xml:space="preserve">
+  <data name="_setSvnModuleTaggedValuesToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>Set the svn Tagged Values of module for:
 - svnDate
 - svnRevision</value>
   </data>
-  <data name="setSvnModuleTaggedValuesToolStripMenuItem.Visible" type="System.Boolean, mscorlib">
+  <data name="_setSvnModuleTaggedValuesToolStripMenuItem.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="setSvnModuleTaggedValuesrecursiveToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_setSvnModuleTaggedValuesrecursiveToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>291, 22</value>
   </data>
-  <data name="setSvnModuleTaggedValuesrecursiveToolStripMenuItem.Text" xml:space="preserve">
+  <data name="_setSvnModuleTaggedValuesrecursiveToolStripMenuItem.Text" xml:space="preserve">
     <value>Set svn Module Tagged Values (recursive)</value>
   </data>
-  <data name="setSvnModuleTaggedValuesrecursiveToolStripMenuItem.ToolTipText" xml:space="preserve">
+  <data name="_setSvnModuleTaggedValuesrecursiveToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>Set the svn Tagged Values of module (recursive packages) for:
 - svnDate
 - svnRevision
 
 Select a package to proceed all recursive package.</value>
   </data>
-  <data name="setSvnModuleTaggedValuesrecursiveToolStripMenuItem.Visible" type="System.Boolean, mscorlib">
+  <data name="_setSvnModuleTaggedValuesrecursiveToolStripMenuItem.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="portToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_portToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>41, 20</value>
   </data>
-  <data name="portToolStripMenuItem.Text" xml:space="preserve">
+  <data name="_portToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Port</value>
   </data>
-  <data name="portToolStripMenuItem.ToolTipText" xml:space="preserve">
+  <data name="_portToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>Functions related to port like:
 - Visibility
 - Move
 - Connect</value>
   </data>
-  <data name="movePortsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_movePortsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>375, 22</value>
   </data>
-  <data name="movePortsToolStripMenuItem.Text" xml:space="preserve">
+  <data name="_movePortsToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Copy ports</value>
   </data>
-  <data name="movePortsToolStripMenuItem.ToolTipText" xml:space="preserve">
+  <data name="_movePortsToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>Copy Ports from selected sources to last selected target.
 Sources:
 - 1 or more Classes/Components
@@ -1590,31 +1590,31 @@ Target (last selected item):
 - Class
 - Component</value>
   </data>
-  <data name="toolStripSeparator7.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_toolStripSeparator7.Size" type="System.Drawing.Size, System.Drawing">
     <value>372, 6</value>
   </data>
-  <data name="deletePortsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_deletePortsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>375, 22</value>
   </data>
-  <data name="deletePortsToolStripMenuItem.Text" xml:space="preserve">
+  <data name="_deletePortsToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Delete Ports</value>
   </data>
-  <data name="deletePortsToolStripMenuItem.ToolTipText" xml:space="preserve">
+  <data name="_deletePortsToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>Delete Ports
 - selected Ports
 - all Ports of selected Elements 
 -- Class, Component</value>
   </data>
-  <data name="toolStripSeparator3.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_toolStripSeparator3.Size" type="System.Drawing.Size, System.Drawing">
     <value>372, 6</value>
   </data>
-  <data name="connectPortsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_connectPortsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>375, 22</value>
   </data>
-  <data name="connectPortsToolStripMenuItem.Text" xml:space="preserve">
+  <data name="_connectPortsToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Connect Ports between Components</value>
   </data>
-  <data name="connectPortsToolStripMenuItem.ToolTipText" xml:space="preserve">
+  <data name="_connectPortsToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>Connect all Ports mit the same name between selected Elements or Ports:
 - Selected Elements
 - Selected Ports
@@ -1622,100 +1622,100 @@ Target (last selected item):
 to each selected Class / Component / port with the same port name.
 </value>
   </data>
-  <data name="connectPortsInsideComponentsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_connectPortsInsideComponentsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>375, 22</value>
   </data>
-  <data name="connectPortsInsideComponentsToolStripMenuItem.Text" xml:space="preserve">
+  <data name="_connectPortsInsideComponentsToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Connect Ports inside Components</value>
   </data>
-  <data name="connectPortsInsideComponentsToolStripMenuItem.ToolTipText" xml:space="preserve">
+  <data name="_connectPortsInsideComponentsToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>Connect ports with the same name inside an Element</value>
   </data>
-  <data name="toolStripSeparator8.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_toolStripSeparator8.Size" type="System.Drawing.Size, System.Drawing">
     <value>372, 6</value>
   </data>
-  <data name="makeConnectorsUnspecifiedDirectionToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_makeConnectorsUnspecifiedDirectionToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>375, 22</value>
   </data>
-  <data name="makeConnectorsUnspecifiedDirectionToolStripMenuItem.Text" xml:space="preserve">
+  <data name="_makeConnectorsUnspecifiedDirectionToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Make Connectors: Unspecified direction</value>
   </data>
-  <data name="makeConnectorsUnspecifiedDirectionToolStripMenuItem.ToolTipText" xml:space="preserve">
+  <data name="_makeConnectorsUnspecifiedDirectionToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>Make all directions of connections of Port / Element unspecified.
 
 Select Elements to make direction of all Port connections to unspecified.</value>
   </data>
-  <data name="toolStripSeparator4.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_toolStripSeparator4.Size" type="System.Drawing.Size, System.Drawing">
     <value>372, 6</value>
   </data>
-  <data name="showPortsInDiagramObjectsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_showPortsInDiagramObjectsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>375, 22</value>
   </data>
-  <data name="showPortsInDiagramObjectsToolStripMenuItem.Text" xml:space="preserve">
+  <data name="_showPortsInDiagramObjectsToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Show Ports on Diagram</value>
   </data>
-  <data name="showPortsInDiagramObjectsToolStripMenuItem.ToolTipText" xml:space="preserve">
+  <data name="_showPortsInDiagramObjectsToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>Show the ports on diagram of:
 - Selected Class / Component
 </value>
   </data>
-  <data name="showSendingPortsLeftRecievingPortsRightToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_showSendingPortsLeftRecievingPortsRightToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>375, 22</value>
   </data>
-  <data name="showSendingPortsLeftRecievingPortsRightToolStripMenuItem.Text" xml:space="preserve">
+  <data name="_showSendingPortsLeftRecievingPortsRightToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Show receiving Ports left, sending Ports right on Diagram</value>
   </data>
-  <data name="showSendingPortsLeftRecievingPortsRightToolStripMenuItem.ToolTipText" xml:space="preserve">
+  <data name="_showSendingPortsLeftRecievingPortsRightToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>Show receiving Ports left, sending Ports right for selected Elements in Diagram
 
 </value>
   </data>
-  <data name="hidePortsInDiagramToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_hidePortsInDiagramToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>375, 22</value>
   </data>
-  <data name="hidePortsInDiagramToolStripMenuItem.Text" xml:space="preserve">
+  <data name="_hidePortsInDiagramToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Remove Ports from Diagram</value>
   </data>
-  <data name="hidePortsInDiagramToolStripMenuItem.ToolTipText" xml:space="preserve">
+  <data name="_hidePortsInDiagramToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>Remove ports from Diagram:
 - Ports from selected Diagramelements
 - Selected ports</value>
   </data>
-  <data name="toolStripSeparator5.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_toolStripSeparator5.Size" type="System.Drawing.Size, System.Drawing">
     <value>372, 6</value>
   </data>
-  <data name="unhidePortsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_unhidePortsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>375, 22</value>
   </data>
-  <data name="unhidePortsToolStripMenuItem.Text" xml:space="preserve">
+  <data name="_unhidePortsToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Show Ports Labels</value>
   </data>
-  <data name="unhidePortsToolStripMenuItem.ToolTipText" xml:space="preserve">
+  <data name="_unhidePortsToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>Show Port labels of selected:
 - Class / Component
 - Ports (embedded Elements)</value>
   </data>
-  <data name="hidePortsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_hidePortsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>375, 22</value>
   </data>
-  <data name="hidePortsToolStripMenuItem.Text" xml:space="preserve">
+  <data name="_hidePortsToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Hide Ports Labels</value>
   </data>
-  <data name="hidePortsToolStripMenuItem.ToolTipText" xml:space="preserve">
+  <data name="_hidePortsToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>Hide Port labels of selected:
 - Class / Component
 - Ports (embedded Elements)</value>
   </data>
-  <data name="toolStripSeparator11.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_toolStripSeparator11.Size" type="System.Drawing.Size, System.Drawing">
     <value>372, 6</value>
   </data>
-  <data name="movePortLabelLeftToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_movePortLabelLeftToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>375, 22</value>
   </data>
-  <data name="movePortLabelLeftToolStripMenuItem.Text" xml:space="preserve">
+  <data name="_movePortLabelLeftToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Move Port Labels left to a Left Position</value>
   </data>
-  <data name="movePortLabelLeftToolStripMenuItem.ToolTipText" xml:space="preserve">
+  <data name="_movePortLabelLeftToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>Select Ports: It Moves Port Labels to a Left Position from the Port.
 
 Tip:
@@ -1723,13 +1723,13 @@ Tip:
 - Move Port Labels to Left Position
 - Fine tune position by a step/bit left or right</value>
   </data>
-  <data name="movePortLabelRightPositionToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_movePortLabelRightPositionToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>375, 22</value>
   </data>
-  <data name="movePortLabelRightPositionToolStripMenuItem.Text" xml:space="preserve">
+  <data name="_movePortLabelRightPositionToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Move Port Labels to a Right Position </value>
   </data>
-  <data name="movePortLabelRightPositionToolStripMenuItem.ToolTipText" xml:space="preserve">
+  <data name="_movePortLabelRightPositionToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>Select Ports: It Moves Port Labels to a Right Position from the Port
 
 Tip:
@@ -1737,377 +1737,377 @@ Tip:
 - Move Port Labels to Righ Position
 - Fine tune position by a step/bit left or right</value>
   </data>
-  <data name="toolStripSeparator12.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_toolStripSeparator12.Size" type="System.Drawing.Size, System.Drawing">
     <value>372, 6</value>
   </data>
-  <data name="movePortLabelLeftToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_movePortLabelLeftToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
     <value>375, 22</value>
   </data>
-  <data name="movePortLabelLeftToolStripMenuItem1.Text" xml:space="preserve">
+  <data name="_movePortLabelLeftToolStripMenuItem1.Text" xml:space="preserve">
     <value>&amp;Move Port Labels a step left</value>
   </data>
-  <data name="movePortLabelLeftToolStripMenuItem1.ToolTipText" xml:space="preserve">
+  <data name="_movePortLabelLeftToolStripMenuItem1.ToolTipText" xml:space="preserve">
     <value>Ports selected: It moves the selecte Ports a little left</value>
   </data>
-  <data name="movePortLabelRightToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_movePortLabelRightToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>375, 22</value>
   </data>
-  <data name="movePortLabelRightToolStripMenuItem.Text" xml:space="preserve">
+  <data name="_movePortLabelRightToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Move Port Labels a step right</value>
   </data>
-  <data name="movePortLabelRightToolStripMenuItem.ToolTipText" xml:space="preserve">
+  <data name="_movePortLabelRightToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>Ports selected: It moves the selected Ports a little right</value>
   </data>
-  <data name="toolStripSeparator9.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_toolStripSeparator9.Size" type="System.Drawing.Size, System.Drawing">
     <value>372, 6</value>
   </data>
-  <data name="orderDiagramItemsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_orderDiagramItemsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>375, 22</value>
   </data>
-  <data name="orderDiagramItemsToolStripMenuItem.Text" xml:space="preserve">
+  <data name="_orderDiagramItemsToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Order Diagram items</value>
   </data>
-  <data name="orderDiagramItemsToolStripMenuItem.ToolTipText" xml:space="preserve">
+  <data name="_orderDiagramItemsToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>Order selected Diagram objects alphabetically.
 </value>
   </data>
-  <data name="helpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_helpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>44, 20</value>
   </data>
-  <data name="helpToolStripMenuItem.Text" xml:space="preserve">
+  <data name="_helpToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Help</value>
   </data>
-  <data name="aboutToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_aboutToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>152, 22</value>
   </data>
-  <data name="aboutToolStripMenuItem.Text" xml:space="preserve">
+  <data name="_aboutToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;About</value>
   </data>
-  <data name="aboutToolStripMenuItem.ToolTipText" xml:space="preserve">
+  <data name="_aboutToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>Information about hoTools</value>
   </data>
-  <data name="helpToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_helpToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
     <value>152, 22</value>
   </data>
-  <data name="helpToolStripMenuItem1.Text" xml:space="preserve">
+  <data name="_helpToolStripMenuItem1.Text" xml:space="preserve">
     <value>&amp;Help</value>
   </data>
-  <data name="helpToolStripMenuItem1.ToolTipText" xml:space="preserve">
+  <data name="_helpToolStripMenuItem1.ToolTipText" xml:space="preserve">
     <value>Help</value>
   </data>
-  <data name="panelButtons.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+  <data name="_panelButtons.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
   </data>
-  <data name="panelButtons.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_panelButtons.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 24</value>
   </data>
-  <data name="panelButtons.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="_panelButtons.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
-  <data name="panelButtons.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_panelButtons.Size" type="System.Drawing.Size, System.Drawing">
     <value>458, 25</value>
   </data>
-  <data name="panelButtons.TabIndex" type="System.Int32, mscorlib">
+  <data name="_panelButtons.TabIndex" type="System.Int32, mscorlib">
     <value>39</value>
   </data>
-  <data name="panelButtons.Visible" type="System.Boolean, mscorlib">
+  <data name="_panelButtons.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="&gt;&gt;panelButtons.Name" xml:space="preserve">
-    <value>panelButtons</value>
+  <data name="&gt;&gt;_panelButtons.Name" xml:space="preserve">
+    <value>_panelButtons</value>
   </data>
-  <data name="&gt;&gt;panelButtons.Type" xml:space="preserve">
+  <data name="&gt;&gt;_panelButtons.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;panelButtons.Parent" xml:space="preserve">
+  <data name="&gt;&gt;_panelButtons.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;panelButtons.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_panelButtons.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
-  <data name="panelLineStyle.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+  <data name="_panelLineStyle.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
   </data>
-  <data name="panelLineStyle.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_panelLineStyle.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 71</value>
   </data>
-  <data name="panelLineStyle.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_panelLineStyle.Size" type="System.Drawing.Size, System.Drawing">
     <value>458, 52</value>
   </data>
-  <data name="panelLineStyle.TabIndex" type="System.Int32, mscorlib">
+  <data name="_panelLineStyle.TabIndex" type="System.Int32, mscorlib">
     <value>40</value>
   </data>
-  <data name="panelLineStyle.Visible" type="System.Boolean, mscorlib">
+  <data name="_panelLineStyle.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="&gt;&gt;panelLineStyle.Name" xml:space="preserve">
-    <value>panelLineStyle</value>
+  <data name="&gt;&gt;_panelLineStyle.Name" xml:space="preserve">
+    <value>_panelLineStyle</value>
   </data>
-  <data name="&gt;&gt;panelLineStyle.Type" xml:space="preserve">
+  <data name="&gt;&gt;_panelLineStyle.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;panelLineStyle.Parent" xml:space="preserve">
+  <data name="&gt;&gt;_panelLineStyle.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;panelLineStyle.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_panelLineStyle.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="panelFavorite.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+  <data name="_panelFavorite.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
   </data>
-  <data name="panelFavorite.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_panelFavorite.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 148</value>
   </data>
-  <data name="panelFavorite.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_panelFavorite.Size" type="System.Drawing.Size, System.Drawing">
     <value>458, 24</value>
   </data>
-  <data name="panelFavorite.TabIndex" type="System.Int32, mscorlib">
+  <data name="_panelFavorite.TabIndex" type="System.Int32, mscorlib">
     <value>41</value>
   </data>
-  <data name="panelFavorite.Visible" type="System.Boolean, mscorlib">
+  <data name="_panelFavorite.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="&gt;&gt;panelFavorite.Name" xml:space="preserve">
-    <value>panelFavorite</value>
+  <data name="&gt;&gt;_panelFavorite.Name" xml:space="preserve">
+    <value>_panelFavorite</value>
   </data>
-  <data name="&gt;&gt;panelFavorite.Type" xml:space="preserve">
+  <data name="&gt;&gt;_panelFavorite.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;panelFavorite.Parent" xml:space="preserve">
+  <data name="&gt;&gt;_panelFavorite.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;panelFavorite.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_panelFavorite.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="panelNote.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+  <data name="_panelNote.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
   </data>
-  <data name="panelNote.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_panelNote.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 251</value>
   </data>
-  <data name="panelNote.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_panelNote.Size" type="System.Drawing.Size, System.Drawing">
     <value>458, 25</value>
   </data>
-  <data name="panelNote.TabIndex" type="System.Int32, mscorlib">
+  <data name="_panelNote.TabIndex" type="System.Int32, mscorlib">
     <value>42</value>
   </data>
-  <data name="panelNote.Visible" type="System.Boolean, mscorlib">
+  <data name="_panelNote.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="&gt;&gt;panelNote.Name" xml:space="preserve">
-    <value>panelNote</value>
+  <data name="&gt;&gt;_panelNote.Name" xml:space="preserve">
+    <value>_panelNote</value>
   </data>
-  <data name="&gt;&gt;panelNote.Type" xml:space="preserve">
+  <data name="&gt;&gt;_panelNote.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;panelNote.Parent" xml:space="preserve">
+  <data name="&gt;&gt;_panelNote.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;panelNote.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_panelNote.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;lblPorts.Name" xml:space="preserve">
-    <value>lblPorts</value>
+  <data name="&gt;&gt;_lblPorts.Name" xml:space="preserve">
+    <value>_lblPorts</value>
   </data>
-  <data name="&gt;&gt;lblPorts.Type" xml:space="preserve">
+  <data name="&gt;&gt;_lblPorts.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;lblPorts.Parent" xml:space="preserve">
-    <value>panelPort</value>
+  <data name="&gt;&gt;_lblPorts.Parent" xml:space="preserve">
+    <value>_panelPort</value>
   </data>
-  <data name="&gt;&gt;lblPorts.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_lblPorts.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="panelPort.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+  <data name="_panelPort.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
   </data>
-  <data name="panelPort.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_panelPort.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 276</value>
   </data>
-  <data name="panelPort.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_panelPort.Size" type="System.Drawing.Size, System.Drawing">
     <value>458, 50</value>
   </data>
-  <data name="panelPort.TabIndex" type="System.Int32, mscorlib">
+  <data name="_panelPort.TabIndex" type="System.Int32, mscorlib">
     <value>43</value>
   </data>
-  <data name="panelPort.Visible" type="System.Boolean, mscorlib">
+  <data name="_panelPort.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="&gt;&gt;panelPort.Name" xml:space="preserve">
-    <value>panelPort</value>
+  <data name="&gt;&gt;_panelPort.Name" xml:space="preserve">
+    <value>_panelPort</value>
   </data>
-  <data name="&gt;&gt;panelPort.Type" xml:space="preserve">
+  <data name="&gt;&gt;_panelPort.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;panelPort.Parent" xml:space="preserve">
+  <data name="&gt;&gt;_panelPort.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;panelPort.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_panelPort.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="lblPorts.AutoSize" type="System.Boolean, mscorlib">
+  <data name="_lblPorts.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="lblPorts.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="_lblPorts.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 12pt</value>
   </data>
-  <data name="lblPorts.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_lblPorts.Location" type="System.Drawing.Point, System.Drawing">
     <value>80, 7</value>
   </data>
-  <data name="lblPorts.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_lblPorts.Size" type="System.Drawing.Size, System.Drawing">
     <value>46, 20</value>
   </data>
-  <data name="lblPorts.TabIndex" type="System.Int32, mscorlib">
+  <data name="_lblPorts.TabIndex" type="System.Int32, mscorlib">
     <value>38</value>
   </data>
-  <data name="lblPorts.Text" xml:space="preserve">
+  <data name="_lblPorts.Text" xml:space="preserve">
     <value>Ports</value>
   </data>
-  <data name="&gt;&gt;lblPorts.Name" xml:space="preserve">
-    <value>lblPorts</value>
+  <data name="&gt;&gt;_lblPorts.Name" xml:space="preserve">
+    <value>_lblPorts</value>
   </data>
-  <data name="&gt;&gt;lblPorts.Type" xml:space="preserve">
+  <data name="&gt;&gt;_lblPorts.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;lblPorts.Parent" xml:space="preserve">
-    <value>panelPort</value>
+  <data name="&gt;&gt;_lblPorts.Parent" xml:space="preserve">
+    <value>_panelPort</value>
   </data>
-  <data name="&gt;&gt;lblPorts.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_lblPorts.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="panelAdvanced.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+  <data name="_panelAdvanced.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
   </data>
-  <data name="panelAdvanced.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_panelAdvanced.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 172</value>
   </data>
-  <data name="panelAdvanced.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_panelAdvanced.Size" type="System.Drawing.Size, System.Drawing">
     <value>458, 79</value>
   </data>
-  <data name="panelAdvanced.TabIndex" type="System.Int32, mscorlib">
+  <data name="_panelAdvanced.TabIndex" type="System.Int32, mscorlib">
     <value>44</value>
   </data>
-  <data name="panelAdvanced.Visible" type="System.Boolean, mscorlib">
+  <data name="_panelAdvanced.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="&gt;&gt;panelAdvanced.Name" xml:space="preserve">
-    <value>panelAdvanced</value>
+  <data name="&gt;&gt;_panelAdvanced.Name" xml:space="preserve">
+    <value>_panelAdvanced</value>
   </data>
-  <data name="&gt;&gt;panelAdvanced.Type" xml:space="preserve">
+  <data name="&gt;&gt;_panelAdvanced.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;panelAdvanced.Parent" xml:space="preserve">
+  <data name="&gt;&gt;_panelAdvanced.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;panelAdvanced.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_panelAdvanced.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;lblConveyedItems.Name" xml:space="preserve">
-    <value>lblConveyedItems</value>
+  <data name="&gt;&gt;_lblConveyedItems.Name" xml:space="preserve">
+    <value>_lblConveyedItems</value>
   </data>
-  <data name="&gt;&gt;lblConveyedItems.Type" xml:space="preserve">
+  <data name="&gt;&gt;_lblConveyedItems.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;lblConveyedItems.Parent" xml:space="preserve">
-    <value>panelConveyedItems</value>
+  <data name="&gt;&gt;_lblConveyedItems.Parent" xml:space="preserve">
+    <value>_panelConveyedItems</value>
   </data>
-  <data name="&gt;&gt;lblConveyedItems.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_lblConveyedItems.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="panelConveyedItems.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+  <data name="_panelConveyedItems.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
   </data>
-  <data name="panelConveyedItems.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_panelConveyedItems.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 123</value>
   </data>
-  <data name="panelConveyedItems.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_panelConveyedItems.Size" type="System.Drawing.Size, System.Drawing">
     <value>458, 25</value>
   </data>
-  <data name="panelConveyedItems.TabIndex" type="System.Int32, mscorlib">
+  <data name="_panelConveyedItems.TabIndex" type="System.Int32, mscorlib">
     <value>45</value>
   </data>
-  <data name="panelConveyedItems.Visible" type="System.Boolean, mscorlib">
+  <data name="_panelConveyedItems.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="&gt;&gt;panelConveyedItems.Name" xml:space="preserve">
-    <value>panelConveyedItems</value>
+  <data name="&gt;&gt;_panelConveyedItems.Name" xml:space="preserve">
+    <value>_panelConveyedItems</value>
   </data>
-  <data name="&gt;&gt;panelConveyedItems.Type" xml:space="preserve">
+  <data name="&gt;&gt;_panelConveyedItems.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;panelConveyedItems.Parent" xml:space="preserve">
+  <data name="&gt;&gt;_panelConveyedItems.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;panelConveyedItems.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_panelConveyedItems.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="lblConveyedItems.AutoSize" type="System.Boolean, mscorlib">
+  <data name="_lblConveyedItems.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="lblConveyedItems.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_lblConveyedItems.Location" type="System.Drawing.Point, System.Drawing">
     <value>192, 6</value>
   </data>
-  <data name="lblConveyedItems.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_lblConveyedItems.Size" type="System.Drawing.Size, System.Drawing">
     <value>83, 13</value>
   </data>
-  <data name="lblConveyedItems.TabIndex" type="System.Int32, mscorlib">
+  <data name="_lblConveyedItems.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="lblConveyedItems.Text" xml:space="preserve">
+  <data name="_lblConveyedItems.Text" xml:space="preserve">
     <value>Conveyed Items</value>
   </data>
-  <data name="&gt;&gt;lblConveyedItems.Name" xml:space="preserve">
-    <value>lblConveyedItems</value>
+  <data name="&gt;&gt;_lblConveyedItems.Name" xml:space="preserve">
+    <value>_lblConveyedItems</value>
   </data>
-  <data name="&gt;&gt;lblConveyedItems.Type" xml:space="preserve">
+  <data name="&gt;&gt;_lblConveyedItems.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;lblConveyedItems.Parent" xml:space="preserve">
-    <value>panelConveyedItems</value>
+  <data name="&gt;&gt;_lblConveyedItems.Parent" xml:space="preserve">
+    <value>_panelConveyedItems</value>
   </data>
-  <data name="&gt;&gt;lblConveyedItems.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_lblConveyedItems.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="panelQuickSearch.ColumnCount" type="System.Int32, mscorlib">
+  <data name="_panelQuickSearch.ColumnCount" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="panelQuickSearch.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+  <data name="_panelQuickSearch.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
   </data>
-  <data name="panelQuickSearch.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_panelQuickSearch.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 49</value>
   </data>
-  <data name="panelQuickSearch.RowCount" type="System.Int32, mscorlib">
+  <data name="_panelQuickSearch.RowCount" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="panelQuickSearch.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_panelQuickSearch.Size" type="System.Drawing.Size, System.Drawing">
     <value>458, 22</value>
   </data>
-  <data name="panelQuickSearch.TabIndex" type="System.Int32, mscorlib">
+  <data name="_panelQuickSearch.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;panelQuickSearch.Name" xml:space="preserve">
-    <value>panelQuickSearch</value>
+  <data name="&gt;&gt;_panelQuickSearch.Name" xml:space="preserve">
+    <value>_panelQuickSearch</value>
   </data>
-  <data name="&gt;&gt;panelQuickSearch.Type" xml:space="preserve">
+  <data name="&gt;&gt;_panelQuickSearch.Type" xml:space="preserve">
     <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;panelQuickSearch.Parent" xml:space="preserve">
+  <data name="&gt;&gt;_panelQuickSearch.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;panelQuickSearch.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_panelQuickSearch.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="panelQuickSearch.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
+  <data name="_panelQuickSearch.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
     <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="txtSearchName" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="txtSearchText" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100,Absolute,150" /&gt;&lt;Rows Styles="Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
-  <data name="getLastSQLErrorToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_getLastSqlErrorToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>165, 22</value>
   </data>
-  <data name="getLastSQLErrorToolStripMenuItem.Text" xml:space="preserve">
+  <data name="_getLastSqlErrorToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Get last SQL Error</value>
   </data>
-  <data name="getLastSQLErrorToolStripMenuItem.ToolTipText" xml:space="preserve">
+  <data name="_getLastSqlErrorToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>Get the last EA sql error from %APPDATA%Sparx Systems\EA\DBError.txt</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -2119,398 +2119,398 @@ Tip:
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
     <value>458, 407</value>
   </data>
-  <data name="&gt;&gt;toolStripSearchBtn1.Name" xml:space="preserve">
-    <value>toolStripSearchBtn1</value>
+  <data name="&gt;&gt;_toolStripSearchBtn1.Name" xml:space="preserve">
+    <value>_toolStripSearchBtn1</value>
   </data>
-  <data name="&gt;&gt;toolStripSearchBtn1.Type" xml:space="preserve">
+  <data name="&gt;&gt;_toolStripSearchBtn1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripSearchBtn2.Name" xml:space="preserve">
-    <value>toolStripSearchBtn2</value>
+  <data name="&gt;&gt;_toolStripSearchBtn2.Name" xml:space="preserve">
+    <value>_toolStripSearchBtn2</value>
   </data>
-  <data name="&gt;&gt;toolStripSearchBtn2.Type" xml:space="preserve">
+  <data name="&gt;&gt;_toolStripSearchBtn2.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripSearchBtn3.Name" xml:space="preserve">
-    <value>toolStripSearchBtn3</value>
+  <data name="&gt;&gt;_toolStripSearchBtn3.Name" xml:space="preserve">
+    <value>_toolStripSearchBtn3</value>
   </data>
-  <data name="&gt;&gt;toolStripSearchBtn3.Type" xml:space="preserve">
+  <data name="&gt;&gt;_toolStripSearchBtn3.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripSearchBtn4.Name" xml:space="preserve">
-    <value>toolStripSearchBtn4</value>
+  <data name="&gt;&gt;_toolStripSearchBtn4.Name" xml:space="preserve">
+    <value>_toolStripSearchBtn4</value>
   </data>
-  <data name="&gt;&gt;toolStripSearchBtn4.Type" xml:space="preserve">
+  <data name="&gt;&gt;_toolStripSearchBtn4.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripSearchBtn5.Name" xml:space="preserve">
-    <value>toolStripSearchBtn5</value>
+  <data name="&gt;&gt;_toolStripSearchBtn5.Name" xml:space="preserve">
+    <value>_toolStripSearchBtn5</value>
   </data>
-  <data name="&gt;&gt;toolStripSearchBtn5.Type" xml:space="preserve">
+  <data name="&gt;&gt;_toolStripSearchBtn5.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripSeparator6.Name" xml:space="preserve">
-    <value>toolStripSeparator6</value>
+  <data name="&gt;&gt;_toolStripSeparator6.Name" xml:space="preserve">
+    <value>_toolStripSeparator6</value>
   </data>
-  <data name="&gt;&gt;toolStripSeparator6.Type" xml:space="preserve">
+  <data name="&gt;&gt;_toolStripSeparator6.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripServiceBtn1.Name" xml:space="preserve">
-    <value>toolStripServiceBtn1</value>
+  <data name="&gt;&gt;_toolStripServiceBtn1.Name" xml:space="preserve">
+    <value>_toolStripServiceBtn1</value>
   </data>
-  <data name="&gt;&gt;toolStripServiceBtn1.Type" xml:space="preserve">
+  <data name="&gt;&gt;_toolStripServiceBtn1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripServiceBtn2.Name" xml:space="preserve">
-    <value>toolStripServiceBtn2</value>
+  <data name="&gt;&gt;_toolStripServiceBtn2.Name" xml:space="preserve">
+    <value>_toolStripServiceBtn2</value>
   </data>
-  <data name="&gt;&gt;toolStripServiceBtn2.Type" xml:space="preserve">
+  <data name="&gt;&gt;_toolStripServiceBtn2.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripServiceBtn3.Name" xml:space="preserve">
-    <value>toolStripServiceBtn3</value>
+  <data name="&gt;&gt;_toolStripServiceBtn3.Name" xml:space="preserve">
+    <value>_toolStripServiceBtn3</value>
   </data>
-  <data name="&gt;&gt;toolStripServiceBtn3.Type" xml:space="preserve">
+  <data name="&gt;&gt;_toolStripServiceBtn3.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripServiceBtn4.Name" xml:space="preserve">
-    <value>toolStripServiceBtn4</value>
+  <data name="&gt;&gt;_toolStripServiceBtn4.Name" xml:space="preserve">
+    <value>_toolStripServiceBtn4</value>
   </data>
-  <data name="&gt;&gt;toolStripServiceBtn4.Type" xml:space="preserve">
+  <data name="&gt;&gt;_toolStripServiceBtn4.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripServiceBtn5.Name" xml:space="preserve">
-    <value>toolStripServiceBtn5</value>
+  <data name="&gt;&gt;_toolStripServiceBtn5.Name" xml:space="preserve">
+    <value>_toolStripServiceBtn5</value>
   </data>
-  <data name="&gt;&gt;toolStripServiceBtn5.Type" xml:space="preserve">
+  <data name="&gt;&gt;_toolStripServiceBtn5.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolTip.Name" xml:space="preserve">
-    <value>toolTip</value>
+  <data name="&gt;&gt;_toolTip.Name" xml:space="preserve">
+    <value>_toolTip</value>
   </data>
-  <data name="&gt;&gt;toolTip.Type" xml:space="preserve">
+  <data name="&gt;&gt;_toolTip.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;fileToolStripMenuItem.Name" xml:space="preserve">
-    <value>fileToolStripMenuItem</value>
+  <data name="&gt;&gt;_fileToolStripMenuItem.Name" xml:space="preserve">
+    <value>_fileToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;fileToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;_fileToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;settingGeneralToolStripMenuItem.Name" xml:space="preserve">
-    <value>settingGeneralToolStripMenuItem</value>
+  <data name="&gt;&gt;_settingGeneralToolStripMenuItem.Name" xml:space="preserve">
+    <value>_settingGeneralToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;settingGeneralToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;_settingGeneralToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;settingsToolStripMenuItem.Name" xml:space="preserve">
-    <value>settingsToolStripMenuItem</value>
+  <data name="&gt;&gt;_settingsToolStripMenuItem.Name" xml:space="preserve">
+    <value>_settingsToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;settingsToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;_settingsToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;settingsGlobalKeysToolStripMenuItem.Name" xml:space="preserve">
-    <value>settingsGlobalKeysToolStripMenuItem</value>
+  <data name="&gt;&gt;_settingsGlobalKeysToolStripMenuItem.Name" xml:space="preserve">
+    <value>_settingsGlobalKeysToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;settingsGlobalKeysToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;_settingsGlobalKeysToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;settingsToolbarToolStripMenuItem.Name" xml:space="preserve">
-    <value>settingsToolbarToolStripMenuItem</value>
+  <data name="&gt;&gt;_settingsToolbarToolStripMenuItem.Name" xml:space="preserve">
+    <value>_settingsToolbarToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;settingsToolbarToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;_settingsToolbarToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;settingsQueryAndSctipToolStripMenuItem.Name" xml:space="preserve">
-    <value>settingsQueryAndSctipToolStripMenuItem</value>
+  <data name="&gt;&gt;_settingsQueryAndSctipToolStripMenuItem.Name" xml:space="preserve">
+    <value>_settingsQueryAndSctipToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;settingsQueryAndSctipToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;_settingsQueryAndSctipToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;doToolStripMenuItem.Name" xml:space="preserve">
-    <value>doToolStripMenuItem</value>
+  <data name="&gt;&gt;_doToolStripMenuItem.Name" xml:space="preserve">
+    <value>_doToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;doToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;_doToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;createActivityForOperationToolStripMenuItem.Name" xml:space="preserve">
-    <value>createActivityForOperationToolStripMenuItem</value>
+  <data name="&gt;&gt;_createActivityForOperationToolStripMenuItem.Name" xml:space="preserve">
+    <value>_createActivityForOperationToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;createActivityForOperationToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;_createActivityForOperationToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;updateActivityFromOperationToolStripMenuItem.Name" xml:space="preserve">
-    <value>updateActivityFromOperationToolStripMenuItem</value>
+  <data name="&gt;&gt;_updateActivityFromOperationToolStripMenuItem.Name" xml:space="preserve">
+    <value>_updateActivityFromOperationToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;updateActivityFromOperationToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;_updateActivityFromOperationToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripSeparator10.Name" xml:space="preserve">
-    <value>toolStripSeparator10</value>
+  <data name="&gt;&gt;_toolStripSeparator10.Name" xml:space="preserve">
+    <value>_toolStripSeparator10</value>
   </data>
-  <data name="&gt;&gt;toolStripSeparator10.Type" xml:space="preserve">
+  <data name="&gt;&gt;_toolStripSeparator10.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;showFolderToolStripMenuItem.Name" xml:space="preserve">
-    <value>showFolderToolStripMenuItem</value>
+  <data name="&gt;&gt;_showFolderToolStripMenuItem.Name" xml:space="preserve">
+    <value>_showFolderToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;showFolderToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;_showFolderToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;copyGUIDSQLToClipboardToolStripMenuItem.Name" xml:space="preserve">
-    <value>copyGUIDSQLToClipboardToolStripMenuItem</value>
+  <data name="&gt;&gt;_copyGuidsqlToClipboardToolStripMenuItem.Name" xml:space="preserve">
+    <value>_copyGuidsqlToClipboardToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;copyGUIDSQLToClipboardToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;_copyGuidsqlToClipboardToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripSeparator1.Name" xml:space="preserve">
-    <value>toolStripSeparator1</value>
+  <data name="&gt;&gt;_toolStripSeparator1.Name" xml:space="preserve">
+    <value>_toolStripSeparator1</value>
   </data>
-  <data name="&gt;&gt;toolStripSeparator1.Type" xml:space="preserve">
+  <data name="&gt;&gt;_toolStripSeparator1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;changeAuthorToolStripMenuItem.Name" xml:space="preserve">
-    <value>changeAuthorToolStripMenuItem</value>
+  <data name="&gt;&gt;_changeAuthorToolStripMenuItem.Name" xml:space="preserve">
+    <value>_changeAuthorToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;changeAuthorToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;_changeAuthorToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;changeAuthorRecursiveToolStripMenuItem.Name" xml:space="preserve">
-    <value>changeAuthorRecursiveToolStripMenuItem</value>
+  <data name="&gt;&gt;_changeAuthorRecursiveToolStripMenuItem.Name" xml:space="preserve">
+    <value>_changeAuthorRecursiveToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;changeAuthorRecursiveToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;_changeAuthorRecursiveToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;versionControlToolStripMenuItem.Name" xml:space="preserve">
-    <value>versionControlToolStripMenuItem</value>
+  <data name="&gt;&gt;_versionControlToolStripMenuItem.Name" xml:space="preserve">
+    <value>_versionControlToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;versionControlToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;_versionControlToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;changeXMLFileToolStripMenuItem.Name" xml:space="preserve">
-    <value>changeXMLFileToolStripMenuItem</value>
+  <data name="&gt;&gt;_changeXmlFileToolStripMenuItem.Name" xml:space="preserve">
+    <value>_changeXmlFileToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;changeXMLFileToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;_changeXmlFileToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;showFolderVCorCodeToolStripMenuItem.Name" xml:space="preserve">
-    <value>showFolderVCorCodeToolStripMenuItem</value>
+  <data name="&gt;&gt;_showFolderVCorCodeToolStripMenuItem.Name" xml:space="preserve">
+    <value>_showFolderVCorCodeToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;showFolderVCorCodeToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;_showFolderVCorCodeToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;getVCLatesrecursiveToolStripMenuItem.Name" xml:space="preserve">
-    <value>getVCLatesrecursiveToolStripMenuItem</value>
+  <data name="&gt;&gt;_getVcLatesrecursiveToolStripMenuItem.Name" xml:space="preserve">
+    <value>_getVcLatesrecursiveToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;getVCLatesrecursiveToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;_getVcLatesrecursiveToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripSeparator2.Name" xml:space="preserve">
-    <value>toolStripSeparator2</value>
+  <data name="&gt;&gt;_toolStripSeparator2.Name" xml:space="preserve">
+    <value>_toolStripSeparator2</value>
   </data>
-  <data name="&gt;&gt;toolStripSeparator2.Type" xml:space="preserve">
+  <data name="&gt;&gt;_toolStripSeparator2.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;showTortoiseLogToolStripMenuItem.Name" xml:space="preserve">
-    <value>showTortoiseLogToolStripMenuItem</value>
+  <data name="&gt;&gt;_showTortoiseLogToolStripMenuItem.Name" xml:space="preserve">
+    <value>_showTortoiseLogToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;showTortoiseLogToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;_showTortoiseLogToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;showTortoiseRepoBrowserToolStripMenuItem.Name" xml:space="preserve">
-    <value>showTortoiseRepoBrowserToolStripMenuItem</value>
+  <data name="&gt;&gt;_showTortoiseRepoBrowserToolStripMenuItem.Name" xml:space="preserve">
+    <value>_showTortoiseRepoBrowserToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;showTortoiseRepoBrowserToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;_showTortoiseRepoBrowserToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;setSvnKeywordsToolStripMenuItem.Name" xml:space="preserve">
-    <value>setSvnKeywordsToolStripMenuItem</value>
+  <data name="&gt;&gt;_setSvnKeywordsToolStripMenuItem.Name" xml:space="preserve">
+    <value>_setSvnKeywordsToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;setSvnKeywordsToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;_setSvnKeywordsToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;setSvnModuleTaggedValuesToolStripMenuItem.Name" xml:space="preserve">
-    <value>setSvnModuleTaggedValuesToolStripMenuItem</value>
+  <data name="&gt;&gt;_setSvnModuleTaggedValuesToolStripMenuItem.Name" xml:space="preserve">
+    <value>_setSvnModuleTaggedValuesToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;setSvnModuleTaggedValuesToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;_setSvnModuleTaggedValuesToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;setSvnModuleTaggedValuesrecursiveToolStripMenuItem.Name" xml:space="preserve">
-    <value>setSvnModuleTaggedValuesrecursiveToolStripMenuItem</value>
+  <data name="&gt;&gt;_setSvnModuleTaggedValuesrecursiveToolStripMenuItem.Name" xml:space="preserve">
+    <value>_setSvnModuleTaggedValuesrecursiveToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;setSvnModuleTaggedValuesrecursiveToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;_setSvnModuleTaggedValuesrecursiveToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;portToolStripMenuItem.Name" xml:space="preserve">
-    <value>portToolStripMenuItem</value>
+  <data name="&gt;&gt;_portToolStripMenuItem.Name" xml:space="preserve">
+    <value>_portToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;portToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;_portToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;movePortsToolStripMenuItem.Name" xml:space="preserve">
-    <value>movePortsToolStripMenuItem</value>
+  <data name="&gt;&gt;_movePortsToolStripMenuItem.Name" xml:space="preserve">
+    <value>_movePortsToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;movePortsToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;_movePortsToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripSeparator7.Name" xml:space="preserve">
-    <value>toolStripSeparator7</value>
+  <data name="&gt;&gt;_toolStripSeparator7.Name" xml:space="preserve">
+    <value>_toolStripSeparator7</value>
   </data>
-  <data name="&gt;&gt;toolStripSeparator7.Type" xml:space="preserve">
+  <data name="&gt;&gt;_toolStripSeparator7.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;deletePortsToolStripMenuItem.Name" xml:space="preserve">
-    <value>deletePortsToolStripMenuItem</value>
+  <data name="&gt;&gt;_deletePortsToolStripMenuItem.Name" xml:space="preserve">
+    <value>_deletePortsToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;deletePortsToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;_deletePortsToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripSeparator3.Name" xml:space="preserve">
-    <value>toolStripSeparator3</value>
+  <data name="&gt;&gt;_toolStripSeparator3.Name" xml:space="preserve">
+    <value>_toolStripSeparator3</value>
   </data>
-  <data name="&gt;&gt;toolStripSeparator3.Type" xml:space="preserve">
+  <data name="&gt;&gt;_toolStripSeparator3.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;connectPortsToolStripMenuItem.Name" xml:space="preserve">
-    <value>connectPortsToolStripMenuItem</value>
+  <data name="&gt;&gt;_connectPortsToolStripMenuItem.Name" xml:space="preserve">
+    <value>_connectPortsToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;connectPortsToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;_connectPortsToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;connectPortsInsideComponentsToolStripMenuItem.Name" xml:space="preserve">
-    <value>connectPortsInsideComponentsToolStripMenuItem</value>
+  <data name="&gt;&gt;_connectPortsInsideComponentsToolStripMenuItem.Name" xml:space="preserve">
+    <value>_connectPortsInsideComponentsToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;connectPortsInsideComponentsToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;_connectPortsInsideComponentsToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripSeparator8.Name" xml:space="preserve">
-    <value>toolStripSeparator8</value>
+  <data name="&gt;&gt;_toolStripSeparator8.Name" xml:space="preserve">
+    <value>_toolStripSeparator8</value>
   </data>
-  <data name="&gt;&gt;toolStripSeparator8.Type" xml:space="preserve">
+  <data name="&gt;&gt;_toolStripSeparator8.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;makeConnectorsUnspecifiedDirectionToolStripMenuItem.Name" xml:space="preserve">
-    <value>makeConnectorsUnspecifiedDirectionToolStripMenuItem</value>
+  <data name="&gt;&gt;_makeConnectorsUnspecifiedDirectionToolStripMenuItem.Name" xml:space="preserve">
+    <value>_makeConnectorsUnspecifiedDirectionToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;makeConnectorsUnspecifiedDirectionToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;_makeConnectorsUnspecifiedDirectionToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripSeparator4.Name" xml:space="preserve">
-    <value>toolStripSeparator4</value>
+  <data name="&gt;&gt;_toolStripSeparator4.Name" xml:space="preserve">
+    <value>_toolStripSeparator4</value>
   </data>
-  <data name="&gt;&gt;toolStripSeparator4.Type" xml:space="preserve">
+  <data name="&gt;&gt;_toolStripSeparator4.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;showPortsInDiagramObjectsToolStripMenuItem.Name" xml:space="preserve">
-    <value>showPortsInDiagramObjectsToolStripMenuItem</value>
+  <data name="&gt;&gt;_showPortsInDiagramObjectsToolStripMenuItem.Name" xml:space="preserve">
+    <value>_showPortsInDiagramObjectsToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;showPortsInDiagramObjectsToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;_showPortsInDiagramObjectsToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;showSendingPortsLeftRecievingPortsRightToolStripMenuItem.Name" xml:space="preserve">
-    <value>showSendingPortsLeftRecievingPortsRightToolStripMenuItem</value>
+  <data name="&gt;&gt;_showSendingPortsLeftRecievingPortsRightToolStripMenuItem.Name" xml:space="preserve">
+    <value>_showSendingPortsLeftRecievingPortsRightToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;showSendingPortsLeftRecievingPortsRightToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;_showSendingPortsLeftRecievingPortsRightToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;hidePortsInDiagramToolStripMenuItem.Name" xml:space="preserve">
-    <value>hidePortsInDiagramToolStripMenuItem</value>
+  <data name="&gt;&gt;_hidePortsInDiagramToolStripMenuItem.Name" xml:space="preserve">
+    <value>_hidePortsInDiagramToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;hidePortsInDiagramToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;_hidePortsInDiagramToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripSeparator5.Name" xml:space="preserve">
-    <value>toolStripSeparator5</value>
+  <data name="&gt;&gt;_toolStripSeparator5.Name" xml:space="preserve">
+    <value>_toolStripSeparator5</value>
   </data>
-  <data name="&gt;&gt;toolStripSeparator5.Type" xml:space="preserve">
+  <data name="&gt;&gt;_toolStripSeparator5.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;unhidePortsToolStripMenuItem.Name" xml:space="preserve">
-    <value>unhidePortsToolStripMenuItem</value>
+  <data name="&gt;&gt;_unhidePortsToolStripMenuItem.Name" xml:space="preserve">
+    <value>_unhidePortsToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;unhidePortsToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;_unhidePortsToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;hidePortsToolStripMenuItem.Name" xml:space="preserve">
-    <value>hidePortsToolStripMenuItem</value>
+  <data name="&gt;&gt;_hidePortsToolStripMenuItem.Name" xml:space="preserve">
+    <value>_hidePortsToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;hidePortsToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;_hidePortsToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripSeparator11.Name" xml:space="preserve">
-    <value>toolStripSeparator11</value>
+  <data name="&gt;&gt;_toolStripSeparator11.Name" xml:space="preserve">
+    <value>_toolStripSeparator11</value>
   </data>
-  <data name="&gt;&gt;toolStripSeparator11.Type" xml:space="preserve">
+  <data name="&gt;&gt;_toolStripSeparator11.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;movePortLabelLeftToolStripMenuItem.Name" xml:space="preserve">
-    <value>movePortLabelLeftToolStripMenuItem</value>
+  <data name="&gt;&gt;_movePortLabelLeftToolStripMenuItem.Name" xml:space="preserve">
+    <value>_movePortLabelLeftToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;movePortLabelLeftToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;_movePortLabelLeftToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;movePortLabelRightPositionToolStripMenuItem.Name" xml:space="preserve">
-    <value>movePortLabelRightPositionToolStripMenuItem</value>
+  <data name="&gt;&gt;_movePortLabelRightPositionToolStripMenuItem.Name" xml:space="preserve">
+    <value>_movePortLabelRightPositionToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;movePortLabelRightPositionToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;_movePortLabelRightPositionToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripSeparator12.Name" xml:space="preserve">
-    <value>toolStripSeparator12</value>
+  <data name="&gt;&gt;_toolStripSeparator12.Name" xml:space="preserve">
+    <value>_toolStripSeparator12</value>
   </data>
-  <data name="&gt;&gt;toolStripSeparator12.Type" xml:space="preserve">
+  <data name="&gt;&gt;_toolStripSeparator12.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;movePortLabelLeftToolStripMenuItem1.Name" xml:space="preserve">
-    <value>movePortLabelLeftToolStripMenuItem1</value>
+  <data name="&gt;&gt;_movePortLabelLeftToolStripMenuItem1.Name" xml:space="preserve">
+    <value>_movePortLabelLeftToolStripMenuItem1</value>
   </data>
-  <data name="&gt;&gt;movePortLabelLeftToolStripMenuItem1.Type" xml:space="preserve">
+  <data name="&gt;&gt;_movePortLabelLeftToolStripMenuItem1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;movePortLabelRightToolStripMenuItem.Name" xml:space="preserve">
-    <value>movePortLabelRightToolStripMenuItem</value>
+  <data name="&gt;&gt;_movePortLabelRightToolStripMenuItem.Name" xml:space="preserve">
+    <value>_movePortLabelRightToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;movePortLabelRightToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;_movePortLabelRightToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;toolStripSeparator9.Name" xml:space="preserve">
-    <value>toolStripSeparator9</value>
+  <data name="&gt;&gt;_toolStripSeparator9.Name" xml:space="preserve">
+    <value>_toolStripSeparator9</value>
   </data>
-  <data name="&gt;&gt;toolStripSeparator9.Type" xml:space="preserve">
+  <data name="&gt;&gt;_toolStripSeparator9.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;orderDiagramItemsToolStripMenuItem.Name" xml:space="preserve">
-    <value>orderDiagramItemsToolStripMenuItem</value>
+  <data name="&gt;&gt;_orderDiagramItemsToolStripMenuItem.Name" xml:space="preserve">
+    <value>_orderDiagramItemsToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;orderDiagramItemsToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;_orderDiagramItemsToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;helpToolStripMenuItem.Name" xml:space="preserve">
-    <value>helpToolStripMenuItem</value>
+  <data name="&gt;&gt;_helpToolStripMenuItem.Name" xml:space="preserve">
+    <value>_helpToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;helpToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;_helpToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;aboutToolStripMenuItem.Name" xml:space="preserve">
-    <value>aboutToolStripMenuItem</value>
+  <data name="&gt;&gt;_aboutToolStripMenuItem.Name" xml:space="preserve">
+    <value>_aboutToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;aboutToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;_aboutToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;helpToolStripMenuItem1.Name" xml:space="preserve">
-    <value>helpToolStripMenuItem1</value>
+  <data name="&gt;&gt;_helpToolStripMenuItem1.Name" xml:space="preserve">
+    <value>_helpToolStripMenuItem1</value>
   </data>
-  <data name="&gt;&gt;helpToolStripMenuItem1.Type" xml:space="preserve">
+  <data name="&gt;&gt;_helpToolStripMenuItem1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;getLastSQLErrorToolStripMenuItem.Name" xml:space="preserve">
-    <value>getLastSQLErrorToolStripMenuItem</value>
+  <data name="&gt;&gt;_getLastSqlErrorToolStripMenuItem.Name" xml:space="preserve">
+    <value>_getLastSqlErrorToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;getLastSQLErrorToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;_getLastSqlErrorToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>AddinControlGUI</value>
+    <value>AddinControlGui</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>hoTools.ActiveX.AddinGUI, ActiveX, Version=2.0.0.1, Culture=neutral, PublicKeyToken=37ea3d95ffcb87e1</value>

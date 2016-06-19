@@ -1,11 +1,14 @@
-﻿namespace hoTools.Settings
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace hoTools.Settings
 {
     partial class FrmSettingsGeneral
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -620,47 +623,47 @@
 
         #endregion
 
-        private System.Windows.Forms.Button btnOk;
-        private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.RadioButton rbSearchAndReplaceDisableWindow;
-        private System.Windows.Forms.RadioButton rbSearchAndReplaceTabWindow;
-        private System.Windows.Forms.RadioButton rbSearchAndReplaceAddinWindow;
-        private System.Windows.Forms.CheckBox chkAdvancedDiagramNote;
-        private System.Windows.Forms.Label label36;
-        private System.Windows.Forms.CheckBox chkVcSupport;
-        private System.Windows.Forms.Label label35;
-        private System.Windows.Forms.CheckBox chkAdvancedFeatures;
-        private System.Windows.Forms.CheckBox chkSvnSupport;
-        private System.Windows.Forms.Label label33;
-        private System.Windows.Forms.Label label41;
-        private System.Windows.Forms.Label label29;
-        private System.Windows.Forms.TextBox txtQuickSearch;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.CheckBox chkAdvancedPort;
-        private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.TextBox txtFileManagerPath;
-        private System.Windows.Forms.Label label34;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.RadioButton rbLineStyleAndMoreDisableWindow;
-        private System.Windows.Forms.RadioButton rbLineStyleAndMoreTabWindow;
-        private System.Windows.Forms.RadioButton rbLineStyleAndMoreAddinWindow;
-        private System.Windows.Forms.CheckBox chkLineStyleSupport;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.CheckBox chkShortKeySupport;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.CheckBox chkShowServiceButtons;
-        private System.Windows.Forms.CheckBox chkShowQueryButtons;
-        private System.Windows.Forms.CheckBox chkFavoriteSupport;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.CheckBox chkConveyedItemSupport;
-        private System.Windows.Forms.RadioButton rbAutoLoadMdgNo;
-        private System.Windows.Forms.RadioButton rbAutoLoadMdgCompilation;
-        private System.Windows.Forms.RadioButton rbAutoLoadMdgBasic;
+        private Button btnOk;
+        private Button btnCancel;
+        private GroupBox groupBox3;
+        private RadioButton rbSearchAndReplaceDisableWindow;
+        private RadioButton rbSearchAndReplaceTabWindow;
+        private RadioButton rbSearchAndReplaceAddinWindow;
+        private CheckBox chkAdvancedDiagramNote;
+        private Label label36;
+        private CheckBox chkVcSupport;
+        private Label label35;
+        private CheckBox chkAdvancedFeatures;
+        private CheckBox chkSvnSupport;
+        private Label label33;
+        private Label label41;
+        private Label label29;
+        private TextBox txtQuickSearch;
+        private Label label1;
+        private Label label2;
+        private CheckBox chkAdvancedPort;
+        private ToolTip toolTip1;
+        private TextBox txtFileManagerPath;
+        private Label label34;
+        private GroupBox groupBox1;
+        private RadioButton rbLineStyleAndMoreDisableWindow;
+        private RadioButton rbLineStyleAndMoreTabWindow;
+        private RadioButton rbLineStyleAndMoreAddinWindow;
+        private CheckBox chkLineStyleSupport;
+        private Label label3;
+        private CheckBox chkShortKeySupport;
+        private Label label4;
+        private Label label5;
+        private Label label6;
+        private CheckBox chkShowServiceButtons;
+        private CheckBox chkShowQueryButtons;
+        private CheckBox chkFavoriteSupport;
+        private Label label7;
+        private Label label8;
+        private GroupBox groupBox2;
+        private CheckBox chkConveyedItemSupport;
+        private RadioButton rbAutoLoadMdgNo;
+        private RadioButton rbAutoLoadMdgCompilation;
+        private RadioButton rbAutoLoadMdgBasic;
     }
 }

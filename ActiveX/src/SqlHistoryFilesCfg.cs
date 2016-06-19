@@ -11,18 +11,18 @@ namespace hoTools.Settings
     /// </summary>
     public class SqlHistoryFilesCfg
     {
-        int MAX_FILE_COUNT_TO_REMEMBER = 20;
-        const string SQL_HISTORY_FILE_CFG_STRING = "SqlFile";
+        int _maxFileCountToRemember = 20;
+        const string SqlHistoryFileCfgString = "SqlFile";
         /// <summary>
         /// List of files loaded in history. Recent used files
         /// </summary>
-        public List<HistoryFile> lSqlHistoryFilesCfg => _lSqlHistoryFilesCfg;
+        public List<HistoryFile> LSqlHistoryFilesCfg => _lSqlHistoryFilesCfg;
 
         readonly List<HistoryFile> _lSqlHistoryFilesCfg = new List<HistoryFile>();
 
         // count of SqlFile in *.cfg files
-        const int SQL_FILE_COUNT = 20;
-        Configuration _config;
+        const int SqlFileCount = 20;
+        readonly Configuration _config;
 
         /// <summary>
         /// Constructor which load all sql history file names
@@ -31,14 +31,14 @@ namespace hoTools.Settings
         public SqlHistoryFilesCfg(Configuration currentConfig)
         {
             _config = currentConfig;
-            load();
+            Load();
         }
 
         /// <summary>
         ///  Loads sql history file names from configuration.
         ///  Ignore not exiting files
         /// </summary>
-        public void load()
+        public void Load()
         {
             // make file list unique
             Dictionary<string, string> loadedFiles = new Dictionary<string, string>();
@@ -47,8 +47,8 @@ namespace hoTools.Settings
             {
                 // find key appropriate for file
                 string key = entry.Key;
-                if (key.Length <= SQL_HISTORY_FILE_CFG_STRING.Length) continue;
-                if (key.Substring(0, SQL_HISTORY_FILE_CFG_STRING.Length).Equals(SQL_HISTORY_FILE_CFG_STRING))
+                if (key.Length <= SqlHistoryFileCfgString.Length) continue;
+                if (key.Substring(0, SqlHistoryFileCfgString.Length).Equals(SqlHistoryFileCfgString))
                 {
                     // filename found
                     string fileName = entry.Value.Trim();
@@ -70,18 +70,17 @@ namespace hoTools.Settings
 
                 }
             }
-            loadedFiles = null;
         }
         /// <summary>
         /// Save history / recent sql file names to configuration. It stores all entries in the history list. The remaining files are reset to "":
         /// </summary>
-        public void save()
+        public void Save()
         {
-            int maxFileCount = MAX_FILE_COUNT_TO_REMEMBER;
+            int maxFileCount = _maxFileCountToRemember;
             if (_lSqlHistoryFilesCfg.Count > maxFileCount) maxFileCount = _lSqlHistoryFilesCfg.Count;
             for (int i = 0; i < maxFileCount; i++)
             {
-                string key = $"{SQL_HISTORY_FILE_CFG_STRING}{i + 1}";
+                string key = $"{SqlHistoryFileCfgString}{i + 1}";
                 string value = "";
                 // store the existing history files
                 if (i < _lSqlHistoryFilesCfg.Count)
@@ -100,7 +99,7 @@ namespace hoTools.Settings
         /// Insert a SQL file to the beginning of SqlFileHistory 
         /// </summary>
         /// <param name="s"></param>
-        public void insert(string s)
+        public void Insert(string s)
         {
             // delete an existing entry
             // add to first one

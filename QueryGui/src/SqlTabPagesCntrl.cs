@@ -717,7 +717,7 @@ CTRL+SHFT+S                     Store sql All
             // delete all previous entries
             loadRecentFileStripMenuItem.DropDownItems.Clear();
             // over all history files
-            foreach (HistoryFile historyFile in Settings.historySqlFiles.lSqlHistoryFilesCfg)
+            foreach (HistoryFile historyFile in Settings.HistorySqlFiles.LSqlHistoryFilesCfg)
             {
                 // ignore empty entries
                 if (historyFile.FullName == "") continue;
@@ -802,8 +802,8 @@ CTRL+SHFT+S                     Store sql All
 
                 if (!notUpdateLastOpenedList)
                 {
-                    Settings.lastOpenedFiles.insert(fileName);
-                    Settings.save();
+                    Settings.LastOpenedFiles.Insert(fileName);
+                    Settings.Save();
                 }
                
             }
@@ -871,7 +871,7 @@ CTRL+SHFT+S                     Store sql All
             // Contend changed, need to be stored first
             if (sqlFile.IsChanged)
             {
-                Settings.lastOpenedFiles.remove(sqlFile.FullName);
+                Settings.LastOpenedFiles.Remove(sqlFile.FullName);
                 DialogResult result = MessageBox.Show($"Old File: '{sqlFile.FullName}'",
                     "First store old File? ", MessageBoxButtons.YesNoCancel);
                 if (result == DialogResult.Cancel) return;
@@ -979,7 +979,7 @@ CTRL+SHFT+S                     Store sql All
             {
                 save(tabPage, configSave: false);
             }
-            Settings.save();
+            Settings.Save();
         }
 
         /// <summary>
@@ -1038,7 +1038,7 @@ CTRL+SHFT+S                     Store sql All
         /// </summary>
         public void ReloadTabPageWithAsk()
         {
-            if (_tabControl.SelectedIndex < 0 || (!Settings.isAskForQueryUpdateOutside) ) return;
+            if (_tabControl.SelectedIndex < 0 || (!Settings.IsAskForQueryUpdateOutside) ) return;
             TabPage tabPage = _tabControl.TabPages[_tabControl.SelectedIndex];
             var textBox = (TextBox)tabPage.Controls[0];
             SqlFile sqlFile = (SqlFile)tabPage.Tag;
@@ -1116,7 +1116,7 @@ CTRL+SHFT+S                     Store sql All
 
                     // store the complete filename in settings
                     InsertRecentFileLists(openFileDialog.FileName);
-                    Settings.save();
+                    Settings.Save();
 
                     // Load recent files into ToolStripMenu
                     loadRecentFilesIntoToolStripItems();
@@ -1190,7 +1190,7 @@ CTRL+SHFT+S                     Store sql All
 
 
 
-                    Settings.save();
+                    Settings.Save();
                 }
             }
         }
@@ -1203,8 +1203,8 @@ CTRL+SHFT+S                     Store sql All
         /// </summary>
         void InsertRecentFileLists(string fileName)
         {
-            Settings.historySqlFiles.insert(fileName);
-            Settings.lastOpenedFiles.insert(fileName);
+            Settings.HistorySqlFiles.Insert(fileName);
+            Settings.LastOpenedFiles.Insert(fileName);
         }
         #endregion
         /// <summary>
@@ -1233,14 +1233,14 @@ CTRL+SHFT+S                     Store sql All
         void loadOpenedTabsFromLastSession()
         {
             // load last opened files into tab pages
-            foreach (HistoryFile lastOpenedFile in Settings.lastOpenedFiles.lSqlLastOpenedFilesCfg)
+            foreach (HistoryFile lastOpenedFile in Settings.LastOpenedFiles.LSqlLastOpenedFilesCfg)
             {
                 string fileName = lastOpenedFile.FullName.Trim();
                 if (fileName == "") continue;
                 // file isn't available, delete it from list of last opened filed
                 if (!File.Exists(fileName))
                 {
-                    Settings.lastOpenedFiles.remove(fileName);
+                    Settings.LastOpenedFiles.Remove(fileName);
                     continue;
                 }
 
@@ -1287,7 +1287,7 @@ CTRL+SHFT+S                     Store sql All
                 // update history
                 InsertRecentFileLists(sqlFile.FullName);
                 // save configuration
-                if (configSave) Settings.save();
+                if (configSave) Settings.Save();
                 // set TabName
                 tabPage.Text = sqlFile.DisplayName;
             }
@@ -1336,8 +1336,8 @@ CTRL+SHFT+S                     Store sql All
 
                 }
             }
-            Settings.lastOpenedFiles.remove(sqlFile.FullName);
-            Settings.save();
+            Settings.LastOpenedFiles.Remove(sqlFile.FullName);
+            Settings.Save();
             _tabControl.TabPages.Remove(tabPage);
         }
 

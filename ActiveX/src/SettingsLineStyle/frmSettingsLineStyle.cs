@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
-using Control.EaAddinShortcuts;
 using hoTools.ActiveX;
-using GlobalHotkeys;
 
 namespace hoTools.Settings
 
@@ -13,9 +10,9 @@ namespace hoTools.Settings
     /// Reads from configuration, displays the content and write to configuration.
     /// </summary>
     public partial class FrmSettingsLineStyle : Form
-    {   
-        AddinSettings _settings;
-        AddinControlGUI _addinControl;
+    {
+        readonly AddinSettings _settings;
+        AddinControlGui _addinControl;
 
         #region Constructor
         /// <summary>
@@ -23,7 +20,7 @@ namespace hoTools.Settings
         /// </summary>
         /// <param name="settings">Object with settings</param>
         /// <param name="addinControl">Object with Control</param>
-        public FrmSettingsLineStyle(AddinSettings settings, AddinControlGUI addinControl)
+        public FrmSettingsLineStyle(AddinSettings settings, AddinControlGui addinControl)
         {
             InitializeComponent();
 
@@ -33,7 +30,7 @@ namespace hoTools.Settings
           
             #region line style
             // line style
-            var items = new string[]{"A Automatic","C Custom","D Direct","B Bezier curve",
+            var items = new[]{"A Automatic","C Custom","D Direct","B Bezier curve",
                 "LV Lateral Vertical","LH Lateral Horizontal","no","OR Orthogonal Rounded",
                 "OS Orthogonal Square","TH Tree Horizontal","TV Tree Vertical"};
             string[] itemsActivity = new string[items.Length];
@@ -65,25 +62,25 @@ namespace hoTools.Settings
 
 
 
-            this.cboActivityLineStyle.DataSource = itemsActivity;
-            this.cboStatechartLineStyle.DataSource = itemsStatechart;
-            this.cboClassLineStyle.DataSource = itemsClass; 
-            this.cboComponentLineStyle.DataSource = itemsComponent;
-            this.cboPackageLineStyle.DataSource = itemsPackage; 
-            this.cboCustomLineStyle.DataSource = itemsCustom; 
-            this.cboUseCaseLineStyle.DataSource = itemsUseCase; 
-            this.cboDeploymentLineStyle.DataSource = itemsDeployment;
-            this.cboCompositeStructureLineStyle.DataSource = itemsCompositeStructure; 
+            cboActivityLineStyle.DataSource = itemsActivity;
+            cboStatechartLineStyle.DataSource = itemsStatechart;
+            cboClassLineStyle.DataSource = itemsClass; 
+            cboComponentLineStyle.DataSource = itemsComponent;
+            cboPackageLineStyle.DataSource = itemsPackage; 
+            cboCustomLineStyle.DataSource = itemsCustom; 
+            cboUseCaseLineStyle.DataSource = itemsUseCase; 
+            cboDeploymentLineStyle.DataSource = itemsDeployment;
+            cboCompositeStructureLineStyle.DataSource = itemsCompositeStructure; 
 
-            this.cboActivityLineStyle.Text = settings.ActivityLineStyle;
-            this.cboStatechartLineStyle.Text = settings.StatechartLineStyle;
-            this.cboClassLineStyle.Text = settings.ClassLineStyle;
-            this.cboComponentLineStyle.Text = settings.ComponentLineStyle;
-            this.cboPackageLineStyle.Text = settings.PackageLineStyle;
-            this.cboCustomLineStyle.Text = settings.CustomLineStyle;
-            this.cboUseCaseLineStyle.Text = settings.UseCaseLineStyle;
-            this.cboDeploymentLineStyle.Text = settings.DeploymentLineStyle;
-            this.cboCompositeStructureLineStyle.Text = settings.CompositeStructureLineStyle;
+            cboActivityLineStyle.Text = settings.ActivityLineStyle;
+            cboStatechartLineStyle.Text = settings.StatechartLineStyle;
+            cboClassLineStyle.Text = settings.ClassLineStyle;
+            cboComponentLineStyle.Text = settings.ComponentLineStyle;
+            cboPackageLineStyle.Text = settings.PackageLineStyle;
+            cboCustomLineStyle.Text = settings.CustomLineStyle;
+            cboUseCaseLineStyle.Text = settings.UseCaseLineStyle;
+            cboDeploymentLineStyle.Text = settings.DeploymentLineStyle;
+            cboCompositeStructureLineStyle.Text = settings.CompositeStructureLineStyle;
             #endregion
 
             
@@ -104,26 +101,26 @@ namespace hoTools.Settings
         {
 
             #region Line style
-            _settings.ActivityLineStyle = this.cboActivityLineStyle.Text;
-            _settings.StatechartLineStyle = this.cboStatechartLineStyle.Text;
-            _settings.ClassLineStyle = this.cboClassLineStyle.Text;
-            _settings.ComponentLineStyle = this.cboComponentLineStyle.Text;
-            _settings.PackageLineStyle = this.cboPackageLineStyle.Text;
-            _settings.CustomLineStyle = this.cboCustomLineStyle.Text;
-            _settings.UseCaseLineStyle = this.cboUseCaseLineStyle.Text;
-            _settings.DeploymentLineStyle = this.cboDeploymentLineStyle.Text;
-            _settings.CompositeStructureLineStyle = this.cboCompositeStructureLineStyle.Text;
+            _settings.ActivityLineStyle = cboActivityLineStyle.Text;
+            _settings.StatechartLineStyle = cboStatechartLineStyle.Text;
+            _settings.ClassLineStyle = cboClassLineStyle.Text;
+            _settings.ComponentLineStyle = cboComponentLineStyle.Text;
+            _settings.PackageLineStyle = cboPackageLineStyle.Text;
+            _settings.CustomLineStyle = cboCustomLineStyle.Text;
+            _settings.UseCaseLineStyle = cboUseCaseLineStyle.Text;
+            _settings.DeploymentLineStyle = cboDeploymentLineStyle.Text;
+            _settings.CompositeStructureLineStyle = cboCompositeStructureLineStyle.Text;
             #endregion
            
-            this._settings.save();
-            this.Close();
+            _settings.Save();
+            Close();
 
         }
         #endregion
 
         void btnCancel_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
     }
 }

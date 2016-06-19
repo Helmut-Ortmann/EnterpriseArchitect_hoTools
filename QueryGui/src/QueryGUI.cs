@@ -33,7 +33,7 @@ namespace hoTools.Query
     [Guid("3F23B705-62F1-43D7-9F6F-085105FDF752")]
     [ProgId(PROGID)]
     [ComDefaultInterface(typeof(IQueryGUI))]
-    public partial class QueryGUI : AddinGUI, IQueryGUI
+    public partial class QueryGUI : AddinGui, IQueryGUI
     {
         public const string PROGID = "hoTools.QueryGUI";
         public const string TABULATOR_SCRIPT = "Script";
@@ -557,10 +557,10 @@ namespace hoTools.Query
             switch (AddinSettings.Customer)
             {
 
-                case AddinSettings.CustomerCfg.VAR1:
+                case AddinSettings.CustomerCfg.Var1:
                     EaService.aboutVAR1(Release, configFilePath);
                     break;
-                case AddinSettings.CustomerCfg.hoTools:
+                case AddinSettings.CustomerCfg.HoTools:
                     EaService.about(Release, configFilePath);
                     break;
                 default:

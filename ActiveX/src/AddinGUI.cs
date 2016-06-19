@@ -1,7 +1,7 @@
-﻿using hoTools.Settings;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
+using EA;
 using EAAddinFramework.Utils;
-
+using hoTools.Settings;
 
 namespace hoTools.ActiveX
 {
@@ -12,43 +12,28 @@ namespace hoTools.ActiveX
     /// <para/>- string Release
     /// <para/>- EA.Repository Repository
     /// </summary>
-    public class AddinGUI : UserControl
+    public class AddinGui : UserControl
     {
-        EA.Repository _rep;
-        string _release;
-        string _projectGUID;
-        Model _model;
-        AddinSettings _addinSettings;
+        public string Release { set; get; }
+        public AddinSettings AddinSettings { get; set; }
+        Repository _rep;
         // needs to set just after creating Control
 
 
-        #region Model
-        public Model Model
-        {
-            set
-            {
-                _model = value;
-            }
-            get
-            {
-                return _model;
-            }
-        }
-        #endregion
+        public Model Model { set; get; }
+
         #region Repository
-        public virtual EA.Repository Repository
+        public virtual Repository Repository
         {
             set
             {
                 _rep = value;
                 if (Repository == null) return;
-                if (_model == null) _model = new Model(value);
+                if (Model == null) Model = new Model(value);
                 {
-                    _model.Repository = value;
+                    Model.Repository = value;
                 }
-                _projectGUID = _rep.ProjectGUID;
-
-                
+               
             }
             get
             {
@@ -56,33 +41,8 @@ namespace hoTools.ActiveX
             }
         }
         #endregion
-        #region Release
-        public string Release
-        {
-            set
-            {
-                _release = value;
-            }
-            get
-            {
-                return _release;
-            }
-        }
-        #endregion
-        #region AddinSettings
-        public AddinSettings AddinSettings
-        {
-            get
-            {
-                return _addinSettings;
-            }
-            set
-            {
-                _addinSettings = value;
 
-             
-            }
-        }
-        #endregion
+
+
     }
 }

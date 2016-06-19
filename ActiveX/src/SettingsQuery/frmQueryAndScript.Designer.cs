@@ -1,11 +1,14 @@
-﻿namespace hoTools.Settings
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace hoTools.Settings
 {
     partial class FrmQueryAndScript
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -260,22 +263,22 @@
 
         #endregion
 
-        private System.Windows.Forms.Button btnOk;
-        private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.RadioButton rbOnlyQueryDisableWindow;
-        private System.Windows.Forms.RadioButton rbOnlyQueryTabWindow;
-        private System.Windows.Forms.RadioButton rbOnlyQueryAddinWindow;
-        private System.Windows.Forms.RadioButton rbScriptAndQueryAddinWindow;
-        private System.Windows.Forms.RadioButton rbScriptAndQueryTabWindow;
-        private System.Windows.Forms.RadioButton rbScriptAndQueryDisableWindow;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.CheckBox chkIsAskForUpdate;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private System.Windows.Forms.TextBox txtSqlEditor;
-        private System.Windows.Forms.Button btnSqlEditor;
+        private Button btnOk;
+        private Button btnCancel;
+        private Label label1;
+        private ToolTip toolTip1;
+        private GroupBox groupBox1;
+        private RadioButton rbOnlyQueryDisableWindow;
+        private RadioButton rbOnlyQueryTabWindow;
+        private RadioButton rbOnlyQueryAddinWindow;
+        private RadioButton rbScriptAndQueryAddinWindow;
+        private RadioButton rbScriptAndQueryTabWindow;
+        private RadioButton rbScriptAndQueryDisableWindow;
+        private GroupBox groupBox2;
+        private CheckBox chkIsAskForUpdate;
+        private Label label2;
+        private OpenFileDialog openFileDialog1;
+        private TextBox txtSqlEditor;
+        private Button btnSqlEditor;
     }
 }

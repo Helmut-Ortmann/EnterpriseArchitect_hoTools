@@ -1,6 +1,6 @@
-﻿using System.IO;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
 
 namespace hoTools.Settings
 {
@@ -10,17 +10,17 @@ namespace hoTools.Settings
     /// </summary>
     public class SqlLastOpenedFilesCfg
     {
-        const int MAX_OPEN_FILE_COUNT_TO_REMEMBER = 10;
-        const string SQL_LAST_OPENED_FILE_CFG_STRING = "SqlLastOpenedFile";
+        const int MaxOpenFileCountToRemember = 10;
+        const string SqlLastOpenedFileCfgString = "SqlLastOpenedFile";
         /// <summary>
         /// List of files last opened before EA closed
         /// </summary>
-        public List<HistoryFile> lSqlLastOpenedFilesCfg => _lSqlLastOpenedFilesCfg;
+        public List<HistoryFile> LSqlLastOpenedFilesCfg => _lSqlLastOpenedFilesCfg;
 
         readonly List<HistoryFile> _lSqlLastOpenedFilesCfg = new List<HistoryFile>();
 
 
-        Configuration _config;
+        readonly Configuration _config;
 
         /// <summary>
         /// Constructor which load all last opened file names
@@ -29,14 +29,14 @@ namespace hoTools.Settings
         public SqlLastOpenedFilesCfg(Configuration currentConfig)
         {
             _config = currentConfig;
-            load();
+            Load();
         }
 
         /// <summary>
         ///  Loads last opened sql file names from configuration.
         ///  File that don't exists are removed from the list.
         /// </summary>
-        public void load()
+        public void Load()
         {
             // make file list unique
             Dictionary<string, string> loadedFiles = new Dictionary<string, string>();
@@ -45,8 +45,8 @@ namespace hoTools.Settings
             {
                 // find key appropriate for file
                 string key = entry.Key;
-                if (key.Length <= SQL_LAST_OPENED_FILE_CFG_STRING.Length) continue;
-                if (key.Substring(0, SQL_LAST_OPENED_FILE_CFG_STRING.Length).Equals(SQL_LAST_OPENED_FILE_CFG_STRING))
+                if (key.Length <= SqlLastOpenedFileCfgString.Length) continue;
+                if (key.Substring(0, SqlLastOpenedFileCfgString.Length).Equals(SqlLastOpenedFileCfgString))
                 {
                     // key with fileName found
                     string fileName = entry.Value.Trim();
@@ -70,20 +70,18 @@ namespace hoTools.Settings
 
                 }
             }
-            // only needed to ensure unique file names
-            loadedFiles = null;
         }
         /// <summary>
         /// Save sql file names to configuration
         /// <para/>Make sure the loaded amount is written back
         /// </summary>
-        public void save()
+        public void Save()
         {
-            int maxOpenFileCount = MAX_OPEN_FILE_COUNT_TO_REMEMBER;
+            int maxOpenFileCount = MaxOpenFileCountToRemember;
             if (_lSqlLastOpenedFilesCfg.Count > maxOpenFileCount) maxOpenFileCount = _lSqlLastOpenedFilesCfg.Count;
             for (int i = 0; i < maxOpenFileCount; i++)
             {
-                string key = $"{SQL_LAST_OPENED_FILE_CFG_STRING}{i + 1}";
+                string key = $"{SqlLastOpenedFileCfgString}{i + 1}";
                 string value = "";
                 // store the opened files
                 if (i < _lSqlLastOpenedFilesCfg.Count)
@@ -102,7 +100,7 @@ namespace hoTools.Settings
         /// Insert a SQL file to the beginning of last opened SQL files 
         /// </summary>
         /// <param name="fileName"></param>
-        public void insert(string fileName)
+        public void Insert(string fileName)
         {
             // delete an existing entry
             // add to first one
@@ -118,7 +116,7 @@ namespace hoTools.Settings
         /// <summary>
         /// Remove fileName from last opened files
         /// </summary>
-        public void remove(string fileName)
+        public void Remove(string fileName)
         {
             // delete an existing entry
             var index = _lSqlLastOpenedFilesCfg.FindIndex(x => x.FullName == fileName);
@@ -130,7 +128,7 @@ namespace hoTools.Settings
         /// <summary>
         /// Remove all file items from last opened files
         /// </summary>
-        public void removeAll()
+        public void RemoveAll()
         {
             _lSqlLastOpenedFilesCfg.Clear();
         }

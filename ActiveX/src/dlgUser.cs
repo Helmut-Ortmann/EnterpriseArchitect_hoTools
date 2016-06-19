@@ -1,25 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace hoTools.EaServices.Dlg
 {
-    public partial class dlgUser : Form
+    public partial class DlgUser : Form
     {
         string _user = "";
-        public dlgUser()
+        public DlgUser()
         {
             InitializeComponent();
             cmbUser.Text = _user;
 
         }
         #region property user
-        public string user
+        public string User
         {
             set { _user = value;  }
             get { return _user; }

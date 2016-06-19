@@ -1,11 +1,14 @@
-﻿namespace hoTools.Settings
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace hoTools.Settings
 {
     partial class FrmSettingsLineStyle
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -329,28 +332,28 @@
         }
 
         #endregion
-        private System.Windows.Forms.Button btnOK;
-        private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.ComboBox cboStatechartLineStyle;
-        private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.ComboBox cboPackageLineStyle;
-        private System.Windows.Forms.ComboBox cboUseCaseLineStyle;
-        private System.Windows.Forms.ComboBox cboDeploymentLineStyle;
-        private System.Windows.Forms.ComboBox cboCustomLineStyle;
-        private System.Windows.Forms.ComboBox cboCompositeStructureLineStyle;
-        private System.Windows.Forms.ComboBox cboComponentLineStyle;
-        private System.Windows.Forms.ComboBox cboClassLineStyle;
-        private System.Windows.Forms.ComboBox cboActivityLineStyle;
-        private System.Windows.Forms.Label label1;
+        private Button btnOK;
+        private Button btnCancel;
+        private Label label2;
+        private Label label3;
+        private Label label4;
+        private Label label5;
+        private Label label6;
+        private Label label7;
+        private Label label8;
+        private Label label9;
+        private Label label10;
+        private GroupBox groupBox1;
+        private ComboBox cboStatechartLineStyle;
+        private ToolTip toolTip1;
+        private ComboBox cboPackageLineStyle;
+        private ComboBox cboUseCaseLineStyle;
+        private ComboBox cboDeploymentLineStyle;
+        private ComboBox cboCustomLineStyle;
+        private ComboBox cboCompositeStructureLineStyle;
+        private ComboBox cboComponentLineStyle;
+        private ComboBox cboClassLineStyle;
+        private ComboBox cboActivityLineStyle;
+        private Label label1;
     }
 }

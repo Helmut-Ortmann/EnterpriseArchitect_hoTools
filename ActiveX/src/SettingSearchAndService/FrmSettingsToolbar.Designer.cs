@@ -1,11 +1,14 @@
-﻿namespace hoTools.Settings.Toolbar
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace hoTools.Settings.Toolbar
 {
     partial class FrmSettingsToolbar
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -695,63 +698,63 @@
         }
 
         #endregion
-        private System.Windows.Forms.Button btnOK;
-        private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.TextBox txtBtn1Text;
-        private System.Windows.Forms.TextBox txtBtn1SearchName;
-        private System.Windows.Forms.TextBox txtBtn1SearchTerm;
-        private System.Windows.Forms.TextBox txtBtn1SearchTooltip;
-        private System.Windows.Forms.TextBox txtBtn2SearchTooltip;
-        private System.Windows.Forms.TextBox txtBtn2SearchTerm;
-        private System.Windows.Forms.TextBox txtBtn2SearchName;
-        private System.Windows.Forms.TextBox txtBtn2Text;
-        private System.Windows.Forms.TextBox txtBtn3SearchTooltip;
-        private System.Windows.Forms.TextBox txtBtn3SearchTerm;
-        private System.Windows.Forms.TextBox txtBtn3SearchName;
-        private System.Windows.Forms.TextBox txtBtn3Text;
-        private System.Windows.Forms.TextBox txtBtn4SearchTooltip;
-        private System.Windows.Forms.TextBox txtBtn4SearchTerm;
-        private System.Windows.Forms.TextBox txtBtn4SearchName;
-        private System.Windows.Forms.TextBox txtBtn4Text;
-        private System.Windows.Forms.TextBox txtBtn5SearchTooltip;
-        private System.Windows.Forms.TextBox txtBtn5SearchTerm;
-        private System.Windows.Forms.TextBox txtBtn5SearchName;
-        private System.Windows.Forms.TextBox txtBtn5Text;
-        private System.Windows.Forms.Label Button1;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.ComboBox cmbService1;
-        private System.Windows.Forms.TextBox txtButton5TextService;
-        private System.Windows.Forms.TextBox txtButton4TextService;
-        private System.Windows.Forms.TextBox txtButton3TextService;
-        private System.Windows.Forms.TextBox txtButton2TextService;
-        private System.Windows.Forms.TextBox txtButton1TextService;
-        private System.Windows.Forms.ComboBox cmbService5;
-        private System.Windows.Forms.ComboBox cmbService4;
-        private System.Windows.Forms.ComboBox cmbService3;
-        private System.Windows.Forms.ComboBox cmbService2;
-        private System.Windows.Forms.Label label19;
-        private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.Label label22;
-        private System.Windows.Forms.Label label23;
-        private System.Windows.Forms.Label label24;
-        private System.Windows.Forms.Label label25;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.TextBox txtServiceTooltip5;
-        private System.Windows.Forms.TextBox txtServiceTooltip1;
-        private System.Windows.Forms.TextBox txtServiceTooltip4;
-        private System.Windows.Forms.TextBox txtServiceTooltip2;
-        private System.Windows.Forms.TextBox txtServiceTooltip3;
-        private System.Windows.Forms.Label label26;
-        private System.Windows.Forms.Label label1;
+        private Button btnOK;
+        private Button btnCancel;
+        private ToolTip toolTip1;
+        private TextBox txtBtn1Text;
+        private TextBox txtBtn1SearchName;
+        private TextBox txtBtn1SearchTerm;
+        private TextBox txtBtn1SearchTooltip;
+        private TextBox txtBtn2SearchTooltip;
+        private TextBox txtBtn2SearchTerm;
+        private TextBox txtBtn2SearchName;
+        private TextBox txtBtn2Text;
+        private TextBox txtBtn3SearchTooltip;
+        private TextBox txtBtn3SearchTerm;
+        private TextBox txtBtn3SearchName;
+        private TextBox txtBtn3Text;
+        private TextBox txtBtn4SearchTooltip;
+        private TextBox txtBtn4SearchTerm;
+        private TextBox txtBtn4SearchName;
+        private TextBox txtBtn4Text;
+        private TextBox txtBtn5SearchTooltip;
+        private TextBox txtBtn5SearchTerm;
+        private TextBox txtBtn5SearchName;
+        private TextBox txtBtn5Text;
+        private Label Button1;
+        private Label label11;
+        private Label label12;
+        private Label label13;
+        private Label label14;
+        private Label label15;
+        private Label label16;
+        private Label label17;
+        private Label label18;
+        private ComboBox cmbService1;
+        private TextBox txtButton5TextService;
+        private TextBox txtButton4TextService;
+        private TextBox txtButton3TextService;
+        private TextBox txtButton2TextService;
+        private TextBox txtButton1TextService;
+        private ComboBox cmbService5;
+        private ComboBox cmbService4;
+        private ComboBox cmbService3;
+        private ComboBox cmbService2;
+        private Label label19;
+        private Label label20;
+        private Label label21;
+        private Label label22;
+        private Label label23;
+        private Label label24;
+        private Label label25;
+        private GroupBox groupBox2;
+        private GroupBox groupBox3;
+        private TextBox txtServiceTooltip5;
+        private TextBox txtServiceTooltip1;
+        private TextBox txtServiceTooltip4;
+        private TextBox txtServiceTooltip2;
+        private TextBox txtServiceTooltip3;
+        private Label label26;
+        private Label label1;
     }
 }
