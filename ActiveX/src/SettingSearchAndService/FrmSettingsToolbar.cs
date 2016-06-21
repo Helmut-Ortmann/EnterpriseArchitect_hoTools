@@ -200,8 +200,8 @@ namespace hoTools.Settings.Toolbar
             #endregion
 
             _addinControl.parameterizeMenusAndButtons(); // hide / unhide Menus & Buttons
-            _addinControl.parameterizeSearchButton(); // sets the EA Model Search Buttons on Toolbar
-            _addinControl.parameterizeServiceButton(); // sets the Services Buttons on Toolbar
+            _addinControl.ParameterizeSearchButton(); // sets the EA Model Search Buttons on Toolbar
+            _addinControl.ParameterizeServiceButton(); // sets the Services Buttons on Toolbar
 
             _settings.updateSearchesAndServices(); // update dynamic informations like method, texts from configuration
             this._settings.save();

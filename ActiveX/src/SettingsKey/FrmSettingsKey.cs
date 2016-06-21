@@ -491,8 +491,8 @@ namespace hoTools.Settings.Key
             #endregion
 
             _addinControl.parameterizeMenusAndButtons(); // hide / unhide Menus & Buttons
-            _addinControl.parameterizeSearchButton(); // sets the shortcuts
-            _addinControl.parameterizeServiceButton(); // sets the shortcuts
+            _addinControl.ParameterizeSearchButton(); // sets the shortcuts
+            _addinControl.ParameterizeServiceButton(); // sets the shortcuts
 
             _settings.updateSearchesAndServices(); // update dynamic informations like method, texts from configuration
             this._settings.save();

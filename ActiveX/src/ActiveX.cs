@@ -157,7 +157,7 @@ namespace hoTools.ActiveX
         }
         #endregion
 
-        public string getText() => txtSearchText.Text;
+        public string GetText() => txtSearchText.Text;
 
 
         /// <summary>
@@ -177,7 +177,7 @@ namespace hoTools.ActiveX
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show(e.ToString(), "ActiveX: Error Initialization");
+                    MessageBox.Show(e.ToString(), @"ActiveX: Error Initialization");
                 }
 
             }
@@ -190,9 +190,9 @@ namespace hoTools.ActiveX
         {
             parameterizeMenusAndButtons();
             // parameterize 5 Buttons to quickly run search
-            parameterizeSearchButton();
+            ParameterizeSearchButton();
             // parameterize 5 Buttons to quickly run services
-            parameterizeServiceButton();
+            ParameterizeServiceButton();
         }
         #endregion
 
@@ -1927,13 +1927,13 @@ namespace hoTools.ActiveX
 
         }
         #endregion
-        #region parameterizeSearchButtons
+        #region ParameterizeSearchButtons
         /// <summary>
         /// Parametrize 5 quick buttons for search with:
         /// <para/>- Search Name
         /// <para/>- Search Tooltip
         /// </summary>
-        public void parameterizeSearchButton()
+        public void ParameterizeSearchButton()
         {
             toolStripSearchBtn1.Visible = AddinSettings.isShowQueryButton;
             toolStripSearchBtn2.Visible = AddinSettings.isShowQueryButton;
@@ -1985,8 +1985,8 @@ namespace hoTools.ActiveX
             }
         }
         #endregion
-        #region parameterizeServiceButton
-        public void parameterizeServiceButton()
+        #region ParameterizeServiceButton
+        public void ParameterizeServiceButton()
         {
             toolStripServiceBtn1.Visible = AddinSettings.isShowServiceButton;
             toolStripServiceBtn2.Visible = AddinSettings.isShowServiceButton;
@@ -2018,15 +2018,15 @@ namespace hoTools.ActiveX
                         toolStripServiceBtn2.ToolTipText = helpText;
                         break;
                     case 2:
-                        toolStripServiceBtn3.Text = buttonText; ;
+                        toolStripServiceBtn3.Text = buttonText; 
                         toolStripServiceBtn3.ToolTipText = helpText;
                         break;
                     case 3:
-                        toolStripServiceBtn4.Text = buttonText; ;
+                        toolStripServiceBtn4.Text = buttonText; 
                         toolStripServiceBtn4.ToolTipText = helpText;
                         break;
                     case 4:
-                        toolStripServiceBtn5.Text = buttonText; ;
+                        toolStripServiceBtn5.Text = buttonText; 
                         toolStripServiceBtn5.ToolTipText = helpText;
                         break;
 
@@ -2100,7 +2100,7 @@ namespace hoTools.ActiveX
             }
             else
             {
-                MessageBox.Show("To get the connectors which convey Elements you have to select an Element.", "No Element is selected, break!!!");
+                MessageBox.Show(@"To get the connectors which convey Elements you have to select an Element.", @"No Element is selected, break!!!");
             }
 
         }
@@ -2129,7 +2129,7 @@ namespace hoTools.ActiveX
             }
             else
             {
-                MessageBox.Show("To get the Elements on the Connector you have to select an Connector.", "No Connector is selected, break!!!");
+                MessageBox.Show(@"To get the Elements on the Connector you have to select an Connector.", @"No Connector is selected, break!!!");
             }
         }
 

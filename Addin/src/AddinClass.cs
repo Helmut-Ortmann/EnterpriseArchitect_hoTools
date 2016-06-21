@@ -286,7 +286,7 @@ namespace hoTools
             {
                 GlobalKeysConfig.GlobalKeysServiceConfig sh = AddinSettings.globalShortcutsService[pos];
                     if (sh.Method == null) return;
-                    sh.Invoke(Repository, AddinControlGUI.getText());
+                    sh.Invoke(Repository, AddinControlGUI.GetText());
             }
 
             private static void HandleGlobalKeySearch0()
