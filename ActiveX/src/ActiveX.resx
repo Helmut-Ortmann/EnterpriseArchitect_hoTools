@@ -1203,7 +1203,7 @@ Search for (Tip Quick Search from MDG hoTools):
     <value>Name EA Search to quickly find your most interesting stuff:
 - Insert search name
 - If blank the default from configuration is used
-- Douple Mouse Click starts the Search
+- Double Mouse Click starts the Search
 - Enter starts the Search
 
 Search for:
@@ -1232,7 +1232,7 @@ Search for:
     <value>0</value>
   </data>
   <data name="btnConveyedItemConnector.Text" xml:space="preserve">
-    <value>CI Connnectors</value>
+    <value>CI Connectors</value>
   </data>
   <data name="btnConveyedItemConnector.ToolTip" xml:space="preserve">
     <value>Get connectors  Conveyed Item from selected Element.
@@ -1357,7 +1357,7 @@ There is no interface to directly select more than one Browser Element (as far a
   <data name="settingsGlobalKeysToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>Define your global keys for:
 - Searches with &lt;Search Term&gt;
-- Sevices (fix implemented in hoTools)</value>
+- Services (fix implemented in hoTools)</value>
   </data>
   <data name="settingsToolbarToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>294, 22</value>
@@ -1615,7 +1615,7 @@ Target (last selected item):
     <value>&amp;Connect Ports between Components</value>
   </data>
   <data name="connectPortsToolStripMenuItem.ToolTipText" xml:space="preserve">
-    <value>Connect all Ports mit the same name between selected Elements or Ports:
+    <value>Connect all Ports with the same name between selected Elements or Ports:
 - Selected Elements
 - Selected Ports
 
@@ -1678,7 +1678,7 @@ Select Elements to make direction of all Port connections to unspecified.</value
   </data>
   <data name="hidePortsInDiagramToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>Remove ports from Diagram:
-- Ports from selected Diagramelements
+- Ports from selected Diagram Elements
 - Selected ports</value>
   </data>
   <data name="toolStripSeparator5.Size" type="System.Drawing.Size, System.Drawing">
@@ -1747,7 +1747,7 @@ Tip:
     <value>&amp;Move Port Labels a step left</value>
   </data>
   <data name="movePortLabelLeftToolStripMenuItem1.ToolTipText" xml:space="preserve">
-    <value>Ports selected: It moves the selecte Ports a little left</value>
+    <value>Ports selected: It moves the selected Ports a little left</value>
   </data>
   <data name="movePortLabelRightToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>375, 22</value>
