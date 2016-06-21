@@ -356,51 +356,51 @@ namespace hoTools.ActiveX
 
 
 
-        void toolStripBtn1_Click(object sender, EventArgs e)
+        void toolStripServiceBtn1_Click(object sender, EventArgs e)
         {
             runService(0);
         }
 
-        void toolStripBtn2_Click(object sender, EventArgs e)
+        void toolStripServiceBtn2_Click(object sender, EventArgs e)
         {
             runService(1);
         }
-        void toolStripBtn3_Click(object sender, EventArgs e)
+        void toolStripServiceBtn3_Click(object sender, EventArgs e)
         {
             runService(2);
         }
 
-        void toolStripBtn4_Click(object sender, EventArgs e)
+        void toolStripServiceBtn4_Click(object sender, EventArgs e)
         {
             runService(3);
         }
 
-        void toolStripBtn5_Click(object sender, EventArgs e)
+        void toolStripServiceBtn5_Click(object sender, EventArgs e)
         {
             runService(4);
         }
 
-        void toolStripBtn11_Click(object sender, EventArgs e)
+        void toolStripSearchBtn1_Click(object sender, EventArgs e)
         {
             runSearch(0);
         }
 
-        void toolStripBtn12_Click(object sender, EventArgs e)
+        void toolStripSearchBtn2_Click(object sender, EventArgs e)
         {
             runSearch(1);
         }
 
-        void toolStripBtn13_Click(object sender, EventArgs e)
+        void toolStripSearchBtn3_Click(object sender, EventArgs e)
         {
             runSearch(2);
         }
 
-        void toolStripBtn14_Click(object sender, EventArgs e)
+        void toolStripSearchBtn4_Click(object sender, EventArgs e)
         {
             runSearch(3);
         }
 
-        void toolStripBtn15_Click(object sender, EventArgs e)
+        void toolStripSearchBtn5_Click(object sender, EventArgs e)
         {
             runSearch(4);
         }
@@ -882,6 +882,7 @@ namespace hoTools.ActiveX
             this.orderDiagramItemsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.getLastSQLErrorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.panelButtons = new System.Windows.Forms.Panel();
             this.panelLineStyle = new System.Windows.Forms.Panel();
@@ -893,7 +894,6 @@ namespace hoTools.ActiveX
             this.panelConveyedItems = new System.Windows.Forms.Panel();
             this.lblConveyedItems = new System.Windows.Forms.Label();
             this.panelQuickSearch = new System.Windows.Forms.TableLayoutPanel();
-            this.getLastSQLErrorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
             this.toolStripQuery.SuspendLayout();
@@ -947,35 +947,35 @@ namespace hoTools.ActiveX
             this.toolStripSearchBtn1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             resources.ApplyResources(this.toolStripSearchBtn1, "toolStripSearchBtn1");
             this.toolStripSearchBtn1.Name = "toolStripSearchBtn1";
-            this.toolStripSearchBtn1.Click += new System.EventHandler(this.toolStripBtn11_Click);
+            this.toolStripSearchBtn1.Click += new System.EventHandler(this.toolStripSearchBtn1_Click);
             // 
             // toolStripSearchBtn2
             // 
             this.toolStripSearchBtn2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.toolStripSearchBtn2.Name = "toolStripSearchBtn2";
             resources.ApplyResources(this.toolStripSearchBtn2, "toolStripSearchBtn2");
-            this.toolStripSearchBtn2.Click += new System.EventHandler(this.toolStripBtn12_Click);
+            this.toolStripSearchBtn2.Click += new System.EventHandler(this.toolStripSearchBtn2_Click);
             // 
             // toolStripSearchBtn3
             // 
             this.toolStripSearchBtn3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             resources.ApplyResources(this.toolStripSearchBtn3, "toolStripSearchBtn3");
             this.toolStripSearchBtn3.Name = "toolStripSearchBtn3";
-            this.toolStripSearchBtn3.Click += new System.EventHandler(this.toolStripBtn13_Click);
+            this.toolStripSearchBtn3.Click += new System.EventHandler(this.toolStripSearchBtn3_Click);
             // 
             // toolStripSearchBtn4
             // 
             this.toolStripSearchBtn4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             resources.ApplyResources(this.toolStripSearchBtn4, "toolStripSearchBtn4");
             this.toolStripSearchBtn4.Name = "toolStripSearchBtn4";
-            this.toolStripSearchBtn4.Click += new System.EventHandler(this.toolStripBtn14_Click);
+            this.toolStripSearchBtn4.Click += new System.EventHandler(this.toolStripSearchBtn4_Click);
             // 
             // toolStripSearchBtn5
             // 
             this.toolStripSearchBtn5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             resources.ApplyResources(this.toolStripSearchBtn5, "toolStripSearchBtn5");
             this.toolStripSearchBtn5.Name = "toolStripSearchBtn5";
-            this.toolStripSearchBtn5.Click += new System.EventHandler(this.toolStripBtn15_Click);
+            this.toolStripSearchBtn5.Click += new System.EventHandler(this.toolStripSearchBtn5_Click);
             // 
             // toolStripSeparator6
             // 
@@ -987,30 +987,35 @@ namespace hoTools.ActiveX
             this.toolStripServiceBtn1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             resources.ApplyResources(this.toolStripServiceBtn1, "toolStripServiceBtn1");
             this.toolStripServiceBtn1.Name = "toolStripServiceBtn1";
+            this.toolStripServiceBtn1.Click += new System.EventHandler(this.toolStripServiceBtn1_Click);
             // 
             // toolStripServiceBtn2
             // 
             this.toolStripServiceBtn2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             resources.ApplyResources(this.toolStripServiceBtn2, "toolStripServiceBtn2");
             this.toolStripServiceBtn2.Name = "toolStripServiceBtn2";
+            this.toolStripServiceBtn2.Click += new System.EventHandler(this.toolStripServiceBtn2_Click);
             // 
             // toolStripServiceBtn3
             // 
             this.toolStripServiceBtn3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             resources.ApplyResources(this.toolStripServiceBtn3, "toolStripServiceBtn3");
             this.toolStripServiceBtn3.Name = "toolStripServiceBtn3";
+            this.toolStripServiceBtn3.Click += new System.EventHandler(this.toolStripServiceBtn3_Click);
             // 
             // toolStripServiceBtn4
             // 
             this.toolStripServiceBtn4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             resources.ApplyResources(this.toolStripServiceBtn4, "toolStripServiceBtn4");
             this.toolStripServiceBtn4.Name = "toolStripServiceBtn4";
+            this.toolStripServiceBtn4.Click += new System.EventHandler(this.toolStripServiceBtn4_Click);
             // 
             // toolStripServiceBtn5
             // 
             this.toolStripServiceBtn5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             resources.ApplyResources(this.toolStripServiceBtn5, "toolStripServiceBtn5");
             this.toolStripServiceBtn5.Name = "toolStripServiceBtn5";
+            this.toolStripServiceBtn5.Click += new System.EventHandler(this.toolStripServiceBtn5_Click);
             // 
             // btnLabelRight
             // 
@@ -1625,6 +1630,12 @@ namespace hoTools.ActiveX
             resources.ApplyResources(this.aboutToolStripMenuItem, "aboutToolStripMenuItem");
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
+            // getLastSQLErrorToolStripMenuItem
+            // 
+            this.getLastSQLErrorToolStripMenuItem.Name = "getLastSQLErrorToolStripMenuItem";
+            resources.ApplyResources(this.getLastSQLErrorToolStripMenuItem, "getLastSQLErrorToolStripMenuItem");
+            this.getLastSQLErrorToolStripMenuItem.Click += new System.EventHandler(this.getLastSQLErrorToolStripMenuItem_Click);
+            // 
             // helpToolStripMenuItem1
             // 
             this.helpToolStripMenuItem1.Name = "helpToolStripMenuItem1";
@@ -1715,12 +1726,6 @@ namespace hoTools.ActiveX
             this.panelQuickSearch.Controls.Add(this.txtSearchName, 0, 0);
             this.panelQuickSearch.Controls.Add(this.txtSearchText, 0, 0);
             this.panelQuickSearch.Name = "panelQuickSearch";
-            // 
-            // getLastSQLErrorToolStripMenuItem
-            // 
-            this.getLastSQLErrorToolStripMenuItem.Name = "getLastSQLErrorToolStripMenuItem";
-            resources.ApplyResources(this.getLastSQLErrorToolStripMenuItem, "getLastSQLErrorToolStripMenuItem");
-            this.getLastSQLErrorToolStripMenuItem.Click += new System.EventHandler(this.getLastSQLErrorToolStripMenuItem_Click);
             // 
             // AddinControlGUI
             // 
