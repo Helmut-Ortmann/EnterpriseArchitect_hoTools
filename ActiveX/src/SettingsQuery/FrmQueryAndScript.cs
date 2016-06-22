@@ -46,7 +46,7 @@ namespace hoTools.Settings
             }
 
             // Ask for update if sql file has changed
-            chkIsAskForUpdate.Checked = _settings.isAskForQueryUpdateOutside;
+            chkIsAskForUpdate.Checked = _settings.IsAskForQueryUpdateOutside;
             // SQL editor
             txtSqlEditor.Text = _settings.SqlEditor;
 
@@ -74,12 +74,12 @@ namespace hoTools.Settings
             if (rbScriptAndQueryAddinWindow.Checked) _settings.ScriptAndQueryWindow = AddinSettings.ShowInWindow.AddinWindow;
             if (rbScriptAndQueryTabWindow.Checked) _settings.ScriptAndQueryWindow = AddinSettings.ShowInWindow.TabWindow;
 
-            _settings.isAskForQueryUpdateOutside = chkIsAskForUpdate.Checked;
+            _settings.IsAskForQueryUpdateOutside = chkIsAskForUpdate.Checked;
             _settings.SqlEditor = txtSqlEditor.Text;
 
 
             // save setting
-            this._settings.save();
+            this._settings.Save();
             Close();
         }
         #endregion

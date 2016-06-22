@@ -115,7 +115,7 @@ namespace hoTools.Settings
             _settings.CompositeStructureLineStyle = this.cboCompositeStructureLineStyle.Text;
             #endregion
            
-            this._settings.save();
+            this._settings.Save();
             this.Close();
 
         }

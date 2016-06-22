@@ -326,10 +326,10 @@ namespace hoTools.ActiveX
             switch (AddinSettings.Customer)
             {
 
-                case AddinSettings.CustomerCfg.VAR1:
+                case AddinSettings.CustomerCfg.Var1:
                     EaService.aboutVAR1(Release, configFilePath);
                     break;
-                case AddinSettings.CustomerCfg.hoTools:
+                case AddinSettings.CustomerCfg.HoTools:
                     EaService.about(Release, configFilePath);
                     break;
                 default:
@@ -406,28 +406,28 @@ namespace hoTools.ActiveX
         }
         void runSearch(int pos)
         {
-            if (AddinSettings.buttonsSearch[pos] is EaAddinShortcutSearch)
+            if (AddinSettings.ButtonsSearch[pos] is EaAddinShortcutSearch)
             {
 
-                var sh = (EaAddinShortcutSearch)AddinSettings.buttonsSearch[pos];
-                if (sh.keySearchName == "") return;
+                var sh = (EaAddinShortcutSearch)AddinSettings.ButtonsSearch[pos];
+                if (sh.KeySearchName == "") return;
                 try
                 {
-                    Repository.RunModelSearch(sh.keySearchName, sh.keySearchTerm, "", "");
+                    Repository.RunModelSearch(sh.KeySearchName, sh.KeySearchTerm, "", "");
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show(e.ToString(), "Error start search '" + sh.keySearchName +
-                       " " + sh.keySearchTerm + "'");
+                    MessageBox.Show(e.ToString(), "Error start search '" + sh.KeySearchName +
+                       " " + sh.KeySearchTerm + "'");
                 }
             }
         }
         void runService(int pos)
         {
-            if (AddinSettings.buttonsServices[pos] is hoTools.EaServices.ServicesCallConfig)
+            if (AddinSettings.ButtonsServices[pos] is hoTools.EaServices.ServicesCallConfig)
             {
 
-                var sh = (hoTools.EaServices.ServicesCallConfig)AddinSettings.buttonsServices[pos];
+                var sh = (hoTools.EaServices.ServicesCallConfig)AddinSettings.ButtonsServices[pos];
                 if (sh.Method == null) return;
                 sh.Invoke(Repository, txtSearchText.Text);
 
@@ -770,7 +770,7 @@ namespace hoTools.ActiveX
             string searchName = txtSearchName.Text.Trim();
             if (searchName == "")
             {
-                searchName = AddinSettings.quickSearchName;
+                searchName = AddinSettings.QuickSearchName;
                 txtSearchName.Text = searchName;
             }
 
@@ -1823,48 +1823,48 @@ namespace hoTools.ActiveX
 
 
             // Port
-            panelPort.Visible = AddinSettings.isAdvancedPort;
-            panelNote.Visible = AddinSettings.isAdvancedDiagramNote;
-            lblPorts.Visible = AddinSettings.isAdvancedPort;
+            panelPort.Visible = AddinSettings.IsAdvancedPort;
+            panelNote.Visible = AddinSettings.IsAdvancedDiagramNote;
+            lblPorts.Visible = AddinSettings.IsAdvancedPort;
 
 
             // Advanced
-            panelAdvanced.Visible = AddinSettings.isAdvancedFeatures;
+            panelAdvanced.Visible = AddinSettings.IsAdvancedFeatures;
 
             // Advanced Features
-            btnDisplayBehavior.Visible = AddinSettings.isAdvancedFeatures;
-            btnDisplaySpecification.Visible = AddinSettings.isAdvancedFeatures;
-            btnUpdateActivityParameter.Visible = AddinSettings.isAdvancedFeatures;
-            btnLocateOperation.Visible = AddinSettings.isAdvancedFeatures;
-            btnFindUsage.Visible = AddinSettings.isAdvancedFeatures;
-            btnLocateType.Visible = AddinSettings.isAdvancedFeatures;
-            btnComposite.Visible = AddinSettings.isAdvancedFeatures;
+            btnDisplayBehavior.Visible = AddinSettings.IsAdvancedFeatures;
+            btnDisplaySpecification.Visible = AddinSettings.IsAdvancedFeatures;
+            btnUpdateActivityParameter.Visible = AddinSettings.IsAdvancedFeatures;
+            btnLocateOperation.Visible = AddinSettings.IsAdvancedFeatures;
+            btnFindUsage.Visible = AddinSettings.IsAdvancedFeatures;
+            btnLocateType.Visible = AddinSettings.IsAdvancedFeatures;
+            btnComposite.Visible = AddinSettings.IsAdvancedFeatures;
 
             // Favorite
-            panelFavorite.Visible = AddinSettings.isFavoriteSupport || AddinSettings.isAdvancedFeatures;
-            btnAddFavorite.Visible = AddinSettings.isFavoriteSupport;
-            btnRemoveFavorite.Visible = AddinSettings.isFavoriteSupport;
-            btnShowFavorites.Visible = AddinSettings.isFavoriteSupport;
+            panelFavorite.Visible = AddinSettings.IsFavoriteSupport || AddinSettings.IsAdvancedFeatures;
+            btnAddFavorite.Visible = AddinSettings.IsFavoriteSupport;
+            btnRemoveFavorite.Visible = AddinSettings.IsFavoriteSupport;
+            btnShowFavorites.Visible = AddinSettings.IsFavoriteSupport;
 
             // Conveyed Item support
-            panelConveyedItems.Visible = AddinSettings.isConveyedItemsSupport;
-            btnConveyedItemConnector.Visible = AddinSettings.isConveyedItemsSupport;
-            btnConveyedItemElement.Visible = AddinSettings.isConveyedItemsSupport;
+            panelConveyedItems.Visible = AddinSettings.IsConveyedItemsSupport;
+            btnConveyedItemConnector.Visible = AddinSettings.IsConveyedItemsSupport;
+            btnConveyedItemElement.Visible = AddinSettings.IsConveyedItemsSupport;
             lblConveyedItems.Visible = true;
 
             // Line style Panel
-            panelLineStyle.Visible = AddinSettings.isLineStyleSupport;
+            panelLineStyle.Visible = AddinSettings.IsLineStyleSupport;
 
             // no quick search defined
-            panelQuickSearch.Visible = (AddinSettings.quickSearchName.Trim() != "");
-            txtSearchName.Text = AddinSettings.quickSearchName.Trim();
+            panelQuickSearch.Visible = (AddinSettings.QuickSearchName.Trim() != "");
+            txtSearchName.Text = AddinSettings.QuickSearchName.Trim();
 
             // Buttons for queries and services
-            panelButtons.Visible = AddinSettings.isShowQueryButton || AddinSettings.isShowServiceButton;
+            panelButtons.Visible = AddinSettings.IsShowQueryButton || AddinSettings.IsShowServiceButton;
 
 
             // SVN support
-            bool visibleSvnVC = true && !(AddinSettings.isSvnSupport == false | AddinSettings.isVcSupport == false);
+            bool visibleSvnVC = true && !(AddinSettings.IsSvnSupport == false | AddinSettings.IsVcSupport == false);
             showTortoiseRepoBrowserToolStripMenuItem.Visible = visibleSvnVC;
             showTortoiseLogToolStripMenuItem.Visible = visibleSvnVC;
             setSvnModuleTaggedValuesToolStripMenuItem.Visible = visibleSvnVC;
@@ -1872,13 +1872,13 @@ namespace hoTools.ActiveX
             setSvnKeywordsToolStripMenuItem.Visible = visibleSvnVC;
 
             // Visible VC
-            bool visibleVC = true && AddinSettings.isVcSupport != false;
+            bool visibleVC = true && AddinSettings.IsVcSupport != false;
 
             getVCLatesrecursiveToolStripMenuItem.Visible = visibleVC;
             changeXMLFileToolStripMenuItem.Visible = visibleVC;
             orderDiagramItemsToolStripMenuItem.Visible = visibleVC;
 
-            if (AddinSettings.isSvnSupport == false && AddinSettings.isVcSupport == false)
+            if (AddinSettings.IsSvnSupport == false && AddinSettings.IsVcSupport == false)
             {
                 versionControlToolStripMenuItem.Visible = false;
             }
@@ -1888,7 +1888,7 @@ namespace hoTools.ActiveX
             }
 
             // Visual Port Support
-            bool visiblePorts = false || AddinSettings.isAdvancedPort;
+            bool visiblePorts =  AddinSettings.IsAdvancedPort;
 
             btnLeft.Visible = visiblePorts;
             btnRight.Visible = visiblePorts;
@@ -1899,33 +1899,33 @@ namespace hoTools.ActiveX
             btnLabelRight.Visible = visiblePorts;
 
             // Note in diagram support
-            bool visibleDiagramNote = false || AddinSettings.isAdvancedDiagramNote;
+            bool visibleDiagramNote = AddinSettings.IsAdvancedDiagramNote;
             btnAddDiagramNote.Visible = visibleDiagramNote;
             btnAddElementNote.Visible = visibleDiagramNote;
 
             // LineStyle
-            btnLV.Visible = AddinSettings.isLineStyleSupport;
-            btnLH.Visible = AddinSettings.isLineStyleSupport;
-            btnTV.Visible = AddinSettings.isLineStyleSupport;
-            btnTH.Visible = AddinSettings.isLineStyleSupport;
-            btnC.Visible = AddinSettings.isLineStyleSupport;
-            btnBezier.Visible = AddinSettings.isLineStyleSupport;
-            btnOS.Visible = AddinSettings.isLineStyleSupport;
-            btnOR.Visible = AddinSettings.isLineStyleSupport;
-            btnA.Visible = AddinSettings.isLineStyleSupport;
-            btnD.Visible = AddinSettings.isLineStyleSupport;
+            btnLV.Visible = AddinSettings.IsLineStyleSupport;
+            btnLH.Visible = AddinSettings.IsLineStyleSupport;
+            btnTV.Visible = AddinSettings.IsLineStyleSupport;
+            btnTH.Visible = AddinSettings.IsLineStyleSupport;
+            btnC.Visible = AddinSettings.IsLineStyleSupport;
+            btnBezier.Visible = AddinSettings.IsLineStyleSupport;
+            btnOS.Visible = AddinSettings.IsLineStyleSupport;
+            btnOR.Visible = AddinSettings.IsLineStyleSupport;
+            btnA.Visible = AddinSettings.IsLineStyleSupport;
+            btnD.Visible = AddinSettings.IsLineStyleSupport;
 
             // Conveyed Items support
-            btnConveyedItemConnector.Visible = AddinSettings.isConveyedItemsSupport;
-            btnConveyedItemElement.Visible = AddinSettings.isConveyedItemsSupport;
+            btnConveyedItemConnector.Visible = AddinSettings.IsConveyedItemsSupport;
+            btnConveyedItemElement.Visible = AddinSettings.IsConveyedItemsSupport;
 
             // Favorite
-            btnAddFavorite.Visible = AddinSettings.isFavoriteSupport;
-            btnRemoveFavorite.Visible = AddinSettings.isFavoriteSupport;
-            btnShowFavorites.Visible = AddinSettings.isFavoriteSupport;
+            btnAddFavorite.Visible = AddinSettings.IsFavoriteSupport;
+            btnRemoveFavorite.Visible = AddinSettings.IsFavoriteSupport;
+            btnShowFavorites.Visible = AddinSettings.IsFavoriteSupport;
 
             // Advance features
-            btnDisplayBehavior.Visible = AddinSettings.isAdvancedFeatures;
+            btnDisplayBehavior.Visible = AddinSettings.IsAdvancedFeatures;
 
             //boolean visibleDiagramNote = false || _addinSettings.isAdvancedDiagramNote;
 
@@ -1940,25 +1940,25 @@ namespace hoTools.ActiveX
         /// </summary>
         public void ParameterizeSearchButton()
         {
-            toolStripSearchBtn1.Visible = AddinSettings.isShowQueryButton;
-            toolStripSearchBtn2.Visible = AddinSettings.isShowQueryButton;
-            toolStripSearchBtn3.Visible = AddinSettings.isShowQueryButton;
-            toolStripSearchBtn4.Visible = AddinSettings.isShowQueryButton;
-            toolStripSearchBtn5.Visible = AddinSettings.isShowQueryButton;
+            toolStripSearchBtn1.Visible = AddinSettings.IsShowQueryButton;
+            toolStripSearchBtn2.Visible = AddinSettings.IsShowQueryButton;
+            toolStripSearchBtn3.Visible = AddinSettings.IsShowQueryButton;
+            toolStripSearchBtn4.Visible = AddinSettings.IsShowQueryButton;
+            toolStripSearchBtn5.Visible = AddinSettings.IsShowQueryButton;
 
-            for (int pos = 0; pos < AddinSettings.buttonsSearch.Length; pos++)
+            for (int pos = 0; pos < AddinSettings.ButtonsSearch.Length; pos++)
             {
                 const string defaultHelptext = "Free Model Searches, Model Search not parametrized.";
                 string buttonText = "";
                 string helpText = defaultHelptext;
-                if (AddinSettings.buttonsSearch[pos] != null)
+                if (AddinSettings.ButtonsSearch[pos] != null)
                 {
-                    EaAddinButtons search = AddinSettings.buttonsSearch[pos];
+                    EaAddinButtons search = AddinSettings.ButtonsSearch[pos];
                     {
-                        if (search.keyText.Trim() != "")
+                        if (search.KeyText.Trim() != "")
                         {
-                            buttonText = search.keyText;
-                            helpText = search.keySearchTooltip;
+                            buttonText = search.KeyText;
+                            helpText = search.KeySearchTooltip;
                         }
                     }
                 }
@@ -1993,18 +1993,18 @@ namespace hoTools.ActiveX
         #region ParameterizeServiceButton
         public void ParameterizeServiceButton()
         {
-            toolStripServiceBtn1.Visible = AddinSettings.isShowServiceButton;
-            toolStripServiceBtn2.Visible = AddinSettings.isShowServiceButton;
-            toolStripServiceBtn3.Visible = AddinSettings.isShowServiceButton;
-            toolStripServiceBtn4.Visible = AddinSettings.isShowServiceButton;
-            toolStripServiceBtn5.Visible = AddinSettings.isShowServiceButton;
-            for (int pos = 0; pos < AddinSettings.buttonsServices.Count; pos++)
+            toolStripServiceBtn1.Visible = AddinSettings.IsShowServiceButton;
+            toolStripServiceBtn2.Visible = AddinSettings.IsShowServiceButton;
+            toolStripServiceBtn3.Visible = AddinSettings.IsShowServiceButton;
+            toolStripServiceBtn4.Visible = AddinSettings.IsShowServiceButton;
+            toolStripServiceBtn5.Visible = AddinSettings.IsShowServiceButton;
+            for (int pos = 0; pos < AddinSettings.ButtonsServices.Count; pos++)
             {
                 string buttonText = "";
                 string helpText = "free Service, Service not parametrized";
-                if (AddinSettings.buttonsServices[pos] != null)
+                if (AddinSettings.ButtonsServices[pos] != null)
                 {
-                    ServicesCallConfig service = AddinSettings.buttonsServices[pos];
+                    ServicesCallConfig service = AddinSettings.ButtonsServices[pos];
                     if (service.ButtonText.Trim() != "")
                     {
                         buttonText = service.ButtonText;

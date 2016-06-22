@@ -151,7 +151,7 @@ namespace hoTools
             {
                 MessageBox.Show("Error setup 'hoTools' Addin. Error:\n" + e, "hoTools Installation error");
             }
-            this.menuHeader = "-" + _AddinSettings.productName;
+            this.menuHeader = "-" + _AddinSettings.ProductName;
             this.menuOptions = new string[] { 
                 //-------------------------- General  --------------------------//
                 //    menuLocateCompositeElementorDiagram,
@@ -202,9 +202,9 @@ namespace hoTools
                 Modifiers modifier3;
                 Modifiers modifier4;
 
-                for (int i = 0; i < AddinSettings.globalShortcutsService.Count; i = i + 1)
+                for (int i = 0; i < AddinSettings.GlobalShortcutsService.Count; i = i + 1)
                 {
-                    GlobalKeysConfig.GlobalKeysSearchConfig search = AddinSettings.globalShortcutsSearch[i];
+                    GlobalKeysConfig.GlobalKeysSearchConfig search = AddinSettings.GlobalShortcutsSearch[i];
                     if (search.Key != "None" & search.SearchName != "")
                     {
                         keys.TryGetValue(search.Key, out key);
@@ -233,9 +233,9 @@ namespace hoTools
                     }
 
                 }
-                for (int i = 0; i < AddinSettings.globalShortcutsService.Count; i = i + 1)
+                for (int i = 0; i < AddinSettings.GlobalShortcutsService.Count; i = i + 1)
                 {
-                    GlobalKeysConfig.GlobalKeysServiceConfig service = AddinSettings.globalShortcutsService[i];
+                    GlobalKeysConfig.GlobalKeysServiceConfig service = AddinSettings.GlobalShortcutsService[i];
                     if (service.Key != "None" & service.GUID != "")
                     {
                         keys.TryGetValue(service.Key, out key);
@@ -270,7 +270,7 @@ namespace hoTools
             public static void runGlobalKeySearch(int pos)
             {
                 
-                    GlobalKeysConfig.GlobalKeysSearchConfig sh = AddinSettings.globalShortcutsSearch[pos];
+                    GlobalKeysConfig.GlobalKeysSearchConfig sh = AddinSettings.GlobalShortcutsSearch[pos];
                     if (sh.SearchName == "") return;
                     try
                     {
@@ -284,7 +284,7 @@ namespace hoTools
             }
             public static void runGlobalKeyService(int pos)
             {
-                GlobalKeysConfig.GlobalKeysServiceConfig sh = AddinSettings.globalShortcutsService[pos];
+                GlobalKeysConfig.GlobalKeysServiceConfig sh = AddinSettings.GlobalShortcutsService[pos];
                     if (sh.Method == null) return;
                     sh.Invoke(Repository, AddinControlGUI.GetText());
             }
@@ -426,7 +426,7 @@ namespace hoTools
         public override string EA_Connect(EA.Repository Repository)
         {
             // register only if configured
-            if (AddinSettings.isShortKeySupport) HotkeyHandlers.SetupGlobalHotkeys();
+            if (AddinSettings.IsShortKeySupport) HotkeyHandlers.SetupGlobalHotkeys();
             _repository = Repository;
             int v = Repository.LibraryVersion;
             if (Repository.IsSecurityEnabled)
@@ -1047,7 +1047,7 @@ namespace hoTools
                     // LineStyle and more
                     if (!(_AddinSettings.LineStyleAndMoreWindow == AddinSettings.ShowInWindow.Disabled))
                     {
-                    AddinControlGUI = addAddinControl<AddinControlGUI>(_AddinSettings.productName,
+                    AddinControlGUI = addAddinControl<AddinControlGUI>(_AddinSettings.ProductName,
                         AddinControlGUI.PROGID, null,
                         AddinSettings.ShowInWindow.AddinWindow);
                         _MyControlGUI = AddinControlGUI; // static + instance

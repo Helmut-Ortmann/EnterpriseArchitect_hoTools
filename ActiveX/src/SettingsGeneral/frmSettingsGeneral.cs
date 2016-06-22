@@ -22,21 +22,21 @@ namespace hoTools.Settings
 
 
             #region miscellaneous
-            chkLineStyleSupport.Checked = settings.isLineStyleSupport;
-            chkShortKeySupport.Checked = settings.isShortKeySupport;
-            chkShowServiceButtons.Checked = settings.isShowServiceButton;
-            chkShowQueryButtons.Checked = settings.isShowQueryButton;
-            chkFavoriteSupport.Checked = settings.isFavoriteSupport;
-            chkConveyedItemSupport.Checked = settings.isConveyedItemsSupport;
+            chkLineStyleSupport.Checked = settings.IsLineStyleSupport;
+            chkShortKeySupport.Checked = settings.IsShortKeySupport;
+            chkShowServiceButtons.Checked = settings.IsShowServiceButton;
+            chkShowQueryButtons.Checked = settings.IsShowQueryButton;
+            chkFavoriteSupport.Checked = settings.IsFavoriteSupport;
+            chkConveyedItemSupport.Checked = settings.IsConveyedItemsSupport;
 
 
-            txtQuickSearch.Text = settings.quickSearchName;
+            txtQuickSearch.Text = settings.QuickSearchName;
             txtFileManagerPath.Text = settings.FileManagerPath;
-            chkAdvancedFeatures.Checked = settings.isAdvancedFeatures;
-            chkSvnSupport.Checked = settings.isSvnSupport;
-            chkVcSupport.Checked = settings.isVcSupport;
-            chkAdvancedPort.Checked = settings.isAdvancedPort;
-            chkAdvancedDiagramNote.Checked = settings.isAdvancedDiagramNote;
+            chkAdvancedFeatures.Checked = settings.IsAdvancedFeatures;
+            chkSvnSupport.Checked = settings.IsSvnSupport;
+            chkVcSupport.Checked = settings.IsVcSupport;
+            chkAdvancedPort.Checked = settings.IsAdvancedPort;
+            chkAdvancedDiagramNote.Checked = settings.IsAdvancedDiagramNote;
             #endregion
 
             #region AutoLoadMdg
@@ -91,22 +91,22 @@ namespace hoTools.Settings
 
         private void btnOk_Click(object sender, System.EventArgs e)
         {
-            _settings.quickSearchName = txtQuickSearch.Text;
+            _settings.QuickSearchName = txtQuickSearch.Text;
             _settings.FileManagerPath = txtFileManagerPath.Text;
 
 
-            _settings.isLineStyleSupport = chkLineStyleSupport.Checked;
-            _settings.isShortKeySupport = chkShortKeySupport.Checked;
-            _settings.isShowServiceButton = chkShowServiceButtons.Checked ;
-            _settings.isShowQueryButton = chkShowQueryButtons.Checked;
-            _settings.isFavoriteSupport = chkFavoriteSupport.Checked;
-            _settings.isConveyedItemsSupport = chkConveyedItemSupport.Checked;
+            _settings.IsLineStyleSupport = chkLineStyleSupport.Checked;
+            _settings.IsShortKeySupport = chkShortKeySupport.Checked;
+            _settings.IsShowServiceButton = chkShowServiceButtons.Checked ;
+            _settings.IsShowQueryButton = chkShowQueryButtons.Checked;
+            _settings.IsFavoriteSupport = chkFavoriteSupport.Checked;
+            _settings.IsConveyedItemsSupport = chkConveyedItemSupport.Checked;
 
-            _settings.isSvnSupport = chkSvnSupport.Checked;
-            _settings.isVcSupport = chkVcSupport.Checked;
-            _settings.isAdvancedFeatures = chkAdvancedFeatures.Checked;
-            _settings.isAdvancedPort = chkAdvancedPort.Checked;
-            _settings.isAdvancedDiagramNote = chkAdvancedDiagramNote.Checked;
+            _settings.IsSvnSupport = chkSvnSupport.Checked;
+            _settings.IsVcSupport = chkVcSupport.Checked;
+            _settings.IsAdvancedFeatures = chkAdvancedFeatures.Checked;
+            _settings.IsAdvancedPort = chkAdvancedPort.Checked;
+            _settings.IsAdvancedDiagramNote = chkAdvancedDiagramNote.Checked;
 
             #region AutoLoadMdg
             _settings.AutoLoadMdgXml = AddinSettings.AutoLoadMdg.No;
@@ -127,7 +127,7 @@ namespace hoTools.Settings
             #endregion
 
             // save setting
-            _settings.save();
+            _settings.Save();
             _addinControl.initializeSettings(); // update settings
             Close();
         }

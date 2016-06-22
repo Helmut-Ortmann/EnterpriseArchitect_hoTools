@@ -35,39 +35,39 @@ namespace hoTools.Settings
         /// <summary>
         /// List of history sql files (recent 20 used sql files)
         /// </summary>
-        public SqlHistoryFilesCfg historySqlFiles { get; }
+        public SqlHistoryFilesCfg HistorySqlFiles { get; }
 
         /// <summary>
         /// List of 10 last opened sql files
         /// </summary>
-        public SqlLastOpenedFilesCfg lastOpenedFiles { get; }
+        public SqlLastOpenedFilesCfg LastOpenedFiles { get; }
 
         // Configuration 5 button searches by key
-        public EaAddinButtons[] buttonsSearch;
+        public EaAddinButtons[] ButtonsSearch;
 
         // Configuration 5 button services by key
-        public List<hoTools.EaServices.ServicesCallConfig> buttonsServices;
+        public List<ServicesCallConfig> ButtonsServices;
         // all available services
-        public List<hoTools.EaServices.ServiceCall> allServices = new List<hoTools.EaServices.ServiceCall>();
+        public List<ServiceCall> AllServices = new List<ServiceCall>();
 
-        public List<GlobalKeysConfig.GlobalKeysServiceConfig> globalShortcutsService = new List<GlobalKeysConfig.GlobalKeysServiceConfig>();
-        public List<GlobalKeysConfig.GlobalKeysSearchConfig> globalShortcutsSearch = new  List<GlobalKeysConfig.GlobalKeysSearchConfig>();
+        public List<GlobalKeysConfig.GlobalKeysServiceConfig> GlobalShortcutsService = new List<GlobalKeysConfig.GlobalKeysServiceConfig>();
+        public List<GlobalKeysConfig.GlobalKeysSearchConfig> GlobalShortcutsSearch = new  List<GlobalKeysConfig.GlobalKeysSearchConfig>();
 
         // Connectors
-        public LogicalConnectors _logicalConnectors = new LogicalConnectors();
-        public ActivityConnectors _activityConnectors = new ActivityConnectors();
+        public LogicalConnectors LogicalConnectors = new LogicalConnectors();
+        public ActivityConnectors ActivityConnectors = new ActivityConnectors();
 
         /// <summary>
         /// Configuration delivered with the installation in the install directory
-        /// <para/>c:\Users\<user>\AppData\Local\Apps\hoTools\ActiveX.dll.config
+        /// <para/>c:\Users\user\AppData\Local\Apps\hoTools\ActiveX.dll.config
         /// </summary>
-        protected Configuration _defaultConfig { get; set; }
+        protected Configuration DefaultConfig { get; set; }
 
         /// <summary>
         /// Configuration stored in Roaming of the user
-        /// <para/>c:\Users\<user>\AppData\Roaming\ho\hoTools\user.config
+        /// <para/>c:\Users\user\AppData\Roaming\ho\hoTools\user.config
         /// </summary>
-        protected Configuration _currentConfig { get; set; }
+        protected Configuration CurrentConfig { get; set; }
         #region Constructor
         /// <summary>
         /// Merge default settings (install DLLs) with current settings (user.config)
@@ -76,7 +76,7 @@ namespace hoTools.Settings
         /// </summary>
         public AddinSettings()
         {
-            getDefaultSettings();
+            GetDefaultSettings();
 
             Configuration roamingConfig = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoaming);
 
@@ -87,10 +87,10 @@ namespace hoTools.Settings
             string configDirectory = System.IO.Directory.GetParent(roamingConfig.FilePath).Parent.Parent.Parent.FullName;
             string path = "";
             switch (Customer) {
-                case CustomerCfg.hoTools:
+                case CustomerCfg.HoTools:
                 path =  @"\ho\hoTools\";
                 break;
-                case CustomerCfg.VAR1:
+                case CustomerCfg.Var1:
                 path =  @"\ho\hoTools_VAR1\";
                 break;
                 default: 
@@ -109,28 +109,28 @@ namespace hoTools.Settings
             var configFileMap = new ExeConfigurationFileMap();
             configFileMap.ExeConfigFilename = ConfigFilePath;
             // Get the mapped configuration file.
-            _currentConfig = ConfigurationManager.OpenMappedExeConfiguration(configFileMap, ConfigurationUserLevel.None);
+            CurrentConfig = ConfigurationManager.OpenMappedExeConfiguration(configFileMap, ConfigurationUserLevel.None);
 
 
             //merge the default settings
             // - For simple values that's all to do
             //   they uses Getter/Setter, no special handling here
-            mergeDefaultSettings();
+            MergeDefaultSettings();
 
             // get list from config
             // for simple values nothing is to do here (there exists only a getter/setter)
-            buttonsSearch = getShortcutsSearch();
-            buttonsServices = getShortcutsServices();
-            globalShortcutsService = getGlobalShortcutsService();
-            globalShortcutsSearch = getGlobalShortcutsSearch();
-            getConnector(_logicalConnectors);
-            getConnector(_activityConnectors);
-            getAllServices();
-            historySqlFiles = new SqlHistoryFilesCfg(_currentConfig);// history of sql files 
-            lastOpenedFiles = new SqlLastOpenedFilesCfg(_currentConfig); // last opened files
+            ButtonsSearch = GetShortcutsSearch();
+            ButtonsServices = GetShortcutsServices();
+            GlobalShortcutsService = GetGlobalShortcutsService();
+            GlobalShortcutsSearch = GetGlobalShortcutsSearch();
+            GetConnector(LogicalConnectors);
+            GetConnector(ActivityConnectors);
+            GetAllServices();
+            HistorySqlFiles = new SqlHistoryFilesCfg(CurrentConfig);// history of sql files 
+            LastOpenedFiles = new SqlLastOpenedFilesCfg(CurrentConfig); // last opened files
 
             // update lists
-            updateSearchesAndServices();
+            UpdateSearchesAndServices();
 
             //-------------------------------------------
             // Simple values uses Getter/Setter, no special handling here
@@ -141,32 +141,32 @@ namespace hoTools.Settings
         /// <summary>
         /// gets the default settings config.
         /// </summary>
-        protected void getDefaultSettings()
+        protected void GetDefaultSettings()
         {
-            string defaultConfigFilePath = System.Reflection.Assembly.GetExecutingAssembly().Location;
-            _defaultConfig = ConfigurationManager.OpenExeConfiguration(defaultConfigFilePath);
+            string defaultConfigFilePath = Assembly.GetExecutingAssembly().Location;
+            DefaultConfig = ConfigurationManager.OpenExeConfiguration(defaultConfigFilePath);
         }
         #endregion
         #region mergeDefaultSettings
         /// <summary>
         /// merge the default settings with the current config.
         /// </summary>
-        protected void mergeDefaultSettings()
+        protected void MergeDefaultSettings()
         {
             //defaultConfig.AppSettings.Settings["menuOwnerEnabled"].Value
-            if (_defaultConfig.AppSettings.Settings.Count == 0)
+            if (DefaultConfig.AppSettings.Settings.Count == 0)
             {
-                MessageBox.Show("No default settings in '" + _defaultConfig.FilePath + "' found!", "Installation wasn't successful!");
+                MessageBox.Show("No default settings in '" + DefaultConfig.FilePath + "' found!", "Installation wasn't successful!");
             }
-            foreach (KeyValueConfigurationElement configEntry in _defaultConfig.AppSettings.Settings)
+            foreach (KeyValueConfigurationElement configEntry in DefaultConfig.AppSettings.Settings)
             {
-                if (!_currentConfig.AppSettings.Settings.AllKeys.Contains(configEntry.Key))
+                if (!CurrentConfig.AppSettings.Settings.AllKeys.Contains(configEntry.Key))
                 {
-                    _currentConfig.AppSettings.Settings.Add(configEntry.Key, configEntry.Value);
+                    CurrentConfig.AppSettings.Settings.Add(configEntry.Key, configEntry.Value);
                 }
             }
             // save the configuration
-            _currentConfig.Save();
+            CurrentConfig.Save();
         }
         #endregion
 
@@ -175,15 +175,15 @@ namespace hoTools.Settings
 
 
         #region Property: isAskForQueryUpdateOutside
-        public bool isAskForQueryUpdateOutside
+        public bool IsAskForQueryUpdateOutside
         {
             get
             {
-                return getBoolConfigValue("isAskForQueryUpdateOutside");
+                return GetBoolConfigValue("isAskForQueryUpdateOutside");
             }
             set
             {
-                setBoolConfigValue("isAskForQueryUpdateOutside", value);
+                SetBoolConfigValue("isAskForQueryUpdateOutside", value);
             }
         }
         #endregion
@@ -193,11 +193,11 @@ namespace hoTools.Settings
         {
             get
             {
-                return getStringConfigValue("SqlEditor");
+                return GetStringConfigValue("SqlEditor");
             }
             set
             {
-                setStringConfigValue("SqlEditor", value);
+                SetStringConfigValue("SqlEditor", value);
             }
         }
 
@@ -205,12 +205,12 @@ namespace hoTools.Settings
 
 
         #region Property: isLineStyleSupport
-        public bool isLineStyleSupport
+        public bool IsLineStyleSupport
         {
             get
             {
                 bool result;
-                var p = _currentConfig.AppSettings.Settings["isLineStyleSupport"];
+                var p = CurrentConfig.AppSettings.Settings["isLineStyleSupport"];
                 if (p == null) return true;
                 if (bool.TryParse(p.Value, out result))
                 {
@@ -223,18 +223,18 @@ namespace hoTools.Settings
             }
             set
             {
-                _currentConfig.AppSettings.Settings["isLineStyleSupport"].Value = value.ToString();
+                CurrentConfig.AppSettings.Settings["isLineStyleSupport"].Value = value.ToString();
             }
         }
         #endregion
 
         #region Property: isShortKeySupport
-        public bool isShortKeySupport
+        public bool IsShortKeySupport
         {
             get
             {
                 bool result;
-                if (bool.TryParse(_currentConfig.AppSettings.Settings["isShortKeySupport"].Value, out result))
+                if (bool.TryParse(CurrentConfig.AppSettings.Settings["isShortKeySupport"].Value, out result))
                 {
                     return result;
                 }
@@ -245,17 +245,17 @@ namespace hoTools.Settings
             }
             set
             {
-                _currentConfig.AppSettings.Settings["isShortKeySupport"].Value = value.ToString();
+                CurrentConfig.AppSettings.Settings["isShortKeySupport"].Value = value.ToString();
             }
         }
         #endregion
         #region Property: isShowServiceButton
-        public bool isShowServiceButton
+        public bool IsShowServiceButton
         {
             get
             {
                 bool result;
-                if (bool.TryParse(_currentConfig.AppSettings.Settings["isShowServiceButton"].Value, out result))
+                if (bool.TryParse(CurrentConfig.AppSettings.Settings["isShowServiceButton"].Value, out result))
                 {
                     return result;
                 }
@@ -266,17 +266,17 @@ namespace hoTools.Settings
             }
             set
             {
-                _currentConfig.AppSettings.Settings["isShowServiceButton"].Value = value.ToString();
+                CurrentConfig.AppSettings.Settings["isShowServiceButton"].Value = value.ToString();
             }
         }
         #endregion
         #region Property: isShowQueryButton
-        public bool isShowQueryButton
+        public bool IsShowQueryButton
         {
             get
             {
                 bool result;
-                if (bool.TryParse(_currentConfig.AppSettings.Settings["isShowQueryButton"].Value, out result))
+                if (bool.TryParse(CurrentConfig.AppSettings.Settings["isShowQueryButton"].Value, out result))
                 {
                     return result;
                 }
@@ -287,17 +287,17 @@ namespace hoTools.Settings
             }
             set
             {
-                _currentConfig.AppSettings.Settings["isShowQueryButton"].Value = value.ToString();
+                CurrentConfig.AppSettings.Settings["isShowQueryButton"].Value = value.ToString();
             }
         }
         #endregion
         #region Property: isFavoriteSupport
-        public bool isFavoriteSupport
+        public bool IsFavoriteSupport
         {
             get
             {
                 bool result;
-                if (bool.TryParse(_currentConfig.AppSettings.Settings["isFavoriteSupport"].Value, out result))
+                if (bool.TryParse(CurrentConfig.AppSettings.Settings["isFavoriteSupport"].Value, out result))
                 {
                     return result;
                 }
@@ -308,20 +308,20 @@ namespace hoTools.Settings
             }
             set
             {
-                _currentConfig.AppSettings.Settings["isFavoriteSupport"].Value = value.ToString();
+                CurrentConfig.AppSettings.Settings["isFavoriteSupport"].Value = value.ToString();
             }
         }
         #endregion
         #region Property: isConveyedItemsSupport
-        public bool isConveyedItemsSupport
+        public bool IsConveyedItemsSupport
         {
             get
             {
-                return getBoolConfigValue("isConveyedItemsSupport");
+                return GetBoolConfigValue("isConveyedItemsSupport");
             }
             set
             {
-                setBoolConfigValue("isConveyedItemsSupport", value);
+                SetBoolConfigValue("isConveyedItemsSupport", value);
             }
         }
         #endregion
@@ -336,17 +336,17 @@ namespace hoTools.Settings
         /// </summary>
         public enum CustomerCfg
         {
-            VAR1,
-            hoTools
+            Var1,
+            HoTools
         }
         #endregion
         #region Property: isAdvancedFeatures
-        public bool isAdvancedFeatures
+        public bool IsAdvancedFeatures
         {
             get
             {
                 bool result;
-                if (bool.TryParse(_currentConfig.AppSettings.Settings["isAdvancedFeatures"].Value, out result))
+                if (bool.TryParse(CurrentConfig.AppSettings.Settings["isAdvancedFeatures"].Value, out result))
                 {
                     return result;
                 }
@@ -357,18 +357,18 @@ namespace hoTools.Settings
             }
             set
             {
-                _currentConfig.AppSettings.Settings["isAdvancedFeatures"].Value = value.ToString();
+                CurrentConfig.AppSettings.Settings["isAdvancedFeatures"].Value = value.ToString();
             }
         }
         #endregion
         #region Property: isAdvancedPort
 
-        public bool isAdvancedPort
+        public bool IsAdvancedPort
         {
             get
             {
                 bool result;
-                if (bool.TryParse(_currentConfig.AppSettings.Settings["isAdvancedPort"].Value, out result))
+                if (bool.TryParse(CurrentConfig.AppSettings.Settings["isAdvancedPort"].Value, out result))
                 {
                     return result;
                 }
@@ -379,7 +379,7 @@ namespace hoTools.Settings
             }
             set
             {
-                _currentConfig.AppSettings.Settings["isAdvancedPort"].Value = value.ToString();
+                CurrentConfig.AppSettings.Settings["isAdvancedPort"].Value = value.ToString();
 
             }
 
@@ -387,12 +387,12 @@ namespace hoTools.Settings
         #endregion
         #region Property: isAdvancedDiagramNote
 
-        public bool isAdvancedDiagramNote
+        public bool IsAdvancedDiagramNote
         {
             get
             {
                 bool result;
-                if (bool.TryParse(_currentConfig.AppSettings.Settings["isAdvancedDiagramNote"].Value, out result))
+                if (bool.TryParse(CurrentConfig.AppSettings.Settings["isAdvancedDiagramNote"].Value, out result))
                 {
                     return result;
                 }
@@ -403,7 +403,7 @@ namespace hoTools.Settings
             }
             set
             {
-                _currentConfig.AppSettings.Settings["isAdvancedDiagramNote"].Value = value.ToString();
+                CurrentConfig.AppSettings.Settings["isAdvancedDiagramNote"].Value = value.ToString();
 
             }
 
@@ -417,9 +417,9 @@ namespace hoTools.Settings
             get
             {
                 ShowInWindow result;
-                if (Enum.TryParse<ShowInWindow>(_currentConfig.AppSettings.Settings["ScriptAndQueryWindow"].Value, out result))
+                if (Enum.TryParse(CurrentConfig.AppSettings.Settings["ScriptAndQueryWindow"].Value, out result))
                 {
-                    return (ShowInWindow)result;
+                    return result;
                 }
                 else
                 {
@@ -428,7 +428,7 @@ namespace hoTools.Settings
             }
             set
             {
-                _currentConfig.AppSettings.Settings["ScriptAndQueryWindow"].Value = value.ToString();
+                CurrentConfig.AppSettings.Settings["ScriptAndQueryWindow"].Value = value.ToString();
 
             }
 
@@ -444,9 +444,9 @@ namespace hoTools.Settings
             get
             {
                 AutoLoadMdg result;
-                if (Enum.TryParse<AutoLoadMdg>(_currentConfig.AppSettings.Settings["AutoLoadMdg"].Value, out result))
+                if (Enum.TryParse(CurrentConfig.AppSettings.Settings["AutoLoadMdg"].Value, out result))
                 {
-                    return (AutoLoadMdg)result;
+                    return result;
                 }
                 else
                 {
@@ -455,12 +455,12 @@ namespace hoTools.Settings
             }
             set
             {
-                if (_currentConfig.AppSettings.Settings["AutoLoadMdg"] != null)
+                if (CurrentConfig.AppSettings.Settings["AutoLoadMdg"] != null)
                 {
-                    _currentConfig.AppSettings.Settings["AutoLoadMdg"].Value = value.ToString();
+                    CurrentConfig.AppSettings.Settings["AutoLoadMdg"].Value = value.ToString();
                 } else
                 {
-                    messageConfigValueNotExists("AutoLoadMdg", value.ToString());
+                    MessageConfigValueNotExists("AutoLoadMdg", value.ToString());
                 }
 
             }
@@ -474,9 +474,9 @@ namespace hoTools.Settings
             get
             {
                 ShowInWindow result;
-                if (Enum.TryParse<ShowInWindow>(_currentConfig.AppSettings.Settings["OnlyQueryWindow"].Value, out result))
+                if (Enum.TryParse(CurrentConfig.AppSettings.Settings["OnlyQueryWindow"].Value, out result))
                 {
-                    return (ShowInWindow)result;
+                    return result;
                 }
                 else
                 {
@@ -485,13 +485,13 @@ namespace hoTools.Settings
             }
             set
             {
-                if (_currentConfig.AppSettings.Settings["OnlyQueryWindow"] != null)
+                if (CurrentConfig.AppSettings.Settings["OnlyQueryWindow"] != null)
                 {
-                    _currentConfig.AppSettings.Settings["OnlyQueryWindow"].Value = value.ToString();
+                    CurrentConfig.AppSettings.Settings["OnlyQueryWindow"].Value = value.ToString();
                 }
                 else
                 {
-                    messageConfigValueNotExists("OnlyQueryWindow", value.ToString());
+                    MessageConfigValueNotExists("OnlyQueryWindow", value.ToString());
                 }
 
             }
@@ -505,9 +505,9 @@ namespace hoTools.Settings
             get
             {
                 ShowInWindow result;
-                if (Enum.TryParse<ShowInWindow>(_currentConfig.AppSettings.Settings["SearchAndReplaceWindow"].Value, out result))
+                if (Enum.TryParse(CurrentConfig.AppSettings.Settings["SearchAndReplaceWindow"].Value, out result))
                 {
-                    return (ShowInWindow)result;
+                    return result;
                 }
                 else
                 {
@@ -516,7 +516,7 @@ namespace hoTools.Settings
             }
             set
             {
-                _currentConfig.AppSettings.Settings["SearchAndReplaceWindow"].Value = value.ToString();
+                CurrentConfig.AppSettings.Settings["SearchAndReplaceWindow"].Value = value.ToString();
 
             }
 
@@ -528,9 +528,9 @@ namespace hoTools.Settings
             get
             {
                 ShowInWindow result;
-                if (Enum.TryParse<ShowInWindow>(_currentConfig.AppSettings.Settings["LineStyleAndMoreWindow"].Value, out result))
+                if (Enum.TryParse(CurrentConfig.AppSettings.Settings["LineStyleAndMoreWindow"].Value, out result))
                 {
-                    return (ShowInWindow)result;
+                    return result;
                 }
                 else
                 {
@@ -539,7 +539,7 @@ namespace hoTools.Settings
             }
             set
             {
-                _currentConfig.AppSettings.Settings["LineStyleAndMoreWindow"].Value = value.ToString();
+                CurrentConfig.AppSettings.Settings["LineStyleAndMoreWindow"].Value = value.ToString();
 
             }
 
@@ -548,12 +548,12 @@ namespace hoTools.Settings
 
         #region Property: isVcSupport
 
-        public bool isVcSupport
+        public bool IsVcSupport
         {
             get
             {
                 bool result;
-                if (bool.TryParse(_currentConfig.AppSettings.Settings["isVcSupport"].Value, out result))
+                if (bool.TryParse(CurrentConfig.AppSettings.Settings["isVcSupport"].Value, out result))
                 {
                     return result;
                 }
@@ -564,7 +564,7 @@ namespace hoTools.Settings
             }
             set
             {
-                _currentConfig.AppSettings.Settings["isVcSupport"].Value = value.ToString();
+                CurrentConfig.AppSettings.Settings["isVcSupport"].Value = value.ToString();
 
             }
 
@@ -572,12 +572,12 @@ namespace hoTools.Settings
         #endregion
         #region Property: isSvnSupport
         
-        public bool isSvnSupport
+        public bool IsSvnSupport
         {
             get
             {
                 bool result;
-                if (bool.TryParse(_currentConfig.AppSettings.Settings["isSvnSupport"].Value, out result))
+                if (bool.TryParse(CurrentConfig.AppSettings.Settings["isSvnSupport"].Value, out result))
                 {
                     return result;
                 }
@@ -588,7 +588,7 @@ namespace hoTools.Settings
             }
             set
             {
-                _currentConfig.AppSettings.Settings["isSvnSupport"].Value = value.ToString();
+                CurrentConfig.AppSettings.Settings["isSvnSupport"].Value = value.ToString();
 
             }
 
@@ -601,36 +601,36 @@ namespace hoTools.Settings
         {
             get
             {
-                if (_currentConfig.AppSettings.Settings["FileManagerPath"].Value == null)
+                if (CurrentConfig.AppSettings.Settings["FileManagerPath"].Value == null)
                 {
                     return "FileManagerPath";
                 }
                 else
                 {
-                    return (_currentConfig.AppSettings.Settings["FileManagerPath"].Value);
+                    return (CurrentConfig.AppSettings.Settings["FileManagerPath"].Value);
                 }
             }
             set
             {
-                _currentConfig.AppSettings.Settings["FileManagerPath"].Value = value;
+                CurrentConfig.AppSettings.Settings["FileManagerPath"].Value = value;
 
             }
         }
         #endregion
         #region Property: quickSearchName
-        public string quickSearchName
+        public string QuickSearchName
         {
             get
             {
-                if (_currentConfig.AppSettings.Settings["QuickSearchName"].Value == null) {
+                if (CurrentConfig.AppSettings.Settings["QuickSearchName"].Value == null) {
                     return "Quick Search";
                 }else {
-                return (_currentConfig.AppSettings.Settings["QuickSearchName"].Value );
+                return (CurrentConfig.AppSettings.Settings["QuickSearchName"].Value );
                 }
             }
             set
             {
-                _currentConfig.AppSettings.Settings["QuickSearchName"].Value =value;
+                CurrentConfig.AppSettings.Settings["QuickSearchName"].Value =value;
                
             }
         }
@@ -639,43 +639,43 @@ namespace hoTools.Settings
         /// <summary>
         /// Folder for SQL Searches
         /// </summary>
-        public string sqlFolder
+        public string SqlFolder
         {
             get
             {
-                if (_currentConfig.AppSettings.Settings["SqlFolder"].Value == null)
+                if (CurrentConfig.AppSettings.Settings["SqlFolder"].Value == null)
                 {
                     return @"c:\temp\sql";
                 }
                 else {
-                    return (_currentConfig.AppSettings.Settings["SqlFolder"].Value);
+                    return (CurrentConfig.AppSettings.Settings["SqlFolder"].Value);
                 }
             }
             set
             {
-                _currentConfig.AppSettings.Settings["SqlFolder"].Value = value;
+                CurrentConfig.AppSettings.Settings["SqlFolder"].Value = value;
 
             }
         }
         #endregion
 
         #region Property: productName
-        public string productName
+        public string ProductName
         {
             get
             {
-                if (_currentConfig.AppSettings.Settings["ProductName"].Value == null)
+                if (CurrentConfig.AppSettings.Settings["ProductName"].Value == null)
                 {
                     return "hoTools";
                 }
                 else
                 {
-                    return (_currentConfig.AppSettings.Settings["ProductName"].Value);
+                    return (CurrentConfig.AppSettings.Settings["ProductName"].Value);
                 }
             }
             set
             {
-                _currentConfig.AppSettings.Settings["ProductName"].Value = value;
+                CurrentConfig.AppSettings.Settings["ProductName"].Value = value;
 
             }
         }
@@ -685,18 +685,18 @@ namespace hoTools.Settings
         {
             get
             {
-                if (_currentConfig.AppSettings.Settings["ActivityLineStyle"].Value == null)
+                if (CurrentConfig.AppSettings.Settings["ActivityLineStyle"].Value == null)
                 {
                     return "LV";
                 }
                 else
                 {
-                    return (_currentConfig.AppSettings.Settings["ActivityLineStyle"].Value);
+                    return (CurrentConfig.AppSettings.Settings["ActivityLineStyle"].Value);
                 }
             }
             set
             {
-                _currentConfig.AppSettings.Settings["ActivityLineStyle"].Value = value;
+                CurrentConfig.AppSettings.Settings["ActivityLineStyle"].Value = value;
 
             }
         }
@@ -706,18 +706,18 @@ namespace hoTools.Settings
         {
             get
             {
-                if (_currentConfig.AppSettings.Settings["StatechartLineStyle"].Value == null)
+                if (CurrentConfig.AppSettings.Settings["StatechartLineStyle"].Value == null)
                 {
                     return "B";
                 }
                 else
                 {
-                    return (_currentConfig.AppSettings.Settings["StatechartLineStyle"].Value);
+                    return (CurrentConfig.AppSettings.Settings["StatechartLineStyle"].Value);
                 }
             }
             set
             {
-                _currentConfig.AppSettings.Settings["StatechartLineStyle"].Value = value;
+                CurrentConfig.AppSettings.Settings["StatechartLineStyle"].Value = value;
 
             }
         }
@@ -727,18 +727,18 @@ namespace hoTools.Settings
         {
             get
             {
-                if (_currentConfig.AppSettings.Settings["CustomLineStyle"].Value == null)
+                if (CurrentConfig.AppSettings.Settings["CustomLineStyle"].Value == null)
                 {
                     return "no";
                 }
                 else
                 {
-                    return (_currentConfig.AppSettings.Settings["CustomLineStyle"].Value);
+                    return (CurrentConfig.AppSettings.Settings["CustomLineStyle"].Value);
                 }
             }
             set
             {
-                _currentConfig.AppSettings.Settings["CustomLineStyle"].Value = value;
+                CurrentConfig.AppSettings.Settings["CustomLineStyle"].Value = value;
 
             }
         }
@@ -748,18 +748,18 @@ namespace hoTools.Settings
         {
             get
             {
-                if (_currentConfig.AppSettings.Settings["ClassLineStyle"].Value == null)
+                if (CurrentConfig.AppSettings.Settings["ClassLineStyle"].Value == null)
                 {
                     return "no";
                 }
                 else
                 {
-                    return (_currentConfig.AppSettings.Settings["ClassLineStyle"].Value);
+                    return (CurrentConfig.AppSettings.Settings["ClassLineStyle"].Value);
                 }
             }
             set
             {
-                _currentConfig.AppSettings.Settings["ClassLineStyle"].Value = value;
+                CurrentConfig.AppSettings.Settings["ClassLineStyle"].Value = value;
 
             }
         }
@@ -769,18 +769,18 @@ namespace hoTools.Settings
         {
             get
             {
-                if (_currentConfig.AppSettings.Settings["PackageLineStyle"].Value == null)
+                if (CurrentConfig.AppSettings.Settings["PackageLineStyle"].Value == null)
                 {
                     return "no";
                 }
                 else
                 {
-                    return (_currentConfig.AppSettings.Settings["PackageLineStyle"].Value);
+                    return (CurrentConfig.AppSettings.Settings["PackageLineStyle"].Value);
                 }
             }
             set
             {
-                _currentConfig.AppSettings.Settings["PackageLineStyle"].Value = value;
+                CurrentConfig.AppSettings.Settings["PackageLineStyle"].Value = value;
 
             }
         }
@@ -790,18 +790,18 @@ namespace hoTools.Settings
         {
             get
             {
-                if (_currentConfig.AppSettings.Settings["UseCaseLineStyle"].Value == null)
+                if (CurrentConfig.AppSettings.Settings["UseCaseLineStyle"].Value == null)
                 {
                     return "no";
                 }
                 else
                 {
-                    return (_currentConfig.AppSettings.Settings["UseCaseLineStyle"].Value);
+                    return (CurrentConfig.AppSettings.Settings["UseCaseLineStyle"].Value);
                 }
             }
             set
             {
-                _currentConfig.AppSettings.Settings["UseCaseLineStyle"].Value = value;
+                CurrentConfig.AppSettings.Settings["UseCaseLineStyle"].Value = value;
 
             }
         }
@@ -811,18 +811,18 @@ namespace hoTools.Settings
         {
             get
             {
-                if (_currentConfig.AppSettings.Settings["DeploymentLineStyle"].Value == null)
+                if (CurrentConfig.AppSettings.Settings["DeploymentLineStyle"].Value == null)
                 {
                     return "B";
                 }
                 else
                 {
-                    return (_currentConfig.AppSettings.Settings["DeploymentLineStyle"].Value);
+                    return (CurrentConfig.AppSettings.Settings["DeploymentLineStyle"].Value);
                 }
             }
             set
             {
-                _currentConfig.AppSettings.Settings["DeploymentLineStyle"].Value = value;
+                CurrentConfig.AppSettings.Settings["DeploymentLineStyle"].Value = value;
 
             }
         }
@@ -832,18 +832,18 @@ namespace hoTools.Settings
         {
             get
             {
-                if (_currentConfig.AppSettings.Settings["CompositeStructureLineStyle"].Value == null)
+                if (CurrentConfig.AppSettings.Settings["CompositeStructureLineStyle"].Value == null)
                 {
                     return "no";
                 }
                 else
                 {
-                    return (_currentConfig.AppSettings.Settings["CompositeStructureLineStyle"].Value);
+                    return (CurrentConfig.AppSettings.Settings["CompositeStructureLineStyle"].Value);
                 }
             }
             set
             {
-                _currentConfig.AppSettings.Settings["CompositeStructureLineStyle"].Value = value;
+                CurrentConfig.AppSettings.Settings["CompositeStructureLineStyle"].Value = value;
 
             }
         }
@@ -853,18 +853,18 @@ namespace hoTools.Settings
         {
             get
             {
-                if (_currentConfig.AppSettings.Settings["ComponentLineStyle"].Value == null)
+                if (CurrentConfig.AppSettings.Settings["ComponentLineStyle"].Value == null)
                 {
                     return "no";
                 }
                 else
                 {
-                    return (_currentConfig.AppSettings.Settings["ComponentLineStyle"].Value);
+                    return (CurrentConfig.AppSettings.Settings["ComponentLineStyle"].Value);
                 }
             }
             set
             {
-                _currentConfig.AppSettings.Settings["ComponentLineStyle"].Value = value;
+                CurrentConfig.AppSettings.Settings["ComponentLineStyle"].Value = value;
 
             }
         }
@@ -876,21 +876,21 @@ namespace hoTools.Settings
             get
             {
                 // get customer
-                var s = _defaultConfig.AppSettings.Settings["Customer"];
-                if (s == null)  return CustomerCfg.hoTools;
+                var s = DefaultConfig.AppSettings.Settings["Customer"];
+                if (s == null)  return CustomerCfg.HoTools;
                 switch (s.Value)
                 {
                     case "F52AB09A-8ED0-4159-9AB4-FFD986983280":
-                        return CustomerCfg.VAR1;
+                        return CustomerCfg.Var1;
                         
                     case "14F09211-3460-47A6-B837-A477491F0A67":
-                        return CustomerCfg.hoTools;
+                        return CustomerCfg.HoTools;
                     case "4661B136-39E8-45B9-9015-C6C18A04EDCF":
-                        return CustomerCfg.hoTools;
+                        return CustomerCfg.HoTools;
                     case "7A415B23-7D1E-49CB-84BA-BAC1C5BFD8FE":
-                        return CustomerCfg.hoTools;
+                        return CustomerCfg.HoTools;
                     default:
-                        return CustomerCfg.hoTools;
+                        return CustomerCfg.HoTools;
 
                 }
                 
@@ -906,77 +906,73 @@ namespace hoTools.Settings
         /// <summary>
         /// saves the settings to the config file
         /// </summary>
-        public void save()
+        public void Save()
         {
             try
             {
-                setShortcuts(buttonsSearch);
-                setServices(buttonsServices);
-                setGlobalShortcutsSearch(globalShortcutsSearch);
-                setGlobalShortcutsService(globalShortcutsService);
+                SetShortcuts(ButtonsSearch);
+                SetServices(ButtonsServices);
+                SetGlobalShortcutsSearch(GlobalShortcutsSearch);
+                SetGlobalShortcutsService(GlobalShortcutsService);
 
-                setConnector(_logicalConnectors);
-                setConnector(_activityConnectors);
-                historySqlFiles.save();
-                lastOpenedFiles.save();
-                _currentConfig.Save();
-                _currentConfig.Save();
+                SetConnector(LogicalConnectors);
+                SetConnector(ActivityConnectors);
+                HistorySqlFiles.Save();
+                LastOpenedFiles.Save();
+                CurrentConfig.Save();
+                CurrentConfig.Save();
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.ToString(), "Error storing user.config");
+                MessageBox.Show(e.ToString(), @"Error storing user.config");
             }
         }
 #endregion
         #region refresh
-        public void refresh()
+        public void Refresh()
         {
-            var configFileMap = new ExeConfigurationFileMap();
-            configFileMap.ExeConfigFilename = _currentConfig.FilePath;
+            var configFileMap = new ExeConfigurationFileMap {ExeConfigFilename = CurrentConfig.FilePath};
             // Get the mapped configuration file.
-            _currentConfig = ConfigurationManager.OpenMappedExeConfiguration(configFileMap, ConfigurationUserLevel.None);
+            CurrentConfig = ConfigurationManager.OpenMappedExeConfiguration(configFileMap, ConfigurationUserLevel.None);
         }
         #endregion
         #region setShortcuts
-        public void setShortcuts(EaAddinButtons[] l)
+        public void SetShortcuts(EaAddinButtons[] l)
         {
-            for (int i = 0; i < l.Length; i++)
+            foreach (EaAddinButtons button in l)
             {
-                if (l[i] == null) continue;
-                if (l[i] is EaAddinShortcutSearch)
+                if (button == null) continue;
                 {
 
-                    var el = (EaAddinShortcutSearch)l[i];
-                    string basicKey = "Key" + el.keyPos;
-                    _currentConfig.AppSettings.Settings[basicKey + "Text"].Value = el.keyText;
-                    _currentConfig.AppSettings.Settings[basicKey + "Type"].Value = "Search";
-                    _currentConfig.AppSettings.Settings[basicKey + "Par1"].Value = el.keySearchName;
-                    _currentConfig.AppSettings.Settings[basicKey + "Par2"].Value = el.keySearchTerm;
-                    _currentConfig.AppSettings.Settings[basicKey + "Tooltip"].Value = el.keySearchTooltip;
+                    var el = (EaAddinShortcutSearch)button;
+                    string basicKey = "Key" + el.KeyPos;
+                    CurrentConfig.AppSettings.Settings[basicKey + "Text"].Value = el.KeyText;
+                    CurrentConfig.AppSettings.Settings[basicKey + "Type"].Value = "Search";
+                    CurrentConfig.AppSettings.Settings[basicKey + "Par1"].Value = el.KeySearchName;
+                    CurrentConfig.AppSettings.Settings[basicKey + "Par2"].Value = el.KeySearchTerm;
+                    CurrentConfig.AppSettings.Settings[basicKey + "Tooltip"].Value = el.KeySearchTooltip;
                 }
             }
-
         }
+
         #endregion
         #region getShortcutsSearch
-        private EaAddinButtons[] getShortcutsSearch()
+        private EaAddinButtons[] GetShortcutsSearch()
         {
             int pos = 0;
-            int posValue = 0;
             string text = "";
             string type = "";
             string par1 = "";
             string par2 = "";
-            string sKey = "";
             EaAddinButtons[] l = new EaAddinButtons[10];
-            foreach (KeyValueConfigurationElement configEntry in _currentConfig.AppSettings.Settings)
+            foreach (KeyValueConfigurationElement configEntry in CurrentConfig.AppSettings.Settings)
             {
-                sKey = configEntry.Key;
+                var sKey = configEntry.Key;
                 string regex = @"key([0-9]+)([a-zA-Z_0-9]+)";
                 Match match = Regex.Match(sKey, regex);
                 if (match.Success)
                 {
-                    posValue = Convert.ToInt16(match.Groups[1].Value);
+                    int posValue = Convert.ToInt16(match.Groups[1].Value);
                     switch (match.Groups[2].Value)
                     {
                         case "Type":
@@ -1008,29 +1004,26 @@ namespace hoTools.Settings
         }
         #endregion
         #region getShortcutsServices
-        private List<hoTools.EaServices.ServicesCallConfig> getShortcutsServices()
+        private List<ServicesCallConfig> GetShortcutsServices()
         {
-            var l = new List<hoTools.EaServices.ServicesCallConfig>();
-            int pos = 0;
-            string sKey = "";
-            string text = "";
-            string GUID = "";
-            foreach (KeyValueConfigurationElement configEntry in _currentConfig.AppSettings.Settings)
+            var l = new List<ServicesCallConfig>();
+            string guid = "";
+            foreach (KeyValueConfigurationElement configEntry in CurrentConfig.AppSettings.Settings)
             {
-                sKey = configEntry.Key;
+                var sKey = configEntry.Key;
                 string regex = @"service([0-9]+)([a-zA-Z_0-9]+)";
                 Match match = Regex.Match(sKey, regex);
                 if (match.Success)
                 {
-                    pos = Convert.ToInt16(match.Groups[1].Value);
+                    int pos = Convert.ToInt16(match.Groups[1].Value);
                     switch (match.Groups[2].Value)
                     {
                         case "GUID":
-                            GUID = configEntry.Value;
+                            guid = configEntry.Value;
                             break;
                         case "Text":
-                            text = configEntry.Value;
-                            l.Add(new hoTools.EaServices.ServicesCallConfig(pos, GUID, text));
+                            var text = configEntry.Value;
+                            l.Add(new ServicesCallConfig(pos, guid, text));
                             break;
                     }
                 }
@@ -1041,25 +1034,23 @@ namespace hoTools.Settings
         #endregion
         #region getAllServices
         // get all possible services
-        private void getAllServices()
+        private void GetAllServices()
         {
-            ServiceOperationAttribute ServiceOperation;
             Type type = typeof(EaService);
-            allServices.Add(new hoTools.EaServices.ServiceCall(null, "{B93C105E-64BC-4D9C-B92F-3DDF0C9150E6}", "-- no --", "no service selected", false));
+            AllServices.Add(new ServiceCall(null, "{B93C105E-64BC-4D9C-B92F-3DDF0C9150E6}", "-- no --", "no service selected", false));
             foreach (MethodInfo method in type.GetMethods())
             {
 
                 foreach (Attribute attr in method.GetCustomAttributes(true))
                 {
-                    ServiceOperation = attr as ServiceOperationAttribute;
-                    if (null != ServiceOperation)
+                    var serviceOperation = attr as ServiceOperationAttribute;
+                    if (null != serviceOperation)
                     {
-                        allServices.Add(new hoTools.EaServices.ServiceCall(method, ServiceOperation.GUID, ServiceOperation.Description, ServiceOperation.Help, ServiceOperation.IsTextRequired));
+                        AllServices.Add(new ServiceCall(method, serviceOperation.GUID, serviceOperation.Description, serviceOperation.Help, serviceOperation.IsTextRequired));
                     }
                 }
             }
-            allServices.Sort(new hoTools.EaServices.ServicesCallDescriptionComparer());
-            return;
+            AllServices.Sort(new ServicesCallDescriptionComparer());
         }
         #endregion
         #region updateSearchesAndServices
@@ -1071,14 +1062,14 @@ namespace hoTools.Settings
         /// - Method
         /// - Tool tip
         /// </summary>
-        public void updateSearchesAndServices()
+        public void UpdateSearchesAndServices()
         {
-            foreach (ServicesCallConfig service in buttonsServices)
+            foreach (ServicesCallConfig service in ButtonsServices)
             {
                 if (service.GUID != "{B93C105E-64BC-4D9C-B92F-3DDF0C9150E6}")
                 {
                     //int index = allServices.BinarySearch(new EaServices.ServiceCall(null, service.GUID, "","", false), new EaServices.ServicesCallGUIDComparer());
-                    foreach (hoTools.EaServices.ServiceCall s in allServices) {
+                    foreach (ServiceCall s in AllServices) {
                         if (service.GUID == s.GUID)
                         {
                             service.Method = s.Method;
@@ -1091,12 +1082,12 @@ namespace hoTools.Settings
                 }
 
             }
-            foreach (GlobalKeysConfig.GlobalKeysServiceConfig service in globalShortcutsService)
+            foreach (GlobalKeysConfig.GlobalKeysServiceConfig service in GlobalShortcutsService)
             {
                 if (service.GUID != "{B93C105E-64BC-4D9C-B92F-3DDF0C9150E6}")
                 {
                     //int index = allServices.BinarySearch(new EaServices.ServiceCall(null, service.GUID, "","", false), new EaServices.ServicesCallGUIDComparer());
-                    foreach (hoTools.EaServices.ServiceCall s in allServices)
+                    foreach (ServiceCall s in AllServices)
                     {
                         if (service.GUID == s.GUID)
                         {
@@ -1117,46 +1108,42 @@ namespace hoTools.Settings
         /// 
         /// </summary>
         /// <returns></returns>
-        private List<GlobalKeysConfig.GlobalKeysServiceConfig> getGlobalShortcutsService()
+        private List<GlobalKeysConfig.GlobalKeysServiceConfig> GetGlobalShortcutsService()
          {
              var l = new List<GlobalKeysConfig.GlobalKeysServiceConfig>();
-             int pos = 0;
-             string sKey = "";
-             string key = "";
-             string Modifier1 = "";
-             string Modifier2 = "";
-             string Modifier3 = "";
-             string Modifier4 = "";
-             string GUID = "";
+            string key = "";
+             string modifier1 = "";
+             string modifier2 = "";
+             string modifier3 = "";
+             string modifier4 = "";
 
-             foreach (KeyValueConfigurationElement configEntry in _currentConfig.AppSettings.Settings)
+            foreach (KeyValueConfigurationElement configEntry in CurrentConfig.AppSettings.Settings)
              {
-                 sKey = configEntry.Key;
+                 var sKey = configEntry.Key;
                  string regex = @"globalKeyService([0-9]+)([a-zA-Z_0-9]+)";
                  Match match = Regex.Match(sKey, regex);
                  if (match.Success)
                  {
-                     pos = Convert.ToInt16(match.Groups[1].Value);
                      switch (match.Groups[2].Value)
                      {
                          case "Key":
                              key = configEntry.Value;
                              break;
                          case "Modifier1":
-                             Modifier1 = configEntry.Value;
+                             modifier1 = configEntry.Value;
                              break;
                          case "Modifier2":
-                             Modifier2 = configEntry.Value;
+                             modifier2 = configEntry.Value;
                              break;
                          case "Modifier3":
-                             Modifier3 = configEntry.Value;
+                             modifier3 = configEntry.Value;
                              break;
                          case "Modifier4":
-                             Modifier4 = configEntry.Value;
+                             modifier4 = configEntry.Value;
                              break;
                          case "GUID":
-                             GUID = configEntry.Value;
-                             l.Add(new GlobalKeysConfig.GlobalKeysServiceConfig(key,Modifier1,Modifier2,Modifier3,Modifier4,"", GUID, "",false));
+                             var guid = configEntry.Value;
+                             l.Add(new GlobalKeysConfig.GlobalKeysServiceConfig(key,modifier1,modifier2,modifier3,modifier4,"", guid, "",false));
                              break;
                      }
                  }
@@ -1170,56 +1157,52 @@ namespace hoTools.Settings
         }
         #endregion
         #region getGlobalShortcutsSearch
-        private List<GlobalKeysConfig.GlobalKeysSearchConfig> getGlobalShortcutsSearch()
+        private List<GlobalKeysConfig.GlobalKeysSearchConfig> GetGlobalShortcutsSearch()
         {
             var l = new List<GlobalKeysConfig.GlobalKeysSearchConfig>();
-            int pos = 0;
-            string sKey = "";
             string key = "";
-            string Modifier1 = "";
-            string Modifier2 = "";
-            string Modifier3 = "";
-            string Modifier4 = "";
-            string SearchName = "";
-            string SearchTerm = "";
-            string Tooltip = "";
+            string modifier1 = "";
+            string modifier2 = "";
+            string modifier3 = "";
+            string modifier4 = "";
+            string searchName = "";
+            string searchTerm = "";
 
-            foreach (KeyValueConfigurationElement configEntry in _currentConfig.AppSettings.Settings)
+            foreach (KeyValueConfigurationElement configEntry in CurrentConfig.AppSettings.Settings)
             {
-                sKey = configEntry.Key;
-                string regex = @"globalKeySearch([0-9]+)([a-zA-Z_0-9]+)";
+                var sKey = configEntry.Key;
+                const string regex = @"globalKeySearch([0-9]+)([a-zA-Z_0-9]+)";
                 Match match = Regex.Match(sKey, regex);
                 if (match.Success)
                 {
-                    pos = Convert.ToInt16(match.Groups[1].Value);
                     switch (match.Groups[2].Value)
                     {
                         case "Key":
                             key = configEntry.Value;
                             break;
                         case "Modifier1":
-                            Modifier1 = configEntry.Value;
+                            modifier1 = configEntry.Value;
                             break;
                         case "Modifier2":
-                            Modifier2 = configEntry.Value;
+                            modifier2 = configEntry.Value;
                             break;
                         case "Modifier3":
-                            Modifier3 = configEntry.Value;
+                            modifier3 = configEntry.Value;
                             break;
                         case "Modifier4":
-                            Modifier4 = configEntry.Value;
+                            modifier4 = configEntry.Value;
                             break;
                         case "SearchName":
-                            SearchName = configEntry.Value;
+                            searchName = configEntry.Value;
                             break;
                         case "SearchTerm":
-                            SearchTerm = configEntry.Value;
+                            searchTerm = configEntry.Value;
                             break;
                         case "Tooltip":
-                            Tooltip = configEntry.Value;
+                            var tooltip = configEntry.Value;
 
-                            l.Add(new GlobalKeysConfig.GlobalKeysSearchConfig(key, Modifier1, Modifier2, Modifier3, Modifier4, Tooltip, 
-                                SearchName, SearchTerm));
+                            l.Add(new GlobalKeysConfig.GlobalKeysSearchConfig(key, modifier1, modifier2, modifier3, modifier4, tooltip, 
+                                searchName, searchTerm));
                             break;
                     }
                 }
@@ -1228,26 +1211,26 @@ namespace hoTools.Settings
         }
         #endregion
         #region setGlobalShortcutsSearch
-        public void setGlobalShortcutsSearch(List<GlobalKeysConfig.GlobalKeysSearchConfig> l) {
+        public void SetGlobalShortcutsSearch(List<GlobalKeysConfig.GlobalKeysSearchConfig> l) {
             for (int i = 0; i< l.Count;i++)
             {
                 if (l[i] == null) continue;
                     GlobalKeysConfig.GlobalKeysSearchConfig el = l[i];
                     string basicKey = "globalKeySearch" + (i+1);
-                    _currentConfig.AppSettings.Settings[basicKey + "Key"].Value = el.Key;
-                    _currentConfig.AppSettings.Settings[basicKey + "Modifier1"].Value = el.Modifier1;
-                    _currentConfig.AppSettings.Settings[basicKey + "Modifier2"].Value = el.Modifier2;
-                    _currentConfig.AppSettings.Settings[basicKey + "Modifier3"].Value = el.Modifier3;
-                    _currentConfig.AppSettings.Settings[basicKey + "Modifier4"].Value = el.Modifier4;
-                    _currentConfig.AppSettings.Settings[basicKey + "SearchName"].Value = el.SearchName;
-                    _currentConfig.AppSettings.Settings[basicKey + "SearchTerm"].Value = el.SearchTerm;
-                    _currentConfig.AppSettings.Settings[basicKey + "Tooltip"].Value = el.Tooltip;
+                    CurrentConfig.AppSettings.Settings[basicKey + "Key"].Value = el.Key;
+                    CurrentConfig.AppSettings.Settings[basicKey + "Modifier1"].Value = el.Modifier1;
+                    CurrentConfig.AppSettings.Settings[basicKey + "Modifier2"].Value = el.Modifier2;
+                    CurrentConfig.AppSettings.Settings[basicKey + "Modifier3"].Value = el.Modifier3;
+                    CurrentConfig.AppSettings.Settings[basicKey + "Modifier4"].Value = el.Modifier4;
+                    CurrentConfig.AppSettings.Settings[basicKey + "SearchName"].Value = el.SearchName;
+                    CurrentConfig.AppSettings.Settings[basicKey + "SearchTerm"].Value = el.SearchTerm;
+                    CurrentConfig.AppSettings.Settings[basicKey + "Tooltip"].Value = el.Tooltip;
             }
 
         }
         #endregion
         #region setGlobalShortcutsService
-        public void setGlobalShortcutsService(List<GlobalKeysConfig.GlobalKeysServiceConfig> l)
+        public void SetGlobalShortcutsService(List<GlobalKeysConfig.GlobalKeysServiceConfig> l)
         {
             
             for (int i = 0; i < l.Count; i++)
@@ -1255,36 +1238,32 @@ namespace hoTools.Settings
                 if (l[i] == null) continue;
                 GlobalKeysConfig.GlobalKeysServiceConfig el = l[i];
                 string basicKey = "globalKeyService" + (i+1);
-                _currentConfig.AppSettings.Settings[basicKey + "Key"].Value = el.Key;
-                _currentConfig.AppSettings.Settings[basicKey + "Modifier1"].Value = el.Modifier1;
-                _currentConfig.AppSettings.Settings[basicKey + "Modifier2"].Value = el.Modifier2;
-                _currentConfig.AppSettings.Settings[basicKey + "Modifier3"].Value = el.Modifier3;
-                _currentConfig.AppSettings.Settings[basicKey + "Modifier4"].Value = el.Modifier4;
-                _currentConfig.AppSettings.Settings[basicKey + "GUID"].Value = el.GUID;
+                CurrentConfig.AppSettings.Settings[basicKey + "Key"].Value = el.Key;
+                CurrentConfig.AppSettings.Settings[basicKey + "Modifier1"].Value = el.Modifier1;
+                CurrentConfig.AppSettings.Settings[basicKey + "Modifier2"].Value = el.Modifier2;
+                CurrentConfig.AppSettings.Settings[basicKey + "Modifier3"].Value = el.Modifier3;
+                CurrentConfig.AppSettings.Settings[basicKey + "Modifier4"].Value = el.Modifier4;
+                CurrentConfig.AppSettings.Settings[basicKey + "GUID"].Value = el.GUID;
             }
 
         }
         #endregion
         #region getConnector
-        public void getConnector(DiagramConnector l)
+        public void GetConnector(DiagramConnector l)
         {
-            string DiagramType = l.DiagramType;
-            int pos = 0;
-            string sKey = "";
+            string diagramType = l.DiagramType;
             string type = "";
             string lineStyle = "";
             string stereotype = "";
             bool isDefault = false;
-            bool isEnabled = false;
 
-            foreach (KeyValueConfigurationElement configEntry in _currentConfig.AppSettings.Settings)
+            foreach (KeyValueConfigurationElement configEntry in CurrentConfig.AppSettings.Settings)
             {
-                sKey = configEntry.Key;
-                string regex = DiagramType +"Connector([0-9]+)([a-zA-Z_0-9]+)";
+                var sKey = configEntry.Key;
+                string regex = diagramType +"Connector([0-9]+)([a-zA-Z_0-9]+)";
                 Match match = Regex.Match(sKey, regex);
                 if (match.Success)
                 {
-                    pos = Convert.ToInt16(match.Groups[1].Value);
                     switch (match.Groups[2].Value)
                     {
                         case "Type":
@@ -1302,68 +1281,66 @@ namespace hoTools.Settings
 
                             break;
                         case "IsEnabled":
-                            isEnabled = false;
+                            var isEnabled = false;
                             isEnabled |= configEntry.Value == "True";
                             l.Add(new Connector(type, stereotype, lineStyle, isDefault, isEnabled));
                             break;
                     }
                 }
             }
-            return;
-            
+           
         }
         #endregion
         #region setConnector
-        public void setConnector(DiagramConnector l)
+        public void SetConnector(DiagramConnector l)
         {
 
-            string DiagramType = l.DiagramType;
+            string diagramType = l.DiagramType;
             string basicKey;
-            string key;
             for (int i = 0; i < l.Count; i++)
             {
                 if (l[i] == null) continue;
                 Connector el = l[i];
-                basicKey = DiagramType + "Connector" + (i + 1);
+                basicKey = diagramType + "Connector" + (i + 1);
 
-                key = basicKey+ "Type";
-                if (! _currentConfig.AppSettings.Settings.AllKeys.Contains(key))
-                _currentConfig.AppSettings.Settings.Add(key, el.Type); 
-                else  _currentConfig.AppSettings.Settings[key].Value = el.Type; 
+                var key = basicKey+ "Type";
+                if (! CurrentConfig.AppSettings.Settings.AllKeys.Contains(key))
+                CurrentConfig.AppSettings.Settings.Add(key, el.Type); 
+                else  CurrentConfig.AppSettings.Settings[key].Value = el.Type; 
 
                 key = basicKey + "Stereotype";
-                if (! _currentConfig.AppSettings.Settings.AllKeys.Contains(key))
-                    _currentConfig.AppSettings.Settings.Add(key, el.Stereotype);
-                else _currentConfig.AppSettings.Settings[key].Value = el.Stereotype;
+                if (! CurrentConfig.AppSettings.Settings.AllKeys.Contains(key))
+                    CurrentConfig.AppSettings.Settings.Add(key, el.Stereotype);
+                else CurrentConfig.AppSettings.Settings[key].Value = el.Stereotype;
 
                 key = basicKey + "LineStyle";
-                if (!_currentConfig.AppSettings.Settings.AllKeys.Contains(key))
-                    _currentConfig.AppSettings.Settings.Add(key, el.LineStyle);
-                else _currentConfig.AppSettings.Settings[key].Value = el.LineStyle;
+                if (!CurrentConfig.AppSettings.Settings.AllKeys.Contains(key))
+                    CurrentConfig.AppSettings.Settings.Add(key, el.LineStyle);
+                else CurrentConfig.AppSettings.Settings[key].Value = el.LineStyle;
 
 
                 key = basicKey + "IsDefault";
-                if (! _currentConfig.AppSettings.Settings.AllKeys.Contains(key))
-                    _currentConfig.AppSettings.Settings.Add(key, el.IsDefault.ToString());
-                else _currentConfig.AppSettings.Settings[key].Value = el.IsDefault.ToString();
+                if (! CurrentConfig.AppSettings.Settings.AllKeys.Contains(key))
+                    CurrentConfig.AppSettings.Settings.Add(key, el.IsDefault.ToString());
+                else CurrentConfig.AppSettings.Settings[key].Value = el.IsDefault.ToString();
 
                 key = basicKey + "IsEnabled";
-                if (! _currentConfig.AppSettings.Settings.AllKeys.Contains(key))
-                    _currentConfig.AppSettings.Settings.Add(key, el.IsEnabled.ToString());
-                else _currentConfig.AppSettings.Settings[key].Value = el.IsEnabled.ToString();
+                if (! CurrentConfig.AppSettings.Settings.AllKeys.Contains(key))
+                    CurrentConfig.AppSettings.Settings.Add(key, el.IsEnabled.ToString());
+                else CurrentConfig.AppSettings.Settings[key].Value = el.IsEnabled.ToString();
                                
             }
             // delete unused entries
             int index = l.Count +1;
             while (true)
             {
-            basicKey = DiagramType + "Connector" + index;
-            if (_currentConfig.AppSettings.Settings.AllKeys.Contains(basicKey+"Type"))
+            basicKey = diagramType + "Connector" + index;
+            if (CurrentConfig.AppSettings.Settings.AllKeys.Contains(basicKey+"Type"))
             {
-                _currentConfig.AppSettings.Settings.Remove(basicKey + "IsEnabled");
-                _currentConfig.AppSettings.Settings.Remove(basicKey + "IsDefault");
-                _currentConfig.AppSettings.Settings.Remove(basicKey + "Stereotype");
-                _currentConfig.AppSettings.Settings.Remove(basicKey + "Type");
+                CurrentConfig.AppSettings.Settings.Remove(basicKey + "IsEnabled");
+                CurrentConfig.AppSettings.Settings.Remove(basicKey + "IsDefault");
+                CurrentConfig.AppSettings.Settings.Remove(basicKey + "Stereotype");
+                CurrentConfig.AppSettings.Settings.Remove(basicKey + "Type");
                 index = index + 1;
             }
 
@@ -1373,18 +1350,17 @@ namespace hoTools.Settings
         }
         #endregion
         #region setServices
-        public void setServices(List<hoTools.EaServices.ServicesCallConfig> l)
+        public void SetServices(List<ServicesCallConfig> l)
         {
-            for (int i = 0; i < l.Count; i++)
+            for (var i = 0; i < l.Count; i++)
             {
                 if (l[i] == null) continue;
-                if (l[i] is hoTools.EaServices.ServicesCallConfig)
                 {
 
-                    var el = (hoTools.EaServices.ServicesCallConfig)l[i];
+                    var el = l[i];
                     string basicKey = "service" + (i + 1);
-                    _currentConfig.AppSettings.Settings[basicKey + "GUID"].Value = el.GUID;
-                    _currentConfig.AppSettings.Settings[basicKey + "Text"].Value = el.ButtonText;
+                    CurrentConfig.AppSettings.Settings[basicKey + "GUID"].Value = el.GUID;
+                    CurrentConfig.AppSettings.Settings[basicKey + "Text"].Value = el.ButtonText;
                 }
             }
 
@@ -1397,10 +1373,10 @@ namespace hoTools.Settings
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        bool getBoolConfigValue(string name)
+        bool GetBoolConfigValue(string name)
         {
             bool result;
-            var p = _currentConfig.AppSettings.Settings[name];
+            var p = CurrentConfig.AppSettings.Settings[name];
             if (p == null) return false;// default
             if (bool.TryParse(p.Value, out result))
             {
@@ -1411,19 +1387,21 @@ namespace hoTools.Settings
                 return true;
             }
         }
+
         /// <summary>
         /// Set bool config value. If error output a message
         /// </summary>
+        /// <param name="name"></param>
         /// <param name="value"></param>
-        void setBoolConfigValue(string name, bool value)
+        void SetBoolConfigValue(string name, bool value)
         {
-            var cfgValue = _currentConfig.AppSettings.Settings[name];
+            var cfgValue = CurrentConfig.AppSettings.Settings[name];
             if (cfgValue != null)
             {
                 cfgValue.Value = value.ToString();
             }else
             {
-                messageConfigValueNotExists(name, value.ToString());
+                MessageConfigValueNotExists(name, value.ToString());
             }
         }
         #endregion
@@ -1432,9 +1410,9 @@ namespace hoTools.Settings
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        string getStringConfigValue(string name)
+        string GetStringConfigValue(string name)
         {
-            var p = _currentConfig.AppSettings.Settings[name];
+            var p = CurrentConfig.AppSettings.Settings[name];
             if (p == null) return "";// default
             return p.Value;
         }
@@ -1443,16 +1421,16 @@ namespace hoTools.Settings
         /// </summary>
         /// <param name="name"></param>
         /// <param name="value"></param>
-        void setStringConfigValue(string name, string value)
+        void SetStringConfigValue(string name, string value)
         {
-            var p = _currentConfig.AppSettings.Settings[name];
+            var p = CurrentConfig.AppSettings.Settings[name];
             if (p !=  null)
             {
                 p.Value = value;
             }
             else
             {
-                messageConfigValueNotExists(name, value);
+                MessageConfigValueNotExists(name, value);
             }
         }
 
@@ -1460,7 +1438,8 @@ namespace hoTools.Settings
         /// Output error Message box for not existent configuration parameter or invalid value
         /// </summary>
         /// <param name="name"></param>
-        void messageConfigValueNotExists(string name, string value)
+        /// <param name="value"></param>
+        void MessageConfigValueNotExists(string name, string value)
         {
             MessageBox.Show($"Parameter '{name}' with value '{value}' don't exists in configuration or is invalid!");
         }

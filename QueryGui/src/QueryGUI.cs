@@ -557,10 +557,10 @@ namespace hoTools.Query
             switch (AddinSettings.Customer)
             {
 
-                case AddinSettings.CustomerCfg.VAR1:
+                case AddinSettings.CustomerCfg.Var1:
                     EaService.aboutVAR1(Release, configFilePath);
                     break;
-                case AddinSettings.CustomerCfg.hoTools:
+                case AddinSettings.CustomerCfg.HoTools:
                     EaService.about(Release, configFilePath);
                     break;
                 default:

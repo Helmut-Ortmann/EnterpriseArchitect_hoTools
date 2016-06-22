@@ -159,7 +159,7 @@ namespace hoTools.Query
         /// <param name="path"></param>
         void OnChanged(string path)
         {
-            if ( (!_sqlTabPagesCntrl.Settings.isAskForQueryUpdateOutside) && (_fullName != path) ) return;
+            if ( (!_sqlTabPagesCntrl.Settings.IsAskForQueryUpdateOutside) && (_fullName != path) ) return;
 
             try
             {
