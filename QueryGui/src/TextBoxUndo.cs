@@ -14,10 +14,10 @@ namespace hoTools.Query
     public class TextBoxUndo : TextBox
     {
         TabPage _tabPage;
-        static int UNDO_LIMIT;
-        List<Item> LastData = new List<Item>();
-        int undoCount = 0;
-        bool undo;
+        static int _undoLimit;
+        List<Item> _lastData = new List<Item>();
+        int _undoCount = 0;
+        bool _undo;
         
         #region Constructor
         /// <summary>
@@ -38,20 +38,20 @@ namespace hoTools.Query
         /// </summary>
         public void UndoText()
         {
-            undo = true;
+            _undo = true;
             try
             {
-                ++undoCount;
-                Text = LastData[LastData.Count - undoCount - 1].text;
-                SelectionStart = LastData[LastData.Count - undoCount - 1].position;
+                ++_undoCount;
+                Text = _lastData[_lastData.Count - _undoCount - 1].Text;
+                SelectionStart = _lastData[_lastData.Count - _undoCount - 1].Position;
                 PerformLayout();
             }
             catch
             {
-                --undoCount;
+                --_undoCount;
             }
 
-            undo = false;
+            _undo = false;
         }
         #endregion
 
@@ -60,20 +60,20 @@ namespace hoTools.Query
         /// Redo last change of TextBobUndo
         /// </summary>
         public void RedoText() { 
-                undo = true;
+                _undo = true;
                 try
                 {
-                    --undoCount;
-                    Text = LastData[LastData.Count - undoCount + 1].text;
-                    SelectionStart = LastData[LastData.Count - undoCount + 1].position;
+                    --_undoCount;
+                    Text = _lastData[_lastData.Count - _undoCount + 1].Text;
+                    SelectionStart = _lastData[_lastData.Count - _undoCount + 1].Position;
                     PerformLayout();
                 }
                 catch
                 {
-                    ++undoCount;
+                    ++_undoCount;
                 }
 
-                undo = false;
+                _undo = false;
         }
         #endregion
 
@@ -143,14 +143,14 @@ namespace hoTools.Query
             SqlFile sqlFile = (SqlFile)_tabPage.Tag;
             sqlFile.IsChanged = true;
             _tabPage.Text = sqlFile.DisplayName;
-            if (!undo)
+            if (!_undo)
             {
-                LastData.RemoveRange(LastData.Count - undoCount, undoCount);
-                LastData.Add(new Item(Text, SelectionStart));
-                undoCount = 0;
-                if (UNDO_LIMIT != 0 && UNDO_LIMIT + 1 < LastData.Count)
+                _lastData.RemoveRange(_lastData.Count - _undoCount, _undoCount);
+                _lastData.Add(new Item(Text, SelectionStart));
+                _undoCount = 0;
+                if (_undoLimit != 0 && _undoLimit + 1 < _lastData.Count)
                 {
-                    LastData.RemoveAt(0);
+                    _lastData.RemoveAt(0);
                 }
             }
         }
@@ -190,13 +190,13 @@ namespace hoTools.Query
     /// </summary>
     class Item
     {
-        public String text;
-        public int position;
+        public String Text;
+        public int Position;
 
         public Item(String text, int position)
         {
-            this.text = text;
-            this.position = position;
+            this.Text = text;
+            this.Position = position;
         }
     }
     #endregion Item

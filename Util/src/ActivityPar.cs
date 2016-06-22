@@ -20,8 +20,8 @@ namespace hoTools.Utils.ActivityParameter
         //
         // init
         // final
-        static public bool activityIsSimple = true; // Create Activity from function in the simple form
-        public static bool createDefaultElementsForActivity(EA.Repository rep, 
+        public static bool ActivityIsSimple = true; // Create Activity from function in the simple form
+        public static bool CreateDefaultElementsForActivity(EA.Repository rep, 
                                 EA.Diagram dia, EA.Element act)
         {
 
@@ -62,7 +62,7 @@ namespace hoTools.Utils.ActivityParameter
         //--------------------------------------------------------------------------------
         // Create an Activity Diagram for the operation
 
-        public static bool createActivityForOperation(EA.Repository rep, EA.Method m, int treePos=100)
+        public static bool CreateActivityForOperation(EA.Repository rep, EA.Method m, int treePos=100)
         {
             // get class
             EA.Element elClass = rep.GetElementByID(m.ParentID);
@@ -75,7 +75,7 @@ namespace hoTools.Utils.ActivityParameter
             pkgSrc.Packages.Refresh();
 
             EA.Element frm = null; // frame beneath package
-            if (activityIsSimple == false)
+            if (ActivityIsSimple == false)
             {
                 // create Class Activity Diagram in target package
                 var pkgActDia = (EA.Diagram)pkgTrg.Diagrams.AddNew("Operation:" + m.Name + " Content", "Activity");
@@ -95,7 +95,7 @@ namespace hoTools.Utils.ActivityParameter
             }
             // create activity with the name of the operation
             var act = (EA.Element)pkgTrg.Elements.AddNew(m.Name, "Activity");
-            if (activityIsSimple == false)
+            if (ActivityIsSimple == false)
             {
                 act.Notes = "Generated from Operation:\r\n" + m.Visibility + " " + m.Name + ":" + m.ReturnType + ";\r\nDetails see Operation definition!!";
             }
@@ -109,21 +109,9 @@ namespace hoTools.Utils.ActivityParameter
             actDia.ShowDetails = 0; // hide details
             // scale page to din A4
             
-            if (actDia.StyleEx.Length > 0)
-            {
-                actDia.StyleEx = actDia.StyleEx.Replace("HideQuals=0", "HideQuals=1"); // hide qualifier
-            }
-            else
-            {
-                actDia.StyleEx = "HideQuals=1;";
-            }
+            actDia.StyleEx = actDia.StyleEx.Length > 0 ? actDia.StyleEx.Replace("HideQuals=0", "HideQuals=1") : "HideQuals=1;";
             // Hide Qualifier
-            if (actDia.ExtendedStyle.Length > 0)
-            { actDia.ExtendedStyle = actDia.ExtendedStyle.Replace("ScalePI=0", "ScalePI=1"); }
-            else 
-            {  
-                actDia.ExtendedStyle = "ScalePI=1;";
-            }
+            actDia.ExtendedStyle = actDia.ExtendedStyle.Length > 0 ? actDia.ExtendedStyle.Replace("ScalePI=0", "ScalePI=1") : "ScalePI=1;";
             actDia.Update();
             act.Diagrams.Refresh();
 
@@ -138,9 +126,9 @@ namespace hoTools.Utils.ActivityParameter
             actDia.DiagramObjects.Refresh();
 
             // add default nodes (init/final)
-            createDefaultElementsForActivity(rep, actDia, act);
+            CreateDefaultElementsForActivity(rep, actDia, act);
 
-            if (activityIsSimple == false)
+            if (ActivityIsSimple == false)
             {
                 // Add Heading to diagram
                 Util.addSequenceNumber(rep, actDia);
@@ -166,7 +154,7 @@ namespace hoTools.Utils.ActivityParameter
             Util.setShowBehaviorInDiagram(rep, m);
 
             // add parameters to activity
-            updateParameterFromOperation(rep, act, m);
+            UpdateParameterFromOperation(rep, act, m);
             int pos = 0;
             foreach (EA.Element actPar in act.EmbeddedElements)
             {
@@ -175,7 +163,7 @@ namespace hoTools.Utils.ActivityParameter
                 pos = pos + 1;
             }
 
-            if (activityIsSimple == false)
+            if (ActivityIsSimple == false)
             {
                 // link Overview frame to diagram
                 Util.setFrameLinksToDiagram(rep, frm, actDia);
@@ -188,7 +176,7 @@ namespace hoTools.Utils.ActivityParameter
         }
       
 
-        public static EA.Diagram createActivityCompositeDiagram(EA.Repository rep, EA.Element act) {
+        public static EA.Diagram CreateActivityCompositeDiagram(EA.Repository rep, EA.Element act) {
             // create activity diagram beneath Activity
             var actDia = (EA.Diagram)act.Diagrams.AddNew(act.Name, "Activity");
             // update diagram properties
@@ -221,7 +209,7 @@ namespace hoTools.Utils.ActivityParameter
             actDia.DiagramObjects.Refresh();
 
             // add default nodes (init/final)
-            createDefaultElementsForActivity(rep, actDia, act);
+            CreateDefaultElementsForActivity(rep, actDia, act);
             act.Elements.Refresh();
             actDia.DiagramObjects.Refresh();
             return actDia;
@@ -232,7 +220,7 @@ namespace hoTools.Utils.ActivityParameter
         // get Parameter from operation
         // visualize them on diagram / activity
         //-------------------------------------------------------------------------------------------------
-        public static bool updateParameterFromOperation(EA.Repository rep, EA.Element act, EA.Method m)
+        public static bool UpdateParameterFromOperation(EA.Repository rep, EA.Element act, EA.Method m)
         {
             if (m == null) return false;
             if (act.Locked) return false;
@@ -245,24 +233,24 @@ namespace hoTools.Utils.ActivityParameter
             // return code
             string postfixName = "";
             string parName = "Return";
-            int methodReturnTypID = 0;
+            int methodReturnTypId;
 
             // is type defined?
             if ((m.ClassifierID != "0") & (m.ClassifierID != ""))
             {
-                methodReturnTypID = Convert.ToInt32(m.ClassifierID);
+                methodReturnTypId = Convert.ToInt32(m.ClassifierID);
             }
             
             // type is only defined as text
             else
             {
-                methodReturnTypID = Convert.ToInt32(Util.getTypeID(rep, m.ReturnType));
+                methodReturnTypId = Convert.ToInt32(Util.getTypeID(rep, m.ReturnType));
             }
 
             bool withActivityReturnParameter = false;
             if (withActivityReturnParameter)
             {
-                parTrgt.ClassifierID = methodReturnTypID;
+                parTrgt.ClassifierID = methodReturnTypId;
                 // create an return Parameter for Activity (in fact an element with properties)
                 parTrgt = Util.getParameterFromActivity(rep, null, act, true);
                 if (parTrgt == null)
@@ -283,7 +271,7 @@ namespace hoTools.Utils.ActivityParameter
                 par = null;
             }
             // returnType for activity
-            act.ClassfierID = methodReturnTypID;
+            act.ClassfierID = methodReturnTypId;
             act.Name = m.Name;
 
             // use stereotype of operation as stereotype for activity
@@ -345,7 +333,6 @@ namespace hoTools.Utils.ActivityParameter
                 par.setParameterProperties("direction", parSrc.Kind);
                 if (parSrc.IsConst)  par.setParameterProperties("constant", "true");
                 par.save();
-                par = null;
                 parTrgt.Update();
                
 
@@ -367,7 +354,7 @@ namespace hoTools.Utils.ActivityParameter
 
             return true;
         }
-        public static void visualizePortForDiagramobject(int pos, EA.Diagram dia, EA.DiagramObject diaObjSource, EA.Element port, EA.Element interf)
+        public static void VisualizePortForDiagramobject(int pos, EA.Diagram dia, EA.DiagramObject diaObjSource, EA.Element port, EA.Element interf)
         {
             // check if port already exists
             foreach (EA.DiagramObject diaObj in dia.DiagramObjects)
@@ -381,10 +368,9 @@ namespace hoTools.Utils.ActivityParameter
             int left = diaObjSource.right - length / 2;
             int right = left + length;
             int top = diaObjSource.top;
-            int bottom = diaObjSource.bottom;
 
             top = top - 10 - pos * 10;
-            bottom = top - length;
+            int bottom = top - length;
             string position = "l=" + left + ";r=" + right + ";t=" + top + ";b=" + bottom + ";";
             var diaObject = (EA.DiagramObject)dia.DiagramObjects.AddNew(position, "");
             dia.Update();

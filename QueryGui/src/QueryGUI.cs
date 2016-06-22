@@ -13,7 +13,6 @@ using hoTools.Settings;
 using hoTools.EaServices;
 using System.Resources;
 
-using System.IO;
 using System.Reflection; // Resource Manager
 
 
@@ -31,22 +30,22 @@ namespace hoTools.Query
     [ComVisible(true)]
     [ClassInterface(ClassInterfaceType.None)]
     [Guid("3F23B705-62F1-43D7-9F6F-085105FDF752")]
-    [ProgId(PROGID)]
-    [ComDefaultInterface(typeof(IQueryGUI))]
-    public partial class QueryGUI : AddinGUI, IQueryGUI
+    [ProgId(Progid)]
+    [ComDefaultInterface(typeof(IQueryGui))]
+    public partial class QueryGui : AddinGUI, IQueryGui
     {
-        public const string PROGID = "hoTools.QueryGUI";
-        public const string TABULATOR_SCRIPT = "Script";
-        public const string TABULATOR_SQL = "SQL";
+        public const string Progid = "hoTools.QueryGUI";
+        public const string TabulatorScript = "Script";
+        public const string TabulatorSql = "SQL";
 
         /// <summary>
         /// Type of Addin. Use the same string for enum as the string to visualize
         /// </summary>
-        public enum AddinType { SQL, Script};
+        public enum AddinType { Sql, Script};
 
         // default value for Addin Tab Name
-        AddinType _addinType = AddinType.SQL;
-        string _addinTabName = TABULATOR_SQL;
+        AddinType _addinType = AddinType.Sql;
+        string _addinTabName = TabulatorSql;
 
         List<Script> _lscripts;  // list off all scripts
         DataTable _tableFunctions; // Scripts and Functions
@@ -60,13 +59,13 @@ namespace hoTools.Query
         /// <summary>
         /// The selected row in script list
         /// </summary>
-        int rowScriptsIndex;
+        int _rowScriptsIndex;
 
         // Coordinates of Close Rectangle relative to TabPage Caption Rectangle TopRight Position
-        const int CLOSE_BUTTON_RECTANGLE_RIGHT_X = -15;
-        const int CLOSE_BUTTON_RECTANGLE_TOP_Y = 4;
-        const int CLOSE_BUTTON_RECTANGLE_WIDTH = 11;
-        const int CLOSE_BUTTON_RECTANGLE_HIGHT = 16;
+        const int CloseButtonRectangleRightX = -15;
+        const int CloseButtonRectangleTopY = 4;
+        const int CloseButtonRectangleWidth = 11;
+        const int CloseButtonRectangleHight = 16;
 
 
         #region Constructor
@@ -75,7 +74,7 @@ namespace hoTools.Query
         /// The real initialization is done after Setting the Repository in setter of property:
         /// 'Repository'
         /// </summary>
-        public QueryGUI()
+        public QueryGui()
         {
             InitializeComponent();
 
@@ -90,13 +89,13 @@ namespace hoTools.Query
 
             // individual initialization
             // Script
-            initScriptDataGrid();
-            initScriptDataTable();
+            InitScriptDataGrid();
+            InitScriptDataTable();
         }
         #endregion
 
         // Interface IQueryGUI implementation
-        public string getName() => "hoTools.QueryGUI";
+        public string GetName() => "hoTools.QueryGUI";
         #region Set Repository
         /// <summary>
         /// Initialize Window after the repository is known/updated
@@ -111,11 +110,11 @@ namespace hoTools.Query
 
                 try
                 {
-                    initializeSettings();
+                    InitializeSettings();
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show(e.ToString(), "SQL,Script: Error Initialization");
+                    MessageBox.Show(e.ToString(), @"SQL,Script: Error Initialization");
                 }
             }
         }
@@ -128,15 +127,15 @@ namespace hoTools.Query
         /// updated
         /// </summary>
         /// <returns></returns>
-        bool initializeSettings()
+        bool InitializeSettings()
         {
             // default 
-            _addinType = AddinType.SQL;
-            _addinTabName = TABULATOR_SQL;
-            if ((string)Tag != TABULATOR_SQL)
+            _addinType = AddinType.Sql;
+            _addinTabName = TabulatorSql;
+            if ((string)Tag != TabulatorSql)
             {
                 _addinType = AddinType.Script;
-                _addinTabName = TABULATOR_SCRIPT;
+                _addinTabName = TabulatorScript;
             }
             // set title
             lblTitle.Text = _addinTabName;
@@ -154,12 +153,12 @@ namespace hoTools.Query
             if (tabControlSql.TabPages.Count == 0)
             {
                 // first tab with Element Template
-                _sqlTabCntrls.addTab(SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.ELEMENT_TEMPLATE));
+                _sqlTabCntrls.AddTab(SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.ELEMENT_TEMPLATE));
             }
 
 
             // run for SQL / Query
-            if (_addinType == AddinType.SQL)
+            if (_addinType == AddinType.Sql)
             {
                 // don't show Script container
                 splitContainer.Panel2Collapsed = true;
@@ -172,7 +171,7 @@ namespace hoTools.Query
                 splitContainer.SplitterDistance = 330;
                 // available script updates
                 _lscripts = Script.getEAMaticScripts(Model);
-                updateTableFunctions();
+                UpdateTableFunctions();
             }
 
             return true;
@@ -180,56 +179,66 @@ namespace hoTools.Query
 
         
         #region initDataGrid
-        void initScriptDataGrid()
+        void InitScriptDataGrid()
         {
             dataGridViewScripts.AutoGenerateColumns = false;
 
             dataGridViewScripts.DataSource = null;
 
-            DataGridViewTextBoxColumn col;
 
-            
-            col = new DataGridViewTextBoxColumn();
-            col.DataPropertyName = "Script";
-            col.Name = "Script";
-            col.HeaderText = "Script";
+            var col = new DataGridViewTextBoxColumn
+            {
+                DataPropertyName = "Script",
+                Name = "Script",
+                HeaderText = @"Script"
+            };
             dataGridViewScripts.Columns.Add(col);
 
 
-            col = new DataGridViewTextBoxColumn();
-            col.DataPropertyName = "Language";
-            col.Name = "Language";
-            col.HeaderText = "Language";
+            col = new DataGridViewTextBoxColumn
+            {
+                DataPropertyName = "Language",
+                Name = "Language",
+                HeaderText = @"Language"
+            };
             dataGridViewScripts.Columns.Add(col);
 
-            col = new DataGridViewTextBoxColumn();
-            col.DataPropertyName = "Group";
-            col.Name = "Group";
-            col.HeaderText = "Group";
+            col = new DataGridViewTextBoxColumn
+            {
+                DataPropertyName = "Group",
+                Name = "Group",
+                HeaderText = @"Group"
+            };
             dataGridViewScripts.Columns.Add(col);
 
 
-            col = new DataGridViewTextBoxColumn();
-            col.DataPropertyName = "Function";
-            col.Name = "Function";
-            col.HeaderText = "Function";
+            col = new DataGridViewTextBoxColumn
+            {
+                DataPropertyName = "Function",
+                Name = "Function",
+                HeaderText = @"Function"
+            };
             dataGridViewScripts.Columns.Add(col);
 
-            col = new DataGridViewTextBoxColumn();
-            col.DataPropertyName = "ParCount";
-            col.Name = "ParCount";
-            col.HeaderText = "Par count";
+            col = new DataGridViewTextBoxColumn
+            {
+                DataPropertyName = "ParCount",
+                Name = "ParCount",
+                HeaderText = @"Par count"
+            };
             dataGridViewScripts.Columns.Add(col);
 
-            col = new DataGridViewTextBoxColumn();
-            col.DataPropertyName = "Err";
-            col.Name = "Err";
-            col.HeaderText = "Err";
+            col = new DataGridViewTextBoxColumn
+            {
+                DataPropertyName = "Err",
+                Name = "Err",
+                HeaderText = @"Err"
+            };
             dataGridViewScripts.Columns.Add(col);
         }
         #endregion
         #region initDataTable
-         void initScriptDataTable()
+         void InitScriptDataTable()
         {
             dataGridViewScripts.DataSource = null;
             _tableFunctions = new DataTable();
@@ -261,7 +270,7 @@ namespace hoTools.Query
     /// Close Addin:
     /// <para/>- Close not stored files
     /// </summary>
-      void close()
+      void Close()
         {
 
         }
@@ -276,7 +285,7 @@ namespace hoTools.Query
         void btnLoadScripts_Click(object sender, EventArgs e)
         {
             _lscripts = Script.getEAMaticScripts(Model);
-            updateTableFunctions();
+            UpdateTableFunctions();
         }
         /// <summary>
         /// Compile, load script with may run on SQL Query result rows. The conditions:
@@ -285,11 +294,10 @@ namespace hoTools.Query
         /// <para/>From Repository, MDG Technology folder, Registry (Tools, MDG, Advanced,..)
         /// </summary>
         /// <param name="isWithAll"></param>
-         void updateTableFunctions(bool isWithAll=false)
+         void UpdateTableFunctions(bool isWithAll=false)
         {
             _tableFunctions.Rows.Clear();
             // fill list
-            DataRow newRow;
             foreach (Script script in _lscripts)
             {
 
@@ -297,7 +305,7 @@ namespace hoTools.Query
                 {
                     // 2 or 3 parameters
                     if (isWithAll || (function.numberOfParameters > 1 && function.numberOfParameters < 4)) { 
-                        newRow = _tableFunctions.NewRow();
+                        var newRow = _tableFunctions.NewRow();
                         newRow["ScriptObj"] = script;
                         newRow["Script"] = script.name;
                         newRow["Language"] = script.languageName;
@@ -319,30 +327,18 @@ namespace hoTools.Query
         }
 
         /// <summary>
-        /// Run SQL with replacing macros and sending the result to EA Search Window
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-         void btnRunSql_Click(object sender, EventArgs e)
-        {
-            _sqlTabCntrls.runSqlTabPage();
-        }
-
-        
-        /// <summary>
         /// Show error of the selected Script
         /// </summary>
         void ShowScriptErrorToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DataGridViewRow row = dataGridViewScripts.Rows[rowScriptsIndex];
+            DataGridViewRow row = dataGridViewScripts.Rows[_rowScriptsIndex];
             string scriptName = row.Cells["Script"].Value as string;
             string functionName = row.Cells["Function"].Value as string;
-            string scriptLanguag = row.Cells["Language"].Value as string;
             string err = row.Cells["Err"].Value as string;
             if (String.IsNullOrWhiteSpace(err))
             { MessageBox.Show("", $"Function compiled fine {scriptName}.{functionName}"); }
             else
-            { MessageBox.Show("Error:\n'" + err + "'", $"Error {scriptName}:{functionName}"); }
+            { MessageBox.Show($"Error:\r\n'{err}'", $"Error {scriptName}:{functionName}"); }
 
 
         }
@@ -357,7 +353,7 @@ namespace hoTools.Query
         /// <param name="e"></param>
          void dataGridViewScripts_MouseClick(object sender, MouseEventArgs e)
         {
-            rowScriptsIndex = dataGridViewScripts.HitTest(e.X, e.Y).RowIndex;
+            _rowScriptsIndex = dataGridViewScripts.HitTest(e.X, e.Y).RowIndex;
         }
 
         /// <summary>
@@ -368,7 +364,7 @@ namespace hoTools.Query
          void showScriptToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
-            DataGridViewRow rowToRun = dataGridViewScripts.Rows[rowScriptsIndex];
+            DataGridViewRow rowToRun = dataGridViewScripts.Rows[_rowScriptsIndex];
             DataRowView row = rowToRun.DataBoundItem as DataRowView;
             
 
@@ -378,20 +374,7 @@ namespace hoTools.Query
         }
 
         
-        void insertText(TextBox txtBox, string text)
-        {
-            var selectionIndex = txtBox.SelectionStart;
-            txtBox.Text = txtBox.Text.Insert(selectionIndex, text);
-            txtBox.SelectionStart = selectionIndex + text.Length;
-        }
-
-      
-             
-
-
-
-     
-              
+        
         /// <summary>
         /// Run SQL and execute Script
         /// </summary>
@@ -426,7 +409,7 @@ namespace hoTools.Query
             TextBox textBox = (TextBox)tabPage.Controls[0];
 
             // get Script and its parameter to run
-            DataGridViewRow rowToRun = dataGridViewScripts.Rows[rowScriptsIndex];
+            DataGridViewRow rowToRun = dataGridViewScripts.Rows[_rowScriptsIndex];
             DataRowView row = rowToRun.DataBoundItem as DataRowView;
             var scriptFunction = row["FunctionObj"] as ScriptFunction;
 
@@ -440,22 +423,11 @@ namespace hoTools.Query
             Cursor.Current = Cursors.Default;
         }
 
-
-
-
-
-
-
-        void txtBoxSql_TextChanged(object sender, EventArgs e)
-        {
-            TextBox txtBox = (TextBox)sender;
-            TabPage tabPage = (TabPage)txtBox.Parent;
-            if (!(tabPage.Text.Contains("*"))) tabPage.Text = tabPage.Text + " *";
-        }
+      
 
          void FileNewTabToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            _sqlTabCntrls.addTab();
+            _sqlTabCntrls.AddTab();
         }
 
         /// <summary>
@@ -473,10 +445,10 @@ namespace hoTools.Query
         void tabControlSql_DrawItem(object sender, DrawItemEventArgs e)
         {
             // Draw a Rectangle with the background color
-            Rectangle closeButton = new Rectangle(e.Bounds.Right + CLOSE_BUTTON_RECTANGLE_RIGHT_X,
-                                                  e.Bounds.Top + CLOSE_BUTTON_RECTANGLE_TOP_Y,
-                                                  CLOSE_BUTTON_RECTANGLE_WIDTH,
-                                                  CLOSE_BUTTON_RECTANGLE_HIGHT);
+            Rectangle closeButton = new Rectangle(e.Bounds.Right + CloseButtonRectangleRightX,
+                                                  e.Bounds.Top + CloseButtonRectangleTopY,
+                                                  CloseButtonRectangleWidth,
+                                                  CloseButtonRectangleHight);
             
             // Output Close simulated button
             if (e.Index == tabControlSql.SelectedIndex)
@@ -522,15 +494,15 @@ namespace hoTools.Query
          void tabControlSql_MouseDown(object sender, MouseEventArgs e)
         {
             if (tabControlSql.SelectedIndex == -1) return;
-            Rectangle r = tabControlSql.GetTabRect(this.tabControlSql.SelectedIndex);
-            Rectangle closeButton = new Rectangle(r.Right + CLOSE_BUTTON_RECTANGLE_RIGHT_X, 
-                                                  r.Top + CLOSE_BUTTON_RECTANGLE_TOP_Y,
-                                                  CLOSE_BUTTON_RECTANGLE_WIDTH,
-                                                  CLOSE_BUTTON_RECTANGLE_HIGHT);
+            Rectangle r = tabControlSql.GetTabRect(tabControlSql.SelectedIndex);
+            Rectangle closeButton = new Rectangle(r.Right + CloseButtonRectangleRightX, 
+                                                  r.Top + CloseButtonRectangleTopY,
+                                                  CloseButtonRectangleWidth,
+                                                  CloseButtonRectangleHight);
             if (closeButton.Contains(e.Location))
             {
                 TabPage tabPage = tabControlSql.SelectedTab;
-                _sqlTabCntrls.close(tabPage);
+                _sqlTabCntrls.Close(tabPage);
 
             }
         }
@@ -584,24 +556,24 @@ namespace hoTools.Query
 
         void runSqlTabToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            _sqlTabCntrls.runSqlTabPage();
+            _sqlTabCntrls.RunSqlTabPage();
         }
 
         void saveSqlTabToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            _sqlTabCntrls.save();
+            _sqlTabCntrls.Save();
         }
 
         void saveSqlTabAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            _sqlTabCntrls.saveSqlTabAs();
+            _sqlTabCntrls.SaveSqlTabAs();
         }
 
 
         void txtSearchTerm_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             txtSearchTerm.Text = Clipboard.GetText();
-            _sqlTabCntrls.runSqlTabPage();
+            _sqlTabCntrls.RunSqlTabPage();
         }
 
 
@@ -628,14 +600,14 @@ namespace hoTools.Query
         {
             if (e.KeyCode == Keys.Enter)
             {
-                _sqlTabCntrls.runSqlTabPage();
+                _sqlTabCntrls.RunSqlTabPage();
                 e.Handled = true;
             }
         }
 
         void saveAllToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            _sqlTabCntrls.saveAll();
+            _sqlTabCntrls.SaveAll();
         }
 
         #region Undo SQL Text
@@ -685,7 +657,7 @@ namespace hoTools.Query
         /// <param name="e"></param>
         void loadTabCtrlLToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            _sqlTabCntrls.loadTabPagePerFileDialog();
+            _sqlTabCntrls.LoadTabPagePerFileDialog();
         }
 
         /// <summary>
@@ -695,7 +667,7 @@ namespace hoTools.Query
         /// <param name="e"></param>
         void btnSave_Click(object sender, EventArgs e)
         {
-            _sqlTabCntrls.save();
+            _sqlTabCntrls.Save();
         }
         /// <summary>
         /// Save all sql Tabs
@@ -704,7 +676,7 @@ namespace hoTools.Query
         /// <param name="e"></param>
         void btnSaveAll_Click(object sender, EventArgs e)
         {
-            _sqlTabCntrls.saveAll();
+            _sqlTabCntrls.SaveAll();
         }
         /// <summary>
         /// Save sql Tab As
@@ -713,7 +685,7 @@ namespace hoTools.Query
         /// <param name="e"></param>
         void btnSaveAs_Click(object sender, EventArgs e)
         {
-            _sqlTabCntrls.saveAs();
+            _sqlTabCntrls.SaveAs();
         }
 
         /// <summary>
@@ -723,7 +695,7 @@ namespace hoTools.Query
         /// <param name="e"></param>
         private void btnRun_Click(object sender, EventArgs e)
         {
-            _sqlTabCntrls.runSqlTabPage();
+            _sqlTabCntrls.RunSqlTabPage();
         }
 
         /// <summary>
@@ -770,7 +742,10 @@ namespace hoTools.Query
             code = rm.GetString("hoDemo3ParScript");
             script = new EaScript(Model, "hoDemo3Par", "Internal", "VBScript", group.GUID, code);
             script.save();
-            MessageBox.Show("ScriptGroup: hoTools\r\n- Script1: hoDemo2Par\r\n- Script2: hoDemo3Par","Demo Scripts to run on query loaded.");
+            MessageBox.Show(@"ScriptGroup: hoTools
+- Script1: hoDemo2Par
+- Script2: hoDemo3Par",
+                @"Demo Scripts to run on query loaded.");
         }
 
         void QueryGUI_Resize(object sender, EventArgs e)
@@ -779,23 +754,8 @@ namespace hoTools.Query
 
         }
 
-        private void txtSearchTerm_TextChanged(object sender, EventArgs e)
-        {
 
-        }
-
-        /// <summary>
-        /// Make sure the DrawEvent is fired when resizing window
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        void tabControlSql_Resize(object sender, EventArgs e)
-        {
-            tabControlSql.Invalidate();
-            
-        }
-
-        void reloadTabToolStripMenuItem_Click(object sender, EventArgs e)
+       void reloadTabToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _sqlTabCntrls.ReloadTabPage();
         }

@@ -7,7 +7,7 @@ namespace hoTools.Utils
 {
     public static class CallOperationAction
     {
-        public static bool createCallAction(EA.Repository rep, EA.Element action, EA.Method method)
+        public static bool CreateCallAction(EA.Repository rep, EA.Element action, EA.Method method)
         {
             // add ClassifierGUID to target action
             string updateStr = @"update t_object set classifier_GUID = '" + method.MethodGUID +
@@ -15,18 +15,18 @@ namespace hoTools.Utils
             rep.Execute(updateStr);
 
             // set CallOperation
-            string CallOperationProperty = "@PROP=@NAME=kind@ENDNAME;@TYPE=ActionKind@ENDTYPE;@VALU=CallOperation@ENDVALU;@PRMT=@ENDPRMT;@ENDPROP;";
+            string callOperationProperty = "@PROP=@NAME=kind@ENDNAME;@TYPE=ActionKind@ENDTYPE;@VALU=CallOperation@ENDVALU;@PRMT=@ENDPRMT;@ENDPROP;";
             Guid g = Guid.NewGuid();
             string xrefid = "{" + g + "}";
-            string insertIntoT_xref = @"insert into t_xref 
+            string insertIntoTXref = @"insert into t_xref 
                 (XrefID,            Name,               Type,              Visibility, Namespace, Requirement, [Constraint], Behavior, Partition, Description, Client, Supplier, Link)
-                VALUES('" + xrefid + "', 'CustomProperties', 'element property','Public', '','','', '',0, '" + CallOperationProperty + "', '" + action.ElementGUID + "', null,'')";
-                rep.Execute(insertIntoT_xref);
+                VALUES('" + xrefid + "', 'CustomProperties', 'element property','Public', '','','', '',0, '" + callOperationProperty + "', '" + action.ElementGUID + "', null,'')";
+                rep.Execute(insertIntoTXref);
 
             // Link Call Operation to operation
                 g = Guid.NewGuid();
                 xrefid = "{" + g + "}";
-                insertIntoT_xref = @"insert into t_xref 
+                insertIntoTXref = @"insert into t_xref 
                 (XrefID,            Name,               Type,              Visibility, Namespace, Requirement, [Constraint], Behavior, Partition, Description, Client, Supplier, Link)
                 VALUES('" + xrefid + "', 'MOFProps', 'element property','Public', '','','', 'target',0, '  null ', '" + method.MethodGUID + "', null,'')";
                 //rep.Execute(insertIntoT_xref);
@@ -34,7 +34,7 @@ namespace hoTools.Utils
             return true;
         }
 
-        public static string removeFirstParenthesisPairFromString(string s)
+        public static string RemoveFirstParenthesisPairFromString(string s)
         {
             // delete first (
             // not for macros
@@ -52,7 +52,7 @@ namespace hoTools.Utils
             return s;
         }
 
-        public static string addQuestionMark(string s)
+        public static string AddQuestionMark(string s)
         {
             if (! s.Contains("end")) {
             if (s.Substring(s.Length - 1, 1) == "?") return s;
@@ -63,7 +63,7 @@ namespace hoTools.Utils
         }
         // Remove modul prefix from call string
         // modulePrefix_function(..) ==> function(..)
-        public static string removeModuleNameFromCallString(string s)
+        public static string RemoveModuleNameFromCallString(string s)
         {
             var pattern = new Regex(@"([a-zA-Z][a-zA-Z_0-9]*_)[a-zA-Z_0-9]*\(");
             Match regMatch = pattern.Match(s);
@@ -74,7 +74,7 @@ namespace hoTools.Utils
             }
             return s;
         }
-        public static string removeCasts(string s)
+        public static string RemoveCasts(string s)
         {
             // remove casts
             if (!s.ToLower().Contains("sizeof("))
@@ -120,9 +120,9 @@ namespace hoTools.Utils
             return s;
         }
         
-        public static string removeUnwantedStringsFromText(string s, bool deleteMultipleSpaces= true)
+        public static string RemoveUnwantedStringsFromText(string s, bool deleteMultipleSpaces= true)
         {
-            s = removeCasts(s);
+            s = RemoveCasts(s);
             
 
             if (! s.Contains("while"))
@@ -155,7 +155,7 @@ namespace hoTools.Utils
 
             return s.Trim();
         }
-        public static EA.Element getElementFromName(EA.Repository rep, string elementName, string elementType)
+        public static EA.Element GetElementFromName(EA.Repository rep, string elementName, string elementType)
         {
             EA.Element el = null;
             string query = @"select o.ea_guid AS EA_GUID
@@ -163,20 +163,20 @@ namespace hoTools.Utils
                       where o.name = '" + elementName + "' AND " +
                             "o.Object_Type = '" + elementType + "' ";
             string str = rep.SQLQuery(query);
-            var XmlDoc = new XmlDocument();
-            XmlDoc.LoadXml(str);
+            var xmlDoc = new XmlDocument();
+            xmlDoc.LoadXml(str);
 
-            XmlNode operationGUIDNode = XmlDoc.SelectSingleNode("//EA_GUID");
-            if (operationGUIDNode != null)
+            XmlNode operationGuidNode = xmlDoc.SelectSingleNode("//EA_GUID");
+            if (operationGuidNode != null)
             {
-                string GUID = operationGUIDNode.InnerText;
-                el = rep.GetElementByGuid(GUID);
+                string guid = operationGuidNode.InnerText;
+                el = rep.GetElementByGuid(guid);
             }
 
             return el;
         }
 
-        public static string getMethodNameFromCallString(string s)
+        public static string GetMethodNameFromCallString(string s)
         {
             var pattern = new Regex(@"[a-zA-Z_][a-zA-Z_0-9]+\s*\(");
             Match regMatch = pattern.Match(s);
@@ -188,21 +188,21 @@ namespace hoTools.Utils
             }
             return "";
         }
-        public static EA.Method getMethodFromMethodName(EA.Repository rep, string methodName)
+        public static EA.Method GetMethodFromMethodName(EA.Repository rep, string methodName)
         {
             EA.Method method = null;
             string query = @"select op.ea_guid AS EA_GUID
                       from t_operation op 
                       where op.name = '" + methodName + "' ";
             string str = rep.SQLQuery(query);
-            var XmlDoc = new XmlDocument();
-            XmlDoc.LoadXml(str);
+            var xmlDoc = new XmlDocument();
+            xmlDoc.LoadXml(str);
 
-            XmlNode operationGUIDNode = XmlDoc.SelectSingleNode("//EA_GUID");
-            if (operationGUIDNode != null)
+            XmlNode operationGuidNode = xmlDoc.SelectSingleNode("//EA_GUID");
+            if (operationGuidNode != null)
             {
-                string GUID = operationGUIDNode.InnerText;
-                method = rep.GetMethodByGuid(GUID);
+                string guid = operationGuidNode.InnerText;
+                method = rep.GetMethodByGuid(guid);
             }
 
             return method;

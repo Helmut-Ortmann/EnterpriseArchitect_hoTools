@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Threading;
-using System.Diagnostics;
 
 namespace FileSystem
 {
@@ -29,19 +28,19 @@ namespace FileSystem
     /// </summary>
     public class FileMonitor : IFileMonitor
     {
-        const int EVENT_OBSERVE_START_AFTER_MS = 100; // start checking after 200ms
-        const int EVENT_OBSERVE_NEXT_INTERVAL_MS = 100;    // check every 100ms
-        const int TIME_WITOUT_EVENT_MS = 75;            // if 100ms without event than fire 
+        const int EventObserveStartAfterMs = 100; // start checking after 200ms
+        const int EventObserveNextIntervalMs = 100;    // check every 100ms
+        const int TimeWitoutEventMs = 75;            // if 100ms without event than fire 
 
         readonly FileSystemWatcher _fileSystemWatcher = new FileSystemWatcher();
 
         /// <summary>
         /// The pending files. All file which are waiting for time in which no further event occurs
         /// </summary>
-        Dictionary<string, DateTime> _pendingEvents = new Dictionary<string, DateTime>();
+        readonly Dictionary<string, DateTime> _pendingEvents = new Dictionary<string, DateTime>();
 
         readonly Timer _timer;
-        bool _timerStarted = false;
+        bool _timerStarted;
         string _filePath;
 
         /// <summary>
@@ -54,7 +53,7 @@ namespace FileSystem
             _fileSystemWatcher.Path = Path.GetDirectoryName(filePath);
             _fileSystemWatcher.NotifyFilter = NotifyFilters.LastWrite | NotifyFilters.FileName;
             _fileSystemWatcher.IncludeSubdirectories = false;
-            _fileSystemWatcher.Changed += new FileSystemEventHandler(OnChange);
+            _fileSystemWatcher.Changed += OnChange;
             _fileSystemWatcher.Error += OnFileError;
 
             // timer to debounce multiple events for the same file
@@ -84,7 +83,7 @@ namespace FileSystem
                 _fileSystemWatcher.EnableRaisingEvents = true;
             } catch (Exception e)
             {
-                System.Windows.Forms.MessageBox.Show($"File: {_filePath}'\r\n{e.ToString()}", "Invalid monitoring of file");
+                System.Windows.Forms.MessageBox.Show($"File: {_filePath}'\r\n{e}", @"Invalid monitoring of file");
             }
         }
         /// <summary>
@@ -98,7 +97,7 @@ namespace FileSystem
         /// <summary>
         /// Update the fileName to watch for changes
         /// </summary>
-        /// <param name="fileName"></param>
+        /// <param name="filePath"></param>
         public void Update(string filePath)
         {
             _filePath = filePath;
@@ -125,7 +124,7 @@ namespace FileSystem
                 if (!_timerStarted)
                 {
                     // Start time + Interval in ms (after 100ms for 100ms)
-                    _timer.Change(EVENT_OBSERVE_START_AFTER_MS, EVENT_OBSERVE_NEXT_INTERVAL_MS);
+                    _timer.Change(EventObserveStartAfterMs, EventObserveNextIntervalMs);
                     _timerStarted = true;
                 }
             }
@@ -138,20 +137,13 @@ namespace FileSystem
         /// <param name="state"></param>
         void OnTimeout(object state)
         {
-            // list of paths which are ready to fire events (timeout without new event)
-            List<string> paths;
-
             // Don't want other threads messing with the pending events right now 
             lock (_pendingEvents)
             {
                 if (! _timerStarted) return;
                 // Get a list of all paths that are ready to fire
-                paths = FindReadyPaths(_pendingEvents);
-                // Remove paths that are ready to fire
-                foreach (string path in paths)
-                {
-
-                }
+                var paths = FindReadyPaths(_pendingEvents);
+                
                 paths.ForEach(
                         (path) =>
                         {
@@ -166,18 +158,10 @@ namespace FileSystem
 
                 }
                 // Fire an event for each path that has changed paths
-                foreach (string path in paths)
-                {
-
-                }
                 paths.ForEach(
-                   
-                    (path) => {
-                        FireEvent(path);
-                    }
+                    FireEvent
                  
                 );
-                return;
             
             }
         }
@@ -196,7 +180,7 @@ namespace FileSystem
                 // If the path has not received a new event in the last 75ms 
                 // an event for the path should be fired 
                 double diff = now.Subtract(entry.Value).TotalMilliseconds;
-                if (diff >= TIME_WITOUT_EVENT_MS)  results.Add(entry.Key);
+                if (diff >= TimeWitoutEventMs)  results.Add(entry.Key);
             }
             return results;
         }

@@ -7,14 +7,14 @@ namespace hoTools.Query
 {
     /// <summary>
     /// Wrapper for Script Functions:
-    /// - Messagebox if error
+    /// - Message box if error
     /// - Configure if you want to show message box
     /// 
     /// </summary>
     public class ScriptFuntionWrapper
     {
         readonly ScriptFunction _function;
-        bool _isErrorOutput = true;
+        readonly bool _isErrorOutput = true;
 
         public ScriptFuntionWrapper(ScriptFunction function)
         {
@@ -31,7 +31,7 @@ namespace hoTools.Query
         /// </summary>
         /// <param name="par"></param>
         /// <returns>true=ok;false=nok</returns>
-        public Boolean execute(object[] par) { 
+        public Boolean Execute(object[] par) { 
             try
             {
                 _function.execute(par);

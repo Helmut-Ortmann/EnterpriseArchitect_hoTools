@@ -1,7 +1,7 @@
 ﻿
 namespace hoTools.Query
 {
-    partial class QueryGUI
+    partial class QueryGui
     {
         /// <summary> 
         /// Required designer variable.
@@ -30,7 +30,7 @@ namespace hoTools.Query
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(QueryGUI));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(QueryGui));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -639,7 +639,7 @@ namespace hoTools.Query
             this.AutoSize = true;
             this.Controls.Add(this.splitContainer);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Name = "QueryGUI";
+            this.Name = "QueryGui";
             this.Size = new System.Drawing.Size(769, 538);
             this.Resize += new System.EventHandler(this.QueryGUI_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewScripts)).EndInit();

@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using hoTools.Utils;
-using hoTools.Utils.Appls;
-using hoTools.Utils.Parameter;
 
 namespace hoTools.Utils.ActionPins
 {
@@ -19,7 +12,7 @@ namespace hoTools.Utils.ActionPins
         //---------------------------------------------------------------------------------------------
         // updateActionParameter(EA.Repository rep, EA.Element actionPin)
         //---------------------------------------------------------------------------------------------
-        public static bool updateActionPinParameter(EA.Repository rep, EA.Element action)
+        public static bool UpdateActionPinParameter(EA.Repository rep, EA.Element action)
         {
             foreach (EA.Element actionPin in action.EmbeddedElements)
             {
@@ -34,7 +27,7 @@ namespace hoTools.Utils.ActionPins
                     //    pin.ClassfierID = parTypeID;
                     //    EA.Element el = rep.GetElementByID(parTypeID);
                     //    pin.Update(); // do it before update table
-                    //    Util.setElementPDATA1(rep, pin, el.ElementGUID);// PDATA1 setzen
+                    //    Util.setElementPDATA1(rep, pin, el.ElementGUID);// set PDATA1
 
                     //}
                 }
@@ -50,11 +43,11 @@ namespace hoTools.Utils.ActionPins
                     }
                     else
                     {
-                        Int32 parTypeID = Util.getTypeID(rep, type);
-                        if (parTypeID != 0)
+                        Int32 parTypeId = Util.getTypeID(rep, type);
+                        if (parTypeId != 0)
                         {
                             //pin.Name = par.
-                            EA.Element el = rep.GetElementByID(parTypeID);
+                            EA.Element el = rep.GetElementByID(parTypeId);
                             Util.setElementPDATA1(rep, actionPin, el.ElementGUID);// PDATA1 setzen
                         }
                     }
@@ -79,11 +72,11 @@ namespace hoTools.Utils.ActionPins
         //    return true;
         //}
 
-        public static bool updateActionPinForElement(EA.Repository rep, EA.Element el1)
+        public static bool UpdateActionPinForElement(EA.Repository rep, EA.Element el1)
         {
             if (el1.Type == "Action")
             {
-                updateActionPinParameter(rep, el1);
+                UpdateActionPinParameter(rep, el1);
                 return true;
             }
             if (el1.Type == "Class" | el1.Type == "Interface")
@@ -94,12 +87,12 @@ namespace hoTools.Utils.ActionPins
             {   // update parameter
                 if (el.Type == "Action")
                 {
-                    updateActionPinParameter(rep, el);
+                    UpdateActionPinParameter(rep, el);
 
                 }
                 if (el.Type == "Activity")
                 {
-                    updateActionPinForElement(rep, el);
+                    UpdateActionPinForElement(rep, el);
                 }
             }
 
@@ -109,27 +102,27 @@ namespace hoTools.Utils.ActionPins
         // updateActionPinForPackage(EA.Repository rep, EA.Package pkg)
         //----------------------------------------------------------------------------
 
-        public static bool updateActionPinForPackage(EA.Repository rep, EA.Package pkg)
+        public static bool UpdateActionPinForPackage(EA.Repository rep, EA.Package pkg)
         {
             foreach (EA.Element el in pkg.Elements)
             {   // update parameter
                 if (el.Type == "Action")
                 {
-                    updateActionPinParameter(rep, el);
+                    UpdateActionPinParameter(rep, el);
                     rep.RefreshModelView(pkg.PackageID); // reload package
                 }
                 if (el.Type == "Activity")
                 {
                     foreach (EA.Element elSub in el.Elements)
                     {
-                        updateActionPinForElement(rep, elSub);
+                        UpdateActionPinForElement(rep, elSub);
                     }
                 }
             }
             foreach (EA.Package pkgSub in pkg.Packages)
             {
                 // update all packages
-                updateActionPinForPackage(rep, pkgSub);
+                UpdateActionPinForPackage(rep, pkgSub);
             }
             return true;
 

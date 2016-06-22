@@ -2,9 +2,6 @@
 using System.Collections.Generic;
 using System.Xml.Linq;
 using EAAddinFramework.Utils;
-using hoTools.Utils.SQL;
-
-
 
 namespace hoTools.Query
 {
@@ -31,7 +28,7 @@ namespace hoTools.Query
             // Check parameter count of function
             if (scriptParCount < 2 || scriptParCount > 3)
             {
-                MessageBox.Show($"Function: '{scriptName}:{functionName} count of parameters={scriptParCount}", "Count of parameters for function shall be 2 or 3 (object_type, GUID, Model), Break!!!!");
+                MessageBox.Show($"Function: '{scriptName}:{functionName} count of parameters={scriptParCount}", @"Count of parameters for function shall be 2 or 3 (object_type, GUID, Model), Break!!!!");
                 return false;
             }
 
@@ -50,11 +47,6 @@ namespace hoTools.Query
             foreach (EaItem item in eaItemList)
             {
 
-                // get selected element and type
-                EA.ObjectType oType = model.Repository.GetContextItemType();
-                object oContext = model.Repository.GetContextObject();
-
-
                 switch (scriptParCount)
                 {
                     case 2:
@@ -64,7 +56,7 @@ namespace hoTools.Query
                         if (isWithAsk)
                         {
                             // run the function with two or three parameters
-                            DialogResult result = MessageBox.Show($"Function '{functionName}', Item {countCurrent} of {count}", "YES=Execute,No=Skip execution, Cancel=Break,", MessageBoxButtons.YesNoCancel);
+                            DialogResult result = MessageBox.Show($"Function '{functionName}', Item {countCurrent} of {count}", @"YES=Execute,No=Skip execution, Cancel=Break,", MessageBoxButtons.YesNoCancel);
                             if (result.Equals(DialogResult.No)) run = false;
                             if (result.Equals(DialogResult.Cancel)) return false;
                         }
@@ -77,18 +69,20 @@ namespace hoTools.Query
                         }
                         continue;
                     default:
-                        MessageBox.Show($"Script parameter count shall be 2 or 3, is {scriptParCount}", "Invalid count of function parameters, Break!!!!");
+                        MessageBox.Show($"Script parameter count shall be 2 or 3, is {scriptParCount}", @"Invalid count of function parameters, Break!!!!");
                         break;
 
                 }
             }
             return true;
         }
+
         /// <summary>
         /// Run function for EA item of arbitrary type<par></par>
         /// - If parameter count = 2 it calls the function with oType, oContext<par></par>
         /// - If parameter count = 3 it calls the function with oType, oContext, Model
         /// </summary>
+        /// <param name="model"></param>
         /// <param name="function">Function</param>
         /// <param name="oType">EA Object type</param>
         /// <param name="oContext">EA Object</param>
@@ -100,13 +94,13 @@ namespace hoTools.Query
             {
                 case 2:
                     object[] par2 = { oContext, oType };
-                    return new ScriptFuntionWrapper(function).execute(par2);
+                    return new ScriptFuntionWrapper(function).Execute(par2);
                 case 3:
                     object[] par3 = { oContext, oType, model };
-                    return new ScriptFuntionWrapper(function).execute(par3);
+                    return new ScriptFuntionWrapper(function).Execute(par3);
                 default:
                     MessageBox.Show($"Script {function.fullName}  has {function.numberOfParameters} parameter",
-                        "Script function parameter count not 2 or 3, Break!");
+                        @"Script function parameter count not 2 or 3, Break!");
                     return false;
             }
 

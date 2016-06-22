@@ -329,7 +329,7 @@ namespace hoTools.EaServices
                 EA.Element el = rep.GetElementByID(m.ParentID);
                 EA.Package pkg = rep.GetPackageByID(el.PackageID);
                 int pos = pkg.Packages.Count + 1;
-                ActivityPar.createActivityForOperation(rep, m, pos);
+                ActivityPar.CreateActivityForOperation(rep, m, pos);
                 rep.Models.Refresh();
                 rep.RefreshModelView(0);
                 rep.ShowInProjectView(m);
@@ -366,7 +366,7 @@ namespace hoTools.EaServices
             foreach (EA.Method m1 in el.Methods)
             {
                 // Create Activity
-                ActivityPar.createActivityForOperation(rep, m1, treePos);
+                ActivityPar.CreateActivityForOperation(rep, m1, treePos);
                 treePos = treePos + 1;
 
             }
@@ -928,7 +928,7 @@ namespace hoTools.EaServices
                     elTarget.Update();
                     if (basicType == "Activity" & extension.ToLower() == "comp=yes")
                     {
-                        EA.Diagram actDia = ActivityPar.createActivityCompositeDiagram(rep, elTarget);
+                        EA.Diagram actDia = ActivityPar.CreateActivityCompositeDiagram(rep, elTarget);
                         Util.setActivityCompositeDiagram(rep, elTarget, actDia.DiagramID.ToString());
                         //elTarget.
                     }
@@ -1103,10 +1103,10 @@ namespace hoTools.EaServices
                 if (type == "CallOperation")
                 {
 
-                    EA.Method method = hoTools.Utils.CallOperationAction.getMethodFromMethodName(rep, extension);
+                    EA.Method method = hoTools.Utils.CallOperationAction.GetMethodFromMethodName(rep, extension);
                     if (!(method == null))
                     {
-                        hoTools.Utils.CallOperationAction.createCallAction(rep, elTarget, method);
+                        hoTools.Utils.CallOperationAction.CreateCallAction(rep, elTarget, method);
 
                     }
                     
@@ -1314,7 +1314,7 @@ namespace hoTools.EaServices
                 string includeName = Regex.Match(includePath, @"([\w-]*)\.h").Groups[1].Value;
 
 
-                EA.Element el = CallOperationAction.getElementFromName(rep, includeName, "Interface");
+                EA.Element el = CallOperationAction.GetElementFromName(rep, includeName, "Interface");
                 if (el == null && createWarningNote )
                 {
                     // create a note
@@ -1556,28 +1556,28 @@ namespace hoTools.EaServices
             }
                 // single "case"==> composite activity  
             else if (s1.Contains("case") ){
-                s1 = CallOperationAction.removeUnwantedStringsFromText(s1);
+                s1 = CallOperationAction.RemoveUnwantedStringsFromText(s1);
                 createDiagramObjectFromContext(rep, s1, "Activity", "comp=yes", offsetHorizental, offsetVertical, guardString);
             }
             else if (Regex.IsMatch(s1, @"^(for|while|do[\s]*$)"))
             {
-                s1 = CallOperationAction.removeUnwantedStringsFromText(s1);
+                s1 = CallOperationAction.RemoveUnwantedStringsFromText(s1);
                 createDiagramObjectFromContext(rep, s1, "Activity", "comp=no", offsetHorizental, offsetVertical, guardString);
             }
             else
             {
-                string methodString = CallOperationAction.removeUnwantedStringsFromText(s1);
-                string methodName = CallOperationAction.getMethodNameFromCallString(methodString);
+                string methodString = CallOperationAction.RemoveUnwantedStringsFromText(s1);
+                string methodName = CallOperationAction.GetMethodNameFromCallString(methodString);
                 // remove module name from method name (text before '_')
                 if (removeModuleNameFromMethodName)
                 {
-                    methodString = CallOperationAction.removeModuleNameFromCallString(methodString);
+                    methodString = CallOperationAction.RemoveModuleNameFromCallString(methodString);
                 }
 
                 // check if function is available
                 if (methodName != "")
                 {
-                    if (hoTools.Utils.CallOperationAction.getMethodFromMethodName(rep, methodName) == null)
+                    if (hoTools.Utils.CallOperationAction.GetMethodFromMethodName(rep, methodName) == null)
                     {
                         createDiagramObjectFromContext(rep, methodString, "Action", "", offsetHorizental, offsetVertical, guardString);
                     }
@@ -1594,12 +1594,12 @@ namespace hoTools.EaServices
         #region createDecisionFromText
         public static string createDecisionFromText(EA.Repository rep, string decisionName, int offsetHorizental = 0, int offsetVertical = 0, string guardString = "")
         {
-            decisionName = CallOperationAction.removeUnwantedStringsFromText(decisionName);
+            decisionName = CallOperationAction.RemoveUnwantedStringsFromText(decisionName);
             string loops = "for, while, switch";
             if (!loops.Contains(decisionName.Substring(0, 3)))
             {
-                decisionName = CallOperationAction.removeFirstParenthesisPairFromString(decisionName);
-                decisionName = CallOperationAction.addQuestionMark(decisionName);
+                decisionName = CallOperationAction.RemoveFirstParenthesisPairFromString(decisionName);
+                decisionName = CallOperationAction.AddQuestionMark(decisionName);
             }
             Match match = Regex.Match(decisionName, @"else[\s]*if");
             if (match.Success)
@@ -1704,7 +1704,7 @@ namespace hoTools.EaServices
                     EA.Method m = Util.getOperationFromBrehavior(rep, el);
                     if (el.Locked) return;
                     if (m == null) return;
-                    ActivityPar.updateParameterFromOperation(rep, el, m);// get parameters from Operation for Activity
+                    ActivityPar.UpdateParameterFromOperation(rep, el, m);// get parameters from Operation for Activity
                     EA.Diagram dia = rep.GetCurrentDiagram();
                     if (dia == null) return;
                    
@@ -1733,7 +1733,7 @@ namespace hoTools.EaServices
                 EA.Element act = Appl.getBehaviorForOperation(rep, m);
                 if (act == null) return;
                 if (act.Locked) return;
-                ActivityPar.updateParameterFromOperation(rep, act, m);// get parameters from Operation for Activity
+                ActivityPar.UpdateParameterFromOperation(rep, act, m);// get parameters from Operation for Activity
             }
             if (oType.Equals(EA.ObjectType.otPackage))
             {
@@ -1750,7 +1750,7 @@ namespace hoTools.EaServices
                 EA.Element act = Appl.getBehaviorForOperation(rep, m);
                 if (act == null) continue;
                 if (act.Locked) continue;
-                ActivityPar.updateParameterFromOperation(rep, act, m);// get parameters from Operation for Activity
+                ActivityPar.UpdateParameterFromOperation(rep, act, m);// get parameters from Operation for Activity
             }
             foreach (EA.Element elSub in el.Elements)
             {
@@ -1924,7 +1924,7 @@ namespace hoTools.EaServices
             if (rep.GetContextItemType().Equals(EA.ObjectType.otElement))
             {
                 var el = (EA.Element)rep.GetContextObject();
-                string s0 = CallOperationAction.removeUnwantedStringsFromText(text.Trim(), false);
+                string s0 = CallOperationAction.RemoveUnwantedStringsFromText(text.Trim(), false);
                 s0 = Regex.Replace(s0, @"\/\*", "//"); // /* ==> //
                 s0 = Regex.Replace(s0, @"\*\/", "");   // delete */
                 el.Notes = s0;
@@ -2666,7 +2666,7 @@ namespace hoTools.EaServices
                 sRaw = Regex.Replace(sRaw, @"/\*.*", "");
                 sRaw = sRaw.Trim();
                 if (sRaw == "") continue;
-                sRaw = CallOperationAction.removeCasts(sRaw);
+                sRaw = CallOperationAction.RemoveCasts(sRaw);
 
                 
 
@@ -2864,7 +2864,7 @@ namespace hoTools.EaServices
 
              if ( ! name.Equals("")) 
              {
-                 value = CallOperationAction.removeCasts(value);
+                 value = CallOperationAction.RemoveCasts(value);
                  foreach (EA.Attribute attr in el.Attributes)
                  {
                      if (attr.Name == name)

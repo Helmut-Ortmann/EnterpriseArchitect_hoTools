@@ -59,14 +59,14 @@ namespace hoTools
         static AddinSettings AddinSettings;
         static AddinControlGUI AddinControlGUI;
         static FindAndReplaceGUI FindAndReplaceGUI;
-        static QueryGUI ScriptGUI;
-        static QueryGUI QueryGUI;
+        static QueryGui ScriptGUI;
+        static QueryGui QueryGUI;
 
         // ActiveX Controls
         AddinControlGUI _MyControlGUI;
         FindAndReplaceGUI _FindAndReplaceGUI;
-        QueryGUI _ScriptGUI;
-        QueryGUI _QueryGUI;
+        QueryGui _ScriptGUI;
+        QueryGui _QueryGUI;
 
         // settings
         AddinSettings _AddinSettings;
@@ -878,12 +878,12 @@ namespace hoTools
                     if (oType.Equals(EA.ObjectType.otPackage))
                     {
                         var pkg = (EA.Package)Repository.GetContextObject();
-                        ActionPin.updateActionPinForPackage(Repository, pkg);
+                        ActionPin.UpdateActionPinForPackage(Repository, pkg);
                     }
                     if (oType.Equals(EA.ObjectType.otElement))
                     {
                         el = (EA.Element)Repository.GetContextObject();
-                        ActionPin.updateActionPinForElement(Repository, el);
+                        ActionPin.UpdateActionPinForElement(Repository, el);
                     }
                     break;
                 
@@ -1065,8 +1065,8 @@ namespace hoTools
                     if (! (_AddinSettings.OnlyQueryWindow == AddinSettings.ShowInWindow.Disabled) )
                     {
                         // Run as Query
-                        QueryGUI = addAddinControl<QueryGUI>(QueryGUI.TABULATOR_SQL, 
-                            QueryGUI.PROGID, QueryGUI.TABULATOR_SQL, 
+                        QueryGUI = addAddinControl<QueryGui>(QueryGui.TabulatorSql, 
+                            QueryGui.Progid, QueryGui.TabulatorSql, 
                             _AddinSettings.OnlyQueryWindow);
                         _QueryGUI = QueryGUI; // static + instance
                     }
@@ -1075,8 +1075,8 @@ namespace hoTools
                     if (!(_AddinSettings.ScriptAndQueryWindow == AddinSettings.ShowInWindow.Disabled))
                     {
                         // Run as Script
-                        ScriptGUI = addAddinControl<QueryGUI>(QueryGUI.TABULATOR_SCRIPT, 
-                            QueryGUI.PROGID, QueryGUI.TABULATOR_SCRIPT, 
+                        ScriptGUI = addAddinControl<QueryGui>(QueryGui.TabulatorScript, 
+                            QueryGui.Progid, QueryGui.TabulatorScript, 
                             _AddinSettings.ScriptAndQueryWindow);
                     _ScriptGUI = ScriptGUI; // static + instance
                     }

@@ -18,7 +18,7 @@ namespace hoTools.Query
     /// </summary>
     public class SqlTabPagesCntrl
     {
-        const string SQL_TEXT_BOX_TOOLTIP =
+        const string SqlTextBoxTooltip =
 @"CTRL+L                        Load sql from File
 CTRL+R                          Run sql
 CTRL+S                          Store sql
@@ -57,16 +57,17 @@ CTRL+SHFT+S                     Store sql All
         /// </summary>
         /// 
         public AddinSettings Settings { get; }
-        Model _model;
-        System.ComponentModel.IContainer _components;
 
-        TabControl _tabControl;
-        TextBox _sqlTextBoxSearchTerm;
+        readonly Model _model;
+        readonly System.ComponentModel.IContainer _components;
+
+        readonly TabControl _tabControl;
+        readonly TextBox _sqlTextBoxSearchTerm;
 
         /// <summary>
         /// The tab name of Addin (SQL or Script)
         /// </summary>
-        string _addinTabName;
+        readonly string _addinTabName;
 
         /// <summary>
         /// Reusable ToolStripMenuItem: File Menu: New Tab and Load Recent Files 
@@ -84,7 +85,7 @@ CTRL+SHFT+S                     Store sql All
         readonly ToolStripMenuItem _loadTabFromFileItem = new ToolStripMenuItem("Load from...");
 
 
-        const string DEFAULT_TAB_NAME = "noName";
+        const string DefaultTabName = "noName";
 
         /// <summary>
         /// Constructor to initialize TabControl, create ToolStripItems (New Tab from, Recent Files) with file history. 
@@ -96,6 +97,7 @@ CTRL+SHFT+S                     Store sql All
         /// <param name="sqlTextBoxSearchTerm"></param>
         /// <param name="fileNewTabAndLoadRecentFileItem">File, New Tab from recent files</param>
         /// <param name="fileLoadRecentFileItem">File, Load Tab from recent files</param>
+        /// <param name="addinTabName"></param>
         public SqlTabPagesCntrl(Model model, AddinSettings settings,
             System.ComponentModel.IContainer components,
             TabControl tabControl, TextBox sqlTextBoxSearchTerm,
@@ -112,10 +114,10 @@ CTRL+SHFT+S                     Store sql All
             _fileNewTabAndLoadRecentFileItem = fileNewTabAndLoadRecentFileItem;
             _fileLoadRecentFileItem = fileLoadRecentFileItem;
 
-            loadOpenedTabsFromLastSession();
+            LoadOpenedTabsFromLastSession();
 
             // Load recent files into ToolStripMenu
-            loadRecentFilesIntoToolStripItems();
+            LoadRecentFilesIntoToolStripItems();
             _addinTabName = addinTabName;
 
         }
@@ -128,23 +130,23 @@ CTRL+SHFT+S                     Store sql All
         /// </summary>
         /// <param name="content">Content of the Tab</param>
         /// <returns></returns>
-        public TabPage addTab(string content)
+        public TabPage AddTab(string content)
         {
-            TabPage tabPage = addTab();
-            if (content != "") loadTabPage(content);
+            TabPage tabPage = AddTab();
+            if (content != "") LoadTabPage(content);
             return tabPage;
         }
         /// <summary>
         /// Add an Tab to the tab control and load the Element Template as default. The Text box is unchanged because it's just a template.
         /// </summary>
         /// <returns></returns>
-        public TabPage addTab(bool withDefaultTabContent = true)
+        public TabPage AddTab()
         {
             // create a new TabPage in TabControl
             TabPage tabPage = new TabPage();
 
             // Create a new empty file
-            SqlFile sqlFile = new SqlFile(this, tabPage, $"{DEFAULT_TAB_NAME}{_tabControl.Controls.Count}.sql", isChanged:false);
+            SqlFile sqlFile = new SqlFile(this, $"{DefaultTabName}{_tabControl.Controls.Count}.sql", isChanged:false);
             tabPage.Tag = sqlFile;
             tabPage.Text = sqlFile.DisplayName;
             tabPage.ToolTipText = sqlFile.FullName;
@@ -160,81 +162,71 @@ CTRL+SHFT+S                     Store sql All
             //-----------------------------------------------------------------
             // Tab with ContextMenuStrip
             // Create a text box in TabPage for the SQL string
-            var sqlTextBox = new TextBoxUndo(tabPage);
+            var sqlTextBox = new TextBoxUndo(tabPage)
+            {
+                Text = SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.ELEMENT_TEMPLATE)
+            };
             // load element template
-            sqlTextBox.Text = SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.ELEMENT_TEMPLATE);
             sqlFile.IsChanged = false;
             tabPage.Text = sqlFile.DisplayName;  // after isChanged = false
 
             // register CTRL+S (store SQL) and CTRL+R (run SQL)
             sqlTextBox.KeyUp += sqlTextBox_KeyUp;
-            //sqlTextBox.KeyDown += sqlTextBox_KeyDown;
-            ToolTip toolTip = new ToolTip();
-            toolTip.IsBalloon = false;
-            toolTip.InitialDelay = 0;
-            toolTip.ShowAlways = true;
-            toolTip.SetToolTip(sqlTextBox, SQL_TEXT_BOX_TOOLTIP);
-
-
+            ToolTip toolTip = new ToolTip
+            {
+                IsBalloon = false,
+                InitialDelay = 0,
+                ShowAlways = true
+            };
+            toolTip.SetToolTip(sqlTextBox, SqlTextBoxTooltip);
             tabPage.Controls.Add(sqlTextBox);
 
 
-            // ContextMenu
-            ContextMenuStrip tabPageContextMenuStrip = new ContextMenuStrip(_components);
-
             // Load sql File into TabPage
-            ToolStripMenuItem _loadTabMenuItem = new ToolStripMenuItem();
-            _loadTabMenuItem.Text = "Load File (CTRL+L)";
-            _loadTabMenuItem.Click += fileLoadMenuItem_Click;
+            ToolStripMenuItem loadTabMenuItem = new ToolStripMenuItem {Text = @"Load File (CTRL+L)"};
+            loadTabMenuItem.Click += fileLoadMenuItem_Click;
 
             // Save sql File from TabPage
-            ToolStripMenuItem fileSaveMenuItem = new ToolStripMenuItem();
-            fileSaveMenuItem.Text = "Save File (CTRL+S)";
+            ToolStripMenuItem fileSaveMenuItem = new ToolStripMenuItem {Text = @"Save File (CTRL+S)"};
             fileSaveMenuItem.Click += fileSaveMenuItem_Click;
 
             // Save all sql files 
-            ToolStripMenuItem fileSaveAllMenuItem = new ToolStripMenuItem();
-            fileSaveAllMenuItem.Text = "Save All File (CTRL+SHFT+S)";
+            ToolStripMenuItem fileSaveAllMenuItem = new ToolStripMenuItem {Text = @"Save All File (CTRL+SHFT+S)"};
             fileSaveAllMenuItem.Click += fileSaveMenuItem_Click;
 
             // Save As sql File from TabPage
-            ToolStripMenuItem fileSaveAsMenuItem = new ToolStripMenuItem();
-            fileSaveAsMenuItem.Text = "Save File As..";
+            ToolStripMenuItem fileSaveAsMenuItem = new ToolStripMenuItem {Text = @"Save File As.."};
             fileSaveAsMenuItem.Click += fileSaveAsMenuItem_Click;
 
             // New TabPage
-            ToolStripMenuItem _newTabMenuItem = new ToolStripMenuItem();
-            _newTabMenuItem.Text = "New Tab ";
-            _newTabMenuItem.Click += addTabMenuItem_Click;
+            ToolStripMenuItem newTabMenuItem = new ToolStripMenuItem {Text = @"New Tab "};
+            newTabMenuItem.Click += addTabMenuItem_Click;
 
             // Close TabPage
-            ToolStripMenuItem closeMenuItem = new ToolStripMenuItem();
-            closeMenuItem.Text = "Close Tab";
+            ToolStripMenuItem closeMenuItem = new ToolStripMenuItem {Text = @"Close Tab"};
             closeMenuItem.Click += closeMenuItem_Click;
 
             // Run sql File 
-            ToolStripMenuItem fileRunMenuItem = new ToolStripMenuItem();
-            fileRunMenuItem.Text = "Run sql (CTRL+R)";
+            ToolStripMenuItem fileRunMenuItem = new ToolStripMenuItem {Text = @"Run sql (CTRL+R)"};
             fileRunMenuItem.Click += fileRunMenuItem_Click;
 
 
             // Run selected sql 
-            ToolStripMenuItem fileRunSelectedMenuItem = new ToolStripMenuItem();
-            fileRunSelectedMenuItem.Text = "Run selected sql";
+            ToolStripMenuItem fileRunSelectedMenuItem = new ToolStripMenuItem {Text = @"Run selected sql"};
             fileRunSelectedMenuItem.Click += fileRunSelectedMenuItem_Click;
 
 
             //------------------------------------------------------------------------------------------------------------------
             // Insert Template
-            ToolStripMenuItem insertTemplateMenuItem = getTemplateMenuItems();
+            ToolStripMenuItem insertTemplateMenuItem = GetTemplateMenuItems();
 
 
             //-----------------------------------------------------------------------------------------------------------------
             // Insert Macro
-            ToolStripMenuItem insertMacroMenuItem = getMacroMenuItems();
+            ToolStripMenuItem insertMacroMenuItem = GetMacroMenuItems();
 
             // Load recent files into toolStrip menu
-            loadRecentFilesIntoToolStripItems();
+            LoadRecentFilesIntoToolStripItems();
 
 
             //----------------------------------------------------------------------------------------------------------
@@ -242,10 +234,10 @@ CTRL+SHFT+S                     Store sql All
             // - TabPage
             // - SQL TextBox
             var toolStripItems = new ToolStripItem[] {
-                _loadTabMenuItem,                   // load Tab from file
+                loadTabMenuItem,                   // load Tab from file
                 _loadTabFromFileItem,                // load Tab from recent file        
                 new ToolStripSeparator(),
-                _newTabMenuItem,                     // new Tab
+                newTabMenuItem,                     // new Tab
                 _newTabFromItem,       // new Tab from recent file 
                 new ToolStripSeparator(),
                 insertTemplateMenuItem,             // insert template
@@ -282,112 +274,120 @@ CTRL+SHFT+S                     Store sql All
         /// <para/>- Event Handler insertTemplate_Click
         /// </summary>
         /// <returns>Tool Strip Menu with the items for each template</returns>
-        ToolStripMenuItem getMacroMenuItems()
+        ToolStripMenuItem GetMacroMenuItems()
         {
-            ToolStripMenuItem insertMacroMenuItem = new ToolStripMenuItem();
-            insertMacroMenuItem.Text = "Insert &Macro";
+            ToolStripMenuItem insertMacroMenuItem = new ToolStripMenuItem {Text = @"Insert &Macro"};
 
             // Insert Macro
-            ToolStripMenuItem insertMacroSearchTermMenuItem = new ToolStripMenuItem();
-            insertMacroSearchTermMenuItem.Text = "Insert " + SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.SEARCH_TERM);
-            insertMacroSearchTermMenuItem.ToolTipText = SqlTemplates.getTooltip(SqlTemplates.SQL_TEMPLATE_ID.SEARCH_TERM);
-            insertMacroSearchTermMenuItem.Tag = SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.SEARCH_TERM);
+            var id = SqlTemplates.SQL_TEMPLATE_ID.SEARCH_TERM;
+            ToolStripMenuItem insertMacroSearchTermMenuItem = new ToolStripMenuItem
+            {
+                Text = @"Insert " + SqlTemplates.getTemplateText(id),
+                ToolTipText = SqlTemplates.getTooltip(id),
+                Tag = SqlTemplates.getTemplate(id)
+            };
             insertMacroSearchTermMenuItem.Click += insertTemplate_Click;
 
             // Insert Package
-            ToolStripMenuItem insertPackageMenuItem = new ToolStripMenuItem();
-            insertPackageMenuItem.Text = "Insert " + SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.PACKAGE_ID);
-            insertPackageMenuItem.ToolTipText = SqlTemplates.getTooltip(SqlTemplates.SQL_TEMPLATE_ID.PACKAGE_ID);
-            insertPackageMenuItem.Tag = SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.PACKAGE_ID);
+            id = SqlTemplates.SQL_TEMPLATE_ID.PACKAGE_ID;
+            ToolStripMenuItem insertPackageMenuItem = new ToolStripMenuItem
+            {
+                Text = @"Insert " + SqlTemplates.getTemplateText(id),
+                ToolTipText = SqlTemplates.getTooltip(id),
+                Tag = SqlTemplates.getTemplate(id)
+            };
             insertPackageMenuItem.Click += insertTemplate_Click;
 
             // Insert Branch
-            ToolStripMenuItem insertBranchMenuItem = new ToolStripMenuItem();
-            insertBranchMenuItem.Text = "Insert " + SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.BRANCH_IDS);
-            insertBranchMenuItem.ToolTipText = SqlTemplates.getTooltip(SqlTemplates.SQL_TEMPLATE_ID.BRANCH_IDS);
-            insertBranchMenuItem.Tag = SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.BRANCH_IDS);
+            id = SqlTemplates.SQL_TEMPLATE_ID.BRANCH_IDS;
+            ToolStripMenuItem insertBranchMenuItem = new ToolStripMenuItem
+            {
+                Text = @"Insert " + SqlTemplates.getTemplateText(id),
+                ToolTipText = SqlTemplates.getTooltip(id),
+                Tag = SqlTemplates.getTemplate(id)
+            };
             insertBranchMenuItem.Click += insertTemplate_Click;
 
             // Insert InBranch
             ToolStripMenuItem insertInBranchMenuItem = new ToolStripMenuItem();
-            insertInBranchMenuItem.Text = "Insert " + SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.IN_BRANCH_IDS);
+            insertInBranchMenuItem.Text = @"Insert " + SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.IN_BRANCH_IDS);
             insertInBranchMenuItem.ToolTipText = SqlTemplates.getTooltip(SqlTemplates.SQL_TEMPLATE_ID.IN_BRANCH_IDS);
             insertInBranchMenuItem.Tag = SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.IN_BRANCH_IDS);
             insertInBranchMenuItem.Click += insertTemplate_Click;
 
             // Insert CurrentID
             ToolStripMenuItem insertCurrentIdMenuItem = new ToolStripMenuItem();
-            insertCurrentIdMenuItem.Text = "Insert " + SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.CURRENT_ITEM_ID);
+            insertCurrentIdMenuItem.Text = @"Insert " + SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.CURRENT_ITEM_ID);
             insertCurrentIdMenuItem.ToolTipText = SqlTemplates.getTooltip(SqlTemplates.SQL_TEMPLATE_ID.CURRENT_ITEM_ID);
             insertCurrentIdMenuItem.Tag = SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.CURRENT_ITEM_ID);
             insertCurrentIdMenuItem.Click += insertTemplate_Click;
 
             // Insert CurrentGUID
             ToolStripMenuItem insertCurrentGuidMenuItem = new ToolStripMenuItem();
-            insertCurrentGuidMenuItem.Text = "Insert " + SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.CURRENT_ITEM_GUID);
+            insertCurrentGuidMenuItem.Text = @"Insert " + SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.CURRENT_ITEM_GUID);
             insertCurrentGuidMenuItem.ToolTipText = SqlTemplates.getTooltip(SqlTemplates.SQL_TEMPLATE_ID.CURRENT_ITEM_GUID);
             insertCurrentGuidMenuItem.Tag = SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.CURRENT_ITEM_GUID);
             insertCurrentGuidMenuItem.Click += insertTemplate_Click;
 
             // Insert ConnectorID
             ToolStripMenuItem insertConnectorIdMenuItem = new ToolStripMenuItem();
-            insertConnectorIdMenuItem.Text = "Insert " + SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.CONNECTOR_ID);
+            insertConnectorIdMenuItem.Text = @"Insert " + SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.CONNECTOR_ID);
             insertConnectorIdMenuItem.ToolTipText = SqlTemplates.getTooltip(SqlTemplates.SQL_TEMPLATE_ID.CONNECTOR_ID);
             insertConnectorIdMenuItem.Tag = SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.CONNECTOR_ID);
             insertConnectorIdMenuItem.Click += insertTemplate_Click;
 
             // Insert Conveyed Item IDs
             ToolStripMenuItem insertConveyedItemIdsMenuItem = new ToolStripMenuItem();
-            insertConveyedItemIdsMenuItem.Text = "Insert " + SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.CONVEYED_ITEM_IDS);
+            insertConveyedItemIdsMenuItem.Text = @"Insert " + SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.CONVEYED_ITEM_IDS);
             insertConveyedItemIdsMenuItem.ToolTipText = SqlTemplates.getTooltip(SqlTemplates.SQL_TEMPLATE_ID.CONVEYED_ITEM_IDS);
             insertConveyedItemIdsMenuItem.Tag = SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.CONVEYED_ITEM_IDS);
             insertConveyedItemIdsMenuItem.Click += insertTemplate_Click;
 
 
             // Insert Diagram Selected Objects_IDS Item IDs
-            ToolStripMenuItem insertDiagramSelectedElements_IDSMenuItem = new ToolStripMenuItem();
-            insertDiagramSelectedElements_IDSMenuItem.Text = "Insert " + SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.DiagramSelectedElements_IDS);
-            insertDiagramSelectedElements_IDSMenuItem.ToolTipText = SqlTemplates.getTooltip(SqlTemplates.SQL_TEMPLATE_ID.DiagramSelectedElements_IDS);
-            insertDiagramSelectedElements_IDSMenuItem.Tag = SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.DiagramSelectedElements_IDS);
-            insertDiagramSelectedElements_IDSMenuItem.Click += insertTemplate_Click;
+            ToolStripMenuItem insertDiagramSelectedElementsIdsMenuItem = new ToolStripMenuItem();
+            insertDiagramSelectedElementsIdsMenuItem.Text = @"Insert " + SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.DiagramSelectedElements_IDS);
+            insertDiagramSelectedElementsIdsMenuItem.ToolTipText = SqlTemplates.getTooltip(SqlTemplates.SQL_TEMPLATE_ID.DiagramSelectedElements_IDS);
+            insertDiagramSelectedElementsIdsMenuItem.Tag = SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.DiagramSelectedElements_IDS);
+            insertDiagramSelectedElementsIdsMenuItem.Click += insertTemplate_Click;
 
             // Insert Diagram Objects_IDS Item IDs
-            ToolStripMenuItem insertDiagramElements_IDSMenuItem = new ToolStripMenuItem();
-            insertDiagramElements_IDSMenuItem.Text = "Insert " + SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.DiagramElements_IDS);
-            insertDiagramElements_IDSMenuItem.ToolTipText = SqlTemplates.getTooltip(SqlTemplates.SQL_TEMPLATE_ID.DiagramElements_IDS);
-            insertDiagramElements_IDSMenuItem.Tag = SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.DiagramElements_IDS);
-            insertDiagramElements_IDSMenuItem.Click += insertTemplate_Click;
+            ToolStripMenuItem insertDiagramElementsIdsMenuItem = new ToolStripMenuItem();
+            insertDiagramElementsIdsMenuItem.Text = @"Insert " + SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.DiagramElements_IDS);
+            insertDiagramElementsIdsMenuItem.ToolTipText = SqlTemplates.getTooltip(SqlTemplates.SQL_TEMPLATE_ID.DiagramElements_IDS);
+            insertDiagramElementsIdsMenuItem.Tag = SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.DiagramElements_IDS);
+            insertDiagramElementsIdsMenuItem.Click += insertTemplate_Click;
 
 
             // Insert Diagram IDs
-            ToolStripMenuItem insertDiagramElements_IDMenuItem = new ToolStripMenuItem();
-            var id = SqlTemplates.SQL_TEMPLATE_ID.DIAGRAM_ID;
-            insertDiagramElements_IDMenuItem.Text = "Insert " + SqlTemplates.getTemplateText(id);
-            insertDiagramElements_IDMenuItem.ToolTipText = SqlTemplates.getTooltip(id);
-            insertDiagramElements_IDMenuItem.Tag = SqlTemplates.getTemplate(id);
-            insertDiagramElements_IDMenuItem.Click += insertTemplate_Click;
+            ToolStripMenuItem insertDiagramElementsIdMenuItem = new ToolStripMenuItem();
+            id = SqlTemplates.SQL_TEMPLATE_ID.DIAGRAM_ID;
+            insertDiagramElementsIdMenuItem.Text = @"Insert " + SqlTemplates.getTemplateText(id);
+            insertDiagramElementsIdMenuItem.ToolTipText = SqlTemplates.getTooltip(id);
+            insertDiagramElementsIdMenuItem.Tag = SqlTemplates.getTemplate(id);
+            insertDiagramElementsIdMenuItem.Click += insertTemplate_Click;
 
             // Tree selected GUIDs
-            ToolStripMenuItem insertTreeSelectedGUIDSMenuItem = new ToolStripMenuItem();
-            insertTreeSelectedGUIDSMenuItem.Text = "Insert " + SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.TREE_SELECTED_GUIDS);
-            insertTreeSelectedGUIDSMenuItem.ToolTipText = SqlTemplates.getTooltip(SqlTemplates.SQL_TEMPLATE_ID.TREE_SELECTED_GUIDS);
-            insertTreeSelectedGUIDSMenuItem.Tag = SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.TREE_SELECTED_GUIDS);
-            insertTreeSelectedGUIDSMenuItem.Click += insertTemplate_Click;
+            ToolStripMenuItem insertTreeSelectedGuidsMenuItem = new ToolStripMenuItem();
+            insertTreeSelectedGuidsMenuItem.Text = @"Insert " + SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.TREE_SELECTED_GUIDS);
+            insertTreeSelectedGuidsMenuItem.ToolTipText = SqlTemplates.getTooltip(SqlTemplates.SQL_TEMPLATE_ID.TREE_SELECTED_GUIDS);
+            insertTreeSelectedGuidsMenuItem.Tag = SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.TREE_SELECTED_GUIDS);
+            insertTreeSelectedGuidsMenuItem.Click += insertTemplate_Click;
 
             // newGuid
             ToolStripMenuItem insertNewGuid = new ToolStripMenuItem();
             id = SqlTemplates.SQL_TEMPLATE_ID.NEW_GUID;
-            insertNewGuid.Text = "Insert " + SqlTemplates.getTemplateText(id);
+            insertNewGuid.Text = @"Insert " + SqlTemplates.getTemplateText(id);
             insertNewGuid.ToolTipText = SqlTemplates.getTooltip(id);
             insertNewGuid.Tag = SqlTemplates.getTemplate(id);
             insertNewGuid.Click += insertTemplate_Click;
 
             // Insert #WC#
             ToolStripMenuItem insertWcMenuItem = new ToolStripMenuItem();
-            insertWcMenuItem.Text = "Insert " + SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.WC);
+            insertWcMenuItem.Text = @"Insert " + SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.WC);
             insertWcMenuItem.ToolTipText = SqlTemplates.getTooltip(SqlTemplates.SQL_TEMPLATE_ID.WC);
             insertWcMenuItem.Tag = SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.WC);
-            insertWcMenuItem.Click += new System.EventHandler(insertTemplate_Click);
+            insertWcMenuItem.Click += insertTemplate_Click;
 
             insertMacroMenuItem.DropDownItems.AddRange(new ToolStripItem[] {
                 insertMacroSearchTermMenuItem,
@@ -401,13 +401,13 @@ CTRL+SHFT+S                     Store sql All
                 insertConnectorIdMenuItem,
                 insertConveyedItemIdsMenuItem,
                 new ToolStripSeparator(),
-                insertDiagramElements_IDMenuItem,
-                insertDiagramElements_IDSMenuItem,
-                insertDiagramSelectedElements_IDSMenuItem,
+                insertDiagramElementsIdMenuItem,
+                insertDiagramElementsIdsMenuItem,
+                insertDiagramSelectedElementsIdsMenuItem,
                 new ToolStripSeparator(),
                 insertNewGuid,
                 new ToolStripSeparator(),
-                insertTreeSelectedGUIDSMenuItem,
+                insertTreeSelectedGuidsMenuItem,
                 insertWcMenuItem
                 });
             return insertMacroMenuItem;
@@ -423,129 +423,129 @@ CTRL+SHFT+S                     Store sql All
         /// <para/>- Event Handler insertTemplate_Click
         /// </summary>
         /// <returns>Tool Strip Menu with the items for each template</returns>
-        ToolStripMenuItem getTemplateMenuItems()
+        ToolStripMenuItem GetTemplateMenuItems()
         {
             ToolStripMenuItem insertTemplateMenuItem = new ToolStripMenuItem("Insert &Template");
 
             // Insert Branch Template
             ToolStripMenuItem insertBranchTemplateMenuItem = new ToolStripMenuItem();
-            insertBranchTemplateMenuItem.Text = "Insert Branch Template";
+            insertBranchTemplateMenuItem.Text = @"Insert Branch Template";
             var id = SqlTemplates.SQL_TEMPLATE_ID.BRANCH_TEMPLATE;
             insertBranchTemplateMenuItem.ToolTipText = SqlTemplates.getTooltip(id);
             insertBranchTemplateMenuItem.Tag = SqlTemplates.getTemplate(id);
-            insertBranchTemplateMenuItem.Click += new System.EventHandler(insertTemplate_Click);
+            insertBranchTemplateMenuItem.Click += insertTemplate_Click;
 
             // Insert CurrentItemId Template
             ToolStripMenuItem insertCurrentItemIdTemplateMenuItem = new ToolStripMenuItem();
-            insertCurrentItemIdTemplateMenuItem.Text = "Insert CurrentItemId Template";
+            insertCurrentItemIdTemplateMenuItem.Text = @"Insert CurrentItemId Template";
             id = SqlTemplates.SQL_TEMPLATE_ID.CURRENT_ITEM_ID_TEMPLATE;
             insertCurrentItemIdTemplateMenuItem.ToolTipText = SqlTemplates.getTooltip(id);
             insertCurrentItemIdTemplateMenuItem.Tag = SqlTemplates.getTemplate(id);
-            insertCurrentItemIdTemplateMenuItem.Click += new System.EventHandler(insertTemplate_Click);
+            insertCurrentItemIdTemplateMenuItem.Click += insertTemplate_Click;
 
             // Insert CurrentItemGuid Template
             ToolStripMenuItem insertCurrentItemGuidTemplateMenuItem = new ToolStripMenuItem();
-            insertCurrentItemGuidTemplateMenuItem.Text = "Insert CurrentItemGuid Template";
+            insertCurrentItemGuidTemplateMenuItem.Text = @"Insert CurrentItemGuid Template";
             id = SqlTemplates.SQL_TEMPLATE_ID.CURRENT_ITEM_GUID_TEMPLATE;
             insertCurrentItemGuidTemplateMenuItem.ToolTipText = SqlTemplates.getTooltip(id);
             insertCurrentItemGuidTemplateMenuItem.Tag = SqlTemplates.getTemplate(id);
-            insertCurrentItemGuidTemplateMenuItem.Click += new System.EventHandler(insertTemplate_Click);
+            insertCurrentItemGuidTemplateMenuItem.Click += insertTemplate_Click;
 
             // Insert ConveyedItemIDS Template
-            ToolStripMenuItem insertConveyedtemIDSTemplateMenuItem = new ToolStripMenuItem();
-            insertConveyedtemIDSTemplateMenuItem.Text = "Insert ConveyedItems from selected Connector Template";
+            ToolStripMenuItem insertConveyedtemIdsTemplateMenuItem = new ToolStripMenuItem();
+            insertConveyedtemIdsTemplateMenuItem.Text = @"Insert ConveyedItems from selected Connector Template";
             id = SqlTemplates.SQL_TEMPLATE_ID.CONVEYED_ITEMS_FROM_CONNECTOR_TEMPLATE;
-            insertConveyedtemIDSTemplateMenuItem.ToolTipText = SqlTemplates.getTooltip(id);
-            insertConveyedtemIDSTemplateMenuItem.Tag = SqlTemplates.getTemplate(id);
-            insertConveyedtemIDSTemplateMenuItem.Click += new System.EventHandler(insertTemplate_Click);
+            insertConveyedtemIdsTemplateMenuItem.ToolTipText = SqlTemplates.getTooltip(id);
+            insertConveyedtemIdsTemplateMenuItem.Tag = SqlTemplates.getTemplate(id);
+            insertConveyedtemIdsTemplateMenuItem.Click += insertTemplate_Click;
 
             // Insert Connectors from Element Template
             ToolStripMenuItem insertConnectorsFromElementTemplateMenuItem = new ToolStripMenuItem();
-            insertConnectorsFromElementTemplateMenuItem.Text = "Insert Connectors from Element Template";
+            insertConnectorsFromElementTemplateMenuItem.Text = @"Insert Connectors from Element Template";
             id = SqlTemplates.SQL_TEMPLATE_ID.CONNECTORS_FROM_ELEMENT_TEMPLATE;
             insertConnectorsFromElementTemplateMenuItem.ToolTipText = SqlTemplates.getTooltip(id);
             insertConnectorsFromElementTemplateMenuItem.Tag = SqlTemplates.getTemplate(id);
-            insertConnectorsFromElementTemplateMenuItem.Click += new System.EventHandler(insertTemplate_Click);
+            insertConnectorsFromElementTemplateMenuItem.Click += insertTemplate_Click;
 
 
             // Insert Element Template
             ToolStripMenuItem insertElementTemplateMenuItem = new ToolStripMenuItem();
-            insertElementTemplateMenuItem.Text = "Insert Element Template";
+            insertElementTemplateMenuItem.Text = @"Insert Element Template";
             id = SqlTemplates.SQL_TEMPLATE_ID.ELEMENT_TEMPLATE;
             insertElementTemplateMenuItem.ToolTipText = SqlTemplates.getTooltip(id);
             insertElementTemplateMenuItem.Tag = SqlTemplates.getTemplate(id);
-            insertElementTemplateMenuItem.Click += new System.EventHandler(insertTemplate_Click);
+            insertElementTemplateMenuItem.Click += insertTemplate_Click;
 
             // Insert Element Type Template
             ToolStripMenuItem insertElementTypeTemplateMenuItem = new ToolStripMenuItem();
-            insertElementTypeTemplateMenuItem.Text = "Insert Element Type Template";
+            insertElementTypeTemplateMenuItem.Text = @"Insert Element Type Template";
             insertElementTypeTemplateMenuItem.ToolTipText = SqlTemplates.getTooltip(SqlTemplates.SQL_TEMPLATE_ID.ELEMENT_TYPE_TEMPLATE);
             insertElementTypeTemplateMenuItem.Tag = SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.ELEMENT_TYPE_TEMPLATE);
-            insertElementTypeTemplateMenuItem.Click += new System.EventHandler(insertTemplate_Click);
+            insertElementTypeTemplateMenuItem.Click += insertTemplate_Click;
 
 
             // Insert Diagram Elements Template
             ToolStripMenuItem insertDiagramElementTemplateMenuItem = new ToolStripMenuItem();
-            insertDiagramElementTemplateMenuItem.Text = "Insert Diagram Elements Template";
+            insertDiagramElementTemplateMenuItem.Text = @"Insert Diagram Elements Template";
             id = SqlTemplates.SQL_TEMPLATE_ID.DIAGRAM_ELEMENTS_IDS_TEMPLATE;
             insertDiagramElementTemplateMenuItem.ToolTipText = SqlTemplates.getTooltip(id);
             insertDiagramElementTemplateMenuItem.Tag = SqlTemplates.getTemplate(id);
-            insertDiagramElementTemplateMenuItem.Click += new System.EventHandler(insertTemplate_Click);
+            insertDiagramElementTemplateMenuItem.Click += insertTemplate_Click;
 
             // Insert Diagram Selected Elements Template
             ToolStripMenuItem insertDiagramSelectedElementTemplateMenuItem = new ToolStripMenuItem();
-            insertDiagramSelectedElementTemplateMenuItem.Text = "Insert Diagram selected Elements Template";
+            insertDiagramSelectedElementTemplateMenuItem.Text = @"Insert Diagram selected Elements Template";
             id = SqlTemplates.SQL_TEMPLATE_ID.DIAGRAM_SELECTED_ELEMENTS_IDS_TEMPLATE;
             insertDiagramSelectedElementTemplateMenuItem.ToolTipText = SqlTemplates.getTooltip(id);
             insertDiagramSelectedElementTemplateMenuItem.Tag = SqlTemplates.getTemplate(id);
-            insertDiagramSelectedElementTemplateMenuItem.Click += new System.EventHandler(insertTemplate_Click);
+            insertDiagramSelectedElementTemplateMenuItem.Click += insertTemplate_Click;
 
 
             // Insert Diagram Template
             ToolStripMenuItem insertDiagramTemplateMenuItem = new ToolStripMenuItem();
-            insertDiagramTemplateMenuItem.Text = "Insert Diagram Template";
+            insertDiagramTemplateMenuItem.Text = @"Insert Diagram Template";
             insertDiagramTemplateMenuItem.ToolTipText = SqlTemplates.getTooltip(SqlTemplates.SQL_TEMPLATE_ID.DIAGRAM_TEMPLATE);
             insertDiagramTemplateMenuItem.Tag = SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.DIAGRAM_TEMPLATE);
-            insertDiagramTemplateMenuItem.Click += new System.EventHandler(insertTemplate_Click);
+            insertDiagramTemplateMenuItem.Click += insertTemplate_Click;
 
             // Insert Diagram Type Template
             ToolStripMenuItem insertDiagramTypeTemplateMenuItem = new ToolStripMenuItem();
-            insertDiagramTypeTemplateMenuItem.Text = "Insert Diagram Type Template";
+            insertDiagramTypeTemplateMenuItem.Text = @"Insert Diagram Type Template";
             insertDiagramTypeTemplateMenuItem.ToolTipText = SqlTemplates.getTooltip(SqlTemplates.SQL_TEMPLATE_ID.DIAGRAM_TYPE_TEMPLATE);
             insertDiagramTypeTemplateMenuItem.Tag = SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.DIAGRAM_TYPE_TEMPLATE);
-            insertDiagramTypeTemplateMenuItem.Click += new System.EventHandler(insertTemplate_Click);
+            insertDiagramTypeTemplateMenuItem.Click += insertTemplate_Click;
 
             // Insert Package Template
             ToolStripMenuItem insertPackageTemplateMenuItem = new ToolStripMenuItem();
-            insertPackageTemplateMenuItem.Text = "Insert Package Template";
+            insertPackageTemplateMenuItem.Text = @"Insert Package Template";
             insertPackageTemplateMenuItem.ToolTipText = SqlTemplates.getTooltip(SqlTemplates.SQL_TEMPLATE_ID.PACKAGE_TEMPLATE);
             insertPackageTemplateMenuItem.Tag = SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.PACKAGE_TEMPLATE);
-            insertPackageTemplateMenuItem.Click += new System.EventHandler(insertTemplate_Click);
+            insertPackageTemplateMenuItem.Click += insertTemplate_Click;
 
             // Insert DiagramObject Template
             ToolStripMenuItem insertDiagramObjectTemplateMenuItem = new ToolStripMenuItem();
-            insertDiagramObjectTemplateMenuItem.Text = "Insert Diagram Object Template";
+            insertDiagramObjectTemplateMenuItem.Text = @"Insert Diagram Object Template";
             insertDiagramObjectTemplateMenuItem.ToolTipText = SqlTemplates.getTooltip(SqlTemplates.SQL_TEMPLATE_ID.DIAGRAM_OBJECT_TEMPLATE);
             insertDiagramObjectTemplateMenuItem.Tag = SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.DIAGRAM_OBJECT_TEMPLATE);
-            insertDiagramObjectTemplateMenuItem.Click += new System.EventHandler(insertTemplate_Click);
+            insertDiagramObjectTemplateMenuItem.Click += insertTemplate_Click;
 
             // Insert Attribute Template
             ToolStripMenuItem insertAttributeTemplateMenuItem = new ToolStripMenuItem();
-            insertAttributeTemplateMenuItem.Text = "Insert Attribute Template";
+            insertAttributeTemplateMenuItem.Text = @"Insert Attribute Template";
             insertAttributeTemplateMenuItem.ToolTipText = SqlTemplates.getTooltip(SqlTemplates.SQL_TEMPLATE_ID.ATTRIBUTE_TEMPLATE);
             insertAttributeTemplateMenuItem.Tag = SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.ATTRIBUTE_TEMPLATE);
-            insertAttributeTemplateMenuItem.Click += new System.EventHandler(insertTemplate_Click);
+            insertAttributeTemplateMenuItem.Click += insertTemplate_Click;
 
             // Insert Operation Template
             ToolStripMenuItem insertOperationTemplateMenuItem = new ToolStripMenuItem();
-            insertOperationTemplateMenuItem.Text = "Insert Operation Template";
+            insertOperationTemplateMenuItem.Text = @"Insert Operation Template";
             insertOperationTemplateMenuItem.ToolTipText = SqlTemplates.getTooltip(SqlTemplates.SQL_TEMPLATE_ID.OPERATION_TEMPLATE);
             insertOperationTemplateMenuItem.Tag = SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.OPERATION_TEMPLATE);
-            insertOperationTemplateMenuItem.Click += new System.EventHandler(insertTemplate_Click);
+            insertOperationTemplateMenuItem.Click += insertTemplate_Click;
 
             // Insert Demo Run Script Template
             ToolStripMenuItem insertDemoRunScriptTemplateMenuItem = new ToolStripMenuItem();
-            insertDemoRunScriptTemplateMenuItem.Text = "Insert Demo Run Script Template";
+            insertDemoRunScriptTemplateMenuItem.Text = @"Insert Demo Run Script Template";
             id = SqlTemplates.SQL_TEMPLATE_ID.DEMO_RUN_SCRIPT_TEMPLATE;
             insertDemoRunScriptTemplateMenuItem.ToolTipText = SqlTemplates.getTooltip(id);
             insertDemoRunScriptTemplateMenuItem.Tag = SqlTemplates.getTemplate(id);
@@ -555,7 +555,7 @@ CTRL+SHFT+S                     Store sql All
             // Insert Element in current Package
             ToolStripMenuItem insertItemIntoPackageMenuItem = new ToolStripMenuItem();
             id = SqlTemplates.SQL_TEMPLATE_ID.INSERT_ITEM_IN_PACKAGE_TEMPLATE;
-            insertItemIntoPackageMenuItem.Text = "Insert Insert Template";
+            insertItemIntoPackageMenuItem.Text = @"Insert Insert Template";
             insertItemIntoPackageMenuItem.ToolTipText = SqlTemplates.getTooltip(id);
             insertItemIntoPackageMenuItem.Tag = SqlTemplates.getTemplate(id);
             insertItemIntoPackageMenuItem.Click += insertTemplate_Click;
@@ -563,7 +563,7 @@ CTRL+SHFT+S                     Store sql All
             // Update current selected Item
             ToolStripMenuItem updateCurrentElementMenuItem = new ToolStripMenuItem();
             id = SqlTemplates.SQL_TEMPLATE_ID.UPDATE_ITEM_TEMPLATE;
-            updateCurrentElementMenuItem.Text = "Insert Update Template";
+            updateCurrentElementMenuItem.Text = @"Insert Update Template";
             updateCurrentElementMenuItem.ToolTipText = SqlTemplates.getTooltip(id);
             updateCurrentElementMenuItem.Tag = SqlTemplates.getTemplate(id);
             updateCurrentElementMenuItem.Click += insertTemplate_Click;
@@ -571,103 +571,103 @@ CTRL+SHFT+S                     Store sql All
             // Delete tree selected Items
             ToolStripMenuItem deleteTreeSelectedItemsMenuItem = new ToolStripMenuItem();
             id = SqlTemplates.SQL_TEMPLATE_ID.DELETED_TREE_SELECTED_ITEMS;
-            deleteTreeSelectedItemsMenuItem.Text = "Insert Delete Template";
+            deleteTreeSelectedItemsMenuItem.Text = @"Insert Delete Template";
             deleteTreeSelectedItemsMenuItem.ToolTipText = SqlTemplates.getTooltip(id);
             deleteTreeSelectedItemsMenuItem.Tag = SqlTemplates.getTemplate(id);
             deleteTreeSelectedItemsMenuItem.Click += insertTemplate_Click;
 
             //---------------------------------------------------------------------------------------------------------
             // DB Templates
-            ToolStripMenuItem insertDBTemplateMenuItem = new ToolStripMenuItem();
-            insertDBTemplateMenuItem.Text = "Insert DB dependent";
+            ToolStripMenuItem insertDbTemplateMenuItem = new ToolStripMenuItem();
+            insertDbTemplateMenuItem.Text = @"Insert DB dependent";
 
             // DB ACESS7007
-            ToolStripMenuItem insertDBACCESS2007TemplateMenuItem = new ToolStripMenuItem();
-            insertDBACCESS2007TemplateMenuItem.Text = "ACCESS2007";
-            insertDBACCESS2007TemplateMenuItem.ToolTipText = SqlTemplates.getTooltip(SqlTemplates.SQL_TEMPLATE_ID.DB_ACCESS2007);
-            insertDBACCESS2007TemplateMenuItem.Tag = SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.DB_ACCESS2007);
-            insertDBACCESS2007TemplateMenuItem.Click += new System.EventHandler(insertTemplate_Click);
+            ToolStripMenuItem insertDbaccess2007TemplateMenuItem = new ToolStripMenuItem();
+            insertDbaccess2007TemplateMenuItem.Text = @"ACCESS2007";
+            insertDbaccess2007TemplateMenuItem.ToolTipText = SqlTemplates.getTooltip(SqlTemplates.SQL_TEMPLATE_ID.DB_ACCESS2007);
+            insertDbaccess2007TemplateMenuItem.Tag = SqlTemplates.getTemplate(SqlTemplates.SQL_TEMPLATE_ID.DB_ACCESS2007);
+            insertDbaccess2007TemplateMenuItem.Click += insertTemplate_Click;
 
             // DB ASA
-            ToolStripMenuItem insertDBAsaTemplateMenuItem = new ToolStripMenuItem();
-            insertDBAsaTemplateMenuItem.Text = "ASA";
+            ToolStripMenuItem insertDbAsaTemplateMenuItem = new ToolStripMenuItem();
+            insertDbAsaTemplateMenuItem.Text = @"ASA";
 
 
             id = SqlTemplates.SQL_TEMPLATE_ID.DB_ASA;
-            insertDBAsaTemplateMenuItem.ToolTipText = SqlTemplates.getTooltip(id);
-            insertDBAsaTemplateMenuItem.Tag = SqlTemplates.getTemplate(id);
-            insertDBAsaTemplateMenuItem.Click += new System.EventHandler(insertTemplate_Click);
+            insertDbAsaTemplateMenuItem.ToolTipText = SqlTemplates.getTooltip(id);
+            insertDbAsaTemplateMenuItem.Tag = SqlTemplates.getTemplate(id);
+            insertDbAsaTemplateMenuItem.Click += insertTemplate_Click;
 
             // DB Firebird
-            ToolStripMenuItem insertDBFirebirdTemplateMenuItem = new ToolStripMenuItem();
-            insertDBFirebirdTemplateMenuItem.Text = "Firebird";
+            ToolStripMenuItem insertDbFirebirdTemplateMenuItem = new ToolStripMenuItem();
+            insertDbFirebirdTemplateMenuItem.Text = @"Firebird";
             id = SqlTemplates.SQL_TEMPLATE_ID.DB_FIREBIRD;
-            insertDBFirebirdTemplateMenuItem.ToolTipText = SqlTemplates.getTooltip(id);
-            insertDBFirebirdTemplateMenuItem.Tag = SqlTemplates.getTemplate(id);
-            insertDBFirebirdTemplateMenuItem.Click += new System.EventHandler(insertTemplate_Click);
+            insertDbFirebirdTemplateMenuItem.ToolTipText = SqlTemplates.getTooltip(id);
+            insertDbFirebirdTemplateMenuItem.Tag = SqlTemplates.getTemplate(id);
+            insertDbFirebirdTemplateMenuItem.Click += insertTemplate_Click;
 
             // DB Jet
-            ToolStripMenuItem insertDBJetTemplateMenuItem = new ToolStripMenuItem();
-            insertDBJetTemplateMenuItem.Text = "JET";
+            ToolStripMenuItem insertDbJetTemplateMenuItem = new ToolStripMenuItem();
+            insertDbJetTemplateMenuItem.Text = @"JET";
             id = SqlTemplates.SQL_TEMPLATE_ID.DB_JET;
-            insertDBJetTemplateMenuItem.ToolTipText = SqlTemplates.getTooltip(id);
-            insertDBJetTemplateMenuItem.Tag = SqlTemplates.getTemplate(id);
-            insertDBJetTemplateMenuItem.Click += new System.EventHandler(insertTemplate_Click);
+            insertDbJetTemplateMenuItem.ToolTipText = SqlTemplates.getTooltip(id);
+            insertDbJetTemplateMenuItem.Tag = SqlTemplates.getTemplate(id);
+            insertDbJetTemplateMenuItem.Click += insertTemplate_Click;
 
             // DB MySQL
-            ToolStripMenuItem insertDBMySQLTemplateMenuItem = new ToolStripMenuItem();
-            insertDBMySQLTemplateMenuItem.Text = "MYSQL";
+            ToolStripMenuItem insertDbmySqlTemplateMenuItem = new ToolStripMenuItem();
+            insertDbmySqlTemplateMenuItem.Text = @"MYSQL";
             id = SqlTemplates.SQL_TEMPLATE_ID.DB_MYSQL;
-            insertDBMySQLTemplateMenuItem.ToolTipText = SqlTemplates.getTooltip(id);
-            insertDBMySQLTemplateMenuItem.Tag = SqlTemplates.getTemplate(id);
-            insertDBMySQLTemplateMenuItem.Click += new System.EventHandler(insertTemplate_Click);
+            insertDbmySqlTemplateMenuItem.ToolTipText = SqlTemplates.getTooltip(id);
+            insertDbmySqlTemplateMenuItem.Tag = SqlTemplates.getTemplate(id);
+            insertDbmySqlTemplateMenuItem.Click += insertTemplate_Click;
 
             // DB Oracle
-            ToolStripMenuItem insertDBOracleTemplateMenuItem = new ToolStripMenuItem();
-            insertDBOracleTemplateMenuItem.Text = "ORACLE";
+            ToolStripMenuItem insertDbOracleTemplateMenuItem = new ToolStripMenuItem();
+            insertDbOracleTemplateMenuItem.Text = @"ORACLE";
             id = SqlTemplates.SQL_TEMPLATE_ID.DB_ORACLE;
-            insertDBOracleTemplateMenuItem.ToolTipText = SqlTemplates.getTooltip(id);
-            insertDBOracleTemplateMenuItem.Tag = SqlTemplates.getTemplate(id);
-            insertDBOracleTemplateMenuItem.Click += new System.EventHandler(insertTemplate_Click);
+            insertDbOracleTemplateMenuItem.ToolTipText = SqlTemplates.getTooltip(id);
+            insertDbOracleTemplateMenuItem.Tag = SqlTemplates.getTemplate(id);
+            insertDbOracleTemplateMenuItem.Click += insertTemplate_Click;
 
             // DB POSTGRES
-            ToolStripMenuItem insertDBPostgresTemplateMenuItem = new ToolStripMenuItem();
-            insertDBPostgresTemplateMenuItem.Text = "POSTGRES";
             id = SqlTemplates.SQL_TEMPLATE_ID.DB_POSTGRES;
-            insertDBPostgresTemplateMenuItem.ToolTipText = SqlTemplates.getTooltip(id);
-            insertDBPostgresTemplateMenuItem.Tag = SqlTemplates.getTemplate(id);
-            insertDBPostgresTemplateMenuItem.Click += new System.EventHandler(insertTemplate_Click);
+            ToolStripMenuItem insertDbPostgresTemplateMenuItem = new ToolStripMenuItem();
+            insertDbPostgresTemplateMenuItem.Text = @"POSTGRES";
+            insertDbPostgresTemplateMenuItem.ToolTipText = SqlTemplates.getTooltip(id);
+            insertDbPostgresTemplateMenuItem.Tag = SqlTemplates.getTemplate(id);
+            insertDbPostgresTemplateMenuItem.Click += insertTemplate_Click;
 
             // DB SQL Server
-            ToolStripMenuItem insertDBSqlServerTemplateMenuItem = new ToolStripMenuItem();
-            insertDBSqlServerTemplateMenuItem.Text = "SQL Server";
+            ToolStripMenuItem insertDbSqlServerTemplateMenuItem = new ToolStripMenuItem();
+            insertDbSqlServerTemplateMenuItem.Text = @"SQL Server";
             id = SqlTemplates.SQL_TEMPLATE_ID.DB_SQLSVR;
-            insertDBSqlServerTemplateMenuItem.ToolTipText = SqlTemplates.getTooltip(id);
-            insertDBSqlServerTemplateMenuItem.Tag = SqlTemplates.getTemplate(id);
-            insertDBSqlServerTemplateMenuItem.Click += new System.EventHandler(insertTemplate_Click);
+            insertDbSqlServerTemplateMenuItem.ToolTipText = SqlTemplates.getTooltip(id);
+            insertDbSqlServerTemplateMenuItem.Tag = SqlTemplates.getTemplate(id);
+            insertDbSqlServerTemplateMenuItem.Click += insertTemplate_Click;
 
             // DB dependent SQL
-            insertDBTemplateMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            insertDBJetTemplateMenuItem,
-                insertDBAsaTemplateMenuItem,
-                insertDBACCESS2007TemplateMenuItem,
-                insertDBFirebirdTemplateMenuItem,
-                insertDBMySQLTemplateMenuItem,
-                insertDBOracleTemplateMenuItem,
-                insertDBPostgresTemplateMenuItem,
-                insertDBSqlServerTemplateMenuItem
+            insertDbTemplateMenuItem.DropDownItems.AddRange(new ToolStripItem[] {
+            insertDbJetTemplateMenuItem,
+                insertDbAsaTemplateMenuItem,
+                insertDbaccess2007TemplateMenuItem,
+                insertDbFirebirdTemplateMenuItem,
+                insertDbmySqlTemplateMenuItem,
+                insertDbOracleTemplateMenuItem,
+                insertDbPostgresTemplateMenuItem,
+                insertDbSqlServerTemplateMenuItem
                 });
 
 
             // Build item content Template
-            insertTemplateMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            insertTemplateMenuItem.DropDownItems.AddRange(new ToolStripItem[] {
                 insertBranchTemplateMenuItem,
                 insertPackageTemplateMenuItem,
                 new ToolStripSeparator(),
                 insertCurrentItemIdTemplateMenuItem,
                 insertCurrentItemGuidTemplateMenuItem,
                 new ToolStripSeparator(),
-                insertConveyedtemIDSTemplateMenuItem,
+                insertConveyedtemIdsTemplateMenuItem,
                 insertConnectorsFromElementTemplateMenuItem,
                 new ToolStripSeparator(),
                 insertElementTemplateMenuItem,
@@ -689,7 +689,7 @@ CTRL+SHFT+S                     Store sql All
                 deleteTreeSelectedItemsMenuItem,
                 new ToolStripSeparator(),
                 insertDemoRunScriptTemplateMenuItem,
-                insertDBTemplateMenuItem
+                insertDbTemplateMenuItem
                 });
 
 
@@ -711,8 +711,8 @@ CTRL+SHFT+S                     Store sql All
         /// Load RecentFiles MenuItems into MenuItemStrip
         /// </summary>
         /// <param name="loadRecentFileStripMenuItem">Item to load recent files as drop down items</param>
-        /// <param name="eventHandler_Click">Function to handle event</param>
-        void loadRecentFilesMenuItems(ToolStripMenuItem loadRecentFileStripMenuItem, EventHandler eventHandler_Click)
+        /// <param name="eventHandlerClick">Function to handle event</param>
+        void LoadRecentFilesMenuItems(ToolStripMenuItem loadRecentFileStripMenuItem, EventHandler eventHandlerClick)
         {
             // delete all previous entries
             loadRecentFileStripMenuItem.DropDownItems.Clear();
@@ -721,11 +721,13 @@ CTRL+SHFT+S                     Store sql All
             {
                 // ignore empty entries
                 if (historyFile.FullName == "") continue;
-                ToolStripMenuItem historyEntry = new ToolStripMenuItem();
-                historyEntry.Text = historyFile.DisplayName;
-                historyEntry.Tag = historyFile;
-                historyEntry.ToolTipText = historyFile.FullName;
-                historyEntry.Click += eventHandler_Click;
+                ToolStripMenuItem historyEntry = new ToolStripMenuItem
+                {
+                    Text = historyFile.DisplayName,
+                    Tag = historyFile,
+                    ToolTipText = historyFile.FullName
+                };
+                historyEntry.Click += eventHandlerClick;
                 loadRecentFileStripMenuItem.DropDownItems.Add(historyEntry);
 
             }
@@ -738,18 +740,11 @@ CTRL+SHFT+S                     Store sql All
         void newTabAndLoadFromHistoryEntry_Click(object sender, EventArgs e)
         {
             // Add a new Tab
-            TabPage tabPage = addTab("");
+            TabPage tabPage = AddTab("");
 
-            // get TabPage
-            SqlFile sqlFile = (SqlFile)tabPage.Tag;
-
-            // get TextBox
-            TextBox textBox = (TextBox)tabPage.Controls[0];
-
-            
             HistoryFile historyFile = (HistoryFile)((ToolStripMenuItem)sender).Tag;
             string file = historyFile.FullName;
-            loadTabPageFromFile(tabPage, file);
+            LoadTabPageFromFile(tabPage, file);
         }
         #region
         /// <summary>
@@ -784,7 +779,7 @@ CTRL+SHFT+S                     Store sql All
         /// <param name="tabPage"></param>
         /// <param name="fileName"></param>
         /// <param name="notUpdateLastOpenedList">Don't update list of the opened files</param>
-        public void loadTabPageFromFile(TabPage tabPage, string fileName, bool notUpdateLastOpenedList = false)
+        public void LoadTabPageFromFile(TabPage tabPage, string fileName, bool notUpdateLastOpenedList = false)
         {
 
             try
@@ -794,7 +789,7 @@ CTRL+SHFT+S                     Store sql All
                 // set TabName
                 SqlFile sqlFile = (SqlFile)tabPage.Tag;
                 sqlFile.FullName = fileName;
-                textBox.Text = sqlFile.load(); // don't move behind sqlFile.IsChange=false !!!!
+                textBox.Text = sqlFile.Load(); // don't move behind sqlFile.IsChange=false !!!!
                 sqlFile.IsChanged = false;
                 tabPage.ToolTipText = sqlFile.FullName;
                 tabPage.Text = sqlFile.DisplayName;
@@ -810,20 +805,19 @@ CTRL+SHFT+S                     Store sql All
             catch (Exception ex)
             {
                 MessageBox.Show($"{ex.Message}", $"Error reading File {fileName}");
-                return;
             }
         }
         /// <summary>
         /// Load string for tab Page
         /// </summary>
         /// <param name="tabContent">What do load in Tab</param>
-        public void loadTabPage(string tabContent)
+        public void LoadTabPage(string tabContent)
         {
             TabPage tabPage;
             // no tab exists
             if (_tabControl.TabPages.Count == 0)
             {
-                tabPage = addTab();
+                tabPage = AddTab();
             }
             else
             {
@@ -852,7 +846,7 @@ CTRL+SHFT+S                     Store sql All
             // no tab exists
             if (_tabControl.TabPages.Count == 0)
             {
-                tabPage = addTab("");
+                tabPage = AddTab("");
                 sqlFile = (SqlFile)tabPage.Tag;
                 sqlFile.IsChanged = false; // new tab just created
             }
@@ -864,20 +858,16 @@ CTRL+SHFT+S                     Store sql All
                 sqlFile = (SqlFile)tabPage.Tag;
             }
 
-
-            // get TextBox
-            TextBoxUndo textBox = (TextBoxUndo)tabPage.Controls[0];
-
             // Contend changed, need to be stored first
             if (sqlFile.IsChanged)
             {
                 Settings.LastOpenedFiles.Remove(sqlFile.FullName);
                 DialogResult result = MessageBox.Show($"Old File: '{sqlFile.FullName}'",
-                    "First store old File? ", MessageBoxButtons.YesNoCancel);
+                    @"First store old File? ", MessageBoxButtons.YesNoCancel);
                 if (result == DialogResult.Cancel) return;
                 if (result == DialogResult.Yes)
                 {
-                    saveAs(tabPage);
+                    SaveAs(tabPage);
                     sqlFile.IsChanged = false;
                     tabPage.ToolTipText = ((SqlFile)tabPage.Tag).FullName;
                 }
@@ -887,7 +877,7 @@ CTRL+SHFT+S                     Store sql All
             // load File
             HistoryFile historyFile = (HistoryFile)((ToolStripMenuItem)sender).Tag;
             string file = historyFile.FullName;
-            loadTabPageFromFile(tabPage, file);
+            LoadTabPageFromFile(tabPage, file);
         }
         void insertTemplate_Click(object sender, EventArgs e)
         {
@@ -928,7 +918,7 @@ CTRL+SHFT+S                     Store sql All
         /// <param name="e"></param>
         void fileSaveAsMenuItem_Click(object sender, EventArgs e)
         {
-            saveSqlTabAs();
+            SaveSqlTabAs();
 
         }
 
@@ -937,15 +927,13 @@ CTRL+SHFT+S                     Store sql All
         /// <summary>
         /// Save current Tab into desired file
         /// </summary>
-        public void saveSqlTabAs()
+        public void SaveSqlTabAs()
         {
             // get TabPage
             if (_tabControl.SelectedIndex < 0) return;
             TabPage tabPage = _tabControl.TabPages[_tabControl.SelectedIndex];
 
-            // get TextBox
-            var textBox = (TextBoxUndo)tabPage.Controls[0];
-            saveAs(tabPage);
+            SaveAs(tabPage);
             tabPage.ToolTipText = ((SqlFile)tabPage.Tag).FullName;
             tabPage.Text = ((SqlFile)tabPage.Tag).DisplayName;
         }
@@ -958,7 +946,7 @@ CTRL+SHFT+S                     Store sql All
         /// <param name="e"></param>
         void fileSaveMenuItem_Click(object sender, EventArgs e)
         {
-            save();
+            Save();
         }
         /// <summary>
         /// Event File Save
@@ -967,17 +955,17 @@ CTRL+SHFT+S                     Store sql All
         /// <param name="e"></param>
         void fileSaveAllMenuItem_Click(object sender, EventArgs e)
         {
-            saveAll();
+            SaveAll();
         }
 
         /// <summary>
         /// Save all unchanged Tabs. 
         /// </summary>
-        public void saveAll()
+        public void SaveAll()
         {
             foreach (TabPage tabPage in _tabControl.TabPages)
             {
-                save(tabPage, configSave: false);
+                Save(tabPage, configSave: false);
             }
             Settings.Save();
         }
@@ -989,7 +977,7 @@ CTRL+SHFT+S                     Store sql All
         /// <param name="e"></param>
         void fileLoadMenuItem_Click(object sender, EventArgs e)
         {
-            loadTabPagePerFileDialog();
+            LoadTabPagePerFileDialog();
 
 
         }
@@ -1000,7 +988,7 @@ CTRL+SHFT+S                     Store sql All
         /// <param name="e"></param>
         void addTabMenuItem_Click(object sender, EventArgs e)
         {
-            addTab();
+            AddTab();
 
 
         }
@@ -1015,7 +1003,7 @@ CTRL+SHFT+S                     Store sql All
             // get TabPage
             if (_tabControl.SelectedIndex < 0) return;
             TabPage tabPage = _tabControl.TabPages[_tabControl.SelectedIndex];
-            close(tabPage);
+            Close(tabPage);
 
         }
 
@@ -1029,7 +1017,7 @@ CTRL+SHFT+S                     Store sql All
             var textBox = (TextBox)tabPage.Controls[0];
             SqlFile sqlFile = (SqlFile)tabPage.Tag;
 
-            textBox.Text = sqlFile.load();
+            textBox.Text = sqlFile.Load();
         }
 
         
@@ -1044,7 +1032,7 @@ CTRL+SHFT+S                     Store sql All
             SqlFile sqlFile = (SqlFile)tabPage.Tag;
 
             // check if really changed
-            string sNew = sqlFile.load().Trim();
+            string sNew = sqlFile.Load().Trim();
             string sOld = textBox.Text.Trim();
             if (sNew.Equals(sOld)) return;
 
@@ -1054,7 +1042,7 @@ CTRL+SHFT+S                     Store sql All
             if (result == DialogResult.Yes)
             {
                 // update textBox with changed content
-                textBox.Text = sqlFile.load();
+                textBox.Text = sqlFile.Load();
             }
 
         }
@@ -1063,13 +1051,13 @@ CTRL+SHFT+S                     Store sql All
         /// Load sql string from *.sql File into active TabPage with TextBox inside. 
         /// <para/>- Update and save the list of sql files 
         /// </summary>
-        public void loadTabPagePerFileDialog()
+        public void LoadTabPagePerFileDialog()
         {
             TabPage tabPage;
             // no tab page exists
             if (_tabControl.TabPages.Count == 0)
             {
-                tabPage = addTab();
+                tabPage = AddTab();
             }
             else
             {
@@ -1082,11 +1070,11 @@ CTRL+SHFT+S                     Store sql All
                 if (sqlFile.IsChanged)
                 {
                     DialogResult result = MessageBox.Show($"Old File: '{sqlFile.FullName}'",
-                        "First store old File? ", MessageBoxButtons.YesNoCancel);
+                        @"First store old File? ", MessageBoxButtons.YesNoCancel);
                     if (result == DialogResult.Cancel) return;
                     if (result == DialogResult.Yes)
                     {
-                        save(tabPage);
+                        Save(tabPage);
                         sqlFile.IsChanged = false;
                         tabPage.ToolTipText = ((SqlFile)tabPage.Tag).FullName;
                     }
@@ -1094,32 +1082,34 @@ CTRL+SHFT+S                     Store sql All
 
 
             }
-            OpenFileDialog openFileDialog = new OpenFileDialog();
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                InitialDirectory = @"c:\temp\sql",
+                RestoreDirectory = true,
+                Filter = @"sql files (*.sql)|*.sql|All files (*.*)|*.*",
+                FilterIndex = 1
+            };
 
-            openFileDialog.InitialDirectory = @"c:\temp\sql";
-            openFileDialog.RestoreDirectory = true;
-            openFileDialog.Filter = "sql files (*.sql)|*.sql|All files (*.*)|*.*";
-            openFileDialog.FilterIndex = 1;
 
             if (openFileDialog.ShowDialog() == DialogResult.OK)
 
             {
                 string fileName = openFileDialog.FileName;
-                if (fileName != null && fileName != "")
+                if (!string.IsNullOrEmpty(fileName))
                 {
                     // get TextBox
                     var textBox = (TextBoxUndo)tabPage.Controls[0];
-                    SqlFile sqlFile = new SqlFile(this, tabPage, fileName, isChanged: false);
+                    SqlFile sqlFile = new SqlFile(this, fileName, isChanged: false);
                     tabPage.Tag = sqlFile;
                     tabPage.Text = sqlFile.DisplayName;
-                    textBox.Text = sqlFile.load();
+                    textBox.Text = sqlFile.Load();
 
                     // store the complete filename in settings
                     InsertRecentFileLists(openFileDialog.FileName);
                     Settings.Save();
 
                     // Load recent files into ToolStripMenu
-                    loadRecentFilesIntoToolStripItems();
+                    LoadRecentFilesIntoToolStripItems();
 
                 }
             }
@@ -1129,56 +1119,48 @@ CTRL+SHFT+S                     Store sql All
 
         }
         /// <summary>
-        /// Re-Load Tab Page from file
-        /// </summary>
-        /// <param name="tabPage"></param>
-        void reLoadTabPage(TabPage tabPage)
-        {
-            SqlFile sqlFile = (SqlFile)tabPage.Tag;
-            loadTabPageFromFile(tabPage, sqlFile.FullName);
-
-
-        }
-        /// <summary>
         /// Save sql Tab As...
         /// </summary>
-        public void saveAs()
+        public void SaveAs()
         {
 
             // get TabPage
             if (_tabControl.SelectedIndex < 0) return;
             TabPage tabPage = _tabControl.TabPages[_tabControl.SelectedIndex];
-            saveAs(tabPage);
+            SaveAs(tabPage);
         }
+
         /// <summary>
         /// Save As... TabPage in *.sql File.
         /// </summary>
-        /// <param name="tabPage></param>
-        void saveAs(TabPage tabPage)
+        /// <param name="tabPage"></param>
+        void SaveAs(TabPage tabPage)
         {
 
             SqlFile sqlFile = (SqlFile)tabPage.Tag;
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            SaveFileDialog saveFileDialog = new SaveFileDialog
+            {
+                InitialDirectory = sqlFile.DirectoryName,
+                FileName = sqlFile.FullName,
+                RestoreDirectory = true,
+                Filter = @"sql files (*.sql)|*.sql|All files (*.*)|*.*",
+                FilterIndex = 1
+            };
 
-            saveFileDialog.InitialDirectory = sqlFile.DirectoryName;
             // get File name
-            saveFileDialog.FileName = sqlFile.FullName;
-            saveFileDialog.RestoreDirectory = true;
-            saveFileDialog.Filter = "sql files (*.sql)|*.sql|All files (*.*)|*.*";
-            saveFileDialog.FilterIndex = 1;
 
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
 
             {
                 string fileName = saveFileDialog.FileName;
-                if (fileName != null && fileName != "")
+                if (!string.IsNullOrEmpty(fileName))
                 {
                     sqlFile.FullName = fileName;
                     var textBox = (TextBox)tabPage.Controls[0];
 
                     tabPage.Text = sqlFile.DisplayName;
                     tabPage.ToolTipText = ((SqlFile)tabPage.Tag).FullName;
-                    sqlFile.save(textBox.Text);
+                    sqlFile.Save(textBox.Text);
 
                     // update files
                     InsertRecentFileLists(saveFileDialog.FileName);
@@ -1214,23 +1196,23 @@ CTRL+SHFT+S                     Store sql All
         /// <para/>-Tab,  Load Tab from..
         /// <para/>-Tab,  Add Tab from..
         /// </summary>
-        void loadRecentFilesIntoToolStripItems()
+        void LoadRecentFilesIntoToolStripItems()
         {
             // File, Load Tab from
-            loadRecentFilesMenuItems(_fileLoadRecentFileItem, loadFromHistoryEntry_Click);
+            LoadRecentFilesMenuItems(_fileLoadRecentFileItem, loadFromHistoryEntry_Click);
             // File, Add Tab from..
-            loadRecentFilesMenuItems(_fileNewTabAndLoadRecentFileItem, newTabAndLoadFromHistoryEntry_Click);
+            LoadRecentFilesMenuItems(_fileNewTabAndLoadRecentFileItem, newTabAndLoadFromHistoryEntry_Click);
 
             // Tab,  Load Tab from..
-            loadRecentFilesMenuItems(_loadTabFromFileItem, loadFromHistoryEntry_Click);
+            LoadRecentFilesMenuItems(_loadTabFromFileItem, loadFromHistoryEntry_Click);
             // Tab,  Add Tab from..
-            loadRecentFilesMenuItems(_newTabFromItem, newTabAndLoadFromHistoryEntry_Click);
+            LoadRecentFilesMenuItems(_newTabFromItem, newTabAndLoadFromHistoryEntry_Click);
         }
 
         /// <summary>
         /// Load all tabs which were opened in the last session
         /// </summary>
-        void loadOpenedTabsFromLastSession()
+        void LoadOpenedTabsFromLastSession()
         {
             // load last opened files into tab pages
             foreach (HistoryFile lastOpenedFile in Settings.LastOpenedFiles.lSqlLastOpenedFilesCfg)
@@ -1244,9 +1226,9 @@ CTRL+SHFT+S                     Store sql All
                     continue;
                 }
 
-                TabPage tabPage = addTab();
+                TabPage tabPage = AddTab();
                 // load 
-                loadTabPageFromFile(tabPage, lastOpenedFile.FullName, notUpdateLastOpenedList: true);
+                LoadTabPageFromFile(tabPage, lastOpenedFile.FullName, notUpdateLastOpenedList: true);
 
             }
         }
@@ -1255,11 +1237,11 @@ CTRL+SHFT+S                     Store sql All
         /// Save current active TabPage
         /// </summary>
         ///  <param name="configSave">Default: true, whether to store the configuration</param>
-        public void save(bool configSave = true)
+        public void Save(bool configSave = true)
         {
             if (_tabControl.SelectedIndex < 0) return;
             TabPage tabPage = _tabControl.TabPages[_tabControl.SelectedIndex];
-            save(tabPage, configSave);
+            Save(tabPage, configSave);
         }
         #endregion
 
@@ -1269,19 +1251,19 @@ CTRL+SHFT+S                     Store sql All
         /// </summary>
         /// <param name="tabPage"></param>
         ///  <param name="configSave">Default: true, whether to store the configuration</param>
-        void save(TabPage tabPage, bool configSave = true)
+        void Save(TabPage tabPage, bool configSave = true)
         {
             SqlFile sqlFile = (SqlFile)tabPage.Tag;
             if (!sqlFile.IsPersistant)
             {
-                saveAs(tabPage);
+                SaveAs(tabPage);
                 return;
             }
 
             try
             {
                 var textBox = (TextBox)tabPage.Controls[0];
-                sqlFile.save(textBox.Text);
+                sqlFile.Save(textBox.Text);
                 
 
                 // update history
@@ -1294,7 +1276,6 @@ CTRL+SHFT+S                     Store sql All
             catch (Exception ex)
             {
                 MessageBox.Show($"{ex.Message}", $"Error writing File {sqlFile.FullName}");
-                return;
             }
         }
 
@@ -1304,11 +1285,11 @@ CTRL+SHFT+S                     Store sql All
         /// <summary>
         /// Close all Tab Pages
         /// </summary>
-        public void closeAll()
+        public void CloseAll()
         {
             foreach (TabPage tabPage in _tabControl.TabPages)
             {
-                close(tabPage);
+                Close(tabPage);
             }
         }
         /// <summary>
@@ -1316,18 +1297,18 @@ CTRL+SHFT+S                     Store sql All
         /// - Ask to store content if changed
         /// </summary>
         /// <param name="tabPage"></param>
-        public void close(TabPage tabPage)
+        public void Close(TabPage tabPage)
         {
 
             SqlFile sqlFile = (SqlFile)tabPage.Tag;
             if (sqlFile.IsChanged)
             {
 
-                DialogResult result = MessageBox.Show($"", "Close TabPage: Sql has changed, store content?", MessageBoxButtons.YesNoCancel);
+                DialogResult result = MessageBox.Show(@"", @"Close TabPage: Sql has changed, store content?", MessageBoxButtons.YesNoCancel);
                 switch (result)
                 {
                     case DialogResult.OK:
-                        save(tabPage);
+                        Save(tabPage);
                         break;
                     case DialogResult.No:
                         break;
@@ -1346,7 +1327,7 @@ CTRL+SHFT+S                     Store sql All
         /// <summary>
         /// Run SQL for selected TabPage
         /// </summary>
-        public void runSqlTabPage()
+        public void RunSqlTabPage()
         {
             if (_tabControl.SelectedIndex < 0) return;
             // get TabPage
@@ -1362,7 +1343,7 @@ CTRL+SHFT+S                     Store sql All
 
         void fileRunMenuItem_Click(object sender, EventArgs e)
         {
-            runSqlTabPage();
+            RunSqlTabPage();
         }
 
         /// <summary>
@@ -1405,7 +1386,7 @@ CTRL+SHFT+S                     Store sql All
             if (e.KeyData == (Keys.Control | Keys.N))
             {
 
-                loadTabPagePerFileDialog();
+                LoadTabPagePerFileDialog();
                 e.Handled = true;
                 return;
             }
@@ -1413,7 +1394,7 @@ CTRL+SHFT+S                     Store sql All
             if (e.KeyData == (Keys.Control | Keys.L))
             {
 
-                loadTabPagePerFileDialog();
+                LoadTabPagePerFileDialog();
                 e.Handled = true;
                 return;
             }
@@ -1422,7 +1403,7 @@ CTRL+SHFT+S                     Store sql All
             if (e.KeyData == (Keys.Control | Keys.S))
             {
 
-                save();
+                Save();
                 e.Handled = true;
                 return;
             }
@@ -1430,43 +1411,19 @@ CTRL+SHFT+S                     Store sql All
             if (e.KeyData == (Keys.Control | Keys.Shift | Keys.S))
             {
 
-                saveAll();
+                SaveAll();
                 e.Handled = true;
                 return;
             }
             // run SQL
             if (e.KeyData == (Keys.Control | Keys.R))
             {
-                runSqlTabPage();
+                RunSqlTabPage();
                 e.Handled = true;
-                return;
             }
 
         }
         #endregion
-
-        /// <summary>
-        /// Output the MessageBox in the required context. 
-        /// </summary>
-        /// <param name="owner"></param>
-        /// <param name="details"></param>
-        /// <param name="caption"></param>
-        /// <param name="buttons"></param>
-        /// <returns></returns>
-        DialogResult BackgroundThreadMessageBox(System.Windows.Forms.Control owner, string details, string caption,MessageBoxButtons buttons )
-        {
-            //if (owner.InvokeRequired)
-            //{
-                return (DialogResult)owner.Invoke(new Func<DialogResult>(
-                                       () => { return MessageBox.Show(owner, details, caption, buttons); }));
-            //}
-            //else
-            //{
-            //    return MessageBox.Show(owner, details, caption, buttons);
-            //}
-        }
-
-
 
     }
 }

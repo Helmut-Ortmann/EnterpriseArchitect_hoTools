@@ -20,7 +20,7 @@ namespace hoTools.Utils
         {
             EA.Element el = null;
 
-            el = CallOperationAction.getElementFromName(rep, name, type);
+            el = CallOperationAction.GetElementFromName(rep, name, type);
 
             if (el == null)
             {
