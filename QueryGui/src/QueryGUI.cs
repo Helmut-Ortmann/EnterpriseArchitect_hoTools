@@ -87,7 +87,28 @@ namespace hoTools.Query
 
             ResizeRedraw = true;
 
+
             // individual initialization
+            // SQL
+            _loadTabCtrlLToolStripMenuItem.Text = SqlTabPagesCntrl.MenuLoadTabFromFileText;
+            _loadTabCtrlLToolStripMenuItem.ToolTipText = SqlTabPagesCntrl.MenuLoadTabFromFileTooltip;
+
+            _loadTabFromToolStripMenuItem.Text = SqlTabPagesCntrl.MenuLoadTabFromRecentFileText;
+            _loadTabFromToolStripMenuItem.ToolTipText = SqlTabPagesCntrl.MenuLoadTabFromRecentFileTooltip;
+
+
+            _reloadTabToolStripMenuItem.Text = SqlTabPagesCntrl.MenuReLoadTabText;
+            _reloadTabToolStripMenuItem.ToolTipText = SqlTabPagesCntrl.MenuReLoadTabTooltip;
+
+
+            _newTabToolStripMenuItem.Text = SqlTabPagesCntrl.MenuNewTabText;
+            _newTabToolStripMenuItem.ToolTipText = SqlTabPagesCntrl.MenuNewTabTooltip;
+
+
+            newTabFromToolStripMenuItem.Text = SqlTabPagesCntrl.MenuLoadTabFromFileText;
+            newTabFromToolStripMenuItem.ToolTipText = SqlTabPagesCntrl.MenuLoadTabFromFileTooltip;
+
+
             // Script
             InitScriptDataGrid();
             InitScriptDataTable();
@@ -148,7 +169,7 @@ namespace hoTools.Query
             }
             _sqlTabCntrls = new SqlTabPagesCntrl(Model, AddinSettings, components, tabControlSql, txtSearchTerm,
                 newTabFromToolStripMenuItem, 
-                loadTabFromToolStripMenuItem, _addinTabName);
+                _loadTabFromToolStripMenuItem, _addinTabName);
 
             if (tabControlSql.TabPages.Count == 0)
             {

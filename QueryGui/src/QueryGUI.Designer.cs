@@ -58,11 +58,11 @@ namespace hoTools.Query
             this.lblTitle = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.loadTabCTRLLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.loadTabFromToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.reloadTabToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this._loadTabCtrlLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this._loadTabFromToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this._reloadTabToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.newTabToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this._newTabToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newTabFromToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.runToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -262,10 +262,10 @@ namespace hoTools.Query
             // 
             this.btnUndo.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnUndo.Image = global::hoTools.Query.Properties.Resources.icon_undo_h;
-            this.btnUndo.Location = new System.Drawing.Point(163, 0);
+            this.btnUndo.Location = new System.Drawing.Point(0, 24);
             this.btnUndo.Margin = new System.Windows.Forms.Padding(0);
             this.btnUndo.Name = "btnUndo";
-            this.btnUndo.Size = new System.Drawing.Size(32, 24);
+            this.btnUndo.Size = new System.Drawing.Size(32, 2);
             this.btnUndo.TabIndex = 9;
             this.toolTip1.SetToolTip(this.btnUndo, "Undo Text change (CTRL+Z)");
             this.btnUndo.UseVisualStyleBackColor = true;
@@ -275,10 +275,10 @@ namespace hoTools.Query
             // 
             this.btnRedo.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnRedo.Image = global::hoTools.Query.Properties.Resources.icon_redo_h;
-            this.btnRedo.Location = new System.Drawing.Point(196, 1);
+            this.btnRedo.Location = new System.Drawing.Point(33, 25);
             this.btnRedo.Margin = new System.Windows.Forms.Padding(1);
             this.btnRedo.Name = "btnRedo";
-            this.btnRedo.Size = new System.Drawing.Size(31, 22);
+            this.btnRedo.Size = new System.Drawing.Size(31, 0);
             this.btnRedo.TabIndex = 11;
             this.toolTip1.SetToolTip(this.btnRedo, "Redo Text change (CTRL+Y)");
             this.btnRedo.UseVisualStyleBackColor = true;
@@ -289,7 +289,7 @@ namespace hoTools.Query
             this.btnSave.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnSave.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.Image")));
             this.btnSave.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnSave.Location = new System.Drawing.Point(67, 0);
+            this.btnSave.Location = new System.Drawing.Point(159, 0);
             this.btnSave.Margin = new System.Windows.Forms.Padding(0);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(32, 24);
@@ -304,7 +304,7 @@ namespace hoTools.Query
             this.btnSaveAll.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnSaveAll.Image = ((System.Drawing.Image)(resources.GetObject("btnSaveAll.Image")));
             this.btnSaveAll.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnSaveAll.Location = new System.Drawing.Point(99, 0);
+            this.btnSaveAll.Location = new System.Drawing.Point(191, 0);
             this.btnSaveAll.Margin = new System.Windows.Forms.Padding(0);
             this.btnSaveAll.Name = "btnSaveAll";
             this.btnSaveAll.Size = new System.Drawing.Size(32, 24);
@@ -319,7 +319,7 @@ namespace hoTools.Query
             this.btnSaveAs.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnSaveAs.Image = ((System.Drawing.Image)(resources.GetObject("btnSaveAs.Image")));
             this.btnSaveAs.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnSaveAs.Location = new System.Drawing.Point(131, 0);
+            this.btnSaveAs.Location = new System.Drawing.Point(223, 0);
             this.btnSaveAs.Margin = new System.Windows.Forms.Padding(0);
             this.btnSaveAs.Name = "btnSaveAs";
             this.btnSaveAs.Size = new System.Drawing.Size(32, 24);
@@ -332,10 +332,10 @@ namespace hoTools.Query
             // 
             this.btnRun.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnRun.Image = ((System.Drawing.Image)(resources.GetObject("btnRun.Image")));
-            this.btnRun.Location = new System.Drawing.Point(228, 0);
+            this.btnRun.Location = new System.Drawing.Point(65, 24);
             this.btnRun.Margin = new System.Windows.Forms.Padding(0);
             this.btnRun.Name = "btnRun";
-            this.btnRun.Size = new System.Drawing.Size(23, 24);
+            this.btnRun.Size = new System.Drawing.Size(23, 2);
             this.btnRun.TabIndex = 16;
             this.toolTip1.SetToolTip(this.btnRun, "Run SQL of the current Tab (CTRL+R).\r\n\r\nIn case of Errors: Help, Last sql Error!\r" +
         "\nYou want to see the SQL after replacing macros: Help, Last sql string sent to E" +
@@ -376,18 +376,18 @@ namespace hoTools.Query
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(0);
-            this.menuStrip1.Size = new System.Drawing.Size(67, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(159, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.loadTabCTRLLToolStripMenuItem,
-            this.loadTabFromToolStripMenuItem,
-            this.reloadTabToolStripMenuItem,
+            this._loadTabCtrlLToolStripMenuItem,
+            this._loadTabFromToolStripMenuItem,
+            this._reloadTabToolStripMenuItem,
             this.toolStripSeparator2,
-            this.newTabToolStripMenuItem,
+            this._newTabToolStripMenuItem,
             this.newTabFromToolStripMenuItem,
             this.toolStripSeparator1,
             this.runToolStripMenuItem,
@@ -404,41 +404,41 @@ namespace hoTools.Query
             this.fileToolStripMenuItem.Text = "&File";
             this.fileToolStripMenuItem.ToolTipText = "Create a new Tab from recent *.sql files";
             // 
-            // loadTabCTRLLToolStripMenuItem
+            // _loadTabCtrlLToolStripMenuItem
             // 
-            this.loadTabCTRLLToolStripMenuItem.Name = "loadTabCTRLLToolStripMenuItem";
-            this.loadTabCTRLLToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
-            this.loadTabCTRLLToolStripMenuItem.Text = "&Load Tab (CTRL+L)";
-            this.loadTabCTRLLToolStripMenuItem.ToolTipText = "Load current SQL Tab by File Dialog";
-            this.loadTabCTRLLToolStripMenuItem.Click += new System.EventHandler(this.loadTabCtrlLToolStripMenuItem_Click);
+            this._loadTabCtrlLToolStripMenuItem.Name = "_loadTabCtrlLToolStripMenuItem";
+            this._loadTabCtrlLToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
+            this._loadTabCtrlLToolStripMenuItem.Text = "&Load Tab (CTRL+L)";
+            this._loadTabCtrlLToolStripMenuItem.ToolTipText = "Load current SQL Tab by File Dialog";
+            this._loadTabCtrlLToolStripMenuItem.Click += new System.EventHandler(this.loadTabCtrlLToolStripMenuItem_Click);
             // 
-            // loadTabFromToolStripMenuItem
+            // _loadTabFromToolStripMenuItem
             // 
-            this.loadTabFromToolStripMenuItem.Name = "loadTabFromToolStripMenuItem";
-            this.loadTabFromToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
-            this.loadTabFromToolStripMenuItem.Text = "Load Tab from...  ";
-            this.loadTabFromToolStripMenuItem.ToolTipText = "Load current Tab from recent file.";
+            this._loadTabFromToolStripMenuItem.Name = "_loadTabFromToolStripMenuItem";
+            this._loadTabFromToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
+            this._loadTabFromToolStripMenuItem.Text = "Load Tab from...  ";
+            this._loadTabFromToolStripMenuItem.ToolTipText = "Load current Tab from recent file.";
             // 
-            // reloadTabToolStripMenuItem
+            // _reloadTabToolStripMenuItem
             // 
-            this.reloadTabToolStripMenuItem.Name = "reloadTabToolStripMenuItem";
-            this.reloadTabToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
-            this.reloadTabToolStripMenuItem.Text = "Reload Tab";
-            this.reloadTabToolStripMenuItem.ToolTipText = "Reload current SQL Tab ";
-            this.reloadTabToolStripMenuItem.Click += new System.EventHandler(this.reloadTabToolStripMenuItem_Click);
+            this._reloadTabToolStripMenuItem.Name = "_reloadTabToolStripMenuItem";
+            this._reloadTabToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
+            this._reloadTabToolStripMenuItem.Text = "Reload Tab";
+            this._reloadTabToolStripMenuItem.ToolTipText = "Reload current SQL Tab ";
+            this._reloadTabToolStripMenuItem.Click += new System.EventHandler(this.reloadTabToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(201, 6);
             // 
-            // newTabToolStripMenuItem
+            // _newTabToolStripMenuItem
             // 
-            this.newTabToolStripMenuItem.Name = "newTabToolStripMenuItem";
-            this.newTabToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
-            this.newTabToolStripMenuItem.Text = "&NewTab ";
-            this.newTabToolStripMenuItem.ToolTipText = "New empty tab";
-            this.newTabToolStripMenuItem.Click += new System.EventHandler(this.FileNewTabToolStripMenuItem_Click);
+            this._newTabToolStripMenuItem.Name = "_newTabToolStripMenuItem";
+            this._newTabToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
+            this._newTabToolStripMenuItem.Text = "&NewTab ";
+            this._newTabToolStripMenuItem.ToolTipText = "New empty tab";
+            this._newTabToolStripMenuItem.Click += new System.EventHandler(this.FileNewTabToolStripMenuItem_Click);
             // 
             // newTabFromToolStripMenuItem
             // 
@@ -632,7 +632,7 @@ namespace hoTools.Query
             this.tableLayoutPanel1.Size = new System.Drawing.Size(769, 25);
             this.tableLayoutPanel1.TabIndex = 12;
             // 
-            // QueryGUI
+            // QueryGui
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -681,12 +681,12 @@ namespace hoTools.Query
         private System.Windows.Forms.ToolStripMenuItem showScriptToolStripMenuItem;
         private System.Windows.Forms.TextBox txtSearchTerm;
         private System.Windows.Forms.Button btnRunScriptForSqlWithAsk;
-        private System.Windows.Forms.ToolStripMenuItem newTabToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem _newTabToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem lastsqlErrorToolStripMenuItem;
         private System.Windows.Forms.SplitContainer splitContainer;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel4;
-        private System.Windows.Forms.ToolStripMenuItem loadTabFromToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem _loadTabFromToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newTabFromToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
@@ -699,7 +699,7 @@ namespace hoTools.Query
         private System.Windows.Forms.Button btnUndo;
         private System.Windows.Forms.Button btnRedo;
         private System.Windows.Forms.ToolStripMenuItem lastSqlStringSentToEAToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem loadTabCTRLLToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem _loadTabCtrlLToolStripMenuItem;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnSaveAll;
         private System.Windows.Forms.Button btnSaveAs;
@@ -711,6 +711,6 @@ namespace hoTools.Query
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
         private System.Windows.Forms.ToolStripMenuItem loadStandardScriptsToolStripMenuItem;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.ToolStripMenuItem reloadTabToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem _reloadTabToolStripMenuItem;
     }
 }

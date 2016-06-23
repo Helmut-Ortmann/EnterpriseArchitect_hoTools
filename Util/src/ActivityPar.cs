@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using hoTools.Utils;
-using hoTools.Utils.Appls;
 using hoTools.Utils.Parameter;
 
 namespace hoTools.Utils.ActivityParameter
@@ -24,14 +19,11 @@ namespace hoTools.Utils.ActivityParameter
         public static bool CreateDefaultElementsForActivity(EA.Repository rep, 
                                 EA.Diagram dia, EA.Element act)
         {
-
-            EA.DiagramObject initNode = null;
-            
             // create init node
-            initNode = CreateInitFinalNode(rep, dia, act, 100, "l=350;r=370;t=70;b=90;");
+            CreateInitFinalNode(rep, dia, act, 100, @"l=350;r=370;t=70;b=90;");
             act.Elements.Refresh();
             dia.DiagramObjects.Refresh();
-            bool error = dia.Update();
+            dia.Update();
             rep.ReloadDiagram(dia.DiagramID);
 
             return true;
@@ -231,7 +223,6 @@ namespace hoTools.Utils.ActivityParameter
 
             ///////////////////////////////////////////////////////////////////////////////////
             // return code
-            string postfixName = "";
             string parName = "Return";
             int methodReturnTypId;
 
@@ -264,7 +255,7 @@ namespace hoTools.Utils.ActivityParameter
                 parTrgt.ClassifierID = parTrgt.ClassifierID;
 
                 parTrgt.Update();
-                // update properties for returnvalue
+                // update properties for return value
                 var par = new Param(rep, parTrgt);
                 par.setParameterProperties("direction", "out");
                 par.save();
@@ -292,7 +283,7 @@ namespace hoTools.Utils.ActivityParameter
                 string direction = "";
                 string prefixTyp = "";
                 if (parSrc.IsConst) prefixTyp = " const";
-                postfixName = "";
+                var postfixName = "";
                 if (parSrc.Kind.Contains("out")) postfixName = "*";
                 parName = parSrc.Position + ":" + parSrc.Name + postfixName + prefixTyp + direction;
 

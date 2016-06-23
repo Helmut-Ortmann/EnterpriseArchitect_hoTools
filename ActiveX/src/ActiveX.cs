@@ -529,7 +529,7 @@ namespace hoTools.ActiveX
         void removePortsInDiagramToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var port = new PortServices(Repository);
-            port.removePortFromDiagramGUI();
+            port.RemovePortFromDiagramGui();
 
         }
         #endregion
@@ -538,7 +538,7 @@ namespace hoTools.ActiveX
         void showPortsInDiagramObjectsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var port = new PortServices(Repository);
-            port.showPortsInDiagram(false);
+            port.ShowPortsInDiagram(false);
 
 
         }
@@ -547,7 +547,7 @@ namespace hoTools.ActiveX
         void showReceivingPortsLeftSendingPortsRightToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var port = new PortServices(Repository);
-            port.showPortsInDiagram(true);
+            port.ShowPortsInDiagram(true);
         }
         #endregion
 
@@ -555,7 +555,7 @@ namespace hoTools.ActiveX
         void copyPortsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var port = new PortServices(Repository);
-            port.copyPortsGUI();
+            port.CopyPortsGui();
 
         }
         #endregion
@@ -564,7 +564,7 @@ namespace hoTools.ActiveX
         void deletePortsWhichAreMarkedForDeletionfutureToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var port = new PortServices(Repository);
-            port.deletePortsMarkedPorts();
+            port.DeletePortsMarkedPorts();
         }
 #pragma warning restore RECS0154
         #endregion
@@ -582,7 +582,7 @@ namespace hoTools.ActiveX
         void hidePortLabelToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var port = new PortServices(Repository);
-            port.changeLabelGUI(PortServices.LabelStyle.IS_HIDDEN);
+            port.ChangeLabelGui(PortServices.LabelStyle.IsHidden);
         }
         #endregion
 
@@ -590,14 +590,14 @@ namespace hoTools.ActiveX
         void viewPortLabelToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var port = new PortServices(Repository);
-            port.changeLabelGUI(PortServices.LabelStyle.IS_SHOWN);
+            port.ChangeLabelGui(PortServices.LabelStyle.IsShown);
         }
         #endregion
         #region movePortLableLeftPositionToolStripMenuItem_Click
         void movePortLableLeftPositionToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var port = new PortServices(Repository);
-            port.changeLabelGUI(PortServices.LabelStyle.POSITION_LEFT);
+            port.ChangeLabelGui(PortServices.LabelStyle.PositionLeft);
         }
         #endregion
 
@@ -605,7 +605,7 @@ namespace hoTools.ActiveX
         void movePortLableRightPositionToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var port = new PortServices(Repository);
-            port.changeLabelGUI(PortServices.LabelStyle.POSITION_RIGHT);
+            port.ChangeLabelGui(PortServices.LabelStyle.PositionRight);
         }
         #endregion
 
@@ -614,7 +614,7 @@ namespace hoTools.ActiveX
         void movePortLablePlusPositionToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var port = new PortServices(Repository);
-            port.changeLabelGUI(PortServices.LabelStyle.POSITION_PLUS);
+            port.ChangeLabelGui(PortServices.LabelStyle.PositionPlus);
         }
         #endregion
 
@@ -623,7 +623,7 @@ namespace hoTools.ActiveX
         void movePortLableMinusPositionToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var port = new PortServices(Repository);
-            port.changeLabelGUI(PortServices.LabelStyle.POSITION_MINUS);
+            port.ChangeLabelGui(PortServices.LabelStyle.PositionMinus);
         }
         #endregion
 
@@ -631,7 +631,7 @@ namespace hoTools.ActiveX
         void connectPortsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var port = new PortServices(Repository);
-            port.connectPortsGUI();
+            port.ConnectPortsGui();
 
         }
 
@@ -643,13 +643,13 @@ namespace hoTools.ActiveX
         void connectPortsInsideComponentsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var port = new PortServices(Repository);
-            port.connectPortsInsideGUI();
+            port.ConnectPortsInsideGui();
         }
 
         void deletePortsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var port = new PortServices(Repository);
-            port.deletePortsGUI();
+            port.DeletePortsGui();
         }
 
         void btnLeft_Click(object sender, EventArgs e)
@@ -675,7 +675,7 @@ namespace hoTools.ActiveX
         void makeConnectorsUnspecifiedDirectionToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var port = new PortServices(Repository);
-            port.setConnectionDirectionUnspecifiedGUI();
+            port.SetConnectionDirectionUnspecifiedGui();
         }
 
 

@@ -16,7 +16,7 @@ namespace hoTools.EAServicesPort
     {
         EA.Repository _rep;
         int _count; // a variable to count the amount of something
-        const string EMBEDDED_ELEMENT_TYPES ="Port Parameter Pin";
+        const string EmbeddedElementTypes ="Port Parameter Pin";
               
         
 
@@ -40,12 +40,12 @@ namespace hoTools.EAServicesPort
         /// <summary>
         /// Copy Ports
         /// </summary>
-        public void copyPortsGUI()
+        public void CopyPortsGui()
         {
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
-                doCopyPortsGUI();
+                DoCopyPortsGui();
                 Cursor.Current = Cursors.Default;
                 MessageBox.Show(String.Format("{0} ports copied!", _count));
             }
@@ -61,7 +61,7 @@ namespace hoTools.EAServicesPort
         }
         #endregion
         #region doCopyPortsGUI
-        public int doCopyPortsGUI()
+        public int DoCopyPortsGui()
         {
             EA.Diagram dia = _rep.GetCurrentDiagram();
             if (dia == null) return 0;
@@ -90,7 +90,7 @@ namespace hoTools.EAServicesPort
                 if (srcEl.Type == "Port")
                 {
                     // selected element was port
-                    copyPort(srcEl, trgEl);
+                    CopyPort(srcEl, trgEl);
                     _count += 1;
                 }
                 else
@@ -100,7 +100,7 @@ namespace hoTools.EAServicesPort
                         if (srcEl.ElementID == trgEl.ElementID) continue;
                         if (p.Type == "Port")
                         {
-                            copyPort(p, trgEl);
+                            CopyPort(p, trgEl);
                             _count += 1;
                         }
                     }
@@ -119,7 +119,7 @@ namespace hoTools.EAServicesPort
         /// </summary>
         /// <param name="srcPort"></param>
         /// <param name="trgEl"></param>
-        private void copyPort(EA.Element srcPort, EA.Element trgEl)
+        private void CopyPort(EA.Element srcPort, EA.Element trgEl)
         {
             bool isUpdate = false;
             EA.Element trgPort = null;
@@ -153,12 +153,12 @@ namespace hoTools.EAServicesPort
         #endregion
 
         #region deletePortsGUI
-        public void deletePortsGUI()
+        public void DeletePortsGui()
         {
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
-                doDeletePortsGUI();
+                DoDeletePortsGui();
                 Cursor.Current = Cursors.Default;
                 MessageBox.Show(String.Format("{0} ports deleted!", _count));
             }
@@ -174,7 +174,7 @@ namespace hoTools.EAServicesPort
         }
         #endregion
         #region doDeletePortsGUI
-        public int doDeletePortsGUI()
+        public int DoDeletePortsGui()
         {
             EA.Diagram dia = _rep.GetCurrentDiagram();
             if (dia == null) return 0;
@@ -194,14 +194,14 @@ namespace hoTools.EAServicesPort
                 if (el.Type == "Port")
                 {
                     // selected element was port
-                    delPort(el);
+                    DelPort(el);
                     _count += 1;
                 }
                 else
                 {   // selected element was "Element"
                     foreach (EA.Element p in el.EmbeddedElements)
                     {
-                        delPort(p);
+                        DelPort(p);
                         _count += 1; 
                     }
                 }
@@ -212,7 +212,7 @@ namespace hoTools.EAServicesPort
        } 
         #endregion
         #region delPort
-        private void delPort(EA.Element port)
+        private void DelPort(EA.Element port)
         {
             EA.Element el = _rep.GetElementByID(port.ParentID);
             for (int i = 0; i < el.EmbeddedElements.Count; i++)
@@ -228,12 +228,12 @@ namespace hoTools.EAServicesPort
         #endregion delPort
 
         #region orderDiagramObjectsGUI
-        public void orderDiagramObjectsGUI()
+        public void OrderDiagramObjectsGui()
         {
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
-                doOrderDiagramObjectsGUI();
+                DoOrderDiagramObjectsGui();
                 Cursor.Current = Cursors.Default;
                
             }
@@ -249,7 +249,7 @@ namespace hoTools.EAServicesPort
         }
         #endregion
         #region doOrderDiagramObjectsGUI
-        public void doOrderDiagramObjectsGUI()
+        public void DoOrderDiagramObjectsGui()
         {
             EA.Diagram dia = _rep.GetCurrentDiagram();
             if (dia == null) return;
@@ -276,7 +276,7 @@ namespace hoTools.EAServicesPort
         /// - Sending Ports on the right side (Client, Sender)
         /// </summary>
         /// <param name="isOptimizePortLayout"></param>
-        public void showPortsInDiagram(bool isOptimizePortLayout=false)
+        public void ShowPortsInDiagram(bool isOptimizePortLayout=false)
         {
             try
             {
@@ -285,7 +285,7 @@ namespace hoTools.EAServicesPort
                 var eaDia = new EADiagram(_rep);
                 
                 // hide all ports
-                removePortFromDiagramGUI();
+                RemovePortFromDiagramGui();
                 // show all ports
                 eaDia.ReloadSelectedObjectsAndConnector();// reload selection
                 EaService.showEmbeddedElementsGUI(_rep, "Port", isOptimizePortLayout);
@@ -308,13 +308,13 @@ namespace hoTools.EAServicesPort
         #endregion
 
         #region removePortFromDiagramGUI
-        public void removePortFromDiagramGUI()
+        public void RemovePortFromDiagramGui()
         {
             try
             {
 
                 Cursor.Current = Cursors.WaitCursor;
-                this.doRemovePortFromDiagramGUI();
+                this.DoRemovePortFromDiagramGui();
                 Cursor.Current = Cursors.Default;
 
             }
@@ -330,7 +330,7 @@ namespace hoTools.EAServicesPort
         }
         #endregion
         #region doRemovePortFromDiagramGUI
-        private void doRemovePortFromDiagramGUI()
+        private void DoRemovePortFromDiagramGui()
         {
             EA.Diagram dia = _rep.GetCurrentDiagram();
             if (dia == null) return;
@@ -350,7 +350,7 @@ namespace hoTools.EAServicesPort
                 if (el.Type == "Port")
                 {
                     // selected element was port
-                    removePortFromDiagram(dia, el);
+                    RemovePortFromDiagram(dia, el);
                 }
                 else
                 {   // selected element was "Element"
@@ -358,7 +358,7 @@ namespace hoTools.EAServicesPort
                     {
                         if (port.Type == "Port")
                         {
-                            removePortFromDiagram(dia, port);
+                            RemovePortFromDiagram(dia, port);
                         }
                     }
 
@@ -369,7 +369,7 @@ namespace hoTools.EAServicesPort
         }
         #endregion  
         #region removePortFromDiagram
-        private void removePortFromDiagram(EA.Diagram dia, EA.Element port)
+        private void RemovePortFromDiagram(EA.Diagram dia, EA.Element port)
         {
             for (int i= dia.DiagramObjects.Count-1; i>=0;i-=1)
             {
@@ -390,19 +390,19 @@ namespace hoTools.EAServicesPort
         [Flags]
         public enum LabelStyle
         {
-            IS_HIDDEN = 1,
-            IS_SHOWN = 2,
-            POSITION_LEFT = 4,
-            POSITION_RIGHT = 8,
-            POSITION_PLUS = 16,
-            POSITION_MINUS = 32
+            IsHidden = 1,
+            IsShown = 2,
+            PositionLeft = 4,
+            PositionRight = 8,
+            PositionPlus = 16,
+            PositionMinus = 32
         }
-        public void changeLabelGUI(LabelStyle style)
+        public void ChangeLabelGui(LabelStyle style)
         {
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
-                doChangeLabelGUI(style);
+                DoChangeLabelGui(style);
                 Cursor.Current = Cursors.Default;
             }
             catch (Exception e11)
@@ -417,7 +417,7 @@ namespace hoTools.EAServicesPort
         }
         #endregion
         #region doChangeLabelGUI
-        public void doChangeLabelGUI(LabelStyle style)
+        public void DoChangeLabelGui(LabelStyle style)
         {
             EA.Diagram dia = _rep.GetCurrentDiagram();
             if (dia == null) return;
@@ -431,23 +431,23 @@ namespace hoTools.EAServicesPort
             foreach (EA.DiagramObject obj in dia.SelectedObjects)
             {
                 el = _rep.GetElementByID(obj.ElementID);
-                if (EMBEDDED_ELEMENT_TYPES.Contains(el.Type) )
+                if (EmbeddedElementTypes.Contains(el.Type) )
                 {
                     EA.DiagramObject portObj = Util.getDiagramObjectByID(_rep, dia, el.ElementID);
                     //EA.DiagramObject portObj = dia.GetDiagramObjectByID(el.ElementID, "");
-                    doChangeLabelStyle(portObj, style);
+                    DoChangeLabelStyle(portObj, style);
                 }
                 else
                 {   // all element like Class, Component,..
                     foreach (EA.Element p in el.EmbeddedElements)
                     {
-                        if (! (EMBEDDED_ELEMENT_TYPES.Contains(p.Type))) continue;
+                        if (! (EmbeddedElementTypes.Contains(p.Type))) continue;
                         EA.DiagramObject portObj = Util.getDiagramObjectByID(_rep, dia, p.ElementID);
                         if (portObj != null) {
                             //EA.DiagramObject portObj = dia.GetDiagramObjectByID(p.ElementID, "");
                             // HDN=1;  Label hidden
                             // HDN=0;  Label visible
-                            doChangeLabelStyle(portObj, style);
+                            DoChangeLabelStyle(portObj, style);
                         }
                     }
                 }
@@ -456,43 +456,43 @@ namespace hoTools.EAServicesPort
         #endregion
 
         #region doChangeLabelStyle
-        private static void doChangeLabelStyle(EA.DiagramObject portObj, LabelStyle style)
+        private static void DoChangeLabelStyle(EA.DiagramObject portObj, LabelStyle style)
         {
             switch (style)
             {
-                case LabelStyle.IS_HIDDEN:
-                    changeLabel(portObj, @"HDN=0", "HDN=1");
+                case LabelStyle.IsHidden:
+                    ChangeLabel(portObj, @"HDN=0", "HDN=1");
                     break;
 
-                case LabelStyle.IS_SHOWN:
-                    changeLabel(portObj, @"HDN=1", "HDN=0");
+                case LabelStyle.IsShown:
+                    ChangeLabel(portObj, @"HDN=1", "HDN=0");
                     break;
 
-                case LabelStyle.POSITION_LEFT:
-                    changeLabel(portObj, @"OX=[\+\-0-9]*", @"OX=-200");
+                case LabelStyle.PositionLeft:
+                    ChangeLabel(portObj, @"OX=[\+\-0-9]*", @"OX=-200");
                     break;
 
-                case LabelStyle.POSITION_RIGHT:
-                    changeLabel(portObj, @"OX=[\+\-0-9]*", @"OX=24");
+                case LabelStyle.PositionRight:
+                    ChangeLabel(portObj, @"OX=[\+\-0-9]*", @"OX=24");
                     break;
 
-                case LabelStyle.POSITION_MINUS:
+                case LabelStyle.PositionMinus:
                     // get old x position
                     Match match = Regex.Match(portObj.Style, @"OX=([\+\-0-9]*)");
                     if (match.Success)
                     {
                         int xPos = Convert.ToInt32(match.Groups[1].Value) - 15;
-                        changeLabel(portObj, @"OX=[\+\-0-9]*", String.Format("OX={0}", xPos));
+                        ChangeLabel(portObj, @"OX=[\+\-0-9]*", String.Format("OX={0}", xPos));
                     }
                     break;
 
-                case LabelStyle.POSITION_PLUS:
+                case LabelStyle.PositionPlus:
                     // get old x position
                     match = Regex.Match(portObj.Style, @"OX=([\+\-0-9]*)");
                     if (match.Success)
                     {
                         int xPos = Convert.ToInt32(match.Groups[1].Value) + 15;
-                        changeLabel(portObj, @"OX=[\+\-0-9]*", String.Format("OX={0}", xPos)  );
+                        ChangeLabel(portObj, @"OX=[\+\-0-9]*", String.Format("OX={0}", xPos)  );
                     }
                     break;
             }
@@ -504,7 +504,7 @@ namespace hoTools.EAServicesPort
         }
         #endregion
         #region setLabel
-        private static void changeLabel(EA.DiagramObject portObj, string from, string to)
+        private static void ChangeLabel(EA.DiagramObject portObj, string from, string to)
         {
             var style = (string)portObj.Style;
 
@@ -522,12 +522,12 @@ namespace hoTools.EAServicesPort
 
 
         #region deletePortsMarkedPorts
-        public void deletePortsMarkedPorts()
+        public void DeletePortsMarkedPorts()
         {
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
-                doDeleteMarkedPortsGUI();
+                DoDeleteMarkedPortsGui();
                 Cursor.Current = Cursors.Default;
                 MessageBox.Show(String.Format("{0} Ports / CharacteristicData / CharacteristicCurve deleted", _count));
             }
@@ -544,7 +544,7 @@ namespace hoTools.EAServicesPort
         }
         #endregion
         #region doDeleteMarkedPortsGUI
-        public void doDeleteMarkedPortsGUI()
+        public void DoDeleteMarkedPortsGui()
         {
             EA.Diagram dia = _rep.GetCurrentDiagram();
             if (dia == null) return;
@@ -579,14 +579,14 @@ namespace hoTools.EAServicesPort
         #endregion
 
         #region connectPortsInsideGUID
-        public void connectPortsInsideGUI()
+        public void ConnectPortsInsideGui()
         {
             try
             {
 
                 Cursor.Current = Cursors.WaitCursor;
                 var eaDia = new EADiagram(_rep);
-                doConnectPortsInsideGUI();
+                DoConnectPortsInsideGui();
 
                 eaDia.ReloadSelectedObjectsAndConnector();
                 Cursor.Current = Cursors.Default;
@@ -609,7 +609,7 @@ namespace hoTools.EAServicesPort
         /// Connect all ports of all selected Class / Components to each other.
         /// </summary>
         /// <returns></returns>
-        public int doConnectPortsInsideGUI()
+        public int DoConnectPortsInsideGui()
         {
             EA.Diagram dia = _rep.GetCurrentDiagram();
             if (dia == null) return 0;
@@ -646,14 +646,14 @@ namespace hoTools.EAServicesPort
         /// Connect Ports between selected Elements from GUI with Mouse Wait
         /// It connects Ports of different elements with the same name with a not directed connector
         /// </summary>
-        public void connectPortsGUI()
+        public void ConnectPortsGui()
         {
             try
             {
 
                 Cursor.Current = Cursors.WaitCursor;
                 var eaDia = new EADiagram(_rep);
-                doConnectPortGUI();
+                DoConnectPortGui();
 
                 eaDia.ReloadSelectedObjectsAndConnector();
                 Cursor.Current = Cursors.Default;
@@ -677,9 +677,9 @@ namespace hoTools.EAServicesPort
         /// - recursive selected packages
         /// </summary>
         /// <returns></returns>
-        public void doConnectPortGUI () 
+        public void DoConnectPortGui () 
         {
-            var l_el_id = new List<int>();
+            var lElId = new List<int>();
             EA.Package pkg = _rep.GetTreeSelectedPackage();
             if (pkg == null) return;
             
@@ -689,26 +689,26 @@ namespace hoTools.EAServicesPort
             {
                 foreach (EA.DiagramObject obj in dia.SelectedObjects)
                 {
-                    l_el_id.Add(obj.ElementID);
+                    lElId.Add(obj.ElementID);
                 }
 
             }
             else
             {
                 var rec = new ElementRecursive(_rep);
-                l_el_id = rec.getItemsRecursive(pkg);
+                lElId = rec.getItemsRecursive(pkg);
             }
 
             // between all components / classes
-            for (int i1 = 0; i1 < l_el_id.Count -1; i1 +=1)
+            for (int i1 = 0; i1 < lElId.Count -1; i1 +=1)
             {
                 // source id
-                int srcId = l_el_id[i1];
+                int srcId = lElId[i1];
                 _rep.ShowInProjectView(_rep.GetElementByID(srcId) );
                 EA.Element srcEl = _rep.GetElementByID(srcId);
-                for (int i2 = i1+1; i2 < l_el_id.Count; i2 += 1)
+                for (int i2 = i1+1; i2 < lElId.Count; i2 += 1)
                 {
-                    int trgtId = l_el_id[i2];
+                    int trgtId = lElId[i2];
                     if (srcId == trgtId) continue;
                     EA.Element trgtEl = _rep.GetElementByID(trgtId);
 
@@ -778,7 +778,7 @@ namespace hoTools.EAServicesPort
      
 
         #region setConnectionDirectionUnspecifiedGUI
-        public void setConnectionDirectionUnspecifiedGUI()
+        public void SetConnectionDirectionUnspecifiedGui()
         {
             var eaDia = new EADiagram(_rep);
             EA.Diagram dia = eaDia.Dia;
@@ -798,13 +798,13 @@ namespace hoTools.EAServicesPort
                 if (el.Type == "Port")
                 {
                     // selected element was port
-                    setElementConnectorDirectionUnspecified(el);
+                    SetElementConnectorDirectionUnspecified(el);
                 }
                 else
                 {   // selected element was "Element"
                     foreach (EA.Element port in el.EmbeddedElements)
                     {
-                        setElementConnectorDirectionUnspecified(port);
+                        SetElementConnectorDirectionUnspecified(port);
                     }
 
                 }
@@ -814,7 +814,7 @@ namespace hoTools.EAServicesPort
         }
         #endregion  
         #region setElementConnectorDirectionUnspecified
-        private void setElementConnectorDirectionUnspecified(EA.Element el) {
+        private void SetElementConnectorDirectionUnspecified(EA.Element el) {
             foreach (EA.Connector con in el.Connectors)
             {
                 if (con.Type == "Connector")
