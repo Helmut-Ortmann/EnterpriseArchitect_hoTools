@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
 using System.Configuration;
@@ -9,7 +10,6 @@ using System.Collections.Generic;
 using Control.EaAddinShortcuts;
 using System.Text.RegularExpressions;
 using GlobalHotkeys;
-//using hoTools.Connectors;
 
 namespace hoTools.Settings
 {
@@ -50,8 +50,8 @@ namespace hoTools.Settings
         // all available services
         public List<ServiceCall> AllServices = new List<ServiceCall>();
 
-        public List<GlobalKeysConfig.GlobalKeysServiceConfig> GlobalShortcutsService = new List<GlobalKeysConfig.GlobalKeysServiceConfig>();
-        public List<GlobalKeysConfig.GlobalKeysSearchConfig> GlobalShortcutsSearch = new  List<GlobalKeysConfig.GlobalKeysSearchConfig>();
+        public List<GlobalKeysConfig.GlobalKeysServiceConfig> GlobalShortcutsService;
+        public List<GlobalKeysConfig.GlobalKeysSearchConfig> GlobalShortcutsSearch;
 
         // Connectors
         public LogicalConnectors LogicalConnectors = new LogicalConnectors();
@@ -83,8 +83,18 @@ namespace hoTools.Settings
             //the roamingConfig now get a path such as C:\Users\<user>\AppData\Roaming\Sparx_Systems_Pty_Ltd\DefaultDomain_Path_2epjiwj3etsq5yyljkyqqi2yc4elkrkf\9,_2,_0,_921\user.config
             // which I don't like. So we move up three directories and then add a directory for the EA Navigator so that we get
             // C:\Users\<user>\AppData\Roaming\ho\hoTools\user.config
-            string configFileName = System.IO.Path.GetFileName(roamingConfig.FilePath);
-            string configDirectory = System.IO.Directory.GetParent(roamingConfig.FilePath).Parent.Parent.Parent.FullName;
+            string configFileName = Path.GetFileName(roamingConfig.FilePath);
+            string configDirectory ="";
+            try
+            {
+                configDirectory = Directory.GetParent(roamingConfig.FilePath).Parent.Parent.Parent.FullName;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($"Expected path: '\\Users\\<user>\\AppData\\Roaming\\ho\\hoTools\\user.config'\r\nconfigFilaname:'{configFileName}'\r\n{e}",
+                        @"Can't get config file!");
+            }
+
             string path = "";
             switch (Customer) {
                 case CustomerCfg.HoTools:
@@ -106,8 +116,7 @@ namespace hoTools.Settings
             // enables the application to access 
             // the configuration file using the
             // System.Configuration.Configuration class
-            var configFileMap = new ExeConfigurationFileMap();
-            configFileMap.ExeConfigFilename = ConfigFilePath;
+            var configFileMap = new ExeConfigurationFileMap {ExeConfigFilename = ConfigFilePath};
             // Get the mapped configuration file.
             CurrentConfig = ConfigurationManager.OpenMappedExeConfiguration(configFileMap, ConfigurationUserLevel.None);
 
@@ -156,7 +165,7 @@ namespace hoTools.Settings
             //defaultConfig.AppSettings.Settings["menuOwnerEnabled"].Value
             if (DefaultConfig.AppSettings.Settings.Count == 0)
             {
-                MessageBox.Show("No default settings in '" + DefaultConfig.FilePath + "' found!", "Installation wasn't successful!");
+                MessageBox.Show($"No default settings in '{DefaultConfig.FilePath}' found!", @"Installation wasn't successful!");
             }
             foreach (KeyValueConfigurationElement configEntry in DefaultConfig.AppSettings.Settings)
             {
@@ -185,6 +194,22 @@ namespace hoTools.Settings
             {
                 SetBoolConfigValue("isAskForQueryUpdateOutside", value);
             }
+        }
+        #endregion
+
+        #region Property: SqlPaths
+        /// <summary>
+        /// Comma separated list of paths to search for SQL Queries
+        /// </summary>
+        public string SqlPaths
+        {
+            get
+            {
+                var p = CurrentConfig.AppSettings.Settings["SqlPaths"];
+                if (p == null) return "";// default
+                return p.Value;
+            }
+            set { SetStringConfigValue("SqlPaths", value); }
         }
         #endregion
 
@@ -1066,11 +1091,11 @@ namespace hoTools.Settings
         {
             foreach (ServicesCallConfig service in ButtonsServices)
             {
-                if (service.GUID != "{B93C105E-64BC-4D9C-B92F-3DDF0C9150E6}")
+                if (service.Guid != "{B93C105E-64BC-4D9C-B92F-3DDF0C9150E6}")
                 {
                     //int index = allServices.BinarySearch(new EaServices.ServiceCall(null, service.GUID, "","", false), new EaServices.ServicesCallGUIDComparer());
                     foreach (ServiceCall s in AllServices) {
-                        if (service.GUID == s.GUID)
+                        if (service.Guid == s.Guid)
                         {
                             service.Method = s.Method;
                             service.Help = s.Help;
@@ -1084,12 +1109,12 @@ namespace hoTools.Settings
             }
             foreach (GlobalKeysConfig.GlobalKeysServiceConfig service in GlobalShortcutsService)
             {
-                if (service.GUID != "{B93C105E-64BC-4D9C-B92F-3DDF0C9150E6}")
+                if (service.Guid != "{B93C105E-64BC-4D9C-B92F-3DDF0C9150E6}")
                 {
                     //int index = allServices.BinarySearch(new EaServices.ServiceCall(null, service.GUID, "","", false), new EaServices.ServicesCallGUIDComparer());
                     foreach (ServiceCall s in AllServices)
                     {
-                        if (service.GUID == s.GUID)
+                        if (service.Guid == s.Guid)
                         {
                             service.Method = s.Method;
                             service.Tooltip = s.Help;
@@ -1243,7 +1268,7 @@ namespace hoTools.Settings
                 CurrentConfig.AppSettings.Settings[basicKey + "Modifier2"].Value = el.Modifier2;
                 CurrentConfig.AppSettings.Settings[basicKey + "Modifier3"].Value = el.Modifier3;
                 CurrentConfig.AppSettings.Settings[basicKey + "Modifier4"].Value = el.Modifier4;
-                CurrentConfig.AppSettings.Settings[basicKey + "GUID"].Value = el.GUID;
+                CurrentConfig.AppSettings.Settings[basicKey + "GUID"].Value = el.Guid;
             }
 
         }
@@ -1359,7 +1384,7 @@ namespace hoTools.Settings
 
                     var el = l[i];
                     string basicKey = "service" + (i + 1);
-                    CurrentConfig.AppSettings.Settings[basicKey + "GUID"].Value = el.GUID;
+                    CurrentConfig.AppSettings.Settings[basicKey + "GUID"].Value = el.Guid;
                     CurrentConfig.AppSettings.Settings[basicKey + "Text"].Value = el.ButtonText;
                 }
             }

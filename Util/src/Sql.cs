@@ -28,9 +28,9 @@ namespace hoTools.Utils.SQL
         /// <param name="stereotype"></param>
         /// <param name="direction"></param>
         /// <returns></returns>
-        public List<int> getAndSortEmbeddedElements(EA.Element el, string objectType, string stereotype, string direction)
+        public List<int> GetAndSortEmbeddedElements(EA.Element el, string objectType, string stereotype, string direction)
         {
-            var l_ports = new List<int>();
+            var lPorts = new List<int>();
 
             string queryStereotype = "";
             string queryOrderBy = @" order by o.name ";
@@ -58,24 +58,24 @@ namespace hoTools.Utils.SQL
             XElement xelement = XElement.Parse(str);
             foreach (XElement xEle in xelement.Descendants("Row"))
             {
-                l_ports.Add(Convert.ToInt32(xEle.Element("object_id").Value));
+                lPorts.Add(Convert.ToInt32(xEle.Element("object_id").Value));
             }
 
-            return l_ports;
+            return lPorts;
             
         }
         #endregion
 
         #region userHasPermission
-        public Boolean userHasPermission(string userGUID)
+        public Boolean UserHasPermission(string userGuid)
         {
          bool result  =false;
          string query = @"SELECT 'Group' As PermissionType " +
                         @"from (t_secgrouppermission p inner join t_secusergroup grp on (p.GroupID = grp.GroupID)) " +
-                        @"where grp.UserID = '" + userGUID + "' " +
+                        @"where grp.UserID = '" + userGuid + "' " +
                         @"UNION " +
                         @"select 'User'  from t_secuserpermission p " +
-                        @"where p.UserID = '" + userGUID + "' ;";
+                        @"where p.UserID = '" + userGuid + "' ;";
 
             string str = _rep.SQLQuery(query);
             XElement xelement = XElement.Parse(str);
@@ -86,7 +86,7 @@ namespace hoTools.Utils.SQL
         }
         #endregion
         #region isConnectionAvailable
-        public Boolean isConnectionAvailable(EA.Element srcEl, EA.Element trgtEl)
+        public Boolean IsConnectionAvailable(EA.Element srcEl, EA.Element trgtEl)
         {
             bool result = false;
             string sql = "SELECT Start_Object_ID  " +
@@ -111,7 +111,7 @@ namespace hoTools.Utils.SQL
         /// - t_secuser
         /// </summary>
          /// <returns></returns>
-        public List<string> getUsers()
+        public List<string> GetUsers()
         {
             var l = new List<string>();
             string query;

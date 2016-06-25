@@ -30,9 +30,9 @@ namespace hoTools.EaServices.Dlg
                 _isSecurityEnabled = true;
 
                 // check if user has the rights to manage users
-                if (_sql.userHasPermission(rep.GetCurrentLoginUser(true)))
+                if (_sql.UserHasPermission(rep.GetCurrentLoginUser(true)))
                 {
-                    users = _sql.getUsers();
+                    users = _sql.GetUsers();
                     txtStatus.Text = "Security is enabled: Choose user";
                 }
                 else
@@ -46,7 +46,7 @@ namespace hoTools.EaServices.Dlg
             }
             else
             {
-                users = _sql.getUsers();
+                users = _sql.GetUsers();
                 txtStatus.Text = "Security isn't enabled: Choose or enter your desired author name!";
             }
             

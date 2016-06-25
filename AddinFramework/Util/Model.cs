@@ -19,34 +19,34 @@ namespace EAAddinFramework.Utils
     {
         public EA.Repository Repository { get; set; }
         public EA.App EaApp { get; }
-        private static string _applicationFullPath;
-        private IWin32Window _mainEAWindow;
-        public RepositoryType? _repositoryType;  // a null able type
+        static string _applicationFullPath;
+        IWin32Window _mainEaWindow;
+        RepositoryType? _repositoryType;  // a null able type
 
 
         /// <summary>
         /// List of databases supported as backend for an EA repository
-        /// 0 - MYSQL
-        ///	1 - SQLSVR
-        /// 2 - ADOJET
+        /// 0 - MySql
+        ///	1 - SqlSvr
+        /// 2 - AdoJet
         /// 3 - ORACLE
         /// 4 - POSTGRES
-        /// 5 - ASA
+        /// 5 - Asa
         /// 7 - OPENEDGE
         /// 8 - ACCESS2007
         /// 9 - FireBird
         /// </summary>
         public enum RepositoryType
         {
-            MYSQL,
-            SQLSVR,
-            ADOJET,
-            ORACLE,
-            POSTGRES,
-            ASA,
-            OPENEDGE,
-            ACCESS2007,
-            FIREBIRD
+            MySql,
+            SqlSvr,
+            AdoJet,
+            Oracle,
+            Postgres,
+            Asa,
+            Openedge,
+            Access2007,
+            Firebird
         }
         #region Constructor
         /// <summary>
@@ -56,32 +56,32 @@ namespace EAAddinFramework.Utils
         {
             object obj = Marshal.GetActiveObject("EA.App");
             EaApp = obj as EA.App;
-            initialize(EaApp.Repository);
+            Initialize(EaApp.Repository);
         }
         /// <summary>
         /// Create a Model
         /// </summary>
-        /// <param name="Repository"></param>
-        public Model(EA.Repository Repository)
+        /// <param name="repository"></param>
+        public Model(EA.Repository repository)
         {
-            initialize(Repository);
+            Initialize(repository);
         }
         #endregion
         /// <summary>
-        /// Initialize an Repository Model object
+        /// Initialize an rep Model object
         /// Intended to use from a scripting environment
         /// </summary>
-        /// <param name="Repository"></param>
-        public void initialize(EA.Repository Repository)
+        /// <param name="rep"></param>
+        public void Initialize(EA.Repository rep)
         {
-            this.Repository = Repository; 
+            Repository = rep; 
         }
 
 
         /// <summary>
         /// returns the full path of the running ea.exe
         /// </summary>
-        public static string applicationFullPath
+        public static string ApplicationFullPath
         {
             get
             {
@@ -104,9 +104,9 @@ namespace EAAddinFramework.Utils
         {
             get
             {
-                if (!this._repositoryType.HasValue)
+                if (!_repositoryType.HasValue)
                 {
-                    this._repositoryType = getRepositoryType();
+                    _repositoryType = GetRepositoryType();
                 }
                 return _repositoryType.Value;
             }
@@ -114,12 +114,12 @@ namespace EAAddinFramework.Utils
         /// <summary>
         /// the main EA window to use when opening properties dialogs
         /// </summary>
-        public IWin32Window mainEAWindow
+        public IWin32Window MainEaWindow
         {
             get
             {
                 if //(true)
-                    (this._mainEAWindow == null)
+                    (_mainEaWindow == null)
                 {
                     var allProcesses = new List<Process>(Process.GetProcesses());
                     Process proc = allProcesses.Find(pr => pr.ProcessName == "EA");
@@ -127,30 +127,30 @@ namespace EAAddinFramework.Utils
                     if (proc == null
                            || proc.MainWindowHandle == null)
                     {
-                        this._mainEAWindow = null;
+                        this._mainEaWindow = null;
                     }
                     else
                     {
                         //found it. Create new WindowWrapper
-                        this._mainEAWindow = new WindowWrapper(proc.MainWindowHandle);
+                        _mainEaWindow = new WindowWrapper(proc.MainWindowHandle);
                     }
                 }
-                return this._mainEAWindow;
+                return _mainEaWindow;
             }
         }
         /// <summary>
-        /// Gets the Repository type for this model
+        /// Gets the rep type for this model
         /// </summary>
         /// <returns></returns>
-        public RepositoryType getRepositoryType()
+        public RepositoryType GetRepositoryType()
         {
-            string connectionString = this.Repository.ConnectionString;
-            RepositoryType repoType = RepositoryType.ADOJET; //default to .eap file
+            string connectionString = Repository.ConnectionString;
+            RepositoryType repoType = RepositoryType.AdoJet; //default to .eap file
 
             // if it is a .feap file then it surely is a Firebird db
             if (connectionString.ToLower().EndsWith(".feap", StringComparison.Ordinal))
             {
-                repoType = RepositoryType.FIREBIRD;
+                repoType = RepositoryType.Firebird;
             }
             else
             {
@@ -161,7 +161,7 @@ namespace EAAddinFramework.Utils
                     if (fileInfo.Length > 1000)
                     {
                         //local .eap file, ms access syntax
-                        repoType = RepositoryType.ADOJET;
+                        repoType = RepositoryType.AdoJet;
                     }
                     else
                     {
@@ -193,17 +193,17 @@ namespace EAAddinFramework.Utils
         /// <summary>
         /// Execute SQL and catch Exception
         /// </summary>
-        /// <param name="SQLString"></param>
-        public bool executeSQL(string SQLString)
+        /// <param name="sqlString"></param>
+        public bool ExecuteSql(string sqlString)
         {
             try
             {
-                this.Repository.Execute(SQLString);
+                Repository.Execute(sqlString);
                 return true;
             }
             catch (Exception e)
             {
-                MessageBox.Show($"SQL execute:\r\n{SQLString}\r\n{e.Message}", "Error SQL execute");
+                MessageBox.Show($"SQL execute:\r\n{sqlString}\r\n{e.Message}", @"Error SQL execute");
                 return false;
             }
         }
@@ -213,15 +213,15 @@ namespace EAAddinFramework.Utils
         /// </summary>
         /// <param name="xpath">the xpath to format</param>
         /// <returns>the formatted xpath</returns>
-        public string formatXPath(string xpath)
+        public string FormatXPath(string xpath)
         {
-            switch (this.repositoryType)
+            switch (repositoryType)
             {
 
-                case RepositoryType.ORACLE:
-                case RepositoryType.FIREBIRD:
+                case RepositoryType.Oracle:
+                case RepositoryType.Firebird:
                     return xpath.ToUpper();
-                case RepositoryType.POSTGRES:
+                case RepositoryType.Postgres:
                     return xpath.ToLower();
                 default:
                     return xpath;
@@ -232,13 +232,13 @@ namespace EAAddinFramework.Utils
         /// </summary>
         /// <param name="sqlString">the string to be escaped</param>
         /// <returns>the escaped string</returns>
-        public string escapeSQLString(string sqlString)
+        public string EscapeSqlString(string sqlString)
         {
             string escapedString = sqlString;
             switch (this.repositoryType)
             {
-                case RepositoryType.MYSQL:
-                case RepositoryType.POSTGRES:
+                case RepositoryType.MySql:
+                case RepositoryType.Postgres:
                     // replace backslash "\" by double backslash "\\"
                     escapedString = escapedString.Replace(@"\", @"\\");
                     break;
@@ -255,10 +255,10 @@ namespace EAAddinFramework.Utils
         /// </summary>
         /// <param name="sql"></param>
         /// <param name="searchText">Search Text to replace 'Search Term' macro</param>
-        public void SQLRun(string sql, string searchText)
+        public void SqlRun(string sql, string searchText)
         {
             // replace templates
-            sql = SqlTemplates.replaceMacro(Repository, sql, searchText);
+            sql = SqlTemplates.ReplaceMacro(Repository, sql, searchText);
             if (sql == "") return;
 
             // check whether select or update, delete, insert sql
@@ -278,8 +278,8 @@ namespace EAAddinFramework.Utils
                 // if ok output the SQL
                 if (ret)
                 {
-                    string sqlText = $"Path SQL:\r\n{SqlError.getHoToolsLastSqlFilePath()}\r\n\r\n{SqlError.readHoToolsLastSql()}";
-                    MessageBox.Show(sqlText, "SQL executed! Ctrl+C to copy it to clipboard (ignore beep).");
+                    string sqlText = $"Path SQL:\r\n{SqlError.GetHoToolsLastSqlFilePath()}\r\n\r\n{SqlError.ReadHoToolsLastSql()}";
+                    MessageBox.Show(sqlText, @"SQL executed! Ctrl+C to copy it to clipboard (ignore beep).");
                 }
 
             }
@@ -292,10 +292,10 @@ namespace EAAddinFramework.Utils
         /// </summary>
         /// <param name="sqlQuery"></param>
         /// <returns>XmlDocuement</returns>
-        public XmlDocument SQLQuery(string sqlQuery)
+        public XmlDocument SqlQuery(string sqlQuery)
         {
             var results = new XmlDocument();
-            results.LoadXml(SQLQueryNative(sqlQuery));
+            results.LoadXml(SqlQueryNative(sqlQuery));
             return results;
         }
         /// <summary>
@@ -309,62 +309,62 @@ namespace EAAddinFramework.Utils
         public string SqlQueryWithException(string query)
         {
             // delete an existing error file
-            SqlError.deleteEaSqlError();
+            SqlError.DeleteEaSqlError();
             try
             {
                 // is query or a changing SQL?
                 //if (Regex.IsMatch(query, "^\s*select ", RegexOptions.IgnoreCase | RegexOptions.Multiline)) {
                     // run the query (select * .. from
-                string xml = SQLQueryNative(query);
-                if (!SqlError.existsEaSqlErrorFile())
+                string xml = SqlQueryNative(query);
+                if (!SqlError.ExistsEaSqlErrorFile())
                     {
                         return xml;
                     }
                 else
                 {
-                    MessageBox.Show(SqlError.readEaSqlError(), "Error SQL (CTRL+C to copy it!!)");
+                    MessageBox.Show(SqlError.ReadEaSqlError(), @"Error SQL (CTRL+C to copy it!!)");
                     return null;
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"SQL:\r\n{query}\r\n{ex.Message}", "Error SQL");
+                MessageBox.Show($"SQL:\r\n{query}\r\n{ex.Message}", @"Error SQL");
                 return null;
             }
         }
+
         /// <summary>
         /// Run EA SQL Query with Exception handling
         /// <para/>return null if error, it also displays the error message in MessageBox
         /// <para/>return "" if nothing found
         /// <para/>return xml string if ok
         /// </summary>
-        /// <param name="query"></param>
         /// <returns>string</returns>
         public bool SqlExecuteWithException(string sql)
         {
             // delete an existing error file
-            SqlError.deleteEaSqlError();
+            SqlError.DeleteEaSqlError();
             try
             {
                 // run the query (select * .. from
-                sql = formatSQL(sql);
+                sql = FormatSql(sql);
                 // store final/last query which is executed
-                SqlError.writeHoToolsLastSql(sql);
+                SqlError.WriteHoToolsLastSql(sql);
 
                 Repository.Execute(sql);
-                if (!SqlError.existsEaSqlErrorFile())
+                if (!SqlError.ExistsEaSqlErrorFile())
                 {
                     return true;
                 }
                 else
                 {
-                    MessageBox.Show(SqlError.readEaSqlError(), "Error SQL (CTRL+C to copy it!!)");
+                    MessageBox.Show(SqlError.ReadEaSqlError(), @"Error SQL (CTRL+C to copy it!!)");
                     return false;
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"SQL:\r\n{sql}\r\n{ex.Message}", "Error SQL");
+                MessageBox.Show($"SQL:\r\n{sql}\r\n{ex.Message}", @"Error SQL");
                 return false;
             }
 
@@ -382,29 +382,29 @@ namespace EAAddinFramework.Utils
         /// </summary>
         /// <param name="sqlQuery"></param>
         /// <returns>string</returns>
-        public string SQLQueryNative(string sqlQuery)
+        public string SqlQueryNative(string sqlQuery)
         {
-            sqlQuery = formatSQL(sqlQuery);
+            sqlQuery = FormatSql(sqlQuery);
             // store final/last query which is executed
-            SqlError.writeHoToolsLastSql(sqlQuery);
+            SqlError.WriteHoToolsLastSql(sqlQuery);
 
             return Repository.SQLQuery(sqlQuery);// no error, only no result rows
         }
+
         /// <summary>
         /// EA Execute SQL:
         /// - formatSQL
         /// - runSQL
         /// - return SQL string
         /// </summary>
-        /// <param name="sqlQuery"></param>
         /// <returns>false=error</returns>
-        public bool SQLExecuteNative(string sqlExecute)
+        public bool SqlExecuteNative(string sqlExecute)
         {
-            sqlExecute = formatSQL(sqlExecute);
+            sqlExecute = FormatSql(sqlExecute);
             // store final/last query which is executed
-            SqlError.writeHoToolsLastSql(sqlExecute);
+            SqlError.WriteHoToolsLastSql(sqlExecute);
 
-            return executeSQL(sqlExecute);// no error, only no result rows
+            return ExecuteSql(sqlExecute);// no error, only no result rows
         }
 
         /// <summary>
@@ -414,7 +414,7 @@ namespace EAAddinFramework.Utils
         /// <returns>string</returns>
         public string MakeEaXmlOutput(string x)
         {
-            if (x == "" || x == null ) return emptyQueryResult();
+            if (x == "" || x == null ) return EmptyQueryResult();
             return MakeEaXmlOutput(XDocument.Parse(x));
         }
 
@@ -478,10 +478,10 @@ namespace EAAddinFramework.Utils
 
                     )
                 )).ToString();
-            } catch (Exception e)
+            } catch (Exception )
             {
                 // empty query result
-                return emptyQueryResult();
+                return EmptyQueryResult();
 
             }
         }
@@ -490,7 +490,7 @@ namespace EAAddinFramework.Utils
         /// Empty Query Result
         /// </summary>
         /// <returns></returns>
-        static string emptyQueryResult()
+        static string EmptyQueryResult()
         {
             return new XDocument(
                 new XElement("ReportViewData",
@@ -558,7 +558,6 @@ namespace EAAddinFramework.Utils
                            row.Name == "CLASSTYPE"     // 'Class','Action','Diagram', 
                      select row;
             string guid = "";
-            string sqlObjectType = "";
             foreach (var field in fields)
             {
 
@@ -569,21 +568,20 @@ namespace EAAddinFramework.Utils
                         continue;
                     case "CLASSTYPE":
                         // valid class type
-                        sqlObjectType = field.Value;
+                        var sqlObjectType = field.Value;
                         EA.ObjectType eaObjectType;
                         object eaObject = Repository.GetEaObject(sqlObjectType, guid, out eaObjectType);
                         if (eaObject == null)
                         {
-                            MessageBox.Show($"CLASSTYPE='{sqlObjectType}' GUID='{guid}' ObjectType={eaObjectType}", "Couldn't find EA item, Break!!!");
+                            MessageBox.Show($"CLASSTYPE='{sqlObjectType}' GUID='{guid}' ObjectType={eaObjectType}", @"Couldn't find EA item, Break!!!");
                             return null;
                         }
                         eaItemList.Add(new EaItem(guid, sqlObjectType, eaObjectType, eaObject));
                         guid = "";
-                        sqlObjectType = "";
                         continue;
 
                     default:
-                        MessageBox.Show($"Column'{field.Value}' not expected! (expected CLASSGUID or CLASSTYPE)", "Invalid SQL results, column not expected");
+                        MessageBox.Show($"Column'{field.Value}' not expected! (expected CLASSGUID or CLASSTYPE)", @"Invalid SQL results, column not expected");
                         return null;
                 }
             }
@@ -600,12 +598,12 @@ namespace EAAddinFramework.Utils
         /// </summary>
         /// <param name="sqlQuery">the original query</param>
         /// <returns>the fixed query</returns>
-        private string formatSQL(string sqlQuery)
+        private string FormatSql(string sqlQuery)
         {
-            sqlQuery = replaceSQLWildCards(sqlQuery);
-            sqlQuery = formatSQLTop(sqlQuery);
-            sqlQuery = formatSQLFunctions(sqlQuery);
-            sqlQuery = formatSQLDBspecific(sqlQuery); // DB specifics like #DB=ORACLE#.... #DB=ORACLE#
+            sqlQuery = ReplaceSqlWildCards(sqlQuery);
+            sqlQuery = FormatSqlTop(sqlQuery);
+            sqlQuery = FormatSqlFunctions(sqlQuery);
+            sqlQuery = FormatSqldBspecific(sqlQuery); // DB specifics like #DB=ORACLE#.... #DB=ORACLE#
             return sqlQuery;
         }
 
@@ -613,28 +611,28 @@ namespace EAAddinFramework.Utils
         /// Operation to translate SQL functions in there equivalents in different sql syntaxes
         /// supported functions:
         /// 
-        /// - lcase -> lower in T-SQL (SQLSVR and ASA)
+        /// - lcase -> lower in T-SQL (SqlSvr and Asa)
         /// </summary>
         /// <param name="sqlQuery">the query to format</param>
         /// <returns>a query with translated functions</returns>
-        private string formatSQLFunctions(string sqlQuery)
+        private string FormatSqlFunctions(string sqlQuery)
         {
-            string formattedSQL = sqlQuery;
-            //lcase -> lower in T-SQL (SQLSVR and ASA and Oracle and FireBird)
-            if (this.repositoryType == RepositoryType.SQLSVR ||
-                this.repositoryType == RepositoryType.ASA ||
-                   this.repositoryType == RepositoryType.ORACLE ||
-                   this.repositoryType == RepositoryType.FIREBIRD ||
-                   this.repositoryType == RepositoryType.POSTGRES)
+            string formattedSql = sqlQuery;
+            //lcase -> lower in T-SQL (SqlSvr and Asa and Oracle and FireBird)
+            if (repositoryType == RepositoryType.SqlSvr ||
+                repositoryType == RepositoryType.Asa ||
+                repositoryType == RepositoryType.Oracle ||
+                repositoryType == RepositoryType.Firebird ||
+                repositoryType == RepositoryType.Postgres)
             {
-                formattedSQL = formattedSQL.Replace("lcase(", "lower(");
+                formattedSql = formattedSql.Replace("lcase(", "lower(");
             }
-            return formattedSQL;
+            return formattedSql;
         }
         //"SELECT TOP N" is used on
-        // SQLSVR
-        // ADOJET
-        // ASA
+        // SqlSvr
+        // AdoJet
+        // Asa
         // OPENEDGE
         // ACCESS2007
         // 
@@ -642,7 +640,7 @@ namespace EAAddinFramework.Utils
         // ORACLE
         // 
         // "LIMIT N" is used on
-        // MYSQL
+        // MySql
         // POSTGRES
         // <summary>
         // limiting the number of results in an sql query is different on different platforms.
@@ -652,7 +650,7 @@ namespace EAAddinFramework.Utils
         /// </summary>
         /// <param name="sqlQuery">the sql query to format</param>
         /// <returns>the formatted sql query </returns>
-        string formatSQLTop(string sqlQuery)
+        string FormatSqlTop(string sqlQuery)
         {
             string formattedQuery = sqlQuery;
             string selectTop = "select top ";
@@ -665,9 +663,9 @@ namespace EAAddinFramework.Utils
                 {
                     string N = sqlQuery.ToLower().Substring(beginN, endN - beginN);
                     string selectTopN = sqlQuery.Substring(begintop, endN);
-                    switch (this.repositoryType)
+                    switch (repositoryType)
                     {
-                        case RepositoryType.ORACLE:
+                        case RepositoryType.Oracle:
                             // remove "top N" clause
                             formattedQuery = formattedQuery.Replace(selectTopN, "select ");
                             // find where clause
@@ -677,15 +675,15 @@ namespace EAAddinFramework.Utils
                             // add the rowcount condition
                             formattedQuery = formattedQuery.Insert(beginWhere + whereString.Length, rowcountCondition);
                             break;
-                        case RepositoryType.MYSQL:
-                        case RepositoryType.POSTGRES:
+                        case RepositoryType.MySql:
+                        case RepositoryType.Postgres:
                             // remove "top N" clause
                             formattedQuery = formattedQuery.Replace(selectTopN, "select ");
                             string limitString = " limit " + N;
                             // add limit clause
                             formattedQuery = formattedQuery + limitString;
                             break;
-                        case RepositoryType.FIREBIRD:
+                        case RepositoryType.Firebird:
                             // in Firebird top becomes first
                             formattedQuery = formattedQuery.Replace(selectTopN, selectTopN.Replace("top", "first"));
                             break;
@@ -699,28 +697,28 @@ namespace EAAddinFramework.Utils
         /// </summary>
         /// <param name="sql"></param>
         /// <returns></returns>
-        //#DB=ASA#                DB specif SQL for ASA
+        //#DB=Asa#                DB specif SQL for Asa
         //#DB=FIREBIRD#           DB specif SQL for FIREBIRD
         //#DB=JET#                DB specif SQL for JET
-        //#DB=MYSQL#              DB specif SQL for My SQL
+        //#DB=MySql#              DB specif SQL for My SQL
         //#DB=ACCESS2007#         DB specif SQL for ACCESS2007
         //#DB=ORACLE#             DB specif SQL for Oracle
         //#DB=POSTGRES#           DB specif SQL for POSTGRES
-        //#DB=SQLSVR#             DB specif SQL for SQL Server
-        string formatSQLDBspecific(string sql) {
+        //#DB=SqlSvr#             DB specif SQL for SQL Server
+        string FormatSqldBspecific(string sql) {
             // available DBs
             var dbs = new Dictionary<RepositoryType, string>()
             {
-                { RepositoryType.ACCESS2007, "#DB=ACCESS2007#" },
-                { RepositoryType.ASA, "#DB=ASA#" },
-                { RepositoryType.FIREBIRD, "#DB=FIREBIRD#" },
-                { RepositoryType.ADOJET, "#DB=JET#" },
-                { RepositoryType.MYSQL, "#DB=MYSQL#" },
-                { RepositoryType.ORACLE, "#DB=ORACLE#" },
-                { RepositoryType.POSTGRES, "#DB=POSTGRES#" },
-                { RepositoryType.SQLSVR, "#DB=SQLSVR#" },
+                { RepositoryType.Access2007, "#DB=ACCESS2007#" },
+                { RepositoryType.Asa, "#DB=Asa#" },
+                { RepositoryType.Firebird, "#DB=FIREBIRD#" },
+                { RepositoryType.AdoJet, "#DB=JET#" },
+                { RepositoryType.MySql, "#DB=MySql#" },
+                { RepositoryType.Oracle, "#DB=ORACLE#" },
+                { RepositoryType.Postgres, "#DB=POSTGRES#" },
+                { RepositoryType.SqlSvr, "#DB=SqlSvr#" },
             };
-            RepositoryType dbType = getRepositoryType();
+            RepositoryType dbType = GetRepositoryType();
             string s = sql;
             foreach (var curDb in dbs )
             {
@@ -732,7 +730,7 @@ namespace EAAddinFramework.Utils
                 
             }
             // delete remaining DB identifying string
-            s = Regex.Replace(s, @"#DB=(ASA|FIREBIRD|JET|MYSQL|ORACLE|ACCESS2007|POSTGRES|SQLSVR)#", "", RegexOptions.Multiline | RegexOptions.IgnoreCase);
+            s = Regex.Replace(s, @"#DB=(Asa|FIREBIRD|JET|MySql|ORACLE|ACCESS2007|POSTGRES|SqlSvr)#", "", RegexOptions.Multiline | RegexOptions.IgnoreCase);
             
             // delete multiple empty lines
             for (int i = 0;  i < 4;i++)
@@ -748,9 +746,9 @@ namespace EAAddinFramework.Utils
         /// </summary>
         /// <param name="sqlQuery">the sql string to edit</param>
         /// <returns>the same sql query, but with its wild cards replaced according to the required syntax</returns>
-        private string replaceSQLWildCards(string sqlQuery)
+       string ReplaceSqlWildCards(string sqlQuery)
         {
-            bool msAccess = this.repositoryType == RepositoryType.ADOJET;
+            bool msAccess = repositoryType == RepositoryType.AdoJet;
             int beginLike = sqlQuery.IndexOf("like", StringComparison.InvariantCultureIgnoreCase);
             if (beginLike > 1)
             {
@@ -778,7 +776,7 @@ namespace EAAddinFramework.Utils
                         string next = string.Empty;
                         if (endString < sqlQuery.Length)
                         {
-                            next = replaceSQLWildCards(sqlQuery.Substring(endString + 1));
+                            next = ReplaceSqlWildCards(sqlQuery.Substring(endString + 1));
                         }
                         sqlQuery = sqlQuery.Substring(0, beginString + 1) + likeString + next;
 
@@ -790,16 +788,16 @@ namespace EAAddinFramework.Utils
         /// <summary>
         /// returns true if security is enabled in this model
         /// </summary>
-        public bool isSecurityEnabled
+        public bool IsSecurityEnabled
         {
             get
             {
                 try
                 {
-                    this.Repository.GetCurrentLoginUser();
+                    Repository.GetCurrentLoginUser();
                     return true;
                 }
-                catch (System.Runtime.InteropServices.COMException e)
+                catch (COMException e)
                 {
                     if (e.Message == "Security not enabled")
                     {
@@ -815,13 +813,13 @@ namespace EAAddinFramework.Utils
         /// <summary>
         /// The working sets defined in this model
         /// </summary>
-        public List<WorkingSet> workingSets
+        public List<WorkingSet> WorkingSets
         {
             get
             {
                 var workingSetList = new List<WorkingSet>();
                 string getWorkingSets = "select d.docid, d.DocName,d.Author from t_document d where d.DocType = 'WorkItem' order by d.Author, d.DocName";
-                XmlDocument workingSets = this.SQLQuery(getWorkingSets);
+                XmlDocument workingSets = SqlQuery(getWorkingSets);
                 foreach (XmlNode workingSetNode in workingSets.SelectNodes("//Row"))
                 {
                     string name = string.Empty;
@@ -842,7 +840,7 @@ namespace EAAddinFramework.Utils
                                 break;
                         }
                     }
-                    User owner = this.users.Find(u => u.fullName.Equals(ownerFullName, StringComparison.InvariantCultureIgnoreCase));
+                    User owner = Users.Find(u => u.fullName.Equals(ownerFullName, StringComparison.InvariantCultureIgnoreCase));
                     workingSetList.Add(new WorkingSet(this, id, owner, name));
                 }
                 return workingSetList;
@@ -851,16 +849,16 @@ namespace EAAddinFramework.Utils
         /// <summary>
         /// all users defined in this model
         /// </summary>
-        public List<User> users
+        public List<User> Users
         {
             get
             {
 
                 var userList = new List<User>();
-                if (this.isSecurityEnabled)
+                if (IsSecurityEnabled)
                 {
                     string getUsers = "select u.UserLogin, u.FirstName, u.Surname from t_secuser u";
-                    XmlDocument users = this.SQLQuery(getUsers);
+                    XmlDocument users = SqlQuery(getUsers);
                     foreach (XmlNode userNode in users.SelectNodes("//Row"))
                     {
                         string login = string.Empty;
@@ -888,8 +886,8 @@ namespace EAAddinFramework.Utils
                 {
                     //security not enabled. List of all users is the list of all authors mentioned in the t_object table.
                     string getUsers = "select distinct o.author from t_object o";
-                    XmlDocument users = this.SQLQuery(getUsers);
-                    foreach (XmlNode authorNode in users.SelectNodes(formatXPath("//author")))
+                    XmlDocument users = SqlQuery(getUsers);
+                    foreach (XmlNode authorNode in users.SelectNodes(FormatXPath("//author")))
                     {
                         string login = authorNode.InnerText;
                         string firstName = string.Empty;

@@ -171,7 +171,7 @@ namespace EAAddinFramework.Utils
 		/// </summary>
 		private static void loadLocalScripts()
 		{
-			string scriptsDirectory = Path.GetDirectoryName(Model.applicationFullPath) + "\\Scripts";
+			string scriptsDirectory = Path.GetDirectoryName(Model.ApplicationFullPath) + "\\Scripts";
 			string[] scriptFiles = Directory.GetFiles(scriptsDirectory,"*.*",SearchOption.AllDirectories);
 			foreach(string scriptfile in scriptFiles)
 			{
@@ -256,7 +256,7 @@ namespace EAAddinFramework.Utils
 		/// </summary>
 		static void loadLocalMDGScripts()
 		{
-			string mdgDirectory = Path.GetDirectoryName(Model.applicationFullPath) + "\\MDGTechnologies";
+			string mdgDirectory = Path.GetDirectoryName(Model.ApplicationFullPath) + "\\MDGTechnologies";
 			loadMDGScriptsFromFolder(mdgDirectory);
 		}
 		/// <summary>
@@ -418,7 +418,7 @@ namespace EAAddinFramework.Utils
 		{			
 			if (model != null)
 			{
-			 XmlDocument xmlScripts = model.SQLQuery(@"select s.ScriptID, s.Notes, s.Script,ps.Script as SCRIPTGROUP, ps.Notes as GROUPNOTES from t_script s
+			 XmlDocument xmlScripts = model.SqlQuery(@"select s.ScriptID, s.Notes, s.Script,ps.Script as SCRIPTGROUP, ps.Notes as GROUPNOTES from t_script s
 													   inner join t_script ps on s.ScriptAuthor = ps.ScriptName
 													   where s.Script like '%EA-Matic%'");
 			 //check the hash before continuing
@@ -440,7 +440,7 @@ namespace EAAddinFramework.Utils
               foreach (XmlNode scriptNode in scriptNodes)
               {
               	//get the <notes> node. If it contains "Group Type=" then it is a group. Else we need to find "Language=" 
-              	XmlNode notesNode = scriptNode.SelectSingleNode(model.formatXPath("Notes"));
+              	XmlNode notesNode = scriptNode.SelectSingleNode(model.FormatXPath("Notes"));
               	if (notesNode.InnerText.Contains(scriptLanguageIndicator))
           	    {
           	    	//we have an actual script.
@@ -449,13 +449,13 @@ namespace EAAddinFramework.Utils
 					//now figure out the language
 					string language = getValueByName(notesNode.InnerText, scriptLanguageIndicator);
 					//get the ID
-					XmlNode IDNode = scriptNode.SelectSingleNode(model.formatXPath("ScriptID"));
+					XmlNode IDNode = scriptNode.SelectSingleNode(model.FormatXPath("ScriptID"));
 					string ScriptID = IDNode.InnerText;
 					//get the group
-					XmlNode groupNode = scriptNode.SelectSingleNode(model.formatXPath("SCRIPTGROUP"));
+					XmlNode groupNode = scriptNode.SelectSingleNode(model.FormatXPath("SCRIPTGROUP"));
 					string groupName = groupNode.InnerText;
 					//then get the code
-					XmlNode codeNode = scriptNode.SelectSingleNode(model.formatXPath("Script"));	
+					XmlNode codeNode = scriptNode.SelectSingleNode(model.FormatXPath("Script"));	
 					if (codeNode != null && language != string.Empty)
 					{
 						//if the script is still empty EA returns NULL
@@ -551,8 +551,8 @@ namespace EAAddinFramework.Utils
 		public void addCode(string functionCode)
 		{
 			this._code += functionCode;
-			string SQLUpdate = "update t_script set script = '"+ this.model.escapeSQLString(this._code) +"' where ScriptID = " + this.scriptID ;
-			this.model.executeSQL(SQLUpdate);
+			string SQLUpdate = "update t_script set script = '"+ this.model.EscapeSqlString(this._code) +"' where ScriptID = " + this.scriptID ;
+			this.model.ExecuteSql(SQLUpdate);
 		}
 
 	}

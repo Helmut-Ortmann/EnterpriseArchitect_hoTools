@@ -57,13 +57,13 @@ namespace hoTools
         // static due to global key definitions
         static EA.Repository Repository ;
         static AddinSettings AddinSettings;
-        static AddinControlGUI AddinControlGUI;
+        static AddinControlGui AddinControlGUI;
         static FindAndReplaceGUI FindAndReplaceGUI;
         static QueryGui ScriptGUI;
         static QueryGui QueryGUI;
 
         // ActiveX Controls
-        AddinControlGUI _MyControlGUI;
+        AddinControlGui _MyControlGUI;
         FindAndReplaceGUI _FindAndReplaceGUI;
         QueryGui _ScriptGUI;
         QueryGui _QueryGUI;
@@ -194,8 +194,8 @@ namespace hoTools
                 // global hot keys
                 var hotkeys = new List<Hotkey>();
 
-                Dictionary<string, Keys> keys = GlobalKeysConfig.getKeys();
-                Dictionary<string, Modifiers> modifiers = GlobalKeysConfig.getModifiers();
+                Dictionary<string, Keys> keys = GlobalKeysConfig.GetKeys();
+                Dictionary<string, Modifiers> modifiers = GlobalKeysConfig.GetModifiers();
                 Keys key;
                 Modifiers modifier1;
                 Modifiers modifier2;
@@ -236,7 +236,7 @@ namespace hoTools
                 for (int i = 0; i < AddinSettings.GlobalShortcutsService.Count; i = i + 1)
                 {
                     GlobalKeysConfig.GlobalKeysServiceConfig service = AddinSettings.GlobalShortcutsService[i];
-                    if (service.Key != "None" & service.GUID != "")
+                    if (service.Key != "None" & service.Guid != "")
                     {
                         keys.TryGetValue(service.Key, out key);
                         modifiers.TryGetValue(service.Modifier1, out modifier1);
@@ -437,7 +437,7 @@ namespace hoTools
                 //     (logInUser.Equals(""))
                 //    ) logInUserRights = UserRights.ADMIN;
             }
-            Favorite.installSearches(_repository); // install searches
+            Favorite.InstallSearches(_repository); // install searches
             return "a string";
         }
         #endregion
@@ -799,7 +799,7 @@ namespace hoTools
                         // test multiple selection
 
                         // Create Activity
-                        Appl.createInteractionForOperation(Repository, m);
+                        Appl.CreateInteractionForOperation(Repository, m);
 
                     }
                     if (oType.Equals(EA.ObjectType.otElement))
@@ -809,7 +809,7 @@ namespace hoTools
                         foreach (EA.Method m in cls.Methods)
                         {
                             // Create Activity
-                            Appl.createInteractionForOperation(Repository, m);
+                            Appl.CreateInteractionForOperation(Repository, m);
 
                         }
                     }
@@ -825,7 +825,7 @@ namespace hoTools
                         // test multiple selection
 
                         // Create State Machine
-                        Appl.createStateMachineForOperation(Repository, m);
+                        Appl.CreateStateMachineForOperation(Repository, m);
 
                     }
                    break;
@@ -842,24 +842,24 @@ namespace hoTools
                     {
                         var a = (EA.Attribute)Repository.GetContextObject();
 
-                        Util.updateAttribute(Repository, a);
+                        Util.UpdateAttribute(Repository, a);
                     }
 
                     if (oType.Equals(EA.ObjectType.otMethod))
                     {
                         var m = (EA.Method)Repository.GetContextObject();
 
-                        Util.updateMethod(Repository, m);
+                        Util.UpdateMethod(Repository, m);
                     }
                     if (oType.Equals(EA.ObjectType.otElement))
                     {
                         el = (EA.Element)Repository.GetContextObject();
-                        Util.updateClass(Repository, el);
+                        Util.UpdateClass(Repository, el);
                     }
                     if (oType.Equals(EA.ObjectType.otPackage))
                     {
                         var pkg = (EA.Package)Repository.GetContextObject();
-                        Util.updatePackage(Repository, pkg);
+                        Util.UpdatePackage(Repository, pkg);
                     }
                     break;
 
@@ -1047,8 +1047,8 @@ namespace hoTools
                     // LineStyle and more
                     if (!(_AddinSettings.LineStyleAndMoreWindow == AddinSettings.ShowInWindow.Disabled))
                     {
-                    AddinControlGUI = addAddinControl<AddinControlGUI>(_AddinSettings.ProductName,
-                        AddinControlGUI.PROGID, null,
+                    AddinControlGUI = addAddinControl<AddinControlGui>(_AddinSettings.ProductName,
+                        AddinControlGui.Progid, null,
                         AddinSettings.ShowInWindow.AddinWindow);
                         _MyControlGUI = AddinControlGUI; // static + instance
                     }
@@ -1174,7 +1174,7 @@ namespace hoTools
                 if (con.Type.Equals("StateFlow"))
                 {
 
-                    EA.Method m = Util.getOperationFromConnector(rep, con);
+                    EA.Method m = Util.GetOperationFromConnector(rep, con);
                     if (m != null)
                     {
                         if (showBehavior.Equals(displayMode.Behavior))
@@ -1289,7 +1289,7 @@ namespace hoTools
         /// <param name="showBehavior"></param>
         static void showMethodFromAction(EA.Repository rep, EA.Element el, displayMode showBehavior)
         {
-            EA.Method method = Util.getOperationFromAction(rep, el);
+            EA.Method method = Util.GetOperationFromAction(rep, el);
             if (method != null)
             {
                 if (showBehavior.Equals(displayMode.Behavior))
@@ -1306,7 +1306,7 @@ namespace hoTools
         #region locateOperationFromBehavior
         static void locateOperationFromBehavior(EA.Repository rep, EA.Element el, displayMode showBehavior)
         {
-            EA.Method method = Util.getOperationFromBrehavior(rep, el);
+            EA.Method method = Util.GetOperationFromBrehavior(rep, el);
             if (method != null)
             {
                 if (showBehavior.Equals(displayMode.Behavior))

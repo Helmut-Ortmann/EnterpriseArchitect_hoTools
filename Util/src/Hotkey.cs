@@ -12,7 +12,7 @@ namespace GlobalHotkeys
     /// </summary>
     public class Hotkey : IDisposable
     {
-        public const int WM_HOTKEY_MSG_ID = 0x0312;
+        public const int WmHotkeyMsgId = 0x0312;
         Keys Key { get; }
         Modifiers Modifiers { get; }
         public HotkeyHandler Handler { get; }

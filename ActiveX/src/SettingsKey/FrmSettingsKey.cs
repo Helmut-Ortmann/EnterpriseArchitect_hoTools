@@ -16,7 +16,7 @@ namespace hoTools.Settings.Key
     public partial class FrmSettingsKey : Form
     {   
         AddinSettings _settings;
-        AddinControlGUI _addinControl ;
+        AddinControlGui _addinControl ;
 
         #region Constructor
         /// <summary>
@@ -24,7 +24,7 @@ namespace hoTools.Settings.Key
         /// </summary>
         /// <param name="settings">Object with settings</param>
         /// <param name="addinControl">Object with Control</param>
-        public FrmSettingsKey(AddinSettings settings, AddinControlGUI addinControl)
+        public FrmSettingsKey(AddinSettings settings, AddinControlGui addinControl)
         {
             InitializeComponent();
 
@@ -70,34 +70,34 @@ namespace hoTools.Settings.Key
             cmbGlobalKey1Service.DataSource = l_services11;
             cmbGlobalKey1Service.DisplayMember = "Description";
             cmbGlobalKey1Service.ValueMember = "GUID";
-            cmbGlobalKey1Service.SelectedValue = _settings.GlobalShortcutsService[0].GUID;
+            cmbGlobalKey1Service.SelectedValue = _settings.GlobalShortcutsService[0].Guid;
             //cmbGlobalKey1Service.Text = _settings.shortcutsServices[0].Help;
 
 
             cmbGlobalKey2Service.DataSource = l_services12;
             cmbGlobalKey2Service.DisplayMember = "Description";
             cmbGlobalKey2Service.ValueMember = "GUID";
-            cmbGlobalKey2Service.SelectedValue = _settings.GlobalShortcutsService[1].GUID;
+            cmbGlobalKey2Service.SelectedValue = _settings.GlobalShortcutsService[1].Guid;
             //cmbGlobalKey2Service.Text = _settings.shortcutsServices[1].Help;
 
             cmbGlobalKey3Service.DataSource = l_services13;
             cmbGlobalKey3Service.DisplayMember = "Description";
             cmbGlobalKey3Service.ValueMember = "GUID";
-            cmbGlobalKey3Service.SelectedValue = _settings.GlobalShortcutsService[2].GUID;
+            cmbGlobalKey3Service.SelectedValue = _settings.GlobalShortcutsService[2].Guid;
             //cmbGlobalKey3Service.Text = _settings.shortcutsServices[2].Help;
 
 
             cmbGlobalKey4Service.DataSource = l_services14;
             cmbGlobalKey4Service.DisplayMember = "Description";
             cmbGlobalKey4Service.ValueMember = "GUID";
-            cmbGlobalKey4Service.SelectedValue = _settings.GlobalShortcutsService[3].GUID;
+            cmbGlobalKey4Service.SelectedValue = _settings.GlobalShortcutsService[3].Guid;
             //cmbGlobalKey4Service.Text = _settings.shortcutsServices[3].Help;
 
 
             cmbGlobalKey5Service.DataSource = l_services15;
             cmbGlobalKey5Service.DisplayMember = "Description";
             cmbGlobalKey5Service.ValueMember = "GUID";
-            cmbGlobalKey5Service.SelectedValue = _settings.GlobalShortcutsService[4].GUID;
+            cmbGlobalKey5Service.SelectedValue = _settings.GlobalShortcutsService[4].Guid;
             //cmbGlobalKey5Service.Text = _settings.shortcutsServices[4].Help;
 
             cmbGlobalKey1Tooltip.Text = _settings.GlobalShortcutsService[0].Tooltip;
@@ -107,8 +107,8 @@ namespace hoTools.Settings.Key
             cmbGlobalKey5Tooltip.Text = _settings.GlobalShortcutsService[4].Tooltip;
 
             Dictionary<string, Keys> l_GlobalKeys1;
-            Dictionary<string, Keys> l_GlobalKeys = GlobalKeysConfig.getKeys();
-            Dictionary<string, Modifiers> l_GlobalModifiers = GlobalKeysConfig.getModifiers();
+            Dictionary<string, Keys> l_GlobalKeys = GlobalKeysConfig.GetKeys();
+            Dictionary<string, Modifiers> l_GlobalModifiers = GlobalKeysConfig.GetModifiers();
 
             // Hot key services
             cmbGlobalKeyService1Key.DataSource = new BindingSource(l_GlobalKeys, null);
@@ -411,7 +411,7 @@ namespace hoTools.Settings.Key
             _settings.GlobalShortcutsService[0].Modifier2 = cmbGlobalKeyService1Mod2.SelectedValue.ToString();
             _settings.GlobalShortcutsService[0].Modifier3 = cmbGlobalKeyService1Mod3.SelectedValue.ToString();
             _settings.GlobalShortcutsService[0].Modifier4 = cmbGlobalKeyService1Mod4.SelectedValue.ToString();
-            _settings.GlobalShortcutsService[0].GUID = cmbGlobalKey1Service.SelectedValue.ToString();
+            _settings.GlobalShortcutsService[0].Guid = cmbGlobalKey1Service.SelectedValue.ToString();
             _settings.GlobalShortcutsService[0].Description = cmbGlobalKey1Tooltip.Text;
 
             _settings.GlobalShortcutsService[1].Key = cmbGlobalKeyService2Key.SelectedValue.ToString();
@@ -419,7 +419,7 @@ namespace hoTools.Settings.Key
             _settings.GlobalShortcutsService[1].Modifier2 = cmbGlobalKeyService2Mod2.SelectedValue.ToString();
             _settings.GlobalShortcutsService[1].Modifier3 = cmbGlobalKeyService2Mod3.SelectedValue.ToString();
             _settings.GlobalShortcutsService[1].Modifier4 = cmbGlobalKeyService2Mod4.SelectedValue.ToString();
-            _settings.GlobalShortcutsService[1].GUID = cmbGlobalKey2Service.SelectedValue.ToString();
+            _settings.GlobalShortcutsService[1].Guid = cmbGlobalKey2Service.SelectedValue.ToString();
             _settings.GlobalShortcutsService[1].Description = cmbGlobalKey2Tooltip.Text;
 
             _settings.GlobalShortcutsService[2].Key = cmbGlobalKeyService3Key.SelectedValue.ToString();
@@ -427,7 +427,7 @@ namespace hoTools.Settings.Key
             _settings.GlobalShortcutsService[2].Modifier2 = cmbGlobalKeyService3Mod2.SelectedValue.ToString();
             _settings.GlobalShortcutsService[2].Modifier3 = cmbGlobalKeyService3Mod3.SelectedValue.ToString();
             _settings.GlobalShortcutsService[2].Modifier4 = cmbGlobalKeyService3Mod4.SelectedValue.ToString();
-            _settings.GlobalShortcutsService[2].GUID = cmbGlobalKey3Service.SelectedValue.ToString();
+            _settings.GlobalShortcutsService[2].Guid = cmbGlobalKey3Service.SelectedValue.ToString();
             _settings.GlobalShortcutsService[2].Description = cmbGlobalKey3Tooltip.Text;
 
             _settings.GlobalShortcutsService[3].Key = cmbGlobalKeyService4Key.SelectedValue.ToString();
@@ -435,7 +435,7 @@ namespace hoTools.Settings.Key
             _settings.GlobalShortcutsService[3].Modifier2 = cmbGlobalKeyService4Mod2.SelectedValue.ToString();
             _settings.GlobalShortcutsService[3].Modifier3 = cmbGlobalKeyService4Mod3.SelectedValue.ToString();
             _settings.GlobalShortcutsService[3].Modifier4 = cmbGlobalKeyService4Mod4.SelectedValue.ToString();
-            _settings.GlobalShortcutsService[3].GUID = cmbGlobalKey4Service.SelectedValue.ToString();
+            _settings.GlobalShortcutsService[3].Guid = cmbGlobalKey4Service.SelectedValue.ToString();
             _settings.GlobalShortcutsService[3].Description = cmbGlobalKey4Tooltip.Text;
 
             _settings.GlobalShortcutsService[4].Key = cmbGlobalKeyService5Key.SelectedValue.ToString();
@@ -443,7 +443,7 @@ namespace hoTools.Settings.Key
             _settings.GlobalShortcutsService[4].Modifier2 = cmbGlobalKeyService5Mod2.SelectedValue.ToString();
             _settings.GlobalShortcutsService[4].Modifier3 = cmbGlobalKeyService5Mod3.SelectedValue.ToString();
             _settings.GlobalShortcutsService[4].Modifier4 = cmbGlobalKeyService5Mod4.SelectedValue.ToString();
-            _settings.GlobalShortcutsService[4].GUID = cmbGlobalKey5Service.SelectedValue.ToString();
+            _settings.GlobalShortcutsService[4].Guid = cmbGlobalKey5Service.SelectedValue.ToString();
             _settings.GlobalShortcutsService[4].Description = cmbGlobalKey5Tooltip.Text;
             #endregion
 
@@ -490,7 +490,7 @@ namespace hoTools.Settings.Key
             _settings.GlobalShortcutsSearch[4].SearchTerm = cmbGlobalKeySearch5SearchTerm.Text;
             #endregion
 
-            _addinControl.parameterizeMenusAndButtons(); // hide / unhide Menus & Buttons
+            _addinControl.ParameterizeMenusAndButtons(); // hide / unhide Menus & Buttons
             _addinControl.ParameterizeSearchButton(); // sets the shortcuts
             _addinControl.ParameterizeServiceButton(); // sets the shortcuts
 

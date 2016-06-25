@@ -7,14 +7,14 @@ namespace hoTools.Settings
     public partial class FrmSettingsGeneral : Form
     {
         AddinSettings _settings;
-        AddinControlGUI _addinControl;
+        AddinControlGui _addinControl;
 
         #region Constructor
         /// <summary>
         /// Constructor with
         /// </summary>
         /// <param name="settings">Object with settings</param>
-        public FrmSettingsGeneral(AddinSettings settings, AddinControlGUI addinControl)
+        public FrmSettingsGeneral(AddinSettings settings, AddinControlGui addinControl)
         {
             InitializeComponent();
             _settings = settings;
@@ -128,7 +128,7 @@ namespace hoTools.Settings
 
             // save setting
             _settings.Save();
-            _addinControl.initializeSettings(); // update settings
+            _addinControl.InitializeSettings(); // update settings
             Close();
         }
 

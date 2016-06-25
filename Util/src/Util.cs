@@ -30,19 +30,19 @@ namespace hoTools.Utils
             }
         }
         #endregion
-        public static string objectTypeToString(EA.ObjectType objectType)
+        public static string ObjectTypeToString(EA.ObjectType objectType)
         {
             switch (objectType)
             {
-                case EA.ObjectType.otPackage:
+                case ObjectType.otPackage:
                     return "Package";
-                case EA.ObjectType.otElement:
+                case ObjectType.otElement:
                     return "Element";
-                case EA.ObjectType.otDiagram:
+                case ObjectType.otDiagram:
                     return "Diagram";
-                case EA.ObjectType.otMethod:
+                case ObjectType.otMethod:
                     return "Operation";
-                case EA.ObjectType.otAttribute:
+                case ObjectType.otAttribute:
                     return "Attribute";
                 default:
                     return "unknown object type";
@@ -51,23 +51,23 @@ namespace hoTools.Utils
        
 
 
-        public static EA.Element getElementFromContextObject(EA.Repository rep)  {
+        public static EA.Element GetElementFromContextObject(EA.Repository rep)  {
             EA.Element el = null;
             EA.ObjectType objectType = rep.GetContextItemType();
             switch (objectType)
             {
-                case EA.ObjectType.otAttribute:
+                case ObjectType.otAttribute:
                     var a = (EA.Attribute)rep.GetContextObject();
                     el = rep.GetElementByID(a.ParentID);
                     break;
-                case EA.ObjectType.otMethod:
-                    var m = (EA.Method)rep.GetContextObject();
+                case ObjectType.otMethod:
+                    var m = (Method)rep.GetContextObject();
                     el = rep.GetElementByID(m.ParentID);
                     break;
-                case EA.ObjectType.otElement:
+                case ObjectType.otElement:
                     el = (EA.Element)rep.GetContextObject();
                     break;
-                case EA.ObjectType.otNone:
+                case ObjectType.otNone:
                     EA.Diagram dia = rep.GetCurrentDiagram();
                     if (dia != null)
                     {
@@ -84,7 +84,7 @@ namespace hoTools.Utils
              }
             return el;
         }
-        public static void startApp(string app, string par)
+        public static void StartApp(string app, string par)
         {
             var p = new Process();
             p.StartInfo.FileName = app;
@@ -102,7 +102,7 @@ namespace hoTools.Utils
                                 "Can't show controlled package");
             }
         }
-        public static string getWildCard(Repository rep)
+        public static string GetWildCard(Repository rep)
         {
            string cnString = rep.ConnectionString.ToUpper();
 
@@ -121,7 +121,7 @@ namespace hoTools.Utils
             else { return "%"; }
                 
         }
-        public static void setSequenceNumber(EA.Repository rep, EA.Diagram dia, 
+        public static void SetSequenceNumber(EA.Repository rep, EA.Diagram dia, 
             EA.DiagramObject obj, string sequence )
         {
             string s = "";
@@ -136,7 +136,7 @@ namespace hoTools.Utils
 
         }
 
-        public static void addSequenceNumber (EA.Repository rep, EA.Diagram dia) {
+        public static void AddSequenceNumber (EA.Repository rep, EA.Diagram dia) {
              
             string updateStr = @"update t_DiagramObjects set sequence = sequence + 1 "+
                        " where diagram_id = " + dia.DiagramID; 
@@ -145,36 +145,36 @@ namespace hoTools.Utils
             return;
 
         }
-        public static int getHighestSequenceNoFromDiagram(EA.Repository rep, EA.Diagram dia)
+        public static int GetHighestSequenceNoFromDiagram(EA.Repository rep, EA.Diagram dia)
         {
             int sequenceNumber = 0;
             string query = @"select sequence from t_diagramobjects do " +
                             "  where do.Diagram_ID = "+ dia.DiagramID +
                             "  order by 1 desc";
             string str = rep.SQLQuery(query);
-            var XmlDoc = new XmlDocument();
-            XmlDoc.LoadXml(str);
+            var xmlDoc = new XmlDocument();
+            xmlDoc.LoadXml(str);
 
-            XmlNode operationGUIDNode = XmlDoc.SelectSingleNode("//SEQUENCE_NUMBER");
-            if (operationGUIDNode != null)
+            XmlNode operationGuidNode = xmlDoc.SelectSingleNode("//SEQUENCE_NUMBER");
+            if (operationGuidNode != null)
             {
-                sequenceNumber = Convert.ToInt32(operationGUIDNode.InnerText);
+                sequenceNumber = Convert.ToInt32(operationGuidNode.InnerText);
             }
             return sequenceNumber;
         }
 
         // replace of API-function getDiagramObjectByID which isn't available in EA 9.
-        public static EA.DiagramObject getDiagramObjectByID(EA.Repository rep, EA.Diagram dia, int ElementID)
+        public static EA.DiagramObject GetDiagramObjectById(EA.Repository rep, EA.Diagram dia, int elementId)
         {
             if (rep.LibraryVersion > 999)
             { 
-                return dia.GetDiagramObjectByID(ElementID,"");
+                return dia.GetDiagramObjectByID(elementId,"");
                 //return null;
             } else
             {
                 foreach (EA.DiagramObject obj in dia.DiagramObjects)
                 {
-                    if (obj.ElementID == ElementID)
+                    if (obj.ElementID == elementId)
                     {
                         return obj;
                     }
@@ -199,7 +199,7 @@ namespace hoTools.Utils
         // C =               Customer
         // B =               Bezier
         // NO=               make nothing
-        public static void setLineStyleForDiagramLink(string lineStyle, EA.DiagramLink link)
+        public static void SetLineStyleForDiagramLink(string lineStyle, EA.DiagramLink link)
         {
             #pragma warning disable RECS0012
             lineStyle = lineStyle + "  "; 
@@ -253,14 +253,14 @@ namespace hoTools.Utils
                          if (c.ClientID == dObject.ElementID | c.SupplierID == dObject.ElementID)
                          {
 
-                             setLineStyleForDiagramLink(lineStyle, link);
+                             SetLineStyleForDiagramLink(lineStyle, link);
                          }
                      }
                      if (selectedConnector != null)
                      {
                          if (c.ConnectorID == selectedConnector.ConnectorID)
                          {
-                             setLineStyleForDiagramLink(lineStyle, link);
+                             SetLineStyleForDiagramLink(lineStyle, link);
                              continue;
                          }
                      }
@@ -301,7 +301,7 @@ namespace hoTools.Utils
             {
                 if (link.IsHidden == false)
                 {
-                    setLineStyleForDiagramLink(lineStyle, link);
+                    SetLineStyleForDiagramLink(lineStyle, link);
                 }
 
             }
@@ -353,35 +353,35 @@ namespace hoTools.Utils
         }
 
 
-        public static bool updateClass(EA.Repository rep, EA.Element el)
+        public static bool UpdateClass(EA.Repository rep, EA.Element el)
         {
 
             foreach (EA.Attribute a in el.Attributes)
             {
-                Util.updateAttribute(rep, a);
+                Util.UpdateAttribute(rep, a);
             }
-            foreach (EA.Method m in el.Methods)
+            foreach (Method m in el.Methods)
             {
-                Util.updateMethod(rep, m);
+                Util.UpdateMethod(rep, m);
             }
 
             // over all nested classes
             foreach (EA.Element e in el.Elements)
             {
-                updateClass(rep, e);
+                UpdateClass(rep, e);
             }
             return true;
         }
 
-        public static bool updatePackage(EA.Repository rep, EA.Package pkg)
+        public static bool UpdatePackage(EA.Repository rep, EA.Package pkg)
         {
             foreach (EA.Element el in pkg.Elements)
             {
-                updateClass(rep, el);
+                UpdateClass(rep, el);
             }
             foreach (EA.Package pkg1 in pkg.Packages)
             {
-                updatePackage(rep, pkg1);
+                UpdatePackage(rep, pkg1);
             }
             
             return true;
@@ -389,13 +389,13 @@ namespace hoTools.Utils
 
 
 
-        public static bool updateAttribute(EA.Repository rep, EA.Attribute a)
+        public static bool UpdateAttribute(EA.Repository rep, EA.Attribute a)
         {
             // no classifier defined
             if (a.ClassifierID == 0)
             {
                 // find type from type_name
-                int id = Util.getTypeID(rep, a.Type);
+                int id = Util.GetTypeId(rep, a.Type);
                 if (id > 0)
                 {
                     a.ClassifierID = id;
@@ -412,7 +412,7 @@ namespace hoTools.Utils
         }
 
         // Update Method Types
-        public static bool updateMethod(EA.Repository rep, EA.Method m)
+        public static bool UpdateMethod(EA.Repository rep, Method m)
         {
 
             int id;
@@ -423,7 +423,7 @@ namespace hoTools.Utils
                 if ((par.ClassifierID == "") || (par.ClassifierID == "0"))
                 {
                     // find type from type_name
-                    id = Util.getTypeID(rep, par.Type);
+                    id = Util.GetTypeId(rep, par.Type);
                     if (id > 0)
                     {
                         par.ClassifierID = id.ToString();
@@ -444,7 +444,7 @@ namespace hoTools.Utils
             if ((m.ClassifierID == "") || (m.ClassifierID == "0"))
             {
                 // find type from type_name
-                id = Util.getTypeID(rep, m.ReturnType);
+                id = Util.GetTypeId(rep, m.ReturnType);
                 if (id > 0)
                 {
                     m.ClassifierID = id.ToString();
@@ -465,7 +465,7 @@ namespace hoTools.Utils
         // Find type for name
         // 1. Search for name (if type contains a '*' search for type with '*' and for type without '*'
         // 2. Search for Synonyms
-        public static int getTypeID(EA.Repository rep, string name)
+        public static int GetTypeId(EA.Repository rep, string name)
         {
             int intReturn = 0;
             //Boolean isPointer = false;
@@ -516,13 +516,13 @@ namespace hoTools.Utils
                                From t_object o
                                         where Object_Type in ('Class','PrimitiveType','DataType','Enumeration') AND name = '" + name + "' ";
                 string str = rep.SQLQuery(query);
-                var XmlDoc = new XmlDocument();
-                XmlDoc.LoadXml(str);
+                var xmlDoc = new XmlDocument();
+                xmlDoc.LoadXml(str);
 
-                XmlNode operationGUIDNode = XmlDoc.SelectSingleNode("//OBJECT_ID");
-                if (operationGUIDNode != null)
+                XmlNode operationGuidNode = xmlDoc.SelectSingleNode("//OBJECT_ID");
+                if (operationGuidNode != null)
                 {
-                    intReturn = Convert.ToInt32(operationGUIDNode.InnerText);
+                    intReturn = Convert.ToInt32(operationGuidNode.InnerText);
                 }
             }
 
@@ -530,19 +530,19 @@ namespace hoTools.Utils
             return intReturn;
         }
 
-        public static int getTypeFromName(EA.Repository rep, ref string name, ref string type) {
+        public static int GetTypeFromName(EA.Repository rep, ref string name, ref string type) {
             int id = 0;
-            id = Util.getTypeID(rep, type);
+            id = Util.GetTypeId(rep, type);
             if (id == 0 & type.Contains("*"))
             {
                 type = type.Remove(type.IndexOf("*", StringComparison.CurrentCulture), 1);
                 name = "*" + name;
-                id = Util.getTypeID(rep, type);
+                id = Util.GetTypeId(rep, type);
                 if (id == 0 & type.Contains("*"))
                 {
                     type = type.Replace("*", "");
                     name = "*" + name;
-                    id = Util.getTypeID(rep, type);
+                    id = Util.GetTypeId(rep, type);
                 }
             }
 
@@ -558,7 +558,7 @@ namespace hoTools.Utils
         // Parameter wird aufgrund des Alias-Namens gefunden
         //
         // 
-        public static EA.Element  getParameterFromActivity(EA.Repository rep, EA.Parameter par, EA.Element act, Boolean isReturn = false)
+        public static EA.Element  GetParameterFromActivity(EA.Repository rep, EA.Parameter par, EA.Element act, Boolean isReturn = false)
         {
 
             string aliasName;
@@ -575,53 +575,53 @@ namespace hoTools.Utils
             string query = @"select o2.ea_guid AS CLASSIFIER_GUID
                       from t_object o1 INNER JOIN t_object o2 on ( o2.parentID = o1.object_id)
                       where o1.Object_ID = " + act.ElementID + 
-                             " AND  o2.Alias like '"+ aliasName + getWildCard(rep) + "'";
+                             " AND  o2.Alias like '"+ aliasName + GetWildCard(rep) + "'";
             string str = rep.SQLQuery(query); 
-            var XmlDoc = new XmlDocument();
-            XmlDoc.LoadXml(str);
+            var xmlDoc = new XmlDocument();
+            xmlDoc.LoadXml(str);
 
-            XmlNode operationGUIDNode = XmlDoc.SelectSingleNode("//CLASSIFIER_GUID");
-            if (operationGUIDNode != null)
+            XmlNode operationGuidNode = xmlDoc.SelectSingleNode("//CLASSIFIER_GUID");
+            if (operationGuidNode != null)
             {
-                string GUID = operationGUIDNode.InnerText;
-                parTrgt = rep.GetElementByGuid(GUID);
+                string guid = operationGuidNode.InnerText;
+                parTrgt = rep.GetElementByGuid(guid);
             }
             return parTrgt;
         }
 
         // Find the calling operation from a Call Operation Action
-        public static EA.Method getOperationFromAction(EA.Repository rep, EA.Element action)
+        public static Method GetOperationFromAction(EA.Repository rep, EA.Element action)
         {
-            EA.Method method = null;
+            Method method = null;
             string query = @"select o.Classifier_guid AS CLASSIFIER_GUID
                       from t_object o 
                       where o.Object_ID = " + action.ElementID;
             string str = rep.SQLQuery(query);
-            var XmlDoc = new XmlDocument();
-            XmlDoc.LoadXml(str);
+            var xmlDoc = new XmlDocument();
+            xmlDoc.LoadXml(str);
 
-            XmlNode operationGUIDNode = XmlDoc.SelectSingleNode("//CLASSIFIER_GUID");
-            if (operationGUIDNode != null)
+            XmlNode operationGuidNode = xmlDoc.SelectSingleNode("//CLASSIFIER_GUID");
+            if (operationGuidNode != null)
             {
-                string GUID = operationGUIDNode.InnerText;
-                method = rep.GetMethodByGuid(GUID);
+                string guid = operationGuidNode.InnerText;
+                method = rep.GetMethodByGuid(guid);
             }
             return method;
         }
         // Find the calling operation from a Call Operation Action
-        public static string getParameterType(EA.Repository rep, string actionPinGuid)
+        public static string GetParameterType(EA.Repository rep, string actionPinGuid)
         {
             string query = @"SELECT par.type AS OPTYPE 
 			    from t_object o  inner join t_operationparams par on (o.classifier_guid = par.ea_guid)
                 where o.ea_guid = '" + actionPinGuid + "' ";
             string str = rep.SQLQuery(query);
-            var XmlDoc = new XmlDocument();
-            XmlDoc.LoadXml(str);
+            var xmlDoc = new XmlDocument();
+            xmlDoc.LoadXml(str);
 
-            XmlNode typeGUIDNode = XmlDoc.SelectSingleNode("//OPTYPE");
-            if (typeGUIDNode != null)
+            XmlNode typeGuidNode = xmlDoc.SelectSingleNode("//OPTYPE");
+            if (typeGuidNode != null)
             {
-                return typeGUIDNode.InnerText;
+                return typeGuidNode.InnerText;
                 
             }
             return "";
@@ -629,104 +629,104 @@ namespace hoTools.Utils
 
 
         // Find the calling operation from a Call Operation Action
-        public static EA.Method getOperationFromCallAction(EA.Repository rep, EA.Element obj)
+        public static Method GetOperationFromCallAction(EA.Repository rep, EA.Element obj)
         {
-            string wildCard = getWildCard(rep);
+            string wildCard = GetWildCard(rep);
             string query = @"SELECT op.ea_guid AS OPERATION from (t_object o inner join t_operation op on (o.classifier_guid = op.ea_guid))
                inner join t_xref x on (x.client = o.ea_guid)
 			   where x.name = 'CustomProperties' and
 			             x.description like '"+ wildCard + "CallOperation" + wildCard + 
                          "' and o.object_id = " + obj.ElementID;
             string str = rep.SQLQuery(query);
-            var XmlDoc = new XmlDocument();
-            XmlDoc.LoadXml(str);
+            var xmlDoc = new XmlDocument();
+            xmlDoc.LoadXml(str);
 
-            XmlNode operationGUIDNode = XmlDoc.SelectSingleNode("//OPERATION");
-            string GUID = "";
-            if (operationGUIDNode != null)
+            XmlNode operationGuidNode = xmlDoc.SelectSingleNode("//OPERATION");
+            string guid = "";
+            if (operationGuidNode != null)
             {
-                GUID = operationGUIDNode.InnerText;
-                return rep.GetMethodByGuid(GUID);
+                guid = operationGuidNode.InnerText;
+                return rep.GetMethodByGuid(guid);
             }
             return null;
         }
         // Find the calling operation from a Call Operation Action
-        public static string getClassifierGUID(EA.Repository rep,string GUID)
+        public static string GetClassifierGuid(EA.Repository rep,string guid)
         {
             string query = @"select o.Classifier_guid AS CLASSIFIER_GUID
                       from t_object o 
-                      where o.EA_GUID = '" + GUID + "'";
+                      where o.EA_GUID = '" + guid + "'";
             string str = rep.SQLQuery(query);
-            var XmlDoc = new XmlDocument();
-            XmlDoc.LoadXml(str);
+            var xmlDoc = new XmlDocument();
+            xmlDoc.LoadXml(str);
 
-            XmlNode operationGUIDNode = XmlDoc.SelectSingleNode("//CLASSIFIER_GUID");
-            GUID = "";
-            if (operationGUIDNode != null)
+            XmlNode operationGuidNode = xmlDoc.SelectSingleNode("//CLASSIFIER_GUID");
+            guid = "";
+            if (operationGuidNode != null)
             {
-                GUID = operationGUIDNode.InnerText;
+                guid = operationGuidNode.InnerText;
             }
-            return GUID;
+            return guid;
         }
 
 
         // Gets the trigger associated with the connector / element
-        public static string getTrigger(EA.Repository rep, string GUID)
+        public static string GetTrigger(EA.Repository rep, string guid)
         {
             string query = @"select x.Description AS TRIGGER_GUID
                       from t_xref x 
-                      where x.Client = '" + GUID + "'    AND behavior = 'trigger' ";
+                      where x.Client = '" + guid + "'    AND behavior = 'trigger' ";
             string str = rep.SQLQuery(query);
-            var XmlDoc = new XmlDocument();
-            XmlDoc.LoadXml(str);
+            var xmlDoc = new XmlDocument();
+            xmlDoc.LoadXml(str);
 
-            XmlNode operationGUIDNode = XmlDoc.SelectSingleNode("//TRIGGER_GUID");
-            GUID = "";
-            if (operationGUIDNode != null)
+            XmlNode operationGuidNode = xmlDoc.SelectSingleNode("//TRIGGER_GUID");
+            guid = "";
+            if (operationGuidNode != null)
             {
-                GUID = operationGUIDNode.InnerText;
+                guid = operationGuidNode.InnerText;
             }
-            return GUID;
+            return guid;
         }
         // Gets the signal associated with the element
-        public static string getSignal(EA.Repository rep, string GUID)
+        public static string GetSignal(EA.Repository rep, string guid)
         {
             string query = @"select x.Description AS SIGNAL_GUID
                       from t_xref x 
-                      where x.Client = '" + GUID + "'    AND behavior = 'event' ";
+                      where x.Client = '" + guid + "'    AND behavior = 'event' ";
             string str = rep.SQLQuery(query);
-            var XmlDoc = new XmlDocument();
-            XmlDoc.LoadXml(str);
+            var xmlDoc = new XmlDocument();
+            xmlDoc.LoadXml(str);
 
-            XmlNode operationGUIDNode = XmlDoc.SelectSingleNode("//SIGNAL_GUID");
-            GUID = "";
-            if (operationGUIDNode != null)
+            XmlNode operationGuidNode = xmlDoc.SelectSingleNode("//SIGNAL_GUID");
+            guid = "";
+            if (operationGuidNode != null)
             {
-                GUID = operationGUIDNode.InnerText;
+                guid = operationGuidNode.InnerText;
             }
-            return GUID;
+            return guid;
         }
         // Gets the composite element for a diagram GUID
-        public static string getElementFromCompositeDiagram(EA.Repository rep, string diagramGUID)
+        public static string GetElementFromCompositeDiagram(EA.Repository rep, string diagramGuid)
         {
             string query = @"select o.ea_guid AS COMPOSITE_GUID
                       from t_xref x INNER JOIN t_object o on (x.client = o.ea_guid and type = 'element property')
-                      where x.supplier = '" + diagramGUID + "'    ";
+                      where x.supplier = '" + diagramGuid + "'    ";
             string str = rep.SQLQuery(query);
-            var XmlDoc = new XmlDocument();
-            XmlDoc.LoadXml(str);
+            var xmlDoc = new XmlDocument();
+            xmlDoc.LoadXml(str);
 
-            XmlNode operationGUIDNode = XmlDoc.SelectSingleNode("//COMPOSITE_GUID");
-            diagramGUID = "";
-            if (operationGUIDNode != null)
+            XmlNode operationGuidNode = xmlDoc.SelectSingleNode("//COMPOSITE_GUID");
+            diagramGuid = "";
+            if (operationGuidNode != null)
             {
-                diagramGUID = operationGUIDNode.InnerText;
+                diagramGuid = operationGuidNode.InnerText;
             }
-            return diagramGUID;
+            return diagramGuid;
         }
         // set "ShowBeh=1; in operation field StyleEx
 
-        public static Boolean setShowBehaviorInDiagram(EA.Repository rep, EA.Method m)
+        public static Boolean SetShowBehaviorInDiagram(EA.Repository rep, Method m)
         {
             string updateStr = @"update t_operation set StyleEx = 'ShowBeh=1;'"  +
                        " where operationID = " + m.MethodID;
@@ -734,44 +734,44 @@ namespace hoTools.Utils
             return true;
         }
         
-        public static Boolean setFrameLinksToDiagram(EA.Repository rep, EA.Element frm, EA.Diagram dia)
+        public static Boolean SetFrameLinksToDiagram(EA.Repository rep, EA.Element frm, EA.Diagram dia)
         {
             string updateStr = @"update t_object set pdata1 = "+ dia.DiagramID + 
                        " where object_ID = " + frm.ElementID;
             rep.Execute(updateStr);
             return true;
         }
-        public static Boolean setActivityCompositeDiagram(EA.Repository rep, EA.Element el, string s)
+        public static Boolean SetActivityCompositeDiagram(EA.Repository rep, EA.Element el, string s)
         {
             string updateStr = @"update t_object set pdata1 = '"+ s +"', ntype = 8 " +
                        " where object_ID = " + el.ElementID;
             rep.Execute(updateStr);
             return true;
         }
-        public static Boolean setElementPDATA1(EA.Repository rep, EA.Element el, string s)
+        public static Boolean SetElementPdata1(EA.Repository rep, EA.Element el, string s)
         {
             string updateStr = @"update t_object set pdata1 = '" + s + "' " +
                        " where object_ID = " + el.ElementID;
             rep.Execute(updateStr);
             return true;
         }
-        public static Boolean setConnectorGuard(EA.Repository rep, int connectorID, string connectorGuard)
+        public static Boolean SetConnectorGuard(EA.Repository rep, int connectorId, string connectorGuard)
         {
 
             string updateStr = @"update t_connector set pdata2 = '" + connectorGuard + "' " +
-           " where Connector_Id = " + connectorID;
+           " where Connector_Id = " + connectorId;
             rep.Execute(updateStr);
 
 
             return true;
         }
         
-        public static Boolean setDiagramHasAttchaedLink(EA.Repository rep, EA.Element el)
+        public static Boolean SetDiagramHasAttchaedLink(EA.Repository rep, EA.Element el)
         {
-            setElementPDATA1(rep,el,"Diagram Note"); 
+            SetElementPdata1(rep,el,"Diagram Note"); 
             return true;
         }
-        public static Boolean setVCFlags (EA.Repository rep, EA.Package pkg, string flags)
+        public static Boolean SetVcFlags (EA.Repository rep, EA.Package pkg, string flags)
         {
             string updateStr = @"update t_package set packageflags = '" + flags +"' " +
                        " where package_ID = " + pkg.PackageID;
@@ -779,7 +779,7 @@ namespace hoTools.Utils
             return true;
         }
 
-        public static Boolean setElementHasAttchaedLink(EA.Repository rep, EA.Element el, EA.Element elNote)
+        public static Boolean SetElementHasAttchaedLink(EA.Repository rep, EA.Element el, EA.Element elNote)
         {
             string updateStr = @"update t_object set pdata1 = 'Element Note', pdata2 = '" + el.ElementID  + "', pdata4='Yes' " +
            " where object_ID = " + elNote.ElementID ;
@@ -789,7 +789,7 @@ namespace hoTools.Utils
             return true;
         }
 
-        public static Boolean setBehaviorForOperation(EA.Repository rep, EA.Method op, EA.Element act)
+        public static Boolean SetBehaviorForOperation(EA.Repository rep, Method op, EA.Element act)
         {
             
             string updateStr = @"update t_operation set behaviour = '" + act.ElementGUID + "' " +
@@ -800,26 +800,26 @@ namespace hoTools.Utils
             return true;
         }
 
-        public static string getDiagramObjectLabel(EA.Repository rep, int objectID, int diagramID, int instanceID)
+        public static string GetDiagramObjectLabel(EA.Repository rep, int objectId, int diagramId, int instanceId)
         {
             string attributeName = "OBJECT_STYLE";
             string query = @"select ObjectStyle AS " + attributeName + 
                     @" from t_diagramobjects
-                      where Object_ID = " + objectID + @" AND 
-                            Diagram_ID = " + diagramID + @" AND 
-                            Instance_ID = " + instanceID ;
+                      where Object_ID = " + objectId + @" AND 
+                            Diagram_ID = " + diagramId + @" AND 
+                            Instance_ID = " + instanceId ;
 
-            return getSingleSQLValue(rep, query, attributeName);
+            return GetSingleSqlValue(rep, query, attributeName);
         }
 
-        private static string getSingleSQLValue(EA.Repository rep, string query, string attributeName)
+        private static string GetSingleSqlValue(EA.Repository rep, string query, string attributeName)
         {
             string s = "";
             string str = rep.SQLQuery(query);
-            var XmlDoc = new XmlDocument();
-            XmlDoc.LoadXml(str);
+            var xmlDoc = new XmlDocument();
+            xmlDoc.LoadXml(str);
 
-            XmlNode node = XmlDoc.SelectSingleNode("//"+attributeName);
+            XmlNode node = xmlDoc.SelectSingleNode("//"+attributeName);
             if (node != null)
             {
                 s = node.InnerText;
@@ -827,13 +827,13 @@ namespace hoTools.Utils
             return s;
         }
 
-        public static Boolean setDiagramObjectLabel(EA.Repository rep, int objectID, int diagramID, int instanceID, string s)
+        public static Boolean SetDiagramObjectLabel(EA.Repository rep, int objectId, int diagramId, int instanceId, string s)
         {
 
             string updateStr = @"update t_diagramObjects set ObjectStyle = '" + s + "' " +
-           " where Object_ID = " + objectID + " AND "+
-                " Diagram_ID = " + diagramID + " AND " +
-                " Instance_ID = " + instanceID ;
+           " where Object_ID = " + objectId + " AND "+
+                " Diagram_ID = " + diagramId + " AND " +
+                " Instance_ID = " + instanceId ;
                
             rep.Execute(updateStr);
 
@@ -843,11 +843,11 @@ namespace hoTools.Utils
 
         // Find the operation from Activity / State Machine
         // it excludes operations in state machines
-        public static EA.Method getOperationFromBrehavior(EA.Repository rep, EA.Element el)
+        public static Method GetOperationFromBrehavior(EA.Repository rep, EA.Element el)
         {
-            EA.Method method = null;
+            Method method = null;
             string query = "";
-            string conString = getConnectionString(rep); // due to shortcuts
+            string conString = GetConnectionString(rep); // due to shortcuts
             if (conString.Contains("DBType=3"))
             {   // Oracle DB
                 query = 
@@ -888,14 +888,14 @@ namespace hoTools.Utils
             }
 
             string str = rep.SQLQuery(query);
-            var XmlDoc = new XmlDocument();
-            XmlDoc.LoadXml(str);
+            var xmlDoc = new XmlDocument();
+            xmlDoc.LoadXml(str);
 
-            XmlNode operationGUIDNode = XmlDoc.SelectSingleNode("//EA_GUID");
-            if (operationGUIDNode != null)
+            XmlNode operationGuidNode = xmlDoc.SelectSingleNode("//EA_GUID");
+            if (operationGuidNode != null)
             {
-                string GUID = operationGUIDNode.InnerText;
-                method = rep.GetMethodByGuid(GUID);
+                string guid = operationGuidNode.InnerText;
+                method = rep.GetMethodByGuid(guid);
             }
             return method;
         }
@@ -962,11 +962,11 @@ namespace hoTools.Utils
 
 
 
-        public static EA.Method getOperationFromConnector(EA.Repository rep, EA.Connector con)
+        public static Method GetOperationFromConnector(EA.Repository rep, EA.Connector con)
         {
-            EA.Method method = null;
+            Method method = null;
             string query = "";
-            if (getConnectionString(rep).Contains("DBType=3"))
+            if (GetConnectionString(rep).Contains("DBType=3"))
                 //pdat3: 'Activity','Sequence', (..)
             {   // Oracle DB
                 query =
@@ -975,7 +975,7 @@ namespace hoTools.Utils
                       where Cast(x.client As Varchar2(38)) = '" + con.ConnectorGUID + "'" +
                                                                 " AND Behavior = 'effect' ";
             }
-            if (getConnectionString(rep).Contains("DBType=1"))
+            if (GetConnectionString(rep).Contains("DBType=1"))
             {   // SQL Server
 
                 query =
@@ -985,7 +985,7 @@ namespace hoTools.Utils
                            " AND Behavior = 'effect' "                   
                                           ;
             }
-            if (getConnectionString(rep).Contains(".eap"))
+            if (GetConnectionString(rep).Contains(".eap"))
             {
 
                 query =
@@ -995,9 +995,9 @@ namespace hoTools.Utils
                            " AND Behavior = 'effect' "
                                           ;
             }
-            if ((! getConnectionString(rep).Contains("DBType=1")) &&  // SQL Server, DBType=0 MySQL
-                (! getConnectionString(rep).Contains("DBType=3")) &&  // Oracle
-                (! getConnectionString(rep).Contains(".eap")))// Access
+            if ((! GetConnectionString(rep).Contains("DBType=1")) &&  // SQL Server, DBType=0 MySQL
+                (! GetConnectionString(rep).Contains("DBType=3")) &&  // Oracle
+                (! GetConnectionString(rep).Contains(".eap")))// Access
             {
                 query =
                 @"select description AS EA_GUID
@@ -1010,8 +1010,8 @@ namespace hoTools.Utils
 
 
             string str = rep.SQLQuery(query);
-            var XmlDoc = new XmlDocument();
-            XmlDoc.LoadXml(str);
+            var xmlDoc = new XmlDocument();
+            xmlDoc.LoadXml(str);
 
             //string type = "";
             //XmlNode pdat3Node = XmlDoc.SelectSingleNode("//PDAT3");
@@ -1022,17 +1022,17 @@ namespace hoTools.Utils
             //}
             //if ( type.EndsWith(")")) // Operation
             //{ 
-            string GUID = null;
-                XmlNode operationGUIDNode = XmlDoc.SelectSingleNode("//EA_GUID");
-                if (operationGUIDNode != null)
+            string guid = null;
+                XmlNode operationGuidNode = xmlDoc.SelectSingleNode("//EA_GUID");
+                if (operationGuidNode != null)
                 {
-                    GUID = operationGUIDNode.InnerText;
-                    method = rep.GetMethodByGuid(GUID);
+                    guid = operationGuidNode.InnerText;
+                    method = rep.GetMethodByGuid(guid);
                 }
                 if (method == null)
                 {
 
-                     if (GUID != null) OpenBehaviorForElement(rep, rep.GetElementByGuid(GUID));
+                     if (guid != null) OpenBehaviorForElement(rep, rep.GetElementByGuid(guid));
                 }
             //}
 
@@ -1045,7 +1045,7 @@ namespace hoTools.Utils
         /// </summary>
         /// <param name="rep">Repository</param>
         /// <param name="pkg">Package to check</param>
-        public static string updateVC(EA.Repository rep, EA.Package pkg)
+        public static string UpdateVc(EA.Repository rep, EA.Package pkg)
         {
             string userNameLockedPackage = "";
             if (pkg.IsVersionControlled)
@@ -1059,13 +1059,13 @@ namespace hoTools.Utils
                 flags = Regex.Replace(flags, @"CheckedOutTo=[^;]*;", "");
 
 
-                var svnHandle = new svn(rep, pkg);
-                userNameLockedPackage = svnHandle.getLockingUser();
+                var svnHandle = new Svn(rep, pkg);
+                userNameLockedPackage = svnHandle.GetLockingUser();
                 svnHandle = null;
                 if (userNameLockedPackage != "") flags = flags + "CheckedOutTo=" + userNameLockedPackage + ";";
                 try
                 {
-                    setVCFlags(rep, pkg, flags);
+                    SetVcFlags(rep, pkg, flags);
                     rep.ShowInProjectView(pkg);
                 }
                 catch (Exception e)
@@ -1083,19 +1083,19 @@ namespace hoTools.Utils
         // resetVCRecursive   If package is controlles: Reset packageflags field of package, work for all packages recursive 
         //------------------------------------------------------------------------------------------
         // packageflags:  Recurse=0;VCCFG=unchanged;
-        public static void resetVCRecursive(EA.Repository rep, EA.Package pkg)
+        public static void ResetVcRecursive(EA.Repository rep, EA.Package pkg)
         {
-            resetVC(rep, pkg);
+            ResetVc(rep, pkg);
             foreach (EA.Package p in pkg.Packages)
             {
-                resetVC(rep, pkg);
+                ResetVc(rep, pkg);
             }
         }
         //------------------------------------------------------------------------------------------
         // resetVC   If package is controlles: Reset packageflags field of package 
         //------------------------------------------------------------------------------------------
         // packageflags:  Recurse=0;VCCFG=unchanged;
-        public static void resetVC(EA.Repository rep, EA.Package pkg)
+        public static void ResetVc(EA.Repository rep, EA.Package pkg)
         {
             if (pkg.IsVersionControlled)
             {
@@ -1115,7 +1115,7 @@ namespace hoTools.Utils
                 // write flags
                 try
                 {
-                    setVCFlags(rep, pkg, flags);
+                    SetVcFlags(rep, pkg, flags);
                 }
                 catch (Exception e)
                 {
@@ -1131,7 +1131,7 @@ namespace hoTools.Utils
             //    updateVC(rep, pkg1);
             //}
         }
-        public static string getVCstate(EA.Repository rep, EA.Package pkg, Boolean isLong) {
+        public static string GetVCstate(EA.Repository rep, EA.Package pkg, Boolean isLong) {
                         string[] checkedOutStatusLong = { "Uncontrolled",
                                                       "Checked in",
                                                       "Checked out to this user",
@@ -1154,8 +1154,8 @@ namespace hoTools.Utils
                         try
                         {
                             string s = ""; 
-                             var svnHandle = new svn(rep, pkg);
-                             s = svnHandle.getLockingUser();
+                             var svnHandle = new Svn(rep, pkg);
+                             s = svnHandle.GetLockingUser();
                             svnHandle = null;
                             if (s != "") s = "CheckedOutTo=" + s ;
                             else s = "Checked in";
@@ -1178,7 +1178,7 @@ namespace hoTools.Utils
         /// <param name="rep"></param>
         /// <param name="el"></param>
         /// <returns></returns>
-        public static string getGenFilePath(EA.Repository rep, EA.Element el)
+        public static string GetGenFilePath(EA.Repository rep, EA.Element el)
         #pragma warning restore RECS0154 // Parameter is never used
         {
             string path = el.Genfile;
@@ -1215,7 +1215,7 @@ namespace hoTools.Utils
             }
             return path;
         }
-        public static string getVccRootPath(EA.Repository rep, EA.Package pkg)
+        public static string GetVccRootPath(EA.Repository rep, EA.Package pkg)
         {
             string rootPath = "";
             var pattern = new Regex(@"VCCFG=[^;]+");
@@ -1257,22 +1257,22 @@ namespace hoTools.Utils
 
         }
 
-        public static string getVccFilePath(EA.Repository rep, EA.Package pkg)
+        public static string GetVccFilePath(EA.Repository rep, EA.Package pkg)
         {
             string path = "";
-            string rootPath = getVccRootPath(rep, pkg);
+            string rootPath = GetVccRootPath(rep, pkg);
             path = rootPath + @"\" + pkg.XMLPath;
             return path;
         }
        
-        public static Boolean getLatest(EA.Repository rep, EA.Package pkg, Boolean recursive, ref int count, int level, ref int errorCount)
+        public static Boolean GetLatest(EA.Repository rep, EA.Package pkg, Boolean recursive, ref int count, int level, ref int errorCount)
         {
             if (pkg.IsControlled)
             {
                 level = level + 1;
                 // check if checked out
 
-                string path = Util.getVccFilePath(rep, pkg);
+                string path = Util.GetVccFilePath(rep, pkg);
                 string fText = "";
                 //rep.WriteOutput("Debug", "Path:" + pkg.Name + path, 0);
                 var sLevel = new string(' ', level * 2);
@@ -1306,9 +1306,9 @@ namespace hoTools.Utils
                     {
                         // to make sure pkg is the correct reference
                         // new load of pkg after GetLatest
-                        string pkgGUID = pkg.PackageGUID;
+                        string pkgGuid = pkg.PackageGUID;
                         pkg.VersionControlGetLatest(true);
-                        pkg = rep.GetPackageByGuid(pkgGUID);
+                        pkg = rep.GetPackageByGuid(pkgGuid);
                         count = count + 1;
                     }
                     catch
@@ -1336,14 +1336,14 @@ namespace hoTools.Utils
                 foreach (EA.Package pkgNested in pkg.Packages)
                 {
                     //rep.WriteOutput("Debug", "Recursive:"+ pkgNested.Name, 0);
-                    getLatest(rep, pkgNested, true, ref count, level, ref errorCount);
+                    GetLatest(rep, pkgNested, true, ref count, level, ref errorCount);
 
                 }
             }
             return true;
 
         }
-        public static string getConnectionString(EA.Repository rep) {
+        public static string GetConnectionString(EA.Repository rep) {
             string s = rep.ConnectionString;
             if (s.Contains("DBType="))
             {
@@ -1364,7 +1364,7 @@ namespace hoTools.Utils
             
 
         }
-        public static void OpenBehaviorForElement(EA.Repository Repository, EA.Element el)
+        public static void OpenBehaviorForElement(EA.Repository repository, EA.Element el)
         {
             // find the diagram
             if (el.Diagrams.Count > 0)
@@ -1372,12 +1372,12 @@ namespace hoTools.Utils
                 // get the diagram
                 var dia = (EA.Diagram)el.Diagrams.GetAt(0);
                 // open diagram
-                Repository.OpenDiagram(dia.DiagramID);
+                repository.OpenDiagram(dia.DiagramID);
             }
             // no diagram found, select element
-            Repository.ShowInProjectView(el);
+            repository.ShowInProjectView(el);
         }
-        public static Boolean setXmlPath(EA.Repository rep, string guid, string path)
+        public static Boolean SetXmlPath(EA.Repository rep, string guid, string path)
         {
 
             string updateStr = @"update t_package set XMLPath = '" + path +
@@ -1401,7 +1401,7 @@ namespace hoTools.Utils
         }
 
         #region visualizePortForDiagramobject
-        public static void visualizePortForDiagramobject(int pos, EA.Diagram dia, EA.DiagramObject diaObjSource, EA.Element port, 
+        public static void VisualizePortForDiagramobject(int pos, EA.Diagram dia, EA.DiagramObject diaObjSource, EA.Element port, 
             EA.Element interf, string portBoundTo = "right")
         {
             // check if port already exists
@@ -1471,11 +1471,11 @@ namespace hoTools.Utils
 
         }
         #endregion
-        public static EA.DiagramLink getDiagramLinkFromConnector(EA.Diagram dia, int connectorID)
+        public static EA.DiagramLink GetDiagramLinkFromConnector(EA.Diagram dia, int connectorId)
         {
             foreach (EA.DiagramLink link in dia.DiagramLinks)
             {
-                if (link.ConnectorID == connectorID)
+                if (link.ConnectorID == connectorId)
                 {
                     return link;
                 }
@@ -1487,7 +1487,7 @@ namespace hoTools.Utils
        
         // Find the operation from Activity / State Machine
         // it excludes operations in state machines
-        public static EA.Package getModelDocumentFromPackage(EA.Repository rep, EA.Package pkg)
+        public static EA.Package GetModelDocumentFromPackage(EA.Repository rep, EA.Package pkg)
         {
             EA.Package pkg1 = null;
             string query = "";
@@ -1523,25 +1523,25 @@ namespace hoTools.Utils
            
 
             string str = rep.SQLQuery(query);
-            var XmlDoc = new XmlDocument();
-            XmlDoc.LoadXml(str);
+            var xmlDoc = new XmlDocument();
+            xmlDoc.LoadXml(str);
 
-            XmlNode operationGUIDNode = XmlDoc.SelectSingleNode("//EA_GUID");
+            XmlNode operationGuidNode = xmlDoc.SelectSingleNode("//EA_GUID");
 
-            if (operationGUIDNode != null)
+            if (operationGuidNode != null)
             {
-                string GUID = operationGUIDNode.InnerText;
-                pkg1 = rep.GetPackageByGuid(GUID);
+                string guid = operationGuidNode.InnerText;
+                pkg1 = rep.GetPackageByGuid(guid);
             }
             return pkg1;
         }
-        public static EA.Package getFirstControlledPackage(EA.Repository rep, EA.Package pkg)
+        public static EA.Package GetFirstControlledPackage(EA.Repository rep, EA.Package pkg)
         {
-            int pkgID = 0;
+            int pkgId = 0;
             if (pkg.IsControlled) return pkg;
-            pkgID = pkg.ParentID;
-            if (pkgID == 0) return null;
-            pkg = getFirstControlledPackage(rep, rep.GetPackageByID(pkgID));
+            pkgId = pkg.ParentID;
+            if (pkgId == 0) return null;
+            pkg = GetFirstControlledPackage(rep, rep.GetPackageByID(pkgId));
             return pkg;
 
         }

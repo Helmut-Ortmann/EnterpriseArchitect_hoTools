@@ -12,19 +12,19 @@ namespace hoTools.Utils.Favorites
     public class Favorite
     {
         readonly EA.Repository _rep;
-        string _xref_GUID = "";
-        string _client_GUID = "";
+        string _xrefGuid = "";
+        string _clientGuid = "";
 
         #region Constructor
         /// <summary>
         /// 
         /// </summary>
         /// <param name="rep"></param>
-        /// <param name="clientGUID">The client GUID of the item to remember as Favorite</param>
-        public  Favorite(EA.Repository rep, string clientGUID) {
+        /// <param name="clientGuid">The client GUID of the item to remember as Favorite</param>
+        public  Favorite(EA.Repository rep, string clientGuid) {
             _rep = rep;
-            _xref_GUID = Guid.NewGuid().ToString();
-            _client_GUID = clientGUID; // Favorite GUID
+            _xrefGuid = Guid.NewGuid().ToString();
+            _clientGuid = clientGuid; // Favorite GUID
         }
         public Favorite(EA.Repository rep)
         {
@@ -38,42 +38,42 @@ namespace hoTools.Utils.Favorites
         /// </summary>
         /// <param name="rep"></param>
         /// <returns></returns>
-        static public bool installSearches(EA.Repository rep)
+        static public bool InstallSearches(EA.Repository rep)
         {
             rep.AddDefinedSearches(Resources.Strings.SearchFavorite);
             return true;
         }
         #endregion
         #region save
-        public bool save()
+        public bool Save()
         {
 
-            this.delete();
+            this.Delete();
             // insert 
             string sql = String.Format(
                          @"insert into t_xref " +
                          @"        (XrefID, Type, Client) " +
                          @" VALUES ( '{0}','Favorite', '{1}') ", 
-                         _xref_GUID, _client_GUID);
+                         _xrefGuid, _clientGuid);
             _rep.Execute(sql);
             
             return true;
         }
         #endregion
         #region delete
-        public bool delete()
+        public bool Delete()
         {
             // delete all old on
             string sql = String.Format(
                          @"delete from t_xref " +
                          @"where Client = '{0}'",
-                         _client_GUID);
+                         _clientGuid);
             _rep.Execute(sql);
             return true;
         }
         #endregion
         #region search
-        public void search()
+        public void Search()
         {
             
             _rep.RunModelSearch(Resources.Strings.SearchFavoriteName, "", "","");

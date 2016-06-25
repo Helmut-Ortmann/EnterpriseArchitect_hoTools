@@ -67,7 +67,7 @@ namespace EAAddinFramework.Utils
                          $" where s.Notes like '<Group Type=\"{getGroupType()}\"*'    AND " +
                          $"       s.Script = '{_name}'  ";
             // run query into XDocument to proceed with LinQ
-            string xml = _model.SQLQueryNative(sql);
+            string xml = _model.SqlQueryNative(sql);
             var x = new XDocument(XDocument.Parse(xml));
 
             // get scriptID
@@ -92,7 +92,7 @@ namespace EAAddinFramework.Utils
             var GUID = "{" + Guid.NewGuid() + "}";
             string sql = "insert into t_script (ScriptCategory, ScriptName,Notes, Script) " +
                     $" Values ('{SCRIPT_GROUP_CATEGORY}','{GUID}','<Group Type=\"{getGroupType()}\" Notes=\"\"/>','{_name}')";
-            _model.executeSQL(sql);
+            _model.ExecuteSql(sql);
             getInfo();
             return true;
         }

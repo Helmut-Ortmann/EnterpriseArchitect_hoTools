@@ -40,12 +40,12 @@ namespace hoTools.Utils.ActivityParameter
             initNode.Update();
             if (dia != null)
             {
-                Util.addSequenceNumber(rep, dia);
+                Util.AddSequenceNumber(rep, dia);
                 var initDiaNode = (EA.DiagramObject)dia.DiagramObjects.AddNew(position,"");
                 initDiaNode.ElementID = initNode.ElementID;
                 initDiaNode.Sequence = 1;
                 initDiaNode.Update();
-                Util.setSequenceNumber(rep, dia, initDiaNode, "1");
+                Util.SetSequenceNumber(rep, dia, initDiaNode, "1");
                 return initDiaNode;
             }else return null;
         }
@@ -109,12 +109,12 @@ namespace hoTools.Utils.ActivityParameter
 
             
             // put the activity on the diagram
-            Util.addSequenceNumber(rep, actDia);
+            Util.AddSequenceNumber(rep, actDia);
             var actObj = (EA.DiagramObject)actDia.DiagramObjects.AddNew("l=30;r=780;t=30;b=1120", "");
             actObj.ElementID = act.ElementID;
             actObj.Sequence = 1;
             actObj.Update();
-            Util.setSequenceNumber(rep, actDia, actObj, "1");
+            Util.SetSequenceNumber(rep, actDia, actObj, "1");
             actDia.DiagramObjects.Refresh();
 
             // add default nodes (init/final)
@@ -123,7 +123,7 @@ namespace hoTools.Utils.ActivityParameter
             if (ActivityIsSimple == false)
             {
                 // Add Heading to diagram
-                Util.addSequenceNumber(rep, actDia);
+                Util.AddSequenceNumber(rep, actDia);
                 var noteObj = (EA.DiagramObject)actDia.DiagramObjects.AddNew("l=40;r=700;t=25;b=50", "");
                 var note = (EA.Element)pkgTrg.Elements.AddNew("Text", "Text");
 
@@ -133,17 +133,17 @@ namespace hoTools.Utils.ActivityParameter
                 noteObj.Style = "fontsz=200;pitch=34;DUID=265D32D5;font=Arial Narrow;bold=0;italic=0;ul=0;charset=0;";
                 noteObj.Sequence = 1;
                 noteObj.Update();
-                Util.setSequenceNumber(rep, actDia, noteObj, "1");
+                Util.SetSequenceNumber(rep, actDia, noteObj, "1");
             }
             pkgTrg.Elements.Refresh();
             actDia.DiagramObjects.Refresh();
 
 
             // Link Operation to activity
-            Util.setBehaviorForOperation(rep, m, act);
+            Util.SetBehaviorForOperation(rep, m, act);
 
             // Set show behavior
-            Util.setShowBehaviorInDiagram(rep, m);
+            Util.SetShowBehaviorInDiagram(rep, m);
 
             // add parameters to activity
             UpdateParameterFromOperation(rep, act, m);
@@ -151,14 +151,14 @@ namespace hoTools.Utils.ActivityParameter
             foreach (EA.Element actPar in act.EmbeddedElements)
             {
                 if (! actPar.Type.Equals("ActivityParameter")) continue;
-                Util.visualizePortForDiagramobject(pos, actDia, actObj, actPar, null);
+                Util.VisualizePortForDiagramobject(pos, actDia, actObj, actPar, null);
                 pos = pos + 1;
             }
 
             if (ActivityIsSimple == false)
             {
                 // link Overview frame to diagram
-                Util.setFrameLinksToDiagram(rep, frm, actDia);
+                Util.SetFrameLinksToDiagram(rep, frm, actDia);
                 frm.Update();
             }
 
@@ -194,7 +194,7 @@ namespace hoTools.Utils.ActivityParameter
             act.Diagrams.Refresh();
 
             // put the activity on the diagram
-            Util.addSequenceNumber(rep, actDia);
+            Util.AddSequenceNumber(rep, actDia);
             var actObj = (EA.DiagramObject)actDia.DiagramObjects.AddNew("l=30;r=780;t=30;b=1120", "");
             actObj.ElementID = act.ElementID;
             actObj.Update();
@@ -235,7 +235,7 @@ namespace hoTools.Utils.ActivityParameter
             // type is only defined as text
             else
             {
-                methodReturnTypId = Convert.ToInt32(Util.getTypeID(rep, m.ReturnType));
+                methodReturnTypId = Convert.ToInt32(Util.GetTypeId(rep, m.ReturnType));
             }
 
             bool withActivityReturnParameter = false;
@@ -243,7 +243,7 @@ namespace hoTools.Utils.ActivityParameter
             {
                 parTrgt.ClassifierID = methodReturnTypId;
                 // create an return Parameter for Activity (in fact an element with properties)
-                parTrgt = Util.getParameterFromActivity(rep, null, act, true);
+                parTrgt = Util.GetParameterFromActivity(rep, null, act, true);
                 if (parTrgt == null)
                 {
                     parTrgt = (EA.Element)act.EmbeddedElements.AddNew(parName, "Parameter");
@@ -257,8 +257,8 @@ namespace hoTools.Utils.ActivityParameter
                 parTrgt.Update();
                 // update properties for return value
                 var par = new Param(rep, parTrgt);
-                par.setParameterProperties("direction", "out");
-                par.save();
+                par.SetParameterProperties("direction", "out");
+                par.Save();
                 par = null;
             }
             // returnType for activity
@@ -288,7 +288,7 @@ namespace hoTools.Utils.ActivityParameter
                 parName = parSrc.Position + ":" + parSrc.Name + postfixName + prefixTyp + direction;
 
                 // check if parameter already exists (last parameter = false)
-                parTrgt = Util.getParameterFromActivity(rep, parSrc, act);
+                parTrgt = Util.GetParameterFromActivity(rep, parSrc, act);
 
 
 
@@ -311,7 +311,7 @@ namespace hoTools.Utils.ActivityParameter
                 // type is only defined as text
                 else
                 {   // try to find classifier
-                    parTrgt.ClassifierID = Convert.ToInt32(Util.getTypeID(rep, parSrc.Type));
+                    parTrgt.ClassifierID = Convert.ToInt32(Util.GetTypeId(rep, parSrc.Type));
                     // use type in name (no classifier found)
                     if (parTrgt.ClassifierID == 0) parTrgt.Name = parTrgt.Name + ":" + parSrc.Type;
                 }
@@ -321,9 +321,9 @@ namespace hoTools.Utils.ActivityParameter
 
                 // update properties for parameter
                 var par = new Param(rep, parTrgt);
-                par.setParameterProperties("direction", parSrc.Kind);
-                if (parSrc.IsConst)  par.setParameterProperties("constant", "true");
-                par.save();
+                par.SetParameterProperties("direction", parSrc.Kind);
+                if (parSrc.IsConst)  par.SetParameterProperties("constant", "true");
+                par.Save();
                 parTrgt.Update();
                
 

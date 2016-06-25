@@ -42,6 +42,7 @@
             this.cmbService4 = new System.Windows.Forms.ComboBox();
             this.cmbService3 = new System.Windows.Forms.ComboBox();
             this.cmbService2 = new System.Windows.Forms.ComboBox();
+            this.lblSearchSearchTerm = new System.Windows.Forms.Label();
             this.txtBtn1Text = new System.Windows.Forms.TextBox();
             this.txtBtn1SearchName = new System.Windows.Forms.TextBox();
             this.txtBtn1SearchTerm = new System.Windows.Forms.TextBox();
@@ -62,25 +63,24 @@
             this.txtBtn5SearchTerm = new System.Windows.Forms.TextBox();
             this.txtBtn5SearchName = new System.Windows.Forms.TextBox();
             this.txtBtn5Text = new System.Windows.Forms.TextBox();
-            this.Button1 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
-            this.label20 = new System.Windows.Forms.Label();
-            this.label21 = new System.Windows.Forms.Label();
-            this.label22 = new System.Windows.Forms.Label();
-            this.label23 = new System.Windows.Forms.Label();
-            this.label24 = new System.Windows.Forms.Label();
-            this.label25 = new System.Windows.Forms.Label();
+            this.lblSearchButton1 = new System.Windows.Forms.Label();
+            this.lblSearchButton2 = new System.Windows.Forms.Label();
+            this.lblSearchButton3 = new System.Windows.Forms.Label();
+            this.lblSearchButton4 = new System.Windows.Forms.Label();
+            this.lblSearchButton5 = new System.Windows.Forms.Label();
+            this.lblSearchSearchName = new System.Windows.Forms.Label();
+            this.lblSearchTooltip = new System.Windows.Forms.Label();
+            this.lblSearchButtonText = new System.Windows.Forms.Label();
+            this.lblServiceButtonText = new System.Windows.Forms.Label();
+            this.lblServiceButtonName = new System.Windows.Forms.Label();
+            this.lblServiceButton5 = new System.Windows.Forms.Label();
+            this.lblServiceButton4 = new System.Windows.Forms.Label();
+            this.lblServiceButton3 = new System.Windows.Forms.Label();
+            this.lblServiceButton2 = new System.Windows.Forms.Label();
+            this.lblServiceButton1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.label26 = new System.Windows.Forms.Label();
+            this.lblServiceButtonTooltip = new System.Windows.Forms.Label();
             this.txtServiceTooltip5 = new System.Windows.Forms.TextBox();
             this.txtServiceTooltip1 = new System.Windows.Forms.TextBox();
             this.txtServiceTooltip4 = new System.Windows.Forms.TextBox();
@@ -126,6 +126,7 @@
             this.cmbService1.Size = new System.Drawing.Size(317, 26);
             this.cmbService1.TabIndex = 42;
             this.toolTip1.SetToolTip(this.cmbService1, "Choose your service Function");
+            this.cmbService1.SelectedIndexChanged += new System.EventHandler(this.cmbService_SelectedIndexChanged);
             // 
             // txtButton5TextService
             // 
@@ -186,6 +187,7 @@
             this.cmbService5.Size = new System.Drawing.Size(317, 26);
             this.cmbService5.TabIndex = 46;
             this.toolTip1.SetToolTip(this.cmbService5, "Choose your service Function");
+            this.cmbService5.SelectedIndexChanged += new System.EventHandler(this.cmbService_SelectedIndexChanged);
             // 
             // cmbService4
             // 
@@ -196,6 +198,7 @@
             this.cmbService4.Size = new System.Drawing.Size(317, 26);
             this.cmbService4.TabIndex = 45;
             this.toolTip1.SetToolTip(this.cmbService4, "Choose your service Function");
+            this.cmbService4.SelectedIndexChanged += new System.EventHandler(this.cmbService_SelectedIndexChanged);
             // 
             // cmbService3
             // 
@@ -206,6 +209,7 @@
             this.cmbService3.Size = new System.Drawing.Size(317, 26);
             this.cmbService3.TabIndex = 44;
             this.toolTip1.SetToolTip(this.cmbService3, "Choose your service Function");
+            this.cmbService3.SelectedIndexChanged += new System.EventHandler(this.cmbService_SelectedIndexChanged);
             // 
             // cmbService2
             // 
@@ -216,6 +220,19 @@
             this.cmbService2.Size = new System.Drawing.Size(317, 26);
             this.cmbService2.TabIndex = 43;
             this.toolTip1.SetToolTip(this.cmbService2, "Choose your service Function");
+            this.cmbService2.SelectedIndexChanged += new System.EventHandler(this.cmbService_SelectedIndexChanged);
+            // 
+            // lblSearchSearchTerm
+            // 
+            this.lblSearchSearchTerm.AutoSize = true;
+            this.lblSearchSearchTerm.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSearchSearchTerm.Location = new System.Drawing.Point(468, 20);
+            this.lblSearchSearchTerm.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblSearchSearchTerm.Name = "lblSearchSearchTerm";
+            this.lblSearchSearchTerm.Size = new System.Drawing.Size(112, 18);
+            this.lblSearchSearchTerm.TabIndex = 39;
+            this.lblSearchSearchTerm.Text = "<Search Term>";
+            this.toolTip1.SetToolTip(this.lblSearchSearchTerm, "The EA <Search Term> to find. ");
             // 
             // txtBtn1Text
             // 
@@ -372,179 +389,167 @@
             this.txtBtn5Text.Size = new System.Drawing.Size(73, 24);
             this.txtBtn5Text.TabIndex = 30;
             // 
-            // Button1
+            // lblSearchButton1
             // 
-            this.Button1.AutoSize = true;
-            this.Button1.Location = new System.Drawing.Point(11, 37);
-            this.Button1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.Button1.Name = "Button1";
-            this.Button1.Size = new System.Drawing.Size(63, 18);
-            this.Button1.TabIndex = 13;
-            this.Button1.Text = "Button 1";
+            this.lblSearchButton1.AutoSize = true;
+            this.lblSearchButton1.Location = new System.Drawing.Point(11, 37);
+            this.lblSearchButton1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblSearchButton1.Name = "lblSearchButton1";
+            this.lblSearchButton1.Size = new System.Drawing.Size(63, 18);
+            this.lblSearchButton1.TabIndex = 13;
+            this.lblSearchButton1.Text = "Button 1";
             // 
-            // label11
+            // lblSearchButton2
             // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(11, 64);
-            this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(63, 18);
-            this.label11.TabIndex = 34;
-            this.label11.Text = "Button 2";
+            this.lblSearchButton2.AutoSize = true;
+            this.lblSearchButton2.Location = new System.Drawing.Point(11, 64);
+            this.lblSearchButton2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblSearchButton2.Name = "lblSearchButton2";
+            this.lblSearchButton2.Size = new System.Drawing.Size(63, 18);
+            this.lblSearchButton2.TabIndex = 34;
+            this.lblSearchButton2.Text = "Button 2";
             // 
-            // label12
+            // lblSearchButton3
             // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(11, 91);
-            this.label12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(63, 18);
-            this.label12.TabIndex = 35;
-            this.label12.Text = "Button 3";
+            this.lblSearchButton3.AutoSize = true;
+            this.lblSearchButton3.Location = new System.Drawing.Point(11, 91);
+            this.lblSearchButton3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblSearchButton3.Name = "lblSearchButton3";
+            this.lblSearchButton3.Size = new System.Drawing.Size(63, 18);
+            this.lblSearchButton3.TabIndex = 35;
+            this.lblSearchButton3.Text = "Button 3";
             // 
-            // label13
+            // lblSearchButton4
             // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(9, 117);
-            this.label13.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(63, 18);
-            this.label13.TabIndex = 36;
-            this.label13.Text = "Button 4";
+            this.lblSearchButton4.AutoSize = true;
+            this.lblSearchButton4.Location = new System.Drawing.Point(9, 117);
+            this.lblSearchButton4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblSearchButton4.Name = "lblSearchButton4";
+            this.lblSearchButton4.Size = new System.Drawing.Size(63, 18);
+            this.lblSearchButton4.TabIndex = 36;
+            this.lblSearchButton4.Text = "Button 4";
             // 
-            // label14
+            // lblSearchButton5
             // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(9, 143);
-            this.label14.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(63, 18);
-            this.label14.TabIndex = 37;
-            this.label14.Text = "Button 5";
+            this.lblSearchButton5.AutoSize = true;
+            this.lblSearchButton5.Location = new System.Drawing.Point(9, 143);
+            this.lblSearchButton5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblSearchButton5.Name = "lblSearchButton5";
+            this.lblSearchButton5.Size = new System.Drawing.Size(63, 18);
+            this.lblSearchButton5.TabIndex = 37;
+            this.lblSearchButton5.Text = "Button 5";
             // 
-            // label15
+            // lblSearchSearchName
             // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(169, 20);
-            this.label15.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(96, 18);
-            this.label15.TabIndex = 38;
-            this.label15.Text = "Search name";
+            this.lblSearchSearchName.AutoSize = true;
+            this.lblSearchSearchName.Location = new System.Drawing.Point(169, 20);
+            this.lblSearchSearchName.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblSearchSearchName.Name = "lblSearchSearchName";
+            this.lblSearchSearchName.Size = new System.Drawing.Size(257, 18);
+            this.lblSearchSearchName.TabIndex = 38;
+            this.lblSearchSearchName.Text = "Search Name or SQL (*.sql) file name";
             // 
-            // label16
+            // lblSearchTooltip
             // 
-            this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.Location = new System.Drawing.Point(468, 20);
-            this.label16.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(112, 18);
-            this.label16.TabIndex = 39;
-            this.label16.Text = "<Search Term>";
-            this.toolTip1.SetToolTip(this.label16, "The EA <Search Term> to find. ");
+            this.lblSearchTooltip.AutoSize = true;
+            this.lblSearchTooltip.Location = new System.Drawing.Point(659, 20);
+            this.lblSearchTooltip.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblSearchTooltip.Name = "lblSearchTooltip";
+            this.lblSearchTooltip.Size = new System.Drawing.Size(104, 18);
+            this.lblSearchTooltip.TabIndex = 40;
+            this.lblSearchTooltip.Text = "Search Tooltip";
             // 
-            // label17
+            // lblSearchButtonText
             // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(659, 20);
-            this.label17.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(99, 18);
-            this.label17.TabIndex = 40;
-            this.label17.Text = "Search tooltip";
+            this.lblSearchButtonText.AutoSize = true;
+            this.lblSearchButtonText.Location = new System.Drawing.Point(80, 20);
+            this.lblSearchButtonText.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblSearchButtonText.Name = "lblSearchButtonText";
+            this.lblSearchButtonText.Size = new System.Drawing.Size(83, 18);
+            this.lblSearchButtonText.TabIndex = 41;
+            this.lblSearchButtonText.Text = "Button Text";
             // 
-            // label18
+            // lblServiceButtonText
             // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(80, 20);
-            this.label18.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(78, 18);
-            this.label18.TabIndex = 41;
-            this.label18.Text = "Button text";
+            this.lblServiceButtonText.AutoSize = true;
+            this.lblServiceButtonText.Location = new System.Drawing.Point(79, 21);
+            this.lblServiceButtonText.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblServiceButtonText.Name = "lblServiceButtonText";
+            this.lblServiceButtonText.Size = new System.Drawing.Size(83, 18);
+            this.lblServiceButtonText.TabIndex = 52;
+            this.lblServiceButtonText.Text = "Button Text";
             // 
-            // label19
+            // lblServiceButtonName
             // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(79, 21);
-            this.label19.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(78, 18);
-            this.label19.TabIndex = 52;
-            this.label19.Text = "Button text";
+            this.lblServiceButtonName.AutoSize = true;
+            this.lblServiceButtonName.Location = new System.Drawing.Point(308, 21);
+            this.lblServiceButtonName.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblServiceButtonName.Name = "lblServiceButtonName";
+            this.lblServiceButtonName.Size = new System.Drawing.Size(336, 18);
+            this.lblServiceButtonName.TabIndex = 53;
+            this.lblServiceButtonName.Text = "Service (choose from available hoTools Services)";
             // 
-            // label20
+            // lblServiceButton5
             // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(324, 21);
-            this.label20.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(98, 18);
-            this.label20.TabIndex = 53;
-            this.label20.Text = "Service name";
+            this.lblServiceButton5.AutoSize = true;
+            this.lblServiceButton5.Location = new System.Drawing.Point(5, 149);
+            this.lblServiceButton5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblServiceButton5.Name = "lblServiceButton5";
+            this.lblServiceButton5.Size = new System.Drawing.Size(63, 18);
+            this.lblServiceButton5.TabIndex = 58;
+            this.lblServiceButton5.Text = "Button 5";
             // 
-            // label21
+            // lblServiceButton4
             // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(5, 149);
-            this.label21.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(63, 18);
-            this.label21.TabIndex = 58;
-            this.label21.Text = "Button 5";
+            this.lblServiceButton4.AutoSize = true;
+            this.lblServiceButton4.Location = new System.Drawing.Point(5, 121);
+            this.lblServiceButton4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblServiceButton4.Name = "lblServiceButton4";
+            this.lblServiceButton4.Size = new System.Drawing.Size(63, 18);
+            this.lblServiceButton4.TabIndex = 57;
+            this.lblServiceButton4.Text = "Button 4";
             // 
-            // label22
+            // lblServiceButton3
             // 
-            this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(5, 121);
-            this.label22.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(63, 18);
-            this.label22.TabIndex = 57;
-            this.label22.Text = "Button 4";
+            this.lblServiceButton3.AutoSize = true;
+            this.lblServiceButton3.Location = new System.Drawing.Point(8, 98);
+            this.lblServiceButton3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblServiceButton3.Name = "lblServiceButton3";
+            this.lblServiceButton3.Size = new System.Drawing.Size(63, 18);
+            this.lblServiceButton3.TabIndex = 56;
+            this.lblServiceButton3.Text = "Button 3";
             // 
-            // label23
+            // lblServiceButton2
             // 
-            this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(8, 98);
-            this.label23.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(63, 18);
-            this.label23.TabIndex = 56;
-            this.label23.Text = "Button 3";
+            this.lblServiceButton2.AutoSize = true;
+            this.lblServiceButton2.Location = new System.Drawing.Point(8, 71);
+            this.lblServiceButton2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblServiceButton2.Name = "lblServiceButton2";
+            this.lblServiceButton2.Size = new System.Drawing.Size(63, 18);
+            this.lblServiceButton2.TabIndex = 55;
+            this.lblServiceButton2.Text = "Button 2";
             // 
-            // label24
+            // lblServiceButton1
             // 
-            this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(8, 71);
-            this.label24.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(63, 18);
-            this.label24.TabIndex = 55;
-            this.label24.Text = "Button 2";
-            // 
-            // label25
-            // 
-            this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(8, 46);
-            this.label25.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(63, 18);
-            this.label25.TabIndex = 54;
-            this.label25.Text = "Button 1";
+            this.lblServiceButton1.AutoSize = true;
+            this.lblServiceButton1.Location = new System.Drawing.Point(8, 46);
+            this.lblServiceButton1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblServiceButton1.Name = "lblServiceButton1";
+            this.lblServiceButton1.Size = new System.Drawing.Size(63, 18);
+            this.lblServiceButton1.TabIndex = 54;
+            this.lblServiceButton1.Text = "Button 1";
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.Button1);
-            this.groupBox2.Controls.Add(this.label11);
-            this.groupBox2.Controls.Add(this.label12);
-            this.groupBox2.Controls.Add(this.label13);
-            this.groupBox2.Controls.Add(this.label14);
-            this.groupBox2.Controls.Add(this.label18);
-            this.groupBox2.Controls.Add(this.label15);
-            this.groupBox2.Controls.Add(this.label16);
-            this.groupBox2.Controls.Add(this.label17);
+            this.groupBox2.Controls.Add(this.lblSearchButton1);
+            this.groupBox2.Controls.Add(this.lblSearchButton2);
+            this.groupBox2.Controls.Add(this.lblSearchButton3);
+            this.groupBox2.Controls.Add(this.lblSearchButton4);
+            this.groupBox2.Controls.Add(this.lblSearchButton5);
+            this.groupBox2.Controls.Add(this.lblSearchButtonText);
+            this.groupBox2.Controls.Add(this.lblSearchSearchName);
+            this.groupBox2.Controls.Add(this.lblSearchSearchTerm);
+            this.groupBox2.Controls.Add(this.lblSearchTooltip);
             this.groupBox2.Controls.Add(this.txtBtn5SearchTooltip);
             this.groupBox2.Controls.Add(this.txtBtn1SearchTooltip);
             this.groupBox2.Controls.Add(this.txtBtn2SearchTooltip);
@@ -565,14 +570,14 @@
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.label19);
-            this.groupBox3.Controls.Add(this.label20);
-            this.groupBox3.Controls.Add(this.label26);
-            this.groupBox3.Controls.Add(this.label25);
-            this.groupBox3.Controls.Add(this.label24);
-            this.groupBox3.Controls.Add(this.label23);
-            this.groupBox3.Controls.Add(this.label22);
-            this.groupBox3.Controls.Add(this.label21);
+            this.groupBox3.Controls.Add(this.lblServiceButtonText);
+            this.groupBox3.Controls.Add(this.lblServiceButtonName);
+            this.groupBox3.Controls.Add(this.lblServiceButtonTooltip);
+            this.groupBox3.Controls.Add(this.lblServiceButton1);
+            this.groupBox3.Controls.Add(this.lblServiceButton2);
+            this.groupBox3.Controls.Add(this.lblServiceButton3);
+            this.groupBox3.Controls.Add(this.lblServiceButton4);
+            this.groupBox3.Controls.Add(this.lblServiceButton5);
             this.groupBox3.Controls.Add(this.txtServiceTooltip5);
             this.groupBox3.Controls.Add(this.txtServiceTooltip1);
             this.groupBox3.Controls.Add(this.txtServiceTooltip4);
@@ -592,20 +597,20 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Services Buttons";
             // 
-            // label26
+            // lblServiceButtonTooltip
             // 
-            this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(662, 27);
-            this.label26.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(101, 18);
-            this.label26.TabIndex = 61;
-            this.label26.Text = "Service tooltip";
+            this.lblServiceButtonTooltip.AutoSize = true;
+            this.lblServiceButtonTooltip.Location = new System.Drawing.Point(658, 21);
+            this.lblServiceButtonTooltip.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblServiceButtonTooltip.Name = "lblServiceButtonTooltip";
+            this.lblServiceButtonTooltip.Size = new System.Drawing.Size(106, 18);
+            this.lblServiceButtonTooltip.TabIndex = 61;
+            this.lblServiceButtonTooltip.Text = "Service Tooltip";
             // 
             // txtServiceTooltip5
             // 
             this.txtServiceTooltip5.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtServiceTooltip5.Location = new System.Drawing.Point(659, 152);
+            this.txtServiceTooltip5.Location = new System.Drawing.Point(659, 150);
             this.txtServiceTooltip5.Name = "txtServiceTooltip5";
             this.txtServiceTooltip5.ReadOnly = true;
             this.txtServiceTooltip5.Size = new System.Drawing.Size(460, 24);
@@ -614,7 +619,7 @@
             // txtServiceTooltip1
             // 
             this.txtServiceTooltip1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtServiceTooltip1.Location = new System.Drawing.Point(659, 48);
+            this.txtServiceTooltip1.Location = new System.Drawing.Point(659, 46);
             this.txtServiceTooltip1.Name = "txtServiceTooltip1";
             this.txtServiceTooltip1.ReadOnly = true;
             this.txtServiceTooltip1.Size = new System.Drawing.Size(460, 24);
@@ -623,7 +628,7 @@
             // txtServiceTooltip4
             // 
             this.txtServiceTooltip4.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtServiceTooltip4.Location = new System.Drawing.Point(659, 123);
+            this.txtServiceTooltip4.Location = new System.Drawing.Point(659, 121);
             this.txtServiceTooltip4.Name = "txtServiceTooltip4";
             this.txtServiceTooltip4.ReadOnly = true;
             this.txtServiceTooltip4.Size = new System.Drawing.Size(460, 24);
@@ -632,7 +637,7 @@
             // txtServiceTooltip2
             // 
             this.txtServiceTooltip2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtServiceTooltip2.Location = new System.Drawing.Point(659, 72);
+            this.txtServiceTooltip2.Location = new System.Drawing.Point(659, 70);
             this.txtServiceTooltip2.Name = "txtServiceTooltip2";
             this.txtServiceTooltip2.ReadOnly = true;
             this.txtServiceTooltip2.Size = new System.Drawing.Size(460, 24);
@@ -641,7 +646,7 @@
             // txtServiceTooltip3
             // 
             this.txtServiceTooltip3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtServiceTooltip3.Location = new System.Drawing.Point(659, 98);
+            this.txtServiceTooltip3.Location = new System.Drawing.Point(659, 96);
             this.txtServiceTooltip3.Name = "txtServiceTooltip3";
             this.txtServiceTooltip3.ReadOnly = true;
             this.txtServiceTooltip3.Size = new System.Drawing.Size(460, 24);
@@ -653,9 +658,9 @@
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(71, 8);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(617, 29);
+            this.label1.Size = new System.Drawing.Size(490, 29);
             this.label1.TabIndex = 196;
-            this.label1.Text = "hoTools: Toolbar Settings for Model Searches && Service";
+            this.label1.Text = "hoTools: Toolbar Model Searches && Service";
             // 
             // FrmSettingsToolbar
             // 
@@ -718,15 +723,15 @@
         private System.Windows.Forms.TextBox txtBtn5SearchTerm;
         private System.Windows.Forms.TextBox txtBtn5SearchName;
         private System.Windows.Forms.TextBox txtBtn5Text;
-        private System.Windows.Forms.Label Button1;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label lblSearchButton1;
+        private System.Windows.Forms.Label lblSearchButton2;
+        private System.Windows.Forms.Label lblSearchButton3;
+        private System.Windows.Forms.Label lblSearchButton4;
+        private System.Windows.Forms.Label lblSearchButton5;
+        private System.Windows.Forms.Label lblSearchSearchName;
+        private System.Windows.Forms.Label lblSearchSearchTerm;
+        private System.Windows.Forms.Label lblSearchTooltip;
+        private System.Windows.Forms.Label lblSearchButtonText;
         private System.Windows.Forms.ComboBox cmbService1;
         private System.Windows.Forms.TextBox txtButton5TextService;
         private System.Windows.Forms.TextBox txtButton4TextService;
@@ -737,13 +742,13 @@
         private System.Windows.Forms.ComboBox cmbService4;
         private System.Windows.Forms.ComboBox cmbService3;
         private System.Windows.Forms.ComboBox cmbService2;
-        private System.Windows.Forms.Label label19;
-        private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.Label label22;
-        private System.Windows.Forms.Label label23;
-        private System.Windows.Forms.Label label24;
-        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.Label lblServiceButtonText;
+        private System.Windows.Forms.Label lblServiceButtonName;
+        private System.Windows.Forms.Label lblServiceButton5;
+        private System.Windows.Forms.Label lblServiceButton4;
+        private System.Windows.Forms.Label lblServiceButton3;
+        private System.Windows.Forms.Label lblServiceButton2;
+        private System.Windows.Forms.Label lblServiceButton1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.TextBox txtServiceTooltip5;
@@ -751,7 +756,7 @@
         private System.Windows.Forms.TextBox txtServiceTooltip4;
         private System.Windows.Forms.TextBox txtServiceTooltip2;
         private System.Windows.Forms.TextBox txtServiceTooltip3;
-        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.Label lblServiceButtonTooltip;
         private System.Windows.Forms.Label label1;
     }
 }

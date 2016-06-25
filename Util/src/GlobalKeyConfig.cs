@@ -16,14 +16,14 @@ namespace GlobalHotkeys
         string _modifier4;
         string _tooltip;
         
-       public GlobalKeysConfig(string Key, string Modifier1, string Modifier2, string Modifier3, string Modifier4, string Help)
+       public GlobalKeysConfig(string key, string modifier1, string modifier2, string modifier3, string modifier4, string help)
         {
-            _key = Key;
-            _modifier1 = Modifier1;
-            _modifier2 = Modifier2;
-            _modifier3 = Modifier3;
-            _modifier4 = Modifier4;
-            _tooltip = Help;
+            _key = key;
+            _modifier1 = modifier1;
+            _modifier2 = modifier2;
+            _modifier3 = modifier3;
+            _modifier4 = modifier4;
+            _tooltip = help;
 
         }
 
@@ -60,7 +60,7 @@ namespace GlobalHotkeys
         }
         #endregion
 
-        public static Dictionary<string, Keys> getKeys() => 
+        public static Dictionary<string, Keys> GetKeys() => 
             new Dictionary<string, Keys>
             {
               {"None",Keys.None },
@@ -77,7 +77,7 @@ namespace GlobalHotkeys
 
             };
 
-        public static Dictionary<string, Modifiers> getModifiers() => 
+        public static Dictionary<string, Modifiers> GetModifiers() => 
             new Dictionary<string, Modifiers>
             { {"Alt",Modifiers.Alt},
               {"Ctrl",Modifiers.Ctrl},
@@ -89,17 +89,17 @@ namespace GlobalHotkeys
         public class GlobalKeysServiceConfig : GlobalKeysConfig
         {
             private MethodInfo _method;
-            private string _GUID = "";
+            private string _guid = "";
             private string _description = "";
             private bool _isTextRequired;
 
-            public GlobalKeysServiceConfig(string Key, string Modifier1, string Modifier2, string Modifier3, string Modifier4, string Help,
-                string GUID, string Description, bool IsTextRequired)
-                : base(Key, Modifier1, Modifier2, Modifier3, Modifier4, Help)
+            public GlobalKeysServiceConfig(string key, string modifier1, string modifier2, string modifier3, string modifier4, string help,
+                string guid, string description, bool isTextRequired)
+                : base(key, modifier1, modifier2, modifier3, modifier4, help)
             {
-                _GUID = GUID;
-                _description = Description;
-                _isTextRequired = IsTextRequired;
+                _guid = guid;
+                _description = description;
+                _isTextRequired = isTextRequired;
             }
 
             #region GetterSetter
@@ -108,10 +108,10 @@ namespace GlobalHotkeys
                 get { return _method; }
                 set { _method = value; }
             }
-            public string GUID
+            public string Guid
             {
-                get { return _GUID; }
-                set { _GUID = value; }
+                get { return _guid; }
+                set { _guid = value; }
             }
             public string Description
             {
@@ -188,12 +188,12 @@ namespace GlobalHotkeys
             private string _searchName = "";
             private string _searchTerm = "";
 
-            public GlobalKeysSearchConfig(string Key, string Modifier1, string Modifier2, string Modifier3, string Modifier4, string Help,
-                string SearchName, string SearchTerm)
-                : base(Key, Modifier1, Modifier2, Modifier3, Modifier4, Help)
+            public GlobalKeysSearchConfig(string key, string modifier1, string modifier2, string modifier3, string modifier4, string help,
+                string searchName, string searchTerm)
+                : base(key, modifier1, modifier2, modifier3, modifier4, help)
             {
-                _searchName = SearchName;
-                _searchTerm = SearchTerm;
+                _searchName = searchName;
+                _searchTerm = searchTerm;
             }
 
             #region GetterSetter

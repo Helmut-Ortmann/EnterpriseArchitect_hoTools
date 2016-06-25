@@ -16,7 +16,7 @@ namespace hoTools.Utils
         /// <param name="type"></param>
         /// <param name="stereotype"></param>
         /// <returns></returns>
-        public static EA.Element createElement(EA.Repository rep, EA.Package pkg, string name, string type, string stereotype)
+        public static EA.Element CreateElement(EA.Repository rep, EA.Package pkg, string name, string type, string stereotype)
         {
             EA.Element el = null;
 
@@ -37,7 +37,7 @@ namespace hoTools.Utils
             }
             return el;
         }
-        public static EA.Element createPortWithInterface(EA.Element elSource, EA.Element elInterface, string ifType ="RequiredInterface")
+        public static EA.Element CreatePortWithInterface(EA.Element elSource, EA.Element elInterface, string ifType ="RequiredInterface")
         {
             EA.Element interf = null;
             EA.Element port = null;

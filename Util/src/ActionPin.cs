@@ -8,7 +8,7 @@ namespace hoTools.Utils.ActionPins
 
     public static class ActionPin
     {
-
+        
         //---------------------------------------------------------------------------------------------
         // updateActionParameter(EA.Repository rep, EA.Element actionPin)
         //---------------------------------------------------------------------------------------------
@@ -35,7 +35,7 @@ namespace hoTools.Utils.ActionPins
                 {
                     // get type of synchronized parameter
                     // if parameter isn't synchronized it will not work
-                    string type = Util.getParameterType(rep, actionPin.ElementGUID);
+                    string type = Util.GetParameterType(rep, actionPin.ElementGUID);
                     if (type == "")
                     {
                         string txt = "No type is available for action:'" + action.Name + "'";
@@ -43,12 +43,12 @@ namespace hoTools.Utils.ActionPins
                     }
                     else
                     {
-                        Int32 parTypeId = Util.getTypeID(rep, type);
+                        Int32 parTypeId = Util.GetTypeId(rep, type);
                         if (parTypeId != 0)
                         {
                             //pin.Name = par.
                             EA.Element el = rep.GetElementByID(parTypeId);
-                            Util.setElementPDATA1(rep, actionPin, el.ElementGUID);// PDATA1 setzen
+                            Util.SetElementPdata1(rep, actionPin, el.ElementGUID);// PDATA1 setzen
                         }
                     }
                 }

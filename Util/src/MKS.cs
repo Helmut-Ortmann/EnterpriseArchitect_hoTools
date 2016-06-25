@@ -23,19 +23,19 @@ namespace hoTools.Utils.MksUtil
             if (pkg.IsControlled)
             {
 
-                _vcPath = Util.getVccFilePath(rep, pkg);
+                _vcPath = Util.GetVccFilePath(rep, pkg);
             }
 
             
         }
         
-        public bool getNewest()
+        public bool GetNewest()
         {
             // check nested packages
             foreach (EA.Package nestedPkg in _pkg.Packages)
             {
                 var mks = new Mks(_rep, nestedPkg);
-                mks.getNewest();
+                mks.GetNewest();
             }
             if (_pkg.IsControlled)
             {
@@ -76,13 +76,13 @@ namespace hoTools.Utils.MksUtil
         public string ViewHistory()
         {
             if (_vcPath == null) return "";
-            return this.cmd("viewhistory");
+            return this.Cmd("viewhistory");
         }
 
         public string Checkout()
         {
             if (_vcPath == null) return "";
-            string txt = this.cmd("co --batch --lock --forceConfirm=yes");
+            string txt = this.Cmd("co --batch --lock --forceConfirm=yes");
             //string txt = this.cmd("co --batch --nolock --unlock");
             return txt;
         }
@@ -90,11 +90,11 @@ namespace hoTools.Utils.MksUtil
         public string UndoCheckout()
         {
             if (_vcPath == null) return "";
-            string txt = this.cmd("unlock --action=remove --revision :head");
+            string txt = this.Cmd("unlock --action=remove --revision :head");
             return txt;
         }
 
-        private string cmd(string command)
+        private string Cmd(string command)
         {
             string returnString = "";
             if (_vcPath == null) return returnString;

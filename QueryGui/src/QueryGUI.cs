@@ -174,7 +174,7 @@ namespace hoTools.Query
             if (tabControlSql.TabPages.Count == 0)
             {
                 // first tab with Element Template
-                _sqlTabCntrls.AddTab(SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.ELEMENT_TEMPLATE));
+                _sqlTabCntrls.AddTab(SqlTemplates.GetTemplateText(SqlTemplates.SqlTemplateId.ElementTemplate));
             }
 
 
@@ -435,7 +435,7 @@ namespace hoTools.Query
             var scriptFunction = row["FunctionObj"] as ScriptFunction;
 
             // replace templates, search term and more
-            string sql = SqlTemplates.replaceMacro(Repository, textBox.Text, txtSearchTerm.Text);
+            string sql = SqlTemplates.ReplaceMacro(Repository, textBox.Text, txtSearchTerm.Text);
             if (sql == "") return;
 
             // run SQL, Script and ask whether to execute, skip script or break all together
@@ -655,7 +655,7 @@ namespace hoTools.Query
         /// <param name="e"></param>
         void showSqlErrorToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Util.StartFile(SqlError.getEaSqlErrorFilePath());
+            Util.StartFile(SqlError.GetEaSqlErrorFilePath());
         }
 
         
@@ -667,7 +667,7 @@ namespace hoTools.Query
         /// <param name="e"></param>
         void lastSqlStringSentToEAToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Util.StartFile(SqlError.getHoToolsLastSqlFilePath());
+            Util.StartFile(SqlError.GetHoToolsLastSqlFilePath());
            
         }
 
@@ -727,11 +727,11 @@ namespace hoTools.Query
         void templatesAndMacrosToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
-            string content = SqlTemplates.getTemplateText(SqlTemplates.SQL_TEMPLATE_ID.MACROS_HELP);
+            string content = SqlTemplates.GetTemplateText(SqlTemplates.SqlTemplateId.MacrosHelp);
             // write it do EA home (%appdata%Sparx System\EA\hoTools_SqlTemplatesAndMacros.txt)
-            SqlError.writeSqlTemplatesAndMacros(content);
+            SqlError.WriteSqlTemplatesAndMacros(content);
             // Show it in Editor
-            Util.StartFile(SqlError.getSqlTemplatesAndMacrosFilePath());
+            Util.StartFile(SqlError.GetSqlTemplatesAndMacrosFilePath());
 
         }
 

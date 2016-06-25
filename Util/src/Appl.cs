@@ -15,39 +15,39 @@ namespace hoTools.Utils.Appls
         
 
 
-        public static EA.Element getBehaviorForOperation(EA.Repository Repository, EA.Method method)
+        public static EA.Element GetBehaviorForOperation(EA.Repository repository, EA.Method method)
         {
             EA.Element returnValue = null;
             string behavior = method.Behavior;
             if (behavior.StartsWith("{", StringComparison.Ordinal) & behavior.EndsWith("}", StringComparison.Ordinal))
             {
                 // get object according to behavior
-                EA.Element el = Repository.GetElementByGuid(behavior);
+                EA.Element el = repository.GetElementByGuid(behavior);
                 returnValue = el;
             }
             return returnValue;
         }
 
-        public static void DisplayBehaviorForOperation(EA.Repository Repository, EA.Method method)
+        public static void DisplayBehaviorForOperation(EA.Repository repository, EA.Method method)
         {
             string behavior = method.Behavior;
             if (behavior.StartsWith("{", StringComparison.Ordinal) & behavior.EndsWith("}", StringComparison.Ordinal))
             {
                 // get object according to behavior
-                EA.Element el = Repository.GetElementByGuid(behavior);
+                EA.Element el = repository.GetElementByGuid(behavior);
                 // Activity
                 if (el == null) { }
                 else
                 {
                     if (el.Type.Equals("Activity") || el.Type.Equals("Interaction") || el.Type.Equals("StateMachine"))
                     {
-                        Util.OpenBehaviorForElement(Repository, el);
+                        Util.OpenBehaviorForElement(repository, el);
                     }
                 }
             }
         }
         
-        public static bool createInteractionForOperation(EA.Repository rep, EA.Method m)
+        public static bool CreateInteractionForOperation(EA.Repository rep, EA.Method m)
         {
             // get class
             EA.Element elClass = rep.GetElementByID(m.ParentID);
@@ -111,14 +111,14 @@ namespace hoTools.Utils.Appls
 
 
             // Link Operation to activity
-            Util.setBehaviorForOperation(rep, m, seq);
+            Util.SetBehaviorForOperation(rep, m, seq);
 
             // Set show behavior
-            Util.setShowBehaviorInDiagram(rep, m);
+            Util.SetShowBehaviorInDiagram(rep, m);
 
             
 
-            Util.setFrameLinksToDiagram(rep, frm, seqDia); // link Overview frame to diagram
+            Util.SetFrameLinksToDiagram(rep, frm, seqDia); // link Overview frame to diagram
             frm.Update();
             //rep.ReloadDiagram(actDia.DiagramID);
 
@@ -135,7 +135,7 @@ namespace hoTools.Utils.Appls
         // final
         // transition from init to 'State1'
 
-        public static bool createDefaultElementsForStateDiagram(EA.Repository rep, EA.Diagram dia, EA.Element stateChart)
+        public static bool CreateDefaultElementsForStateDiagram(EA.Repository rep, EA.Diagram dia, EA.Element stateChart)
         {
 
             // check if init and final node are available
@@ -155,12 +155,12 @@ namespace hoTools.Utils.Appls
                 initNode.Update();
                 if (dia != null)
                 {
-                    Util.addSequenceNumber(rep, dia);
+                    Util.AddSequenceNumber(rep, dia);
                     var initDiaNode = (EA.DiagramObject)dia.DiagramObjects.AddNew("l=295;r=315;t=125;b=135;", "");
                     initDiaNode.Sequence = 1;
                     initDiaNode.ElementID = initNode.ElementID;
                     initDiaNode.Update();
-                    Util.setSequenceNumber(rep, dia, initDiaNode, "1");
+                    Util.SetSequenceNumber(rep, dia, initDiaNode, "1");
                 }
 
             }
@@ -174,12 +174,12 @@ namespace hoTools.Utils.Appls
                 finalNode.Update();
                 if (dia != null)
                 {
-                    Util.addSequenceNumber(rep, dia);
+                    Util.AddSequenceNumber(rep, dia);
                     var finalDiaNode = (EA.DiagramObject)dia.DiagramObjects.AddNew("l=285;r=305;t=745;b=765;", "");
                     finalDiaNode.Sequence = 1;
                     finalDiaNode.ElementID = finalNode.ElementID;
                     finalDiaNode.Update();
-                    Util.setSequenceNumber(rep, dia, finalDiaNode, "1");
+                    Util.SetSequenceNumber(rep, dia, finalDiaNode, "1");
                 }
             }
             // create state node
@@ -190,13 +190,13 @@ namespace hoTools.Utils.Appls
             stateNode.Update();
             if (dia != null)
             {
-                Util.addSequenceNumber(rep, dia);
+                Util.AddSequenceNumber(rep, dia);
                 string pos = "l=300;r=400;t=-400;b=-470";
                 var stateDiaNode = (EA.DiagramObject)dia.DiagramObjects.AddNew(pos, "");
                 stateDiaNode.Sequence = 1;
                 stateDiaNode.ElementID = stateNode.ElementID;
                 stateDiaNode.Update();
-                Util.setSequenceNumber(rep, dia, stateDiaNode, "1");
+                Util.SetSequenceNumber(rep, dia, stateDiaNode, "1");
 
                 // draw a transition
                 var con = (EA.Connector)finalNode.Connectors.AddNew("", "StateFlow");
@@ -217,7 +217,7 @@ namespace hoTools.Utils.Appls
         //-----------------------------------------------------------------------------------------
         // Create StateMachine for Operation
         //----------------------------------------------------------------------------------
-        public static bool createStateMachineForOperation(EA.Repository rep, EA.Method m)
+        public static bool CreateStateMachineForOperation(EA.Repository rep, EA.Method m)
         {
             // get class
             EA.Element elClass = rep.GetElementByID(m.ParentID);
@@ -262,7 +262,7 @@ namespace hoTools.Utils.Appls
             chartDia.DiagramObjects.Refresh();
 
             // add default nodes (init/final)
-            createDefaultElementsForStateDiagram(rep, chartDia, stateMachine);
+            CreateDefaultElementsForStateDiagram(rep, chartDia, stateMachine);
 
             // Add Heading to diagram
             var noteObj = (EA.DiagramObject)chartDia.DiagramObjects.AddNew("l=40;r=700;t=10;b=25", "");
@@ -278,14 +278,14 @@ namespace hoTools.Utils.Appls
 
 
             // Link Operation to StateMachine
-            Util.setBehaviorForOperation(rep, m, stateMachine);
+            Util.SetBehaviorForOperation(rep, m, stateMachine);
 
             // Set show behavior
-            Util.setShowBehaviorInDiagram(rep, m);
+            Util.SetShowBehaviorInDiagram(rep, m);
 
 
 
-            Util.setFrameLinksToDiagram(rep, frm, chartDia); // link Overview frame to diagram
+            Util.SetFrameLinksToDiagram(rep, frm, chartDia); // link Overview frame to diagram
             frm.Update();
             //rep.ReloadDiagram(actDia.DiagramID);
 

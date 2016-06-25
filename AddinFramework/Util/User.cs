@@ -15,7 +15,7 @@ namespace EAAddinFramework.Utils
 		{
 			get
 			{
-				if (this.model.isSecurityEnabled)
+				if (this.model.IsSecurityEnabled)
 				{
 					return this.firstName + " " + this.lastName;
 				}

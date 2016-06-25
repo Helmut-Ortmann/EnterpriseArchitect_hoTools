@@ -8,7 +8,7 @@ namespace hoTools.Settings
         /// <summary>
         /// Global Settings of hoTools
         /// </summary>
-        AddinSettings _settings;
+        readonly AddinSettings _settings;
 
         #region Constructor
         /// <summary>
@@ -50,7 +50,7 @@ namespace hoTools.Settings
             // SQL editor
             txtSqlEditor.Text = _settings.SqlEditor;
 
-
+            txtSqlSearchPath.Text = _settings.SqlPaths;
         }
         #endregion
 
@@ -62,7 +62,7 @@ namespace hoTools.Settings
         #endregion
 
         #region Button ok
-        private void btnOk_Click(object sender, EventArgs e)
+        void btnOk_Click(object sender, EventArgs e)
         {
             // only SQL query window
             _settings.OnlyQueryWindow = AddinSettings.ShowInWindow.Disabled;
@@ -77,9 +77,11 @@ namespace hoTools.Settings
             _settings.IsAskForQueryUpdateOutside = chkIsAskForUpdate.Checked;
             _settings.SqlEditor = txtSqlEditor.Text;
 
+            _settings.SqlPaths = txtSqlSearchPath.Text;
+
 
             // save setting
-            this._settings.Save();
+            _settings.Save();
             Close();
         }
         #endregion

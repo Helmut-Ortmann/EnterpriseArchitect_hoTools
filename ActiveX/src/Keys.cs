@@ -25,7 +25,7 @@ namespace Control.EaAddinShortcuts
             KeySearchName = searchName;
             KeySearchTerm = searchTerm;
         }
-        public string HelpTextLog
+        public string HelpTextLong
         {
             get
             {

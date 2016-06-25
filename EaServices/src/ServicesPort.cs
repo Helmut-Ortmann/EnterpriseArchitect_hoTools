@@ -258,8 +258,8 @@ namespace hoTools.EAServicesPort
             if (count < 2) return;
             _rep.SaveDiagram(dia.DiagramID);
 
-            var eadia = new EADiagram(_rep);
-            eadia.sortSelectedObjects();
+            var eadia = new EaDiagram(_rep);
+            eadia.SortSelectedObjects();
             eadia.ReloadSelectedObjectsAndConnector();
  
             //_rep.ReloadDiagram(dia.DiagramID);
@@ -282,7 +282,7 @@ namespace hoTools.EAServicesPort
             {
                 Cursor.Current = Cursors.WaitCursor;
                 // remember Diagram data of current selected diagram
-                var eaDia = new EADiagram(_rep);
+                var eaDia = new EaDiagram(_rep);
                 
                 // hide all ports
                 RemovePortFromDiagramGui();
@@ -433,7 +433,7 @@ namespace hoTools.EAServicesPort
                 el = _rep.GetElementByID(obj.ElementID);
                 if (EmbeddedElementTypes.Contains(el.Type) )
                 {
-                    EA.DiagramObject portObj = Util.getDiagramObjectByID(_rep, dia, el.ElementID);
+                    EA.DiagramObject portObj = Util.GetDiagramObjectById(_rep, dia, el.ElementID);
                     //EA.DiagramObject portObj = dia.GetDiagramObjectByID(el.ElementID, "");
                     DoChangeLabelStyle(portObj, style);
                 }
@@ -442,7 +442,7 @@ namespace hoTools.EAServicesPort
                     foreach (EA.Element p in el.EmbeddedElements)
                     {
                         if (! (EmbeddedElementTypes.Contains(p.Type))) continue;
-                        EA.DiagramObject portObj = Util.getDiagramObjectByID(_rep, dia, p.ElementID);
+                        EA.DiagramObject portObj = Util.GetDiagramObjectById(_rep, dia, p.ElementID);
                         if (portObj != null) {
                             //EA.DiagramObject portObj = dia.GetDiagramObjectByID(p.ElementID, "");
                             // HDN=1;  Label hidden
@@ -585,7 +585,7 @@ namespace hoTools.EAServicesPort
             {
 
                 Cursor.Current = Cursors.WaitCursor;
-                var eaDia = new EADiagram(_rep);
+                var eaDia = new EaDiagram(_rep);
                 DoConnectPortsInsideGui();
 
                 eaDia.ReloadSelectedObjectsAndConnector();
@@ -652,7 +652,7 @@ namespace hoTools.EAServicesPort
             {
 
                 Cursor.Current = Cursors.WaitCursor;
-                var eaDia = new EADiagram(_rep);
+                var eaDia = new EaDiagram(_rep);
                 DoConnectPortGui();
 
                 eaDia.ReloadSelectedObjectsAndConnector();
@@ -696,7 +696,7 @@ namespace hoTools.EAServicesPort
             else
             {
                 var rec = new ElementRecursive(_rep);
-                lElId = rec.getItemsRecursive(pkg);
+                lElId = rec.GetItemsRecursive(pkg);
             }
 
             // between all components / classes
@@ -747,7 +747,7 @@ namespace hoTools.EAServicesPort
                         //        if (trgtPort.Stereotype != "Client") continue;
 
                             var sql = new UtilSql(_rep);
-                            if (sql.isConnectionAvailable(srcPort, trgtPort) == false)
+                            if (sql.IsConnectionAvailable(srcPort, trgtPort) == false)
                             {
                                 // direction of connector
                                 if (srcPort.Stereotype == "Sender" | srcPort.Stereotype == "Client")
@@ -780,7 +780,7 @@ namespace hoTools.EAServicesPort
         #region setConnectionDirectionUnspecifiedGUI
         public void SetConnectionDirectionUnspecifiedGui()
         {
-            var eaDia = new EADiagram(_rep);
+            var eaDia = new EaDiagram(_rep);
             EA.Diagram dia = eaDia.Dia;
             if (eaDia.Dia == null) return;
             if (eaDia.SelectedObjectsCount == 0) return;

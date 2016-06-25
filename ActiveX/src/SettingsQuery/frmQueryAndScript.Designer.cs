@@ -46,6 +46,8 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.txtSqlSearchPath = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -169,9 +171,10 @@
             // 
             // txtSqlEditor
             // 
+            this.txtSqlEditor.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSqlEditor.Location = new System.Drawing.Point(29, 191);
             this.txtSqlEditor.Name = "txtSqlEditor";
-            this.txtSqlEditor.Size = new System.Drawing.Size(270, 20);
+            this.txtSqlEditor.Size = new System.Drawing.Size(270, 24);
             this.txtSqlEditor.TabIndex = 214;
             this.toolTip1.SetToolTip(this.txtSqlEditor, resources.GetString("txtSqlEditor.ToolTip"));
             this.txtSqlEditor.Visible = false;
@@ -228,6 +231,28 @@
             this.label2.Text = "Ask for update if file has changed outside";
             this.toolTip1.SetToolTip(this.label2, "Ask for update if File has changed outside hoTools.");
             // 
+            // txtSqlSearchPath
+            // 
+            this.txtSqlSearchPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSqlSearchPath.Location = new System.Drawing.Point(29, 230);
+            this.txtSqlSearchPath.Name = "txtSqlSearchPath";
+            this.txtSqlSearchPath.Size = new System.Drawing.Size(536, 24);
+            this.txtSqlSearchPath.TabIndex = 216;
+            this.toolTip1.SetToolTip(this.txtSqlSearchPath, "Paths hoTools searches for SQL Queries to run:\r\n\r\nA semicolon seperated list of p" +
+        "aths hoTools searches for the SQL query to execute.");
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(29, 211);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(264, 18);
+            this.label3.TabIndex = 217;
+            this.label3.Text = "SQL path to search for SQL to execute";
+            this.toolTip1.SetToolTip(this.label3, "Paths hoTools searches for SQL Queries to run:\r\n\r\nA semicolon seperated list of p" +
+        "aths hoTools searches for the SQL query to execute.");
+            // 
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
@@ -238,6 +263,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(577, 328);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.txtSqlSearchPath);
             this.Controls.Add(this.btnSqlEditor);
             this.Controls.Add(this.txtSqlEditor);
             this.Controls.Add(this.label2);
@@ -277,5 +304,7 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.TextBox txtSqlEditor;
         private System.Windows.Forms.Button btnSqlEditor;
+        private System.Windows.Forms.TextBox txtSqlSearchPath;
+        private System.Windows.Forms.Label label3;
     }
 }

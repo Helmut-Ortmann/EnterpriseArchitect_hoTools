@@ -6,8 +6,6 @@ using System.Reflection;
 using System.Text.RegularExpressions;
 using EA;
 
-using hoTools.Utils;
-
 
 namespace hoTools.Utils.SQL
 {
@@ -18,68 +16,68 @@ namespace hoTools.Utils.SQL
         /// Dictionary of the available Templates. Note: If error like duplicate key the constructor breaks without exception.
         /// Not easy to find errors.
         /// </summary>
-        static Dictionary<SQL_TEMPLATE_ID, SqlTemplate> SqlTemplate = new Dictionary<SQL_TEMPLATE_ID, SqlTemplate>
+        static readonly Dictionary<SqlTemplateId, SqlTemplate> SqlTemplate = new Dictionary<SqlTemplateId, SqlTemplate>
         {
 
-             {  SQL_TEMPLATE_ID.CURRENT_ITEM_ID_TEMPLATE,
+             {  SqlTemplateId.CurrentItemIdTemplate,
                 new SqlTemplate("Current Item Id Template", // Name
                     "CurrentItemIdTemplate",                // String ID of Resource
                     "Template to select current selected item (Package, Diagram, Element, Attribute, Operation) by an ID",
                     isResource:true
                     ) },
-              {  SQL_TEMPLATE_ID.CURRENT_ITEM_GUID_TEMPLATE,
+              {  SqlTemplateId.CurrentItemGuidTemplate,
                 new SqlTemplate("Current Item Guid Template", // Name
                     "CurrentItemGuidTemplate",       // String ID of Resource
                     "Template to select current selected item (Package, Diagram, Element, Attribute, Operation) by a GUID",
                     isResource:true
                     ) },
-              {  SQL_TEMPLATE_ID.CONVEYED_ITEMS_FROM_CONNECTOR_TEMPLATE,
+              {  SqlTemplateId.ConveyedItemsFromConnectorTemplate,
                 new SqlTemplate("Conveyed Items from selected Connector Template", // Name
                     "ConveyedItemsIdsTemplate",           // String ID of Resource
                     "Template to get Conveyed Items from the selected Connector like: 'ElementID IN ( #ConveyedItemsIDS# )",
                     isResource:true
                     ) },
-              {  SQL_TEMPLATE_ID.CONNECTORS_FROM_ELEMENT_TEMPLATE,
+              {  SqlTemplateId.ConnectorsFromElementTemplate,
                 new SqlTemplate("Connectors from Element",    // Name
                     "ConnectorsFromElementTemplate",          // String ID of Resource
                     "Template to get connectors with Conveyed Items from the selected Element. Gets list of Elements which are source of connector. Right Click, Goto Diagram to get the Source element in the Diagram",
                     isResource:true
                     ) },
 
-                {  SQL_TEMPLATE_ID.DIAGRAM_ELEMENTS_IDS_TEMPLATE,
+                {  SqlTemplateId.DiagramElementsIdsTemplate,
                 new SqlTemplate("Diagram Elements IDS template",    // Name
                     "DiagramElementsIdsTemplate",          // String ID of Resource
                     "Template to get all Diagram Elements",
                     isResource:true
                     ) },
 
-                {  SQL_TEMPLATE_ID.DIAGRAM_SELECTED_ELEMENTS_IDS_TEMPLATE,
+                {  SqlTemplateId.DiagramSelectedElementsIdsTemplate,
                 new SqlTemplate("Diagram selected Elements IDS template",    // Name
                     "DiagramSelectedElementsIdsTemplate",          // String ID of Resource
                     "Template to get selected Diagram Elements",
                     isResource:true
                     ) },
 
-             {  SQL_TEMPLATE_ID.DEMO_RUN_SCRIPT_TEMPLATE,
+             {  SqlTemplateId.DemoRunScriptTemplate,
                 new SqlTemplate("Demo Query to run Scripts on results ",    // Name
                     "DemoRunScript",          // String ID of Resource
                     "Demo Query to run Scripts on results (needs exactly one GUID in result column) ",
                     isResource:true
                     ) },
 
-             {  SQL_TEMPLATE_ID.DELETED_TREE_SELECTED_ITEMS,
+             {  SqlTemplateId.DeletedTreeSelectedItems,
                 new SqlTemplate("Demo Delete Tree selected Items ",    // Name
                     "DeleteTreeSelectedItemsTemplate",          // String ID of Resource
                     "Demo delete SQL to delete the selected Items in browser (Diagram, Element, Attribute, Operation). Be careful! This might cause damage! ",
                     isResource:true
                     ) },
-             {  SQL_TEMPLATE_ID.UPDATE_ITEM_TEMPLATE,
+             {  SqlTemplateId.UpdateItemTemplate,
                 new SqlTemplate("Demo Update current selected Item ",    // Name
                     "UpdateCurrentSelectedItemTemplate",          // String ID of Resource
                     "Demo update SQL the selected Item (Diagram, Element, Attribute, Operation). Be careful! This might cause damage! ",
                     isResource:true
                     ) },
-             {  SQL_TEMPLATE_ID.INSERT_ITEM_IN_PACKAGE_TEMPLATE,
+             {  SqlTemplateId.InsertItemInPackageTemplate,
                 new SqlTemplate("Demo Insert into Package ",    // Name
                     "InsertElementIntoCurrentPackage",          // String ID of Resource
                     "Demo insert SQL in current selected package (Package of Diagram, Element, Attribute, Operation). Be careful! This might cause damage! ",
@@ -88,7 +86,7 @@ namespace hoTools.Utils.SQL
 
 
 
-            {  SQL_TEMPLATE_ID.BRANCH_TEMPLATE,
+            {  SqlTemplateId.BranchTemplate,
                 new SqlTemplate("Branch",@"
 //
 // Template #Branch#
@@ -100,7 +98,7 @@ where pkg.package_ID in (#Branch#)
 ORDER BY pkg.Name
             ", "Template Package recursive") },
 
-             { SQL_TEMPLATE_ID.MACROS_HELP,
+             { SqlTemplateId.MacrosHelp,
                 new SqlTemplate("Macros help",
                 "//\r\n" +
                 "// Help to available Macros\r\n" +
@@ -140,7 +138,7 @@ ORDER BY pkg.Name
                 "      )\r\n" +
                 "ORDER BY o.Name\r\n",
                      "Template available Macros") },
-             { SQL_TEMPLATE_ID.ELEMENT_TEMPLATE,
+             { SqlTemplateId.ElementTemplate,
                 new SqlTemplate("Element Template",
                 "//\r\n" +
                 "// Template Element\r\n" +
@@ -154,7 +152,7 @@ ORDER BY pkg.Name
                 "      )\r\n" +
                 "ORDER BY o.Name\r\n",
                      "Template to search for Elements") },
-              { SQL_TEMPLATE_ID.ELEMENT_TYPE_TEMPLATE,
+              { SqlTemplateId.ElementTypeTemplate,
                 new SqlTemplate("Element Type Template Text",
                 "//\r\n" +
                 "// Template Element types\r\n" +
@@ -168,7 +166,7 @@ ORDER BY pkg.Name
                 "ORDER BY 1,2\r\n",
                      "Template to display all Element Types and their counts") },
 
-               { SQL_TEMPLATE_ID.DIAGRAM_TYPE_TEMPLATE,
+               { SqlTemplateId.DiagramTypeTemplate,
                 new SqlTemplate("Diagram Type Template ",
                 "//\r\n" +
                 "// Template Diagram types\r\n" +
@@ -182,7 +180,7 @@ ORDER BY pkg.Name
                 "ORDER BY 1,2\r\n",
                      "Template to display all Diagram Types and their counts") },
 
-             { SQL_TEMPLATE_ID.DIAGRAM_TEMPLATE,
+             { SqlTemplateId.DiagramTemplate,
                 new SqlTemplate("Diagram TemplateText",
                 "//\r\n" +
                 "// Template Diagram of type\r\n" +
@@ -197,7 +195,7 @@ ORDER BY pkg.Name
                      "    )\r\n" +
                      "ORDER BY d.Name\r\n",
                    "TemplateText to search for Diagrams") },
-             { SQL_TEMPLATE_ID.PACKAGE_TEMPLATE,
+             { SqlTemplateId.PackageTemplate,
                 new SqlTemplate("Package TemplateText",
                            "//\r\n" +
                             "// Template Package with\r\n" +
@@ -212,7 +210,7 @@ ORDER BY pkg.Name
                            "      o.ea_guid = pkg.ea_guid \r\n" +
                            "ORDER BY o.Name\r\n",
                     "TemplateText to search for Packages") },
-             { SQL_TEMPLATE_ID.DIAGRAM_OBJECT_TEMPLATE,
+             { SqlTemplateId.DiagramObjectTemplate,
                 new SqlTemplate(@"Diagram Object Template",@"
 //
 // Diagram Object Template
@@ -227,7 +225,7 @@ ORDER BY 3",
                     "TemplateText to search Diagram Object Packages") },
 
 
-             { SQL_TEMPLATE_ID.ATTRIBUTE_TEMPLATE,
+             { SqlTemplateId.AttributeTemplate,
                 new SqlTemplate(@"Attribute TemplateText",
                      "//\r\n" +
                     "// Template Attribute\r\n" +
@@ -236,7 +234,7 @@ ORDER BY 3",
                     "from t_attribute o\r\n" +
                     "where o.name like '%' ",
                     "Diagram objects of current or selected Diagram") },
-             { SQL_TEMPLATE_ID.OPERATION_TEMPLATE,
+             { SqlTemplateId.OperationTemplate,
                 new SqlTemplate(@"OPERATION TemplateText",
                      "//\r\n" +
                       "// Template Operation\r\n" +
@@ -247,66 +245,66 @@ ORDER BY 3",
                     "TemplateText to search for Operations") },
              //--------------------------------------------------------------------------------
              // Insert Macros
-            { SQL_TEMPLATE_ID.SEARCH_TERM,
+            { SqlTemplateId.SearchTerm,
                 new SqlTemplate("SEARCH_TERM",
                     "<Search Term>",
                     "<Search Term> is a string replaced at runtime by a variable string.\nExample: Name = '<Search Term>'") },
-            { SQL_TEMPLATE_ID.CONNECTOR_ID,
+            { SqlTemplateId.ConnectorId,
                 new SqlTemplate("CONNECTOR_ID",
                     "#ConnectorID#",
                     "Placeholder for the current selected connector ID\nExample: ConnectorID = #ConnectorID# ") },
-             { SQL_TEMPLATE_ID.CONVEYED_ITEM_IDS,
+             { SqlTemplateId.ConveyedItemIds,
                 new SqlTemplate("CONVEDYED_ITEM_IDS",
                     "#ConveyedItemIDS#",
                     "Placeholder for the current conveyed item IDs as comma separated list\nExample: 'elementID in (#ConveyedItemIDS#)'") },
-             { SQL_TEMPLATE_ID.TREE_SELECTED_GUIDS,
+             { SqlTemplateId.TreeSelectedGuids,
                 new SqlTemplate("TREE_SELECTED_GUIDS",
                     "#TreeSelectedGUIDS#",
                     "Placeholder for selected Browser Elements  as comma separated list of GUIDs\nExample: ea_GUID in (#TreeSelectedGUIDS#)") },
-              { SQL_TEMPLATE_ID.PACKAGE_ID,
+              { SqlTemplateId.PackageId,
                 new SqlTemplate("PACKAGE_ID",
                     "#Package#",
                     "Placeholder for the package the selected Item (Package, Diagram, Element, Operation, Attribute) is contained, use as PackageID\nExample: pkg.Package_ID = #Package# ") },
-            { SQL_TEMPLATE_ID.PACKAGE,
+            { SqlTemplateId.Package,
                 new SqlTemplate("PACKAGE_ID",
                     "#PackageID#",
                     "Placeholder for the package the selected Item (Package, Diagram, Element, Operation, Attribute) is contained, use as PackageID\nExample: pkg.Package_ID = #PackageID# ") },
-            { SQL_TEMPLATE_ID.BRANCH_IDS,
+            { SqlTemplateId.BranchIds,
                 new SqlTemplate("BRANCH_IDS",
                     "#Branch#",
                     "Placeholder for the current selected package (recursive), use as PackageID\nExample: pkg.Package_ID in (#Branch#)\nExpands to in '512,513,..' ")  },
-            { SQL_TEMPLATE_ID.IN_BRANCH_IDS,
+            { SqlTemplateId.InBranchIds,
                 new SqlTemplate("IN_BRANCH_IDS",
                     "#InBranch#",
                     "Placeholder for sql in clause for the current selected package (recursive), use as PackageID\nExample: pkg.Package_ID  (#InBranch#)\nExpands to 'IN (512,513,..)' ") },
-            { SQL_TEMPLATE_ID.NEW_GUID,
+            { SqlTemplateId.NewGuid,
                 new SqlTemplate("NewGuid",
                     "#NewGuid#",
                     "Placeholder for a new created GUID to use in SQL INSERT statement.") },
-            { SQL_TEMPLATE_ID.CURRENT_ITEM_ID,
+            { SqlTemplateId.CurrentItemId,
                 new SqlTemplate("CURRENT_ITEM_ID",
                     "#CurrentItemID#","Placeholder for the current selected item ID (Element, Package, Diagram, Attribute, Operation, may be ambiguous, GUID is more secure), use as ID\nExample: obj.Object_ID = #CurrentItemID#; Alias: #CurrentElementID#") },
-            { SQL_TEMPLATE_ID.CURRENT_ITEM_GUID,
+            { SqlTemplateId.CurrentItemGuid,
                 new SqlTemplate( "CURRENT_ITEM_GUID",
                     "#CurrentItemGUID#",
                     "Placeholder for the current selected item GUID (Element, Package, Diagram, Attribute, Operation), use as GUID\nExample: obj.ea_GUID = #CurrentItemGUID#; Alias: #CurrentElementGUID# ") },
 
-            { SQL_TEMPLATE_ID.DiagramSelectedElements_IDS,
+            { SqlTemplateId.DiagramSelectedElementsIds,
                 new SqlTemplate( "DiagramSelectedElements_IDS",
                     "#DiagramSelectedElements_IDS#",
                     "Placeholder for the current selected items in the diagram, as ID\nExample: elementID in (#DiagramSelectedElements_IDS# )") },
 
-            { SQL_TEMPLATE_ID.DiagramElements_IDS,
+            { SqlTemplateId.DiagramElementsIds,
                 new SqlTemplate( "DiagramElements_IDS",
                     "#DiagramElements_IDS#",
                     "Placeholder for the diagram Elements in the selected diagram, as ID\nExample: elementID in (#DiagramElements_IDS#) ") },
 
-             { SQL_TEMPLATE_ID.DIAGRAM_ID,
+             { SqlTemplateId.DiagramId,
                 new SqlTemplate( "Diagram ID", // Name
                     "#Diagram_ID#",            // Macro
                     "Placeholder for the diagram ID of the current diagram, as ID\nExample: diagramID in (#Diagram_ID#) ") },
 
-            { SQL_TEMPLATE_ID.WC,
+            { SqlTemplateId.Wc,
                 new SqlTemplate("DB Wild Card", 
                     "#WC#", 
                     "Placeholder for the Database Wild Card (% or *)\r\n"+
@@ -314,43 +312,43 @@ ORDER BY 3",
                     "Remark: Just for compatibility with EA Searches.You may simple use the familiar wild cards '*' or '%'\r\n " +
                     "        hoTools take care of the correct usage for the current database\r\n "
                     ) },
-            { SQL_TEMPLATE_ID.NOW,
+            { SqlTemplateId.Now,
                 new SqlTemplate("NOW date/time", 
                     "#NOW(not implemented)#", 
                     "Placeholder date/time, not yet implemented ") },
-            { SQL_TEMPLATE_ID.AUTHOR,
+            { SqlTemplateId.Author,
                 new SqlTemplate("Author",
                     "#Author(not implemented)#",
                     "Author, Takes the name from the 'Author' field in the 'Options' dialog 'General' page.") },
-            { SQL_TEMPLATE_ID.DB_MYSQL,
+            { SqlTemplateId.DbMysql,
                new SqlTemplate("DB_MYSQL",
                     "#DB=MYSQL#                             #DB=MYSQL#",
                     "The SQL string for other DBs included by #DB=MYSQL#, #DB=MYSQL#     ...my db sql....#DB=MYSQL#") },
-            { SQL_TEMPLATE_ID.DB_JET,
+            { SqlTemplateId.DbJet,
                 new SqlTemplate("DB_JET",
                     "#DB=JET#                             #DB=JET#",
                     "The SQL string for other DBs included by #DB=JET#, #DB=JET#     ...my db sql....#DB=JET#") },
-            { SQL_TEMPLATE_ID.DB_ORACLE,
+            { SqlTemplateId.DbOracle,
                 new SqlTemplate("DB_ORACLE",
                     "#DB=ORACLE#                             #DB=ORACLE#",
                     "The SQL string for other DBs included by #DB=ORACLE#, #DB=ORACLE#     ...my db sql....#DB=ORACLE#") },
-            { SQL_TEMPLATE_ID.DB_SQLSVR,
+            { SqlTemplateId.DbSqlsvr,
                 new SqlTemplate("DB_SQLSVR",
                     "#DB=SQLSVR#                             #DB=SQLSVR#",
                     "The SQL string for other DBs included by #DB=SQLSVR#, #DB=SQLSVR#     ...my db sql....#DB=SQLSVR#") },
-            { SQL_TEMPLATE_ID.DB_ASA,
+            { SqlTemplateId.DbAsa,
                 new SqlTemplate("DB_ASA",
                     "#DB=ASA#                             #DB=ASA#",
                     "The SQL string for other DBs included by #DB=ASA#, #DB=ASA#     ...my db sql....#DB=ASA#") },
-            { SQL_TEMPLATE_ID.DB_POSTGRES,
+            { SqlTemplateId.DbPostgres,
                 new SqlTemplate("DB_POSTGRES",
                     "#DB=POSTGRES#                             #DB=POSTGRES#",
                     "The SQL string for other DBs included by #DB=POSTGRES#, #DB=POSTGRES#     ...my db sql....#DB=POSTGRES#") },
-            { SQL_TEMPLATE_ID.DB_ACCESS2007,
+            { SqlTemplateId.DbAccess2007,
                 new SqlTemplate("DB_ACCESS2007",
                     "#DB=ACCESS2007#                             #DB=ACCESS2007#",
                     "The SQL string for other DBs included by #DB=ACCESS2007#, #DB=ACCESS2007#     ...my db sql....#DB=ACCESS2007#") },
-             { SQL_TEMPLATE_ID.DB_FIREBIRD,
+             { SqlTemplateId.DbFirebird,
                 new SqlTemplate("DB_FIREBIRD",
                     "#DB=FIREBIRD#                             #DB=FIREBIRD#",
                     "The SQL string for other DBs included by #DB=FIREBIRD#, #DB=FIREBIRD#     ...my db sql....#DB=FIREBIRD#") }
@@ -362,60 +360,60 @@ ORDER BY 3",
         /// <summary>
         /// Available Templates
         /// </summary>
-        public enum SQL_TEMPLATE_ID
+        public enum SqlTemplateId
         {
-            DB_OTHER,           // Macros for special DBs
-            DB_ACCESS2007,
-            DB_ORACLE,
-            DB_ASA,
-            DB_SQLSVR,
-            DB_MYSQL,
-            DB_POSTGRES,
-            DB_FIREBIRD,
-            DB_JET,
+            DbOther,           // Macros for special DBs
+            DbAccess2007,
+            DbOracle,
+            DbAsa,
+            DbSqlsvr,
+            DbMysql,
+            DbPostgres,
+            DbFirebird,
+            DbJet,
 
-            BRANCH_TEMPLATE,   // Branch Template
-            ELEMENT_TEMPLATE,
-            ELEMENT_TYPE_TEMPLATE,
-            DIAGRAM_TEMPLATE,
-            DIAGRAM_TYPE_TEMPLATE,
-            PACKAGE_TEMPLATE,
-            DIAGRAM_OBJECT_TEMPLATE,
-            ATTRIBUTE_TEMPLATE,
-            OPERATION_TEMPLATE,
-            SEARCH_TERM,
+            BranchTemplate,   // Branch Template
+            ElementTemplate,
+            ElementTypeTemplate,
+            DiagramTemplate,
+            DiagramTypeTemplate,
+            PackageTemplate,
+            DiagramObjectTemplate,
+            AttributeTemplate,
+            OperationTemplate,
+            SearchTerm,
 
             // SQL modifying
-            INSERT_ITEM_IN_PACKAGE_TEMPLATE,
-            UPDATE_ITEM_TEMPLATE,
-            DELETED_TREE_SELECTED_ITEMS,
+            InsertItemInPackageTemplate,
+            UpdateItemTemplate,
+            DeletedTreeSelectedItems,
                
             //-------------------------
             // macros
-            MACROS_HELP,        // Help to macros
-            CONNECTOR_ID,   // Get's the connector
-            CONVEYED_ITEM_IDS, // Get's the conveyed Items of the connector as a comma separated ID list of elementIDs
-            CONVEYED_ITEMS_FROM_CONNECTOR_TEMPLATE, // Template Conveyed Items of the selected connector
-            CONNECTORS_FROM_ELEMENT_TEMPLATE, // Template to get the Connector with Conveyed Items from Element
-            PACKAGE_ID,      // The containing package of Package, Diagram, Element, Attribute, Operation
-            PACKAGE,         // The containing package of Package, Diagram, Element, Attribute, Operation (compatible with EA)
-            BRANCH_IDS,     // Package (nested, recursive) ids separated by ','  like '20,21,47,1'
-            IN_BRANCH_IDS,  // Package (nested, recursive), complete SQL in clause, ids separated by ','  like 'IN (20,21,47,1)', just a shortcut for #BRANCH_ID#
-            CURRENT_ITEM_ID,     // ALIAS CURRENT_ELEMENT_ID exists (compatible to EA)
-            CURRENT_ITEM_ID_TEMPLATE,   // Template for usage of #CurrentItemId#
-            CURRENT_ITEM_GUID_TEMPLATE, // Template for usage of #CurrentItemGUID#
-            CURRENT_ITEM_GUID,  // ALIAS CURRENT_ELEMENT_GUID exists (compatible to EA)
-            DiagramSelectedElements_IDS,// Selected Diagram objects as a comma separated list of IDs
-            DiagramElements_IDS,        // Diagram objects (selected diagram) as a comma separated list of IDs
-            DIAGRAM_ELEMENTS_IDS_TEMPLATE,
-            DIAGRAM_SELECTED_ELEMENTS_IDS_TEMPLATE,
-            DIAGRAM_ID,                 // Diagram ID
-            AUTHOR,
-            TREE_SELECTED_GUIDS, // get all the GUIDs of the selected items (otDiagram, otElement, otPackage, otAttribute, otMethod
-            NEW_GUID,            // create a new GUIDs to use in insert statement
-            NOW,
-            WC,
-            DEMO_RUN_SCRIPT_TEMPLATE
+            MacrosHelp,        // Help to macros
+            ConnectorId,   // Get's the connector
+            ConveyedItemIds, // Get's the conveyed Items of the connector as a comma separated ID list of elementIDs
+            ConveyedItemsFromConnectorTemplate, // Template Conveyed Items of the selected connector
+            ConnectorsFromElementTemplate, // Template to get the Connector with Conveyed Items from Element
+            PackageId,      // The containing package of Package, Diagram, Element, Attribute, Operation
+            Package,         // The containing package of Package, Diagram, Element, Attribute, Operation (compatible with EA)
+            BranchIds,     // Package (nested, recursive) ids separated by ','  like '20,21,47,1'
+            InBranchIds,  // Package (nested, recursive), complete SQL in clause, ids separated by ','  like 'IN (20,21,47,1)', just a shortcut for #BRANCH_ID#
+            CurrentItemId,     // ALIAS CURRENT_ELEMENT_ID exists (compatible to EA)
+            CurrentItemIdTemplate,   // Template for usage of #CurrentItemId#
+            CurrentItemGuidTemplate, // Template for usage of #CurrentItemGUID#
+            CurrentItemGuid,  // ALIAS CURRENT_ELEMENT_GUID exists (compatible to EA)
+            DiagramSelectedElementsIds,// Selected Diagram objects as a comma separated list of IDs
+            DiagramElementsIds,        // Diagram objects (selected diagram) as a comma separated list of IDs
+            DiagramElementsIdsTemplate,
+            DiagramSelectedElementsIdsTemplate,
+            DiagramId,                 // Diagram ID
+            Author,
+            TreeSelectedGuids, // get all the GUIDs of the selected items (otDiagram, otElement, otPackage, otAttribute, otMethod
+            NewGuid,            // create a new GUIDs to use in insert statement
+            Now,
+            Wc,
+            DemoRunScriptTemplate
         }
         #endregion
 
@@ -425,17 +423,17 @@ ORDER BY 3",
         /// - Name
         /// - ToolTip
         /// </summary>
-        /// <param name="templateID"></param>
+        /// <param name="templateId"></param>
         /// <returns></returns>
-        public static SqlTemplate getTemplate(SQL_TEMPLATE_ID templateID)
+        public static SqlTemplate GetTemplate(SqlTemplateId templateId)
         {
             SqlTemplate template;
-            if (SqlTemplate.TryGetValue(templateID, out template))
+            if (SqlTemplate.TryGetValue(templateId, out template))
             {
                 return template;
             }
             else {
-                MessageBox.Show("ID={templateID}", "Invalid templateID");
+                MessageBox.Show($"ID={templateId}", @"Invalid templateID");
                 return null;
             }
 
@@ -443,12 +441,12 @@ ORDER BY 3",
         /// <summary>
         /// Get TemplateText (the template) or null according to templateID. 
         /// </summary>
-        /// <param name="templateID"></param>
+        /// <param name="templateId"></param>
         /// <returns></returns>
-        public static string getTemplateText(SQL_TEMPLATE_ID templateID)
+        public static string GetTemplateText(SqlTemplateId templateId)
         {
             SqlTemplate template;
-            if (SqlTemplate.TryGetValue(templateID, out template))
+            if (SqlTemplate.TryGetValue(templateId, out template))
             {
                 // get string from class or from resource
                 if (template.IsResource)
@@ -458,7 +456,7 @@ ORDER BY 3",
                 }  else return template.TemplateText;
             }
             else {
-                MessageBox.Show("ID={templateID}", "Invalid templateID");
+                MessageBox.Show($"ID={templateId}", @"Invalid templateID");
                 return null;
             }
    
@@ -466,17 +464,17 @@ ORDER BY 3",
         /// <summary>
         /// Get TemplateText Tool tip or null according to templateID
         /// </summary>
-        /// <param name="templateID"></param>
+        /// <param name="templateId"></param>
         /// <returns></returns>
-        public static string getTooltip(SQL_TEMPLATE_ID templateID)
+        public static string GetTooltip(SqlTemplateId templateId)
         {
             SqlTemplate template;
-            if (SqlTemplate.TryGetValue(templateID, out template))
+            if (SqlTemplate.TryGetValue(templateId, out template))
             {
                 return template.ToolTip;
             }
             else {
-                MessageBox.Show($"ID={templateID.ToString()}", "Invalid templateID");
+                MessageBox.Show($"ID={templateId}", @"Invalid templateID");
                 return null;
             }
 
@@ -484,17 +482,17 @@ ORDER BY 3",
         /// <summary>
         /// Get TemplateText name or null according to templateID
         /// </summary>
-        /// <param name="templateID"></param>
+        /// <param name="templateId"></param>
         /// <returns></returns>
-        public static string getTemplateName(SQL_TEMPLATE_ID templateID)
+        public static string GetTemplateName(SqlTemplateId templateId)
         {
             SqlTemplate template;
-            if (SqlTemplate.TryGetValue(templateID, out template))
+            if (SqlTemplate.TryGetValue(templateId, out template))
             {
                 return template.TemplateName;
             }
             else {
-                MessageBox.Show("ID={templateID}", "Invalid templateID");
+                MessageBox.Show($"ID={templateId}", @"Invalid templateID");
                 return null;
             }
 
@@ -508,13 +506,13 @@ ORDER BY 3",
         /// <param name="sqlString">The complete SQL string</param>
         /// <param name="searchTerm">The Search Term from the text entry field</param>
         /// <returns>"" if error occurred</returns>
-        public static string replaceMacro(Repository rep, string sqlString, string searchTerm)
+        public static string ReplaceMacro(Repository rep, string sqlString, string searchTerm)
         {
             // delete Comments
             string sql = deleteC_Comments(sqlString);
 
             // <Search Term>
-            sql = sql.Replace(getTemplateText(SQL_TEMPLATE_ID.SEARCH_TERM), searchTerm);
+            sql = sql.Replace(GetTemplateText(SqlTemplateId.SearchTerm), searchTerm);
 
             sql = macroDiagram_ID(rep, sql);
             if (sql == "") return "";
@@ -538,32 +536,32 @@ ORDER BY 3",
             if (sql == "") return "";
 
             // replace #Package# by ID of the package the selected item is contained (Element, Package, Diagram, Attribute, Operation)
-            sql = macroPackageID(rep, sql);
+            sql = MacroPackageId(rep, sql);
             if (sql == "") return "";
 
             // replace #ConnectorID#, #ConveyedItemIDS# 
-            sql = macroConnector(rep, sql);
+            sql = MacroConnector(rep, sql);
             if (sql == "") return "";
 
             // replace #TreeSelectedGUIDS#
-            sql = macroTreeSelected(rep, sql);
+            sql = MacroTreeSelected(rep, sql);
             if (sql == "") return "";
 
             // replace #TreeSelectedGUIDS#
-            sql = macroBranch(rep, sql);
+            sql = MacroBranch(rep, sql);
             if (sql == "") return "";
 
 
             // Replace #WC# (DB wile card)
             // Later '*' is changed to the wild card of the current DB
-            string currentTemplate = getTemplateText(SQL_TEMPLATE_ID.WC);
+            string currentTemplate = GetTemplateText(SqlTemplateId.Wc);
             if (sql.Contains(currentTemplate))
             {
                 sql = sql.Replace(currentTemplate, "*"); 
             }
 
             // replace #NewGuid" by a newly created GUID (global unique identifier
-            string newGuidTemplate = getTemplateText(SQL_TEMPLATE_ID.NEW_GUID);
+            string newGuidTemplate = GetTemplateText(SqlTemplateId.NewGuid);
             if (sql.Contains(newGuidTemplate))
             {
                 sql = sql.Replace(newGuidTemplate, "{" + Guid.NewGuid() + "}");
@@ -602,14 +600,14 @@ ORDER BY 3",
         static string macroDiagram_ID(Repository rep, string sql)
         {
             // get template
-            string template = getTemplateText(SQL_TEMPLATE_ID.DIAGRAM_ID);
+            string template = GetTemplateText(SqlTemplateId.DiagramId);
 
             // template is used
             if (sql.Contains(template))
             {
                 // get the diagram
-                EA.Diagram dia;
-                if (rep.GetContextItemType() == EA.ObjectType.otDiagram)
+                Diagram dia;
+                if (rep.GetContextItemType() == ObjectType.otDiagram)
                 {
                     dia = rep.GetContextObject();
                 }
@@ -644,14 +642,14 @@ ORDER BY 3",
         /// <returns>sql string with replaced macro</returns>
         static string macroDiagramElements_IDS(Repository rep, string sql) {
             // get template
-            string template = getTemplateText(SQL_TEMPLATE_ID.DiagramElements_IDS);
+            string template = GetTemplateText(SqlTemplateId.DiagramElementsIds);
 
             // template is used
             if (sql.Contains(template))
             {
                 // get the diagram
-                EA.Diagram dia;
-                if (rep.GetContextItemType() == EA.ObjectType.otDiagram)
+                Diagram dia;
+                if (rep.GetContextItemType() == ObjectType.otDiagram)
                 {
                     dia = rep.GetContextObject();
                 } else
@@ -692,14 +690,14 @@ ORDER BY 3",
         static string macroDiagramSelectedElements_IDS(Repository rep, string sql)
         {
             // get template
-            string template = getTemplateText(SQL_TEMPLATE_ID.DiagramSelectedElements_IDS);
+            string template = GetTemplateText(SqlTemplateId.DiagramSelectedElementsIds);
 
             // template is used
             if (sql.Contains(template))
             {
                 // get the diagram
-                EA.Diagram dia;
-                if (rep.GetContextItemType() == EA.ObjectType.otDiagram)
+                Diagram dia;
+                if (rep.GetContextItemType() == ObjectType.otDiagram)
                 {
                     dia = rep.GetContextObject();
                 }
@@ -742,31 +740,31 @@ ORDER BY 3",
         static string macroItem_ID(Repository rep, string sql)
         {
             // replace ID
-            string template = getTemplateText(SQL_TEMPLATE_ID.CURRENT_ITEM_ID);
+            string template = GetTemplateText(SqlTemplateId.CurrentItemId);
             if (sql.Contains(template) | sql.Contains("#CurrentElementID#"))
             {
-                EA.ObjectType objectType = rep.GetContextItemType();
+                ObjectType objectType = rep.GetContextItemType();
                 int id = 0;
                 switch (objectType)
                 {
-                    case EA.ObjectType.otElement:
+                    case ObjectType.otElement:
                         EA.Element el = (EA.Element)rep.GetContextObject();
                         id = el.ElementID;
                         break;
-                    case EA.ObjectType.otDiagram:
-                        EA.Diagram dia = (EA.Diagram)rep.GetContextObject();
+                    case ObjectType.otDiagram:
+                        Diagram dia = (Diagram)rep.GetContextObject();
                         id = dia.DiagramID;
                         break;
-                    case EA.ObjectType.otPackage:
+                    case ObjectType.otPackage:
                         EA.Package pkg = (EA.Package)rep.GetContextObject();
                         id = pkg.PackageID;
                         break;
-                    case EA.ObjectType.otAttribute:
+                    case ObjectType.otAttribute:
                         EA.Attribute attr = (EA.Attribute)rep.GetContextObject();
                         id = attr.AttributeID;
                         break;
-                    case EA.ObjectType.otMethod:
-                        EA.Method method = (EA.Method)rep.GetContextObject();
+                    case ObjectType.otMethod:
+                        Method method = (Method)rep.GetContextObject();
                         id = method.MethodID;
                         break;
                 }
@@ -779,7 +777,7 @@ ORDER BY 3",
                 else
                 // no diagram, element or package selected
                 {
-                    MessageBox.Show(sql, $"No item (Package, Element, Diagram, Operation, Attribute) selected!");
+                    MessageBox.Show(sql, @"No item (Package, Element, Diagram, Operation, Attribute) selected!");
                     sql = "";
                 }
 
@@ -796,31 +794,31 @@ ORDER BY 3",
         static string macroItem_GUID(Repository rep, string sql)
         {
             // replace ID
-            string template = getTemplateText(SQL_TEMPLATE_ID.CURRENT_ITEM_GUID);
+            string template = GetTemplateText(SqlTemplateId.CurrentItemGuid);
             if (sql.Contains(template) | sql.Contains("#CurrentElementGUID#")) 
             {
-                EA.ObjectType objectType = rep.GetContextItemType();
+                ObjectType objectType = rep.GetContextItemType();
                 string guid = "";
                 switch (objectType)
                 {
-                    case EA.ObjectType.otElement:
+                    case ObjectType.otElement:
                         EA.Element el = (EA.Element)rep.GetContextObject();
                         guid = el.ElementGUID;
                         break;
-                    case EA.ObjectType.otDiagram:
-                        EA.Diagram dia = (EA.Diagram)rep.GetContextObject();
+                    case ObjectType.otDiagram:
+                        Diagram dia = (Diagram)rep.GetContextObject();
                         guid = dia.DiagramGUID;
                         break;
-                    case EA.ObjectType.otPackage:
+                    case ObjectType.otPackage:
                         EA.Package pkg = (EA.Package)rep.GetContextObject();
                         guid = pkg.PackageGUID;
                         break;
-                    case EA.ObjectType.otAttribute:
+                    case ObjectType.otAttribute:
                         EA.Attribute attr = (EA.Attribute)rep.GetContextObject();
                         guid = attr.AttributeGUID;
                         break;
-                    case EA.ObjectType.otMethod:
-                        EA.Method method = (EA.Method)rep.GetContextObject();
+                    case ObjectType.otMethod:
+                        Method method = (Method)rep.GetContextObject();
                         guid = method.MethodGUID;
                         break;
                 }
@@ -833,7 +831,7 @@ ORDER BY 3",
                 else
                 // no diagram, element or package selected
                 {
-                    MessageBox.Show(sql, $"No item (Package, Element, Diagram, Operation, Attribute) selected!");
+                    MessageBox.Show(sql, @"No item (Package, Element, Diagram, Operation, Attribute) selected!");
                     sql = "";
                 }
 
@@ -846,14 +844,14 @@ ORDER BY 3",
         /// <param name="rep"></param>
         /// <param name="sql">The sql string to replace the macro by the found ID</param>
         /// <returns>sql string with replaced macro</returns>
-        static string macroPackageID(Repository rep, string sql)
+        static string MacroPackageId(Repository rep, string sql)
         {
             // Package ID
-            string currentPackageTemplate = getTemplateText(SQL_TEMPLATE_ID.PACKAGE_ID);
+            string currentPackageTemplate = GetTemplateText(SqlTemplateId.PackageId);
             if (sql.Contains(currentPackageTemplate))
             {
                 // get Package id
-                int id = getParentPackageIdFromContextElement(rep);
+                int id = GetParentPackageIdFromContextElement(rep);
                 if (id > 0)
                 {
                     sql = sql.Replace(currentPackageTemplate, $"{id}");
@@ -861,7 +859,7 @@ ORDER BY 3",
                 else
                 // no diagram, element or package selected
                 {
-                    MessageBox.Show(sql, $"No element, diagram, package, attribute, operation selected!");
+                    MessageBox.Show(sql, @"No element, diagram, package, attribute, operation selected!");
                     sql = "";
                 }
 
@@ -874,31 +872,31 @@ ORDER BY 3",
         /// </summary>
         /// <param name="rep"></param>
         /// <returns></returns>
-        static int getParentPackageIdFromContextElement(Repository rep)
+        static int GetParentPackageIdFromContextElement(Repository rep)
         {
-            EA.ObjectType objectType = rep.GetContextItemType();
+            ObjectType objectType = rep.GetContextItemType();
             int id = 0;
             switch (objectType)
             {
-                case EA.ObjectType.otDiagram:
-                    EA.Diagram dia = (EA.Diagram)rep.GetContextObject();
+                case ObjectType.otDiagram:
+                    Diagram dia = (Diagram)rep.GetContextObject();
                     id = dia.PackageID;
                     break;
-                case EA.ObjectType.otElement:
+                case ObjectType.otElement:
                     EA.Element el = (EA.Element)rep.GetContextObject();
                     id = el.PackageID;
                     break;
-                case EA.ObjectType.otPackage:
+                case ObjectType.otPackage:
                     EA.Package pkg = (EA.Package)rep.GetContextObject();
                     id = pkg.PackageID;
                     break;
-                case EA.ObjectType.otAttribute:
+                case ObjectType.otAttribute:
                     EA.Attribute attr = (EA.Attribute)rep.GetContextObject();
                     EA.Element elOfAttr = rep.GetElementByID(attr.ParentID);
                     id = elOfAttr.PackageID;
                     break;
-                case EA.ObjectType.otMethod:
-                    EA.Method meth = (EA.Method)rep.GetContextObject();
+                case ObjectType.otMethod:
+                    Method meth = (Method)rep.GetContextObject();
                     EA.Element elOfMeth = rep.GetElementByID(meth.ParentID);
                     id = elOfMeth.PackageID;
                     break;
@@ -917,21 +915,21 @@ ORDER BY 3",
         /// <param name="rep"></param>
         /// <param name="sql">The sql string to replace the macro by the found ID</param>
         /// <returns>sql string with replaced macro</returns>
-        static string macroConnector(Repository rep, string sql)
+        static string MacroConnector(Repository rep, string sql)
         {
             //--------------------------------------------------------------------------------------------
             // CONNECTOR ID
             // CONVEYED_ITEM_ID
-            string currentConnectorTemplate = getTemplateText(SQL_TEMPLATE_ID.CONNECTOR_ID);
-            string currentConveyedItemTemplate = getTemplateText(SQL_TEMPLATE_ID.CONVEYED_ITEM_IDS);
+            string currentConnectorTemplate = GetTemplateText(SqlTemplateId.ConnectorId);
+            string currentConveyedItemTemplate = GetTemplateText(SqlTemplateId.ConveyedItemIds);
 
             if ((sql.Contains(currentConnectorTemplate) | sql.Contains(currentConveyedItemTemplate)))
             {
                 // connector
-                if (rep.GetContextItemType() == EA.ObjectType.otConnector)
+                if (rep.GetContextItemType() == ObjectType.otConnector)
                 {
                     // connector ID
-                    EA.Connector con = rep.GetContextObject();
+                    Connector con = rep.GetContextObject();
                     if (sql.Contains(currentConnectorTemplate))
                     {
                         
@@ -951,7 +949,7 @@ ORDER BY 3",
                 } else
                 // no connector selected
                 {
-                    MessageBox.Show(sql, $"No connector selected!");
+                    MessageBox.Show(sql, @"No connector selected!");
                     sql = "";
                 }
             }
@@ -965,42 +963,40 @@ ORDER BY 3",
         /// <param name="rep"></param>
         /// <param name="sql">The sql string to replace the macro by the found ID</param>
         /// <returns>sql string with replaced macro</returns>
-        static string macroTreeSelected(Repository rep, string sql)
+        static string MacroTreeSelected(Repository rep, string sql)
         {
             //--------------------------------------------------------------------------------------------
             // Tree selected items
             // CONVEYED_ITEM_ID
-            string template = getTemplateText(SQL_TEMPLATE_ID.TREE_SELECTED_GUIDS);
+            string template = GetTemplateText(SqlTemplateId.TreeSelectedGuids);
 
 
             if (sql.Contains(template))
             {
                 // get the selected elements (Element)
-                string GUIDs = "";  
-                string GUID = "";
+                string guiDs = "";
                 string comma = "";
-                EA.Collection col = rep.GetTreeSelectedElements();
+                Collection col = rep.GetTreeSelectedElements();
                 foreach (var el in col)
                 {
-                    GUID = ((EA.Element)el).ElementGUID;
-                   
+                    var guid = ((EA.Element)el).ElementGUID;
+
                     // make list
-                    if (GUID != "")
+                    if (guid != "")
                     {
-                        GUIDs = $"{GUIDs}{comma}'{GUID}'";
+                        guiDs = $"{guiDs}{comma}'{guid}'";
                         comma = ", ";
                     }
-
                 }
                 // at least one element selected
-                if (GUIDs != "")
+                if (guiDs != "")
                 {
                     // replace by list of GUIDs
-                    sql = sql.Replace(template, $"{GUIDs}");
+                    sql = sql.Replace(template, $"{guiDs}");
                 }
                 else// no element in Browser selected
                 {
-                    MessageBox.Show(sql, $"No elements in browser of type Element(Class, Activity,..) selected, Break!!!!");
+                    MessageBox.Show(sql, @"No elements in browser of type Element(Class, Activity,..) selected, Break!!!!");
                     sql = "";
                 }
             }
@@ -1013,32 +1009,32 @@ ORDER BY 3",
         /// <param name="rep"></param>
         /// <param name="sql">The sql string to replace the macro by the found ID</param>
         /// <returns>sql string with replaced macro</returns>
-        static string macroBranch(Repository rep, string sql) { 
+        static string MacroBranch(Repository rep, string sql) { 
         // Branch=comma separated Package IDs, Recursive:
         // Example for 3 Packages with their PackageID 7,29,128
         // 7,29,128
         //
         // Branch: complete SQL IN statement ' IN (comma separated Package IDs, Recursive):
         // IN (7,29,128)
-            string currentBranchTemplate = getTemplateText(SQL_TEMPLATE_ID.BRANCH_IDS);
-            string currrentInBranchTemplate = getTemplateText(SQL_TEMPLATE_ID.IN_BRANCH_IDS);
+            string currentBranchTemplate = GetTemplateText(SqlTemplateId.BranchIds);
+            string currrentInBranchTemplate = GetTemplateText(SqlTemplateId.InBranchIds);
             if (sql.Contains(currentBranchTemplate) | sql.Contains(currrentInBranchTemplate))
             {
-                EA.ObjectType objectType = rep.GetContextItemType();
+                ObjectType objectType = rep.GetContextItemType();
                 int id = 0;
                 switch (objectType)
                 {
                     // use Package of diagram
-                    case EA.ObjectType.otDiagram:
-                        EA.Diagram dia = (EA.Diagram)rep.GetContextObject();
+                    case ObjectType.otDiagram:
+                        Diagram dia = (Diagram)rep.GetContextObject();
                         id = dia.PackageID;
                         break;
                     // use Package of element
-                    case EA.ObjectType.otElement:
+                    case ObjectType.otElement:
                         EA.Element el = (EA.Element)rep.GetContextObject();
                         id = el.PackageID;
                         break;
-                    case EA.ObjectType.otPackage:
+                    case ObjectType.otPackage:
                         EA.Package pkg = (EA.Package)rep.GetContextObject();
                         id = pkg.PackageID;
                         break;
@@ -1047,13 +1043,13 @@ ORDER BY 3",
                 if (id > 0)
                 {
                     // get package recursive
-                    string branch = Package.getBranch(rep, "", id);
+                    string branch = Package.GetBranch(rep, "", id);
                     sql = sql.Replace(currentBranchTemplate, branch);
                     sql = sql.Replace(currrentInBranchTemplate, branch);
                 } else
                 // no diagram, element or package selected
                 {
-                    MessageBox.Show(sql, $"No element, diagram or package selected!");
+                    MessageBox.Show(sql, @"No element, diagram or package selected!");
                     sql =  "";
                 }
             }

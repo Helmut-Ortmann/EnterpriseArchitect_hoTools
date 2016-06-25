@@ -66,8 +66,8 @@ namespace hoTools.Query.Resources {
         ///&apos;[group=hoTools]
         ///!INC Local Scripts.EAConstants-VBScript
         ///&apos; Dim doesn&apos;t work (syntax error)
-        ///&apos; Object &apos;Session&apos; doesn&apos;t exist (use  Repository.WriteOutput &quot;Script&quot;, &quot;MyTest&quot;,0)
-        ///&apos; Var &apos;Repository&apos; is loaded
+        ///&apos; Object &apos;Session&apos; doesn&apos;t exist (use  rep.WriteOutput &quot;Script&quot;, &quot;MyTest&quot;,0)
+        ///&apos; Var &apos;rep&apos; is loaded
         ///&apos; You may create an instance &apos;EAAddinFramework.Utils.Model&apos; of the first running EA-Instance
         ///
         ///function hoDemoPrintContext(modelItem, objectType)
@@ -75,7 +75,8 @@ namespace hoTools.Query.Resources {
         ///	itemType = &quot;unknown&quot;
         ///	Select Case objectType
         ///	    Case otElement
-        ///			itemType = &quot;Eleme [rest of string was truncated]&quot;;.
+        ///			itemType = &quot;Element&quot;
+        ///		Case ot [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string hoDemo2ParScript {
             get {
@@ -93,9 +94,9 @@ namespace hoTools.Query.Resources {
         ///!INC Local Scripts.EAConstants-VBScript
         ///&apos;----------------------------------------------------------------------
         ///&apos; Dim doesn&apos;t work (syntax error, used in EA for intellissense)
-        ///&apos; Object &apos;Session&apos; doesn&apos;t exist (use  Repository.WriteOutput &quot;Script&quot;, &quot;MyTest&quot;,0)
-        ///&apos; Var &apos;Repository&apos; is loaded by script environment
-        ///&apos; You may create an instance &apos;EAAddin [rest of string was truncated]&quot;;.
+        ///&apos; Object &apos;Session&apos; doesn&apos;t exist (use  rep.WriteOutput &quot;Script&quot;, &quot;MyTest&quot;,0)
+        ///&apos; Var &apos;rep&apos; is loaded by script environment
+        ///&apos; You may create an instance &apos;EAAddinFramework.Util [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string hoDemo3ParScript {
             get {

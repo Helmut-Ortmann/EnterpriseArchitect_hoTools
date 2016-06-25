@@ -10,7 +10,7 @@ namespace hoTools.Utils
     /// <para/>Selected Objects
     /// <para/>Selected Connector
     /// </summary>
-    public class EADiagram
+    public class EaDiagram
     {
         readonly EA.Repository _rep;
         readonly EA.Diagram _dia;
@@ -22,7 +22,7 @@ namespace hoTools.Utils
         /// Get the current Diagram with it's selected objects and connectors.
         /// </summary>
         /// <param name="rep"></param>
-        public EADiagram(EA.Repository rep)
+        public EaDiagram(EA.Repository rep)
         {
             _rep = rep;
             _dia = _rep.GetCurrentDiagram();
@@ -56,7 +56,7 @@ namespace hoTools.Utils
         }
         #endregion
         #region sortSelectedObjects
-        public void sortSelectedObjects()
+        public void SortSelectedObjects()
         {
             // estimate sort criteria (left/right, top/bottom)
             bool isVerticalSorted = true;
@@ -65,33 +65,33 @@ namespace hoTools.Utils
             if (Math.Abs(obj1.left - obj2.left) > Math.Abs(obj1.top - obj2.top)) isVerticalSorted = false;
 
             // fill the diagram objects to sort by name / by position
-            var l_ids_by_name = new List<DiagramObject>();
-            var l_obj_by_position = new List<DiagramObjectSelected>();
+            var lIdsByName = new List<DiagramObject>();
+            var lObjByPosition = new List<DiagramObjectSelected>();
             foreach (EA.DiagramObject obj in _selectedObjects)
             {
                 EA.Element el= _rep.GetElementByID(obj.ElementID);
-                l_ids_by_name.Add(new DiagramObject(el.Name, el.ElementID) );
+                lIdsByName.Add(new DiagramObject(el.Name, el.ElementID) );
                 int position = obj.left;
                 if (isVerticalSorted) position = obj.top;
-                l_obj_by_position.Add(new DiagramObjectSelected(obj, position, obj.left));
+                lObjByPosition.Add(new DiagramObjectSelected(obj, position, obj.left));
             }
             
             // sort name list and position list
-            l_ids_by_name.Sort(new DiagramObjectComparer());
+            lIdsByName.Sort(new DiagramObjectComparer());
             // sort diagram objects according to position and vertical / horizontal sorting
-            if (isVerticalSorted) l_obj_by_position.Sort(new DiagramObjectSelectedVerticalComparer());
-            else l_obj_by_position.Sort(new DiagramObjectSelectedHorizontalComparer());
+            if (isVerticalSorted) lObjByPosition.Sort(new DiagramObjectSelectedVerticalComparer());
+            else lObjByPosition.Sort(new DiagramObjectSelectedHorizontalComparer());
 
 
             foreach (EA.DiagramObject obj in _dia.SelectedObjects)
             {
                 // find position of element in sorted selected objects
-                int pos = l_ids_by_name.FindIndex(x => x.Id == obj.ElementID);
+                int pos = lIdsByName.FindIndex(x => x.Id == obj.ElementID);
 
                 int length = obj.right - obj.left;
                 int high = obj.top - obj.bottom;
-                obj.left = l_obj_by_position[pos].Left;
-                obj.bottom = l_obj_by_position[pos].Obj.bottom;
+                obj.left = lObjByPosition[pos].Left;
+                obj.bottom = lObjByPosition[pos].Obj.bottom;
                 obj.right = obj.left + length;
                 obj.top = obj.bottom + high;
                 obj.Update();
@@ -112,10 +112,10 @@ namespace hoTools.Utils
         string _name = "";
         readonly int _id;
         #region Constructor
-        public DiagramObject(string Name, int Id)
+        public DiagramObject(string name, int id)
         {
-            _id = Id;
-            _name = Name;
+            _id = id;
+            _name = name;
         }
         #endregion
 
@@ -143,11 +143,11 @@ namespace hoTools.Utils
         int _position;
         readonly int _left;
         #region Constructor
-        public DiagramObjectSelected(EA.DiagramObject Obj, int position, int Left)
+        public DiagramObjectSelected(EA.DiagramObject obj, int position, int left)
         {
             _position = position;
-            _obj = Obj;
-            _left = Left;
+            _obj = obj;
+            _left = left;
         }
         #endregion
 

@@ -9,8 +9,8 @@ namespace GlobalHotkeys
 {
     public partial class InvisibleHotKeyForm : Form
     {
-        private const int WM_ACTIVATEAPP = 0x001C;
-        private const int WM_NCACTIVATE = 0x0086;
+        private const int WmActivateapp = 0x001C;
+        private const int WmNcactivate = 0x0086;
         private readonly IEnumerable<Hotkey> _hotkeys;
         private readonly int _thisProcessId = Process.GetCurrentProcess().Id;
         private int _lastActiveProcessId;
@@ -37,7 +37,7 @@ namespace GlobalHotkeys
 
         protected override void WndProc(ref Message m)
         {
-            if (m.Msg == Hotkey.WM_HOTKEY_MSG_ID)
+            if (m.Msg == Hotkey.WmHotkeyMsgId)
             {
                 foreach (Hotkey key in _hotkeys)
                 {
@@ -48,7 +48,7 @@ namespace GlobalHotkeys
                     }
                 }
             }
-            else if (m.Msg == WM_ACTIVATEAPP || m.Msg == WM_NCACTIVATE)
+            else if (m.Msg == WmActivateapp || m.Msg == WmNcactivate)
             {
                 bool windowGotFocus = (m.WParam.ToInt32() == 1);
                 if (windowGotFocus)

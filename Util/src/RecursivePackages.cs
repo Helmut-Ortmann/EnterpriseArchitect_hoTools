@@ -8,34 +8,34 @@ namespace hoTools.Utils
     public class ElementRecursive
     {
         EA.Repository _rep;
-        readonly List<int> _l_el_id;
+        readonly List<int> _lElId;
 
         #region Constructor
         public ElementRecursive(EA.Repository rep)
         {
             _rep = rep;
-            _l_el_id = new List<int>();
+            _lElId = new List<int>();
         }
         #endregion
 
-        public List<int> getItemsRecursive(EA.Package pkg) {
+        public List<int> GetItemsRecursive(EA.Package pkg) {
             
             foreach (EA.Package pkgSub in pkg.Packages)
             {
-                getItemsRecursive(pkgSub);
+                GetItemsRecursive(pkgSub);
             }
             foreach (EA.Element el in pkg.Elements)
             {
-                getItemEl(el);
+                GetItemEl(el);
             }
-            return _l_el_id;
+            return _lElId;
         }
-        private void getItemEl(EA.Element el) 
+        private void GetItemEl(EA.Element el) 
         {
-            _l_el_id.Add(el.ElementID);
+            _lElId.Add(el.ElementID);
             foreach (EA.Element elSub in el.Elements)
             {
-                getItemEl(elSub);
+                GetItemEl(elSub);
             }
 
         }
@@ -43,11 +43,11 @@ namespace hoTools.Utils
     }
     public static class RecursivePackages
     {
-        public delegate void setPackage(EA.Repository rep, EA.Package pkg, string[] s);
-        public delegate void setElement(EA.Repository rep, EA.Element el, string[] s);
-        public delegate void setDiagram(EA.Repository rep, EA.Diagram dia, string[] s);
+        public delegate void SetPackage(EA.Repository rep, EA.Package pkg, string[] s);
+        public delegate void SetElement(EA.Repository rep, EA.Element el, string[] s);
+        public delegate void SetDiagram(EA.Repository rep, EA.Diagram dia, string[] s);
 
-        public static void doRecursivePkg(EA.Repository rep, EA.Package pkg, setPackage setPkg, setElement setEl, setDiagram setDia, string[] s)
+        public static void DoRecursivePkg(EA.Repository rep, EA.Package pkg, SetPackage setPkg, SetElement setEl, SetDiagram setDia, string[] s)
         {
             // perform package
             if (setPkg != null) setPkg(rep, pkg, s);
@@ -60,24 +60,24 @@ namespace hoTools.Utils
             // run elements of package
             foreach (EA.Element el in pkg.Elements)
             {
-                if (setEl != null) doRecursiveEl(rep, el, setEl, setDia, s);
+                if (setEl != null) DoRecursiveEl(rep, el, setEl, setDia, s);
             }
             
             // run packages of package
             foreach (EA.Package pkgTrgt in pkg.Packages)
             {
-                doRecursivePkg(rep, pkgTrgt, setPkg, setEl, setDia, s);
+                DoRecursivePkg(rep, pkgTrgt, setPkg, setEl, setDia, s);
             }
             return;
         }
-        public static void doRecursiveEl(EA.Repository rep, EA.Element el, setElement setEl, setDiagram setDia, string[] s)
+        public static void DoRecursiveEl(EA.Repository rep, EA.Element el, SetElement setEl, SetDiagram setDia, string[] s)
         {
             // performel
             setEl(rep, el, s);
             //run all elements
             foreach (EA.Element elTrgt in el.Elements)
             {
-                doRecursiveEl(rep, elTrgt, setEl, setDia, s);
+                DoRecursiveEl(rep, elTrgt, setEl, setDia, s);
             }
             return;
         }

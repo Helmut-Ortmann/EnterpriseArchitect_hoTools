@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Reflection;
 using System.Windows.Forms;
 
@@ -9,27 +7,26 @@ namespace hoTools.EaServices
 {
     public class ServiceCall
     {
-        MethodInfo _method;
-        string _GUID = "";
-        string _description = "";
-        string _help = "";
         bool _isTextRequired;
 
         public ServiceCall(MethodInfo method, string guid, string description, string help, bool isTextRequired)
         {
-            _method = method;
-            _description = description;
-            _GUID = guid;
-            _help = help;
+            Method = method;
+            Description = description;
+            Guid = guid;
+            Help = help;
             _isTextRequired = isTextRequired;
         }
 
 
 
-        public String Description => this._description;
-        public MethodInfo Method => this._method;
-        public string Help => this._help;
-        public String GUID => this._GUID;
+        public string Description { get; }
+
+        public MethodInfo Method { get; }
+
+        public string Help { get; }
+
+        public string Guid { get; }
     }
     /// <summary>
     /// Sort ServicesCalls against column Description. Use Interface IComparable.
@@ -47,14 +44,14 @@ namespace hoTools.EaServices
     /// <summary>
     /// Sort/Search ServicesCalls against column GUID. Use Interface IComparable.
     /// </summary>
-    public class ServicesCallGUIDComparer : IComparer<ServiceCall>
+    public class ServicesCallGuidComparer : IComparer<ServiceCall>
     {
         public int Compare(ServiceCall firstValue, ServiceCall secondValue)
         {
             if (firstValue == null && secondValue == null) return 0;
             if (firstValue == null) return 1;
             if (secondValue == null) return -1;
-            return string.Compare(firstValue.GUID, secondValue.GUID, StringComparison.Ordinal);
+            return string.Compare(firstValue.Guid, secondValue.Guid, StringComparison.Ordinal);
         }
     }
     /// <summary>
@@ -62,168 +59,96 @@ namespace hoTools.EaServices
     /// </summary>
     public class ServicesCallConfig
     {
-        MethodInfo _method;
-        string _GUID;
-        int _pos;
-        string _buttonText;
-        string _description;
-        string _help;
-        bool _IsTextRequired;
-        public ServicesCallConfig(int Pos, string GUID, string ButtonText)
+        public ServicesCallConfig(int pos, string guid, string buttonText)
         {
-            _GUID = GUID;
-            _pos = Pos;
-            _buttonText = ButtonText;
+            Guid = guid;
+            Pos = pos;
+            ButtonText = buttonText;
         }
         public string Invoke(EA.Repository rep, string text)
         {
-            object s = null;
-            if (_method != null)
+            if (Method != null)
             {
                 try {
                     // Invoke the method itself. The string returned by the method winds up in s
                     // substitute default parameter by Type.Missing
-                    if (_IsTextRequired)
+                    if (IsTextRequired)
                     {
                         // use Type.Missing for optional parameters
-                        switch (_method.GetParameters().Length)
+                        switch (Method.GetParameters().Length)
                         {
                             case 1:
-                                _method.Invoke(null, new object[] { rep, text });
+                                Method.Invoke(null, new object[] { rep, text });
                                 break;
                             case 2:
-                                _method.Invoke(null, new object[] { rep, text, Type.Missing });
+                                Method.Invoke(null, new[] { rep, text, Type.Missing });
                                 break;
                             case 3:
-                                _method.Invoke(null, new object[] { rep, text, Type.Missing, Type.Missing });
+                                Method.Invoke(null, new[] { rep, text, Type.Missing, Type.Missing });
                                 break;
                             default:
-                                _method.Invoke(null, new object[] { rep, text, Type.Missing, Type.Missing, Type.Missing });
+                                Method.Invoke(null, new[] { rep, text, Type.Missing, Type.Missing, Type.Missing });
                                 break;
                         }
                     }
                     else
                     {
                         // use Type.Missing for optional parameters
-                        switch (_method.GetParameters().Length)
+                        switch (Method.GetParameters().Length)
                         {
                             case 1:
-                                _method.Invoke(null, new object[] { rep });
+                                Method.Invoke(null, new object[] { rep });
                                 break;
                             case 2:
-                                _method.Invoke(null, new object[] { rep, Type.Missing });
+                                Method.Invoke(null, new[] { rep, Type.Missing });
                                 break;
                             case 3:
-                                _method.Invoke(null, new object[] { rep, Type.Missing, Type.Missing });
+                                Method.Invoke(null, new[] { rep, Type.Missing, Type.Missing });
                                 break;
                             default:
-                                _method.Invoke(null, new object[] { rep, Type.Missing, Type.Missing, Type.Missing });
+                                Method.Invoke(null, new[] { rep, Type.Missing, Type.Missing, Type.Missing });
                                 break;
                         }
 
                     }
                 } catch (Exception e)
                 {
-                    MessageBox.Show(e +  "\nCan't invoke " + _method.Name + "Return:'"+ _method.ReturnParameter + "' "+_method,"Error Invoking service");
-                    return (string)s;
+                    MessageBox.Show($"{e}\n\nCan't invoke {Method.Name}  Return:'{Method.ReturnParameter}'  {Method}" , 
+                        $"Error Invoking service '{Method.Name}'");
+                    return null;
                 }
             }
             return null;
         }
-        public string Help
-        {
-            get
-            {
-                return this._help;
+        public string Help { get; set; }
 
-            }
-            set
-            {
-                this._help = value;
+        public MethodInfo Method { get; set; }
 
-            }
-        }
-        public MethodInfo Method
-        {
-            get
-            {
-                return this._method;
-
-            }
-            set
-            {
-                this._method = value;
-
-            }
-        }
         public string MethodName {
             get
             {
-                if (this._method == null) return "";
-                else return this._method.Name;
+                if (Method == null) return "";
+                else return Method.Name;
             }
 
         }
-        public string Description
-        {
-            get
-            {
-                return this._description; 
-            }
-            set
-            {
-                this._description = value;
-            }
+        public string Description { get; set; }
 
-        }
         public string HelpTextLong
         {
             get
             {
                 if (MethodName == "") return "";
-                return $"Service\t\t: {_buttonText} / {MethodName}()\nService Name\t: {_description}\nDescription\t: {_help}";
+                return $"Service\t\t: {ButtonText} / {MethodName}()\nService Name\t: {Description}\nDescription\t: {Help}";
             }
 
         }
-        public int Pos => this._pos;
-        public bool IsTextRequired
-         {
-             get
-             {
-                 return this._IsTextRequired;
+        public int Pos { get; }
 
-             }
-             set
-             {
-                 this._IsTextRequired = value;
+        public bool IsTextRequired { get; set; }
 
-             }
-         }
-         public string GUID
-         {
-             get
-             {
-                 return this._GUID;
+        public string Guid { get; set; }
 
-             }
-             set
-             {
-                this._GUID = value;
-
-             }
-         }
-         public string ButtonText
-         {
-             get
-             {
-                 return this._buttonText;
-
-             }
-              set
-             {
-                 this._buttonText = value;
-
-             }
-         }
+        public string ButtonText { get; set; }
     }
 }

@@ -35,19 +35,19 @@ namespace hoTools.Utils.Parameter
                         
                             
             string str = _rep.SQLQuery(query);
-            var XmlDoc = new XmlDocument();
-            XmlDoc.LoadXml(str);
+            var xmlDoc = new XmlDocument();
+            xmlDoc.LoadXml(str);
 
             // get existing t_xref and remember GUID/XrefID
-            XmlNode xrefGUID = XmlDoc.SelectSingleNode("//XREF_ID");
-            if (xrefGUID != null)
+            XmlNode xrefGuid = xmlDoc.SelectSingleNode("//XREF_ID");
+            if (xrefGuid != null)
             {
-                _xrefid = xrefGUID.InnerText;// GUID of xref
+                _xrefid = xrefGuid.InnerText;// GUID of xref
 
                 // get description
-                XmlNode xrefDESC = XmlDoc.SelectSingleNode("//DESCR");
+                XmlNode xrefDesc = xmlDoc.SelectSingleNode("//DESCR");
                 _properties = null;
-                if (xrefDESC != null) _properties = xrefDESC.InnerText;
+                if (xrefDesc != null) _properties = xrefDesc.InnerText;
             }
         }
             //---------------------------------------------------------------------
@@ -55,7 +55,7 @@ namespace hoTools.Utils.Parameter
             //---------------------------------------------------------------------
             // It's possible to call this function several times. It the accumulates the different properties
             //
-            public bool setParameterProperties(string propertyName, string propertyValue) {
+            public bool SetParameterProperties(string propertyName, string propertyValue) {
                 if (propertyName == "direction")
                 {
                     var rx = new Regex(@"@PROP=@NAME=direction@ENDNAME;@TYPE=ParameterDirectionKind@ENDTYPE;@VALU=[^@]+@ENDVALU;@PRMT=@ENDPRMT;@ENDPROP;");
@@ -89,17 +89,17 @@ namespace hoTools.Utils.Parameter
             // Save() Save ParameterProperties to t_xref
             //---------------------------------------------------------------------
             //
-            public bool save()
+            public bool Save()
             {
                 // create new entry in t_xref
                 if (_xrefid == "")
                 {
                     Guid g = Guid.NewGuid();
                     _xrefid = g.ToString();
-                    string insertIntoT_xref = @"insert into t_xref 
+                    string insertIntoTXref = @"insert into t_xref 
                 (XrefID,            Name,               Type,              Visibility, Namespace, Requirement, [Constraint], Behavior, Partition, Description, Client, Supplier, Link)
                 VALUES('" + g + "', 'CustomProperties', 'element property','Public', '','','', '',0, '" + _properties + "', '" + _parTrgt.ElementGUID + "', null,'')";
-                    _rep.Execute(insertIntoT_xref);
+                    _rep.Execute(insertIntoTXref);
                 }
                 // update propertyValue
                 string update = @"update t_xref set description = '" + _properties +

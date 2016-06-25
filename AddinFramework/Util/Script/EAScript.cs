@@ -75,10 +75,10 @@ namespace EAAddinFramework.Utils
             {
 
                 string SQLUpdate = "update t_script set " +
-                                            $"script = '{_model.escapeSQLString(_code)}' " + 
+                                            $"script = '{_model.EscapeSqlString(_code)}' " + 
                                             $", notes = {notes} "  +                      
                                     " where ScriptID = " + _id;
-                _model.executeSQL(SQLUpdate);
+                _model.ExecuteSql(SQLUpdate);
             }
             else
             {
@@ -90,8 +90,8 @@ namespace EAAddinFramework.Utils
                                    $"'{_groupGuid}', " +
                                    $"'{guid}', " +
                                    $"{notes}, " +
-                                   $"'{_model.escapeSQLString(_code)}' )";
-                _model.executeSQL(sql);
+                                   $"'{_model.EscapeSqlString(_code)}' )";
+                _model.ExecuteSql(sql);
                 // update script information
                 getInfo();
             }
@@ -118,7 +118,7 @@ namespace EAAddinFramework.Utils
                              $"  s.Notes like '<Script Name=\"{_name}\"*' " +
                              sqlWhereScriptGroup;
             // run query into XDocument to proceed with LinQ
-            string xml = _model.SQLQueryNative(sql);
+            string xml = _model.SqlQueryNative(sql);
             var x = new XDocument(XDocument.Parse(xml));
 
             // get scriptID

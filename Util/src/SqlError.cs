@@ -12,12 +12,12 @@ namespace hoTools.Utils.SQL
     /// </summary>
     public static class SqlError
     {
-        const string DBERROR_FILE_NAME = "dberror.txt";
-        const string hoTools_LAST_SQL_FILE_NAME = "hoTools_LastSql.txt";
-        const string hoTools_SQL_TEMPLATE_MACRO_FILE__NAME = "hoTools_SqlTemplatesAndMacros.txt";
+        const string DberrorFileName = "dberror.txt";
+        const string HoToolsLastSqlFileName = "hoTools_LastSql.txt";
+        const string HoToolsSqlTemplateMacroFileName = "hoTools_SqlTemplatesAndMacros.txt";
 
 
-        static string getEaSqlErrorPath()
+        static string GetEaSqlErrorPath()
            => Environment.GetEnvironmentVariable("appdata") + @"\Sparx Systems\EA";
 
         /// <summary>
@@ -26,18 +26,18 @@ namespace hoTools.Utils.SQL
         /// </summary>
         /// <param name="file"></param>
         /// <returns></returns>
-        static string getEaHomeFileName(string file)
+        static string GetEaHomeFileName(string file)
         {
-            string path = getEaSqlErrorPath();
+            string path = GetEaSqlErrorPath();
             return Path.Combine(path, file);
         }
         /// <summary>
         /// delete file
         /// </summary>
         /// <param name="fileName"></param>
-        static void delete(string fileName)
+        static void Delete(string fileName)
         {
-            string path = getEaHomeFileName(fileName);
+            string path = GetEaHomeFileName(fileName);
             try
             {
                 File.Delete(fileName);
@@ -52,9 +52,9 @@ namespace hoTools.Utils.SQL
         /// </summary>
         /// <param name="fileName"></param>
         /// <param name="content"></param>
-        static void write(string fileName, string content)
+        static void Write(string fileName, string content)
         {
-            string path = getEaHomeFileName(fileName);
+            string path = GetEaHomeFileName(fileName);
             try
             {
                 File.WriteAllText(path, content);
@@ -67,9 +67,9 @@ namespace hoTools.Utils.SQL
         /// <summary>
         /// read content from file
         /// </summary>
-        static string read(string fileName)
+        static string Read(string fileName)
         {
-            string path = getEaHomeFileName(fileName);
+            string path = GetEaHomeFileName(fileName);
             try
             {
 
@@ -83,14 +83,14 @@ namespace hoTools.Utils.SQL
         }
         //------------------------------------------------------------------------------
         // SqlTemplatesAndMacros
-        public static string getSqlTemplatesAndMacrosFilePath() 
-            => getEaHomeFileName(hoTools_SQL_TEMPLATE_MACRO_FILE__NAME);
-        public static void  writeSqlTemplatesAndMacros(string text)
+        public static string GetSqlTemplatesAndMacrosFilePath() 
+            => GetEaHomeFileName(HoToolsSqlTemplateMacroFileName);
+        public static void  WriteSqlTemplatesAndMacros(string text)
         {
-            write(getSqlTemplatesAndMacrosFilePath(), text);
+            Write(GetSqlTemplatesAndMacrosFilePath(), text);
         }
-        public static string readSqlTemplatesAndMacros()
-            => read(getSqlTemplatesAndMacrosFilePath());
+        public static string ReadSqlTemplatesAndMacros()
+            => Read(GetSqlTemplatesAndMacrosFilePath());
 
         //------------------------------------------------------------------------------
         // DBERROR_FILE_NAME
@@ -98,32 +98,32 @@ namespace hoTools.Utils.SQL
         /// Get the error string which EA stores.
         /// </summary>
         /// <returns>Error message + SQL the error is based on</returns>
-        public static string getEaSqlErrorFilePath() 
-            => getEaHomeFileName(DBERROR_FILE_NAME);
+        public static string GetEaSqlErrorFilePath() 
+            => GetEaHomeFileName(DberrorFileName);
         /// <summary>
         /// Read SQL error file
         /// </summary>
         /// <returns></returns>
-        public static string readEaSqlError()
-           => read(getEaSqlErrorFilePath());
+        public static string ReadEaSqlError()
+           => Read(GetEaSqlErrorFilePath());
         /// <summary>
         /// Returns true if an EA SQL error file exists
         /// </summary>
         /// <returns></returns>
-        public static bool existsEaSqlErrorFile()
-            => File.Exists(getEaSqlErrorFilePath());
+        public static bool ExistsEaSqlErrorFile()
+            => File.Exists(GetEaSqlErrorFilePath());
 
         // write SQL error file
-        public static void writeEaSqlError(string text)
+        public static void WriteEaSqlError(string text)
         {
-            write(getEaSqlErrorFilePath(), text);
+            Write(GetEaSqlErrorFilePath(), text);
         }
         /// <summary>
         /// Delete SQL error file
         /// </summary>
-        public static void deleteEaSqlError()
+        public static void DeleteEaSqlError()
         {
-            delete(getEaSqlErrorFilePath());
+            Delete(GetEaSqlErrorFilePath());
         }
 
         //---------------------------------------------------------------------------------
@@ -132,22 +132,22 @@ namespace hoTools.Utils.SQL
         /// Get the sql string which is sent to EA.
         /// </summary>
         /// <returns>The SQL sent to EA</returns>
-        public static string getHoToolsLastSqlFilePath() 
-            => getEaHomeFileName(hoTools_LAST_SQL_FILE_NAME);
+        public static string GetHoToolsLastSqlFilePath() 
+            => GetEaHomeFileName(HoToolsLastSqlFileName);
         /// <summary>
         /// Write last SQL to EA home 
         /// </summary>
         /// <returns></returns>
-        public static void writeHoToolsLastSql(string text)
+        public static void WriteHoToolsLastSql(string text)
         {
-            write(getHoToolsLastSqlFilePath(), text);
+            Write(GetHoToolsLastSqlFilePath(), text);
         }
         /// <summary>
         /// Read last SQL from EA home 
         /// </summary>
         /// <returns></returns>
-        public static string readHoToolsLastSql()
-          => read(getHoToolsLastSqlFilePath());
+        public static string ReadHoToolsLastSql()
+          => Read(GetHoToolsLastSqlFilePath());
 
 
 

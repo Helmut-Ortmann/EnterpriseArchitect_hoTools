@@ -11,52 +11,52 @@ using System.Text.RegularExpressions;
 
 namespace hoTools.Utils.svnUtil
 {
-    public class svn
+    public class Svn
     {
         readonly string _vcPath;
         EA.Package _pkg;
         EA.Repository _rep;
 
         // constructor
-        public svn(EA.Repository rep, EA.Package pkg)  {
+        public Svn(EA.Repository rep, EA.Package pkg)  {
             _pkg = pkg;
             _rep = rep;
             _vcPath = "";
             if (pkg.IsControlled)
             {
 
-                _vcPath = Util.getVccFilePath(rep, pkg);
+                _vcPath = Util.GetVccFilePath(rep, pkg);
             }
 
             
         }
 
-        public bool setProperty()
+        public bool SetProperty()
         {
-            cmd("svn","propset svn:keywords \"Date Author Rev Id Header\" ");
+            Cmd("svn","propset svn:keywords \"Date Author Rev Id Header\" ");
             return true;
         }
-        public void gotoLog()
+        public void GotoLog()
         {
-            string repUrl = getRepositoryPath();
-            cmd("tortoiseProc", "/command:log /findtype:2 /path:",repUrl);
+            string repUrl = GetRepositoryPath();
+            Cmd("tortoiseProc", "/command:log /findtype:2 /path:",repUrl);
         }
-        public string getLockingUser()
+        public string GetLockingUser()
         {
-            string repUrl = getRepositoryPath();
-            string s = cmd("svn", "info " + repUrl);
+            string repUrl = GetRepositoryPath();
+            string s = Cmd("svn", "info " + repUrl);
             Match match = Regex.Match(s, @"Lock Owner:[\s]*([A-Za-z]*)");
             return match.Groups[1].Value;
         }
-        public void gotoRepoBrowser()
+        public void GotoRepoBrowser()
         {
-            string repUrl = getRepositoryPath();
-            cmd("tortoiseProc", "/command:repobrowser /path:", repUrl);
+            string repUrl = GetRepositoryPath();
+            Cmd("tortoiseProc", "/command:repobrowser /path:", repUrl);
         }
-        private string getRepositoryPath()
+        private string GetRepositoryPath()
         {
             string url = "";
-            string s = cmd("svn", "info");
+            string s = Cmd("svn", "info");
             string[] lines = Regex.Split(s, "\r\n");
             url = lines[3].Substring(5);
             
@@ -64,7 +64,7 @@ namespace hoTools.Utils.svnUtil
         }
 
         // proc: svn, tortoiseProc
-        public string cmd(string procInfo, string cmd, string url="")
+        public string Cmd(string procInfo, string cmd, string url="")
         {
             string returnString = "";
             

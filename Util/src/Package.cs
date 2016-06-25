@@ -14,7 +14,7 @@ namespace hoTools.Utils
         /// <param name="branch"></param>
         /// <param name="id"></param>
         /// <returns></returns>
-        public static string getBranch (EA.Repository rep, string branch, int id)
+        public static string GetBranch (EA.Repository rep, string branch, int id)
         {
             if (id > 0)
             {
@@ -28,7 +28,7 @@ namespace hoTools.Utils
                     int pkgId = p.PackageID;
                     string s = pkgId.ToString();
                     
-                    branch = getBranch(rep, branch, pkgId);
+                    branch = GetBranch(rep, branch, pkgId);
                 }
 
                 

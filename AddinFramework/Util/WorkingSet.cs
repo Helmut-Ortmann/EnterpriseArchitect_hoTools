@@ -31,7 +31,7 @@ namespace EAAddinFramework.Utils
 			if (overwrite)
 			{
 				//check if a workingset with the same name already exists
-				WorkingSet workingSetToOverwrite = this.model.workingSets.Find(w => 
+				WorkingSet workingSetToOverwrite = this.model.WorkingSets.Find(w => 
 				                                                    w.user != null
 				                                                    && w.user.login == user.login 
 				                                                    && w.name == this.name);
@@ -44,7 +44,7 @@ namespace EAAddinFramework.Utils
 								select '"+Guid.NewGuid().ToString("B")+@"',d.DocName, d.Notes, d.Style,
 								d.ElementID, d.ElementType,d.StrContent,d.BinContent,d.DocType,'" + user.fullName + @"',d.DocDate from t_document d
 								where d.DocID like '"+this.ID+"'";
-			this.model.executeSQL(insertQuery);
+			this.model.ExecuteSql(insertQuery);
 		
 		}
 		/// <summary>
@@ -53,7 +53,7 @@ namespace EAAddinFramework.Utils
 		void delete()
 		{
 			string deleteQuery = "delete from t_document where docid like '"+ this.ID + "'";
-			this.model.executeSQL(deleteQuery);
+			this.model.ExecuteSql(deleteQuery);
 		}
 	}
 }

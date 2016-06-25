@@ -7,7 +7,7 @@ namespace hoTools.Utils
 {
     public static class TaggedValue
     {
-        public static EA.TaggedValue addTaggedValue(EA.Element shm, string name)
+        public static EA.TaggedValue AddTaggedValue(EA.Element shm, string name)
         {
             EA.TaggedValue tagStart = null;
             foreach (EA.TaggedValue taggedValue in shm.TaggedValues)

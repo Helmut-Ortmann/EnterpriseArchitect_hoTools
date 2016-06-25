@@ -13,15 +13,15 @@ namespace hoTools.Connectors {
         string _lineStyle = "LV";
        
 
-        public Connector(string Type, string Stereotype, string LineStyle="LV", bool IsDefault=false, bool IsEnabled = true)
+        public Connector(string type, string stereotype, string lineStyle="LV", bool isDefault=false, bool isEnabled = true)
         {
-            _type = Type;
-            _stereotype = Stereotype;
-            _isDefault = IsDefault;
-            _isEnabled = IsEnabled;
-            _lineStyle = LineStyle;
+            _type = type;
+            _stereotype = stereotype;
+            _isDefault = isDefault;
+            _isEnabled = isEnabled;
+            _lineStyle = lineStyle;
         }
-        static public List<string> getLineStyle() => new List<String> {
+        static public List<string> GetLineStyle() => new List<String> {
         "LV","LH","TV","TH","B","OS","OR","D"};
 
         public string LineStyle
@@ -60,9 +60,9 @@ namespace hoTools.Connectors {
     {
         private string _diagramType = "";
 
-        public DiagramConnector(string DiagramType)
+        public DiagramConnector(string diagramType)
 {
-                _diagramType = DiagramType;
+                _diagramType = diagramType;
             }
         public string DiagramType
         {
@@ -78,12 +78,12 @@ namespace hoTools.Connectors {
         {
            
         }
-        public List<string> getConnectorTypes() => new List<string> {
+        public List<string> GetConnectorTypes() => new List<string> {
                 "Abstraction", "Aggregation", "Assembly", "Association", "Collaboration", "Connector","ControlFlow", "Delegate","Deployment", "ERLink",
                 "Extension", "InformationFlow",  "Instantiation", "InterruptFlow", "Manifast", "Nesting", "NoteLink", "ObjectFlow", "Package", "Realisation",
                 "Sequence", "StateFlow", "Substitution", "Usage", "UseCase"
             };
-        public List<String> getStandardStereotypes() => new List<String> {
+        public List<String> GetStandardStereotypes() => new List<String> {
                 "trace", "trace1", "trace2"
             };
 
@@ -96,10 +96,10 @@ namespace hoTools.Connectors {
         {
 
         }
-        public List<String> getConnectorTypes() => new List<String> {
+        public List<String> GetConnectorTypes() => new List<String> {
                 "DataFlow", "ControlFlow"
             };
-        public List<String> getStandardStereotypes() => new List<String>
+        public List<String> GetStandardStereotypes() => new List<String>
         {
 
         };

@@ -121,7 +121,7 @@ namespace hoTools.EaServices
                 diaObject.Update();
                 pkg.Elements.Refresh();
 
-                Util.setDiagramHasAttchaedLink(rep, elNote);
+                Util.SetDiagramHasAttchaedLink(rep, elNote);
                 rep.ReloadDiagram(dia.DiagramID);
 
             }
@@ -196,11 +196,11 @@ namespace hoTools.EaServices
             switch (oType)
             {
                 case EA.ObjectType.otPackage:
-                    RecursivePackages.doRecursivePkg(rep, pkg, changeAuthorPackage, changeAuthorElement, changeAuthorDiagram, s);
+                    RecursivePackages.DoRecursivePkg(rep, pkg, changeAuthorPackage, changeAuthorElement, changeAuthorDiagram, s);
                     MessageBox.Show("New author:'" + s[0] + "'", "Author changed for packages/elements (recursive)");
                     break;
                 case EA.ObjectType.otElement:
-                    RecursivePackages.doRecursiveEl(rep, el, changeAuthorElement, changeAuthorDiagram, s);
+                    RecursivePackages.DoRecursiveEl(rep, el, changeAuthorElement, changeAuthorDiagram, s);
                     MessageBox.Show("New author:'" + s[0] + "'", "Author changed for elements (recursive)");
                     break;
                 case EA.ObjectType.otDiagram:
@@ -291,26 +291,26 @@ namespace hoTools.EaServices
             {
                 case EA.ObjectType.otPackage:
                     var pkg = (EA.Package)rep.GetContextObject();
-                    path = Util.getVccFilePath(rep, pkg);
+                    path = Util.GetVccFilePath(rep, pkg);
                     // remove filename
                     path = Regex.Replace(path, @"[a-zA-Z0-9\s_:.]*\.xml", "");
 
                     if (isTotalCommander)
-                        Util.startApp(@"totalcmd.exe", "/o " + path);
+                        Util.StartApp(@"totalcmd.exe", "/o " + path);
                     else
-                        Util.startApp(@"Explorer.exe", "/e, " + path);
+                        Util.StartApp(@"Explorer.exe", "/e, " + path);
                     break;
 
                 case EA.ObjectType.otElement:
                     var el = (EA.Element)rep.GetContextObject();
-                    path = Util.getGenFilePath(rep, el);
+                    path = Util.GetGenFilePath(rep, el);
                     // remove filename
                     path = Regex.Replace(path, @"[a-zA-Z0-9\s_:.]*\.[a-zA-Z0-9]{0,4}$", "");
 
                     if (isTotalCommander)
-                        Util.startApp(@"totalcmd.exe", "/o " + path);
+                        Util.StartApp(@"totalcmd.exe", "/o " + path);
                     else
-                        Util.startApp(@"Explorer.exe", "/e, " + path);
+                        Util.StartApp(@"Explorer.exe", "/e, " + path);
 
                     break;
             }
@@ -429,7 +429,7 @@ namespace hoTools.EaServices
                 elSource = rep.GetElementByID(diaObj.ElementID);
                 if (! "Class Component Activity".Contains(elSource.Type)) continue; 
                 // find object on Diagram
-                diaObjSource = Util.getDiagramObjectByID(rep, dia, elSource.ElementID);
+                diaObjSource = Util.GetDiagramObjectById(rep, dia, elSource.ElementID);
                 //diaObjSource = dia.GetDiagramObjectByID(elSource.ElementID, "");
                 if (diaObjSource == null) return;
 
@@ -441,11 +441,11 @@ namespace hoTools.EaServices
                     if (isOptimizePortLayout == false && portBoundTo == "left") continue;
                     int pos = 0;
                     if (isOptimizePortLayout == false) { 
-                        l_ports = sqlUtil.getAndSortEmbeddedElements(elSource, "", "", "");
+                        l_ports = sqlUtil.GetAndSortEmbeddedElements(elSource, "", "", "");
                     }
                     else {
-                        if (portBoundTo == "left") l_ports = sqlUtil.getAndSortEmbeddedElements(elSource, "Port", "'Server', 'Receiver' ", "DESC");
-                        else l_ports = sqlUtil.getAndSortEmbeddedElements(elSource, "Port", "'Client', 'Sender' ", "");
+                        if (portBoundTo == "left") l_ports = sqlUtil.GetAndSortEmbeddedElements(elSource, "Port", "'Server', 'Receiver' ", "DESC");
+                        else l_ports = sqlUtil.GetAndSortEmbeddedElements(elSource, "Port", "'Client', 'Sender' ", "");
                     }
                     // over all sorted ports
                     string oldStereotype = ""; 
@@ -476,7 +476,7 @@ namespace hoTools.EaServices
                                     oldStereotype = portEmbedded.Stereotype;
 
                                 }
-                                Util.visualizePortForDiagramobject(pos, dia, diaObjSource, portEmbedded, null, portBoundTo);
+                                Util.VisualizePortForDiagramobject(pos, dia, diaObjSource, portEmbedded, null, portBoundTo);
                                 pos = pos + 1;
                             }
                             else
@@ -484,7 +484,7 @@ namespace hoTools.EaServices
                                 // Port: Visualize Port + Interface
                                 foreach (EA.Element interf in portEmbedded.EmbeddedElements)
                                 {
-                                    Util.visualizePortForDiagramobject(pos, dia, diaObjSource, portEmbedded, interf);
+                                    Util.VisualizePortForDiagramobject(pos, dia, diaObjSource, portEmbedded, interf);
                                     pos = pos + 1;
                                 }
                             }
@@ -504,7 +504,7 @@ namespace hoTools.EaServices
             if (oType.Equals(EA.ObjectType.otDiagram))
             {
                 var d = (EA.Diagram)Repository.GetContextObject();
-                string guid = Util.getElementFromCompositeDiagram(Repository, d.DiagramGUID);
+                string guid = Util.GetElementFromCompositeDiagram(Repository, d.DiagramGUID);
                 if (guid != "")
                 {
                     Repository.ShowInProjectView(Repository.GetElementByGuid(guid));
@@ -746,7 +746,7 @@ namespace hoTools.EaServices
             if (con.Type.Equals("StateFlow"))
             {
 
-                EA.Method m = Util.getOperationFromConnector(Repository, con);
+                EA.Method m = Util.GetOperationFromConnector(Repository, con);
                 if (m != null)
                 {
                     if (showBehavior.Equals(displayMode.Behavior))
@@ -810,7 +810,7 @@ namespace hoTools.EaServices
 
         static void showFromElement(EA.Repository Repository, EA.Element el, displayMode showBehavior)
         {
-            EA.Method method = Util.getOperationFromAction(Repository, el);
+            EA.Method method = Util.GetOperationFromAction(Repository, el);
             if (method != null)
             {
                 if (showBehavior.Equals(displayMode.Behavior))
@@ -826,7 +826,7 @@ namespace hoTools.EaServices
 
         static void locateOperationFromBehavior(EA.Repository Repository, EA.Element el, displayMode showBehavior)
         {
-            EA.Method method = Util.getOperationFromBrehavior(Repository, el);
+            EA.Method method = Util.GetOperationFromBrehavior(Repository, el);
             if (method != null)
             {
                 if (showBehavior.Equals(displayMode.Behavior))
@@ -892,10 +892,10 @@ namespace hoTools.EaServices
             rep.SaveDiagram(dia.DiagramID);
 
             // only one diagram object selected as source
-            if (srcEl == null) elSource = Util.getElementFromContextObject(rep);
+            if (srcEl == null) elSource = Util.GetElementFromContextObject(rep);
             else elSource = srcEl;
             if (elSource == null)  return null;
-            diaObjSource = Util.getDiagramObjectByID(rep, dia, elSource.ElementID);
+            diaObjSource = Util.GetDiagramObjectById(rep, dia, elSource.ElementID);
             //diaObjSource = dia.GetDiagramObjectByID(elSource.ElementID, "");
 
             string noValifTypes = "Note, Constraint, Boundary, Text, UMLDiagram, DiagramFrame";
@@ -904,7 +904,7 @@ namespace hoTools.EaServices
 
             if (!(elSource.ParentID == 0))
             {
-                diaObjParent = Util.getDiagramObjectByID(rep, dia, elSource.ParentID);
+                diaObjParent = Util.GetDiagramObjectById(rep, dia, elSource.ParentID);
                 //diaObjParent = dia.GetDiagramObjectByID(elSource.ParentID, "");
             }
                 
@@ -929,7 +929,7 @@ namespace hoTools.EaServices
                     if (basicType == "Activity" & extension.ToLower() == "comp=yes")
                     {
                         EA.Diagram actDia = ActivityPar.CreateActivityCompositeDiagram(rep, elTarget);
-                        Util.setActivityCompositeDiagram(rep, elTarget, actDia.DiagramID.ToString());
+                        Util.SetActivityCompositeDiagram(rep, elTarget, actDia.DiagramID.ToString());
                         //elTarget.
                     }
 
@@ -1002,7 +1002,7 @@ namespace hoTools.EaServices
                 // end note
                 if ( elParent != null && elParent.Type == "Activity" && extension == "101")
                 {
-                    EA.DiagramObject diaObj = Util.getDiagramObjectByID(rep, dia, elParent.ElementID);
+                    EA.DiagramObject diaObj = Util.GetDiagramObjectById(rep, dia, elParent.ElementID);
                     //EA.DiagramObject diaObj = dia.GetDiagramObjectByID(elParent.ElementID,"");
                     if (diaObj != null)
                     {
@@ -1012,12 +1012,12 @@ namespace hoTools.EaServices
                 }
 
 
-                Util.addSequenceNumber(rep, dia);
+                Util.AddSequenceNumber(rep, dia);
                 diaObjTarget = (EA.DiagramObject)dia.DiagramObjects.AddNew(position, "");
                 diaObjTarget.ElementID = elTarget.ElementID;
                 diaObjTarget.Sequence = 1;
                 diaObjTarget.Update();
-                Util.setSequenceNumber(rep, dia, diaObjTarget, "1");
+                Util.SetSequenceNumber(rep, dia, diaObjTarget, "1");
 
                 // position the label:
                 // LBL=CX=180:  length of label
@@ -1030,7 +1030,7 @@ namespace hoTools.EaServices
                     else length = (int)(name.Length * WidthPerCharacter / 10);
                     // string s = "DUID=E2352ABC;LBL=CX=180:CY=13:OX=29:OY=-4:HDN=0:BLD=0:ITA=0:UND=0:CLR=-1:ALN=0:ALT=0:ROT=0;;"; 
                     string s = "DUID=E2352ABC;LBL=CX=180:CY=13:OX=-"+ length + ":OY=-4:HDN=0:BLD=0:ITA=0:UND=0:CLR=-1:ALN=0:ALT=0:ROT=0;;"; 
-                    Util.setDiagramObjectLabel(rep,
+                    Util.SetDiagramObjectLabel(rep,
                         diaObjTarget.ElementID, diaObjTarget.DiagramID, diaObjTarget.InstanceID, s);
                 }
                 
@@ -1068,7 +1068,7 @@ namespace hoTools.EaServices
                         string style = "LV";
                         if ((elSource.Type == "Action" | elSource.Type == "Activity") & guardString == "no") style = "LH";
                         if (Regex.IsMatch(elSource.Name, @"switch[\s]*\(")) style = "OS";
-                        Util.setLineStyleForDiagramLink(style, link);
+                        Util.SetLineStyleForDiagramLink(style, link);
                         
                         break;
                     }
@@ -1084,18 +1084,18 @@ namespace hoTools.EaServices
                     else
                     {
                         // GUARD
-                        Util.setConnectorGuard(rep, con.ConnectorID, guardString);
+                        Util.SetConnectorGuard(rep, con.ConnectorID, guardString);
                     }
                 }
                 else if (elSource.Type.Equals("Decision") & !elSource.Name.Trim().Equals(""))
                 {
                     if (guardString == "no")
                     {
-                        Util.setConnectorGuard(rep, con.ConnectorID, "no");
+                        Util.SetConnectorGuard(rep, con.ConnectorID, "no");
                     }
                     else
                     {
-                        Util.setConnectorGuard(rep, con.ConnectorID, "yes");
+                        Util.SetConnectorGuard(rep, con.ConnectorID, "yes");
                     }
                 }
 
@@ -1199,7 +1199,7 @@ namespace hoTools.EaServices
             
             // check if interface already exists on diagram
 
-            diaObjTarget = Util.getDiagramObjectByID(rep, dia, elTarget.ElementID);
+            diaObjTarget = Util.GetDiagramObjectById(rep, dia, elTarget.ElementID);
             //diaObjTarget = dia.GetDiagramObjectByID(elTarget.ElementID, "");
             if (diaObjTarget == null)
             {
@@ -1261,7 +1261,7 @@ namespace hoTools.EaServices
                 {
                     if (link.ConnectorID == con.ConnectorID)
                     {
-                        Util.setLineStyleForDiagramLink("LV", link);
+                        Util.SetLineStyleForDiagramLink("LV", link);
                         string s = link.Style;
                     }
                 }
@@ -1342,7 +1342,7 @@ namespace hoTools.EaServices
             if (dia == null) return;
             if (dia.Type != "Activity") return;
 
-            EA.Element elSource = Util.getElementFromContextObject(rep);
+            EA.Element elSource = Util.GetElementFromContextObject(rep);
             if (elSource == null) return;
             EA.DiagramObject objSource = null;
             bool isSwitchCase = false;
@@ -1350,7 +1350,7 @@ namespace hoTools.EaServices
             if (Regex.IsMatch(elSource.Name, @"switch[\s]*\("))
             {
                 isSwitchCase = true;
-                objSource = Util.getDiagramObjectByID(rep, dia, elSource.ElementID);
+                objSource = Util.GetDiagramObjectById(rep, dia, elSource.ElementID);
                 //objSource = dia.GetDiagramObjectByID(elSource.ElementID, "");
             }
 
@@ -1624,7 +1624,7 @@ namespace hoTools.EaServices
         public static void addElementNote(EA.Repository rep)
         {
             EA.ObjectType oType = rep.GetContextItemType();
-            EA.Element el = el = Util.getElementFromContextObject(rep);
+            EA.Element el = el = Util.GetElementFromContextObject(rep);
             if (! (el == null))
             {
                 EA.Diagram dia = rep.GetCurrentDiagram();
@@ -1665,7 +1665,7 @@ namespace hoTools.EaServices
                 con.SupplierID = elNote.ElementID;
                 con.Update();
                 el.Connectors.Refresh();
-                Util.setElementHasAttchaedLink(rep, el, elNote);
+                Util.SetElementHasAttchaedLink(rep, el, elNote);
                 rep.ReloadDiagram(dia.DiagramID);
             } 
             else if (oType.Equals(EA.ObjectType.otConnector))
@@ -1701,14 +1701,14 @@ namespace hoTools.EaServices
                 if (el.Type.Equals("Activity"))
                 {
                     // get the associated operation
-                    EA.Method m = Util.getOperationFromBrehavior(rep, el);
+                    EA.Method m = Util.GetOperationFromBrehavior(rep, el);
                     if (el.Locked) return;
                     if (m == null) return;
                     ActivityPar.UpdateParameterFromOperation(rep, el, m);// get parameters from Operation for Activity
                     EA.Diagram dia = rep.GetCurrentDiagram();
                     if (dia == null) return;
                    
-                    EA.DiagramObject diaObj = Util.getDiagramObjectByID(rep, dia, el.ElementID);
+                    EA.DiagramObject diaObj = Util.GetDiagramObjectById(rep, dia, el.ElementID);
                     //EA.DiagramObject diaObj = dia.GetDiagramObjectByID(el.ElementID,"");
                     if (diaObj == null) return;
                     
@@ -1717,7 +1717,7 @@ namespace hoTools.EaServices
                     foreach (EA.Element actPar in el.EmbeddedElements)
                     {
                         if (!actPar.Type.Equals("ActivityParameter")) continue;
-                        Util.visualizePortForDiagramobject(pos, dia, diaObj, actPar, null);
+                        Util.VisualizePortForDiagramobject(pos, dia, diaObj, actPar, null);
                         pos = pos + 1;
                     }
                     rep.ReloadDiagram(dia.DiagramID);
@@ -1730,7 +1730,7 @@ namespace hoTools.EaServices
             if (oType.Equals(EA.ObjectType.otMethod))
             {
                 var m = (EA.Method)rep.GetContextObject();
-                EA.Element act = Appl.getBehaviorForOperation(rep, m);
+                EA.Element act = Appl.GetBehaviorForOperation(rep, m);
                 if (act == null) return;
                 if (act.Locked) return;
                 ActivityPar.UpdateParameterFromOperation(rep, act, m);// get parameters from Operation for Activity
@@ -1747,7 +1747,7 @@ namespace hoTools.EaServices
         {
             foreach (EA.Method m in el.Methods)
             {
-                EA.Element act = Appl.getBehaviorForOperation(rep, m);
+                EA.Element act = Appl.GetBehaviorForOperation(rep, m);
                 if (act == null) continue;
                 if (act.Locked) continue;
                 ActivityPar.UpdateParameterFromOperation(rep, act, m);// get parameters from Operation for Activity
@@ -1789,7 +1789,7 @@ namespace hoTools.EaServices
 
                 case EA.ObjectType.otConnector:
                     var con = (EA.Connector)rep.GetContextObject();
-                    trigger_GUID = Util.getTrigger(rep, con.ConnectorGUID);
+                    trigger_GUID = Util.GetTrigger(rep, con.ConnectorGUID);
                     if (trigger_GUID.StartsWith("{", StringComparison.Ordinal) && trigger_GUID.EndsWith("}", StringComparison.Ordinal))
                     {
                         EA.Element trigger = rep.GetElementByGuid(trigger_GUID);
@@ -1875,7 +1875,7 @@ namespace hoTools.EaServices
                                     if (custproperty.Name.Equals("kind") && custproperty.Value.Contains("AcceptEvent"))
                                     {
                                         // get the trigger
-                                        trigger_GUID = Util.getTrigger(rep, el.ElementGUID);
+                                        trigger_GUID = Util.GetTrigger(rep, el.ElementGUID);
                                         if (trigger_GUID.StartsWith("{", StringComparison.Ordinal) && trigger_GUID.EndsWith("}", StringComparison.Ordinal))
                                         {
                                             EA.Element trigger = rep.GetElementByGuid(trigger_GUID);
@@ -1890,7 +1890,7 @@ namespace hoTools.EaServices
                             if (el.Type.Equals("Trigger"))
                             {
                                 // get the signal
-                                string signal_GUID = Util.getSignal(rep, el.ElementGUID);
+                                string signal_GUID = Util.GetSignal(rep, el.ElementGUID);
                                 if (signal_GUID.StartsWith("RefGUID={", StringComparison.Ordinal))
                                 {
                                     EA.Element signal = rep.GetElementByGuid(signal_GUID.Substring(8, 38));
@@ -1911,7 +1911,7 @@ namespace hoTools.EaServices
 
                 case EA.ObjectType.otPackage:
                     var pkgSrc = (EA.Package)rep.GetContextObject();
-                    EA.Package pkgTrg = Util.getModelDocumentFromPackage(rep, pkgSrc);
+                    EA.Package pkgTrg = Util.GetModelDocumentFromPackage(rep, pkgSrc);
                     if (pkgTrg != null) rep.ShowInProjectView(pkgTrg);
                     break;
             }
@@ -1946,7 +1946,7 @@ namespace hoTools.EaServices
                 rep.EnsureOutputVisible("Debug");
                 rep.WriteOutput("Debug", "Start GetLatestRecursive", 0);
                 var pkg = (EA.Package)rep.GetContextObject();
-                Util.getLatest(rep, pkg, true, ref count, 0, ref errorCount);
+                Util.GetLatest(rep, pkg, true, ref count, 0, ref errorCount);
                 string s = "";
                 if (errorCount > 0) s = " with " + errorCount + " errors";
 
@@ -2004,7 +2004,7 @@ namespace hoTools.EaServices
                     PDATA1 = "";
                     PDATA1string = "";
                 }
-                string classifier = Util.getClassifierGUID(rep, el.ElementGUID);
+                string classifier = Util.GetClassifierGuid(rep, el.ElementGUID);
                 str = el.ElementGUID + ":" + classifier + PDATA1string + " " + el.Name + ' ' + el.Type + "\r\n" +
                  "\r\nSelect ea_guid As CLASSGUID, object_type As CLASSTYPE,* from t_object o where ea_guid = '" + el.ElementGUID + "'";
                 if (classifier != "")
@@ -2140,21 +2140,21 @@ namespace hoTools.EaServices
             Match matchShm = Regex.Match(txt, regexShm, RegexOptions.Multiline);
             while (matchShm.Success)
             {
-                shm = Element.createElement(rep, pkg, matchShm.Groups[1].Value, "Class","shm");
-                Ishm = Element.createElement(rep, pkg, "SHM_"+ matchShm.Groups[1].Value, "Interface", "");
+                shm = Element.CreateElement(rep, pkg, matchShm.Groups[1].Value, "Class","shm");
+                Ishm = Element.CreateElement(rep, pkg, "SHM_"+ matchShm.Groups[1].Value, "Interface", "");
 
                 if (matchShm.Groups[2].Value == "START")
                 {
                     shmStartAddr = matchShm.Groups[3].Value;
                     // add Tagged Value "StartAddr"
-                    tagStart = TaggedValue.addTaggedValue(shm, "StartAddr");
+                    tagStart = TaggedValue.AddTaggedValue(shm, "StartAddr");
                     tagStart.Value = shmStartAddr;
                     tagStart.Update();
 
                 }else if (matchShm.Groups[2].Value == "END"){
                     shmEndAddr = matchShm.Groups[3].Value;
                     // add Tagged Value "StartAddr"
-                    tagEnd = TaggedValue.addTaggedValue(shm, "EndAddr");
+                    tagEnd = TaggedValue.AddTaggedValue(shm, "EndAddr");
                     tagEnd.Value = shmEndAddr;
                     tagEnd.Update();
                 }
@@ -2185,7 +2185,7 @@ namespace hoTools.EaServices
         
                 }
                 // make a port with a provided interface
-                Element.createPortWithInterface(shm, Ishm, "ProvidedInterface");
+                Element.CreatePortWithInterface(shm, Ishm, "ProvidedInterface");
 
 
 
@@ -2216,7 +2216,7 @@ namespace hoTools.EaServices
         public static void createOperationsFromText(EA.Repository rep, string txt)
         {
             EA.Diagram dia = rep.GetCurrentDiagram();
-            EA.Element el = Util.getElementFromContextObject(rep);
+            EA.Element el = Util.GetElementFromContextObject(rep);
             if (el == null) return;
 
             if ( dia != null && dia.SelectedObjects.Count != 1)
@@ -2313,17 +2313,17 @@ namespace hoTools.EaServices
                 functionType = match.Value + pointer;
                 leftover = leftover.Replace(functionType, "").Trim();
                 // get classifierID of type
-                typeClassifier = Util.getTypeFromName(rep, ref functionName, ref functionType);
+                typeClassifier = Util.GetTypeFromName(rep, ref functionName, ref functionType);
                 if (typeClassifier == 0 & functionType.Contains("*"))
                 {
                     functionType = functionType.Remove(functionName.IndexOf("*", StringComparison.Ordinal), 1);
                     functionName = "*" + functionName;
-                    typeClassifier = Util.getTypeID(rep, functionType);
+                    typeClassifier = Util.GetTypeId(rep, functionType);
                     if (typeClassifier == 0 & functionType.Contains("*"))
                     {
                         functionType = functionType.Replace("*", "");
                         functionName = "*" + functionName;
-                        typeClassifier = Util.getTypeID(rep, functionType);
+                        typeClassifier = Util.GetTypeId(rep, functionType);
                     }
                 }
             }
@@ -2399,7 +2399,7 @@ namespace hoTools.EaServices
                 string type = lparElements[lparElements.Length - 2]+pointer;
                 
                 // get classifier ID
-                classifierID = Util.getTypeFromName(rep, ref name, ref type);
+                classifierID = Util.GetTypeFromName(rep, ref name, ref type);
 
                 elPar = (EA.Parameter)m.Parameters.AddNew(name, "");
                 m.Parameters.Refresh();
@@ -2440,7 +2440,7 @@ namespace hoTools.EaServices
                 EA.Package pkg = rep.GetPackageByID(dia.PackageID);
                 if (dia.SelectedObjects.Count != 1) return;
 
-                el = Util.getElementFromContextObject(rep);
+                el = Util.GetElementFromContextObject(rep);
 
                 // delete comment
                 txt = deleteComment(txt);
@@ -2500,7 +2500,7 @@ namespace hoTools.EaServices
             txt = txt.Remove(match.Index, match.Length); 
             
              // check if typedef already exists
-            int targetID = Util.getTypeID(rep,name);
+            int targetID = Util.GetTypeId(rep,name);
             if (targetID != 0)
             {
                 elTypedef = rep.GetElementByID(targetID);
@@ -2538,7 +2538,7 @@ namespace hoTools.EaServices
             if (isStruct)
             {
                 elTypedef.Stereotype = "struct";
-                EA.TaggedValue tag = TaggedValue.addTaggedValue(elTypedef, "typedef");
+                EA.TaggedValue tag = TaggedValue.AddTaggedValue(elTypedef, "typedef");
                 tag.Value = "true";
                 tag.Update();
             }
@@ -2603,7 +2603,7 @@ namespace hoTools.EaServices
         public static void createAttributesFromText(EA.Repository rep, string txt)
         {
             EA.DiagramObject objSelected = null;
-            EA.Element el = Util.getElementFromContextObject(rep);
+            EA.Element el = Util.GetElementFromContextObject(rep);
             EA.Diagram dia = rep.GetCurrentDiagram();
             if (!(dia == null && dia.SelectedObjects.Count > 0 ))
             {
@@ -2810,7 +2810,7 @@ namespace hoTools.EaServices
                     a.Type = type;
                     a.IsConst = isConst;
                     a.Default = defaultValue;
-                    a.ClassifierID = Util.getTypeID(rep, type);
+                    a.ClassifierID = Util.GetTypeId(rep, type);
                     if (el.Type.Equals("Class")) a.Visibility = "Private";
                     else a.Visibility = "Public";
                     if (!collectionValue.Equals(""))
@@ -2958,7 +2958,7 @@ namespace hoTools.EaServices
                     var el = (EA.Element)rep.GetContextObject();
                     if (el.Type == "Activity")
                     {
-                        EA.Method m = Util.getOperationFromBrehavior(rep, el);
+                        EA.Method m = Util.GetOperationFromBrehavior(rep, el);
                         if (m == null)
                         {
                             MessageBox.Show("Activity hasn't an operation");
@@ -3077,7 +3077,7 @@ namespace hoTools.EaServices
 
                 // get the type
                 // find type from type_name
-                classifierID = Util.getTypeID(rep, parType);
+                classifierID = Util.GetTypeId(rep, parType);
                 // type not defined
                 if (classifierID == 0)
                 {
@@ -3093,7 +3093,7 @@ namespace hoTools.EaServices
                         parName = "*" + parName;
 
                     }
-                    classifierID = Util.getTypeID(rep, parType);
+                    classifierID = Util.GetTypeId(rep, parType);
 
                 }
 
@@ -3125,17 +3125,17 @@ namespace hoTools.EaServices
                 string path = string.Empty;
                 var openFileDialogXML = new OpenFileDialog();
                 openFileDialogXML.Filter = "xml files (*.xml)|*.xml";
-                openFileDialogXML.FileName = Util.getVccFilePath(rep, pkg);
+                openFileDialogXML.FileName = Util.GetVccFilePath(rep, pkg);
                 if (openFileDialogXML.ShowDialog() == DialogResult.OK)
                 {
                     path = openFileDialogXML.FileName;
-                    string rootPath = Util.getVccRootPath(rep, pkg);
+                    string rootPath = Util.GetVccRootPath(rep, pkg);
                     // delete root path and an preceding '\'
                     string shortPath = path.Replace(rootPath, "");
                     if (shortPath.StartsWith(@"\", StringComparison.Ordinal)) shortPath = shortPath.Substring(1);
                     
                     // write to repository
-                    Util.setXmlPath(rep, guid, shortPath);
+                    Util.SetXmlPath(rep, guid, shortPath);
 
                     // write to file
                     try
@@ -3213,11 +3213,11 @@ namespace hoTools.EaServices
             if (pkg == null) pkg = rep.GetTreeSelectedPackage();
             if (pkg == null) return;
 
-            pkg = Util.getFirstControlledPackage(rep, pkg);
+            pkg = Util.GetFirstControlledPackage(rep, pkg);
             if (pkg == null) return;
 
-            var svnHandle = new svn(rep, pkg);
-            string userNameLockedPackage = svnHandle.getLockingUser();
+            var svnHandle = new Svn(rep, pkg);
+            string userNameLockedPackage = svnHandle.GetLockingUser();
             svnHandle = null;
             if (userNameLockedPackage != "")
             {
@@ -3296,11 +3296,11 @@ namespace hoTools.EaServices
                 if (pkg == null) pkg = rep.GetTreeSelectedPackage();
                 if (pkg == null) return;
 
-                pkg = Util.getFirstControlledPackage(rep, pkg);
+                pkg = Util.GetFirstControlledPackage(rep, pkg);
                 if (pkg == null) return;
 
-                var svnHandle = new svn(rep, pkg);
-                string userNameLockedPackage = svnHandle.getLockingUser();
+                var svnHandle = new Svn(rep, pkg);
+                string userNameLockedPackage = svnHandle.GetLockingUser();
                 svnHandle = null;
                 if (userNameLockedPackage == "")
                 {
@@ -3525,8 +3525,8 @@ namespace hoTools.EaServices
             // set svn properties
             if (pkg.IsVersionControlled)
             {
-                var svnHandle = new svn(rep, pkg);
-                svnHandle.setProperty();
+                var svnHandle = new Svn(rep, pkg);
+                svnHandle.SetProperty();
                 svnHandle = null;
             }
         }
@@ -3535,8 +3535,8 @@ namespace hoTools.EaServices
             // set svn properties
             if (pkg.IsVersionControlled)
             {
-                var svnHandle = new svn(rep, pkg);
-                svnHandle.gotoLog();
+                var svnHandle = new Svn(rep, pkg);
+                svnHandle.GotoLog();
                 svnHandle = null;
             }
         }
@@ -3545,8 +3545,8 @@ namespace hoTools.EaServices
             // set svn properties
             if (pkg.IsVersionControlled)
             {
-                var svnHandle = new svn(rep, pkg);
-                svnHandle.gotoRepoBrowser();
+                var svnHandle = new Svn(rep, pkg);
+                svnHandle.GotoRepoBrowser();
                 svnHandle = null;
             }
         }
@@ -3573,7 +3573,7 @@ namespace hoTools.EaServices
             var oldCollection = new List<EA.DiagramObject>();
 
             // get context element (last selected element)
-            EA.Element originalSrcEl = Util.getElementFromContextObject(rep);
+            EA.Element originalSrcEl = Util.GetElementFromContextObject(rep);
             if (originalSrcEl == null) return;
             int  originalSrcID =  originalSrcEl.ElementID;
 
@@ -3584,7 +3584,7 @@ namespace hoTools.EaServices
                 //if (i > 0) dia.SelectedObjects.DeleteAt((short)i, true);
             }
 
-            EA.DiagramObject originalSrcObj = Util.getDiagramObjectByID(rep, dia, originalSrcID);
+            EA.DiagramObject originalSrcObj = Util.GetDiagramObjectById(rep, dia, originalSrcID);
             //EA.DiagramObject originalSrcObj = dia.GetDiagramObjectByID(originalSrcID, "");
 
             EA.DiagramObject trgObj = EaService.createDiagramObjectFromContext(rep, "", type, subType,0,0,guardString, originalSrcEl);
@@ -3617,11 +3617,11 @@ namespace hoTools.EaServices
                         string style = "LV";
                         if ((srcEl.Type == "Action" | srcEl.Type == "Activity") & guardString == "no") style = "LH";
                         link = getDiagramLinkForConnector(dia, con.ConnectorID);
-                        if (link != null) Util.setLineStyleForDiagramLink(style, link);
+                        if (link != null) Util.SetLineStyleForDiagramLink(style, link);
 
                     }
                     // set new high/bottom_Position
-                    srcObj = Util.getDiagramObjectByID(rep, dia, srcEl.ElementID);
+                    srcObj = Util.GetDiagramObjectById(rep, dia, srcEl.ElementID);
                     //srcObj = dia.GetDiagramObjectByID(srcEl.ElementID, "");
                     if (srcObj.bottom < bottom) bottom = srcObj.bottom;
 
@@ -3639,7 +3639,7 @@ namespace hoTools.EaServices
                     EA.Element parEl = rep.GetElementByID(trgtEl.ParentID);
                     if (parEl.Type == "Activity")
                     {
-                        EA.DiagramObject parObj = Util.getDiagramObjectByID(rep, dia, parEl.ElementID);
+                        EA.DiagramObject parObj = Util.GetDiagramObjectById(rep, dia, parEl.ElementID);
                         //EA.DiagramObject parObj = dia.GetDiagramObjectByID(parEl.ElementID, "");
                         if (parObj != null)
                         {
@@ -3687,7 +3687,7 @@ namespace hoTools.EaServices
                 dia.DiagramLinks.Refresh();
                 // set line style
                 EA.DiagramLink link = getDiagramLinkForConnector(dia, con.ConnectorID);
-                if (link != null) Util.setLineStyleForDiagramLink("LV", link);
+                if (link != null) Util.SetLineStyleForDiagramLink("LV", link);
                
             }
     
@@ -3901,7 +3901,7 @@ namespace hoTools.EaServices
              elSource = (EA.Element)rep.GetContextObject();
              if (elSource.Type != "Component") return;
 
-             diaObjSource = Util.getDiagramObjectByID(rep, dia, elSource.ElementID);
+             diaObjSource = Util.GetDiagramObjectById(rep, dia, elSource.ElementID);
              //diaObjSource = dia.GetDiagramObjectByID(elSource.ElementID, "");
 
              string txt = "";
@@ -3918,7 +3918,7 @@ namespace hoTools.EaServices
 
         public static string addReleaseInformation(EA.Repository rep, EA.Element el) {
             string txt = "";
-            string path = Util.getGenFilePath(rep, el);
+            string path = Util.GetGenFilePath(rep, el);
             if (path == "")
             {
                 MessageBox.Show("No file defined in property for: '" + el.Name + "':" + el.Type);
@@ -3993,7 +3993,7 @@ namespace hoTools.EaServices
             elSource = (EA.Element)rep.GetContextObject();
             if (elSource.Type != "Component") return;
 
-            diaObjSource = Util.getDiagramObjectByID(rep, dia, elSource.ElementID);
+            diaObjSource = Util.GetDiagramObjectById(rep, dia, elSource.ElementID);
             //diaObjSource = dia.GetDiagramObjectByID(elSource.ElementID, "");
 
             rep.SaveDiagram(dia.DiagramID);
@@ -4025,7 +4025,7 @@ namespace hoTools.EaServices
         public static List<EA.Element> getIncludedHeaderFiles(EA.Repository rep, EA.Element el)
         {
             var l_el = new List<EA.Element>();
-            string path = Util.getGenFilePath(rep, el);
+            string path = Util.GetGenFilePath(rep, el);
             if (path == "")
             {
                 MessageBox.Show("No file defined in property for: '" + el.Name + "':" + el.Type);
@@ -4056,9 +4056,9 @@ namespace hoTools.EaServices
             {
                 if (pkg.IsControlled)
                 {
-                    string pkgState = Util.getVCstate(rep, pkg, true);
+                    string pkgState = Util.GetVCstate(rep, pkg, true);
                      DialogResult result = MessageBox.Show("Package is "+ pkgState +"\nPath=" + pkg.XMLPath + "\nFlags=" + pkg.Flags, "Update package state?", MessageBoxButtons.YesNo);
-                    if (result == DialogResult.Yes)  Util.updateVC(rep, pkg);
+                    if (result == DialogResult.Yes)  Util.UpdateVc(rep, pkg);
                 }
             }
             else MessageBox.Show("No package selected");
@@ -4099,12 +4099,12 @@ namespace hoTools.EaServices
         #region updateVcStateRecursive
         public static void updateVcStateRecursive(EA.Repository rep, EA.Package pkg,bool recursive=true)
         {
-            if (pkg.IsControlled) Util.updateVC(rep, pkg);
+            if (pkg.IsControlled) Util.UpdateVc(rep, pkg);
             if (recursive)
             {
                 foreach (EA.Package p in pkg.Packages)
                 {
-                    if (p.IsControlled) Util.updateVC(rep, p);
+                    if (p.IsControlled) Util.UpdateVc(rep, p);
                     updateVcStateRecursive(rep, p);
                 }
             }
@@ -4133,7 +4133,7 @@ namespace hoTools.EaServices
         public static void AddFavorite(EA.Repository rep)
         {
             var f = new Favorite(rep, getGuidfromSelectedItem(rep));
-            f.save();
+            f.Save();
 
         }
         #endregion
@@ -4150,7 +4150,7 @@ namespace hoTools.EaServices
         public static void RemoveFavorite(EA.Repository rep)
         {
             var f = new Favorite(rep, getGuidfromSelectedItem(rep));
-            f.delete();
+            f.Delete();
 
         }
         #endregion
@@ -4166,7 +4166,7 @@ namespace hoTools.EaServices
         public static void Favorites(EA.Repository rep)
         {
             var f = new Favorite(rep);
-            f.search();
+            f.Search();
 
         }
         #endregion
@@ -4226,7 +4226,7 @@ namespace hoTools.EaServices
             // get parent of embedded element
             EA.Element el = rep.GetElementByID(port.ParentID);
 
-            EA.DiagramObject obj = Util.getDiagramObjectByID(rep, dia, el.ElementID);
+            EA.DiagramObject obj = Util.GetDiagramObjectById(rep, dia, el.ElementID);
             //EA.DiagramObject obj = dia.GetDiagramObjectByID(el.ElementID, "");
 
 
@@ -4290,7 +4290,7 @@ namespace hoTools.EaServices
             // get parent of embedded element
             EA.Element el = rep.GetElementByID(port.ParentID);
 
-            EA.DiagramObject obj = Util.getDiagramObjectByID(rep, dia, el.ElementID);
+            EA.DiagramObject obj = Util.GetDiagramObjectById(rep, dia, el.ElementID);
             //EA.DiagramObject obj = dia.GetDiagramObjectByID(el.ElementID, "");
 
 
@@ -4354,7 +4354,7 @@ namespace hoTools.EaServices
             // get parent of embedded element
             EA.Element el = rep.GetElementByID(port.ParentID);
 
-            EA.DiagramObject obj = Util.getDiagramObjectByID(rep, dia, el.ElementID);
+            EA.DiagramObject obj = Util.GetDiagramObjectById(rep, dia, el.ElementID);
             //EA.DiagramObject obj = dia.GetDiagramObjectByID(el.ElementID, "");
 
             // check if lower limit element is crossed
@@ -4420,7 +4420,7 @@ namespace hoTools.EaServices
             // get parent of embedded element
             EA.Element el = rep.GetElementByID(port.ParentID);
 
-            EA.DiagramObject obj = Util.getDiagramObjectByID(rep, dia, el.ElementID);
+            EA.DiagramObject obj = Util.GetDiagramObjectById(rep, dia, el.ElementID);
             //EA.DiagramObject obj = dia.GetDiagramObjectByID(el.ElementID, "");
           
 

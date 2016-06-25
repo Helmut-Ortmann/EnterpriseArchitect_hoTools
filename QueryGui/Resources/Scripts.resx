@@ -123,8 +123,8 @@
 '[group=hoTools]
 !INC Local Scripts.EAConstants-VBScript
 ' Dim doesn't work (syntax error)
-' Object 'Session' doesn't exist (use  Repository.WriteOutput "Script", "MyTest",0)
-' Var 'Repository' is loaded
+' Object 'Session' doesn't exist (use  rep.WriteOutput "Script", "MyTest",0)
+' Var 'rep' is loaded
 ' You may create an instance 'EAAddinFramework.Utils.Model' of the first running EA-Instance
 
 function hoDemoPrintContext(modelItem, objectType)
@@ -145,8 +145,8 @@ function hoDemoPrintContext(modelItem, objectType)
 	Dim s 
 	s = "hoDemoPrintContext: Context item is: '" + modelItem.Name + "' of type '" + itemType + "'"
     ' Output to EA			
-    Repository.EnsureOutputVisible("Script") 
-	Repository.WriteOutput "Script", s, 0
+    rep.EnsureOutputVisible("Script") 
+	rep.WriteOutput "Script", s, 0
 end function</value>
     <comment>Demo Script to show Query with Script functionality with 2 Parameters</comment>
   </data>
@@ -160,8 +160,8 @@ end function</value>
 !INC Local Scripts.EAConstants-VBScript
 '----------------------------------------------------------------------
 ' Dim doesn't work (syntax error, used in EA for intellissense)
-' Object 'Session' doesn't exist (use  Repository.WriteOutput "Script", "MyTest",0)
-' Var 'Repository' is loaded by script environment
+' Object 'Session' doesn't exist (use  rep.WriteOutput "Script", "MyTest",0)
+' Var 'rep' is loaded by script environment
 ' You may create an instance 'EAAddinFramework.Utils.Model' of the first running EA-Instance
 
 '---------------------------------------------------------------------
@@ -169,17 +169,17 @@ end function</value>
 ' Par2: ObjectType
 ' Par3: Model (methods and attributes see code in https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools.git)
 function hoDemo3Parameter(ModelItem, ObjectType, Model)
-   ' The EA default variable 'Repository'
-    'Repository.ClearOutput("Script")
-    Repository.EnsureOutputVisible("Script") 
+   ' The EA default variable 'rep'
+    'rep.ClearOutput("Script")
+    rep.EnsureOutputVisible("Script") 
 
     ' just output the parameters
-	Repository.WriteOutput "Script","Par1: '"+ CStr(ObjectType) + "' Par2: '" + ModelItem.Name + "' Par3: '" + Model + "'",0
+	rep.WriteOutput "Script","Par1: '"+ CStr(ObjectType) + "' Par2: '" + ModelItem.Name + "' Par3: '" + Model + "'",0
 	
-	' Get Repository via Model object.
+	' Get rep via Model object.
     set m = CreateObject("EAAddinFramework.Utils.Model")
     ' Create new Model Object with the first running EA instance
-	set rep = m.Repository
+	set rep = m.rep
 	rep.EnsureOutputVisible("Script") 
 	rep.WriteOutput "Script","Par1: '"+ CStr(ObjectType) + "' Par2: '" + ModelItem.Name + "' Par3: '" + Model + "'",0
 	

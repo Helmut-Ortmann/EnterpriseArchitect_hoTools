@@ -21,7 +21,7 @@ namespace hoTools.Utils.RUN
 
         }
         #endregion
-        public string stop()
+        public string Stop()
         {
             _stopWatch.Stop();
             TimeSpan ts = _stopWatch.Elapsed;
