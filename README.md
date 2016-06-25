@@ -15,10 +15,12 @@ Collection of useful tools (see also [WiKi](https://github.com/Helmut-Ortmann/En
 - [SQL](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/SQL) with tabbed Windows
     -- Select, Insert, Delete, Update
     -- Templates
-    -- Macros
+    -- Macros (easy access to EA, a lot more than EA delivers)
     -- See error
-  - Conveyed Items
-- Your [Script](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/Script) which runs for SQL results (vbScript, JScript, JavaScript) 
+    -- Conveyed Items
+    -- *.sql files in file system (you may use favourite Editor)
+- [Script](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/Script) which runs for [SQL](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/SQL) results 
+  - all EA script languages (vbScript, JScript, JavaScript) 
 - Configure
  - Buttons
  - Searches
@@ -37,12 +39,12 @@ Collection of useful tools (see also [WiKi](https://github.com/Helmut-Ortmann/En
 
 
 # SQL Query
-- Tabbed Editor
+- Tabbed Editor or use your own editor
 - Macro replacement (ID, GUID, Branch, DiagramSelectObject, ConveyedItem,..)
 - DB specific (#DB=ORACLE#,..)
 - Comment your sql
-- Easy find SQ
-- Load / Save
+- Easy find SQL error
+- Load / Save to file
 - History / Last opened
 - Easy cooperation with your beloved editor (try e.g. atom,..)
 - etc.
@@ -78,6 +80,12 @@ Some features:
 - hoToolsRemove.ps1 (deinstall with PowerShell)
 - Make sure only one instance of hoTools is installed
 - See also: [Installation](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/Installation)
+
+# Scheduled (release 2.0.3)
+- Improved help for Toolbar Buttons
+- Use advanced [SQL](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/SQL) everywhere in hoTools
+-- Toolbar Buttons
+-- Quick Search 
 
 # ToDo
 - Drag SQL file on canvas
