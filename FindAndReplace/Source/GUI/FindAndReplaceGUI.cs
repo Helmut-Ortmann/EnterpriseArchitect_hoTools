@@ -200,7 +200,7 @@ namespace hoTools.Find
             switch (AddinSettings.Customer)
             {
                 case AddinSettings.CustomerCfg.Var1:
-                    EaService.aboutVAR1(Release, configFilePath);
+                    EaService.AboutVar1(Release, configFilePath);
                     break;
                 case AddinSettings.CustomerCfg.HoTools:
                     EaService.about(Release, configFilePath);
@@ -243,7 +243,7 @@ namespace hoTools.Find
         {
             if (e.KeyCode == Keys.Enter)
             {
-                EaService.runQuickSearch(Repository, AddinSettings.QuickSearchName, txtUserText.Text);
+                EaService.RunQuickSearch(Repository, AddinSettings.QuickSearchName, txtUserText.Text);
                 e.Handled = true;
             }
         }
@@ -252,7 +252,7 @@ namespace hoTools.Find
         private void txtUserText_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             txtUserText.Text = Clipboard.GetText();
-            EaService.runQuickSearch(Repository, AddinSettings.QuickSearchName, txtUserText.Text);
+            EaService.RunQuickSearch(Repository, AddinSettings.QuickSearchName, txtUserText.Text);
         }
 #endregion
         #region regularExpressionToolStripMenuItem_Click

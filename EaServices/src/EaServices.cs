@@ -54,7 +54,7 @@ namespace hoTools.EaServices
     public static class EaService 
     {
           public static string release = "1.0.01";
-          private const string EMBEDDED_ELEMENT_TYPES = "Port Parameter Pin"; 
+          const string EmbeddedElementTypes = "Port Parameter Pin"; 
         
 
         // define menu constants
@@ -67,7 +67,7 @@ namespace hoTools.EaServices
         #region runQuickSearch
         //---------------------------------------------------------------------------------------------------------------
         // Search for Elements, Operation, Attributes, GUID
-        public static void runQuickSearch(EA.Repository rep, string searchName, string searchString)
+        public static void RunQuickSearch(EA.Repository rep, string searchName, string searchString)
         {
             // get the search from setting
             try
@@ -76,7 +76,7 @@ namespace hoTools.EaServices
             }
             catch (Exception e1)
             {
-                MessageBox.Show( $"Search name:'{searchName}' not available", "Error run search, break!");
+                MessageBox.Show( $"Search name:'{searchName}' not available", @"Error run search, break!");
             }
         }
         #endregion
@@ -4221,7 +4221,7 @@ namespace hoTools.EaServices
             // check if port,..
             var objPort0 = (EA.DiagramObject)dia.SelectedObjects.GetAt(0);
             EA.Element port = rep.GetElementByID(objPort0.ElementID);
-            if (!EMBEDDED_ELEMENT_TYPES.Contains(port.Type)) return;
+            if (!EmbeddedElementTypes.Contains(port.Type)) return;
 
             // get parent of embedded element
             EA.Element el = rep.GetElementByID(port.ParentID);
@@ -4285,7 +4285,7 @@ namespace hoTools.EaServices
             // check if port,..
             var objPort0 = (EA.DiagramObject)dia.SelectedObjects.GetAt(0);
             EA.Element port = rep.GetElementByID(objPort0.ElementID);
-            if (!EMBEDDED_ELEMENT_TYPES.Contains(port.Type)) return;
+            if (!EmbeddedElementTypes.Contains(port.Type)) return;
 
             // get parent of embedded element
             EA.Element el = rep.GetElementByID(port.ParentID);
@@ -4349,7 +4349,7 @@ namespace hoTools.EaServices
             // check if port,..
             var objPort0 = (EA.DiagramObject)dia.SelectedObjects.GetAt(0);
             EA.Element port = rep.GetElementByID(objPort0.ElementID);
-            if (!EMBEDDED_ELEMENT_TYPES.Contains(port.Type)) return;
+            if (!EmbeddedElementTypes.Contains(port.Type)) return;
 
             // get parent of embedded element
             EA.Element el = rep.GetElementByID(port.ParentID);
@@ -4415,7 +4415,7 @@ namespace hoTools.EaServices
             // check if port,..
             var objPort0 = (EA.DiagramObject)dia.SelectedObjects.GetAt(0);
             EA.Element port = rep.GetElementByID(objPort0.ElementID);
-            if (  ! EMBEDDED_ELEMENT_TYPES.Contains(port.Type) ) return;
+            if (  ! EmbeddedElementTypes.Contains(port.Type) ) return;
 
             // get parent of embedded element
             EA.Element el = rep.GetElementByID(port.ParentID);
@@ -4488,15 +4488,15 @@ namespace hoTools.EaServices
         }
         #endregion
 
-        public static void aboutVAR1(string release, string configFilePath) {
+        public static void AboutVar1(string release, string configFilePath) {
             string installDir = Path.GetDirectoryName(Assembly.GetAssembly(typeof(EaService)).CodeBase);
-            MessageBox.Show("Helmut.Ortmann@t-online.de\n"+
-                            "Helmut.Ortmann@t-online.de\n" +
-                            "Germany\n" +
-                            "private: +49 172 / 51 79 16 7\n"+
-                            "\n\nInstall:\t" + installDir +
-                            "\nConfig:\t" + configFilePath
-                    , "hoTools for VAR1  " + release);
+            MessageBox.Show(@"Helmut.Ortmann@t-online.de
+Germany
+private: +49 172 / 51 79 16 7\n
+
+Install:   {installDir} 
+Config:    {configFilePath}",
+ $"hoTools for VAR1  {release}");
         }
         #endregion
     }

@@ -15,10 +15,7 @@ namespace hoTools.ActiveX
     public class AddinGUI : UserControl
     {
         EA.Repository _rep;
-        string _release;
-        string _projectGUID;
-        Model _model;
-        AddinSettings _addinSettings;
+        Model _model; 
         // needs to set just after creating Control
 
 
@@ -46,9 +43,6 @@ namespace hoTools.ActiveX
                 {
                     _model.Repository = value;
                 }
-                _projectGUID = _rep.ProjectGUID;
-
-                
             }
             get
             {
@@ -57,32 +51,12 @@ namespace hoTools.ActiveX
         }
         #endregion
         #region Release
-        public string Release
-        {
-            set
-            {
-                _release = value;
-            }
-            get
-            {
-                return _release;
-            }
-        }
+        public string Release { set; get; }
+
         #endregion
         #region AddinSettings
-        public AddinSettings AddinSettings
-        {
-            get
-            {
-                return _addinSettings;
-            }
-            set
-            {
-                _addinSettings = value;
+        public AddinSettings AddinSettings { get; set; }
 
-             
-            }
-        }
         #endregion
     }
 }

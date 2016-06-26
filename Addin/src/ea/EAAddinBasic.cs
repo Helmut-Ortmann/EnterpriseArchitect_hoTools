@@ -20,7 +20,7 @@ namespace EAAddinFramework
         /// the name of the menu. 
         /// Set this name in the constructor of the derived add-in class
         /// </summary>
-        protected virtual string menuHeader
+        protected virtual string MenuHeader
         {
             get { return _menuHeader; }
             set { _menuHeader = value; }
@@ -91,10 +91,10 @@ namespace EAAddinFramework
             if (MenuName == string.Empty)
             {
                 //return top level menu option
-                return this.menuHeader;
+                return this.MenuHeader;
                 
             }
-            else if (MenuName == this.menuHeader)
+            else if (MenuName == this.MenuHeader)
             {
                 // return submenu options
                 return this.menuOptions;

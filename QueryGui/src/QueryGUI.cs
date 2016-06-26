@@ -551,7 +551,7 @@ namespace hoTools.Query
             {
 
                 case AddinSettings.CustomerCfg.Var1:
-                    EaService.aboutVAR1(Release, configFilePath);
+                    EaService.AboutVar1(Release, configFilePath);
                     break;
                 case AddinSettings.CustomerCfg.HoTools:
                     EaService.about(Release, configFilePath);

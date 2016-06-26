@@ -72,6 +72,8 @@
     <Compile Include="src\ActionPin.cs" />
     <Compile Include="src\ActivityPar.cs" />
     <Compile Include="src\Appl.cs" />
+    <Compile Include="src\Configuration\HoToolsGlobalCfg.cs" />
+    <Compile Include="src\Configuration\IHoToolsGlobalCfg.cs" />
     <Compile Include="src\Connector.cs" />
     <Compile Include="src\Diagram.cs" />
     <Compile Include="src\Element.cs" />

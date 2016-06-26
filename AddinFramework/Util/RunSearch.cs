@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace EAAddinFramework.Utils
 {
     /// <summary>
-    /// Run the search.
+    /// Run the SQL Search. It looks for the hoTools Path for the possible locations of the SQL.
     /// </summary>
     public class RunSearch
     {

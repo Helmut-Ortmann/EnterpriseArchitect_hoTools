@@ -15,6 +15,7 @@ using hoTools.Utils.ActionPins;
 using System.Reflection;
 
 using hoTools.Find;
+using hoTools.Utils.Configuration;
 
 using GlobalHotkeys;
 
@@ -53,7 +54,10 @@ namespace hoTools
         // Overwritten by AdinClass AssemblyFileVersion
         // This should be identical to installed product version from WIX installer (ProductVersion)
         string release = "X.X.XXX.XX"; // Major, Minor, Build, free,
-                                       
+
+
+        HoToolsGlobalCfg _globalCfg;
+                                           
         // static due to global key definitions
         static EA.Repository Repository ;
         static AddinSettings AddinSettings;
@@ -63,13 +67,13 @@ namespace hoTools
         static QueryGui QueryGUI;
 
         // ActiveX Controls
-        AddinControlGui _MyControlGUI;
-        FindAndReplaceGUI _FindAndReplaceGUI;
-        QueryGui _ScriptGUI;
-        QueryGui _QueryGUI;
+        AddinControlGui _myControlGui;
+        FindAndReplaceGUI _findAndReplaceGui;
+        QueryGui _scriptGui;
+        QueryGui _queryGui;
 
         // settings
-        AddinSettings _AddinSettings;
+        readonly AddinSettings _AddinSettings;
  
 
         EA.Repository _repository;
@@ -146,12 +150,19 @@ namespace hoTools
 
                 _AddinSettings = new AddinSettings();
                 AddinSettings = _AddinSettings; // static
+
+               
+
             }
             catch (Exception e)
             {
-                MessageBox.Show("Error setup 'hoTools' Addin. Error:\n" + e, "hoTools Installation error");
+                MessageBox.Show($"Error setup 'hoTools' Addin. Error:\n\n{e}", @"hoTools Installation error");
             }
-            this.menuHeader = "-" + _AddinSettings.ProductName;
+            // global configuration parameters independent from EA-Instance and used by services
+            _globalCfg = HoToolsGlobalCfg.Instance;
+            _globalCfg.SetSqlPaths(_AddinSettings.SqlPaths);
+
+            this.MenuHeader = "-" + _AddinSettings.ProductName;
             this.menuOptions = new string[] { 
                 //-------------------------- General  --------------------------//
                 //    menuLocateCompositeElementorDiagram,
@@ -447,7 +458,7 @@ namespace hoTools
         }
         public override void EA_FileClose(EA.Repository Repository)
         {
-            if (_MyControlGUI != null)  _MyControlGUI.Save(); // save settings
+            if (_myControlGui != null)  _myControlGui.Save(); // save settings
             initializeForRepository(null);
 
 
@@ -526,10 +537,10 @@ namespace hoTools
             Repository = rep;
             try
             {
-                if (_MyControlGUI != null) _MyControlGUI.Repository = rep;
-                if (_FindAndReplaceGUI != null) _FindAndReplaceGUI.Repository = rep;
-                if (_ScriptGUI != null) _ScriptGUI.Repository = rep;
-                if (_QueryGUI != null) _QueryGUI.Repository = rep;
+                if (_myControlGui != null) _myControlGui.Repository = rep;
+                if (_findAndReplaceGui != null) _findAndReplaceGui.Repository = rep;
+                if (_scriptGui != null) _scriptGui.Repository = rep;
+                if (_queryGui != null) _queryGui.Repository = rep;
             } catch (Exception e)
             {
                 MessageBox.Show($"{e.Message}","hoTools: Error initializing Addin Tabs");
@@ -1039,7 +1050,7 @@ namespace hoTools
         /// </summary>
         private void ShowAddinControlWindows()
         {
-            if (_MyControlGUI == null)
+            if (_myControlGui == null)
             {
 
                 try
@@ -1050,7 +1061,7 @@ namespace hoTools
                     AddinControlGUI = addAddinControl<AddinControlGui>(_AddinSettings.ProductName,
                         AddinControlGui.Progid, null,
                         AddinSettings.ShowInWindow.AddinWindow);
-                        _MyControlGUI = AddinControlGUI; // static + instance
+                        _myControlGui = AddinControlGUI; // static + instance
                     }
 
                     // with Search & Replace EA Addin Windows
@@ -1058,7 +1069,7 @@ namespace hoTools
                         FindAndReplaceGUI = addAddinControl<FindAndReplaceGUI>(FindAndReplaceGUI.TABULATOR, 
                             FindAndReplaceGUI.PROGID, null, 
                             AddinSettings.ShowInWindow.AddinWindow);
-                       _FindAndReplaceGUI = FindAndReplaceGUI; // static + instance
+                       _findAndReplaceGui = FindAndReplaceGUI; // static + instance
                     }
 
                     // with Query EA Addin Windows
@@ -1068,7 +1079,7 @@ namespace hoTools
                         QueryGUI = addAddinControl<QueryGui>(QueryGui.TabulatorSql, 
                             QueryGui.Progid, QueryGui.TabulatorSql, 
                             _AddinSettings.OnlyQueryWindow);
-                        _QueryGUI = QueryGUI; // static + instance
+                        _queryGui = QueryGUI; // static + instance
                     }
 
                     // with Script & Query EA Addin Windows
@@ -1078,7 +1089,7 @@ namespace hoTools
                         ScriptGUI = addAddinControl<QueryGui>(QueryGui.TabulatorScript, 
                             QueryGui.Progid, QueryGui.TabulatorScript, 
                             _AddinSettings.ScriptAndQueryWindow);
-                    _ScriptGUI = ScriptGUI; // static + instance
+                    _scriptGui = ScriptGUI; // static + instance
                     }
 
 
@@ -1098,6 +1109,7 @@ namespace hoTools
         /// <param name="tabName">Tabulator name to show Addin</param>
         /// <param name="progId">ProgID under which the Addin is registered</param>
         /// <param name="tag">Information to pass to Control</param>
+        /// <param name="showInWindowType"></param>
         /// <returns>AddinGUI</returns>
         private T addAddinControl<T>(string tabName, string progId, object tag, AddinSettings.ShowInWindow showInWindowType)
         {

@@ -8,6 +8,7 @@ using System.Xml.Linq;
 using System.Linq;
 using System.Text.RegularExpressions;
 
+
 using hoTools.Utils.SQL;
 
 
@@ -66,6 +67,7 @@ namespace EAAddinFramework.Utils
         {
             Initialize(repository);
         }
+
         #endregion
         /// <summary>
         /// Initialize an rep Model object
@@ -247,6 +249,12 @@ namespace EAAddinFramework.Utils
             escapedString = escapedString.Replace("'", "''");
             return escapedString;
         }
+
+
+
+
+
+
         /// <summary>
         /// Run an SQL string and if query output the result in EA Search Window. If update, insert, delete execute SQL.
         /// <para/>- replacement of macros
@@ -284,6 +292,9 @@ namespace EAAddinFramework.Utils
 
             }
         }
+
+
+
         /// <summary>
         /// EA SQL Query with:
         /// - formatSQL
