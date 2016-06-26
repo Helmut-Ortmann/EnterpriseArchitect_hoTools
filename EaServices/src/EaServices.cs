@@ -36,20 +36,19 @@ namespace hoTools.EaServices
         /// <param name="isTextRequired">text is required, default false</param>
         public ServiceOperationAttribute(String guid, String description, String help, bool isTextRequired = false)
         {
-            _description = description;
-            _guid = guid;
-            _help = help;
-            _isTextRequired = isTextRequired;
+            Description = description;
+            Guid = guid;
+            Help = help;
+            IsTextRequired = isTextRequired;
         }
 
-        private readonly bool _isTextRequired;
-        public bool IsTextRequired => _isTextRequired;
-        private readonly String _description;
-        public String Description => _description;
-        public string Guid => _guid;
-        private readonly String _help;
-        public String Help => this._help;
-        private readonly String _guid;
+        public bool IsTextRequired { get; }
+
+        public String Description { get; }
+
+        public string Guid { get; }
+
+        public String Help { get; }
     }
     #endregion
 
@@ -1962,11 +1961,9 @@ namespace hoTools.EaServices
         {
             string str = "";
             string str1 = "";
-            string str2 = "";
             EA.ObjectType oType = rep.GetContextItemType();
             EA.Diagram diaCurrent = rep.GetCurrentDiagram();
             EA.Connector conCurrent = null;
-            EA.Element el = null;
 
             if (diaCurrent != null)
             {
@@ -1994,7 +1991,7 @@ namespace hoTools.EaServices
             }
             if (oType.Equals(EA.ObjectType.otElement))
             {// Element 
-                el = (EA.Element)rep.GetContextObject();
+                var el = (EA.Element)rep.GetContextObject();
                 string pdata1 = el.get_MiscData(0);
                 string pdata1String = "";
                 if (pdata1.EndsWith("}", StringComparison.Ordinal))
@@ -2080,7 +2077,7 @@ namespace hoTools.EaServices
             if (oType.Equals(EA.ObjectType.otMethod))
             {// Element 
                 str1 = "LEFT JOIN t_object parTyp on (par.classifier = parTyp.object_id))";
-                str2 = "LEFT JOIN t_object opTyp on (op.classifier = opTyp.object_id)";
+                var str2 = "LEFT JOIN t_object opTyp on (op.classifier = opTyp.object_id)";
                 if (rep.ConnectionString.Contains(".eap"))
                 {
                     str1 = " LEFT JOIN t_object parTyp on (par.classifier = Format(parTyp.object_id))) ";
@@ -2125,15 +2122,8 @@ namespace hoTools.EaServices
         // #define SP_SHM_HW_MIC_START     0x40008000u
         // #define SP_SHM_HW_MIC_END       0x400083FFu
         public static void CreateSharedMemoryFromText(EA.Repository rep, string txt) {
-            string shmStartAddr;
-            string shmEndAddr;
-            EA.TaggedValue tagStart = null;
-            EA.TaggedValue tagEnd = null;
-
             EA.Package pkg = null;
 
-            EA.Element shm = null;
-            EA.Element ishm = null;
             EA.ObjectType oType = rep.GetContextItemType();
             if (! oType.Equals(EA.ObjectType.otPackage)) return;
             pkg = (EA.Package)rep.GetContextObject();
@@ -2142,21 +2132,21 @@ namespace hoTools.EaServices
             Match matchShm = Regex.Match(txt, regexShm, RegexOptions.Multiline);
             while (matchShm.Success)
             {
-                shm = Element.CreateElement(rep, pkg, matchShm.Groups[1].Value, "Class","shm");
-                ishm = Element.CreateElement(rep, pkg, "SHM_"+ matchShm.Groups[1].Value, "Interface", "");
+                var shm = Element.CreateElement(rep, pkg, matchShm.Groups[1].Value, "Class",@"shm");
+                var ishm = Element.CreateElement(rep, pkg, "SHM_"+ matchShm.Groups[1].Value, "Interface", "");
 
                 if (matchShm.Groups[2].Value == "START")
                 {
-                    shmStartAddr = matchShm.Groups[3].Value;
+                    var shmStartAddr = matchShm.Groups[3].Value;
                     // add Tagged Value "StartAddr"
-                    tagStart = TaggedValue.AddTaggedValue(shm, "StartAddr");
+                    var tagStart = TaggedValue.AddTaggedValue(shm, "StartAddr");
                     tagStart.Value = shmStartAddr;
                     tagStart.Update();
 
                 }else if (matchShm.Groups[2].Value == "END"){
-                    shmEndAddr = matchShm.Groups[3].Value;
+                    var shmEndAddr = matchShm.Groups[3].Value;
                     // add Tagged Value "StartAddr"
-                    tagEnd = TaggedValue.AddTaggedValue(shm, "EndAddr");
+                    var tagEnd = TaggedValue.AddTaggedValue(shm, "EndAddr");
                     tagEnd.Value = shmEndAddr;
                     tagEnd.Update();
                 }
@@ -2207,7 +2197,7 @@ namespace hoTools.EaServices
             }
             catch (Exception e11)
             {
-                MessageBox.Show(e11.ToString() , "Error Insert Function");
+                MessageBox.Show(e11.ToString() , @"Error Insert Function");
             }
             finally
             {
@@ -2281,7 +2271,7 @@ namespace hoTools.EaServices
             }
             else
             {
-                MessageBox.Show(txt, "No function definition");
+                MessageBox.Show(txt, @"No function definition");
                 return;
             }
             // get parameters
@@ -2834,12 +2824,12 @@ namespace hoTools.EaServices
                     }
                     catch (Exception e)
                     {
-                        MessageBox.Show(e.ToString(), "Error updating attribute");
+                        MessageBox.Show(e.ToString(), @"Error updating attribute");
                     }
                 }
                 else
                 {
-                    MessageBox.Show(s+"\n\n"+sCompact, "Couldn't understand attribute syntax");
+                    MessageBox.Show(s+"\n\n"+sCompact, @"Couldn't understand attribute syntax");
                 }
             }
 
@@ -2893,7 +2883,7 @@ namespace hoTools.EaServices
                  a.Type = "";
                  a.Update();
              } else {
-                 MessageBox.Show(s,"Can't identify macro");
+                 MessageBox.Show(s,@"Can't identify macro");
              }
 
         }
@@ -2911,11 +2901,10 @@ namespace hoTools.EaServices
             // abc  ,
             string regexEnum = @"([a-zA-Z_0-9]+)[\s]*(=[\s]*([a-zA-Z_0-9| ]+)|,|$)";
             Match match = Regex.Match(txt, regexEnum, RegexOptions.Multiline);
-            EA.Attribute a = null;
             int pos = 0;
             while (match.Success)
             {
-                a = (EA.Attribute)el.Attributes.AddNew(match.Groups[1].Value, "");
+                var a = (EA.Attribute)el.Attributes.AddNew(match.Groups[1].Value, "");
                 // with/without default value
                 if (match.Groups[2].Value != ",") a.Default = match.Groups[3].Value;
                 a.Stereotype = "enum";
@@ -2963,7 +2952,7 @@ namespace hoTools.EaServices
                         EA.Method m = Util.GetOperationFromBrehavior(rep, el);
                         if (m == null)
                         {
-                            MessageBox.Show("Activity hasn't an operation");
+                            MessageBox.Show(@"Activity hasn't an operation");
                             return;
                         }
                         UpdateOperationType(rep, m);
@@ -3036,8 +3025,8 @@ namespace hoTools.EaServices
                 {
                     if (parType == "")
                     {
-                        MessageBox.Show("Method " + m.Name + " Parameter '" + par.Name + ":" + par.Type + "' ",
-                            "Parameter type undefined");
+                        MessageBox.Show($"Method {m.Name} Parameter '{par.Name}: {par.Type}' ",
+                            @"Parameter type undefined");
                     }
                     else
                     {
@@ -3157,10 +3146,10 @@ namespace hoTools.EaServices
                     }
                     catch (Exception e1)
                     {
-                        MessageBox.Show(e1.ToString(), "Error writing '"+path+"'"); 
+                        MessageBox.Show(e1.ToString(), $"Error writing '{path}'"); 
                     }
 
-                    MessageBox.Show(path , "Changed"); 
+                    MessageBox.Show(path , @"Changed"); 
                 }
                
             }
@@ -3223,7 +3212,7 @@ namespace hoTools.EaServices
             svnHandle = null;
             if (userNameLockedPackage != "")
             {
-                MessageBox.Show("Package is checked out by " + userNameLockedPackage);
+                MessageBox.Show($"Package is checked out by '{userNameLockedPackage}'");
                 return;
             }
 
@@ -3235,7 +3224,7 @@ namespace hoTools.EaServices
                 Cursor.Current = Cursors.Default;
             } catch (Exception e) 
             {
-                MessageBox.Show(e + "\n\n"+ pkg.GetLastError(), "Error Checkout");
+                MessageBox.Show(e + "\n\n"+ pkg.GetLastError(), @"Error Checkout");
             }
             finally
             {
@@ -3368,8 +3357,8 @@ namespace hoTools.EaServices
             label.Text = promptText;
             textBox.Text = value;
 
-            buttonOk.Text = "OK";
-            buttonCancel.Text = "Cancel";
+            buttonOk.Text = @"OK";
+            buttonCancel.Text = @"Cancel";
             buttonOk.DialogResult = DialogResult.OK;
             buttonCancel.DialogResult = DialogResult.Cancel;
 
@@ -3524,32 +3513,29 @@ namespace hoTools.EaServices
 
         public static void SetSvnProperty(EA.Repository rep, EA.Package pkg)
         {
-            // set svn properties
+            // set SVN properties
             if (pkg.IsVersionControlled)
             {
                 var svnHandle = new Svn(rep, pkg);
                 svnHandle.SetProperty();
-                svnHandle = null;
             }
         }
         public static void GotoSvnLog(EA.Repository rep, EA.Package pkg)
         {
-            // set svn properties
+            // set SVN properties
             if (pkg.IsVersionControlled)
             {
                 var svnHandle = new Svn(rep, pkg);
                 svnHandle.GotoLog();
-                svnHandle = null;
             }
         }
         public static void GotoSvnBrowser(EA.Repository rep, EA.Package pkg)
         {
-            // set svn properties
+            // set SVN properties
             if (pkg.IsVersionControlled)
             {
                 var svnHandle = new Svn(rep, pkg);
                 svnHandle.GotoRepoBrowser();
-                svnHandle = null;
             }
         }
 
@@ -3798,7 +3784,7 @@ namespace hoTools.EaServices
 
             trgEl = (EA.Element)rep.GetContextObject();
             if  (!(trgEl.Type.Equals("Activity"))) {
-                MessageBox.Show("Target '" + trgEl.Name + ":" + trgEl.Type + "' isn't an Activity", " Only move below Activity is allowed");
+                MessageBox.Show($"Target '{ trgEl.Name }:{ trgEl.Type}' isn't an Activity", @" Only move below Activity is allowed");
                 return;
             }
             var diaObj = new List<EA.DiagramObject>();
@@ -3817,7 +3803,6 @@ namespace hoTools.EaServices
         {
             EA.Element elSource = null;
             int elSourceId = 0;
-            EA.Element elTarget = null;
             EA.DiagramObject diaObjSource = null;
             EA.Connector con = null;
             EA.Diagram dia = rep.GetCurrentDiagram();
@@ -3854,7 +3839,7 @@ namespace hoTools.EaServices
                 if ("Usage Realisation".Contains(conType))
                 {
                     // check if target is..
-                    elTarget = rep.GetElementByID(con.SupplierID);
+                    var elTarget = rep.GetElementByID(con.SupplierID);
                     if (elTarget.Type == "Interface")
                     {
                         if (lInternalId.BinarySearch(con.ConnectorID) < 0)
@@ -3865,7 +3850,6 @@ namespace hoTools.EaServices
                         }
                     }
                 }
-               
             }
 
             
@@ -3895,22 +3879,20 @@ namespace hoTools.EaServices
          {
 
              EA.Element elSource = null;
-             EA.Element elTarget = null;
-             EA.DiagramObject diaObjSource = null;
-             EA.Diagram dia = rep.GetCurrentDiagram();
+            EA.Diagram dia = rep.GetCurrentDiagram();
              if (dia == null) return;
              if (!rep.GetContextItemType().Equals(EA.ObjectType.otElement)) return;
              elSource = (EA.Element)rep.GetContextObject();
              if (elSource.Type != "Component") return;
 
-             diaObjSource = Util.GetDiagramObjectById(rep, dia, elSource.ElementID);
+             Util.GetDiagramObjectById(rep, dia, elSource.ElementID);
              //diaObjSource = dia.GetDiagramObjectByID(elSource.ElementID, "");
 
              string txt = "";
              string nl = "";
              foreach (EA.DiagramObject obj in dia.DiagramObjects)
              {
-                 elTarget = rep.GetElementByID(obj.ElementID);
+                 var elTarget = rep.GetElementByID(obj.ElementID);
                  if (!("Class Interface".Contains(elTarget.Type))) continue;
                  txt = txt + nl + AddReleaseInformation(rep, elTarget);
                  nl = "\r\n";
@@ -3923,7 +3905,7 @@ namespace hoTools.EaServices
             string path = Util.GetGenFilePath(rep, el);
             if (path == "")
             {
-                MessageBox.Show("No file defined in property for: '" + el.Name + "':" + el.Type);
+                MessageBox.Show($"No file defined in property for: '{ el.Name }': { el.Type}");
                 return "";
             }
             try
@@ -3932,7 +3914,7 @@ namespace hoTools.EaServices
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.ToString(), "Error Reading file '" + el.Name + "':" + el.Type);
+                MessageBox.Show(e.ToString(), @"Error Reading file '" + el.Name + @"':" + el.Type);
                 return "";
             }
             string extension = ".c";
@@ -3987,21 +3969,19 @@ namespace hoTools.EaServices
 
             int pos = 0;
             EA.Element elSource = null;
-            EA.Element elTarget = null;
-            EA.DiagramObject diaObjSource = null;
             EA.Diagram dia = rep.GetCurrentDiagram();
             if (dia == null) return;
             if (!rep.GetContextItemType().Equals(EA.ObjectType.otElement)) return;
             elSource = (EA.Element)rep.GetContextObject();
             if (elSource.Type != "Component") return;
 
-            diaObjSource = Util.GetDiagramObjectById(rep, dia, elSource.ElementID);
+            Util.GetDiagramObjectById(rep, dia, elSource.ElementID);
             //diaObjSource = dia.GetDiagramObjectByID(elSource.ElementID, "");
 
             rep.SaveDiagram(dia.DiagramID);
             foreach (EA.DiagramObject obj in dia.DiagramObjects)
             {
-                elTarget = rep.GetElementByID(obj.ElementID);
+                var elTarget = rep.GetElementByID(obj.ElementID);
                 if (! ("Class Interface".Contains(elTarget.Type))) continue;
                 if (!(elTarget.Name.EndsWith("_i", StringComparison.Ordinal)))
                 {
@@ -4199,7 +4179,7 @@ namespace hoTools.EaServices
                     guid = pkg.PackageGUID;
                     break;
                 default:
-                    MessageBox.Show("Nothing useful selected");
+                    MessageBox.Show(@"Nothing useful selected");
                     break;
             }
             return guid;
