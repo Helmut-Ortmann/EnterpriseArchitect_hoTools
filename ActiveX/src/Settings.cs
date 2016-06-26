@@ -1071,7 +1071,7 @@ namespace hoTools.Settings
                     var serviceOperation = attr as ServiceOperationAttribute;
                     if (null != serviceOperation)
                     {
-                        AllServices.Add(new ServiceCall(method, serviceOperation.GUID, serviceOperation.Description, serviceOperation.Help, serviceOperation.IsTextRequired));
+                        AllServices.Add(new ServiceCall(method, serviceOperation.Guid, serviceOperation.Description, serviceOperation.Help, serviceOperation.IsTextRequired));
                     }
                 }
             }

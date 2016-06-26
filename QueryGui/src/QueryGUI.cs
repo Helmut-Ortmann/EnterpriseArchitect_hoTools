@@ -554,10 +554,10 @@ namespace hoTools.Query
                     EaService.AboutVar1(Release, configFilePath);
                     break;
                 case AddinSettings.CustomerCfg.HoTools:
-                    EaService.about(Release, configFilePath);
+                    EaService.About(Release, configFilePath);
                     break;
                 default:
-                    EaService.about(Release, configFilePath);
+                    EaService.About(Release, configFilePath);
                     break;
             }
         }
@@ -571,7 +571,7 @@ namespace hoTools.Query
         /// <param name="e"></param>
          void helpToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            Help.ShowHelp(this, EaService.getAssemblyPath() + "\\" + "hoTools.chm");
+            Help.ShowHelp(this, EaService.GetAssemblyPath() + "\\" + "hoTools.chm");
         }
         #endregion
 

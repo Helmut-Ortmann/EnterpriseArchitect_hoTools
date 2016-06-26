@@ -203,10 +203,10 @@ namespace hoTools.Find
                     EaService.AboutVar1(Release, configFilePath);
                     break;
                 case AddinSettings.CustomerCfg.HoTools:
-                    EaService.about(Release, configFilePath);
+                    EaService.About(Release, configFilePath);
                     break;
                 default:
-                    EaService.about(Release, configFilePath);
+                    EaService.About(Release, configFilePath);
                     break;
             }
         }
@@ -214,7 +214,7 @@ namespace hoTools.Find
         #region helpToolStripMenuItem2_Click
         private void helpToolStripMenuItem2_Click(object sender, EventArgs e)
         {
-            Help.ShowHelp(this, EaService.getAssemblyPath() + "\\" + "hoTools.chm");
+            Help.ShowHelp(this, EaService.GetAssemblyPath() + "\\" + "hoTools.chm");
         }
         #endregion
         #region OverwriteIsInputKey of quick search

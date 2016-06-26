@@ -558,7 +558,7 @@ namespace hoTools
             {
                 if (link.ConnectorID == connectorID)
                 {
-                    EaService.setLineStyle(rep, style);
+                    EaService.SetLineStyle(rep, style);
                     return true;
                 }
             }
@@ -741,32 +741,32 @@ namespace hoTools
 
                     // Line style: Lateral Horizontal 
                 case menuChangeXmlFile:
-                     EaService.setNewXmlPath(Repository);
+                     EaService.SetNewXmlPath(Repository);
                      break;
                 // Line style: Lateral Horizontal 
                 case menuLineStyleDiaLH:
-                     EaService.setLineStyle(Repository, "LH");
+                     EaService.SetLineStyle(Repository, "LH");
                    
                     break;
                 // Line style: Lateral Vertical 
                 case menuLineStyleDiaLV:
                     // all connections of diagram
-                    EaService.setLineStyle(Repository, "LV");
+                    EaService.SetLineStyle(Repository, "LV");
                     break;
                 // Line style: Tree Vertical 
                 case menuLineStyleDiaTV:
-                    EaService.setLineStyle(Repository, "V");
+                    EaService.SetLineStyle(Repository, "V");
                     
                     break;
 
                 // Line style: Tree Horizontal 
                 case menuLineStyleDiaTH:
-                    EaService.setLineStyle(Repository, "H");
+                    EaService.SetLineStyle(Repository, "H");
                     
                     break;
                 // Line style: Orthogonal square 
                 case menuLineStyleDiaOS:
-                    EaService.setLineStyle(Repository, "OS");
+                    EaService.SetLineStyle(Repository, "OS");
                     
                     break;
 
@@ -797,7 +797,7 @@ namespace hoTools
 
                 // Start specification (file parameter)
                 case  menuShowSpecification:
-                      EaService.showSpecification(Repository);
+                      EaService.ShowSpecification(Repository);
 
                     break;
 
@@ -844,7 +844,7 @@ namespace hoTools
 
 
                 case menuLocateCompositeElementorDiagram:
-                   EaService.navigateComposite(Repository);
+                   EaService.NavigateComposite(Repository);
                     break;
                     
                 // 
@@ -900,22 +900,22 @@ namespace hoTools
                 
 
                 case menuAddLinkedDiagramNote:
-                    EaService.addDiagramNote(Repository); 
+                    EaService.AddDiagramNote(Repository); 
                                
                     break;
 
                 case menuAddLinkedNote:
-                    EaService.addElementNote(Repository);
+                    EaService.AddElementNote(Repository);
 
                     break;
 
                 case menuLocateType:
-                    EaService.locateType(Repository);
+                    EaService.LocateType(Repository);
                     
                     break;
 
                 case menuUsage:
-                    EaService.findUsage(Repository);
+                    EaService.FindUsage(Repository);
                     
                     break;
 
@@ -1001,7 +1001,7 @@ namespace hoTools
                     break;
 
                 case menuCopyGUIDToClipboard:
-                   EaService.copyGuidSqlToClipboard(Repository);
+                   EaService.CopyGuidSqlToClipboard(Repository);
                    break;
 
 
@@ -1030,11 +1030,11 @@ namespace hoTools
                     break;
 
                 case menuDisplayMethodDefinition:
-                    EaService.DisplayOperationForSelectedElement(Repository, EaService.displayMode.Method);
+                    EaService.DisplayOperationForSelectedElement(Repository, EaService.DisplayMode.Method);
                     break;
 
                 case menuDisplayBehavior:
-                    EaService.DisplayOperationForSelectedElement(Repository, EaService.displayMode.Behavior);
+                    EaService.DisplayOperationForSelectedElement(Repository, EaService.DisplayMode.Behavior);
                     break;
 
                 
@@ -1369,118 +1369,118 @@ namespace hoTools
 #pragma warning disable RECS0154
         void btnLH_Click(object sender, EventArgs e)
         {
-            EaService.setLineStyle(_repository, "LH");
+            EaService.SetLineStyle(_repository, "LH");
         }
         #pragma warning restore RECS0154
 
         #pragma warning disable RECS0154
         void btnLV_Click(object sender, EventArgs e)
         {
-            EaService.setLineStyle(_repository, "LV");
+            EaService.SetLineStyle(_repository, "LV");
         }
         #pragma warning restore RECS0154
 
         #pragma warning disable RECS0154
         void btnTH_Click(object sender, EventArgs e)
         {
-            EaService.setLineStyle(_repository, "H");
+            EaService.SetLineStyle(_repository, "H");
         }
         #pragma warning restore RECS0154
 
         #pragma warning disable RECS0154
         void btnTV_Click(object sender, EventArgs e)
         {
-            EaService.setLineStyle(_repository, "V");
+            EaService.SetLineStyle(_repository, "V");
         }
         #pragma warning restore RECS0154
 
         #pragma warning disable RECS0154
         void btnOS_Click(object sender, EventArgs e)
         {
-            EaService.setLineStyle(_repository, "OS");
+            EaService.SetLineStyle(_repository, "OS");
         }
         #pragma warning restore RECS0154
 
         #pragma warning disable RECS0154
         void btnOR_Click(object sender, EventArgs e)
         {
-            EaService.setLineStyle(_repository, "OR");
+            EaService.SetLineStyle(_repository, "OR");
         }
         #pragma warning restore RECS0154
 
         #pragma warning disable RECS0154
         void btnA_Click(object sender, EventArgs e)
         {
-            EaService.setLineStyle(_repository, "A");
+            EaService.SetLineStyle(_repository, "A");
         }
         #pragma warning restore RECS0154
 
         #pragma warning disable RECS0154    
         void btnD_Click(object sender, EventArgs e)
         {
-            EaService.setLineStyle(_repository, "D");
+            EaService.SetLineStyle(_repository, "D");
         }
         #pragma warning restore RECS0154
 
         #pragma warning disable RECS0154
         void btnC_Click(object sender, EventArgs e)
         {
-            EaService.setLineStyle(_repository, "C");
+            EaService.SetLineStyle(_repository, "C");
         }
         #pragma warning restore RECS0154
         #pragma warning disable RECS0154
         void btnComposite_Click(object sender, EventArgs e)
         {
-            EaService.navigateComposite(_repository);
+            EaService.NavigateComposite(_repository);
         }
         #pragma warning restore RECS0154
 
         #pragma warning disable RECS0154
         void btnDisplayBehavior_Click(object sender, EventArgs e)
         {
-            EaService.DisplayOperationForSelectedElement(_repository, EaService.displayMode.Behavior);
+            EaService.DisplayOperationForSelectedElement(_repository, EaService.DisplayMode.Behavior);
         }
         #pragma warning restore RECS0154
 
         #pragma warning disable RECS0154
         void btnLocateOperation_Click(object sender, EventArgs e)
         {
-            EaService.DisplayOperationForSelectedElement(_repository, EaService.displayMode.Method);
+            EaService.DisplayOperationForSelectedElement(_repository, EaService.DisplayMode.Method);
         }
         #pragma warning restore RECS0154
 
         #pragma warning disable RECS0154
         void btnAddElementNote_Click(object sender, EventArgs e)
         {
-            EaService.addElementNote(_repository);
+            EaService.AddElementNote(_repository);
         }
         #pragma warning restore RECS0154
 
         #pragma warning disable RECS0154
         void btnAddDiagramNote_Click(object sender, EventArgs e)
         {
-            EaService.addDiagramNote(_repository);
+            EaService.AddDiagramNote(_repository);
         }
         #pragma warning restore RECS0154
 
         #pragma warning disable RECS0154
         void btnLocateType_Click(object sender, EventArgs e)
         {
-            EaService.locateType(_repository);
+            EaService.LocateType(_repository);
         }
         #pragma warning restore RECS0154
 
         #pragma warning disable RECS0154
         void btnFindUsage_Click(object sender, EventArgs e)
         {
-            EaService.findUsage(_repository);
+            EaService.FindUsage(_repository);
         }
         #pragma warning restore RECS0154
 
         #pragma warning disable RECS0154
         void btnDisplaySpecification_Click(object sender, EventArgs e)
         {
-            EaService.showSpecification(_repository);
+            EaService.ShowSpecification(_repository);
         }
         #pragma warning restore RECS0154
         #endregion

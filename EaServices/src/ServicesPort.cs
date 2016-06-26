@@ -288,7 +288,7 @@ namespace hoTools.EAServicesPort
                 RemovePortFromDiagramGui();
                 // show all ports
                 eaDia.ReloadSelectedObjectsAndConnector();// reload selection
-                EaService.showEmbeddedElementsGUI(_rep, "Port", isOptimizePortLayout);
+                EaService.ShowEmbeddedElementsGui(_rep, "Port", isOptimizePortLayout);
                 // set selction
 
                 eaDia.ReloadSelectedObjectsAndConnector();
