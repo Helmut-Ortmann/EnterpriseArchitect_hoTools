@@ -6,13 +6,12 @@ using hoTools.Settings;
 using hoTools.EaServices;
 using hoTools.EAServicesPort;
 using Control.EaAddinShortcuts;
-using EAAddinFramework.Utils;
 using hoTools.Settings.Key;
 using hoTools.Settings.Toolbar;
 
 using hoTools.Utils.SQL;
 using hoTools.Utils;
-
+using hoTools.Utils.Configuration;
 
 
 namespace hoTools.ActiveX
@@ -35,7 +34,7 @@ namespace hoTools.ActiveX
         FrmSettingsKey _frmSettingsKey;
         FrmSettingsLineStyle _frmSettingsLineStyle;
 
-        RunSearch _runSearch;
+        HoToolsGlobalCfg _globalCfg;
 
 
         #region Generated
@@ -192,6 +191,8 @@ namespace hoTools.ActiveX
         /// </summary>
         public void InitializeSettings()
         {
+            // get global settings
+            _globalCfg = HoToolsGlobalCfg.Instance;
             ParameterizeMenusAndButtons();
             // parameterize 5 Buttons to quickly run search
             ParameterizeSearchButton();
@@ -435,8 +436,7 @@ namespace hoTools.ActiveX
             Regex pattern = new Regex(@"\.sql", RegexOptions.IgnoreCase);
             if (pattern.IsMatch(searchName))
             {
-                if (_runSearch == null) _runSearch = new RunSearch(AddinSettings.SqlPaths);
-                string sqlString = _runSearch.GetSql(searchName);
+                string sqlString = _globalCfg.GetSqlFilePathFromName(searchName);
 
                 // run search
                 Model.SqlRun(sqlString, searchTerm);
