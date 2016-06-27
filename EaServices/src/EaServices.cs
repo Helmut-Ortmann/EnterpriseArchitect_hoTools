@@ -132,7 +132,6 @@ namespace hoTools.EaServices
             EA.Element el = rep.GetElementByGuid(pkg.PackageGUID);
             el.Author = args[0];
             el.Update();
-            return;
         }
         #endregion
         #region changeAuthorElement
@@ -354,8 +353,6 @@ namespace hoTools.EaServices
                 rep.ShowInProjectView(pkg);
                 break;
             }
-
-            return;
         }
         #endregion
         public static void CreateActivityForOperationsInElement(EA.Repository rep, EA.Element el)
@@ -407,7 +404,8 @@ namespace hoTools.EaServices
             return false;
         }
         #region showAllEmbeddedElementsGUI
-        [ServiceOperation("{678AD901-1D2F-4FB0-BAAD-AEB775EE18AC}", "Show all ports for Component", "Select Class, Interface or Component", isTextRequired: false)]
+        [ServiceOperation("{678AD901-1D2F-4FB0-BAAD-AEB775EE18AC}", "Show all ports for Component", 
+            "Select Class, Interface or Component", isTextRequired: false)]
         public static void ShowEmbeddedElementsGui(
             EA.Repository rep, 
             string embeddedElementType="Port Pin Parameter", 
@@ -565,7 +563,8 @@ namespace hoTools.EaServices
         /// Show all specifications of selected Element. It shows all files in specified in properties.
         /// </summary>
         /// <param name="rep"></param>
-        [ServiceOperation("{899C9C5F-39B8-47E3-B253-7C5730F1AA7D}", "Show all specifications of selected element (all files defined in properties)", "Select item", false)]
+        [ServiceOperation("{899C9C5F-39B8-47E3-B253-7C5730F1AA7D}", "Show all specifications of selected element (all files defined in properties)", 
+            "Select item", isTextRequired: false)]
         public static void ShowSpecification(EA.Repository rep)
         {
             EA.ObjectType oType = rep.GetContextItemType();
@@ -582,7 +581,6 @@ namespace hoTools.EaServices
                     }
                 }
             }
-            return;
         }
         #region LineStyle
         #region setLineStyleLV
@@ -787,7 +785,7 @@ namespace hoTools.EaServices
                     }
                     if ((el.Type.Equals("Sequence") || el.Type.Equals("Object")) && el.ClassfierID > 0)
                     {
-                        el = (EA.Element)repository.GetElementByID(el.ClassifierID);
+                        el = repository.GetElementByID(el.ClassifierID);
                         foreach (EA.Method op in el.Methods)
                         {
                             if (op.Name == opName)
@@ -874,7 +872,7 @@ namespace hoTools.EaServices
 
             if (name.Length > 255)
             {
-                MessageBox.Show(type + ": '" + name + "' has more than 255 characters.", "Name is to long");
+                MessageBox.Show($"{type}: '{ name }' has more than 255 characters.", @"Name is to long");
                 return null;
             }
             EA.DiagramObject diaObjSource = null;
@@ -1213,10 +1211,9 @@ namespace hoTools.EaServices
                 int left = diaObjSource.right ;
                 int right = left + length;
                 int top = diaObjSource.bottom - 25;
-                int bottom;
 
                 top = top - 20 - pos * 70;
-                bottom = top - 50;
+                var bottom = top - 50;
                 string position = "l=" + left + ";r=" + right + ";t=" + top + ";b=" + bottom + ";";
 
 
@@ -1278,7 +1275,7 @@ namespace hoTools.EaServices
         
         static void AddPortToComponent(EA.Element elSource, EA.Element elInterface)
         {
-            EA.Element port = null;
+            EA.Element port;
             EA.Element interf = null;
             if (elInterface.Type != "Interface") return;
 
@@ -1357,7 +1354,7 @@ namespace hoTools.EaServices
 
             int offsetHorizontal = 0;
             int offsetVertical = 0;
-            string s1 = "";
+            string s1;
             // delete comments /* to */
             string s0 = DeleteComment(text);
 
@@ -1780,7 +1777,7 @@ namespace hoTools.EaServices
         public static void LocateType(EA.Repository rep)
         {
             EA.ObjectType oType = rep.GetContextItemType();
-            EA.Element el = null;
+            EA.Element el;
             int id = 0;
             string triggerGuid = "";
             // connector
@@ -1959,8 +1956,8 @@ namespace hoTools.EaServices
         }
         public static void CopyGuidSqlToClipboard(EA.Repository rep)
         {
-            string str = "";
-            string str1 = "";
+            string str = @"";
+            string str1;
             EA.ObjectType oType = rep.GetContextItemType();
             EA.Diagram diaCurrent = rep.GetCurrentDiagram();
             EA.Connector conCurrent = null;
@@ -1993,7 +1990,7 @@ namespace hoTools.EaServices
             {// Element 
                 var el = (EA.Element)rep.GetContextObject();
                 string pdata1 = el.get_MiscData(0);
-                string pdata1String = "";
+                string pdata1String;
                 if (pdata1.EndsWith("}", StringComparison.Ordinal))
                 {
                     pdata1String = "/" + pdata1;
@@ -2122,7 +2119,7 @@ namespace hoTools.EaServices
         // #define SP_SHM_HW_MIC_START     0x40008000u
         // #define SP_SHM_HW_MIC_END       0x400083FFu
         public static void CreateSharedMemoryFromText(EA.Repository rep, string txt) {
-            EA.Package pkg = null;
+            EA.Package pkg;
 
             EA.ObjectType oType = rep.GetContextItemType();
             if (! oType.Equals(EA.ObjectType.otPackage)) return;
@@ -2151,7 +2148,6 @@ namespace hoTools.EaServices
                     tagEnd.Update();
                 }
                 // make realize dependency from Interface to shared memory
-                EA.Connector con = null;
                 bool found = false;
                 foreach (EA.Connector c in shm.Connectors)
                 {
@@ -2163,7 +2159,7 @@ namespace hoTools.EaServices
                 }
                 if (found == false)
                 {
-                    con = (EA.Connector)shm.Connectors.AddNew("", "Realisation");
+                    var con = (EA.Connector)shm.Connectors.AddNew("", "Realisation");
                     con.SupplierID = ishm.ElementID;
                     try
                     {
@@ -2192,7 +2188,7 @@ namespace hoTools.EaServices
          try
             {
                 Cursor.Current = Cursors.WaitCursor;
-                EaService.CreateOperationsFromText(rep, txt);
+                CreateOperationsFromText(rep, txt);
                 Cursor.Current = Cursors.Default;
             }
             catch (Exception e11)
@@ -2250,7 +2246,7 @@ namespace hoTools.EaServices
         {
 
             EA.Method m = null;
-            string functionName = "";
+            string functionName;
             string parameters = "";
             string leftover = "";
             string functionType = "";
@@ -2360,7 +2356,7 @@ namespace hoTools.EaServices
             {
                 string par = para.Trim();
                 if (par == "void" | par == "") continue;
-                int classifierId = 0;
+                int classifierId;
                 EA.Parameter elPar = null;
                 bool isConst = false;
                 if (par.Contains(@"const"))
@@ -2403,19 +2399,17 @@ namespace hoTools.EaServices
                 elPar.Position = pos;
                 elPar.ClassifierID = classifierId.ToString();
 
-                int i = elPar.OperationID;
                 try
                 {
                     elPar.Update();
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show(e + "\n\n"+elPar.GetLastError(), "Error creating parameter:" + type +" " + name);
+                    MessageBox.Show($"{e}\n\n {elPar.GetLastError()}", $"Error creating parameter: {type} {name}");
                 }
                 pos = pos + 1;
 
             }
-            return;
         }
         #region createTypeDefStructFromTextService
         [ServiceOperation("{6784026E-1B54-47CA-898F-A49EEB8A6ECB}", "Create/Update typedef for struct or enum from C-text for selected Class/Interface/Component", 
@@ -2529,7 +2523,7 @@ namespace hoTools.EaServices
             }
             if (isStruct)
             {
-                elTypedef.Stereotype = "struct";
+                elTypedef.Stereotype = @"struct";
                 EA.TaggedValue tag = TaggedValue.AddTaggedValue(elTypedef, "typedef");
                 tag.Value = "true";
                 tag.Update();
@@ -2572,18 +2566,18 @@ namespace hoTools.EaServices
                 
         }
         #region insertAttributeService
-        [ServiceOperation("{BE4759E5-2E8D-454D-83F7-94AA2FF3D50A}", "Insert/Update Attributes in Class, Interface, Component", "Insert text with variables, macros or enums", isTextRequired: true)]
+        [ServiceOperation("{BE4759E5-2E8D-454D-83F7-94AA2FF3D50A}", "Insert/Update Attributes in Class, Interface, Component", @"Insert text with variables, macros or enums", isTextRequired: true)]
         public static void InsertAttributeService(EA.Repository rep, string txt)
         {
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
-                EaService.CreateAttributesFromText(rep, txt);
+                CreateAttributesFromText(rep, txt);
                 Cursor.Current = Cursors.Default;
             }
             catch (Exception e10)
             {
-                MessageBox.Show(e10.ToString(), "Error insert Attributes");
+                MessageBox.Show(e10.ToString(), @"Error insert Attributes");
             }
             finally
             {
@@ -2605,7 +2599,7 @@ namespace hoTools.EaServices
 
 
             if (el == null ) {
-                MessageBox.Show("No Element selected, probably nothing or an attribute / operation");
+                MessageBox.Show(@"No Element selected, probably nothing or an attribute / operation");
                 return;
             }
             if (el.Type.Equals("Class") | el.Type.Equals("Interface")) CreateClassAttributesFromText(rep, el, txt);
@@ -2646,9 +2640,8 @@ namespace hoTools.EaServices
                 bool isConst = false;
                 bool isStatic = false;
                 string pointerValue = "";
-                int pos;
                 // remove everything behind ";"
-                pos = sRaw.IndexOf(";", StringComparison.Ordinal);
+                var pos = sRaw.IndexOf(";", StringComparison.Ordinal);
                 if (pos >=0 & pos >= sRaw.Length) sRaw = sRaw.Substring(pos+1);
 
 
@@ -2674,8 +2667,7 @@ namespace hoTools.EaServices
                 // remove macros
                 sRaw = Regex.Replace(sRaw, @"[\s]*#[^$]*", "");
 
-                string name = "";
-                string type = "";
+                string name;
                 string prefix = "";
                 string defaultValue = "";
                 string collectionValue = "";
@@ -2723,13 +2715,13 @@ namespace hoTools.EaServices
                     pointerValue = "**";
                 }
 
-                isConst |= sRaw.Contains("const");
+                isConst |= sRaw.Contains(@"const");
                 isStatic |= sRaw.ToLower().Contains("static");
 
 
                 string sCompact = sRaw.Replace("*", "");
-                sCompact = sCompact.Replace("const", "");
-                sCompact = sCompact.Replace("static ", "");
+                sCompact = sCompact.Replace(@"const", "");
+                sCompact = sCompact.Replace(@"static ", "");
                 sCompact = sCompact.Replace("STATIC ", "");
 
                 // get name
@@ -2765,7 +2757,7 @@ namespace hoTools.EaServices
                 if (match.Success)
                 {
                     name = match.Groups[2].Value.Trim();
-                    type = match.Groups[1].Value.Trim();
+                    var type = match.Groups[1].Value.Trim();
                     sCompact = sCompact.Remove(match.Groups[2].Index, match.Groups[2].Length); // delete name
                     sCompact = sCompact.Remove(match.Groups[1].Index, match.Groups[1].Length); // delete type
                     sCompact = sCompact.Replace(";", ""); // ;
@@ -2792,7 +2784,7 @@ namespace hoTools.EaServices
                         a = (EA.Attribute)el.Attributes.AddNew(aName, "");
                         if (a.Name.Length > 255)
                         {
-                            MessageBox.Show(a.Name + " has " + a.Name.Length, "Name longer than 255");
+                            MessageBox.Show($"{a.Name} has { a.Name.Length}", @"Name longer than 255");
                             continue;
                         }
                         a.Pos = el.Attributes.Count+1;
@@ -2811,7 +2803,7 @@ namespace hoTools.EaServices
                         a.Container = collectionValue;
                         if (collectionValue.Length > 50)
                         {
-                            MessageBox.Show("Collection '" + collectionValue + "' has " + collectionValue.Length + " characters.", "Break! Collection length need to be <=50 characters");
+                            MessageBox.Show($"Collection '{ collectionValue}' has {collectionValue.Length}  characters.", @"Break! Collection length need to be <=50 characters");
                             continue;
                         }
                     }
@@ -2936,7 +2928,8 @@ namespace hoTools.EaServices
 
         // update the types of operations
         #region CreateActivityForOperation
-        [ServiceOperation("{AC0111AB-10AE-4FC6-92DE-CD58F610C4E6}", "Update Activity Parameter from Operation, Class/Interface", "Select Package, Class/Interface or operation", isTextRequired: false)]
+        [ServiceOperation("{AC0111AB-10AE-4FC6-92DE-CD58F610C4E6}", "Update Activity Parameter from Operation, Class/Interface", 
+            "Select Package, Class/Interface or operation", isTextRequired: false)]
         public static void UpdateOperationTypes(EA.Repository rep)
         {
             EA.ObjectType oType = rep.GetContextItemType();
@@ -2992,8 +2985,8 @@ namespace hoTools.EaServices
             {
                 if (methodType == "")
                 {
-                    MessageBox.Show("Method " + m.Name + " Type '" + m.ReturnType + "' ",
-                        "Method type undefined");
+                    MessageBox.Show($"Method {m.Name} Type '{m.ReturnType}' ",
+                        @"Method type undefined");
                 }
                 else
                 {
@@ -3115,7 +3108,7 @@ namespace hoTools.EaServices
 
                 string path = string.Empty;
                 var openFileDialogXml = new OpenFileDialog();
-                openFileDialogXml.Filter = "xml files (*.xml)|*.xml";
+                openFileDialogXml.Filter = @"xml files (*.xml)|*.xml";
                 openFileDialogXml.FileName = Util.GetVccFilePath(rep, pkg);
                 if (openFileDialogXml.ShowDialog() == DialogResult.OK)
                 {
@@ -3156,7 +3149,7 @@ namespace hoTools.EaServices
             return true;
         }
         #region VcReconcile
-        [ServiceOperation("{EAC9246F-96FA-40E7-885A-A572E907AF86}", "Scan XMI and reconcile", "no selection required", false)]
+        [ServiceOperation("{EAC9246F-96FA-40E7-885A-A572E907AF86}", "Scan XMI and reconcile", "no selection required", isTextRequired: false)]
         public static void VcReconcile(EA.Repository rep)
         {
                  //
@@ -3168,7 +3161,7 @@ namespace hoTools.EaServices
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show(e + "\n\n" , "Error VC reconcile");
+                    MessageBox.Show($"{e}\n\n" , @"Error VC reconcile");
                 }
                 finally
                 {
@@ -3177,7 +3170,7 @@ namespace hoTools.EaServices
         }
         #endregion
         #region checkOutService
-        [ServiceOperation("{1BF01759-DD99-4552-8B68-75F19A3C593E}", "Check out", "Select Package",false)]
+        [ServiceOperation("{1BF01759-DD99-4552-8B68-75F19A3C593E}", "Check out", "Select Package",isTextRequired: false)]
         public static void CheckOutService(EA.Repository rep)
         {
 
@@ -3189,7 +3182,7 @@ namespace hoTools.EaServices
             }
             catch (Exception e11)
             {
-                MessageBox.Show(e11.ToString(), "Error Checkout");
+                MessageBox.Show(e11.ToString(), @"Error Checkout");
             }
             finally
             {
@@ -3209,7 +3202,6 @@ namespace hoTools.EaServices
 
             var svnHandle = new Svn(rep, pkg);
             string userNameLockedPackage = svnHandle.GetLockingUser();
-            svnHandle = null;
             if (userNameLockedPackage != "")
             {
                 MessageBox.Show($"Package is checked out by '{userNameLockedPackage}'");
@@ -3224,7 +3216,7 @@ namespace hoTools.EaServices
                 Cursor.Current = Cursors.Default;
             } catch (Exception e) 
             {
-                MessageBox.Show(e + "\n\n"+ pkg.GetLastError(), @"Error Checkout");
+                MessageBox.Show($"{e}\n\n{pkg.GetLastError()}", @"Error Checkout");
             }
             finally
             {
@@ -3232,7 +3224,7 @@ namespace hoTools.EaServices
             }
         }
         #region checkInService
-        [ServiceOperation("{085C84D2-7B51-4783-8189-06E956411B94}", "Check in ", "Select package or something in package", false)]
+        [ServiceOperation("{085C84D2-7B51-4783-8189-06E956411B94}", "Check in ", "Select package or something in package", isTextRequired: false)]
         public static void CheckInService(EA.Repository rep)
         {
             try
@@ -3243,7 +3235,7 @@ namespace hoTools.EaServices
             }
             catch (Exception e11)
             {
-                MessageBox.Show(e11.ToString(), "Error Checkin");
+                MessageBox.Show(e11.ToString(), @"Error Checkin");
             }
             finally
             {
@@ -3465,7 +3457,7 @@ namespace hoTools.EaServices
                 }
                 if (state == 1)// checked in
                 {
-                    EaService.CheckOut(rep, pkg);
+                    CheckOut(rep, pkg);
                     withCheckIn = true;
                 }
             }
@@ -3506,7 +3498,7 @@ namespace hoTools.EaServices
                 if (state == 2 & withCheckIn)// checked out to this user
                 {
                     //EaService.checkIn(rep, pkg, "");
-                    EaService.CheckIn(rep,pkg, withGetLatest:true, comment:@"svn tags added");
+                    CheckIn(rep,pkg, withGetLatest:true, comment:@"svn tags added");
                 }
              }
         }
@@ -3585,8 +3577,8 @@ namespace hoTools.EaServices
             int diff = trgObj.top - trgObj.bottom;
 
             
-            EA.DiagramObject srcObj = null;
-            EA.DiagramLink link = null;
+            EA.DiagramObject srcObj;
+            EA.DiagramLink link;
             foreach (EA.DiagramObject diaObj in oldCollection)
                 {
                     EA.Element srcEl = rep.GetElementByID(diaObj.ElementID);
@@ -3644,7 +3636,7 @@ namespace hoTools.EaServices
         }
         #endregion
         #region joinDiagramObjectsToLastSelected
-        [ServiceOperation("{6946E63E-3237-4F45-B4D8-7EE0D6580FA5}", "Join nodes to the last selected node", "Only Activity Diagram", false)]
+        [ServiceOperation("{6946E63E-3237-4F45-B4D8-7EE0D6580FA5}", "Join nodes to the last selected node", "Only Activity Diagram", isTextRequired: false)]
         public static void JoinDiagramObjectsToLastSelected(EA.Repository rep)
         {
             EA.Diagram dia = rep.GetCurrentDiagram();
@@ -3654,19 +3646,16 @@ namespace hoTools.EaServices
             rep.SaveDiagram(dia.DiagramID);
 
             // target object/element
-            EA.DiagramObject srcObj;
-            EA.Element srcEl;
-            EA.Connector con;
             var trgEl = (EA.Element)rep.GetContextObject();
            
             for (int i = 0; i < count; i = i + 1)
             {
-                srcObj = (EA.DiagramObject)dia.SelectedObjects.GetAt((short)i);
-                srcEl = (EA.Element)rep.GetElementByID(srcObj.ElementID);
+                var srcObj = (EA.DiagramObject)dia.SelectedObjects.GetAt((short)i);
+                var srcEl = (EA.Element)rep.GetElementByID(srcObj.ElementID);
                 if (srcEl.ElementID == trgEl.ElementID) continue;
                 Connector connector = GetConnectionDefault(dia);
 
-                con = (EA.Connector)srcEl.Connectors.AddNew("", connector.Type);
+                var con = (EA.Connector)srcEl.Connectors.AddNew("", connector.Type);
                 con.SupplierID = trgEl.ElementID;
                 con.Stereotype = connector.Stereotype;
                 con.Update();
@@ -3686,7 +3675,8 @@ namespace hoTools.EaServices
         public static Connector GetConnectionDefault(EA.Diagram dia) => new Connector("DataFlow", "");
 
         #region splitDiagramObjectsToLastSelected
-        [ServiceOperation("{521FCFEB-984B-43F0-A710-E97C29E4C8EE}", "Split last selected Diagram object from previous selected Diagram Objects", "Incoming and outgoing connections", false)]
+        [ServiceOperation("{521FCFEB-984B-43F0-A710-E97C29E4C8EE}", "Split last selected Diagram object from previous selected Diagram Objects", 
+            "Incoming and outgoing connections", isTextRequired: false)]
         public static void SplitDiagramObjectsToLastSelected(EA.Repository rep)
         {
             EA.Diagram dia = rep.GetCurrentDiagram();
@@ -3715,7 +3705,8 @@ namespace hoTools.EaServices
         }
         #endregion
         #region splitAllDiagramObjectsToLastSelected
-        [ServiceOperation("{CA29CB67-77EA-4BCC-B3B4-8893F6B0DAE2}", "Split last selected Diagram object from all connected Diagram Objects", "Incoming and outgoing connections", false)]
+        [ServiceOperation("{CA29CB67-77EA-4BCC-B3B4-8893F6B0DAE2}", 
+            "Split last selected Diagram object from all connected Diagram Objects", "Incoming and outgoing connections", isTextRequired: false)]
         public static void SplitAllDiagramObjectsToLastSelected(EA.Repository rep)
         {
             EA.Diagram dia = rep.GetCurrentDiagram();
@@ -3725,14 +3716,13 @@ namespace hoTools.EaServices
             rep.SaveDiagram(dia.DiagramID);
 
             // target object/element
-            EA.Element srcEl;
             EA.ObjectType objType = rep.GetContextItemType();
             if (!(objType.Equals(EA.ObjectType.otElement))) return;
             var trgEl = (EA.Element)rep.GetContextObject();
 
             foreach (EA.DiagramObject srcObj in dia.DiagramObjects)
             {
-                srcEl = rep.GetElementByID(srcObj.ElementID);
+                var srcEl = rep.GetElementByID(srcObj.ElementID);
                 if (srcEl.ElementID == trgEl.ElementID) continue;
                 SplitElementsByConnectorType(srcEl, trgEl);
             }
@@ -3775,8 +3765,6 @@ namespace hoTools.EaServices
             rep.SaveDiagram(dia.DiagramID);
 
             // target object/element
-            EA.DiagramObject srcObj;
-            EA.Element srcEl;
             EA.Element trgEl;
 
             EA.ObjectType objType = rep.GetContextItemType();
@@ -3787,11 +3775,10 @@ namespace hoTools.EaServices
                 MessageBox.Show($"Target '{ trgEl.Name }:{ trgEl.Type}' isn't an Activity", @" Only move below Activity is allowed");
                 return;
             }
-            var diaObj = new List<EA.DiagramObject>();
             for (int i = 0; i < count; i = i + 1)
             {
-                srcObj = (EA.DiagramObject)dia.SelectedObjects.GetAt((short)i);
-                srcEl = rep.GetElementByID(srcObj.ElementID);
+                var srcObj = (EA.DiagramObject)dia.SelectedObjects.GetAt((short)i);
+                var srcEl = rep.GetElementByID(srcObj.ElementID);
                 if (srcEl.ElementID == trgEl.ElementID) continue;
                 srcEl.ParentID = trgEl.ElementID;
                 srcEl.Update();
@@ -3801,9 +3788,9 @@ namespace hoTools.EaServices
         }
         public static void DeleteInvisibleUseRealizationDependencies (EA.Repository rep)
         {
-            EA.Element elSource = null;
-            int elSourceId = 0;
-            EA.DiagramObject diaObjSource = null;
+            EA.Element elSource;
+            int elSourceId;
+            EA.DiagramObject diaObjSource;
             EA.Connector con = null;
             EA.Diagram dia = rep.GetCurrentDiagram();
             if (dia == null) return;
@@ -3830,12 +3817,10 @@ namespace hoTools.EaServices
             }
 
 
-            string conType;
-
             for (int i = elSource.Connectors.Count - 1; i >=0; i = i - 1)
             {
                 con = (EA.Connector)elSource.Connectors.GetAt((short)i);
-                conType = con.Type;
+                var conType = con.Type;
                 if ("Usage Realisation".Contains(conType))
                 {
                     // check if target is..
@@ -3845,8 +3830,6 @@ namespace hoTools.EaServices
                         if (lInternalId.BinarySearch(con.ConnectorID) < 0)
                         {
                             elSource.Connectors.DeleteAt((short)i, true);
-                            continue;
-                               
                         }
                     }
                 }
@@ -3855,7 +3838,7 @@ namespace hoTools.EaServices
             
         }
         #region copyReleaseInfoOfModuleService
-        [ServiceOperation("{1C78E1C0-AAC8-4284-8C25-2D776FF373BC}", "Copy release information to clipboard", "Select Component", false)]
+        [ServiceOperation("{1C78E1C0-AAC8-4284-8C25-2D776FF373BC}", "Copy release information to clipboard", "Select Component", isTextRequired: false)]
         public static void CopyReleaseInfoOfModuleService(EA.Repository rep)
         {
             try
@@ -3878,7 +3861,7 @@ namespace hoTools.EaServices
         public static void CopyReleaseInfoOfModule(EA.Repository rep)
          {
 
-             EA.Element elSource = null;
+             EA.Element elSource;
             EA.Diagram dia = rep.GetCurrentDiagram();
              if (dia == null) return;
              if (!rep.GetContextItemType().Equals(EA.ObjectType.otElement)) return;
@@ -3910,7 +3893,7 @@ namespace hoTools.EaServices
             }
             try
             {
-                txt = System.IO.File.ReadAllText(path);
+                txt = File.ReadAllText(path);
             }
             catch (Exception e)
             {
@@ -3943,7 +3926,7 @@ namespace hoTools.EaServices
             return txtResult;
         }
         #region generateComponentPortsService
-        [ServiceOperation("{00602D5F-D581-4926-A31F-806F2D06691C}", "Generate ports for component", "Select Component", false)]
+        [ServiceOperation("{00602D5F-D581-4926-A31F-806F2D06691C}", "Generate ports for component", "Select Component", isTextRequired: false)]
         public static void GenerateComponentPortsService(EA.Repository rep)
         {
             try
@@ -4024,13 +4007,13 @@ namespace hoTools.EaServices
                 MessageBox.Show($"{e}\n\nsee Clipboard!", $"Error Reading file '{el.Name}':{el.Type}");
                 return lEl;
             }
-            lEl = GetInterfacesFromText(rep, null, text, false);
+            lEl = GetInterfacesFromText(rep, null, text, createWarningNote: false);
             
             return lEl;
 
         }
         #region vCGetState
-        [ServiceOperation("{597608A2-5C3F-4AE6-9B18-86C1B3C27382}", "Get and update VC state of selected package", "Select Packages", false)]
+        [ServiceOperation("{597608A2-5C3F-4AE6-9B18-86C1B3C27382}", "Get and update VC state of selected package", "Select Packages", isTextRequired: false)]
         public static void VCGetState(EA.Repository rep)
         {
             EA.Package pkg = rep.GetTreeSelectedPackage();
@@ -4039,15 +4022,16 @@ namespace hoTools.EaServices
                 if (pkg.IsControlled)
                 {
                     string pkgState = Util.GetVCstate(rep, pkg, true);
-                     DialogResult result = MessageBox.Show("Package is "+ pkgState +"\nPath=" + pkg.XMLPath + "\nFlags=" + pkg.Flags, "Update package state?", MessageBoxButtons.YesNo);
+                     DialogResult result = MessageBox.Show($"Package is {pkgState}\nPath={ pkg.XMLPath }\nFlags={ pkg.Flags}", 
+                         @"Update package state?", MessageBoxButtons.YesNo);
                     if (result == DialogResult.Yes)  Util.UpdateVc(rep, pkg);
                 }
             }
-            else MessageBox.Show("No package selected");
+            else MessageBox.Show(@"No package selected");
         }
         #endregion
         #region updateVcStateOfSelectedPackageRecursiveService
-        [ServiceOperation("{A521EB65-3F3C-4C5D-9B82-D12FFCEC71D4}", "Update VC-State of package(recursive)", "Select Packages or model", false)]
+        [ServiceOperation("{A521EB65-3F3C-4C5D-9B82-D12FFCEC71D4}", "Update VC-State of package(recursive)", "Select Packages or model", isTextRequired: false)]
         public static void UpdateVcStateOfSelectedPackageRecursiveService(EA.Repository rep)
         {
             try
@@ -4069,7 +4053,7 @@ namespace hoTools.EaServices
             }
             catch (Exception e11)
             {
-                MessageBox.Show(e11.ToString(), "Error Insert Function");
+                MessageBox.Show(e11.ToString(), @"Error Insert Function");
             }
             finally
             {
@@ -4453,32 +4437,51 @@ namespace hoTools.EaServices
         public static void About(string release, string configFilePath)
         {
             string installDir = Path.GetDirectoryName(Assembly.GetAssembly(typeof(EaService)).CodeBase);
-            MessageBox.Show("!!!Make live with EA easier and more efficient!!!\n\n\n"+
-                      "Helmut.Ortmann@t-online.de\n +49 172 / 51 79 16 7\n\n"+
-                      " Workshops, Training Coaching, Project Work\n"+
-                      " - Processes (RUP / Functional Safety)\n"+
-                      " - Requirements\n" +
-                      " - Enterprise Architect\n"+
-                      " -- UML / SysML\n"+
-                      " -- Method- development and -implementation\n" +
-                      " -- Addin\n" +
-                      " -- Query & Script\n\n\n"+
-                      "!!!Make live with EA easier and more efficient!!!"+
-                      "\n\nInstall:\t"+installDir +
-                      "\nConfig:\t" + configFilePath
-                    , "hoTools  " + release + " (AddinClass.dll AssemblyFileVersion)");
+            string s1 = @"!!!Make live with EA easier and more efficient!!!
+
+Helmut.Ortmann@t-online.de
+(+49) 172 / 51 79 16 7
+Workshops, Training Coaching, Project Work
+- Processes (RUP / Functional Safety)
+- Requirements
+- Enterprise Architect
+ -- UML / SysML
+ -- Method- development and -implementation
+ -- Addin
+ -- Query & Script
+ !!!Make live with EA easier and more efficient!!!
+";
+            
+            
+            string s2 =
+                $"Install:\t {installDir}\nConfig:\t {configFilePath}\nhoTools  {release} (AddinClass.dll AssemblyFileVersion)";
+
+
+            MessageBox.Show(s1 + s2, @"hoTools");
+
         }
         #endregion
 
         public static void AboutVar1(string release, string configFilePath) {
             string installDir = Path.GetDirectoryName(Assembly.GetAssembly(typeof(EaService)).CodeBase);
-            MessageBox.Show(@"Helmut.Ortmann@t-online.de
-Germany
-private: +49 172 / 51 79 16 7\n
+            string s1 = @"!!!Make live with EA easier and more efficient!!!
 
-Install:   {installDir} 
-Config:    {configFilePath}",
- $"hoTools for VAR1  {release}");
+Helmut.Ortmann@t-online.de
+(+49) 172 / 51 79 16 7
+Workshops, Training Coaching, Project Work
+- Processes (RUP / Functional Safety)
+- Requirements
+- Enterprise Architect
+ -- UML / SysML
+ -- Method- development and -implementation
+ -- Addin
+ -- Query & Script
+ !!!Make live with EA easier and more efficient!!!
+";
+
+            string s2 =
+               $"Install:\t {installDir}\nConfig:\t {configFilePath}\nhoTools  {release} (AddinClass.dll AssemblyFileVersion)";
+            MessageBox.Show(s1 + s2, @"hoTools");
         }
         #endregion
     }
