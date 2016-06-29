@@ -82,12 +82,15 @@ Some features:
 - See also: [Installation](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/Installation)
 
 # Scheduled (release 2.0.3)
-- Improved help for Toolbar Buttons
-- Use advanced [SQL](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/SQL) everywhere in hoTools
--- Toolbar Buttons
--- Quick Search 
+- Lock/Unlock Element/Diagram/Package
+- SQL with macro #Branch=guidPackage# (select the package by GUID, not the selected one)
+- Help / Documentation
+ - Improved help for Toolbar Buttons
+ - Use advanced [SQL](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/SQL) everywhere in hoTools
+   - Toolbar Buttons
+   - Quick Search 
 
-# ToDo
+# Not yet scheduled
 - Drag SQL file on canvas
   (seems impossible with EA, no drag and drop for ActiveX supported)
-- Undo (multiple)
+

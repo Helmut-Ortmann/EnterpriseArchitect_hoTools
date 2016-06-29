@@ -14,12 +14,15 @@ using System.Reflection;
 using hoTools.Connectors;
 using hoTools.EaServices.Dlg;
 using hoTools.Utils.SQL;
+// ReSharper disable RedundantArgumentDefaultValue
+// ReSharper disable ArgumentsStyleLiteral
 
 
 
 namespace hoTools.EaServices
 {
     #region Definition of Service Attribute
+    // ReSharper disable once RedundantAttributeUsageProperty
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = false) ]
 
     
@@ -33,8 +36,8 @@ namespace hoTools.EaServices
         /// <param name="guid"></param>
         /// <param name="description">the brief description for the service</param>
         /// <param name="help">the help text / tooltip for the service </param>
-        /// <param name="isTextRequired">text is required, default false</param>
-        public ServiceOperationAttribute(String guid, String description, String help, bool isTextRequired = false)
+        /// <param name="isTextRequired">text is required to run service, default false</param>
+        public ServiceOperationAttribute(string guid, string description, string help, bool isTextRequired = false)
         {
             Description = description;
             Guid = guid;
@@ -44,11 +47,11 @@ namespace hoTools.EaServices
 
         public bool IsTextRequired { get; }
 
-        public String Description { get; }
+        public string Description { get; }
 
         public string Guid { get; }
 
-        public String Help { get; }
+        public string Help { get; }
     }
     #endregion
 
@@ -87,8 +90,9 @@ namespace hoTools.EaServices
             if (oType.Equals(EA.ObjectType.otDiagram))
             {
                 EA.Diagram dia = rep.GetCurrentDiagram();
+                if (dia == null) return;
                 EA.Package pkg = rep.GetPackageByID(dia.PackageID);
-                if (pkg.IsProtected || dia.IsLocked || dia == null) return;
+                if (pkg.IsProtected || dia.IsLocked ) return;
 
                 // save diagram
                 rep.SaveDiagram(dia.DiagramID);
@@ -128,28 +132,171 @@ namespace hoTools.EaServices
         }
         #endregion
         #region changeAuthorPackage
-        public static void ChangeAuthorPackage( EA.Repository rep, EA.Package pkg, string[] args) {
+
+        static void ChangeAuthorPackage( EA.Repository rep, EA.Package pkg, string[] args) {
             EA.Element el = rep.GetElementByGuid(pkg.PackageGUID);
             el.Author = args[0];
             el.Update();
         }
         #endregion
         #region changeAuthorElement
-        public static void ChangeAuthorElement(EA.Repository rep, EA.Element el, string[] args)
+
+        static void ChangeAuthorElement(EA.Repository rep, EA.Element el, string[] args)
         {
             el.Author = args[0];
             el.Update();
-            return;
         }
         #endregion
         #region changeAuthorDiagram
-        public static void ChangeAuthorDiagram(EA.Repository rep, EA.Diagram dia, string[] args)
+
+        private static void ChangeAuthorDiagram(EA.Repository rep, EA.Diagram dia, string[] args)
         {
             dia.Author = args[0];
             dia.Update();
-            return;
         }
         #endregion
+
+        #region LockSelected
+        /// <summary>
+        /// Lock selected item (Package, Diagram, Element)
+        /// </summary>
+        /// <param name="rep"></param>
+
+        [ServiceOperation("{0A731169-C983-404C-AB20-E4E478A38DB4}", "Lock selected item (package, Diagram, Element)",
+            "Lock selected item (package, Diagram, Element)", isTextRequired: false)]
+        public static void LockSelected(EA.Repository rep)
+        {
+            bool success;
+            switch (rep.GetContextItemType())
+            {
+                case EA.ObjectType.otPackage:
+                    EA.Package pkg = (EA.Package)rep.GetContextObject();
+                    pkg.ApplyUserLockRecursive(true, true, false);
+                    success = pkg.ApplyUserLock();
+                    break;
+                case EA.ObjectType.otElement:
+                    EA.Element el = (EA.Element)rep.GetContextObject();
+                    success = el.ApplyUserLock();
+                    break;
+                case EA.ObjectType.otDiagram:
+                    EA.Diagram dia = (EA.Diagram)rep.GetContextObject();
+                    success = dia.ApplyUserLock();
+                    break;
+                default:
+                    return;
+            }
+            if (success ) return;
+            MessageBox.Show($"Error:'{rep.GetLastError()}'", @"Error lock item");
+
+        }
+        #endregion
+        #region UnLockSelected
+        /// <summary>
+        /// UnLock selected item (Package, Diagram, Element)
+        /// </summary>
+        /// <param name="rep"></param>
+
+        [ServiceOperation("{1ABCB8FB-56F9-412F-B6C1-9FE5E2B4824E}", "UnLock selected Package, Diagram or Element",
+            "UnLock selected Package, Diagram or Element", isTextRequired: false)]
+        public static void UnLockSelected(EA.Repository rep)
+        {
+            bool success;
+            switch (rep.GetContextItemType())
+            {
+                case EA.ObjectType.otPackage:
+                    EA.Package pkg = (EA.Package)rep.GetContextObject();
+                    pkg.ReleaseUserLockRecursive(true,true,false);
+                    success = pkg.ReleaseUserLock();
+                    break;
+                case EA.ObjectType.otElement:
+                    EA.Element el = (EA.Element)rep.GetContextObject();
+                    success = el.ReleaseUserLock();
+                    break;
+                case EA.ObjectType.otDiagram:
+                    EA.Diagram dia = (EA.Diagram)rep.GetContextObject();
+                    success = dia.ReleaseUserLock();
+                    break;
+                default:
+                    return;
+            }
+            if (success ) return;
+            MessageBox.Show($"Error:'{rep.GetLastError()}'", @"Error unlock item");
+
+        }
+        #endregion
+        #region UnLockPackageRecursive
+        /// <summary>
+        /// UnLock selected item (Package, Diagram, Element)
+        /// </summary>
+        /// <param name="rep"></param>
+
+        [ServiceOperation("{42788062-3578-49CC-BBD0-87032B764B3D}", "UnLock package recursive)",
+            "UnLock package recursive", isTextRequired: false)]
+        public static void UnLockPackageRecursive(EA.Repository rep)
+        {
+            bool success;
+            EA.Package pkg;
+            switch (rep.GetContextItemType())
+            {
+                case EA.ObjectType.otPackage:
+                    pkg = (EA.Package)rep.GetContextObject();
+                    success = pkg.ReleaseUserLockRecursive(true, true, true);
+                    break;
+                case EA.ObjectType.otElement:
+                    EA.Element el = (EA.Element)rep.GetContextObject();
+                    pkg = rep.GetPackageByID(el.PackageID);
+                    success = pkg.ReleaseUserLockRecursive(true, true, true);
+                    break;
+                case EA.ObjectType.otDiagram:
+                    EA.Diagram dia = (EA.Diagram)rep.GetContextObject();
+                    pkg = rep.GetPackageByID(dia.PackageID);
+                    success = pkg.ReleaseUserLockRecursive(true, true, true);
+                    break;
+                default:
+                    return;
+            }
+            if (success) return;
+            MessageBox.Show($"Error:'{rep.GetLastError()}'", @"Error unlock package recursive");
+
+        }
+        #endregion
+        #region LockPackageRecursive
+        /// <summary>
+        /// UnLock selected item (Package, Diagram, Element)
+        /// </summary>
+        /// <param name="rep"></param>
+
+        [ServiceOperation("{F1B97839-0E68-4019-95C2-8F745CCDA484}", "Lock package recursive",
+            "UnLock package recursive", isTextRequired: false)]
+        public static void LockPackageRecursive(EA.Repository rep)
+        {
+            bool success;
+            EA.Package pkg;
+            switch (rep.GetContextItemType())
+            {
+                case EA.ObjectType.otPackage:
+                    pkg = (EA.Package)rep.GetContextObject();
+                    success = pkg.ApplyUserLockRecursive(true, true, true);
+                    break;
+                case EA.ObjectType.otElement:
+                    EA.Element el = (EA.Element)rep.GetContextObject();
+                    pkg = rep.GetPackageByID(el.PackageID);
+                    success = pkg.ApplyUserLockRecursive(true, true, true);
+                    break;
+                case EA.ObjectType.otDiagram:
+                    EA.Diagram dia = (EA.Diagram)rep.GetContextObject();
+                    pkg = rep.GetPackageByID(dia.PackageID);
+                    success = pkg.ApplyUserLockRecursive(true, true, true);
+                    break;
+                default:
+                    return;
+            }
+            if (success) return;
+            MessageBox.Show($"Error:'{rep.GetLastError()}'", @"Error lock package recursive");
+
+        }
+        #endregion
+
         #region change User Recursive
         [ServiceOperation("{F0038D4B-CCAA-4F05-9401-AAAADF431ECB}", "Change user of package/element recursive", "Select package or element", isTextRequired: false)]
         public static void ChangeUserRecursive(EA.Repository rep)
@@ -355,7 +502,8 @@ namespace hoTools.EaServices
             }
         }
         #endregion
-        public static void CreateActivityForOperationsInElement(EA.Repository rep, EA.Element el)
+
+        private static void CreateActivityForOperationsInElement(EA.Repository rep, EA.Element el)
         {
             if (el.Locked) return;
             EA.Package pkg = rep.GetPackageByID(el.PackageID);
@@ -369,7 +517,8 @@ namespace hoTools.EaServices
             }
 
         }
-        public static void CreateActivityForOperationsInPackage(EA.Repository rep, EA.Package pkg)
+
+        private static void CreateActivityForOperationsInPackage(EA.Repository rep, EA.Package pkg)
         {
             foreach (EA.Element el in pkg.Elements)
             {
@@ -413,8 +562,6 @@ namespace hoTools.EaServices
         {
 
             EA.Diagram dia = null;
-            EA.Element elSource = null;
-            EA.DiagramObject diaObjSource = null;
 
             dia = rep.GetCurrentDiagram();
             if (dia == null) return;
@@ -424,20 +571,20 @@ namespace hoTools.EaServices
             // over all selected elements
             foreach (EA.DiagramObject diaObj in dia.SelectedObjects)
             {
-                elSource = rep.GetElementByID(diaObj.ElementID);
+                var elSource = rep.GetElementByID(diaObj.ElementID);
                 if (! "Class Component Activity".Contains(elSource.Type)) continue; 
                 // find object on Diagram
-                diaObjSource = Util.GetDiagramObjectById(rep, dia, elSource.ElementID);
+                var diaObjSource = Util.GetDiagramObjectById(rep, dia, elSource.ElementID);
                 //diaObjSource = dia.GetDiagramObjectByID(elSource.ElementID, "");
                 if (diaObjSource == null) return;
 
-                List<int> lPorts = null;
                 string[] portTypes = {"left","right"};
                 foreach (string portBoundTo in portTypes )
                 {
                     // arrange sequence of ports
                     if (isOptimizePortLayout == false && portBoundTo == "left") continue;
                     int pos = 0;
+                    List<int> lPorts = null;
                     if (isOptimizePortLayout == false) { 
                         lPorts = sqlUtil.GetAndSortEmbeddedElements(elSource, "", "", "");
                     }
@@ -556,7 +703,6 @@ namespace hoTools.EaServices
                 rep.RunModelSearch("Connector is visible in Diagrams",
                     con.ConnectorID.ToString(), "", "");
             }
-            return;
         }
         #endregion
         /// <summary>
@@ -1670,7 +1816,6 @@ namespace hoTools.EaServices
             {
 
             }
-            return;
         }
         #endregion
 
@@ -1848,7 +1993,6 @@ namespace hoTools.EaServices
                     {
                         el = rep.GetElementByID(el.ClassfierID);
                         rep.ShowInProjectView(el);
-                        return;
                     }
                     else
                     {//MiscData(0) PDATA1,PDATA2,
@@ -2908,7 +3052,6 @@ namespace hoTools.EaServices
                 
 
             }
-            return;
         }
         public static void UpdateOperationTypeForPackage(EA.Repository rep, EA.Package pkg)
         {
@@ -3127,7 +3270,7 @@ namespace hoTools.EaServices
                         // set readonly attribute to false
                         File.SetAttributes(path, FileAttributes.Normal);
 
-                        String strFile = File.ReadAllText(path);
+                        string strFile = File.ReadAllText(path);
                         string replace = @"value=[.0-9a-zA-Z_\\-]*\.xml";
                         string replacement = shortPath;
                         strFile = Regex.Replace(strFile, replace, replacement);
