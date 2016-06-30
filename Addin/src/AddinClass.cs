@@ -379,38 +379,48 @@ namespace hoTools
         {
             EA.EventProperty eventProperty = Info.Get(0);
             var s = (string)eventProperty.Value;
-            int connectorID = int.Parse(s);
+
+            // check if it is a diagram
+            int connectorId;
+            if (Int32.TryParse(s, out connectorId) == false)
+            {
+                return false;
+            }
+
+
+            
             EA.Diagram dia = Repository.GetCurrentDiagram();
+            if (dia == null) return false; // e.g. Matrix has a diagramm id but no diagram object
             switch (dia.Type)
             {
                 case "Activity":
-                    return updateLineStyle(Repository, dia, connectorID, _AddinSettings.ActivityLineStyle.Substring(0, 2));
+                    return updateLineStyle(Repository, dia, connectorId, _AddinSettings.ActivityLineStyle.Substring(0, 2));
 
 
                 case "Statechart":
-                    return updateLineStyle(Repository, dia, connectorID, _AddinSettings.StatechartLineStyle.Substring(0, 2));
+                    return updateLineStyle(Repository, dia, connectorId, _AddinSettings.StatechartLineStyle.Substring(0, 2));
 
                 case "Logical":
-                    return updateLineStyle(Repository, dia, connectorID, _AddinSettings.ClassLineStyle.Substring(0, 2));
+                    return updateLineStyle(Repository, dia, connectorId, _AddinSettings.ClassLineStyle.Substring(0, 2));
 
 
                 case "Custom":
-                    return updateLineStyle(Repository, dia, connectorID, _AddinSettings.CustomLineStyle.Substring(0, 2));
+                    return updateLineStyle(Repository, dia, connectorId, _AddinSettings.CustomLineStyle.Substring(0, 2));
 
                 case "Component":
-                    return updateLineStyle(Repository, dia, connectorID, _AddinSettings.ComponentLineStyle.Substring(0, 2));
+                    return updateLineStyle(Repository, dia, connectorId, _AddinSettings.ComponentLineStyle.Substring(0, 2));
 
                 case "Deployment":
-                    return updateLineStyle(Repository, dia, connectorID, _AddinSettings.DeploymentLineStyle.Substring(0, 2));
+                    return updateLineStyle(Repository, dia, connectorId, _AddinSettings.DeploymentLineStyle.Substring(0, 2));
 
                 case "Package":
-                    return updateLineStyle(Repository, dia, connectorID, _AddinSettings.PackageLineStyle.Substring(0, 2));
+                    return updateLineStyle(Repository, dia, connectorId, _AddinSettings.PackageLineStyle.Substring(0, 2));
 
                 case "Use Case":
-                    return updateLineStyle(Repository, dia, connectorID, _AddinSettings.UseCaseLineStyle.Substring(0, 2));
+                    return updateLineStyle(Repository, dia, connectorId, _AddinSettings.UseCaseLineStyle.Substring(0, 2));
 
                 case "CompositeStructure":
-                    return updateLineStyle(Repository, dia, connectorID, _AddinSettings.CompositeStructureLineStyle.Substring(0, 2));
+                    return updateLineStyle(Repository, dia, connectorId, _AddinSettings.CompositeStructureLineStyle.Substring(0, 2));
 
                 default:
                     return false;

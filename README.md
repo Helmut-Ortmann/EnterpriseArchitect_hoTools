@@ -90,6 +90,9 @@ Some features:
    - Toolbar Buttons
    - Quick Search 
 
+ # Bugfixes
+- Exception Matrix Profile
+
 # Not yet scheduled
 - Drag SQL file on canvas
   (seems impossible with EA, no drag and drop for ActiveX supported)
