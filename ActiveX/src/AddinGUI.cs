@@ -12,7 +12,7 @@ namespace hoTools.ActiveX
     /// <para/>- string Release
     /// <para/>- EA.Repository Repository
     /// </summary>
-    public class AddinGUI : UserControl
+    public class AddinGui : UserControl
     {
         EA.Repository _rep;
         Model _model; 
@@ -20,7 +20,8 @@ namespace hoTools.ActiveX
 
 
         #region Model
-        public Model Model
+
+        protected Model Model
         {
             set
             {
@@ -44,18 +45,18 @@ namespace hoTools.ActiveX
                     _model.Repository = value;
                 }
             }
-            get
+            protected get
             {
                 return _rep;
             }
         }
         #endregion
         #region Release
-        public string Release { set; get; }
+        public string Release { set; protected get; }
 
         #endregion
         #region AddinSettings
-        public AddinSettings AddinSettings { get; set; }
+        public AddinSettings AddinSettings { protected get; set; }
 
         #endregion
     }

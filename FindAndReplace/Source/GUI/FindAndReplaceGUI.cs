@@ -17,7 +17,7 @@ namespace hoTools.Find
     [ProgId(PROGID)]
     [ComDefaultInterface(typeof(IFindAndReplaceGUI))]
 
-    public partial class FindAndReplaceGUI : AddinGUI, IFindAndReplaceGUI
+    public partial class FindAndReplaceGUI : AddinGui, IFindAndReplaceGUI
     {
         public const string PROGID = "hoTools.FindAndReplaceGUI";
         public const string TABULATOR = "Find";

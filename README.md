@@ -13,23 +13,28 @@ Collection of useful tools (see also [WiKi](https://github.com/Helmut-Ortmann/En
   - Favorites
   - ..
 - [SQL](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/SQL) with tabbed Windows
-    -- Select, Insert, Delete, Update
-    -- Templates
-    -- Macros (easy access to EA items / Packages or complete Branches, a lot more than EA delivers)
-    -- See error
-    -- Conveyed Items
-    -- *.sql files in file system (you may use favourite Editor)
+    - Select, Insert, Delete, Update
+    - Templates
+    - Macros (easy access to EA items / Packages or complete Branches, a lot more than EA delivers)
+    - See error
+    - Conveyed Items
+    - *.sql files in file system (you may use favourite Editor)
 - [Script](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/Script) which runs for [SQL](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/SQL) results 
-  - all EA script languages (vbScript, JScript, JavaScript) 
+  - All EA script languages (vbScript, JScript, JavaScript) 
+  - Compatible to Geert Bellekens great VBScript Library
+- [Find&Replace](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/FindAndReplace)
+  - Find simple string or Regular Expression
+  - Name, Description, Stereotype, Tagged Value
+  - in Packages, Elements, Diagrams, Attributes, Operations
 - Configure
- - Buttons
- - Searches
+ - Buttons & Keys
+ - Searches & Services
  - GUI appearance
 - Administration of EA
   - Version Control
 - Intuitive GUI
-- Online help
-- ..
+- [WiKi](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/home)
+
 
 # Requirements
 - Windows

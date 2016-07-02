@@ -22,7 +22,7 @@ namespace hoTools.ActiveX
     [ProgId("hoTools.ActiveXGUI")]
     [ComDefaultInterface(typeof(IAddinControl))]
 
-    public class AddinControlGui : AddinGUI, IAddinControl
+    public class AddinControlGui : AddinGui, IAddinControl
     {
         public const string Progid = "hoTools.ActiveXGUI";
 
@@ -155,7 +155,14 @@ namespace hoTools.ActiveX
         #region Constructor
         public AddinControlGui()
         {
-            InitializeComponent();
+            try
+            {
+                InitializeComponent();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($"{e}", @"Error Constructor hoTools");
+            }
 
         }
         #endregion

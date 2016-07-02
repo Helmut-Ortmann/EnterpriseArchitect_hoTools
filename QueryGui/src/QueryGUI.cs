@@ -32,7 +32,7 @@ namespace hoTools.Query
     [Guid("3F23B705-62F1-43D7-9F6F-085105FDF752")]
     [ProgId(Progid)]
     [ComDefaultInterface(typeof(IQueryGui))]
-    public partial class QueryGui : AddinGUI, IQueryGui
+    public partial class QueryGui : AddinGui, IQueryGui
     {
         public const string Progid = "hoTools.QueryGUI";
         public const string TabulatorScript = "Script";

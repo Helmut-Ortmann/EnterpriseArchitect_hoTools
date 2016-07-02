@@ -1073,16 +1073,16 @@ namespace hoTools
                 try
                 {
                     // LineStyle and more
-                    if (!(_addinSettings.LineStyleAndMoreWindow == AddinSettings.ShowInWindow.Disabled))
+                    if (_addinSettings.LineStyleAndMoreWindow != AddinSettings.ShowInWindow.Disabled)
                     {
-                    _AddinControlGui = AddAddinControl<AddinControlGui>(_addinSettings.ProductName,
+                        _AddinControlGui = AddAddinControl<AddinControlGui>(_addinSettings.ProductName,
                         AddinControlGui.Progid, null,
                         AddinSettings.ShowInWindow.AddinWindow);
                         _myControlGui = _AddinControlGui; // static + instance
                     }
 
                     // with Search & Replace EA Addin Windows
-                    if (!  (_addinSettings.SearchAndReplaceWindow == AddinSettings.ShowInWindow.Disabled) ) { 
+                    if (_addinSettings.SearchAndReplaceWindow != AddinSettings.ShowInWindow.Disabled ) { 
                         _FindAndReplaceGUI = AddAddinControl<FindAndReplaceGUI>(FindAndReplaceGUI.TABULATOR, 
                             FindAndReplaceGUI.PROGID, null, 
                             AddinSettings.ShowInWindow.AddinWindow);
@@ -1090,7 +1090,7 @@ namespace hoTools
                     }
 
                     // with Query EA Addin Windows
-                    if (! (_addinSettings.OnlyQueryWindow == AddinSettings.ShowInWindow.Disabled) )
+                    if (_addinSettings.OnlyQueryWindow != AddinSettings.ShowInWindow.Disabled )
                     {
                         // Run as Query
                         _QueryGUI = AddAddinControl<QueryGui>(QueryGui.TabulatorSql, 
@@ -1100,7 +1100,7 @@ namespace hoTools
                     }
 
                     // with Script & Query EA Addin Windows
-                    if (!(_addinSettings.ScriptAndQueryWindow == AddinSettings.ShowInWindow.Disabled))
+                    if (_addinSettings.ScriptAndQueryWindow != AddinSettings.ShowInWindow.Disabled)
                     {
                         // Run as Script
                         _ScriptGUI = AddAddinControl<QueryGui>(QueryGui.TabulatorScript, 
@@ -1141,7 +1141,7 @@ namespace hoTools
             default:
                     return default(T);
             }
-            AddinGUI control = c as AddinGUI;
+            AddinGui control = c as AddinGui;
             if (null == control)
             {
                 MessageBox.Show($"Unable to start progId='{progId}', tab='{tabName}'");
