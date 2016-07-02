@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 using System.Windows.Forms;
+using EA;
 
 namespace hoTools.EaServices
 {
@@ -65,7 +66,7 @@ namespace hoTools.EaServices
             Pos = pos;
             ButtonText = buttonText;
         }
-        public string Invoke(EA.Repository rep, string text)
+        public string Invoke(Repository rep, string text)
         {
             if (Method != null)
             {
@@ -128,9 +129,8 @@ namespace hoTools.EaServices
             get
             {
                 if (Method == null) return "";
-                else return Method.Name;
+                return Method.Name;
             }
-
         }
         public string Description { get; set; }
 

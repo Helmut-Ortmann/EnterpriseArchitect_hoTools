@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows;
 using System.Windows.Forms;
 using EA;
 using hoTools.Settings;
@@ -31,10 +32,6 @@ namespace hoTools.Query
 
         public static readonly string MenuNewTabText = "New Tab with Element Template";
         public static readonly string MenuNewTabTooltip = "Create new SQL Tab with Element Template";
-
-        public static readonly string MenuNewTabFromRecentFileText = "New Tab, load recent file...";
-        public static readonly string MenuNewTabFromRecentFileTooltip = "Create new SQL Tab and load from recent File...";
-
 
 
         const string SqlTextBoxTooltip =
@@ -89,16 +86,8 @@ CTRL+SHFT+S                     Store sql All
         /// </summary>
         readonly string _addinTabName;
 
-        /// <summary>
-        /// Reusable ToolStripMenuItem: File Menu: New Tab and Load Recent Files 
-        /// </summary>
-        public ToolStripMenuItem FileNewTabAndLoadRecentFileItem => _fileNewTabAndLoadRecentFileItem;
         readonly ToolStripMenuItem _fileNewTabAndLoadRecentFileItem;
 
-        /// <summary>
-        /// Reusable ToolStripMenuItem: File Menu: Load Recent Files in current Tab
-        /// </summary>
-        public ToolStripMenuItem FileLoadRecentFileItem => _fileLoadRecentFileItem;
         readonly ToolStripMenuItem _fileLoadRecentFileItem;
 
         readonly ToolStripMenuItem _newTabFromItem = new ToolStripMenuItem("New Tab from...");
@@ -493,6 +482,28 @@ Useful to quickly test:
             };
             insertWcMenuItem.Click += insertTemplate_Click;
 
+            // Insert Design ID
+            id = SqlTemplates.SqlTemplateId.DesignId;
+            ToolStripMenuItem insertDesignId = new ToolStripMenuItem
+            {
+                Text = @"Insert " + SqlTemplates.GetTemplateText(id),
+                ToolTipText = SqlTemplates.GetTooltip(id),
+                Tag = SqlTemplates.GetTemplate(id)
+            };
+            insertDesignId.Click += insertTemplate_Click;
+
+            // Insert Design GUID
+            id = SqlTemplates.SqlTemplateId.DesignGuid;
+            ToolStripMenuItem insertDesignGuid = new ToolStripMenuItem
+            {
+                Text = @"Insert " + SqlTemplates.GetTemplateText(id),
+                ToolTipText = SqlTemplates.GetTooltip(id),
+                Tag = SqlTemplates.GetTemplate(id)
+            };
+            insertDesignGuid.Click += insertTemplate_Click;
+
+
+
             insertMacroMenuItem.DropDownItems.AddRange(new ToolStripItem[] {
                 insertMacroSearchTermMenuItem,
                 new ToolStripSeparator(),
@@ -510,10 +521,13 @@ Useful to quickly test:
                 insertDiagramElementsIdsMenuItem,
                 insertDiagramSelectedElementsIdsMenuItem,
                 new ToolStripSeparator(),
-                insertNewGuid,
+                insertNewGuid,  // used for Insert 
                 new ToolStripSeparator(),
                 insertTreeSelectedGuidsMenuItem,
-                insertWcMenuItem
+                insertWcMenuItem,
+                new ToolStripSeparator(),
+                insertDesignId,
+                insertDesignGuid
                 });
             return insertMacroMenuItem;
         }
@@ -855,7 +869,7 @@ Useful to quickly test:
         /// <param name="tabPage"></param>
         /// <param name="fileName"></param>
         /// <param name="notUpdateLastOpenedList">Don't update list of the opened files</param>
-        public void LoadTabPageFromFile(TabPage tabPage, string fileName, bool notUpdateLastOpenedList = false)
+        void LoadTabPageFromFile(TabPage tabPage, string fileName, bool notUpdateLastOpenedList = false)
         {
 
             try
@@ -887,7 +901,7 @@ Useful to quickly test:
         /// Load string for tab Page
         /// </summary>
         /// <param name="tabContent">What do load in Tab</param>
-        public void LoadTabPage(string tabContent)
+        void LoadTabPage(string tabContent)
         {
             TabPage tabPage;
             // no tab exists
@@ -975,18 +989,13 @@ Useful to quickly test:
             SqlTemplate template = (SqlTemplate)menuItem.Tag;
             var templateText = template.TemplateText;
 
-            EA.ObjectType objectType = _model.Repository.GetContextItemType();
-            // #Branch={...guid...}#
-            if (objectType == ObjectType.otPackage &&
-                template == SqlTemplates.GetTemplate(SqlTemplates.SqlTemplateId.BranchIdsConstantPackage))
-            {
-                // get package GUID
-                string guid = ((EA.Package)_model.Repository.GetContextObject()).PackageGUID;
-                // replace {.....} by guid
-                Regex pattern = new Regex(@"={[^}]*}");
-                templateText = pattern.Replace(templateText, $"={guid}");
-            }
-            
+
+            //---------------------------------------------------------------------------
+            // special template handling 
+            // it replaces the template if it matches
+            templateText = BranchConstantPackageTemplateText(template, templateText);
+            templateText = IdConstant(template, templateText);
+            templateText = GuidConstant(template, templateText);
 
 
             // insert text and replace a selected range
@@ -1005,6 +1014,116 @@ Useful to quickly test:
 
 
         }
+        /// <summary>
+        /// Insert Branch for a constant package like: '#Branch={.....guid...}'. If the context Element is a package it inserts the Package GUID.
+        /// </summary>
+        /// <param name="template"></param>
+        /// <param name="templateText"></param>
+        /// <returns></returns>
+        private string BranchConstantPackageTemplateText(SqlTemplate template, string templateText)
+        {
+            ObjectType objectType = _model.Repository.GetContextItemType();
+            // #Branch={...guid...}#
+            if (objectType == ObjectType.otPackage &&
+                template == SqlTemplates.GetTemplate(SqlTemplates.SqlTemplateId.BranchIdsConstantPackage))
+            {
+                // get package GUID
+                string guid = ((Package) _model.Repository.GetContextObject()).PackageGUID;
+                // replace {.....} by guid
+                Regex pattern = new Regex(@"={[^}]*}");
+                templateText = pattern.Replace(templateText, $"={guid}");
+            }
+            return templateText;
+        }
+
+        /// <summary>
+        /// Returns string of id of it selected and has a supported type (Package, Diagram, Element, Attribute, Operation).It also copies the id to Clipboard.
+        /// </summary>
+        /// <param name="template"></param>
+        /// <param name="templateText"></param>
+        /// <returns></returns>
+        private string IdConstant(SqlTemplate template, string templateText)
+        {
+
+            // #Branch={...guid...}#
+            if ( template == SqlTemplates.GetTemplate(SqlTemplates.SqlTemplateId.DesignId))
+            {
+                // get design ID
+                ObjectType objectType = _model.Repository.GetContextItemType();
+                int id;
+                switch (objectType)
+                {
+                    case ObjectType.otElement:
+                        id = ((Element)_model.Repository.GetContextObject()).ElementID;
+                        break;
+                    case ObjectType.otPackage:
+                        id = ((Package)_model.Repository.GetContextObject()).PackageID;
+                        break;
+                    case ObjectType.otDiagram:
+                        id = ((Diagram)_model.Repository.GetContextObject()).DiagramID;
+                        break;
+                    case ObjectType.otAttribute:
+                        id = ((EA.Attribute)_model.Repository.GetContextObject()).AttributeID;
+                        break;
+                    case ObjectType.otMethod:
+                        id = ((Method)_model.Repository.GetContextObject()).MethodID;
+                        break;
+                    default:
+                        return templateText;
+                }
+                string sId = $"{id}";
+                Clipboard.SetText(sId);
+                return sId;
+
+
+            }
+
+            return templateText;
+        }
+        /// <summary>
+        /// Returns guid of it selected and has a supported type (Package, Diagram, Element, Attribute, Operation)
+        /// </summary>
+        /// <param name="template"></param>
+        /// <param name="templateText"></param>
+        /// <returns></returns>
+        private string GuidConstant(SqlTemplate template, string templateText)
+        {
+
+            // #Branch={...guid...}#
+            if (template == SqlTemplates.GetTemplate(SqlTemplates.SqlTemplateId.DesignGuid))
+            {
+                // get design GUID
+                ObjectType objectType = _model.Repository.GetContextItemType();
+                string guid;
+                switch (objectType)
+                {
+                    case ObjectType.otElement:
+                        guid = ((Element)_model.Repository.GetContextObject()).ElementGUID;
+                        break;
+                    case ObjectType.otPackage:
+                        guid = ((Package)_model.Repository.GetContextObject()).PackageGUID;
+                        break;
+                    case ObjectType.otDiagram:
+                        guid = ((Diagram)_model.Repository.GetContextObject()).DiagramGUID;
+                        break;
+                    case ObjectType.otAttribute:
+                        guid = ((EA.Attribute)_model.Repository.GetContextObject()).AttributeGUID;
+                        break;
+                    case ObjectType.otMethod:
+                        guid = ((Method)_model.Repository.GetContextObject()).MethodGUID;
+                        break;
+                    default:
+                        return templateText;
+                }
+                Clipboard.SetText(guid);
+                return guid;
+
+
+            }
+            return templateText;
+        }
+
+
 
 
         /// <summary>

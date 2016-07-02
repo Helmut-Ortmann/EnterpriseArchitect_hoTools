@@ -1,20 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Xml.Linq;
-using System.Text;
-using System.Windows.Forms;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
+using EA;
 using hoTools.EaServices;
 using hoTools.Utils;
 using hoTools.Utils.SQL;
-using hoTools.Utils.RUN;
+using DiagramObject = EA.DiagramObject;
+using Element = EA.Element;
+using Package = EA.Package;
 
 namespace hoTools.EAServicesPort
 {
     public class PortServices
     {
-        EA.Repository _rep;
+        Repository _rep;
         int _count; // a variable to count the amount of something
         const string EmbeddedElementTypes ="Port Parameter Pin";
               
@@ -25,7 +25,7 @@ namespace hoTools.EAServicesPort
         /// Port services like: Label, Connect, Copy, Delete,..
         /// </summary>
         /// <param name="rep"></param>
-        public PortServices(EA.Repository rep)
+        public PortServices(Repository rep)
         {
             _rep = rep;
             _count = 0;
@@ -63,7 +63,7 @@ namespace hoTools.EAServicesPort
         #region doCopyPortsGUI
         public int DoCopyPortsGui()
         {
-            EA.Diagram dia = _rep.GetCurrentDiagram();
+            Diagram dia = _rep.GetCurrentDiagram();
             if (dia == null) return 0;
             int count = dia.SelectedObjects.Count;
            
@@ -71,9 +71,9 @@ namespace hoTools.EAServicesPort
             _rep.SaveDiagram(dia.DiagramID);
 
             // target object/element
-            EA.DiagramObject srcObj;
-            EA.Element srcEl;
-            var trgEl = (EA.Element)_rep.GetContextObject();
+            DiagramObject srcObj;
+            Element srcEl;
+            var trgEl = (Element)_rep.GetContextObject();
             if (trgEl.Type != "Class" && trgEl.Type != "Component")
             {
                 MessageBox.Show("Target element has to be Class or Component", "");
@@ -83,8 +83,8 @@ namespace hoTools.EAServicesPort
             // over all selected DiagramObjects
             for (int i = 0; i < count; i = i + 1)
             {
-                srcObj = (EA.DiagramObject)dia.SelectedObjects.GetAt((short)i);
-                srcEl = (EA.Element)_rep.GetElementByID(srcObj.ElementID);
+                srcObj = (DiagramObject)dia.SelectedObjects.GetAt((short)i);
+                srcEl = _rep.GetElementByID(srcObj.ElementID);
                 if (srcEl.ElementID == trgEl.ElementID) continue;
 
                 if (srcEl.Type == "Port")
@@ -95,7 +95,7 @@ namespace hoTools.EAServicesPort
                 }
                 else
                 {   // selected element was "Port"
-                    foreach (EA.Element p in srcEl.EmbeddedElements)
+                    foreach (Element p in srcEl.EmbeddedElements)
                     {
                         if (srcEl.ElementID == trgEl.ElementID) continue;
                         if (p.Type == "Port")
@@ -119,14 +119,14 @@ namespace hoTools.EAServicesPort
         /// </summary>
         /// <param name="srcPort"></param>
         /// <param name="trgEl"></param>
-        private void CopyPort(EA.Element srcPort, EA.Element trgEl)
+        private void CopyPort(Element srcPort, Element trgEl)
         {
             bool isUpdate = false;
-            EA.Element trgPort = null;
+            Element trgPort = null;
             if (srcPort.Type != "Port") return;
             // check if port already exits
             
-            foreach (EA.Element p in trgEl.EmbeddedElements)
+            foreach (Element p in trgEl.EmbeddedElements)
             {
                 if (p.Name == srcPort.Name && p.Stereotype == srcPort.Stereotype)
                 {
@@ -142,7 +142,7 @@ namespace hoTools.EAServicesPort
                 string stereotype = srcPort.Stereotype;
                 if (isUpdate == false)
                 {
-                    trgPort = (EA.Element)trgEl.EmbeddedElements.AddNew(name, "Port");
+                    trgPort = (Element)trgEl.EmbeddedElements.AddNew(name, "Port");
                     trgEl.EmbeddedElements.Refresh();
                 }
                 trgPort.Stereotype = stereotype;
@@ -176,19 +176,19 @@ namespace hoTools.EAServicesPort
         #region doDeletePortsGUI
         public int DoDeletePortsGui()
         {
-            EA.Diagram dia = _rep.GetCurrentDiagram();
+            Diagram dia = _rep.GetCurrentDiagram();
             if (dia == null) return 0;
             int selCount = dia.SelectedObjects.Count;
             if (selCount == 0) return 0;
             _rep.SaveDiagram(dia.DiagramID);
 
             // target object/element
-            EA.DiagramObject obj;
-            EA.Element el;
+            DiagramObject obj;
+            Element el;
 
             for (int i = 0; i < selCount; i++)
             {
-                obj = (EA.DiagramObject)dia.SelectedObjects.GetAt((short)i);
+                obj = (DiagramObject)dia.SelectedObjects.GetAt((short)i);
                 el = _rep.GetElementByID(obj.ElementID);
                 
                 if (el.Type == "Port")
@@ -199,7 +199,7 @@ namespace hoTools.EAServicesPort
                 }
                 else
                 {   // selected element was "Element"
-                    foreach (EA.Element p in el.EmbeddedElements)
+                    foreach (Element p in el.EmbeddedElements)
                     {
                         DelPort(p);
                         _count += 1; 
@@ -212,12 +212,12 @@ namespace hoTools.EAServicesPort
        } 
         #endregion
         #region delPort
-        private void DelPort(EA.Element port)
+        private void DelPort(Element port)
         {
-            EA.Element el = _rep.GetElementByID(port.ParentID);
+            Element el = _rep.GetElementByID(port.ParentID);
             for (int i = 0; i < el.EmbeddedElements.Count; i++)
             {
-                var p1 = (EA.Element)el.EmbeddedElements.GetAt((short)i);
+                var p1 = (Element)el.EmbeddedElements.GetAt((short)i);
                 if (p1.ElementID == port.ElementID)
                 {
                     el.EmbeddedElements.Delete((short)i);
@@ -251,7 +251,7 @@ namespace hoTools.EAServicesPort
         #region doOrderDiagramObjectsGUI
         public void DoOrderDiagramObjectsGui()
         {
-            EA.Diagram dia = _rep.GetCurrentDiagram();
+            Diagram dia = _rep.GetCurrentDiagram();
             if (dia == null) return;
             int count = dia.SelectedObjects.Count;
 
@@ -314,7 +314,7 @@ namespace hoTools.EAServicesPort
             {
 
                 Cursor.Current = Cursors.WaitCursor;
-                this.DoRemovePortFromDiagramGui();
+                DoRemovePortFromDiagramGui();
                 Cursor.Current = Cursors.Default;
 
             }
@@ -332,19 +332,19 @@ namespace hoTools.EAServicesPort
         #region doRemovePortFromDiagramGUI
         private void DoRemovePortFromDiagramGui()
         {
-            EA.Diagram dia = _rep.GetCurrentDiagram();
+            Diagram dia = _rep.GetCurrentDiagram();
             if (dia == null) return;
             int selCount = dia.SelectedObjects.Count;
             if (selCount == 0) return;
             _rep.SaveDiagram(dia.DiagramID);
 
             // target object/element
-            EA.DiagramObject obj;
-            EA.Element el;
+            DiagramObject obj;
+            Element el;
 
             for (int i = selCount - 1; i >= 0; i -= 1)
             {
-                obj = (EA.DiagramObject)dia.SelectedObjects.GetAt((short)i);
+                obj = (DiagramObject)dia.SelectedObjects.GetAt((short)i);
                 el = _rep.GetElementByID(obj.ElementID);
 
                 if (el.Type == "Port")
@@ -354,7 +354,7 @@ namespace hoTools.EAServicesPort
                 }
                 else
                 {   // selected element was "Element"
-                    foreach (EA.Element port in el.EmbeddedElements)
+                    foreach (Element port in el.EmbeddedElements)
                     {
                         if (port.Type == "Port")
                         {
@@ -369,11 +369,11 @@ namespace hoTools.EAServicesPort
         }
         #endregion  
         #region removePortFromDiagram
-        private void RemovePortFromDiagram(EA.Diagram dia, EA.Element port)
+        private void RemovePortFromDiagram(Diagram dia, Element port)
         {
             for (int i= dia.DiagramObjects.Count-1; i>=0;i-=1)
             {
-                var obj = (EA.DiagramObject)dia.DiagramObjects.GetAt((short) i);
+                var obj = (DiagramObject)dia.DiagramObjects.GetAt((short) i);
                 if (obj.ElementID == port.ElementID)
                 {
                     dia.DiagramObjects.Delete((short)i);
@@ -419,30 +419,30 @@ namespace hoTools.EAServicesPort
         #region doChangeLabelGUI
         public void DoChangeLabelGui(LabelStyle style)
         {
-            EA.Diagram dia = _rep.GetCurrentDiagram();
+            Diagram dia = _rep.GetCurrentDiagram();
             if (dia == null) return;
             int count = dia.SelectedObjects.Count;
             _rep.SaveDiagram(dia.DiagramID);
 
             // target object/element
-            EA.Element el;
+            Element el;
 
             // for each selected element
-            foreach (EA.DiagramObject obj in dia.SelectedObjects)
+            foreach (DiagramObject obj in dia.SelectedObjects)
             {
                 el = _rep.GetElementByID(obj.ElementID);
                 if (EmbeddedElementTypes.Contains(el.Type) )
                 {
-                    EA.DiagramObject portObj = Util.GetDiagramObjectById(_rep, dia, el.ElementID);
+                    DiagramObject portObj = Util.GetDiagramObjectById(_rep, dia, el.ElementID);
                     //EA.DiagramObject portObj = dia.GetDiagramObjectByID(el.ElementID, "");
                     DoChangeLabelStyle(portObj, style);
                 }
                 else
                 {   // all element like Class, Component,..
-                    foreach (EA.Element p in el.EmbeddedElements)
+                    foreach (Element p in el.EmbeddedElements)
                     {
                         if (! (EmbeddedElementTypes.Contains(p.Type))) continue;
-                        EA.DiagramObject portObj = Util.GetDiagramObjectById(_rep, dia, p.ElementID);
+                        DiagramObject portObj = Util.GetDiagramObjectById(_rep, dia, p.ElementID);
                         if (portObj != null) {
                             //EA.DiagramObject portObj = dia.GetDiagramObjectByID(p.ElementID, "");
                             // HDN=1;  Label hidden
@@ -456,7 +456,7 @@ namespace hoTools.EAServicesPort
         #endregion
 
         #region doChangeLabelStyle
-        private static void DoChangeLabelStyle(EA.DiagramObject portObj, LabelStyle style)
+        private static void DoChangeLabelStyle(DiagramObject portObj, LabelStyle style)
         {
             switch (style)
             {
@@ -504,7 +504,7 @@ namespace hoTools.EAServicesPort
         }
         #endregion
         #region setLabel
-        private static void ChangeLabel(EA.DiagramObject portObj, string from, string to)
+        private static void ChangeLabel(DiagramObject portObj, string from, string to)
         {
             var style = (string)portObj.Style;
 
@@ -546,22 +546,22 @@ namespace hoTools.EAServicesPort
         #region doDeleteMarkedPortsGUI
         public void DoDeleteMarkedPortsGui()
         {
-            EA.Diagram dia = _rep.GetCurrentDiagram();
+            Diagram dia = _rep.GetCurrentDiagram();
             if (dia == null) return;
             int count = dia.SelectedObjects.Count;
             _rep.SaveDiagram(dia.DiagramID);
 
             // target object/element
-            EA.DiagramObject obj;
-            EA.Element el;
+            DiagramObject obj;
+            Element el;
 
             for (int i = 0; i < count; i = i + 1)
             {
-                obj = (EA.DiagramObject)dia.SelectedObjects.GetAt((short)i);
+                obj = (DiagramObject)dia.SelectedObjects.GetAt((short)i);
                 el = _rep.GetElementByID(obj.ElementID);
                 for (int i1 = el.EmbeddedElements.Count -1; i1 >= 0; i1 = i1-1)
                 {
-                    var p = (EA.Element)el.EmbeddedElements.GetAt((short)i1);
+                    var p = (Element)el.EmbeddedElements.GetAt((short)i1);
                     if (p.Type == "Port" ||
                         p.Type == "Part" && p.Stereotype == "CharacteristicCurve" ||
                         p.Type == "Part" && p.Stereotype == "CharacteristicData" )
@@ -611,21 +611,21 @@ namespace hoTools.EAServicesPort
         /// <returns></returns>
         public int DoConnectPortsInsideGui()
         {
-            EA.Diagram dia = _rep.GetCurrentDiagram();
+            Diagram dia = _rep.GetCurrentDiagram();
             if (dia == null) return 0;
             int count = dia.SelectedObjects.Count;
 
             _rep.SaveDiagram(dia.DiagramID);
 
             // target object/element
-            EA.DiagramObject srcObj;
-            EA.Element srcEl;
+            DiagramObject srcObj;
+            Element srcEl;
 
 
             // all selected objects
             for (int iSrc = 0; iSrc < count ; iSrc += 1)
             {
-                srcObj = (EA.DiagramObject)dia.SelectedObjects.GetAt((short)iSrc);
+                srcObj = (DiagramObject)dia.SelectedObjects.GetAt((short)iSrc);
                 srcEl = _rep.GetElementByID(srcObj.ElementID);
 
                 ConnectPortsOf2Classes(srcEl, srcEl);
@@ -680,14 +680,14 @@ namespace hoTools.EAServicesPort
         public void DoConnectPortGui () 
         {
             var lElId = new List<int>();
-            EA.Package pkg = _rep.GetTreeSelectedPackage();
+            Package pkg = _rep.GetTreeSelectedPackage();
             if (pkg == null) return;
             
             // overall selected elements 
-            EA.Diagram dia = _rep.GetCurrentDiagram();
+            Diagram dia = _rep.GetCurrentDiagram();
             if (dia != null && dia.SelectedObjects.Count > 0)
             {
-                foreach (EA.DiagramObject obj in dia.SelectedObjects)
+                foreach (DiagramObject obj in dia.SelectedObjects)
                 {
                     lElId.Add(obj.ElementID);
                 }
@@ -705,28 +705,25 @@ namespace hoTools.EAServicesPort
                 // source id
                 int srcId = lElId[i1];
                 _rep.ShowInProjectView(_rep.GetElementByID(srcId) );
-                EA.Element srcEl = _rep.GetElementByID(srcId);
+                Element srcEl = _rep.GetElementByID(srcId);
                 for (int i2 = i1+1; i2 < lElId.Count; i2 += 1)
                 {
                     int trgtId = lElId[i2];
                     if (srcId == trgtId) continue;
-                    EA.Element trgtEl = _rep.GetElementByID(trgtId);
+                    Element trgtEl = _rep.GetElementByID(trgtId);
 
                     ConnectPortsOf2Classes(srcEl, trgtEl);
                 }
             }
             _rep.ReloadDiagram(dia.DiagramID);
-            return ;
-    
-                
         }
         #endregion
         #region ConnectPortsOf2Classes
-        public void ConnectPortsOf2Classes(EA.Element srcEl, EA.Element trgtEl)
+        public void ConnectPortsOf2Classes(Element srcEl, Element trgtEl)
         {
-            foreach (EA.Element srcPort in srcEl.EmbeddedElements)
+            foreach (Element srcPort in srcEl.EmbeddedElements)
             {
-                foreach (EA.Element trgtPort in trgtEl.EmbeddedElements)
+                foreach (Element trgtPort in trgtEl.EmbeddedElements)
                 {
                     // don't connect to itself
                     if (srcPort.Name == trgtPort.Name && srcPort.ElementID != trgtPort.ElementID)
@@ -752,7 +749,7 @@ namespace hoTools.EAServicesPort
                                 // direction of connector
                                 if (srcPort.Stereotype == "Sender" | srcPort.Stereotype == "Client")
                                 {
-                                    var con = (EA.Connector)srcPort.Connectors.AddNew("", "Connector");
+                                    var con = (Connector)srcPort.Connectors.AddNew("", "Connector");
                                     srcPort.Connectors.Refresh();
                                     con.SupplierID = trgtPort.ElementID;
                                     con.Update();
@@ -760,7 +757,7 @@ namespace hoTools.EAServicesPort
                                 }
                                 else
                                 {
-                                    var con = (EA.Connector)trgtPort.Connectors.AddNew("", "Connector");
+                                    var con = (Connector)trgtPort.Connectors.AddNew("", "Connector");
                                     trgtPort.Connectors.Refresh();
                                     con.SupplierID = srcPort.ElementID;
                                     con.Update();
@@ -771,8 +768,6 @@ namespace hoTools.EAServicesPort
                     }
                 }
             }
-            return;
-
         }
         #endregion
      
@@ -781,18 +776,18 @@ namespace hoTools.EAServicesPort
         public void SetConnectionDirectionUnspecifiedGui()
         {
             var eaDia = new EaDiagram(_rep);
-            EA.Diagram dia = eaDia.Dia;
+            Diagram dia = eaDia.Dia;
             if (eaDia.Dia == null) return;
             if (eaDia.SelectedObjectsCount == 0) return;
             eaDia.Save();
 
             // target object/element
-            EA.DiagramObject obj;
-            EA.Element el;
+            DiagramObject obj;
+            Element el;
 
             for (int i = 0; i < eaDia.SelectedObjectsCount; i++)
             {
-                obj = (EA.DiagramObject)dia.SelectedObjects.GetAt((short)i);
+                obj = (DiagramObject)dia.SelectedObjects.GetAt((short)i);
                 el = _rep.GetElementByID(obj.ElementID);
 
                 if (el.Type == "Port")
@@ -802,7 +797,7 @@ namespace hoTools.EAServicesPort
                 }
                 else
                 {   // selected element was "Element"
-                    foreach (EA.Element port in el.EmbeddedElements)
+                    foreach (Element port in el.EmbeddedElements)
                     {
                         SetElementConnectorDirectionUnspecified(port);
                     }
@@ -814,8 +809,8 @@ namespace hoTools.EAServicesPort
         }
         #endregion  
         #region setElementConnectorDirectionUnspecified
-        private void SetElementConnectorDirectionUnspecified(EA.Element el) {
-            foreach (EA.Connector con in el.Connectors)
+        private void SetElementConnectorDirectionUnspecified(Element el) {
+            foreach (Connector con in el.Connectors)
             {
                 if (con.Type == "Connector")
                 {

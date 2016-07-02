@@ -1,11 +1,14 @@
-﻿namespace hoTools.EaServices.Dlg
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace hoTools.EaServices.Dlg
 {
     partial class dlgUser
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -92,10 +95,10 @@
 
         #endregion
 
-        private System.Windows.Forms.Button btnOk;
-        private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.ComboBox cmbUser;
-        private System.Windows.Forms.TextBox txtStatus;
-        private System.Windows.Forms.ToolTip toolTip1;
+        private Button btnOk;
+        private Button btnCancel;
+        private ComboBox cmbUser;
+        private TextBox txtStatus;
+        private ToolTip toolTip1;
     }
 }

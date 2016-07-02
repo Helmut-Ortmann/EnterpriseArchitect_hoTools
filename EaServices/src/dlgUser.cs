@@ -1,12 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
-using hoTools.Utils;
+using EA;
 using hoTools.Utils.SQL;
 
 namespace hoTools.EaServices.Dlg
@@ -16,11 +11,11 @@ namespace hoTools.EaServices.Dlg
     {
         List<string> users;
         string _user = "";
-        EA.Repository _rep;
+        Repository _rep;
         bool _isSecurityEnabled;
         UtilSql _sql;
 
-        public dlgUser(EA.Repository rep)
+        public dlgUser(Repository rep)
         {
             _rep = rep;
             _sql = new UtilSql(rep);

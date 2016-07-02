@@ -79,11 +79,11 @@ namespace hoTools.Query
             InitializeComponent();
 
             // set properties to enable drawing tab caption
-            tabControlSql.Multiline = false;
+            tabControlSql.Multiline = true;
             tabControlSql.SizeMode = TabSizeMode.FillToRight;
             tabControlSql.DrawMode = TabDrawMode.OwnerDrawFixed;
-            ResumeLayout(false);
-            PerformLayout();
+            //ResumeLayout(false);
+            //PerformLayout();
 
             ResizeRedraw = true;
 

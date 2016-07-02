@@ -322,6 +322,20 @@ Tip: Select Package while inserting in SQL via Insert Macro in Context Menu"
                     "Remark: Just for compatibility with EA Searches.You may simple use the familiar wild cards '*' or '%'\r\n " +
                     "        hoTools take care of the correct usage for the current database\r\n "
                     ) },
+            { SqlTemplateId.DesignId,
+                new SqlTemplate("Design Time ID",
+                    "ID",
+                    @"Inserts the ID of the selected item at Design time. It also copies the ID to clipboard.
+For: Package, Element, Diagram, Attribute, Operation" 
+                    ) },
+            { SqlTemplateId.DesignGuid,
+                new SqlTemplate(@"Design Time GUID",
+                    "GUID",
+                    @"Inserts the GUID of the selected item at Design time. It also copies the GUID to clipboard.
+For: Package, Element, Diagram, Attribute, Operation" 
+                    ) },
+
+
             { SqlTemplateId.Now,
                 new SqlTemplate("NOW date/time", 
                     "#NOW(not implemented)#", 
@@ -424,6 +438,8 @@ Tip: Select Package while inserting in SQL via Insert Macro in Context Menu"
             NewGuid,            // create a new GUIDs to use in insert statement
             Now,
             Wc,
+            DesignId,                 // The ID at design time (editing query) of the selected item (Package, Element, Diagram, Operation, Attribute)
+            DesignGuid,               // The GUID at design time (editing query) of the selected item (Package, Element, Diagram, Operation, Attribute) 
             DemoRunScriptTemplate
         }
         #endregion
