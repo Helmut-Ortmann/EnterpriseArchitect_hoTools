@@ -82,7 +82,6 @@ namespace hoTools
 
         EA.Repository _repository;
         // define menu constants
-        const string MenuName = "-hoTools";
 
         const string MenuShowWindow = "Show Window";
         const string MenuChangeXmlFile = "Change *.xml file for a version controlled package";
@@ -161,8 +160,8 @@ namespace hoTools
             var globalCfg = HoToolsGlobalCfg.Instance;
             globalCfg.SetSqlPaths(_addinSettings.SqlPaths);
 
-            this.MenuHeader = "-" + _addinSettings.ProductName;
-            this.menuOptions = new string[] { 
+            MenuHeader = "-" + _addinSettings.ProductName;
+            menuOptions = new string[] { 
                 //-------------------------- General  --------------------------//
                 //    menuLocateCompositeElementorDiagram,
                 //-------------------------- LineStyle --------------------------//
@@ -288,8 +287,7 @@ namespace hoTools
                     }
                     catch (Exception e)
                     {
-                        MessageBox.Show(e.ToString(), "Error start search '" + sh.SearchName +
-                           " " + sh.SearchTerm + "'");
+                        MessageBox.Show(e.ToString(), $"Error start search '{sh.SearchName} {sh.SearchTerm}'");
                     }
             }
             public static void RunGlobalKeyService(int pos)
@@ -350,26 +348,27 @@ namespace hoTools
         /// called when the selected item changes
         /// This operation will show the guid of the selected element in the eaControl
         /// </summary>
-        /// <param name="Repository">the EA.rep</param>
-        /// <param name="GUID">the guid of the selected item</param>
+        /// <param name="repository">the EA.rep</param>
+        /// <param name="guid">the guid of the selected item</param>
         /// <param name="ot">the object type of the selected item</param>
-        public override void EA_OnContextItemChanged(EA.Repository Repository, string GUID, EA.ObjectType ot)
+        public override void EA_OnContextItemChanged(EA.Repository repository, string guid, EA.ObjectType ot)
         { }
         #endregion
         #region EA_OnOutputItemDoubleClicked
-        public override void EA_OnOutputItemDoubleClicked(EA.Repository Repository, string TabName, string LineText, long ID)
+        public override void EA_OnOutputItemDoubleClicked(EA.Repository repository, string tabName, 
+            string lineText, long id)
         {
 
         }
         #endregion
         #region EA_OnPostInitialized
-        public override void EA_OnPostInitialized(EA.Repository Repository)
+        public override void EA_OnPostInitialized(EA.Repository repository)
         {
             // gets the file 'AssemblyFileVersion' of file AddinClass.dll
             string productVersion = FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).ProductVersion;
             _release = productVersion;
-            AddinClass._Repository = Repository;
-            _repository = Repository;
+            _Repository = repository;
+            _repository = repository;
             ShowAddinControlWindows();
         }
         #endregion
@@ -438,17 +437,17 @@ namespace hoTools
         /// The chief uses for EA_Connect are in initializing global Add-In data and for identifying the Add-In as an MDG Add-In.
         /// Also look at EA_Disconnect.
         /// </summary>
-        /// <param name="Repository">An EA.rep object representing the currently open Enterprise Architect model.
+        /// <param name="repository">An EA.rep object representing the currently open Enterprise Architect model.
         /// Poll its members to retrieve model data and user interface status information.</param>
         /// <returns>String identifying a specialized type of Add-In: 
         /// - "MDG" : MDG Add-Ins receive MDG Events and extra menu options.
         /// - "" : None-specialized Add-In.</returns>
-        public override string EA_Connect(EA.Repository Repository)
+        public override string EA_Connect(EA.Repository repository)
         {
             // register only if configured
             if (_AddinSettings.IsShortKeySupport) HotkeyHandlers.SetupGlobalHotkeys();
-            _repository = Repository;
-            if (Repository.IsSecurityEnabled)
+            _repository = repository;
+            if (repository.IsSecurityEnabled)
             {
                 //logInUser = rep.GetCurrentLoginUser(false);
                 //if ((logInUser.Contains("ho")) ||
@@ -544,6 +543,7 @@ namespace hoTools
         /// <param name="rep"></param>
         void InitializeForRepository(EA.Repository rep)
         {
+            if (rep == null) return;
             _repository = rep;
             _Repository = rep;
             try
@@ -554,7 +554,7 @@ namespace hoTools
                 if (_queryGui != null) _queryGui.Repository = rep;
             } catch (Exception e)
             {
-                MessageBox.Show($"{e.Message}",@"hoTools: Error initializing Addin Tabs");
+                MessageBox.Show($"{e.Message}",@"hoTools: Error initializing Addin Tabs with repository");
             }
 
 
@@ -735,7 +735,7 @@ namespace hoTools
         {
             EA.ObjectType oType = Repository.GetContextItemType();
             EA.Diagram diaCurrent = Repository.GetCurrentDiagram();
-            EA.Element el = null;
+            EA.Element el;
 
             if (diaCurrent != null) 
             {

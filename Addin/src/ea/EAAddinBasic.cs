@@ -61,13 +61,13 @@ namespace EAAddinFramework
         /// The chief uses for EA_Connect are in initializing global Add-In data and for identifying the Add-In as an MDG Add-In.
         /// Also look at EA_Disconnect.
         /// </summary>
-        /// <param name="Repository">An EA.rep object representing the currently open Enterprise Architect model.
+        /// <param name="repository">An EA.rep object representing the currently open Enterprise Architect model.
         /// Poll its members to retrieve model data and user interface status information.</param>
         /// <returns>String identifying a specialized type of Add-In: 
         /// - "MDG" : MDG Add-Ins receive MDG Events and extra menu options.
         /// - "" : None-specialized Add-In.</returns>
         //No special processing required.
-        public virtual string EA_Connect(EA.Repository Repository) => "a string";
+        public virtual string EA_Connect(EA.Repository repository) => "a string";
 
         /// <summary>
         /// The EA_GetMenuItems event enables the Add-In to provide the Enterprise Architect user interface with additional Add-In menu options in various context and main menus. When a user selects an Add-In menu option, an event is raised and passed back to the Add-In that originally defined that menu option.
@@ -181,13 +181,13 @@ namespace EAAddinFramework
         /// Note that every loaded Add-In receives this event for every double-click on an output tab in Enterprise Architect - irrespective of whether the Add-In created that tab. Add-Ins should therefore check the TabName parameter supplied by this event to ensure that they are not responding to other Add-Ins' events.
         /// Also look at EA_OnOutputItemClicked.
         /// </summary>
-        /// <param name="Repository">An EA.rep object representing the currently open Enterprise Architect model.
+        /// <param name="repository">An EA.rep object representing the currently open Enterprise Architect model.
         /// Poll its members to retrieve model data and user interface status information.</param>
-        /// <param name="TabName">The name of the tab that the click occurred in. 
+        /// <param name="tabName">The name of the tab that the click occurred in. 
         /// Usually this would have been created through rep.AddTab().</param>
-        /// <param name="LineText">The text that had been supplied as the String parameter in the original call to rep.WriteOutput().</param>
-        /// <param name="ID">The ID value specified in the original call to rep.WriteOutput().</param>
-        public virtual void EA_OnOutputItemDoubleClicked(EA.Repository Repository, string TabName, string LineText, long ID) { }
+        /// <param name="lineText">The text that had been supplied as the String parameter in the original call to rep.WriteOutput().</param>
+        /// <param name="id">The ID value specified in the original call to rep.WriteOutput().</param>
+        public virtual void EA_OnOutputItemDoubleClicked(EA.Repository repository, string tabName, string lineText, long id) { }
 
         /// <summary>
         /// The EA_ShowHelp event enables the Add-In to show a help topic for a particular menu option. When the user has an Add-In menu option selected, pressing [F1] can be delegated to the required Help topic by the Add-In and a suitable help message shown.
@@ -573,9 +573,9 @@ namespace EAAddinFramework
         /// EA_OnPostInitialized notifies Add-Ins that the rep object has finished loading and any necessary initialization steps can now be performed on the object.
         /// For example, the Add-In can create an Output tab using rep.CreateOutputTab.
         /// </summary>
-        /// <param name="Repository">An EA.rep object representing the currently open Enterprise Architect model.
+        /// <param name="repository">An EA.rep object representing the currently open Enterprise Architect model.
         /// Poll its members to retrieve model data and user interface status information.</param>
-        public virtual void EA_OnPostInitialized(EA.Repository Repository) { }
+        public virtual void EA_OnPostInitialized(EA.Repository repository) { }
 
         /// <summary>
         /// EA_OnPostTransform notifies Add-Ins that an MDG transformation has taken place with the output in the specified target package.
@@ -636,9 +636,9 @@ namespace EAAddinFramework
         /// This event occurs after a user has selected an item anywhere in the Enterprise Architect GUI. Add-Ins that require knowledge of the current item in context can subscribe to this broadcast function. If ot = otRepository, then this function behaves the same as EA_FileOpen.
         /// Also look at EA_OnContextItemDoubleClicked and EA_OnNotifyContextItemModified.
         /// </summary>
-        /// <param name="Repository">An EA.rep object representing the currently open Enterprise Architect model.
+        /// <param name="repository">An EA.rep object representing the currently open Enterprise Architect model.
         /// Poll its members to retrieve model data and user interface status information.</param>
-        /// <param name="GUID">Contains the GUID of the new context item. 
+        /// <param name="guid">Contains the GUID of the new context item. 
         /// This value corresponds to the following properties, depending on the value of the ot parameter:
         /// ot (ObjectType)	- GUID value
         /// otElement  		- Element.ElementGUID
@@ -650,7 +650,7 @@ namespace EAAddinFramework
         /// otRepository	- NOT APPLICABLE, GUID is an empty string
         /// </param>
         /// <param name="ot">Specifies the type of the new context item.</param>
-        public virtual void EA_OnContextItemChanged(EA.Repository Repository, string GUID, EA.ObjectType ot) { }
+        public virtual void EA_OnContextItemChanged(EA.Repository repository, string guid, EA.ObjectType ot) { }
 
         /// <summary>
         /// EA_OnContextItemDoubleClicked notifies Add-Ins that the user has double-clicked the item currently in context.
