@@ -1,9 +1,11 @@
 ﻿using System;
-using System.IO;
 using System.Windows.Forms;
+using EA;
 using hoTools.Settings;
 using hoTools.Utils.SQL;
 using EAAddinFramework.Utils;
+using File = System.IO.File;
+using System.Text.RegularExpressions;
 
 namespace hoTools.Query
 {
@@ -42,7 +44,8 @@ CTRL+S                          Store sql
 CTRL+SHFT+S                     Store sql All
 \\ Comment                      Just your comment as you may know from C, Java, C#,..
 <Search Term>                   Replaced by Text from the Search Text
-#Branch#                        Selected Package, Replaced by nested recursive as comma separated list of PackageIDs            
+#Branch#                        Selected Package, Replaced by nested recursive as comma separated list of PackageIDs    
+#Branch={....guid...}#          Package according to GUID, Replaced by nested recursive as comma separated list of PackageIDs                    
 #ConnectorID#                  Selected Connector, Replaced by ConnectorID
 #ConveyedItemsIDS#             Selected Connector, Replaced by the Conveyed Items as comma separated list of ElementIDs
 #CurrentElementGUID#            Alias for #CurrentItemGUID# (EA compatibility)
@@ -368,6 +371,16 @@ Useful to quickly test:
             };
             insertBranchMenuItem.Click += insertTemplate_Click;
 
+            // Insert Branch for constant package
+            id = SqlTemplates.SqlTemplateId.BranchIdsConstantPackage;
+            ToolStripMenuItem insertBranchConstantPackageMenuItem = new ToolStripMenuItem
+            {
+                Text = @"Insert " + SqlTemplates.GetTemplateText(id),
+                ToolTipText = SqlTemplates.GetTooltip(id),
+                Tag = SqlTemplates.GetTemplate(id)
+            };
+            insertBranchConstantPackageMenuItem.Click += insertTemplate_Click;
+
             // Insert InBranch
             id = SqlTemplates.SqlTemplateId.InBranchIds;
             ToolStripMenuItem insertInBranchMenuItem = new ToolStripMenuItem
@@ -485,6 +498,7 @@ Useful to quickly test:
                 new ToolStripSeparator(),
                 insertPackageMenuItem,
                 insertBranchMenuItem,
+                insertBranchConstantPackageMenuItem,
                 new ToolStripSeparator(),
                 insertCurrentIdMenuItem,
                 insertCurrentGuidMenuItem,
@@ -941,6 +955,12 @@ Useful to quickly test:
             string file = historyFile.FullName;
             LoadTabPageFromFile(tabPage, file);
         }
+        /// <summary>
+        /// Inserts the selected macro at the cursor position or replace the selected text by the macro. 
+        /// The template is identified by the .Tag property of the menuItem passed by the sender parameter.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void insertTemplate_Click(object sender, EventArgs e)
         {
             // get TabPage
@@ -953,10 +973,24 @@ Useful to quickly test:
             // get the template to insert text
             ToolStripMenuItem menuItem = (ToolStripMenuItem)sender;
             SqlTemplate template = (SqlTemplate)menuItem.Tag;
+            var templateText = template.TemplateText;
+
+            EA.ObjectType objectType = _model.Repository.GetContextItemType();
+            // #Branch={...guid...}#
+            if (objectType == ObjectType.otPackage &&
+                template == SqlTemplates.GetTemplate(SqlTemplates.SqlTemplateId.BranchIdsConstantPackage))
+            {
+                // get package GUID
+                string guid = ((EA.Package)_model.Repository.GetContextObject()).PackageGUID;
+                // replace {.....} by guid
+                Regex pattern = new Regex(@"={[^}]*}");
+                templateText = pattern.Replace(templateText, $"={guid}");
+            }
+            
 
 
             // insert text and replace a selected range
-            var templateText = template.TemplateText;
+
             int iSelectionStart = textBox.SelectionStart;
             string sBefore = textBox.Text.Substring(0, iSelectionStart);
             string sAfter = textBox.Text.Substring(iSelectionStart + textBox.SelectionLength);

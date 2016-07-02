@@ -636,7 +636,7 @@ namespace EAAddinFramework.Utils
                 repositoryType == RepositoryType.Firebird ||
                 repositoryType == RepositoryType.Postgres)
             {
-                formattedSql = formattedSql.Replace("lcase(", "lower(");
+                formattedSql = formattedSql.Replace(@"lcase(", "lower(");
             }
             return formattedSql;
         }
@@ -682,8 +682,8 @@ namespace EAAddinFramework.Utils
                             // find where clause
                             string whereString = "where ";
                             int beginWhere = formattedQuery.ToLower().IndexOf(whereString, StringComparison.CurrentCulture);
-                            string rowcountCondition = "rownum <= " + N + " and ";
-                            // add the rowcount condition
+                            string rowcountCondition = @"rownum <= " + N + " and ";
+                            // add the row count condition
                             formattedQuery = formattedQuery.Insert(beginWhere + whereString.Length, rowcountCondition);
                             break;
                         case RepositoryType.MySql:
@@ -840,13 +840,13 @@ namespace EAAddinFramework.Utils
                     {
                         switch (subNode.Name.ToLower())
                         {
-                            case "docid":
+                            case @"docid":
                                 id = subNode.InnerText;
                                 break;
-                            case "docname":
+                            case @"docname":
                                 name = subNode.InnerText;
                                 break;
-                            case "author":
+                            case @"author":
                                 ownerFullName = subNode.InnerText;
                                 break;
                         }
@@ -879,13 +879,13 @@ namespace EAAddinFramework.Utils
                         {
                             switch (subNode.Name.ToLower())
                             {
-                                case "userlogin":
+                                case @"userlogin":
                                     login = subNode.InnerText;
                                     break;
-                                case "firstname":
+                                case @"firstname":
                                     firstName = subNode.InnerText;
                                     break;
-                                case "surname":
+                                case @"surname":
                                     lastName = subNode.InnerText;
                                     break;
                             }

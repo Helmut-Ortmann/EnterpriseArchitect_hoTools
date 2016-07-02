@@ -102,7 +102,8 @@ ORDER BY pkg.Name
                 new SqlTemplate("Macros help",
                 "//\r\n" +
                 "// Help to available Macros\r\n" +
-                "// - #Branch#                    Replaced by the package ID of the selected package and all nested package like '512, 31,613' \r\n" +
+                "// - #Branch#                    Replaced by the package ID of the selected package and all nested package like '512, 31,613' \r\nTip: Select Package while inserting via Macro" +
+                "// - #Branch={...guid....}#      Replaced by the package ID of the package according to GUID and all nested package like '512, 31,613' \r\n" +
                 "// - #ConnectorID#              Selected Connector, Replaced by ConnectorID\r\n" +
                 "// - #ConveyedItemIDS#           Selected Connector, Replaced by the Conveyed Items as comma separated list of ElementIDs like ' IN (#ConveyedItemIDS#)'\r\n" +
                 "// - #CurrentElementGUID#        Alias for #CurrentItemGUID# (compatible to EA)\r\n" +
@@ -273,6 +274,15 @@ ORDER BY 3",
                 new SqlTemplate("BRANCH_IDS",
                     "#Branch#",
                     "Placeholder for the current selected package (recursive), use as PackageID\nExample: pkg.Package_ID in (#Branch#)\nExpands to in '512,513,..' ")  },
+             { SqlTemplateId.BranchIdsConstantPackage,
+                new SqlTemplate("BRANCH_IDS_CONSTANT_PACKAGE",
+                    "#Branch={....guid...}#",
+                    @"Placeholder for the package (recursive) for the used guid, use as PackageID
+Example: pkg.Package_ID in (#Branch={....guid...0#)\nExpands to in '512,513,..' 
+
+Tip: Select Package while inserting in SQL via Insert Macro in Context Menu"
+)  },
+
             { SqlTemplateId.InBranchIds,
                 new SqlTemplate("IN_BRANCH_IDS",
                     "#InBranch#",
@@ -398,6 +408,7 @@ ORDER BY 3",
             PackageId,      // The containing package of Package, Diagram, Element, Attribute, Operation
             Package,         // The containing package of Package, Diagram, Element, Attribute, Operation (compatible with EA)
             BranchIds,     // Package (nested, recursive) ids separated by ','  like '20,21,47,1'
+            BranchIdsConstantPackage, // Package (nested, recursive) for the package defined by the GUID, ids separated by ','  like '20,21,47,1'
             InBranchIds,  // Package (nested, recursive), complete SQL in clause, ids separated by ','  like 'IN (20,21,47,1)', just a shortcut for #BRANCH_ID#
             CurrentItemId,     // ALIAS CURRENT_ELEMENT_ID exists (compatible to EA)
             CurrentItemIdTemplate,   // Template for usage of #CurrentItemId#
@@ -547,8 +558,12 @@ ORDER BY 3",
             sql = MacroTreeSelected(rep, sql);
             if (sql == "") return "";
 
-            // replace #TreeSelectedGUIDS#
+            // replace #Branch#
             sql = MacroBranch(rep, sql);
+            if (sql == "") return "";
+
+            // replace #Branch={...guid....}# by a list of nested packages
+            sql = MacroBranchConstant(rep, sql);
             if (sql == "") return "";
 
 
@@ -1004,7 +1019,7 @@ ORDER BY 3",
         }
 
         /// <summary>
-        /// Replace macro #Branch# an #InBranch# by IDs of selected packages, recursive nested 
+        /// Replace macro #Branch# and #InBranch# by IDs of selected packages, recursive nested. 
         /// </summary>
         /// <param name="rep"></param>
         /// <param name="sql">The sql string to replace the macro by the found ID</param>
@@ -1018,6 +1033,8 @@ ORDER BY 3",
         // IN (7,29,128)
             string currentBranchTemplate = GetTemplateText(SqlTemplateId.BranchIds);
             string currrentInBranchTemplate = GetTemplateText(SqlTemplateId.InBranchIds);
+
+            
             if (sql.Contains(currentBranchTemplate) | sql.Contains(currrentInBranchTemplate))
             {
                 ObjectType objectType = rep.GetContextItemType();
@@ -1051,6 +1068,107 @@ ORDER BY 3",
                 {
                     MessageBox.Show(sql, @"No element, diagram or package selected!");
                     sql =  "";
+                }
+            }
+            return sql;
+        }
+        /// <summary>
+        /// Replace macro '#Branch={...guid...}#' by ids of the package referenced by GUID. It selects all nested packages recursive. 
+        /// <para />
+        /// Usage: '#Branch={2BC1A31E-0F99-40CE-BE76-04E7DCEDDD87}#' is replaced by a comma separated list of the package and its recursive nested packages.
+        /// <para /> 
+        /// Result:    6,28,5,20147
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <param name="sql"></param>
+        /// <returns></returns>
+        static string MacroBranchConstant(Repository rep, string sql)
+        {
+            foreach (SqlTemplateId id in new SqlTemplateId[]
+            {
+                SqlTemplateId.BranchIds,
+                SqlTemplateId.InBranchIds
+            })
+            {
+                string branchPattern = GetTemplateText(id);
+                branchPattern = branchPattern.Remove(branchPattern.Length - 1);
+                branchPattern = branchPattern + @"=({[ABCDEF0-9-]*})#";
+                Regex pattern = new Regex(branchPattern, RegexOptions.IgnoreCase);
+                MatchCollection matches = pattern.Matches(sql);
+                if (matches.Count > 0)
+                {
+                    foreach (Match match in matches)
+                    {
+                        // get Package id
+                        EA.Package pkg = rep.GetPackageByGuid(match.Groups[1].Value);
+                        if (pkg == null)
+                        {
+                            MessageBox.Show($"Package for GUID '{match.Groups[1].Value}' not found",
+                                @"GUID for #Branch={...}# not found, Break");
+                            {
+                                return "";
+                            }
+                        }
+                        int pkgId = pkg.PackageID;
+                        string branch = Package.GetBranch(rep, "", pkgId);
+                        sql = sql.Replace(match.Groups[0].Value, branch);
+                    }
+                }
+            }
+            return sql;
+        }
+
+        /// <summary>
+        /// Replace macro #Branch={..guid..}# and #InBranch={..guid..}# by IDs of selected packages, recursive nested. 
+        /// It uses the package of the guid and not of the selected Package
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <param name="sql">The sql string to replace the macro by the found ID</param>
+        /// <returns>sql string with replaced macro</returns>
+        static string MacroBranchConstantPackage(Repository rep, string sql)
+        {
+            // Branch=comma separated Package IDs, Recursive:
+            // Example for 3 Packages with their PackageID 7,29,128
+            // 7,29,128
+            //
+            // Branch: complete SQL IN statement ' IN (comma separated Package IDs, Recursive):
+            // IN (7,29,128)
+            string currentBranchTemplate = GetTemplateText(SqlTemplateId.BranchIds);
+            string currrentInBranchTemplate = GetTemplateText(SqlTemplateId.InBranchIds);
+            if (sql.Contains(currentBranchTemplate) | sql.Contains(currrentInBranchTemplate))
+            {
+                ObjectType objectType = rep.GetContextItemType();
+                int id = 0;
+                switch (objectType)
+                {
+                    // use Package of diagram
+                    case ObjectType.otDiagram:
+                        Diagram dia = (Diagram)rep.GetContextObject();
+                        id = dia.PackageID;
+                        break;
+                    // use Package of element
+                    case ObjectType.otElement:
+                        EA.Element el = (EA.Element)rep.GetContextObject();
+                        id = el.PackageID;
+                        break;
+                    case ObjectType.otPackage:
+                        EA.Package pkg = (EA.Package)rep.GetContextObject();
+                        id = pkg.PackageID;
+                        break;
+                }
+                // Context element available
+                if (id > 0)
+                {
+                    // get package recursive
+                    string branch = Package.GetBranch(rep, "", id);
+                    sql = sql.Replace(currentBranchTemplate, branch);
+                    sql = sql.Replace(currrentInBranchTemplate, branch);
+                }
+                else
+                // no diagram, element or package selected
+                {
+                    MessageBox.Show(sql, @"No element, diagram or package selected!");
+                    sql = "";
                 }
             }
             return sql;

@@ -503,9 +503,9 @@ namespace hoTools
         /// <para/>- RELEASE  AppData\Local\Apps\hoTools\
         /// 
         /// </summary>
-        /// <param name="repository"></param>
+        /// <param name="Repository"></param>
         /// <returns></returns>
-        public override object EA_OnInitializeTechnologies(EA.Repository repository) {
+        public override object EA_OnInitializeTechnologies(EA.Repository Repository) {
            
 
             string fileNameMdg;
