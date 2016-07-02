@@ -15,7 +15,7 @@ Collection of useful tools (see also [WiKi](https://github.com/Helmut-Ortmann/En
 - [SQL](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/SQL) with tabbed Windows
     -- Select, Insert, Delete, Update
     -- Templates
-    -- Macros (easy access to EA, a lot more than EA delivers)
+    -- Macros (easy access to EA items / Packages or complete Branches, a lot more than EA delivers)
     -- See error
     -- Conveyed Items
     -- *.sql files in file system (you may use favourite Editor)
@@ -82,8 +82,9 @@ Some features:
 - See also: [Installation](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/Installation)
 
 # Scheduled (release 2.0.3)
-- Lock/Unlock Element/Diagram/Package
-- SQL with macro #Branch=guidPackage# (select the package by GUID, not the selected one)
+- Lock/Unlock (with/without package recursive) Element/Diagram/Package
+- SQL with macro #Branch=guidPackage# (select the package you want the branch by GUID, not the selected one)
+  - Help function to get the current Package GUID to easily insert in SQL
 - Help / Documentation
  - Improved help for Toolbar Buttons
  - Use advanced [SQL](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/SQL) everywhere in hoTools

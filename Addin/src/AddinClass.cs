@@ -53,18 +53,22 @@ namespace hoTools
     {
         // Overwritten by AdinClass AssemblyFileVersion
         // This should be identical to installed product version from WIX installer (ProductVersion)
-        string release = "X.X.XXX.XX"; // Major, Minor, Build, free,
+        string _release = "X.X.XXX.XX"; // Major, Minor, Build, free,
 
 
-        HoToolsGlobalCfg _globalCfg;
-                                           
         // static due to global key definitions
-        static EA.Repository Repository ;
-        static AddinSettings AddinSettings;
-        static AddinControlGui AddinControlGUI;
-        static FindAndReplaceGUI FindAndReplaceGUI;
-        static QueryGui ScriptGUI;
-        static QueryGui QueryGUI;
+        // ReSharper disable once InconsistentNaming
+        static EA.Repository _Repository ;
+        // ReSharper disable once InconsistentNaming
+        static AddinSettings _AddinSettings;
+        // ReSharper disable once InconsistentNaming
+        static AddinControlGui _AddinControlGui;
+        // ReSharper disable once InconsistentNaming
+        static FindAndReplaceGUI _FindAndReplaceGUI;
+        // ReSharper disable once InconsistentNaming
+        static QueryGui _ScriptGUI;
+        // ReSharper disable once InconsistentNaming
+        static QueryGui _QueryGUI;
 
         // ActiveX Controls
         AddinControlGui _myControlGui;
@@ -73,67 +77,62 @@ namespace hoTools
         QueryGui _queryGui;
 
         // settings
-        readonly AddinSettings _AddinSettings;
+        readonly AddinSettings _addinSettings;
  
 
         EA.Repository _repository;
         // define menu constants
-        const string menuName = "-hoTools";
+        const string MenuName = "-hoTools";
 
-        const string menuShowWindow = "Show Window";
-        const string menuChangeXmlFile = "Change *.xml file for a version controlled package";
+        const string MenuShowWindow = "Show Window";
+        const string MenuChangeXmlFile = "Change *.xml file for a version controlled package";
 
-        const string menuDisplayBehavior = "Display Behavior";
-        const string menuDisplayMethodDefinition = "Locate Operation";
-        const string menuLocateType = "Locate Type";
-        const string menuLocateCompositeElementorDiagram = "Locate CompositeElementOfDiagram";
-        const string menuLocateCompositeDiagramOfElement = "Locate CompositeDiagramOfElement";
-        const string menuShowSpecification = "Show Specification";
-        const string menuUnlockDiagram = "UnlockDiagram";
+        const string MenuDisplayBehavior = "Display Behavior";
+        const string MenuDisplayMethodDefinition = "Locate Operation";
+        const string MenuLocateType = "Locate Type";
+        const string MenuLocateCompositeElementorDiagram = "Locate CompositeElementOfDiagram";
+        const string MenuLocateCompositeDiagramOfElement = "Locate CompositeDiagramOfElement";
+        const string MenuShowSpecification = "Show Specification";
+        const string MenuUnlockDiagram = "UnlockDiagram";
 
-        const string menuDeviderLineStyleDia = "---------------Line style Diagram-----------------";
-        const string menuLineStyleDiaLH = "Line Style Diagram (Object): Lateral Horizontal";
-        const string menuLineStyleDiaLV = "Line Style Diagram (Object): Lateral Vertical";
-        const string menuLineStyleDiaTH = "Line Style Diagram (Object): Tree Horizontal";
-        const string menuLineStyleDiaTV = "Line Style Diagram (Object): Tree Vertical";
-        const string menuLineStyleDiaOS = "Line Style Diagram (Object): Orthogonal Square";
+        const string MenuDeviderLineStyleDia = "---------------Line style Diagram-----------------";
+        const string MenuLineStyleDiaLh = "Line Style Diagram (Object): Lateral Horizontal";
+        const string MenuLineStyleDiaLv = "Line Style Diagram (Object): Lateral Vertical";
+        const string MenuLineStyleDiaTh = "Line Style Diagram (Object): Tree Horizontal";
+        const string MenuLineStyleDiaTv = "Line Style Diagram (Object): Tree Vertical";
+        const string MenuLineStyleDiaOs = "Line Style Diagram (Object): Orthogonal Square";
 
-        const string menuDeviderActivity = "-------------Create Activity for Operation ---------------------------";
-        const string menuCreateActivityForOperation = "Create Activity for Operation (select operation or class)";
-        const string menuUpdateOperationParameter = "Update Operation Parameter for Activity (select Package(recursive), Activity, Class, Interface or Operation)";
-        const string menuUpdateActionPin = "Update Action Pin for Package (recursive)";
+        const string MenuDeviderActivity = "-------------Create Activity for Operation ---------------------------";
+        const string MenuCreateActivityForOperation = "Create Activity for Operation (select operation or class)";
+        const string MenuUpdateOperationParameter = "Update Operation Parameter for Activity (select Package(recursive), Activity, Class, Interface or Operation)";
+        const string MenuUpdateActionPin = "Update Action Pin for Package (recursive)";
 
-        const string menuDeviderInteraction = "-------------Create Interaction for Operation ---------------------------";
-        const string menuCreateInteractionForOperation = "&Create Interaction for Operation (select operation or class)  ";
+        const string MenuDeviderInteraction = "-------------Create Interaction for Operation ---------------------------";
+        const string MenuCreateInteractionForOperation = "&Create Interaction for Operation (select operation or class)  ";
 
-        const string menuDeviderStateMachine = "-------------Create State Machine for Operation ---------------------------";
-        const string menuCreateStateMachineForOperation = "&Create State Machine for Operation (select operation)  ";
-
-
-        const string menuCorrectTypes = "-------------Correct Type ---------------------------";
-        const string menuCorrectType = "Correct types of Attribute, Function (selected Attribute, Function, Class or Package)";
-
-        const string menuDeviderCopyPast = "-------------Move links---------------------------"; 
-        const string menuCopyGUIDToClipboard = "Copy GUID / Select Statement to Clipboard";
-        const string menuCopyLinksToClipboard = "Copy Links to Clipboard";
-        const string menuPasteLinksFromClipboard = "Paste Links from Clipboard";
-
-        const string menuDeviderNote = "-------------Note      ---------------------------"; 
-        const string menuAddLinkedNote = "Add linked Note";
-        const string menuAddLinkedDiagramNote = "Add linked Diagram Note";
-
-        const string menuUsage = "Find Usage";
-        const string menuAbout = "About + Help";
-
-        const string menuDevider = "-----------------------------------------------"; 
+        const string MenuDeviderStateMachine = "-------------Create State Machine for Operation ---------------------------";
+        const string MenuCreateStateMachineForOperation = "&Create State Machine for Operation (select operation)  ";
 
 
-        public enum displayMode
-        {
-            Behavior,
-            Method
-        }
+        const string MenuCorrectTypes = "-------------Correct Type ---------------------------";
+        const string MenuCorrectType = "Correct types of Attribute, Function (selected Attribute, Function, Class or Package)";
 
+        const string MenuDeviderCopyPast = "-------------Move links---------------------------"; 
+        const string MenuCopyGuidToClipboard = "Copy GUID / Select Statement to Clipboard";
+        const string MenuCopyLinksToClipboard = "Copy Links to Clipboard";
+        const string MenuPasteLinksFromClipboard = "Paste Links from Clipboard";
+
+        const string MenuDeviderNote = "-------------Note      ---------------------------"; 
+        const string MenuAddLinkedNote = "Add linked Note";
+        const string MenuAddLinkedDiagramNote = "Add linked Diagram Note";
+
+        const string MenuUsage = "Find Usage";
+        const string MenuAbout = "About + Help";
+
+        const string MenuDevider = "-----------------------------------------------"; 
+
+
+       
         #region Constructor
         /// <summary>
         /// Constructor: Reade settings, set the menu header and menuOptions
@@ -148,8 +147,8 @@ namespace hoTools
                 //string s = $"0:AddinConstructor {DateTime.Now}";
                 //System.IO.File.WriteAllText(@"D:\temp\AddinClass.log", s);
 
-                _AddinSettings = new AddinSettings();
-                AddinSettings = _AddinSettings; // static
+                _addinSettings = new AddinSettings();
+                _AddinSettings = _addinSettings; // static
 
                
 
@@ -159,38 +158,38 @@ namespace hoTools
                 MessageBox.Show($"Error setup 'hoTools' Addin. Error:\n\n{e}", @"hoTools Installation error");
             }
             // global configuration parameters independent from EA-Instance and used by services
-            _globalCfg = HoToolsGlobalCfg.Instance;
-            _globalCfg.SetSqlPaths(_AddinSettings.SqlPaths);
+            var globalCfg = HoToolsGlobalCfg.Instance;
+            globalCfg.SetSqlPaths(_addinSettings.SqlPaths);
 
-            this.MenuHeader = "-" + _AddinSettings.ProductName;
+            this.MenuHeader = "-" + _addinSettings.ProductName;
             this.menuOptions = new string[] { 
                 //-------------------------- General  --------------------------//
                 //    menuLocateCompositeElementorDiagram,
                 //-------------------------- LineStyle --------------------------//
                                         
                 //-------------------------- Activity --------------------------//
-                menuDeviderActivity,
-                menuCreateActivityForOperation, menuUpdateOperationParameter, 
+                MenuDeviderActivity,
+                MenuCreateActivityForOperation, MenuUpdateOperationParameter, 
                 //menuUpdateActionPin,
                 //-------------------------- Interaction --------------------------//
-                menuDeviderInteraction,
-                menuCreateInteractionForOperation,
+                MenuDeviderInteraction,
+                MenuCreateInteractionForOperation,
                 //-------------------------- Interaction --------------------------//
-                menuDeviderStateMachine,
-                menuCreateStateMachineForOperation,
+                MenuDeviderStateMachine,
+                MenuCreateStateMachineForOperation,
                 //-------------------------- Correct Types ------------------------//
                 //menuCorrectTypes, menuCorrectType, 
                 //-------------------------- Add Note -----------------------------//
-                menuDeviderNote,
-                menuAddLinkedNote,menuAddLinkedDiagramNote,
+                MenuDeviderNote,
+                MenuAddLinkedNote,MenuAddLinkedDiagramNote,
 
                 //-------------------------- Move links ---------------------------//
-                menuDeviderCopyPast,
-                menuChangeXmlFile,menuCopyLinksToClipboard, menuPasteLinksFromClipboard, 
+                MenuDeviderCopyPast,
+                MenuChangeXmlFile,MenuCopyLinksToClipboard, MenuPasteLinksFromClipboard, 
 
-                menuShowWindow,    
+                MenuShowWindow,    
                 //---------------------------- About -------------------------------//
-                menuDevider, menuAbout };
+                MenuDevider, MenuAbout };
         }
         #endregion
 
@@ -213,9 +212,9 @@ namespace hoTools
                 Modifiers modifier3;
                 Modifiers modifier4;
 
-                for (int i = 0; i < AddinSettings.GlobalShortcutsService.Count; i = i + 1)
+                for (int i = 0; i < _AddinSettings.GlobalShortcutsService.Count; i = i + 1)
                 {
-                    GlobalKeysConfig.GlobalKeysSearchConfig search = AddinSettings.GlobalShortcutsSearch[i];
+                    GlobalKeysConfig.GlobalKeysSearchConfig search = _AddinSettings.GlobalShortcutsSearch[i];
                     if (search.Key != "None" & search.SearchName != "")
                     {
                         keys.TryGetValue(search.Key, out key);
@@ -244,9 +243,9 @@ namespace hoTools
                     }
 
                 }
-                for (int i = 0; i < AddinSettings.GlobalShortcutsService.Count; i = i + 1)
+                for (int i = 0; i < _AddinSettings.GlobalShortcutsService.Count; i = i + 1)
                 {
-                    GlobalKeysConfig.GlobalKeysServiceConfig service = AddinSettings.GlobalShortcutsService[i];
+                    GlobalKeysConfig.GlobalKeysServiceConfig service = _AddinSettings.GlobalShortcutsService[i];
                     if (service.Key != "None" & service.Guid != "")
                     {
                         keys.TryGetValue(service.Key, out key);
@@ -278,14 +277,14 @@ namespace hoTools
                 Form hotkeyForm = new InvisibleHotKeyForm(hotkeys);
                 hotkeyForm.Show();
             }
-            public static void runGlobalKeySearch(int pos)
+            public static void RunGlobalKeySearch(int pos)
             {
                 
-                    GlobalKeysConfig.GlobalKeysSearchConfig sh = AddinSettings.GlobalShortcutsSearch[pos];
+                    GlobalKeysConfig.GlobalKeysSearchConfig sh = _AddinSettings.GlobalShortcutsSearch[pos];
                     if (sh.SearchName == "") return;
                     try
                     {
-                        Repository.RunModelSearch(sh.SearchName, sh.SearchTerm, "", "");
+                        _Repository.RunModelSearch(sh.SearchName, sh.SearchTerm, "", "");
                     }
                     catch (Exception e)
                     {
@@ -293,52 +292,52 @@ namespace hoTools
                            " " + sh.SearchTerm + "'");
                     }
             }
-            public static void runGlobalKeyService(int pos)
+            public static void RunGlobalKeyService(int pos)
             {
-                GlobalKeysConfig.GlobalKeysServiceConfig sh = AddinSettings.GlobalShortcutsService[pos];
+                GlobalKeysConfig.GlobalKeysServiceConfig sh = _AddinSettings.GlobalShortcutsService[pos];
                     if (sh.Method == null) return;
-                    sh.Invoke(Repository, AddinControlGUI.GetText());
+                    sh.Invoke(_Repository, _AddinControlGui.GetText());
             }
 
             private static void HandleGlobalKeySearch0()
             {
-                runGlobalKeySearch(0); 
+                RunGlobalKeySearch(0); 
             }
             private static void HandleGlobalKeySearch1()
             {
-                runGlobalKeySearch(1);
+                RunGlobalKeySearch(1);
             }
             private static void HandleGlobalKeySearch2()
             {
-                runGlobalKeySearch(2);
+                RunGlobalKeySearch(2);
             }
             private static void HandleGlobalKeySearch3()
             {
-                runGlobalKeySearch(3);
+                RunGlobalKeySearch(3);
             }
             private static void HandleGlobalKeySearch4()
             {
-                runGlobalKeySearch(4);
+                RunGlobalKeySearch(4);
             }
             private static void HandleGlobalKeyService0()
             {
-                runGlobalKeyService(0);
+                RunGlobalKeyService(0);
             }
             private static void HandleGlobalKeyService1()
             {
-                runGlobalKeyService(1);
+                RunGlobalKeyService(1);
             }
             private static void HandleGlobalKeyService2()
             {
-                runGlobalKeyService(2);
+                RunGlobalKeyService(2);
             }
             private static void HandleGlobalKeyService3()
             {
-                runGlobalKeyService(3);
+                RunGlobalKeyService(3);
             }
             private static void HandleGlobalKeyService4()
             {
-                runGlobalKeyService(4);
+                RunGlobalKeyService(4);
             }
                       
         }
@@ -351,7 +350,7 @@ namespace hoTools
         /// called when the selected item changes
         /// This operation will show the guid of the selected element in the eaControl
         /// </summary>
-        /// <param name="Repository">the EA.Repository</param>
+        /// <param name="Repository">the EA.rep</param>
         /// <param name="GUID">the guid of the selected item</param>
         /// <param name="ot">the object type of the selected item</param>
         public override void EA_OnContextItemChanged(EA.Repository Repository, string GUID, EA.ObjectType ot)
@@ -368,16 +367,16 @@ namespace hoTools
         {
             // gets the file 'AssemblyFileVersion' of file AddinClass.dll
             string productVersion = FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).ProductVersion;
-            release = productVersion;
-            AddinClass.Repository = Repository;
+            _release = productVersion;
+            AddinClass._Repository = Repository;
             _repository = Repository;
             ShowAddinControlWindows();
         }
         #endregion
         #region EA_OnPostNewConnector
-        public override bool EA_OnPostNewConnector(EA.Repository Repository, EA.EventProperties Info)
+        public override bool EA_OnPostNewConnector(EA.Repository rep, EA.EventProperties info)
         {
-            EA.EventProperty eventProperty = Info.Get(0);
+            EA.EventProperty eventProperty = info.Get(0);
             var s = (string)eventProperty.Value;
 
             // check if it is a diagram
@@ -389,38 +388,38 @@ namespace hoTools
 
 
             
-            EA.Diagram dia = Repository.GetCurrentDiagram();
+            EA.Diagram dia = rep.GetCurrentDiagram();
             if (dia == null) return false; // e.g. Matrix has a diagramm id but no diagram object
             switch (dia.Type)
             {
                 case "Activity":
-                    return updateLineStyle(Repository, dia, connectorId, _AddinSettings.ActivityLineStyle.Substring(0, 2));
+                    return UpdateLineStyle(rep, dia, connectorId, _addinSettings.ActivityLineStyle.Substring(0, 2));
 
 
                 case "Statechart":
-                    return updateLineStyle(Repository, dia, connectorId, _AddinSettings.StatechartLineStyle.Substring(0, 2));
+                    return UpdateLineStyle(rep, dia, connectorId, _addinSettings.StatechartLineStyle.Substring(0, 2));
 
                 case "Logical":
-                    return updateLineStyle(Repository, dia, connectorId, _AddinSettings.ClassLineStyle.Substring(0, 2));
+                    return UpdateLineStyle(rep, dia, connectorId, _addinSettings.ClassLineStyle.Substring(0, 2));
 
 
                 case "Custom":
-                    return updateLineStyle(Repository, dia, connectorId, _AddinSettings.CustomLineStyle.Substring(0, 2));
+                    return UpdateLineStyle(rep, dia, connectorId, _addinSettings.CustomLineStyle.Substring(0, 2));
 
                 case "Component":
-                    return updateLineStyle(Repository, dia, connectorId, _AddinSettings.ComponentLineStyle.Substring(0, 2));
+                    return UpdateLineStyle(rep, dia, connectorId, _addinSettings.ComponentLineStyle.Substring(0, 2));
 
                 case "Deployment":
-                    return updateLineStyle(Repository, dia, connectorId, _AddinSettings.DeploymentLineStyle.Substring(0, 2));
+                    return UpdateLineStyle(rep, dia, connectorId, _addinSettings.DeploymentLineStyle.Substring(0, 2));
 
                 case "Package":
-                    return updateLineStyle(Repository, dia, connectorId, _AddinSettings.PackageLineStyle.Substring(0, 2));
+                    return UpdateLineStyle(rep, dia, connectorId, _addinSettings.PackageLineStyle.Substring(0, 2));
 
                 case "Use Case":
-                    return updateLineStyle(Repository, dia, connectorId, _AddinSettings.UseCaseLineStyle.Substring(0, 2));
+                    return UpdateLineStyle(rep, dia, connectorId, _addinSettings.UseCaseLineStyle.Substring(0, 2));
 
                 case "CompositeStructure":
-                    return updateLineStyle(Repository, dia, connectorId, _AddinSettings.CompositeStructureLineStyle.Substring(0, 2));
+                    return UpdateLineStyle(rep, dia, connectorId, _addinSettings.CompositeStructureLineStyle.Substring(0, 2));
 
                 default:
                     return false;
@@ -435,11 +434,11 @@ namespace hoTools
         #region EA_Connect
         /// <summary>
         /// EA_Connect events enable Add-Ins to identify their type and to respond to Enterprise Architect start up.
-        /// This event occurs when Enterprise Architect first loads your Add-In. Enterprise Architect itself is loading at this time so that while a Repository object is supplied, there is limited information that you can extract from it.
+        /// This event occurs when Enterprise Architect first loads your Add-In. Enterprise Architect itself is loading at this time so that while a rep object is supplied, there is limited information that you can extract from it.
         /// The chief uses for EA_Connect are in initializing global Add-In data and for identifying the Add-In as an MDG Add-In.
         /// Also look at EA_Disconnect.
         /// </summary>
-        /// <param name="Repository">An EA.Repository object representing the currently open Enterprise Architect model.
+        /// <param name="Repository">An EA.rep object representing the currently open Enterprise Architect model.
         /// Poll its members to retrieve model data and user interface status information.</param>
         /// <returns>String identifying a specialized type of Add-In: 
         /// - "MDG" : MDG Add-Ins receive MDG Events and extra menu options.
@@ -447,12 +446,11 @@ namespace hoTools
         public override string EA_Connect(EA.Repository Repository)
         {
             // register only if configured
-            if (AddinSettings.IsShortKeySupport) HotkeyHandlers.SetupGlobalHotkeys();
+            if (_AddinSettings.IsShortKeySupport) HotkeyHandlers.SetupGlobalHotkeys();
             _repository = Repository;
-            int v = Repository.LibraryVersion;
             if (Repository.IsSecurityEnabled)
             {
-                //logInUser = Repository.GetCurrentLoginUser(false);
+                //logInUser = rep.GetCurrentLoginUser(false);
                 //if ((logInUser.Contains("ho")) ||
                 //     (logInUser.Contains("admin")) ||
                 //     (logInUser.Equals(""))
@@ -462,14 +460,16 @@ namespace hoTools
             return "a string";
         }
         #endregion
+        // ReSharper disable once InconsistentNaming
         public override void EA_FileOpen(EA.Repository Repository)
         {
-            initializeForRepository(Repository);
+            InitializeForRepository(Repository);
         }
+        // ReSharper disable once InconsistentNaming
         public override void EA_FileClose(EA.Repository Repository)
         {
             if (_myControlGui != null)  _myControlGui.Save(); // save settings
-            initializeForRepository(null);
+            InitializeForRepository(null);
 
 
         }
@@ -478,37 +478,38 @@ namespace hoTools
         /// <summary>
         /// Called when EA start model validation. Just shows a message box
         /// </summary>
-        /// <param name="Repository">the Repository</param>
+        /// <param name="Repository">the rep</param>
         /// <param name="Args">the arguments</param>
+        // ReSharper disable once InconsistentNaming
         public override void EA_OnStartValidation(EA.Repository Repository, object Args)
         {
-            MessageBox.Show("Validation started");
+            MessageBox.Show(@"Validation started");
         }
         /// <summary>
         /// Called when EA ends model validation. Just shows a message box
         /// </summary>
-        /// <param name="Repository">the Repository</param>
+        /// <param name="Repository">the rep</param>
         /// <param name="Args">the arguments</param>
         public override void EA_OnEndValidation(EA.Repository Repository, object Args)
         {
-            MessageBox.Show("Validation ended");
+            MessageBox.Show(@"Validation ended");
         }
         #endregion
         #region EA Technology Events
         /// <summary>
-        /// Returns xml string for MDG to load. Possible values: Basic, Compilation, No). See AddinSettings.AutoLoadMdgXml.
+        /// Returns xml string for MDG to load. Possible values: Basic, Compilation, No). See _AddinSettings.AutoLoadMdgXml.
         /// It loads the *.xml from the *.dll install directory
         /// <para/>- DEBUG  Addin\bin\debug\
         /// <para/>- RELEASE  AppData\Local\Apps\hoTools\
         /// 
         /// </summary>
-        /// <param name="Repository"></param>
+        /// <param name="repository"></param>
         /// <returns></returns>
-        public override object EA_OnInitializeTechnologies(EA.Repository Repository) {
+        public override object EA_OnInitializeTechnologies(EA.Repository repository) {
            
 
             string fileNameMdg;
-            switch (AddinSettings.AutoLoadMdgXml)
+            switch (_AddinSettings.AutoLoadMdgXml)
             {
                 case AddinSettings.AutoLoadMdg.Basic:
                     fileNameMdg = "hoToolsBasic.xml";
@@ -527,10 +528,10 @@ namespace hoTools
 
             try
             {
-                return System.IO.File.ReadAllText(combinedPathMdg);
+                return File.ReadAllText(combinedPathMdg);
             } catch (Exception e)
             {
-                MessageBox.Show($"MDG file='{combinedPathMdg}'\r\n{e.ToString()}", $"Can't load MDG '{fileNameMdg}'");
+                MessageBox.Show($"MDG file='{combinedPathMdg}'\r\n{e}", $"Can't load MDG '{fileNameMdg}'");
                 return "";
             } 
         }
@@ -541,10 +542,10 @@ namespace hoTools
         /// Initialize repositories for all EA hoTools Addin Tabulators
         /// </summary>
         /// <param name="rep"></param>
-        void initializeForRepository(EA.Repository rep)
+        void InitializeForRepository(EA.Repository rep)
         {
             _repository = rep;
-            Repository = rep;
+            _Repository = rep;
             try
             {
                 if (_myControlGui != null) _myControlGui.Repository = rep;
@@ -553,7 +554,7 @@ namespace hoTools
                 if (_queryGui != null) _queryGui.Repository = rep;
             } catch (Exception e)
             {
-                MessageBox.Show($"{e.Message}","hoTools: Error initializing Addin Tabs");
+                MessageBox.Show($"{e.Message}",@"hoTools: Error initializing Addin Tabs");
             }
 
 
@@ -561,12 +562,12 @@ namespace hoTools
         #endregion
 
         #region updateLineStyle
-        private bool updateLineStyle(EA.Repository rep, EA.Diagram dia, int connectorID, string style)
+        private bool UpdateLineStyle(EA.Repository rep, EA.Diagram dia, int connectorId, string style)
         {
             if (style.ToUpper() == "NO") return false;
             foreach (EA.DiagramLink link in dia.DiagramLinks)
             {
-                if (link.ConnectorID == connectorID)
+                if (link.ConnectorID == connectorId)
                 {
                     EaService.SetLineStyle(rep, style);
                     return true;
@@ -580,123 +581,130 @@ namespace hoTools
         /// <summary>
         /// Called once Menu has been opened to see what menu items should active.
         /// </summary>
-        /// <param name="Repository">the Repository</param>
+        /// <param name="Repository">the rep</param>
         /// <param name="MenuLocation">the location of the menu</param>
         /// <param name="MenuName">the name of the menu</param>
         /// <param name="ItemName">the name of the menu item</param>
         /// <param name="IsEnabled">boolean indicating whether the menu item is enabled</param>
         /// <param name="IsChecked">boolean indicating whether the menu is checked</param>
+        // ReSharper disable once InconsistentNaming
+        // ReSharper disable once InconsistentNaming
+        // ReSharper disable once ParameterHidesMember
+        // ReSharper disable once InconsistentNaming
+        // ReSharper disable once InconsistentNaming
+        // ReSharper disable once InconsistentNaming
+        // ReSharper disable once InconsistentNaming
         public override void EA_GetMenuState(EA.Repository Repository, string MenuLocation, string MenuName, string ItemName, ref bool IsEnabled, ref bool IsChecked)
         {
             if (IsProjectOpen(Repository))
             {
                 switch (ItemName)
                 {
-                    case menuChangeXmlFile:
+                    case MenuChangeXmlFile:
                         IsChecked = false;
                         break;
 
-                    case menuShowWindow:
+                    case MenuShowWindow:
                         IsChecked = false;
                         break;
-                    case  menuShowSpecification:
-                        IsChecked = false;
-                        break;
-
-                    case menuUnlockDiagram:
+                    case  MenuShowSpecification:
                         IsChecked = false;
                         break;
 
-                    case menuLineStyleDiaTH:
-                        IsChecked = false;
-                        break;
-                    case menuLineStyleDiaTV:
-                        IsChecked = false;
-                        break;
-                    case menuLineStyleDiaLH:
-                        IsChecked = false;
-                        break;
-                    case menuLineStyleDiaLV:
-                        IsChecked = false;
-                        break;
-                    case menuLineStyleDiaOS:
+                    case MenuUnlockDiagram:
                         IsChecked = false;
                         break;
 
-                    case menuLocateCompositeElementorDiagram:
+                    case MenuLineStyleDiaTh:
+                        IsChecked = false;
+                        break;
+                    case MenuLineStyleDiaTv:
+                        IsChecked = false;
+                        break;
+                    case MenuLineStyleDiaLh:
+                        IsChecked = false;
+                        break;
+                    case MenuLineStyleDiaLv:
+                        IsChecked = false;
+                        break;
+                    case MenuLineStyleDiaOs:
+                        IsChecked = false;
+                        break;
+
+                    case MenuLocateCompositeElementorDiagram:
                         IsChecked = false;
                         break;
                     
-                    case menuLocateCompositeDiagramOfElement:
+                    case MenuLocateCompositeDiagramOfElement:
                         IsChecked = false;
                         break;
                         
 
-                case menuUsage:
+                case MenuUsage:
                         IsChecked = false;
                         break;    
                        
-                case menuCreateInteractionForOperation:
+                case MenuCreateInteractionForOperation:
                         IsChecked = false;
                         break;
 
-                case menuCreateStateMachineForOperation:
+                case MenuCreateStateMachineForOperation:
                         IsChecked = false;
                         break;  
                     
-                case menuCorrectType:
+                case MenuCorrectType:
                         IsChecked = false;
                         break;
 
-               case menuDisplayBehavior:
-                        IsChecked = false;
-                        break;
-
-
-               case menuUpdateActionPin:
-                        IsChecked = false;
-                        break;
-
-                    case menuUpdateOperationParameter:
-                        IsChecked = false;
-                        break;
-
-                    case menuCreateActivityForOperation:
-                        IsChecked = false;
-                        break;
-
-                    case menuDisplayMethodDefinition:
-                        IsChecked = false;
-                        break;
-
-                    
-                    case menuLocateType:
+               case MenuDisplayBehavior:
                         IsChecked = false;
                         break;
 
 
-                    case menuCopyGUIDToClipboard:
+               case MenuUpdateActionPin:
                         IsChecked = false;
                         break;
 
-                    case menuCopyLinksToClipboard:
+                    case MenuUpdateOperationParameter:
                         IsChecked = false;
                         break;
 
-                    case menuPasteLinksFromClipboard:
+                    case MenuCreateActivityForOperation:
+                        IsChecked = false;
+                        break;
+
+                    case MenuDisplayMethodDefinition:
                         IsChecked = false;
                         break;
 
                     
-                    case menuAddLinkedNote:
+                    case MenuLocateType:
                         IsChecked = false;
                         break;
 
-                    case menuAddLinkedDiagramNote:
+
+                    case MenuCopyGuidToClipboard:
                         IsChecked = false;
                         break;
 
-                    case menuAbout:
+                    case MenuCopyLinksToClipboard:
+                        IsChecked = false;
+                        break;
+
+                    case MenuPasteLinksFromClipboard:
+                        IsChecked = false;
+                        break;
+
+                    
+                    case MenuAddLinkedNote:
+                        IsChecked = false;
+                        break;
+
+                    case MenuAddLinkedDiagramNote:
+                        IsChecked = false;
+                        break;
+
+                    case MenuAbout:
                         IsChecked = false;
                         break;
 
@@ -719,7 +727,7 @@ namespace hoTools
         /// Called when user makes a selection in the menu.
         /// This is your main exit point to the rest of your Add-in
         /// </summary>
-        /// <param name="Repository">the Repository</param>
+        /// <param name="Repository">the rep</param>
         /// <param name="MenuLocation">the location of the menu</param>
         /// <param name="MenuName">the name of the menu</param>
         /// <param name="ItemName">the name of the selected menu item</param>
@@ -727,55 +735,52 @@ namespace hoTools
         {
             EA.ObjectType oType = Repository.GetContextItemType();
             EA.Diagram diaCurrent = Repository.GetCurrentDiagram();
-            EA.Connector conCurrent = null;
             EA.Element el = null;
 
             if (diaCurrent != null) 
             {
-                conCurrent = diaCurrent.SelectedConnector;
             }
             switch (ItemName)
             {
 
-                    case menuShowWindow:
+                    case MenuShowWindow:
                     ShowAddinControlWindows();
                     
                     
                     break;
-                case menuAbout:
+                case MenuAbout:
 
-                    var fAbout = new About();
-                    fAbout.lblTabName.Text = release;
+                    var fAbout = new About {lblTabName = {Text = _release}};
                     fAbout.ShowDialog();
                     break;
 
                     // Line style: Lateral Horizontal 
-                case menuChangeXmlFile:
+                case MenuChangeXmlFile:
                      EaService.SetNewXmlPath(Repository);
                      break;
                 // Line style: Lateral Horizontal 
-                case menuLineStyleDiaLH:
+                case MenuLineStyleDiaLh:
                      EaService.SetLineStyle(Repository, "LH");
                    
                     break;
                 // Line style: Lateral Vertical 
-                case menuLineStyleDiaLV:
+                case MenuLineStyleDiaLv:
                     // all connections of diagram
                     EaService.SetLineStyle(Repository, "LV");
                     break;
                 // Line style: Tree Vertical 
-                case menuLineStyleDiaTV:
+                case MenuLineStyleDiaTv:
                     EaService.SetLineStyle(Repository, "V");
                     
                     break;
 
                 // Line style: Tree Horizontal 
-                case menuLineStyleDiaTH:
+                case MenuLineStyleDiaTh:
                     EaService.SetLineStyle(Repository, "H");
                     
                     break;
                 // Line style: Orthogonal square 
-                case menuLineStyleDiaOS:
+                case MenuLineStyleDiaOs:
                     EaService.SetLineStyle(Repository, "OS");
                     
                     break;
@@ -787,7 +792,7 @@ namespace hoTools
                 //    fHelp.ShowDialog();
                 //    return;
                 //}
-                case menuUnlockDiagram:
+                case MenuUnlockDiagram:
                     if (oType.Equals(EA.ObjectType.otDiagram))
                     {
                         try
@@ -799,20 +804,23 @@ namespace hoTools
                             Repository.ReloadDiagram(diaCurrent.DiagramID);
                         }
                         #pragma warning disable RECS0022
-                        catch { }
-                        #pragma warning restore RECS0022
+                        catch
+                        {
+                            // ignored
+                        }
+#pragma warning restore RECS0022
                     }
 
                     break;
 
                 // Start specification (file parameter)
-                case  menuShowSpecification:
+                case  MenuShowSpecification:
                       EaService.ShowSpecification(Repository);
 
                     break;
 
                 // Create Interaction for selected operation or class (all operations)
-                case   menuCreateInteractionForOperation:
+                case   MenuCreateInteractionForOperation:
                     // Check selected Elements in tree
                     if (oType.Equals(EA.ObjectType.otMethod))
                     {
@@ -838,7 +846,7 @@ namespace hoTools
                     break;
 
                 // Create Interaction for selected operation or class (all operations)
-                case menuCreateStateMachineForOperation:
+                case MenuCreateStateMachineForOperation:
                     // Check selected Elements in tree
                     if (oType.Equals(EA.ObjectType.otMethod))
                     {
@@ -853,12 +861,12 @@ namespace hoTools
 
 
 
-                case menuLocateCompositeElementorDiagram:
+                case MenuLocateCompositeElementorDiagram:
                    EaService.NavigateComposite(Repository);
                     break;
                     
                 // 
-                case menuCorrectType:
+                case MenuCorrectType:
                     if (oType.Equals(EA.ObjectType.otAttribute))
                     {
                         var a = (EA.Attribute)Repository.GetContextObject();
@@ -885,17 +893,17 @@ namespace hoTools
                     break;
 
                 
-                case menuCreateActivityForOperation:
+                case MenuCreateActivityForOperation:
                     EaService.CreateActivityForOperation(Repository);
 
                     break;
 
                     // get Parameter for Activity
-                case menuUpdateOperationParameter:
+                case MenuUpdateOperationParameter:
                     EaService.UpdateActivityParameter(Repository);
                     break;
 
-                case menuUpdateActionPin:
+                case MenuUpdateActionPin:
                     if (oType.Equals(EA.ObjectType.otPackage))
                     {
                         var pkg = (EA.Package)Repository.GetContextObject();
@@ -909,27 +917,27 @@ namespace hoTools
                     break;
                 
 
-                case menuAddLinkedDiagramNote:
+                case MenuAddLinkedDiagramNote:
                     EaService.AddDiagramNote(Repository); 
                                
                     break;
 
-                case menuAddLinkedNote:
+                case MenuAddLinkedNote:
                     EaService.AddElementNote(Repository);
 
                     break;
 
-                case menuLocateType:
+                case MenuLocateType:
                     EaService.LocateType(Repository);
                     
                     break;
 
-                case menuUsage:
+                case MenuUsage:
                     EaService.FindUsage(Repository);
                     
                     break;
 
-                case menuPasteLinksFromClipboard:
+                case MenuPasteLinksFromClipboard:
                     if (oType.Equals(EA.ObjectType.otElement)) // only Element
                     {
                         el = (EA.Element)Repository.GetContextObject();
@@ -960,7 +968,7 @@ namespace hoTools
                                         {
                                             countError = countError + 1;
                                             EA.Element el1 = Repository.GetElementByID(con.SupplierID);
-                                            string fText = String.Format("Error Name {0}, Error={1}", el1.Name, con.GetLastError());
+                                            string fText = $"Error Name {el1.Name}, Error={con.GetLastError()}";
                                             Repository.WriteOutput("Debug", fText, 0);
                                         }
                                     }
@@ -978,7 +986,7 @@ namespace hoTools
                                         {
                                             countError = countError + 1;
                                             EA.Element el1 = Repository.GetElementByID(con.ClientID);
-                                            string fText = String.Format("Error Name {0}, Error={1}", el1.Name, con.GetLastError());
+                                            string fText = $"Error Name {el1.Name}, Error={con.GetLastError()}";
                                             Repository.WriteOutput("Debug",fText,0);
                                         }
 
@@ -996,13 +1004,12 @@ namespace hoTools
                                 }
                                 #pragma warning disable RECS0022
                                 catch
-                                #pragma warning restore RECS0022
+#pragma warning restore RECS0022
                                 {
-
+                                    // ignored
                                 }
-                                
                             }
-                            MessageBox.Show(string.Format("Copied:{0}\r\nErrors:{1}", countInserted,countError));
+                            MessageBox.Show($"Copied:{countInserted}\r\nErrors:{countError}");
                         }
 
                         
@@ -1010,7 +1017,7 @@ namespace hoTools
                     }
                     break;
 
-                case menuCopyGUIDToClipboard:
+                case MenuCopyGuidToClipboard:
                    EaService.CopyGuidSqlToClipboard(Repository);
                    break;
 
@@ -1019,7 +1026,7 @@ namespace hoTools
                 // 'ConnectorGUID', 'Client' if element is a client/source in this dependency
                 // 'ConnectorGUID', 'Supplier' if element is a supplier/target in this dependency
 
-                case menuCopyLinksToClipboard:
+                case MenuCopyLinksToClipboard:
                     if (oType.Equals(EA.ObjectType.otElement)) // only Element
                     {
                         el = (EA.Element)Repository.GetContextObject();
@@ -1039,11 +1046,11 @@ namespace hoTools
                     }
                     break;
 
-                case menuDisplayMethodDefinition:
+                case MenuDisplayMethodDefinition:
                     EaService.DisplayOperationForSelectedElement(Repository, EaService.DisplayMode.Method);
                     break;
 
-                case menuDisplayBehavior:
+                case MenuDisplayBehavior:
                     EaService.DisplayOperationForSelectedElement(Repository, EaService.DisplayMode.Behavior);
                     break;
 
@@ -1066,40 +1073,40 @@ namespace hoTools
                 try
                 {
                     // LineStyle and more
-                    if (!(_AddinSettings.LineStyleAndMoreWindow == AddinSettings.ShowInWindow.Disabled))
+                    if (!(_addinSettings.LineStyleAndMoreWindow == AddinSettings.ShowInWindow.Disabled))
                     {
-                    AddinControlGUI = addAddinControl<AddinControlGui>(_AddinSettings.ProductName,
+                    _AddinControlGui = AddAddinControl<AddinControlGui>(_addinSettings.ProductName,
                         AddinControlGui.Progid, null,
                         AddinSettings.ShowInWindow.AddinWindow);
-                        _myControlGui = AddinControlGUI; // static + instance
+                        _myControlGui = _AddinControlGui; // static + instance
                     }
 
                     // with Search & Replace EA Addin Windows
-                    if (!  (_AddinSettings.SearchAndReplaceWindow == AddinSettings.ShowInWindow.Disabled) ) { 
-                        FindAndReplaceGUI = addAddinControl<FindAndReplaceGUI>(FindAndReplaceGUI.TABULATOR, 
+                    if (!  (_addinSettings.SearchAndReplaceWindow == AddinSettings.ShowInWindow.Disabled) ) { 
+                        _FindAndReplaceGUI = AddAddinControl<FindAndReplaceGUI>(FindAndReplaceGUI.TABULATOR, 
                             FindAndReplaceGUI.PROGID, null, 
                             AddinSettings.ShowInWindow.AddinWindow);
-                       _findAndReplaceGui = FindAndReplaceGUI; // static + instance
+                       _findAndReplaceGui = _FindAndReplaceGUI; // static + instance
                     }
 
                     // with Query EA Addin Windows
-                    if (! (_AddinSettings.OnlyQueryWindow == AddinSettings.ShowInWindow.Disabled) )
+                    if (! (_addinSettings.OnlyQueryWindow == AddinSettings.ShowInWindow.Disabled) )
                     {
                         // Run as Query
-                        QueryGUI = addAddinControl<QueryGui>(QueryGui.TabulatorSql, 
+                        _QueryGUI = AddAddinControl<QueryGui>(QueryGui.TabulatorSql, 
                             QueryGui.Progid, QueryGui.TabulatorSql, 
-                            _AddinSettings.OnlyQueryWindow);
-                        _queryGui = QueryGUI; // static + instance
+                            _addinSettings.OnlyQueryWindow);
+                        _queryGui = _QueryGUI; // static + instance
                     }
 
                     // with Script & Query EA Addin Windows
-                    if (!(_AddinSettings.ScriptAndQueryWindow == AddinSettings.ShowInWindow.Disabled))
+                    if (!(_addinSettings.ScriptAndQueryWindow == AddinSettings.ShowInWindow.Disabled))
                     {
                         // Run as Script
-                        ScriptGUI = addAddinControl<QueryGui>(QueryGui.TabulatorScript, 
+                        _ScriptGUI = AddAddinControl<QueryGui>(QueryGui.TabulatorScript, 
                             QueryGui.Progid, QueryGui.TabulatorScript, 
-                            _AddinSettings.ScriptAndQueryWindow);
-                    _scriptGui = ScriptGUI; // static + instance
+                            _addinSettings.ScriptAndQueryWindow);
+                    _scriptGui = _ScriptGUI; // static + instance
                     }
 
 
@@ -1114,16 +1121,16 @@ namespace hoTools
 
 
         /// <summary>
-        /// Add AddinGUI as a tab to EA. It sets the following properties in the following sequence: Tag, AddinSettings, Release, Repository. 
+        /// Add AddinGUI as a tab to EA. It sets the following properties in the following sequence: Tag, _AddinSettings, Release, rep. 
         /// </summary>
         /// <param name="tabName">Tabulator name to show Addin</param>
         /// <param name="progId">ProgID under which the Addin is registered</param>
         /// <param name="tag">Information to pass to Control</param>
         /// <param name="showInWindowType"></param>
         /// <returns>AddinGUI</returns>
-        private T addAddinControl<T>(string tabName, string progId, object tag, AddinSettings.ShowInWindow showInWindowType)
+        private T AddAddinControl<T>(string tabName, string progId, object tag, AddinSettings.ShowInWindow showInWindowType)
         {
-            var c = default(T);
+            T c;
             switch (showInWindowType) {
                 case AddinSettings.ShowInWindow.AddinWindow:
                     c = (T)_repository.AddWindow(tabName, progId);
@@ -1142,8 +1149,8 @@ namespace hoTools
             else
             {
                 control.Tag = tag;
-                control.AddinSettings = this._AddinSettings;
-                control.Release = "V" + release;
+                control.AddinSettings = _addinSettings;
+                control.Release = "V" + _release;
                 control.Repository = _repository;
 
 
@@ -1153,348 +1160,7 @@ namespace hoTools
         }
         #endregion
 
-
-        #region Display Behavior
-        /// <summary>
-        /// Display behavior or definition for selected element
-        /// </summary>
-        /// <param name="rep"></param>
-        /// <param name="showBehavior"></param>
-        private static void DisplayOperationForSelectedElement(EA.Repository rep, displayMode showBehavior)
-        {
-            EA.ObjectType oType = rep.GetContextItemType();
-            // Method found
-            if (oType.Equals(EA.ObjectType.otMethod))
-            {
-                // display behavior for method
-                Appl.DisplayBehaviorForOperation(rep, (EA.Method)rep.GetContextObject());
-
-            }
-            if (oType.Equals(EA.ObjectType.otDiagram))
-            {
-                // find parent element
-                var dia = (EA.Diagram)rep.GetContextObject();
-                if (dia.ParentID > 0)
-                {
-                    // find parent element
-                    EA.Element parentEl = rep.GetElementByID(dia.ParentID);
-                    //
-                    locateOperationFromBehavior(rep, parentEl, showBehavior);
-                }
-                else
-                {
-                    // open diagram
-                    rep.OpenDiagram(dia.DiagramID);
-                }
-            }
-
-
-            // Connector / Message found
-            if (oType.Equals(EA.ObjectType.otConnector))
-            {
-                var con = (EA.Connector)rep.GetContextObject();
-                if (con.Type.Equals("StateFlow"))
-                {
-
-                    EA.Method m = Util.GetOperationFromConnector(rep, con);
-                    if (m != null)
-                    {
-                        if (showBehavior.Equals(displayMode.Behavior))
-                        {
-                            Appl.DisplayBehaviorForOperation(rep, m);
-                        }
-                        else
-                        {
-                            rep.ShowInProjectView(m);
-                        }
-
-                    }
-
-
-                }
-
-                if (con.Type.Equals("Sequence"))
-                {
-                    // If name is of the form: OperationName(..) the operation is associated to an method
-                    string opName = con.Name;
-                    if (opName.EndsWith(")", StringComparison.CurrentCulture))
-                    {
-                        // extract the name
-                        int pos = opName.IndexOf("(", StringComparison.CurrentCulture);
-                        opName = opName.Substring(0, pos);
-                        EA.Element el = rep.GetElementByID(con.SupplierID);
-                        // find operation by name
-                        foreach (EA.Method op in el.Methods)
-                        {
-                            if (op.Name == opName)
-                            {
-                                rep.ShowInProjectView(op);
-                                //Appl.DisplayBehaviorForOperation(Repository, op);
-                                return;
-                            }
-                        }
-                        if ((el.Type.Equals("Sequence") || el.Type.Equals("Object")) && el.ClassfierID > 0)
-                        {
-                            el = (EA.Element)rep.GetElementByID(el.ClassifierID);
-                            foreach (EA.Method op in el.Methods)
-                            {
-                                if (op.Name == opName)
-                                {
-                                    if (showBehavior.Equals(displayMode.Behavior))
-                                    {
-                                        Appl.DisplayBehaviorForOperation(rep, op);
-                                    }
-                                    else
-                                    {
-                                        rep.ShowInProjectView(op);
-                                    }
-
-                                }
-                            }
-                        }
-
-                    }
-                }
-            }
-
-            // Element
-            if (oType.Equals(EA.ObjectType.otElement))
-            {
-                var el = (EA.Element)rep.GetContextObject();
-
-                if (el.Type.Equals("Activity"))
-                {
-                    // Open Behavior for Activity
-                    Util.OpenBehaviorForElement(rep, el);
-
-
-                }
-               if (el.Type.Equals("State"))
-                {
-                    // get operations
-                    foreach (EA.Method m in el.Methods)
-                    {
-                        // display behaviors for methods
-                        Appl.DisplayBehaviorForOperation(rep, m);
-                    }
-                }
-                if (el.Type.Equals("Action"))
-                {
-                    foreach (EA.CustomProperty custproperty in el.CustomProperties)
-                    {
-                        if (custproperty.Name.Equals("kind") && custproperty.Value.Equals("CallOperation"))
-                        {
-                            showMethodFromAction(rep, el, showBehavior);
-                        }
-                        if (custproperty.Name.Equals("kind") && custproperty.Value.Equals("CallBehavior"))
-                        {
-                            el = rep.GetElementByID(el.ClassfierID);
-                            Util.OpenBehaviorForElement(rep, el);
-                        }
-                    }
-
-                }
-                if (el.Type.Equals("Activity") || el.Type.Equals("StateMachine") || el.Type.Equals("Interaction"))
-                {
-                    locateOperationFromBehavior(rep, el, showBehavior);
-                }
-            }
-        }
-        #endregion
-
-        #region showMethodFromAction
-        /// <summary>
-        /// Show for Action: Behavior or Method in Browser
-        /// </summary>
-        /// <param name="rep"></param>
-        /// <param name="el"></param>
-        /// <param name="showBehavior"></param>
-        static void showMethodFromAction(EA.Repository rep, EA.Element el, displayMode showBehavior)
-        {
-            EA.Method method = Util.GetOperationFromAction(rep, el);
-            if (method != null)
-            {
-                if (showBehavior.Equals(displayMode.Behavior))
-                {
-                    Appl.DisplayBehaviorForOperation(rep, method);
-                }
-                else
-                {
-                    rep.ShowInProjectView(method);
-                }
-            }
-        }
-        #endregion
-        #region locateOperationFromBehavior
-        static void locateOperationFromBehavior(EA.Repository rep, EA.Element el, displayMode showBehavior)
-        {
-            EA.Method method = Util.GetOperationFromBrehavior(rep, el);
-            if (method != null)
-            {
-                if (showBehavior.Equals(displayMode.Behavior))
-                {
-                    Appl.DisplayBehaviorForOperation(rep, method);
-                }
-                else
-                {
-                    rep.ShowInProjectView(method);
-                }
-            }
-        }
-        #endregion
-        #region BehaviorForOperation
-        static void BehaviorForOperation(EA.Repository rep, EA.Method method)
-        {
-            string behavior = method.Behavior;
-            if (behavior.StartsWith("{", StringComparison.CurrentCulture) & behavior.EndsWith("}", StringComparison.CurrentCulture))
-            {
-                // get object according to behavior
-                EA.Element el = rep.GetElementByGuid(behavior);
-                // Activity
-                if (el == null) { }
-                else
-                {
-                    if (el.Type.Equals("Activity") || el.Type.Equals("Interaction") || el.Type.Equals("StateMachine"))
-                    {
-                        Util.OpenBehaviorForElement(rep, el);
-                    }
-                }
-            }
-        }
-        #endregion
-
-        #region LineStyle
-        //---------------------------------------------------------------------------------------------------------------
-        // line style
-        // LH = "Line Style: Lateral Horizontal";
-        // LV = "Line Style: Lateral Vertical";
-        // TH  = "Line Style: Tree Horizontal";
-        // TV = "Line Style: Tree Vertical";
-        // OS = "Line Style: Orthogonal Square";
-        // OR =              Orthogonal Round
-        // A =               Automatic
-        // D =               Direct
-        // C =               Customer
-
-#pragma warning disable RECS0154
-        void btnLH_Click(object sender, EventArgs e)
-        {
-            EaService.SetLineStyle(_repository, "LH");
-        }
-        #pragma warning restore RECS0154
-
-        #pragma warning disable RECS0154
-        void btnLV_Click(object sender, EventArgs e)
-        {
-            EaService.SetLineStyle(_repository, "LV");
-        }
-        #pragma warning restore RECS0154
-
-        #pragma warning disable RECS0154
-        void btnTH_Click(object sender, EventArgs e)
-        {
-            EaService.SetLineStyle(_repository, "H");
-        }
-        #pragma warning restore RECS0154
-
-        #pragma warning disable RECS0154
-        void btnTV_Click(object sender, EventArgs e)
-        {
-            EaService.SetLineStyle(_repository, "V");
-        }
-        #pragma warning restore RECS0154
-
-        #pragma warning disable RECS0154
-        void btnOS_Click(object sender, EventArgs e)
-        {
-            EaService.SetLineStyle(_repository, "OS");
-        }
-        #pragma warning restore RECS0154
-
-        #pragma warning disable RECS0154
-        void btnOR_Click(object sender, EventArgs e)
-        {
-            EaService.SetLineStyle(_repository, "OR");
-        }
-        #pragma warning restore RECS0154
-
-        #pragma warning disable RECS0154
-        void btnA_Click(object sender, EventArgs e)
-        {
-            EaService.SetLineStyle(_repository, "A");
-        }
-        #pragma warning restore RECS0154
-
-        #pragma warning disable RECS0154    
-        void btnD_Click(object sender, EventArgs e)
-        {
-            EaService.SetLineStyle(_repository, "D");
-        }
-        #pragma warning restore RECS0154
-
-        #pragma warning disable RECS0154
-        void btnC_Click(object sender, EventArgs e)
-        {
-            EaService.SetLineStyle(_repository, "C");
-        }
-        #pragma warning restore RECS0154
-        #pragma warning disable RECS0154
-        void btnComposite_Click(object sender, EventArgs e)
-        {
-            EaService.NavigateComposite(_repository);
-        }
-        #pragma warning restore RECS0154
-
-        #pragma warning disable RECS0154
-        void btnDisplayBehavior_Click(object sender, EventArgs e)
-        {
-            EaService.DisplayOperationForSelectedElement(_repository, EaService.DisplayMode.Behavior);
-        }
-        #pragma warning restore RECS0154
-
-        #pragma warning disable RECS0154
-        void btnLocateOperation_Click(object sender, EventArgs e)
-        {
-            EaService.DisplayOperationForSelectedElement(_repository, EaService.DisplayMode.Method);
-        }
-        #pragma warning restore RECS0154
-
-        #pragma warning disable RECS0154
-        void btnAddElementNote_Click(object sender, EventArgs e)
-        {
-            EaService.AddElementNote(_repository);
-        }
-        #pragma warning restore RECS0154
-
-        #pragma warning disable RECS0154
-        void btnAddDiagramNote_Click(object sender, EventArgs e)
-        {
-            EaService.AddDiagramNote(_repository);
-        }
-        #pragma warning restore RECS0154
-
-        #pragma warning disable RECS0154
-        void btnLocateType_Click(object sender, EventArgs e)
-        {
-            EaService.LocateType(_repository);
-        }
-        #pragma warning restore RECS0154
-
-        #pragma warning disable RECS0154
-        void btnFindUsage_Click(object sender, EventArgs e)
-        {
-            EaService.FindUsage(_repository);
-        }
-        #pragma warning restore RECS0154
-
-        #pragma warning disable RECS0154
-        void btnDisplaySpecification_Click(object sender, EventArgs e)
-        {
-            EaService.ShowSpecification(_repository);
-        }
-        #pragma warning restore RECS0154
-        #endregion
-
+    
 
     }
 }
