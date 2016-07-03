@@ -161,12 +161,12 @@
             // 
             this.chkIsAskForUpdate.AutoSize = true;
             this.chkIsAskForUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkIsAskForUpdate.Location = new System.Drawing.Point(321, 171);
+            this.chkIsAskForUpdate.Location = new System.Drawing.Point(377, 174);
             this.chkIsAskForUpdate.Name = "chkIsAskForUpdate";
             this.chkIsAskForUpdate.Size = new System.Drawing.Size(15, 14);
             this.chkIsAskForUpdate.TabIndex = 212;
-            this.toolTip1.SetToolTip(this.chkIsAskForUpdate, "If checked: SQL will ask to update  query display content if file has changed out" +
-        "side.\r\n\r\nYou may use your beloved Editor.");
+            this.toolTip1.SetToolTip(this.chkIsAskForUpdate, "If checked: SQL will ask to update  query display content if *.sql file has chang" +
+        "ed outside.\r\n\r\nYou may use your beloved Editor.");
             this.chkIsAskForUpdate.UseVisualStyleBackColor = true;
             // 
             // txtSqlEditor
@@ -182,7 +182,7 @@
             // btnSqlEditor
             // 
             this.btnSqlEditor.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSqlEditor.Location = new System.Drawing.Point(321, 191);
+            this.btnSqlEditor.Location = new System.Drawing.Point(377, 192);
             this.btnSqlEditor.Name = "btnSqlEditor";
             this.btnSqlEditor.Size = new System.Drawing.Size(183, 23);
             this.btnSqlEditor.TabIndex = 215;
@@ -224,11 +224,11 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(26, 169);
+            this.label2.Location = new System.Drawing.Point(30, 170);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(276, 18);
+            this.label2.Size = new System.Drawing.Size(313, 18);
             this.label2.TabIndex = 213;
-            this.label2.Text = "Ask for update if file has changed outside";
+            this.label2.Text = "Ask for update if *.sql file has changed outside.";
             this.toolTip1.SetToolTip(this.label2, "Ask for update if File has changed outside hoTools.");
             // 
             // txtSqlSearchPath

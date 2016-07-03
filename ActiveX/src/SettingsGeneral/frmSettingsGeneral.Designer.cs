@@ -69,9 +69,8 @@
             this.rbAutoLoadMdgCompilation = new System.Windows.Forms.RadioButton();
             this.rbAutoLoadMdgBasic = new System.Windows.Forms.RadioButton();
             this.chkConveyedItemSupport = new System.Windows.Forms.CheckBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label34 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label34 = new System.Windows.Forms.Label();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -79,7 +78,7 @@
             // 
             // btnOk
             // 
-            this.btnOk.Location = new System.Drawing.Point(33, 423);
+            this.btnOk.Location = new System.Drawing.Point(30, 486);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(75, 23);
             this.btnOk.TabIndex = 0;
@@ -89,7 +88,7 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(114, 423);
+            this.btnCancel.Location = new System.Drawing.Point(111, 486);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 1;
@@ -152,7 +151,7 @@
             // chkAdvancedDiagramNote
             // 
             this.chkAdvancedDiagramNote.AutoSize = true;
-            this.chkAdvancedDiagramNote.Location = new System.Drawing.Point(215, 311);
+            this.chkAdvancedDiagramNote.Location = new System.Drawing.Point(212, 374);
             this.chkAdvancedDiagramNote.Margin = new System.Windows.Forms.Padding(2);
             this.chkAdvancedDiagramNote.Name = "chkAdvancedDiagramNote";
             this.chkAdvancedDiagramNote.Size = new System.Drawing.Size(15, 14);
@@ -165,7 +164,7 @@
             // 
             this.label36.AutoSize = true;
             this.label36.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label36.Location = new System.Drawing.Point(29, 307);
+            this.label36.Location = new System.Drawing.Point(26, 370);
             this.label36.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label36.Name = "label36";
             this.label36.Size = new System.Drawing.Size(154, 18);
@@ -177,7 +176,7 @@
             // chkVcSupport
             // 
             this.chkVcSupport.AutoSize = true;
-            this.chkVcSupport.Location = new System.Drawing.Point(215, 358);
+            this.chkVcSupport.Location = new System.Drawing.Point(212, 421);
             this.chkVcSupport.Margin = new System.Windows.Forms.Padding(2);
             this.chkVcSupport.Name = "chkVcSupport";
             this.chkVcSupport.Size = new System.Drawing.Size(15, 14);
@@ -191,7 +190,7 @@
             // 
             this.label35.AutoSize = true;
             this.label35.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label35.Location = new System.Drawing.Point(30, 358);
+            this.label35.Location = new System.Drawing.Point(27, 421);
             this.label35.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label35.Name = "label35";
             this.label35.Size = new System.Drawing.Size(84, 18);
@@ -204,7 +203,7 @@
             // chkAdvancedFeatures
             // 
             this.chkAdvancedFeatures.AutoSize = true;
-            this.chkAdvancedFeatures.Location = new System.Drawing.Point(215, 271);
+            this.chkAdvancedFeatures.Location = new System.Drawing.Point(212, 334);
             this.chkAdvancedFeatures.Margin = new System.Windows.Forms.Padding(2);
             this.chkAdvancedFeatures.Name = "chkAdvancedFeatures";
             this.chkAdvancedFeatures.Size = new System.Drawing.Size(15, 14);
@@ -215,7 +214,7 @@
             // chkSvnSupport
             // 
             this.chkSvnSupport.AutoSize = true;
-            this.chkSvnSupport.Location = new System.Drawing.Point(215, 385);
+            this.chkSvnSupport.Location = new System.Drawing.Point(212, 448);
             this.chkSvnSupport.Margin = new System.Windows.Forms.Padding(2);
             this.chkSvnSupport.Name = "chkSvnSupport";
             this.chkSvnSupport.Size = new System.Drawing.Size(15, 14);
@@ -228,7 +227,7 @@
             // 
             this.label33.AutoSize = true;
             this.label33.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label33.Location = new System.Drawing.Point(30, 381);
+            this.label33.Location = new System.Drawing.Point(27, 444);
             this.label33.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label33.Name = "label33";
             this.label33.Size = new System.Drawing.Size(94, 18);
@@ -240,7 +239,7 @@
             // 
             this.label41.AutoSize = true;
             this.label41.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label41.Location = new System.Drawing.Point(29, 285);
+            this.label41.Location = new System.Drawing.Point(26, 348);
             this.label41.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label41.Name = "label41";
             this.label41.Size = new System.Drawing.Size(158, 18);
@@ -253,7 +252,7 @@
             // 
             this.label29.AutoSize = true;
             this.label29.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label29.Location = new System.Drawing.Point(29, 267);
+            this.label29.Location = new System.Drawing.Point(26, 330);
             this.label29.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label29.Name = "label29";
             this.label29.Size = new System.Drawing.Size(129, 18);
@@ -274,12 +273,13 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(29, 184);
+            this.label1.Location = new System.Drawing.Point(31, 185);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(176, 18);
+            this.label1.Size = new System.Drawing.Size(153, 72);
             this.label1.TabIndex = 212;
-            this.label1.Text = "(Quick) EA-Search Name";
+            this.label1.Text = "(Quick) Search Name\r\n- EA Search Name\r\n- SQL file (\'mySql.sql\')\r\nBlank to hide it" +
+    "";
             this.toolTip1.SetToolTip(this.label1, resources.GetString("label1.ToolTip"));
             // 
             // label2
@@ -295,7 +295,7 @@
             // chkAdvancedPort
             // 
             this.chkAdvancedPort.AutoSize = true;
-            this.chkAdvancedPort.Location = new System.Drawing.Point(215, 289);
+            this.chkAdvancedPort.Location = new System.Drawing.Point(212, 352);
             this.chkAdvancedPort.Margin = new System.Windows.Forms.Padding(2);
             this.chkAdvancedPort.Name = "chkAdvancedPort";
             this.chkAdvancedPort.Size = new System.Drawing.Size(15, 14);
@@ -306,7 +306,7 @@
             // 
             // txtFileManagerPath
             // 
-            this.txtFileManagerPath.Location = new System.Drawing.Point(249, 381);
+            this.txtFileManagerPath.Location = new System.Drawing.Point(246, 444);
             this.txtFileManagerPath.Margin = new System.Windows.Forms.Padding(2);
             this.txtFileManagerPath.Name = "txtFileManagerPath";
             this.txtFileManagerPath.Size = new System.Drawing.Size(314, 20);
@@ -352,7 +352,7 @@
             // chkLineStyleSupport
             // 
             this.chkLineStyleSupport.AutoSize = true;
-            this.chkLineStyleSupport.Location = new System.Drawing.Point(215, 231);
+            this.chkLineStyleSupport.Location = new System.Drawing.Point(212, 294);
             this.chkLineStyleSupport.Margin = new System.Windows.Forms.Padding(2);
             this.chkLineStyleSupport.Name = "chkLineStyleSupport";
             this.chkLineStyleSupport.Size = new System.Drawing.Size(15, 14);
@@ -364,7 +364,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(29, 227);
+            this.label3.Location = new System.Drawing.Point(26, 290);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(121, 18);
@@ -447,7 +447,7 @@
             // chkFavoriteSupport
             // 
             this.chkFavoriteSupport.AutoSize = true;
-            this.chkFavoriteSupport.Location = new System.Drawing.Point(215, 253);
+            this.chkFavoriteSupport.Location = new System.Drawing.Point(212, 316);
             this.chkFavoriteSupport.Margin = new System.Windows.Forms.Padding(2);
             this.chkFavoriteSupport.Name = "chkFavoriteSupport";
             this.chkFavoriteSupport.Size = new System.Drawing.Size(15, 14);
@@ -461,7 +461,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(29, 249);
+            this.label7.Location = new System.Drawing.Point(26, 312);
             this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(133, 18);
@@ -477,7 +477,7 @@
             this.groupBox2.Controls.Add(this.rbAutoLoadMdgCompilation);
             this.groupBox2.Controls.Add(this.rbAutoLoadMdgBasic);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(268, 227);
+            this.groupBox2.Location = new System.Drawing.Point(265, 290);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(295, 100);
             this.groupBox2.TabIndex = 238;
@@ -535,28 +535,6 @@
             this.toolTip1.SetToolTip(this.chkConveyedItemSupport, resources.GetString("chkConveyedItemSupport.ToolTip"));
             this.chkConveyedItemSupport.UseVisualStyleBackColor = true;
             // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(29, 202);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(113, 18);
-            this.label8.TabIndex = 237;
-            this.label8.Text = "- Blank to hide it";
-            this.toolTip1.SetToolTip(this.label8, resources.GetString("label8.ToolTip"));
-            // 
-            // label34
-            // 
-            this.label34.AutoSize = true;
-            this.label34.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label34.Location = new System.Drawing.Point(246, 358);
-            this.label34.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(297, 18);
-            this.label34.TabIndex = 225;
-            this.label34.Text = "Path File Manager / Explorer for show folder";
-            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.rbLineStyleAndMoreDisableWindow);
@@ -572,15 +550,25 @@
             this.toolTip1.SetToolTip(this.groupBox1, "Show Tab hoTools with:\r\n- Linestyle\r\n- Toolbar for Searches and Services\r\n- Versi" +
         "on Control\r\n- Port Support\r\n- Favorites\r\n- Quick Search\r\n- and more");
             // 
+            // label34
+            // 
+            this.label34.AutoSize = true;
+            this.label34.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label34.Location = new System.Drawing.Point(243, 421);
+            this.label34.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(297, 18);
+            this.label34.TabIndex = 225;
+            this.label34.Text = "Path File Manager / Explorer for show folder";
+            // 
             // FrmSettingsGeneral
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(844, 458);
+            this.ClientSize = new System.Drawing.Size(844, 529);
             this.Controls.Add(this.chkConveyedItemSupport);
             this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.label8);
             this.Controls.Add(this.chkFavoriteSupport);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.chkShowQueryButtons);
@@ -661,7 +649,6 @@
         private System.Windows.Forms.CheckBox chkShowQueryButtons;
         private System.Windows.Forms.CheckBox chkFavoriteSupport;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label8;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.CheckBox chkConveyedItemSupport;
         private System.Windows.Forms.RadioButton rbAutoLoadMdgNo;
