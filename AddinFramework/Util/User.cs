@@ -7,21 +7,21 @@ namespace EAAddinFramework.Utils
 	/// </summary>
 	public class User
 	{
-		public Model model {get;set;}
-		public string login {get;set;}
-		public string firstName {get;set;}
-		public string lastName {get;set;}
-		public string fullName
+		public Model Model {get;set;}
+		public string Login {get;set;}
+		public string FirstName {get;set;}
+		public string LastName {get;set;}
+		public string FullName
 		{
 			get
 			{
-				if (this.model.IsSecurityEnabled)
+				if (Model.IsSecurityEnabled)
 				{
-					return this.firstName + " " + this.lastName;
+					return FirstName + " " + LastName;
 				}
 				else
 				{
-					return this.login;
+					return Login;
 				}
 			}
 		}
@@ -35,10 +35,10 @@ namespace EAAddinFramework.Utils
 		/// <param name="lastName">the last name of the user</param>
 		public User(Model model,string login,string firstName,string lastName)
 		{
-			this.model = model;
-			this.login = login;
-			this.firstName = firstName;
-			this.lastName = lastName;
+			Model = model;
+			Login = login;
+			FirstName = firstName;
+			LastName = lastName;
 		}
 	}
 }

@@ -228,6 +228,7 @@
             this.cmbGlobalKey5Service.Size = new System.Drawing.Size(312, 23);
             this.cmbGlobalKey5Service.TabIndex = 142;
             this.toolTip1.SetToolTip(this.cmbGlobalKey5Service, "Choose your service Function");
+            this.cmbGlobalKey5Service.SelectedIndexChanged += new System.EventHandler(this.cmbGlobalKeyService_SelectedIndexChanged);
             // 
             // cmbGlobalKeyService4Mod4
             // 
@@ -316,6 +317,7 @@
             this.cmbGlobalKey4Service.Size = new System.Drawing.Size(312, 23);
             this.cmbGlobalKey4Service.TabIndex = 135;
             this.toolTip1.SetToolTip(this.cmbGlobalKey4Service, "Choose your service Function");
+            this.cmbGlobalKey4Service.SelectedIndexChanged += new System.EventHandler(this.cmbGlobalKeyService_SelectedIndexChanged);
             // 
             // cmbGlobalKeyService3Mod4
             // 
@@ -404,6 +406,7 @@
             this.cmbGlobalKey3Service.Size = new System.Drawing.Size(312, 23);
             this.cmbGlobalKey3Service.TabIndex = 128;
             this.toolTip1.SetToolTip(this.cmbGlobalKey3Service, "Choose your service Function");
+            this.cmbGlobalKey3Service.SelectedIndexChanged += new System.EventHandler(this.cmbGlobalKeyService_SelectedIndexChanged);
             // 
             // cmbGlobalKeyService2Mod4
             // 
@@ -492,6 +495,7 @@
             this.cmbGlobalKey2Service.Size = new System.Drawing.Size(312, 23);
             this.cmbGlobalKey2Service.TabIndex = 121;
             this.toolTip1.SetToolTip(this.cmbGlobalKey2Service, "Choose your service Function");
+            this.cmbGlobalKey2Service.SelectedIndexChanged += new System.EventHandler(this.cmbGlobalKeyService_SelectedIndexChanged);
             // 
             // cmbGlobalKeyService1Mod4
             // 
@@ -580,6 +584,7 @@
             this.cmbGlobalKey1Service.Size = new System.Drawing.Size(312, 23);
             this.cmbGlobalKey1Service.TabIndex = 112;
             this.toolTip1.SetToolTip(this.cmbGlobalKey1Service, "Choose your service Function");
+            this.cmbGlobalKey1Service.SelectedIndexChanged += new System.EventHandler(this.cmbGlobalKeyService_SelectedIndexChanged);
             // 
             // cmbGlobalKeySearch5SearchTerm
             // 

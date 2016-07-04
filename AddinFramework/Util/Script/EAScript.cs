@@ -19,40 +19,28 @@ namespace EAAddinFramework.Utils
         // Script:          The Script itself
         //                  The Group Name
         // Script Category of a Script
-        const string SCRIPT_CATEGORY = "605A62F7-BCD0-4845-A8D0-7DC45B4D2E3F";
-
-        public int ID => _id;
-        public string GroupGuid { get { return _groupGuid; }
-                               set { _groupGuid = value; } }
-
-        public string Code
-        {
-            get { return _code; }
-            set { _code = value; }
-        }
-        public string GUID => _guid;
+        const string ScriptCategory = "605A62F7-BCD0-4845-A8D0-7DC45B4D2E3F";
 
         int _id;
-        string _guid;    // the guid of the Script
         string _groupGuid;  // the group / author of the Script
         string _name;    // the name of the Script
         string _type;    // VBScript, JavaScript, JScript
         string _language;
         string _code; // the script itself
-        string _groupName;
         Model _model;
 
         #region Constructor
         public EaScript(Model model, string name, string type, string language, string groupGuid, string code)
         {
-            init(model, name, type, language, groupGuid, code);
+            Init(model, name, type, language, groupGuid, code);
         }
+        // ReSharper disable once UnusedMember.Global
         public EaScript(Model model, string name, string type, string language, string code)
         {
-            init(model, name, type, language, "", code);
+            Init(model, name, type, language, "", code);
         }
 
-        void init(Model model, string name, string type, string language, string groupGuid, string code)
+        private void Init(Model model, string name, string type, string language, string groupGuid, string code)
         {
             _groupGuid = groupGuid;
             _name = name;
@@ -63,50 +51,49 @@ namespace EAAddinFramework.Utils
 
         }
         #endregion
-        public bool exists()
+
+        private bool Exists()
         {
-            getInfo();
+            GetInfo();
             return (_id > 0);
         }
-        public void save()
+        public void Save()
         {
             string notes = $" '<Script Name=\"{_name}\" Type=\"{ _type}\" Language=\"{_language}\" Notes=\"\"/>' ";
-            if (exists())
+            if (Exists())
             {
 
-                string SQLUpdate = "update t_script set " +
+                string sqlUpdate = "update t_script set " +
                                             $"script = '{_model.EscapeSqlString(_code)}' " + 
                                             $", notes = {notes} "  +                      
                                     " where ScriptID = " + _id;
-                _model.ExecuteSql(SQLUpdate);
+                _model.ExecuteSql(sqlUpdate);
             }
             else
             {
 
                 string guid = "{" + Guid.NewGuid() + "}";
                 string sql = "insert into t_script (ScriptCategory, ScriptAuthor, ScriptName, Notes, Script) " +
-                        $" Values (" +
-                                   $"'{SCRIPT_CATEGORY}', " +
+                        @" Values (" +
+                                   $"'{ScriptCategory}', " +
                                    $"'{_groupGuid}', " +
                                    $"'{guid}', " +
                                    $"{notes}, " +
                                    $"'{_model.EscapeSqlString(_code)}' )";
                 _model.ExecuteSql(sql);
                 // update script information
-                getInfo();
+                GetInfo();
             }
-            return;
-
         }
         /// <summary>
         /// getInfo from script (ID, groupName, groupGuid)
         /// <para/> It get's only one Script (The same ScriptName could be in more than one ScriptGroup)
         /// </summary>
-        void getInfo()
+        void GetInfo()
         {
             // check if author (Group of Script) is the expected
             string sqlWhereScriptGroup = "";
-            if (_groupGuid != null && _groupGuid != "" )
+            if (!string.IsNullOrEmpty(_groupGuid) )
             {
                 sqlWhereScriptGroup = $" AND s.[ScriptAuthor] = '{_groupGuid}'";
             }
@@ -122,21 +109,18 @@ namespace EAAddinFramework.Utils
             var x = new XDocument(XDocument.Parse(xml));
 
             // get scriptID
-            var scriptIDNode = x.Descendants("ScriptID").FirstOrDefault();
-            if (scriptIDNode == null) return;
-            _id = (int)scriptIDNode;
+            var scriptIdNode = x.Descendants("ScriptID").FirstOrDefault();
+            if (scriptIdNode == null) return;
+            _id = (int)scriptIdNode;
 
             // get groupName
             var scriptGroupNameNode = x.Descendants("GroupName").FirstOrDefault();
             if (scriptGroupNameNode == null) return;
-            _groupName = scriptGroupNameNode.Value;
 
             // get groupName
             var scriptGroupGuidNode = x.Descendants("GroupGuid").FirstOrDefault();
             if (scriptGroupGuidNode == null) return;
             _groupGuid = scriptGroupGuidNode.Value;
-            return;
-
         }
     }
 }

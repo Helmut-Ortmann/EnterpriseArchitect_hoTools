@@ -34,12 +34,12 @@ namespace hoTools.Query
         public Boolean Execute(object[] par) { 
             try
             {
-                _function.execute(par);
+                _function.Execute(par);
                 return true;
             }
             catch (Exception e)
             {
-                if (_isErrorOutput) MessageBox.Show(e.ToString(), $"Error run Script  '{_function.fullName}()'");
+                if (_isErrorOutput) MessageBox.Show(e.ToString(), $"Error run Script  '{_function.FullName}()'");
                 return false;
 
             }

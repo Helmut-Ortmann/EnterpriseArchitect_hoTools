@@ -115,7 +115,7 @@ namespace hoTools.Settings.Toolbar
 
             #endregion
 
-            #region set possible services
+            #region load possible services
 
             var lServices1 = new List<EaServices.ServiceCall>();
             var lServices2 = new List<EaServices.ServiceCall>();
@@ -334,11 +334,15 @@ namespace hoTools.Settings.Toolbar
         {
             // get selected value
             ComboBox cmbBox = (ComboBox) sender;
-            if (sender == cmbService1) txtServiceTooltip1.Text = cmbBox.Text;
-            if (sender == cmbService2) txtServiceTooltip2.Text = cmbBox.Text;
-            if (sender == cmbService3) txtServiceTooltip3.Text = cmbBox.Text;
-            if (sender == cmbService4) txtServiceTooltip4.Text = cmbBox.Text;
-            if (sender == cmbService5) txtServiceTooltip5.Text = cmbBox.Text;
+            // get tooltip for selected index
+            int index = cmbBox.SelectedIndex;
+            string tooltip = _settings.AllServices[index].Help;
+
+            if (sender == cmbService1) txtServiceTooltip1.Text = tooltip;
+            if (sender == cmbService2) txtServiceTooltip2.Text = tooltip;
+            if (sender == cmbService3) txtServiceTooltip3.Text = tooltip;
+            if (sender == cmbService4) txtServiceTooltip4.Text = tooltip;
+            if (sender == cmbService5) txtServiceTooltip5.Text = tooltip;
 
 
         }

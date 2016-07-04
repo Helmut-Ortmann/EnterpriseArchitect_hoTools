@@ -851,7 +851,7 @@ namespace EAAddinFramework.Utils
                                 break;
                         }
                     }
-                    User owner = Users.Find(u => u.fullName.Equals(ownerFullName, StringComparison.InvariantCultureIgnoreCase));
+                    User owner = Users.Find(u => u.FullName.Equals(ownerFullName, StringComparison.InvariantCultureIgnoreCase));
                     workingSetList.Add(new WorkingSet(this, id, owner, name));
                 }
                 return workingSetList;

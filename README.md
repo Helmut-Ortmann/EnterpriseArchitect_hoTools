@@ -103,3 +103,7 @@ Some features:
 - Drag SQL file on canvas
   (seems impossible with EA, no drag and drop for ActiveX supported)
 
+# Feedback
+
+I appreciate your feedback!!
+

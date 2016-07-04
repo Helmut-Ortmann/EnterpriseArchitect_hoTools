@@ -21,7 +21,7 @@ namespace EAAddinFramework.Utils
         /// <param name="eaObject"></param>
         public EaItem(string guid, string sqlObjType, EA.ObjectType eaObjectType, object eaObject)
         {
-            init(guid, sqlObjType, eaObjectType, eaObject);
+            Init(guid, sqlObjType, eaObjectType, eaObject);
         }
         /// <summary>
         /// Constructor
@@ -31,7 +31,7 @@ namespace EAAddinFramework.Utils
         /// <param name="eaObjectType"></param>
         public EaItem(string guid, string sqlObjType, EA.ObjectType eaObjectType)
         {
-            init(guid, sqlObjType, eaObjectType, null);
+            Init(guid, sqlObjType, eaObjectType, null);
         }
         /// <summary>
         /// Constructor
@@ -40,7 +40,7 @@ namespace EAAddinFramework.Utils
         /// <param name="sqlObjType"></param>
         public EaItem(string guid, string sqlObjType)
         {
-            init(guid, sqlObjType, EA.ObjectType.otNone, null);
+            Init(guid, sqlObjType, EA.ObjectType.otNone, null);
         }
         #endregion
 
@@ -52,7 +52,7 @@ namespace EAAddinFramework.Utils
         /// <param name="sqlObjType"></param>
         /// <param name="objType"></param>
         /// <param name="eaObject"></param>
-        void init(string guid, string sqlObjType, EA.ObjectType objType, object eaObject)
+        private void Init(string guid, string sqlObjType, EA.ObjectType objType, object eaObject)
         {
             Guid = guid;
             SqlObjectType = sqlObjType;

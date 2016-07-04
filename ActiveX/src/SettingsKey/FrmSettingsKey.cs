@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using hoTools.ActiveX;
 using GlobalHotkeys;
-using hoTools.Settings;
-using Control.EaAddinShortcuts;
+
 
 namespace hoTools.Settings.Key
 
@@ -14,9 +13,9 @@ namespace hoTools.Settings.Key
     /// Reads from configuration, displays the content and write to configuration.
     /// </summary>
     public partial class FrmSettingsKey : Form
-    {   
-        AddinSettings _settings;
-        AddinControlGui _addinControl ;
+    {
+        readonly AddinSettings _settings;
+        readonly AddinControlGui _addinControl ;
 
         #region Constructor
         /// <summary>
@@ -36,28 +35,19 @@ namespace hoTools.Settings.Key
            
 
             #region set possible services
-            var l_services1 = new List<hoTools.EaServices.ServiceCall>();
-            var l_services2 = new List<hoTools.EaServices.ServiceCall>();
-            var l_services3 = new List<hoTools.EaServices.ServiceCall>();
-            var l_services4 = new List<hoTools.EaServices.ServiceCall>();
-            var l_services11 = new List<hoTools.EaServices.ServiceCall>();
-            var l_services12 = new List<hoTools.EaServices.ServiceCall>();
-            var l_services13 = new List<hoTools.EaServices.ServiceCall>();
-            var l_services14 = new List<hoTools.EaServices.ServiceCall>();
-            var l_services15 = new List<hoTools.EaServices.ServiceCall>();
-
-
-            foreach (hoTools.EaServices.ServiceCall service in _settings.AllServices)
+            // set 5 lists of all possible services
+            var lServices1 = new List<EaServices.ServiceCall>();
+            var lServices2 = new List<EaServices.ServiceCall>();
+            var lServices3 = new List<EaServices.ServiceCall>();
+            var lServices4 = new List<EaServices.ServiceCall>();
+            var lServices15 = new List<EaServices.ServiceCall>();
+            foreach (EaServices.ServiceCall service in _settings.AllServices)
             {
-                l_services1.Add(service);
-                l_services2.Add(service);
-                l_services3.Add(service);
-                l_services4.Add(service);
-                l_services11.Add(service);
-                l_services12.Add(service);
-                l_services13.Add(service);
-                l_services14.Add(service);
-                l_services15.Add(service);
+                lServices1.Add(service);
+                lServices2.Add(service);
+                lServices3.Add(service);
+                lServices4.Add(service);
+                lServices15.Add(service);
             }
             #endregion
 
@@ -67,147 +57,148 @@ namespace hoTools.Settings.Key
 
             #region Global Shortcuts Service
             // Global Keys/Shortcuts
-            cmbGlobalKey1Service.DataSource = l_services11;
+            cmbGlobalKey1Service.DataSource = lServices1;
             cmbGlobalKey1Service.DisplayMember = "Description";
             cmbGlobalKey1Service.ValueMember = "GUID";
             cmbGlobalKey1Service.SelectedValue = _settings.GlobalShortcutsService[0].Guid;
-            //cmbGlobalKey1Service.Text = _settings.shortcutsServices[0].Help;
+            cmbGlobalKey1Tooltip.Text = _settings.GlobalShortcutsService[0].Tooltip;
 
 
-            cmbGlobalKey2Service.DataSource = l_services12;
+            cmbGlobalKey2Service.DataSource = lServices2;
             cmbGlobalKey2Service.DisplayMember = "Description";
             cmbGlobalKey2Service.ValueMember = "GUID";
             cmbGlobalKey2Service.SelectedValue = _settings.GlobalShortcutsService[1].Guid;
-            //cmbGlobalKey2Service.Text = _settings.shortcutsServices[1].Help;
+            cmbGlobalKey2Tooltip.Text = _settings.GlobalShortcutsService[1].Tooltip;
 
-            cmbGlobalKey3Service.DataSource = l_services13;
+
+            cmbGlobalKey3Service.DataSource = lServices3;
             cmbGlobalKey3Service.DisplayMember = "Description";
             cmbGlobalKey3Service.ValueMember = "GUID";
             cmbGlobalKey3Service.SelectedValue = _settings.GlobalShortcutsService[2].Guid;
-            //cmbGlobalKey3Service.Text = _settings.shortcutsServices[2].Help;
+            cmbGlobalKey3Tooltip.Text = _settings.GlobalShortcutsService[2].Tooltip;
 
 
-            cmbGlobalKey4Service.DataSource = l_services14;
+            cmbGlobalKey4Service.DataSource = lServices4;
             cmbGlobalKey4Service.DisplayMember = "Description";
             cmbGlobalKey4Service.ValueMember = "GUID";
             cmbGlobalKey4Service.SelectedValue = _settings.GlobalShortcutsService[3].Guid;
-            //cmbGlobalKey4Service.Text = _settings.shortcutsServices[3].Help;
+            cmbGlobalKey4Tooltip.Text = _settings.GlobalShortcutsService[3].Tooltip;
 
 
-            cmbGlobalKey5Service.DataSource = l_services15;
+            cmbGlobalKey5Service.DataSource = lServices15;
             cmbGlobalKey5Service.DisplayMember = "Description";
             cmbGlobalKey5Service.ValueMember = "GUID";
             cmbGlobalKey5Service.SelectedValue = _settings.GlobalShortcutsService[4].Guid;
-            //cmbGlobalKey5Service.Text = _settings.shortcutsServices[4].Help;
-
-            cmbGlobalKey1Tooltip.Text = _settings.GlobalShortcutsService[0].Tooltip;
-            cmbGlobalKey2Tooltip.Text = _settings.GlobalShortcutsService[1].Tooltip;
-            cmbGlobalKey3Tooltip.Text = _settings.GlobalShortcutsService[2].Tooltip;
-            cmbGlobalKey4Tooltip.Text = _settings.GlobalShortcutsService[3].Tooltip;
             cmbGlobalKey5Tooltip.Text = _settings.GlobalShortcutsService[4].Tooltip;
 
-            Dictionary<string, Keys> l_GlobalKeys1;
-            Dictionary<string, Keys> l_GlobalKeys = GlobalKeysConfig.GetKeys();
-            Dictionary<string, Modifiers> l_GlobalModifiers = GlobalKeysConfig.GetModifiers();
+
+
+
+
+
+
+
+            Dictionary<string, Keys> lGlobalKeys = GlobalKeysConfig.GetKeys();
+            Dictionary<string, Modifiers> lGlobalModifiers = GlobalKeysConfig.GetModifiers();
 
             // Hot key services
-            cmbGlobalKeyService1Key.DataSource = new BindingSource(l_GlobalKeys, null);
+            cmbGlobalKeyService1Key.DataSource = new BindingSource(lGlobalKeys, null);
             cmbGlobalKeyService1Key.DisplayMember = "Key";
             cmbGlobalKeyService1Key.ValueMember = "Key";
 
-            cmbGlobalKeyService1Mod1.DataSource = new BindingSource(l_GlobalModifiers, null);
+            cmbGlobalKeyService1Mod1.DataSource = new BindingSource(lGlobalModifiers, null);
             cmbGlobalKeyService1Mod1.DisplayMember = "Key";
             cmbGlobalKeyService1Mod1.ValueMember = "Key";
 
-            cmbGlobalKeyService1Mod2.DataSource = new BindingSource(l_GlobalModifiers, null);
+            cmbGlobalKeyService1Mod2.DataSource = new BindingSource(lGlobalModifiers, null);
             cmbGlobalKeyService1Mod2.DisplayMember = "Key";
             cmbGlobalKeyService1Mod2.ValueMember = "Key";
 
-            cmbGlobalKeyService1Mod3.DataSource = new BindingSource(l_GlobalModifiers, null);
+            cmbGlobalKeyService1Mod3.DataSource = new BindingSource(lGlobalModifiers, null);
             cmbGlobalKeyService1Mod3.DisplayMember = "Key";
             cmbGlobalKeyService1Mod3.ValueMember = "Key";
 
-            cmbGlobalKeyService1Mod4.DataSource = new BindingSource(l_GlobalModifiers, null);
+            cmbGlobalKeyService1Mod4.DataSource = new BindingSource(lGlobalModifiers, null);
             cmbGlobalKeyService1Mod4.DisplayMember = "Key";
             cmbGlobalKeyService1Mod4.ValueMember = "Key";
 
-            cmbGlobalKeyService2Key.DataSource = new BindingSource(l_GlobalKeys, null);
+            cmbGlobalKeyService2Key.DataSource = new BindingSource(lGlobalKeys, null);
             cmbGlobalKeyService2Key.DisplayMember = "Key";
             cmbGlobalKeyService2Key.ValueMember = "Key";
 
-            cmbGlobalKeyService2Mod1.DataSource = new BindingSource(l_GlobalModifiers, null);
+            cmbGlobalKeyService2Mod1.DataSource = new BindingSource(lGlobalModifiers, null);
             cmbGlobalKeyService2Mod1.DisplayMember = "Key";
             cmbGlobalKeyService2Mod1.ValueMember = "Key";
 
-            cmbGlobalKeyService2Mod2.DataSource = new BindingSource(l_GlobalModifiers, null);
+            cmbGlobalKeyService2Mod2.DataSource = new BindingSource(lGlobalModifiers, null);
             cmbGlobalKeyService2Mod2.DisplayMember = "Key";
             cmbGlobalKeyService2Mod2.ValueMember = "Key";
 
-            cmbGlobalKeyService2Mod3.DataSource = new BindingSource(l_GlobalModifiers, null);
+            cmbGlobalKeyService2Mod3.DataSource = new BindingSource(lGlobalModifiers, null);
             cmbGlobalKeyService2Mod3.DisplayMember = "Key";
             cmbGlobalKeyService2Mod3.ValueMember = "Key";
 
-            cmbGlobalKeyService2Mod4.DataSource = new BindingSource(l_GlobalModifiers, null);
+            cmbGlobalKeyService2Mod4.DataSource = new BindingSource(lGlobalModifiers, null);
             cmbGlobalKeyService2Mod4.DisplayMember = "Key";
             cmbGlobalKeyService2Mod4.ValueMember = "Key";
 
-            cmbGlobalKeyService3Key.DataSource = new BindingSource(l_GlobalKeys, null);
+            cmbGlobalKeyService3Key.DataSource = new BindingSource(lGlobalKeys, null);
             cmbGlobalKeyService3Key.DisplayMember = "Key";
             cmbGlobalKeyService3Key.ValueMember = "Key";
 
-            cmbGlobalKeyService3Mod1.DataSource = new BindingSource(l_GlobalModifiers, null);
+            cmbGlobalKeyService3Mod1.DataSource = new BindingSource(lGlobalModifiers, null);
             cmbGlobalKeyService3Mod1.DisplayMember = "Key";
             cmbGlobalKeyService3Mod1.ValueMember = "Key";
 
-            cmbGlobalKeyService3Mod2.DataSource = new BindingSource(l_GlobalModifiers, null);
+            cmbGlobalKeyService3Mod2.DataSource = new BindingSource(lGlobalModifiers, null);
             cmbGlobalKeyService3Mod2.DisplayMember = "Key";
             cmbGlobalKeyService3Mod2.ValueMember = "Key";
 
-            cmbGlobalKeyService3Mod3.DataSource = new BindingSource(l_GlobalModifiers, null);
+            cmbGlobalKeyService3Mod3.DataSource = new BindingSource(lGlobalModifiers, null);
             cmbGlobalKeyService3Mod3.DisplayMember = "Key";
             cmbGlobalKeyService3Mod3.ValueMember = "Key";
 
-            cmbGlobalKeyService3Mod4.DataSource = new BindingSource(l_GlobalModifiers, null);
+            cmbGlobalKeyService3Mod4.DataSource = new BindingSource(lGlobalModifiers, null);
             cmbGlobalKeyService3Mod4.DisplayMember = "Key";
             cmbGlobalKeyService3Mod4.ValueMember = "Key";
 
-            cmbGlobalKeyService4Key.DataSource = new BindingSource(l_GlobalKeys, null);
+            cmbGlobalKeyService4Key.DataSource = new BindingSource(lGlobalKeys, null);
             cmbGlobalKeyService4Key.DisplayMember = "Key";
             cmbGlobalKeyService4Key.ValueMember = "Key";
 
-            cmbGlobalKeyService4Mod1.DataSource = new BindingSource(l_GlobalModifiers, null);
+            cmbGlobalKeyService4Mod1.DataSource = new BindingSource(lGlobalModifiers, null);
             cmbGlobalKeyService4Mod1.DisplayMember = "Key";
             cmbGlobalKeyService4Mod1.ValueMember = "Key";
 
-            cmbGlobalKeyService4Mod2.DataSource = new BindingSource(l_GlobalModifiers, null);
+            cmbGlobalKeyService4Mod2.DataSource = new BindingSource(lGlobalModifiers, null);
             cmbGlobalKeyService4Mod2.DisplayMember = "Key";
             cmbGlobalKeyService4Mod2.ValueMember = "Key";
 
-            cmbGlobalKeyService4Mod3.DataSource = new BindingSource(l_GlobalModifiers, null);
+            cmbGlobalKeyService4Mod3.DataSource = new BindingSource(lGlobalModifiers, null);
             cmbGlobalKeyService4Mod3.DisplayMember = "Key";
             cmbGlobalKeyService4Mod3.ValueMember = "Key";
 
-            cmbGlobalKeyService4Mod4.DataSource = new BindingSource(l_GlobalModifiers, null);
+            cmbGlobalKeyService4Mod4.DataSource = new BindingSource(lGlobalModifiers, null);
             cmbGlobalKeyService4Mod4.DisplayMember = "Key";
             cmbGlobalKeyService4Mod4.ValueMember = "Key";
 
-            cmbGlobalKeyService5Key.DataSource = new BindingSource(l_GlobalKeys, null);
+            cmbGlobalKeyService5Key.DataSource = new BindingSource(lGlobalKeys, null);
             cmbGlobalKeyService5Key.DisplayMember = "Key";
             cmbGlobalKeyService5Key.ValueMember = "Key";
 
-            cmbGlobalKeyService5Mod1.DataSource = new BindingSource(l_GlobalModifiers, null);
+            cmbGlobalKeyService5Mod1.DataSource = new BindingSource(lGlobalModifiers, null);
             cmbGlobalKeyService5Mod1.DisplayMember = "Key";
             cmbGlobalKeyService5Mod1.ValueMember = "Key";
 
-            cmbGlobalKeyService5Mod2.DataSource = new BindingSource(l_GlobalModifiers, null);
+            cmbGlobalKeyService5Mod2.DataSource = new BindingSource(lGlobalModifiers, null);
             cmbGlobalKeyService5Mod2.DisplayMember = "Key";
             cmbGlobalKeyService5Mod2.ValueMember = "Key";
 
-            cmbGlobalKeyService5Mod3.DataSource = new BindingSource(l_GlobalModifiers, null);
+            cmbGlobalKeyService5Mod3.DataSource = new BindingSource(lGlobalModifiers, null);
             cmbGlobalKeyService5Mod3.DisplayMember = "Key";
             cmbGlobalKeyService5Mod3.ValueMember = "Key";
 
-            cmbGlobalKeyService5Mod4.DataSource = new BindingSource(l_GlobalModifiers, null);
+            cmbGlobalKeyService5Mod4.DataSource = new BindingSource(lGlobalModifiers, null);
             cmbGlobalKeyService5Mod4.DisplayMember = "Key";
             cmbGlobalKeyService5Mod4.ValueMember = "Key";
 
@@ -245,103 +236,103 @@ namespace hoTools.Settings.Key
             // Search
             #region Global Key Search
             // Search
-            cmbGlobalKeySearch1Key.DataSource = new BindingSource(l_GlobalKeys, null);
+            cmbGlobalKeySearch1Key.DataSource = new BindingSource(lGlobalKeys, null);
             cmbGlobalKeySearch1Key.DisplayMember = "Key";
             cmbGlobalKeySearch1Key.ValueMember = "Key";
 
-            cmbGlobalKeySearch1Mod1.DataSource = new BindingSource(l_GlobalModifiers, null);
+            cmbGlobalKeySearch1Mod1.DataSource = new BindingSource(lGlobalModifiers, null);
             cmbGlobalKeySearch1Mod1.DisplayMember = "Key";
             cmbGlobalKeySearch1Mod1.ValueMember = "Key";
 
-            cmbGlobalKeySearch1Mod2.DataSource = new BindingSource(l_GlobalModifiers, null);
+            cmbGlobalKeySearch1Mod2.DataSource = new BindingSource(lGlobalModifiers, null);
             cmbGlobalKeySearch1Mod2.DisplayMember = "Key";
             cmbGlobalKeySearch1Mod2.ValueMember = "Key";
 
-            cmbGlobalKeySearch1Mod3.DataSource = new BindingSource(l_GlobalModifiers, null);
+            cmbGlobalKeySearch1Mod3.DataSource = new BindingSource(lGlobalModifiers, null);
             cmbGlobalKeySearch1Mod3.DisplayMember = "Key";
             cmbGlobalKeySearch1Mod3.ValueMember = "Key";
 
-            cmbGlobalKeySearch1Mod4.DataSource = new BindingSource(l_GlobalModifiers, null);
+            cmbGlobalKeySearch1Mod4.DataSource = new BindingSource(lGlobalModifiers, null);
             cmbGlobalKeySearch1Mod4.DisplayMember = "Key";
             cmbGlobalKeySearch1Mod4.ValueMember = "Key";
 
-            cmbGlobalKeySearch2Key.DataSource = new BindingSource(l_GlobalKeys, null);
+            cmbGlobalKeySearch2Key.DataSource = new BindingSource(lGlobalKeys, null);
             cmbGlobalKeySearch2Key.DisplayMember = "Key";
             cmbGlobalKeySearch2Key.ValueMember = "Key";
 
-            cmbGlobalKeySearch2Mod1.DataSource = new BindingSource(l_GlobalModifiers, null);
+            cmbGlobalKeySearch2Mod1.DataSource = new BindingSource(lGlobalModifiers, null);
             cmbGlobalKeySearch2Mod1.DisplayMember = "Key";
             cmbGlobalKeySearch2Mod1.ValueMember = "Key";
 
-            cmbGlobalKeySearch2Mod2.DataSource = new BindingSource(l_GlobalModifiers, null);
+            cmbGlobalKeySearch2Mod2.DataSource = new BindingSource(lGlobalModifiers, null);
             cmbGlobalKeySearch2Mod2.DisplayMember = "Key";
             cmbGlobalKeySearch2Mod2.ValueMember = "Key";
 
-            cmbGlobalKeySearch2Mod3.DataSource = new BindingSource(l_GlobalModifiers, null);
+            cmbGlobalKeySearch2Mod3.DataSource = new BindingSource(lGlobalModifiers, null);
             cmbGlobalKeySearch2Mod3.DisplayMember = "Key";
             cmbGlobalKeySearch2Mod3.ValueMember = "Key";
 
-            cmbGlobalKeySearch2Mod4.DataSource = new BindingSource(l_GlobalModifiers, null);
+            cmbGlobalKeySearch2Mod4.DataSource = new BindingSource(lGlobalModifiers, null);
             cmbGlobalKeySearch2Mod4.DisplayMember = "Key";
             cmbGlobalKeySearch2Mod4.ValueMember = "Key";
 
-            cmbGlobalKeySearch3Key.DataSource = new BindingSource(l_GlobalKeys, null);
+            cmbGlobalKeySearch3Key.DataSource = new BindingSource(lGlobalKeys, null);
             cmbGlobalKeySearch3Key.DisplayMember = "Key";
             cmbGlobalKeySearch3Key.ValueMember = "Key";
 
-            cmbGlobalKeySearch3Mod1.DataSource = new BindingSource(l_GlobalModifiers, null);
+            cmbGlobalKeySearch3Mod1.DataSource = new BindingSource(lGlobalModifiers, null);
             cmbGlobalKeySearch3Mod1.DisplayMember = "Key";
             cmbGlobalKeySearch3Mod1.ValueMember = "Key";
 
-            cmbGlobalKeySearch3Mod2.DataSource = new BindingSource(l_GlobalModifiers, null);
+            cmbGlobalKeySearch3Mod2.DataSource = new BindingSource(lGlobalModifiers, null);
             cmbGlobalKeySearch3Mod2.DisplayMember = "Key";
             cmbGlobalKeySearch3Mod2.ValueMember = "Key";
 
-            cmbGlobalKeySearch3Mod3.DataSource = new BindingSource(l_GlobalModifiers, null);
+            cmbGlobalKeySearch3Mod3.DataSource = new BindingSource(lGlobalModifiers, null);
             cmbGlobalKeySearch3Mod3.DisplayMember = "Key";
             cmbGlobalKeySearch3Mod3.ValueMember = "Key";
 
-            cmbGlobalKeySearch3Mod4.DataSource = new BindingSource(l_GlobalModifiers, null);
+            cmbGlobalKeySearch3Mod4.DataSource = new BindingSource(lGlobalModifiers, null);
             cmbGlobalKeySearch3Mod4.DisplayMember = "Key";
             cmbGlobalKeySearch3Mod4.ValueMember = "Key";
 
-            cmbGlobalKeySearch4Key.DataSource = new BindingSource(l_GlobalKeys, null);
+            cmbGlobalKeySearch4Key.DataSource = new BindingSource(lGlobalKeys, null);
             cmbGlobalKeySearch4Key.DisplayMember = "Key";
             cmbGlobalKeySearch4Key.ValueMember = "Key";
 
-            cmbGlobalKeySearch4Mod1.DataSource = new BindingSource(l_GlobalModifiers, null);
+            cmbGlobalKeySearch4Mod1.DataSource = new BindingSource(lGlobalModifiers, null);
             cmbGlobalKeySearch4Mod1.DisplayMember = "Key";
             cmbGlobalKeySearch4Mod1.ValueMember = "Key";
 
-            cmbGlobalKeySearch4Mod2.DataSource = new BindingSource(l_GlobalModifiers, null);
+            cmbGlobalKeySearch4Mod2.DataSource = new BindingSource(lGlobalModifiers, null);
             cmbGlobalKeySearch4Mod2.DisplayMember = "Key";
             cmbGlobalKeySearch4Mod2.ValueMember = "Key";
 
-            cmbGlobalKeySearch4Mod3.DataSource = new BindingSource(l_GlobalModifiers, null);
+            cmbGlobalKeySearch4Mod3.DataSource = new BindingSource(lGlobalModifiers, null);
             cmbGlobalKeySearch4Mod3.DisplayMember = "Key";
             cmbGlobalKeySearch4Mod3.ValueMember = "Key";
 
-            cmbGlobalKeySearch4Mod4.DataSource = new BindingSource(l_GlobalModifiers, null);
+            cmbGlobalKeySearch4Mod4.DataSource = new BindingSource(lGlobalModifiers, null);
             cmbGlobalKeySearch4Mod4.DisplayMember = "Key";
             cmbGlobalKeySearch4Mod4.ValueMember = "Key";
 
-            cmbGlobalKeySearch5Key.DataSource = new BindingSource(l_GlobalKeys, null);
+            cmbGlobalKeySearch5Key.DataSource = new BindingSource(lGlobalKeys, null);
             cmbGlobalKeySearch5Key.DisplayMember = "Key";
             cmbGlobalKeySearch5Key.ValueMember = "Key";
 
-            cmbGlobalKeySearch5Mod1.DataSource = new BindingSource(l_GlobalModifiers, null);
+            cmbGlobalKeySearch5Mod1.DataSource = new BindingSource(lGlobalModifiers, null);
             cmbGlobalKeySearch5Mod1.DisplayMember = "Key";
             cmbGlobalKeySearch5Mod1.ValueMember = "Key";
 
-            cmbGlobalKeySearch5Mod2.DataSource = new BindingSource(l_GlobalModifiers, null);
+            cmbGlobalKeySearch5Mod2.DataSource = new BindingSource(lGlobalModifiers, null);
             cmbGlobalKeySearch5Mod2.DisplayMember = "Key";
             cmbGlobalKeySearch5Mod2.ValueMember = "Key";
 
-            cmbGlobalKeySearch5Mod3.DataSource = new BindingSource(l_GlobalModifiers, null);
+            cmbGlobalKeySearch5Mod3.DataSource = new BindingSource(lGlobalModifiers, null);
             cmbGlobalKeySearch5Mod3.DisplayMember = "Key";
             cmbGlobalKeySearch5Mod3.ValueMember = "Key";
 
-            cmbGlobalKeySearch5Mod4.DataSource = new BindingSource(l_GlobalModifiers, null);
+            cmbGlobalKeySearch5Mod4.DataSource = new BindingSource(lGlobalModifiers, null);
             cmbGlobalKeySearch5Mod4.DisplayMember = "Key";
             cmbGlobalKeySearch5Mod4.ValueMember = "Key";
 
@@ -495,15 +486,38 @@ namespace hoTools.Settings.Key
             _addinControl.ParameterizeServiceButton(); // sets the shortcuts
 
             _settings.UpdateSearchesAndServices(); // update dynamic informations like method, texts from configuration
-            this._settings.Save();
-            this.Close();
+            _settings.Save();
+            Close();
 
         }
         #endregion
 
         void btnCancel_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
+        }
+        /// <summary>
+        /// The Service index has changed. Update the tooltip
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void cmbGlobalKeyService_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // get selected value
+            ComboBox cmbBox = (ComboBox)sender;
+            // get tooltip for selected index
+            int index = cmbBox.SelectedIndex;
+            string tooltip = _settings.AllServices[index].Help;
+            if (sender == cmbGlobalKey1Service)
+                cmbGlobalKey1Tooltip.Text = tooltip;
+            if (sender == cmbGlobalKey2Service)
+                cmbGlobalKey2Tooltip.Text = tooltip;
+            if (sender == cmbGlobalKey3Service)
+                cmbGlobalKey3Tooltip.Text = tooltip;
+            if (sender == cmbGlobalKey4Service)
+                cmbGlobalKey4Tooltip.Text = tooltip;
+            if (sender == cmbGlobalKey5Service)
+                cmbGlobalKey5Tooltip.Text = tooltip;
         }
     }
 }

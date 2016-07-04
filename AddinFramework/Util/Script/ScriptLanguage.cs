@@ -1,9 +1,4 @@
 ﻿/*
- * Created by SharpDevelop.
- * User: wij
- * Date: 22/11/2014
- * Time: 6:54
- * 
  * To change this template use Tools | Options | Coding | Edit Standard Headers.
  */
 using System;
@@ -17,36 +12,36 @@ namespace EAAddinFramework.Utils
 	public abstract class ScriptLanguage
 	{
 
-		public ScriptFunction addFunction(Script script, MethodInfo operation)
+		public ScriptFunction AddFunction(Script script, MethodInfo operation)
 		{
 			//get the script code
 			//get the function code
-			string functionCode = this.translate(operation);
+			string functionCode = Translate(operation);
 			//add function code to script code
-			script.addCode(functionCode);
+			script.AddCode(functionCode);
 			//return the function
-			return script.functions.Find(x => x.name == operation.Name);
+			return script.Functions.Find(x => x.Name == operation.Name);
 		}
-		public abstract string name{get;}
-		protected abstract string functionStart {get;}
-		protected abstract string parameterListStart {get;}
-		protected abstract string parameterSeparator {get;}
-		protected abstract string parameterListEnd{get;}
-		protected abstract string bodyStart {get;}
-		protected abstract string bodyEnd {get;}
-		protected abstract string functionEnd {get;}
-		protected abstract string commentLine {get;}
+		public abstract string Name{get;}
+		protected abstract string FunctionStart {get;}
+		protected abstract string ParameterListStart {get;}
+		protected abstract string ParameterSeparator {get;}
+		protected abstract string ParameterListEnd{get;}
+		protected abstract string BodyStart {get;}
+		protected abstract string BodyEnd {get;}
+		protected abstract string FunctionEnd {get;}
+		protected abstract string CommentLine {get;}
 
-		public string translate(MethodInfo operation)
+		public string Translate(MethodInfo operation)
 		{
 			//start with e new line
 			string code = Environment.NewLine;
 			//keyword				
-			code += functionStart;
+			code += FunctionStart;
 			//name of the method
 			code += operation.Name;
 			//open parenthesis
-			code += parameterListStart;
+			code += ParameterListStart;
 			//parameters
 			bool firstParameter = true;
 			foreach (ParameterInfo parameter in operation.GetParameters()) 
@@ -61,7 +56,7 @@ namespace EAAddinFramework.Utils
 					else
 					{
 						//add a comma and space starting from the second parameter
-						code += parameterSeparator;
+						code += ParameterSeparator;
 					}
 					//parameter name
 					code += parameter.Name;
@@ -69,29 +64,29 @@ namespace EAAddinFramework.Utils
 				}
 			}
 			//close parenthesis
-			code += parameterListEnd;
+			code += ParameterListEnd;
 			//add newline
 			code += Environment.NewLine;
 			//begin of body
-			code += bodyStart;
+			code += BodyStart;
 			//add newline if there was a bodyStart
-			if (!string.IsNullOrEmpty(bodyStart))
+			if (!string.IsNullOrEmpty(BodyStart))
 			{
 				code += Environment.NewLine;							
 			}
 			//add tab + comment
-			code += "\t "+commentLine+"Add code here";
+			code += "\t "+CommentLine+"Add code here";
 			//add newline
 			code += Environment.NewLine;
 			//add end of body 
-			code += bodyEnd;
+			code += BodyEnd;
 			//add newline if there was a body end
-			if (!string.IsNullOrEmpty(bodyEnd))
+			if (!string.IsNullOrEmpty(BodyEnd))
 			{
 				code += Environment.NewLine;
 			}
 			//add end keyword
-			code += functionEnd;
+			code += FunctionEnd;
 			return code;							
 		}
 

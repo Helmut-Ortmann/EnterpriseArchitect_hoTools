@@ -25,55 +25,55 @@ namespace EAAddinFramework.Utils
     /// </summary>
     public class Script
 	{
-		static string scriptLanguageIndicator = "Language=\"";
-		static string scriptNameIndicator = "Script Name=\"";
-		private static int scriptHash;
-		private static List<Script> allScripts = new List<Script>();
-		private static Dictionary<string,string> _includableScripts ;
-		private static Dictionary<string,string> staticIncludableScripts ;
-		private static List<Script> staticEAMaticScripts = new List<Script>();
-		private static Dictionary<string,string> modelIncludableScripts = new Dictionary<string, string>(); 
-		private static bool reloadModelIncludableScripts;
-		private Model model;
-        readonly string scriptID;
-        public string _code { get; private set; }
-		public string errorMessage {get;set;}
-		private ScriptControl scriptController;
-		public List<ScriptFunction> functions {get;set;}
-		private ScriptLanguage language;
-		public string name{get;set;}
-		public string groupName {get;set;}
-        public string languageName => scriptController.Language;
-        public string displayName => name + " - " + scriptController.Language;
-        public bool isStatic { get; }
+		static string _scriptLanguageIndicator = "Language=\"";
+		static string _scriptNameIndicator = "Script Name=\"";
+        static int _scriptHash;
+        private static List<Script> _allScripts = new List<Script>();
+        static Dictionary<string, string> _includableScripts;
+        private static Dictionary<string,string> _staticIncludableScripts ;
+        static readonly List<Script> StaticEaMaticScripts = new List<Script>();
+        private static Dictionary<string,string> _modelIncludableScripts = new Dictionary<string, string>();
+        static bool _reloadModelIncludableScripts;
+        private Model _model;
+        readonly string _scriptId;
+        public string Code { get; private set; }
+		public string ErrorMessage {get;set;}
+        ScriptControl _scriptController;
+        public List<ScriptFunction> Functions {get;set;}
+        ScriptLanguage _language;
+        public string Name{get;set;}
+		public string GroupName {get;set;}
+        public string LanguageName => _scriptController.Language;
+        public string DisplayName => Name + " - " + _scriptController.Language;
+        public bool IsStatic { get; }
         static Script()
 		{
-			loadStaticIncludableScripts();
+			LoadStaticIncludableScripts();
 		}
 		/// <summary>
 		/// A dictionary with all the includable script.
 		/// The key is the complete !INC statement, the value is the code
 		/// </summary>
-		static Dictionary<string,string> includableScripts 
+		static Dictionary<string,string> IncludableScripts 
 		{
 			get
 			{
-				if (staticIncludableScripts == null)
+				if (_staticIncludableScripts == null)
 				{
-					loadStaticIncludableScripts();
+					LoadStaticIncludableScripts();
 				}
 				//if _includableScript is null then it has been made empty because the model scripts changed
-				if (reloadModelIncludableScripts)
+				if (_reloadModelIncludableScripts)
 				{
 					//start with the static includeable scripts
-					_includableScripts = new Dictionary<string, string>(staticIncludableScripts);
+					_includableScripts = new Dictionary<string, string>(_staticIncludableScripts);
 					//then add the model scripts
-					foreach (KeyValuePair<string, string> script in modelIncludableScripts) 
+					foreach (KeyValuePair<string, string> script in _modelIncludableScripts) 
 					{
 						_includableScripts.Add(script.Key, script.Value);
 					}
 					//turn off flag to reload scripts
-					reloadModelIncludableScripts = false;					
+					_reloadModelIncludableScripts = false;					
 				}
 				return _includableScripts;					
 			}
@@ -86,116 +86,118 @@ namespace EAAddinFramework.Utils
 		/// <summary>
 		/// creates a new script
 		/// </summary>
-		/// <param name="scriptID">the id of the script</param>
+		/// <param name="scriptId">the id of the script</param>
 		/// <param name="scriptName">the name of the script</param>
-		/// <param name="groupName">the name of the scriptgroup</param>
+		/// <param name="groupName">the name of the script group</param>
 		/// <param name="code">the code</param>
 		/// <param name="language">the language the code is written in</param>
 		/// <param name="model">the model this script resides in</param>
-		public Script(string scriptID,string scriptName,string groupName, string code, string language, Model model):this(scriptID, scriptName, groupName, code, language, false)
+		public Script(string scriptId,string scriptName,string groupName, string code, string language, Model model):this(scriptId, scriptName, groupName, code, language, false)
 		{
-			this.model = model;
+			_model = model;
 		}
-		/// <summary>
-		/// creates a new script
-		/// </summary>
-		/// <param name="scriptID">the id of the script</param>
-		/// <param name="scriptName">the name of the script</param>
-		/// <param name="groupName">the name of the scriptgroup</param>
-		/// <param name="code">the code</param>
-		/// <param name="language">the language the code is written in</param>
-		public Script(string scriptID,string scriptName,string groupName, string code, string language, bool isStatic)
-		{
-			this.scriptID = scriptID;
-			this.name = scriptName;
-			this.groupName = groupName;
-			this.functions = new List<ScriptFunction>();
-			this._code = code;
-			this.setLanguage(language);
-			this.isStatic = isStatic;
-		}
-		/// <summary>
-		/// reload the code into the controller to refresh the functions
-		/// </summary>
-		private void reloadCode()
-		{
-			//remove all functions
-			this.functions.Clear();
-			//create new scriptcontroller
-			this.scriptController = new ScriptControl();
-			this.scriptController.Language = this.language.name;
-			this.scriptController.AddObject("Repository", model.Repository);
-			//Add the actual code. This must be done in a try/catch because a syntax error in the script will result in an exception from AddCode
-			try
-			{
-				//first add the included code
-				string includedCode = this.IncludeScripts(this._code);
 
-				//then add the included code to the scriptcontroller
-				this.scriptController.AddCode(includedCode);
-				//set the functions
-				foreach (MSScriptControl.Procedure procedure in this.scriptController.Procedures) 
-				{
-					functions.Add(new ScriptFunction(this, procedure));
-				}
-			}
-			catch (Exception e)
-			{
-				//the addCode didn't work, probably because of a syntax error, or unsupported syntax in the code
-				var iscriptControl = this.scriptController as MSScriptControl.IScriptControl;
-				this.errorMessage = e.Message + " ERROR : " + iscriptControl.Error.Description + " | Line of error: " + iscriptControl.Error.Line + " | Code error: " + iscriptControl.Error.Text;
+        /// <summary>
+        /// creates a new script
+        /// </summary>
+        /// <param name="scriptId">the id of the script</param>
+        /// <param name="scriptName">the name of the script</param>
+        /// <param name="groupName">the name of the scriptgroup</param>
+        /// <param name="code">the code</param>
+        /// <param name="language">the language the code is written in</param>
+        /// <param name="isStatic"></param>
+        public Script(string scriptId,string scriptName,string groupName, string code, string language, bool isStatic)
+		{
+			_scriptId = scriptId;
+			Name = scriptName;
+			GroupName = groupName;
+			Functions = new List<ScriptFunction>();
+			Code = code;
+			SetLanguage(language);
+			IsStatic = isStatic;
+		}
+        /// <summary>
+        /// reload the code into the controller to refresh the functions
+        /// </summary>
+        private void ReloadCode()
+        {
+            //remove all functions
+            Functions.Clear();
+            //create new script controller
+            _scriptController = new ScriptControl();
+            _scriptController.Language = _language.Name;
+            _scriptController.AddObject("Repository", _model.Repository);
+            //Add the actual code. This must be done in a try/catch because a syntax error in the script will result in an exception from AddCode
+            try
+            {
+                //first add the included code
+                string includedCode = IncludeScripts(Code);
+
+                //then add the included code to the scriptcontroller
+                _scriptController.AddCode(includedCode);
+                //set the functions
+                foreach (Procedure procedure in _scriptController.Procedures)
+                {
+                    Functions.Add(new ScriptFunction(this, procedure));
+                }
+            }
+            catch (Exception e)
+            {
+                //the addCode didn't work, probably because of a syntax error, or unsupported syntax in the code
+                var iscriptControl = _scriptController as IScriptControl;
+                ErrorMessage = e.Message + " ERROR : " + iscriptControl.Error.Description + " | Line of error: " + iscriptControl.Error.Line + " | Code error: " + iscriptControl.Error.Text;
                 // use only the error message in the Script object
                 //MessageBox.Show("Error in loading code for script " + this.name + ": " + this.errorMessage, "Syntax error in Script");
-			}
-		}
-		/// <summary>
-		/// loads all static includable scripts. These scripts are stored outside the model and can not be changed by the user
-		/// </summary>
-		static void loadStaticIncludableScripts()
+            }
+        }
+        /// <summary>
+        /// loads all static includable scripts. These scripts are stored outside the model and can not be changed by the user
+        /// </summary>
+        static void LoadStaticIncludableScripts()
 		{
-			staticIncludableScripts = new Dictionary<string, string>();
+			_staticIncludableScripts = new Dictionary<string, string>();
 			//local scripts
-			loadLocalScripts();
+			LoadLocalScripts();
 			//MDG scripts in the program folder
-			loadLocalMDGScripts();
+			LoadLocalMdgScripts();
 			// MDG scripts in other locations
-			loadOtherMDGScripts();
+			LoadOtherMdgScripts();
 			//store the staticIncludeable scripts in a separate dictionary
-			_includableScripts = new Dictionary<string, string>(staticIncludableScripts);
+			_includableScripts = new Dictionary<string, string>(_staticIncludableScripts);
 
 		}
 
-		/// <summary>
-		/// The local scripts are located in the "ea program files"\scripts (so usually C:\Program Files (x86)\Sparx Systems\EA\Scripts or C:\Program Files\Sparx Systems\EA\Scripts)
-		/// The contents of the local scripts is loaded into the includableScripts
-		/// </summary>
-		private static void loadLocalScripts()
-		{
-			string scriptsDirectory = Path.GetDirectoryName(Model.ApplicationFullPath) + "\\Scripts";
-			string[] scriptFiles = Directory.GetFiles(scriptsDirectory,"*.*",SearchOption.AllDirectories);
-			foreach(string scriptfile in scriptFiles)
-			{
-				string scriptcode = File.ReadAllText(scriptfile);
-				string scriptName = Path.GetFileNameWithoutExtension(scriptfile);
-				string scriptLanguage = getLanguageFromPath(scriptfile);
-				staticIncludableScripts.Add("!INC Local Scripts." + scriptName, scriptcode);
-				//also check if the script needs to be loaded as static EA-Matic script
-				loadStaticEAMaticScript(scriptName, "Local Scripts", scriptcode,scriptLanguage);
-			}
-		}
-		private static string getLanguageFromPath (string path)
+        /// <summary>
+        /// The local scripts are located in the "ea program files"\scripts (so usually C:\Program Files (x86)\Sparx Systems\EA\Scripts or C:\Program Files\Sparx Systems\EA\Scripts)
+        /// The contents of the local scripts is loaded into the includableScripts
+        /// </summary>
+        static void LoadLocalScripts()
+        {
+            string scriptsDirectory = Path.GetDirectoryName(Model.ApplicationFullPath) + "\\Scripts";
+            string[] scriptFiles = Directory.GetFiles(scriptsDirectory, "*.*", SearchOption.AllDirectories);
+            foreach (string scriptfile in scriptFiles)
+            {
+                string scriptcode = File.ReadAllText(scriptfile);
+                string scriptName = Path.GetFileNameWithoutExtension(scriptfile);
+                string scriptLanguage = GetLanguageFromPath(scriptfile);
+                _staticIncludableScripts.Add("!INC Local Scripts." + scriptName, scriptcode);
+                //also check if the script needs to be loaded as static EA-Matic script
+                LoadStaticEaMaticScript(scriptName, "Local Scripts", scriptcode, scriptLanguage);
+            }
+        }
+        private static string GetLanguageFromPath (string path)
 		{
 			string extension = Path.GetExtension(path);
 			string foundLanguage = "VBScript";
-			if (extension.Equals("vbs",StringComparison.InvariantCultureIgnoreCase))
+			if (extension.Equals(@"vbs",StringComparison.InvariantCultureIgnoreCase))
 		    {
 		    	foundLanguage =  "VBScript";
 			} 
-			else if (extension.Equals("js",StringComparison.InvariantCultureIgnoreCase))
+			else if (extension.Equals(@"js",StringComparison.InvariantCultureIgnoreCase))
 			{
-				if (path.Contains("Jscript"))
+				if (path.Contains(@"Jscript"))
 				{
-					foundLanguage =  "Jscript";
+					foundLanguage =  @"Jscript";
 				}
 				else
 				{
@@ -204,66 +206,67 @@ namespace EAAddinFramework.Utils
 			}
 			return foundLanguage;
 		}
-			
-		/// <summary>
-		/// loads the MDG scripts from the locations added from MDG Technologies|Advanced. 
-		/// these locations are stored as a comma separated string in the registry
-		/// a location can either be a directory, or an URL
-		/// </summary>
-		private static void loadOtherMDGScripts()
-		{
-			//read the registry key to find the locations
-			var pathList = Registry.GetValue(@"HKEY_CURRENT_USER\Software\Sparx Systems\EA400\EA\OPTIONS", "MDGTechnology PathList", null) as string;    
-			if (pathList != null)
-			{
-				string[] mdgPaths = pathList.Split(',');
-				foreach (string mdgPath in mdgPaths) 
-				{
+
+        /// <summary>
+        /// loads the MDG scripts from the locations added from MDG Technologies|Advanced. 
+        /// these locations are stored as a comma separated string in the registry
+        /// a location can either be a directory, or an URL
+        /// </summary>
+        static void LoadOtherMdgScripts()
+        {
+            //read the registry key to find the locations
+            var pathList = Registry.GetValue(@"HKEY_CURRENT_USER\Software\Sparx Systems\EA400\EA\OPTIONS", "MDGTechnology PathList", null) as string;
+            if (pathList != null)
+            {
+                string[] mdgPaths = pathList.Split(',');
+                foreach (string mdgPath in mdgPaths)
+                {
                     if (mdgPath.Trim() == "") continue;
-					//figure out it we have a folder path or an URL
-					if (mdgPath.StartsWith("http",StringComparison.InvariantCultureIgnoreCase))
-				    {
-						//URL
-						loadMDGScriptsFromURL(mdgPath);
-				    }
-					else
-					{
-						//directory
-						loadMDGScriptsFromFolder(mdgPath);
-					}
-				}
-			}
-	
-		}
-		/// <summary>
-		/// load the MDG scripts from the MDG file located at the given URL
-		/// </summary>
-		/// <param name="url">the URL pointing to the MDG file</param>
-		static void loadMDGScriptsFromURL(string url)
+                    //figure out it we have a folder path or an URL
+                    if (mdgPath.StartsWith("http", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        //URL
+                        LoadMdgScriptsFromUrl(mdgPath);
+                    }
+                    else
+                    {
+                        //directory
+                        LoadMdgScriptsFromFolder(mdgPath);
+                    }
+                }
+            }
+
+        }
+        /// <summary>
+        /// load the MDG scripts from the MDG file located at the given URL
+        /// </summary>
+        /// <param name="url">the URL pointing to the MDG file</param>
+        static void LoadMdgScriptsFromUrl(string url)
 		{
 			try
 			{
-				loadMDGScripts(new WebClient().DownloadString(url));
+				LoadMdgScripts(new WebClient().DownloadString(url));
 			}
 			catch (Exception e)
 			{
-                MessageBox.Show($"URL='{url}' skipped (see: Extensions, MDGTechnology,Advanced).\r\n{e.Message}", "Error in load *.xml MDGScripts from url! ");
+                MessageBox.Show($"URL='{url}' skipped (see: Extensions, MDGTechnology,Advanced).\r\n{e.Message}", 
+                    @"Error in load *.xml MDGScripts from url! ");
             }
 		}
 		/// <summary>
 		/// get the MDG files in the local MDGtechnologies folder.
         /// In EA .\EA\MDGTechnologies\...
 		/// </summary>
-		static void loadLocalMDGScripts()
+		static void LoadLocalMdgScripts()
 		{
 			string mdgDirectory = Path.GetDirectoryName(Model.ApplicationFullPath) + "\\MDGTechnologies";
-			loadMDGScriptsFromFolder(mdgDirectory);
+			LoadMdgScriptsFromFolder(mdgDirectory);
 		}
 		/// <summary>
 		/// load the scripts from the MDG files in the given directory
 		/// </summary>
 		/// <param name="folderPath">the path to the directory</param>
-		static void loadMDGScriptsFromFolder(string folderPath)
+		static void LoadMdgScriptsFromFolder(string folderPath)
 		{
             string[] mdgFiles = Directory.GetFiles(folderPath, "*.xml", SearchOption.TopDirectoryOnly);
             try
@@ -271,12 +274,13 @@ namespace EAAddinFramework.Utils
 				
 				foreach(string mdgFile in mdgFiles)
 				{
-					loadMDGScripts(File.ReadAllText(mdgFile));
+					LoadMdgScripts(File.ReadAllText(mdgFile));
 				}
 			}
 			catch (Exception e)
 			{
-                MessageBox.Show($"Folder '{folderPath}' skipped\r\n{e.Message}", "Error in load *.xml MDGScripts from file! " );
+                MessageBox.Show($"Folder '{folderPath}' skipped\r\n{e.Message}",
+                    @"Error in load *.xml MDGScripts from file! " );
                 
 			}
 		}
@@ -284,7 +288,7 @@ namespace EAAddinFramework.Utils
         /// loads the scripts described in the MDG file into the includable scripts
         /// </summary>
         /// <param name="mdgXmlContent">the string content of the MDG file</param>
-        private static void loadMDGScripts(string mdgXmlContent)
+        private static void LoadMdgScripts(string mdgXmlContent)
 		{
 			try
 			{
@@ -309,14 +313,14 @@ namespace EAAddinFramework.Utils
 						if (contentNode != null)
 						{
 							//the script itself is base64 encoded in the content tag
-							string scriptcontent = System.Text.Encoding.Unicode.GetString( System.Convert.FromBase64String(contentNode.InnerText));
+							string scriptcontent = System.Text.Encoding.Unicode.GetString( Convert.FromBase64String(contentNode.InnerText));
                             string key = "!INC " + mdgName + "." + scriptName;
                             // key exists
-                            if (! staticIncludableScripts.ContainsKey(key))
+                            if (! _staticIncludableScripts.ContainsKey(key))
                             {
-                                staticIncludableScripts.Add(key, scriptcontent);
+                                _staticIncludableScripts.Add(key, scriptcontent);
                                 //also check if the script needs to be loaded as static EA-Matic script
-                                loadStaticEAMaticScript(scriptName, mdgName, scriptcontent, scriptLanguage);
+                                LoadStaticEaMaticScript(scriptName, mdgName, scriptcontent, scriptLanguage);
                             }
 						
 						}
@@ -325,34 +329,36 @@ namespace EAAddinFramework.Utils
 			}
 			catch (Exception e)
 			{
-                MessageBox.Show(String.Format(""), "Error in loadMDGScripts: " + e.Message );
+                MessageBox.Show(@"", @"Error in loadMDGScripts: " + e.Message );
 			}
 		}
-		private static void loadStaticEAMaticScript(string scriptName, string groupName, string scriptCode, string language)
-		{
-			if (scriptCode.Contains("EA-Matic"))
-			{
-				var script = new Script(groupName + "." + scriptName,scriptName,groupName,scriptCode, language,true);
-				staticEAMaticScripts.Add(script);
-			}
-		}
-		/// <summary>
-		/// replaces the !INC  statements with the actual code of the local script.
-		/// The local scripts are located in the "ea program files"\scripts (so usually C:\Program Files (x86)\Sparx Systems\EA\Scripts or C:\Program Files\Sparx Systems\EA\Scripts)
-		/// 
-		/// </summary>
-		/// <param name="code">the code containing the include parameters</param>
-		/// <returns>the code including the included code</returns>
-		private string IncludeScripts(string code,string parentIncludeStatement = null)
+        static void LoadStaticEaMaticScript(string scriptName, string groupName, string scriptCode, string language)
+        {
+            if (scriptCode.Contains("EA-Matic"))
+            {
+                var script = new Script(groupName + "." + scriptName, scriptName, groupName, scriptCode, language, true);
+                StaticEaMaticScripts.Add(script);
+            }
+        }
+
+        /// <summary>
+        /// replaces the !INC  statements with the actual code of the local script.
+        /// The local scripts are located in the "ea program files"\scripts (so usually C:\Program Files (x86)\Sparx Systems\EA\Scripts or C:\Program Files\Sparx Systems\EA\Scripts)
+        /// 
+        /// </summary>
+        /// <param name="code">the code containing the include parameters</param>
+        /// <param name="parentIncludeStatement"></param>
+        /// <returns>the code including the included code</returns>
+        private string IncludeScripts(string code,string parentIncludeStatement = null)
 		{
 			string includedCode = code;
 			//find all lines starting with !INC
-			foreach (string includeString in this.getIncludes(code)) 
+			foreach (string includeString in GetIncludes(code)) 
 			{
 				if (includeString != parentIncludeStatement) //prevent eternal loop
 				{
 					//then replace with the contents of the included script
-					includedCode = includedCode.Replace(includeString,this.IncludeScripts(this.getIncludedcode(includeString),includeString));
+					includedCode = includedCode.Replace(includeString,IncludeScripts(GetIncludedcode(includeString),includeString));
 				}
 			}
 			
@@ -364,48 +370,48 @@ namespace EAAddinFramework.Utils
 		/// </summary>
 		/// <param name="includeString">the include statement</param>
 		/// <returns>the code to be included</returns>
-		private string getIncludedcode(string includeString)
+		private string GetIncludedcode(string includeString)
 		{
 			string includedCode = string.Empty;
-			if (includableScripts.ContainsKey(includeString))
+			if (IncludableScripts.ContainsKey(includeString))
 			{
-				includedCode = includableScripts[includeString];
+				includedCode = IncludableScripts[includeString];
 			}
 			return includedCode;
 		}
-		/// <summary>
-		/// finds each instance of "!INC" and returns the whole line
-		/// </summary>
-		/// <param name="code">the code to search</param>
-		/// <returns>the contents of each line starting with "!INC"</returns>
-		private List<string> getIncludes(string code)
-		{
-			var includes = new List<string>();
-			using (StringReader reader = new StringReader(code))
-			{
-				string line;
-			    while ((line = reader.ReadLine()) != null)
-			    {
-			    	if (line.StartsWith("!INC", StringComparison.Ordinal))
-		    	    {
-			    		includes.Add(line);
-		    	    }
-			    }
-			}
-			return includes;
-		}
-		
-		private void setLanguage(string language)
+        /// <summary>
+        /// finds each instance of "!INC" and returns the whole line
+        /// </summary>
+        /// <param name="code">the code to search</param>
+        /// <returns>the contents of each line starting with "!INC"</returns>
+        List<string> GetIncludes(string code)
+        {
+            var includes = new List<string>();
+            using (StringReader reader = new StringReader(code))
+            {
+                string line;
+                while ((line = reader.ReadLine()) != null)
+                {
+                    if (line.StartsWith("!INC", StringComparison.Ordinal))
+                    {
+                        includes.Add(line);
+                    }
+                }
+            }
+            return includes;
+        }
+
+        private void SetLanguage(string language)
 		{
 			switch (language) {
 				case "VBScript":
-					this.language = new VBScriptLanguage();
+					_language = new VBScriptLanguage();
 					break;
 				case "JScript":
-					this.language = new JScriptLanguage();
+					_language = new JScriptLanguage();
 					break;
 				case "JavaScript":
-					this.language = new JavaScriptLanguage();
+					_language = new JavaScriptLanguage();
 					break;
 			}
 		}
@@ -414,7 +420,7 @@ namespace EAAddinFramework.Utils
 		/// </summary>
 		/// <param name="model"></param>
 		/// <returns></returns>
-		public static List<Script> getEAMaticScripts(Model model)
+		public static List<Script> GetEaMaticScripts(Model model)
 		{			
 			if (model != null)
 			{
@@ -425,32 +431,32 @@ namespace EAAddinFramework.Utils
 			 int newHash = xmlScripts.InnerXml.GetHashCode();
 			 //only create the scripts of the hash is different
 			 //otherwise we returned the cached scripts
-			 if (newHash != scriptHash)
+			 if (newHash != _scriptHash)
 			 {
 			  //set the new hash code
-			  scriptHash = newHash;
+			  _scriptHash = newHash;
 			  //reset scripts
-		 	  allScripts = new List<Script>();
+		 	  _allScripts = new List<Script>();
 		 	  
 		 	  //set flag to reload scripts in includableScripts
-		 	  reloadModelIncludableScripts = true;
-		 	  modelIncludableScripts = new Dictionary<string, string>();
+		 	  _reloadModelIncludableScripts = true;
+		 	  _modelIncludableScripts = new Dictionary<string, string>();
 		 	  
 		 	  XmlNodeList scriptNodes = xmlScripts.SelectNodes("//Row");
               foreach (XmlNode scriptNode in scriptNodes)
               {
               	//get the <notes> node. If it contains "Group Type=" then it is a group. Else we need to find "Language=" 
               	XmlNode notesNode = scriptNode.SelectSingleNode(model.FormatXPath("Notes"));
-              	if (notesNode.InnerText.Contains(scriptLanguageIndicator))
+              	if (notesNode.InnerText.Contains(_scriptLanguageIndicator))
           	    {
           	    	//we have an actual script.
           	    	//the name of the script
-          	    	string scriptName = getValueByName(notesNode.InnerText, scriptNameIndicator);
+          	    	string scriptName = GetValueByName(notesNode.InnerText, _scriptNameIndicator);
 					//now figure out the language
-					string language = getValueByName(notesNode.InnerText, scriptLanguageIndicator);
+					string language = GetValueByName(notesNode.InnerText, _scriptLanguageIndicator);
 					//get the ID
-					XmlNode IDNode = scriptNode.SelectSingleNode(model.FormatXPath("ScriptID"));
-					string ScriptID = IDNode.InnerText;
+					XmlNode idNode = scriptNode.SelectSingleNode(model.FormatXPath("ScriptID"));
+					string scriptId = idNode.InnerText;
 					//get the group
 					XmlNode groupNode = scriptNode.SelectSingleNode(model.FormatXPath("SCRIPTGROUP"));
 					string groupName = groupNode.InnerText;
@@ -464,95 +470,95 @@ namespace EAAddinFramework.Utils
 						{
 							scriptCode = string.Empty;
 						}
-						var script = new Script(ScriptID,scriptName,groupName,scriptCode, language,model); 
+						var script = new Script(scriptId,scriptName,groupName,scriptCode, language,model); 
 						//and create the script if both code and language are found
-						allScripts.Add(script);
+						_allScripts.Add(script);
 						//also add the script to the include dictionary
-						modelIncludableScripts.Add("!INC "+ script.groupName + "." + script.name,script._code);
+						_modelIncludableScripts.Add("!INC "+ script.GroupName + "." + script.Name,script.Code);
 					}
           	    }
               }
               //Add the static EA-Matic scripts to allScripts
-              foreach (Script staticScript in staticEAMaticScripts)
+              foreach (Script staticScript in StaticEaMaticScripts)
               {
               	//add the model to the static script first
-              	staticScript.model = model;
+              	staticScript._model = model;
               	//then add the static scrip to all scripts
-              	allScripts.Add(staticScript);
+              	_allScripts.Add(staticScript);
 			  }              
 			  //load the code of the scripts (because a script can include another script we can only load the code after all scripts have been created)
-			  foreach (Script script in allScripts) 
+			  foreach (Script script in _allScripts) 
 			  {
-			  	script.reloadCode();
+			  	script.ReloadCode();
 			  }			  
 			 }
 			}
-			return allScripts;
+			return _allScripts;
 		}
-		/// <summary>
-		/// gets the value from the content of the notes.
-		/// The value can be found after "name="
-		/// </summary>
-		/// <param name="notesContent">the contents of the notes node</param>
-		/// <param name="name">the name of the tag</param>
-		/// <returns>the value string</returns>
-		private static string getValueByName(string notesContent,string name)
-		{
-			string returnValue = string.Empty;
-			if (notesContent.Contains(name))
-		    {
-		    	int startName = notesContent.IndexOf(name, StringComparison.Ordinal) + name.Length;
-		    	int endName = notesContent.IndexOf("\"", startName, StringComparison.Ordinal);
-		    	if (endName > startName)
-		    	{
-		    		returnValue = notesContent.Substring(startName, endName - startName);
-		    	}
-		    	
-		    }
-			return returnValue;
-			
-		}
+        /// <summary>
+        /// gets the value from the content of the notes.
+        /// The value can be found after "name="
+        /// </summary>
+        /// <param name="notesContent">the contents of the notes node</param>
+        /// <param name="name">the name of the tag</param>
+        /// <returns>the value string</returns>
+        static string GetValueByName(string notesContent, string name)
+        {
+            string returnValue = string.Empty;
+            if (notesContent.Contains(name))
+            {
+                int startName = notesContent.IndexOf(name, StringComparison.Ordinal) + name.Length;
+                int endName = notesContent.IndexOf("\"", startName, StringComparison.Ordinal);
+                if (endName > startName)
+                {
+                    returnValue = notesContent.Substring(startName, endName - startName);
+                }
+
+            }
+            return returnValue;
+
+        }
         /// <summary>
         /// executes the function with the given name
         /// </summary>
         /// <param name="functionName">name of the function to execute</param>
         /// <param name="parameters">the parameters needed by this function</param>
         /// <returns>whatever (if anything) the function returns</returns>
-        internal object executeFunction(string functionName, object[] parameters)
-            => this.scriptController.Run(functionName, parameters);
+        internal object ExecuteFunction(string functionName, object[] parameters)
+            => _scriptController.Run(functionName, parameters);
         /// <summary>
         /// executes the function with the given name
         /// </summary>
         /// <param name="functionName">name of the function to execute</param>
         /// <returns>whatever (if anything) the function returns</returns>
-        internal object executeFunction(string functionName) 
-            => this.scriptController.Run(functionName, new object[0]);
+        internal object ExecuteFunction(string functionName) 
+            => _scriptController.Run(functionName, new object[0]);
         /// <summary>
         /// add a function with based on the given operation
         /// </summary>
         /// <param name="operation">the operation to base this function on</param>
         /// <returns>the new function</returns>
-        public ScriptFunction addFunction(MethodInfo operation)
+        public ScriptFunction AddFunction(MethodInfo operation)
 		{
 			//translate the method info into code
-			string functionCode = this.language.translate(operation);
+			string functionCode = _language.Translate(operation);
 			//add the code to the script
-			this.addCode(functionCode);
+			AddCode(functionCode);
 			//reload the script code
-			this.reloadCode();
+			ReloadCode();
 			//return the new function
-			return functions.Find(x => x.name == operation.Name);
+			return Functions.Find(x => x.Name == operation.Name);
 		}
 		
 		/// <summary>
 		/// adds the given code to the end of the script
 		/// </summary>
 		/// <param name="functionCode">the code to be added</param>
-		public void addCode(string functionCode)
+		public void AddCode(string functionCode)
 		{
-			this._code += functionCode;
-			string SQLUpdate = "update t_script set script = '"+ this.model.EscapeSqlString(this._code) +"' where ScriptID = " + this.scriptID ;
-			this.model.ExecuteSql(SQLUpdate);
+			Code += functionCode;
+			string sqlUpdate = "update t_script set script = '"+ _model.EscapeSqlString(Code) +"' where ScriptID = " + _scriptId ;
+			_model.ExecuteSql(sqlUpdate);
 		}
 
 	}

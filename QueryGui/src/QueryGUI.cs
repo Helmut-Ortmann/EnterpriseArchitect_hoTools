@@ -191,7 +191,7 @@ namespace hoTools.Query
 
                 splitContainer.SplitterDistance = 330;
                 // available script updates
-                _lscripts = Script.getEAMaticScripts(Model);
+                _lscripts = Script.GetEaMaticScripts(Model);
                 UpdateTableFunctions();
             }
 
@@ -305,7 +305,7 @@ namespace hoTools.Query
         /// <param name="e"></param>
         void btnLoadScripts_Click(object sender, EventArgs e)
         {
-            _lscripts = Script.getEAMaticScripts(Model);
+            _lscripts = Script.GetEaMaticScripts(Model);
             UpdateTableFunctions();
         }
         /// <summary>
@@ -322,20 +322,20 @@ namespace hoTools.Query
             foreach (Script script in _lscripts)
             {
 
-                foreach (ScriptFunction function in script.functions)
+                foreach (ScriptFunction function in script.Functions)
                 {
                     // 2 or 3 parameters
-                    if (isWithAll || (function.numberOfParameters > 1 && function.numberOfParameters < 4)) { 
+                    if (isWithAll || (function.NumberOfParameters > 1 && function.NumberOfParameters < 4)) { 
                         var newRow = _tableFunctions.NewRow();
                         newRow["ScriptObj"] = script;
-                        newRow["Script"] = script.name;
-                        newRow["Language"] = script.languageName;
-                        newRow["Group"] = script.groupName;
-                        newRow["Err"] = script.errorMessage;
+                        newRow["Script"] = script.Name;
+                        newRow["Language"] = script.LanguageName;
+                        newRow["Group"] = script.GroupName;
+                        newRow["Err"] = script.ErrorMessage;
 
                         newRow["FunctionObj"] = function;
-                        newRow["Function"] = function.name;
-                        newRow["ParCount"] = function.numberOfParameters;
+                        newRow["Function"] = function.Name;
+                        newRow["ParCount"] = function.NumberOfParameters;
                         _tableFunctions.Rows.Add(newRow);
                     }
                 }
@@ -390,7 +390,7 @@ namespace hoTools.Query
             
 
             var script = row["ScriptObj"] as Script;
-            MessageBox.Show(script._code, $"Code of {script.displayName}");
+            MessageBox.Show(script.Code, $"Code of {script.DisplayName}");
 
         }
 
@@ -748,21 +748,21 @@ namespace hoTools.Query
         void loadStandardScriptsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // new script group "hoTools"
-            var group = new EaScriptGroup(Model, "hoTools",EaScriptGroup.EaScriptGroupType.NORMAL);
-            if (! group.exists()) group.save();
+            var group = new EaScriptGroup(Model, "hoTools",EaScriptGroup.EaScriptGroupType.Normal);
+            if (! group.Exists()) group.Save();
 
             // get scripts to create
             ResourceManager rm = new ResourceManager("hoTools.Query.Resources.Scripts", Assembly.GetExecutingAssembly());
 
             // new script for script group "hoTools"
             string code = rm.GetString("hoDemo2ParScript");
-            var script = new EaScript(Model, "hoDemo2Par", "Internal", "VBScript", group.GUID, code);
-            script.save();
+            var script = new EaScript(Model, "hoDemo2Par", "Internal", "VBScript", group.Guid, code);
+            script.Save();
 
             // new script for script group "hoTools"
             code = rm.GetString("hoDemo3ParScript");
-            script = new EaScript(Model, "hoDemo3Par", "Internal", "VBScript", group.GUID, code);
-            script.save();
+            script = new EaScript(Model, "hoDemo3Par", "Internal", "VBScript", group.Guid, code);
+            script.Save();
             MessageBox.Show(@"ScriptGroup: hoTools
 - Script1: hoDemo2Par
 - Script2: hoDemo3Par",

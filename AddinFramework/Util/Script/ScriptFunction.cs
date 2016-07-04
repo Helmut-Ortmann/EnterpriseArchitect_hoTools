@@ -18,11 +18,11 @@ namespace EAAddinFramework.Utils
 	/// </summary>
 	public class ScriptFunction
 	{
-		public Script owner { get; }
-        public string name => procedure.Name;
-        public string fullName => this.owner.name + "." + this.procedure.Name;
-        public int numberOfParameters => procedure.NumArgs;
-        Procedure procedure { get; }
+		public Script Owner { get; }
+        public string Name => Procedure.Name;
+        public string FullName => Owner.Name + "." + Procedure.Name;
+        public int NumberOfParameters => Procedure.NumArgs;
+        Procedure Procedure { get; }
 
         /// <summary>
         /// Constructor ScriptFunction
@@ -31,27 +31,27 @@ namespace EAAddinFramework.Utils
         /// <param name="procedure">Function</param>
         public ScriptFunction(Script owner, Procedure procedure)
 		{
-			this.owner = owner;
-			this.procedure = procedure;
+			Owner = owner;
+			Procedure = procedure;
 		}
 		/// <summary>
 		/// execute this function
 		/// </summary>
 		/// <param name="parameters">the parameters needed by this function</param>
 		/// <returns>whatever gets returned by the actual script function</returns>
-		public object execute(object[] parameters)
+		public object Execute(object[] parameters)
 		{
-			if (this.procedure.NumArgs == parameters.Length)
+			if (Procedure.NumArgs == parameters.Length)
 			{
-				return this.owner.executeFunction(this.name, parameters);
+				return Owner.ExecuteFunction(Name, parameters);
 			}
-			else if (this.procedure.NumArgs == 0)
+			else if (Procedure.NumArgs == 0)
 			{
-				return this.owner.executeFunction(this.name);
+				return Owner.ExecuteFunction(Name);
 			}
 			else
 			{
-				throw new ArgumentException ("wrong number of arguments. Script has "+this.procedure.NumArgs+" argument where the call has " + parameters.Length + " parameters");
+				throw new ArgumentException ("wrong number of arguments. Script has "+Procedure.NumArgs+" argument where the call has " + parameters.Length + " parameters");
 			}
 		}
 	}

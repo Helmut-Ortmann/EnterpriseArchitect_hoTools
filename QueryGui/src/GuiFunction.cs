@@ -21,9 +21,9 @@ namespace hoTools.Query
         /// <returns></returns>
         public static bool RunScriptWithAsk(Model model, string sql, ScriptFunction function, bool isWithAsk = false)
         {
-            string scriptName = function.owner.name;
-            string functionName = function.name;
-            int scriptParCount = function.numberOfParameters;
+            string scriptName = function.Owner.Name;
+            string functionName = function.Name;
+            int scriptParCount = function.NumberOfParameters;
 
             // Check parameter count of function
             if (scriptParCount < 2 || scriptParCount > 3)
@@ -90,7 +90,7 @@ namespace hoTools.Query
         public static bool RunScriptFunction(Model model, ScriptFunction function, EA.ObjectType oType, object oContext)
         {
             // run script according to parameter count
-            switch (function.numberOfParameters)
+            switch (function.NumberOfParameters)
             {
                 case 2:
                     object[] par2 = { oContext, oType };
@@ -99,7 +99,7 @@ namespace hoTools.Query
                     object[] par3 = { oContext, oType, model };
                     return new ScriptFuntionWrapper(function).Execute(par3);
                 default:
-                    MessageBox.Show($"Script {function.fullName}  has {function.numberOfParameters} parameter",
+                    MessageBox.Show($"Script {function.FullName}  has {function.NumberOfParameters} parameter",
                         @"Script function parameter count not 2 or 3, Break!");
                     return false;
             }

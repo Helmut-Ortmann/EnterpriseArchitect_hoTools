@@ -10,7 +10,7 @@ namespace EAAddinFramework.Utils
         // Dictionary of SQL Types
         // only use unambiguous types
         // !!!!Package may be a Package as well as a Diagram!!!!!!
-        static readonly Dictionary<string, EA.ObjectType> eaObjectTypes = new Dictionary<string, EA.ObjectType>
+        static readonly Dictionary<string, EA.ObjectType> EaObjectTypes = new Dictionary<string, EA.ObjectType>
         {
             { "Action",EA.ObjectType.otElement},
             { "ActionPin",EA.ObjectType.otElement},
@@ -51,45 +51,45 @@ namespace EAAddinFramework.Utils
         /// </summary>
         /// <param name="rep"></param>
         /// <param name="sqlObjectType"></param>
-        /// <param name="GUID"></param>
+        /// <param name="guid"></param>
         /// <param name="objectType"></param>
         /// <returns></returns>
-        public static object GetEaObject(this EA.Repository rep, string  sqlObjectType, string GUID, out EA.ObjectType objectType)
+        public static object GetEaObject(this EA.Repository rep, string  sqlObjectType, string guid, out EA.ObjectType objectType)
         {
            
             EA.ObjectType eaObjectType;
             objectType = EA.ObjectType.otNone;
 
             // eaObjectType found in dictionary
-            if ( eaObjectTypes.TryGetValue(sqlObjectType, out eaObjectType) )
+            if ( EaObjectTypes.TryGetValue(sqlObjectType, out eaObjectType) )
             {
                 switch (eaObjectType)
                 {
                     case EA.ObjectType.otElement:
                         objectType = eaObjectType;
-                        return (object)rep.GetElementByGuid(GUID);
+                        return rep.GetElementByGuid(guid);
                     case EA.ObjectType.otDiagram:
                         objectType = eaObjectType;
-                        return (object)rep.GetDiagramByGuid(GUID);
+                        return (object)rep.GetDiagramByGuid(guid);
                     case EA.ObjectType.otPackage:
                         objectType = eaObjectType;
-                        return (object)rep.GetPackageByGuid(GUID);
+                        return rep.GetPackageByGuid(guid);
                     case EA.ObjectType.otAttribute:
                         objectType = eaObjectType;
-                        return (object)rep.GetAttributeByGuid(GUID);
+                        return rep.GetAttributeByGuid(guid);
                     case EA.ObjectType.otMethod:
                         objectType = eaObjectType;
-                        return (object)rep.GetMethodByGuid(GUID);
+                        return rep.GetMethodByGuid(guid);
                     case EA.ObjectType.otConnector:
                         objectType = eaObjectType;
-                        return (object)rep.GetConnectorByGuid(GUID);
+                        return rep.GetConnectorByGuid(guid);
                     default:
                         break;
                 }
 
             } else {
                 // by SQL
-                string where = $"where ea_guid = '{ GUID}'";
+                string where = $"where ea_guid = '{ guid}'";
                 string sql = $"select 'OBJECT'  as object_type from t_object  {where}      UNION " +
                              $"select 'DIAGRAM'                from t_diagram {where}            ";
                 XElement x = XElement.Parse(rep.SQLQuery(sql));
@@ -97,7 +97,7 @@ namespace EAAddinFramework.Utils
                              select t).FirstOrDefault();
                 if (oType == null )
                 {
-                    MessageBox.Show($"GUID:'{GUID}'", "GUID not found, Break!!!!");
+                    MessageBox.Show($"GUID:'{guid}'", @"GUID not found, Break!!!!");
                     return null;
                 }
                 string type = oType.Value;
@@ -105,12 +105,12 @@ namespace EAAddinFramework.Utils
                 {
                     case "OBJECT":
                         objectType = EA.ObjectType.otElement;
-                        return rep.GetElementByGuid(GUID);
+                        return rep.GetElementByGuid(guid);
                     case "DIAGRAM":
                         objectType = EA.ObjectType.otDiagram;
-                        return rep.GetDiagramByGuid(GUID);
+                        return rep.GetDiagramByGuid(guid);
                     default:
-                        MessageBox.Show($"GUID searched in object, diagram:'{GUID}'", "GUID not found in Repository, Break!!!!");
+                        MessageBox.Show($"GUID searched in object, diagram:'{guid}'", @"GUID not found in Repository, Break!!!!");
                         return null;
 
                 }
