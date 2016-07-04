@@ -30,9 +30,12 @@ namespace hoTools.Settings.Key
             _settings = settings;
             _addinControl = addinControl;
 
-          
-          
-           
+
+            // Global key support
+            chkShortKeySupport.Checked = settings.IsShortKeySupport;
+
+
+
 
             #region set possible services
             // set 5 lists of all possible services
@@ -389,11 +392,12 @@ namespace hoTools.Settings.Key
         /// <param name="e"></param>
         void btnOk_Click(object sender, EventArgs e)
         {
-           
+            // Global Key support
+            _settings.IsShortKeySupport = chkShortKeySupport.Checked;
 
 
-    
-           
+
+
 
             #region store global services
             // Global Services via hot key

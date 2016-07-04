@@ -71,6 +71,8 @@
             this.chkConveyedItemSupport = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label34 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -78,9 +80,10 @@
             // 
             // btnOk
             // 
+            this.btnOk.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnOk.Location = new System.Drawing.Point(30, 486);
             this.btnOk.Name = "btnOk";
-            this.btnOk.Size = new System.Drawing.Size(75, 23);
+            this.btnOk.Size = new System.Drawing.Size(91, 31);
             this.btnOk.TabIndex = 0;
             this.btnOk.Text = "OK";
             this.btnOk.UseVisualStyleBackColor = true;
@@ -88,9 +91,10 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(111, 486);
+            this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancel.Location = new System.Drawing.Point(127, 486);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.Size = new System.Drawing.Size(91, 31);
             this.btnCancel.TabIndex = 1;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -380,8 +384,7 @@
             this.chkShortKeySupport.Name = "chkShortKeySupport";
             this.chkShortKeySupport.Size = new System.Drawing.Size(15, 14);
             this.chkShortKeySupport.TabIndex = 230;
-            this.toolTip1.SetToolTip(this.chkShortKeySupport, "Enable\r\n- Key\r\n- Hotkey\r\n- Shortcut\r\nsupport.\r\n\r\nDefine a key combination for a s" +
-        "earch or a service (see settings).");
+            this.toolTip1.SetToolTip(this.chkShortKeySupport, resources.GetString("chkShortKeySupport.ToolTip"));
             this.chkShortKeySupport.UseVisualStyleBackColor = true;
             // 
             // label4
@@ -391,12 +394,10 @@
             this.label4.Location = new System.Drawing.Point(29, 108);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(123, 18);
+            this.label4.Size = new System.Drawing.Size(136, 18);
             this.label4.TabIndex = 229;
-            this.label4.Text = "Shortkey Support";
-            this.toolTip1.SetToolTip(this.label4, "Enable\r\n- Key\r\n- Hotkey\r\n- Shortcut\r\nsupport.\r\n\r\nDefine a key combination for a s" +
-        "earch or a service (see settings).\r\n\r\nYou have to restart EA to activate the con" +
-        "figured settings.");
+            this.label4.Text = "Global Key Support";
+            this.toolTip1.SetToolTip(this.label4, resources.GetString("label4.ToolTip"));
             // 
             // label5
             // 
@@ -561,12 +562,34 @@
             this.label34.TabIndex = 225;
             this.label34.Text = "Path File Manager / Explorer for show folder";
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(235, 137);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(80, 18);
+            this.label8.TabIndex = 240;
+            this.label8.Text = "on Toolbar";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(235, 155);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(80, 18);
+            this.label9.TabIndex = 241;
+            this.label9.Text = "on Toolbar";
+            // 
             // FrmSettingsGeneral
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(844, 529);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.label8);
             this.Controls.Add(this.chkConveyedItemSupport);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.chkFavoriteSupport);
@@ -654,5 +677,7 @@
         private System.Windows.Forms.RadioButton rbAutoLoadMdgNo;
         private System.Windows.Forms.RadioButton rbAutoLoadMdgCompilation;
         private System.Windows.Forms.RadioButton rbAutoLoadMdgBasic;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
     }
 }

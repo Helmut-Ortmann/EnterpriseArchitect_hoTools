@@ -241,8 +241,8 @@ namespace hoTools.EaServices
         /// </summary>
         /// <param name="rep"></param>
 
-        [ServiceOperation("{42788062-3578-49CC-BBD0-87032B764B3D}", "UnLock package recursive)",
-            "UnLock package recursive", isTextRequired: false)]
+        [ServiceOperation("{42788062-3578-49CC-BBD0-87032B764B3D}", "UnLock selected package recursive)",
+            "UnLock selected package recursive", isTextRequired: false)]
         // ReSharper disable once UnusedMember.Global
         // dynamical usage as configurable service by reflection
         public static void UnLockPackageRecursive(Repository rep)
@@ -279,8 +279,8 @@ namespace hoTools.EaServices
         /// </summary>
         /// <param name="rep"></param>
 
-        [ServiceOperation("{F1B97839-0E68-4019-95C2-8F745CCDA484}", "Lock package recursive",
-            "UnLock package recursive", isTextRequired: false)]
+        [ServiceOperation("{F1B97839-0E68-4019-95C2-8F745CCDA484}", "Lock selected package recursive",
+            "Lock selected package recursive", isTextRequired: false)]
         // ReSharper disable once UnusedMember.Global
         // dynamical usage as configurable service by reflection
         public static void LockPackageRecursive(Repository rep)

@@ -112,6 +112,9 @@
             this.label28 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.chkShortKeySupport = new System.Windows.Forms.CheckBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.SuspendLayout();
@@ -119,7 +122,7 @@
             // btnOK
             // 
             this.btnOK.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnOK.Location = new System.Drawing.Point(22, 477);
+            this.btnOK.Location = new System.Drawing.Point(22, 516);
             this.btnOK.Margin = new System.Windows.Forms.Padding(2);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(72, 27);
@@ -132,7 +135,7 @@
             // btnCancel
             // 
             this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancel.Location = new System.Drawing.Point(108, 477);
+            this.btnCancel.Location = new System.Drawing.Point(106, 516);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(2);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 27);
@@ -143,7 +146,7 @@
             // 
             // cmbGlobalKeyService5Mod4
             // 
-            this.cmbGlobalKeyService5Mod4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbGlobalKeyService5Mod4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeyService5Mod4.FormattingEnabled = true;
             this.cmbGlobalKeyService5Mod4.ItemHeight = 15;
             this.cmbGlobalKeyService5Mod4.Location = new System.Drawing.Point(264, 154);
@@ -156,7 +159,7 @@
             // 
             // cmbGlobalKeyService5Mod2
             // 
-            this.cmbGlobalKeyService5Mod2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbGlobalKeyService5Mod2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeyService5Mod2.FormattingEnabled = true;
             this.cmbGlobalKeyService5Mod2.ItemHeight = 15;
             this.cmbGlobalKeyService5Mod2.Location = new System.Drawing.Point(164, 154);
@@ -169,7 +172,7 @@
             // 
             // cmbGlobalKeyService5Mod3
             // 
-            this.cmbGlobalKeyService5Mod3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbGlobalKeyService5Mod3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeyService5Mod3.FormattingEnabled = true;
             this.cmbGlobalKeyService5Mod3.ItemHeight = 15;
             this.cmbGlobalKeyService5Mod3.Location = new System.Drawing.Point(214, 154);
@@ -182,7 +185,7 @@
             // 
             // cmbGlobalKeyService5Mod1
             // 
-            this.cmbGlobalKeyService5Mod1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbGlobalKeyService5Mod1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeyService5Mod1.FormattingEnabled = true;
             this.cmbGlobalKeyService5Mod1.ItemHeight = 15;
             this.cmbGlobalKeyService5Mod1.Location = new System.Drawing.Point(115, 154);
@@ -195,7 +198,7 @@
             // 
             // cmbGlobalKeyService5Key
             // 
-            this.cmbGlobalKeyService5Key.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbGlobalKeyService5Key.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeyService5Key.FormattingEnabled = true;
             this.cmbGlobalKeyService5Key.ItemHeight = 15;
             this.cmbGlobalKeyService5Key.Location = new System.Drawing.Point(7, 154);
@@ -232,7 +235,7 @@
             // 
             // cmbGlobalKeyService4Mod4
             // 
-            this.cmbGlobalKeyService4Mod4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbGlobalKeyService4Mod4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeyService4Mod4.FormattingEnabled = true;
             this.cmbGlobalKeyService4Mod4.ItemHeight = 15;
             this.cmbGlobalKeyService4Mod4.Location = new System.Drawing.Point(264, 130);
@@ -245,7 +248,7 @@
             // 
             // cmbGlobalKeyService4Mod2
             // 
-            this.cmbGlobalKeyService4Mod2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbGlobalKeyService4Mod2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeyService4Mod2.FormattingEnabled = true;
             this.cmbGlobalKeyService4Mod2.ItemHeight = 15;
             this.cmbGlobalKeyService4Mod2.Location = new System.Drawing.Point(164, 130);
@@ -258,7 +261,7 @@
             // 
             // cmbGlobalKeyService4Mod3
             // 
-            this.cmbGlobalKeyService4Mod3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbGlobalKeyService4Mod3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeyService4Mod3.FormattingEnabled = true;
             this.cmbGlobalKeyService4Mod3.ItemHeight = 15;
             this.cmbGlobalKeyService4Mod3.Location = new System.Drawing.Point(214, 130);
@@ -271,7 +274,7 @@
             // 
             // cmbGlobalKeyService4Mod1
             // 
-            this.cmbGlobalKeyService4Mod1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbGlobalKeyService4Mod1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeyService4Mod1.FormattingEnabled = true;
             this.cmbGlobalKeyService4Mod1.ItemHeight = 15;
             this.cmbGlobalKeyService4Mod1.Location = new System.Drawing.Point(115, 130);
@@ -284,7 +287,7 @@
             // 
             // cmbGlobalKeyService4Key
             // 
-            this.cmbGlobalKeyService4Key.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbGlobalKeyService4Key.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeyService4Key.FormattingEnabled = true;
             this.cmbGlobalKeyService4Key.ItemHeight = 15;
             this.cmbGlobalKeyService4Key.Location = new System.Drawing.Point(7, 130);
@@ -321,7 +324,7 @@
             // 
             // cmbGlobalKeyService3Mod4
             // 
-            this.cmbGlobalKeyService3Mod4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbGlobalKeyService3Mod4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeyService3Mod4.FormattingEnabled = true;
             this.cmbGlobalKeyService3Mod4.ItemHeight = 15;
             this.cmbGlobalKeyService3Mod4.Location = new System.Drawing.Point(264, 106);
@@ -334,7 +337,7 @@
             // 
             // cmbGlobalKeyService3Mod2
             // 
-            this.cmbGlobalKeyService3Mod2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbGlobalKeyService3Mod2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeyService3Mod2.FormattingEnabled = true;
             this.cmbGlobalKeyService3Mod2.ItemHeight = 15;
             this.cmbGlobalKeyService3Mod2.Location = new System.Drawing.Point(164, 106);
@@ -347,7 +350,7 @@
             // 
             // cmbGlobalKeyService3Mod3
             // 
-            this.cmbGlobalKeyService3Mod3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbGlobalKeyService3Mod3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeyService3Mod3.FormattingEnabled = true;
             this.cmbGlobalKeyService3Mod3.ItemHeight = 15;
             this.cmbGlobalKeyService3Mod3.Location = new System.Drawing.Point(214, 106);
@@ -360,7 +363,7 @@
             // 
             // cmbGlobalKeyService3Mod1
             // 
-            this.cmbGlobalKeyService3Mod1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbGlobalKeyService3Mod1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeyService3Mod1.FormattingEnabled = true;
             this.cmbGlobalKeyService3Mod1.ItemHeight = 15;
             this.cmbGlobalKeyService3Mod1.Location = new System.Drawing.Point(115, 106);
@@ -373,7 +376,7 @@
             // 
             // cmbGlobalKeyService3Key
             // 
-            this.cmbGlobalKeyService3Key.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbGlobalKeyService3Key.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeyService3Key.FormattingEnabled = true;
             this.cmbGlobalKeyService3Key.ItemHeight = 15;
             this.cmbGlobalKeyService3Key.Location = new System.Drawing.Point(7, 106);
@@ -410,7 +413,7 @@
             // 
             // cmbGlobalKeyService2Mod4
             // 
-            this.cmbGlobalKeyService2Mod4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbGlobalKeyService2Mod4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeyService2Mod4.FormattingEnabled = true;
             this.cmbGlobalKeyService2Mod4.ItemHeight = 15;
             this.cmbGlobalKeyService2Mod4.Location = new System.Drawing.Point(264, 82);
@@ -423,7 +426,7 @@
             // 
             // cmbGlobalKeyService2Mod2
             // 
-            this.cmbGlobalKeyService2Mod2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbGlobalKeyService2Mod2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeyService2Mod2.FormattingEnabled = true;
             this.cmbGlobalKeyService2Mod2.ItemHeight = 15;
             this.cmbGlobalKeyService2Mod2.Location = new System.Drawing.Point(164, 82);
@@ -436,7 +439,7 @@
             // 
             // cmbGlobalKeyService2Mod3
             // 
-            this.cmbGlobalKeyService2Mod3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbGlobalKeyService2Mod3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeyService2Mod3.FormattingEnabled = true;
             this.cmbGlobalKeyService2Mod3.ItemHeight = 15;
             this.cmbGlobalKeyService2Mod3.Location = new System.Drawing.Point(214, 82);
@@ -449,7 +452,7 @@
             // 
             // cmbGlobalKeyService2Mod1
             // 
-            this.cmbGlobalKeyService2Mod1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbGlobalKeyService2Mod1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeyService2Mod1.FormattingEnabled = true;
             this.cmbGlobalKeyService2Mod1.ItemHeight = 15;
             this.cmbGlobalKeyService2Mod1.Location = new System.Drawing.Point(115, 82);
@@ -462,7 +465,7 @@
             // 
             // cmbGlobalKeyService2Key
             // 
-            this.cmbGlobalKeyService2Key.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbGlobalKeyService2Key.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeyService2Key.FormattingEnabled = true;
             this.cmbGlobalKeyService2Key.ItemHeight = 15;
             this.cmbGlobalKeyService2Key.Location = new System.Drawing.Point(7, 82);
@@ -594,7 +597,7 @@
             this.cmbGlobalKeySearch5SearchTerm.Name = "cmbGlobalKeySearch5SearchTerm";
             this.cmbGlobalKeySearch5SearchTerm.Size = new System.Drawing.Size(280, 21);
             this.cmbGlobalKeySearch5SearchTerm.TabIndex = 162;
-            this.toolTip1.SetToolTip(this.cmbGlobalKeySearch5SearchTerm, "Search text");
+            this.toolTip1.SetToolTip(this.cmbGlobalKeySearch5SearchTerm, "Search text used in Search (EA or hoTools SQL file)");
             // 
             // cmbGlobalKeySearch5SearchName
             // 
@@ -604,7 +607,8 @@
             this.cmbGlobalKeySearch5SearchName.Name = "cmbGlobalKeySearch5SearchName";
             this.cmbGlobalKeySearch5SearchName.Size = new System.Drawing.Size(309, 21);
             this.cmbGlobalKeySearch5SearchName.TabIndex = 161;
-            this.toolTip1.SetToolTip(this.cmbGlobalKeySearch5SearchName, "Search name");
+            this.toolTip1.SetToolTip(this.cmbGlobalKeySearch5SearchName, "EA Search Name or \r\nhoTools SQL file name like \'mySql.sql\' for advanced features." +
+        "\r\n\r\nMake sure the SQL paths is set in: Global Setting!!!!!");
             // 
             // cmbGlobalKeySearch5Mod4
             // 
@@ -624,7 +628,7 @@
             this.cmbGlobalKeySearch4SearchTerm.Name = "cmbGlobalKeySearch4SearchTerm";
             this.cmbGlobalKeySearch4SearchTerm.Size = new System.Drawing.Size(281, 21);
             this.cmbGlobalKeySearch4SearchTerm.TabIndex = 160;
-            this.toolTip1.SetToolTip(this.cmbGlobalKeySearch4SearchTerm, "Search text");
+            this.toolTip1.SetToolTip(this.cmbGlobalKeySearch4SearchTerm, "Search text used in Search (EA or hoTools SQL file)");
             // 
             // cmbGlobalKeySearch5Mod2
             // 
@@ -644,7 +648,8 @@
             this.cmbGlobalKeySearch4SearchName.Name = "cmbGlobalKeySearch4SearchName";
             this.cmbGlobalKeySearch4SearchName.Size = new System.Drawing.Size(309, 21);
             this.cmbGlobalKeySearch4SearchName.TabIndex = 159;
-            this.toolTip1.SetToolTip(this.cmbGlobalKeySearch4SearchName, "Search name");
+            this.toolTip1.SetToolTip(this.cmbGlobalKeySearch4SearchName, "EA Search Name or \r\nhoTools SQL file name like \'mySql.sql\' for advanced features." +
+        "\r\n\r\nMake sure the SQL paths is set in: Global Setting!!!!!");
             // 
             // cmbGlobalKeySearch5Mod3
             // 
@@ -664,7 +669,7 @@
             this.cmbGlobalKeySearch3SearchTerm.Name = "cmbGlobalKeySearch3SearchTerm";
             this.cmbGlobalKeySearch3SearchTerm.Size = new System.Drawing.Size(281, 21);
             this.cmbGlobalKeySearch3SearchTerm.TabIndex = 158;
-            this.toolTip1.SetToolTip(this.cmbGlobalKeySearch3SearchTerm, "Search text");
+            this.toolTip1.SetToolTip(this.cmbGlobalKeySearch3SearchTerm, "Search text used in Search (EA or hoTools SQL file)");
             // 
             // cmbGlobalKeySearch5Mod1
             // 
@@ -684,7 +689,8 @@
             this.cmbGlobalKeySearch3SearchName.Name = "cmbGlobalKeySearch3SearchName";
             this.cmbGlobalKeySearch3SearchName.Size = new System.Drawing.Size(309, 21);
             this.cmbGlobalKeySearch3SearchName.TabIndex = 157;
-            this.toolTip1.SetToolTip(this.cmbGlobalKeySearch3SearchName, "Search name");
+            this.toolTip1.SetToolTip(this.cmbGlobalKeySearch3SearchName, "EA Search Name or \r\nhoTools SQL file name like \'mySql.sql\' for advanced features." +
+        "\r\n\r\nMake sure the SQL paths is set in: Global Setting!!!!!");
             // 
             // cmbGlobalKeySearch5Key
             // 
@@ -704,7 +710,7 @@
             this.cmbGlobalKeySearch2SearchTerm.Name = "cmbGlobalKeySearch2SearchTerm";
             this.cmbGlobalKeySearch2SearchTerm.Size = new System.Drawing.Size(280, 21);
             this.cmbGlobalKeySearch2SearchTerm.TabIndex = 156;
-            this.toolTip1.SetToolTip(this.cmbGlobalKeySearch2SearchTerm, "Search text");
+            this.toolTip1.SetToolTip(this.cmbGlobalKeySearch2SearchTerm, "Search text used in Search (EA or hoTools SQL file)");
             // 
             // cmbGlobalKeySearch4Mod4
             // 
@@ -724,7 +730,8 @@
             this.cmbGlobalKeySearch2SearchName.Name = "cmbGlobalKeySearch2SearchName";
             this.cmbGlobalKeySearch2SearchName.Size = new System.Drawing.Size(309, 21);
             this.cmbGlobalKeySearch2SearchName.TabIndex = 155;
-            this.toolTip1.SetToolTip(this.cmbGlobalKeySearch2SearchName, "Search name");
+            this.toolTip1.SetToolTip(this.cmbGlobalKeySearch2SearchName, "EA Search Name or \r\nhoTools SQL file name like \'mySql.sql\' for advanced features." +
+        "\r\n\r\nMake sure the SQL paths is set in: Global Setting!!!!!");
             // 
             // cmbGlobalKeySearch4Mod2
             // 
@@ -744,7 +751,7 @@
             this.cmbGlobalKeySearch1SearchTerm.Name = "cmbGlobalKeySearch1SearchTerm";
             this.cmbGlobalKeySearch1SearchTerm.Size = new System.Drawing.Size(280, 21);
             this.cmbGlobalKeySearch1SearchTerm.TabIndex = 153;
-            this.toolTip1.SetToolTip(this.cmbGlobalKeySearch1SearchTerm, "Search text");
+            this.toolTip1.SetToolTip(this.cmbGlobalKeySearch1SearchTerm, "Search text used in Search (EA or hoTools SQL file)");
             // 
             // cmbGlobalKeySearch4Mod3
             // 
@@ -764,7 +771,8 @@
             this.cmbGlobalKeySearch1SearchName.Name = "cmbGlobalKeySearch1SearchName";
             this.cmbGlobalKeySearch1SearchName.Size = new System.Drawing.Size(309, 21);
             this.cmbGlobalKeySearch1SearchName.TabIndex = 151;
-            this.toolTip1.SetToolTip(this.cmbGlobalKeySearch1SearchName, "Search name");
+            this.toolTip1.SetToolTip(this.cmbGlobalKeySearch1SearchName, "EA Search Name or \r\nhoTools SQL file name like \'mySql.sql\' for advanced features." +
+        "\r\n\r\nMake sure the SQL paths is set in: Global Setting!!!!!");
             // 
             // cmbGlobalKeySearch4Mod1
             // 
@@ -956,31 +964,31 @@
             this.groupBox5.Size = new System.Drawing.Size(958, 188);
             this.groupBox5.TabIndex = 195;
             this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Searches on EA global hotkeys / shortcuts";
+            this.groupBox5.Text = "Searches on EA Global Keys ";
             this.toolTip1.SetToolTip(this.groupBox5, "Use a not used EA hotkey ");
             // 
             // label31
             // 
             this.label31.AutoSize = true;
             this.label31.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label31.Location = new System.Drawing.Point(320, 39);
+            this.label31.Location = new System.Drawing.Point(321, 36);
             this.label31.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(96, 18);
+            this.label31.Size = new System.Drawing.Size(296, 18);
             this.label31.TabIndex = 152;
-            this.label31.Text = "Search name";
+            this.label31.Text = "EA Search Name or hoTools SQL file name";
             // 
             // label30
             // 
             this.label30.AutoSize = true;
             this.label30.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label30.Location = new System.Drawing.Point(656, 36);
+            this.label30.Location = new System.Drawing.Point(657, 36);
             this.label30.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label30.Name = "label30";
             this.label30.Size = new System.Drawing.Size(112, 18);
             this.label30.TabIndex = 154;
             this.label30.Text = "<Search Term>";
-            this.toolTip1.SetToolTip(this.label30, "The EA <Search Term> to find the <Search Term>");
+            this.toolTip1.SetToolTip(this.label30, "Search text used in Search (EA or hoTools SQL file)");
             // 
             // label32
             // 
@@ -989,9 +997,9 @@
             this.label32.Location = new System.Drawing.Point(4, 36);
             this.label32.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(130, 18);
+            this.label32.Size = new System.Drawing.Size(151, 18);
             this.label32.TabIndex = 188;
-            this.label32.Text = "Hotkeys Searches";
+            this.label32.Text = "Global Key: Searches";
             // 
             // Hotkeys
             // 
@@ -1000,9 +1008,9 @@
             this.Hotkeys.Location = new System.Drawing.Point(5, 36);
             this.Hotkeys.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.Hotkeys.Name = "Hotkeys";
-            this.Hotkeys.Size = new System.Drawing.Size(124, 18);
+            this.Hotkeys.Size = new System.Drawing.Size(145, 18);
             this.Hotkeys.TabIndex = 149;
-            this.Hotkeys.Text = "Hotkeys Services";
+            this.Hotkeys.Text = "Global Key: Services";
             // 
             // label27
             // 
@@ -1072,7 +1080,7 @@
             this.groupBox4.Size = new System.Drawing.Size(959, 205);
             this.groupBox4.TabIndex = 150;
             this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Services on EA global hotkeys / shortcuts";
+            this.groupBox4.Text = "Services on EA Global Keys";
             // 
             // label1
             // 
@@ -1080,16 +1088,52 @@
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(71, 8);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(593, 29);
+            this.label1.Size = new System.Drawing.Size(597, 29);
             this.label1.TabIndex = 196;
-            this.label1.Text = "Settings global Keys for Model Searches and Services";
+            this.label1.Text = "Settings Global Keys for Model Searches and Services";
+            // 
+            // chkShortKeySupport
+            // 
+            this.chkShortKeySupport.AutoSize = true;
+            this.chkShortKeySupport.Location = new System.Drawing.Point(212, 467);
+            this.chkShortKeySupport.Margin = new System.Windows.Forms.Padding(2);
+            this.chkShortKeySupport.Name = "chkShortKeySupport";
+            this.chkShortKeySupport.Size = new System.Drawing.Size(15, 14);
+            this.chkShortKeySupport.TabIndex = 232;
+            this.toolTip1.SetToolTip(this.chkShortKeySupport, resources.GetString("chkShortKeySupport.ToolTip"));
+            this.chkShortKeySupport.UseVisualStyleBackColor = true;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(26, 463);
+            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(164, 20);
+            this.label4.TabIndex = 231;
+            this.label4.Text = "Global Key Support";
+            this.toolTip1.SetToolTip(this.label4, resources.GetString("label4.ToolTip"));
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(339, 460);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(441, 24);
+            this.label2.TabIndex = 233;
+            this.label2.Text = "Select Global Key Support and Restart EA !!!!!!";
             // 
             // FrmSettingsKey
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1015, 515);
+            this.ClientSize = new System.Drawing.Size(1015, 554);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.chkShortKeySupport);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cmbGlobalKeySearch5Mod4);
             this.Controls.Add(this.cmbGlobalKeySearch5Mod2);
@@ -1122,7 +1166,7 @@
             this.Controls.Add(this.btnOK);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FrmSettingsKey";
-            this.Text = "hoTools: Settings global Keys for Model Searches and Services";
+            this.Text = "hoTools: Settings Global Keys for Model Searches and Services";
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             this.groupBox4.ResumeLayout(false);
@@ -1215,5 +1259,8 @@
         private System.Windows.Forms.ComboBox cmbGlobalKeySearch1Key;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.CheckBox chkShortKeySupport;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label2;
     }
 }

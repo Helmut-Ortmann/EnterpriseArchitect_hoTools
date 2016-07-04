@@ -120,6 +120,9 @@
   <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
   <data name="cmbGlobalKeySearch5Mod4.ToolTip" xml:space="preserve">
     <value>Choose key to access searches by an shortcut / hotkey.
 You can use a key with modifiers like Ctrl,Shif, Window Key, ALT to access a searches / queries.
@@ -244,6 +247,28 @@ Note: The key + modifiers must not be used by EA</value>
     <value>Choose key to access searches by an shortcut / hotkey.
 You can use a key with modifiers like Ctrl,Shif, Window Key, ALT to access a searches / queries.
 Note: The key + modifiers must not be used by EA</value>
+  </data>
+  <data name="chkShortKeySupport.ToolTip" xml:space="preserve">
+    <value>Enable Global Key Support e.g.:
+- F1+CTRL+SHFT  Lock Package Recursive
+- F2+CTRL+SHFT  Unlock Package Recursive
+- F3+CTRL+SHFT  Run Search 'myModule' with &lt;Search Text&gt; 'A*'
+- F4+CTRL+SHFT  Run Search 'myModule' with &lt;Search Text&gt; 'ZZ*'
+
+Define a key combination for a search or a service (see Settings Keys).
+
+You have to restart EA to activate the configured settings.</value>
+  </data>
+  <data name="label4.ToolTip" xml:space="preserve">
+    <value>Enable Global Key Support e.g.:
+- F1+CTRL+SHFT  Lock Package Recursive
+- F2+CTRL+SHFT  Unlock Package Recursive
+- F3+CTRL+SHFT  Run Search 'myModule' with &lt;Search Text&gt; 'A*'
+- F4+CTRL+SHFT  Run Search 'myModule' with &lt;Search Text&gt; 'ZZ*'
+
+Define a key combination for a search or a service (see Settings Keys).
+
+You have to restart EA to activate the configured settings.</value>
   </data>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>25</value>

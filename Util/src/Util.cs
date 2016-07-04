@@ -79,16 +79,21 @@ namespace hoTools.Utils
                     }
                     break;
                 default:
-                    MessageBox.Show("No Interface, Class or Component selected");
+                    MessageBox.Show(@"No Interface, Class or Component selected");
                     break;
              }
             return el;
         }
         public static void StartApp(string app, string par)
         {
-            var p = new Process();
-            p.StartInfo.FileName = app;
-            p.StartInfo.Arguments = par;
+            var p = new Process
+            {
+                StartInfo =
+                {
+                    FileName = app,
+                    Arguments = par
+                }
+            };
             try
             {
                 p.Start();
@@ -96,10 +101,10 @@ namespace hoTools.Utils
             }
             catch (Exception e)
             {
-                MessageBox.Show(p.StartInfo.FileName + " " +
-                                p.StartInfo.Arguments + "\n\n" +
-                                "Have you set the %path% environment variable?\n\n" + e,
-                                "Can't show controlled package");
+                MessageBox.Show(p.StartInfo.FileName + @" " +
+                                p.StartInfo.Arguments + @"\n\n" +
+                                @"Have you set the %path% environment variable?\n\n" + e,
+                                @"Can't show controlled package");
             }
         }
         public static string GetWildCard(Repository rep)
@@ -124,16 +129,15 @@ namespace hoTools.Utils
         public static void SetSequenceNumber(EA.Repository rep, EA.Diagram dia, 
             EA.DiagramObject obj, string sequence )
         {
-            string s = "";
-            if (!(obj == null)) s = " AND instance_id = " + obj.InstanceID;
+            if (obj != null)
+            {
 
-            string updateStr = @"update t_DiagramObjects set sequence = " + sequence +
-                       " where diagram_id = " + dia.DiagramID + 
-                       " AND instance_id = " + obj.InstanceID; 
+                string updateStr = @"update t_DiagramObjects set sequence = " + sequence +
+                                   " where diagram_id = " + dia.DiagramID +
+                                   " AND instance_id = " + obj.InstanceID;
 
-            rep.Execute(updateStr);
-            return;
-
+                rep.Execute(updateStr);
+            }
         }
 
         public static void AddSequenceNumber (EA.Repository rep, EA.Diagram dia) {
@@ -142,8 +146,6 @@ namespace hoTools.Utils
                        " where diagram_id = " + dia.DiagramID; 
 
             rep.Execute(updateStr);
-            return;
-
         }
         public static int GetHighestSequenceNoFromDiagram(EA.Repository rep, EA.Diagram dia)
         {
@@ -246,7 +248,7 @@ namespace hoTools.Utils
                  if (link.IsHidden == false)
                  {
 
-                     // check if connecter is connected with diagram object
+                     // check if connector is connected with diagram object
                      EA.Connector c = rep.GetConnectorByID(link.ConnectorID);
                      foreach (EA.DiagramObject dObject in d.SelectedObjects)
                      {
@@ -358,11 +360,11 @@ namespace hoTools.Utils
 
             foreach (EA.Attribute a in el.Attributes)
             {
-                Util.UpdateAttribute(rep, a);
+                UpdateAttribute(rep, a);
             }
             foreach (Method m in el.Methods)
             {
-                Util.UpdateMethod(rep, m);
+                UpdateMethod(rep, m);
             }
 
             // over all nested classes
@@ -395,15 +397,14 @@ namespace hoTools.Utils
             if (a.ClassifierID == 0)
             {
                 // find type from type_name
-                int id = Util.GetTypeId(rep, a.Type);
+                int id = GetTypeId(rep, a.Type);
                 if (id > 0)
                 {
                     a.ClassifierID = id;
                     bool error = a.Update();
                     if (!error)
                     {
-                        MessageBox.Show("Error write Attribute", a.GetLastError());
-                        // Error occured
+                        MessageBox.Show(@"Error write Attribute", a.GetLastError());
                         return false;
                     }
                 }
@@ -423,16 +424,16 @@ namespace hoTools.Utils
                 if ((par.ClassifierID == "") || (par.ClassifierID == "0"))
                 {
                     // find type from type_name
-                    id = Util.GetTypeId(rep, par.Type);
+                    id = GetTypeId(rep, par.Type);
                     if (id > 0)
                     {
                         par.ClassifierID = id.ToString();
                         bool error = par.Update();
                         if (!error)
                         {
-                            MessageBox.Show("Error write Parameter", m.GetLastError());
+                            MessageBox.Show(@"Error write Parameter", m.GetLastError());
                             return false;
-                            // Error occured
+
                         }
                     }
 
@@ -444,16 +445,15 @@ namespace hoTools.Utils
             if ((m.ClassifierID == "") || (m.ClassifierID == "0"))
             {
                 // find type from type_name
-                id = Util.GetTypeId(rep, m.ReturnType);
+                id = GetTypeId(rep, m.ReturnType);
                 if (id > 0)
                 {
                     m.ClassifierID = id.ToString();
                     bool error = m.Update();
                     if (!error)
                     {
-                        MessageBox.Show("Error write Method", m.GetLastError());
+                        MessageBox.Show(@"Error write Method", m.GetLastError());
                         return false;
-                        // Error occured
                     }
                 }
             }
@@ -531,18 +531,17 @@ namespace hoTools.Utils
         }
 
         public static int GetTypeFromName(EA.Repository rep, ref string name, ref string type) {
-            int id = 0;
-            id = Util.GetTypeId(rep, type);
+            var id = GetTypeId(rep, type);
             if (id == 0 & type.Contains("*"))
             {
                 type = type.Remove(type.IndexOf("*", StringComparison.CurrentCulture), 1);
                 name = "*" + name;
-                id = Util.GetTypeId(rep, type);
+                id = GetTypeId(rep, type);
                 if (id == 0 & type.Contains("*"))
                 {
                     type = type.Replace("*", "");
                     name = "*" + name;
-                    id = Util.GetTypeId(rep, type);
+                    id = GetTypeId(rep, type);
                 }
             }
 
@@ -642,10 +641,9 @@ namespace hoTools.Utils
             xmlDoc.LoadXml(str);
 
             XmlNode operationGuidNode = xmlDoc.SelectSingleNode("//OPERATION");
-            string guid = "";
             if (operationGuidNode != null)
             {
-                guid = operationGuidNode.InnerText;
+                var guid = operationGuidNode.InnerText;
                 return rep.GetMethodByGuid(guid);
             }
             return null;
@@ -1061,7 +1059,6 @@ namespace hoTools.Utils
 
                 var svnHandle = new Svn(rep, pkg);
                 userNameLockedPackage = svnHandle.GetLockingUser();
-                svnHandle = null;
                 if (userNameLockedPackage != "") flags = flags + "CheckedOutTo=" + userNameLockedPackage + ";";
                 try
                 {
@@ -1072,6 +1069,7 @@ namespace hoTools.Utils
                 {
                     string s = e.Message + " ;" + pkg.GetLastError();
                     s = s + "!";
+                    MessageBox.Show(s, @"Error UpdateVC state");
                 }
 
 
@@ -1080,21 +1078,21 @@ namespace hoTools.Utils
          }
 
         //------------------------------------------------------------------------------------------
-        // resetVCRecursive   If package is controlles: Reset packageflags field of package, work for all packages recursive 
+        // resetVCRecursive   If package is controlled: Reset package flags field of package, work for all packages recursive 
         //------------------------------------------------------------------------------------------
-        // packageflags:  Recurse=0;VCCFG=unchanged;
+        // package flags:  Recurse=0;VCCFG=unchanged;
         public static void ResetVcRecursive(EA.Repository rep, EA.Package pkg)
         {
             ResetVc(rep, pkg);
             foreach (EA.Package p in pkg.Packages)
             {
-                ResetVc(rep, pkg);
+                ResetVc(rep, p);
             }
         }
         //------------------------------------------------------------------------------------------
-        // resetVC   If package is controlles: Reset packageflags field of package 
+        // resetVC   If package is controlled: Reset package flags field of package 
         //------------------------------------------------------------------------------------------
-        // packageflags:  Recurse=0;VCCFG=unchanged;
+        // package flags:  Recurse=0;VCCFG=unchanged;
         public static void ResetVc(EA.Repository rep, EA.Package pkg)
         {
             if (pkg.IsVersionControlled)
@@ -1121,6 +1119,7 @@ namespace hoTools.Utils
                 {
                     string s = e.Message + " ;" + pkg.GetLastError();
                     s = s + "!";
+                    MessageBox.Show(s, @"Error Reset VC");
                 }
 
 
@@ -1137,30 +1136,27 @@ namespace hoTools.Utils
                                                       "Checked out to this user",
                                                       "Read only version",
                                                       "Checked out to another user",
-                                                      "Offline checked in",
-                                                      "Offline checked out by user",
-                                                      "Offline checked out by other user", 
+                                                      @"Offline checked in",
+                                                      @"Offline checked out by user",
+                                                      @"Offline checked out by other user", 
                                                       "Deleted" };
                         string[] checkedOutStatusShort = { "Uncontrolled",
                                                       "Checked in",
                                                       "Checked out",
                                                       "Read only",
                                                       "Checked out",
-                                                      "Offline checked in",
-                                                      "Offline checked out",
-                                                      "Offline checked out", 
-                                                      "Deleted" };
+                                                      @"Offline checked in",
+                                                      @"Offline checked out",
+                                                      @"Offline checked out", 
+                                                      @"Deleted" };
 
                         try
                         {
-                            string s = ""; 
-                             var svnHandle = new Svn(rep, pkg);
-                             s = svnHandle.GetLockingUser();
-                            svnHandle = null;
+                            var svnHandle = new Svn(rep, pkg);
+                            var s = svnHandle.GetLockingUser();
                             if (s != "") s = "CheckedOutTo=" + s ;
                             else s = "Checked in";
                             return s;
-                            //state = pkg.VersionControlGetStatus();
                         }
                         catch (Exception e)
                         {
@@ -1182,24 +1178,21 @@ namespace hoTools.Utils
         #pragma warning restore RECS0154 // Parameter is never used
         {
             string path = el.Genfile;
-            string localPathVar = "";
-            
+
             // check if a local path is defined
             Match m = Regex.Match(path, @"%[^%]*");
             if (m.Success)
             {
-                localPathVar = m.Value.Substring(1) ;
+                var localPathVar = m.Value.Substring(1);
                 // get path for localDir
-                Environment.CurrentDirectory = Environment.GetEnvironmentVariable("appdata");
+                Environment.CurrentDirectory = Environment.GetEnvironmentVariable(@"appdata");
                 string s1 = @"Sparx Systems\EA\paths.txt";
                 TextReader tr = new StreamReader(s1);
                 string line = "";
-                Match regMatch;
                 var pattern = new Regex(@"(type=" + el.Gentype + ";id=" + localPathVar + @").+(path=[^;]+)");
                 while ((line = tr.ReadLine()) != null)
                 {
-
-                    regMatch = pattern.Match(line);
+                    var regMatch = pattern.Match(line);
                     if (regMatch.Success)
                     {
                         path = path.Replace("%"+ localPathVar + "%" ,"");
@@ -1208,8 +1201,6 @@ namespace hoTools.Utils
                         path = path.Replace(@"\\", @"\");
                         break;
                     }
-
-
                 }
                 tr.Close();
             }
@@ -1220,13 +1211,12 @@ namespace hoTools.Utils
             string rootPath = "";
             var pattern = new Regex(@"VCCFG=[^;]+");
             Match regMatch = pattern.Match(pkg.Flags);
-            string uniqueId = "";
             if (regMatch.Success)
             {
                 // get VCCFG
-                uniqueId = regMatch.Value.Substring(6);
+                var uniqueId = regMatch.Value.Substring(6);
                 // get path for UiqueId
-                Environment.CurrentDirectory = Environment.GetEnvironmentVariable("appdata");
+                Environment.CurrentDirectory = Environment.GetEnvironmentVariable(@"appdata");
                 string s1 = @"Sparx Systems\EA\paths.txt";
                 TextReader tr = new StreamReader(s1);
                 string line = "";
@@ -1259,21 +1249,20 @@ namespace hoTools.Utils
 
         public static string GetVccFilePath(EA.Repository rep, EA.Package pkg)
         {
-            string path = "";
             string rootPath = GetVccRootPath(rep, pkg);
-            path = rootPath + @"\" + pkg.XMLPath;
+            var path = rootPath + @"\" + pkg.XMLPath;
             return path;
         }
        
-        public static Boolean GetLatest(EA.Repository rep, EA.Package pkg, Boolean recursive, ref int count, int level, ref int errorCount)
+        public static bool GetLatest(EA.Repository rep, EA.Package pkg, bool recursive, ref int count, int level, ref int errorCount)
         {
             if (pkg.IsControlled)
             {
                 level = level + 1;
                 // check if checked out
 
-                string path = Util.GetVccFilePath(rep, pkg);
-                string fText = "";
+                string path = GetVccFilePath(rep, pkg);
+                string fText;
                 //rep.WriteOutput("Debug", "Path:" + pkg.Name + path, 0);
                 var sLevel = new string(' ', level * 2);
                 rep.WriteOutput("Debug", sLevel + (count+1).ToString(",0") + " Work for:" + path, 0);
@@ -1377,7 +1366,7 @@ namespace hoTools.Utils
             // no diagram found, select element
             repository.ShowInProjectView(el);
         }
-        public static Boolean SetXmlPath(EA.Repository rep, string guid, string path)
+        public static bool SetXmlPath(EA.Repository rep, string guid, string path)
         {
 
             string updateStr = @"update t_package set XMLPath = '" + path +
@@ -1490,15 +1479,14 @@ namespace hoTools.Utils
         public static EA.Package GetModelDocumentFromPackage(EA.Repository rep, EA.Package pkg)
         {
             EA.Package pkg1 = null;
-            string query = "";
             string repositoryType = "JET";// rep.RepositoryType();
 
             // get object_ID of package
-            query = @"select pkg.ea_GUID AS EA_GUID " +
-                   @" from (((t_object o  INNER JOIN t_attribute a on (o.object_ID = a.Object_ID AND a.type = 'Package')) " +
-                   @"     INNER JOIN t_package pkg on (pkg.Package_ID = o.Package_ID)) " +
-                   @"		  INNER JOIN t_object o1 on (cstr(o1.object_id) = a.classifier)) " +
-                   @" where o1.ea_guid = '" + pkg.PackageGUID + "' ";
+            var query = @"select pkg.ea_GUID AS EA_GUID " +
+                           @" from (((t_object o  INNER JOIN t_attribute a on (o.object_ID = a.Object_ID AND a.type = 'Package')) " +
+                           @"     INNER JOIN t_package pkg on (pkg.Package_ID = o.Package_ID)) " +
+                           @"		  INNER JOIN t_object o1 on (cstr(o1.object_id) = a.classifier)) " +
+                           @" where o1.ea_guid = '" + pkg.PackageGUID + "' ";
             
 						 
             if (repositoryType== "JET")
@@ -1537,9 +1525,8 @@ namespace hoTools.Utils
         }
         public static EA.Package GetFirstControlledPackage(EA.Repository rep, EA.Package pkg)
         {
-            int pkgId = 0;
             if (pkg.IsControlled) return pkg;
-            pkgId = pkg.ParentID;
+            var pkgId = pkg.ParentID;
             if (pkgId == 0) return null;
             pkg = GetFirstControlledPackage(rep, rep.GetPackageByID(pkgId));
             return pkg;
