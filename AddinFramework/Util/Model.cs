@@ -7,6 +7,7 @@ using System.Xml;
 using System.Xml.Linq;
 using System.Linq;
 using System.Text.RegularExpressions;
+using hoTools.Utils.Configuration;
 
 
 using hoTools.Utils.SQL;
@@ -23,6 +24,9 @@ namespace EAAddinFramework.Utils
         static string _applicationFullPath;
         IWin32Window _mainEaWindow;
         RepositoryType? _repositoryType;  // a null able type
+
+        // configuration as singleton
+        HoToolsGlobalCfg _globalCfg = HoToolsGlobalCfg.Instance;
 
 
         /// <summary>
@@ -249,10 +253,40 @@ namespace EAAddinFramework.Utils
             escapedString = escapedString.Replace("'", "''");
             return escapedString;
         }
+        /// <summary>
+        /// Runs the search (EA search or hoTools SQL file if it's a *.sql file). It handles the exceptions.
+        /// </summary>
+        /// <param name="searchName">EA Search name or SQL file name (uses path to find absolute path)</param>
+        /// <param name="searchTerm"></param>
+        public void SearchRun(string searchName, string searchTerm)
+        {
+            kkkkkkkk // allow an absolute path (not only relative)
+            if (searchName == "") return;
+
+            // SQL file?
+            Regex pattern = new Regex(@"\.sql", RegexOptions.IgnoreCase);
+            if (pattern.IsMatch(searchName))
+            {
+                string sqlString = _globalCfg.ReadSqlFile(searchName);
+
+                // run search
+                SqlRun(sqlString, searchTerm);
 
 
-
-
+            }
+            else
+            {
+                try
+                {
+                    Repository.RunModelSearch(searchName, searchName, "", "");
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.ToString(),
+                        $"Error start search '{searchName} {searchName}'");
+                }
+            }
+        }
 
 
         /// <summary>

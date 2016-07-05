@@ -37,11 +37,13 @@ namespace hoTools.Utils.Configuration
         }
 
         /// <summary>
-        /// Get SQL File path from file name. It looks in the hoTools SQL Path Settings to search for file
+        /// Read the SQL file. It uses the SQL file path to find the file. The sequence of search is:
+        /// <para />1. path (it accept '.' as current directory)
+        /// <para />2. filename as it is
         /// </summary>
         /// <param name="sqlFileName"></param>
         /// <returns></returns>
-        public string GetSqlFilePathFromName(string sqlFileName)
+        public string ReadSqlFile(string sqlFileName)
         {
             // over all files
             foreach (string path in _lpaths)

@@ -8,6 +8,7 @@ using hoTools.EAServicesPort;
 using Control.EaAddinShortcuts;
 using hoTools.Settings.Key;
 using hoTools.Settings.Toolbar;
+using EAAddinFramework.Utils;
 
 using hoTools.Utils.SQL;
 using hoTools.Utils;
@@ -35,6 +36,7 @@ namespace hoTools.ActiveX
         FrmSettingsLineStyle _frmSettingsLineStyle;
 
         HoToolsGlobalCfg _globalCfg;
+        Model _model;
 
 
         #region Generated
@@ -200,6 +202,7 @@ namespace hoTools.ActiveX
         {
             // get global settings
             _globalCfg = HoToolsGlobalCfg.Instance;
+            _model = new Model(Repository);
             ParameterizeMenusAndButtons();
             // parameterize 5 Buttons to quickly run search
             ParameterizeSearchButton();
@@ -428,43 +431,14 @@ namespace hoTools.ActiveX
                 string searchName = button.KeySearchName.Trim();
                 if (searchName == "") return;
 
-               RunSearch(searchName, button.KeySearchTerm.Trim() );
+               _model.SearchRun(searchName, button.KeySearchTerm.Trim() );
 
             }
         }
-        /// <summary>
-        /// Run a search. Depending of the Search name is runs the SQL Search or the EA Model Search.
-        /// </summary>
-        public void RunSearch(string searchName, string searchTerm)
-        {
-            if (searchName == "") return;
-
-            // SQL file?
-            Regex pattern = new Regex(@"\.sql", RegexOptions.IgnoreCase);
-            if (pattern.IsMatch(searchName))
-            {
-                string sqlString = _globalCfg.GetSqlFilePathFromName(searchName);
-
-                // run search
-                Model.SqlRun(sqlString, searchTerm);
-
-
-            }
-            else
-            {
-                try
-                {
-                    Repository.RunModelSearch(searchName, searchName, "", "");
-                }
-                catch (Exception e)
-                {
-                    MessageBox.Show(e.ToString(),
-                        $"Error start search '{searchName} {searchName}'");
-                }
-            }
-        }
+        
         void RunService(int pos)
         {
+            // ReSharper disable once IsExpressionAlwaysTrue
             if (AddinSettings.ButtonsServices[pos] is hoTools.EaServices.ServicesCallConfig)
             {
 
@@ -775,7 +749,7 @@ namespace hoTools.ActiveX
         {
             if (e.KeyCode == Keys.Enter)
             {
-                RunSearch(GetSearchName(), _txtSearchText.Text);
+                _model.SearchRun(GetSearchName(), _txtSearchText.Text);
                 e.Handled = true;
             }
         }
@@ -789,7 +763,7 @@ namespace hoTools.ActiveX
         void txtSearchText_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             _txtSearchText.Text = Clipboard.GetText();
-            RunSearch(GetSearchName(), _txtSearchText.Text);
+            _model.SearchRun(GetSearchName(), _txtSearchText.Text);
         }
 
         /// <summary>
@@ -799,7 +773,7 @@ namespace hoTools.ActiveX
         /// <param name="e"></param>
         void txtSearchName_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            RunSearch(GetSearchName(), _txtSearchText.Text);
+            _model.SearchRun(GetSearchName(), _txtSearchText.Text);
         }
 
         /// <summary>

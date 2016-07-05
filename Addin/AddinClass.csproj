@@ -81,6 +81,10 @@
       <Project>{c9ebcebb-71e4-4e87-b92c-7aeb8f62b69a}</Project>
       <Name>ActiveX</Name>
     </ProjectReference>
+    <ProjectReference Include="..\AddinFramework\AddinFramework.csproj">
+      <Project>{b08ae89b-5e8d-46fd-a5d8-b3db4d33fb46}</Project>
+      <Name>AddinFramework</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EaServices\EaServices.csproj">
       <Project>{dfbedf5e-fc7f-4269-a0a6-f9b9e86dac90}</Project>
       <Name>EaServices</Name>

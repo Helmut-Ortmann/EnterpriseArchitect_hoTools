@@ -33,6 +33,8 @@ namespace hoTools.Settings.Key
 
             // Global key support
             chkShortKeySupport.Checked = settings.IsShortKeySupport;
+            // SQL Paths
+            txtSqlSearchPath.Text = _settings.SqlPaths;
 
 
 
@@ -394,10 +396,7 @@ namespace hoTools.Settings.Key
         {
             // Global Key support
             _settings.IsShortKeySupport = chkShortKeySupport.Checked;
-
-
-
-
+            _settings.SqlPaths = txtSqlSearchPath.Text;
 
             #region store global services
             // Global Services via hot key

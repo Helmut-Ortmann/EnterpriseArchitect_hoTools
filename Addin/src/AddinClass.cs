@@ -12,12 +12,14 @@ using hoTools.EaServices;
 using hoTools.Utils;
 using hoTools.Utils.Appls;
 using hoTools.Utils.ActionPins;
-using System.Reflection;
+using EAAddinFramework.Utils;
 
+using System.Reflection;
+using EA;
 using hoTools.Find;
 using hoTools.Utils.Configuration;
-
 using GlobalHotkeys;
+using File = System.IO.File;
 
 #region description
 //---------------------------------------------------------------
@@ -75,6 +77,9 @@ namespace hoTools
         FindAndReplaceGUI _findAndReplaceGui;
         QueryGui _scriptGui;
         QueryGui _queryGui;
+
+        static Model _Model;        // to run SQL query file from global key
+
 
         // settings
         readonly AddinSettings _addinSettings;
@@ -194,7 +199,7 @@ namespace hoTools
 
         #region HotkeyHandlers
         /// <summary>
-        /// Handle Hotkeys
+        /// Handle Global Keys
         /// </summary>
         internal static class HotkeyHandlers
         {
@@ -281,14 +286,8 @@ namespace hoTools
                 
                     GlobalKeysConfig.GlobalKeysSearchConfig sh = _AddinSettings.GlobalShortcutsSearch[pos];
                     if (sh.SearchName == "") return;
-                    try
-                    {
-                        _Repository.RunModelSearch(sh.SearchName, sh.SearchTerm, "", "");
-                    }
-                    catch (Exception e)
-                    {
-                        MessageBox.Show(e.ToString(), $"Error start search '{sh.SearchName} {sh.SearchTerm}'");
-                    }
+                    _Model.SearchRun(sh.SearchName, sh.SearchTerm);
+                    
             }
             public static void RunGlobalKeyService(int pos)
             {
@@ -546,6 +545,7 @@ namespace hoTools
             if (rep == null) return;
             _repository = rep;
             _Repository = rep;
+            _Model = new Model(rep);
             try
             {
                 if (_myControlGui != null) _myControlGui.Repository = rep;

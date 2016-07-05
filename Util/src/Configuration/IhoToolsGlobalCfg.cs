@@ -13,6 +13,6 @@ namespace hoTools.Utils.Configuration
         /// </summary>
         /// <param name="sqlFileName"></param>
         /// <returns></returns>
-        string GetSqlFilePathFromName(string sqlFileName);
+        string ReadSqlFile(string sqlFileName);
     }
 }

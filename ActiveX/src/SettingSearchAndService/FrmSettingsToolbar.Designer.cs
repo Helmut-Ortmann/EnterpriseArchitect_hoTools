@@ -87,6 +87,14 @@
             this.txtServiceTooltip2 = new System.Windows.Forms.TextBox();
             this.txtServiceTooltip3 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtSqlSearchPath = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.chkShowQueryButtons = new System.Windows.Forms.CheckBox();
+            this.chkShowServiceButtons = new System.Windows.Forms.CheckBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.SuspendLayout();
@@ -94,7 +102,7 @@
             // btnOK
             // 
             this.btnOK.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnOK.Location = new System.Drawing.Point(11, 460);
+            this.btnOK.Location = new System.Drawing.Point(8, 539);
             this.btnOK.Margin = new System.Windows.Forms.Padding(2);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(72, 27);
@@ -107,7 +115,7 @@
             // btnCancel
             // 
             this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancel.Location = new System.Drawing.Point(92, 460);
+            this.btnCancel.Location = new System.Drawing.Point(93, 539);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(2);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 27);
@@ -121,7 +129,7 @@
             this.cmbService1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbService1.FormattingEnabled = true;
             this.cmbService1.ItemHeight = 18;
-            this.cmbService1.Location = new System.Drawing.Point(327, 46);
+            this.cmbService1.Location = new System.Drawing.Point(327, 47);
             this.cmbService1.Name = "cmbService1";
             this.cmbService1.Size = new System.Drawing.Size(317, 26);
             this.cmbService1.TabIndex = 42;
@@ -131,7 +139,7 @@
             // txtButton5TextService
             // 
             this.txtButton5TextService.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtButton5TextService.Location = new System.Drawing.Point(79, 147);
+            this.txtButton5TextService.Location = new System.Drawing.Point(79, 148);
             this.txtButton5TextService.Margin = new System.Windows.Forms.Padding(2);
             this.txtButton5TextService.Name = "txtButton5TextService";
             this.txtButton5TextService.Size = new System.Drawing.Size(179, 24);
@@ -141,7 +149,7 @@
             // txtButton4TextService
             // 
             this.txtButton4TextService.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtButton4TextService.Location = new System.Drawing.Point(91, 342);
+            this.txtButton4TextService.Location = new System.Drawing.Point(88, 409);
             this.txtButton4TextService.Margin = new System.Windows.Forms.Padding(2);
             this.txtButton4TextService.Name = "txtButton4TextService";
             this.txtButton4TextService.Size = new System.Drawing.Size(179, 24);
@@ -151,7 +159,7 @@
             // txtButton3TextService
             // 
             this.txtButton3TextService.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtButton3TextService.Location = new System.Drawing.Point(91, 318);
+            this.txtButton3TextService.Location = new System.Drawing.Point(88, 385);
             this.txtButton3TextService.Margin = new System.Windows.Forms.Padding(2);
             this.txtButton3TextService.Name = "txtButton3TextService";
             this.txtButton3TextService.Size = new System.Drawing.Size(179, 24);
@@ -161,7 +169,7 @@
             // txtButton2TextService
             // 
             this.txtButton2TextService.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtButton2TextService.Location = new System.Drawing.Point(91, 291);
+            this.txtButton2TextService.Location = new System.Drawing.Point(88, 358);
             this.txtButton2TextService.Margin = new System.Windows.Forms.Padding(2);
             this.txtButton2TextService.Name = "txtButton2TextService";
             this.txtButton2TextService.Size = new System.Drawing.Size(179, 24);
@@ -171,7 +179,7 @@
             // txtButton1TextService
             // 
             this.txtButton1TextService.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtButton1TextService.Location = new System.Drawing.Point(91, 267);
+            this.txtButton1TextService.Location = new System.Drawing.Point(79, 44);
             this.txtButton1TextService.Margin = new System.Windows.Forms.Padding(2);
             this.txtButton1TextService.Name = "txtButton1TextService";
             this.txtButton1TextService.Size = new System.Drawing.Size(179, 24);
@@ -182,7 +190,7 @@
             // 
             this.cmbService5.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbService5.FormattingEnabled = true;
-            this.cmbService5.Location = new System.Drawing.Point(327, 149);
+            this.cmbService5.Location = new System.Drawing.Point(327, 150);
             this.cmbService5.Name = "cmbService5";
             this.cmbService5.Size = new System.Drawing.Size(317, 26);
             this.cmbService5.TabIndex = 46;
@@ -193,7 +201,7 @@
             // 
             this.cmbService4.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbService4.FormattingEnabled = true;
-            this.cmbService4.Location = new System.Drawing.Point(327, 121);
+            this.cmbService4.Location = new System.Drawing.Point(327, 122);
             this.cmbService4.Name = "cmbService4";
             this.cmbService4.Size = new System.Drawing.Size(317, 26);
             this.cmbService4.TabIndex = 45;
@@ -204,7 +212,7 @@
             // 
             this.cmbService3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbService3.FormattingEnabled = true;
-            this.cmbService3.Location = new System.Drawing.Point(327, 98);
+            this.cmbService3.Location = new System.Drawing.Point(327, 99);
             this.cmbService3.Name = "cmbService3";
             this.cmbService3.Size = new System.Drawing.Size(317, 26);
             this.cmbService3.TabIndex = 44;
@@ -215,7 +223,7 @@
             // 
             this.cmbService2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbService2.FormattingEnabled = true;
-            this.cmbService2.Location = new System.Drawing.Point(327, 72);
+            this.cmbService2.Location = new System.Drawing.Point(327, 73);
             this.cmbService2.Name = "cmbService2";
             this.cmbService2.Size = new System.Drawing.Size(317, 26);
             this.cmbService2.TabIndex = 43;
@@ -492,7 +500,7 @@
             // lblServiceButton5
             // 
             this.lblServiceButton5.AutoSize = true;
-            this.lblServiceButton5.Location = new System.Drawing.Point(5, 149);
+            this.lblServiceButton5.Location = new System.Drawing.Point(5, 150);
             this.lblServiceButton5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblServiceButton5.Name = "lblServiceButton5";
             this.lblServiceButton5.Size = new System.Drawing.Size(63, 18);
@@ -502,7 +510,7 @@
             // lblServiceButton4
             // 
             this.lblServiceButton4.AutoSize = true;
-            this.lblServiceButton4.Location = new System.Drawing.Point(5, 121);
+            this.lblServiceButton4.Location = new System.Drawing.Point(5, 122);
             this.lblServiceButton4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblServiceButton4.Name = "lblServiceButton4";
             this.lblServiceButton4.Size = new System.Drawing.Size(63, 18);
@@ -512,7 +520,7 @@
             // lblServiceButton3
             // 
             this.lblServiceButton3.AutoSize = true;
-            this.lblServiceButton3.Location = new System.Drawing.Point(8, 98);
+            this.lblServiceButton3.Location = new System.Drawing.Point(8, 99);
             this.lblServiceButton3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblServiceButton3.Name = "lblServiceButton3";
             this.lblServiceButton3.Size = new System.Drawing.Size(63, 18);
@@ -522,7 +530,7 @@
             // lblServiceButton2
             // 
             this.lblServiceButton2.AutoSize = true;
-            this.lblServiceButton2.Location = new System.Drawing.Point(8, 71);
+            this.lblServiceButton2.Location = new System.Drawing.Point(8, 72);
             this.lblServiceButton2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblServiceButton2.Name = "lblServiceButton2";
             this.lblServiceButton2.Size = new System.Drawing.Size(63, 18);
@@ -532,7 +540,7 @@
             // lblServiceButton1
             // 
             this.lblServiceButton1.AutoSize = true;
-            this.lblServiceButton1.Location = new System.Drawing.Point(8, 46);
+            this.lblServiceButton1.Location = new System.Drawing.Point(8, 47);
             this.lblServiceButton1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblServiceButton1.Name = "lblServiceButton1";
             this.lblServiceButton1.Size = new System.Drawing.Size(63, 18);
@@ -563,17 +571,21 @@
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.Location = new System.Drawing.Point(11, 40);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(1126, 177);
+            this.groupBox2.Size = new System.Drawing.Size(1126, 241);
             this.groupBox2.TabIndex = 59;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Search Buttons";
+            this.toolTip1.SetToolTip(this.groupBox2, "Configure Buttons for Searches in the Toolbar");
             // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.lblServiceButtonText);
+            this.groupBox3.Controls.Add(this.label8);
+            this.groupBox3.Controls.Add(this.chkShowServiceButtons);
             this.groupBox3.Controls.Add(this.lblServiceButtonName);
             this.groupBox3.Controls.Add(this.lblServiceButtonTooltip);
             this.groupBox3.Controls.Add(this.lblServiceButton1);
+            this.groupBox3.Controls.Add(this.txtButton1TextService);
             this.groupBox3.Controls.Add(this.lblServiceButton2);
             this.groupBox3.Controls.Add(this.lblServiceButton3);
             this.groupBox3.Controls.Add(this.lblServiceButton4);
@@ -590,12 +602,14 @@
             this.groupBox3.Controls.Add(this.cmbService5);
             this.groupBox3.Controls.Add(this.txtButton5TextService);
             this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox3.Location = new System.Drawing.Point(12, 220);
+            this.groupBox3.Location = new System.Drawing.Point(9, 287);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(1125, 189);
+            this.groupBox3.Size = new System.Drawing.Size(1125, 238);
             this.groupBox3.TabIndex = 60;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Services Buttons";
+            this.toolTip1.SetToolTip(this.groupBox3, "Configure Buttons for Services in the Toolbar");
+
             // 
             // lblServiceButtonTooltip
             // 
@@ -610,7 +624,7 @@
             // txtServiceTooltip5
             // 
             this.txtServiceTooltip5.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtServiceTooltip5.Location = new System.Drawing.Point(659, 150);
+            this.txtServiceTooltip5.Location = new System.Drawing.Point(659, 151);
             this.txtServiceTooltip5.Name = "txtServiceTooltip5";
             this.txtServiceTooltip5.ReadOnly = true;
             this.txtServiceTooltip5.Size = new System.Drawing.Size(460, 24);
@@ -619,7 +633,7 @@
             // txtServiceTooltip1
             // 
             this.txtServiceTooltip1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtServiceTooltip1.Location = new System.Drawing.Point(659, 46);
+            this.txtServiceTooltip1.Location = new System.Drawing.Point(659, 47);
             this.txtServiceTooltip1.Name = "txtServiceTooltip1";
             this.txtServiceTooltip1.ReadOnly = true;
             this.txtServiceTooltip1.Size = new System.Drawing.Size(460, 24);
@@ -628,7 +642,7 @@
             // txtServiceTooltip4
             // 
             this.txtServiceTooltip4.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtServiceTooltip4.Location = new System.Drawing.Point(659, 121);
+            this.txtServiceTooltip4.Location = new System.Drawing.Point(659, 122);
             this.txtServiceTooltip4.Name = "txtServiceTooltip4";
             this.txtServiceTooltip4.ReadOnly = true;
             this.txtServiceTooltip4.Size = new System.Drawing.Size(460, 24);
@@ -637,16 +651,17 @@
             // txtServiceTooltip2
             // 
             this.txtServiceTooltip2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtServiceTooltip2.Location = new System.Drawing.Point(659, 70);
+            this.txtServiceTooltip2.Location = new System.Drawing.Point(659, 71);
             this.txtServiceTooltip2.Name = "txtServiceTooltip2";
             this.txtServiceTooltip2.ReadOnly = true;
             this.txtServiceTooltip2.Size = new System.Drawing.Size(460, 24);
             this.txtServiceTooltip2.TabIndex = 62;
+
             // 
             // txtServiceTooltip3
             // 
             this.txtServiceTooltip3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtServiceTooltip3.Location = new System.Drawing.Point(659, 96);
+            this.txtServiceTooltip3.Location = new System.Drawing.Point(659, 97);
             this.txtServiceTooltip3.Name = "txtServiceTooltip3";
             this.txtServiceTooltip3.ReadOnly = true;
             this.txtServiceTooltip3.Size = new System.Drawing.Size(460, 24);
@@ -662,17 +677,110 @@
             this.label1.TabIndex = 196;
             this.label1.Text = "hoTools: Toolbar Model Searches && Service";
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(12, 220);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(284, 20);
+            this.label3.TabIndex = 237;
+            this.label3.Text = "SQL path to search for SQL to execute";
+            this.toolTip1.SetToolTip(this.label3, "Paths hoTools searches for SQL Queries to run:\r\n\r\nA semicolon separated list of p" +
+        "aths hoTools searches for the SQL query to execute.");
+            // 
+            // txtSqlSearchPath
+            // 
+            this.txtSqlSearchPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSqlSearchPath.Location = new System.Drawing.Point(302, 220);
+            this.txtSqlSearchPath.Name = "txtSqlSearchPath";
+            this.txtSqlSearchPath.Size = new System.Drawing.Size(536, 24);
+            this.txtSqlSearchPath.TabIndex = 236;
+            this.toolTip1.SetToolTip(this.txtSqlSearchPath, "Paths hoTools searches for SQL Queries to run:\r\n\r\nA semicolon separated list of p" +
+        "aths hoTools searches for the SQL query to execute.");
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(216, 250);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(84, 20);
+            this.label9.TabIndex = 247;
+            this.label9.Text = "on Toolbar";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(207, 203);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(84, 20);
+            this.label8.TabIndex = 246;
+            this.label8.Text = "on Toolbar";
+            // 
+            // chkShowQueryButtons
+            // 
+            this.chkShowQueryButtons.AutoSize = true;
+            this.chkShowQueryButtons.Location = new System.Drawing.Point(183, 254);
+            this.chkShowQueryButtons.Margin = new System.Windows.Forms.Padding(2);
+            this.chkShowQueryButtons.Name = "chkShowQueryButtons";
+            this.chkShowQueryButtons.Size = new System.Drawing.Size(15, 14);
+            this.chkShowQueryButtons.TabIndex = 245;
+            this.toolTip1.SetToolTip(this.chkShowQueryButtons, "Add Buttons to start a Query with just one click");
+            this.chkShowQueryButtons.UseVisualStyleBackColor = true;
+            // 
+            // chkShowServiceButtons
+            // 
+            this.chkShowServiceButtons.AutoSize = true;
+            this.chkShowServiceButtons.Location = new System.Drawing.Point(174, 208);
+            this.chkShowServiceButtons.Margin = new System.Windows.Forms.Padding(2);
+            this.chkShowServiceButtons.Name = "chkShowServiceButtons";
+            this.chkShowServiceButtons.Size = new System.Drawing.Size(15, 14);
+            this.chkShowServiceButtons.TabIndex = 244;
+            this.toolTip1.SetToolTip(this.chkShowServiceButtons, "Buttons to start a Service with just one click");
+            this.chkShowServiceButtons.UseVisualStyleBackColor = true;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(13, 250);
+            this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(155, 20);
+            this.label6.TabIndex = 243;
+            this.label6.Text = "Show Query Buttons";
+            this.toolTip1.SetToolTip(this.label6, "Add Buttons to start a Query with just one click");
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(11, 490);
+            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(165, 20);
+            this.label5.TabIndex = 242;
+            this.label5.Text = "Show Service Buttons";
+            this.toolTip1.SetToolTip(this.label5, "Add Buttons to start a Service with just one click");
+            // 
             // FrmSettingsToolbar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1149, 498);
+            this.ClientSize = new System.Drawing.Size(1149, 595);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.chkShowQueryButtons);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.txtSqlSearchPath);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtButton4TextService);
             this.Controls.Add(this.txtButton3TextService);
             this.Controls.Add(this.txtButton2TextService);
-            this.Controls.Add(this.txtButton1TextService);
             this.Controls.Add(this.txtBtn5SearchName);
             this.Controls.Add(this.txtBtn5Text);
             this.Controls.Add(this.txtBtn4SearchName);
@@ -758,5 +866,13 @@
         private System.Windows.Forms.TextBox txtServiceTooltip3;
         private System.Windows.Forms.Label lblServiceButtonTooltip;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox txtSqlSearchPath;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.CheckBox chkShowServiceButtons;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.CheckBox chkShowQueryButtons;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label5;
     }
 }

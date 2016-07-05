@@ -73,6 +73,8 @@
             this.label34 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.txtSqlSearchPath = new System.Windows.Forms.TextBox();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -266,10 +268,11 @@
             // 
             // txtQuickSearch
             // 
-            this.txtQuickSearch.Location = new System.Drawing.Point(215, 185);
+            this.txtQuickSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtQuickSearch.Location = new System.Drawing.Point(215, 181);
             this.txtQuickSearch.Margin = new System.Windows.Forms.Padding(2);
             this.txtQuickSearch.Name = "txtQuickSearch";
-            this.txtQuickSearch.Size = new System.Drawing.Size(314, 20);
+            this.txtQuickSearch.Size = new System.Drawing.Size(536, 24);
             this.txtQuickSearch.TabIndex = 213;
             this.toolTip1.SetToolTip(this.txtQuickSearch, resources.GetString("txtQuickSearch.ToolTip"));
             // 
@@ -282,8 +285,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(153, 72);
             this.label1.TabIndex = 212;
-            this.label1.Text = "(Quick) Search Name\r\n- EA Search Name\r\n- SQL file (\'mySql.sql\')\r\nBlank to hide it" +
-    "";
+            this.label1.Text = "Quick Search:\r\n- EA Search Name\r\n- SQL file (\'mySql.sql\')\r\n- Blank to hide it";
             this.toolTip1.SetToolTip(this.label1, resources.GetString("label1.ToolTip"));
             // 
             // label2
@@ -310,10 +312,11 @@
             // 
             // txtFileManagerPath
             // 
+            this.txtFileManagerPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtFileManagerPath.Location = new System.Drawing.Point(246, 444);
             this.txtFileManagerPath.Margin = new System.Windows.Forms.Padding(2);
             this.txtFileManagerPath.Name = "txtFileManagerPath";
-            this.txtFileManagerPath.Size = new System.Drawing.Size(314, 20);
+            this.txtFileManagerPath.Size = new System.Drawing.Size(314, 24);
             this.txtFileManagerPath.TabIndex = 226;
             this.toolTip1.SetToolTip(this.txtFileManagerPath, resources.GetString("txtFileManagerPath.ToolTip"));
             // 
@@ -582,12 +585,36 @@
             this.label9.TabIndex = 241;
             this.label9.Text = "on Toolbar";
             // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(211, 207);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(81, 20);
+            this.label10.TabIndex = 243;
+            this.label10.Text = "SQL path:";
+            this.toolTip1.SetToolTip(this.label10, "Paths hoTools searches for SQL Queries to run:\r\n\r\nA semicolon separated list of p" +
+        "aths hoTools searches for the SQL query to execute.");
+            // 
+            // txtSqlSearchPath
+            // 
+            this.txtSqlSearchPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSqlSearchPath.Location = new System.Drawing.Point(215, 230);
+            this.txtSqlSearchPath.Name = "txtSqlSearchPath";
+            this.txtSqlSearchPath.Size = new System.Drawing.Size(536, 24);
+            this.txtSqlSearchPath.TabIndex = 242;
+            this.toolTip1.SetToolTip(this.txtSqlSearchPath, "Paths hoTools searches for SQL Queries to run:\r\n\r\nA semicolon separated list of p" +
+        "aths hoTools searches for the SQL query to execute.");
+            // 
             // FrmSettingsGeneral
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(844, 529);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.txtSqlSearchPath);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.chkConveyedItemSupport);
@@ -679,5 +706,7 @@
         private System.Windows.Forms.RadioButton rbAutoLoadMdgBasic;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox txtSqlSearchPath;
     }
 }

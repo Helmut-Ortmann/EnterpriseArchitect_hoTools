@@ -5,9 +5,10 @@ namespace Control.EaAddinShortcuts
     public class EaAddinButtons
     {
         public string  KeyText;
-        public int KeyPos;
+        public readonly int KeyPos;
         public string KeySearchTooltip;
-        public EaAddinButtons(int pos, string text, string toolTip)
+
+        protected EaAddinButtons(int pos, string text, string toolTip)
         {
             KeyPos = pos;
             KeyText = text;

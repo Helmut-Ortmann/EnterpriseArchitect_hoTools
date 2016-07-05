@@ -24,6 +24,9 @@ namespace hoTools.Settings
 
 
             #region miscellaneous
+            // SQL paths
+            txtSqlSearchPath.Text = _settings.SqlPaths;
+
             chkLineStyleSupport.Checked = settings.IsLineStyleSupport;
             chkShortKeySupport.Checked = settings.IsShortKeySupport;
             chkShowServiceButtons.Checked = settings.IsShowServiceButton;
@@ -93,6 +96,8 @@ namespace hoTools.Settings
 
         private void btnOk_Click(object sender, System.EventArgs e)
         {
+            // SQL paths
+            _settings.SqlPaths = txtSqlSearchPath.Text;
             _settings.QuickSearchName = txtQuickSearch.Text;
             _settings.FileManagerPath = txtFileManagerPath.Text;
 

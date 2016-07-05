@@ -107,14 +107,16 @@
             this.label31 = new System.Windows.Forms.Label();
             this.label30 = new System.Windows.Forms.Label();
             this.label32 = new System.Windows.Forms.Label();
+            this.chkShortKeySupport = new System.Windows.Forms.CheckBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.Hotkeys = new System.Windows.Forms.Label();
             this.label27 = new System.Windows.Forms.Label();
             this.label28 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.chkShortKeySupport = new System.Windows.Forms.CheckBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtSqlSearchPath = new System.Windows.Forms.TextBox();
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.SuspendLayout();
@@ -1001,6 +1003,29 @@
             this.label32.TabIndex = 188;
             this.label32.Text = "Global Key: Searches";
             // 
+            // chkShortKeySupport
+            // 
+            this.chkShortKeySupport.AutoSize = true;
+            this.chkShortKeySupport.Location = new System.Drawing.Point(211, 481);
+            this.chkShortKeySupport.Margin = new System.Windows.Forms.Padding(2);
+            this.chkShortKeySupport.Name = "chkShortKeySupport";
+            this.chkShortKeySupport.Size = new System.Drawing.Size(15, 14);
+            this.chkShortKeySupport.TabIndex = 232;
+            this.toolTip1.SetToolTip(this.chkShortKeySupport, resources.GetString("chkShortKeySupport.ToolTip"));
+            this.chkShortKeySupport.UseVisualStyleBackColor = true;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(25, 477);
+            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(164, 20);
+            this.label4.TabIndex = 231;
+            this.label4.Text = "Global Key Support";
+            this.toolTip1.SetToolTip(this.label4, resources.GetString("label4.ToolTip"));
+            // 
             // Hotkeys
             // 
             this.Hotkeys.AutoSize = true;
@@ -1019,9 +1044,9 @@
             this.label27.Location = new System.Drawing.Point(657, 37);
             this.label27.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(101, 18);
+            this.label27.Size = new System.Drawing.Size(106, 18);
             this.label27.TabIndex = 115;
-            this.label27.Text = "Service tooltip";
+            this.label27.Text = "Service Tooltip";
             // 
             // label28
             // 
@@ -1030,9 +1055,9 @@
             this.label28.Location = new System.Drawing.Point(318, 36);
             this.label28.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(98, 18);
+            this.label28.Size = new System.Drawing.Size(101, 18);
             this.label28.TabIndex = 113;
-            this.label28.Text = "Service name";
+            this.label28.Text = "Service Name";
             // 
             // groupBox4
             // 
@@ -1092,38 +1117,37 @@
             this.label1.TabIndex = 196;
             this.label1.Text = "Settings Global Keys for Model Searches and Services";
             // 
-            // chkShortKeySupport
-            // 
-            this.chkShortKeySupport.AutoSize = true;
-            this.chkShortKeySupport.Location = new System.Drawing.Point(212, 467);
-            this.chkShortKeySupport.Margin = new System.Windows.Forms.Padding(2);
-            this.chkShortKeySupport.Name = "chkShortKeySupport";
-            this.chkShortKeySupport.Size = new System.Drawing.Size(15, 14);
-            this.chkShortKeySupport.TabIndex = 232;
-            this.toolTip1.SetToolTip(this.chkShortKeySupport, resources.GetString("chkShortKeySupport.ToolTip"));
-            this.chkShortKeySupport.UseVisualStyleBackColor = true;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(26, 463);
-            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(164, 20);
-            this.label4.TabIndex = 231;
-            this.label4.Text = "Global Key Support";
-            this.toolTip1.SetToolTip(this.label4, resources.GetString("label4.ToolTip"));
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(339, 460);
+            this.label2.Location = new System.Drawing.Point(313, 501);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(441, 24);
             this.label2.TabIndex = 233;
             this.label2.Text = "Select Global Key Support and Restart EA !!!!!!";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(27, 455);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(284, 20);
+            this.label3.TabIndex = 235;
+            this.label3.Text = "SQL path to search for SQL to execute";
+            this.toolTip1.SetToolTip(this.label3, "Paths hoTools searches for SQL Queries to run:\r\n\r\nA semicolon seperated list of p" +
+        "aths hoTools searches for the SQL query to execute.");
+            // 
+            // txtSqlSearchPath
+            // 
+            this.txtSqlSearchPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSqlSearchPath.Location = new System.Drawing.Point(317, 455);
+            this.txtSqlSearchPath.Name = "txtSqlSearchPath";
+            this.txtSqlSearchPath.Size = new System.Drawing.Size(536, 24);
+            this.txtSqlSearchPath.TabIndex = 234;
+            this.toolTip1.SetToolTip(this.txtSqlSearchPath, "Paths hoTools searches for SQL Queries to run:\r\n\r\nA semicolon seperated list of p" +
+        "aths hoTools searches for the SQL query to execute.");
             // 
             // FrmSettingsKey
             // 
@@ -1131,6 +1155,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(1015, 554);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.txtSqlSearchPath);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.chkShortKeySupport);
             this.Controls.Add(this.label4);
@@ -1262,5 +1288,7 @@
         private System.Windows.Forms.CheckBox chkShortKeySupport;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox txtSqlSearchPath;
     }
 }

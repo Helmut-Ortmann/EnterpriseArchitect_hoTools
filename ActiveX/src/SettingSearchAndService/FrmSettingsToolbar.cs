@@ -81,6 +81,12 @@ namespace hoTools.Settings.Toolbar
         {
             base.OnCreateControl();
 
+            // Button support for Service and Search
+            chkShowQueryButtons.Checked = _settings.IsShortKeySupport;
+            chkShowServiceButtons.Checked = _settings.IsShowServiceButton;
+
+            txtSqlSearchPath.Text = _settings.SqlPaths;
+
             #region load shortcuts search
 
             var sh = (EaAddinShortcutSearch)_settings.ButtonsSearch[0];
@@ -315,6 +321,13 @@ namespace hoTools.Settings.Toolbar
             _addinControl.ParameterizeServiceButton(); // sets the Services Buttons on Toolbar
 
             _settings.UpdateSearchesAndServices(); // update dynamic informations like method, texts from configuration
+
+            // Button support for Service and Search
+            _settings.IsShortKeySupport = chkShowQueryButtons.Checked;
+            _settings.IsShowServiceButton = chkShowServiceButtons.Checked;
+            // SQL paths
+            _settings.SqlPaths = txtSqlSearchPath.Text;
+
             _settings.Save();
             Close();
         }
