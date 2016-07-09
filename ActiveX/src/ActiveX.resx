@@ -349,6 +349,16 @@
     <value>&lt;Search Term&gt; if needed for your SQL / EA Model Search:
 
 With enter you can run your Search.
+
+Enter your &lt;Search Term&gt; to further specify your search.
+
+If you use hoTools SQL the following wild cards are supported and converted according to your database:
+- #WC# EA wild card (works also in hoToolsQuery like '*' or '%'
+- % or * (no or any amount of arbitrary characters, transformed to the used database)
+- ? or _ (single character, transformed to the used database)
+- ! or ^ (shortcut for XOR)
+
+e.g.: 'myString*' Everything starting with 'myString' (db independent)
 </value>
   </data>
   <data name="&gt;&gt;_txtSearchText.Name" xml:space="preserve">

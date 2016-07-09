@@ -26,7 +26,7 @@ namespace EAAddinFramework.Utils
         RepositoryType? _repositoryType;  // a null able type
 
         // configuration as singleton
-        HoToolsGlobalCfg _globalCfg = HoToolsGlobalCfg.Instance;
+        readonly HoToolsGlobalCfg _globalCfg = HoToolsGlobalCfg.Instance;
 
 
         /// <summary>
@@ -241,7 +241,7 @@ namespace EAAddinFramework.Utils
         public string EscapeSqlString(string sqlString)
         {
             string escapedString = sqlString;
-            switch (this.repositoryType)
+            switch (repositoryType)
             {
                 case RepositoryType.MySql:
                 case RepositoryType.Postgres:
@@ -255,12 +255,12 @@ namespace EAAddinFramework.Utils
         }
         /// <summary>
         /// Runs the search (EA search or hoTools SQL file if it's a *.sql file). It handles the exceptions.
+        /// It converts wild cards of the &lt;Search Term>. 
         /// </summary>
         /// <param name="searchName">EA Search name or SQL file name (uses path to find absolute path)</param>
         /// <param name="searchTerm"></param>
         public void SearchRun(string searchName, string searchTerm)
         {
-            kkkkkkkk // allow an absolute path (not only relative)
             if (searchName == "") return;
 
             // SQL file?
@@ -270,6 +270,7 @@ namespace EAAddinFramework.Utils
                 string sqlString = _globalCfg.ReadSqlFile(searchName);
 
                 // run search
+                searchTerm = ReplaceSqlWildCards(searchTerm);
                 SqlRun(sqlString, searchTerm);
 
 
@@ -278,12 +279,12 @@ namespace EAAddinFramework.Utils
             {
                 try
                 {
-                    Repository.RunModelSearch(searchName, searchName, "", "");
+                    Repository.RunModelSearch(searchName, searchTerm, "", "");
                 }
                 catch (Exception e)
                 {
                     MessageBox.Show(e.ToString(),
-                        $"Error start search '{searchName} {searchName}'");
+                        $"Error start search '{searchName} {searchTerm}'");
                 }
             }
         }
@@ -307,8 +308,7 @@ namespace EAAddinFramework.Utils
             if (Regex.IsMatch(sql, @"^\s*select ", RegexOptions.IgnoreCase | RegexOptions.Multiline))
             {
                 // run the select query
-                string xml = SqlQueryWithException(sql);
-                if (xml == null) xml = ""; // error message already output
+                string xml = SqlQueryWithException(sql) ?? "";
 
                 // output the query in EA Search Window
                 string target = MakeEaXmlOutput(xml);
@@ -459,7 +459,7 @@ namespace EAAddinFramework.Utils
         /// <returns>string</returns>
         public string MakeEaXmlOutput(string x)
         {
-            if (x == "" || x == null ) return EmptyQueryResult();
+            if (string.IsNullOrEmpty(x) ) return EmptyQueryResult();
             return MakeEaXmlOutput(XDocument.Parse(x));
         }
 
@@ -787,7 +787,13 @@ namespace EAAddinFramework.Utils
 
 
         /// <summary>
-        /// replace the wild cards in the given sql query string to match either MSAccess or ANSI syntax
+        /// Replace the wild cards in the given sql query string to match either MSAccess or ANSI syntax. It works for:
+        /// <para />
+        /// % or * or #WC# Any character
+        /// <para />
+        /// _ or ? a single character
+        /// <para />
+        /// '^' or '!' a shortcut for XOR
         /// </summary>
         /// <param name="sqlQuery">the sql string to edit</param>
         /// <returns>the same sql query, but with its wild cards replaced according to the required syntax</returns>
@@ -810,6 +816,7 @@ namespace EAAddinFramework.Utils
                             likeString = likeString.Replace('%', '*');
                             likeString = likeString.Replace('_', '?');
                             likeString = likeString.Replace('^', '!');
+                            likeString = likeString.Replace("#WC#", "*");
                         }
                         else
                         {
@@ -817,6 +824,7 @@ namespace EAAddinFramework.Utils
                             likeString = likeString.Replace('?', '_');
                             likeString = likeString.Replace('#', '_');
                             likeString = likeString.Replace('^', '!');
+                            likeString = likeString.Replace("#WC#", "%");
                         }
                         string next = string.Empty;
                         if (endString < sqlQuery.Length)

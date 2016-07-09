@@ -15,7 +15,6 @@ using hoTools.Utils.ActionPins;
 using EAAddinFramework.Utils;
 
 using System.Reflection;
-using EA;
 using hoTools.Find;
 using hoTools.Utils.Configuration;
 using GlobalHotkeys;
@@ -51,6 +50,10 @@ using File = System.IO.File;
 
 namespace hoTools
 {
+    /// <summary>
+    /// The main Addin class which calls the other tasks
+    /// </summary>
+    // ReSharper disable once UnusedMember.Global
     public class AddinClass : EAAddinFramework.EAAddinBase
     {
         // Overwritten by AdinClass AssemblyFileVersion
@@ -99,7 +102,7 @@ namespace hoTools
         const string MenuShowSpecification = "Show Specification";
         const string MenuUnlockDiagram = "UnlockDiagram";
 
-        const string MenuDeviderLineStyleDia = "---------------Line style Diagram-----------------";
+        // const string MenuDeviderLineStyleDia = "---------------Line style Diagram-----------------";
         const string MenuLineStyleDiaLh = "Line Style Diagram (Object): Lateral Horizontal";
         const string MenuLineStyleDiaLv = "Line Style Diagram (Object): Lateral Vertical";
         const string MenuLineStyleDiaTh = "Line Style Diagram (Object): Tree Horizontal";
@@ -118,7 +121,7 @@ namespace hoTools
         const string MenuCreateStateMachineForOperation = "&Create State Machine for Operation (select operation)  ";
 
 
-        const string MenuCorrectTypes = "-------------Correct Type ---------------------------";
+        // const string MenuCorrectTypes = "-------------Correct Type ---------------------------";
         const string MenuCorrectType = "Correct types of Attribute, Function (selected Attribute, Function, Class or Package)";
 
         const string MenuDeviderCopyPast = "-------------Move links---------------------------"; 
@@ -165,7 +168,10 @@ namespace hoTools
             var globalCfg = HoToolsGlobalCfg.Instance;
             globalCfg.SetSqlPaths(_addinSettings.SqlPaths);
 
+            // ReSharper disable once VirtualMemberCallInConstructor
             MenuHeader = "-" + _addinSettings.ProductName;
+            // ReSharper disable once VirtualMemberCallInConstructor
+            // ReSharper disable once RedundantExplicitArrayCreation
             menuOptions = new string[] { 
                 //-------------------------- General  --------------------------//
                 //    menuLocateCompositeElementorDiagram,
@@ -201,7 +207,7 @@ namespace hoTools
         /// <summary>
         /// Handle Global Keys
         /// </summary>
-        internal static class HotkeyHandlers
+        private static class HotkeyHandlers
         {
             public static void SetupGlobalHotkeys()
             {
@@ -281,7 +287,11 @@ namespace hoTools
                 Form hotkeyForm = new InvisibleHotKeyForm(hotkeys);
                 hotkeyForm.Show();
             }
-            public static void RunGlobalKeySearch(int pos)
+            /// <summary>
+            /// Service run global key search
+            /// </summary>
+            /// <param name="pos"></param>
+            private static void RunGlobalKeySearch(int pos)
             {
                 
                     GlobalKeysConfig.GlobalKeysSearchConfig sh = _AddinSettings.GlobalShortcutsSearch[pos];
@@ -289,7 +299,11 @@ namespace hoTools
                     _Model.SearchRun(sh.SearchName, sh.SearchTerm);
                     
             }
-            public static void RunGlobalKeyService(int pos)
+            /// <summary>
+            /// Service function to run global keys
+            /// </summary>
+            /// <param name="pos"></param>
+            private static void RunGlobalKeyService(int pos)
             {
                 GlobalKeysConfig.GlobalKeysServiceConfig sh = _AddinSettings.GlobalShortcutsService[pos];
                     if (sh.Method == null) return;
@@ -349,8 +363,8 @@ namespace hoTools
         /// </summary>
         /// <param name="repository">the EA.rep</param>
         /// <param name="guid">the guid of the selected item</param>
-        /// <param name="ot">the object type of the selected item</param>
-        public override void EA_OnContextItemChanged(EA.Repository repository, string guid, EA.ObjectType ot)
+        /// <param name="objectType">the object type of the selected item</param>
+        public override void EA_OnContextItemChanged(EA.Repository repository, string guid, EA.ObjectType objectType)
         { }
         #endregion
         #region EA_OnOutputItemDoubleClicked
@@ -369,6 +383,8 @@ namespace hoTools
             _Repository = repository;
             _repository = repository;
             ShowAddinControlWindows();
+            // Activate the correct tab
+            _repository.ActivateTab(_AddinControlGui.ProductName);
         }
         #endregion
         #region EA_OnPostNewConnector
@@ -466,7 +482,7 @@ namespace hoTools
         // ReSharper disable once InconsistentNaming
         public override void EA_FileClose(EA.Repository Repository)
         {
-            if (_myControlGui != null)  _myControlGui.Save(); // save settings
+            _myControlGui?.Save(); // save settings
             InitializeForRepository(null);
 
 
@@ -477,18 +493,18 @@ namespace hoTools
         /// Called when EA start model validation. Just shows a message box
         /// </summary>
         /// <param name="Repository">the rep</param>
-        /// <param name="Args">the arguments</param>
+        /// <param name="args">the arguments</param>
         // ReSharper disable once InconsistentNaming
-        public override void EA_OnStartValidation(EA.Repository Repository, object Args)
+        public override void EA_OnStartValidation(EA.Repository Repository, object args)
         {
             MessageBox.Show(@"Validation started");
         }
         /// <summary>
         /// Called when EA ends model validation. Just shows a message box
         /// </summary>
-        /// <param name="Repository">the rep</param>
-        /// <param name="Args">the arguments</param>
-        public override void EA_OnEndValidation(EA.Repository Repository, object Args)
+        /// <param name="repository">the rep</param>
+        /// <param name="args">the arguments</param>
+        public override void EA_OnEndValidation(EA.Repository repository, object args)
         {
             MessageBox.Show(@"Validation ended");
         }
@@ -501,9 +517,9 @@ namespace hoTools
         /// <para/>- RELEASE  AppData\Local\Apps\hoTools\
         /// 
         /// </summary>
-        /// <param name="Repository"></param>
+        /// <param name="repository"></param>
         /// <returns></returns>
-        public override object EA_OnInitializeTechnologies(EA.Repository Repository) {
+        public override object EA_OnInitializeTechnologies(EA.Repository repository) {
            
 
             string fileNameMdg;
@@ -522,6 +538,7 @@ namespace hoTools
             if (fileNameMdg == "") return "";
 
             string assemblyFolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            // ReSharper disable once AssignNullToNotNullAttribute
             string combinedPathMdg = Path.Combine(assemblyFolder, fileNameMdg);
 
             try
@@ -582,11 +599,11 @@ namespace hoTools
         /// Called once Menu has been opened to see what menu items should active.
         /// </summary>
         /// <param name="Repository">the rep</param>
-        /// <param name="MenuLocation">the location of the menu</param>
-        /// <param name="MenuName">the name of the menu</param>
-        /// <param name="ItemName">the name of the menu item</param>
-        /// <param name="IsEnabled">boolean indicating whether the menu item is enabled</param>
-        /// <param name="IsChecked">boolean indicating whether the menu is checked</param>
+        /// <param name="menuLocation">the location of the menu</param>
+        /// <param name="menuName">the name of the menu</param>
+        /// <param name="itemName">the name of the menu item</param>
+        /// <param name="isEnabled">boolean indicating whether the menu item is enabled</param>
+        /// <param name="isChecked">boolean indicating whether the menu is checked</param>
         // ReSharper disable once InconsistentNaming
         // ReSharper disable once InconsistentNaming
         // ReSharper disable once ParameterHidesMember
@@ -594,130 +611,130 @@ namespace hoTools
         // ReSharper disable once InconsistentNaming
         // ReSharper disable once InconsistentNaming
         // ReSharper disable once InconsistentNaming
-        public override void EA_GetMenuState(EA.Repository Repository, string MenuLocation, string MenuName, string ItemName, ref bool IsEnabled, ref bool IsChecked)
+        public override void EA_GetMenuState(EA.Repository Repository, string menuLocation, string menuName, string itemName, ref bool isEnabled, ref bool isChecked)
         {
             if (IsProjectOpen(Repository))
             {
-                switch (ItemName)
+                switch (itemName)
                 {
                     case MenuChangeXmlFile:
-                        IsChecked = false;
+                        isChecked = false;
                         break;
 
                     case MenuShowWindow:
-                        IsChecked = false;
+                        isChecked = false;
                         break;
                     case  MenuShowSpecification:
-                        IsChecked = false;
+                        isChecked = false;
                         break;
 
                     case MenuUnlockDiagram:
-                        IsChecked = false;
+                        isChecked = false;
                         break;
 
                     case MenuLineStyleDiaTh:
-                        IsChecked = false;
+                        isChecked = false;
                         break;
                     case MenuLineStyleDiaTv:
-                        IsChecked = false;
+                        isChecked = false;
                         break;
                     case MenuLineStyleDiaLh:
-                        IsChecked = false;
+                        isChecked = false;
                         break;
                     case MenuLineStyleDiaLv:
-                        IsChecked = false;
+                        isChecked = false;
                         break;
                     case MenuLineStyleDiaOs:
-                        IsChecked = false;
+                        isChecked = false;
                         break;
 
                     case MenuLocateCompositeElementorDiagram:
-                        IsChecked = false;
+                        isChecked = false;
                         break;
                     
                     case MenuLocateCompositeDiagramOfElement:
-                        IsChecked = false;
+                        isChecked = false;
                         break;
                         
 
                 case MenuUsage:
-                        IsChecked = false;
+                        isChecked = false;
                         break;    
                        
                 case MenuCreateInteractionForOperation:
-                        IsChecked = false;
+                        isChecked = false;
                         break;
 
                 case MenuCreateStateMachineForOperation:
-                        IsChecked = false;
+                        isChecked = false;
                         break;  
                     
                 case MenuCorrectType:
-                        IsChecked = false;
+                        isChecked = false;
                         break;
 
                case MenuDisplayBehavior:
-                        IsChecked = false;
+                        isChecked = false;
                         break;
 
 
                case MenuUpdateActionPin:
-                        IsChecked = false;
+                        isChecked = false;
                         break;
 
                     case MenuUpdateOperationParameter:
-                        IsChecked = false;
+                        isChecked = false;
                         break;
 
                     case MenuCreateActivityForOperation:
-                        IsChecked = false;
+                        isChecked = false;
                         break;
 
                     case MenuDisplayMethodDefinition:
-                        IsChecked = false;
+                        isChecked = false;
                         break;
 
                     
                     case MenuLocateType:
-                        IsChecked = false;
+                        isChecked = false;
                         break;
 
 
                     case MenuCopyGuidToClipboard:
-                        IsChecked = false;
+                        isChecked = false;
                         break;
 
                     case MenuCopyLinksToClipboard:
-                        IsChecked = false;
+                        isChecked = false;
                         break;
 
                     case MenuPasteLinksFromClipboard:
-                        IsChecked = false;
+                        isChecked = false;
                         break;
 
                     
                     case MenuAddLinkedNote:
-                        IsChecked = false;
+                        isChecked = false;
                         break;
 
                     case MenuAddLinkedDiagramNote:
-                        IsChecked = false;
+                        isChecked = false;
                         break;
 
                     case MenuAbout:
-                        IsChecked = false;
+                        isChecked = false;
                         break;
 
                     // there shouldn't be any other, but just in case disable it.
                     default:
-                        IsEnabled = false;
+                        isEnabled = false;
                         break;
                 }
             }
             else
             {
                 // If no open project, disable all menu options
-                IsEnabled = false;
+                isEnabled = false;
             }
         }
         #endregion
@@ -727,20 +744,17 @@ namespace hoTools
         /// Called when user makes a selection in the menu.
         /// This is your main exit point to the rest of your Add-in
         /// </summary>
-        /// <param name="Repository">the rep</param>
-        /// <param name="MenuLocation">the location of the menu</param>
-        /// <param name="MenuName">the name of the menu</param>
-        /// <param name="ItemName">the name of the selected menu item</param>
-        public override void EA_MenuClick(EA.Repository Repository, string MenuLocation, string MenuName, string ItemName)
+        /// <param name="repository">the rep</param>
+        /// <param name="menuLocation">the location of the menu</param>
+        /// <param name="menuName">the name of the menu</param>
+        /// <param name="itemName">the name of the selected menu item</param>
+        public override void EA_MenuClick(EA.Repository repository, string menuLocation, string menuName, string itemName)
         {
-            EA.ObjectType oType = Repository.GetContextItemType();
-            EA.Diagram diaCurrent = Repository.GetCurrentDiagram();
+            EA.ObjectType oType = repository.GetContextItemType();
+            EA.Diagram diaCurrent = repository.GetCurrentDiagram();
             EA.Element el;
 
-            if (diaCurrent != null) 
-            {
-            }
-            switch (ItemName)
+            switch (itemName)
             {
 
                     case MenuShowWindow:
@@ -756,32 +770,32 @@ namespace hoTools
 
                     // Line style: Lateral Horizontal 
                 case MenuChangeXmlFile:
-                     EaService.SetNewXmlPath(Repository);
+                     EaService.SetNewXmlPath(repository);
                      break;
                 // Line style: Lateral Horizontal 
                 case MenuLineStyleDiaLh:
-                     EaService.SetLineStyle(Repository, "LH");
+                     EaService.SetLineStyle(repository, "LH");
                    
                     break;
                 // Line style: Lateral Vertical 
                 case MenuLineStyleDiaLv:
                     // all connections of diagram
-                    EaService.SetLineStyle(Repository, "LV");
+                    EaService.SetLineStyle(repository, "LV");
                     break;
                 // Line style: Tree Vertical 
                 case MenuLineStyleDiaTv:
-                    EaService.SetLineStyle(Repository, "V");
+                    EaService.SetLineStyle(repository, "V");
                     
                     break;
 
                 // Line style: Tree Horizontal 
                 case MenuLineStyleDiaTh:
-                    EaService.SetLineStyle(Repository, "H");
+                    EaService.SetLineStyle(repository, "H");
                     
                     break;
                 // Line style: Orthogonal square 
                 case MenuLineStyleDiaOs:
-                    EaService.SetLineStyle(Repository, "OS");
+                    EaService.SetLineStyle(repository, "OS");
                     
                     break;
 
@@ -799,9 +813,9 @@ namespace hoTools
                         {
                             string sql = @"update t_diagram set locked = 0" +
                            " where diagram_ID = " + diaCurrent.DiagramID;
-                            Repository.Execute(sql);
+                            repository.Execute(sql);
                             // reload view
-                            Repository.ReloadDiagram(diaCurrent.DiagramID);
+                            repository.ReloadDiagram(diaCurrent.DiagramID);
                         }
                         #pragma warning disable RECS0022
                         catch
@@ -815,7 +829,7 @@ namespace hoTools
 
                 // Start specification (file parameter)
                 case  MenuShowSpecification:
-                      EaService.ShowSpecification(Repository);
+                      EaService.ShowSpecification(repository);
 
                     break;
 
@@ -824,21 +838,21 @@ namespace hoTools
                     // Check selected Elements in tree
                     if (oType.Equals(EA.ObjectType.otMethod))
                     {
-                        var m = (EA.Method)Repository.GetContextObject();
+                        var m = (EA.Method)repository.GetContextObject();
                         // test multiple selection
 
                         // Create Activity
-                        Appl.CreateInteractionForOperation(Repository, m);
+                        Appl.CreateInteractionForOperation(repository, m);
 
                     }
                     if (oType.Equals(EA.ObjectType.otElement))
                     {
-                        var cls = (EA.Element)Repository.GetContextObject();
+                        var cls = (EA.Element)repository.GetContextObject();
                         // over all operations of class
                         foreach (EA.Method m in cls.Methods)
                         {
                             // Create Activity
-                            Appl.CreateInteractionForOperation(Repository, m);
+                            Appl.CreateInteractionForOperation(repository, m);
 
                         }
                     }
@@ -850,11 +864,11 @@ namespace hoTools
                     // Check selected Elements in tree
                     if (oType.Equals(EA.ObjectType.otMethod))
                     {
-                        var m = (EA.Method)Repository.GetContextObject();
+                        var m = (EA.Method)repository.GetContextObject();
                         // test multiple selection
 
                         // Create State Machine
-                        Appl.CreateStateMachineForOperation(Repository, m);
+                        Appl.CreateStateMachineForOperation(repository, m);
 
                     }
                    break;
@@ -862,89 +876,89 @@ namespace hoTools
 
 
                 case MenuLocateCompositeElementorDiagram:
-                   EaService.NavigateComposite(Repository);
+                   EaService.NavigateComposite(repository);
                     break;
                     
                 // 
                 case MenuCorrectType:
                     if (oType.Equals(EA.ObjectType.otAttribute))
                     {
-                        var a = (EA.Attribute)Repository.GetContextObject();
+                        var a = (EA.Attribute)repository.GetContextObject();
 
-                        Util.UpdateAttribute(Repository, a);
+                        Util.UpdateAttribute(repository, a);
                     }
 
                     if (oType.Equals(EA.ObjectType.otMethod))
                     {
-                        var m = (EA.Method)Repository.GetContextObject();
+                        var m = (EA.Method)repository.GetContextObject();
 
-                        Util.UpdateMethod(Repository, m);
+                        Util.UpdateMethod(repository, m);
                     }
                     if (oType.Equals(EA.ObjectType.otElement))
                     {
-                        el = (EA.Element)Repository.GetContextObject();
-                        Util.UpdateClass(Repository, el);
+                        el = (EA.Element)repository.GetContextObject();
+                        Util.UpdateClass(repository, el);
                     }
                     if (oType.Equals(EA.ObjectType.otPackage))
                     {
-                        var pkg = (EA.Package)Repository.GetContextObject();
-                        Util.UpdatePackage(Repository, pkg);
+                        var pkg = (EA.Package)repository.GetContextObject();
+                        Util.UpdatePackage(repository, pkg);
                     }
                     break;
 
                 
                 case MenuCreateActivityForOperation:
-                    EaService.CreateActivityForOperation(Repository);
+                    EaService.CreateActivityForOperation(repository);
 
                     break;
 
                     // get Parameter for Activity
                 case MenuUpdateOperationParameter:
-                    EaService.UpdateActivityParameter(Repository);
+                    EaService.UpdateActivityParameter(repository);
                     break;
 
                 case MenuUpdateActionPin:
                     if (oType.Equals(EA.ObjectType.otPackage))
                     {
-                        var pkg = (EA.Package)Repository.GetContextObject();
-                        ActionPin.UpdateActionPinForPackage(Repository, pkg);
+                        var pkg = (EA.Package)repository.GetContextObject();
+                        ActionPin.UpdateActionPinForPackage(repository, pkg);
                     }
                     if (oType.Equals(EA.ObjectType.otElement))
                     {
-                        el = (EA.Element)Repository.GetContextObject();
-                        ActionPin.UpdateActionPinForElement(Repository, el);
+                        el = (EA.Element)repository.GetContextObject();
+                        ActionPin.UpdateActionPinForElement(repository, el);
                     }
                     break;
                 
 
                 case MenuAddLinkedDiagramNote:
-                    EaService.AddDiagramNote(Repository); 
+                    EaService.AddDiagramNote(repository); 
                                
                     break;
 
                 case MenuAddLinkedNote:
-                    EaService.AddElementNote(Repository);
+                    EaService.AddElementNote(repository);
 
                     break;
 
                 case MenuLocateType:
-                    EaService.LocateType(Repository);
+                    EaService.LocateType(repository);
                     
                     break;
 
                 case MenuUsage:
-                    EaService.FindUsage(Repository);
+                    EaService.FindUsage(repository);
                     
                     break;
 
                 case MenuPasteLinksFromClipboard:
                     if (oType.Equals(EA.ObjectType.otElement)) // only Element
                     {
-                        el = (EA.Element)Repository.GetContextObject();
+                        el = (EA.Element)repository.GetContextObject();
                         string conStr = Clipboard.GetText();  // get Clipboard
                         if (conStr.StartsWith("{", StringComparison.CurrentCulture) && conStr.Substring(37,1)=="}" && conStr.EndsWith("\r\n", StringComparison.CurrentCulture)) {
-                            Repository.CreateOutputTab("DEBUG");
-                            Repository.EnsureOutputVisible("DEBUG");
+                            repository.CreateOutputTab("DEBUG");
+                            repository.EnsureOutputVisible("DEBUG");
                             int countError = 0;
                             int countInserted = 0;
                             string[] conStrList = conStr.Split('\n');
@@ -953,7 +967,7 @@ namespace hoTools
                                 if (line.Length > 38)
                                 {
                                     string guid = line.Substring(0, 38);
-                                    EA.Connector con = Repository.GetConnectorByGuid(guid);
+                                    EA.Connector con = repository.GetConnectorByGuid(guid);
 
                                     // Client/Source
                                     if (line.Substring(38, 1) == "C")
@@ -967,9 +981,9 @@ namespace hoTools
                                         catch
                                         {
                                             countError = countError + 1;
-                                            EA.Element el1 = Repository.GetElementByID(con.SupplierID);
+                                            EA.Element el1 = repository.GetElementByID(con.SupplierID);
                                             string fText = $"Error Name {el1.Name}, Error={con.GetLastError()}";
-                                            Repository.WriteOutput("Debug", fText, 0);
+                                            repository.WriteOutput("Debug", fText, 0);
                                         }
                                     }
                                     //Supplier / Target
@@ -985,22 +999,22 @@ namespace hoTools
                                         catch
                                         {
                                             countError = countError + 1;
-                                            EA.Element el1 = Repository.GetElementByID(con.ClientID);
+                                            EA.Element el1 = repository.GetElementByID(con.ClientID);
                                             string fText = $"Error Name {el1.Name}, Error={con.GetLastError()}";
-                                            Repository.WriteOutput("Debug",fText,0);
+                                            repository.WriteOutput("Debug",fText,0);
                                         }
 
                                     }
                                 }
                             }
                             // update diagram
-                            EA.Diagram dia = Repository.GetCurrentDiagram();
+                            EA.Diagram dia = repository.GetCurrentDiagram();
                             if (dia != null)
                             {
                                 try
                                 {
                                     dia.Update();
-                                    Repository.ReloadDiagram(dia.DiagramID);
+                                    repository.ReloadDiagram(dia.DiagramID);
                                 }
                                 #pragma warning disable RECS0022
                                 catch
@@ -1018,7 +1032,7 @@ namespace hoTools
                     break;
 
                 case MenuCopyGuidToClipboard:
-                   EaService.CopyGuidSqlToClipboard(Repository);
+                   EaService.CopyGuidSqlToClipboard(repository);
                    break;
 
 
@@ -1029,7 +1043,7 @@ namespace hoTools
                 case MenuCopyLinksToClipboard:
                     if (oType.Equals(EA.ObjectType.otElement)) // only Element
                     {
-                        el = (EA.Element)Repository.GetContextObject();
+                        el = (EA.Element)repository.GetContextObject();
                         string conStr = "";
                         foreach (EA.Connector con in el.Connectors)
                         {
@@ -1047,11 +1061,11 @@ namespace hoTools
                     break;
 
                 case MenuDisplayMethodDefinition:
-                    EaService.DisplayOperationForSelectedElement(Repository, EaService.DisplayMode.Method);
+                    EaService.DisplayOperationForSelectedElement(repository, EaService.DisplayMode.Method);
                     break;
 
                 case MenuDisplayBehavior:
-                    EaService.DisplayOperationForSelectedElement(Repository, EaService.DisplayMode.Behavior);
+                    EaService.DisplayOperationForSelectedElement(repository, EaService.DisplayMode.Behavior);
                     break;
 
                 

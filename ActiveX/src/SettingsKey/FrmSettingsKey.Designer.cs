@@ -109,14 +109,14 @@
             this.label32 = new System.Windows.Forms.Label();
             this.chkShortKeySupport = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtSqlSearchPath = new System.Windows.Forms.TextBox();
             this.Hotkeys = new System.Windows.Forms.Label();
             this.label27 = new System.Windows.Forms.Label();
             this.label28 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtSqlSearchPath = new System.Windows.Forms.TextBox();
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.SuspendLayout();
@@ -599,7 +599,7 @@
             this.cmbGlobalKeySearch5SearchTerm.Name = "cmbGlobalKeySearch5SearchTerm";
             this.cmbGlobalKeySearch5SearchTerm.Size = new System.Drawing.Size(280, 21);
             this.cmbGlobalKeySearch5SearchTerm.TabIndex = 162;
-            this.toolTip1.SetToolTip(this.cmbGlobalKeySearch5SearchTerm, "Search text used in Search (EA or hoTools SQL file)");
+            this.toolTip1.SetToolTip(this.cmbGlobalKeySearch5SearchTerm, resources.GetString("cmbGlobalKeySearch5SearchTerm.ToolTip"));
             // 
             // cmbGlobalKeySearch5SearchName
             // 
@@ -609,8 +609,8 @@
             this.cmbGlobalKeySearch5SearchName.Name = "cmbGlobalKeySearch5SearchName";
             this.cmbGlobalKeySearch5SearchName.Size = new System.Drawing.Size(309, 21);
             this.cmbGlobalKeySearch5SearchName.TabIndex = 161;
-            this.toolTip1.SetToolTip(this.cmbGlobalKeySearch5SearchName, "EA Search Name or \r\nhoTools SQL file name like \'mySql.sql\' for advanced features." +
-        "\r\n\r\nMake sure the SQL paths is set in: Global Setting!!!!!");
+            this.toolTip1.SetToolTip(this.cmbGlobalKeySearch5SearchName, "The search to use:\r\n- EA Search\r\n- SQL file name like *.sql (set SQL Path)\r\n- SQL" +
+        " file path like c:\\..\\..\\*.sql");
             // 
             // cmbGlobalKeySearch5Mod4
             // 
@@ -630,7 +630,7 @@
             this.cmbGlobalKeySearch4SearchTerm.Name = "cmbGlobalKeySearch4SearchTerm";
             this.cmbGlobalKeySearch4SearchTerm.Size = new System.Drawing.Size(281, 21);
             this.cmbGlobalKeySearch4SearchTerm.TabIndex = 160;
-            this.toolTip1.SetToolTip(this.cmbGlobalKeySearch4SearchTerm, "Search text used in Search (EA or hoTools SQL file)");
+            this.toolTip1.SetToolTip(this.cmbGlobalKeySearch4SearchTerm, resources.GetString("cmbGlobalKeySearch4SearchTerm.ToolTip"));
             // 
             // cmbGlobalKeySearch5Mod2
             // 
@@ -650,8 +650,8 @@
             this.cmbGlobalKeySearch4SearchName.Name = "cmbGlobalKeySearch4SearchName";
             this.cmbGlobalKeySearch4SearchName.Size = new System.Drawing.Size(309, 21);
             this.cmbGlobalKeySearch4SearchName.TabIndex = 159;
-            this.toolTip1.SetToolTip(this.cmbGlobalKeySearch4SearchName, "EA Search Name or \r\nhoTools SQL file name like \'mySql.sql\' for advanced features." +
-        "\r\n\r\nMake sure the SQL paths is set in: Global Setting!!!!!");
+            this.toolTip1.SetToolTip(this.cmbGlobalKeySearch4SearchName, "The search to use:\r\n- EA Search\r\n- SQL file name like *.sql (set SQL Path)\r\n- SQL" +
+        " file path like c:\\..\\..\\*.sql");
             // 
             // cmbGlobalKeySearch5Mod3
             // 
@@ -671,7 +671,7 @@
             this.cmbGlobalKeySearch3SearchTerm.Name = "cmbGlobalKeySearch3SearchTerm";
             this.cmbGlobalKeySearch3SearchTerm.Size = new System.Drawing.Size(281, 21);
             this.cmbGlobalKeySearch3SearchTerm.TabIndex = 158;
-            this.toolTip1.SetToolTip(this.cmbGlobalKeySearch3SearchTerm, "Search text used in Search (EA or hoTools SQL file)");
+            this.toolTip1.SetToolTip(this.cmbGlobalKeySearch3SearchTerm, resources.GetString("cmbGlobalKeySearch3SearchTerm.ToolTip"));
             // 
             // cmbGlobalKeySearch5Mod1
             // 
@@ -691,8 +691,8 @@
             this.cmbGlobalKeySearch3SearchName.Name = "cmbGlobalKeySearch3SearchName";
             this.cmbGlobalKeySearch3SearchName.Size = new System.Drawing.Size(309, 21);
             this.cmbGlobalKeySearch3SearchName.TabIndex = 157;
-            this.toolTip1.SetToolTip(this.cmbGlobalKeySearch3SearchName, "EA Search Name or \r\nhoTools SQL file name like \'mySql.sql\' for advanced features." +
-        "\r\n\r\nMake sure the SQL paths is set in: Global Setting!!!!!");
+            this.toolTip1.SetToolTip(this.cmbGlobalKeySearch3SearchName, "The search to use:\r\n- EA Search\r\n- SQL file name like *.sql (set SQL Path)\r\n- SQL" +
+        " file path like c:\\..\\..\\*.sql");
             // 
             // cmbGlobalKeySearch5Key
             // 
@@ -712,7 +712,7 @@
             this.cmbGlobalKeySearch2SearchTerm.Name = "cmbGlobalKeySearch2SearchTerm";
             this.cmbGlobalKeySearch2SearchTerm.Size = new System.Drawing.Size(280, 21);
             this.cmbGlobalKeySearch2SearchTerm.TabIndex = 156;
-            this.toolTip1.SetToolTip(this.cmbGlobalKeySearch2SearchTerm, "Search text used in Search (EA or hoTools SQL file)");
+            this.toolTip1.SetToolTip(this.cmbGlobalKeySearch2SearchTerm, resources.GetString("cmbGlobalKeySearch2SearchTerm.ToolTip"));
             // 
             // cmbGlobalKeySearch4Mod4
             // 
@@ -732,8 +732,8 @@
             this.cmbGlobalKeySearch2SearchName.Name = "cmbGlobalKeySearch2SearchName";
             this.cmbGlobalKeySearch2SearchName.Size = new System.Drawing.Size(309, 21);
             this.cmbGlobalKeySearch2SearchName.TabIndex = 155;
-            this.toolTip1.SetToolTip(this.cmbGlobalKeySearch2SearchName, "EA Search Name or \r\nhoTools SQL file name like \'mySql.sql\' for advanced features." +
-        "\r\n\r\nMake sure the SQL paths is set in: Global Setting!!!!!");
+            this.toolTip1.SetToolTip(this.cmbGlobalKeySearch2SearchName, "The search to use:\r\n- EA Search\r\n- SQL file name like *.sql (set SQL Path)\r\n- SQL" +
+        " file path like c:\\..\\..\\*.sql");
             // 
             // cmbGlobalKeySearch4Mod2
             // 
@@ -753,7 +753,7 @@
             this.cmbGlobalKeySearch1SearchTerm.Name = "cmbGlobalKeySearch1SearchTerm";
             this.cmbGlobalKeySearch1SearchTerm.Size = new System.Drawing.Size(280, 21);
             this.cmbGlobalKeySearch1SearchTerm.TabIndex = 153;
-            this.toolTip1.SetToolTip(this.cmbGlobalKeySearch1SearchTerm, "Search text used in Search (EA or hoTools SQL file)");
+            this.toolTip1.SetToolTip(this.cmbGlobalKeySearch1SearchTerm, resources.GetString("cmbGlobalKeySearch1SearchTerm.ToolTip"));
             // 
             // cmbGlobalKeySearch4Mod3
             // 
@@ -773,8 +773,8 @@
             this.cmbGlobalKeySearch1SearchName.Name = "cmbGlobalKeySearch1SearchName";
             this.cmbGlobalKeySearch1SearchName.Size = new System.Drawing.Size(309, 21);
             this.cmbGlobalKeySearch1SearchName.TabIndex = 151;
-            this.toolTip1.SetToolTip(this.cmbGlobalKeySearch1SearchName, "EA Search Name or \r\nhoTools SQL file name like \'mySql.sql\' for advanced features." +
-        "\r\n\r\nMake sure the SQL paths is set in: Global Setting!!!!!");
+            this.toolTip1.SetToolTip(this.cmbGlobalKeySearch1SearchName, "The search to use:\r\n- EA Search\r\n- SQL file name like *.sql (set SQL Path)\r\n- SQL" +
+        " file path like c:\\..\\..\\*.sql\r\n");
             // 
             // cmbGlobalKeySearch4Mod1
             // 
@@ -976,9 +976,9 @@
             this.label31.Location = new System.Drawing.Point(321, 36);
             this.label31.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(296, 18);
+            this.label31.Size = new System.Drawing.Size(237, 18);
             this.label31.TabIndex = 152;
-            this.label31.Text = "EA Search Name or hoTools SQL file name";
+            this.label31.Text = "EA Search Name or SQL file name";
             // 
             // label30
             // 
@@ -990,7 +990,7 @@
             this.label30.Size = new System.Drawing.Size(112, 18);
             this.label30.TabIndex = 154;
             this.label30.Text = "<Search Term>";
-            this.toolTip1.SetToolTip(this.label30, "Search text used in Search (EA or hoTools SQL file)");
+            this.toolTip1.SetToolTip(this.label30, resources.GetString("label30.ToolTip"));
             // 
             // label32
             // 
@@ -1025,6 +1025,30 @@
             this.label4.TabIndex = 231;
             this.label4.Text = "Global Key Support";
             this.toolTip1.SetToolTip(this.label4, resources.GetString("label4.ToolTip"));
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(27, 455);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(284, 20);
+            this.label3.TabIndex = 235;
+            this.label3.Text = "SQL path to search for SQL to execute";
+            this.toolTip1.SetToolTip(this.label3, "Paths hoTools searches for SQL Queries to run:\r\n\r\nA semicolon seperated list of p" +
+        "aths hoTools searches for the SQL query to execute.\r\n\r\nLike: c:\\temp\\sql;d:\\temp" +
+        "\\sql");
+            // 
+            // txtSqlSearchPath
+            // 
+            this.txtSqlSearchPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSqlSearchPath.Location = new System.Drawing.Point(317, 455);
+            this.txtSqlSearchPath.Name = "txtSqlSearchPath";
+            this.txtSqlSearchPath.Size = new System.Drawing.Size(536, 24);
+            this.txtSqlSearchPath.TabIndex = 234;
+            this.toolTip1.SetToolTip(this.txtSqlSearchPath, "Paths hoTools searches for SQL Queries to run:\r\n\r\nA semicolon seperated list of p" +
+        "aths hoTools searches for the SQL query to execute.\r\n\r\nLike: c:\\temp\\sql;d:\\temp" +
+        "\\sql");
             // 
             // Hotkeys
             // 
@@ -1126,28 +1150,6 @@
             this.label2.Size = new System.Drawing.Size(441, 24);
             this.label2.TabIndex = 233;
             this.label2.Text = "Select Global Key Support and Restart EA !!!!!!";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(27, 455);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(284, 20);
-            this.label3.TabIndex = 235;
-            this.label3.Text = "SQL path to search for SQL to execute";
-            this.toolTip1.SetToolTip(this.label3, "Paths hoTools searches for SQL Queries to run:\r\n\r\nA semicolon seperated list of p" +
-        "aths hoTools searches for the SQL query to execute.");
-            // 
-            // txtSqlSearchPath
-            // 
-            this.txtSqlSearchPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSqlSearchPath.Location = new System.Drawing.Point(317, 455);
-            this.txtSqlSearchPath.Name = "txtSqlSearchPath";
-            this.txtSqlSearchPath.Size = new System.Drawing.Size(536, 24);
-            this.txtSqlSearchPath.TabIndex = 234;
-            this.toolTip1.SetToolTip(this.txtSqlSearchPath, "Paths hoTools searches for SQL Queries to run:\r\n\r\nA semicolon seperated list of p" +
-        "aths hoTools searches for the SQL query to execute.");
             // 
             // FrmSettingsKey
             // 

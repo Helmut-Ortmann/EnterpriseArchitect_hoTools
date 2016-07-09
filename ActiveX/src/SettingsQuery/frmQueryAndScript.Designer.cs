@@ -56,7 +56,7 @@
             // btnOk
             // 
             this.btnOk.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnOk.Location = new System.Drawing.Point(24, 293);
+            this.btnOk.Location = new System.Drawing.Point(12, 352);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(105, 31);
             this.btnOk.TabIndex = 0;
@@ -67,7 +67,7 @@
             // btnCancel
             // 
             this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancel.Location = new System.Drawing.Point(135, 293);
+            this.btnCancel.Location = new System.Drawing.Point(123, 352);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(105, 31);
             this.btnCancel.TabIndex = 1;
@@ -204,7 +204,7 @@
             this.groupBox1.TabIndex = 210;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Edit and run SQL";
-            this.toolTip1.SetToolTip(this.groupBox1, "Select if you want to show:\r\n- As Addin Tab\r\n- As Own Window\r\n- Not");
+            this.toolTip1.SetToolTip(this.groupBox1, "Select if you want to show the SQL:\r\n- As Addin Tab\r\n- As Own Window\r\n- Not");
             // 
             // groupBox2
             // 
@@ -234,24 +234,26 @@
             // txtSqlSearchPath
             // 
             this.txtSqlSearchPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSqlSearchPath.Location = new System.Drawing.Point(29, 230);
+            this.txtSqlSearchPath.Location = new System.Drawing.Point(29, 241);
             this.txtSqlSearchPath.Name = "txtSqlSearchPath";
             this.txtSqlSearchPath.Size = new System.Drawing.Size(536, 24);
             this.txtSqlSearchPath.TabIndex = 216;
             this.toolTip1.SetToolTip(this.txtSqlSearchPath, "Paths hoTools searches for SQL Queries to run:\r\n\r\nA semicolon seperated list of p" +
-        "aths hoTools searches for the SQL query to execute.");
+        "aths hoTools searches for the SQL query to execute.\r\n\r\nLike: c:\\temp\\sql;d:\\temp" +
+        "\\sql");
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(29, 211);
+            this.label3.Location = new System.Drawing.Point(29, 222);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(264, 18);
             this.label3.TabIndex = 217;
             this.label3.Text = "SQL path to search for SQL to execute";
             this.toolTip1.SetToolTip(this.label3, "Paths hoTools searches for SQL Queries to run:\r\n\r\nA semicolon seperated list of p" +
-        "aths hoTools searches for the SQL query to execute.");
+        "aths hoTools searches for the SQL query to execute.\r\n\r\nLike: c:\\temp\\sql;d:\\temp" +
+        "\\sql");
             // 
             // openFileDialog1
             // 
@@ -262,7 +264,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(577, 328);
+            this.ClientSize = new System.Drawing.Size(582, 405);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtSqlSearchPath);
             this.Controls.Add(this.btnSqlEditor);

@@ -88,25 +88,35 @@ namespace hoTools.Query
             ResizeRedraw = true;
 
 
-            // individual initialization
-            // SQL
-            _loadTabCtrlLToolStripMenuItem.Text = SqlTabPagesCntrl.MenuLoadTabFromFileText;
-            _loadTabCtrlLToolStripMenuItem.ToolTipText = SqlTabPagesCntrl.MenuLoadTabFromFileTooltip;
+            //--------------------------------------------------------------------------------------
+            // FileMenu
+            //--------------------------------------------------------------------------------------
+            // Load current Tab from file (CTRL+L Load)
+            _loadTabCtrlLToolStripMenuItem.Text = SqlTabPagesCntrl.MenuLoadTabFileText;
+            _loadTabCtrlLToolStripMenuItem.ToolTipText = SqlTabPagesCntrl.MenuLoadTabFileTooltip;
 
-            _loadTabFromToolStripMenuItem.Text = SqlTabPagesCntrl.MenuLoadTabFromRecentFileText;
-            _loadTabFromToolStripMenuItem.ToolTipText = SqlTabPagesCntrl.MenuLoadTabFromRecentFileTooltip;
-
-
+            // Load Tab from Recent file
+            _loadTabFromRecentToolStripMenuItem.Text = SqlTabPagesCntrl.MenuLoadTabFromRecentFileText;
+            _loadTabFromRecentToolStripMenuItem.ToolTipText = SqlTabPagesCntrl.MenuLoadTabFromRecentFileTooltip;
+            //--------------------------------------------------------------------------------------
+            // Reload
             _reloadTabToolStripMenuItem.Text = SqlTabPagesCntrl.MenuReLoadTabText;
             _reloadTabToolStripMenuItem.ToolTipText = SqlTabPagesCntrl.MenuReLoadTabTooltip;
 
-
+            //--------------------------------------------------------------------------------------
+            // New Tab
             _newTabToolStripMenuItem.Text = SqlTabPagesCntrl.MenuNewTabText;
             _newTabToolStripMenuItem.ToolTipText = SqlTabPagesCntrl.MenuNewTabTooltip;
 
+            // New Tab from File with File Dialog
+            _newTabWithFileDialogToolStripMenuItem.Text = SqlTabPagesCntrl.MenuNewTabWithFileDialogText;
+            _newTabWithFileDialogToolStripMenuItem.ToolTipText = SqlTabPagesCntrl.MenuNewTabWithFileDialogTooltip;
 
-            newTabFromToolStripMenuItem.Text = SqlTabPagesCntrl.MenuLoadTabFromFileText;
-            newTabFromToolStripMenuItem.ToolTipText = SqlTabPagesCntrl.MenuLoadTabFromFileTooltip;
+            // New Tab from recent file
+            _newTabFromRecentToolStripMenuItem.Text = SqlTabPagesCntrl.MenuNewTabFromRecentText;
+            _newTabFromRecentToolStripMenuItem.ToolTipText = SqlTabPagesCntrl.MenuNewTabFromRecentTooltip;
+
+
 
 
             // Script
@@ -168,8 +178,8 @@ namespace hoTools.Query
                 components = new System.ComponentModel.Container();
             }
             _sqlTabCntrls = new SqlTabPagesCntrl(Model, AddinSettings, components, tabControlSql, txtSearchTerm,
-                newTabFromToolStripMenuItem, 
-                _loadTabFromToolStripMenuItem, _addinTabName);
+                _newTabFromRecentToolStripMenuItem, 
+                _loadTabFromRecentToolStripMenuItem, _addinTabName);
 
             if (tabControlSql.TabPages.Count == 0)
             {
@@ -779,6 +789,16 @@ namespace hoTools.Query
        void reloadTabToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _sqlTabCntrls.ReloadTabPage();
+        }
+
+        /// <summary>
+        /// New Tab via File Dialog
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void _newTabWithFileDialogToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _sqlTabCntrls.AddTabWithFileDialog();
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Windows;
 using System.Windows.Forms;
 using EA;
 using hoTools.Settings;
@@ -21,8 +20,8 @@ namespace hoTools.Query
     /// </summary>
     public class SqlTabPagesCntrl
     {
-        public static readonly string MenuLoadTabFromFileText = "Load Tab from File (CTRL+L)";
-        public static readonly string MenuLoadTabFromFileTooltip = "Load current SQL Tab by File Dialog.";
+        public static readonly string MenuLoadTabFileText = "Load Tab from File (CTRL+L)";
+        public static readonly string MenuLoadTabFileTooltip = "Load current SQL Tab by File Dialog.";
 
         public static readonly string MenuLoadTabFromRecentFileText = "Load Tab from recent File...";
         public static readonly string MenuLoadTabFromRecentFileTooltip = "Load current SQL Tab from recent File...";
@@ -30,8 +29,17 @@ namespace hoTools.Query
         public static readonly string MenuReLoadTabText = "ReLoad Tab from File";
         public static readonly string MenuReLoadTabTooltip = "ReLoad current SQL Tab from File";
 
-        public static readonly string MenuNewTabText = "New Tab with Element Template";
+        public static readonly string MenuNewTabText = "New Tab";
         public static readonly string MenuNewTabTooltip = "Create new SQL Tab with Element Template";
+
+        public static readonly string MenuNewTabFromRecentText = "New Tab from recent File...";
+        public static readonly string MenuNewTabFromRecentTooltip = "Create new SQL Tab from recent File";
+
+        public static readonly string MenuNewTabWithFileDialogText = "New Tab from File";
+        public static readonly string MenuNewTabWithFileDialogTooltip = "Create new SQL Tab from File Dialog.";
+
+
+        
 
 
         const string SqlTextBoxTooltip =
@@ -64,9 +72,9 @@ CTRL+SHFT+S                     Store sql All
 #DB=ORACLE#                     DB specif SQL for Oracle
 #DB=POSTGRES#                   DB specif SQL for POSTGRES
 #DB=SqlSvr#                     DB specif SQL for SQL Server
-* or %                          DB specific Wild Card (automatic transformed into DB format)
-? or _                          DB specific Wild Card (automatic transformed into DB format)
-^ or !                          DB specific Wild Card (automatic transformed into DB format)
+* or %                          DB Wild Card (any arbitrary characters, automatic transformed into DB format)
+? or _                          DB Wild Card (one arbitrary character caret, automatic transformed into DB format)
+^ or !                          DB short for XOR (automatic transformed into DB format)
 ";
 
         /// <summary>
@@ -86,12 +94,15 @@ CTRL+SHFT+S                     Store sql All
         /// </summary>
         readonly string _addinTabName;
 
-        readonly ToolStripMenuItem _fileNewTabAndLoadRecentFileItem;
+        // File Menu:   New Tab Recent MenuItems to complete with recent files items
+        readonly ToolStripMenuItem _fileNewTabAndLoadRecentFileMenuItem;
+        // File Menu:   Load Tab Recent MenuItems to complete with recent files items
+        readonly ToolStripMenuItem _fileLoadTabRecentFileMenuItem;
 
-        readonly ToolStripMenuItem _fileLoadRecentFileItem;
-
-        readonly ToolStripMenuItem _newTabFromItem = new ToolStripMenuItem("New Tab from...");
-        readonly ToolStripMenuItem _loadTabFromFileItem = new ToolStripMenuItem("Load from...");
+        // Tab Menu:   New Tab Recent MenuItems to complete with recent files items       
+        readonly ToolStripMenuItem _tabNewTabFromRecentFileMenuItem = new ToolStripMenuItem("New Tab from...");
+        // Tab Menu:   Load Tab Recent MenuItems to complete with recent files items
+        readonly ToolStripMenuItem _tabLoadTabFromRecentFileMenuItem = new ToolStripMenuItem("Load from...");
 
 
         const string DefaultTabName = "noName";
@@ -104,14 +115,14 @@ CTRL+SHFT+S                     Store sql All
         /// <param name="components"></param>
         /// <param name="tabControl"></param>
         /// <param name="sqlTextBoxSearchTerm"></param>
-        /// <param name="fileNewTabAndLoadRecentFileItem">File, New Tab from recent files</param>
-        /// <param name="fileLoadRecentFileItem">File, Load Tab from recent files</param>
+        /// <param name="fileNewTabAndLoadRecentFileMenuItem">File, New Tab from recent files</param>
+        /// <param name="fileLoadTabRecentFileMenuItem">File, Load Tab from recent files</param>
         /// <param name="addinTabName"></param>
         public SqlTabPagesCntrl(Model model, AddinSettings settings,
             System.ComponentModel.IContainer components,
             TabControl tabControl, TextBox sqlTextBoxSearchTerm,
-            ToolStripMenuItem fileNewTabAndLoadRecentFileItem,
-            ToolStripMenuItem fileLoadRecentFileItem, 
+            ToolStripMenuItem fileNewTabAndLoadRecentFileMenuItem,
+            ToolStripMenuItem fileLoadTabRecentFileMenuItem, 
             string addinTabName)
         {
             Settings = settings;
@@ -120,15 +131,20 @@ CTRL+SHFT+S                     Store sql All
             _components = components;
             _sqlTextBoxSearchTerm = sqlTextBoxSearchTerm;
 
-            _fileNewTabAndLoadRecentFileItem = fileNewTabAndLoadRecentFileItem;
-            _fileLoadRecentFileItem = fileLoadRecentFileItem;
+
+
+            // Recent MenuItems to complete with items of recent files
+            _fileNewTabAndLoadRecentFileMenuItem = fileNewTabAndLoadRecentFileMenuItem;
+            _fileLoadTabRecentFileMenuItem = fileLoadTabRecentFileMenuItem;
 
             // Update text and tooltip for menu item
-            _loadTabFromFileItem.Text = MenuLoadTabFromRecentFileText;
-            _loadTabFromFileItem.ToolTipText = MenuLoadTabFromFileTooltip;
+            _tabLoadTabFromRecentFileMenuItem.Text = MenuLoadTabFromRecentFileText;
+            _tabLoadTabFromRecentFileMenuItem.ToolTipText = MenuLoadTabFromRecentFileTooltip;
 
-            _newTabFromItem.Text = MenuLoadTabFromRecentFileText;
-            _newTabFromItem.ToolTipText = MenuLoadTabFromRecentFileTooltip;
+
+
+            _tabNewTabFromRecentFileMenuItem.Text = MenuNewTabFromRecentText;
+            _tabNewTabFromRecentFileMenuItem.ToolTipText = MenuNewTabFromRecentTooltip;
 
             
             LoadOpenedTabsFromLastSession();
@@ -140,7 +156,7 @@ CTRL+SHFT+S                     Store sql All
 
         }
 
-
+        public string MenuNewTabFromRecentFileText { get; set; }
 
 
         /// <summary>
@@ -153,6 +169,16 @@ CTRL+SHFT+S                     Store sql All
             TabPage tabPage = AddTab();
             if (content != "") LoadTabPage(content);
             return tabPage;
+        }
+        /// <summary>
+        /// Add Tab with file dialog to load file
+        /// </summary>
+        /// <returns></returns>
+        public TabPage AddTabWithFileDialog()
+        {
+            TabPage tab = AddTab();
+            LoadTabPagePerFileDialog();
+            return tab;
         }
         /// <summary>
         /// Add an Tab to the tab control and load the Element Template as default. The Text box is unchanged because it's just a template.
@@ -202,12 +228,12 @@ CTRL+SHFT+S                     Store sql All
 
 
             // Load sql File into TabPage
-            ToolStripMenuItem loadTabMenuItem = new ToolStripMenuItem
+            ToolStripMenuItem loadWithFileDialogMenuItem = new ToolStripMenuItem
             {
-                Text = MenuLoadTabFromFileText,
-                ToolTipText = MenuLoadTabFromFileTooltip
+                Text = MenuLoadTabFileText,
+                ToolTipText = MenuLoadTabFileTooltip
             };
-            loadTabMenuItem.Click += fileLoadMenuItem_Click;
+            loadWithFileDialogMenuItem.Click += fileLoadMenuItem_Click;
 
             // ReLoad sql File
             ToolStripMenuItem reLoadTabMenuItem = new ToolStripMenuItem
@@ -218,20 +244,7 @@ CTRL+SHFT+S                     Store sql All
             reLoadTabMenuItem.Click += reLoadTabMenuItem_Click;
 
 
-            // Save sql File from TabPage
-            ToolStripMenuItem fileSaveMenuItem = new ToolStripMenuItem
-            {
-                Text = @"Save File (CTRL+S)"
-            };
-            fileSaveMenuItem.Click += fileSaveMenuItem_Click;
-
-            // Save all sql files 
-            ToolStripMenuItem fileSaveAllMenuItem = new ToolStripMenuItem {Text = @"Save All File (CTRL+SHFT+S)"};
-            fileSaveAllMenuItem.Click += fileSaveAllMenuItem_Click;
-
-            // Save As sql File from TabPage
-            ToolStripMenuItem fileSaveAsMenuItem = new ToolStripMenuItem {Text = @"Save File As.."};
-            fileSaveAsMenuItem.Click += fileSaveAsMenuItem_Click;
+            
 
             // New TabPage
             ToolStripMenuItem newTabMenuItem = new ToolStripMenuItem
@@ -240,6 +253,32 @@ CTRL+SHFT+S                     Store sql All
                 ToolTipText = MenuNewTabTooltip
             };
             newTabMenuItem.Click += addTabMenuItem_Click;
+
+            // New Tab and Load File via Dialog
+            ToolStripMenuItem newTabWithFileDialogMenuItem = new ToolStripMenuItem
+            {
+                Text = MenuNewTabWithFileDialogText,
+                ToolTipText = MenuNewTabWithFileDialogTooltip
+            };
+            newTabWithFileDialogMenuItem.Click += addTabFileDialogMenuItem_Click;
+
+
+            // Save sql File from TabPage
+            ToolStripMenuItem fileSaveMenuItem = new ToolStripMenuItem
+            {
+                Text = @"Save File (CTRL+S)"
+            };
+            fileSaveMenuItem.Click += fileSaveMenuItem_Click;
+
+            // Save all sql files 
+            ToolStripMenuItem fileSaveAllMenuItem = new ToolStripMenuItem { Text = @"Save All File (CTRL+SHFT+S)" };
+            fileSaveAllMenuItem.Click += fileSaveAllMenuItem_Click;
+
+            // Save As sql File from TabPage
+            ToolStripMenuItem fileSaveAsMenuItem = new ToolStripMenuItem { Text = @"Save File As.." };
+            fileSaveAsMenuItem.Click += fileSaveAsMenuItem_Click;
+
+
 
             // Close TabPage
             ToolStripMenuItem closeMenuItem = new ToolStripMenuItem {Text = @"Close Tab"};
@@ -285,12 +324,14 @@ Useful to quickly test:
             // - TabPage
             // - SQL TextBox
             var toolStripItems = new ToolStripItem[] {
-                loadTabMenuItem,                   // load Tab from file
-                _loadTabFromFileItem,                // load Tab from recent file  
-                reLoadTabMenuItem,                  // ReLoad Tab
+                loadWithFileDialogMenuItem,                   // load Tab from file
+                _tabLoadTabFromRecentFileMenuItem,              // load Tab from recent file  
+                reLoadTabMenuItem,                 // ReLoad Tab
                 new ToolStripSeparator(),
                 newTabMenuItem,                     // new Tab
-                _newTabFromItem,       // new Tab from recent file 
+                newTabWithFileDialogMenuItem,       // New Tab with File Dialog
+                _tabNewTabFromRecentFileMenuItem,      // new Tab from recent file
+
                 new ToolStripSeparator(),
                 insertTemplateMenuItem,             // insert template
                 insertMacroMenuItem,                // insert macro
@@ -1209,6 +1250,17 @@ Useful to quickly test:
         }
 
         /// <summary>
+        /// Add Tab with File Dialog
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void addTabFileDialogMenuItem_Click(object sender, EventArgs e)
+        {
+            AddTabWithFileDialog();
+
+        }
+
+        /// <summary>
         /// Event Close TabPage 
         /// </summary>
         /// <param name="sender"></param>
@@ -1320,8 +1372,10 @@ Useful to quickly test:
                     var textBox = (TextBoxUndo)tabPage.Controls[0];
                     SqlFile sqlFile = new SqlFile(this, fileName, isChanged: false);
                     tabPage.Tag = sqlFile;
+                    sqlFile.IsChanged = false;
                     tabPage.Text = sqlFile.DisplayName;
                     textBox.Text = sqlFile.Load();
+                    sqlFile.IsChanged = false;
 
                     // store the complete filename in settings
                     InsertRecentFileLists(openFileDialog.FileName);
@@ -1418,14 +1472,14 @@ Useful to quickly test:
         void LoadRecentFilesIntoToolStripItems()
         {
             // File, Load Tab from
-            LoadRecentFilesMenuItems(_fileLoadRecentFileItem, loadFromHistoryEntry_Click);
+            LoadRecentFilesMenuItems(_fileLoadTabRecentFileMenuItem, loadFromHistoryEntry_Click);
             // File, Add Tab from..
-            LoadRecentFilesMenuItems(_fileNewTabAndLoadRecentFileItem, newTabAndLoadFromHistoryEntry_Click);
+            LoadRecentFilesMenuItems(_fileNewTabAndLoadRecentFileMenuItem, newTabAndLoadFromHistoryEntry_Click);
 
             // Tab,  Load Tab from..
-            LoadRecentFilesMenuItems(_loadTabFromFileItem, loadFromHistoryEntry_Click);
+            LoadRecentFilesMenuItems(_tabLoadTabFromRecentFileMenuItem, loadFromHistoryEntry_Click);
             // Tab,  Add Tab from..
-            LoadRecentFilesMenuItems(_newTabFromItem, newTabAndLoadFromHistoryEntry_Click);
+            LoadRecentFilesMenuItems(_tabNewTabFromRecentFileMenuItem, newTabAndLoadFromHistoryEntry_Click);
         }
 
         /// <summary>

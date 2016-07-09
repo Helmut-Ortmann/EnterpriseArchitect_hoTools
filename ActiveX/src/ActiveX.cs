@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
-using System.Text.RegularExpressions;
 using hoTools.Settings;
 using hoTools.EaServices;
 using hoTools.EAServicesPort;
@@ -12,9 +11,8 @@ using EAAddinFramework.Utils;
 
 using hoTools.Utils.SQL;
 using hoTools.Utils;
-using hoTools.Utils.Configuration;
 
-
+// ReSharper disable once CheckNamespace
 namespace hoTools.ActiveX
 {
     [ComVisible(true)]
@@ -35,7 +33,6 @@ namespace hoTools.ActiveX
         FrmSettingsKey _frmSettingsKey;
         FrmSettingsLineStyle _frmSettingsLineStyle;
 
-        HoToolsGlobalCfg _globalCfg;
         Model _model;
 
 
@@ -201,7 +198,6 @@ namespace hoTools.ActiveX
         public void InitializeSettings()
         {
             // get global settings
-            _globalCfg = HoToolsGlobalCfg.Instance;
             _model = new Model(Repository);
             ParameterizeMenusAndButtons();
             // parameterize 5 Buttons to quickly run search
@@ -290,12 +286,6 @@ namespace hoTools.ActiveX
         }
 
 
-#pragma warning disable RECS0154
-        void getAllLatestrecursiveToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            EaService.GetVcLatestRecursive(Repository);
-        }
-#pragma warning restore RECS0154
 
         void createActivityForOperationToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -424,6 +414,7 @@ namespace hoTools.ActiveX
         /// <param name="pos"></param>
         void RunSearch(int pos)
         {
+            // ReSharper disable once CanBeReplacedWithTryCastAndCheckForNull
             if (AddinSettings.ButtonsSearch[pos] is EaAddinShortcutSearch)
             {
 
@@ -553,7 +544,7 @@ namespace hoTools.ActiveX
         void showPortsInDiagramObjectsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var port = new PortServices(Repository);
-            port.ShowPortsInDiagram(false);
+            port.ShowPortsInDiagram(isOptimizePortLayout:false);
 
 
         }
@@ -574,15 +565,7 @@ namespace hoTools.ActiveX
 
         }
         #endregion
-        #region deletePortsWhichAreMarkedForDeletion
-#pragma warning disable RECS0154
-        void deletePortsWhichAreMarkedForDeletionfutureToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var port = new PortServices(Repository);
-            port.DeletePortsMarkedPorts();
-        }
-#pragma warning restore RECS0154
-        #endregion
+        
 
         /// <summary>
         /// Hide labels from elements by:

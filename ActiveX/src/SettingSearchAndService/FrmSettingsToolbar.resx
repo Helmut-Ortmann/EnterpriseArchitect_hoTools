@@ -120,9 +120,78 @@
   <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
+  <data name="lblSearchSearchTerm.ToolTip" xml:space="preserve">
+    <value>Enter &lt;Search Term&gt; to specify your Search more specific.
+
+The following wild cards are supported and converted according to your database:
+- #WC# EA wild card (works also in hoToolsQuery like '*' or '%'
+- % or * (no or any amount of arbitrary characters, transformed to the used database)
+- ? or _ (a single character, transformed to the used database)
+- ! or ^ (shortcut for XOR)
+
+e.g.: 'myString*' Everything starting with 'myString' (db independent)
+</value>
+  </data>
+  <data name="txtBtn5SearchTerm.ToolTip" xml:space="preserve">
+    <value>Enter &lt;Search Term&gt; to specify your Search more specific.
+
+The following wild cards are supported and converted according to your database:
+- #WC# EA wild card (works also in hoToolsQuery like '*' or '%'
+- % or * (no or any amount of arbitrary characters, transformed to the used database)
+- ? or _ (a single character, transformed to the used database)
+- ! or ^ (shortcut for XOR)
+
+e.g.: 'myString*' Everything starting with 'myString' (db independent)
+</value>
+  </data>
+  <data name="txtBtn1SearchTerm.ToolTip" xml:space="preserve">
+    <value>Enter &lt;Search Term&gt; to specify your Search more specific.
+
+The following wild cards are supported and converted according to your database:
+- #WC# EA wild card (works also in hoToolsQuery like '*' or '%'
+- % or * (no or any amount of arbitrary characters, transformed to the used database)
+- ? or _ (a single character, transformed to the used database)
+- ! or ^ (shortcut for XOR)
+
+e.g.: 'myString*' Everything starting with 'myString' (db independent)
+</value>
+  </data>
+  <data name="txtBtn2SearchTerm.ToolTip" xml:space="preserve">
+    <value>Enter &lt;Search Term&gt; to specify your Search more specific.
+
+The following wild cards are supported and converted according to your database:
+- #WC# EA wild card (works also in hoToolsQuery like '*' or '%'
+- % or * (no or any amount of arbitrary characters, transformed to the used database)
+- ? or _ (a single character, transformed to the used database)
+- ! or ^ (shortcut for XOR)
+
+e.g.: 'myString*' Everything starting with 'myString' (db independent)
+</value>
+  </data>
+  <data name="txtBtn3SearchTerm.ToolTip" xml:space="preserve">
+    <value>Enter &lt;Search Term&gt; to specify your Search more specific.
+
+The following wild cards are supported and converted according to your database:
+- #WC# EA wild card (works also in hoToolsQuery like '*' or '%'
+- % or * (no or any amount of arbitrary characters, transformed to the used database)
+- ? or _ (a single character, transformed to the used database)
+- ! or ^ (shortcut for XOR)
+
+e.g.: 'myString*' Everything starting with 'myString' (db independent)
+</value>
+  </data>
+  <data name="txtBtn4SearchTerm.ToolTip" xml:space="preserve">
+    <value>Enter &lt;Search Term&gt; to specify your Search more specific.
+
+The following wild cards are supported and converted according to your database:
+- #WC# EA wild card (works also in hoToolsQuery like '*' or '%'
+- % or * (no or any amount of arbitrary characters, transformed to the used database)
+- ? or _ (a single character, transformed to the used database)
+- ! or ^ (shortcut for XOR)
+
+e.g.: 'myString*' Everything starting with 'myString' (db independent)
+</value>
+  </data>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>25</value>
   </metadata>

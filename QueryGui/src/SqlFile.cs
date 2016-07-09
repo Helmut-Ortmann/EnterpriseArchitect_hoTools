@@ -172,6 +172,7 @@ namespace hoTools.Query
         /// </summary>
         /// <param name="text"></param>
         /// <returns></returns>
+        // ReSharper disable once UnusedMethodReturnValue.Global
         public bool Save(string text)
         {
             try
@@ -187,7 +188,7 @@ namespace hoTools.Query
             }
         }
         /// <summary>
-        /// Load from file.
+        /// Load from file. Note currently the change event will make the text box change. Therefore you have later to set IsChanged to false; 
         /// </summary>
         /// <returns>File content</returns>
         public string Load()

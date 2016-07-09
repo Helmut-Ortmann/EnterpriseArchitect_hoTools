@@ -113,22 +113,22 @@ namespace EAAddinFramework
         /// </summary>
         /// <param name="Repository">An EA.rep object representing the currently open Enterprise Architect model.
         /// Poll its members to retrieve model data and user interface status information.</param>
-        /// <param name="MenuLocation">String representing the part of the user interface that brought up the menu. 
+        /// <param name="menuLocation">String representing the part of the user interface that brought up the menu. 
         /// Can be TreeView, MainMenu or Diagram.</param>
-        /// <param name="MenuName">The name of the parent menu for which sub-items must be defined. In the case of the top-level menu it is an empty string.</param>
-        /// <param name="ItemName">The name of the option actually clicked, for example, Create a New Invoice.</param>
-        /// <param name="IsEnabled">Boolean. Set to False to disable this particular menu option.</param>
-        /// <param name="IsChecked">Boolean. Set to True to check this particular menu option.</param>
-        public virtual void EA_GetMenuState(EA.Repository Repository, string MenuLocation, string MenuName, string ItemName, ref bool IsEnabled, ref bool IsChecked)
+        /// <param name="menuName">The name of the parent menu for which sub-items must be defined. In the case of the top-level menu it is an empty string.</param>
+        /// <param name="itemName">The name of the option actually clicked, for example, Create a New Invoice.</param>
+        /// <param name="isEnabled">Boolean. Set to False to disable this particular menu option.</param>
+        /// <param name="isChecked">Boolean. Set to True to check this particular menu option.</param>
+        public virtual void EA_GetMenuState(EA.Repository Repository, string menuLocation, string menuName, string itemName, ref bool isEnabled, ref bool isChecked)
         {
             if (IsProjectOpen(Repository))
             {
-                IsEnabled = true;
+                isEnabled = true;
             }
             else
             {
                 // If no open project, disable all menu options
-                IsEnabled = false;
+                isEnabled = false;
             }
         }
 
@@ -139,13 +139,13 @@ namespace EAAddinFramework
         /// Notice that your code can directly access Enterprise Architect data and UI elements using rep methods.
         /// Also look at EA_GetMenuItems.
         /// </summary>
-        /// <param name="Repository">An EA.rep object representing the currently open Enterprise Architect model.
+        /// <param name="repository">An EA.rep object representing the currently open Enterprise Architect model.
         /// Poll its members to retrieve model data and user interface status information.</param>
-        /// <param name="MenuLocation">String representing the part of the user interface that brought up the menu. 
+        /// <param name="menuLocation">String representing the part of the user interface that brought up the menu. 
         /// Can be TreeView, MainMenu or Diagram.</param>
-        /// <param name="MenuName">The name of the parent menu for which sub-items must be defined. In the case of the top-level menu it is an empty string.</param>
-        /// <param name="ItemName">The name of the option actually clicked, for example, Create a New Invoice.</param>
-        public virtual void EA_MenuClick(EA.Repository Repository, string MenuLocation, string MenuName, string ItemName) { }
+        /// <param name="menuName">The name of the parent menu for which sub-items must be defined. In the case of the top-level menu it is an empty string.</param>
+        /// <param name="itemName">The name of the option actually clicked, for example, Create a New Invoice.</param>
+        public virtual void EA_MenuClick(EA.Repository repository, string menuLocation, string menuName, string itemName) { }
 
         /// <summary>
         /// The EA_Disconnect event enables the Add-In to respond to user requests to disconnect the model branch from an external project.
@@ -599,10 +599,10 @@ namespace EAAddinFramework
         /// public object EA_OnInitializeTechnologies(EA.rep rep){
         /// 	return My.Resources.MyTechnology;}
         /// </example>
-        /// <param name="Repository">An EA.rep object representing the currently open Enterprise Architect model.
+        /// <param name="repository">An EA.rep object representing the currently open Enterprise Architect model.
         /// Poll its members to retrieve model data and user interface status information.</param>
         /// <returns>Return the MDG Technology as a single XML string.</returns>
-        public virtual object EA_OnInitializeTechnologies(EA.Repository Repository) => null;
+        public virtual object EA_OnInitializeTechnologies(EA.Repository repository) => null;
 
         /// <summary>
         /// EA_OnPreActivateTechnology notifies Add-Ins that an MDG Technology resource is about to be activated in the model. This event occurs when a user selects to activate an MDG Technology resource in the model (by clicking on the Set Active button on the MDG Technologies dialog or by selecting the technology in the list box in the Default Tools toolbar).
@@ -633,14 +633,14 @@ namespace EAAddinFramework
 
         /// <summary>
         /// EA_OnContextItemChanged notifies Add-Ins that a different item is now in context.
-        /// This event occurs after a user has selected an item anywhere in the Enterprise Architect GUI. Add-Ins that require knowledge of the current item in context can subscribe to this broadcast function. If ot = otRepository, then this function behaves the same as EA_FileOpen.
+        /// This event occurs after a user has selected an item anywhere in the Enterprise Architect GUI. Add-Ins that require knowledge of the current item in context can subscribe to this broadcast function. If objectType = otRepository, then this function behaves the same as EA_FileOpen.
         /// Also look at EA_OnContextItemDoubleClicked and EA_OnNotifyContextItemModified.
         /// </summary>
         /// <param name="repository">An EA.rep object representing the currently open Enterprise Architect model.
         /// Poll its members to retrieve model data and user interface status information.</param>
         /// <param name="guid">Contains the GUID of the new context item. 
-        /// This value corresponds to the following properties, depending on the value of the ot parameter:
-        /// ot (ObjectType)	- GUID value
+        /// This value corresponds to the following properties, depending on the value of the objectType parameter:
+        /// objectType (ObjectType)	- GUID value
         /// otElement  		- Element.ElementGUID
         /// otPackage 		- Package.PackageGUID
         /// otDiagram		- Diagram.DiagramGUID
@@ -649,8 +649,8 @@ namespace EAAddinFramework
         /// otConnector		- Connector.ConnectorGUID
         /// otRepository	- NOT APPLICABLE, GUID is an empty string
         /// </param>
-        /// <param name="ot">Specifies the type of the new context item.</param>
-        public virtual void EA_OnContextItemChanged(EA.Repository repository, string guid, EA.ObjectType ot) { }
+        /// <param name="objectType">Specifies the type of the new context item.</param>
+        public virtual void EA_OnContextItemChanged(EA.Repository repository, string guid, EA.ObjectType objectType) { }
 
         /// <summary>
         /// EA_OnContextItemDoubleClicked notifies Add-Ins that the user has double-clicked the item currently in context.
@@ -660,8 +660,8 @@ namespace EAAddinFramework
         /// <param name="Repository">An EA.rep object representing the currently open Enterprise Architect model.
         /// Poll its members to retrieve model data and user interface status information.</param>
         /// <param name="GUID">Contains the GUID of the new context item. 
-        /// This value corresponds to the following properties, depending on the value of the ot parameter:
-        /// ot (ObjectType)	- GUID value
+        /// This value corresponds to the following properties, depending on the value of the objectType parameter:
+        /// objectType (ObjectType)	- GUID value
         /// otElement  		- Element.ElementGUID
         /// otPackage 		- Package.PackageGUID
         /// otDiagram		- Diagram.DiagramGUID
@@ -681,8 +681,8 @@ namespace EAAddinFramework
         /// <param name="Repository">An EA.rep object representing the currently open Enterprise Architect model.
         /// Poll its members to retrieve model data and user interface status information.</param>
         /// <param name="GUID">Contains the GUID of the new context item. 
-        /// This value corresponds to the following properties, depending on the value of the ot parameter:
-        /// ot (ObjectType)	- GUID value
+        /// This value corresponds to the following properties, depending on the value of the objectType parameter:
+        /// objectType (ObjectType)	- GUID value
         /// otElement  		- Element.ElementGUID
         /// otPackage 		- Package.PackageGUID
         /// otDiagram		- Diagram.DiagramGUID
@@ -733,16 +733,16 @@ namespace EAAddinFramework
         /// </summary>
         /// <param name="Repository">An EA.rep object representing the currently open Enterprise Architect model.
         /// Poll its members to retrieve model data and user interface status information.</param>
-        /// <param name="Args">Contains a (Variant) list of Rule Categories that are active for the current invocation of model validation.</param>
-        public virtual void EA_OnStartValidation(EA.Repository Repository, object Args) { }
+        /// <param name="args">Contains a (Variant) list of Rule Categories that are active for the current invocation of model validation.</param>
+        public virtual void EA_OnStartValidation(EA.Repository Repository, object args) { }
 
         /// <summary>
         /// EA_OnEndValidation notifies Add-Ins that model validation has completed. Use this event to arrange any clean-up operations arising from the validation.
         /// </summary>
-        /// <param name="Repository">An EA.rep object representing the currently open Enterprise Architect model.
+        /// <param name="repository">An EA.rep object representing the currently open Enterprise Architect model.
         /// Poll its members to retrieve model data and user interface status information.</param>
-        /// <param name="Args">Contains a (Variant) list of Rule Categories that were active for the invocation of model validation that has just completed.</param>
-        public virtual void EA_OnEndValidation(EA.Repository Repository, object Args) { }
+        /// <param name="args">Contains a (Variant) list of Rule Categories that were active for the invocation of model validation that has just completed.</param>
+        public virtual void EA_OnEndValidation(EA.Repository repository, object args) { }
 
         /// <summary>
         /// This event is triggered once for each rule defined in EA_OnInitializeUserRules to be performed on each element in the selection being validated. If you don't want to perform the rule defined by RuleID on the given element, then simply return without performing any action. On performing any validation, if a validation error is found, use the rep.ProjectInterface.PublishResult method to notify Enterprise Architect.

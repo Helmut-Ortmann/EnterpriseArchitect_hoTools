@@ -70,11 +70,11 @@
             this.rbAutoLoadMdgBasic = new System.Windows.Forms.RadioButton();
             this.chkConveyedItemSupport = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.txtSqlSearchPath = new System.Windows.Forms.TextBox();
             this.label34 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.txtSqlSearchPath = new System.Windows.Forms.TextBox();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -554,6 +554,28 @@
             this.toolTip1.SetToolTip(this.groupBox1, "Show Tab hoTools with:\r\n- Linestyle\r\n- Toolbar for Searches and Services\r\n- Versi" +
         "on Control\r\n- Port Support\r\n- Favorites\r\n- Quick Search\r\n- and more");
             // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(211, 207);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(81, 20);
+            this.label10.TabIndex = 243;
+            this.label10.Text = "SQL path:";
+            this.toolTip1.SetToolTip(this.label10, "Paths hoTools searches for SQL Queries to run:\r\n\r\nA semicolon separated list of p" +
+        "aths hoTools searches for the SQL query to execute.");
+            // 
+            // txtSqlSearchPath
+            // 
+            this.txtSqlSearchPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSqlSearchPath.Location = new System.Drawing.Point(215, 230);
+            this.txtSqlSearchPath.Name = "txtSqlSearchPath";
+            this.txtSqlSearchPath.Size = new System.Drawing.Size(536, 24);
+            this.txtSqlSearchPath.TabIndex = 242;
+            this.toolTip1.SetToolTip(this.txtSqlSearchPath, "Paths hoTools searches for SQL Queries to run:\r\n\r\nA semicolon separated parts of " +
+        "path hoTools searches for the SQL query to execute.");
+            // 
             // label34
             // 
             this.label34.AutoSize = true;
@@ -584,28 +606,6 @@
             this.label9.Size = new System.Drawing.Size(80, 18);
             this.label9.TabIndex = 241;
             this.label9.Text = "on Toolbar";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(211, 207);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(81, 20);
-            this.label10.TabIndex = 243;
-            this.label10.Text = "SQL path:";
-            this.toolTip1.SetToolTip(this.label10, "Paths hoTools searches for SQL Queries to run:\r\n\r\nA semicolon separated list of p" +
-        "aths hoTools searches for the SQL query to execute.");
-            // 
-            // txtSqlSearchPath
-            // 
-            this.txtSqlSearchPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSqlSearchPath.Location = new System.Drawing.Point(215, 230);
-            this.txtSqlSearchPath.Name = "txtSqlSearchPath";
-            this.txtSqlSearchPath.Size = new System.Drawing.Size(536, 24);
-            this.txtSqlSearchPath.TabIndex = 242;
-            this.toolTip1.SetToolTip(this.txtSqlSearchPath, "Paths hoTools searches for SQL Queries to run:\r\n\r\nA semicolon separated list of p" +
-        "aths hoTools searches for the SQL query to execute.");
             // 
             // FrmSettingsGeneral
             // 

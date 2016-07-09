@@ -1,4 +1,6 @@
 ﻿using System.IO;
+using System.Windows.Forms;
+
 namespace hoTools.Utils.Configuration
 {
     public sealed class HoToolsGlobalCfg: IHoToolsGlobalCfg
@@ -35,23 +37,49 @@ namespace hoTools.Utils.Configuration
             _paths = paths;
             _lpaths = paths.Split(';');
         }
-
+       
         /// <summary>
-        /// Read the SQL file. It uses the SQL file path to find the file. The sequence of search is:
-        /// <para />1. path (it accept '.' as current directory)
-        /// <para />2. filename as it is
+        /// Read the SQL file. If it is an absolute path it uses this. If not it uses the SQL Path to find the complete sql file name. 
+        /// <para />
+        /// In case of IO errors or file not found it return "". If a not existing absolute patch is used an error message is output 
+        /// (if withErrMessage = true, default) 
         /// </summary>
         /// <param name="sqlFileName"></param>
+        /// <param name="withErrMessage"></param>
         /// <returns></returns>
-        public string ReadSqlFile(string sqlFileName)
+        public string ReadSqlFile(string sqlFileName, bool withErrMessage = true)
         {
-            // over all files
-            foreach (string path in _lpaths)
+            // Absolute path
+            if (Path.IsPathRooted(sqlFileName))
             {
-                string fileName = Path.Combine(path, sqlFileName);
-                if (File.Exists(fileName))
+                try
                 {
-                    return File.ReadAllText((fileName));
+                    return File.ReadAllText(sqlFileName);
+                }
+                catch (IOException e)
+                {
+                    if (withErrMessage)
+                    {
+                        MessageBox.Show($"Error reading sql file '{sqlFileName}'\n\n{e}", @"Error Reading *.sql file");
+                    }
+                    else
+                    {
+                        return "";
+                    }
+                }
+            }
+            else
+            {
+
+
+                // over all files
+                foreach (string path in _lpaths)
+                {
+                    string fileName = Path.Combine(path, sqlFileName);
+                    if (File.Exists(fileName))
+                    {
+                        return File.ReadAllText(fileName);
+                    }
                 }
             }
             // nothing found

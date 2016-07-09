@@ -120,13 +120,33 @@
   <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
+  <data name="cmbGlobalKeySearch5SearchTerm.ToolTip" xml:space="preserve">
+    <value>Enter &lt;Search Term&gt; to specify your Search more specific.
+
+The following wild cards are supported and converted according to your database:
+- #WC# EA wild card (works also in hoToolsQuery like '*' or '%'
+- % or * (no or any amount of arbitrary characters, transformed to the used database)
+- ? or _ (a single character, transformed to the used database)
+- ! or ^ (shortcut for XOR)
+
+e.g.: 'myString*' Everything starting with 'myString' (db independent)</value>
+  </data>
   <data name="cmbGlobalKeySearch5Mod4.ToolTip" xml:space="preserve">
     <value>Choose key to access searches by an shortcut / hotkey.
 You can use a key with modifiers like Ctrl,Shif, Window Key, ALT to access a searches / queries.
 Note: The key + modifiers must not be used by EA</value>
+  </data>
+  <data name="cmbGlobalKeySearch4SearchTerm.ToolTip" xml:space="preserve">
+    <value>Enter &lt;Search Term&gt; to specify your Search more specific.
+
+The following wild cards are supported and converted according to your database:
+- #WC# EA wild card (works also in hoToolsQuery like '*' or '%'
+- % or * (no or any amount of arbitrary characters, transformed to the used database)
+- ? or _ (a single character, transformed to the used database)
+- ! or ^ (shortcut for XOR)
+
+e.g.: 'myString*' Everything starting with 'myString' (db independent)
+</value>
   </data>
   <data name="cmbGlobalKeySearch5Mod2.ToolTip" xml:space="preserve">
     <value>Choose key to access searches by an shortcut / hotkey.
@@ -138,6 +158,18 @@ Note: The key + modifiers must not be used by EA</value>
 You can use a key with modifiers like Ctrl,Shif, Window Key, ALT to access a searches / queries.
 Note: The key + modifiers must not be used by EA</value>
   </data>
+  <data name="cmbGlobalKeySearch3SearchTerm.ToolTip" xml:space="preserve">
+    <value>Enter &lt;Search Term&gt; to specify your Search more specific.
+
+The following wild cards are supported and converted according to your database:
+- #WC# EA wild card (works also in hoToolsQuery like '*' or '%'
+- % or * (no or any amount of arbitrary characters, transformed to the used database)
+- ? or _ (a single character, transformed to the used database)
+- ! or ^ (shortcut for XOR)
+
+e.g.: 'myString*' Everything starting with 'myString' (db independent)
+</value>
+  </data>
   <data name="cmbGlobalKeySearch5Mod1.ToolTip" xml:space="preserve">
     <value>Choose key to access searches by an shortcut / hotkey.
 You can use a key with modifiers like Ctrl,Shif, Window Key, ALT to access a searches / queries.
@@ -148,6 +180,18 @@ Note: The key + modifiers must not be used by EA</value>
 You can use a key with modifiers like Ctrl,Shif, Window Key, ALT to access a searches / queries.
 Note: The key + modifiers must not be used by EA</value>
   </data>
+  <data name="cmbGlobalKeySearch2SearchTerm.ToolTip" xml:space="preserve">
+    <value>Enter &lt;Search Term&gt; to specify your Search more specific.
+
+The following wild cards are supported and converted according to your database:
+- #WC# EA wild card (works also in hoToolsQuery like '*' or '%'
+- % or * (no or any amount of arbitrary characters, transformed to the used database)
+- ? or _ (a single character, transformed to the used database)
+- ! or ^ (shortcut for XOR)
+
+e.g.: 'myString*' Everything starting with 'myString' (db independent)
+</value>
+  </data>
   <data name="cmbGlobalKeySearch4Mod4.ToolTip" xml:space="preserve">
     <value>Choose key to access searches by an shortcut / hotkey.
 You can use a key with modifiers like Ctrl,Shif, Window Key, ALT to access a searches / queries.
@@ -157,6 +201,17 @@ Note: The key + modifiers must not be used by EA</value>
     <value>Choose key to access searches by an shortcut / hotkey.
 You can use a key with modifiers like Ctrl,Shif, Window Key, ALT to access a searches / queries.
 Note: The key + modifiers must not be used by EA</value>
+  </data>
+  <data name="cmbGlobalKeySearch1SearchTerm.ToolTip" xml:space="preserve">
+    <value>Enter &lt;Search Term&gt; to specify your Search more specific.
+
+The following wild cards are supported and converted according to your database:
+- #WC# EA wild card (works also in hoToolsQuery like '*' or '%'
+- % or * (no or any amount of arbitrary characters, transformed to the used database)
+- ? or _ (a single character, transformed to the used database)
+- ! or ^ (shortcut for XOR)
+
+e.g.: 'myString*' Everything starting with 'myString' (db independent)</value>
   </data>
   <data name="cmbGlobalKeySearch4Mod3.ToolTip" xml:space="preserve">
     <value>Choose key to access searches by an shortcut / hotkey.
@@ -247,6 +302,18 @@ Note: The key + modifiers must not be used by EA</value>
     <value>Choose key to access searches by an shortcut / hotkey.
 You can use a key with modifiers like Ctrl,Shif, Window Key, ALT to access a searches / queries.
 Note: The key + modifiers must not be used by EA</value>
+  </data>
+  <data name="label30.ToolTip" xml:space="preserve">
+    <value>Enter &lt;Search Term&gt; to specify your Search more specific.
+
+The following wild cards are supported and converted according to your database:
+- #WC# EA wild card (works also in hoToolsQuery like '*' or '%'
+- % or * (no or any amount of arbitrary characters, transformed to the used database)
+- ? or _ (a single character, transformed to the used database)
+- ! or ^ (shortcut for XOR)
+
+e.g.: 'myString*' Everything starting with 'myString' (db independent)
+</value>
   </data>
   <data name="chkShortKeySupport.ToolTip" xml:space="preserve">
     <value>Enable Global Key Support e.g.:

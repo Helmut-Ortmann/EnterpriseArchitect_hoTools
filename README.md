@@ -1,12 +1,12 @@
 # EnterpriseArchitect_hoTools
-Addin with Tools for SPARX Enterprise Architect
+Addin with Tools for SPARX Enterprise Architect (EA)
 
 # Abstract
 Collection of useful tools (see also [WiKi](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/home)):
 
 - [hoTools](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/hoTools) Assortment of tools
   - Toolbar for Searches and Services
-  - Keys for Searches and Services 
+  - Global Keys for Searches and Services (e.g.: F1+Ctrl executes your beloved Search)
   - Set diagram line style
   - Version Control + SVN
   - Port support
@@ -16,7 +16,7 @@ Collection of useful tools (see also [WiKi](https://github.com/Helmut-Ortmann/En
     - Select, Insert, Delete, Update
     - Templates
     - Macros (easy access to EA items / Packages or complete Branches, a lot more than EA delivers)
-    - See error
+    - Easy handling of SQL errors
     - Conveyed Items
     - *.sql files in file system (you may use favourite Editor)
 - [Script](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/Script) which runs for [SQL](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/SQL) results 
@@ -27,7 +27,7 @@ Collection of useful tools (see also [WiKi](https://github.com/Helmut-Ortmann/En
   - Name, Description, Stereotype, Tagged Value
   - in Packages, Elements, Diagrams, Attributes, Operations
 - Configure
- - Buttons & Keys
+ - Buttons & Global Keys
  - Searches & Services
  - GUI appearance
 - Administration of EA
@@ -86,17 +86,14 @@ Some features:
 - Make sure only one instance of hoTools is installed
 - See also: [Installation](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/Installation)
 
-# Scheduled (release 2.0.3)
-- Lock/Unlock (with/without package recursive) Element/Diagram/Package
-- SQL with macro #Branch=guidPackage# (select the package you want the branch by GUID, not the selected one)
-  - Help function to get the current Package GUID to easily insert in SQL
-- Help / Documentation
- - Improved help for Toolbar Buttons
- - Use advanced [SQL](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/SQL) everywhere in hoTools
-   - Toolbar Buttons
-   - Quick Search 
+# Scheduled (release 2.0.4)
+- Improved Settings regarding SQL (Global Keys, Toolbar)
+- SQL can now be used everywhere in hoTools
+  (Global Key, Toolbar, Quick Search)
+ - Relative path to SQL Paths
+ - Absolute path
 
- # Bugfixes
+# Bugfixes
 - Exception Matrix Profile
 
 # Not yet scheduled
