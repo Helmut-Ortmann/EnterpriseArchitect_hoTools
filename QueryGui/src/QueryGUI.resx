@@ -122,15 +122,13 @@
   </metadata>
   <data name="txtSearchTerm.ToolTip" xml:space="preserve">
     <value>Enter a search text and use it in Query by:
-&lt;Search Term&gt;
-
 - Enter runs the query
 - Double left click inserts the text from Clipboard and runs the query
 
-e.g.:
-elementID = &lt;Search Term&gt;
-eaGUID = '&lt;Search Term&gt;'
-in (&lt;Search Term&gt; ) // 1,2,3 SQL in clause</value>
+You may use the wiild cards (automatic transformed according your DB)
+- '*' or '%' no or arbitrary character
+- '?' or '_'   single character
+</value>
   </data>
   <metadata name="contextMenuStripDataGrid.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>229, 17</value>

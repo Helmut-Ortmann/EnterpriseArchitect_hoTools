@@ -78,13 +78,22 @@ Some features:
 - Generate Activity Diagram from code snippets
 
 # Installation 
-- uninstall hoTools
+- Uninstall hoTools
 - hoTools.msi  (Setup\bin\Release\hoTools.msi V2.0.1)
 - In EA: Extension, Addin Windows is selected
 - In EA: Manage Addins, MDG: hoTools is selected
 - hoToolsRemove.ps1 (deinstall with PowerShell)
 - Make sure only one instance of hoTools is installed
 - See also: [Installation](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/Installation)
+
+## Install folders
+- c:\Users\&lt;user>\AppData\Local\Apps\hoTools\
+  - The application installation folder
+  - Sql.zip  Examples SQL files
+- c:\Users\&lt;user>\AppData\Roaming\ho\hoTools\
+  - Data folder
+  - user.config Configuration 
+
 
 # Scheduled (release 2.0.4)
 - Improved Settings regarding SQL (Global Keys, Toolbar)

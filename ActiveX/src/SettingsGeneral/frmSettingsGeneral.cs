@@ -2,6 +2,7 @@
 using hoTools.ActiveX;
 
 
+// ReSharper disable once CheckNamespace
 namespace hoTools.Settings
 {
     public partial class FrmSettingsGeneral : Form
@@ -26,6 +27,7 @@ namespace hoTools.Settings
             #region miscellaneous
             // SQL paths
             txtSqlSearchPath.Text = _settings.SqlPaths;
+            txtAddinTabToFirstActivate.Text = _settings.AddinTabToFirstActivate;
 
             chkLineStyleSupport.Checked = settings.IsLineStyleSupport;
             chkShortKeySupport.Checked = settings.IsShortKeySupport;
@@ -98,6 +100,8 @@ namespace hoTools.Settings
         {
             // SQL paths
             _settings.SqlPaths = txtSqlSearchPath.Text;
+            _settings.AddinTabToFirstActivate = txtAddinTabToFirstActivate.Text;
+
             _settings.QuickSearchName = txtQuickSearch.Text;
             _settings.FileManagerPath = txtFileManagerPath.Text;
 
@@ -144,14 +148,8 @@ namespace hoTools.Settings
             Close();
         }
 
-        private void label7_Click(object sender, System.EventArgs e)
-        {
+       
 
-        }
-
-        private void checkBox1_CheckedChanged(object sender, System.EventArgs e)
-        {
-
-        }
+       
     }
 }

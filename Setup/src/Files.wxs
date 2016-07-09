@@ -32,6 +32,9 @@
       <Component Id="SettingsID" Guid="03C40ACF-2BEE-4C6D-B706-C0AA893CDF08">
         <File Id="SettingsID" Name="SettingsID" Source="license.rtf"  KeyPath="yes" />
       </Component>
+      <Component Id="Sql.zip" Guid="{B51D32DE-0AE7-46D9-A8EF-90C8F74EE10E}">
+        <File Id="Sql.zip" Name="Sql.zip" Source="sql.zip"  KeyPath="yes" />
+      </Component>
       <Component Id="RegisterEA" Guid="08CCFB79-BA02-4B57-BE8B-795754A6113F">
         <RegistryKey Root="HKCU" Key="Software\Sparx Systems\EAAddins\hoTools">
           <RegistryValue Type="string" Value="hoTools.AddinClass" KeyPath="yes" />

@@ -1,19 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Diagnostics;
-using System.IO;
 using System.Windows.Forms;
-using hoTools.Utils;
-using System.Text;
 
+// ReSharper disable once CheckNamespace
 namespace hoTools.Utils.MksUtil
 {
-    class Mks
+    public class Mks
     {
         readonly string _vcPath;
-        EA.Package _pkg;
-        private EA.Repository _rep;
+        readonly EA.Package _pkg;
+        readonly EA.Repository _rep;
 
         // constructor
         public Mks(EA.Repository rep, EA.Package pkg)  {
@@ -64,7 +60,7 @@ namespace hoTools.Utils.MksUtil
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show(e.ToString(), "Error");
+                    MessageBox.Show(e.ToString(), @"Error");
                 }
             }
             
@@ -76,13 +72,13 @@ namespace hoTools.Utils.MksUtil
         public string ViewHistory()
         {
             if (_vcPath == null) return "";
-            return this.Cmd("viewhistory");
+            return Cmd(@"viewhistory");
         }
 
         public string Checkout()
         {
             if (_vcPath == null) return "";
-            string txt = this.Cmd("co --batch --lock --forceConfirm=yes");
+            string txt = Cmd("co --batch --lock --forceConfirm=yes");
             //string txt = this.cmd("co --batch --nolock --unlock");
             return txt;
         }
@@ -90,7 +86,7 @@ namespace hoTools.Utils.MksUtil
         public string UndoCheckout()
         {
             if (_vcPath == null) return "";
-            string txt = this.Cmd("unlock --action=remove --revision :head");
+            string txt = Cmd("unlock --action=remove --revision :head");
             return txt;
         }
 
@@ -98,27 +94,27 @@ namespace hoTools.Utils.MksUtil
         {
             string returnString = "";
             if (_vcPath == null) return returnString;
-            var psi = new ProcessStartInfo(@"si");
-            psi.Arguments = command + " \"" + _vcPath + "\"";  // wrap file name in " to avoid problems with blank in name
-            psi.RedirectStandardOutput = true;
-            psi.RedirectStandardError = true;
-            psi.WindowStyle = ProcessWindowStyle.Hidden;
-            psi.UseShellExecute = false;
-            StreamReader output;
-            StreamReader standardError;
-            Process p;
+            var psi = new ProcessStartInfo(@"si")
+            {
+                Arguments = command + " \"" + _vcPath + "\"",
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+                WindowStyle = ProcessWindowStyle.Hidden,
+                UseShellExecute = false
+            };
+            // wrap file name in " to avoid problems with blank in name
             try
             {
-                p = Process.Start(psi);
-                output = p.StandardOutput;
-                standardError = p.StandardError;
+                var p = Process.Start(psi);
+                var output = p.StandardOutput;
+                var standardError = p.StandardError;
                 //outputError = p.StandardError;
                 p.WaitForExit(10000);
                 if (p.HasExited)
                 {
                     if (p.ExitCode != 0)
                     {
-                        MessageBox.Show("ErrorCode:"+p.ExitCode + "\r\n" + standardError.ReadToEnd(),"mks");
+                        MessageBox.Show($"ErrorCode:{p.ExitCode }\r\n{standardError.ReadToEnd()}",@"mks");
                        return "Error";
                     }
                     return output.ReadToEnd();
@@ -126,14 +122,14 @@ namespace hoTools.Utils.MksUtil
                 }
                 else
                 {
-                    MessageBox.Show("Error: Timeout","mks");
+                    MessageBox.Show(@"Error: Timeout",@"mks");
                     return "Error: Timeout";
                 }
             }
             catch (Exception e)
             {
                 MessageBox.Show(e +
-                    "\r\n\r\nCommand:" + psi + " " + psi.Arguments, "Error mks");
+                    $"\r\n\r\nCommand:{psi}  {psi.Arguments}", @"Error mks");
             }
 
 

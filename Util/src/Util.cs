@@ -557,7 +557,7 @@ namespace hoTools.Utils
         // Parameter wird aufgrund des Alias-Namens gefunden
         //
         // 
-        public static EA.Element  GetParameterFromActivity(EA.Repository rep, EA.Parameter par, EA.Element act, Boolean isReturn = false)
+        public static EA.Element  GetParameterFromActivity(EA.Repository rep, EA.Parameter par, EA.Element act, bool isReturn = false)
         {
 
             string aliasName;
@@ -724,7 +724,7 @@ namespace hoTools.Utils
         }
         // set "ShowBeh=1; in operation field StyleEx
 
-        public static Boolean SetShowBehaviorInDiagram(EA.Repository rep, Method m)
+        public static bool SetShowBehaviorInDiagram(EA.Repository rep, Method m)
         {
             string updateStr = @"update t_operation set StyleEx = 'ShowBeh=1;'"  +
                        " where operationID = " + m.MethodID;
@@ -732,28 +732,28 @@ namespace hoTools.Utils
             return true;
         }
         
-        public static Boolean SetFrameLinksToDiagram(EA.Repository rep, EA.Element frm, EA.Diagram dia)
+        public static bool SetFrameLinksToDiagram(EA.Repository rep, EA.Element frm, EA.Diagram dia)
         {
             string updateStr = @"update t_object set pdata1 = "+ dia.DiagramID + 
                        " where object_ID = " + frm.ElementID;
             rep.Execute(updateStr);
             return true;
         }
-        public static Boolean SetActivityCompositeDiagram(EA.Repository rep, EA.Element el, string s)
+        public static bool SetActivityCompositeDiagram(EA.Repository rep, EA.Element el, string s)
         {
             string updateStr = @"update t_object set pdata1 = '"+ s +"', ntype = 8 " +
                        " where object_ID = " + el.ElementID;
             rep.Execute(updateStr);
             return true;
         }
-        public static Boolean SetElementPdata1(EA.Repository rep, EA.Element el, string s)
+        public static bool SetElementPdata1(EA.Repository rep, EA.Element el, string s)
         {
             string updateStr = @"update t_object set pdata1 = '" + s + "' " +
                        " where object_ID = " + el.ElementID;
             rep.Execute(updateStr);
             return true;
         }
-        public static Boolean SetConnectorGuard(EA.Repository rep, int connectorId, string connectorGuard)
+        public static bool SetConnectorGuard(EA.Repository rep, int connectorId, string connectorGuard)
         {
 
             string updateStr = @"update t_connector set pdata2 = '" + connectorGuard + "' " +
@@ -764,12 +764,12 @@ namespace hoTools.Utils
             return true;
         }
         
-        public static Boolean SetDiagramHasAttchaedLink(EA.Repository rep, EA.Element el)
+        public static bool SetDiagramHasAttchaedLink(EA.Repository rep, EA.Element el)
         {
             SetElementPdata1(rep,el,"Diagram Note"); 
             return true;
         }
-        public static Boolean SetVcFlags (EA.Repository rep, EA.Package pkg, string flags)
+        public static bool SetVcFlags (EA.Repository rep, EA.Package pkg, string flags)
         {
             string updateStr = @"update t_package set packageflags = '" + flags +"' " +
                        " where package_ID = " + pkg.PackageID;
@@ -777,7 +777,7 @@ namespace hoTools.Utils
             return true;
         }
 
-        public static Boolean SetElementHasAttchaedLink(EA.Repository rep, EA.Element el, EA.Element elNote)
+        public static bool SetElementHasAttchaedLink(EA.Repository rep, EA.Element el, EA.Element elNote)
         {
             string updateStr = @"update t_object set pdata1 = 'Element Note', pdata2 = '" + el.ElementID  + "', pdata4='Yes' " +
            " where object_ID = " + elNote.ElementID ;
@@ -787,7 +787,7 @@ namespace hoTools.Utils
             return true;
         }
 
-        public static Boolean SetBehaviorForOperation(EA.Repository rep, Method op, EA.Element act)
+        public static bool SetBehaviorForOperation(EA.Repository rep, Method op, EA.Element act)
         {
             
             string updateStr = @"update t_operation set behaviour = '" + act.ElementGUID + "' " +
@@ -825,7 +825,7 @@ namespace hoTools.Utils
             return s;
         }
 
-        public static Boolean SetDiagramObjectLabel(EA.Repository rep, int objectId, int diagramId, int instanceId, string s)
+        public static bool SetDiagramObjectLabel(EA.Repository rep, int objectId, int diagramId, int instanceId, string s)
         {
 
             string updateStr = @"update t_diagramObjects set ObjectStyle = '" + s + "' " +
@@ -1130,7 +1130,7 @@ namespace hoTools.Utils
             //    updateVC(rep, pkg1);
             //}
         }
-        public static string GetVCstate(EA.Repository rep, EA.Package pkg, Boolean isLong) {
+        public static string GetVCstate(EA.Repository rep, EA.Package pkg, bool isLong) {
                         string[] checkedOutStatusLong = { "Uncontrolled",
                                                       "Checked in",
                                                       "Checked out to this user",

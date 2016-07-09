@@ -76,7 +76,7 @@ namespace hoTools
         static QueryGui _QueryGUI;
 
         // ActiveX Controls
-        AddinControlGui _myControlGui;
+        AddinControlGui _myControlGui; // hoTools main window
         FindAndReplaceGUI _findAndReplaceGui;
         QueryGui _scriptGui;
         QueryGui _queryGui;
@@ -383,8 +383,11 @@ namespace hoTools
             _Repository = repository;
             _repository = repository;
             ShowAddinControlWindows();
-            // Activate the correct tab
-            _repository.ActivateTab(_AddinControlGui.ProductName);
+
+            // Activates the Addin tab
+            ShowAddinTab(_AddinSettings.AddinTabToFirstActivate);
+
+
         }
         #endregion
         #region EA_OnPostNewConnector
@@ -403,7 +406,7 @@ namespace hoTools
 
             
             EA.Diagram dia = rep.GetCurrentDiagram();
-            if (dia == null) return false; // e.g. Matrix has a diagramm id but no diagram object
+            if (dia == null) return false; // e.g. Matrix has a diagram id but no diagram object
             switch (dia.Type)
             {
                 case "Activity":
@@ -1077,19 +1080,19 @@ namespace hoTools
 
         #region ShowAddinControlWindows
         /// <summary>
-        /// Show all AddinControl Addin Windows
+        /// Show all AddinControl Addin Windows. If configured set the tab to display.
         /// </summary>
         private void ShowAddinControlWindows()
         {
             if (_myControlGui == null)
             {
-
                 try
                 {
                     // LineStyle and more
                     if (_addinSettings.LineStyleAndMoreWindow != AddinSettings.ShowInWindow.Disabled)
                     {
-                        _AddinControlGui = AddAddinControl<AddinControlGui>(_addinSettings.ProductName,
+                        _AddinControlGui = AddAddinControl<AddinControlGui>(
+                        _addinSettings.ProductName,  // Tab Name
                         AddinControlGui.Progid, null,
                         AddinSettings.ShowInWindow.AddinWindow);
                         _myControlGui = _AddinControlGui; // static + instance
@@ -1097,7 +1100,8 @@ namespace hoTools
 
                     // with Search & Replace EA Addin Windows
                     if (_addinSettings.SearchAndReplaceWindow != AddinSettings.ShowInWindow.Disabled ) { 
-                        _FindAndReplaceGUI = AddAddinControl<FindAndReplaceGUI>(FindAndReplaceGUI.TABULATOR, 
+                        _FindAndReplaceGUI = AddAddinControl<FindAndReplaceGUI>(
+                            FindAndReplaceGUI.TABULATOR, 
                             FindAndReplaceGUI.PROGID, null, 
                             AddinSettings.ShowInWindow.AddinWindow);
                        _findAndReplaceGui = _FindAndReplaceGUI; // static + instance
@@ -1129,7 +1133,25 @@ namespace hoTools
                 {
                     MessageBox.Show(e.Message);
                 }
-                    
+               
+            }
+        }
+        /// <summary>
+        /// Show the specified Addin Tab. If blank it shows nothing (default EA behavior).
+        /// </summary>
+        /// <param name="tabName"></param>
+        private void ShowAddinTab(string tabName)
+        {
+            if (String.IsNullOrWhiteSpace(tabName)) return;
+            try
+            {
+                // Activate the correct tab by sending the tab Name of the Tab
+                _repository.ShowAddinWindow("SQL");
+                _repository.ShowAddinWindow(tabName);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($"Tab name={tabName}\n\n{e}", @"Can't activate Addin Tab");
             }
         }
 

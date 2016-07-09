@@ -226,7 +226,27 @@ namespace hoTools.Settings
             }
         }
 
-      
+        #region Property: AddinTabToFirstActivate
+        public string AddinTabToFirstActivate
+        {
+            get
+            {
+                if (CurrentConfig.AppSettings.Settings["AddinTabToFirstActivate"].Value == null)
+                {
+                    return "";
+                }
+                else
+                {
+                    return (CurrentConfig.AppSettings.Settings["AddinTabToFirstActivate"].Value);
+                }
+            }
+            set
+            {
+                CurrentConfig.AppSettings.Settings["AddinTabToFirstActivate"].Value = value;
+
+            }
+        }
+        #endregion
 
 
         #region Property: isLineStyleSupport

@@ -75,6 +75,9 @@
             this.label34 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.txtAddinTabToFirstActivate = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -83,7 +86,7 @@
             // btnOk
             // 
             this.btnOk.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnOk.Location = new System.Drawing.Point(30, 486);
+            this.btnOk.Location = new System.Drawing.Point(27, 552);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(91, 31);
             this.btnOk.TabIndex = 0;
@@ -94,7 +97,7 @@
             // btnCancel
             // 
             this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancel.Location = new System.Drawing.Point(127, 486);
+            this.btnCancel.Location = new System.Drawing.Point(124, 552);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(91, 31);
             this.btnCancel.TabIndex = 1;
@@ -157,7 +160,7 @@
             // chkAdvancedDiagramNote
             // 
             this.chkAdvancedDiagramNote.AutoSize = true;
-            this.chkAdvancedDiagramNote.Location = new System.Drawing.Point(212, 374);
+            this.chkAdvancedDiagramNote.Location = new System.Drawing.Point(209, 440);
             this.chkAdvancedDiagramNote.Margin = new System.Windows.Forms.Padding(2);
             this.chkAdvancedDiagramNote.Name = "chkAdvancedDiagramNote";
             this.chkAdvancedDiagramNote.Size = new System.Drawing.Size(15, 14);
@@ -170,7 +173,7 @@
             // 
             this.label36.AutoSize = true;
             this.label36.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label36.Location = new System.Drawing.Point(26, 370);
+            this.label36.Location = new System.Drawing.Point(23, 436);
             this.label36.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label36.Name = "label36";
             this.label36.Size = new System.Drawing.Size(154, 18);
@@ -182,7 +185,7 @@
             // chkVcSupport
             // 
             this.chkVcSupport.AutoSize = true;
-            this.chkVcSupport.Location = new System.Drawing.Point(212, 421);
+            this.chkVcSupport.Location = new System.Drawing.Point(209, 487);
             this.chkVcSupport.Margin = new System.Windows.Forms.Padding(2);
             this.chkVcSupport.Name = "chkVcSupport";
             this.chkVcSupport.Size = new System.Drawing.Size(15, 14);
@@ -196,7 +199,7 @@
             // 
             this.label35.AutoSize = true;
             this.label35.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label35.Location = new System.Drawing.Point(27, 421);
+            this.label35.Location = new System.Drawing.Point(24, 487);
             this.label35.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label35.Name = "label35";
             this.label35.Size = new System.Drawing.Size(84, 18);
@@ -209,7 +212,7 @@
             // chkAdvancedFeatures
             // 
             this.chkAdvancedFeatures.AutoSize = true;
-            this.chkAdvancedFeatures.Location = new System.Drawing.Point(212, 334);
+            this.chkAdvancedFeatures.Location = new System.Drawing.Point(209, 400);
             this.chkAdvancedFeatures.Margin = new System.Windows.Forms.Padding(2);
             this.chkAdvancedFeatures.Name = "chkAdvancedFeatures";
             this.chkAdvancedFeatures.Size = new System.Drawing.Size(15, 14);
@@ -220,7 +223,7 @@
             // chkSvnSupport
             // 
             this.chkSvnSupport.AutoSize = true;
-            this.chkSvnSupport.Location = new System.Drawing.Point(212, 448);
+            this.chkSvnSupport.Location = new System.Drawing.Point(209, 514);
             this.chkSvnSupport.Margin = new System.Windows.Forms.Padding(2);
             this.chkSvnSupport.Name = "chkSvnSupport";
             this.chkSvnSupport.Size = new System.Drawing.Size(15, 14);
@@ -233,7 +236,7 @@
             // 
             this.label33.AutoSize = true;
             this.label33.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label33.Location = new System.Drawing.Point(27, 444);
+            this.label33.Location = new System.Drawing.Point(24, 510);
             this.label33.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label33.Name = "label33";
             this.label33.Size = new System.Drawing.Size(94, 18);
@@ -245,7 +248,7 @@
             // 
             this.label41.AutoSize = true;
             this.label41.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label41.Location = new System.Drawing.Point(26, 348);
+            this.label41.Location = new System.Drawing.Point(23, 414);
             this.label41.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label41.Name = "label41";
             this.label41.Size = new System.Drawing.Size(158, 18);
@@ -258,7 +261,7 @@
             // 
             this.label29.AutoSize = true;
             this.label29.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label29.Location = new System.Drawing.Point(26, 330);
+            this.label29.Location = new System.Drawing.Point(23, 396);
             this.label29.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label29.Name = "label29";
             this.label29.Size = new System.Drawing.Size(129, 18);
@@ -269,7 +272,7 @@
             // txtQuickSearch
             // 
             this.txtQuickSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtQuickSearch.Location = new System.Drawing.Point(215, 181);
+            this.txtQuickSearch.Location = new System.Drawing.Point(212, 247);
             this.txtQuickSearch.Margin = new System.Windows.Forms.Padding(2);
             this.txtQuickSearch.Name = "txtQuickSearch";
             this.txtQuickSearch.Size = new System.Drawing.Size(536, 24);
@@ -280,7 +283,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(31, 185);
+            this.label1.Location = new System.Drawing.Point(28, 251);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(153, 72);
@@ -301,7 +304,7 @@
             // chkAdvancedPort
             // 
             this.chkAdvancedPort.AutoSize = true;
-            this.chkAdvancedPort.Location = new System.Drawing.Point(212, 352);
+            this.chkAdvancedPort.Location = new System.Drawing.Point(209, 418);
             this.chkAdvancedPort.Margin = new System.Windows.Forms.Padding(2);
             this.chkAdvancedPort.Name = "chkAdvancedPort";
             this.chkAdvancedPort.Size = new System.Drawing.Size(15, 14);
@@ -313,7 +316,7 @@
             // txtFileManagerPath
             // 
             this.txtFileManagerPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtFileManagerPath.Location = new System.Drawing.Point(246, 444);
+            this.txtFileManagerPath.Location = new System.Drawing.Point(243, 510);
             this.txtFileManagerPath.Margin = new System.Windows.Forms.Padding(2);
             this.txtFileManagerPath.Name = "txtFileManagerPath";
             this.txtFileManagerPath.Size = new System.Drawing.Size(314, 24);
@@ -359,7 +362,7 @@
             // chkLineStyleSupport
             // 
             this.chkLineStyleSupport.AutoSize = true;
-            this.chkLineStyleSupport.Location = new System.Drawing.Point(212, 294);
+            this.chkLineStyleSupport.Location = new System.Drawing.Point(209, 360);
             this.chkLineStyleSupport.Margin = new System.Windows.Forms.Padding(2);
             this.chkLineStyleSupport.Name = "chkLineStyleSupport";
             this.chkLineStyleSupport.Size = new System.Drawing.Size(15, 14);
@@ -371,7 +374,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(26, 290);
+            this.label3.Location = new System.Drawing.Point(23, 356);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(121, 18);
@@ -382,7 +385,7 @@
             // chkShortKeySupport
             // 
             this.chkShortKeySupport.AutoSize = true;
-            this.chkShortKeySupport.Location = new System.Drawing.Point(215, 112);
+            this.chkShortKeySupport.Location = new System.Drawing.Point(212, 178);
             this.chkShortKeySupport.Margin = new System.Windows.Forms.Padding(2);
             this.chkShortKeySupport.Name = "chkShortKeySupport";
             this.chkShortKeySupport.Size = new System.Drawing.Size(15, 14);
@@ -394,7 +397,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(29, 108);
+            this.label4.Location = new System.Drawing.Point(26, 174);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(136, 18);
@@ -406,7 +409,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(29, 137);
+            this.label5.Location = new System.Drawing.Point(26, 203);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(154, 18);
@@ -418,7 +421,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(29, 155);
+            this.label6.Location = new System.Drawing.Point(26, 221);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(145, 18);
@@ -429,7 +432,7 @@
             // chkShowServiceButtons
             // 
             this.chkShowServiceButtons.AutoSize = true;
-            this.chkShowServiceButtons.Location = new System.Drawing.Point(215, 141);
+            this.chkShowServiceButtons.Location = new System.Drawing.Point(212, 207);
             this.chkShowServiceButtons.Margin = new System.Windows.Forms.Padding(2);
             this.chkShowServiceButtons.Name = "chkShowServiceButtons";
             this.chkShowServiceButtons.Size = new System.Drawing.Size(15, 14);
@@ -440,7 +443,7 @@
             // chkShowQueryButtons
             // 
             this.chkShowQueryButtons.AutoSize = true;
-            this.chkShowQueryButtons.Location = new System.Drawing.Point(215, 159);
+            this.chkShowQueryButtons.Location = new System.Drawing.Point(212, 225);
             this.chkShowQueryButtons.Margin = new System.Windows.Forms.Padding(2);
             this.chkShowQueryButtons.Name = "chkShowQueryButtons";
             this.chkShowQueryButtons.Size = new System.Drawing.Size(15, 14);
@@ -451,7 +454,7 @@
             // chkFavoriteSupport
             // 
             this.chkFavoriteSupport.AutoSize = true;
-            this.chkFavoriteSupport.Location = new System.Drawing.Point(212, 316);
+            this.chkFavoriteSupport.Location = new System.Drawing.Point(209, 382);
             this.chkFavoriteSupport.Margin = new System.Windows.Forms.Padding(2);
             this.chkFavoriteSupport.Name = "chkFavoriteSupport";
             this.chkFavoriteSupport.Size = new System.Drawing.Size(15, 14);
@@ -459,13 +462,12 @@
             this.toolTip1.SetToolTip(this.chkFavoriteSupport, "Add buttons to handle Favorites:\r\n- Element\r\n- Package\r\n- Diagram\r\nadd, remove, s" +
         "how/find");
             this.chkFavoriteSupport.UseVisualStyleBackColor = true;
-            this.chkFavoriteSupport.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(26, 312);
+            this.label7.Location = new System.Drawing.Point(23, 378);
             this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(133, 18);
@@ -473,7 +475,6 @@
             this.label7.Text = "Favorites Supports";
             this.toolTip1.SetToolTip(this.label7, "Add buttons to handle Favorites:\r\n- Element\r\n- Package\r\n- Diagram\r\nadd, remove, s" +
         "how/find");
-            this.label7.Click += new System.EventHandler(this.label7_Click);
             // 
             // groupBox2
             // 
@@ -481,7 +482,7 @@
             this.groupBox2.Controls.Add(this.rbAutoLoadMdgCompilation);
             this.groupBox2.Controls.Add(this.rbAutoLoadMdgBasic);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(265, 290);
+            this.groupBox2.Location = new System.Drawing.Point(262, 356);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(295, 100);
             this.groupBox2.TabIndex = 238;
@@ -531,7 +532,7 @@
             // 
             this.chkConveyedItemSupport.AutoSize = true;
             this.chkConveyedItemSupport.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkConveyedItemSupport.Location = new System.Drawing.Point(285, 112);
+            this.chkConveyedItemSupport.Location = new System.Drawing.Point(282, 178);
             this.chkConveyedItemSupport.Name = "chkConveyedItemSupport";
             this.chkConveyedItemSupport.Size = new System.Drawing.Size(187, 22);
             this.chkConveyedItemSupport.TabIndex = 239;
@@ -558,7 +559,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(211, 207);
+            this.label10.Location = new System.Drawing.Point(208, 273);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(81, 20);
             this.label10.TabIndex = 243;
@@ -569,7 +570,7 @@
             // txtSqlSearchPath
             // 
             this.txtSqlSearchPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSqlSearchPath.Location = new System.Drawing.Point(215, 230);
+            this.txtSqlSearchPath.Location = new System.Drawing.Point(212, 296);
             this.txtSqlSearchPath.Name = "txtSqlSearchPath";
             this.txtSqlSearchPath.Size = new System.Drawing.Size(536, 24);
             this.txtSqlSearchPath.TabIndex = 242;
@@ -580,7 +581,7 @@
             // 
             this.label34.AutoSize = true;
             this.label34.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label34.Location = new System.Drawing.Point(243, 421);
+            this.label34.Location = new System.Drawing.Point(240, 487);
             this.label34.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label34.Name = "label34";
             this.label34.Size = new System.Drawing.Size(297, 18);
@@ -591,7 +592,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(235, 137);
+            this.label8.Location = new System.Drawing.Point(232, 203);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(80, 18);
             this.label8.TabIndex = 240;
@@ -601,18 +602,51 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(235, 155);
+            this.label9.Location = new System.Drawing.Point(232, 221);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(80, 18);
             this.label9.TabIndex = 241;
             this.label9.Text = "on Toolbar";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(31, 108);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(205, 18);
+            this.label11.TabIndex = 244;
+            this.label11.Text = "Addin Tab Name to select first";
+            // 
+            // txtAddinTabToFirstActivate
+            // 
+            this.txtAddinTabToFirstActivate.Location = new System.Drawing.Point(273, 108);
+            this.txtAddinTabToFirstActivate.Name = "txtAddinTabToFirstActivate";
+            this.txtAddinTabToFirstActivate.Size = new System.Drawing.Size(260, 20);
+            this.txtAddinTabToFirstActivate.TabIndex = 245;
+            this.toolTip1.SetToolTip(this.txtAddinTabToFirstActivate, "Define your Addin Tab Name to visualize first\r\n- \"\" EA decides\r\n- \"hoTools\"\r\n- \"S" +
+        "QL\"\r\n- \"Script\"\r\n- \"your favorible Addin\"\r\n\r\nLeave it blank if you want EA to de" +
+        "cide. ");
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(550, 108);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(173, 18);
+            this.label12.TabIndex = 246;
+            this.label12.Text = "(hoTools, SQL, Script, ..)";
             // 
             // FrmSettingsGeneral
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(844, 529);
+            this.ClientSize = new System.Drawing.Size(844, 624);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.txtAddinTabToFirstActivate);
+            this.Controls.Add(this.label11);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.txtSqlSearchPath);
             this.Controls.Add(this.label9);
@@ -708,5 +742,8 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox txtSqlSearchPath;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TextBox txtAddinTabToFirstActivate;
+        private System.Windows.Forms.Label label12;
     }
 }

@@ -49,6 +49,9 @@
             this.txtSqlSearchPath = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.label12 = new System.Windows.Forms.Label();
+            this.txtAddinTabToFirstActivate = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -56,7 +59,7 @@
             // btnOk
             // 
             this.btnOk.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnOk.Location = new System.Drawing.Point(12, 352);
+            this.btnOk.Location = new System.Drawing.Point(26, 370);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(105, 31);
             this.btnOk.TabIndex = 0;
@@ -67,7 +70,7 @@
             // btnCancel
             // 
             this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancel.Location = new System.Drawing.Point(123, 352);
+            this.btnCancel.Location = new System.Drawing.Point(147, 370);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(105, 31);
             this.btnCancel.TabIndex = 1;
@@ -259,12 +262,45 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(503, 288);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(173, 18);
+            this.label12.TabIndex = 249;
+            this.label12.Text = "(hoTools, SQL, Script, ..)";
+            // 
+            // txtAddinTabToFirstActivate
+            // 
+            this.txtAddinTabToFirstActivate.Location = new System.Drawing.Point(237, 288);
+            this.txtAddinTabToFirstActivate.Name = "txtAddinTabToFirstActivate";
+            this.txtAddinTabToFirstActivate.Size = new System.Drawing.Size(260, 20);
+            this.txtAddinTabToFirstActivate.TabIndex = 248;
+            this.toolTip1.SetToolTip(this.txtAddinTabToFirstActivate, "Define your Addin Tab Name to visualize first\r\n- \"\" EA decides\r\n- \"hoTools\"\r\n- \"S" +
+        "QL\"\r\n- \"Script\"\r\n- \"your favorible Addin\"\r\n\r\nLeave it blank if you want EA to de" +
+        "cide. ");
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(26, 290);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(205, 18);
+            this.label11.TabIndex = 247;
+            this.label11.Text = "Addin Tab Name to select first";
+            // 
             // FrmQueryAndScript
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(582, 405);
+            this.ClientSize = new System.Drawing.Size(716, 494);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.txtAddinTabToFirstActivate);
+            this.Controls.Add(this.label11);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtSqlSearchPath);
             this.Controls.Add(this.btnSqlEditor);
@@ -308,5 +344,8 @@
         private System.Windows.Forms.Button btnSqlEditor;
         private System.Windows.Forms.TextBox txtSqlSearchPath;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TextBox txtAddinTabToFirstActivate;
+        private System.Windows.Forms.Label label11;
     }
 }

@@ -84,15 +84,15 @@
             this.chkShowQueryButtons = new System.Windows.Forms.CheckBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.txtBtn1Text = new System.Windows.Forms.TextBox();
             this.txtBtn1SearchName = new System.Windows.Forms.TextBox();
             this.txtBtn2SearchName = new System.Windows.Forms.TextBox();
-            this.txtBtn2Text = new System.Windows.Forms.TextBox();
             this.txtBtn3SearchName = new System.Windows.Forms.TextBox();
-            this.txtBtn3Text = new System.Windows.Forms.TextBox();
             this.txtBtn4SearchName = new System.Windows.Forms.TextBox();
-            this.txtBtn4Text = new System.Windows.Forms.TextBox();
             this.txtBtn5SearchName = new System.Windows.Forms.TextBox();
+            this.txtBtn1Text = new System.Windows.Forms.TextBox();
+            this.txtBtn2Text = new System.Windows.Forms.TextBox();
+            this.txtBtn3Text = new System.Windows.Forms.TextBox();
+            this.txtBtn4Text = new System.Windows.Forms.TextBox();
             this.txtBtn5Text = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -671,14 +671,6 @@
             this.label5.Text = "Show Service Buttons";
             this.toolTip1.SetToolTip(this.label5, "Add Buttons to start a Service with just one click");
             // 
-            // txtBtn1Text
-            // 
-            this.txtBtn1Text.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBtn1Text.Location = new System.Drawing.Point(94, 78);
-            this.txtBtn1Text.Name = "txtBtn1Text";
-            this.txtBtn1Text.Size = new System.Drawing.Size(73, 24);
-            this.txtBtn1Text.TabIndex = 14;
-            // 
             // txtBtn1SearchName
             // 
             this.txtBtn1SearchName.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -699,14 +691,6 @@
             this.toolTip1.SetToolTip(this.txtBtn2SearchName, "The search to use:\r\n- EA Search\r\n- SQL file name like *.sql (set SQL Path)\r\n- SQL" +
         " file path like c:\\..\\..\\*.sql\r\n");
             // 
-            // txtBtn2Text
-            // 
-            this.txtBtn2Text.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBtn2Text.Location = new System.Drawing.Point(94, 103);
-            this.txtBtn2Text.Name = "txtBtn2Text";
-            this.txtBtn2Text.Size = new System.Drawing.Size(73, 24);
-            this.txtBtn2Text.TabIndex = 18;
-            // 
             // txtBtn3SearchName
             // 
             this.txtBtn3SearchName.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -716,14 +700,6 @@
             this.txtBtn3SearchName.TabIndex = 23;
             this.toolTip1.SetToolTip(this.txtBtn3SearchName, "The search to use:\r\n- EA Search\r\n- SQL file name like *.sql (set SQL Path)\r\n- SQL" +
         " file path like c:\\..\\..\\*.sql\r\n");
-            // 
-            // txtBtn3Text
-            // 
-            this.txtBtn3Text.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBtn3Text.Location = new System.Drawing.Point(94, 129);
-            this.txtBtn3Text.Name = "txtBtn3Text";
-            this.txtBtn3Text.Size = new System.Drawing.Size(73, 24);
-            this.txtBtn3Text.TabIndex = 22;
             // 
             // txtBtn4SearchName
             // 
@@ -735,14 +711,6 @@
             this.toolTip1.SetToolTip(this.txtBtn4SearchName, "The search to use:\r\n- EA Search\r\n- SQL file name like *.sql (set SQL Path)\r\n- SQL" +
         " file path like c:\\..\\..\\*.sql\r\n");
             // 
-            // txtBtn4Text
-            // 
-            this.txtBtn4Text.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBtn4Text.Location = new System.Drawing.Point(94, 155);
-            this.txtBtn4Text.Name = "txtBtn4Text";
-            this.txtBtn4Text.Size = new System.Drawing.Size(73, 24);
-            this.txtBtn4Text.TabIndex = 26;
-            // 
             // txtBtn5SearchName
             // 
             this.txtBtn5SearchName.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -752,6 +720,38 @@
             this.txtBtn5SearchName.TabIndex = 31;
             this.toolTip1.SetToolTip(this.txtBtn5SearchName, "The search to use:\r\n- EA Search\r\n- SQL file name like *.sql (set SQL Path)\r\n- SQL" +
         " file path like c:\\..\\..\\*.sql\r\n");
+            // 
+            // txtBtn1Text
+            // 
+            this.txtBtn1Text.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBtn1Text.Location = new System.Drawing.Point(94, 78);
+            this.txtBtn1Text.Name = "txtBtn1Text";
+            this.txtBtn1Text.Size = new System.Drawing.Size(73, 24);
+            this.txtBtn1Text.TabIndex = 14;
+            // 
+            // txtBtn2Text
+            // 
+            this.txtBtn2Text.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBtn2Text.Location = new System.Drawing.Point(94, 103);
+            this.txtBtn2Text.Name = "txtBtn2Text";
+            this.txtBtn2Text.Size = new System.Drawing.Size(73, 24);
+            this.txtBtn2Text.TabIndex = 18;
+            // 
+            // txtBtn3Text
+            // 
+            this.txtBtn3Text.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBtn3Text.Location = new System.Drawing.Point(94, 129);
+            this.txtBtn3Text.Name = "txtBtn3Text";
+            this.txtBtn3Text.Size = new System.Drawing.Size(73, 24);
+            this.txtBtn3Text.TabIndex = 22;
+            // 
+            // txtBtn4Text
+            // 
+            this.txtBtn4Text.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBtn4Text.Location = new System.Drawing.Point(94, 155);
+            this.txtBtn4Text.Name = "txtBtn4Text";
+            this.txtBtn4Text.Size = new System.Drawing.Size(73, 24);
+            this.txtBtn4Text.TabIndex = 26;
             // 
             // txtBtn5Text
             // 
@@ -767,9 +767,9 @@
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(71, 8);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(490, 29);
+            this.label1.Size = new System.Drawing.Size(273, 29);
             this.label1.TabIndex = 196;
-            this.label1.Text = "hoTools: Toolbar Model Searches && Service";
+            this.label1.Text = "hoTools: Toolbar Model";
             // 
             // label9
             // 

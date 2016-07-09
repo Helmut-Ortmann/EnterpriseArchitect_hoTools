@@ -50,6 +50,8 @@ namespace hoTools.Settings
             // SQL editor
             txtSqlEditor.Text = _settings.SqlEditor;
 
+            txtAddinTabToFirstActivate.Text = _settings.AddinTabToFirstActivate;
+
             txtSqlSearchPath.Text = _settings.SqlPaths;
         }
         #endregion
@@ -66,6 +68,8 @@ namespace hoTools.Settings
         {
             // only SQL query window
             _settings.OnlyQueryWindow = AddinSettings.ShowInWindow.Disabled;
+            _settings.AddinTabToFirstActivate = txtAddinTabToFirstActivate.Text;
+
             if (rbOnlyQueryAddinWindow.Checked) _settings.OnlyQueryWindow = AddinSettings.ShowInWindow.AddinWindow;
             if (rbOnlyQueryTabWindow.Checked) _settings.OnlyQueryWindow = AddinSettings.ShowInWindow.TabWindow;
 

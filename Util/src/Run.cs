@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Xml.Linq;
-using System.Text;
 using System.Diagnostics;
 
 
@@ -27,7 +23,7 @@ namespace hoTools.Utils.RUN
             TimeSpan ts = _stopWatch.Elapsed;
 
             // Format and display the TimeSpan value.
-            return String.Format("{0:00}M:{1:00}S.{2:00}MS",
+            return string.Format("{0:00}M:{1:00}S.{2:00}MS",
                 ts.Minutes, ts.Seconds,
                 ts.Milliseconds);
         }
