@@ -101,6 +101,7 @@ Some features:
   (Global Key, Toolbar, Quick Search)
  - Relative path to SQL Paths
  - Absolute path
+-  Sql.zip  Examples SQL files
 
 # Bugfixes
 - Exception Matrix Profile
