@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Resources;
 using System.Reflection;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
+
+// ReSharper disable once CheckNamespace
 namespace hoTools.Utils.SQL
 {
     /// <summary>
@@ -45,12 +44,14 @@ namespace hoTools.Utils.SQL
             ToolTip = toolTip;
             IsResource = false;
         }
+
         /// <summary>
         /// Constructor SQL Template with the resource as Resource name
         /// </summary>
         /// <param name="templateName"></param>
         /// <param name="templateText"></param>
         /// <param name="toolTip"></param>
+        /// <param name="isResource"></param>
         public SqlTemplate(string templateName, string templateText, string toolTip, bool isResource)
         {
             TemplateName = templateName;

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
+﻿
 namespace hoTools.Utils
 {
     public static class Element
@@ -18,9 +14,7 @@ namespace hoTools.Utils
         /// <returns></returns>
         public static EA.Element CreateElement(EA.Repository rep, EA.Package pkg, string name, string type, string stereotype)
         {
-            EA.Element el = null;
-
-            el = CallOperationAction.GetElementFromName(rep, name, type);
+            var el = CallOperationAction.GetElementFromName(rep, name, type);
 
             if (el == null)
             {
@@ -39,17 +33,14 @@ namespace hoTools.Utils
         }
         public static EA.Element CreatePortWithInterface(EA.Element elSource, EA.Element elInterface, string ifType ="RequiredInterface")
         {
-            EA.Element interf = null;
-            EA.Element port = null;
-
             foreach (EA.Element p in elSource.EmbeddedElements)
             {
                 if (p.Name == elInterface.Name) return null; //interface exists
             }
             // create a port
-            port = (EA.Element)elSource.EmbeddedElements.AddNew(elInterface.Name, "Port");
+            var port = (EA.Element)elSource.EmbeddedElements.AddNew(elInterface.Name, "Port");
             // add interface
-            interf = (EA.Element)port.EmbeddedElements.AddNew(elInterface.Name, ifType);
+            var interf = (EA.Element)port.EmbeddedElements.AddNew(elInterface.Name, ifType);
             // set classifier
             interf.ClassfierID = elInterface.ElementID;
             interf.Update();

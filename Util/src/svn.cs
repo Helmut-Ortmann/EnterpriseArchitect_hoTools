@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
-using hoTools.Utils;
-using System.Text;
 using System.Text.RegularExpressions;
 
 
+// ReSharper disable once CheckNamespace
 namespace hoTools.Utils.svnUtil
 {
     public class Svn
@@ -33,7 +30,7 @@ namespace hoTools.Utils.svnUtil
 
         public bool SetProperty()
         {
-            Cmd("svn","propset svn:keywords \"Date Author Rev Id Header\" ");
+            Cmd(@"svn","propset svn:keywords \"Date Author Rev Id Header\" ");
             return true;
         }
         public void GotoLog()
@@ -81,21 +78,19 @@ namespace hoTools.Utils.svnUtil
             psi.WindowStyle = ProcessWindowStyle.Hidden;
             psi.CreateNoWindow = true;
             psi.UseShellExecute = false;
-            StreamReader output;
-            StreamReader standardError;
             Process p;
             try
             {
                 p = Process.Start(psi);
-                output = p.StandardOutput;
-                standardError = p.StandardError;
+                var output = p.StandardOutput;
+                var standardError = p.StandardError;
                 //outputError = p.StandardError;
                 p.WaitForExit(20000);
                 if (p.HasExited)
                 {
                     if (p.ExitCode != 0)
                     {
-                        MessageBox.Show("ErrorCode:"+p.ExitCode + "\r\n" + standardError.ReadToEnd(),"svn");
+                        MessageBox.Show($"ErrorCode:{p.ExitCode}\r\n{standardError.ReadToEnd()}",@"svn");
                        return "Error";
                     }
                     return output.ReadToEnd();
@@ -103,14 +98,13 @@ namespace hoTools.Utils.svnUtil
                 }
                 else
                 {
-                    MessageBox.Show("Error: Timeout","svn");
+                    MessageBox.Show(@"Error: Timeout",@"svn");
                     return "Error: Timeout";
                 }
             }
             catch (Exception e)
             {
-                MessageBox.Show(e +
-                    "\r\n\r\nCommand:" + psi + " " + psi.Arguments, "Error svn");
+                MessageBox.Show($"{e}\r\n\r\nCommand:{psi} {psi.Arguments}", @"Error svn");
             }
 
 

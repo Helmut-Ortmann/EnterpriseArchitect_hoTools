@@ -1,5 +1,6 @@
 ﻿using System.Windows.Forms;
 
+// ReSharper disable once CheckNamespace
 namespace hoTools.Utils.Forms
 {
     /// <summary>

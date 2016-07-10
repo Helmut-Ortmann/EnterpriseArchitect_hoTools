@@ -7,6 +7,7 @@ namespace hoTools.Utils
 {
     public static class CallOperationAction
     {
+        // ReSharper disable once UnusedMethodReturnValue.Global
         public static bool CreateCallAction(EA.Repository rep, EA.Element action, EA.Method method)
         {
             // add ClassifierGUID to target action
@@ -40,7 +41,7 @@ namespace hoTools.Utils
             // not for macros
             if (! s.Substring(0, 1).Equals("#"))
             {
-                int i = s.IndexOf((string)@"(", 1, StringComparison.CurrentCulture);
+                int i = s.IndexOf(@"(", 1, StringComparison.CurrentCulture);
                 if (i >= 0)
                 {
                     s = s.Remove(i, 1);

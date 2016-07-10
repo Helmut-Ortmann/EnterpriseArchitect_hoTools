@@ -1,13 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
-using hoTools.Utils;
-using hoTools.Utils.Parameter;
-using hoTools.Utils.ActivityParameter;
-//using IFM_Addin;
-
+// ReSharper disable once CheckNamespace
 namespace hoTools.Utils.Appls
 {
     public static class Appl
@@ -209,7 +202,7 @@ namespace hoTools.Utils.Appls
 
             stateChart.Elements.Refresh();
             dia.DiagramObjects.Refresh();
-            bool error1 = dia.Update();
+            dia.Update();
             rep.ReloadDiagram(dia.DiagramID);
 
             return true;

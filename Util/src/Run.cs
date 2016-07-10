@@ -2,6 +2,7 @@
 using System.Diagnostics;
 
 
+// ReSharper disable once CheckNamespace
 namespace hoTools.Utils.RUN
 {
 
@@ -23,9 +24,7 @@ namespace hoTools.Utils.RUN
             TimeSpan ts = _stopWatch.Elapsed;
 
             // Format and display the TimeSpan value.
-            return string.Format("{0:00}M:{1:00}S.{2:00}MS",
-                ts.Minutes, ts.Seconds,
-                ts.Milliseconds);
+            return $"{ts.Minutes:00}M:{ts.Seconds:00}S.{ts.Milliseconds:00}MS";
         }
 
     }

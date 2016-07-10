@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
+
+// ReSharper disable once CheckNamespace
 namespace hoTools.Utils.Favorites
 {
     /// <summary>
@@ -48,13 +47,10 @@ namespace hoTools.Utils.Favorites
         public bool Save()
         {
 
-            this.Delete();
+            Delete();
             // insert 
-            string sql = String.Format(
-                         @"insert into t_xref " +
-                         @"        (XrefID, Type, Client) " +
-                         @" VALUES ( '{0}','Favorite', '{1}') ", 
-                         _xrefGuid, _clientGuid);
+            string sql = @"insert into t_xref         (XrefID, Type, Client) " +
+                         $@" VALUES ( '{_xrefGuid}','Favorite', '{_clientGuid}') ";
             _rep.Execute(sql);
             
             return true;
@@ -64,10 +60,7 @@ namespace hoTools.Utils.Favorites
         public bool Delete()
         {
             // delete all old on
-            string sql = String.Format(
-                         @"delete from t_xref " +
-                         @"where Client = '{0}'",
-                         _clientGuid);
+            string sql = @"delete from t_xref where Client = '{_clientGuid}'";
             _rep.Execute(sql);
             return true;
         }

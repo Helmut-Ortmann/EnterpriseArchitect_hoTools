@@ -1,5 +1,6 @@
 ﻿using System;
 
+// ReSharper disable once CheckNamespace
 namespace GlobalHotkeys
 {
     public class GlobalHotkeyException : Exception

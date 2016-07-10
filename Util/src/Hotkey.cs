@@ -4,6 +4,7 @@ using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 
+// ReSharper disable once CheckNamespace
 namespace GlobalHotkeys
 {
     public delegate void HotkeyHandler();
@@ -24,9 +25,9 @@ namespace GlobalHotkeys
         #region Constructor
         public Hotkey(Keys key, Modifiers modifiers, HotkeyHandler handler)
         {
-            this.Key = key;
-            this.Modifiers = modifiers;
-            this.Handler = handler;
+            Key = key;
+            Modifiers = modifiers;
+            Handler = handler;
             Id = GetHashCode();
         }
         #endregion
@@ -38,10 +39,10 @@ namespace GlobalHotkeys
         {
             if (window == null)
                 #pragma warning disable RECS0143 // Cannot resolve symbol in text argument
-                throw new ArgumentNullException("window ", "You must provide a form or window to register the hotkey against.");
+                throw new ArgumentNullException(@"window ", @"You must provide a form or window to register the hotkey against.");
                 #pragma warning restore RECS0143 // Cannot resolve symbol in text argument
             if (!RegisterHotKey(window.Handle, Id, (int)Modifiers, (int)Key))
-                throw new GlobalHotkeyException("Hotkey " + Modifiers + " + " + (char)Key + " failed to register.");
+                throw new GlobalHotkeyException(@"Hotkey " + Modifiers + " + " + (char)Key + " failed to register.");
             _registered = true;
             _registeredWindow = window;
         }
@@ -67,7 +68,7 @@ namespace GlobalHotkeys
             GC.SuppressFinalize(this);
         }
 
-        public override sealed int GetHashCode() => (int)Modifiers ^ (int)Key;
+        public sealed override int GetHashCode() => (int)Modifiers ^ (int)Key;
 
 
         public bool IsPressedKeyCombination(IntPtr lParam)

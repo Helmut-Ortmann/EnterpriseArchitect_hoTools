@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace hoTools.Utils
 {
@@ -14,9 +12,9 @@ namespace hoTools.Utils
     {
         readonly EA.Repository _rep;
         readonly EA.Diagram _dia;
-        List<EA.DiagramObject> _selectedObjects = new List<EA.DiagramObject>();
+        readonly List<EA.DiagramObject> _selectedObjects = new List<EA.DiagramObject>();
 
-        EA.Connector _selectedConnector;
+        readonly EA.Connector _selectedConnector;
         #region Constructor
         /// <summary>
         /// Get the current Diagram with it's selected objects and connectors.
@@ -109,7 +107,7 @@ namespace hoTools.Utils
     }
     public class DiagramObject
     {
-        string _name = "";
+        readonly string _name;
         readonly int _id;
         #region Constructor
         public DiagramObject(string name, int id)
@@ -139,8 +137,8 @@ namespace hoTools.Utils
     }
     public class DiagramObjectSelected
     {
-        EA.DiagramObject _obj;
-        int _position;
+        readonly EA.DiagramObject _obj;
+        readonly int _position;
         readonly int _left;
         #region Constructor
         public DiagramObjectSelected(EA.DiagramObject obj, int position, int left)
@@ -179,8 +177,7 @@ namespace hoTools.Utils
         {
             if (firstValue == null && secondValue == null) return 0;
             if (firstValue == null) return 1;
-            if (secondValue == null) return -1;
-            if (firstValue.Position < secondValue.Position) return 1;
+            if (firstValue.Position < secondValue?.Position) return 1;
             return -1;
          }
     }

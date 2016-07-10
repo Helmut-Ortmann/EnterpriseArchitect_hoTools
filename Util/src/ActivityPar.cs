@@ -66,7 +66,7 @@ namespace hoTools.Utils.ActivityParameter
             pkgTrg.Update();
             pkgSrc.Packages.Refresh();
 
-            EA.Element frm = null; // frame beneath package
+            EA.Element frame = null; // frame beneath package
             if (ActivityIsSimple == false)
             {
                 // create Class Activity Diagram in target package
@@ -76,9 +76,9 @@ namespace hoTools.Utils.ActivityParameter
 
                 // add frame in Activity diagram
                 var frmObj = (EA.DiagramObject)pkgActDia.DiagramObjects.AddNew("l=100;r=400;t=25;b=50", "");
-                frm = (EA.Element)pkgTrg.Elements.AddNew(m.Name, "UMLDiagram");
-                frm.Update();
-                frmObj.ElementID = frm.ElementID;
+                frame = (EA.Element)pkgTrg.Elements.AddNew(m.Name, "UMLDiagram");
+                frame.Update();
+                frmObj.ElementID = frame.ElementID;
                 //frmObj.Style = "fontsz=200;pitch=34;DUID=265D32D5;font=Arial Narrow;bold=0;italic=0;ul=0;charset=0;";
                 frmObj.Update();
                 pkgTrg.Elements.Refresh();
@@ -158,8 +158,8 @@ namespace hoTools.Utils.ActivityParameter
             if (ActivityIsSimple == false)
             {
                 // link Overview frame to diagram
-                Util.SetFrameLinksToDiagram(rep, frm, actDia);
-                frm.Update();
+                Util.SetFrameLinksToDiagram(rep, frame, actDia);
+                frame.Update();
             }
 
             // select operation

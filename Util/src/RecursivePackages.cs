@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
+
 
 namespace hoTools.Utils
 {
@@ -50,7 +48,7 @@ namespace hoTools.Utils
         public static void DoRecursivePkg(EA.Repository rep, EA.Package pkg, SetPackage setPkg, SetElement setEl, SetDiagram setDia, string[] s)
         {
             // perform package
-            if (setPkg != null) setPkg(rep, pkg, s);
+            setPkg?.Invoke(rep, pkg, s);
 
             // perform diagrams of package
             foreach (EA.Diagram dia in pkg.Diagrams)
@@ -68,18 +66,16 @@ namespace hoTools.Utils
             {
                 DoRecursivePkg(rep, pkgTrgt, setPkg, setEl, setDia, s);
             }
-            return;
         }
         public static void DoRecursiveEl(EA.Repository rep, EA.Element el, SetElement setEl, SetDiagram setDia, string[] s)
         {
-            // performel
+            // perform
             setEl(rep, el, s);
             //run all elements
             foreach (EA.Element elTrgt in el.Elements)
             {
                 DoRecursiveEl(rep, elTrgt, setEl, setDia, s);
             }
-            return;
         }
     }
 }

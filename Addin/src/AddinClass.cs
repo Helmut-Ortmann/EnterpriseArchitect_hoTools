@@ -616,6 +616,7 @@ namespace hoTools
         // ReSharper disable once InconsistentNaming
         public override void EA_GetMenuState(EA.Repository Repository, string menuLocation, string menuName, string itemName, ref bool isEnabled, ref bool isChecked)
         {
+            if (Repository == null) return;
             if (IsProjectOpen(Repository))
             {
                 switch (itemName)
@@ -740,6 +741,7 @@ namespace hoTools
                 isEnabled = false;
             }
         }
+
         #endregion
 
         #region EA_MenuClick

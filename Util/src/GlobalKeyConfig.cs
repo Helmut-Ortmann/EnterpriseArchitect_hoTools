@@ -1,63 +1,38 @@
 ﻿using System;
 using System.Windows.Forms;
-using GlobalHotkeys;
 using System.Collections.Generic;
 using System.Reflection;
 
+// ReSharper disable once CheckNamespace
 namespace GlobalHotkeys
 {
 
     public class GlobalKeysConfig
     {
-        string _key;
-        string _modifier1;
-        string _modifier2;
-        string _modifier3;
-        string _modifier4;
-        string _tooltip;
-        
-       public GlobalKeysConfig(string key, string modifier1, string modifier2, string modifier3, string modifier4, string help)
+        private GlobalKeysConfig(string key, string modifier1, string modifier2, string modifier3, string modifier4, string help)
         {
-            _key = key;
-            _modifier1 = modifier1;
-            _modifier2 = modifier2;
-            _modifier3 = modifier3;
-            _modifier4 = modifier4;
-            _tooltip = help;
+            Key = key;
+            Modifier1 = modifier1;
+            Modifier2 = modifier2;
+            Modifier3 = modifier3;
+            Modifier4 = modifier4;
+            Tooltip = help;
 
         }
 
        #region GetterSetter
-       public string Key
-        {
-            get { return _key; }
-            set { _key = value; }
-        }
-        public string Modifier1
-        {
-            get { return _modifier1; }
-            set { _modifier1 = value; }
-        }
-        public string Modifier2
-        {
-            get { return _modifier2; }
-            set { _modifier2 = value; }
-        }
-        public string Modifier3
-        {
-            get { return _modifier3; }
-            set { _modifier3 = value; }
-        }
-        public string Modifier4
-        {
-            get { return _modifier4; }
-            set { _modifier4 = value; }
-        }
-        public string Tooltip
-        {
-            get { return _tooltip; }
-            set { _tooltip = value; }
-        }
+       public string Key { get; set; }
+
+        public string Modifier1 { get; set; }
+
+        public string Modifier2 { get; set; }
+
+        public string Modifier3 { get; set; }
+
+        public string Modifier4 { get; set; }
+
+        public string Tooltip { get; set; }
+
         #endregion
 
         public static Dictionary<string, Keys> GetKeys() => 
@@ -88,87 +63,68 @@ namespace GlobalHotkeys
 
         public class GlobalKeysServiceConfig : GlobalKeysConfig
         {
-            private MethodInfo _method;
-            private string _guid = "";
-            private string _description = "";
-            private bool _isTextRequired;
-
             public GlobalKeysServiceConfig(string key, string modifier1, string modifier2, string modifier3, string modifier4, string help,
                 string guid, string description, bool isTextRequired)
                 : base(key, modifier1, modifier2, modifier3, modifier4, help)
             {
-                _guid = guid;
-                _description = description;
-                _isTextRequired = isTextRequired;
+                Guid = guid;
+                Description = description;
+                IsTextRequired = isTextRequired;
             }
 
             #region GetterSetter
-            public MethodInfo Method
-            {
-                get { return _method; }
-                set { _method = value; }
-            }
-            public string Guid
-            {
-                get { return _guid; }
-                set { _guid = value; }
-            }
-            public string Description
-            {
-                get { return _description; }
-                set { _description = value; }
-            }
-            
-            public bool IsTextRequired
-            {
-                get { return _isTextRequired; }
-                set { _isTextRequired = value; }
-            }
+            public MethodInfo Method { get; set; }
+
+            public string Guid { get; set; }
+
+            public string Description { get; set; }
+
+            public bool IsTextRequired { get; set; }
+
             #endregion
             public string Invoke(EA.Repository rep, string text)
             {
-                object s = null;
-                if (_method != null)
+                if (Method != null)
                 {
                     try
                     {
                         // Invoke the method itself. The string returned by the method winds up in s
                         // substitute default parameter by Type.Missing
-                        if (_isTextRequired)
+                        if (IsTextRequired)
                         {
                             // use Type.Missing for optional parameters
-                            switch (_method.GetParameters().Length)
+                            switch (Method.GetParameters().Length)
                             {
                                 case 1:
-                                    _method.Invoke(null, new object[] { rep, text });
+                                    Method.Invoke(null, new object[] { rep, text });
                                     break;
                                 case 2:
-                                    _method.Invoke(null, new object[] { rep, text, Type.Missing });
+                                    Method.Invoke(null, new[] { rep, text, Type.Missing });
                                     break;
                                 case 3:
-                                    _method.Invoke(null, new object[] { rep,text, Type.Missing, Type.Missing });
+                                    Method.Invoke(null, new[] { rep,text, Type.Missing, Type.Missing });
                                     break;
                                 default:
-                                    _method.Invoke(null, new object[] { rep,text,  Type.Missing, Type.Missing, Type.Missing });
+                                    Method.Invoke(null, new[] { rep,text,  Type.Missing, Type.Missing, Type.Missing });
                                     break;
                             }
                         }
                         else
                         {
                             // use Type.Missing for optional parameters
-                            switch (_method.GetParameters().Length)
+                            switch (Method.GetParameters().Length)
                             {
                                 case 1:
-                                    _method.Invoke(null, new object[] { rep });
+                                    Method.Invoke(null, new object[] { rep });
                                     break;
                                 case 2:
-                                    _method.Invoke(null, new object[] { rep, Type.Missing });
+                                    Method.Invoke(null, new[] { rep, Type.Missing });
                                     break;
                                 case 3:
-                                    _method.Invoke(null, new object[] { rep, Type.Missing, Type.Missing });
+                                    Method.Invoke(null, new[] { rep, Type.Missing, Type.Missing });
                                     break;
                                 default:
-                                    _method.Invoke(null, new object[] { rep, Type.Missing, Type.Missing, Type.Missing });
+                                    Method.Invoke(null, new[] { rep, Type.Missing, Type.Missing, Type.Missing });
                                     break;
                             }
 
@@ -176,8 +132,8 @@ namespace GlobalHotkeys
                     }
                     catch (Exception e)
                     {
-                        MessageBox.Show(e + "\nCan't invoke " + _method.Name + "Return:'" + _method.ReturnParameter + "' " + _method, "Error Invoking service");
-                        return (string)s;
+                        MessageBox.Show($"{e}\nCan't invoke { Method.Name } Return:'{ Method.ReturnParameter}' { Method}", @"Error Invoking service");
+                        return null;
                     }
                 }
                 return null;
@@ -185,33 +141,24 @@ namespace GlobalHotkeys
         }
         public class GlobalKeysSearchConfig : GlobalKeysConfig
         {
-            private string _searchName = "";
-            private string _searchTerm = "";
-
             public GlobalKeysSearchConfig(string key, string modifier1, string modifier2, string modifier3, string modifier4, string help,
                 string searchName, string searchTerm)
                 : base(key, modifier1, modifier2, modifier3, modifier4, help)
             {
-                _searchName = searchName;
-                _searchTerm = searchTerm;
+                SearchName = searchName;
+                SearchTerm = searchTerm;
             }
 
             #region GetterSetter
             
-            public string SearchName
-            {
-                get { return _searchName; }
-                set { _searchName = value; }
-            }
-            public string SearchTerm
-            {
-                get { return _searchTerm; }
-                set { _searchTerm = value; }
-            }
+            public string SearchName { get; set; }
+
+            public string SearchTerm { get; set; }
+
             public string Description
             {
-                get { return _searchTerm; }
-                set { _searchTerm = value; }
+                get { return SearchTerm; }
+                set { SearchTerm = value; }
             }
             #endregion
         }

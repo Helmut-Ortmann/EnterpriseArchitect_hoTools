@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 
+// ReSharper disable once CheckNamespace
 namespace hoTools.Connectors {
     public class Connector
     {
-        string _type = "";
-        string _stereotype = "";
+        string _type;
+        string _stereotype;
         bool _isDefault;
-        bool _isEnabled = true;
+        bool _isEnabled;
         int _pos;
-        string _lineStyle = "LV";
+        string _lineStyle;
        
 
         public Connector(string type, string stereotype, string lineStyle="LV", bool isDefault=false, bool isEnabled = true)
@@ -21,8 +22,6 @@ namespace hoTools.Connectors {
             _isEnabled = isEnabled;
             _lineStyle = lineStyle;
         }
-        static public List<string> GetLineStyle() => new List<String> {
-        "LV","LH","TV","TH","B","OS","OR","D"};
 
         public string LineStyle
         {
@@ -58,7 +57,7 @@ namespace hoTools.Connectors {
     }
     public class DiagramConnector : BindingList<Connector>
     {
-        private string _diagramType = "";
+        private string _diagramType;
 
         public DiagramConnector(string diagramType)
 {
