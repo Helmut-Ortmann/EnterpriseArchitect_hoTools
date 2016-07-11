@@ -95,16 +95,12 @@ Some features:
   - user.config Configuration 
 
 
-# Scheduled (release 2.0.4)
-- Improved Settings regarding SQL (Global Keys, Toolbar)
-- SQL can now be used everywhere in hoTools
-  (Global Key, Toolbar, Quick Search)
- - Relative path to SQL Paths
- - Absolute path
--  Sql.zip  Examples SQL files
+# Scheduled (release 2.0.5)
+- Lock/Unlock for Package
+
 
 # Bugfixes
-- Exception Matrix Profile
+- minor
 
 # Not yet scheduled
 - Drag SQL file on canvas

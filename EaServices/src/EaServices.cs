@@ -169,8 +169,8 @@ namespace hoTools.EaServices
         /// </summary>
         /// <param name="rep"></param>
 
-        [ServiceOperation("{0A731169-C983-404C-AB20-E4E478A38DB4}", "Lock selected item (package, Diagram, Element)",
-            "Lock selected item (package, Diagram, Element)", isTextRequired: false)]
+        [ServiceOperation("{0A731169-C983-404C-AB20-E4E478A38DB4}", "Lock selected item (Package, Diagram, Element)",
+            "Lock selected item (Package, Diagram or Element)", isTextRequired: false)]
         // ReSharper disable once UnusedMember.Global
         // dynamical usage as configurable service by reflection
         public static void LockSelected(Repository rep)
@@ -235,82 +235,113 @@ namespace hoTools.EaServices
 
         }
         #endregion
+        //--------------------------------------------------------------------------------------------
         #region UnLockPackageRecursive
         /// <summary>
-        /// UnLock selected item (Package, Diagram, Element)
+        /// UnLock Package recursive (Package, Diagram or Element selected)
         /// </summary>
         /// <param name="rep"></param>
 
-        [ServiceOperation("{42788062-3578-49CC-BBD0-87032B764B3D}", "UnLock selected package recursive)",
-            "UnLock selected package recursive", isTextRequired: false)]
+        [ServiceOperation("{42788062-3578-49CC-BBD0-87032B764B3D}", "UnLock Package recursive)",
+            "UnLock Package recursive (select Package, Element or Diagram)", isTextRequired: false)]
         // ReSharper disable once UnusedMember.Global
         // dynamical usage as configurable service by reflection
         public static void UnLockPackageRecursive(Repository rep)
         {
-            bool success;
-            Package pkg;
-            switch (rep.GetContextItemType())
-            {
-                case ObjectType.otPackage:
-                    pkg = (Package)rep.GetContextObject();
-                    success = pkg.ReleaseUserLockRecursive(true, true, true);
-                    break;
-                case ObjectType.otElement:
-                    Element el = (Element)rep.GetContextObject();
-                    pkg = rep.GetPackageByID(el.PackageID);
-                    success = pkg.ReleaseUserLockRecursive(true, true, true);
-                    break;
-                case ObjectType.otDiagram:
-                    Diagram dia = (Diagram)rep.GetContextObject();
-                    pkg = rep.GetPackageByID(dia.PackageID);
-                    success = pkg.ReleaseUserLockRecursive(true, true, true);
-                    break;
-                default:
-                    return;
-            }
-            if (success) return;
-            MessageBox.Show($"Error:'{rep.GetLastError()}'", @"Error unlock package recursive");
+             Package pkg = GetContextPackage(rep);
+            if (pkg == null) return;
+            if (! pkg.ReleaseUserLockRecursive(true, true, true)) 
+                MessageBox.Show($"Error:'{rep.GetLastError()}'", @"Error Unlock Package recursive");
+     
 
         }
         #endregion
         #region LockPackageRecursive
         /// <summary>
-        /// UnLock selected item (Package, Diagram, Element)
+        /// UnLock Package recursive (Package, Diagram or Element selected)
         /// </summary>
         /// <param name="rep"></param>
 
-        [ServiceOperation("{F1B97839-0E68-4019-95C2-8F745CCDA484}", "Lock selected package recursive",
-            "Lock selected package recursive", isTextRequired: false)]
+        [ServiceOperation("{F1B97839-0E68-4019-95C2-8F745CCDA484}", "Lock Package recursive",
+            "Lock Package recursive (select Package, Element or Diagram)", isTextRequired: false)]
         // ReSharper disable once UnusedMember.Global
         // dynamical usage as configurable service by reflection
         public static void LockPackageRecursive(Repository rep)
         {
-            bool success;
-            Package pkg;
-            switch (rep.GetContextItemType())
-            {
-                case ObjectType.otPackage:
-                    pkg = (Package)rep.GetContextObject();
-                    success = pkg.ApplyUserLockRecursive(true, true, true);
-                    break;
-                case ObjectType.otElement:
-                    Element el = (Element)rep.GetContextObject();
-                    pkg = rep.GetPackageByID(el.PackageID);
-                    success = pkg.ApplyUserLockRecursive(true, true, true);
-                    break;
-                case ObjectType.otDiagram:
-                    Diagram dia = (Diagram)rep.GetContextObject();
-                    pkg = rep.GetPackageByID(dia.PackageID);
-                    success = pkg.ApplyUserLockRecursive(true, true, true);
-                    break;
-                default:
-                    return;
-            }
-            if (success) return;
-            MessageBox.Show($"Error:'{rep.GetLastError()}'", @"Error lock package recursive");
+            Package pkg = GetContextPackage(rep);
+            if (pkg == null) return;
+            if (! pkg.ApplyUserLockRecursive(true, true, true)) 
+                MessageBox.Show($"Error:'{rep.GetLastError()}'", @"Error lock Package recursive");
+     
 
         }
         #endregion
+        //-------------------------------------------------------------------------------------------
+        #region UnLockPackage
+        /// <summary>
+        /// UnLock Package (Package, Diagram, Element may be selected)
+        /// </summary>
+        /// <param name="rep"></param>
+
+        [ServiceOperation("{06FD450C-9B18-453A-821F-955CFFE299DA}", "UnLock Package)",
+            "UnLock Package (select Package, Element or Diagram)", isTextRequired: false)]
+        // ReSharper disable once UnusedMember.Global
+        // dynamical usage as configurable service by reflection
+        public static void UnLockPackage(Repository rep)
+        {
+            Package pkg = GetContextPackage(rep);
+            if (pkg == null) return;
+            if (!pkg.ReleaseUserLockRecursive(true, true, false))
+                MessageBox.Show($"Error:'{rep.GetLastError()}'", @"Error Unlock Package");
+
+
+        }
+        #endregion
+        #region LockPackage
+        /// <summary>
+        /// Lock Package (Package, Diagram, Element may be selected)
+        /// </summary>
+        /// <param name="rep"></param>
+
+        [ServiceOperation("{BA09245C-21E3-4A3C-A9AF-5DF6ED703201}", "Lock Package",
+            "Lock Package (select Package, Element, Diagram)", isTextRequired: false)]
+        // ReSharper disable once UnusedMember.Global
+        // dynamical usage as configurable service by reflection
+        public static void LockPackage(Repository rep)
+        {
+            Package pkg = GetContextPackage(rep);
+            if (pkg == null) return;
+            if (!pkg.ApplyUserLockRecursive(true, true, false))
+                MessageBox.Show($"Error:'{rep.GetLastError()}'", @"Error lock package");
+
+
+        }
+        #endregion
+        //--------------------------------------------------------------------------------
+        /// <summary>
+        /// Get context Package from Package, Element, Diagram
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <returns></returns>
+        static Package GetContextPackage(Repository rep)
+        {
+            switch (rep.GetContextItemType())
+            {
+                case ObjectType.otPackage:
+                    return (Package)rep.GetContextObject();
+
+                case ObjectType.otElement:
+                    Element el = (Element)rep.GetContextObject();
+                    return  rep.GetPackageByID(el.PackageID);
+
+                case ObjectType.otDiagram:
+                    Diagram dia = (Diagram)rep.GetContextObject();
+                    return rep.GetPackageByID(dia.PackageID);
+
+                default:
+                    return null;
+            }
+        }
 
         #region change User Recursive
         [ServiceOperation("{F0038D4B-CCAA-4F05-9401-AAAADF431ECB}", "Change user of package/element recursive", "Select package or element", isTextRequired: false)]
@@ -1734,6 +1765,7 @@ namespace hoTools.EaServices
         }
         #endregion
         #region createDecisionFromText
+        // ReSharper disable once UnusedMethodReturnValue.Local
         static string CreateDecisionFromText(Repository rep, string decisionName, int offsetHorizental = 0, int offsetVertical = 0, string guardString = "")
         {
             decisionName = CallOperationAction.RemoveUnwantedStringsFromText(decisionName);
@@ -1899,6 +1931,7 @@ namespace hoTools.EaServices
             }
         }
 
+        // ReSharper disable once UnusedMethodReturnValue.Local
         static bool UpdateActivityParameterForPackage(Repository rep, Package pkg)
         {
             foreach (Element el in pkg.Elements)
@@ -3021,6 +3054,7 @@ namespace hoTools.EaServices
         }
         #endregion
        
+        // ReSharper disable once UnusedParameter.Local
         static void CreateEnumerationAttributesFromText(Repository rep, Element el, string txt)
         {
             // delete comment
@@ -3233,6 +3267,7 @@ namespace hoTools.EaServices
         public static string GetAssemblyPath() => Path.GetDirectoryName(
             Assembly.GetAssembly(typeof(EaService)).CodeBase);
 
+        // ReSharper disable once UnusedMethodReturnValue.Global
         public static bool SetNewXmlPath(Repository rep)
         {
             if (rep.GetContextItemType().Equals(ObjectType.otPackage))
