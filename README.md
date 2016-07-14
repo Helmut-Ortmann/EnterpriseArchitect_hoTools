@@ -26,6 +26,7 @@ Collection of useful tools (see also [WiKi](https://github.com/Helmut-Ortmann/En
   - Find simple string or Regular Expression
   - Name, Description, Stereotype, Tagged Value
   - in Packages, Elements, Diagrams, Attributes, Operations
+- [COM Server](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/ComServer) for [SQL searches](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/EaSearches)
 - Configure
  - Buttons & Global Keys
  - Searches & Services
