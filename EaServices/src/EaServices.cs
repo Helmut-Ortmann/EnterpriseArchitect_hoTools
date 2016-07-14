@@ -235,61 +235,35 @@ namespace hoTools.EaServices
 
             string logInUserGuid = rep.GetCurrentLoginUser(true);
 
-            List<string> l = RememberVisibleLocks(rep, logInUserGuid);
-            string sql = $"delete from t_seclocks where UserId = '{logInUserGuid}' ";
-            try
-            {
-                rep.Execute(sql);
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show($"Error:'{rep.GetLastError()}'\n\n'{sql}\n\n{e}",
-                    @"Error deleting locks for current user!");
-            }
-            RemoveVisibleLocks(rep, l);
-        }
-
-        #endregion
-
-        static List<string> RememberVisibleLocks(EA.Repository rep, string userGuid)
-        {
-            List<string> lItems = new List<string>();
             string sqlItems =
-                $"select EntityType as [TYPE], EntityID as [GUID] from t_seclocks where UserId = '{userGuid}'";
+                $"select EntityType as [TYPE], EntityID as [GUID] from t_seclocks where UserId = '{logInUserGuid}'";
             XDocument x = XDocument.Parse(rep.SQLQuery(sqlItems));
 
             var fields = from row in x.Descendants("Row").Descendants()
-                where row.Name == "TYPE" ||
-                      row.Name == "GUID"
-                // 'Class','Action','Diagram', 
-                select row;
-            foreach (var field in fields)
-            {
-                lItems.Add(field.Value);
-            }
-            return lItems;
-        }
-
-        static void RemoveVisibleLocks(EA.Repository rep, List<string> fields)
-        {
+                         where row.Name == "TYPE" ||
+                               row.Name == "GUID"
+                         // 'Class','Action','Diagram', 
+                         select row;
             int i = 0;
             string type = "";
             foreach (var field in fields)
             {
-                switch (i%2)
+                switch (i % 2)
                 {
                     case 0:
-                        type = field;
+                        type = field.Value;
                         break;
                     case 1:
-                        var guid = field;
+                        var guid = field.Value;
                         switch (type)
                         {
                             case "Element":
-                                rep.ShowInProjectView(rep.GetElementByGuid(guid));
+                                EA.Element el = rep.GetElementByGuid(guid);
+                                el.ReleaseUserLock();
                                 break;
                             case "Diagram":
-                                rep.ShowInProjectView(rep.GetDiagramByGuid(guid));
+                                EA.Diagram dia = rep.GetDiagramByGuid(guid);
+                                dia.ReleaseUserLock();
                                 break;
                         }
                         break;
@@ -297,6 +271,10 @@ namespace hoTools.EaServices
                 i = i + 1;
             }
         }
+
+        #endregion
+
+       
 
         #region UnLockSelected
 
