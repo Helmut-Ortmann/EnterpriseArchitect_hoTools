@@ -727,15 +727,7 @@ For: Package, Element, Diagram, Attribute, Operation"
             if (sql.Contains(template))
             {
                 // get the diagram
-                Diagram dia;
-                if (rep.GetContextItemType() == ObjectType.otDiagram)
-                {
-                    dia = rep.GetContextObject();
-                }
-                else
-                {
-                    dia = rep.GetCurrentDiagram();
-                }
+                Diagram dia = rep.GetContextItemType() == ObjectType.otDiagram ? rep.GetContextObject() : rep.GetCurrentDiagram();
                 // Diagram selected?
                 if (dia == null)
                 {
@@ -756,7 +748,6 @@ For: Package, Element, Diagram, Attribute, Operation"
                     // replace by list of IDs
                     sql = sql.Replace(template, $"{listId}");
                 }
-
             }
             return sql;
         }

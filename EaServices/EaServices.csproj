@@ -82,6 +82,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AddinFramework\AddinFramework.csproj">
+      <Project>{b08ae89b-5e8d-46fd-a5d8-b3db4d33fb46}</Project>
+      <Name>AddinFramework</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Util\Util.csproj">
       <Project>{9376680e-9420-4fc1-8de8-4311fca18efc}</Project>
       <Name>Util</Name>

@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using System.Xml;
+using System.Xml.Linq;
 using EA;
 using hoTools.EaServices.Dlg;
 using hoTools.Utils;
@@ -24,16 +27,14 @@ using TaggedValue = hoTools.Utils.TaggedValue;
 // ReSharper disable RedundantArgumentDefaultValue
 // ReSharper disable ArgumentsStyleLiteral
 
-
-
 namespace hoTools.EaServices
 {
-    #region Definition of Service Attribute
-    // ReSharper disable once RedundantAttributeUsageProperty
-    [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = false) ]
 
-    
-    public class ServiceOperationAttribute : Attribute 
+    #region Definition of Service Attribute
+
+    // ReSha.rper disable once RedundantAttributeUsageProperty
+    [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = false)]
+    public class ServiceOperationAttribute : Attribute
     {
         /// <summary>
         /// Attribute to define services which might be called without parameters
@@ -60,12 +61,13 @@ namespace hoTools.EaServices
 
         public string Help { get; }
     }
+
     #endregion
 
-    public static class EaService 
+    public static class EaService
     {
-          const string EmbeddedElementTypes = "Port Parameter Pin"; 
-        
+        const string EmbeddedElementTypes = "Port Parameter Pin";
+
 
         // define menu constants
         public enum DisplayMode
@@ -75,6 +77,7 @@ namespace hoTools.EaServices
         }
 
         #region runQuickSearch
+
         //---------------------------------------------------------------------------------------------------------------
         // Search for Elements, Operation, Attributes, GUID
         public static void RunQuickSearch(Repository rep, string searchName, string searchString)
@@ -86,11 +89,14 @@ namespace hoTools.EaServices
             }
             catch (Exception)
             {
-                MessageBox.Show( $"Search name:'{searchName}' not available", @"Error run search, break!");
+                MessageBox.Show($"Search name:'{searchName}' not available", @"Error run search, break!");
             }
         }
+
         #endregion
+
         #region ddDiagramNote
+
         public static void AddDiagramNote(Repository rep)
         {
             ObjectType oType = rep.GetContextItemType();
@@ -99,7 +105,7 @@ namespace hoTools.EaServices
                 Diagram dia = rep.GetCurrentDiagram();
                 if (dia == null) return;
                 Package pkg = rep.GetPackageByID(dia.PackageID);
-                if (pkg.IsProtected || dia.IsLocked ) return;
+                if (pkg.IsProtected || dia.IsLocked) return;
 
                 // save diagram
                 rep.SaveDiagram(dia.DiagramID);
@@ -107,18 +113,21 @@ namespace hoTools.EaServices
                 Element elNote;
                 try
                 {
-                    elNote = (Element)pkg.Elements.AddNew("", "Note");
+                    elNote = (Element) pkg.Elements.AddNew("", "Note");
                     elNote.Update();
                     pkg.Update();
                 }
-                catch { return; }
+                catch
+                {
+                    return;
+                }
 
                 // add element to diagram
                 // "l=200;r=400;t=200;b=600;"
 
                 // get the position of the Element
 
-                int left = (dia.cx / 2) - 100;
+                int left = (dia.cx/2) - 100;
                 int right = left + 200;
                 int top = dia.cy - 150;
                 int bottom = top + 120;
@@ -126,7 +135,7 @@ namespace hoTools.EaServices
 
                 string position = "l=" + left + ";r=" + right + ";t=" + top + ";b=" + bottom + ";";
 
-                var diaObject = (DiagramObject)dia.DiagramObjects.AddNew(position, "");
+                var diaObject = (DiagramObject) dia.DiagramObjects.AddNew(position, "");
                 dia.Update();
                 diaObject.ElementID = elNote.ElementID;
                 diaObject.Update();
@@ -134,18 +143,22 @@ namespace hoTools.EaServices
 
                 Util.SetDiagramHasAttchaedLink(rep, elNote);
                 rep.ReloadDiagram(dia.DiagramID);
-
             }
         }
+
         #endregion
+
         #region changeAuthorPackage
 
-        static void ChangeAuthorPackage(Repository rep, Package pkg, string[] args) {
+        static void ChangeAuthorPackage(Repository rep, Package pkg, string[] args)
+        {
             Element el = rep.GetElementByGuid(pkg.PackageGUID);
             el.Author = args[0];
             el.Update();
         }
+
         #endregion
+
         #region changeAuthorElement
 
         static void ChangeAuthorElement(Repository rep, Element el, string[] args)
@@ -153,7 +166,9 @@ namespace hoTools.EaServices
             el.Author = args[0];
             el.Update();
         }
+
         #endregion
+
         #region changeAuthorDiagram
 
         private static void ChangeAuthorDiagram(Repository rep, Diagram dia, string[] args)
@@ -161,162 +176,280 @@ namespace hoTools.EaServices
             dia.Author = args[0];
             dia.Update();
         }
+
         #endregion
 
         #region LockSelected
+
         /// <summary>
         /// Lock selected item (Package, Diagram, Element)
         /// </summary>
         /// <param name="rep"></param>
-
-        [ServiceOperation("{0A731169-C983-404C-AB20-E4E478A38DB4}", "Lock selected item (Package, Diagram, Element)",
-            "Lock selected item (Package, Diagram or Element)", isTextRequired: false)]
+        [ServiceOperation("{0A731169-C983-404C-AB20-E4E478A38DB4}",
+            "Lock Item (Package, Diagram or Element)", // Description
+            "Lock Item (select Package, Diagram or Element). Security has to be enabled!", //Tooltip
+            isTextRequired: false)]
         // ReSharper disable once UnusedMember.Global
         // dynamical usage as configurable service by reflection
         public static void LockSelected(Repository rep)
         {
+            if (!IsSecurityEnabled(rep)) return;
             bool success;
             switch (rep.GetContextItemType())
             {
                 case ObjectType.otPackage:
-                    Package pkg = (Package)rep.GetContextObject();
+                    Package pkg = (Package) rep.GetContextObject();
                     pkg.ApplyUserLockRecursive(true, true, false);
                     success = pkg.ApplyUserLock();
                     break;
                 case ObjectType.otElement:
-                    Element el = (Element)rep.GetContextObject();
+                    Element el = (Element) rep.GetContextObject();
                     success = el.ApplyUserLock();
                     break;
                 case ObjectType.otDiagram:
-                    Diagram dia = (Diagram)rep.GetContextObject();
+                    Diagram dia = (Diagram) rep.GetContextObject();
                     success = dia.ApplyUserLock();
                     break;
                 default:
                     return;
             }
-            if (success ) return;
+            if (success) return;
             MessageBox.Show($"Error:'{rep.GetLastError()}'", @"Error lock item");
-
         }
+
         #endregion
+
+        #region UnLockAllForCurrentUser
+
+        /// <summary>
+        /// UnLock all for current user 
+        /// </summary>
+        /// <param name="rep"></param>
+        [ServiceOperation("{77275F9D-DDE6-4807-A1B1-5152416B3235}", "UnLock all locks for current user",
+            "UnLock all locks for current user!", isTextRequired: false)]
+        // ReSharper disable once UnusedMember.Global
+        // dynamical usage as configurable service by reflection
+        public static void UnLockAllForCurrentUser(Repository rep)
+        {
+            if (!IsSecurityEnabled(rep)) return;
+
+            string logInUserGuid = rep.GetCurrentLoginUser(true);
+
+            List<string> l = RememberVisibleLocks(rep, logInUserGuid);
+            string sql = $"delete from t_seclocks where UserId = '{logInUserGuid}' ";
+            try
+            {
+                rep.Execute(sql);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($"Error:'{rep.GetLastError()}'\n\n'{sql}\n\n{e}",
+                    @"Error deleting locks for current user!");
+            }
+            RemoveVisibleLocks(rep, l);
+        }
+
+        #endregion
+
+        static List<string> RememberVisibleLocks(EA.Repository rep, string userGuid)
+        {
+            List<string> lItems = new List<string>();
+            string sqlItems =
+                $"select EntityType as [TYPE], EntityID as [GUID] from t_seclocks where UserId = '{userGuid}'";
+            XDocument x = XDocument.Parse(rep.SQLQuery(sqlItems));
+
+            var fields = from row in x.Descendants("Row").Descendants()
+                where row.Name == "TYPE" ||
+                      row.Name == "GUID"
+                // 'Class','Action','Diagram', 
+                select row;
+            foreach (var field in fields)
+            {
+                lItems.Add(field.Value);
+            }
+            return lItems;
+        }
+
+        static void RemoveVisibleLocks(EA.Repository rep, List<string> fields)
+        {
+            int i = 0;
+            string type = "";
+            foreach (var field in fields)
+            {
+                switch (i%2)
+                {
+                    case 0:
+                        type = field;
+                        break;
+                    case 1:
+                        var guid = field;
+                        switch (type)
+                        {
+                            case "Element":
+                                rep.ShowInProjectView(rep.GetElementByGuid(guid));
+                                break;
+                            case "Diagram":
+                                rep.ShowInProjectView(rep.GetDiagramByGuid(guid));
+                                break;
+                        }
+                        break;
+                }
+                i = i + 1;
+            }
+        }
+
         #region UnLockSelected
+
         /// <summary>
         /// UnLock selected item (Package, Diagram, Element)
         /// </summary>
         /// <param name="rep"></param>
-
-        [ServiceOperation("{1ABCB8FB-56F9-412F-B6C1-9FE5E2B4824E}", "UnLock selected Package, Diagram or Element",
-            "UnLock selected Package, Diagram or Element", isTextRequired: false)]
+        [
+            ServiceOperation("{1ABCB8FB-56F9-412F-B6C1-9FE5E2B4824E}", "UnLock Package, Diagram or Element",
+                "UnLock selected Package, Diagram or Element. Security has to be enabled!", isTextRequired: false)]
         // ReSharper disable once UnusedMember.Global
         // dynamical usage as configurable service by reflection
         public static void UnLockSelected(Repository rep)
         {
+            if (!IsSecurityEnabled(rep)) return;
             bool success;
             switch (rep.GetContextItemType())
             {
                 case ObjectType.otPackage:
-                    Package pkg = (Package)rep.GetContextObject();
-                    pkg.ReleaseUserLockRecursive(true,true,false);
+                    Package pkg = (Package) rep.GetContextObject();
+                    pkg.ReleaseUserLockRecursive(true, true, false);
                     success = pkg.ReleaseUserLock();
                     break;
                 case ObjectType.otElement:
-                    Element el = (Element)rep.GetContextObject();
+                    Element el = (Element) rep.GetContextObject();
                     success = el.ReleaseUserLock();
                     break;
                 case ObjectType.otDiagram:
-                    Diagram dia = (Diagram)rep.GetContextObject();
+                    Diagram dia = (Diagram) rep.GetContextObject();
                     success = dia.ReleaseUserLock();
                     break;
                 default:
                     return;
             }
-            if (success ) return;
+            if (success) return;
             MessageBox.Show($"Error:'{rep.GetLastError()}'", @"Error unlock item");
-
         }
+
         #endregion
+
         //--------------------------------------------------------------------------------------------
+
         #region UnLockPackageRecursive
+
         /// <summary>
         /// UnLock Package recursive (Package, Diagram or Element selected)
         /// </summary>
         /// <param name="rep"></param>
-
-        [ServiceOperation("{42788062-3578-49CC-BBD0-87032B764B3D}", "UnLock Package recursive)",
-            "UnLock Package recursive (select Package, Element or Diagram)", isTextRequired: false)]
+        [ServiceOperation("{42788062-3578-49CC-BBD0-87032B764B3D}", "UnLock Package recursive",
+            "UnLock Package recursive (select Package, Element or Diagram). Security has to be enabled!",
+            isTextRequired: false)]
         // ReSharper disable once UnusedMember.Global
         // dynamical usage as configurable service by reflection
         public static void UnLockPackageRecursive(Repository rep)
         {
-             Package pkg = GetContextPackage(rep);
+            if (!IsSecurityEnabled(rep)) return;
+            Package pkg = GetContextPackage(rep);
             if (pkg == null) return;
-            if (! pkg.ReleaseUserLockRecursive(true, true, true)) 
+            if (!pkg.ReleaseUserLockRecursive(true, true, true))
                 MessageBox.Show($"Error:'{rep.GetLastError()}'", @"Error Unlock Package recursive");
-     
-
         }
+
         #endregion
+
         #region LockPackageRecursive
+
         /// <summary>
         /// UnLock Package recursive (Package, Diagram or Element selected)
         /// </summary>
         /// <param name="rep"></param>
-
         [ServiceOperation("{F1B97839-0E68-4019-95C2-8F745CCDA484}", "Lock Package recursive",
-            "Lock Package recursive (select Package, Element or Diagram)", isTextRequired: false)]
+            "Lock Package recursive (select Package, Element or Diagram). Security has to be enabled!",
+            isTextRequired: false)]
         // ReSharper disable once UnusedMember.Global
         // dynamical usage as configurable service by reflection
         public static void LockPackageRecursive(Repository rep)
         {
+            if (!IsSecurityEnabled(rep)) return;
             Package pkg = GetContextPackage(rep);
             if (pkg == null) return;
-            if (! pkg.ApplyUserLockRecursive(true, true, true)) 
+            bool success = pkg.ApplyUserLockRecursive(true, true, true);
+            if (!success)
                 MessageBox.Show($"Error:'{rep.GetLastError()}'", @"Error lock Package recursive");
-     
-
         }
+
         #endregion
+
         //-------------------------------------------------------------------------------------------
+
         #region UnLockPackage
+
         /// <summary>
         /// UnLock Package (Package, Diagram, Element may be selected)
         /// </summary>
         /// <param name="rep"></param>
-
-        [ServiceOperation("{06FD450C-9B18-453A-821F-955CFFE299DA}", "UnLock Package)",
-            "UnLock Package (select Package, Element or Diagram)", isTextRequired: false)]
+        [ServiceOperation("{06FD450C-9B18-453A-821F-955CFFE299DA}", "UnLock Package",
+            "UnLock Package (select Package, Element or Diagram). Security has to be enabled!", isTextRequired: false)]
         // ReSharper disable once UnusedMember.Global
         // dynamical usage as configurable service by reflection
         public static void UnLockPackage(Repository rep)
         {
+            if (!IsSecurityEnabled(rep)) return;
             Package pkg = GetContextPackage(rep);
             if (pkg == null) return;
+
+            pkg.ReleaseUserLock();
             if (!pkg.ReleaseUserLockRecursive(true, true, false))
                 MessageBox.Show($"Error:'{rep.GetLastError()}'", @"Error Unlock Package");
-
-
         }
+
+        /// <summary>
+        /// Return false and outputs an error message if no security is enabled
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <returns></returns>
+        private static bool IsSecurityEnabled(Repository rep)
+        {
+            if (rep.IsSecurityEnabled == false)
+            {
+                MessageBox.Show(@"Can't perform Lock/Unlock because no Security is enabled!",
+                    @"No security enabled for current Repository");
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
         #endregion
+
         #region LockPackage
+
         /// <summary>
         /// Lock Package (Package, Diagram, Element may be selected)
         /// </summary>
         /// <param name="rep"></param>
-
         [ServiceOperation("{BA09245C-21E3-4A3C-A9AF-5DF6ED703201}", "Lock Package",
-            "Lock Package (select Package, Element, Diagram)", isTextRequired: false)]
+            "Lock Package (select Package, Element, Diagram). Security has to be enabled!", isTextRequired: false)]
         // ReSharper disable once UnusedMember.Global
         // dynamical usage as configurable service by reflection
         public static void LockPackage(Repository rep)
         {
+            if (!IsSecurityEnabled(rep)) return;
             Package pkg = GetContextPackage(rep);
             if (pkg == null) return;
+            pkg.ApplyUserLock();
             if (!pkg.ApplyUserLockRecursive(true, true, false))
                 MessageBox.Show($"Error:'{rep.GetLastError()}'", @"Error lock package");
-
-
         }
+
         #endregion
+
         //--------------------------------------------------------------------------------
         /// <summary>
         /// Get context Package from Package, Element, Diagram
@@ -328,14 +461,14 @@ namespace hoTools.EaServices
             switch (rep.GetContextItemType())
             {
                 case ObjectType.otPackage:
-                    return (Package)rep.GetContextObject();
+                    return (Package) rep.GetContextObject();
 
                 case ObjectType.otElement:
-                    Element el = (Element)rep.GetContextObject();
-                    return  rep.GetPackageByID(el.PackageID);
+                    Element el = (Element) rep.GetContextObject();
+                    return rep.GetPackageByID(el.PackageID);
 
                 case ObjectType.otDiagram:
-                    Diagram dia = (Diagram)rep.GetContextObject();
+                    Diagram dia = (Diagram) rep.GetContextObject();
                     return rep.GetPackageByID(dia.PackageID);
 
                 default:
@@ -344,7 +477,9 @@ namespace hoTools.EaServices
         }
 
         #region change User Recursive
-        [ServiceOperation("{F0038D4B-CCAA-4F05-9401-AAAADF431ECB}", "Change user of package/element recursive", "Select package or element", isTextRequired: false)]
+
+        [ServiceOperation("{F0038D4B-CCAA-4F05-9401-AAAADF431ECB}", "Change user of package/element recursive",
+            "Select package or element", isTextRequired: false)]
         public static void ChangeUserRecursive(Repository rep)
         {
             // get the user
@@ -359,16 +494,16 @@ namespace hoTools.EaServices
             switch (oType)
             {
                 case ObjectType.otPackage:
-                    pkg = (Package)rep.GetContextObject();
+                    pkg = (Package) rep.GetContextObject();
                     el = rep.GetElementByGuid(pkg.PackageGUID);
                     oldAuthor = el.Author;
                     break;
                 case ObjectType.otElement:
-                    el = (Element)rep.GetContextObject();
+                    el = (Element) rep.GetContextObject();
                     oldAuthor = el.Author;
                     break;
                 case ObjectType.otDiagram:
-                    dia = (Diagram)rep.GetContextObject();
+                    dia = (Diagram) rep.GetContextObject();
                     oldAuthor = dia.Author;
                     break;
                 default:
@@ -380,35 +515,37 @@ namespace hoTools.EaServices
             s[0] = dlg.User;
             if (s[0] == "")
             {
-                MessageBox.Show($"Author:'{s[0] }'", @"no or invalid user");
+                MessageBox.Show($"Author:'{s[0]}'", @"no or invalid user");
                 return;
             }
             switch (oType)
             {
                 case ObjectType.otPackage:
-                    RecursivePackages.DoRecursivePkg(rep, pkg, ChangeAuthorPackage, ChangeAuthorElement, ChangeAuthorDiagram, s);
+                    RecursivePackages.DoRecursivePkg(rep, pkg, ChangeAuthorPackage, ChangeAuthorElement,
+                        ChangeAuthorDiagram, s);
                     MessageBox.Show($"New author:'{s[0]}'", @"Author changed for packages/elements (recursive)");
                     break;
                 case ObjectType.otElement:
                     RecursivePackages.DoRecursiveEl(rep, el, ChangeAuthorElement, ChangeAuthorDiagram, s);
-                    MessageBox.Show($"New author:'{ s[0]}'", @"Author changed for elements (recursive)");
+                    MessageBox.Show($"New author:'{s[0]}'", @"Author changed for elements (recursive)");
                     break;
                 case ObjectType.otDiagram:
                     ChangeAuthorDiagram(rep, dia, s);
-                    MessageBox.Show($"New author:'{ s[0] }'", @"Author changed for diagram");
+                    MessageBox.Show($"New author:'{s[0]}'", @"Author changed for diagram");
                     break;
                 default:
                     return;
             }
-
-
         }
+
         #endregion
+
         #region change User
-        [ServiceOperation("{4161D769-825F-494A-9389-962CC1C16E4F}", "Change Author of package/element", "Select package or element", isTextRequired: false)]
+
+        [ServiceOperation("{4161D769-825F-494A-9389-962CC1C16E4F}", "Change Author of package/element",
+            "Select package or element", isTextRequired: false)]
         public static void ChangeAuthor(Repository rep)
         {
-
             string[] args = {""};
             string oldAuthor;
             Element el = null;
@@ -420,16 +557,16 @@ namespace hoTools.EaServices
             switch (oType)
             {
                 case ObjectType.otPackage:
-                    pkg = (Package)rep.GetContextObject();
+                    pkg = (Package) rep.GetContextObject();
                     el = rep.GetElementByGuid(pkg.PackageGUID);
                     oldAuthor = el.Author;
                     break;
                 case ObjectType.otElement:
-                    el = (Element)rep.GetContextObject();
+                    el = (Element) rep.GetContextObject();
                     oldAuthor = el.Author;
                     break;
                 case ObjectType.otDiagram:
-                    dia = (Diagram)rep.GetContextObject();
+                    dia = (Diagram) rep.GetContextObject();
                     oldAuthor = dia.Author;
                     break;
                 default:
@@ -441,44 +578,46 @@ namespace hoTools.EaServices
             args[0] = dlg.User;
             if (args[0] == "")
             {
-                MessageBox.Show($"Author:'{ args[0] }'", @"no or invalid user");
+                MessageBox.Show($"Author:'{args[0]}'", @"no or invalid user");
                 return;
             }
             switch (oType)
             {
                 case ObjectType.otPackage:
-                    ChangeAuthorPackage(rep,pkg, args);
-                    MessageBox.Show($"New author:'{ args[0] }'", @"Author changed for package");
+                    ChangeAuthorPackage(rep, pkg, args);
+                    MessageBox.Show($"New author:'{args[0]}'", @"Author changed for package");
                     break;
                 case ObjectType.otElement:
                     ChangeAuthorElement(rep, el, args);
-                    MessageBox.Show($"New author:'{ args[0] }'", @"Author changed for element");
+                    MessageBox.Show($"New author:'{args[0]}'", @"Author changed for element");
                     break;
                 case ObjectType.otDiagram:
                     ChangeAuthorDiagram(rep, dia, args);
-                    MessageBox.Show($"New author:'{ args[0] }'", @"Author changed for element");
+                    MessageBox.Show($"New author:'{args[0]}'", @"Author changed for element");
                     break;
                 default:
                     return;
             }
-
-
         }
-#endregion
+
+        #endregion
+
         #region ShowFolder
+
         // Show folder with Explorer or Total Commander for:
         // - Package: If Version Controlled package
         // - File: If Source Code implementation exists
         // See also: Global Settings
-        [ServiceOperation("{C007C59A-FABA-4280-9B66-5AD10ACB4B13}", "Show folder of *.xml, *.h,*.c", "Select VC controlled package or element with file path (Source Code Generation)", isTextRequired: false)]
-        public static void ShowFolder(Repository rep, bool isTotalCommander=false)
+        [ServiceOperation("{C007C59A-FABA-4280-9B66-5AD10ACB4B13}", "Show folder of *.xml, *.h,*.c",
+            "Select VC controlled package or element with file path (Source Code Generation)", isTextRequired: false)]
+        public static void ShowFolder(Repository rep, bool isTotalCommander = false)
         {
             string path;
             ObjectType oType = rep.GetContextItemType();
             switch (oType)
             {
                 case ObjectType.otPackage:
-                    var pkg = (Package)rep.GetContextObject();
+                    var pkg = (Package) rep.GetContextObject();
                     path = Util.GetVccFilePath(rep, pkg);
                     // remove filename
                     path = Regex.Replace(path, @"[a-zA-Z0-9\s_:.]*\.xml", "");
@@ -490,7 +629,7 @@ namespace hoTools.EaServices
                     break;
 
                 case ObjectType.otElement:
-                    var el = (Element)rep.GetContextObject();
+                    var el = (Element) rep.GetContextObject();
                     path = Util.GetGenFilePath(rep, el);
                     // remove filename
                     path = Regex.Replace(path, @"[a-zA-Z0-9\s_:.]*\.[a-zA-Z0-9]{0,4}$", "");
@@ -503,46 +642,52 @@ namespace hoTools.EaServices
                     break;
             }
         }
+
         #endregion
 
         #region CreateActivityForOperation
-        [ServiceOperation("{17D09C06-8FAE-4D76-B808-5EC2362B1953}", "Create Activity for Operation, Class/Interface", "Select Package, Class/Interface or operation", isTextRequired: false)]
-        public static void CreateActivityForOperation(Repository rep) {
+
+        [ServiceOperation("{17D09C06-8FAE-4D76-B808-5EC2362B1953}", "Create Activity for Operation, Class/Interface",
+            "Select Package, Class/Interface or operation", isTextRequired: false)]
+        public static void CreateActivityForOperation(Repository rep)
+        {
             ObjectType oType = rep.GetContextItemType();
-            switch (oType) {
-            case ObjectType.otMethod:
-                var m = (Method)rep.GetContextObject();
-                
-                // Create Activity at the end
-                Element el = rep.GetElementByID(m.ParentID);
-                Package pkg = rep.GetPackageByID(el.PackageID);
-                int pos = pkg.Packages.Count + 1;
-                ActivityPar.CreateActivityForOperation(rep, m, pos);
-                rep.Models.Refresh();
-                rep.RefreshModelView(0);
-                rep.ShowInProjectView(m);
-                break;
+            switch (oType)
+            {
+                case ObjectType.otMethod:
+                    var m = (Method) rep.GetContextObject();
 
-            case ObjectType.otElement:
-                el = (Element)rep.GetContextObject();
-                if (el.Locked) return;
+                    // Create Activity at the end
+                    Element el = rep.GetElementByID(m.ParentID);
+                    Package pkg = rep.GetPackageByID(el.PackageID);
+                    int pos = pkg.Packages.Count + 1;
+                    ActivityPar.CreateActivityForOperation(rep, m, pos);
+                    rep.Models.Refresh();
+                    rep.RefreshModelView(0);
+                    rep.ShowInProjectView(m);
+                    break;
 
-                CreateActivityForOperationsInElement(rep, el);
-                rep.Models.Refresh();
-                rep.RefreshModelView(0);
-                rep.ShowInProjectView(el);
-                break;
+                case ObjectType.otElement:
+                    el = (Element) rep.GetContextObject();
+                    if (el.Locked) return;
 
-            case ObjectType.otPackage:
-                pkg = (Package)rep.GetContextObject();
-                CreateActivityForOperationsInPackage(rep, pkg);
-                // update sort order of packages
-                rep.Models.Refresh();
-                rep.RefreshModelView(0);
-                rep.ShowInProjectView(pkg);
-                break;
+                    CreateActivityForOperationsInElement(rep, el);
+                    rep.Models.Refresh();
+                    rep.RefreshModelView(0);
+                    rep.ShowInProjectView(el);
+                    break;
+
+                case ObjectType.otPackage:
+                    pkg = (Package) rep.GetContextObject();
+                    CreateActivityForOperationsInPackage(rep, pkg);
+                    // update sort order of packages
+                    rep.Models.Refresh();
+                    rep.RefreshModelView(0);
+                    rep.ShowInProjectView(pkg);
+                    break;
             }
         }
+
         #endregion
 
         private static void CreateActivityForOperationsInElement(Repository rep, Element el)
@@ -555,9 +700,7 @@ namespace hoTools.EaServices
                 // Create Activity
                 ActivityPar.CreateActivityForOperation(rep, m1, treePos);
                 treePos = treePos + 1;
-
             }
-
         }
 
         private static void CreateActivityForOperationsInPackage(Repository rep, Package pkg)
@@ -565,14 +708,13 @@ namespace hoTools.EaServices
             foreach (Element el in pkg.Elements)
             {
                 CreateActivityForOperationsInElement(rep, el);
-
             }
             foreach (Package pkg1 in pkg.Packages)
             {
                 CreateActivityForOperationsInPackage(rep, pkg1);
             }
-            
         }
+
         static bool LocateTextOrFrame(Repository rep, Element el)
         {
             if (el.Type == "Text")
@@ -590,50 +732,56 @@ namespace hoTools.EaServices
                 Diagram dia = rep.GetDiagramByID(id);
                 rep.ShowInProjectView(dia);
                 return true;
-
             }
             return false;
         }
+
         #region showAllEmbeddedElementsGUI
-        [ServiceOperation("{678AD901-1D2F-4FB0-BAAD-AEB775EE18AC}", "Show all ports for Component", 
+
+        [ServiceOperation("{678AD901-1D2F-4FB0-BAAD-AEB775EE18AC}", "Show all ports for Component",
             "Select Class, Interface or Component", isTextRequired: false)]
         public static void ShowEmbeddedElementsGui(
-            Repository rep, 
-            string embeddedElementType="Port Pin Parameter", 
-            bool isOptimizePortLayout=false)
+            Repository rep,
+            string embeddedElementType = "Port Pin Parameter",
+            bool isOptimizePortLayout = false)
         {
             var dia = rep.GetCurrentDiagram();
             if (dia == null) return;
             rep.SaveDiagram(dia.DiagramID);
 
-            var sqlUtil = new UtilSql(rep); 
+            var sqlUtil = new UtilSql(rep);
             // over all selected elements
             foreach (DiagramObject diaObj in dia.SelectedObjects)
             {
                 var elSource = rep.GetElementByID(diaObj.ElementID);
-                if (! "Class Component Activity".Contains(elSource.Type)) continue; 
+                if (!"Class Component Activity".Contains(elSource.Type)) continue;
                 // find object on Diagram
                 var diaObjSource = Util.GetDiagramObjectById(rep, dia, elSource.ElementID);
                 //diaObjSource = dia.GetDiagramObjectByID(elSource.ElementID, "");
                 if (diaObjSource == null) return;
 
-                string[] portTypes = {"left","right"};
-                foreach (string portBoundTo in portTypes )
+                string[] portTypes = {"left", "right"};
+                foreach (string portBoundTo in portTypes)
                 {
                     // arrange sequence of ports
                     if (isOptimizePortLayout == false && portBoundTo == "left") continue;
                     int pos = 0;
                     List<int> lPorts;
-                    if (isOptimizePortLayout == false) { 
+                    if (isOptimizePortLayout == false)
+                    {
                         lPorts = sqlUtil.GetAndSortEmbeddedElements(elSource, "", "", "");
                     }
-                    else {
-                        if (portBoundTo == "left") lPorts = sqlUtil.GetAndSortEmbeddedElements(elSource, "Port", "'Server', 'Receiver' ", "DESC");
+                    else
+                    {
+                        if (portBoundTo == "left")
+                            lPorts = sqlUtil.GetAndSortEmbeddedElements(elSource, "Port", "'Server', 'Receiver' ",
+                                "DESC");
                         else lPorts = sqlUtil.GetAndSortEmbeddedElements(elSource, "Port", "'Client', 'Sender' ", "");
                     }
                     // over all sorted ports
-                    string oldStereotype = ""; 
-                    foreach (int i in lPorts) { 
+                    string oldStereotype = "";
+                    foreach (int i in lPorts)
+                    {
                         Element portEmbedded = rep.GetElementByID(i);
                         if (embeddedElementType == "" | embeddedElementType.Contains(portEmbedded.Type))
                         {
@@ -650,17 +798,18 @@ namespace hoTools.EaServices
                                     {
                                         if ("Receiver Server".Contains(portEmbedded.Stereotype)) continue;
                                     }
-
                                 }
                                 // Make a gap between different stereotypes
-                                if (pos == 0 && "Sender Receiver".Contains(portEmbedded.Stereotype)) oldStereotype = portEmbedded.Stereotype;
-                                if (pos > 0 && "Sender Receiver".Contains(oldStereotype) && oldStereotype != portEmbedded.Stereotype)
+                                if (pos == 0 && "Sender Receiver".Contains(portEmbedded.Stereotype))
+                                    oldStereotype = portEmbedded.Stereotype;
+                                if (pos > 0 && "Sender Receiver".Contains(oldStereotype) &&
+                                    oldStereotype != portEmbedded.Stereotype)
                                 {
                                     pos = pos + 1; // make a gap
                                     oldStereotype = portEmbedded.Stereotype;
-
                                 }
-                                Util.VisualizePortForDiagramobject(pos, dia, diaObjSource, portEmbedded, null, portBoundTo);
+                                Util.VisualizePortForDiagramobject(pos, dia, diaObjSource, portEmbedded, null,
+                                    portBoundTo);
                                 pos = pos + 1;
                             }
                             else
@@ -677,35 +826,36 @@ namespace hoTools.EaServices
                 }
             }
             rep.ReloadDiagram(dia.DiagramID);
-
-            
         }
+
         #endregion
+
         public static void NavigateComposite(Repository repository)
         {
             ObjectType oType = repository.GetContextItemType();
             // find composite element of diagram
             if (oType.Equals(ObjectType.otDiagram))
             {
-                var d = (Diagram)repository.GetContextObject();
+                var d = (Diagram) repository.GetContextObject();
                 string guid = Util.GetElementFromCompositeDiagram(repository, d.DiagramGUID);
                 if (guid != "")
                 {
                     repository.ShowInProjectView(repository.GetElementByGuid(guid));
                 }
-
             }
             // find composite diagram of element of element
             if (oType.Equals(ObjectType.otElement))
             {
-                var e = (Element)repository.GetContextObject();
+                var e = (Element) repository.GetContextObject();
                 // locate text or frame
                 if (LocateTextOrFrame(repository, e)) return;
 
                 repository.ShowInProjectView(e.CompositeDiagram);
             }
         }
+
         #region findUsage
+
         /// <summary>
         /// Find usage of selected item. The following searches are required
         /// - "Element usage"
@@ -714,47 +864,51 @@ namespace hoTools.EaServices
         /// - "Connector usage"
         /// </summary>
         /// <param name="rep"></param>
-        [ServiceOperation("{755DD068-94A2-4AD9-84EE-F3D1350BC9B7}", "Find usage of Element,Method, Attribute, Diagram, Connector ", "Select item", false)]
+        [ServiceOperation("{755DD068-94A2-4AD9-84EE-F3D1350BC9B7}",
+            "Find usage of Element,Method, Attribute, Diagram, Connector ", "Select item", false)]
         public static void FindUsage(Repository rep)
         {
             ObjectType oType = rep.GetContextItemType();
             if (oType.Equals(ObjectType.otElement))
             {
                 // locate text or frame
-                var el = (Element)rep.GetContextObject();
+                var el = (Element) rep.GetContextObject();
                 if (LocateTextOrFrame(rep, el)) return;
                 rep.RunModelSearch("Element usage", el.ElementGUID, "", "");
             }
             if (oType.Equals(ObjectType.otMethod))
             {
-                var method = (Method)rep.GetContextObject();
+                var method = (Method) rep.GetContextObject();
                 rep.RunModelSearch("Method usage", method.MethodGUID, "", "");
             }
             if (oType.Equals(ObjectType.otDiagram))
             {
-                var dia = (Diagram)rep.GetContextObject();
+                var dia = (Diagram) rep.GetContextObject();
                 rep.RunModelSearch("Diagram usage", dia.DiagramGUID, "", "");
             }
             if (oType.Equals(ObjectType.otConnector))
             {
-                var con = (Connector)rep.GetContextObject();
+                var con = (Connector) rep.GetContextObject();
                 rep.RunModelSearch("Connector is visible in Diagrams",
                     con.ConnectorID.ToString(), "", "");
             }
         }
+
         #endregion
+
         /// <summary>
         /// Show all specifications of selected Element. It shows all files in specified in properties.
         /// </summary>
         /// <param name="rep"></param>
-        [ServiceOperation("{899C9C5F-39B8-47E3-B253-7C5730F1AA7D}", "Show all specifications of selected element (all files defined in properties)", 
+        [ServiceOperation("{899C9C5F-39B8-47E3-B253-7C5730F1AA7D}",
+            "Show all specifications of selected element (all files defined in properties)",
             "Select item", isTextRequired: false)]
         public static void ShowSpecification(Repository rep)
         {
             ObjectType oType = rep.GetContextItemType();
             if (oType.Equals(ObjectType.otElement))
             {
-                var el = (Element)rep.GetContextObject();
+                var el = (Element) rep.GetContextObject();
                 //over all file
                 foreach (File f in el.Files)
                 {
@@ -765,60 +919,78 @@ namespace hoTools.EaServices
                 }
             }
         }
+
         #region LineStyle
+
         #region setLineStyleLV
-        [ServiceOperation("{5F5CB088-1DDD-4A00-B641-273CAC017AE5}", "Set line style LV(Lateral Vertical)", "Select Diagram, connector, nodes", isTextRequired: false)]
+
+        [ServiceOperation("{5F5CB088-1DDD-4A00-B641-273CAC017AE5}", "Set line style LV(Lateral Vertical)",
+            "Select Diagram, connector, nodes", isTextRequired: false)]
+
         #endregion
+
         // ReSharper disable once UnusedMember.Global
         // dynamical usage as configurable service by reflection
         public static void SetLineStyleLv(Repository rep)
         {
             SetLineStyle(rep, "LV");
         }
-         [ServiceOperation("{9F1E7448-3B3B-4058-83AB-CBA97F24B90B}", "Set line style LH(Lateral Horizontal)", "Select Diagram, connector, nodes", isTextRequired: false)]
+
+        [ServiceOperation("{9F1E7448-3B3B-4058-83AB-CBA97F24B90B}", "Set line style LH(Lateral Horizontal)",
+            "Select Diagram, connector, nodes", isTextRequired: false)]
         // ReSharper disable once UnusedMember.Global
         // dynamical usage as configurable service by reflection
         public static void SetLineStyleLh(Repository rep)
-         {
-             SetLineStyle(rep, "LH");
-         }
-         [ServiceOperation("{A8199FFF-A9BA-4875-9529-45B2801F0DB3}", "Set line style TV(Tree Vertical)", "Select Diagram, connector, nodes", isTextRequired: false)]
+        {
+            SetLineStyle(rep, "LH");
+        }
+
+        [ServiceOperation("{A8199FFF-A9BA-4875-9529-45B2801F0DB3}", "Set line style TV(Tree Vertical)",
+            "Select Diagram, connector, nodes", isTextRequired: false)]
         // ReSharper disable once UnusedMember.Global
         // dynamical usage as configurable service by reflection
         public static void SetLineStyleTv(Repository rep)
-         {
-             SetLineStyle(rep, "TV");
-         }
-         [ServiceOperation("{5E481745-C684-431D-BD02-AD22EE39C252}", "Set line style TH(Tree Horizontal)", "Select Diagram, connector, nodes", isTextRequired: false)]
+        {
+            SetLineStyle(rep, "TV");
+        }
+
+        [ServiceOperation("{5E481745-C684-431D-BD02-AD22EE39C252}", "Set line style TH(Tree Horizontal)",
+            "Select Diagram, connector, nodes", isTextRequired: false)]
         // ReSharper disable once UnusedMember.Global
         // dynamical usage as configurable service by reflection
         public static void SetLineStyleTh(Repository rep)
-         {
-             SetLineStyle(rep, "TH");
-         }
-         [ServiceOperation("{A8199FFF-A9BA-4875-9529-45B2801F0DB3}", "Set line style OS(Orthogonal Square)", "Select Diagram, connector, nodes", isTextRequired: false)]
+        {
+            SetLineStyle(rep, "TH");
+        }
+
+        [ServiceOperation("{A8199FFF-A9BA-4875-9529-45B2801F0DB3}", "Set line style OS(Orthogonal Square)",
+            "Select Diagram, connector, nodes", isTextRequired: false)]
         // ReSharper disable once UnusedMember.Global
         // dynamical usage as configurable service by reflection
         public static void SetLineStyleOs(Repository rep)
-         {
-             SetLineStyle(rep, "OS");
-         }
-         [ServiceOperation("{D7B75725-60B7-4C73-913F-164E6EE847D3}", "Set line style OR(Orthogonal Round)", "Select Diagram, connector, nodes", isTextRequired: false)]
-         // ReSharper disable once UnusedMember.Global
-         public static void SetLineStyleOr(Repository rep)
-         {
-             SetLineStyle(rep, "OR");
-         }
-         [ServiceOperation("{99F31FC7-8326-468B-B1D8-2542BBC8D4EB}", "Set line style B(Bezier)", "Select Diagram, connector, nodes", isTextRequired: false)]
-         // ReSharper disable once UnusedMember.Global
-         public static void SetLineStyleB(Repository rep)
-         {
-             SetLineStyle(rep, "B");
-         }
+        {
+            SetLineStyle(rep, "OS");
+        }
+
+        [ServiceOperation("{D7B75725-60B7-4C73-913F-164E6EE847D3}", "Set line style OR(Orthogonal Round)",
+            "Select Diagram, connector, nodes", isTextRequired: false)]
+        // ReSharper disable once UnusedMember.Global
+        public static void SetLineStyleOr(Repository rep)
+        {
+            SetLineStyle(rep, "OR");
+        }
+
+        [ServiceOperation("{99F31FC7-8326-468B-B1D8-2542BBC8D4EB}", "Set line style B(Bezier)",
+            "Select Diagram, connector, nodes", isTextRequired: false)]
+        // ReSharper disable once UnusedMember.Global
+        public static void SetLineStyleB(Repository rep)
+        {
+            SetLineStyle(rep, "B");
+        }
 
         public static void SetLineStyle(Repository repository, string lineStyle)
         {
-          Connector con = null;
+            Connector con = null;
             Collection objCol = null;
             ObjectType oType = repository.GetContextItemType();
             Diagram diaCurrent = repository.GetCurrentDiagram();
@@ -833,14 +1005,16 @@ namespace hoTools.EaServices
                 Util.SetLineStyleDiagram(repository, diaCurrent, lineStyle);
             }
             // all connections of diagram elements
-            if (con != null || objCol.Count >0  )
+            if (con != null || objCol.Count > 0)
             {
                 Util.SetLineStyleDiagramObjectsAndConnectors(repository, diaCurrent, lineStyle);
             }
-            
         }
+
         #endregion
+
         #region DisplayOperationForSelectedElement
+
         // display behavior or definition for selected element
         // enum displayMode: "Behavior" or "Method"
         public static void DisplayOperationForSelectedElement(Repository repository, DisplayMode showBehavior)
@@ -850,13 +1024,12 @@ namespace hoTools.EaServices
             if (oType.Equals(ObjectType.otMethod))
             {
                 // display behavior for method
-                Appl.DisplayBehaviorForOperation(repository, (Method)repository.GetContextObject());
-
+                Appl.DisplayBehaviorForOperation(repository, (Method) repository.GetContextObject());
             }
             if (oType.Equals(ObjectType.otDiagram))
             {
                 // find parent element
-                var dia = (Diagram)repository.GetContextObject();
+                var dia = (Diagram) repository.GetContextObject();
                 if (dia.ParentID > 0)
                 {
                     // find parent element
@@ -875,15 +1048,14 @@ namespace hoTools.EaServices
             // Connector / Message found
             if (oType.Equals(ObjectType.otConnector))
             {
-                var con = (Connector)repository.GetContextObject();
+                var con = (Connector) repository.GetContextObject();
                 SelectBehaviorFromConnector(repository, con, showBehavior);
-                
             }
 
             // Element
             if (oType.Equals(ObjectType.otElement))
             {
-                var el = (Element)repository.GetContextObject();
+                var el = (Element) repository.GetContextObject();
                 // locate text or frame
                 if (LocateTextOrFrame(repository, el)) return;
 
@@ -891,8 +1063,6 @@ namespace hoTools.EaServices
                 {
                     // Open Behavior for Activity
                     Util.OpenBehaviorForElement(repository, el);
-
-
                 }
                 if (el.Type.Equals("State"))
                 {
@@ -918,15 +1088,15 @@ namespace hoTools.EaServices
                             Util.OpenBehaviorForElement(repository, el);
                         }
                     }
-
                 }
                 if (showBehavior.Equals(DisplayMode.Method) & (
-                    el.Type.Equals("Activity") || el.Type.Equals("StateMachine") || el.Type.Equals("Interaction")) )
+                    el.Type.Equals("Activity") || el.Type.Equals("StateMachine") || el.Type.Equals("Interaction")))
                 {
                     LocateOperationFromBehavior(repository, el, showBehavior);
                 }
             }
         }
+
         #endregion
 
         /// <summary>
@@ -940,7 +1110,6 @@ namespace hoTools.EaServices
         {
             if (con.Type.Equals("StateFlow"))
             {
-
                 Method m = Util.GetOperationFromConnector(repository, con);
                 if (m != null)
                 {
@@ -952,10 +1121,7 @@ namespace hoTools.EaServices
                     {
                         repository.ShowInProjectView(m);
                     }
-
                 }
-
-
             }
 
             if (con.Type.Equals("Sequence"))
@@ -993,11 +1159,9 @@ namespace hoTools.EaServices
                                 {
                                     repository.ShowInProjectView(op);
                                 }
-
                             }
                         }
                     }
-
                 }
             }
         }
@@ -1034,6 +1198,7 @@ namespace hoTools.EaServices
                 }
             }
         }
+
         // ReSharper disable once UnusedMember.Local
         static void BehaviorForOperation(Repository repository, Method method)
         {
@@ -1043,7 +1208,9 @@ namespace hoTools.EaServices
                 // get object according to behavior
                 Element el = repository.GetElementByGuid(behavior);
                 // Activity
-                if (el == null) { }
+                if (el == null)
+                {
+                }
                 else
                 {
                     if (el.Type.Equals("Activity") || el.Type.Equals("Interaction") || el.Type.Equals("StateMachine"))
@@ -1053,14 +1220,17 @@ namespace hoTools.EaServices
                 }
             }
         }
+
         #region createDiagramObjectFromContext
+
         //----------------------------------------------------------------------------------------
         // type:      "Action", "Activity","Decision", "MergeNode","StateNode"
         // extension: "CallOperation" ,"101"=StateNode, Final, "no"= else/no Merge
         //             comp=yes:  Activity with composite Diagram
         //----------------------------------------------------------------------------------------
         private static DiagramObject CreateDiagramObjectFromContext(Repository rep, string name, string type,
-            string extension, int offsetHorizental = 0, int offsetVertical = 0, string guardString = "", Element srcEl=null)
+            string extension, int offsetHorizental = 0, int offsetVertical = 0, string guardString = "",
+            Element srcEl = null)
         {
             int widthPerCharacter = 60;
             // filter out linefeed, tab
@@ -1068,7 +1238,7 @@ namespace hoTools.EaServices
 
             if (name.Length > 255)
             {
-                MessageBox.Show($"{type}: '{ name }' has more than 255 characters.", @"Name is to long");
+                MessageBox.Show($"{type}: '{name}' has more than 255 characters.", @"Name is to long");
                 return null;
             }
             Element elSource;
@@ -1086,238 +1256,235 @@ namespace hoTools.EaServices
             // only one diagram object selected as source
             if (srcEl == null) elSource = Util.GetElementFromContextObject(rep);
             else elSource = srcEl;
-            if (elSource == null)  return null;
+            if (elSource == null) return null;
             var diaObjSource = Util.GetDiagramObjectById(rep, dia, elSource.ElementID);
             //diaObjSource = dia.GetDiagramObjectByID(elSource.ElementID, "");
 
             string noValifTypes = "Note, Constraint, Boundary, Text, UMLDiagram, DiagramFrame";
             if (noValifTypes.Contains(elSource.Type)) return null;
-           
+
 
             if (elSource.ParentID != 0)
             {
                 Util.GetDiagramObjectById(rep, dia, elSource.ParentID);
                 //diaObjParent = dia.GetDiagramObjectByID(elSource.ParentID, "");
             }
-                
-                try
-                {
-                    if (elSource.ParentID > 0 ) {
-                        elParent = rep.GetElementByID(elSource.ParentID);
-                        elTarget = (Element)elParent.Elements.AddNew(name, basicType);
-                        if (basicType == "StateNode") elTarget.Subtype = Convert.ToInt32(extension);
-                        elParent.Elements.Refresh();
-                       
-                    }
-                    else 
-                    {
-                        var pkg = rep.GetPackageByID(elSource.PackageID);
-                        elTarget = (Element)pkg.Elements.AddNew(name, basicType);
-                        if (basicType == "StateNode") elTarget.Subtype = Convert.ToInt32(extension);
-                        pkg.Elements.Refresh();
-                    }
-                    elTarget.ParentID = elSource.ParentID;
-                    elTarget.Update();
-                    if (basicType == "Activity" & extension.ToLower() == "comp=yes")
-                    {
-                    Diagram actDia = ActivityPar.CreateActivityCompositeDiagram(rep, elTarget);
-                        Util.SetActivityCompositeDiagram(rep, elTarget, actDia.DiagramID.ToString());
-                        //elTarget.
-                    }
 
+            try
+            {
+                if (elSource.ParentID > 0)
+                {
+                    elParent = rep.GetElementByID(elSource.ParentID);
+                    elTarget = (Element) elParent.Elements.AddNew(name, basicType);
+                    if (basicType == "StateNode") elTarget.Subtype = Convert.ToInt32(extension);
+                    elParent.Elements.Refresh();
                 }
-                catch { return null; }
-
-                int left = diaObjSource.left + offsetHorizental;
-                int right = diaObjSource.right + offsetHorizental;
-                int top = diaObjSource.top + offsetVertical;
-                int bottom = diaObjSource.bottom + offsetVertical;
-                int length;
-
-                if (basicType == "StateNode")
+                else
                 {
-                    left = left - 10 + (right - left) / 2;
-                    right = left + 20;
+                    var pkg = rep.GetPackageByID(elSource.PackageID);
+                    elTarget = (Element) pkg.Elements.AddNew(name, basicType);
+                    if (basicType == "StateNode") elTarget.Subtype = Convert.ToInt32(extension);
+                    pkg.Elements.Refresh();
+                }
+                elTarget.ParentID = elSource.ParentID;
+                elTarget.Update();
+                if (basicType == "Activity" & extension.ToLower() == "comp=yes")
+                {
+                    Diagram actDia = ActivityPar.CreateActivityCompositeDiagram(rep, elTarget);
+                    Util.SetActivityCompositeDiagram(rep, elTarget, actDia.DiagramID.ToString());
+                    //elTarget.
+                }
+            }
+            catch
+            {
+                return null;
+            }
+
+            int left = diaObjSource.left + offsetHorizental;
+            int right = diaObjSource.right + offsetHorizental;
+            int top = diaObjSource.top + offsetVertical;
+            int bottom = diaObjSource.bottom + offsetVertical;
+            int length;
+
+            if (basicType == "StateNode")
+            {
+                left = left - 10 + (right - left)/2;
+                right = left + 20;
+                top = bottom - 20;
+                bottom = top - 20;
+            }
+            if ((basicType == "Decision") | (basicType == "MergeNode"))
+            {
+                if (guardString == "no")
+                {
+                    if (elSource.Type == "Decision") left = left + (right - left) + 200;
+                    else left = left + (right - left) + 50;
+                    bottom = bottom - 5;
+                }
+                left = left - 15 + (right - left)/2;
+                right = left + 30;
+                top = bottom - 20;
+                bottom = top - 40;
+            }
+            if (basicType == "Action" | basicType == "Activity")
+            {
+                length = name.Length*widthPerCharacter/10;
+
+                if (extension.ToLower() == "comp=no")
+                {
+                    /* Activity ind diagram */
+                    if (length < 500) length = 500;
+                    left = left + ((right - left)/2) - (length/2);
+                    right = left + length;
+                    top = bottom - 20;
+                    bottom = top - 200;
+                    if (basicType == "Activity") bottom = top - 400;
+                }
+                else if (extension.ToLower() == "comp=yes")
+                {
+                    if (length < 220) length = 220;
+                    left = left + ((right - left)/2) - (length/2);
+                    right = left + length;
+                    top = bottom - 40;
+                    bottom = top - 40;
+                }
+                else
+                {
+                    if (length < 220) length = 220;
+                    left = left + ((right - left)/2) - (length/2);
+                    right = left + length;
                     top = bottom - 20;
                     bottom = top - 20;
                 }
-                if ((basicType == "Decision") | (basicType == "MergeNode"))
-                {
-                    if (guardString == "no")
-                    {
-                        if (elSource.Type == "Decision") left = left + (right -left) + 200;
-                        else left = left + (right -left) + 50;
-                        bottom = bottom - 5;
-                    }
-                    left = left - 15 + (right - left)/2;
-                    right = left + 30; 
-                    top = bottom - 20;
-                    bottom = top - 40;
-                }
-                if (basicType == "Action" | basicType == "Activity")
-                {
-                    length = name.Length * widthPerCharacter / 10;
-
-                    if (extension.ToLower() == "comp=no")
-                    { /* Activity ind diagram */
-                        if (length < 500) length = 500;
-                        left = left + ((right - left) / 2) - (length / 2);
-                        right = left + length;
-                        top = bottom - 20;
-                        bottom = top - 200;
-                        if (basicType == "Activity") bottom = top - 400;
-
-
-                    }
-                    else if (extension.ToLower() == "comp=yes")
-                    {
-                        if (length < 220) length = 220;
-                        left = left + ((right - left) / 2) - (length / 2);
-                        right = left + length;
-                        top = bottom - 40;
-                        bottom = top - 40;
-                    }
-                    else
-                    {
-
-                        if (length < 220) length = 220;
-                        left = left + ((right - left) / 2) - (length / 2);
-                        right = left + length;
-                        top = bottom - 20;
-                        bottom = top - 20;
-                    }
-
-                }
-                // limit values
-                if (left < 5) left = 5;
-                string position = "l=" + left + ";r=" + right + ";t=" + top + ";b=" + bottom + ";";
-                // end note
-                if ( elParent != null && elParent.Type == "Activity" && extension == "101")
-                {
+            }
+            // limit values
+            if (left < 5) left = 5;
+            string position = "l=" + left + ";r=" + right + ";t=" + top + ";b=" + bottom + ";";
+            // end note
+            if (elParent != null && elParent.Type == "Activity" && extension == "101")
+            {
                 DiagramObject diaObj = Util.GetDiagramObjectById(rep, dia, elParent.ElementID);
-                    //EA.DiagramObject diaObj = dia.GetDiagramObjectByID(elParent.ElementID,"");
-                    if (diaObj != null)
-                    {
-                        diaObj.bottom = bottom - 40;
-                        diaObj.Update();
-                    }
-                }
-
-
-                Util.AddSequenceNumber(rep, dia);
-                var diaObjTarget = (DiagramObject)dia.DiagramObjects.AddNew(position, "");
-                diaObjTarget.ElementID = elTarget.ElementID;
-                diaObjTarget.Sequence = 1;
-                diaObjTarget.Update();
-                Util.SetSequenceNumber(rep, dia, diaObjTarget, "1");
-
-                // position the label:
-                // LBL=CX=180:  length of label
-                // CY=13:       hight of label
-                // OX=26:       x-position of label (relative object)
-                // CY=13:       y-position of label (relative object)
-                if (basicType == "Decision" & name.Length > 0)
+                //EA.DiagramObject diaObj = dia.GetDiagramObjectByID(elParent.ElementID,"");
+                if (diaObj != null)
                 {
-                    if (name.Length > 25) length = 25 * widthPerCharacter / 10;
-                    else length = name.Length * widthPerCharacter / 10;
-                    // string s = "DUID=E2352ABC;LBL=CX=180:CY=13:OX=29:OY=-4:HDN=0:BLD=0:ITA=0:UND=0:CLR=-1:ALN=0:ALT=0:ROT=0;;"; 
-                    string s = "DUID=E2352ABC;LBL=CX=180:CY=13:OX=-"+ length + ":OY=-4:HDN=0:BLD=0:ITA=0:UND=0:CLR=-1:ALN=0:ALT=0:ROT=0;;"; 
-                    Util.SetDiagramObjectLabel(rep,
-                        diaObjTarget.ElementID, diaObjTarget.DiagramID, diaObjTarget.InstanceID, s);
+                    diaObj.bottom = bottom - 40;
+                    diaObj.Update();
                 }
+            }
+
+
+            Util.AddSequenceNumber(rep, dia);
+            var diaObjTarget = (DiagramObject) dia.DiagramObjects.AddNew(position, "");
+            diaObjTarget.ElementID = elTarget.ElementID;
+            diaObjTarget.Sequence = 1;
+            diaObjTarget.Update();
+            Util.SetSequenceNumber(rep, dia, diaObjTarget, "1");
+
+            // position the label:
+            // LBL=CX=180:  length of label
+            // CY=13:       hight of label
+            // OX=26:       x-position of label (relative object)
+            // CY=13:       y-position of label (relative object)
+            if (basicType == "Decision" & name.Length > 0)
+            {
+                if (name.Length > 25) length = 25*widthPerCharacter/10;
+                else length = name.Length*widthPerCharacter/10;
+                // string s = "DUID=E2352ABC;LBL=CX=180:CY=13:OX=29:OY=-4:HDN=0:BLD=0:ITA=0:UND=0:CLR=-1:ALN=0:ALT=0:ROT=0;;"; 
+                string s = "DUID=E2352ABC;LBL=CX=180:CY=13:OX=-" + length +
+                           ":OY=-4:HDN=0:BLD=0:ITA=0:UND=0:CLR=-1:ALN=0:ALT=0:ROT=0;;";
+                Util.SetDiagramObjectLabel(rep,
+                    diaObjTarget.ElementID, diaObjTarget.DiagramID, diaObjTarget.InstanceID, s);
+            }
 
             if (extension == "Comp=no")
-                { /* Activity ind diagram */
-                    // place an init
-                    int initLeft = left + ((right - left) / 2) - 10;
-                    int initRight = initLeft + 20;
-                    int initTop = top - 25;
-                    int initBottom = initTop - 20;
-                    string initPosition = "l=" + initLeft + ";r=" + initRight + ";t=" + initTop + ";b=" + initBottom + ";";
-                    ActivityPar.CreateInitFinalNode(rep, dia,
-                        elTarget, 100, initPosition);
-                    
-                    
-                    
-                }
+            {
+                /* Activity ind diagram */
+                // place an init
+                int initLeft = left + ((right - left)/2) - 10;
+                int initRight = initLeft + 20;
+                int initTop = top - 25;
+                int initBottom = initTop - 20;
+                string initPosition = "l=" + initLeft + ";r=" + initRight + ";t=" + initTop + ";b=" + initBottom + ";";
+                ActivityPar.CreateInitFinalNode(rep, dia,
+                    elTarget, 100, initPosition);
+            }
 
-                // draw a Control Flow
-                var con = (Connector)elSource.Connectors.AddNew("", "ControlFlow");
-                con.SupplierID = elTarget.ElementID;
-                con.Update();
-                elSource.Connectors.Refresh();
-                // set line style LV
-                foreach (DiagramLink link in dia.DiagramLinks)
+            // draw a Control Flow
+            var con = (Connector) elSource.Connectors.AddNew("", "ControlFlow");
+            con.SupplierID = elTarget.ElementID;
+            con.Update();
+            elSource.Connectors.Refresh();
+            // set line style LV
+            foreach (DiagramLink link in dia.DiagramLinks)
+            {
+                if (link.ConnectorID == con.ConnectorID)
                 {
-                    if (link.ConnectorID == con.ConnectorID)
+                    if (guardString != "no")
                     {
-                        if (guardString != "no")
-                        {
-                            link.Geometry = "EDGE=3;$LLB=;LLT=;LMT=;LMB=CX=21:CY=13:OX=-20:OY=-19:HDN=0:BLD=0:ITA=0:UND=0:CLR=-1:ALN=0:DIR=0:ROT=0;LRT=;LRB=;IRHS=;ILHS=;";
-                        }
-                        // in case of switch case line style = LH
-                        string style = "LV";
-                        if ((elSource.Type == "Action" | elSource.Type == "Activity") & guardString == "no") style = "LH";
-                        if (Regex.IsMatch(elSource.Name, @"switch[\s]*\(")) style = "OS";
-                        Util.SetLineStyleForDiagramLink(style, link);
-                        
-                        break;
+                        link.Geometry =
+                            "EDGE=3;$LLB=;LLT=;LMT=;LMB=CX=21:CY=13:OX=-20:OY=-19:HDN=0:BLD=0:ITA=0:UND=0:CLR=-1:ALN=0:DIR=0:ROT=0;LRT=;LRB=;IRHS=;ILHS=;";
                     }
-                }
-             
+                    // in case of switch case line style = LH
+                    string style = "LV";
+                    if ((elSource.Type == "Action" | elSource.Type == "Activity") & guardString == "no") style = "LH";
+                    if (Regex.IsMatch(elSource.Name, @"switch[\s]*\(")) style = "OS";
+                    Util.SetLineStyleForDiagramLink(style, link);
 
-                // set Guard
-                if (guardString != "") {
-                    if (guardString == "no" && elSource.Type != "Decision")
-                    {
-                       // mo GUARD
-                    }
-                    else
-                    {
-                        // GUARD
-                        Util.SetConnectorGuard(rep, con.ConnectorID, guardString);
-                    }
+                    break;
                 }
-                else if (elSource.Type.Equals("Decision") & !elSource.Name.Trim().Equals(""))
+            }
+
+
+            // set Guard
+            if (guardString != "")
+            {
+                if (guardString == "no" && elSource.Type != "Decision")
                 {
-                    if (guardString == "no")
-                    {
-                        Util.SetConnectorGuard(rep, con.ConnectorID, "no");
-                    }
-                    else
-                    {
-                        Util.SetConnectorGuard(rep, con.ConnectorID, "yes");
-                    }
+                    // mo GUARD
                 }
-
-                // handle subtypes of action
-                if (type == "CallOperation")
+                else
                 {
+                    // GUARD
+                    Util.SetConnectorGuard(rep, con.ConnectorID, guardString);
+                }
+            }
+            else if (elSource.Type.Equals("Decision") & !elSource.Name.Trim().Equals(""))
+            {
+                if (guardString == "no")
+                {
+                    Util.SetConnectorGuard(rep, con.ConnectorID, "no");
+                }
+                else
+                {
+                    Util.SetConnectorGuard(rep, con.ConnectorID, "yes");
+                }
+            }
 
+            // handle subtypes of action
+            if (type == "CallOperation")
+            {
                 Method method = CallOperationAction.GetMethodFromMethodName(rep, extension);
-                    if (method != null)
-                    {
-                        CallOperationAction.CreateCallAction(rep, elTarget, method);
-
-                    }
-                    
+                if (method != null)
+                {
+                    CallOperationAction.CreateCallAction(rep, elTarget, method);
                 }
-                
-                rep.ReloadDiagram(dia.DiagramID);
+            }
+
+            rep.ReloadDiagram(dia.DiagramID);
 
             // set selected object
-                dia.SelectedObjects.AddNew(diaObjTarget.ElementID.ToString(), diaObjTarget.ObjectType.ToString());
-                dia.SelectedObjects.Refresh();
+            dia.SelectedObjects.AddNew(diaObjTarget.ElementID.ToString(), diaObjTarget.ObjectType.ToString());
+            dia.SelectedObjects.Refresh();
             return diaObjTarget;
-                
-            
         }
+
         #endregion
+
         #region insertInterface
+
         // ReSharper disable once UnusedMember.Local
         static void InsertInterface(Repository rep, Diagram dia, string text)
         {
-
             bool isComponent = false;
             Package pkg = rep.GetPackageByID(dia.PackageID);
             int pos = 0;
@@ -1329,11 +1496,11 @@ namespace hoTools.EaServices
             DiagramObject objSelected = null;
             if (!(dia == null && dia.SelectedObjects.Count > 0))
             {
-                objSelected = (DiagramObject)dia.SelectedObjects.GetAt(0);
+                objSelected = (DiagramObject) dia.SelectedObjects.GetAt(0);
             }
 
             rep.SaveDiagram(dia.DiagramID);
-            var diaObjSource = (DiagramObject)dia.SelectedObjects.GetAt(0);
+            var diaObjSource = (DiagramObject) dia.SelectedObjects.GetAt(0);
             var elSource = rep.GetElementByID(diaObjSource.ElementID);
             isComponent |= elSource.Type == "Component";
             // remember selected object
@@ -1341,20 +1508,18 @@ namespace hoTools.EaServices
             List<Element> ifList = GetInterfacesFromText(rep, pkg, text);
             foreach (Element elTarget in ifList)
             {
-                if (elSource.Locked )
+                if (elSource.Locked)
                 {
-                    MessageBox.Show($"Source '{ elSource.Name}' is locked", @"Element locked");
+                    MessageBox.Show($"Source '{elSource.Name}' is locked", @"Element locked");
                     continue;
                 }
                 if (isComponent)
                 {
                     AddPortToComponent(elSource, elTarget);
-                    
                 }
                 else
                 {
                     AddInterfaceToElement(rep, pos, elSource, elTarget, dia, diaObjSource);
-
                 }
                 pos = pos + 1;
             }
@@ -1371,14 +1536,16 @@ namespace hoTools.EaServices
             {
                 dia.SelectedObjects.AddNew(elSource.ElementID.ToString(), elSource.ObjectType.ToString());
                 dia.SelectedObjects.Refresh();
-            }	
+            }
             rep.ReloadDiagram(dia.DiagramID);
             dia.SelectedObjects.AddNew(elSource.ElementID.ToString(), elSource.ObjectType.ToString());
             dia.SelectedObjects.Refresh();
-
         }
+
         #endregion
-        static void AddInterfaceToElement(Repository rep, int pos, Element elSource, Element elTarget, Diagram dia, DiagramObject diaObjSource)
+
+        static void AddInterfaceToElement(Repository rep, int pos, Element elSource, Element elTarget, Diagram dia,
+            DiagramObject diaObjSource)
         {
             // check if interface already exists on diagram
 
@@ -1386,29 +1553,27 @@ namespace hoTools.EaServices
             //diaObjTarget = dia.GetDiagramObjectByID(elTarget.ElementID, "");
             if (diaObjTarget == null)
             {
-
                 int length = 250;
                 //if (elTarget.Type != "Interface") length = 250;
                 // calculate target position
                 // int left = diaObjSource.right - 75;
-                int left = diaObjSource.right ;
+                int left = diaObjSource.right;
                 int right = left + length;
                 int top = diaObjSource.bottom - 25;
 
-                top = top - 20 - pos * 70;
+                top = top - 20 - pos*70;
                 var bottom = top - 50;
                 string position = "l=" + left + ";r=" + right + ";t=" + top + ";b=" + bottom + ";";
 
 
-
-
                 // create target diagram object
-                diaObjTarget = (DiagramObject)dia.DiagramObjects.AddNew(position, "");
+                diaObjTarget = (DiagramObject) dia.DiagramObjects.AddNew(position, "");
 
                 diaObjTarget.ElementID = elTarget.ElementID;
                 diaObjTarget.Sequence = 1;
                 // suppress attributes/operations
-                diaObjTarget.Style = "DUID=1263D775;AttPro=0;AttPri=0;AttPub=0;AttPkg=0;AttCustom=0;OpCustom=0;PType=0;RzO=1;OpPro=0;OpPri=0;OpPub=0;OpPkg=0;";
+                diaObjTarget.Style =
+                    "DUID=1263D775;AttPro=0;AttPri=0;AttPub=0;AttPkg=0;AttCustom=0;OpCustom=0;PType=0;RzO=1;OpPro=0;OpPri=0;OpPub=0;OpPkg=0;";
                 diaObjTarget.Update();
             }
             // connect source to target by Usage
@@ -1416,19 +1581,21 @@ namespace hoTools.EaServices
             // make a connector/ or link if notes
             // check if connector already exists
             Connector con;
-            foreach (Connector c in elSource.Connectors) {
+            foreach (Connector c in elSource.Connectors)
+            {
                 if (c.SupplierID == elTarget.ElementID &
-                    ( c.Type == "Usage"  | c.Stereotype == "use" |
-                      c.Type == "Realisation")                            ) return;
-                    
+                    (c.Type == "Usage" | c.Stereotype == "use" |
+                     c.Type == "Realisation")) return;
             }
 
 
-            if (elTarget.Type.Equals("Interface") )
+            if (elTarget.Type.Equals("Interface"))
             {
-                 con = (Connector)elSource.Connectors.AddNew("", "Usage");
-            } else {
-                con = (Connector)elSource.Connectors.AddNew("", "NoteLink");
+                con = (Connector) elSource.Connectors.AddNew("", "Usage");
+            }
+            else
+            {
+                con = (Connector) elSource.Connectors.AddNew("", "NoteLink");
             }
             con.SupplierID = elTarget.ElementID;
             try
@@ -1452,7 +1619,7 @@ namespace hoTools.EaServices
                 MessageBox.Show(e.ToString(), $"Error create connector between '{elSource.Name}  and '{elTarget.Name}' ");
             }
         }
-        
+
         static void AddPortToComponent(Element elSource, Element elInterface)
         {
             if (elInterface.Type != "Interface") return;
@@ -1463,19 +1630,18 @@ namespace hoTools.EaServices
                 if (p.Name == elInterface.Name) return;
             }
             // create a port
-            var port = (Element)elSource.EmbeddedElements.AddNew(elInterface.Name, "Port");
+            var port = (Element) elSource.EmbeddedElements.AddNew(elInterface.Name, "Port");
             elSource.EmbeddedElements.Refresh();
             // add interface
-            var interf = (Element)port.EmbeddedElements.AddNew(elInterface.Name, "RequiredInterface");
+            var interf = (Element) port.EmbeddedElements.AddNew(elInterface.Name, "RequiredInterface");
             // set classifier
             interf.ClassfierID = elInterface.ElementID;
             interf.Update();
+        }
 
 
-          }
-
-               
-        private static List<Element> GetInterfacesFromText(Repository rep, Package pkg, string s, bool createWarningNote = true)
+        private static List<Element> GetInterfacesFromText(Repository rep, Package pkg, string s,
+            bool createWarningNote = true)
         {
             var elList = new List<Element>();
             s = DeleteComment(s);
@@ -1491,19 +1657,16 @@ namespace hoTools.EaServices
 
 
                 Element el = CallOperationAction.GetElementFromName(rep, includeName, "Interface");
-                if (el == null && createWarningNote )
+                if (el == null && createWarningNote)
                 {
                     // create a note
-                    el = (Element)pkg.Elements.AddNew("", "Note");
+                    el = (Element) pkg.Elements.AddNew("", "Note");
                     el.Notes = "Interface '" + includeName + "' not available!";
                     el.Update();
-
                 }
                 elList.Add(el);
                 matchPath = matchPath.NextMatch();
-
             }
-
 
 
             return elList;
@@ -1513,7 +1676,6 @@ namespace hoTools.EaServices
         // ReSharper disable once UnusedMember.Global
         public static void InsertInActivtyDiagram(Repository rep, string text)
         {
-
             // remember selected object
             Diagram dia = rep.GetCurrentDiagram();
             if (dia == null) return;
@@ -1543,18 +1705,16 @@ namespace hoTools.EaServices
                 s0 = s0.Replace(match.Groups[1].Value, "");
                 match = match.NextMatch();
             }
- 
 
 
             // concatenate lines =..;
             match = Regex.Match(s0, @"[^=]*(=[^;{}]*)", RegexOptions.Singleline);
-            
+
             while (match.Success)
             {
                 string old = match.Groups[1].Value;
-                if (! (match.Value.Contains("#")))
+                if (!(match.Value.Contains("#")))
                 {
-
                     //if (Regex.IsMatch(old, @"#[\s]*(if|elseif|else)", RegexOptions.Singleline)) continue;
                     s0 = s0.Replace(match.Groups[1].Value, Regex.Replace(old, "\r\n", ""));
                 }
@@ -1564,39 +1724,44 @@ namespace hoTools.EaServices
             match = Regex.Match(s0, @"[A-Za-z0-9_]+[\s]*\([^;}{]*\)", RegexOptions.Singleline);
             while (match.Success)
             {
-                if (! (match.Value.Contains("#")))
+                if (!(match.Value.Contains("#")))
                 {
-                //if (Regex.IsMatch(old, @"#[\s]*(if|elseif|else)", RegexOptions.Singleline)) continue;
+                    //if (Regex.IsMatch(old, @"#[\s]*(if|elseif|else)", RegexOptions.Singleline)) continue;
                     //s0 = s0.Replace(match.Groups[1].Value, Regex.Replace(old, "\r\n", ""));
                     // check if this is no if(..)
-                    if (match.Value.StartsWith("if", StringComparison.CurrentCulture)) { }
+                    if (match.Value.StartsWith("if", StringComparison.CurrentCulture))
+                    {
+                    }
                     else s0 = s0.Replace(match.Value, Regex.Replace(match.Value, "\r\n", ""));
                 }
                 match = match.NextMatch();
             }
             // remove empty lines
-            s0 = Regex.Replace(s0, @"\r\n\s*\r\n", "\r\n"); 
-            
-           string[] lines = Regex.Split(s0, "\r\n");
+            s0 = Regex.Replace(s0, @"\r\n\s*\r\n", "\r\n");
+
+            string[] lines = Regex.Split(s0, "\r\n");
 
             // first line start with an "else"
             bool skipFirstLine = false;
             // case nnnnn:
             string guardString = "";
-            if (lines.Length > 0) {
+            if (lines.Length > 0)
+            {
                 string line0 = lines[0].Trim();
                 if (line0.StartsWith("else", StringComparison.Ordinal) |
-                    Regex.IsMatch(lines[0],"#[ ]*else") )                     
+                    Regex.IsMatch(lines[0], "#[ ]*else"))
                 {
-                    
                     offsetHorizontal = 300;
                     guardString = "no";
                     Match matchElseIf = Regex.Match(line0, @"^else[\s]*if");
-                    if (matchElseIf.Success)  {
+                    if (matchElseIf.Success)
+                    {
                         offsetHorizontal = 0;
                         //lines[0] = lines[0].Replace(matchElseIf.Value, "");
-                    } else {
-                    skipFirstLine = true;
+                    }
+                    else
+                    {
+                        skipFirstLine = true;
                     }
                 }
             }
@@ -1607,16 +1772,19 @@ namespace hoTools.EaServices
                 lineNumber += 1;
                 var s1 = s.Trim();
                 // case: of switch case
-                if (isSwitchCase & (s1.StartsWith("case", StringComparison.Ordinal) | s1.StartsWith("default", StringComparison.Ordinal)))
-                {   // set the selected element to the switch case
+                if (isSwitchCase &
+                    (s1.StartsWith("case", StringComparison.Ordinal) |
+                     s1.StartsWith("default", StringComparison.Ordinal)))
+                {
+                    // set the selected element to the switch case
                     int l = dia.SelectedObjects.Count;
                     for (int i = l - 1; i >= 0; i--)
                     {
-                        dia.SelectedObjects.DeleteAt((short)i, true);
+                        dia.SelectedObjects.DeleteAt((short) i, true);
                         dia.SelectedObjects.Refresh();
                     }
                     dia.SelectedObjects.Refresh();
-                    
+
                     foreach (DiagramObject obj in dia.SelectedObjects)
                     {
                         dia.SelectedObjects.DeleteAt(0, true);
@@ -1625,7 +1793,8 @@ namespace hoTools.EaServices
                     dia.SelectedObjects.AddNew(objSource.ElementID.ToString(), objSource.ObjectType.ToString());
                     dia.SelectedObjects.Refresh();
                 }
-                if (skipFirstLine) {
+                if (skipFirstLine)
+                {
                     skipFirstLine = false;
                     // check if this was the only line
                     if (lines.Length == 1)
@@ -1638,21 +1807,22 @@ namespace hoTools.EaServices
                     }
                     continue;
                 }
-               
+
                 // check if do, while, for, #if, #else, #endif, #elseif
-                if (    Regex.IsMatch(s1, @"^(if|else|else[\s]if|switch[\s]*\()") |
-                        Regex.IsMatch(s1, @"#[ ]*(if|endif|else|ifdef|elseif)")  )
+                if (Regex.IsMatch(s1, @"^(if|else|else[\s]if|switch[\s]*\()") |
+                    Regex.IsMatch(s1, @"#[ ]*(if|endif|else|ifdef|elseif)"))
                 {
                     CreateDecisionFromText(rep, s1, offsetHorizontal, offsetVertical, guardString);
                     offsetHorizontal = 0;
                     guardString = "";
                 }
-                    
+
                 else
                 {
                     if (s1.Length > 1)
                     {
-                        if (s1.StartsWith("case", StringComparison.Ordinal) | s1.StartsWith("default", StringComparison.Ordinal))
+                        if (s1.StartsWith("case", StringComparison.Ordinal) |
+                            s1.StartsWith("default", StringComparison.Ordinal))
                         {
                             if (s1.StartsWith("case", StringComparison.Ordinal)) s1 = s1.Substring(4);
                             guardString = s1.Replace(":", "").Trim();
@@ -1664,36 +1834,37 @@ namespace hoTools.EaServices
                             if (s1.StartsWith("break;", StringComparison.Ordinal) & isSwitchCase & lineNumber > 0)
                             {
                                 string s2 = lines[lineNumber - 1].Trim();
-                                if (s2.StartsWith("case", StringComparison.Ordinal) | s2.StartsWith("default", StringComparison.Ordinal))
+                                if (s2.StartsWith("case", StringComparison.Ordinal) |
+                                    s2.StartsWith("default", StringComparison.Ordinal))
                                     s1 = "nothing to do";
                                 else s1 = "";
-                            } 
-                            if ( ! s1.Equals(""))  CreateActionFromText(rep, s1, offsetHorizontal, offsetVertical, guardString);
+                            }
+                            if (!s1.Equals(""))
+                                CreateActionFromText(rep, s1, offsetHorizontal, offsetVertical, guardString);
                             offsetHorizontal = 0;
                             guardString = "";
-
                         }
-                       
-                       
                     }
                 }
             }
         }
+
         static string DeleteCurleyBrackets(string s)
         {
-           s = Regex.Replace(s, @"{[^{}]*}", "", RegexOptions.Multiline);
-           s = Regex.Replace(s, @"{[^{}]*}", "", RegexOptions.Multiline);
-           s = Regex.Replace(s, @"{[^{}]*}", "", RegexOptions.Multiline);
-           s = Regex.Replace(s, @"{[^{}]*}", "", RegexOptions.Multiline);
-           s = Regex.Replace(s, @"{[^{}]*}", "", RegexOptions.Multiline);
-           s = Regex.Replace(s, @"{[^{}]*}", "", RegexOptions.Multiline);
-           s = Regex.Replace(s, @"{[^{}]*}", "", RegexOptions.Multiline);
-           s = Regex.Replace(s, @"{[^{}]*}", "", RegexOptions.Multiline);
-           s = Regex.Replace(s, @"{[^{}]*}", "", RegexOptions.Multiline);
-           return s;
+            s = Regex.Replace(s, @"{[^{}]*}", "", RegexOptions.Multiline);
+            s = Regex.Replace(s, @"{[^{}]*}", "", RegexOptions.Multiline);
+            s = Regex.Replace(s, @"{[^{}]*}", "", RegexOptions.Multiline);
+            s = Regex.Replace(s, @"{[^{}]*}", "", RegexOptions.Multiline);
+            s = Regex.Replace(s, @"{[^{}]*}", "", RegexOptions.Multiline);
+            s = Regex.Replace(s, @"{[^{}]*}", "", RegexOptions.Multiline);
+            s = Regex.Replace(s, @"{[^{}]*}", "", RegexOptions.Multiline);
+            s = Regex.Replace(s, @"{[^{}]*}", "", RegexOptions.Multiline);
+            s = Regex.Replace(s, @"{[^{}]*}", "", RegexOptions.Multiline);
+            return s;
         }
 
         #region deleteComment
+
         /// <summary>
         /// Delete Comment for C like languages.
         /// </summary>
@@ -1714,10 +1885,14 @@ namespace hoTools.EaServices
             s = Regex.Replace(s, "(\r\n){2,100}", "\r\n");
             return s;
         }
+
         #endregion
+
         #region createActionFromText
-        private static void CreateActionFromText(Repository rep, string s1, int offsetHorizental = 0, int offsetVertical = 0, string guardString = "", 
-            bool removeModuleNameFromMethodName= false)
+
+        private static void CreateActionFromText(Repository rep, string s1, int offsetHorizental = 0,
+            int offsetVertical = 0, string guardString = "",
+            bool removeModuleNameFromMethodName = false)
         {
             // check if return
             Match matchReturn = Regex.Match(s1, @"\s*return\s*([^;]*);");
@@ -1725,17 +1900,20 @@ namespace hoTools.EaServices
             {
                 string returnValue = "";
                 if (matchReturn.Groups.Count == 2) returnValue = matchReturn.Groups[1].Value;
-                CreateDiagramObjectFromContext(rep, returnValue, "StateNode", "101", 0,0, "");
+                CreateDiagramObjectFromContext(rep, returnValue, "StateNode", "101", 0, 0, "");
             }
-                // single "case"==> composite activity  
-            else if (s1.Contains("case") ){
+            // single "case"==> composite activity  
+            else if (s1.Contains("case"))
+            {
                 s1 = CallOperationAction.RemoveUnwantedStringsFromText(s1);
-                CreateDiagramObjectFromContext(rep, s1, "Activity", "comp=yes", offsetHorizental, offsetVertical, guardString);
+                CreateDiagramObjectFromContext(rep, s1, "Activity", "comp=yes", offsetHorizental, offsetVertical,
+                    guardString);
             }
             else if (Regex.IsMatch(s1, @"^(for|while|do[\s]*$)"))
             {
                 s1 = CallOperationAction.RemoveUnwantedStringsFromText(s1);
-                CreateDiagramObjectFromContext(rep, s1, "Activity", "comp=no", offsetHorizental, offsetVertical, guardString);
+                CreateDiagramObjectFromContext(rep, s1, "Activity", "comp=no", offsetHorizental, offsetVertical,
+                    guardString);
             }
             else
             {
@@ -1752,21 +1930,30 @@ namespace hoTools.EaServices
                 {
                     if (CallOperationAction.GetMethodFromMethodName(rep, methodName) == null)
                     {
-                        CreateDiagramObjectFromContext(rep, methodString, "Action", "", offsetHorizental, offsetVertical, guardString);
+                        CreateDiagramObjectFromContext(rep, methodString, "Action", "", offsetHorizental, offsetVertical,
+                            guardString);
                     }
                     else
                     {
-                        CreateDiagramObjectFromContext(rep, methodString, "CallOperation", methodName, offsetHorizental, offsetVertical, guardString);
+                        CreateDiagramObjectFromContext(rep, methodString, "CallOperation", methodName, offsetHorizental,
+                            offsetVertical, guardString);
                     }
                 }
-                else { CreateDiagramObjectFromContext(rep, methodString, "CallOperation", methodName, offsetHorizental, offsetVertical, guardString);}
+                else
+                {
+                    CreateDiagramObjectFromContext(rep, methodString, "CallOperation", methodName, offsetHorizental,
+                        offsetVertical, guardString);
+                }
             }
-            
         }
+
         #endregion
+
         #region createDecisionFromText
+
         // ReSharper disable once UnusedMethodReturnValue.Local
-        static string CreateDecisionFromText(Repository rep, string decisionName, int offsetHorizental = 0, int offsetVertical = 0, string guardString = "")
+        static string CreateDecisionFromText(Repository rep, string decisionName, int offsetHorizental = 0,
+            int offsetVertical = 0, string guardString = "")
         {
             decisionName = CallOperationAction.RemoveUnwantedStringsFromText(decisionName);
             string loops = "for, while, switch";
@@ -1781,20 +1968,28 @@ namespace hoTools.EaServices
                 decisionName = decisionName.Replace(match.Value, "");
                 guardString = "no";
             }
-            if (decisionName.StartsWith("if", StringComparison.Ordinal)) {
+            if (decisionName.StartsWith("if", StringComparison.Ordinal))
+            {
                 decisionName = decisionName.Substring(2).Trim();
             }
-            
-            if (Regex.IsMatch(decisionName, @"#[ ]*endif") ) {
-                CreateDiagramObjectFromContext(rep, decisionName, "MergeNode", "", offsetHorizental, offsetVertical, guardString);
-            }else
+
+            if (Regex.IsMatch(decisionName, @"#[ ]*endif"))
             {
-                CreateDiagramObjectFromContext(rep, decisionName, "Decision", "", offsetHorizental, offsetVertical, guardString);
+                CreateDiagramObjectFromContext(rep, decisionName, "MergeNode", "", offsetHorizental, offsetVertical,
+                    guardString);
+            }
+            else
+            {
+                CreateDiagramObjectFromContext(rep, decisionName, "Decision", "", offsetHorizental, offsetVertical,
+                    guardString);
             }
             return decisionName;
         }
+
         #endregion
+
         #region addElementNote
+
         public static void AddElementNote(Repository rep)
         {
             ObjectType oType = rep.GetContextItemType();
@@ -1803,7 +1998,7 @@ namespace hoTools.EaServices
             {
                 Diagram dia = rep.GetCurrentDiagram();
                 Package pkg = rep.GetPackageByID(el.PackageID);
-                if (pkg.IsProtected || dia.IsLocked || el.Locked ) return;
+                if (pkg.IsProtected || dia.IsLocked || el.Locked) return;
 
                 // save diagram
                 rep.SaveDiagram(dia.DiagramID);
@@ -1811,42 +2006,45 @@ namespace hoTools.EaServices
                 Element elNote;
                 try
                 {
-                    elNote = (Element)pkg.Elements.AddNew("", "Note");
+                    elNote = (Element) pkg.Elements.AddNew("", "Note");
                     elNote.Update();
                     pkg.Update();
                 }
-                catch { return; }
+                catch
+                {
+                    return;
+                }
 
                 // add element to diagram
                 // "l=200;r=400;t=200;b=600;"
 
                 DiagramObject diaObj = GetDiagramObjectFromElement(el, dia);
-               
+
                 int left = diaObj.right + 50;
                 int right = left + 100;
                 int top = diaObj.top;
                 int bottom = top - 100;
 
                 string position = "l=" + left + ";r=" + right + ";t=" + top + ";b=" + bottom + ";";
-                var diaObject = (DiagramObject)dia.DiagramObjects.AddNew(position, "");
+                var diaObject = (DiagramObject) dia.DiagramObjects.AddNew(position, "");
                 dia.Update();
                 diaObject.ElementID = elNote.ElementID;
                 diaObject.Sequence = 1; // put element to top
                 diaObject.Update();
                 pkg.Elements.Refresh();
                 // make a connector
-                var con = (Connector)el.Connectors.AddNew("test", "NoteLink");
+                var con = (Connector) el.Connectors.AddNew("test", "NoteLink");
                 con.SupplierID = elNote.ElementID;
                 con.Update();
                 el.Connectors.Refresh();
                 Util.SetElementHasAttchaedLink(rep, el, elNote);
                 rep.ReloadDiagram(dia.DiagramID);
-            } 
+            }
             else if (oType.Equals(ObjectType.otConnector))
             {
-
             }
         }
+
         #endregion
 
         private static DiagramObject GetDiagramObjectFromElement(Element el, Diagram dia)
@@ -1863,28 +2061,29 @@ namespace hoTools.EaServices
             }
             return diaObj;
         }
+
         #region UpdateActivityParameter
+
         public static void UpdateActivityParameter(Repository rep)
         {
             ObjectType oType = rep.GetContextItemType();
             if (oType.Equals(ObjectType.otElement))
             {
-
-                var el = (Element)rep.GetContextObject();
+                var el = (Element) rep.GetContextObject();
                 if (el.Type.Equals("Activity"))
                 {
                     // get the associated operation
                     Method m = Util.GetOperationFromBrehavior(rep, el);
                     if (el.Locked) return;
                     if (m == null) return;
-                    ActivityPar.UpdateParameterFromOperation(rep, el, m);// get parameters from Operation for Activity
+                    ActivityPar.UpdateParameterFromOperation(rep, el, m); // get parameters from Operation for Activity
                     Diagram dia = rep.GetCurrentDiagram();
                     if (dia == null) return;
-                   
+
                     DiagramObject diaObj = Util.GetDiagramObjectById(rep, dia, el.ElementID);
                     //EA.DiagramObject diaObj = dia.GetDiagramObjectByID(el.ElementID,"");
                     if (diaObj == null) return;
-                    
+
                     int pos = 0;
                     rep.SaveDiagram(dia.DiagramID);
                     foreach (Element actPar in el.EmbeddedElements)
@@ -1902,18 +2101,19 @@ namespace hoTools.EaServices
             }
             if (oType.Equals(ObjectType.otMethod))
             {
-                var m = (Method)rep.GetContextObject();
+                var m = (Method) rep.GetContextObject();
                 Element act = Appl.GetBehaviorForOperation(rep, m);
                 if (act == null) return;
                 if (act.Locked) return;
-                ActivityPar.UpdateParameterFromOperation(rep, act, m);// get parameters from Operation for Activity
+                ActivityPar.UpdateParameterFromOperation(rep, act, m); // get parameters from Operation for Activity
             }
             if (oType.Equals(ObjectType.otPackage))
             {
-                var pkg = (Package)rep.GetContextObject();
+                var pkg = (Package) rep.GetContextObject();
                 UpdateActivityParameterForPackage(rep, pkg);
             }
         }
+
         #endregion
 
         static void UpdateActivityParameterForElement(Repository rep, Element el)
@@ -1923,7 +2123,7 @@ namespace hoTools.EaServices
                 Element act = Appl.GetBehaviorForOperation(rep, m);
                 if (act == null) continue;
                 if (act.Locked) continue;
-                ActivityPar.UpdateParameterFromOperation(rep, act, m);// get parameters from Operation for Activity
+                ActivityPar.UpdateParameterFromOperation(rep, act, m); // get parameters from Operation for Activity
             }
             foreach (Element elSub in el.Elements)
             {
@@ -1944,7 +2144,6 @@ namespace hoTools.EaServices
                 UpdateActivityParameterForPackage(rep, pkgSub);
             }
             return true;
-
         }
 
         /// <summary>
@@ -1961,16 +2160,15 @@ namespace hoTools.EaServices
             // links to trigger
             switch (oType)
             {
-
                 case ObjectType.otConnector:
-                    var con = (Connector)rep.GetContextObject();
+                    var con = (Connector) rep.GetContextObject();
                     triggerGuid = Util.GetTrigger(rep, con.ConnectorGUID);
-                    if (triggerGuid.StartsWith("{", StringComparison.Ordinal) && triggerGuid.EndsWith("}", StringComparison.Ordinal))
+                    if (triggerGuid.StartsWith("{", StringComparison.Ordinal) &&
+                        triggerGuid.EndsWith("}", StringComparison.Ordinal))
                     {
                         Element trigger = rep.GetElementByGuid(triggerGuid);
 
                         if (trigger != null) rep.ShowInProjectView(trigger);
-
                     }
                     else
                     {
@@ -1980,7 +2178,7 @@ namespace hoTools.EaServices
 
 
                 case ObjectType.otMethod:
-                    var m = (Method)rep.GetContextObject();
+                    var m = (Method) rep.GetContextObject();
                     if (m.ClassifierID != "")
                     {
                         id = Convert.ToInt32(m.ClassifierID);
@@ -1994,7 +2192,7 @@ namespace hoTools.EaServices
                     break;
 
                 case ObjectType.otAttribute:
-                    var attr = (EA.Attribute)rep.GetContextObject();
+                    var attr = (EA.Attribute) rep.GetContextObject();
                     id = attr.ClassifierID;
                     // get type
                     if (id > 0)
@@ -2014,20 +2212,21 @@ namespace hoTools.EaServices
 
                 // Locate Diagram (e.g. from Search Window)
                 case ObjectType.otDiagram:
-                    var d = (Diagram)rep.GetContextObject();
+                    var d = (Diagram) rep.GetContextObject();
                     rep.ShowInProjectView(d);
                     break;
 
 
                 case ObjectType.otElement:
-                    el = (Element)rep.GetContextObject();
+                    el = (Element) rep.GetContextObject();
                     if (el.ClassfierID > 0)
                     {
                         el = rep.GetElementByID(el.ClassfierID);
                         rep.ShowInProjectView(el);
                     }
                     else
-                    {//MiscData(0) PDATA1,PDATA2,
+                    {
+//MiscData(0) PDATA1,PDATA2,
                         // pdata1 GUID for parts, UmlElement
                         // object_id   for text with Hyper link to diagram
 
@@ -2050,15 +2249,14 @@ namespace hoTools.EaServices
                                     {
                                         // get the trigger
                                         triggerGuid = Util.GetTrigger(rep, el.ElementGUID);
-                                        if (triggerGuid.StartsWith("{", StringComparison.Ordinal) && triggerGuid.EndsWith("}", StringComparison.Ordinal))
+                                        if (triggerGuid.StartsWith("{", StringComparison.Ordinal) &&
+                                            triggerGuid.EndsWith("}", StringComparison.Ordinal))
                                         {
                                             Element trigger = rep.GetElementByGuid(triggerGuid);
                                             rep.ShowInProjectView(trigger);
                                             break;
                                         }
                                     }
-
-
                                 }
                             }
                             if (el.Type.Equals("Trigger"))
@@ -2076,32 +2274,27 @@ namespace hoTools.EaServices
                             {
                                 rep.ShowInProjectView(el);
                             }
-
                         }
-
-
                     }
                     break;
 
                 case ObjectType.otPackage:
-                    var pkgSrc = (Package)rep.GetContextObject();
+                    var pkgSrc = (Package) rep.GetContextObject();
                     Package pkgTrg = Util.GetModelDocumentFromPackage(rep, pkgSrc);
                     if (pkgTrg != null) rep.ShowInProjectView(pkgTrg);
                     break;
             }
-
-
-
         }
+
         // ReSharper disable once UnusedMember.Local
         static void CreateNoteFromText(Repository rep, string text)
         {
             if (rep.GetContextItemType().Equals(ObjectType.otElement))
             {
-                var el = (Element)rep.GetContextObject();
+                var el = (Element) rep.GetContextObject();
                 string s0 = CallOperationAction.RemoveUnwantedStringsFromText(text.Trim(), false);
                 s0 = Regex.Replace(s0, @"\/\*", "//"); // /* ==> //
-                s0 = Regex.Replace(s0, @"\*\/", "");   // delete */
+                s0 = Regex.Replace(s0, @"\*\/", ""); // delete */
                 el.Notes = s0;
                 el.Update();
             }
@@ -2120,17 +2313,18 @@ namespace hoTools.EaServices
                 rep.CreateOutputTab("Debug");
                 rep.EnsureOutputVisible("Debug");
                 rep.WriteOutput("Debug", "Start GetLatestRecursive", 0);
-                var pkg = (Package)rep.GetContextObject();
+                var pkg = (Package) rep.GetContextObject();
                 Util.GetLatest(rep, pkg, true, ref count, 0, ref errorCount);
                 string s = "";
                 if (errorCount > 0) s = " with " + errorCount + " errors";
 
                 // finished
                 TimeSpan span = DateTime.Now - startTime;
-                rep.WriteOutput("Debug", "End GetLatestRecursive in " + span.Hours + ":" + span.Minutes + " hh:mm. " + s, 0);
-
+                rep.WriteOutput("Debug", "End GetLatestRecursive in " + span.Hours + ":" + span.Minutes + " hh:mm. " + s,
+                    0);
             }
         }
+
         public static void CopyGuidSqlToClipboard(Repository rep)
         {
             string str = @"";
@@ -2145,27 +2339,28 @@ namespace hoTools.EaServices
             }
 
             if (conCurrent != null)
-            {// Connector 
+            {
+// Connector 
                 Connector con = conCurrent;
                 str = con.ConnectorGUID + " " + con.Name + ' ' + con.Type + "\r\n" +
-
-                    "\r\n Connector: Select ea_guid As CLASSGUID, connector_type As CLASSTYPE,* from t_connector con where ea_guid = '" + con.ConnectorGUID + "'" +
-
-                    "\r\n\r\nSelect o.ea_guid As CLASSGUID, o.object_type As CLASSTYPE,o.name As Name, o.object_type AS ObjectType, o.PDATA1, o.Stereotype, " +
-                    "\r\n                       con.Name, con.connector_type, con.Stereotype, con.ea_guid As ConnectorGUID, dia.Name As DiagrammName, dia.ea_GUID As DiagramGUID," +
-                    "\r\n                       o.ea_guid, o.Classifier_GUID,o.Classifier " +
-                "\r\nfrom (((t_connector con INNER JOIN t_object o              on con.start_object_id   = o.object_id) " +
-                "\r\nINNER JOIN t_diagramlinks diaLink  on con.connector_id      = diaLink.connectorid ) " +
-                "\r\nINNER JOIN t_diagram dia           on diaLink.DiagramId     = dia.Diagram_ID) " +
-                "\r\nINNER JOIN t_diagramobjects diaObj on diaObj.diagram_ID     = dia.Diagram_ID and o.object_id = diaObj.object_id " +
-                "\r\nwhere         con.ea_guid = '" + con.ConnectorGUID + "' " +
-                "\r\nAND dialink.Hidden  = 0 ";
+                      "\r\n Connector: Select ea_guid As CLASSGUID, connector_type As CLASSTYPE,* from t_connector con where ea_guid = '" +
+                      con.ConnectorGUID + "'" +
+                      "\r\n\r\nSelect o.ea_guid As CLASSGUID, o.object_type As CLASSTYPE,o.name As Name, o.object_type AS ObjectType, o.PDATA1, o.Stereotype, " +
+                      "\r\n                       con.Name, con.connector_type, con.Stereotype, con.ea_guid As ConnectorGUID, dia.Name As DiagrammName, dia.ea_GUID As DiagramGUID," +
+                      "\r\n                       o.ea_guid, o.Classifier_GUID,o.Classifier " +
+                      "\r\nfrom (((t_connector con INNER JOIN t_object o              on con.start_object_id   = o.object_id) " +
+                      "\r\nINNER JOIN t_diagramlinks diaLink  on con.connector_id      = diaLink.connectorid ) " +
+                      "\r\nINNER JOIN t_diagram dia           on diaLink.DiagramId     = dia.Diagram_ID) " +
+                      "\r\nINNER JOIN t_diagramobjects diaObj on diaObj.diagram_ID     = dia.Diagram_ID and o.object_id = diaObj.object_id " +
+                      "\r\nwhere         con.ea_guid = '" + con.ConnectorGUID + "' " +
+                      "\r\nAND dialink.Hidden  = 0 ";
                 Clipboard.SetText(str);
                 return;
             }
             if (oType.Equals(ObjectType.otElement))
-            {// Element 
-                var el = (Element)rep.GetContextObject();
+            {
+// Element 
+                var el = (Element) rep.GetContextObject();
                 string pdata1 = el.MiscData[0];
                 string pdata1String;
                 if (pdata1.EndsWith("}", StringComparison.Ordinal))
@@ -2179,21 +2374,28 @@ namespace hoTools.EaServices
                 }
                 string classifier = Util.GetClassifierGuid(rep, el.ElementGUID);
                 str = el.ElementGUID + ":" + classifier + pdata1String + " " + el.Name + ' ' + el.Type + "\r\n" +
-                 "\r\nSelect ea_guid As CLASSGUID, object_type As CLASSTYPE,* from t_object o where ea_guid = '" + el.ElementGUID + "'";
+                      "\r\nSelect ea_guid As CLASSGUID, object_type As CLASSTYPE,* from t_object o where ea_guid = '" +
+                      el.ElementGUID + "'";
                 if (classifier != "")
                 {
                     if (el.Type.Equals("ActionPin"))
                     {
-                        str = str + "\r\n Type:\r\nSelect ea_guid As CLASSGUID, 'Parameter' As CLASSTYPE,* from t_operationparams op where ea_guid = '" + classifier + "'";
+                        str = str +
+                              "\r\n Type:\r\nSelect ea_guid As CLASSGUID, 'Parameter' As CLASSTYPE,* from t_operationparams op where ea_guid = '" +
+                              classifier + "'";
                     }
                     else
                     {
-                        str = str + "\r\n Type:\r\nSelect ea_guid As CLASSGUID, object_type As CLASSTYPE,* from t_object o where ea_guid = '" + classifier + "'";
+                        str = str +
+                              "\r\n Type:\r\nSelect ea_guid As CLASSGUID, object_type As CLASSTYPE,* from t_object o where ea_guid = '" +
+                              classifier + "'";
                     }
                 }
                 if (pdata1 != "")
                 {
-                    str = str + "\r\n PDATA1:  Select ea_guid As CLASSGUID, object_type As CLASSTYPE,* from t_object o where ea_guid = '" + pdata1 + "'";
+                    str = str +
+                          "\r\n PDATA1:  Select ea_guid As CLASSGUID, object_type As CLASSTYPE,* from t_object o where ea_guid = '" +
+                          pdata1 + "'";
                 }
 
                 // Look for diagram object
@@ -2205,51 +2407,54 @@ namespace hoTools.EaServices
                         if (diaObj.ElementID == el.ElementID)
                         {
                             str = str + "\r\n\r\n" +
-                                "select * from t_diagramobjects where object_id = " + diaObj.ElementID;
+                                  "select * from t_diagramobjects where object_id = " + diaObj.ElementID;
                             break;
-
                         }
                     }
                 }
-
             }
 
             if (oType.Equals(ObjectType.otDiagram))
-            {// Element 
-                var dia = (Diagram)rep.GetContextObject();
+            {
+// Element 
+                var dia = (Diagram) rep.GetContextObject();
                 str = dia.DiagramGUID + " " + dia.Name + ' ' + dia.Type + "\r\n" +
-                       "\r\nSelect ea_guid As CLASSGUID, diagram_type As CLASSTYPE,* from t_diagram dia where ea_guid = '" + dia.DiagramGUID + "'";
+                      "\r\nSelect ea_guid As CLASSGUID, diagram_type As CLASSTYPE,* from t_diagram dia where ea_guid = '" +
+                      dia.DiagramGUID + "'";
             }
             if (oType.Equals(ObjectType.otPackage))
-            {// Element 
-                var pkg = (Package)rep.GetContextObject();
+            {
+// Element 
+                var pkg = (Package) rep.GetContextObject();
                 str = pkg.PackageGUID + " " + pkg.Name + ' ' + " Package " + "\r\n" +
-                 "\r\nSelect ea_guid As CLASSGUID, 'Package' As CLASSTYPE,* from t_package pkg where ea_guid = '" + pkg.PackageGUID + "'";
-
+                      "\r\nSelect ea_guid As CLASSGUID, 'Package' As CLASSTYPE,* from t_package pkg where ea_guid = '" +
+                      pkg.PackageGUID + "'";
             }
             if (oType.Equals(ObjectType.otAttribute))
-            {// Element 
+            {
+// Element 
                 str1 = "LEFT JOIN  t_object typAttr on (attr.Classifier = typAttr.object_id)";
                 if (rep.ConnectionString.Contains(".eap"))
                 {
                     str1 = "LEFT JOIN  t_object typAttr on (attr.Classifier = Format(typAttr.object_id))";
-
                 }
-                var attr = (EA.Attribute)rep.GetContextObject();
+                var attr = (EA.Attribute) rep.GetContextObject();
                 str = attr.AttributeID + " " + attr.Name + ' ' + " Attribute " + "\r\n" +
                       "\r\n " +
-                      "\r\nSelect ea_guid As CLASSGUID, 'Attribute' As CLASSTYPE,* from t_attribute attr where ea_guid = '" + attr.AttributeGUID + "'" +
-                        "\r\n Class has Attributes:" +
-                        "\r\nSelect attr.ea_guid As CLASSGUID, 'Attribute' As CLASSTYPE, " +
-                        "\r\n       o.Name As Class, o.object_type, " +
-                        "\r\n       attr.Name As AttrName, attr.Type As Type, " +
-                        "\r\n       typAttr.Name " +
-                        "\r\n   from (t_object o INNER JOIN t_attribute attr on (o.object_id = attr.object_id)) " +
-                        "\r\n                   " + str1 +
-                        "\r\n   where attr.ea_guid = '" + attr.AttributeGUID + "'";
+                      "\r\nSelect ea_guid As CLASSGUID, 'Attribute' As CLASSTYPE,* from t_attribute attr where ea_guid = '" +
+                      attr.AttributeGUID + "'" +
+                      "\r\n Class has Attributes:" +
+                      "\r\nSelect attr.ea_guid As CLASSGUID, 'Attribute' As CLASSTYPE, " +
+                      "\r\n       o.Name As Class, o.object_type, " +
+                      "\r\n       attr.Name As AttrName, attr.Type As Type, " +
+                      "\r\n       typAttr.Name " +
+                      "\r\n   from (t_object o INNER JOIN t_attribute attr on (o.object_id = attr.object_id)) " +
+                      "\r\n                   " + str1 +
+                      "\r\n   where attr.ea_guid = '" + attr.AttributeGUID + "'";
             }
             if (oType.Equals(ObjectType.otMethod))
-            {// Element 
+            {
+// Element 
                 str1 = "LEFT JOIN t_object parTyp on (par.classifier = parTyp.object_id))";
                 var str2 = "LEFT JOIN t_object opTyp on (op.classifier = opTyp.object_id)";
                 if (rep.ConnectionString.Contains(".eap"))
@@ -2258,7 +2463,7 @@ namespace hoTools.EaServices
                     str2 = " LEFT JOIN t_object opTyp  on (op.classifier  = Format(opTyp.object_id))";
                 }
 
-                var op = (Method)rep.GetContextObject();
+                var op = (Method) rep.GetContextObject();
                 str = op.MethodGUID + " " + op.Name + ' ' + " Operation " +
                       "\r\nOperation may have type " +
                       "\r\nSelect op.ea_guid As CLASSGUID, 'Operation' As CLASSTYPE,opTyp As OperationType, op.Name As OperationName, typ.Name As TypName,*" +
@@ -2274,12 +2479,13 @@ namespace hoTools.EaServices
                       "\r\n                        " + str1 +
                       "\r\n                        " + str2 +
                       "\r\n   where op.ea_guid = '" + op.MethodGUID + "' " +
-                       "\r\n  Order by par.Pos ";
-
+                      "\r\n  Order by par.Pos ";
             }
             Clipboard.SetText(str);
         }
+
         #region createSharedMemoryFromText
+
         /// <summary>
         /// createSharedMemoryFromText
         /// 
@@ -2296,17 +2502,18 @@ namespace hoTools.EaServices
         // #define SP_SHM_HW_MIC_START     0x40008000u
         // #define SP_SHM_HW_MIC_END       0x400083FFu
         // ReSharper disable once UnusedMember.Local
-        static void CreateSharedMemoryFromText(Repository rep, string txt) {
+        static void CreateSharedMemoryFromText(Repository rep, string txt)
+        {
             ObjectType oType = rep.GetContextItemType();
-            if (! oType.Equals(ObjectType.otPackage)) return;
-            var pkg = (Package)rep.GetContextObject();
+            if (!oType.Equals(ObjectType.otPackage)) return;
+            var pkg = (Package) rep.GetContextObject();
 
             string regexShm = @"#define\sSP_SHM_(.*)_(START|END)\s*(0x[0-9ABCDEF]*)";
             Match matchShm = Regex.Match(txt, regexShm, RegexOptions.Multiline);
             while (matchShm.Success)
             {
-                var shm = Utils.Element.CreateElement(rep, pkg, matchShm.Groups[1].Value, "Class",@"shm");
-                var ishm = Utils.Element.CreateElement(rep, pkg, "SHM_"+ matchShm.Groups[1].Value, "Interface", "");
+                var shm = Utils.Element.CreateElement(rep, pkg, matchShm.Groups[1].Value, "Class", @"shm");
+                var ishm = Utils.Element.CreateElement(rep, pkg, "SHM_" + matchShm.Groups[1].Value, "Interface", "");
 
                 if (matchShm.Groups[2].Value == "START")
                 {
@@ -2315,8 +2522,9 @@ namespace hoTools.EaServices
                     var tagStart = TaggedValue.AddTaggedValue(shm, "StartAddr");
                     tagStart.Value = shmStartAddr;
                     tagStart.Update();
-
-                }else if (matchShm.Groups[2].Value == "END"){
+                }
+                else if (matchShm.Groups[2].Value == "END")
+                {
                     var shmEndAddr = matchShm.Groups[3].Value;
                     // add Tagged Value "StartAddr"
                     var tagEnd = TaggedValue.AddTaggedValue(shm, "EndAddr");
@@ -2327,16 +2535,16 @@ namespace hoTools.EaServices
                 bool found = false;
                 foreach (Connector c in shm.Connectors)
                 {
-                    if (c.SupplierID == ishm.ElementID & c.Type == "Realisation") {
+                    if (c.SupplierID == ishm.ElementID & c.Type == "Realisation")
+                    {
                         found = false;
                         break;
                     }
-
                 }
                 // currently switched off
                 if (found == false)
                 {
-                    var con = (Connector)shm.Connectors.AddNew("", "Realisation");
+                    var con = (Connector) shm.Connectors.AddNew("", "Realisation");
                     con.SupplierID = ishm.ElementID;
                     try
                     {
@@ -2344,27 +2552,30 @@ namespace hoTools.EaServices
                     }
                     catch
                     {
-                      //
+                        //
                     }
                     shm.Connectors.Refresh();
-        
                 }
                 // make a port with a provided interface
                 Utils.Element.CreatePortWithInterface(shm, ishm, "ProvidedInterface");
 
 
-
                 matchShm = matchShm.NextMatch();
-
             }
         }
+
         #endregion
+
         #region createOperationsFromTextService
-        [ServiceOperation("{E56C2722-605A-49BB-84FA-F3782697B6F9}", "Insert Operations in selected Class, Interface, Component", "Insert text with prototype(s)", isTextRequired: true)]
+
+        [ServiceOperation("{E56C2722-605A-49BB-84FA-F3782697B6F9}",
+            "Insert Operations in selected Class, Interface, Component", "Insert text with prototype(s)",
+            isTextRequired: true)]
         // ReSharper disable once UnusedMember.Global
         // dynamical usage as configurable service by reflection
-        public static void CreateOperationsFromTextService(Repository rep, string txt) {
-         try
+        public static void CreateOperationsFromTextService(Repository rep, string txt)
+        {
+            try
             {
                 Cursor.Current = Cursors.WaitCursor;
                 CreateOperationsFromText(rep, txt);
@@ -2372,13 +2583,14 @@ namespace hoTools.EaServices
             }
             catch (Exception e11)
             {
-                MessageBox.Show(e11.ToString() , @"Error Insert Function");
+                MessageBox.Show(e11.ToString(), @"Error Insert Function");
             }
             finally
             {
                 Cursor.Current = Cursors.Default;
             }
-}
+        }
+
         #endregion
 
         private static void CreateOperationsFromText(Repository rep, string txt)
@@ -2387,7 +2599,7 @@ namespace hoTools.EaServices
             Element el = Util.GetElementFromContextObject(rep);
             if (el == null) return;
 
-            if ( dia != null && dia.SelectedObjects.Count != 1)
+            if (dia != null && dia.SelectedObjects.Count != 1)
             {
                 dia = null;
             }
@@ -2399,7 +2611,7 @@ namespace hoTools.EaServices
 
             txt = txt.Replace(";", " ");
             // delete macros
-            txt = Regex.Replace(txt, @"^[\s]*#[^\n]*\n", "",RegexOptions.Multiline);
+            txt = Regex.Replace(txt, @"^[\s]*#[^\n]*\n", "", RegexOptions.Multiline);
 
             string[] lTxt = Regex.Split(txt, @"\)[\s]*\r\n");
             for (int i = 0; i < lTxt.Length; i++)
@@ -2408,19 +2620,18 @@ namespace hoTools.EaServices
                 if (!txt.Equals(""))
                 {
                     if (!txt.EndsWith(")", StringComparison.Ordinal)) txt = txt + ")";
-                    
-                    CreateOperationFromText(rep, el, txt);
 
+                    CreateOperationFromText(rep, el, txt);
                 }
             }
             if (dia != null) rep.ReloadDiagram(dia.DiagramID);
             dia.SelectedObjects.AddNew(el.ElementID.ToString(), el.ObjectType.ToString());
             dia.SelectedObjects.Refresh();
         }
-        public static void CreateOperationFromText(Repository rep, Element el, 
-                                string txt)
-        {
 
+        public static void CreateOperationFromText(Repository rep, Element el,
+            string txt)
+        {
             Method m = null;
             string functionName;
             string parameters = "";
@@ -2429,7 +2640,6 @@ namespace hoTools.EaServices
             bool isStatic = false;
             // delete comment
             var leftover = DeleteComment(txt);
-
 
 
             // get function name
@@ -2466,7 +2676,7 @@ namespace hoTools.EaServices
             if (leftover.Contains("*"))
             {
                 pointer = "*";
-                leftover = leftover.Replace("*","").Trim();
+                leftover = leftover.Replace("*", "").Trim();
             }
             leftover = leftover.Trim();
             regex = @"[a-zA-Z_0-9*]*$";
@@ -2491,13 +2701,14 @@ namespace hoTools.EaServices
             }
             // create function if not exists, else update function
             bool isNewFunctions = true;
-            foreach (Method m1 in el.Methods) {
+            foreach (Method m1 in el.Methods)
+            {
                 if (m1.Name == functionName)
                 {
                     isNewFunctions = false;
                     m = m1;
                     // delete all parameters
-                    for (short i = (short)(m.Parameters.Count-1); i >=0; i--)
+                    for (short i = (short) (m.Parameters.Count - 1); i >= 0; i--)
                     {
                         m.Parameters.Delete(i);
                         m.Parameters.Refresh();
@@ -2507,7 +2718,7 @@ namespace hoTools.EaServices
 
             if (isNewFunctions)
             {
-                m = (Method)el.Methods.AddNew(functionName, "");
+                m = (Method) el.Methods.AddNew(functionName, "");
                 m.Pos = el.Methods.Count + 1;
                 el.Methods.Refresh();
             }
@@ -2518,12 +2729,11 @@ namespace hoTools.EaServices
             m.Visibility = el.Type.Equals("Interface") ? "public" : "private";
             m.Update();
 
- 
+
             el.Methods.Refresh();
             string[] lpar = parameters.Split(',');
 
-            
-            
+
             int pos = 1;
             foreach (string para in lpar)
             {
@@ -2546,21 +2756,20 @@ namespace hoTools.EaServices
                         par = par.Remove(par.IndexOf("*", StringComparison.Ordinal), 1);
                     }
                 }
-                par = Regex.Replace(par.Trim(),@"[\s]+", " ");
+                par = Regex.Replace(par.Trim(), @"[\s]+", " ");
                 string[] lparElements = par.Split(' ');
                 if (lparElements.Length != 2)
                 {
                     MessageBox.Show(txt, @"Can't evaluate parameters");
                     return;
-
                 }
                 string name = lparElements[lparElements.Length - 1];
-                string type = lparElements[lparElements.Length - 2]+pointer;
-                
+                string type = lparElements[lparElements.Length - 2] + pointer;
+
                 // get classifier ID
                 var classifierId = Util.GetTypeFromName(rep, ref name, ref type);
 
-                var elPar = (Parameter)m.Parameters.AddNew(name, "");
+                var elPar = (Parameter) m.Parameters.AddNew(name, "");
                 m.Parameters.Refresh();
                 elPar.IsConst = isConst;
 
@@ -2578,12 +2787,15 @@ namespace hoTools.EaServices
                     MessageBox.Show($"{e}\n\n {elPar.GetLastError()}", $"Error creating parameter: {type} {name}");
                 }
                 pos = pos + 1;
-
             }
         }
+
         #region createTypeDefStructFromTextService
-        [ServiceOperation("{6784026E-1B54-47CA-898F-A49EEB8A6ECB}", "Create/Update typedef for struct or enum from C-text for selected Class/Interface/Component", 
-                "Insert text with typedef\nSelect Class to generate it beneath class\nSelect typedef to update it", isTextRequired: true)]
+
+        [ServiceOperation("{6784026E-1B54-47CA-898F-A49EEB8A6ECB}",
+            "Create/Update typedef for struct or enum from C-text for selected Class/Interface/Component",
+            "Insert text with typedef\nSelect Class to generate it beneath class\nSelect typedef to update it",
+            isTextRequired: true)]
         // ReSharper disable once UnusedMember.Global
         // dynamical usage as configurable service by reflection
         public static void CreateTypeDefStructFromTextService(Repository rep, string txt)
@@ -2608,8 +2820,7 @@ namespace hoTools.EaServices
                 MatchCollection matches = Regex.Matches(txt, @".*?}[\s]*[A-Za-z0-9_]*[\s]*;", RegexOptions.Singleline);
                 foreach (Match match in matches)
                 {
-                    CreateTypeDefStructFromText(rep, dia, pkg, el,match.Value);
-
+                    CreateTypeDefStructFromText(rep, dia, pkg, el, match.Value);
                 }
                 Cursor.Current = Cursors.Default;
             }
@@ -2622,13 +2833,13 @@ namespace hoTools.EaServices
                 Cursor.Current = Cursors.Default;
             }
         }
+
         #endregion
 
         static void CreateTypeDefStructFromText(Repository rep, Diagram dia, Package pkg, Element el, string txt)
         {
-            
             Element elTypedef = null;
-           
+
 
             // delete comment
             txt = DeleteComment(txt);
@@ -2654,42 +2865,41 @@ namespace hoTools.EaServices
             if (!match.Success) return;
             string name = match.Groups[1].Value.Trim();
             if (name == "") return;
-            txt = txt.Remove(match.Index, match.Length); 
-            
-             // check if typedef already exists
-            int targetId = Util.GetTypeId(rep,name);
+            txt = txt.Remove(match.Index, match.Length);
+
+            // check if typedef already exists
+            int targetId = Util.GetTypeId(rep, name);
             if (targetId != 0)
             {
                 elTypedef = rep.GetElementByID(targetId);
                 update = true;
                 for (int i = elTypedef.Attributes.Count - 1; i > -1; i = i - 1)
                 {
-                    elTypedef.Attributes.DeleteAt((short)i, true);
+                    elTypedef.Attributes.DeleteAt((short) i, true);
                 }
-                
             }
 
 
             // create typedef
-            if (update == false) 
+            if (update == false)
             {
-                if (el != null ) { // create class below element
-                   if ("Interface Class Component".Contains(el.Type))
+                if (el != null)
+                {
+                    // create class below element
+                    if ("Interface Class Component".Contains(el.Type))
                     {
-                        elTypedef = (Element)el.Elements.AddNew(name, elType);
+                        elTypedef = (Element) el.Elements.AddNew(name, elType);
                         el.Elements.Refresh();
                     }
                     else
                     {
                         MessageBox.Show(@"Can't create element below selected Element");
                     }
-               
                 }
-                 else // create class in package
-                { 
-                    elTypedef = (Element)pkg.Elements.AddNew(name, elType);
+                else // create class in package
+                {
+                    elTypedef = (Element) pkg.Elements.AddNew(name, elType);
                     pkg.Elements.Refresh();
-
                 }
             }
             if (isStruct)
@@ -2713,7 +2923,6 @@ namespace hoTools.EaServices
             {
                 rep.RefreshModelView(elTypedef.PackageID);
                 rep.ShowInProjectView(elTypedef);
-                
             }
             else
             {
@@ -2725,7 +2934,7 @@ namespace hoTools.EaServices
                 //int right = diaObj.right + 2 * (diaObj.right - diaObj.left);
                 rep.SaveDiagram(dia.DiagramID);
                 string position = "l=" + left + ";r=" + right + ";t=" + top + ";b=" + bottom + ";";
-                var diaObj = (DiagramObject)dia.DiagramObjects.AddNew(position, "");
+                var diaObj = (DiagramObject) dia.DiagramObjects.AddNew(position, "");
                 dia.DiagramObjects.Refresh();
                 diaObj.ElementID = elTypedef.ElementID;
                 diaObj.Update();
@@ -2733,11 +2942,13 @@ namespace hoTools.EaServices
             rep.ReloadDiagram(dia.DiagramID);
             dia.SelectedObjects.AddNew(elTypedef.ElementID.ToString(), elTypedef.ObjectType.ToString());
             dia.SelectedObjects.Refresh();
-            
-                
         }
+
         #region insertAttributeService
-        [ServiceOperation("{BE4759E5-2E8D-454D-83F7-94AA2FF3D50A}", "Insert/Update Attributes in Class, Interface, Component", @"Insert text with variables, macros or enums", isTextRequired: true)]
+
+        [ServiceOperation("{BE4759E5-2E8D-454D-83F7-94AA2FF3D50A}",
+            "Insert/Update Attributes in Class, Interface, Component", @"Insert text with variables, macros or enums",
+            isTextRequired: true)]
         // ReSharper disable once UnusedMember.Global
         // dynamical usage as configurable service by reflection
         public static void InsertAttributeService(Repository rep, string txt)
@@ -2756,22 +2967,23 @@ namespace hoTools.EaServices
             {
                 Cursor.Current = Cursors.Default;
             }
-
         }
+
         #endregion
+
         public static void CreateAttributesFromText(Repository rep, string txt)
         {
             DiagramObject objSelected = null;
             Element el = Util.GetElementFromContextObject(rep);
             Diagram dia = rep.GetCurrentDiagram();
-            if (!(dia == null && dia.SelectedObjects.Count > 0 ))
+            if (!(dia == null && dia.SelectedObjects.Count > 0))
             {
-                objSelected = (DiagramObject)dia.SelectedObjects.GetAt(0);
+                objSelected = (DiagramObject) dia.SelectedObjects.GetAt(0);
             }
- 
 
 
-            if (el == null ) {
+            if (el == null)
+            {
                 MessageBox.Show(@"No Element selected, probably nothing or an attribute / operation");
                 return;
             }
@@ -2785,17 +2997,14 @@ namespace hoTools.EaServices
                 dia.SelectedObjects.Refresh();
             }
         }
-        
+
         static void CreateClassAttributesFromText(Repository rep, Element el, string txt)
         {
-            
-            
             // delete comment
             txt = DeleteComment(txt);
 
             // delete macro's like #if, #else, #end,..
             txt = Regex.Replace(txt, @"^[\s]*(#[\s]*if|#[\s]*else|#[\s]*end)[^\n]*\n", "", RegexOptions.Multiline);
-
 
 
             // get all lines
@@ -2805,8 +3014,6 @@ namespace hoTools.EaServices
             string part1 = "";
             foreach (string s in lines)
             {
-
-
                 string sRaw = part1 + " " + s.Trim();
                 if (sRaw == "") continue;
                 //sRaw = sRaw + ";";
@@ -2815,7 +3022,7 @@ namespace hoTools.EaServices
                 string pointerValue = "";
                 // remove everything behind ";"
                 var pos = sRaw.IndexOf(";", StringComparison.Ordinal);
-                if (pos >=0 & pos >= sRaw.Length) sRaw = sRaw.Substring(pos+1);
+                if (pos >= 0 & pos >= sRaw.Length) sRaw = sRaw.Substring(pos + 1);
 
 
                 // remove everything behind "//"
@@ -2826,15 +3033,14 @@ namespace hoTools.EaServices
                 if (sRaw == "") continue;
                 sRaw = CallOperationAction.RemoveCasts(sRaw);
 
-                
 
                 if (sRaw.Equals("")) continue;
-                if (sRaw.Contains("#") && sRaw.Contains("define") )
+                if (sRaw.Contains("#") && sRaw.Contains("define"))
                 {
                     CreateMacro(rep, el, sRaw, stereotype);
                     continue;
                 }
-               
+
                 //-----------------------------------------------------------------------------
                 // attributes
                 // remove macros
@@ -2848,7 +3054,7 @@ namespace hoTools.EaServices
                 // Attributes over more than one line
                 if (sRaw.Contains(";") || sRaw.Contains("MODULE_NAME("))
                 {
-                   part1 = "";
+                    part1 = "";
                 }
                 else
                 {
@@ -2863,7 +3069,7 @@ namespace hoTools.EaServices
                 {
                     name = match.Groups[1].Value;
                     defaultValue = match.Groups[2].Value;
-                    a = (EA.Attribute)el.Attributes.AddNew(name + defaultValue, "");
+                    a = (EA.Attribute) el.Attributes.AddNew(name + defaultValue, "");
                     a.IsConst = isConst;
                     if (el.Type.Equals("Class")) a.Visibility = "Private";
                     else a.Visibility = "Public";
@@ -2874,7 +3080,7 @@ namespace hoTools.EaServices
                     a.Update();
                     continue;
                 }
-                
+
                 pos = sRaw.IndexOf("*", StringComparison.Ordinal);
                 if (pos > -1)
                 {
@@ -2898,7 +3104,7 @@ namespace hoTools.EaServices
                 sCompact = sCompact.Replace("STATIC ", "");
 
                 // get name
-               
+
 
                 // get default value
                 string regexDefault = @"=[\s]*([\(\)a-zA-Z0-9_ *+-{}\%]*)";
@@ -2906,11 +3112,11 @@ namespace hoTools.EaServices
                 if (match.Success)
                 {
                     defaultValue = match.Groups[1].Value.Trim();
-                    sCompact = sCompact.Remove(match.Groups[1].Index, match.Groups[1].Length); 
+                    sCompact = sCompact.Remove(match.Groups[1].Index, match.Groups[1].Length);
                     sCompact = sCompact.Replace("=", "");
                     if (!sCompact.EndsWith(";", StringComparison.Ordinal)) sCompact = sCompact + ";";
                 }
-                
+
 
                 // get array
                 //string regexArray = @"(\[[^;]*);";
@@ -2919,11 +3125,10 @@ namespace hoTools.EaServices
                 if (match.Success)
                 {
                     collectionValue = match.Groups[1].Value.Trim();
-                    sCompact = sCompact.Remove(match.Groups[1].Index, match.Groups[1].Length); 
+                    sCompact = sCompact.Remove(match.Groups[1].Index, match.Groups[1].Length);
                     if (!sCompact.EndsWith(";", StringComparison.Ordinal)) sCompact = sCompact + ";";
                 }
 
-                
 
                 string regexName = @"[\s]*([a-zA-Z_0-9]+)[\s]+([a-zA-Z_0-9:]+)[\s]*[\[;]";
                 match = Regex.Match(sCompact, regexName);
@@ -2935,7 +3140,6 @@ namespace hoTools.EaServices
                     sCompact = sCompact.Remove(match.Groups[1].Index, match.Groups[1].Length); // delete type
                     sCompact = sCompact.Replace(";", ""); // ;
                     prefix = sCompact.Trim();
-
 
 
                     // add attribute
@@ -2954,13 +3158,13 @@ namespace hoTools.EaServices
 
                     if (isNewAttribute)
                     {
-                        a = (EA.Attribute)el.Attributes.AddNew(aName, "");
+                        a = (EA.Attribute) el.Attributes.AddNew(aName, "");
                         if (a.Name.Length > 255)
                         {
-                            MessageBox.Show($"{a.Name} has { a.Name.Length}", @"Name longer than 255");
+                            MessageBox.Show($"{a.Name} has {a.Name.Length}", @"Name longer than 255");
                             continue;
                         }
-                        a.Pos = el.Attributes.Count+1;
+                        a.Pos = el.Attributes.Count + 1;
                         el.Attributes.Refresh();
                     }
 
@@ -2976,7 +3180,9 @@ namespace hoTools.EaServices
                         a.Container = collectionValue;
                         if (collectionValue.Length > 50)
                         {
-                            MessageBox.Show($"Collection '{ collectionValue}' has {collectionValue.Length}  characters.", @"Break! Collection length need to be <=50 characters");
+                            MessageBox.Show(
+                                $"Collection '{collectionValue}' has {collectionValue.Length}  characters.",
+                                @"Break! Collection length need to be <=50 characters");
                             continue;
                         }
                     }
@@ -2997,69 +3203,71 @@ namespace hoTools.EaServices
                     MessageBox.Show($"{s}\n\n+{sCompact}", @"Couldn't understand attribute syntax");
                 }
             }
-
         }
+
         #region createMacro
-        static void CreateMacro(Repository rep, Element el, string s, string stereotype) {
 
-             string name = "";
-             string value = "";
-             EA.Attribute a = null;
-             bool isNewAttribute = true;
+        static void CreateMacro(Repository rep, Element el, string s, string stereotype)
+        {
+            string name = "";
+            string value = "";
+            EA.Attribute a = null;
+            bool isNewAttribute = true;
 
-             // delete spaces between parameters
-            s = Regex.Replace(s, @",[\s]+",",");
+            // delete spaces between parameters
+            s = Regex.Replace(s, @",[\s]+", ",");
             s = Regex.Replace(s, @"[\s]+,", ",");
 
-             string regexDefine = @"#[\s]*define[\s]*([a-zA-Z0-9_(),]*)[\s]*(.*)";
-                Match match = Regex.Match(s, regexDefine);
-                if (match.Success)
+            string regexDefine = @"#[\s]*define[\s]*([a-zA-Z0-9_(),]*)[\s]*(.*)";
+            Match match = Regex.Match(s, regexDefine);
+            if (match.Success)
+            {
+                name = match.Groups[1].Value.Trim();
+                value = match.Groups[2].Value.Trim();
+            }
+
+            if (!name.Equals(""))
+            {
+                value = CallOperationAction.RemoveCasts(value);
+                foreach (EA.Attribute attr in el.Attributes)
                 {
-                    name = match.Groups[1].Value.Trim();
-                    value = match.Groups[2].Value.Trim();
+                    if (attr.Name == name)
+                    {
+                        a = attr;
+                        isNewAttribute = false;
+                        break;
+                    }
                 }
+                if (isNewAttribute)
+                {
+                    a = (EA.Attribute) el.Attributes.AddNew(name, "");
+                    a.Pos = el.Attributes.Count;
+                    el.Attributes.Refresh();
+                }
+                a.Default = value;
+                if (el.Type.Equals("Interface")) a.Visibility = "public";
+                else a.Visibility = "private";
 
-             if ( ! name.Equals("")) 
-             {
-                 value = CallOperationAction.RemoveCasts(value);
-                 foreach (EA.Attribute attr in el.Attributes)
-                 {
-                     if (attr.Name == name)
-                     {
-                         a = attr;
-                         isNewAttribute = false;
-                         break;
-                     }
-                 }
-                 if (isNewAttribute)
-                 {
-                     a = (EA.Attribute)el.Attributes.AddNew(name, "");
-                     a.Pos = el.Attributes.Count;
-                     el.Attributes.Refresh();
-                 }
-                 a.Default = value;
-                 if (el.Type.Equals("Interface")) a.Visibility = "public";
-                 else a.Visibility = "private";
-             
-                 a.IsConst = true;
-                 if (! stereotype.Equals("")) a.Stereotype = stereotype;
-                 else a.Stereotype = "define";
-                 a.ClassifierID = 0;
-                 a.Type = "";
-                 a.Update();
-             } else {
-                 MessageBox.Show(s,@"Can't identify macro");
-             }
-
+                a.IsConst = true;
+                if (!stereotype.Equals("")) a.Stereotype = stereotype;
+                else a.Stereotype = "define";
+                a.ClassifierID = 0;
+                a.Type = "";
+                a.Update();
+            }
+            else
+            {
+                MessageBox.Show(s, @"Can't identify macro");
+            }
         }
+
         #endregion
-       
+
         // ReSharper disable once UnusedParameter.Local
         static void CreateEnumerationAttributesFromText(Repository rep, Element el, string txt)
         {
             // delete comment
             txt = DeleteComment(txt);
-
 
 
             // check for (with or without comma):
@@ -3070,7 +3278,7 @@ namespace hoTools.EaServices
             int pos = 0;
             while (match.Success)
             {
-                var a = (EA.Attribute)el.Attributes.AddNew(match.Groups[1].Value, "");
+                var a = (EA.Attribute) el.Attributes.AddNew(match.Groups[1].Value, "");
                 // with/without default value
                 if (match.Groups[2].Value != ",") a.Default = match.Groups[3].Value;
                 a.Stereotype = "enum";
@@ -3079,15 +3287,13 @@ namespace hoTools.EaServices
                 el.Attributes.Refresh();
                 pos = pos + 1;
                 match = match.NextMatch();
-                
-
             }
         }
+
         static void UpdateOperationTypeForPackage(Repository rep, Package pkg)
         {
             foreach (Element el1 in pkg.Elements)
             {
-
                 foreach (Method m in el1.Methods)
                 {
                     UpdateOperationType(rep, m);
@@ -3100,8 +3306,11 @@ namespace hoTools.EaServices
         }
 
         // update the types of operations
+
         #region CreateActivityForOperation
-        [ServiceOperation("{AC0111AB-10AE-4FC6-92DE-CD58F610C4E6}", "Update Activity Parameter from Operation, Class/Interface", 
+
+        [ServiceOperation("{AC0111AB-10AE-4FC6-92DE-CD58F610C4E6}",
+            "Update Activity Parameter from Operation, Class/Interface",
             "Select Package, Class/Interface or operation", isTextRequired: false)]
         public static void UpdateOperationTypes(Repository rep)
         {
@@ -3109,10 +3318,10 @@ namespace hoTools.EaServices
             switch (oType)
             {
                 case ObjectType.otMethod:
-                    UpdateOperationType(rep, (Method)rep.GetContextObject());
+                    UpdateOperationType(rep, (Method) rep.GetContextObject());
                     break;
                 case ObjectType.otElement:
-                    var el = (Element)rep.GetContextObject();
+                    var el = (Element) rep.GetContextObject();
                     if (el.Type == "Activity")
                     {
                         Method m = Util.GetOperationFromBrehavior(rep, el);
@@ -3133,14 +3342,14 @@ namespace hoTools.EaServices
                     break;
 
                 case ObjectType.otPackage:
-                    var pkg = (Package)rep.GetContextObject();
+                    var pkg = (Package) rep.GetContextObject();
                     UpdateOperationTypeForPackage(rep, pkg);
                     break;
             }
-
         }
 
         #region updateOperationType
+
         /// <summary> 
         /// Update the types of the operation
         /// </summary>
@@ -3151,7 +3360,7 @@ namespace hoTools.EaServices
             string methodType = m.ReturnType;
             if (methodType == "") methodType = "void";
             int methodClassifierId = 0;
-            if (m.ClassifierID != "")  methodClassifierId = Convert.ToInt32(m.ClassifierID);
+            if (m.ClassifierID != "") methodClassifierId = Convert.ToInt32(m.ClassifierID);
             var typeChanged = UpdateTypeName(rep, ref methodClassifierId, ref methodName, ref methodType);
             if (typeChanged)
             {
@@ -3183,8 +3392,8 @@ namespace hoTools.EaServices
                 string parType = par.Type;
                 if (parType == "") parType = "void";
                 int classifierId = 0;
-                if (! par.ClassifierID.Equals("")) classifierId = Convert.ToInt32(par.ClassifierID);
-                typeChanged = UpdateTypeName(rep,ref classifierId , ref parName, ref parType);
+                if (!par.ClassifierID.Equals("")) classifierId = Convert.ToInt32(par.ClassifierID);
+                typeChanged = UpdateTypeName(rep, ref classifierId, ref parName, ref parType);
                 if (typeChanged)
                 {
                     if (parType == "")
@@ -3201,14 +3410,13 @@ namespace hoTools.EaServices
                     }
                 }
                 if (parameterUpdated) par.Update();
-
             }
         }
+
         #endregion
 
         private static bool UpdateTypeName(Repository rep, ref int classifierId, ref string parName, ref string parType)
         {
-            
             // no classifier defined
             // check if type is correct
             Element el = null;
@@ -3219,19 +3427,17 @@ namespace hoTools.EaServices
                     el = rep.GetElementByID(classifierId);
                     if (el.Name != parType) el = null;
                 }
-                // empty catch, el = null
-                #pragma warning disable RECS0022
+                    // empty catch, el = null
+#pragma warning disable RECS0022
                 catch //(Exception e)
                 {
                     // ignored
                 }
 #pragma warning restore RECS0022
-
             }
 
             if (el == null)
             {
-
                 // get the type
                 // find type from type_name
                 classifierId = Util.GetTypeId(rep, parType);
@@ -3242,21 +3448,17 @@ namespace hoTools.EaServices
                     {
                         parType = parType.Substring(0, parType.Length - 1);
                         parName = "*" + parName;
-
                     }
                     if (parType.EndsWith("*", StringComparison.Ordinal))
                     {
                         parType = parType.Substring(0, parType.Length - 1);
                         parName = "*" + parName;
-
                     }
                     classifierId = Util.GetTypeId(rep, parType);
-
                 }
 
                 if (classifierId != 0)
                 {
-
                     return true;
                 }
                 parType = "";
@@ -3264,6 +3466,7 @@ namespace hoTools.EaServices
             }
             return false;
         }
+
         public static string GetAssemblyPath() => Path.GetDirectoryName(
             Assembly.GetAssembly(typeof(EaService)).CodeBase);
 
@@ -3272,7 +3475,7 @@ namespace hoTools.EaServices
         {
             if (rep.GetContextItemType().Equals(ObjectType.otPackage))
             {
-                var pkg  = (Package)rep.GetContextObject();
+                var pkg = (Package) rep.GetContextObject();
                 string guid = pkg.PackageGUID;
 
                 var openFileDialogXml = new OpenFileDialog
@@ -3287,7 +3490,7 @@ namespace hoTools.EaServices
                     // delete root path and an preceding '\'
                     string shortPath = path.Replace(rootPath, "");
                     if (shortPath.StartsWith(@"\", StringComparison.Ordinal)) shortPath = shortPath.Substring(1);
-                    
+
                     // write to repository
                     Util.SetXmlPath(rep, guid, shortPath);
 
@@ -3309,45 +3512,50 @@ namespace hoTools.EaServices
                     }
                     catch (Exception e1)
                     {
-                        MessageBox.Show(e1.ToString(), $"Error writing '{path}'"); 
+                        MessageBox.Show(e1.ToString(), $"Error writing '{path}'");
                     }
 
-                    MessageBox.Show(path , @"Changed"); 
+                    MessageBox.Show(path, @"Changed");
                 }
-               
             }
             return true;
         }
+
         #region VcReconcile
-        [ServiceOperation("{EAC9246F-96FA-40E7-885A-A572E907AF86}", "Scan XMI and reconcile", "no selection required", isTextRequired: false)]
+
+        [ServiceOperation("{EAC9246F-96FA-40E7-885A-A572E907AF86}", "Scan XMI and reconcile", "no selection required",
+            isTextRequired: false)]
         // ReSharper disable once UnusedMember.Global
         // dynamical usage as configurable service by reflection
         public static void VcReconcile(Repository rep)
         {
-                 //
-                try
-                {
-                    Cursor.Current = Cursors.WaitCursor;
-                    rep.ScanXMIAndReconcile();
-                    Cursor.Current = Cursors.Default;
-                }
-                catch (Exception e)
-                {
-                    MessageBox.Show($"{e}\n\n" , @"Error VC reconcile");
-                }
-                finally
-                {
-                    Cursor.Current = Cursors.Default;
-                }
+            //
+            try
+            {
+                Cursor.Current = Cursors.WaitCursor;
+                rep.ScanXMIAndReconcile();
+                Cursor.Current = Cursors.Default;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($"{e}\n\n", @"Error VC reconcile");
+            }
+            finally
+            {
+                Cursor.Current = Cursors.Default;
+            }
         }
+
         #endregion
+
         #region checkOutService
-        [ServiceOperation("{1BF01759-DD99-4552-8B68-75F19A3C593E}", "Check out", "Select Package",isTextRequired: false)]
+
+        [ServiceOperation("{1BF01759-DD99-4552-8B68-75F19A3C593E}", "Check out", "Select Package", isTextRequired: false
+            )]
         // ReSharper disable once UnusedMember.Global
         // dynamical usage as configurable service by reflection
         public static void CheckOutService(Repository rep)
         {
-
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
@@ -3362,11 +3570,11 @@ namespace hoTools.EaServices
             {
                 Cursor.Current = Cursors.Default;
             }
-
         }
+
         #endregion
 
-        private static void CheckOut(Repository rep,Package pkg=null)
+        private static void CheckOut(Repository rep, Package pkg = null)
         {
             if (pkg == null) pkg = rep.GetTreeSelectedPackage();
             if (pkg == null) return;
@@ -3383,12 +3591,13 @@ namespace hoTools.EaServices
             }
 
             //
-            try 
+            try
             {
                 Cursor.Current = Cursors.WaitCursor;
                 pkg.VersionControlCheckout("");
                 Cursor.Current = Cursors.Default;
-            } catch (Exception e) 
+            }
+            catch (Exception e)
             {
                 MessageBox.Show($"{e}\n\n{pkg.GetLastError()}", @"Error Checkout");
             }
@@ -3397,8 +3606,11 @@ namespace hoTools.EaServices
                 Cursor.Current = Cursors.Default;
             }
         }
+
         #region checkInService
-        [ServiceOperation("{085C84D2-7B51-4783-8189-06E956411B94}", "Check in ", "Select package or something in package", isTextRequired: false)]
+
+        [ServiceOperation("{085C84D2-7B51-4783-8189-06E956411B94}", "Check in ",
+            "Select package or something in package", isTextRequired: false)]
         // ReSharper disable once UnusedMember.Global
         // dynamical usage as configurable service by reflection
         public static void CheckInService(Repository rep)
@@ -3418,16 +3630,22 @@ namespace hoTools.EaServices
                 Cursor.Current = Cursors.Default;
             }
         }
+
         #endregion
+
         #region checkInServiceWithUpdateKeyword
-        [ServiceOperation("{C5BB52C6-F300-42AE-B4DC-DC97D57D8F7D}", "Check in with get latest (update VC keywords, if Tagged Values 'svnDate'/'svnRevision')", "Select package or something in package", false)]
+
+        [ServiceOperation("{C5BB52C6-F300-42AE-B4DC-DC97D57D8F7D}",
+            "Check in with get latest (update VC keywords, if Tagged Values 'svnDate'/'svnRevision')",
+            "Select package or something in package", false)]
         // ReSharper disable once UnusedMember.Global
         // dynamical usage as configurable service by reflection
-        public static void CheckInServiceWithUpdateKeyword (Repository rep) {
-         try
+        public static void CheckInServiceWithUpdateKeyword(Repository rep)
+        {
+            try
             {
                 Cursor.Current = Cursors.WaitCursor;
-                CheckIn(rep, pkg:null, withGetLatest: true, comment:"code changed");
+                CheckIn(rep, pkg: null, withGetLatest: true, comment: "code changed");
                 Cursor.Current = Cursors.Default;
             }
             catch (Exception e11)
@@ -3438,81 +3656,79 @@ namespace hoTools.EaServices
             {
                 Cursor.Current = Cursors.Default;
             }
-         }
+        }
+
         #endregion
+
         #region checkIn
+
         /// <summary>
-            /// Check in of a package. If there are the following package tagged values a get latest is performed to update keywords:
-            /// -- svnDoc
-            /// -- svnRevision
-            /// </summary>
-            /// <param name="rep">Repository</param>
-            /// <param name="pkg">Package, default null</param>
-            /// <param name="withGetLatest">false if you want to avoid a getLatest to update VC keywords
-            /// Tagged Value "svnDoc" or "svnRevision" of package are true</param>
-            /// <param name="comment">A check in comment, default="0" = aks for checkin comment</param>
-        static void CheckIn(Repository rep, Package pkg=null, bool withGetLatest = false, string comment="0")
+        /// Check in of a package. If there are the following package tagged values a get latest is performed to update keywords:
+        /// -- svnDoc
+        /// -- svnRevision
+        /// </summary>
+        /// <param name="rep">Repository</param>
+        /// <param name="pkg">Package, default null</param>
+        /// <param name="withGetLatest">false if you want to avoid a getLatest to update VC keywords
+        /// Tagged Value "svnDoc" or "svnRevision" of package are true</param>
+        /// <param name="comment">A check in comment, default="0" = aks for checkin comment</param>
+        static void CheckIn(Repository rep, Package pkg = null, bool withGetLatest = false, string comment = "0")
         {
-                
-                if (pkg == null) pkg = rep.GetTreeSelectedPackage();
-                if (pkg == null) return;
+            if (pkg == null) pkg = rep.GetTreeSelectedPackage();
+            if (pkg == null) return;
 
-                pkg = Util.GetFirstControlledPackage(rep, pkg);
-                if (pkg == null) return;
+            pkg = Util.GetFirstControlledPackage(rep, pkg);
+            if (pkg == null) return;
 
-                var svnHandle = new Svn(rep, pkg);
-                string userNameLockedPackage = svnHandle.GetLockingUser();
+            var svnHandle = new Svn(rep, pkg);
+            string userNameLockedPackage = svnHandle.GetLockingUser();
             if (userNameLockedPackage == "")
+            {
+                MessageBox.Show(@"Package isn't checked out");
+                return;
+            }
+
+
+            if (InputBox(@"Checkin comment", @"Checkin", ref comment) == DialogResult.OK)
+            {
+                //
+                try
                 {
-                    MessageBox.Show(@"Package isn't checked out");
+                    Cursor.Current = Cursors.WaitCursor;
+                    pkg.VersionControlCheckin(comment);
+                    Cursor.Current = Cursors.Default;
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show($"{e} \n\n {pkg.GetLastError()}", @"Error Checkin");
                     return;
                 }
-
-
-                if (InputBox(@"Checkin comment", @"Checkin", ref comment) == DialogResult.OK)
+                finally
                 {
-
-                    //
-                    try
-                    {
-                        Cursor.Current = Cursors.WaitCursor;
-                        pkg.VersionControlCheckin(comment);
-                        Cursor.Current = Cursors.Default;
-                    }
-                    catch (Exception e)
-                    {
-                        MessageBox.Show($"{e} \n\n {pkg.GetLastError()}", @"Error Checkin");
-                        return;
-                    }
-                    finally
-                    {
-                        Cursor.Current = Cursors.Default;
-                       
-                    }
+                    Cursor.Current = Cursors.Default;
                 }
-                if (withGetLatest)
+            }
+            if (withGetLatest)
+            {
+                // check if GetLatest is appropriate
+                Element el = rep.GetElementByGuid(pkg.PackageGUID);
+                foreach (EA.TaggedValue t in el.TaggedValues)
                 {
-                    // check if GetLatest is appropriate
-                    Element el = rep.GetElementByGuid(pkg.PackageGUID);
-                    foreach (EA.TaggedValue t in el.TaggedValues)
+                    if (t.Name == "svnDoc" | t.Name == "svnRevision")
                     {
-                        if (t.Name == "svnDoc" | t.Name == "svnRevision")
+                        pkg.VersionControlResynchPkgStatus(false);
+                        if (pkg.Flags.Contains("Checkout"))
                         {
-
-                            pkg.VersionControlResynchPkgStatus(false);
-                            if (pkg.Flags.Contains("Checkout"))
-                            {
-                                MessageBox.Show($"Flags={pkg.Flags}", @"Package Checked out, Break!");
-                                return;
-
-                            }
-                            pkg.VersionControlGetLatest(true);
+                            MessageBox.Show($"Flags={pkg.Flags}", @"Package Checked out, Break!");
                             return;
                         }
+                        pkg.VersionControlGetLatest(true);
+                        return;
                     }
                 }
-            
+            }
         }
+
         #endregion
 
         static DialogResult InputBox(string title, string promptText, ref string value)
@@ -3543,7 +3759,7 @@ namespace hoTools.EaServices
             buttonCancel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
 
             form.ClientSize = new Size(396, 107);
-            form.Controls.AddRange(new Control[] { label, textBox, buttonOk, buttonCancel });
+            form.Controls.AddRange(new Control[] {label, textBox, buttonOk, buttonCancel});
             form.ClientSize = new Size(Math.Max(300, label.Right + 10), form.ClientSize.Height);
             form.FormBorderStyle = FormBorderStyle.FixedDialog;
             form.StartPosition = FormStartPosition.CenterScreen;
@@ -3582,18 +3798,16 @@ namespace hoTools.EaServices
             {
                 SetDirectoryTaggedValueRecursive(rep, pkg1);
             }
-               
-
         }
+
         public static void SetTaggedValueGui(Repository rep)
         {
-
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
                 ObjectType oType = rep.GetContextItemType();
                 if (!oType.Equals(ObjectType.otPackage)) return;
-                var pkg = (Package)rep.GetContextObject();
+                var pkg = (Package) rep.GetContextObject();
                 SetDirectoryTaggedValueRecursive(rep, pkg);
                 Cursor.Current = Cursors.Default;
             }
@@ -3612,7 +3826,8 @@ namespace hoTools.EaServices
         {
             bool isRevision = false;
             bool isDate = false;
-            foreach (EA.TaggedValue tag in el.TaggedValues) {
+            foreach (EA.TaggedValue tag in el.TaggedValues)
+            {
                 isRevision |= tag.Name == "svnRevision";
                 isDate |= tag.Name == "svnDate";
             }
@@ -3620,7 +3835,8 @@ namespace hoTools.EaServices
             return false;
         }
 
-        public static void SetDirectoryTaggedValues(Repository rep, Package pkg) {
+        public static void SetDirectoryTaggedValues(Repository rep, Package pkg)
+        {
             bool withCheckIn = false;
             string guid = pkg.PackageGUID;
 
@@ -3631,10 +3847,10 @@ namespace hoTools.EaServices
                 int state = pkg.VersionControlGetStatus();
                 if (state == 4)
                 {
-                    MessageBox.Show("",@"Package checked out by another user, break");
-                        return;
+                    MessageBox.Show("", @"Package checked out by another user, break");
+                    return;
                 }
-                if (state == 1)// checked in
+                if (state == 1) // checked in
                 {
                     CheckOut(rep, pkg);
                     withCheckIn = true;
@@ -3651,20 +3867,18 @@ namespace hoTools.EaServices
             {
                 createSvnDate &= t.Name != "svnDate";
                 createSvnRevision &= t.Name != "svnRevision";
-
             }
             EA.TaggedValue tag;
             if (createSvnDate)
             {
-                tag = (EA.TaggedValue)el.TaggedValues.AddNew("svnDate", "");
+                tag = (EA.TaggedValue) el.TaggedValues.AddNew("svnDate", "");
                 tag.Value = "$Date: $";
                 el.TaggedValues.Refresh();
                 tag.Update();
-
             }
             if (createSvnRevision)
             {
-                tag = (EA.TaggedValue)el.TaggedValues.AddNew("svnRevision", "");
+                tag = (EA.TaggedValue) el.TaggedValues.AddNew("svnRevision", "");
                 tag.Value = "$Revision: $";
                 el.TaggedValues.Refresh();
                 tag.Update();
@@ -3674,12 +3888,12 @@ namespace hoTools.EaServices
             if (pkg.IsVersionControlled)
             {
                 int state = pkg.VersionControlGetStatus();
-                if (state == 2 & withCheckIn)// checked out to this user
+                if (state == 2 & withCheckIn) // checked out to this user
                 {
                     //EaService.checkIn(rep, pkg, "");
-                    CheckIn(rep,pkg, withGetLatest:true, comment:@"svn tags added");
+                    CheckIn(rep, pkg, withGetLatest: true, comment: @"svn tags added");
                 }
-             }
+            }
         }
 
         public static void SetSvnProperty(Repository rep, Package pkg)
@@ -3691,6 +3905,7 @@ namespace hoTools.EaServices
                 svnHandle.SetProperty();
             }
         }
+
         public static void GotoSvnLog(Repository rep, Package pkg)
         {
             // set SVN properties
@@ -3700,6 +3915,7 @@ namespace hoTools.EaServices
                 svnHandle.GotoLog();
             }
         }
+
         public static void GotoSvnBrowser(Repository rep, Package pkg)
         {
             // set SVN properties
@@ -3711,6 +3927,7 @@ namespace hoTools.EaServices
         }
 
         #region insertDiagramElementAndConnect
+
         /// <summary>insertDiagramElement insert a diagram element and connects it to all selected diagramobject 
         /// <para>type: type of the node like "Action", Activity", "MergeNode"</para>
         ///       MergeNode may have the subType "no" to draw a transition with a "no" guard.
@@ -3720,7 +3937,8 @@ namespace hoTools.EaServices
         ///        if "yes" or "" it will locate the node under the last selected element
         /// </summary> 
         // ReSharper disable once UnusedMember.Global
-        public static void InsertDiagramElementAndConnect(Repository rep, string type, string subType, string guardString="") 
+        public static void InsertDiagramElementAndConnect(Repository rep, string type, string subType,
+            string guardString = "")
         {
             Diagram dia = rep.GetCurrentDiagram();
             if (dia == null) return;
@@ -3735,11 +3953,11 @@ namespace hoTools.EaServices
             // get context element (last selected element)
             Element originalSrcEl = Util.GetElementFromContextObject(rep);
             if (originalSrcEl == null) return;
-            int  originalSrcId =  originalSrcEl.ElementID;
+            int originalSrcId = originalSrcEl.ElementID;
 
             for (int i = count - 1; i > -1; i = i - 1)
             {
-                oldCollection.Add((DiagramObject)dia.SelectedObjects.GetAt((short)i));
+                oldCollection.Add((DiagramObject) dia.SelectedObjects.GetAt((short) i));
                 // keep last selected element
                 //if (i > 0) dia.SelectedObjects.DeleteAt((short)i, true);
             }
@@ -3747,7 +3965,8 @@ namespace hoTools.EaServices
             Util.GetDiagramObjectById(rep, dia, originalSrcId);
             //EA.DiagramObject originalSrcObj = dia.GetDiagramObjectByID(originalSrcID, "");
 
-            DiagramObject trgObj = CreateDiagramObjectFromContext(rep, "", type, subType,0,0,guardString, originalSrcEl);
+            DiagramObject trgObj = CreateDiagramObjectFromContext(rep, "", type, subType, 0, 0, guardString,
+                originalSrcEl);
             Element trgtEl = rep.GetElementByID(trgObj.ElementID);
 
             // if connection to more than one element make sure the new element is on the deepest position
@@ -3758,31 +3977,30 @@ namespace hoTools.EaServices
 
 
             foreach (DiagramObject diaObj in oldCollection)
+            {
+                Element srcEl = rep.GetElementByID(diaObj.ElementID);
+                // don't connect two times
+                if (originalSrcId != diaObj.ElementID)
                 {
-                    Element srcEl = rep.GetElementByID(diaObj.ElementID);
-                    // don't connect two times
-                    if (originalSrcId != diaObj.ElementID)
-                    {
-                        var con = (Connector)srcEl.Connectors.AddNew("", "ControlFlow");
-                        con.SupplierID = trgObj.ElementID;
-                        if (type == "MergeNode" && guardString == "no" && srcEl.Type == "Decision") con.TransitionGuard = "no";
-                        con.Update();
-                        srcEl.Connectors.Refresh();
-                        dia.DiagramLinks.Refresh();
-                        //trgtEl.Connectors.Refresh();
+                    var con = (Connector) srcEl.Connectors.AddNew("", "ControlFlow");
+                    con.SupplierID = trgObj.ElementID;
+                    if (type == "MergeNode" && guardString == "no" && srcEl.Type == "Decision")
+                        con.TransitionGuard = "no";
+                    con.Update();
+                    srcEl.Connectors.Refresh();
+                    dia.DiagramLinks.Refresh();
+                    //trgtEl.Connectors.Refresh();
 
-                        // set line style
-                        string style = "LV";
-                        if ((srcEl.Type == "Action" | srcEl.Type == "Activity") & guardString == "no") style = "LH";
-                        var link = GetDiagramLinkForConnector(dia, con.ConnectorID);
-                        if (link != null) Util.SetLineStyleForDiagramLink(style, link);
-
-                    }
-                    // set new high/bottom_Position
-                    var srcObj = Util.GetDiagramObjectById(rep, dia, srcEl.ElementID);
-                    //srcObj = dia.GetDiagramObjectByID(srcEl.ElementID, "");
-                    if (srcObj.bottom < bottom) bottom = srcObj.bottom;
-
+                    // set line style
+                    string style = "LV";
+                    if ((srcEl.Type == "Action" | srcEl.Type == "Activity") & guardString == "no") style = "LH";
+                    var link = GetDiagramLinkForConnector(dia, con.ConnectorID);
+                    if (link != null) Util.SetLineStyleForDiagramLink(style, link);
+                }
+                // set new high/bottom_Position
+                var srcObj = Util.GetDiagramObjectById(rep, dia, srcEl.ElementID);
+                //srcObj = dia.GetDiagramObjectByID(srcEl.ElementID, "");
+                if (srcObj.bottom < bottom) bottom = srcObj.bottom;
             }
             if (oldCollection.Count > 1)
             {
@@ -3804,7 +4022,6 @@ namespace hoTools.EaServices
                             parObj.bottom = trgObj.bottom - 30;
                             parObj.Update();
                         }
-
                     }
                 }
             }
@@ -3812,9 +4029,13 @@ namespace hoTools.EaServices
             rep.ReloadDiagram(dia.DiagramID);
             dia.SelectedObjects.AddNew(trgtEl.ElementID.ToString(), trgtEl.ObjectType.ToString());
         }
+
         #endregion
+
         #region joinDiagramObjectsToLastSelected
-        [ServiceOperation("{6946E63E-3237-4F45-B4D8-7EE0D6580FA5}", "Join nodes to the last selected node", "Only Activity Diagram", isTextRequired: false)]
+
+        [ServiceOperation("{6946E63E-3237-4F45-B4D8-7EE0D6580FA5}", "Join nodes to the last selected node",
+            "Only Activity Diagram", isTextRequired: false)]
         // ReSharper disable once UnusedMember.Global
         // dynamical usage as configurable service by reflection
         public static void JoinDiagramObjectsToLastSelected(Repository rep)
@@ -3826,16 +4047,16 @@ namespace hoTools.EaServices
             rep.SaveDiagram(dia.DiagramID);
 
             // target object/element
-            var trgEl = (Element)rep.GetContextObject();
-           
+            var trgEl = (Element) rep.GetContextObject();
+
             for (int i = 0; i < count; i = i + 1)
             {
-                var srcObj = (DiagramObject)dia.SelectedObjects.GetAt((short)i);
+                var srcObj = (DiagramObject) dia.SelectedObjects.GetAt((short) i);
                 var srcEl = rep.GetElementByID(srcObj.ElementID);
                 if (srcEl.ElementID == trgEl.ElementID) continue;
                 Connectors.Connector connector = GetConnectionDefault();
 
-                var con = (Connector)srcEl.Connectors.AddNew("", connector.Type);
+                var con = (Connector) srcEl.Connectors.AddNew("", connector.Type);
                 con.SupplierID = trgEl.ElementID;
                 con.Stereotype = connector.Stereotype;
                 con.Update();
@@ -3845,18 +4066,20 @@ namespace hoTools.EaServices
                 // set line style
                 DiagramLink link = GetDiagramLinkForConnector(dia, con.ConnectorID);
                 if (link != null) Util.SetLineStyleForDiagramLink("LV", link);
-               
             }
-    
+
             rep.ReloadDiagram(dia.DiagramID);
             dia.SelectedObjects.AddNew(trgEl.ElementID.ToString(), trgEl.ObjectType.ToString());
         }
+
         #endregion
 
         private static Connectors.Connector GetConnectionDefault() => new Connectors.Connector("DataFlow", "");
 
         #region splitDiagramObjectsToLastSelected
-        [ServiceOperation("{521FCFEB-984B-43F0-A710-E97C29E4C8EE}", "Split last selected Diagram object from previous selected Diagram Objects", 
+
+        [ServiceOperation("{521FCFEB-984B-43F0-A710-E97C29E4C8EE}",
+            "Split last selected Diagram object from previous selected Diagram Objects",
             "Incoming and outgoing connections", isTextRequired: false)]
         // ReSharper disable once UnusedMember.Global
         // dynamical usage as configurable service by reflection
@@ -3871,11 +4094,11 @@ namespace hoTools.EaServices
             // target object/element
             ObjectType objType = rep.GetContextItemType();
             if (!(objType.Equals(ObjectType.otElement))) return;
-            var trgEl = (Element)rep.GetContextObject();
+            var trgEl = (Element) rep.GetContextObject();
 
             for (int i = 0; i < count; i = i + 1)
             {
-                var srcObj = (DiagramObject)dia.SelectedObjects.GetAt((short)i);
+                var srcObj = (DiagramObject) dia.SelectedObjects.GetAt((short) i);
                 var srcEl = rep.GetElementByID(srcObj.ElementID);
                 if (srcEl.ElementID == trgEl.ElementID) continue;
                 SplitElementsByConnectorType(srcEl, trgEl, "ControlFlow");
@@ -3884,10 +4107,14 @@ namespace hoTools.EaServices
             rep.ReloadDiagram(dia.DiagramID);
             dia.SelectedObjects.AddNew(trgEl.ElementID.ToString(), trgEl.ObjectType.ToString());
         }
+
         #endregion
+
         #region splitAllDiagramObjectsToLastSelected
-        [ServiceOperation("{CA29CB67-77EA-4BCC-B3B4-8893F6B0DAE2}", 
-            "Split last selected Diagram object from all connected Diagram Objects", "Incoming and outgoing connections", isTextRequired: false)]
+
+        [ServiceOperation("{CA29CB67-77EA-4BCC-B3B4-8893F6B0DAE2}",
+            "Split last selected Diagram object from all connected Diagram Objects", "Incoming and outgoing connections",
+            isTextRequired: false)]
         // ReSharper disable once UnusedMember.Global
         // dynamical usage as configurable service by reflection
         public static void SplitAllDiagramObjectsToLastSelected(Repository rep)
@@ -3901,7 +4128,7 @@ namespace hoTools.EaServices
             // target object/element
             ObjectType objType = rep.GetContextItemType();
             if (!(objType.Equals(ObjectType.otElement))) return;
-            var trgEl = (Element)rep.GetContextObject();
+            var trgEl = (Element) rep.GetContextObject();
 
             foreach (DiagramObject srcObj in dia.DiagramObjects)
             {
@@ -3913,8 +4140,11 @@ namespace hoTools.EaServices
             rep.ReloadDiagram(dia.DiagramID);
             dia.SelectedObjects.AddNew(trgEl.ElementID.ToString(), trgEl.ObjectType.ToString());
         }
+
         #endregion
+
         #region splitElementsByConnectorType
+
         /// <summary>
         /// Split / delete the connection of two elements
         /// </summary>
@@ -3922,20 +4152,25 @@ namespace hoTools.EaServices
         /// <param name="trgEl">Target element of the connector</param>
         /// <param name="connectorType">Connector type or default "All"</param>
         /// <param name="direction">Direction of connection ("in","out","all" or default "All"</param>
-        static void SplitElementsByConnectorType(Element srcEl, Element trgEl, string connectorType="all", string direction="all")
+        static void SplitElementsByConnectorType(Element srcEl, Element trgEl, string connectorType = "all",
+            string direction = "all")
         {
-            for (int i = srcEl.Connectors.Count - 1;i >= 0; i=i-1 ) {
-                var con = (Connector)srcEl.Connectors.GetAt((short)i);
-                if (con.SupplierID == trgEl.ElementID && (con.Type == connectorType | connectorType == "all" | direction == "all" | direction == "in") )
+            for (int i = srcEl.Connectors.Count - 1; i >= 0; i = i - 1)
+            {
+                var con = (Connector) srcEl.Connectors.GetAt((short) i);
+                if (con.SupplierID == trgEl.ElementID &&
+                    (con.Type == connectorType | connectorType == "all" | direction == "all" | direction == "in"))
                 {
-                    srcEl.Connectors.DeleteAt((short)i, true);
+                    srcEl.Connectors.DeleteAt((short) i, true);
                 }
-                if (con.ClientID == trgEl.ElementID && (con.Type == connectorType | connectorType == "all" | direction == "all" | direction == "out"))
+                if (con.ClientID == trgEl.ElementID &&
+                    (con.Type == connectorType | connectorType == "all" | direction == "all" | direction == "out"))
                 {
-                    srcEl.Connectors.DeleteAt((short)i, true);
+                    srcEl.Connectors.DeleteAt((short) i, true);
                 }
             }
         }
+
         #endregion
 
         // ReSharper disable once UnusedMember.Local
@@ -3953,24 +4188,25 @@ namespace hoTools.EaServices
             ObjectType objType = rep.GetContextItemType();
             if (!(objType.Equals(ObjectType.otElement))) return;
 
-            var trgEl = (Element)rep.GetContextObject();
-            if  (!(trgEl.Type.Equals("Activity"))) {
-                MessageBox.Show($"Target '{ trgEl.Name }:{ trgEl.Type}' isn't an Activity", @" Only move below Activity is allowed");
+            var trgEl = (Element) rep.GetContextObject();
+            if (!(trgEl.Type.Equals("Activity")))
+            {
+                MessageBox.Show($"Target '{trgEl.Name}:{trgEl.Type}' isn't an Activity",
+                    @" Only move below Activity is allowed");
                 return;
             }
             for (int i = 0; i < count; i = i + 1)
             {
-                var srcObj = (DiagramObject)dia.SelectedObjects.GetAt((short)i);
+                var srcObj = (DiagramObject) dia.SelectedObjects.GetAt((short) i);
                 var srcEl = rep.GetElementByID(srcObj.ElementID);
                 if (srcEl.ElementID == trgEl.ElementID) continue;
                 srcEl.ParentID = trgEl.ElementID;
                 srcEl.Update();
-               
             }
-           
         }
+
         // ReSharper disable once UnusedMember.Local
-        static void DeleteInvisibleUseRealizationDependencies (Repository rep)
+        static void DeleteInvisibleUseRealizationDependencies(Repository rep)
         {
             Connector con;
             var dia = rep.GetCurrentDiagram();
@@ -3981,26 +4217,25 @@ namespace hoTools.EaServices
             if (dia.SelectedObjects.Count != 1) return;
 
             rep.SaveDiagram(dia.DiagramID);
-            var diaObjSource = (DiagramObject)dia.SelectedObjects.GetAt(0);
+            var diaObjSource = (DiagramObject) dia.SelectedObjects.GetAt(0);
             var elSource = rep.GetElementByID(diaObjSource.ElementID);
             var elSourceId = elSource.ElementID;
-            if (! ("Interface Class".Contains(elSource.Type))) return;
+            if (!("Interface Class".Contains(elSource.Type))) return;
 
             // list of all connectorIDs
             var lInternalId = new List<int>();
             foreach (DiagramLink link in dia.DiagramLinks)
             {
-               con = rep.GetConnectorByID(link.ConnectorID);
-               if (con.ClientID != elSourceId) continue;
-               if (!("Usage Realisation".Contains(con.Type))) continue;
-               lInternalId.Add(con.ConnectorID);
-
+                con = rep.GetConnectorByID(link.ConnectorID);
+                if (con.ClientID != elSourceId) continue;
+                if (!("Usage Realisation".Contains(con.Type))) continue;
+                lInternalId.Add(con.ConnectorID);
             }
 
 
-            for (int i = elSource.Connectors.Count - 1; i >=0; i = i - 1)
+            for (int i = elSource.Connectors.Count - 1; i >= 0; i = i - 1)
             {
-                con = (Connector)elSource.Connectors.GetAt((short)i);
+                con = (Connector) elSource.Connectors.GetAt((short) i);
                 var conType = con.Type;
                 if ("Usage Realisation".Contains(conType))
                 {
@@ -4010,16 +4245,17 @@ namespace hoTools.EaServices
                     {
                         if (lInternalId.BinarySearch(con.ConnectorID) < 0)
                         {
-                            elSource.Connectors.DeleteAt((short)i, true);
+                            elSource.Connectors.DeleteAt((short) i, true);
                         }
                     }
                 }
             }
-
-            
         }
+
         #region copyReleaseInfoOfModuleService
-        [ServiceOperation("{1C78E1C0-AAC8-4284-8C25-2D776FF373BC}", "Copy release information to clipboard", "Select Component", isTextRequired: false)]
+
+        [ServiceOperation("{1C78E1C0-AAC8-4284-8C25-2D776FF373BC}", "Copy release information to clipboard",
+            "Select Component", isTextRequired: false)]
         // ReSharper disable once UnusedMember.Global
         // dynamical usage as configurable service by reflection
         public static void CopyReleaseInfoOfModuleService(Repository rep)
@@ -4038,39 +4274,40 @@ namespace hoTools.EaServices
             {
                 Cursor.Current = Cursors.Default;
             }
-
         }
+
         #endregion
 
         static void CopyReleaseInfoOfModule(Repository rep)
-         {
+        {
             Diagram dia = rep.GetCurrentDiagram();
-             if (dia == null) return;
-             if (!rep.GetContextItemType().Equals(ObjectType.otElement)) return;
-             var elSource = (Element)rep.GetContextObject();
-             if (elSource.Type != "Component") return;
+            if (dia == null) return;
+            if (!rep.GetContextItemType().Equals(ObjectType.otElement)) return;
+            var elSource = (Element) rep.GetContextObject();
+            if (elSource.Type != "Component") return;
 
-             Util.GetDiagramObjectById(rep, dia, elSource.ElementID);
-             //diaObjSource = dia.GetDiagramObjectByID(elSource.ElementID, "");
+            Util.GetDiagramObjectById(rep, dia, elSource.ElementID);
+            //diaObjSource = dia.GetDiagramObjectByID(elSource.ElementID, "");
 
-             string txt = "";
-             string nl = "";
-             foreach (DiagramObject obj in dia.DiagramObjects)
-             {
-                 var elTarget = rep.GetElementByID(obj.ElementID);
-                 if (!("Class Interface".Contains(elTarget.Type))) continue;
-                 txt = txt + nl + AddReleaseInformation(rep, elTarget);
-                 nl = "\r\n";
-             }
-             Clipboard.SetText(txt);
-         }
+            string txt = "";
+            string nl = "";
+            foreach (DiagramObject obj in dia.DiagramObjects)
+            {
+                var elTarget = rep.GetElementByID(obj.ElementID);
+                if (!("Class Interface".Contains(elTarget.Type))) continue;
+                txt = txt + nl + AddReleaseInformation(rep, elTarget);
+                nl = "\r\n";
+            }
+            Clipboard.SetText(txt);
+        }
 
-        static string AddReleaseInformation(Repository rep, Element el) {
+        static string AddReleaseInformation(Repository rep, Element el)
+        {
             string txt;
             string path = Util.GetGenFilePath(rep, el);
             if (path == "")
             {
-                MessageBox.Show($"No file defined in property for: '{ el.Name }': { el.Type}");
+                MessageBox.Show($"No file defined in property for: '{el.Name}': {el.Type}");
                 return "";
             }
             try
@@ -4089,11 +4326,13 @@ namespace hoTools.EaServices
             else name = name.PadRight(60);
             return name + GetReleaseInformationFromText(txt);
         }
-        private static string GetReleaseInformationFromText(string txt) {
+
+        private static string GetReleaseInformationFromText(string txt)
+        {
             string patternRev = @"\$Rev(ision|):[\s]*([0-9]*)";
             string patternDate = @"\$Date:[\s][^\$]*";
             string txtResult = "";
-            
+
 
             Match matchPath = Regex.Match(txt, patternRev, RegexOptions.Multiline);
             if (matchPath.Success)
@@ -4107,8 +4346,11 @@ namespace hoTools.EaServices
             }
             return txtResult;
         }
+
         #region generateComponentPortsService
-        [ServiceOperation("{00602D5F-D581-4926-A31F-806F2D06691C}", "Generate ports for component", "Select Component", isTextRequired: false)]
+
+        [ServiceOperation("{00602D5F-D581-4926-A31F-806F2D06691C}", "Generate ports for component", "Select Component",
+            isTextRequired: false)]
         // ReSharper disable once UnusedMember.Global
         // dynamical usage as configurable service by reflection
         public static void GenerateComponentPortsService(Repository rep)
@@ -4127,17 +4369,17 @@ namespace hoTools.EaServices
             {
                 Cursor.Current = Cursors.Default;
             }
-
         }
+
         #endregion
 
-        static void GenerateComponentPorts(Repository rep) {
-
+        static void GenerateComponentPorts(Repository rep)
+        {
             int pos = 0;
             Diagram dia = rep.GetCurrentDiagram();
             if (dia == null) return;
             if (!rep.GetContextItemType().Equals(ObjectType.otElement)) return;
-            var elSource = (Element)rep.GetContextObject();
+            var elSource = (Element) rep.GetContextObject();
             if (elSource.Type != "Component") return;
 
             Util.GetDiagramObjectById(rep, dia, elSource.ElementID);
@@ -4147,17 +4389,19 @@ namespace hoTools.EaServices
             foreach (DiagramObject obj in dia.DiagramObjects)
             {
                 var elTarget = rep.GetElementByID(obj.ElementID);
-                if (! ("Class Interface".Contains(elTarget.Type))) continue;
+                if (!("Class Interface".Contains(elTarget.Type))) continue;
                 if (!(elTarget.Name.EndsWith("_i", StringComparison.Ordinal)))
                 {
                     AddPortToComponent(elSource, elTarget);
                     pos = pos + 1;
                 }
 
-                if ("Interface Class".Contains(elTarget.Type)) {
-                    List<Element> lEl =  GetIncludedHeaderFiles(rep, elTarget);
-                    foreach ( Element el in lEl) {
-                        if (el == null) continue; 
+                if ("Interface Class".Contains(elTarget.Type))
+                {
+                    List<Element> lEl = GetIncludedHeaderFiles(rep, elTarget);
+                    foreach (Element el in lEl)
+                    {
+                        if (el == null) continue;
                         if (!(el.Name.EndsWith("_i", StringComparison.Ordinal)))
                         {
                             AddPortToComponent(elSource, el);
@@ -4167,7 +4411,6 @@ namespace hoTools.EaServices
                 }
             }
             ShowEmbeddedElementsGui(rep);
-
         }
 
         static List<Element> GetIncludedHeaderFiles(Repository rep, Element el)
@@ -4191,12 +4434,14 @@ namespace hoTools.EaServices
                 return lEl;
             }
             lEl = GetInterfacesFromText(rep, null, text, createWarningNote: false);
-            
-            return lEl;
 
+            return lEl;
         }
+
         #region vCGetState
-        [ServiceOperation("{597608A2-5C3F-4AE6-9B18-86C1B3C27382}", "Get and update VC state of selected package", "Select Packages", isTextRequired: false)]
+
+        [ServiceOperation("{597608A2-5C3F-4AE6-9B18-86C1B3C27382}", "Get and update VC state of selected package",
+            "Select Packages", isTextRequired: false)]
         // ReSharper disable once InconsistentNaming
         // dynamical usage as configurable service by reflection
         // ReSharper disable once UnusedMember.Local
@@ -4208,16 +4453,21 @@ namespace hoTools.EaServices
                 if (pkg.IsControlled)
                 {
                     string pkgState = Util.GetVCstate(rep, pkg, true);
-                     DialogResult result = MessageBox.Show($"Package is {pkgState}\nPath={ pkg.XMLPath }\nFlags={ pkg.Flags}", 
-                         @"Update package state?", MessageBoxButtons.YesNo);
-                    if (result == DialogResult.Yes)  Util.UpdateVc(rep, pkg);
+                    DialogResult result =
+                        MessageBox.Show($"Package is {pkgState}\nPath={pkg.XMLPath}\nFlags={pkg.Flags}",
+                            @"Update package state?", MessageBoxButtons.YesNo);
+                    if (result == DialogResult.Yes) Util.UpdateVc(rep, pkg);
                 }
             }
             else MessageBox.Show(@"No package selected");
         }
+
         #endregion
+
         #region updateVcStateOfSelectedPackageRecursiveService
-        [ServiceOperation("{A521EB65-3F3C-4C5D-9B82-D12FFCEC71D4}", "Update VC-State of package(recursive)", "Select Packages or model", isTextRequired: false)]
+
+        [ServiceOperation("{A521EB65-3F3C-4C5D-9B82-D12FFCEC71D4}", "Update VC-State of package(recursive)",
+            "Select Packages or model", isTextRequired: false)]
         // ReSharper disable once UnusedMember.Global
         // dynamical usage as configurable service by reflection
         public static void UpdateVcStateOfSelectedPackageRecursiveService(Repository rep)
@@ -4225,11 +4475,11 @@ namespace hoTools.EaServices
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
-               
-                
+
+
                 Package pkg = rep.GetTreeSelectedPackage();
                 UpdateVcStateRecursive(rep, pkg);
-                    //pkg = rep.GetTreeSelectedPackage();
+                //pkg = rep.GetTreeSelectedPackage();
                 //if (pkg != null && pkg.ParentID == 0)
                 //{
                 //    foreach (EA.Package p in rep.Models)
@@ -4247,12 +4497,13 @@ namespace hoTools.EaServices
             {
                 Cursor.Current = Cursors.Default;
             }
-            
         }
+
         #endregion
+
         #region updateVcStateRecursive
 
-        static void UpdateVcStateRecursive(Repository rep, Package pkg,bool recursive=true)
+        static void UpdateVcStateRecursive(Repository rep, Package pkg, bool recursive = true)
         {
             if (pkg.IsControlled) Util.UpdateVc(rep, pkg);
             if (recursive)
@@ -4264,8 +4515,11 @@ namespace hoTools.EaServices
                 }
             }
         }
+
         #endregion
+
         #region getDiagramLinkForConnector
+
         static DiagramLink GetDiagramLinkForConnector(Diagram dia, int connectorId)
         {
             foreach (DiagramLink link in dia.DiagramLinks)
@@ -4274,8 +4528,11 @@ namespace hoTools.EaServices
             }
             return null;
         }
+
         #endregion
+
         #region AddFavorite
+
         /// <summary>
         /// Add selected item to Favorite:
         /// - element, package, diagram, attribute, operation
@@ -4289,10 +4546,12 @@ namespace hoTools.EaServices
         {
             var f = new Favorite(rep, GetGuidfromSelectedItem(rep));
             f.Save();
-
         }
+
         #endregion
+
         #region RemoveFavorite
+
         /// <summary>
         /// Remove selected item to Favorite:
         /// - element, package, diagram, attribute, operation
@@ -4306,10 +4565,12 @@ namespace hoTools.EaServices
         {
             var f = new Favorite(rep, GetGuidfromSelectedItem(rep));
             f.Delete();
-
         }
+
         #endregion
+
         #region Favorites
+
         /// <summary>
         /// List Favorite:
         /// - List Favorites in the search window
@@ -4322,33 +4583,36 @@ namespace hoTools.EaServices
         {
             var f = new Favorite(rep);
             f.Search();
-
         }
+
         #endregion
+
         #region getGuidfromSelectedItem
-        private static string GetGuidfromSelectedItem(Repository rep) {
+
+        private static string GetGuidfromSelectedItem(Repository rep)
+        {
             ObjectType objectType = rep.GetContextItemType();
             string guid = "";
             switch (objectType)
             {
                 case ObjectType.otAttribute:
-                    var a = (EA.Attribute)rep.GetContextObject();
+                    var a = (EA.Attribute) rep.GetContextObject();
                     guid = a.AttributeGUID;
                     break;
                 case ObjectType.otMethod:
-                    var m = (Method)rep.GetContextObject();
+                    var m = (Method) rep.GetContextObject();
                     guid = m.MethodGUID;
                     break;
                 case ObjectType.otElement:
-                    var el = (Element)rep.GetContextObject();
+                    var el = (Element) rep.GetContextObject();
                     guid = el.ElementGUID;
                     break;
                 case ObjectType.otDiagram:
-                    var dia = (Diagram)rep.GetContextObject();
+                    var dia = (Diagram) rep.GetContextObject();
                     guid = dia.DiagramGUID;
                     break;
                 case ObjectType.otPackage:
-                    var pkg = (Package)rep.GetContextObject();
+                    var pkg = (Package) rep.GetContextObject();
                     guid = pkg.PackageGUID;
                     break;
                 default:
@@ -4357,14 +4621,18 @@ namespace hoTools.EaServices
             }
             return guid;
         }
+
         #endregion
+
         #region moveEmbeddedLeftGUI
+
         /// <summary>
         /// Move the selected ports left
         /// - If left level is crossed it locates ports to top left corner.
         /// </summary>
         /// <param name="rep"></param>
-        [ServiceOperation("{28188D09-7B40-4396-8FCF-90EA901CFE12}", "Embedded Elements left", "Select embedded elements", isTextRequired: false)]
+        [ServiceOperation("{28188D09-7B40-4396-8FCF-90EA901CFE12}", "Embedded Elements left", "Select embedded elements",
+            isTextRequired: false)]
         public static void MoveEmbeddedLeftGui(Repository rep)
         {
             Diagram dia = rep.GetCurrentDiagram();
@@ -4374,7 +4642,7 @@ namespace hoTools.EaServices
             rep.SaveDiagram(dia.DiagramID);
 
             // check if port,..
-            var objPort0 = (DiagramObject)dia.SelectedObjects.GetAt(0);
+            var objPort0 = (DiagramObject) dia.SelectedObjects.GetAt(0);
             Element port = rep.GetElementByID(objPort0.ElementID);
             if (!EmbeddedElementTypes.Contains(port.Type)) return;
 
@@ -4386,7 +4654,7 @@ namespace hoTools.EaServices
 
 
             // check if left limit element is crossed
-            int leftLimit = obj.left - 0;// limit cross over left 
+            int leftLimit = obj.left - 0; // limit cross over left 
             bool isRightLimitCrossed = false;
             foreach (DiagramObject objPort in dia.SelectedObjects)
             {
@@ -4395,7 +4663,6 @@ namespace hoTools.EaServices
                     isRightLimitCrossed = true;
                     break;
                 }
-
             }
             // move all to left upper corner of element
             int startValueTop = obj.top - 8;
@@ -4412,23 +4679,25 @@ namespace hoTools.EaServices
                 else
                 {
                     // move from top to down
-                    objPort.top = startValueTop - pos * 20;
+                    objPort.top = startValueTop - pos*20;
                     objPort.left = startValueLeft;
                     objPort.Update();
                     pos = pos + 1;
                 }
-
             }
-          
         }
+
         #endregion
+
         #region moveEmbeddedRightGUI
+
         /// <summary>
         /// Move the selected ports right
         /// - If right level is crossed it locates ports to top right corner.
         /// </summary>
         /// <param name="rep"></param>
-        [ServiceOperation("{91998805-D1E6-4A3E-B9AA-8218B1C9F4AB}", "Embedded Elements right", "Select embedded elements", isTextRequired: false)]
+        [ServiceOperation("{91998805-D1E6-4A3E-B9AA-8218B1C9F4AB}", "Embedded Elements right",
+            "Select embedded elements", isTextRequired: false)]
         public static void MoveEmbeddedRightGui(Repository rep)
         {
             Diagram dia = rep.GetCurrentDiagram();
@@ -4438,7 +4707,7 @@ namespace hoTools.EaServices
             rep.SaveDiagram(dia.DiagramID);
 
             // check if port,..
-            var objPort0 = (DiagramObject)dia.SelectedObjects.GetAt(0);
+            var objPort0 = (DiagramObject) dia.SelectedObjects.GetAt(0);
             Element port = rep.GetElementByID(objPort0.ElementID);
             if (!EmbeddedElementTypes.Contains(port.Type)) return;
 
@@ -4450,7 +4719,7 @@ namespace hoTools.EaServices
 
 
             // check if right limit element is crossed
-            int rightLimit = obj.right - 16;// limit cross over right 
+            int rightLimit = obj.right - 16; // limit cross over right 
             bool isRightLimitCrossed = false;
             foreach (DiagramObject objPort in dia.SelectedObjects)
             {
@@ -4459,7 +4728,6 @@ namespace hoTools.EaServices
                     isRightLimitCrossed = true;
                     break;
                 }
-
             }
             // move all to left upper corner of element
             int startValueTop = obj.top - 8;
@@ -4476,23 +4744,25 @@ namespace hoTools.EaServices
                 else
                 {
                     // move from top to down
-                    objPort.top = startValueTop - pos * 20;
-                    objPort.left = startValueLeft ;
+                    objPort.top = startValueTop - pos*20;
+                    objPort.left = startValueLeft;
                     objPort.Update();
                     pos = pos + 1;
                 }
-
             }
-
         }
+
         #endregion
+
         #region moveEmbeddedDownGUI
+
         /// <summary>
         /// Move the selected ports down
         /// - If lower level is crossed it locates ports to bottom left corners.
         /// </summary>
         /// <param name="rep"></param>
-        [ServiceOperation("{1F5BA798-F9AC-4F80-8004-A8E8236AF629}", "Embedded Elements down", "Select embedded elements", isTextRequired: false)]
+        [ServiceOperation("{1F5BA798-F9AC-4F80-8004-A8E8236AF629}", "Embedded Elements down", "Select embedded elements",
+            isTextRequired: false)]
         public static void MoveEmbeddedDownGui(Repository rep)
         {
             Diagram dia = rep.GetCurrentDiagram();
@@ -4502,7 +4772,7 @@ namespace hoTools.EaServices
             rep.SaveDiagram(dia.DiagramID);
 
             // check if port,..
-            var objPort0 = (DiagramObject)dia.SelectedObjects.GetAt(0);
+            var objPort0 = (DiagramObject) dia.SelectedObjects.GetAt(0);
             Element port = rep.GetElementByID(objPort0.ElementID);
             if (!EmbeddedElementTypes.Contains(port.Type)) return;
 
@@ -4513,7 +4783,7 @@ namespace hoTools.EaServices
             //EA.DiagramObject obj = dia.GetDiagramObjectByID(el.ElementID, "");
 
             // check if lower limit element is crossed
-            int lowerLimit = obj.bottom + 12;// limit cross over upper 
+            int lowerLimit = obj.bottom + 12; // limit cross over upper 
             bool isLowerLimitCrossed = false;
             foreach (DiagramObject objPort in dia.SelectedObjects)
             {
@@ -4522,7 +4792,6 @@ namespace hoTools.EaServices
                     isLowerLimitCrossed = true;
                     break;
                 }
-
             }
             // move all to left upper corner of element
             int startValueTop = obj.bottom + 8;
@@ -4540,25 +4809,24 @@ namespace hoTools.EaServices
                 {
                     // move from left to right
                     objPort.top = startValueTop;
-                    objPort.left = startValueLeft + pos * 20;
+                    objPort.left = startValueLeft + pos*20;
                     objPort.Update();
                     pos = pos + 1;
                 }
-
             }
-
-
-            
-
         }
+
         #endregion
+
         #region moveEmbeddedUpGUI
+
         /// <summary>
         /// Move the selected ports up
         /// - If upper level is crossed it locates ports to top left corners.
         /// </summary>
         /// <param name="rep"></param>
-        [ServiceOperation("{26F5F957-4CFD-4684-9417-305A1615460A}", "Embedded Elements up", "Select embedded elements", isTextRequired: false)]
+        [ServiceOperation("{26F5F957-4CFD-4684-9417-305A1615460A}", "Embedded Elements up", "Select embedded elements",
+            isTextRequired: false)]
         public static void MoveEmbeddedUpGui(Repository rep)
         {
             Diagram dia = rep.GetCurrentDiagram();
@@ -4568,19 +4836,19 @@ namespace hoTools.EaServices
             rep.SaveDiagram(dia.DiagramID);
 
             // check if port,..
-            var objPort0 = (DiagramObject)dia.SelectedObjects.GetAt(0);
+            var objPort0 = (DiagramObject) dia.SelectedObjects.GetAt(0);
             Element port = rep.GetElementByID(objPort0.ElementID);
-            if (  ! EmbeddedElementTypes.Contains(port.Type) ) return;
+            if (!EmbeddedElementTypes.Contains(port.Type)) return;
 
             // get parent of embedded element
             Element el = rep.GetElementByID(port.ParentID);
 
             DiagramObject obj = Util.GetDiagramObjectById(rep, dia, el.ElementID);
             //EA.DiagramObject obj = dia.GetDiagramObjectByID(el.ElementID, "");
-          
+
 
             // check if upper limit element is crossed
-            int upLimit = obj.top - 10;// limit cross over upper 
+            int upLimit = obj.top - 10; // limit cross over upper 
             bool isUpperLimitCrossed = false;
             foreach (DiagramObject objPort in dia.SelectedObjects)
             {
@@ -4589,35 +4857,34 @@ namespace hoTools.EaServices
                     isUpperLimitCrossed = true;
                     break;
                 }
-
             }
             // move all to left upper corner of element
             int startValueTop = obj.top + 8;
             int startValueLeft = obj.left + 8;
             int pos = 0;
-            foreach (DiagramObject objPort in dia.SelectedObjects) 
+            foreach (DiagramObject objPort in dia.SelectedObjects)
             {
-                if (! isUpperLimitCrossed)
+                if (!isUpperLimitCrossed)
                 {
                     // move to top
                     objPort.top = objPort.top + 10;
                     objPort.Update();
-                }else 
+                }
+                else
                 {
                     // move from left to right
                     objPort.top = startValueTop;
-                    objPort.left = startValueLeft + pos * 20;
+                    objPort.left = startValueLeft + pos*20;
                     objPort.Update();
                     pos = pos + 1;
                 }
-               
             }
-
-
         }
+
         #endregion
 
         #region About
+
         /// <summary>
         /// Outputs the About window
         /// </summary>
@@ -4640,18 +4907,19 @@ Workshops, Training Coaching, Project Work
  -- Query & Script
  !!!Make live with EA easier and more efficient!!!
 ";
-            
-            
+
+
             string s2 =
                 $"\nInstall:\t {installDir}\nConfig:\t {configFilePath}\n\n\nhoTools  {release} (AddinClass.dll AssemblyFileVersion)";
 
 
             MessageBox.Show(s1 + s2, @"hoTools");
-
         }
+
         #endregion
 
-        public static void AboutVar1(string release, string configFilePath) {
+        public static void AboutVar1(string release, string configFilePath)
+        {
             string installDir = Path.GetDirectoryName(Assembly.GetAssembly(typeof(EaService)).CodeBase);
             string s1 = @"!!!Make live with EA easier and more efficient!!!
 
@@ -4669,9 +4937,10 @@ Workshops, Training Coaching, Project Work
 ";
 
             string s2 =
-               $"Install:\t {installDir}\nConfig:\t {configFilePath}\nhoTools  {release} (AddinClass.dll AssemblyFileVersion)";
+                $"Install:\t {installDir}\nConfig:\t {configFilePath}\nhoTools  {release} (AddinClass.dll AssemblyFileVersion)";
             MessageBox.Show(s1 + s2, @"hoTools");
         }
+
         #endregion
     }
 }

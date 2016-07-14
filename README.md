@@ -97,7 +97,10 @@ Some features:
 
 # Scheduled (release 2.0.5)
 - Lock/Unlock for Package
-
+- QuickSearch
+  - With easy change of Search (EA, SQL)
+  - Reset to default Search
+  - Set Default Search
 
 # Bugfixes
 - minor

@@ -220,7 +220,7 @@
             this.cmbGlobalKey5Tooltip.Multiline = true;
             this.cmbGlobalKey5Tooltip.Name = "cmbGlobalKey5Tooltip";
             this.cmbGlobalKey5Tooltip.ReadOnly = true;
-            this.cmbGlobalKey5Tooltip.Size = new System.Drawing.Size(280, 21);
+            this.cmbGlobalKey5Tooltip.Size = new System.Drawing.Size(426, 21);
             this.cmbGlobalKey5Tooltip.TabIndex = 143;
             this.toolTip1.SetToolTip(this.cmbGlobalKey5Tooltip, "Tooltip");
             // 
@@ -309,7 +309,7 @@
             this.cmbGlobalKey4Tooltip.Multiline = true;
             this.cmbGlobalKey4Tooltip.Name = "cmbGlobalKey4Tooltip";
             this.cmbGlobalKey4Tooltip.ReadOnly = true;
-            this.cmbGlobalKey4Tooltip.Size = new System.Drawing.Size(280, 21);
+            this.cmbGlobalKey4Tooltip.Size = new System.Drawing.Size(426, 21);
             this.cmbGlobalKey4Tooltip.TabIndex = 136;
             this.toolTip1.SetToolTip(this.cmbGlobalKey4Tooltip, "Tooltip");
             // 
@@ -398,7 +398,7 @@
             this.cmbGlobalKey3Tooltip.Multiline = true;
             this.cmbGlobalKey3Tooltip.Name = "cmbGlobalKey3Tooltip";
             this.cmbGlobalKey3Tooltip.ReadOnly = true;
-            this.cmbGlobalKey3Tooltip.Size = new System.Drawing.Size(280, 21);
+            this.cmbGlobalKey3Tooltip.Size = new System.Drawing.Size(426, 21);
             this.cmbGlobalKey3Tooltip.TabIndex = 129;
             this.toolTip1.SetToolTip(this.cmbGlobalKey3Tooltip, "Tooltip");
             // 
@@ -487,7 +487,7 @@
             this.cmbGlobalKey2Tooltip.Multiline = true;
             this.cmbGlobalKey2Tooltip.Name = "cmbGlobalKey2Tooltip";
             this.cmbGlobalKey2Tooltip.ReadOnly = true;
-            this.cmbGlobalKey2Tooltip.Size = new System.Drawing.Size(280, 21);
+            this.cmbGlobalKey2Tooltip.Size = new System.Drawing.Size(426, 21);
             this.cmbGlobalKey2Tooltip.TabIndex = 122;
             this.toolTip1.SetToolTip(this.cmbGlobalKey2Tooltip, "Tooltip");
             // 
@@ -576,7 +576,7 @@
             this.cmbGlobalKey1Tooltip.Multiline = true;
             this.cmbGlobalKey1Tooltip.Name = "cmbGlobalKey1Tooltip";
             this.cmbGlobalKey1Tooltip.ReadOnly = true;
-            this.cmbGlobalKey1Tooltip.Size = new System.Drawing.Size(280, 21);
+            this.cmbGlobalKey1Tooltip.Size = new System.Drawing.Size(426, 21);
             this.cmbGlobalKey1Tooltip.TabIndex = 114;
             this.toolTip1.SetToolTip(this.cmbGlobalKey1Tooltip, "Tooltip");
             // 
@@ -597,7 +597,7 @@
             this.cmbGlobalKeySearch5SearchTerm.Location = new System.Drawing.Point(660, 158);
             this.cmbGlobalKeySearch5SearchTerm.Margin = new System.Windows.Forms.Padding(2);
             this.cmbGlobalKeySearch5SearchTerm.Name = "cmbGlobalKeySearch5SearchTerm";
-            this.cmbGlobalKeySearch5SearchTerm.Size = new System.Drawing.Size(280, 21);
+            this.cmbGlobalKeySearch5SearchTerm.Size = new System.Drawing.Size(426, 21);
             this.cmbGlobalKeySearch5SearchTerm.TabIndex = 162;
             this.toolTip1.SetToolTip(this.cmbGlobalKeySearch5SearchTerm, resources.GetString("cmbGlobalKeySearch5SearchTerm.ToolTip"));
             // 
@@ -628,7 +628,7 @@
             this.cmbGlobalKeySearch4SearchTerm.Location = new System.Drawing.Point(659, 136);
             this.cmbGlobalKeySearch4SearchTerm.Margin = new System.Windows.Forms.Padding(2);
             this.cmbGlobalKeySearch4SearchTerm.Name = "cmbGlobalKeySearch4SearchTerm";
-            this.cmbGlobalKeySearch4SearchTerm.Size = new System.Drawing.Size(281, 21);
+            this.cmbGlobalKeySearch4SearchTerm.Size = new System.Drawing.Size(427, 21);
             this.cmbGlobalKeySearch4SearchTerm.TabIndex = 160;
             this.toolTip1.SetToolTip(this.cmbGlobalKeySearch4SearchTerm, resources.GetString("cmbGlobalKeySearch4SearchTerm.ToolTip"));
             // 
@@ -669,7 +669,7 @@
             this.cmbGlobalKeySearch3SearchTerm.Location = new System.Drawing.Point(659, 113);
             this.cmbGlobalKeySearch3SearchTerm.Margin = new System.Windows.Forms.Padding(2);
             this.cmbGlobalKeySearch3SearchTerm.Name = "cmbGlobalKeySearch3SearchTerm";
-            this.cmbGlobalKeySearch3SearchTerm.Size = new System.Drawing.Size(281, 21);
+            this.cmbGlobalKeySearch3SearchTerm.Size = new System.Drawing.Size(427, 21);
             this.cmbGlobalKeySearch3SearchTerm.TabIndex = 158;
             this.toolTip1.SetToolTip(this.cmbGlobalKeySearch3SearchTerm, resources.GetString("cmbGlobalKeySearch3SearchTerm.ToolTip"));
             // 
@@ -710,7 +710,7 @@
             this.cmbGlobalKeySearch2SearchTerm.Location = new System.Drawing.Point(660, 88);
             this.cmbGlobalKeySearch2SearchTerm.Margin = new System.Windows.Forms.Padding(2);
             this.cmbGlobalKeySearch2SearchTerm.Name = "cmbGlobalKeySearch2SearchTerm";
-            this.cmbGlobalKeySearch2SearchTerm.Size = new System.Drawing.Size(280, 21);
+            this.cmbGlobalKeySearch2SearchTerm.Size = new System.Drawing.Size(426, 21);
             this.cmbGlobalKeySearch2SearchTerm.TabIndex = 156;
             this.toolTip1.SetToolTip(this.cmbGlobalKeySearch2SearchTerm, resources.GetString("cmbGlobalKeySearch2SearchTerm.ToolTip"));
             // 
@@ -751,7 +751,7 @@
             this.cmbGlobalKeySearch1SearchTerm.Location = new System.Drawing.Point(660, 63);
             this.cmbGlobalKeySearch1SearchTerm.Margin = new System.Windows.Forms.Padding(2);
             this.cmbGlobalKeySearch1SearchTerm.Name = "cmbGlobalKeySearch1SearchTerm";
-            this.cmbGlobalKeySearch1SearchTerm.Size = new System.Drawing.Size(280, 21);
+            this.cmbGlobalKeySearch1SearchTerm.Size = new System.Drawing.Size(426, 21);
             this.cmbGlobalKeySearch1SearchTerm.TabIndex = 153;
             this.toolTip1.SetToolTip(this.cmbGlobalKeySearch1SearchTerm, resources.GetString("cmbGlobalKeySearch1SearchTerm.ToolTip"));
             // 
@@ -963,7 +963,7 @@
             this.groupBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox5.Location = new System.Drawing.Point(22, 251);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(958, 188);
+            this.groupBox5.Size = new System.Drawing.Size(1091, 188);
             this.groupBox5.TabIndex = 195;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Searches on EA Global Keys ";
@@ -1044,7 +1044,7 @@
             this.txtSqlSearchPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSqlSearchPath.Location = new System.Drawing.Point(317, 455);
             this.txtSqlSearchPath.Name = "txtSqlSearchPath";
-            this.txtSqlSearchPath.Size = new System.Drawing.Size(536, 24);
+            this.txtSqlSearchPath.Size = new System.Drawing.Size(791, 24);
             this.txtSqlSearchPath.TabIndex = 234;
             this.toolTip1.SetToolTip(this.txtSqlSearchPath, "Paths hoTools searches for SQL Queries to run:\r\n\r\nA semicolon seperated list of p" +
         "aths hoTools searches for the SQL query to execute.\r\n\r\nLike: c:\\temp\\sql;d:\\temp" +
@@ -1126,7 +1126,7 @@
             this.groupBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox4.Location = new System.Drawing.Point(22, 40);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(959, 205);
+            this.groupBox4.Size = new System.Drawing.Size(1091, 205);
             this.groupBox4.TabIndex = 150;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Services on EA Global Keys";
@@ -1156,7 +1156,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1015, 554);
+            this.ClientSize = new System.Drawing.Size(1125, 554);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtSqlSearchPath);
             this.Controls.Add(this.label2);

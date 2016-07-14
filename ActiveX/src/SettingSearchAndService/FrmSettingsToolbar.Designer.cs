@@ -132,7 +132,7 @@
             this.cmbService1.ItemHeight = 18;
             this.cmbService1.Location = new System.Drawing.Point(174, 47);
             this.cmbService1.Name = "cmbService1";
-            this.cmbService1.Size = new System.Drawing.Size(470, 26);
+            this.cmbService1.Size = new System.Drawing.Size(381, 26);
             this.cmbService1.TabIndex = 42;
             this.toolTip1.SetToolTip(this.cmbService1, "Choose your service Function");
             this.cmbService1.SelectedIndexChanged += new System.EventHandler(this.cmbService_SelectedIndexChanged);
@@ -193,7 +193,7 @@
             this.cmbService5.FormattingEnabled = true;
             this.cmbService5.Location = new System.Drawing.Point(174, 150);
             this.cmbService5.Name = "cmbService5";
-            this.cmbService5.Size = new System.Drawing.Size(470, 26);
+            this.cmbService5.Size = new System.Drawing.Size(381, 26);
             this.cmbService5.TabIndex = 46;
             this.toolTip1.SetToolTip(this.cmbService5, "Choose your service Function");
             this.cmbService5.SelectedIndexChanged += new System.EventHandler(this.cmbService_SelectedIndexChanged);
@@ -204,7 +204,7 @@
             this.cmbService4.FormattingEnabled = true;
             this.cmbService4.Location = new System.Drawing.Point(174, 122);
             this.cmbService4.Name = "cmbService4";
-            this.cmbService4.Size = new System.Drawing.Size(470, 26);
+            this.cmbService4.Size = new System.Drawing.Size(381, 26);
             this.cmbService4.TabIndex = 45;
             this.toolTip1.SetToolTip(this.cmbService4, "Choose your service Function");
             this.cmbService4.SelectedIndexChanged += new System.EventHandler(this.cmbService_SelectedIndexChanged);
@@ -215,7 +215,7 @@
             this.cmbService3.FormattingEnabled = true;
             this.cmbService3.Location = new System.Drawing.Point(174, 99);
             this.cmbService3.Name = "cmbService3";
-            this.cmbService3.Size = new System.Drawing.Size(470, 26);
+            this.cmbService3.Size = new System.Drawing.Size(381, 26);
             this.cmbService3.TabIndex = 44;
             this.toolTip1.SetToolTip(this.cmbService3, "Choose your service Function");
             this.cmbService3.SelectedIndexChanged += new System.EventHandler(this.cmbService_SelectedIndexChanged);
@@ -226,7 +226,7 @@
             this.cmbService2.FormattingEnabled = true;
             this.cmbService2.Location = new System.Drawing.Point(174, 73);
             this.cmbService2.Name = "cmbService2";
-            this.cmbService2.Size = new System.Drawing.Size(470, 26);
+            this.cmbService2.Size = new System.Drawing.Size(381, 26);
             this.cmbService2.TabIndex = 43;
             this.toolTip1.SetToolTip(this.cmbService2, "Choose your service Function");
             this.cmbService2.SelectedIndexChanged += new System.EventHandler(this.cmbService_SelectedIndexChanged);
@@ -570,46 +570,46 @@
             // txtServiceTooltip5
             // 
             this.txtServiceTooltip5.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtServiceTooltip5.Location = new System.Drawing.Point(659, 151);
+            this.txtServiceTooltip5.Location = new System.Drawing.Point(561, 151);
             this.txtServiceTooltip5.Name = "txtServiceTooltip5";
             this.txtServiceTooltip5.ReadOnly = true;
-            this.txtServiceTooltip5.Size = new System.Drawing.Size(460, 24);
+            this.txtServiceTooltip5.Size = new System.Drawing.Size(558, 24);
             this.txtServiceTooltip5.TabIndex = 65;
             // 
             // txtServiceTooltip1
             // 
             this.txtServiceTooltip1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtServiceTooltip1.Location = new System.Drawing.Point(659, 47);
+            this.txtServiceTooltip1.Location = new System.Drawing.Point(561, 47);
             this.txtServiceTooltip1.Name = "txtServiceTooltip1";
             this.txtServiceTooltip1.ReadOnly = true;
-            this.txtServiceTooltip1.Size = new System.Drawing.Size(460, 24);
+            this.txtServiceTooltip1.Size = new System.Drawing.Size(558, 24);
             this.txtServiceTooltip1.TabIndex = 61;
             // 
             // txtServiceTooltip4
             // 
             this.txtServiceTooltip4.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtServiceTooltip4.Location = new System.Drawing.Point(659, 122);
+            this.txtServiceTooltip4.Location = new System.Drawing.Point(561, 122);
             this.txtServiceTooltip4.Name = "txtServiceTooltip4";
             this.txtServiceTooltip4.ReadOnly = true;
-            this.txtServiceTooltip4.Size = new System.Drawing.Size(460, 24);
+            this.txtServiceTooltip4.Size = new System.Drawing.Size(558, 24);
             this.txtServiceTooltip4.TabIndex = 64;
             // 
             // txtServiceTooltip2
             // 
             this.txtServiceTooltip2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtServiceTooltip2.Location = new System.Drawing.Point(659, 71);
+            this.txtServiceTooltip2.Location = new System.Drawing.Point(561, 71);
             this.txtServiceTooltip2.Name = "txtServiceTooltip2";
             this.txtServiceTooltip2.ReadOnly = true;
-            this.txtServiceTooltip2.Size = new System.Drawing.Size(460, 24);
+            this.txtServiceTooltip2.Size = new System.Drawing.Size(558, 24);
             this.txtServiceTooltip2.TabIndex = 62;
             // 
             // txtServiceTooltip3
             // 
             this.txtServiceTooltip3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtServiceTooltip3.Location = new System.Drawing.Point(659, 97);
+            this.txtServiceTooltip3.Location = new System.Drawing.Point(561, 97);
             this.txtServiceTooltip3.Name = "txtServiceTooltip3";
             this.txtServiceTooltip3.ReadOnly = true;
-            this.txtServiceTooltip3.Size = new System.Drawing.Size(460, 24);
+            this.txtServiceTooltip3.Size = new System.Drawing.Size(558, 24);
             this.txtServiceTooltip3.TabIndex = 63;
             // 
             // label3
@@ -630,7 +630,7 @@
             this.txtSqlSearchPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSqlSearchPath.Location = new System.Drawing.Point(302, 220);
             this.txtSqlSearchPath.Name = "txtSqlSearchPath";
-            this.txtSqlSearchPath.Size = new System.Drawing.Size(536, 24);
+            this.txtSqlSearchPath.Size = new System.Drawing.Size(826, 24);
             this.txtSqlSearchPath.TabIndex = 236;
             this.toolTip1.SetToolTip(this.txtSqlSearchPath, "Paths hoTools searches for SQL Queries to run:\r\n\r\nA semicolon seperated list of p" +
         "aths hoTools searches for the SQL query to execute.\r\n\r\nLike: c:\\temp\\sql;d:\\temp" +
@@ -654,9 +654,9 @@
             this.label6.Location = new System.Drawing.Point(13, 250);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(155, 20);
+            this.label6.Size = new System.Drawing.Size(164, 20);
             this.label6.TabIndex = 243;
-            this.label6.Text = "Show Query Buttons";
+            this.label6.Text = "Show Search Buttons";
             this.toolTip1.SetToolTip(this.label6, "Add Buttons to start a Query with just one click");
             // 
             // label5
@@ -767,9 +767,9 @@
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(297, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(205, 29);
+            this.label1.Size = new System.Drawing.Size(197, 29);
             this.label1.TabIndex = 196;
-            this.label1.Text = "hoTools: Toolbar ";
+            this.label1.Text = "Settings Toolbar ";
             // 
             // label9
             // 
