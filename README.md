@@ -97,13 +97,17 @@ Some features:
 
 # Scheduled (release 2.0.5)
 - Lock/Unlock for Package
+- Error fixed Script usage of hoTools as COM Object
+- Run hoTools SQL from Script 
+
+# Schedules (release 2.0.6)
 - QuickSearch
   - With easy change of Search (EA, SQL)
   - Reset to default Search
   - Set Default Search
 
 # Bugfixes
-- minor
+- Error fixed Script usage of hoTools as COM Object
 
 # Not yet scheduled
 - Drag SQL file on canvas

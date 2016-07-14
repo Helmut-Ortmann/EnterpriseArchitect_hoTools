@@ -202,4 +202,43 @@ function hoDemo3Parameter(ModelItem, ObjectType, Model)
 end function</value>
     <comment>Demo Script to show Query with Script functionality with 3 Parameters</comment>
   </data>
+  <data name="hoDemoRunSql" xml:space="preserve">
+    <value>'EA-Matic
+' Usage of Geert Bellekens Script Framework to administer Scripts recommended
+'[path=\Framework\ho\hoTools]
+'[group=hoTools]
+'option explicit
+
+!INC Local Scripts.EAConstants-VBScript
+'----------------------------------------------------------------------
+' Dim doesn't work (syntax error, used in EA for intellissense)
+' Object 'Session' doesn't exist (use  Repository.WriteOutput "Script", "MyTest",0)
+' Var 'Repository' is loaded by script environment
+' You may create an instance 'EAAddinFramework.Utils.Model' of the first running EA-Instance
+
+'---------------------------------------------------------------------
+' Demo Script to show how to run an SQL file by Script
+sub hoDemoRunSql
+   ' The EA default variable 'Repository'
+    'Repository.ClearOutput("Script")
+    Repository.EnsureOutputVisible("Script") 
+
+    ' just output the parameters
+	Repository.WriteOutput "Script","hoDemoRunSql for d:\temp\Branch.sql",0
+	
+	' Get Repository via Model object.
+    set m = CreateObject("EAAddinFramework.Utils.Model")
+    ' Create new Model Object with the first running EA instance
+	set rep = m.Repository
+	rep.EnsureOutputVisible("Script") 
+	' Run the SQL
+	' par 1: EA Search-name, SQL relative file (SQL Paths in Settings) or absolute file
+    ' par 2: &lt;Search Term&gt;, supports wild cards ('%','*','_','?'), see Wiki on GitHub
+	m.SearchRun "d:\temp\sql\Branch.sql", ""
+end sub
+
+' Run the function
+hoDemoRunSql</value>
+    <comment>Demo Script to run SQL Search from Script</comment>
+  </data>
 </root>

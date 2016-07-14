@@ -520,7 +520,7 @@ namespace hoTools.Query
             this.loadStandardScriptsToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
             this.loadStandardScriptsToolStripMenuItem.Text = "LoadStandardScripts";
             this.loadStandardScriptsToolStripMenuItem.ToolTipText = "Load demo scripts to process SQL query results:\r\n- ScriptGroup: hoTools\r\n- hoDemo" +
-    "2Par\r\n- hoDemo3Par";
+    "2Par\r\n- hoDemo3Par\r\n- hoDemoRunSql";
             this.loadStandardScriptsToolStripMenuItem.Click += new System.EventHandler(this.loadStandardScriptsToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem

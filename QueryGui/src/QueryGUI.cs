@@ -773,9 +773,17 @@ namespace hoTools.Query
             code = rm.GetString("hoDemo3ParScript");
             script = new EaScript(Model, "hoDemo3Par", "Internal", "VBScript", group.Guid, code);
             script.Save();
+
+            // new script for script group "hoTools"
+            code = rm.GetString("hoDemoRunSql");
+            script = new EaScript(Model, "hoDemoRunSql", "Internal", "VBScript", group.Guid, code);
+            script.Save();
+
+           
             MessageBox.Show(@"ScriptGroup: hoTools
 - Script1: hoDemo2Par
-- Script2: hoDemo3Par",
+- Script2: hoDemo3Par
+- Script3: hoDemoRunSql",
                 @"Demo Scripts to run on query loaded.");
         }
 

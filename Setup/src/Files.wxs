@@ -49,8 +49,77 @@
       <Component Id="EaServices" Guid="EDB06D59-762F-4B7D-BCFF-7C59DDFC3519">
         <File Id="EaServices" KeyPath="yes" Name="EaServices.dll"  Source="$(var.EaServices.TargetPath)" />
       </Component>
+      <!--
+      Name="AddinFramework.dll" Source="$(var.AddinFramework.TargetPath)" />
+      Update if Assembly, Visual Studio Version changed
+      -->
       <Component Id="AddinFramework" Guid="2D0DD439-7CE9-4EBE-BF29-CD4EBA09CD44">
-        <File Id="AddinFramework" KeyPath="yes" Name="AddinFramework.dll"  Source="$(var.AddinFramework.TargetPath)" />
+        <Class Id="{18EAA8B5-21FE-319E-ABA9-104E7C99F095}" Context="InprocServer32" Description="EAAddinFramework.Utils.Model" ThreadingModel="both" ForeignServer="mscoree.dll">
+          <ProgId Id="EAAddinFramework.Utils.Model" Description="EAAddinFramework.Utils.Model" />
+        </Class>
+        <Class Id="{19B9E8D9-2463-3B21-95D1-03E9415956D6}" Context="InprocServer32" Description="EAAddinFramework.Utils.JScriptLanguage" ThreadingModel="both" ForeignServer="mscoree.dll">
+          <ProgId Id="EAAddinFramework.Utils.JScriptLanguage" Description="EAAddinFramework.Utils.JScriptLanguage" />
+        </Class>
+        <Class Id="{38E8989F-563F-30A2-9BD5-F3C00FCC9824}" Context="InprocServer32" Description="EAAddinFramework.Utils.JavaScriptLanguage" ThreadingModel="both" ForeignServer="mscoree.dll">
+          <ProgId Id="EAAddinFramework.Utils.JavaScriptLanguage" Description="EAAddinFramework.Utils.JavaScriptLanguage" />
+        </Class>
+        <Class Id="{B889C989-4903-3FA8-AFE4-FFE02DA61805}" Context="InprocServer32" Description="EAAddinFramework.Utils.VBScriptLanguage" ThreadingModel="both" ForeignServer="mscoree.dll">
+          <ProgId Id="EAAddinFramework.Utils.VBScriptLanguage" Description="EAAddinFramework.Utils.VBScriptLanguage" />
+        </Class>
+        <File Id="filAFC29951E4CFCABC13B9E448EEB2FD5D" KeyPath="yes"       Name="AddinFramework.dll" Source="$(var.AddinFramework.TargetPath)" />
+        <ProgId Id="Record" />
+        <RegistryValue Root="HKCR" Key="CLSID\{18EAA8B5-21FE-319E-ABA9-104E7C99F095}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{18EAA8B5-21FE-319E-ABA9-104E7C99F095}\InprocServer32\2.0.0.1" Name="Class" Value="EAAddinFramework.Utils.Model" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{18EAA8B5-21FE-319E-ABA9-104E7C99F095}\InprocServer32\2.0.0.1" Name="Assembly" Value="AddinFramework, Version=2.0.0.1, Culture=neutral, PublicKeyToken=37ea3d95ffcb87e1" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{18EAA8B5-21FE-319E-ABA9-104E7C99F095}\InprocServer32\2.0.0.1" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{18EAA8B5-21FE-319E-ABA9-104E7C99F095}\InprocServer32\2.0.0.1" Name="CodeBase" Value="file:///[#filAFC29951E4CFCABC13B9E448EEB2FD5D]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{18EAA8B5-21FE-319E-ABA9-104E7C99F095}\InprocServer32" Name="Class" Value="EAAddinFramework.Utils.Model" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{18EAA8B5-21FE-319E-ABA9-104E7C99F095}\InprocServer32" Name="Assembly" Value="AddinFramework, Version=2.0.0.1, Culture=neutral, PublicKeyToken=37ea3d95ffcb87e1" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{18EAA8B5-21FE-319E-ABA9-104E7C99F095}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{18EAA8B5-21FE-319E-ABA9-104E7C99F095}\InprocServer32" Name="CodeBase" Value="file:///[#filAFC29951E4CFCABC13B9E448EEB2FD5D]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{19B9E8D9-2463-3B21-95D1-03E9415956D6}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{19B9E8D9-2463-3B21-95D1-03E9415956D6}\InprocServer32\2.0.0.1" Name="Class" Value="EAAddinFramework.Utils.JScriptLanguage" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{19B9E8D9-2463-3B21-95D1-03E9415956D6}\InprocServer32\2.0.0.1" Name="Assembly" Value="AddinFramework, Version=2.0.0.1, Culture=neutral, PublicKeyToken=37ea3d95ffcb87e1" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{19B9E8D9-2463-3B21-95D1-03E9415956D6}\InprocServer32\2.0.0.1" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{19B9E8D9-2463-3B21-95D1-03E9415956D6}\InprocServer32\2.0.0.1" Name="CodeBase" Value="file:///[#filAFC29951E4CFCABC13B9E448EEB2FD5D]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{19B9E8D9-2463-3B21-95D1-03E9415956D6}\InprocServer32" Name="Class" Value="EAAddinFramework.Utils.JScriptLanguage" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{19B9E8D9-2463-3B21-95D1-03E9415956D6}\InprocServer32" Name="Assembly" Value="AddinFramework, Version=2.0.0.1, Culture=neutral, PublicKeyToken=37ea3d95ffcb87e1" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{19B9E8D9-2463-3B21-95D1-03E9415956D6}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{19B9E8D9-2463-3B21-95D1-03E9415956D6}\InprocServer32" Name="CodeBase" Value="file:///[#filAFC29951E4CFCABC13B9E448EEB2FD5D]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{38E8989F-563F-30A2-9BD5-F3C00FCC9824}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{38E8989F-563F-30A2-9BD5-F3C00FCC9824}\InprocServer32\2.0.0.1" Name="Class" Value="EAAddinFramework.Utils.JavaScriptLanguage" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{38E8989F-563F-30A2-9BD5-F3C00FCC9824}\InprocServer32\2.0.0.1" Name="Assembly" Value="AddinFramework, Version=2.0.0.1, Culture=neutral, PublicKeyToken=37ea3d95ffcb87e1" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{38E8989F-563F-30A2-9BD5-F3C00FCC9824}\InprocServer32\2.0.0.1" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{38E8989F-563F-30A2-9BD5-F3C00FCC9824}\InprocServer32\2.0.0.1" Name="CodeBase" Value="file:///[#filAFC29951E4CFCABC13B9E448EEB2FD5D]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{38E8989F-563F-30A2-9BD5-F3C00FCC9824}\InprocServer32" Name="Class" Value="EAAddinFramework.Utils.JavaScriptLanguage" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{38E8989F-563F-30A2-9BD5-F3C00FCC9824}\InprocServer32" Name="Assembly" Value="AddinFramework, Version=2.0.0.1, Culture=neutral, PublicKeyToken=37ea3d95ffcb87e1" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{38E8989F-563F-30A2-9BD5-F3C00FCC9824}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{38E8989F-563F-30A2-9BD5-F3C00FCC9824}\InprocServer32" Name="CodeBase" Value="file:///[#filAFC29951E4CFCABC13B9E448EEB2FD5D]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{B889C989-4903-3FA8-AFE4-FFE02DA61805}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{B889C989-4903-3FA8-AFE4-FFE02DA61805}\InprocServer32\2.0.0.1" Name="Class" Value="EAAddinFramework.Utils.VBScriptLanguage" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{B889C989-4903-3FA8-AFE4-FFE02DA61805}\InprocServer32\2.0.0.1" Name="Assembly" Value="AddinFramework, Version=2.0.0.1, Culture=neutral, PublicKeyToken=37ea3d95ffcb87e1" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{B889C989-4903-3FA8-AFE4-FFE02DA61805}\InprocServer32\2.0.0.1" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{B889C989-4903-3FA8-AFE4-FFE02DA61805}\InprocServer32\2.0.0.1" Name="CodeBase" Value="file:///[#filAFC29951E4CFCABC13B9E448EEB2FD5D]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{B889C989-4903-3FA8-AFE4-FFE02DA61805}\InprocServer32" Name="Class" Value="EAAddinFramework.Utils.VBScriptLanguage" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{B889C989-4903-3FA8-AFE4-FFE02DA61805}\InprocServer32" Name="Assembly" Value="AddinFramework, Version=2.0.0.1, Culture=neutral, PublicKeyToken=37ea3d95ffcb87e1" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{B889C989-4903-3FA8-AFE4-FFE02DA61805}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{B889C989-4903-3FA8-AFE4-FFE02DA61805}\InprocServer32" Name="CodeBase" Value="file:///[#filAFC29951E4CFCABC13B9E448EEB2FD5D]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="Record\{4366B1A3-019C-3153-92A0-E4047A881C04}\2.0.0.1" Name="Class" Value="EAAddinFramework.EASpecific.ScriptType" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="Record\{4366B1A3-019C-3153-92A0-E4047A881C04}\2.0.0.1" Name="Assembly" Value="AddinFramework, Version=2.0.0.1, Culture=neutral, PublicKeyToken=37ea3d95ffcb87e1" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="Record\{4366B1A3-019C-3153-92A0-E4047A881C04}\2.0.0.1" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="Record\{4366B1A3-019C-3153-92A0-E4047A881C04}\2.0.0.1" Name="CodeBase" Value="file:///[#filAFC29951E4CFCABC13B9E448EEB2FD5D]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="Record\{5E1E504C-95C7-4B14-A0F6-70329F70084A}\2.0.0.1" Name="Class" Value="EA.ObjectType" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="Record\{5E1E504C-95C7-4B14-A0F6-70329F70084A}\2.0.0.1" Name="Assembly" Value="AddinFramework, Version=2.0.0.1, Culture=neutral, PublicKeyToken=37ea3d95ffcb87e1" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="Record\{5E1E504C-95C7-4B14-A0F6-70329F70084A}\2.0.0.1" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="Record\{5E1E504C-95C7-4B14-A0F6-70329F70084A}\2.0.0.1" Name="CodeBase" Value="file:///[#filAFC29951E4CFCABC13B9E448EEB2FD5D]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="Record\{D37F5AD5-1759-327B-ACA7-312CAC7A7C90}\2.0.0.1" Name="Class" Value="EAAddinFramework.Utils.Model+RepositoryType" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="Record\{D37F5AD5-1759-327B-ACA7-312CAC7A7C90}\2.0.0.1" Name="Assembly" Value="AddinFramework, Version=2.0.0.1, Culture=neutral, PublicKeyToken=37ea3d95ffcb87e1" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="Record\{D37F5AD5-1759-327B-ACA7-312CAC7A7C90}\2.0.0.1" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="Record\{D37F5AD5-1759-327B-ACA7-312CAC7A7C90}\2.0.0.1" Name="CodeBase" Value="file:///[#filAFC29951E4CFCABC13B9E448EEB2FD5D]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="Record\{E0124CC9-70A0-310E-B449-12A9E45D945D}\2.0.0.1" Name="Class" Value="EAAddinFramework.Utils.EaScriptGroup+EaScriptGroupType" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="Record\{E0124CC9-70A0-310E-B449-12A9E45D945D}\2.0.0.1" Name="Assembly" Value="AddinFramework, Version=2.0.0.1, Culture=neutral, PublicKeyToken=37ea3d95ffcb87e1" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="Record\{E0124CC9-70A0-310E-B449-12A9E45D945D}\2.0.0.1" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="Record\{E0124CC9-70A0-310E-B449-12A9E45D945D}\2.0.0.1" Name="CodeBase" Value="file:///[#filAFC29951E4CFCABC13B9E448EEB2FD5D]" Type="string" Action="write" />
       </Component>
       <!--
       Name="AddinClass.dll" Source="$(var.AddinClass.TargetPath)" />
