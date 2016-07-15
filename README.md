@@ -6,7 +6,9 @@ Collection of useful tools (see also [WiKi](https://github.com/Helmut-Ortmann/En
 
 - [hoTools](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/hoTools) Assortment of tools
   - Toolbar for Searches and Services
-  - Global Keys for Searches and Services (e.g.: F1+Ctrl executes your beloved Search)
+  - Global Keys for Searches and Services 
+    - e.g.: F1+Ctrl executes your beloved Search
+    - e.g.: F1+Ctrl+Shft locks the selected Package
   - Set diagram line style
   - Version Control + SVN
   - Port support
@@ -95,17 +97,10 @@ Some features:
   - Data folder
   - user.config Configuration 
 
-
-# Scheduled (release 2.0.5)
-- Lock/Unlock for Package
-- Error fixed Script usage of hoTools as COM Object
-- Run hoTools SQL from Script 
-
 # Schedules (release 2.0.6)
-- QuickSearch
+- QuickSearch with fuzzy filter for available Searches
   - With easy change of Search (EA, SQL)
-  - Reset to default Search
-  - Set Default Search
+
 
 # Bugfixes
 - Error fixed Script usage of hoTools as COM Object
