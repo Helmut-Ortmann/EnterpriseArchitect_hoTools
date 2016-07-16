@@ -16,7 +16,7 @@ namespace hoTools.Utils.SQL
         const string HoToolsSqlTemplateMacroFileName = "hoTools_SqlTemplatesAndMacros.txt";
 
 
-        static string GetEaSqlErrorPath()
+        public static string GetEaSqlErrorPath()
            => Environment.GetEnvironmentVariable("appdata") + @"\Sparx Systems\EA";
 
         /// <summary>

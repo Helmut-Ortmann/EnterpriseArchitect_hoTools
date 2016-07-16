@@ -340,7 +340,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="_txtSearchText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>306, 20</value>
+    <value>241, 20</value>
   </data>
   <data name="_txtSearchText.TabIndex" type="System.Int32, mscorlib">
     <value>27</value>
@@ -371,7 +371,7 @@ e.g.: 'myString*' Everything starting with 'myString' (db independent)
     <value>_panelQuickSearch</value>
   </data>
   <data name="&gt;&gt;_txtSearchText.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>0</value>
   </data>
   <data name="_btnLabelRight.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 9.75pt</value>
@@ -1237,52 +1237,6 @@ It sets the linesytyle for the Diagram Connectors:
   <data name="&gt;&gt;_btnLh.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="_txtSearchName.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="_txtSearchName.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 9pt</value>
-  </data>
-  <data name="_txtSearchName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>309, 1</value>
-  </data>
-  <data name="_txtSearchName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
-  </data>
-  <data name="_txtSearchName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>148, 21</value>
-  </data>
-  <data name="_txtSearchName.TabIndex" type="System.Int32, mscorlib">
-    <value>28</value>
-  </data>
-  <data name="_txtSearchName.Text" xml:space="preserve">
-    <value>Simple</value>
-  </data>
-  <data name="_txtSearchName.ToolTip" xml:space="preserve">
-    <value>Name EA Model Search or *.sql file 
-to quickly find your most interesting stuff:
-- Insert EA Model Search Name or *.sql file
-- If blank the default from configuration is used
-- Douple Mouse Click starts the Search
-- Enter starts the Search
-
-Note:
-If you enter a SQL file name like 'Branch.sql' make sure the SQL Path is appropriate:
-- SQL Query Addin Tab
-- File, Settings </value>
-  </data>
-  <data name="&gt;&gt;_txtSearchName.Name" xml:space="preserve">
-    <value>_txtSearchName</value>
-  </data>
-  <data name="&gt;&gt;_txtSearchName.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;_txtSearchName.Parent" xml:space="preserve">
-    <value>_panelQuickSearch</value>
-  </data>
-  <data name="&gt;&gt;_txtSearchName.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="_btnConveyedItemConnector.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, -1</value>
   </data>
@@ -1411,7 +1365,37 @@ There is no interface to directly select more than one Browser Element (as far a
     <value>$this</value>
   </data>
   <data name="&gt;&gt;_panelConveyedItems.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>6</value>
+  </data>
+  <data name="_cmbSearchName.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="_cmbSearchName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>246, 3</value>
+  </data>
+  <data name="_cmbSearchName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>209, 21</value>
+  </data>
+  <data name="_cmbSearchName.TabIndex" type="System.Int32, mscorlib">
+    <value>46</value>
+  </data>
+  <data name="_cmbSearchName.Text" xml:space="preserve">
+    <value>Simple</value>
+  </data>
+  <data name="_cmbSearchName.ToolTip" xml:space="preserve">
+    <value>To quickly find your most interesting stuff:</value>
+  </data>
+  <data name="&gt;&gt;_cmbSearchName.Name" xml:space="preserve">
+    <value>_cmbSearchName</value>
+  </data>
+  <data name="&gt;&gt;_cmbSearchName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;_cmbSearchName.Parent" xml:space="preserve">
+    <value>_panelQuickSearch</value>
+  </data>
+  <data name="&gt;&gt;_cmbSearchName.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="_btnAddDiagramNote.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 9pt</value>
@@ -1976,7 +1960,7 @@ Tip:
     <value>$this</value>
   </data>
   <data name="&gt;&gt;_menuStrip1.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>10</value>
   </data>
   <data name="_panelButtons.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
@@ -2006,7 +1990,7 @@ Tip:
     <value>$this</value>
   </data>
   <data name="&gt;&gt;_panelButtons.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>9</value>
   </data>
   <data name="_panelLineStyle.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
@@ -2033,7 +2017,7 @@ Tip:
     <value>$this</value>
   </data>
   <data name="&gt;&gt;_panelLineStyle.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>7</value>
   </data>
   <data name="_panelFavorite.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
@@ -2060,7 +2044,7 @@ Tip:
     <value>$this</value>
   </data>
   <data name="&gt;&gt;_panelFavorite.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>5</value>
   </data>
   <data name="_panelNote.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
@@ -2087,7 +2071,7 @@ Tip:
     <value>$this</value>
   </data>
   <data name="&gt;&gt;_panelNote.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="_lblPorts.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2144,7 +2128,7 @@ Tip:
     <value>$this</value>
   </data>
   <data name="&gt;&gt;_panelPort.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>2</value>
   </data>
   <data name="_panelAdvanced.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
@@ -2171,7 +2155,7 @@ Tip:
     <value>$this</value>
   </data>
   <data name="&gt;&gt;_panelAdvanced.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>4</value>
   </data>
   <data name="_panelQuickSearch.ColumnCount" type="System.Int32, mscorlib">
     <value>2</value>
@@ -2183,7 +2167,7 @@ Tip:
     <value>0, 49</value>
   </data>
   <data name="_panelQuickSearch.RowCount" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="_panelQuickSearch.Size" type="System.Drawing.Size, System.Drawing">
     <value>458, 22</value>
@@ -2201,10 +2185,61 @@ Tip:
     <value>$this</value>
   </data>
   <data name="&gt;&gt;_panelQuickSearch.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>8</value>
   </data>
   <data name="_panelQuickSearch.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="_txtSearchName" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="_txtSearchText" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100,Absolute,150" /&gt;&lt;Rows Styles="Percent,100" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="_txtSearchText" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="_cmbSearchName" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100,Absolute,215,Absolute,20" /&gt;&lt;Rows Styles="Percent,100,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
+  </data>
+  <data name="txtTest.AutoCompleteCustomSource" xml:space="preserve">
+    <value>a</value>
+  </data>
+  <data name="txtTest.AutoCompleteCustomSource1" xml:space="preserve">
+    <value>b</value>
+  </data>
+  <data name="txtTest.AutoCompleteCustomSource2" xml:space="preserve">
+    <value>b</value>
+  </data>
+  <data name="txtTest.AutoCompleteCustomSource3" xml:space="preserve">
+    <value>g</value>
+  </data>
+  <data name="txtTest.AutoCompleteCustomSource4" xml:space="preserve">
+    <value>h</value>
+  </data>
+  <data name="txtTest.AutoCompleteCustomSource5" xml:space="preserve">
+    <value>jjjjjjjjj</value>
+  </data>
+  <data name="txtTest.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 333</value>
+  </data>
+  <data name="txtTest.Size" type="System.Drawing.Size, System.Drawing">
+    <value>318, 20</value>
+  </data>
+  <data name="txtTest.TabIndex" type="System.Int32, mscorlib">
+    <value>46</value>
+  </data>
+  <data name="&gt;&gt;txtTest.Name" xml:space="preserve">
+    <value>txtTest</value>
+  </data>
+  <data name="&gt;&gt;txtTest.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtTest.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;txtTest.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <metadata name="contextMenuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>496, 17</value>
+  </metadata>
+  <data name="contextMenuStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>61, 4</value>
+  </data>
+  <data name="&gt;&gt;contextMenuStrip1.Name" xml:space="preserve">
+    <value>contextMenuStrip1</value>
+  </data>
+  <data name="&gt;&gt;contextMenuStrip1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

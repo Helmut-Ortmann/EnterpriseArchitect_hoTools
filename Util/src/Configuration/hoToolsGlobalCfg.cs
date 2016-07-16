@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using System.Windows.Forms;
 
 namespace hoTools.Utils.Configuration
@@ -7,11 +8,7 @@ namespace hoTools.Utils.Configuration
     {
         string _paths;
         string[] _lpaths;
-        /// <summary>
-        /// Allocate ourselves.
-        /// We have a private constructor, so no one else can.
-        /// </summary>
-        static readonly HoToolsGlobalCfg _instance = new HoToolsGlobalCfg();
+
         HoToolsGlobalCfg()
         {
             
@@ -20,10 +17,8 @@ namespace hoTools.Utils.Configuration
         /// Access HoToolsGlobalCfg.Instance to get the singleton object.
         /// Then call methods on that instance.
         /// </summary>
-        public static HoToolsGlobalCfg Instance
-        {
-            get { return _instance; }
-        }
+        public static HoToolsGlobalCfg Instance { get; } = new HoToolsGlobalCfg();
+
         public string GetSqlPaths()
         {
             return _paths;
@@ -84,6 +79,33 @@ namespace hoTools.Utils.Configuration
             }
             // nothing found
             return "";
+        }
+
+        /// <summary>
+        /// Get list of *.sql files of SQL path
+        /// </summary>
+        /// <returns></returns>
+        public List<string> getListFileCompleteName()
+        {
+            List<string> files = new List<string>();
+            // over all files
+            foreach (string path in _lpaths)
+            {
+                if (Directory.Exists(path))
+                    files.AddRange(Directory.GetFiles(path, "*.sql"));
+            }
+            return files;
+
+        }
+
+        public AutoCompleteStringCollection getListFileName()
+        {
+            AutoCompleteStringCollection files = new AutoCompleteStringCollection();
+            foreach (string file in getListFileCompleteName())
+            {
+                files.Add(Path.GetFileName(file));
+            }
+            return files;
         }
     }
 }

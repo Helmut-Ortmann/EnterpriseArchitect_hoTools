@@ -59,6 +59,7 @@
     <Compile Include="EASpecific\EAAddin.cs" />
     <Compile Include="Util\EaItem.cs" />
     <Compile Include="Util\EaObjectType.cs" />
+    <Compile Include="Util\Search\Search.cs" />
     <Compile Include="Util\Script\EaScript.cs" />
     <Compile Include="Util\Script\EaScriptGroup.cs" />
     <Compile Include="Util\Script\JavaScriptLanguage.cs" />
@@ -71,6 +72,7 @@
     <Compile Include="Util\Script\VBScriptLanguage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\Model.cs" />
+    <Compile Include="Util\Search\SearchItem.cs" />
     <Compile Include="Util\User.cs" />
     <Compile Include="Util\WindowWrapper.cs" />
     <Compile Include="Util\WorkingSet.cs" />
@@ -96,6 +98,7 @@
     <None Include="hoKeyPair.snk" />
     <None Include="LICENSE" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
