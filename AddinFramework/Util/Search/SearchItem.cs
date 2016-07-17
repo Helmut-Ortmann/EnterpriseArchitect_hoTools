@@ -2,6 +2,7 @@
  // ReSharper disable once CheckNamespace
 
 using System;
+using System.IO;
 using Newtonsoft.Json;
 
 namespace AddinFramework.Util
@@ -62,9 +63,28 @@ namespace AddinFramework.Util
     {
         public string LongName { get; set; }
 
+        [JsonConstructor]
+        public SqlSearchItem(string longName):base(Path.GetFileName(longName))
+        {
+           Init(longName, "");
+        }
+
         public SqlSearchItem(string name, string longName) : base(name)
         {
+            Init(longName, "");
+        }
+
+        public SqlSearchItem(string name, string longName, string description ) : base(name)
+        {
+            Init(longName, description);
+        }
+
+        void Init(string longName, string description)
+        {
             LongName = longName;
+            Category = "SQL-File";
+            Description = description;
+
         }
 
     }

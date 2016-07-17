@@ -17,8 +17,7 @@ namespace AddinFramework.Util
 {
     public class Search
     {
-       static List<SearchItem> _staticSearches;
-        static List<SearchItem> _staticImport;
+        static List<SearchItem> _staticSearches;
         public static EA.Repository Rep;
         // configuration as singleton
         static readonly HoToolsGlobalCfg _globalCfg = HoToolsGlobalCfg.Instance;
@@ -217,36 +216,14 @@ namespace AddinFramework.Util
         static void LoadEaStandardSearchesFromJason()
         {
 
-            string pattern1 = @"
-[
-    {
-        'Name': 'Simple',
-        'Description': 'Find a matching string',
-        'Category': 'Common Searches',
-        'Favorite':'false'
-
-    },
-    {
-        'Name': 'Extended',
-        'Description': 'Find a matching string',
-        'Category': 'Common Searches',
-        'Favorite':'false'
-
-    }
-]";
-    List<Test> l = JsonConvert.DeserializeObject<List<Test>>(pattern1);
-    List<SearchItem> l1 = JsonConvert.DeserializeObject<List<SearchItem>>(pattern1);
-
             string jasonPath =
                 @"D:\hoData\Development\GitHub\EnterpriseArchitect_hoTools\AddinFramework\Util\Search\EaStandardSearches.json";
-            string pattern = File.ReadAllText(jasonPath);
-            _staticSearches = JsonConvert.DeserializeObject<List<SearchItem>>(pattern);
 
             using (StreamReader sr = new StreamReader(path: jasonPath) )
             using (JsonReader reader = new JsonTextReader(sr))
             {
                 JsonSerializer serializer = new JsonSerializer();
-                _staticSearches = (List<SearchItem>)serializer.Deserialize<List<SearchItem>>(reader);
+                _staticSearches.AddRange(serializer.Deserialize<List<SearchItem>>(reader));
 
             }
             

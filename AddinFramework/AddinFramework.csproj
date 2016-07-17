@@ -102,7 +102,9 @@
     <None Include="hoKeyPair.snk" />
     <None Include="LICENSE" />
     <None Include="packages.config" />
-    <None Include="Util\Search\EaStandardSearches.json" />
+    <None Include="Util\Search\EaStandardSearches.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

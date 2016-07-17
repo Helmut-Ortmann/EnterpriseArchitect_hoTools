@@ -213,15 +213,18 @@ namespace hoTools.ActiveX
             // parameterize 5 Buttons to quickly run services
             ParameterizeServiceButton();
             //
-            _cmbSearchName.DataSource = _globalCfg.getListFileCompleteName();
+            //_cmbSearchName.DataSource = _globalCfg.getListFileCompleteName();
+
+            Search.Rep = Repository;
+            _cmbSearchName.DisplayMember = "Name";
+            _cmbSearchName.ValueMember = "Name";
+            _cmbSearchName.DataSource = Search.Searches;
+
             _cmbSearchName.AutoCompleteCustomSource = _globalCfg.GetListFileName();
             _cmbSearchName.Text = AddinSettings.QuickSearchName;
             // 
             txtTest.AutoCompleteCustomSource = _globalCfg.GetListFileName();
 
-            // Test
-            Search.Rep = Repository;
-            List<SearchItem> searches = Search.Searches;
 
 
         }
