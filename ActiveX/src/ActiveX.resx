@@ -1365,7 +1365,7 @@ There is no interface to directly select more than one Browser Element (as far a
     <value>$this</value>
   </data>
   <data name="&gt;&gt;_panelConveyedItems.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>5</value>
   </data>
   <data name="_cmbSearchName.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -1960,7 +1960,7 @@ Tip:
     <value>$this</value>
   </data>
   <data name="&gt;&gt;_menuStrip1.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>9</value>
   </data>
   <data name="_panelButtons.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
@@ -1990,7 +1990,7 @@ Tip:
     <value>$this</value>
   </data>
   <data name="&gt;&gt;_panelButtons.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>8</value>
   </data>
   <data name="_panelLineStyle.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
@@ -2017,7 +2017,7 @@ Tip:
     <value>$this</value>
   </data>
   <data name="&gt;&gt;_panelLineStyle.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>6</value>
   </data>
   <data name="_panelFavorite.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
@@ -2044,7 +2044,7 @@ Tip:
     <value>$this</value>
   </data>
   <data name="&gt;&gt;_panelFavorite.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>4</value>
   </data>
   <data name="_panelNote.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
@@ -2071,7 +2071,7 @@ Tip:
     <value>$this</value>
   </data>
   <data name="&gt;&gt;_panelNote.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>2</value>
   </data>
   <data name="_lblPorts.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2128,7 +2128,7 @@ Tip:
     <value>$this</value>
   </data>
   <data name="&gt;&gt;_panelPort.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>1</value>
   </data>
   <data name="_panelAdvanced.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
@@ -2155,7 +2155,7 @@ Tip:
     <value>$this</value>
   </data>
   <data name="&gt;&gt;_panelAdvanced.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>3</value>
   </data>
   <data name="_panelQuickSearch.ColumnCount" type="System.Int32, mscorlib">
     <value>2</value>
@@ -2185,49 +2185,10 @@ Tip:
     <value>$this</value>
   </data>
   <data name="&gt;&gt;_panelQuickSearch.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>7</value>
   </data>
   <data name="_panelQuickSearch.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
     <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="_txtSearchText" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="_cmbSearchName" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100,Absolute,215,Absolute,20" /&gt;&lt;Rows Styles="Percent,100,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
-  </data>
-  <data name="txtTest.AutoCompleteCustomSource" xml:space="preserve">
-    <value>a</value>
-  </data>
-  <data name="txtTest.AutoCompleteCustomSource1" xml:space="preserve">
-    <value>b</value>
-  </data>
-  <data name="txtTest.AutoCompleteCustomSource2" xml:space="preserve">
-    <value>b</value>
-  </data>
-  <data name="txtTest.AutoCompleteCustomSource3" xml:space="preserve">
-    <value>g</value>
-  </data>
-  <data name="txtTest.AutoCompleteCustomSource4" xml:space="preserve">
-    <value>h</value>
-  </data>
-  <data name="txtTest.AutoCompleteCustomSource5" xml:space="preserve">
-    <value>jjjjjjjjj</value>
-  </data>
-  <data name="txtTest.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 333</value>
-  </data>
-  <data name="txtTest.Size" type="System.Drawing.Size, System.Drawing">
-    <value>318, 20</value>
-  </data>
-  <data name="txtTest.TabIndex" type="System.Int32, mscorlib">
-    <value>46</value>
-  </data>
-  <data name="&gt;&gt;txtTest.Name" xml:space="preserve">
-    <value>txtTest</value>
-  </data>
-  <data name="&gt;&gt;txtTest.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;txtTest.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;txtTest.ZOrder" xml:space="preserve">
-    <value>1</value>
   </data>
   <metadata name="contextMenuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>496, 17</value>
@@ -2248,7 +2209,7 @@ Tip:
     <value>True</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>458, 407</value>
+    <value>458, 339</value>
   </data>
   <data name="&gt;&gt;_toolStripSearchBtn1.Name" xml:space="preserve">
     <value>_toolStripSearchBtn1</value>

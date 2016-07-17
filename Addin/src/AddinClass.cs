@@ -167,6 +167,7 @@ namespace hoTools
             // global configuration parameters independent from EA-Instance and used by services
             var globalCfg = HoToolsGlobalCfg.Instance;
             globalCfg.SetSqlPaths(_addinSettings.SqlPaths);
+            globalCfg.ConfigPath = _addinSettings.ConfigPath;
 
             // ReSharper disable once VirtualMemberCallInConstructor
             MenuHeader = "-" + _addinSettings.ProductName;

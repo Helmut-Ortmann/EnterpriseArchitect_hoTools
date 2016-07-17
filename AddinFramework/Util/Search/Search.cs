@@ -18,6 +18,7 @@ namespace AddinFramework.Util
     public class Search
     {
         static List<SearchItem> _staticSearches;
+        static AutoCompleteStringCollection _staticSearchesSuggestions;
         public static EA.Repository Rep;
         // configuration as singleton
         static readonly HoToolsGlobalCfg _globalCfg = HoToolsGlobalCfg.Instance;
@@ -59,6 +60,22 @@ namespace AddinFramework.Util
             }
         }
 
+        public static AutoCompleteStringCollection SearchesSuggestions
+        {
+            get
+            {
+                if (_staticSearches == null)
+                {
+                    LoadStaticSearches();
+                    LoadStaticSearchesSuggestions();
+                }
+                return _staticSearchesSuggestions;
+            }
+            
+        }
+        /// <summary>
+        /// Load the possible Searches
+        /// </summary>
         static void LoadStaticSearches()
         {
             _staticSearches = new List<SearchItem>();
@@ -72,8 +89,25 @@ namespace AddinFramework.Util
             LoadLocalMdgSearches();
             // MDG scripts in other locations
             LoadOtherMdgSearches();
+            // order
+            _staticSearches = _staticSearches.OrderBy(a => a.Name)
+                .ToList();
+            LoadStaticSearchesSuggestions();
 
         }
+        /// <summary>
+        /// Load the suggestions for the search Combo Box
+        /// </summary>
+        static void LoadStaticSearchesSuggestions()
+        {
+            _staticSearchesSuggestions = new AutoCompleteStringCollection();
+            var result = _staticSearches.Select(e => e.Name).ToArray();
+            _staticSearchesSuggestions.AddRange(result);
+            
+
+
+        } 
+
         /// <summary>
         /// The local Searches are located in the "ea program files"\scripts (so usually C:\Program Files (x86)\Sparx Systems\EA\Scripts or C:\Program Files\Sparx Systems\EA\Scripts)
         /// The contents of the local scripts is loaded into the Searches.

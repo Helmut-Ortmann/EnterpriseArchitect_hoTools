@@ -19,6 +19,11 @@ namespace hoTools.Utils.Configuration
         /// </summary>
         public static HoToolsGlobalCfg Instance { get; } = new HoToolsGlobalCfg();
 
+
+        /// <summary>
+        /// hoTools config path (..user\&lt;users>\AppData\Roaming\ho\hoTools\)
+        /// </summary>
+        public string ConfigPath { get; set; }
         public string GetSqlPaths()
         {
             return _paths;

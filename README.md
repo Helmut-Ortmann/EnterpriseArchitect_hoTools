@@ -98,8 +98,15 @@ Some features:
   - user.config Configuration 
 
 # Schedules (release 2.0.6)
-- QuickSearch with fuzzy filter for available Searches
-  - With easy change of Search (EA, SQL)
+- QuickSearch selection with autocomplete for available Searches
+  - SQL Searches
+  - MDG
+  - Own Searches
+  - Standard Searches
+- Search Management (for Quick Search)
+  - Enable Category (Settings)
+  - Favorites (configuration via JSON)
+  - EA Standard Searches (configurable via JSON, my EA Standard Searches) 
 
 
 # Bugfixes

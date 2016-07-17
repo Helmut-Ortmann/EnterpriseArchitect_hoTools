@@ -11,6 +11,7 @@ using Control.EaAddinShortcuts;
 using System.Text.RegularExpressions;
 using GlobalHotkeys;
 
+// ReSharper disable once CheckNamespace
 namespace hoTools.Settings
 {
     /// <summary>
@@ -24,6 +25,7 @@ namespace hoTools.Settings
     /// </code>
     public class AddinSettings
     {
+
         public enum ShowInWindow { AddinWindow, TabWindow,Disabled};
         public enum AutoLoadMdg { Basic, Compilation, No};
 
