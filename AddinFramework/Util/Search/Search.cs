@@ -7,8 +7,10 @@ using System.Net;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using EAAddinFramework.Utils;
+using hoTools.Utils.Configuration;
 using hoTools.Utils.SQL;
 using Microsoft.Win32;
+using Newtonsoft.Json;
 
 // ReSharper disable once CheckNamespace
 namespace AddinFramework.Util
@@ -16,7 +18,10 @@ namespace AddinFramework.Util
     public class Search
     {
        static List<SearchItem> _staticSearches;
+        static List<SearchItem> _staticImport;
         public static EA.Repository Rep;
+        // configuration as singleton
+        static readonly HoToolsGlobalCfg _globalCfg = HoToolsGlobalCfg.Instance;
 
         /// <summary>
         /// Loads all findable Searches. These Searches are stored outside the model and cannot be changed by the user.
@@ -58,6 +63,10 @@ namespace AddinFramework.Util
         static void LoadStaticSearches()
         {
             _staticSearches = new List<SearchItem>();
+            LoadEaStandardSearchesFromJason();
+
+            LoadSqlSearches();
+
             //local scripts
             LoadLocalSearches();
             //MDG scripts in the program folder
@@ -188,6 +197,83 @@ namespace AddinFramework.Util
                 MessageBox.Show($"URL='{url}' skipped (see: Extensions, MDGTechnology,Advanced).\r\n{e.Message}",
                     @"Error in load *.xml MDGSearches from url! ");
             }
+        }
+        
+        /// <summary>
+        /// Get file names of SQL path.
+        /// </summary>
+        /// <returns></returns>
+        public static void LoadSqlSearches()
+        {
+            foreach (string file in _globalCfg.getListFileCompleteName())
+            {
+                string name = Path.GetFileName(file);
+                _staticSearches.Add( new SqlSearchItem(name, file)); 
+            }
+        }
+        /// <summary>
+        /// Load EA Standard Searches from JSON
+        /// </summary>
+        static void LoadEaStandardSearchesFromJason()
+        {
+
+            string pattern1 = @"
+[
+    {
+        'Name': 'Simple',
+        'Description': 'Find a matching string',
+        'Category': 'Common Searches',
+        'Favorite':'false'
+
+    },
+    {
+        'Name': 'Extended',
+        'Description': 'Find a matching string',
+        'Category': 'Common Searches',
+        'Favorite':'false'
+
+    }
+]";
+    List<Test> l = JsonConvert.DeserializeObject<List<Test>>(pattern1);
+    List<SearchItem> l1 = JsonConvert.DeserializeObject<List<SearchItem>>(pattern1);
+
+            string jasonPath =
+                @"D:\hoData\Development\GitHub\EnterpriseArchitect_hoTools\AddinFramework\Util\Search\EaStandardSearches.json";
+            string pattern = File.ReadAllText(jasonPath);
+            _staticSearches = JsonConvert.DeserializeObject<List<SearchItem>>(pattern);
+
+            using (StreamReader sr = new StreamReader(path: jasonPath) )
+            using (JsonReader reader = new JsonTextReader(sr))
+            {
+                JsonSerializer serializer = new JsonSerializer();
+                _staticSearches = (List<SearchItem>)serializer.Deserialize<List<SearchItem>>(reader);
+
+            }
+            
+
+
+        }
+
+    }
+
+    public class Test
+    {
+        public Double Score { get; set; }
+        public bool Favorite { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+
+        public string Category { get; set; }
+
+        public Test(string name, string description)
+        {
+            Name = name;
+            Description = description;
+        }
+        [JsonConstructor]
+        public Test(string name)
+        {
+            Name = name;
         }
 
     }

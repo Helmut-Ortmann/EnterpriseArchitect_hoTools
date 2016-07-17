@@ -1,0 +1,57 @@
+﻿[
+    {
+        "Name": "Simple",
+        "Description": "Find a matching string",
+        "Category": "Common Searches",
+        "Favorite": "true"
+    },
+    {
+        "Name": "Extended",
+        "Description": "Find a matching string",
+        "Category": "Common Searches",
+        "Favorite": "true"
+    },
+    {
+        "Name": "Attribute Details",
+        "Description": "Attribute Details",
+        "Category": "Common Searches",
+        "Favorite": "true"
+    },
+    {
+        "Name": "Method Details",
+        "Description": "Method Details",
+        "Category": "Common Searches",
+        "Favorite": "true"
+    },
+    {
+        "Name": "Recent Modified Elements",
+        "Description": "Recent Modified Elements",
+        "Category": "Common Searches",
+        "Favorite": "true"
+    },
+    {
+        "Name": "Attribute Details",
+        "Description": "Attribute Details",
+        "Category": "Common Searches",
+        "Favorite": "true"
+    },
+    {
+        "Name": "Find Operations by Name",
+        "Description": "Attribute Details",
+        "Category": "Common Searches",
+        "Favorite": "true"
+    },
+    {
+        "Name": "Find Operations by Name",
+        "Description": "Find Operations by Name",
+        "Category": "Common Searches",
+        "Favorite": "true"
+    },
+    {
+        "Name": "Find Package",
+        "Description": "Find Package",
+        "Category": "Common Searches",
+        "Favorite": "true"
+    }
+
+]

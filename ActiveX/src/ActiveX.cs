@@ -214,10 +214,10 @@ namespace hoTools.ActiveX
             ParameterizeServiceButton();
             //
             _cmbSearchName.DataSource = _globalCfg.getListFileCompleteName();
-            _cmbSearchName.AutoCompleteCustomSource = _globalCfg.getListFileName();
+            _cmbSearchName.AutoCompleteCustomSource = _globalCfg.GetListFileName();
             _cmbSearchName.Text = AddinSettings.QuickSearchName;
             // 
-            txtTest.AutoCompleteCustomSource = _globalCfg.getListFileName();
+            txtTest.AutoCompleteCustomSource = _globalCfg.GetListFileName();
 
             // Test
             Search.Rep = Repository;

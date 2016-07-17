@@ -98,7 +98,7 @@ namespace hoTools.Utils.Configuration
 
         }
 
-        public AutoCompleteStringCollection getListFileName()
+        public AutoCompleteStringCollection GetListFileName()
         {
             AutoCompleteStringCollection files = new AutoCompleteStringCollection();
             foreach (string file in getListFileCompleteName())
@@ -107,5 +107,6 @@ namespace hoTools.Utils.Configuration
             }
             return files;
         }
+
     }
 }

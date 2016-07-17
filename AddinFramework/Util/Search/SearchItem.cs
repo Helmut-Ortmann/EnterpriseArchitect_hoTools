@@ -1,20 +1,45 @@
 ﻿
+ // ReSharper disable once CheckNamespace
+
+using System;
+using Newtonsoft.Json;
+
 namespace AddinFramework.Util
 {
     /// <summary>
-    /// A Search Item to define a search
+    /// A Search Item to define a Search like EA Model Search or SQL. 
     /// </summary>
     public class SearchItem
     {
         public double Score { get; set; }
         public string Name { get; set; }
+        public string Description { get; set; }
+        public string Category { get; set; }
+        public bool Favorite { get; set; }
 
 
+        [JsonConstructor]
         public SearchItem(string name)
         {
-            Score = 0.0;
             Name = name;
-
+        }
+        public SearchItem(string name, string description)
+        {
+            Name = name;
+            Description = description;
+        }
+        public SearchItem(string name, string description, string category)
+        {
+            Name = name;
+            Description = description;
+            Category = category;
+        }
+        public SearchItem(string name, string description, string category, bool favorite)
+        {
+            Name = name;
+            Description = description;
+            Category = category;
+            Favorite = favorite;
         }
     }
     /// <summary>
@@ -31,7 +56,7 @@ namespace AddinFramework.Util
         
     }
     /// <summary>
-    /// An SQL Search Item
+    /// An SQL Search Item with name, longName.
     /// </summary>
     public class SqlSearchItem : SearchItem
     {
