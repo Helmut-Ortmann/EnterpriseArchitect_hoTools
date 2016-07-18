@@ -207,6 +207,18 @@ namespace hoTools.ActiveX
         {
             // get global settings
             _model = new Model(Repository);
+
+
+            // Search window
+            _cmbSearchName.DisplayMember = "Name";
+            _cmbSearchName.ValueMember = "Name";
+            _cmbSearchName.DataSource = Search.GetSearches(Repository);
+
+            _cmbSearchName.AutoCompleteCustomSource = Search.GetSearchesSuggestions(Repository);
+            _cmbSearchName.Text = AddinSettings.QuickSearchName;
+
+
+
             ParameterizeMenusAndButtons();
             // parameterize 5 Buttons to quickly run search
             ParameterizeSearchButton();
@@ -215,12 +227,7 @@ namespace hoTools.ActiveX
             //
             //_cmbSearchName.DataSource = _globalCfg.getListFileCompleteName();
 
-            _cmbSearchName.DisplayMember = "Name";
-            _cmbSearchName.ValueMember = "Name";
-            _cmbSearchName.DataSource = Search.GetSearches(Repository);
-
-            _cmbSearchName.AutoCompleteCustomSource = Search.GetSearchesSuggestions(Repository);
-            _cmbSearchName.Text = AddinSettings.QuickSearchName;
+            
 
         }
         #endregion
@@ -783,7 +790,7 @@ namespace hoTools.ActiveX
         // There are special keys like "Enter" which require an enabling by 
         //---------------------------------------------------------
         // see at:  protected override boolean IsInputKey(Keys keyData)
-        void cmbUserName_KeyDown(object sender, KeyEventArgs e)
+        void cmbSearchName_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
@@ -792,25 +799,47 @@ namespace hoTools.ActiveX
             }
             
         }
-        void cmbUserName_KeyUp(object sender, KeyEventArgs e)
+        void cmbSearchName_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                _model.SearchRun(GetSearchName(), _txtSearchText.Text);
+                e.Handled = true;
+            }
+
+
+        }
+        private void _cmbSearchName_TextChanged(object sender, EventArgs e)
         {
            
-                if (_cmbSearchName.Text.Length > 2)
+
+        }
+        private void _cmbSearchName_TextUpdate(object sender, EventArgs e)
+        {
+            if (_cmbSearchName.Text.Length > 2)
+            {
+                string text = _cmbSearchName.Text;
+                Search.CalulateAndSort(text);
+                _isSortedName = false;
+                // nothing selected
+                if (_cmbSearchName.SelectedIndex == -1)
                 {
-                    Search.CalulateAndSort(_cmbSearchName.Text);
-                    _isSortedName = false;
                     _cmbSearchName.DataSource = Search.GetSearches(Repository);
+                    _cmbSearchName.SelectedIndex = -1;
+                    _cmbSearchName.SelectedItem = null;
+                    _cmbSearchName.Text = text;
                 }
-                else
+            }
+            else
+            {
+                if (_isSortedName == false)
                 {
                     Search.ResetSort();
-                    if (_isSortedName == false)
-                    {
-                        _cmbSearchName.DataSource = Search.GetSearches(Repository);
-                        _isSortedName = true;
-                    }
+                    _cmbSearchName.DataSource = Search.GetSearches(Repository);
+                    _isSortedName = true;
                 }
-                e.Handled = true;
+            }
+
         }
 
         /// <summary>
@@ -1324,8 +1353,10 @@ namespace hoTools.ActiveX
             this._cmbSearchName.FormattingEnabled = true;
             this._cmbSearchName.Name = "_cmbSearchName";
             this._toolTip.SetToolTip(this._cmbSearchName, resources.GetString("_cmbSearchName.ToolTip"));
-            this._cmbSearchName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbUserName_KeyDown);
-            this._cmbSearchName.KeyUp += new System.Windows.Forms.KeyEventHandler(this.cmbUserName_KeyUp);
+            this._cmbSearchName.TextUpdate += new System.EventHandler(this._cmbSearchName_TextUpdate);
+            this._cmbSearchName.TextChanged += new System.EventHandler(this._cmbSearchName_TextChanged);
+            this._cmbSearchName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbSearchName_KeyDown);
+            this._cmbSearchName.KeyUp += new System.Windows.Forms.KeyEventHandler(this.cmbSearchName_KeyUp);
             this._cmbSearchName.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.cmbSearchName_MouseDoubleClick);
             // 
             // _btnAddDiagramNote
@@ -2201,5 +2232,7 @@ namespace hoTools.ActiveX
         {
             Util.StartFile(SqlError.GetEaSqlErrorFilePath());
         }
+
+       
     }
 }
