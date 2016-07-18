@@ -47,6 +47,15 @@ namespace AddinFramework.Util
         /// <summary>
         /// Get the list of searches (EA + SQL)
         /// </summary>
+        public static List<SearchItem> LoadSearches(EA.Repository rep)
+        {
+            LoadStaticSearches(rep);
+            return _staticSearches;
+
+        }
+        /// <summary>
+        /// Get the list of searches (EA + SQL)
+        /// </summary>
         public static List<SearchItem> GetSearches(EA.Repository rep)
         {
                 if (_staticSearches == null)
@@ -80,6 +89,12 @@ namespace AddinFramework.Util
             }
             // sort list
             _staticSearches = l.OrderByDescending(a => a.Score).ToList();
+
+        }
+        public static void ResetSort()
+        {
+            // sort list
+            _staticSearches = _staticSearches.OrderByDescending(a => a.Name).ToList();
 
         }
 

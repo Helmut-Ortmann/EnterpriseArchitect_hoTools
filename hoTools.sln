@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddinClass", "Addin\AddinClass.csproj", "{6D5DEEEF-0897-4494-9857-5BEE2BF0D0AF}"
+	ProjectSection(ProjectDependencies) = postProject
+		{29385A2D-EAC1-4777-BC01-C060C2002307} = {29385A2D-EAC1-4777-BC01-C060C2002307}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ActiveX", "ActiveX\ActiveX.csproj", "{C9EBCEBB-71E4-4E87-B92C-7AEB8F62B69A}"
 EndProject

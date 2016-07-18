@@ -27,6 +27,8 @@ namespace hoTools.ActiveX
     {
         public const string Progid = "hoTools.ActiveXGUI";
 
+        private bool _isSortedName = true;
+
         // Windows/Frames
         FrmQueryAndScript _frmQueryAndScript;
         FrmSettingsGeneral _frmSettingsGeneral;
@@ -765,7 +767,52 @@ namespace hoTools.ActiveX
             _model.SearchRun(GetSearchName(), _txtSearchText.Text);
         }
 
-        
+
+        //--------------------------------------------------------------------
+        // Search Name Combo Box
+        /// <summary>
+        /// Double Mouse Click in SearchName runs the query
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void cmbSearchName_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            _model.SearchRun(GetSearchName(), _txtSearchText.Text);
+        }
+        // text field
+        // There are special keys like "Enter" which require an enabling by 
+        //---------------------------------------------------------
+        // see at:  protected override boolean IsInputKey(Keys keyData)
+        void cmbUserName_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                _model.SearchRun(GetSearchName(), _txtSearchText.Text);
+                e.Handled = true;
+            }
+            
+        }
+        void cmbUserName_KeyUp(object sender, KeyEventArgs e)
+        {
+           
+                if (_cmbSearchName.Text.Length > 2)
+                {
+                    Search.CalulateAndSort(_cmbSearchName.Text);
+                    _isSortedName = false;
+                    _cmbSearchName.DataSource = Search.GetSearches(Repository);
+                }
+                else
+                {
+                    Search.ResetSort();
+                    if (_isSortedName == false)
+                    {
+                        _cmbSearchName.DataSource = Search.GetSearches(Repository);
+                        _isSortedName = true;
+                    }
+                }
+                e.Handled = true;
+        }
+
         /// <summary>
         /// Get Search Name from GUI text field. If empty use Search name from settings
         /// </summary>
@@ -1277,9 +1324,9 @@ namespace hoTools.ActiveX
             this._cmbSearchName.FormattingEnabled = true;
             this._cmbSearchName.Name = "_cmbSearchName";
             this._toolTip.SetToolTip(this._cmbSearchName, resources.GetString("_cmbSearchName.ToolTip"));
-            this._cmbSearchName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtUserText_KeyDown);
-            this._cmbSearchName.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtUserText_KeyDown);
-            this._cmbSearchName.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.txtSearchText_MouseDoubleClick);
+            this._cmbSearchName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbUserName_KeyDown);
+            this._cmbSearchName.KeyUp += new System.Windows.Forms.KeyEventHandler(this.cmbUserName_KeyUp);
+            this._cmbSearchName.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.cmbSearchName_MouseDoubleClick);
             // 
             // _btnAddDiagramNote
             // 
