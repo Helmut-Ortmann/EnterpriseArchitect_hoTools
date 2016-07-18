@@ -93,18 +93,23 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DuoVia.FuzzyStrings\DuoVia.FuzzyStrings.csproj">
+      <Project>{29385a2d-eac1-4777-bc01-c060c2002307}</Project>
+      <Name>DuoVia.FuzzyStrings</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Util\Util.csproj">
       <Project>{9376680e-9420-4fc1-8de8-4311fca18efc}</Project>
       <Name>Util</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="EaStandardSearches.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="hoKeyPair.snk" />
     <None Include="LICENSE" />
     <None Include="packages.config" />
-    <None Include="Util\Search\EaStandardSearches.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    <None Include="Util\Search\EaStandardSearches.json" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

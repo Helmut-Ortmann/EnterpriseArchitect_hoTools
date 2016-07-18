@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
-
+using System.Reflection;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using EAAddinFramework.Utils;
@@ -12,14 +12,17 @@ using hoTools.Utils.SQL;
 using Microsoft.Win32;
 using Newtonsoft.Json;
 
+using DuoVia.FuzzyStrings;
+
 // ReSharper disable once CheckNamespace
 namespace AddinFramework.Util
 {
     public class Search
     {
         static List<SearchItem> _staticSearches;
+        private static List<string> _staticSearchesOrdered;
         static AutoCompleteStringCollection _staticSearchesSuggestions;
-        public static EA.Repository Rep;
+
         // configuration as singleton
         static readonly HoToolsGlobalCfg _globalCfg = HoToolsGlobalCfg.Instance;
 
@@ -44,39 +47,47 @@ namespace AddinFramework.Util
         /// <summary>
         /// Get the list of searches (EA + SQL)
         /// </summary>
-        public static List<SearchItem> Searches
+        public static List<SearchItem> GetSearches(EA.Repository rep)
         {
-            get
-            {
                 if (_staticSearches == null)
                 {
-                    LoadStaticSearches();
+                    LoadStaticSearches(rep);
                 }
                 return _staticSearches;
-            }
-            set
-            {
-                _staticSearches = value;
-            }
+            
         }
 
-        public static AutoCompleteStringCollection SearchesSuggestions
+        public static AutoCompleteStringCollection GetSearchesSuggestions(EA.Repository rep)
         {
-            get
-            {
                 if (_staticSearches == null)
                 {
-                    LoadStaticSearches();
+                    LoadStaticSearches(rep);
                     LoadStaticSearchesSuggestions();
                 }
                 return _staticSearchesSuggestions;
-            }
             
         }
+
+        public static void CalulateAndSort(string pattern)
+        {
+            var l = new List<SearchItem>();
+
+            foreach (var search in _staticSearches)
+            {
+                var score = pattern.LevenshteinDistance(search.Name);
+                l.Add(new SearchItem(score, search.Name, search.Description, search.Category, search.Favorite));
+
+            }
+            // sort list
+            _staticSearches = l.OrderByDescending(a => a.Score).ToList();
+
+        }
+
+
         /// <summary>
         /// Load the possible Searches
         /// </summary>
-        static void LoadStaticSearches()
+        static void LoadStaticSearches(EA.Repository rep)
         {
             _staticSearches = new List<SearchItem>();
             LoadEaStandardSearchesFromJason();
@@ -84,11 +95,11 @@ namespace AddinFramework.Util
             LoadSqlSearches();
 
             //local scripts
-            LoadLocalSearches();
+            LoadLocalSearches(rep);
             //MDG scripts in the program folder
-            LoadLocalMdgSearches();
+            LoadLocalMdgSearches(rep);
             // MDG scripts in other locations
-            LoadOtherMdgSearches();
+            LoadOtherMdgSearches(rep);
             // order
             _staticSearches = _staticSearches.OrderBy(a => a.Name)
                 .ToList();
@@ -112,28 +123,28 @@ namespace AddinFramework.Util
         /// The local Searches are located in the "ea program files"\scripts (so usually C:\Program Files (x86)\Sparx Systems\EA\Scripts or C:\Program Files\Sparx Systems\EA\Scripts)
         /// The contents of the local scripts is loaded into the Searches.
         /// </summary>
-        static void LoadLocalSearches()
+        static void LoadLocalSearches(EA.Repository rep)
         {
             
             string searchFolder = SqlError.GetEaSqlErrorPath() + @"\Search Data"; 
-            LoadSearchFromFolder(searchFolder);
+            LoadSearchFromFolder(rep, searchFolder);
 
         }
         /// <summary>
         /// Load Searches from MDG Technology folder
         /// </summary>
-        static void LoadLocalMdgSearches()
+        static void LoadLocalMdgSearches(EA.Repository rep)
         {
             string searchFolder = Path.GetDirectoryName(Model.ApplicationFullPath) + "\\MDGTechnologies";
-            LoadSearchFromFolder(searchFolder);
+            LoadSearchFromFolder(rep, searchFolder);
         }
 
-        static void LoadSearchFromFolder(string folder)
+        static void LoadSearchFromFolder(EA.Repository rep, string folder)
         {
             string[] searchFiles = Directory.GetFiles(folder, "*.xml", SearchOption.AllDirectories);
             foreach (string searchFile in searchFiles)
             {
-                LoadMdgSearches(File.ReadAllText(searchFile));
+                LoadMdgSearches(rep, File.ReadAllText(searchFile));
             }
 
         }
@@ -142,7 +153,7 @@ namespace AddinFramework.Util
         /// these locations are stored as a comma separated string in the registry
         /// a location can either be a directory, or an URL
         /// </summary>
-        static void LoadOtherMdgSearches()
+        static void LoadOtherMdgSearches(EA.Repository rep)
         {
 
                 //read the registry key to find the locations
@@ -157,12 +168,12 @@ namespace AddinFramework.Util
                         if (mdgPath.StartsWith("http", StringComparison.InvariantCultureIgnoreCase))
                         {
                             //URL
-                            LoadMdgSearchFromUrl(mdgPath);
+                            LoadMdgSearchFromUrl(rep, mdgPath);
                         }
                         else
                         {
                             //directory
-                            LoadSearchFromFolder(mdgPath);
+                            LoadSearchFromFolder(rep, mdgPath);
                         }
                     }
                 }
@@ -173,8 +184,9 @@ namespace AddinFramework.Util
         /// <summary>
         /// Loads the Searches described in the MDG file into the includable scripts
         /// </summary>
+        /// <param name="rep"></param>
         /// <param name="mdgXmlContent">the string content of the MDG file</param>
-        static void LoadMdgSearches(string mdgXmlContent)
+        static void LoadMdgSearches(EA.Repository rep, string mdgXmlContent)
         {
             try
             {
@@ -194,7 +206,7 @@ namespace AddinFramework.Util
                     //name = documentation.Attribute("name").Value;
                     //notes = documentation.Attribute("notes").Value;
                     // check if Technology is enabled
-                    if (Rep.IsTechnologyEnabled(id) == false && Rep.IsTechnologyLoaded(id)) return;
+                    if (rep.IsTechnologyEnabled(id) == false && rep.IsTechnologyLoaded(id)) return;
 
                 }
 
@@ -215,15 +227,17 @@ namespace AddinFramework.Util
                 MessageBox.Show(@"", @"Error in loadMDGScripts: " + e.Message);
             }
         }
+
         /// <summary>
         /// load the MDG Search from the MDG file located at the given URL
         /// </summary>
+        /// <param name="rep"></param>
         /// <param name="url">the URL pointing to the MDG file</param>
-        static void LoadMdgSearchFromUrl(string url)
+        static void LoadMdgSearchFromUrl(EA.Repository rep, string url)
         {
             try
             {
-                LoadMdgSearches(new WebClient().DownloadString(url));
+                LoadMdgSearches(rep, new WebClient().DownloadString(url));
             }
             catch (Exception e)
             {
@@ -250,8 +264,7 @@ namespace AddinFramework.Util
         static void LoadEaStandardSearchesFromJason()
         {
 
-            string jasonPath =
-                @"D:\hoData\Development\GitHub\EnterpriseArchitect_hoTools\AddinFramework\Util\Search\EaStandardSearches.json";
+            string jasonPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"EaStandardSearches.json");
 
             using (StreamReader sr = new StreamReader(path: jasonPath) )
             using (JsonReader reader = new JsonTextReader(sr))

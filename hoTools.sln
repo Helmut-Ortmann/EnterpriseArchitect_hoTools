@@ -42,6 +42,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Advanced", "Advanced", "{A9
 		ActiveX\bin\Release\ActiveXCollectRegistrationInfo.bat = ActiveX\bin\Release\ActiveXCollectRegistrationInfo.bat
 		Addin\bin\Release\AddinClass.wxs = Addin\bin\Release\AddinClass.wxs
 		Addin\bin\Release\AddinClassCollectRegistrationInfo.bat = Addin\bin\Release\AddinClassCollectRegistrationInfo.bat
+		AddinFramework\bin\Release\AddinFramework.wxs = AddinFramework\bin\Release\AddinFramework.wxs
+		AddinFramework\bin\Release\AddinFrameworkCollectRegistrationInfo.bat = AddinFramework\bin\Release\AddinFrameworkCollectRegistrationInfo.bat
 		Setup\src\Files.wxs = Setup\src\Files.wxs
 		FindAndReplace\bin\Release\FindAndReplace.wxs = FindAndReplace\bin\Release\FindAndReplace.wxs
 		FindAndReplace\bin\Release\FindAndReplaceCollectRegistrationInfo.bat = FindAndReplace\bin\Release\FindAndReplaceCollectRegistrationInfo.bat
@@ -57,6 +59,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Reuse", "Reuse", "{F1F0E6B1
 	ProjectSection(SolutionItems) = preProject
 		Reuse\hoKeyPair.snk = Reuse\hoKeyPair.snk
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DuoVia.FuzzyStrings", "DuoVia.FuzzyStrings\DuoVia.FuzzyStrings.csproj", "{29385A2D-EAC1-4777-BC01-C060C2002307}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -161,6 +165,18 @@ Global
 		{D83C4D98-7AA9-4B1A-ABED-EA8A9EAC210C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{D83C4D98-7AA9-4B1A-ABED-EA8A9EAC210C}.Release|x86.ActiveCfg = Release|Any CPU
 		{D83C4D98-7AA9-4B1A-ABED-EA8A9EAC210C}.Release|x86.Build.0 = Release|Any CPU
+		{29385A2D-EAC1-4777-BC01-C060C2002307}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29385A2D-EAC1-4777-BC01-C060C2002307}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29385A2D-EAC1-4777-BC01-C060C2002307}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{29385A2D-EAC1-4777-BC01-C060C2002307}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{29385A2D-EAC1-4777-BC01-C060C2002307}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{29385A2D-EAC1-4777-BC01-C060C2002307}.Debug|x86.Build.0 = Debug|Any CPU
+		{29385A2D-EAC1-4777-BC01-C060C2002307}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29385A2D-EAC1-4777-BC01-C060C2002307}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29385A2D-EAC1-4777-BC01-C060C2002307}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{29385A2D-EAC1-4777-BC01-C060C2002307}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{29385A2D-EAC1-4777-BC01-C060C2002307}.Release|x86.ActiveCfg = Release|Any CPU
+		{29385A2D-EAC1-4777-BC01-C060C2002307}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

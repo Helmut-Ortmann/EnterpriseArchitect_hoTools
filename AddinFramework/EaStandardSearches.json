@@ -1,23 +1,5 @@
 ﻿[
-    /* 
-    * *.jso configuration file for EA Searches
-    * Name:          Name of the search
-    * Description:   Description, possible use as tooltip
-    * Category:      MDG-ID, Category of EA Model Search Window
-    * Favorite:      true/false is a favorite
-    *
-    * Example(see also official json specification (JSON.NET is used: It additionally supports comments)
-    * [
-    *   {
-    *      "Name": "Simple",
-    *      "Description": "Find a matching string",
-    *      "Category": "Common Searches",
-    *      "Favorite": "true"
-    *   },
-    *   {
-    *   }
-    *]
-    *
+    /* my comment
     */
     {
         "Name": "Simple",

@@ -37,7 +37,7 @@ namespace hoTools.ActiveX
 
         Model _model;
 
-        // configuration as singleton
+        // Global Configuration as singleton
         readonly HoToolsGlobalCfg _globalCfg = HoToolsGlobalCfg.Instance;
 
 
@@ -213,12 +213,11 @@ namespace hoTools.ActiveX
             //
             //_cmbSearchName.DataSource = _globalCfg.getListFileCompleteName();
 
-            Search.Rep = Repository;
             _cmbSearchName.DisplayMember = "Name";
             _cmbSearchName.ValueMember = "Name";
-            _cmbSearchName.DataSource = Search.Searches;
+            _cmbSearchName.DataSource = Search.GetSearches(Repository);
 
-            _cmbSearchName.AutoCompleteCustomSource = Search.SearchesSuggestions;
+            _cmbSearchName.AutoCompleteCustomSource = Search.GetSearchesSuggestions(Repository);
             _cmbSearchName.Text = AddinSettings.QuickSearchName;
 
         }

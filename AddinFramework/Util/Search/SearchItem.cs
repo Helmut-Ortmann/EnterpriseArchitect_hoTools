@@ -42,6 +42,14 @@ namespace AddinFramework.Util
             Category = category;
             Favorite = favorite;
         }
+        public SearchItem(double score, string name, string description, string category, bool favorite)
+        {
+            Score = score;
+            Name = name;
+            Description = description;
+            Category = category;
+            Favorite = favorite;
+        }
     }
     /// <summary>
     /// An EA Search Item to define an EA Search

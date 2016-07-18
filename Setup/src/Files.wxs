@@ -35,6 +35,7 @@
       <Component Id="Sql.zip" Guid="{B51D32DE-0AE7-46D9-A8EF-90C8F74EE10E}">
         <File Id="Sql.zip" Name="Sql.zip" Source="sql.zip"  KeyPath="yes" />
       </Component>
+      
       <Component Id="RegisterEA" Guid="08CCFB79-BA02-4B57-BE8B-795754A6113F">
         <RegistryKey Root="HKCU" Key="Software\Sparx Systems\EAAddins\hoTools">
           <RegistryValue Type="string" Value="hoTools.AddinClass" KeyPath="yes" />
@@ -42,6 +43,10 @@
       </Component>
       <Component Id="Help" Guid="7C6716FC-4A34-447B-BA42-1E632099D9F0">
         <File Id="Help" Name="hoTools.chm" Source="..\Addin\hoTools.chm"  KeyPath="yes" />
+      </Component>
+      <!-- EA Standard Searches Configuration                   -->
+      <Component Id="EaStandardSearches.json" Guid="{BDC7CABC-176C-4F01-8E11-926724F50A48}">
+        <File Id="EaStandardSearches.json" Name="EaStandardSearches.json" Source="..\AddinFramework\Util\Search\EaStandardSearches.json" KeyPath="yes" />
       </Component>
       <Component Id="Utils" Guid="260441DA-0826-4CF6-A6DA-5777C2BEEDE0">
         <File Id="Utils" KeyPath="yes" Name="Utils.dll" Source="$(var.Util.TargetPath)" /> 
