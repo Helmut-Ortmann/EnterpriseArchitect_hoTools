@@ -75,15 +75,20 @@ namespace AddinFramework.Util
                 return _staticSearchesSuggestions;
             
         }
-
+        /// <summary>
+        /// Calculate score, sort and visualize rtf field
+        /// </summary>
+        /// <param name="pattern"></param>
         public static void CalulateAndSort(string pattern)
         {
             var l = new List<SearchItem>();
 
             foreach (var search in _staticSearches)
             {
-                var score = pattern.LevenshteinDistance(search.Name);
-                l.Add(new SearchItem(score, search.Name, search.Description, search.Category, search.Favorite));
+                var score = pattern.LongestCommonSubsequence(search.Name);
+                l.Add(new SearchItem(score.Item2, search.Name, search.Description, search.Category, search.Favorite));
+                //var score = pattern.LevenshteinDistance(search.Name);
+                //l.Add(new SearchItem(score, search.Name, search.Description, search.Category, search.Favorite));
 
             }
             // sort list
@@ -126,7 +131,7 @@ namespace AddinFramework.Util
         static public string GetRtf()
         {
             //var result = _staticSearches.Select(e => e.Name).ToArray();
-            var s = _staticSearches.Select(e => e.Name).ToList();
+            var s = _staticSearches.Select(e => $"{e.Score:F2}\t\t{e.Name}" ).ToList();
             return string.Join("\r\n",s);
         }
 

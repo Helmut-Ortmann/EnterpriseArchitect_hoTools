@@ -27,6 +27,8 @@ namespace hoTools.ActiveX
     {
         public const string Progid = "hoTools.ActiveXGUI";
 
+        private bool _rtfVisible = false;
+
         // Windows/Frames
         FrmQueryAndScript _frmQueryAndScript;
         FrmSettingsGeneral _frmSettingsGeneral;
@@ -241,6 +243,7 @@ namespace hoTools.ActiveX
             rtfListOfSearches.Width = this.Width - 20;
             rtfListOfSearches.Top = _txtSearchName.Bottom + 50;
             rtfListOfSearches.Height = this.Bottom - rtfListOfSearches.Top - 20;
+            rtfListOfSearches.BringToFront();
         }
 
         #endregion
@@ -807,34 +810,48 @@ namespace hoTools.ActiveX
         // see at:  protected override boolean IsInputKey(Keys keyData)
         void cmbSearchName_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
-            {
-                _model.SearchRun(GetSearchName(), _txtSearchText.Text);
-                e.Handled = true;
-            }
-            
+            RtfSearchNameProcessKeys(e);
+
         }
-        void cmbSearchName_KeyUp(object sender, KeyEventArgs e)
+        void _txtSearchName_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
-            {
-
-                _model.SearchRun(GetSearchName(), _txtSearchText.Text);
-                e.Handled = true;
-            }
-            if (e.KeyCode == Keys.Right)
-            {
-                Search.CalulateAndSort(_txtSearchText.Text);
-            }
-
-
+            RtfSearchNameProcessKeys(e);
         }
-        private void _cmbSearchName_TextChanged(object sender, EventArgs e)
+
+        /// <summary>
+        /// Process Keys for Textbox Search Name:
+        /// <para />
+        /// Enter: Run Query
+        /// <para />
+        /// Right, Space: Open rtf list to choose a Search
+        /// </summary>
+        /// <param name="e"></param>
+        private void RtfSearchNameProcessKeys(KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Enter:
+                    _model.SearchRun(GetSearchName(), _txtSearchName.Text);
+                    rtfListOfSearches.Visible = false;
+                    e.Handled = true;
+                    break;
+                case Keys.Right:
+                case Keys.Space:
+                    Search.CalulateAndSort(_txtSearchName.Text);
+                    rtfListOfSearches.Text = Search.GetRtf();
+                    rtfListOfSearches.BringToFront();
+                    rtfListOfSearches.Visible = true;
+                    e.Handled = true;
+                    break;
+            }
+        }
+
+        private void _txtSearchName_TextChanged(object sender, EventArgs e)
         {
            
 
         }
-        private void _cmbSearchName_TextUpdate(object sender, EventArgs e)
+        private void _txtSearchName_TextUpdate(object sender, EventArgs e)
         {
             //Search.ResetSort();
 
@@ -844,7 +861,7 @@ namespace hoTools.ActiveX
         }
 
         /// <summary>
-        /// Get Search Name from GUI text field. If empty use Search name from settings
+        /// Get Search Name from GUI text field.
         /// </summary>
         /// <returns></returns>
         string GetSearchName()
@@ -977,8 +994,8 @@ namespace hoTools.ActiveX
             this._lblPorts = new System.Windows.Forms.Label();
             this._panelAdvanced = new System.Windows.Forms.Panel();
             this._panelQuickSearch = new System.Windows.Forms.TableLayoutPanel();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this._txtSearchName = new System.Windows.Forms.TextBox();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this._toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this._toolStripContainer1.SuspendLayout();
             this._toolStripQuery.SuspendLayout();
@@ -1356,10 +1373,10 @@ namespace hoTools.ActiveX
             this._cmbSearchName.FormattingEnabled = true;
             this._cmbSearchName.Name = "_cmbSearchName";
             this._toolTip.SetToolTip(this._cmbSearchName, resources.GetString("_cmbSearchName.ToolTip"));
-            this._cmbSearchName.TextUpdate += new System.EventHandler(this._cmbSearchName_TextUpdate);
-            this._cmbSearchName.TextChanged += new System.EventHandler(this._cmbSearchName_TextChanged);
+            this._cmbSearchName.TextUpdate += new System.EventHandler(this._txtSearchName_TextUpdate);
+            this._cmbSearchName.TextChanged += new System.EventHandler(this._txtSearchName_TextChanged);
             this._cmbSearchName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbSearchName_KeyDown);
-            this._cmbSearchName.KeyUp += new System.Windows.Forms.KeyEventHandler(this.cmbSearchName_KeyUp);
+            this._cmbSearchName.KeyUp += new System.Windows.Forms.KeyEventHandler(this._txtSearchName_KeyUp);
             this._cmbSearchName.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.cmbSearchName_MouseDoubleClick);
             // 
             // rtfListOfSearches
@@ -1368,6 +1385,8 @@ namespace hoTools.ActiveX
             this.rtfListOfSearches.Name = "rtfListOfSearches";
             this.rtfListOfSearches.ReadOnly = true;
             this._toolTip.SetToolTip(this.rtfListOfSearches, resources.GetString("rtfListOfSearches.ToolTip"));
+            this.rtfListOfSearches.Enter += new System.EventHandler(this.rtfListOfSearches_Enter);
+            this.rtfListOfSearches.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.rtfListOfSearches_MouseDoubleClick);
             // 
             // _btnAddDiagramNote
             // 
@@ -1822,27 +1841,28 @@ namespace hoTools.ActiveX
             this._panelQuickSearch.Controls.Add(this._txtSearchName, 1, 0);
             this._panelQuickSearch.Name = "_panelQuickSearch";
             // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            resources.ApplyResources(this.contextMenuStrip1, "contextMenuStrip1");
-            // 
             // _txtSearchName
             // 
             this._txtSearchName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this._txtSearchName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             resources.ApplyResources(this._txtSearchName, "_txtSearchName");
             this._txtSearchName.Name = "_txtSearchName";
-            this._txtSearchName.TextChanged += new System.EventHandler(this._cmbSearchName_TextChanged);
+            this._txtSearchName.TextChanged += new System.EventHandler(this._txtSearchName_TextChanged);
             this._txtSearchName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbSearchName_KeyDown);
-            this._txtSearchName.KeyUp += new System.Windows.Forms.KeyEventHandler(this.cmbSearchName_KeyUp);
+            this._txtSearchName.KeyUp += new System.Windows.Forms.KeyEventHandler(this._txtSearchName_KeyUp);
+            this._txtSearchName.Leave += new System.EventHandler(this._txtSearchName_Leave);
             this._txtSearchName.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.cmbSearchName_MouseDoubleClick);
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            resources.ApplyResources(this.contextMenuStrip1, "contextMenuStrip1");
             // 
             // AddinControlGui
             // 
             resources.ApplyResources(this, "$this");
-            this.Controls.Add(this._cmbSearchName);
             this.Controls.Add(this.rtfListOfSearches);
+            this.Controls.Add(this._cmbSearchName);
             this.Controls.Add(this._panelPort);
             this.Controls.Add(this._panelNote);
             this.Controls.Add(this._panelAdvanced);
@@ -2262,6 +2282,33 @@ namespace hoTools.ActiveX
         private void AddinControlGui_Resize(object sender, EventArgs e)
         {
             ResizeRtfListOfChanges();
+        }
+        /// <summary>
+        /// Leave the TextBox Search Name
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void _txtSearchName_Leave(object sender, EventArgs e)
+        {
+            if (_rtfVisible == true)
+                _rtfVisible = false;
+            else    rtfListOfSearches.Visible = false;
+        }
+
+        private void rtfListOfSearches_Enter(object sender, EventArgs e)
+        {
+            rtfListOfSearches.Visible = true;
+            _rtfVisible = true;
+        }
+
+        /// <summary>
+        /// Mouse in rtf List of Searches double clicked. Run the search
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void rtfListOfSearches_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+
         }
     }
 }
