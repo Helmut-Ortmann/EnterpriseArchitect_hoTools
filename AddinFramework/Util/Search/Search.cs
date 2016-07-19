@@ -126,7 +126,8 @@ namespace AddinFramework.Util
         static public string GetRtf()
         {
             //var result = _staticSearches.Select(e => e.Name).ToArray();
-            return _staticSearches.Select(e => e.Name+"\r\n").ToString();
+            var s = _staticSearches.Select(e => e.Name).ToList();
+            return string.Join("\r\n",s);
         }
 
 

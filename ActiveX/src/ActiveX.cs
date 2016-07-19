@@ -27,8 +27,6 @@ namespace hoTools.ActiveX
     {
         public const string Progid = "hoTools.ActiveXGUI";
 
-        private bool _isSortedName = true;
-
         // Windows/Frames
         FrmQueryAndScript _frmQueryAndScript;
         FrmSettingsGeneral _frmSettingsGeneral;
@@ -157,6 +155,7 @@ namespace hoTools.ActiveX
         private ComboBox _cmbSearchName;
         private ContextMenuStrip contextMenuStrip1;
         private RichTextBox rtfListOfSearches;
+        private TextBox _txtSearchName;
         private TextBox _txtSearchText;
         #endregion
 
@@ -210,16 +209,10 @@ namespace hoTools.ActiveX
             _model = new Model(Repository);
 
 
-            // Search window
-            _cmbSearchName.DisplayMember = "Name";
-            _cmbSearchName.ValueMember = "Name";
-            _cmbSearchName.DataSource = Search.GetSearches(Repository);
-            //
-            rtfListOfSearches.Text = Search.GetRtf();
 
 
-            _cmbSearchName.AutoCompleteCustomSource = Search.GetSearchesSuggestions(Repository);
-            _cmbSearchName.Text = AddinSettings.QuickSearchName;
+            _txtSearchName.AutoCompleteCustomSource = Search.GetSearchesSuggestions(Repository);
+            _txtSearchName.Text = AddinSettings.QuickSearchName;
 
 
 
@@ -229,11 +222,27 @@ namespace hoTools.ActiveX
             // parameterize 5 Buttons to quickly run services
             ParameterizeServiceButton();
             //
-            //_cmbSearchName.DataSource = _globalCfg.getListFileCompleteName();
+            //_txtSearchName.DataSource = _globalCfg.getListFileCompleteName();
 
-            
+            //
+            ResizeRtfListOfChanges();
+
+            rtfListOfSearches.Text = Search.GetRtf();
+
+
 
         }
+        /// <summary>
+        /// Resize hight of rtf field according to available space
+        /// </summary>
+        private void ResizeRtfListOfChanges()
+        {
+            rtfListOfSearches.Left = this.Left + 20;
+            rtfListOfSearches.Width = this.Width - 20;
+            rtfListOfSearches.Top = _txtSearchName.Bottom + 50;
+            rtfListOfSearches.Height = this.Bottom - rtfListOfSearches.Top - 20;
+        }
+
         #endregion
 
         #region IActiveX Members
@@ -739,6 +748,8 @@ namespace hoTools.ActiveX
             EaService.SetLineStyle(Repository, "OS");
         }
         #endregion
+
+
         #region Key down
         /// <summary>
         /// Overrides TextBox to handle the enter key. Per default it isn't passed
@@ -814,7 +825,6 @@ namespace hoTools.ActiveX
             if (e.KeyCode == Keys.Right)
             {
                 Search.CalulateAndSort(_txtSearchText.Text);
-                _cmbSearchName.DataSource = Search.GetSearches(Repository);
             }
 
 
@@ -839,11 +849,11 @@ namespace hoTools.ActiveX
         /// <returns></returns>
         string GetSearchName()
         {
-            string searchName = _cmbSearchName.Text.Trim();
+            string searchName = _txtSearchName.Text.Trim();
             if (searchName == "")
             {
                 searchName = AddinSettings.QuickSearchName;
-                _cmbSearchName.Text = searchName;
+                _txtSearchName.Text = searchName;
             }
 
             return searchName;
@@ -902,6 +912,7 @@ namespace hoTools.ActiveX
             this._panelConveyedItems = new System.Windows.Forms.Panel();
             this._lblConveyedItems = new System.Windows.Forms.Label();
             this._cmbSearchName = new System.Windows.Forms.ComboBox();
+            this.rtfListOfSearches = new System.Windows.Forms.RichTextBox();
             this._btnAddDiagramNote = new System.Windows.Forms.Button();
             this._btnAddElementNote = new System.Windows.Forms.Button();
             this._menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -967,7 +978,7 @@ namespace hoTools.ActiveX
             this._panelAdvanced = new System.Windows.Forms.Panel();
             this._panelQuickSearch = new System.Windows.Forms.TableLayoutPanel();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.rtfListOfSearches = new System.Windows.Forms.RichTextBox();
+            this._txtSearchName = new System.Windows.Forms.TextBox();
             this._toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this._toolStripContainer1.SuspendLayout();
             this._toolStripQuery.SuspendLayout();
@@ -1350,6 +1361,13 @@ namespace hoTools.ActiveX
             this._cmbSearchName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbSearchName_KeyDown);
             this._cmbSearchName.KeyUp += new System.Windows.Forms.KeyEventHandler(this.cmbSearchName_KeyUp);
             this._cmbSearchName.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.cmbSearchName_MouseDoubleClick);
+            // 
+            // rtfListOfSearches
+            // 
+            resources.ApplyResources(this.rtfListOfSearches, "rtfListOfSearches");
+            this.rtfListOfSearches.Name = "rtfListOfSearches";
+            this.rtfListOfSearches.ReadOnly = true;
+            this._toolTip.SetToolTip(this.rtfListOfSearches, resources.GetString("rtfListOfSearches.ToolTip"));
             // 
             // _btnAddDiagramNote
             // 
@@ -1801,7 +1819,7 @@ namespace hoTools.ActiveX
             // 
             resources.ApplyResources(this._panelQuickSearch, "_panelQuickSearch");
             this._panelQuickSearch.Controls.Add(this._txtSearchText, 0, 0);
-            this._panelQuickSearch.Controls.Add(this._cmbSearchName, 1, 0);
+            this._panelQuickSearch.Controls.Add(this._txtSearchName, 1, 0);
             this._panelQuickSearch.Name = "_panelQuickSearch";
             // 
             // contextMenuStrip1
@@ -1809,15 +1827,21 @@ namespace hoTools.ActiveX
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             resources.ApplyResources(this.contextMenuStrip1, "contextMenuStrip1");
             // 
-            // rtfListOfSearches
+            // _txtSearchName
             // 
-            resources.ApplyResources(this.rtfListOfSearches, "rtfListOfSearches");
-            this.rtfListOfSearches.Name = "rtfListOfSearches";
-            this.rtfListOfSearches.ReadOnly = true;
+            this._txtSearchName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this._txtSearchName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            resources.ApplyResources(this._txtSearchName, "_txtSearchName");
+            this._txtSearchName.Name = "_txtSearchName";
+            this._txtSearchName.TextChanged += new System.EventHandler(this._cmbSearchName_TextChanged);
+            this._txtSearchName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbSearchName_KeyDown);
+            this._txtSearchName.KeyUp += new System.Windows.Forms.KeyEventHandler(this.cmbSearchName_KeyUp);
+            this._txtSearchName.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.cmbSearchName_MouseDoubleClick);
             // 
             // AddinControlGui
             // 
             resources.ApplyResources(this, "$this");
+            this.Controls.Add(this._cmbSearchName);
             this.Controls.Add(this.rtfListOfSearches);
             this.Controls.Add(this._panelPort);
             this.Controls.Add(this._panelNote);
@@ -1829,6 +1853,7 @@ namespace hoTools.ActiveX
             this.Controls.Add(this._panelButtons);
             this.Controls.Add(this._menuStrip1);
             this.Name = "AddinControlGui";
+            this.Resize += new System.EventHandler(this.AddinControlGui_Resize);
             this._toolStripContainer1.TopToolStripPanel.ResumeLayout(false);
             this._toolStripContainer1.TopToolStripPanel.PerformLayout();
             this._toolStripContainer1.ResumeLayout(false);
@@ -1946,7 +1971,7 @@ namespace hoTools.ActiveX
 
             // no quick search defined
             _panelQuickSearch.Visible = (AddinSettings.QuickSearchName.Trim() != "");
-            _cmbSearchName.Text = AddinSettings.QuickSearchName.Trim();
+            _txtSearchName.Text = AddinSettings.QuickSearchName.Trim();
 
             // Buttons for queries and services
             _panelButtons.Visible = AddinSettings.IsShowQueryButton || AddinSettings.IsShowServiceButton;
@@ -2232,6 +2257,11 @@ namespace hoTools.ActiveX
             Util.StartFile(SqlError.GetEaSqlErrorFilePath());
         }
 
-       
+        
+
+        private void AddinControlGui_Resize(object sender, EventArgs e)
+        {
+            ResizeRtfListOfChanges();
+        }
     }
 }
