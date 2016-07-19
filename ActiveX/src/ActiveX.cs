@@ -156,6 +156,7 @@ namespace hoTools.ActiveX
         private ToolStripMenuItem _getLastSqlErrorToolStripMenuItem;
         private ComboBox _cmbSearchName;
         private ContextMenuStrip contextMenuStrip1;
+        private RichTextBox rtfListOfSearches;
         private TextBox _txtSearchText;
         #endregion
 
@@ -213,6 +214,9 @@ namespace hoTools.ActiveX
             _cmbSearchName.DisplayMember = "Name";
             _cmbSearchName.ValueMember = "Name";
             _cmbSearchName.DataSource = Search.GetSearches(Repository);
+            //
+            rtfListOfSearches.Text = Search.GetRtf();
+
 
             _cmbSearchName.AutoCompleteCustomSource = Search.GetSearchesSuggestions(Repository);
             _cmbSearchName.Text = AddinSettings.QuickSearchName;
@@ -803,8 +807,14 @@ namespace hoTools.ActiveX
         {
             if (e.KeyCode == Keys.Enter)
             {
+
                 _model.SearchRun(GetSearchName(), _txtSearchText.Text);
                 e.Handled = true;
+            }
+            if (e.KeyCode == Keys.Right)
+            {
+                Search.CalulateAndSort(_txtSearchText.Text);
+                _cmbSearchName.DataSource = Search.GetSearches(Repository);
             }
 
 
@@ -816,29 +826,10 @@ namespace hoTools.ActiveX
         }
         private void _cmbSearchName_TextUpdate(object sender, EventArgs e)
         {
-            if (_cmbSearchName.Text.Length > 2)
-            {
-                string text = _cmbSearchName.Text;
-                Search.CalulateAndSort(text);
-                _isSortedName = false;
-                // nothing selected
-                if (_cmbSearchName.SelectedIndex == -1)
-                {
-                    _cmbSearchName.DataSource = Search.GetSearches(Repository);
-                    _cmbSearchName.SelectedIndex = -1;
-                    _cmbSearchName.SelectedItem = null;
-                    _cmbSearchName.Text = text;
-                }
-            }
-            else
-            {
-                if (_isSortedName == false)
-                {
-                    Search.ResetSort();
-                    _cmbSearchName.DataSource = Search.GetSearches(Repository);
-                    _isSortedName = true;
-                }
-            }
+            //Search.ResetSort();
+
+
+
 
         }
 
@@ -976,6 +967,7 @@ namespace hoTools.ActiveX
             this._panelAdvanced = new System.Windows.Forms.Panel();
             this._panelQuickSearch = new System.Windows.Forms.TableLayoutPanel();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.rtfListOfSearches = new System.Windows.Forms.RichTextBox();
             this._toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this._toolStripContainer1.SuspendLayout();
             this._toolStripQuery.SuspendLayout();
@@ -1347,7 +1339,7 @@ namespace hoTools.ActiveX
             // 
             // _cmbSearchName
             // 
-            this._cmbSearchName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this._cmbSearchName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this._cmbSearchName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             resources.ApplyResources(this._cmbSearchName, "_cmbSearchName");
             this._cmbSearchName.FormattingEnabled = true;
@@ -1817,9 +1809,16 @@ namespace hoTools.ActiveX
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             resources.ApplyResources(this.contextMenuStrip1, "contextMenuStrip1");
             // 
+            // rtfListOfSearches
+            // 
+            resources.ApplyResources(this.rtfListOfSearches, "rtfListOfSearches");
+            this.rtfListOfSearches.Name = "rtfListOfSearches";
+            this.rtfListOfSearches.ReadOnly = true;
+            // 
             // AddinControlGui
             // 
             resources.ApplyResources(this, "$this");
+            this.Controls.Add(this.rtfListOfSearches);
             this.Controls.Add(this._panelPort);
             this.Controls.Add(this._panelNote);
             this.Controls.Add(this._panelAdvanced);

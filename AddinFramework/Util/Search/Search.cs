@@ -65,7 +65,6 @@ namespace AddinFramework.Util
                 return _staticSearches;
             
         }
-
         public static AutoCompleteStringCollection GetSearchesSuggestions(EA.Repository rep)
         {
                 if (_staticSearches == null)
@@ -121,6 +120,16 @@ namespace AddinFramework.Util
             LoadStaticSearchesSuggestions();
 
         }
+        /// <summary>
+        /// Get the suggestions for the rtf box
+        /// </summary>
+        static public string GetRtf()
+        {
+            //var result = _staticSearches.Select(e => e.Name).ToArray();
+            return _staticSearches.Select(e => e.Name+"\r\n").ToString();
+        }
+
+
         /// <summary>
         /// Load the suggestions for the search Combo Box
         /// </summary>
