@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
+using System.Text.RegularExpressions;
 using AddinFramework.Util;
 using hoTools.Settings;
 using hoTools.EaServices;
@@ -155,7 +157,7 @@ namespace hoTools.ActiveX
         private ToolStripSeparator _toolStripSeparator10;
         private ToolStripMenuItem _getLastSqlErrorToolStripMenuItem;
         private ComboBox _cmbSearchName;
-        private ContextMenuStrip contextMenuStrip1;
+        private ContextMenuStrip _contextMenuStrip1;
         private RichTextBox rtfListOfSearches;
         private TextBox _txtSearchName;
         private TextBox _txtSearchText;
@@ -823,7 +825,7 @@ namespace hoTools.ActiveX
         /// <para />
         /// Enter: Run Query
         /// <para />
-        /// Right, Space: Open rtf list to choose a Search
+        /// up, down, Space: Open rtf list to choose a Search
         /// </summary>
         /// <param name="e"></param>
         private void RtfSearchNameProcessKeys(KeyEventArgs e)
@@ -835,16 +837,65 @@ namespace hoTools.ActiveX
                     rtfListOfSearches.Visible = false;
                     e.Handled = true;
                     break;
-                case Keys.Right:
+                case Keys.Up:
+                case Keys.Down:
                 case Keys.Space:
-                    Search.CalulateAndSort(_txtSearchName.Text);
-                    rtfListOfSearches.Text = Search.GetRtf();
+                    if (_txtSearchName.Text.Trim() == "")
+                    {
+                        Search.ResetSort();
+                        rtfListOfSearches.Text = Search.GetRtf();
+                    }
+                    else
+                    {
+                        Search.CalulateAndSort(_txtSearchName.Text);
+                        rtfListOfSearches.Clear();
+                        ColorCharacters(rtfListOfSearches, Search.GetRtf(), _txtSearchName.Text, Color.Yellow);
+                    }
+
                     rtfListOfSearches.BringToFront();
                     rtfListOfSearches.Visible = true;
                     e.Handled = true;
                     break;
             }
         }
+
+
+        void ColorCharacters(RichTextBox rtf, string fromText, string charactersToColor, Color color)
+        {
+            int posInText = 0;
+            if (charactersToColor.Trim() == "")
+            {
+                rtf.SelectionBackColor = Color.AliceBlue;
+                rtf.AppendText(fromText);
+            }
+            else
+            {
+
+                string from = fromText.ToLower();
+                Regex pattern = new Regex($"[{charactersToColor.ToLower()}]");
+                Match match = pattern.Match(from);
+                while (match.Success)
+                {
+                    // output not outputted text
+                    if ((match.Index - posInText) > 0)
+                    {
+                        rtf.SelectionBackColor = Color.AliceBlue;
+                        rtf.AppendText(from.Substring(posInText, match.Index - posInText));
+                    }
+                    rtf.SelectionBackColor = Color.Gold;
+                    rtf.AppendText(match.Value);
+                    posInText = match.Index + match.Length;
+                    match = match.NextMatch();
+
+                }
+                if ((from.Length - 1 - posInText) >= 0)
+                {
+                    rtf.SelectionBackColor = Color.AliceBlue;
+                    rtf.SelectionBackColor = Color.AliceBlue;
+                    rtf.AppendText(from.Substring(posInText, from.Length - posInText));
+                }
+        }
+    }
 
         private void _txtSearchName_TextChanged(object sender, EventArgs e)
         {
@@ -995,7 +1046,7 @@ namespace hoTools.ActiveX
             this._panelAdvanced = new System.Windows.Forms.Panel();
             this._panelQuickSearch = new System.Windows.Forms.TableLayoutPanel();
             this._txtSearchName = new System.Windows.Forms.TextBox();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this._contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this._toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this._toolStripContainer1.SuspendLayout();
             this._toolStripQuery.SuspendLayout();
@@ -1124,6 +1175,7 @@ namespace hoTools.ActiveX
             resources.ApplyResources(this._txtSearchText, "_txtSearchText");
             this._txtSearchText.Name = "_txtSearchText";
             this._toolTip.SetToolTip(this._txtSearchText, resources.GetString("_txtSearchText.ToolTip"));
+            this._txtSearchText.Enter += new System.EventHandler(this._txtSearchText_Enter);
             this._txtSearchText.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtUserText_KeyDown);
             this._txtSearchText.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.txtSearchText_MouseDoubleClick);
             // 
@@ -1386,6 +1438,7 @@ namespace hoTools.ActiveX
             this.rtfListOfSearches.ReadOnly = true;
             this._toolTip.SetToolTip(this.rtfListOfSearches, resources.GetString("rtfListOfSearches.ToolTip"));
             this.rtfListOfSearches.Enter += new System.EventHandler(this.rtfListOfSearches_Enter);
+            this.rtfListOfSearches.Leave += new System.EventHandler(this.rtfListOfSearches_Leave);
             this.rtfListOfSearches.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.rtfListOfSearches_MouseDoubleClick);
             // 
             // _btnAddDiagramNote
@@ -1848,15 +1901,16 @@ namespace hoTools.ActiveX
             resources.ApplyResources(this._txtSearchName, "_txtSearchName");
             this._txtSearchName.Name = "_txtSearchName";
             this._txtSearchName.TextChanged += new System.EventHandler(this._txtSearchName_TextChanged);
+            this._txtSearchName.Enter += new System.EventHandler(this._txtSearchName_Enter);
             this._txtSearchName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbSearchName_KeyDown);
             this._txtSearchName.KeyUp += new System.Windows.Forms.KeyEventHandler(this._txtSearchName_KeyUp);
             this._txtSearchName.Leave += new System.EventHandler(this._txtSearchName_Leave);
             this._txtSearchName.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.cmbSearchName_MouseDoubleClick);
             // 
-            // contextMenuStrip1
+            // _contextMenuStrip1
             // 
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            resources.ApplyResources(this.contextMenuStrip1, "contextMenuStrip1");
+            this._contextMenuStrip1.Name = "_contextMenuStrip1";
+            resources.ApplyResources(this._contextMenuStrip1, "_contextMenuStrip1");
             // 
             // AddinControlGui
             // 
@@ -2290,9 +2344,7 @@ namespace hoTools.ActiveX
         /// <param name="e"></param>
         private void _txtSearchName_Leave(object sender, EventArgs e)
         {
-            if (_rtfVisible == true)
-                _rtfVisible = false;
-            else    rtfListOfSearches.Visible = false;
+
         }
 
         private void rtfListOfSearches_Enter(object sender, EventArgs e)
@@ -2309,6 +2361,31 @@ namespace hoTools.ActiveX
         private void rtfListOfSearches_MouseDoubleClick(object sender, MouseEventArgs e)
         {
 
+
+            int startPosLine = rtfListOfSearches.GetFirstCharIndexOfCurrentLine();
+            int lineNumber = rtfListOfSearches.GetLineFromCharIndex(startPosLine);
+            SearchItem searchItem = Search.GetSearche(lineNumber);
+
+            // run Search
+            _model.SearchRun(searchItem.Name, _txtSearchName.Text);
+            rtfListOfSearches.Visible = false;
+
+
+        }
+
+        private void _txtSearchName_Enter(object sender, EventArgs e)
+        {
+            rtfListOfSearches.Visible = false;
+        }
+
+        private void _txtSearchText_Enter(object sender, EventArgs e)
+        {
+            rtfListOfSearches.Visible = false;
+        }
+
+        private void rtfListOfSearches_Leave(object sender, EventArgs e)
+        {
+            rtfListOfSearches.Visible = false;
         }
     }
 }

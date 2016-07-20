@@ -65,6 +65,17 @@ namespace AddinFramework.Util
                 return _staticSearches;
             
         }
+        /// <summary>
+        /// Get the SearchItem for the index
+        /// </summary>
+        public static SearchItem GetSearche(int index)
+        {
+            
+            return _staticSearches[index];
+
+        }
+
+
         public static AutoCompleteStringCollection GetSearchesSuggestions(EA.Repository rep)
         {
                 if (_staticSearches == null)
@@ -76,16 +87,17 @@ namespace AddinFramework.Util
             
         }
         /// <summary>
-        /// Calculate score, sort and visualize rtf field
+        /// Calculate score, sort and visualize rtf field. Cases are not considered.
         /// </summary>
         /// <param name="pattern"></param>
         public static void CalulateAndSort(string pattern)
         {
+            pattern = pattern.ToLower();
             var l = new List<SearchItem>();
 
             foreach (var search in _staticSearches)
             {
-                var score = pattern.LongestCommonSubsequence(search.Name);
+                var score = pattern.LongestCommonSubsequence(search.Name.ToLower());
                 l.Add(new SearchItem(score.Item2, search.Name, search.Description, search.Category, search.Favorite));
                 //var score = pattern.LevenshteinDistance(search.Name);
                 //l.Add(new SearchItem(score, search.Name, search.Description, search.Category, search.Favorite));
@@ -98,7 +110,7 @@ namespace AddinFramework.Util
         public static void ResetSort()
         {
             // sort list
-            _staticSearches = _staticSearches.OrderByDescending(a => a.Name).ToList();
+            _staticSearches = _staticSearches.OrderBy(a => a.Name).ToList();
 
         }
 
@@ -225,7 +237,7 @@ namespace AddinFramework.Util
 
                 // get MDG data (ID, Name) 
 
-                string id = "";
+                string id = "My EA Searches";
                 //string name = "";
                 //string notes = "";
                 XElement documentation = mdg.Element("Documentation");
@@ -309,26 +321,5 @@ namespace AddinFramework.Util
         }
 
     }
-
-    public class Test
-    {
-        public Double Score { get; set; }
-        public bool Favorite { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-
-        public string Category { get; set; }
-
-        public Test(string name, string description)
-        {
-            Name = name;
-            Description = description;
-        }
-        [JsonConstructor]
-        public Test(string name)
-        {
-            Name = name;
-        }
-
-    }
+    
 }

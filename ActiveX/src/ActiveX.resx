@@ -192,51 +192,6 @@
   <data name="_toolStripQuery.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>None</value>
   </data>
-  <data name="_toolStripQuery.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 0</value>
-  </data>
-  <data name="_toolStripQuery.Size" type="System.Drawing.Size, System.Drawing">
-    <value>248, 25</value>
-  </data>
-  <data name="_toolStripQuery.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;_toolStripQuery.Name" xml:space="preserve">
-    <value>_toolStripQuery</value>
-  </data>
-  <data name="&gt;&gt;_toolStripQuery.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;_toolStripQuery.Parent" xml:space="preserve">
-    <value>_toolStripContainer1.TopToolStripPanel</value>
-  </data>
-  <data name="&gt;&gt;_toolStripQuery.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;_toolStripContainer1.TopToolStripPanel.Name" xml:space="preserve">
-    <value>_toolStripContainer1.TopToolStripPanel</value>
-  </data>
-  <data name="&gt;&gt;_toolStripContainer1.TopToolStripPanel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;_toolStripContainer1.TopToolStripPanel.Parent" xml:space="preserve">
-    <value>_toolStripContainer1</value>
-  </data>
-  <data name="&gt;&gt;_toolStripContainer1.TopToolStripPanel.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;_toolStripContainer1.Name" xml:space="preserve">
-    <value>_toolStripContainer1</value>
-  </data>
-  <data name="&gt;&gt;_toolStripContainer1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripContainer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;_toolStripContainer1.Parent" xml:space="preserve">
-    <value>_panelButtons</value>
-  </data>
-  <data name="&gt;&gt;_toolStripContainer1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="_toolStripSearchBtn1.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
@@ -326,6 +281,51 @@
   </data>
   <data name="_toolStripServiceBtn5.Text" xml:space="preserve">
     <value>5</value>
+  </data>
+  <data name="_toolStripQuery.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 0</value>
+  </data>
+  <data name="_toolStripQuery.Size" type="System.Drawing.Size, System.Drawing">
+    <value>248, 25</value>
+  </data>
+  <data name="_toolStripQuery.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;_toolStripQuery.Name" xml:space="preserve">
+    <value>_toolStripQuery</value>
+  </data>
+  <data name="&gt;&gt;_toolStripQuery.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;_toolStripQuery.Parent" xml:space="preserve">
+    <value>_toolStripContainer1.TopToolStripPanel</value>
+  </data>
+  <data name="&gt;&gt;_toolStripQuery.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;_toolStripContainer1.TopToolStripPanel.Name" xml:space="preserve">
+    <value>_toolStripContainer1.TopToolStripPanel</value>
+  </data>
+  <data name="&gt;&gt;_toolStripContainer1.TopToolStripPanel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;_toolStripContainer1.TopToolStripPanel.Parent" xml:space="preserve">
+    <value>_toolStripContainer1</value>
+  </data>
+  <data name="&gt;&gt;_toolStripContainer1.TopToolStripPanel.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;_toolStripContainer1.Name" xml:space="preserve">
+    <value>_toolStripContainer1</value>
+  </data>
+  <data name="&gt;&gt;_toolStripContainer1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripContainer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;_toolStripContainer1.Parent" xml:space="preserve">
+    <value>_panelButtons</value>
+  </data>
+  <data name="&gt;&gt;_toolStripContainer1.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <metadata name="_toolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>286, 17</value>
@@ -1308,6 +1308,21 @@ There is no interface to directly select more than one Browser Element (as far a
   <data name="&gt;&gt;_btnConveyedItemElement.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="_lblConveyedItems.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="_lblConveyedItems.Location" type="System.Drawing.Point, System.Drawing">
+    <value>192, 6</value>
+  </data>
+  <data name="_lblConveyedItems.Size" type="System.Drawing.Size, System.Drawing">
+    <value>83, 13</value>
+  </data>
+  <data name="_lblConveyedItems.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="_lblConveyedItems.Text" xml:space="preserve">
+    <value>Conveyed Items</value>
+  </data>
   <data name="&gt;&gt;_lblConveyedItems.Name" xml:space="preserve">
     <value>_lblConveyedItems</value>
   </data>
@@ -1351,33 +1366,6 @@ There is no interface to directly select more than one Browser Element (as far a
   </data>
   <data name="&gt;&gt;_panelConveyedItems.ZOrder" xml:space="preserve">
     <value>7</value>
-  </data>
-  <data name="_lblConveyedItems.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="_lblConveyedItems.Location" type="System.Drawing.Point, System.Drawing">
-    <value>192, 6</value>
-  </data>
-  <data name="_lblConveyedItems.Size" type="System.Drawing.Size, System.Drawing">
-    <value>83, 13</value>
-  </data>
-  <data name="_lblConveyedItems.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="_lblConveyedItems.Text" xml:space="preserve">
-    <value>Conveyed Items</value>
-  </data>
-  <data name="&gt;&gt;_lblConveyedItems.Name" xml:space="preserve">
-    <value>_lblConveyedItems</value>
-  </data>
-  <data name="&gt;&gt;_lblConveyedItems.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;_lblConveyedItems.Parent" xml:space="preserve">
-    <value>_panelConveyedItems</value>
-  </data>
-  <data name="&gt;&gt;_lblConveyedItems.ZOrder" xml:space="preserve">
-    <value>0</value>
   </data>
   <data name="_cmbSearchName.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -1502,36 +1490,6 @@ There is no interface to directly select more than one Browser Element (as far a
   <metadata name="_menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>376, 17</value>
   </metadata>
-  <data name="_menuStrip1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="_menuStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>461, 24</value>
-  </data>
-  <data name="_menuStrip1.TabIndex" type="System.Int32, mscorlib">
-    <value>22</value>
-  </data>
-  <data name="_menuStrip1.Text" xml:space="preserve">
-    <value>menuStrip1</value>
-  </data>
-  <data name="&gt;&gt;_menuStrip1.Name" xml:space="preserve">
-    <value>_menuStrip1</value>
-  </data>
-  <data name="&gt;&gt;_menuStrip1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.MenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;_menuStrip1.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;_menuStrip1.ZOrder" xml:space="preserve">
-    <value>11</value>
-  </data>
-  <data name="_fileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>37, 20</value>
-  </data>
-  <data name="_fileToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;File</value>
-  </data>
   <data name="_settingGeneralToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>294, 22</value>
   </data>
@@ -1588,14 +1546,11 @@ There is no interface to directly select more than one Browser Element (as far a
 - Own EA Tab Window
 - Disable</value>
   </data>
-  <data name="_doToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>34, 20</value>
+  <data name="_fileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>37, 20</value>
   </data>
-  <data name="_doToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Do</value>
-  </data>
-  <data name="_doToolStripMenuItem.ToolTipText" xml:space="preserve">
-    <value>Change Author of selected Package / Element</value>
+  <data name="_fileToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;File</value>
   </data>
   <data name="_createActivityForOperationToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>242, 22</value>
@@ -1678,14 +1633,14 @@ The application to open the folder: See global Settings</value>
 - Packages
 - Elements</value>
   </data>
-  <data name="_versionControlToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_doToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>34, 20</value>
   </data>
-  <data name="_versionControlToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;VC</value>
+  <data name="_doToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Do</value>
   </data>
-  <data name="_versionControlToolStripMenuItem.ToolTipText" xml:space="preserve">
-    <value>Functions related to Version Control</value>
+  <data name="_doToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Change Author of selected Package / Element</value>
   </data>
   <data name="_changeXmlFileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>291, 22</value>
@@ -1769,17 +1724,14 @@ Select a package to proceed all recursive package.</value>
   <data name="_setSvnModuleTaggedValuesrecursiveToolStripMenuItem.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="_portToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>41, 20</value>
+  <data name="_versionControlToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>34, 20</value>
   </data>
-  <data name="_portToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Port</value>
+  <data name="_versionControlToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;VC</value>
   </data>
-  <data name="_portToolStripMenuItem.ToolTipText" xml:space="preserve">
-    <value>Functions related to port like:
-- Visibility
-- Move
-- Connect</value>
+  <data name="_versionControlToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Functions related to Version Control</value>
   </data>
   <data name="_movePortsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>375, 22</value>
@@ -1977,11 +1929,17 @@ Tip:
     <value>Order selected Diagram objects alphabetically.
 </value>
   </data>
-  <data name="_helpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>44, 20</value>
+  <data name="_portToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>41, 20</value>
   </data>
-  <data name="_helpToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Help</value>
+  <data name="_portToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Port</value>
+  </data>
+  <data name="_portToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Functions related to port like:
+- Visibility
+- Move
+- Connect</value>
   </data>
   <data name="_aboutToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>165, 22</value>
@@ -2009,6 +1967,36 @@ Tip:
   </data>
   <data name="_helpToolStripMenuItem1.ToolTipText" xml:space="preserve">
     <value>Help</value>
+  </data>
+  <data name="_helpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>44, 20</value>
+  </data>
+  <data name="_helpToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Help</value>
+  </data>
+  <data name="_menuStrip1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="_menuStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>461, 24</value>
+  </data>
+  <data name="_menuStrip1.TabIndex" type="System.Int32, mscorlib">
+    <value>22</value>
+  </data>
+  <data name="_menuStrip1.Text" xml:space="preserve">
+    <value>menuStrip1</value>
+  </data>
+  <data name="&gt;&gt;_menuStrip1.Name" xml:space="preserve">
+    <value>_menuStrip1</value>
+  </data>
+  <data name="&gt;&gt;_menuStrip1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.MenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;_menuStrip1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;_menuStrip1.ZOrder" xml:space="preserve">
+    <value>11</value>
   </data>
   <data name="_panelButtons.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
@@ -2121,6 +2109,24 @@ Tip:
   <data name="&gt;&gt;_panelNote.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
+  <data name="_lblPorts.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="_lblPorts.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 12pt</value>
+  </data>
+  <data name="_lblPorts.Location" type="System.Drawing.Point, System.Drawing">
+    <value>80, 7</value>
+  </data>
+  <data name="_lblPorts.Size" type="System.Drawing.Size, System.Drawing">
+    <value>46, 20</value>
+  </data>
+  <data name="_lblPorts.TabIndex" type="System.Int32, mscorlib">
+    <value>38</value>
+  </data>
+  <data name="_lblPorts.Text" xml:space="preserve">
+    <value>Ports</value>
+  </data>
   <data name="&gt;&gt;_lblPorts.Name" xml:space="preserve">
     <value>_lblPorts</value>
   </data>
@@ -2160,36 +2166,6 @@ Tip:
   <data name="&gt;&gt;_panelPort.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="_lblPorts.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="_lblPorts.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 12pt</value>
-  </data>
-  <data name="_lblPorts.Location" type="System.Drawing.Point, System.Drawing">
-    <value>80, 7</value>
-  </data>
-  <data name="_lblPorts.Size" type="System.Drawing.Size, System.Drawing">
-    <value>46, 20</value>
-  </data>
-  <data name="_lblPorts.TabIndex" type="System.Int32, mscorlib">
-    <value>38</value>
-  </data>
-  <data name="_lblPorts.Text" xml:space="preserve">
-    <value>Ports</value>
-  </data>
-  <data name="&gt;&gt;_lblPorts.Name" xml:space="preserve">
-    <value>_lblPorts</value>
-  </data>
-  <data name="&gt;&gt;_lblPorts.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;_lblPorts.Parent" xml:space="preserve">
-    <value>_panelPort</value>
-  </data>
-  <data name="&gt;&gt;_lblPorts.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="_panelAdvanced.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
   </data>
@@ -2219,6 +2195,24 @@ Tip:
   </data>
   <data name="_panelQuickSearch.ColumnCount" type="System.Int32, mscorlib">
     <value>2</value>
+  </data>
+  <data name="_txtSearchName.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="_txtSearchName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>249, 3</value>
+  </data>
+  <data name="_txtSearchName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>209, 20</value>
+  </data>
+  <data name="_txtSearchName.TabIndex" type="System.Int32, mscorlib">
+    <value>47</value>
+  </data>
+  <data name="_txtSearchName.Text" xml:space="preserve">
+    <value>Search Name (EA or SQL).
+
+1. Use Autocomplete
+2. ListBox with Blank, Key up, Key down</value>
   </data>
   <data name="&gt;&gt;_txtSearchName.Name" xml:space="preserve">
     <value>_txtSearchName</value>
@@ -2262,40 +2256,16 @@ Tip:
   <data name="_panelQuickSearch.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
     <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="_txtSearchText" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="_txtSearchName" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100,Absolute,215,Absolute,20" /&gt;&lt;Rows Styles="Percent,100,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
-  <data name="_txtSearchName.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="_txtSearchName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>249, 3</value>
-  </data>
-  <data name="_txtSearchName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>209, 20</value>
-  </data>
-  <data name="_txtSearchName.TabIndex" type="System.Int32, mscorlib">
-    <value>47</value>
-  </data>
-  <data name="&gt;&gt;_txtSearchName.Name" xml:space="preserve">
-    <value>_txtSearchName</value>
-  </data>
-  <data name="&gt;&gt;_txtSearchName.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;_txtSearchName.Parent" xml:space="preserve">
-    <value>_panelQuickSearch</value>
-  </data>
-  <data name="&gt;&gt;_txtSearchName.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <metadata name="contextMenuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <metadata name="_contextMenuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>496, 17</value>
   </metadata>
-  <data name="contextMenuStrip1.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_contextMenuStrip1.Size" type="System.Drawing.Size, System.Drawing">
     <value>61, 4</value>
   </data>
-  <data name="&gt;&gt;contextMenuStrip1.Name" xml:space="preserve">
-    <value>contextMenuStrip1</value>
+  <data name="&gt;&gt;_contextMenuStrip1.Name" xml:space="preserve">
+    <value>_contextMenuStrip1</value>
   </data>
-  <data name="&gt;&gt;contextMenuStrip1.Type" xml:space="preserve">
+  <data name="&gt;&gt;_contextMenuStrip1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
