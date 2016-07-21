@@ -93,5 +93,16 @@
         <lineHash>uD0z6/4Gimz211bpZGlmR+7A0WzHv2T8Ocp9dpyO3XE=</lineHash>
       </position>
     </Favorite>
+    <Favorite>
+      <name>ActiveX.cs [Design]</name>
+      <path>activex\src\activex.cs</path>
+      <absolutePath>d:\hodata\development\github\enterprisearchitect_hotools\activex\src\activex.cs</absolutePath>
+      <viewKind>7651a702-06e5-11d1-8ebd-00a0c90f26ea</viewKind>
+      <position>
+        <line>2113</line>
+        <column>50</column>
+        <lineHash>farFJy5Vs3DOdcR0p8BnNIdIcEJcS2VKtPQD0XHgPSE=</lineHash>
+      </position>
+    </Favorite>
   </favorites>
 </Favorites>

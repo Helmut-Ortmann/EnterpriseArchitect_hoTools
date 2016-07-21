@@ -97,8 +97,9 @@ namespace AddinFramework.Util
 
             foreach (var search in _staticSearches)
             {
+                // Search for length of subsequence
                 var score = pattern.LongestCommonSubsequence(search.Name.ToLower());
-                l.Add(new SearchItem(score.Item2, search.Name, search.Description, search.Category, search.Favorite));
+                l.Add(new SearchItem(score.Item1.Length, search.Name, search.Description, search.Category, search.Favorite));
                 //var score = pattern.LevenshteinDistance(search.Name);
                 //l.Add(new SearchItem(score, search.Name, search.Description, search.Category, search.Favorite));
 
@@ -107,6 +108,9 @@ namespace AddinFramework.Util
             _staticSearches = l.OrderByDescending(a => a.Score).ToList();
 
         }
+        /// <summary>
+        /// Reset sort in rtf by default order (Name field of SearchItem).
+        /// </summary>
         public static void ResetSort()
         {
             // sort list

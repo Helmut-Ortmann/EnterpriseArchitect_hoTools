@@ -858,7 +858,13 @@ namespace hoTools.ActiveX
                     break;
             }
         }
-
+        /// <summary>
+        /// Color find characters in rtf textbox.
+        /// </summary>
+        /// <param name="rtf"></param>
+        /// <param name="fromText"></param>
+        /// <param name="charactersToColor"></param>
+        /// <param name="color"></param>
 
         void ColorCharacters(RichTextBox rtf, string fromText, string charactersToColor, Color color)
         {

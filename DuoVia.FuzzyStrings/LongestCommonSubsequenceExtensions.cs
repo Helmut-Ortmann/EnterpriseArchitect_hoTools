@@ -15,7 +15,7 @@ namespace DuoVia.FuzzyStrings
 		/// <param name="input"></param>
 		/// <param name="comparedTo"></param>
 		/// <param name="caseSensitive"></param>
-		/// <returns>Returns a Tuple of the sub sequence string and the match coeficient.</returns>
+		/// <returns>Returns a Tuple of the sub sequence string and the match coefficient.</returns>
 		public static Tuple<string, double> LongestCommonSubsequence(this string input, string comparedTo, bool caseSensitive = false)
 		{
 			if (string.IsNullOrWhiteSpace(input) || string.IsNullOrWhiteSpace(comparedTo)) return new Tuple<string, double>(string.Empty, 0.0d);
