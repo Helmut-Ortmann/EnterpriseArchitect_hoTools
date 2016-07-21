@@ -857,6 +857,10 @@ namespace hoTools.ActiveX
                     rtfListOfSearches.Visible = true;
                     e.Handled = true;
                     break;
+                case Keys.Escape:
+                case Keys.Back:
+                    rtfListOfSearches.Visible = false;
+                    break;
             }
         }
         /// <summary>

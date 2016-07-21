@@ -103,8 +103,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="EaStandardSearches.json" />
-    <None Include="hoKeyPair.snk" />
+    <None Include="EaStandardSearches.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="hoKeyPair.snk">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="LICENSE" />
     <None Include="packages.config" />
     <None Include="Util\Search\EaStandardSearches.json" />

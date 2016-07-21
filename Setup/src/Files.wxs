@@ -54,6 +54,9 @@
       <Component Id="EaServices" Guid="EDB06D59-762F-4B7D-BCFF-7C59DDFC3519">
         <File Id="EaServices" KeyPath="yes" Name="EaServices.dll"  Source="$(var.EaServices.TargetPath)" />
       </Component>
+      <Component Id="DuoVia.FuzzyStrings" Guid="525D4F63-8200-41A4-ADC2-C9C4801669E8">
+        <File Id="DuoVia.FuzzyStrings" KeyPath="yes" Name="DuoVia.FuzzyStrings.dll"  Source="$(var.DuoVia.FuzzyStrings.TargetPath)" />
+      </Component>
       <!--
       Name="AddinFramework.dll" Source="$(var.AddinFramework.TargetPath)" />
       Update if Assembly, Visual Studio Version changed
