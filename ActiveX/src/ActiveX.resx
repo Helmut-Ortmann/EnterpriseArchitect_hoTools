@@ -1400,6 +1400,9 @@ There is no interface to directly select more than one Browser Element (as far a
   <data name="&gt;&gt;_cmbSearchName.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="rtfListOfSearches.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Courier New, 8.25pt</value>
+  </data>
   <data name="rtfListOfSearches.Location" type="System.Drawing.Point, System.Drawing">
     <value>51, 329</value>
   </data>

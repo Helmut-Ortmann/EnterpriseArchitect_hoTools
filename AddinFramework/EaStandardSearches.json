@@ -1,58 +1,287 @@
 ﻿[
-    /* my comment
+    /* 
+    * *.jso configuration file for EA Searches
+    * Name:          Name of the search
+    * Description:   Description, possible use as tooltip
+    * Category:      MDG-ID, Category of EA Model Search Window
+    * Favorite:      true/false is a favorite
+    *
+    * Example(see also official json specification (JSON.NET is used: It additionally supports comments)
+    * [
+    *   {
+    *      "Name": "Simple",
+    *      "Description": "Find a matching string",
+    *      "Category": "Common Searches",
+    *      "Favorite": "true"
+    *   },
+    *   {
+    *   }
+    *]
+    *
     */
+    /* EA Common Searches */
     {
         "Name": "Simple",
         "Description": "Find a matching string",
-        "Category": "Common Searches",
+        "Category": "EACommon",
         "Favorite": "true"
     },
     {
         "Name": "Extended",
         "Description": "Find a matching string",
-        "Category": "Common Searches",
+        "Category": "EACommon",
         "Favorite": "true"
     },
     {
         "Name": "Attribute Details",
         "Description": "Attribute Details",
-        "Category": "Common Searches",
+        "Category": "EACommon",
         "Favorite": "true"
     },
     {
         "Name": "Method Details",
         "Description": "Method Details",
-        "Category": "Common Searches",
+        "Category": "EACommon",
         "Favorite": "true"
     },
+
     {
-        "Name": "Recent Modified Elements",
-        "Description": "Recent Modified Elements",
-        "Category": "Common Searches",
-        "Favorite": "true"
-    },
-    {
-        "Name": "Attribute Details",
-        "Description": "Attribute Details",
-        "Category": "Common Searches",
+        "Name": "Recently Modified Elements",
+        "Description": "Method Details",
+        "Category": "EACommon",
         "Favorite": "true"
     },
     {
         "Name": "Find Operations by Name",
         "Description": "Attribute Details",
-        "Category": "Common Searches",
+        "Category": "EACommon",
         "Favorite": "true"
     },
     {
         "Name": "Find Operations by Name",
         "Description": "Find Operations by Name",
-        "Category": "Common Searches",
+        "Category": "EACommon",
         "Favorite": "true"
     },
     {
         "Name": "Find Package",
         "Description": "Find Package",
-        "Category": "Common Searches",
+        "Category": "EACommon",
+        "Favorite": "true"
+    },
+    /* EA Diagram Searches */
+    {
+        "Name": "Find Orphans",
+        "Description": "Find Orphans",
+        "Category": "EADiagram",
+        "Favorite": "true"
+    },
+    {
+        "Name": "Find Bookmarked Elements",
+        "Description": "Find Bookmarked Elements",
+        "Category": "EADiagram",
+        "Favorite": "true"
+    },
+    {
+        "Name": "Recently Modified Diagrams",
+        "Description": "Attribute Details",
+        "Category": "EADiagram",
+        "Favorite": "true"
+    },
+    {
+        "Name": "FindKanban Diagrams",
+        "Description": "FindKanban Diagrams",
+        "Category": "EADiagram",
+        "Favorite": "true"
+    },
+
+    {
+        "Name": "Activity Diagrams",
+        "Description": "Activity Diagrams",
+        "Category": "EADiagram",
+        "Favorite": "true"
+    },
+    {
+        "Name": "Recent StateMachin Diagrams",
+        "Description": "Recent StateMachin Diagrams",
+        "Category": "EADiagram",
+        "Favorite": "true"
+    },
+    {
+        "Name": "Recent Activity Diagrams",
+        "Description": "Recent Activity Diagrams",
+        "Category": "EADiagram",
+        "Favorite": "true"
+    },
+    {
+        "Name": "Executable Statemachines",
+        "Description": "Executable Statemachines",
+        "Category": "EADiagram",
+        "Favorite": "true"
+    },
+    /* EA Diagram Searches */
+    {
+        "Name": "Find Orphans",
+        "Description": "Find Orphans",
+        "Category": "EADiagram",
+        "Favorite": "true"
+    },
+    {
+        "Name": "Find Bookmarked Elements",
+        "Description": "Find Bookmarked Elements",
+        "Category": "EADiagram",
+        "Favorite": "true"
+    },
+    {
+        "Name": "Recently Modified Diagrams",
+        "Description": "Attribute Details",
+        "Category": "EADiagram",
+        "Favorite": "true"
+    },
+    {
+        "Name": "FindKanban Diagrams",
+        "Description": "FindKanban Diagrams",
+        "Category": "EADiagram",
+        "Favorite": "true"
+    },
+
+    {
+        "Name": "Activity Diagrams",
+        "Description": "Activity Diagrams",
+        "Category": "EADiagram",
+        "Favorite": "true"
+    },
+    /* Test and Verifications */
+    {
+        "Name": "Failed Internal Tests",
+        "Description": "Failed Internal Tests",
+        "Category": "EATest&Ver",
+        "Favorite": "true"
+    },
+    {
+        "Name": "Tests and Recently Modified Elements",
+        "Description": "Tests and Recently Modified Elements",
+        "Category": "EATest&Ver",
+        "Favorite": "true"
+    },
+    {
+        "Name": "Test not Run",
+        "Description": "Test not Run",
+        "Category": "EATest&Ver",
+        "Favorite": "true"
+    },
+    {
+        "Name": "Test not Checked",
+        "Description": "Failed Internal Tests",
+        "Category": "EATest&Ver",
+        "Favorite": "true"
+    },
+    {
+        "Name": "Passed Test",
+        "Description": "Passed Test",
+        "Category": "EATest&Ver",
+        "Favorite": "true"
+    },
+    {
+        "Name": "Failed Test",
+        "Description": "Test not Run",
+        "Category": "EATest&Ver",
+        "Favorite": "true"
+    },
+    {
+        "Name": "Deferred Tests",
+        "Description": "Deferred Tests",
+        "Category": "EATest&Ver",
+        "Favorite": "true"
+    },
+    {
+        "Name": "Recently Run Tests",
+        "Description": "Recently Run Tests",
+        "Category": "EATest&Ver",
+        "Favorite": "true"
+    },
+    /* Requirements */
+    {
+        "Name": "Responsibility",
+        "Description": "Failed Internal Tests",
+        "Category": "EATest&Ver",
+        "Favorite": "true"
+    },
+    {
+        "Name": "Requirements",
+        "Description": "Requirements",
+        "Category": "EATest&Ver",
+        "Favorite": "true"
+    },
+    {
+        "Name": "Recently Discussed Elements",
+        "Description": "Recently Discussed Elements",
+        "Category": "EATest&Ver",
+        "Favorite": "true"
+    },
+    {
+        "Name": "Recent Element Posts",
+        "Description": "Recent Element Posts",
+        "Category": "EATest&Ver",
+        "Favorite": "true"
+    }
+    /* Resource Tracking     */
+
+    ,
+    {
+        "Name": "Resources",
+        "Description": "Passed Test",
+        "Category": "Resoure",
+        "Favorite": "true"
+    },
+    {
+        "Name": "Task Overdue",
+        "Description": "Test not Run",
+        "Category": "Resoure",
+        "Favorite": "true"
+    },
+    {
+        "Name": "Active Tasks",
+        "Description": "Deferred Tests",
+        "Category": "Resoure",
+        "Favorite": "true"
+    },
+    {
+        "Name": "Tasks Completed",
+        "Description": "Tasks Completed",
+        "Category": "Resoure",
+        "Favorite": "true"
+    },
+    {
+        "Name": "Recently Finished Tasks",
+        "Description": "Recently Finished Tasks",
+        "Category": "Resoure",
+        "Favorite": "true"
+    },
+    {
+        "Name": "Tasks Ending Today",
+        "Description": "Tasks Ending Today",
+        "Category": "Resoure",
+        "Favorite": "true"
+    },
+    {
+        "Name": "Tasks Starting Today",
+        "Description": "Tasks Starting Today",
+        "Category": "Resoure",
+        "Favorite": "true"
+    },
+    {
+        "Name": "Authors with no Active Tasks",
+        "Description": "Authors with no Active Tasks",
+        "Category": "Resoure",
+        "Favorite": "true"
+    }
+    /* Project Status */
+    ,
+    {
+        "Name": "My Checked Out Packages",
+        "Description": "My Checked Out Packages",
+        "Category": "Project",
         "Favorite": "true"
     }
 

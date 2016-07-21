@@ -848,8 +848,9 @@ namespace hoTools.ActiveX
                     else
                     {
                         Search.CalulateAndSort(_txtSearchName.Text);
-                        rtfListOfSearches.Clear();
-                        ColorCharacters(rtfListOfSearches, Search.GetRtf(), _txtSearchName.Text, Color.Yellow);
+                        rtfListOfSearches.Text = Search.GetRtf();
+                        //rtfListOfSearches.Clear();
+                        //ColorCharacters(rtfListOfSearches, Search.GetRtf(), _txtSearchName.Text, Color.Yellow);
                     }
 
                     rtfListOfSearches.BringToFront();
@@ -877,8 +878,8 @@ namespace hoTools.ActiveX
             else
             {
 
-                string from = fromText.ToLower();
-                Regex pattern = new Regex($"[{charactersToColor.ToLower()}]");
+                string from = fromText;
+                Regex pattern = new Regex($"[{charactersToColor.ToLower()}{charactersToColor.ToUpper()}]");
                 Match match = pattern.Match(from);
                 while (match.Success)
                 {
