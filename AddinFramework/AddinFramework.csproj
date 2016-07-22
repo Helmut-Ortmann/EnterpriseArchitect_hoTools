@@ -111,7 +111,6 @@
     </None>
     <None Include="LICENSE" />
     <None Include="packages.config" />
-    <None Include="Util\Search\EaStandardSearches.json" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

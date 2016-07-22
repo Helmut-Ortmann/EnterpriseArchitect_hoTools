@@ -97,12 +97,22 @@ Some features:
   - Data folder
   - user.config Configuration 
 
-# Schedules (release 2.0.6)
+
+# Schedules
+## Release 2.0.6
 - QuickSearch selection with autocomplete for available Searches
   - SQL Searches
   - MDG
   - Own Searches
   - Standard Searches
+  - Determine Search
+    - Autocomplete (.NET standard feature)
+    - Find part of string after Up, Down, Blank Key
+      - Double Click in find starts Search
+    
+## Not yet scheduled 
+- Global Keys with possible start Script (VBScript, JavaScript, JScript)
+- Toolbar with possible start Script (VBScript, JavaScript, JScript)
 - Search Management (for Quick Search)
   - Enable Category (Settings)
   - Favorites (configuration via JSON)

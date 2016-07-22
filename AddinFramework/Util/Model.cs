@@ -262,6 +262,7 @@ namespace EAAddinFramework.Utils
         /// <param name="searchTerm"></param>
         public void SearchRun(string searchName, string searchTerm)
         {
+            searchName = searchName.Trim();
             if (searchName == "") return;
 
             // SQL file?

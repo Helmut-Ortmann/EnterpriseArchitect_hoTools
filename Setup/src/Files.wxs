@@ -46,7 +46,7 @@
       </Component>
       <!-- EA Standard Searches Configuration                   -->
       <Component Id="EaStandardSearches.json" Guid="{BDC7CABC-176C-4F01-8E11-926724F50A48}">
-        <File Id="EaStandardSearches.json" Name="EaStandardSearches.json" Source="..\AddinFramework\Util\Search\EaStandardSearches.json" KeyPath="yes" />
+        <File Id="EaStandardSearches.json" Name="EaStandardSearches.json" Source="..\AddinFramework\EaStandardSearches.json" KeyPath="yes" />
       </Component>
       <Component Id="Utils" Guid="260441DA-0826-4CF6-A6DA-5777C2BEEDE0">
         <File Id="Utils" KeyPath="yes" Name="Utils.dll" Source="$(var.Util.TargetPath)" /> 
@@ -56,6 +56,9 @@
       </Component>
       <Component Id="DuoVia.FuzzyStrings" Guid="525D4F63-8200-41A4-ADC2-C9C4801669E8">
         <File Id="DuoVia.FuzzyStrings" KeyPath="yes" Name="DuoVia.FuzzyStrings.dll"  Source="$(var.DuoVia.FuzzyStrings.TargetPath)" />
+      </Component>
+       <Component Id="Newtonsoft.Json" Guid="48483AD6-80C5-41C6-87DB-CE36684E4ACD">
+        <File Id="Newtonsoft.Json" KeyPath="yes" Name="Newtonsoft.Json.dll"  Source="..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll" />
       </Component>
       <!--
       Name="AddinFramework.dll" Source="$(var.AddinFramework.TargetPath)" />

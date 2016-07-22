@@ -151,7 +151,7 @@
         "Category": "EADiagram",
         "Favorite": "true"
     },
-    /* Test and Verifications */
+    /* Tests and Verifications */
     {
         "Name": "Failed Internal Tests",
         "Description": "Failed Internal Tests",
@@ -165,26 +165,26 @@
         "Favorite": "true"
     },
     {
-        "Name": "Test not Run",
-        "Description": "Test not Run",
+        "Name": "Tests not Run",
+        "Description": "Tests not Run",
         "Category": "EATest&Ver",
         "Favorite": "true"
     },
     {
-        "Name": "Test not Checked",
+        "Name": "Tests not Checked",
         "Description": "Failed Internal Tests",
         "Category": "EATest&Ver",
         "Favorite": "true"
     },
     {
-        "Name": "Passed Test",
-        "Description": "Passed Test",
+        "Name": "Passed Tests",
+        "Description": "Passed Tests",
         "Category": "EATest&Ver",
         "Favorite": "true"
     },
     {
         "Name": "Failed Test",
-        "Description": "Test not Run",
+        "Description": "Tests not Run",
         "Category": "EATest&Ver",
         "Favorite": "true"
     },
@@ -203,7 +203,7 @@
     /* Requirements */
     {
         "Name": "Responsibility",
-        "Description": "Failed Internal Tests",
+        "Description": "Responsibility",
         "Category": "EATest&Ver",
         "Favorite": "true"
     },
