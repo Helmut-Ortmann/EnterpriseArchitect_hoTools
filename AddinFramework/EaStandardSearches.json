@@ -139,8 +139,14 @@
         "Favorite": "true"
     },
     {
-        "Name": "FindKanban Diagrams",
-        "Description": "FindKanban Diagrams",
+        "Name": "Find Kanban Diagrams",
+        "Description": "Find Kanban Diagrams",
+        "Category": "EADiagram",
+        "Favorite": "true"
+    },
+    {
+        "Name": "StateMachine Diagrams",
+        "Description": "StateMachine Diagrams",
         "Category": "EADiagram",
         "Favorite": "true"
     },
@@ -148,6 +154,25 @@
     {
         "Name": "Activity Diagrams",
         "Description": "Activity Diagrams",
+        "Category": "EADiagram",
+        "Favorite": "true"
+    },
+    {
+        "Name": "Recent Statemachine Diagrams",
+        "Description": "Recent Statemachine Diagrams",
+        "Category": "EADiagram",
+        "Favorite": "true"
+    },
+    {
+        "Name": "Recent Activity Diagrams",
+        "Description": "Recent Activity Diagrams",
+        "Category": "EADiagram",
+        "Favorite": "true"
+    },
+
+    {
+        "Name": "Executable Statemachines",
+        "Description": "Executable Statemachines",
         "Category": "EADiagram",
         "Favorite": "true"
     },
@@ -183,7 +208,7 @@
         "Favorite": "true"
     },
     {
-        "Name": "Failed Test",
+        "Name": "Failed Tests",
         "Description": "Tests not Run",
         "Category": "EATest&Ver",
         "Favorite": "true"
@@ -230,19 +255,19 @@
     ,
     {
         "Name": "Resources",
-        "Description": "Passed Test",
+        "Description": "Resources",
         "Category": "Resoure",
         "Favorite": "true"
     },
     {
         "Name": "Task Overdue",
-        "Description": "Test not Run",
+        "Description": "Task Overdue",
         "Category": "Resoure",
         "Favorite": "true"
     },
     {
         "Name": "Active Tasks",
-        "Description": "Deferred Tests",
+        "Description": "Active Tasks",
         "Category": "Resoure",
         "Favorite": "true"
     },
