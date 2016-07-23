@@ -11,6 +11,8 @@ Collection of useful tools (see also [WiKi](https://github.com/Helmut-Ortmann/En
     - e.g.: F1+Ctrl+Shft locks the selected Package
   - Set diagram line style
   - Version Control + SVN
+  - [Quick Search](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/Quick Search) 
+    - Autocomplete Search, Find Search + List all Searches
   - Port support
   - Favorites
   - ..
@@ -21,6 +23,7 @@ Collection of useful tools (see also [WiKi](https://github.com/Helmut-Ortmann/En
     - Easy handling of SQL errors
     - Conveyed Items
     - *.sql files in file system (you may use favourite Editor)
+    - [Find Search](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/Find Search)
 - [Script](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/Script) which runs for [SQL](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/SQL) results 
   - All EA script languages (vbScript, JScript, JavaScript) 
   - Compatible to Geert Bellekens great VBScript Library
@@ -101,7 +104,7 @@ Some features:
 # Schedules
 ## Release 2.0.6
 - QuickSearch selection with autocomplete for available Searches
-  - SQL Searches
+  - SQL Searches (multiple folders are possible, file name should be uniqueue)
   - MDG
   - Own Searches
   - Standard Searches
