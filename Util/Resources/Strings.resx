@@ -274,11 +274,18 @@ where o.object_ID in (#DiagramSelectedElements_IDS#)
 ORDER BY o.Name</value>
   </data>
   <data name="SearchFavorite" xml:space="preserve">
-    <value>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;RootSearch&gt;&lt;Search Name="Favorites" GUID="{A70B9F0E-14CD-4c03-B8FE-21C644DC2D5E}" 
-PkgGUID="-1" Type="0" LnksToObj="0" CustomSearch="1" AddinAndMethodName=""&gt;&lt;SrchOn&gt;
-&lt;RootTable Filter="select o.ea_guid As CLASSGUID, o.Object_Type as CLASSTYPE, o.Name, o.stereotype, o.object_type &amp;#xA;from t_object o inner join t_xref x on (o.EA_GUID = x.client)&amp;#xA;where Type = 'Favorite'&amp;#xA;UNION&amp;#xA;select d.ea_guid As CLASSGUID, d.Diagram_Type as CLASSTYPE, d.Name, d.stereotype, d.diagram_type &amp;#xA;from t_diagram d inner join t_xref x on (d.EA_GUID = x.client)&amp;#xA;where Type = 'Favorite'&amp;#xA;UNION&amp;#xA;select a.ea_guid As CLASSGUID, 'Attribute' as CLASSTYPE, a.Name, a.stereotype, 'Attribute' &amp;#xA;from t_attribute a inner join t_xref x on (a.EA_GUID = x.client)&amp;#xA;where x.Type = 'Favorite'&amp;#xA;UNION&amp;#xA;select op.ea_guid As CLASSGUID, 'Operation' as CLASSTYPE, op.Name, op.stereotype, 'Operation' &amp;#xA;from t_operation op inner join t_xref x on (op.EA_GUID = x.client)&amp;#xA;where x.Type = 'Favorite'&amp;#xA;order by 3" Type="-1"&gt;&lt;TableName Display="Custom SQL Search" Name=""/&gt;
-&lt;TableHierarchy Display="" Hierarchy=""/&gt;&lt;/RootTable&gt;&lt;/SrchOn&gt;&lt;LnksTo/&gt;&lt;/Search&gt;&lt;/RootSearch&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;RootSearch&gt;
+  &lt;Search Name="Favorites" GUID="{A70B9F0E-14CD-4c03-B8FE-21C644DC2D5E}" PkgGUID="-1" Type="0" LnksToObj="0" CustomSearch="1" AddinAndMethodName=""&gt;
+    &lt;SrchOn&gt;
+      &lt;RootTable Filter="select o.ea_guid As CLASSGUID, o.Object_Type as CLASSTYPE, o.Name, o.stereotype, o.object_type As [EAType], 'Element' As [Type]&amp;#xD;&amp;#xA;from t_object o inner join t_xref x on (o.EA_GUID = x.client)&amp;#xD;&amp;#xA;where Type = 'Favorite'&amp;#xD;&amp;#xA;UNION&amp;#xD;&amp;#xA;select d.ea_guid As CLASSGUID, d.Diagram_Type as CLASSTYPE, d.Name, d.stereotype, d.diagram_type, 'Diagram' &amp;#xD;&amp;#xA;from t_diagram d inner join t_xref x on (d.EA_GUID = x.client)&amp;#xD;&amp;#xA;where Type = 'Favorite'&amp;#xD;&amp;#xA;UNION&amp;#xD;&amp;#xA;select a.ea_guid As CLASSGUID, 'Attribute' as CLASSTYPE, a.Name, a.stereotype, 'Attribute','' &amp;#xD;&amp;#xA;from t_attribute a inner join t_xref x on (a.EA_GUID = x.client)&amp;#xD;&amp;#xA;where x.Type = 'Favorite'&amp;#xD;&amp;#xA;UNION&amp;#xD;&amp;#xA;select op.ea_guid As CLASSGUID, 'Operation' as CLASSTYPE, op.Name, op.stereotype, 'Operation','' &amp;#xD;&amp;#xA;from t_operation op inner join t_xref x on (op.EA_GUID = x.client)&amp;#xD;&amp;#xA;where x.Type = 'Favorite'&amp;#xD;&amp;#xA;order by 3,4" Type="-1"&gt;
+        &lt;TableName Display="Custom SQL Search" Name="" /&gt;
+        &lt;TableHierarchy Display="" Hierarchy="" /&gt;
+      &lt;/RootTable&gt;
+    &lt;/SrchOn&gt;
+    &lt;LnksTo /&gt;
+  &lt;/Search&gt;
+&lt;/RootSearch&gt;</value>
     <comment>*.xml file of the EA Search Favorite</comment>
   </data>
   <data name="SearchFavoriteName" xml:space="preserve">

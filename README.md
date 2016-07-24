@@ -112,6 +112,7 @@ Some features:
     - Autocomplete (.NET standard feature)
     - Find part of string after Up, Down, Blank Key
       - Double Click in find starts Search
+## Release 2.0.7
     
 ## Not yet scheduled 
 - Global Keys with possible start Script (VBScript, JavaScript, JScript)

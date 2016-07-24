@@ -72,11 +72,11 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label10 = new System.Windows.Forms.Label();
             this.txtSqlSearchPath = new System.Windows.Forms.TextBox();
+            this.txtAddinTabToFirstActivate = new System.Windows.Forms.TextBox();
             this.label34 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
-            this.txtAddinTabToFirstActivate = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -424,10 +424,10 @@
             this.label6.Location = new System.Drawing.Point(26, 221);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(145, 18);
+            this.label6.Size = new System.Drawing.Size(152, 18);
             this.label6.TabIndex = 232;
-            this.label6.Text = "Show Query Buttons";
-            this.toolTip1.SetToolTip(this.label6, "Add Buttons to start a Query with just one click");
+            this.label6.Text = "Show Search Buttons";
+            this.toolTip1.SetToolTip(this.label6, "Add Buttons to start a Search with just one click.\r\n\r\n- EA Search\r\n- SQL Search");
             // 
             // chkShowServiceButtons
             // 
@@ -577,6 +577,16 @@
             this.toolTip1.SetToolTip(this.txtSqlSearchPath, "Paths hoTools searches for SQL Queries to run:\r\n\r\nA semicolon separated parts of " +
         "path hoTools searches for the SQL query to execute.");
             // 
+            // txtAddinTabToFirstActivate
+            // 
+            this.txtAddinTabToFirstActivate.Location = new System.Drawing.Point(273, 108);
+            this.txtAddinTabToFirstActivate.Name = "txtAddinTabToFirstActivate";
+            this.txtAddinTabToFirstActivate.Size = new System.Drawing.Size(260, 20);
+            this.txtAddinTabToFirstActivate.TabIndex = 245;
+            this.toolTip1.SetToolTip(this.txtAddinTabToFirstActivate, "Define your Addin Tab Name to visualize first\r\n- \"\" EA decides\r\n- \"hoTools\"\r\n- \"S" +
+        "QL\"\r\n- \"Script\"\r\n- \"your favorible Addin\"\r\n\r\nLeave it blank if you want EA to de" +
+        "cide. ");
+            // 
             // label34
             // 
             this.label34.AutoSize = true;
@@ -617,16 +627,6 @@
             this.label11.Size = new System.Drawing.Size(205, 18);
             this.label11.TabIndex = 244;
             this.label11.Text = "Addin Tab Name to select first";
-            // 
-            // txtAddinTabToFirstActivate
-            // 
-            this.txtAddinTabToFirstActivate.Location = new System.Drawing.Point(273, 108);
-            this.txtAddinTabToFirstActivate.Name = "txtAddinTabToFirstActivate";
-            this.txtAddinTabToFirstActivate.Size = new System.Drawing.Size(260, 20);
-            this.txtAddinTabToFirstActivate.TabIndex = 245;
-            this.toolTip1.SetToolTip(this.txtAddinTabToFirstActivate, "Define your Addin Tab Name to visualize first\r\n- \"\" EA decides\r\n- \"hoTools\"\r\n- \"S" +
-        "QL\"\r\n- \"Script\"\r\n- \"your favorible Addin\"\r\n\r\nLeave it blank if you want EA to de" +
-        "cide. ");
             // 
             // label12
             // 
