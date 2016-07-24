@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using Control.EaAddinShortcuts;
+using EAAddinFramework.Utils;
 using hoTools.ActiveX;
 using hoTools.Utils.Forms;
 
@@ -58,6 +59,7 @@ namespace hoTools.Settings.Toolbar
 
         readonly AddinSettings _settings;
         readonly AddinControlGui _addinControl;
+        readonly Model _model;
 
         #region Constructor
 
@@ -72,6 +74,7 @@ namespace hoTools.Settings.Toolbar
 
             _settings = settings;
             _addinControl = addinControl;
+            _model = addinControl.Model;
 
         }
         #endregion
@@ -123,10 +126,14 @@ namespace hoTools.Settings.Toolbar
 
             #region load possible services
 
-            var lServices1 = new List<EaServices.ServiceCall>();
-            var lServices2 = new List<EaServices.ServiceCall>();
-            var lServices3 = new List<EaServices.ServiceCall>();
-            var lServices4 = new List<EaServices.ServiceCall>();
+            // Load Scripts
+            List<Script> _lscripts = Script.GetEaMaticScripts(_model);
+
+            var lServices1 = new List<EaServices.Service>();
+            var lServices2 = new List<EaServices.Service>();
+            var lServices3 = new List<EaServices.Service>();
+            var lServices4 = new List<EaServices.Service>();
+            var lServices5 = new List<EaServices.Service>();
 
 
             // 
@@ -136,9 +143,11 @@ namespace hoTools.Settings.Toolbar
                 lServices2.Add(service);
                 lServices3.Add(service);
                 lServices4.Add(service);
+                lServices5.Add(service);
             }
             #region set services
-            cmbService1.DataSource = _settings.AllServices;
+
+            cmbService1.DataSource = lServices1;
             cmbService1.DisplayMember = "Description";
             cmbService1.ValueMember = "GUID";
             cmbService1.SelectedValue = _settings.ButtonsServices[0].Guid;
@@ -146,14 +155,14 @@ namespace hoTools.Settings.Toolbar
             txtServiceTooltip1.Text = _settings.ButtonsServices[0].Help;
 
 
-            cmbService2.DataSource = lServices1;
+            cmbService2.DataSource = lServices2;
             cmbService2.DisplayMember = "Description";
             cmbService2.ValueMember = "GUID";
             cmbService2.SelectedValue = _settings.ButtonsServices[1].Guid;
             txtButton2TextService.Text = _settings.ButtonsServices[1].ButtonText;
             txtServiceTooltip2.Text = _settings.ButtonsServices[1].Help;
 
-            cmbService3.DataSource = lServices2;
+            cmbService3.DataSource = lServices3;
             cmbService3.DisplayMember = "Description";
             cmbService3.ValueMember = "GUID";
             cmbService3.SelectedValue = _settings.ButtonsServices[2].Guid;
@@ -161,14 +170,14 @@ namespace hoTools.Settings.Toolbar
             txtServiceTooltip3.Text = _settings.ButtonsServices[2].Help;
 
 
-            cmbService4.DataSource = lServices3;
+            cmbService4.DataSource = lServices4;
             cmbService4.DisplayMember = "Description";
             cmbService4.ValueMember = "GUID";
             cmbService4.SelectedValue = _settings.ButtonsServices[3].Guid;
             txtButton4TextService.Text = _settings.ButtonsServices[3].ButtonText;
             txtServiceTooltip4.Text = _settings.ButtonsServices[3].Help;
 
-            cmbService5.DataSource = lServices4;
+            cmbService5.DataSource = lServices5;
             cmbService5.DisplayMember = "Description";
             cmbService5.ValueMember = "GUID";
             cmbService5.SelectedValue = _settings.ButtonsServices[4].Guid;
@@ -345,10 +354,12 @@ namespace hoTools.Settings.Toolbar
         /// <param name="e"></param>
         void cmbService_SelectedIndexChanged(object sender, EventArgs e)
         {
+
             // get selected value
             ComboBox cmbBox = (ComboBox) sender;
             // get tooltip for selected index
             int index = cmbBox.SelectedIndex;
+            if (index == -1) return;
             string tooltip = _settings.AllServices[index].Help;
 
             if (sender == cmbService1) txtServiceTooltip1.Text = tooltip;

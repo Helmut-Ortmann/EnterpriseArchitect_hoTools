@@ -416,7 +416,9 @@ namespace EAAddinFramework.Utils
 			}
 		}
 		/// <summary>
-		/// gets all scripts defined in the model
+		/// Gets all suitable Scripts defined in the model.Suitable Scripts have:
+		/// <para /> 2 or three parameters
+		/// <para /> Tag: EA-Matic 
 		/// </summary>
 		/// <param name="model"></param>
 		/// <returns></returns>

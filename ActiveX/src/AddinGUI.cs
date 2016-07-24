@@ -21,7 +21,7 @@ namespace hoTools.ActiveX
 
         #region Model
 
-        protected Model Model
+      public Model Model
         {
             set
             {

@@ -6,26 +6,44 @@ using EA;
 
 namespace hoTools.EaServices
 {
-    public class ServiceCall
+    public class ServiceCall: Service
     {
         bool _isTextRequired;
 
-        public ServiceCall(MethodInfo method, string guid, string description, string help, bool isTextRequired)
-        {
+        /// <summary>
+        /// Definition of a Service of Type Call.
+        /// </summary>
+        /// <param name="method"></param>
+        /// <param name="guid"></param>
+        /// <param name="description"></param>
+        /// <param name="help"></param>
+        /// <param name="isTextRequired"></param>
+        public ServiceCall(MethodInfo method, string guid, string description, string help, bool isTextRequired): base(guid, description, help)
+        { 
             Method = method;
-            Description = description;
-            Guid = guid;
-            Help = help;
             _isTextRequired = isTextRequired;
+        }
+        /// <summary>
+        /// Create an empty Service
+        /// </summary>
+        public ServiceCall() : base(ServicesCallConfig.ServiceCallEmpty, "-- no --", "no service selected")
+        {
+            Method = null;
+            _isTextRequired = false;
+        }
+
+        /// <summary>
+        /// Check whether the Service is an empty service
+        /// </summary>
+        /// <returns></returns>
+        public bool IsEmpty()
+        {
+            return Guid == ServicesCallConfig.ServiceCallEmpty;
         }
 
 
-
-        public string Description { get; }
-
         public MethodInfo Method { get; }
 
-        public string Help { get; }
 
         public string Guid { get; }
     }
@@ -60,6 +78,7 @@ namespace hoTools.EaServices
     /// </summary>
     public class ServicesCallConfig
     {
+        public const string ServiceCallEmpty = "{B93C105E-64BC-4D9C-B92F-3DDF0C9150E6}";
         public ServicesCallConfig(int pos, string guid, string buttonText)
         {
             Guid = guid;

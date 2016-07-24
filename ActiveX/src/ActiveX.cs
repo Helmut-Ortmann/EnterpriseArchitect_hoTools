@@ -29,7 +29,6 @@ namespace hoTools.ActiveX
     {
         public const string Progid = "hoTools.ActiveXGUI";
 
-        private bool _rtfVisible = false;
 
         // Windows/Frames
         FrmQueryAndScript _frmQueryAndScript;
@@ -2362,7 +2361,6 @@ namespace hoTools.ActiveX
         private void rtfListOfSearches_Enter(object sender, EventArgs e)
         {
             rtfListOfSearches.Visible = true;
-            _rtfVisible = true;
         }
 
         /// <summary>

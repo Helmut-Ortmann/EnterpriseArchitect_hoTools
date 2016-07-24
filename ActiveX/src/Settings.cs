@@ -1084,7 +1084,7 @@ namespace hoTools.Settings
         private void GetAllServices()
         {
             Type type = typeof(EaService);
-            AllServices.Add(new ServiceCall(null, "{B93C105E-64BC-4D9C-B92F-3DDF0C9150E6}", "-- no --", "no service selected", false));
+            AllServices.Add(new ServiceCall());
             foreach (MethodInfo method in type.GetMethods())
             {
 
@@ -1113,7 +1113,8 @@ namespace hoTools.Settings
         {
             foreach (ServicesCallConfig service in ButtonsServices)
             {
-                if (service.Guid != "{B93C105E-64BC-4D9C-B92F-3DDF0C9150E6}")
+                // Real service or just empty service
+                if (service.Guid != ServicesCallConfig.ServiceCallEmpty)
                 {
                     //int index = allServices.BinarySearch(new EaServices.ServiceCall(null, service.GUID, "","", false), new EaServices.ServicesCallGUIDComparer());
                     foreach (ServiceCall s in AllServices) {
@@ -1131,7 +1132,8 @@ namespace hoTools.Settings
             }
             foreach (GlobalKeysConfig.GlobalKeysServiceConfig service in GlobalShortcutsService)
             {
-                if (service.Guid != "{B93C105E-64BC-4D9C-B92F-3DDF0C9150E6}")
+                // Real service or just empty service
+                if (service.Guid != ServicesCallConfig.ServiceCallEmpty)
                 {
                     //int index = allServices.BinarySearch(new EaServices.ServiceCall(null, service.GUID, "","", false), new EaServices.ServicesCallGUIDComparer());
                     foreach (ServiceCall s in AllServices)

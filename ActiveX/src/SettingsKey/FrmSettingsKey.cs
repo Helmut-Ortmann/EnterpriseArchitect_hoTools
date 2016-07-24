@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Windows.Documents;
 using System.Windows.Forms;
+using EAAddinFramework.Utils;
 using hoTools.ActiveX;
 using GlobalHotkeys;
 
@@ -16,6 +18,7 @@ namespace hoTools.Settings.Key
     {
         readonly AddinSettings _settings;
         readonly AddinControlGui _addinControl ;
+        private readonly Model _model;
 
         #region Constructor
         /// <summary>
@@ -29,30 +32,31 @@ namespace hoTools.Settings.Key
 
             _settings = settings;
             _addinControl = addinControl;
-
+            _model = addinControl.Model;
 
             // Global key support
             chkShortKeySupport.Checked = settings.IsShortKeySupport;
             // SQL Paths
             txtSqlSearchPath.Text = _settings.SqlPaths;
 
-
-
+            // Load Scripts
+            List<Script> _lscripts = Script.GetEaMaticScripts(_model);
 
             #region set possible services
             // set 5 lists of all possible services
-            var lServices1 = new List<EaServices.ServiceCall>();
-            var lServices2 = new List<EaServices.ServiceCall>();
-            var lServices3 = new List<EaServices.ServiceCall>();
-            var lServices4 = new List<EaServices.ServiceCall>();
-            var lServices15 = new List<EaServices.ServiceCall>();
+            var lServices1 = new List<EaServices.Service>();
+            var lServices2 = new List<EaServices.Service>();
+            var lServices3 = new List<EaServices.Service>();
+            var lServices4 = new List<EaServices.Service>();
+            var lServices5 = new List<EaServices.Service>();
+            // set all Service Calls
             foreach (EaServices.ServiceCall service in _settings.AllServices)
             {
                 lServices1.Add(service);
                 lServices2.Add(service);
                 lServices3.Add(service);
                 lServices4.Add(service);
-                lServices15.Add(service);
+                lServices5.Add(service);
             }
             #endregion
 
@@ -90,7 +94,7 @@ namespace hoTools.Settings.Key
             cmbGlobalKey4Tooltip.Text = _settings.GlobalShortcutsService[3].Tooltip;
 
 
-            cmbGlobalKey5Service.DataSource = lServices15;
+            cmbGlobalKey5Service.DataSource = lServices5;
             cmbGlobalKey5Service.DisplayMember = "Description";
             cmbGlobalKey5Service.ValueMember = "GUID";
             cmbGlobalKey5Service.SelectedValue = _settings.GlobalShortcutsService[4].Guid;
@@ -386,13 +390,16 @@ namespace hoTools.Settings.Key
         }
         #endregion
 
-        #region StoreAll ButtonOkClick()
-        /// <summary>
-        /// Store the settings, ok button
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        void btnOk_Click(object sender, EventArgs e)
+        
+
+
+            #region StoreAll ButtonOkClick()
+            /// <summary>
+            /// Store the settings, ok button
+            /// </summary>
+            /// <param name="sender"></param>
+            /// <param name="e"></param>
+            void btnOk_Click(object sender, EventArgs e)
         {
             // Global Key support
             _settings.IsShortKeySupport = chkShortKeySupport.Checked;
@@ -510,6 +517,7 @@ namespace hoTools.Settings.Key
             ComboBox cmbBox = (ComboBox)sender;
             // get tooltip for selected index
             int index = cmbBox.SelectedIndex;
+            if (index == -1) return;
             string tooltip = _settings.AllServices[index].Help;
             if (sender == cmbGlobalKey1Service)
                 cmbGlobalKey1Tooltip.Text = tooltip;
