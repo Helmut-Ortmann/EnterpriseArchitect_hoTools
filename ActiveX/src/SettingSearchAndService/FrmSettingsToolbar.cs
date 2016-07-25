@@ -4,8 +4,10 @@ using System.Windows.Forms;
 using Control.EaAddinShortcuts;
 using EAAddinFramework.Utils;
 using hoTools.ActiveX;
+using hoTools.EaServices;
 using hoTools.Utils.Forms;
 
+// ReSharper disable once CheckNamespace
 namespace hoTools.Settings.Toolbar
 
 {
@@ -126,8 +128,6 @@ namespace hoTools.Settings.Toolbar
 
             #region load possible services
 
-            // Load Scripts
-            List<Script> _lscripts = Script.GetEaMaticScripts(_model);
 
             var lServices1 = new List<EaServices.Service>();
             var lServices2 = new List<EaServices.Service>();
@@ -145,6 +145,22 @@ namespace hoTools.Settings.Toolbar
                 lServices4.Add(service);
                 lServices5.Add(service);
             }
+
+            // Load Scripts ant their functions
+            List<Script> lscripts = Script.GetEaMaticScripts(_model);
+            foreach (var script in lscripts)
+            {
+                foreach (var scriptFunction in script.Functions)
+                {
+                    lServices1.Add(new ServiceScript(scriptFunction));
+                    lServices2.Add(new ServiceScript(scriptFunction));
+                    lServices3.Add(new ServiceScript(scriptFunction));
+                    lServices4.Add(new ServiceScript(scriptFunction));
+                    lServices5.Add(new ServiceScript(scriptFunction));
+                }
+            }
+
+
             #region set services
 
             cmbService1.DataSource = lServices1;
@@ -360,7 +376,12 @@ namespace hoTools.Settings.Toolbar
             // get tooltip for selected index
             int index = cmbBox.SelectedIndex;
             if (index == -1) return;
-            string tooltip = _settings.AllServices[index].Help;
+            string tooltip = ""; 
+            // Tooltip for service
+            if (index < _settings.AllServices.Count)
+            {
+                tooltip = _settings.AllServices[index].Help;
+            }
 
             if (sender == cmbService1) txtServiceTooltip1.Text = tooltip;
             if (sender == cmbService2) txtServiceTooltip2.Text = tooltip;

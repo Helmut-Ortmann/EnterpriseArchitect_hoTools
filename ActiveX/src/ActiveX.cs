@@ -477,7 +477,7 @@ namespace hoTools.ActiveX
 
                 var sh = AddinSettings.ButtonsServices[pos];
                 if (sh.Method == null) return;
-                sh.Invoke(Repository, _txtSearchText.Text);
+                sh.Invoke(_model, _txtSearchText.Text);
 
             }
         }

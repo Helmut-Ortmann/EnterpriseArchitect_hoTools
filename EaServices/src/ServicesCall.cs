@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Reflection;
 using System.Windows.Forms;
+using AddinFramework.Util;
 using EA;
+using EAAddinFramework.Utils;
 
 namespace hoTools.EaServices
 {
@@ -73,23 +75,60 @@ namespace hoTools.EaServices
             return string.Compare(firstValue.Guid, secondValue.Guid, StringComparison.Ordinal);
         }
     }
+
+
+
+
+
+   
+
     /// <summary>
     /// Class to define the configurable services
     /// </summary>
-    public class ServicesCallConfig
+    public class ServicesCallConfig : ServicesConfig
     {
         public const string ServiceCallEmpty = "{B93C105E-64BC-4D9C-B92F-3DDF0C9150E6}";
-        public ServicesCallConfig(int pos, string guid, string buttonText)
+        public bool IsTextRequired { get;  }
+
+        public string Guid
         {
-            Guid = guid;
-            Pos = pos;
-            ButtonText = buttonText;
+            get { return Id; }
+            set { Id = value; }
         }
-        public string Invoke(Repository rep, string text)
+
+        public MethodInfo Method { get; set; }
+
+        public string MethodName
+        {
+            get
+            {
+                if (Method == null) return "";
+                return Method.Name;
+            }
+        }
+
+        public string HelpTextLong
+        {
+            get
+            {
+                if (MethodName == "") return "";
+                return
+                    $"Service\t\t: {ButtonText} / {MethodName}()\nService Name\t: {Description}\nDescription\t: {Help}";
+            }
+
+        }
+
+        public ServicesCallConfig(int pos, string guid, string buttonText) : base(pos, guid, buttonText)
+        {
+
+        }
+
+        public string Invoke(Model model, string text)
         {
             if (Method != null)
             {
-                try {
+                try
+                {
                     // Invoke the method itself. The string returned by the method winds up in s
                     // substitute default parameter by Type.Missing
                     if (IsTextRequired)
@@ -98,16 +137,16 @@ namespace hoTools.EaServices
                         switch (Method.GetParameters().Length)
                         {
                             case 1:
-                                Method.Invoke(null, new object[] { rep, text });
+                                Method.Invoke(null, new object[] {model.Repository, text});
                                 break;
                             case 2:
-                                Method.Invoke(null, new[] { rep, text, Type.Missing });
+                                Method.Invoke(null, new[] { model.Repository, text, Type.Missing});
                                 break;
                             case 3:
-                                Method.Invoke(null, new[] { rep, text, Type.Missing, Type.Missing });
+                                Method.Invoke(null, new[] { model.Repository, text, Type.Missing, Type.Missing});
                                 break;
                             default:
-                                Method.Invoke(null, new[] { rep, text, Type.Missing, Type.Missing, Type.Missing });
+                                Method.Invoke(null, new[] { model.Repository, text, Type.Missing, Type.Missing, Type.Missing});
                                 break;
                         }
                     }
@@ -117,57 +156,78 @@ namespace hoTools.EaServices
                         switch (Method.GetParameters().Length)
                         {
                             case 1:
-                                Method.Invoke(null, new object[] { rep });
+                                Method.Invoke(null, new object[] { model.Repository });
                                 break;
                             case 2:
-                                Method.Invoke(null, new[] { rep, Type.Missing });
+                                Method.Invoke(null, new[] { model.Repository, Type.Missing});
                                 break;
                             case 3:
-                                Method.Invoke(null, new[] { rep, Type.Missing, Type.Missing });
+                                Method.Invoke(null, new[] { model.Repository, Type.Missing, Type.Missing});
                                 break;
                             default:
-                                Method.Invoke(null, new[] { rep, Type.Missing, Type.Missing, Type.Missing });
+                                Method.Invoke(null, new[] { model.Repository, Type.Missing, Type.Missing, Type.Missing});
                                 break;
                         }
 
                     }
-                } catch (Exception e)
+                }
+                catch (Exception e)
                 {
-                    MessageBox.Show($"{e}\n\nCan't invoke {Method.Name}  Return:'{Method.ReturnParameter}'  {Method}" , 
+                    MessageBox.Show($"{e}\n\nCan't invoke {Method.Name}  Return:'{Method.ReturnParameter}'  {Method}",
                         $"Error Invoking service '{Method.Name}'");
                     return null;
                 }
             }
             return null;
         }
-        public string Help { get; set; }
 
-        public MethodInfo Method { get; set; }
-
-        public string MethodName {
-            get
-            {
-                if (Method == null) return "";
-                return Method.Name;
-            }
-        }
-        public string Description { get; set; }
-
-        public string HelpTextLong
+        /// <summary>
+        /// Class to define the configurable services
+        /// </summary>
+        public class ServicesScriptConfig : ServicesConfig
         {
-            get
+            public ScriptFunction Function;
+
+            public string functionName
             {
-                if (MethodName == "") return "";
-                return $"Service\t\t: {ButtonText} / {MethodName}()\nService Name\t: {Description}\nDescription\t: {Help}";
+                get { return Id; }
+                set { Id = value; }
             }
 
+            public string HelpTextLong
+            {
+                get
+                {
+                    if (Function == null) return "";
+                    return
+                        $"{"Script",8}: {ButtonText} / {Function.Owner.Name}:{Function.Name}\n {Description}\nHelp\t: {Help}";
+                }
+
+            }
+
+            public ServicesScriptConfig(int pos, ScriptFunction function, string buttonText)
+                : base(pos, $"{function.Owner.Name}:{function.Name}", buttonText)
+            {
+
+            }
+
+            public string Invoke(Model model)
+            {
+                if (Function != null)
+                {
+                    EA.ObjectType objectType = model.Repository.GetContextItemType();
+                    object oContext = (object)model.Repository.GetContextObject();
+
+                    ScriptUtility.RunScriptFunction(model, Function, objectType, oContext);
+
+                }
+                return null;
+            }
+
+
+
+
+
         }
-        public int Pos { get; }
-
-        public bool IsTextRequired { get; set; }
-
-        public string Guid { get; set; }
-
-        public string ButtonText { get; set; }
     }
 }

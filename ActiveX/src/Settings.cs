@@ -45,31 +45,31 @@ namespace hoTools.Settings
         public SqlLastOpenedFilesCfg LastOpenedFiles { get; }
 
         // Configuration 5 button searches by key
-        public EaAddinButtons[] ButtonsSearch;
+        public readonly EaAddinButtons[] ButtonsSearch;
 
         // Configuration 5 button services by key
-        public List<ServicesCallConfig> ButtonsServices;
+        public readonly List<ServicesCallConfig> ButtonsServices;
         // all available services
-        public List<ServiceCall> AllServices = new List<ServiceCall>();
+        public readonly List<Service> AllServices = new List<Service>();
 
-        public List<GlobalKeysConfig.GlobalKeysServiceConfig> GlobalShortcutsService;
-        public List<GlobalKeysConfig.GlobalKeysSearchConfig> GlobalShortcutsSearch;
+        public readonly List<GlobalKeysConfig.GlobalKeysServiceConfig> GlobalShortcutsService;
+        public readonly List<GlobalKeysConfig.GlobalKeysSearchConfig> GlobalShortcutsSearch;
 
         // Connectors
-        public LogicalConnectors LogicalConnectors = new LogicalConnectors();
-        public ActivityConnectors ActivityConnectors = new ActivityConnectors();
+        private readonly LogicalConnectors _logicalConnectors = new LogicalConnectors();
+        private readonly ActivityConnectors _activityConnectors = new ActivityConnectors();
 
         /// <summary>
         /// Configuration delivered with the installation in the install directory
         /// <para/>c:\Users\user\AppData\Local\Apps\hoTools\ActiveX.dll.config
         /// </summary>
-        protected Configuration DefaultConfig { get; set; }
+        private Configuration DefaultConfig { get; set; }
 
         /// <summary>
         /// Configuration stored in Roaming of the user
         /// <para/>c:\Users\user\AppData\Roaming\ho\hoTools\user.config
         /// </summary>
-        protected Configuration CurrentConfig { get; set; }
+        private Configuration CurrentConfig { get; set; }
         #region Constructor
         /// <summary>
         /// Merge default settings (install DLLs) with current settings (user.config)
@@ -97,7 +97,7 @@ namespace hoTools.Settings
                         @"Can't get config file!");
             }
 
-            string path = "";
+            string path;
             switch (Customer) {
                 case CustomerCfg.HoTools:
                 path =  @"\ho\hoTools\";
@@ -134,8 +134,8 @@ namespace hoTools.Settings
             ButtonsServices = GetShortcutsServices();
             GlobalShortcutsService = GetGlobalShortcutsService();
             GlobalShortcutsSearch = GetGlobalShortcutsSearch();
-            GetConnector(LogicalConnectors);
-            GetConnector(ActivityConnectors);
+            GetConnector(_logicalConnectors);
+            GetConnector(_activityConnectors);
             GetAllServices();
             HistorySqlFiles = new SqlHistoryFilesCfg(CurrentConfig);// history of sql files 
             LastOpenedFiles = new SqlLastOpenedFilesCfg(CurrentConfig); // last opened files
@@ -152,7 +152,7 @@ namespace hoTools.Settings
         /// <summary>
         /// gets the default settings config.
         /// </summary>
-        protected void GetDefaultSettings()
+        private void GetDefaultSettings()
         {
             string defaultConfigFilePath = Assembly.GetExecutingAssembly().Location;
             DefaultConfig = ConfigurationManager.OpenExeConfiguration(defaultConfigFilePath);
@@ -162,7 +162,7 @@ namespace hoTools.Settings
         /// <summary>
         /// merge the default settings with the current config.
         /// </summary>
-        protected void MergeDefaultSettings()
+        private void MergeDefaultSettings()
         {
             //defaultConfig.AppSettings.Settings["menuOwnerEnabled"].Value
             if (DefaultConfig.AppSettings.Settings.Count == 0)
@@ -962,8 +962,8 @@ namespace hoTools.Settings
                 SetGlobalShortcutsSearch(GlobalShortcutsSearch);
                 SetGlobalShortcutsService(GlobalShortcutsService);
 
-                SetConnector(LogicalConnectors);
-                SetConnector(ActivityConnectors);
+                SetConnector(_logicalConnectors);
+                SetConnector(_activityConnectors);
                 HistorySqlFiles.Save();
                 LastOpenedFiles.Save();
                 CurrentConfig.Save();
@@ -984,7 +984,8 @@ namespace hoTools.Settings
         }
         #endregion
         #region setShortcuts
-        public void SetShortcuts(EaAddinButtons[] l)
+
+        private void SetShortcuts(EaAddinButtons[] l)
         {
             foreach (EaAddinButtons button in l)
             {
@@ -1097,7 +1098,7 @@ namespace hoTools.Settings
                     }
                 }
             }
-            AllServices.Sort(new ServicesCallDescriptionComparer());
+            AllServices.Sort(new Service.ServicesDescriptionComparer());
         }
         #endregion
         #region updateSearchesAndServices
@@ -1117,13 +1118,28 @@ namespace hoTools.Settings
                 if (service.Guid != ServicesCallConfig.ServiceCallEmpty)
                 {
                     //int index = allServices.BinarySearch(new EaServices.ServiceCall(null, service.GUID, "","", false), new EaServices.ServicesCallGUIDComparer());
-                    foreach (ServiceCall s in AllServices) {
-                        if (service.Guid == s.Guid)
+                    foreach (Service s in AllServices) {
+                       if (s is ServiceCall)
                         {
-                            service.Method = s.Method;
-                            service.Help = s.Help;
-                            service.Description = s.Description;
-                            break;
+                            ServiceCall sCall = s as ServiceCall;
+                            if (service.Guid == sCall.Guid)
+                            {
+                                service.Method = sCall.Method;
+                                service.Help = sCall.Help;
+                                service.Description = sCall.Description;
+                                break;
+                            }
+                        }
+                        if (s is ServiceScript)
+                        {
+                            ServiceScript sScript = s as ServiceScript;
+                            if (service.Guid == sScript.Name)
+                            {
+                                service.Help = sScript.Help;
+                                service.Description = sScript.Description;
+                                break;
+                            }
+
                         }
                     }
                     
@@ -1260,7 +1276,8 @@ namespace hoTools.Settings
         }
         #endregion
         #region setGlobalShortcutsSearch
-        public void SetGlobalShortcutsSearch(List<GlobalKeysConfig.GlobalKeysSearchConfig> l) {
+
+        private void SetGlobalShortcutsSearch(List<GlobalKeysConfig.GlobalKeysSearchConfig> l) {
             for (int i = 0; i< l.Count;i++)
             {
                 if (l[i] == null) continue;
@@ -1279,7 +1296,8 @@ namespace hoTools.Settings
         }
         #endregion
         #region setGlobalShortcutsService
-        public void SetGlobalShortcutsService(List<GlobalKeysConfig.GlobalKeysServiceConfig> l)
+
+        private void SetGlobalShortcutsService(List<GlobalKeysConfig.GlobalKeysServiceConfig> l)
         {
             
             for (int i = 0; i < l.Count; i++)
@@ -1298,7 +1316,8 @@ namespace hoTools.Settings
         }
         #endregion
         #region getConnector
-        public void GetConnector(DiagramConnector l)
+
+        private void GetConnector(DiagramConnector l)
         {
             string diagramType = l.DiagramType;
             string type = "";
@@ -1341,7 +1360,8 @@ namespace hoTools.Settings
         }
         #endregion
         #region setConnector
-        public void SetConnector(DiagramConnector l)
+
+        private void SetConnector(DiagramConnector l)
         {
 
             string diagramType = l.DiagramType;
@@ -1399,7 +1419,8 @@ namespace hoTools.Settings
         }
         #endregion
         #region setServices
-        public void SetServices(List<ServicesCallConfig> l)
+
+        private void SetServices(List<ServicesCallConfig> l)
         {
             for (var i = 0; i < l.Count; i++)
             {

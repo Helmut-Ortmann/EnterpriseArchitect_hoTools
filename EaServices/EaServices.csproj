@@ -74,7 +74,9 @@
     </Compile>
     <Compile Include="src\EaServices.cs" />
     <Compile Include="src\IActiveX.cs" />
+    <Compile Include="src\ServiceConfig.cs" />
     <Compile Include="src\ServicesCall.cs" />
+    <Compile Include="src\ServiceScript.cs" />
     <Compile Include="src\ServicesPort.cs" />
   </ItemGroup>
   <ItemGroup>

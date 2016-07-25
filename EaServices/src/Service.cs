@@ -9,6 +9,9 @@ using EAAddinFramework.Utils;
 
 namespace hoTools.EaServices
 {
+    /// <summary>
+    /// Generalization of services like ServiceCall and ServiceScript.
+    /// </summary>
     public class Service
     {
         public string Name { get; set; }
@@ -16,21 +19,32 @@ namespace hoTools.EaServices
         public string Description { get; set; }
         public string Help { get; set; }
         public string GUID { get; set; }
+        /// <summary>
+        /// Creates a new service with ID=GUID or Name, description, help
+        /// </summary>
+        /// <param name="guid"></param>
+        /// <param name="description"></param>
+        /// <param name="help"></param>
         public Service (string guid, string description, string help)
         {
             GUID = guid;
             Description = description;
             Help = help;
         }
-    }
-    public class ServiceScript : Service
-    {
-        private ScriptFunction _function;
-
-        public ServiceScript(ScriptFunction function):base($"{function.Owner.Name}:{function.Name}", $"{function.Owner.Name}:{function.Name}", function.Owner.LanguageName)
+        /// <summary>
+        /// Sort ServicesCalls against column Description. Use Interface IComparable.
+        /// </summary>
+        public class ServicesDescriptionComparer : IComparer<Service>
         {
-            _function = function;
+            public int Compare(Service firstValue, Service secondValue)
+            {
+                if (firstValue == null && secondValue == null) return 0;
+                if (firstValue == null) return 1;
+                if (secondValue == null) return -1;
+                return string.Compare(firstValue.Description, secondValue.Description, StringComparison.Ordinal);
+            }
         }
-    
+        
     }
+    
 }
