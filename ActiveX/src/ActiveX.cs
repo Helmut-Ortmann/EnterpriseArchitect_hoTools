@@ -472,7 +472,7 @@ namespace hoTools.ActiveX
         void RunService(int pos)
         {
             // ReSharper disable once IsExpressionAlwaysTrue
-            if (AddinSettings.ButtonsServices[pos] is hoTools.EaServices.ServicesCallConfig)
+            if (AddinSettings.ButtonsServices[pos] is hoTools.EaServices.ServicesConfigCall)
             {
 
                 var sh = AddinSettings.ButtonsServices[pos];
@@ -2203,11 +2203,11 @@ namespace hoTools.ActiveX
                 string helpText = "free Service, Service not parametrized";
                 if (AddinSettings.ButtonsServices[pos] != null)
                 {
-                    ServicesCallConfig service = AddinSettings.ButtonsServices[pos];
-                    if (service.ButtonText.Trim() != "")
+                    ServicesConfigCall serviceConfig = AddinSettings.ButtonsServices[pos];
+                    if (serviceConfig.ButtonText.Trim() != "")
                     {
-                        buttonText = service.ButtonText;
-                        helpText = $"{service.HelpTextLong}"; //  Long Help text
+                        buttonText = serviceConfig.ButtonText;
+                        helpText = $"{serviceConfig.HelpTextLong}"; //  Long Help text
                     }
                 }
 

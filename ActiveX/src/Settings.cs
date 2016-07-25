@@ -48,7 +48,7 @@ namespace hoTools.Settings
         public readonly EaAddinButtons[] ButtonsSearch;
 
         // Configuration 5 button services by key
-        public readonly List<ServicesCallConfig> ButtonsServices;
+        public readonly List<ServicesConfigCall> ButtonsServices;
         // all available services
         public readonly List<Service> AllServices = new List<Service>();
 
@@ -1052,9 +1052,9 @@ namespace hoTools.Settings
         }
         #endregion
         #region getShortcutsServices
-        private List<ServicesCallConfig> GetShortcutsServices()
+        private List<ServicesConfigCall> GetShortcutsServices()
         {
-            var l = new List<ServicesCallConfig>();
+            var l = new List<ServicesConfigCall>();
             string guid = "";
             foreach (KeyValueConfigurationElement configEntry in CurrentConfig.AppSettings.Settings)
             {
@@ -1071,7 +1071,7 @@ namespace hoTools.Settings
                             break;
                         case "Text":
                             var text = configEntry.Value;
-                            l.Add(new ServicesCallConfig(pos, guid, text));
+                            l.Add(new ServicesConfigCall(pos, guid, text));
                             break;
                     }
                 }
@@ -1112,10 +1112,10 @@ namespace hoTools.Settings
         /// </summary>
         public void UpdateSearchesAndServices()
         {
-            foreach (ServicesCallConfig service in ButtonsServices)
+            foreach (ServicesConfigCall service in ButtonsServices)
             {
                 // Real service or just empty service
-                if (service.Guid != ServicesCallConfig.ServiceCallEmpty)
+                if (service.Guid != ServicesConfigCall.ServiceCallEmpty)
                 {
                     //int index = allServices.BinarySearch(new EaServices.ServiceCall(null, service.GUID, "","", false), new EaServices.ServicesCallGUIDComparer());
                     foreach (Service s in AllServices) {
@@ -1149,7 +1149,7 @@ namespace hoTools.Settings
             foreach (GlobalKeysConfig.GlobalKeysServiceConfig service in GlobalShortcutsService)
             {
                 // Real service or just empty service
-                if (service.Guid != ServicesCallConfig.ServiceCallEmpty)
+                if (service.Guid != ServicesConfigCall.ServiceCallEmpty)
                 {
                     //int index = allServices.BinarySearch(new EaServices.ServiceCall(null, service.GUID, "","", false), new EaServices.ServicesCallGUIDComparer());
                     foreach (ServiceCall s in AllServices)
@@ -1420,7 +1420,7 @@ namespace hoTools.Settings
         #endregion
         #region setServices
 
-        private void SetServices(List<ServicesCallConfig> l)
+        private void SetServices(List<ServicesConfigCall> l)
         {
             for (var i = 0; i < l.Count; i++)
             {
