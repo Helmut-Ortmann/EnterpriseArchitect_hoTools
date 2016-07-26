@@ -125,7 +125,7 @@ namespace hoTools
         const string MenuCorrectType = "Correct types of Attribute, Function (selected Attribute, Function, Class or Package)";
 
         const string MenuDeviderCopyPast = "-------------Move links---------------------------"; 
-        const string MenuCopyGuidToClipboard = "Copy GUID / Select Statement to Clipboard";
+        const string MenuCopyGuidToClipboard = "Copy Id / Select Statement to Clipboard";
         const string MenuCopyLinksToClipboard = "Copy Links to Clipboard";
         const string MenuPasteLinksFromClipboard = "Paste Links from Clipboard";
 
@@ -257,7 +257,7 @@ namespace hoTools
                 for (int i = 0; i < _AddinSettings.GlobalShortcutsService.Count; i = i + 1)
                 {
                     GlobalKeysConfig.GlobalKeysServiceConfig service = _AddinSettings.GlobalShortcutsService[i];
-                    if (service.Key != "None" & service.Guid != "")
+                    if (service.Key != "None" & service.Id != "")
                     {
                         keys.TryGetValue(service.Key, out key);
                         modifiers.TryGetValue(service.Modifier1, out modifier1);

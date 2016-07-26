@@ -1,11 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using EA;
-using EAAddinFramework.Utils;
 
 namespace hoTools.EaServices
 {
@@ -18,16 +12,16 @@ namespace hoTools.EaServices
 
         public string Description { get; set; }
         public string Help { get; set; }
-        public string GUID { get; set; }
+        public string Id { get; set; }
         /// <summary>
-        /// Creates a new service with ID=GUID or Name, description, help
+        /// Creates a new service with ID=Id or Name, description, help
         /// </summary>
-        /// <param name="guid"></param>
+        /// <param name="id"></param>
         /// <param name="description"></param>
         /// <param name="help"></param>
-        public Service (string guid, string description, string help)
+        public Service (string id, string description, string help)
         {
-            GUID = guid;
+            Id = id;
             Description = description;
             Help = help;
         }

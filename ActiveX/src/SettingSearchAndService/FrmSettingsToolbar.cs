@@ -165,7 +165,7 @@ namespace hoTools.Settings.Toolbar
 
             cmbService1.DataSource = lServices1;
             cmbService1.DisplayMember = "Description";
-            cmbService1.ValueMember = "GUID";
+            cmbService1.ValueMember = "Id";
             cmbService1.SelectedValue = _settings.ButtonsServices[0].Guid;
             txtButton1TextService.Text = _settings.ButtonsServices[0].ButtonText;
             txtServiceTooltip1.Text = _settings.ButtonsServices[0].Help;
@@ -173,14 +173,14 @@ namespace hoTools.Settings.Toolbar
 
             cmbService2.DataSource = lServices2;
             cmbService2.DisplayMember = "Description";
-            cmbService2.ValueMember = "GUID";
+            cmbService2.ValueMember = "Id";
             cmbService2.SelectedValue = _settings.ButtonsServices[1].Guid;
             txtButton2TextService.Text = _settings.ButtonsServices[1].ButtonText;
             txtServiceTooltip2.Text = _settings.ButtonsServices[1].Help;
 
             cmbService3.DataSource = lServices3;
             cmbService3.DisplayMember = "Description";
-            cmbService3.ValueMember = "GUID";
+            cmbService3.ValueMember = "Id";
             cmbService3.SelectedValue = _settings.ButtonsServices[2].Guid;
             txtButton3TextService.Text = _settings.ButtonsServices[2].ButtonText;
             txtServiceTooltip3.Text = _settings.ButtonsServices[2].Help;
@@ -188,14 +188,14 @@ namespace hoTools.Settings.Toolbar
 
             cmbService4.DataSource = lServices4;
             cmbService4.DisplayMember = "Description";
-            cmbService4.ValueMember = "GUID";
+            cmbService4.ValueMember = "Id";
             cmbService4.SelectedValue = _settings.ButtonsServices[3].Guid;
             txtButton4TextService.Text = _settings.ButtonsServices[3].ButtonText;
             txtServiceTooltip4.Text = _settings.ButtonsServices[3].Help;
 
             cmbService5.DataSource = lServices5;
             cmbService5.DisplayMember = "Description";
-            cmbService5.ValueMember = "GUID";
+            cmbService5.ValueMember = "Id";
             cmbService5.SelectedValue = _settings.ButtonsServices[4].Guid;
             txtButton5TextService.Text = _settings.ButtonsServices[4].ButtonText;
             txtServiceTooltip5.Text = _settings.ButtonsServices[4].Help;

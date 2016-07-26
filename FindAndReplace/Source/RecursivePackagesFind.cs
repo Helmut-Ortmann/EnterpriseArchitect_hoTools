@@ -23,7 +23,7 @@ namespace hoTools.Find
                 fr.FindStringInItem(EA.ObjectType.otPackage, pkg.PackageGUID);
                 if (fr.isTagSearch)
                 {
-                    // tagged values are beneath element with the same GUID
+                    // tagged values are beneath element with the same Id
                     EA.Element el = rep.GetElementByGuid(pkg.PackageGUID);
                     if (el != null)   FindMatchingPackageTaggedValue(rep, pkg, fr);
                 }

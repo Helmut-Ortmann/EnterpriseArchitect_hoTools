@@ -26,7 +26,7 @@ namespace hoTools.Utils.SQL
                     isResource:true
                     ) },
               {  SqlTemplateId.CurrentItemGuidTemplate,
-                new SqlTemplate("Current Item Guid Template", // Name
+                new SqlTemplate("Current Item Id Template", // Name
                     "CurrentItemGuidTemplate",       // String ID of Resource
                     "Template to select current selected item (Package, Diagram, Element, Attribute, Operation) by a GUID",
                     isResource:true

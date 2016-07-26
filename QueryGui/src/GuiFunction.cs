@@ -29,7 +29,7 @@ namespace hoTools.Query
             // Check parameter count of function
             if (scriptParCount < 2 || scriptParCount > 3)
             {
-                MessageBox.Show($"Function: '{scriptName}:{functionName} count of parameters={scriptParCount}", @"Count of parameters for function shall be 2 or 3 (object_type, GUID, Model), Break!!!!");
+                MessageBox.Show($"Function: '{scriptName}:{functionName} count of parameters={scriptParCount}", @"Count of parameters for function shall be 2 or 3 (object_type, Id, Model), Break!!!!");
                 return false;
             }
 

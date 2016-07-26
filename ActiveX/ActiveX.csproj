@@ -85,6 +85,10 @@
     <Compile Include="src\dlgUser.Designer.cs">
       <DependentUpon>dlgUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="src\GlobalKeyConfig.cs" />
+    <Compile Include="src\GlobalKeyConfigScript.cs" />
+    <Compile Include="src\GlobalKeyConfigSearch.cs" />
+    <Compile Include="src\GlobalKeyConfigService.cs" />
     <Compile Include="src\SettingSearchAndService\FrmSettingsToolbar.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -384,7 +384,7 @@
             this.txtUserText.Text = "";
             this.toolTip1.SetToolTip(this.txtUserText, "Run EA Search \'Quick View\' with:\r\n- Input text + Enter\r\n- Double left Click with " +
         "insert Clipboard and start search\r\n\r\nSearch for:\r\n- Class / Component / Requirem" +
-        "ent\r\n- GUID\r\n- Port");
+        "ent\r\n- Id\r\n- Port");
             this.txtUserText.Visible = false;
             this.txtUserText.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtUserText_KeyDown);
             this.txtUserText.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtUserText_KeyDown);

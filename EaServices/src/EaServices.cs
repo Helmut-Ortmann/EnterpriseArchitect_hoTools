@@ -79,7 +79,7 @@ namespace hoTools.EaServices
         #region runQuickSearch
 
         //---------------------------------------------------------------------------------------------------------------
-        // Search for Elements, Operation, Attributes, GUID
+        // Search for Elements, Operation, Attributes, Id
         public static void RunQuickSearch(Repository rep, string searchName, string searchString)
         {
             // get the search from setting
@@ -241,7 +241,7 @@ namespace hoTools.EaServices
 
             var fields = from row in x.Descendants("Row").Descendants()
                          where row.Name == "TYPE" ||
-                               row.Name == "GUID"
+                               row.Name == "Id"
                          // 'Class','Action','Diagram', 
                          select row;
             int i = 0;
@@ -2205,7 +2205,7 @@ namespace hoTools.EaServices
                     else
                     {
 //MiscData(0) PDATA1,PDATA2,
-                        // pdata1 GUID for parts, UmlElement
+                        // pdata1 Id for parts, UmlElement
                         // object_id   for text with Hyper link to diagram
 
                         // locate text or frame
@@ -3767,7 +3767,7 @@ namespace hoTools.EaServices
 
         static void SetDirectoryTaggedValueRecursive(Repository rep, Package pkg)
         {
-            // remember GUID, because of reloading package from xmi
+            // remember Id, because of reloading package from xmi
             string pkgGuid = pkg.PackageGUID;
             if (CheckTaggedValuePackage(pkg)) SetDirectoryTaggedValues(rep, pkg);
 

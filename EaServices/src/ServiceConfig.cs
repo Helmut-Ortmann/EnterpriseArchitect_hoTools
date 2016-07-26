@@ -8,6 +8,8 @@ namespace hoTools.EaServices
 {
     public class ServicesConfig
     {
+        // Empty service
+        public const string ServiceEmpty = "{B93C105E-64BC-4D9C-B92F-3DDF0C9150E6}";
         public int Pos { get; set; }
         public string Id { get; set; }
         public string ButtonText { get; set; }

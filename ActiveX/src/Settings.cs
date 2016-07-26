@@ -1066,7 +1066,7 @@ namespace hoTools.Settings
                     int pos = Convert.ToInt16(match.Groups[1].Value);
                     switch (match.Groups[2].Value)
                     {
-                        case "GUID":
+                        case "Id":
                             guid = configEntry.Value;
                             break;
                         case "Text":
@@ -1115,14 +1115,14 @@ namespace hoTools.Settings
             foreach (ServicesConfigCall service in ButtonsServices)
             {
                 // Real service or just empty service
-                if (service.Guid != ServicesConfigCall.ServiceCallEmpty)
+                if (service.Id != ServicesConfigCall.ServiceEmpty)
                 {
-                    //int index = allServices.BinarySearch(new EaServices.ServiceCall(null, service.GUID, "","", false), new EaServices.ServicesCallGUIDComparer());
+                    //int index = allServices.BinarySearch(new EaServices.ServiceCall(null, service.Id, "","", false), new EaServices.ServicesCallGUIDComparer());
                     foreach (Service s in AllServices) {
                        if (s is ServiceCall)
                         {
                             ServiceCall sCall = s as ServiceCall;
-                            if (service.Guid == sCall.Guid)
+                            if (service.Id == sCall.Id)
                             {
                                 service.Method = sCall.Method;
                                 service.Help = sCall.Help;
@@ -1133,7 +1133,7 @@ namespace hoTools.Settings
                         if (s is ServiceScript)
                         {
                             ServiceScript sScript = s as ServiceScript;
-                            if (service.Guid == sScript.Name)
+                            if (service.Id == sScript.Name)
                             {
                                 service.Help = sScript.Help;
                                 service.Description = sScript.Description;
@@ -1146,21 +1146,38 @@ namespace hoTools.Settings
                 }
 
             }
-            foreach (GlobalKeysConfig.GlobalKeysServiceConfig service in GlobalShortcutsService)
+
+            // over all configured services
+            foreach (GlobalKeysConfig.GlobalKeysServiceConfig serviceConfig in GlobalShortcutsService)
             {
-                // Real service or just empty service
-                if (service.Guid != ServicesConfigCall.ServiceCallEmpty)
+                // Empty service
+                if (serviceConfig.Id != ServicesConfig.ServiceEmpty)
                 {
-                    //int index = allServices.BinarySearch(new EaServices.ServiceCall(null, service.GUID, "","", false), new EaServices.ServicesCallGUIDComparer());
-                    foreach (ServiceCall s in AllServices)
+                    // over all possible services
+                    foreach (Service service in AllServices)
                     {
-                        if (service.Guid == s.Guid)
+                        if (serviceConfig.Id == service.Id)
                         {
-                            service.Method = s.Method;
-                            service.Tooltip = s.Help;
-                            service.Description = s.Description;
-                            break;
+                            if (serviceConfig.Id == service.Id)
+                            {
+                                if (service is ServiceCall)
+                                {
+                                    ServiceCall serviceCall = service as ServiceCall;
+                                    serviceConfig.Method = serviceCall.Method;
+                                    serviceConfig.Tooltip = serviceCall.Help;
+                                    serviceConfig.Description = serviceCall.Description;
+                                    break;
+                                }
+                                else
+                                {
+                                    ServiceScript serviceScript = service as ServiceScript;
+                                    serviceConfig.Function = serviceScript.Function;
+                                    serviceConfig.Tooltip = serviceScript.Help;
+                                    serviceConfig.Description = serviceScript.Description;
+                                }
+                            }
                         }
+                        
                     }
 
                 }
@@ -1206,7 +1223,7 @@ namespace hoTools.Settings
                          case "Modifier4":
                              modifier4 = configEntry.Value;
                              break;
-                         case "GUID":
+                         case "Id":
                              var guid = configEntry.Value;
                              l.Add(new GlobalKeysConfig.GlobalKeysServiceConfig(key,modifier1,modifier2,modifier3,modifier4,"", guid, "",false));
                              break;
@@ -1214,11 +1231,11 @@ namespace hoTools.Settings
                  }
              }
              return l;
-            //globalServiceKeys.Add(new GlobalKeysConfig.GlobalKeysServiceConfig("F", "Ctrl", "No", "No", "No","Help","","",false));
-            //globalServiceKeys.Add(new GlobalKeysConfig.GlobalKeysServiceConfig("A", "Shift", "No", "No", "No", "Help", "", "", false));
-            //globalServiceKeys.Add(new GlobalKeysConfig.GlobalKeysServiceConfig("B", "Win", "No", "No", "No", "Help", "", "", false));
-            //globalServiceKeys.Add(new GlobalKeysConfig.GlobalKeysServiceConfig("C", "Alt", "No", "No", "No", "Help", "", "", false));
-            //globalServiceKeys.Add(new GlobalKeysConfig.GlobalKeysServiceConfig("D", "No", "No", "No", "No", "Help", "", "", false));
+            //globalServiceKeys.Add(new GlobalKeysConfig.GlobalKeysConfigService("F", "Ctrl", "No", "No", "No","Help","","",false));
+            //globalServiceKeys.Add(new GlobalKeysConfig.GlobalKeysConfigService("A", "Shift", "No", "No", "No", "Help", "", "", false));
+            //globalServiceKeys.Add(new GlobalKeysConfig.GlobalKeysConfigService("B", "Win", "No", "No", "No", "Help", "", "", false));
+            //globalServiceKeys.Add(new GlobalKeysConfig.GlobalKeysConfigService("C", "Alt", "No", "No", "No", "Help", "", "", false));
+            //globalServiceKeys.Add(new GlobalKeysConfig.GlobalKeysConfigService("D", "No", "No", "No", "No", "Help", "", "", false));
         }
         #endregion
         #region getGlobalShortcutsSearch
@@ -1310,7 +1327,7 @@ namespace hoTools.Settings
                 CurrentConfig.AppSettings.Settings[basicKey + "Modifier2"].Value = el.Modifier2;
                 CurrentConfig.AppSettings.Settings[basicKey + "Modifier3"].Value = el.Modifier3;
                 CurrentConfig.AppSettings.Settings[basicKey + "Modifier4"].Value = el.Modifier4;
-                CurrentConfig.AppSettings.Settings[basicKey + "GUID"].Value = el.Guid;
+                CurrentConfig.AppSettings.Settings[basicKey + "Id"].Value = el.Id;
             }
 
         }
@@ -1429,7 +1446,7 @@ namespace hoTools.Settings
 
                     var el = l[i];
                     string basicKey = "service" + (i + 1);
-                    CurrentConfig.AppSettings.Settings[basicKey + "GUID"].Value = el.Guid;
+                    CurrentConfig.AppSettings.Settings[basicKey + "Id"].Value = el.Guid;
                     CurrentConfig.AppSettings.Settings[basicKey + "Text"].Value = el.ButtonText;
                 }
             }

@@ -50,12 +50,12 @@ CTRL+SHFT+S                     Store sql All
 \\ Comment                      Just your comment as you may know from C, Java, C#,..
 <Search Term>                   Replaced by Text from the Search Text
 #Branch#                        Selected Package, Replaced by nested recursive as comma separated list of PackageIDs    
-#Branch={....guid...}#          Package according to GUID, Replaced by nested recursive as comma separated list of PackageIDs                    
+#Branch={....guid...}#          Package according to Id, Replaced by nested recursive as comma separated list of PackageIDs                    
 #ConnectorID#                  Selected Connector, Replaced by ConnectorID
 #ConveyedItemsIDS#             Selected Connector, Replaced by the Conveyed Items as comma separated list of ElementIDs
 #CurrentElementGUID#            Alias for #CurrentItemGUID# (EA compatibility)
 #CurrentElementID#              Alias for #CurrentItemID# (EA compatibility)
-#CurrentItemGUID#               Selected Element, Diagram, Replaced by the GUID
+#CurrentItemGUID#               Selected Element, Diagram, Replaced by the Id
 #CurrentItemID#                 Selected Element, Diagram, Replaced by the ID
 #DiagramElements_IDS#            Diagram Elements of selected Diagram / current Diagram
 #DiagramSelectedElements_IDS#    Selected Diagram Objects of selected Diagram / current Diagram 
@@ -533,7 +533,7 @@ Useful to quickly test:
             };
             insertDesignId.Click += insertTemplate_Click;
 
-            // Insert Design GUID
+            // Insert Design Id
             id = SqlTemplates.SqlTemplateId.DesignGuid;
             ToolStripMenuItem insertDesignGuid = new ToolStripMenuItem
             {
@@ -1056,7 +1056,7 @@ Useful to quickly test:
 
         }
         /// <summary>
-        /// Insert Branch for a constant package like: '#Branch={.....guid...}'. If the context Element is a package it inserts the Package GUID.
+        /// Insert Branch for a constant package like: '#Branch={.....guid...}'. If the context Element is a package it inserts the Package Id.
         /// </summary>
         /// <param name="template"></param>
         /// <param name="templateText"></param>
@@ -1068,7 +1068,7 @@ Useful to quickly test:
             if (objectType == ObjectType.otPackage &&
                 template == SqlTemplates.GetTemplate(SqlTemplates.SqlTemplateId.BranchIdsConstantPackage))
             {
-                // get package GUID
+                // get package Id
                 string guid = ((Package) _model.Repository.GetContextObject()).PackageGUID;
                 // replace {.....} by guid
                 Regex pattern = new Regex(@"={[^}]*}");
@@ -1133,7 +1133,7 @@ Useful to quickly test:
             // #Branch={...guid...}#
             if (template == SqlTemplates.GetTemplate(SqlTemplates.SqlTemplateId.DesignGuid))
             {
-                // get design GUID
+                // get design Id
                 ObjectType objectType = _model.Repository.GetContextItemType();
                 string guid;
                 switch (objectType)

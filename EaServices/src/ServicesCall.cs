@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
-using System.Windows.Forms;
-using AddinFramework.Util;
-using EA;
-using EAAddinFramework.Utils;
 
 namespace hoTools.EaServices
 {
@@ -16,11 +12,11 @@ namespace hoTools.EaServices
         /// Definition of a Service of Type Call.
         /// </summary>
         /// <param name="method"></param>
-        /// <param name="guid"></param>
+        /// <param name="id"></param>
         /// <param name="description"></param>
         /// <param name="help"></param>
         /// <param name="isTextRequired"></param>
-        public ServiceCall(MethodInfo method, string guid, string description, string help, bool isTextRequired): base(guid, description, help)
+        public ServiceCall(MethodInfo method, string id, string description, string help, bool isTextRequired): base(id, description, help)
         { 
             Method = method;
             _isTextRequired = isTextRequired;
@@ -28,7 +24,7 @@ namespace hoTools.EaServices
         /// <summary>
         /// Create an empty Service
         /// </summary>
-        public ServiceCall() : base(ServicesConfigCall.ServiceCallEmpty, "-- no --", "no service selected")
+        public ServiceCall() : base(ServicesConfig.ServiceEmpty, "-- no --", "no service selected")
         {
             Method = null;
             _isTextRequired = false;
@@ -40,14 +36,14 @@ namespace hoTools.EaServices
         /// <returns></returns>
         public bool IsEmpty()
         {
-            return Guid == ServicesConfigCall.ServiceCallEmpty;
+            return Id == ServicesConfig.ServiceEmpty;
         }
 
 
         public MethodInfo Method { get; }
 
 
-        public string Guid { get; }
+        //public string Id { get; }
     }
     /// <summary>
     /// Sort ServicesCalls against column Description. Use Interface IComparable.
@@ -63,7 +59,7 @@ namespace hoTools.EaServices
         } 
     }
     /// <summary>
-    /// Sort/Search ServicesCalls against column GUID. Use Interface IComparable.
+    /// Sort/Search ServicesCalls against column Id. Use Interface IComparable.
     /// </summary>
     public class ServicesCallGuidComparer : IComparer<ServiceCall>
     {
@@ -72,7 +68,7 @@ namespace hoTools.EaServices
             if (firstValue == null && secondValue == null) return 0;
             if (firstValue == null) return 1;
             if (secondValue == null) return -1;
-            return string.Compare(firstValue.Guid, secondValue.Guid, StringComparison.Ordinal);
+            return string.Compare(firstValue.Id, secondValue.Id, StringComparison.Ordinal);
         }
     }
 

@@ -10,14 +10,7 @@ namespace hoTools.EaServices
     /// </summary>
     public class ServicesConfigCall : ServicesConfig
     {
-        public const string ServiceCallEmpty = "{B93C105E-64BC-4D9C-B92F-3DDF0C9150E6}";
         public bool IsTextRequired { get; }
-
-        public string Guid
-        {
-            get { return Id; }
-            set { Id = value; }
-        }
 
         public MethodInfo Method { get; set; }
 
@@ -41,7 +34,7 @@ namespace hoTools.EaServices
 
         }
 
-        public ServicesConfigCall(int pos, string guid, string buttonText) : base(pos, guid, buttonText)
+        public ServicesConfigCall(int pos, string id, string buttonText) : base(pos, id, buttonText)
         {
 
         }

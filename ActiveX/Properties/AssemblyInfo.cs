@@ -20,7 +20,7 @@ using hoTools;
 // COM, set the ComVisible attribute to true on that type.
 [assembly: ComVisible(true)]
 
-// The following GUID is for the ID of the typelib if this project is exposed to COM
+// The following Id is for the ID of the typelib if this project is exposed to COM
 [assembly: Guid("95E55ADF-0152-4D32-9414-94ACFA19C593")]
 
 // Version information for an assembly consists of the following four values:

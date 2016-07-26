@@ -638,16 +638,16 @@ namespace EAAddinFramework
         /// </summary>
         /// <param name="repository">An EA.rep object representing the currently open Enterprise Architect model.
         /// Poll its members to retrieve model data and user interface status information.</param>
-        /// <param name="guid">Contains the GUID of the new context item. 
+        /// <param name="guid">Contains the Id of the new context item. 
         /// This value corresponds to the following properties, depending on the value of the objectType parameter:
-        /// objectType (ObjectType)	- GUID value
+        /// objectType (ObjectType)	- Id value
         /// otElement  		- Element.ElementGUID
         /// otPackage 		- Package.PackageGUID
         /// otDiagram		- Diagram.DiagramGUID
         /// otAttribute		- Attribute.AttributeGUID
         /// otMethod		- Method.MethodGUID
         /// otConnector		- Connector.ConnectorGUID
-        /// otRepository	- NOT APPLICABLE, GUID is an empty string
+        /// otRepository	- NOT APPLICABLE, Id is an empty string
         /// </param>
         /// <param name="objectType">Specifies the type of the new context item.</param>
         public virtual void EA_OnContextItemChanged(EA.Repository repository, string guid, EA.ObjectType objectType) { }
@@ -659,9 +659,9 @@ namespace EAAddinFramework
         /// </summary>
         /// <param name="Repository">An EA.rep object representing the currently open Enterprise Architect model.
         /// Poll its members to retrieve model data and user interface status information.</param>
-        /// <param name="GUID">Contains the GUID of the new context item. 
+        /// <param name="GUID">Contains the Id of the new context item. 
         /// This value corresponds to the following properties, depending on the value of the objectType parameter:
-        /// objectType (ObjectType)	- GUID value
+        /// objectType (ObjectType)	- Id value
         /// otElement  		- Element.ElementGUID
         /// otPackage 		- Package.PackageGUID
         /// otDiagram		- Diagram.DiagramGUID
@@ -680,9 +680,9 @@ namespace EAAddinFramework
         /// </summary>
         /// <param name="Repository">An EA.rep object representing the currently open Enterprise Architect model.
         /// Poll its members to retrieve model data and user interface status information.</param>
-        /// <param name="GUID">Contains the GUID of the new context item. 
+        /// <param name="GUID">Contains the Id of the new context item. 
         /// This value corresponds to the following properties, depending on the value of the objectType parameter:
-        /// objectType (ObjectType)	- GUID value
+        /// objectType (ObjectType)	- Id value
         /// otElement  		- Element.ElementGUID
         /// otPackage 		- Package.PackageGUID
         /// otDiagram		- Diagram.DiagramGUID
@@ -711,7 +711,7 @@ namespace EAAddinFramework
         /// <param name="Repository">An EA.rep object representing the currently open Enterprise Architect model.
         /// Poll its members to retrieve model data and user interface status information.</param>
         /// <param name="sCompartment">The name of the compartment for which data is being requested.</param>
-        /// <param name="sGUID">The GUID of the element for which data is being requested.</param>
+        /// <param name="sGUID">The Id of the element for which data is being requested.</param>
         /// <param name="oType">The type of the element for which data is being requested.</param>
         /// <returns>Variant containing a formatted string. See the example in the EA Help file to understand the format.</returns>
         public virtual object EA_GetCompartmentData(EA.Repository Repository, string sCompartment, string sGUID, EA.ObjectType oType) => null;
@@ -795,7 +795,7 @@ namespace EAAddinFramework
         /// <param name="Repository">An EA.rep object representing the currently open Enterprise Architect model.
         /// Poll its members to retrieve model data and user interface status information.</param>
         /// <param name="RuleID">The ID that was passed into the Project.DefineRule command.</param>
-        /// <param name="AttributeGUID">The GUID of the attribute to potentially perform validation on. Use the rep.GetAttributeByGUID method to retrieve the attribute object.</param>
+        /// <param name="AttributeGUID">The Id of the attribute to potentially perform validation on. Use the rep.GetAttributeByGUID method to retrieve the attribute object.</param>
         /// <param name="ObjectID">The ID of the object that owns the given attribute. Use the rep.GetObjectByID method to retrieve the object.</param>
         public virtual void EA_OnRunAttributeRule(EA.Repository Repository, string RuleID, string AttributeGUID, long ObjectID) { }
 
@@ -807,7 +807,7 @@ namespace EAAddinFramework
         /// <param name="Repository">An EA.rep object representing the currently open Enterprise Architect model.
         /// Poll its members to retrieve model data and user interface status information.</param>
         /// <param name="RuleID">The ID that was passed into the Project.DefineRule command.</param>
-        /// <param name="MethodGUID">The GUID of the method to potentially perform validation on. Use the rep.GetMethodByGUID method to retrieve the method object.</param>
+        /// <param name="MethodGUID">The Id of the method to potentially perform validation on. Use the rep.GetMethodByGUID method to retrieve the method object.</param>
         /// <param name="ObjectID">The ID of the object that owns the given method. Use the rep.GetObjectByID method to retrieve the object.</param>
         public virtual void EA_OnRunMethodRule(EA.Repository Repository, string RuleID, string MethodGUID, long ObjectID) { }
 
@@ -819,8 +819,8 @@ namespace EAAddinFramework
         /// <param name="Repository">An EA.rep object representing the currently open Enterprise Architect model.
         /// Poll its members to retrieve model data and user interface status information.</param>
         /// <param name="RuleID">The ID that was passed into the Project.DefineRule command.</param>
-        /// <param name="ParameterGUID">The GUID of the parameter to potentially perform validation on. Use the rep.GetParameterByGUID parameter to retrieve the parameter object.</param>
-        /// <param name="MethodGUID">The GUID of the method that owns the given parameter. Use the rep.GetMethodByGuid method to retrieve the method object.</param> 
+        /// <param name="ParameterGUID">The Id of the parameter to potentially perform validation on. Use the rep.GetParameterByGUID parameter to retrieve the parameter object.</param>
+        /// <param name="MethodGUID">The Id of the method that owns the given parameter. Use the rep.GetMethodByGuid method to retrieve the method object.</param> 
         /// <param name="ObjectID">The ID of the object that owns the given parameter. Use the rep.GetObjectByID parameter to retrieve the object.</param>
         public virtual void EA_OnRunParameterRule(EA.Repository Repository, string RuleID, string ParameterGUID, string MethodGUID, long ObjectID) { }
 
@@ -847,7 +847,7 @@ namespace EAAddinFramework
         /// </summary>
         /// <param name="Repository">An EA.rep object representing the currently open Enterprise Architect model.
         /// Poll its members to retrieve model data and user interface status information.</param>
-        /// <param name="PackageGuid">The GUID identifying the Enterprise Architect package sub-tree that is controlled by the Add-In.</param>
+        /// <param name="PackageGuid">The Id identifying the Enterprise Architect package sub-tree that is controlled by the Add-In.</param>
         public virtual void MDG_BuildProject(EA.Repository Repository, string PackageGuid) { }
 
         /// <summary>
@@ -872,7 +872,7 @@ namespace EAAddinFramework
         /// </summary>
         /// <param name="Repository">An EA.rep object representing the currently open Enterprise Architect model.
         /// Poll its members to retrieve model data and user interface status information.</param>
-        /// <param name="PackageGuid">The GUID identifying the Enterprise Architect package sub-tree that is controlled by the Add-In.</param>
+        /// <param name="PackageGuid">The Id identifying the Enterprise Architect package sub-tree that is controlled by the Add-In.</param>
         /// <returns>Returns a non-zero to indicate that a disconnection has occurred enabling Enterprise Architect to update the user interface. A zero indicates that the user has not disconnected from an external project.</returns>
         public virtual long MDG_Disconnect(EA.Repository Repository, string PackageGuid) => 0;
 
@@ -882,7 +882,7 @@ namespace EAAddinFramework
         /// </summary>
         /// <param name="Repository">An EA.rep object representing the currently open Enterprise Architect model.
         /// Poll its members to retrieve model data and user interface status information.</param>
-        /// <returns>Returns an array of GUID strings representing individual Enterprise Architect packages.</returns>
+        /// <returns>Returns an array of Id strings representing individual Enterprise Architect packages.</returns>
         public virtual object MDG_GetConnectedPackages(EA.Repository Repository) => null;
 
         /// <summary>
@@ -896,7 +896,7 @@ namespace EAAddinFramework
         /// </summary>
         /// <param name="Repository">An EA.rep object representing the currently open Enterprise Architect model.
         /// Poll its members to retrieve model data and user interface status information.</param>
-        /// <param name="PackageGuid">The GUID identifying the Enterprise Architect package sub-tree that is controlled by the Add-In.</param>
+        /// <param name="PackageGuid">The Id identifying the Enterprise Architect package sub-tree that is controlled by the Add-In.</param>
         /// <param name="PropertyName">The name of the property that is used by Enterprise Architect. See Details for the possible values.</param>
         /// <returns>see summary above</returns>
         public virtual object MDG_GetProperty(EA.Repository Repository, string PackageGuid, string PropertyName) => null;
@@ -921,7 +921,7 @@ namespace EAAddinFramework
         /// </summary>
         /// <param name="Repository">An EA.rep object representing the currently open Enterprise Architect model.
         /// Poll its members to retrieve model data and user interface status information.</param>
-        /// <param name="PackageGuid">The GUID identifying the Enterprise Architect package sub-tree that is controlled by the Add-In.</param>
+        /// <param name="PackageGuid">The Id identifying the Enterprise Architect package sub-tree that is controlled by the Add-In.</param>
         /// <param name="SynchObjects">A string array containing a list of objects (Object ID format) to be jointly synchronized between the model branch and the project. 
         /// See summary for the format of the Object IDs.</param>
         /// <param name="SynchType">The value determining the user-selected type of synchronization to take place. 
@@ -946,7 +946,7 @@ namespace EAAddinFramework
         /// </summary>
         /// <param name="Repository">An EA.rep object representing the currently open Enterprise Architect model.
         /// Poll its members to retrieve model data and user interface status information.</param>
-        /// <param name="PackageGuid">The GUID identifying the Enterprise Architect package sub-tree that is controlled by the Add-In.</param>
+        /// <param name="PackageGuid">The Id identifying the Enterprise Architect package sub-tree that is controlled by the Add-In.</param>
         /// <param name="CodeID">A string used to identify the code element before it is created, for more information see MDG_View.</param>
         /// <param name="Language">A string used to identify the programming language for the new Class. The language must be supported by Enterprise Architect.</param>
         /// <returns>Returns a string containing the file path that should be assigned to the Class.</returns>
@@ -961,7 +961,7 @@ namespace EAAddinFramework
         /// </summary>
         /// <param name="Repository">An EA.rep object representing the currently open Enterprise Architect model.
         /// Poll its members to retrieve model data and user interface status information.</param>
-        /// <param name="PackageGuid">The GUID identifying the Enterprise Architect package sub-tree that is controlled by the Add-In.</param>
+        /// <param name="PackageGuid">The Id identifying the Enterprise Architect package sub-tree that is controlled by the Add-In.</param>
         /// <param name="FilePath">The path of the file Enterprise Architect intends to overwrite.</param>
         /// <param name="FileContents">A string containing the proposed contents of the file.</param>
         /// <returns>Return value depends on the type of event that this function is responding to (see summary). 
@@ -977,7 +977,7 @@ namespace EAAddinFramework
         /// </summary>
         /// <param name="Repository">An EA.rep object representing the currently open Enterprise Architect model.
         /// Poll its members to retrieve model data and user interface status information.</param>
-        /// <param name="PackageGuid">The GUID identifying the Enterprise Architect package sub-tree that is controlled by the Add-In.</param>
+        /// <param name="PackageGuid">The Id identifying the Enterprise Architect package sub-tree that is controlled by the Add-In.</param>
         /// <returns>Return a zero value if the post-merge process has failed, a non-zero return indicates that the post-merge has been successful. Enterprise Architect assumes a non-zero return if this method is not implemented</returns>
         public virtual long MDG_PostMerge(EA.Repository Repository, string PackageGuid) => 1;
 
@@ -989,7 +989,7 @@ namespace EAAddinFramework
         /// </summary>
         /// <param name="Repository">An EA.rep object representing the currently open Enterprise Architect model.
         /// Poll its members to retrieve model data and user interface status information.</param>
-        /// <param name="PackageGuid">The GUID identifying the Enterprise Architect package sub-tree that is controlled by the Add-In.</param>
+        /// <param name="PackageGuid">The Id identifying the Enterprise Architect package sub-tree that is controlled by the Add-In.</param>
         /// <returns>Return a zero value to abort generation. Any other value enables the generation to continue.</returns>
         public virtual long MDG_PreGenerate(EA.Repository Repository, string PackageGuid) => 1;
 
@@ -1003,7 +1003,7 @@ namespace EAAddinFramework
         /// </summary>
         /// <param name="Repository">An EA.rep object representing the currently open Enterprise Architect model.
         /// Poll its members to retrieve model data and user interface status information.</param>
-        /// <param name="PackageGuid">The GUID identifying the Enterprise Architect package sub-tree that is controlled by the Add-In.</param>
+        /// <param name="PackageGuid">The Id identifying the Enterprise Architect package sub-tree that is controlled by the Add-In.</param>
         /// <returns>A return value of zero indicates that the merge process will not occur. If the value is not zero the merge process will proceed. If this method is not implemented then it is assumed that a merge process is used.</returns>
         public virtual long MDG_PreMerge(EA.Repository Repository, string PackageGuid) => 1;
 
@@ -1014,7 +1014,7 @@ namespace EAAddinFramework
         /// </summary>
         /// <param name="Repository">An EA.rep object representing the currently open Enterprise Architect model.
         /// Poll its members to retrieve model data and user interface status information.</param>
-        /// <param name="PackageGuid">The GUID identifying the Enterprise Architect package sub-tree that is controlled by the Add-In.</param>
+        /// <param name="PackageGuid">The Id identifying the Enterprise Architect package sub-tree that is controlled by the Add-In.</param>
         /// <param name="FilePaths">A string array of filepaths pointed to the files that are to be reverse engineered.</param>
         public virtual void MDG_PreReverse(EA.Repository Repository, string PackageGuid, object FilePaths) { }
 
@@ -1024,7 +1024,7 @@ namespace EAAddinFramework
         /// </summary>
         /// <param name="Repository">An EA.rep object representing the currently open Enterprise Architect model.
         /// Poll its members to retrieve model data and user interface status information.</param>
-        /// <param name="PackageGuid">The GUID identifying the Enterprise Architect package sub-tree that is controlled by the Add-In.</param>
+        /// <param name="PackageGuid">The Id identifying the Enterprise Architect package sub-tree that is controlled by the Add-In.</param>
         public virtual void MDG_RunExe(EA.Repository Repository, string PackageGuid) { }
 
         /// <summary>
@@ -1032,7 +1032,7 @@ namespace EAAddinFramework
         /// </summary>
         /// <param name="Repository">An EA.rep object representing the currently open Enterprise Architect model.
         /// Poll its members to retrieve model data and user interface status information.</param>
-        /// <param name="PackageGuid">The GUID identifying the Enterprise Architect package sub-tree that is controlled by the Add-In.</param>
+        /// <param name="PackageGuid">The Id identifying the Enterprise Architect package sub-tree that is controlled by the Add-In.</param>
         /// <param name="CodeID">Identifies the code element in the following format:
         /// [type]ElementPart[type]ElementPart...
         /// where each element is proceeded with a token identifying its type:

@@ -8,7 +8,7 @@ namespace hoTools.EaServices
     /// </summary>
     public class ServicesConfigScript : ServicesConfig
     {
-        public ScriptFunction Function;
+        public ScriptFunction Function { get; }
 
         public string functionName
         {
@@ -30,7 +30,7 @@ namespace hoTools.EaServices
         public ServicesConfigScript(int pos, ScriptFunction function, string buttonText)
             : base(pos, $"{function.Owner.Name}:{function.Name}", buttonText)
         {
-
+            Function = function;
         }
 
         public string Invoke(Model model)
