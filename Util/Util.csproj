@@ -80,10 +80,6 @@
     <Compile Include="src\Favorite.cs" />
     <Compile Include="src\FormsControl.cs" />
     <Compile Include="src\GlobalHotkeyException.cs" />
-    <Compile Include="src\GlobalKeyConfigScript.cs" />
-    <Compile Include="src\GlobalKeyConfigSearch.cs" />
-    <Compile Include="src\GlobalKeyConfigService.cs" />
-    <Compile Include="src\GlobalKeyConfig.cs" />
     <Compile Include="src\Hotkey.cs" />
     <Compile Include="src\InvisibleHotKeyForm.cs">
       <SubType>Form</SubType>

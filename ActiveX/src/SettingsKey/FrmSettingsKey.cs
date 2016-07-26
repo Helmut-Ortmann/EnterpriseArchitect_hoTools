@@ -69,36 +69,36 @@ namespace hoTools.Settings.Key
             cmbGlobalKey1Service.DataSource = lServices1;
             cmbGlobalKey1Service.DisplayMember = "Description";
             cmbGlobalKey1Service.ValueMember = "Id";
-            cmbGlobalKey1Service.SelectedValue = _settings.GlobalShortcutsService[0].Id;
-            cmbGlobalKey1Tooltip.Text = _settings.GlobalShortcutsService[0].Tooltip;
+            cmbGlobalKey1Service.SelectedValue = _settings.GlobalKeysConfig[0].Id;
+            cmbGlobalKey1Tooltip.Text = _settings.GlobalKeysConfig[0].Tooltip;
 
 
             cmbGlobalKey2Service.DataSource = lServices2;
             cmbGlobalKey2Service.DisplayMember = "Description";
             cmbGlobalKey2Service.ValueMember = "Id";
-            cmbGlobalKey2Service.SelectedValue = _settings.GlobalShortcutsService[1].Id;
-            cmbGlobalKey2Tooltip.Text = _settings.GlobalShortcutsService[1].Tooltip;
+            cmbGlobalKey2Service.SelectedValue = _settings.GlobalKeysConfig[1].Id;
+            cmbGlobalKey2Tooltip.Text = _settings.GlobalKeysConfig[1].Tooltip;
 
 
             cmbGlobalKey3Service.DataSource = lServices3;
             cmbGlobalKey3Service.DisplayMember = "Description";
             cmbGlobalKey3Service.ValueMember = "Id";
-            cmbGlobalKey3Service.SelectedValue = _settings.GlobalShortcutsService[2].Id;
-            cmbGlobalKey3Tooltip.Text = _settings.GlobalShortcutsService[2].Tooltip;
+            cmbGlobalKey3Service.SelectedValue = _settings.GlobalKeysConfig[2].Id;
+            cmbGlobalKey3Tooltip.Text = _settings.GlobalKeysConfig[2].Tooltip;
 
 
             cmbGlobalKey4Service.DataSource = lServices4;
             cmbGlobalKey4Service.DisplayMember = "Description";
             cmbGlobalKey4Service.ValueMember = "Id";
-            cmbGlobalKey4Service.SelectedValue = _settings.GlobalShortcutsService[3].Id;
-            cmbGlobalKey4Tooltip.Text = _settings.GlobalShortcutsService[3].Tooltip;
+            cmbGlobalKey4Service.SelectedValue = _settings.GlobalKeysConfig[3].Id;
+            cmbGlobalKey4Tooltip.Text = _settings.GlobalKeysConfig[3].Tooltip;
 
 
             cmbGlobalKey5Service.DataSource = lServices5;
             cmbGlobalKey5Service.DisplayMember = "Description";
             cmbGlobalKey5Service.ValueMember = "Id";
-            cmbGlobalKey5Service.SelectedValue = _settings.GlobalShortcutsService[4].Id;
-            cmbGlobalKey5Tooltip.Text = _settings.GlobalShortcutsService[4].Tooltip;
+            cmbGlobalKey5Service.SelectedValue = _settings.GlobalKeysConfig[4].Id;
+            cmbGlobalKey5Tooltip.Text = _settings.GlobalKeysConfig[4].Tooltip;
 
 
 
@@ -211,35 +211,35 @@ namespace hoTools.Settings.Key
             cmbGlobalKeyService5Mod4.DisplayMember = "Key";
             cmbGlobalKeyService5Mod4.ValueMember = "Key";
 
-            cmbGlobalKeyService1Key.SelectedValue = _settings.GlobalShortcutsService[0].Key;
-            cmbGlobalKeyService1Mod1.SelectedValue = _settings.GlobalShortcutsService[0].Modifier1;
-            cmbGlobalKeyService1Mod2.SelectedValue = _settings.GlobalShortcutsService[0].Modifier2;
-            cmbGlobalKeyService1Mod3.SelectedValue = _settings.GlobalShortcutsService[0].Modifier3;
-            cmbGlobalKeyService1Mod4.SelectedValue = _settings.GlobalShortcutsService[0].Modifier4;
+            cmbGlobalKeyService1Key.SelectedValue = _settings.GlobalKeysConfig[0].Key;
+            cmbGlobalKeyService1Mod1.SelectedValue = _settings.GlobalKeysConfig[0].Modifier1;
+            cmbGlobalKeyService1Mod2.SelectedValue = _settings.GlobalKeysConfig[0].Modifier2;
+            cmbGlobalKeyService1Mod3.SelectedValue = _settings.GlobalKeysConfig[0].Modifier3;
+            cmbGlobalKeyService1Mod4.SelectedValue = _settings.GlobalKeysConfig[0].Modifier4;
 
-            cmbGlobalKeyService2Key.SelectedValue = _settings.GlobalShortcutsService[1].Key;
-            cmbGlobalKeyService2Mod1.SelectedValue = _settings.GlobalShortcutsService[1].Modifier1;
-            cmbGlobalKeyService2Mod2.SelectedValue = _settings.GlobalShortcutsService[1].Modifier2;
-            cmbGlobalKeyService2Mod3.SelectedValue = _settings.GlobalShortcutsService[1].Modifier3;
-            cmbGlobalKeyService2Mod4.SelectedValue = _settings.GlobalShortcutsService[1].Modifier4;
+            cmbGlobalKeyService2Key.SelectedValue = _settings.GlobalKeysConfig[1].Key;
+            cmbGlobalKeyService2Mod1.SelectedValue = _settings.GlobalKeysConfig[1].Modifier1;
+            cmbGlobalKeyService2Mod2.SelectedValue = _settings.GlobalKeysConfig[1].Modifier2;
+            cmbGlobalKeyService2Mod3.SelectedValue = _settings.GlobalKeysConfig[1].Modifier3;
+            cmbGlobalKeyService2Mod4.SelectedValue = _settings.GlobalKeysConfig[1].Modifier4;
 
-            cmbGlobalKeyService3Key.SelectedValue = _settings.GlobalShortcutsService[2].Key;
-            cmbGlobalKeyService3Mod1.SelectedValue = _settings.GlobalShortcutsService[2].Modifier1;
-            cmbGlobalKeyService3Mod2.SelectedValue = _settings.GlobalShortcutsService[2].Modifier2;
-            cmbGlobalKeyService3Mod3.SelectedValue = _settings.GlobalShortcutsService[2].Modifier3;
-            cmbGlobalKeyService3Mod4.SelectedValue = _settings.GlobalShortcutsService[2].Modifier4;
+            cmbGlobalKeyService3Key.SelectedValue = _settings.GlobalKeysConfig[2].Key;
+            cmbGlobalKeyService3Mod1.SelectedValue = _settings.GlobalKeysConfig[2].Modifier1;
+            cmbGlobalKeyService3Mod2.SelectedValue = _settings.GlobalKeysConfig[2].Modifier2;
+            cmbGlobalKeyService3Mod3.SelectedValue = _settings.GlobalKeysConfig[2].Modifier3;
+            cmbGlobalKeyService3Mod4.SelectedValue = _settings.GlobalKeysConfig[2].Modifier4;
 
-            cmbGlobalKeyService4Key.SelectedValue = _settings.GlobalShortcutsService[3].Key;
-            cmbGlobalKeyService4Mod1.SelectedValue = _settings.GlobalShortcutsService[3].Modifier1;
-            cmbGlobalKeyService4Mod2.SelectedValue = _settings.GlobalShortcutsService[3].Modifier2;
-            cmbGlobalKeyService4Mod3.SelectedValue = _settings.GlobalShortcutsService[3].Modifier3;
-            cmbGlobalKeyService4Mod4.SelectedValue = _settings.GlobalShortcutsService[3].Modifier4;
+            cmbGlobalKeyService4Key.SelectedValue = _settings.GlobalKeysConfig[3].Key;
+            cmbGlobalKeyService4Mod1.SelectedValue = _settings.GlobalKeysConfig[3].Modifier1;
+            cmbGlobalKeyService4Mod2.SelectedValue = _settings.GlobalKeysConfig[3].Modifier2;
+            cmbGlobalKeyService4Mod3.SelectedValue = _settings.GlobalKeysConfig[3].Modifier3;
+            cmbGlobalKeyService4Mod4.SelectedValue = _settings.GlobalKeysConfig[3].Modifier4;
 
-            cmbGlobalKeyService5Key.SelectedValue = _settings.GlobalShortcutsService[4].Key;
-            cmbGlobalKeyService5Mod1.SelectedValue = _settings.GlobalShortcutsService[4].Modifier1;
-            cmbGlobalKeyService5Mod2.SelectedValue = _settings.GlobalShortcutsService[4].Modifier2;
-            cmbGlobalKeyService5Mod3.SelectedValue = _settings.GlobalShortcutsService[4].Modifier3;
-            cmbGlobalKeyService5Mod4.SelectedValue = _settings.GlobalShortcutsService[4].Modifier4;
+            cmbGlobalKeyService5Key.SelectedValue = _settings.GlobalKeysConfig[4].Key;
+            cmbGlobalKeyService5Mod1.SelectedValue = _settings.GlobalKeysConfig[4].Modifier1;
+            cmbGlobalKeyService5Mod2.SelectedValue = _settings.GlobalKeysConfig[4].Modifier2;
+            cmbGlobalKeyService5Mod3.SelectedValue = _settings.GlobalKeysConfig[4].Modifier3;
+            cmbGlobalKeyService5Mod4.SelectedValue = _settings.GlobalKeysConfig[4].Modifier4;
             #endregion
 
             // Search
@@ -345,45 +345,45 @@ namespace hoTools.Settings.Key
             cmbGlobalKeySearch5Mod4.DisplayMember = "Key";
             cmbGlobalKeySearch5Mod4.ValueMember = "Key";
 
-            cmbGlobalKeySearch1Key.SelectedValue = _settings.GlobalShortcutsSearch[0].Key;
-            cmbGlobalKeySearch1Mod1.SelectedValue = _settings.GlobalShortcutsSearch[0].Modifier1;
-            cmbGlobalKeySearch1Mod2.SelectedValue = _settings.GlobalShortcutsSearch[0].Modifier2;
-            cmbGlobalKeySearch1Mod3.SelectedValue = _settings.GlobalShortcutsSearch[0].Modifier3;
-            cmbGlobalKeySearch1Mod4.SelectedValue = _settings.GlobalShortcutsSearch[0].Modifier4;
-            cmbGlobalKeySearch1SearchName.Text = _settings.GlobalShortcutsSearch[0].SearchName;
-            cmbGlobalKeySearch1SearchTerm.Text = _settings.GlobalShortcutsSearch[0].SearchTerm;
+            cmbGlobalKeySearch1Key.SelectedValue = _settings.GlobalKeysConfigSearch[0].Key;
+            cmbGlobalKeySearch1Mod1.SelectedValue = _settings.GlobalKeysConfigSearch[0].Modifier1;
+            cmbGlobalKeySearch1Mod2.SelectedValue = _settings.GlobalKeysConfigSearch[0].Modifier2;
+            cmbGlobalKeySearch1Mod3.SelectedValue = _settings.GlobalKeysConfigSearch[0].Modifier3;
+            cmbGlobalKeySearch1Mod4.SelectedValue = _settings.GlobalKeysConfigSearch[0].Modifier4;
+            cmbGlobalKeySearch1SearchName.Text = _settings.GlobalKeysConfigSearch[0].SearchName;
+            cmbGlobalKeySearch1SearchTerm.Text = _settings.GlobalKeysConfigSearch[0].SearchTerm;
 
-            cmbGlobalKeySearch2Key.SelectedValue = _settings.GlobalShortcutsSearch[1].Key;
-            cmbGlobalKeySearch2Mod1.SelectedValue = _settings.GlobalShortcutsSearch[1].Modifier1;
-            cmbGlobalKeySearch2Mod2.SelectedValue = _settings.GlobalShortcutsSearch[1].Modifier2;
-            cmbGlobalKeySearch2Mod3.SelectedValue = _settings.GlobalShortcutsSearch[1].Modifier3;
-            cmbGlobalKeySearch2Mod4.SelectedValue = _settings.GlobalShortcutsSearch[1].Modifier4;
-            cmbGlobalKeySearch2SearchName.Text = _settings.GlobalShortcutsSearch[1].SearchName;
-            cmbGlobalKeySearch2SearchTerm.Text = _settings.GlobalShortcutsSearch[1].SearchTerm;
+            cmbGlobalKeySearch2Key.SelectedValue = _settings.GlobalKeysConfigSearch[1].Key;
+            cmbGlobalKeySearch2Mod1.SelectedValue = _settings.GlobalKeysConfigSearch[1].Modifier1;
+            cmbGlobalKeySearch2Mod2.SelectedValue = _settings.GlobalKeysConfigSearch[1].Modifier2;
+            cmbGlobalKeySearch2Mod3.SelectedValue = _settings.GlobalKeysConfigSearch[1].Modifier3;
+            cmbGlobalKeySearch2Mod4.SelectedValue = _settings.GlobalKeysConfigSearch[1].Modifier4;
+            cmbGlobalKeySearch2SearchName.Text = _settings.GlobalKeysConfigSearch[1].SearchName;
+            cmbGlobalKeySearch2SearchTerm.Text = _settings.GlobalKeysConfigSearch[1].SearchTerm;
 
-            cmbGlobalKeySearch3Key.SelectedValue = _settings.GlobalShortcutsSearch[2].Key;
-            cmbGlobalKeySearch3Mod1.SelectedValue = _settings.GlobalShortcutsSearch[2].Modifier1;
-            cmbGlobalKeySearch3Mod2.SelectedValue = _settings.GlobalShortcutsSearch[2].Modifier2;
-            cmbGlobalKeySearch3Mod3.SelectedValue = _settings.GlobalShortcutsSearch[2].Modifier3;
-            cmbGlobalKeySearch3Mod4.SelectedValue = _settings.GlobalShortcutsSearch[2].Modifier4;
-            cmbGlobalKeySearch3SearchName.Text = _settings.GlobalShortcutsSearch[2].SearchName;
-            cmbGlobalKeySearch3SearchTerm.Text = _settings.GlobalShortcutsSearch[2].SearchTerm;
+            cmbGlobalKeySearch3Key.SelectedValue = _settings.GlobalKeysConfigSearch[2].Key;
+            cmbGlobalKeySearch3Mod1.SelectedValue = _settings.GlobalKeysConfigSearch[2].Modifier1;
+            cmbGlobalKeySearch3Mod2.SelectedValue = _settings.GlobalKeysConfigSearch[2].Modifier2;
+            cmbGlobalKeySearch3Mod3.SelectedValue = _settings.GlobalKeysConfigSearch[2].Modifier3;
+            cmbGlobalKeySearch3Mod4.SelectedValue = _settings.GlobalKeysConfigSearch[2].Modifier4;
+            cmbGlobalKeySearch3SearchName.Text = _settings.GlobalKeysConfigSearch[2].SearchName;
+            cmbGlobalKeySearch3SearchTerm.Text = _settings.GlobalKeysConfigSearch[2].SearchTerm;
 
-            cmbGlobalKeySearch4Key.SelectedValue = _settings.GlobalShortcutsSearch[3].Key;
-            cmbGlobalKeySearch4Mod1.SelectedValue = _settings.GlobalShortcutsSearch[3].Modifier1;
-            cmbGlobalKeySearch4Mod2.SelectedValue = _settings.GlobalShortcutsSearch[3].Modifier2;
-            cmbGlobalKeySearch4Mod3.SelectedValue = _settings.GlobalShortcutsSearch[3].Modifier3;
-            cmbGlobalKeySearch4Mod4.SelectedValue = _settings.GlobalShortcutsSearch[3].Modifier4;
-            cmbGlobalKeySearch4SearchName.Text = _settings.GlobalShortcutsSearch[3].SearchName;
-            cmbGlobalKeySearch4SearchTerm.Text = _settings.GlobalShortcutsSearch[3].SearchTerm;
+            cmbGlobalKeySearch4Key.SelectedValue = _settings.GlobalKeysConfigSearch[3].Key;
+            cmbGlobalKeySearch4Mod1.SelectedValue = _settings.GlobalKeysConfigSearch[3].Modifier1;
+            cmbGlobalKeySearch4Mod2.SelectedValue = _settings.GlobalKeysConfigSearch[3].Modifier2;
+            cmbGlobalKeySearch4Mod3.SelectedValue = _settings.GlobalKeysConfigSearch[3].Modifier3;
+            cmbGlobalKeySearch4Mod4.SelectedValue = _settings.GlobalKeysConfigSearch[3].Modifier4;
+            cmbGlobalKeySearch4SearchName.Text = _settings.GlobalKeysConfigSearch[3].SearchName;
+            cmbGlobalKeySearch4SearchTerm.Text = _settings.GlobalKeysConfigSearch[3].SearchTerm;
 
-            cmbGlobalKeySearch5Key.SelectedValue = _settings.GlobalShortcutsSearch[4].Key;
-            cmbGlobalKeySearch5Mod1.SelectedValue = _settings.GlobalShortcutsSearch[4].Modifier1;
-            cmbGlobalKeySearch5Mod2.SelectedValue = _settings.GlobalShortcutsSearch[4].Modifier2;
-            cmbGlobalKeySearch5Mod3.SelectedValue = _settings.GlobalShortcutsSearch[4].Modifier3;
-            cmbGlobalKeySearch5Mod4.SelectedValue = _settings.GlobalShortcutsSearch[4].Modifier4;
-            cmbGlobalKeySearch5SearchName.Text = _settings.GlobalShortcutsSearch[4].SearchName;
-            cmbGlobalKeySearch5SearchTerm.Text = _settings.GlobalShortcutsSearch[4].SearchTerm;
+            cmbGlobalKeySearch5Key.SelectedValue = _settings.GlobalKeysConfigSearch[4].Key;
+            cmbGlobalKeySearch5Mod1.SelectedValue = _settings.GlobalKeysConfigSearch[4].Modifier1;
+            cmbGlobalKeySearch5Mod2.SelectedValue = _settings.GlobalKeysConfigSearch[4].Modifier2;
+            cmbGlobalKeySearch5Mod3.SelectedValue = _settings.GlobalKeysConfigSearch[4].Modifier3;
+            cmbGlobalKeySearch5Mod4.SelectedValue = _settings.GlobalKeysConfigSearch[4].Modifier4;
+            cmbGlobalKeySearch5SearchName.Text = _settings.GlobalKeysConfigSearch[4].SearchName;
+            cmbGlobalKeySearch5SearchTerm.Text = _settings.GlobalKeysConfigSearch[4].SearchTerm;
             #endregion Global Key Search
 
 
@@ -407,88 +407,88 @@ namespace hoTools.Settings.Key
 
             #region store global services
             // Global Services via hot key
-            _settings.GlobalShortcutsService[0].Key = cmbGlobalKeyService1Key.SelectedValue.ToString();
-            _settings.GlobalShortcutsService[0].Modifier1 = cmbGlobalKeyService1Mod1.SelectedValue.ToString();
-            _settings.GlobalShortcutsService[0].Modifier2 = cmbGlobalKeyService1Mod2.SelectedValue.ToString();
-            _settings.GlobalShortcutsService[0].Modifier3 = cmbGlobalKeyService1Mod3.SelectedValue.ToString();
-            _settings.GlobalShortcutsService[0].Modifier4 = cmbGlobalKeyService1Mod4.SelectedValue.ToString();
-            _settings.GlobalShortcutsService[0].Id = cmbGlobalKey1Service.SelectedValue.ToString();
-            _settings.GlobalShortcutsService[0].Description = cmbGlobalKey1Tooltip.Text;
+            _settings.GlobalKeysConfig[0].Key = cmbGlobalKeyService1Key.SelectedValue.ToString();
+            _settings.GlobalKeysConfig[0].Modifier1 = cmbGlobalKeyService1Mod1.SelectedValue.ToString();
+            _settings.GlobalKeysConfig[0].Modifier2 = cmbGlobalKeyService1Mod2.SelectedValue.ToString();
+            _settings.GlobalKeysConfig[0].Modifier3 = cmbGlobalKeyService1Mod3.SelectedValue.ToString();
+            _settings.GlobalKeysConfig[0].Modifier4 = cmbGlobalKeyService1Mod4.SelectedValue.ToString();
+            _settings.GlobalKeysConfig[0].Id = cmbGlobalKey1Service.SelectedValue.ToString();
+            _settings.GlobalKeysConfig[0].Description = cmbGlobalKey1Tooltip.Text;
 
-            _settings.GlobalShortcutsService[1].Key = cmbGlobalKeyService2Key.SelectedValue.ToString();
-            _settings.GlobalShortcutsService[1].Modifier1 = cmbGlobalKeyService2Mod1.SelectedValue.ToString();
-            _settings.GlobalShortcutsService[1].Modifier2 = cmbGlobalKeyService2Mod2.SelectedValue.ToString();
-            _settings.GlobalShortcutsService[1].Modifier3 = cmbGlobalKeyService2Mod3.SelectedValue.ToString();
-            _settings.GlobalShortcutsService[1].Modifier4 = cmbGlobalKeyService2Mod4.SelectedValue.ToString();
-            _settings.GlobalShortcutsService[1].Id = cmbGlobalKey2Service.SelectedValue.ToString();
-            _settings.GlobalShortcutsService[1].Description = cmbGlobalKey2Tooltip.Text;
+            _settings.GlobalKeysConfig[1].Key = cmbGlobalKeyService2Key.SelectedValue.ToString();
+            _settings.GlobalKeysConfig[1].Modifier1 = cmbGlobalKeyService2Mod1.SelectedValue.ToString();
+            _settings.GlobalKeysConfig[1].Modifier2 = cmbGlobalKeyService2Mod2.SelectedValue.ToString();
+            _settings.GlobalKeysConfig[1].Modifier3 = cmbGlobalKeyService2Mod3.SelectedValue.ToString();
+            _settings.GlobalKeysConfig[1].Modifier4 = cmbGlobalKeyService2Mod4.SelectedValue.ToString();
+            _settings.GlobalKeysConfig[1].Id = cmbGlobalKey2Service.SelectedValue.ToString();
+            _settings.GlobalKeysConfig[1].Description = cmbGlobalKey2Tooltip.Text;
 
-            _settings.GlobalShortcutsService[2].Key = cmbGlobalKeyService3Key.SelectedValue.ToString();
-            _settings.GlobalShortcutsService[2].Modifier1 = cmbGlobalKeyService3Mod1.SelectedValue.ToString();
-            _settings.GlobalShortcutsService[2].Modifier2 = cmbGlobalKeyService3Mod2.SelectedValue.ToString();
-            _settings.GlobalShortcutsService[2].Modifier3 = cmbGlobalKeyService3Mod3.SelectedValue.ToString();
-            _settings.GlobalShortcutsService[2].Modifier4 = cmbGlobalKeyService3Mod4.SelectedValue.ToString();
-            _settings.GlobalShortcutsService[2].Id = cmbGlobalKey3Service.SelectedValue.ToString();
-            _settings.GlobalShortcutsService[2].Description = cmbGlobalKey3Tooltip.Text;
+            _settings.GlobalKeysConfig[2].Key = cmbGlobalKeyService3Key.SelectedValue.ToString();
+            _settings.GlobalKeysConfig[2].Modifier1 = cmbGlobalKeyService3Mod1.SelectedValue.ToString();
+            _settings.GlobalKeysConfig[2].Modifier2 = cmbGlobalKeyService3Mod2.SelectedValue.ToString();
+            _settings.GlobalKeysConfig[2].Modifier3 = cmbGlobalKeyService3Mod3.SelectedValue.ToString();
+            _settings.GlobalKeysConfig[2].Modifier4 = cmbGlobalKeyService3Mod4.SelectedValue.ToString();
+            _settings.GlobalKeysConfig[2].Id = cmbGlobalKey3Service.SelectedValue.ToString();
+            _settings.GlobalKeysConfig[2].Description = cmbGlobalKey3Tooltip.Text;
 
-            _settings.GlobalShortcutsService[3].Key = cmbGlobalKeyService4Key.SelectedValue.ToString();
-            _settings.GlobalShortcutsService[3].Modifier1 = cmbGlobalKeyService4Mod1.SelectedValue.ToString();
-            _settings.GlobalShortcutsService[3].Modifier2 = cmbGlobalKeyService4Mod2.SelectedValue.ToString();
-            _settings.GlobalShortcutsService[3].Modifier3 = cmbGlobalKeyService4Mod3.SelectedValue.ToString();
-            _settings.GlobalShortcutsService[3].Modifier4 = cmbGlobalKeyService4Mod4.SelectedValue.ToString();
-            _settings.GlobalShortcutsService[3].Id = cmbGlobalKey4Service.SelectedValue.ToString();
-            _settings.GlobalShortcutsService[3].Description = cmbGlobalKey4Tooltip.Text;
+            _settings.GlobalKeysConfig[3].Key = cmbGlobalKeyService4Key.SelectedValue.ToString();
+            _settings.GlobalKeysConfig[3].Modifier1 = cmbGlobalKeyService4Mod1.SelectedValue.ToString();
+            _settings.GlobalKeysConfig[3].Modifier2 = cmbGlobalKeyService4Mod2.SelectedValue.ToString();
+            _settings.GlobalKeysConfig[3].Modifier3 = cmbGlobalKeyService4Mod3.SelectedValue.ToString();
+            _settings.GlobalKeysConfig[3].Modifier4 = cmbGlobalKeyService4Mod4.SelectedValue.ToString();
+            _settings.GlobalKeysConfig[3].Id = cmbGlobalKey4Service.SelectedValue.ToString();
+            _settings.GlobalKeysConfig[3].Description = cmbGlobalKey4Tooltip.Text;
 
-            _settings.GlobalShortcutsService[4].Key = cmbGlobalKeyService5Key.SelectedValue.ToString();
-            _settings.GlobalShortcutsService[4].Modifier1 = cmbGlobalKeyService5Mod1.SelectedValue.ToString();
-            _settings.GlobalShortcutsService[4].Modifier2 = cmbGlobalKeyService5Mod2.SelectedValue.ToString();
-            _settings.GlobalShortcutsService[4].Modifier3 = cmbGlobalKeyService5Mod3.SelectedValue.ToString();
-            _settings.GlobalShortcutsService[4].Modifier4 = cmbGlobalKeyService5Mod4.SelectedValue.ToString();
-            _settings.GlobalShortcutsService[4].Id = cmbGlobalKey5Service.SelectedValue.ToString();
-            _settings.GlobalShortcutsService[4].Description = cmbGlobalKey5Tooltip.Text;
+            _settings.GlobalKeysConfig[4].Key = cmbGlobalKeyService5Key.SelectedValue.ToString();
+            _settings.GlobalKeysConfig[4].Modifier1 = cmbGlobalKeyService5Mod1.SelectedValue.ToString();
+            _settings.GlobalKeysConfig[4].Modifier2 = cmbGlobalKeyService5Mod2.SelectedValue.ToString();
+            _settings.GlobalKeysConfig[4].Modifier3 = cmbGlobalKeyService5Mod3.SelectedValue.ToString();
+            _settings.GlobalKeysConfig[4].Modifier4 = cmbGlobalKeyService5Mod4.SelectedValue.ToString();
+            _settings.GlobalKeysConfig[4].Id = cmbGlobalKey5Service.SelectedValue.ToString();
+            _settings.GlobalKeysConfig[4].Description = cmbGlobalKey5Tooltip.Text;
             #endregion
 
             #region store global searches
             // Global Searches via hot key
-            _settings.GlobalShortcutsSearch[0].Key = cmbGlobalKeySearch1Key.SelectedValue.ToString();
-            _settings.GlobalShortcutsSearch[0].Modifier1 = cmbGlobalKeySearch1Mod1.SelectedValue.ToString();
-            _settings.GlobalShortcutsSearch[0].Modifier2 = cmbGlobalKeySearch1Mod2.SelectedValue.ToString();
-            _settings.GlobalShortcutsSearch[0].Modifier3 = cmbGlobalKeySearch1Mod3.SelectedValue.ToString();
-            _settings.GlobalShortcutsSearch[0].Modifier4 = cmbGlobalKeySearch1Mod4.SelectedValue.ToString();
-            _settings.GlobalShortcutsSearch[0].SearchName = cmbGlobalKeySearch1SearchName.Text;
-            _settings.GlobalShortcutsSearch[0].SearchTerm = cmbGlobalKeySearch1SearchTerm.Text;
+            _settings.GlobalKeysConfigSearch[0].Key = cmbGlobalKeySearch1Key.SelectedValue.ToString();
+            _settings.GlobalKeysConfigSearch[0].Modifier1 = cmbGlobalKeySearch1Mod1.SelectedValue.ToString();
+            _settings.GlobalKeysConfigSearch[0].Modifier2 = cmbGlobalKeySearch1Mod2.SelectedValue.ToString();
+            _settings.GlobalKeysConfigSearch[0].Modifier3 = cmbGlobalKeySearch1Mod3.SelectedValue.ToString();
+            _settings.GlobalKeysConfigSearch[0].Modifier4 = cmbGlobalKeySearch1Mod4.SelectedValue.ToString();
+            _settings.GlobalKeysConfigSearch[0].SearchName = cmbGlobalKeySearch1SearchName.Text;
+            _settings.GlobalKeysConfigSearch[0].SearchTerm = cmbGlobalKeySearch1SearchTerm.Text;
 
-            _settings.GlobalShortcutsSearch[1].Key = cmbGlobalKeySearch2Key.SelectedValue.ToString();
-            _settings.GlobalShortcutsSearch[1].Modifier1 = cmbGlobalKeySearch2Mod1.SelectedValue.ToString();
-            _settings.GlobalShortcutsSearch[1].Modifier2 = cmbGlobalKeySearch2Mod2.SelectedValue.ToString();
-            _settings.GlobalShortcutsSearch[1].Modifier3 = cmbGlobalKeySearch2Mod3.SelectedValue.ToString();
-            _settings.GlobalShortcutsSearch[1].Modifier4 = cmbGlobalKeySearch2Mod4.SelectedValue.ToString();
-            _settings.GlobalShortcutsSearch[1].SearchName = cmbGlobalKeySearch2SearchName.Text;
-            _settings.GlobalShortcutsSearch[1].SearchTerm = cmbGlobalKeySearch2SearchTerm.Text;
+            _settings.GlobalKeysConfigSearch[1].Key = cmbGlobalKeySearch2Key.SelectedValue.ToString();
+            _settings.GlobalKeysConfigSearch[1].Modifier1 = cmbGlobalKeySearch2Mod1.SelectedValue.ToString();
+            _settings.GlobalKeysConfigSearch[1].Modifier2 = cmbGlobalKeySearch2Mod2.SelectedValue.ToString();
+            _settings.GlobalKeysConfigSearch[1].Modifier3 = cmbGlobalKeySearch2Mod3.SelectedValue.ToString();
+            _settings.GlobalKeysConfigSearch[1].Modifier4 = cmbGlobalKeySearch2Mod4.SelectedValue.ToString();
+            _settings.GlobalKeysConfigSearch[1].SearchName = cmbGlobalKeySearch2SearchName.Text;
+            _settings.GlobalKeysConfigSearch[1].SearchTerm = cmbGlobalKeySearch2SearchTerm.Text;
 
-            _settings.GlobalShortcutsSearch[2].Key = cmbGlobalKeySearch3Key.SelectedValue.ToString();
-            _settings.GlobalShortcutsSearch[2].Modifier1 = cmbGlobalKeySearch3Mod1.SelectedValue.ToString();
-            _settings.GlobalShortcutsSearch[2].Modifier2 = cmbGlobalKeySearch3Mod2.SelectedValue.ToString();
-            _settings.GlobalShortcutsSearch[2].Modifier3 = cmbGlobalKeySearch3Mod3.SelectedValue.ToString();
-            _settings.GlobalShortcutsSearch[2].Modifier4 = cmbGlobalKeySearch3Mod4.SelectedValue.ToString();
-            _settings.GlobalShortcutsSearch[2].SearchName = cmbGlobalKeySearch3SearchName.Text;
-            _settings.GlobalShortcutsSearch[2].SearchTerm = cmbGlobalKeySearch3SearchTerm.Text;
+            _settings.GlobalKeysConfigSearch[2].Key = cmbGlobalKeySearch3Key.SelectedValue.ToString();
+            _settings.GlobalKeysConfigSearch[2].Modifier1 = cmbGlobalKeySearch3Mod1.SelectedValue.ToString();
+            _settings.GlobalKeysConfigSearch[2].Modifier2 = cmbGlobalKeySearch3Mod2.SelectedValue.ToString();
+            _settings.GlobalKeysConfigSearch[2].Modifier3 = cmbGlobalKeySearch3Mod3.SelectedValue.ToString();
+            _settings.GlobalKeysConfigSearch[2].Modifier4 = cmbGlobalKeySearch3Mod4.SelectedValue.ToString();
+            _settings.GlobalKeysConfigSearch[2].SearchName = cmbGlobalKeySearch3SearchName.Text;
+            _settings.GlobalKeysConfigSearch[2].SearchTerm = cmbGlobalKeySearch3SearchTerm.Text;
 
-            _settings.GlobalShortcutsSearch[3].Key = cmbGlobalKeySearch4Key.SelectedValue.ToString();
-            _settings.GlobalShortcutsSearch[3].Modifier1 = cmbGlobalKeySearch4Mod1.SelectedValue.ToString();
-            _settings.GlobalShortcutsSearch[3].Modifier2 = cmbGlobalKeySearch4Mod2.SelectedValue.ToString();
-            _settings.GlobalShortcutsSearch[3].Modifier3 = cmbGlobalKeySearch4Mod3.SelectedValue.ToString();
-            _settings.GlobalShortcutsSearch[3].Modifier4 = cmbGlobalKeySearch4Mod4.SelectedValue.ToString();
-            _settings.GlobalShortcutsSearch[3].SearchName = cmbGlobalKeySearch4SearchName.Text;
-            _settings.GlobalShortcutsSearch[3].SearchTerm = cmbGlobalKeySearch4SearchTerm.Text;
+            _settings.GlobalKeysConfigSearch[3].Key = cmbGlobalKeySearch4Key.SelectedValue.ToString();
+            _settings.GlobalKeysConfigSearch[3].Modifier1 = cmbGlobalKeySearch4Mod1.SelectedValue.ToString();
+            _settings.GlobalKeysConfigSearch[3].Modifier2 = cmbGlobalKeySearch4Mod2.SelectedValue.ToString();
+            _settings.GlobalKeysConfigSearch[3].Modifier3 = cmbGlobalKeySearch4Mod3.SelectedValue.ToString();
+            _settings.GlobalKeysConfigSearch[3].Modifier4 = cmbGlobalKeySearch4Mod4.SelectedValue.ToString();
+            _settings.GlobalKeysConfigSearch[3].SearchName = cmbGlobalKeySearch4SearchName.Text;
+            _settings.GlobalKeysConfigSearch[3].SearchTerm = cmbGlobalKeySearch4SearchTerm.Text;
 
-            _settings.GlobalShortcutsSearch[4].Key = cmbGlobalKeySearch5Key.SelectedValue.ToString();
-            _settings.GlobalShortcutsSearch[4].Modifier1 = cmbGlobalKeySearch5Mod1.SelectedValue.ToString();
-            _settings.GlobalShortcutsSearch[4].Modifier2 = cmbGlobalKeySearch5Mod2.SelectedValue.ToString();
-            _settings.GlobalShortcutsSearch[4].Modifier3 = cmbGlobalKeySearch5Mod3.SelectedValue.ToString();
-            _settings.GlobalShortcutsSearch[4].Modifier4 = cmbGlobalKeySearch5Mod4.SelectedValue.ToString();
-            _settings.GlobalShortcutsSearch[4].SearchName = cmbGlobalKeySearch5SearchName.Text;
-            _settings.GlobalShortcutsSearch[4].SearchTerm = cmbGlobalKeySearch5SearchTerm.Text;
+            _settings.GlobalKeysConfigSearch[4].Key = cmbGlobalKeySearch5Key.SelectedValue.ToString();
+            _settings.GlobalKeysConfigSearch[4].Modifier1 = cmbGlobalKeySearch5Mod1.SelectedValue.ToString();
+            _settings.GlobalKeysConfigSearch[4].Modifier2 = cmbGlobalKeySearch5Mod2.SelectedValue.ToString();
+            _settings.GlobalKeysConfigSearch[4].Modifier3 = cmbGlobalKeySearch5Mod3.SelectedValue.ToString();
+            _settings.GlobalKeysConfigSearch[4].Modifier4 = cmbGlobalKeySearch5Mod4.SelectedValue.ToString();
+            _settings.GlobalKeysConfigSearch[4].SearchName = cmbGlobalKeySearch5SearchName.Text;
+            _settings.GlobalKeysConfigSearch[4].SearchTerm = cmbGlobalKeySearch5SearchTerm.Text;
             #endregion
 
             _addinControl.ParameterizeMenusAndButtons(); // hide / unhide Menus & Buttons

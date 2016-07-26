@@ -65,7 +65,7 @@ namespace hoTools.Utils.Resources {
         ///// Get Connector (conveyed items) from selected Elements
         ///// Select Element and get diagram
         /////
-        ///select  s.ea_guid AS CLASSGUID, s.object_type AS CLASSTYPE, s.name As Source , d.name As Destination
+        ///select  s.ea_Id AS CLASSGUID, s.object_type AS CLASSTYPE, s.name As Source , d.name As Destination
         ///from t_xref x,   // a lot of things like properties,..
         ///     t_connector c,
         ///     t_object s, // Souce element
@@ -73,9 +73,9 @@ namespace hoTools.Utils.Resources {
         ///
         ///where  x.description like  &apos;#WC##CurrentElementGUID##WC#&apos; AND
         ///       x.Behavior = &apos;conveyed&apos; AND
-        ///       c.ea_guid = x.client    
+        ///       c.ea_Id = x.client    
         ///
-        ///and    c.ea_guid = x [rest of string was truncated]&quot;;.
+        ///and    c.ea_Id = x.clien [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string ConnectorsFromElementTemplate {
             get {
@@ -87,7 +87,7 @@ namespace hoTools.Utils.Resources {
         ///   Looks up a localized string similar to //
         ///// Get Elements from selected Connector (conveyed Items)
         /////
-        ///select  o.ea_guid AS CLASSGUID, o.object_type AS CLASSTYPE, o.name As Element
+        ///select  o.ea_Id AS CLASSGUID, o.object_type AS CLASSTYPE, o.name As Element
         ///from t_object o
         ///
         ///where  o.Object_ID in ( #ConveyedItemIDS# ).
@@ -108,15 +108,15 @@ namespace hoTools.Utils.Resources {
         /////
         ///
         ///// As Element
-        ///select o.ea_guid AS CLASSGUID, o.object_type AS CLASSTYPE,o.Name AS Name,o.object_type As Type 
+        ///select o.ea_Id AS CLASSGUID, o.object_type AS CLASSTYPE,o.Name AS Name,o.object_type As Type 
         ///from t_object o
-        ///where o.ea_guid = &apos;#CurrentElementGUID#&apos;
+        ///where o.ea_Id = &apos;#CurrentElementGUID#&apos;
         ///
         ///UNION
         ///
         ///// As Diagram
-        ///select dia.ea_guid AS CLASSGUID, dia.diagram_type AS CLASSTYPE,dia.Name AS Name,dia.diagram_type As Type 
-        ///from t_diagr [rest of string was truncated]&quot;;.
+        ///select dia.ea_Id AS CLASSGUID, dia.diagram_type AS CLASSTYPE,dia.Name AS Name,dia.diagram_type As Type 
+        ///from t_diagram dia [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string CurrentItemGuidTemplate {
             get {
@@ -135,14 +135,14 @@ namespace hoTools.Utils.Resources {
         /////
         ///
         ///// As Element
-        ///select o.ea_guid AS CLASSGUID, o.object_type AS CLASSTYPE,o.Name AS Name,o.object_type As Type 
+        ///select o.ea_Id AS CLASSGUID, o.object_type AS CLASSTYPE,o.Name AS Name,o.object_type As Type 
         ///from t_object o
         ///where o.object_ID = #CurrentElementID#
         ///
         ///UNION
         ///
         ///// As Diagram
-        ///select dia.ea_guid AS CLASSGUID, dia.diagram_type AS CLASSTY [rest of string was truncated]&quot;;.
+        ///select dia.ea_Id AS CLASSGUID, dia.diagram_type AS CLASSTYPE,d [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string CurrentItemIdTemplate {
             get {
@@ -155,7 +155,7 @@ namespace hoTools.Utils.Resources {
         ///// Template delete tree selected 
         /////
         ///delete from t_object 
-        ///where ea_guid in (#TreeSelectedGUIDS#).
+        ///where ea_Id in (#TreeSelectedGUIDS#).
         /// </summary>
         internal static string DeleteTreeSelectedItemsTemplate {
             get {
@@ -171,7 +171,7 @@ namespace hoTools.Utils.Resources {
         ///// - hoDemoPrintContext (2 parameters)
         /////
         /////
-        ///select o.ea_guid AS CLASSGUID, o.object_type AS CLASSTYPE,o.Name AS Name,o.object_type As Type 
+        ///select o.ea_Id AS CLASSGUID, o.object_type AS CLASSTYPE,o.Name AS Name,o.object_type As Type 
         ///from t_object o
         ///where o.name like &apos;&lt;Search Term&gt;#WC#&apos; AND      o.object_type in 
         ///     (
@@ -189,7 +189,7 @@ namespace hoTools.Utils.Resources {
         ///   Looks up a localized string similar to //
         ///// Template DiagramElements_IDS
         /////
-        ///select o.ea_guid AS CLASSGUID, o.object_type AS CLASSTYPE,o.Name AS Name,o.object_type As Type 
+        ///select o.ea_Id AS CLASSGUID, o.object_type AS CLASSTYPE,o.Name AS Name,o.object_type As Type 
         ///from t_object o
         ///where o.object_ID in (#DiagramElements_IDS#)
         ///  
@@ -205,7 +205,7 @@ namespace hoTools.Utils.Resources {
         ///   Looks up a localized string similar to //
         ///// Template DiagramElements_IDS
         /////
-        ///select o.ea_guid AS CLASSGUID, o.object_type AS CLASSTYPE,o.Name AS Name,o.object_type As Type 
+        ///select o.ea_Id AS CLASSGUID, o.object_type AS CLASSTYPE,o.Name AS Name,o.object_type As Type 
         ///from t_object o
         ///where o.object_ID in (#DiagramSelectedElements_IDS#)
         ///  
@@ -222,9 +222,9 @@ namespace hoTools.Utils.Resources {
         ///// Template Insert Element into current selected Package (direct or indirect selected via Element, Diagram, Operation, Attribute in Package)
         /////
         ///insert into t_object 
-        ///   (ea_guid, object_type, Name, Package_ID)
+        ///   (ea_Id, object_type, Name, Package_ID)
         ///values
-        ///   (&apos;#NewGuid#&apos;, &apos;Class&apos;, &apos;XXXX&apos;, #Package#).
+        ///   (&apos;#NewId#&apos;, &apos;Class&apos;, &apos;XXXX&apos;, #Package#).
         /// </summary>
         internal static string InsertElementIntoCurrentPackage {
             get {
@@ -237,7 +237,7 @@ namespace hoTools.Utils.Resources {
         ///&lt;RootSearch&gt;
         ///  &lt;Search Name=&quot;Favorites&quot; GUID=&quot;{A70B9F0E-14CD-4c03-B8FE-21C644DC2D5E}&quot; PkgGUID=&quot;-1&quot; Type=&quot;0&quot; LnksToObj=&quot;0&quot; CustomSearch=&quot;1&quot; AddinAndMethodName=&quot;&quot;&gt;
         ///    &lt;SrchOn&gt;
-        ///      &lt;RootTable Filter=&quot;select o.ea_guid As CLASSGUID, o.Object_Type as CLASSTYPE, o.Name, o.stereotype, o.object_type As [EAType], &apos;Element&apos; As [Type]&amp;#xD;&amp;#xA;from t_object o inner join t_xref x on (o.EA_GUID = x.client)&amp;#xD;&amp;#xA;where Type = &apos;Favorite&apos;&amp;#xD;&amp;#xA;UNION&amp;#xD;&amp;#xA;select d.ea_g [rest of string was truncated]&quot;;.
+        ///      &lt;RootTable Filter=&quot;select o.ea_Id As CLASSGUID, o.Object_Type as CLASSTYPE, o.Name, o.stereotype, o.object_type As [EAType], &apos;Element&apos; As [Type]&amp;#xD;&amp;#xA;from t_object o inner join t_xref x on (o.EA_GUID = x.client)&amp;#xD;&amp;#xA;where Type = &apos;Favorite&apos;&amp;#xD;&amp;#xA;UNION&amp;#xD;&amp;#xA;select d.ea_Id  [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string SearchFavorite {
             get {

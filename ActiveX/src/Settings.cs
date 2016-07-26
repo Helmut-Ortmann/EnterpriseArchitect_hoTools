@@ -52,8 +52,9 @@ namespace hoTools.Settings
         // all available services
         public readonly List<Service> AllServices = new List<Service>();
 
-        public readonly List<GlobalKeysConfig.GlobalKeysServiceConfig> GlobalShortcutsService;
-        public readonly List<GlobalKeysConfig.GlobalKeysSearchConfig> GlobalShortcutsSearch;
+        public readonly List<GlobalKeysConfig> GlobalKeysConfig;
+
+        public readonly List<GlobalKeysConfigSearch> GlobalKeysConfigSearch;
 
         // Connectors
         private readonly LogicalConnectors _logicalConnectors = new LogicalConnectors();
@@ -130,10 +131,10 @@ namespace hoTools.Settings
 
             // get list from config
             // for simple values nothing is to do here (there exists only a getter/setter)
-            ButtonsSearch = GetShortcutsSearch();
-            ButtonsServices = GetShortcutsServices();
-            GlobalShortcutsService = GetGlobalShortcutsService();
-            GlobalShortcutsSearch = GetGlobalShortcutsSearch();
+            ButtonsSearch = GetButtonsSearch();
+            ButtonsServices = GetButtonsService();
+            GlobalKeysConfig = GetKeysService();
+            GlobalKeysConfigSearch = GetKeysSearch();
             GetConnector(_logicalConnectors);
             GetConnector(_activityConnectors);
             GetAllServices();
@@ -957,10 +958,10 @@ namespace hoTools.Settings
         {
             try
             {
-                SetShortcuts(ButtonsSearch);
-                SetServices(ButtonsServices);
-                SetGlobalShortcutsSearch(GlobalShortcutsSearch);
-                SetGlobalShortcutsService(GlobalShortcutsService);
+                SetButtonsSearch(ButtonsSearch);
+                SetButtonsServices(ButtonsServices);
+                SetGlobalKeysSearch(GlobalKeysConfigSearch);
+                SetGlobalKeysService(GlobalKeysConfig);
 
                 SetConnector(_logicalConnectors);
                 SetConnector(_activityConnectors);
@@ -985,7 +986,7 @@ namespace hoTools.Settings
         #endregion
         #region setShortcuts
 
-        private void SetShortcuts(EaAddinButtons[] l)
+        private void SetButtonsSearch(EaAddinButtons[] l)
         {
             foreach (EaAddinButtons button in l)
             {
@@ -1005,7 +1006,7 @@ namespace hoTools.Settings
 
         #endregion
         #region getShortcutsSearch
-        private EaAddinButtons[] GetShortcutsSearch()
+        private EaAddinButtons[] GetButtonsSearch()
         {
             int pos = 0;
             string text = "";
@@ -1052,7 +1053,7 @@ namespace hoTools.Settings
         }
         #endregion
         #region getShortcutsServices
-        private List<ServicesConfigCall> GetShortcutsServices()
+        private List<ServicesConfigCall> GetButtonsService()
         {
             var l = new List<ServicesConfigCall>();
             string guid = "";
@@ -1115,7 +1116,7 @@ namespace hoTools.Settings
             foreach (ServicesConfigCall service in ButtonsServices)
             {
                 // Real service or just empty service
-                if (service.Id != ServicesConfigCall.ServiceEmpty)
+                if (service.Id != ServicesConfig.ServiceEmpty)
                 {
                     //int index = allServices.BinarySearch(new EaServices.ServiceCall(null, service.Id, "","", false), new EaServices.ServicesCallGUIDComparer());
                     foreach (Service s in AllServices) {
@@ -1148,7 +1149,7 @@ namespace hoTools.Settings
             }
 
             // over all configured services
-            foreach (GlobalKeysConfig.GlobalKeysServiceConfig serviceConfig in GlobalShortcutsService)
+            foreach (GlobalKeysConfig serviceConfig in GlobalKeysConfig)
             {
                 // Empty service
                 if (serviceConfig.Id != ServicesConfig.ServiceEmpty)
@@ -1163,17 +1164,19 @@ namespace hoTools.Settings
                                 if (service is ServiceCall)
                                 {
                                     ServiceCall serviceCall = service as ServiceCall;
-                                    serviceConfig.Method = serviceCall.Method;
-                                    serviceConfig.Tooltip = serviceCall.Help;
-                                    serviceConfig.Description = serviceCall.Description;
+                                    var servicesConfigCall = serviceConfig as GlobalKeysConfigService;
+                                    servicesConfigCall.Method = serviceCall.Method;
+                                    servicesConfigCall.Tooltip = serviceCall.Help;
+                                    servicesConfigCall.Description = serviceCall.Description;
                                     break;
                                 }
                                 else
                                 {
                                     ServiceScript serviceScript = service as ServiceScript;
-                                    serviceConfig.Function = serviceScript.Function;
-                                    serviceConfig.Tooltip = serviceScript.Help;
-                                    serviceConfig.Description = serviceScript.Description;
+                                    var servicesConfigScript = serviceConfig as GlobalKeysConfigScript;
+                                    servicesConfigScript.ScriptFunction = serviceScript.Function;
+                                    servicesConfigScript.Tooltip = serviceScript.Help;
+                                    servicesConfigScript.Description = serviceScript.Description;
                                 }
                             }
                         }
@@ -1190,9 +1193,9 @@ namespace hoTools.Settings
         /// 
         /// </summary>
         /// <returns></returns>
-        private List<GlobalKeysConfig.GlobalKeysServiceConfig> GetGlobalShortcutsService()
+        private List<GlobalKeysConfig> GetKeysService()
          {
-             var l = new List<GlobalKeysConfig.GlobalKeysServiceConfig>();
+             var l = new List<GlobalKeysConfig>();
             string key = "";
              string modifier1 = "";
              string modifier2 = "";
@@ -1224,24 +1227,20 @@ namespace hoTools.Settings
                              modifier4 = configEntry.Value;
                              break;
                          case "Id":
-                             var guid = configEntry.Value;
-                             l.Add(new GlobalKeysConfig.GlobalKeysServiceConfig(key,modifier1,modifier2,modifier3,modifier4,"", guid, "",false));
+                             var id = configEntry.Value;
+                             l.Add(new GlobalKeysConfig(id, key,modifier1,modifier2,modifier3,modifier4,description:"", help:""));
                              break;
                      }
                  }
              }
              return l;
-            //globalServiceKeys.Add(new GlobalKeysConfig.GlobalKeysConfigService("F", "Ctrl", "No", "No", "No","Help","","",false));
-            //globalServiceKeys.Add(new GlobalKeysConfig.GlobalKeysConfigService("A", "Shift", "No", "No", "No", "Help", "", "", false));
-            //globalServiceKeys.Add(new GlobalKeysConfig.GlobalKeysConfigService("B", "Win", "No", "No", "No", "Help", "", "", false));
-            //globalServiceKeys.Add(new GlobalKeysConfig.GlobalKeysConfigService("C", "Alt", "No", "No", "No", "Help", "", "", false));
-            //globalServiceKeys.Add(new GlobalKeysConfig.GlobalKeysConfigService("D", "No", "No", "No", "No", "Help", "", "", false));
+
         }
         #endregion
         #region getGlobalShortcutsSearch
-        private List<GlobalKeysConfig.GlobalKeysSearchConfig> GetGlobalShortcutsSearch()
+        private List<GlobalKeysConfigSearch> GetKeysSearch()
         {
-            var l = new List<GlobalKeysConfig.GlobalKeysSearchConfig>();
+            var l = new List<GlobalKeysConfigSearch>();
             string key = "";
             string modifier1 = "";
             string modifier2 = "";
@@ -1283,7 +1282,7 @@ namespace hoTools.Settings
                         case "Tooltip":
                             var tooltip = configEntry.Value;
 
-                            l.Add(new GlobalKeysConfig.GlobalKeysSearchConfig(key, modifier1, modifier2, modifier3, modifier4, tooltip, 
+                            l.Add(new GlobalKeysConfigSearch(key, modifier1, modifier2, modifier3, modifier4, tooltip, 
                                 searchName, searchTerm));
                             break;
                     }
@@ -1294,11 +1293,11 @@ namespace hoTools.Settings
         #endregion
         #region setGlobalShortcutsSearch
 
-        private void SetGlobalShortcutsSearch(List<GlobalKeysConfig.GlobalKeysSearchConfig> l) {
+        private void SetGlobalKeysSearch(List<GlobalKeysConfigSearch> l) {
             for (int i = 0; i< l.Count;i++)
             {
                 if (l[i] == null) continue;
-                    GlobalKeysConfig.GlobalKeysSearchConfig el = l[i];
+                    GlobalKeysConfigSearch el = l[i];
                     string basicKey = "globalKeySearch" + (i+1);
                     CurrentConfig.AppSettings.Settings[basicKey + "Key"].Value = el.Key;
                     CurrentConfig.AppSettings.Settings[basicKey + "Modifier1"].Value = el.Modifier1;
@@ -1314,13 +1313,13 @@ namespace hoTools.Settings
         #endregion
         #region setGlobalShortcutsService
 
-        private void SetGlobalShortcutsService(List<GlobalKeysConfig.GlobalKeysServiceConfig> l)
+        private void SetGlobalKeysService(List<GlobalKeysConfig> l)
         {
             
             for (int i = 0; i < l.Count; i++)
             {
                 if (l[i] == null) continue;
-                GlobalKeysConfig.GlobalKeysServiceConfig el = l[i];
+                GlobalKeysConfig el = l[i];
                 string basicKey = "globalKeyService" + (i+1);
                 CurrentConfig.AppSettings.Settings[basicKey + "Key"].Value = el.Key;
                 CurrentConfig.AppSettings.Settings[basicKey + "Modifier1"].Value = el.Modifier1;
@@ -1437,7 +1436,7 @@ namespace hoTools.Settings
         #endregion
         #region setServices
 
-        private void SetServices(List<ServicesConfigCall> l)
+        private void SetButtonsServices(List<ServicesConfigCall> l)
         {
             for (var i = 0; i < l.Count; i++)
             {
@@ -1446,7 +1445,7 @@ namespace hoTools.Settings
 
                     var el = l[i];
                     string basicKey = "service" + (i + 1);
-                    CurrentConfig.AppSettings.Settings[basicKey + "Id"].Value = el.Guid;
+                    CurrentConfig.AppSettings.Settings[basicKey + "Id"].Value = el.Id;
                     CurrentConfig.AppSettings.Settings[basicKey + "Text"].Value = el.ButtonText;
                 }
             }

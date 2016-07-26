@@ -4,21 +4,39 @@ using System.Windows.Forms;
 // ReSharper disable once CheckNamespace
 namespace GlobalHotkeys
 {
+    /// <summary>
+    /// Configuration of EA Keys (Generalization)
+    /// </summary>
     public class GlobalKeysConfig
     {
-        public GlobalKeysConfig(string key, string modifier1, string modifier2, string modifier3, string modifier4,
-            string help)
+        /// <summary>
+        /// Constructor Global Key Definition. Id="Script:Function","{..guid..}","Script:Function" (dependent of subtype). 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="key"></param>
+        /// <param name="modifier1"></param>
+        /// <param name="modifier2"></param>
+        /// <param name="modifier3"></param>
+        /// <param name="modifier4"></param>
+        /// <param name="description"></param>
+        /// <param name="help"></param>
+        public GlobalKeysConfig(string id, string key, string modifier1, string modifier2, string modifier3, string modifier4,
+            string description, string help)
         {
+            Id = id;
             Key = key;
             Modifier1 = modifier1;
             Modifier2 = modifier2;
             Modifier3 = modifier3;
             Modifier4 = modifier4;
+            Description = description;
             Tooltip = help;
 
         }
 
         #region GetterSetter
+
+        public string Id { get; set; }
 
         public string Key { get; set; }
 
@@ -30,6 +48,7 @@ namespace GlobalHotkeys
 
         public string Modifier4 { get; set; }
 
+        public string Description { get; set; }
         public string Tooltip { get; set; }
 
         #endregion

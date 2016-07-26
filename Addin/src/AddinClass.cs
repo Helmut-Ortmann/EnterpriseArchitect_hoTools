@@ -223,9 +223,9 @@ namespace hoTools
                 Modifiers modifier3;
                 Modifiers modifier4;
 
-                for (int i = 0; i < _AddinSettings.GlobalShortcutsService.Count; i = i + 1)
+                for (int i = 0; i < _AddinSettings.GlobalKeysConfig.Count; i = i + 1)
                 {
-                    GlobalKeysConfig.GlobalKeysSearchConfig search = _AddinSettings.GlobalShortcutsSearch[i];
+                    GlobalKeysConfigSearch search = _AddinSettings.GlobalKeysConfigSearch[i];
                     if (search.Key != "None" & search.SearchName != "")
                     {
                         keys.TryGetValue(search.Key, out key);
@@ -254,9 +254,9 @@ namespace hoTools
                     }
 
                 }
-                for (int i = 0; i < _AddinSettings.GlobalShortcutsService.Count; i = i + 1)
+                for (int i = 0; i < _AddinSettings.GlobalKeysConfig.Count; i = i + 1)
                 {
-                    GlobalKeysConfig.GlobalKeysServiceConfig service = _AddinSettings.GlobalShortcutsService[i];
+                    GlobalKeysConfig service = _AddinSettings.GlobalKeysConfig[i];
                     if (service.Key != "None" & service.Id != "")
                     {
                         keys.TryGetValue(service.Key, out key);
@@ -295,7 +295,7 @@ namespace hoTools
             private static void RunGlobalKeySearch(int pos)
             {
                 
-                    GlobalKeysConfig.GlobalKeysSearchConfig sh = _AddinSettings.GlobalShortcutsSearch[pos];
+                    GlobalKeysConfigSearch sh = _AddinSettings.GlobalKeysConfigSearch[pos];
                     if (sh.SearchName == "") return;
                     _Model.SearchRun(sh.SearchName, sh.SearchTerm);
                     
@@ -306,9 +306,19 @@ namespace hoTools
             /// <param name="pos"></param>
             private static void RunGlobalKeyService(int pos)
             {
-                GlobalKeysConfig.GlobalKeysServiceConfig sh = _AddinSettings.GlobalShortcutsService[pos];
-                    if (sh.Method == null) return;
-                    sh.Invoke(_Repository, _AddinControlGui.GetText());
+                GlobalKeysConfig keyConfig = _AddinSettings.GlobalKeysConfig[pos];
+                if (keyConfig is GlobalKeysConfigService)
+                {
+                    GlobalKeysConfigService keyConfigService = keyConfig as GlobalKeysConfigService;
+                    if (keyConfigService.Method == null) return;
+                    keyConfigService.Invoke(_Model, _AddinControlGui.GetText());
+                }
+                if (keyConfig is GlobalKeysConfigScript)
+                {
+                    GlobalKeysConfigScript keyConfigScript= keyConfig as GlobalKeysConfigScript;
+                    if (keyConfigScript.ScriptFunction == null) return;
+                    keyConfigScript.Invoke(_Model);
+                }
             }
 
             private static void HandleGlobalKeySearch0()
