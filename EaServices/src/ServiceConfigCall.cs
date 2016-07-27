@@ -23,13 +23,13 @@ namespace hoTools.EaServices
             }
         }
 
-        public string HelpTextLong
+        public override string HelpTextLong
         {
             get
             {
                 if (MethodName == "") return "";
                 return
-                    $"Service\t\t: {ButtonText} / {MethodName}()\nService Name\t: {Description}\nDescription\t: {Help}";
+                    $"Service: {ButtonText} / {MethodName}()\n{Description}\n{Help}";
             }
 
         }

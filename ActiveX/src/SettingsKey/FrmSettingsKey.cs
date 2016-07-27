@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Windows.Documents;
 using System.Windows.Forms;
 using EAAddinFramework.Utils;
 using hoTools.ActiveX;

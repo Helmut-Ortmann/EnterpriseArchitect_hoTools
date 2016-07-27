@@ -16,13 +16,13 @@ namespace hoTools.EaServices
             set { Id = value; }
         }
 
-        public string HelpTextLong
+        public override string HelpTextLong
         {
             get
             {
                 if (Function == null) return "";
                 return
-                    $"{"Script",8}: {ButtonText} / {Function.Owner.Name}:{Function.Name}\n {Description}\nHelp\t: {Help}";
+                    $"{"Script",10}: {ButtonText} / {Function.Owner.Name}:{Function.Name}\n{Description}\n{Help}";
             }
 
         }

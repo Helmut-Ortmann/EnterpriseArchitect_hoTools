@@ -9,6 +9,7 @@ using hoTools.Connectors;
 using System.Collections.Generic;
 using Control.EaAddinShortcuts;
 using System.Text.RegularExpressions;
+using EAAddinFramework.Utils;
 using GlobalHotkeys;
 
 // ReSharper disable once CheckNamespace
@@ -25,7 +26,7 @@ namespace hoTools.Settings
     /// </code>
     public class AddinSettings
     {
-
+        Model _model;
         public enum ShowInWindow { AddinWindow, TabWindow,Disabled};
         public enum AutoLoadMdg { Basic, Compilation, No};
 
@@ -45,10 +46,10 @@ namespace hoTools.Settings
         public SqlLastOpenedFilesCfg LastOpenedFiles { get; }
 
         // Configuration 5 button searches by key
-        public readonly EaAddinButtons[] ButtonsSearch;
+        public readonly EaAddinButtons[] ButtonsConfigSearch;
 
         // Configuration 5 button services by key
-        public readonly List<ServicesConfigCall> ButtonsServices;
+        public readonly List<ServicesConfig> ButtonsServiceConfig;
         // all available services
         public readonly List<Service> AllServices = new List<Service>();
 
@@ -131,23 +132,40 @@ namespace hoTools.Settings
 
             // get list from config
             // for simple values nothing is to do here (there exists only a getter/setter)
-            ButtonsSearch = GetButtonsSearch();
-            ButtonsServices = GetButtonsService();
+            ButtonsConfigSearch = GetButtonsSearch();
+            ButtonsServiceConfig = GetButtonsService();
             GlobalKeysConfig = GetKeysService();
             GlobalKeysConfigSearch = GetKeysSearch();
             GetConnector(_logicalConnectors);
             GetConnector(_activityConnectors);
-            GetAllServices();
+
+            
+
             HistorySqlFiles = new SqlHistoryFilesCfg(CurrentConfig);// history of sql files 
             LastOpenedFiles = new SqlLastOpenedFilesCfg(CurrentConfig); // last opened files
 
-            // update lists
-            UpdateSearchesAndServices();
+            
 
             //-------------------------------------------
             // Simple values uses Getter/Setter, no special handling here
         }
         #endregion
+
+        /// <summary>
+        /// Update settings with model specific features like: Scripts
+        /// </summary>
+        /// <param name="model"></param>
+        public void UpdateModel(Model model)
+        {
+
+            GetAllServices();
+            // update Searches and Services of type call
+            UpdateSearchesAndServices();
+
+
+        }
+
+
 
         #region getDefaultSettings
         /// <summary>
@@ -958,8 +976,8 @@ namespace hoTools.Settings
         {
             try
             {
-                SetButtonsSearch(ButtonsSearch);
-                SetButtonsServices(ButtonsServices);
+                SetButtonsSearch(ButtonsConfigSearch);
+                SetButtonsServices(ButtonsServiceConfig);
                 SetGlobalKeysSearch(GlobalKeysConfigSearch);
                 SetGlobalKeysService(GlobalKeysConfig);
 
@@ -1005,7 +1023,11 @@ namespace hoTools.Settings
         }
 
         #endregion
-        #region getShortcutsSearch
+        #region GetButtonsSearch from Configuration
+        /// <summary>
+        /// Get 5 Searches
+        /// </summary>
+        /// <returns></returns>
         private EaAddinButtons[] GetButtonsSearch()
         {
             int pos = 0;
@@ -1053,9 +1075,14 @@ namespace hoTools.Settings
         }
         #endregion
         #region getShortcutsServices
-        private List<ServicesConfigCall> GetButtonsService()
+
+        /// <summary>
+        /// Get 5 services of type Call or Script from configuration
+        /// </summary>
+        /// <returns></returns>
+        private List<ServicesConfig> GetButtonsService()
         {
-            var l = new List<ServicesConfigCall>();
+            var l = new List<ServicesConfig>();
             string guid = "";
             foreach (KeyValueConfigurationElement configEntry in CurrentConfig.AppSettings.Settings)
             {
@@ -1072,7 +1099,7 @@ namespace hoTools.Settings
                             break;
                         case "Text":
                             var text = configEntry.Value;
-                            l.Add(new ServicesConfigCall(pos, guid, text));
+                            l.Add(new ServicesConfig(pos, guid, text));
                             break;
                     }
                 }
@@ -1082,9 +1109,12 @@ namespace hoTools.Settings
         }
         #endregion
         #region getAllServices
-        // get all possible services
+        /// <summary>
+        /// Get all possible Service of type Call from Method Attributes
+        /// </summary>
         private void GetAllServices()
         {
+            AllServices.Clear();
             Type type = typeof(EaService);
             AllServices.Add(new ServiceCall());
             foreach (MethodInfo method in type.GetMethods())
@@ -1098,6 +1128,16 @@ namespace hoTools.Settings
                         AllServices.Add(new ServiceCall(method, serviceOperation.Guid, serviceOperation.Description, serviceOperation.Help, serviceOperation.IsTextRequired));
                     }
                 }
+            }
+
+
+            foreach (Script script in Script.GetEaMaticScripts(_model))
+            {
+                foreach (ScriptFunction scriptFunction in script.Functions)
+                {
+                    AllServices.Add(new ServiceScript(scriptFunction));
+                }
+
             }
             AllServices.Sort(new Service.ServicesDescriptionComparer());
         }
@@ -1113,7 +1153,7 @@ namespace hoTools.Settings
         /// </summary>
         public void UpdateSearchesAndServices()
         {
-            foreach (ServicesConfigCall service in ButtonsServices)
+            foreach (ServicesConfigCall service in ButtonsServiceConfig)
             {
                 // Real service or just empty service
                 if (service.Id != ServicesConfig.ServiceEmpty)
@@ -1436,7 +1476,7 @@ namespace hoTools.Settings
         #endregion
         #region setServices
 
-        private void SetButtonsServices(List<ServicesConfigCall> l)
+        private void SetButtonsServices(List<ServicesConfig> l)
         {
             for (var i = 0; i < l.Count; i++)
             {

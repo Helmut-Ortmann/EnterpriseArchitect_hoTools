@@ -457,10 +457,10 @@ namespace hoTools.ActiveX
         void RunSearch(int pos)
         {
             // ReSharper disable once CanBeReplacedWithTryCastAndCheckForNull
-            if (AddinSettings.ButtonsSearch[pos] is EaAddinShortcutSearch)
+            if (AddinSettings.ButtonsConfigSearch[pos] is EaAddinShortcutSearch)
             {
 
-                var button = (EaAddinShortcutSearch)AddinSettings.ButtonsSearch[pos];
+                var button = (EaAddinShortcutSearch)AddinSettings.ButtonsConfigSearch[pos];
                 string searchName = button.KeySearchName.Trim();
                 if (searchName == "") return;
 
@@ -468,17 +468,26 @@ namespace hoTools.ActiveX
 
             }
         }
-        
+        /// <summary>
+        /// Run service of type Call or Script
+        /// </summary>
+        /// <param name="pos"></param>
         void RunService(int pos)
         {
             // ReSharper disable once IsExpressionAlwaysTrue
-            if (AddinSettings.ButtonsServices[pos] is hoTools.EaServices.ServicesConfigCall)
+            if (AddinSettings.ButtonsServiceConfig[pos] is ServicesConfigCall)
             {
 
-                var sh = AddinSettings.ButtonsServices[pos];
+                var sh = (ServicesConfigCall) AddinSettings.ButtonsServiceConfig[pos];
                 if (sh.Method == null) return;
                 sh.Invoke(_model, _txtSearchText.Text);
 
+            }
+            if (AddinSettings.ButtonsServiceConfig[pos] is ServicesConfigScript)
+            {
+                var script = (ServicesConfigScript)AddinSettings.ButtonsServiceConfig[pos];
+                if (script.Function == null) return;
+                script.Invoke(_model);
             }
         }
 
@@ -2145,14 +2154,14 @@ namespace hoTools.ActiveX
             _toolStripSearchBtn4.Visible = AddinSettings.IsShowQueryButton;
             _toolStripSearchBtn5.Visible = AddinSettings.IsShowQueryButton;
 
-            for (int pos = 0; pos < AddinSettings.ButtonsSearch.Length; pos++)
+            for (int pos = 0; pos < AddinSettings.ButtonsConfigSearch.Length; pos++)
             {
                 const string defaultHelptext = "Free Model Searches, Model Search not parametrized.";
                 string buttonText = "";
                 string helpText = defaultHelptext;
-                if (AddinSettings.ButtonsSearch[pos] != null)
+                if (AddinSettings.ButtonsConfigSearch[pos] != null)
                 {
-                    EaAddinShortcutSearch search = (EaAddinShortcutSearch)AddinSettings.ButtonsSearch[pos];
+                    EaAddinShortcutSearch search = (EaAddinShortcutSearch)AddinSettings.ButtonsConfigSearch[pos];
                     {
                         if (search.KeyText.Trim() != "")
                         {
@@ -2197,13 +2206,13 @@ namespace hoTools.ActiveX
             _toolStripServiceBtn3.Visible = AddinSettings.IsShowServiceButton;
             _toolStripServiceBtn4.Visible = AddinSettings.IsShowServiceButton;
             _toolStripServiceBtn5.Visible = AddinSettings.IsShowServiceButton;
-            for (int pos = 0; pos < AddinSettings.ButtonsServices.Count; pos++)
+            for (int pos = 0; pos < AddinSettings.ButtonsServiceConfig.Count; pos++)
             {
                 string buttonText = "";
                 string helpText = "free Service, Service not parametrized";
-                if (AddinSettings.ButtonsServices[pos] != null)
+                if (AddinSettings.ButtonsServiceConfig[pos] != null)
                 {
-                    ServicesConfigCall serviceConfig = AddinSettings.ButtonsServices[pos];
+                    ServicesConfig serviceConfig = AddinSettings.ButtonsServiceConfig[pos];
                     if (serviceConfig.ButtonText.Trim() != "")
                     {
                         buttonText = serviceConfig.ButtonText;

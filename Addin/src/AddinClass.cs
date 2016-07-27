@@ -577,6 +577,7 @@ namespace hoTools
             _repository = rep;
             _Repository = rep;
             _Model = new Model(rep);
+            _addinSettings.UpdateModel(_Model);
             try
             {
                 if (_myControlGui != null) _myControlGui.Repository = rep;

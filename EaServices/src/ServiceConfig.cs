@@ -16,6 +16,8 @@ namespace hoTools.EaServices
         public string Description { get; set; }
         public string Help { get; set; }
 
+        public virtual string HelpTextLong { get;  }
+
         public ServicesConfig(int pos, string id, string buttonText)
         {
             Init(pos, id, buttonText, "", "");
