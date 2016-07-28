@@ -1525,7 +1525,7 @@ There is no interface to directly select more than one Browser Element (as far a
     <value>376, 17</value>
   </metadata>
   <data name="_settingGeneralToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>294, 22</value>
+    <value>305, 22</value>
   </data>
   <data name="_settingGeneralToolStripMenuItem.Text" xml:space="preserve">
     <value>Settings &amp;General</value>
@@ -1538,7 +1538,7 @@ There is no interface to directly select more than one Browser Element (as far a
 - MDG to load</value>
   </data>
   <data name="_settingsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>294, 22</value>
+    <value>305, 22</value>
   </data>
   <data name="_settingsToolStripMenuItem.Text" xml:space="preserve">
     <value>Settings Default &amp;Linestyle</value>
@@ -1547,7 +1547,7 @@ There is no interface to directly select more than one Browser Element (as far a
     <value>Setting the default linestyle of Diagram Types</value>
   </data>
   <data name="_settingsGlobalKeysToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>294, 22</value>
+    <value>305, 22</value>
   </data>
   <data name="_settingsGlobalKeysToolStripMenuItem.Text" xml:space="preserve">
     <value>Settings Global Keys</value>
@@ -1558,18 +1558,18 @@ There is no interface to directly select more than one Browser Element (as far a
 - Services (fix implemented in hoTools)</value>
   </data>
   <data name="_settingsToolbarToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>294, 22</value>
+    <value>305, 22</value>
   </data>
   <data name="_settingsToolbarToolStripMenuItem.Text" xml:space="preserve">
-    <value>Settings Toolbar for Searches and Services</value>
+    <value>Settings Toolbar (Searches, Services, Scripts)</value>
   </data>
   <data name="_settingsToolbarToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>Define Toolbar for:
 - at max 5 Searches
-- at max 5 Services</value>
+- at max 5 Services or Scripts</value>
   </data>
   <data name="_settingsQueryAndSctipToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>294, 22</value>
+    <value>305, 22</value>
   </data>
   <data name="_settingsQueryAndSctipToolStripMenuItem.Text" xml:space="preserve">
     <value>Settings SQL and Script</value>

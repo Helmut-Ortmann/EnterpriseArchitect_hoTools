@@ -146,21 +146,7 @@ namespace hoTools.Settings.Toolbar
                 lServices5.Add(service);
             }
 
-            // Load Scripts ant their functions
-            List<Script> lscripts = Script.GetEaMaticScripts(_model);
-            foreach (var script in lscripts)
-            {
-                foreach (var scriptFunction in script.Functions)
-                {
-                    lServices1.Add(new ServiceScript(scriptFunction));
-                    lServices2.Add(new ServiceScript(scriptFunction));
-                    lServices3.Add(new ServiceScript(scriptFunction));
-                    lServices4.Add(new ServiceScript(scriptFunction));
-                    lServices5.Add(new ServiceScript(scriptFunction));
-                }
-            }
-
-
+            
             #region set services
 
             cmbService1.DataSource = lServices1;
