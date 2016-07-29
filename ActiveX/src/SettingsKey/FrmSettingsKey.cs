@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using EAAddinFramework.Utils;
 using hoTools.ActiveX;
+using hoTools.EaServices;
 using GlobalHotkeys;
 
 
+// ReSharper disable once CheckNamespace
 namespace hoTools.Settings.Key
 
 {
@@ -33,8 +35,18 @@ namespace hoTools.Settings.Key
             _addinControl = addinControl;
             _model = addinControl.Model;
 
+            
+
+
+        }
+        #endregion
+        #region OnCreateControl
+
+        protected override void OnCreateControl()
+        {
+            base.OnCreateControl();
             // Global key support
-            chkShortKeySupport.Checked = settings.IsShortKeySupport;
+            chkShortKeySupport.Checked = _settings.IsShortKeySupport;
             // SQL Paths
             txtSqlSearchPath.Text = _settings.SqlPaths;
 
@@ -43,13 +55,13 @@ namespace hoTools.Settings.Key
 
             #region set possible services
             // set 5 lists of all possible services
-            var lServices1 = new List<EaServices.Service>();
-            var lServices2 = new List<EaServices.Service>();
-            var lServices3 = new List<EaServices.Service>();
-            var lServices4 = new List<EaServices.Service>();
-            var lServices5 = new List<EaServices.Service>();
+            var lServices1 = new List<Service>();
+            var lServices2 = new List<Service>();
+            var lServices3 = new List<Service>();
+            var lServices4 = new List<Service>();
+            var lServices5 = new List<Service>();
             // set all Service Calls
-            foreach (EaServices.ServiceCall service in _settings.AllServices)
+            foreach (Service service in _settings.AllServices)
             {
                 lServices1.Add(service);
                 lServices2.Add(service);
@@ -59,9 +71,9 @@ namespace hoTools.Settings.Key
             }
             #endregion
 
-           
 
-           
+
+
 
             #region Global Shortcuts Service
             // Global Keys/Shortcuts
@@ -384,21 +396,17 @@ namespace hoTools.Settings.Key
             cmbGlobalKeySearch5SearchName.Text = _settings.GlobalKeysConfigSearch[4].SearchName;
             cmbGlobalKeySearch5SearchTerm.Text = _settings.GlobalKeysConfigSearch[4].SearchTerm;
             #endregion Global Key Search
-
-
         }
         #endregion
 
-        
 
-
-            #region StoreAll ButtonOkClick()
-            /// <summary>
-            /// Store the settings, ok button
-            /// </summary>
-            /// <param name="sender"></param>
-            /// <param name="e"></param>
-            void btnOk_Click(object sender, EventArgs e)
+        #region StoreAll ButtonOkClick()
+        /// <summary>
+        /// Store the settings, ok button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void btnOk_Click(object sender, EventArgs e)
         {
             // Global Key support
             _settings.IsShortKeySupport = chkShortKeySupport.Checked;

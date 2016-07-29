@@ -1158,11 +1158,11 @@ namespace hoTools.Settings
         #region updateSearchesAndServices
         /// <summary>
         /// Update the services and searches for:
-        /// - Buttons
-        /// - Global keys / global shortcuts / keyboard keys
-        /// by 
-        /// - Method
-        /// - Tool tip
+        /// <para />- Buttons
+        /// <para />- Global keys / global shortcuts / keyboard keys
+        /// <para />by 
+        /// <para />- Method
+        /// <para />- Tool tip
         /// </summary>
         public void UpdateSearchesAndServices()
         {
