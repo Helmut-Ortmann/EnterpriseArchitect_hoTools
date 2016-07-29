@@ -29,7 +29,7 @@ namespace hoTools.EaServices
             {
                 if (MethodName == "") return "";
                 return
-                    $"Service: {ButtonText} / {MethodName}()\n{Description}\n{Help}";
+                    $"{"Service",-10}: '{ButtonText}' / {MethodName}(){Environment.NewLine}{Description}{Environment.NewLine}{Help}";
             }
 
         }

@@ -20,6 +20,12 @@ namespace Control.EaAddinShortcuts
         public string KeyType = "Search";
         public string KeySearchName;
         public string KeySearchTerm;
+
+        public bool IsEmpty()
+        {
+            if (KeyText.Trim() == "" || KeySearchName.Trim() == "") return true;
+            return false;
+        }
         public EaAddinShortcutSearch(int keyPos, string text, string searchName, string searchTerm, string toolTip)
             : base(keyPos, text, toolTip)
         {

@@ -1157,11 +1157,11 @@ namespace hoTools.Settings
         #endregion
         #region updateSearchesAndServices
         /// <summary>
-        /// Update the services and searches for:
+        /// Update the services (Call Service or run Script) and searches for:
         /// <para />- Buttons
         /// <para />- Global keys / global shortcuts / keyboard keys
         /// <para />by 
-        /// <para />- Method
+        /// <para />- Method / Script / Search Name / SQL File name (absolute or relative to path)
         /// <para />- Tool tip
         /// </summary>
         public void UpdateSearchesAndServices()
@@ -1198,9 +1198,11 @@ namespace hoTools.Settings
                             ServiceScript sScript = (ServiceScript) s;
                             if (service.Id == sScript.Id)
                             {
-                                var serviceScript = new ServicesConfigCall(service.Pos, service.Id, service.ButtonText);
+                                //int pos, ScriptFunction function, string buttonText
+                                var serviceScript = new ServicesConfigScript(service.Pos, service.Id, service.ButtonText);
                                 tempServiceConfig.Add(serviceScript);
-                                serviceScript.Help = sScript.Help;
+                                serviceScript.Function = sScript.Function;
+                                serviceScript.Help  = sScript.Help;
                                 serviceScript.Description = sScript.Description;
                                 break;
                             }

@@ -1,4 +1,5 @@
-﻿using AddinFramework.Util;
+﻿using System;
+using AddinFramework.Util;
 using EAAddinFramework.Utils;
 
 namespace hoTools.EaServices
@@ -8,12 +9,15 @@ namespace hoTools.EaServices
     /// </summary>
     public class ServicesConfigScript : ServicesConfig
     {
-        public ScriptFunction Function { get; }
+        public ScriptFunction Function { get; set; }
 
-        public string functionName
+        public string FunctionName
         {
             get { return Id; }
-            set { Id = value; }
+            set
+            {
+                Id = value; 
+            }
         }
 
         public override string HelpTextLong
@@ -22,11 +26,15 @@ namespace hoTools.EaServices
             {
                 if (Function == null) return "";
                 return
-                    $"{"Script",10}: {ButtonText} / {Function.Owner.Name}:{Function.Name}\n{Description}\n{Help}";
+                    $"{"Script",-10}: '{ButtonText}' / {Function.Owner.Name}:{Function.Name}{Environment.NewLine}{Description}{Environment.NewLine}{Help}";
             }
 
         }
-
+        public ServicesConfigScript(int pos, string id, string buttonText)
+            : base(pos, id, buttonText)
+        {
+    
+        }
         public ServicesConfigScript(int pos, ScriptFunction function, string buttonText)
             : base(pos, $"{function.Owner.Name}:{function.Name}", buttonText)
         {

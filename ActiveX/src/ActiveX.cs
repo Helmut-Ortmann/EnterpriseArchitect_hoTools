@@ -14,7 +14,7 @@ using EAAddinFramework.Utils;
 
 using hoTools.Utils.SQL;
 using hoTools.Utils;
-using hoTools.Utils.Configuration;
+
 
 // ReSharper disable once CheckNamespace
 namespace hoTools.ActiveX
@@ -41,7 +41,7 @@ namespace hoTools.ActiveX
         Model _model;
 
         // Global Configuration as singleton
-        readonly HoToolsGlobalCfg _globalCfg = HoToolsGlobalCfg.Instance;
+        //readonly HoToolsGlobalCfg _globalCfg = HoToolsGlobalCfg.Instance;
 
 
         #region Generated
@@ -240,10 +240,10 @@ namespace hoTools.ActiveX
         /// </summary>
         private void ResizeRtfListOfChanges()
         {
-            rtfListOfSearches.Left = this.Left + 20;
-            rtfListOfSearches.Width = this.Width - 20;
+            rtfListOfSearches.Left = Left + 20;
+            rtfListOfSearches.Width = Width - 20;
             rtfListOfSearches.Top = _txtSearchName.Bottom + 50;
-            rtfListOfSearches.Height = this.Bottom - rtfListOfSearches.Top - 20;
+            rtfListOfSearches.Height = Bottom - rtfListOfSearches.Top - 20;
             rtfListOfSearches.BringToFront();
         }
 
@@ -2156,6 +2156,7 @@ namespace hoTools.ActiveX
 
             for (int pos = 0; pos < AddinSettings.ButtonsConfigSearch.Length; pos++)
             {
+                bool empty = false;
                 const string defaultHelptext = "Free Model Searches, Model Search not parametrized.";
                 string buttonText = "";
                 string helpText = defaultHelptext;
@@ -2163,7 +2164,11 @@ namespace hoTools.ActiveX
                 {
                     EaAddinShortcutSearch search = (EaAddinShortcutSearch)AddinSettings.ButtonsConfigSearch[pos];
                     {
-                        if (search.KeyText.Trim() != "")
+                        if (search.IsEmpty())
+                        {
+                            empty = true;
+                        }
+                        else
                         {
                             buttonText = search.KeyText;
                             helpText = search.HelpTextLong;
@@ -2174,22 +2179,27 @@ namespace hoTools.ActiveX
                 switch (pos)
                 {
                     case 0:
+                        _toolStripSearchBtn1.Visible = ! empty;
                         _toolStripSearchBtn1.Text = buttonText;
                         _toolStripSearchBtn1.ToolTipText = helpText;
                         break;
                     case 1:
+                        _toolStripSearchBtn2.Visible = !empty;
                         _toolStripSearchBtn2.Text = buttonText;
                         _toolStripSearchBtn2.ToolTipText = helpText;
                         break;
                     case 2:
+                        _toolStripSearchBtn3.Visible = !empty;
                         _toolStripSearchBtn3.Text = buttonText;
                         _toolStripSearchBtn3.ToolTipText = helpText;
                         break;
                     case 3:
+                        _toolStripSearchBtn4.Visible = !empty;
                         _toolStripSearchBtn4.Text = buttonText;
                         _toolStripSearchBtn4.ToolTipText = helpText;
                         break;
                     case 4:
+                        _toolStripSearchBtn5.Visible = !empty;
                         _toolStripSearchBtn5.Text = buttonText;
                         _toolStripSearchBtn5.ToolTipText = helpText;
                         break;
@@ -2199,6 +2209,9 @@ namespace hoTools.ActiveX
         }
         #endregion
         #region ParameterizeServiceButton
+        /// <summary>
+        /// Parameterize Service Buttons of Type Call or Script
+        /// </summary>
         public void ParameterizeServiceButton()
         {
             _toolStripServiceBtn1.Visible = AddinSettings.IsShowServiceButton;
@@ -2208,37 +2221,51 @@ namespace hoTools.ActiveX
             _toolStripServiceBtn5.Visible = AddinSettings.IsShowServiceButton;
             for (int pos = 0; pos < AddinSettings.ButtonsServiceConfig.Count; pos++)
             {
+                bool empty = false;
                 string buttonText = "";
                 string helpText = "free Service, Service not parametrized";
                 if (AddinSettings.ButtonsServiceConfig[pos] != null)
                 {
                     ServicesConfig serviceConfig = AddinSettings.ButtonsServiceConfig[pos];
-                    if (serviceConfig.ButtonText.Trim() != "")
+                    if (serviceConfig.IsEmpty())
+                    {
+                        empty = true;
+                    }
+                    else
                     {
                         buttonText = serviceConfig.ButtonText;
-                        helpText = $"{serviceConfig.HelpTextLong}"; //  Long Help text
+
+                        var servicesConfigCall = serviceConfig as ServicesConfigCall;
+                        helpText = servicesConfigCall != null 
+                            ? $"{servicesConfigCall.HelpTextLong}" 
+                            : $"{((ServicesConfigScript)serviceConfig).HelpTextLong}";
                     }
                 }
 
                 switch (pos)
                 {
                     case 0:
+                        _toolStripServiceBtn1.Visible = ! empty;
                         _toolStripServiceBtn1.Text = buttonText;
                         _toolStripServiceBtn1.ToolTipText = helpText;
                         break;
                     case 1:
+                        _toolStripServiceBtn2.Visible = !empty;
                         _toolStripServiceBtn2.Text = buttonText;
                         _toolStripServiceBtn2.ToolTipText = helpText;
                         break;
                     case 2:
+                        _toolStripServiceBtn3.Visible = !empty;
                         _toolStripServiceBtn3.Text = buttonText; 
                         _toolStripServiceBtn3.ToolTipText = helpText;
                         break;
                     case 3:
+                        _toolStripServiceBtn4.Visible = !empty;
                         _toolStripServiceBtn4.Text = buttonText; 
                         _toolStripServiceBtn4.ToolTipText = helpText;
                         break;
                     case 4:
+                        _toolStripServiceBtn5.Visible = !empty;
                         _toolStripServiceBtn5.Text = buttonText; 
                         _toolStripServiceBtn5.ToolTipText = helpText;
                         break;

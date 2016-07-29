@@ -18,6 +18,12 @@ namespace hoTools.EaServices
 
         public virtual string HelpTextLong { get;  }
 
+        public bool IsEmpty()
+        {
+            if (Id == ServiceEmpty || Id.Trim() == "" || ButtonText.Trim() == "") return true;
+            return false;
+        }
+
         public ServicesConfig(int pos, string id, string buttonText)
         {
             Init(pos, id, buttonText, "", "");
