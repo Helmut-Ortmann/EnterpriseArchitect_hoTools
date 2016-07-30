@@ -170,8 +170,8 @@ namespace hoTools.Settings
 
             // get all services of type Call and Script which are available 
             GetAllServices();
-            // update Searches and Services of type call
-            UpdateSearchesAndServices();
+            // update Services of type Call and Script
+            UpdateServices();
 
 
         }
@@ -1164,7 +1164,7 @@ namespace hoTools.Settings
         /// <para />- Method / Script / Search Name / SQL File name (absolute or relative to path)
         /// <para />- Tool tip
         /// </summary>
-        public void UpdateSearchesAndServices()
+        public void UpdateServices()
         {
             // all services of type Call or Script
             List<ServicesConfig> tempServiceConfig = new List<ServicesConfig>();
@@ -1312,7 +1312,7 @@ namespace hoTools.Settings
 
         }
         #endregion
-        #region getGlobalShortcutsSearch
+        #region getGlobalKeysSearch
         private List<GlobalKeysConfigSearch> GetKeysSearch()
         {
             var l = new List<GlobalKeysConfigSearch>();
@@ -1358,7 +1358,7 @@ namespace hoTools.Settings
                             var tooltip = configEntry.Value;
 
                             l.Add(new GlobalKeysConfigSearch(key, modifier1, modifier2, modifier3, modifier4, tooltip, 
-                                searchName, searchTerm));
+                                searchName, searchTerm:searchTerm));
                             break;
                     }
                 }

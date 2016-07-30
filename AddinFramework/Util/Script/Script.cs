@@ -133,7 +133,7 @@ namespace EAAddinFramework.Utils
                 //first add the included code
                 string includedCode = IncludeScripts(Code);
 
-                //then add the included code to the scriptcontroller
+                //then add the included code to the script controller
                 _scriptController.AddCode(includedCode);
                 //set the functions
                 foreach (Procedure procedure in _scriptController.Procedures)
@@ -520,6 +520,7 @@ namespace EAAddinFramework.Utils
             return returnValue;
 
         }
+
         /// <summary>
         /// executes the function with the given name
         /// </summary>
@@ -527,7 +528,13 @@ namespace EAAddinFramework.Utils
         /// <param name="parameters">the parameters needed by this function</param>
         /// <returns>whatever (if anything) the function returns</returns>
         internal object ExecuteFunction(string functionName, object[] parameters)
-            => _scriptController.Run(functionName, parameters);
+        {
+            //_scriptController.AddObject("rep", _model.Repository);
+            //_scriptController.AddObject("EAContextObject",parameters[0]);
+            //_scriptController.AddObject("EAObjectType", parameters[1]);
+            return _scriptController.Run(functionName, parameters);
+        }
+        
         /// <summary>
         /// executes the function with the given name
         /// </summary>

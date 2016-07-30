@@ -502,7 +502,7 @@ namespace hoTools.Settings.Key
             _addinControl.ParameterizeSearchButton(); // sets the shortcuts
             _addinControl.ParameterizeServiceButton(); // sets the shortcuts
 
-            _settings.UpdateSearchesAndServices(); // update dynamic informations like method, texts from configuration
+            _settings.UpdateServices(); // update dynamic informations like method, texts from configuration
             _settings.Save();
             Close();
 

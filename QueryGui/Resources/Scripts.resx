@@ -145,8 +145,8 @@ function hoDemoPrintContext(modelItem, objectType)
 	Dim s 
 	s = "hoDemoPrintContext: Context item is: '" + modelItem.Name + "' of type '" + itemType + "'"
     ' Output to EA			
-    rep.EnsureOutputVisible("Script") 
-	rep.WriteOutput "Script", s, 0
+    Repository.EnsureOutputVisible("Script") 
+	Repository.WriteOutput "Script", s, 0
 end function</value>
     <comment>Demo Script to show Query with Script functionality with 2 Parameters</comment>
   </data>
@@ -171,15 +171,19 @@ end function</value>
 function hoDemo3Parameter(ModelItem, ObjectType, Model)
    ' The EA default variable 'rep'
     'rep.ClearOutput("Script")
-    rep.EnsureOutputVisible("Script") 
+    Repository.EnsureOutputVisible("Script") 
 
     ' just output the parameters
-	rep.WriteOutput "Script","Par1: '"+ CStr(ObjectType) + "' Par2: '" + ModelItem.Name + "' Par3: '" + Model + "'",0
+	Repository.WriteOutput "Script","Par1: '"+ CStr(ObjectType) + "' Par2: '" + ModelItem.Name + "' Par3: '" + Model + "'",0
 	
 	' Get rep via Model object.
     set m = CreateObject("EAAddinFramework.Utils.Model")
+	if m is nothing Then
+	   Repository.WriteOutput "Script","Can't create object for 'EAAddinFramework.Utils.Model'",0
+	   Exit Function
+	end if
     ' Create new Model Object with the first running EA instance
-	set rep = m.rep
+	set rep = m.Repository
 	rep.EnsureOutputVisible("Script") 
 	rep.WriteOutput "Script","Par1: '"+ CStr(ObjectType) + "' Par2: '" + ModelItem.Name + "' Par3: '" + Model + "'",0
 	
@@ -228,6 +232,10 @@ sub hoDemoRunSql
 	
 	' Get Repository via Model object.
     set m = CreateObject("EAAddinFramework.Utils.Model")
+	if m is nothing Then
+	   Repository.WriteOutput "Script","Can't create object for 'EAAddinFramework.Utils.Model'",0
+	   Exit Function
+	end if
     ' Create new Model Object with the first running EA instance
 	set rep = m.Repository
 	rep.EnsureOutputVisible("Script") 

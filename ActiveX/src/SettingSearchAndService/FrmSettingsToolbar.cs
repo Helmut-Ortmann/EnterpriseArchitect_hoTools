@@ -331,7 +331,7 @@ namespace hoTools.Settings.Toolbar
             _addinControl.ParameterizeSearchButton(); // sets the EA Model Search Buttons on Toolbar
             _addinControl.ParameterizeServiceButton(); // sets the Services Buttons on Toolbar
 
-            _settings.UpdateSearchesAndServices(); // update dynamic informations like method, texts from configuration
+            _settings.UpdateServices(); // update dynamic informations like method, texts from configuration
 
             // Button support for Service and Search
             _settings.IsShortKeySupport = chkShowQueryButtons.Checked;

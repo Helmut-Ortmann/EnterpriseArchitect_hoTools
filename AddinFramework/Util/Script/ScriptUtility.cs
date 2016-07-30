@@ -23,7 +23,8 @@ namespace AddinFramework.Util
             {
                 case 2:
                     object[] par2 = { oContext, oType };
-                    return new ScriptFuntionWrapper(function).Execute(par2);
+                    new ScriptFuntionWrapper(function).Execute(par2);
+                    return true;
                 case 3:
                     object[] par3 = { oContext, oType, model };
                     return new ScriptFuntionWrapper(function).Execute(par3);
