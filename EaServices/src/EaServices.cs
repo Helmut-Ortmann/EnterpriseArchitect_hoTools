@@ -7,7 +7,6 @@ using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using System.Xml;
 using System.Xml.Linq;
 using EA;
 using hoTools.EaServices.Dlg;
@@ -258,7 +257,7 @@ namespace hoTools.EaServices
                         switch (type)
                         {
                             case "Element":
-                                EA.Element el = rep.GetElementByGuid(guid);
+                                Element el = rep.GetElementByGuid(guid);
                                 el.ReleaseUserLock();
                                 break;
                             case "Diagram":

@@ -48,7 +48,7 @@ namespace hoTools.EaServices
                 EA.ObjectType objectType = model.Repository.GetContextItemType();
                 object oContext = (object)model.Repository.GetContextObject();
 
-                ScriptUtility.RunScriptFunction(model, Function, objectType, oContext);
+                ScriptUtility.RunScriptFunction(model, Function,objectType, oContext);
 
             }
             return null;

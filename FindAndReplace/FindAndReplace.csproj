@@ -48,9 +48,8 @@
     <AssemblyOriginatorKeyFile>hoKeyPair.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Interop.EA, Version=2.10.238.1, Culture=neutral, PublicKeyToken=d28e1c76302f6a17, processorArchitecture=MSIL">
-      <HintPath>C:\Program Files (x86)\Sparx Systems\EA\Interop.EA.dll</HintPath>
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Interop.EA">
+      <HintPath>..\EA\Interop.EA.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="System" />
@@ -114,6 +113,7 @@
     <ProjectReference Include="..\EaServices\EaServices.csproj">
       <Project>{dfbedf5e-fc7f-4269-a0a6-f9b9e86dac90}</Project>
       <Name>EaServices</Name>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
     </ProjectReference>
     <ProjectReference Include="..\Util\Util.csproj">
       <Project>{9376680e-9420-4fc1-8de8-4311fca18efc}</Project>
