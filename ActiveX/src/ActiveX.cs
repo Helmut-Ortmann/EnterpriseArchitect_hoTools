@@ -478,9 +478,9 @@ namespace hoTools.ActiveX
             if (AddinSettings.ButtonsServiceConfig[pos] is ServicesConfigCall)
             {
 
-                var sh = (ServicesConfigCall) AddinSettings.ButtonsServiceConfig[pos];
-                if (sh.Method == null) return;
-                sh.Invoke(_model, _txtSearchText.Text);
+                var call = (ServicesConfigCall) AddinSettings.ButtonsServiceConfig[pos];
+                if (call.Method == null) return;
+                call.Invoke(_model, _txtSearchText.Text);
 
             }
             if (AddinSettings.ButtonsServiceConfig[pos] is ServicesConfigScript)
