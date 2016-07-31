@@ -412,50 +412,28 @@ namespace hoTools.Settings.Key
             _settings.IsShortKeySupport = chkShortKeySupport.Checked;
             _settings.SqlPaths = txtSqlSearchPath.Text;
 
-            #region store global services
-            // Global Services via hot key
-            _settings.GlobalKeysConfig[0].Key = cmbGlobalKeyService1Key.SelectedValue.ToString();
-            _settings.GlobalKeysConfig[0].Modifier1 = cmbGlobalKeyService1Mod1.SelectedValue.ToString();
-            _settings.GlobalKeysConfig[0].Modifier2 = cmbGlobalKeyService1Mod2.SelectedValue.ToString();
-            _settings.GlobalKeysConfig[0].Modifier3 = cmbGlobalKeyService1Mod3.SelectedValue.ToString();
-            _settings.GlobalKeysConfig[0].Modifier4 = cmbGlobalKeyService1Mod4.SelectedValue.ToString();
-            _settings.GlobalKeysConfig[0].Id = cmbGlobalKey1Service.SelectedValue.ToString();
-            _settings.GlobalKeysConfig[0].Description = cmbGlobalKey1Tooltip.Text;
+            SaveServices();
 
-            _settings.GlobalKeysConfig[1].Key = cmbGlobalKeyService2Key.SelectedValue.ToString();
-            _settings.GlobalKeysConfig[1].Modifier1 = cmbGlobalKeyService2Mod1.SelectedValue.ToString();
-            _settings.GlobalKeysConfig[1].Modifier2 = cmbGlobalKeyService2Mod2.SelectedValue.ToString();
-            _settings.GlobalKeysConfig[1].Modifier3 = cmbGlobalKeyService2Mod3.SelectedValue.ToString();
-            _settings.GlobalKeysConfig[1].Modifier4 = cmbGlobalKeyService2Mod4.SelectedValue.ToString();
-            _settings.GlobalKeysConfig[1].Id = cmbGlobalKey2Service.SelectedValue.ToString();
-            _settings.GlobalKeysConfig[1].Description = cmbGlobalKey2Tooltip.Text;
+            SaveSearch();
 
-            _settings.GlobalKeysConfig[2].Key = cmbGlobalKeyService3Key.SelectedValue.ToString();
-            _settings.GlobalKeysConfig[2].Modifier1 = cmbGlobalKeyService3Mod1.SelectedValue.ToString();
-            _settings.GlobalKeysConfig[2].Modifier2 = cmbGlobalKeyService3Mod2.SelectedValue.ToString();
-            _settings.GlobalKeysConfig[2].Modifier3 = cmbGlobalKeyService3Mod3.SelectedValue.ToString();
-            _settings.GlobalKeysConfig[2].Modifier4 = cmbGlobalKeyService3Mod4.SelectedValue.ToString();
-            _settings.GlobalKeysConfig[2].Id = cmbGlobalKey3Service.SelectedValue.ToString();
-            _settings.GlobalKeysConfig[2].Description = cmbGlobalKey3Tooltip.Text;
+            _addinControl.ParameterizeMenusAndButtons(); // hide / unhide Menus & Buttons
 
-            _settings.GlobalKeysConfig[3].Key = cmbGlobalKeyService4Key.SelectedValue.ToString();
-            _settings.GlobalKeysConfig[3].Modifier1 = cmbGlobalKeyService4Mod1.SelectedValue.ToString();
-            _settings.GlobalKeysConfig[3].Modifier2 = cmbGlobalKeyService4Mod2.SelectedValue.ToString();
-            _settings.GlobalKeysConfig[3].Modifier3 = cmbGlobalKeyService4Mod3.SelectedValue.ToString();
-            _settings.GlobalKeysConfig[3].Modifier4 = cmbGlobalKeyService4Mod4.SelectedValue.ToString();
-            _settings.GlobalKeysConfig[3].Id = cmbGlobalKey4Service.SelectedValue.ToString();
-            _settings.GlobalKeysConfig[3].Description = cmbGlobalKey4Tooltip.Text;
+            _settings.UpdateKeysAndToolbarsServices(); // update dynamic informations like method, texts from configuration
 
-            _settings.GlobalKeysConfig[4].Key = cmbGlobalKeyService5Key.SelectedValue.ToString();
-            _settings.GlobalKeysConfig[4].Modifier1 = cmbGlobalKeyService5Mod1.SelectedValue.ToString();
-            _settings.GlobalKeysConfig[4].Modifier2 = cmbGlobalKeyService5Mod2.SelectedValue.ToString();
-            _settings.GlobalKeysConfig[4].Modifier3 = cmbGlobalKeyService5Mod3.SelectedValue.ToString();
-            _settings.GlobalKeysConfig[4].Modifier4 = cmbGlobalKeyService5Mod4.SelectedValue.ToString();
-            _settings.GlobalKeysConfig[4].Id = cmbGlobalKey5Service.SelectedValue.ToString();
-            _settings.GlobalKeysConfig[4].Description = cmbGlobalKey5Tooltip.Text;
-            #endregion
+            _addinControl.ParameterizeToolbarSearchButton(); // sets the SearchButtoms
+            _addinControl.ParameterizeToolbarServiceButton(); // sets the ServiceButtons
 
-            #region store global searches
+
+            _settings.Save();
+            Close();
+
+        }
+        #region SaveSearch
+        /// <summary>
+        /// Save Search to settings
+        /// </summary>
+        private void SaveSearch()
+        {
             // Global Searches via hot key
             _settings.GlobalKeysConfigSearch[0].Key = cmbGlobalKeySearch1Key.SelectedValue.ToString();
             _settings.GlobalKeysConfigSearch[0].Modifier1 = cmbGlobalKeySearch1Mod1.SelectedValue.ToString();
@@ -496,17 +474,62 @@ namespace hoTools.Settings.Key
             _settings.GlobalKeysConfigSearch[4].Modifier4 = cmbGlobalKeySearch5Mod4.SelectedValue.ToString();
             _settings.GlobalKeysConfigSearch[4].SearchName = cmbGlobalKeySearch5SearchName.Text;
             _settings.GlobalKeysConfigSearch[4].SearchTerm = cmbGlobalKeySearch5SearchTerm.Text;
-            #endregion
 
-            _addinControl.ParameterizeMenusAndButtons(); // hide / unhide Menus & Buttons
-            _addinControl.ParameterizeSearchButton(); // sets the shortcuts
-            _addinControl.ParameterizeServiceButton(); // sets the shortcuts
-
-            _settings.UpdateServices(); // update dynamic informations like method, texts from configuration
-            _settings.Save();
-            Close();
 
         }
+        #endregion
+        #region Save Services
+        /// <summary>
+        /// Save Services to settings
+        /// </summary>
+        private void SaveServices()
+        {
+
+
+            // Global Services via hot key
+            _settings.GlobalKeysConfig[0].Key = cmbGlobalKeyService1Key.SelectedValue.ToString();
+            _settings.GlobalKeysConfig[0].Modifier1 = cmbGlobalKeyService1Mod1.SelectedValue.ToString();
+            _settings.GlobalKeysConfig[0].Modifier2 = cmbGlobalKeyService1Mod2.SelectedValue.ToString();
+            _settings.GlobalKeysConfig[0].Modifier3 = cmbGlobalKeyService1Mod3.SelectedValue.ToString();
+            _settings.GlobalKeysConfig[0].Modifier4 = cmbGlobalKeyService1Mod4.SelectedValue.ToString();
+            _settings.GlobalKeysConfig[0].Id = cmbGlobalKey1Service.SelectedValue.ToString();
+            _settings.GlobalKeysConfig[0].Description = cmbGlobalKey1Tooltip.Text;
+
+            _settings.GlobalKeysConfig[1].Key = cmbGlobalKeyService2Key.SelectedValue.ToString();
+            _settings.GlobalKeysConfig[1].Modifier1 = cmbGlobalKeyService2Mod1.SelectedValue.ToString();
+            _settings.GlobalKeysConfig[1].Modifier2 = cmbGlobalKeyService2Mod2.SelectedValue.ToString();
+            _settings.GlobalKeysConfig[1].Modifier3 = cmbGlobalKeyService2Mod3.SelectedValue.ToString();
+            _settings.GlobalKeysConfig[1].Modifier4 = cmbGlobalKeyService2Mod4.SelectedValue.ToString();
+            _settings.GlobalKeysConfig[1].Id = cmbGlobalKey2Service.SelectedValue.ToString();
+            _settings.GlobalKeysConfig[1].Description = cmbGlobalKey2Tooltip.Text;
+
+            _settings.GlobalKeysConfig[2].Key = cmbGlobalKeyService3Key.SelectedValue.ToString();
+            _settings.GlobalKeysConfig[2].Modifier1 = cmbGlobalKeyService3Mod1.SelectedValue.ToString();
+            _settings.GlobalKeysConfig[2].Modifier2 = cmbGlobalKeyService3Mod2.SelectedValue.ToString();
+            _settings.GlobalKeysConfig[2].Modifier3 = cmbGlobalKeyService3Mod3.SelectedValue.ToString();
+            _settings.GlobalKeysConfig[2].Modifier4 = cmbGlobalKeyService3Mod4.SelectedValue.ToString();
+            _settings.GlobalKeysConfig[2].Id = cmbGlobalKey3Service.SelectedValue.ToString();
+            _settings.GlobalKeysConfig[2].Description = cmbGlobalKey3Tooltip.Text;
+
+            _settings.GlobalKeysConfig[3].Key = cmbGlobalKeyService4Key.SelectedValue.ToString();
+            _settings.GlobalKeysConfig[3].Modifier1 = cmbGlobalKeyService4Mod1.SelectedValue.ToString();
+            _settings.GlobalKeysConfig[3].Modifier2 = cmbGlobalKeyService4Mod2.SelectedValue.ToString();
+            _settings.GlobalKeysConfig[3].Modifier3 = cmbGlobalKeyService4Mod3.SelectedValue.ToString();
+            _settings.GlobalKeysConfig[3].Modifier4 = cmbGlobalKeyService4Mod4.SelectedValue.ToString();
+            _settings.GlobalKeysConfig[3].Id = cmbGlobalKey4Service.SelectedValue.ToString();
+            _settings.GlobalKeysConfig[3].Description = cmbGlobalKey4Tooltip.Text;
+
+            _settings.GlobalKeysConfig[4].Key = cmbGlobalKeyService5Key.SelectedValue.ToString();
+            _settings.GlobalKeysConfig[4].Modifier1 = cmbGlobalKeyService5Mod1.SelectedValue.ToString();
+            _settings.GlobalKeysConfig[4].Modifier2 = cmbGlobalKeyService5Mod2.SelectedValue.ToString();
+            _settings.GlobalKeysConfig[4].Modifier3 = cmbGlobalKeyService5Mod3.SelectedValue.ToString();
+            _settings.GlobalKeysConfig[4].Modifier4 = cmbGlobalKeyService5Mod4.SelectedValue.ToString();
+            _settings.GlobalKeysConfig[4].Id = cmbGlobalKey5Service.SelectedValue.ToString();
+            _settings.GlobalKeysConfig[4].Description = cmbGlobalKey5Tooltip.Text;
+
+            #endregion
+        }
+
         #endregion
 
         void btnCancel_Click(object sender, EventArgs e)

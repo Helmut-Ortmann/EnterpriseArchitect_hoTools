@@ -171,7 +171,7 @@ namespace hoTools.Settings
             // get all services of type Call and Script which are available 
             GetAllServices();
             // update Services of type Call and Script
-            UpdateServices();
+            UpdateKeysAndToolbarsServices();
 
 
         }
@@ -999,7 +999,6 @@ namespace hoTools.Settings
                 HistorySqlFiles.Save();
                 LastOpenedFiles.Save();
                 CurrentConfig.Save();
-                CurrentConfig.Save();
             }
             catch (Exception e)
             {
@@ -1155,38 +1154,98 @@ namespace hoTools.Settings
             AllServices.Sort(new Service.ServicesDescriptionComparer());
         }
         #endregion
-        #region updateSearchesAndServices
+        #region UpdateKeysAndToolbarsServices
         /// <summary>
-        /// Update the services (Call Service or run Script) and searches for:
+        /// Update the subclasses services (Call Service or run Script)  for:
         /// <para />- Buttons
         /// <para />- Global keys / global shortcuts / keyboard keys
         /// <para />by 
-        /// <para />- Method / Script / Search Name / SQL File name (absolute or relative to path)
+        /// <para />- Method / Script 
         /// <para />- Tool tip
+        /// <para />- Subclasses
         /// </summary>
-        public void UpdateServices()
+        public void UpdateKeysAndToolbarsServices()
+        {
+            UpdateToolbarServiceButtons();
+
+
+            UpdateKeysService();
+        }
+
+        /// <summary>
+        /// Update then global keys service for Call and Script.
+        /// <para/> Helptext, subservices
+        /// </summary>
+        private void UpdateKeysService()
+        {
+            List<GlobalKeysConfig> tempGlobalKeysConfig = new List<GlobalKeysConfig>();
+            // over all configured services
+            foreach (GlobalKeysConfig service in GlobalKeysConfig)
+            {
+                // Empty service
+                if (service.Id == ServicesConfig.ServiceEmpty || service.Id.Trim() == "")
+                {
+                    var serviceCall = new GlobalKeysConfig(service.Id,
+                        service.Key, service.Modifier1, service.Modifier2, service.Modifier3, service.Modifier4,
+                        "", "");
+                    tempGlobalKeysConfig.Add(serviceCall);
+                }
+                else
+                {
+                    // over all possible services
+                    foreach (Service s in AllServices)
+                    {
+                        if (service.Id == s.Id)
+                        {
+                            if (s is ServiceCall)
+                            {
+                                ServiceCall sCall = s as ServiceCall;
+                                var serviceCall = new GlobalKeysConfigService(service.Key, service.Modifier1, service.Modifier2,
+                                    service.Modifier3, service.Modifier4,
+                                    sCall.Help, sCall.Method, sCall.Id, sCall.Description, false);
+                                tempGlobalKeysConfig.Add(serviceCall);
+                                break;
+                            }
+                            if (s is ServiceScript)
+                            {
+                                ServiceScript sScript = (ServiceScript) s;
+                                var serviceScript = new GlobalKeysConfigScript(service.Key, service.Modifier1, service.Modifier2,
+                                    service.Modifier3, service.Modifier4,
+                                    sScript.Function, sScript.Description, sScript.Help);
+                                tempGlobalKeysConfig.Add(serviceScript);
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+            GlobalKeysConfig = tempGlobalKeysConfig;
+        }
+
+        private void UpdateToolbarServiceButtons()
         {
             // all services of type Call or Script
-            List<ServicesConfig> tempServiceConfig = new List<ServicesConfig>();
+            List<ServicesConfig> tempButtonsServiceConfig = new List<ServicesConfig>();
             foreach (ServicesConfig service in ButtonsServiceConfig)
             {
                 // Real service or just empty service
                 if (service.Id == ServicesConfig.ServiceEmpty || service.Id.Trim() == "")
                 {
                     var serviceCall = new ServicesConfig(service.Pos, service.Id, service.ButtonText);
-                    tempServiceConfig.Add(serviceCall);
+                    tempButtonsServiceConfig.Add(serviceCall);
                 }
                 else
                 {
                     //int index = allServices.BinarySearch(new EaServices.ServiceCall(null, service.Id, "","", false), new EaServices.ServicesCallGUIDComparer());
-                    foreach (Service s in AllServices) {
-                       if (s is ServiceCall)
+                    foreach (Service s in AllServices)
+                    {
+                        if (s is ServiceCall)
                         {
                             ServiceCall sCall = s as ServiceCall;
                             if (service.Id == sCall.Id)
                             {
                                 var serviceCall = new ServicesConfigCall(service.Pos, service.Id, service.ButtonText);
-                                tempServiceConfig.Add(serviceCall);
+                                tempButtonsServiceConfig.Add(serviceCall);
                                 serviceCall.Method = sCall.Method;
                                 serviceCall.Help = sCall.Help;
                                 serviceCall.Description = sCall.Description;
@@ -1200,68 +1259,19 @@ namespace hoTools.Settings
                             {
                                 //int pos, ScriptFunction function, string buttonText
                                 var serviceScript = new ServicesConfigScript(service.Pos, service.Id, service.ButtonText);
-                                tempServiceConfig.Add(serviceScript);
+                                tempButtonsServiceConfig.Add(serviceScript);
                                 serviceScript.Function = sScript.Function;
-                                serviceScript.Help  = sScript.Help;
+                                serviceScript.Help = sScript.Help;
                                 serviceScript.Description = sScript.Description;
                                 break;
                             }
-
                         }
                     }
-                    
                 }
-
             }
-            ButtonsServiceConfig = tempServiceConfig;
-
-
-            List<GlobalKeysConfig> tempGlobalKeysConfig = new List<GlobalKeysConfig>();
-            // over all configured services
-            foreach (GlobalKeysConfig service in GlobalKeysConfig)
-            {
-                // Empty service
-                if (service.Id == ServicesConfig.ServiceEmpty || service.Id.Trim() == "")
-                {
-                    var serviceCall = new GlobalKeysConfig(service.Id, 
-                        service.Key, service.Modifier1, service.Modifier2, service.Modifier3, service.Modifier4,
-                        "","");
-                    tempGlobalKeysConfig.Add(serviceCall);
-                }
-                else
-                {
-                    
-                    // over all possible services
-                    foreach (Service s in AllServices) {
-                        if (service.Id == s.Id)
-                        {
-                                if (s is ServiceCall)
-                                {
-                                     ServiceCall sCall = s as ServiceCall;
-                                     var serviceCall = new GlobalKeysConfigService(service.Key, service.Modifier1, service.Modifier2, service.Modifier3, service.Modifier4,
-                                         sCall.Help, sCall.Method, sCall.Id, sCall.Description, false);
-                                      tempGlobalKeysConfig.Add(serviceCall);
-                                      break;
-                                }
-                                if (s is ServiceScript)
-                                {
-                                       ServiceScript sScript = (ServiceScript)s;
-                                       var serviceScript = new GlobalKeysConfigScript(service.Key, service.Modifier1, service.Modifier2, service.Modifier3, service.Modifier4,
-                                       sScript.Function, sScript.Description, sScript.Help);
-                                       tempGlobalKeysConfig.Add(serviceScript);
-                                break;
-
-                                }
-
-                        }
-                        
-                    }
-
-                }
-
-            }
-            GlobalKeysConfig = tempGlobalKeysConfig;
+            ButtonsServiceConfig = tempButtonsServiceConfig;
         }
+
         #endregion
         #region getGlobalShortcutsService
         /// <summary>

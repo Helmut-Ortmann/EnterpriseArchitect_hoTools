@@ -328,10 +328,13 @@ namespace hoTools.Settings.Toolbar
             #endregion
 
             _addinControl.ParameterizeMenusAndButtons(); // hide / unhide Menus & Buttons
-            _addinControl.ParameterizeSearchButton(); // sets the EA Model Search Buttons on Toolbar
-            _addinControl.ParameterizeServiceButton(); // sets the Services Buttons on Toolbar
+                                                         // Toolbar
+            _settings.UpdateKeysAndToolbarsServices(); // update dynamic informations like method, texts from configuration
 
-            _settings.UpdateServices(); // update dynamic informations like method, texts from configuration
+            _addinControl.ParameterizeToolbarSearchButton(); // sets the EA Model Search Buttons on Toolbar
+            _addinControl.ParameterizeToolbarServiceButton(); // sets the Services Buttons on Toolbar
+
+
 
             // Button support for Service and Search
             _settings.IsShortKeySupport = chkShowQueryButtons.Checked;

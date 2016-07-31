@@ -90,10 +90,10 @@
     <Compile Include="src\GlobalKeysConfigScript.cs" />
     <Compile Include="src\GlobalKeysConfigSearch.cs" />
     <Compile Include="src\GlobalKeysConfigService.cs" />
-    <Compile Include="src\SettingSearchAndService\FrmSettingsToolbar.cs">
+    <Compile Include="src\SettingToolbar\FrmSettingsToolbar.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="src\SettingSearchAndService\FrmSettingsToolbar.Designer.cs">
+    <Compile Include="src\SettingToolbar\FrmSettingsToolbar.Designer.cs">
       <DependentUpon>FrmSettingsToolbar.cs</DependentUpon>
     </Compile>
     <Compile Include="src\SettingsQuery\FrmQueryAndScript.cs">
@@ -139,7 +139,7 @@
     <EmbeddedResource Include="src\dlgUser.resx">
       <DependentUpon>dlgUser.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="src\SettingSearchAndService\FrmSettingsToolbar.resx">
+    <EmbeddedResource Include="src\SettingToolbar\FrmSettingsToolbar.resx">
       <DependentUpon>FrmSettingsToolbar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="src\SettingsQuery\FrmQueryAndScript.resx">

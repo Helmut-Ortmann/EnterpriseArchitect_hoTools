@@ -221,9 +221,9 @@ namespace hoTools.ActiveX
 
             ParameterizeMenusAndButtons();
             // parameterize 5 Buttons to quickly run search
-            ParameterizeSearchButton();
+            ParameterizeToolbarSearchButton();
             // parameterize 5 Buttons to quickly run services
-            ParameterizeServiceButton();
+            ParameterizeToolbarServiceButton();
             //
             //_txtSearchName.DataSource = _globalCfg.getListFileCompleteName();
 
@@ -2146,7 +2146,7 @@ namespace hoTools.ActiveX
         /// <para/>- Search Name
         /// <para/>- Search Tooltip
         /// </summary>
-        public void ParameterizeSearchButton()
+        public void ParameterizeToolbarSearchButton()
         {
             _toolStripSearchBtn1.Visible = AddinSettings.IsShowQueryButton;
             _toolStripSearchBtn2.Visible = AddinSettings.IsShowQueryButton;
@@ -2208,11 +2208,12 @@ namespace hoTools.ActiveX
             }
         }
         #endregion
-        #region ParameterizeServiceButton
+        #region ParameterizeToolbarServiceButtons
         /// <summary>
-        /// Parameterize Service Buttons of Type Call or Script
+        /// Parameterize Service Toolbar Buttons of Type Call or Script.
+        /// Prerequisite:
         /// </summary>
-        public void ParameterizeServiceButton()
+        public void ParameterizeToolbarServiceButton()
         {
             _toolStripServiceBtn1.Visible = AddinSettings.IsShowServiceButton;
             _toolStripServiceBtn2.Visible = AddinSettings.IsShowServiceButton;
