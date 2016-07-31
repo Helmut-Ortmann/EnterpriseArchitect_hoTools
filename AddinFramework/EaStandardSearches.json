@@ -1,6 +1,7 @@
 ﻿[
     /* 
-    * *.jso configuration file for EA Searches
+    * *.json configuration file for EA Searches
+    * 2016-07-31     Updated EA Standard Searches.
     * Name:          Name of the search
     * Description:   Description, possible use as tooltip
     * Category:      MDG-ID, Category of EA Model Search Window
@@ -125,7 +126,7 @@
         "Category": "EADiagram",
         "Favorite": "true"
     },
-       
+
     /* Tests and Verifications */
     {
         "Name": "Failed Internal Tests",
