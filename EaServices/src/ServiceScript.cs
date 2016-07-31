@@ -1,4 +1,5 @@
 ﻿using System;
+using AddinFramework.Util.Script;
 using EAAddinFramework.Utils;
 
 namespace hoTools.EaServices

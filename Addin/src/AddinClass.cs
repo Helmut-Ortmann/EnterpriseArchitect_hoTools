@@ -63,7 +63,7 @@ namespace hoTools
 
         // static due to global key definitions
         // ReSharper disable once InconsistentNaming
-        static EA.Repository _Repository ;
+        //private static EA.Repository _Repository ;
         // ReSharper disable once InconsistentNaming
         static AddinSettings _AddinSettings;
         // ReSharper disable once InconsistentNaming
@@ -81,7 +81,7 @@ namespace hoTools
         QueryGui _scriptGui;
         QueryGui _queryGui;
 
-        static Model _Model;        // to run SQL query file from global key
+        private static Model _model;        // to run SQL query file from global key
 
 
         // settings
@@ -297,7 +297,7 @@ namespace hoTools
                 
                     GlobalKeysConfigSearch sh = _AddinSettings.GlobalKeysConfigSearch[pos];
                     if (sh.SearchName == "") return;
-                    _Model.SearchRun(sh.SearchName, sh.SearchTerm);
+                    _model.SearchRun(sh.SearchName, sh.SearchTerm);
                     
             }
             /// <summary>
@@ -311,13 +311,13 @@ namespace hoTools
                 {
                     GlobalKeysConfigService keyConfigService = keyConfig as GlobalKeysConfigService;
                     if (keyConfigService.Method == null) return;
-                    keyConfigService.Invoke(_Model, _AddinControlGui.GetText());
+                    keyConfigService.Invoke(_model, _AddinControlGui.GetText());
                 }
                 if (keyConfig is GlobalKeysConfigScript)
                 {
                     GlobalKeysConfigScript keyConfigScript= keyConfig as GlobalKeysConfigScript;
                     if (keyConfigScript.ScriptFunction == null) return;
-                    keyConfigScript.Invoke(_Model);
+                    keyConfigScript.Invoke(_model);
                 }
             }
 
@@ -391,7 +391,6 @@ namespace hoTools
             // gets the file 'AssemblyFileVersion' of file AddinClass.dll
             string productVersion = FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).ProductVersion;
             _release = productVersion;
-            _Repository = repository;
             _repository = repository;
             ShowAddinControlWindows();
 
@@ -575,9 +574,8 @@ namespace hoTools
         {
             if (rep == null) return;
             _repository = rep;
-            _Repository = rep;
-            _Model = new Model(rep);
-            _addinSettings.UpdateModel(_Model);
+            _model = new Model(rep);
+            _addinSettings.UpdateModel(_model);
             try
             {
                 if (_myControlGui != null) _myControlGui.Repository = rep;

@@ -13,11 +13,13 @@ using System.IO;
 using System.Net;
 using System.Reflection;
 using System.Xml;
+using AddinFramework.Util.Script;
 using Microsoft.Win32;
 using MSScriptControl;
 //using EAWrappers = TSF.UmlToolingFramework.Wrappers.EA;
 
 
+// ReSharper disable once CheckNamespace
 namespace EAAddinFramework.Utils
 {
     /// <summary>
@@ -126,7 +128,9 @@ namespace EAAddinFramework.Utils
             //create new script controller
             _scriptController = new ScriptControl();
             _scriptController.Language = _language.Name;
+            // Objects available in Script
             _scriptController.AddObject("Repository", _model.Repository);
+            _scriptController.AddObject("EAModel", _model);
             //Add the actual code. This must be done in a try/catch because a syntax error in the script will result in an exception from AddCode
             try
             {

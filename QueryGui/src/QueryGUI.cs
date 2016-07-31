@@ -13,7 +13,10 @@ using hoTools.Settings;
 using hoTools.EaServices;
 using System.Resources;
 
-using System.Reflection; // Resource Manager
+using System.Reflection;
+using AddinFramework.Util.Script;
+
+// Resource Manager
 
 
 
@@ -194,7 +197,7 @@ namespace hoTools.Query
                 // don't show Script container
                 splitContainer.Panel2Collapsed = true;
                 // don't show Menu item LoadScripts
-                loadStandardScriptsToolStripMenuItem.Visible = false;
+                //loadStandardScriptsToolStripMenuItem.Visible = false;
             }
             else // run for Script (includes SQL / Query)
             {

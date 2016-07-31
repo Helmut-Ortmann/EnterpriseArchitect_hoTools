@@ -6,11 +6,11 @@
  * 
  * To change this template use Tools | Options | Coding | Edit Standard Headers.
  */
+
 using System;
 using MSScriptControl;
 
-
-namespace EAAddinFramework.Utils
+namespace AddinFramework.Util.Script
 {
 	/// <summary>
 	/// Description of ScriptFunction.
@@ -18,7 +18,7 @@ namespace EAAddinFramework.Utils
 	/// </summary>
 	public class ScriptFunction
 	{
-		public Script Owner { get; }
+		public EAAddinFramework.Utils.Script Owner { get; }
         public string Name => Procedure.Name;
         public string FullName => Owner.Name + "." + Procedure.Name;
         public int NumberOfParameters => Procedure.NumArgs;
@@ -29,7 +29,7 @@ namespace EAAddinFramework.Utils
         /// </summary>
         /// <param name="owner">Script</param>
         /// <param name="procedure">Function</param>
-        public ScriptFunction(Script owner, Procedure procedure)
+        public ScriptFunction(EAAddinFramework.Utils.Script owner, Procedure procedure)
 		{
 			Owner = owner;
 			Procedure = procedure;

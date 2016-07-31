@@ -3,6 +3,7 @@
  */
 using System;
 using System.Reflection;
+using AddinFramework.Util.Script;
 
 namespace EAAddinFramework.Utils
 {

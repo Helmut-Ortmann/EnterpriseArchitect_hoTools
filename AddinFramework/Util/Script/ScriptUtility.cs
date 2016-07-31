@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using AddinFramework.Util.Script;
 using EAAddinFramework.Utils;
 
 namespace AddinFramework.Util

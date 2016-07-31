@@ -9,6 +9,7 @@ using hoTools.Connectors;
 using System.Collections.Generic;
 using Control.EaAddinShortcuts;
 using System.Text.RegularExpressions;
+using AddinFramework.Util.Script;
 using EAAddinFramework.Utils;
 using GlobalHotkeys;
 

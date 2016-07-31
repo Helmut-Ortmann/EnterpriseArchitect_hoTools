@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Xml.Linq;
 using AddinFramework.Util;
+using AddinFramework.Util.Script;
 using EAAddinFramework.Utils;
 
 namespace hoTools.Query
