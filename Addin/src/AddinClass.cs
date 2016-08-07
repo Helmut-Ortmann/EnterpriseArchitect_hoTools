@@ -420,33 +420,33 @@ namespace hoTools
             switch (dia.Type)
             {
                 case "Activity":
-                    return UpdateLineStyle(rep, dia, connectorId, _addinSettings.ActivityLineStyle.Substring(0, 2));
+                    return UpdateLineStyle(rep, dia, connectorId, _addinSettings.ActivityLineStyle);
 
 
                 case "Statechart":
-                    return UpdateLineStyle(rep, dia, connectorId, _addinSettings.StatechartLineStyle.Substring(0, 2));
+                    return UpdateLineStyle(rep, dia, connectorId, _addinSettings.StatechartLineStyle);
 
                 case "Logical":
-                    return UpdateLineStyle(rep, dia, connectorId, _addinSettings.ClassLineStyle.Substring(0, 2));
+                    return UpdateLineStyle(rep, dia, connectorId, _addinSettings.ClassLineStyle);
 
 
                 case "Custom":
-                    return UpdateLineStyle(rep, dia, connectorId, _addinSettings.CustomLineStyle.Substring(0, 2));
+                    return UpdateLineStyle(rep, dia, connectorId, _addinSettings.CustomLineStyle);
 
                 case "Component":
-                    return UpdateLineStyle(rep, dia, connectorId, _addinSettings.ComponentLineStyle.Substring(0, 2));
+                    return UpdateLineStyle(rep, dia, connectorId, _addinSettings.ComponentLineStyle);
 
                 case "Deployment":
-                    return UpdateLineStyle(rep, dia, connectorId, _addinSettings.DeploymentLineStyle.Substring(0, 2));
+                    return UpdateLineStyle(rep, dia, connectorId, _addinSettings.DeploymentLineStyle);
 
                 case "Package":
-                    return UpdateLineStyle(rep, dia, connectorId, _addinSettings.PackageLineStyle.Substring(0, 2));
+                    return UpdateLineStyle(rep, dia, connectorId, _addinSettings.PackageLineStyle);
 
                 case "Use Case":
-                    return UpdateLineStyle(rep, dia, connectorId, _addinSettings.UseCaseLineStyle.Substring(0, 2));
+                    return UpdateLineStyle(rep, dia, connectorId, _addinSettings.UseCaseLineStyle);
 
                 case "CompositeStructure":
-                    return UpdateLineStyle(rep, dia, connectorId, _addinSettings.CompositeStructureLineStyle.Substring(0, 2));
+                    return UpdateLineStyle(rep, dia, connectorId, _addinSettings.CompositeStructureLineStyle);
 
                 default:
                     return false;

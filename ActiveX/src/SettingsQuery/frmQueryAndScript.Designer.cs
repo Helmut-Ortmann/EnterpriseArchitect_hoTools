@@ -48,10 +48,11 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txtSqlSearchPath = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.txtAddinTabToFirstActivate = new System.Windows.Forms.TextBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.label12 = new System.Windows.Forms.Label();
-            this.txtAddinTabToFirstActivate = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
+            this.checkRookie = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -59,7 +60,7 @@
             // btnOk
             // 
             this.btnOk.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnOk.Location = new System.Drawing.Point(26, 370);
+            this.btnOk.Location = new System.Drawing.Point(29, 427);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(105, 31);
             this.btnOk.TabIndex = 0;
@@ -70,7 +71,7 @@
             // btnCancel
             // 
             this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancel.Location = new System.Drawing.Point(147, 370);
+            this.btnCancel.Location = new System.Drawing.Point(140, 427);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(105, 31);
             this.btnCancel.TabIndex = 1;
@@ -258,6 +259,16 @@
         "aths hoTools searches for the SQL query to execute.\r\n\r\nLike: c:\\temp\\sql;d:\\temp" +
         "\\sql");
             // 
+            // txtAddinTabToFirstActivate
+            // 
+            this.txtAddinTabToFirstActivate.Location = new System.Drawing.Point(237, 288);
+            this.txtAddinTabToFirstActivate.Name = "txtAddinTabToFirstActivate";
+            this.txtAddinTabToFirstActivate.Size = new System.Drawing.Size(260, 20);
+            this.txtAddinTabToFirstActivate.TabIndex = 248;
+            this.toolTip1.SetToolTip(this.txtAddinTabToFirstActivate, "Define your Addin Tab Name to visualize first\r\n- \"\" EA decides\r\n- \"hoTools\"\r\n- \"S" +
+        "QL\"\r\n- \"Script\"\r\n- \"your favorible Addin\"\r\n\r\nLeave it blank if you want EA to de" +
+        "cide. ");
+            // 
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
@@ -272,16 +283,6 @@
             this.label12.TabIndex = 249;
             this.label12.Text = "(hoTools, SQL, Script, ..)";
             // 
-            // txtAddinTabToFirstActivate
-            // 
-            this.txtAddinTabToFirstActivate.Location = new System.Drawing.Point(237, 288);
-            this.txtAddinTabToFirstActivate.Name = "txtAddinTabToFirstActivate";
-            this.txtAddinTabToFirstActivate.Size = new System.Drawing.Size(260, 20);
-            this.txtAddinTabToFirstActivate.TabIndex = 248;
-            this.toolTip1.SetToolTip(this.txtAddinTabToFirstActivate, "Define your Addin Tab Name to visualize first\r\n- \"\" EA decides\r\n- \"hoTools\"\r\n- \"S" +
-        "QL\"\r\n- \"Script\"\r\n- \"your favorible Addin\"\r\n\r\nLeave it blank if you want EA to de" +
-        "cide. ");
-            // 
             // label11
             // 
             this.label11.AutoSize = true;
@@ -292,12 +293,26 @@
             this.label11.TabIndex = 247;
             this.label11.Text = "Addin Tab Name to select first";
             // 
+            // checkRookie
+            // 
+            this.checkRookie.AutoSize = true;
+            this.checkRookie.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkRookie.Location = new System.Drawing.Point(32, 347);
+            this.checkRookie.Name = "checkRookie";
+            this.checkRookie.Size = new System.Drawing.Size(75, 22);
+            this.checkRookie.TabIndex = 250;
+            this.checkRookie.Text = "Rookie";
+            this.toolTip1.SetToolTip(this.checkRookie, "Not all tooltips are available. Currently it supresses:\r\n- List of all macros in " +
+        "SQL Text fiels (for me it\'s annoying)");
+            this.checkRookie.UseVisualStyleBackColor = true;
+            // 
             // FrmQueryAndScript
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(716, 494);
+            this.Controls.Add(this.checkRookie);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.txtAddinTabToFirstActivate);
             this.Controls.Add(this.label11);
@@ -347,5 +362,6 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox txtAddinTabToFirstActivate;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.CheckBox checkRookie;
     }
 }
