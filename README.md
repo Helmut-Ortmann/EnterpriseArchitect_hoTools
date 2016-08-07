@@ -114,13 +114,16 @@ Some features:
       - Double Click in find starts Search
 ## Release 2.0.7
     
-## Not yet scheduled 
 - Global Keys with possible start Script (VBScript, JavaScript, JScript)
 - Toolbar with possible start Script (VBScript, JavaScript, JScript)
+- Fix: Automatic linestyle: Linestyles of a length of 1 leads to Exception
+
+## Not yet scheduled 
 - Search Management (for Quick Search)
   - Enable Category (Settings)
   - Favorites (configuration via JSON)
   - EA Standard Searches (configurable via JSON, my EA Standard Searches) 
+
 
 
 # Bugfixes
