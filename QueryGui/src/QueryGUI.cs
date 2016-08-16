@@ -180,9 +180,13 @@ namespace hoTools.Query
             {
                 components = new System.ComponentModel.Container();
             }
-            _sqlTabCntrls = new SqlTabPagesCntrl(Model, AddinSettings, components, tabControlSql, txtSearchTerm,
-                _newTabFromRecentToolStripMenuItem, 
-                _loadTabFromRecentToolStripMenuItem, _addinTabName);
+            // the sql tabulators might already be available
+            if (_sqlTabCntrls == null)
+            {
+                _sqlTabCntrls = new SqlTabPagesCntrl(Model, AddinSettings, components, tabControlSql, txtSearchTerm,
+                    _newTabFromRecentToolStripMenuItem,
+                    _loadTabFromRecentToolStripMenuItem, _addinTabName);
+            }
 
             if (tabControlSql.TabPages.Count == 0)
             {

@@ -122,7 +122,8 @@ Some features:
 ## Release 2.0.8
     
 - Fix: Conveyed Items for Information Flow and for Connector
-- Swtich off annoying tooltip in SQL window
+- Fix: Opened tabbed were duplicated by opening another repository
+- Switch off annoying tooltip in SQL window
 
 
 ## Not yet scheduled 

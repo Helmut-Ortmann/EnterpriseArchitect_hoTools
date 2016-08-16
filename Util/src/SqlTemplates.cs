@@ -962,27 +962,44 @@ For: Package, Element, Diagram, Attribute, Operation"
                     // conveyed items are a comma separated list of elementIDs
                     if (sql.Contains(currentConveyedItemTemplate))
                     {
-                        // first get "InformationFlow" which carries the conveyed items
-                        if (con.MetaType == "Connector")
-                        {
-                            string sqlInformationFlow = "select x.description " +
-                                                        "    from t_connector c, t_xref x,t_connector c1" +
-                                                        $"    where c.ea_guid = '{con.ConnectorGUID}'   AND " +
-                                                        "          x.client = c.ea_guid                AND " +
-                                                        "          c1.ea_guid = x.description              ";
-                            //sqlInformationFlow = "select c.ea_guid " +
-                            //                            "    from t_connector c " ;
-                            List<EA.Connector> l_con = rep.GetConnectorsBySql(sqlInformationFlow);
-                            if (l_con.Count == 1) con = l_con[0];
-                        }
 
                         // to avoid syntax error, 0 will never fit any conveyed item
-                        string s = "0";
-                        foreach (EA.Element el in con.ConveyedItems)
+                        string conveyedItems = "0";
+
+                        // first get "InformationFlows" which carries the conveyed items
+                        if (con.MetaType == "Connector")
                         {
-                            s = $"{s}, {el.ElementID}";
+                            // get semicolon delimiter list of information flow guids
+                            string sqlInformationFlows = "select x.description " +
+                                                         "    from t_connector c, t_xref x " +
+                                                         $"    where c.ea_guid = '{con.ConnectorGUID}' ";
+
+                            // get semicolon delimiter list of guids of all dependent connectors/information flows
+                            List<string> lFlows = rep.GetStringsBySql(sqlInformationFlows);
+                            foreach (string flowGuids in lFlows) { 
+                                string[] lFlowGuid = flowGuids.Split(';');
+                                foreach (string flowGuid in lFlowGuid)
+                                {
+                                    EA.Connector flow = rep.GetConnectorByGuid(flowGuid);
+                                    foreach (EA.Element el in flow.ConveyedItems)
+                                    {
+                                        conveyedItems = $"{conveyedItems}, {el.ElementID}";
+                                    }
+                                }
+
+                            }
                         }
-                        sql = sql.Replace(currentConveyedItemTemplate, $"{s}");
+                        else
+                        {
+
+
+                            foreach (EA.Element el in con.ConveyedItems)
+                            {
+                                conveyedItems = $"{conveyedItems}, {el.ElementID}";
+                            }
+
+                        }
+                        sql = sql.Replace(currentConveyedItemTemplate, $"{conveyedItems}");
                     }
                 } else
                 // no connector selected
