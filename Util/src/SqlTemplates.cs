@@ -5,6 +5,7 @@ using System.Resources;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using EA;
+using hoTools.Utils.Extension;
 
 
 namespace hoTools.Utils.SQL
@@ -929,6 +930,7 @@ For: Package, Element, Diagram, Attribute, Operation"
 
         /// <summary>
         /// Connector macros: ConnectorID and ConveyedItemIDS
+        /// Note: If Element connector 
         /// <para/>
         /// Replace macro #ConnectorID# by the ID of the selected connector.
         /// <para/>
@@ -960,7 +962,21 @@ For: Package, Element, Diagram, Attribute, Operation"
                     // conveyed items are a comma separated list of elementIDs
                     if (sql.Contains(currentConveyedItemTemplate))
                     {
-                        // to avoid syntax error
+                        // first get "InformationFlow" which carries the conveyed items
+                        if (con.MetaType == "Connector")
+                        {
+                            string sqlInformationFlow = "select x.description " +
+                                                        "    from t_connector c, t_xref x,t_connector c1" +
+                                                        $"    where c.ea_guid = '{con.ConnectorGUID}'   AND " +
+                                                        "          x.client = c.ea_guid                AND " +
+                                                        "          c1.ea_guid = x.description              ";
+                            //sqlInformationFlow = "select c.ea_guid " +
+                            //                            "    from t_connector c " ;
+                            List<EA.Connector> l_con = rep.GetConnectorsBySql(sqlInformationFlow);
+                            if (l_con.Count == 1) con = l_con[0];
+                        }
+
+                        // to avoid syntax error, 0 will never fit any conveyed item
                         string s = "0";
                         foreach (EA.Element el in con.ConveyedItems)
                         {

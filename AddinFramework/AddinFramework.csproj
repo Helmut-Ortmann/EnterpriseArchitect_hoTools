@@ -62,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EASpecific\EAAddin.cs" />
+    <Compile Include="Extension\EaExtensionClass.cs" />
     <Compile Include="Util\EaItem.cs" />
     <Compile Include="Util\EaObjectType.cs" />
     <Compile Include="Util\Script\ScriptUtility.cs" />

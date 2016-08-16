@@ -117,21 +117,19 @@ Some features:
 - Global Keys with possible start Script (VBScript, JavaScript, JScript)
 - Toolbar with possible start Script (VBScript, JavaScript, JScript)
 - Fix: Automatic linestyle: Linestyles of a length of 1 leads to Exception
+- Error fixed Script usage of hoTools as COM Object
+
+## Release 2.0.8
+    
+- Fix: Conveyed Items for Information Flow and for Connector
+- Swtich off annoying tooltip in SQL window
+
 
 ## Not yet scheduled 
 - Search Management (for Quick Search)
   - Enable Category (Settings)
   - Favorites (configuration via JSON)
   - EA Standard Searches (configurable via JSON, my EA Standard Searches) 
-
-
-
-# Bugfixes
-- Error fixed Script usage of hoTools as COM Object
-
-# Not yet scheduled
-- Drag SQL file on canvas
-  (seems impossible with EA, no drag and drop for ActiveX supported)
 
 # Feedback
 

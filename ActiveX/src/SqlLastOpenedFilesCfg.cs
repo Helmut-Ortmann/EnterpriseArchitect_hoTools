@@ -73,7 +73,7 @@ namespace hoTools.Settings
             // only needed to ensure unique file names
         }
         /// <summary>
-        /// Save sql file names to configuration
+        /// Save sql file names to configuration. Don't store duplicated file names
         /// <para/>Make sure the loaded amount is written back
         /// </summary>
         public void Save()

@@ -215,14 +215,14 @@ CTRL+SHFT+S                     Store sql All
             tabPage.Text = sqlFile.DisplayName;  // after isChanged = false
 
             // register CTRL+S (store SQL) and CTRL+R (run SQL)
-            sqlTextBox.KeyUp += sqlTextBox_KeyUp;
-            ToolTip toolTip = new ToolTip
-            {
-                IsBalloon = false,
-                InitialDelay = 0,
-                ShowAlways = true
-            };
-            toolTip.SetToolTip(sqlTextBox, SqlTextBoxTooltip);
+            //sqlTextBox.KeyUp += sqlTextBox_KeyUp;
+            //ToolTip toolTip = new ToolTip
+            //{
+            //    IsBalloon = false,
+            //    InitialDelay = 0,
+            //    ShowAlways = true
+            //};
+            //toolTip.SetToolTip(sqlTextBox, SqlTextBoxTooltip);
             tabPage.Controls.Add(sqlTextBox);
 
 
