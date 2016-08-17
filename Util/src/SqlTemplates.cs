@@ -971,13 +971,13 @@ For: Package, Element, Diagram, Attribute, Operation"
                         {
                             // get semicolon delimiter list of information flow guids
                             string sqlInformationFlows = "select x.description " +
-                                                         "    from t_connector c, t_xref x " +
-                                                         $"    where c.ea_guid = '{con.ConnectorGUID}' ";
+                                                         "    from  t_xref x " +
+                                                         $"    where x.client = '{con.ConnectorGUID}' ";
 
                             // get semicolon delimiter list of guids of all dependent connectors/information flows
                             List<string> lFlows = rep.GetStringsBySql(sqlInformationFlows);
                             foreach (string flowGuids in lFlows) { 
-                                string[] lFlowGuid = flowGuids.Split(';');
+                                string[] lFlowGuid = flowGuids.Split(',');
                                 foreach (string flowGuid in lFlowGuid)
                                 {
                                     EA.Connector flow = rep.GetConnectorByGuid(flowGuid);
