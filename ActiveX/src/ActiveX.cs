@@ -19,6 +19,8 @@ using hoTools.Utils;
 // ReSharper disable once CheckNamespace
 namespace hoTools.ActiveX
 {
+    #region New region
+
     [ComVisible(true)]
     [ClassInterface(ClassInterfaceType.None)]
     [Guid("82A06E9C-7568-4E4B-8D2C-A53B8D9A7272")]
@@ -56,7 +58,6 @@ namespace hoTools.ActiveX
         private Button _btnDisplayBehavior;
         private Button _btnLocateOperation;
         private Button _btnAddElementNote;
-        private Button _btnAddDiagramNote;
         private Button _btnLocateType;
         private Button _btnFindUsage;
         private Button _btnDisplaySpecification;
@@ -140,8 +141,7 @@ namespace hoTools.ActiveX
         private Panel _panelPort;
         private Panel _panelAdvanced;
         private Panel _panelConveyedItems;
-        private Button _btnConveyedItemElement;
-        private Button _btnConveyedItemConnector;
+        private Button _btnConveyedItem;
         private ToolStripSeparator _toolStripSeparator6;
         private ToolStripButton _toolStripServiceBtn1;
         private ToolStripButton _toolStripServiceBtn2;
@@ -150,7 +150,6 @@ namespace hoTools.ActiveX
         private ToolStripButton _toolStripServiceBtn5;
         private ToolStripMenuItem _settingsGlobalKeysToolStripMenuItem;
         private Label _lblPorts;
-        private Label _lblConveyedItems;
         private TableLayoutPanel _panelQuickSearch;
         private ToolStripMenuItem _updateActivityFromOperationToolStripMenuItem;
         private ToolStripSeparator _toolStripSeparator10;
@@ -994,14 +993,11 @@ namespace hoTools.ActiveX
             this._btnTh = new System.Windows.Forms.Button();
             this._btnLv = new System.Windows.Forms.Button();
             this._btnLh = new System.Windows.Forms.Button();
-            this._btnConveyedItemConnector = new System.Windows.Forms.Button();
-            this._btnConveyedItemElement = new System.Windows.Forms.Button();
+            this._btnConveyedItem = new System.Windows.Forms.Button();
             this._panelConveyedItems = new System.Windows.Forms.Panel();
-            this._lblConveyedItems = new System.Windows.Forms.Label();
             this._cmbSearchName = new System.Windows.Forms.ComboBox();
             this.rtfListOfSearches = new System.Windows.Forms.RichTextBox();
             this._txtSearchName = new System.Windows.Forms.TextBox();
-            this._btnAddDiagramNote = new System.Windows.Forms.Button();
             this._btnAddElementNote = new System.Windows.Forms.Button();
             this._menuStrip1 = new System.Windows.Forms.MenuStrip();
             this._fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -1406,35 +1402,20 @@ namespace hoTools.ActiveX
             this._btnLh.UseVisualStyleBackColor = true;
             this._btnLh.Click += new System.EventHandler(this.btnLH_Click);
             // 
-            // _btnConveyedItemConnector
+            // _btnConveyedItem
             // 
-            resources.ApplyResources(this._btnConveyedItemConnector, "_btnConveyedItemConnector");
-            this._btnConveyedItemConnector.Name = "_btnConveyedItemConnector";
-            this._toolTip.SetToolTip(this._btnConveyedItemConnector, resources.GetString("_btnConveyedItemConnector.ToolTip"));
-            this._btnConveyedItemConnector.UseVisualStyleBackColor = true;
-            this._btnConveyedItemConnector.Click += new System.EventHandler(this.btnConveyedItemConnector_Click);
-            // 
-            // _btnConveyedItemElement
-            // 
-            resources.ApplyResources(this._btnConveyedItemElement, "_btnConveyedItemElement");
-            this._btnConveyedItemElement.Name = "_btnConveyedItemElement";
-            this._toolTip.SetToolTip(this._btnConveyedItemElement, resources.GetString("_btnConveyedItemElement.ToolTip"));
-            this._btnConveyedItemElement.UseVisualStyleBackColor = true;
-            this._btnConveyedItemElement.Click += new System.EventHandler(this.btnConveyedItemElement_Click);
+            resources.ApplyResources(this._btnConveyedItem, "_btnConveyedItem");
+            this._btnConveyedItem.Name = "_btnConveyedItem";
+            this._toolTip.SetToolTip(this._btnConveyedItem, resources.GetString("_btnConveyedItem.ToolTip"));
+            this._btnConveyedItem.UseVisualStyleBackColor = true;
+            this._btnConveyedItem.Click += new System.EventHandler(this.btnConveyedItem_Click);
             // 
             // _panelConveyedItems
             // 
-            this._panelConveyedItems.Controls.Add(this._lblConveyedItems);
-            this._panelConveyedItems.Controls.Add(this._btnConveyedItemElement);
-            this._panelConveyedItems.Controls.Add(this._btnConveyedItemConnector);
+            this._panelConveyedItems.Controls.Add(this._btnConveyedItem);
             resources.ApplyResources(this._panelConveyedItems, "_panelConveyedItems");
             this._panelConveyedItems.Name = "_panelConveyedItems";
             this._toolTip.SetToolTip(this._panelConveyedItems, resources.GetString("_panelConveyedItems.ToolTip"));
-            // 
-            // _lblConveyedItems
-            // 
-            resources.ApplyResources(this._lblConveyedItems, "_lblConveyedItems");
-            this._lblConveyedItems.Name = "_lblConveyedItems";
             // 
             // _cmbSearchName
             // 
@@ -1474,17 +1455,11 @@ namespace hoTools.ActiveX
             this._txtSearchName.Leave += new System.EventHandler(this._txtSearchName_Leave);
             this._txtSearchName.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.cmbSearchName_MouseDoubleClick);
             // 
-            // _btnAddDiagramNote
-            // 
-            resources.ApplyResources(this._btnAddDiagramNote, "_btnAddDiagramNote");
-            this._btnAddDiagramNote.Name = "_btnAddDiagramNote";
-            this._btnAddDiagramNote.UseVisualStyleBackColor = true;
-            this._btnAddDiagramNote.Click += new System.EventHandler(this.btnAddDiagramNote_Click);
-            // 
             // _btnAddElementNote
             // 
             resources.ApplyResources(this._btnAddElementNote, "_btnAddElementNote");
             this._btnAddElementNote.Name = "_btnAddElementNote";
+            this._toolTip.SetToolTip(this._btnAddElementNote, resources.GetString("_btnAddElementNote.ToolTip"));
             this._btnAddElementNote.UseVisualStyleBackColor = true;
             this._btnAddElementNote.Click += new System.EventHandler(this.btnAddElementNote_Click);
             // 
@@ -1888,7 +1863,6 @@ namespace hoTools.ActiveX
             // _panelNote
             // 
             this._panelNote.Controls.Add(this._btnAddElementNote);
-            this._panelNote.Controls.Add(this._btnAddDiagramNote);
             resources.ApplyResources(this._panelNote, "_panelNote");
             this._panelNote.Name = "_panelNote";
             // 
@@ -1955,7 +1929,6 @@ namespace hoTools.ActiveX
             this._toolStripQuery.ResumeLayout(false);
             this._toolStripQuery.PerformLayout();
             this._panelConveyedItems.ResumeLayout(false);
-            this._panelConveyedItems.PerformLayout();
             this._menuStrip1.ResumeLayout(false);
             this._menuStrip1.PerformLayout();
             this._panelButtons.ResumeLayout(false);
@@ -2056,9 +2029,7 @@ namespace hoTools.ActiveX
 
             // Conveyed Item support
             _panelConveyedItems.Visible = AddinSettings.IsConveyedItemsSupport;
-            _btnConveyedItemConnector.Visible = AddinSettings.IsConveyedItemsSupport;
-            _btnConveyedItemElement.Visible = AddinSettings.IsConveyedItemsSupport;
-            _lblConveyedItems.Visible = true;
+            _btnConveyedItem.Visible = AddinSettings.IsConveyedItemsSupport;
 
             // Line style Panel
             _panelLineStyle.Visible = AddinSettings.IsLineStyleSupport;
@@ -2108,7 +2079,6 @@ namespace hoTools.ActiveX
 
             // Note in diagram support
             bool visibleDiagramNote = AddinSettings.IsAdvancedDiagramNote;
-            _btnAddDiagramNote.Visible = visibleDiagramNote;
             _btnAddElementNote.Visible = visibleDiagramNote;
 
             // LineStyle
@@ -2124,8 +2094,7 @@ namespace hoTools.ActiveX
             _btnD.Visible = AddinSettings.IsLineStyleSupport;
 
             // Conveyed Items support
-            _btnConveyedItemConnector.Visible = AddinSettings.IsConveyedItemsSupport;
-            _btnConveyedItemElement.Visible = AddinSettings.IsConveyedItemsSupport;
+            _btnConveyedItem.Visible = AddinSettings.IsConveyedItemsSupport;
 
             // Favorite
             _btnAddFavorite.Visible = AddinSettings.IsFavoriteSupport;
@@ -2307,20 +2276,25 @@ namespace hoTools.ActiveX
         }
 
         /// <summary>
-        /// Get Connectors for selected Element
+        /// Get Connectors with conveyed items for selected Element or vice versa
         /// Run search with selected Element
         /// - Lists Elements which are source of connectors
         /// - Locate Diagram get you to the diagram
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        void btnConveyedItemConnector_Click(object sender, EventArgs e)
+        void btnConveyedItem_Click(object sender, EventArgs e)
         {
             EA.ObjectType type = Model.Repository.GetContextItemType();
-            if (type == EA.ObjectType.otElement)
+            string sql;
+            switch (type)
             {
-                string sql = @"
-                        select  s.ea_guid AS CLASSGUID, s.object_type AS CLASSTYPE, s.name As Source , d.name As Destination
+                case EA.ObjectType.otElement:
+
+                     sql = @"
+                        select  s.ea_guid AS CLASSGUID, s.object_type AS CLASSTYPE, 
+                                        s.name As [Source],     s.Object_Type As [SourceType],
+                                        d.name As [Destination], d.object_Type As [DestinationType]
                         from t_xref x,   // a lot of things like properties,..
                              t_connector c,
                              t_object s, // Source element
@@ -2334,45 +2308,31 @@ namespace hoTools.ActiveX
                         and    c.start_object_id = s.object_id
                         and    c.end_object_id = d.object_id
                         ORDER BY 3,4
-                ";
-                // Run SQL with macro replacement
-                Model.SqlRun(sql, "");
+                    ";
+                    // Run SQL with macro replacement
+                    Model.SqlRun(sql, "");
+                    break;
 
-            }
-            else
-            {
-                MessageBox.Show(@"To get the connectors which convey Elements you have to select an Element.", @"No Element is selected, break!!!");
-            }
-
-        }
-        /// <summary>
-        /// Get Elements for select Connector
-        /// Run search with selected Connector
-        /// - Lists Elements which have Conveyed Elements on Connector
-        /// - Locate Element 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        void btnConveyedItemElement_Click(object sender, EventArgs e)
-        {
-            EA.ObjectType type = Model.Repository.GetContextItemType();
-            if (type == EA.ObjectType.otConnector)
-            {
-                string sql = @"
-                        select  o.ea_guid AS CLASSGUID, o.object_type AS CLASSTYPE, o.name As Element
+                case EA.ObjectType.otConnector:
+                     sql = @"
+                        select  o.ea_guid AS CLASSGUID, o.object_type AS CLASSTYPE, o.name As [Element], o.object_type As [Type]
                         from t_object o
                         where  o.object_id in ( #ConveyedItemIDS# )
                         ORDER BY 3
-                ";
-                // Run SQL with macro replacement
-                Model.SqlRun(sql, "");
+                    ";
+                    // Run SQL with macro replacement
+                    Model.SqlRun(sql, "");
+                    break;
 
+                default:
+                    MessageBox.Show(@"Select Connector or Element", @"No Element or Connector Selected!!!");
+                    break;
             }
-            else
-            {
-                MessageBox.Show(@"To get the Elements on the Connector you have to select an Connector.", @"No Connector is selected, break!!!");
-            }
+            
+
         }
+
+        
 
         void getLastSQLErrorToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -2437,4 +2397,6 @@ namespace hoTools.ActiveX
             rtfListOfSearches.Visible = false;
         }
     }
+
+    #endregion
 }

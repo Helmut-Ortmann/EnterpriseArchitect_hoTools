@@ -25,106 +25,208 @@
         "Name": "Simple",
         "Description": "Searches the 'Name', 'Alias' and 'Notes' fields of all elements for the given Search Term.",
         "Category": "EACommon",
-        "Favorite": "true"
+        "Favorite": "true",
+        "EARelease": "9,10,11,12,12.1,13"
     },
     {
         "Name": "Extended",
         "Description": "Searches many additional fields relating to the element, including Attributes, Operations, Tagged Values and Test Cases.",
         "Category": "EACommon",
-        "Favorite": "true"
+        "Favorite": "true",
+        "EARelease": "9,10,11,12,12.1,13"
     },
     {
         "Name": "Element Name",
         "Description": "Searches for an exact match against the element name, alias, method or operation; the default search in the 'Search in Model' menu option in the Code Editor.",
         "Category": "EACommon",
-        "Favorite": "true"
+        "Favorite": "true",
+        "EARelease": "9,10,11,12,12.1,13"
     },
     {
         "Name": "Attribute Details",
         "Description": "Searches for elements with attributes relating to the search term, including Tagged Values, constraints, and common attribute data fields.",
         "Category": "EACommon",
-        "Favorite": "true"
+        "Favorite": "true",
+        "EARelease": "9,10,11,12,12.1,13"
     },
     {
         "Name": "Method Details",
         "Description": "Searches for elements with operations and methods relating to the search term, including Tagged Values, constraints and common operation and method data fields.",
         "Category": "EACommon",
-        "Favorite": "true"
+        "Favorite": "true",
+        "EARelease": "9,10,11,12,12.1,13"
     },
 
     {
         "Name": "Recently Modified Elements",
         "Description": "Searches for elements that have been recently modified, anywhere in the project. The default is to show elements modified in the last three days, but you can set an alternative interval by typing the appropriate number of days in the 'Search Term' field.",
         "Category": "EACommon",
-        "Favorite": "true"
+        "Favorite": "true",
+        "EARelease": "9,10,11,12,12.1,13"
     },
     {
         "Name": "Find Attributes by Name",
         "Description": "Searches for the use of a named attribute anywhere in the model.",
         "Category": "EACommon",
-        "Favorite": "true"
+        "Favorite": "true",
+        "EARelease": "9,10,11,12,12.1,13"
     },
     {
         "Name": "Find Operations by Name",
         "Description": "Searches for the use of a named operation anywhere in the model.",
         "Category": "EACommon",
-        "Favorite": "true"
+        "Favorite": "true",
+        "EARelease": "9,10,11,12,12.1,13"
     },
     {
         "Name": "Find Package",
         "Description": "Searches for a named Package in the model.",
         "Category": "EACommon",
-        "Favorite": "true"
+        "Favorite": "true",
+        "EARelease": "9,10,11,12,12.1,13"
     },
+    {
+        "Name": "Find Scenarios",
+        "Description": "Searches for Scenarios.",
+        "Category": "EACommon",
+        "Favorite": "true",
+        "EARelease": "13"
+    },
+    {
+        "Name": "Schema Profiles",
+        "Description": "Find Schema Profiles.",
+        "Category": "EACommon",
+        "Favorite": "true",
+        "EARelease": "13"
+    },
+    {
+        "Name": "Recently Modified Schema Profiles",
+        "Description": "Find Recently Modified Schema Profiles.",
+        "Category": "EACommon",
+        "Favorite": "true",
+        "EARelease": "13"
+    },
+    {
+        "Name": "Recently Modified Linked Documents",
+        "Description": "Find Recently Modified Schema Profiles.",
+        "Category": "EACommon",
+        "Favorite": "true",
+        "EARelease": "13"
+    },
+    {
+        "Name": "Recently Modified Decision Tables",
+        "Description": "Find Recently Modified Decision Tables.",
+        "Category": "EACommon",
+        "Favorite": "true",
+        "EARelease": "13"
+    },
+    {
+        "Name": "Linked Documents",
+        "Description": "Find Linked Documents.",
+        "Category": "EACommon",
+        "Favorite": "true",
+        "EARelease": "13"
+    },
+    {
+        "Name": "Decision Tables",
+        "Description": "Find Decision Tables.",
+        "Category": "EACommon",
+        "Favorite": "true",
+        "EARelease": "13"
+    },
+    {
+        "Name": "Find Baselines",
+        "Description": "Find Baselines.",
+        "Category": "EACommon",
+        "Favorite": "true",
+        "EARelease": "13"
+    },
+    {
+        "Name": "Recent Model Chat",
+        "Description": "Find Recent Model Chats.",
+        "Category": "EACommon",
+        "Favorite": "true",
+        "EARelease": "13"
+    },
+
     /* EA Diagram Searches */
     {
         "Name": "Find Orphans",
         "Description": "Searches for orphaned elements throughout the model, with the ability to filter on common element fields using a search term. An 'orphaned' element is an element that does not appear on any diagram in the model.",
         "Category": "EADiagram",
-        "Favorite": "true"
+        "Favorite": "true",
+        "EARelease": "9,10,11,12,12.1,13"
     },
     {
         "Name": "Find Bookmarked Elements",
         "Description": "Searches for elements that have been bookmarked, anywhere in the project.",
         "Category": "EADiagram",
-        "Favorite": "true"
+        "Favorite": "true",
+        "EARelease": "9,10,11,12,12.1,13"
     },
     {
         "Name": "Recently Modified Diagrams",
         "Description": "Searches for diagrams that have been recently modified, anywhere in the project. The default is to show diagrams modified in the last three days, but you can set an alternative interval by typing the appropriate number of days in the 'Search Term' field.",
         "Category": "EADiagram",
-        "Favorite": "true"
+        "Favorite": "true",
+        "EARelease": "9,10,11,12,12.1,13"
+    },
+    {
+        "Name": "Diagram Details",
+        "Description": "Find Diagram Details.",
+        "Category": "EADiagram",
+        "Favorite": "true",
+        "EARelease": "13"
+    },
+    {
+        "Name": "Diagram Name",
+        "Description": "Find Diagram Name.",
+        "Category": "EADiagram",
+        "Favorite": "true",
+        "EARelease": "13"
     },
     {
         "Name": "FindKanban Diagrams",
         "Description": "Lists all Kanban diagrams in the model and identifies who created them, when they were created and when they were last modified.",
         "Category": "EADiagram",
-        "Favorite": "true"
+        "Favorite": "true",
+        "EARelease": "9,10,11,12,12.1"
+    },
+    {
+        "Name": "Find Kanban Diagrams",
+        "Description": "Lists all Kanban diagrams in the model and identifies who created them, when they were created and when they were last modified.",
+        "Category": "EADiagram",
+        "Favorite": "true",
+        "EARelease": "13"
     },
 
     {
         "Name": "Activity Diagrams",
         "Description": "Activity Diagrams",
         "Category": "EADiagram",
-        "Favorite": "true"
+        "Favorite": "true",
+        "EARelease": "9,10,11,12,12.1,13"
     },
     {
         "Name": "Recent StateMachine Diagrams",
         "Description": "Recent StateMachin Diagrams",
         "Category": "EADiagram",
-        "Favorite": "true"
+        "Favorite": "true",
+        "EARelease": "9,10,11,12,12.1,13"
     },
     {
         "Name": "Recent Activity Diagrams",
         "Description": "Find recent Activity Diagrams",
         "Category": "EADiagram",
-        "Favorite": "true"
+        "Favorite": "true",
+        "EARelease": "9,10,11,12,12.1,13"
     },
     {
         "Name": "Executable Statemachines",
         "Description": "Find executable Statemachines",
         "Category": "EADiagram",
-        "Favorite": "true"
+        "Favorite": "true",
+        "EARelease": "9,10,11,12,12.1,13"
     },
 
     /* Tests and Verifications */
@@ -132,7 +234,8 @@
         "Name": "Failed Internal Tests",
         "Description": "Searches the project for elements containing one or more internal test cases where the 'Status' value is 'Fail' and the search term is in any common Test Case field. The output lists the elements and shows their properties; use the 'Element | Testing' menu option to examine the test records for a selected element.",
         "Category": "EATest&Ver",
-        "Favorite": "true"
+        "Favorite": "true",
+        "EARelease": "9,10,11,12,12.1,13"
     },
     {
         "Name": "Tests on Recently Modified Elements",
@@ -144,7 +247,8 @@
         "Name": "Tests not Run",
         "Description": "Searches the project for elements having test records where the 'Status value' is any of: 'Not Run', 'Cancelled' or 'Deferred'. In the 'Search Term' field you can specify the number of days over which to check back. If you do not specify a number of days, the search uses a value of 1 day (you can use your own value in Search Term)",
         "Category": "EATest&Ver",
-        "Favorite": "true"
+        "Favorite": "true",
+        "EARelease": "9,10,11,12,12.1,13"
     },
     {
         "Name": "Tests not Checked",
@@ -156,50 +260,58 @@
         "Name": "Passed Tests",
         "Description": "Searches the project for elements having test records where the 'Status' value is 'Pass'. In the 'Search Term' field you can specify the number of days over which to check back. If you do not specify a number of days, the search uses a value of 1 day or the value in Search Term",
         "Category": "EATest&Ver",
-        "Favorite": "true"
+        "Favorite": "true",
+        "EARelease": "9,10,11,12,12.1,13"
     },
     {
         "Name": "Failed Tests",
         "Description": "Searches the project for elements having test records where the 'Status' value is 'Fail'. In the 'Search Term' field you can specify the number of days over which to check back. If you do not specify a number of days, the search uses a value of 1 day or the value in Search Term.",
         "Category": "EATest&Ver",
-        "Favorite": "true"
+        "Favorite": "true",
+        "EARelease": "9,10,11,12,12.1,13"
     },
     {
         "Name": "Deferred Tests",
         "Description": "Searches the project for elements having test records where the 'Status' value is 'Deferred'. In the 'Search Term' field you can specify the number of days over which to check back. If you do not specify a number of days, the search uses a value of 1 day or the value in Search Term. ",
         "Category": "EATest&Ver",
-        "Favorite": "true"
+        "Favorite": "true",
+        "EARelease": "9,10,11,12,12.1,13"
     },
     {
         "Name": "Recently Run Tests",
         "Description": "Searches the project for elements having test records where the 'Run Date' field has a value. In the 'Search Term' field you can specify the number of days over which to check back. If you do not specify a number of days, the search uses a value of 1 day or the value in Search Term. ",
         "Category": "EATest&Ver",
-        "Favorite": "true"
+        "Favorite": "true",
+        "EARelease": "9,10,11,12,12.1,13"
     },
     /* Requirements */
     {
         "Name": "Responsibility",
         "Description": "Searches the project for elements with internal responsibilities/requirements where the search term relates to any common responsibility/requirement field. ",
         "Category": "EATest&Ver",
-        "Favorite": "true"
+        "Favorite": "true",
+        "EARelease": "9,10,11,12,12.1,13"
     },
     {
         "Name": "Requirements",
         "Description": "Searches the project for Requirement element types where the search term occurs in any common element field. ",
         "Category": "EATest&Ver",
-        "Favorite": "true"
+        "Favorite": "true",
+        "EARelease": "9,10,11,12,12.1,13"
     },
     {
         "Name": "Recently Discussed Elements",
         "Description": "Searches the project for any element that has a recent entry in the Element Discussions window. In the 'Search Term' field you can specify the number of days over which to check back. If you do not specify a number of days, the search uses a value of 3 days or the value in Search Term",
         "Category": "EATest&Ver",
-        "Favorite": "true"
+        "Favorite": "true",
+        "EARelease": "9,10,11,12,12.1,13"
     },
     {
         "Name": "Recent Element Posts",
         "Description": "Searches the project for any element that has a recent entry in the Element Discussions window. In the 'Search Term' field you can specify the number of days over which to check back. If you do not specify a number of days, the search uses a value of 3 days or the value in Search Term",
         "Category": "EATest&Ver",
-        "Favorite": "true"
+        "Favorite": "true",
+        "EARelease": "9,10,11,12,12.1,13"
     }
     /* Resource Tracking     */
 
@@ -208,31 +320,37 @@
         "Name": "Resources",
         "Description": "Searches the project for elements with assigned resources, where the search term is the value of any common Resource field. ",
         "Category": "Resource",
-        "Favorite": "true"
+        "Favorite": "true",
+        "EARelease": "9,10,11,12,12.1,13"
+
     },
     {
         "Name": "Task Overdue",
         "Description": "Searches the project for elements with assigned resources, where the end date is in the past and the percentage completion is less than 100. ",
         "Category": "Resource",
-        "Favorite": "true"
+        "Favorite": "true",
+        "EARelease": "9,10,11,12,12.1,13"
     },
     {
         "Name": "Active Tasks",
         "Description": "Searches the project for elements with assigned resources, where the end date is in the future and the percentage completion is less than 100. ",
         "Category": "Resource",
-        "Favorite": "true"
+        "Favorite": "true",
+        "EARelease": "9,10,11,12,12.1,13"
     },
     {
         "Name": "Tasks Completed",
         "Description": "Searches the project for elements with assigned resources, where the percentage completion is 100. ",
         "Category": "Resource",
-        "Favorite": "true"
+        "Favorite": "true",
+        "EARelease": "9,10,11,12,12.1,13"
     },
     {
         "Name": "Recently Finished Tasks",
         "Description": "Searches the project for elements with assigned resources, where the end date is in the recent past and the percentage completion is 100. In the 'Search Term' field, specify the number of days over which to check back. ",
         "Category": "Resource",
-        "Favorite": "true"
+        "Favorite": "true",
+        "EARelease": "9,10,11,12,12.1,13"
     },
     {
         "Name": "Tasks Ending Today",
@@ -244,21 +362,118 @@
         "Name": "Tasks Starting Today",
         "Description": "Searches the project for elements with assigned resources, where the task start date is today. ",
         "Category": "Resource",
-        "Favorite": "true"
+        "Favorite": "true",
+        "EARelease": "9,10,11,12,12.1,13"
     },
     {
         "Name": "Authors with no Active Tasks",
         "Description": "Searches the project for authors who have not been assigned as a resource to any task  that is currently active. ",
         "Category": "Resource",
-        "Favorite": "true"
-    }
+        "Favorite": "true",
+        "EARelease": "9,10,11,12,12.1,13"
+    },
+    {
+
+        "Name": "30 Days Task Summary (Simplified)",
+        "Description": "30 Days Task Summary (Simplified) ",
+        "Category": "Resource",
+        "Favorite": "true",
+        "EARelease": "13"
+    },
+    {
+
+        "Name": "30 Days Task Summary (Full)",
+        "Description": "30 Days Task Summary (Full) ",
+        "Category": "Resource",
+        "Favorite": "true",
+        "EARelease": "13"
+    },
+    {
+
+        "Name": "30 Days Resources ",
+        "Description": "30 Days Resources",
+        "Category": "Resource",
+        "Favorite": "true",
+        "EARelease": "13"
+    },
+    {
+
+        "Name": "30 Days Roles ",
+        "Description": "30 Days Roles",
+        "Category": "Resource",
+        "Favorite": "true",
+        "EARelease": "13"
+    },
     /* Project Status */
-    ,
     {
         "Name": "My Checked Out Packages",
         "Description": "Searches the project for Packages under version control that are marked as checked out under your user ID.",
         "Category": "Project",
-        "Favorite": "true"
+        "Favorite": "true",
+        "EARelease": "9,10,11,12,12.1,13"
+    },
+    /* Simulation */
+    /* Changes */
+    /* Defects */
+    /* Issues */
+    /* Tasks */
+    /* Events */
+    /* Decisions */
+    {
+        "Name": "Verified Decisions",
+        "Description": "Verified Decisions",
+        "Category": "Decision",
+        "Favorite": "true",
+        "EARelease": "13"
+    },
+    {
+        "Name": "Recently Created Decisions",
+        "Description": "Recently Created Decisions",
+        "Category": "Decision",
+        "Favorite": "true",
+        "EARelease": "13"
+    },
+    {
+        "Name": "Recently Effective Decisions",
+        "Description": "Recently Effective Decisions",
+        "Category": "Decision",
+        "Favorite": "true",
+        "EARelease": "13"
+    },
+    {
+        "Name": "New Decisions",
+        "Description": "New Decisions",
+        "Category": "Decision",
+        "Favorite": "true",
+        "EARelease": "13"
+    },
+    {
+        "Name": "Unresolved Decisions",
+        "Description": "Unresolved Decisions",
+        "Category": "Decision",
+        "Favorite": "true",
+        "EARelease": "13"
+    },
+    /* Test Points */
+    {
+        "Name": "Test Suites",
+        "Description": "Test Suites",
+        "Category": "TestPoint",
+        "Favorite": "true",
+        "EARelease": "13"
+    },
+    {
+        "Name": "Test Sets",
+        "Description": "Test Sets",
+        "Category": "TestPoint",
+        "Favorite": "true",
+        "EARelease": "13"
+    },
+    {
+        "Name": "Test Cuts",
+        "Description": "Test Cuts",
+        "Category": "TestPoint",
+        "Favorite": "true",
+        "EARelease": "13"
     }
-
 ]

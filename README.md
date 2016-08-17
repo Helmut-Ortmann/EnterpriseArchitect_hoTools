@@ -103,27 +103,30 @@ Some features:
 
 # Schedules
 ## Release 2.0.6
-- QuickSearch selection with autocomplete for available Searches
-  - SQL Searches (multiple folders are possible, file name should be uniqueue)
+- QuickSearch selection with auto complete for available Searches
+  - SQL Searches (multiple folders are possible, file name should be unique)
   - MDG
   - Own Searches
   - Standard Searches
   - Determine Search
-    - Autocomplete (.NET standard feature)
+    - Auto complete (.NET standard feature)
     - Find part of string after Up, Down, Blank Key
       - Double Click in find starts Search
 ## Release 2.0.7
     
 - Global Keys with possible start Script (VBScript, JavaScript, JScript)
 - Toolbar with possible start Script (VBScript, JavaScript, JScript)
-- Fix: Automatic linestyle: Linestyles of a length of 1 leads to Exception
+- Fix: Automatic line style: Line-style of a length of 1 leads to Exception
 - Error fixed Script usage of hoTools as COM Object
 
 ## Release 2.0.8
     
 - Fix: Conveyed Items for Information Flow and for Connector
 - Fix: Opened tabbed were duplicated by opening another repository
+- Optimization: Only one Button Conveyed Items (former two, function decides from selected element/connector/flow)
+- Optimization: Only one Button Notes (former two, function decides from selected element/diagram what to do)
 - Switch off annoying tooltip in SQL window
+- Search description adapted to EA 13
 
 
 ## Not yet scheduled 

@@ -17,6 +17,7 @@ namespace AddinFramework.Util
         public string Description { get; set; }
         public string Category { get; set; }
         public bool Favorite { get; set; }
+        public string EARelease { get; set; }
 
 
         [JsonConstructor]
@@ -49,6 +50,15 @@ namespace AddinFramework.Util
             Description = description;
             Category = category;
             Favorite = favorite;
+        }
+        public SearchItem(double score, string name, string description, string category, bool favorite, string eaRelease)
+        {
+            Score = score;
+            Name = name;
+            Description = description;
+            Category = category;
+            Favorite = favorite;
+            EARelease = eaRelease;
         }
     }
     /// <summary>

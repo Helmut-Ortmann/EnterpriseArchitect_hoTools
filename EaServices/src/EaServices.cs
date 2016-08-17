@@ -1967,6 +1967,25 @@ namespace hoTools.EaServices
 
         #region addElementNote
 
+        /// <summary>
+        /// Add Element- or Diagram -Note to Element or Diagram and link Note to Notes Property.
+        /// </summary>
+        /// <param name="rep"></param>
+        public static void AddNote(Repository rep)
+        {
+            ObjectType oType = rep.GetContextItemType();
+            switch (oType)
+            {
+                    case ObjectType.otElement:
+                        AddElementNote(rep);
+                    break;
+                    case ObjectType.otDiagram:
+                        AddDiagramNote(rep);
+                    break;
+                    
+            }
+        }
+
         public static void AddElementNote(Repository rep)
         {
             ObjectType oType = rep.GetContextItemType();
