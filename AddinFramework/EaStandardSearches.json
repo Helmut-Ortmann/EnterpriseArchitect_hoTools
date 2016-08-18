@@ -6,6 +6,7 @@
     * Description:   Description, possible use as tooltip
     * Category:      MDG-ID, Category of EA Model Search Window
     * Favorite:      true/false is a favorite
+    * EARelease:     The EA release the search is used, comma separated list
     *
     * Example(see also official json specification (JSON.NET is used: It additionally supports comments)
     * [
@@ -13,7 +14,8 @@
     *      "Name": "Simple",
     *      "Description": "Find a matching string",
     *      "Category": "Common Searches",
-    *      "Favorite": "true"
+    *      "Favorite": "true",
+    *      "EARelease": "9,10,11,12,12.1,13"
     *   },
     *   {
     *   }
@@ -205,28 +207,28 @@
         "Description": "Activity Diagrams",
         "Category": "EADiagram",
         "Favorite": "true",
-        "EARelease": "9,10,11,12,12.1,13"
+        "EARelease": "9,10,11,12,12.1"
     },
     {
         "Name": "Recent StateMachine Diagrams",
         "Description": "Recent StateMachin Diagrams",
         "Category": "EADiagram",
         "Favorite": "true",
-        "EARelease": "9,10,11,12,12.1,13"
+        "EARelease": "9,10,11,12,12.1"
     },
     {
         "Name": "Recent Activity Diagrams",
         "Description": "Find recent Activity Diagrams",
         "Category": "EADiagram",
         "Favorite": "true",
-        "EARelease": "9,10,11,12,12.1,13"
+        "EARelease": "9,10,11,12,12.1"
     },
     {
         "Name": "Executable Statemachines",
         "Description": "Find executable Statemachines",
         "Category": "EADiagram",
         "Favorite": "true",
-        "EARelease": "9,10,11,12,12.1,13"
+        "EARelease": "9,10,11,12,12.1"
     },
 
     /* Tests and Verifications */
@@ -241,7 +243,8 @@
         "Name": "Tests on Recently Modified Elements",
         "Description": "Searches the project for recently modified elements that have test records. In the 'Search Term' field you can specify the number of days over which to check back. If you do not specify a number of days, the search uses a value of 1 day. The output lists the elements that have test records and that have been modified during the specified period, and shows the details of each test record on each element. Double-click on an item to display the 'Test Details' dialog for that test.",
         "Category": "EATest&Ver",
-        "Favorite": "true"
+        "Favorite": "true",
+        "EARelease": "9,10,11,12,12.1,13"
     },
     {
         "Name": "Tests not Run",
@@ -254,7 +257,8 @@
         "Name": "Tests not Checked",
         "Description": "Searches the project for elements having test records that have no 'Checked By' value. In the 'Search Term' field you can specify the number of days over which to check back. If you do not specify a number of days, the search uses a value of 1 day or the value in Search Term",
         "Category": "EATest&Ver",
-        "Favorite": "true"
+        "Favorite": "true",
+        "EARelease": "9,10,11,12,12.1,13"
     },
     {
         "Name": "Passed Tests",
@@ -356,7 +360,8 @@
         "Name": "Tasks Ending Today",
         "Description": "Searches the project for elements with assigned resources, where the task end date is today. ",
         "Category": "Resource",
-        "Favorite": "true"
+        "Favorite": "true",
+        "EARelease": "9,10,11,12,12.1,13"
     },
     {
         "Name": "Tasks Starting Today",
@@ -413,11 +418,242 @@
         "EARelease": "9,10,11,12,12.1,13"
     },
     /* Simulation */
+    {
+        "Name": "StateMachine Diagrams",
+        "Description": "StateMachine Diagrams",
+        "Category": "Simulation",
+        "Favorite": "true",
+        "EARelease": "13"
+    },
+    {
+        "Name": "Activity Diagrams",
+        "Description": "Activity Diagrams",
+        "Category": "Simulation",
+        "Favorite": "true",
+        "EARelease": "13"
+    },
+    {
+        "Name": "Recent StateMachine Diagrams",
+        "Description": "Recently StateMachine Diagrams",
+        "Category": "Simulation",
+        "Favorite": "true",
+        "EARelease": "13"
+    },
+    {
+        "Name": "Recent Activity Diagrams",
+        "Description": "Recent Activity Diagrams",
+        "Category": "Simulation",
+        "Favorite": "true",
+        "EARelease": "13"
+    },
+    {
+        "Name": "Executable Statemachines",
+        "Description": "Executable Statemachines",
+        "Category": "Simulation",
+        "Favorite": "true",
+        "EARelease": "13"
+    },
+    {
+        "Name": "SysMLSim Configuration",
+        "Description": "SysMLSim Configuration",
+        "Category": "Simulation",
+        "Favorite": "true",
+        "EARelease": "13"
+    },
+    {
+        "Name": "BPSim Report",
+        "Description": "BPSim Report",
+        "Category": "Simulation",
+        "Favorite": "true",
+        "EARelease": "13"
+    },
+    {
+        "Name": "BPSim Chart",
+        "Description": "BPSim Chart",
+        "Category": "Simulation",
+        "Favorite": "true",
+        "EARelease": "13"
+    },
+    {
+        "Name": "BPSim",
+        "Description": "BPSim",
+        "Category": "Simulation",
+        "Favorite": "true",
+        "EARelease": "13"
+    },
     /* Changes */
+    {
+        "Name": "Verified Changes",
+        "Description": "Verified Changes",
+        "Category": "Change",
+        "Favorite": "true",
+        "EARelease": "13"
+    },
+    {
+        "Name": "Recently Reported Changes",
+        "Description": "Recently Reported Changes",
+        "Category": "Change",
+        "Favorite": "true",
+        "EARelease": "13"
+    },
+    {
+        "Name": "Recently Resolved Changes",
+        "Description": "Recently Resolved Changes",
+        "Category": "Change",
+        "Favorite": "true",
+        "EARelease": "13"
+    },
+    {
+        "Name": "New Changes",
+        "Description": "New Changes",
+        "Category": "Change",
+        "Favorite": "true",
+        "EARelease": "13"
+    },
+    {
+        "Name": "Unresolved Changes",
+        "Description": "Unresolved Changes",
+        "Category": "Change",
+        "Favorite": "true",
+        "EARelease": "13"
+    },
     /* Defects */
+    {
+        "Name": "Verified Defects",
+        "Description": "Verified Defects",
+        "Category": "Defect",
+        "Favorite": "true",
+        "EARelease": "13"
+    },
+    {
+        "Name": "Recently Reported Defects",
+        "Description": "Recently Reported Defects",
+        "Category": "Defect",
+        "Favorite": "true",
+        "EARelease": "13"
+    },
+    {
+        "Name": "Recently Resolved Defects",
+        "Description": "Recently Resolved Defects",
+        "Category": "Defect",
+        "Favorite": "true",
+        "EARelease": "13"
+    },
+    {
+        "Name": "New Defects",
+        "Description": "New Defects",
+        "Category": "Defect",
+        "Favorite": "true",
+        "EARelease": "13"
+    },
+    {
+        "Name": "Unresolved Defects",
+        "Description": "Unresolved Defects",
+        "Category": "Defect",
+        "Favorite": "true",
+        "EARelease": "13"
+    },
     /* Issues */
+    {
+        "Name": "Verified Issues",
+        "Description": "Verified Tasks",
+        "Category": "Issue",
+        "Favorite": "true",
+        "EARelease": "13"
+    },
+    {
+        "Name": "Recently Reported Issues",
+        "Description": "Recently Reported Issues",
+        "Category": "Issue",
+        "Favorite": "true",
+        "EARelease": "13"
+    },
+    {
+        "Name": "Recently Resolved Issues",
+        "Description": "Recently Resolved Issues",
+        "Category": "Issue",
+        "Favorite": "true",
+        "EARelease": "13"
+    },
+    {
+        "Name": "New Issues",
+        "Description": "New Issues",
+        "Category": "Issue",
+        "Favorite": "true",
+        "EARelease": "13"
+    },
+    {
+        "Name": "Unresolved Issues",
+        "Description": "Unresolved Issues",
+        "Category": "Issue",
+        "Favorite": "true",
+        "EARelease": "13"
+    },
     /* Tasks */
+    {
+        "Name": "Verified Tasks",
+        "Description": "Verified Tasks",
+        "Category": "Task",
+        "Favorite": "true",
+        "EARelease": "13"
+    },
+    {
+        "Name": "Recently Requested Tasks",
+        "Description": "Recently Requested Tasks",
+        "Category": "Task",
+        "Favorite": "true",
+        "EARelease": "13"
+    },
+    {
+        "Name": "Recently Completed Tasks",
+        "Description": "Recently Completed Tasks",
+        "Category": "Task",
+        "Favorite": "true",
+        "EARelease": "13"
+    },
+    {
+        "Name": "New Tasks",
+        "Description": "New Tasks",
+        "Category": "Task",
+        "Favorite": "true",
+        "EARelease": "13"
+    },
+    {
+        "Name": "Incomplete Tasks",
+        "Description": "Incomplete Tasks",
+        "Category": "Task",
+        "Favorite": "true",
+        "EARelease": "13"
+    },
     /* Events */
+    {
+        "Name": "Recently Reported Events",
+        "Description": "Recently Reported Events",
+        "Category": "Event",
+        "Favorite": "true",
+        "EARelease": "13"
+    },
+    {
+        "Name": "Recently Completed Events",
+        "Description": "Recently Completed Events",
+        "Category": "Event",
+        "Favorite": "true",
+        "EARelease": "13"
+    },
+    {
+        "Name": "High Priority Events",
+        "Description": "High Priority Events",
+        "Category": "Event",
+        "Favorite": "true",
+        "EARelease": "13"
+    },
+    {
+        "Name": "Open Events",
+        "Description": "Open Events",
+        "Category": "Event",
+        "Favorite": "true",
+        "EARelease": "13"
+    },
     /* Decisions */
     {
         "Name": "Verified Decisions",

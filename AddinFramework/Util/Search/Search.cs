@@ -17,6 +17,9 @@ using DuoVia.FuzzyStrings;
 // ReSharper disable once CheckNamespace
 namespace AddinFramework.Util
 {
+    /// <summary>
+    /// The Searches  
+    /// </summary>
     public class Search
     {
         static List<SearchItem> _staticSearches;
@@ -125,7 +128,12 @@ namespace AddinFramework.Util
         static void LoadStaticSearches(EA.Repository rep)
         {
             _staticSearches = new List<SearchItem>();
-            LoadEaStandardSearchesFromJason();
+
+
+            // get release 8,9,10,11,12,13  (currently no 12.1)
+            int eaRelease = rep.LibraryVersion/100;
+            eaRelease = 12;
+            LoadEaStandardSearchesFromJason($"{eaRelease}");
 
             LoadSqlSearches();
 
@@ -305,23 +313,34 @@ namespace AddinFramework.Util
             }
         }
         /// <summary>
-        /// Load EA Standard Searches from JSON
+        /// Load all EA Standard Searches from JSON for an EA Release. The Standard searches are stored in: 'EaStandardSearches.json'.
         /// </summary>
-        static void LoadEaStandardSearchesFromJason()
+        static void LoadEaStandardSearchesFromJason(string eaRelease)
         {
 
             string jasonPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"EaStandardSearches.json");
 
+            List<SearchItem> searches;
             using (StreamReader sr = new StreamReader(path: jasonPath) )
             using (JsonReader reader = new JsonTextReader(sr))
             {
                 JsonSerializer serializer = new JsonSerializer();
-                _staticSearches.AddRange(serializer.Deserialize<List<SearchItem>>(reader));
+                 searches = serializer.Deserialize<List<SearchItem>>(reader);
+                
 
             }
-            
-
-
+            // filter only EA Searches used in current release
+            foreach (var search in searches)
+            {
+                if (search.EARelease != null)
+                {
+                    if (search.EARelease.Contains(eaRelease)) _staticSearches.Add(search);
+                }
+                else
+                {
+                    MessageBox.Show($"Like: \"EARelease\": \"9, 10, 11, 12, 12.1, 13\"\r\nFile:\r\n'{jasonPath}'", @"Error JSON, no release defined");
+                }
+            }
         }
 
     }

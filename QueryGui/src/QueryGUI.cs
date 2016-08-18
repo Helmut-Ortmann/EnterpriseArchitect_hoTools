@@ -44,7 +44,7 @@ namespace hoTools.Query
         /// <summary>
         /// Type of Addin. Use the same string for enum as the string to visualize
         /// </summary>
-        public enum AddinType { Sql, Script};
+        private enum AddinType { Sql, Script};
 
         // default value for Addin Tab Name
         AddinType _addinType = AddinType.Sql;
@@ -72,6 +72,7 @@ namespace hoTools.Query
 
 
         #region Constructor
+
         /// <summary>
         /// Constructor QueryGUI. Constructor make the basic initialization. 
         /// The real initialization is done after Setting the Repository in setter of property:
@@ -289,7 +290,7 @@ namespace hoTools.Query
             DataColumn functionFunctionColumn = new DataColumn("Function", typeof(string));
             DataColumn functionParCountColumn = new DataColumn("ParCount", typeof(int));
             // add columns
-            _tableFunctions.Columns.AddRange(new DataColumn[]
+            _tableFunctions.Columns.AddRange(new[]
                 {
                     functionScriptObj,
                     functionFunctionObj,

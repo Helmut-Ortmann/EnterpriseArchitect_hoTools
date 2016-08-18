@@ -52,7 +52,6 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.label12 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
-            this.checkRookie = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -293,26 +292,12 @@
             this.label11.TabIndex = 247;
             this.label11.Text = "Addin Tab Name to select first";
             // 
-            // checkRookie
-            // 
-            this.checkRookie.AutoSize = true;
-            this.checkRookie.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkRookie.Location = new System.Drawing.Point(32, 347);
-            this.checkRookie.Name = "checkRookie";
-            this.checkRookie.Size = new System.Drawing.Size(75, 22);
-            this.checkRookie.TabIndex = 250;
-            this.checkRookie.Text = "Rookie";
-            this.toolTip1.SetToolTip(this.checkRookie, "Not all tooltips are available. Currently it supresses:\r\n- List of all macros in " +
-        "SQL Text fiels (for me it\'s annoying)");
-            this.checkRookie.UseVisualStyleBackColor = true;
-            // 
             // FrmQueryAndScript
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(716, 494);
-            this.Controls.Add(this.checkRookie);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.txtAddinTabToFirstActivate);
             this.Controls.Add(this.label11);
@@ -362,6 +347,5 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox txtAddinTabToFirstActivate;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.CheckBox checkRookie;
     }
 }
