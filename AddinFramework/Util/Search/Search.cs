@@ -11,6 +11,7 @@ using hoTools.Utils.Configuration;
 using hoTools.Utils.SQL;
 using Microsoft.Win32;
 using Newtonsoft.Json;
+using AddinFramework.Extension;
 
 using DuoVia.FuzzyStrings;
 
@@ -130,10 +131,8 @@ namespace AddinFramework.Util
             _staticSearches = new List<SearchItem>();
 
 
-            // get release 8,9,10,11,12,13  (currently no 12.1)
-            int eaRelease = rep.LibraryVersion/100;
-            eaRelease = 12;
-            LoadEaStandardSearchesFromJason($"{eaRelease}");
+            // Load EA Standard Search Names for current release  
+            LoadEaStandardSearchesFromJason(rep.getRelease());
 
             LoadSqlSearches();
 
@@ -156,7 +155,7 @@ namespace AddinFramework.Util
         {
             // var s = _staticSearches.Select(e => $"{e.Score,2} {e.Category,-15} {e.Name}" ).ToList();
             var s = _staticSearches.Select(e => $"{e.Category,-10} {e.Name}" ).ToList();
-            return string.Join("\r\n",s);
+            return string.Join($"{Environment.NewLine}", s);
         }
 
 
@@ -314,7 +313,10 @@ namespace AddinFramework.Util
         }
         /// <summary>
         /// Load all EA Standard Searches from JSON for an EA Release. The Standard searches are stored in: 'EaStandardSearches.json'.
+        /// Possible EA Releases are: "9, 10, 11, 12, 12.1, 13\"
+        /// 
         /// </summary>
+        /// <param name="eaRelease">The release of EA</param>
         static void LoadEaStandardSearchesFromJason(string eaRelease)
         {
 

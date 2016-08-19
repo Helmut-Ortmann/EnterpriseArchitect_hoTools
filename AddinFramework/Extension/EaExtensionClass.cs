@@ -23,5 +23,18 @@ namespace AddinFramework.Extension
     
             return null;
         }
+
+        /// <summary>
+        /// get EA Release as string in the form: "9","10","11","12","12.1","13"
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <returns>EA Version</returns>
+        public static string getRelease(this EA.Repository rep)
+        {
+            int libraryVersion = rep.LibraryVersion;
+            if (libraryVersion > 1200 && libraryVersion < 1300) return "12.1";
+           
+            return Convert.ToString((int)libraryVersion/100);
+        }
     }
 }
