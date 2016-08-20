@@ -269,7 +269,17 @@ namespace hoTools.ActiveX
         {
             EaService.DisplayOperationForSelectedElement(Repository, EaService.DisplayMode.Method);
         }
-
+        /// <summary>
+        /// Add Note to the selected element and link this Note to the description:<para/>
+        /// - Element<para/>
+        /// - Diagram
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void btnAddNote_Click(object sender, EventArgs e)
+        {
+            EaService.AddNote(Repository);
+        }
         void btnAddElementNote_Click(object sender, EventArgs e)
         {
             EaService.AddElementNote(Repository);
@@ -1461,7 +1471,7 @@ namespace hoTools.ActiveX
             this._btnAddElementNote.Name = "_btnAddElementNote";
             this._toolTip.SetToolTip(this._btnAddElementNote, resources.GetString("_btnAddElementNote.ToolTip"));
             this._btnAddElementNote.UseVisualStyleBackColor = true;
-            this._btnAddElementNote.Click += new System.EventHandler(this.btnAddElementNote_Click);
+            this._btnAddElementNote.Click += new System.EventHandler(this.btnAddNote_Click);
             // 
             // _menuStrip1
             // 

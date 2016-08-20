@@ -50,7 +50,11 @@ namespace hoTools.Utils
         }
        
 
-
+        /// <summary>
+        /// Get element from Context element. Possible inputs are: Attribute, Operation, Element, Package
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <returns></returns>
         public static EA.Element GetElementFromContextObject(EA.Repository rep)  {
             EA.Element el = null;
             EA.ObjectType objectType = rep.GetContextItemType();
@@ -67,19 +71,20 @@ namespace hoTools.Utils
                 case ObjectType.otElement:
                     el = (EA.Element)rep.GetContextObject();
                     break;
+                case ObjectType.otPackage:
+                    EA.Package pkg  = rep.GetContextObject();
+                    el = rep.GetElementByGuid(pkg.PackageGUID);
+                    break;
                 case ObjectType.otNone:
                     EA.Diagram dia = rep.GetCurrentDiagram();
-                    if (dia != null)
+                    if (dia?.SelectedObjects.Count == 1)
                     {
-                        if (dia.SelectedObjects.Count == 1)
-                        {
-                            var objSelected = (EA.DiagramObject)dia.SelectedObjects.GetAt(0);
-                            el = rep.GetElementByID(objSelected.ElementID);
-                        }
+                        var objSelected = (EA.DiagramObject)dia.SelectedObjects.GetAt(0);
+                        el = rep.GetElementByID(objSelected.ElementID);
                     }
                     break;
                 default:
-                    MessageBox.Show(@"No Interface, Class or Component selected");
+                    MessageBox.Show(@"No Element, Attribute, Operation, Package selected");
                     break;
              }
             return el;

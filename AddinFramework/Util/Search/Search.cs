@@ -19,16 +19,18 @@ using DuoVia.FuzzyStrings;
 namespace AddinFramework.Util
 {
     /// <summary>
-    /// The Searches  
+    /// Load the possible Searches:<para/>
+    /// - EA Standard Searches<para/>
+    /// - Searches defined in MDG (Program-Technology-Folder, MDG in file locations, MDG in URI locations)<para/> 
+    /// - Local Search of PC <para/>
     /// </summary>
-    public class Search
+    public static class Search
     {
         static List<SearchItem> _staticSearches;
-        private static List<string> _staticSearchesOrdered;
         static AutoCompleteStringCollection _staticSearchesSuggestions;
 
         // configuration as singleton
-        static readonly HoToolsGlobalCfg _globalCfg = HoToolsGlobalCfg.Instance;
+        static readonly HoToolsGlobalCfg GlobalCfg = HoToolsGlobalCfg.Instance;
 
         /// <summary>
         /// Loads all findable Searches. These Searches are stored outside the model and cannot be changed by the user.
@@ -124,7 +126,10 @@ namespace AddinFramework.Util
 
 
         /// <summary>
-        /// Load the possible Searches
+        /// Load the possible Searches:<para/>
+        /// - EA Standard Searches<para/>
+        /// - Searches defined in MDG (Program-Technology-Folder, MDG in file locations, MDG in URI locations)<para/> 
+        /// - Local Search of PC <para/> 
         /// </summary>
         static void LoadStaticSearches(EA.Repository rep)
         {
@@ -305,7 +310,7 @@ namespace AddinFramework.Util
         /// <returns></returns>
         public static void LoadSqlSearches()
         {
-            foreach (string file in _globalCfg.getListFileCompleteName())
+            foreach (string file in GlobalCfg.getListFileCompleteName())
             {
                 string name = Path.GetFileName(file);
                 _staticSearches.Add( new SqlSearchItem(name, file)); 

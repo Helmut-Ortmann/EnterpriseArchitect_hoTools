@@ -1976,16 +1976,22 @@ namespace hoTools.EaServices
             ObjectType oType = rep.GetContextItemType();
             switch (oType)
             {
-                    case ObjectType.otElement:
+                case ObjectType.otPackage:
+                case ObjectType.otElement:
                         AddElementNote(rep);
                     break;
-                    case ObjectType.otDiagram:
+                case ObjectType.otDiagram:
                         AddDiagramNote(rep);
                     break;
                     
             }
         }
-
+        /// <summary>
+        /// Add Element note for Element. Element is estimated from:<para/>
+        /// Element, Attribute, Operation, Package
+        /// 
+        /// </summary>
+        /// <param name="rep"></param>
         public static void AddElementNote(Repository rep)
         {
             ObjectType oType = rep.GetContextItemType();
