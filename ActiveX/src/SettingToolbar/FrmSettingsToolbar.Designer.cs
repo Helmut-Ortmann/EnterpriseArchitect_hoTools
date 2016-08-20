@@ -67,6 +67,7 @@
             this.lblServiceButtonText = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.chkShowServiceButtons = new System.Windows.Forms.CheckBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.lblServiceButtonName = new System.Windows.Forms.Label();
             this.lblServiceButtonTooltip = new System.Windows.Forms.Label();
             this.lblServiceButton1 = new System.Windows.Forms.Label();
@@ -83,7 +84,6 @@
             this.txtSqlSearchPath = new System.Windows.Forms.TextBox();
             this.chkShowQueryButtons = new System.Windows.Forms.CheckBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
             this.txtBtn1SearchName = new System.Windows.Forms.TextBox();
             this.txtBtn2SearchName = new System.Windows.Forms.TextBox();
             this.txtBtn3SearchName = new System.Windows.Forms.TextBox();
@@ -326,7 +326,7 @@
             // lblSearchButtonText
             // 
             this.lblSearchButtonText.AutoSize = true;
-            this.lblSearchButtonText.Location = new System.Drawing.Point(80, 20);
+            this.lblSearchButtonText.Location = new System.Drawing.Point(62, 20);
             this.lblSearchButtonText.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblSearchButtonText.Name = "lblSearchButtonText";
             this.lblSearchButtonText.Size = new System.Drawing.Size(94, 18);
@@ -464,13 +464,13 @@
             this.groupBox3.Size = new System.Drawing.Size(1125, 225);
             this.groupBox3.TabIndex = 60;
             this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Services Buttons";
+            this.groupBox3.Text = "Service and Script Buttons";
             this.toolTip1.SetToolTip(this.groupBox3, "Configure Buttons for Services in the Toolbar");
             // 
             // lblServiceButtonText
             // 
             this.lblServiceButtonText.AutoSize = true;
-            this.lblServiceButtonText.Location = new System.Drawing.Point(79, 21);
+            this.lblServiceButtonText.Location = new System.Drawing.Point(64, 20);
             this.lblServiceButtonText.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblServiceButtonText.Name = "lblServiceButtonText";
             this.lblServiceButtonText.Size = new System.Drawing.Size(94, 18);
@@ -498,15 +498,27 @@
             this.toolTip1.SetToolTip(this.chkShowServiceButtons, "Buttons to start a Service with just one click");
             this.chkShowServiceButtons.UseVisualStyleBackColor = true;
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(5, 187);
+            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(165, 20);
+            this.label5.TabIndex = 242;
+            this.label5.Text = "Show Service Buttons";
+            this.toolTip1.SetToolTip(this.label5, "Add Buttons to start a Service with just one click");
+            // 
             // lblServiceButtonName
             // 
             this.lblServiceButtonName.AutoSize = true;
             this.lblServiceButtonName.Location = new System.Drawing.Point(171, 21);
             this.lblServiceButtonName.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblServiceButtonName.Name = "lblServiceButtonName";
-            this.lblServiceButtonName.Size = new System.Drawing.Size(384, 18);
+            this.lblServiceButtonName.Size = new System.Drawing.Size(154, 18);
             this.lblServiceButtonName.TabIndex = 53;
-            this.lblServiceButtonName.Text = "Service (choose from available hoTools Services)";
+            this.lblServiceButtonName.Text = "Service and Scripts";
             // 
             // lblServiceButtonTooltip
             // 
@@ -514,9 +526,9 @@
             this.lblServiceButtonTooltip.Location = new System.Drawing.Point(658, 21);
             this.lblServiceButtonTooltip.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblServiceButtonTooltip.Name = "lblServiceButtonTooltip";
-            this.lblServiceButtonTooltip.Size = new System.Drawing.Size(121, 18);
+            this.lblServiceButtonTooltip.Size = new System.Drawing.Size(202, 18);
             this.lblServiceButtonTooltip.TabIndex = 61;
-            this.lblServiceButtonTooltip.Text = "Service Tooltip";
+            this.lblServiceButtonTooltip.Text = "Service and Script Tooltip";
             // 
             // lblServiceButton1
             // 
@@ -660,18 +672,6 @@
             this.label6.Text = "Show Search Buttons";
             this.toolTip1.SetToolTip(this.label6, "Add Buttons to start a Query with just one click");
             // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(5, 187);
-            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(165, 20);
-            this.label5.TabIndex = 242;
-            this.label5.Text = "Show Service Buttons";
-            this.toolTip1.SetToolTip(this.label5, "Add Buttons to start a Service with just one click");
-            // 
             // txtBtn1SearchName
             // 
             this.txtBtn1SearchName.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -813,7 +813,7 @@
             this.Controls.Add(this.groupBox3);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FrmSettingsToolbar";
-            this.Text = "hoTools: Toolbar Settings for Model Searches & Service";
+            this.Text = "hoTools: Toolbar Settings for Model Searches & Services & Scripts";
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);

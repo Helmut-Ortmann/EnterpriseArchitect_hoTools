@@ -85,6 +85,7 @@ namespace hoTools.Settings.Toolbar
         protected override void OnCreateControl()
         {
             base.OnCreateControl();
+            _settings.UpdateModel(_model);
 
             // Button support for Service and Search
             chkShowQueryButtons.Checked = _settings.IsShortKeySupport;

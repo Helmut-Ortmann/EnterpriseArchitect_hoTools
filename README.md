@@ -6,10 +6,13 @@ Collection of useful tools (see also [WiKi](https://github.com/Helmut-Ortmann/En
 
 - [hoTools](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/hoTools) Assortment of tools
   - Toolbar for Searches and Services
+    - 5 Searches (EA or from SQL File)
+    - 5 Services (Predefined hoTools Services, your beloved Script (VBScript, JavaScript, JScript))
   - Global Keys for Searches and Services 
-    - e.g.: F1+Ctrl executes your beloved Search
+    - e.g.: F1+Ctrl executes your beloved Search (EA, SQL-File)
     - e.g.: F1+Ctrl+Shft locks the selected Package
-  - Set diagram line style
+    - e.g.: F2+Ctrl+Shft runs your beloved Script (VBScript, JavaScript, JScript)
+  - Set diagram Line Style
   - Version Control + SVN
   - [Quick Search](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/Quick Search) 
     - Autocomplete Search, Find Search + List all Searches
@@ -27,6 +30,7 @@ Collection of useful tools (see also [WiKi](https://github.com/Helmut-Ortmann/En
 - [Script](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/Script) which runs for [SQL](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/SQL) results 
   - All EA script languages (vbScript, JScript, JavaScript) 
   - Compatible to Geert Bellekens great VBScript Library
+  - Script can be called from Search Results, Key, Toolbar
 - [Find&Replace](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/FindAndReplace)
   - Find simple string or Regular Expression
   - Name, Description, Stereotype, Tagged Value
@@ -34,7 +38,7 @@ Collection of useful tools (see also [WiKi](https://github.com/Helmut-Ortmann/En
 - [COM Server](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/ComServer) for [SQL searches](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/EaSearches)
 - Configure
  - Buttons & Global Keys
- - Searches & Services
+ - Searches & Services & Scripts
  - GUI appearance
 - Administration of EA
   - Version Control
@@ -101,7 +105,7 @@ Some features:
   - user.config Configuration 
 
 
-# Schedules
+# Releases
 ## Release 2.0.6
 - QuickSearch selection with auto complete for available Searches
   - SQL Searches (multiple folders are possible, file name should be unique)

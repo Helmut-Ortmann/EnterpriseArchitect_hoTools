@@ -976,9 +976,9 @@
             this.label31.Location = new System.Drawing.Point(321, 36);
             this.label31.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(237, 18);
+            this.label31.Size = new System.Drawing.Size(240, 18);
             this.label31.TabIndex = 152;
-            this.label31.Text = "EA Search Name or SQL file name";
+            this.label31.Text = "EA Search Name or SQL file Name";
             // 
             // label30
             // 
@@ -1057,9 +1057,9 @@
             this.Hotkeys.Location = new System.Drawing.Point(5, 36);
             this.Hotkeys.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.Hotkeys.Name = "Hotkeys";
-            this.Hotkeys.Size = new System.Drawing.Size(145, 18);
+            this.Hotkeys.Size = new System.Drawing.Size(199, 18);
             this.Hotkeys.TabIndex = 149;
-            this.Hotkeys.Text = "Global Key: Services";
+            this.Hotkeys.Text = "Global Key: Services & Scripts";
             // 
             // label27
             // 
@@ -1079,9 +1079,10 @@
             this.label28.Location = new System.Drawing.Point(318, 36);
             this.label28.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(101, 18);
+            this.label28.Size = new System.Drawing.Size(174, 18);
             this.label28.TabIndex = 113;
-            this.label28.Text = "Service Name";
+            this.label28.Text = "Choose Service or Script";
+            this.toolTip1.SetToolTip(this.label28, "Choose a hoTools Service or a Script for your Key Combination");
             // 
             // groupBox4
             // 
@@ -1194,7 +1195,7 @@
             this.Controls.Add(this.btnOK);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FrmSettingsKey";
-            this.Text = "hoTools: Settings Global Keys for Model Searches and Services";
+            this.Text = "hoTools: Settings Global Keys for Model Searches & Services & Scripts";
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             this.groupBox4.ResumeLayout(false);

@@ -45,14 +45,13 @@ namespace hoTools.Settings.Key
         protected override void OnCreateControl()
         {
             base.OnCreateControl();
+            _settings.UpdateModel(_model);
             // Global key support
             chkShortKeySupport.Checked = _settings.IsShortKeySupport;
             // SQL Paths
             txtSqlSearchPath.Text = _settings.SqlPaths;
 
-            // Load Scripts
-            List<Script> _lscripts = Script.GetEaMaticScripts(_model);
-
+            
             #region set possible services
             // set 5 lists of all possible services
             var lServices1 = new List<Service>();

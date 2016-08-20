@@ -4574,12 +4574,12 @@ namespace hoTools.EaServices
         #region Favorites
 
         /// <summary>
-        /// List Favorite:
-        /// - List Favorites in the search window
+        /// Show Favorite:
+        /// - Show Favorites in the search window
         /// </summary>
         /// <param name="rep"></param>
-        [ServiceOperation("{756710FA-A99E-40D3-B265-518DDF1014D1}", "Favorites",
-            "Element, package, diagram, attribute, operation",
+        [ServiceOperation("{756710FA-A99E-40D3-B265-518DDF1014D1}", "Show Favorites",
+            "Element, Package, Diagram, Attribute, Operation in EA Model Search",
             isTextRequired: false)]
         public static void Favorites(Repository rep)
         {
