@@ -63,26 +63,26 @@
   <ItemGroup>
     <Compile Include="EASpecific\EAAddin.cs" />
     <Compile Include="Extension\EaExtensionClass.cs" />
-    <Compile Include="Util\EaItem.cs" />
-    <Compile Include="Util\EaObjectType.cs" />
-    <Compile Include="Util\Script\ScriptUtility.cs" />
-    <Compile Include="Util\Search\Search.cs" />
-    <Compile Include="Util\Script\EaScript.cs" />
-    <Compile Include="Util\Script\EaScriptGroup.cs" />
-    <Compile Include="Util\Script\JavaScriptLanguage.cs" />
-    <Compile Include="Util\Script\JavaScriptLanguageBase.cs" />
-    <Compile Include="Util\Script\JScriptLanguage.cs" />
-    <Compile Include="Util\Script\Script.cs" />
-    <Compile Include="Util\Script\ScriptFunction.cs" />
-    <Compile Include="Util\Script\ScriptLanguage.cs" />
-    <Compile Include="Util\Script\ScriptType.cs" />
-    <Compile Include="Util\Script\VBScriptLanguage.cs" />
+    <Compile Include="Utils\EaItem.cs" />
+    <Compile Include="Utils\EaObjectType.cs" />
+    <Compile Include="Utils\Script\ScriptUtility.cs" />
+    <Compile Include="Utils\Search\Search.cs" />
+    <Compile Include="Utils\Script\EaScript.cs" />
+    <Compile Include="Utils\Script\EaScriptGroup.cs" />
+    <Compile Include="Utils\Script\JavaScriptLanguage.cs" />
+    <Compile Include="Utils\Script\JavaScriptLanguageBase.cs" />
+    <Compile Include="Utils\Script\JScriptLanguage.cs" />
+    <Compile Include="Utils\Script\Script.cs" />
+    <Compile Include="Utils\Script\ScriptFunction.cs" />
+    <Compile Include="Utils\Script\ScriptLanguage.cs" />
+    <Compile Include="Utils\Script\ScriptType.cs" />
+    <Compile Include="Utils\Script\VBScriptLanguage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Util\Model.cs" />
-    <Compile Include="Util\Search\SearchItem.cs" />
-    <Compile Include="Util\User.cs" />
-    <Compile Include="Util\WindowWrapper.cs" />
-    <Compile Include="Util\WorkingSet.cs" />
+    <Compile Include="Utils\Model.cs" />
+    <Compile Include="Utils\Search\SearchItem.cs" />
+    <Compile Include="Utils\User.cs" />
+    <Compile Include="Utils\WindowWrapper.cs" />
+    <Compile Include="Utils\WorkingSet.cs" />
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="MSScriptControl">
