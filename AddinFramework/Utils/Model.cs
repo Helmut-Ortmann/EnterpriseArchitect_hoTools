@@ -904,6 +904,7 @@ namespace EAAddinFramework.Utils
         /// <summary>
         /// all users defined in this model
         /// </summary>
+        // ReSharper disable once MemberCanBePrivate.Global
         public List<User> Users
         {
             get
@@ -954,7 +955,94 @@ namespace EAAddinFramework.Utils
                 return userList;
             }
         }
-        
+        /// <summary>
+        /// Expose Clipboard.Clear()
+        /// </summary>
+        // ReSharper disable once UnusedMember.Global
+        public void ClipboardClear()
+        {
+            Clipboard.Clear();
+        }
+        /// <summary>
+        /// Expose Clipboard.SetText()
+        /// </summary>
+        /// <returns></returns>
+        // ReSharper disable once UnusedMember.Global
+        public void ClipboardSetText(object text)
+        {
+            Clipboard.SetText((string)text);
+        }
+        /// <summary>
+        /// Exposes ClipboardGetText(TestDataFormat);
+        /// <para/> 0=TextDataFormat.CommaSeparatedValue;
+        /// <para/>1=TextDataFormat.Html;
+        /// <para/>2=TextDataFormat.Rtf;
+        /// <para/>3=TextDataFormat.Text;
+        /// <para/>4=TextDataFormat.UnicodeText;
+        /// </summary>
+        /// <param name="textDataType"></param>
+        /// <returns></returns>
+        // ReSharper disable once UnusedMember.Global
+        public string ClipboardGetText(int textDataType)
+        {
+            switch (textDataType)
+            {
+                case 0:
+                    return Clipboard.GetText(TextDataFormat.CommaSeparatedValue);
+                case 1:
+                    return Clipboard.GetText(TextDataFormat.Html);
+                case 2:
+                    return Clipboard.GetText(TextDataFormat.Rtf);
+                case 3:
+                    return Clipboard.GetText(TextDataFormat.Text);
+                case 4: 
+                    return Clipboard.GetText(TextDataFormat.UnicodeText);
+                default:
+                    MessageBox.Show($"Valid Clipboard Get (TextDataFormat):0-4, was '{textDataType}'", @"Invalid Clipboard Parameter Clipboard.GetText(TextDataFormat");
+                    return "";
+            } 
+
+        }
+
+        /// <summary>
+        /// Exposes ClipboardSetText(text, TestDataFormat);
+        /// <para/> 0=TextDataFormat.CommaSeparatedValue;
+        /// <para/>1=TextDataFormat.Html;
+        /// <para/>2=TextDataFormat.Rtf;
+        /// <para/>3=TextDataFormat.Text;
+        /// <para/>4=TextDataFormat.UnicodeText;
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="textDataType"></param>
+        /// <returns></returns>
+        // ReSharper disable once UnusedMember.Global
+        public void ClipboardSetText(object text, object textDataType)
+        {
+            int dataType = (int) textDataType;
+            switch (dataType)
+            {
+                case 0:
+                    Clipboard.SetText((string)text, TextDataFormat.CommaSeparatedValue);
+                    return;
+                case 1:
+                    Clipboard.SetText((string)text, TextDataFormat.Html);
+                    return;
+                case 2:
+                    Clipboard.SetText((string)text, TextDataFormat.Rtf);
+                    return;
+                case 3:
+                    Clipboard.SetText((string)text, TextDataFormat.Text);
+                    return;
+                case 4:
+                    Clipboard.SetText((string)text, TextDataFormat.UnicodeText);
+                    return;
+                default:
+                    MessageBox.Show($"Valid Clipboard Set (TextDataFormat):0-4, was '{textDataType}'", @"Invalid Clipboard Parameter Clipboard.SetText(text, TextDataFormat");
+                    return;
+            }
+
+        }
+
 
     }
 }
