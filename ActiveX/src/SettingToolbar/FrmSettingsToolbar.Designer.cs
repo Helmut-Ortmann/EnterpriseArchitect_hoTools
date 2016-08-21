@@ -516,9 +516,10 @@
             this.lblServiceButtonName.Location = new System.Drawing.Point(171, 21);
             this.lblServiceButtonName.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblServiceButtonName.Name = "lblServiceButtonName";
-            this.lblServiceButtonName.Size = new System.Drawing.Size(154, 18);
+            this.lblServiceButtonName.Size = new System.Drawing.Size(252, 18);
             this.lblServiceButtonName.TabIndex = 53;
-            this.lblServiceButtonName.Text = "Service and Scripts";
+            this.lblServiceButtonName.Text = "Service and Scripts (End of List)";
+            this.toolTip1.SetToolTip(this.lblServiceButtonName, resources.GetString("lblServiceButtonName.ToolTip"));
             // 
             // lblServiceButtonTooltip
             // 

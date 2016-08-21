@@ -1123,7 +1123,7 @@ namespace hoTools.Settings
         #endregion
         #region getAllServices
         /// <summary>
-        /// Get all possible Service of type Call from Method Attributes
+        /// Fill the list AllServices with all possible Services and Scripts.
         /// </summary>
         private void GetAllServices()
         {
@@ -1138,12 +1138,13 @@ namespace hoTools.Settings
                     var serviceOperation = attr as ServiceOperationAttribute;
                     if (null != serviceOperation)
                     {
-                        AllServices.Add(new ServiceCall(method, serviceOperation.Guid, serviceOperation.Description, serviceOperation.Help, serviceOperation.IsTextRequired));
+                        AllServices.Add(new ServiceCall(method, serviceOperation.Guid, serviceOperation.Description, 
+                            serviceOperation.Help, serviceOperation.IsTextRequired));
                     }
                 }
             }
 
-
+            // Get all suitable Scripts
             foreach (Script script in Script.GetEaMaticScripts(_model))
             {
                 foreach (ScriptFunction scriptFunction in script.Functions)
@@ -1193,7 +1194,8 @@ namespace hoTools.Settings
                 }
                 else
                 {
-                    // over all possible services
+                    // over all possible services and scripts
+                    bool foundValidEntry = false;
                     foreach (Service s in AllServices)
                     {
                         if (service.Id == s.Id)
@@ -1205,6 +1207,7 @@ namespace hoTools.Settings
                                     service.Modifier3, service.Modifier4,
                                     sCall.Help, sCall.Method, sCall.Id, sCall.Description, false);
                                 tempGlobalKeysConfig.Add(serviceCall);
+                                foundValidEntry = true;
                                 break;
                             }
                             if (s is ServiceScript)
@@ -1214,15 +1217,26 @@ namespace hoTools.Settings
                                     service.Modifier3, service.Modifier4,
                                     sScript.Function, sScript.Description, sScript.Help);
                                 tempGlobalKeysConfig.Add(serviceScript);
+                                foundValidEntry = true;
                                 break;
                             }
                         }
+                    }
+                    if (foundValidEntry == false)
+                    {
+                        var serviceCall = new GlobalKeysConfig(ServicesConfig.ServiceEmpty,
+                        service.Key, service.Modifier1, service.Modifier2, service.Modifier3, service.Modifier4,
+                        "", "");
+                        tempGlobalKeysConfig.Add(serviceCall);
                     }
                 }
             }
             GlobalKeysConfig = tempGlobalKeysConfig;
         }
 
+        /// <summary>
+        /// Update Toolbar Buttons by available Services and Scripts.
+        /// </summary>
         private void UpdateToolbarServiceButtons()
         {
             // all services of type Call or Script
@@ -1238,6 +1252,7 @@ namespace hoTools.Settings
                 else
                 {
                     //int index = allServices.BinarySearch(new EaServices.ServiceCall(null, service.Id, "","", false), new EaServices.ServicesCallGUIDComparer());
+                    bool foundValidEntry = false;
                     foreach (Service s in AllServices)
                     {
                         if (s is ServiceCall)
@@ -1250,6 +1265,7 @@ namespace hoTools.Settings
                                 serviceCall.Method = sCall.Method;
                                 serviceCall.Help = sCall.Help;
                                 serviceCall.Description = sCall.Description;
+                                foundValidEntry = true;
                                 break;
                             }
                         }
@@ -1264,9 +1280,16 @@ namespace hoTools.Settings
                                 serviceScript.Function = sScript.Function;
                                 serviceScript.Help = sScript.Help;
                                 serviceScript.Description = sScript.Description;
+                                foundValidEntry = true;
                                 break;
                             }
                         }
+                    }
+                    // no valid entry found, use default
+                    if (foundValidEntry == false)
+                    {
+                        var serviceCall = new ServicesConfig(service.Pos, ServicesConfig.ServiceEmpty, service.ButtonText);
+                        tempButtonsServiceConfig.Add(serviceCall);
                     }
                 }
             }

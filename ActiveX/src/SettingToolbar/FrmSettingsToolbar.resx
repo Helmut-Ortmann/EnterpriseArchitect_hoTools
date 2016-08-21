@@ -195,6 +195,16 @@ The following wild cards are supported and converted according to your database:
 e.g.: 'myString*' Everything starting with 'myString' (db independent)
 </value>
   </data>
+  <data name="lblServiceButtonName.ToolTip" xml:space="preserve">
+    <value>Choose a Service or a Script for your Key Combination.
+
+Services at the start of the list to choose from.
+
+Scripts at the end of the list to choose from.
+Only Script with:
+- 'EA-Matic
+- 2 or three parameters are shown!</value>
+  </data>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>25</value>
   </metadata>

@@ -111,9 +111,9 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.txtSqlSearchPath = new System.Windows.Forms.TextBox();
+            this.label28 = new System.Windows.Forms.Label();
             this.Hotkeys = new System.Windows.Forms.Label();
             this.label27 = new System.Windows.Forms.Label();
-            this.label28 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -1050,6 +1050,18 @@
         "aths hoTools searches for the SQL query to execute.\r\n\r\nLike: c:\\temp\\sql;d:\\temp" +
         "\\sql");
             // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label28.Location = new System.Drawing.Point(318, 36);
+            this.label28.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(253, 18);
+            this.label28.TabIndex = 113;
+            this.label28.Text = "Choose Service or Script (End of list)";
+            this.toolTip1.SetToolTip(this.label28, resources.GetString("label28.ToolTip"));
+            // 
             // Hotkeys
             // 
             this.Hotkeys.AutoSize = true;
@@ -1071,18 +1083,6 @@
             this.label27.Size = new System.Drawing.Size(106, 18);
             this.label27.TabIndex = 115;
             this.label27.Text = "Service Tooltip";
-            // 
-            // label28
-            // 
-            this.label28.AutoSize = true;
-            this.label28.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label28.Location = new System.Drawing.Point(318, 36);
-            this.label28.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(174, 18);
-            this.label28.TabIndex = 113;
-            this.label28.Text = "Choose Service or Script";
-            this.toolTip1.SetToolTip(this.label28, "Choose a hoTools Service or a Script for your Key Combination");
             // 
             // groupBox4
             // 

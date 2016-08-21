@@ -120,9 +120,6 @@
   <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
   <data name="cmbGlobalKeySearch5SearchTerm.ToolTip" xml:space="preserve">
     <value>Enter &lt;Search Term&gt; to specify your Search more specific.
 
@@ -339,6 +336,16 @@ You have to restart EA to activate the configured settings.</value>
 Define a key combination for a search or a service (see Settings Keys).
 
 You have to restart EA to activate the configured settings.</value>
+  </data>
+  <data name="label28.ToolTip" xml:space="preserve">
+    <value>Choose a Service or a Script for your Key Combination.
+
+Services at the start of the list to choose from.
+
+Scripts at the end of the list to choose from.
+Only Script with:
+- 'EA-Matic
+- 2 or three parameters are shown!</value>
   </data>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>25</value>

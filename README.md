@@ -5,10 +5,10 @@ Addin with Tools for SPARX Enterprise Architect (EA)
 Collection of useful tools (see also [WiKi](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/home)):
 
 - [hoTools](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/hoTools) Assortment of tools
-  - Toolbar for Searches and Services
+  - Toolbar for Searches, [SQL](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/SQL), [Services](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/Services) and [Scripts](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/Scripts)
     - 5 Searches (EA or from SQL File)
     - 5 Services (Predefined hoTools Services, your beloved Script (VBScript, JavaScript, JScript))
-  - Global Keys for Searches and Services 
+  - Global Keys for Searches, SQL, Services and Scripts 
     - e.g.: F1+Ctrl executes your beloved Search (EA, SQL-File)
     - e.g.: F1+Ctrl+Shft locks the selected Package
     - e.g.: F2+Ctrl+Shft runs your beloved Script (VBScript, JavaScript, JScript)
@@ -129,7 +129,7 @@ Some features:
 - Fix: Opened tabbed were duplicated by opening another repository
 - Optimization: Only one Button Conveyed Items (former two, function decides from selected element/connector/flow)
 - Optimization: Only one Button Notes (former two, function decides from selected element/diagram what to do)
-- Switch off annoying tooltip in SQL window
+- Switch off annoying Tooltip in SQL window
 - Search description adapted to EA 13
 
 
