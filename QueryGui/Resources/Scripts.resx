@@ -234,7 +234,7 @@ sub hoDemoRunSql
     set m = CreateObject("EAAddinFramework.Utils.Model")
 	if m is nothing Then
 	   Repository.WriteOutput "Script","Can't create object for 'EAAddinFramework.Utils.Model'",0
-	   Exit Function
+	   Exit Sub
 	end if
     ' Create new Model Object with the first running EA instance
 	set rep = m.Repository

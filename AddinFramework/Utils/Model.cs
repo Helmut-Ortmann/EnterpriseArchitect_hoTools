@@ -968,6 +968,16 @@ namespace EAAddinFramework.Utils
         /// </summary>
         /// <returns></returns>
         // ReSharper disable once UnusedMember.Global
+        public string ClipboardGetText()
+        {
+            string s = Clipboard.GetText();
+            return s;
+        }
+        /// <summary>
+        /// Expose Clipboard.SetText()
+        /// </summary>
+        /// <returns></returns>
+        // ReSharper disable once UnusedMember.Global
         public void ClipboardSetText(object text)
         {
             Clipboard.SetText((string)text);
