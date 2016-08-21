@@ -123,8 +123,9 @@ Some features:
 - Fix: Automatic line style: Line-style of a length of 1 leads to Exception
 - Error fixed Script usage of hoTools as COM Object
 
-## Release 2.0.8
-    
+## Release 2.0.9
+
+- Consolidate Tag with release (skip 2.0.8)    
 - Fix: Conveyed Items for Information Flow and for Connector
 - Fix: Opened tabbed were duplicated by opening another repository
 - Optimization: Only one Button Conveyed Items (former two, function decides from selected element/connector/flow)

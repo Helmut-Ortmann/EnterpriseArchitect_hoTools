@@ -33,6 +33,6 @@ using System.Runtime.InteropServices;
 // übernehmen, indem Sie "*" eingeben:
 [assembly: AssemblyVersion("2.0.0.1")]
 // possibly make same as ProductVersion in Product.wxs
-[assembly: AssemblyFileVersion("2.0.8")]
+[assembly: AssemblyFileVersion("2.0.9")]
 [assembly: NeutralResourcesLanguage("en")]
 
