@@ -158,6 +158,10 @@ namespace hoTools.ActiveX
         private ContextMenuStrip _contextMenuStrip1;
         private RichTextBox rtfListOfSearches;
         private TextBox _txtSearchName;
+        private ToolStripMenuItem updateScriptsToolStripMenuItem;
+        private ToolStripMenuItem gitHubToolStripMenuItem;
+        private ToolStripSeparator toolStripSeparator1;
+        private ToolStripSeparator toolStripSeparator2;
         private TextBox _txtSearchText;
         #endregion
 
@@ -404,11 +408,27 @@ namespace hoTools.ActiveX
             EaService.SetLineStyle(Repository, "B");
         }
 
+        /// <summary>
+        /// Open GitHub WiKi
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void helpToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            Help.ShowHelp(this, EaService.GetAssemblyPath() + "\\" + "hoTools.chm");
+            // Open GitHub Wiki
+            EaService.Wiki();
         }
-
+        /// <summary>
+        /// Open GitHub Repository
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void githubToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            // Open GitHub Repository
+            EaService.Repo();
+        }
+        
 
 
         void toolStripServiceBtn1_Click(object sender, EventArgs e)
@@ -1016,6 +1036,7 @@ namespace hoTools.ActiveX
             this._settingsGlobalKeysToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._settingsToolbarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._settingsQueryAndSctipToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.updateScriptsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._doToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._createActivityForOperationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._updateActivityFromOperationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -1063,6 +1084,7 @@ namespace hoTools.ActiveX
             this._aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._getLastSqlErrorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._helpToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.gitHubToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._panelButtons = new System.Windows.Forms.Panel();
             this._panelLineStyle = new System.Windows.Forms.Panel();
             this._panelFavorite = new System.Windows.Forms.Panel();
@@ -1072,6 +1094,8 @@ namespace hoTools.ActiveX
             this._panelAdvanced = new System.Windows.Forms.Panel();
             this._panelQuickSearch = new System.Windows.Forms.TableLayoutPanel();
             this._contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this._toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this._toolStripContainer1.SuspendLayout();
             this._toolStripQuery.SuspendLayout();
@@ -1492,7 +1516,8 @@ namespace hoTools.ActiveX
             this._settingsToolStripMenuItem,
             this._settingsGlobalKeysToolStripMenuItem,
             this._settingsToolbarToolStripMenuItem,
-            this._settingsQueryAndSctipToolStripMenuItem});
+            this._settingsQueryAndSctipToolStripMenuItem,
+            this.updateScriptsToolStripMenuItem});
             this._fileToolStripMenuItem.Name = "_fileToolStripMenuItem";
             resources.ApplyResources(this._fileToolStripMenuItem, "_fileToolStripMenuItem");
             // 
@@ -1525,6 +1550,12 @@ namespace hoTools.ActiveX
             this._settingsQueryAndSctipToolStripMenuItem.Name = "_settingsQueryAndSctipToolStripMenuItem";
             resources.ApplyResources(this._settingsQueryAndSctipToolStripMenuItem, "_settingsQueryAndSctipToolStripMenuItem");
             this._settingsQueryAndSctipToolStripMenuItem.Click += new System.EventHandler(this.settingsQueryAndSctipToolStripMenuItem_Click);
+            // 
+            // updateScriptsToolStripMenuItem
+            // 
+            this.updateScriptsToolStripMenuItem.Name = "updateScriptsToolStripMenuItem";
+            resources.ApplyResources(this.updateScriptsToolStripMenuItem, "updateScriptsToolStripMenuItem");
+            this.updateScriptsToolStripMenuItem.Click += new System.EventHandler(this.updateScriptsToolStripMenuItem_Click);
             // 
             // _doToolStripMenuItem
             // 
@@ -1815,9 +1846,12 @@ namespace hoTools.ActiveX
             // _helpToolStripMenuItem
             // 
             this._helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this._aboutToolStripMenuItem,
             this._getLastSqlErrorToolStripMenuItem,
-            this._helpToolStripMenuItem1});
+            this.toolStripSeparator1,
+            this._helpToolStripMenuItem1,
+            this.gitHubToolStripMenuItem,
+            this.toolStripSeparator2,
+            this._aboutToolStripMenuItem});
             this._helpToolStripMenuItem.Name = "_helpToolStripMenuItem";
             resources.ApplyResources(this._helpToolStripMenuItem, "_helpToolStripMenuItem");
             this._helpToolStripMenuItem.Click += new System.EventHandler(this.helpToolStripMenuItem_Click);
@@ -1839,6 +1873,12 @@ namespace hoTools.ActiveX
             this._helpToolStripMenuItem1.Name = "_helpToolStripMenuItem1";
             resources.ApplyResources(this._helpToolStripMenuItem1, "_helpToolStripMenuItem1");
             this._helpToolStripMenuItem1.Click += new System.EventHandler(this.helpToolStripMenuItem1_Click);
+            // 
+            // gitHubToolStripMenuItem
+            // 
+            this.gitHubToolStripMenuItem.Name = "gitHubToolStripMenuItem";
+            resources.ApplyResources(this.gitHubToolStripMenuItem, "gitHubToolStripMenuItem");
+            this.gitHubToolStripMenuItem.Click += new System.EventHandler(this.githubToolStripMenuItem1_Click);
             // 
             // _panelButtons
             // 
@@ -1915,6 +1955,16 @@ namespace hoTools.ActiveX
             // 
             this._contextMenuStrip1.Name = "_contextMenuStrip1";
             resources.ApplyResources(this._contextMenuStrip1, "_contextMenuStrip1");
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            resources.ApplyResources(this.toolStripSeparator1, "toolStripSeparator1");
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            resources.ApplyResources(this.toolStripSeparator2, "toolStripSeparator2");
             // 
             // AddinControlGui
             // 
@@ -2405,6 +2455,15 @@ namespace hoTools.ActiveX
         private void rtfListOfSearches_Leave(object sender, EventArgs e)
         {
             rtfListOfSearches.Visible = false;
+        }
+        /// <summary>
+        /// Update Scripts
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void updateScriptsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AddinSettings.UpdateModel(_model);
         }
     }
 

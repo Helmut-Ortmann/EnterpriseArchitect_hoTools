@@ -787,12 +787,25 @@ namespace hoTools.Query
             script = new EaScript(Model, "hoDemoRunSql", "Internal", "VBScript", group.Guid, code);
             script.Save();
 
-           
+
+            // new script for script group "hoTools"
+            code = rm.GetString("hoDemo2ParScript_JS");
+            script = new EaScript(Model, "hoDemo2Par_JS", "Internal", "JavaScript", group.Guid, code);
+            script.Save();
+
+            // new script for script group "hoTools"
+            code = rm.GetString("Clipboard");
+            script = new EaScript(Model, "Clipboard", "Internal", "VBScript", group.Guid, code);
+            script.Save();
+
+
             MessageBox.Show(@"ScriptGroup: hoTools
-- Script1: hoDemo2Par
-- Script2: hoDemo3Par
-- Script3: hoDemoRunSql",
-                @"Demo Scripts to run on query loaded.");
+- Script1: hoDemo2Par   VbScript
+- Script2: hoDemo3Par   VbScript
+- Script3: hoDemoRunSql VbScript
+- Script4: hoDemo2Par   JavaScript
+- Script5: Clipboard    VbScript",
+                @"Demo Scripts to run on SQL row, Key or Toolbar Button loaded.");
         }
 
         void QueryGUI_Resize(object sender, EventArgs e)
@@ -815,6 +828,26 @@ namespace hoTools.Query
         void _newTabWithFileDialogToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _sqlTabCntrls.AddTabWithFileDialog();
+        }
+
+        private void gitHubWiKiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EaService.WikiSql();
+        }
+
+        private void gitHubWiKiSQLToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EaService.WikiSql();
+        }
+
+        private void gitHubWiKiScriptToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EaService.WikiScript();
+        }
+
+        private void gitHubRepositoryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EaService.Repo();
         }
     }
 }

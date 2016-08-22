@@ -4944,5 +4944,22 @@ Workshops, Training Coaching, Project Work
         }
 
         #endregion
+
+        public static void Wiki()
+        {
+            System.Diagnostics.Process.Start("https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki");
+        }
+        public static void WikiSql()
+        {
+            System.Diagnostics.Process.Start("https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/Sql");
+        }
+        public static void WikiScript()
+        {
+            System.Diagnostics.Process.Start("https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/Script");
+        }
+        public static void Repo()
+        {
+            System.Diagnostics.Process.Start("https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools");
+        }
     }
 }

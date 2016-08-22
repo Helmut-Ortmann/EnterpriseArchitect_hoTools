@@ -133,6 +133,11 @@ Some features:
 - Switch off annoying Tooltip in SQL window
 - Search description adapted to EA 13
 
+## Release 2.0.10
+- Add Load Scripts (if a Script is changed the user has to update the Script in hoTools before using it)
+- Script Examples for JavaScript
+- EAModel with Clipboard functions (for usage in Scripts)
+
 
 ## Not yet scheduled 
 - Search Management (for Quick Search)

@@ -117,15 +117,398 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Clipboard" xml:space="preserve">
+    <value>'EA-Matic
+' Usage of Geert Bellekens Script Framework to administer Scripts recommended
+'[path=\Framework\ho\hoTools]
+'[group=hoTools]
+'option explicit
+
+!INC Local Scripts.EAConstants-VBScript
+'--------------------------------------------------------------------
+' hoTools Script Environment (Call from hoTools)
+' - Global Key can run Script
+' - Toolbar Button can run Script
+' - SQL result rows can run Script 
+'--------------------------------------------------------------------
+' Dim doesn't work (syntax error)
+' Object 'Session' doesn't exist (use  Repository.WriteOutput "Script", "MyTest",0)
+'
+' Var 'Repository' is loaded by Script Environment
+' Var 'EAModel'    is loaded by Script Environment (Supports Search, Clipboard and more)
+' You may create an instance 'EAAddinFramework.Utils.Model' of the first running EA-Instance (equal to variable EAModel)
+'
+' hoTools requires 2 or 3 Parameter
+' par1: EA Context Item 
+' par2: EA Object Type
+' par3: Optionial EAModel for (Supports Search, Clipboard and more)
+'---------------------
+' https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki
+' https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/Scripts
+' https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools
+'---------------------------------------------------------------------
+' Demo Script to show how to run an SQL file by Script
+sub hoClipboard
+   ' The EA default variable 'Repository'
+   'Repository.ClearOutput("Script")
+    Repository.EnsureOutputVisible("Script") 
+
+    ' just output the parameters
+	Repository.WriteOutput "Script","hoClipboard",0
+	
+	' Get Repository via Model object.
+    set m = CreateObject("EAAddinFramework.Utils.Model")
+	if m is nothing Then
+	   Repository.WriteOutput "Script","Can't create object for 'EAAddinFramework.Utils.Model'",0
+	   Exit Sub
+	end if
+	'm.SearchRun "d:\temp\sql\Branch.sql", ""
+	m.ClipboardSetText "ddd"
+	Dim s
+    s = m.ClipboardGetText
+    Repository.WriteOutput "Script",s,0
+	m.ClipBoardClear
+	s = m.ClipboardGetText
+    Repository.WriteOutput "Script","Empty'"+s+"'",0
+	
+	
+
+	Repository.EnsureOutputVisible("Script") 
+	
+end sub
+
+' Run the function
+'EA-Matic
+' Usage of Geert Bellekens Script Framework to administer Scripts recommended
+'[path=\Framework\ho\hoTools]
+'[group=hoTools]
+'option explicit
+
+!INC Local Scripts.EAConstants-VBScript
+'--------------------------------------------------------------------
+' hoTools Script Environment (Call from hoTools)
+' - Global Key can run Script
+' - Toolbar Button can run Script
+' - SQL result rows can run Script 
+'--------------------------------------------------------------------
+' Dim doesn't work (syntax error)
+' Object 'Session' doesn't exist (use  Repository.WriteOutput "Script", "MyTest",0)
+'
+' Var 'Repository' is loaded by Script Environment
+' Var 'EAModel'    is loaded by Script Environment (Supports Search, Clipboard and more)
+' You may create an instance 'EAAddinFramework.Utils.Model' of the first running EA-Instance (equal to variable EAModel)
+'
+' hoTools requires 2 or 3 Parameter
+' par1: EA Context Item 
+' par2: EA Object Type
+' par3: Optionial EAModel for (Supports Search, Clipboard and more)
+'---------------------
+' https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki
+' https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/Scripts
+' https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools
+'---------------------------------------------------------------------
+' Demo Script to show how to run an SQL file by Script
+sub hoClipboard
+   ' The EA default variable 'Repository'
+   'Repository.ClearOutput("Script")
+    Repository.EnsureOutputVisible("Script") 
+
+    ' just output the parameters
+	Repository.WriteOutput "Script","hoClipboard",0
+	
+	' Get Repository via Model object.
+    set m = CreateObject("EAAddinFramework.Utils.Model")
+	if m is nothing Then
+	   Repository.WriteOutput "Script","Can't create object for 'EAAddinFramework.Utils.Model'",0
+	   Exit Sub
+	end if
+	'm.SearchRun "d:\temp\sql\Branch.sql", ""
+	m.ClipboardSetText "ddd"
+	Dim s
+    s = m.ClipboardGetText
+    Repository.WriteOutput "Script",s,0
+	m.ClipBoardClear
+	s = m.ClipboardGetText
+    Repository.WriteOutput "Script","Empty'"+s+"'",0
+	
+	
+
+	Repository.EnsureOutputVisible("Script") 
+	
+end sub
+
+' Run the function
+'EA-Matic
+' Usage of Geert Bellekens Script Framework to administer Scripts recommended
+'[path=\Framework\ho\hoTools]
+'[group=hoTools]
+'option explicit
+
+!INC Local Scripts.EAConstants-VBScript
+'--------------------------------------------------------------------
+' hoTools Script Environment (Call from hoTools)
+' - Global Key can run Script
+' - Toolbar Button can run Script
+' - SQL result rows can run Script 
+'--------------------------------------------------------------------
+' Dim doesn't work (syntax error)
+' Object 'Session' doesn't exist (use  Repository.WriteOutput "Script", "MyTest",0)
+'
+' Var 'Repository' is loaded by Script Environment
+' Var 'EAModel'    is loaded by Script Environment (Supports Search, Clipboard and more)
+' You may create an instance 'EAAddinFramework.Utils.Model' of the first running EA-Instance (equal to variable EAModel)
+'
+' hoTools requires 2 or 3 Parameter
+' par1: EA Context Item 
+' par2: EA Object Type
+' par3: Optionial EAModel for (Supports Search, Clipboard and more)
+'---------------------
+' https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki
+' https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/Scripts
+' https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools
+'---------------------------------------------------------------------
+' Demo Script to show how to run an SQL file by Script
+sub hoClipboard
+   ' The EA default variable 'Repository'
+   'Repository.ClearOutput("Script")
+    Repository.EnsureOutputVisible("Script") 
+
+    ' just output the parameters
+	Repository.WriteOutput "Script","hoClipboard",0
+	
+	' Get Repository via Model object.
+    set m = CreateObject("EAAddinFramework.Utils.Model")
+	if m is nothing Then
+	   Repository.WriteOutput "Script","Can't create object for 'EAAddinFramework.Utils.Model'",0
+	   Exit Sub
+	end if
+	'm.SearchRun "d:\temp\sql\Branch.sql", ""
+	m.ClipboardSetText "ddd"
+	Dim s
+    s = m.ClipboardGetText
+    Repository.WriteOutput "Script",s,0
+	m.ClipBoardClear
+	s = m.ClipboardGetText
+    Repository.WriteOutput "Script","Empty'"+s+"'",0
+	
+	
+
+	Repository.EnsureOutputVisible("Script") 
+	
+end sub
+
+' Run the function
+'EA-Matic
+' Usage of Geert Bellekens Script Framework to administer Scripts recommended
+'[path=\Framework\ho\hoTools]
+'[group=hoTools]
+'option explicit
+
+!INC Local Scripts.EAConstants-VBScript
+'--------------------------------------------------------------------
+' hoTools Script Environment (Call from hoTools)
+' - Global Key can run Script
+' - Toolbar Button can run Script
+' - SQL result rows can run Script 
+'--------------------------------------------------------------------
+' Dim doesn't work (syntax error)
+' Object 'Session' doesn't exist (use  Repository.WriteOutput "Script", "MyTest",0)
+'
+' Var 'Repository' is loaded by Script Environment
+' Var 'EAModel'    is loaded by Script Environment (Supports Search, Clipboard and more)
+' You may create an instance 'EAAddinFramework.Utils.Model' of the first running EA-Instance (equal to variable EAModel)
+'
+' hoTools requires 2 or 3 Parameter
+' par1: EA Context Item 
+' par2: EA Object Type
+' par3: Optionial EAModel for (Supports Search, Clipboard and more)
+'---------------------
+' https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki
+' https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/Scripts
+' https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools
+'---------------------------------------------------------------------
+' Demo Script to show how to run an SQL file by Script
+sub hoClipboard
+   ' The EA default variable 'Repository'
+   'Repository.ClearOutput("Script")
+    Repository.EnsureOutputVisible("Script") 
+
+    ' just output the parameters
+	Repository.WriteOutput "Script","hoClipboard",0
+	
+	' Get Repository via Model object.
+    set m = CreateObject("EAAddinFramework.Utils.Model")
+	if m is nothing Then
+	   Repository.WriteOutput "Script","Can't create object for 'EAAddinFramework.Utils.Model'",0
+	   Exit Sub
+	end if
+	'm.SearchRun "d:\temp\sql\Branch.sql", ""
+	m.ClipboardSetText "ddd"
+	Dim s
+    s = m.ClipboardGetText
+    Repository.WriteOutput "Script",s,0
+	m.ClipBoardClear
+	s = m.ClipboardGetText
+    Repository.WriteOutput "Script","Empty'"+s+"'",0
+	
+	
+
+	Repository.EnsureOutputVisible("Script") 
+	
+end sub
+
+' Run the function
+'EA-Matic
+' Usage of Geert Bellekens Script Framework to administer Scripts recommended
+'[path=\Framework\ho\hoTools]
+'[group=hoTools]
+'option explicit
+
+!INC Local Scripts.EAConstants-VBScript
+'--------------------------------------------------------------------
+' hoTools Script Environment (Call from hoTools)
+' - Global Key can run Script
+' - Toolbar Button can run Script
+' - SQL result rows can run Script 
+'--------------------------------------------------------------------
+' Dim doesn't work (syntax error)
+' Object 'Session' doesn't exist (use  Repository.WriteOutput "Script", "MyTest",0)
+'
+' Var 'Repository' is loaded by Script Environment
+' Var 'EAModel'    is loaded by Script Environment (Supports Search, Clipboard and more)
+' You may create an instance 'EAAddinFramework.Utils.Model' of the first running EA-Instance (equal to variable EAModel)
+'
+' hoTools requires 2 or 3 Parameter
+' par1: EA Context Item 
+' par2: EA Object Type
+' par3: Optionial EAModel for (Supports Search, Clipboard and more)
+'---------------------
+' https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki
+' https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/Scripts
+' https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools
+'---------------------------------------------------------------------
+' Demo Script to show how to run an SQL file by Script
+sub hoClipboard
+   ' The EA default variable 'Repository'
+   'Repository.ClearOutput("Script")
+    Repository.EnsureOutputVisible("Script") 
+
+    ' just output the parameters
+	Repository.WriteOutput "Script","hoClipboard",0
+	
+	' Get Repository via Model object.
+    set m = CreateObject("EAAddinFramework.Utils.Model")
+	if m is nothing Then
+	   Repository.WriteOutput "Script","Can't create object for 'EAAddinFramework.Utils.Model'",0
+	   Exit Sub
+	end if
+	'm.SearchRun "d:\temp\sql\Branch.sql", ""
+	m.ClipboardSetText "ddd"
+	Dim s
+    s = m.ClipboardGetText
+    Repository.WriteOutput "Script",s,0
+	m.ClipBoardClear
+	s = m.ClipboardGetText
+    Repository.WriteOutput "Script","Empty'"+s+"'",0
+	
+	
+
+	Repository.EnsureOutputVisible("Script") 
+	
+end sub
+
+' Run the function
+'EA-Matic
+' Usage of Geert Bellekens Script Framework to administer Scripts recommended
+'[path=\Framework\ho\hoTools]
+'[group=hoTools]
+'option explicit
+
+!INC Local Scripts.EAConstants-VBScript
+'--------------------------------------------------------------------
+' hoTools Script Environment (Call from hoTools)
+' - Global Key can run Script
+' - Toolbar Button can run Script
+' - SQL result rows can run Script 
+'--------------------------------------------------------------------
+' Dim doesn't work (syntax error)
+' Object 'Session' doesn't exist (use  Repository.WriteOutput "Script", "MyTest",0)
+'
+' Var 'Repository' is loaded by Script Environment
+' Var 'EAModel'    is loaded by Script Environment (Supports Search, Clipboard and more)
+' You may create an instance 'EAAddinFramework.Utils.Model' of the first running EA-Instance (equal to variable EAModel)
+'
+' hoTools requires 2 or 3 Parameter
+' par1: EA Context Item 
+' par2: EA Object Type
+' par3: Optionial EAModel for (Supports Search, Clipboard and more)
+'---------------------
+' https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki
+' https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/Scripts
+' https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools
+'---------------------------------------------------------------------
+' Demo Script to show how to run an SQL file by Script
+sub hoClipboard
+   ' The EA default variable 'Repository'
+   'Repository.ClearOutput("Script")
+    Repository.EnsureOutputVisible("Script") 
+
+    ' just output the parameters
+	Repository.WriteOutput "Script","hoClipboard",0
+	
+	' Get Repository via Model object.
+    set m = CreateObject("EAAddinFramework.Utils.Model")
+	if m is nothing Then
+	   Repository.WriteOutput "Script","Can't create object for 'EAAddinFramework.Utils.Model'",0
+	   Exit Sub
+	end if
+	'm.SearchRun "d:\temp\sql\Branch.sql", ""
+	m.ClipboardSetText "ddd"
+	Dim s
+    s = m.ClipboardGetText
+    Repository.WriteOutput "Script",s,0
+	m.ClipBoardClear
+	s = m.ClipboardGetText
+    Repository.WriteOutput "Script","Empty'"+s+"'",0
+	
+	
+
+	Repository.EnsureOutputVisible("Script") 
+	
+end sub
+
+' Run the function
+hoClipboard</value>
+    <comment>Example Clipboard</comment>
+  </data>
   <data name="hoDemo2ParScript" xml:space="preserve">
     <value>'EA-Matic
 '[path=\Framework\ho\hoTools]
 '[group=hoTools]
 !INC Local Scripts.EAConstants-VBScript
+
+'--------------------------------------------------------------------
+' hoTools Script Environment (Call from hoTools)
+' - Global Key can run Script
+' - Toolbar Button can run Script
+' - SQL result rows can run Script 
+'--------------------------------------------------------------------
 ' Dim doesn't work (syntax error)
-' Object 'Session' doesn't exist (use  rep.WriteOutput "Script", "MyTest",0)
-' Var 'rep' is loaded
-' You may create an instance 'EAAddinFramework.Utils.Model' of the first running EA-Instance
+' Object 'Session' doesn't exist (use  Repository.WriteOutput "Script", "MyTest",0)
+'
+' Var 'Repository' is loaded by Script Environment
+' Var 'EAModel'    is loaded by Script Environment (Supports Search, Clipboard and more)
+' You may create an instance 'EAAddinFramework.Utils.Model' of the first running EA-Instance (equal to variable EAModel)
+'
+' hoTools requires 2 or 3 Parameter
+' par1: EA Context Item 
+' par2: EA Object Type
+' par3: Optionial EAModel for (Supports Search, Clipboard and more)
+'--------------------------------------------------------------------
+' https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki
+' https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/Scripts
+' https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools
+'---------------------------------------------------------------------
 
 function hoDemoPrintContext(modelItem, objectType)
     'Dim itemType as 5
@@ -147,8 +530,75 @@ function hoDemoPrintContext(modelItem, objectType)
     ' Output to EA			
     Repository.EnsureOutputVisible("Script") 
 	Repository.WriteOutput "Script", s, 0
+	
+	' Run Search (EA + SQL (absolute path or relative path (SQL Path) in Settings))
+	EAModel.SearchRun("Recently Modified Elements","")
+	EAModel.SearchRun "d:\temp\sql\Branch.sql", ""
+	
 end function</value>
     <comment>Demo Script to show Query with Script functionality with 2 Parameters</comment>
+  </data>
+  <data name="hoDemo2ParScript_JS" xml:space="preserve">
+    <value>//EA-Matic
+//[path=\Framework\ho\hoTools]
+//[group=hoTools]
+
+//----------------------------------------------------------------
+// hoTools Script environment:  Example of a JavaScript with two Parameters
+// Can be called from:
+// - SQL (Result rows)
+// - Global Key
+// - Toolbar
+//
+// If you change a Script you have to update it by:
+// File, Update Scripts in hoTools Tab
+//
+// 1.Parameter:  Context Item in EA (can be used as EA object)
+// 2. Parameter: Object Type in EA 
+// Repository    EA Repository Object
+// EAModel       hoTools Object for Services (e.g. EaSearch, SQL, Clipboard,..)
+//---------------------
+// https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki
+// https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/Scripts
+// https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools
+// ---------------------------------------------------------------------
+
+!INC Local Scripts.EAConstants-JScript
+function hoDemo2Par_JS(modelItem, objectType)
+{
+	Repository.EnsureOutputVisible("Script")
+	
+	// Handling Clipboard
+    EAModel.ClipboardSetText("Clipboard set")
+    var clipboard = EAModel.ClipboardGetText();	
+	Repository.WriteOutput( "Script", "hoDemo2Par_JS: " + "Clipboard was '" + clipboard + "'", 0)
+	
+	var itemType = "unknown"
+	switch (objectType) {
+	    case otElement:
+			var itemType = "Element"
+		case otPackage:
+			var itemType = "Package"
+		case otDiagram:
+			var itemType = "Diagram"
+		case otAttribute:
+			var itemType = "Attribute"
+		case otOperation:
+			var itemType = "Operation"
+	}
+	var s = "hoDemoPrintContext: Context item is: '" + modelItem.Name + "' of type '" + itemType + "'";
+		
+    Repository.EnsureOutputVisible("Script") 
+	Repository.WriteOutput( "Script", s, 0)
+	
+	// Show recent modified Elements
+	// Par 1: Search-Name or SQL file
+	// Par 2: &lt;Search Term&gt;
+	// Output in EA Search Window (Find in Project)
+	EAModel.SearchRun("Recently Modified Elements","")
+}
+//hoDemo2Par_JS("2",4);</value>
+    <comment>Demo JavaScript for 2 Parameters, SQL and Clipboard</comment>
   </data>
   <data name="hoDemo3ParScript" xml:space="preserve">
     <value>'EA-Matic

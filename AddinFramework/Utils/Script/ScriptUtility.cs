@@ -72,7 +72,7 @@ namespace AddinFramework.Util
             }
             catch (Exception e)
             {
-                if (_isErrorOutput) MessageBox.Show(e.ToString(), $"Error run Script  '{_function.FullName}()'");
+                if (_isErrorOutput) MessageBox.Show($"Have you updated the Scripts (File, Update Scripts)??\r\n\r\n{e.ToString()}", $"Error run Script  '{_function.FullName}()'");
                 return false;
 
             }
