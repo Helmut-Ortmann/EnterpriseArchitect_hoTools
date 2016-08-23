@@ -804,7 +804,10 @@ namespace hoTools.Query
 - Script2: hoDemo3Par   VbScript
 - Script3: hoDemoRunSql VbScript
 - Script4: hoDemo2Par   JavaScript
-- Script5: Clipboard    VbScript",
+- Script5: Clipboard    VbScript
+created!
+
+Open EA Scripting Window, Update (3th Button from left) and the Script Group appears!",
                 @"Demo Scripts to run on SQL row, Key or Toolbar Button loaded.");
         }
 

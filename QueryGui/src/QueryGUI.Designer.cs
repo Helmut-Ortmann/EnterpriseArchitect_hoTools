@@ -75,21 +75,21 @@ namespace hoTools.Query
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadStandardScriptsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lastsqlErrorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lastSqlStringSentToEAToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.templatesAndMacrosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
+            this.gitHubWiKiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gitHubWiKiSQLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gitHubWiKiScriptToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gitHubRepositoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer = new System.Windows.Forms.SplitContainer();
             this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.gitHubWiKiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.gitHubRepositoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.gitHubWiKiSQLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.gitHubWiKiScriptToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewScripts)).BeginInit();
             this.contextMenuStripDataGrid.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -408,7 +408,7 @@ namespace hoTools.Query
             this.loadStandardScriptsToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Padding = new System.Windows.Forms.Padding(0);
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(29, 24);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(94, 24);
             this.fileToolStripMenuItem.Text = "&File";
             this.fileToolStripMenuItem.ToolTipText = "Create a new Tab from recent *.sql files";
             // 
@@ -525,8 +525,8 @@ namespace hoTools.Query
             this.loadStandardScriptsToolStripMenuItem.Name = "loadStandardScriptsToolStripMenuItem";
             this.loadStandardScriptsToolStripMenuItem.Size = new System.Drawing.Size(204, 22);
             this.loadStandardScriptsToolStripMenuItem.Text = "LoadStandardScripts";
-            this.loadStandardScriptsToolStripMenuItem.ToolTipText = "Load demo scripts to process SQL query results:\r\n- ScriptGroup: hoTools\r\n- hoDemo" +
-    "2Par\r\n- hoDemo3Par\r\n- hoDemoRunSql";
+            this.loadStandardScriptsToolStripMenuItem.ToolTipText = "Load hoTools demo scripts (VBScript, JavaScript)\r\n- ScriptGroup: hoTools\r\n"+
+                "Open EA Scripting Window, Update (3th Button from left, update Window) and the Script Group appears!";
             this.loadStandardScriptsToolStripMenuItem.Click += new System.EventHandler(this.loadStandardScriptsToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
@@ -548,13 +548,6 @@ namespace hoTools.Query
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(36, 24);
             this.helpToolStripMenuItem.Text = "&Help";
             // 
-            // aboutToolStripMenuItem
-            // 
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
-            this.aboutToolStripMenuItem.Text = "&About";
-            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
-            // 
             // lastsqlErrorToolStripMenuItem
             // 
             this.lastsqlErrorToolStripMenuItem.Name = "lastsqlErrorToolStripMenuItem";
@@ -572,6 +565,11 @@ namespace hoTools.Query
     "hoTools_LastSql.sql";
             this.lastSqlStringSentToEAToolStripMenuItem.Click += new System.EventHandler(this.lastSqlStringSentToEAToolStripMenuItem_Click);
             // 
+            // toolStripSeparator8
+            // 
+            this.toolStripSeparator8.Name = "toolStripSeparator8";
+            this.toolStripSeparator8.Size = new System.Drawing.Size(199, 6);
+            // 
             // templatesAndMacrosToolStripMenuItem
             // 
             this.templatesAndMacrosToolStripMenuItem.Name = "templatesAndMacrosToolStripMenuItem";
@@ -579,6 +577,51 @@ namespace hoTools.Query
             this.templatesAndMacrosToolStripMenuItem.Text = "Templates and macros";
             this.templatesAndMacrosToolStripMenuItem.ToolTipText = "View Templates and Macors in Editor";
             this.templatesAndMacrosToolStripMenuItem.Click += new System.EventHandler(this.templatesAndMacrosToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator7
+            // 
+            this.toolStripSeparator7.Name = "toolStripSeparator7";
+            this.toolStripSeparator7.Size = new System.Drawing.Size(199, 6);
+            // 
+            // gitHubWiKiToolStripMenuItem
+            // 
+            this.gitHubWiKiToolStripMenuItem.Name = "gitHubWiKiToolStripMenuItem";
+            this.gitHubWiKiToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
+            this.gitHubWiKiToolStripMenuItem.Text = "GitHub WiKi";
+            this.gitHubWiKiToolStripMenuItem.Click += new System.EventHandler(this.gitHubWiKiToolStripMenuItem_Click);
+            // 
+            // gitHubWiKiSQLToolStripMenuItem
+            // 
+            this.gitHubWiKiSQLToolStripMenuItem.Name = "gitHubWiKiSQLToolStripMenuItem";
+            this.gitHubWiKiSQLToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
+            this.gitHubWiKiSQLToolStripMenuItem.Text = "GitHub WiKi SQL";
+            this.gitHubWiKiSQLToolStripMenuItem.Click += new System.EventHandler(this.gitHubWiKiSQLToolStripMenuItem_Click);
+            // 
+            // gitHubWiKiScriptToolStripMenuItem
+            // 
+            this.gitHubWiKiScriptToolStripMenuItem.Name = "gitHubWiKiScriptToolStripMenuItem";
+            this.gitHubWiKiScriptToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
+            this.gitHubWiKiScriptToolStripMenuItem.Text = "GitHub WiKi Script";
+            this.gitHubWiKiScriptToolStripMenuItem.Click += new System.EventHandler(this.gitHubWiKiScriptToolStripMenuItem_Click);
+            // 
+            // gitHubRepositoryToolStripMenuItem
+            // 
+            this.gitHubRepositoryToolStripMenuItem.Name = "gitHubRepositoryToolStripMenuItem";
+            this.gitHubRepositoryToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
+            this.gitHubRepositoryToolStripMenuItem.Text = "GitHub Repository";
+            this.gitHubRepositoryToolStripMenuItem.Click += new System.EventHandler(this.gitHubRepositoryToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator9
+            // 
+            this.toolStripSeparator9.Name = "toolStripSeparator9";
+            this.toolStripSeparator9.Size = new System.Drawing.Size(199, 6);
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
+            this.aboutToolStripMenuItem.Text = "&About";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // splitContainer
             // 
@@ -645,49 +688,6 @@ namespace hoTools.Query
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(769, 25);
             this.tableLayoutPanel1.TabIndex = 12;
-            // 
-            // gitHubWiKiToolStripMenuItem
-            // 
-            this.gitHubWiKiToolStripMenuItem.Name = "gitHubWiKiToolStripMenuItem";
-            this.gitHubWiKiToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
-            this.gitHubWiKiToolStripMenuItem.Text = "GitHub WiKi";
-            this.gitHubWiKiToolStripMenuItem.Click += new System.EventHandler(this.gitHubWiKiToolStripMenuItem_Click);
-            // 
-            // gitHubRepositoryToolStripMenuItem
-            // 
-            this.gitHubRepositoryToolStripMenuItem.Name = "gitHubRepositoryToolStripMenuItem";
-            this.gitHubRepositoryToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
-            this.gitHubRepositoryToolStripMenuItem.Text = "GitHub Repository";
-            this.gitHubRepositoryToolStripMenuItem.Click += new System.EventHandler(this.gitHubRepositoryToolStripMenuItem_Click);
-            // 
-            // gitHubWiKiSQLToolStripMenuItem
-            // 
-            this.gitHubWiKiSQLToolStripMenuItem.Name = "gitHubWiKiSQLToolStripMenuItem";
-            this.gitHubWiKiSQLToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
-            this.gitHubWiKiSQLToolStripMenuItem.Text = "GitHub WiKi SQL";
-            this.gitHubWiKiSQLToolStripMenuItem.Click += new System.EventHandler(this.gitHubWiKiSQLToolStripMenuItem_Click);
-            // 
-            // gitHubWiKiScriptToolStripMenuItem
-            // 
-            this.gitHubWiKiScriptToolStripMenuItem.Name = "gitHubWiKiScriptToolStripMenuItem";
-            this.gitHubWiKiScriptToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
-            this.gitHubWiKiScriptToolStripMenuItem.Text = "GitHub WiKi Script";
-            this.gitHubWiKiScriptToolStripMenuItem.Click += new System.EventHandler(this.gitHubWiKiScriptToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator7
-            // 
-            this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new System.Drawing.Size(199, 6);
-            // 
-            // toolStripSeparator8
-            // 
-            this.toolStripSeparator8.Name = "toolStripSeparator8";
-            this.toolStripSeparator8.Size = new System.Drawing.Size(199, 6);
-            // 
-            // toolStripSeparator9
-            // 
-            this.toolStripSeparator9.Name = "toolStripSeparator9";
-            this.toolStripSeparator9.Size = new System.Drawing.Size(199, 6);
             // 
             // QueryGui
             // 

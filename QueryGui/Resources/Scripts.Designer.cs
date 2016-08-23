@@ -61,20 +61,23 @@ namespace hoTools.Query.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &apos;EA-Matic
-        ///&apos; Usage of Geert Bellekens Script Framework to administer Scripts recommended
-        ///&apos;[path=\Framework\ho\hoTools]
-        ///&apos;[group=hoTools]
-        ///&apos;option explicit
+        ///   Looks up a localized string similar to //EA-Matic
+        /////[path=\Framework\ho\hoTools]
+        /////[group=hoTools]
         ///
-        ///!INC Local Scripts.EAConstants-VBScript
-        ///&apos;--------------------------------------------------------------------
-        ///&apos; hoTools Script Environment (Call from hoTools)
-        ///&apos; - Global Key can run Script
-        ///&apos; - Toolbar Button can run Script
-        ///&apos; - SQL result rows can run Script 
-        ///&apos;--------------------------------------------------------------------
-        ///&apos; Dim doesn&apos;t wor [rest of string was truncated]&quot;;.
+        /////--------------------------------------------------------------------
+        ///// Demo 2 parameter
+        ///// - Output Selected item and its type
+        ///// - Run Search
+        ///// - Clipboard JavaScript
+        /////----------------------------------------------------------------
+        ///// hoTools Script environment:  Example of a JavaScript with two Parameters
+        ///// Can be called from:
+        ///// - SQL (Result rows)
+        ///// - Global Key
+        ///// - Toolbar
+        /////
+        ///// If you change a Script you have to upda [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string Clipboard {
             get {
@@ -89,13 +92,15 @@ namespace hoTools.Query.Resources {
         ///!INC Local Scripts.EAConstants-VBScript
         ///
         ///&apos;--------------------------------------------------------------------
+        ///&apos; Demo 2 parameter
+        ///&apos; - Output Selected item and its type
+        ///&apos; - Run Search
+        ///&apos;--------------------------------------------------------------------
         ///&apos; hoTools Script Environment (Call from hoTools)
         ///&apos; - Global Key can run Script
         ///&apos; - Toolbar Button can run Script
         ///&apos; - SQL result rows can run Script 
-        ///&apos;--------------------------------------------------------------------
-        ///&apos; Dim doesn&apos;t work (syntax error)
-        ///&apos; Object &apos;Session&apos; doesn&apos;t exist (use  Repository.WriteOutput &quot;Script&quot;, &quot;MyTest [rest of string was truncated]&quot;;.
+        ///&apos;-------------------------------------- [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string hoDemo2ParScript {
             get {
@@ -108,6 +113,12 @@ namespace hoTools.Query.Resources {
         /////[path=\Framework\ho\hoTools]
         /////[group=hoTools]
         ///
+        ///
+        /////--------------------------------------------------------------------
+        ///// Demo 2 parameter
+        ///// - Output Selected item and its type
+        ///// - Run Search
+        ///// - Clipboard JavaScript
         /////----------------------------------------------------------------
         ///// hoTools Script environment:  Example of a JavaScript with two Parameters
         ///// Can be called from:
@@ -115,12 +126,7 @@ namespace hoTools.Query.Resources {
         ///// - Global Key
         ///// - Toolbar
         /////
-        ///// If you change a Script you have to update it by:
-        ///// File, Update Scripts in hoTools Tab
-        /////
-        ///// 1.Parameter:  Context Item in EA (can be used as EA object)
-        ///// 2. Parameter: Object Type in EA 
-        ///// Repository    EA R [rest of string was truncated]&quot;;.
+        ///// If you change a Script you have to up [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string hoDemo2ParScript_JS {
             get {
@@ -136,11 +142,13 @@ namespace hoTools.Query.Resources {
         ///&apos;option explicit
         ///
         ///!INC Local Scripts.EAConstants-VBScript
+        ///&apos;--------------------------------------------------------------------
+        ///&apos; Demo 3 parameter
+        ///&apos; - Output Selected item and its type
+        ///&apos; - Create EAModel as VB Object
         ///&apos;----------------------------------------------------------------------
         ///&apos; Dim doesn&apos;t work (syntax error, used in EA for intellissense)
-        ///&apos; Object &apos;Session&apos; doesn&apos;t exist (use  rep.WriteOutput &quot;Script&quot;, &quot;MyTest&quot;,0)
-        ///&apos; Var &apos;rep&apos; is loaded by script environment
-        ///&apos; You may create an instance &apos;EAAddinFramework.Util [rest of string was truncated]&quot;;.
+        ///&apos; Object &apos;S [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string hoDemo3ParScript {
             get {
@@ -150,17 +158,18 @@ namespace hoTools.Query.Resources {
         
         /// <summary>
         ///   Looks up a localized string similar to &apos;EA-Matic
-        ///&apos; Usage of Geert Bellekens Script Framework to administer Scripts recommended
+        ///&apos;Usage of Geert Bellekens Script Framework to administer Scripts recommended
         ///&apos;[path=\Framework\ho\hoTools]
         ///&apos;[group=hoTools]
-        ///&apos;option explicit
         ///
         ///!INC Local Scripts.EAConstants-VBScript
+        ///&apos;--------------------------------------------------------------------
+        ///&apos; Demo Run SQL
+        ///&apos; - Create VB Object 
         ///&apos;----------------------------------------------------------------------
+        ///&apos; hoTools Script Environment
         ///&apos; Dim doesn&apos;t work (syntax error, used in EA for intellissense)
-        ///&apos; Object &apos;Session&apos; doesn&apos;t exist (use  Repository.WriteOutput &quot;Script&quot;, &quot;MyTest&quot;,0)
-        ///&apos; Var &apos;Repository&apos; is loaded by script environment
-        ///&apos; You may create an instance &apos;EAAddin [rest of string was truncated]&quot;;.
+        ///&apos; Object &apos;Session&apos; doesn&apos;t exist (use  Repository.Wri [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string hoDemoRunSql {
             get {
