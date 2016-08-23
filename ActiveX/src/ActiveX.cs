@@ -214,13 +214,8 @@ namespace hoTools.ActiveX
             // get global settings
             _model = new Model(Repository);
 
-
-
-
-            _txtSearchName.AutoCompleteCustomSource = Search.GetSearchesSuggestions(Repository);
             _txtSearchName.Text = AddinSettings.QuickSearchName;
-
-
+            IntializeSearches();
 
             ParameterizeMenusAndButtons();
             // parameterize 5 Buttons to quickly run search
@@ -238,6 +233,16 @@ namespace hoTools.ActiveX
 
 
         }
+        /// <summary>
+        /// Initializes Searches
+        /// </summary>
+        private void IntializeSearches()
+        {
+            _txtSearchName.AutoCompleteCustomSource = Search.GetSearchesSuggestions(Repository);
+
+        } 
+
+
         /// <summary>
         /// Resize hight of rtf field according to available space
         /// </summary>
@@ -879,6 +884,7 @@ namespace hoTools.ActiveX
                 case Keys.Space:
                     if (_txtSearchName.Text.Trim() == "")
                     {
+                        // Reset sort order of Searches
                         Search.ResetSort();
                         rtfListOfSearches.Text = Search.GetRtf();
                     }
@@ -2431,7 +2437,7 @@ namespace hoTools.ActiveX
 
             int startPosLine = rtfListOfSearches.GetFirstCharIndexOfCurrentLine();
             int lineNumber = rtfListOfSearches.GetLineFromCharIndex(startPosLine);
-            SearchItem searchItem = Search.GetSearche(lineNumber);
+            SearchItem searchItem = Search.GetSearch(lineNumber);
             string searchName = searchItem.Name;
             _txtSearchName.Text = searchName;
 
@@ -2444,6 +2450,7 @@ namespace hoTools.ActiveX
 
         private void _txtSearchName_Enter(object sender, EventArgs e)
         {
+            IntializeSearches();
             rtfListOfSearches.Visible = false;
         }
 

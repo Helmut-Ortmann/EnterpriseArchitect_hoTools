@@ -23,6 +23,7 @@ namespace AddinFramework.Util.Script
         public string FullName => Owner.Name + "." + Procedure.Name;
         public int NumberOfParameters => Procedure.NumArgs;
         Procedure Procedure { get; }
+        public string Description { get; } 
 
         /// <summary>
         /// Constructor ScriptFunction
@@ -34,12 +35,25 @@ namespace AddinFramework.Util.Script
 			Owner = owner;
 			Procedure = procedure;
 		}
-		/// <summary>
-		/// execute this function
-		/// </summary>
-		/// <param name="parameters">the parameters needed by this function</param>
-		/// <returns>whatever gets returned by the actual script function</returns>
-		public object Execute(object[] parameters)
+
+	    /// <summary>
+	    /// Constructor ScriptFunction with description
+	    /// </summary>
+	    /// <param name="owner">Script</param>
+	    /// <param name="procedure">Function</param>
+	    /// <param name="description">Description</param>
+	    public ScriptFunction(EAAddinFramework.Utils.Script owner, Procedure procedure, string description)
+        {
+            Owner = owner;
+            Procedure = procedure;
+            Description = description;
+        }
+        /// <summary>
+        /// execute this function
+        /// </summary>
+        /// <param name="parameters">the parameters needed by this function</param>
+        /// <returns>whatever gets returned by the actual script function</returns>
+        public object Execute(object[] parameters)
 		{
 			if (Procedure.NumArgs == parameters.Length)
 			{

@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Reflection;
+using System.Text.RegularExpressions;
 using System.Xml;
 using AddinFramework.Util.Script;
 using Microsoft.Win32;
@@ -142,7 +143,8 @@ namespace EAAddinFramework.Utils
                 //set the functions
                 foreach (Procedure procedure in _scriptController.Procedures)
                 {
-                    Functions.Add(new ScriptFunction(this, procedure));
+                    string description = GetDescription(includedCode, procedure);
+                    Functions.Add(new ScriptFunction(this, procedure, description));
                 }
             }
             catch (Exception e)
@@ -154,6 +156,26 @@ namespace EAAddinFramework.Utils
                 //MessageBox.Show("Error in loading code for script " + this.name + ": " + this.errorMessage, "Syntax error in Script");
             }
         }
+        /// <summary>
+        /// Get Description for Procedure. The function is identified by (independent of language):
+        /// <para/>function name
+        /// <para/>Sub name
+        /// </summary>
+        /// <param name="includeCode"></param>
+        /// <param name="procedure"></param>
+        /// <returns></returns>
+	    static string GetDescription(string includeCode, Procedure procedure)
+	    {
+            // find procedure
+            string pattern = $"^\\s*(function|Function|Sub|sub)\\s+{procedure.Name}";
+	        Match m = Regex.Match(includeCode, pattern, RegexOptions.Multiline);
+	        if (m.Success)
+	        {
+	            string s = includeCode.Substring(0, m.Index);
+	        }
+
+	        return "";
+	    }
         /// <summary>
         /// loads all static includable scripts. These scripts are stored outside the model and can not be changed by the user
         /// </summary>

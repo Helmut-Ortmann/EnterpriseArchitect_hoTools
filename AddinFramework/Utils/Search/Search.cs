@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Reflection;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using EAAddinFramework.Utils;
@@ -26,7 +27,7 @@ namespace AddinFramework.Util
     /// </summary>
     public static class Search
     {
-        static List<SearchItem> _staticSearches;
+        static List<SearchItem> _staticAllSearches;
         static AutoCompleteStringCollection _staticSearchesSuggestions;
 
         // configuration as singleton
@@ -48,47 +49,29 @@ namespace AddinFramework.Util
         // ReSharper disable once EmptyConstructor
         static Search()
         {
-            //LoadStaticSearches();
-        }
-        /// <summary>
-        /// Get the list of searches (EA + SQL)
-        /// </summary>
-        public static List<SearchItem> LoadSearches(EA.Repository rep)
-        {
-            LoadStaticSearches(rep);
-            return _staticSearches;
 
         }
-        /// <summary>
-        /// Get the list of searches (EA + SQL)
-        /// </summary>
-        public static List<SearchItem> GetSearches(EA.Repository rep)
-        {
-                if (_staticSearches == null)
-                {
-                    LoadStaticSearches(rep);
-                }
-                return _staticSearches;
-            
-        }
+       
         /// <summary>
         /// Get the SearchItem for the index
         /// </summary>
-        public static SearchItem GetSearche(int index)
+        public static SearchItem GetSearch(int index)
         {
             
-            return _staticSearches[index];
+            return _staticAllSearches[index];
 
         }
 
-
+        /// <summary>
+        /// Makes a Forms Auto Completion List of all searches.
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <returns></returns>
         public static AutoCompleteStringCollection GetSearchesSuggestions(EA.Repository rep)
         {
-                if (_staticSearches == null)
-                {
-                    LoadStaticSearches(rep);
-                    LoadStaticSearchesSuggestions();
-                }
+
+                LoadAllSearches(rep);
+                LoadStaticSearchesSuggestions();
                 return _staticSearchesSuggestions;
             
         }
@@ -101,7 +84,7 @@ namespace AddinFramework.Util
             pattern = pattern.ToLower();
             var l = new List<SearchItem>();
 
-            foreach (var search in _staticSearches)
+            foreach (var search in _staticAllSearches)
             {
                 // Search for length of subsequence
                 var score = pattern.LongestCommonSubsequence(search.Name.ToLower());
@@ -111,7 +94,7 @@ namespace AddinFramework.Util
 
             }
             // sort list
-            _staticSearches = l.OrderByDescending(a => a.Score).ToList();
+            _staticAllSearches = l.OrderByDescending(a => a.Score).ToList();
 
         }
         /// <summary>
@@ -120,7 +103,7 @@ namespace AddinFramework.Util
         public static void ResetSort()
         {
             // sort list
-            _staticSearches = _staticSearches.OrderBy(a => a.Name).ToList();
+            _staticAllSearches = _staticAllSearches.OrderBy(a => a.Name).ToList();
 
         }
 
@@ -131,9 +114,9 @@ namespace AddinFramework.Util
         /// - Searches defined in MDG (Program-Technology-Folder, MDG in file locations, MDG in URI locations)<para/> 
         /// - Local Search of PC <para/> 
         /// </summary>
-        static void LoadStaticSearches(EA.Repository rep)
+        static void LoadAllSearches(EA.Repository rep)
         {
-            _staticSearches = new List<SearchItem>();
+            _staticAllSearches = new List<SearchItem>();
 
 
             // Load EA Standard Search Names for current release  
@@ -148,7 +131,7 @@ namespace AddinFramework.Util
             // MDG scripts in other locations
             LoadOtherMdgSearches(rep);
             // order
-            _staticSearches = _staticSearches.OrderBy(a => a.Name)
+            _staticAllSearches = _staticAllSearches.OrderBy(a => a.Name)
                 .ToList();
             LoadStaticSearchesSuggestions();
 
@@ -158,8 +141,8 @@ namespace AddinFramework.Util
         /// </summary>
         static public string GetRtf()
         {
-            // var s = _staticSearches.Select(e => $"{e.Score,2} {e.Category,-15} {e.Name}" ).ToList();
-            var s = _staticSearches.Select(e => $"{e.Category,-10} {e.Name}" ).ToList();
+            // var s = _staticAllSearches.Select(e => $"{e.Score,2} {e.Category,-15} {e.Name}" ).ToList();
+            var s = _staticAllSearches.Select(e => $"{e.Category,-10} {e.Name}" ).ToList();
             return string.Join($"{Environment.NewLine}", s);
         }
 
@@ -167,10 +150,10 @@ namespace AddinFramework.Util
         /// <summary>
         /// Load the suggestions for the search Combo Box
         /// </summary>
-        static void LoadStaticSearchesSuggestions()
+        public static void LoadStaticSearchesSuggestions()
         {
             _staticSearchesSuggestions = new AutoCompleteStringCollection();
-            var result = _staticSearches.Select(e => e.Name).ToArray();
+            var result = _staticAllSearches.Select(e => e.Name).ToArray();
             _staticSearchesSuggestions.AddRange(result);
             
 
@@ -275,7 +258,7 @@ namespace AddinFramework.Util
                 foreach (XElement search in searches)
                 {
                     string searchName = search.Attribute("Name").Value;
-                    _staticSearches.Add(new EaSearchItem(id, searchName));
+                    _staticAllSearches.Add(new EaSearchItem(id, searchName));
                 }
 
 
@@ -312,10 +295,27 @@ namespace AddinFramework.Util
         {
             foreach (string file in GlobalCfg.getListFileCompleteName())
             {
+                string description = SqlGetDescription(file);
                 string name = Path.GetFileName(file);
-                _staticSearches.Add( new SqlSearchItem(name, file)); 
+                _staticAllSearches.Add( new SqlSearchItem(name, file,description)); 
             }
         }
+        /// <summary>
+        /// Get Description from SQL file
+        /// </summary>
+        /// <param name="file"></param>
+        /// <returns></returns>
+        private static string SqlGetDescription(string file)
+        {
+            string sqlText = File.ReadAllText(file);
+            Regex regex = new Regex(@"(// \S[^\n]*\n){1,}");
+            Match match = regex.Match(sqlText);
+            Char[] c =  { '\r','\n' };
+            
+            if (match.Success) return match.Value.Trim(c);
+            else return "";
+        }
+
         /// <summary>
         /// Load all EA Standard Searches from JSON for an EA Release. The Standard searches are stored in: 'EaStandardSearches.json'.
         /// Possible EA Releases are: "9, 10, 11, 12, 12.1, 13\"
@@ -341,7 +341,7 @@ namespace AddinFramework.Util
             {
                 if (search.EARelease != null)
                 {
-                    if (search.EARelease.Contains(eaRelease)) _staticSearches.Add(search);
+                    if (search.EARelease.Contains(eaRelease)) _staticAllSearches.Add(search);
                 }
                 else
                 {
