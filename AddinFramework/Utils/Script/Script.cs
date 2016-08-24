@@ -180,7 +180,7 @@ namespace EAAddinFramework.Utils
                 Char[] lineFeed = { '\r', '\n' };
                 string s = m.Groups[1].Value.Trim(lineFeed);
                 // remove Comment at start
-	            pattern = $"^[ \t]*{comment}";
+	            pattern = $"^[ \t]*{comment} ";
 	            s = Regex.Replace(s, pattern,"", RegexOptions.Multiline);
 	            return s;
 

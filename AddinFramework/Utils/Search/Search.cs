@@ -286,9 +286,10 @@ namespace AddinFramework.Util
                     @"Error in load *.xml MDGSearches from url! ");
             }
         }
-        
+
         /// <summary>
-        /// Get file names of SQL path.
+        /// Load SQL Searches in structure '_staticAllSearches'. The structure contains:
+        /// <para/>File, Description of SQL
         /// </summary>
         /// <returns></returns>
         public static void LoadSqlSearches()
@@ -308,11 +309,18 @@ namespace AddinFramework.Util
         private static string SqlGetDescription(string file)
         {
             string sqlText = File.ReadAllText(file);
-            Regex regex = new Regex(@"(// \S[^\n]*\n){1,}");
+            Regex regex = new Regex(@"(^[ \t]*// \S[^\n]*\n)+", RegexOptions.Multiline);
             Match match = regex.Match(sqlText);
             Char[] c =  { '\r','\n' };
-            
-            if (match.Success) return match.Value.Trim(c);
+
+            if (match.Success)
+            {
+                // delete '// ' from start of line
+                string pattern = "^[ \t]*// ";
+                string s = match.Value.Trim(c);
+                s = Regex.Replace(s, pattern, "", RegexOptions.Multiline);
+                return s;
+            }
             else return "";
         }
 
