@@ -10,8 +10,10 @@ using System;
 using System.Windows.Forms;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Reflection;
+using System.Reflection.Emit;
 using System.Text.RegularExpressions;
 using System.Xml;
 using AddinFramework.Util.Script;
@@ -140,7 +142,7 @@ namespace EAAddinFramework.Utils
 
                 //then add the included code to the script controller
                 _scriptController.AddCode(includedCode);
-                //set the functions
+                // set the functions
                 foreach (Procedure procedure in _scriptController.Procedures)
                 {
                     string description = GetDescription(includedCode, procedure);
@@ -164,14 +166,24 @@ namespace EAAddinFramework.Utils
         /// <param name="includeCode"></param>
         /// <param name="procedure"></param>
         /// <returns></returns>
-	    static string GetDescription(string includeCode, Procedure procedure)
+	    private string GetDescription(string includeCode, Procedure procedure)
 	    {
-            // find procedure
-            string pattern = $"^\\s*(function|Function|Sub|sub)\\s+{procedure.Name}";
-	        Match m = Regex.Match(includeCode, pattern, RegexOptions.Multiline);
+	        string comment = _language.CommentLine;
+            string pattern = $"(([ \t]*{comment} \\S[^\n]*\n)+)+" +  // Comment line, 1 Blank + Description of Function / procedure
+                    $"(([ \t]*\r\n)*|([ \t]*{comment}[\\S][^\n]*\n)*)*" + // Ignore empty lines, Comment lines without 1 Blank
+                    $"[ \t]*((public[ \t]*)*(default[ \t]*)*(private[ \t]*)*function|sub)\\s+{procedure.Name}";
+
+            Match m = Regex.Match(includeCode, pattern, RegexOptions.Multiline);
 	        if (m.Success)
 	        {
-	            string s = includeCode.Substring(0, m.Index);
+                // remove line feeds
+                Char[] lineFeed = { '\r', '\n' };
+                string s = m.Groups[1].Value.Trim(lineFeed);
+                // remove Comment at start
+	            pattern = $"^[ \t]*{comment}";
+	            s = Regex.Replace(s, pattern,"", RegexOptions.Multiline);
+	            return s;
+
 	        }
 
 	        return "";

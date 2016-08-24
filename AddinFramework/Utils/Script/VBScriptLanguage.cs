@@ -17,7 +17,7 @@ namespace EAAddinFramework.Utils
         protected override string BodyStart => string.Empty;
         protected override string BodyEnd => string.Empty;
         protected override string FunctionEnd => "end function";
-        protected override string CommentLine => "'";
+        public override string CommentLine => "'";
 
         private string SubStart => "sub ";
         private string SubEnd => "end sub";

@@ -31,7 +31,7 @@ namespace EAAddinFramework.Utils
 		protected abstract string BodyStart {get;}
 		protected abstract string BodyEnd {get;}
 		protected abstract string FunctionEnd {get;}
-		protected abstract string CommentLine {get;}
+		public abstract string CommentLine {get;}
 
 		public string Translate(MethodInfo operation)
 		{
@@ -47,7 +47,7 @@ namespace EAAddinFramework.Utils
 			bool firstParameter = true;
 			foreach (ParameterInfo parameter in operation.GetParameters()) 
 			{
-				//don't add the repository parameter as it is added directly to the scriptcontroller
+				//don't add the repository parameter as it is added directly to the script controller
 				if (parameter.Name.ToLower() != "repository")
 				{
 					if (firstParameter)

@@ -86,9 +86,6 @@ namespace hoTools.Query
             tabControlSql.Multiline = true;
             tabControlSql.SizeMode = TabSizeMode.FillToRight;
             tabControlSql.DrawMode = TabDrawMode.OwnerDrawFixed;
-            //ResumeLayout(false);
-            //PerformLayout();
-
             ResizeRedraw = true;
 
 
@@ -119,10 +116,7 @@ namespace hoTools.Query
             // New Tab from recent file
             _newTabFromRecentToolStripMenuItem.Text = SqlTabPagesCntrl.MenuNewTabFromRecentText;
             _newTabFromRecentToolStripMenuItem.ToolTipText = SqlTabPagesCntrl.MenuNewTabFromRecentTooltip;
-
-
-
-
+            
             // Script
             InitScriptDataGrid();
             InitScriptDataTable();
@@ -206,18 +200,27 @@ namespace hoTools.Query
             }
             else // run for Script (includes SQL / Query)
             {
-
                 splitContainer.SplitterDistance = 330;
                 // available script updates
-                _lscripts = Script.GetEaMaticScripts(Model);
-                UpdateTableFunctions();
+                ReloadScripts();
             }
 
             return true;
         }
+        /// <summary>
+        /// Reload the Scripts and update the Script View.
+        /// <para/>Pay attention: After Loading the script EA needs update of Scripting window (third button from right)
+        /// </summary>
+        private void ReloadScripts()
+        {
+            _lscripts = Script.GetEaMaticScripts(Model);
+            UpdateTableFunctions();
+        }
 
-        
         #region initDataGrid
+        /// <summary>
+        /// Init Script Data for Grid
+        /// </summary>
         void InitScriptDataGrid()
         {
             dataGridViewScripts.AutoGenerateColumns = false;
@@ -269,6 +272,14 @@ namespace hoTools.Query
 
             col = new DataGridViewTextBoxColumn
             {
+                DataPropertyName = "Description",
+                Name = "Description",
+                HeaderText = @"Description"
+            };
+            dataGridViewScripts.Columns.Add(col);
+
+            col = new DataGridViewTextBoxColumn
+            {
                 DataPropertyName = "Err",
                 Name = "Err",
                 HeaderText = @"Err"
@@ -277,6 +288,9 @@ namespace hoTools.Query
         }
         #endregion
         #region initDataTable
+        /// <summary>
+        /// Init the Data Grid Table.
+        /// </summary>
          void InitScriptDataTable()
         {
             dataGridViewScripts.DataSource = null;
@@ -289,6 +303,7 @@ namespace hoTools.Query
             DataColumn functionErrColumn = new DataColumn("Err", typeof(string));
             DataColumn functionFunctionColumn = new DataColumn("Function", typeof(string));
             DataColumn functionParCountColumn = new DataColumn("ParCount", typeof(int));
+            DataColumn functionParDescriptionColumn = new DataColumn("Description", typeof(string));
             // add columns
             _tableFunctions.Columns.AddRange(new[]
                 {
@@ -297,6 +312,7 @@ namespace hoTools.Query
                     functionScriptColumn,
                     functionLanguageColumn,
                     functionGroupColumn,
+                    functionParDescriptionColumn,
                     functionErrColumn,
                     functionFunctionColumn,
                     functionParCountColumn
@@ -323,11 +339,10 @@ namespace hoTools.Query
         /// <param name="e"></param>
         void btnLoadScripts_Click(object sender, EventArgs e)
         {
-            _lscripts = Script.GetEaMaticScripts(Model);
-            UpdateTableFunctions();
+            ReloadScripts();
         }
         /// <summary>
-        /// Compile, load script with may run on SQL Query result rows. The conditions:
+        /// Compile, load scripts with may run on SQL Query result rows, Global Keys or Toolbar Button. The conditions:
         /// <para/>- Contains string 'EA-Matic'
         /// <para/>- With 2 or 3 parameters
         /// <para/>From Repository, MDG Technology folder, Registry (Tools, MDG, Advanced,..)
@@ -350,7 +365,7 @@ namespace hoTools.Query
                         newRow["Language"] = script.LanguageName;
                         newRow["Group"] = script.GroupName;
                         newRow["Err"] = script.ErrorMessage;
-
+                        newRow["Description"] = function.Description;
                         newRow["FunctionObj"] = function;
                         newRow["Function"] = function.Name;
                         newRow["ParCount"] = function.NumberOfParameters;
@@ -797,13 +812,14 @@ namespace hoTools.Query
             code = rm.GetString("Clipboard");
             script = new EaScript(Model, "Clipboard", "Internal", "VBScript", group.Guid, code);
             script.Save();
+            UpdateTableFunctions();
 
 
             MessageBox.Show(@"ScriptGroup: hoTools
 - Script1: hoDemo2Par   VbScript
 - Script2: hoDemo3Par   VbScript
 - Script3: hoDemoRunSql VbScript
-- Script4: hoDemo2Par   JavaScript
+- Script4: hoDemo2Par_JS   JavaScript
 - Script5: Clipboard    VbScript
 created!
 
