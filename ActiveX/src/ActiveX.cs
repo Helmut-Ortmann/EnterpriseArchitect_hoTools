@@ -156,12 +156,14 @@ namespace hoTools.ActiveX
         private ToolStripMenuItem _getLastSqlErrorToolStripMenuItem;
         private ComboBox _cmbSearchName;
         private ContextMenuStrip _contextMenuStrip1;
-        private RichTextBox rtfListOfSearches;
+        private RichTextBox _rtfListOfSearches;
         private TextBox _txtSearchName;
         private ToolStripMenuItem updateScriptsToolStripMenuItem;
         private ToolStripMenuItem gitHubToolStripMenuItem;
         private ToolStripSeparator toolStripSeparator1;
         private ToolStripSeparator toolStripSeparator2;
+        private ToolTip _toolTipRtfListOfSearches;
+        private ToolTip toolTip1;
         private TextBox _txtSearchText;
         #endregion
 
@@ -228,7 +230,7 @@ namespace hoTools.ActiveX
             //
             ResizeRtfListOfChanges();
 
-            rtfListOfSearches.Text = Search.GetRtf();
+            _rtfListOfSearches.Text = Search.GetRtf();
 
 
 
@@ -248,11 +250,11 @@ namespace hoTools.ActiveX
         /// </summary>
         private void ResizeRtfListOfChanges()
         {
-            rtfListOfSearches.Left = Left + 20;
-            rtfListOfSearches.Width = Width - 20;
-            rtfListOfSearches.Top = _txtSearchName.Bottom + 50;
-            rtfListOfSearches.Height = Bottom - rtfListOfSearches.Top - 20;
-            rtfListOfSearches.BringToFront();
+            _rtfListOfSearches.Left = Left + 20;
+            _rtfListOfSearches.Width = Width - 20;
+            _rtfListOfSearches.Top = _txtSearchName.Bottom + 50;
+            _rtfListOfSearches.Height = Bottom - _rtfListOfSearches.Top - 20;
+            _rtfListOfSearches.BringToFront();
         }
 
         #endregion
@@ -876,7 +878,7 @@ namespace hoTools.ActiveX
             {
                 case Keys.Enter:
                     _model.SearchRun(GetSearchName(), _txtSearchText.Text);
-                    rtfListOfSearches.Visible = false;
+                    _rtfListOfSearches.Visible = false;
                     e.Handled = true;
                     break;
                 case Keys.Up:
@@ -886,23 +888,23 @@ namespace hoTools.ActiveX
                     {
                         // Reset sort order of Searches
                         Search.ResetSort();
-                        rtfListOfSearches.Text = Search.GetRtf();
+                        _rtfListOfSearches.Text = Search.GetRtf();
                     }
                     else
                     {
                         Search.CalulateAndSort(_txtSearchName.Text.Trim());
-                        rtfListOfSearches.Text = Search.GetRtf();
-                        rtfListOfSearches.Clear();
-                        ColorCharacters(rtfListOfSearches, Search.GetRtf(), _txtSearchName.Text, Color.Yellow);
+                        _rtfListOfSearches.Text = Search.GetRtf();
+                        _rtfListOfSearches.Clear();
+                        ColorCharacters(_rtfListOfSearches, Search.GetRtf(), _txtSearchName.Text, Color.Yellow);
                     }
 
-                    rtfListOfSearches.BringToFront();
-                    rtfListOfSearches.Visible = true;
+                    _rtfListOfSearches.BringToFront();
+                    _rtfListOfSearches.Visible = true;
                     e.Handled = true;
                     break;
                 case Keys.Escape:
                 case Keys.Back:
-                    rtfListOfSearches.Visible = false;
+                    _rtfListOfSearches.Visible = false;
                     break;
             }
         }
@@ -1032,7 +1034,7 @@ namespace hoTools.ActiveX
             this._btnConveyedItem = new System.Windows.Forms.Button();
             this._panelConveyedItems = new System.Windows.Forms.Panel();
             this._cmbSearchName = new System.Windows.Forms.ComboBox();
-            this.rtfListOfSearches = new System.Windows.Forms.RichTextBox();
+            this._rtfListOfSearches = new System.Windows.Forms.RichTextBox();
             this._txtSearchName = new System.Windows.Forms.TextBox();
             this._btnAddElementNote = new System.Windows.Forms.Button();
             this._menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -1102,6 +1104,8 @@ namespace hoTools.ActiveX
             this._panelAdvanced = new System.Windows.Forms.Panel();
             this._panelQuickSearch = new System.Windows.Forms.TableLayoutPanel();
             this._contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this._toolTipRtfListOfSearches = new System.Windows.Forms.ToolTip(this.components);
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this._toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this._toolStripContainer1.SuspendLayout();
             this._toolStripQuery.SuspendLayout();
@@ -1471,15 +1475,17 @@ namespace hoTools.ActiveX
             this._cmbSearchName.KeyUp += new System.Windows.Forms.KeyEventHandler(this._txtSearchName_KeyUp);
             this._cmbSearchName.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.cmbSearchName_MouseDoubleClick);
             // 
-            // rtfListOfSearches
+            // _rtfListOfSearches
             // 
-            resources.ApplyResources(this.rtfListOfSearches, "rtfListOfSearches");
-            this.rtfListOfSearches.Name = "rtfListOfSearches";
-            this.rtfListOfSearches.ReadOnly = true;
-            this._toolTip.SetToolTip(this.rtfListOfSearches, resources.GetString("rtfListOfSearches.ToolTip"));
-            this.rtfListOfSearches.Enter += new System.EventHandler(this.rtfListOfSearches_Enter);
-            this.rtfListOfSearches.Leave += new System.EventHandler(this.rtfListOfSearches_Leave);
-            this.rtfListOfSearches.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.rtfListOfSearches_MouseDoubleClick);
+            resources.ApplyResources(this._rtfListOfSearches, "_rtfListOfSearches");
+            this._rtfListOfSearches.Name = "_rtfListOfSearches";
+            this._rtfListOfSearches.ReadOnly = true;
+            this._toolTip.SetToolTip(this._rtfListOfSearches, resources.GetString("_rtfListOfSearches.ToolTip"));
+            this._rtfListOfSearches.Enter += new System.EventHandler(this.rtfListOfSearches_Enter);
+            this._rtfListOfSearches.Leave += new System.EventHandler(this.rtfListOfSearches_Leave);
+            this._rtfListOfSearches.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.rtfListOfSearches_MouseDoubleClick);
+            this._rtfListOfSearches.MouseDown += new System.Windows.Forms.MouseEventHandler(this.rtfListOfSearches_MouseDown);
+            this._rtfListOfSearches.MouseUp += new System.Windows.Forms.MouseEventHandler(this.rtfListOfSearches_MouseUp);
             // 
             // _txtSearchName
             // 
@@ -1972,10 +1978,15 @@ namespace hoTools.ActiveX
             this._contextMenuStrip1.Name = "_contextMenuStrip1";
             resources.ApplyResources(this._contextMenuStrip1, "_contextMenuStrip1");
             // 
+            // _toolTipRtfListOfSearches
+            // 
+            this._toolTipRtfListOfSearches.AutomaticDelay = 0;
+            this._toolTipRtfListOfSearches.IsBalloon = true;
+            // 
             // AddinControlGui
             // 
             resources.ApplyResources(this, "$this");
-            this.Controls.Add(this.rtfListOfSearches);
+            this.Controls.Add(this._rtfListOfSearches);
             this.Controls.Add(this._cmbSearchName);
             this.Controls.Add(this._panelPort);
             this.Controls.Add(this._panelNote);
@@ -2423,7 +2434,7 @@ namespace hoTools.ActiveX
 
         private void rtfListOfSearches_Enter(object sender, EventArgs e)
         {
-            rtfListOfSearches.Visible = true;
+            _rtfListOfSearches.Visible = true;
         }
 
         /// <summary>
@@ -2435,15 +2446,15 @@ namespace hoTools.ActiveX
         {
 
 
-            int startPosLine = rtfListOfSearches.GetFirstCharIndexOfCurrentLine();
-            int lineNumber = rtfListOfSearches.GetLineFromCharIndex(startPosLine);
+            int startPosLine = _rtfListOfSearches.GetFirstCharIndexOfCurrentLine();
+            int lineNumber = _rtfListOfSearches.GetLineFromCharIndex(startPosLine);
             SearchItem searchItem = Search.GetSearch(lineNumber);
             string searchName = searchItem.Name;
             _txtSearchName.Text = searchName;
 
             // run Search
             _model.SearchRun(searchName, _txtSearchText.Text);
-            rtfListOfSearches.Visible = false;
+            _rtfListOfSearches.Visible = false;
 
 
         }
@@ -2451,17 +2462,22 @@ namespace hoTools.ActiveX
         private void _txtSearchName_Enter(object sender, EventArgs e)
         {
             IntializeSearches();
-            rtfListOfSearches.Visible = false;
+            _rtfListOfSearches.Visible = false;
         }
 
         private void _txtSearchText_Enter(object sender, EventArgs e)
         {
-            rtfListOfSearches.Visible = false;
+            _rtfListOfSearches.Visible = false;
         }
-
+        /// <summary>
+        /// Leaves list of available Searches
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void rtfListOfSearches_Leave(object sender, EventArgs e)
         {
-            rtfListOfSearches.Visible = false;
+            _rtfListOfSearches.Visible = false;
+            _toolTipRtfListOfSearches.Hide(_rtfListOfSearches);
         }
         /// <summary>
         /// Update Scripts
@@ -2471,6 +2487,54 @@ namespace hoTools.ActiveX
         private void updateScriptsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AddinSettings.UpdateModel(_model);
+        }
+        /// <summary>
+        /// Mouse down on the rtf search list displays the comment
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void rtfListOfSearches_MouseDown(object sender, MouseEventArgs e)
+        {
+            RichTextBox rtf = (sender as RichTextBox);
+            if (rtf == _rtfListOfSearches)
+            {
+                int line = GetLine(rtf, e.Location);
+                SearchItem searchItem = Search.GetSearch(line);
+                Point pointRtfBox = rtf.Location;
+                // show tooltip relative rtfBox
+                _toolTipRtfListOfSearches.Show(
+                    searchItem.Description,
+                    rtf,
+                    pointRtfBox.X + e.X,
+                    pointRtfBox.Y + e.Y + 10);// Switch off by mouse down
+            }
+
+        }
+        /// <summary>
+        /// Get current line of the Textbox.
+        /// </summary>
+        /// <param name="rtf"></param>
+        /// <param name="location"></param>
+        /// <returns></returns>
+        private static int GetLine(RichTextBox rtf, Point location)
+        {
+            int index = rtf.GetCharIndexFromPosition(location);
+            return rtf.GetLineFromCharIndex(index);
+        }
+
+        /// <summary>
+        /// Mouse up on the rtf search list hides the comment
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void rtfListOfSearches_MouseUp(object sender, MouseEventArgs e)
+        {
+            RichTextBox rtf = (sender as RichTextBox);
+            if (rtf == _rtfListOfSearches)
+            {
+                // ReSharper disable once AssignNullToNotNullAttribute
+                _toolTipRtfListOfSearches.Hide(rtf);
+            }
         }
     }
 
