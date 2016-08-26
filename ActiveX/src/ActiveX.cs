@@ -40,9 +40,6 @@ namespace hoTools.ActiveX
         FrmSettingsKey _frmSettingsKey;
         FrmSettingsLineStyle _frmSettingsLineStyle;
 
-        private string _rtfToolTipText;
-        int TOOLTIP_XOFFSET = 20;//10
-        int TOOLTIP_YOFFSET = 20;
 
         Model _model;
 
@@ -1984,7 +1981,6 @@ namespace hoTools.ActiveX
             // _toolTipRtfListOfSearches
             // 
             this._toolTipRtfListOfSearches.AutomaticDelay = 0;
-            this._toolTipRtfListOfSearches.IsBalloon = true;
             this._toolTipRtfListOfSearches.OwnerDraw = true;
             this._toolTipRtfListOfSearches.Draw += new System.Windows.Forms.DrawToolTipEventHandler(this._toolTipRtfListOfSearches_Draw);
             this._toolTipRtfListOfSearches.Popup += new System.Windows.Forms.PopupEventHandler(this._toolTipRtfListOfSearches_Popup);
@@ -2519,7 +2515,6 @@ namespace hoTools.ActiveX
             {
                 // ReSharper disable once AssignNullToNotNullAttribute
                 _toolTipRtfListOfSearches.Hide(rtf);
-                _rtfToolTipText = "";
             }
         }
 
@@ -2535,23 +2530,22 @@ namespace hoTools.ActiveX
             {
                 int line = GetLine(rtf, e.Location);
                 SearchItem searchItem = Search.GetSearch(line);
-                _rtfToolTipText = searchItem.Description;
 
                 //Point pointRtfBox = rtf.Location;
                 // show tooltip relative rtfBox
-                _toolTipRtfListOfSearches.OwnerDraw = true;
-                _toolTipRtfListOfSearches.InitialDelay = 0;
-                _toolTipRtfListOfSearches.AutomaticDelay = 0;
-                _toolTipRtfListOfSearches.AutoPopDelay = 0;
-                _toolTipRtfListOfSearches.ShowAlways = true;
+                //_toolTipRtfListOfSearches.OwnerDraw = true;
+                //_toolTipRtfListOfSearches.InitialDelay = 0;
+                //_toolTipRtfListOfSearches.AutomaticDelay = 0;
+                //_toolTipRtfListOfSearches.AutoPopDelay = 0;
+                //_toolTipRtfListOfSearches.ShowAlways = true;
 
+                Point locationMouse = e.Location;
                _toolTipRtfListOfSearches.Show(
                     searchItem.Description,
-                    _rtfListOfSearches);
-                string text = _toolTipRtfListOfSearches.GetToolTip(_rtfListOfSearches);
-                //,
-                //pointRtfBox.X + e.X,
-                //pointRtfBox.Y + e.Y + 10);// Switch off by mouse down
+                    _rtfListOfSearches,
+                locationMouse.X + e.X - 60,
+                locationMouse.Y + e.Y + 15);
+                
             }
 
         }
@@ -2561,56 +2555,41 @@ namespace hoTools.ActiveX
         {
 
             // Draw the custom background.
-            e.Graphics.FillRectangle(SystemBrushes.ActiveCaption, e.Bounds);
+            e.Graphics.FillRectangle(SystemBrushes.Window, e.Bounds);
 
             // Draw the standard border.
             e.DrawBorder();
 
-            // Draw the custom text. 
-            // The using block will dispose the StringFormat automatically. 
+            // Draw the custom text.
+            // The using block will dispose the StringFormat automatically.
             using (StringFormat sf = new StringFormat())
             {
-                sf.Alignment = StringAlignment.Center;
-                sf.LineAlignment = StringAlignment.Center;
-                sf.HotkeyPrefix = System.Drawing.Text.HotkeyPrefix.None;
-                sf.FormatFlags = StringFormatFlags.NoWrap;
-                using (Font f = new Font("Courier New", 10.0f, FontStyle.Bold))
+                //sf.Alignment = StringAlignment.Near;
+                //sf.LineAlignment = StringAlignment.Near;
+                //sf.HotkeyPrefix = System.Drawing.Text.HotkeyPrefix.None;
+                //sf.FormatFlags = StringFormatFlags.NoWrap;
+                using (Font f = new Font("Courier New", 10))
                 {
                     e.Graphics.DrawString(e.ToolTipText, f,
                         SystemBrushes.ActiveCaptionText, e.Bounds, sf);
                 }
             }
 
-            //Rectangle bounds = e.Bounds;
-            //bounds.Offset(TOOLTIP_XOFFSET, TOOLTIP_YOFFSET);
-            //DrawToolTipEventArgs newArgs = new DrawToolTipEventArgs(e.Graphics, e.AssociatedWindow, e.AssociatedControl, bounds, 
-            //    e.ToolTipText, _toolTipRtfListOfSearches.BackColor, _toolTipRtfListOfSearches.ForeColor, 
-            //    new Font("Courier New", 10.0f, FontStyle.Bold));
-            //newArgs.DrawBackground();
-            //newArgs.DrawBorder();
-            //newArgs.DrawText(TextFormatFlags.TextBoxControl);
-
         }
 
         /// <summary>
-        /// Popup Event to size the pop-up
+        /// Popup Event to size the pop-up.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void _toolTipRtfListOfSearches_Popup(object sender, PopupEventArgs e)
         {
-            // Determine the correct size
-            using (Font f = new Font("Courier New", 10.0f, FontStyle.Bold))
+            // Determine the correct size (don't use baloon)
+            using (Font f = new Font("Courier New", 10))
             {
                 e.ToolTipSize = TextRenderer.MeasureText(
-                   _toolTipRtfListOfSearches.GetToolTip(e.AssociatedControl), f);
-                //e.ToolTipSize = TextRenderer.MeasureText(
-                //    _toolTipRtfListOfSearches.GetToolTip(e.AssociatedControl), f);
+                    _toolTipRtfListOfSearches.GetToolTip(e.AssociatedControl), f);
             }
-
-
-            //e.ToolTipSize = TextRenderer.MeasureText(_rtfToolTipText, new Font("Courier New", 10.0f, FontStyle.Bold));
-            //e.ToolTipSize = new Size(e.ToolTipSize.Width + TOOLTIP_XOFFSET, e.ToolTipSize.Height + TOOLTIP_YOFFSET);
         }
     }
 

@@ -1352,7 +1352,7 @@ Get Elements from selected Connector.
   </data>
   <data name="_txtSearchName.ToolTip" xml:space="preserve">
     <value>Enter Search Name (default is in settings):
-1. Just type to search (Autocomplete)
+1. Type to search (Autocomplete)
 2. If you have entered a part of the name press Blank, 
    Key up or down to search for (Fuzzy Search)</value>
   </data>
@@ -1414,7 +1414,9 @@ Get Elements from selected Connector.
     <value>46</value>
   </data>
   <data name="_rtfListOfSearches.Text" xml:space="preserve">
-    <value />
+    <value>List of available Searches (EA + SQL)
+1. Double Click to run Search
+2. Mouse Down to show description of search</value>
   </data>
   <data name="_rtfListOfSearches.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
