@@ -40,6 +40,10 @@ namespace hoTools.ActiveX
         FrmSettingsKey _frmSettingsKey;
         FrmSettingsLineStyle _frmSettingsLineStyle;
 
+        private string _rtfToolTipText;
+        int TOOLTIP_XOFFSET = 20;//10
+        int TOOLTIP_YOFFSET = 20;
+
         Model _model;
 
         // Global Configuration as singleton
@@ -1034,9 +1038,9 @@ namespace hoTools.ActiveX
             this._btnConveyedItem = new System.Windows.Forms.Button();
             this._panelConveyedItems = new System.Windows.Forms.Panel();
             this._cmbSearchName = new System.Windows.Forms.ComboBox();
-            this._rtfListOfSearches = new System.Windows.Forms.RichTextBox();
             this._txtSearchName = new System.Windows.Forms.TextBox();
             this._btnAddElementNote = new System.Windows.Forms.Button();
+            this._rtfListOfSearches = new System.Windows.Forms.RichTextBox();
             this._menuStrip1 = new System.Windows.Forms.MenuStrip();
             this._fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._settingGeneralToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -1475,18 +1479,6 @@ namespace hoTools.ActiveX
             this._cmbSearchName.KeyUp += new System.Windows.Forms.KeyEventHandler(this._txtSearchName_KeyUp);
             this._cmbSearchName.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.cmbSearchName_MouseDoubleClick);
             // 
-            // _rtfListOfSearches
-            // 
-            resources.ApplyResources(this._rtfListOfSearches, "_rtfListOfSearches");
-            this._rtfListOfSearches.Name = "_rtfListOfSearches";
-            this._rtfListOfSearches.ReadOnly = true;
-            this._toolTip.SetToolTip(this._rtfListOfSearches, resources.GetString("_rtfListOfSearches.ToolTip"));
-            this._rtfListOfSearches.Enter += new System.EventHandler(this.rtfListOfSearches_Enter);
-            this._rtfListOfSearches.Leave += new System.EventHandler(this.rtfListOfSearches_Leave);
-            this._rtfListOfSearches.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.rtfListOfSearches_MouseDoubleClick);
-            this._rtfListOfSearches.MouseDown += new System.Windows.Forms.MouseEventHandler(this.rtfListOfSearches_MouseDown);
-            this._rtfListOfSearches.MouseUp += new System.Windows.Forms.MouseEventHandler(this.rtfListOfSearches_MouseUp);
-            // 
             // _txtSearchName
             // 
             this._txtSearchName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
@@ -1508,6 +1500,17 @@ namespace hoTools.ActiveX
             this._toolTip.SetToolTip(this._btnAddElementNote, resources.GetString("_btnAddElementNote.ToolTip"));
             this._btnAddElementNote.UseVisualStyleBackColor = true;
             this._btnAddElementNote.Click += new System.EventHandler(this.btnAddNote_Click);
+            // 
+            // _rtfListOfSearches
+            // 
+            resources.ApplyResources(this._rtfListOfSearches, "_rtfListOfSearches");
+            this._rtfListOfSearches.Name = "_rtfListOfSearches";
+            this._rtfListOfSearches.ReadOnly = true;
+            this._rtfListOfSearches.Enter += new System.EventHandler(this.rtfListOfSearches_Enter);
+            this._rtfListOfSearches.Leave += new System.EventHandler(this.rtfListOfSearches_Leave);
+            this._rtfListOfSearches.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.rtfListOfSearches_MouseDoubleClick);
+            this._rtfListOfSearches.MouseDown += new System.Windows.Forms.MouseEventHandler(this.rtfListOfSearches_MouseDown);
+            this._rtfListOfSearches.MouseUp += new System.Windows.Forms.MouseEventHandler(this.rtfListOfSearches_MouseUp);
             // 
             // _menuStrip1
             // 
@@ -1982,6 +1985,9 @@ namespace hoTools.ActiveX
             // 
             this._toolTipRtfListOfSearches.AutomaticDelay = 0;
             this._toolTipRtfListOfSearches.IsBalloon = true;
+            this._toolTipRtfListOfSearches.OwnerDraw = true;
+            this._toolTipRtfListOfSearches.Draw += new System.Windows.Forms.DrawToolTipEventHandler(this._toolTipRtfListOfSearches_Draw);
+            this._toolTipRtfListOfSearches.Popup += new System.Windows.Forms.PopupEventHandler(this._toolTipRtfListOfSearches_Popup);
             // 
             // AddinControlGui
             // 
@@ -2488,28 +2494,7 @@ namespace hoTools.ActiveX
         {
             AddinSettings.UpdateModel(_model);
         }
-        /// <summary>
-        /// Mouse down on the rtf search list displays the comment
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void rtfListOfSearches_MouseDown(object sender, MouseEventArgs e)
-        {
-            RichTextBox rtf = (sender as RichTextBox);
-            if (rtf == _rtfListOfSearches)
-            {
-                int line = GetLine(rtf, e.Location);
-                SearchItem searchItem = Search.GetSearch(line);
-                Point pointRtfBox = rtf.Location;
-                // show tooltip relative rtfBox
-                _toolTipRtfListOfSearches.Show(
-                    searchItem.Description,
-                    rtf,
-                    pointRtfBox.X + e.X,
-                    pointRtfBox.Y + e.Y + 10);// Switch off by mouse down
-            }
 
-        }
         /// <summary>
         /// Get current line of the Textbox.
         /// </summary>
@@ -2534,7 +2519,98 @@ namespace hoTools.ActiveX
             {
                 // ReSharper disable once AssignNullToNotNullAttribute
                 _toolTipRtfListOfSearches.Hide(rtf);
+                _rtfToolTipText = "";
             }
+        }
+
+        /// <summary>
+        /// Mouse down on the rtf search list displays the comment
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void rtfListOfSearches_MouseDown(object sender, MouseEventArgs e)
+        {
+            RichTextBox rtf = (sender as RichTextBox);
+            if (rtf == _rtfListOfSearches)
+            {
+                int line = GetLine(rtf, e.Location);
+                SearchItem searchItem = Search.GetSearch(line);
+                _rtfToolTipText = searchItem.Description;
+
+                //Point pointRtfBox = rtf.Location;
+                // show tooltip relative rtfBox
+                _toolTipRtfListOfSearches.OwnerDraw = true;
+                _toolTipRtfListOfSearches.InitialDelay = 0;
+                _toolTipRtfListOfSearches.AutomaticDelay = 0;
+                _toolTipRtfListOfSearches.AutoPopDelay = 0;
+                _toolTipRtfListOfSearches.ShowAlways = true;
+
+               _toolTipRtfListOfSearches.Show(
+                    searchItem.Description,
+                    _rtfListOfSearches);
+                string text = _toolTipRtfListOfSearches.GetToolTip(_rtfListOfSearches);
+                //,
+                //pointRtfBox.X + e.X,
+                //pointRtfBox.Y + e.Y + 10);// Switch off by mouse down
+            }
+
+        }
+        
+
+        private void _toolTipRtfListOfSearches_Draw(object sender, DrawToolTipEventArgs e)
+        {
+
+            // Draw the custom background.
+            e.Graphics.FillRectangle(SystemBrushes.ActiveCaption, e.Bounds);
+
+            // Draw the standard border.
+            e.DrawBorder();
+
+            // Draw the custom text. 
+            // The using block will dispose the StringFormat automatically. 
+            using (StringFormat sf = new StringFormat())
+            {
+                sf.Alignment = StringAlignment.Center;
+                sf.LineAlignment = StringAlignment.Center;
+                sf.HotkeyPrefix = System.Drawing.Text.HotkeyPrefix.None;
+                sf.FormatFlags = StringFormatFlags.NoWrap;
+                using (Font f = new Font("Courier New", 10.0f, FontStyle.Bold))
+                {
+                    e.Graphics.DrawString(e.ToolTipText, f,
+                        SystemBrushes.ActiveCaptionText, e.Bounds, sf);
+                }
+            }
+
+            //Rectangle bounds = e.Bounds;
+            //bounds.Offset(TOOLTIP_XOFFSET, TOOLTIP_YOFFSET);
+            //DrawToolTipEventArgs newArgs = new DrawToolTipEventArgs(e.Graphics, e.AssociatedWindow, e.AssociatedControl, bounds, 
+            //    e.ToolTipText, _toolTipRtfListOfSearches.BackColor, _toolTipRtfListOfSearches.ForeColor, 
+            //    new Font("Courier New", 10.0f, FontStyle.Bold));
+            //newArgs.DrawBackground();
+            //newArgs.DrawBorder();
+            //newArgs.DrawText(TextFormatFlags.TextBoxControl);
+
+        }
+
+        /// <summary>
+        /// Popup Event to size the pop-up
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void _toolTipRtfListOfSearches_Popup(object sender, PopupEventArgs e)
+        {
+            // Determine the correct size
+            using (Font f = new Font("Courier New", 10.0f, FontStyle.Bold))
+            {
+                e.ToolTipSize = TextRenderer.MeasureText(
+                   _toolTipRtfListOfSearches.GetToolTip(e.AssociatedControl), f);
+                //e.ToolTipSize = TextRenderer.MeasureText(
+                //    _toolTipRtfListOfSearches.GetToolTip(e.AssociatedControl), f);
+            }
+
+
+            //e.ToolTipSize = TextRenderer.MeasureText(_rtfToolTipText, new Font("Courier New", 10.0f, FontStyle.Bold));
+            //e.ToolTipSize = new Size(e.ToolTipSize.Width + TOOLTIP_XOFFSET, e.ToolTipSize.Height + TOOLTIP_YOFFSET);
         }
     }
 
