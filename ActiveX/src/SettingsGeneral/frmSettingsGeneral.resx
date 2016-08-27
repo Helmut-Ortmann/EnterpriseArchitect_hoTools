@@ -141,7 +141,12 @@
 - Composite (locate composite)</value>
   </data>
   <data name="txtQuickSearch.ToolTip" xml:space="preserve">
-    <value>Search  for Quick Search (Tip: Quick Search from MDG hoTools)
+    <value>Search  Name for Quick Search (Tip: Quick Search from MDG hoTools).
+- If you mostly use a "your Search" enter the name
+- If you prefer to use autocomplete and Fuzzy Search leave it blank
+
+
+
 - Simple (EA Standard Search)  or
 - Other EA Model Search or
 - Your own Search 
@@ -151,17 +156,6 @@
 Your most frequently Model Items at your finger tip.
 
 Keep it empty to hide Quick Search support</value>
-  </data>
-  <data name="label1.ToolTip" xml:space="preserve">
-    <value>Search  for Quick Search (Tip: Quick Search from MDG hoTools)
-- Simple (EA Standard Search)  or
-- Other EA Model Search or
-- Your own Search 
-- SQL File name like *.sql (hoTools searches in SQL Paths)
-- SQL Full file name (c:\....\*.sql)
-
-Your most frequently Model Items at your finger tip.
-</value>
   </data>
   <data name="txtFileManagerPath.ToolTip" xml:space="preserve">
     <value>Path to a File Manager like:
@@ -213,5 +207,15 @@ You can easily implement such functions by search and macros like:
 - '#CONVEYED_ITEMS#'
 
 </value>
+  </data>
+  <data name="label13.ToolTip" xml:space="preserve">
+    <value>Quick Search:
+- EA Search Name
+- SQL file ('mySql.sql') relative to SQL Path
+- SQL File (absolute file Path)
+- Blank for mostly using Autocomplete or Fuzzy Search to find your Search
+
+- If you mostly use a "your Search" enter the name
+- If you prefer to use autocomplete and Fuzzy Search leave it blank</value>
   </data>
 </root>

@@ -46,7 +46,6 @@
             this.label41 = new System.Windows.Forms.Label();
             this.label29 = new System.Windows.Forms.Label();
             this.txtQuickSearch = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.chkAdvancedPort = new System.Windows.Forms.CheckBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
@@ -78,6 +77,8 @@
             this.label9 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this._chkQuickSearchSupport = new System.Windows.Forms.CheckBox();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -272,24 +273,12 @@
             // txtQuickSearch
             // 
             this.txtQuickSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtQuickSearch.Location = new System.Drawing.Point(212, 247);
+            this.txtQuickSearch.Location = new System.Drawing.Point(273, 247);
             this.txtQuickSearch.Margin = new System.Windows.Forms.Padding(2);
             this.txtQuickSearch.Name = "txtQuickSearch";
-            this.txtQuickSearch.Size = new System.Drawing.Size(536, 24);
+            this.txtQuickSearch.Size = new System.Drawing.Size(475, 24);
             this.txtQuickSearch.TabIndex = 213;
             this.toolTip1.SetToolTip(this.txtQuickSearch, resources.GetString("txtQuickSearch.ToolTip"));
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(28, 251);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(153, 72);
-            this.label1.TabIndex = 212;
-            this.label1.Text = "Quick Search:\r\n- EA Search Name\r\n- SQL file (\'mySql.sql\')\r\n- Blank to hide it";
-            this.toolTip1.SetToolTip(this.label1, resources.GetString("label1.ToolTip"));
             // 
             // label2
             // 
@@ -385,7 +374,7 @@
             // chkShortKeySupport
             // 
             this.chkShortKeySupport.AutoSize = true;
-            this.chkShortKeySupport.Location = new System.Drawing.Point(212, 178);
+            this.chkShortKeySupport.Location = new System.Drawing.Point(208, 154);
             this.chkShortKeySupport.Margin = new System.Windows.Forms.Padding(2);
             this.chkShortKeySupport.Name = "chkShortKeySupport";
             this.chkShortKeySupport.Size = new System.Drawing.Size(15, 14);
@@ -397,7 +386,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(26, 174);
+            this.label4.Location = new System.Drawing.Point(31, 150);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(136, 18);
@@ -409,7 +398,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(26, 203);
+            this.label5.Location = new System.Drawing.Point(37, 179);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(154, 18);
@@ -421,7 +410,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(26, 221);
+            this.label6.Location = new System.Drawing.Point(37, 197);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(152, 18);
@@ -432,7 +421,7 @@
             // chkShowServiceButtons
             // 
             this.chkShowServiceButtons.AutoSize = true;
-            this.chkShowServiceButtons.Location = new System.Drawing.Point(212, 207);
+            this.chkShowServiceButtons.Location = new System.Drawing.Point(208, 183);
             this.chkShowServiceButtons.Margin = new System.Windows.Forms.Padding(2);
             this.chkShowServiceButtons.Name = "chkShowServiceButtons";
             this.chkShowServiceButtons.Size = new System.Drawing.Size(15, 14);
@@ -443,7 +432,7 @@
             // chkShowQueryButtons
             // 
             this.chkShowQueryButtons.AutoSize = true;
-            this.chkShowQueryButtons.Location = new System.Drawing.Point(212, 225);
+            this.chkShowQueryButtons.Location = new System.Drawing.Point(208, 201);
             this.chkShowQueryButtons.Margin = new System.Windows.Forms.Padding(2);
             this.chkShowQueryButtons.Name = "chkShowQueryButtons";
             this.chkShowQueryButtons.Size = new System.Drawing.Size(15, 14);
@@ -532,7 +521,7 @@
             // 
             this.chkConveyedItemSupport.AutoSize = true;
             this.chkConveyedItemSupport.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkConveyedItemSupport.Location = new System.Drawing.Point(282, 178);
+            this.chkConveyedItemSupport.Location = new System.Drawing.Point(279, 150);
             this.chkConveyedItemSupport.Name = "chkConveyedItemSupport";
             this.chkConveyedItemSupport.Size = new System.Drawing.Size(187, 22);
             this.chkConveyedItemSupport.TabIndex = 239;
@@ -559,7 +548,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(208, 273);
+            this.label10.Location = new System.Drawing.Point(36, 296);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(81, 20);
             this.label10.TabIndex = 243;
@@ -602,7 +591,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(232, 203);
+            this.label8.Location = new System.Drawing.Point(228, 179);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(80, 18);
             this.label8.TabIndex = 240;
@@ -612,7 +601,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(232, 221);
+            this.label9.Location = new System.Drawing.Point(228, 197);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(80, 18);
             this.label9.TabIndex = 241;
@@ -638,12 +627,37 @@
             this.label12.TabIndex = 246;
             this.label12.Text = "(hoTools, SQL, Script, ..)";
             // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(37, 247);
+            this.label13.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(102, 36);
+            this.label13.TabIndex = 212;
+            this.label13.Text = "Quick Search:\r\n\r\n";
+            this.toolTip1.SetToolTip(this.label13, resources.GetString("label13.ToolTip"));
+            // 
+            // _chkQuickSearchSupport
+            // 
+            this._chkQuickSearchSupport.AutoSize = true;
+            this._chkQuickSearchSupport.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this._chkQuickSearchSupport.Location = new System.Drawing.Point(208, 250);
+            this._chkQuickSearchSupport.Name = "_chkQuickSearchSupport";
+            this._chkQuickSearchSupport.Size = new System.Drawing.Size(62, 22);
+            this._chkQuickSearchSupport.TabIndex = 247;
+            this._chkQuickSearchSupport.Text = "use it";
+            this.toolTip1.SetToolTip(this._chkQuickSearchSupport, "Use Quick Search in hoTools.");
+            this._chkQuickSearchSupport.UseVisualStyleBackColor = true;
+            // 
             // FrmSettingsGeneral
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(844, 624);
+            this.Controls.Add(this._chkQuickSearchSupport);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.txtAddinTabToFirstActivate);
             this.Controls.Add(this.label11);
@@ -678,7 +692,7 @@
             this.Controls.Add(this.label41);
             this.Controls.Add(this.label29);
             this.Controls.Add(this.txtQuickSearch);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.label13);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOk);
@@ -713,7 +727,6 @@
         private System.Windows.Forms.Label label41;
         private System.Windows.Forms.Label label29;
         private System.Windows.Forms.TextBox txtQuickSearch;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.CheckBox chkAdvancedPort;
         private System.Windows.Forms.ToolTip toolTip1;
@@ -745,5 +758,7 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox txtAddinTabToFirstActivate;
         private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.CheckBox _chkQuickSearchSupport;
     }
 }

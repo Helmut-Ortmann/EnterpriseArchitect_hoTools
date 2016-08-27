@@ -31,6 +31,8 @@ namespace hoTools.Settings
 
             chkLineStyleSupport.Checked = settings.IsLineStyleSupport;
             chkShortKeySupport.Checked = settings.IsShortKeySupport;
+            _chkQuickSearchSupport.Checked = settings.IsQuickSearchSupport;
+
             chkShowServiceButtons.Checked = settings.IsShowServiceButton;
             chkShowQueryButtons.Checked = settings.IsShowQueryButton;
             chkFavoriteSupport.Checked = settings.IsFavoriteSupport;
@@ -108,6 +110,7 @@ namespace hoTools.Settings
 
             _settings.IsLineStyleSupport = chkLineStyleSupport.Checked;
             _settings.IsShortKeySupport = chkShortKeySupport.Checked;
+            _settings.IsQuickSearchSupport = _chkQuickSearchSupport.Checked;
             _settings.IsShowServiceButton = chkShowServiceButtons.Checked ;
             _settings.IsShowQueryButton = chkShowQueryButtons.Checked;
             _settings.IsFavoriteSupport = chkFavoriteSupport.Checked;

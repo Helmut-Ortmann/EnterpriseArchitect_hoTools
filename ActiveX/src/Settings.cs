@@ -306,6 +306,27 @@ namespace hoTools.Settings
         }
         #endregion
 
+        #region Property: isQuickSearchSupport
+        public bool IsQuickSearchSupport
+        {
+            get
+            {
+                bool result;
+                if (bool.TryParse(CurrentConfig.AppSettings.Settings["isQuickSearchSupport"].Value, out result))
+                {
+                    return result;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            set
+            {
+                CurrentConfig.AppSettings.Settings["isQuickSearchSupport"].Value = value.ToString();
+            }
+        }
+        #endregion
         #region Property: isShortKeySupport
         public bool IsShortKeySupport
         {
