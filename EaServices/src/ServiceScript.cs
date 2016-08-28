@@ -11,10 +11,11 @@ namespace hoTools.EaServices
         /// 
         /// </summary>
         /// <param name="function"></param>
-        public ServiceScript(ScriptFunction function) : base($"{function.Owner.Name}:{function.Name}", $"{function.Owner.Name}:{function.Name}", function.Owner.LanguageName)
+        public ServiceScript(ScriptFunction function) : base($"{function.Owner.Name}:{function.Name}", $"{function.Owner.Name}:{function.Name}", function.Description)
         {
             Function = function;
         }
+        // public ServiceScript(ScriptFunction function) : base($"{function.Owner.Name}:{function.Name}", $"{function.Owner.Name}:{function.Name}", function.Owner.LanguageName)
 
     }
 }
