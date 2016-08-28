@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
@@ -15,6 +16,7 @@ using EAAddinFramework.Utils;
 
 using hoTools.Utils.SQL;
 using hoTools.Utils;
+using hoTools.Utils.Configuration;
 
 
 // ReSharper disable once CheckNamespace
@@ -43,6 +45,9 @@ namespace hoTools.ActiveX
 
 
         Model _model;
+
+        // configuration as singleton
+        readonly HoToolsGlobalCfg _globalCfg = HoToolsGlobalCfg.Instance;
 
         // Global Configuration as singleton
         //readonly HoToolsGlobalCfg _globalCfg = HoToolsGlobalCfg.Instance;
@@ -1541,6 +1546,7 @@ namespace hoTools.ActiveX
             // 
             this.showDescriptionToolStripMenuItem.Name = "showDescriptionToolStripMenuItem";
             resources.ApplyResources(this.showDescriptionToolStripMenuItem, "showDescriptionToolStripMenuItem");
+            this.showDescriptionToolStripMenuItem.Click += new System.EventHandler(this.showDescriptionToolStripMenuItem_Click);
             // 
             // _menuStrip1
             // 
@@ -2478,6 +2484,8 @@ namespace hoTools.ActiveX
         }
         /// <summary>
         /// Run Search for current line of rtf text box
+        /// <para/>- EA Search
+        /// <para/>- SQL path with absolute and relative path (according to SQL Path)
         /// </summary>
         private void RunSearchForCurrentRtfLine()
         {
@@ -2527,11 +2535,10 @@ namespace hoTools.ActiveX
         /// Get current line of the Textbox.
         /// </summary>
         /// <param name="rtf"></param>
-        /// <param name="location"></param>
         /// <returns></returns>
-        private static int GetLine(RichTextBox rtf, Point location)
+        private static int GetLineForRtf(RichTextBox rtf)
         {
-            int index = rtf.GetCharIndexFromPosition(location);
+            int index = rtf.SelectionStart;
             return rtf.GetLineFromCharIndex(index);
         }
 
@@ -2560,7 +2567,7 @@ namespace hoTools.ActiveX
             RichTextBox rtf = (sender as RichTextBox);
             if (rtf == _rtfListOfSearches)
             {
-                int line = GetLine(rtf, e.Location);
+                int line = GetLineForRtf(rtf);
                 SearchItem searchItem = Search.GetSearch(line);
 
                Point locationMouse = e.Location;
@@ -2630,12 +2637,48 @@ namespace hoTools.ActiveX
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void editSQLToolStripMenuItem_Click(object sender, EventArgs e)
+        void editSQLToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Point location = new Point(MousePosition.X,MousePosition.Y);
-            int line = GetLine(_rtfListOfSearches, location);
-            SearchItem searchItem = Search.GetSearch(line);
-            Process.Start(searchItem.Name);
+            SearchItem searchItem = GetSearchItemFromRtfLine();
+            if (searchItem is EaSearchItem) return;
+
+            string sqlName = _globalCfg.GetFileLong(searchItem.Name);
+            if (! String.IsNullOrEmpty(sqlName)) Process.Start(sqlName);
+        }
+
+        private void showDescriptionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SearchItem searchItem = GetSearchItemFromRtfLine();
+            if (searchItem is EaSearchItem)
+            {
+                var eaSearchItem = searchItem as EaSearchItem;
+                MessageBox.Show($"Category: {eaSearchItem.Category}{Environment.NewLine}" +
+                                $"Releases: '{eaSearchItem.EARelease}'{Environment.NewLine}" +
+                                $"MDG ID: '{eaSearchItem.MdgId}'{Environment.NewLine}" +
+                                $"Description: {eaSearchItem.Description}{Environment.NewLine}",
+                                $"Info EA-Search: '{searchItem.Name}'");
+
+            }
+            else
+            {   // SQL-File Search
+                string sqlString = _globalCfg.ReadSqlFile(searchItem.Name);
+
+                MessageBox.Show($"{ _globalCfg.GetFileLong(searchItem.Name)}" +
+                                $"{Environment.NewLine}Category: {searchItem.Category}{Environment.NewLine}{sqlString}",
+                                $"Info SQL-File: '{Path.GetFileName(searchItem.Name)}'");
+
+            }
+            
+
+        }
+        /// <summary>
+        /// Get Search Item for line in rtf
+        /// </summary>
+        /// <returns></returns>
+        SearchItem GetSearchItemFromRtfLine()
+        {
+            int line = GetLineForRtf(_rtfListOfSearches);
+            return Search.GetSearch(line);
         }
     }
 

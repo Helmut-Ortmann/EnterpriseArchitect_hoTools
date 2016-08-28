@@ -76,25 +76,19 @@ namespace AddinFramework.Util
             
         }
         /// <summary>
-        /// Calculate score, sort and visualize rtf field. Cases are not considered.
+        /// Calculate score, sort and visualize rtf field. Upper/Lower cases are not considered.
         /// </summary>
         /// <param name="pattern"></param>
         public static void CalulateAndSort(string pattern)
         {
             pattern = pattern.ToLower();
-            var l = new List<SearchItem>();
 
-            foreach (var search in _staticAllSearches)
+            foreach (SearchItem item in _staticAllSearches)
             {
-                // Search for length of subsequence
-                var score = pattern.LongestCommonSubsequence(search.Name.ToLower());
-                l.Add(new SearchItem(score.Item1.Length, search.Name, search.Description, search.Category, search.Favorite));
-                //var score = pattern.LevenshteinDistance(search.Name);
-                //l.Add(new SearchItem(score, search.Name, search.Description, search.Category, search.Favorite));
-
+                item.Score = pattern.LongestCommonSubsequence(item.Name.ToLower()).Item2;
             }
-            // sort list
-            _staticAllSearches = l.OrderByDescending(a => a.Score).ToList();
+           // sort list
+            _staticAllSearches = _staticAllSearches.OrderByDescending(a => a.Score).ToList();
 
         }
         /// <summary>
@@ -335,26 +329,28 @@ namespace AddinFramework.Util
 
             string jasonPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"EaStandardSearches.json");
 
-            List<SearchItem> searches;
+            List<EaSearchItem> eaSearches;
             using (StreamReader sr = new StreamReader(path: jasonPath) )
             using (JsonReader reader = new JsonTextReader(sr))
             {
                 JsonSerializer serializer = new JsonSerializer();
-                 searches = serializer.Deserialize<List<SearchItem>>(reader);
+                 eaSearches = serializer.Deserialize<List<EaSearchItem>>(reader);
                 
 
             }
             // filter only EA Searches used in current release
-            foreach (var search in searches)
+            foreach (var eaSearchItem in eaSearches)
             {
-                if (search.EARelease != null)
-                {
-                    if (search.EARelease.Contains(eaRelease)) _staticAllSearches.Add(search);
-                }
-                else
-                {
-                    MessageBox.Show($"Like: \"EARelease\": \"9, 10, 11, 12, 12.1, 13\"\r\nFile:\r\n'{jasonPath}'", @"Error JSON, no release defined");
-                }
+                    if (eaSearchItem.EARelease != null)
+                    {
+                        if (eaSearchItem.EARelease.Contains(eaRelease)) _staticAllSearches.Add(eaSearchItem);
+                    }
+                    else
+                    {
+                        MessageBox.Show($"Like: \"EARelease\": \"9, 10, 11, 12, 12.1, 13\"\r\nFile:\r\n'{jasonPath}'",
+                            @"Error JSON, no release defined");
+                    }
+
             }
         }
 

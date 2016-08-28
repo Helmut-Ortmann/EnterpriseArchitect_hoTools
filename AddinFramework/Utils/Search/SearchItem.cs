@@ -17,10 +17,8 @@ namespace AddinFramework.Util
         public string Description { get; set; }
         public string Category { get; set; }
         public bool Favorite { get; set; }
-        public string EARelease { get; set; }
+        
 
-
-        [JsonConstructor]
         public SearchItem(string name)
         {
             Name = name;
@@ -51,28 +49,35 @@ namespace AddinFramework.Util
             Category = category;
             Favorite = favorite;
         }
-        public SearchItem(double score, string name, string description, string category, bool favorite, string eaRelease)
-        {
-            Score = score;
-            Name = name;
-            Description = description;
-            Category = category;
-            Favorite = favorite;
-            EARelease = eaRelease;
-        }
+       
     }
     /// <summary>
     /// An EA Search Item to define an EA Search
     /// </summary>
     public class EaSearchItem : SearchItem
     {
-        public string MdgId { get; set; }
-
-        public EaSearchItem(string id, string name): base(name)
-        {
-            MdgId = id;
-        }
         
+        public string MdgId { get; set; }
+        public string EARelease { get; set; }
+
+        [JsonConstructor]
+        public EaSearchItem(string Name): base(Name)
+        {
+           
+        }
+        public EaSearchItem(string Name, string Description) : base(Name)
+        {
+            this.Description = Description; 
+        }
+        public EaSearchItem(string name, string description, string eaRelease) : base(name)
+        {
+            Description = description;
+            EARelease = eaRelease;
+        }
+
+
+
+
     }
     /// <summary>
     /// An SQL Search Item with name, longName.
@@ -81,10 +86,9 @@ namespace AddinFramework.Util
     {
         public string LongName { get; set; }
 
-        [JsonConstructor]
-        public SqlSearchItem(string longName):base(Path.GetFileName(longName))
+        public SqlSearchItem(string longName) : base(Path.GetFileName(longName))
         {
-           Init(longName, "");
+            Init(longName, "");
         }
 
         public SqlSearchItem(string name, string longName) : base(name)
@@ -92,7 +96,7 @@ namespace AddinFramework.Util
             Init(longName, "");
         }
 
-        public SqlSearchItem(string name, string longName, string description ) : base(name)
+        public SqlSearchItem(string name, string longName, string description) : base(name)
         {
             Init(longName, description);
         }

@@ -85,7 +85,28 @@ namespace hoTools.Utils.Configuration
             // nothing found
             return "";
         }
+        /// <summary>
+        /// Get complete filepath from file name
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <returns></returns>
+        public string GetFileLong(string fileName )
+        {
+            // compare complete file name with extension
+            foreach (string fileNameLong in getListFileCompleteName())
+            {
+                if (Path.GetFileName(fileNameLong) == fileName) return fileNameLong;
+            }
 
+            // compare file name without extension
+            fileName = Path.GetFileNameWithoutExtension(fileName);
+            foreach (string fileNameLong in getListFileCompleteName())
+            {
+                if (Path.GetFileNameWithoutExtension(fileNameLong) == fileName) return fileNameLong;
+            }
+            return "";
+
+        }
         /// <summary>
         /// Get list of *.sql files of SQL path
         /// </summary>
