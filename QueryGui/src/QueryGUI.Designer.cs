@@ -90,6 +90,9 @@ namespace hoTools.Query
             this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.runScriptSelectedItemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.runTreeSelectedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewScripts)).BeginInit();
             this.contextMenuStripDataGrid.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -182,6 +185,9 @@ namespace hoTools.Query
             // contextMenuStripDataGrid
             // 
             this.contextMenuStripDataGrid.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.runTreeSelectedToolStripMenuItem,
+            this.runScriptSelectedItemToolStripMenuItem,
+            this.toolStripSeparator10,
             this.runScriptToolStripMenuItem,
             this.runScriptAndAskToolStripMenuItem,
             this.toolStripSeparator5,
@@ -190,7 +196,7 @@ namespace hoTools.Query
             this.showScriptToolStripMenuItem,
             this.ShowErrorToolStripMenuItem1});
             this.contextMenuStripDataGrid.Name = "contextMenuStripDataGrid";
-            this.contextMenuStripDataGrid.Size = new System.Drawing.Size(331, 126);
+            this.contextMenuStripDataGrid.Size = new System.Drawing.Size(331, 198);
             this.contextMenuStripDataGrid.Text = "C";
             this.contextMenuStripDataGrid.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStripDataGrid_Opening);
             // 
@@ -690,6 +696,29 @@ namespace hoTools.Query
             this.tableLayoutPanel1.Size = new System.Drawing.Size(769, 25);
             this.tableLayoutPanel1.TabIndex = 12;
             // 
+            // runScriptSelectedItemToolStripMenuItem
+            // 
+            this.runScriptSelectedItemToolStripMenuItem.Name = "runScriptSelectedItemToolStripMenuItem";
+            this.runScriptSelectedItemToolStripMenuItem.Size = new System.Drawing.Size(330, 22);
+            this.runScriptSelectedItemToolStripMenuItem.Text = "Run Script for Context Item(s)";
+            this.runScriptSelectedItemToolStripMenuItem.ToolTipText = "- Element\r\n- Attribut\r\n- Operation\r\n- Package\r\n- Diagram\r\n- Diagram Objects\r\n- Di" +
+    "agram Connector";
+            this.runScriptSelectedItemToolStripMenuItem.Click += new System.EventHandler(this.runScriptSelectedItemToolStripMenuItem_Click);
+            // 
+            // runTreeSelectedToolStripMenuItem
+            // 
+            this.runTreeSelectedToolStripMenuItem.Name = "runTreeSelectedToolStripMenuItem";
+            this.runTreeSelectedToolStripMenuItem.Size = new System.Drawing.Size(330, 22);
+            this.runTreeSelectedToolStripMenuItem.Text = "Run Script for Elements seleted in Browser";
+            this.runTreeSelectedToolStripMenuItem.ToolTipText = "Run Script Elements selected in Browser\r\n- Classs, Components\r\n- Activitys, Actio" +
+    "ns\r\n- usw.\r\n\r\nSee: Run Script for Context Item(s)";
+            this.runTreeSelectedToolStripMenuItem.Click += new System.EventHandler(this.runTreeSelectedToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator10
+            // 
+            this.toolStripSeparator10.Name = "toolStripSeparator10";
+            this.toolStripSeparator10.Size = new System.Drawing.Size(327, 6);
+            // 
             // QueryGui
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -777,5 +806,8 @@ namespace hoTools.Query
         private System.Windows.Forms.ToolStripMenuItem gitHubWiKiScriptToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem gitHubRepositoryToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
+        private System.Windows.Forms.ToolStripMenuItem runScriptSelectedItemToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem runTreeSelectedToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
     }
 }
