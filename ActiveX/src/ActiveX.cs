@@ -302,7 +302,7 @@ namespace hoTools.ActiveX
         }
         void btnAddElementNote_Click(object sender, EventArgs e)
         {
-            EaService.AddElementNote(Repository);
+            EaService.AddNote(Repository);
         }
 
         void btnAddDiagramNote_Click(object sender, EventArgs e)

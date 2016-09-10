@@ -952,7 +952,7 @@ namespace hoTools
                     break;
 
                 case MenuAddLinkedNote:
-                    EaService.AddElementNote(repository);
+                    EaService.AddNote(repository);
 
                     break;
 

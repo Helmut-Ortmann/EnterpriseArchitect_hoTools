@@ -1973,12 +1973,31 @@ namespace hoTools.EaServices
         /// <param name="rep"></param>
         public static void AddNote(Repository rep)
         {
+            // handle multiple selected elements
+            Diagram diaCurrent = rep.GetCurrentDiagram();
+            EA.Collection objCol = null;
+            if (diaCurrent != null)
+            {
+                objCol = diaCurrent.SelectedObjects;
+            }
             ObjectType oType = rep.GetContextItemType();
             switch (oType)
             {
+                case ObjectType.otConnector:
+                    break;
                 case ObjectType.otPackage:
                 case ObjectType.otElement:
-                        AddElementNote(rep);
+                    if (objCol?.Count > 0)
+                    {
+                        foreach (EA.DiagramObject obj in objCol)
+                        {
+                            AddElementNote(rep, obj);
+                            
+
+                        }
+
+                    }
+                    
                     break;
                 case ObjectType.otDiagram:
                         AddDiagramNote(rep);
@@ -1986,23 +2005,24 @@ namespace hoTools.EaServices
                     
             }
         }
+
         /// <summary>
-        /// Add Element note for Element. Element is estimated from:<para/>
+        /// Add Element note for diagram Object from:<para/>
         /// Element, Attribute, Operation, Package
         /// 
         /// </summary>
         /// <param name="rep"></param>
-        public static void AddElementNote(Repository rep)
+        /// <param name="diaObj"></param>
+        public static void AddElementNote(Repository rep, DiagramObject diaObj)
         {
-            ObjectType oType = rep.GetContextItemType();
-            Element el = Util.GetElementFromContextObject(rep);
+            Element el = rep.GetElementByID(diaObj.ElementID);
             if (el != null)
             {
                 Diagram dia = rep.GetCurrentDiagram();
                 Package pkg = rep.GetPackageByID(el.PackageID);
                 if (pkg.IsProtected || dia.IsLocked || el.Locked) return;
 
-                // save diagram
+                // save diagram;//
                 rep.SaveDiagram(dia.DiagramID);
 
                 Element elNote;
@@ -2019,8 +2039,6 @@ namespace hoTools.EaServices
 
                 // add element to diagram
                 // "l=200;r=400;t=200;b=600;"
-
-                DiagramObject diaObj = GetDiagramObjectFromElement(el, dia);
 
                 int left = diaObj.right + 50;
                 int right = left + 100;
@@ -2042,9 +2060,7 @@ namespace hoTools.EaServices
                 Util.SetElementHasAttchaedLink(rep, el, elNote);
                 rep.ReloadDiagram(dia.DiagramID);
             }
-            else if (oType.Equals(ObjectType.otConnector))
-            {
-            }
+           
         }
 
         #endregion
