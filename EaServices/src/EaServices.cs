@@ -1121,9 +1121,29 @@ namespace hoTools.EaServices
                             return;
                         }
                     }
-                    if ((el.Type.Equals("Sequence") || el.Type.Equals("Object")) && el.ClassfierID > 0)
+                    // If connector 0 Sequence and Classifier exists
+                    if (con.Type.Equals("Sequence") && ( el.ClassfierID > 0 || el.PropertyType > 0))
                     {
-                        el = repository.GetElementByID(el.ClassifierID);
+                        if ("PartPort".Contains(el.Type))
+                        {
+                            if (el.PropertyType > 0)
+                            {
+                                el = repository.GetElementByID(el.PropertyType);
+                            }
+                            else
+                            {
+                                if (el.ClassifierID > 0)
+                                    el = repository.GetElementByID(el.ClassifierID);
+                                else return;
+
+                            }
+                        }
+                        else
+                        {
+                            if (el.ClassifierID > 0)
+                                el = repository.GetElementByID(el.ClassifierID);
+                        }
+
                         foreach (Method op in el.Methods)
                         {
                             if (op.Name == opName)
