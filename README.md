@@ -139,6 +139,10 @@ Some features:
 - Add Load Scripts (if a Script is changed the user has to update the Script in hoTools before using it)
 - Script Examples for JavaScript
 - EAModel with Clipboard functions (for usage in Scripts)
+- Default Linestyle all none (delete *.xml file required, or File, Settings,..)
+  It's possible that Activity Diagrams and Statechart have a default Linestyle
+  You may want to change it by
+  File, Settings, Default Linestyle
 
 
 ## Not yet scheduled 
