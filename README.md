@@ -134,6 +134,7 @@ Some features:
 - Search description adapted to EA 13
 
 ## Release 2.0.10
+- Favorites (Show Favorites didn't work)
 - SysML Locate Part for Sequence Call by name
 - Add Load Scripts (if a Script is changed the user has to update the Script in hoTools before using it)
 - Script Examples for JavaScript

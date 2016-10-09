@@ -237,7 +237,7 @@ namespace hoTools.Utils.Resources {
         ///&lt;RootSearch&gt;
         ///  &lt;Search Name=&quot;Favorites&quot; GUID=&quot;{A70B9F0E-14CD-4c03-B8FE-21C644DC2D5E}&quot; PkgGUID=&quot;-1&quot; Type=&quot;0&quot; LnksToObj=&quot;0&quot; CustomSearch=&quot;1&quot; AddinAndMethodName=&quot;&quot;&gt;
         ///    &lt;SrchOn&gt;
-        ///      &lt;RootTable Filter=&quot;select o.ea_Id As CLASSGUID, o.Object_Type as CLASSTYPE, o.Name, o.stereotype, o.object_type As [EAType], &apos;Element&apos; As [Type]&amp;#xD;&amp;#xA;from t_object o inner join t_xref x on (o.EA_GUID = x.client)&amp;#xD;&amp;#xA;where Type = &apos;Favorite&apos;&amp;#xD;&amp;#xA;UNION&amp;#xD;&amp;#xA;select d.ea_Id  [rest of string was truncated]&quot;;.
+        ///      &lt;RootTable Filter=&quot;select o.ea_guid As CLASSGUID, o.Object_Type as CLASSTYPE, o.Name, o.stereotype, o.object_type As [EAType], &apos;Element&apos; As [Type]&amp;#xD;&amp;#xA;from t_object o inner join t_xref x on (o.EA_GUID = x.client)&amp;#xD;&amp;#xA;where Type = &apos;Favorite&apos;&amp;#xD;&amp;#xA;UNION&amp;#xD;&amp;#xA;select d.ea_g [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string SearchFavorite {
             get {

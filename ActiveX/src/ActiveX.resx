@@ -1030,7 +1030,8 @@ These are all the files specified in Element properties.</value>
 - Activity
 - Activity Diagram
 - Action with Call Behavior
-- Interaction</value>
+- Interaction
+- SysML Sequence Diagram</value>
   </data>
   <data name="&gt;&gt;_btnLocateOperation.Name" xml:space="preserve">
     <value>_btnLocateOperation</value>
