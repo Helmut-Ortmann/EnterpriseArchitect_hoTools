@@ -107,7 +107,7 @@ Some features:
 
 # Releases
 ## Release 2.0.6
-- QuickSearch selection with auto complete for available Searches
+  - QuickSearch selection with auto complete for available Searches
   - SQL Searches (multiple folders are possible, file name should be unique)
   - MDG
   - Own Searches
