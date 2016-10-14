@@ -13,10 +13,10 @@ namespace hoTools.Query
     /// </summary>
     public class TextBoxUndo : TextBox
     {
-        TabPage _tabPage;
-        static int _undoLimit;
-        List<Item> _lastData = new List<Item>();
-        int _undoCount = 0;
+        readonly TabPage _tabPage;
+        private static readonly int UndoLimit;
+        readonly List<Item> _lastData = new List<Item>();
+        int _undoCount;
         bool _undo;
         
         #region Constructor
@@ -125,12 +125,7 @@ namespace hoTools.Query
             }
 
         }
-        void text_KeyPress(object sender, KeyPressEventArgs e)
-        {
-          
-        }
-
-
+        
         #region Event TextChanged
         /// <summary>
         /// Event TextChanged
@@ -148,7 +143,7 @@ namespace hoTools.Query
                 _lastData.RemoveRange(_lastData.Count - _undoCount, _undoCount);
                 _lastData.Add(new Item(Text, SelectionStart));
                 _undoCount = 0;
-                if (_undoLimit != 0 && _undoLimit + 1 < _lastData.Count)
+                if (UndoLimit != 0 && UndoLimit + 1 < _lastData.Count)
                 {
                     _lastData.RemoveAt(0);
                 }
@@ -190,13 +185,13 @@ namespace hoTools.Query
     /// </summary>
     class Item
     {
-        public String Text;
-        public int Position;
+        public readonly String Text;
+        public readonly int Position;
 
         public Item(String text, int position)
         {
-            this.Text = text;
-            this.Position = position;
+            Text = text;
+            Position = position;
         }
     }
     #endregion Item

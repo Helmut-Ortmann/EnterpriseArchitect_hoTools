@@ -15,7 +15,7 @@ Collection of useful tools (see also [WiKi](https://github.com/Helmut-Ortmann/En
   - Set diagram Line Style
   - Version Control + SVN
   - [Quick Search](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/Quick Search) 
-    - Autocomplete Search, Find Search + List all Searches
+    - Auto complete Search, Find Search + List all Searches
   - Port support
   - Favorites
   - ..
@@ -25,7 +25,7 @@ Collection of useful tools (see also [WiKi](https://github.com/Helmut-Ortmann/En
     - Macros (easy access to EA items / Packages or complete Branches, a lot more than EA delivers)
     - Easy handling of SQL errors
     - Conveyed Items
-    - *.sql files in file system (you may use favourite Editor)
+    - *.sql files in file system (you may use favorite Editor)
     - [Find Search](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/Find Search)
 - [Script](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/Script) which runs for [SQL](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/SQL) results 
   - All EA script languages (vbScript, JScript, JavaScript) 
@@ -139,10 +139,13 @@ Some features:
 - Add Load Scripts (if a Script is changed the user has to update the Script in hoTools before using it)
 - Script Examples for JavaScript
 - EAModel with Clipboard functions (for usage in Scripts)
-- Default Linestyle all none (delete *.xml file required, or File, Settings,..)
-  It's possible that Activity Diagrams and Statechart have a default Linestyle
+- Default Line style all none (delete *.xml file required, or File, Settings,..)
+  It's possible that Activity Diagrams and Statechart have a default Line style
   You may want to change it by
-  File, Settings, Default Linestyle
+  File, Settings, Default Line style
+
+## Release 2.0.11
+- unused references deleted (no functional implication)
 
 
 ## Not yet scheduled 
