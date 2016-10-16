@@ -323,7 +323,7 @@ namespace EAAddinFramework.Utils
                 if (ret)
                 {
                     string sqlText = $"Path SQL:\r\n{SqlError.GetHoToolsLastSqlFilePath()}\r\n\r\n{SqlError.ReadHoToolsLastSql()}";
-                    MessageBox.Show(sqlText, @"SQL executed! Ctrl+C to copy it to clipboard (ignore beep).");
+                    MessageBox.Show(sqlText, @"SQL executed!\r\n\r\nCtrl+C to copy it to clipboard (ignore beep).");
                 }
 
             }

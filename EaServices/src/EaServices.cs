@@ -981,7 +981,7 @@ namespace hoTools.EaServices
             {
                 Util.SetLineStyleDiagram(repository, diaCurrent, lineStyle);
             }
-            // all connections of diagram elements
+            // current connector + all connections of selected diagram elements
             if (con != null || objCol?.Count > 0)
             {
                 Util.SetLineStyleDiagramObjectsAndConnectors(repository, diaCurrent, lineStyle);

@@ -68,7 +68,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(325, 29);
             this.textBox1.TabIndex = 4;
-            this.textBox1.Text = "Tools";
+            this.textBox1.Text = "hoTools";
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged_1);
             // 
             // label1

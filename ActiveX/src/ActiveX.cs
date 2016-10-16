@@ -173,6 +173,7 @@ namespace hoTools.ActiveX
         private ToolStripMenuItem runToolStripMenuItem;
         private ToolStripMenuItem editSQLToolStripMenuItem;
         private ToolStripMenuItem showDescriptionToolStripMenuItem;
+        private Button _btnReverseConnector;
         private TextBox _txtSearchText;
         #endregion
 
@@ -349,6 +350,15 @@ namespace hoTools.ActiveX
         void btnOR_Click(object sender, EventArgs e)
         {
             EaService.SetLineStyle(Repository, "OR");
+        }
+        /// <summary>
+        /// Reverse direction of selected connector
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void _btnReverseConnector_Click(object sender, EventArgs e)
+        {
+            EaService.SetLineStyle(Repository, "R");
         }
 
         void btnComposite_Click(object sender, EventArgs e)
@@ -1117,6 +1127,7 @@ namespace hoTools.ActiveX
             this._panelAdvanced = new System.Windows.Forms.Panel();
             this._panelQuickSearch = new System.Windows.Forms.TableLayoutPanel();
             this._toolTipRtfListOfSearches = new System.Windows.Forms.ToolTip(this.components);
+            this._btnReverseConnector = new System.Windows.Forms.Button();
             this._toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this._toolStripContainer1.SuspendLayout();
             this._toolStripQuery.SuspendLayout();
@@ -1949,6 +1960,7 @@ namespace hoTools.ActiveX
             // 
             // _panelLineStyle
             // 
+            this._panelLineStyle.Controls.Add(this._btnReverseConnector);
             this._panelLineStyle.Controls.Add(this._btnLv);
             this._panelLineStyle.Controls.Add(this._btnLh);
             this._panelLineStyle.Controls.Add(this._btnTv);
@@ -2018,6 +2030,14 @@ namespace hoTools.ActiveX
             this._toolTipRtfListOfSearches.OwnerDraw = true;
             this._toolTipRtfListOfSearches.Draw += new System.Windows.Forms.DrawToolTipEventHandler(this._toolTipRtfListOfSearches_Draw);
             this._toolTipRtfListOfSearches.Popup += new System.Windows.Forms.PopupEventHandler(this._toolTipRtfListOfSearches_Popup);
+            // 
+            // _btnReverseConnector
+            // 
+            resources.ApplyResources(this._btnReverseConnector, "_btnReverseConnector");
+            this._btnReverseConnector.Name = "_btnReverseConnector";
+            this._toolTip.SetToolTip(this._btnReverseConnector, resources.GetString("_btnReverseConnector.ToolTip"));
+            this._btnReverseConnector.UseVisualStyleBackColor = true;
+            this._btnReverseConnector.Click += new System.EventHandler(this._btnReverseConnector_Click);
             // 
             // AddinControlGui
             // 
@@ -2680,6 +2700,8 @@ namespace hoTools.ActiveX
             int line = GetLineForRtf(_rtfListOfSearches);
             return Search.GetSearch(line);
         }
+
+        
     }
 
     #endregion

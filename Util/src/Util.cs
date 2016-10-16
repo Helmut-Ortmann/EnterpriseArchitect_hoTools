@@ -229,7 +229,7 @@ namespace hoTools.Utils
 
 
         //--------------------------------------------------------------------------------------------------------------
-        // SetLineStyleDiagramObjectsAndConnectors  Set line style for diagram objects and connectors
+        // SetLineStyleDiagramObjectsAndConnectors  Set line style for selected connector and all connectors of selected diagram objects
         //--------------------------------------------------------------------------------------------------------------
         // linestyle
         // LH = "Line Style: Lateral Horizontal";
@@ -242,6 +242,7 @@ namespace hoTools.Utils
         // D =               Direct
         // C =               Customer 
         // B =               Bezier
+        // R =               Reverse direction of connector
         public static void SetLineStyleDiagramObjectsAndConnectors(EA.Repository rep, EA.Diagram d, string lineStyle)
          {
              EA.Collection selectedObjects = d.SelectedObjects;
@@ -259,16 +260,21 @@ namespace hoTools.Utils
                      {
                          if (c.ClientID == dObject.ElementID | c.SupplierID == dObject.ElementID)
                          {
-
-                             SetLineStyleForDiagramLink(lineStyle, link);
+                            // Line style or direction of connector
+                             if (lineStyle.Substring(0, 1) == "R")
+                                ReverseConnectorDirection(rep, rep.GetConnectorByID(link.ConnectorID));
+                            else
+                                 SetLineStyleForDiagramLink(lineStyle, link);
                          }
                      }
                      if (selectedConnector != null)
                      {
                          if (c.ConnectorID == selectedConnector.ConnectorID)
                          {
-                             SetLineStyleForDiagramLink(lineStyle, link);
-                             continue;
+                            if (lineStyle.Substring(0, 1) == "R")
+                                ReverseConnectorDirection(rep, rep.GetConnectorByID(link.ConnectorID));
+                            else
+                                SetLineStyleForDiagramLink(lineStyle, link);
                          }
                      }
                  }
@@ -296,7 +302,8 @@ namespace hoTools.Utils
         // OR =              Orthogonal Round
         // A =               Automatic
         // D =               Direct
-        // C =               Customer       
+        // C =               Customer  
+        // R =  Reverse direction of connector     
 
 
         public static void SetLineStyleDiagram(EA.Repository rep, EA.Diagram d, string lineStyle)
@@ -308,7 +315,11 @@ namespace hoTools.Utils
             {
                 if (link.IsHidden == false)
                 {
-                    SetLineStyleForDiagramLink(lineStyle, link);
+                    // Line style or direction of connector
+                    if (lineStyle.Substring(0, 1) == "R")
+                        ReverseConnectorDirection(rep, rep.GetConnectorByID(link.ConnectorID));
+                    else
+                        SetLineStyleForDiagramLink(lineStyle, link);
                 }
 
             }
@@ -1535,6 +1546,20 @@ namespace hoTools.Utils
             if (pkgId == 0) return null;
             pkg = GetFirstControlledPackage(rep, rep.GetPackageByID(pkgId));
             return pkg;
+
+        }
+
+        /// <summary>
+        /// Reverse direction of connector
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <param name="con"></param>
+        public static void ReverseConnectorDirection(EA.Repository rep, EA.Connector con)
+        {
+            string sql = $"update t_connector set "+
+                         $" Start_Object_Id = {con.SupplierID}, End_Object_Id = {con.ClientID} " +
+                         $" where ea_guid = '{con.ConnectorGUID}'";
+            rep.Execute(sql);
 
         }
     }
