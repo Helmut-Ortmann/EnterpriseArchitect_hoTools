@@ -1619,11 +1619,11 @@ namespace hoTools.Utils
             // A Connector may have n information flows realized
             if (con.MetaType == "Connector")
             {
-                string sql = $"select Description from t_xref where Client = 'con.ConnectorGUID'";
+                string sql = $"select Description from t_xref where Client = '{con.ConnectorGUID}'";
                 var list = rep.GetStringsBySql(sql);
                 foreach (var description in list)
                 {
-                    // {GUID},{GUID}
+                    // {GUID},{GUID},..
                     foreach (var guid in description.Split(','))
                     {
                        SetConnector(rep, guid,  con.SupplierID, con.ClientID);

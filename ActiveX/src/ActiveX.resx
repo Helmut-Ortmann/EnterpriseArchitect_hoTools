@@ -192,6 +192,51 @@
   <data name="_toolStripQuery.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>None</value>
   </data>
+  <data name="_toolStripQuery.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 0</value>
+  </data>
+  <data name="_toolStripQuery.Size" type="System.Drawing.Size, System.Drawing">
+    <value>248, 25</value>
+  </data>
+  <data name="_toolStripQuery.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;_toolStripQuery.Name" xml:space="preserve">
+    <value>_toolStripQuery</value>
+  </data>
+  <data name="&gt;&gt;_toolStripQuery.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;_toolStripQuery.Parent" xml:space="preserve">
+    <value>_toolStripContainer1.TopToolStripPanel</value>
+  </data>
+  <data name="&gt;&gt;_toolStripQuery.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;_toolStripContainer1.TopToolStripPanel.Name" xml:space="preserve">
+    <value>_toolStripContainer1.TopToolStripPanel</value>
+  </data>
+  <data name="&gt;&gt;_toolStripContainer1.TopToolStripPanel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;_toolStripContainer1.TopToolStripPanel.Parent" xml:space="preserve">
+    <value>_toolStripContainer1</value>
+  </data>
+  <data name="&gt;&gt;_toolStripContainer1.TopToolStripPanel.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;_toolStripContainer1.Name" xml:space="preserve">
+    <value>_toolStripContainer1</value>
+  </data>
+  <data name="&gt;&gt;_toolStripContainer1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripContainer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;_toolStripContainer1.Parent" xml:space="preserve">
+    <value>_panelButtons</value>
+  </data>
+  <data name="&gt;&gt;_toolStripContainer1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="_toolStripSearchBtn1.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
@@ -281,51 +326,6 @@
   </data>
   <data name="_toolStripServiceBtn5.Text" xml:space="preserve">
     <value>5</value>
-  </data>
-  <data name="_toolStripQuery.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 0</value>
-  </data>
-  <data name="_toolStripQuery.Size" type="System.Drawing.Size, System.Drawing">
-    <value>248, 25</value>
-  </data>
-  <data name="_toolStripQuery.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;_toolStripQuery.Name" xml:space="preserve">
-    <value>_toolStripQuery</value>
-  </data>
-  <data name="&gt;&gt;_toolStripQuery.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;_toolStripQuery.Parent" xml:space="preserve">
-    <value>_toolStripContainer1.TopToolStripPanel</value>
-  </data>
-  <data name="&gt;&gt;_toolStripQuery.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;_toolStripContainer1.TopToolStripPanel.Name" xml:space="preserve">
-    <value>_toolStripContainer1.TopToolStripPanel</value>
-  </data>
-  <data name="&gt;&gt;_toolStripContainer1.TopToolStripPanel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;_toolStripContainer1.TopToolStripPanel.Parent" xml:space="preserve">
-    <value>_toolStripContainer1</value>
-  </data>
-  <data name="&gt;&gt;_toolStripContainer1.TopToolStripPanel.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;_toolStripContainer1.Name" xml:space="preserve">
-    <value>_toolStripContainer1</value>
-  </data>
-  <data name="&gt;&gt;_toolStripContainer1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripContainer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;_toolStripContainer1.Parent" xml:space="preserve">
-    <value>_panelButtons</value>
-  </data>
-  <data name="&gt;&gt;_toolStripContainer1.ZOrder" xml:space="preserve">
-    <value>0</value>
   </data>
   <metadata name="_toolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>339, 17</value>
@@ -697,7 +697,7 @@ It sets the linesytyle for the Diagram Connectors:
     <value>_panelLineStyle</value>
   </data>
   <data name="&gt;&gt;_btnBezier.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>5</value>
   </data>
   <data name="_btnUpdateActivityParameter.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 9pt</value>
@@ -774,7 +774,7 @@ It sets the linesytyle for the Diagram Connectors:
     <value>_panelLineStyle</value>
   </data>
   <data name="&gt;&gt;_btnC.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>4</value>
   </data>
   <data name="_btnD.Location" type="System.Drawing.Point, System.Drawing">
     <value>188, 26</value>
@@ -806,7 +806,7 @@ It sets the linesytyle for the Diagram Connectors:
     <value>_panelLineStyle</value>
   </data>
   <data name="&gt;&gt;_btnD.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>9</value>
   </data>
   <data name="_btnA.Location" type="System.Drawing.Point, System.Drawing">
     <value>141, 26</value>
@@ -838,7 +838,7 @@ It sets the linesytyle for the Diagram Connectors:
     <value>_panelLineStyle</value>
   </data>
   <data name="&gt;&gt;_btnA.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>8</value>
   </data>
   <data name="_btnOr.Location" type="System.Drawing.Point, System.Drawing">
     <value>96, 26</value>
@@ -870,7 +870,7 @@ It sets the linesytyle for the Diagram Connectors:
     <value>_panelLineStyle</value>
   </data>
   <data name="&gt;&gt;_btnOr.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>7</value>
   </data>
   <data name="_btnComposite.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 9pt</value>
@@ -1108,7 +1108,7 @@ It sets the linesytyle for the Diagram Connectors:
     <value>_panelLineStyle</value>
   </data>
   <data name="&gt;&gt;_btnOs.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>6</value>
   </data>
   <data name="_btnTv.Location" type="System.Drawing.Point, System.Drawing">
     <value>96, 0</value>
@@ -1140,7 +1140,7 @@ It sets the linesytyle for the Diagram Connectors:
     <value>_panelLineStyle</value>
   </data>
   <data name="&gt;&gt;_btnTv.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>2</value>
   </data>
   <data name="_btnTh.Location" type="System.Drawing.Point, System.Drawing">
     <value>141, 0</value>
@@ -1172,7 +1172,7 @@ It sets the linesytyle for the Diagram Connectors:
     <value>_panelLineStyle</value>
   </data>
   <data name="&gt;&gt;_btnTh.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>3</value>
   </data>
   <data name="_btnLv.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
@@ -1204,7 +1204,7 @@ It sets the linesytyle for the Diagram Connectors:
     <value>_panelLineStyle</value>
   </data>
   <data name="&gt;&gt;_btnLv.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>0</value>
   </data>
   <data name="_btnLh.Location" type="System.Drawing.Point, System.Drawing">
     <value>51, 0</value>
@@ -1236,10 +1236,10 @@ It sets the linesytyle for the Diagram Connectors:
     <value>_panelLineStyle</value>
   </data>
   <data name="&gt;&gt;_btnLh.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>1</value>
   </data>
   <data name="_btnConveyedItem.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, -1</value>
+    <value>51, 2</value>
   </data>
   <data name="_btnConveyedItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>133, 23</value>
@@ -1252,13 +1252,15 @@ It sets the linesytyle for the Diagram Connectors:
   </data>
   <data name="_btnConveyedItem.ToolTip" xml:space="preserve">
     <value>Get Connectors  with Conveyed Items from selected Element.
+
 Get Elements from selected Connector.
 
+Procedure:
 1. Select Element or Connector
 2. Click Button 
 3. EA outputs Elements or Connectors
 4. Connector Source, Target: Right Click, Find in Diagram  (CTRL+U, usage)
-4. Elements:     Right Click, Find in Browser (CTRL+G, goto)
+5. Elements:     Right Click, Find in Browser (CTRL+G, goto)
 
 </value>
   </data>
@@ -1272,6 +1274,42 @@ Get Elements from selected Connector.
     <value>_panelConveyedItems</value>
   </data>
   <data name="&gt;&gt;_btnConveyedItem.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="_btnReverseConnector.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="_btnReverseConnector.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 2</value>
+  </data>
+  <data name="_btnReverseConnector.Size" type="System.Drawing.Size, System.Drawing">
+    <value>39, 23</value>
+  </data>
+  <data name="_btnReverseConnector.TabIndex" type="System.Int32, mscorlib">
+    <value>26</value>
+  </data>
+  <data name="_btnReverseConnector.Text" xml:space="preserve">
+    <value>R</value>
+  </data>
+  <data name="_btnReverseConnector.ToolTip" xml:space="preserve">
+    <value>Reverse direction of edge like
+- connector
+- dependency
+- information flow
+- ..
+
+Even information flow realized.</value>
+  </data>
+  <data name="&gt;&gt;_btnReverseConnector.Name" xml:space="preserve">
+    <value>_btnReverseConnector</value>
+  </data>
+  <data name="&gt;&gt;_btnReverseConnector.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;_btnReverseConnector.Parent" xml:space="preserve">
+    <value>_panelConveyedItems</value>
+  </data>
+  <data name="&gt;&gt;_btnReverseConnector.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="_panelConveyedItems.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
@@ -1405,38 +1443,6 @@ Get Elements from selected Connector.
   <metadata name="contextMenuRtf.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>554, 17</value>
   </metadata>
-  <data name="runToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>166, 22</value>
-  </data>
-  <data name="runToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Run</value>
-  </data>
-  <data name="runToolStripMenuItem.ToolTipText" xml:space="preserve">
-    <value>Run the Search.
-Results are shown in the EA Model Search Window.
-
-You may have inserted a &lt;Search Term&gt;.</value>
-  </data>
-  <data name="editSQLToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>166, 22</value>
-  </data>
-  <data name="editSQLToolStripMenuItem.Text" xml:space="preserve">
-    <value>Edit SQL</value>
-  </data>
-  <data name="editSQLToolStripMenuItem.ToolTipText" xml:space="preserve">
-    <value>Edit the SQL File (only if SQL File)</value>
-  </data>
-  <data name="showDescriptionToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>166, 22</value>
-  </data>
-  <data name="showDescriptionToolStripMenuItem.Text" xml:space="preserve">
-    <value>Show Description</value>
-  </data>
-  <data name="showDescriptionToolStripMenuItem.ToolTipText" xml:space="preserve">
-    <value>Show the description of the Search:
-- EA Standard Searches are documented in file: EaStandardSearches.json
-- SQL Searches are described via '// My documentation with exactly one leading blank at th beginning of file.</value>
-  </data>
   <data name="contextMenuRtf.Size" type="System.Drawing.Size, System.Drawing">
     <value>167, 70</value>
   </data>
@@ -1481,9 +1487,74 @@ You may have inserted a &lt;Search Term&gt;.</value>
   <data name="&gt;&gt;_rtfListOfSearches.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="runToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>166, 22</value>
+  </data>
+  <data name="runToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Run</value>
+  </data>
+  <data name="runToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Run the Search.
+Results are shown in the EA Model Search Window.
+
+You may have inserted a &lt;Search Term&gt;.</value>
+  </data>
+  <data name="editSQLToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>166, 22</value>
+  </data>
+  <data name="editSQLToolStripMenuItem.Text" xml:space="preserve">
+    <value>Edit SQL</value>
+  </data>
+  <data name="editSQLToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Edit the SQL File (only if SQL File)</value>
+  </data>
+  <data name="showDescriptionToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>166, 22</value>
+  </data>
+  <data name="showDescriptionToolStripMenuItem.Text" xml:space="preserve">
+    <value>Show Description</value>
+  </data>
+  <data name="showDescriptionToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Show the description of the Search:
+- EA Standard Searches are documented in file: EaStandardSearches.json
+- SQL Searches are described via '// My documentation with exactly one leading blank at th beginning of file.</value>
+  </data>
   <metadata name="_menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>434, 17</value>
   </metadata>
+  <data name="_menuStrip1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="_menuStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>461, 24</value>
+  </data>
+  <data name="_menuStrip1.TabIndex" type="System.Int32, mscorlib">
+    <value>22</value>
+  </data>
+  <data name="_menuStrip1.Text" xml:space="preserve">
+    <value>menuStrip1</value>
+  </data>
+  <data name="&gt;&gt;_menuStrip1.Name" xml:space="preserve">
+    <value>_menuStrip1</value>
+  </data>
+  <data name="&gt;&gt;_menuStrip1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.MenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;_menuStrip1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;_menuStrip1.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="_fileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>37, 20</value>
+  </data>
+  <data name="_fileToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;File</value>
+  </data>
+  <data name="_fileToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>If a Script is added or changed you have to use this command.</value>
+  </data>
   <data name="_settingGeneralToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>326, 22</value>
   </data>
@@ -1554,14 +1625,14 @@ Changes will only take effect:
 - Change Model
 - Dialog Settings Key or Toolbar</value>
   </data>
-  <data name="_fileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>37, 20</value>
+  <data name="_doToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>34, 20</value>
   </data>
-  <data name="_fileToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;File</value>
+  <data name="_doToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Do</value>
   </data>
-  <data name="_fileToolStripMenuItem.ToolTipText" xml:space="preserve">
-    <value>If a Script is added or changed you have to use this command.</value>
+  <data name="_doToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Change Author of selected Package / Element</value>
   </data>
   <data name="_createActivityForOperationToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>242, 22</value>
@@ -1644,14 +1715,14 @@ The application to open the folder: See global Settings</value>
 - Packages
 - Elements</value>
   </data>
-  <data name="_doToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="_versionControlToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>34, 20</value>
   </data>
-  <data name="_doToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Do</value>
+  <data name="_versionControlToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;VC</value>
   </data>
-  <data name="_doToolStripMenuItem.ToolTipText" xml:space="preserve">
-    <value>Change Author of selected Package / Element</value>
+  <data name="_versionControlToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Functions related to Version Control</value>
   </data>
   <data name="_changeXmlFileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>291, 22</value>
@@ -1735,14 +1806,17 @@ Select a package to proceed all recursive package.</value>
   <data name="_setSvnModuleTaggedValuesrecursiveToolStripMenuItem.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="_versionControlToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>34, 20</value>
+  <data name="_portToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>41, 20</value>
   </data>
-  <data name="_versionControlToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;VC</value>
+  <data name="_portToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Port</value>
   </data>
-  <data name="_versionControlToolStripMenuItem.ToolTipText" xml:space="preserve">
-    <value>Functions related to Version Control</value>
+  <data name="_portToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Functions related to port like:
+- Visibility
+- Move
+- Connect</value>
   </data>
   <data name="_movePortsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>375, 22</value>
@@ -1940,17 +2014,11 @@ Tip:
     <value>Order selected Diagram objects alphabetically.
 </value>
   </data>
-  <data name="_portToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>41, 20</value>
+  <data name="_helpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>44, 20</value>
   </data>
-  <data name="_portToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Port</value>
-  </data>
-  <data name="_portToolStripMenuItem.ToolTipText" xml:space="preserve">
-    <value>Functions related to port like:
-- Visibility
-- Move
-- Connect</value>
+  <data name="_helpToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Help</value>
   </data>
   <data name="_getLastSqlErrorToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>171, 22</value>
@@ -1994,36 +2062,6 @@ Tip:
   <data name="_aboutToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>Information about hoTools</value>
   </data>
-  <data name="_helpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>44, 20</value>
-  </data>
-  <data name="_helpToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Help</value>
-  </data>
-  <data name="_menuStrip1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="_menuStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>461, 24</value>
-  </data>
-  <data name="_menuStrip1.TabIndex" type="System.Int32, mscorlib">
-    <value>22</value>
-  </data>
-  <data name="_menuStrip1.Text" xml:space="preserve">
-    <value>menuStrip1</value>
-  </data>
-  <data name="&gt;&gt;_menuStrip1.Name" xml:space="preserve">
-    <value>_menuStrip1</value>
-  </data>
-  <data name="&gt;&gt;_menuStrip1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.MenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;_menuStrip1.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;_menuStrip1.ZOrder" xml:space="preserve">
-    <value>11</value>
-  </data>
   <data name="_panelButtons.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
   </data>
@@ -2053,36 +2091,6 @@ Tip:
   </data>
   <data name="&gt;&gt;_panelButtons.ZOrder" xml:space="preserve">
     <value>10</value>
-  </data>
-  <data name="_btnReverseConnector.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="_btnReverseConnector.Location" type="System.Drawing.Point, System.Drawing">
-    <value>233, 0</value>
-  </data>
-  <data name="_btnReverseConnector.Size" type="System.Drawing.Size, System.Drawing">
-    <value>39, 23</value>
-  </data>
-  <data name="_btnReverseConnector.TabIndex" type="System.Int32, mscorlib">
-    <value>26</value>
-  </data>
-  <data name="_btnReverseConnector.Text" xml:space="preserve">
-    <value>R</value>
-  </data>
-  <data name="_btnReverseConnector.ToolTip" xml:space="preserve">
-    <value>Reverse direction of connector</value>
-  </data>
-  <data name="&gt;&gt;_btnReverseConnector.Name" xml:space="preserve">
-    <value>_btnReverseConnector</value>
-  </data>
-  <data name="&gt;&gt;_btnReverseConnector.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;_btnReverseConnector.Parent" xml:space="preserve">
-    <value>_panelLineStyle</value>
-  </data>
-  <data name="&gt;&gt;_btnReverseConnector.ZOrder" xml:space="preserve">
-    <value>0</value>
   </data>
   <data name="_panelLineStyle.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
@@ -2165,24 +2173,6 @@ Tip:
   <data name="&gt;&gt;_panelNote.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="_lblPorts.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="_lblPorts.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 12pt</value>
-  </data>
-  <data name="_lblPorts.Location" type="System.Drawing.Point, System.Drawing">
-    <value>80, 7</value>
-  </data>
-  <data name="_lblPorts.Size" type="System.Drawing.Size, System.Drawing">
-    <value>46, 20</value>
-  </data>
-  <data name="_lblPorts.TabIndex" type="System.Int32, mscorlib">
-    <value>38</value>
-  </data>
-  <data name="_lblPorts.Text" xml:space="preserve">
-    <value>Ports</value>
-  </data>
   <data name="&gt;&gt;_lblPorts.Name" xml:space="preserve">
     <value>_lblPorts</value>
   </data>
@@ -2221,6 +2211,36 @@ Tip:
   </data>
   <data name="&gt;&gt;_panelPort.ZOrder" xml:space="preserve">
     <value>3</value>
+  </data>
+  <data name="_lblPorts.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="_lblPorts.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 12pt</value>
+  </data>
+  <data name="_lblPorts.Location" type="System.Drawing.Point, System.Drawing">
+    <value>80, 7</value>
+  </data>
+  <data name="_lblPorts.Size" type="System.Drawing.Size, System.Drawing">
+    <value>46, 20</value>
+  </data>
+  <data name="_lblPorts.TabIndex" type="System.Int32, mscorlib">
+    <value>38</value>
+  </data>
+  <data name="_lblPorts.Text" xml:space="preserve">
+    <value>Ports</value>
+  </data>
+  <data name="&gt;&gt;_lblPorts.Name" xml:space="preserve">
+    <value>_lblPorts</value>
+  </data>
+  <data name="&gt;&gt;_lblPorts.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;_lblPorts.Parent" xml:space="preserve">
+    <value>_panelPort</value>
+  </data>
+  <data name="&gt;&gt;_lblPorts.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="_panelAdvanced.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>

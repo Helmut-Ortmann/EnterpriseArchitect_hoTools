@@ -281,6 +281,30 @@ namespace hoTools.Settings
         }
         #endregion
 
+        #region Property: IsReverseEdgeDirection
+        public bool IsReverseEdgeDirection
+        {
+            get
+            {
+                bool result;
+                var p = CurrentConfig.AppSettings.Settings["IsReverseEdgeDirection"];
+                if (p == null) return true;
+                if (bool.TryParse(p.Value, out result))
+                {
+                    return result;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            set
+            {
+                CurrentConfig.AppSettings.Settings["IsReverseEdgeDirection"].Value = value.ToString();
+            }
+        }
+        #endregion
+
 
         #region Property: isLineStyleSupport
         public bool IsLineStyleSupport

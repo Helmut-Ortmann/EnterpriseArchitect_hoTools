@@ -1052,6 +1052,7 @@ namespace hoTools.ActiveX
             this._btnLh = new System.Windows.Forms.Button();
             this._btnConveyedItem = new System.Windows.Forms.Button();
             this._panelConveyedItems = new System.Windows.Forms.Panel();
+            this._btnReverseConnector = new System.Windows.Forms.Button();
             this._cmbSearchName = new System.Windows.Forms.ComboBox();
             this._txtSearchName = new System.Windows.Forms.TextBox();
             this._btnAddElementNote = new System.Windows.Forms.Button();
@@ -1127,7 +1128,6 @@ namespace hoTools.ActiveX
             this._panelAdvanced = new System.Windows.Forms.Panel();
             this._panelQuickSearch = new System.Windows.Forms.TableLayoutPanel();
             this._toolTipRtfListOfSearches = new System.Windows.Forms.ToolTip(this.components);
-            this._btnReverseConnector = new System.Windows.Forms.Button();
             this._toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this._toolStripContainer1.SuspendLayout();
             this._toolStripQuery.SuspendLayout();
@@ -1479,10 +1479,19 @@ namespace hoTools.ActiveX
             // 
             // _panelConveyedItems
             // 
+            this._panelConveyedItems.Controls.Add(this._btnReverseConnector);
             this._panelConveyedItems.Controls.Add(this._btnConveyedItem);
             resources.ApplyResources(this._panelConveyedItems, "_panelConveyedItems");
             this._panelConveyedItems.Name = "_panelConveyedItems";
             this._toolTip.SetToolTip(this._panelConveyedItems, resources.GetString("_panelConveyedItems.ToolTip"));
+            // 
+            // _btnReverseConnector
+            // 
+            resources.ApplyResources(this._btnReverseConnector, "_btnReverseConnector");
+            this._btnReverseConnector.Name = "_btnReverseConnector";
+            this._toolTip.SetToolTip(this._btnReverseConnector, resources.GetString("_btnReverseConnector.ToolTip"));
+            this._btnReverseConnector.UseVisualStyleBackColor = true;
+            this._btnReverseConnector.Click += new System.EventHandler(this._btnReverseConnector_Click);
             // 
             // _cmbSearchName
             // 
@@ -1960,7 +1969,6 @@ namespace hoTools.ActiveX
             // 
             // _panelLineStyle
             // 
-            this._panelLineStyle.Controls.Add(this._btnReverseConnector);
             this._panelLineStyle.Controls.Add(this._btnLv);
             this._panelLineStyle.Controls.Add(this._btnLh);
             this._panelLineStyle.Controls.Add(this._btnTv);
@@ -2030,14 +2038,6 @@ namespace hoTools.ActiveX
             this._toolTipRtfListOfSearches.OwnerDraw = true;
             this._toolTipRtfListOfSearches.Draw += new System.Windows.Forms.DrawToolTipEventHandler(this._toolTipRtfListOfSearches_Draw);
             this._toolTipRtfListOfSearches.Popup += new System.Windows.Forms.PopupEventHandler(this._toolTipRtfListOfSearches_Popup);
-            // 
-            // _btnReverseConnector
-            // 
-            resources.ApplyResources(this._btnReverseConnector, "_btnReverseConnector");
-            this._btnReverseConnector.Name = "_btnReverseConnector";
-            this._toolTip.SetToolTip(this._btnReverseConnector, resources.GetString("_btnReverseConnector.ToolTip"));
-            this._btnReverseConnector.UseVisualStyleBackColor = true;
-            this._btnReverseConnector.Click += new System.EventHandler(this._btnReverseConnector_Click);
             // 
             // AddinControlGui
             // 
@@ -2162,8 +2162,9 @@ namespace hoTools.ActiveX
             _btnShowFavorites.Visible = AddinSettings.IsFavoriteSupport;
 
             // Conveyed Item support
-            _panelConveyedItems.Visible = AddinSettings.IsConveyedItemsSupport;
+            _panelConveyedItems.Visible = AddinSettings.IsConveyedItemsSupport || AddinSettings.IsReverseEdgeDirection;
             _btnConveyedItem.Visible = AddinSettings.IsConveyedItemsSupport;
+            _btnReverseConnector.Visible = AddinSettings.IsReverseEdgeDirection;
 
             // Line style Panel
             _panelLineStyle.Visible = AddinSettings.IsLineStyleSupport;

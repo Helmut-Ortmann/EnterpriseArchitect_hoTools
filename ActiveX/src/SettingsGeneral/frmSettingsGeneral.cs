@@ -29,6 +29,7 @@ namespace hoTools.Settings
             txtSqlSearchPath.Text = _settings.SqlPaths;
             txtAddinTabToFirstActivate.Text = _settings.AddinTabToFirstActivate;
 
+            chkReverseEdgeDirection.Checked = settings.IsReverseEdgeDirection;
             chkLineStyleSupport.Checked = settings.IsLineStyleSupport;
             chkShortKeySupport.Checked = settings.IsShortKeySupport;
             _chkQuickSearchSupport.Checked = settings.IsQuickSearchSupport;
@@ -107,7 +108,8 @@ namespace hoTools.Settings
             _settings.QuickSearchName = txtQuickSearch.Text;
             _settings.FileManagerPath = txtFileManagerPath.Text;
 
-
+            
+            _settings.IsReverseEdgeDirection = chkReverseEdgeDirection.Checked;
             _settings.IsLineStyleSupport = chkLineStyleSupport.Checked;
             _settings.IsShortKeySupport = chkShortKeySupport.Checked;
             _settings.IsQuickSearchSupport = _chkQuickSearchSupport.Checked;
