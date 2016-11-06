@@ -1238,7 +1238,6 @@ namespace hoTools.EaServices
                 MessageBox.Show($"{type}: '{name}' has more than 255 characters.", @"Name is to long");
                 return null;
             }
-            Element elSource;
             Element elParent = null;
             Element elTarget;
 
@@ -1251,8 +1250,7 @@ namespace hoTools.EaServices
             rep.SaveDiagram(dia.DiagramID);
 
             // only one diagram object selected as source
-            if (srcEl == null) elSource = Util.GetElementFromContextObject(rep);
-            else elSource = srcEl;
+            var elSource = srcEl ?? Util.GetElementFromContextObject(rep);
             if (elSource == null) return null;
             var diaObjSource = Util.GetDiagramObjectById(rep, dia, elSource.ElementID);
             //diaObjSource = dia.GetDiagramObjectByID(elSource.ElementID, "");
@@ -1447,14 +1445,7 @@ namespace hoTools.EaServices
             }
             else if (elSource.Type.Equals("Decision") & !elSource.Name.Trim().Equals(""))
             {
-                if (guardString == "no")
-                {
-                    Util.SetConnectorGuard(rep, con.ConnectorID, "no");
-                }
-                else
-                {
-                    Util.SetConnectorGuard(rep, con.ConnectorID, "yes");
-                }
+                Util.SetConnectorGuard(rep, con.ConnectorID, guardString == "no" ? "no" : "yes");
             }
 
             // handle subtypes of action
@@ -2655,19 +2646,21 @@ namespace hoTools.EaServices
             for (int i = 0; i < lTxt.Length; i++)
             {
                 txt = lTxt[i].Trim();
-                if (!txt.Equals(""))
-                {
-                    if (!txt.EndsWith(")", StringComparison.Ordinal)) txt = txt + ")";
+                if (txt.Equals("")) continue;
+                if (!txt.EndsWith(")", StringComparison.Ordinal)) txt = txt + ")";
 
-                    CreateOperationFromText(rep, el, txt);
-                }
+                CreateOperationFromText(rep, el, txt);
             }
-            if (dia != null) rep.ReloadDiagram(dia.DiagramID);
-            dia.SelectedObjects.AddNew(el.ElementID.ToString(), el.ObjectType.ToString());
-            dia.SelectedObjects.Refresh();
+            if (dia != null)
+            {
+                rep.ReloadDiagram(dia.DiagramID);
+                dia.SelectedObjects.AddNew(el.ElementID.ToString(), el.ObjectType.ToString());
+                dia.SelectedObjects.Refresh();
+            }
+
         }
 
-        public static void CreateOperationFromText(Repository rep, Element el,
+        private static void CreateOperationFromText(Repository rep, Element el,
             string txt)
         {
             Method m = null;
@@ -3210,8 +3203,7 @@ namespace hoTools.EaServices
                     a.IsConst = isConst;
                     a.Default = defaultValue;
                     a.ClassifierID = Util.GetTypeId(rep, type);
-                    if (el.Type.Equals("Class")) a.Visibility = "Private";
-                    else a.Visibility = "Public";
+                    a.Visibility = el.Type.Equals("Class") ? "Private" : "Public";
                     if (!collectionValue.Equals(""))
                     {
                         a.IsCollection = true;
@@ -3283,12 +3275,10 @@ namespace hoTools.EaServices
                     el.Attributes.Refresh();
                 }
                 a.Default = value;
-                if (el.Type.Equals("Interface")) a.Visibility = "public";
-                else a.Visibility = "private";
+                a.Visibility = el.Type.Equals("Interface") ? "public" : "private";
 
                 a.IsConst = true;
-                if (!stereotype.Equals("")) a.Stereotype = stereotype;
-                else a.Stereotype = "define";
+                a.Stereotype = !stereotype.Equals("") ? stereotype : "define";
                 a.ClassifierID = 0;
                 a.Type = "";
                 a.Update();
