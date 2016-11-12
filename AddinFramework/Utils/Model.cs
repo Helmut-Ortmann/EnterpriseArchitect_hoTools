@@ -340,8 +340,8 @@ namespace EAAddinFramework.Utils
 
                 // output the query in EA Search Window
                 string xmlEaOutput = MakeEaXmlOutput(xmlSqlQueryResult);
-                //MakeExcelFile(xmlSqlQueryResult, @"d:\temp\select.xls");
-                Excel.MakeExcelFile(xmlSqlQueryResult, @"d:\temp\sql\"+ sqlName+ ".xlsx");
+                //MakeExcelFileFromSqlResult(xmlSqlQueryResult, @"d:\temp\select.xls");
+                Excel.MakeExcelFileFromSqlResult(xmlSqlQueryResult, @"d:\temp\sql\"+ sqlName+ ".xlsx");
                 Repository.RunModelSearch("", "", "", xmlEaOutput);
                 return xmlSqlQueryResult;
             }

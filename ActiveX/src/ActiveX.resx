@@ -2467,6 +2467,12 @@ Tip:
   <data name="&gt;&gt;exportExcelToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;exportCsvOfClipboardToExcelToolStripMenuItem.Name" xml:space="preserve">
+    <value>exportCsvOfClipboardToExcelToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;exportCsvOfClipboardToExcelToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;toolStripSeparator3.Name" xml:space="preserve">
     <value>toolStripSeparator3</value>
   </data>
@@ -2772,12 +2778,6 @@ Tip:
   </data>
   <data name="&gt;&gt;_toolTipRtfListOfSearches.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;exportCsvOfClipboardToExcelToolStripMenuItem.Name" xml:space="preserve">
-    <value>exportCsvOfClipboardToExcelToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;exportCsvOfClipboardToExcelToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>AddinControlGui</value>

@@ -18,6 +18,8 @@ using hoTools.Utils.SQL;
 using hoTools.Utils;
 using hoTools.Utils.Configuration;
 
+using hoTools.Utils.Excel;
+
 
 // ReSharper disable once CheckNamespace
 namespace hoTools.ActiveX
@@ -1075,6 +1077,7 @@ namespace hoTools.ActiveX
             this.updateScriptsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._doToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportExcelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportCsvOfClipboardToExcelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this._createActivityForOperationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._updateActivityFromOperationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -1134,7 +1137,6 @@ namespace hoTools.ActiveX
             this._panelAdvanced = new System.Windows.Forms.Panel();
             this._panelQuickSearch = new System.Windows.Forms.TableLayoutPanel();
             this._toolTipRtfListOfSearches = new System.Windows.Forms.ToolTip(this.components);
-            this.exportCsvOfClipboardToExcelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this._toolStripContainer1.SuspendLayout();
             this._toolStripQuery.SuspendLayout();
@@ -1657,6 +1659,12 @@ namespace hoTools.ActiveX
             resources.ApplyResources(this.exportExcelToolStripMenuItem, "exportExcelToolStripMenuItem");
             this.exportExcelToolStripMenuItem.Click += new System.EventHandler(this.exportExcelToolStripMenuItem_Click);
             // 
+            // exportCsvOfClipboardToExcelToolStripMenuItem
+            // 
+            this.exportCsvOfClipboardToExcelToolStripMenuItem.Name = "exportCsvOfClipboardToExcelToolStripMenuItem";
+            resources.ApplyResources(this.exportCsvOfClipboardToExcelToolStripMenuItem, "exportCsvOfClipboardToExcelToolStripMenuItem");
+            this.exportCsvOfClipboardToExcelToolStripMenuItem.Click += new System.EventHandler(this.exportCsvOfClipboardToExcelToolStripMenuItem_Click);
+            // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
@@ -2058,11 +2066,6 @@ namespace hoTools.ActiveX
             this._toolTipRtfListOfSearches.OwnerDraw = true;
             this._toolTipRtfListOfSearches.Draw += new System.Windows.Forms.DrawToolTipEventHandler(this._toolTipRtfListOfSearches_Draw);
             this._toolTipRtfListOfSearches.Popup += new System.Windows.Forms.PopupEventHandler(this._toolTipRtfListOfSearches_Popup);
-            // 
-            // exportCsvOfClipboardToExcelToolStripMenuItem
-            // 
-            this.exportCsvOfClipboardToExcelToolStripMenuItem.Name = "exportCsvOfClipboardToExcelToolStripMenuItem";
-            resources.ApplyResources(this.exportCsvOfClipboardToExcelToolStripMenuItem, "exportCsvOfClipboardToExcelToolStripMenuItem");
             // 
             // AddinControlGui
             // 
@@ -2735,6 +2738,11 @@ namespace hoTools.ActiveX
         private void exportExcelToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void exportCsvOfClipboardToExcelToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Excel.MakeExcelFileFromCsv();
         }
     }
 
