@@ -9,11 +9,17 @@ using System.Xml;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
 using hoTools.Utils.Configuration;
+using hoTools.Utils.Excel;
+
+// Excel
+using System.Runtime.InteropServices;
+//using Excel = Microsoft.Office.Interop.Excel;
 
 
 using hoTools.Utils.SQL;
-
-
+using System.IO;
+using System.Linq.Expressions;
+using hoTools.Utils;
 
 namespace EAAddinFramework.Utils
 {
@@ -24,7 +30,7 @@ namespace EAAddinFramework.Utils
         public EA.App EaApp { get; }
         static string _applicationFullPath;
         IWin32Window _mainEaWindow;
-        RepositoryType? _repositoryType;  // a null able type
+        RepositoryType? _repositoryType; // a null able type
 
         // configuration as singleton
         readonly HoToolsGlobalCfg _globalCfg = HoToolsGlobalCfg.Instance;
@@ -54,7 +60,9 @@ namespace EAAddinFramework.Utils
             Access2007,
             Firebird
         }
+
         #region Constructor
+
         /// <summary>
         /// Create a model on the first running EA instance
         /// </summary>
@@ -64,6 +72,7 @@ namespace EAAddinFramework.Utils
             EaApp = obj as EA.App;
             Initialize(EaApp.Repository);
         }
+
         /// <summary>
         /// Create a Model
         /// </summary>
@@ -74,6 +83,7 @@ namespace EAAddinFramework.Utils
         }
 
         #endregion
+
         /// <summary>
         /// Initialize an rep Model object
         /// Intended to use from a scripting environment
@@ -81,7 +91,7 @@ namespace EAAddinFramework.Utils
         /// <param name="rep"></param>
         public void Initialize(EA.Repository rep)
         {
-            Repository = rep; 
+            Repository = rep;
         }
 
 
@@ -103,6 +113,7 @@ namespace EAAddinFramework.Utils
                 return _applicationFullPath;
             }
         }
+
         /// <summary>
         /// returns the type of repository backend.
         /// This is mostly needed to adjust to sql to the specific sql dialect
@@ -118,6 +129,7 @@ namespace EAAddinFramework.Utils
                 return _repositoryType.Value;
             }
         }
+
         /// <summary>
         /// the main EA window to use when opening properties dialogs
         /// </summary>
@@ -132,7 +144,7 @@ namespace EAAddinFramework.Utils
                     Process proc = allProcesses.Find(pr => pr.ProcessName == "EA");
                     //if we don't find the process then we set the main window to null
                     if (proc == null
-                           || proc.MainWindowHandle == null)
+                        || proc.MainWindowHandle == null)
                     {
                         this._mainEaWindow = null;
                     }
@@ -145,6 +157,7 @@ namespace EAAddinFramework.Utils
                 return _mainEaWindow;
             }
         }
+
         /// <summary>
         /// Gets the rep type for this model
         /// </summary>
@@ -173,7 +186,8 @@ namespace EAAddinFramework.Utils
                     else
                     {
                         //open the file as a text file to find the connection string.
-                        var fileStream = new System.IO.FileStream(connectionString, System.IO.FileMode.Open, System.IO.FileAccess.Read, System.IO.FileShare.ReadWrite);
+                        var fileStream = new System.IO.FileStream(connectionString, System.IO.FileMode.Open,
+                            System.IO.FileAccess.Read, System.IO.FileShare.ReadWrite);
                         var reader = new System.IO.StreamReader(fileStream);
                         //replace connection string with the file contents
                         connectionString = reader.ReadToEnd();
@@ -183,20 +197,22 @@ namespace EAAddinFramework.Utils
                 if (!connectionString.ToLower().EndsWith(".eap", StringComparison.CurrentCulture))
                 {
                     string dbTypeString = "DBType=";
-                    int dbIndex = connectionString.IndexOf(dbTypeString, StringComparison.CurrentCulture) + dbTypeString.Length;
+                    int dbIndex = connectionString.IndexOf(dbTypeString, StringComparison.CurrentCulture) +
+                                  dbTypeString.Length;
                     if (dbIndex > dbTypeString.Length)
                     {
                         int dbNumber;
                         string dbNumberString = connectionString.Substring(dbIndex, 1);
                         if (int.TryParse(dbNumberString, out dbNumber))
                         {
-                            repoType = (RepositoryType)dbNumber;
+                            repoType = (RepositoryType) dbNumber;
                         }
                     }
                 }
             }
             return repoType;
         }
+
         /// <summary>
         /// Execute SQL and catch Exception
         /// </summary>
@@ -214,6 +230,7 @@ namespace EAAddinFramework.Utils
                 return false;
             }
         }
+
         /// <summary>
         /// formats an xpath according to the type of database.
         /// For Oracle and Firebird it should be ALL CAPS
@@ -234,6 +251,7 @@ namespace EAAddinFramework.Utils
                     return xpath;
             }
         }
+
         /// <summary>
         /// escapes a literal string so it can be inserted using sql
         /// </summary>
@@ -254,16 +272,17 @@ namespace EAAddinFramework.Utils
             escapedString = escapedString.Replace("'", "''");
             return escapedString;
         }
+
         /// <summary>
         /// Runs the search (EA search or hoTools SQL file if it's a *.sql file). It handles the exceptions.
         /// It converts wild cards of the &lt;Search Term>. 
         /// </summary>
         /// <param name="searchName">EA Search name or SQL file name (uses path to find absolute path)</param>
         /// <param name="searchTerm"></param>
-        public void SearchRun(string searchName, string searchTerm)
+        public string SearchRun(string searchName, string searchTerm)
         {
             searchName = searchName.Trim();
-            if (searchName == "") return;
+            if (searchName == "") return "";
 
             // SQL file?
             Regex pattern = new Regex(@"\.sql", RegexOptions.IgnoreCase);
@@ -273,20 +292,24 @@ namespace EAAddinFramework.Utils
 
                 // run search
                 searchTerm = ReplaceSqlWildCards(searchTerm);
-                SqlRun(sqlString, searchTerm);
+                return SqlRun(searchName, sqlString, searchTerm);
 
 
             }
             else
             {
+                // EA Search
                 try
                 {
+                    // run SQL search and display in Search Window
                     Repository.RunModelSearch(searchName, searchTerm, "", "");
+                    return "";
                 }
                 catch (Exception e)
                 {
                     MessageBox.Show(e.ToString(),
                         $"Error start search '{searchName} {searchTerm}'");
+                    return "";
                 }
             }
         }
@@ -294,37 +317,47 @@ namespace EAAddinFramework.Utils
 
         /// <summary>
         /// Run an SQL string and if query output the result in EA Search Window. If update, insert, delete execute SQL.
+        /// Ir return "" for nothing found or the SQL result string.
         /// <para/>- replacement of macros
         /// <para/>- run query
         /// <para/>- format to output
         /// </summary>
+        /// <param name="sqlName"></param>
         /// <param name="sql"></param>
         /// <param name="searchText">Search Text to replace 'Search Term' macro</param>
-        public void SqlRun(string sql, string searchText)
+        /// <returns>"" for nothing found or the EA SQL XML string with the found information</returns>
+        public string SqlRun(string sqlName, string sql, string searchText)
         {
             // replace templates
             sql = SqlTemplates.ReplaceMacro(Repository, sql, searchText);
-            if (sql == "") return;
+            if (sql == "") return "";
 
             // check whether select or update, delete, insert sql
             if (Regex.IsMatch(sql, @"^\s*select ", RegexOptions.IgnoreCase | RegexOptions.Multiline))
             {
-                // run the select query
-                string xml = SqlQueryWithException(sql) ?? "";
+                // run the SQL select query
+                var xmlSqlQueryResult = SqlQueryWithException(sql) ?? "";
 
                 // output the query in EA Search Window
-                string target = MakeEaXmlOutput(xml);
-                Repository.RunModelSearch("", "", "", target);
-            } else
+                string xmlEaOutput = MakeEaXmlOutput(xmlSqlQueryResult);
+                //MakeExcelFile(xmlSqlQueryResult, @"d:\temp\select.xls");
+                Excel.MakeExcelFile(xmlSqlQueryResult, @"d:\temp\sql\"+ sqlName+ ".xlsx");
+                Repository.RunModelSearch("", "", "", xmlEaOutput);
+                return xmlSqlQueryResult;
+            }
+            else
             {
                 // run the update, delete, insert sql
                 bool ret = SqlExecuteWithException(sql);
                 // if ok output the SQL
                 if (ret)
                 {
-                    string sqlText = $"Path SQL:\r\n{SqlError.GetHoToolsLastSqlFilePath()}\r\n\r\n{SqlError.ReadHoToolsLastSql()}";
+                    string sqlText =
+                        $"Path SQL:\r\n{SqlError.GetHoToolsLastSqlFilePath()}\r\n\r\n{SqlError.ReadHoToolsLastSql()}";
                     MessageBox.Show(sqlText, @"SQL executed!\r\n\r\nCtrl+C to copy it to clipboard (ignore beep).");
+
                 }
+                return "";
 
             }
         }
@@ -345,6 +378,7 @@ namespace EAAddinFramework.Utils
             results.LoadXml(SqlQueryNative(sqlQuery));
             return results;
         }
+
         /// <summary>
         /// Run EA SQL Query with Exception handling. It deletes the error file and reads it back to detect errors.
         /// <para/>return null if error, it also displays the error message in MessageBox
@@ -361,12 +395,12 @@ namespace EAAddinFramework.Utils
             {
                 // is query or a changing SQL?
                 //if (Regex.IsMatch(query, "^\s*select ", RegexOptions.IgnoreCase | RegexOptions.Multiline)) {
-                    // run the query (select * .. from
+                // run the query (select * .. from
                 string xml = SqlQueryNative(query);
                 if (!SqlError.ExistsEaSqlErrorFile())
-                    {
-                        return xml;
-                    }
+                {
+                    return xml;
+                }
                 else
                 {
                     MessageBox.Show(SqlError.ReadEaSqlError(), @"Error SQL (CTRL+C to copy it!!)");
@@ -435,7 +469,7 @@ namespace EAAddinFramework.Utils
             // store final/last query which is executed
             SqlError.WriteHoToolsLastSql(sqlQuery);
 
-            return Repository.SQLQuery(sqlQuery);// no error, only no result rows
+            return Repository.SQLQuery(sqlQuery); // no error, only no result rows
         }
 
         /// <summary>
@@ -451,9 +485,99 @@ namespace EAAddinFramework.Utils
             // store final/last query which is executed
             SqlError.WriteHoToolsLastSql(sqlExecute);
 
-            return ExecuteSql(sqlExecute);// no error, only no result rows
+            return ExecuteSql(sqlExecute); // no error, only no result rows
         }
 
+        /// <summary>
+        /// Make EA Excel File from EA SQLQuery format (string)
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="fileName"></param>
+        /// <returns>string</returns>
+        public bool MakeExcelFile(string x, string fileName = @"d:\temp\sql\sql.xlsx")
+        {
+
+            if (string.IsNullOrEmpty(x)) return false;
+            XDocument xDoc = XDocument.Parse(x);
+
+            // get field names
+            var fieldNames = xDoc.Descendants("Row").FirstOrDefault()?.Descendants();
+            if (fieldNames == null) return false;
+
+            TryToDeleteFile(fileName);
+            Cursor.Current = Cursors.WaitCursor;
+            try
+            {
+
+                //Excel.Application xlApp = new Excel.Application();
+
+
+                object misValue = System.Reflection.Missing.Value;
+
+                //var xlWorkBook = xlApp.Workbooks.Add(misValue);
+                //var xlWorkSheet = (Excel.Worksheet) xlWorkBook.Worksheets.Item[1];
+
+                int column = 1;
+                int row = 1;
+                foreach (var field in fieldNames)
+                {
+                    //xlWorkSheet.Cells[row, column] = field.Name.ToString();
+                    column = column + 1;
+                }
+
+
+                var xRows = xDoc.Descendants("Row");
+                foreach (var xRow in xRows)
+                {
+                    Console.WriteLine("New Record found");
+                    row = row + 1;
+                    column = 1;
+                    foreach (var value in xRow.Elements())
+                    {
+                        //xlWorkSheet.Cells[row, column] = value.Value;
+                        column = column + 1;
+
+                    }
+                }
+                //xlWorkBook.SaveAs(fileName, Excel.XlFileFormat.xlWorkbookNormal, misValue, misValue, misValue, misValue,
+                //    Excel.XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
+                //xlWorkBook.Close(true, misValue, misValue);
+                //xlApp.Quit();
+
+                // release objects
+                //Marshal.ReleaseComObject(xlWorkSheet);
+                //Marshal.ReleaseComObject(xlWorkBook);
+                //Marshal.ReleaseComObject(xlApp);
+                Cursor.Current = Cursors.Default;
+                var ret = MessageBox.Show($"Yes: Open Excel File\r\nNo: Open Folder\r\nCancel",
+                    $"Excel File '{fileName}' created!", MessageBoxButtons.YesNoCancel);
+                switch (ret)
+                {
+                        case DialogResult.Yes:
+                            Util.StartFile(fileName);
+                            break;
+                        case DialogResult.No:
+                            Util.ShowFolder(Path.GetDirectoryName(fileName));
+                        break;
+                        default:
+                        break;
+
+                }
+                return true;
+            }
+            catch (Exception e)
+            {
+                Cursor.Current = Cursors.Default;
+                MessageBox.Show($"Error {e.Message}\r\n{e.Source}");
+                return false;
+            }
+        }
+
+       
+
+
+
+        #region MakeEaXmlOutput
         /// <summary>
         /// Make EA XML output format from EA SQLQuery format (string)
         /// </summary>
@@ -465,14 +589,13 @@ namespace EAAddinFramework.Utils
             return MakeEaXmlOutput(XDocument.Parse(x));
         }
 
-        #region MakeEaXmlOutput
         /// <summary>
         /// Make EA XML output format from EA SQLQuery XDocument format (LINQ to XML). If nothing found or an error has occurred nothing is displayed.
         /// </summary>
         /// <param name="x">Output from EA SQLQuery</param>
         /// <returns></returns>
         #pragma warning disable CSE0003 // Use expression-bodied members
-        public string MakeEaXmlOutput(XDocument x)
+        private string MakeEaXmlOutput(XDocument x)
         {
             //---------------------------------------------------------------------
             // make the output format:
@@ -1052,7 +1175,29 @@ namespace EAAddinFramework.Utils
             }
 
         }
+        /// <summary>
+        /// Delete file with error handling
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <returns></returns>
+        static bool TryToDeleteFile(string fileName)
+        {
+            try
+            {
+                // A.
+                // Try to delete the file.
+                if (File.Exists(fileName)) File.Delete(fileName);
+                return true;
+            }
+            catch (IOException)
+            {
+                // B.
+                // We could not delete the file.
+                return false;
+            }
+        }
 
 
     }
+    
 }

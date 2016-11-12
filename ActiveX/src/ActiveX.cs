@@ -174,6 +174,9 @@ namespace hoTools.ActiveX
         private ToolStripMenuItem editSQLToolStripMenuItem;
         private ToolStripMenuItem showDescriptionToolStripMenuItem;
         private Button _btnReverseConnector;
+        private ToolStripMenuItem exportExcelToolStripMenuItem;
+        private ToolStripSeparator toolStripSeparator3;
+        private ToolStripMenuItem exportCsvOfClipboardToExcelToolStripMenuItem;
         private TextBox _txtSearchText;
         #endregion
 
@@ -875,7 +878,7 @@ namespace hoTools.ActiveX
         // see at:  protected override boolean IsInputKey(Keys keyData)
         void cmbSearchName_KeyDown(object sender, KeyEventArgs e)
         {
-            RtfSearchNameProcessKeys(e);
+            //RtfSearchNameProcessKeys(e);
 
         }
         void _txtSearchName_KeyUp(object sender, KeyEventArgs e)
@@ -895,6 +898,7 @@ namespace hoTools.ActiveX
         {
             switch (e.KeyCode)
             {
+                // run the SQL
                 case Keys.Enter:
                     _model.SearchRun(GetSearchName(), _txtSearchText.Text);
                     _rtfListOfSearches.Visible = false;
@@ -1070,6 +1074,8 @@ namespace hoTools.ActiveX
             this._settingsQueryAndSctipToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.updateScriptsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._doToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportExcelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this._createActivityForOperationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._updateActivityFromOperationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
@@ -1128,6 +1134,7 @@ namespace hoTools.ActiveX
             this._panelAdvanced = new System.Windows.Forms.Panel();
             this._panelQuickSearch = new System.Windows.Forms.TableLayoutPanel();
             this._toolTipRtfListOfSearches = new System.Windows.Forms.ToolTip(this.components);
+            this.exportCsvOfClipboardToExcelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this._toolStripContainer1.SuspendLayout();
             this._toolStripQuery.SuspendLayout();
@@ -1514,7 +1521,6 @@ namespace hoTools.ActiveX
             resources.ApplyResources(this._txtSearchName, "_txtSearchName");
             this._txtSearchName.Name = "_txtSearchName";
             this._toolTip.SetToolTip(this._txtSearchName, resources.GetString("_txtSearchName.ToolTip"));
-            this._txtSearchName.TextChanged += new System.EventHandler(this._txtSearchName_TextChanged);
             this._txtSearchName.Enter += new System.EventHandler(this._txtSearchName_Enter);
             this._txtSearchName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbSearchName_KeyDown);
             this._txtSearchName.KeyUp += new System.Windows.Forms.KeyEventHandler(this._txtSearchName_KeyUp);
@@ -1631,6 +1637,9 @@ namespace hoTools.ActiveX
             // _doToolStripMenuItem
             // 
             this._doToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.exportExcelToolStripMenuItem,
+            this.exportCsvOfClipboardToExcelToolStripMenuItem,
+            this.toolStripSeparator3,
             this._createActivityForOperationToolStripMenuItem,
             this._updateActivityFromOperationToolStripMenuItem,
             this._toolStripSeparator10,
@@ -1641,6 +1650,17 @@ namespace hoTools.ActiveX
             this._changeAuthorRecursiveToolStripMenuItem});
             this._doToolStripMenuItem.Name = "_doToolStripMenuItem";
             resources.ApplyResources(this._doToolStripMenuItem, "_doToolStripMenuItem");
+            // 
+            // exportExcelToolStripMenuItem
+            // 
+            this.exportExcelToolStripMenuItem.Name = "exportExcelToolStripMenuItem";
+            resources.ApplyResources(this.exportExcelToolStripMenuItem, "exportExcelToolStripMenuItem");
+            this.exportExcelToolStripMenuItem.Click += new System.EventHandler(this.exportExcelToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            resources.ApplyResources(this.toolStripSeparator3, "toolStripSeparator3");
             // 
             // _createActivityForOperationToolStripMenuItem
             // 
@@ -2038,6 +2058,11 @@ namespace hoTools.ActiveX
             this._toolTipRtfListOfSearches.OwnerDraw = true;
             this._toolTipRtfListOfSearches.Draw += new System.Windows.Forms.DrawToolTipEventHandler(this._toolTipRtfListOfSearches_Draw);
             this._toolTipRtfListOfSearches.Popup += new System.Windows.Forms.PopupEventHandler(this._toolTipRtfListOfSearches_Popup);
+            // 
+            // exportCsvOfClipboardToExcelToolStripMenuItem
+            // 
+            this.exportCsvOfClipboardToExcelToolStripMenuItem.Name = "exportCsvOfClipboardToExcelToolStripMenuItem";
+            resources.ApplyResources(this.exportCsvOfClipboardToExcelToolStripMenuItem, "exportCsvOfClipboardToExcelToolStripMenuItem");
             // 
             // AddinControlGui
             // 
@@ -2444,7 +2469,7 @@ namespace hoTools.ActiveX
                         ORDER BY 3,4
                     ";
                     // Run SQL with macro replacement
-                    Model.SqlRun(sql, "");
+                    Model.SqlRun("ConveyeyItems", sql, "");
                     break;
 
                 case EA.ObjectType.otConnector:
@@ -2455,7 +2480,7 @@ namespace hoTools.ActiveX
                         ORDER BY 3
                     ";
                     // Run SQL with macro replacement
-                    Model.SqlRun(sql, "");
+                    Model.SqlRun("ConveyeyItems", sql, "");
                     break;
 
                 default:
@@ -2702,7 +2727,15 @@ namespace hoTools.ActiveX
             return Search.GetSearch(line);
         }
 
-        
+        /// <summary>
+        /// Export current SQL to Excel and show it
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void exportExcelToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 
     #endregion

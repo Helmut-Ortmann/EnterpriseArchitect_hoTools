@@ -53,6 +53,10 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
       <Private>False</Private>
     </Reference>
+    <Reference Include="KBCsv, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc96fa93a217f7a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\KBCsv.5.0.0\lib\netstandard1.0\KBCsv.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
@@ -176,6 +180,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="hoKeyPair.snk" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

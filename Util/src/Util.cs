@@ -7,6 +7,7 @@ using System.IO;
 using EA;
 using hoTools.Utils.Extension;
 using hoTools.Utils.svnUtil;
+using File = System.IO.File;
 
 namespace hoTools.Utils
 {
@@ -94,6 +95,16 @@ namespace hoTools.Utils
             }
             return el;
         }
+
+        public static void ShowFolder(string path, bool isTotalCommander=false)
+        {
+
+            if (isTotalCommander)
+                Util.StartApp(@"totalcmd.exe", "/o " + path);
+            else
+                Util.StartApp(@"Explorer.exe", "/e, " + path);
+        }
+
 
         public static void StartApp(string app, string par)
         {
@@ -1650,6 +1661,27 @@ namespace hoTools.Utils
                                $" where ea_guid = '{guid}'";
             rep.Execute(sql);
 
+        }
+        /// <summary>
+        /// Delete file with error handling
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <returns></returns>
+        public static bool TryToDeleteFile(string fileName)
+        {
+            try
+            {
+                // A.
+                // Try to delete the file.
+                if (File.Exists(fileName)) File.Delete(fileName);
+                return true;
+            }
+            catch (IOException)
+            {
+                // B.
+                // We could not delete the file.
+                return false;
+            }
         }
     }
 }

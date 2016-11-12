@@ -1609,7 +1609,7 @@ Useful to quickly test:
 
             // get TextBox
             var textBox = (TextBox)tabPage.Controls[0];
-            _model.SqlRun(textBox.Text, _sqlTextBoxSearchTerm.Text);
+            _model.SqlRun(tabPage.Text, textBox.Text, _sqlTextBoxSearchTerm.Text);
             Cursor.Current = Cursors.Default;
         }
         #endregion
@@ -1634,7 +1634,7 @@ Useful to quickly test:
             // get TextBox
             var textBox = (TextBox)tabPage.Controls[0];
 
-            _model.SqlRun(textBox.SelectedText, _sqlTextBoxSearchTerm.Text);
+            _model.SqlRun(tabPage.Text, textBox.SelectedText, _sqlTextBoxSearchTerm.Text);
             Cursor.Current = Cursors.Default;
         }
 

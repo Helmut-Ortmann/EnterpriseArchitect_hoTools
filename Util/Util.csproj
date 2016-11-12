@@ -48,9 +48,21 @@
     <AssemblyOriginatorKeyFile>hoKeyPair.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ClosedXML, Version=0.80.0.0, Culture=neutral, PublicKeyToken=fd1eb21b62ae805b, processorArchitecture=MSIL">
+      <HintPath>..\packages\ClosedXML.0.80.1\lib\net40-client\ClosedXML.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.5.5631.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocumentFormat.OpenXml.2.5\lib\DocumentFormat.OpenXml.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Interop.EA">
       <HintPath>..\EA\Interop.EA.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="KBCsv, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc96fa93a217f7a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\KBCsv.5.0.0\lib\netstandard1.0\KBCsv.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -78,6 +90,7 @@
     <Compile Include="src\Connector.cs" />
     <Compile Include="src\Diagram.cs" />
     <Compile Include="src\Element.cs" />
+    <Compile Include="src\Excel.cs" />
     <Compile Include="src\Favorite.cs" />
     <Compile Include="src\FormsControl.cs" />
     <Compile Include="src\GlobalHotkeyException.cs" />
@@ -109,6 +122,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="hoKeyPair.snk" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
