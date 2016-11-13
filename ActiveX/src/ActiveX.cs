@@ -541,7 +541,7 @@ namespace hoTools.ActiveX
 
                 var call = (ServicesConfigCall) AddinSettings.ButtonsServiceConfig[pos];
                 if (call.Method == null) return;
-                call.Invoke(_model, _txtSearchText.Text);
+                call.Invoke(_model, GetSearchTerm());
 
             }
             if (AddinSettings.ButtonsServiceConfig[pos] is ServicesConfigScript)
@@ -1016,12 +1016,6 @@ namespace hoTools.ActiveX
         {
             string searchName = _txtSearchName.Text.Trim();
             if (searchName.Equals("<Search Name>")) searchName = "";
-            if (searchName == "")
-            {
-                searchName = AddinSettings.QuickSearchName;
-                _txtSearchName.Text = searchName;
-            }
-
             return searchName;
         }
         #endregion
@@ -1285,8 +1279,9 @@ namespace hoTools.ActiveX
             this._toolTip.SetToolTip(this._txtSearchText, resources.GetString("_txtSearchText.ToolTip"));
             this._txtSearchText.Enter += new System.EventHandler(this._txtSearchText_Enter);
             this._txtSearchText.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtUserText_KeyDown);
+            this._txtSearchText.Leave += new System.EventHandler(this._txtSearchText_Leave);
             this._txtSearchText.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.txtSearchText_MouseDoubleClick);
-            this._txtSearchText.MouseLeave += new System.EventHandler(this._txtSearchText_Leave);
+            this._txtSearchText.MouseLeave += new System.EventHandler(this._txtSearchText_MouseLeave);
             // 
             // _btnLabelRight
             // 
@@ -2563,7 +2558,7 @@ namespace hoTools.ActiveX
             _txtSearchName.Text = searchName;
 
             // run Search
-            _model.SearchRun(searchName, _txtSearchText.Text);
+            _model.SearchRun(searchName, GetSearchTerm());
             _rtfListOfSearches.Visible = false;
         }
 
@@ -2578,6 +2573,10 @@ namespace hoTools.ActiveX
         {
             if (_txtSearchText.Text.Trim().Equals("")) _txtSearchText.Text = "<Search Term>";
             _rtfListOfSearches.Visible = false;
+        }
+        private void _txtSearchText_MouseLeave(object sender, EventArgs e)
+        {
+           _rtfListOfSearches.Visible = false;
         }
         private void _txtSearchText_Enter(object sender, EventArgs e)
         {

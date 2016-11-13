@@ -18,9 +18,11 @@ Collection of useful tools (see also [WiKi](https://github.com/Helmut-Ortmann/En
     - Auto complete Search, Find Search + List all Searches
   - Port support
   - Favorites
+  - Clipboard CSV to Excel
   - ..
 - [SQL](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/SQL) with tabbed Windows
     - Select, Insert, Delete, Update
+	- Export results to Excel
     - Templates
     - Macros (easy access to EA items / Packages or complete Branches, a lot more than EA delivers)
     - Easy handling of SQL errors
@@ -89,7 +91,7 @@ Some features:
 
 # Installation 
 - Uninstall hoTools
-- hoTools.msi  (Setup\bin\Release\hoTools.msi V2.0.1)
+- hoTools.msi  (Setup\bin\Release\hoTools.msi V2.0.11)
 - In EA: Extension, Addin Windows is selected
 - In EA: Manage Addins, MDG: hoTools is selected
 - hoToolsRemove.ps1 (deinstall with PowerShell)
@@ -108,6 +110,8 @@ Some features:
 # Releases
 
 ## Release 2.0.11
+- SQL Query Results can be exported to Excel (no Excel required)
+- Clipboard CSV content can be exported to Excel (no Excel required)
 - Reverse direction of edge (connector, dependency, association, information flow, SysML Item Flow)
 - Unused references deleted (no functional implication)
 - Implementation documentation added
