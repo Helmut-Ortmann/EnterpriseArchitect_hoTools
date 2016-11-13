@@ -63,8 +63,11 @@
       <Component Id="KBCsv" Guid="30620E70-7C9D-45E4-BEC8-6A3B8D5107EA">
         <File Id="KBCsv" KeyPath="yes" Name="KBCsv.dll"  Source="..\packages\KBCsv.5.0.0\lib\netstandard1.0\KBCsv.dll" />
       </Component>
-      <Component Id="KBCsv.Extensions.Data" Guid="{97618C61-D0E0-41B0-8A2D-F82ECC5AF35E}">
+      <Component Id="KBCsv.Extensions.Data" Guid="97618C61-D0E0-41B0-8A2D-F82ECC5AF35E">
         <File Id="KBCsv.Extensions.Data" KeyPath="yes" Name="KBCsv.Extensions.Data.dll"  Source="..\packages\KBCsv.Extensions.Data.5.0.0\lib\net45\KBCsv.Extensions.Data.dll" />
+      </Component>
+      <Component Id="DocumentFormat.OpenXml" Guid="F6FBBA69-A929-413B-A13B-BBDD7851D1F7">
+        <File Id="DocumentFormat.OpenXml" KeyPath="yes" Name="DocumentFormat.OpenXml.dll"  Source="..\packages\DocumentFormat.OpenXml.2.5\lib\DocumentFormat.OpenXml.dll" />
       </Component>
       <!--
       Name="AddinFramework.dll" Source="$(var.AddinFramework.TargetPath)" />
