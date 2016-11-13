@@ -60,6 +60,12 @@
        <Component Id="Newtonsoft.Json" Guid="48483AD6-80C5-41C6-87DB-CE36684E4ACD">
         <File Id="Newtonsoft.Json" KeyPath="yes" Name="Newtonsoft.Json.dll"  Source="..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll" />
       </Component>
+      <Component Id="KBCsv" Guid="30620E70-7C9D-45E4-BEC8-6A3B8D5107EA">
+        <File Id="KBCsv" KeyPath="yes" Name="KBCsv.dll"  Source="..\packages\KBCsv.5.0.0\lib\netstandard1.0\KBCsv.dll" />
+      </Component>
+      <Component Id="KBCsv.Extensions.Data" Guid="{97618C61-D0E0-41B0-8A2D-F82ECC5AF35E}">
+        <File Id="KBCsv.Extensions.Data" KeyPath="yes" Name="KBCsv.Extensions.Data.dll"  Source="..\packages\KBCsv.Extensions.Data.5.0.0\lib\net45\KBCsv.Extensions.Data.dll" />
+      </Component>
       <!--
       Name="AddinFramework.dll" Source="$(var.AddinFramework.TargetPath)" />
       Update if Assembly, Visual Studio Version changed
