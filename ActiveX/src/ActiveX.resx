@@ -334,16 +334,19 @@
     <value>Fill</value>
   </data>
   <data name="_txtSearchText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 1</value>
+    <value>247, 1</value>
   </data>
   <data name="_txtSearchText.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="_txtSearchText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>244, 20</value>
+    <value>213, 20</value>
   </data>
   <data name="_txtSearchText.TabIndex" type="System.Int32, mscorlib">
     <value>27</value>
+  </data>
+  <data name="_txtSearchText.Text" xml:space="preserve">
+    <value>&lt;Search Term&gt;</value>
   </data>
   <data name="_txtSearchText.ToolTip" xml:space="preserve">
     <value>&lt;Search Term&gt; if needed for your SQL / EA Model Search:
@@ -371,7 +374,7 @@ e.g.: 'myString*' Everything starting with 'myString' (db independent)
     <value>_panelQuickSearch</value>
   </data>
   <data name="&gt;&gt;_txtSearchText.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="_btnLabelRight.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 9.75pt</value>
@@ -1393,22 +1396,33 @@ Even information flow realized.</value>
     <value>Fill</value>
   </data>
   <data name="_txtSearchName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>247, 1</value>
+    <value>1, 1</value>
   </data>
   <data name="_txtSearchName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="_txtSearchName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>213, 20</value>
+    <value>244, 20</value>
   </data>
   <data name="_txtSearchName.TabIndex" type="System.Int32, mscorlib">
     <value>47</value>
+  </data>
+  <data name="_txtSearchName.Text" xml:space="preserve">
+    <value>&lt;Search Name&gt;</value>
   </data>
   <data name="_txtSearchName.ToolTip" xml:space="preserve">
     <value>Enter Search Name (default is in settings):
 1. Type to search (Autocomplete)
 2. If you have entered a part of the name press Blank, 
-   Key up or down to search for (Fuzzy Search)</value>
+   Key up or down to search for (Fuzzy Search)
+
+An SQL Query you can export to Excel by:
+- Do
+- Export to Excel
+
+*.csv in Clipboard you can export to Excel by:
+- Do
+- Export clipboared to CSV </value>
   </data>
   <data name="&gt;&gt;_txtSearchName.Name" xml:space="preserve">
     <value>_txtSearchName</value>
@@ -1420,7 +1434,7 @@ Even information flow realized.</value>
     <value>_panelQuickSearch</value>
   </data>
   <data name="&gt;&gt;_txtSearchName.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>0</value>
   </data>
   <data name="_btnAddElementNote.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 9pt</value>
@@ -1653,7 +1667,7 @@ Changes will only take effect:
     <value>Export SQL to Excel</value>
   </data>
   <data name="exportExcelToolStripMenuItem.ToolTipText" xml:space="preserve">
-    <value>Export SQL to Excel</value>
+    <value>Export current SQL Search to Excel. The Search Field has to include a valid SQL</value>
   </data>
   <data name="exportCsvOfClipboardToExcelToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>242, 22</value>
@@ -2333,7 +2347,7 @@ Tip:
     <value>9</value>
   </data>
   <data name="_panelQuickSearch.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="_txtSearchText" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="_txtSearchName" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100,Absolute,215,Absolute,20" /&gt;&lt;Rows Styles="Percent,100,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="_txtSearchName" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="_txtSearchText" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100,Absolute,215,Absolute,20" /&gt;&lt;Rows Styles="Percent,100,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <metadata name="_toolTipRtfListOfSearches.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>154, 17</value>

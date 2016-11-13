@@ -232,6 +232,7 @@ namespace hoTools.ActiveX
             _model = new Model(Repository);
 
             _txtSearchName.Text = AddinSettings.QuickSearchName;
+            if (_txtSearchName.Text.Trim().Equals("")) _txtSearchName.Text = "<Search Name>";
             IntializeSearches();
 
             ParameterizeMenusAndButtons();
@@ -845,7 +846,7 @@ namespace hoTools.ActiveX
         {
             if (e.KeyCode == Keys.Enter)
             {
-                _model.SearchRun(GetSearchName(), _txtSearchText.Text);
+                _model.SearchRun(GetSearchName(), GetSearchTerm());
                 e.Handled = true;
             }
         }
@@ -859,7 +860,7 @@ namespace hoTools.ActiveX
         void txtSearchText_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             _txtSearchText.Text = Clipboard.GetText();
-            _model.SearchRun(GetSearchName(), _txtSearchText.Text);
+            _model.SearchRun(GetSearchName(), GetSearchTerm());
         }
 
 
@@ -872,7 +873,7 @@ namespace hoTools.ActiveX
         /// <param name="e"></param>
         void cmbSearchName_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            _model.SearchRun(GetSearchName(), _txtSearchText.Text);
+            _model.SearchRun(GetSearchName(), GetSearchTerm());
         }
         // text field
         // There are special keys like "Enter" which require an enabling by 
@@ -902,7 +903,7 @@ namespace hoTools.ActiveX
             {
                 // run the SQL
                 case Keys.Enter:
-                    _model.SearchRun(GetSearchName(), _txtSearchText.Text);
+                    _model.SearchRun(GetSearchName(), GetSearchTerm() );
                     _rtfListOfSearches.Visible = false;
                     e.Handled = true;
                     break;
@@ -991,7 +992,22 @@ namespace hoTools.ActiveX
 
 
         }
+        /// <summary>
+        /// Get the Search Term
+        /// </summary>
+        /// <returns></returns>
 
+        string GetSearchTerm()
+        {
+            string searchTerm = _txtSearchText.Text;
+            if (searchTerm == "<Search Term>")
+            {
+                searchTerm = "";
+            }
+
+            return searchTerm;
+
+        }
         /// <summary>
         /// Get Search Name from GUI text field.
         /// </summary>
@@ -999,6 +1015,7 @@ namespace hoTools.ActiveX
         string GetSearchName()
         {
             string searchName = _txtSearchName.Text.Trim();
+            if (searchName.Equals("<Search Name>")) searchName = "";
             if (searchName == "")
             {
                 searchName = AddinSettings.QuickSearchName;
@@ -1269,6 +1286,7 @@ namespace hoTools.ActiveX
             this._txtSearchText.Enter += new System.EventHandler(this._txtSearchText_Enter);
             this._txtSearchText.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtUserText_KeyDown);
             this._txtSearchText.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.txtSearchText_MouseDoubleClick);
+            this._txtSearchText.MouseLeave += new System.EventHandler(this._txtSearchText_Leave);
             // 
             // _btnLabelRight
             // 
@@ -2056,8 +2074,8 @@ namespace hoTools.ActiveX
             // _panelQuickSearch
             // 
             resources.ApplyResources(this._panelQuickSearch, "_panelQuickSearch");
-            this._panelQuickSearch.Controls.Add(this._txtSearchText, 0, 0);
-            this._panelQuickSearch.Controls.Add(this._txtSearchName, 1, 0);
+            this._panelQuickSearch.Controls.Add(this._txtSearchName, 0, 0);
+            this._panelQuickSearch.Controls.Add(this._txtSearchText, 1, 0);
             this._panelQuickSearch.Name = "_panelQuickSearch";
             // 
             // _toolTipRtfListOfSearches
@@ -2514,7 +2532,7 @@ namespace hoTools.ActiveX
         /// <param name="e"></param>
         private void _txtSearchName_Leave(object sender, EventArgs e)
         {
-
+            if (_txtSearchName.Text.Trim().Equals("")) _txtSearchName.Text =  "<Search Name>" ;
         }
 
         private void rtfListOfSearches_Enter(object sender, EventArgs e)
@@ -2552,12 +2570,18 @@ namespace hoTools.ActiveX
 
         private void _txtSearchName_Enter(object sender, EventArgs e)
         {
+            if (_txtSearchName.Text.Equals("<Search Name>")) _txtSearchName.Text = "";
             IntializeSearches();
             _rtfListOfSearches.Visible = false;
         }
-
+        private void _txtSearchText_Leave(object sender, EventArgs e)
+        {
+            if (_txtSearchText.Text.Trim().Equals("")) _txtSearchText.Text = "<Search Term>";
+            _rtfListOfSearches.Visible = false;
+        }
         private void _txtSearchText_Enter(object sender, EventArgs e)
         {
+            if (_txtSearchText.Text.Contains("<Search Term>")) _txtSearchText.Text = "";
             _rtfListOfSearches.Visible = false;
         }
         /// <summary>
@@ -2737,7 +2761,7 @@ namespace hoTools.ActiveX
         /// <param name="e"></param>
         private void exportExcelToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            _model.SearchRun(GetSearchName(), _txtSearchText.Text, exportToExcel:true);
+            _model.SearchRun(GetSearchName(), GetSearchTerm(), exportToExcel:true);
             _rtfListOfSearches.Visible = false;
         }
 

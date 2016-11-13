@@ -341,8 +341,9 @@ namespace EAAddinFramework.Utils
 
                 // output the query in EA Search Window
                 string xmlEaOutput = MakeEaXmlOutput(xmlSqlQueryResult);
-                //MakeExcelFileFromSqlResult(xmlSqlQueryResult, @"d:\temp\select.xls");
-                if (exportToExcel) Excel.MakeExcelFileFromSqlResult(xmlSqlQueryResult, @"d:\temp\sql\"+ sqlName+ ".xlsx");
+                if (exportToExcel)
+                    Excel.MakeExcelFileFromSqlResult(xmlSqlQueryResult,
+                        @"d:\temp\sql\" + Path.GetFileNameWithoutExtension(sqlName) + ".xlsx");
                 Repository.RunModelSearch("", "", "", xmlEaOutput);
                 return xmlSqlQueryResult;
             }
