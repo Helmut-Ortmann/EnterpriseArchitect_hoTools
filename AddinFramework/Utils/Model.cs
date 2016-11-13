@@ -279,7 +279,8 @@ namespace EAAddinFramework.Utils
         /// </summary>
         /// <param name="searchName">EA Search name or SQL file name (uses path to find absolute path)</param>
         /// <param name="searchTerm"></param>
-        public string SearchRun(string searchName, string searchTerm)
+        /// <param name="exportToExcel"></param>
+        public string SearchRun(string searchName, string searchTerm, bool exportToExcel=false)
         {
             searchName = searchName.Trim();
             if (searchName == "") return "";
@@ -292,7 +293,7 @@ namespace EAAddinFramework.Utils
 
                 // run search
                 searchTerm = ReplaceSqlWildCards(searchTerm);
-                return SqlRun(searchName, sqlString, searchTerm);
+                return SqlRun(searchName, sqlString, searchTerm, exportToExcel);
 
 
             }
@@ -326,7 +327,7 @@ namespace EAAddinFramework.Utils
         /// <param name="sql"></param>
         /// <param name="searchText">Search Text to replace 'Search Term' macro</param>
         /// <returns>"" for nothing found or the EA SQL XML string with the found information</returns>
-        public string SqlRun(string sqlName, string sql, string searchText)
+        public string SqlRun(string sqlName, string sql, string searchText, bool exportToExcel=false)
         {
             // replace templates
             sql = SqlTemplates.ReplaceMacro(Repository, sql, searchText);
@@ -341,7 +342,7 @@ namespace EAAddinFramework.Utils
                 // output the query in EA Search Window
                 string xmlEaOutput = MakeEaXmlOutput(xmlSqlQueryResult);
                 //MakeExcelFileFromSqlResult(xmlSqlQueryResult, @"d:\temp\select.xls");
-                Excel.MakeExcelFileFromSqlResult(xmlSqlQueryResult, @"d:\temp\sql\"+ sqlName+ ".xlsx");
+                if (exportToExcel) Excel.MakeExcelFileFromSqlResult(xmlSqlQueryResult, @"d:\temp\sql\"+ sqlName+ ".xlsx");
                 Repository.RunModelSearch("", "", "", xmlEaOutput);
                 return xmlSqlQueryResult;
             }

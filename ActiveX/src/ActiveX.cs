@@ -2737,7 +2737,8 @@ namespace hoTools.ActiveX
         /// <param name="e"></param>
         private void exportExcelToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            _model.SearchRun(GetSearchName(), _txtSearchText.Text, exportToExcel:true);
+            _rtfListOfSearches.Visible = false;
         }
 
         private void exportCsvOfClipboardToExcelToolStripMenuItem_Click(object sender, EventArgs e)
