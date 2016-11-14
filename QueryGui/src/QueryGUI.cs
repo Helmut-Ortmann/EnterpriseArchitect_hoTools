@@ -493,7 +493,7 @@ namespace hoTools.Query
             var scriptFunction = row["FunctionObj"] as ScriptFunction;
 
             // replace templates, search term and more
-            string sql = SqlTemplates.ReplaceMacro(Repository, textBox.Text, txtSearchTerm.Text);
+            string sql = SqlTemplates.ReplaceMacro(Repository, textBox.Text, GetSearchTerm());
             if (sql == "") return;
 
             // run SQL, Script and ask whether to execute, skip script or break all together
@@ -978,6 +978,55 @@ Open EA Scripting Window, Update (3th Button from left) and the Script Group app
                     break;
             }
             Cursor.Current = Cursors.Default;
+        }
+
+        private void exportSQLResultsToExcelToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (tabControlSql.SelectedIndex == -1) return;
+                Cursor.Current = Cursors.WaitCursor;
+                // get TabPage
+                TabPage tabPage = tabControlSql.TabPages[tabControlSql.SelectedIndex];
+                // get SQL path
+                string sqlFile = ((SqlFile)tabPage.Tag).FullName;
+                Model.SearchRun(sqlFile, GetSearchTerm(), exportToExcel: true);
+
+        }
+
+        /// <summary>
+        /// Return Search Term. If default "Search Term" then return "" 
+        /// </summary>
+        /// <returns></returns>
+        private string GetSearchTerm()
+        {
+            if (txtSearchTerm.Text == "<Search Term>") return "";
+            return txtSearchTerm.Text;
+        }
+        /// <summary>
+        /// Show default text if empty
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtSearchTerm_Leave(object sender, EventArgs e)
+        {
+            if (txtSearchTerm.Text == "")
+            {
+                txtSearchTerm.Text = "<Search Term>";
+                txtSearchTerm.ForeColor = SystemColors.ControlDark;
+            }
+            else txtSearchTerm.ForeColor = SystemColors.WindowText;
+        }
+        /// <summary>
+        /// Show empty if default text
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtSearchTerm_Enter(object sender, EventArgs e)
+        {
+            txtSearchTerm.ForeColor = SystemColors.WindowText;
+            if (txtSearchTerm.Text == "<Search Term>")
+            {
+                txtSearchTerm.Text = "";
+            }
         }
     }
 }

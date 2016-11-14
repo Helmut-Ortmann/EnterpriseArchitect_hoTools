@@ -77,6 +77,9 @@ namespace hoTools.Query
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadStandardScriptsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.doToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportSQLResultsToExcelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportCSVClipboartToExcelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lastsqlErrorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lastSqlStringSentToEAToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -108,14 +111,18 @@ namespace hoTools.Query
             // txtSearchTerm
             // 
             this.txtSearchTerm.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtSearchTerm.Location = new System.Drawing.Point(258, 3);
+            this.txtSearchTerm.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.txtSearchTerm.Location = new System.Drawing.Point(288, 3);
             this.txtSearchTerm.MinimumSize = new System.Drawing.Size(50, 4);
             this.txtSearchTerm.Name = "txtSearchTerm";
-            this.txtSearchTerm.Size = new System.Drawing.Size(428, 20);
+            this.txtSearchTerm.Size = new System.Drawing.Size(399, 20);
             this.txtSearchTerm.TabIndex = 7;
+            this.txtSearchTerm.Text = "<Search Term>";
             this.toolTip1.SetToolTip(this.txtSearchTerm, resources.GetString("txtSearchTerm.ToolTip"));
+            this.txtSearchTerm.Enter += new System.EventHandler(this.txtSearchTerm_Enter);
             this.txtSearchTerm.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSearchTerm_KeyDown);
             this.txtSearchTerm.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtSearchTerm_KeyDown);
+            this.txtSearchTerm.Leave += new System.EventHandler(this.txtSearchTerm_Leave);
             this.txtSearchTerm.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.txtSearchTerm_MouseDoubleClick);
             // 
             // btnRunScriptForSql
@@ -298,7 +305,7 @@ namespace hoTools.Query
             // 
             this.btnUndo.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnUndo.Image = global::hoTools.Query.Properties.Resources.icon_undo_h;
-            this.btnUndo.Location = new System.Drawing.Point(163, 0);
+            this.btnUndo.Location = new System.Drawing.Point(189, 0);
             this.btnUndo.Margin = new System.Windows.Forms.Padding(0);
             this.btnUndo.Name = "btnUndo";
             this.btnUndo.Size = new System.Drawing.Size(32, 24);
@@ -311,7 +318,7 @@ namespace hoTools.Query
             // 
             this.btnRedo.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnRedo.Image = global::hoTools.Query.Properties.Resources.icon_redo_h;
-            this.btnRedo.Location = new System.Drawing.Point(196, 1);
+            this.btnRedo.Location = new System.Drawing.Point(222, 1);
             this.btnRedo.Margin = new System.Windows.Forms.Padding(1);
             this.btnRedo.Name = "btnRedo";
             this.btnRedo.Size = new System.Drawing.Size(31, 22);
@@ -325,7 +332,7 @@ namespace hoTools.Query
             this.btnSave.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnSave.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.Image")));
             this.btnSave.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnSave.Location = new System.Drawing.Point(67, 0);
+            this.btnSave.Location = new System.Drawing.Point(93, 0);
             this.btnSave.Margin = new System.Windows.Forms.Padding(0);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(32, 24);
@@ -340,7 +347,7 @@ namespace hoTools.Query
             this.btnSaveAll.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnSaveAll.Image = ((System.Drawing.Image)(resources.GetObject("btnSaveAll.Image")));
             this.btnSaveAll.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnSaveAll.Location = new System.Drawing.Point(99, 0);
+            this.btnSaveAll.Location = new System.Drawing.Point(125, 0);
             this.btnSaveAll.Margin = new System.Windows.Forms.Padding(0);
             this.btnSaveAll.Name = "btnSaveAll";
             this.btnSaveAll.Size = new System.Drawing.Size(32, 24);
@@ -355,7 +362,7 @@ namespace hoTools.Query
             this.btnSaveAs.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnSaveAs.Image = ((System.Drawing.Image)(resources.GetObject("btnSaveAs.Image")));
             this.btnSaveAs.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnSaveAs.Location = new System.Drawing.Point(131, 0);
+            this.btnSaveAs.Location = new System.Drawing.Point(157, 0);
             this.btnSaveAs.Margin = new System.Windows.Forms.Padding(0);
             this.btnSaveAs.Name = "btnSaveAs";
             this.btnSaveAs.Size = new System.Drawing.Size(32, 24);
@@ -368,7 +375,7 @@ namespace hoTools.Query
             // 
             this.btnRun.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnRun.Image = ((System.Drawing.Image)(resources.GetObject("btnRun.Image")));
-            this.btnRun.Location = new System.Drawing.Point(228, 0);
+            this.btnRun.Location = new System.Drawing.Point(254, 0);
             this.btnRun.Margin = new System.Windows.Forms.Padding(0);
             this.btnRun.Name = "btnRun";
             this.btnRun.Size = new System.Drawing.Size(23, 24);
@@ -397,7 +404,7 @@ namespace hoTools.Query
             this.lblTitle.AutoSize = true;
             this.lblTitle.Dock = System.Windows.Forms.DockStyle.Left;
             this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitle.Location = new System.Drawing.Point(692, 0);
+            this.lblTitle.Location = new System.Drawing.Point(693, 0);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(73, 25);
             this.lblTitle.TabIndex = 1;
@@ -406,13 +413,15 @@ namespace hoTools.Query
             // menuStrip1
             // 
             this.menuStrip1.Dock = System.Windows.Forms.DockStyle.None;
+            this.menuStrip1.GripMargin = new System.Windows.Forms.Padding(1, 1, 0, 1);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
+            this.doToolStripMenuItem,
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(0);
-            this.menuStrip1.Size = new System.Drawing.Size(67, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(93, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -559,6 +568,32 @@ namespace hoTools.Query
     "roup appears!";
             this.loadStandardScriptsToolStripMenuItem.Click += new System.EventHandler(this.loadStandardScriptsToolStripMenuItem_Click);
             // 
+            // doToolStripMenuItem
+            // 
+            this.doToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.exportSQLResultsToExcelToolStripMenuItem,
+            this.exportCSVClipboartToExcelToolStripMenuItem});
+            this.doToolStripMenuItem.Name = "doToolStripMenuItem";
+            this.doToolStripMenuItem.Padding = new System.Windows.Forms.Padding(0);
+            this.doToolStripMenuItem.Size = new System.Drawing.Size(26, 24);
+            this.doToolStripMenuItem.Text = "Do";
+            // 
+            // exportSQLResultsToExcelToolStripMenuItem
+            // 
+            this.exportSQLResultsToExcelToolStripMenuItem.Name = "exportSQLResultsToExcelToolStripMenuItem";
+            this.exportSQLResultsToExcelToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
+            this.exportSQLResultsToExcelToolStripMenuItem.Text = "Export SQL results to Excel";
+            this.exportSQLResultsToExcelToolStripMenuItem.ToolTipText = "Execute SQL Query and export results to Excel (*.xlsx). \r\nThe <Search Name> has t" +
+    "o contain a valid SQL Query.\r\n\r\nNo Excel is required.";
+            this.exportSQLResultsToExcelToolStripMenuItem.Click += new System.EventHandler(this.exportSQLResultsToExcelToolStripMenuItem_Click);
+            // 
+            // exportCSVClipboartToExcelToolStripMenuItem
+            // 
+            this.exportCSVClipboartToExcelToolStripMenuItem.Name = "exportCSVClipboartToExcelToolStripMenuItem";
+            this.exportCSVClipboartToExcelToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
+            this.exportCSVClipboartToExcelToolStripMenuItem.Text = "Export CSV Clipboart to Excel";
+            this.exportCSVClipboartToExcelToolStripMenuItem.ToolTipText = "Export *.csv content of Clipboard to Excel.\r\n\r\nNo Excel is required.";
+            // 
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -687,6 +722,7 @@ namespace hoTools.Query
             // 
             // flowLayoutPanel2
             // 
+            this.flowLayoutPanel2.AutoSize = true;
             this.flowLayoutPanel2.Controls.Add(this.menuStrip1);
             this.flowLayoutPanel2.Controls.Add(this.btnSave);
             this.flowLayoutPanel2.Controls.Add(this.btnSaveAll);
@@ -694,22 +730,21 @@ namespace hoTools.Query
             this.flowLayoutPanel2.Controls.Add(this.btnUndo);
             this.flowLayoutPanel2.Controls.Add(this.btnRedo);
             this.flowLayoutPanel2.Controls.Add(this.btnRun);
-            this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.flowLayoutPanel2.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel2.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(255, 25);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(277, 24);
             this.flowLayoutPanel2.TabIndex = 11;
             // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 3;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 255F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 285F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 79F));
+            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel2, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.lblTitle, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.txtSearchTerm, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel2, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
@@ -809,5 +844,8 @@ namespace hoTools.Query
         private System.Windows.Forms.ToolStripMenuItem runScriptSelectedItemToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem runTreeSelectedToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
+        private System.Windows.Forms.ToolStripMenuItem doToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exportSQLResultsToExcelToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exportCSVClipboartToExcelToolStripMenuItem;
     }
 }

@@ -231,8 +231,13 @@ namespace hoTools.ActiveX
             // get global settings
             _model = new Model(Repository);
 
+            _txtSearchName.ForeColor = SystemColors.WindowText;
             _txtSearchName.Text = AddinSettings.QuickSearchName;
-            if (_txtSearchName.Text.Trim().Equals("")) _txtSearchName.Text = "<Search Name>";
+            if (_txtSearchName.Text.Trim().Equals(""))
+            {
+                _txtSearchName.Text = "<Search Name>";
+                _txtSearchName.ForeColor = SystemColors.ControlDark;
+            }
             IntializeSearches();
 
             ParameterizeMenusAndButtons();
@@ -1014,6 +1019,7 @@ namespace hoTools.ActiveX
         /// <returns></returns>
         string GetSearchName()
         {
+            _txtSearchName.ForeColor = SystemColors.WindowText;
             string searchName = _txtSearchName.Text.Trim();
             if (searchName.Equals("<Search Name>")) searchName = "";
             return searchName;
@@ -1275,6 +1281,7 @@ namespace hoTools.ActiveX
             // _txtSearchText
             // 
             resources.ApplyResources(this._txtSearchText, "_txtSearchText");
+            this._txtSearchText.ForeColor = System.Drawing.SystemColors.ControlDark;
             this._txtSearchText.Name = "_txtSearchText";
             this._toolTip.SetToolTip(this._txtSearchText, resources.GetString("_txtSearchText.ToolTip"));
             this._txtSearchText.Enter += new System.EventHandler(this._txtSearchText_Enter);
@@ -1534,6 +1541,7 @@ namespace hoTools.ActiveX
             this._txtSearchName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this._txtSearchName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             resources.ApplyResources(this._txtSearchName, "_txtSearchName");
+            this._txtSearchName.ForeColor = System.Drawing.SystemColors.ControlDark;
             this._txtSearchName.Name = "_txtSearchName";
             this._toolTip.SetToolTip(this._txtSearchName, resources.GetString("_txtSearchName.ToolTip"));
             this._txtSearchName.Enter += new System.EventHandler(this._txtSearchName_Enter);
@@ -2527,7 +2535,12 @@ namespace hoTools.ActiveX
         /// <param name="e"></param>
         private void _txtSearchName_Leave(object sender, EventArgs e)
         {
-            if (_txtSearchName.Text.Trim().Equals("")) _txtSearchName.Text =  "<Search Name>" ;
+            _txtSearchName.ForeColor = SystemColors.WindowText;
+            if (_txtSearchName.Text.Trim().Equals(""))
+            {
+                _txtSearchName.Text =  "<Search Name>" ;
+                _txtSearchName.ForeColor = SystemColors.ControlDark;
+            }
         }
 
         private void rtfListOfSearches_Enter(object sender, EventArgs e)
@@ -2565,13 +2578,19 @@ namespace hoTools.ActiveX
 
         private void _txtSearchName_Enter(object sender, EventArgs e)
         {
+            _txtSearchName.ForeColor = SystemColors.WindowText;
             if (_txtSearchName.Text.Equals("<Search Name>")) _txtSearchName.Text = "";
             IntializeSearches();
             _rtfListOfSearches.Visible = false;
         }
         private void _txtSearchText_Leave(object sender, EventArgs e)
         {
-            if (_txtSearchText.Text.Trim().Equals("")) _txtSearchText.Text = "<Search Term>";
+            _txtSearchText.ForeColor = SystemColors.WindowText;
+            if (_txtSearchText.Text.Trim().Equals(""))
+            {
+                _txtSearchText.Text = "<Search Term>";
+                _txtSearchText.ForeColor = SystemColors.ControlDark;
+            }
             _rtfListOfSearches.Visible = false;
         }
         private void _txtSearchText_MouseLeave(object sender, EventArgs e)
@@ -2580,6 +2599,7 @@ namespace hoTools.ActiveX
         }
         private void _txtSearchText_Enter(object sender, EventArgs e)
         {
+            _txtSearchText.ForeColor = SystemColors.WindowText;
             if (_txtSearchText.Text.Contains("<Search Term>")) _txtSearchText.Text = "";
             _rtfListOfSearches.Visible = false;
         }
