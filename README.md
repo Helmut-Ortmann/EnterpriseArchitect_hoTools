@@ -18,11 +18,12 @@ Collection of useful tools (see also [WiKi](https://github.com/Helmut-Ortmann/En
     - Auto complete Search, Find Search + List all Searches
   - Port support
   - Favorites
+  - Export SQL query results to Excel (hoTools, SQL, Script)
   - Clipboard CSV to Excel
   - ..
 - [SQL](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/SQL) with tabbed Windows
     - Select, Insert, Delete, Update
-	- Export results to Excel
+	- Export SQL query results to Excel
     - Templates
     - Macros (easy access to EA items / Packages or complete Branches, a lot more than EA delivers)
     - Easy handling of SQL errors
@@ -112,9 +113,11 @@ Some features:
 ## Release 2.0.11
 - SQL Query Results can be exported to Excel (no Excel required)
 - Clipboard CSV content can be exported to Excel (no Excel required)
+- User SQL Search definitions possible
 - Reverse direction of edge (connector, dependency, association, information flow, SysML Item Flow)
 - Unused references deleted (no functional implication)
 - Implementation documentation added
+- Search can't find Tagged Values in of Package
 
 
 ## Release 2.0.10

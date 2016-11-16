@@ -261,7 +261,7 @@ namespace hoTools.ActiveX
         /// </summary>
         private void IntializeSearches()
         {
-            _txtSearchName.AutoCompleteCustomSource = Search.GetSearchesSuggestions(Repository);
+            _txtSearchName.AutoCompleteCustomSource = Search.GetSearchesSuggestions(Repository,AddinSettings.ConfigPath);
 
         } 
 

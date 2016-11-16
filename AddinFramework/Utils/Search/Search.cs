@@ -66,11 +66,12 @@ namespace AddinFramework.Util
         /// Makes a Forms Auto Completion List of all searches.
         /// </summary>
         /// <param name="rep"></param>
+        /// <param name="configFilePath">Configuration file with user configurations</param>
         /// <returns></returns>
-        public static AutoCompleteStringCollection GetSearchesSuggestions(EA.Repository rep)
+        public static AutoCompleteStringCollection GetSearchesSuggestions(EA.Repository rep, string configFilePath)
         {
 
-                LoadAllSearches(rep);
+                LoadAllSearches(rep, configFilePath);
                 LoadStaticSearchesSuggestions();
                 return _staticSearchesSuggestions;
             
@@ -108,13 +109,13 @@ namespace AddinFramework.Util
         /// - Searches defined in MDG (Program-Technology-Folder, MDG in file locations, MDG in URI locations)<para/> 
         /// - Local Search of PC <para/> 
         /// </summary>
-        static void LoadAllSearches(EA.Repository rep)
+        static void LoadAllSearches(EA.Repository rep, string configFilePath)
         {
             _staticAllSearches = new List<SearchItem>();
 
 
             // Load EA Standard Search Names for current release  
-            LoadEaStandardSearchesFromJason(rep.getRelease());
+            LoadEaStandardSearchesFromJason(rep.getRelease(), configFilePath);
 
             LoadSqlSearches();
 
@@ -127,13 +128,13 @@ namespace AddinFramework.Util
             // order
             _staticAllSearches = _staticAllSearches.OrderBy(a => a.Name)
                 .ToList();
-            LoadStaticSearchesSuggestions();
+            
 
         }
         /// <summary>
         /// Get the suggestions for the rtf box
         /// </summary>
-        static public string GetRtf()
+        public static string GetRtf()
         {
             // var s = _staticAllSearches.Select(e => $"{e.Score,2} {e.Category,-15} {e.Name}" ).ToList();
             var s = _staticAllSearches.Select(e => $"{e.Category,-10} {e.Name}" ).ToList();
@@ -144,7 +145,7 @@ namespace AddinFramework.Util
         /// <summary>
         /// Load the suggestions for the search Combo Box
         /// </summary>
-        public static void LoadStaticSearchesSuggestions()
+        private static void LoadStaticSearchesSuggestions()
         {
             _staticSearchesSuggestions = new AutoCompleteStringCollection();
             var result = _staticAllSearches.Select(e => e.Name).ToArray();
@@ -324,20 +325,30 @@ namespace AddinFramework.Util
         /// 
         /// </summary>
         /// <param name="eaRelease">The release of EA</param>
-        static void LoadEaStandardSearchesFromJason(string eaRelease)
+        static void LoadEaStandardSearchesFromJason(string eaRelease, string configFilePath)
         {
 
-            string jasonPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"EaStandardSearches.json");
+            string jasonPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
+                @"EaStandardSearches.json");
+            var eaSearches = LoadSearchesFromJason(jasonPath);
 
-            List<EaSearchItem> eaSearches;
-            using (StreamReader sr = new StreamReader(path: jasonPath) )
-            using (JsonReader reader = new JsonTextReader(sr))
-            {
-                JsonSerializer serializer = new JsonSerializer();
-                 eaSearches = serializer.Deserialize<List<EaSearchItem>>(reader);
-                
+            // add user search definitions
+            var jasonUserPatch = configFilePath + @"userSearches.json";
+            if (File.Exists(jasonUserPatch)) { 
+                var eaSearchesUser = LoadSearchesFromJason(jasonUserPatch);
 
+                try
+                {
+                    eaSearches.AddRange(eaSearchesUser);
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show($"{e.Message}",
+                        "Import user searches 'userSearches.json' impossible, double definitions!");
+                }
             }
+
+
             // filter only EA Searches used in current release
             foreach (var eaSearchItem in eaSearches)
             {
@@ -354,6 +365,17 @@ namespace AddinFramework.Util
             }
         }
 
+        private static List<EaSearchItem> LoadSearchesFromJason(string jasonPath)
+        {
+            List<EaSearchItem> eaSearches;
+            using (StreamReader sr = new StreamReader(path: jasonPath))
+            using (JsonReader reader = new JsonTextReader(sr))
+            {
+                JsonSerializer serializer = new JsonSerializer();
+                eaSearches = serializer.Deserialize<List<EaSearchItem>>(reader);
+            }
+            return eaSearches;
+        }
     }
     
 }

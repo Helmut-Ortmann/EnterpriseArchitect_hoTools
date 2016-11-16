@@ -497,8 +497,8 @@
         "EARelease": "13"
     },
     {
-        "Name": "Recently Resolved Changes",
-        "Description": "Recently Resolved Changes",
+        "Name": "Recently Completed Changes",
+        "Description": "Recently Completed Changes",
         "Category": "Change",
         "Favorite": "true",
         "EARelease": "13"
@@ -511,8 +511,8 @@
         "EARelease": "13"
     },
     {
-        "Name": "Unresolved Changes",
-        "Description": "Unresolved Changes",
+        "Name": "Incomplete Changes",
+        "Description": "Incomplete Changes",
         "Category": "Change",
         "Favorite": "true",
         "EARelease": "13"
