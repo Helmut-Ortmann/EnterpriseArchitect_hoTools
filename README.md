@@ -110,6 +110,9 @@ Some features:
 
 # Releases
 
+## Release 2.1
+
+
 ## Release 2.0.11
 - SQL Query Results can be exported to Excel (no Excel required)
 - Clipboard CSV content can be exported to Excel (no Excel required)
