@@ -1,0 +1,51 @@
+﻿[
+    /* 
+    * user *.json configuration file for user EA Searches
+    * Example to change according to your needs
+    * FileName: UserSearches.json
+    *
+    * Name:          Name of the search
+    * Description:   Description, possible use as tooltip
+    * Category:      Your category, see also .\AppData\Local\Apps\hoTools\EaStandardSearches.json
+    * Favorite:      true/false is a favorite
+    * EARelease:     The EA release the search is used, comma separated list
+    *
+    * Example(see also official json specification (JSON.NET is used: It additionally supports comments)
+    * [
+    *   {
+    *      "Name": "xx1",
+    *      "Description": "Example Search xx1",
+    *      "Category": "my",
+    *      "Favorite": "true",
+    *      "EARelease": "9,10,11,12,12.1,13"
+    *   },
+    *   {
+    *   }
+    *]
+    *
+    */
+    /* Category: my */
+    {
+        "Name": "xx1",
+        "Description": "My Search Specification for xx1",
+        "Category": "my",
+        "Favorite": "true",
+        "EARelease": "9,10,11,12,12.1,13"
+    },
+    {
+        "Name": "xx2",
+        "Description": "My Search Specification for xx2",
+        "Category": "my",
+        "Favorite": "true",
+        "EARelease": "9,10,11,12,12.1,13"
+    },
+   
+    /* Category my2 */
+    {
+        "Name": "xx3",
+        "Description": "My Search Specification for xx2",
+        "Category": "my2",
+        "Favorite": "true",
+        "EARelease": "9,10,11,12,12.1,13"
+    }
+]
