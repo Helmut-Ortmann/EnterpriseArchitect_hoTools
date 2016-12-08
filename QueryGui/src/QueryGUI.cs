@@ -17,6 +17,7 @@ using System.Reflection;
 using AddinFramework.Util;
 using AddinFramework.Util.Script;
 using EA;
+using hoTools.Utils.Excel;
 
 // Resource Manager
 
@@ -1027,6 +1028,11 @@ Open EA Scripting Window, Update (3th Button from left) and the Script Group app
             {
                 txtSearchTerm.Text = "";
             }
+        }
+
+        private void exportCSVClipboartToExcelToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Excel.MakeExcelFileFromCsv();
         }
     }
 }

@@ -11,6 +11,13 @@ namespace hoTools.Utils.Excel
 {
     public static class Excel
     {
+        /// <summary>
+        /// Make Excel file from *.csv stored in Clipboard.
+        /// It uses the List Sepaerator of the current culture. Usually it's ';' but might differ.
+        /// The ValueDelimiter of the CSV converter is with it's default value. EA don't support Value Delimiter.
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <returns></returns>
         public static bool MakeExcelFileFromCsv(string fileName = @"x:\temp\sql\csv.xlsx")
         {
 
@@ -18,16 +25,28 @@ namespace hoTools.Utils.Excel
             {
                 var csv = Clipboard.GetText(TextDataFormat.Text);
                 var dt = new DataTable();
-                using (var reader = CsvReader.FromCsvString(csv))
+                char seperator =
+                            Convert.ToChar(System.Globalization.CultureInfo.CurrentCulture.TextInfo.ListSeparator);
+                try
                 {
-                    char seperator = Convert.ToChar(System.Globalization.CultureInfo.CurrentCulture.TextInfo.ListSeparator);
-                    reader.ValueSeparator = seperator;   // this will be used between each value
-                    //reader.ValueDelimiter = ';';   // this will be used to wrap values that require it (because they contain the separator or a linefeed character)
-                    reader.ReadHeaderRecord();
-                   
-                    dt.Fill(reader);
+
+
+                    using (var reader = CsvReader.FromCsvString(csv))
+                    {
+                        
+                        reader.ValueSeparator = seperator; // this will be used between each value
+                        //reader.ValueDelimiter = ';';   // this will be used to wrap values that require it (because they contain the separator or a linefeed character)
+                        reader.ReadHeaderRecord();
+
+                        dt.Fill(reader);
+                    }
+                    if (!SaveTableToExcel(ref fileName, dt)) return false;
                 }
-                if (!SaveTableToExcel(ref fileName, dt)) return false;
+                catch (Exception e)
+                {
+                    MessageBox.Show($"Seperator:'{seperator}'\r\n {e.Message}","Cant't convert Clipboard content to Excel");
+                    return false;
+                }
             }
 
             return true;
