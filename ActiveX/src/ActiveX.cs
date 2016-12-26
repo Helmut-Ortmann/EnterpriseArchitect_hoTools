@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
@@ -1572,6 +1573,7 @@ namespace hoTools.ActiveX
             // 
             // contextMenuRtf
             // 
+            this.contextMenuRtf.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.contextMenuRtf.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.runToolStripMenuItem,
             this.editSQLToolStripMenuItem,
@@ -2614,12 +2616,13 @@ namespace hoTools.ActiveX
             _toolTipRtfListOfSearches.Hide(_rtfListOfSearches);
         }
         /// <summary>
-        /// Update Scripts
+        /// Update Scripts and Searches
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void updateScriptsToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            IntializeSearches();
             AddinSettings.UpdateModel(_model);
         }
 

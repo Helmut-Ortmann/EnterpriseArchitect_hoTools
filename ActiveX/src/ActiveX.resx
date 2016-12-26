@@ -196,13 +196,13 @@
     <value>Magenta</value>
   </data>
   <data name="_toolStripSearchBtn1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>23, 24</value>
   </data>
   <data name="_toolStripSearchBtn1.Text" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="_toolStripSearchBtn2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>23, 24</value>
   </data>
   <data name="_toolStripSearchBtn2.Text" xml:space="preserve">
     <value>2</value>
@@ -211,7 +211,7 @@
     <value>Magenta</value>
   </data>
   <data name="_toolStripSearchBtn3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>28, 24</value>
   </data>
   <data name="_toolStripSearchBtn3.Text" xml:space="preserve">
     <value>F3</value>
@@ -220,7 +220,7 @@
     <value>Magenta</value>
   </data>
   <data name="_toolStripSearchBtn4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>28, 24</value>
   </data>
   <data name="_toolStripSearchBtn4.Text" xml:space="preserve">
     <value>F4</value>
@@ -229,19 +229,19 @@
     <value>Magenta</value>
   </data>
   <data name="_toolStripSearchBtn5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>28, 24</value>
   </data>
   <data name="_toolStripSearchBtn5.Text" xml:space="preserve">
     <value>F5</value>
   </data>
   <data name="_toolStripSeparator6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 25</value>
+    <value>6, 27</value>
   </data>
   <data name="_toolStripServiceBtn1.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
   <data name="_toolStripServiceBtn1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>23, 24</value>
   </data>
   <data name="_toolStripServiceBtn1.Text" xml:space="preserve">
     <value>1</value>
@@ -250,7 +250,7 @@
     <value>Magenta</value>
   </data>
   <data name="_toolStripServiceBtn2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>23, 24</value>
   </data>
   <data name="_toolStripServiceBtn2.Text" xml:space="preserve">
     <value>2</value>
@@ -259,7 +259,7 @@
     <value>Magenta</value>
   </data>
   <data name="_toolStripServiceBtn3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>23, 24</value>
   </data>
   <data name="_toolStripServiceBtn3.Text" xml:space="preserve">
     <value>3</value>
@@ -268,7 +268,7 @@
     <value>Magenta</value>
   </data>
   <data name="_toolStripServiceBtn4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>23, 24</value>
   </data>
   <data name="_toolStripServiceBtn4.Text" xml:space="preserve">
     <value>4</value>
@@ -277,7 +277,7 @@
     <value>Magenta</value>
   </data>
   <data name="_toolStripServiceBtn5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 22</value>
+    <value>23, 24</value>
   </data>
   <data name="_toolStripServiceBtn5.Text" xml:space="preserve">
     <value>5</value>
@@ -286,7 +286,7 @@
     <value>3, 0</value>
   </data>
   <data name="_toolStripQuery.Size" type="System.Drawing.Size, System.Drawing">
-    <value>248, 25</value>
+    <value>263, 27</value>
   </data>
   <data name="_toolStripQuery.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -340,7 +340,7 @@
     <value>1, 1, 1, 1</value>
   </data>
   <data name="_txtSearchText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>213, 20</value>
+    <value>213, 22</value>
   </data>
   <data name="_txtSearchText.TabIndex" type="System.Int32, mscorlib">
     <value>27</value>
@@ -1319,7 +1319,7 @@ Even information flow realized.</value>
     <value>Top</value>
   </data>
   <data name="_panelConveyedItems.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 123</value>
+    <value>0, 127</value>
   </data>
   <data name="_panelConveyedItems.Size" type="System.Drawing.Size, System.Drawing">
     <value>461, 25</value>
@@ -1351,10 +1351,10 @@ Even information flow realized.</value>
     <value>Fill</value>
   </data>
   <data name="_cmbSearchName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 326</value>
+    <value>0, 330</value>
   </data>
   <data name="_cmbSearchName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>461, 21</value>
+    <value>461, 24</value>
   </data>
   <data name="_cmbSearchName.TabIndex" type="System.Int32, mscorlib">
     <value>46</value>
@@ -1390,7 +1390,7 @@ Even information flow realized.</value>
     <value>1, 1, 1, 1</value>
   </data>
   <data name="_txtSearchName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>244, 20</value>
+    <value>244, 22</value>
   </data>
   <data name="_txtSearchName.TabIndex" type="System.Int32, mscorlib">
     <value>47</value>
@@ -1458,7 +1458,7 @@ An SQL Query you can export to Excel by:
     <value>554, 17</value>
   </metadata>
   <data name="runToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>166, 22</value>
+    <value>200, 26</value>
   </data>
   <data name="runToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Run</value>
@@ -1470,7 +1470,7 @@ Results are shown in the EA Model Search Window.
 You may have inserted a &lt;Search Term&gt;.</value>
   </data>
   <data name="editSQLToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>166, 22</value>
+    <value>200, 26</value>
   </data>
   <data name="editSQLToolStripMenuItem.Text" xml:space="preserve">
     <value>Edit SQL</value>
@@ -1479,7 +1479,7 @@ You may have inserted a &lt;Search Term&gt;.</value>
     <value>Edit the SQL File (only if SQL File)</value>
   </data>
   <data name="showDescriptionToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>166, 22</value>
+    <value>200, 26</value>
   </data>
   <data name="showDescriptionToolStripMenuItem.Text" xml:space="preserve">
     <value>Show Description</value>
@@ -1490,7 +1490,7 @@ You may have inserted a &lt;Search Term&gt;.</value>
 - SQL Searches are described via '// My documentation with exactly one leading blank at th beginning of file.</value>
   </data>
   <data name="contextMenuRtf.Size" type="System.Drawing.Size, System.Drawing">
-    <value>167, 70</value>
+    <value>201, 82</value>
   </data>
   <data name="&gt;&gt;contextMenuRtf.Name" xml:space="preserve">
     <value>contextMenuRtf</value>
@@ -1537,7 +1537,7 @@ You may have inserted a &lt;Search Term&gt;.</value>
     <value>434, 17</value>
   </metadata>
   <data name="_settingGeneralToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>326, 22</value>
+    <value>402, 26</value>
   </data>
   <data name="_settingGeneralToolStripMenuItem.Text" xml:space="preserve">
     <value>Settings &amp;General</value>
@@ -1550,7 +1550,7 @@ You may have inserted a &lt;Search Term&gt;.</value>
 - MDG to load</value>
   </data>
   <data name="_settingsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>326, 22</value>
+    <value>402, 26</value>
   </data>
   <data name="_settingsToolStripMenuItem.Text" xml:space="preserve">
     <value>Settings Default &amp;Linestyle</value>
@@ -1559,7 +1559,7 @@ You may have inserted a &lt;Search Term&gt;.</value>
     <value>Setting the default linestyle of Diagram Types</value>
   </data>
   <data name="_settingsGlobalKeysToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>326, 22</value>
+    <value>402, 26</value>
   </data>
   <data name="_settingsGlobalKeysToolStripMenuItem.Text" xml:space="preserve">
     <value>Settings Global Keys (Searches, Services, Scripts)</value>
@@ -1570,7 +1570,7 @@ You may have inserted a &lt;Search Term&gt;.</value>
 - Services (fix implemented in hoTools)</value>
   </data>
   <data name="_settingsToolbarToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>326, 22</value>
+    <value>402, 26</value>
   </data>
   <data name="_settingsToolbarToolStripMenuItem.Text" xml:space="preserve">
     <value>Settings Toolbar (Searches, Services, Scripts)</value>
@@ -1581,7 +1581,7 @@ You may have inserted a &lt;Search Term&gt;.</value>
 - at max 5 Services or Scripts</value>
   </data>
   <data name="_settingsQueryAndSctipToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>326, 22</value>
+    <value>402, 26</value>
   </data>
   <data name="_settingsQueryAndSctipToolStripMenuItem.Text" xml:space="preserve">
     <value>Settings SQL and Script</value>
@@ -1593,21 +1593,16 @@ You may have inserted a &lt;Search Term&gt;.</value>
 - Disable</value>
   </data>
   <data name="updateScriptsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>326, 22</value>
+    <value>402, 26</value>
   </data>
   <data name="updateScriptsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Update Scripts</value>
+    <value>Update Searches &amp; Scripts</value>
   </data>
   <data name="updateScriptsToolStripMenuItem.ToolTipText" xml:space="preserve">
-    <value>After you've changed a Script update all Scripts with this command.
-
-Changes will only take effect:
-- Restart EA
-- Change Model
-- Dialog Settings Key or Toolbar</value>
+    <value>After you've changed a Search or a Script update all with this command.</value>
   </data>
   <data name="_fileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>37, 20</value>
+    <value>44, 24</value>
   </data>
   <data name="_fileToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;File</value>
@@ -1616,7 +1611,7 @@ Changes will only take effect:
     <value>If a Script is added or changed you have to use this command.</value>
   </data>
   <data name="exportExcelToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>242, 22</value>
+    <value>296, 26</value>
   </data>
   <data name="exportExcelToolStripMenuItem.Text" xml:space="preserve">
     <value>Export SQL results to Excel</value>
@@ -1628,7 +1623,7 @@ The &lt;Search Name&gt; has to contain a valid SQL Query.
 No Excel is required.</value>
   </data>
   <data name="exportCsvOfClipboardToExcelToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>242, 22</value>
+    <value>296, 26</value>
   </data>
   <data name="exportCsvOfClipboardToExcelToolStripMenuItem.Text" xml:space="preserve">
     <value>Export csv of Clipboard to Excel</value>
@@ -1639,10 +1634,10 @@ No Excel is required.</value>
 No Excel is required.</value>
   </data>
   <data name="toolStripSeparator3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>239, 6</value>
+    <value>293, 6</value>
   </data>
   <data name="_createActivityForOperationToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>242, 22</value>
+    <value>296, 26</value>
   </data>
   <data name="_createActivityForOperationToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Create Activity for Operation</value>
@@ -1659,7 +1654,7 @@ Select:
 - Operation</value>
   </data>
   <data name="_updateActivityFromOperationToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>242, 22</value>
+    <value>296, 26</value>
   </data>
   <data name="_updateActivityFromOperationToolStripMenuItem.Text" xml:space="preserve">
     <value>Update Activity from Operation</value>
@@ -1676,10 +1671,10 @@ Select:
 - Operation </value>
   </data>
   <data name="_toolStripSeparator10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>239, 6</value>
+    <value>293, 6</value>
   </data>
   <data name="_showFolderToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>242, 22</value>
+    <value>296, 26</value>
   </data>
   <data name="_showFolderToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Show Folder</value>
@@ -1692,16 +1687,16 @@ Select:
 The application to open the folder: See global Settings</value>
   </data>
   <data name="_copyGuidsqlToClipboardToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>242, 22</value>
+    <value>296, 26</value>
   </data>
   <data name="_copyGuidsqlToClipboardToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;SQL select &amp; update/create/insert</value>
   </data>
   <data name="_toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>239, 6</value>
+    <value>293, 6</value>
   </data>
   <data name="_changeAuthorToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>242, 22</value>
+    <value>296, 26</value>
   </data>
   <data name="_changeAuthorToolStripMenuItem.Text" xml:space="preserve">
     <value>Change Author</value>
@@ -1712,7 +1707,7 @@ The application to open the folder: See global Settings</value>
 - Element</value>
   </data>
   <data name="_changeAuthorRecursiveToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>242, 22</value>
+    <value>296, 26</value>
   </data>
   <data name="_changeAuthorRecursiveToolStripMenuItem.Text" xml:space="preserve">
     <value>Change Author recursive</value>
@@ -1723,7 +1718,7 @@ The application to open the folder: See global Settings</value>
 - Elements</value>
   </data>
   <data name="_doToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>34, 20</value>
+    <value>41, 24</value>
   </data>
   <data name="_doToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Do</value>
@@ -1732,7 +1727,7 @@ The application to open the folder: See global Settings</value>
     <value>Change Author of selected Package / Element</value>
   </data>
   <data name="_changeXmlFileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>291, 22</value>
+    <value>356, 26</value>
   </data>
   <data name="_changeXmlFileToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Change XML file</value>
@@ -1741,7 +1736,7 @@ The application to open the folder: See global Settings</value>
     <value>Change the *.xml file path for a Version controlled package</value>
   </data>
   <data name="_showFolderVCorCodeToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>291, 22</value>
+    <value>356, 26</value>
   </data>
   <data name="_showFolderVCorCodeToolStripMenuItem.Text" xml:space="preserve">
     <value>Show folder VC controlled package</value>
@@ -1754,7 +1749,7 @@ In settings you may choose your file manager.
 Default: Explorer.exe</value>
   </data>
   <data name="_getVcLatesrecursiveToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>291, 22</value>
+    <value>356, 26</value>
   </data>
   <data name="_getVcLatesrecursiveToolStripMenuItem.Text" xml:space="preserve">
     <value>Get VC latest (recursive)</value>
@@ -1763,28 +1758,28 @@ Default: Explorer.exe</value>
     <value>Get Version Control latest package (recursive).</value>
   </data>
   <data name="_toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>288, 6</value>
+    <value>353, 6</value>
   </data>
   <data name="_showTortoiseLogToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>291, 22</value>
+    <value>356, 26</value>
   </data>
   <data name="_showTortoiseLogToolStripMenuItem.Text" xml:space="preserve">
     <value>Show Tortoise Log</value>
   </data>
   <data name="_showTortoiseRepoBrowserToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>291, 22</value>
+    <value>356, 26</value>
   </data>
   <data name="_showTortoiseRepoBrowserToolStripMenuItem.Text" xml:space="preserve">
     <value>Show Tortoise Repo Browser</value>
   </data>
   <data name="_setSvnKeywordsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>291, 22</value>
+    <value>356, 26</value>
   </data>
   <data name="_setSvnKeywordsToolStripMenuItem.Text" xml:space="preserve">
     <value>Set svn Keywords</value>
   </data>
   <data name="_setSvnModuleTaggedValuesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>291, 22</value>
+    <value>356, 26</value>
   </data>
   <data name="_setSvnModuleTaggedValuesToolStripMenuItem.Text" xml:space="preserve">
     <value>Set svn Module Tagged Values</value>
@@ -1798,7 +1793,7 @@ Default: Explorer.exe</value>
     <value>False</value>
   </data>
   <data name="_setSvnModuleTaggedValuesrecursiveToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>291, 22</value>
+    <value>356, 26</value>
   </data>
   <data name="_setSvnModuleTaggedValuesrecursiveToolStripMenuItem.Text" xml:space="preserve">
     <value>Set svn Module Tagged Values (recursive)</value>
@@ -1814,7 +1809,7 @@ Select a package to proceed all recursive package.</value>
     <value>False</value>
   </data>
   <data name="_versionControlToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>34, 20</value>
+    <value>39, 24</value>
   </data>
   <data name="_versionControlToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;VC</value>
@@ -1823,7 +1818,7 @@ Select a package to proceed all recursive package.</value>
     <value>Functions related to Version Control</value>
   </data>
   <data name="_movePortsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>375, 22</value>
+    <value>459, 26</value>
   </data>
   <data name="_movePortsToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Copy ports</value>
@@ -1838,10 +1833,10 @@ Target (last selected item):
 - Component</value>
   </data>
   <data name="_toolStripSeparator7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>372, 6</value>
+    <value>456, 6</value>
   </data>
   <data name="_deletePortsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>375, 22</value>
+    <value>459, 26</value>
   </data>
   <data name="_deletePortsToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Delete Ports</value>
@@ -1853,10 +1848,10 @@ Target (last selected item):
 -- Class, Component</value>
   </data>
   <data name="_toolStripSeparator3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>372, 6</value>
+    <value>456, 6</value>
   </data>
   <data name="_connectPortsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>375, 22</value>
+    <value>459, 26</value>
   </data>
   <data name="_connectPortsToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Connect Ports between Components</value>
@@ -1870,7 +1865,7 @@ to each selected Class / Component / port with the same port name.
 </value>
   </data>
   <data name="_connectPortsInsideComponentsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>375, 22</value>
+    <value>459, 26</value>
   </data>
   <data name="_connectPortsInsideComponentsToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Connect Ports inside Components</value>
@@ -1879,10 +1874,10 @@ to each selected Class / Component / port with the same port name.
     <value>Connect ports with the same name inside an Element</value>
   </data>
   <data name="_toolStripSeparator8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>372, 6</value>
+    <value>456, 6</value>
   </data>
   <data name="_makeConnectorsUnspecifiedDirectionToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>375, 22</value>
+    <value>459, 26</value>
   </data>
   <data name="_makeConnectorsUnspecifiedDirectionToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Make Connectors: Unspecified direction</value>
@@ -1893,10 +1888,10 @@ to each selected Class / Component / port with the same port name.
 Select Elements to make direction of all Port connections to unspecified.</value>
   </data>
   <data name="_toolStripSeparator4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>372, 6</value>
+    <value>456, 6</value>
   </data>
   <data name="_showPortsInDiagramObjectsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>375, 22</value>
+    <value>459, 26</value>
   </data>
   <data name="_showPortsInDiagramObjectsToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Show Ports on Diagram</value>
@@ -1907,7 +1902,7 @@ Select Elements to make direction of all Port connections to unspecified.</value
 </value>
   </data>
   <data name="_showSendingPortsLeftRecievingPortsRightToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>375, 22</value>
+    <value>459, 26</value>
   </data>
   <data name="_showSendingPortsLeftRecievingPortsRightToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Show receiving Ports left, sending Ports right on Diagram</value>
@@ -1918,7 +1913,7 @@ Select Elements to make direction of all Port connections to unspecified.</value
 </value>
   </data>
   <data name="_hidePortsInDiagramToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>375, 22</value>
+    <value>459, 26</value>
   </data>
   <data name="_hidePortsInDiagramToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Remove Ports from Diagram</value>
@@ -1929,10 +1924,10 @@ Select Elements to make direction of all Port connections to unspecified.</value
 - Selected ports</value>
   </data>
   <data name="_toolStripSeparator5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>372, 6</value>
+    <value>456, 6</value>
   </data>
   <data name="_unhidePortsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>375, 22</value>
+    <value>459, 26</value>
   </data>
   <data name="_unhidePortsToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Show Ports Labels</value>
@@ -1943,7 +1938,7 @@ Select Elements to make direction of all Port connections to unspecified.</value
 - Ports (embedded Elements)</value>
   </data>
   <data name="_hidePortsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>375, 22</value>
+    <value>459, 26</value>
   </data>
   <data name="_hidePortsToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Hide Ports Labels</value>
@@ -1954,10 +1949,10 @@ Select Elements to make direction of all Port connections to unspecified.</value
 - Ports (embedded Elements)</value>
   </data>
   <data name="_toolStripSeparator11.Size" type="System.Drawing.Size, System.Drawing">
-    <value>372, 6</value>
+    <value>456, 6</value>
   </data>
   <data name="_movePortLabelLeftToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>375, 22</value>
+    <value>459, 26</value>
   </data>
   <data name="_movePortLabelLeftToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Move Port Labels left to a Left Position</value>
@@ -1971,7 +1966,7 @@ Tip:
 - Fine tune position by a step/bit left or right</value>
   </data>
   <data name="_movePortLabelRightPositionToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>375, 22</value>
+    <value>459, 26</value>
   </data>
   <data name="_movePortLabelRightPositionToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Move Port Labels to a Right Position </value>
@@ -1985,10 +1980,10 @@ Tip:
 - Fine tune position by a step/bit left or right</value>
   </data>
   <data name="_toolStripSeparator12.Size" type="System.Drawing.Size, System.Drawing">
-    <value>372, 6</value>
+    <value>456, 6</value>
   </data>
   <data name="_movePortLabelLeftToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>375, 22</value>
+    <value>459, 26</value>
   </data>
   <data name="_movePortLabelLeftToolStripMenuItem1.Text" xml:space="preserve">
     <value>&amp;Move Port Labels a step left</value>
@@ -1997,7 +1992,7 @@ Tip:
     <value>Ports selected: It moves the selected Ports a little left</value>
   </data>
   <data name="_movePortLabelRightToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>375, 22</value>
+    <value>459, 26</value>
   </data>
   <data name="_movePortLabelRightToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Move Port Labels a step right</value>
@@ -2006,10 +2001,10 @@ Tip:
     <value>Ports selected: It moves the selected Ports a little right</value>
   </data>
   <data name="_toolStripSeparator9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>372, 6</value>
+    <value>456, 6</value>
   </data>
   <data name="_orderDiagramItemsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>375, 22</value>
+    <value>459, 26</value>
   </data>
   <data name="_orderDiagramItemsToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Order Diagram items</value>
@@ -2019,7 +2014,7 @@ Tip:
 </value>
   </data>
   <data name="_portToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>41, 20</value>
+    <value>47, 24</value>
   </data>
   <data name="_portToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Port</value>
@@ -2031,7 +2026,7 @@ Tip:
 - Connect</value>
   </data>
   <data name="_getLastSqlErrorToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>171, 22</value>
+    <value>206, 26</value>
   </data>
   <data name="_getLastSqlErrorToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Get last SQL Error</value>
@@ -2040,10 +2035,10 @@ Tip:
     <value>Get the last EA sql error from %APPDATA%Sparx Systems\EA\DBError.txt</value>
   </data>
   <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>168, 6</value>
+    <value>203, 6</value>
   </data>
   <data name="_helpToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>171, 22</value>
+    <value>206, 26</value>
   </data>
   <data name="_helpToolStripMenuItem1.Text" xml:space="preserve">
     <value>GitHub &amp;WiKi</value>
@@ -2052,7 +2047,7 @@ Tip:
     <value>Show WiKi at GitHub</value>
   </data>
   <data name="gitHubToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>171, 22</value>
+    <value>206, 26</value>
   </data>
   <data name="gitHubToolStripMenuItem.Text" xml:space="preserve">
     <value>GitHub Repository</value>
@@ -2061,10 +2056,10 @@ Tip:
     <value>Show GitHub Repository</value>
   </data>
   <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>168, 6</value>
+    <value>203, 6</value>
   </data>
   <data name="_aboutToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>171, 22</value>
+    <value>206, 26</value>
   </data>
   <data name="_aboutToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;About</value>
@@ -2073,7 +2068,7 @@ Tip:
     <value>Information about hoTools</value>
   </data>
   <data name="_helpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>44, 20</value>
+    <value>53, 24</value>
   </data>
   <data name="_helpToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Help</value>
@@ -2082,7 +2077,7 @@ Tip:
     <value>0, 0</value>
   </data>
   <data name="_menuStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>461, 24</value>
+    <value>461, 28</value>
   </data>
   <data name="_menuStrip1.TabIndex" type="System.Int32, mscorlib">
     <value>22</value>
@@ -2106,7 +2101,7 @@ Tip:
     <value>Top</value>
   </data>
   <data name="_panelButtons.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 24</value>
+    <value>0, 28</value>
   </data>
   <data name="_panelButtons.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
@@ -2136,7 +2131,7 @@ Tip:
     <value>Top</value>
   </data>
   <data name="_panelLineStyle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 71</value>
+    <value>0, 75</value>
   </data>
   <data name="_panelLineStyle.Size" type="System.Drawing.Size, System.Drawing">
     <value>461, 52</value>
@@ -2163,7 +2158,7 @@ Tip:
     <value>Top</value>
   </data>
   <data name="_panelFavorite.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 148</value>
+    <value>0, 152</value>
   </data>
   <data name="_panelFavorite.Size" type="System.Drawing.Size, System.Drawing">
     <value>461, 24</value>
@@ -2190,7 +2185,7 @@ Tip:
     <value>Top</value>
   </data>
   <data name="_panelNote.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 251</value>
+    <value>0, 255</value>
   </data>
   <data name="_panelNote.Size" type="System.Drawing.Size, System.Drawing">
     <value>461, 25</value>
@@ -2223,7 +2218,7 @@ Tip:
     <value>80, 7</value>
   </data>
   <data name="_lblPorts.Size" type="System.Drawing.Size, System.Drawing">
-    <value>46, 20</value>
+    <value>57, 25</value>
   </data>
   <data name="_lblPorts.TabIndex" type="System.Int32, mscorlib">
     <value>38</value>
@@ -2247,7 +2242,7 @@ Tip:
     <value>Top</value>
   </data>
   <data name="_panelPort.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 276</value>
+    <value>0, 280</value>
   </data>
   <data name="_panelPort.Size" type="System.Drawing.Size, System.Drawing">
     <value>461, 50</value>
@@ -2274,7 +2269,7 @@ Tip:
     <value>Top</value>
   </data>
   <data name="_panelAdvanced.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 172</value>
+    <value>0, 176</value>
   </data>
   <data name="_panelAdvanced.Size" type="System.Drawing.Size, System.Drawing">
     <value>461, 79</value>
@@ -2304,7 +2299,7 @@ Tip:
     <value>Top</value>
   </data>
   <data name="_panelQuickSearch.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 49</value>
+    <value>0, 53</value>
   </data>
   <data name="_panelQuickSearch.RowCount" type="System.Int32, mscorlib">
     <value>2</value>

@@ -11,14 +11,9 @@ using System.Xml.Linq;
 using hoTools.Utils.Configuration;
 using hoTools.Utils.Excel;
 
-// Excel
-using System.Runtime.InteropServices;
-//using Excel = Microsoft.Office.Interop.Excel;
-
 
 using hoTools.Utils.SQL;
 using System.IO;
-using System.Linq.Expressions;
 using hoTools.Utils;
 
 namespace EAAddinFramework.Utils

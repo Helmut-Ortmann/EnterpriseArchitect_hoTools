@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using System.Configuration;
 using System.Linq;
 using hoTools.EaServices;
+using AddinFramework.Util;
 using hoTools.Connectors;
 using System.Collections.Generic;
 using Control.EaAddinShortcuts;
@@ -1214,8 +1215,6 @@ namespace hoTools.Settings
         public void UpdateKeysAndToolbarsServices()
         {
             UpdateToolbarServiceButtons();
-
-
             UpdateKeysService();
         }
 

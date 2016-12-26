@@ -189,7 +189,8 @@ namespace EAAddinFramework.Utils
 	        return "";
 	    }
         /// <summary>
-        /// loads all static includable scripts. These scripts are stored outside the model and can not be changed by the user
+        /// loads all static includable scripts. 
+        /// These scripts are stored outside the model and can not be changed by the user
         /// </summary>
         static void LoadStaticIncludableScripts()
 		{

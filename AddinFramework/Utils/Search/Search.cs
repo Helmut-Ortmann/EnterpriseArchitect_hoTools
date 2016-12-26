@@ -27,7 +27,7 @@ namespace AddinFramework.Util
     /// </summary>
     public static class Search
     {
-        static List<SearchItem> _staticAllSearches;
+        public static List<SearchItem> _staticAllSearches;
         static AutoCompleteStringCollection _staticSearchesSuggestions;
 
         // configuration as singleton
@@ -109,14 +109,28 @@ namespace AddinFramework.Util
         /// - Searches defined in MDG (Program-Technology-Folder, MDG in file locations, MDG in URI locations)<para/> 
         /// - Local Search of PC <para/> 
         /// </summary>
-        static void LoadAllSearches(EA.Repository rep, string configFilePath)
+        public static void LoadAllSearches(EA.Repository rep, string configFilePath)
         {
             _staticAllSearches = new List<SearchItem>();
 
 
             // Load EA Standard Search Names for current release  
             LoadEaStandardSearchesFromJason(rep.getRelease(), configFilePath);
+            // Load stored searches like MDGs from different sources
+            LoadSearches(rep);
 
+
+
+
+        }
+        /// <summary>
+        /// LoadSearches
+        /// - 
+        /// </summary>
+        /// <param name="rep"></param>
+        static void LoadSearches(EA.Repository rep)
+        {
+            // Load possible SQL seaerches from SQL Path
             LoadSqlSearches();
 
             //local scripts
@@ -128,7 +142,6 @@ namespace AddinFramework.Util
             // order
             _staticAllSearches = _staticAllSearches.OrderBy(a => a.Name)
                 .ToList();
-            
 
         }
         /// <summary>
@@ -226,23 +239,22 @@ namespace AddinFramework.Util
         {
             try
             {
+                string category = "My";
                 var mdg  = XElement.Parse(mdgXmlContent);
 
 
-                // get MDG data (ID, Name) 
-
-                string id = "My EA Searches";
-                //string name = "";
-                //string notes = "";
+                // If MDG is has to be enabled 
                 XElement documentation = mdg.Element("Documentation");
                 // Not part of a MDG
                 if (documentation != null)
                 {
-                    id = documentation.Attribute("id").Value;
+                    string id = documentation.Attribute("id")?.Value;
+                    if (id == null) return;
                     //name = documentation.Attribute("name").Value;
                     //notes = documentation.Attribute("notes").Value;
                     // check if Technology is enabled
                     if (rep.IsTechnologyEnabled(id) == false && rep.IsTechnologyLoaded(id)) return;
+                    category = id;
 
                 }
 
@@ -250,17 +262,18 @@ namespace AddinFramework.Util
                 // Get all searches
                 var searches = from search in mdg.Descendants("Search")
                     select search;
+                
                 foreach (XElement search in searches)
                 {
                     string searchName = search.Attribute("Name").Value;
-                    _staticAllSearches.Add(new EaSearchItem(id, searchName));
+                    _staticAllSearches.Add(new SearchItem(searchName, searchName, category));
                 }
 
 
             }
             catch (Exception e)
             {
-                MessageBox.Show(@"", @"Error in loadMDGScripts: " + e.Message);
+                MessageBox.Show($"{e.Message}", @"Error in loadMDGScripts: " );
             }
         }
 
@@ -283,7 +296,8 @@ namespace AddinFramework.Util
         }
 
         /// <summary>
-        /// Load SQL Searches in structure '_staticAllSearches'. The structure contains:
+        /// Load SQL Searches according to SQL Path 
+        /// in structure '_staticAllSearches'. The structure contains:
         /// <para/>File, Description of SQL
         /// </summary>
         /// <returns></returns>
@@ -325,6 +339,7 @@ namespace AddinFramework.Util
         /// 
         /// </summary>
         /// <param name="eaRelease">The release of EA</param>
+        /// <param name="configFilePath"></param>
         static void LoadEaStandardSearchesFromJason(string eaRelease, string configFilePath)
         {
 
@@ -344,7 +359,7 @@ namespace AddinFramework.Util
                 catch (Exception e)
                 {
                     MessageBox.Show($"{e.Message}",
-                        "Import user searches 'userSearches.json' impossible, double definitions!");
+                        @"Import user searches 'userSearches.json' impossible, double definitions!");
                 }
             }
 
