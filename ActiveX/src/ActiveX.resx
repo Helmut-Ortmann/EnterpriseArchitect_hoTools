@@ -1596,7 +1596,7 @@ You may have inserted a &lt;Search Term&gt;.</value>
     <value>402, 26</value>
   </data>
   <data name="updateScriptsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Update Searches &amp; Scripts</value>
+    <value>Update Searches and Scripts</value>
   </data>
   <data name="updateScriptsToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>After you've changed a Search or a Script update all with this command.</value>

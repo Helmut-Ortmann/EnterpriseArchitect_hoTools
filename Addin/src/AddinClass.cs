@@ -162,7 +162,8 @@ namespace hoTools
             }
             catch (Exception e)
             {
-                MessageBox.Show($"Error setup 'hoTools' Addin. Error:\n\n{e}", @"hoTools Installation error");
+                MessageBox.Show($@"Error setup 'hoTools' Addin. Error:{Environment.NewLine}{e}", 
+                    @"hoTools Installation error");
             }
             // global configuration parameters independent from EA-Instance and used by services
             var globalCfg = HoToolsGlobalCfg.Instance;
@@ -389,6 +390,7 @@ namespace hoTools
         public override void EA_OnPostInitialized(EA.Repository repository)
         {
             // gets the file 'AssemblyFileVersion' of file AddinClass.dll
+            // ReSharper disable once AssignNullToNotNullAttribute
             string productVersion = FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).ProductVersion;
             _release = productVersion;
             _repository = repository;
@@ -559,7 +561,8 @@ namespace hoTools
                 return File.ReadAllText(combinedPathMdg);
             } catch (Exception e)
             {
-                MessageBox.Show($"MDG file='{combinedPathMdg}'\r\n{e}", $"Can't load MDG '{fileNameMdg}'");
+                MessageBox.Show($@"MDG file='{combinedPathMdg}'{Environment.NewLine}{e}", 
+                    $@"Can't load MDG '{fileNameMdg}'");
                 return "";
             } 
         }
@@ -584,7 +587,7 @@ namespace hoTools
                 if (_queryGui != null) _queryGui.Repository = rep;
             } catch (Exception e)
             {
-                MessageBox.Show($"{e.Message}",@"hoTools: Error initializing Addin Tabs with repository");
+                MessageBox.Show($@"{e.Message}",@"hoTools: Error initializing Addin Tabs with repository");
             }
 
 
@@ -1038,7 +1041,7 @@ namespace hoTools
                                     // ignored
                                 }
                             }
-                            MessageBox.Show($"Copied:{countInserted}\r\nErrors:{countError}");
+                            MessageBox.Show($@"Copied:{countInserted}{Environment.NewLine}Errors:{countError}");
                         }
 
                         
@@ -1143,7 +1146,7 @@ namespace hoTools
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show(e.Message);
+                    MessageBox.Show(e.Message,@"Error Starting Addin");
                 }
                
             }
@@ -1163,7 +1166,7 @@ namespace hoTools
             }
             catch (Exception e)
             {
-                MessageBox.Show($"Tab name={tabName}\n\n{e}", @"Can't activate Addin Tab");
+                MessageBox.Show($@"Tab name={tabName}{Environment.NewLine}{e}", @"Can't activate Addin Tab");
             }
         }
 
@@ -1192,7 +1195,7 @@ namespace hoTools
             AddinGui control = c as AddinGui;
             if (null == control)
             {
-                MessageBox.Show($"Unable to start progId='{progId}', tab='{tabName}'");
+                MessageBox.Show($@"Unable to start progId='{progId}', tab='{tabName}'");
             }
             else
             {
