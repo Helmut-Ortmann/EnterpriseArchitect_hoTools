@@ -303,7 +303,7 @@ namespace AddinFramework.Util
         /// <returns></returns>
         public static void LoadSqlSearches()
         {
-            foreach (string file in GlobalCfg.getListFileCompleteName())
+            foreach (string file in GlobalCfg.GetListFileCompleteName())
             {
                 string description = SqlGetDescription(file);
                 string name = Path.GetFileName(file);

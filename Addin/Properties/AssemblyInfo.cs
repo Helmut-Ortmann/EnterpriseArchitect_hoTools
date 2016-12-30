@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Helmut Ortmann")]
 [assembly: AssemblyProduct("hoTools")]
-[assembly: AssemblyCopyright("Copyright ©  Helmut Ortmann 2016")]
+[assembly: AssemblyCopyright("Copyright ©  Helmut Ortmann 2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

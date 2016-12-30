@@ -11,7 +11,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("ho")]
 [assembly: AssemblyProduct("FindAndReplace")]
-[assembly: AssemblyCopyright("Copyright ©  Helmut Ortmann 2016")]
+[assembly: AssemblyCopyright("Copyright ©  Helmut Ortmann 2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

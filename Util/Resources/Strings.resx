@@ -122,7 +122,7 @@
 // Get Connector (conveyed items) from selected Elements
 // Select Element and get diagram
 //
-select  s.ea_Id AS CLASSGUID, s.object_type AS CLASSTYPE, s.name As Source , d.name As Destination
+select  s.ea_GUID AS CLASSGUID, s.object_type AS CLASSTYPE, s.name As Source , d.name As Destination
 from t_xref x,   // a lot of things like properties,..
      t_connector c,
      t_object s, // Souce element
@@ -130,9 +130,9 @@ from t_xref x,   // a lot of things like properties,..
 
 where  x.description like  '#WC##CurrentElementGUID##WC#' AND
        x.Behavior = 'conveyed' AND
-       c.ea_Id = x.client    
+       c.ea_GUID = x.client    
 
-and    c.ea_Id = x.client
+and    c.ea_GUID = x.client
 and    c.start_object_id = s.object_id
 and    c.end_object_id = d.object_id</value>
   </data>
@@ -140,7 +140,7 @@ and    c.end_object_id = d.object_id</value>
     <value>//
 // Get Elements from selected Connector (conveyed Items)
 //
-select  o.ea_Id AS CLASSGUID, o.object_type AS CLASSTYPE, o.name As Element
+select  o.ea_GUID AS CLASSGUID, o.object_type AS CLASSTYPE, o.name As Element
 from t_object o
 
 where  o.Object_ID in ( #ConveyedItemIDS# )</value>
@@ -155,38 +155,38 @@ where  o.Object_ID in ( #ConveyedItemIDS# )</value>
 //
 
 // As Element
-select o.ea_Id AS CLASSGUID, o.object_type AS CLASSTYPE,o.Name AS Name,o.object_type As Type 
+select o.ea_GUID AS CLASSGUID, o.object_type AS CLASSTYPE,o.Name AS Name,o.object_type As Type 
 from t_object o
-where o.ea_Id = '#CurrentElementGUID#'
+where o.ea_GUID = '#CurrentElementGUID#'
 
 UNION
 
 // As Diagram
-select dia.ea_Id AS CLASSGUID, dia.diagram_type AS CLASSTYPE,dia.Name AS Name,dia.diagram_type As Type 
+select dia.ea_GUID AS CLASSGUID, dia.diagram_type AS CLASSTYPE,dia.Name AS Name,dia.diagram_type As Type 
 from t_diagram dia
-where dia.ea_Id = '#CurrentElementGUID#'
+where dia.ea_GUID = '#CurrentElementGUID#'
 
 UNION
 
 // As Package
-select pkg.ea_Id AS CLASSGUID, 'Package' AS CLASSTYPE,pkg.Name AS Name,'Package' As Type 
+select pkg.ea_GUID AS CLASSGUID, 'Package' AS CLASSTYPE,pkg.Name AS Name,'Package' As Type 
 from t_package pkg
-where pkg.ea_Id = '#CurrentElementGUID#'
+where pkg.ea_GUID = '#CurrentElementGUID#'
 
 
 
 UNION
 // As Attribute
-select attr.ea_Id AS CLASSGUID,'Attribute',attr.Name AS Name,'Attribute' 
+select attr.ea_GUID AS CLASSGUID,'Attribute',attr.Name AS Name,'Attribute' 
 from t_attribute attr
-where attr.ea_Id = '#CurrentElementGUID#'
+where attr.ea_GUID = '#CurrentElementGUID#'
 
 UNION
 
 // As operation
-select opr.ea_Id AS CLASSGUID,'P',opr.Name AS Name,'Operation' 
+select opr.ea_GUID AS CLASSGUID,'P',opr.Name AS Name,'Operation' 
 from t_operation opr
-where opr.ea_Id = '#CurrentElementGUID#'
+where opr.ea_GUID = '#CurrentElementGUID#'
 
 ORDER BY Name</value>
   </data>
@@ -201,21 +201,21 @@ ORDER BY Name</value>
 //
 
 // As Element
-select o.ea_Id AS CLASSGUID, o.object_type AS CLASSTYPE,o.Name AS Name,o.object_type As Type 
+select o.ea_GUID AS CLASSGUID, o.object_type AS CLASSTYPE,o.Name AS Name,o.object_type As Type 
 from t_object o
 where o.object_ID = #CurrentElementID#
 
 UNION
 
 // As Diagram
-select dia.ea_Id AS CLASSGUID, dia.diagram_type AS CLASSTYPE,dia.Name AS Name,dia.diagram_type As Type 
+select dia.ea_GUID AS CLASSGUID, dia.diagram_type AS CLASSTYPE,dia.Name AS Name,dia.diagram_type As Type 
 from t_diagram dia
 where dia.diagram_ID = #CurrentElementID#
 
 UNION
 
 // As Package
-select pkg.ea_Id AS CLASSGUID, 'Package' AS CLASSTYPE,pkg.Name AS Name,'Package' As Type 
+select pkg.ea_GUID AS CLASSGUID, 'Package' AS CLASSTYPE,pkg.Name AS Name,'Package' As Type 
 from t_package pkg
 where pkg.package_ID = #CurrentElementID#
 
@@ -223,14 +223,14 @@ where pkg.package_ID = #CurrentElementID#
 
 UNION
 // As Attribute
-select attr.ea_Id AS CLASSGUID,'Attribute',attr.Name AS Name,'Attribute' 
+select attr.ea_GUID AS CLASSGUID,'Attribute',attr.Name AS Name,'Attribute' 
 from t_attribute attr
 where attr.object_ID = #CurrentElementID#
 
 UNION
 
 // As operation
-select opr.ea_Id AS CLASSGUID,'P',opr.Name AS Name,'Operation' 
+select opr.ea_GUID AS CLASSGUID,'P',opr.Name AS Name,'Operation' 
 from t_operation opr
 where opr.object_ID = #CurrentElementID#
 
@@ -244,7 +244,7 @@ ORDER BY Name</value>
 // - hoDemoPrintContext (2 parameters)
 //
 //
-select o.ea_Id AS CLASSGUID, o.object_type AS CLASSTYPE,o.Name AS Name,o.object_type As Type 
+select o.ea_GUID AS CLASSGUID, o.object_type AS CLASSTYPE,o.Name AS Name,o.object_type As Type 
 from t_object o
 where o.name like '&lt;Search Term&gt;#WC#' AND      o.object_type in 
      (
@@ -257,7 +257,7 @@ ORDER BY o.Name</value>
     <value>//
 // Template DiagramElements_IDS
 //
-select o.ea_Id AS CLASSGUID, o.object_type AS CLASSTYPE,o.Name AS Name,o.object_type As Type 
+select o.ea_GUID AS CLASSGUID, o.object_type AS CLASSTYPE,o.Name AS Name,o.object_type As Type 
 from t_object o
 where o.object_ID in (#DiagramElements_IDS#)
   
@@ -267,7 +267,7 @@ ORDER BY o.Name</value>
     <value>//
 // Template DiagramElements_IDS
 //
-select o.ea_Id AS CLASSGUID, o.object_type AS CLASSTYPE,o.Name AS Name,o.object_type As Type 
+select o.ea_GUID AS CLASSGUID, o.object_type AS CLASSTYPE,o.Name AS Name,o.object_type As Type 
 from t_object o
 where o.object_ID in (#DiagramSelectedElements_IDS#)
   
@@ -297,14 +297,14 @@ ORDER BY o.Name</value>
 // Template delete tree selected 
 //
 delete from t_object 
-where ea_Id in (#TreeSelectedGUIDS#)</value>
+where ea_GUID in (#TreeSelectedGUIDS#)</value>
   </data>
   <data name="InsertElementIntoCurrentPackage" xml:space="preserve">
     <value>//
 // Template Insert Element into current selected Package (direct or indirect selected via Element, Diagram, Operation, Attribute in Package)
 //
 insert into t_object 
-   (ea_Id, object_type, Name, Package_ID)
+   (ea_GUID, object_type, Name, Package_ID)
 values
    ('#NewId#', 'Class', 'XXXX', #Package#)</value>
   </data>

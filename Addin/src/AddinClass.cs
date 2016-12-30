@@ -485,7 +485,7 @@ namespace hoTools
                 //     (logInUser.Equals(""))
                 //    ) logInUserRights = UserRights.ADMIN;
             }
-            Favorite.InstallSearches(_repository); // install searches
+            Favorite.InstallSearches(repository); // install searches
             return "a string";
         }
         #endregion

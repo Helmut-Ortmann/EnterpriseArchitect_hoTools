@@ -221,7 +221,7 @@ namespace EAAddinFramework.Utils
             }
             catch (Exception e)
             {
-                MessageBox.Show($"SQL execute:\r\n{sqlString}\r\n{e.Message}", @"Error SQL execute");
+                MessageBox.Show($@"SQL execute:\r\n{sqlString}\r\n{e.Message}", @"Error SQL execute");
                 return false;
             }
         }
@@ -304,7 +304,7 @@ namespace EAAddinFramework.Utils
                 catch (Exception e)
                 {
                     MessageBox.Show(e.ToString(),
-                        $"Error start search '{searchName} {searchTerm}'");
+                        $@"Error start search '{searchName} {searchTerm}'");
                     return "";
                 }
             }
@@ -406,7 +406,7 @@ namespace EAAddinFramework.Utils
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"SQL:\r\n{query}\r\n{ex.Message}", @"Error SQL");
+                MessageBox.Show($@"SQL:\r\n{query}\r\n{ex.Message}", @"Error SQL");
                 return null;
             }
         }
@@ -442,7 +442,7 @@ namespace EAAddinFramework.Utils
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"SQL:\r\n{sql}\r\n{ex.Message}", @"Error SQL");
+                MessageBox.Show($@"SQL:\r\n{sql}\r\n{ex.Message}", @"Error SQL");
                 return false;
             }
 
@@ -526,7 +526,7 @@ namespace EAAddinFramework.Utils
                 var xRows = xDoc.Descendants("Row");
                 foreach (var xRow in xRows)
                 {
-                    Console.WriteLine("New Record found");
+                    Console.WriteLine(@"New Record found");
                     row = row + 1;
                     column = 1;
                     foreach (var value in xRow.Elements())
@@ -546,7 +546,7 @@ namespace EAAddinFramework.Utils
                 //Marshal.ReleaseComObject(xlWorkBook);
                 //Marshal.ReleaseComObject(xlApp);
                 Cursor.Current = Cursors.Default;
-                var ret = MessageBox.Show($"Yes: Open Excel File\r\nNo: Open Folder\r\nCancel",
+                var ret = MessageBox.Show($@"Yes: Open Excel File\r\nNo: Open Folder\r\nCancel",
                     $"Excel File '{fileName}' created!", MessageBoxButtons.YesNoCancel);
                 switch (ret)
                 {
@@ -565,7 +565,7 @@ namespace EAAddinFramework.Utils
             catch (Exception e)
             {
                 Cursor.Current = Cursors.Default;
-                MessageBox.Show($"Error {e.Message}\r\n{e.Source}");
+                MessageBox.Show($@"Error {e.Message}\r\n{e.Source}");
                 return false;
             }
         }
@@ -740,7 +740,7 @@ namespace EAAddinFramework.Utils
                         object eaObject = Repository.GetEaObject(sqlObjectType, guid, out eaObjectType);
                         if (eaObject == null)
                         {
-                            MessageBox.Show($"CLASSTYPE='{sqlObjectType}' GUID='{guid}' ObjectType={eaObjectType}", @"Couldn't find EA item, Break!!!");
+                            MessageBox.Show($@"CLASSTYPE='{sqlObjectType}' GUID='{guid}' ObjectType={eaObjectType}", @"Couldn't find EA item, Break!!!");
                             return null;
                         }
                         eaItemList.Add(new EaItem(guid, sqlObjectType, eaObjectType, eaObject));
@@ -748,7 +748,7 @@ namespace EAAddinFramework.Utils
                         continue;
 
                     default:
-                        MessageBox.Show($"Column'{field.Value}' not expected! (expected CLASSGUID or CLASSTYPE)", @"Invalid SQL results, column not expected");
+                        MessageBox.Show($@"Column'{field.Value}' not expected! (expected CLASSGUID or CLASSTYPE)", @"Invalid SQL results, column not expected");
                         return null;
                 }
             }
@@ -1128,7 +1128,7 @@ namespace EAAddinFramework.Utils
                 case 4: 
                     return Clipboard.GetText(TextDataFormat.UnicodeText);
                 default:
-                    MessageBox.Show($"Valid Clipboard Get (TextDataFormat):0-4, was '{textDataType}'", @"Invalid Clipboard Parameter Clipboard.GetText(TextDataFormat");
+                    MessageBox.Show($@"Valid Clipboard Get (TextDataFormat):0-4, was '{textDataType}'", @"Invalid Clipboard Parameter Clipboard.GetText(TextDataFormat");
                     return "";
             } 
 
@@ -1167,7 +1167,7 @@ namespace EAAddinFramework.Utils
                     Clipboard.SetText((string)text, TextDataFormat.UnicodeText);
                     return;
                 default:
-                    MessageBox.Show($"Valid Clipboard Set (TextDataFormat):0-4, was '{textDataType}'", @"Invalid Clipboard Parameter Clipboard.SetText(text, TextDataFormat");
+                    MessageBox.Show($@"Valid Clipboard Set (TextDataFormat):0-4, was '{textDataType}'", @"Invalid Clipboard Parameter Clipboard.SetText(text, TextDataFormat");
                     return;
             }
 

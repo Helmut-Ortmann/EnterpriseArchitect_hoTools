@@ -1,6 +1,10 @@
 # EnterpriseArchitect_hoTools
 Addin with Tools for SPARX Enterprise Architect (EA)
 
+- Helmut.Ortmann@t-online.de
+- Helmut.Ortmann@hoModeller.de
+- hoModeller.de
+
 # Abstract
 Collection of useful tools (see also [WiKi](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/home)):
 
@@ -111,6 +115,11 @@ Some features:
 # Releases
 
 ## Release 2.1
+- SQL Searches of MDG, 'My Searches' are now inventoried.
+- Searches were faulty (ea_id instead of ea_guid), fixed in hoToolsBasic.xml,..
+- File error "d:\temp\sql\Branch.sql" fixed, cause unclear
+- Jump between composite diagram and owning diagram fixed (null value)
+- Wiki updated
 
 
 ## Release 2.0.11
@@ -179,4 +188,8 @@ Some features:
 # Feedback
 
 I appreciate your feedback!!
+
+Helmut.Ortmann@t-online.de
+
+Helmut.Ortmann@hoModeller.de
 

@@ -88,7 +88,7 @@ namespace hoTools.EaServices
             }
             catch (Exception)
             {
-                MessageBox.Show($"Search name:'{searchName}' not available", @"Error run search, break!");
+                MessageBox.Show($@"Search name:'{searchName}' not available", @"Error run search, break!");
             }
         }
 
@@ -213,7 +213,7 @@ namespace hoTools.EaServices
                     return;
             }
             if (success) return;
-            MessageBox.Show($"Error:'{rep.GetLastError()}'", @"Error lock item");
+            MessageBox.Show($@"Error:'{rep.GetLastError()}'", @"Error lock item");
         }
 
         #endregion
@@ -309,7 +309,7 @@ namespace hoTools.EaServices
                     return;
             }
             if (success) return;
-            MessageBox.Show($"Error:'{rep.GetLastError()}'", @"Error unlock item");
+            MessageBox.Show($@"Error:'{rep.GetLastError()}'", @"Error unlock item");
         }
 
         #endregion
@@ -333,7 +333,7 @@ namespace hoTools.EaServices
             Package pkg = GetContextPackage(rep);
             if (pkg == null) return;
             if (!pkg.ReleaseUserLockRecursive(true, true, true))
-                MessageBox.Show($"Error:'{rep.GetLastError()}'", @"Error Unlock Package recursive");
+                MessageBox.Show($@"Error:'{rep.GetLastError()}'", @"Error Unlock Package recursive");
         }
 
         #endregion
@@ -356,7 +356,7 @@ namespace hoTools.EaServices
             if (pkg == null) return;
             bool success = pkg.ApplyUserLockRecursive(true, true, true);
             if (!success)
-                MessageBox.Show($"Error:'{rep.GetLastError()}'", @"Error lock Package recursive");
+                MessageBox.Show($@"Error:'{rep.GetLastError()}'", @"Error lock Package recursive");
         }
 
         #endregion
@@ -422,7 +422,7 @@ namespace hoTools.EaServices
             if (pkg == null) return;
             pkg.ApplyUserLock();
             if (!pkg.ApplyUserLockRecursive(true, true, false))
-                MessageBox.Show($"Error:'{rep.GetLastError()}'", @"Error lock package");
+                MessageBox.Show($@"Error:'{rep.GetLastError()}'", @"Error lock package");
         }
 
         #endregion
@@ -492,7 +492,7 @@ namespace hoTools.EaServices
             s[0] = dlg.User;
             if (s[0] == "")
             {
-                MessageBox.Show($"Author:'{s[0]}'", @"no or invalid user");
+                MessageBox.Show($@"Author:'{s[0]}'", @"no or invalid user");
                 return;
             }
             switch (oType)
@@ -500,15 +500,15 @@ namespace hoTools.EaServices
                 case ObjectType.otPackage:
                     RecursivePackages.DoRecursivePkg(rep, pkg, ChangeAuthorPackage, ChangeAuthorElement,
                         ChangeAuthorDiagram, s);
-                    MessageBox.Show($"New author:'{s[0]}'", @"Author changed for packages/elements (recursive)");
+                    MessageBox.Show($@"New author:'{s[0]}'", @"Author changed for packages/elements (recursive)");
                     break;
                 case ObjectType.otElement:
                     RecursivePackages.DoRecursiveEl(rep, el, ChangeAuthorElement, ChangeAuthorDiagram, s);
-                    MessageBox.Show($"New author:'{s[0]}'", @"Author changed for elements (recursive)");
+                    MessageBox.Show($@"New author:'{s[0]}'", @"Author changed for elements (recursive)");
                     break;
                 case ObjectType.otDiagram:
                     ChangeAuthorDiagram(rep, dia, s);
-                    MessageBox.Show($"New author:'{s[0]}'", @"Author changed for diagram");
+                    MessageBox.Show($@"New author:'{s[0]}'", @"Author changed for diagram");
                     break;
                 default:
                     return;
@@ -555,22 +555,22 @@ namespace hoTools.EaServices
             args[0] = dlg.User;
             if (args[0] == "")
             {
-                MessageBox.Show($"Author:'{args[0]}'", @"no or invalid user");
+                MessageBox.Show($@"Author:'{args[0]}'", @"no or invalid user");
                 return;
             }
             switch (oType)
             {
                 case ObjectType.otPackage:
                     ChangeAuthorPackage(rep, pkg, args);
-                    MessageBox.Show($"New author:'{args[0]}'", @"Author changed for package");
+                    MessageBox.Show($@"New author:'{args[0]}'", @"Author changed for package");
                     break;
                 case ObjectType.otElement:
                     ChangeAuthorElement(rep, el, args);
-                    MessageBox.Show($"New author:'{args[0]}'", @"Author changed for element");
+                    MessageBox.Show($@"New author:'{args[0]}'", @"Author changed for element");
                     break;
                 case ObjectType.otDiagram:
                     ChangeAuthorDiagram(rep, dia, args);
-                    MessageBox.Show($"New author:'{args[0]}'", @"Author changed for element");
+                    MessageBox.Show($@"New author:'{args[0]}'", @"Author changed for element");
                     break;
                 default:
                     return;
@@ -691,7 +691,15 @@ namespace hoTools.EaServices
                 CreateActivityForOperationsInPackage(rep, pkg1);
             }
         }
-
+        /// <summary>
+        /// If passed element is of type "Text" or UMLDiagram"
+        /// - show in project view
+        /// - return true
+        /// If not return false
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <param name="el"></param>
+        /// <returns>true Element is "Text" or "UMLDiagram"</returns>
         static bool LocateTextOrFrame(Repository rep, Element el)
         {
             if (el.Type == "Text")
@@ -826,7 +834,7 @@ namespace hoTools.EaServices
                 var e = (Element) repository.GetContextObject();
                 // locate text or frame
                 if (LocateTextOrFrame(repository, e)) return;
-
+                if (e.CompositeDiagram == null) return;
                 repository.ShowInProjectView(e.CompositeDiagram);
             }
         }
@@ -1235,7 +1243,7 @@ namespace hoTools.EaServices
 
             if (name.Length > 255)
             {
-                MessageBox.Show($"{type}: '{name}' has more than 255 characters.", @"Name is to long");
+                MessageBox.Show($@"{type}: '{name}' has more than 255 characters.", @"Name is to long");
                 return null;
             }
             Element elParent = null;
@@ -1498,7 +1506,7 @@ namespace hoTools.EaServices
             {
                 if (elSource.Locked)
                 {
-                    MessageBox.Show($"Source '{elSource.Name}' is locked", @"Element locked");
+                    MessageBox.Show($@"Source '{elSource.Name}' is locked", @"Element locked");
                     continue;
                 }
                 if (isComponent)
@@ -1604,7 +1612,7 @@ namespace hoTools.EaServices
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.ToString(), $"Error create connector between '{elSource.Name}  and '{elTarget.Name}' ");
+                MessageBox.Show(e.ToString(), $@"Error create connector between '{elSource.Name}  and '{elTarget.Name}' ");
             }
         }
 
@@ -2000,7 +2008,7 @@ namespace hoTools.EaServices
                 case ObjectType.otElement:
                     if (objCol?.Count > 0)
                     {
-                        foreach (EA.DiagramObject obj in objCol)
+                        foreach (DiagramObject obj in objCol)
                         {
                             AddElementNote(rep, obj);
                             
@@ -2815,7 +2823,7 @@ namespace hoTools.EaServices
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show($"{e}\n\n {elPar.GetLastError()}", $"Error creating parameter: {type} {name}");
+                    MessageBox.Show($@"{e}\n\n {elPar.GetLastError()}", $@"Error creating parameter: {type} {name}");
                 }
                 pos = pos + 1;
             }
@@ -3192,7 +3200,7 @@ namespace hoTools.EaServices
                         a = (EA.Attribute) el.Attributes.AddNew(aName, "");
                         if (a.Name.Length > 255)
                         {
-                            MessageBox.Show($"{a.Name} has {a.Name.Length}", @"Name longer than 255");
+                            MessageBox.Show($@"{a.Name} has {a.Name.Length}", @"Name longer than 255");
                             continue;
                         }
                         a.Pos = el.Attributes.Count + 1;
@@ -3211,7 +3219,7 @@ namespace hoTools.EaServices
                         if (collectionValue.Length > 50)
                         {
                             MessageBox.Show(
-                                $"Collection '{collectionValue}' has {collectionValue.Length}  characters.",
+                                $@"Collection '{collectionValue}' has {collectionValue.Length}  characters.",
                                 @"Break! Collection length need to be <=50 characters");
                             continue;
                         }
@@ -3230,7 +3238,7 @@ namespace hoTools.EaServices
                 }
                 else
                 {
-                    MessageBox.Show($"{s}\n\n+{sCompact}", @"Couldn't understand attribute syntax");
+                    MessageBox.Show($@"{s}\n\n+{sCompact}", @"Couldn't understand attribute syntax");
                 }
             }
         }
@@ -3394,7 +3402,7 @@ namespace hoTools.EaServices
             {
                 if (methodType == "")
                 {
-                    MessageBox.Show($"Method {m.Name} Type '{m.ReturnType}' ",
+                    MessageBox.Show($@"Method {m.Name} Type '{m.ReturnType}' ",
                         @"Method type undefined");
                 }
                 else
@@ -3426,7 +3434,7 @@ namespace hoTools.EaServices
                 {
                     if (parType == "")
                     {
-                        MessageBox.Show($"Method {m.Name} Parameter '{par.Name}: {par.Type}' ",
+                        MessageBox.Show($@"Method {m.Name} Parameter '{par.Name}: {par.Type}' ",
                             @"Parameter type undefined");
                     }
                     else
@@ -3540,7 +3548,7 @@ namespace hoTools.EaServices
                     }
                     catch (Exception e1)
                     {
-                        MessageBox.Show(e1.ToString(), $"Error writing '{path}'");
+                        MessageBox.Show(e1.ToString(), $@"Error writing '{path}'");
                     }
 
                     MessageBox.Show(path, @"Changed");
@@ -3614,7 +3622,7 @@ namespace hoTools.EaServices
             string userNameLockedPackage = svnHandle.GetLockingUser();
             if (userNameLockedPackage != "")
             {
-                MessageBox.Show($"Package is checked out by '{userNameLockedPackage}'");
+                MessageBox.Show($@"Package is checked out by '{userNameLockedPackage}'");
                 return;
             }
 
@@ -3627,7 +3635,7 @@ namespace hoTools.EaServices
             }
             catch (Exception e)
             {
-                MessageBox.Show($"{e}\n\n{pkg.GetLastError()}", @"Error Checkout");
+                MessageBox.Show($@"{e}\n\n{pkg.GetLastError()}", @"Error Checkout");
             }
             finally
             {
@@ -3728,7 +3736,7 @@ namespace hoTools.EaServices
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show($"{e} \n\n {pkg.GetLastError()}", @"Error Checkin");
+                    MessageBox.Show($@"{e} \n\n {pkg.GetLastError()}", @"Error Checkin");
                     return;
                 }
                 finally
@@ -3747,7 +3755,7 @@ namespace hoTools.EaServices
                         pkg.VersionControlResynchPkgStatus(false);
                         if (pkg.Flags.Contains("Checkout"))
                         {
-                            MessageBox.Show($"Flags={pkg.Flags}", @"Package Checked out, Break!");
+                            MessageBox.Show($@"Flags={pkg.Flags}", @"Package Checked out, Break!");
                             return;
                         }
                         pkg.VersionControlGetLatest(true);
@@ -4219,7 +4227,7 @@ namespace hoTools.EaServices
             var trgEl = (Element) rep.GetContextObject();
             if (!(trgEl.Type.Equals("Activity")))
             {
-                MessageBox.Show($"Target '{trgEl.Name}:{trgEl.Type}' isn't an Activity",
+                MessageBox.Show($@"Target '{trgEl.Name}:{trgEl.Type}' isn't an Activity",
                     @" Only move below Activity is allowed");
                 return;
             }
@@ -4335,7 +4343,7 @@ namespace hoTools.EaServices
             string path = Util.GetGenFilePath(rep, el);
             if (path == "")
             {
-                MessageBox.Show($"No file defined in property for: '{el.Name}': {el.Type}");
+                MessageBox.Show($@"No file defined in property for: '{el.Name}': {el.Type}");
                 return "";
             }
             try
@@ -4447,7 +4455,7 @@ namespace hoTools.EaServices
             string path = Util.GetGenFilePath(rep, el);
             if (path == "")
             {
-                MessageBox.Show($"No file defined in property for: '{el.Name}':{el.Type}");
+                MessageBox.Show($@"No file defined in property for: '{el.Name}':{el.Type}");
                 return lEl;
             }
             string text;
@@ -4458,7 +4466,7 @@ namespace hoTools.EaServices
             catch (Exception e)
             {
                 Clipboard.SetText(e.ToString());
-                MessageBox.Show($"{e}\n\nsee Clipboard!", $"Error Reading file '{el.Name}':{el.Type}");
+                MessageBox.Show($@"{e}\n\nsee Clipboard!", $@"Error Reading file '{el.Name}':{el.Type}");
                 return lEl;
             }
             lEl = GetInterfacesFromText(rep, null, text, createWarningNote: false);
@@ -4482,7 +4490,7 @@ namespace hoTools.EaServices
                 {
                     string pkgState = Util.GetVCstate(rep, pkg, true);
                     DialogResult result =
-                        MessageBox.Show($"Package is {pkgState}\nPath={pkg.XMLPath}\nFlags={pkg.Flags}",
+                        MessageBox.Show($@"Package is {pkgState}\nPath={pkg.XMLPath}\nFlags={pkg.Flags}",
                             @"Update package state?", MessageBoxButtons.YesNo);
                     if (result == DialogResult.Yes) Util.UpdateVc(rep, pkg);
                 }
@@ -4924,12 +4932,13 @@ namespace hoTools.EaServices
             string s1 = @"!!!Make live with EA easier and more efficient!!!
 
 Helmut.Ortmann@t-online.de
+Helmut.Ortmann@hoModeller.de
 (+49) 172 / 51 79 16 7
 Workshops, Training Coaching, Project Work
-- Processes (RUP / Functional Safety)
+- Processes (SPICE / Functional Safety)
 - Requirements
 - Enterprise Architect
- -- UML / SysML
+ -- UML / SysML, also integration Modelica
  -- Method- development and -implementation
  -- Addin
  -- Query & Script
@@ -4952,12 +4961,13 @@ Workshops, Training Coaching, Project Work
             string s1 = @"!!!Make live with EA easier and more efficient!!!
 
 Helmut.Ortmann@t-online.de
+Helmut.Ortmann@hoModeller.de
 (+49) 172 / 51 79 16 7
 Workshops, Training Coaching, Project Work
-- Processes (RUP / Functional Safety)
+- Processes (SPICE / Functional Safety)
 - Requirements
 - Enterprise Architect
- -- UML / SysML
+ -- UML / SysML with Modelica integration
  -- Method- development and -implementation
  -- Addin
  -- Query & Script
@@ -4973,19 +4983,19 @@ Workshops, Training Coaching, Project Work
 
         public static void Wiki()
         {
-            System.Diagnostics.Process.Start("https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki");
+            Process.Start("https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki");
         }
         public static void WikiSql()
         {
-            System.Diagnostics.Process.Start("https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/Sql");
+            Process.Start("https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/Sql");
         }
         public static void WikiScript()
         {
-            System.Diagnostics.Process.Start("https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/Script");
+            Process.Start("https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/Script");
         }
         public static void Repo()
         {
-            System.Diagnostics.Process.Start("https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools");
+            Process.Start("https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools");
         }
     }
 }

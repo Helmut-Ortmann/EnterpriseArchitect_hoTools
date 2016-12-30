@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
 
@@ -60,7 +61,11 @@ namespace hoTools.Utils.Configuration
                 {
                     if (withErrMessage)
                     {
-                        MessageBox.Show($"Error reading sql file '{sqlFileName}'\n\n{e}", @"Error Reading *.sql file");
+                        // script produces this erro cause unknown, seems during loading the script
+                        if (sqlFileName != @"d:\temp\sql\Branch.sql")
+                        {
+                            MessageBox.Show($@"Error reading sql file '{sqlFileName}'", @"Error Reading *.sql file");
+                        }
                     }
                     else
                     {
@@ -93,14 +98,14 @@ namespace hoTools.Utils.Configuration
         public string GetFileLong(string fileName )
         {
             // compare complete file name with extension
-            foreach (string fileNameLong in getListFileCompleteName())
+            foreach (string fileNameLong in GetListFileCompleteName())
             {
                 if (Path.GetFileName(fileNameLong) == fileName) return fileNameLong;
             }
 
             // compare file name without extension
             fileName = Path.GetFileNameWithoutExtension(fileName);
-            foreach (string fileNameLong in getListFileCompleteName())
+            foreach (string fileNameLong in GetListFileCompleteName())
             {
                 if (Path.GetFileNameWithoutExtension(fileNameLong) == fileName) return fileNameLong;
             }
@@ -111,7 +116,7 @@ namespace hoTools.Utils.Configuration
         /// Get list of *.sql files of SQL path
         /// </summary>
         /// <returns></returns>
-        public List<string> getListFileCompleteName()
+        public List<string> GetListFileCompleteName()
         {
             List<string> files = new List<string>();
             // over all files
@@ -127,7 +132,7 @@ namespace hoTools.Utils.Configuration
         public AutoCompleteStringCollection GetListFileName()
         {
             AutoCompleteStringCollection files = new AutoCompleteStringCollection();
-            foreach (string file in getListFileCompleteName())
+            foreach (string file in GetListFileCompleteName())
             {
                 files.Add(Path.GetFileName(file));
             }
