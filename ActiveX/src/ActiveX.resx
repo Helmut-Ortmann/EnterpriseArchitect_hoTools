@@ -1424,34 +1424,97 @@ An SQL Query you can export to Excel by:
   <data name="&gt;&gt;_txtSearchName.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="_btnAddElementNote.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="_btnAddNoteAndLink.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 9pt</value>
   </data>
-  <data name="_btnAddElementNote.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="_btnAddNoteAndLink.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
-  <data name="_btnAddElementNote.Size" type="System.Drawing.Size, System.Drawing">
-    <value>134, 25</value>
+  <data name="_btnAddNoteAndLink.Size" type="System.Drawing.Size, System.Drawing">
+    <value>90, 25</value>
   </data>
-  <data name="_btnAddElementNote.TabIndex" type="System.Int32, mscorlib">
+  <data name="_btnAddNoteAndLink.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
-  <data name="_btnAddElementNote.Text" xml:space="preserve">
-    <value>Add Note</value>
+  <data name="_btnAddNoteAndLink.Text" xml:space="preserve">
+    <value>Att Note</value>
   </data>
-  <data name="_btnAddElementNote.ToolTip" xml:space="preserve">
-    <value>Add Note to selected Diagram or Element and link it to description.</value>
+  <data name="_btnAddNoteAndLink.ToolTip" xml:space="preserve">
+    <value>Add, link and attach Note to selected: 
+- Diagram
+- Element
+and link it to description of selected diagram, element.
+
+The Note therefore always shows the description of the linked model element.</value>
   </data>
-  <data name="&gt;&gt;_btnAddElementNote.Name" xml:space="preserve">
-    <value>_btnAddElementNote</value>
+  <data name="&gt;&gt;_btnAddNoteAndLink.Name" xml:space="preserve">
+    <value>_btnAddNoteAndLink</value>
   </data>
-  <data name="&gt;&gt;_btnAddElementNote.Type" xml:space="preserve">
+  <data name="&gt;&gt;_btnAddNoteAndLink.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;_btnAddElementNote.Parent" xml:space="preserve">
+  <data name="&gt;&gt;_btnAddNoteAndLink.Parent" xml:space="preserve">
     <value>_panelNote</value>
   </data>
-  <data name="&gt;&gt;_btnAddElementNote.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;_btnAddNoteAndLink.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="_btnAddNote.Location" type="System.Drawing.Point, System.Drawing">
+    <value>96, -1</value>
+  </data>
+  <data name="_btnAddNote.Size" type="System.Drawing.Size, System.Drawing">
+    <value>83, 26</value>
+  </data>
+  <data name="_btnAddNote.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="_btnAddNote.Text" xml:space="preserve">
+    <value>Add Note</value>
+  </data>
+  <data name="_btnAddNote.ToolTip" xml:space="preserve">
+    <value>Add Note to selected: 
+- Elements
+- Diagram if nothing selected</value>
+  </data>
+  <data name="&gt;&gt;_btnAddNote.Name" xml:space="preserve">
+    <value>_btnAddNote</value>
+  </data>
+  <data name="&gt;&gt;_btnAddNote.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;_btnAddNote.Parent" xml:space="preserve">
+    <value>_panelNote</value>
+  </data>
+  <data name="&gt;&gt;_btnAddNote.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="_btnAddConstraint.Location" type="System.Drawing.Point, System.Drawing">
+    <value>188, -1</value>
+  </data>
+  <data name="_btnAddConstraint.Size" type="System.Drawing.Size, System.Drawing">
+    <value>113, 26</value>
+  </data>
+  <data name="_btnAddConstraint.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="_btnAddConstraint.Text" xml:space="preserve">
+    <value>Add Constraint</value>
+  </data>
+  <data name="_btnAddConstraint.ToolTip" xml:space="preserve">
+    <value>Add Constraint to selected: 
+- Elements
+- Diagram if nothing selected</value>
+  </data>
+  <data name="&gt;&gt;_btnAddConstraint.Name" xml:space="preserve">
+    <value>_btnAddConstraint</value>
+  </data>
+  <data name="&gt;&gt;_btnAddConstraint.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;_btnAddConstraint.Parent" xml:space="preserve">
+    <value>_panelNote</value>
+  </data>
+  <data name="&gt;&gt;_btnAddConstraint.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="contextMenuRtf.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
@@ -2330,6 +2393,9 @@ Tip:
   </metadata>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
+  </metadata>
+  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>25</value>
   </metadata>
   <data name="$this.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>

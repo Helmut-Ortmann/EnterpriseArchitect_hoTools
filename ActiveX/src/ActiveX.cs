@@ -67,7 +67,7 @@ namespace hoTools.ActiveX
         private System.ComponentModel.IContainer components;
         private Button _btnDisplayBehavior;
         private Button _btnLocateOperation;
-        private Button _btnAddElementNote;
+        private Button _btnAddNoteAndLink;
         private Button _btnLocateType;
         private Button _btnFindUsage;
         private Button _btnDisplaySpecification;
@@ -180,6 +180,8 @@ namespace hoTools.ActiveX
         private ToolStripMenuItem exportExcelToolStripMenuItem;
         private ToolStripSeparator toolStripSeparator3;
         private ToolStripMenuItem exportCsvOfClipboardToExcelToolStripMenuItem;
+        private Button _btnAddConstraint;
+        private Button _btnAddNote;
         private TextBox _txtSearchText;
         #endregion
 
@@ -309,19 +311,33 @@ namespace hoTools.ActiveX
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        void btnAddNoteAndLinkDescription_Click(object sender, EventArgs e)
+        {
+            EaService.AddElementToDiagram(Repository,"Note","NoteLink");
+        }
+        /// <summary>
+        /// Add Note to the selected elements:<para/>
+        /// - Elements<para/>
+        /// - Diagram (nothing selected)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void btnAddNote_Click(object sender, EventArgs e)
         {
-            EaService.AddNote(Repository);
+            EaService.AddElementToDiagram(Repository, "Note" );
         }
-        void btnAddElementNote_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Add Constraint to the selected elements:<para/>
+        /// - Elements<para/>
+        /// - Diagram (nothing selected)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void btnAddConstraint_Click(object sender, EventArgs e)
         {
-            EaService.AddNote(Repository);
+            EaService.AddElementToDiagram(Repository, "Constraint");
         }
 
-        void btnAddDiagramNote_Click(object sender, EventArgs e)
-        {
-            EaService.AddDiagramNote(Repository);
-        }
 
         void btnLocateType_Click(object sender, EventArgs e)
         {
@@ -1079,7 +1095,9 @@ namespace hoTools.ActiveX
             this._btnReverseConnector = new System.Windows.Forms.Button();
             this._cmbSearchName = new System.Windows.Forms.ComboBox();
             this._txtSearchName = new System.Windows.Forms.TextBox();
-            this._btnAddElementNote = new System.Windows.Forms.Button();
+            this._btnAddNoteAndLink = new System.Windows.Forms.Button();
+            this._btnAddNote = new System.Windows.Forms.Button();
+            this._btnAddConstraint = new System.Windows.Forms.Button();
             this._rtfListOfSearches = new System.Windows.Forms.RichTextBox();
             this.contextMenuRtf = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.runToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -1551,13 +1569,29 @@ namespace hoTools.ActiveX
             this._txtSearchName.Leave += new System.EventHandler(this._txtSearchName_Leave);
             this._txtSearchName.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.cmbSearchName_MouseDoubleClick);
             // 
-            // _btnAddElementNote
+            // _btnAddNoteAndLink
             // 
-            resources.ApplyResources(this._btnAddElementNote, "_btnAddElementNote");
-            this._btnAddElementNote.Name = "_btnAddElementNote";
-            this._toolTip.SetToolTip(this._btnAddElementNote, resources.GetString("_btnAddElementNote.ToolTip"));
-            this._btnAddElementNote.UseVisualStyleBackColor = true;
-            this._btnAddElementNote.Click += new System.EventHandler(this.btnAddNote_Click);
+            resources.ApplyResources(this._btnAddNoteAndLink, "_btnAddNoteAndLink");
+            this._btnAddNoteAndLink.Name = "_btnAddNoteAndLink";
+            this._toolTip.SetToolTip(this._btnAddNoteAndLink, resources.GetString("_btnAddNoteAndLink.ToolTip"));
+            this._btnAddNoteAndLink.UseVisualStyleBackColor = true;
+            this._btnAddNoteAndLink.Click += new System.EventHandler(this.btnAddNoteAndLinkDescription_Click);
+            // 
+            // _btnAddNote
+            // 
+            resources.ApplyResources(this._btnAddNote, "_btnAddNote");
+            this._btnAddNote.Name = "_btnAddNote";
+            this._toolTip.SetToolTip(this._btnAddNote, resources.GetString("_btnAddNote.ToolTip"));
+            this._btnAddNote.UseVisualStyleBackColor = true;
+            this._btnAddNote.Click += new System.EventHandler(this.btnAddNote_Click);
+            // 
+            // _btnAddConstraint
+            // 
+            resources.ApplyResources(this._btnAddConstraint, "_btnAddConstraint");
+            this._btnAddConstraint.Name = "_btnAddConstraint";
+            this._toolTip.SetToolTip(this._btnAddConstraint, resources.GetString("_btnAddConstraint.ToolTip"));
+            this._btnAddConstraint.UseVisualStyleBackColor = true;
+            this._btnAddConstraint.Click += new System.EventHandler(this.btnAddConstraint_Click);
             // 
             // _rtfListOfSearches
             // 
@@ -2044,7 +2078,9 @@ namespace hoTools.ActiveX
             // 
             // _panelNote
             // 
-            this._panelNote.Controls.Add(this._btnAddElementNote);
+            this._panelNote.Controls.Add(this._btnAddConstraint);
+            this._panelNote.Controls.Add(this._btnAddNote);
+            this._panelNote.Controls.Add(this._btnAddNoteAndLink);
             resources.ApplyResources(this._panelNote, "_panelNote");
             this._panelNote.Name = "_panelNote";
             // 
@@ -2264,7 +2300,9 @@ namespace hoTools.ActiveX
 
             // Note in diagram support
             bool visibleDiagramNote = AddinSettings.IsAdvancedDiagramNote;
-            _btnAddElementNote.Visible = visibleDiagramNote;
+            _btnAddNoteAndLink.Visible = visibleDiagramNote;
+            _btnAddNote.Visible = visibleDiagramNote;
+            _btnAddConstraint.Visible = visibleDiagramNote;
 
             // LineStyle
             _btnLv.Visible = AddinSettings.IsLineStyleSupport;
@@ -2540,7 +2578,7 @@ namespace hoTools.ActiveX
             _txtSearchName.ForeColor = SystemColors.WindowText;
             if (_txtSearchName.Text.Trim().Equals(""))
             {
-                _txtSearchName.Text =  "<Search Name>" ;
+                _txtSearchName.Text =  @"<Search Name>" ;
                 _txtSearchName.ForeColor = SystemColors.ControlDark;
             }
         }
@@ -2590,7 +2628,7 @@ namespace hoTools.ActiveX
             _txtSearchText.ForeColor = SystemColors.WindowText;
             if (_txtSearchText.Text.Trim().Equals(""))
             {
-                _txtSearchText.Text = "<Search Term>";
+                _txtSearchText.Text = @"<Search Term>";
                 _txtSearchText.ForeColor = SystemColors.ControlDark;
             }
             _rtfListOfSearches.Visible = false;
@@ -2747,20 +2785,20 @@ namespace hoTools.ActiveX
             if (searchItem is EaSearchItem)
             {
                 var eaSearchItem = searchItem as EaSearchItem;
-                MessageBox.Show($"Category: {eaSearchItem.Category}{Environment.NewLine}" +
-                                $"Releases: '{eaSearchItem.EARelease}'{Environment.NewLine}" +
-                                $"MDG ID: '{eaSearchItem.MdgId}'{Environment.NewLine}" +
-                                $"Description: {eaSearchItem.Description}{Environment.NewLine}",
-                                $"Info EA-Search: '{searchItem.Name}'");
+                MessageBox.Show($@"Category: {eaSearchItem.Category}{Environment.NewLine}" +
+                                $@"Releases: '{eaSearchItem.EARelease}'{Environment.NewLine}" +
+                                $@"MDG ID: '{eaSearchItem.MdgId}'{Environment.NewLine}" +
+                                $@"Description: {eaSearchItem.Description}{Environment.NewLine}",
+                                $@"Info EA-Search: '{searchItem.Name}'");
 
             }
             else
             {   // SQL-File Search
                 string sqlString = _globalCfg.ReadSqlFile(searchItem.Name);
 
-                MessageBox.Show($"{ _globalCfg.GetFileLong(searchItem.Name)}" +
-                                $"{Environment.NewLine}Category: {searchItem.Category}{Environment.NewLine}{sqlString}",
-                                $"Info SQL-File: '{Path.GetFileName(searchItem.Name)}'");
+                MessageBox.Show($@"{ _globalCfg.GetFileLong(searchItem.Name)}" +
+                                $@"{Environment.NewLine}Category: {searchItem.Category}{Environment.NewLine}{sqlString}",
+                                $@"Info SQL-File: '{Path.GetFileName(searchItem.Name)}'");
 
             }
             
@@ -2791,6 +2829,7 @@ namespace hoTools.ActiveX
         {
             Excel.MakeExcelFileFromCsv();
         }
+
     }
 
     #endregion

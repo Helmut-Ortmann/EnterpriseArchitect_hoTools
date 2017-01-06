@@ -94,7 +94,7 @@ namespace hoTools.EaServices
 
         #endregion
 
-        #region ddDiagramNote
+        #region AddDiagramNote
 
         public static void AddDiagramNote(Repository rep)
         {
@@ -1984,13 +1984,18 @@ namespace hoTools.EaServices
 
         #endregion
 
-        #region addElementNote
+        
+        #region AddElementToDiagram
 
         /// <summary>
-        /// Add Element- or Diagram -Note to Element or Diagram and link Note to Notes Property.
+        /// Add Element (Note, Constraint,..) to diagram and link to selected Nodes in Diagram.
+        /// If nothing selected add the wanted Element to the diagram
         /// </summary>
         /// <param name="rep"></param>
-        public static void AddNote(Repository rep)
+        /// <param name="elementType"></param>
+        /// <param name="connectorType"></param>
+        public static void AddElementToDiagram(Repository rep, 
+            string elementType="Note", string connectorType="NoteLink")
         {
             // handle multiple selected elements
             Diagram diaCurrent = rep.GetCurrentDiagram();
@@ -2010,18 +2015,18 @@ namespace hoTools.EaServices
                     {
                         foreach (DiagramObject obj in objCol)
                         {
-                            AddElementNote(rep, obj);
-                            
+                            AddElementWithLink(rep, obj, elementType, connectorType);
+
 
                         }
 
                     }
-                    
+
                     break;
                 case ObjectType.otDiagram:
-                        AddDiagramNote(rep);
+                    AddDiagramNote(rep);
                     break;
-                    
+
             }
         }
 
@@ -2071,15 +2076,90 @@ namespace hoTools.EaServices
                 diaObject.Sequence = 1; // put element to top
                 diaObject.Update();
                 pkg.Elements.Refresh();
+
+
                 // make a connector
                 var con = (Connector) el.Connectors.AddNew("test", "NoteLink");
                 con.SupplierID = elNote.ElementID;
                 con.Update();
                 el.Connectors.Refresh();
+
+
                 Util.SetElementHasAttchaedLink(rep, el, elNote);
                 rep.ReloadDiagram(dia.DiagramID);
             }
            
+        }
+
+        /// <summary>
+        /// Add Element and optionally link to  Object from:<para/>
+        /// Element, Attribute, Operation, Package
+        /// 
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <param name="diaObj"></param>
+        /// <param name="elementType">Default Note</param>
+        /// <param name="connectorType">Default: null</param>
+        /// <param name="isAttchedLink"></param>
+        public static void AddElementWithLink(Repository rep, DiagramObject diaObj, 
+            string elementType=@"Note", string connectorType="NoteLink", bool isAttchedLink = false )
+        {
+            Element el = rep.GetElementByID(diaObj.ElementID);
+            if (el != null)
+            {
+                Diagram dia = rep.GetCurrentDiagram();
+                Package pkg = rep.GetPackageByID(el.PackageID);
+                if (pkg.IsProtected || dia.IsLocked || el.Locked) return;
+
+                // save diagram;//
+                rep.SaveDiagram(dia.DiagramID);
+
+                Element elNewElement;
+                try
+                {
+                    elNewElement = (Element)pkg.Elements.AddNew("", elementType);
+                    elNewElement.Update();
+                    pkg.Update();
+                }
+                catch
+                {
+                    return;
+                }
+
+                // add element to diagram
+                // "l=200;r=400;t=200;b=600;"
+
+                int left = diaObj.right + 50;
+                int right = left + 100;
+                int top = diaObj.top;
+                int bottom = top - 100;
+
+                string position = "l=" + left + ";r=" + right + ";t=" + top + ";b=" + bottom + ";";
+                var diaObject = (DiagramObject)dia.DiagramObjects.AddNew(position, "");
+                dia.Update();
+                diaObject.ElementID = elNewElement.ElementID;
+                diaObject.Sequence = 1; // put element to top
+                diaObject.Update();
+                pkg.Elements.Refresh();
+
+                // connect Element to node
+                if (! String.IsNullOrWhiteSpace(connectorType))
+                {
+                    // make a connector
+                    var con = (Connector) el.Connectors.AddNew("test", connectorType);
+                    con.SupplierID = elNewElement.ElementID;
+                    con.Update();
+                    el.Connectors.Refresh();
+
+                    // set attached link
+                    if (isAttchedLink)
+                    {
+                        Util.SetElementHasAttchaedLink(rep, el, elNewElement);
+                    }
+                }
+                rep.ReloadDiagram(dia.DiagramID);
+            }
+
         }
 
         #endregion
@@ -3574,7 +3654,7 @@ namespace hoTools.EaServices
             }
             catch (Exception e)
             {
-                MessageBox.Show($"{e}\n\n", @"Error VC reconcile");
+                MessageBox.Show($@"{e}\n\n", @"Error VC reconcile");
             }
             finally
             {
