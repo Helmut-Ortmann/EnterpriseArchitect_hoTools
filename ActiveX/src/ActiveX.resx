@@ -1440,14 +1440,13 @@ An SQL Query you can export to Excel by:
     <value>9</value>
   </data>
   <data name="_btnAddNoteAndLink.Text" xml:space="preserve">
-    <value>Attach Note</value>
+    <value>Show Feature</value>
   </data>
   <data name="_btnAddNoteAndLink.ToolTip" xml:space="preserve">
-    <value>Add Note, link and attach to selected: 
-- Diagram Note / Description
-- Element Note / Descriptio
-
-The Note therefore always shows the description of the linked model element.
+    <value>Add Note element and show feature 'Note' of selected nodes/elements: 
+- Diagram 
+- Element
+- Connector 
 
 Always remember: 
 - Diagrams are for the reader
@@ -1482,9 +1481,9 @@ Always remember:
   <data name="_btnAddNote.ToolTip" xml:space="preserve">
     <value>Add Note to selected: 
 - Elements
+- Connector
 - Diagram if nothing is selected
-
-Always remember: Diagrams are for the reader</value>
+</value>
   </data>
   <data name="&gt;&gt;_btnAddNote.Name" xml:space="preserve">
     <value>_btnAddNote</value>
@@ -1513,9 +1512,9 @@ Always remember: Diagrams are for the reader</value>
   <data name="_btnAddConstraint.ToolTip" xml:space="preserve">
     <value>Add Constraint to selected: 
 - Elements
+- Connector
 - Diagram if nothing selected
-
-Always remember: Diagrams are for the reader</value>
+</value>
   </data>
   <data name="&gt;&gt;_btnAddConstraint.Name" xml:space="preserve">
     <value>_btnAddConstraint</value>
