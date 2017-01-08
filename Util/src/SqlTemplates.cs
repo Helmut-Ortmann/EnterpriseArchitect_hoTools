@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Windows.Forms;
-using System.Resources;
 using System.Reflection;
+using System.Resources;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
 using EA;
 using hoTools.Utils.Extension;
-
+using Attribute = EA.Attribute;
 
 namespace hoTools.Utils.SQL
 {
@@ -460,11 +460,8 @@ For: Package, Element, Diagram, Attribute, Operation"
             {
                 return template;
             }
-            else {
-                MessageBox.Show($"ID={templateId}", @"Invalid templateID");
-                return null;
-            }
-
+            MessageBox.Show($"ID={templateId}", @"Invalid templateID");
+            return null;
         }
         /// <summary>
         /// Get TemplateText (the template) or null according to templateID. 
@@ -481,13 +478,11 @@ For: Package, Element, Diagram, Attribute, Operation"
                 {
                     ResourceManager rm = new ResourceManager("hoTools.Utils.Resources.Strings", Assembly.GetExecutingAssembly());
                     return rm.GetString(template.TemplateText); 
-                }  else return template.TemplateText;
+                }
+                return template.TemplateText;
             }
-            else {
-                MessageBox.Show($"ID={templateId}", @"Invalid templateID");
-                return null;
-            }
-   
+            MessageBox.Show($"ID={templateId}", @"Invalid templateID");
+            return null;
         }
         /// <summary>
         /// Get TemplateText Tool tip or null according to templateID
@@ -501,11 +496,8 @@ For: Package, Element, Diagram, Attribute, Operation"
             {
                 return template.ToolTip;
             }
-            else {
-                MessageBox.Show($"ID={templateId}", @"Invalid templateID");
-                return null;
-            }
-
+            MessageBox.Show($"ID={templateId}", @"Invalid templateID");
+            return null;
         }
         /// <summary>
         /// Get TemplateText name or null according to templateID
@@ -519,11 +511,8 @@ For: Package, Element, Diagram, Attribute, Operation"
             {
                 return template.TemplateName;
             }
-            else {
-                MessageBox.Show($"ID={templateId}", @"Invalid templateID");
-                return null;
-            }
-
+            MessageBox.Show($"ID={templateId}", @"Invalid templateID");
+            return null;
         }
 
         /// <summary>
@@ -783,7 +772,7 @@ For: Package, Element, Diagram, Attribute, Operation"
                         id = pkg.PackageID;
                         break;
                     case ObjectType.otAttribute:
-                        EA.Attribute attr = (EA.Attribute)rep.GetContextObject();
+                        Attribute attr = (Attribute)rep.GetContextObject();
                         id = attr.AttributeID;
                         break;
                     case ObjectType.otMethod:
@@ -837,7 +826,7 @@ For: Package, Element, Diagram, Attribute, Operation"
                         guid = pkg.PackageGUID;
                         break;
                     case ObjectType.otAttribute:
-                        EA.Attribute attr = (EA.Attribute)rep.GetContextObject();
+                        Attribute attr = (Attribute)rep.GetContextObject();
                         guid = attr.AttributeGUID;
                         break;
                     case ObjectType.otMethod:
@@ -914,7 +903,7 @@ For: Package, Element, Diagram, Attribute, Operation"
                     id = pkg.PackageID;
                     break;
                 case ObjectType.otAttribute:
-                    EA.Attribute attr = (EA.Attribute)rep.GetContextObject();
+                    Attribute attr = (Attribute)rep.GetContextObject();
                     EA.Element elOfAttr = rep.GetElementByID(attr.ParentID);
                     id = elOfAttr.PackageID;
                     break;
@@ -980,7 +969,7 @@ For: Package, Element, Diagram, Attribute, Operation"
                                 string[] lFlowGuid = flowGuids.Split(',');
                                 foreach (string flowGuid in lFlowGuid)
                                 {
-                                    EA.Connector flow = rep.GetConnectorByGuid(flowGuid);
+                                    Connector flow = rep.GetConnectorByGuid(flowGuid);
                                     foreach (EA.Element el in flow.ConveyedItems)
                                     {
                                         conveyedItems = $"{conveyedItems}, {el.ElementID}";
@@ -1124,7 +1113,7 @@ For: Package, Element, Diagram, Attribute, Operation"
         /// <returns></returns>
         static string MacroBranchConstant(Repository rep, string sql)
         {
-            foreach (SqlTemplateId id in new SqlTemplateId[]
+            foreach (SqlTemplateId id in new[]
             {
                 SqlTemplateId.BranchIds,
                 SqlTemplateId.InBranchIds

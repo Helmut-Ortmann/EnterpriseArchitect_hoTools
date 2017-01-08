@@ -955,7 +955,7 @@ namespace hoTools
                     break;
 
                 case MenuAddLinkedNote:
-                    EaService.AddElementToDiagram(repository,"Note","NoteLink");
+                    EaService.AddElementsToDiagram(repository,"Note","NoteLink");
 
                     break;
 

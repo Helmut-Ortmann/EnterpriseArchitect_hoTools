@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Resources;
 using System.Reflection;
-
+using System.Resources;
 
 // ReSharper disable once CheckNamespace
 namespace hoTools.Utils.SQL

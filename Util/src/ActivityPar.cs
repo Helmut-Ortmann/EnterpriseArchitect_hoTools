@@ -1,4 +1,5 @@
 ﻿using System;
+using EA;
 using hoTools.Utils.Parameter;
 
 namespace hoTools.Utils.ActivityParameter
@@ -16,8 +17,8 @@ namespace hoTools.Utils.ActivityParameter
         // init
         // final
         public static bool ActivityIsSimple = true; // Create Activity from function in the simple form
-        public static bool CreateDefaultElementsForActivity(EA.Repository rep, 
-                                EA.Diagram dia, EA.Element act)
+        public static bool CreateDefaultElementsForActivity(Repository rep, 
+                                Diagram dia, EA.Element act)
         {
             // create init node
             CreateInitFinalNode(rep, dia, act, 100, @"l=350;r=370;t=70;b=90;");
@@ -32,7 +33,7 @@ namespace hoTools.Utils.ActivityParameter
         // subtype=100 init node
         // subtype=101 final node
 
-        public static EA.DiagramObject CreateInitFinalNode(EA.Repository rep, EA.Diagram dia, EA.Element act, 
+        public static EA.DiagramObject CreateInitFinalNode(Repository rep, Diagram dia, EA.Element act, 
                                       int subType, string position)
         {
             var initNode = (EA.Element)act.Elements.AddNew("", "StateNode");
@@ -47,14 +48,15 @@ namespace hoTools.Utils.ActivityParameter
                 initDiaNode.Update();
                 Util.SetSequenceNumber(rep, dia, initDiaNode, "1");
                 return initDiaNode;
-            }else return null;
+            }
+            return null;
         }
         //--------------------------------------------------------------------------------
         // createActivityForOperation
         //--------------------------------------------------------------------------------
         // Create an Activity Diagram for the operation
 
-        public static bool CreateActivityForOperation(EA.Repository rep, EA.Method m, int treePos=100)
+        public static bool CreateActivityForOperation(Repository rep, Method m, int treePos=100)
         {
             // get class
             EA.Element elClass = rep.GetElementByID(m.ParentID);
@@ -70,7 +72,7 @@ namespace hoTools.Utils.ActivityParameter
             if (ActivityIsSimple == false)
             {
                 // create Class Activity Diagram in target package
-                var pkgActDia = (EA.Diagram)pkgTrg.Diagrams.AddNew("Operation:" + m.Name + " Content", "Activity");
+                var pkgActDia = (Diagram)pkgTrg.Diagrams.AddNew("Operation:" + m.Name + " Content", "Activity");
                 pkgActDia.Update();
                 pkgTrg.Diagrams.Refresh();
 
@@ -96,7 +98,7 @@ namespace hoTools.Utils.ActivityParameter
             pkgTrg.Elements.Refresh();
 
             // create activity diagram beneath Activity
-            var actDia = (EA.Diagram)act.Diagrams.AddNew(m.Name, "Activity");
+            var actDia = (Diagram)act.Diagrams.AddNew(m.Name, "Activity");
             // update diagram properties
             actDia.ShowDetails = 0; // hide details
             // scale page to din A4
@@ -168,9 +170,9 @@ namespace hoTools.Utils.ActivityParameter
         }
       
 
-        public static EA.Diagram CreateActivityCompositeDiagram(EA.Repository rep, EA.Element act) {
+        public static Diagram CreateActivityCompositeDiagram(Repository rep, EA.Element act) {
             // create activity diagram beneath Activity
-            var actDia = (EA.Diagram)act.Diagrams.AddNew(act.Name, "Activity");
+            var actDia = (Diagram)act.Diagrams.AddNew(act.Name, "Activity");
             // update diagram properties
             actDia.ShowDetails = 0; // hide details
             // scale page to din A4
@@ -212,7 +214,7 @@ namespace hoTools.Utils.ActivityParameter
         // get Parameter from operation
         // visualize them on diagram / activity
         //-------------------------------------------------------------------------------------------------
-        public static bool UpdateParameterFromOperation(EA.Repository rep, EA.Element act, EA.Method m)
+        public static bool UpdateParameterFromOperation(Repository rep, EA.Element act, Method m)
         {
             if (m == null) return false;
             if (act.Locked) return false;
@@ -345,7 +347,7 @@ namespace hoTools.Utils.ActivityParameter
 
             return true;
         }
-        public static void VisualizePortForDiagramobject(int pos, EA.Diagram dia, EA.DiagramObject diaObjSource, EA.Element port, EA.Element interf)
+        public static void VisualizePortForDiagramobject(int pos, Diagram dia, EA.DiagramObject diaObjSource, EA.Element port, EA.Element interf)
         {
             // check if port already exists
             foreach (EA.DiagramObject diaObj in dia.DiagramObjects)

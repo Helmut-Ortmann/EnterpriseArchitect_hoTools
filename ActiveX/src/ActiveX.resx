@@ -415,6 +415,9 @@ e.g.: 'myString*' Everything starting with 'myString' (db independent)
   <data name="_btnLabelLeft.ImageAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
+  <data name="_btnLabelLeft.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="_btnLabelLeft.Location" type="System.Drawing.Point, System.Drawing">
     <value>141, 0</value>
   </data>
@@ -1431,21 +1434,26 @@ An SQL Query you can export to Excel by:
     <value>0, 0</value>
   </data>
   <data name="_btnAddNoteAndLink.Size" type="System.Drawing.Size, System.Drawing">
-    <value>90, 25</value>
+    <value>109, 25</value>
   </data>
   <data name="_btnAddNoteAndLink.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
   <data name="_btnAddNoteAndLink.Text" xml:space="preserve">
-    <value>Att Note</value>
+    <value>Attach Note</value>
   </data>
   <data name="_btnAddNoteAndLink.ToolTip" xml:space="preserve">
-    <value>Add, link and attach Note to selected: 
-- Diagram
-- Element
-and link it to description of selected diagram, element.
+    <value>Add Note, link and attach to selected: 
+- Diagram Note / Description
+- Element Note / Descriptio
 
-The Note therefore always shows the description of the linked model element.</value>
+The Note therefore always shows the description of the linked model element.
+
+Always remember: 
+- Diagrams are for the reader
+- The Element/Diagram description is a good place for specifications.
+
+</value>
   </data>
   <data name="&gt;&gt;_btnAddNoteAndLink.Name" xml:space="preserve">
     <value>_btnAddNoteAndLink</value>
@@ -1460,21 +1468,23 @@ The Note therefore always shows the description of the linked model element.</va
     <value>2</value>
   </data>
   <data name="_btnAddNote.Location" type="System.Drawing.Point, System.Drawing">
-    <value>96, -1</value>
+    <value>141, -1</value>
   </data>
   <data name="_btnAddNote.Size" type="System.Drawing.Size, System.Drawing">
-    <value>83, 26</value>
+    <value>50, 26</value>
   </data>
   <data name="_btnAddNote.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
   <data name="_btnAddNote.Text" xml:space="preserve">
-    <value>Add Note</value>
+    <value>Note</value>
   </data>
   <data name="_btnAddNote.ToolTip" xml:space="preserve">
     <value>Add Note to selected: 
 - Elements
-- Diagram if nothing selected</value>
+- Diagram if nothing is selected
+
+Always remember: Diagrams are for the reader</value>
   </data>
   <data name="&gt;&gt;_btnAddNote.Name" xml:space="preserve">
     <value>_btnAddNote</value>
@@ -1489,21 +1499,23 @@ The Note therefore always shows the description of the linked model element.</va
     <value>1</value>
   </data>
   <data name="_btnAddConstraint.Location" type="System.Drawing.Point, System.Drawing">
-    <value>188, -1</value>
+    <value>211, -1</value>
   </data>
   <data name="_btnAddConstraint.Size" type="System.Drawing.Size, System.Drawing">
-    <value>113, 26</value>
+    <value>90, 26</value>
   </data>
   <data name="_btnAddConstraint.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
   </data>
   <data name="_btnAddConstraint.Text" xml:space="preserve">
-    <value>Add Constraint</value>
+    <value>Constraint</value>
   </data>
   <data name="_btnAddConstraint.ToolTip" xml:space="preserve">
     <value>Add Constraint to selected: 
 - Elements
-- Diagram if nothing selected</value>
+- Diagram if nothing selected
+
+Always remember: Diagrams are for the reader</value>
   </data>
   <data name="&gt;&gt;_btnAddConstraint.Name" xml:space="preserve">
     <value>_btnAddConstraint</value>

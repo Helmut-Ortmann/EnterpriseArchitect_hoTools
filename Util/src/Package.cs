@@ -1,4 +1,6 @@
 ﻿
+using EA;
+
 namespace hoTools.Utils
 {
     public static class Package
@@ -10,7 +12,7 @@ namespace hoTools.Utils
         /// <param name="branch"></param>
         /// <param name="id"></param>
         /// <returns></returns>
-        public static string GetBranch (EA.Repository rep, string branch, int id)
+        public static string GetBranch (Repository rep, string branch, int id)
         {
             if (id > 0)
             {

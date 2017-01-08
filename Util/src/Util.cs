@@ -1,12 +1,13 @@
 ﻿using System;
-using System.Windows.Forms;
 using System.Diagnostics;
-using System.Xml;
-using System.Text.RegularExpressions;
 using System.IO;
+using System.Text.RegularExpressions;
+using System.Windows.Forms;
+using System.Xml;
 using EA;
 using hoTools.Utils.Extension;
 using hoTools.Utils.svnUtil;
+using Attribute = EA.Attribute;
 using File = System.IO.File;
 
 namespace hoTools.Utils
@@ -29,13 +30,13 @@ namespace hoTools.Utils
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"{ex.Message}\n\nFile:'{filePath}'", $"Can't open file {Path.GetFileName(filePath)}");
+                MessageBox.Show($@"{ex.Message}\n\nFile:'{filePath}'", $@"Can't open file {Path.GetFileName(filePath)}");
             }
         }
 
         #endregion
 
-        public static string ObjectTypeToString(EA.ObjectType objectType)
+        public static string ObjectTypeToString(ObjectType objectType)
         {
             switch (objectType)
             {
@@ -60,14 +61,14 @@ namespace hoTools.Utils
         /// </summary>
         /// <param name="rep"></param>
         /// <returns></returns>
-        public static EA.Element GetElementFromContextObject(EA.Repository rep)
+        public static EA.Element GetElementFromContextObject(Repository rep)
         {
             EA.Element el = null;
-            EA.ObjectType objectType = rep.GetContextItemType();
+            ObjectType objectType = rep.GetContextItemType();
             switch (objectType)
             {
                 case ObjectType.otAttribute:
-                    var a = (EA.Attribute) rep.GetContextObject();
+                    var a = (Attribute) rep.GetContextObject();
                     el = rep.GetElementByID(a.ParentID);
                     break;
                 case ObjectType.otMethod:
@@ -82,7 +83,7 @@ namespace hoTools.Utils
                     el = rep.GetElementByGuid(pkg.PackageGUID);
                     break;
                 case ObjectType.otNone:
-                    EA.Diagram dia = rep.GetCurrentDiagram();
+                    Diagram dia = rep.GetCurrentDiagram();
                     if (dia?.SelectedObjects.Count == 1)
                     {
                         var objSelected = (EA.DiagramObject) dia.SelectedObjects.GetAt(0);
@@ -100,9 +101,9 @@ namespace hoTools.Utils
         {
 
             if (isTotalCommander)
-                Util.StartApp(@"totalcmd.exe", "/o " + path);
+                StartApp(@"totalcmd.exe", "/o " + path);
             else
-                Util.StartApp(@"Explorer.exe", "/e, " + path);
+                StartApp(@"Explorer.exe", "/e, " + path);
         }
 
 
@@ -146,14 +147,10 @@ namespace hoTools.Utils
                 return "";
 
             }
-            else
-            {
-                return "%";
-            }
-
+            return "%";
         }
 
-        public static void SetSequenceNumber(EA.Repository rep, EA.Diagram dia,
+        public static void SetSequenceNumber(Repository rep, Diagram dia,
             EA.DiagramObject obj, string sequence)
         {
             if (obj != null)
@@ -167,7 +164,7 @@ namespace hoTools.Utils
             }
         }
 
-        public static void AddSequenceNumber(EA.Repository rep, EA.Diagram dia)
+        public static void AddSequenceNumber(Repository rep, Diagram dia)
         {
 
             string updateStr = @"update t_DiagramObjects set sequence = sequence + 1 " +
@@ -176,7 +173,7 @@ namespace hoTools.Utils
             rep.Execute(updateStr);
         }
 
-        public static int GetHighestSequenceNoFromDiagram(EA.Repository rep, EA.Diagram dia)
+        public static int GetHighestSequenceNoFromDiagram(Repository rep, Diagram dia)
         {
             int sequenceNumber = 0;
             string query = @"select sequence from t_diagramobjects do " +
@@ -195,24 +192,21 @@ namespace hoTools.Utils
         }
 
         // replace of API-function getDiagramObjectByID which isn't available in EA 9.
-        public static EA.DiagramObject GetDiagramObjectById(EA.Repository rep, EA.Diagram dia, int elementId)
+        public static EA.DiagramObject GetDiagramObjectById(Repository rep, Diagram dia, int elementId)
         {
             if (rep.LibraryVersion > 999)
             {
                 return dia.GetDiagramObjectByID(elementId, "");
                 //return null;
             }
-            else
+            foreach (EA.DiagramObject obj in dia.DiagramObjects)
             {
-                foreach (EA.DiagramObject obj in dia.DiagramObjects)
+                if (obj.ElementID == elementId)
                 {
-                    if (obj.ElementID == elementId)
-                    {
-                        return obj;
-                    }
+                    return obj;
                 }
-                return null;
             }
+            return null;
         }
 
 
@@ -231,7 +225,7 @@ namespace hoTools.Utils
         // C =               Customer
         // B =               Bezier
         // NO=               make nothing
-        public static void SetLineStyleForDiagramLink(string lineStyle, EA.DiagramLink link)
+        public static void SetLineStyleForDiagramLink(string lineStyle, DiagramLink link)
         {
 #pragma warning disable RECS0012
             lineStyle = lineStyle + "  ";
@@ -268,19 +262,19 @@ namespace hoTools.Utils
         // C =               Customer 
         // B =               Bezier
         // R =               Reverse direction of connector
-        public static void SetLineStyleDiagramObjectsAndConnectors(EA.Repository rep, EA.Diagram d, string lineStyle)
+        public static void SetLineStyleDiagramObjectsAndConnectors(Repository rep, Diagram d, string lineStyle)
         {
-            EA.Collection selectedObjects = d.SelectedObjects;
-            EA.Connector selectedConnector = d.SelectedConnector;
+            Collection selectedObjects = d.SelectedObjects;
+            Connector selectedConnector = d.SelectedConnector;
             // store current diagram
             rep.SaveDiagram(d.DiagramID);
-            foreach (EA.DiagramLink link in d.DiagramLinks)
+            foreach (DiagramLink link in d.DiagramLinks)
             {
                 if (link.IsHidden == false)
                 {
 
                     // check if connector is connected with diagram object
-                    EA.Connector c = rep.GetConnectorByID(link.ConnectorID);
+                    Connector c = rep.GetConnectorByID(link.ConnectorID);
                     foreach (EA.DiagramObject dObject in d.SelectedObjects)
                     {
                         if (c.ClientID == dObject.ElementID | c.SupplierID == dObject.ElementID)
@@ -292,15 +286,12 @@ namespace hoTools.Utils
                                 SetLineStyleForDiagramLink(lineStyle, link);
                         }
                     }
-                    if (selectedConnector != null)
+                    if (c.ConnectorID == selectedConnector?.ConnectorID)
                     {
-                        if (c.ConnectorID == selectedConnector.ConnectorID)
-                        {
-                            if (lineStyle.Substring(0, 1) == "R")
-                                ReverseConnectorDirection(rep, rep.GetConnectorByID(link.ConnectorID));
-                            else
-                                SetLineStyleForDiagramLink(lineStyle, link);
-                        }
+                        if (lineStyle.Substring(0, 1) == "R")
+                            ReverseConnectorDirection(rep, rep.GetConnectorByID(link.ConnectorID));
+                        else
+                            SetLineStyleForDiagramLink(lineStyle, link);
                     }
                 }
             }
@@ -331,12 +322,12 @@ namespace hoTools.Utils
         // R =  Reverse direction of connector     
 
 
-        public static void SetLineStyleDiagram(EA.Repository rep, EA.Diagram d, string lineStyle)
+        public static void SetLineStyleDiagram(Repository rep, Diagram d, string lineStyle)
         {
             // store current diagram
             rep.SaveDiagram(d.DiagramID);
             // all links
-            foreach (EA.DiagramLink link in d.DiagramLinks)
+            foreach (DiagramLink link in d.DiagramLinks)
             {
                 if (link.IsHidden == false)
                 {
@@ -352,7 +343,7 @@ namespace hoTools.Utils
         }
 
 
-        public static void ChangeClassNameToSynonyms(EA.Repository rep, EA.Element el)
+        public static void ChangeClassNameToSynonyms(Repository rep, EA.Element el)
         {
             if (el.Type.Equals("Class"))
             {
@@ -377,7 +368,7 @@ namespace hoTools.Utils
             }
         }
 
-        public static void ChangePackageClassNameToSynonyms(EA.Repository rep, EA.Package pkg)
+        public static void ChangePackageClassNameToSynonyms(Repository rep, EA.Package pkg)
         {
             // All elements in package
             foreach (EA.Element el in pkg.Elements)
@@ -397,10 +388,10 @@ namespace hoTools.Utils
         }
 
 
-        public static bool UpdateClass(EA.Repository rep, EA.Element el)
+        public static bool UpdateClass(Repository rep, EA.Element el)
         {
 
-            foreach (EA.Attribute a in el.Attributes)
+            foreach (Attribute a in el.Attributes)
             {
                 UpdateAttribute(rep, a);
             }
@@ -417,7 +408,7 @@ namespace hoTools.Utils
             return true;
         }
 
-        public static bool UpdatePackage(EA.Repository rep, EA.Package pkg)
+        public static bool UpdatePackage(Repository rep, EA.Package pkg)
         {
             foreach (EA.Element el in pkg.Elements)
             {
@@ -433,7 +424,7 @@ namespace hoTools.Utils
 
 
 
-        public static bool UpdateAttribute(EA.Repository rep, EA.Attribute a)
+        public static bool UpdateAttribute(Repository rep, Attribute a)
         {
             // no classifier defined
             if (a.ClassifierID == 0)
@@ -455,7 +446,7 @@ namespace hoTools.Utils
         }
 
         // Update Method Types
-        public static bool UpdateMethod(EA.Repository rep, Method m)
+        public static bool UpdateMethod(Repository rep, Method m)
         {
 
             int id;
@@ -507,7 +498,7 @@ namespace hoTools.Utils
         // Find type for name
         // 1. Search for name (if type contains a '*' search for type with '*' and for type without '*'
         // 2. Search for Synonyms
-        public static int GetTypeId(EA.Repository rep, string name)
+        public static int GetTypeId(Repository rep, string name)
         {
             int intReturn = 0;
             //Boolean isPointer = false;
@@ -573,7 +564,7 @@ namespace hoTools.Utils
             return intReturn;
         }
 
-        public static int GetTypeFromName(EA.Repository rep, ref string name, ref string type)
+        public static int GetTypeFromName(Repository rep, ref string name, ref string type)
         {
             var id = GetTypeId(rep, type);
             if (id == 0 & type.Contains("*"))
@@ -602,7 +593,7 @@ namespace hoTools.Utils
         // Parameter wird aufgrund des Alias-Namens gefunden
         //
         // 
-        public static EA.Element GetParameterFromActivity(EA.Repository rep, EA.Parameter par, EA.Element act,
+        public static EA.Element GetParameterFromActivity(Repository rep, EA.Parameter par, EA.Element act,
             bool isReturn = false)
         {
 
@@ -635,7 +626,7 @@ namespace hoTools.Utils
         }
 
         // Find the calling operation from a Call Operation Action
-        public static Method GetOperationFromAction(EA.Repository rep, EA.Element action)
+        public static Method GetOperationFromAction(Repository rep, EA.Element action)
         {
             Method method = null;
             string query = @"select o.Classifier_guid AS CLASSIFIER_GUID
@@ -655,7 +646,7 @@ namespace hoTools.Utils
         }
 
         // Find the calling operation from a Call Operation Action
-        public static string GetParameterType(EA.Repository rep, string actionPinGuid)
+        public static string GetParameterType(Repository rep, string actionPinGuid)
         {
             string query = @"SELECT par.type AS OPTYPE 
 			    from t_object o  inner join t_operationparams par on (o.classifier_guid = par.ea_guid)
@@ -675,7 +666,7 @@ namespace hoTools.Utils
 
 
         // Find the calling operation from a Call Operation Action
-        public static Method GetOperationFromCallAction(EA.Repository rep, EA.Element obj)
+        public static Method GetOperationFromCallAction(Repository rep, EA.Element obj)
         {
             string wildCard = GetWildCard(rep);
             string query = @"SELECT op.ea_guid AS OPERATION from (t_object o inner join t_operation op on (o.classifier_guid = op.ea_guid))
@@ -697,7 +688,7 @@ namespace hoTools.Utils
         }
 
         // Find the calling operation from a Call Operation Action
-        public static string GetClassifierGuid(EA.Repository rep, string guid)
+        public static string GetClassifierGuid(Repository rep, string guid)
         {
             string query = @"select o.Classifier_guid AS CLASSIFIER_GUID
                       from t_object o 
@@ -717,7 +708,7 @@ namespace hoTools.Utils
 
 
         // Gets the trigger associated with the connector / element
-        public static string GetTrigger(EA.Repository rep, string guid)
+        public static string GetTrigger(Repository rep, string guid)
         {
             string query = @"select x.Description AS TRIGGER_GUID
                       from t_xref x 
@@ -736,7 +727,7 @@ namespace hoTools.Utils
         }
 
         // Gets the signal associated with the element
-        public static string GetSignal(EA.Repository rep, string guid)
+        public static string GetSignal(Repository rep, string guid)
         {
             string query = @"select x.Description AS SIGNAL_GUID
                       from t_xref x 
@@ -755,7 +746,7 @@ namespace hoTools.Utils
         }
 
         // Gets the composite element for a diagram GUID
-        public static string GetElementFromCompositeDiagram(EA.Repository rep, string diagramGuid)
+        public static string GetElementFromCompositeDiagram(Repository rep, string diagramGuid)
         {
             string query = @"select o.ea_guid AS COMPOSITE_GUID
                       from t_xref x INNER JOIN t_object o on (x.client = o.ea_guid and type = 'element property')
@@ -775,7 +766,7 @@ namespace hoTools.Utils
 
         // set "ShowBeh=1; in operation field StyleEx
 
-        public static bool SetShowBehaviorInDiagram(EA.Repository rep, Method m)
+        public static bool SetShowBehaviorInDiagram(Repository rep, Method m)
         {
             string updateStr = @"update t_operation set StyleEx = 'ShowBeh=1;'" +
                                " where operationID = " + m.MethodID;
@@ -783,7 +774,7 @@ namespace hoTools.Utils
             return true;
         }
 
-        public static bool SetFrameLinksToDiagram(EA.Repository rep, EA.Element frm, EA.Diagram dia)
+        public static bool SetFrameLinksToDiagram(Repository rep, EA.Element frm, Diagram dia)
         {
             string updateStr = @"update t_object set pdata1 = " + dia.DiagramID +
                                " where object_ID = " + frm.ElementID;
@@ -791,7 +782,7 @@ namespace hoTools.Utils
             return true;
         }
 
-        public static bool SetActivityCompositeDiagram(EA.Repository rep, EA.Element el, string s)
+        public static bool SetActivityCompositeDiagram(Repository rep, EA.Element el, string s)
         {
             string updateStr = @"update t_object set pdata1 = '" + s + "', ntype = 8 " +
                                " where object_ID = " + el.ElementID;
@@ -799,7 +790,7 @@ namespace hoTools.Utils
             return true;
         }
 
-        public static bool SetElementPdata1(EA.Repository rep, EA.Element el, string s)
+        public static bool SetElementPdata1(Repository rep, EA.Element el, string s)
         {
             string updateStr = @"update t_object set pdata1 = '" + s + "' " +
                                " where object_ID = " + el.ElementID;
@@ -807,7 +798,7 @@ namespace hoTools.Utils
             return true;
         }
 
-        public static bool SetConnectorGuard(EA.Repository rep, int connectorId, string connectorGuard)
+        public static bool SetConnectorGuard(Repository rep, int connectorId, string connectorGuard)
         {
 
             string updateStr = @"update t_connector set pdata2 = '" + connectorGuard + "' " +
@@ -817,33 +808,79 @@ namespace hoTools.Utils
 
             return true;
         }
-
-        public static bool SetDiagramHasAttchaedLink(EA.Repository rep, EA.Element el)
+        /// <summary>
+        /// PDATA1:
+        /// - "Diagram Note"
+        /// - "
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <param name="el"></param>
+        /// <returns></returns>
+        public static bool SetDiagramHasAttchaedLink(Repository rep, EA.Element el)
         {
             SetElementPdata1(rep, el, "Diagram Note");
             return true;
         }
 
-        public static bool SetVcFlags(EA.Repository rep, EA.Package pkg, string flags)
+        public static bool SetVcFlags(Repository rep, EA.Package pkg, string flags)
         {
             string updateStr = @"update t_package set packageflags = '" + flags + "' " +
                                " where package_ID = " + pkg.PackageID;
             rep.Execute(updateStr);
             return true;
         }
-
-        public static bool SetElementHasAttchaedLink(EA.Repository rep, EA.Element el, EA.Element elNote)
+        /// <summary>
+        /// Attach a Modelelement to another Model element
+        /// pdata1= 'Element Note'  (what to attach to)
+        ///         'Link Notes'    (link to connector)
+        /// pdata2= ElementID to attach to if element
+        /// pdata4= 'Yes' if link to element
+        ///         idref1=ID connector if link to connector
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <param name="el"></param>
+        /// <param name="elNote"></param>
+        /// <returns></returns>
+        public static bool SetElementHasAttachedElementLink(Repository rep, EA.Element el, EA.Element elNote)
         {
-            string updateStr = @"update t_object set pdata1 = 'Element Note', pdata2 = '" + el.ElementID +
-                               "', pdata4='Yes' " +
-                               " where object_ID = " + elNote.ElementID;
+            return SetElementLink(rep, elNote.ElementID, "Element Note", el.ElementID, "Yes",0);
+        }
+
+        public static bool SetElementHasAttchaedConnectorLink(Repository rep, Connector con, EA.Element elNote, bool isAttachedLink=false)
+        {
+            string attachedLink = "";
+            if (isAttachedLink) attachedLink = "Link Notes";
+            return SetElementLink(rep, elNote.ElementID, attachedLink, 0, $@"idref1={con.ConnectorID}",1);
+        }
+        /// Set Element Link to:
+        /// - Object
+        /// - Diagram
+        /// - Connector
+        /// Attach a Modelelement to another Model item (Element, Connector, Diagram)
+        /// pdata1= Attach Note to feature of
+        ///         'Diagram Note'  
+        ///         'Element Note' and more features to attach to the object
+        ///         'Link Notes'   Attach to connector
+        /// pdata2= ElementID to attach to if object
+        /// pdata4= 'Yes' if link to object
+        ///         'idref1=connectorID;' connector if link to connector
+        /// ntype   0 Standard
+        ///         1 connect to connector according to 'idref1=connectorID;'
+        static bool SetElementLink(Repository rep, int elId, string pdata1, int pdata2, string pdata4, int ntype)
+        {
+            string pdata2Value = "";
+            if (pdata2 > 0)
+               pdata2Value = $@", pdata2 = { pdata2}";
+            {
+                
+            } 
+            string updateStr = $@"update t_object set pdata1 = '{pdata1}' {pdata2Value}, pdata4='{pdata4};', NTYPE={ntype}" +
+                               $@" where object_ID = {elId} ";
             rep.Execute(updateStr);
-
-
             return true;
         }
 
-        public static bool SetBehaviorForOperation(EA.Repository rep, Method op, EA.Element act)
+        public static bool SetBehaviorForOperation(Repository rep, Method op, EA.Element act)
         {
 
             string updateStr = @"update t_operation set behaviour = '" + act.ElementGUID + "' " +
@@ -854,7 +891,7 @@ namespace hoTools.Utils
             return true;
         }
 
-        public static string GetDiagramObjectLabel(EA.Repository rep, int objectId, int diagramId, int instanceId)
+        public static string GetDiagramObjectLabel(Repository rep, int objectId, int diagramId, int instanceId)
         {
             string attributeName = "OBJECT_STYLE";
             string query = @"select ObjectStyle AS " + attributeName +
@@ -866,7 +903,7 @@ namespace hoTools.Utils
             return GetSingleSqlValue(rep, query, attributeName);
         }
 
-        private static string GetSingleSqlValue(EA.Repository rep, string query, string attributeName)
+        private static string GetSingleSqlValue(Repository rep, string query, string attributeName)
         {
             string s = "";
             string str = rep.SQLQuery(query);
@@ -881,7 +918,7 @@ namespace hoTools.Utils
             return s;
         }
 
-        public static bool SetDiagramObjectLabel(EA.Repository rep, int objectId, int diagramId, int instanceId,
+        public static bool SetDiagramObjectLabel(Repository rep, int objectId, int diagramId, int instanceId,
             string s)
         {
 
@@ -898,7 +935,7 @@ namespace hoTools.Utils
 
         // Find the operation from Activity / State Machine
         // it excludes operations in state machines
-        public static Method GetOperationFromBrehavior(EA.Repository rep, EA.Element el)
+        public static Method GetOperationFromBrehavior(Repository rep, EA.Element el)
         {
             Method method = null;
             string query = "";
@@ -1020,7 +1057,7 @@ namespace hoTools.Utils
 
 
 
-        public static Method GetOperationFromConnector(EA.Repository rep, EA.Connector con)
+        public static Method GetOperationFromConnector(Repository rep, Connector con)
         {
             Method method = null;
             string query = "";
@@ -1106,7 +1143,7 @@ namespace hoTools.Utils
         /// </summary>
         /// <param name="rep">Repository</param>
         /// <param name="pkg">Package to check</param>
-        public static string UpdateVc(EA.Repository rep, EA.Package pkg)
+        public static string UpdateVc(Repository rep, EA.Package pkg)
         {
             string userNameLockedPackage = "";
             if (pkg.IsVersionControlled)
@@ -1144,7 +1181,7 @@ namespace hoTools.Utils
         // resetVCRecursive   If package is controlled: Reset package flags field of package, work for all packages recursive 
         //------------------------------------------------------------------------------------------
         // package flags:  Recurse=0;VCCFG=unchanged;
-        public static void ResetVcRecursive(EA.Repository rep, EA.Package pkg)
+        public static void ResetVcRecursive(Repository rep, EA.Package pkg)
         {
             ResetVc(rep, pkg);
             foreach (EA.Package p in pkg.Packages)
@@ -1157,7 +1194,7 @@ namespace hoTools.Utils
         // resetVC   If package is controlled: Reset package flags field of package 
         //------------------------------------------------------------------------------------------
         // package flags:  Recurse=0;VCCFG=unchanged;
-        public static void ResetVc(EA.Repository rep, EA.Package pkg)
+        public static void ResetVc(Repository rep, EA.Package pkg)
         {
             if (pkg.IsVersionControlled)
             {
@@ -1195,32 +1232,9 @@ namespace hoTools.Utils
             //}
         }
 
-        public static string GetVCstate(EA.Repository rep, EA.Package pkg, bool isLong)
+        public static string GetVCstate(Repository rep, EA.Package pkg, bool isLong)
         {
-            string[] checkedOutStatusLong =
-            {
-                "Uncontrolled",
-                "Checked in",
-                "Checked out to this user",
-                "Read only version",
-                "Checked out to another user",
-                @"Offline checked in",
-                @"Offline checked out by user",
-                @"Offline checked out by other user",
-                "Deleted"
-            };
-            string[] checkedOutStatusShort =
-            {
-                "Uncontrolled",
-                "Checked in",
-                "Checked out",
-                "Read only",
-                "Checked out",
-                @"Offline checked in",
-                @"Offline checked out",
-                @"Offline checked out",
-                @"Deleted"
-            };
+            
 
             try
             {
@@ -1233,7 +1247,7 @@ namespace hoTools.Utils
             catch (Exception e)
             {
                 if (isLong) return "VC State Error: " + e.Message;
-                else return "State Error";
+                return "State Error";
             }
 
         }
@@ -1246,7 +1260,7 @@ namespace hoTools.Utils
         /// <param name="rep"></param>
         /// <param name="el"></param>
         /// <returns></returns>
-        public static string GetGenFilePath(EA.Repository rep, EA.Element el)
+        public static string GetGenFilePath(Repository rep, EA.Element el)
 #pragma warning restore RECS0154 // Parameter is never used
         {
             string path = el.Genfile;
@@ -1279,7 +1293,7 @@ namespace hoTools.Utils
             return path;
         }
 
-        public static string GetVccRootPath(EA.Repository rep, EA.Package pkg)
+        public static string GetVccRootPath(Repository rep, EA.Package pkg)
         {
             string rootPath = "";
             var pattern = new Regex(@"VCCFG=[^;]+");
@@ -1312,22 +1326,18 @@ namespace hoTools.Utils
                 }
                 return rootPath;
             }
-            else
-            {
-                rep.WriteOutput("Debug", "VCCFG=... not found:" + pkg.Name, 0);
-                return "";
-            }
-
+            rep.WriteOutput("Debug", "VCCFG=... not found:" + pkg.Name, 0);
+            return "";
         }
 
-        public static string GetVccFilePath(EA.Repository rep, EA.Package pkg)
+        public static string GetVccFilePath(Repository rep, EA.Package pkg)
         {
             string rootPath = GetVccRootPath(rep, pkg);
             var path = rootPath + @"\" + pkg.XMLPath;
             return path;
         }
 
-        public static bool GetLatest(EA.Repository rep, EA.Package pkg, bool recursive, ref int count, int level,
+        public static bool GetLatest(Repository rep, EA.Package pkg, bool recursive, ref int count, int level,
             ref int errorCount)
         {
             if (pkg.IsControlled)
@@ -1349,8 +1359,8 @@ namespace hoTools.Utils
                     {
                         var fileInfo = new FileInfo(path);
                         var attributes = (FileAttributes) (fileInfo.Attributes - FileAttributes.ReadOnly);
-                        System.IO.File.SetAttributes(fileInfo.FullName, attributes);
-                        System.IO.File.Delete(path);
+                        File.SetAttributes(fileInfo.FullName, attributes);
+                        File.Delete(path);
                     }
                     catch (FileNotFoundException e)
                     {
@@ -1407,36 +1417,28 @@ namespace hoTools.Utils
 
         }
 
-        public static string GetConnectionString(EA.Repository rep)
+        public static string GetConnectionString(Repository rep)
         {
             string s = rep.ConnectionString;
             if (s.Contains("DBType="))
             {
                 return s;
             }
-            else
+            var f = new FileInfo(s);
+            if (f.Length > 1025)
             {
-                var f = new FileInfo(s);
-                if (f.Length > 1025)
-                {
-                    return s;
-                }
-                else
-                {
-                    return System.IO.File.ReadAllText(s);
-                }
+                return s;
             }
-
-
+            return File.ReadAllText(s);
         }
 
-        public static void OpenBehaviorForElement(EA.Repository repository, EA.Element el)
+        public static void OpenBehaviorForElement(Repository repository, EA.Element el)
         {
             // find the diagram
             if (el.Diagrams.Count > 0)
             {
                 // get the diagram
-                var dia = (EA.Diagram) el.Diagrams.GetAt(0);
+                var dia = (Diagram) el.Diagrams.GetAt(0);
                 // open diagram
                 repository.OpenDiagram(dia.DiagramID);
             }
@@ -1444,7 +1446,7 @@ namespace hoTools.Utils
             repository.ShowInProjectView(el);
         }
 
-        public static bool SetXmlPath(EA.Repository rep, string guid, string path)
+        public static bool SetXmlPath(Repository rep, string guid, string path)
         {
 
             string updateStr = @"update t_package set XMLPath = '" + path +
@@ -1465,12 +1467,12 @@ namespace hoTools.Utils
             else
                 attribute = (FileAttributes) (filePath.Attributes - FileAttributes.ReadOnly);
 
-            System.IO.File.SetAttributes(filePath.FullName, attribute);
+            File.SetAttributes(filePath.FullName, attribute);
         }
 
         #region visualizePortForDiagramobject
 
-        public static void VisualizePortForDiagramobject(int pos, EA.Diagram dia, EA.DiagramObject diaObjSource,
+        public static void VisualizePortForDiagramobject(int pos, Diagram dia, EA.DiagramObject diaObjSource,
             EA.Element port,
             EA.Element interf, string portBoundTo = "right")
         {
@@ -1543,9 +1545,9 @@ namespace hoTools.Utils
 
         #endregion
 
-        public static EA.DiagramLink GetDiagramLinkFromConnector(EA.Diagram dia, int connectorId)
+        public static DiagramLink GetDiagramLinkFromConnector(Diagram dia, int connectorId)
         {
-            foreach (EA.DiagramLink link in dia.DiagramLinks)
+            foreach (DiagramLink link in dia.DiagramLinks)
             {
                 if (link.ConnectorID == connectorId)
                 {
@@ -1559,7 +1561,7 @@ namespace hoTools.Utils
 
         // Find the operation from Activity / State Machine
         // it excludes operations in state machines
-        public static EA.Package GetModelDocumentFromPackage(EA.Repository rep, EA.Package pkg)
+        public static EA.Package GetModelDocumentFromPackage(Repository rep, EA.Package pkg)
         {
             EA.Package pkg1 = null;
             string repositoryType = "JET"; // rep.RepositoryType();
@@ -1607,7 +1609,7 @@ namespace hoTools.Utils
             return pkg1;
         }
 
-        public static EA.Package GetFirstControlledPackage(EA.Repository rep, EA.Package pkg)
+        public static EA.Package GetFirstControlledPackage(Repository rep, EA.Package pkg)
         {
             if (pkg.IsControlled) return pkg;
             var pkgId = pkg.ParentID;
@@ -1653,10 +1655,10 @@ namespace hoTools.Utils
         /// <param name="guid"></param>
         /// <param name="start"></param>
         /// <param name="end"></param>
-        private static void SetConnector(EA.Repository rep, string guid, int start, int end)
+        private static void SetConnector(Repository rep, string guid, int start, int end)
         {
             string sql =
-                               $"update t_connector set " +
+                               "update t_connector set " +
                                $" Start_Object_Id = {start}, End_Object_Id = {end} " +
                                $" where ea_guid = '{guid}'";
             rep.Execute(sql);

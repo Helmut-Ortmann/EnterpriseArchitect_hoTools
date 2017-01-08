@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Windows.Forms;
+using EA;
 
 // ReSharper disable once CheckNamespace
 namespace hoTools.Utils.MksUtil
@@ -9,10 +10,10 @@ namespace hoTools.Utils.MksUtil
     {
         readonly string _vcPath;
         readonly EA.Package _pkg;
-        readonly EA.Repository _rep;
+        readonly Repository _rep;
 
         // constructor
-        public Mks(EA.Repository rep, EA.Package pkg)  {
+        public Mks(Repository rep, EA.Package pkg)  {
             _pkg = pkg;
             _rep = rep;
             _vcPath = "";
@@ -49,7 +50,7 @@ namespace hoTools.Utils.MksUtil
                     _rep.WriteOutput("Debug", _pkg.Name + " " + _pkg.Notes, 0);
 
                     //MessageBox.Show(_pkg.Name + " " + _pkg.Packages.Count.ToString() + " " + _pkg.PackageGUID, "CountBefore");
-                    EA.Project prj = _rep.GetProjectInterface();
+                    Project prj = _rep.GetProjectInterface();
                     prj.LoadControlledPackage(_pkg.PackageGUID);
 
 
@@ -120,11 +121,8 @@ namespace hoTools.Utils.MksUtil
                     return output.ReadToEnd();
 
                 }
-                else
-                {
-                    MessageBox.Show(@"Error: Timeout",@"mks");
-                    return "Error: Timeout";
-                }
+                MessageBox.Show(@"Error: Timeout",@"mks");
+                return "Error: Timeout";
             }
             catch (Exception e)
             {

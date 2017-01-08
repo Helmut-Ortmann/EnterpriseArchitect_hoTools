@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 using System.Xml;
-
+using EA;
 
 namespace hoTools.Utils
 {
     public static class CallOperationAction
     {
         // ReSharper disable once UnusedMethodReturnValue.Global
-        public static bool CreateCallAction(EA.Repository rep, EA.Element action, EA.Method method)
+        public static bool CreateCallAction(Repository rep, EA.Element action, Method method)
         {
             // add ClassifierGUID to target action
             string updateStr = @"update t_object set classifier_GUID = '" + method.MethodGUID +
@@ -156,7 +156,7 @@ namespace hoTools.Utils
 
             return s.Trim();
         }
-        public static EA.Element GetElementFromName(EA.Repository rep, string elementName, string elementType)
+        public static EA.Element GetElementFromName(Repository rep, string elementName, string elementType)
         {
             EA.Element el = null;
             string query = @"select o.ea_guid AS EA_GUID
@@ -189,9 +189,9 @@ namespace hoTools.Utils
             }
             return "";
         }
-        public static EA.Method GetMethodFromMethodName(EA.Repository rep, string methodName)
+        public static Method GetMethodFromMethodName(Repository rep, string methodName)
         {
-            EA.Method method = null;
+            Method method = null;
             string query = @"select op.ea_guid AS EA_GUID
                       from t_operation op 
                       where op.name = '" + methodName + "' ";

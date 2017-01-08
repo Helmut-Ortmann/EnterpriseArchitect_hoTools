@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
-using System.IO;
-using System.Windows.Forms;
 using System.Text.RegularExpressions;
-
+using System.Windows.Forms;
+using EA;
 
 // ReSharper disable once CheckNamespace
 namespace hoTools.Utils.svnUtil
@@ -12,10 +11,10 @@ namespace hoTools.Utils.svnUtil
     {
         readonly string _vcPath;
         EA.Package _pkg;
-        EA.Repository _rep;
+        Repository _rep;
 
         // constructor
-        public Svn(EA.Repository rep, EA.Package pkg)  {
+        public Svn(Repository rep, EA.Package pkg)  {
             _pkg = pkg;
             _rep = rep;
             _vcPath = "";
@@ -96,11 +95,8 @@ namespace hoTools.Utils.svnUtil
                     return output.ReadToEnd();
 
                 }
-                else
-                {
-                    MessageBox.Show(@"Error: Timeout",@"svn");
-                    return "Error: Timeout";
-                }
+                MessageBox.Show(@"Error: Timeout",@"svn");
+                return "Error: Timeout";
             }
             catch (Exception e)
             {

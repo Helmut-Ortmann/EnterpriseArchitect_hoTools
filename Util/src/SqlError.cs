@@ -2,7 +2,6 @@
 using System.IO;
 using System.Windows.Forms;
 
-
 // ReSharper disable once CheckNamespace
 namespace hoTools.Utils.SQL
 {

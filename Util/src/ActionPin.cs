@@ -1,4 +1,5 @@
 ﻿using System;
+using EA;
 
 namespace hoTools.Utils.ActionPins
 {
@@ -12,7 +13,7 @@ namespace hoTools.Utils.ActionPins
         //---------------------------------------------------------------------------------------------
         // updateActionParameter(EA.Repository rep, EA.Element actionPin)
         //---------------------------------------------------------------------------------------------
-        public static bool UpdateActionPinParameter(EA.Repository rep, EA.Element action)
+        public static bool UpdateActionPinParameter(Repository rep, EA.Element action)
         {
             foreach (EA.Element actionPin in action.EmbeddedElements)
             {
@@ -72,7 +73,7 @@ namespace hoTools.Utils.ActionPins
         //    return true;
         //}
 
-        public static bool UpdateActionPinForElement(EA.Repository rep, EA.Element el1)
+        public static bool UpdateActionPinForElement(Repository rep, EA.Element el1)
         {
             if (el1.Type == "Action")
             {
@@ -102,7 +103,7 @@ namespace hoTools.Utils.ActionPins
         // updateActionPinForPackage(EA.Repository rep, EA.Package pkg)
         //----------------------------------------------------------------------------
 
-        public static bool UpdateActionPinForPackage(EA.Repository rep, EA.Package pkg)
+        public static bool UpdateActionPinForPackage(Repository rep, EA.Package pkg)
         {
             foreach (EA.Element el in pkg.Elements)
             {   // update parameter

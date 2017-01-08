@@ -1,4 +1,5 @@
 ﻿using System;
+using EA;
 
 // ReSharper disable once CheckNamespace
 namespace hoTools.Utils.Appls
@@ -8,7 +9,7 @@ namespace hoTools.Utils.Appls
         
 
 
-        public static EA.Element GetBehaviorForOperation(EA.Repository repository, EA.Method method)
+        public static EA.Element GetBehaviorForOperation(Repository repository, Method method)
         {
             EA.Element returnValue = null;
             string behavior = method.Behavior;
@@ -21,7 +22,7 @@ namespace hoTools.Utils.Appls
             return returnValue;
         }
 
-        public static void DisplayBehaviorForOperation(EA.Repository repository, EA.Method method)
+        public static void DisplayBehaviorForOperation(Repository repository, Method method)
         {
             string behavior = method.Behavior;
             if (behavior.StartsWith("{", StringComparison.Ordinal) & behavior.EndsWith("}", StringComparison.Ordinal))
@@ -40,7 +41,7 @@ namespace hoTools.Utils.Appls
             }
         }
         
-        public static bool CreateInteractionForOperation(EA.Repository rep, EA.Method m)
+        public static bool CreateInteractionForOperation(Repository rep, Method m)
         {
             // get class
             EA.Element elClass = rep.GetElementByID(m.ParentID);
@@ -52,7 +53,7 @@ namespace hoTools.Utils.Appls
             pkgSrc.Packages.Refresh();
 
             // create Class Sequence Diagram in target package
-            var pkgSeqDia = (EA.Diagram)pkgTrg.Diagrams.AddNew("Operation:" + m.Name + " Content", "Sequence");
+            var pkgSeqDia = (Diagram)pkgTrg.Diagrams.AddNew("Operation:" + m.Name + " Content", "Sequence");
             pkgSeqDia.Update();
             pkgTrg.Diagrams.Refresh();
 
@@ -74,7 +75,7 @@ namespace hoTools.Utils.Appls
             pkgTrg.Elements.Refresh();
 
             // create sequence diagram beneath Interaction
-            var seqDia = (EA.Diagram)seq.Diagrams.AddNew(m.Name, "Sequence");
+            var seqDia = (Diagram)seq.Diagrams.AddNew(m.Name, "Sequence");
             seqDia.Update();
             seq.Diagrams.Refresh();
 
@@ -128,7 +129,7 @@ namespace hoTools.Utils.Appls
         // final
         // transition from init to 'State1'
 
-        public static bool CreateDefaultElementsForStateDiagram(EA.Repository rep, EA.Diagram dia, EA.Element stateChart)
+        public static bool CreateDefaultElementsForStateDiagram(Repository rep, Diagram dia, EA.Element stateChart)
         {
 
             // check if init and final node are available
@@ -192,7 +193,7 @@ namespace hoTools.Utils.Appls
                 Util.SetSequenceNumber(rep, dia, stateDiaNode, "1");
 
                 // draw a transition
-                var con = (EA.Connector)finalNode.Connectors.AddNew("", "StateFlow");
+                var con = (Connector)finalNode.Connectors.AddNew("", "StateFlow");
                 con.SupplierID = stateNode.ElementID;
                 con.ClientID = initNode.ElementID;
                 con.Update();
@@ -210,7 +211,7 @@ namespace hoTools.Utils.Appls
         //-----------------------------------------------------------------------------------------
         // Create StateMachine for Operation
         //----------------------------------------------------------------------------------
-        public static bool CreateStateMachineForOperation(EA.Repository rep, EA.Method m)
+        public static bool CreateStateMachineForOperation(Repository rep, Method m)
         {
             // get class
             EA.Element elClass = rep.GetElementByID(m.ParentID);
@@ -222,7 +223,7 @@ namespace hoTools.Utils.Appls
             pkgSrc.Packages.Refresh();
 
             // create Class StateMachine Diagram in target package
-            var pkgSeqDia = (EA.Diagram)pkgTrg.Diagrams.AddNew("Operation:" + m.Name + " Content", "Statechart");
+            var pkgSeqDia = (Diagram)pkgTrg.Diagrams.AddNew("Operation:" + m.Name + " Content", "Statechart");
             pkgSeqDia.Update();
             pkgTrg.Diagrams.Refresh();
 
@@ -244,7 +245,7 @@ namespace hoTools.Utils.Appls
             pkgTrg.Elements.Refresh();
 
             // create Statechart diagram beneath Statemachine
-            var chartDia = (EA.Diagram)stateMachine.Diagrams.AddNew(m.Name, "Statechart");
+            var chartDia = (Diagram)stateMachine.Diagrams.AddNew(m.Name, "Statechart");
             chartDia.Update();
             stateMachine.Diagrams.Refresh();
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using EA;
 
 namespace hoTools.Utils
 {
@@ -10,17 +11,17 @@ namespace hoTools.Utils
     /// </summary>
     public class EaDiagram
     {
-        readonly EA.Repository _rep;
-        readonly EA.Diagram _dia;
+        readonly Repository _rep;
+        readonly Diagram _dia;
         readonly List<EA.DiagramObject> _selectedObjects = new List<EA.DiagramObject>();
 
-        readonly EA.Connector _selectedConnector;
+        readonly Connector _selectedConnector;
         #region Constructor
         /// <summary>
         /// Get the current Diagram with it's selected objects and connectors.
         /// </summary>
         /// <param name="rep"></param>
-        public EaDiagram(EA.Repository rep)
+        public EaDiagram(Repository rep)
         {
             _rep = rep;
             _dia = _rep.GetCurrentDiagram();
@@ -34,12 +35,15 @@ namespace hoTools.Utils
         }
         #endregion
         #region Properties
-        public EA.Diagram Dia => _dia;
+        public Diagram Dia => _dia;
         public int SelectedObjectsCount => _dia.SelectedObjects.Count;
 
         #endregion
 
         #region ReloadSelectedObjectsAndConnector
+        /// <summary>
+        /// Reload previously stored selected diagramobjects and diagramlinks
+        /// </summary>
         public void ReloadSelectedObjectsAndConnector()
         {
             Save();

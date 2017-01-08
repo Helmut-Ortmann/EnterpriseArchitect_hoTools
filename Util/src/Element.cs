@@ -1,4 +1,6 @@
 ﻿
+using EA;
+
 namespace hoTools.Utils
 {
     public static class Element
@@ -12,7 +14,7 @@ namespace hoTools.Utils
         /// <param name="type"></param>
         /// <param name="stereotype"></param>
         /// <returns></returns>
-        public static EA.Element CreateElement(EA.Repository rep, EA.Package pkg, string name, string type, string stereotype)
+        public static EA.Element CreateElement(Repository rep, EA.Package pkg, string name, string type, string stereotype)
         {
             var el = CallOperationAction.GetElementFromName(rep, name, type);
 

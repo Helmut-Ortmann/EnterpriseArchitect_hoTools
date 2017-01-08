@@ -98,10 +98,7 @@ namespace hoTools.Connectors {
         public List<String> GetConnectorTypes() => new List<String> {
                 "DataFlow", "ControlFlow"
             };
-        public List<String> GetStandardStereotypes() => new List<String>
-        {
-
-        };
+        public List<String> GetStandardStereotypes() => new List<String>();
 
     }
 

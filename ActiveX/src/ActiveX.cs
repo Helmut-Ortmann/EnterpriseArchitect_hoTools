@@ -305,7 +305,7 @@ namespace hoTools.ActiveX
             EaService.DisplayOperationForSelectedElement(Repository, EaService.DisplayMode.Method);
         }
         /// <summary>
-        /// Add Note to the selected element and link this Note to the description:<para/>
+        /// Add Note to the selected elements and link this Note to the description:<para/>
         /// - Element<para/>
         /// - Diagram
         /// </summary>
@@ -313,7 +313,7 @@ namespace hoTools.ActiveX
         /// <param name="e"></param>
         void btnAddNoteAndLinkDescription_Click(object sender, EventArgs e)
         {
-            EaService.AddElementToDiagram(Repository,"Note","NoteLink");
+            EaService.AddElementsToDiagram(Repository,"Note","NoteLink", true);
         }
         /// <summary>
         /// Add Note to the selected elements:<para/>
@@ -324,7 +324,7 @@ namespace hoTools.ActiveX
         /// <param name="e"></param>
         void btnAddNote_Click(object sender, EventArgs e)
         {
-            EaService.AddElementToDiagram(Repository, "Note" );
+            EaService.AddElementsToDiagram(Repository, "Note" );
         }
         /// <summary>
         /// Add Constraint to the selected elements:<para/>
@@ -335,7 +335,7 @@ namespace hoTools.ActiveX
         /// <param name="e"></param>
         void btnAddConstraint_Click(object sender, EventArgs e)
         {
-            EaService.AddElementToDiagram(Repository, "Constraint");
+            EaService.AddElementsToDiagram(Repository, "Constraint");
         }
 
 

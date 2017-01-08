@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text.RegularExpressions;
-
 using System.Xml;
+using EA;
 
 // ReSharper disable once CheckNamespace
 namespace hoTools.Utils.Parameter
@@ -16,11 +16,11 @@ namespace hoTools.Utils.Parameter
     //            par = null;
     public class Param
     {
-        readonly EA.Repository _rep;
+        readonly Repository _rep;
         readonly EA.Element _parTrgt; // parameter
         string _xrefid = "";        // GUID of t_xref
         string _properties = "";    // the properties
-        public Param(EA.Repository rep, EA.Element parTrgt) {
+        public Param(Repository rep, EA.Element parTrgt) {
             _rep = rep;
             _parTrgt = parTrgt;
 

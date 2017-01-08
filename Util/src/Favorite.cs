@@ -1,5 +1,6 @@
 ﻿using System;
-
+using EA;
+using hoTools.Utils.Resources;
 
 // ReSharper disable once CheckNamespace
 namespace hoTools.Utils.Favorites
@@ -10,7 +11,7 @@ namespace hoTools.Utils.Favorites
     /// </summary>
     public class Favorite
     {
-        readonly EA.Repository _rep;
+        readonly Repository _rep;
         string _xrefGuid = "";
         string _clientGuid = "";
 
@@ -20,12 +21,12 @@ namespace hoTools.Utils.Favorites
         /// </summary>
         /// <param name="rep"></param>
         /// <param name="clientGuid">The client GUID of the item to remember as Favorite</param>
-        public  Favorite(EA.Repository rep, string clientGuid) {
+        public  Favorite(Repository rep, string clientGuid) {
             _rep = rep;
             _xrefGuid = Guid.NewGuid().ToString();
             _clientGuid = clientGuid; // Favorite GUID
         }
-        public Favorite(EA.Repository rep)
+        public Favorite(Repository rep)
         {
             _rep = rep;
             
@@ -37,9 +38,9 @@ namespace hoTools.Utils.Favorites
         /// </summary>
         /// <param name="rep"></param>
         /// <returns></returns>
-        static public bool InstallSearches(EA.Repository rep)
+        static public bool InstallSearches(Repository rep)
         {
-            rep.AddDefinedSearches(Resources.Strings.SearchFavorite);
+            rep.AddDefinedSearches(Strings.SearchFavorite);
             return true;
         }
         #endregion
@@ -69,7 +70,7 @@ namespace hoTools.Utils.Favorites
         public void Search()
         {
             
-            _rep.RunModelSearch(Resources.Strings.SearchFavoriteName, "", "","");
+            _rep.RunModelSearch(Strings.SearchFavoriteName, "", "","");
         }
         #endregion
     }

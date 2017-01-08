@@ -3,7 +3,6 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
-
 // ReSharper disable once CheckNamespace
 namespace GlobalHotkeys
 {

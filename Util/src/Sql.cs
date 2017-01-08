@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
+using EA;
 
 // ReSharper disable once CheckNamespace
 namespace hoTools.Utils.SQL
@@ -9,9 +10,9 @@ namespace hoTools.Utils.SQL
 
     public class UtilSql
     {
-        readonly EA.Repository _rep;
+        readonly Repository _rep;
         #region Constructor
-        public UtilSql(EA.Repository rep)
+        public UtilSql(Repository rep)
         {
             _rep = rep;
         }
@@ -80,7 +81,7 @@ namespace hoTools.Utils.SQL
             string str = _rep.SQLQuery(query);
             XElement xelement = XElement.Parse(str);
             // something found????
-            result = xelement.Descendants("Row").Count<XElement>() > 0;
+            result = xelement.Descendants("Row").Count() > 0;
             
             return result;
         }
@@ -99,7 +100,7 @@ namespace hoTools.Utils.SQL
             string str = _rep.SQLQuery(query);
             XElement xelement = XElement.Parse(str);
             // something found????
-            result = xelement.Descendants("Row").Count<XElement>() > 0;
+            result = xelement.Descendants("Row").Count() > 0;
 
             return result;
         }
