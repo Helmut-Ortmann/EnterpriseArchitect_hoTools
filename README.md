@@ -115,6 +115,8 @@ Some features:
 # Releases
 
 ## Release 2.1
+- Add Note, Constraint to Diagram, link to Node, Link, Diagram
+- Example Model Views 'hoModelView' to view Diagrams in Model View
 - SQL Searches of MDG, 'My Searches' are now inventoried.
 - Searches were faulty (ea_id instead of ea_guid), fixed in hoToolsBasic.xml,..
 - File error "d:\temp\sql\Branch.sql" fixed, cause unclear
