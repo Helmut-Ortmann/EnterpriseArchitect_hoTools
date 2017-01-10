@@ -60,7 +60,7 @@ namespace hoTools.Utils.Configuration
                 {
                     if (withErrMessage)
                     {
-                        // script produces this erro cause unknown, seems during loading the script
+                        // script produces this error cause unknown, seems during loading the script
                         if (sqlFileName != @"d:\temp\sql\Branch.sql")
                         {
                             MessageBox.Show($@"Error reading sql file '{sqlFileName}'", @"Error Reading *.sql file");

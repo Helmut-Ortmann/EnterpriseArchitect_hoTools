@@ -2620,7 +2620,7 @@ namespace hoTools.ActiveX
         {
             _txtSearchName.ForeColor = SystemColors.WindowText;
             if (_txtSearchName.Text.Equals("<Search Name>")) _txtSearchName.Text = "";
-            IntializeSearches();
+            //IntializeSearches();
             _rtfListOfSearches.Visible = false;
         }
         private void _txtSearchText_Leave(object sender, EventArgs e)

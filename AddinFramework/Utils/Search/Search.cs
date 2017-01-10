@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -27,7 +28,7 @@ namespace AddinFramework.Util
     /// </summary>
     public static class Search
     {
-        public static List<SearchItem> _staticAllSearches;
+        public static List<SearchItem> StaticAllSearches;
         static AutoCompleteStringCollection _staticSearchesSuggestions;
 
         // configuration as singleton
@@ -58,7 +59,7 @@ namespace AddinFramework.Util
         public static SearchItem GetSearch(int index)
         {
             
-            return _staticAllSearches[index];
+            return StaticAllSearches[index];
 
         }
 
@@ -71,9 +72,16 @@ namespace AddinFramework.Util
         public static AutoCompleteStringCollection GetSearchesSuggestions(EA.Repository rep, string configFilePath)
         {
 
-                LoadAllSearches(rep, configFilePath);
-                LoadStaticSearchesSuggestions();
-                return _staticSearchesSuggestions;
+            StaticAllSearches = new List<SearchItem>();
+
+            // Load EA Standard Search Names for current release  
+            LoadEaStandardSearchesFromJason(rep.getRelease(), configFilePath);
+            // Load stored searches like MDGs from different sources
+            LoadSearches(rep);
+
+
+            LoadStaticSearchesSuggestions();
+            return _staticSearchesSuggestions;
             
         }
         /// <summary>
@@ -84,12 +92,12 @@ namespace AddinFramework.Util
         {
             pattern = pattern.ToLower();
 
-            foreach (SearchItem item in _staticAllSearches)
+            foreach (SearchItem item in StaticAllSearches)
             {
                 item.Score = pattern.LongestCommonSubsequence(item.Name.ToLower()).Item2;
             }
            // sort list
-            _staticAllSearches = _staticAllSearches.OrderByDescending(a => a.Score).ToList();
+            StaticAllSearches = StaticAllSearches.OrderByDescending(a => a.Score).ToList();
 
         }
         /// <summary>
@@ -98,31 +106,11 @@ namespace AddinFramework.Util
         public static void ResetSort()
         {
             // sort list
-            _staticAllSearches = _staticAllSearches.OrderBy(a => a.Name).ToList();
+            StaticAllSearches = StaticAllSearches.OrderBy(a => a.Name).ToList();
 
         }
 
 
-        /// <summary>
-        /// Load the possible Searches:<para/>
-        /// - EA Standard Searches<para/>
-        /// - Searches defined in MDG (Program-Technology-Folder, MDG in file locations, MDG in URI locations)<para/> 
-        /// - Local Search of PC <para/> 
-        /// </summary>
-        public static void LoadAllSearches(EA.Repository rep, string configFilePath)
-        {
-            _staticAllSearches = new List<SearchItem>();
-
-
-            // Load EA Standard Search Names for current release  
-            LoadEaStandardSearchesFromJason(rep.getRelease(), configFilePath);
-            // Load stored searches like MDGs from different sources
-            LoadSearches(rep);
-
-
-
-
-        }
         /// <summary>
         /// LoadSearches
         /// - 
@@ -140,7 +128,7 @@ namespace AddinFramework.Util
             // MDG scripts in other locations
             LoadOtherMdgSearches(rep);
             // order
-            _staticAllSearches = _staticAllSearches.OrderBy(a => a.Name)
+            StaticAllSearches = StaticAllSearches.OrderBy(a => a.Name)
                 .ToList();
 
         }
@@ -150,7 +138,7 @@ namespace AddinFramework.Util
         public static string GetRtf()
         {
             // var s = _staticAllSearches.Select(e => $"{e.Score,2} {e.Category,-15} {e.Name}" ).ToList();
-            var s = _staticAllSearches.Select(e => $"{e.Category,-10} {e.Name}" ).ToList();
+            var s = StaticAllSearches.Select(e => $"{e.Category,-12} {e.Name}" ).ToList();
             return string.Join($"{Environment.NewLine}", s);
         }
 
@@ -161,7 +149,7 @@ namespace AddinFramework.Util
         private static void LoadStaticSearchesSuggestions()
         {
             _staticSearchesSuggestions = new AutoCompleteStringCollection();
-            var result = _staticAllSearches.Select(e => e.Name).ToArray();
+            var result = StaticAllSearches.Select(e => e.Name).ToArray();
             _staticSearchesSuggestions.AddRange(result);
             
 
@@ -243,9 +231,14 @@ namespace AddinFramework.Util
                 var mdg  = XElement.Parse(mdgXmlContent);
 
 
-                // If MDG is has to be enabled 
+                // If MDG? It has to be enabled 
                 XElement documentation = mdg.Element("Documentation");
-                // Not part of a MDG
+
+                
+                // no MDG, 
+                var searches = from search in mdg.Descendants("Search")
+                    select search; 
+                // Part of MDG?
                 if (documentation != null)
                 {
                     string id = documentation.Attribute("id")?.Value;
@@ -256,24 +249,27 @@ namespace AddinFramework.Util
                     if (rep.IsTechnologyEnabled(id) == false && rep.IsTechnologyLoaded(id)) return;
                     category = id;
 
-                }
+                    //----------------------------------------
+                    // Get all searches "ModelSearch"\"Searches"
+                    searches = from search in mdg.Descendants("ModelSearches").Descendants("Search")
+                        select search;
 
-                //----------------------------------------
-                // Get all searches
-                var searches = from search in mdg.Descendants("Search")
-                    select search;
+                }
                 
+                //----------------------------------------
+                // Get all searches 
                 foreach (XElement search in searches)
                 {
+                    // ReSharper disable once PossibleNullReferenceException
                     string searchName = search.Attribute("Name").Value;
-                    _staticAllSearches.Add(new SearchItem(searchName, searchName, category));
+                    StaticAllSearches.Add(new SearchItem(searchName, searchName, category));
                 }
 
 
             }
             catch (Exception e)
             {
-                MessageBox.Show($"{e.Message}", @"Error in loadMDGScripts: " );
+                MessageBox.Show($@"{e.Message}", @"Error in loadMDGScripts: " );
             }
         }
 
@@ -290,7 +286,7 @@ namespace AddinFramework.Util
             }
             catch (Exception e)
             {
-                MessageBox.Show($"URL='{url}' skipped (see: Extensions, MDGTechnology,Advanced).\r\n{e.Message}",
+                MessageBox.Show($@"URL='{url}' skipped (see: Extensions, MDGTechnology,Advanced).\r\n{e.Message}",
                     @"Error in load *.xml MDGSearches from url! ");
             }
         }
@@ -301,13 +297,13 @@ namespace AddinFramework.Util
         /// <para/>File, Description of SQL
         /// </summary>
         /// <returns></returns>
-        public static void LoadSqlSearches()
+        private static void LoadSqlSearches()
         {
             foreach (string file in GlobalCfg.GetListFileCompleteName())
             {
                 string description = SqlGetDescription(file);
                 string name = Path.GetFileName(file);
-                _staticAllSearches.Add( new SqlSearchItem(name, file,description)); 
+                StaticAllSearches.Add( new SqlSearchItem(name, file,description)); 
             }
         }
         /// <summary>
@@ -343,6 +339,7 @@ namespace AddinFramework.Util
         static void LoadEaStandardSearchesFromJason(string eaRelease, string configFilePath)
         {
 
+            // ReSharper disable once AssignNullToNotNullAttribute
             string jasonPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
                 @"EaStandardSearches.json");
             var eaSearches = LoadSearchesFromJason(jasonPath);
@@ -358,7 +355,7 @@ namespace AddinFramework.Util
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show($"{e.Message}",
+                    MessageBox.Show($@"{e.Message}",
                         @"Import user searches 'userSearches.json' impossible, double definitions!");
                 }
             }
@@ -369,11 +366,13 @@ namespace AddinFramework.Util
             {
                     if (eaSearchItem.EARelease != null)
                     {
-                        if (eaSearchItem.EARelease.Contains(eaRelease)) _staticAllSearches.Add(eaSearchItem);
+                        if (eaSearchItem.EARelease.Contains(eaRelease)) StaticAllSearches.Add(eaSearchItem);
                     }
                     else
                     {
-                        MessageBox.Show($"Like: \"EARelease\": \"9, 10, 11, 12, 12.1, 13\"\r\nFile:\r\n'{jasonPath}'",
+                        MessageBox.Show($@"Like: ""EARelease"": ""9, 10, 11, 12, 12.1, 13""
+File:
+'{jasonPath}'",
                             @"Error JSON, no release defined");
                     }
 

@@ -31,7 +31,7 @@
   <ModelSearches>
     <Search Name="Activity Diagrams" GUID="{F4B57E0B-ADE7-4b4c-80C4-3930EE03E46A}" PkgGUID="-1" Type="0" LnksToObj="0" CustomSearch="1" AddinAndMethodName="">
       <SrchOn>
-        <RootTable Filter="SELECT ea_guid AS CLASSGUID,  Diagram_Type AS CLASSTYPE, Name, [Version], Author, Stereotype, CreatedDate, Diagram_Type, ModifiedDate&#xA;FROM t_diagram&#xA;WHERE&#xA;t_diagram.Diagram_Type = 'Activity'  AND &#xA;name like &quot;&lt;Search Term&gt;#WC#&quot; &#xA;ORDER BY Name" Type="-1">
+        <RootTable Filter="SELECT ea_guid AS CLASSGUID,  Diagram_Type AS CLASSTYPE, Name, [Version], Author, Stereotype, CreatedDate, Diagram_Type, ModifiedDate&#xA;FROM t_diagram&#xA;WHERE&#xA;t_diagram.Diagram_Type = 'Activity' &#xA;ORDER BY&#xA; Name" Type="-1">
           <TableName Display="Custom SQL Search" Name="" />
           <TableHierarchy Display="" Hierarchy="" />
         </RootTable>
@@ -40,7 +40,7 @@
     </Search>
     <Search Name="All Diagrams" GUID="{09A09F93-95BF-4519-B50D-C8C07EBDDEA6}" PkgGUID="-1" Type="0" LnksToObj="0" CustomSearch="1" AddinAndMethodName="">
       <SrchOn>
-        <RootTable Filter="SELECT ea_guid AS CLASSGUID,  Diagram_Type AS CLASSTYPE, Name, [Version], Author, Stereotype, CreatedDate, Diagram_Type, ModifiedDate&#xD;&#xA;&#xD;&#xA;FROM t_diagram&#xD;&#xA;Where name like &quot;&lt;Search Term&gt;#WC#&quot;&#xD;&#xA;&#xD;&#xA;ORDER BY Name" Type="-1">
+        <RootTable Filter="SELECT ea_guid AS CLASSGUID,  Diagram_Type AS CLASSTYPE, Name, [Version], Author, Stereotype, CreatedDate, Diagram_Type, ModifiedDate&#xA;FROM t_diagram&#xA;&#xA;&#xA;ORDER BY&#xA; Name" Type="-1">
           <TableName Display="Custom SQL Search" Name="" />
           <TableHierarchy Display="" Hierarchy="" />
         </RootTable>
@@ -58,7 +58,7 @@
     </Search>
     <Search Name="Class Diagrams" GUID="{B2CC69D8-15AE-4ae9-8528-C2DDDF8EB465}" PkgGUID="-1" Type="0" LnksToObj="0" CustomSearch="1" AddinAndMethodName="">
       <SrchOn>
-        <RootTable Filter="SELECT ea_guid AS CLASSGUID,  Diagram_Type AS CLASSTYPE, Name, [Version], Author, Stereotype, CreatedDate, Diagram_Type, ModifiedDate&#xA;FROM t_diagram&#xA;where&#xA;t_diagram.Diagram_Type = 'Logical'&#xA;&#xA; AND &#xA;name like &quot;&lt;Search Term&gt;#WC#&quot; &#xA;ORDER BY Name" Type="-1">
+        <RootTable Filter="SELECT ea_guid AS CLASSGUID,  Diagram_Type AS CLASSTYPE, Name, [Version], Author, Stereotype, CreatedDate, Diagram_Type, ModifiedDate&#xA;FROM t_diagram&#xA;where&#xA;t_diagram.Diagram_Type = 'Logical'&#xA;&#xA;&#xA;ORDER BY&#xA; Name" Type="-1">
           <TableName Display="Custom SQL Search" Name="" />
           <TableHierarchy Display="" Hierarchy="" />
         </RootTable>
@@ -67,7 +67,7 @@
     </Search>
     <Search Name="Communication Diagrams" GUID="{64745C47-0803-4d9d-B640-4E547739E308}" PkgGUID="-1" Type="0" LnksToObj="0" CustomSearch="1" AddinAndMethodName="">
       <SrchOn>
-        <RootTable Filter="SELECT ea_guid AS CLASSGUID,  Diagram_Type AS CLASSTYPE, Name, [Version], Author, Stereotype, CreatedDate, Diagram_Type, ModifiedDate&#xA;FROM t_diagram&#xA;WHERE&#xA;t_diagram.Diagram_Type = 'Collaboration' AND &#xA;name like &quot;&lt;Search Term&gt;#WC#&quot; &#xA;ORDER BY Name" Type="-1">
+        <RootTable Filter="SELECT ea_guid AS CLASSGUID,  Diagram_Type AS CLASSTYPE, Name, [Version], Author, Stereotype, CreatedDate, Diagram_Type, ModifiedDate&#xA;FROM t_diagram&#xA;WHERE&#xA;t_diagram.Diagram_Type = 'Collaboration'&#xA;ORDER BY&#xA; Name" Type="-1">
           <TableName Display="Custom SQL Search" Name="" />
           <TableHierarchy Display="" Hierarchy="" />
         </RootTable>
@@ -76,7 +76,7 @@
     </Search>
     <Search Name="Component Diagrams" GUID="{9DE6B056-0FB5-4114-8772-A52B9EA07891}" PkgGUID="-1" Type="0" LnksToObj="0" CustomSearch="1" AddinAndMethodName="">
       <SrchOn>
-        <RootTable Filter="SELECT ea_guid AS CLASSGUID,  Diagram_Type AS CLASSTYPE, Name, [Version], Author, Stereotype, CreatedDate, Diagram_Type, ModifiedDate&#xA;FROM t_diagram&#xA;WHERE&#xA;t_diagram.Diagram_Type = 'Component' AND &#xA;name like &quot;&lt;Search Term&gt;#WC#&quot; &#xA;ORDER BY Name" Type="-1">
+        <RootTable Filter="SELECT ea_guid AS CLASSGUID,  Diagram_Type AS CLASSTYPE, Name, [Version], Author, Stereotype, CreatedDate, Diagram_Type, ModifiedDate&#xA;FROM t_diagram&#xA;WHERE&#xA;t_diagram.Diagram_Type = 'Component'&#xA;ORDER BY&#xA; Name" Type="-1">
           <TableName Display="Custom SQL Search" Name="" />
           <TableHierarchy Display="" Hierarchy="" />
         </RootTable>
@@ -85,7 +85,7 @@
     </Search>
     <Search Name="Custom Diagrams" GUID="{6673A54D-4B3D-4ff8-8057-9F2FD945D2A4}" PkgGUID="-1" Type="0" LnksToObj="0" CustomSearch="1" AddinAndMethodName="">
       <SrchOn>
-        <RootTable Filter="SELECT ea_guid AS CLASSGUID,  Diagram_Type AS CLASSTYPE, Name, [Version], Author, Stereotype, CreatedDate, Diagram_Type, ModifiedDate&#xA;FROM t_diagram&#xA;WHERE&#xA;t_diagram.Diagram_Type = 'Custom' AND &#xA;name like &quot;&lt;Search Term&gt;#WC#&quot; &#xA;ORDER BY Name" Type="-1">
+        <RootTable Filter="SELECT ea_guid AS CLASSGUID,  Diagram_Type AS CLASSTYPE, Name, [Version], Author, Stereotype, CreatedDate, Diagram_Type, ModifiedDate&#xA;FROM t_diagram&#xA;WHERE&#xA;t_diagram.Diagram_Type = 'Custom'&#xA;ORDER BY&#xA; Name" Type="-1">
           <TableName Display="Custom SQL Search" Name="" />
           <TableHierarchy Display="" Hierarchy="" />
         </RootTable>
@@ -94,7 +94,7 @@
     </Search>
     <Search Name="Deployment Diagrams" GUID="{361092C7-1AFB-4c61-9579-96B6A6731B86}" PkgGUID="-1" Type="0" LnksToObj="0" CustomSearch="1" AddinAndMethodName="">
       <SrchOn>
-        <RootTable Filter="SELECT ea_guid AS CLASSGUID,  Diagram_Type AS CLASSTYPE, Name, [Version], Author, Stereotype, CreatedDate, Diagram_Type, ModifiedDate&#xA;FROM t_diagram&#xA;WHERE&#xA;t_diagram.Diagram_Type = 'Deployment' AND &#xA;name like &quot;&lt;Search Term&gt;#WC#&quot; &#xA;ORDER BY Name" Type="-1">
+        <RootTable Filter="SELECT ea_guid AS CLASSGUID,  Diagram_Type AS CLASSTYPE, Name, [Version], Author, Stereotype, CreatedDate, Diagram_Type, ModifiedDate&#xA;FROM t_diagram&#xA;WHERE&#xA;t_diagram.Diagram_Type = 'Deployment'&#xA;ORDER BY&#xA; Name" Type="-1">
           <TableName Display="Custom SQL Search" Name="" />
           <TableHierarchy Display="" Hierarchy="" />
         </RootTable>
@@ -112,7 +112,7 @@
     </Search>
     <Search Name="Object Diagrams" GUID="{9B394770-A716-41b5-8F00-E9217DB39439}" PkgGUID="-1" Type="0" LnksToObj="0" CustomSearch="1" AddinAndMethodName="">
       <SrchOn>
-        <RootTable Filter="SELECT ea_guid AS CLASSGUID,  Diagram_Type AS CLASSTYPE, Name, [Version], Author, Stereotype, CreatedDate, Diagram_Type, ModifiedDate&#xA;FROM t_diagram&#xA;WHERE&#xA;t_diagram.Diagram_Type = 'Object' AND &#xA;name like &quot;&lt;Search Term&gt;#WC#&quot; &#xA;ORDER BY Name" Type="-1">
+        <RootTable Filter="SELECT ea_guid AS CLASSGUID,  Diagram_Type AS CLASSTYPE, Name, [Version], Author, Stereotype, CreatedDate, Diagram_Type, ModifiedDate&#xA;FROM t_diagram&#xA;WHERE&#xA;t_diagram.Diagram_Type = 'Object'&#xA;ORDER BY&#xA; Name" Type="-1">
           <TableName Display="Custom SQL Search" Name="" />
           <TableHierarchy Display="" Hierarchy="" />
         </RootTable>
@@ -121,7 +121,7 @@
     </Search>
     <Search Name="Package Diagrams" GUID="{F7F98DFE-38B8-4b42-8C2F-CED17503B6B9}" PkgGUID="-1" Type="0" LnksToObj="0" CustomSearch="1" AddinAndMethodName="">
       <SrchOn>
-        <RootTable Filter="SELECT ea_guid AS CLASSGUID,  Diagram_Type AS CLASSTYPE, Name, [Version], Author, Stereotype, CreatedDate, Diagram_Type, ModifiedDate&#xA;FROM t_diagram&#xA;WHERE&#xA;t_diagram.Diagram_Type = 'Package' AND &#xA;name like &quot;&lt;Search Term&gt;#WC#&quot; &#xA;ORDER BY Name" Type="-1">
+        <RootTable Filter="SELECT ea_guid AS CLASSGUID,  Diagram_Type AS CLASSTYPE, Name, [Version], Author, Stereotype, CreatedDate, Diagram_Type, ModifiedDate&#xA;FROM t_diagram&#xA;WHERE&#xA;t_diagram.Diagram_Type = 'Package'&#xA;ORDER BY&#xA; Name" Type="-1">
           <TableName Display="Custom SQL Search" Name="" />
           <TableHierarchy Display="" Hierarchy="" />
         </RootTable>
@@ -130,7 +130,7 @@
     </Search>
     <Search Name="Interaction Overview Diagram" GUID="{F4335723-A6DF-45ac-825B-A5D18C14BE5A}" PkgGUID="-1" Type="0" LnksToObj="0" CustomSearch="1" AddinAndMethodName="">
       <SrchOn>
-        <RootTable Filter="SELECT ea_guid AS CLASSGUID,  Diagram_Type AS CLASSTYPE, Name, [Version], Author, Stereotype, CreatedDate, Diagram_Type, ModifiedDate&#xA;FROM t_diagram&#xA;WHERE&#xA;t_diagram.Diagram_Type = 'InteractionOverview' AND &#xA;name like &quot;&lt;Search Term&gt;#WC#&quot; &#xA;ORDER BY Name" Type="-1">
+        <RootTable Filter="SELECT ea_guid AS CLASSGUID,  Diagram_Type AS CLASSTYPE, Name, [Version], Author, Stereotype, CreatedDate, Diagram_Type, ModifiedDate&#xA;FROM t_diagram&#xA;WHERE&#xA;t_diagram.Diagram_Type = 'InteractionOverview'&#xA;ORDER BY&#xA; Name" Type="-1">
           <TableName Display="Custom SQL Search" Name="" />
           <TableHierarchy Display="" Hierarchy="" />
         </RootTable>
@@ -148,7 +148,7 @@
     </Search>
     <Search Name="Recent Diagrams" GUID="{2357FC6A-9AC2-4bbd-973B-BDE81BD00EC6}" PkgGUID="-1" Type="0" LnksToObj="0" CustomSearch="1" AddinAndMethodName="">
       <SrchOn>
-        <RootTable Filter="SELECT ea_guid AS CLASSGUID,  Diagram_Type AS CLASSTYPE, Name, [Version], Author, Stereotype, CreatedDate, Diagram_Type, ModifiedDate, &lt;Search Term&gt; As NewerAsDays, * &#xD;&#xA;FROM t_diagram&#xD;&#xA;where&#xD;&#xA;ModifiedDate &gt; #Now - &lt;Search Term&gt;#&#xD;&#xA;ORDER BY ModifiedDate Desc" Type="-1">
+        <RootTable Filter="SELECT ea_guid AS CLASSGUID,  Diagram_Type AS CLASSTYPE, Name, [Version], Author, Stereotype, CreatedDate, Diagram_Type, ModifiedDate, &lt;Search Term&gt; As NewerAsDays, * &#xA;FROM t_diagram&#xA;where&#xA;ModifiedDate &gt; #Now - &lt;Search Term&gt;#&#xA;&#xA;ORDER BY&#xA;ModifiedDate Desc" Type="-1">
           <TableName Display="Custom SQL Search" Name="" />
           <TableHierarchy Display="" Hierarchy="" />
         </RootTable>
@@ -157,7 +157,7 @@
     </Search>
     <Search Name="Recent Elements" GUID="{D34F824C-33F5-469b-BBE6-20D830BBF8E7}" PkgGUID="-1" Type="0" LnksToObj="0" CustomSearch="1" AddinAndMethodName="">
       <SrchOn>
-        <RootTable Filter="select o.ea_guid AS CLASSGUID, o.object_type AS CLASSTYPE,o.Name AS Name,o.object_type As Type, ModifiedDate As NewerAs, Author, &#xD;&#xA; * &#xD;&#xA;from t_object o&#xD;&#xA;where o.object_type in &#xD;&#xA;     (&#xD;&#xA;      &quot;Artifact&quot;,&quot;Class&quot;,&quot;Requirement&quot;,&quot;Component&quot;, &quot;UseCase&quot;,&quot;Package&quot;,&quot;Action&quot;,&#xD;&#xA;   &quot;Activity&quot;,&quot;State&quot;,&quot;Actor&quot;,&quot;Event&quot;,&quot;Trigger&quot;,&quot;StateMachine&quot;,&quot;Signal&quot;,&#xD;&#xA;   &quot;Sequence&quot;,&quot;Port&quot;,&quot;Part&quot;,&quot;Package&quot;,&quot;Object&quot;,&quot;Note&quot;,&quot;Interface&quot;,&quot;Interaction&quot;,&quot;InteractionFragment&quot;,&quot;InteractionOccurence&quot;, &quot;Collaboration&quot;,&quot;DataType&quot;,&quot;Signal&quot;,&quot;Sequence&quot; &#xD;&#xA;      ) AND&#xD;&#xA;ModifiedDate &gt; #Now - &lt;Search Term&gt;#    &#xD;&#xA;ORDER BY o.ModifiedDate Desc" Type="-1">
+        <RootTable Filter="select o.ea_guid AS CLASSGUID, o.object_type AS CLASSTYPE,o.Name AS Name,o.object_type As Type, ModifiedDate, Author, &#xA;&lt;Search Term&gt; As NewerAsDays, * &#xA;from t_object o&#xA;where o.object_type in &#xA;     (&#xA;      &quot;Artifact&quot;,&quot;Class&quot;,&quot;Requirement&quot;,&quot;Component&quot;, &quot;UseCase&quot;,&quot;Package&quot;,&quot;Action&quot;,&#xA;   &quot;Activity&quot;,&quot;State&quot;,&quot;Actor&quot;,&quot;Event&quot;,&quot;Trigger&quot;,&quot;Text&quot;,&quot;StateMachine&quot;,&quot;Signal&quot;,&#xA;   &quot;Sequence&quot;,&quot;Port&quot;,&quot;Part&quot;,&quot;Package&quot;,&quot;Object&quot;,&quot;Note&quot;,&quot;Interface&quot;,&quot;Interaction&quot;,&quot;InteractionFragment&quot;,&quot;InteractionOccurence&quot;, &quot;Collaboration&quot;,&quot;DataType&quot;,&quot;Signal&quot;,&quot;Sequence&quot; &#xA;      ) AND&#xA;ModifiedDate &gt; #Now - &lt;Search Term&gt;#    &#xA;ORDER BY o.ModifiedDate Desc" Type="-1">
           <TableName Display="Custom SQL Search" Name="" />
           <TableHierarchy Display="" Hierarchy="" />
         </RootTable>
@@ -166,7 +166,7 @@
     </Search>
     <Search Name="Requirements Diagrams" GUID="{F4F41F75-A03D-4ce1-B5C4-E1FFA0F542E7}" PkgGUID="-1" Type="0" LnksToObj="0" CustomSearch="1" AddinAndMethodName="">
       <SrchOn>
-        <RootTable Filter="SELECT ea_guid AS CLASSGUID,  Diagram_Type AS CLASSTYPE, Name, [Version], Author, Stereotype, CreatedDate, Diagram_Type, ModifiedDate,*&#xA;FROM t_diagram&#xA;WHERE&#xA;t_diagram.StyleEx like '#WC#::Requirements#WC#'&#xA; AND &#xA;name like &quot;&lt;Search Term&gt;#WC#&quot; &#xA;ORDER BY Name" Type="-1">
+        <RootTable Filter="SELECT ea_guid AS CLASSGUID,  Diagram_Type AS CLASSTYPE, Name, [Version], Author, Stereotype, CreatedDate, Diagram_Type, ModifiedDate,*&#xA;FROM t_diagram&#xA;WHERE&#xA;t_diagram.StyleEx like '#WC#::Requirements#WC#'&#xA;&#xA;ORDER BY&#xA; Name" Type="-1">
           <TableName Display="Custom SQL Search" Name="" />
           <TableHierarchy Display="" Hierarchy="" />
         </RootTable>
@@ -174,7 +174,7 @@
       <LnksTo />
       <Search Name="Sequence Diagrams" GUID="{83A336DC-D94E-4a76-B2A6-1CCC61B19ECC}" PkgGUID="-1" Type="0" LnksToObj="0" CustomSearch="1" AddinAndMethodName="">
         <SrchOn>
-          <RootTable Filter="SELECT ea_guid AS CLASSGUID,  Diagram_Type AS CLASSTYPE, Name, [Version], Author, Stereotype, CreatedDate, Diagram_Type, ModifiedDate&#xA;FROM t_diagram&#xA;WHERE&#xA;t_diagram.Diagram_Type = 'Sequence' AND &#xA;name like &quot;&lt;Search Term&gt;#WC#&quot; &#xA;ORDER BY Name" Type="-1">
+          <RootTable Filter="SELECT ea_guid AS CLASSGUID,  Diagram_Type AS CLASSTYPE, Name, [Version], Author, Stereotype, CreatedDate, Diagram_Type, ModifiedDate&#xA;FROM t_diagram&#xA;WHERE&#xA;t_diagram.Diagram_Type = 'Sequence'&#xA;ORDER BY&#xA; Name" Type="-1">
             <TableName Display="Custom SQL Search" Name="" />
             <TableHierarchy Display="" Hierarchy="" />
           </RootTable>
@@ -182,9 +182,18 @@
         <LnksTo />
       </Search>
     </Search>
+    <Search Name="Sequence Diagrams" GUID="{D8165088-1DEE-4f07-A779-030E27A47593}" PkgGUID="-1" Type="0" LnksToObj="0" CustomSearch="1" AddinAndMethodName="">
+      <SrchOn>
+        <RootTable Type="-1">
+          <TableName Display="Custom SQL Search" Name="" />
+          <TableHierarchy Display="" Hierarchy="" />
+        </RootTable>
+      </SrchOn>
+      <LnksTo />
+    </Search>
     <Search Name="StateMachine Diagrams" GUID="{292F7CB0-BFF1-43e6-9596-9BEC5FB2C8D9}" PkgGUID="-1" Type="0" LnksToObj="0" CustomSearch="1" AddinAndMethodName="">
       <SrchOn>
-        <RootTable Filter="SELECT ea_guid AS CLASSGUID, 't_diagram' as CLASSTABLE, Diagram_Type AS CLASSTYPE, Name, [Version], Author, Stereotype, CreatedDate, Diagram_Type, ModifiedDate&#xA;FROM t_diagram&#xA;WHERE&#xA;t_diagram.Diagram_Type = 'Statechart' AND &#xA;name like &quot;&lt;Search Term&gt;#WC#&quot; &#xA;ORDER BY Name" Type="-1">
+        <RootTable Filter="SELECT ea_guid AS CLASSGUID, 't_diagram' as CLASSTABLE, Diagram_Type AS CLASSTYPE, Name, [Version], Author, Stereotype, CreatedDate, Diagram_Type, ModifiedDate&#xA;FROM t_diagram&#xA;WHERE&#xA;t_diagram.Diagram_Type = 'Statechart'&#xA;ORDER BY&#xA; Name" Type="-1">
           <TableName Display="Custom SQL Search" Name="" />
           <TableHierarchy Display="" Hierarchy="" />
         </RootTable>
@@ -193,7 +202,7 @@
     </Search>
     <Search Name="Timing Diagrams" GUID="{20818B09-1E1F-4a5d-8AB3-23D447D28F65}" PkgGUID="-1" Type="0" LnksToObj="0" CustomSearch="1" AddinAndMethodName="">
       <SrchOn>
-        <RootTable Filter="SELECT ea_guid AS CLASSGUID,  Diagram_Type AS CLASSTYPE, Name, [Version], Author, Stereotype, CreatedDate, Diagram_Type, ModifiedDate&#xD;&#xA;FROM t_diagram&#xD;&#xA;WHERE&#xD;&#xA;t_diagram.Diagram_Type = 'Timing' AND &#xD;&#xA;name like &quot;&lt;Search Term&gt;#WC#&quot; &#xD;&#xA;ORDER BY Name" Type="-1">
+        <RootTable Filter="SELECT ea_guid AS CLASSGUID,  Diagram_Type AS CLASSTYPE, Name, [Version], Author, Stereotype, CreatedDate, Diagram_Type, ModifiedDate&#xA;FROM t_diagram&#xA;WHERE&#xA;t_diagram.Diagram_Type = 'Timing'&#xA;ORDER BY&#xA; Name" Type="-1">
           <TableName Display="Custom SQL Search" Name="" />
           <TableHierarchy Display="" Hierarchy="" />
         </RootTable>
@@ -202,7 +211,7 @@
     </Search>
     <Search Name="Use Case Diagrams" GUID="{F188F7C6-D5DE-4e8b-B4A6-C0B0AB17A237}" PkgGUID="-1" Type="0" LnksToObj="0" CustomSearch="1" AddinAndMethodName="">
       <SrchOn>
-        <RootTable Type="-1" Filter="SELECT ea_guid AS CLASSGUID,  Diagram_Type AS CLASSTYPE, Name, [Version], Author, Stereotype, CreatedDate, Diagram_Type, ModifiedDate&amp;#xA;FROM t_diagram&amp;#xA;WHERE&amp;#xA;t_diagram.Diagram_Type = 'Use Case' AND &amp;#xA;name like &quot;&amp;lt;Search Term&amp;gt;#WC#&quot; &amp;#xA;ORDER BY Name">
+        <RootTable Type="-1">
           <TableName Display="Custom SQL Search" Name="" />
           <TableHierarchy Display="" Hierarchy="" />
         </RootTable>

@@ -364,11 +364,18 @@
       <Component Id="ActiveX.dll.config" Guid="357C0398-047E-4E8A-957C-C2F0607ED8E1">
         <File Id="ActiveX.dll.config" Name="ActiveX.dll.config" KeyPath="yes" Source="..\Setup\ActiveX.dll.config" />
       </Component>
+      <!-- User Searches, copy them into the roaming folder of hoTools                                    -->
+      <Component Id="UserSearches.json" Guid="FCF9AF3B-36BD-4EFC-8A7E-3129FB0D2E3B">
+        <File Id="UserSearches.json" Name="UserSearches.json" KeyPath="yes" Source="..\Setup\UserSearches.json" />
+      </Component>
       <Component Id="hoToolsBasic.xml" Guid="DD837398-1240-45E4-A5BE-D218A42E2E5B">
         <File Id="hoToolsBasic.xml" Name="hoToolsBasic.xml" KeyPath="yes" Source="..\Addin\hoToolsBasic.xml" />
       </Component>
       <Component Id="hoToolsCompilation.xml" Guid="21C131ED-2D03-48F1-A6FF-1B1127612DE1">
         <File Id="hoToolsCompilation.xml" Name="hoToolsCompilation.xml" KeyPath="yes" Source="..\Addin\hoToolsCompilation.xml" />
+      </Component>
+      <Component Id="hoModelViewsMDG.xml" Guid="58558A7B-1F88-43CD-93BC-0863A82D88EE">
+        <File Id="hoModelViewsMDG.xml" Name="hoModelViewsMDG.xml" KeyPath="yes" Source="..\Addin\hoModelViewsMDG.xml" />
       </Component>
     </ComponentGroup>
   </Fragment>

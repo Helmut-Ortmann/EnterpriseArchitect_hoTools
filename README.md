@@ -1,7 +1,6 @@
 # EnterpriseArchitect_hoTools
 Addin with Tools for SPARX Enterprise Architect (EA)
 
-- Helmut.Ortmann@t-online.de
 - Helmut.Ortmann@hoModeller.de
 - hoModeller.de
 
@@ -113,6 +112,9 @@ Some features:
 
 
 # Releases
+
+## Release 2.1.1
+- Error fixing hoModelView MDG
 
 ## Release 2.1
 - Add Note, Constraint to Diagram, link to Node, Link, Diagram
