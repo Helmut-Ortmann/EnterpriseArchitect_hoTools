@@ -45,7 +45,7 @@ namespace hoTools.Utils.SQL
             if (objectType != "") queryObjectType = @" o.object_type = '{1}'  AND ";
 
 
-            string query = @"SELECT o.object_id " +
+            string query = @"SELECT o.object_id As [object_id]" +
                            @"from t_object o " +
                            @"where " +
                            queryObjectType +
@@ -59,7 +59,7 @@ namespace hoTools.Utils.SQL
             XElement xelement = XElement.Parse(str);
             foreach (XElement xEle in xelement.Descendants("Row"))
             {
-                lPorts.Add(Convert.ToInt32(xEle.Element("object_id").Value));
+                lPorts.Add(Convert.ToInt32(xEle.Element("OBJECT_ID").Value));
             }
 
             return lPorts;

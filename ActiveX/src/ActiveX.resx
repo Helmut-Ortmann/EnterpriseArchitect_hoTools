@@ -1245,7 +1245,7 @@ It sets the linesytyle for the Diagram Connectors:
     <value>1</value>
   </data>
   <data name="_btnConveyedItem.Location" type="System.Drawing.Point, System.Drawing">
-    <value>51, 2</value>
+    <value>156, 2</value>
   </data>
   <data name="_btnConveyedItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>133, 23</value>
@@ -1280,6 +1280,66 @@ Procedure:
     <value>_panelConveyedItems</value>
   </data>
   <data name="&gt;&gt;_btnConveyedItem.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="_btnHidePort.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="_btnHidePort.Location" type="System.Drawing.Point, System.Drawing">
+    <value>98, 2</value>
+  </data>
+  <data name="_btnHidePort.Size" type="System.Drawing.Size, System.Drawing">
+    <value>39, 23</value>
+  </data>
+  <data name="_btnHidePort.TabIndex" type="System.Int32, mscorlib">
+    <value>28</value>
+  </data>
+  <data name="_btnHidePort.Text" xml:space="preserve">
+    <value>HP</value>
+  </data>
+  <data name="_btnHidePort.ToolTip" xml:space="preserve">
+    <value>Hide Ports</value>
+  </data>
+  <data name="&gt;&gt;_btnHidePort.Name" xml:space="preserve">
+    <value>_btnHidePort</value>
+  </data>
+  <data name="&gt;&gt;_btnHidePort.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;_btnHidePort.Parent" xml:space="preserve">
+    <value>_panelConveyedItems</value>
+  </data>
+  <data name="&gt;&gt;_btnHidePort.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="_btnShowPort.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="_btnShowPort.Location" type="System.Drawing.Point, System.Drawing">
+    <value>51, 2</value>
+  </data>
+  <data name="_btnShowPort.Size" type="System.Drawing.Size, System.Drawing">
+    <value>39, 23</value>
+  </data>
+  <data name="_btnShowPort.TabIndex" type="System.Int32, mscorlib">
+    <value>27</value>
+  </data>
+  <data name="_btnShowPort.Text" xml:space="preserve">
+    <value>SP</value>
+  </data>
+  <data name="_btnShowPort.ToolTip" xml:space="preserve">
+    <value>Show Ports</value>
+  </data>
+  <data name="&gt;&gt;_btnShowPort.Name" xml:space="preserve">
+    <value>_btnShowPort</value>
+  </data>
+  <data name="&gt;&gt;_btnShowPort.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;_btnShowPort.Parent" xml:space="preserve">
+    <value>_panelConveyedItems</value>
+  </data>
+  <data name="&gt;&gt;_btnShowPort.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="_btnReverseConnector.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
@@ -1316,7 +1376,7 @@ Even information flow realized.</value>
     <value>_panelConveyedItems</value>
   </data>
   <data name="&gt;&gt;_btnReverseConnector.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>2</value>
   </data>
   <data name="_panelConveyedItems.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>

@@ -735,16 +735,35 @@ namespace hoTools.EaServices
             rep.SaveDiagram(dia.DiagramID);
 
             var sqlUtil = new UtilSql(rep);
+
+            // work for all diagramObjects or only for the selected diagramObjects
+            List<EA.DiagramObject> ldDiagramObjects = new List<EA.DiagramObject>();
+            if (dia.SelectedObjects.Count == 0)
+            {
+                foreach (var o in dia.DiagramObjects)
+                {
+                    ldDiagramObjects.Add((DiagramObject) o);
+                }
+              
+            }
+            else
+            {
+                foreach (var o in dia.SelectedObjects)
+                {
+                    ldDiagramObjects.Add((DiagramObject)o);
+                }
+            }
             // over all selected elements
-            foreach (DiagramObject diaObj in dia.SelectedObjects)
+            foreach (DiagramObject diaObj in ldDiagramObjects)
             {
                 var elSource = rep.GetElementByID(diaObj.ElementID);
-                if (!"Class Component Activity".Contains(elSource.Type)) continue;
-                // find object on Diagram
+                if (!"Class Component Activity Part".Contains(elSource.Type)) continue;
+                // find DiagramObject on Diagram
                 var diaObjSource = Util.GetDiagramObjectById(rep, dia, elSource.ElementID);
                 //diaObjSource = dia.GetDiagramObjectByID(elSource.ElementID, "");
                 if (diaObjSource == null) return;
 
+                
                 string[] portTypes = {"left", "right"};
                 foreach (string portBoundTo in portTypes)
                 {
@@ -2339,7 +2358,7 @@ namespace hoTools.EaServices
                     }
                     else
                     {
-//MiscData(0) PDATA1,PDATA2,
+                        //MiscData(0) PDATA1,PDATA2,
                         // pdata1 Id for parts, UmlElement
                         // object_id   for text with Hyper link to diagram
 

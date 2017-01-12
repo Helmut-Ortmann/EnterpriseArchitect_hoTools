@@ -1471,7 +1471,15 @@ namespace hoTools.Utils
         }
 
         #region visualizePortForDiagramobject
-
+        /// <summary>
+        /// Visualize port for diagramobject
+        /// </summary>
+        /// <param name="pos"></param>
+        /// <param name="dia"></param>
+        /// <param name="diaObjSource"></param>
+        /// <param name="port"></param>
+        /// <param name="interf"></param>
+        /// <param name="portBoundTo"></param>
         public static void VisualizePortForDiagramobject(int pos, Diagram dia, EA.DiagramObject diaObjSource,
             EA.Element port,
             EA.Element interf, string portBoundTo = "right")

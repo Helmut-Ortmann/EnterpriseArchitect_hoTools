@@ -182,6 +182,8 @@ namespace hoTools.ActiveX
         private ToolStripMenuItem exportCsvOfClipboardToExcelToolStripMenuItem;
         private Button _btnAddConstraint;
         private Button _btnAddNote;
+        private Button _btnHidePort;
+        private Button _btnShowPort;
         private TextBox _txtSearchText;
         #endregion
 
@@ -1092,6 +1094,8 @@ namespace hoTools.ActiveX
             this._btnLh = new System.Windows.Forms.Button();
             this._btnConveyedItem = new System.Windows.Forms.Button();
             this._panelConveyedItems = new System.Windows.Forms.Panel();
+            this._btnHidePort = new System.Windows.Forms.Button();
+            this._btnShowPort = new System.Windows.Forms.Button();
             this._btnReverseConnector = new System.Windows.Forms.Button();
             this._cmbSearchName = new System.Windows.Forms.ComboBox();
             this._txtSearchName = new System.Windows.Forms.TextBox();
@@ -1527,11 +1531,29 @@ namespace hoTools.ActiveX
             // 
             // _panelConveyedItems
             // 
+            this._panelConveyedItems.Controls.Add(this._btnHidePort);
+            this._panelConveyedItems.Controls.Add(this._btnShowPort);
             this._panelConveyedItems.Controls.Add(this._btnReverseConnector);
             this._panelConveyedItems.Controls.Add(this._btnConveyedItem);
             resources.ApplyResources(this._panelConveyedItems, "_panelConveyedItems");
             this._panelConveyedItems.Name = "_panelConveyedItems";
             this._toolTip.SetToolTip(this._panelConveyedItems, resources.GetString("_panelConveyedItems.ToolTip"));
+            // 
+            // _btnHidePort
+            // 
+            resources.ApplyResources(this._btnHidePort, "_btnHidePort");
+            this._btnHidePort.Name = "_btnHidePort";
+            this._toolTip.SetToolTip(this._btnHidePort, resources.GetString("_btnHidePort.ToolTip"));
+            this._btnHidePort.UseVisualStyleBackColor = true;
+            this._btnHidePort.Click += new System.EventHandler(this.removePortsInDiagramToolStripMenuItem_Click);
+            // 
+            // _btnShowPort
+            // 
+            resources.ApplyResources(this._btnShowPort, "_btnShowPort");
+            this._btnShowPort.Name = "_btnShowPort";
+            this._toolTip.SetToolTip(this._btnShowPort, resources.GetString("_btnShowPort.ToolTip"));
+            this._btnShowPort.UseVisualStyleBackColor = true;
+            this._btnShowPort.Click += new System.EventHandler(this.showPortsInDiagramObjectsToolStripMenuItem_Click);
             // 
             // _btnReverseConnector
             // 

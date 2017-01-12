@@ -47,11 +47,11 @@ namespace hoTools.EAServicesPort
                 Cursor.Current = Cursors.WaitCursor;
                 DoCopyPortsGui();
                 Cursor.Current = Cursors.Default;
-                MessageBox.Show(String.Format("{0} ports copied!", _count));
+                MessageBox.Show($@"{_count} ports copied!");
             }
             catch (Exception e11)
             {
-                MessageBox.Show(e11.ToString(), "Error copying ports");
+                MessageBox.Show(e11.ToString(), @"Error copying ports");
             }
             finally
             {
@@ -71,20 +71,18 @@ namespace hoTools.EAServicesPort
             _rep.SaveDiagram(dia.DiagramID);
 
             // target object/element
-            DiagramObject srcObj;
-            Element srcEl;
             var trgEl = (Element)_rep.GetContextObject();
             if (trgEl.Type != "Class" && trgEl.Type != "Component")
             {
-                MessageBox.Show("Target element has to be Class or Component", "");
+                MessageBox.Show(@"Target element has to be Class or Component", "");
                 return 0;
             }
            
             // over all selected DiagramObjects
             for (int i = 0; i < count; i = i + 1)
             {
-                srcObj = (DiagramObject)dia.SelectedObjects.GetAt((short)i);
-                srcEl = _rep.GetElementByID(srcObj.ElementID);
+                var srcObj = (DiagramObject)dia.SelectedObjects.GetAt((short)i);
+                var srcEl = _rep.GetElementByID(srcObj.ElementID);
                 if (srcEl.ElementID == trgEl.ElementID) continue;
 
                 if (srcEl.Type == "Port")
@@ -160,11 +158,11 @@ namespace hoTools.EAServicesPort
                 Cursor.Current = Cursors.WaitCursor;
                 DoDeletePortsGui();
                 Cursor.Current = Cursors.Default;
-                MessageBox.Show(String.Format("{0} ports deleted!", _count));
+                MessageBox.Show($@"{_count} ports deleted!");
             }
             catch (Exception e11)
             {
-                MessageBox.Show(e11.ToString(), "Error deleting ports");
+                MessageBox.Show(e11.ToString(), @"Error deleting ports");
             }
             finally
             {
@@ -183,13 +181,11 @@ namespace hoTools.EAServicesPort
             _rep.SaveDiagram(dia.DiagramID);
 
             // target object/element
-            DiagramObject obj;
-            Element el;
 
             for (int i = 0; i < selCount; i++)
             {
-                obj = (DiagramObject)dia.SelectedObjects.GetAt((short)i);
-                el = _rep.GetElementByID(obj.ElementID);
+                var obj = (DiagramObject)dia.SelectedObjects.GetAt((short)i);
+                var el = _rep.GetElementByID(obj.ElementID);
                 
                 if (el.Type == "Port")
                 {
@@ -239,7 +235,7 @@ namespace hoTools.EAServicesPort
             }
             catch (Exception e11)
             {
-                MessageBox.Show(e11.ToString(), "Error ordering diagram objects");
+                MessageBox.Show(e11.ToString(), @"Error ordering diagram objects");
             }
             finally
             {
@@ -284,10 +280,12 @@ namespace hoTools.EAServicesPort
                 // remember Diagram data of current selected diagram
                 var eaDia = new EaDiagram(_rep);
                 
-                // hide all ports
+                // First: hide all ports
                 RemovePortFromDiagramGui();
                 // show all ports
                 eaDia.ReloadSelectedObjectsAndConnector();// reload selection
+
+                // Now show the ports
                 EaService.ShowEmbeddedElementsGui(_rep, "Port", isOptimizePortLayout);
                 // set selction
 
@@ -297,7 +295,7 @@ namespace hoTools.EAServicesPort
             }
             catch (Exception e11)
             {
-                MessageBox.Show(e11.ToString(), "Error show ports on diagram");
+                MessageBox.Show(e11.ToString(), @"Error show ports on diagram");
             }
             finally
             {
@@ -308,19 +306,30 @@ namespace hoTools.EAServicesPort
         #endregion
 
         #region removePortFromDiagramGUI
+        /// <summary>
+        /// Remove/hide the ports of:
+        /// - all selected diagramobjects
+        /// - all diaramobjects if no diagramobject is selected
+        /// </summary>
         public void RemovePortFromDiagramGui()
         {
             try
             {
 
                 Cursor.Current = Cursors.WaitCursor;
-                DoRemovePortFromDiagramGui();
+                // remember Diagram data of current selected diagram
+                var eaDia = new EaDiagram(_rep);
+
+                HidePortFromDiagramGui();
+
+
+                eaDia.ReloadSelectedObjectsAndConnector();
                 Cursor.Current = Cursors.Default;
 
             }
             catch (Exception e11)
             {
-                MessageBox.Show(e11.ToString(), "Error removing ports from diagram");
+                MessageBox.Show(e11.ToString(), @"Error removing ports from diagram");
             }
             finally
             {
@@ -329,24 +338,41 @@ namespace hoTools.EAServicesPort
             }
         }
         #endregion
-        #region doRemovePortFromDiagramGUI
-        private void DoRemovePortFromDiagramGui()
+        #region HidePortFromDiagramGui
+        /// <summary>
+        /// Hide ports from diagramobjects
+        /// - selected diagramObjects
+        /// - All diagramObjects if nothing selected
+        /// </summary>
+        private void HidePortFromDiagramGui()
         {
             Diagram dia = _rep.GetCurrentDiagram();
             if (dia == null) return;
-            int selCount = dia.SelectedObjects.Count;
-            if (selCount == 0) return;
+
+            // work for all diagramObjects or only for the selected diagramObjects
+            List<EA.Element> ldElement = new List<EA.Element>();
+            if (dia.SelectedObjects.Count == 0)
+            {
+                foreach (DiagramObject o in dia.DiagramObjects)
+                {
+                    ldElement.Add(_rep.GetElementByID(o.ElementID));
+                }
+
+            }
+            else
+            {
+                foreach (DiagramObject o in dia.SelectedObjects)
+                {
+                    ldElement.Add(_rep.GetElementByID(o.ElementID));
+                }
+            }
+            if (ldElement.Count == 0) return;
+
             _rep.SaveDiagram(dia.DiagramID);
 
             // target object/element
-            DiagramObject obj;
-            Element el;
-
-            for (int i = selCount - 1; i >= 0; i -= 1)
+            foreach (Element el in ldElement)
             {
-                obj = (DiagramObject)dia.SelectedObjects.GetAt((short)i);
-                el = _rep.GetElementByID(obj.ElementID);
-
                 if (el.Type == "Port")
                 {
                     // selected element was port
@@ -361,9 +387,7 @@ namespace hoTools.EAServicesPort
                             RemovePortFromDiagram(dia, port);
                         }
                     }
-
                 }
-
             }
             _rep.ReloadDiagram(dia.DiagramID);
         }
@@ -395,7 +419,9 @@ namespace hoTools.EAServicesPort
             PositionLeft = 4,
             PositionRight = 8,
             PositionPlus = 16,
-            PositionMinus = 32
+            PositionMinus = 32,
+            IsTypeHidden = 64, // PType=0;
+            IsTypeShown = 128, // PType=1;
         }
         public void ChangeLabelGui(LabelStyle style)
         {
@@ -407,7 +433,7 @@ namespace hoTools.EAServicesPort
             }
             catch (Exception e11)
             {
-                MessageBox.Show(e11.ToString(), "Error label hide/show");
+                MessageBox.Show(e11.ToString(), @"Error label hide/show");
             }
             finally
             {
@@ -421,16 +447,14 @@ namespace hoTools.EAServicesPort
         {
             Diagram dia = _rep.GetCurrentDiagram();
             if (dia == null) return;
-            int count = dia.SelectedObjects.Count;
             _rep.SaveDiagram(dia.DiagramID);
 
             // target object/element
-            Element el;
 
             // for each selected element
             foreach (DiagramObject obj in dia.SelectedObjects)
             {
-                el = _rep.GetElementByID(obj.ElementID);
+                var el = _rep.GetElementByID(obj.ElementID);
                 if (EmbeddedElementTypes.Contains(el.Type) )
                 {
                     DiagramObject portObj = Util.GetDiagramObjectById(_rep, dia, el.ElementID);
@@ -456,6 +480,11 @@ namespace hoTools.EAServicesPort
         #endregion
 
         #region doChangeLabelStyle
+        /// <summary>
+        /// Set the style of an diagram object. The style is code with enum LabelStyle.
+        /// </summary>
+        /// <param name="portObj"></param>
+        /// <param name="style"></param>
         private static void DoChangeLabelStyle(DiagramObject portObj, LabelStyle style)
         {
             switch (style)
@@ -466,6 +495,13 @@ namespace hoTools.EAServicesPort
 
                 case LabelStyle.IsShown:
                     ChangeLabel(portObj, @"HDN=1", "HDN=0");
+                    break;
+                case LabelStyle.IsTypeHidden:
+                    ChangeLabel(portObj, @"PType=1", "PType=0");
+                    break;
+
+                case LabelStyle.IsTypeShown:
+                    ChangeLabel(portObj, @"PType=0", "PType=1");
                     break;
 
                 case LabelStyle.PositionLeft:
@@ -482,7 +518,7 @@ namespace hoTools.EAServicesPort
                     if (match.Success)
                     {
                         int xPos = Convert.ToInt32(match.Groups[1].Value) - 15;
-                        ChangeLabel(portObj, @"OX=[\+\-0-9]*", String.Format("OX={0}", xPos));
+                        ChangeLabel(portObj, @"OX=[\+\-0-9]*", $@"OX={xPos}");
                     }
                     break;
 
@@ -492,7 +528,7 @@ namespace hoTools.EAServicesPort
                     if (match.Success)
                     {
                         int xPos = Convert.ToInt32(match.Groups[1].Value) + 15;
-                        ChangeLabel(portObj, @"OX=[\+\-0-9]*", String.Format("OX={0}", xPos)  );
+                        ChangeLabel(portObj, @"OX=[\+\-0-9]*", $@"OX={xPos}"  );
                     }
                     break;
             }
@@ -529,12 +565,12 @@ namespace hoTools.EAServicesPort
                 Cursor.Current = Cursors.WaitCursor;
                 DoDeleteMarkedPortsGui();
                 Cursor.Current = Cursors.Default;
-                MessageBox.Show(String.Format("{0} Ports / CharacteristicData / CharacteristicCurve deleted", _count));
+                MessageBox.Show($@"{_count} Ports / CharacteristicData / CharacteristicCurve deleted");
             }
 
             catch (Exception e11)
             {
-                MessageBox.Show(e11.ToString(), "Error deleting Ports / CharacteristicData / CharacteristicCurve");
+                MessageBox.Show(e11.ToString(), @"Error deleting Ports / CharacteristicData / CharacteristicCurve");
             }
             finally
             {
@@ -552,13 +588,11 @@ namespace hoTools.EAServicesPort
             _rep.SaveDiagram(dia.DiagramID);
 
             // target object/element
-            DiagramObject obj;
-            Element el;
 
             for (int i = 0; i < count; i = i + 1)
             {
-                obj = (DiagramObject)dia.SelectedObjects.GetAt((short)i);
-                el = _rep.GetElementByID(obj.ElementID);
+                var obj = (DiagramObject)dia.SelectedObjects.GetAt((short)i);
+                var el = _rep.GetElementByID(obj.ElementID);
                 for (int i1 = el.EmbeddedElements.Count -1; i1 >= 0; i1 = i1-1)
                 {
                     var p = (Element)el.EmbeddedElements.GetAt((short)i1);
@@ -590,11 +624,11 @@ namespace hoTools.EAServicesPort
 
                 eaDia.ReloadSelectedObjectsAndConnector();
                 Cursor.Current = Cursors.Default;
-                MessageBox.Show(String.Format("{0} ports connected!", _count));
+                MessageBox.Show($@"{_count} ports connected!");
             }
             catch (Exception e11)
             {
-                MessageBox.Show(e11.ToString(), "Error generating ports");
+                MessageBox.Show(e11.ToString(), @"Error generating ports");
             }
             finally
             {
@@ -618,15 +652,13 @@ namespace hoTools.EAServicesPort
             _rep.SaveDiagram(dia.DiagramID);
 
             // target object/element
-            DiagramObject srcObj;
-            Element srcEl;
 
 
             // all selected objects
             for (int iSrc = 0; iSrc < count ; iSrc += 1)
             {
-                srcObj = (DiagramObject)dia.SelectedObjects.GetAt((short)iSrc);
-                srcEl = _rep.GetElementByID(srcObj.ElementID);
+                var srcObj = (DiagramObject)dia.SelectedObjects.GetAt((short)iSrc);
+                var srcEl = _rep.GetElementByID(srcObj.ElementID);
 
                 ConnectPortsOf2Classes(srcEl, srcEl);
               
@@ -657,11 +689,11 @@ namespace hoTools.EAServicesPort
 
                 eaDia.ReloadSelectedObjectsAndConnector();
                 Cursor.Current = Cursors.Default;
-                MessageBox.Show(String.Format("{0} ports connected!", _count));
+                MessageBox.Show($@"{_count} ports connected!");
             }
             catch (Exception e11)
             {
-                MessageBox.Show(e11.ToString(), "Error generating ports");
+                MessageBox.Show(e11.ToString(), @"Error generating ports");
             }
             finally
             {
@@ -782,13 +814,11 @@ namespace hoTools.EAServicesPort
             eaDia.Save();
 
             // target object/element
-            DiagramObject obj;
-            Element el;
 
             for (int i = 0; i < eaDia.SelectedObjectsCount; i++)
             {
-                obj = (DiagramObject)dia.SelectedObjects.GetAt((short)i);
-                el = _rep.GetElementByID(obj.ElementID);
+                var obj = (DiagramObject)dia.SelectedObjects.GetAt((short)i);
+                var el = _rep.GetElementByID(obj.ElementID);
 
                 if (el.Type == "Port")
                 {
