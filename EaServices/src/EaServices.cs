@@ -23,6 +23,7 @@ using Element = EA.Element;
 using File = EA.File;
 using Package = EA.Package;
 using TaggedValue = hoTools.Utils.TaggedValue;
+using hoTools.EAServicesPort;
 
 // ReSharper disable RedundantArgumentDefaultValue
 // ReSharper disable ArgumentsStyleLiteral
@@ -721,7 +722,13 @@ namespace hoTools.EaServices
         }
 
         #region showAllEmbeddedElementsGUI
-
+        /// <summary>
+        /// Show all embedded Elements in diagram for
+        /// - Seleted Elements
+        /// - All elements if nothing is selected
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <param name="isOptimizePortLayout"></param>
         [ServiceOperation("{678AD901-1D2F-4FB0-BAAD-AEB775EE18AC}", "Show all Ports, Pins, Parameter",
             "Selected Diagram Objects or all", isTextRequired: false)]
         public static void ShowEmbeddedElementsGui(
@@ -747,27 +754,27 @@ namespace hoTools.EaServices
                 var elSource = eaDia.SelElements[count];
                 
                
-                string[] portTypes = {"left", "right"};
-                foreach (string portBoundTo in portTypes)
+                string[] embeddedTypes = {"left", "right"};
+                foreach (string portBoundTo in embeddedTypes)
                 {
                     // arrange sequence of ports
                     if (isOptimizePortLayout == false && portBoundTo == "left") continue;
                     int pos = 0;
-                    List<int> lPorts;
+                    List<int> lEmbeddedElements;
                     if (isOptimizePortLayout == false)
                     {
-                        lPorts = sqlUtil.GetAndSortEmbeddedElements(elSource, "", "", "");
+                        lEmbeddedElements = sqlUtil.GetAndSortEmbeddedElements(elSource, "", "", "");
                     }
                     else
                     {
                         if (portBoundTo == "left")
-                            lPorts = sqlUtil.GetAndSortEmbeddedElements(elSource, "Port", "'Server', 'Receiver' ",
+                            lEmbeddedElements = sqlUtil.GetAndSortEmbeddedElements(elSource, "Port", "'Server', 'Receiver' ",
                                 "DESC");
-                        else lPorts = sqlUtil.GetAndSortEmbeddedElements(elSource, "Port", "'Client', 'Sender' ", "");
+                        else lEmbeddedElements = sqlUtil.GetAndSortEmbeddedElements(elSource, "Port", "'Client', 'Sender' ", "");
                     }
                     // over all sorted ports
                     string oldStereotype = "";
-                    foreach (int i in lPorts)
+                    foreach (int i in lEmbeddedElements)
                     {
                         Element portEmbedded = rep.GetElementByID(i);
                         if (portEmbedded.IsEmbeddedElement())
@@ -876,6 +883,88 @@ namespace hoTools.EaServices
         }
 
         #endregion
+
+        #region ShowEmbeddedElementLabel
+        /// <summary>
+        /// Show embdeded Element Labels for:
+        /// - selected nodes
+        /// - all if nothing is selected
+        /// </summary>
+        /// <param name="rep"></param>
+        [ServiceOperation("{FBEF4500-DD24-4D23-BC7F-08D70DDA2B57}", "Show embedded Element Labels",
+            "Selected Diagram Objects or all", isTextRequired: false)]
+        public static void ShowEmbeddedElementsLabel(Repository rep)
+        {
+            UpdateEmbeddedElementStyle(rep, PortServices.LabelStyle.IsShown);
+        }
+        #endregion
+
+        #region HideEmbeddedElementsLabel
+        /// <summary>
+        /// Hide embdeded Element Labels for:
+        /// - selected nodes
+        /// - all if nothing is selected
+        /// </summary>
+        /// <param name="rep"></param>
+        [ServiceOperation("{006B3A82-533E-4128-9737-3CA64BB14362}", "Hide embedded Element Labels",
+            "Selected Diagram Objects or all", isTextRequired: false)]
+        public static void HideEmbeddedElementsLabel(Repository rep)
+        {
+            UpdateEmbeddedElementStyle(rep, PortServices.LabelStyle.IsHidden);
+        }
+        #endregion
+
+        #region UpdateEmbeddedElementStyle
+        private static void UpdateEmbeddedElementStyle( Repository rep, PortServices.LabelStyle style )
+        {
+            Cursor.Current = Cursors.WaitCursor;
+            // remember Diagram data of current selected diagram
+            var eaDia = new EaDiagram(rep);
+            if (eaDia.Dia == null) return;
+            // Save to avoid indifferent states
+            rep.SaveDiagram(eaDia.Dia.DiagramID);
+
+            // SQL for Embedded Elements
+            var sqlUtil = new UtilSql(rep);
+
+
+            // over all selected elements
+            int count = -1;
+            foreach (DiagramObject diaObj in eaDia.SelObjects)
+            {
+                count = count + 1;
+                var elSource = eaDia.SelElements[count];
+                if (elSource.IsEmbeddedElement())
+                {
+                    PortServices.DoChangeLabelStyle(diaObj, style);
+                }
+                else
+                {   // selected element was "Element"
+                    foreach (Element embeddedElement in elSource.EmbeddedElements)
+                    {
+                        if (embeddedElement.IsEmbeddedElement())
+                        {
+                            var diagramObject = eaDia.Dia.GetDiagramObjectByID(embeddedElement.ElementID,"");
+                            if (diagramObject == null) continue;
+                            PortServices.DoChangeLabelStyle(diagramObject, style);
+                        }
+                    }
+                }
+
+
+
+
+            }
+            // display changes
+            rep.ReloadDiagram(eaDia.Dia.DiagramID);
+            eaDia.ReloadSelectedObjectsAndConnector();
+            Cursor.Current = Cursors.Default;
+        }
+
+        #endregion
+
+
+
         /// <summary>
         /// Delete the embedded element from Diagram (Port, Parameter, Pin)
         /// </summary>

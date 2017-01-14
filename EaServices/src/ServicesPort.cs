@@ -377,31 +377,31 @@ namespace hoTools.EAServicesPort
         /// </summary>
         /// <param name="portObj"></param>
         /// <param name="style"></param>
-        private static void DoChangeLabelStyle(EA.DiagramObject portObj, LabelStyle style)
+        public static void DoChangeLabelStyle(EA.DiagramObject portObj, LabelStyle style)
         {
             switch (style)
             {
                 case LabelStyle.IsHidden:
-                    ChangeLabel(portObj, @"HDN=0", "HDN=1");
+                    ChangeDiagramObjectStyle(portObj, @"HDN=0", "HDN=1");
                     break;
 
                 case LabelStyle.IsShown:
-                    ChangeLabel(portObj, @"HDN=1", "HDN=0");
+                    ChangeDiagramObjectStyle(portObj, @"HDN=1", "HDN=0");
                     break;
                 case LabelStyle.IsTypeHidden:
-                    ChangeLabel(portObj, @"PType=1", "PType=0");
+                    ChangeDiagramObjectStyle(portObj, @"PType=1", "PType=0");
                     break;
 
                 case LabelStyle.IsTypeShown:
-                    ChangeLabel(portObj, @"PType=0", "PType=1");
+                    ChangeDiagramObjectStyle(portObj, @"PType=0", "PType=1");
                     break;
 
                 case LabelStyle.PositionLeft:
-                    ChangeLabel(portObj, @"OX=[\+\-0-9]*", @"OX=-200");
+                    ChangeDiagramObjectStyle(portObj, @"OX=[\+\-0-9]*", @"OX=-200");
                     break;
 
                 case LabelStyle.PositionRight:
-                    ChangeLabel(portObj, @"OX=[\+\-0-9]*", @"OX=24");
+                    ChangeDiagramObjectStyle(portObj, @"OX=[\+\-0-9]*", @"OX=24");
                     break;
 
                 case LabelStyle.PositionMinus:
@@ -410,7 +410,7 @@ namespace hoTools.EAServicesPort
                     if (match.Success)
                     {
                         int xPos = Convert.ToInt32(match.Groups[1].Value) - 15;
-                        ChangeLabel(portObj, @"OX=[\+\-0-9]*", $@"OX={xPos}");
+                        ChangeDiagramObjectStyle(portObj, @"OX=[\+\-0-9]*", $@"OX={xPos}");
                     }
                     break;
 
@@ -420,7 +420,7 @@ namespace hoTools.EAServicesPort
                     if (match.Success)
                     {
                         int xPos = Convert.ToInt32(match.Groups[1].Value) + 15;
-                        ChangeLabel(portObj, @"OX=[\+\-0-9]*", $@"OX={xPos}"  );
+                        ChangeDiagramObjectStyle(portObj, @"OX=[\+\-0-9]*", $@"OX={xPos}"  );
                     }
                     break;
             }
@@ -431,18 +431,31 @@ namespace hoTools.EAServicesPort
             //portObj.Style = style;
         }
         #endregion
-        #region setLabel
-        private static void ChangeLabel(DiagramObject portObj, string from, string to)
+        #region ChangeDiagramObjectStyle
+        /// <summary>
+        /// Change Style of a DiagramObject. 
+        /// </summary>
+        /// <param name="portObj"></param>
+        /// <param name="from"></param>
+        /// <param name="to"></param>
+        private static void ChangeDiagramObjectStyle(DiagramObject portObj, string from, string to)
         {
             var style = (string)portObj.Style;
 
             Match match = Regex.Match(style, from);
+
             if (match.Success)
             {
                 style = style.Replace(match.Value, to);
-                portObj.Style = style;
-                portObj.Update();
             }
+            else // Empty style, just add new style
+            {
+                style = style.Replace($"{to};", "");// delete possible new value
+                style = style + $" {to};";// insert new value
+            }
+            // update style
+            portObj.Style = style;
+            portObj.Update();
         }
         #endregion
 

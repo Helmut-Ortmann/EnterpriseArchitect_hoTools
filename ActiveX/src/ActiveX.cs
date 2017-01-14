@@ -696,8 +696,7 @@ namespace hoTools.ActiveX
         /// <param name="e"></param>
         private void _btnShowPortLabel_Click(object sender, EventArgs e)
         {
-            var port = new PortServices(Repository);
-            port.ChangeLabelGui(PortServices.LabelStyle.IsShown);
+            EaService.ShowEmbeddedElementsLabel(Repository);
         }
         /// <summary>
         /// Hide Port Label for:
@@ -709,8 +708,7 @@ namespace hoTools.ActiveX
         /// <param name="e"></param>
         private void _btnHidePortLabel_Click(object sender, EventArgs e)
         {
-            var port = new PortServices(Repository);
-            port.ChangeLabelGui(PortServices.LabelStyle.IsHidden);
+            EaService.HideEmbeddedElementsLabel(Repository);
         }
         /// <summary>
         /// Show Port Type for:
