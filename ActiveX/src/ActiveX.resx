@@ -1298,10 +1298,13 @@ Procedure:
     <value>HPT</value>
   </data>
   <data name="_btnHidePortType.ToolTip" xml:space="preserve">
-    <value>Hide Port Types of selected
+    <value>Hide Port,Parameter, Pin Type of selected
 - Diagram
 - Nodes
-- Ports</value>
+
+Ports,Parameter,Pins are also called:
+- Structural Elements
+- Embedded Elements</value>
   </data>
   <data name="&gt;&gt;_btnHidePortType.Name" xml:space="preserve">
     <value>_btnHidePortType</value>
@@ -1331,10 +1334,13 @@ Procedure:
     <value>SPT</value>
   </data>
   <data name="_btnShowPortType.ToolTip" xml:space="preserve">
-    <value>Show Port Types of selected
+    <value>Show Port, Parameter, Pin Type of selected
 - Diagram
 - Nodes
-- Ports</value>
+
+Ports,Parameter,Pins are also called:
+- Structural Elements
+- Embedded Elements</value>
   </data>
   <data name="&gt;&gt;_btnShowPortType.Name" xml:space="preserve">
     <value>_btnShowPortType</value>
@@ -1364,10 +1370,13 @@ Procedure:
     <value>SPL</value>
   </data>
   <data name="_btnShowPortLabel.ToolTip" xml:space="preserve">
-    <value>Show Port Labels of selected
+    <value>Show Port, Parameter, Pin Labels of selected
 - Diagram
 - Nodes
-- Ports</value>
+
+Ports,Parameter,Pins are also called:
+- Structural Elements
+- Embedded Elements</value>
   </data>
   <data name="&gt;&gt;_btnShowPortLabel.Name" xml:space="preserve">
     <value>_btnShowPortLabel</value>
@@ -1397,10 +1406,13 @@ Procedure:
     <value>HPL</value>
   </data>
   <data name="_btnHidePortLabel.ToolTip" xml:space="preserve">
-    <value>Hide Port Labels of selected
+    <value>Hide Port-, Parameter-, Pin- Labels of selected
 - Diagram
 - Nodes
-- Ports</value>
+
+Ports,Parameter,Pins are also called:
+- Structural Elements
+- Embedded Elements</value>
   </data>
   <data name="&gt;&gt;_btnHidePortLabel.Name" xml:space="preserve">
     <value>_btnHidePortLabel</value>
@@ -1430,10 +1442,13 @@ Procedure:
     <value>HP</value>
   </data>
   <data name="_btnHidePort.ToolTip" xml:space="preserve">
-    <value>Hide Port of selected
+    <value>Hide Ports, Parameter, Pins of selected
 - Diagram
 - Nodes
-- Ports</value>
+
+Ports,Parameter,Pins are also called:
+- Structural Elements
+- Embedded Elements</value>
   </data>
   <data name="&gt;&gt;_btnHidePort.Name" xml:space="preserve">
     <value>_btnHidePort</value>
@@ -1463,10 +1478,13 @@ Procedure:
     <value>SP</value>
   </data>
   <data name="_btnShowPort.ToolTip" xml:space="preserve">
-    <value>Show Ports of selected
+    <value>Show Ports,Parameter,Pins of selected
 - Diagram
 - Nodes
-- Ports</value>
+
+Ports,Parameter,Pins are also called:
+- Structural Elements
+- Embedded Elements</value>
   </data>
   <data name="&gt;&gt;_btnShowPort.Name" xml:space="preserve">
     <value>_btnShowPort</value>

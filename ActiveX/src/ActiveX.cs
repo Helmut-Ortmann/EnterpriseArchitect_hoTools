@@ -674,7 +674,7 @@ namespace hoTools.ActiveX
         #region removePortsInDiagramToolStripMenuItem_Click
         void removePortsInDiagramToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            EaService.HideEmbeddedElementsGui(Repository);
+            EaService.HideEmbeddedElements(Repository);
 
         }
         #endregion
@@ -683,7 +683,7 @@ namespace hoTools.ActiveX
         void showPortsInDiagramObjectsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // Show the ports
-            EaService.ShowEmbeddedElementsGui(Repository);
+            EaService.ShowEmbeddedElements(Repository);
         }
         #endregion
         /// <summary>
@@ -720,8 +720,7 @@ namespace hoTools.ActiveX
         /// <param name="e"></param>
         private void _btnShowPortType_Click(object sender, EventArgs e)
         {
-            var port = new PortServices(Repository);
-            port.ChangeLabelGui(PortServices.LabelStyle.IsTypeShown);
+            EaService.ShowEmbeddedElementsType(Repository);
         }
         /// <summary>
         /// Hide Port Type for:
@@ -733,8 +732,7 @@ namespace hoTools.ActiveX
         /// <param name="e"></param>
         private void _btnHidePortType_Click(object sender, EventArgs e)
         {
-            var port = new PortServices(Repository);
-            port.ChangeLabelGui(PortServices.LabelStyle.IsTypeHidden);
+            EaService.HideEmbeddedElementsType(Repository);
         }
 
 
@@ -742,7 +740,7 @@ namespace hoTools.ActiveX
         #region showReceivingPortsLeftSendingPortsRight
         void showReceivingPortsLeftSendingPortsRightToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            EaService.ShowEmbeddedElementsGui(Repository);
+            EaService.ShowEmbeddedElements(Repository);
         }
         #endregion
 
@@ -835,8 +833,7 @@ namespace hoTools.ActiveX
 
         void deletePortsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var port = new PortServices(Repository);
-            port.DeletePortsGui();
+            EaService.HideEmbeddedElements(Repository);
         }
 
         void btnLeft_Click(object sender, EventArgs e)

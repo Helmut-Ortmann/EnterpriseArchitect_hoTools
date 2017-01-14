@@ -721,7 +721,7 @@ namespace hoTools.EaServices
             return false;
         }
 
-        #region showAllEmbeddedElementsGUI
+        #region showAllEmbeddedElements
         /// <summary>
         /// Show all embedded Elements in diagram for
         /// - Seleted Elements
@@ -731,7 +731,7 @@ namespace hoTools.EaServices
         /// <param name="isOptimizePortLayout"></param>
         [ServiceOperation("{678AD901-1D2F-4FB0-BAAD-AEB775EE18AC}", "Show all Ports, Pins, Parameter",
             "Selected Diagram Objects or all", isTextRequired: false)]
-        public static void ShowEmbeddedElementsGui(
+        public static void ShowEmbeddedElements(
             Repository rep,
             bool isOptimizePortLayout = false)
         {
@@ -827,7 +827,7 @@ namespace hoTools.EaServices
 
         #endregion
 
-        #region HideAllEmbeddedElementsGUI
+        #region HideAllEmbeddedElementI
         /// <summary>
         /// Hide all embdeded Elements for:
         /// - selected nodes
@@ -836,7 +836,7 @@ namespace hoTools.EaServices
         /// <param name="rep"></param>
         [ServiceOperation("{5ED3DABA-367E-4575-A161-D79F838A5A17}", "Hide all Ports, Pins, Parameter",
             "Selected Diagram Objects or all", isTextRequired: false)]
-        public static void HideEmbeddedElementsGui(
+        public static void HideEmbeddedElements(
             Repository rep)
         {
             Cursor.Current = Cursors.WaitCursor;
@@ -906,11 +906,41 @@ namespace hoTools.EaServices
         /// - all if nothing is selected
         /// </summary>
         /// <param name="rep"></param>
-        [ServiceOperation("{006B3A82-533E-4128-9737-3CA64BB14362}", "Hide embedded Element Labels",
+        [ServiceOperation("{3493B9E6-F6DA-478E-A161-DD95D1D34B44}", "Hide embedded Element Type",
             "Selected Diagram Objects or all", isTextRequired: false)]
         public static void HideEmbeddedElementsLabel(Repository rep)
         {
             UpdateEmbeddedElementStyle(rep, PortServices.LabelStyle.IsHidden);
+        }
+        #endregion
+
+        #region HideEmbeddedElementsType
+        /// <summary>
+        /// Hide embdeded Element Labels for:
+        /// - selected nodes
+        /// - all if nothing is selected
+        /// </summary>
+        /// <param name="rep"></param>
+        [ServiceOperation("{CF59707B-35A3-4E0C-AA0D-16722DB61F7D}", "Hide embedded Element Type",
+            "Selected Diagram Objects or all", isTextRequired: false)]
+        public static void HideEmbeddedElementsType(Repository rep)
+        {
+            UpdateEmbeddedElementStyle(rep, PortServices.LabelStyle.IsTypeHidden);
+        }
+        #endregion
+
+        #region ShowEmbeddedElementsType
+        /// <summary>
+        /// Hide embdeded Element Labels for:
+        /// - selected nodes
+        /// - all if nothing is selected
+        /// </summary>
+        /// <param name="rep"></param>
+        [ServiceOperation("{CF59707B-35A3-4E0C-AA0D-16722DB61F7D}", "Show embedded Element Type",
+            "Selected Diagram Objects or all", isTextRequired: false)]
+        public static void ShowEmbeddedElementsType(Repository rep)
+        {
+            UpdateEmbeddedElementStyle(rep, PortServices.LabelStyle.IsTypeShown);
         }
         #endregion
 
@@ -1693,7 +1723,7 @@ namespace hoTools.EaServices
             {
                 dia.SelectedObjects.AddNew(diaObjSource.ElementID.ToString(), ObjectType.otElement.ToString());
                 dia.SelectedObjects.Refresh();
-                ShowEmbeddedElementsGui(rep);
+                ShowEmbeddedElements(rep);
             }
 
             // reload selected object
@@ -4694,7 +4724,7 @@ namespace hoTools.EaServices
                     }
                 }
             }
-            ShowEmbeddedElementsGui(rep);
+            ShowEmbeddedElements(rep);
         }
 
         static List<Element> GetIncludedHeaderFiles(Repository rep, Element el)

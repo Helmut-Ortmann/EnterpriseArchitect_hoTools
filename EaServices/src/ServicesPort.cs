@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using EA;
-using hoTools.EaServices;
 using hoTools.Utils;
 using hoTools.Utils.SQL;
 using DiagramObject = EA.DiagramObject;
@@ -14,7 +13,7 @@ namespace hoTools.EAServicesPort
 {
     public class PortServices
     {
-        Repository _rep;
+        private readonly Repository _rep;
         int _count; // a variable to count the amount of something
         const string EmbeddedElementTypes ="Port Parameter Pin";
               
@@ -150,79 +149,8 @@ namespace hoTools.EAServicesPort
         }
         #endregion
 
-        #region deletePortsGUI
-        public void DeletePortsGui()
-        {
-            try
-            {
-                Cursor.Current = Cursors.WaitCursor;
-                DoDeletePortsGui();
-                Cursor.Current = Cursors.Default;
-                MessageBox.Show($@"{_count} ports deleted!");
-            }
-            catch (Exception e11)
-            {
-                MessageBox.Show(e11.ToString(), @"Error deleting ports");
-            }
-            finally
-            {
-                Cursor.Current = Cursors.Default;
-
-            }
-        }
-        #endregion
-        #region doDeletePortsGUI
-        public int DoDeletePortsGui()
-        {
-            Diagram dia = _rep.GetCurrentDiagram();
-            if (dia == null) return 0;
-            int selCount = dia.SelectedObjects.Count;
-            if (selCount == 0) return 0;
-            _rep.SaveDiagram(dia.DiagramID);
-
-            // target object/element
-
-            for (int i = 0; i < selCount; i++)
-            {
-                var obj = (DiagramObject)dia.SelectedObjects.GetAt((short)i);
-                var el = _rep.GetElementByID(obj.ElementID);
-                
-                if (el.Type == "Port")
-                {
-                    // selected element was port
-                    DelPort(el);
-                    _count += 1;
-                }
-                else
-                {   // selected element was "Element"
-                    foreach (Element p in el.EmbeddedElements)
-                    {
-                        DelPort(p);
-                        _count += 1; 
-                    }
-                }
-
-            }
-
-            return _count;
-       } 
-        #endregion
-        #region delPort
-        private void DelPort(Element port)
-        {
-            Element el = _rep.GetElementByID(port.ParentID);
-            for (int i = 0; i < el.EmbeddedElements.Count; i++)
-            {
-                var p1 = (Element)el.EmbeddedElements.GetAt((short)i);
-                if (p1.ElementID == port.ElementID)
-                {
-                    el.EmbeddedElements.Delete((short)i);
-                    el.EmbeddedElements.Refresh();
-                }
-            }
-        }
-        #endregion delPort
-
+        
+        
         #region orderDiagramObjectsGUI
         public void OrderDiagramObjectsGui()
         {
@@ -268,24 +196,7 @@ namespace hoTools.EAServicesPort
 
         
         
-        #region removePortFromDiagram
-        private void RemovePortFromDiagram(Diagram dia, Element port)
-        {
-            for (int i= dia.DiagramObjects.Count-1; i>=0;i-=1)
-            {
-                var obj = (DiagramObject)dia.DiagramObjects.GetAt((short) i);
-                if (obj.ElementID == port.ElementID)
-                {
-                    dia.DiagramObjects.Delete((short)i);
-                    dia.DiagramObjects.Refresh();
-                    break;
-                } 
-            }
-           
-        }
-        #endregion
-
-
+        
         #region changeLabelGUI
         [Flags]
         public enum LabelStyle

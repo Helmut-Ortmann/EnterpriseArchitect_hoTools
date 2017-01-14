@@ -167,7 +167,7 @@
             // chkAdvancedDiagramNote
             // 
             this.chkAdvancedDiagramNote.AutoSize = true;
-            this.chkAdvancedDiagramNote.Location = new System.Drawing.Point(209, 440);
+            this.chkAdvancedDiagramNote.Location = new System.Drawing.Point(208, 469);
             this.chkAdvancedDiagramNote.Margin = new System.Windows.Forms.Padding(2);
             this.chkAdvancedDiagramNote.Name = "chkAdvancedDiagramNote";
             this.chkAdvancedDiagramNote.Size = new System.Drawing.Size(15, 14);
@@ -180,7 +180,7 @@
             // 
             this.label36.AutoSize = true;
             this.label36.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label36.Location = new System.Drawing.Point(23, 436);
+            this.label36.Location = new System.Drawing.Point(22, 465);
             this.label36.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label36.Name = "label36";
             this.label36.Size = new System.Drawing.Size(154, 18);
@@ -258,9 +258,9 @@
             this.label41.Location = new System.Drawing.Point(397, 422);
             this.label41.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label41.Name = "label41";
-            this.label41.Size = new System.Drawing.Size(160, 18);
+            this.label41.Size = new System.Drawing.Size(128, 18);
             this.label41.TabIndex = 214;
-            this.label41.Text = "Port Advanced Support";
+            this.label41.Text = "Advanced Support";
             this.toolTip1.SetToolTip(this.label41, "Add Buttons to move multiple Ports like:\r\n- Move left\r\n- Move right\r\n- Move up\r\n-" +
         " Move down");
             // 
@@ -299,7 +299,7 @@
             // chkAdvancedPort
             // 
             this.chkAdvancedPort.AutoSize = true;
-            this.chkAdvancedPort.Location = new System.Drawing.Point(561, 426);
+            this.chkAdvancedPort.Location = new System.Drawing.Point(542, 426);
             this.chkAdvancedPort.Margin = new System.Windows.Forms.Padding(2);
             this.chkAdvancedPort.Name = "chkAdvancedPort";
             this.chkAdvancedPort.Size = new System.Drawing.Size(15, 14);
@@ -632,35 +632,35 @@
             // chkPortBasicSupport
             // 
             this.chkPortBasicSupport.AutoSize = true;
-            this.chkPortBasicSupport.Location = new System.Drawing.Point(208, 422);
+            this.chkPortBasicSupport.Location = new System.Drawing.Point(243, 426);
             this.chkPortBasicSupport.Margin = new System.Windows.Forms.Padding(2);
             this.chkPortBasicSupport.Name = "chkPortBasicSupport";
             this.chkPortBasicSupport.Size = new System.Drawing.Size(15, 14);
             this.chkPortBasicSupport.TabIndex = 251;
-            this.toolTip1.SetToolTip(this.chkPortBasicSupport, "Add Buttons to show/hide Port\r\n- Port itself\r\n- Port Label");
+            this.toolTip1.SetToolTip(this.chkPortBasicSupport, "Add Buttons to show/hide Port, Parameter, Pin\r\n- Icon\r\n- Label");
             this.chkPortBasicSupport.UseVisualStyleBackColor = true;
             // 
             // lblPortBasicSupport
             // 
             this.lblPortBasicSupport.AutoSize = true;
             this.lblPortBasicSupport.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPortBasicSupport.Location = new System.Drawing.Point(23, 418);
+            this.lblPortBasicSupport.Location = new System.Drawing.Point(23, 422);
             this.lblPortBasicSupport.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblPortBasicSupport.Name = "lblPortBasicSupport";
-            this.lblPortBasicSupport.Size = new System.Drawing.Size(133, 18);
+            this.lblPortBasicSupport.Size = new System.Drawing.Size(210, 18);
             this.lblPortBasicSupport.TabIndex = 250;
-            this.lblPortBasicSupport.Text = "Port Basic Support";
-            this.toolTip1.SetToolTip(this.lblPortBasicSupport, "Add Buttons to show/hide Port\r\n- Port itself\r\n- Port Label");
+            this.lblPortBasicSupport.Text = "Port, Parameter Basic Support";
+            this.toolTip1.SetToolTip(this.lblPortBasicSupport, "Add Buttons to show/hide Port, Parameter, Pin\r\n- Icon\r\n- Label");
             // 
             // chkPortTypeSupport
             // 
             this.chkPortTypeSupport.AutoSize = true;
-            this.chkPortTypeSupport.Location = new System.Drawing.Point(374, 426);
+            this.chkPortTypeSupport.Location = new System.Drawing.Point(365, 426);
             this.chkPortTypeSupport.Margin = new System.Windows.Forms.Padding(2);
             this.chkPortTypeSupport.Name = "chkPortTypeSupport";
             this.chkPortTypeSupport.Size = new System.Drawing.Size(15, 14);
             this.chkPortTypeSupport.TabIndex = 253;
-            this.toolTip1.SetToolTip(this.chkPortTypeSupport, "Add Buttons to show/hide Port Types\r\n");
+            this.toolTip1.SetToolTip(this.chkPortTypeSupport, "Add Buttons to show/hide Port, Parameter, Pin Type");
             this.chkPortTypeSupport.UseVisualStyleBackColor = true;
             this.chkPortTypeSupport.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
@@ -668,13 +668,13 @@
             // 
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.Location = new System.Drawing.Point(240, 422);
+            this.label15.Location = new System.Drawing.Point(265, 422);
             this.label15.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(128, 18);
+            this.label15.Size = new System.Drawing.Size(96, 18);
             this.label15.TabIndex = 252;
-            this.label15.Text = "Port Type Support";
-            this.toolTip1.SetToolTip(this.label15, "Add Buttons to show/hide Port Types");
+            this.label15.Text = "Type Support";
+            this.toolTip1.SetToolTip(this.label15, "Add Buttons to show/hide Port, Parameter, Pin Type");
             this.label15.Click += new System.EventHandler(this.label15_Click);
             // 
             // label34
