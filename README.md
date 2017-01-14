@@ -115,10 +115,11 @@ Some features:
 
 ## Release 2.1.1
 - Error fixing hoModelView MDG
-- Port support increased (UML + SysML)
+- Port,Parameter,Pin support increased (UML + SysML)
+  (Structural Elements)
+-- Button + Services show/hide Port,Parameter, Pin
+-- Button + Services show/hide Port,Parameter, Pin Label
 -- Button + Services show/hide Port
--- Button + Services show/hide Port Label
--- Button + Services show/hide Port Type
 
 
 ## Release 2.1

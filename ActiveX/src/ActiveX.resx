@@ -1298,13 +1298,11 @@ Procedure:
     <value>HPT</value>
   </data>
   <data name="_btnHidePortType.ToolTip" xml:space="preserve">
-    <value>Hide Port,Parameter, Pin Type of selected
+    <value>Hide Port Type of selected
 - Diagram
 - Nodes
 
-Ports,Parameter,Pins are also called:
-- Structural Elements
-- Embedded Elements</value>
+</value>
   </data>
   <data name="&gt;&gt;_btnHidePortType.Name" xml:space="preserve">
     <value>_btnHidePortType</value>
@@ -1334,13 +1332,11 @@ Ports,Parameter,Pins are also called:
     <value>SPT</value>
   </data>
   <data name="_btnShowPortType.ToolTip" xml:space="preserve">
-    <value>Show Port, Parameter, Pin Type of selected
+    <value>Show Port Type of selected
 - Diagram
 - Nodes
 
-Ports,Parameter,Pins are also called:
-- Structural Elements
-- Embedded Elements</value>
+</value>
   </data>
   <data name="&gt;&gt;_btnShowPortType.Name" xml:space="preserve">
     <value>_btnShowPortType</value>
