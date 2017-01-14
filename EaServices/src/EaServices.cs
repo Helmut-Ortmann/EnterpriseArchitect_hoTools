@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml.Linq;
+using AddinFramework.Extension;
 using EA;
 using hoTools.EaServices.Dlg;
 using hoTools.Utils;
@@ -65,9 +66,7 @@ namespace hoTools.EaServices
 
     public static class EaService
     {
-        const string EmbeddedElementTypes = "Port Parameter Pin";
-
-
+       
         // define menu constants
         public enum DisplayMode
         {
@@ -261,7 +260,7 @@ namespace hoTools.EaServices
                                 el.ReleaseUserLock();
                                 break;
                             case "Diagram":
-                                Diagram dia = rep.GetDiagramByGuid(guid);
+                                EA.Diagram dia = (EA.Diagram)rep.GetDiagramByGuid(guid);
                                 dia.ReleaseUserLock();
                                 break;
                         }
@@ -723,47 +722,31 @@ namespace hoTools.EaServices
 
         #region showAllEmbeddedElementsGUI
 
-        [ServiceOperation("{678AD901-1D2F-4FB0-BAAD-AEB775EE18AC}", "Show all ports for Component",
-            "Select Class, Interface or Component", isTextRequired: false)]
+        [ServiceOperation("{678AD901-1D2F-4FB0-BAAD-AEB775EE18AC}", "Show all Ports, Pins, Parameter",
+            "Selected Diagram Objects or all", isTextRequired: false)]
         public static void ShowEmbeddedElementsGui(
             Repository rep,
-            string embeddedElementType = "Port Pin Parameter",
             bool isOptimizePortLayout = false)
         {
-            var dia = rep.GetCurrentDiagram();
-            if (dia == null) return;
-            rep.SaveDiagram(dia.DiagramID);
+            Cursor.Current = Cursors.WaitCursor;
+            // remember Diagram data of current selected diagram
+            var eaDia = new EaDiagram(rep);
+            if (eaDia.Dia == null) return;
+            // Save to avoid indifferent states
+            rep.SaveDiagram(eaDia.Dia.DiagramID);
 
+            // SQL for Embedded Elements
             var sqlUtil = new UtilSql(rep);
 
-            // work for all diagramObjects or only for the selected diagramObjects
-            List<EA.DiagramObject> ldDiagramObjects = new List<EA.DiagramObject>();
-            if (dia.SelectedObjects.Count == 0)
-            {
-                foreach (var o in dia.DiagramObjects)
-                {
-                    ldDiagramObjects.Add((DiagramObject) o);
-                }
-              
-            }
-            else
-            {
-                foreach (var o in dia.SelectedObjects)
-                {
-                    ldDiagramObjects.Add((DiagramObject)o);
-                }
-            }
+            
             // over all selected elements
-            foreach (DiagramObject diaObj in ldDiagramObjects)
+            int count = -1;
+            foreach (DiagramObject diaObj in eaDia.SelObjects)
             {
-                var elSource = rep.GetElementByID(diaObj.ElementID);
-                if (!"Class Component Activity Part".Contains(elSource.Type)) continue;
-                // find DiagramObject on Diagram
-                var diaObjSource = Util.GetDiagramObjectById(rep, dia, elSource.ElementID);
-                //diaObjSource = dia.GetDiagramObjectByID(elSource.ElementID, "");
-                if (diaObjSource == null) return;
-
+                count = count + 1;
+                var elSource = eaDia.SelElements[count];
                 
+               
                 string[] portTypes = {"left", "right"};
                 foreach (string portBoundTo in portTypes)
                 {
@@ -787,7 +770,7 @@ namespace hoTools.EaServices
                     foreach (int i in lPorts)
                     {
                         Element portEmbedded = rep.GetElementByID(i);
-                        if (embeddedElementType == "" | embeddedElementType.Contains(portEmbedded.Type))
+                        if (portEmbedded.IsEmbeddedElement())
                         {
                             // only ports / parameters (port has no further embedded elements
                             if (portEmbedded.Type == "ActivityParameter" | portEmbedded.EmbeddedElements.Count == 0)
@@ -812,7 +795,7 @@ namespace hoTools.EaServices
                                     pos = pos + 1; // make a gap
                                     oldStereotype = portEmbedded.Stereotype;
                                 }
-                                Util.VisualizePortForDiagramobject(pos, dia, diaObjSource, portEmbedded, null,
+                                Util.VisualizePortForDiagramobject(pos, eaDia.Dia, diaObj, portEmbedded, null,
                                     portBoundTo);
                                 pos = pos + 1;
                             }
@@ -821,7 +804,7 @@ namespace hoTools.EaServices
                                 // Port: Visualize Port + Interface
                                 foreach (Element interf in portEmbedded.EmbeddedElements)
                                 {
-                                    Util.VisualizePortForDiagramobject(pos, dia, diaObjSource, portEmbedded, interf);
+                                    Util.VisualizePortForDiagramobject(pos, eaDia.Dia, diaObj, portEmbedded, interf);
                                     pos = pos + 1;
                                 }
                             }
@@ -829,10 +812,91 @@ namespace hoTools.EaServices
                     }
                 }
             }
-            rep.ReloadDiagram(dia.DiagramID);
+            // display changes
+            rep.ReloadDiagram(eaDia.Dia.DiagramID);
+            eaDia.ReloadSelectedObjectsAndConnector();
+            Cursor.Current = Cursors.Default;
         }
 
         #endregion
+
+        #region HideAllEmbeddedElementsGUI
+        /// <summary>
+        /// Hide all embdeded Elements for:
+        /// - selected nodes
+        /// - all if nothing is selected
+        /// </summary>
+        /// <param name="rep"></param>
+        [ServiceOperation("{5ED3DABA-367E-4575-A161-D79F838A5A17}", "Hide all Ports, Pins, Parameter",
+            "Selected Diagram Objects or all", isTextRequired: false)]
+        public static void HideEmbeddedElementsGui(
+            Repository rep)
+        {
+            Cursor.Current = Cursors.WaitCursor;
+            // remember Diagram data of current selected diagram
+            var eaDia = new EaDiagram(rep);
+            if (eaDia.Dia == null) return;
+            // Save to avoid indifferent states
+            rep.SaveDiagram(eaDia.Dia.DiagramID);
+
+            // SQL for Embedded Elements
+            var sqlUtil = new UtilSql(rep);
+
+
+            // over all selected elements
+            int count = -1;
+            foreach (DiagramObject diaObj in eaDia.SelObjects)
+            {
+                count = count + 1;
+                var elSource = eaDia.SelElements[count];
+                if (elSource.IsEmbeddedElement())
+                {
+                    // selected element was port
+                    RemoveEmbeddedElementFromDiagram(eaDia.Dia, elSource);
+                }
+                else
+                {   // selected element was "Element"
+                    foreach (Element embeddedElement in elSource.EmbeddedElements)
+                    {
+                        if (embeddedElement.IsEmbeddedElement())
+                        {
+                            RemoveEmbeddedElementFromDiagram(eaDia.Dia, embeddedElement);
+                        }
+                    }
+                }
+
+
+
+
+            }
+            // display changes
+            rep.ReloadDiagram(eaDia.Dia.DiagramID);
+            eaDia.ReloadSelectedObjectsAndConnector();
+            Cursor.Current = Cursors.Default;
+        }
+
+        #endregion
+        /// <summary>
+        /// Delete the embedded element from Diagram (Port, Parameter, Pin)
+        /// </summary>
+        /// <param name="dia"></param>
+        /// <param name="embeddedElement"></param>
+        private static void RemoveEmbeddedElementFromDiagram(Diagram dia, EA.Element embeddedElement)
+        {
+            if (!embeddedElement.IsEmbeddedElement()) return;
+            for (int i = dia.DiagramObjects.Count - 1; i >= 0; i -= 1)
+            {
+                var obj = (DiagramObject)dia.DiagramObjects.GetAt((short)i);
+                if (obj.ElementID == embeddedElement.ElementID)
+                {
+                    dia.DiagramObjects.Delete((short)i);
+                    dia.DiagramObjects.Refresh();
+                    break;
+                }
+            }
+
+
+        }
 
         public static void NavigateComposite(Repository repository)
         {
@@ -4775,7 +4839,7 @@ namespace hoTools.EaServices
             // check if port,..
             var objPort0 = (DiagramObject) dia.SelectedObjects.GetAt(0);
             Element port = rep.GetElementByID(objPort0.ElementID);
-            if (!EmbeddedElementTypes.Contains(port.Type)) return;
+            if (! port.IsEmbeddedElement()) return;
 
             // get parent of embedded element
             Element el = rep.GetElementByID(port.ParentID);
@@ -4840,7 +4904,7 @@ namespace hoTools.EaServices
             // check if port,..
             var objPort0 = (DiagramObject) dia.SelectedObjects.GetAt(0);
             Element port = rep.GetElementByID(objPort0.ElementID);
-            if (!EmbeddedElementTypes.Contains(port.Type)) return;
+            if (! port.IsEmbeddedElement()) return;
 
             // get parent of embedded element
             Element el = rep.GetElementByID(port.ParentID);
@@ -4905,7 +4969,7 @@ namespace hoTools.EaServices
             // check if port,..
             var objPort0 = (DiagramObject) dia.SelectedObjects.GetAt(0);
             Element port = rep.GetElementByID(objPort0.ElementID);
-            if (!EmbeddedElementTypes.Contains(port.Type)) return;
+            if (! port.IsEmbeddedElement()) return;
 
             // get parent of embedded element
             Element el = rep.GetElementByID(port.ParentID);
@@ -4969,7 +5033,7 @@ namespace hoTools.EaServices
             // check if port,..
             var objPort0 = (DiagramObject) dia.SelectedObjects.GetAt(0);
             Element port = rep.GetElementByID(objPort0.ElementID);
-            if (!EmbeddedElementTypes.Contains(port.Type)) return;
+            if (! port.IsEmbeddedElement()) return;
 
             // get parent of embedded element
             Element el = rep.GetElementByID(port.ParentID);

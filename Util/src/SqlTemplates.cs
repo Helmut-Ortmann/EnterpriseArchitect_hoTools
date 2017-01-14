@@ -630,7 +630,7 @@ For: Package, Element, Diagram, Attribute, Operation"
                 Diagram dia;
                 if (rep.GetContextItemType() == ObjectType.otDiagram)
                 {
-                    dia = rep.GetContextObject();
+                    dia = (EA.Diagram)rep.GetContextObject();
                 }
                 else
                 {
@@ -672,7 +672,7 @@ For: Package, Element, Diagram, Attribute, Operation"
                 Diagram dia;
                 if (rep.GetContextItemType() == ObjectType.otDiagram)
                 {
-                    dia = rep.GetContextObject();
+                    dia = (EA.Diagram)rep.GetContextObject();
                 } else
                 {
                     dia = rep.GetCurrentDiagram();
@@ -717,7 +717,7 @@ For: Package, Element, Diagram, Attribute, Operation"
             if (sql.Contains(template))
             {
                 // get the diagram
-                Diagram dia = rep.GetContextItemType() == ObjectType.otDiagram ? rep.GetContextObject() : rep.GetCurrentDiagram();
+                EA.Diagram dia = rep.GetContextItemType() == ObjectType.otDiagram ? (EA.Diagram)rep.GetContextObject() : (EA.Diagram)rep.GetCurrentDiagram();
                 // Diagram selected?
                 if (dia == null)
                 {
@@ -942,7 +942,7 @@ For: Package, Element, Diagram, Attribute, Operation"
                 if (rep.GetContextItemType() == ObjectType.otConnector)
                 {
                     // connector ID
-                    Connector con = rep.GetContextObject();
+                    Connector con = (EA.Connector)rep.GetContextObject();
                     if (sql.Contains(currentConnectorTemplate))
                     {
                         

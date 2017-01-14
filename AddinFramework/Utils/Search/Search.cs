@@ -75,7 +75,7 @@ namespace AddinFramework.Util
             StaticAllSearches = new List<SearchItem>();
 
             // Load EA Standard Search Names for current release  
-            LoadEaStandardSearchesFromJason(rep.getRelease(), configFilePath);
+            LoadEaStandardSearchesFromJason(rep.GetRelease(), configFilePath);
             // Load stored searches like MDGs from different sources
             LoadSearches(rep);
 

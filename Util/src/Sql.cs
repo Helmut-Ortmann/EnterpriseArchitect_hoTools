@@ -7,7 +7,11 @@ using EA;
 // ReSharper disable once CheckNamespace
 namespace hoTools.Utils.SQL
 {
-
+    /// <summary>
+    /// SQL Utilities like:
+    /// - Embedded Elements
+    /// - User
+    /// </summary>
     public class UtilSql
     {
         readonly Repository _rep;

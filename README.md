@@ -115,6 +115,11 @@ Some features:
 
 ## Release 2.1.1
 - Error fixing hoModelView MDG
+- Port support increased (UML + SysML)
+-- Button + Services show/hide Port
+-- Button + Services show/hide Port Label
+-- Button + Services show/hide Port Type
+
 
 ## Release 2.1
 - Add Note, Constraint to Diagram, link to Node, Link, Diagram

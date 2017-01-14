@@ -18,7 +18,7 @@ namespace AddinFramework.Extension
             var rowsNode = x.Descendants("Row");
             foreach (var row in rowsNode)
             {
-                string ea_guid = row.Attribute("value").Value;
+                string eaGuid = row.Attribute("value").Value;
             }
     
             return null;
@@ -29,12 +29,31 @@ namespace AddinFramework.Extension
         /// </summary>
         /// <param name="rep"></param>
         /// <returns>EA Version</returns>
-        public static string getRelease(this EA.Repository rep)
+        public static string GetRelease(this EA.Repository rep)
         {
             int libraryVersion = rep.LibraryVersion;
             if (libraryVersion > 1200 && libraryVersion < 1300) return "12.1";
            
-            return Convert.ToString((int)libraryVersion/100);
+            return Convert.ToString(libraryVersion/100);
+        }
+
+        /// <summary>
+        /// Return true if Element is an Embedded Element Type
+        /// - Port
+        /// - Activity Parameter
+        /// - Parameter
+        /// - ExpansionNode
+        /// - Pin
+        /// </summary>
+        /// <param name="el"></param>
+        /// <returns>EA Version</returns>
+        public static bool IsEmbeddedElement(this EA.Element el)
+        {
+            return el.Type == "Port" || 
+                   el.Type == "ActivityParameter" || 
+                   el.Type == "Parameter" || 
+                   el.Type == "ExpansionNode" ||
+                   el.Type == "ActionPin";
         }
     }
 }

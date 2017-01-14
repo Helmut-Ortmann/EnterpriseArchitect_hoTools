@@ -12,8 +12,10 @@ namespace hoTools.Utils
     public class EaDiagram
     {
         readonly Repository _rep;
-        readonly Diagram _dia;
+        readonly EA.Diagram _dia;
         readonly List<EA.DiagramObject> _selectedObjects = new List<EA.DiagramObject>();
+        readonly List<EA.Element> _selectedElements = new List<EA.Element>();
+        readonly bool _isElementSelectedNone = false;
 
         readonly Connector _selectedConnector;
         #region Constructor
@@ -25,16 +27,33 @@ namespace hoTools.Utils
         {
             _rep = rep;
             _dia = _rep.GetCurrentDiagram();
-            if (_dia == null) return;
-            foreach (EA.DiagramObject obj in  _dia.SelectedObjects)
+            if (_dia == null)   return;
+            if (_dia.SelectedObjects.Count == 0)
             {
-                _selectedObjects.Add(obj);
+                foreach (EA.DiagramObject obj in _dia.DiagramObjects)
+                {
+                    _selectedObjects.Add(obj);
+                    _selectedElements.Add(rep.GetElementByID(obj.ElementID));
+                }
+                _isElementSelectedNone = true;
+
+            }
+            else
+            {
+                foreach (EA.DiagramObject obj in  _dia.SelectedObjects)
+                {
+                    _selectedObjects.Add(obj);
+                    _selectedElements.Add(rep.GetElementByID(obj.ElementID));
+                }
             }
             _selectedConnector = _dia.SelectedConnector;
 
         }
         #endregion
         #region Properties
+        public List<EA.DiagramObject> SelObjects =>_selectedObjects;
+        public List<EA.Element> SelElements => _selectedElements;
+        public bool IsSelectedNone => _isElementSelectedNone;
         public Diagram Dia => _dia;
         public int SelectedObjectsCount => _dia.SelectedObjects.Count;
 
@@ -46,6 +65,7 @@ namespace hoTools.Utils
         /// </summary>
         public void ReloadSelectedObjectsAndConnector()
         {
+            if (IsSelectedNone) return;
             Save();
             _rep.ReloadDiagram(_dia.DiagramID);
             if (_selectedConnector != null) _dia.SelectedConnector = _selectedConnector;
@@ -62,8 +82,9 @@ namespace hoTools.Utils
         {
             // estimate sort criteria (left/right, top/bottom)
             bool isVerticalSorted = true;
-            EA.DiagramObject obj1 = _dia.SelectedObjects.GetAt(0);
-            EA.DiagramObject obj2 = _dia.SelectedObjects.GetAt(1);
+
+            EA.DiagramObject obj1 = (EA.DiagramObject)_dia.SelectedObjects.GetAt(0);
+            EA.DiagramObject obj2 = (EA.DiagramObject)_dia.SelectedObjects.GetAt(1);
             if (Math.Abs(obj1.left - obj2.left) > Math.Abs(obj1.top - obj2.top)) isVerticalSorted = false;
 
             // fill the diagram objects to sort by name / by position

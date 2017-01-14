@@ -264,134 +264,10 @@ namespace hoTools.EAServicesPort
         }
         #endregion
 
-        #region showPortsInDiagram
-        /// <summary>
-        /// Show Ports of selected elements in Diagram. The ports are on the right side of the element.
-        /// If isOptimized=true:
-        /// - Receiving Ports on the left side (Server, Receiver)
-        /// - Sending Ports on the right side (Client, Sender)
-        /// </summary>
-        /// <param name="isOptimizePortLayout"></param>
-        public void ShowPortsInDiagram(bool isOptimizePortLayout=false)
-        {
-            try
-            {
-                Cursor.Current = Cursors.WaitCursor;
-                // remember Diagram data of current selected diagram
-                var eaDia = new EaDiagram(_rep);
-                
-                // First: hide all ports
-                RemovePortFromDiagramGui();
-                // show all ports
-                eaDia.ReloadSelectedObjectsAndConnector();// reload selection
+       
 
-                // Now show the ports
-                EaService.ShowEmbeddedElementsGui(_rep, "Port", isOptimizePortLayout);
-                // set selction
-
-                eaDia.ReloadSelectedObjectsAndConnector();
-                Cursor.Current = Cursors.Default;
-
-            }
-            catch (Exception e11)
-            {
-                MessageBox.Show(e11.ToString(), @"Error show ports on diagram");
-            }
-            finally
-            {
-                Cursor.Current = Cursors.Default;
-
-            }
-        }
-        #endregion
-
-        #region removePortFromDiagramGUI
-        /// <summary>
-        /// Remove/hide the ports of:
-        /// - all selected diagramobjects
-        /// - all diaramobjects if no diagramobject is selected
-        /// </summary>
-        public void RemovePortFromDiagramGui()
-        {
-            try
-            {
-
-                Cursor.Current = Cursors.WaitCursor;
-                // remember Diagram data of current selected diagram
-                var eaDia = new EaDiagram(_rep);
-
-                HidePortFromDiagramGui();
-
-
-                eaDia.ReloadSelectedObjectsAndConnector();
-                Cursor.Current = Cursors.Default;
-
-            }
-            catch (Exception e11)
-            {
-                MessageBox.Show(e11.ToString(), @"Error removing ports from diagram");
-            }
-            finally
-            {
-                Cursor.Current = Cursors.Default;
-
-            }
-        }
-        #endregion
-        #region HidePortFromDiagramGui
-        /// <summary>
-        /// Hide ports from diagramobjects
-        /// - selected diagramObjects
-        /// - All diagramObjects if nothing selected
-        /// </summary>
-        private void HidePortFromDiagramGui()
-        {
-            Diagram dia = _rep.GetCurrentDiagram();
-            if (dia == null) return;
-
-            // work for all diagramObjects or only for the selected diagramObjects
-            List<EA.Element> ldElement = new List<EA.Element>();
-            if (dia.SelectedObjects.Count == 0)
-            {
-                foreach (DiagramObject o in dia.DiagramObjects)
-                {
-                    ldElement.Add(_rep.GetElementByID(o.ElementID));
-                }
-
-            }
-            else
-            {
-                foreach (DiagramObject o in dia.SelectedObjects)
-                {
-                    ldElement.Add(_rep.GetElementByID(o.ElementID));
-                }
-            }
-            if (ldElement.Count == 0) return;
-
-            _rep.SaveDiagram(dia.DiagramID);
-
-            // target object/element
-            foreach (Element el in ldElement)
-            {
-                if (el.Type == "Port")
-                {
-                    // selected element was port
-                    RemovePortFromDiagram(dia, el);
-                }
-                else
-                {   // selected element was "Element"
-                    foreach (Element port in el.EmbeddedElements)
-                    {
-                        if (port.Type == "Port")
-                        {
-                            RemovePortFromDiagram(dia, port);
-                        }
-                    }
-                }
-            }
-            _rep.ReloadDiagram(dia.DiagramID);
-        }
-        #endregion  
+        
+        
         #region removePortFromDiagram
         private void RemovePortFromDiagram(Diagram dia, Element port)
         {
@@ -423,6 +299,14 @@ namespace hoTools.EAServicesPort
             IsTypeHidden = 64, // PType=0;
             IsTypeShown = 128, // PType=1;
         }
+        /// <summary>
+        /// Change the type of nodes:
+        /// - All nodes
+        /// - Selected nodes
+        /// - Pass the LabelStyle attribute you want to change (see type LabelStyle)
+        ///   hoTools updates: DiagramObjects.Styles 
+        /// </summary>
+        /// <param name="style"></param>
         public void ChangeLabelGui(LabelStyle style)
         {
             try
@@ -443,7 +327,15 @@ namespace hoTools.EAServicesPort
         }
         #endregion
         #region doChangeLabelGUI
-        public void DoChangeLabelGui(LabelStyle style)
+        /// <summary>
+        /// Worker for change the type of nodes:
+        /// - All nodes
+        /// - Selected nodes
+        /// - Pass the LabelStyle attribute you want to change (see type LabelStyle)
+        ///   hoTools updates: DiagramObjects.Styles 
+        /// </summary>
+        /// <param name="style"></param>
+        private void DoChangeLabelGui(LabelStyle style)
         {
             Diagram dia = _rep.GetCurrentDiagram();
             if (dia == null) return;
@@ -485,7 +377,7 @@ namespace hoTools.EAServicesPort
         /// </summary>
         /// <param name="portObj"></param>
         /// <param name="style"></param>
-        private static void DoChangeLabelStyle(DiagramObject portObj, LabelStyle style)
+        private static void DoChangeLabelStyle(EA.DiagramObject portObj, LabelStyle style)
         {
             switch (style)
             {
@@ -514,7 +406,7 @@ namespace hoTools.EAServicesPort
 
                 case LabelStyle.PositionMinus:
                     // get old x position
-                    Match match = Regex.Match(portObj.Style, @"OX=([\+\-0-9]*)");
+                    Match match = Regex.Match((string)portObj.Style, @"OX=([\+\-0-9]*)");
                     if (match.Success)
                     {
                         int xPos = Convert.ToInt32(match.Groups[1].Value) - 15;
@@ -524,7 +416,7 @@ namespace hoTools.EAServicesPort
 
                 case LabelStyle.PositionPlus:
                     // get old x position
-                    match = Regex.Match(portObj.Style, @"OX=([\+\-0-9]*)");
+                    match = Regex.Match((string)portObj.Style, @"OX=([\+\-0-9]*)");
                     if (match.Success)
                     {
                         int xPos = Convert.ToInt32(match.Groups[1].Value) + 15;

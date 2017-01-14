@@ -79,7 +79,7 @@ namespace hoTools.Utils
                     el = (EA.Element) rep.GetContextObject();
                     break;
                 case ObjectType.otPackage:
-                    EA.Package pkg = rep.GetContextObject();
+                    EA.Package pkg = (EA.Package)rep.GetContextObject();
                     el = rep.GetElementByGuid(pkg.PackageGUID);
                     break;
                 case ObjectType.otNone:

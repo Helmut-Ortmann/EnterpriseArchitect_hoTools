@@ -74,13 +74,17 @@
             this.txtAddinTabToFirstActivate = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this._chkQuickSearchSupport = new System.Windows.Forms.CheckBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.chkReverseEdgeDirection = new System.Windows.Forms.CheckBox();
+            this.chkPortBasicSupport = new System.Windows.Forms.CheckBox();
+            this.lblPortBasicSupport = new System.Windows.Forms.Label();
+            this.chkPortTypeSupport = new System.Windows.Forms.CheckBox();
+            this.label15 = new System.Windows.Forms.Label();
             this.label34 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.chkReverseEdgeDirection = new System.Windows.Forms.CheckBox();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -251,14 +255,14 @@
             // 
             this.label41.AutoSize = true;
             this.label41.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label41.Location = new System.Drawing.Point(23, 414);
+            this.label41.Location = new System.Drawing.Point(397, 422);
             this.label41.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label41.Name = "label41";
-            this.label41.Size = new System.Drawing.Size(158, 18);
+            this.label41.Size = new System.Drawing.Size(160, 18);
             this.label41.TabIndex = 214;
-            this.label41.Text = "Advanced Port support";
-            this.toolTip1.SetToolTip(this.label41, "Add Tool support to easily handle multiple ports on an Element like:\r\n- Move left" +
-        "\r\n- Move right\r\n- Move up\r\n- Move down");
+            this.label41.Text = "Port Advanced Support";
+            this.toolTip1.SetToolTip(this.label41, "Add Buttons to move multiple Ports like:\r\n- Move left\r\n- Move right\r\n- Move up\r\n-" +
+        " Move down");
             // 
             // label29
             // 
@@ -295,13 +299,13 @@
             // chkAdvancedPort
             // 
             this.chkAdvancedPort.AutoSize = true;
-            this.chkAdvancedPort.Location = new System.Drawing.Point(209, 418);
+            this.chkAdvancedPort.Location = new System.Drawing.Point(561, 426);
             this.chkAdvancedPort.Margin = new System.Windows.Forms.Padding(2);
             this.chkAdvancedPort.Name = "chkAdvancedPort";
             this.chkAdvancedPort.Size = new System.Drawing.Size(15, 14);
             this.chkAdvancedPort.TabIndex = 224;
-            this.toolTip1.SetToolTip(this.chkAdvancedPort, "Add Tool support to easily handle multiple ports on an Element like:\r\n- Move left" +
-        "\r\n- Move right\r\n- Move up\r\n- Move down");
+            this.toolTip1.SetToolTip(this.chkAdvancedPort, "Add Buttons to move multiple Ports like:\r\n- Move left\r\n- Move right\r\n- Move up\r\n-" +
+        " Move down");
             this.chkAdvancedPort.UseVisualStyleBackColor = true;
             // 
             // txtFileManagerPath
@@ -523,7 +527,7 @@
             // 
             this.chkConveyedItemSupport.AutoSize = true;
             this.chkConveyedItemSupport.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkConveyedItemSupport.Location = new System.Drawing.Point(243, 356);
+            this.chkConveyedItemSupport.Location = new System.Drawing.Point(243, 360);
             this.chkConveyedItemSupport.Name = "chkConveyedItemSupport";
             this.chkConveyedItemSupport.Size = new System.Drawing.Size(187, 22);
             this.chkConveyedItemSupport.TabIndex = 239;
@@ -602,6 +606,77 @@
             this.toolTip1.SetToolTip(this._chkQuickSearchSupport, "Use Quick Search in hoTools.");
             this._chkQuickSearchSupport.UseVisualStyleBackColor = true;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(23, 338);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(159, 18);
+            this.label1.TabIndex = 248;
+            this.label1.Text = "Reverse edge direction";
+            this.toolTip1.SetToolTip(this.label1, "Add Buttons for Linestyle");
+            // 
+            // chkReverseEdgeDirection
+            // 
+            this.chkReverseEdgeDirection.AutoSize = true;
+            this.chkReverseEdgeDirection.Location = new System.Drawing.Point(208, 338);
+            this.chkReverseEdgeDirection.Margin = new System.Windows.Forms.Padding(2);
+            this.chkReverseEdgeDirection.Name = "chkReverseEdgeDirection";
+            this.chkReverseEdgeDirection.Size = new System.Drawing.Size(15, 14);
+            this.chkReverseEdgeDirection.TabIndex = 249;
+            this.toolTip1.SetToolTip(this.chkReverseEdgeDirection, "Add Button for reverse edge direction\r\n");
+            this.chkReverseEdgeDirection.UseVisualStyleBackColor = true;
+            // 
+            // chkPortBasicSupport
+            // 
+            this.chkPortBasicSupport.AutoSize = true;
+            this.chkPortBasicSupport.Location = new System.Drawing.Point(208, 422);
+            this.chkPortBasicSupport.Margin = new System.Windows.Forms.Padding(2);
+            this.chkPortBasicSupport.Name = "chkPortBasicSupport";
+            this.chkPortBasicSupport.Size = new System.Drawing.Size(15, 14);
+            this.chkPortBasicSupport.TabIndex = 251;
+            this.toolTip1.SetToolTip(this.chkPortBasicSupport, "Add Buttons to show/hide Port\r\n- Port itself\r\n- Port Label");
+            this.chkPortBasicSupport.UseVisualStyleBackColor = true;
+            // 
+            // lblPortBasicSupport
+            // 
+            this.lblPortBasicSupport.AutoSize = true;
+            this.lblPortBasicSupport.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPortBasicSupport.Location = new System.Drawing.Point(23, 418);
+            this.lblPortBasicSupport.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblPortBasicSupport.Name = "lblPortBasicSupport";
+            this.lblPortBasicSupport.Size = new System.Drawing.Size(133, 18);
+            this.lblPortBasicSupport.TabIndex = 250;
+            this.lblPortBasicSupport.Text = "Port Basic Support";
+            this.toolTip1.SetToolTip(this.lblPortBasicSupport, "Add Buttons to show/hide Port\r\n- Port itself\r\n- Port Label");
+            // 
+            // chkPortTypeSupport
+            // 
+            this.chkPortTypeSupport.AutoSize = true;
+            this.chkPortTypeSupport.Location = new System.Drawing.Point(374, 426);
+            this.chkPortTypeSupport.Margin = new System.Windows.Forms.Padding(2);
+            this.chkPortTypeSupport.Name = "chkPortTypeSupport";
+            this.chkPortTypeSupport.Size = new System.Drawing.Size(15, 14);
+            this.chkPortTypeSupport.TabIndex = 253;
+            this.toolTip1.SetToolTip(this.chkPortTypeSupport, "Add Buttons to show/hide Port Types\r\n");
+            this.chkPortTypeSupport.UseVisualStyleBackColor = true;
+            this.chkPortTypeSupport.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.Location = new System.Drawing.Point(240, 422);
+            this.label15.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(128, 18);
+            this.label15.TabIndex = 252;
+            this.label15.Text = "Port Type Support";
+            this.toolTip1.SetToolTip(this.label15, "Add Buttons to show/hide Port Types");
+            this.label15.Click += new System.EventHandler(this.label15_Click);
+            // 
             // label34
             // 
             this.label34.AutoSize = true;
@@ -653,35 +728,16 @@
             this.label12.TabIndex = 246;
             this.label12.Text = "(hoTools, SQL, Script, ..)";
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(23, 338);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(159, 18);
-            this.label1.TabIndex = 248;
-            this.label1.Text = "Reverse edge direction";
-            this.toolTip1.SetToolTip(this.label1, "Add Buttons for Linestyle");
-            // 
-            // chkReverseEdgeDirection
-            // 
-            this.chkReverseEdgeDirection.AutoSize = true;
-            this.chkReverseEdgeDirection.Location = new System.Drawing.Point(208, 338);
-            this.chkReverseEdgeDirection.Margin = new System.Windows.Forms.Padding(2);
-            this.chkReverseEdgeDirection.Name = "chkReverseEdgeDirection";
-            this.chkReverseEdgeDirection.Size = new System.Drawing.Size(15, 14);
-            this.chkReverseEdgeDirection.TabIndex = 249;
-            this.toolTip1.SetToolTip(this.chkReverseEdgeDirection, "Add Button for reverse edge direction\r\n");
-            this.chkReverseEdgeDirection.UseVisualStyleBackColor = true;
-            // 
             // FrmSettingsGeneral
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(785, 624);
+            this.Controls.Add(this.chkPortTypeSupport);
+            this.Controls.Add(this.label15);
+            this.Controls.Add(this.chkPortBasicSupport);
+            this.Controls.Add(this.lblPortBasicSupport);
             this.Controls.Add(this.chkReverseEdgeDirection);
             this.Controls.Add(this.label1);
             this.Controls.Add(this._chkQuickSearchSupport);
@@ -789,5 +845,9 @@
         private System.Windows.Forms.CheckBox _chkQuickSearchSupport;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox chkReverseEdgeDirection;
+        private System.Windows.Forms.CheckBox chkPortBasicSupport;
+        private System.Windows.Forms.Label lblPortBasicSupport;
+        private System.Windows.Forms.CheckBox chkPortTypeSupport;
+        private System.Windows.Forms.Label label15;
     }
 }

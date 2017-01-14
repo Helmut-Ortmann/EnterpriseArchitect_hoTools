@@ -509,6 +509,58 @@ namespace hoTools.Settings
 
         }
         #endregion
+        #region Property: isPortBasic
+        /// <summary>
+        /// Show/hide Port and Port Label Buttons
+        /// </summary>
+        public bool IsPortBasic
+        {
+            get
+            {
+                bool result;
+                if (bool.TryParse(CurrentConfig.AppSettings.Settings["isPortBasic"].Value, out result))
+                {
+                    return result;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            set
+            {
+                CurrentConfig.AppSettings.Settings["isPortBasic"].Value = value.ToString();
+
+            }
+
+        }
+        #endregion
+        #region Property: isPortType
+        /// <summary>
+        /// Show/hide Port Type Buttons
+        /// </summary>
+        public bool IsPortType
+        {
+            get
+            {
+                bool result;
+                if (bool.TryParse(CurrentConfig.AppSettings.Settings["isPortType"].Value, out result))
+                {
+                    return result;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            set
+            {
+                CurrentConfig.AppSettings.Settings["isPortType"].Value = value.ToString();
+
+            }
+
+        }
+        #endregion
         #region Property: isAdvancedDiagramNote
 
         public bool IsAdvancedDiagramNote

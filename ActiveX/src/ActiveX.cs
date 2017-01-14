@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
@@ -150,7 +149,7 @@ namespace hoTools.ActiveX
         private Panel _panelNote;
         private Panel _panelPort;
         private Panel _panelAdvanced;
-        private Panel _panelConveyedItems;
+        private Panel _panelPortButtons;
         private Button _btnConveyedItem;
         private ToolStripSeparator _toolStripSeparator6;
         private ToolStripButton _toolStripServiceBtn1;
@@ -167,7 +166,7 @@ namespace hoTools.ActiveX
         private ComboBox _cmbSearchName;
         private RichTextBox _rtfListOfSearches;
         private TextBox _txtSearchName;
-        private ToolStripMenuItem updateScriptsToolStripMenuItem;
+        private ToolStripMenuItem _updateScriptsToolStripMenuItem;
         private ToolStripMenuItem gitHubToolStripMenuItem;
         private ToolStripSeparator toolStripSeparator1;
         private ToolStripSeparator toolStripSeparator2;
@@ -184,6 +183,11 @@ namespace hoTools.ActiveX
         private Button _btnAddNote;
         private Button _btnHidePort;
         private Button _btnShowPort;
+        private Button _btnHidePortType;
+        private Button _btnShowPortType;
+        private Button _btnShowPortLabel;
+        private Button _btnHidePortLabel;
+        private Panel _panelConveyedItems;
         private TextBox _txtSearchText;
         #endregion
 
@@ -670,8 +674,7 @@ namespace hoTools.ActiveX
         #region removePortsInDiagramToolStripMenuItem_Click
         void removePortsInDiagramToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var port = new PortServices(Repository);
-            port.RemovePortFromDiagramGui();
+            EaService.HideEmbeddedElementsGui(Repository);
 
         }
         #endregion
@@ -679,17 +682,69 @@ namespace hoTools.ActiveX
         #region showPortsInDiagramObjects
         void showPortsInDiagramObjectsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var port = new PortServices(Repository);
-            port.ShowPortsInDiagram(isOptimizePortLayout:false);
-
-
+            // Show the ports
+            EaService.ShowEmbeddedElementsGui(Repository);
         }
         #endregion
+        /// <summary>
+        /// Show Port Label for:
+        /// - Diagram
+        /// - Element
+        /// - Port
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void _btnShowPortLabel_Click(object sender, EventArgs e)
+        {
+            var port = new PortServices(Repository);
+            port.ChangeLabelGui(PortServices.LabelStyle.IsShown);
+        }
+        /// <summary>
+        /// Hide Port Label for:
+        /// - Diagram
+        /// - Element
+        /// - Port
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void _btnHidePortLabel_Click(object sender, EventArgs e)
+        {
+            var port = new PortServices(Repository);
+            port.ChangeLabelGui(PortServices.LabelStyle.IsHidden);
+        }
+        /// <summary>
+        /// Show Port Type for:
+        /// - Diagram
+        /// - Element
+        /// - Port
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void _btnShowPortType_Click(object sender, EventArgs e)
+        {
+            var port = new PortServices(Repository);
+            port.ChangeLabelGui(PortServices.LabelStyle.IsTypeShown);
+        }
+        /// <summary>
+        /// Hide Port Type for:
+        /// - Diagram
+        /// - Element
+        /// - Port
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void _btnHidePortType_Click(object sender, EventArgs e)
+        {
+            var port = new PortServices(Repository);
+            port.ChangeLabelGui(PortServices.LabelStyle.IsTypeHidden);
+        }
+
+
+
         #region showReceivingPortsLeftSendingPortsRight
         void showReceivingPortsLeftSendingPortsRightToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var port = new PortServices(Repository);
-            port.ShowPortsInDiagram(true);
+            EaService.ShowEmbeddedElementsGui(Repository);
         }
         #endregion
 
@@ -1093,7 +1148,11 @@ namespace hoTools.ActiveX
             this._btnLv = new System.Windows.Forms.Button();
             this._btnLh = new System.Windows.Forms.Button();
             this._btnConveyedItem = new System.Windows.Forms.Button();
-            this._panelConveyedItems = new System.Windows.Forms.Panel();
+            this._panelPortButtons = new System.Windows.Forms.Panel();
+            this._btnHidePortType = new System.Windows.Forms.Button();
+            this._btnShowPortType = new System.Windows.Forms.Button();
+            this._btnShowPortLabel = new System.Windows.Forms.Button();
+            this._btnHidePortLabel = new System.Windows.Forms.Button();
             this._btnHidePort = new System.Windows.Forms.Button();
             this._btnShowPort = new System.Windows.Forms.Button();
             this._btnReverseConnector = new System.Windows.Forms.Button();
@@ -1114,7 +1173,7 @@ namespace hoTools.ActiveX
             this._settingsGlobalKeysToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._settingsToolbarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._settingsQueryAndSctipToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.updateScriptsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this._updateScriptsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._doToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportExcelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportCsvOfClipboardToExcelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -1177,10 +1236,11 @@ namespace hoTools.ActiveX
             this._panelAdvanced = new System.Windows.Forms.Panel();
             this._panelQuickSearch = new System.Windows.Forms.TableLayoutPanel();
             this._toolTipRtfListOfSearches = new System.Windows.Forms.ToolTip(this.components);
+            this._panelConveyedItems = new System.Windows.Forms.Panel();
             this._toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this._toolStripContainer1.SuspendLayout();
             this._toolStripQuery.SuspendLayout();
-            this._panelConveyedItems.SuspendLayout();
+            this._panelPortButtons.SuspendLayout();
             this.contextMenuRtf.SuspendLayout();
             this._menuStrip1.SuspendLayout();
             this._panelButtons.SuspendLayout();
@@ -1190,6 +1250,7 @@ namespace hoTools.ActiveX
             this._panelPort.SuspendLayout();
             this._panelAdvanced.SuspendLayout();
             this._panelQuickSearch.SuspendLayout();
+            this._panelConveyedItems.SuspendLayout();
             this.SuspendLayout();
             // 
             // _toolStripContainer1
@@ -1529,15 +1590,49 @@ namespace hoTools.ActiveX
             this._btnConveyedItem.UseVisualStyleBackColor = true;
             this._btnConveyedItem.Click += new System.EventHandler(this.btnConveyedItem_Click);
             // 
-            // _panelConveyedItems
+            // _panelPortButtons
             // 
-            this._panelConveyedItems.Controls.Add(this._btnHidePort);
-            this._panelConveyedItems.Controls.Add(this._btnShowPort);
-            this._panelConveyedItems.Controls.Add(this._btnReverseConnector);
-            this._panelConveyedItems.Controls.Add(this._btnConveyedItem);
-            resources.ApplyResources(this._panelConveyedItems, "_panelConveyedItems");
-            this._panelConveyedItems.Name = "_panelConveyedItems";
-            this._toolTip.SetToolTip(this._panelConveyedItems, resources.GetString("_panelConveyedItems.ToolTip"));
+            this._panelPortButtons.Controls.Add(this._btnHidePortType);
+            this._panelPortButtons.Controls.Add(this._btnShowPortType);
+            this._panelPortButtons.Controls.Add(this._btnShowPortLabel);
+            this._panelPortButtons.Controls.Add(this._btnHidePortLabel);
+            this._panelPortButtons.Controls.Add(this._btnHidePort);
+            this._panelPortButtons.Controls.Add(this._btnShowPort);
+            resources.ApplyResources(this._panelPortButtons, "_panelPortButtons");
+            this._panelPortButtons.Name = "_panelPortButtons";
+            this._toolTip.SetToolTip(this._panelPortButtons, resources.GetString("_panelPortButtons.ToolTip"));
+            // 
+            // _btnHidePortType
+            // 
+            resources.ApplyResources(this._btnHidePortType, "_btnHidePortType");
+            this._btnHidePortType.Name = "_btnHidePortType";
+            this._toolTip.SetToolTip(this._btnHidePortType, resources.GetString("_btnHidePortType.ToolTip"));
+            this._btnHidePortType.UseVisualStyleBackColor = true;
+            this._btnHidePortType.Click += new System.EventHandler(this._btnHidePortType_Click);
+            // 
+            // _btnShowPortType
+            // 
+            resources.ApplyResources(this._btnShowPortType, "_btnShowPortType");
+            this._btnShowPortType.Name = "_btnShowPortType";
+            this._toolTip.SetToolTip(this._btnShowPortType, resources.GetString("_btnShowPortType.ToolTip"));
+            this._btnShowPortType.UseVisualStyleBackColor = true;
+            this._btnShowPortType.Click += new System.EventHandler(this._btnShowPortType_Click);
+            // 
+            // _btnShowPortLabel
+            // 
+            resources.ApplyResources(this._btnShowPortLabel, "_btnShowPortLabel");
+            this._btnShowPortLabel.Name = "_btnShowPortLabel";
+            this._toolTip.SetToolTip(this._btnShowPortLabel, resources.GetString("_btnShowPortLabel.ToolTip"));
+            this._btnShowPortLabel.UseVisualStyleBackColor = true;
+            this._btnShowPortLabel.Click += new System.EventHandler(this._btnShowPortLabel_Click);
+            // 
+            // _btnHidePortLabel
+            // 
+            resources.ApplyResources(this._btnHidePortLabel, "_btnHidePortLabel");
+            this._btnHidePortLabel.Name = "_btnHidePortLabel";
+            this._toolTip.SetToolTip(this._btnHidePortLabel, resources.GetString("_btnHidePortLabel.ToolTip"));
+            this._btnHidePortLabel.UseVisualStyleBackColor = true;
+            this._btnHidePortLabel.Click += new System.EventHandler(this._btnHidePortLabel_Click);
             // 
             // _btnHidePort
             // 
@@ -1675,7 +1770,7 @@ namespace hoTools.ActiveX
             this._settingsGlobalKeysToolStripMenuItem,
             this._settingsToolbarToolStripMenuItem,
             this._settingsQueryAndSctipToolStripMenuItem,
-            this.updateScriptsToolStripMenuItem});
+            this._updateScriptsToolStripMenuItem});
             this._fileToolStripMenuItem.Name = "_fileToolStripMenuItem";
             resources.ApplyResources(this._fileToolStripMenuItem, "_fileToolStripMenuItem");
             // 
@@ -1709,11 +1804,11 @@ namespace hoTools.ActiveX
             resources.ApplyResources(this._settingsQueryAndSctipToolStripMenuItem, "_settingsQueryAndSctipToolStripMenuItem");
             this._settingsQueryAndSctipToolStripMenuItem.Click += new System.EventHandler(this.settingsQueryAndSctipToolStripMenuItem_Click);
             // 
-            // updateScriptsToolStripMenuItem
+            // _updateScriptsToolStripMenuItem
             // 
-            this.updateScriptsToolStripMenuItem.Name = "updateScriptsToolStripMenuItem";
-            resources.ApplyResources(this.updateScriptsToolStripMenuItem, "updateScriptsToolStripMenuItem");
-            this.updateScriptsToolStripMenuItem.Click += new System.EventHandler(this.updateScriptsToolStripMenuItem_Click);
+            this._updateScriptsToolStripMenuItem.Name = "_updateScriptsToolStripMenuItem";
+            resources.ApplyResources(this._updateScriptsToolStripMenuItem, "_updateScriptsToolStripMenuItem");
+            this._updateScriptsToolStripMenuItem.Click += new System.EventHandler(this.updateScriptsToolStripMenuItem_Click);
             // 
             // _doToolStripMenuItem
             // 
@@ -2148,6 +2243,13 @@ namespace hoTools.ActiveX
             this._toolTipRtfListOfSearches.Draw += new System.Windows.Forms.DrawToolTipEventHandler(this._toolTipRtfListOfSearches_Draw);
             this._toolTipRtfListOfSearches.Popup += new System.Windows.Forms.PopupEventHandler(this._toolTipRtfListOfSearches_Popup);
             // 
+            // _panelConveyedItems
+            // 
+            this._panelConveyedItems.Controls.Add(this._btnReverseConnector);
+            this._panelConveyedItems.Controls.Add(this._btnConveyedItem);
+            resources.ApplyResources(this._panelConveyedItems, "_panelConveyedItems");
+            this._panelConveyedItems.Name = "_panelConveyedItems";
+            // 
             // AddinControlGui
             // 
             resources.ApplyResources(this, "$this");
@@ -2158,6 +2260,7 @@ namespace hoTools.ActiveX
             this.Controls.Add(this._panelAdvanced);
             this.Controls.Add(this._panelFavorite);
             this.Controls.Add(this._panelConveyedItems);
+            this.Controls.Add(this._panelPortButtons);
             this.Controls.Add(this._panelLineStyle);
             this.Controls.Add(this._panelQuickSearch);
             this.Controls.Add(this._panelButtons);
@@ -2170,7 +2273,7 @@ namespace hoTools.ActiveX
             this._toolStripContainer1.PerformLayout();
             this._toolStripQuery.ResumeLayout(false);
             this._toolStripQuery.PerformLayout();
-            this._panelConveyedItems.ResumeLayout(false);
+            this._panelPortButtons.ResumeLayout(false);
             this.contextMenuRtf.ResumeLayout(false);
             this._menuStrip1.ResumeLayout(false);
             this._menuStrip1.PerformLayout();
@@ -2183,6 +2286,7 @@ namespace hoTools.ActiveX
             this._panelAdvanced.ResumeLayout(false);
             this._panelQuickSearch.ResumeLayout(false);
             this._panelQuickSearch.PerformLayout();
+            this._panelConveyedItems.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2204,6 +2308,7 @@ namespace hoTools.ActiveX
             _panelAdvanced.Visible = false;
             _panelFavorite.Visible = false;
             _panelConveyedItems.Visible = false;
+            _panelPortButtons.Visible = false;
             _panelLineStyle.Visible = false;
             _panelQuickSearch.Visible = false;
             _panelButtons.Visible = false;
@@ -2220,6 +2325,8 @@ namespace hoTools.ActiveX
             _panelFavorite.PerformLayout();
             _panelConveyedItems.ResumeLayout(false);
             _panelConveyedItems.PerformLayout();
+            _panelPortButtons.ResumeLayout(false);
+            _panelPortButtons.PerformLayout();
             _panelLineStyle.ResumeLayout(false);
             _panelLineStyle.PerformLayout();
             _panelQuickSearch.ResumeLayout(false);
@@ -2241,13 +2348,17 @@ namespace hoTools.ActiveX
             _panelAdvanced.Visible = false;
             _panelFavorite.Visible = false;
             _panelConveyedItems.Visible = false;
+            _panelPortButtons.Visible = false;
             _panelLineStyle.Visible = false;
             _panelQuickSearch.Visible = false;
             _panelButtons.Visible = false;
 
 
-            // Port
+            // Port Panels
             _panelPort.Visible = AddinSettings.IsAdvancedPort;
+
+
+
             _panelNote.Visible = AddinSettings.IsAdvancedDiagramNote;
             _lblPorts.Visible = AddinSettings.IsAdvancedPort;
 
@@ -2274,6 +2385,9 @@ namespace hoTools.ActiveX
             _panelConveyedItems.Visible = AddinSettings.IsConveyedItemsSupport || AddinSettings.IsReverseEdgeDirection;
             _btnConveyedItem.Visible = AddinSettings.IsConveyedItemsSupport;
             _btnReverseConnector.Visible = AddinSettings.IsReverseEdgeDirection;
+            
+            // Port Buttons
+            _panelPortButtons.Visible = AddinSettings.IsPortBasic || AddinSettings.IsPortType;
 
             // Line style Panel
             _panelLineStyle.Visible = AddinSettings.IsLineStyleSupport;
@@ -2319,6 +2433,14 @@ namespace hoTools.ActiveX
 
             _btnLabelLeft.Visible = visiblePorts;
             _btnLabelRight.Visible = visiblePorts;
+
+            // Port Buttons
+            _btnHidePort.Visible = AddinSettings.IsPortBasic;
+            _btnShowPort.Visible = AddinSettings.IsPortBasic;
+            _btnHidePortLabel.Visible = AddinSettings.IsPortBasic;
+            _btnShowPortLabel.Visible = AddinSettings.IsPortBasic;
+            _btnHidePortType.Visible = AddinSettings.IsPortType;
+            _btnShowPortType.Visible = AddinSettings.IsPortType;
 
             // Note in diagram support
             bool visibleDiagramNote = AddinSettings.IsAdvancedDiagramNote;
@@ -2852,6 +2974,7 @@ namespace hoTools.ActiveX
             Excel.MakeExcelFileFromCsv();
         }
 
+        
     }
 
     #endregion

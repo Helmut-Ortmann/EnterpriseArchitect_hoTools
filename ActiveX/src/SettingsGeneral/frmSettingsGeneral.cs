@@ -45,7 +45,12 @@ namespace hoTools.Settings
             chkAdvancedFeatures.Checked = settings.IsAdvancedFeatures;
             chkSvnSupport.Checked = settings.IsSvnSupport;
             chkVcSupport.Checked = settings.IsVcSupport;
+            // Port support
             chkAdvancedPort.Checked = settings.IsAdvancedPort;
+            chkPortBasicSupport.Checked = settings.IsPortBasic;
+            chkPortTypeSupport.Checked = settings.IsPortType;
+
+
             chkAdvancedDiagramNote.Checked = settings.IsAdvancedDiagramNote;
             #endregion
 
@@ -121,7 +126,11 @@ namespace hoTools.Settings
             _settings.IsSvnSupport = chkSvnSupport.Checked;
             _settings.IsVcSupport = chkVcSupport.Checked;
             _settings.IsAdvancedFeatures = chkAdvancedFeatures.Checked;
+            // Port
+            _settings.IsPortBasic = chkPortBasicSupport.Checked;
+            _settings.IsPortType = chkPortTypeSupport.Checked;
             _settings.IsAdvancedPort = chkAdvancedPort.Checked;
+
             _settings.IsAdvancedDiagramNote = chkAdvancedDiagramNote.Checked;
 
             #region AutoLoadMdg
@@ -153,8 +162,14 @@ namespace hoTools.Settings
             Close();
         }
 
-       
+        private void label15_Click(object sender, System.EventArgs e)
+        {
 
-       
+        }
+
+        private void checkBox1_CheckedChanged(object sender, System.EventArgs e)
+        {
+
+        }
     }
 }
