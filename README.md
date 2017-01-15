@@ -43,11 +43,11 @@ Collection of useful tools (see also [WiKi](https://github.com/Helmut-Ortmann/En
   - in Packages, Elements, Diagrams, Attributes, Operations
 - [COM Server](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/ComServer) for [SQL searches](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/EaSearches)
 - Configure
- - Buttons & Global Keys
- - Searches & Services & Scripts
- - GUI appearance
+  - Buttons & Global Keys
+  - Searches & Services & Scripts
+  - GUI appearance
 - Administration of EA
-  - Version Control
+   - Version Control
 - Intuitive GUI
 - [WiKi](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/home)
 
@@ -113,13 +113,15 @@ Some features:
 
 # Releases
 
+## Release 2.1.2
+
 ## Release 2.1.1
 - Error fixing hoModelView MDG
 - Port,Parameter,Pin support increased (UML + SysML)
   (Structural Elements)
--- Button + Services show/hide Port,Parameter, Pin
--- Button + Services show/hide Port,Parameter, Pin Label
--- Button + Services show/hide Port
+ - Button + Services show/hide Port,Parameter, Pin
+ - Button + Services show/hide Port,Parameter, Pin Label
+ - Button + Services show/hide Port
 
 
 ## Release 2.1
