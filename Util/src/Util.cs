@@ -106,7 +106,12 @@ namespace hoTools.Utils
                 StartApp(@"Explorer.exe", "/e, " + path);
         }
 
-
+        
+        /// <summary>
+        /// Start Application with parameters
+        /// </summary>
+        /// <param name="app"></param>
+        /// <param name="par"></param>
         public static void StartApp(string app, string par)
         {
             var p = new Process

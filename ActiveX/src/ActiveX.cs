@@ -188,6 +188,12 @@ namespace hoTools.ActiveX
         private Button _btnShowPortLabel;
         private Button _btnHidePortLabel;
         private Panel _panelConveyedItems;
+        private ContextMenuStrip _contextMenuStripSearch;
+        private ToolStripMenuItem editSQLSearchToolStripMenuItem;
+        private ToolStripMenuItem showFolderToolStripMenuItem;
+        private ToolStripMenuItem runQueryToolStripMenuItem;
+        private ToolStripMenuItem runSQLAndExportToExcelToolStripMenuItem;
+        private ToolStripMenuItem clipboardTocsvToolStripMenuItem;
         private TextBox _txtSearchText;
         #endregion
 
@@ -1116,6 +1122,12 @@ namespace hoTools.ActiveX
             this._toolStripServiceBtn5 = new System.Windows.Forms.ToolStripButton();
             this._toolTip = new System.Windows.Forms.ToolTip(this.components);
             this._txtSearchText = new System.Windows.Forms.TextBox();
+            this._contextMenuStripSearch = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.editSQLSearchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.showFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.runQueryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.runSQLAndExportToExcelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.clipboardTocsvToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._btnLabelRight = new System.Windows.Forms.Button();
             this._btnLabelLeft = new System.Windows.Forms.Button();
             this._btnUp = new System.Windows.Forms.Button();
@@ -1235,6 +1247,7 @@ namespace hoTools.ActiveX
             this._toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this._toolStripContainer1.SuspendLayout();
             this._toolStripQuery.SuspendLayout();
+            this._contextMenuStripSearch.SuspendLayout();
             this._panelPortButtons.SuspendLayout();
             this.contextMenuRtf.SuspendLayout();
             this._menuStrip1.SuspendLayout();
@@ -1359,6 +1372,7 @@ namespace hoTools.ActiveX
             // 
             // _txtSearchText
             // 
+            this._txtSearchText.ContextMenuStrip = this._contextMenuStripSearch;
             resources.ApplyResources(this._txtSearchText, "_txtSearchText");
             this._txtSearchText.ForeColor = System.Drawing.SystemColors.ControlDark;
             this._txtSearchText.Name = "_txtSearchText";
@@ -1368,6 +1382,46 @@ namespace hoTools.ActiveX
             this._txtSearchText.Leave += new System.EventHandler(this._txtSearchText_Leave);
             this._txtSearchText.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.txtSearchText_MouseDoubleClick);
             this._txtSearchText.MouseLeave += new System.EventHandler(this._txtSearchText_MouseLeave);
+            // 
+            // _contextMenuStripSearch
+            // 
+            this._contextMenuStripSearch.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.editSQLSearchToolStripMenuItem,
+            this.showFolderToolStripMenuItem,
+            this.runQueryToolStripMenuItem,
+            this.runSQLAndExportToExcelToolStripMenuItem,
+            this.clipboardTocsvToolStripMenuItem});
+            this._contextMenuStripSearch.Name = "_contextMenuStripSearch";
+            resources.ApplyResources(this._contextMenuStripSearch, "_contextMenuStripSearch");
+            // 
+            // editSQLSearchToolStripMenuItem
+            // 
+            this.editSQLSearchToolStripMenuItem.Name = "editSQLSearchToolStripMenuItem";
+            resources.ApplyResources(this.editSQLSearchToolStripMenuItem, "editSQLSearchToolStripMenuItem");
+            this.editSQLSearchToolStripMenuItem.Click += new System.EventHandler(this.editSQLSearchToolStripMenuItem_Click);
+            // 
+            // showFolderToolStripMenuItem
+            // 
+            this.showFolderToolStripMenuItem.Name = "showFolderToolStripMenuItem";
+            resources.ApplyResources(this.showFolderToolStripMenuItem, "showFolderToolStripMenuItem");
+            // 
+            // runQueryToolStripMenuItem
+            // 
+            this.runQueryToolStripMenuItem.Name = "runQueryToolStripMenuItem";
+            resources.ApplyResources(this.runQueryToolStripMenuItem, "runQueryToolStripMenuItem");
+            this.runQueryToolStripMenuItem.Click += new System.EventHandler(this.runQueryToolStripMenuItem_Click);
+            // 
+            // runSQLAndExportToExcelToolStripMenuItem
+            // 
+            this.runSQLAndExportToExcelToolStripMenuItem.Name = "runSQLAndExportToExcelToolStripMenuItem";
+            resources.ApplyResources(this.runSQLAndExportToExcelToolStripMenuItem, "runSQLAndExportToExcelToolStripMenuItem");
+            this.runSQLAndExportToExcelToolStripMenuItem.Click += new System.EventHandler(this.exportExcelToolStripMenuItem_Click);
+            // 
+            // clipboardTocsvToolStripMenuItem
+            // 
+            this.clipboardTocsvToolStripMenuItem.Name = "clipboardTocsvToolStripMenuItem";
+            resources.ApplyResources(this.clipboardTocsvToolStripMenuItem, "clipboardTocsvToolStripMenuItem");
+            this.clipboardTocsvToolStripMenuItem.Click += new System.EventHandler(this.exportCsvOfClipboardToExcelToolStripMenuItem_Click);
             // 
             // _btnLabelRight
             // 
@@ -1671,6 +1725,7 @@ namespace hoTools.ActiveX
             // 
             this._txtSearchName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this._txtSearchName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this._txtSearchName.ContextMenuStrip = this._contextMenuStripSearch;
             resources.ApplyResources(this._txtSearchName, "_txtSearchName");
             this._txtSearchName.ForeColor = System.Drawing.SystemColors.ControlDark;
             this._txtSearchName.Name = "_txtSearchName";
@@ -2268,6 +2323,7 @@ namespace hoTools.ActiveX
             this._toolStripContainer1.PerformLayout();
             this._toolStripQuery.ResumeLayout(false);
             this._toolStripQuery.PerformLayout();
+            this._contextMenuStripSearch.ResumeLayout(false);
             this._panelPortButtons.ResumeLayout(false);
             this.contextMenuRtf.ResumeLayout(false);
             this._menuStrip1.ResumeLayout(false);
@@ -2968,8 +3024,28 @@ namespace hoTools.ActiveX
         {
             Excel.MakeExcelFileFromCsv();
         }
+        /// <summary>
+        /// Context menu Search: Run Search
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void runQueryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _model.SearchRun(GetSearchName(), GetSearchTerm());
+            _rtfListOfSearches.Visible = false;
+        }
 
-        
+        /// <summary>
+        /// Open the file in the editor
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void editSQLSearchToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string sqlAbsFileName = _globalCfg.ReadSqlFile(GetSearchName());
+            // run editor
+            if (sqlAbsFileName != "") Util.StartFile(sqlAbsFileName);
+        }
     }
 
     #endregion

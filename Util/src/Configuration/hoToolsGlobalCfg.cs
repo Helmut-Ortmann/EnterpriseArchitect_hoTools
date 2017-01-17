@@ -49,28 +49,30 @@ namespace hoTools.Utils.Configuration
         /// <returns></returns>
         public string ReadSqlFile(string sqlFileName, bool withErrMessage = true)
         {
+            string absFileName = GetSqlFileName(sqlFileName);
+            if (absFileName != "") return File.ReadAllText(sqlFileName);
+            if ( (absFileName == "") && (sqlFileName == @"d:\temp\sql\Branch.sql")  ) return "";
+
+            if (withErrMessage)
+            {
+               MessageBox.Show($@"Error reading sql file '{sqlFileName}'", @"Error Reading *.sql file");
+            }
+            return "";
+
+        }
+        /// <summary>
+        /// Get the absolute file name. It searches according to SQL path.
+        /// </summary>
+        /// <param name="sqlFileName"></param>
+        /// <returns></returns>
+        public string GetSqlFileName(string sqlFileName)
+        {
             // Absolute path
             if (Path.IsPathRooted(sqlFileName))
             {
-                try
-                {
-                    return File.ReadAllText(sqlFileName);
-                }
-                catch (IOException e)
-                {
-                    if (withErrMessage)
-                    {
-                        // script produces this error cause unknown, seems during loading the script
-                        if (sqlFileName != @"d:\temp\sql\Branch.sql")
-                        {
-                            MessageBox.Show($@"Error reading sql file '{sqlFileName}'", @"Error Reading *.sql file");
-                        }
-                    }
-                    else
-                    {
-                        return "";
-                    }
-                }
+                if (File.Exists(sqlFileName)) return sqlFileName;
+                else return "";
+                
             }
             else
             {
@@ -79,16 +81,20 @@ namespace hoTools.Utils.Configuration
                 // over all files
                 foreach (string path in _lpaths)
                 {
-                    string fileName = Path.Combine(path, sqlFileName);
-                    if (File.Exists(fileName))
+                    string f = Path.Combine(path, sqlFileName);
+                    if (File.Exists(f))
                     {
-                        return File.ReadAllText(fileName);
+                        return f;
                     }
+                   
                 }
             }
             // nothing found
             return "";
         }
+
+
+
         /// <summary>
         /// Get complete filepath from file name
         /// </summary>

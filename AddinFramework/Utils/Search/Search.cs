@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -28,7 +27,7 @@ namespace AddinFramework.Util
     /// </summary>
     public static class Search
     {
-        public static List<SearchItem> StaticAllSearches;
+        private static List<SearchItem> _staticAllSearches;
         static AutoCompleteStringCollection _staticSearchesSuggestions;
 
         // configuration as singleton
@@ -59,7 +58,7 @@ namespace AddinFramework.Util
         public static SearchItem GetSearch(int index)
         {
             
-            return StaticAllSearches[index];
+            return _staticAllSearches[index];
 
         }
 
@@ -72,7 +71,7 @@ namespace AddinFramework.Util
         public static AutoCompleteStringCollection GetSearchesSuggestions(EA.Repository rep, string configFilePath)
         {
 
-            StaticAllSearches = new List<SearchItem>();
+            _staticAllSearches = new List<SearchItem>();
 
             // Load EA Standard Search Names for current release  
             LoadEaStandardSearchesFromJason(rep.GetRelease(), configFilePath);
@@ -92,12 +91,12 @@ namespace AddinFramework.Util
         {
             pattern = pattern.ToLower();
 
-            foreach (SearchItem item in StaticAllSearches)
+            foreach (SearchItem item in _staticAllSearches)
             {
                 item.Score = pattern.LongestCommonSubsequence(item.Name.ToLower()).Item2;
             }
            // sort list
-            StaticAllSearches = StaticAllSearches.OrderByDescending(a => a.Score).ToList();
+            _staticAllSearches = _staticAllSearches.OrderByDescending(a => a.Score).ToList();
 
         }
         /// <summary>
@@ -106,7 +105,7 @@ namespace AddinFramework.Util
         public static void ResetSort()
         {
             // sort list
-            StaticAllSearches = StaticAllSearches.OrderBy(a => a.Name).ToList();
+            _staticAllSearches = _staticAllSearches.OrderBy(a => a.Name).ToList();
 
         }
 
@@ -128,7 +127,7 @@ namespace AddinFramework.Util
             // MDG scripts in other locations
             LoadOtherMdgSearches(rep);
             // order
-            StaticAllSearches = StaticAllSearches.OrderBy(a => a.Name)
+            _staticAllSearches = _staticAllSearches.OrderBy(a => a.Name)
                 .ToList();
 
         }
@@ -138,7 +137,7 @@ namespace AddinFramework.Util
         public static string GetRtf()
         {
             // var s = _staticAllSearches.Select(e => $"{e.Score,2} {e.Category,-15} {e.Name}" ).ToList();
-            var s = StaticAllSearches.Select(e => $"{e.Category,-12} {e.Name}" ).ToList();
+            var s = _staticAllSearches.Select(e => $"{e.Category,-12} {e.Name}" ).ToList();
             return string.Join($"{Environment.NewLine}", s);
         }
 
@@ -149,7 +148,7 @@ namespace AddinFramework.Util
         private static void LoadStaticSearchesSuggestions()
         {
             _staticSearchesSuggestions = new AutoCompleteStringCollection();
-            var result = StaticAllSearches.Select(e => e.Name).ToArray();
+            var result = _staticAllSearches.Select(e => e.Name).ToArray();
             _staticSearchesSuggestions.AddRange(result);
             
 
@@ -262,7 +261,7 @@ namespace AddinFramework.Util
                 {
                     // ReSharper disable once PossibleNullReferenceException
                     string searchName = search.Attribute("Name").Value;
-                    StaticAllSearches.Add(new SearchItem(searchName, searchName, category));
+                    _staticAllSearches.Add(new SearchItem(searchName, searchName, category));
                 }
 
 
@@ -303,11 +302,11 @@ namespace AddinFramework.Util
             {
                 string description = SqlGetDescription(file);
                 string name = Path.GetFileName(file);
-                StaticAllSearches.Add( new SqlSearchItem(name, file,description)); 
+                _staticAllSearches.Add( new SqlSearchItem(name, file,description)); 
             }
         }
         /// <summary>
-        /// Get Description from SQL file
+        /// Get Description from SQL file. The comments from the SQL file are used as description.
         /// </summary>
         /// <param name="file"></param>
         /// <returns></returns>
@@ -366,7 +365,7 @@ namespace AddinFramework.Util
             {
                     if (eaSearchItem.EARelease != null)
                     {
-                        if (eaSearchItem.EARelease.Contains(eaRelease)) StaticAllSearches.Add(eaSearchItem);
+                        if (eaSearchItem.EARelease.Contains(eaRelease)) _staticAllSearches.Add(eaSearchItem);
                     }
                     else
                     {
