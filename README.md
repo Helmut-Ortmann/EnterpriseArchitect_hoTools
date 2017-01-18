@@ -114,6 +114,11 @@ Some features:
 # Releases
 
 ## Release 2.1.2
+- Search with Context Menu (Right Click)
+-- Edit current hoTools SQL Search with Editor
+-- Open folder of current hoTools SQL Search
+-- Run Search and export results to Excel (no Excel required)
+-- Export Clipboard with csv data to Excel (no Excel required)
 
 ## Release 2.1.1
 - Error fixing hoModelView MDG

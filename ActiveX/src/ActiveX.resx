@@ -334,34 +334,51 @@
     <value>693, 17</value>
   </metadata>
   <data name="editSQLSearchToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>277, 22</value>
+    <value>258, 22</value>
   </data>
   <data name="editSQLSearchToolStripMenuItem.Text" xml:space="preserve">
-    <value>Edit SQL Search</value>
+    <value>Edit SQL</value>
   </data>
   <data name="editSQLSearchToolStripMenuItem.ToolTipText" xml:space="preserve">
-    <value>Edit SQL Search in your Editor </value>
+    <value>Edit hoTools SQL Script file in your Editor.
+
+hoTools starts the application which is associated to "*.sql".</value>
   </data>
   <data name="showFolderToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>277, 22</value>
+    <value>258, 22</value>
   </data>
   <data name="showFolderToolStripMenuItem.Text" xml:space="preserve">
     <value>Show SQL Folder</value>
   </data>
   <data name="showFolderToolStripMenuItem.ToolTipText" xml:space="preserve">
-    <value>Show the first SQL folder.</value>
+    <value>Show SQL folder of hoTools SQL Script file (*.sql)</value>
+  </data>
+  <data name="showSQLPathToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>258, 22</value>
+  </data>
+  <data name="showSQLPathToolStripMenuItem.Text" xml:space="preserve">
+    <value>Show SQL Path</value>
+  </data>
+  <data name="showSQLPathToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Show the SQL path where hoTools seaches for possible SQL Scripts.
+
+You can set SQL path:
+- File, Setting SQL and Script</value>
+  </data>
+  <data name="toolStripSeparator4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>255, 6</value>
   </data>
   <data name="runQueryToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>277, 22</value>
+    <value>258, 22</value>
   </data>
   <data name="runQueryToolStripMenuItem.Text" xml:space="preserve">
-    <value>Run Query</value>
+    <value>Run</value>
   </data>
   <data name="runSQLAndExportToExcelToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>277, 22</value>
+    <value>258, 22</value>
   </data>
   <data name="runSQLAndExportToExcelToolStripMenuItem.Text" xml:space="preserve">
-    <value>Execute and export SQL results to Excel</value>
+    <value>Run and export SQL results to Excel</value>
   </data>
   <data name="runSQLAndExportToExcelToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>Execute SQL Query and export results to Excel (*.xlsx). 
@@ -369,14 +386,20 @@ The &lt;Search Name&gt; has to contain a valid SQL Query.
 
 No Excel is required.</value>
   </data>
+  <data name="toolStripSeparator5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>255, 6</value>
+  </data>
   <data name="clipboardTocsvToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>277, 22</value>
+    <value>258, 22</value>
   </data>
   <data name="clipboardTocsvToolStripMenuItem.Text" xml:space="preserve">
     <value>Export csv of Clipboard to Excel</value>
   </data>
   <data name="_contextMenuStripSearch.Size" type="System.Drawing.Size, System.Drawing">
-    <value>278, 114</value>
+    <value>259, 170</value>
+  </data>
+  <data name="_contextMenuStripSearch.ToolTip" xml:space="preserve">
+    <value>Export the Clipboard content as csv to Excel</value>
   </data>
   <data name="&gt;&gt;_contextMenuStripSearch.Name" xml:space="preserve">
     <value>_contextMenuStripSearch</value>
@@ -1869,8 +1892,95 @@ Always remember:
   <metadata name="contextMenuRtf.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>554, 17</value>
   </metadata>
+  <data name="editSQLToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>239, 22</value>
+  </data>
+  <data name="editSQLToolStripMenuItem.Text" xml:space="preserve">
+    <value>Edit SQL</value>
+  </data>
+  <data name="editSQLToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Edit hoTools SQL Script file in your Editor.
+
+hoTools starts the application which is associated to "*.sql".</value>
+  </data>
+  <data name="showSQLFolderToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>239, 22</value>
+  </data>
+  <data name="showSQLFolderToolStripMenuItem.Text" xml:space="preserve">
+    <value>Show SQL folder</value>
+  </data>
+  <data name="showSQLFolderToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Show SQL folder of hoTools SQL Script file (*.sql)</value>
+  </data>
+  <data name="showSQLPathToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>239, 22</value>
+  </data>
+  <data name="showSQLPathToolStripMenuItem1.Text" xml:space="preserve">
+    <value>Show SQL path</value>
+  </data>
+  <data name="showSQLPathToolStripMenuItem1.ToolTipText" xml:space="preserve">
+    <value>Show the SQL path where hoTools seaches for possible SQL Scripts.
+
+You can set SQL path:
+- File, Setting SQL and Script</value>
+  </data>
+  <data name="showDescriptionToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>239, 22</value>
+  </data>
+  <data name="showDescriptionToolStripMenuItem.Text" xml:space="preserve">
+    <value>Show Description</value>
+  </data>
+  <data name="showDescriptionToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Show the description of the Search:
+- EA Standard Searches are documented in file: EaStandardSearches.json
+- SQL Searches are described via '// My documentation with exactly one leading blank at th beginning of file.</value>
+  </data>
+  <data name="toolStripSeparator6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>236, 6</value>
+  </data>
+  <data name="runToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>239, 22</value>
+  </data>
+  <data name="runToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Run</value>
+  </data>
+  <data name="runToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Run the Search.
+Results are shown in the EA Model Search Window.
+
+You may have inserted a &lt;Search Term&gt;.</value>
+  </data>
+  <data name="runAndExportSQLToExcelToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>239, 22</value>
+  </data>
+  <data name="runAndExportSQLToExcelToolStripMenuItem.Text" xml:space="preserve">
+    <value>Run and export SQL to Excel</value>
+  </data>
+  <data name="runAndExportSQLToExcelToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Execute SQL Query and export results to Excel (*.xlsx). 
+The &lt;Search Name&gt; has to contain a valid SQL Query. 
+
+No Excel is required.</value>
+  </data>
+  <data name="toolStripSeparator7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>236, 6</value>
+  </data>
+  <data name="exportCsvOfClipboardToExcelToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>239, 22</value>
+  </data>
+  <data name="exportCsvOfClipboardToExcelToolStripMenuItem1.Text" xml:space="preserve">
+    <value>Export csv of Clipboard to Excel</value>
+  </data>
+  <data name="exportCsvOfClipboardToExcelToolStripMenuItem1.ToolTipText" xml:space="preserve">
+    <value>Export the Clipboard content as csv to Excel</value>
+  </data>
   <data name="contextMenuRtf.Size" type="System.Drawing.Size, System.Drawing">
-    <value>167, 70</value>
+    <value>240, 170</value>
+  </data>
+  <data name="contextMenuRtf.ToolTip" xml:space="preserve">
+    <value>Edit SQL Search in your Editor.
+
+hoTools starts the application which is associated to "*.sql".</value>
   </data>
   <data name="&gt;&gt;contextMenuRtf.Name" xml:space="preserve">
     <value>contextMenuRtf</value>
@@ -1912,38 +2022,6 @@ Always remember:
   </data>
   <data name="&gt;&gt;_rtfListOfSearches.ZOrder" xml:space="preserve">
     <value>2</value>
-  </data>
-  <data name="runToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>166, 22</value>
-  </data>
-  <data name="runToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Run</value>
-  </data>
-  <data name="runToolStripMenuItem.ToolTipText" xml:space="preserve">
-    <value>Run the Search.
-Results are shown in the EA Model Search Window.
-
-You may have inserted a &lt;Search Term&gt;.</value>
-  </data>
-  <data name="editSQLToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>166, 22</value>
-  </data>
-  <data name="editSQLToolStripMenuItem.Text" xml:space="preserve">
-    <value>Edit SQL</value>
-  </data>
-  <data name="editSQLToolStripMenuItem.ToolTipText" xml:space="preserve">
-    <value>Edit the SQL File (only if SQL File)</value>
-  </data>
-  <data name="showDescriptionToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>166, 22</value>
-  </data>
-  <data name="showDescriptionToolStripMenuItem.Text" xml:space="preserve">
-    <value>Show Description</value>
-  </data>
-  <data name="showDescriptionToolStripMenuItem.ToolTipText" xml:space="preserve">
-    <value>Show the description of the Search:
-- EA Standard Searches are documented in file: EaStandardSearches.json
-- SQL Searches are described via '// My documentation with exactly one leading blank at th beginning of file.</value>
   </data>
   <metadata name="_menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>434, 17</value>
@@ -2783,7 +2861,7 @@ Tip:
     <value>True</value>
   </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>123</value>
+    <value>79</value>
   </metadata>
   <data name="$this.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2875,6 +2953,18 @@ Tip:
   <data name="&gt;&gt;showFolderToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;showSQLPathToolStripMenuItem.Name" xml:space="preserve">
+    <value>showSQLPathToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;showSQLPathToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator4.Name" xml:space="preserve">
+    <value>toolStripSeparator4</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;runQueryToolStripMenuItem.Name" xml:space="preserve">
     <value>runQueryToolStripMenuItem</value>
   </data>
@@ -2887,16 +2977,16 @@ Tip:
   <data name="&gt;&gt;runSQLAndExportToExcelToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;toolStripSeparator5.Name" xml:space="preserve">
+    <value>toolStripSeparator5</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;clipboardTocsvToolStripMenuItem.Name" xml:space="preserve">
     <value>clipboardTocsvToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;clipboardTocsvToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;runToolStripMenuItem.Name" xml:space="preserve">
-    <value>runToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;runToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;editSQLToolStripMenuItem.Name" xml:space="preserve">
@@ -2905,10 +2995,52 @@ Tip:
   <data name="&gt;&gt;editSQLToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;showSQLFolderToolStripMenuItem.Name" xml:space="preserve">
+    <value>showSQLFolderToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;showSQLFolderToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;showSQLPathToolStripMenuItem1.Name" xml:space="preserve">
+    <value>showSQLPathToolStripMenuItem1</value>
+  </data>
+  <data name="&gt;&gt;showSQLPathToolStripMenuItem1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;showDescriptionToolStripMenuItem.Name" xml:space="preserve">
     <value>showDescriptionToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;showDescriptionToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator6.Name" xml:space="preserve">
+    <value>toolStripSeparator6</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator6.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;runToolStripMenuItem.Name" xml:space="preserve">
+    <value>runToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;runToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;runAndExportSQLToExcelToolStripMenuItem.Name" xml:space="preserve">
+    <value>runAndExportSQLToExcelToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;runAndExportSQLToExcelToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator7.Name" xml:space="preserve">
+    <value>toolStripSeparator7</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator7.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;exportCsvOfClipboardToExcelToolStripMenuItem1.Name" xml:space="preserve">
+    <value>exportCsvOfClipboardToExcelToolStripMenuItem1</value>
+  </data>
+  <data name="&gt;&gt;exportCsvOfClipboardToExcelToolStripMenuItem1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;_fileToolStripMenuItem.Name" xml:space="preserve">

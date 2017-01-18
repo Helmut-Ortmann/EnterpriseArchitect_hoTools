@@ -96,9 +96,14 @@ namespace hoTools.Utils
             }
             return el;
         }
-
+        /// <summary>
+        /// Open Directory of a directory or a file with Explorer or Totalcommander.
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="isTotalCommander"></param>
         public static void ShowFolder(string path, bool isTotalCommander=false)
         {
+            path = Path.GetDirectoryName(path);
 
             if (isTotalCommander)
                 StartApp(@"totalcmd.exe", "/o " + path);

@@ -6,6 +6,10 @@ using hoTools.Utils.SQL;
 using EAAddinFramework.Utils;
 using File = System.IO.File;
 using System.Text.RegularExpressions;
+using hoTools.Utils;
+using hoTools.Utils.Configuration;
+using Element = EA.Element;
+using Package = EA.Package;
 
 namespace hoTools.Query
 {
@@ -38,8 +42,9 @@ namespace hoTools.Query
         public static readonly string MenuNewTabWithFileDialogText = "New Tab from File";
         public static readonly string MenuNewTabWithFileDialogTooltip = "Create new SQL Tab from File Dialog.";
 
+        public static readonly string MenuEditWithExternalEditorText = "Edit with external Editor";
+        public static readonly string MenuEditWithExternalEditorTooltip = "Edit hoTools Script file with external Editor";
 
-        
 
 
         const string SqlTextBoxTooltip =
@@ -106,6 +111,9 @@ CTRL+SHFT+S                     Store sql All
 
 
         const string DefaultTabName = "noName";
+
+        // configuration as singleton
+        readonly HoToolsGlobalCfg _globalCfg = HoToolsGlobalCfg.Instance;
 
         /// <summary>
         /// Constructor to Initialize TabControl, create ToolStripItems (New Tab from, Recent Files) with file history. 
@@ -244,7 +252,14 @@ CTRL+SHFT+S                     Store sql All
             reLoadTabMenuItem.Click += reLoadTabMenuItem_Click;
 
 
-            
+            // edit file with external editor
+           // MenuEditWithExternalEditor
+            ToolStripMenuItem editWithExternalEditorMenuItem = new ToolStripMenuItem
+            {
+                Text = MenuEditWithExternalEditorText,
+                ToolTipText = MenuEditWithExternalEditorTooltip
+            };
+            editWithExternalEditorMenuItem.Click += editWithExternalEditorMenuItem_Click;
 
             // New TabPage
             ToolStripMenuItem newTabMenuItem = new ToolStripMenuItem
@@ -331,7 +346,8 @@ Useful to quickly test:
                 newTabMenuItem,                     // new Tab
                 newTabWithFileDialogMenuItem,       // New Tab with File Dialog
                 _tabNewTabFromRecentFileMenuItem,      // new Tab from recent file
-
+                new ToolStripSeparator(),
+                editWithExternalEditorMenuItem,     // Edit with external Editor
                 new ToolStripSeparator(),
                 insertTemplateMenuItem,             // insert template
                 insertMacroMenuItem,                // insert macro
@@ -1278,6 +1294,27 @@ Useful to quickly test:
         {
             ReloadTabPage();
         }
+
+        /// <summary>
+        /// Edit with external editor
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+
+        void editWithExternalEditorMenuItem_Click(object sender, EventArgs e)
+        {
+            if (_tabControl.SelectedIndex < 0) return;
+            TabPage tabPage = _tabControl.TabPages[_tabControl.SelectedIndex];
+            var textBox = (TextBox)tabPage.Controls[0];
+            SqlFile sqlFile = (SqlFile)tabPage.Tag;
+
+            string sqlAbsFileName = _globalCfg.GetSqlFileName(sqlFile.FullName);
+            // run editor
+            if (sqlAbsFileName != "") Util.StartFile(sqlAbsFileName);
+        }
+
+
+
         /// <summary>
         /// Reload current Tab
         /// </summary>

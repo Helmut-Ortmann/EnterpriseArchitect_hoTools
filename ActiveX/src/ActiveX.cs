@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Diagnostics;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
@@ -194,6 +194,15 @@ namespace hoTools.ActiveX
         private ToolStripMenuItem runQueryToolStripMenuItem;
         private ToolStripMenuItem runSQLAndExportToExcelToolStripMenuItem;
         private ToolStripMenuItem clipboardTocsvToolStripMenuItem;
+        private ToolStripMenuItem showSQLPathToolStripMenuItem;
+        private ToolStripSeparator toolStripSeparator4;
+        private ToolStripSeparator toolStripSeparator5;
+        private ToolStripMenuItem showSQLFolderToolStripMenuItem;
+        private ToolStripMenuItem showSQLPathToolStripMenuItem1;
+        private ToolStripSeparator toolStripSeparator6;
+        private ToolStripMenuItem runAndExportSQLToExcelToolStripMenuItem;
+        private ToolStripMenuItem exportCsvOfClipboardToExcelToolStripMenuItem1;
+        private ToolStripSeparator toolStripSeparator7;
         private TextBox _txtSearchText;
         #endregion
 
@@ -426,7 +435,7 @@ namespace hoTools.ActiveX
         /// <param name="e"></param>
         void showFolderToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            EaService.ShowFolder(Repository, isTotalCommander: false);
+            EaService.ShowFolderElementPackage(Repository, isTotalCommander: false);
         }
 
         void copyGUIDSQLToClipboardToolStripMenuItem_Click(object sender, EventArgs e)
@@ -603,7 +612,7 @@ namespace hoTools.ActiveX
 
         void showFolderVCorCodeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            EaService.ShowFolder(Repository, isTotalCommander: false);
+            EaService.ShowFolderElementPackage(Repository, isTotalCommander: false);
         }
 
         void showTortoiseLogToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1125,8 +1134,11 @@ namespace hoTools.ActiveX
             this._contextMenuStripSearch = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.editSQLSearchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.showSQLPathToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.runQueryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.runSQLAndExportToExcelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.clipboardTocsvToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._btnLabelRight = new System.Windows.Forms.Button();
             this._btnLabelLeft = new System.Windows.Forms.Button();
@@ -1170,9 +1182,15 @@ namespace hoTools.ActiveX
             this._btnAddConstraint = new System.Windows.Forms.Button();
             this._rtfListOfSearches = new System.Windows.Forms.RichTextBox();
             this.contextMenuRtf = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.runToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editSQLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.showSQLFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.showSQLPathToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.showDescriptionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
+            this.runToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.runAndExportSQLToExcelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
+            this.exportCsvOfClipboardToExcelToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this._menuStrip1 = new System.Windows.Forms.MenuStrip();
             this._fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._settingGeneralToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -1388,11 +1406,15 @@ namespace hoTools.ActiveX
             this._contextMenuStripSearch.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.editSQLSearchToolStripMenuItem,
             this.showFolderToolStripMenuItem,
+            this.showSQLPathToolStripMenuItem,
+            this.toolStripSeparator4,
             this.runQueryToolStripMenuItem,
             this.runSQLAndExportToExcelToolStripMenuItem,
+            this.toolStripSeparator5,
             this.clipboardTocsvToolStripMenuItem});
             this._contextMenuStripSearch.Name = "_contextMenuStripSearch";
             resources.ApplyResources(this._contextMenuStripSearch, "_contextMenuStripSearch");
+            this._toolTip.SetToolTip(this._contextMenuStripSearch, resources.GetString("_contextMenuStripSearch.ToolTip"));
             // 
             // editSQLSearchToolStripMenuItem
             // 
@@ -1404,6 +1426,18 @@ namespace hoTools.ActiveX
             // 
             this.showFolderToolStripMenuItem.Name = "showFolderToolStripMenuItem";
             resources.ApplyResources(this.showFolderToolStripMenuItem, "showFolderToolStripMenuItem");
+            this.showFolderToolStripMenuItem.Click += new System.EventHandler(this.showFolderSqlToolStripMenuItem_Click);
+            // 
+            // showSQLPathToolStripMenuItem
+            // 
+            this.showSQLPathToolStripMenuItem.Name = "showSQLPathToolStripMenuItem";
+            resources.ApplyResources(this.showSQLPathToolStripMenuItem, "showSQLPathToolStripMenuItem");
+            this.showSQLPathToolStripMenuItem.Click += new System.EventHandler(this.showSQLPathToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            resources.ApplyResources(this.toolStripSeparator4, "toolStripSeparator4");
             // 
             // runQueryToolStripMenuItem
             // 
@@ -1416,6 +1450,11 @@ namespace hoTools.ActiveX
             this.runSQLAndExportToExcelToolStripMenuItem.Name = "runSQLAndExportToExcelToolStripMenuItem";
             resources.ApplyResources(this.runSQLAndExportToExcelToolStripMenuItem, "runSQLAndExportToExcelToolStripMenuItem");
             this.runSQLAndExportToExcelToolStripMenuItem.Click += new System.EventHandler(this.exportExcelToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            resources.ApplyResources(this.toolStripSeparator5, "toolStripSeparator5");
             // 
             // clipboardTocsvToolStripMenuItem
             // 
@@ -1776,11 +1815,47 @@ namespace hoTools.ActiveX
             // 
             this.contextMenuRtf.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.contextMenuRtf.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.runToolStripMenuItem,
             this.editSQLToolStripMenuItem,
-            this.showDescriptionToolStripMenuItem});
+            this.showSQLFolderToolStripMenuItem,
+            this.showSQLPathToolStripMenuItem1,
+            this.showDescriptionToolStripMenuItem,
+            this.toolStripSeparator6,
+            this.runToolStripMenuItem,
+            this.runAndExportSQLToExcelToolStripMenuItem,
+            this.toolStripSeparator7,
+            this.exportCsvOfClipboardToExcelToolStripMenuItem1});
             this.contextMenuRtf.Name = "contextMenuRtf";
             resources.ApplyResources(this.contextMenuRtf, "contextMenuRtf");
+            this._toolTip.SetToolTip(this.contextMenuRtf, resources.GetString("contextMenuRtf.ToolTip"));
+            // 
+            // editSQLToolStripMenuItem
+            // 
+            this.editSQLToolStripMenuItem.Name = "editSQLToolStripMenuItem";
+            resources.ApplyResources(this.editSQLToolStripMenuItem, "editSQLToolStripMenuItem");
+            this.editSQLToolStripMenuItem.Click += new System.EventHandler(this.editSqlRtfToolStripMenuItem_Click);
+            // 
+            // showSQLFolderToolStripMenuItem
+            // 
+            this.showSQLFolderToolStripMenuItem.Name = "showSQLFolderToolStripMenuItem";
+            resources.ApplyResources(this.showSQLFolderToolStripMenuItem, "showSQLFolderToolStripMenuItem");
+            this.showSQLFolderToolStripMenuItem.Click += new System.EventHandler(this.showSqlFolderRtfToolStripMenuItem_Click);
+            // 
+            // showSQLPathToolStripMenuItem1
+            // 
+            this.showSQLPathToolStripMenuItem1.Name = "showSQLPathToolStripMenuItem1";
+            resources.ApplyResources(this.showSQLPathToolStripMenuItem1, "showSQLPathToolStripMenuItem1");
+            this.showSQLPathToolStripMenuItem1.Click += new System.EventHandler(this.showSQLPathToolStripMenuItem_Click);
+            // 
+            // showDescriptionToolStripMenuItem
+            // 
+            this.showDescriptionToolStripMenuItem.Name = "showDescriptionToolStripMenuItem";
+            resources.ApplyResources(this.showDescriptionToolStripMenuItem, "showDescriptionToolStripMenuItem");
+            this.showDescriptionToolStripMenuItem.Click += new System.EventHandler(this.showDescriptionToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator6
+            // 
+            this.toolStripSeparator6.Name = "toolStripSeparator6";
+            resources.ApplyResources(this.toolStripSeparator6, "toolStripSeparator6");
             // 
             // runToolStripMenuItem
             // 
@@ -1788,17 +1863,22 @@ namespace hoTools.ActiveX
             resources.ApplyResources(this.runToolStripMenuItem, "runToolStripMenuItem");
             this.runToolStripMenuItem.Click += new System.EventHandler(this.runToolStripMenuItem_Click);
             // 
-            // editSQLToolStripMenuItem
+            // runAndExportSQLToExcelToolStripMenuItem
             // 
-            this.editSQLToolStripMenuItem.Name = "editSQLToolStripMenuItem";
-            resources.ApplyResources(this.editSQLToolStripMenuItem, "editSQLToolStripMenuItem");
-            this.editSQLToolStripMenuItem.Click += new System.EventHandler(this.editSQLToolStripMenuItem_Click);
+            this.runAndExportSQLToExcelToolStripMenuItem.Name = "runAndExportSQLToExcelToolStripMenuItem";
+            resources.ApplyResources(this.runAndExportSQLToExcelToolStripMenuItem, "runAndExportSQLToExcelToolStripMenuItem");
+            this.runAndExportSQLToExcelToolStripMenuItem.Click += new System.EventHandler(this.runAndExportSQLToExcelRtfToolStripMenuItem_Click);
             // 
-            // showDescriptionToolStripMenuItem
+            // toolStripSeparator7
             // 
-            this.showDescriptionToolStripMenuItem.Name = "showDescriptionToolStripMenuItem";
-            resources.ApplyResources(this.showDescriptionToolStripMenuItem, "showDescriptionToolStripMenuItem");
-            this.showDescriptionToolStripMenuItem.Click += new System.EventHandler(this.showDescriptionToolStripMenuItem_Click);
+            this.toolStripSeparator7.Name = "toolStripSeparator7";
+            resources.ApplyResources(this.toolStripSeparator7, "toolStripSeparator7");
+            // 
+            // exportCsvOfClipboardToExcelToolStripMenuItem1
+            // 
+            this.exportCsvOfClipboardToExcelToolStripMenuItem1.Name = "exportCsvOfClipboardToExcelToolStripMenuItem1";
+            resources.ApplyResources(this.exportCsvOfClipboardToExcelToolStripMenuItem1, "exportCsvOfClipboardToExcelToolStripMenuItem1");
+            this.exportCsvOfClipboardToExcelToolStripMenuItem1.Click += new System.EventHandler(this.runAndExportCsvToExcelRtfToolStripMenuItem_Click);
             // 
             // _menuStrip1
             // 
@@ -2961,17 +3041,36 @@ namespace hoTools.ActiveX
         }
 
         /// <summary>
-        /// Edit the file under the Mouse
+        /// Context Menu rtf: Edit the file under the Mouse
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        void editSQLToolStripMenuItem_Click(object sender, EventArgs e)
+        void editSqlRtfToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SearchItem searchItem = GetSearchItemFromRtfLine();
             if (searchItem is EaSearchItem) return;
-
-            string sqlName = _globalCfg.GetFileLong(searchItem.Name);
-            if (! String.IsNullOrEmpty(sqlName)) Process.Start(sqlName);
+            EditSqlFile(searchItem.Name);
+        }
+        /// <summary>
+        /// Context Menu rtf: Show folder of hoTools SQL search under the Mouse
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void showSqlFolderRtfToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SearchItem searchItem = GetSearchItemFromRtfLine();
+            if (searchItem is EaSearchItem) return;
+            ShowFolderForSql(searchItem.Name);
+        }
+        private void runAndExportSQLToExcelRtfToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SearchItem searchItem = GetSearchItemFromRtfLine();
+            if (searchItem is EaSearchItem) return;
+            _model.SearchRun(searchItem.Name, GetSearchTerm(), exportToExcel: true);
+        }
+        private void runAndExportCsvToExcelRtfToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Excel.MakeExcelFileFromCsv();
         }
 
         private void showDescriptionToolStripMenuItem_Click(object sender, EventArgs e)
@@ -3042,9 +3141,55 @@ namespace hoTools.ActiveX
         /// <param name="e"></param>
         private void editSQLSearchToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string sqlAbsFileName = _globalCfg.ReadSqlFile(GetSearchName());
+            EditSqlFile(GetSearchName());
+        }
+
+        private void EditSqlFile(string fileName)
+        {
+            string sqlAbsFileName = _globalCfg.GetSqlFileName(fileName);
             // run editor
             if (sqlAbsFileName != "") Util.StartFile(sqlAbsFileName);
+        }
+
+        /// <summary>
+        /// Show folder for SQL Script according to patch
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void showFolderSqlToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowFolderForSql(GetSearchName());
+        }
+
+        private void ShowFolderForSql(string file)
+        {
+            string sqlAbsFileName = _globalCfg.GetSqlFileName(file);
+
+
+            // Show folder
+            if (sqlAbsFileName != "") Util.ShowFolder(sqlAbsFileName);
+            else
+            {
+                List<string> sqlList = _globalCfg.GetListSqlPaths();
+                if (sqlList.Count > 0) Util.ShowFolder(sqlList[0]);
+                else
+                    MessageBox.Show($"Configure SQL path in:{Environment.NewLine}File, Settings SQL and Script",
+                        "No SQL path in settings defined!");
+            }
+        }
+
+        /// <summary>
+        /// Show the SQL path
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void showSQLPathToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string sqlPath = _globalCfg.GetSqlPaths();
+            MessageBox.Show(
+                $"The SQL path is:{Environment.NewLine}{sqlPath}{Environment.NewLine}{Environment.NewLine}"+
+                       $"Change SQL path with 'File, Settings SQL and Script'",
+                "The SQL path to search for scripts");
         }
     }
 

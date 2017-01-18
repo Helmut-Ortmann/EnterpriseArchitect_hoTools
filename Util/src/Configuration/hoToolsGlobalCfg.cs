@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace hoTools.Utils.Configuration
@@ -29,6 +30,14 @@ namespace hoTools.Utils.Configuration
             return _paths;
         }
         /// <summary>
+        /// Get list of sql paths
+        /// </summary>
+        /// <returns></returns>
+        public List<string> GetListSqlPaths()
+        {
+            return _lpaths.ToList();
+        }
+        /// <summary>
         ///  Set hoTools SQL path from Settings to search for SQL files. 
         /// </summary>
         /// <param name="paths"></param>
@@ -50,7 +59,7 @@ namespace hoTools.Utils.Configuration
         public string ReadSqlFile(string sqlFileName, bool withErrMessage = true)
         {
             string absFileName = GetSqlFileName(sqlFileName);
-            if (absFileName != "") return File.ReadAllText(sqlFileName);
+            if (absFileName != "") return File.ReadAllText(absFileName);
             if ( (absFileName == "") && (sqlFileName == @"d:\temp\sql\Branch.sql")  ) return "";
 
             if (withErrMessage)
@@ -61,7 +70,7 @@ namespace hoTools.Utils.Configuration
 
         }
         /// <summary>
-        /// Get the absolute file name. It searches according to SQL path.
+        /// Get the absolute file name. It searches according to the in settings specified SQL path. If the file don't exists it return "".
         /// </summary>
         /// <param name="sqlFileName"></param>
         /// <returns></returns>

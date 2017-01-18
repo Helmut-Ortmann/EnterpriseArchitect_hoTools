@@ -204,7 +204,7 @@ namespace hoTools.Query
             this.showScriptToolStripMenuItem,
             this.ShowErrorToolStripMenuItem1});
             this.contextMenuStripDataGrid.Name = "contextMenuStripDataGrid";
-            this.contextMenuStripDataGrid.Size = new System.Drawing.Size(331, 198);
+            this.contextMenuStripDataGrid.Size = new System.Drawing.Size(331, 176);
             this.contextMenuStripDataGrid.Text = "C";
             this.contextMenuStripDataGrid.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStripDataGrid_Opening);
             // 

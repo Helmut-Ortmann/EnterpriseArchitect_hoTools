@@ -67,7 +67,7 @@ namespace hoTools.EaServices
 
     public static class EaService
     {
-       
+
         // define menu constants
         public enum DisplayMode
         {
@@ -126,7 +126,7 @@ namespace hoTools.EaServices
 
                 // get the position of the Element
 
-                int left = (dia.cx/2) - 100;
+                int left = (dia.cx / 2) - 100;
                 int right = left + 200;
                 int top = dia.cy - 150;
                 int bottom = top + 120;
@@ -239,10 +239,10 @@ namespace hoTools.EaServices
             XDocument x = XDocument.Parse(rep.SQLQuery(sqlItems));
 
             var fields = from row in x.Descendants("Row").Descendants()
-                         where row.Name == "TYPE" ||
-                               row.Name == "Id"
-                         // 'Class','Action','Diagram', 
-                         select row;
+                where row.Name == "TYPE" ||
+                      row.Name == "Id"
+                // 'Class','Action','Diagram', 
+                select row;
             int i = 0;
             string type = "";
             foreach (var field in fields)
@@ -261,7 +261,7 @@ namespace hoTools.EaServices
                                 el.ReleaseUserLock();
                                 break;
                             case "Diagram":
-                                EA.Diagram dia = (EA.Diagram)rep.GetDiagramByGuid(guid);
+                                EA.Diagram dia = (EA.Diagram) rep.GetDiagramByGuid(guid);
                                 dia.ReleaseUserLock();
                                 break;
                         }
@@ -273,7 +273,7 @@ namespace hoTools.EaServices
 
         #endregion
 
-       
+
 
         #region UnLockSelected
 
@@ -579,7 +579,7 @@ namespace hoTools.EaServices
 
         #endregion
 
-        #region ShowFolder
+        #region ShowFolderElementPackage
 
         // Show folder with Explorer or Total Commander for:
         // - Package: If Version Controlled package
@@ -587,35 +587,24 @@ namespace hoTools.EaServices
         // See also: Global Settings
         [ServiceOperation("{C007C59A-FABA-4280-9B66-5AD10ACB4B13}", "Show folder of *.xml, *.h,*.c",
             "Select VC controlled package or element with file path (Source Code Generation)", isTextRequired: false)]
-        public static void ShowFolder(Repository rep, bool isTotalCommander = false)
+        public static void ShowFolderElementPackage(Repository rep, bool isTotalCommander = false)
         {
-            string path;
+            string dirPath;
             ObjectType oType = rep.GetContextItemType();
             switch (oType)
             {
                 case ObjectType.otPackage:
                     var pkg = (Package) rep.GetContextObject();
-                    path = Util.GetVccFilePath(rep, pkg);
-                    // remove filename
-                    path = Regex.Replace(path, @"[a-zA-Z0-9\s_:.]*\.xml", "");
-
-                    if (isTotalCommander)
-                        Util.StartApp(@"totalcmd.exe", "/o " + path);
-                    else
-                        Util.StartApp(@"Explorer.exe", "/e, " + path);
+                    dirPath = Util.GetVccFilePath(rep, pkg);
+                    if (dirPath == "") return;
+                    Util.ShowFolder(dirPath, isTotalCommander);
                     break;
 
                 case ObjectType.otElement:
                     var el = (Element) rep.GetContextObject();
-                    path = Util.GetGenFilePath(rep, el);
-                    // remove filename
-                    path = Regex.Replace(path, @"[a-zA-Z0-9\s_:.]*\.[a-zA-Z0-9]{0,4}$", "");
-
-                    if (isTotalCommander)
-                        Util.StartApp(@"totalcmd.exe", "/o " + path);
-                    else
-                        Util.StartApp(@"Explorer.exe", "/e, " + path);
-
+                    dirPath = Util.GetGenFilePath(rep, el);
+                    if (dirPath == "") return;
+                    Util.ShowFolder(dirPath, isTotalCommander);
                     break;
             }
         }
@@ -691,6 +680,7 @@ namespace hoTools.EaServices
                 CreateActivityForOperationsInPackage(rep, pkg1);
             }
         }
+
         /// <summary>
         /// If passed element is of type "Text" or UMLDiagram"
         /// - show in project view
@@ -722,6 +712,7 @@ namespace hoTools.EaServices
         }
 
         #region showAllEmbeddedElements
+
         /// <summary>
         /// Show all embedded Elements in diagram for
         /// - Seleted Elements
@@ -745,15 +736,15 @@ namespace hoTools.EaServices
             // SQL for Embedded Elements
             var sqlUtil = new UtilSql(rep);
 
-            
+
             // over all selected elements
             int count = -1;
             foreach (DiagramObject diaObj in eaDia.SelObjects)
             {
                 count = count + 1;
                 var elSource = eaDia.SelElements[count];
-                
-               
+
+
                 string[] embeddedTypes = {"left", "right"};
                 foreach (string portBoundTo in embeddedTypes)
                 {
@@ -768,9 +759,12 @@ namespace hoTools.EaServices
                     else
                     {
                         if (portBoundTo == "left")
-                            lEmbeddedElements = sqlUtil.GetAndSortEmbeddedElements(elSource, "Port", "'Server', 'Receiver' ",
+                            lEmbeddedElements = sqlUtil.GetAndSortEmbeddedElements(elSource, "Port",
+                                "'Server', 'Receiver' ",
                                 "DESC");
-                        else lEmbeddedElements = sqlUtil.GetAndSortEmbeddedElements(elSource, "Port", "'Client', 'Sender' ", "");
+                        else
+                            lEmbeddedElements = sqlUtil.GetAndSortEmbeddedElements(elSource, "Port",
+                                "'Client', 'Sender' ", "");
                     }
                     // over all sorted ports
                     string oldStereotype = "";
@@ -828,6 +822,7 @@ namespace hoTools.EaServices
         #endregion
 
         #region HideAllEmbeddedElementI
+
         /// <summary>
         /// Hide all embdeded Elements for:
         /// - selected nodes
@@ -862,7 +857,8 @@ namespace hoTools.EaServices
                     RemoveEmbeddedElementFromDiagram(eaDia.Dia, elSource);
                 }
                 else
-                {   // selected element was "Element"
+                {
+                    // selected element was "Element"
                     foreach (Element embeddedElement in elSource.EmbeddedElements)
                     {
                         if (embeddedElement.IsEmbeddedElement())
@@ -885,6 +881,7 @@ namespace hoTools.EaServices
         #endregion
 
         #region ShowEmbeddedElementLabel
+
         /// <summary>
         /// Show embdeded Element Labels for:
         /// - selected nodes
@@ -897,9 +894,11 @@ namespace hoTools.EaServices
         {
             UpdateEmbeddedElementStyle(rep, PortServices.LabelStyle.IsShown);
         }
+
         #endregion
 
         #region HideEmbeddedElementsLabel
+
         /// <summary>
         /// Hide embdeded Element Labels for:
         /// - selected nodes
@@ -912,9 +911,11 @@ namespace hoTools.EaServices
         {
             UpdateEmbeddedElementStyle(rep, PortServices.LabelStyle.IsHidden);
         }
+
         #endregion
 
         #region HideEmbeddedElementsType
+
         /// <summary>
         /// Hide embdeded Element Labels for:
         /// - selected nodes
@@ -927,9 +928,11 @@ namespace hoTools.EaServices
         {
             UpdateEmbeddedElementStyle(rep, PortServices.LabelStyle.IsTypeHidden);
         }
+
         #endregion
 
         #region ShowEmbeddedElementsType
+
         /// <summary>
         /// Hide embdeded Element Labels for:
         /// - selected nodes
@@ -942,10 +945,12 @@ namespace hoTools.EaServices
         {
             UpdateEmbeddedElementStyle(rep, PortServices.LabelStyle.IsTypeShown);
         }
+
         #endregion
 
         #region UpdateEmbeddedElementStyle
-        private static void UpdateEmbeddedElementStyle( Repository rep, PortServices.LabelStyle style )
+
+        private static void UpdateEmbeddedElementStyle(Repository rep, PortServices.LabelStyle style)
         {
             Cursor.Current = Cursors.WaitCursor;
             // remember Diagram data of current selected diagram
@@ -969,12 +974,13 @@ namespace hoTools.EaServices
                     PortServices.DoChangeLabelStyle(diaObj, style);
                 }
                 else
-                {   // selected element was "Element"
+                {
+                    // selected element was "Element"
                     foreach (Element embeddedElement in elSource.EmbeddedElements)
                     {
                         if (embeddedElement.IsEmbeddedElement())
                         {
-                            var diagramObject = eaDia.Dia.GetDiagramObjectByID(embeddedElement.ElementID,"");
+                            var diagramObject = eaDia.Dia.GetDiagramObjectByID(embeddedElement.ElementID, "");
                             if (diagramObject == null) continue;
                             PortServices.DoChangeLabelStyle(diagramObject, style);
                         }
@@ -1005,10 +1011,10 @@ namespace hoTools.EaServices
             if (!embeddedElement.IsEmbeddedElement()) return;
             for (int i = dia.DiagramObjects.Count - 1; i >= 0; i -= 1)
             {
-                var obj = (DiagramObject)dia.DiagramObjects.GetAt((short)i);
+                var obj = (DiagramObject) dia.DiagramObjects.GetAt((short) i);
                 if (obj.ElementID == embeddedElement.ElementID)
                 {
-                    dia.DiagramObjects.Delete((short)i);
+                    dia.DiagramObjects.Delete((short) i);
                     dia.DiagramObjects.Refresh();
                     break;
                 }
@@ -1277,7 +1283,7 @@ namespace hoTools.EaServices
                     }
                 }
                 if (showBehavior.Equals(DisplayMode.Method) & (
-                    el.Type.Equals("Activity") || el.Type.Equals("StateMachine") || el.Type.Equals("Interaction")))
+                        el.Type.Equals("Activity") || el.Type.Equals("StateMachine") || el.Type.Equals("Interaction")))
                 {
                     LocateOperationFromBehavior(repository, el, showBehavior);
                 }
@@ -1332,7 +1338,7 @@ namespace hoTools.EaServices
                         }
                     }
                     // If connector 0 Sequence and Classifier exists
-                    if (con.Type.Equals("Sequence") && ( el.ClassfierID > 0 || el.PropertyType > 0))
+                    if (con.Type.Equals("Sequence") && (el.ClassfierID > 0 || el.PropertyType > 0))
                     {
                         if ("PartPort".Contains(el.Type))
                         {
@@ -1513,7 +1519,7 @@ namespace hoTools.EaServices
 
             if (basicType == "StateNode")
             {
-                left = left - 10 + (right - left)/2;
+                left = left - 10 + (right - left) / 2;
                 right = left + 20;
                 top = bottom - 20;
                 bottom = top - 20;
@@ -1526,20 +1532,20 @@ namespace hoTools.EaServices
                     else left = left + (right - left) + 50;
                     bottom = bottom - 5;
                 }
-                left = left - 15 + (right - left)/2;
+                left = left - 15 + (right - left) / 2;
                 right = left + 30;
                 top = bottom - 20;
                 bottom = top - 40;
             }
             if (basicType == "Action" | basicType == "Activity")
             {
-                length = name.Length*widthPerCharacter/10;
+                length = name.Length * widthPerCharacter / 10;
 
                 if (extension.ToLower() == "comp=no")
                 {
                     /* Activity ind diagram */
                     if (length < 500) length = 500;
-                    left = left + ((right - left)/2) - (length/2);
+                    left = left + ((right - left) / 2) - (length / 2);
                     right = left + length;
                     top = bottom - 20;
                     bottom = top - 200;
@@ -1548,7 +1554,7 @@ namespace hoTools.EaServices
                 else if (extension.ToLower() == "comp=yes")
                 {
                     if (length < 220) length = 220;
-                    left = left + ((right - left)/2) - (length/2);
+                    left = left + ((right - left) / 2) - (length / 2);
                     right = left + length;
                     top = bottom - 40;
                     bottom = top - 40;
@@ -1556,7 +1562,7 @@ namespace hoTools.EaServices
                 else
                 {
                     if (length < 220) length = 220;
-                    left = left + ((right - left)/2) - (length/2);
+                    left = left + ((right - left) / 2) - (length / 2);
                     right = left + length;
                     top = bottom - 20;
                     bottom = top - 20;
@@ -1592,8 +1598,8 @@ namespace hoTools.EaServices
             // CY=13:       y-position of label (relative object)
             if (basicType == "Decision" & name.Length > 0)
             {
-                if (name.Length > 25) length = 25*widthPerCharacter/10;
-                else length = name.Length*widthPerCharacter/10;
+                if (name.Length > 25) length = 25 * widthPerCharacter / 10;
+                else length = name.Length * widthPerCharacter / 10;
                 // string s = "DUID=E2352ABC;LBL=CX=180:CY=13:OX=29:OY=-4:HDN=0:BLD=0:ITA=0:UND=0:CLR=-1:ALN=0:ALT=0:ROT=0;;"; 
                 string s = "DUID=E2352ABC;LBL=CX=180:CY=13:OX=-" + length +
                            ":OY=-4:HDN=0:BLD=0:ITA=0:UND=0:CLR=-1:ALN=0:ALT=0:ROT=0;;";
@@ -1605,7 +1611,7 @@ namespace hoTools.EaServices
             {
                 /* Activity ind diagram */
                 // place an init
-                int initLeft = left + ((right - left)/2) - 10;
+                int initLeft = left + ((right - left) / 2) - 10;
                 int initRight = initLeft + 20;
                 int initTop = top - 25;
                 int initBottom = initTop - 20;
@@ -1756,7 +1762,7 @@ namespace hoTools.EaServices
                 int right = left + length;
                 int top = diaObjSource.bottom - 25;
 
-                top = top - 20 - pos*70;
+                top = top - 20 - pos * 70;
                 var bottom = top - 50;
                 string position = "l=" + left + ";r=" + right + ";t=" + top + ";b=" + bottom + ";";
 
@@ -1811,7 +1817,8 @@ namespace hoTools.EaServices
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.ToString(), $@"Error create connector between '{elSource.Name}  and '{elTarget.Name}' ");
+                MessageBox.Show(e.ToString(),
+                    $@"Error create connector between '{elSource.Name}  and '{elTarget.Name}' ");
             }
         }
 
@@ -2183,7 +2190,7 @@ namespace hoTools.EaServices
 
         #endregion
 
-        
+
         #region AddElementsToDiagram
 
         /// <summary>
@@ -2194,8 +2201,8 @@ namespace hoTools.EaServices
         /// <param name="elementType"></param>
         /// <param name="connectorType"></param>
         /// <param name="attachNote"></param>
-        public static void AddElementsToDiagram(Repository rep, 
-            string elementType="Note", string connectorType="NoteLink", Boolean attachNote=false)
+        public static void AddElementsToDiagram(Repository rep,
+            string elementType = "Note", string connectorType = "NoteLink", Boolean attachNote = false)
         {
             // handle multiple selected elements
             Diagram diaCurrent = rep.GetCurrentDiagram();
@@ -2212,10 +2219,11 @@ namespace hoTools.EaServices
             }
             else
             {
-               // check for selected connectors
+                // check for selected connectors
                 if (diaCurrent.SelectedConnector != null)
                 {
-                    AddElementWithLinkToConnector(rep, diaCurrent.SelectedConnector, elementType, connectorType, attachNote);
+                    AddElementWithLinkToConnector(rep, diaCurrent.SelectedConnector, elementType, connectorType,
+                        attachNote);
                 }
                 // check for selected DiagramObjects
                 var objCol = diaCurrent.SelectedObjects;
@@ -2229,7 +2237,7 @@ namespace hoTools.EaServices
             }
             eaDia.ReloadSelectedObjectsAndConnector();
         }
-        
+
 
         /// <summary>
         /// Add Element and optionally link to  Object from:<para/>
@@ -2241,8 +2249,8 @@ namespace hoTools.EaServices
         /// <param name="elementType">Default Note</param>
         /// <param name="connectorType">Default: null</param>
         /// <param name="isAttchedLink"></param>
-        public static void AddElementWithLink(Repository rep, DiagramObject diaObj, 
-            string elementType=@"Note", string connectorType="NoteLink", bool isAttchedLink = false )
+        public static void AddElementWithLink(Repository rep, DiagramObject diaObj,
+            string elementType = @"Note", string connectorType = "NoteLink", bool isAttchedLink = false)
         {
             Element el = rep.GetElementByID(diaObj.ElementID);
             if (el != null)
@@ -2254,7 +2262,7 @@ namespace hoTools.EaServices
                 Element elNewElement;
                 try
                 {
-                    elNewElement = (Element)pkg.Elements.AddNew("", elementType);
+                    elNewElement = (Element) pkg.Elements.AddNew("", elementType);
                     elNewElement.Update();
                     pkg.Update();
                 }
@@ -2272,7 +2280,7 @@ namespace hoTools.EaServices
                 int bottom = top - 100;
 
                 string position = "l=" + left + ";r=" + right + ";t=" + top + ";b=" + bottom + ";";
-                var diaObject = (DiagramObject)dia.DiagramObjects.AddNew(position, "");
+                var diaObject = (DiagramObject) dia.DiagramObjects.AddNew(position, "");
                 dia.Update();
                 diaObject.ElementID = elNewElement.ElementID;
                 diaObject.Sequence = 1; // put element to top
@@ -2280,7 +2288,7 @@ namespace hoTools.EaServices
                 pkg.Elements.Refresh();
 
                 // connect Element to node
-                if (! String.IsNullOrWhiteSpace(connectorType))
+                if (!String.IsNullOrWhiteSpace(connectorType))
                 {
                     // make a connector
                     var con = (Connector) el.Connectors.AddNew("test", connectorType);
@@ -2317,12 +2325,12 @@ namespace hoTools.EaServices
         {
             Diagram dia = rep.GetCurrentDiagram();
             Package pkg = rep.GetPackageByID(dia.PackageID);
-            if (pkg.IsProtected || dia.IsLocked ) return;
+            if (pkg.IsProtected || dia.IsLocked) return;
 
             Element elNewElement;
             try
             {
-                elNewElement = (Element)pkg.Elements.AddNew("", elementType);
+                elNewElement = (Element) pkg.Elements.AddNew("", elementType);
                 elNewElement.Update();
                 pkg.Update();
             }
@@ -2333,7 +2341,7 @@ namespace hoTools.EaServices
 
             Element sourceEl = rep.GetElementByID(con.SupplierID);
             Element targetEl = rep.GetElementByID(con.ClientID);
-            DiagramObject sourceObj = dia.GetDiagramObjectByID(sourceEl.ElementID,"");
+            DiagramObject sourceObj = dia.GetDiagramObjectByID(sourceEl.ElementID, "");
             DiagramObject targetObj = dia.GetDiagramObjectByID(targetEl.ElementID, "");
 
             // add element to diagram
@@ -2345,7 +2353,7 @@ namespace hoTools.EaServices
             int bottom = top - 100;
 
             string position = "l=" + left + ";r=" + right + ";t=" + top + ";b=" + bottom + ";";
-            var diaObject = (DiagramObject)dia.DiagramObjects.AddNew(position, "");
+            var diaObject = (DiagramObject) dia.DiagramObjects.AddNew(position, "");
             dia.Update();
             diaObject.ElementID = elNewElement.ElementID;
             diaObject.Sequence = 1; // put element to top
@@ -3741,7 +3749,7 @@ namespace hoTools.EaServices
                     el = rep.GetElementByID(classifierId);
                     if (el.Name != parType) el = null;
                 }
-                    // empty catch, el = null
+                // empty catch, el = null
 #pragma warning disable RECS0022
                 catch //(Exception e)
                 {
@@ -3865,7 +3873,7 @@ namespace hoTools.EaServices
         #region checkOutService
 
         [ServiceOperation("{1BF01759-DD99-4552-8B68-75F19A3C593E}", "Check out", "Select Package", isTextRequired: false
-            )]
+        )]
         // ReSharper disable once UnusedMember.Global
         // dynamical usage as configurable service by reflection
         public static void CheckOutService(Repository rep)
@@ -4958,7 +4966,7 @@ namespace hoTools.EaServices
             // check if port,..
             var objPort0 = (DiagramObject) dia.SelectedObjects.GetAt(0);
             Element port = rep.GetElementByID(objPort0.ElementID);
-            if (! port.IsEmbeddedElement()) return;
+            if (!port.IsEmbeddedElement()) return;
 
             // get parent of embedded element
             Element el = rep.GetElementByID(port.ParentID);
@@ -4993,7 +5001,7 @@ namespace hoTools.EaServices
                 else
                 {
                     // move from top to down
-                    objPort.top = startValueTop - pos*20;
+                    objPort.top = startValueTop - pos * 20;
                     objPort.left = startValueLeft;
                     objPort.Update();
                     pos = pos + 1;
@@ -5023,7 +5031,7 @@ namespace hoTools.EaServices
             // check if port,..
             var objPort0 = (DiagramObject) dia.SelectedObjects.GetAt(0);
             Element port = rep.GetElementByID(objPort0.ElementID);
-            if (! port.IsEmbeddedElement()) return;
+            if (!port.IsEmbeddedElement()) return;
 
             // get parent of embedded element
             Element el = rep.GetElementByID(port.ParentID);
@@ -5058,7 +5066,7 @@ namespace hoTools.EaServices
                 else
                 {
                     // move from top to down
-                    objPort.top = startValueTop - pos*20;
+                    objPort.top = startValueTop - pos * 20;
                     objPort.left = startValueLeft;
                     objPort.Update();
                     pos = pos + 1;
@@ -5088,7 +5096,7 @@ namespace hoTools.EaServices
             // check if port,..
             var objPort0 = (DiagramObject) dia.SelectedObjects.GetAt(0);
             Element port = rep.GetElementByID(objPort0.ElementID);
-            if (! port.IsEmbeddedElement()) return;
+            if (!port.IsEmbeddedElement()) return;
 
             // get parent of embedded element
             Element el = rep.GetElementByID(port.ParentID);
@@ -5123,7 +5131,7 @@ namespace hoTools.EaServices
                 {
                     // move from left to right
                     objPort.top = startValueTop;
-                    objPort.left = startValueLeft + pos*20;
+                    objPort.left = startValueLeft + pos * 20;
                     objPort.Update();
                     pos = pos + 1;
                 }
@@ -5152,7 +5160,7 @@ namespace hoTools.EaServices
             // check if port,..
             var objPort0 = (DiagramObject) dia.SelectedObjects.GetAt(0);
             Element port = rep.GetElementByID(objPort0.ElementID);
-            if (! port.IsEmbeddedElement()) return;
+            if (!port.IsEmbeddedElement()) return;
 
             // get parent of embedded element
             Element el = rep.GetElementByID(port.ParentID);
@@ -5188,7 +5196,7 @@ namespace hoTools.EaServices
                 {
                     // move from left to right
                     objPort.top = startValueTop;
-                    objPort.left = startValueLeft + pos*20;
+                    objPort.left = startValueLeft + pos * 20;
                     objPort.Update();
                     pos = pos + 1;
                 }
@@ -5263,17 +5271,21 @@ Workshops, Training Coaching, Project Work
         {
             Process.Start("https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki");
         }
+
         public static void WikiSql()
         {
             Process.Start("https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/Sql");
         }
+
         public static void WikiScript()
         {
             Process.Start("https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/Script");
         }
+
         public static void Repo()
         {
             Process.Start("https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools");
         }
+
     }
 }
