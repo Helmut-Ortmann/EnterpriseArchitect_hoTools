@@ -45,6 +45,9 @@ namespace hoTools.Query
         public static readonly string MenuEditWithExternalEditorText = "Edit with external Editor";
         public static readonly string MenuEditWithExternalEditorTooltip = "Edit hoTools Script file with external Editor";
 
+        public static readonly string MenuShowScriptFolderText = "Show Script Folder";
+        public static readonly string MenuShowScriptFolderTooltip = "Show Script Folder";
+
 
 
         const string SqlTextBoxTooltip =
@@ -260,6 +263,13 @@ CTRL+SHFT+S                     Store sql All
                 ToolTipText = MenuEditWithExternalEditorTooltip
             };
             editWithExternalEditorMenuItem.Click += editWithExternalEditorMenuItem_Click;
+            // Show Script Folder
+            ToolStripMenuItem showScriptFolderMenuItem = new ToolStripMenuItem
+            {
+                Text = MenuShowScriptFolderText,
+                ToolTipText = MenuShowScriptFolderTooltip
+            };
+            showScriptFolderMenuItem.Click += showScriptFolderMenuItem_Click;
 
             // New TabPage
             ToolStripMenuItem newTabMenuItem = new ToolStripMenuItem
@@ -1305,16 +1315,31 @@ Useful to quickly test:
         {
             if (_tabControl.SelectedIndex < 0) return;
             TabPage tabPage = _tabControl.TabPages[_tabControl.SelectedIndex];
-            var textBox = (TextBox)tabPage.Controls[0];
             SqlFile sqlFile = (SqlFile)tabPage.Tag;
 
             string sqlAbsFileName = _globalCfg.GetSqlFileName(sqlFile.FullName);
             // run editor
             if (sqlAbsFileName != "") Util.StartFile(sqlAbsFileName);
         }
+        /// <summary>
+        /// Show Script Folder
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+
+        void showScriptFolderMenuItem_Click(object sender, EventArgs e)
+        {
+            if (_tabControl.SelectedIndex < 0) return;
+            TabPage tabPage = _tabControl.TabPages[_tabControl.SelectedIndex];
+            SqlFile sqlFile = (SqlFile)tabPage.Tag;
+
+            string sqlAbsFileName = _globalCfg.GetSqlFileName(sqlFile.FullName);
+            // run editor
+            if (sqlAbsFileName != "") Util.ShowFolder(sqlAbsFileName);
+        }
 
 
-
+        
         /// <summary>
         /// Reload current Tab
         /// </summary>
