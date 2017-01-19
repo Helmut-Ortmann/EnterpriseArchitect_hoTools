@@ -717,6 +717,7 @@ namespace hoTools.EaServices
         /// Show all embedded Elements in diagram for
         /// - Seleted Elements
         /// - All elements if nothing is selected
+        /// - If Port or Object with a Block/Classs then update the Ports
         /// </summary>
         /// <param name="rep"></param>
         /// <param name="isOptimizePortLayout"></param>
@@ -743,6 +744,8 @@ namespace hoTools.EaServices
             {
                 count = count + 1;
                 var elSource = eaDia.SelElements[count];
+                if (elSource.Type == "Part" ) UpdatePortsForPart(rep, elSource);
+
 
 
                 string[] embeddedTypes = {"left", "right"};
@@ -821,6 +824,59 @@ namespace hoTools.EaServices
 
         #endregion
 
+        /// <summary>
+        /// Update Ports for a Part if a PropertyType is defined.
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <param name="elTarget"></param>
+        /// <returns></returns>
+        static bool UpdatePortsForPart(Repository rep, EA.Element elTarget)
+        {
+            // no Property defined
+            if (elTarget.PropertyType == 0) return true;
+
+            EA.Element elSource = rep.GetElementByID(elTarget.PropertyType);
+            foreach (EA.Element portSource in elSource.EmbeddedElements)
+            {
+                if (portSource.Type == "Port")
+                {
+                    PortServices.CopyPort(portSource, elTarget);
+
+                }
+            }
+            // delete all ports that are not part of the PropertyType
+            bool foundAtLeastOneToDelete = false;
+            for (int i = elTarget.EmbeddedElements.Count-1; i >= 0; i -= 1)
+            {
+                EA.Element portTarget = (EA.Element)elTarget.EmbeddedElements.GetAt((short)i);
+                if (portTarget.Type == "Port")
+                {
+                    bool found = false;
+                    foreach (EA.Element portSource in elSource.EmbeddedElements)
+                    {
+                        if (portSource.Name != portTarget.Name || portSource.Stereotype != portTarget.Stereotype)
+                            continue;
+                        // port found in target and in source
+                        found = true;
+                        foundAtLeastOneToDelete = true;
+                        break;
+                    }
+                    // port not found in source, delete it
+                    if (! found)
+                    {
+                        portTarget.Locked = false;
+                        elTarget.EmbeddedElements.Delete((short)i);
+                    }
+
+
+                }
+            }
+            if (foundAtLeastOneToDelete) elTarget.EmbeddedElements.Refresh();
+
+
+            return true;
+
+        }
         #region HideAllEmbeddedElementI
 
         /// <summary>

@@ -95,7 +95,7 @@ Some features:
 
 # Installation 
 - Uninstall hoTools
-- hoTools.msi  (Setup\bin\Release\hoTools.msi V2.0.11)
+- hoTools.msi  (Setup\bin\Release\hoTools.msi )
 - In EA: Extension, Addin Windows is selected
 - In EA: Manage Addins, MDG: hoTools is selected
 - hoToolsRemove.ps1 (deinstall with PowerShell)
@@ -114,11 +114,21 @@ Some features:
 # Releases
 
 ## Release 2.1.2
+- SysML: Synchronization Property / Part with its Type, usually a block
+-- 'Show Ports' also synchronizes ports between block and its properties/parts (add/delete)
+-- Synchronized are the folowing information
+--- Name
+--- Stereotype
+--- Notes
 - Search with Context Menu (Right Click)
 -- Edit current hoTools SQL Search with Editor
 -- Open folder of current hoTools SQL Search
 -- Run Search and export results to Excel (no Excel required)
 -- Export Clipboard with csv data to Excel (no Excel required)
+- SQL Context Menu contains
+-- Edit current hoTools SQL Search with Editor
+-- Open folder of current hoTools SQL Search
+
 
 ## Release 2.1.1
 - Error fixing hoModelView MDG

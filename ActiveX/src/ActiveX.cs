@@ -1180,7 +1180,6 @@ namespace hoTools.ActiveX
             this._btnAddNoteAndLink = new System.Windows.Forms.Button();
             this._btnAddNote = new System.Windows.Forms.Button();
             this._btnAddConstraint = new System.Windows.Forms.Button();
-            this._rtfListOfSearches = new System.Windows.Forms.RichTextBox();
             this.contextMenuRtf = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.editSQLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showSQLFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -1191,6 +1190,7 @@ namespace hoTools.ActiveX
             this.runAndExportSQLToExcelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.exportCsvOfClipboardToExcelToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this._rtfListOfSearches = new System.Windows.Forms.RichTextBox();
             this._menuStrip1 = new System.Windows.Forms.MenuStrip();
             this._fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._settingGeneralToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -1799,18 +1799,6 @@ namespace hoTools.ActiveX
             this._btnAddConstraint.UseVisualStyleBackColor = true;
             this._btnAddConstraint.Click += new System.EventHandler(this.btnAddConstraint_Click);
             // 
-            // _rtfListOfSearches
-            // 
-            this._rtfListOfSearches.ContextMenuStrip = this.contextMenuRtf;
-            resources.ApplyResources(this._rtfListOfSearches, "_rtfListOfSearches");
-            this._rtfListOfSearches.Name = "_rtfListOfSearches";
-            this._rtfListOfSearches.ReadOnly = true;
-            this._rtfListOfSearches.Enter += new System.EventHandler(this.rtfListOfSearches_Enter);
-            this._rtfListOfSearches.Leave += new System.EventHandler(this.rtfListOfSearches_Leave);
-            this._rtfListOfSearches.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.rtfListOfSearches_MouseDoubleClick);
-            this._rtfListOfSearches.MouseDown += new System.Windows.Forms.MouseEventHandler(this.rtfListOfSearches_MouseDown);
-            this._rtfListOfSearches.MouseUp += new System.Windows.Forms.MouseEventHandler(this.rtfListOfSearches_MouseUp);
-            // 
             // contextMenuRtf
             // 
             this.contextMenuRtf.ImageScalingSize = new System.Drawing.Size(20, 20);
@@ -1879,6 +1867,18 @@ namespace hoTools.ActiveX
             this.exportCsvOfClipboardToExcelToolStripMenuItem1.Name = "exportCsvOfClipboardToExcelToolStripMenuItem1";
             resources.ApplyResources(this.exportCsvOfClipboardToExcelToolStripMenuItem1, "exportCsvOfClipboardToExcelToolStripMenuItem1");
             this.exportCsvOfClipboardToExcelToolStripMenuItem1.Click += new System.EventHandler(this.runAndExportCsvToExcelRtfToolStripMenuItem_Click);
+            // 
+            // _rtfListOfSearches
+            // 
+            this._rtfListOfSearches.ContextMenuStrip = this.contextMenuRtf;
+            resources.ApplyResources(this._rtfListOfSearches, "_rtfListOfSearches");
+            this._rtfListOfSearches.Name = "_rtfListOfSearches";
+            this._rtfListOfSearches.ReadOnly = true;
+            this._rtfListOfSearches.Enter += new System.EventHandler(this.rtfListOfSearches_Enter);
+            this._rtfListOfSearches.Leave += new System.EventHandler(this.rtfListOfSearches_Leave);
+            this._rtfListOfSearches.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.rtfListOfSearches_MouseDoubleClick);
+            this._rtfListOfSearches.MouseDown += new System.Windows.Forms.MouseEventHandler(this.rtfListOfSearches_MouseDown);
+            this._rtfListOfSearches.MouseUp += new System.Windows.Forms.MouseEventHandler(this.rtfListOfSearches_MouseUp);
             // 
             // _menuStrip1
             // 

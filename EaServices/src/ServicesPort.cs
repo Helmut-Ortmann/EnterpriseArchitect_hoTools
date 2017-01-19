@@ -112,13 +112,14 @@ namespace hoTools.EAServicesPort
         #endregion
         #region copyPort
         /// <summary>
-        /// Copy port to target element
+        /// Copy port to target element. It port exists it don't copy it. The Ports are locked against changes.
+        /// Note: hoTools don't copy tagged values
         /// </summary>
         /// <param name="srcPort"></param>
         /// <param name="trgEl"></param>
-        private void CopyPort(Element srcPort, Element trgEl)
+        public static void CopyPort(Element srcPort, Element trgEl)
         {
-            bool isUpdate = false;
+            bool isUpdated = false;
             Element trgPort = null;
             if (srcPort.Type != "Port") return;
             // check if port already exits
@@ -127,23 +128,33 @@ namespace hoTools.EAServicesPort
             {
                 if (p.Name == srcPort.Name && p.Stereotype == srcPort.Stereotype)
                 {
-                    isUpdate = true;
-                    trgPort = p;
+                    if (p.Notes != srcPort.Notes || p.PropertyType != srcPort.PropertyType)
+                    {
+                        p.Locked = false;
+                        p.Notes = srcPort.Notes;
+                        p.PropertyType = srcPort.PropertyType;
+                        p.Update();
+                        p.Locked = true;
+                    }
+
+                    
+
+                    isUpdated = true;
+                    
                     break;
                 }
             }
 
-            if (isUpdate == false)
+            if (isUpdated == false)
             {
-                string name = srcPort.Name;
-                string stereotype = srcPort.Stereotype;
-                if (isUpdate == false)
-                {
-                    trgPort = (Element)trgEl.EmbeddedElements.AddNew(name, "Port");
-                    trgEl.EmbeddedElements.Refresh();
-                }
-                trgPort.Stereotype = stereotype;
+                // Create new Port and set the properties according to source port
+                trgPort = (Element)trgEl.EmbeddedElements.AddNew(srcPort.Name, "Port");
+                trgEl.EmbeddedElements.Refresh();
+                trgPort.Stereotype = srcPort.Stereotype;
+                trgPort.Notes = srcPort.Notes;
+                trgPort.PropertyType = srcPort.PropertyType;
                 trgPort.Update();
+                trgPort.Locked = true;
             }
 
         }
