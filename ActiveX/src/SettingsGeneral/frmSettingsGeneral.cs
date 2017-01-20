@@ -45,10 +45,29 @@ namespace hoTools.Settings
             chkAdvancedFeatures.Checked = settings.IsAdvancedFeatures;
             chkSvnSupport.Checked = settings.IsSvnSupport;
             chkVcSupport.Checked = settings.IsVcSupport;
+
             // Port support
             chkAdvancedPort.Checked = settings.IsAdvancedPort;
             chkPortBasicSupport.Checked = settings.IsPortBasic;
             chkPortTypeSupport.Checked = settings.IsPortType;
+
+            // Block Part synchronization of Ports
+            switch (_settings.PartPortSyncho)
+            {
+                case AddinSettings.PartPortSynchronization.New:
+                    _rbPortSynchronizationNew.Checked = true;
+                    break;
+                case AddinSettings.PartPortSynchronization.Mark:
+                    _rbPortSynchronizationMark.Checked = true;
+                    break;
+                case AddinSettings.PartPortSynchronization.Delete:
+                    _rbPortSynchronizationDelete.Checked = true;
+                    break;
+
+                default:
+                    _rbPortSynchronizationOff.Checked = true;
+                    break;
+            }
 
 
             chkAdvancedDiagramNote.Checked = settings.IsAdvancedDiagramNote;
@@ -130,6 +149,15 @@ namespace hoTools.Settings
             _settings.IsPortBasic = chkPortBasicSupport.Checked;
             _settings.IsPortType = chkPortTypeSupport.Checked;
             _settings.IsAdvancedPort = chkAdvancedPort.Checked;
+
+            // Block to Part Port synchronization
+            _settings.PartPortSyncho = AddinSettings.PartPortSynchronization.Off;
+            if (_rbPortSynchronizationDelete.Checked)
+                _settings.PartPortSyncho = AddinSettings.PartPortSynchronization.Delete;
+            if (_rbPortSynchronizationMark.Checked)
+                _settings.PartPortSyncho = AddinSettings.PartPortSynchronization.Mark;
+            if (_rbPortSynchronizationNew.Checked)
+                _settings.PartPortSyncho = AddinSettings.PartPortSynchronization.New;
 
             _settings.IsAdvancedDiagramNote = chkAdvancedDiagramNote.Checked;
 

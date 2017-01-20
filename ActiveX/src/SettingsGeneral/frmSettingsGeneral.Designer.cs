@@ -85,15 +85,21 @@
             this.label9 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this._rbPortSynchronizationOff = new System.Windows.Forms.RadioButton();
+            this._rbPortSynchronizationNew = new System.Windows.Forms.RadioButton();
+            this._rbPortSynchronizationMark = new System.Windows.Forms.RadioButton();
+            this._rbPortSynchronizationDelete = new System.Windows.Forms.RadioButton();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnOk
             // 
             this.btnOk.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnOk.Location = new System.Drawing.Point(27, 552);
+            this.btnOk.Location = new System.Drawing.Point(16, 663);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(91, 31);
             this.btnOk.TabIndex = 0;
@@ -104,7 +110,7 @@
             // btnCancel
             // 
             this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancel.Location = new System.Drawing.Point(124, 552);
+            this.btnCancel.Location = new System.Drawing.Point(113, 663);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(91, 31);
             this.btnCancel.TabIndex = 1;
@@ -167,7 +173,7 @@
             // chkAdvancedDiagramNote
             // 
             this.chkAdvancedDiagramNote.AutoSize = true;
-            this.chkAdvancedDiagramNote.Location = new System.Drawing.Point(208, 469);
+            this.chkAdvancedDiagramNote.Location = new System.Drawing.Point(199, 580);
             this.chkAdvancedDiagramNote.Margin = new System.Windows.Forms.Padding(2);
             this.chkAdvancedDiagramNote.Name = "chkAdvancedDiagramNote";
             this.chkAdvancedDiagramNote.Size = new System.Drawing.Size(15, 14);
@@ -180,7 +186,7 @@
             // 
             this.label36.AutoSize = true;
             this.label36.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label36.Location = new System.Drawing.Point(22, 465);
+            this.label36.Location = new System.Drawing.Point(13, 576);
             this.label36.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label36.Name = "label36";
             this.label36.Size = new System.Drawing.Size(154, 18);
@@ -192,7 +198,7 @@
             // chkVcSupport
             // 
             this.chkVcSupport.AutoSize = true;
-            this.chkVcSupport.Location = new System.Drawing.Point(209, 487);
+            this.chkVcSupport.Location = new System.Drawing.Point(200, 598);
             this.chkVcSupport.Margin = new System.Windows.Forms.Padding(2);
             this.chkVcSupport.Name = "chkVcSupport";
             this.chkVcSupport.Size = new System.Drawing.Size(15, 14);
@@ -206,7 +212,7 @@
             // 
             this.label35.AutoSize = true;
             this.label35.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label35.Location = new System.Drawing.Point(24, 487);
+            this.label35.Location = new System.Drawing.Point(15, 598);
             this.label35.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label35.Name = "label35";
             this.label35.Size = new System.Drawing.Size(84, 18);
@@ -230,7 +236,7 @@
             // chkSvnSupport
             // 
             this.chkSvnSupport.AutoSize = true;
-            this.chkSvnSupport.Location = new System.Drawing.Point(209, 514);
+            this.chkSvnSupport.Location = new System.Drawing.Point(200, 625);
             this.chkSvnSupport.Margin = new System.Windows.Forms.Padding(2);
             this.chkSvnSupport.Name = "chkSvnSupport";
             this.chkSvnSupport.Size = new System.Drawing.Size(15, 14);
@@ -243,7 +249,7 @@
             // 
             this.label33.AutoSize = true;
             this.label33.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label33.Location = new System.Drawing.Point(24, 510);
+            this.label33.Location = new System.Drawing.Point(15, 621);
             this.label33.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label33.Name = "label33";
             this.label33.Size = new System.Drawing.Size(94, 18);
@@ -255,14 +261,14 @@
             // 
             this.label41.AutoSize = true;
             this.label41.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label41.Location = new System.Drawing.Point(560, 422);
+            this.label41.Location = new System.Drawing.Point(560, 426);
             this.label41.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label41.Name = "label41";
             this.label41.Size = new System.Drawing.Size(159, 18);
             this.label41.TabIndex = 214;
             this.label41.Text = "Port advanced Support";
-            this.toolTip1.SetToolTip(this.label41, "Add Buttons to move multiple Ports like:\r\n- Move left\r\n- Move right\r\n- Move up\r\n-" +
-        " Move down");
+            this.toolTip1.SetToolTip(this.label41, "Add Buttons to move multiple Ports or Labels like:\r\n- Move left\r\n- Move right\r\n- " +
+        "Move up\r\n- Move down");
             // 
             // label29
             // 
@@ -299,7 +305,7 @@
             // chkAdvancedPort
             // 
             this.chkAdvancedPort.AutoSize = true;
-            this.chkAdvancedPort.Location = new System.Drawing.Point(735, 426);
+            this.chkAdvancedPort.Location = new System.Drawing.Point(735, 430);
             this.chkAdvancedPort.Margin = new System.Windows.Forms.Padding(2);
             this.chkAdvancedPort.Name = "chkAdvancedPort";
             this.chkAdvancedPort.Size = new System.Drawing.Size(15, 14);
@@ -311,7 +317,7 @@
             // txtFileManagerPath
             // 
             this.txtFileManagerPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtFileManagerPath.Location = new System.Drawing.Point(243, 510);
+            this.txtFileManagerPath.Location = new System.Drawing.Point(234, 621);
             this.txtFileManagerPath.Margin = new System.Windows.Forms.Padding(2);
             this.txtFileManagerPath.Name = "txtFileManagerPath";
             this.txtFileManagerPath.Size = new System.Drawing.Size(314, 24);
@@ -655,7 +661,7 @@
             // chkPortTypeSupport
             // 
             this.chkPortTypeSupport.AutoSize = true;
-            this.chkPortTypeSupport.Location = new System.Drawing.Point(503, 426);
+            this.chkPortTypeSupport.Location = new System.Drawing.Point(424, 426);
             this.chkPortTypeSupport.Margin = new System.Windows.Forms.Padding(2);
             this.chkPortTypeSupport.Name = "chkPortTypeSupport";
             this.chkPortTypeSupport.Size = new System.Drawing.Size(15, 14);
@@ -668,7 +674,7 @@
             // 
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.Location = new System.Drawing.Point(371, 422);
+            this.label15.Location = new System.Drawing.Point(292, 422);
             this.label15.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(128, 18);
@@ -681,7 +687,7 @@
             // 
             this.label34.AutoSize = true;
             this.label34.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label34.Location = new System.Drawing.Point(240, 487);
+            this.label34.Location = new System.Drawing.Point(231, 598);
             this.label34.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label34.Name = "label34";
             this.label34.Size = new System.Drawing.Size(297, 18);
@@ -728,12 +734,76 @@
             this.label12.TabIndex = 246;
             this.label12.Text = "(hoTools, SQL, Script, ..)";
             // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this._rbPortSynchronizationDelete);
+            this.groupBox4.Controls.Add(this._rbPortSynchronizationMark);
+            this.groupBox4.Controls.Add(this._rbPortSynchronizationNew);
+            this.groupBox4.Controls.Add(this._rbPortSynchronizationOff);
+            this.groupBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox4.Location = new System.Drawing.Point(554, 449);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(215, 136);
+            this.groupBox4.TabIndex = 254;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Part: Port synchronization mode";
+            this.toolTip1.SetToolTip(this.groupBox4, resources.GetString("groupBox4.ToolTip"));
+            // 
+            // _rbPortSynchronizationOff
+            // 
+            this._rbPortSynchronizationOff.AutoSize = true;
+            this._rbPortSynchronizationOff.Location = new System.Drawing.Point(11, 20);
+            this._rbPortSynchronizationOff.Name = "_rbPortSynchronizationOff";
+            this._rbPortSynchronizationOff.Size = new System.Drawing.Size(46, 22);
+            this._rbPortSynchronizationOff.TabIndex = 0;
+            this._rbPortSynchronizationOff.TabStop = true;
+            this._rbPortSynchronizationOff.Text = "Off";
+            this.toolTip1.SetToolTip(this._rbPortSynchronizationOff, resources.GetString("_rbPortSynchronizationOff.ToolTip"));
+            this._rbPortSynchronizationOff.UseVisualStyleBackColor = true;
+            // 
+            // _rbPortSynchronizationNew
+            // 
+            this._rbPortSynchronizationNew.AutoSize = true;
+            this._rbPortSynchronizationNew.Location = new System.Drawing.Point(11, 44);
+            this._rbPortSynchronizationNew.Name = "_rbPortSynchronizationNew";
+            this._rbPortSynchronizationNew.Size = new System.Drawing.Size(155, 22);
+            this._rbPortSynchronizationNew.TabIndex = 1;
+            this._rbPortSynchronizationNew.TabStop = true;
+            this._rbPortSynchronizationNew.Text = "Only add new Ports";
+            this.toolTip1.SetToolTip(this._rbPortSynchronizationNew, resources.GetString("_rbPortSynchronizationNew.ToolTip"));
+            this._rbPortSynchronizationNew.UseVisualStyleBackColor = true;
+            // 
+            // _rbPortSynchronizationMark
+            // 
+            this._rbPortSynchronizationMark.AutoSize = true;
+            this._rbPortSynchronizationMark.Location = new System.Drawing.Point(11, 68);
+            this._rbPortSynchronizationMark.Name = "_rbPortSynchronizationMark";
+            this._rbPortSynchronizationMark.Size = new System.Drawing.Size(163, 22);
+            this._rbPortSynchronizationMark.TabIndex = 2;
+            this._rbPortSynchronizationMark.TabStop = true;
+            this._rbPortSynchronizationMark.Text = "Mark Port as deleted";
+            this.toolTip1.SetToolTip(this._rbPortSynchronizationMark, resources.GetString("_rbPortSynchronizationMark.ToolTip"));
+            this._rbPortSynchronizationMark.UseVisualStyleBackColor = true;
+            // 
+            // _rbPortSynchronizationDelete
+            // 
+            this._rbPortSynchronizationDelete.AutoSize = true;
+            this._rbPortSynchronizationDelete.Location = new System.Drawing.Point(11, 92);
+            this._rbPortSynchronizationDelete.Name = "_rbPortSynchronizationDelete";
+            this._rbPortSynchronizationDelete.Size = new System.Drawing.Size(100, 22);
+            this._rbPortSynchronizationDelete.TabIndex = 3;
+            this._rbPortSynchronizationDelete.TabStop = true;
+            this._rbPortSynchronizationDelete.Text = "Delete Port";
+            this.toolTip1.SetToolTip(this._rbPortSynchronizationDelete, resources.GetString("_rbPortSynchronizationDelete.ToolTip"));
+            this._rbPortSynchronizationDelete.UseVisualStyleBackColor = true;
+            // 
             // FrmSettingsGeneral
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(785, 624);
+            this.ClientSize = new System.Drawing.Size(785, 706);
+            this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.chkPortTypeSupport);
             this.Controls.Add(this.label15);
             this.Controls.Add(this.chkPortBasicSupport);
@@ -787,6 +857,8 @@
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -849,5 +921,10 @@
         private System.Windows.Forms.Label lblPortBasicSupport;
         private System.Windows.Forms.CheckBox chkPortTypeSupport;
         private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.RadioButton _rbPortSynchronizationDelete;
+        private System.Windows.Forms.RadioButton _rbPortSynchronizationMark;
+        private System.Windows.Forms.RadioButton _rbPortSynchronizationNew;
+        private System.Windows.Forms.RadioButton _rbPortSynchronizationOff;
     }
 }

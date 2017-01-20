@@ -120,9 +120,6 @@
   <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
   <data name="chkAdvancedFeatures.ToolTip" xml:space="preserve">
     <value>Add advanved features:
 - Display Behavior (Display related Behavior of Operation)
@@ -221,4 +218,64 @@ You can easily implement such functions by search and macros like:
 - If you mostly use a "your Search" enter the name
 - If you prefer to use autocomplete and Fuzzy Search leave it blank</value>
   </data>
+  <data name="_rbPortSynchronizationDelete.ToolTip" xml:space="preserve">
+    <value>The ports of a part may be synchronized by the block the part is typed of. 
+hoTools provides features to update the ports of a part by its block. 
+Because there is no dependency between ports hoTools can't detect if a port is renamed.
+
+The following is possible:
+- Off: no synchronization
+- Only add new Ports: No Port is deleted
+- Mark Port as to delete: A Port not available in Block is suffixed by 'DeleteMe' in Part
+- Delete Port: A Port not available in Block is deleted from Part</value>
+  </data>
+  <data name="_rbPortSynchronizationMark.ToolTip" xml:space="preserve">
+    <value>The ports of a part may be synchronized by the block the part is typed of. 
+hoTools provides features to update the ports of a part by its block. 
+Because there is no dependency between ports hoTools can't detect if a port is renamed.
+
+The following is possible:
+- Off: no synchronization
+- Only add new Ports: No Port is deleted
+- Mark Port as to delete: A Port not available in Block is suffixed by 'DeleteMe' in Part
+- Delete Port: A Port not available in Block is deleted from Part</value>
+  </data>
+  <data name="_rbPortSynchronizationNew.ToolTip" xml:space="preserve">
+    <value>The ports of a part may be synchronized by the block the part is typed of. 
+hoTools provides features to update the ports of a part by its block. 
+Because there is no dependency between ports hoTools can't detect if a port is renamed.
+
+The following is possible:
+- Off: no synchronization
+- Only add new Ports: No Port is deleted
+- Mark Port as to delete: A Port not available in Block is suffixed by 'DeleteMe' in Part
+- Delete Port: A Port not available in Block is deleted from Part</value>
+  </data>
+  <data name="_rbPortSynchronizationOff.ToolTip" xml:space="preserve">
+    <value>The ports of a part may be synchronized by the block the part is typed of. 
+hoTools provides features to update the ports of a part by its block. 
+Because there is no dependency between ports hoTools can't detect if a port is renamed.
+
+The following is possible:
+- Off: no synchronization
+- Only add new Ports: No Port is deleted
+- Mark Port as to delete: A Port not available in Block is suffixed by 'DeleteMe' in Part
+- Delete Port: A Port not available in Block is deleted from Part</value>
+  </data>
+  <data name="groupBox4.ToolTip" xml:space="preserve">
+    <value>The ports of a part may be synchronized by the block the part is typed of. 
+hoTools provides features to update the ports of a part by its block. 
+Because there is no dependency between ports hoTools can't detect if a port is renamed.
+
+The following is possible:
+- Off: no synchronization
+- Only add new Ports: No Port is deleted
+- Mark Port as to delete: A Port not available in Block is suffixed by 'DeleteMe' in Part
+- Delete Port: A Port not available in Block is deleted from Part
+
+</value>
+  </data>
+  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>50</value>
+  </metadata>
 </root>
