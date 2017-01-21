@@ -807,6 +807,13 @@ namespace hoTools.Utils
             rep.Execute(updateStr);
             return true;
         }
+        public static bool SetElementPdata3(Repository rep, EA.Element el, string s)
+        {
+            string updateStr = @"update t_object set pdata3 = '" + s + "' " +
+                               " where object_ID = " + el.ElementID;
+            rep.Execute(updateStr);
+            return true;
+        }
 
         public static bool SetConnectorGuard(Repository rep, int connectorId, string connectorGuard)
         {

@@ -50,9 +50,7 @@ namespace hoTools.ActiveX
 
         // configuration as singleton
         readonly HoToolsGlobalCfg _globalCfg = HoToolsGlobalCfg.Instance;
-
-        // Global Configuration as singleton
-        //readonly HoToolsGlobalCfg _globalCfg = HoToolsGlobalCfg.Instance;
+        
 
 
         #region Generated
@@ -697,8 +695,7 @@ namespace hoTools.ActiveX
         #region showPortsInDiagramObjects
         void showPortsInDiagramObjectsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // Show the ports
-            EaService.ShowEmbeddedElements(Repository);
+            EaService.ShowEmbeddedElements(Repository, isOptimizePortLayout: false, portSynchronizationKind: AddinSettings.PartPortSyncho);
         }
         #endregion
         /// <summary>
@@ -755,7 +752,7 @@ namespace hoTools.ActiveX
         #region showReceivingPortsLeftSendingPortsRight
         void showReceivingPortsLeftSendingPortsRightToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            EaService.ShowEmbeddedElements(Repository);
+            EaService.ShowEmbeddedElements(Repository, isOptimizePortLayout: false, portSynchronizationKind: AddinSettings.PartPortSyncho);
         }
         #endregion
 

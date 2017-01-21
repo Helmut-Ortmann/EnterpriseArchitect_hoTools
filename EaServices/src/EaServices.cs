@@ -721,11 +721,13 @@ namespace hoTools.EaServices
         /// </summary>
         /// <param name="rep"></param>
         /// <param name="isOptimizePortLayout"></param>
+        /// <param name="portSynchronizationKind"></param>
         [ServiceOperation("{678AD901-1D2F-4FB0-BAAD-AEB775EE18AC}", "Show all Ports, Pins, Parameter",
             "Selected Diagram Objects or all", isTextRequired: false)]
         public static void ShowEmbeddedElements(
             Repository rep,
-            bool isOptimizePortLayout = false)
+            bool isOptimizePortLayout = false,
+            PartPortSynchronization portSynchronizationKind = PartPortSynchronization.Delete)
         {
             Cursor.Current = Cursors.WaitCursor;
             // remember Diagram data of current selected diagram
@@ -738,13 +740,14 @@ namespace hoTools.EaServices
             var sqlUtil = new UtilSql(rep);
 
 
-            // over all selected elements
+            // over all selected diagram objects elements (Class, Block,.. Part, Parameter, Action Pin,..)
             int count = -1;
             foreach (DiagramObject diaObj in eaDia.SelObjects)
             {
                 count = count + 1;
                 var elSource = eaDia.SelElements[count];
-                if (elSource.Type == "Part" ) UpdatePortsForPart(rep, elSource);
+                if (elSource.Type == "Part" && (portSynchronizationKind != PartPortSynchronization.Off) )
+                    UpdatePortsForPart(rep, elSource, portSynchronizationKind);
 
 
 
@@ -824,15 +827,26 @@ namespace hoTools.EaServices
 
         #endregion
 
+        // Handle Synchronization of a Part Port which has a Block that types the Part
+        public enum PartPortSynchronization
+        {
+            Off,  // No synchronization Part Ports from its typed Block
+            New,  // Add new Part Port if Block has a Port which isn't available in Part 
+            Mark, // Mark Part Port as to 'DeleteMe' if Part Port isn't available in Block
+            Delete // Delete Part Port if Part Port isn't available in Block
+        }
+
         /// <summary>
         /// Update Ports for a Part if a PropertyType is defined.
+        /// If a port is dependant on another port PDATA3 (MiscData(2)) contains ea_guid of the master port.
         /// </summary>
         /// <param name="rep"></param>
         /// <param name="elTarget"></param>
+        /// <param name="synchronizationKind"></param>
         /// <returns></returns>
-        static bool UpdatePortsForPart(Repository rep, EA.Element elTarget)
+        static bool UpdatePortsForPart(Repository rep, EA.Element elTarget, PartPortSynchronization synchronizationKind)
         {
-            // no Property defined
+            // no Property defined (Block that type this part)
             if (elTarget.PropertyType == 0) return true;
 
             EA.Element elSource = rep.GetElementByID(elTarget.PropertyType);
@@ -840,38 +854,53 @@ namespace hoTools.EaServices
             {
                 if (portSource.Type == "Port")
                 {
-                    PortServices.CopyPort(portSource, elTarget);
+                    PortServices.CopyPort(rep, portSource, elTarget);
 
                 }
             }
-            // delete all ports that are not part of the PropertyType
-            bool foundAtLeastOneToDelete = false;
-            for (int i = elTarget.EmbeddedElements.Count-1; i >= 0; i -= 1)
+            // handling of additional ports
+            if (synchronizationKind == PartPortSynchronization.Delete ||
+                synchronizationKind == PartPortSynchronization.Mark)
             {
-                EA.Element portTarget = (EA.Element)elTarget.EmbeddedElements.GetAt((short)i);
-                if (portTarget.Type == "Port")
+                // delete all ports that are not part of the PropertyType
+                bool foundAtLeastOneToDelete = false;
+                for (int i = elTarget.EmbeddedElements.Count - 1; i >= 0; i -= 1)
                 {
-                    bool found = false;
-                    foreach (EA.Element portSource in elSource.EmbeddedElements)
+                    EA.Element portTarget = (EA.Element) elTarget.EmbeddedElements.GetAt((short) i);
+                    if (portTarget.Type == "Port")
                     {
-                        if (portSource.Name != portTarget.Name || portSource.Stereotype != portTarget.Stereotype)
-                            continue;
-                        // port found in target and in source
-                        found = true;
-                        foundAtLeastOneToDelete = true;
-                        break;
-                    }
-                    // port not found in source, delete it
-                    if (! found)
-                    {
-                        portTarget.Locked = false;
-                        elTarget.EmbeddedElements.Delete((short)i);
-                    }
+                        bool found = false;
+                        foreach (EA.Element portSource in elSource.EmbeddedElements)
+                        {
+                            if (portSource.Name != portTarget.Name || portSource.Stereotype != portTarget.Stereotype)
+                                continue;
+                            // port found in target and in source
+                            found = true;
+                            break;
+                        }
+                        // port not found in source, delete it or rename it
+                        if (!found)
+                        {
+                            if (synchronizationKind == PartPortSynchronization.Delete)
+                            {
+                                portTarget.Locked = false;
+                                elTarget.EmbeddedElements.Delete((short) i);
+                                foundAtLeastOneToDelete = true;
+                            }
+                            if (synchronizationKind == PartPortSynchronization.Mark)
+                            {
+                                portTarget.Locked = false;
+                                portTarget.Name = portTarget.Name + "_DeleteMe";
+                                portTarget.Update();
+                                portTarget.Locked = true;
+                            }
+                        }
 
 
+                    }
                 }
+                if (foundAtLeastOneToDelete) elTarget.EmbeddedElements.Refresh();
             }
-            if (foundAtLeastOneToDelete) elTarget.EmbeddedElements.Refresh();
 
 
             return true;

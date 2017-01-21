@@ -1,5 +1,6 @@
 ﻿using System.Windows.Forms;
 using hoTools.ActiveX;
+using hoTools.EaServices;
 
 
 // ReSharper disable once CheckNamespace
@@ -54,13 +55,13 @@ namespace hoTools.Settings
             // Block Part synchronization of Ports
             switch (_settings.PartPortSyncho)
             {
-                case AddinSettings.PartPortSynchronization.New:
+                case EaService.PartPortSynchronization.New:
                     _rbPortSynchronizationNew.Checked = true;
                     break;
-                case AddinSettings.PartPortSynchronization.Mark:
+                case EaService.PartPortSynchronization.Mark:
                     _rbPortSynchronizationMark.Checked = true;
                     break;
-                case AddinSettings.PartPortSynchronization.Delete:
+                case EaService.PartPortSynchronization.Delete:
                     _rbPortSynchronizationDelete.Checked = true;
                     break;
 
@@ -151,13 +152,13 @@ namespace hoTools.Settings
             _settings.IsAdvancedPort = chkAdvancedPort.Checked;
 
             // Block to Part Port synchronization
-            _settings.PartPortSyncho = AddinSettings.PartPortSynchronization.Off;
+            _settings.PartPortSyncho = EaService.PartPortSynchronization.Off;
             if (_rbPortSynchronizationDelete.Checked)
-                _settings.PartPortSyncho = AddinSettings.PartPortSynchronization.Delete;
+                _settings.PartPortSyncho = EaService.PartPortSynchronization.Delete;
             if (_rbPortSynchronizationMark.Checked)
-                _settings.PartPortSyncho = AddinSettings.PartPortSynchronization.Mark;
+                _settings.PartPortSyncho = EaService.PartPortSynchronization.Mark;
             if (_rbPortSynchronizationNew.Checked)
-                _settings.PartPortSyncho = AddinSettings.PartPortSynchronization.New;
+                _settings.PartPortSyncho = EaService.PartPortSynchronization.New;
 
             _settings.IsAdvancedDiagramNote = chkAdvancedDiagramNote.Checked;
 

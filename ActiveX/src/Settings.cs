@@ -33,13 +33,7 @@ namespace hoTools.Settings
         public enum AutoLoadMdg { Basic, Compilation, No};
 
         // Handle Synchronization of a Part Port which has a Block that types the Part
-        public enum PartPortSynchronization
-        {
-            Off,  // No synchronization Part Ports from its typed Block
-            New,  // Add new Part Port if Block has a Port which isn't available in Part 
-            Mark, // Mark Part Port as to 'DeleteMe' if Part Port isn't available in Block
-            Delete // Delete Part Port if Part Port isn't available in Block
-        }
+        
         // File path of configuration file
         // %APPDATA%ho\hoTools\user.config
         public string ConfigFilePath { get; }
@@ -684,18 +678,18 @@ namespace hoTools.Settings
         #endregion
 
         #region Property: PartPortSynchronization
-        public PartPortSynchronization PartPortSyncho
+        public EaService.PartPortSynchronization PartPortSyncho
         {
             get
             {
-                PartPortSynchronization result;
+                EaService.PartPortSynchronization result;
                 if (Enum.TryParse(CurrentConfig.AppSettings.Settings["PartPortSynchronization"].Value, out result))
                 {
                     return result;
                 }
                 else
                 {
-                    return PartPortSynchronization.Off;
+                    return EaService.PartPortSynchronization.Off;
                 }
             }
             set

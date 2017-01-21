@@ -87,7 +87,7 @@ namespace hoTools.EAServicesPort
                 if (srcEl.Type == "Port")
                 {
                     // selected element was port
-                    CopyPort(srcEl, trgEl);
+                    CopyPort(_rep, srcEl, trgEl);
                     _count += 1;
                 }
                 else
@@ -97,7 +97,7 @@ namespace hoTools.EAServicesPort
                         if (srcEl.ElementID == trgEl.ElementID) continue;
                         if (p.Type == "Port")
                         {
-                            CopyPort(p, trgEl);
+                            CopyPort(_rep, p, trgEl);
                             _count += 1;
                         }
                     }
@@ -117,44 +117,35 @@ namespace hoTools.EAServicesPort
         /// </summary>
         /// <param name="srcPort"></param>
         /// <param name="trgEl"></param>
-        public static void CopyPort(Element srcPort, Element trgEl)
+        public static void CopyPort(EA.Repository rep, Element srcPort, Element trgEl)
         {
             bool isUpdated = false;
-            Element trgPort = null;
             if (srcPort.Type != "Port") return;
             // check if port already exits
             
-            foreach (Element p in trgEl.EmbeddedElements)
+            foreach (Element trgtPort in trgEl.EmbeddedElements)
             {
-                if (p.Name == srcPort.Name && p.Stereotype == srcPort.Stereotype)
+                // the target port already exists in source (Target Port PDATA3 contains ea_guid of source port the port is dependant from)
+                if (srcPort.ElementGUID == trgtPort.MiscData[3])
                 {
-                    if (p.Notes != srcPort.Notes || p.PropertyType != srcPort.PropertyType)
-                    {
-                        p.Locked = false;
-                        p.Notes = srcPort.Notes;
-                        p.PropertyType = srcPort.PropertyType;
-                        p.Update();
-                        p.Locked = true;
-                    }
-
-                    
-
-                    isUpdated = true;
+                   isUpdated = true;
                     
                     break;
                 }
             }
-
+            // Source port isn't available in target Part
             if (isUpdated == false)
             {
                 // Create new Port and set the properties according to source port
-                trgPort = (Element)trgEl.EmbeddedElements.AddNew(srcPort.Name, "Port");
+                var newPort = (Element)trgEl.EmbeddedElements.AddNew(srcPort.Name, "Port");
                 trgEl.EmbeddedElements.Refresh();
-                trgPort.Stereotype = srcPort.Stereotype;
-                trgPort.Notes = srcPort.Notes;
-                trgPort.PropertyType = srcPort.PropertyType;
-                trgPort.Update();
-                trgPort.Locked = true;
+                newPort.Stereotype = srcPort.Stereotype;
+                newPort.Notes = srcPort.Notes;
+                newPort.PropertyType = srcPort.PropertyType;
+                newPort.Update();
+                // Link Port to the source Port of property type
+                Util.SetElementPdata3(rep, newPort, srcPort.ElementGUID);
+                //newPort.Locked = true;
             }
 
         }
