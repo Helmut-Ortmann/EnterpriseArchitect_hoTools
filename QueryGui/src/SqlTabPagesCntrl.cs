@@ -46,7 +46,7 @@ namespace hoTools.Query
         public static readonly string MenuEditWithExternalEditorTooltip = "Edit hoTools Script file with external Editor";
 
         public static readonly string MenuShowScriptFolderText = "Show Script Folder";
-        public static readonly string MenuShowScriptFolderTooltip = "Show Script Folder";
+        public static readonly string MenuShowScriptFolderTooltip = "Show Script Folder of the current script";
 
 
 
@@ -263,6 +263,8 @@ CTRL+SHFT+S                     Store sql All
                 ToolTipText = MenuEditWithExternalEditorTooltip
             };
             editWithExternalEditorMenuItem.Click += editWithExternalEditorMenuItem_Click;
+
+
             // Show Script Folder
             ToolStripMenuItem showScriptFolderMenuItem = new ToolStripMenuItem
             {
@@ -358,6 +360,7 @@ Useful to quickly test:
                 _tabNewTabFromRecentFileMenuItem,      // new Tab from recent file
                 new ToolStripSeparator(),
                 editWithExternalEditorMenuItem,     // Edit with external Editor
+                showScriptFolderMenuItem,           // Show Folder of current Script
                 new ToolStripSeparator(),
                 insertTemplateMenuItem,             // insert template
                 insertMacroMenuItem,                // insert macro

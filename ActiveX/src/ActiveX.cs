@@ -201,6 +201,10 @@ namespace hoTools.ActiveX
         private ToolStripMenuItem runAndExportSQLToExcelToolStripMenuItem;
         private ToolStripMenuItem exportCsvOfClipboardToExcelToolStripMenuItem1;
         private ToolStripSeparator toolStripSeparator7;
+        private ToolStripMenuItem hoToolsToolStripMenuItem;
+        private ToolStripMenuItem settingsGeneralToolStripMenuItem;
+        private ToolStripSeparator toolStripSeparator8;
+        private ToolStripMenuItem toolStripMenuIHome;
         private TextBox _txtSearchText;
         #endregion
 
@@ -1259,6 +1263,10 @@ namespace hoTools.ActiveX
             this._panelQuickSearch = new System.Windows.Forms.TableLayoutPanel();
             this._toolTipRtfListOfSearches = new System.Windows.Forms.ToolTip(this.components);
             this._panelConveyedItems = new System.Windows.Forms.Panel();
+            this.hoToolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.settingsGeneralToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuIHome = new System.Windows.Forms.ToolStripMenuItem();
             this._toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this._toolStripContainer1.SuspendLayout();
             this._toolStripQuery.SuspendLayout();
@@ -1885,7 +1893,8 @@ namespace hoTools.ActiveX
             this._doToolStripMenuItem,
             this._versionControlToolStripMenuItem,
             this._portToolStripMenuItem,
-            this._helpToolStripMenuItem});
+            this._helpToolStripMenuItem,
+            this.toolStripMenuIHome});
             resources.ApplyResources(this._menuStrip1, "_menuStrip1");
             this._menuStrip1.Name = "_menuStrip1";
             // 
@@ -2248,9 +2257,12 @@ namespace hoTools.ActiveX
             this._helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this._getLastSqlErrorToolStripMenuItem,
             this.toolStripSeparator1,
+            this.hoToolsToolStripMenuItem,
+            this.settingsGeneralToolStripMenuItem,
+            this.toolStripSeparator2,
             this._helpToolStripMenuItem1,
             this.gitHubToolStripMenuItem,
-            this.toolStripSeparator2,
+            this.toolStripSeparator8,
             this._aboutToolStripMenuItem});
             this._helpToolStripMenuItem.Name = "_helpToolStripMenuItem";
             resources.ApplyResources(this._helpToolStripMenuItem, "_helpToolStripMenuItem");
@@ -2376,6 +2388,29 @@ namespace hoTools.ActiveX
             this._panelConveyedItems.Controls.Add(this._btnConveyedItem);
             resources.ApplyResources(this._panelConveyedItems, "_panelConveyedItems");
             this._panelConveyedItems.Name = "_panelConveyedItems";
+            // 
+            // hoToolsToolStripMenuItem
+            // 
+            this.hoToolsToolStripMenuItem.Name = "hoToolsToolStripMenuItem";
+            resources.ApplyResources(this.hoToolsToolStripMenuItem, "hoToolsToolStripMenuItem");
+            this.hoToolsToolStripMenuItem.Click += new System.EventHandler(this.hoToolsToolStripMenuItem_Click);
+            // 
+            // settingsGeneralToolStripMenuItem
+            // 
+            this.settingsGeneralToolStripMenuItem.Name = "settingsGeneralToolStripMenuItem";
+            resources.ApplyResources(this.settingsGeneralToolStripMenuItem, "settingsGeneralToolStripMenuItem");
+            this.settingsGeneralToolStripMenuItem.Click += new System.EventHandler(this.settingsGeneralToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator8
+            // 
+            this.toolStripSeparator8.Name = "toolStripSeparator8";
+            resources.ApplyResources(this.toolStripSeparator8, "toolStripSeparator8");
+            // 
+            // toolStripMenuIHome
+            // 
+            resources.ApplyResources(this.toolStripMenuIHome, "toolStripMenuIHome");
+            this.toolStripMenuIHome.Name = "toolStripMenuIHome";
+            this.toolStripMenuIHome.Click += new System.EventHandler(this.toolStripMenuIHome_Click);
             // 
             // AddinControlGui
             // 
@@ -3187,6 +3222,21 @@ namespace hoTools.ActiveX
                 $"The SQL path is:{Environment.NewLine}{sqlPath}{Environment.NewLine}{Environment.NewLine}"+
                        $"Change SQL path with 'File, Settings SQL and Script'",
                 "The SQL path to search for scripts");
+        }
+
+        private void toolStripMenuIHome_Click(object sender, EventArgs e)
+        {
+            EaService.Wiki();
+        }
+
+        private void hoToolsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EaService.WikiHoTools();
+        }
+
+        private void settingsGeneralToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EaService.WikiSettingsGeneral();
         }
     }
 
