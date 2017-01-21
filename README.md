@@ -113,6 +113,8 @@ Some features:
 
 # Releases
 
+## Release 2.1.3
+
 ## Release 2.1.2
 - Synchronization Part Ports with its Type, usually a Class/Block
 -- 'Show Ports' also synchronizes ports between block and its properties/parts (add/delete)
