@@ -128,6 +128,9 @@ Some features:
 - SQL Context Menu contains
 -- Edit current hoTools SQL Search with Editor
 -- Open folder of current hoTools SQL Search
+-  Fixed error in example Script hoDemoRunSQL (leads to error message during initialization)
+-- Delete Script 'hoDemoRunSQL' in EA ScriptWindow
+-- Comment last line by inserting a ' at start of line
 
 
 ## Release 2.1.1

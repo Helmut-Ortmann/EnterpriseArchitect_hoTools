@@ -695,7 +695,7 @@ namespace hoTools.ActiveX
         #region showPortsInDiagramObjects
         void showPortsInDiagramObjectsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            EaService.ShowEmbeddedElements(Repository, isOptimizePortLayout: false, portSynchronizationKind: AddinSettings.PartPortSyncho);
+            EaService.ShowEmbeddedElements(Repository, isOptimizePortLayoutLocation: false, portSynchronizationKind: AddinSettings.PartPortSyncho);
         }
         #endregion
         /// <summary>
@@ -752,7 +752,7 @@ namespace hoTools.ActiveX
         #region showReceivingPortsLeftSendingPortsRight
         void showReceivingPortsLeftSendingPortsRightToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            EaService.ShowEmbeddedElements(Repository, isOptimizePortLayout: false, portSynchronizationKind: AddinSettings.PartPortSyncho);
+            EaService.ShowEmbeddedElements(Repository, isOptimizePortLayoutLocation: false, portSynchronizationKind: AddinSettings.PartPortSyncho);
         }
         #endregion
 

@@ -214,7 +214,7 @@ namespace hoTools.Find
         #region helpToolStripMenuItem2_Click
         private void helpToolStripMenuItem2_Click(object sender, EventArgs e)
         {
-            Help.ShowHelp(this, EaService.GetAssemblyPath() + "\\" + "hoTools.chm");
+            EaService.WikiFindAndReplace();
         }
         #endregion
         #region OverwriteIsInputKey of quick search
@@ -266,6 +266,11 @@ namespace hoTools.Find
         private void FindAndReplaceGUI_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            EaService.Wiki();
         }
     }
 }

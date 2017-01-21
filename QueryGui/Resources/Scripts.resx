@@ -162,7 +162,7 @@ sub hoDemoRunSql
 end sub
 
 ' Run the function
-hoDemoRunSql</value>
+' hoDemoRunSql</value>
     <comment>Example Clipboard</comment>
   </data>
   <data name="hoDemo2ParScript" xml:space="preserve">
@@ -479,7 +479,7 @@ sub hoDemoRunSql
 end sub
 
 ' Run the function
-hoDemoRunSql</value>
+' hoDemoRunSql</value>
     <comment>Demo Script to run SQL Search from Script</comment>
   </data>
 </root>

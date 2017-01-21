@@ -49,7 +49,7 @@ namespace hoTools.Utils.SQL
             if (objectType != "") queryObjectType = @" o.object_type = '{1}'  AND ";
 
 
-            string query = @"SELECT o.object_id As [object_id]" +
+            string query = @"SELECT o.object_id As [OBJECT_ID]" +
                            @"from t_object o " +
                            @"where " +
                            queryObjectType +

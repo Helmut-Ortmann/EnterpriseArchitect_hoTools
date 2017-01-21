@@ -60,7 +60,7 @@ namespace hoTools.Utils.Configuration
         {
             string absFileName = GetSqlFileName(sqlFileName);
             if (absFileName != "") return File.ReadAllText(absFileName);
-            if ( (absFileName == "") && (sqlFileName == @"d:\temp\sql\Branch.sql")  ) return "";
+            if ( absFileName == ""  ) return "";
 
             if (withErrMessage)
             {

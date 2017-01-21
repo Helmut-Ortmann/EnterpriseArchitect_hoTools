@@ -5,7 +5,6 @@ using System.Windows.Forms;
 using System.Configuration;
 using System.Linq;
 using hoTools.EaServices;
-using AddinFramework.Util;
 using hoTools.Connectors;
 using System.Collections.Generic;
 using Control.EaAddinShortcuts;
@@ -165,17 +164,18 @@ namespace hoTools.Settings
         #endregion
 
         /// <summary>
-        /// Update settings with model specific features like: Scripts
+        /// Update settings with model specific features: Scripts, Services
         /// </summary>
         /// <param name="model"></param>
         public void UpdateModel(Model model)
         {
             _model = model;
 
-            // get all services of type Call and Script which are available 
-            GetAllServices();
+            
             // update Services of type Call and Script
             UpdateKeysAndToolbarsServices();
+            // get all services of type Call and Script which are available 
+            GetAllServicesAndScripts();
 
 
         }
@@ -1252,12 +1252,13 @@ namespace hoTools.Settings
 
         }
         #endregion
-        #region getAllServices
+        #region getAllServicesAndScripts
         /// <summary>
         /// Fill the list AllServices with all possible Services and Scripts.
         /// </summary>
-        private void GetAllServices()
+        private void GetAllServicesAndScripts()
         {
+            // Get all Services
             AllServices.Clear();
             Type type = typeof(EaService);
             AllServices.Add(new ServiceCall());

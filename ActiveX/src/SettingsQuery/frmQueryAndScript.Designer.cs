@@ -52,8 +52,15 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.label12 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.settingsSQLScriptToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sQLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.scriptToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnOk
@@ -82,7 +89,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(75, 13);
+            this.label1.Location = new System.Drawing.Point(123, 46);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(268, 29);
             this.label1.TabIndex = 2;
@@ -164,7 +171,7 @@
             // 
             this.chkIsAskForUpdate.AutoSize = true;
             this.chkIsAskForUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkIsAskForUpdate.Location = new System.Drawing.Point(377, 174);
+            this.chkIsAskForUpdate.Location = new System.Drawing.Point(376, 225);
             this.chkIsAskForUpdate.Name = "chkIsAskForUpdate";
             this.chkIsAskForUpdate.Size = new System.Drawing.Size(15, 14);
             this.chkIsAskForUpdate.TabIndex = 212;
@@ -175,7 +182,7 @@
             // txtSqlEditor
             // 
             this.txtSqlEditor.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSqlEditor.Location = new System.Drawing.Point(29, 191);
+            this.txtSqlEditor.Location = new System.Drawing.Point(28, 242);
             this.txtSqlEditor.Name = "txtSqlEditor";
             this.txtSqlEditor.Size = new System.Drawing.Size(270, 24);
             this.txtSqlEditor.TabIndex = 214;
@@ -185,7 +192,7 @@
             // btnSqlEditor
             // 
             this.btnSqlEditor.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSqlEditor.Location = new System.Drawing.Point(377, 192);
+            this.btnSqlEditor.Location = new System.Drawing.Point(376, 243);
             this.btnSqlEditor.Name = "btnSqlEditor";
             this.btnSqlEditor.Size = new System.Drawing.Size(183, 23);
             this.btnSqlEditor.TabIndex = 215;
@@ -201,7 +208,7 @@
             this.groupBox1.Controls.Add(this.rbOnlyQueryTabWindow);
             this.groupBox1.Controls.Add(this.rbOnlyQueryAddinWindow);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(26, 63);
+            this.groupBox1.Location = new System.Drawing.Point(25, 114);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(334, 43);
             this.groupBox1.TabIndex = 210;
@@ -215,7 +222,7 @@
             this.groupBox2.Controls.Add(this.rbScriptAndQueryTabWindow);
             this.groupBox2.Controls.Add(this.rbScriptAndQueryAddinWindow);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(26, 121);
+            this.groupBox2.Location = new System.Drawing.Point(25, 172);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(334, 43);
             this.groupBox2.TabIndex = 211;
@@ -227,7 +234,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(30, 170);
+            this.label2.Location = new System.Drawing.Point(29, 221);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(313, 18);
             this.label2.TabIndex = 213;
@@ -237,7 +244,7 @@
             // txtSqlSearchPath
             // 
             this.txtSqlSearchPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSqlSearchPath.Location = new System.Drawing.Point(29, 241);
+            this.txtSqlSearchPath.Location = new System.Drawing.Point(28, 292);
             this.txtSqlSearchPath.Name = "txtSqlSearchPath";
             this.txtSqlSearchPath.Size = new System.Drawing.Size(536, 24);
             this.txtSqlSearchPath.TabIndex = 216;
@@ -249,7 +256,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(29, 222);
+            this.label3.Location = new System.Drawing.Point(28, 273);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(264, 18);
             this.label3.TabIndex = 217;
@@ -260,7 +267,7 @@
             // 
             // txtAddinTabToFirstActivate
             // 
-            this.txtAddinTabToFirstActivate.Location = new System.Drawing.Point(237, 288);
+            this.txtAddinTabToFirstActivate.Location = new System.Drawing.Point(236, 339);
             this.txtAddinTabToFirstActivate.Name = "txtAddinTabToFirstActivate";
             this.txtAddinTabToFirstActivate.Size = new System.Drawing.Size(260, 20);
             this.txtAddinTabToFirstActivate.TabIndex = 248;
@@ -276,7 +283,7 @@
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(503, 288);
+            this.label12.Location = new System.Drawing.Point(502, 339);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(173, 18);
             this.label12.TabIndex = 249;
@@ -286,11 +293,62 @@
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(26, 290);
+            this.label11.Location = new System.Drawing.Point(25, 341);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(205, 18);
             this.label11.TabIndex = 247;
             this.label11.Text = "Addin Tab Name to select first";
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.helpToolStripMenuItem,
+            this.toolStripMenuItem1});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(716, 25);
+            this.menuStrip1.TabIndex = 250;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.settingsSQLScriptToolStripMenuItem,
+            this.sQLToolStripMenuItem,
+            this.scriptToolStripMenuItem});
+            this.helpToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(47, 21);
+            this.helpToolStripMenuItem.Text = "Help";
+            // 
+            // settingsSQLScriptToolStripMenuItem
+            // 
+            this.settingsSQLScriptToolStripMenuItem.Name = "settingsSQLScriptToolStripMenuItem";
+            this.settingsSQLScriptToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            this.settingsSQLScriptToolStripMenuItem.Text = "Settings SQL + Script";
+            this.settingsSQLScriptToolStripMenuItem.Click += new System.EventHandler(this.settingsSQLScriptToolStripMenuItem_Click);
+            // 
+            // sQLToolStripMenuItem
+            // 
+            this.sQLToolStripMenuItem.Name = "sQLToolStripMenuItem";
+            this.sQLToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            this.sQLToolStripMenuItem.Text = "SQL";
+            this.sQLToolStripMenuItem.Click += new System.EventHandler(this.sQLToolStripMenuItem_Click);
+            // 
+            // scriptToolStripMenuItem
+            // 
+            this.scriptToolStripMenuItem.Name = "scriptToolStripMenuItem";
+            this.scriptToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            this.scriptToolStripMenuItem.Text = "Script";
+            this.scriptToolStripMenuItem.Click += new System.EventHandler(this.scriptToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(26, 21);
+            this.toolStripMenuItem1.Text = "?";
+            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
             // FrmQueryAndScript
             // 
@@ -312,12 +370,16 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOk);
+            this.Controls.Add(this.menuStrip1);
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "FrmQueryAndScript";
             this.Text = "hoTools: Settings SQL and Script";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -347,5 +409,11 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox txtAddinTabToFirstActivate;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem settingsSQLScriptToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem sQLToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem scriptToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
     }
 }

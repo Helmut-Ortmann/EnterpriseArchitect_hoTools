@@ -720,19 +720,20 @@ namespace hoTools.EaServices
         /// - If Port or Object with a Block/Classs then update the Ports
         /// </summary>
         /// <param name="rep"></param>
-        /// <param name="isOptimizePortLayout"></param>
+        /// <param name="isOptimizePortLayoutLocation"></param>
         /// <param name="portSynchronizationKind"></param>
         [ServiceOperation("{678AD901-1D2F-4FB0-BAAD-AEB775EE18AC}", "Show all Ports, Pins, Parameter",
             "Selected Diagram Objects or all", isTextRequired: false)]
         public static void ShowEmbeddedElements(
             Repository rep,
-            bool isOptimizePortLayout = false,
+            bool isOptimizePortLayoutLocation = false,
             PartPortSynchronization portSynchronizationKind = PartPortSynchronization.Delete)
         {
-            Cursor.Current = Cursors.WaitCursor;
-            // remember Diagram data of current selected diagram
             var eaDia = new EaDiagram(rep);
             if (eaDia.Dia == null) return;
+            Cursor.Current = Cursors.WaitCursor;
+            // remember Diagram data of current selected diagram
+            
             // Save to avoid indifferent states
             rep.SaveDiagram(eaDia.Dia.DiagramID);
 
@@ -746,19 +747,25 @@ namespace hoTools.EaServices
             {
                 count = count + 1;
                 var elSource = eaDia.SelElements[count];
+                // Are Ports to be synchronized (Type = Part and synchronizing configured)
                 if (elSource.Type == "Part" && (portSynchronizationKind != PartPortSynchronization.Off) )
                     UpdatePortsForPart(rep, elSource, portSynchronizationKind);
 
 
-
-                string[] embeddedTypes = {"left", "right"};
-                foreach (string portBoundTo in embeddedTypes)
+                // arrange sequence of ports
+                string[] embededElementLocation = { "right" };
+                if (isOptimizePortLayoutLocation == true)
+                
                 {
-                    // arrange sequence of ports
-                    if (isOptimizePortLayout == false && portBoundTo == "left") continue;
+                    embededElementLocation = new string[] { "left", "right" };
+                }
+                // Over all possible locations of embedded elements 
+                foreach (string portBoundTo in embededElementLocation)
+                {
+                    
                     int pos = 0;
                     List<int> lEmbeddedElements;
-                    if (isOptimizePortLayout == false)
+                    if (isOptimizePortLayoutLocation == false)
                     {
                         lEmbeddedElements = sqlUtil.GetAndSortEmbeddedElements(elSource, "", "", "");
                     }
@@ -782,7 +789,7 @@ namespace hoTools.EaServices
                             // only ports / parameters (port has no further embedded elements
                             if (portEmbedded.Type == "ActivityParameter" | portEmbedded.EmbeddedElements.Count == 0)
                             {
-                                if (isOptimizePortLayout)
+                                if (isOptimizePortLayoutLocation)
                                 {
                                     if (portBoundTo == "left")
                                     {
@@ -837,7 +844,7 @@ namespace hoTools.EaServices
         }
 
         /// <summary>
-        /// Update Ports for a Part if a PropertyType is defined.
+        /// Update Ports for a Part if a PropertyType (defining Block/Class the part depends on) is defined.
         /// If a port is dependant on another port PDATA3 (MiscData(2)) contains ea_guid of the master port.
         /// </summary>
         /// <param name="rep"></param>
@@ -849,6 +856,8 @@ namespace hoTools.EaServices
             // no Property defined (Block that type this part)
             if (elTarget.PropertyType == 0) return true;
 
+
+            // Copy ports from the typing block/class to the dependant class/block
             EA.Element elSource = rep.GetElementByID(elTarget.PropertyType);
             foreach (EA.Element portSource in elSource.EmbeddedElements)
             {
@@ -862,7 +871,7 @@ namespace hoTools.EaServices
             if (synchronizationKind == PartPortSynchronization.Delete ||
                 synchronizationKind == PartPortSynchronization.Mark)
             {
-                // delete all ports that are not part of the PropertyType
+                // delete all ports that are not part of the PropertyType (the defining type (Class/Block)
                 bool foundAtLeastOneToDelete = false;
                 for (int i = elTarget.EmbeddedElements.Count - 1; i >= 0; i -= 1)
                 {
@@ -872,25 +881,33 @@ namespace hoTools.EaServices
                         bool found = false;
                         foreach (EA.Element portSource in elSource.EmbeddedElements)
                         {
-                            if (portSource.Name != portTarget.Name || portSource.Stereotype != portTarget.Stereotype)
+                            // Port has to be connected to source Port (GUID source = PDATA3)
+                            if ( portSource.ElementGUID != portTarget.MiscData[2]  )
                                 continue;
                             // port found in target and in source
                             found = true;
                             break;
                         }
-                        // port not found in source, delete it or rename it
+                        // port not found in source, Perform action according to settings:
+                        // - Delete
+                        // - Rename it (_DeleteMe)
+                        // - Do nothing
                         if (!found)
                         {
+                            // Delete Port
                             if (synchronizationKind == PartPortSynchronization.Delete)
                             {
                                 portTarget.Locked = false;
                                 elTarget.EmbeddedElements.Delete((short) i);
                                 foundAtLeastOneToDelete = true;
                             }
+                            // Mark Port as to delete
                             if (synchronizationKind == PartPortSynchronization.Mark)
                             {
                                 portTarget.Locked = false;
-                                portTarget.Name = portTarget.Name + "_DeleteMe";
+                                string suffixDeleteMe = "_DeleteMe";
+                                if (! portTarget.Name.Contains(suffixDeleteMe))
+                                    portTarget.Name = portTarget.Name + suffixDeleteMe;
                                 portTarget.Update();
                                 portTarget.Locked = true;
                             }
@@ -899,6 +916,7 @@ namespace hoTools.EaServices
 
                     }
                 }
+                // Update Embedded Elements list if one Port was updated
                 if (foundAtLeastOneToDelete) elTarget.EmbeddedElements.Refresh();
             }
 
@@ -5352,19 +5370,55 @@ Workshops, Training Coaching, Project Work
 
         #endregion
 
+        public static void WikiSql()
+        {
+            Process.Start("https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/SQL");
+        }
+
         public static void Wiki()
         {
             Process.Start("https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki");
         }
-
-        public static void WikiSql()
+        public static void WikiSettingsGeneral()
         {
-            Process.Start("https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/Sql");
+            Process.Start("https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/SettingsGeneral");
         }
+        public static void WikiSettingsLinestyle()
+        {
+            Process.Start("https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/Settings_Default_Linestyle");
+        }
+        
+        public static void WikiSettingsGlobalKeys()
+        {
+            Process.Start("https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/Settings-Global-Keys");
+        }
+        public static void WikiSettingsToolbar()
+        {
+            Process.Start("https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/SettingsForToolbarsAndServices");
+        }
+        public static void WikiSettingsSql()
+        {
+            Process.Start("https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/SettingsSqlAndScript");
+        }
+        public static void WikiHoTools()
+        {
+            Process.Start("https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/hoTools");
+        }
+        public static void WikiInstallation()
+        {
+            Process.Start("https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/Installation");
+        }
+
+
 
         public static void WikiScript()
         {
-            Process.Start("https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/Script");
+            Process.Start("https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/Scripts");
+        }
+
+        public static void WikiFindAndReplace()
+        {
+            Process.Start("https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/FindAndReplace");
         }
 
         public static void Repo()

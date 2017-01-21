@@ -486,6 +486,7 @@ namespace hoTools
                 //    ) logInUserRights = UserRights.ADMIN;
             }
             Favorite.InstallSearches(repository); // install searches
+            // get all services of type Call and Script which are available 
             return "a string";
         }
         #endregion

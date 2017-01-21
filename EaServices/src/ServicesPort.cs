@@ -126,7 +126,7 @@ namespace hoTools.EAServicesPort
             foreach (Element trgtPort in trgEl.EmbeddedElements)
             {
                 // the target port already exists in source (Target Port PDATA3 contains ea_guid of source port the port is dependant from)
-                if (srcPort.ElementGUID == trgtPort.MiscData[3])
+                if (srcPort.ElementGUID == trgtPort.MiscData[2])
                 {
                    isUpdated = true;
                     
@@ -137,7 +137,7 @@ namespace hoTools.EAServicesPort
             if (isUpdated == false)
             {
                 // Create new Port and set the properties according to source port
-                var newPort = (Element)trgEl.EmbeddedElements.AddNew(srcPort.Name, "Port");
+                var newPort = (Element) trgEl.EmbeddedElements.AddNew(srcPort.Name, "Port");
                 trgEl.EmbeddedElements.Refresh();
                 newPort.Stereotype = srcPort.Stereotype;
                 newPort.Notes = srcPort.Notes;
@@ -147,7 +147,7 @@ namespace hoTools.EAServicesPort
                 Util.SetElementPdata3(rep, newPort, srcPort.ElementGUID);
                 //newPort.Locked = true;
             }
-
+            
         }
         #endregion
 

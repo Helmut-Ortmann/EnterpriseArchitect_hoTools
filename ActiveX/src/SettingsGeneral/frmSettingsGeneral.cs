@@ -200,5 +200,20 @@ namespace hoTools.Settings
         {
 
         }
+
+        private void toolStripMenuWiki_Click(object sender, System.EventArgs e)
+        {
+            EaService.Wiki();
+        }
+
+        private void generalSettingsToolStripMenuItem_Click(object sender, System.EventArgs e)
+        {
+            EaService.WikiSettingsGeneral();
+        }
+
+        private void hoToolsToolStripMenuItem_Click(object sender, System.EventArgs e)
+        {
+            EaService.WikiHoTools();
+        }
     }
 }
