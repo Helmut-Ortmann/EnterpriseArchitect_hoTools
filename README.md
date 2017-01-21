@@ -114,9 +114,9 @@ Some features:
 # Releases
 
 ## Release 2.1.2
-- SysML: Synchronization Property / Part with its Type, usually a block
+- Synchronization Part Ports with its Type, usually a Class/Block
 -- 'Show Ports' also synchronizes ports between block and its properties/parts (add/delete)
--- Synchronized are the folowing information
+-- Synchronized are the following information
 --- Name
 --- Stereotype
 --- Notes
