@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using hoTools.Settings;
 using hoTools.EaServices;
+using hoTools.EaServices.WiKiRefs;
 using hoTools.ActiveX;
 
 
@@ -214,7 +215,7 @@ namespace hoTools.Find
         #region helpToolStripMenuItem2_Click
         private void helpToolStripMenuItem2_Click(object sender, EventArgs e)
         {
-            EaService.WikiFindAndReplace();
+            WikiRef.WikiFindAndReplace();
         }
         #endregion
         #region OverwriteIsInputKey of quick search
@@ -270,7 +271,7 @@ namespace hoTools.Find
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            EaService.Wiki();
+            WikiRef.Wiki();
         }
     }
 }

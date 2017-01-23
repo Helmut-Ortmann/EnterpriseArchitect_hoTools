@@ -5,6 +5,7 @@ using EAAddinFramework.Utils;
 using hoTools.ActiveX;
 using hoTools.EaServices;
 using GlobalHotkeys;
+using hoTools.EaServices.WiKiRefs;
 
 
 // ReSharper disable once CheckNamespace
@@ -558,6 +559,32 @@ namespace hoTools.Settings.Key
                 cmbGlobalKey4Tooltip.Text = tooltip;
             if (sender == cmbGlobalKey5Service)
                 cmbGlobalKey5Tooltip.Text = tooltip;
+        }
+
+        private void settingsSQLScriptToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            WikiRef.WikiSettingsSql();
+        }
+
+        private void sQLToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            WikiRef.WikiSql();
+        }
+
+        private void scriptToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            WikiRef.WikiScript();
+        }
+
+        private void findReplaceToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            WikiRef.WikiFindAndReplace();
+
+        }
+
+        private void settingsGlobalKeysStripMenu_Click(object sender, EventArgs e)
+        {
+            WikiRef.WikiSettingsGlobalKeys();
         }
     }
 }

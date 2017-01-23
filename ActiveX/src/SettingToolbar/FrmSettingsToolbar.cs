@@ -6,6 +6,7 @@ using EAAddinFramework.Utils;
 using hoTools.ActiveX;
 using hoTools.EaServices;
 using hoTools.Utils.Forms;
+using hoTools.EaServices.WiKiRefs;
 
 // ReSharper disable once CheckNamespace
 namespace hoTools.Settings.Toolbar
@@ -380,6 +381,36 @@ namespace hoTools.Settings.Toolbar
             if (sender == cmbService5) txtServiceTooltip5.Text = tooltip;
 
 
+        }
+
+        private void toolbarToolStripMenuSettings_Click(object sender, EventArgs e)
+        {
+            WikiRef.WikiSettingsToolbar();
+        }
+
+        private void wiKiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            WikiRef.Wiki();
+        }
+
+        private void hoToolsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            WikiRef.WikiHoTools();
+        }
+
+        private void sQLToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            WikiRef.WikiSql();
+        }
+
+        private void scriptToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            WikiRef.WikiScript();
+        }
+
+        private void findReplaceToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            WikiRef.WikiFindAndReplace();
         }
     }
 }

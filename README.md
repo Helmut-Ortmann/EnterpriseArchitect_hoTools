@@ -114,6 +114,7 @@ Some features:
 # Releases
 
 ## Release 2.1.3
+- Link to help improved
 
 ## Release 2.1.2
 - Synchronization Part Ports with its Type, usually a Class/Block

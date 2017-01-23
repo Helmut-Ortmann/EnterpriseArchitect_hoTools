@@ -306,7 +306,7 @@
             this.toolStripMenuItem1});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(716, 25);
+            this.menuStrip1.Size = new System.Drawing.Size(716, 28);
             this.menuStrip1.TabIndex = 250;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -316,37 +316,37 @@
             this.settingsSQLScriptToolStripMenuItem,
             this.sQLToolStripMenuItem,
             this.scriptToolStripMenuItem});
-            this.helpToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.helpToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(47, 21);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
             this.helpToolStripMenuItem.Text = "Help";
             // 
             // settingsSQLScriptToolStripMenuItem
             // 
             this.settingsSQLScriptToolStripMenuItem.Name = "settingsSQLScriptToolStripMenuItem";
-            this.settingsSQLScriptToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            this.settingsSQLScriptToolStripMenuItem.Size = new System.Drawing.Size(217, 24);
             this.settingsSQLScriptToolStripMenuItem.Text = "Settings SQL + Script";
             this.settingsSQLScriptToolStripMenuItem.Click += new System.EventHandler(this.settingsSQLScriptToolStripMenuItem_Click);
             // 
             // sQLToolStripMenuItem
             // 
             this.sQLToolStripMenuItem.Name = "sQLToolStripMenuItem";
-            this.sQLToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            this.sQLToolStripMenuItem.Size = new System.Drawing.Size(217, 24);
             this.sQLToolStripMenuItem.Text = "SQL";
             this.sQLToolStripMenuItem.Click += new System.EventHandler(this.sQLToolStripMenuItem_Click);
             // 
             // scriptToolStripMenuItem
             // 
             this.scriptToolStripMenuItem.Name = "scriptToolStripMenuItem";
-            this.scriptToolStripMenuItem.Size = new System.Drawing.Size(199, 22);
+            this.scriptToolStripMenuItem.Size = new System.Drawing.Size(217, 24);
             this.scriptToolStripMenuItem.Text = "Script";
             this.scriptToolStripMenuItem.Click += new System.EventHandler(this.scriptToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
-            this.toolStripMenuItem1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripMenuItem1.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(26, 21);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(28, 24);
             this.toolStripMenuItem1.Text = "?";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 

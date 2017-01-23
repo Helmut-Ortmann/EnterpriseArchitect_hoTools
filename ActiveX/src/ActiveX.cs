@@ -8,6 +8,7 @@ using System.Text.RegularExpressions;
 using AddinFramework.Util;
 using hoTools.Settings;
 using hoTools.EaServices;
+using hoTools.EaServices.WiKiRefs;
 using hoTools.EAServicesPort;
 using Control.EaAddinShortcuts;
 using hoTools.Settings.Key;
@@ -493,7 +494,7 @@ namespace hoTools.ActiveX
         void helpToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             // Open GitHub Wiki
-            EaService.Wiki();
+            WikiRef.Wiki();
         }
         /// <summary>
         /// Open GitHub Repository
@@ -503,7 +504,7 @@ namespace hoTools.ActiveX
         void githubToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             // Open GitHub Repository
-            EaService.Repo();
+            WikiRef.Repo();
         }
         
 
@@ -3226,17 +3227,17 @@ namespace hoTools.ActiveX
 
         private void toolStripMenuIHome_Click(object sender, EventArgs e)
         {
-            EaService.Wiki();
+            WikiRef.Wiki();
         }
 
         private void hoToolsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            EaService.WikiHoTools();
+            WikiRef.WikiHoTools();
         }
 
         private void settingsGeneralToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            EaService.WikiSettingsGeneral();
+            WikiRef.WikiSettingsGeneral();
         }
     }
 

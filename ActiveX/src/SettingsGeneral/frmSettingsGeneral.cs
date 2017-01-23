@@ -1,6 +1,7 @@
 ﻿using System.Windows.Forms;
 using hoTools.ActiveX;
 using hoTools.EaServices;
+using hoTools.EaServices.WiKiRefs;
 
 
 // ReSharper disable once CheckNamespace
@@ -203,17 +204,17 @@ namespace hoTools.Settings
 
         private void toolStripMenuWiki_Click(object sender, System.EventArgs e)
         {
-            EaService.Wiki();
+            WikiRef.Wiki();
         }
 
         private void generalSettingsToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
-            EaService.WikiSettingsGeneral();
+            WikiRef.WikiSettingsGeneral();
         }
 
         private void hoToolsToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
-            EaService.WikiHoTools();
+            WikiRef.WikiHoTools();
         }
     }
 }

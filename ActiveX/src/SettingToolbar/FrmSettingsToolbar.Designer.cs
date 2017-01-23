@@ -96,14 +96,23 @@
             this.txtBtn5Text = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolbarToolStripMenuSettings = new System.Windows.Forms.ToolStripMenuItem();
+            this.wiKiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.hoToolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sQLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.scriptToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.findReplaceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnOK
             // 
             this.btnOK.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnOK.Location = new System.Drawing.Point(10, 576);
+            this.btnOK.Location = new System.Drawing.Point(11, 624);
             this.btnOK.Margin = new System.Windows.Forms.Padding(2);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(72, 27);
@@ -116,7 +125,7 @@
             // btnCancel
             // 
             this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancel.Location = new System.Drawing.Point(95, 576);
+            this.btnCancel.Location = new System.Drawing.Point(96, 624);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(2);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 27);
@@ -150,7 +159,7 @@
             // txtButton4TextService
             // 
             this.txtButton4TextService.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtButton4TextService.Location = new System.Drawing.Point(91, 176);
+            this.txtButton4TextService.Location = new System.Drawing.Point(92, 224);
             this.txtButton4TextService.Margin = new System.Windows.Forms.Padding(2);
             this.txtButton4TextService.Name = "txtButton4TextService";
             this.txtButton4TextService.Size = new System.Drawing.Size(79, 24);
@@ -160,7 +169,7 @@
             // txtButton3TextService
             // 
             this.txtButton3TextService.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtButton3TextService.Location = new System.Drawing.Point(91, 152);
+            this.txtButton3TextService.Location = new System.Drawing.Point(92, 200);
             this.txtButton3TextService.Margin = new System.Windows.Forms.Padding(2);
             this.txtButton3TextService.Name = "txtButton3TextService";
             this.txtButton3TextService.Size = new System.Drawing.Size(79, 24);
@@ -170,7 +179,7 @@
             // txtButton2TextService
             // 
             this.txtButton2TextService.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtButton2TextService.Location = new System.Drawing.Point(91, 125);
+            this.txtButton2TextService.Location = new System.Drawing.Point(92, 173);
             this.txtButton2TextService.Margin = new System.Windows.Forms.Padding(2);
             this.txtButton2TextService.Name = "txtButton2TextService";
             this.txtButton2TextService.Size = new System.Drawing.Size(80, 24);
@@ -265,7 +274,7 @@
             this.groupBox2.Controls.Add(this.txtBtn3SearchTerm);
             this.groupBox2.Controls.Add(this.txtBtn4SearchTerm);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(11, 315);
+            this.groupBox2.Location = new System.Drawing.Point(12, 363);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(1126, 241);
             this.groupBox2.TabIndex = 59;
@@ -459,7 +468,7 @@
             this.groupBox3.Controls.Add(this.cmbService5);
             this.groupBox3.Controls.Add(this.txtButton5TextService);
             this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox3.Location = new System.Drawing.Point(12, 54);
+            this.groupBox3.Location = new System.Drawing.Point(13, 102);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(1125, 225);
             this.groupBox3.TabIndex = 60;
@@ -630,7 +639,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(12, 495);
+            this.label3.Location = new System.Drawing.Point(13, 543);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(284, 20);
             this.label3.TabIndex = 237;
@@ -642,7 +651,7 @@
             // txtSqlSearchPath
             // 
             this.txtSqlSearchPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSqlSearchPath.Location = new System.Drawing.Point(302, 495);
+            this.txtSqlSearchPath.Location = new System.Drawing.Point(303, 543);
             this.txtSqlSearchPath.Name = "txtSqlSearchPath";
             this.txtSqlSearchPath.Size = new System.Drawing.Size(826, 24);
             this.txtSqlSearchPath.TabIndex = 236;
@@ -653,7 +662,7 @@
             // chkShowQueryButtons
             // 
             this.chkShowQueryButtons.AutoSize = true;
-            this.chkShowQueryButtons.Location = new System.Drawing.Point(183, 529);
+            this.chkShowQueryButtons.Location = new System.Drawing.Point(184, 577);
             this.chkShowQueryButtons.Margin = new System.Windows.Forms.Padding(2);
             this.chkShowQueryButtons.Name = "chkShowQueryButtons";
             this.chkShowQueryButtons.Size = new System.Drawing.Size(15, 14);
@@ -665,7 +674,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(13, 525);
+            this.label6.Location = new System.Drawing.Point(14, 573);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(164, 20);
@@ -676,7 +685,7 @@
             // txtBtn1SearchName
             // 
             this.txtBtn1SearchName.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBtn1SearchName.Location = new System.Drawing.Point(183, 353);
+            this.txtBtn1SearchName.Location = new System.Drawing.Point(184, 401);
             this.txtBtn1SearchName.Name = "txtBtn1SearchName";
             this.txtBtn1SearchName.Size = new System.Drawing.Size(278, 24);
             this.txtBtn1SearchName.TabIndex = 15;
@@ -686,7 +695,7 @@
             // txtBtn2SearchName
             // 
             this.txtBtn2SearchName.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBtn2SearchName.Location = new System.Drawing.Point(183, 378);
+            this.txtBtn2SearchName.Location = new System.Drawing.Point(184, 426);
             this.txtBtn2SearchName.Name = "txtBtn2SearchName";
             this.txtBtn2SearchName.Size = new System.Drawing.Size(278, 24);
             this.txtBtn2SearchName.TabIndex = 19;
@@ -696,7 +705,7 @@
             // txtBtn3SearchName
             // 
             this.txtBtn3SearchName.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBtn3SearchName.Location = new System.Drawing.Point(183, 404);
+            this.txtBtn3SearchName.Location = new System.Drawing.Point(184, 452);
             this.txtBtn3SearchName.Name = "txtBtn3SearchName";
             this.txtBtn3SearchName.Size = new System.Drawing.Size(278, 24);
             this.txtBtn3SearchName.TabIndex = 23;
@@ -706,7 +715,7 @@
             // txtBtn4SearchName
             // 
             this.txtBtn4SearchName.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBtn4SearchName.Location = new System.Drawing.Point(183, 430);
+            this.txtBtn4SearchName.Location = new System.Drawing.Point(184, 478);
             this.txtBtn4SearchName.Name = "txtBtn4SearchName";
             this.txtBtn4SearchName.Size = new System.Drawing.Size(278, 24);
             this.txtBtn4SearchName.TabIndex = 27;
@@ -716,7 +725,7 @@
             // txtBtn5SearchName
             // 
             this.txtBtn5SearchName.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBtn5SearchName.Location = new System.Drawing.Point(183, 456);
+            this.txtBtn5SearchName.Location = new System.Drawing.Point(184, 504);
             this.txtBtn5SearchName.Name = "txtBtn5SearchName";
             this.txtBtn5SearchName.Size = new System.Drawing.Size(278, 24);
             this.txtBtn5SearchName.TabIndex = 31;
@@ -726,7 +735,7 @@
             // txtBtn1Text
             // 
             this.txtBtn1Text.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBtn1Text.Location = new System.Drawing.Point(94, 353);
+            this.txtBtn1Text.Location = new System.Drawing.Point(95, 401);
             this.txtBtn1Text.Name = "txtBtn1Text";
             this.txtBtn1Text.Size = new System.Drawing.Size(73, 24);
             this.txtBtn1Text.TabIndex = 14;
@@ -734,7 +743,7 @@
             // txtBtn2Text
             // 
             this.txtBtn2Text.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBtn2Text.Location = new System.Drawing.Point(94, 378);
+            this.txtBtn2Text.Location = new System.Drawing.Point(95, 426);
             this.txtBtn2Text.Name = "txtBtn2Text";
             this.txtBtn2Text.Size = new System.Drawing.Size(73, 24);
             this.txtBtn2Text.TabIndex = 18;
@@ -742,7 +751,7 @@
             // txtBtn3Text
             // 
             this.txtBtn3Text.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBtn3Text.Location = new System.Drawing.Point(94, 404);
+            this.txtBtn3Text.Location = new System.Drawing.Point(95, 452);
             this.txtBtn3Text.Name = "txtBtn3Text";
             this.txtBtn3Text.Size = new System.Drawing.Size(73, 24);
             this.txtBtn3Text.TabIndex = 22;
@@ -750,7 +759,7 @@
             // txtBtn4Text
             // 
             this.txtBtn4Text.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBtn4Text.Location = new System.Drawing.Point(94, 430);
+            this.txtBtn4Text.Location = new System.Drawing.Point(95, 478);
             this.txtBtn4Text.Name = "txtBtn4Text";
             this.txtBtn4Text.Size = new System.Drawing.Size(73, 24);
             this.txtBtn4Text.TabIndex = 26;
@@ -758,7 +767,7 @@
             // txtBtn5Text
             // 
             this.txtBtn5Text.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtBtn5Text.Location = new System.Drawing.Point(94, 456);
+            this.txtBtn5Text.Location = new System.Drawing.Point(95, 504);
             this.txtBtn5Text.Name = "txtBtn5Text";
             this.txtBtn5Text.Size = new System.Drawing.Size(73, 24);
             this.txtBtn5Text.TabIndex = 30;
@@ -767,7 +776,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(297, 9);
+            this.label1.Location = new System.Drawing.Point(371, 81);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(197, 29);
             this.label1.TabIndex = 196;
@@ -777,18 +786,85 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(216, 525);
+            this.label9.Location = new System.Drawing.Point(217, 573);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(84, 20);
             this.label9.TabIndex = 247;
             this.label9.Text = "on Toolbar";
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.helpToolStripMenuItem,
+            this.toolbarToolStripMenuSettings});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(1149, 28);
+            this.menuStrip1.TabIndex = 248;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.wiKiToolStripMenuItem,
+            this.hoToolsToolStripMenuItem,
+            this.sQLToolStripMenuItem,
+            this.scriptToolStripMenuItem,
+            this.findReplaceToolStripMenuItem});
+            this.helpToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
+            this.helpToolStripMenuItem.Text = "Help";
+            // 
+            // toolbarToolStripMenuSettings
+            // 
+            this.toolbarToolStripMenuSettings.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolbarToolStripMenuSettings.Name = "toolbarToolStripMenuSettings";
+            this.toolbarToolStripMenuSettings.Size = new System.Drawing.Size(28, 24);
+            this.toolbarToolStripMenuSettings.Text = "?";
+            this.toolbarToolStripMenuSettings.Click += new System.EventHandler(this.toolbarToolStripMenuSettings_Click);
+            // 
+            // wiKiToolStripMenuItem
+            // 
+            this.wiKiToolStripMenuItem.Name = "wiKiToolStripMenuItem";
+            this.wiKiToolStripMenuItem.Size = new System.Drawing.Size(177, 24);
+            this.wiKiToolStripMenuItem.Text = "WiKi";
+            this.wiKiToolStripMenuItem.Click += new System.EventHandler(this.wiKiToolStripMenuItem_Click);
+            // 
+            // hoToolsToolStripMenuItem
+            // 
+            this.hoToolsToolStripMenuItem.Name = "hoToolsToolStripMenuItem";
+            this.hoToolsToolStripMenuItem.Size = new System.Drawing.Size(177, 24);
+            this.hoToolsToolStripMenuItem.Text = "hoTools";
+            this.hoToolsToolStripMenuItem.Click += new System.EventHandler(this.hoToolsToolStripMenuItem_Click);
+            // 
+            // sQLToolStripMenuItem
+            // 
+            this.sQLToolStripMenuItem.Name = "sQLToolStripMenuItem";
+            this.sQLToolStripMenuItem.Size = new System.Drawing.Size(177, 24);
+            this.sQLToolStripMenuItem.Text = "SQL";
+            this.sQLToolStripMenuItem.Click += new System.EventHandler(this.sQLToolStripMenuItem_Click);
+            // 
+            // scriptToolStripMenuItem
+            // 
+            this.scriptToolStripMenuItem.Name = "scriptToolStripMenuItem";
+            this.scriptToolStripMenuItem.Size = new System.Drawing.Size(177, 24);
+            this.scriptToolStripMenuItem.Text = "Script";
+            this.scriptToolStripMenuItem.Click += new System.EventHandler(this.scriptToolStripMenuItem_Click);
+            // 
+            // findReplaceToolStripMenuItem
+            // 
+            this.findReplaceToolStripMenuItem.Name = "findReplaceToolStripMenuItem";
+            this.findReplaceToolStripMenuItem.Size = new System.Drawing.Size(177, 24);
+            this.findReplaceToolStripMenuItem.Text = "Find + Replace";
+            this.findReplaceToolStripMenuItem.Click += new System.EventHandler(this.findReplaceToolStripMenuItem_Click);
             // 
             // FrmSettingsToolbar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1149, 614);
+            this.ClientSize = new System.Drawing.Size(1149, 677);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.chkShowQueryButtons);
             this.Controls.Add(this.label6);
@@ -812,6 +888,8 @@
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox3);
+            this.Controls.Add(this.menuStrip1);
+            this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FrmSettingsToolbar";
             this.Text = "hoTools: Toolbar Settings for Model Searches & Services & Scripts";
@@ -819,6 +897,8 @@
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -891,5 +971,13 @@
         private System.Windows.Forms.CheckBox chkShowQueryButtons;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem wiKiToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem hoToolsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem sQLToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem scriptToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem findReplaceToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolbarToolStripMenuSettings;
     }
 }

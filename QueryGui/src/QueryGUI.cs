@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using EAAddinFramework.Utils;
 using hoTools.Settings;
 using hoTools.EaServices;
+using hoTools.EaServices.WiKiRefs;
 using System.Resources;
 
 using System.Reflection;
@@ -895,22 +896,22 @@ Open EA Scripting Window, Update (3th Button from left) and the Script Group app
 
         private void gitHubWiKiToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            EaService.WikiSql();
+            WikiRef.WikiSql();
         }
 
         private void gitHubWiKiSQLToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            EaService.WikiSql();
+            WikiRef.WikiSql();
         }
 
         private void gitHubWiKiScriptToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            EaService.WikiScript();
+            WikiRef.WikiScript();
         }
 
         private void gitHubRepositoryToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            EaService.Repo();
+            WikiRef.Repo();
         }
 
         /// <summary>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using hoTools.EaServices;
+using hoTools.EaServices.WiKiRefs;
 
 namespace hoTools.Settings
 {
@@ -93,22 +94,22 @@ namespace hoTools.Settings
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            EaService.Wiki();
+            WikiRef.Wiki();
         }
 
         private void settingsSQLScriptToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            EaService.WikiSettingsSql();
+            WikiRef.WikiSettingsSql();
         }
 
         private void sQLToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            EaService.WikiSql();
+            WikiRef.WikiSql();
         }
 
         private void scriptToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            EaService.WikiScript();
+            WikiRef.WikiScript();
         }
     }
 }

@@ -104,5 +104,15 @@
         <lineHash>farFJy5Vs3DOdcR0p8BnNIdIcEJcS2VKtPQD0XHgPSE=</lineHash>
       </position>
     </Favorite>
+    <Favorite>
+      <name>EaServices.cs</name>
+      <path>EaServices\src\EaServices.cs</path>
+      <absolutePath>D:\hoData\Development\GitHub\EnterpriseArchitect_hoTools\EaServices\src\EaServices.cs</absolutePath>
+      <position>
+        <line>1</line>
+        <column>1</column>
+        <lineHash>+C3wS7Ft5DyHeLCyPV9r1wsaOWkxFdQYa1IzhmbnvNw=</lineHash>
+      </position>
+    </Favorite>
   </favorites>
 </Favorites>
