@@ -1164,31 +1164,63 @@ namespace hoTools.EaServices
             "Find usage of Element,Method, Attribute, Diagram, Connector ", "Select item", false)]
         public static void FindUsage(Repository rep)
         {
+            string errorMessageSearchNotFind = @"Have you installed and enabled search, e.g. by standard MDG:
+- hoToolsBasic.xml or
+- hoToolsBasicCompilation.xml
+from %APPDATA%Local\Apps\hoTools\
+?
+";
             ObjectType oType = rep.GetContextItemType();
             if (oType.Equals(ObjectType.otElement))
             {
                 // locate text or frame
                 var el = (Element) rep.GetContextObject();
                 if (LocateTextOrFrame(rep, el)) return;
-                rep.RunModelSearch("Element usage", el.ElementGUID, "", "");
+                try
+                {
+                    rep.RunModelSearch("Element usage", el.ElementGUID, "", "");
+                }
+                catch
+                {
+                    MessageBox.Show(errorMessageSearchNotFind, "Search 'Element usage not defined' missing, Break!!");
+                }
             }
             if (oType.Equals(ObjectType.otMethod))
             {
-                var method = (Method) rep.GetContextObject();
-                rep.RunModelSearch("Method usage", method.MethodGUID, "", "");
+                try { 
+
+                    var method = (Method) rep.GetContextObject();
+                    rep.RunModelSearch("Method usage", method.MethodGUID, "", "");
+                }
+                    catch
+                {
+                    MessageBox.Show(errorMessageSearchNotFind, "Search 'Element usage not defined' missing, Break!!");
+                }
             }
             if (oType.Equals(ObjectType.otDiagram))
             {
+                try { 
                 var dia = (Diagram) rep.GetContextObject();
                 rep.RunModelSearch("Diagram usage", dia.DiagramGUID, "", "");
+                }
+                        catch
+                {
+                    MessageBox.Show(errorMessageSearchNotFind, "Search 'Diagram usage' missing, Break!!");
+                }
             }
             if (oType.Equals(ObjectType.otConnector))
             {
+                try { 
                 var con = (Connector) rep.GetContextObject();
                 rep.RunModelSearch("Connector is visible in Diagrams",
                     con.ConnectorID.ToString(), "", "");
+                 }
+                        catch
+                    {
+                        MessageBox.Show(errorMessageSearchNotFind, "Search 'Connector is visible in Diagrams', Break!!");
+                    }
+                }
             }
-        }
 
         #endregion
 

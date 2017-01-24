@@ -115,6 +115,7 @@ Some features:
 
 ## Release 2.1.3
 - Link to help improved
+- Find Usage (Error Message if Search not existed (catch try block))
 
 ## Release 2.1.2
 - Synchronization Part Ports with its Type, usually a Class/Block

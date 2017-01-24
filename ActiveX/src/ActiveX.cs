@@ -1250,10 +1250,14 @@ namespace hoTools.ActiveX
             this._helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._getLastSqlErrorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.hoToolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.settingsGeneralToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this._helpToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.gitHubToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this._aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuIHome = new System.Windows.Forms.ToolStripMenuItem();
             this._panelButtons = new System.Windows.Forms.Panel();
             this._panelLineStyle = new System.Windows.Forms.Panel();
             this._panelFavorite = new System.Windows.Forms.Panel();
@@ -1264,10 +1268,6 @@ namespace hoTools.ActiveX
             this._panelQuickSearch = new System.Windows.Forms.TableLayoutPanel();
             this._toolTipRtfListOfSearches = new System.Windows.Forms.ToolTip(this.components);
             this._panelConveyedItems = new System.Windows.Forms.Panel();
-            this.hoToolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.settingsGeneralToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripMenuIHome = new System.Windows.Forms.ToolStripMenuItem();
             this._toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this._toolStripContainer1.SuspendLayout();
             this._toolStripQuery.SuspendLayout();
@@ -2280,6 +2280,23 @@ namespace hoTools.ActiveX
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             resources.ApplyResources(this.toolStripSeparator1, "toolStripSeparator1");
             // 
+            // hoToolsToolStripMenuItem
+            // 
+            this.hoToolsToolStripMenuItem.Name = "hoToolsToolStripMenuItem";
+            resources.ApplyResources(this.hoToolsToolStripMenuItem, "hoToolsToolStripMenuItem");
+            this.hoToolsToolStripMenuItem.Click += new System.EventHandler(this.hoToolsToolStripMenuItem_Click);
+            // 
+            // settingsGeneralToolStripMenuItem
+            // 
+            this.settingsGeneralToolStripMenuItem.Name = "settingsGeneralToolStripMenuItem";
+            resources.ApplyResources(this.settingsGeneralToolStripMenuItem, "settingsGeneralToolStripMenuItem");
+            this.settingsGeneralToolStripMenuItem.Click += new System.EventHandler(this.settingsGeneralToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            resources.ApplyResources(this.toolStripSeparator2, "toolStripSeparator2");
+            // 
             // _helpToolStripMenuItem1
             // 
             this._helpToolStripMenuItem1.Name = "_helpToolStripMenuItem1";
@@ -2292,16 +2309,22 @@ namespace hoTools.ActiveX
             resources.ApplyResources(this.gitHubToolStripMenuItem, "gitHubToolStripMenuItem");
             this.gitHubToolStripMenuItem.Click += new System.EventHandler(this.githubToolStripMenuItem1_Click);
             // 
-            // toolStripSeparator2
+            // toolStripSeparator8
             // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            resources.ApplyResources(this.toolStripSeparator2, "toolStripSeparator2");
+            this.toolStripSeparator8.Name = "toolStripSeparator8";
+            resources.ApplyResources(this.toolStripSeparator8, "toolStripSeparator8");
             // 
             // _aboutToolStripMenuItem
             // 
             this._aboutToolStripMenuItem.Name = "_aboutToolStripMenuItem";
             resources.ApplyResources(this._aboutToolStripMenuItem, "_aboutToolStripMenuItem");
             this._aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            // 
+            // toolStripMenuIHome
+            // 
+            resources.ApplyResources(this.toolStripMenuIHome, "toolStripMenuIHome");
+            this.toolStripMenuIHome.Name = "toolStripMenuIHome";
+            this.toolStripMenuIHome.Click += new System.EventHandler(this.toolStripMenuIHome_Click);
             // 
             // _panelButtons
             // 
@@ -2389,29 +2412,6 @@ namespace hoTools.ActiveX
             this._panelConveyedItems.Controls.Add(this._btnConveyedItem);
             resources.ApplyResources(this._panelConveyedItems, "_panelConveyedItems");
             this._panelConveyedItems.Name = "_panelConveyedItems";
-            // 
-            // hoToolsToolStripMenuItem
-            // 
-            this.hoToolsToolStripMenuItem.Name = "hoToolsToolStripMenuItem";
-            resources.ApplyResources(this.hoToolsToolStripMenuItem, "hoToolsToolStripMenuItem");
-            this.hoToolsToolStripMenuItem.Click += new System.EventHandler(this.hoToolsToolStripMenuItem_Click);
-            // 
-            // settingsGeneralToolStripMenuItem
-            // 
-            this.settingsGeneralToolStripMenuItem.Name = "settingsGeneralToolStripMenuItem";
-            resources.ApplyResources(this.settingsGeneralToolStripMenuItem, "settingsGeneralToolStripMenuItem");
-            this.settingsGeneralToolStripMenuItem.Click += new System.EventHandler(this.settingsGeneralToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator8
-            // 
-            this.toolStripSeparator8.Name = "toolStripSeparator8";
-            resources.ApplyResources(this.toolStripSeparator8, "toolStripSeparator8");
-            // 
-            // toolStripMenuIHome
-            // 
-            resources.ApplyResources(this.toolStripMenuIHome, "toolStripMenuIHome");
-            this.toolStripMenuIHome.Name = "toolStripMenuIHome";
-            this.toolStripMenuIHome.Click += new System.EventHandler(this.toolStripMenuIHome_Click);
             // 
             // AddinControlGui
             // 
