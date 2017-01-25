@@ -162,7 +162,7 @@ namespace hoTools.Query
         #endregion
 
         /// <summary>
-        /// Initialize setting. Only call after
+        /// Initialize setting. Only call after Repository is known.
         /// <para/>- Tag (
         /// <para/>- Model
         /// <para/>- Settings
@@ -213,7 +213,13 @@ namespace hoTools.Query
             }
             else // run for Script (includes SQL / Query)
             {
-                splitContainer.SplitterDistance = 330;
+                float distance = (float) splitContainer.Height * (float)0.5;
+                try
+                {
+                    splitContainer.SplitterDistance = (int) distance;
+                }
+                catch // suppress any error, use default SplitterDistance
+                { }
                 // available script updates
                 ReloadScripts();
             }
