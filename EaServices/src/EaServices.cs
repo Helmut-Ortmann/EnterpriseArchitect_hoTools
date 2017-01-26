@@ -722,7 +722,7 @@ namespace hoTools.EaServices
         /// <param name="rep"></param>
         /// <param name="isOptimizePortLayoutLocation"></param>
         /// <param name="portSynchronizationKind"></param>
-        [ServiceOperation("{678AD901-1D2F-4FB0-BAAD-AEB775EE18AC}", "Show all Ports, Pins, Parameter",
+        [ServiceOperation("{678AD901-1D2F-4FB0-BAAD-AEB775EE18AC}", "Show Ports, Pins, Parameter",
             "Selected Diagram Objects or all", isTextRequired: false)]
         public static void ShowEmbeddedElements(
             Repository rep,
@@ -932,7 +932,7 @@ namespace hoTools.EaServices
         /// - all if nothing is selected
         /// </summary>
         /// <param name="rep"></param>
-        [ServiceOperation("{5ED3DABA-367E-4575-A161-D79F838A5A17}", "Hide all Ports, Pins, Parameter",
+        [ServiceOperation("{5ED3DABA-367E-4575-A161-D79F838A5A17}", "Hide Ports, Pins, Parameter",
             "Selected Diagram Objects or all", isTextRequired: false)]
         public static void HideEmbeddedElements(
             Repository rep)
@@ -991,7 +991,7 @@ namespace hoTools.EaServices
         /// - all if nothing is selected
         /// </summary>
         /// <param name="rep"></param>
-        [ServiceOperation("{FBEF4500-DD24-4D23-BC7F-08D70DDA2B57}", "Show embedded Element Labels",
+        [ServiceOperation("{FBEF4500-DD24-4D23-BC7F-08D70DDA2B57}", "Show Port, Pin Parameter Labels",
             "Selected Diagram Objects or all", isTextRequired: false)]
         public static void ShowEmbeddedElementsLabel(Repository rep)
         {
@@ -1008,7 +1008,7 @@ namespace hoTools.EaServices
         /// - all if nothing is selected
         /// </summary>
         /// <param name="rep"></param>
-        [ServiceOperation("{3493B9E6-F6DA-478E-A161-DD95D1D34B44}", "Hide embedded Element Type",
+        [ServiceOperation("{3493B9E6-F6DA-478E-A161-DD95D1D34B44}", "Hide Ports, Pins, Parameter Label",
             "Selected Diagram Objects or all", isTextRequired: false)]
         public static void HideEmbeddedElementsLabel(Repository rep)
         {
@@ -1025,7 +1025,7 @@ namespace hoTools.EaServices
         /// - all if nothing is selected
         /// </summary>
         /// <param name="rep"></param>
-        [ServiceOperation("{CF59707B-35A3-4E0C-AA0D-16722DB61F7D}", "Hide embedded Element Type",
+        [ServiceOperation("{CF59707B-35A3-4E0C-AA0D-16722DB61F7D}", "Hide Port Type",
             "Selected Diagram Objects or all", isTextRequired: false)]
         public static void HideEmbeddedElementsType(Repository rep)
         {
@@ -1042,7 +1042,7 @@ namespace hoTools.EaServices
         /// - all if nothing is selected
         /// </summary>
         /// <param name="rep"></param>
-        [ServiceOperation("{CF59707B-35A3-4E0C-AA0D-16722DB61F7D}", "Show embedded Element Type",
+        [ServiceOperation("{CF59707B-35A3-4E0C-AA0D-16722DB61F7D}", "Show Port Type",
             "Selected Diagram Objects or all", isTextRequired: false)]
         public static void ShowEmbeddedElementsType(Repository rep)
         {
