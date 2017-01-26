@@ -270,9 +270,6 @@ The following is possible for a Part:
 
 </value>
   </data>
-  <metadata name="menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>114, 17</value>
-  </metadata>
   <data name="label14.ToolTip" xml:space="preserve">
     <value>Add advanved features:
 - Display Behavior (Display related Behavior of Operation)
@@ -283,6 +280,9 @@ The following is possible for a Part:
 - Locate Type (find the type)
 - Composite (locate composite)</value>
   </data>
+  <metadata name="menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>114, 17</value>
+  </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>50</value>
   </metadata>

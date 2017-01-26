@@ -1242,7 +1242,7 @@ from %APPDATA%Local\Apps\hoTools\
                 {
                     if (f.Name.Length > 2)
                     {
-                        Process.Start(f.Name);
+                        Util.StartFile(f.Name);
                     }
                 }
             }

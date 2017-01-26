@@ -117,6 +117,7 @@ Some features:
 - Link to help improved
 - Find Usage (Error Message if Search not existed (catch try block))
 - Find Usage (o.CLASSIFIER_ID=>o.CLASSIFIER_GUID, o1.CLASSIFIER_ID=>o1.CLASSIFIER_GUID corrected)
+- Missing try catch in Show Specification
 - Script: Catch error set SplitterDistance (I can't reproduce but it will do no harm)
 
 

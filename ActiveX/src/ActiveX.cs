@@ -1409,6 +1409,7 @@ namespace hoTools.ActiveX
             // 
             // _contextMenuStripSearch
             // 
+            this._contextMenuStripSearch.ImageScalingSize = new System.Drawing.Size(20, 20);
             this._contextMenuStripSearch.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.editSQLSearchToolStripMenuItem,
             this.showFolderToolStripMenuItem,

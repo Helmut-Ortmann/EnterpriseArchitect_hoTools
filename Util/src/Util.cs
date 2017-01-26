@@ -30,7 +30,7 @@ namespace hoTools.Utils
             }
             catch (Exception ex)
             {
-                MessageBox.Show($@"{ex.Message}\n\nFile:'{filePath}'", $@"Can't open file {Path.GetFileName(filePath)}");
+                MessageBox.Show($@"{ex.Message}:{Environment.NewLine}'{filePath}'", $@"Can't open file {Path.GetFileName(filePath)}");
             }
         }
 
