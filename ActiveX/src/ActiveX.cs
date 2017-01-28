@@ -205,6 +205,7 @@ namespace hoTools.ActiveX
         private ToolStripMenuItem settingsGeneralToolStripMenuItem;
         private ToolStripSeparator toolStripSeparator8;
         private ToolStripMenuItem toolStripMenuIHome;
+        private ToolStripMenuItem changeAuthorPackagestandardToolStripMenuItem;
         private TextBox _txtSearchText;
         #endregion
 
@@ -599,12 +600,16 @@ namespace hoTools.ActiveX
 
         void changeAuthorToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            EaService.ChangeAuthor(Repository);
+            EaService.ChangeAuthorItem(Repository);
         }
 
         void changeAuthorRecursiveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             EaService.ChangeAuthorRecursive(Repository);
+        }
+        private void changeAuthorPackagestandardToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EaService.ChangeAuthorItem(Repository);
         }
 
         void helpToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1267,6 +1272,7 @@ namespace hoTools.ActiveX
             this._panelQuickSearch = new System.Windows.Forms.TableLayoutPanel();
             this._toolTipRtfListOfSearches = new System.Windows.Forms.ToolTip(this.components);
             this._panelConveyedItems = new System.Windows.Forms.Panel();
+            this.changeAuthorPackagestandardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this._toolStripContainer1.SuspendLayout();
             this._toolStripQuery.SuspendLayout();
@@ -1959,8 +1965,9 @@ namespace hoTools.ActiveX
             this._showFolderToolStripMenuItem,
             this._copyGuidsqlToClipboardToolStripMenuItem,
             this._toolStripSeparator1,
-            this._changeAuthorToolStripMenuItem,
-            this._changeAuthorRecursiveToolStripMenuItem});
+            this.changeAuthorPackagestandardToolStripMenuItem,
+            this._changeAuthorRecursiveToolStripMenuItem,
+            this._changeAuthorToolStripMenuItem});
             this._doToolStripMenuItem.Name = "_doToolStripMenuItem";
             resources.ApplyResources(this._doToolStripMenuItem, "_doToolStripMenuItem");
             // 
@@ -2412,6 +2419,12 @@ namespace hoTools.ActiveX
             this._panelConveyedItems.Controls.Add(this._btnConveyedItem);
             resources.ApplyResources(this._panelConveyedItems, "_panelConveyedItems");
             this._panelConveyedItems.Name = "_panelConveyedItems";
+            // 
+            // changeAuthorPackagestandardToolStripMenuItem
+            // 
+            this.changeAuthorPackagestandardToolStripMenuItem.Name = "changeAuthorPackagestandardToolStripMenuItem";
+            resources.ApplyResources(this.changeAuthorPackagestandardToolStripMenuItem, "changeAuthorPackagestandardToolStripMenuItem");
+            this.changeAuthorPackagestandardToolStripMenuItem.Click += new System.EventHandler(this.changeAuthorPackagestandardToolStripMenuItem_Click);
             // 
             // AddinControlGui
             // 
@@ -3239,6 +3252,8 @@ namespace hoTools.ActiveX
         {
             WikiRef.WikiSettingsGeneral();
         }
+
+        
     }
 
     #endregion
