@@ -46,10 +46,9 @@ namespace hoTools.EaServices.Dlg
             // 
             this.btnOk.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnOk.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnOk.Location = new System.Drawing.Point(47, 303);
-            this.btnOk.Margin = new System.Windows.Forms.Padding(4);
+            this.btnOk.Location = new System.Drawing.Point(35, 246);
             this.btnOk.Name = "btnOk";
-            this.btnOk.Size = new System.Drawing.Size(100, 28);
+            this.btnOk.Size = new System.Drawing.Size(75, 23);
             this.btnOk.TabIndex = 0;
             this.btnOk.Text = "ok";
             this.toolTip1.SetToolTip(this.btnOk, "Cancel changing author");
@@ -60,10 +59,9 @@ namespace hoTools.EaServices.Dlg
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancel.Location = new System.Drawing.Point(164, 303);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(4);
+            this.btnCancel.Location = new System.Drawing.Point(123, 246);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(100, 28);
+            this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 1;
             this.btnCancel.Text = "cancel";
             this.toolTip1.SetToolTip(this.btnCancel, "Cancel changing author");
@@ -74,10 +72,9 @@ namespace hoTools.EaServices.Dlg
             // 
             this.cmbUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbUser.FormattingEnabled = true;
-            this.cmbUser.Location = new System.Drawing.Point(47, 41);
-            this.cmbUser.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbUser.Location = new System.Drawing.Point(35, 33);
             this.cmbUser.Name = "cmbUser";
-            this.cmbUser.Size = new System.Drawing.Size(479, 25);
+            this.cmbUser.Size = new System.Drawing.Size(360, 25);
             this.cmbUser.TabIndex = 2;
             this.toolTip1.SetToolTip(this.cmbUser, "Select Author:\r\nIf suricty enabled: The Author has to be from the list box.\r\nIf s" +
         "ecurity isn\'t enabled: The Author is arbitrary (not blank).");
@@ -85,22 +82,21 @@ namespace hoTools.EaServices.Dlg
             // txtStatus
             // 
             this.txtStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtStatus.Location = new System.Drawing.Point(47, 359);
-            this.txtStatus.Margin = new System.Windows.Forms.Padding(4);
+            this.txtStatus.Location = new System.Drawing.Point(35, 292);
             this.txtStatus.Name = "txtStatus";
             this.txtStatus.ReadOnly = true;
-            this.txtStatus.Size = new System.Drawing.Size(508, 23);
+            this.txtStatus.Size = new System.Drawing.Size(382, 23);
             this.txtStatus.TabIndex = 3;
             this.toolTip1.SetToolTip(this.txtStatus, "Shows whether change of user is possible due to rights");
             // 
             // _listChanged
             // 
             this._listChanged.FormattingEnabled = true;
-            this._listChanged.ItemHeight = 16;
-            this._listChanged.Location = new System.Drawing.Point(155, 74);
+            this._listChanged.Location = new System.Drawing.Point(116, 60);
+            this._listChanged.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this._listChanged.Name = "_listChanged";
             this._listChanged.SelectionMode = System.Windows.Forms.SelectionMode.None;
-            this._listChanged.Size = new System.Drawing.Size(371, 212);
+            this._listChanged.Size = new System.Drawing.Size(279, 173);
             this._listChanged.TabIndex = 5;
             this.toolTip1.SetToolTip(this._listChanged, "Items to change the Author.");
             // 
@@ -108,7 +104,8 @@ namespace hoTools.EaServices.Dlg
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(47, 13);
+            this.label1.Location = new System.Drawing.Point(35, 11);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(205, 18);
             this.label1.TabIndex = 4;
@@ -117,17 +114,18 @@ namespace hoTools.EaServices.Dlg
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(47, 74);
+            this.label2.Location = new System.Drawing.Point(35, 60);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(102, 16);
+            this.label2.Size = new System.Drawing.Size(83, 13);
             this.label2.TabIndex = 6;
             this.label2.Text = "Items to change";
             // 
             // DlgAuthor
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(568, 395);
+            this.ClientSize = new System.Drawing.Size(426, 321);
             this.Controls.Add(this.label2);
             this.Controls.Add(this._listChanged);
             this.Controls.Add(this.label1);
@@ -135,7 +133,6 @@ namespace hoTools.EaServices.Dlg
             this.Controls.Add(this.cmbUser);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOk);
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "DlgAuthor";
             this.Text = "Enter Author ";
             this.toolTip1.SetToolTip(this, "Select Author:\r\nIf suricty enabled: The Author has to be from the list box.\r\nIf s" +

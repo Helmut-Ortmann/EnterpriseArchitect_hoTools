@@ -142,7 +142,7 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Search and Replace";
             this.toolTip1.SetToolTip(this.groupBox3, "Show Search and Replace Tab with:\r\n- Find simple string or Regular Expression\r\n- " +
-        "Name, Description, Stereotype, Tagged Value\r\n- in Packages, Elements, Diagrams, " +
+        "Name, Description, Stereotype, Tagged Value\r\n- in FullPackageElement, Elements, Diagrams, " +
         "Attributes, Operations");
             // 
             // rbSearchAndReplaceDisableWindow

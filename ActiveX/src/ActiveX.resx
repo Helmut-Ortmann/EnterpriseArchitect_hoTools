@@ -2121,7 +2121,7 @@ The application to open the folder: See global Settings</value>
   </data>
   <data name="_changeAuthorToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>Change Author for:
-- Packages
+- FullPackageElement
 - Element</value>
   </data>
   <data name="_changeAuthorRecursiveToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
@@ -2132,7 +2132,7 @@ The application to open the folder: See global Settings</value>
   </data>
   <data name="_changeAuthorRecursiveToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>Change Author recursive for:
-- Packages
+- FullPackageElement
 - Elements</value>
   </data>
   <data name="_doToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">

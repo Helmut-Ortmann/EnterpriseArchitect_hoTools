@@ -454,7 +454,7 @@ namespace hoTools.EaServices
             }
         }
 
-        #region change User Recursive
+        #region Change Author recursive
         /// <summary>
         /// Change Author recursive for the selected items (Package, Element, Diagram)
         /// Use:
@@ -468,40 +468,69 @@ namespace hoTools.EaServices
             "Select package, element or diagram in Browser or Diagram", isTextRequired: false)]
         public static void ChangeAuthorRecursive(Repository rep)
         {
-            // list of users, the first element returns the changed user name
-            string[] liUser = {""};
+            ChangeAuthor(rep, ChangeScope.PackageRecursive);
+        }
+        /// <summary>
+        /// Changes the Author of selected items and the choosen 'DlgAuthor.ChangeScope'.
+        /// - Selected items
+        /// - Standard (selected Item, Elements Recursive, Package and it's content)
+        /// - All recursive
+        /// - 
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <param name="changeScope"></param>
+        static void ChangeAuthor(Repository rep, ChangeScope changeScope)
+        {
+            // Parameter for change
+            // - list of users, the first element is the proposed Author name
+            // - changeScope
+            string[] liParameter = { "", changeScope.ToString()};
+
             List<Element> lEl = GetSelectedElements(rep);
-            List<String> lToChange = new List<String>();
-            foreach (EA.Element el0 in lEl)
-            {
-                lToChange.Add(el0.Name);
-            }
+
+
+            // Selected elements (Diagram or Project Browser Key)
             if (lEl.Count > 0)
             {
-                var dlg0 = new DlgAuthor(rep, lToChange) { User = lEl[0].Author };
+                // Make a list of to change item names from selected elements
+                // This list to show the user to check the Items
+                List<String> lToChange = new List<String>();
+                foreach (EA.Element el0 in lEl)
+                {
+                    lToChange.Add(el0.Name);
+                }
+
+                var dlg0 = new DlgAuthor(rep, changeScope, lToChange) { User = lEl[0].Author };
                 dlg0.ShowDialog();
                 // use string to use recursive call of function
                 if (dlg0.User == "") return;
-                liUser[0] = dlg0.User;
+                liParameter[0] = dlg0.User;
+                liParameter[1] = changeScope.ToString();
                 foreach (EA.Element el in lEl)
                 {
                     if (el.Type == "Package")
                     {
                         EA.Package pkg1 = rep.GetPackageByGuid(el.ElementGUID);
-                        RecursivePackages.DoRecursivePkg(rep, pkg1, ChangeAuthorPackage, ChangeAuthorElement,
-                            ChangeAuthorDiagram, liUser);
+                              RecursivePackages.DoRecursivePkg(rep, pkg1, ChangeAuthorPackage, ChangeAuthorElement,
+                                ChangeAuthorDiagram, liParameter);
+
                     }
-                    else RecursivePackages.DoRecursiveEl(rep, el, ChangeAuthorElement, ChangeAuthorDiagram, liUser);
+                    else
+                    {
+                            RecursivePackages.DoRecursiveEl(rep, el, ChangeAuthorElement, ChangeAuthorDiagram, liParameter);
+                       
+                    }
                 }
             }
             else
+            // No selected item (Diagram or Project Browser)
             // Context Element
             {
                 EA.Element el = null;
                 EA.Package pkg = null;
                 Diagram dia = null;
                 string oldAuthor;
-                List<string> liName = new List<string>();
+                List<string> liAuthors = new List<string>();
                 ObjectType oType = rep.GetContextItemType();
 
                 // get the element
@@ -510,40 +539,40 @@ namespace hoTools.EaServices
                     case ObjectType.otPackage:
                         pkg = (Package)rep.GetContextObject();
                         oldAuthor = rep.GetElementByGuid(pkg.PackageGUID).Author;
-                        liName.Add(pkg.Name);
+                        liAuthors.Add(pkg.Name);
                         break;
                     case ObjectType.otElement:
-                        el = (Element) rep.GetContextObject(); 
+                        el = (Element)rep.GetContextObject();
                         oldAuthor = el.Author;
-                        liName.Add(el.Name);
+                        liAuthors.Add(el.Name);
                         break;
                     case ObjectType.otDiagram:
                         dia = (Diagram)rep.GetContextObject();
                         oldAuthor = dia.Author;
-                        liName.Add(dia.Name);
+                        liAuthors.Add(dia.Name);
                         break;
                     default:
                         return;
                 }
                 // ask for new user
-                var dlg = new DlgAuthor(rep, liName) { User = oldAuthor };
+                var dlg = new DlgAuthor(rep, ChangeScope.PackageRecursive, liAuthors) { User = oldAuthor };
                 dlg.ShowDialog();
                 // use string to use recursive call of function
-                liUser[0] = dlg.User;
+                liParameter[0] = dlg.User;
                 if (dlg.User == "") return;
                 switch (oType)
                 {
                     case ObjectType.otPackage:
                         RecursivePackages.DoRecursivePkg(rep, pkg, ChangeAuthorPackage, ChangeAuthorElement,
-                            ChangeAuthorDiagram, liUser);
+                            ChangeAuthorDiagram, liParameter);
                         MessageBox.Show($@"New author:'{dlg.User}'", $@"Author changed for package '{pkg.Name}', recursive");
                         break;
                     case ObjectType.otElement:
-                        RecursivePackages.DoRecursiveEl(rep, el, ChangeAuthorElement, ChangeAuthorDiagram, liUser);
+                        RecursivePackages.DoRecursiveEl(rep, el, ChangeAuthorElement, ChangeAuthorDiagram, liParameter);
                         MessageBox.Show($@"New author:'{dlg.User}'", $@"Author changed for element '{el.Name}', recursive");
                         break;
                     case ObjectType.otDiagram:
-                        ChangeAuthorDiagram(rep, dia, liUser);
+                        ChangeAuthorDiagram(rep, dia, liParameter);
                         MessageBox.Show($@"New author:'{dlg.User}'", $@"Author changed for diagram '{dia.Name}'");
                         break;
                     default:
@@ -551,6 +580,9 @@ namespace hoTools.EaServices
                 }
             }
         }
+
+        #endregion
+        #region Get selected Elements
         /// <summary>
         /// Get selected Elements
         /// </summary>
@@ -578,7 +610,7 @@ namespace hoTools.EaServices
 
         #endregion
 
-        #region change User
+        #region change Author for selected item
 
         [ServiceOperation("{4161D769-825F-494A-9389-962CC1C16E4F}", "Change Author of package, element, diagram",
             "Select package, element or diagram in Browser or Diagram", isTextRequired: false)]
@@ -616,7 +648,7 @@ namespace hoTools.EaServices
                     return;
             }
             // ask for new user
-            var dlg = new DlgAuthor(rep,liName) {User = oldAuthor};
+            var dlg = new DlgAuthor(rep, ChangeScope.PackageRecursive, liName) {User = oldAuthor};
             dlg.ShowDialog();
             liUser[0] = dlg.User;
             // no user change requested
@@ -4962,7 +4994,7 @@ from %APPDATA%Local\Apps\hoTools\
         #region vCGetState
 
         [ServiceOperation("{597608A2-5C3F-4AE6-9B18-86C1B3C27382}", "Get and update VC state of selected package",
-            "Select Packages", isTextRequired: false)]
+            "Select FullPackageElement", isTextRequired: false)]
         // ReSharper disable once InconsistentNaming
         // dynamical usage as configurable service by reflection
         // ReSharper disable once UnusedMember.Local
@@ -4988,7 +5020,7 @@ from %APPDATA%Local\Apps\hoTools\
         #region updateVcStateOfSelectedPackageRecursiveService
 
         [ServiceOperation("{A521EB65-3F3C-4C5D-9B82-D12FFCEC71D4}", "Update VC-State of package(recursive)",
-            "Select Packages or model", isTextRequired: false)]
+            "Select FullPackageElement or model", isTextRequired: false)]
         // ReSharper disable once UnusedMember.Global
         // dynamical usage as configurable service by reflection
         public static void UpdateVcStateOfSelectedPackageRecursiveService(Repository rep)

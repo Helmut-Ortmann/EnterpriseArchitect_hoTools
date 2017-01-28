@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using EA;
+using hoTools.Utils;
 using hoTools.Utils.SQL;
 
 namespace hoTools.EaServices.Dlg
@@ -15,18 +16,38 @@ namespace hoTools.EaServices.Dlg
         string _user = "";
         Repository _rep;
         readonly bool _isSecurityEnabled;
+        private string _items = @"Change Author of selected items";
+        private string _packages = @"Change Author of selected packages + content";
+        private string _packagesRecursive = @"Change Author of selected packages, recursive";
+
+
+        
 
         /// <summary>
         /// Dialog to ask and enter a user. Enter a user is only possible if the user has the rights.
         /// </summary>
         /// <param name="rep"></param>
+        /// <param name="changeScope"></param>
         /// <param name="lToDelete"></param>
-        public DlgAuthor(Repository rep, List<string> lToDelete )
+        public DlgAuthor(Repository rep, ChangeScope changeScope, List<string> lToDelete )
         {
             _rep = rep;
             var sql = new UtilSql(rep);
             InitializeComponent();
             _listChanged.DataSource = lToDelete;
+            switch (changeScope)
+            {
+                case ChangeScope.Item:
+                    Text = _items;
+                    break;
+                case ChangeScope.FullPackageElement:
+                    Text = _packages;
+                    break;
+                case ChangeScope.PackageRecursive:
+                    Text = _packagesRecursive;
+                    break;
+
+            } 
             if (rep.IsSecurityEnabled)
             {
                 _isSecurityEnabled = true;
