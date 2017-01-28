@@ -115,11 +115,14 @@ Some features:
 
 ## Release 2.1.3
 - Link to help improved
-- Find Usage (Error Message if Search not existed (catch try block))
+- [FindUsage](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/FindUsage) (Error Message if search not existed (catch try block))
 - Find Usage (o.CLASSIFIER_ID=>o.CLASSIFIER_GUID, o1.CLASSIFIER_ID=>o1.CLASSIFIER_GUID corrected)
 - Missing try catch in Show Specification
 - Script: Catch error set SplitterDistance (I can't reproduce but it will do no harm)
+- [Change Author optimized](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/ChangeAuthor)
 
+## Release 2.1.2.1
+- Wrong installation file 2.1.2 corrected 
 
 ## Release 2.1.2
 - Synchronization Part Ports with its Type, usually a Class/Block

@@ -453,6 +453,24 @@ namespace hoTools.EaServices
                     return null;
             }
         }
+        [ServiceOperation("{4FF89921-595B-4F16-8813-39789EB53730}", "Change Author Package (selected Items + Package content)",
+           "Select Package, Element or Diagram in Browser or Diagram", isTextRequired: false)]
+        public static void ChangeAuthorPackage(Repository rep)
+        {
+            ChangeAuthor(rep, ChangeScope.Package);
+        }
+
+        #region change Author for selected item
+
+        [ServiceOperation("{4161D769-825F-494A-9389-962CC1C16E4F}", "Change Author Items",
+            "Select Package, Element or Diagram in Browser or Diagram", isTextRequired: false)]
+        public static void ChangeAuthorItem(Repository rep)
+        {
+            ChangeAuthor(rep, ChangeScope.Item);
+
+        }
+
+        #endregion
 
         #region Change Author recursive
         /// <summary>
@@ -464,8 +482,8 @@ namespace hoTools.EaServices
         /// </summary>
         /// <param name="rep"></param>
         [ServiceOperation("{F0038D4B-CCAA-4F05-9401-AAAADF431ECB}",
-            "Change Author of package, element, diagram recursive",
-            "Select package, element or diagram in Browser or Diagram", isTextRequired: false)]
+            "Change Author Package recursive",
+            "Select Package, Element or Diagram in Browser or Diagram", isTextRequired: false)]
         public static void ChangeAuthorRecursive(Repository rep)
         {
             ChangeAuthor(rep, ChangeScope.PackageRecursive);
@@ -618,78 +636,7 @@ namespace hoTools.EaServices
 
         #endregion
 
-        [ServiceOperation("{4FF89921-595B-4F16-8813-39789EB53730}", "Change Author standard (selected+package content)",
-            "Select package, element or diagram in Browser or Diagram", isTextRequired: false)]
-        public static void ChangeAuthorPackage(Repository rep)
-        {
-            ChangeAuthor(rep, ChangeScope.Package);
-        }
-
-        #region change Author for selected item
-
-        [ServiceOperation("{4161D769-825F-494A-9389-962CC1C16E4F}", "Change Author of package, element, diagram (only selected)",
-            "Select package, element or diagram in Browser or Diagram", isTextRequired: false)]
-        public static void ChangeAuthorItem(Repository rep)
-        {
-            ChangeAuthor(rep, ChangeScope.Item);
-            //// list of users, the first element returns the changed user name
-            //string[] liUser = {""};
-            //string oldAuthor;
-            //Element el = null;
-            //Package pkg = null;
-            //Diagram dia = null;
-            //List<string> liName = new List<string>();
-            //ObjectType oType = rep.GetContextItemType();
-
-            //// get the element
-            //switch (oType)
-            //{
-            //    case ObjectType.otPackage:
-            //        pkg = (Package) rep.GetContextObject();
-            //        el = rep.GetElementByGuid(pkg.PackageGUID);
-            //        liName.Add(el.Name);
-            //        oldAuthor = el.Author;
-            //        break;
-            //    case ObjectType.otElement:
-            //        el = (Element) rep.GetContextObject();
-            //        liName.Add(el.Name);
-            //        oldAuthor = el.Author;
-            //        break;
-            //    case ObjectType.otDiagram:
-            //        dia = (Diagram) rep.GetContextObject();
-            //        liName.Add(dia.Name);
-            //        oldAuthor = dia.Author;
-            //        break;
-            //    default:
-            //        return;
-            //}
-            //// ask for new user
-            //var dlg = new DlgAuthor(rep, ChangeScope.PackageRecursive, liName) {User = oldAuthor};
-            //dlg.ShowDialog();
-            //liUser[0] = dlg.User;
-            //// no user change requested
-            //if (dlg.User == "") return;
-            //switch (oType)
-            //{
-            //    case ObjectType.otPackage:
-            //        ChangeAuthorPackage(rep, pkg, liUser);
-            //        MessageBox.Show($@"New author:'{dlg.User}'", @"Author changed for package");
-            //        break;
-            //    case ObjectType.otElement:
-            //        ChangeAuthorElement(rep, el, liUser);
-            //        MessageBox.Show($@"New author:'{dlg.User}'", @"Author changed for element");
-            //        break;
-            //    case ObjectType.otDiagram:
-            //        ChangeAuthorDiagram(rep, dia, liUser);
-            //        MessageBox.Show($@"New author:'{dlg.User}'", @"Author changed for element");
-            //        break;
-            //    default:
-            //        return;
-            //}
-            //MessageBox.Show($@"Author:'{dlg.User}'", @"Author changed");
-        }
-
-        #endregion
+       
 
         #region ShowFolderElementPackage
 
@@ -2894,7 +2841,13 @@ from %APPDATA%Local\Apps\hoTools\
                     0);
             }
         }
-
+        /// <summary>
+        /// Copy SQL to Clipboard
+        /// - Connector
+        /// - Diagram Object
+        /// - Element
+        /// </summary>
+        /// <param name="rep"></param>
         public static void CopyGuidSqlToClipboard(Repository rep)
         {
             string str = @"";
