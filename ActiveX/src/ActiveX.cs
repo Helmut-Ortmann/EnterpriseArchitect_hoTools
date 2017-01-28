@@ -8,13 +8,12 @@ using System.Text.RegularExpressions;
 using AddinFramework.Util;
 using hoTools.Settings;
 using hoTools.EaServices;
-using hoTools.EaServices.WiKiRefs;
 using hoTools.EAServicesPort;
 using Control.EaAddinShortcuts;
 using hoTools.Settings.Key;
 using hoTools.Settings.Toolbar;
 using EAAddinFramework.Utils;
-
+using hoTools.EaServices.WiKiRefs;
 using hoTools.Utils.SQL;
 using hoTools.Utils;
 using hoTools.Utils.Configuration;
@@ -605,7 +604,7 @@ namespace hoTools.ActiveX
 
         void changeAuthorRecursiveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            EaService.ChangeUserRecursive(Repository);
+            EaService.ChangeAuthorRecursive(Repository);
         }
 
         void helpToolStripMenuItem_Click(object sender, EventArgs e)

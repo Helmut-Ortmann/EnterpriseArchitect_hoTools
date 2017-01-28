@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net.Configuration;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -454,80 +455,142 @@ namespace hoTools.EaServices
         }
 
         #region change User Recursive
-
-        [ServiceOperation("{F0038D4B-CCAA-4F05-9401-AAAADF431ECB}", "Change user of package/element recursive",
-            "Select package or element", isTextRequired: false)]
-        public static void ChangeUserRecursive(Repository rep)
+        /// <summary>
+        /// Change Author recursive for the selected items (Package, Element, Diagram)
+        /// Use:
+        /// - If nothing in Diagram selected: Use TreeSelectedElements
+        /// - If DiagramObjects selected: Use DiagramObjects
+        /// - Else: Use ContextItem 
+        /// </summary>
+        /// <param name="rep"></param>
+        [ServiceOperation("{F0038D4B-CCAA-4F05-9401-AAAADF431ECB}",
+            "Change Author of package, element, diagram recursive",
+            "Select package, element or diagram in Browser or Diagram", isTextRequired: false)]
+        public static void ChangeAuthorRecursive(Repository rep)
         {
-            // get the user
-            string[] s = {""};
-            string oldAuthor;
-            Element el = null;
-            Package pkg = null;
-            Diagram dia = null;
-            ObjectType oType = rep.GetContextItemType();
+            // list of users, the first element returns the changed user name
+            string[] liUser = {""};
+            List<Element> lEl = GetSelectedElements(rep);
+            List<String> lToChange = new List<String>();
+            foreach (EA.Element el0 in lEl)
+            {
+                lToChange.Add(el0.Name);
+            }
+            if (lEl.Count > 0)
+            {
+                var dlg0 = new DlgAuthor(rep, lToChange) { User = lEl[0].Author };
+                dlg0.ShowDialog();
+                // use string to use recursive call of function
+                if (dlg0.User == "") return;
+                liUser[0] = dlg0.User;
+                foreach (EA.Element el in lEl)
+                {
+                    if (el.Type == "Package")
+                    {
+                        EA.Package pkg1 = rep.GetPackageByGuid(el.ElementGUID);
+                        RecursivePackages.DoRecursivePkg(rep, pkg1, ChangeAuthorPackage, ChangeAuthorElement,
+                            ChangeAuthorDiagram, liUser);
+                    }
+                    else RecursivePackages.DoRecursiveEl(rep, el, ChangeAuthorElement, ChangeAuthorDiagram, liUser);
+                }
+            }
+            else
+            // Context Element
+            {
+                EA.Element el = null;
+                EA.Package pkg = null;
+                Diagram dia = null;
+                string oldAuthor;
+                List<string> liName = new List<string>();
+                ObjectType oType = rep.GetContextItemType();
 
-            // get the element
-            switch (oType)
-            {
-                case ObjectType.otPackage:
-                    pkg = (Package) rep.GetContextObject();
-                    el = rep.GetElementByGuid(pkg.PackageGUID);
-                    oldAuthor = el.Author;
-                    break;
-                case ObjectType.otElement:
-                    el = (Element) rep.GetContextObject();
-                    oldAuthor = el.Author;
-                    break;
-                case ObjectType.otDiagram:
-                    dia = (Diagram) rep.GetContextObject();
-                    oldAuthor = dia.Author;
-                    break;
-                default:
-                    return;
+                // get the element
+                switch (oType)
+                {
+                    case ObjectType.otPackage:
+                        pkg = (Package)rep.GetContextObject();
+                        oldAuthor = rep.GetElementByGuid(pkg.PackageGUID).Author;
+                        liName.Add(pkg.Name);
+                        break;
+                    case ObjectType.otElement:
+                        el = (Element) rep.GetContextObject(); 
+                        oldAuthor = el.Author;
+                        liName.Add(el.Name);
+                        break;
+                    case ObjectType.otDiagram:
+                        dia = (Diagram)rep.GetContextObject();
+                        oldAuthor = dia.Author;
+                        liName.Add(dia.Name);
+                        break;
+                    default:
+                        return;
+                }
+                // ask for new user
+                var dlg = new DlgAuthor(rep, liName) { User = oldAuthor };
+                dlg.ShowDialog();
+                // use string to use recursive call of function
+                liUser[0] = dlg.User;
+                if (dlg.User == "") return;
+                switch (oType)
+                {
+                    case ObjectType.otPackage:
+                        RecursivePackages.DoRecursivePkg(rep, pkg, ChangeAuthorPackage, ChangeAuthorElement,
+                            ChangeAuthorDiagram, liUser);
+                        MessageBox.Show($@"New author:'{dlg.User}'", $@"Author changed for package '{pkg.Name}', recursive");
+                        break;
+                    case ObjectType.otElement:
+                        RecursivePackages.DoRecursiveEl(rep, el, ChangeAuthorElement, ChangeAuthorDiagram, liUser);
+                        MessageBox.Show($@"New author:'{dlg.User}'", $@"Author changed for element '{el.Name}', recursive");
+                        break;
+                    case ObjectType.otDiagram:
+                        ChangeAuthorDiagram(rep, dia, liUser);
+                        MessageBox.Show($@"New author:'{dlg.User}'", $@"Author changed for diagram '{dia.Name}'");
+                        break;
+                    default:
+                        return;
+                }
             }
-            // ask for new user
-            var dlg = new dlgUser(rep) {User = oldAuthor};
-            dlg.ShowDialog();
-            s[0] = dlg.User;
-            if (s[0] == "")
+        }
+        /// <summary>
+        /// Get selected Elements
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <returns></returns>
+        private static List<Element> GetSelectedElements(Repository rep)
+        {
+            List<Element> lEl = new List<Element>();
+            var eaDia = new EaDiagram(rep);
+            // nothing selected
+            if (! eaDia.IsSelectedObjects && eaDia.SelectedConnector == null)
             {
-                MessageBox.Show($@"Author:'{s[0]}'", @"no or invalid user");
-                return;
+                // get all tree selected elements
+                foreach (EA.Element el1 in rep.GetTreeSelectedElements())
+                {
+                    lEl.Add(el1);
+                }
             }
-            switch (oType)
+            else
             {
-                case ObjectType.otPackage:
-                    RecursivePackages.DoRecursivePkg(rep, pkg, ChangeAuthorPackage, ChangeAuthorElement,
-                        ChangeAuthorDiagram, s);
-                    MessageBox.Show($@"New author:'{s[0]}'", @"Author changed for packages/elements (recursive)");
-                    break;
-                case ObjectType.otElement:
-                    RecursivePackages.DoRecursiveEl(rep, el, ChangeAuthorElement, ChangeAuthorDiagram, s);
-                    MessageBox.Show($@"New author:'{s[0]}'", @"Author changed for elements (recursive)");
-                    break;
-                case ObjectType.otDiagram:
-                    ChangeAuthorDiagram(rep, dia, s);
-                    MessageBox.Show($@"New author:'{s[0]}'", @"Author changed for diagram");
-                    break;
-                default:
-                    return;
+                lEl = eaDia.SelElements;
             }
+            return lEl;
         }
 
         #endregion
 
         #region change User
 
-        [ServiceOperation("{4161D769-825F-494A-9389-962CC1C16E4F}", "Change Author of package/element",
-            "Select package or element", isTextRequired: false)]
+        [ServiceOperation("{4161D769-825F-494A-9389-962CC1C16E4F}", "Change Author of package, element, diagram",
+            "Select package, element or diagram in Browser or Diagram", isTextRequired: false)]
         public static void ChangeAuthor(Repository rep)
         {
-            string[] args = {""};
+            // list of users, the first element returns the changed user name
+            string[] liUser = {""};
             string oldAuthor;
             Element el = null;
             Package pkg = null;
             Diagram dia = null;
+            List<string> liName = new List<string>();
             ObjectType oType = rep.GetContextItemType();
 
             // get the element
@@ -536,45 +599,46 @@ namespace hoTools.EaServices
                 case ObjectType.otPackage:
                     pkg = (Package) rep.GetContextObject();
                     el = rep.GetElementByGuid(pkg.PackageGUID);
+                    liName.Add(el.Name);
                     oldAuthor = el.Author;
                     break;
                 case ObjectType.otElement:
                     el = (Element) rep.GetContextObject();
+                    liName.Add(el.Name);
                     oldAuthor = el.Author;
                     break;
                 case ObjectType.otDiagram:
                     dia = (Diagram) rep.GetContextObject();
+                    liName.Add(dia.Name);
                     oldAuthor = dia.Author;
                     break;
                 default:
                     return;
             }
             // ask for new user
-            var dlg = new dlgUser(rep) {User = oldAuthor};
+            var dlg = new DlgAuthor(rep,liName) {User = oldAuthor};
             dlg.ShowDialog();
-            args[0] = dlg.User;
-            if (args[0] == "")
-            {
-                MessageBox.Show($@"Author:'{args[0]}'", @"no or invalid user");
-                return;
-            }
+            liUser[0] = dlg.User;
+            // no user change requested
+            if (dlg.User == "") return;
             switch (oType)
             {
                 case ObjectType.otPackage:
-                    ChangeAuthorPackage(rep, pkg, args);
-                    MessageBox.Show($@"New author:'{args[0]}'", @"Author changed for package");
+                    ChangeAuthorPackage(rep, pkg, liUser);
+                    MessageBox.Show($@"New author:'{dlg.User}'", @"Author changed for package");
                     break;
                 case ObjectType.otElement:
-                    ChangeAuthorElement(rep, el, args);
-                    MessageBox.Show($@"New author:'{args[0]}'", @"Author changed for element");
+                    ChangeAuthorElement(rep, el, liUser);
+                    MessageBox.Show($@"New author:'{dlg.User}'", @"Author changed for element");
                     break;
                 case ObjectType.otDiagram:
-                    ChangeAuthorDiagram(rep, dia, args);
-                    MessageBox.Show($@"New author:'{args[0]}'", @"Author changed for element");
+                    ChangeAuthorDiagram(rep, dia, liUser);
+                    MessageBox.Show($@"New author:'{dlg.User}'", @"Author changed for element");
                     break;
                 default:
                     return;
             }
+            MessageBox.Show($@"Author:'{dlg.User}'", @"Author changed");
         }
 
         #endregion

@@ -3,8 +3,8 @@ using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using hoTools.Settings;
 using hoTools.EaServices;
-using hoTools.EaServices.WiKiRefs;
 using hoTools.ActiveX;
+using hoTools.EaServices.WiKiRefs;
 
 
 namespace hoTools.Find

@@ -5,8 +5,8 @@ using Control.EaAddinShortcuts;
 using EAAddinFramework.Utils;
 using hoTools.ActiveX;
 using hoTools.EaServices;
-using hoTools.Utils.Forms;
 using hoTools.EaServices.WiKiRefs;
+using hoTools.Utils.Forms;
 
 // ReSharper disable once CheckNamespace
 namespace hoTools.Settings.Toolbar

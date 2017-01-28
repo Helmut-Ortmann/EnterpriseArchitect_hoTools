@@ -11,13 +11,13 @@ using System.Collections.Generic;
 using EAAddinFramework.Utils;
 using hoTools.Settings;
 using hoTools.EaServices;
-using hoTools.EaServices.WiKiRefs;
 using System.Resources;
 
 using System.Reflection;
 using AddinFramework.Util;
 using AddinFramework.Util.Script;
 using EA;
+using hoTools.EaServices.WiKiRefs;
 using hoTools.Utils.Excel;
 
 // Resource Manager

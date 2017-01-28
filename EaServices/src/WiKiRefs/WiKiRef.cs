@@ -1,6 +1,5 @@
 ﻿using System.Diagnostics;
 
-
 namespace hoTools.EaServices.WiKiRefs
 {
     public class WikiRef

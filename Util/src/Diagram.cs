@@ -15,7 +15,7 @@ namespace hoTools.Utils
         readonly EA.Diagram _dia;
         readonly List<EA.DiagramObject> _selectedObjects = new List<EA.DiagramObject>();
         readonly List<EA.Element> _selectedElements = new List<EA.Element>();
-        readonly bool _isElementSelectedNone = false;
+        readonly bool _isElementSelectedObjects = false;
 
         readonly Connector _selectedConnector;
         #region Constructor
@@ -27,7 +27,7 @@ namespace hoTools.Utils
         {
             _rep = rep;
             _dia = _rep.GetCurrentDiagram();
-            if (_dia == null)   return;
+            if (_dia == null )   return;
             if (_dia.SelectedObjects.Count == 0)
             {
                 foreach (EA.DiagramObject obj in _dia.DiagramObjects)
@@ -35,11 +35,12 @@ namespace hoTools.Utils
                     _selectedObjects.Add(obj);
                     _selectedElements.Add(rep.GetElementByID(obj.ElementID));
                 }
-                _isElementSelectedNone = true;
+                
 
             }
             else
             {
+                _isElementSelectedObjects = true;
                 foreach (EA.DiagramObject obj in  _dia.SelectedObjects)
                 {
                     _selectedObjects.Add(obj);
@@ -48,14 +49,16 @@ namespace hoTools.Utils
             }
             _selectedConnector = _dia.SelectedConnector;
 
+
         }
         #endregion
         #region Properties
         public List<EA.DiagramObject> SelObjects =>_selectedObjects;
         public List<EA.Element> SelElements => _selectedElements;
-        public bool IsSelectedNone => _isElementSelectedNone;
+        public bool IsSelectedObjects => _isElementSelectedObjects;
         public Diagram Dia => _dia;
         public int SelectedObjectsCount => _dia.SelectedObjects.Count;
+        public EA.Connector SelectedConnector => _selectedConnector;
 
         #endregion
 
@@ -65,7 +68,7 @@ namespace hoTools.Utils
         /// </summary>
         public void ReloadSelectedObjectsAndConnector()
         {
-            if (IsSelectedNone) return;
+            if (! IsSelectedObjects) return;
             Save();
             _rep.ReloadDiagram(_dia.DiagramID);
             if (_selectedConnector != null) _dia.SelectedConnector = _selectedConnector;
