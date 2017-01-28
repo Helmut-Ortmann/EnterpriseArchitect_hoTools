@@ -92,11 +92,11 @@ namespace hoTools.EaServices.Dlg
             // _listChanged
             // 
             this._listChanged.FormattingEnabled = true;
-            this._listChanged.Location = new System.Drawing.Point(116, 60);
-            this._listChanged.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this._listChanged.Location = new System.Drawing.Point(152, 60);
+            this._listChanged.Margin = new System.Windows.Forms.Padding(2);
             this._listChanged.Name = "_listChanged";
             this._listChanged.SelectionMode = System.Windows.Forms.SelectionMode.None;
-            this._listChanged.Size = new System.Drawing.Size(279, 173);
+            this._listChanged.Size = new System.Drawing.Size(243, 173);
             this._listChanged.TabIndex = 5;
             this.toolTip1.SetToolTip(this._listChanged, "Items to change the Author.");
             // 
@@ -114,12 +114,13 @@ namespace hoTools.EaServices.Dlg
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(35, 60);
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(35, 61);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(83, 13);
+            this.label2.Size = new System.Drawing.Size(113, 36);
             this.label2.TabIndex = 6;
-            this.label2.Text = "Items to change";
+            this.label2.Text = "Selected\r\nItems to change";
             // 
             // DlgAuthor
             // 

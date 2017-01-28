@@ -473,8 +473,8 @@ namespace hoTools.EaServices
         /// <summary>
         /// Changes the Author of selected items and the choosen 'DlgAuthor.ChangeScope'.
         /// - Selected items
-        /// - Standard (selected Item, Elements Recursive, Package and it's content)
-        /// - All recursive
+        /// - Standard (selected Items, Elements Recursive, Package and it's content)
+        /// - All recursive (also all Packages recursive)
         /// - 
         /// </summary>
         /// <param name="rep"></param>
@@ -482,17 +482,19 @@ namespace hoTools.EaServices
         static void ChangeAuthor(Repository rep, ChangeScope changeScope)
         {
             // Parameter for change
-            // - list of users, the first element is the proposed Author name
-            // - changeScope
-            string[] liParameter = { "", changeScope.ToString()};
+            // - [0]Author to change to
+            // - [1]changeScope
+            string[] liParameter = { "", changeScope.ToString() };
 
+            // Get Elements of type Element and Package
             List<Element> lEl = GetSelectedElements(rep);
 
 
             // Selected elements (Diagram or Project Browser Key)
+            // No element returns: Check Context item
             if (lEl.Count > 0)
             {
-                // Make a list of to change item names from selected elements
+                // Make a list of 'to change item names' from selected elements
                 // This list to show the user to check the Items
                 List<String> lToChange = new List<String>();
                 foreach (EA.Element el0 in lEl)
@@ -511,7 +513,7 @@ namespace hoTools.EaServices
                     if (el.Type == "Package")
                     {
                         EA.Package pkg1 = rep.GetPackageByGuid(el.ElementGUID);
-                              RecursivePackages.DoRecursivePkg(rep, pkg1, ChangeAuthorPackage, ChangeAuthorElement,
+                        RecursivePackages.DoRecursivePkg(rep, pkg1, ChangeAuthorPackage, ChangeAuthorElement,
                                 ChangeAuthorDiagram, liParameter);
 
                     }
@@ -521,10 +523,13 @@ namespace hoTools.EaServices
                        
                     }
                 }
+                string items = string.Join($"{Environment.NewLine}", lToChange.ToArray());
+                MessageBox.Show($@"New author:'{dlg0.User}'{Environment.NewLine}{items}", 
+                    $@"Author changed, {changeScope.ToString()}");
             }
             else
             // No selected item (Diagram or Project Browser)
-            // Context Element
+            // Use Context Element
             {
                 EA.Element el = null;
                 EA.Package pkg = null;
@@ -584,7 +589,10 @@ namespace hoTools.EaServices
         #endregion
         #region Get selected Elements
         /// <summary>
-        /// Get selected Elements
+        /// Get selected Elements from:
+        /// - Diagram
+        /// - Tree Selected Elements
+        /// - Elements can also be Packages
         /// </summary>
         /// <param name="rep"></param>
         /// <returns></returns>
@@ -614,7 +622,7 @@ namespace hoTools.EaServices
             "Select package, element or diagram in Browser or Diagram", isTextRequired: false)]
         public static void ChangeAuthorPackage(Repository rep)
         {
-            ChangeAuthor(rep, ChangeScope.FullPackageElement);
+            ChangeAuthor(rep, ChangeScope.Package);
         }
 
         #region change Author for selected item

@@ -17,8 +17,8 @@ namespace hoTools.EaServices.Dlg
         Repository _rep;
         readonly bool _isSecurityEnabled;
         private string _items = @"Change Author of selected items";
-        private string _packages = @"Change Author of selected packages + content";
-        private string _packagesRecursive = @"Change Author of selected packages, recursive";
+        private string _packages = @"Change Author of selected items + packages";
+        private string _packagesRecursive = @"Change Author of selected items, packages, recursive";
 
 
         
@@ -40,7 +40,7 @@ namespace hoTools.EaServices.Dlg
                 case ChangeScope.Item:
                     Text = _items;
                     break;
-                case ChangeScope.FullPackageElement:
+                case ChangeScope.Package:
                     Text = _packages;
                     break;
                 case ChangeScope.PackageRecursive:

@@ -46,7 +46,7 @@ namespace hoTools.Utils
     public enum ChangeScope
     {
         Item,
-        FullPackageElement,
+        Package,
         PackageRecursive
 
     }
@@ -86,10 +86,14 @@ namespace hoTools.Utils
                 }
 
                 // run packages of package
-                if (changeScope == ChangeScope.PackageRecursive) { 
+                if (changeScope != ChangeScope.Item) {
+                    if (changeScope == ChangeScope.Package)
+                    {
+                        // inside package only the items
+                        parameterStrings[1] = ChangeScope.Item.ToString();
+                    }
                     foreach (EA.Package pkgTrgt in pkg.Packages)
                     {
-
                         DoRecursivePkg(rep, pkgTrgt, setPkg, setEl, setDia, parameterStrings);
                     }
                 }
@@ -102,7 +106,7 @@ namespace hoTools.Utils
         {
             ChangeScope changeScope;
             if (Enum.TryParse(parameterStrings[1], out changeScope)) { 
-                // perform
+                // perform change
                 setEl(rep, el, parameterStrings);
 
                 // only the item itself
