@@ -4,6 +4,16 @@ Addin with Tools for SPARX Enterprise Architect (EA)
 - Helmut.Ortmann@hoModeller.de
 - hoModeller.de
 
+# Requirements
+- Windows
+- .NET 4.5 or greater
+- EA 9.0 or greater
+- Local administration rights for installation (register COM dll)
+
+# Known issues
+- On 4K monitors sometimes modal windows get behind the current window (no work possible, only beeping)
+  - Workaround: Kill EA and start on a non 4k monitor. After a while you can change to 4k monitor
+
 # Abstract
 Collection of useful tools (see also [WiKi](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/home)):
 
@@ -52,11 +62,7 @@ Collection of useful tools (see also [WiKi](https://github.com/Helmut-Ortmann/En
 - [WiKi](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/home)
 
 
-# Requirements
-- Windows
-- .NET 4.5 or greater
-- EA 9.0 or greater
-- Local administration rights for installation (register COM dll)
+
 
 
 # SQL Query

@@ -605,7 +605,7 @@ namespace hoTools.Query
         void settingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _frmQueryAndScript = new FrmQueryAndScript(AddinSettings);
-            _frmQueryAndScript.ShowDialog();
+            _frmQueryAndScript.ShowDialog(this);
         }
 
         #region About

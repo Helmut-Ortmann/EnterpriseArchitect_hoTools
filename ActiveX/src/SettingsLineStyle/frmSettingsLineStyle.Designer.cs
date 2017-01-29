@@ -321,6 +321,7 @@
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FrmSettingsLineStyle";
             this.Text = "hoTools: Default Line Style Setting";
+            this.Shown += new System.EventHandler(this.FrmSettingsLineStyle_Shown);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);

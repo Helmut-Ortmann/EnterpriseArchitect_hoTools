@@ -16,6 +16,7 @@ namespace hoTools.EaServices.Dlg
         {
             InitializeComponent();
             cmbUser.Text = _user;
+            TopMost = true;
 
         }
         #region property user
@@ -30,6 +31,15 @@ namespace hoTools.EaServices.Dlg
         {
             _user = cmbUser.Text; 
         }
-
+        /// <summary>
+        /// Ensured that the modal windows is always on top
+        /// - On 4K monitors the dialog sometimes get in the background
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dlgUser_Shown(object sender, EventArgs e)
+        {
+            TopMost = true;
+        }
     }
 }

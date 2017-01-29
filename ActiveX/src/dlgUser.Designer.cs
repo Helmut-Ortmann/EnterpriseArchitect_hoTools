@@ -72,6 +72,7 @@
             this.Controls.Add(this.btnOk);
             this.Name = "dlgUser";
             this.Text = "dlgUser";
+            this.Shown += new System.EventHandler(this.dlgUser_Shown);
             this.ResumeLayout(false);
 
         }

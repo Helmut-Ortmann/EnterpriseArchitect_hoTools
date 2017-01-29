@@ -112,7 +112,16 @@ namespace hoTools.EaServices.Dlg
         {
             _user = "";
         }
-
+        /// <summary>
+        /// Ensured that the modal windows is always on top
+        /// - On 4K monitors the dialog sometimes get in the background
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DlgAuthor_Shown(object sender, EventArgs e)
+        {
+            TopMost = true;
+        }
     }
     
 }

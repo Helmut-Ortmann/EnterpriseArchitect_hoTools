@@ -111,5 +111,15 @@ namespace hoTools.Settings
         {
             WikiRef.WikiScript();
         }
+        /// <summary>
+        /// Ensured that the modal windows is always on top
+        /// - On 4K monitors the dialog sometimes get in the background
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void FrmQueryAndScript_Shown(object sender, EventArgs e)
+        {
+            TopMost = true;
+        }
     }
 }

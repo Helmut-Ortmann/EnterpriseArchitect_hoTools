@@ -2486,11 +2486,17 @@ Tip:
   <data name="hoToolsToolStripMenuItem.Text" xml:space="preserve">
     <value>hoTools</value>
   </data>
+  <data name="hoToolsToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Shows the hoTools WiKi page with your browser</value>
+  </data>
   <data name="settingsGeneralToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>171, 22</value>
   </data>
   <data name="settingsGeneralToolStripMenuItem.Text" xml:space="preserve">
     <value>SettingsGeneral</value>
+  </data>
+  <data name="settingsGeneralToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Shows the hoTools General Settings WiKi page with your browser</value>
   </data>
   <data name="toolStripSeparator2.Size" type="System.Drawing.Size, System.Drawing">
     <value>168, 6</value>
@@ -2515,6 +2521,15 @@ Tip:
   </data>
   <data name="toolStripSeparator8.Size" type="System.Drawing.Size, System.Drawing">
     <value>168, 6</value>
+  </data>
+  <data name="readMeToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>171, 22</value>
+  </data>
+  <data name="readMeToolStripMenuItem.Text" xml:space="preserve">
+    <value>ReadMe</value>
+  </data>
+  <data name="readMeToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Shows the readme file with your browser.</value>
   </data>
   <data name="_aboutToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>171, 22</value>
@@ -3385,6 +3400,12 @@ Tip:
   </data>
   <data name="&gt;&gt;toolStripSeparator8.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;readMeToolStripMenuItem.Name" xml:space="preserve">
+    <value>readMeToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;readMeToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;_aboutToolStripMenuItem.Name" xml:space="preserve">
     <value>_aboutToolStripMenuItem</value>

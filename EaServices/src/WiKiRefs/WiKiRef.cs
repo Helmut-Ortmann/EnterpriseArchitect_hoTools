@@ -4,6 +4,10 @@ namespace hoTools.EaServices.WiKiRefs
 {
     public class WikiRef
     {
+        public static void ReadMe()
+        {
+            Process.Start("https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/blob/master/README.md");
+        }
         public static void WikiSql()
         {
             Process.Start("https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/SQL");

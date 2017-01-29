@@ -138,6 +138,7 @@ namespace hoTools.EaServices.Dlg
             this.Text = "Enter Author ";
             this.toolTip1.SetToolTip(this, "Select Author:\r\nIf suricty enabled: The Author has to be from the list box.\r\nIf s" +
         "ecurity isn\'t enabled: The Author is arbitrary (not blank).");
+            this.Shown += new System.EventHandler(this.DlgAuthor_Shown);
             this.ResumeLayout(false);
             this.PerformLayout();
 

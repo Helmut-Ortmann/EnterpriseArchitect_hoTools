@@ -9,6 +9,8 @@ namespace hoTools.Utils.Configuration
     {
         string _paths;
         string[] _lpaths;
+        // the owner of the windows, used to prevent modal windows in background
+        private Control _owner;
 
         HoToolsGlobalCfg()
         {
@@ -20,6 +22,14 @@ namespace hoTools.Utils.Configuration
         /// </summary>
         public static HoToolsGlobalCfg Instance { get; } = new HoToolsGlobalCfg();
 
+        /// <summary>
+        /// The owner of all windows. Used to prevent modal windows stuck in background.
+        /// </summary>
+        public Control Owner
+        {
+            get { return _owner; }
+            set { _owner = value; }
+        }
 
         /// <summary>
         /// hoTools config path (..user\&lt;users>\AppData\Roaming\ho\hoTools\)

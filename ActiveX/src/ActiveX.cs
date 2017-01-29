@@ -206,6 +206,7 @@ namespace hoTools.ActiveX
         private ToolStripSeparator toolStripSeparator8;
         private ToolStripMenuItem toolStripMenuIHome;
         private ToolStripMenuItem changeAuthorPackagestandardToolStripMenuItem;
+        private ToolStripMenuItem readMeToolStripMenuItem;
         private TextBox _txtSearchText;
         #endregion
 
@@ -215,6 +216,8 @@ namespace hoTools.ActiveX
             try
             {
                 InitializeComponent();
+                // Initialize owner to prevent modal windows getting back behind main window
+                _globalCfg.Owner = this;
             }
             catch (Exception e)
             {
@@ -449,7 +452,7 @@ namespace hoTools.ActiveX
         void settingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _frmSettingsLineStyle = new FrmSettingsLineStyle(AddinSettings, this);
-            _frmSettingsLineStyle.ShowDialog();
+            _frmSettingsLineStyle.ShowDialog(this);
         }
 
         void btnUpdateActivityParametzer_Click(object sender, EventArgs e)
@@ -1261,6 +1264,7 @@ namespace hoTools.ActiveX
             this._helpToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.gitHubToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
+            this.readMeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuIHome = new System.Windows.Forms.ToolStripMenuItem();
             this._panelButtons = new System.Windows.Forms.Panel();
@@ -2277,6 +2281,7 @@ namespace hoTools.ActiveX
             this._helpToolStripMenuItem1,
             this.gitHubToolStripMenuItem,
             this.toolStripSeparator8,
+            this.readMeToolStripMenuItem,
             this._aboutToolStripMenuItem});
             this._helpToolStripMenuItem.Name = "_helpToolStripMenuItem";
             resources.ApplyResources(this._helpToolStripMenuItem, "_helpToolStripMenuItem");
@@ -2326,6 +2331,12 @@ namespace hoTools.ActiveX
             // 
             this.toolStripSeparator8.Name = "toolStripSeparator8";
             resources.ApplyResources(this.toolStripSeparator8, "toolStripSeparator8");
+            // 
+            // readMeToolStripMenuItem
+            // 
+            this.readMeToolStripMenuItem.Name = "readMeToolStripMenuItem";
+            resources.ApplyResources(this.readMeToolStripMenuItem, "readMeToolStripMenuItem");
+            this.readMeToolStripMenuItem.Click += new System.EventHandler(this.readMeToolStripMenuItem_Click);
             // 
             // _aboutToolStripMenuItem
             // 
@@ -2798,25 +2809,25 @@ namespace hoTools.ActiveX
         void settingsQueryAndSctipToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _frmQueryAndScript = new FrmQueryAndScript(AddinSettings);
-            _frmQueryAndScript.ShowDialog();
+            _frmQueryAndScript.ShowDialog(this);
         }
 
         void settingGeneralToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _frmSettingsGeneral = new FrmSettingsGeneral(AddinSettings, this);
-            _frmSettingsGeneral.ShowDialog();
+            _frmSettingsGeneral.ShowDialog(this);
 
         }
 
         void settingsToolbarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _frmSettingsToolbar = new FrmSettingsToolbar(AddinSettings, this);
-            _frmSettingsToolbar.ShowDialog();
+            _frmSettingsToolbar.ShowDialog(this);
         }
         void settingsKeysToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _frmSettingsKey = new FrmSettingsKey(AddinSettings, this);
-            _frmSettingsKey.ShowDialog();
+            _frmSettingsKey.ShowDialog(this);
         }
 
         /// <summary>
@@ -3253,7 +3264,10 @@ namespace hoTools.ActiveX
             WikiRef.WikiSettingsGeneral();
         }
 
-        
+        private void readMeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            WikiRef.ReadMe();
+        }
     }
 
     #endregion

@@ -98,12 +98,12 @@
             this.label9 = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolbarToolStripMenuSettings = new System.Windows.Forms.ToolStripMenuItem();
             this.wiKiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.hoToolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sQLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.scriptToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.findReplaceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolbarToolStripMenuSettings = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -816,14 +816,6 @@
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
             this.helpToolStripMenuItem.Text = "Help";
             // 
-            // toolbarToolStripMenuSettings
-            // 
-            this.toolbarToolStripMenuSettings.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolbarToolStripMenuSettings.Name = "toolbarToolStripMenuSettings";
-            this.toolbarToolStripMenuSettings.Size = new System.Drawing.Size(28, 24);
-            this.toolbarToolStripMenuSettings.Text = "?";
-            this.toolbarToolStripMenuSettings.Click += new System.EventHandler(this.toolbarToolStripMenuSettings_Click);
-            // 
             // wiKiToolStripMenuItem
             // 
             this.wiKiToolStripMenuItem.Name = "wiKiToolStripMenuItem";
@@ -859,6 +851,14 @@
             this.findReplaceToolStripMenuItem.Text = "Find + Replace";
             this.findReplaceToolStripMenuItem.Click += new System.EventHandler(this.findReplaceToolStripMenuItem_Click);
             // 
+            // toolbarToolStripMenuSettings
+            // 
+            this.toolbarToolStripMenuSettings.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolbarToolStripMenuSettings.Name = "toolbarToolStripMenuSettings";
+            this.toolbarToolStripMenuSettings.Size = new System.Drawing.Size(28, 24);
+            this.toolbarToolStripMenuSettings.Text = "?";
+            this.toolbarToolStripMenuSettings.Click += new System.EventHandler(this.toolbarToolStripMenuSettings_Click);
+            // 
             // FrmSettingsToolbar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -893,6 +893,7 @@
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FrmSettingsToolbar";
             this.Text = "hoTools: Toolbar Settings for Model Searches & Services & Scripts";
+            this.Shown += new System.EventHandler(this.FrmSettingsToolbar_Shown);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);

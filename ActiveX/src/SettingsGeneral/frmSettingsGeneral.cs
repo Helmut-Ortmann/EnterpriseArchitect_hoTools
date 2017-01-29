@@ -24,7 +24,7 @@ namespace hoTools.Settings
             InitializeComponent();
             _settings = settings;
             _addinControl = addinControl;
-
+            //this.TopMost = true;
 
             #region miscellaneous
             // SQL paths
@@ -215,6 +215,16 @@ namespace hoTools.Settings
         private void hoToolsToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
             WikiRef.WikiHoTools();
+        }
+        /// <summary>
+        /// Ensured that the modal windows is always on top
+        /// - On 4K monitors the dialog sometimes get in the background
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void FrmSettingsGeneral_Shown(object sender, System.EventArgs e)
+        {
+            this.TopMost = true;
         }
     }
 }

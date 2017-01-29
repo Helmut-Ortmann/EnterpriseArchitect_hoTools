@@ -374,6 +374,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "FrmQueryAndScript";
             this.Text = "hoTools: Settings SQL and Script";
+            this.Shown += new System.EventHandler(this.FrmQueryAndScript_Shown);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);

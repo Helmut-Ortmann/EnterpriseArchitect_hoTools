@@ -119,11 +119,11 @@
             this.label2 = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.settingsGlobalKeysStripMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsSQLScriptToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sQLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.scriptToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.findReplaceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.settingsGlobalKeysStripMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -1183,14 +1183,6 @@
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
             this.helpToolStripMenuItem.Text = "Help";
             // 
-            // settingsGlobalKeysStripMenu
-            // 
-            this.settingsGlobalKeysStripMenu.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.settingsGlobalKeysStripMenu.Name = "settingsGlobalKeysStripMenu";
-            this.settingsGlobalKeysStripMenu.Size = new System.Drawing.Size(28, 24);
-            this.settingsGlobalKeysStripMenu.Text = "?";
-            this.settingsGlobalKeysStripMenu.Click += new System.EventHandler(this.settingsGlobalKeysStripMenu_Click);
-            // 
             // settingsSQLScriptToolStripMenuItem
             // 
             this.settingsSQLScriptToolStripMenuItem.Name = "settingsSQLScriptToolStripMenuItem";
@@ -1218,6 +1210,14 @@
             this.findReplaceToolStripMenuItem.Size = new System.Drawing.Size(177, 24);
             this.findReplaceToolStripMenuItem.Text = "Find + Replace";
             this.findReplaceToolStripMenuItem.Click += new System.EventHandler(this.findReplaceToolStripMenuItem_Click);
+            // 
+            // settingsGlobalKeysStripMenu
+            // 
+            this.settingsGlobalKeysStripMenu.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.settingsGlobalKeysStripMenu.Name = "settingsGlobalKeysStripMenu";
+            this.settingsGlobalKeysStripMenu.Size = new System.Drawing.Size(28, 24);
+            this.settingsGlobalKeysStripMenu.Text = "?";
+            this.settingsGlobalKeysStripMenu.Click += new System.EventHandler(this.settingsGlobalKeysStripMenu_Click);
             // 
             // FrmSettingsKey
             // 
@@ -1265,6 +1265,7 @@
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FrmSettingsKey";
             this.Text = "hoTools: Settings Global Keys for Model Searches & Services & Scripts";
+            this.Shown += new System.EventHandler(this.FrmSettingsKey_Shown);
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             this.groupBox4.ResumeLayout(false);

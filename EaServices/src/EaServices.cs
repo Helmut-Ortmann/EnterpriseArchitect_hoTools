@@ -25,6 +25,7 @@ using File = EA.File;
 using Package = EA.Package;
 using TaggedValue = hoTools.Utils.TaggedValue;
 using hoTools.EAServicesPort;
+using hoTools.Utils.Configuration;
 
 // ReSharper disable RedundantArgumentDefaultValue
 // ReSharper disable ArgumentsStyleLiteral
@@ -68,6 +69,8 @@ namespace hoTools.EaServices
 
     public static class EaService
     {
+        // configuration as singleton
+        static HoToolsGlobalCfg _globalCfg;
 
         // define menu constants
         public enum DisplayMode
@@ -499,6 +502,8 @@ namespace hoTools.EaServices
         /// <param name="changeScope"></param>
         static void ChangeAuthor(Repository rep, ChangeScope changeScope)
         {
+            // configuration as singleton
+            _globalCfg = HoToolsGlobalCfg.Instance;
             // Parameter for change
             // - [0]Author to change to
             // - [1]changeScope
@@ -521,7 +526,7 @@ namespace hoTools.EaServices
                 }
 
                 var dlg0 = new DlgAuthor(rep, changeScope, lToChange) { User = lEl[0].Author };
-                dlg0.ShowDialog();
+                dlg0.ShowDialog(_globalCfg.Owner);
                 // use string to use recursive call of function
                 if (dlg0.User == "") return;
                 liParameter[0] = dlg0.User;
@@ -579,7 +584,7 @@ namespace hoTools.EaServices
                 }
                 // ask for new user
                 var dlg = new DlgAuthor(rep, ChangeScope.PackageRecursive, liAuthors) { User = oldAuthor };
-                dlg.ShowDialog();
+                dlg.ShowDialog(_globalCfg.Owner);
                 // use string to use recursive call of function
                 liParameter[0] = dlg.User;
                 if (dlg.User == "") return;
