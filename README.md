@@ -11,8 +11,7 @@ Addin with Tools for SPARX Enterprise Architect (EA)
 - Local administration rights for installation (register COM dll)
 
 # Known issues
-- On 4K monitors sometimes modal windows get behind the current window (no work possible, only beeping)
-  - Workaround: Kill EA and start on a non 4k monitor. After a while you can change to 4k monitor
+- No
 
 # Abstract
 Collection of useful tools (see also [WiKi](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/home)):
@@ -120,12 +119,14 @@ Some features:
 # Releases
 
 ## Release 2.1.3
+- [External SQL Editor integration improved](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/sqlExternalEdit)
 - Link to help improved
 - [FindUsage](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/FindUsage) (Error Message if search not existed (catch try block))
 - Find Usage (o.CLASSIFIER_ID=>o.CLASSIFIER_GUID, o1.CLASSIFIER_ID=>o1.CLASSIFIER_GUID corrected)
 - Missing try catch in Show Specification
 - Script: Catch error set SplitterDistance (I can't reproduce but it will do no harm)
 - [Change Author optimized](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/ChangeAuthor)
+- Fixed: Modale windows stuck behind main window
 
 ## Release 2.1.2.1
 - Wrong installation file 2.1.2 corrected 
