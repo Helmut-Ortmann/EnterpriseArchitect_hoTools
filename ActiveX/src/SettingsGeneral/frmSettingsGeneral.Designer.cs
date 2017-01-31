@@ -181,7 +181,7 @@
             // 
             this.chkAdvancedDiagramNote.AutoSize = true;
             this.chkAdvancedDiagramNote.Location = new System.Drawing.Point(197, 608);
-            this.chkAdvancedDiagramNote.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkAdvancedDiagramNote.Margin = new System.Windows.Forms.Padding(2);
             this.chkAdvancedDiagramNote.Name = "chkAdvancedDiagramNote";
             this.chkAdvancedDiagramNote.Size = new System.Drawing.Size(15, 14);
             this.chkAdvancedDiagramNote.TabIndex = 222;
@@ -206,7 +206,7 @@
             // 
             this.chkVcSupport.AutoSize = true;
             this.chkVcSupport.Location = new System.Drawing.Point(198, 626);
-            this.chkVcSupport.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkVcSupport.Margin = new System.Windows.Forms.Padding(2);
             this.chkVcSupport.Name = "chkVcSupport";
             this.chkVcSupport.Size = new System.Drawing.Size(15, 14);
             this.chkVcSupport.TabIndex = 220;
@@ -233,7 +233,7 @@
             // 
             this.chkAdvancedFeatures.AutoSize = true;
             this.chkAdvancedFeatures.Location = new System.Drawing.Point(207, 432);
-            this.chkAdvancedFeatures.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkAdvancedFeatures.Margin = new System.Windows.Forms.Padding(2);
             this.chkAdvancedFeatures.Name = "chkAdvancedFeatures";
             this.chkAdvancedFeatures.Size = new System.Drawing.Size(15, 14);
             this.chkAdvancedFeatures.TabIndex = 218;
@@ -244,7 +244,7 @@
             // 
             this.chkSvnSupport.AutoSize = true;
             this.chkSvnSupport.Location = new System.Drawing.Point(198, 653);
-            this.chkSvnSupport.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkSvnSupport.Margin = new System.Windows.Forms.Padding(2);
             this.chkSvnSupport.Name = "chkSvnSupport";
             this.chkSvnSupport.Size = new System.Drawing.Size(15, 14);
             this.chkSvnSupport.TabIndex = 217;
@@ -293,7 +293,7 @@
             // 
             this.txtQuickSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtQuickSearch.Location = new System.Drawing.Point(271, 275);
-            this.txtQuickSearch.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtQuickSearch.Margin = new System.Windows.Forms.Padding(2);
             this.txtQuickSearch.Name = "txtQuickSearch";
             this.txtQuickSearch.Size = new System.Drawing.Size(496, 24);
             this.txtQuickSearch.TabIndex = 213;
@@ -313,7 +313,7 @@
             // 
             this.chkAdvancedPort.AutoSize = true;
             this.chkAdvancedPort.Location = new System.Drawing.Point(733, 474);
-            this.chkAdvancedPort.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkAdvancedPort.Margin = new System.Windows.Forms.Padding(2);
             this.chkAdvancedPort.Name = "chkAdvancedPort";
             this.chkAdvancedPort.Size = new System.Drawing.Size(15, 14);
             this.chkAdvancedPort.TabIndex = 224;
@@ -325,7 +325,7 @@
             // 
             this.txtFileManagerPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtFileManagerPath.Location = new System.Drawing.Point(232, 649);
-            this.txtFileManagerPath.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtFileManagerPath.Margin = new System.Windows.Forms.Padding(2);
             this.txtFileManagerPath.Name = "txtFileManagerPath";
             this.txtFileManagerPath.Size = new System.Drawing.Size(314, 24);
             this.txtFileManagerPath.TabIndex = 226;
@@ -371,7 +371,7 @@
             // 
             this.chkLineStyleSupport.AutoSize = true;
             this.chkLineStyleSupport.Location = new System.Drawing.Point(207, 388);
-            this.chkLineStyleSupport.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkLineStyleSupport.Margin = new System.Windows.Forms.Padding(2);
             this.chkLineStyleSupport.Name = "chkLineStyleSupport";
             this.chkLineStyleSupport.Size = new System.Drawing.Size(15, 14);
             this.chkLineStyleSupport.TabIndex = 228;
@@ -394,7 +394,7 @@
             // 
             this.chkShortKeySupport.AutoSize = true;
             this.chkShortKeySupport.Location = new System.Drawing.Point(206, 182);
-            this.chkShortKeySupport.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkShortKeySupport.Margin = new System.Windows.Forms.Padding(2);
             this.chkShortKeySupport.Name = "chkShortKeySupport";
             this.chkShortKeySupport.Size = new System.Drawing.Size(15, 14);
             this.chkShortKeySupport.TabIndex = 230;
@@ -441,7 +441,7 @@
             // 
             this.chkShowServiceButtons.AutoSize = true;
             this.chkShowServiceButtons.Location = new System.Drawing.Point(206, 211);
-            this.chkShowServiceButtons.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkShowServiceButtons.Margin = new System.Windows.Forms.Padding(2);
             this.chkShowServiceButtons.Name = "chkShowServiceButtons";
             this.chkShowServiceButtons.Size = new System.Drawing.Size(15, 14);
             this.chkShowServiceButtons.TabIndex = 233;
@@ -452,7 +452,7 @@
             // 
             this.chkShowQueryButtons.AutoSize = true;
             this.chkShowQueryButtons.Location = new System.Drawing.Point(206, 229);
-            this.chkShowQueryButtons.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkShowQueryButtons.Margin = new System.Windows.Forms.Padding(2);
             this.chkShowQueryButtons.Name = "chkShowQueryButtons";
             this.chkShowQueryButtons.Size = new System.Drawing.Size(15, 14);
             this.chkShowQueryButtons.TabIndex = 234;
@@ -463,7 +463,7 @@
             // 
             this.chkFavoriteSupport.AutoSize = true;
             this.chkFavoriteSupport.Location = new System.Drawing.Point(207, 410);
-            this.chkFavoriteSupport.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkFavoriteSupport.Margin = new System.Windows.Forms.Padding(2);
             this.chkFavoriteSupport.Name = "chkFavoriteSupport";
             this.chkFavoriteSupport.Size = new System.Drawing.Size(15, 14);
             this.chkFavoriteSupport.TabIndex = 236;
@@ -635,7 +635,7 @@
             // 
             this.chkReverseEdgeDirection.AutoSize = true;
             this.chkReverseEdgeDirection.Location = new System.Drawing.Point(206, 366);
-            this.chkReverseEdgeDirection.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkReverseEdgeDirection.Margin = new System.Windows.Forms.Padding(2);
             this.chkReverseEdgeDirection.Name = "chkReverseEdgeDirection";
             this.chkReverseEdgeDirection.Size = new System.Drawing.Size(15, 14);
             this.chkReverseEdgeDirection.TabIndex = 249;
@@ -646,7 +646,7 @@
             // 
             this.chkPortBasicSupport.AutoSize = true;
             this.chkPortBasicSupport.Location = new System.Drawing.Point(271, 470);
-            this.chkPortBasicSupport.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkPortBasicSupport.Margin = new System.Windows.Forms.Padding(2);
             this.chkPortBasicSupport.Name = "chkPortBasicSupport";
             this.chkPortBasicSupport.Size = new System.Drawing.Size(15, 14);
             this.chkPortBasicSupport.TabIndex = 251;
@@ -669,7 +669,7 @@
             // 
             this.chkPortTypeSupport.AutoSize = true;
             this.chkPortTypeSupport.Location = new System.Drawing.Point(422, 470);
-            this.chkPortTypeSupport.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkPortTypeSupport.Margin = new System.Windows.Forms.Padding(2);
             this.chkPortTypeSupport.Name = "chkPortTypeSupport";
             this.chkPortTypeSupport.Size = new System.Drawing.Size(15, 14);
             this.chkPortTypeSupport.TabIndex = 253;
@@ -773,9 +773,10 @@
             this.label34.Location = new System.Drawing.Point(229, 626);
             this.label34.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(297, 18);
+            this.label34.Size = new System.Drawing.Size(362, 18);
             this.label34.TabIndex = 225;
-            this.label34.Text = "Path File Manager / Explorer for show folder";
+            this.label34.Text = "Path File Manager : Explorer/Totalcmd  to show folder";
+            this.toolTip1.SetToolTip(this.label34, "ter");
             // 
             // label8
             // 

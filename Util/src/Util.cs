@@ -1309,7 +1309,13 @@ namespace hoTools.Utils
             }
             return path;
         }
-
+        /// <summary>
+        /// 1. Get the ID from pkg.Flags
+        /// 2. Get root path from id in "%APPDATA%\Sparx System\EA\paths.tyt"
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <param name="pkg"></param>
+        /// <returns></returns>
         public static string GetVccRootPath(Repository rep, EA.Package pkg)
         {
             string rootPath = "";

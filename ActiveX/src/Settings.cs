@@ -233,6 +233,23 @@ namespace hoTools.Settings
         }
         #endregion
 
+
+        #region Property:CodeExtensionsPath
+        /// <summary>
+        /// Comma separated list of paths to search for SQL Queries
+        /// </summary>
+        public string CodeExtensionsPath
+        {
+            get
+            {
+                var p = CurrentConfig.AppSettings.Settings["CodeExtensionsPath"];
+                if (p == null) return "";// default
+                return p.Value;
+            }
+            set { SetStringConfigValue("CodeExtensionsPath", value); }
+        }
+        #endregion
+
         #region Property: SqlPaths
         /// <summary>
         /// Comma separated list of paths to search for SQL Queries
@@ -248,6 +265,8 @@ namespace hoTools.Settings
             set { SetStringConfigValue("SqlPaths", value); }
         }
         #endregion
+
+
 
         #region Property: SqlEditor
         public string SqlEditor
@@ -646,6 +665,38 @@ namespace hoTools.Settings
         }
         #endregion
 
+        #region Property: ExtensionWindow
+        public ShowInWindow ExtensionWindow
+        {
+            get
+            {
+                ShowInWindow result;
+                if (Enum.TryParse(CurrentConfig.AppSettings.Settings["ExtensionWindow"].Value, out result))
+                {
+                    return result;
+                }
+                else
+                {
+                    return ShowInWindow.Disabled;
+                }
+            }
+            set
+            {
+                if (CurrentConfig.AppSettings.Settings["ExtensionWindow"] != null)
+                {
+                    CurrentConfig.AppSettings.Settings["ExtensionWindow"].Value = value.ToString();
+                }
+                else
+                {
+                    MessageConfigValueNotExists("ExtensionWindow", value.ToString());
+                }
+
+            }
+
+        }
+        #endregion
+
+
         #region Property: OnlyQueryWindow
         public ShowInWindow OnlyQueryWindow
         {
@@ -825,6 +876,9 @@ namespace hoTools.Settings
 
             }
         }
+        // if Totalcmd is used to diplay folders
+        public bool IsTotalCommander => FileManagerPath.ToUpper().Contains("TOTAL");
+
         #endregion
         #region Property: quickSearchName
         public string QuickSearchName

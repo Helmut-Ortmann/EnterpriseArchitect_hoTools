@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace hoTools.Extension
+namespace hoTools.Extensions
 {
     [ComVisible(true)]
     [InterfaceType(ComInterfaceType.InterfaceIsDual)]
-    [Guid("8AD92777-EF23-4105-85DF-BA99D9C61BC5")]
-    public interface IQueryGui
+    [Guid("7D019C3D-5E7A-4BC4-B412-0B013F7DCEF2")]
+    public interface IExtensionGui
     {
         string GetName();
            

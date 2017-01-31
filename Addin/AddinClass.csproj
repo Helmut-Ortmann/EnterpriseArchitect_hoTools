@@ -91,6 +91,10 @@
       <Project>{dfbedf5e-fc7f-4269-a0a6-f9b9e86dac90}</Project>
       <Name>EaServices</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Extension\ExtensionGui.csproj">
+      <Project>{da1287e7-d076-4b08-85dd-7c8440317b94}</Project>
+      <Name>ExtensionGui</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FindAndReplace\FindAndReplace.csproj">
       <Project>{5089f046-2f1a-49f2-bf76-f8dda89fd0be}</Project>
       <Name>FindAndReplace</Name>
@@ -170,6 +174,7 @@
     </None>
     <None Include="ActiveX.dll.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </None>
     <None Include="hoKeyPair.snk" />
     <None Include="hoTools.bme">

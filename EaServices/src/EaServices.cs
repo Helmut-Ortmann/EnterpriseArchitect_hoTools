@@ -660,8 +660,11 @@ namespace hoTools.EaServices
                 case ObjectType.otPackage:
                     var pkg = (Package) rep.GetContextObject();
                     dirPath = Util.GetVccFilePath(rep, pkg);
-                    if (dirPath == "") return;
-                    Util.ShowFolder(dirPath, isTotalCommander);
+                    if (pkg.IsControlled)
+                    {
+                        if (dirPath == "") return;
+                        Util.ShowFolder(dirPath, isTotalCommander);
+                    }
                     break;
 
                 case ObjectType.otElement:

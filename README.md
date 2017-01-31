@@ -118,6 +118,8 @@ Some features:
 
 # Releases
 
+## Release 2.1.4
+
 ## Release 2.1.3
 - [External SQL Editor integration improved](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/sqlExternalEdit)
 - Link to help improved

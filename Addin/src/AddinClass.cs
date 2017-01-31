@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using hoTools.Utils.Favorites;
 using hoTools.ActiveX;
 using hoTools.Settings;
-using hoTools.Query;
+using hoTools.Extension;
 
 using hoTools.EaServices;
 using hoTools.Utils;
@@ -18,6 +18,7 @@ using System.Reflection;
 using hoTools.Find;
 using hoTools.Utils.Configuration;
 using GlobalHotkeys;
+using hoTools.Extensions;
 using File = System.IO.File;
 
 #region description
@@ -74,12 +75,14 @@ namespace hoTools
         static QueryGui _ScriptGUI;
         // ReSharper disable once InconsistentNaming
         static QueryGui _QueryGUI;
+        static ExtensionGui _ExtensionGUI;
 
         // ActiveX Controls
         AddinControlGui _myControlGui; // hoTools main window
         FindAndReplaceGUI _findAndReplaceGui;
         QueryGui _scriptGui;
         QueryGui _queryGui;
+        ExtensionGui _extensionGui;
 
         private static Model _model;        // to run SQL query file from global key
 
@@ -168,7 +171,11 @@ namespace hoTools
             // global configuration parameters independent from EA-Instance and used by services
             var globalCfg = HoToolsGlobalCfg.Instance;
             globalCfg.SetSqlPaths(_addinSettings.SqlPaths);
+            globalCfg.SetExtensionPaths(_addinSettings.CodeExtensionsPath);
+
             globalCfg.ConfigPath = _addinSettings.ConfigPath;
+
+
 
             // ReSharper disable once VirtualMemberCallInConstructor
             MenuHeader = "-" + _addinSettings.ProductName;
@@ -586,6 +593,7 @@ namespace hoTools
                 if (_findAndReplaceGui != null) _findAndReplaceGui.Repository = rep;
                 if (_scriptGui != null) _scriptGui.Repository = rep;
                 if (_queryGui != null) _queryGui.Repository = rep;
+                if (_extensionGui != null) _extensionGui.Repository = rep;
             } catch (Exception e)
             {
                 MessageBox.Show($@"{e.Message}",@"hoTools: Error initializing Addin Tabs with repository");
@@ -1131,6 +1139,16 @@ namespace hoTools
                             QueryGui.Progid, QueryGui.TabulatorSql, 
                             _addinSettings.OnlyQueryWindow);
                         _queryGui = _QueryGUI; // static + instance
+                    }
+                    // with Extension EA Addin Windows
+                    if (_addinSettings.ExtensionWindow != AddinSettings.ShowInWindow.Disabled)
+                    {
+                        // Run as Query
+                        _ExtensionGUI = AddAddinControl<ExtensionGui>(
+                            ExtensionGui.Tabulator,
+                            ExtensionGui.Progid,null,
+                             AddinSettings.ShowInWindow.AddinWindow);
+                        _extensionGui = _ExtensionGUI; // static + instance
                     }
 
                     // with Script & Query EA Addin Windows

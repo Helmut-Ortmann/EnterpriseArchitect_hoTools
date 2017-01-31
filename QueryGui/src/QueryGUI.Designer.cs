@@ -1,5 +1,5 @@
 ﻿
-namespace hoTools.Query
+namespace hoTools.Extension
 {
     partial class QueryGui
     {
@@ -305,7 +305,7 @@ namespace hoTools.Query
             // btnUndo
             // 
             this.btnUndo.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnUndo.Image = global::hoTools.Query.Properties.Resources.icon_undo_h;
+            this.btnUndo.Image = global::hoTools.Extension.Properties.Resources.icon_undo_h;
             this.btnUndo.Location = new System.Drawing.Point(0, 24);
             this.btnUndo.Margin = new System.Windows.Forms.Padding(0);
             this.btnUndo.Name = "btnUndo";
@@ -318,7 +318,7 @@ namespace hoTools.Query
             // btnRedo
             // 
             this.btnRedo.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnRedo.Image = global::hoTools.Query.Properties.Resources.icon_redo_h;
+            this.btnRedo.Image = global::hoTools.Extension.Properties.Resources.icon_redo_h;
             this.btnRedo.Location = new System.Drawing.Point(33, 25);
             this.btnRedo.Margin = new System.Windows.Forms.Padding(1);
             this.btnRedo.Name = "btnRedo";

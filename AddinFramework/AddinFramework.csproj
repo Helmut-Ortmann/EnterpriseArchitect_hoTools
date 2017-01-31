@@ -73,6 +73,8 @@
     <Compile Include="Extension\EaExtensionClass.cs" />
     <Compile Include="Utils\EaItem.cs" />
     <Compile Include="Utils\EaObjectType.cs" />
+    <Compile Include="Utils\Extensions\Extension.cs" />
+    <Compile Include="Utils\Extensions\ExtensionItem.cs" />
     <Compile Include="Utils\Script\ScriptUtility.cs" />
     <Compile Include="Utils\Search\Search.cs" />
     <Compile Include="Utils\Script\EaScript.cs" />

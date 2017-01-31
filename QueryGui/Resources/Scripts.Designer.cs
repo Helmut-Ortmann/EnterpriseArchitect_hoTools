@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace hoTools.Query.Resources {
+namespace hoTools.Extension.Resources {
     using System;
     
     

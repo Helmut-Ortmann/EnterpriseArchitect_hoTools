@@ -78,6 +78,14 @@
       <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
       <RefTargetDir>INSTALLFOLDER</RefTargetDir>
     </ProjectReference>
+    <ProjectReference Include="..\Extension\ExtensionGui.csproj">
+      <Name>ExtensionGui</Name>
+      <Project>{da1287e7-d076-4b08-85dd-7c8440317b94}</Project>
+      <Private>True</Private>
+      <DoNotHarvest>True</DoNotHarvest>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLFOLDER</RefTargetDir>
+    </ProjectReference>
     <ProjectReference Include="..\FindAndReplace\FindAndReplace.csproj">
       <Name>FindAndReplace</Name>
       <Project>{5089f046-2f1a-49f2-bf76-f8dda89fd0be}</Project>

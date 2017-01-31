@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace hoTools.Query.Properties {
+namespace hoTools.Extension.Properties {
     using System;
     
     

@@ -44,6 +44,7 @@
             this.helpToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.regularExpressionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.btnFindPrevious = new System.Windows.Forms.Button();
             this.txtStatus = new System.Windows.Forms.TextBox();
@@ -66,7 +67,6 @@
             this.chkAttribute = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
             this.Filter = new System.Windows.Forms.GroupBox();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.Filter.SuspendLayout();
             this.SuspendLayout();
@@ -74,7 +74,7 @@
             // txtFindString
             // 
             this.txtFindString.Location = new System.Drawing.Point(10, 251);
-            this.txtFindString.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtFindString.Margin = new System.Windows.Forms.Padding(2);
             this.txtFindString.Name = "txtFindString";
             this.txtFindString.Size = new System.Drawing.Size(215, 20);
             this.txtFindString.TabIndex = 0;
@@ -83,15 +83,15 @@
             // txtReplaceString
             // 
             this.txtReplaceString.Location = new System.Drawing.Point(233, 251);
-            this.txtReplaceString.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtReplaceString.Margin = new System.Windows.Forms.Padding(2);
             this.txtReplaceString.Name = "txtReplaceString";
-            this.txtReplaceString.Size = new System.Drawing.Size(198, 20);
+            this.txtReplaceString.Size = new System.Drawing.Size(227, 20);
             this.txtReplaceString.TabIndex = 1;
             // 
             // btnFindNext
             // 
             this.btnFindNext.Location = new System.Drawing.Point(28, 274);
-            this.btnFindNext.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnFindNext.Margin = new System.Windows.Forms.Padding(2);
             this.btnFindNext.Name = "btnFindNext";
             this.btnFindNext.Size = new System.Drawing.Size(40, 0);
             this.btnFindNext.TabIndex = 2;
@@ -103,7 +103,7 @@
             // btnReplace
             // 
             this.btnReplace.Location = new System.Drawing.Point(184, 274);
-            this.btnReplace.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnReplace.Margin = new System.Windows.Forms.Padding(2);
             this.btnReplace.Name = "btnReplace";
             this.btnReplace.Size = new System.Drawing.Size(56, 0);
             this.btnReplace.TabIndex = 3;
@@ -117,7 +117,7 @@
             // btnReplaceAll
             // 
             this.btnReplaceAll.Location = new System.Drawing.Point(271, 274);
-            this.btnReplaceAll.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnReplaceAll.Margin = new System.Windows.Forms.Padding(2);
             this.btnReplaceAll.Name = "btnReplaceAll";
             this.btnReplaceAll.Size = new System.Drawing.Size(74, 0);
             this.btnReplaceAll.TabIndex = 4;
@@ -130,7 +130,7 @@
             // btnCancel
             // 
             this.btnCancel.Location = new System.Drawing.Point(374, 275);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(2);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(56, 0);
             this.btnCancel.TabIndex = 5;
@@ -144,7 +144,7 @@
             this.chkRegularExpression.AutoSize = true;
             this.chkRegularExpression.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkRegularExpression.Location = new System.Drawing.Point(11, 188);
-            this.chkRegularExpression.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkRegularExpression.Margin = new System.Windows.Forms.Padding(2);
             this.chkRegularExpression.Name = "chkRegularExpression";
             this.chkRegularExpression.Size = new System.Drawing.Size(134, 19);
             this.chkRegularExpression.TabIndex = 6;
@@ -157,7 +157,7 @@
             this.chkName.AutoSize = true;
             this.chkName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkName.Location = new System.Drawing.Point(11, 93);
-            this.chkName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkName.Margin = new System.Windows.Forms.Padding(2);
             this.chkName.Name = "chkName";
             this.chkName.Size = new System.Drawing.Size(60, 19);
             this.chkName.TabIndex = 7;
@@ -169,7 +169,7 @@
             this.chkDescription.AutoSize = true;
             this.chkDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkDescription.Location = new System.Drawing.Point(11, 115);
-            this.chkDescription.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkDescription.Margin = new System.Windows.Forms.Padding(2);
             this.chkDescription.Name = "chkDescription";
             this.chkDescription.Size = new System.Drawing.Size(88, 19);
             this.chkDescription.TabIndex = 8;
@@ -185,7 +185,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(436, 25);
+            this.menuStrip1.Size = new System.Drawing.Size(475, 25);
             this.menuStrip1.TabIndex = 10;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -221,10 +221,18 @@
             this.regularExpressionToolStripMenuItem.Text = "Regular Expression";
             this.regularExpressionToolStripMenuItem.Click += new System.EventHandler(this.regularExpressionToolStripMenuItem_Click);
             // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(26, 21);
+            this.toolStripMenuItem1.Text = "?";
+            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
+            // 
             // btnFindPrevious
             // 
             this.btnFindPrevious.Location = new System.Drawing.Point(98, 274);
-            this.btnFindPrevious.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnFindPrevious.Margin = new System.Windows.Forms.Padding(2);
             this.btnFindPrevious.Name = "btnFindPrevious";
             this.btnFindPrevious.Size = new System.Drawing.Size(57, 0);
             this.btnFindPrevious.TabIndex = 24;
@@ -238,9 +246,9 @@
             // 
             this.txtStatus.Enabled = false;
             this.txtStatus.Location = new System.Drawing.Point(77, 280);
-            this.txtStatus.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtStatus.Margin = new System.Windows.Forms.Padding(2);
             this.txtStatus.Name = "txtStatus";
-            this.txtStatus.Size = new System.Drawing.Size(354, 20);
+            this.txtStatus.Size = new System.Drawing.Size(383, 20);
             this.txtStatus.TabIndex = 25;
             this.toolTip1.SetToolTip(this.txtStatus, resources.GetString("txtStatus.ToolTip"));
             // 
@@ -248,7 +256,7 @@
             // 
             this.btnShow.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnShow.Location = new System.Drawing.Point(11, 277);
-            this.btnShow.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnShow.Margin = new System.Windows.Forms.Padding(2);
             this.btnShow.Name = "btnShow";
             this.btnShow.Size = new System.Drawing.Size(60, 22);
             this.btnShow.TabIndex = 26;
@@ -262,7 +270,7 @@
             this.chkStereotype.AutoSize = true;
             this.chkStereotype.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkStereotype.Location = new System.Drawing.Point(11, 136);
-            this.chkStereotype.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkStereotype.Margin = new System.Windows.Forms.Padding(2);
             this.chkStereotype.Name = "chkStereotype";
             this.chkStereotype.Size = new System.Drawing.Size(84, 19);
             this.chkStereotype.TabIndex = 27;
@@ -275,7 +283,7 @@
             this.chkTaggedValue.AutoSize = true;
             this.chkTaggedValue.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkTaggedValue.Location = new System.Drawing.Point(11, 158);
-            this.chkTaggedValue.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkTaggedValue.Margin = new System.Windows.Forms.Padding(2);
             this.chkTaggedValue.Name = "chkTaggedValue";
             this.chkTaggedValue.Size = new System.Drawing.Size(108, 19);
             this.chkTaggedValue.TabIndex = 28;
@@ -288,9 +296,9 @@
             // txtTaggedValue
             // 
             this.txtTaggedValue.Location = new System.Drawing.Point(116, 103);
-            this.txtTaggedValue.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtTaggedValue.Margin = new System.Windows.Forms.Padding(2);
             this.txtTaggedValue.Name = "txtTaggedValue";
-            this.txtTaggedValue.Size = new System.Drawing.Size(291, 22);
+            this.txtTaggedValue.Size = new System.Drawing.Size(329, 22);
             this.txtTaggedValue.TabIndex = 29;
             this.toolTip1.SetToolTip(this.txtTaggedValue, "Enter TaggedValue Names to search in Item Types\r\n- Blank = all TaggedValue Names\r" +
         "\n- Tagged Value Names splitted by \',\' or \';\'");
@@ -322,8 +330,8 @@
             // chkIgnoreWhiteSpaces
             // 
             this.chkIgnoreWhiteSpaces.AutoSize = true;
-            this.chkIgnoreWhiteSpaces.Location = new System.Drawing.Point(252, 135);
-            this.chkIgnoreWhiteSpaces.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkIgnoreWhiteSpaces.Location = new System.Drawing.Point(274, 135);
+            this.chkIgnoreWhiteSpaces.Margin = new System.Windows.Forms.Padding(2);
             this.chkIgnoreWhiteSpaces.Name = "chkIgnoreWhiteSpaces";
             this.chkIgnoreWhiteSpaces.Size = new System.Drawing.Size(171, 20);
             this.chkIgnoreWhiteSpaces.TabIndex = 22;
@@ -335,7 +343,7 @@
             // 
             this.btnFind.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnFind.Location = new System.Drawing.Point(10, 223);
-            this.btnFind.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnFind.Margin = new System.Windows.Forms.Padding(2);
             this.btnFind.Name = "btnFind";
             this.btnFind.Size = new System.Drawing.Size(60, 22);
             this.btnFind.TabIndex = 23;
@@ -372,7 +380,7 @@
             // txtUserText
             // 
             this.txtUserText.Location = new System.Drawing.Point(355, 29);
-            this.txtUserText.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtUserText.Margin = new System.Windows.Forms.Padding(2);
             this.txtUserText.Name = "txtUserText";
             this.txtUserText.Size = new System.Drawing.Size(67, 20);
             this.txtUserText.TabIndex = 11;
@@ -389,7 +397,7 @@
             // 
             this.chkPackage.AutoSize = true;
             this.chkPackage.Location = new System.Drawing.Point(116, 39);
-            this.chkPackage.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkPackage.Margin = new System.Windows.Forms.Padding(2);
             this.chkPackage.Name = "chkPackage";
             this.chkPackage.Size = new System.Drawing.Size(89, 20);
             this.chkPackage.TabIndex = 16;
@@ -400,7 +408,7 @@
             // 
             this.chkElement.AutoSize = true;
             this.chkElement.Location = new System.Drawing.Point(116, 61);
-            this.chkElement.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkElement.Margin = new System.Windows.Forms.Padding(2);
             this.chkElement.Name = "chkElement";
             this.chkElement.Size = new System.Drawing.Size(83, 20);
             this.chkElement.TabIndex = 17;
@@ -411,7 +419,7 @@
             // 
             this.chkDiagram.AutoSize = true;
             this.chkDiagram.Location = new System.Drawing.Point(116, 84);
-            this.chkDiagram.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkDiagram.Margin = new System.Windows.Forms.Padding(2);
             this.chkDiagram.Name = "chkDiagram";
             this.chkDiagram.Size = new System.Drawing.Size(86, 20);
             this.chkDiagram.TabIndex = 18;
@@ -421,8 +429,8 @@
             // chkCaseSensetive
             // 
             this.chkCaseSensetive.AutoSize = true;
-            this.chkCaseSensetive.Location = new System.Drawing.Point(131, 135);
-            this.chkCaseSensetive.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkCaseSensetive.Location = new System.Drawing.Point(139, 135);
+            this.chkCaseSensetive.Margin = new System.Windows.Forms.Padding(2);
             this.chkCaseSensetive.Name = "chkCaseSensetive";
             this.chkCaseSensetive.Size = new System.Drawing.Size(129, 20);
             this.chkCaseSensetive.TabIndex = 19;
@@ -433,7 +441,7 @@
             // 
             this.chkOperation.AutoSize = true;
             this.chkOperation.Location = new System.Drawing.Point(204, 61);
-            this.chkOperation.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkOperation.Margin = new System.Windows.Forms.Padding(2);
             this.chkOperation.Name = "chkOperation";
             this.chkOperation.Size = new System.Drawing.Size(95, 20);
             this.chkOperation.TabIndex = 21;
@@ -444,7 +452,7 @@
             // 
             this.chkAttribute.AutoSize = true;
             this.chkAttribute.Location = new System.Drawing.Point(204, 39);
-            this.chkAttribute.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chkAttribute.Margin = new System.Windows.Forms.Padding(2);
             this.chkAttribute.Name = "chkAttribute";
             this.chkAttribute.Size = new System.Drawing.Size(84, 20);
             this.chkAttribute.TabIndex = 20;
@@ -475,18 +483,10 @@
             this.Filter.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Filter.Location = new System.Drawing.Point(10, 54);
             this.Filter.Name = "Filter";
-            this.Filter.Size = new System.Drawing.Size(411, 164);
+            this.Filter.Size = new System.Drawing.Size(450, 164);
             this.Filter.TabIndex = 34;
             this.Filter.TabStop = false;
             this.Filter.Text = "Filter";
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(26, 21);
-            this.toolStripMenuItem1.Text = "?";
-            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
             // FindAndReplaceGUI
             // 
@@ -514,9 +514,9 @@
             this.Controls.Add(this.txtFindString);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.Filter);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FindAndReplaceGUI";
-            this.Size = new System.Drawing.Size(436, 309);
+            this.Size = new System.Drawing.Size(475, 310);
             this.toolTip1.SetToolTip(this, "Show details and allow changes");
             this.Load += new System.EventHandler(this.FindAndReplaceGUI_Load);
             this.menuStrip1.ResumeLayout(false);

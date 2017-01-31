@@ -55,6 +55,8 @@ namespace hoTools.Settings
             txtAddinTabToFirstActivate.Text = _settings.AddinTabToFirstActivate;
 
             txtSqlSearchPath.Text = _settings.SqlPaths;
+
+            txtExtensionPath.Text = _settings.CodeExtensionsPath;
         }
         #endregion
 
@@ -84,6 +86,8 @@ namespace hoTools.Settings
             _settings.SqlEditor = txtSqlEditor.Text;
 
             _settings.SqlPaths = txtSqlSearchPath.Text;
+
+            _settings.CodeExtensionsPath = txtExtensionPath.Text;
 
 
             // save setting

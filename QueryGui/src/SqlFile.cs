@@ -5,7 +5,7 @@ using System.Threading;
 using FileSystem;
 
 
-namespace hoTools.Query
+namespace hoTools.Extension
 {
     /// <summary>
     /// Information of a *.sql file:

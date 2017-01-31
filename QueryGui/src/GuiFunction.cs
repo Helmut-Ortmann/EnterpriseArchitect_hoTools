@@ -5,7 +5,7 @@ using AddinFramework.Util;
 using AddinFramework.Util.Script;
 using EAAddinFramework.Utils;
 
-namespace hoTools.Query
+namespace hoTools.Extension
 {
     /// <summary>
     /// GUI Layer for QueryGUI

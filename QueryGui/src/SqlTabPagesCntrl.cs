@@ -11,7 +11,7 @@ using hoTools.Utils.Configuration;
 using Element = EA.Element;
 using Package = EA.Package;
 
-namespace hoTools.Query
+namespace hoTools.Extension
 {
     /// <summary>
     /// SqlTabPagesCntrl creates and handles TabPages of a ControlTab to work with *.sql files.

@@ -7,8 +7,11 @@ namespace hoTools.Utils.Configuration
 {
     public sealed class HoToolsGlobalCfg: IHoToolsGlobalCfg
     {
-        string _paths;
-        string[] _lpaths;
+        string _sqlPaths;
+        string[] _lSqlPaths;
+
+        string _extensionPaths;
+        string[] _lExtensionPaths;
         // the owner of the windows, used to prevent modal windows in background
         private Control _owner;
 
@@ -35,9 +38,73 @@ namespace hoTools.Utils.Configuration
         /// hoTools config path (..user\&lt;users>\AppData\Roaming\ho\hoTools\)
         /// </summary>
         public string ConfigPath { get; set; }
+
+        #region ExtensionPath
+
+        /// <summary>
+        ///  Set hoTools SQL path from Settings to search for SQL files. 
+        /// </summary>
+        /// <param name="paths"></param>
+        public void SetExtensionPaths(string paths)
+        {
+            _extensionPaths = paths;
+            _lExtensionPaths = paths.Split(';');
+        }
+
+        /// <summary>
+        /// Get the absolute file name. It searches according to the in settings specified SQL path. If the file don't exists it return "".
+        /// </summary>
+        /// <param name="extensionFileName"></param>
+        /// <returns></returns>
+        public string GetExtensionFileName(string extensionFileName)
+        {
+            return GetFileNameFromPath(_lExtensionPaths, extensionFileName);
+
+        }
+        /// <summary>
+        /// Get complete extension filepath from file name
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <returns></returns>
+        public string GetExtensionFileLong(string fileName)
+        {
+            return FileNameLong(GetExtensionListFileCompleteName(), fileName);
+        }
+
+        /// <summary>
+        /// Get list of Extension files of SQL path
+        /// </summary>
+        /// <returns></returns>
+        public List<string> GetExtensionListFileCompleteName()
+        {
+            return Files(_lExtensionPaths);
+
+        }
+
+        /// <summary>
+        /// Get list of sql paths
+        /// </summary>
+        /// <returns></returns>
+        public List<string> GetListExtensionPaths()
+        {
+            return _lExtensionPaths.ToList();
+        }
+        /// <summary>
+        ///  Set hoTools SQL path from Settings to search for SQL files. 
+        /// </summary>
+        /// <param name="paths"></param>
+        public void SetExtensionlPaths(string paths)
+        {
+            _extensionPaths = paths;
+            _lExtensionPaths = paths.Split(';');
+        }
+        #endregion
+
+
+        #region SqlPath
         public string GetSqlPaths()
         {
-            return _paths;
+            return _sqlPaths;
         }
         /// <summary>
         /// Get list of sql paths
@@ -45,7 +112,7 @@ namespace hoTools.Utils.Configuration
         /// <returns></returns>
         public List<string> GetListSqlPaths()
         {
-            return _lpaths.ToList();
+            return _lSqlPaths.ToList();
         }
         /// <summary>
         ///  Set hoTools SQL path from Settings to search for SQL files. 
@@ -53,8 +120,8 @@ namespace hoTools.Utils.Configuration
         /// <param name="paths"></param>
         public void SetSqlPaths(string paths)
         {
-            _paths = paths;
-            _lpaths = paths.Split(';');
+            _sqlPaths = paths;
+            _lSqlPaths = paths.Split(';');
         }
        
         /// <summary>
@@ -79,6 +146,7 @@ namespace hoTools.Utils.Configuration
             return "";
 
         }
+
         /// <summary>
         /// Get the absolute file name. It searches according to the in settings specified SQL path. If the file don't exists it return "".
         /// </summary>
@@ -86,10 +154,22 @@ namespace hoTools.Utils.Configuration
         /// <returns></returns>
         public string GetSqlFileName(string sqlFileName)
         {
+            return GetFileNameFromPath(_lSqlPaths, sqlFileName);
+            
+        }
+
+        /// <summary>
+        /// Get the absolute file name. It searches according to the in settings specified path. If the file don't exists it return "".
+        /// </summary>
+        /// <param name="lPaths"></param>
+        /// <param name="fileName"></param>
+        /// <returns></returns>
+        public string GetFileNameFromPath(string[] lPaths, string fileName)
+        {
             // Absolute path
-            if (Path.IsPathRooted(sqlFileName))
+            if (Path.IsPathRooted(fileName))
             {
-                if (File.Exists(sqlFileName)) return sqlFileName;
+                if (File.Exists(fileName)) return fileName;
                 else return "";
                 
             }
@@ -98,9 +178,9 @@ namespace hoTools.Utils.Configuration
 
 
                 // over all files
-                foreach (string path in _lpaths)
+                foreach (string path in lPaths)
                 {
-                    string f = Path.Combine(path, sqlFileName);
+                    string f = Path.Combine(path, fileName);
                     if (File.Exists(f))
                     {
                         return f;
@@ -115,53 +195,65 @@ namespace hoTools.Utils.Configuration
 
 
         /// <summary>
-        /// Get complete filepath from file name
+        /// Get complete sql filepath from file name
         /// </summary>
         /// <param name="fileName"></param>
         /// <returns></returns>
-        public string GetFileLong(string fileName )
+        public string GetSqlFileLong(string fileName )
+        {
+            return FileNameLong(GetSqlListFileCompleteName(), fileName);
+        }
+
+        private string FileNameLong(List<string> liFileCompleteName, string fileName)
         {
             // compare complete file name with extension
-            foreach (string fileNameLong in GetListFileCompleteName())
+            foreach (string fileNameLong in liFileCompleteName)
             {
                 if (Path.GetFileName(fileNameLong) == fileName) return fileNameLong;
             }
 
             // compare file name without extension
             fileName = Path.GetFileNameWithoutExtension(fileName);
-            foreach (string fileNameLong in GetListFileCompleteName())
+            foreach (string fileNameLong in liFileCompleteName)
             {
                 if (Path.GetFileNameWithoutExtension(fileNameLong) == fileName) return fileNameLong;
             }
             return "";
-
         }
+
+
         /// <summary>
         /// Get list of *.sql files of SQL path
         /// </summary>
         /// <returns></returns>
-        public List<string> GetListFileCompleteName()
+        public List<string> GetSqlListFileCompleteName()
+        {
+            return Files(_lSqlPaths);
+
+        }
+
+        private List<string> Files(string[] lPaths)
         {
             List<string> files = new List<string>();
             // over all files
-            foreach (string path in _lpaths)
+            foreach (string path in lPaths)
             {
                 if (Directory.Exists(path))
                     files.AddRange(Directory.GetFiles(path, "*.sql"));
             }
             return files;
-
         }
 
         public AutoCompleteStringCollection GetListFileName()
         {
             AutoCompleteStringCollection files = new AutoCompleteStringCollection();
-            foreach (string file in GetListFileCompleteName())
+            foreach (string file in GetSqlListFileCompleteName())
             {
                 files.Add(Path.GetFileName(file));
             }
             return files;
         }
+        #endregion
 
     }
 }

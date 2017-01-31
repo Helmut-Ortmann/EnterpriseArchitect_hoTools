@@ -360,6 +360,27 @@
                 <RegistryValue Root="HKCR" Key="Record\{5E1E504C-95C7-4B14-A0F6-70329F70084A}\2.0.0.1" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="Record\{5E1E504C-95C7-4B14-A0F6-70329F70084A}\2.0.0.1" Name="CodeBase" Value="file:///[#filA37F4A5CC1095CD95C25F0B032E07EA0]" Type="string" Action="write" />
       </Component>
+      <!--
+      Name="ExtensionGUI.dll" Source="$(var.ExtensionGui.TargetPath)" />
+      Update if Assembly, Visual Studio Version changed
+      -->
+      <Component Id="cmp6568F8A56629419B3A295204DA9EF009" Guid="*">
+                <Class Id="{07081FF7-5B36-4487-994B-B69DA4D4C530}" Context="InprocServer32" Description="hoTools.Extensions.ExtensionGui" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="hoTools.Extension" Description="hoTools.Extensions.ExtensionGui" />
+                </Class>
+                <File Id="filD154641F7286E1E07C3986437E4E72F1" KeyPath="yes" Name="ExtensionGUI.dll" Source="$(var.ExtensionGui.TargetPath)" />
+                <RegistryValue Root="HKCR" Key="CLSID\{07081FF7-5B36-4487-994B-B69DA4D4C530}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{07081FF7-5B36-4487-994B-B69DA4D4C530}\InprocServer32\2.1.4.0" Name="Class" Value="hoTools.Extensions.ExtensionGui" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{07081FF7-5B36-4487-994B-B69DA4D4C530}\InprocServer32\2.1.4.0" Name="Assembly" Value="ExtensionGui, Version=2.1.4.0, Culture=neutral, PublicKeyToken=37ea3d95ffcb87e1" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{07081FF7-5B36-4487-994B-B69DA4D4C530}\InprocServer32\2.1.4.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{07081FF7-5B36-4487-994B-B69DA4D4C530}\InprocServer32\2.1.4.0" Name="CodeBase" Value="file:///[#filD154641F7286E1E07C3986437E4E72F1]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{07081FF7-5B36-4487-994B-B69DA4D4C530}\InprocServer32" Name="Class" Value="hoTools.Extensions.ExtensionGui" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{07081FF7-5B36-4487-994B-B69DA4D4C530}\InprocServer32" Name="Assembly" Value="ExtensionGui, Version=2.1.4.0, Culture=neutral, PublicKeyToken=37ea3d95ffcb87e1" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{07081FF7-5B36-4487-994B-B69DA4D4C530}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{07081FF7-5B36-4487-994B-B69DA4D4C530}\InprocServer32" Name="CodeBase" Value="file:///[#filD154641F7286E1E07C3986437E4E72F1]" Type="string" Action="write" />
+            </Component>
+        
+      
       <!-- Configuration  ActiveX.dll.config  -->
       <Component Id="ActiveX.dll.config" Guid="357C0398-047E-4E8A-957C-C2F0607ED8E1">
         <File Id="ActiveX.dll.config" Name="ActiveX.dll.config" KeyPath="yes" Source="..\Setup\ActiveX.dll.config" />

@@ -441,7 +441,7 @@ namespace hoTools.ActiveX
         /// <param name="e"></param>
         void showFolderToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            EaService.ShowFolderElementPackage(Repository, isTotalCommander: false);
+            EaService.ShowFolderElementPackage(Repository, isTotalCommander: AddinSettings.IsTotalCommander);
         }
 
         void copyGUIDSQLToClipboardToolStripMenuItem_Click(object sender, EventArgs e)
@@ -622,7 +622,7 @@ namespace hoTools.ActiveX
 
         void showFolderVCorCodeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            EaService.ShowFolderElementPackage(Repository, isTotalCommander: false);
+            EaService.ShowFolderElementPackage(Repository, isTotalCommander: AddinSettings.IsTotalCommander);
         }
 
         void showTortoiseLogToolStripMenuItem_Click(object sender, EventArgs e)
@@ -3147,7 +3147,7 @@ namespace hoTools.ActiveX
             {   // SQL-File Search
                 string sqlString = _globalCfg.ReadSqlFile(searchItem.Name);
 
-                MessageBox.Show($@"{ _globalCfg.GetFileLong(searchItem.Name)}" +
+                MessageBox.Show($@"{ _globalCfg.GetSqlFileLong(searchItem.Name)}" +
                                 $@"{Environment.NewLine}Category: {searchItem.Category}{Environment.NewLine}{sqlString}",
                                 $@"Info SQL-File: '{Path.GetFileName(searchItem.Name)}'");
 

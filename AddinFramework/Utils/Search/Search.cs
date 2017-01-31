@@ -298,7 +298,7 @@ namespace AddinFramework.Util
         /// <returns></returns>
         private static void LoadSqlSearches()
         {
-            foreach (string file in GlobalCfg.GetListFileCompleteName())
+            foreach (string file in GlobalCfg.GetSqlListFileCompleteName())
             {
                 string description = SqlGetDescription(file);
                 string name = Path.GetFileName(file);
