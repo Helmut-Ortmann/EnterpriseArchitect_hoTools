@@ -34,7 +34,7 @@ namespace hoTools.Extensions
             this.txtSearchTerm = new System.Windows.Forms.TextBox();
             this.btnRunScriptForSql = new System.Windows.Forms.Button();
             this.btnRunScriptForSqlWithAsk = new System.Windows.Forms.Button();
-            this.dataGridViewScripts = new System.Windows.Forms.DataGridView();
+            this.dataGridViewExtensions = new System.Windows.Forms.DataGridView();
             this.contextMenuStripDataGrid = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.runTreeSelectedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.runScriptSelectedItemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -101,7 +101,7 @@ namespace hoTools.Extensions
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridExtensions = new System.Windows.Forms.DataGridView();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewScripts)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewExtensions)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.SuspendLayout();
             this.menuStrip2.SuspendLayout();
@@ -129,12 +129,12 @@ namespace hoTools.Extensions
             this.btnRunScriptForSqlWithAsk.Size = new System.Drawing.Size(75, 23);
             this.btnRunScriptForSqlWithAsk.TabIndex = 0;
             // 
-            // dataGridViewScripts
+            // dataGridViewExtensions
             // 
-            this.dataGridViewScripts.Location = new System.Drawing.Point(0, 0);
-            this.dataGridViewScripts.Name = "dataGridViewScripts";
-            this.dataGridViewScripts.Size = new System.Drawing.Size(240, 150);
-            this.dataGridViewScripts.TabIndex = 0;
+            this.dataGridViewExtensions.Location = new System.Drawing.Point(0, 0);
+            this.dataGridViewExtensions.Name = "dataGridViewExtensions";
+            this.dataGridViewExtensions.Size = new System.Drawing.Size(240, 150);
+            this.dataGridViewExtensions.TabIndex = 0;
             // 
             // contextMenuStripDataGrid
             // 
@@ -532,7 +532,7 @@ namespace hoTools.Extensions
             this.Name = "ExtensionGui";
             this.Size = new System.Drawing.Size(471, 281);
             this.Load += new System.EventHandler(this.ExtensionGui_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewScripts)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewExtensions)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).EndInit();
             this.splitContainer.ResumeLayout(false);
             this.menuStrip2.ResumeLayout(false);
@@ -555,7 +555,7 @@ namespace hoTools.Extensions
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Button btnLoadScripts;
-        private System.Windows.Forms.DataGridView dataGridViewScripts;
+        private System.Windows.Forms.DataGridView dataGridViewExtensions;
         private System.Windows.Forms.Button btnRunScriptForSql;
         private System.Windows.Forms.TabControl tabControlSql;
         private System.Windows.Forms.ContextMenuStrip contextMenuStripDataGrid;

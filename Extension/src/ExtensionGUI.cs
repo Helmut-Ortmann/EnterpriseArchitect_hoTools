@@ -39,11 +39,13 @@ namespace hoTools.Extensions
         public const string Progid = "hoTools.ExtensionGUI";
         public const string Tabulator = "Extensions";
 
+        DataTable _tableFunctions; // Scripts and Functions
 
 
 
 
-     
+
+
 
         #region Constructor
 
@@ -114,6 +116,93 @@ namespace hoTools.Extensions
         }
 
         private void ExtensionGui_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        #region initDataGrid
+
+        /// <summary>
+        /// Init Script Data for Grid
+        /// </summary>
+        void InitScriptDataGrid()
+        {
+            dataGridViewExtensions.AutoGenerateColumns = false;
+
+            dataGridViewExtensions.DataSource = null;
+
+
+            var col = new DataGridViewTextBoxColumn
+            {
+                DataPropertyName = "Name",
+                Name = "Name",
+                HeaderText = @"Name"
+            };
+            dataGridViewExtensions.Columns.Add(col);
+
+
+            col = new DataGridViewTextBoxColumn
+            {
+                DataPropertyName = "Type",
+                Name = "Type",
+                HeaderText = @"Type of Assembly"
+            };
+            dataGridViewExtensions.Columns.Add(col);
+
+            col = new DataGridViewTextBoxColumn
+            {
+                DataPropertyName = "Signiture",
+                Name = "Signiture",
+                HeaderText = @"Signiture"
+            };
+            dataGridViewExtensions.Columns.Add(col);
+
+
+            col = new DataGridViewTextBoxColumn
+            {
+                DataPropertyName = "Description",
+                Name = "Description",
+                HeaderText = @"Description"
+            };
+            dataGridViewExtensions.Columns.Add(col);
+
+           
+        }
+
+        #endregion
+
+        #region initDataTable
+
+        /// <summary>
+        /// Init the Data Grid Table.
+        /// </summary>
+        void InitScriptDataTable()
+        {
+            dataGridViewExtensions.DataSource = null;
+            _tableFunctions = new DataTable();
+            DataColumn functionName = new DataColumn("Name", typeof(Script));
+            DataColumn functionType = new DataColumn("Type", typeof(ScriptFunction));
+            DataColumn functionSigniture = new DataColumn("Signiture", typeof(string));
+            DataColumn functionDescription = new DataColumn("Description", typeof(string));
+            // add columns
+            _tableFunctions.Columns.AddRange(new[]
+                {
+                    functionName,
+                    functionType,
+                    functionSigniture,
+                    functionDescription,
+
+                }
+            );
+        }
+
+        #endregion
+
+        /// <summary>
+        /// Close Addin:
+        /// <para/>- Close not stored files
+        /// </summary>
+        void Close()
         {
 
         }
