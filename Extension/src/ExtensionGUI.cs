@@ -43,11 +43,7 @@ namespace hoTools.Extensions
 
 
 
-        // settings
-        FrmQueryAndScript _frmQueryAndScript;
-
-
-       
+     
 
         #region Constructor
 
@@ -66,7 +62,7 @@ namespace hoTools.Extensions
         #endregion
 
         // Interface IQueryGUI implementation
-        public string GetName() => "hoTools.QueryGUI";
+        public string GetName() => "hoTools.ExtensionGUI";
 
         #region Set Repository
 
@@ -87,7 +83,7 @@ namespace hoTools.Extensions
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show(e.ToString(), @"SQL,Script: Error Initialization");
+                    MessageBox.Show(e.ToString(), @"Extensions: Error Initialization");
                 }
             }
         }
@@ -117,6 +113,9 @@ namespace hoTools.Extensions
             return true;
         }
 
-        
+        private void ExtensionGui_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

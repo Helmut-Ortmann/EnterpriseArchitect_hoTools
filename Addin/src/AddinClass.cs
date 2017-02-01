@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using hoTools.Utils.Favorites;
 using hoTools.ActiveX;
 using hoTools.Settings;
-using hoTools.Extension;
+using hoTools.Query;
 
 using hoTools.EaServices;
 using hoTools.Utils;

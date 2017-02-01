@@ -93,18 +93,19 @@ namespace hoTools.Extensions
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.menuStrip2 = new System.Windows.Forms.MenuStrip();
-            this.helpToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.hOtOOLSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.wiKiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.label1 = new System.Windows.Forms.Label();
-            this.listExtensions = new System.Windows.Forms.ListBox();
             this.fileToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.hOtOOLSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.wiKiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.label1 = new System.Windows.Forms.Label();
+            this.dataGridExtensions = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewScripts)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.SuspendLayout();
             this.menuStrip2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridExtensions)).BeginInit();
             this.SuspendLayout();
             // 
             // txtSearchTerm
@@ -138,6 +139,7 @@ namespace hoTools.Extensions
             // contextMenuStripDataGrid
             // 
             this.contextMenuStripDataGrid.Name = "contextMenuStripDataGrid";
+            this.contextMenuStripDataGrid.Size = new System.Drawing.Size(61, 4);
             // 
             // runTreeSelectedToolStripMenuItem
             // 
@@ -456,56 +458,9 @@ namespace hoTools.Extensions
             this.toolStripMenuItem1});
             this.menuStrip2.Location = new System.Drawing.Point(0, 0);
             this.menuStrip2.Name = "menuStrip2";
-            this.menuStrip2.Size = new System.Drawing.Size(591, 25);
+            this.menuStrip2.Size = new System.Drawing.Size(471, 25);
             this.menuStrip2.TabIndex = 1;
             this.menuStrip2.Text = "menuStrip2";
-            // 
-            // helpToolStripMenuItem1
-            // 
-            this.helpToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.hOtOOLSToolStripMenuItem,
-            this.wiKiToolStripMenuItem});
-            this.helpToolStripMenuItem1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.helpToolStripMenuItem1.Name = "helpToolStripMenuItem1";
-            this.helpToolStripMenuItem1.Size = new System.Drawing.Size(47, 21);
-            this.helpToolStripMenuItem1.Text = "Help";
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(26, 21);
-            this.toolStripMenuItem1.Text = "?";
-            // 
-            // hOtOOLSToolStripMenuItem
-            // 
-            this.hOtOOLSToolStripMenuItem.Name = "hOtOOLSToolStripMenuItem";
-            this.hOtOOLSToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.hOtOOLSToolStripMenuItem.Text = "hoTools";
-            // 
-            // wiKiToolStripMenuItem
-            // 
-            this.wiKiToolStripMenuItem.Name = "wiKiToolStripMenuItem";
-            this.wiKiToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.wiKiToolStripMenuItem.Text = "WiKi";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(86, 60);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(296, 37);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "hoTools Extensions";
-            // 
-            // listExtensions
-            // 
-            this.listExtensions.FormattingEnabled = true;
-            this.listExtensions.Location = new System.Drawing.Point(39, 116);
-            this.listExtensions.Name = "listExtensions";
-            this.listExtensions.Size = new System.Drawing.Size(495, 225);
-            this.listExtensions.TabIndex = 3;
             // 
             // fileToolStripMenuItem1
             // 
@@ -519,21 +474,70 @@ namespace hoTools.Extensions
             // settingsToolStripMenuItem1
             // 
             this.settingsToolStripMenuItem1.Name = "settingsToolStripMenuItem1";
-            this.settingsToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.settingsToolStripMenuItem1.Size = new System.Drawing.Size(122, 22);
             this.settingsToolStripMenuItem1.Text = "Settings";
+            // 
+            // helpToolStripMenuItem1
+            // 
+            this.helpToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.hOtOOLSToolStripMenuItem,
+            this.wiKiToolStripMenuItem});
+            this.helpToolStripMenuItem1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.helpToolStripMenuItem1.Name = "helpToolStripMenuItem1";
+            this.helpToolStripMenuItem1.Size = new System.Drawing.Size(47, 21);
+            this.helpToolStripMenuItem1.Text = "Help";
+            // 
+            // hOtOOLSToolStripMenuItem
+            // 
+            this.hOtOOLSToolStripMenuItem.Name = "hOtOOLSToolStripMenuItem";
+            this.hOtOOLSToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
+            this.hOtOOLSToolStripMenuItem.Text = "hoTools";
+            // 
+            // wiKiToolStripMenuItem
+            // 
+            this.wiKiToolStripMenuItem.Name = "wiKiToolStripMenuItem";
+            this.wiKiToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
+            this.wiKiToolStripMenuItem.Text = "WiKi";
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(26, 21);
+            this.toolStripMenuItem1.Text = "?";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(113, 25);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(147, 20);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "hoTools Extensions";
+            // 
+            // dataGridExtensions
+            // 
+            this.dataGridExtensions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridExtensions.Location = new System.Drawing.Point(14, 48);
+            this.dataGridExtensions.Name = "dataGridExtensions";
+            this.dataGridExtensions.Size = new System.Drawing.Size(434, 193);
+            this.dataGridExtensions.TabIndex = 4;
             // 
             // ExtensionGui
             // 
-            this.Controls.Add(this.listExtensions);
+            this.Controls.Add(this.dataGridExtensions);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.menuStrip2);
             this.Name = "ExtensionGui";
-            this.Size = new System.Drawing.Size(591, 479);
+            this.Size = new System.Drawing.Size(471, 281);
+            this.Load += new System.EventHandler(this.ExtensionGui_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewScripts)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).EndInit();
             this.splitContainer.ResumeLayout(false);
             this.menuStrip2.ResumeLayout(false);
             this.menuStrip2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridExtensions)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -613,6 +617,6 @@ namespace hoTools.Extensions
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ListBox listExtensions;
+        private System.Windows.Forms.DataGridView dataGridExtensions;
     }
 }

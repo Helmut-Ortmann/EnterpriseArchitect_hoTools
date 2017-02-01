@@ -13,6 +13,7 @@ using Control.EaAddinShortcuts;
 using hoTools.Settings.Key;
 using hoTools.Settings.Toolbar;
 using EAAddinFramework.Utils;
+using AddinFramework.Utils.Extensions;
 using hoTools.EaServices.WiKiRefs;
 using hoTools.Utils.SQL;
 using hoTools.Utils;
@@ -269,6 +270,8 @@ namespace hoTools.ActiveX
                 _txtSearchName.ForeColor = SystemColors.ControlDark;
             }
             IntializeSearches();
+
+            Extension.LoadExtensions(Repository);
 
             ParameterizeMenusAndButtons();
             // parameterize 5 Buttons to quickly run search

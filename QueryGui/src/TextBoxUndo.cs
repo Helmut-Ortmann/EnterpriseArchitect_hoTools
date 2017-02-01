@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace hoTools.Extension
+namespace hoTools.Query
 {
     /// <summary>
     /// Text Box with UnDo/ReDo functionality by

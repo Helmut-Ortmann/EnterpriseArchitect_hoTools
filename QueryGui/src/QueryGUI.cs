@@ -24,7 +24,7 @@ using hoTools.Utils.Excel;
 
 
 
-namespace hoTools.Extension
+namespace hoTools.Query
 {
 
 
