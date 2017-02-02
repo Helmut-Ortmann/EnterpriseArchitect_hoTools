@@ -12,6 +12,7 @@ namespace hoTools.Utils.Configuration
 
         string _extensionPaths;
         string[] _lExtensionPaths;
+
         // the owner of the windows, used to prevent modal windows in background
         private Control _owner;
 
@@ -50,7 +51,7 @@ namespace hoTools.Utils.Configuration
             _extensionPaths = paths;
             _lExtensionPaths = paths.Split(';');
         }
-
+        #endregion
         /// <summary>
         /// Get the absolute file name. It searches according to the in settings specified SQL path. If the file don't exists it return "".
         /// </summary>
@@ -89,18 +90,7 @@ namespace hoTools.Utils.Configuration
         {
             return _lExtensionPaths.ToList();
         }
-        /// <summary>
-        ///  Set hoTools SQL path from Settings to search for SQL files. 
-        /// </summary>
-        /// <param name="paths"></param>
-        public void SetExtensionlPaths(string paths)
-        {
-            _extensionPaths = paths;
-            _lExtensionPaths = paths.Split(';');
-        }
-        #endregion
-
-
+        
         #region SqlPath
         public string GetSqlPaths()
         {
