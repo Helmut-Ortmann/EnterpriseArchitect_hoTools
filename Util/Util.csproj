@@ -95,6 +95,8 @@
     <Compile Include="src\Diagram.cs" />
     <Compile Include="src\Element.cs" />
     <Compile Include="src\Excel.cs" />
+    <Compile Include="src\Extensions\Extension.cs" />
+    <Compile Include="src\Extensions\ExtensionItem.cs" />
     <Compile Include="src\Favorite.cs" />
     <Compile Include="src\FormsControl.cs" />
     <Compile Include="src\GlobalHotkeyException.cs" />

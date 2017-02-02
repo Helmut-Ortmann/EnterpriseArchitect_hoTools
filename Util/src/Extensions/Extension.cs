@@ -1,25 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using EAAddinFramework.Utils;
+﻿using System.Collections.Generic;
 using hoTools.Utils.Configuration;
 
-
-namespace AddinFramework.Utils.ExtensionsDummy
+namespace hoTools.Utils.Extensions
 {
-    public static class Extension
+    public class Extension
     {
         // List of Extensions
-        private static List<ExtensionItem> lExtension;
+        private List<ExtensionItem> lExtension;
 
         // configurations as singleton
         static readonly HoToolsGlobalCfg GlobalCfg = HoToolsGlobalCfg.Instance;
 
+        public Extension()
+        {
+            LoadExtensions();
+        }
+
         #region properties
 
-        public static List<ExtensionItem> LExtension
+        public List<ExtensionItem> LExtension
         {
             get { return lExtension; }
         }
@@ -32,8 +31,9 @@ namespace AddinFramework.Utils.ExtensionsDummy
         /// </summary>
         /// <param name="rep"></param>
         /// <returns></returns>
-        public static bool LoadExtensions(EA.Repository rep)
+        public bool LoadExtensions()
         {
+            lExtension = new List<ExtensionItem>();
             foreach (string extensionName in GlobalCfg.GetExtensionListFileCompleteName())
             {
                 lExtension.Add(new ExtensionItem(extensionName));

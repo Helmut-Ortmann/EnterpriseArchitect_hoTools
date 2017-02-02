@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.IO;
 
-namespace AddinFramework.Utils.ExtensionsDummy
+
+namespace hoTools.Utils.Extensions
 {
     public class ExtensionItem
     {

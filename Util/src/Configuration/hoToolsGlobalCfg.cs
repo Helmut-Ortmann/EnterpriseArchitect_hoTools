@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using hoTools.Utils.Extensions;
 
 namespace hoTools.Utils.Configuration
 {
@@ -13,6 +14,9 @@ namespace hoTools.Utils.Configuration
         string _extensionPaths;
         string[] _lExtensionPaths;
 
+        // Class to administer Extensions
+        hoTools.Utils.Extensions.Extension  _extensions;
+
         // the owner of the windows, used to prevent modal windows in background
         private Control _owner;
 
@@ -20,6 +24,13 @@ namespace hoTools.Utils.Configuration
         {
             
         }
+
+        public Extensions.Extension Extensions
+        {
+            get { return _extensions; }
+            set { _extensions = value; }
+        }
+
         /// <summary>
         /// Access HoToolsGlobalCfg.Instance to get the singleton object.
         /// Then call methods on that instance.
@@ -78,8 +89,31 @@ namespace hoTools.Utils.Configuration
         /// <returns></returns>
         public List<string> GetExtensionListFileCompleteName()
         {
-            return Files(_lExtensionPaths);
+            return ExtentionFiles(_lExtensionPaths);
 
+        }
+        /// <summary>
+        /// returns extension file names (*.exe,*.dll) according to the specified path parameter 
+        /// </summary>
+        /// <param name="lPaths"></param>
+        /// <returns></returns>
+        private List<string> ExtentionFiles(string[] lPaths)
+        {
+            List<string> files = new List<string>();
+            // over all files
+            foreach (string path in lPaths)
+            {
+                if (Directory.Exists(path))
+                {
+                    files.AddRange(Directory.GetFiles(path, "*.exe"));
+                    files.AddRange(Directory.GetFiles(path, "*.dll"));
+                }
+            }
+            for (int i = files.Count - 1; i >= 0; i = i - 1)
+            {
+               if ( files[i].ToLower().Contains("interop") || files[i].ToLower().Contains("sparxsystem")) files.RemoveAt(i);
+            }
+            return files;
         }
 
         /// <summary>
@@ -218,11 +252,11 @@ namespace hoTools.Utils.Configuration
         /// <returns></returns>
         public List<string> GetSqlListFileCompleteName()
         {
-            return Files(_lSqlPaths);
+            return SqlFiles(_lSqlPaths);
 
         }
 
-        private List<string> Files(string[] lPaths)
+        private List<string> SqlFiles(string[] lPaths)
         {
             List<string> files = new List<string>();
             // over all files

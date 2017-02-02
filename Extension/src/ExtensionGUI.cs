@@ -39,7 +39,7 @@ namespace hoTools.Extensions
         public const string Progid = "hoTools.ExtensionGUI";
         public const string Tabulator = "Extensions";
 
-        DataTable _tableFunctions; // Scripts and Functions
+        DataTable _tableExtensions; // Scripts and Functions
 
 
 
@@ -174,18 +174,18 @@ namespace hoTools.Extensions
         #region initDataTable
 
         /// <summary>
-        /// Init the Data Grid Table.
+        /// Init the Data Grid Table with the Extensions
         /// </summary>
-        void InitScriptDataTable()
+        void InitExtensionDataTable()
         {
             dataGridViewExtensions.DataSource = null;
-            _tableFunctions = new DataTable();
+            _tableExtensions = new DataTable();
             DataColumn functionName = new DataColumn("Name", typeof(Script));
             DataColumn functionType = new DataColumn("Type", typeof(ScriptFunction));
             DataColumn functionSigniture = new DataColumn("Signiture", typeof(string));
             DataColumn functionDescription = new DataColumn("Description", typeof(string));
             // add columns
-            _tableFunctions.Columns.AddRange(new[]
+            _tableExtensions.Columns.AddRange(new[]
                 {
                     functionName,
                     functionType,
