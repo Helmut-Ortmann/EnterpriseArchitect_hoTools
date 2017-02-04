@@ -1,36 +1,40 @@
-﻿using System.IO;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Reflection;
 
 
 namespace hoTools.Utils.Extensions
 {
     public class ExtensionItem
     {
-        private string _name;
-        private string _longName;
-        private string _signature;
+        private string _fileName;
         private string _description;
         private string _helpText;
         private string _type;
         private string _assemblyVersion;
         private string _fileVersion;
-        private string _signiture;
+        private string _signature;
+        private List<string> _publicStaticMethods;
+        private List<string> _publicMethods;
 
 
-        public ExtensionItem(string longName)
+        public ExtensionItem(string fileName)
         {
-            _longName = longName;
+            _fileName = fileName;
         }
 
         public string Name
         {
-            get { return Path.GetFileName(_name); }
+            get { return Path.GetFileName(_fileName); }
 
         }
 
-        public string LongName
+        public string FileName
         {
-            get { return _longName; }
-            set { _longName = value; }
+            get { return _fileName; }
+            set { _fileName = value; }
         }
 
         public string Description
@@ -59,10 +63,65 @@ namespace hoTools.Utils.Extensions
             get { return _fileVersion; }
             set { _fileVersion = value; }
         }
-        public string Signiture
+        public string Signature
         {
-            get { return _signiture; }
-            set { _signiture = value; }
+            get { return _signature; }
+            set { _signature = value; }
+        }
+
+        public List<string> PublicStaticMethods
+        {
+            get { return _publicStaticMethods; }
+        }
+
+        public void AnalyzeAssembly()
+        {
+            Assembly ass = Assembly.ReflectionOnlyLoadFrom(_fileName);
+            foreach (Type t in ass.GetTypes())
+            {
+                string name = t.Name;
+                string fullyQualifiedName = t.FullName;
+            }
+
+            // get all public methods
+            _publicStaticMethods  = (from type in ass.GetTypes()
+                         from method in type.GetMethods(
+                           BindingFlags.Public |
+                           BindingFlags.Static)
+                         select type.FullName + ":" + method.Name).Distinct().ToList();
+
+            _publicMethods = (from type in ass.GetTypes()
+                                    from method in type.GetMethods(
+                                      BindingFlags.Public |
+                                      BindingFlags.Instance )
+                                    select type.FullName + ":" + method.Name).Distinct().ToList();
+
+            var m = (from type in ass.GetTypes()
+                     from method in type.GetMethods(
+                       BindingFlags.Public |
+                       BindingFlags.Instance)
+                     
+                     select new { type.FullName, method.Name, method.ReturnType});
+
+
+
+
+        }
+
+        public string ExtensionDetails()
+        {
+            string staticMethods = string.Join($@"{Environment.NewLine}", _publicStaticMethods.ToArray());
+            string publicMethods = string.Join($@"{Environment.NewLine}", _publicMethods.ToArray());
+            string info = $@"File:    {_fileName}
+Static Methods:
+{staticMethods}
+
+Instance Methods:
+{publicMethods}
+
+";
+            return info;
+
         }
     }
 }

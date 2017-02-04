@@ -6,7 +6,7 @@ namespace hoTools.Utils.Extensions
     public class Extension
     {
         // List of Extensions
-        private List<ExtensionItem> lExtension;
+        private List<ExtensionItem> _lExtensions;
 
         // configurations as singleton
         static readonly HoToolsGlobalCfg GlobalCfg = HoToolsGlobalCfg.Instance;
@@ -18,9 +18,9 @@ namespace hoTools.Utils.Extensions
 
         #region properties
 
-        public List<ExtensionItem> LExtension
+        public List<ExtensionItem> LExtensions
         {
-            get { return lExtension; }
+            get { return _lExtensions; }
         }
 
         #endregion
@@ -33,10 +33,10 @@ namespace hoTools.Utils.Extensions
         /// <returns></returns>
         public bool LoadExtensions()
         {
-            lExtension = new List<ExtensionItem>();
-            foreach (string extensionName in GlobalCfg.GetExtensionListFileCompleteName())
+            _lExtensions = new List<ExtensionItem>();
+            foreach (string extensionFileName in GlobalCfg.GetExtensionListFileCompleteName())
             {
-                lExtension.Add(new ExtensionItem(extensionName));
+                _lExtensions.Add(new ExtensionItem(extensionFileName));
 
             }
 

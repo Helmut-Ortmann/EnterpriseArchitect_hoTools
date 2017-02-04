@@ -49,6 +49,7 @@
             this.txtSqlSearchPath = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.txtAddinTabToFirstActivate = new System.Windows.Forms.TextBox();
+            this.txtExtensionPath = new System.Windows.Forms.TextBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.label12 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
@@ -58,7 +59,6 @@
             this.sQLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.scriptToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.txtExtensionPath = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -93,9 +93,9 @@
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(123, 46);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(268, 29);
+            this.label1.Size = new System.Drawing.Size(422, 29);
             this.label1.TabIndex = 2;
-            this.label1.Text = "Settings SQL and Script";
+            this.label1.Text = "Settings SQL,  Script and c# Extension";
             // 
             // rbOnlyQueryAddinWindow
             // 
@@ -277,6 +277,16 @@
         "QL\"\r\n- \"Script\"\r\n- \"your favorible Addin\"\r\n\r\nLeave it blank if you want EA to de" +
         "cide. ");
             // 
+            // txtExtensionPath
+            // 
+            this.txtExtensionPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtExtensionPath.Location = new System.Drawing.Point(28, 425);
+            this.txtExtensionPath.Name = "txtExtensionPath";
+            this.txtExtensionPath.Size = new System.Drawing.Size(536, 24);
+            this.txtExtensionPath.TabIndex = 251;
+            this.toolTip1.SetToolTip(this.txtExtensionPath, "Paths hoTools Extensions developed in C#:\r\n\r\nA semicolon seperated list of paths " +
+        "hoTools Extensions.\r\n\r\nLike: c:\\hoToolsExtensions;d:\\hoToolsExtension");
+            // 
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
@@ -352,25 +362,15 @@
             this.toolStripMenuItem1.Text = "?";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
-            // txtExtensionPath
-            // 
-            this.txtExtensionPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtExtensionPath.Location = new System.Drawing.Point(28, 425);
-            this.txtExtensionPath.Name = "txtExtensionPath";
-            this.txtExtensionPath.Size = new System.Drawing.Size(536, 24);
-            this.txtExtensionPath.TabIndex = 251;
-            this.toolTip1.SetToolTip(this.txtExtensionPath, "Paths hoTools Extensions developed in C#:\r\n\r\nA semicolon seperated list of paths " +
-        "hoTools Extensions.\r\n\r\nLike: c:\\hoToolsExtensions;d:\\hoToolsExtension");
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(28, 406);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(191, 18);
+            this.label4.Size = new System.Drawing.Size(290, 18);
             this.label4.TabIndex = 252;
-            this.label4.Text = "Path to hoTools Extensions";
+            this.label4.Text = "Path to hoTools .NET Extensions (e.g.:C#)";
             // 
             // FrmQueryAndScript
             // 
@@ -397,7 +397,7 @@
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "FrmQueryAndScript";
-            this.Text = "hoTools: Settings SQL and Script";
+            this.Text = "hoTools: Settings SQL, Script, .NET Extensions";
             this.Shown += new System.EventHandler(this.FrmQueryAndScript_Shown);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

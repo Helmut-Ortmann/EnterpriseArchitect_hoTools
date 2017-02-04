@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using AddinFramework.Util.Script;
 using EAAddinFramework.Utils;
 using hoTools.ActiveX;
+using hoTools.Settings;
 using hoTools.Utils.Configuration;
 using hoTools.Utils.Extensions;
 
@@ -36,14 +37,8 @@ namespace hoTools.Extensions
         readonly HoToolsGlobalCfg _globalCfg = HoToolsGlobalCfg.Instance;
 
         DataTable _tableExtensions; // Scripts and Functions
-        private List<ExtensionItem> _lExtension;
-
-
-
-
-
-
-
+        private List<ExtensionItem> _lExtensions;
+        private FrmQueryAndScript _frmQueryAndScript;
 
         #region Constructor
 
@@ -118,10 +113,18 @@ namespace hoTools.Extensions
 
 
             // get list of extensions
-            _lExtension = _globalCfg.Extensions.LExtension;
+            _lExtensions = _globalCfg.Extensions.LExtensions;
             InitExtensionDataGrid();
             InitExtensionDataTable();
+            LoadExtensions();
+        }
+        /// <summary>
+        /// Load all extensions.
+        /// </summary>
+        private void LoadExtensions()
+        {
             LoadExtensionDataTable();
+            dataGridExtensions.DataSource = _tableExtensions;
         }
 
         #region initDataGrid
@@ -134,9 +137,15 @@ namespace hoTools.Extensions
             dataGridViewExtensions.AutoGenerateColumns = false;
 
             dataGridViewExtensions.DataSource = null;
-
-
             var col = new DataGridViewTextBoxColumn
+            {
+                DataPropertyName = "ExtensionName",
+                Name = "ExtensionName",
+                HeaderText = @"ExtensionName",
+                Visible = false
+            };
+
+            col = new DataGridViewTextBoxColumn
             {
                 DataPropertyName = "Name",
                 Name = "Name",
@@ -155,9 +164,9 @@ namespace hoTools.Extensions
 
             col = new DataGridViewTextBoxColumn
             {
-                DataPropertyName = "Signiture",
-                Name = "Signiture",
-                HeaderText = @"Signiture"
+                DataPropertyName = "Signature",
+                Name = "Signature",
+                HeaderText = @"Signature"
             };
             dataGridViewExtensions.Columns.Add(col);
 
@@ -184,13 +193,15 @@ namespace hoTools.Extensions
         {
             dataGridViewExtensions.DataSource = null;
             _tableExtensions = new DataTable();
-            DataColumn name = new DataColumn("Name", typeof(Script));
-            DataColumn type = new DataColumn("Type", typeof(ScriptFunction));
-            DataColumn signature = new DataColumn("Signiture", typeof(string));
+            DataColumn extensionItem = new DataColumn("ExtensionItem", typeof(ExtensionItem));
+            DataColumn name = new DataColumn("Name", typeof(string));
+            DataColumn type = new DataColumn("Type", typeof(string));
+            DataColumn signature = new DataColumn("Signature", typeof(string));
             DataColumn description = new DataColumn("Description", typeof(string));
             // add columns
             _tableExtensions.Columns.AddRange(new[]
                 {
+                    extensionItem,
                     name,
                     type,
                     signature,
@@ -207,10 +218,12 @@ namespace hoTools.Extensions
             _tableExtensions.Rows.Clear();
             _globalCfg.Extensions.LoadExtensions();
 
-            foreach (var row in _lExtension)
+            foreach (var row in _lExtensions)
             {
 
-                _tableExtensions.Rows.Add(row.Name, row.Type, row.Signiture, row.Description);
+                _tableExtensions.Rows.Add(row, row.Name, row.Type, row.Signature, row.Description);
+                row.AnalyzeAssembly();
+                string methods = row.PublicStaticMethods.ToString();
             }
 
 
@@ -222,6 +235,26 @@ namespace hoTools.Extensions
         /// </summary>
         void Close()
         {
+
+        }
+
+        private void settingsToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            _frmQueryAndScript = new FrmQueryAndScript(AddinSettings);
+            _frmQueryAndScript.ShowDialog(this);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            LoadExtensions();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            int index = dataGridExtensions.CurrentCell.RowIndex;
+            if (index < 0) return;
+            ExtensionItem extensionItem = _tableExtensions.Rows[index].Field<ExtensionItem>(0);
+            MessageBox.Show(extensionItem.ExtensionDetails(), "Details Extension");
 
         }
     }
