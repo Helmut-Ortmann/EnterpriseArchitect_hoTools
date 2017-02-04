@@ -99,8 +99,8 @@ namespace hoTools.Extensions
             this.hOtOOLSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.wiKiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.label1 = new System.Windows.Forms.Label();
             this.dataGridExtensions = new System.Windows.Forms.DataGridView();
+            this.panel1 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewExtensions)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.SuspendLayout();
@@ -506,29 +506,29 @@ namespace hoTools.Extensions
             this.toolStripMenuItem1.Size = new System.Drawing.Size(26, 21);
             this.toolStripMenuItem1.Text = "?";
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(113, 25);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(147, 20);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "hoTools Extensions";
-            // 
             // dataGridExtensions
             // 
+            this.dataGridExtensions.BackgroundColor = System.Drawing.SystemColors.ControlLight;
             this.dataGridExtensions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridExtensions.Location = new System.Drawing.Point(14, 48);
+            this.dataGridExtensions.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridExtensions.Location = new System.Drawing.Point(0, 25);
             this.dataGridExtensions.Name = "dataGridExtensions";
-            this.dataGridExtensions.Size = new System.Drawing.Size(434, 193);
+            this.dataGridExtensions.Size = new System.Drawing.Size(471, 231);
             this.dataGridExtensions.TabIndex = 4;
+            // 
+            // panel1
+            // 
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel1.Location = new System.Drawing.Point(0, 256);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(471, 25);
+            this.panel1.TabIndex = 5;
             // 
             // ExtensionGui
             // 
             this.Controls.Add(this.dataGridExtensions);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.menuStrip2);
+            this.Controls.Add(this.panel1);
             this.Name = "ExtensionGui";
             this.Size = new System.Drawing.Size(471, 281);
             this.Load += new System.EventHandler(this.ExtensionGui_Load);
@@ -616,7 +616,7 @@ namespace hoTools.Extensions
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem1;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridView dataGridExtensions;
+        private System.Windows.Forms.Panel panel1;
     }
 }

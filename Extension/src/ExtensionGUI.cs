@@ -1,21 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Reflection;
-using System.Resources;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
-using AddinFramework.Util;
 using AddinFramework.Util.Script;
-using EA;
 using EAAddinFramework.Utils;
 using hoTools.ActiveX;
-using hoTools.EaServices;
-using hoTools.EaServices.WiKiRefs;
-using hoTools.Settings;
-using hoTools.Utils;
-using hoTools.Utils.Excel;
-using hoTools.Utils.SQL;
+using hoTools.Utils.Configuration;
+using hoTools.Utils.Extensions;
 
 // Resource Manager
 
@@ -39,7 +31,13 @@ namespace hoTools.Extensions
         public const string Progid = "hoTools.ExtensionGUI";
         public const string Tabulator = "Extensions";
 
+
+        // configuration as singleton
+        readonly HoToolsGlobalCfg _globalCfg = HoToolsGlobalCfg.Instance;
+
         DataTable _tableExtensions; // Scripts and Functions
+        private List<ExtensionItem> _lExtension;
+
 
 
 
@@ -118,6 +116,12 @@ namespace hoTools.Extensions
         private void ExtensionGui_Load(object sender, EventArgs e)
         {
 
+
+            // get list of extensions
+            _lExtension = _globalCfg.Extensions.LExtension;
+            InitExtensionDataGrid();
+            InitExtensionDataTable();
+            LoadExtensionDataTable();
         }
 
         #region initDataGrid
@@ -125,7 +129,7 @@ namespace hoTools.Extensions
         /// <summary>
         /// Init Script Data for Grid
         /// </summary>
-        void InitScriptDataGrid()
+        void InitExtensionDataGrid()
         {
             dataGridViewExtensions.AutoGenerateColumns = false;
 
@@ -180,23 +184,37 @@ namespace hoTools.Extensions
         {
             dataGridViewExtensions.DataSource = null;
             _tableExtensions = new DataTable();
-            DataColumn functionName = new DataColumn("Name", typeof(Script));
-            DataColumn functionType = new DataColumn("Type", typeof(ScriptFunction));
-            DataColumn functionSigniture = new DataColumn("Signiture", typeof(string));
-            DataColumn functionDescription = new DataColumn("Description", typeof(string));
+            DataColumn name = new DataColumn("Name", typeof(Script));
+            DataColumn type = new DataColumn("Type", typeof(ScriptFunction));
+            DataColumn signature = new DataColumn("Signiture", typeof(string));
+            DataColumn description = new DataColumn("Description", typeof(string));
             // add columns
             _tableExtensions.Columns.AddRange(new[]
                 {
-                    functionName,
-                    functionType,
-                    functionSigniture,
-                    functionDescription,
+                    name,
+                    type,
+                    signature,
+                    description,
 
                 }
             );
         }
 
         #endregion
+
+        void LoadExtensionDataTable()
+        {
+            _tableExtensions.Rows.Clear();
+            _globalCfg.Extensions.LoadExtensions();
+
+            foreach (var row in _lExtension)
+            {
+
+                _tableExtensions.Rows.Add(row.Name, row.Type, row.Signiture, row.Description);
+            }
+
+
+        }
 
         /// <summary>
         /// Close Addin:
