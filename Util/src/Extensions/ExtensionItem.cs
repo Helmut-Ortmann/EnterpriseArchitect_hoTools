@@ -94,15 +94,30 @@ namespace hoTools.Utils.Extensions
                                     from method in type.GetMethods(
                                       BindingFlags.Public |
                                       BindingFlags.Instance )
-                                    select type.FullName + ":" + method.Name).Distinct().ToList();
+                                    select method.ReturnType + "  "+ type.FullName + ":" + method.Name).Distinct().ToList();
 
-            var m = (from type in ass.GetTypes()
+            var m = from type in ass.GetTypes()
                      from method in type.GetMethods(
                        BindingFlags.Public |
                        BindingFlags.Instance)
-                     
-                     select new { type.FullName, method.Name, method.ReturnType});
-
+                     select new { type.FullName, method.Name, method.ReturnType, method};
+            string methodNames = "";
+            foreach (var e in m)
+            {
+                string name = $@"{e.ReturnType}     {e.FullName}:{e.Name}";
+                var method = e.method;
+                // collect parameters
+                string parameters = "";
+                string delimeter = " ";
+                foreach (var par in method.GetParameters())
+                {
+                    parameters = parameters + $@"{delimeter}{par.Name}:{par.ParameterType}";
+                    delimeter = ",";
+                }
+                methodNames = methodNames + $@"{name} ({parameters}){Environment.NewLine}";
+            }
+            _publicMethods = new List<string>();
+            _publicMethods.Add(methodNames);
 
 
 
