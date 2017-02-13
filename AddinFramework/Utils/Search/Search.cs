@@ -63,26 +63,36 @@ namespace AddinFramework.Util
         }
 
         /// <summary>
-        /// Makes a Forms Auto Completion List of all searches.
+        /// Load All Searches. 
         /// </summary>
         /// <param name="rep"></param>
         /// <param name="configFilePath">Configuration file with user configurations</param>
+        /// <param name="mdgLoadDuringStartUp"></param>
         /// <returns></returns>
-        public static AutoCompleteStringCollection GetSearchesSuggestions(EA.Repository rep, string configFilePath)
+        public static void  LoadAllSearches(EA.Repository rep, string configFilePath, string mdgLoadDuringStartUp)
         {
 
             _staticAllSearches = new List<SearchItem>();
+
+            LoadMdgSearches(rep, File.ReadAllText(mdgLoadDuringStartUp));
 
             // Load EA Standard Search Names for current release  
             LoadEaStandardSearchesFromJason(rep.GetRelease(), configFilePath);
             // Load stored searches like MDGs from different sources
             LoadSearches(rep);
-
-
-            LoadStaticSearchesSuggestions();
-            return _staticSearchesSuggestions;
+   
             
         }
+        /// <summary>
+        /// Get AutoComplete Suggestion for searches. The Searches have to be loaded by LoadAllSearches.
+        /// </summary>
+        /// <returns></returns>
+        public static AutoCompleteStringCollection GetSearchAutoCompleteSuggestion()
+        {
+            LoadStaticSearchesSuggestions();
+            return _staticSearchesSuggestions;
+        }
+
         /// <summary>
         /// Calculate score, sort and visualize rtf field. Upper/Lower cases are not considered.
         /// </summary>
@@ -117,7 +127,7 @@ namespace AddinFramework.Util
         /// <param name="rep"></param>
         static void LoadSearches(EA.Repository rep)
         {
-            // Load possible SQL seaerches from SQL Path
+            // Load possible SQL searches from SQL Path
             LoadSqlSearches();
 
             //local scripts

@@ -288,11 +288,12 @@ namespace hoTools.ActiveX
 
         }
         /// <summary>
-        /// Initializes Searches
+        /// Initializes all Searches. Load all searches and fill AutoSuggestionCollection
         /// </summary>
         private void IntializeSearches()
         {
-            _txtSearchName.AutoCompleteCustomSource = Search.GetSearchesSuggestions(Repository,AddinSettings.ConfigPath);
+             Search.LoadAllSearches(Repository,AddinSettings.ConfigPath, AddinSettings.GetAutoLoadMdgFileName());
+            _txtSearchName.AutoCompleteCustomSource = Search.GetSearchAutoCompleteSuggestion();
 
         } 
 

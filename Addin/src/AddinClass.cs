@@ -548,31 +548,13 @@ namespace hoTools
         public override object EA_OnInitializeTechnologies(EA.Repository repository) {
            
 
-            string fileNameMdg;
-            switch (_AddinSettings.AutoLoadMdgXml)
-            {
-                case AddinSettings.AutoLoadMdg.Basic:
-                    fileNameMdg = "hoToolsBasic.xml";
-                    break;
-                case AddinSettings.AutoLoadMdg.Compilation:
-                    fileNameMdg = "hoToolsCompilation.xml";
-                    break;
-                default:
-                    fileNameMdg = "";
-                    break;
-            }
-            if (fileNameMdg == "") return "";
-
-            string assemblyFolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            // ReSharper disable once AssignNullToNotNullAttribute
-            string combinedPathMdg = Path.Combine(assemblyFolder, fileNameMdg);
-
+            string fileNameMdg = _AddinSettings.GetAutoLoadMdgFileName();
             try
             {
-                return File.ReadAllText(combinedPathMdg);
+                return File.ReadAllText(fileNameMdg);
             } catch (Exception e)
             {
-                MessageBox.Show($@"MDG file='{combinedPathMdg}'{Environment.NewLine}{e}", 
+                MessageBox.Show($@"MDG file='{fileNameMdg}'{Environment.NewLine}{e}", 
                     $@"Can't load MDG '{fileNameMdg}'");
                 return "";
             } 

@@ -633,6 +633,37 @@ namespace hoTools.Settings
         #endregion
 
         #region Property: AutoLoadMdgXml
+
+
+        /// <summary>
+        /// Get filename of MDG to load during startup. It's the filename or blank for no file.
+        /// </summary>
+        /// <returns></returns>
+        public string GetAutoLoadMdgFileName()
+        {
+            string fileNameMdg;
+            switch (AutoLoadMdgXml)
+            {
+                case AddinSettings.AutoLoadMdg.Basic:
+                    fileNameMdg = "hoToolsBasic.xml";
+                    break;
+                case AddinSettings.AutoLoadMdg.Compilation:
+                    fileNameMdg = "hoToolsCompilation.xml";
+                    break;
+                default:
+                    fileNameMdg = "";
+                    break;
+            }
+            if (fileNameMdg == "") return "";
+
+            string assemblyFolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            // ReSharper disable once AssignNullToNotNullAttribute
+           return Path.Combine(assemblyFolder, fileNameMdg);
+
+        }
+
+
+
         /// <summary>
         /// Property which MDG to load (Basic, Compilation, No)
         /// </summary>
