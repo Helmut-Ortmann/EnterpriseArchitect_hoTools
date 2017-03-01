@@ -107,16 +107,9 @@
     <UIRef Id="WixUI_ErrorProgressText" />
 
     <!-- Prevent downgrading -->
-    <CustomAction Id="PreventDowngrading" Error="Newer version already installed." />
-    <!-- Sequences -->
-    <InstallExecuteSequence>
-      <Custom Action="PreventDowngrading" After="FindRelatedProducts">NEWPRODUCTFOUND</Custom>
-      <RemoveExistingProducts After="InstallFinalize" />
-    </InstallExecuteSequence>
-
-    <InstallUISequence>
-      <Custom Action="PreventDowngrading" After="FindRelatedProducts">NEWPRODUCTFOUND</Custom>
-    </InstallUISequence>
+    <MajorUpgrade Schedule="afterInstallInitialize"
+                DowngradeErrorMessage="A later version of hoReverse is already installed"
+                AllowSameVersionUpgrades="yes" />
 
   </Product>
 

@@ -6,7 +6,7 @@
          
   
   1. Generate mit Wix Tool heat the registry entry for Addin.dll (in bin\release folder of Addin
-     "c:\Program Files (x86)\WiX Toolset v3.7\bin\heat" file hoToolsAddin.dll -ag -template fragment -out IFM_Addin.wxs
+     "c:\Program Files (x86)\WiX Toolset v3.7\bin\heat" file hoToolsAddin.dll -ag -template fragment -out hoTools_Addin.wxs
   
   2.   Copy the Component content of *.wxs into the Addin Component of this file
   

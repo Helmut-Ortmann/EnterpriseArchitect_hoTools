@@ -76,7 +76,7 @@ namespace hoTools.Utils.Extensions
 
         public void AnalyzeAssembly()
         {
-            Assembly ass = Assembly.ReflectionOnlyLoadFrom(_fileName);
+            Assembly ass = Assembly.LoadFrom(_fileName);
             foreach (Type t in ass.GetTypes())
             {
                 string name = t.Name;

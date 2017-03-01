@@ -222,8 +222,8 @@ namespace hoTools.Extensions
             {
 
                 _tableExtensions.Rows.Add(row, row.Name, row.Type, row.Signature, row.Description);
-                row.AnalyzeAssembly();
-                string methods = row.PublicStaticMethods.ToString();
+                //row.AnalyzeAssembly();
+                //string methods = row.PublicStaticMethods.ToString();
             }
 
 

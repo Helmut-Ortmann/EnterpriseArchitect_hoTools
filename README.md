@@ -119,6 +119,9 @@ Some features:
 # Releases
 
 ## Release 2.1.4
+- hoTools inventarize loaded MDGs (hoBasicMDG,..)
+- Fixing error in Searches (CLASSID->CLASSGUID)
+- Preparation enventarize C# Extenssions to use as Scripts
 
 ## Release 2.1.3
 - [External SQL Editor integration improved](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/sqlExternalEdit)

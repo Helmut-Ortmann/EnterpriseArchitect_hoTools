@@ -40,7 +40,7 @@ namespace hoTools.Utils.ActionPins
                     if (type == "")
                     {
                         string txt = "No type is available for action:'" + action.Name + "'";
-                        rep.WriteOutput("ifm_addin", txt, 0);
+                        rep.WriteOutput("hoTools", txt, 0);
                     }
                     else
                     {
