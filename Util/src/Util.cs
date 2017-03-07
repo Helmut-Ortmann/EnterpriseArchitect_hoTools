@@ -1544,7 +1544,7 @@ namespace hoTools.Utils
                 diaObjSource.Update();
             }
 
-            string position = "l=" + leftPort + ";r=" + rightPort + ";t=" + topPort + ";b=" + bottomPort + ";";
+            string position = $"l={leftPort};r={rightPort};t={topPort};b={bottomPort};";
             var diaObjectPort = (EA.DiagramObject) dia.DiagramObjects.AddNew(position, "");
             if (port.Type.Equals("Port"))
             {

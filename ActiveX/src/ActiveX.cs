@@ -911,7 +911,7 @@ namespace hoTools.ActiveX
         }
         void btnTH_Click(object sender, EventArgs e)
         {
-            EaService.SetLineStyle(Repository, "LH");
+            EaService.SetLineStyle(Repository, "TH");
         }
         void btnTV_Click(object sender, EventArgs e)
         {

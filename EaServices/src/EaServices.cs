@@ -1975,6 +1975,7 @@ from %APPDATA%Local\Apps\hoTools\
                 diaObjTarget.ElementID = elTarget.ElementID;
                 diaObjTarget.Sequence = 1;
                 // suppress attributes/operations
+                //"DUID=1263D775;AttPro=0;AttPri=0;AttPub=0;AttPkg=0;AttCustom=0;OpCustom=0;PType=0;RzO=1;OpPro=0;OpPri=0;OpPub=0;OpPkg=0;";
                 diaObjTarget.Style =
                     "DUID=1263D775;AttPro=0;AttPri=0;AttPub=0;AttPkg=0;AttCustom=0;OpCustom=0;PType=0;RzO=1;OpPro=0;OpPri=0;OpPub=0;OpPkg=0;";
                 diaObjTarget.Update();

@@ -121,6 +121,7 @@ Some features:
 ## Release 2.1.4
 - hoTools inventarize loaded MDGs (hoBasicMDG,..)
 - Fixing error in Searches (CLASSID->CLASSGUID)
+- Linestyle TH (Tree Horizontal) was implemented as Lateral Horizontal)
 - Preparation enventarize C# Extenssions to use as Scripts
 
 ## Release 2.1.3
