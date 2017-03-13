@@ -24,7 +24,7 @@
   -->
   <?define ProductVersion="2.1.4" ?> 
   <?define UpgradeCode="3543ED18-28F6-484C-AD8C-FA1A3B72C911" ?>
-  <?define Manufacturer="hoModeller.de" ?>
+  <?define Manufacturer="hoModeler.de" ?>
   <?define ProductName="hoTools" ?>
 
   <Product Id="*"

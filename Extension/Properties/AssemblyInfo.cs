@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Extension")]
 [assembly: AssemblyDescription("Handle Extens")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Helmut Ortmann, hoModeller.de")]
+[assembly: AssemblyCompany("Helmut Ortmann, hoModeler.de")]
 [assembly: AssemblyProduct("Extension")]
 [assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]

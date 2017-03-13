@@ -1,8 +1,8 @@
 # EnterpriseArchitect_hoTools
 Addin with Tools for SPARX Enterprise Architect (EA)
 
-- Helmut.Ortmann@hoModeller.de
-- hoModeller.de
+- Helmut.Ortmann@hoModeler.de
+- hoModeler.de
 
 # Requirements
 - Windows
@@ -245,5 +245,5 @@ I appreciate your feedback!!
 
 Helmut.Ortmann@t-online.de
 
-Helmut.Ortmann@hoModeller.de
+Helmut.Ortmann@hoModeler.de
 

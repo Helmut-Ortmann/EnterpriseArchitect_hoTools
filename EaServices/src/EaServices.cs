@@ -5427,7 +5427,7 @@ from %APPDATA%Local\Apps\hoTools\
             string s1 = @"!!!Make live with EA easier and more efficient!!!
 
 Helmut.Ortmann@t-online.de
-Helmut.Ortmann@hoModeller.de
+Helmut.Ortmann@hoModeler.de
 (+49) 172 / 51 79 16 7
 Workshops, Training Coaching, Project Work
 - Processes (SPICE / Functional Safety)
@@ -5456,7 +5456,7 @@ Workshops, Training Coaching, Project Work
             string s1 = @"!!!Make live with EA easier and more efficient!!!
 
 Helmut.Ortmann@t-online.de
-Helmut.Ortmann@hoModeller.de
+Helmut.Ortmann@hoModeler.de
 (+49) 172 / 51 79 16 7
 Workshops, Training Coaching, Project Work
 - Processes (SPICE / Functional Safety)
