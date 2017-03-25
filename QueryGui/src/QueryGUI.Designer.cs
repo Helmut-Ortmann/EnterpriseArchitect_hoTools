@@ -29,17 +29,16 @@ namespace hoTools.Query
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(QueryGui));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.toolTip1 = new System.Windows.Forms.ToolTip();
             this.txtSearchTerm = new System.Windows.Forms.TextBox();
             this.btnRunScriptForSql = new System.Windows.Forms.Button();
             this.btnRunScriptForSqlWithAsk = new System.Windows.Forms.Button();
             this.dataGridViewScripts = new System.Windows.Forms.DataGridView();
-            this.contextMenuStripDataGrid = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.contextMenuStripDataGrid = new System.Windows.Forms.ContextMenuStrip();
             this.runTreeSelectedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.runScriptSelectedItemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
@@ -306,10 +305,10 @@ namespace hoTools.Query
             // 
             this.btnUndo.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnUndo.Image = global::hoTools.Query.Properties.Resources.icon_undo_h;
-            this.btnUndo.Location = new System.Drawing.Point(0, 24);
+            this.btnUndo.Location = new System.Drawing.Point(189, 0);
             this.btnUndo.Margin = new System.Windows.Forms.Padding(0);
             this.btnUndo.Name = "btnUndo";
-            this.btnUndo.Size = new System.Drawing.Size(32, 2);
+            this.btnUndo.Size = new System.Drawing.Size(32, 24);
             this.btnUndo.TabIndex = 9;
             this.toolTip1.SetToolTip(this.btnUndo, "Undo Text change (CTRL+Z)");
             this.btnUndo.UseVisualStyleBackColor = true;
@@ -319,10 +318,10 @@ namespace hoTools.Query
             // 
             this.btnRedo.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnRedo.Image = global::hoTools.Query.Properties.Resources.icon_redo_h;
-            this.btnRedo.Location = new System.Drawing.Point(33, 25);
+            this.btnRedo.Location = new System.Drawing.Point(222, 1);
             this.btnRedo.Margin = new System.Windows.Forms.Padding(1);
             this.btnRedo.Name = "btnRedo";
-            this.btnRedo.Size = new System.Drawing.Size(31, 0);
+            this.btnRedo.Size = new System.Drawing.Size(31, 22);
             this.btnRedo.TabIndex = 11;
             this.toolTip1.SetToolTip(this.btnRedo, "Redo Text change (CTRL+Y)");
             this.btnRedo.UseVisualStyleBackColor = true;
@@ -333,7 +332,7 @@ namespace hoTools.Query
             this.btnSave.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnSave.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.Image")));
             this.btnSave.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnSave.Location = new System.Drawing.Point(185, 0);
+            this.btnSave.Location = new System.Drawing.Point(93, 0);
             this.btnSave.Margin = new System.Windows.Forms.Padding(0);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(32, 24);
@@ -348,7 +347,7 @@ namespace hoTools.Query
             this.btnSaveAll.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnSaveAll.Image = ((System.Drawing.Image)(resources.GetObject("btnSaveAll.Image")));
             this.btnSaveAll.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnSaveAll.Location = new System.Drawing.Point(217, 0);
+            this.btnSaveAll.Location = new System.Drawing.Point(125, 0);
             this.btnSaveAll.Margin = new System.Windows.Forms.Padding(0);
             this.btnSaveAll.Name = "btnSaveAll";
             this.btnSaveAll.Size = new System.Drawing.Size(32, 24);
@@ -363,7 +362,7 @@ namespace hoTools.Query
             this.btnSaveAs.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnSaveAs.Image = ((System.Drawing.Image)(resources.GetObject("btnSaveAs.Image")));
             this.btnSaveAs.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnSaveAs.Location = new System.Drawing.Point(249, 0);
+            this.btnSaveAs.Location = new System.Drawing.Point(157, 0);
             this.btnSaveAs.Margin = new System.Windows.Forms.Padding(0);
             this.btnSaveAs.Name = "btnSaveAs";
             this.btnSaveAs.Size = new System.Drawing.Size(32, 24);
@@ -376,10 +375,10 @@ namespace hoTools.Query
             // 
             this.btnRun.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnRun.Image = ((System.Drawing.Image)(resources.GetObject("btnRun.Image")));
-            this.btnRun.Location = new System.Drawing.Point(65, 24);
+            this.btnRun.Location = new System.Drawing.Point(254, 0);
             this.btnRun.Margin = new System.Windows.Forms.Padding(0);
             this.btnRun.Name = "btnRun";
-            this.btnRun.Size = new System.Drawing.Size(23, 2);
+            this.btnRun.Size = new System.Drawing.Size(23, 24);
             this.btnRun.TabIndex = 16;
             this.toolTip1.SetToolTip(this.btnRun, "Run SQL of the current Tab (CTRL+R).\r\n\r\nIn case of Errors: Help, Last sql Error!\r" +
         "\nYou want to see the SQL after replacing macros: Help, Last sql string sent to E" +
@@ -423,7 +422,7 @@ namespace hoTools.Query
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(0);
-            this.menuStrip1.Size = new System.Drawing.Size(185, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(93, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -736,7 +735,7 @@ namespace hoTools.Query
             this.flowLayoutPanel2.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel2.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(281, 25);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(277, 24);
             this.flowLayoutPanel2.TabIndex = 11;
             // 
             // tableLayoutPanel1

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.9
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddinClass", "Addin\AddinClass.csproj", "{6D5DEEEF-0897-4494-9857-5BEE2BF0D0AF}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -67,6 +67,18 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DuoVia.FuzzyStrings", "DuoVia.FuzzyStrings\DuoVia.FuzzyStrings.csproj", "{29385A2D-EAC1-4777-BC01-C060C2002307}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExtensionGui", "Extension\ExtensionGui.csproj", "{DA1287E7-D076-4B08-85DD-7C8440317B94}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Properties", "Properties", "{940FF7B9-412F-4399-981C-9E841BEF6F6C}"
+	ProjectSection(SolutionItems) = preProject
+		ActiveX\Properties\AssemblyInfo.cs = ActiveX\Properties\AssemblyInfo.cs
+		Addin\Properties\AssemblyInfo.cs = Addin\Properties\AssemblyInfo.cs
+		AddinFramework\Properties\AssemblyInfo.cs = AddinFramework\Properties\AssemblyInfo.cs
+		DuoVia.FuzzyStrings\Properties\AssemblyInfo.cs = DuoVia.FuzzyStrings\Properties\AssemblyInfo.cs
+		EaServices\Properties\AssemblyInfo.cs = EaServices\Properties\AssemblyInfo.cs
+		Extension\Properties\AssemblyInfo.cs = Extension\Properties\AssemblyInfo.cs
+		FindAndReplace\Properties\AssemblyInfo.cs = FindAndReplace\Properties\AssemblyInfo.cs
+		Util\Properties\AssemblyInfo.cs = Util\Properties\AssemblyInfo.cs
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -204,5 +216,6 @@ Global
 		{71383584-777C-46C1-84EF-C4DA7F692189} = {2015668A-5B2E-43C9-9E24-F93D54600512}
 		{A9B0B204-36DD-466D-B5C1-A9FD55ED7A4B} = {71383584-777C-46C1-84EF-C4DA7F692189}
 		{F1F0E6B1-5463-4DBB-9120-282C921427E0} = {2015668A-5B2E-43C9-9E24-F93D54600512}
+		{940FF7B9-412F-4399-981C-9E841BEF6F6C} = {71383584-777C-46C1-84EF-C4DA7F692189}
 	EndGlobalSection
 EndGlobal

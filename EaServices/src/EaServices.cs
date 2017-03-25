@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Net.Configuration;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -5413,6 +5411,76 @@ from %APPDATA%Local\Apps\hoTools\
         }
 
         #endregion
+
+        /// <summary>
+        /// Move Attribute up. EA automatic ordering has to be disabled in the configuration
+        /// </summary>
+        /// [ServiceOperation("{7DEB5894-1B07-4743-B97E-95C71FDC7614}", "Move Attribute up", "Select attribute", isTextRequired: false)]
+        public static void AttributeUp(EA.Repository rep)
+        {
+            switch (rep.GetContextItemType())
+            {
+                case EA.ObjectType.otAttribute:
+                    EA.Attribute findAttribute = (EA.Attribute)rep.GetContextObject();
+                    EA.Element el = rep.GetElementByID(findAttribute.ParentID);
+                    int lfdNr = 1;
+                    EA.Attribute lastAttribute = null;
+                    foreach (EA.Attribute a in el.Attributes)
+                    {
+                        a.Pos = lfdNr;
+                        a.Update();
+                        if (a.AttributeID == findAttribute.AttributeID)
+                        {
+                            if (lastAttribute != null)
+                            {
+                                lastAttribute.Pos = lfdNr + 1;
+                                lastAttribute.Update();
+                            }
+                        }
+                        lastAttribute = a;
+                        lfdNr += 1;
+                    }
+                    el.Attributes.Refresh();
+                    el.Update();
+                    rep.ShowInProjectView(findAttribute);
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// Move Attribute down. EA automatic ordering has to be disabled in the configuration
+        /// </summary>
+        /// [ServiceOperation("{8A54BF0E-F901-4D74-A8C4-D66B5A2508AE}", "Move Attribute down", "Select attribute", isTextRequired: false)]
+        public static void AttributeDown(EA.Repository rep)
+        {
+            switch (rep.GetContextItemType())
+            {
+                case EA.ObjectType.otAttribute:
+                    EA.Attribute findAttribute = (EA.Attribute)rep.GetContextObject();
+                    EA.Element el = rep.GetElementByID(findAttribute.ParentID);
+                    int indexFind = -1;
+                    int lfdNr = 1;
+                    foreach (EA.Attribute a in el.Attributes)
+                    {
+                        if (a.AttributeID == findAttribute.AttributeID)
+                        {
+                            a.Pos = lfdNr + 1;
+                            indexFind = lfdNr + 1;
+                        }
+                        else
+                        {
+                            if (indexFind == lfdNr) a.Pos = lfdNr - 1;
+                            else a.Pos = lfdNr;
+                        }
+                        a.Update();
+                        lfdNr += 1;
+                    }
+                    el.Attributes.Refresh();
+                    el.Update();
+                    rep.ShowInProjectView(findAttribute);
+                    break;
+            }
+        }
 
         #region About
 

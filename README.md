@@ -135,7 +135,8 @@ Some features:
 - Fixed: Modale windows stuck behind main window
 
 ## Release 2.1.2.1
-- Wrong installation file 2.1.2 corrected 
+- Wrong installation file 2.1.2 corrected
+- Attribute up and down
 
 ## Release 2.1.2
 - Synchronization Part Ports with its Type, usually a Class/Block

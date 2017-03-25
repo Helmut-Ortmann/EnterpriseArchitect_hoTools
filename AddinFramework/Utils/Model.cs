@@ -771,7 +771,7 @@ namespace EAAddinFramework.Utils
             sqlQuery = FormatSqlTop(sqlQuery);
             sqlQuery = FormatSqlFunctions(sqlQuery);
             sqlQuery = FormatSqldBspecific(sqlQuery); // DB specifics like #DB=ORACLE#.... #DB=ORACLE#
-            return sqlQuery;
+            return sqlQuery.Trim();
         }
 
         /// <summary>

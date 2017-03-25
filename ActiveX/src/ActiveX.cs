@@ -207,6 +207,8 @@ namespace hoTools.ActiveX
         private ToolStripMenuItem toolStripMenuIHome;
         private ToolStripMenuItem changeAuthorPackagestandardToolStripMenuItem;
         private ToolStripMenuItem readMeToolStripMenuItem;
+        private Button btnDown;
+        private Button btnUp;
         private TextBox _txtSearchText;
         #endregion
 
@@ -1279,6 +1281,8 @@ namespace hoTools.ActiveX
             this._panelQuickSearch = new System.Windows.Forms.TableLayoutPanel();
             this._toolTipRtfListOfSearches = new System.Windows.Forms.ToolTip(this.components);
             this._panelConveyedItems = new System.Windows.Forms.Panel();
+            this.btnUp = new System.Windows.Forms.Button();
+            this.btnDown = new System.Windows.Forms.Button();
             this._toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this._toolStripContainer1.SuspendLayout();
             this._toolStripQuery.SuspendLayout();
@@ -2434,10 +2438,28 @@ namespace hoTools.ActiveX
             // 
             // _panelConveyedItems
             // 
+            this._panelConveyedItems.Controls.Add(this.btnDown);
+            this._panelConveyedItems.Controls.Add(this.btnUp);
             this._panelConveyedItems.Controls.Add(this._btnReverseConnector);
             this._panelConveyedItems.Controls.Add(this._btnConveyedItem);
             resources.ApplyResources(this._panelConveyedItems, "_panelConveyedItems");
             this._panelConveyedItems.Name = "_panelConveyedItems";
+            // 
+            // btnUp
+            // 
+            resources.ApplyResources(this.btnUp, "btnUp");
+            this.btnUp.Name = "btnUp";
+            this._toolTipRtfListOfSearches.SetToolTip(this.btnUp, resources.GetString("btnUp.ToolTip"));
+            this.btnUp.UseVisualStyleBackColor = true;
+            this.btnUp.Click += new System.EventHandler(this.btnUp_Click_1);
+            // 
+            // btnDown
+            // 
+            resources.ApplyResources(this.btnDown, "btnDown");
+            this.btnDown.Name = "btnDown";
+            this._toolTip.SetToolTip(this.btnDown, resources.GetString("btnDown.ToolTip"));
+            this.btnDown.UseVisualStyleBackColor = true;
+            this.btnDown.Click += new System.EventHandler(this.btnDown_Click_1);
             // 
             // AddinControlGui
             // 
@@ -3269,6 +3291,16 @@ namespace hoTools.ActiveX
         private void readMeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             WikiRef.ReadMe();
+        }
+
+        private void btnUp_Click_1(object sender, EventArgs e)
+        {
+            EaService.AttributeUp(Repository);
+        }
+
+        private void btnDown_Click_1(object sender, EventArgs e)
+        {
+            EaService.AttributeDown(Repository);
         }
     }
 
