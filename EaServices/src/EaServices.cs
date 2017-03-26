@@ -2630,7 +2630,7 @@ from %APPDATA%Local\Apps\hoTools\
             diaObject.Update();
             pkg.Elements.Refresh();
 
-            Util.SetElementHasAttchaedConnectorLink(rep, con, elNewElement, isAttachedLink);
+            Util.SetElementHasAttachedConnectorLink(rep, con, elNewElement, isAttachedLink);
             elNewElement.Refresh();
             diaObject.Update();
             dia.Update();
@@ -5482,10 +5482,10 @@ from %APPDATA%Local\Apps\hoTools\
         #endregion
 
         /// <summary>
-        /// Move Attribute up. EA automatic ordering has to be disabled in the configuration
+        /// Move Feature (Attribute/Operation) up. EA automatic ordering has to be disabled in the configuration
         /// </summary>
-        /// [ServiceOperation("{7DEB5894-1B07-4743-B97E-95C71FDC7614}", "Move Attribute up", "Select attribute", isTextRequired: false)]
-        public static void AttributeUp(EA.Repository rep)
+        /// [ServiceOperation("{7DEB5894-1B07-4743-B97E-95C71FDC7614}", "Move Feature (Attribute/Operation) up", "Select Feature", isTextRequired: false)]
+        public static void FeatureUp(EA.Repository rep)
         {
             switch (rep.GetContextItemType())
             {
@@ -5513,14 +5513,39 @@ from %APPDATA%Local\Apps\hoTools\
                     el.Update();
                     rep.ShowInProjectView(findAttribute);
                     break;
+                // handle methods
+                case EA.ObjectType.otMethod:
+                    EA.Method findMethod = (EA.Method)rep.GetContextObject();
+                    EA.Element elMethods = rep.GetElementByID(findMethod.ParentID);
+                    int lfdNrMethod = 1;
+                    EA.Method lastMethod = null;
+                    foreach (EA.Method m in elMethods.Methods)
+                    {
+                        m.Pos = lfdNrMethod;
+                        m.Update();
+                        if (m.MethodID == findMethod.MethodID)
+                        {
+                            if (lastMethod != null)
+                            {
+                                lastMethod.Pos = lfdNrMethod + 1;
+                                lastMethod.Update();
+                            }
+                        }
+                        lastMethod = m;
+                        lfdNrMethod += 1;
+                    }
+                    elMethods.Methods.Refresh();
+                    elMethods.Update();
+                    rep.ShowInProjectView(findMethod);
+                    break;
             }
         }
 
         /// <summary>
-        /// Move Attribute down. EA automatic ordering has to be disabled in the configuration
+        /// Move feature (Attribute/Operation) down. EA automatic ordering has to be disabled in the configuration
         /// </summary>
         /// [ServiceOperation("{8A54BF0E-F901-4D74-A8C4-D66B5A2508AE}", "Move Attribute down", "Select attribute", isTextRequired: false)]
-        public static void AttributeDown(EA.Repository rep)
+        public static void FeatureDown(EA.Repository rep)
         {
             switch (rep.GetContextItemType())
             {
@@ -5547,6 +5572,31 @@ from %APPDATA%Local\Apps\hoTools\
                     el.Attributes.Refresh();
                     el.Update();
                     rep.ShowInProjectView(findAttribute);
+                    break;
+                // Method
+                case EA.ObjectType.otMethod:
+                    EA.Method findMethod = (EA.Method)rep.GetContextObject();
+                    EA.Element elMethod = rep.GetElementByID(findMethod.ParentID);
+                    int indexFindMethod = -1;
+                    int lfdNrMethod = 1;
+                    foreach (EA.Method m in elMethod.Methods)
+                    {
+                        if (m.MethodID == findMethod.MethodID)
+                        {
+                            m.Pos = lfdNrMethod + 1;
+                            indexFindMethod = lfdNrMethod + 1;
+                        }
+                        else
+                        {
+                            if (indexFindMethod == lfdNrMethod) m.Pos = lfdNrMethod - 1;
+                            else m.Pos = lfdNrMethod;
+                        }
+                        m.Update();
+                        lfdNrMethod += 1;
+                    }
+                    elMethod.Methods.Refresh();
+                    elMethod.Update();
+                    rep.ShowInProjectView(findMethod);
                     break;
             }
         }

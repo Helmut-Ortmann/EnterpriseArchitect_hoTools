@@ -96,6 +96,8 @@
             this.generalSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.hoToolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.label16 = new System.Windows.Forms.Label();
+            this.chkFeatureOrdering = new System.Windows.Forms.CheckBox();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -268,7 +270,7 @@
             // 
             this.label41.AutoSize = true;
             this.label41.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label41.Location = new System.Drawing.Point(558, 470);
+            this.label41.Location = new System.Drawing.Point(525, 472);
             this.label41.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label41.Name = "label41";
             this.label41.Size = new System.Drawing.Size(159, 18);
@@ -862,19 +864,48 @@
             this.toolStripMenuItem2.Text = "?";
             this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuWiki_Click);
             // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.Location = new System.Drawing.Point(238, 366);
+            this.label16.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(116, 18);
+            this.label16.TabIndex = 248;
+            this.label16.Text = "Feature ordering";
+            this.toolTip1.SetToolTip(this.label16, "Support Feature (Attribute, Method)  ordering (down/up Feature button)\r\n\r\nNote:\r\n" +
+        "You need to switch of automatic Feature (Attribut/Method) ordering in settings/c" +
+        "onfiguration.");
+            // 
+            // chkFeatureOrdering
+            // 
+            this.chkFeatureOrdering.AutoSize = true;
+            this.chkFeatureOrdering.Location = new System.Drawing.Point(361, 369);
+            this.chkFeatureOrdering.Margin = new System.Windows.Forms.Padding(2);
+            this.chkFeatureOrdering.Name = "chkFeatureOrdering";
+            this.chkFeatureOrdering.Size = new System.Drawing.Size(15, 14);
+            this.chkFeatureOrdering.TabIndex = 249;
+            this.toolTip1.SetToolTip(this.chkFeatureOrdering, "Support Feature (Attribute, Method) ordering (down/up Attribute/Method button)\r\n\r" +
+        "\nNote:\r\nYou need to switch of automatic Feature (Attribute, Method) ordering in " +
+        "settings/configuration.");
+            this.chkFeatureOrdering.UseVisualStyleBackColor = true;
+            // 
             // FrmSettingsGeneral
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(785, 739);
+            this.ClientSize = new System.Drawing.Size(785, 810);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.chkPortTypeSupport);
             this.Controls.Add(this.label15);
             this.Controls.Add(this.chkPortBasicSupport);
             this.Controls.Add(this.lblPortBasicSupport);
+            this.Controls.Add(this.chkFeatureOrdering);
             this.Controls.Add(this.chkReverseEdgeDirection);
+            this.Controls.Add(this.label16);
             this.Controls.Add(this.label1);
             this.Controls.Add(this._chkQuickSearchSupport);
             this.Controls.Add(this.label12);
@@ -1003,5 +1034,7 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem hoToolsToolStripMenuItem;
         private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.CheckBox chkFeatureOrdering;
     }
 }

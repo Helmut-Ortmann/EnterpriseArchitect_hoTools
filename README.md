@@ -118,11 +118,13 @@ Some features:
 
 # Releases
 
-## Release 2.1.4
+## Release 2.1.5
 - hoTools inventarize loaded MDGs (hoBasicMDG,..)
 - Fixing error in Searches (CLASSID->CLASSGUID)
 - Linestyle TH (Tree Horizontal) was implemented as Lateral Horizontal)
+- Sorting Features (Attributes, Operations)
 - Preparation enventarize C# Extenssions to use as Scripts
+- Default line style StateMachine 'no' (need to delete configuration, %APPDATA%ho\hoTools\user.config, change per configuration)
 
 ## Release 2.1.3
 - [External SQL Editor integration improved](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/sqlExternalEdit)

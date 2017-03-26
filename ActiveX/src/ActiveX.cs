@@ -207,8 +207,8 @@ namespace hoTools.ActiveX
         private ToolStripMenuItem toolStripMenuIHome;
         private ToolStripMenuItem changeAuthorPackagestandardToolStripMenuItem;
         private ToolStripMenuItem readMeToolStripMenuItem;
-        private Button btnDown;
-        private Button btnUp;
+        private Button _btnFeatureDown;
+        private Button _btnFeatureUp;
         private ToolStripMenuItem setFolderToolStripMenuItem;
         private ToolStripSeparator toolStripSeparator9;
         private TextBox _txtSearchText;
@@ -1205,7 +1205,8 @@ namespace hoTools.ActiveX
             this.runAndExportSQLToExcelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.exportCsvOfClipboardToExcelToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnDown = new System.Windows.Forms.Button();
+            this._btnFeatureDown = new System.Windows.Forms.Button();
+            this._btnFeatureUp = new System.Windows.Forms.Button();
             this._rtfListOfSearches = new System.Windows.Forms.RichTextBox();
             this._menuStrip1 = new System.Windows.Forms.MenuStrip();
             this._fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -1223,6 +1224,8 @@ namespace hoTools.ActiveX
             this._updateActivityFromOperationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
             this._showFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.setFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
             this._copyGuidsqlToClipboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.changeAuthorPackagestandardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -1283,10 +1286,7 @@ namespace hoTools.ActiveX
             this._panelAdvanced = new System.Windows.Forms.Panel();
             this._panelQuickSearch = new System.Windows.Forms.TableLayoutPanel();
             this._toolTipRtfListOfSearches = new System.Windows.Forms.ToolTip(this.components);
-            this.btnUp = new System.Windows.Forms.Button();
             this._panelConveyedItems = new System.Windows.Forms.Panel();
-            this.setFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
             this._toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this._toolStripContainer1.SuspendLayout();
             this._toolStripQuery.SuspendLayout();
@@ -1894,13 +1894,21 @@ namespace hoTools.ActiveX
             resources.ApplyResources(this.exportCsvOfClipboardToExcelToolStripMenuItem1, "exportCsvOfClipboardToExcelToolStripMenuItem1");
             this.exportCsvOfClipboardToExcelToolStripMenuItem1.Click += new System.EventHandler(this.runAndExportCsvToExcelRtfToolStripMenuItem_Click);
             // 
-            // btnDown
+            // _btnFeatureDown
             // 
-            resources.ApplyResources(this.btnDown, "btnDown");
-            this.btnDown.Name = "btnDown";
-            this._toolTip.SetToolTip(this.btnDown, resources.GetString("btnDown.ToolTip"));
-            this.btnDown.UseVisualStyleBackColor = true;
-            this.btnDown.Click += new System.EventHandler(this.btnDown_Click_1);
+            resources.ApplyResources(this._btnFeatureDown, "_btnFeatureDown");
+            this._btnFeatureDown.Name = "_btnFeatureDown";
+            this._toolTip.SetToolTip(this._btnFeatureDown, resources.GetString("_btnFeatureDown.ToolTip"));
+            this._btnFeatureDown.UseVisualStyleBackColor = true;
+            this._btnFeatureDown.Click += new System.EventHandler(this._btnFeatureDown_Click);
+            // 
+            // _btnFeatureUp
+            // 
+            resources.ApplyResources(this._btnFeatureUp, "_btnFeatureUp");
+            this._btnFeatureUp.Name = "_btnFeatureUp";
+            this._toolTip.SetToolTip(this._btnFeatureUp, resources.GetString("_btnFeatureUp.ToolTip"));
+            this._btnFeatureUp.UseVisualStyleBackColor = true;
+            this._btnFeatureUp.Click += new System.EventHandler(this._btnFeatureUp_Click);
             // 
             // _rtfListOfSearches
             // 
@@ -2034,6 +2042,17 @@ namespace hoTools.ActiveX
             this._showFolderToolStripMenuItem.Name = "_showFolderToolStripMenuItem";
             resources.ApplyResources(this._showFolderToolStripMenuItem, "_showFolderToolStripMenuItem");
             this._showFolderToolStripMenuItem.Click += new System.EventHandler(this.showFolderToolStripMenuItem_Click);
+            // 
+            // setFolderToolStripMenuItem
+            // 
+            this.setFolderToolStripMenuItem.Name = "setFolderToolStripMenuItem";
+            resources.ApplyResources(this.setFolderToolStripMenuItem, "setFolderToolStripMenuItem");
+            this.setFolderToolStripMenuItem.Click += new System.EventHandler(this.setFolderToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator9
+            // 
+            this.toolStripSeparator9.Name = "toolStripSeparator9";
+            resources.ApplyResources(this.toolStripSeparator9, "toolStripSeparator9");
             // 
             // _copyGuidsqlToClipboardToolStripMenuItem
             // 
@@ -2450,33 +2469,14 @@ namespace hoTools.ActiveX
             this._toolTipRtfListOfSearches.Draw += new System.Windows.Forms.DrawToolTipEventHandler(this._toolTipRtfListOfSearches_Draw);
             this._toolTipRtfListOfSearches.Popup += new System.Windows.Forms.PopupEventHandler(this._toolTipRtfListOfSearches_Popup);
             // 
-            // btnUp
-            // 
-            resources.ApplyResources(this.btnUp, "btnUp");
-            this.btnUp.Name = "btnUp";
-            this._toolTipRtfListOfSearches.SetToolTip(this.btnUp, resources.GetString("btnUp.ToolTip"));
-            this.btnUp.UseVisualStyleBackColor = true;
-            this.btnUp.Click += new System.EventHandler(this.btnUp_Click_1);
-            // 
             // _panelConveyedItems
             // 
-            this._panelConveyedItems.Controls.Add(this.btnDown);
-            this._panelConveyedItems.Controls.Add(this.btnUp);
+            this._panelConveyedItems.Controls.Add(this._btnFeatureDown);
+            this._panelConveyedItems.Controls.Add(this._btnFeatureUp);
             this._panelConveyedItems.Controls.Add(this._btnReverseConnector);
             this._panelConveyedItems.Controls.Add(this._btnConveyedItem);
             resources.ApplyResources(this._panelConveyedItems, "_panelConveyedItems");
             this._panelConveyedItems.Name = "_panelConveyedItems";
-            // 
-            // setFolderToolStripMenuItem
-            // 
-            this.setFolderToolStripMenuItem.Name = "setFolderToolStripMenuItem";
-            resources.ApplyResources(this.setFolderToolStripMenuItem, "setFolderToolStripMenuItem");
-            this.setFolderToolStripMenuItem.Click += new System.EventHandler(this.setFolderToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator9
-            // 
-            this.toolStripSeparator9.Name = "toolStripSeparator9";
-            resources.ApplyResources(this.toolStripSeparator9, "toolStripSeparator9");
             // 
             // AddinControlGui
             // 
@@ -2611,10 +2611,12 @@ namespace hoTools.ActiveX
             _btnShowFavorites.Visible = AddinSettings.IsFavoriteSupport;
 
             // Conveyed Item support
-            _panelConveyedItems.Visible = AddinSettings.IsConveyedItemsSupport || AddinSettings.IsReverseEdgeDirection;
+            _panelConveyedItems.Visible = AddinSettings.IsConveyedItemsSupport || AddinSettings.IsReverseEdgeDirection || AddinSettings.IsOrderFeatures;
             _btnConveyedItem.Visible = AddinSettings.IsConveyedItemsSupport;
             _btnReverseConnector.Visible = AddinSettings.IsReverseEdgeDirection;
-            
+            _btnFeatureDown.Visible = AddinSettings.IsOrderFeatures;
+            _btnFeatureUp.Visible = AddinSettings.IsOrderFeatures;
+
             // Port Buttons
             _panelPortButtons.Visible = AddinSettings.IsPortBasic || AddinSettings.IsPortType;
 
@@ -3310,14 +3312,14 @@ namespace hoTools.ActiveX
             WikiRef.ReadMe();
         }
 
-        private void btnUp_Click_1(object sender, EventArgs e)
+        private void _btnFeatureUp_Click(object sender, EventArgs e)
         {
-            EaService.AttributeUp(Repository);
+            EaService.FeatureUp(Repository);
         }
 
-        private void btnDown_Click_1(object sender, EventArgs e)
+        private void _btnFeatureDown_Click(object sender, EventArgs e)
         {
-            EaService.AttributeDown(Repository);
+            EaService.FeatureDown(Repository);
         }
 
         private void setFolderToolStripMenuItem_Click(object sender, EventArgs e)

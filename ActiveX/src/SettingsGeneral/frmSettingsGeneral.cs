@@ -31,6 +31,7 @@ namespace hoTools.Settings
             txtSqlSearchPath.Text = _settings.SqlPaths;
             txtAddinTabToFirstActivate.Text = _settings.AddinTabToFirstActivate;
 
+            chkFeatureOrdering.Checked = _settings.IsOrderFeatures;
             chkReverseEdgeDirection.Checked = settings.IsReverseEdgeDirection;
             chkLineStyleSupport.Checked = settings.IsLineStyleSupport;
             chkShortKeySupport.Checked = settings.IsShortKeySupport;
@@ -91,6 +92,8 @@ namespace hoTools.Settings
             }
             #endregion
 
+            
+
             #region LineStyleAndMoreWindow
             // Initialize LineStyle Window
             switch (_settings.LineStyleAndMoreWindow)
@@ -134,7 +137,7 @@ namespace hoTools.Settings
             _settings.QuickSearchName = txtQuickSearch.Text;
             _settings.FileManagerPath = txtFileManagerPath.Text;
 
-            
+            _settings.IsOrderFeatures = chkFeatureOrdering.Checked;
             _settings.IsReverseEdgeDirection = chkReverseEdgeDirection.Checked;
             _settings.IsLineStyleSupport = chkLineStyleSupport.Checked;
             _settings.IsShortKeySupport = chkShortKeySupport.Checked;

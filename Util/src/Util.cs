@@ -847,7 +847,7 @@ namespace hoTools.Utils
             return true;
         }
         /// <summary>
-        /// Attach a Modelelement to another Model element
+        /// Attach a Model element to another Model element
         /// pdata1= 'Element Note'  (what to attach to)
         ///         'Link Notes'    (link to connector)
         /// pdata2= ElementID to attach to if element
@@ -863,7 +863,7 @@ namespace hoTools.Utils
             return SetElementLink(rep, elNote.ElementID, "Element Note", el.ElementID, "Yes",0);
         }
 
-        public static bool SetElementHasAttchaedConnectorLink(Repository rep, Connector con, EA.Element elNote, bool isAttachedLink=false)
+        public static bool SetElementHasAttachedConnectorLink(Repository rep, Connector con, EA.Element elNote, bool isAttachedLink=false)
         {
             string attachedLink = "";
             if (isAttachedLink) attachedLink = "Link Notes";
@@ -873,7 +873,7 @@ namespace hoTools.Utils
         /// - Object
         /// - Diagram
         /// - Connector
-        /// Attach a Modelelement to another Model item (Element, Connector, Diagram)
+        /// Attach a Model element to another Model item (Element, Connector, Diagram)
         /// pdata1= Attach Note to feature of
         ///         'Diagram Note'  
         ///         'Element Note' and more features to attach to the object

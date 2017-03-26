@@ -606,6 +606,29 @@ namespace hoTools.Settings
 
         }
         #endregion
+        #region Property: IsOrderFeatures
+        public bool IsOrderFeatures
+        {
+            get
+            {
+                bool result;
+                if (bool.TryParse(CurrentConfig.AppSettings.Settings["isOrderFeatures"].Value, out result))
+                {
+                    return result;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            set
+            {
+                CurrentConfig.AppSettings.Settings["isOrderFeatures"].Value = value.ToString();
+
+            }
+
+        }
+        #endregion
 
 
         #region Property: ScriptAndQueryWindow
