@@ -137,6 +137,7 @@ Some features:
 ## Release 2.1.2.1
 - Wrong installation file 2.1.2 corrected
 - Attribute up and down
+- Set and view package folder optimized
 
 ## Release 2.1.2
 - Synchronization Part Ports with its Type, usually a Class/Block

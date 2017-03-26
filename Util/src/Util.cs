@@ -1268,31 +1268,26 @@ namespace hoTools.Utils
             }
 
         }
-#pragma warning disable RECS0154 // Parameter is never used
-
         /// <summary>
-        /// Get file path for an implementation file which uses code generation. It transforms the path into the local path.
-        /// Note: A file might have one or no implementation language.
+        /// Get file path for a string. It regards the local file path definition in %APPDATA%. To do so it needs the GenType (C,C++,..)
         /// </summary>
         /// <param name="rep"></param>
-        /// <param name="el"></param>
+        /// <param name="genType"></param>
+        /// <param name="path"></param>
         /// <returns></returns>
-        public static string GetGenFilePath(Repository rep, EA.Element el)
-#pragma warning restore RECS0154 // Parameter is never used
+        public static string GetFilePath(Repository rep, string genType, string path)
         {
-            string path = el.Genfile;
-
             // check if a local path is defined
             Match m = Regex.Match(path, @"%[^%]*");
             if (m.Success)
             {
                 var localPathVar = m.Value.Substring(1);
                 // get path for localDir
-                Environment.CurrentDirectory = Environment.GetEnvironmentVariable(@"appdata");
+                Environment.CurrentDirectory = Environment.GetEnvironmentVariable("appdata");
                 string s1 = @"Sparx Systems\EA\paths.txt";
                 TextReader tr = new StreamReader(s1);
                 string line = "";
-                var pattern = new Regex(@"(type=" + el.Gentype + ";id=" + localPathVar + @").+(path=[^;]+)");
+                Regex pattern = new Regex(@"(type=" + genType + ";id=" + localPathVar + @").+(path=[^;]+)");
                 while ((line = tr.ReadLine()) != null)
                 {
                     var regMatch = pattern.Match(line);
@@ -1308,6 +1303,23 @@ namespace hoTools.Utils
                 tr.Close();
             }
             return path;
+
+
+        }
+
+#pragma warning disable RECS0154 // Parameter is never used
+
+        /// <summary>
+        /// Get file path for an implementation file which uses code generation. It transforms the path into the local path.
+        /// Note: A file might have one or no implementation language.
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <param name="el"></param>
+        /// <returns></returns>
+        public static string GetGenFilePathElement(Repository rep, EA.Element el)
+#pragma warning restore RECS0154 // Parameter is never used
+        {
+            return GetFilePath(rep, el.Gentype, el.Genfile);
         }
         /// <summary>
         /// 1. Get the ID from pkg.Flags

@@ -638,8 +638,50 @@ namespace hoTools.EaServices
         }
 
         #endregion
+        // Set folder of package for easy access of implementation:
+        [ServiceOperation("{7D0298DF-3AC2-4563-9593-699138657018}", "Set folder of implementation",
+                "Select package to set the implementation folder", isTextRequired: false)]
+        public static void SetFolder(Repository rep)
+        {
 
-       
+            switch (rep.GetContextItemType())
+            {
+                case EA.ObjectType.otPackage:
+
+                    EA.Package pkg = (EA.Package)rep.GetContextObject();
+                    string folderPath = pkg.CodePath;
+                    // try to infer the right folder from package class/interfaces
+                    if (folderPath.Trim() == "")
+                    {
+                        foreach (EA.Element el in pkg.Elements)
+                        {
+                            if ("Interface Component Class".Contains(el.Type))
+                            {
+                                if (el.Genfile != "")
+                                {
+                                    folderPath = Path.GetDirectoryName(Util.GetGenFilePathElement(rep, el));
+                                    break;
+                                }
+                            }
+                        }
+                    }
+
+                    using (var fbd = new FolderBrowserDialog())
+                    {
+                        fbd.SelectedPath = folderPath;
+                        DialogResult result = fbd.ShowDialog();
+
+                        if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
+                        {
+
+                            pkg.CodePath = fbd.SelectedPath;
+                            pkg.Update();
+                        }
+                    }
+
+                    break;
+            }
+        }
 
         #region ShowFolderElementPackage
 
@@ -651,25 +693,52 @@ namespace hoTools.EaServices
             "Select VC controlled package or element with file path (Source Code Generation)", isTextRequired: false)]
         public static void ShowFolderElementPackage(Repository rep, bool isTotalCommander = false)
         {
-            string dirPath;
+            string pathFolder = "";
             ObjectType oType = rep.GetContextItemType();
             switch (oType)
             {
-                case ObjectType.otPackage:
-                    var pkg = (Package) rep.GetContextObject();
-                    dirPath = Util.GetVccFilePath(rep, pkg);
-                    if (pkg.IsControlled)
+                case EA.ObjectType.otPackage:
+                    EA.Package pkg = (EA.Package)rep.GetContextObject();
+                    if (pkg.CodePath.Trim() != "")
                     {
-                        if (dirPath == "") return;
-                        Util.ShowFolder(dirPath, isTotalCommander);
+                        // consider gentype (C,C++,..)
+                        EA.Element el1 = rep.GetElementByGuid(pkg.PackageGUID);
+                        if (el1.Gentype == "")
+                        {
+                            MessageBox.Show("Package has no language configured. Please select a language!");
+                            return;
+                        }
+                        pathFolder = Util.GetFilePath(rep, el1.Gentype, pkg.CodePath);
                     }
+                    else
+                    {
+                        if (pkg.IsControlled)
+                        {
+                            pathFolder = Util.GetVccFilePath(rep, pkg);
+                            // remove filename
+                            pathFolder = Regex.Replace(pathFolder, @"[a-zA-Z0-9\s_:.]*\.xml", "");
+                        }
+                    }
+                    if (pathFolder == "") return;
+
+
+                    if (isTotalCommander)
+                        Util.StartApp(@"totalcmd.exe", "/o " + pathFolder);
+                    else
+                        Util.StartApp(@"Explorer.exe", "/e, " + pathFolder);
                     break;
 
-                case ObjectType.otElement:
-                    var el = (Element) rep.GetContextObject();
-                    dirPath = Util.GetGenFilePath(rep, el);
-                    if (dirPath == "") return;
-                    Util.ShowFolder(dirPath, isTotalCommander);
+                case EA.ObjectType.otElement:
+                    EA.Element el = (EA.Element)rep.GetContextObject();
+                    pathFolder = Util.GetGenFilePathElement(rep, el);
+                    // remove filename
+                    pathFolder = Regex.Replace(pathFolder, @"[a-zA-Z0-9\s_:.]*\.[a-zA-Z0-9]{0,4}$", "");
+
+                    if (isTotalCommander)
+                        Util.StartApp(@"totalcmd.exe", "/o " + pathFolder);
+                    else
+                        Util.StartApp(@"Explorer.exe", "/e, " + pathFolder);
+
                     break;
             }
         }
@@ -4833,7 +4902,7 @@ from %APPDATA%Local\Apps\hoTools\
         static string AddReleaseInformation(Repository rep, Element el)
         {
             string txt;
-            string path = Util.GetGenFilePath(rep, el);
+            string path = Util.GetGenFilePathElement(rep, el);
             if (path == "")
             {
                 MessageBox.Show($@"No file defined in property for: '{el.Name}': {el.Type}");
@@ -4945,7 +5014,7 @@ from %APPDATA%Local\Apps\hoTools\
         static List<Element> GetIncludedHeaderFiles(Repository rep, Element el)
         {
             var lEl = new List<Element>();
-            string path = Util.GetGenFilePath(rep, el);
+            string path = Util.GetGenFilePathElement(rep, el);
             if (path == "")
             {
                 MessageBox.Show($@"No file defined in property for: '{el.Name}':{el.Type}");
