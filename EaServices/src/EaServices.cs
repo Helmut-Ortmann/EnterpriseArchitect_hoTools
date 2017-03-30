@@ -1061,7 +1061,7 @@ namespace hoTools.EaServices
         #region HideAllEmbeddedElementI
 
         /// <summary>
-        /// Hide all embdeded Elements for:
+        /// Hide all embedded Elements for:
         /// - selected nodes
         /// - all if nothing is selected
         /// </summary>

@@ -124,6 +124,7 @@ Some features:
 - Linestyle TH (Tree Horizontal) was implemented as Lateral Horizontal)
 - Sorting Features (Attributes, Operations)
 - Preparation enventarize C# Extenssions to use as Scripts
+- Error in Diagram.class fixed (last selected element is the first in collection)
 - Default line style StateMachine 'no' (need to delete configuration, %APPDATA%ho\hoTools\user.config, change per configuration)
 
 ## Release 2.1.3

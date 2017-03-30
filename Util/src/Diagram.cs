@@ -5,8 +5,8 @@ using EA;
 namespace hoTools.Utils
 {
     /// <summary>
-    /// The Current diagram with:
-    /// <para/>Selected Objects
+    /// The current diagram with the selected objects (first element=context=last selected element):
+    /// <para/>Selected DiagramObjects if selected, all DiagramObjects if nothing selected. Check IsElementSelectedObjects. The first element is the last selected!
     /// <para/>Selected Connector
     /// </summary>
     public class EaDiagram
@@ -27,22 +27,32 @@ namespace hoTools.Utils
         {
             _rep = rep;
             _dia = _rep.GetCurrentDiagram();
-            if (_dia == null )   return;
+            if (_dia == null) return;
             if (_dia.SelectedObjects.Count == 0)
             {
+                // overall diagram objects
                 foreach (EA.DiagramObject obj in _dia.DiagramObjects)
                 {
                     _selectedObjects.Add(obj);
                     _selectedElements.Add(rep.GetElementByID(obj.ElementID));
                 }
-                
 
             }
             else
             {
+                // 1. store context element/ last selected element
+                EA.Element elContext = (EA.Element)rep.GetContextObject();
+                EA.DiagramObject objContext = _dia.GetDiagramObjectByID(elContext.ElementID, "");
+                _selectedElements.Add(elContext);
+                _selectedObjects.Add(objContext);
                 _isElementSelectedObjects = true;
-                foreach (EA.DiagramObject obj in  _dia.SelectedObjects)
+
+                // over all selected diagram objects
+                foreach (EA.DiagramObject obj in _dia.SelectedObjects)
                 {
+                    // skip last selected element / context element
+                    if (obj.ElementID == objContext.ElementID) continue;
+
                     _selectedObjects.Add(obj);
                     _selectedElements.Add(rep.GetElementByID(obj.ElementID));
                 }
