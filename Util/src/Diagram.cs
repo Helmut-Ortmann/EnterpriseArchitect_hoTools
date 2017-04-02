@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using EA;
 
 namespace hoTools.Utils
@@ -142,6 +143,56 @@ namespace hoTools.Utils
             _rep.SaveDiagram(_dia.DiagramID);
         }
         #endregion
+
+
+        /// <summary>
+        /// Set diagram style to fit into a page.
+        /// </summary>
+        /// <param name="dia"></param>
+        public static void SetDiagramStyleFitToPage(Diagram dia)
+        {
+            // set diagram style = scale to fit one page
+            string t = dia.ExtendedStyle;
+            t = Regex.Replace(t, "PPgs.cx=[0-9]", "PPgs.cx=1");
+            t = Regex.Replace(t, "PPgs.cy=[0-9]", "PPgs.cy=1");
+            t = Regex.Replace(t, "ScalePI=[0-9]", "ScalePI=1");
+            dia.ExtendedStyle = t;
+            dia.Update();
+        }
+
+        /// <summary>
+        /// Set Diagram styles:
+        /// HideQuals=1 HideQualifiers: 
+        /// OpParams=2  Show full Operation Parameter
+        /// ScalePI=1   Scale to fit page
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <param name="dia"></param>
+        /// <param name="par">par[0] contains the values as a comma separated list</param>
+        public static void SetDiagramStyle(EA.Repository rep, Diagram dia, string[] par)
+        {
+            string[] styleEx = par[0].Split(',');
+            string diaStyle = dia.StyleEx;
+            string diaExtendedStyle = dia.ExtendedStyle;
+            Regex rx = new Regex(@"([^=]*)=.*");
+            rep.SaveDiagram(dia.DiagramID);
+            foreach (string style in styleEx)
+            {
+                Match match = rx.Match(style);
+                string patternFind = $@"{match.Groups[1].Value}=[^;]*;";
+                diaStyle = Regex.Replace(diaStyle, patternFind, $@"{style};");
+                diaExtendedStyle = Regex.Replace(diaExtendedStyle, patternFind, $@"{style};");
+            }
+            dia.ExtendedStyle = diaExtendedStyle;
+            dia.StyleEx = diaStyle;
+            dia.Update();
+            rep.ReloadDiagram(dia.DiagramID);
+
+        }
+       
+
+
+
     }
     public class DiagramObject
     {

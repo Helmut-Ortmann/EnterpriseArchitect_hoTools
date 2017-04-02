@@ -490,7 +490,7 @@ namespace hoTools.EaServices
             ChangeAuthor(rep, ChangeScope.PackageRecursive);
         }
         /// <summary>
-        /// Changes the Author of selected items and the choosen 'DlgAuthor.ChangeScope'.
+        /// Changes the Author of selected items and the chosen 'DlgAuthor.ChangeScope'.
         /// - Selected items
         /// - Standard (selected Items, Elements Recursive, Package and it's content)
         /// - All recursive (also all Packages recursive)
