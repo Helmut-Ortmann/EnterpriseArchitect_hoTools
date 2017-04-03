@@ -2480,32 +2480,131 @@ from %APPDATA%Local\Apps\hoTools\
             var eaDia = new EaDiagram(rep);
             rep.SaveDiagram(diaCurrent.DiagramID);
 
-
-            // Check for Diagram
-            ObjectType oType = rep.GetContextItemType();
-            if (oType == ObjectType.otDiagram)
+            switch (rep.GetContextItemType())
             {
-                AddDiagramNote(rep);
-            }
-            else
-            {
-                // check for selected connectors
-                if (diaCurrent.SelectedConnector != null)
-                {
+                case ObjectType.otDiagram:
+                    AddDiagramNote(rep);
+                    break;
+                case ObjectType.otConnector:
                     AddElementWithLinkToConnector(rep, diaCurrent.SelectedConnector, elementType, connectorType,
-                        attachNote);
-                }
-                // check for selected DiagramObjects
-                var objCol = diaCurrent.SelectedObjects;
-                if (objCol?.Count > 0)
-                {
-                    foreach (DiagramObject obj in objCol)
+                       attachNote);
+                    break;
+                case ObjectType.otElement:
+                    // check for selected DiagramObjects
+                    var objCol = diaCurrent.SelectedObjects;
+                    if (objCol?.Count > 0)
                     {
-                        AddElementWithLink(rep, obj, elementType, connectorType, attachNote);
+                        foreach (EA.DiagramObject obj in objCol)
+                        {
+                            AddElementWithLink(rep, obj, elementType, connectorType, attachNote);
+                        }
                     }
-                }
+                    break;
+                case ObjectType.otMethod:
+                    if (attachNote == false) return;
+                    AddFeatureWithNoteLink(rep, (EA.Method)rep.GetContextObject());
+                    break;
+                case ObjectType.otAttribute:
+                    if (attachNote == false) return;
+                    AddFeatureWithNoteLink(rep, (EA.Attribute)rep.GetContextObject());
+                    break;
             }
             eaDia.ReloadSelectedObjectsAndConnector();
+        }
+        /// <summary>
+        /// Add Attribute Link to Note (Feature Link)
+        /// 
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <param name="attr"></param>
+        private static void AddFeatureWithNoteLink(EA.Repository rep, EA.Attribute attr)
+        {
+
+            string featureType = "Attribute";
+            int featureId = attr.AttributeID;
+            string featureName = attr.Name;
+            EA.Element elNote = rep.GetElementByID(attr.ParentID);
+
+            SetFeatureLink(rep, elNote, featureType, featureId, featureName);
+        }
+        /// <summary>
+        /// Add Operation Link to Note (Feature Link)
+        /// 
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <param name="op"></param>
+        private static void AddFeatureWithNoteLink(EA.Repository rep, EA.Method op)
+        {
+
+            string featureType = "Operation";
+            int featureId = op.MethodID;
+            string featureName = op.Name;
+            EA.Element elNote = rep.GetElementByID(op.ParentID);
+
+            SetFeatureLink(rep, elNote, featureType, featureId, featureName);
+        }
+        /// <summary>
+        /// Set Link Feature to Note. The link is stored inside the note object.
+        /// - Attribute
+        /// - Operation
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <param name="elNote"></param>
+        /// <param name="featureType"></param>
+        /// <param name="featureId"></param>
+        /// <param name="featureName"></param>
+        private static void SetFeatureLink(Repository rep, EA.Element elNote, string featureType,
+            int featureId, string featureName)
+        {
+            string connectorType = "NoteLink";
+
+            if (elNote != null)
+            {
+                EA.Diagram dia = rep.GetCurrentDiagram();
+                EA.Package pkg = rep.GetPackageByID(elNote.PackageID);
+                if (pkg.IsProtected || dia.IsLocked || elNote.Locked) return;
+
+                EA.Element elNewNote;
+                try
+                {
+                    elNewNote = (EA.Element)pkg.Elements.AddNew("", "Note");
+                    elNewNote.Update();
+                    pkg.Update();
+                }
+                catch
+                {
+                    return;
+                }
+
+                // add element to diagram
+                // "l=200;r=400;t=200;b=600;"
+                EA.DiagramObject diaObj = dia.GetDiagramObjectByID(elNote.ElementID, "");
+                int left = diaObj.right + 50;
+                int right = left + 100;
+                int top = diaObj.top;
+                int bottom = top - 100;
+
+                string position = "l=" + left + ";r=" + right + ";t=" + top + ";b=" + bottom + ";";
+                var diaObject = (EA.DiagramObject)dia.DiagramObjects.AddNew(position, "");
+                dia.Update();
+                diaObject.ElementID = elNewNote.ElementID;
+                diaObject.Sequence = 1; // put element to top
+                diaObject.Update();
+                pkg.Elements.Refresh();
+
+                // connect Element to node
+                if (!String.IsNullOrWhiteSpace(connectorType))
+                {
+                    // make a connector
+                    EA.Connector con = (EA.Connector)elNote.Connectors.AddNew("test", connectorType);
+                    con.SupplierID = elNewNote.ElementID;
+                    con.Update();
+                    elNote.Connectors.Refresh();
+
+                    // set attached link to feature (Attribute/Operation)
+                    Util.SetElementLink(rep, elNewNote.ElementID, featureType, featureId, featureName, "Yes", 0);
+                }
+            }
         }
 
 

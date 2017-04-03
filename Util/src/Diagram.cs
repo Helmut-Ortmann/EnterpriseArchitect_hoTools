@@ -20,16 +20,18 @@ namespace hoTools.Utils
 
         readonly Connector _selectedConnector;
         #region Constructor
+
         /// <summary>
         /// Get the current Diagram with it's selected objects and connectors.
         /// </summary>
         /// <param name="rep"></param>
-        public EaDiagram(Repository rep)
+        /// <param name="getAllDiagramObject">True if you want all diagram objects if nothing no diagram object is selected</param>
+        public EaDiagram(Repository rep, bool  getAllDiagramObject= false)
         {
             _rep = rep;
             _dia = _rep.GetCurrentDiagram();
             if (_dia == null) return;
-            if (_dia.SelectedObjects.Count == 0)
+            if (_dia.SelectedObjects.Count == 0 && getAllDiagramObject)
             {
                 // overall diagram objects
                 foreach (EA.DiagramObject obj in _dia.DiagramObjects)
@@ -39,7 +41,7 @@ namespace hoTools.Utils
                 }
 
             }
-            else
+            if (_dia.SelectedObjects.Count > 0)
             {
                 // 1. store context element/ last selected element
                 EA.Element elContext = (EA.Element)rep.GetContextObject();

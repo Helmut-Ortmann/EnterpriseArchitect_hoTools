@@ -123,6 +123,7 @@ Some features:
 - Fixing error in Searches (CLASSID->CLASSGUID)
 - Linestyle TH (Tree Horizontal) was implemented as Lateral Horizontal)
 - Sorting Features (Attributes, Operations)
+- Link features to a Note
 - Preparation enventarize C# Extenssions to use as Scripts
 - Error in Diagram.class fixed (last selected element is the first in collection)
 - Default line style StateMachine 'no' (need to delete configuration, %APPDATA%ho\hoTools\user.config, change per configuration)

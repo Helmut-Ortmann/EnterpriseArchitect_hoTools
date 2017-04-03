@@ -846,6 +846,13 @@ namespace hoTools.Utils
             rep.Execute(updateStr);
             return true;
         }
+        
+        public static bool SetElementHasAttachedConnectorLink(Repository rep, Connector con, EA.Element elNote, bool isAttachedLink=false)
+        {
+            string attachedLink = "";
+            if (isAttachedLink) attachedLink = "Link Notes";
+            return SetElementLink(rep, elNote.ElementID, attachedLink, 0,"",  $@"idref1={con.ConnectorID}",1);
+        }
         /// <summary>
         /// Attach a Model element to another Model element
         /// pdata1= 'Element Note'  (what to attach to)
@@ -860,14 +867,7 @@ namespace hoTools.Utils
         /// <returns></returns>
         public static bool SetElementHasAttachedElementLink(Repository rep, EA.Element el, EA.Element elNote)
         {
-            return SetElementLink(rep, elNote.ElementID, "Element Note", el.ElementID, "Yes",0);
-        }
-
-        public static bool SetElementHasAttachedConnectorLink(Repository rep, Connector con, EA.Element elNote, bool isAttachedLink=false)
-        {
-            string attachedLink = "";
-            if (isAttachedLink) attachedLink = "Link Notes";
-            return SetElementLink(rep, elNote.ElementID, attachedLink, 0, $@"idref1={con.ConnectorID}",1);
+            return SetElementLink(rep, elNote.ElementID, "Element Note", el.ElementID, "", "Yes", 0);
         }
         /// Set Element Link to:
         /// - Object
@@ -878,20 +878,26 @@ namespace hoTools.Utils
         ///         'Diagram Note'  
         ///         'Element Note' and more features to attach to the object
         ///         'Link Notes'   Attach to connector
+        ///         'Attribute'
+        ///         'Operation'
         /// pdata2= ElementID to attach to if object
+        /// pdata3= Feature name if feature, else blank
         /// pdata4= 'Yes' if link to object
         ///         'idref1=connectorID;' connector if link to connector
         /// ntype   0 Standard
         ///         1 connect to connector according to 'idref1=connectorID;'
-        static bool SetElementLink(Repository rep, int elId, string pdata1, int pdata2, string pdata4, int ntype)
+        public static bool SetElementLink(Repository rep, int elId, string pdata1, int pdata2, string pdata3, string pdata4, int ntype)
         {
+            // ID of the object (Element, Connector, Attribute, Operation,..)
             string pdata2Value = "";
             if (pdata2 > 0)
-               pdata2Value = $@", pdata2 = { pdata2}";
-            {
-                
-            } 
-            string updateStr = $@"update t_object set pdata1 = '{pdata1}' {pdata2Value}, pdata4='{pdata4};', NTYPE={ntype}" +
+                pdata2Value = $@", pdata2 = { pdata2}";
+            // Feature name
+            string pdata3Value = "";
+            if (pdata3 != "")
+                pdata3Value = $@", pdata3 = '{pdata3}'";
+
+            string updateStr = $@"update t_object set pdata1 = '{pdata1}' {pdata2Value} {pdata3Value}, pdata4='{pdata4}', NTYPE={ntype}" +
                                $@" where object_ID = {elId} ";
             rep.Execute(updateStr);
             return true;
