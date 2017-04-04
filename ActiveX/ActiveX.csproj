@@ -50,7 +50,7 @@
   <ItemGroup>
     <Reference Include="Interop.EA">
       <HintPath>..\EA\Interop.EA.dll</HintPath>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
       <Private>False</Private>
     </Reference>
     <Reference Include="KBCsv, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc96fa93a217f7a1, processorArchitecture=MSIL">

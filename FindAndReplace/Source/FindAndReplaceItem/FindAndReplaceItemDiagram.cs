@@ -10,7 +10,7 @@ namespace hoTools.Find
         readonly EA.Diagram _dia;
         public  FindAndReplaceItemDiagram(EA.Repository rep, string GUID)  :base( rep, GUID)
         {
-            this._dia = rep.GetDiagramByGuid(GUID);
+            this._dia = (EA.Diagram)rep.GetDiagramByGuid(GUID);
             this.load(rep);
         }
         #region load
@@ -25,7 +25,7 @@ namespace hoTools.Find
         #region save
         public override void save(EA.Repository rep, FindAndReplaceItem.FieldType fieldType)
         {
-            EA.Diagram dia = rep.GetDiagramByGuid(GUID);
+            EA.Diagram dia = (EA.Diagram)rep.GetDiagramByGuid(GUID);
             if ((fieldType & FindAndReplaceItem.FieldType.Description) > 0)
             { dia.Notes = _Description; }
             if ((fieldType & FindAndReplaceItem.FieldType.Name) > 0)

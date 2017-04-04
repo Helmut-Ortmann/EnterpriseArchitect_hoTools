@@ -15,6 +15,7 @@ using hoTools.Utils.ActionPins;
 using EAAddinFramework.Utils;
 
 using System.Reflection;
+using EA;
 using hoTools.Find;
 using hoTools.Utils.Configuration;
 using GlobalHotkeys;
@@ -413,22 +414,22 @@ namespace hoTools
         }
         #endregion
         #region EA_OnPostNewConnector
+
         public override bool EA_OnPostNewConnector(EA.Repository rep, EA.EventProperties info)
         {
+            int connectorId = 0;
             EA.EventProperty eventProperty = info.Get(0);
-            var s = (string)eventProperty.Value;
-
+            var s = (string) eventProperty.Value;
             // check if it is a diagram
-            int connectorId;
+
             if (Int32.TryParse(s, out connectorId) == false)
             {
                 return false;
             }
 
-
-            
-            EA.Diagram dia = rep.GetCurrentDiagram();
+            var dia = rep.GetCurrentDiagram();
             if (dia == null) return false; // e.g. Matrix has a diagram id but no diagram object
+            
             switch (dia.Type)
             {
                 case "Activity":
