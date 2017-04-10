@@ -1513,7 +1513,7 @@ namespace hoTools.Utils
 
         #region visualizePortForDiagramobject
         /// <summary>
-        /// Visualize port for diagramobject
+        /// Visualize port with or without interface (required/provided) for diagramobject
         /// </summary>
         /// <param name="pos"></param>
         /// <param name="dia"></param>
@@ -1581,6 +1581,8 @@ namespace hoTools.Utils
 
             diaObjectPort.Update();
 
+
+            // Visualize interface for port
             if (interf == null) return;
 
             // visualize interface
@@ -1588,7 +1590,14 @@ namespace hoTools.Utils
             dia.Update();
             diaObject2.Style = "LBL=CX=69:CY=13:OX=45:OY=0:HDN=0:BLD=0:ITA=0:UND=0:CLR=-1:ALN=0:ALT=0:ROT=0;";
             diaObject2.ElementID = interf.ElementID;
-            diaObject2.Update();
+            try
+            {
+                diaObject2.Update();
+            }
+            catch (Exception e)
+            {
+                
+            }
 
         }
 

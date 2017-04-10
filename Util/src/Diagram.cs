@@ -45,6 +45,12 @@ namespace hoTools.Utils
             {
                 // 1. store context element/ last selected element
                 EA.Element elContext = (EA.Element)rep.GetContextObject();
+                // no context element available, take first element
+                if (elContext == null)
+                {
+                    EA.DiagramObject obj = (EA.DiagramObject)_dia.SelectedObjects.GetAt(0);
+                    elContext = rep.GetElementByID(obj.ElementID);
+                }
                 EA.DiagramObject objContext = _dia.GetDiagramObjectByID(elContext.ElementID, "");
                 _selectedElements.Add(elContext);
                 _selectedObjects.Add(objContext);

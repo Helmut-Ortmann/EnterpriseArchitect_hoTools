@@ -262,7 +262,8 @@ namespace hoTools.EAServicesPort
                 var el = _rep.GetElementByID(obj.ElementID);
                 if (EmbeddedElementTypes.Contains(el.Type) )
                 {
-                    DiagramObject portObj = Util.GetDiagramObjectById(_rep, dia, el.ElementID);
+                    
+                    DiagramObject portObj = dia.GetDiagramObjectByID(el.ElementID, "");
                     //EA.DiagramObject portObj = dia.GetDiagramObjectByID(el.ElementID, "");
                     DoChangeLabelStyle(portObj, style);
                 }
@@ -271,7 +272,7 @@ namespace hoTools.EAServicesPort
                     foreach (Element p in el.EmbeddedElements)
                     {
                         if (! (EmbeddedElementTypes.Contains(p.Type))) continue;
-                        DiagramObject portObj = Util.GetDiagramObjectById(_rep, dia, p.ElementID);
+                        DiagramObject portObj = dia.GetDiagramObjectByID(el.ElementID, "");
                         if (portObj != null) {
                             //EA.DiagramObject portObj = dia.GetDiagramObjectByID(p.ElementID, "");
                             // HDN=1;  Label hidden
@@ -287,6 +288,9 @@ namespace hoTools.EAServicesPort
         #region doChangeLabelStyle
         /// <summary>
         /// Set the style of an diagram object. The style is code with enum LabelStyle.
+        /// -HDN Hide Label
+        /// - PType: Output type
+        /// - OX=nn; Label Position, -nn=Left, +nn = Right
         /// </summary>
         /// <param name="portObj"></param>
         /// <param name="style"></param>
@@ -326,7 +330,7 @@ namespace hoTools.EAServicesPort
                         ChangeDiagramObjectStyle(portObj, @"OX=[\+\-0-9]*", $@"OX={xPos}");
                     }
                     break;
-
+                // add offset to position
                 case LabelStyle.PositionPlus:
                     // get old x position
                     match = Regex.Match((string)portObj.Style, @"OX=([\+\-0-9]*)");

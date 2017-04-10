@@ -888,7 +888,7 @@ namespace hoTools.EaServices
 
                 // arrange sequence of ports
                 string[] embededElementLocation = { "right" };
-                if (isOptimizePortLayoutLocation == true)
+                if (isOptimizePortLayoutLocation)
                 
                 {
                     embededElementLocation = new string[] { "left", "right" };
@@ -979,19 +979,20 @@ namespace hoTools.EaServices
 
         /// <summary>
         /// Update Ports for a Part if a PropertyType (defining Block/Class the part depends on) is defined.
-        /// If a port is dependant on another port PDATA3 (MiscData(2)) contains ea_guid of the master port.
+        /// If a port is dependent on another port PDATA3 (MiscData(2)) contains ea_guid of the master port.
         /// </summary>
         /// <param name="rep"></param>
         /// <param name="elTarget"></param>
         /// <param name="synchronizationKind"></param>
         /// <returns></returns>
+        // ReSharper disable once UnusedMethodReturnValue.Local
         static bool UpdatePortsForPart(Repository rep, EA.Element elTarget, PartPortSynchronization synchronizationKind)
         {
             // no Property defined (Block that type this part)
             if (elTarget.PropertyType == 0) return true;
 
 
-            // Copy ports from the typing block/class to the dependant class/block
+            // Copy ports from the typing block/class to the dependent class/block
             EA.Element elSource = rep.GetElementByID(elTarget.PropertyType);
             foreach (EA.Element portSource in elSource.EmbeddedElements)
             {
@@ -1078,10 +1079,7 @@ namespace hoTools.EaServices
             // Save to avoid indifferent states
             rep.SaveDiagram(eaDia.Dia.DiagramID);
 
-            // SQL for Embedded Elements
-            var sqlUtil = new UtilSql(rep);
-
-
+            
             // over all selected elements
             int count = -1;
             foreach (DiagramObject diaObj in eaDia.SelObjects)
@@ -1195,10 +1193,6 @@ namespace hoTools.EaServices
             if (eaDia.Dia == null) return;
             // Save to avoid indifferent states
             rep.SaveDiagram(eaDia.Dia.DiagramID);
-
-            // SQL for Embedded Elements
-            var sqlUtil = new UtilSql(rep);
-
 
             // over all selected elements
             int count = -1;
@@ -2618,6 +2612,7 @@ from %APPDATA%Local\Apps\hoTools\
         /// <param name="elementType">Default Note</param>
         /// <param name="connectorType">Default: null</param>
         /// <param name="isAttchedLink"></param>
+        // ReSharper disable once MemberCanBePrivate.Global
         public static void AddElementWithLink(Repository rep, DiagramObject diaObj,
             string elementType = @"Note", string connectorType = "NoteLink", bool isAttchedLink = false)
         {
@@ -2689,6 +2684,7 @@ from %APPDATA%Local\Apps\hoTools\
         /// <param name="elementType">Default Note</param>
         /// <param name="connectorType">Default: null</param>
         /// <param name="isAttachedLink"></param>
+        // ReSharper disable once MemberCanBePrivate.Global
         public static void AddElementWithLinkToConnector(Repository rep, Connector con,
             string elementType = @"Note", string connectorType = "NoteLink", bool isAttachedLink = false)
         {
@@ -2711,7 +2707,7 @@ from %APPDATA%Local\Apps\hoTools\
             Element sourceEl = rep.GetElementByID(con.SupplierID);
             Element targetEl = rep.GetElementByID(con.ClientID);
             DiagramObject sourceObj = dia.GetDiagramObjectByID(sourceEl.ElementID, "");
-            DiagramObject targetObj = dia.GetDiagramObjectByID(targetEl.ElementID, "");
+            dia.GetDiagramObjectByID(targetEl.ElementID, "");
 
             // add element to diagram
             // "l=200;r=400;t=200;b=600;"
@@ -2739,6 +2735,7 @@ from %APPDATA%Local\Apps\hoTools\
         #endregion
 
 
+        // ReSharper disable once UnusedMember.Local
         private static DiagramObject GetDiagramObjectFromElement(Element el, Diagram dia)
         {
             // get the position of the Element
@@ -3905,7 +3902,14 @@ from %APPDATA%Local\Apps\hoTools\
         }
 
         #region createMacro
-
+        /// <summary>
+        /// Create Macro, a stereotype is used as a macro.
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <param name="el"></param>
+        /// <param name="s"></param>
+        /// <param name="stereotype"></param>
+        // ReSharper disable once UnusedParameter.Local
         static void CreateMacro(Repository rep, Element el, string s, string stereotype)
         {
             string name = "";
