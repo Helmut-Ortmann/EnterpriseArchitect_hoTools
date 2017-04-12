@@ -127,6 +127,8 @@ Some features:
 - Preparation enventarize C# Extenssions to use as Scripts
 - Error in Diagram.class fixed (last selected element is the first in collection)
 - Default line style StateMachine 'no' (need to delete configuration, %APPDATA%ho\hoTools\user.config, change per configuration)
+- Reset settings to default settings
+- Error fixing
 
 ## Release 2.1.3
 - [External SQL Editor integration improved](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/sqlExternalEdit)

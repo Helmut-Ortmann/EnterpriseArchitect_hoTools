@@ -15,8 +15,8 @@ namespace hoTools.Utils
         readonly Repository _rep;
         readonly EA.Diagram _dia;
         readonly List<EA.DiagramObject> _selectedObjects = new List<EA.DiagramObject>();
-        readonly List<EA.Element> _selectedElements = new List<EA.Element>();
-        readonly bool _isElementSelectedObjects = false;
+        readonly EA.DiagramObject _conTextDiagramObject;
+
 
         readonly Connector _selectedConnector;
         #region Constructor
@@ -30,6 +30,7 @@ namespace hoTools.Utils
         {
             _rep = rep;
             _dia = _rep.GetCurrentDiagram();
+            IsSelectedObjects = false;
             if (_dia == null) return;
             if (_dia.SelectedObjects.Count == 0 && getAllDiagramObject)
             {
@@ -37,33 +38,42 @@ namespace hoTools.Utils
                 foreach (EA.DiagramObject obj in _dia.DiagramObjects)
                 {
                     _selectedObjects.Add(obj);
-                    _selectedElements.Add(rep.GetElementByID(obj.ElementID));
+                    SelElements.Add(rep.GetElementByID(obj.ElementID));
                 }
 
             }
+            // If an context element exists than this is the last selected element
             if (_dia.SelectedObjects.Count > 0)
             {
-                // 1. store context element/ last selected element
-                EA.Element elContext = (EA.Element)rep.GetContextObject();
-                // no context element available, take first element
-                if (elContext == null)
+                EA.ObjectType type = _rep.GetContextItemType();
+                // only package and object makes sense, or no context element (than go for selected elements)
+                if (type == EA.ObjectType.otElement ||
+                    type == EA.ObjectType.otPackage ||
+                    type == EA.ObjectType.otNone)
                 {
-                    EA.DiagramObject obj = (EA.DiagramObject)_dia.SelectedObjects.GetAt(0);
-                    elContext = rep.GetElementByID(obj.ElementID);
-                }
-                EA.DiagramObject objContext = _dia.GetDiagramObjectByID(elContext.ElementID, "");
-                _selectedElements.Add(elContext);
-                _selectedObjects.Add(objContext);
-                _isElementSelectedObjects = true;
+                    // 1. store context element/ last selected element
+                    EA.Element elContext = (EA.Element) rep.GetContextObject();
+                    // no context element available, take first element
+                    if (elContext == null)
+                    {
+                        EA.DiagramObject obj = (EA.DiagramObject)_dia.SelectedObjects.GetAt(0);
+                        elContext = rep.GetElementByID(obj.ElementID);
+                    }
+                    _conTextDiagramObject = _dia.GetDiagramObjectByID(elContext.ElementID, "");
 
-                // over all selected diagram objects
-                foreach (EA.DiagramObject obj in _dia.SelectedObjects)
-                {
-                    // skip last selected element / context element
-                    if (obj.ElementID == objContext.ElementID) continue;
+                    SelElements.Add(elContext);
+                    _selectedObjects.Add(_conTextDiagramObject);
+                    IsSelectedObjects = true;
 
-                    _selectedObjects.Add(obj);
-                    _selectedElements.Add(rep.GetElementByID(obj.ElementID));
+                    // over all selected diagram objects
+                    foreach (EA.DiagramObject obj in _dia.SelectedObjects)
+                    {
+                        // skip last selected element / context element
+                        if (obj.ElementID == _conTextDiagramObject.ElementID) continue;
+
+                        _selectedObjects.Add(obj);
+                        SelElements.Add(rep.GetElementByID(obj.ElementID));
+                    }
                 }
             }
             _selectedConnector = _dia.SelectedConnector;
@@ -73,8 +83,12 @@ namespace hoTools.Utils
         #endregion
         #region Properties
         public List<EA.DiagramObject> SelObjects =>_selectedObjects;
-        public List<EA.Element> SelElements => _selectedElements;
-        public bool IsSelectedObjects => _isElementSelectedObjects;
+        // ReSharper disable once CollectionNeverQueried.Global
+        // ReSharper disable once MemberCanBePrivate.Global
+        public List<EA.Element> SelElements { get; } = new List<EA.Element>();
+
+        public bool IsSelectedObjects { get; }
+
         public Diagram Dia => _dia;
         public int SelectedObjectsCount => _dia.SelectedObjects.Count;
         public EA.Connector SelectedConnector => _selectedConnector;
@@ -83,11 +97,10 @@ namespace hoTools.Utils
 
         #region ReloadSelectedObjectsAndConnector
         /// <summary>
-        /// Reload previously stored selected diagramobjects and diagramlinks
+        /// Reload previously stored selected diagram objects and diagram links
         /// </summary>
         public void ReloadSelectedObjectsAndConnector()
         {
-            if (! IsSelectedObjects) return;
             Save();
             _rep.ReloadDiagram(_dia.DiagramID);
             if (_selectedConnector != null) _dia.SelectedConnector = _selectedConnector;
@@ -99,7 +112,46 @@ namespace hoTools.Utils
 
         }
         #endregion
+        /// <summary>
+        /// Select diagram object. Save diagram and reload it refresh it.
+        /// </summary>
+        public void SelectDiagramObject()
+        {
+            Unselect();
+            Save();
+            _rep.ReloadDiagram(_dia.DiagramID);
+
+            _dia.SelectedObjects.AddNew(_conTextDiagramObject.ElementID.ToString(), _conTextDiagramObject.ObjectType.ToString());
+        }
+        /// <summary>
+        /// Select diagram object for the passed connector. Save diagram and reload / refresh it.
+        /// </summary>
+        public void SelectDiagramObject(EA.Connector con)
+        {
+            Unselect();
+            Save();
+            _rep.ReloadDiagram(_dia.DiagramID);
+
+
+            EA.DiagramObject diaObj = _dia.GetDiagramObjectByID(con.SupplierID,"");
+            _dia.SelectedObjects.AddNew(diaObj.ElementID.ToString(), diaObj.ObjectType.ToString());
+        }
+        /// <summary>
+        /// Unselect all elements, connector.
+        /// </summary>
+        private void Unselect()
+        {
+            Dia.SelectedConnector = null;
+            for (int i = _dia.SelectedObjects.Count - 1; i >= 0; i=i-1)
+            {
+                _dia.SelectedObjects.DeleteAt((short)i, true);
+            }
+            Dia.SelectedObjects.Refresh();
+
+        }
+
         #region sortSelectedObjects
+        // ReSharper disable once UnusedMember.Global
         public void SortSelectedObjects()
         {
             // estimate sort criteria (left/right, top/bottom)
@@ -146,27 +198,13 @@ namespace hoTools.Utils
         #endregion
 
         #region Save
+        // ReSharper disable once MemberCanBePrivate.Global
         public void Save()
         {
             _rep.SaveDiagram(_dia.DiagramID);
         }
         #endregion
 
-
-        /// <summary>
-        /// Set diagram style to fit into a page.
-        /// </summary>
-        /// <param name="dia"></param>
-        public static void SetDiagramStyleFitToPage(Diagram dia)
-        {
-            // set diagram style = scale to fit one page
-            string t = dia.ExtendedStyle;
-            t = Regex.Replace(t, "PPgs.cx=[0-9]", "PPgs.cx=1");
-            t = Regex.Replace(t, "PPgs.cy=[0-9]", "PPgs.cy=1");
-            t = Regex.Replace(t, "ScalePI=[0-9]", "ScalePI=1");
-            dia.ExtendedStyle = t;
-            dia.Update();
-        }
 
         /// <summary>
         /// Set Diagram styles:
@@ -176,12 +214,17 @@ namespace hoTools.Utils
         /// </summary>
         /// <param name="rep"></param>
         /// <param name="dia"></param>
-        /// <param name="par">par[0] contains the values as a comma separated list</param>
+        /// <param name="par">par[0] contains the values as a semicolon separated list</param>
+        // ReSharper disable once UnusedMember.Global
         public static void SetDiagramStyle(EA.Repository rep, Diagram dia, string[] par)
         {
-            string[] styleEx = par[0].Split(',');
+            string[] styleEx = par[0].Split(';');
             string diaStyle = dia.StyleEx;
-            string diaExtendedStyle = dia.ExtendedStyle;
+            string diaExtendedStyle = dia.ExtendedStyle.Trim();
+            // no distinguishing between StyleEx and ExtendedStayle, may cause of trouble
+            if (dia.StyleEx == "") diaStyle = par[0]+";";
+            if (dia.ExtendedStyle == "") diaExtendedStyle = par[0] + ";"; 
+
             Regex rx = new Regex(@"([^=]*)=.*");
             rep.SaveDiagram(dia.DiagramID);
             foreach (string style in styleEx)
@@ -204,19 +247,19 @@ namespace hoTools.Utils
     }
     public class DiagramObject
     {
-        readonly string _name;
-        readonly int _id;
         #region Constructor
         public DiagramObject(string name, int id)
         {
-            _id = id;
-            _name = name;
+            Id = id;
+            Name = name;
         }
         #endregion
 
         #region Properties
-        public string Name => _name;
-        public int Id => _id;
+        public string Name { get; }
+
+        public int Id { get; }
+
         #endregion
     }
     /// <summary>
@@ -234,22 +277,22 @@ namespace hoTools.Utils
     }
     public class DiagramObjectSelected
     {
-        readonly EA.DiagramObject _obj;
-        readonly int _position;
-        readonly int _left;
         #region Constructor
         public DiagramObjectSelected(EA.DiagramObject obj, int position, int left)
         {
-            _position = position;
-            _obj = obj;
-            _left = left;
+            Position = position;
+            Obj = obj;
+            Left = left;
         }
         #endregion
 
         #region Properties
-        public EA.DiagramObject Obj => _obj;
-        public int Position => _position;
-        public int Left => _left;
+        public EA.DiagramObject Obj { get; }
+
+        public int Position { get; }
+
+        public int Left { get; }
+
         #endregion
     }
     /// <summary>

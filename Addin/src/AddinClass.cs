@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.Collections.Generic;
@@ -15,7 +14,6 @@ using hoTools.Utils.ActionPins;
 using EAAddinFramework.Utils;
 
 using System.Reflection;
-using EA;
 using hoTools.Find;
 using hoTools.Utils.Configuration;
 using GlobalHotkeys;
@@ -76,7 +74,7 @@ namespace hoTools
         static QueryGui _ScriptGUI;
         // ReSharper disable once InconsistentNaming
         static QueryGui _QueryGUI;
-        static ExtensionGui _ExtensionGUI;
+        static ExtensionGui _extensionGui2;
 
         // ActiveX Controls
         AddinControlGui _myControlGui; // hoTools main window
@@ -417,7 +415,7 @@ namespace hoTools
 
         public override bool EA_OnPostNewConnector(EA.Repository rep, EA.EventProperties info)
         {
-            int connectorId = 0;
+            int connectorId;
             EA.EventProperty eventProperty = info.Get(0);
             var s = (string) eventProperty.Value;
             // check if it is a diagram
@@ -1094,49 +1092,63 @@ namespace hoTools
         /// </summary>
         private void ShowAddinControlWindows()
         {
+
             if (_myControlGui == null)
             {
+                //-----------  hoTools main window -------------------------------------------------
                 try
                 {
                     // LineStyle and more
                     if (_addinSettings.LineStyleAndMoreWindow != AddinSettings.ShowInWindow.Disabled)
                     {
                         _AddinControlGui = AddAddinControl<AddinControlGui>(
-                        _addinSettings.ProductName,  // Tab Name
-                        AddinControlGui.Progid, null,
-                        AddinSettings.ShowInWindow.AddinWindow);
+                            _addinSettings.ProductName, // Tab Name
+                            AddinControlGui.Progid, null,
+                            AddinSettings.ShowInWindow.AddinWindow);
                         _myControlGui = _AddinControlGui; // static + instance
                     }
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.Message, @"Error Starting hoTool main window.");
+                }
+                //-----------  hoSearchAndReplace -------------------------------------------------
+                try
+                {
 
-                    // with Search & Replace EA Addin Windows
-                    if (_addinSettings.SearchAndReplaceWindow != AddinSettings.ShowInWindow.Disabled ) { 
+                    if (_addinSettings.SearchAndReplaceWindow != AddinSettings.ShowInWindow.Disabled)
+                    {
                         _FindAndReplaceGUI = AddAddinControl<FindAndReplaceGUI>(
-                            FindAndReplaceGUI.TABULATOR, 
-                            FindAndReplaceGUI.PROGID, null, 
+                            FindAndReplaceGUI.TABULATOR,
+                            FindAndReplaceGUI.PROGID, null,
                             AddinSettings.ShowInWindow.AddinWindow);
-                       _findAndReplaceGui = _FindAndReplaceGUI; // static + instance
+                        _findAndReplaceGui = _FindAndReplaceGUI; // static + instance
                     }
-
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.Message, @"Error Starting hoFindAndReplace window.");
+                }
+                //-----------  hoSql -------------------------------------------------
+                try
+                {
                     // with Query EA Addin Windows
-                    if (_addinSettings.OnlyQueryWindow != AddinSettings.ShowInWindow.Disabled )
+                    if (_addinSettings.OnlyQueryWindow != AddinSettings.ShowInWindow.Disabled)
                     {
                         // Run as Query
-                        _QueryGUI = AddAddinControl<QueryGui>(QueryGui.TabulatorSql, 
-                            QueryGui.Progid, QueryGui.TabulatorSql, 
+                        _QueryGUI = AddAddinControl<QueryGui>(QueryGui.TabulatorSql,
+                            QueryGui.Progid, QueryGui.TabulatorSql,
                             _addinSettings.OnlyQueryWindow);
                         _queryGui = _QueryGUI; // static + instance
                     }
-                    // with Extension EA Addin Windows
-                    if (_addinSettings.ExtensionWindow != AddinSettings.ShowInWindow.Disabled)
-                    {
-                        // Run as Query
-                        _ExtensionGUI = AddAddinControl<ExtensionGui>(
-                            ExtensionGui.Tabulator,
-                            ExtensionGui.Progid,null,
-                             AddinSettings.ShowInWindow.AddinWindow);
-                        _extensionGui = _ExtensionGUI; // static + instance
-                    }
-
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.Message, @"Error Starting SQL window.");
+                }
+                
+                //-----------  hoScript -------------------------------------------------
+                try { 
                     // with Script & Query EA Addin Windows
                     if (_addinSettings.ScriptAndQueryWindow != AddinSettings.ShowInWindow.Disabled)
                     {
@@ -1151,9 +1163,27 @@ namespace hoTools
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show(e.Message,@"Error Starting Addin");
+                    MessageBox.Show(e.Message,@"Error Starting hoScript window");
                 }
-               
+                //-----------  hoExtension -------------------------------------------------
+                try
+                {
+                    // with Extension EA Addin Windows
+                    if (_addinSettings.ExtensionWindow != AddinSettings.ShowInWindow.Disabled)
+                    {
+                        // Run as Query
+                        _extensionGui2 = AddAddinControl<ExtensionGui>(
+                            ExtensionGui.Tabulator,
+                            ExtensionGui.Progid, null,
+                            AddinSettings.ShowInWindow.AddinWindow);
+                        _extensionGui = _extensionGui2; // static + instance
+                    }
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.Message, @"Error Starting hoExtension window.");
+                }
+
             }
         }
         /// <summary>

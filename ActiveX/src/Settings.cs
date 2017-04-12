@@ -82,6 +82,10 @@ namespace hoTools.Settings
         /// <para/>c:\Users\user\AppData\Roaming\ho\hoTools\user.config
         /// </summary>
         private Configuration CurrentConfig { get; set; }
+
+
+
+
         #region Constructor
         /// <summary>
         /// Merge default settings (install DLLs) with current settings (user.config)
@@ -1218,7 +1222,18 @@ namespace hoTools.Settings
         #endregion
         #endregion
 
-
+        /// <summary>
+        /// Reset configuration to default settings. The old configuration is stored to 'user.config.tmp'.
+        /// This is done by deleting the configuration file.
+        /// </summary>
+        /// <returns></returns>
+        public string Reset()
+        {
+            string filePath = CurrentConfig.FilePath;
+            CurrentConfig.SaveAs($@"{filePath}.tmp");
+            File.Delete(filePath);
+            return filePath;
+        }
         #region save
         /// <summary>
         /// saves the settings to the config file

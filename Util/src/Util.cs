@@ -1586,9 +1586,15 @@ namespace hoTools.Utils
             if (interf == null) return;
 
             // visualize interface
-            var diaObject2 = (EA.DiagramObject) dia.DiagramObjects.AddNew(position, "");
-            dia.Update();
-            diaObject2.Style = "LBL=CX=69:CY=13:OX=45:OY=0:HDN=0:BLD=0:ITA=0:UND=0:CLR=-1:ALN=0:ALT=0:ROT=0;";
+            EA.DiagramObject diaObject2 = (EA.DiagramObject)dia.DiagramObjects.AddNew(position, EA.ObjectType.otElement.ToString());
+            dia.DiagramObjects.Refresh();
+            // diaObject2.Style = "LBL=CX=69:CY=13:OX=45:OY=0:HDN=0:BLD=0:ITA=0:UND=0:CLR=-1:ALN=0:ALT=0:ROT=0;";
+            // HDN=0 Label visible
+            // HDN=1 Label invisible
+            // PType=1: Type Shown
+            // CX = nn; Name Position
+            // OX = nn; Label Position, -nn = Left, +nn = Right
+            diaObject2.Style = "LBL=CX=69:CY=13:OX=45:OY=0:HDN=1:BLD=0:ITA=0:UND=0:CLR=-1:ALN=0:ALT=0:ROT=0;";
             diaObject2.ElementID = interf.ElementID;
             try
             {

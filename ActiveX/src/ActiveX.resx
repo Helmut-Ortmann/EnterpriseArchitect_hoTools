@@ -2097,6 +2097,18 @@ In configuration/settings you have to disable the automatic feature (Attribut/Me
   <data name="_updateScriptsToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>After you've changed a Search or a Script update all with this command.</value>
   </data>
+  <data name="toolStripSeparator10.Size" type="System.Drawing.Size, System.Drawing">
+    <value>323, 6</value>
+  </data>
+  <data name="resetFactorySettingsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>326, 22</value>
+  </data>
+  <data name="resetFactorySettingsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Reset factory settings</value>
+  </data>
+  <data name="resetFactorySettingsToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Resets the Settings to the dafault hoTools settings </value>
+  </data>
   <data name="_fileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>37, 21</value>
   </data>
@@ -3158,6 +3170,18 @@ Tip:
     <value>_updateScriptsToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;_updateScriptsToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator10.Name" xml:space="preserve">
+    <value>toolStripSeparator10</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator10.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;resetFactorySettingsToolStripMenuItem.Name" xml:space="preserve">
+    <value>resetFactorySettingsToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;resetFactorySettingsToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;_doToolStripMenuItem.Name" xml:space="preserve">

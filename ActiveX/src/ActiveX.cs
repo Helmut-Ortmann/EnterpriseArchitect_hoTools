@@ -211,6 +211,8 @@ namespace hoTools.ActiveX
         private Button _btnFeatureUp;
         private ToolStripMenuItem setFolderToolStripMenuItem;
         private ToolStripSeparator toolStripSeparator9;
+        private ToolStripMenuItem resetFactorySettingsToolStripMenuItem;
+        private ToolStripSeparator toolStripSeparator10;
         private TextBox _txtSearchText;
         #endregion
 
@@ -1129,7 +1131,6 @@ namespace hoTools.ActiveX
         #region InitializeComponent
         void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddinControlGui));
             this._toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this._toolStripQuery = new System.Windows.Forms.ToolStrip();
@@ -1144,9 +1145,9 @@ namespace hoTools.ActiveX
             this._toolStripServiceBtn3 = new System.Windows.Forms.ToolStripButton();
             this._toolStripServiceBtn4 = new System.Windows.Forms.ToolStripButton();
             this._toolStripServiceBtn5 = new System.Windows.Forms.ToolStripButton();
-            this._toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this._toolTip = new System.Windows.Forms.ToolTip();
             this._txtSearchText = new System.Windows.Forms.TextBox();
-            this._contextMenuStripSearch = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this._contextMenuStripSearch = new System.Windows.Forms.ContextMenuStrip();
             this.editSQLSearchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showSQLPathToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -1195,7 +1196,7 @@ namespace hoTools.ActiveX
             this._btnAddNoteAndLink = new System.Windows.Forms.Button();
             this._btnAddNote = new System.Windows.Forms.Button();
             this._btnAddConstraint = new System.Windows.Forms.Button();
-            this.contextMenuRtf = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.contextMenuRtf = new System.Windows.Forms.ContextMenuStrip();
             this.editSQLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showSQLFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showSQLPathToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -1216,6 +1217,8 @@ namespace hoTools.ActiveX
             this._settingsToolbarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._settingsQueryAndSctipToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._updateScriptsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
+            this.resetFactorySettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._doToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportExcelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportCsvOfClipboardToExcelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -1285,7 +1288,7 @@ namespace hoTools.ActiveX
             this._lblPorts = new System.Windows.Forms.Label();
             this._panelAdvanced = new System.Windows.Forms.Panel();
             this._panelQuickSearch = new System.Windows.Forms.TableLayoutPanel();
-            this._toolTipRtfListOfSearches = new System.Windows.Forms.ToolTip(this.components);
+            this._toolTipRtfListOfSearches = new System.Windows.Forms.ToolTip();
             this._panelConveyedItems = new System.Windows.Forms.Panel();
             this._toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this._toolStripContainer1.SuspendLayout();
@@ -1943,7 +1946,9 @@ namespace hoTools.ActiveX
             this._settingsGlobalKeysToolStripMenuItem,
             this._settingsToolbarToolStripMenuItem,
             this._settingsQueryAndSctipToolStripMenuItem,
-            this._updateScriptsToolStripMenuItem});
+            this._updateScriptsToolStripMenuItem,
+            this.toolStripSeparator10,
+            this.resetFactorySettingsToolStripMenuItem});
             this._fileToolStripMenuItem.Name = "_fileToolStripMenuItem";
             resources.ApplyResources(this._fileToolStripMenuItem, "_fileToolStripMenuItem");
             // 
@@ -1982,6 +1987,17 @@ namespace hoTools.ActiveX
             this._updateScriptsToolStripMenuItem.Name = "_updateScriptsToolStripMenuItem";
             resources.ApplyResources(this._updateScriptsToolStripMenuItem, "_updateScriptsToolStripMenuItem");
             this._updateScriptsToolStripMenuItem.Click += new System.EventHandler(this.updateScriptsToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator10
+            // 
+            this.toolStripSeparator10.Name = "toolStripSeparator10";
+            resources.ApplyResources(this.toolStripSeparator10, "toolStripSeparator10");
+            // 
+            // resetFactorySettingsToolStripMenuItem
+            // 
+            this.resetFactorySettingsToolStripMenuItem.Name = "resetFactorySettingsToolStripMenuItem";
+            resources.ApplyResources(this.resetFactorySettingsToolStripMenuItem, "resetFactorySettingsToolStripMenuItem");
+            this.resetFactorySettingsToolStripMenuItem.Click += new System.EventHandler(this.resetFactorySettingsToolStripMenuItem_Click);
             // 
             // _doToolStripMenuItem
             // 
@@ -3325,6 +3341,17 @@ namespace hoTools.ActiveX
         private void setFolderToolStripMenuItem_Click(object sender, EventArgs e)
         {
             EaService.SetFolder(Repository);
+        }
+
+        private void resetFactorySettingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string filePath = AddinSettings.Reset();
+            MessageBox.Show($@"Configuration saved to 
+'{filePath}'
+and deleted.
+
+Please restart EA. During restart hoTools loads the default settings.
+You may copy the saved file to 'user.config' in the same folder", "Configuration reset to default. Please Restart!");
         }
     }
 
