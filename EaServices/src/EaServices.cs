@@ -943,7 +943,7 @@ namespace hoTools.EaServices
                                     pos = pos + 1; // make a gap
                                     oldStereotype = portEmbedded.Stereotype;
                                 }
-                                Util.VisualizePortForDiagramobject(pos, eaDia.Dia, diaObj, portEmbedded, null,
+                                Util.VisualizePortForDiagramobject(rep, pos, eaDia.Dia, diaObj, portEmbedded, null,
                                     portBoundTo);
                                 pos = pos + 1;
                             }
@@ -952,7 +952,7 @@ namespace hoTools.EaServices
                                 // Port: Visualize Port + Interface
                                 foreach (Element interf in portEmbedded.EmbeddedElements)
                                 {
-                                    Util.VisualizePortForDiagramobject(pos, eaDia.Dia, diaObj, portEmbedded, interf);
+                                    Util.VisualizePortForDiagramobject(rep, pos, eaDia.Dia, diaObj, portEmbedded, interf);
                                     pos = pos + 1;
                                 }
                             }
@@ -2778,7 +2778,7 @@ from %APPDATA%Local\Apps\hoTools\
                     foreach (Element actPar in el.EmbeddedElements)
                     {
                         if (!actPar.Type.Equals("ActivityParameter")) continue;
-                        Util.VisualizePortForDiagramobject(pos, dia, diaObj, actPar, null);
+                        Util.VisualizePortForDiagramobject(rep, pos, dia, diaObj, actPar, null);
                         pos = pos + 1;
                     }
                     rep.ReloadDiagram(dia.DiagramID);

@@ -153,7 +153,7 @@ namespace hoTools.Utils.ActivityParameter
             foreach (EA.Element actPar in act.EmbeddedElements)
             {
                 if (! actPar.Type.Equals("ActivityParameter")) continue;
-                Util.VisualizePortForDiagramobject(pos, actDia, actObj, actPar, null);
+                Util.VisualizePortForDiagramobject(rep, pos, actDia, actObj, actPar, null);
                 pos = pos + 1;
             }
 

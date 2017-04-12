@@ -1521,7 +1521,7 @@ namespace hoTools.Utils
         /// <param name="port"></param>
         /// <param name="interf"></param>
         /// <param name="portBoundTo"></param>
-        public static void VisualizePortForDiagramobject(int pos, Diagram dia, EA.DiagramObject diaObjSource,
+        public static void VisualizePortForDiagramobject(EA.Repository rep, int pos, Diagram dia, EA.DiagramObject diaObjSource,
             EA.Element port,
             EA.Element interf, string portBoundTo = "right")
         {
@@ -1566,45 +1566,25 @@ namespace hoTools.Utils
             var diaObjectPort = (EA.DiagramObject) dia.DiagramObjects.AddNew(position, "");
             if (port.Type.Equals("Port"))
             {
-                // not showing label
-                //diaObject.Style = "LBL=CX=97:CY=13:OX=45:OY=0:HDN=1:BLD=0:ITA=0:UND=0:CLR=-1:ALN=0:ALT=0:ROT=0;";
-                diaObjectPort.Style = "LBL=CX=200:CY=12:OX=23:OY=1:HDN=0:BLD=0:ITA=0:UND=0:CLR=-1:ALN=0:ALT=0:ROT=0;";
+                string hdn = "HDN=0:"; // Port without interface, visualize name, label
+                string ox = "OX=23:";  // Port without interface, visualize name, label
+                if (port.EmbeddedElements.Count > 0 || interf != null)
+                {  // port with interface
+                    ox = "OX=60:"; // more to the right side
+                    hdn = "HDN=1:";// without label
+                }
+                diaObjectPort.Style = $@"LBL=CX=200:CY=12:{ox}OY=0:{hdn}BLD=0:ITA=0:UND=0:CLR=-1:ALN=0:ALT=0:ROT=0;";
             }
             else
             {
 
-                // not showing label
-                diaObjectPort.Style = "LBL=CX=97:CY=13:OX=39:OY=3:HDN=0:BLD=0:ITA=0:UND=0:CLR=-1:ALN=0:ALT=0:ROT=0;";
+                // Parameter: Not showing label
+                diaObjectPort.Style = "LBL=CX=97:CY=13:OX=39:OY=0:HDN=0:BLD=0:ITA=0:UND=0:CLR=-1:ALN=0:ALT=0:ROT=0;";
             }
             diaObjectPort.ElementID = port.ElementID;
-
-
-            diaObjectPort.Update();
-
-
-            // Visualize interface for port
-            if (interf == null) return;
-
-            // visualize interface
-            EA.DiagramObject diaObject2 = (EA.DiagramObject)dia.DiagramObjects.AddNew(position, EA.ObjectType.otElement.ToString());
             dia.DiagramObjects.Refresh();
-            // diaObject2.Style = "LBL=CX=69:CY=13:OX=45:OY=0:HDN=0:BLD=0:ITA=0:UND=0:CLR=-1:ALN=0:ALT=0:ROT=0;";
-            // HDN=0 Label visible
-            // HDN=1 Label invisible
-            // PType=1: Type Shown
-            // CX = nn; Name Position
-            // OX = nn; Label Position, -nn = Left, +nn = Right
-            diaObject2.Style = "LBL=CX=69:CY=13:OX=45:OY=0:HDN=1:BLD=0:ITA=0:UND=0:CLR=-1:ALN=0:ALT=0:ROT=0;";
-            diaObject2.ElementID = interf.ElementID;
-            try
-            {
-                diaObject2.Update();
-            }
-            catch (Exception e)
-            {
-                
-            }
-
+            diaObjectPort.Update();
+            
         }
 
         #endregion
