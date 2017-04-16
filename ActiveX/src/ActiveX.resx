@@ -1447,6 +1447,8 @@ Procedure:
 - Diagram
 - Nodes
 
+Show Label also visialize e.g. Port Name
+
 Ports,Parameter,Pins are also called:
 - Structural Elements
 - Embedded Elements</value>

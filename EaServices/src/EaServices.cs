@@ -1200,8 +1200,11 @@ namespace hoTools.EaServices
             {
                 count = count + 1;
                 var elSource = eaDia.SelElements[count];
-                if (elSource.IsEmbeddedElement())
+                // Update Embedded Element, RequiredInterface, ProvidedInterface
+                if (elSource.IsEmbeddedElement() |
+                    "ProvidedInterface RequiredInterface".Contains(elSource.Type))
                 {
+                    
                     PortServices.DoChangeLabelStyle(diaObj, style);
                 }
                 else

@@ -1582,9 +1582,28 @@ namespace hoTools.Utils
                 diaObjectPort.Style = "LBL=CX=97:CY=13:OX=39:OY=0:HDN=0:BLD=0:ITA=0:UND=0:CLR=-1:ALN=0:ALT=0:ROT=0;";
             }
             diaObjectPort.ElementID = port.ElementID;
-            dia.DiagramObjects.Refresh();
-            diaObjectPort.Update();
-            
+            try
+            {
+                diaObjectPort.Update();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($@"VisualPort for:
+SourceNodeID: {diaObjSource.InstanceID}
+SourceElementID: {diaObjSource.ElementID}
+SourceName: {rep.GetElementByID(diaObjSource.ElementID).Name}
+SourceType: {rep.GetElementByID(diaObjSource.ElementID).Type}
+NodeID: {diaObjectPort.InstanceID}
+ElementID: {diaObjectPort.ElementID}
+DiagramID: {diaObjectPort.DiagramID}
+Port: {port.Name}
+PortParent: {port.ParentID}
+PortPackage: {port.PackageID}
+PortType: {port.Type}
+", "Exception updating Port node!");
+            }
+            dia.DiagramObjects.Refresh();// first update element than refresh collection 
+
         }
 
         #endregion

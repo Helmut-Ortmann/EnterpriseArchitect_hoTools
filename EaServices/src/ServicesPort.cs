@@ -203,14 +203,16 @@ namespace hoTools.EAServicesPort
         [Flags]
         public enum LabelStyle
         {
-            IsHidden = 1,
-            IsShown = 2,
+            IsHidden = 1,        // HDN=1; Hide Label/Name
+            IsShown = 2,         // HDN=0; Show Label/Name
             PositionLeft = 4,
             PositionRight = 8,
             PositionPlus = 16,
             PositionMinus = 32,
             IsTypeHidden = 64, // PType=0;
-            IsTypeShown = 128, // PType=1;
+            IsTypeShown = 128,  // PType=1;
+            IsPortResizable = 256, // PortResizable=1;
+            IsNotPortResizable = 512 // PortResizable=0;
         }
         /// <summary>
         /// Change the type of nodes:
@@ -304,6 +306,12 @@ namespace hoTools.EAServicesPort
 
                 case LabelStyle.IsShown:
                     ChangeDiagramObjectStyle(portObj, @"HDN=1", "HDN=0");
+                    break;
+                case LabelStyle.IsPortResizable:
+                    ChangeDiagramObjectStyle(portObj, @"PortResizable=0", "PortResizable=1");
+                    break;
+                case LabelStyle.IsNotPortResizable:
+                    ChangeDiagramObjectStyle(portObj, @"PortResizable=1", "PortResizable=0");
                     break;
                 case LabelStyle.IsTypeHidden:
                     ChangeDiagramObjectStyle(portObj, @"PType=1", "PType=0");
