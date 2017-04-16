@@ -117,6 +117,8 @@ Some features:
 
 
 # Releases
+## Release 2.1.6
+- Hybrid Scripting (Using C#, Java,.. instead of VB Script & co)
 
 ## Release 2.1.5
 - hoTools inventarize loaded MDGs (hoBasicMDG,..)
