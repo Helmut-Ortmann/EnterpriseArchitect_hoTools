@@ -89,7 +89,7 @@ Collection of useful tools (see also [WiKi](https://github.com/Helmut-Ortmann/En
 - Integrated Geert Bellekens VBScript Library
 - Useful Searches
 - Installable for different customers (brands)
-- Visual Studio 2015
+- Visual Studio 2017
 - Visual Studio Debug: Select "Enable native code debugging"
 
 # Power features C/C++ for SPICE / FuSi #
@@ -117,6 +117,8 @@ Some features:
 
 
 # Releases
+## Release 2.1.6
+- Hybrid Scripting (Using C#, Java,.. instead of VB Script & co)
 
 ## Release 2.1.5
 - hoTools inventarize loaded MDGs (hoBasicMDG,..)
