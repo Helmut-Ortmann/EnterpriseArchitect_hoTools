@@ -89,7 +89,7 @@ Collection of useful tools (see also [WiKi](https://github.com/Helmut-Ortmann/En
 - Integrated Geert Bellekens VBScript Library
 - Useful Searches
 - Installable for different customers (brands)
-- Visual Studio 2015
+- Visual Studio 2017
 - Visual Studio Debug: Select "Enable native code debugging"
 
 # Power features C/C++ for SPICE / FuSi #

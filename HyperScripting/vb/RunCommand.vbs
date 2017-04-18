@@ -26,6 +26,7 @@
 ' Improvements:
 ' - Use Windows %PATH% Environment Variable
 ' - Make a fix location structure for your Scripts
+' - Use local path
 ' - Your ideas
 ' - ..
 '
@@ -58,6 +59,27 @@ sub Test
 	Session.Output "RunEA(), Result ping:" & vbCRLF & result
 end sub
 
+'---------------------------------------------------------------------------------------------------------------------------------
+' Testfunction: 
+' - Use it to test and get a basic understanding. At the end of this file you can switch the call of this Test Function on or off.
+'   To do this insert or delete the apostrophe (Last line of this file/script)
+sub TestJava
+	Dim process, result
+	process = ProcessId("EA.exe")
+	Session.Output "--------------------------------------------"
+	Session.Output "ProcessId('EA.exe')" & vbCRLF
+	Session.Output process
+    Session.Output "--------------------------------------------"
+	' Test RunJava(..,..)
+	result = RunCommandJava("c:\temp\java", "SparxSystems.RepositoryInterface", " ", " ")
+	Session.Output "--------------------------------------------"
+	Session.Output "RunJava 'c:\temp\java', 'SparxSystems.RepositoryInterface', ' ', ' ')" & vbCRLF
+	Session.Output result
+    Session.Output "--------------------------------------------"
+	Session.Output vbCRLF & vbCRLF & vbCRLF
+end sub
+
+
 
 '--------------------------------------------------------------------
 ' Function to call an arbitrary *.exe and return the Standard Output to the caller
@@ -72,9 +94,25 @@ end sub
 ' - para1        The ProcessID of the EA Instance
 ' - para2        param1 
 ' - para3        param2 
-
 Function RunCommand(CommandExe, param1, param2)
     RunCommand = Run(CommandExe, ProcessId("EA.exe"), param1, param2)
+End Function
+
+'--------------------------------------------------------------------
+' Function to call an Java Class and returns the Standard Output to the caller
+'
+' Parameters:
+' - CommandExe   The *.exe file to call
+' - param1       Your parameter 1 you want to pass to the exe
+' - param2       Your parameter 2 you want to pass to the exe
+' - Return Value The Standard Output of the called *.exe
+'
+' Your Java Class:    Get the EA Repository by the Process ID of the EA Instance
+' - para1             The ProcessID of the EA Instance
+' - para2             param1 
+' - para3             param2 
+Function RunCommandJava(baseFolder, eaClass, param1, param2)
+    RunCommandJava = RunJava(baseFolder, eaClass, ProcessId("EA.exe"), param1, param2)
 End Function
 
 
@@ -108,8 +146,13 @@ End Function
 
 '-----------------------------------------------------
 ' Helper function to run an *.exe with 3 parameters
+' Tested with C# in a Hybrid SPARX Environment 
 ' It reads the Standard Output and returns it as the result
 '
+' CommandExe:  Full path of the C# exe according to SPARX
+' param1:      Value parameter you want to pass to CommandExe (no references, objects)
+' param2:      Value parameter you want to pass to CommandExe (no references, objects)
+' param3:      Value parameter you want to pass to CommandExe (no references, objects)
 Function Run(CommandExe,param1,param2, param3) 
     Dim ws,wsShellExe, Command
 	Dim stdOut ' Standard output
@@ -151,9 +194,82 @@ Function Run(CommandExe,param1,param2, param3)
     Run = stdOut
 End Function
 
-'-----------------------------------------------------------
-' Test "Execute EA HyperScripting" from EA Script GUI
+
+'-----------------------------------------------------
+' Helper function to run Java Class with 2 parameters
+' Tested with java in a Hybrid SPARX Environment 
+' It reads the Standard Output and returns it as the result
+' Note: Build has run
+'       java is in path
 '
-' To use or not use this test functionality remove/insert beneath apostrophe before Test
+' baseFolder:   Full path of the C# exe according to SPARX
+' eaClass:     e.g.: SparxSystems.RepositoryInterface
+' param1:      Value parameter you want to pass to CommandExe (no references, objects)
+' param2:      Value parameter you want to pass to CommandExe (no references, objects)
+' param3:      Value parameter you want to pass to CommandExe (no references, objects)
+'
+' baseFolder\
+'           \eaapi.jar
+'           \SSJavaCOM.dll
+'           \SparxSystems\
+'                        \... your Java classes
+Function RunJava(baseFolder, eaClass, param1, param2, param3)
+    Dim ws,wsShellExe, Command
+    Dim objEnv
+	Dim stdOut ' Standard output
+	Dim stdErr ' Error output
+	Const WshFinished = 1
+    Const WshFailed = 2
+	
+
+    ' Set environment variable
+	Set ws = CreateObject("WScript.Shell")
+    Set objEnv = ws.Environment ("PROCESS")
+    objEnv("PATH") = objEnv("PATH") & ";" & baseFolder
+	
+	' Set current folder
+	ws.CurrentDirectory = baseFolder
+    Session.Output ws.CurrentDirectory
+
+
+    Set ws = CreateObject("WScript.Shell")
+    command = "java -cp ""eaapi.jar;.;"" " & eaClass &" "& param1 &" "&param2&" "&param3&" " 
+    Session.Output "Command=" & "'" & command & "'"
+    Session.Output objEnv("PATH")
+    On Error Resume Next
+    Set wsShellExe = ws.Exec(command)
+	If Err.Number <> 0 Then
+	  MsgBox "Command:'"  & vbCRLF & command & _
+     	  "'" & vbCRLF & "Error:" & Err.Number & _
+		  vbCRLF & "Source:" & Err.Source & _
+		  vbCRLF & "Description:" & Err.Description, _
+		  65, _
+		  "Error running command"
+	  return
+	End If
+	On Error Goto 0
+
+	stdErr = wsShellExe.StdErr.ReadAll
+	
+	Select Case wsShellExe.Status
+      Case WshFinished
+		 'Session.Output "WshFinished"
+		 stdOut = wsShellExe.StdOut.ReadAll
+      Case WshFailed
+         'strOutput = wsShellExe.StdErr.ReadAll
+		 Session.Output "WshEnd"
+	  Case Else
+	     'Session.Output "Error"
+		 stdOut = "Undefined Error!"
+    End Select
+    RunJava = stdOut 
+ End Function
+
+'-----------------------------------------------------------
+' Test      Execute C# EA HyperScripting from EA Script GUI
+' TestJava  Execute Java EA HyperScripting from EA Script GUI
+'
+' To use or not use this test functionality remove/insert beneath apostrophe before 'Test' or 'TestJava'
 '
 'Test
+TestJava
