@@ -119,6 +119,9 @@ Some features:
 # Releases
 ## Release 2.1.6
 - Hybrid Scripting (Using C#, Java,.. instead of VB Script & co)
+- Service Added: Copy Name to Clipboard
+- Service Added: Copy Name to Clipboard and search with "Quick Search" for item name 
+- Remember Services can be bound to Keys or Buttons 
 
 ## Release 2.1.5
 - hoTools inventarize loaded MDGs (hoBasicMDG,..)
