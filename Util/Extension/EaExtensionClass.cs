@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
-using System.Xml.XPath;
 
 namespace hoTools.Utils.Extension
 {
@@ -18,10 +16,11 @@ namespace hoTools.Utils.Extension
         /// <param name="rep"></param>
         /// <param name="sql">SQL which select ea_guid</param>
         /// <returns>List of connectors</returns>
+        // ReSharper disable once UnusedMember.Global
         public static List<EA.Connector> GetConnectorsBySql(this EA.Repository rep, string sql)
         {
 
-            var l_con = new List<EA.Connector>();
+            var lCon = new List<EA.Connector>();
             // run query into XDocument to proceed with LinQ
             string xml =rep.SQLQuery(sql);
             var x = new XDocument(XDocument.Parse(xml));
@@ -33,10 +32,10 @@ namespace hoTools.Utils.Extension
             foreach (var row in node)
             {
                 EA.Connector con = rep.GetConnectorByGuid(row.Value);
-                l_con.Add(con);
+                lCon.Add(con);
             }
     
-            return l_con;
+            return lCon;
         }
         /// <summary>
         /// Returns a list of strings of the query with one column.
@@ -47,7 +46,7 @@ namespace hoTools.Utils.Extension
         public static List<string> GetStringsBySql(this EA.Repository rep, string sql)
         {
 
-            var l_con = new List<string>();
+            var lCon = new List<string>();
             // run query into XDocument to proceed with LinQ
             string xml = rep.SQLQuery(sql);
             var x = new XDocument(XDocument.Parse(xml));
@@ -58,12 +57,31 @@ namespace hoTools.Utils.Extension
 
             foreach (var row in node)
             {
-                l_con.Add(row.Value);
+                lCon.Add(row.Value);
             }
 
-            return l_con;
+            return lCon;
         }
-       
+        /// <summary>
+        /// Return true if Element is an Embedded Element Type
+        /// - Port
+        /// - Activity Parameter
+        /// - Parameter
+        /// - ExpansionNode
+        /// - Pin
+        /// </summary>
+        /// <param name="el"></param>
+        /// <returns>EA Version</returns>
+        // ReSharper disable once UnusedMember.Global
+        public static bool IsEmbeddedElement(this EA.Element el)
+        {
+            return el.Type == "Port" ||
+                   el.Type == "ActivityParameter" ||
+                   el.Type == "Parameter" ||
+                   el.Type == "ExpansionNode" ||
+                   el.Type == "ActionPin";
+        }
+
 
     }
 }
