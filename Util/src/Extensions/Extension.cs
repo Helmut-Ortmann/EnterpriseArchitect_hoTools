@@ -6,7 +6,6 @@ namespace hoTools.Utils.Extensions
     public class Extension
     {
         // List of Extensions
-        private List<ExtensionItem> _lExtensions;
 
         // configurations as singleton
         static readonly HoToolsGlobalCfg GlobalCfg = HoToolsGlobalCfg.Instance;
@@ -18,10 +17,7 @@ namespace hoTools.Utils.Extensions
 
         #region properties
 
-        public List<ExtensionItem> LExtensions
-        {
-            get { return _lExtensions; }
-        }
+        public List<ExtensionItem> LExtensions { get; private set; }
 
         #endregion
 
@@ -29,14 +25,14 @@ namespace hoTools.Utils.Extensions
         /// <summary>
         /// Load Extensions to run
         /// </summary>
-        /// <param name="rep"></param>
         /// <returns></returns>
+        // ReSharper disable once UnusedMethodReturnValue.Global
         public bool LoadExtensions()
         {
-            _lExtensions = new List<ExtensionItem>();
+            LExtensions = new List<ExtensionItem>();
             foreach (string extensionFileName in GlobalCfg.GetExtensionListFileCompleteName())
             {
-                _lExtensions.Add(new ExtensionItem(extensionFileName));
+                LExtensions.Add(new ExtensionItem(extensionFileName,"",""));
 
             }
 

@@ -129,7 +129,7 @@ namespace hoTools.Utils.Appls
         // final
         // transition from init to 'State1'
 
-        public static bool CreateDefaultElementsForStateDiagram(Repository rep, Diagram dia, EA.Element stateChart)
+        private static bool CreateDefaultElementsForStateDiagram(Repository rep, Diagram dia, EA.Element stateChart)
         {
 
             // check if init and final node are available
@@ -143,14 +143,14 @@ namespace hoTools.Utils.Appls
             EA.Element initNode = null;
             if (!init)
             {
-                initNode = (EA.Element)stateChart.Elements.AddNew("", "StateNode");
+                initNode = (EA.Element) stateChart.Elements.AddNew("", "StateNode");
                 initNode.Subtype = 3;
                 initNode.ParentID = stateChart.ElementID;
                 initNode.Update();
                 if (dia != null)
                 {
                     Util.AddSequenceNumber(rep, dia);
-                    var initDiaNode = (EA.DiagramObject)dia.DiagramObjects.AddNew("l=295;r=315;t=125;b=135;", "");
+                    var initDiaNode = (EA.DiagramObject) dia.DiagramObjects.AddNew("l=295;r=315;t=125;b=135;", "");
                     initDiaNode.Sequence = 1;
                     initDiaNode.ElementID = initNode.ElementID;
                     initDiaNode.Update();
@@ -162,14 +162,14 @@ namespace hoTools.Utils.Appls
             // create final node
             if (!final)
             {
-                finalNode = (EA.Element)stateChart.Elements.AddNew("", "StateNode");
+                finalNode = (EA.Element) stateChart.Elements.AddNew("", "StateNode");
                 finalNode.Subtype = 4;
                 finalNode.ParentID = stateChart.ElementID;
                 finalNode.Update();
                 if (dia != null)
                 {
                     Util.AddSequenceNumber(rep, dia);
-                    var finalDiaNode = (EA.DiagramObject)dia.DiagramObjects.AddNew("l=285;r=305;t=745;b=765;", "");
+                    var finalDiaNode = (EA.DiagramObject) dia.DiagramObjects.AddNew("l=285;r=305;t=745;b=765;", "");
                     finalDiaNode.Sequence = 1;
                     finalDiaNode.ElementID = finalNode.ElementID;
                     finalDiaNode.Update();
@@ -177,8 +177,8 @@ namespace hoTools.Utils.Appls
                 }
             }
             // create state node
-            var stateNode = (EA.Element)stateChart.Elements.AddNew("", "State");
-            stateNode.Subtype = 0;// state
+            var stateNode = (EA.Element) stateChart.Elements.AddNew("", "State");
+            stateNode.Subtype = 0; // state
             stateNode.Name = "State1";
             stateNode.ParentID = stateChart.ElementID;
             stateNode.Update();
@@ -186,31 +186,30 @@ namespace hoTools.Utils.Appls
             {
                 Util.AddSequenceNumber(rep, dia);
                 string pos = "l=300;r=400;t=-400;b=-470";
-                var stateDiaNode = (EA.DiagramObject)dia.DiagramObjects.AddNew(pos, "");
+                var stateDiaNode = (EA.DiagramObject) dia.DiagramObjects.AddNew(pos, "");
                 stateDiaNode.Sequence = 1;
                 stateDiaNode.ElementID = stateNode.ElementID;
                 stateDiaNode.Update();
                 Util.SetSequenceNumber(rep, dia, stateDiaNode, "1");
 
                 // draw a transition
-                var con = (Connector)finalNode.Connectors.AddNew("", "StateFlow");
+                var con = (Connector) finalNode.Connectors.AddNew("", "StateFlow");
                 con.SupplierID = stateNode.ElementID;
                 con.ClientID = initNode.ElementID;
                 con.Update();
                 finalNode.Connectors.Refresh();
-            }
-
-
-            stateChart.Elements.Refresh();
-            dia.DiagramObjects.Refresh();
-            dia.Update();
-            rep.ReloadDiagram(dia.DiagramID);
-
-            return true;
+                stateChart.Elements.Refresh();
+                dia.DiagramObjects.Refresh();
+                dia.Update();
+                rep.ReloadDiagram(dia.DiagramID);
         }
+
+        return true;
+    }
         //-----------------------------------------------------------------------------------------
         // Create StateMachine for Operation
         //----------------------------------------------------------------------------------
+        // ReSharper disable once UnusedMethodReturnValue.Global
         public static bool CreateStateMachineForOperation(Repository rep, Method m)
         {
             // get class

@@ -13,7 +13,8 @@ namespace hoTools.Utils.ActionPins
         //---------------------------------------------------------------------------------------------
         // updateActionParameter(EA.Repository rep, EA.Element actionPin)
         //---------------------------------------------------------------------------------------------
-        public static bool UpdateActionPinParameter(Repository rep, EA.Element action)
+        // ReSharper disable once UnusedMethodReturnValue.Local
+        private static bool UpdateActionPinParameter(Repository rep, EA.Element action)
         {
             foreach (EA.Element actionPin in action.EmbeddedElements)
             {
@@ -73,16 +74,16 @@ namespace hoTools.Utils.ActionPins
         //    return true;
         //}
 
-        public static bool UpdateActionPinForElement(Repository rep, EA.Element el1)
+        public static void UpdateActionPinForElement(Repository rep, EA.Element el1)
         {
             if (el1.Type == "Action")
             {
                 UpdateActionPinParameter(rep, el1);
-                return true;
+                return;
             }
             if (el1.Type == "Class" | el1.Type == "Interface")
             {
-                return true;
+                return;
             }
             foreach (EA.Element el in el1.Elements)
             {   // update parameter
@@ -96,14 +97,12 @@ namespace hoTools.Utils.ActionPins
                     UpdateActionPinForElement(rep, el);
                 }
             }
-
-            return true;
         }
         //----------------------------------------------------------------------------
         // updateActionPinForPackage(EA.Repository rep, EA.Package pkg)
         //----------------------------------------------------------------------------
 
-        public static bool UpdateActionPinForPackage(Repository rep, EA.Package pkg)
+        public static void UpdateActionPinForPackage(Repository rep, EA.Package pkg)
         {
             foreach (EA.Element el in pkg.Elements)
             {   // update parameter
@@ -125,8 +124,6 @@ namespace hoTools.Utils.ActionPins
                 // update all packages
                 UpdateActionPinForPackage(rep, pkgSub);
             }
-            return true;
-
         }
     }
 }

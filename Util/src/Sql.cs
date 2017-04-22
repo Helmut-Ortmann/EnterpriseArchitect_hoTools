@@ -85,7 +85,7 @@ namespace hoTools.Utils.SQL
             string str = _rep.SQLQuery(query);
             XElement xelement = XElement.Parse(str);
             // something found????
-            result = xelement.Descendants("Row").Count() > 0;
+            result = xelement.Descendants("Row").Any();
             
             return result;
         }
@@ -104,7 +104,7 @@ namespace hoTools.Utils.SQL
             string str = _rep.SQLQuery(query);
             XElement xelement = XElement.Parse(str);
             // something found????
-            result = xelement.Descendants("Row").Count() > 0;
+            result = xelement.Descendants("Row").Any();
 
             return result;
         }

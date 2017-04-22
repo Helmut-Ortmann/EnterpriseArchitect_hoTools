@@ -26,7 +26,8 @@ namespace hoTools.Utils.SQL
             }
            
         }
-        string _templateText;
+
+        readonly string _templateText;
         public string TemplateName { get; }
         public string ToolTip { get; }
         public Boolean IsResource { get; }
