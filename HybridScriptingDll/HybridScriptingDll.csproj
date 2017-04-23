@@ -73,5 +73,8 @@
     <None Include="RegisterAsCom.bat" />
     <None Include="UnRegisterAsCom.bat" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="vb\RunDll.vbs" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
