@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26228.9
+VisualStudioVersion = 15.0.26403.7
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddinClass", "Addin\AddinClass.csproj", "{6D5DEEEF-0897-4494-9857-5BEE2BF0D0AF}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -78,6 +78,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Properties", "Properties", 
 		Extension\Properties\AssemblyInfo.cs = Extension\Properties\AssemblyInfo.cs
 		FindAndReplace\Properties\AssemblyInfo.cs = FindAndReplace\Properties\AssemblyInfo.cs
 		Util\Properties\AssemblyInfo.cs = Util\Properties\AssemblyInfo.cs
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HybridScriptingExe", "HybridScriptingExe\HybridScriptingExe.csproj", "{D8F1743A-FD36-411B-897C-647DB82D5B88}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HybridScriptingDll", "HybridScriptingDll\HybridScriptingDll.csproj", "{DF6BDF31-C850-4C54-B4F2-BA73E18743C7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5DF16867-AC84-4A1C-86CE-D4D4CA2EF940}"
+	ProjectSection(SolutionItems) = preProject
+		commands.json = commands.json
 	EndProjectSection
 EndProject
 Global
@@ -207,6 +216,30 @@ Global
 		{DA1287E7-D076-4B08-85DD-7C8440317B94}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{DA1287E7-D076-4B08-85DD-7C8440317B94}.Release|x86.ActiveCfg = Release|Any CPU
 		{DA1287E7-D076-4B08-85DD-7C8440317B94}.Release|x86.Build.0 = Release|Any CPU
+		{D8F1743A-FD36-411B-897C-647DB82D5B88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8F1743A-FD36-411B-897C-647DB82D5B88}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8F1743A-FD36-411B-897C-647DB82D5B88}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{D8F1743A-FD36-411B-897C-647DB82D5B88}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{D8F1743A-FD36-411B-897C-647DB82D5B88}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D8F1743A-FD36-411B-897C-647DB82D5B88}.Debug|x86.Build.0 = Debug|Any CPU
+		{D8F1743A-FD36-411B-897C-647DB82D5B88}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8F1743A-FD36-411B-897C-647DB82D5B88}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8F1743A-FD36-411B-897C-647DB82D5B88}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{D8F1743A-FD36-411B-897C-647DB82D5B88}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{D8F1743A-FD36-411B-897C-647DB82D5B88}.Release|x86.ActiveCfg = Release|Any CPU
+		{D8F1743A-FD36-411B-897C-647DB82D5B88}.Release|x86.Build.0 = Release|Any CPU
+		{DF6BDF31-C850-4C54-B4F2-BA73E18743C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF6BDF31-C850-4C54-B4F2-BA73E18743C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF6BDF31-C850-4C54-B4F2-BA73E18743C7}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{DF6BDF31-C850-4C54-B4F2-BA73E18743C7}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{DF6BDF31-C850-4C54-B4F2-BA73E18743C7}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{DF6BDF31-C850-4C54-B4F2-BA73E18743C7}.Debug|x86.Build.0 = Debug|Any CPU
+		{DF6BDF31-C850-4C54-B4F2-BA73E18743C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF6BDF31-C850-4C54-B4F2-BA73E18743C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF6BDF31-C850-4C54-B4F2-BA73E18743C7}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{DF6BDF31-C850-4C54-B4F2-BA73E18743C7}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{DF6BDF31-C850-4C54-B4F2-BA73E18743C7}.Release|x86.ActiveCfg = Release|Any CPU
+		{DF6BDF31-C850-4C54-B4F2-BA73E18743C7}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

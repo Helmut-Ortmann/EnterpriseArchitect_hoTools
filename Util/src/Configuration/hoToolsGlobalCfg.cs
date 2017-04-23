@@ -2,7 +2,6 @@
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using hoTools.Utils.Extensions;
 
 namespace hoTools.Utils.Configuration
 {
@@ -15,21 +14,15 @@ namespace hoTools.Utils.Configuration
         string[] _lExtensionPaths;
 
         // Class to administer Extensions
-        hoTools.Utils.Extensions.Extension  _extensions;
 
         // the owner of the windows, used to prevent modal windows in background
-        private Control _owner;
 
         HoToolsGlobalCfg()
         {
             
         }
 
-        public Extensions.Extension Extensions
-        {
-            get { return _extensions; }
-            set { _extensions = value; }
-        }
+        public Extensions.Extension Extensions { get; set; }
 
         /// <summary>
         /// Access HoToolsGlobalCfg.Instance to get the singleton object.
@@ -40,11 +33,7 @@ namespace hoTools.Utils.Configuration
         /// <summary>
         /// The owner of all windows. Used to prevent modal windows stuck in background.
         /// </summary>
-        public Control Owner
-        {
-            get { return _owner; }
-            set { _owner = value; }
-        }
+        public Control Owner { get; set; }
 
         /// <summary>
         /// hoTools config path (..user\&lt;users>\AppData\Roaming\ho\hoTools\)
@@ -188,7 +177,7 @@ namespace hoTools.Utils.Configuration
         /// <param name="lPaths"></param>
         /// <param name="fileName"></param>
         /// <returns></returns>
-        public string GetFileNameFromPath(string[] lPaths, string fileName)
+        private string GetFileNameFromPath(string[] lPaths, string fileName)
         {
             // Absolute path
             if (Path.IsPathRooted(fileName))

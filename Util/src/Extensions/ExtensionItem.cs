@@ -9,74 +9,37 @@ namespace hoTools.Utils.Extensions
 {
     public class ExtensionItem
     {
-        private string _fileName;
-        private string _description;
-        private string _helpText;
-        private string _type;
-        private string _assemblyVersion;
-        private string _fileVersion;
-        private string _signature;
-        private List<string> _publicStaticMethods;
         private List<string> _publicMethods;
 
 
-        public ExtensionItem(string fileName)
+        public ExtensionItem(string fileName, string type, string description)
         {
-            _fileName = fileName;
+            FileName = fileName;
+            Type = type;
+            Description = description;
         }
 
-        public string Name
-        {
-            get { return Path.GetFileName(_fileName); }
+        public string Name => Path.GetFileName(FileName);
 
-        }
+        public string FileName { get;  }
 
-        public string FileName
-        {
-            get { return _fileName; }
-            set { _fileName = value; }
-        }
+        public string Description { get;  }
 
-        public string Description
-        {
-            get { return _description; }
-            set { _description = value; }
-        }
+        public string HelpText { get; set; }
 
-        public string HelpText
-        {
-            get { return _helpText; }
-            set { _helpText = value; }
-        }
-        public string Type
-        {
-            get { return _type; }
-            set { _type = value; }
-        }
-        public string AssemblyVersion
-        {
-            get { return _assemblyVersion; }
-            set { _assemblyVersion = value; }
-        }
-        public string FileVersion
-        {
-            get { return _fileVersion; }
-            set { _fileVersion = value; }
-        }
-        public string Signature
-        {
-            get { return _signature; }
-            set { _signature = value; }
-        }
+        public string Type { get;}
 
-        public List<string> PublicStaticMethods
-        {
-            get { return _publicStaticMethods; }
-        }
+        public string AssemblyVersion { get; set; }
+
+        public string FileVersion { get; set; }
+
+        public string Signature { get; set; }
+
+        public List<string> PublicStaticMethods { get; private set; }
 
         public void AnalyzeAssembly()
         {
-            Assembly ass = Assembly.LoadFrom(_fileName);
+            Assembly ass = Assembly.LoadFrom(FileName);
             foreach (Type t in ass.GetTypes())
             {
                 string name = t.Name;
@@ -84,7 +47,7 @@ namespace hoTools.Utils.Extensions
             }
 
             // get all public methods
-            _publicStaticMethods  = (from type in ass.GetTypes()
+            PublicStaticMethods  = (from type in ass.GetTypes()
                          from method in type.GetMethods(
                            BindingFlags.Public |
                            BindingFlags.Static)
@@ -125,9 +88,9 @@ namespace hoTools.Utils.Extensions
 
         public string ExtensionDetails()
         {
-            string staticMethods = string.Join($@"{Environment.NewLine}", _publicStaticMethods.ToArray());
+            string staticMethods = string.Join($@"{Environment.NewLine}", PublicStaticMethods.ToArray());
             string publicMethods = string.Join($@"{Environment.NewLine}", _publicMethods.ToArray());
-            string info = $@"File:    {_fileName}
+            string info = $@"File:    {FileName}
 Static Methods:
 {staticMethods}
 

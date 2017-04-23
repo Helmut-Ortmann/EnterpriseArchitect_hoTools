@@ -12,8 +12,8 @@ namespace hoTools.Utils.Favorites
     public class Favorite
     {
         readonly Repository _rep;
-        string _xrefGuid = "";
-        string _clientGuid = "";
+        readonly string _xrefGuid = "";
+        readonly string _clientGuid = "";
 
         #region Constructor
         /// <summary>
@@ -38,7 +38,7 @@ namespace hoTools.Utils.Favorites
         /// </summary>
         /// <param name="rep"></param>
         /// <returns></returns>
-        static public bool InstallSearches(Repository rep)
+        public static bool InstallSearches(Repository rep)
         {
             rep.AddDefinedSearches(Strings.SearchFavorite);
             return true;

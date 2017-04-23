@@ -1,0 +1,19 @@
+{
+  "commands": {
+    "RegisterAsCom": {
+      "fileName": "cmd.exe",
+      "workingDirectory": ".",
+      "arguments": "/c HybridScriptingDll\\RegisterAsCom.bat"
+    },
+    "RegisterAsCom 1405418121": {
+      "fileName": "cmd.exe",
+      "workingDirectory": ".",
+      "arguments": "/c HybridScriptingDll\\RegisterAsCom.bat"
+    },
+    "RegisterAsCom 1639433835": {
+      "fileName": "cmd.exe",
+      "workingDirectory": ".",
+      "arguments": "/c HybridScriptingDll\\RegisterAsCom.bat"
+    }
+  }
+}

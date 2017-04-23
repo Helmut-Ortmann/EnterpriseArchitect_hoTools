@@ -2,6 +2,7 @@
 using EA;
 using hoTools.Utils.Parameter;
 
+// ReSharper disable once CheckNamespace
 namespace hoTools.Utils.ActivityParameter
 {
     //--------------------------------------------------------------------------------------------
@@ -16,8 +17,10 @@ namespace hoTools.Utils.ActivityParameter
         //
         // init
         // final
-        public static bool ActivityIsSimple = true; // Create Activity from function in the simple form
-        public static bool CreateDefaultElementsForActivity(Repository rep, 
+        private static bool ActivityIsSimple = true; // Create Activity from function in the simple form
+
+        // ReSharper disable once UnusedMethodReturnValue.Local
+        private static bool CreateDefaultElementsForActivity(Repository rep, 
                                 Diagram dia, EA.Element act)
         {
             // create init node
@@ -33,6 +36,7 @@ namespace hoTools.Utils.ActivityParameter
         // subtype=100 init node
         // subtype=101 final node
 
+        // ReSharper disable once UnusedMethodReturnValue.Global
         public static EA.DiagramObject CreateInitFinalNode(Repository rep, Diagram dia, EA.Element act, 
                                       int subType, string position)
         {
@@ -56,6 +60,7 @@ namespace hoTools.Utils.ActivityParameter
         //--------------------------------------------------------------------------------
         // Create an Activity Diagram for the operation
 
+        // ReSharper disable once UnusedMethodReturnValue.Global
         public static bool CreateActivityForOperation(Repository rep, Method m, int treePos=100)
         {
             // get class
@@ -177,21 +182,11 @@ namespace hoTools.Utils.ActivityParameter
             actDia.ShowDetails = 0; // hide details
             // scale page to din A4
             
-            if (actDia.StyleEx.Length > 0)
-            {
-                actDia.StyleEx = actDia.StyleEx.Replace("HideQuals=0", "HideQuals=1"); // hide qualifier
-            }
-            else
-            {
-                actDia.StyleEx = "HideQuals=1;";
-            }
+            actDia.StyleEx = actDia
+                                 .StyleEx
+                                 .Length > 0 ? actDia.StyleEx.Replace("HideQuals=0", "HideQuals=1") : "HideQuals=1;";
             // Hide Qualifier
-            if (actDia.ExtendedStyle.Length > 0)
-            { actDia.ExtendedStyle = actDia.ExtendedStyle.Replace("ScalePI=0", "ScalePI=1"); }
-            else 
-            {  
-                actDia.ExtendedStyle = "ScalePI=1;";
-            }
+            actDia.ExtendedStyle = actDia.ExtendedStyle.Length > 0 ? actDia.ExtendedStyle.Replace("ScalePI=0", "ScalePI=1") : "ScalePI=1;";
             actDia.Update();
             act.Diagrams.Refresh();
 
@@ -214,6 +209,7 @@ namespace hoTools.Utils.ActivityParameter
         // get Parameter from operation
         // visualize them on diagram / activity
         //-------------------------------------------------------------------------------------------------
+        // ReSharper disable once UnusedMethodReturnValue.Global
         public static bool UpdateParameterFromOperation(Repository rep, EA.Element act, Method m)
         {
             if (m == null) return false;
@@ -347,6 +343,7 @@ namespace hoTools.Utils.ActivityParameter
 
             return true;
         }
+        // ReSharper disable once UnusedMember.Global
         public static void VisualizePortForDiagramobject(int pos, Diagram dia, EA.DiagramObject diaObjSource, EA.Element port, EA.Element interf)
         {
             // check if port already exists

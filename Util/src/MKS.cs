@@ -76,6 +76,7 @@ namespace hoTools.Utils.MksUtil
             return Cmd(@"viewhistory");
         }
 
+        // ReSharper disable once MemberCanBePrivate.Global
         public string Checkout()
         {
             if (_vcPath == null) return "";
@@ -84,6 +85,7 @@ namespace hoTools.Utils.MksUtil
             return txt;
         }
 
+        // ReSharper disable once UnusedMember.Global
         public string UndoCheckout()
         {
             if (_vcPath == null) return "";

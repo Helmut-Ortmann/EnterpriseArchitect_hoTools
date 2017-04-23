@@ -60,7 +60,7 @@ namespace hoTools.Utils.svnUtil
         }
 
         // proc: svn, tortoiseProc
-        public string Cmd(string procInfo, string cmd, string url="")
+        private string Cmd(string procInfo, string cmd, string url="")
         {
             string returnString = "";
             
@@ -77,10 +77,9 @@ namespace hoTools.Utils.svnUtil
             psi.WindowStyle = ProcessWindowStyle.Hidden;
             psi.CreateNoWindow = true;
             psi.UseShellExecute = false;
-            Process p;
             try
             {
-                p = Process.Start(psi);
+                var p = Process.Start(psi);
                 var output = p.StandardOutput;
                 var standardError = p.StandardError;
                 //outputError = p.StandardError;

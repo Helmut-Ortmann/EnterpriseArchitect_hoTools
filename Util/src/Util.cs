@@ -141,7 +141,7 @@ namespace hoTools.Utils
             }
         }
 
-        public static string GetWildCard(Repository rep)
+        private static string GetWildCard(Repository rep)
         {
             string cnString = rep.ConnectionString.ToUpper();
 
@@ -353,7 +353,7 @@ namespace hoTools.Utils
         }
 
 
-        public static void ChangeClassNameToSynonyms(Repository rep, EA.Element el)
+        private static void ChangeClassNameToSynonyms(Repository rep, EA.Element el)
         {
             if (el.Type.Equals("Class"))
             {
@@ -839,7 +839,7 @@ namespace hoTools.Utils
             return true;
         }
 
-        public static bool SetVcFlags(Repository rep, EA.Package pkg, string flags)
+        private static bool SetVcFlags(Repository rep, EA.Package pkg, string flags)
         {
             string updateStr = @"update t_package set packageflags = '" + flags + "' " +
                                " where package_ID = " + pkg.PackageID;
@@ -1217,7 +1217,7 @@ namespace hoTools.Utils
         // resetVC   If package is controlled: Reset package flags field of package 
         //------------------------------------------------------------------------------------------
         // package flags:  Recurse=0;VCCFG=unchanged;
-        public static void ResetVc(Repository rep, EA.Package pkg)
+        private static void ResetVc(Repository rep, EA.Package pkg)
         {
             if (pkg.IsVersionControlled)
             {
@@ -1458,7 +1458,7 @@ namespace hoTools.Utils
 
         }
 
-        public static string GetConnectionString(Repository rep)
+        private static string GetConnectionString(Repository rep)
         {
             string s = rep.ConnectionString;
             if (s.Contains("DBType="))
@@ -1512,9 +1512,11 @@ namespace hoTools.Utils
         }
 
         #region visualizePortForDiagramobject
+
         /// <summary>
         /// Visualize port with or without interface (required/provided) for diagramobject
         /// </summary>
+        /// <param name="rep"></param>
         /// <param name="pos"></param>
         /// <param name="dia"></param>
         /// <param name="diaObjSource"></param>
@@ -1586,7 +1588,7 @@ namespace hoTools.Utils
             {
                 diaObjectPort.Update();
             }
-            catch (Exception e)
+            catch 
             {
                 MessageBox.Show($@"VisualPort for:
 SourceNodeID: {diaObjSource.InstanceID}

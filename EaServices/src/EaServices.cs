@@ -891,7 +891,7 @@ namespace hoTools.EaServices
                 if (isOptimizePortLayoutLocation)
                 
                 {
-                    embededElementLocation = new string[] { "left", "right" };
+                    embededElementLocation = new[] { "left", "right" };
                 }
                 // Over all possible locations of embedded elements 
                 foreach (string portBoundTo in embededElementLocation)
@@ -5705,6 +5705,116 @@ from %APPDATA%Local\Apps\hoTools\
                     rep.ShowInProjectView(findMethod);
                     break;
             }
+        }
+
+        [ServiceOperation("{10845456-3A25-4357-9F54-C8010E5AC9E1}", "Search for + Copy to Clipboard selected item name",
+            "Select Package, Element, Attribute, Operation. Run Quick Search with Item name.", isTextRequired: false)]
+
+        // ReSharper disable once UnusedMember.Global
+        public static void SearchForName(EA.Repository rep)
+        {
+            string name = GetNameFromContextItem(rep);
+            // run search if name found
+            if (name != "")
+            {
+                Clipboard.SetText(name);
+                // run search
+                rep.RunModelSearch("Quick Search", name, "", "");
+            }
+
+        }
+
+        [ServiceOperation("{0B719197-81AF-4B7A-9E2E-2E2B96C101DB}", "Copy name of selected item to Clipboard",
+            "Select Package, Element, Attribute, Operation.", isTextRequired: false)]
+        // ReSharper disable once UnusedMember.Global
+        public static void CopyContextNameToClipboard(EA.Repository rep)
+        {
+            string txt = GetNameFromContextItem(rep);
+            Clipboard.SetText(txt);
+        }
+
+        /// <summary>
+        /// Get name from context element
+        /// If Action try to extract the operation name.
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <returns></returns>
+        private static string GetNameFromContextItem(EA.Repository rep)
+        {
+            string name = "";
+            switch (rep.GetContextItemType())
+            {
+                case ObjectType.otElement:
+                    EA.Element el = (EA.Element)rep.GetContextObject();
+                    name = el.Name;
+                    // possible Action which contains a function
+                    if (el.Type == "Action" && el.Name.EndsWith(")") && el.Name.Contains("("))
+                    {
+                        // xxxxx( , , ) // extract function name
+                        Regex rx = new Regex(@"\s*(\w*)\s*\([^\)]*\)");
+                        Match match = rx.Match(name);
+                        if (match.Groups.Count == 2)
+                        {
+                            name = match.Groups[1].Value;
+                        }
+                    }
+                    break;
+                case ObjectType.otDiagram:
+                    name = ((EA.Diagram)rep.GetContextObject()).Name;
+                    break;
+                case ObjectType.otPackage:
+                    name = ((EA.Package)rep.GetContextObject()).Name;
+                    break;
+                case ObjectType.otAttribute:
+                    name = ((EA.Attribute)rep.GetContextObject()).Name;
+                    break;
+                case ObjectType.otMethod:
+                    name = ((EA.Method)rep.GetContextObject()).Name;
+                    break;
+                case ObjectType.otParameter:
+                    name = ((EA.Parameter)rep.GetContextObject()).Name;
+                    break;
+                case ObjectType.otDatatype:
+                    name = ((EA.Datatype)rep.GetContextObject()).Name;
+                    break;
+                case ObjectType.otConnector:
+                    name = ((EA.Connector)rep.GetContextObject()).Name;
+                    break;
+                case ObjectType.otIssue:
+                    name = ((EA.Issue)rep.GetContextObject()).Name;
+                    break;
+                case ObjectType.otTest:
+                    name = ((EA.Test)rep.GetContextObject()).Name;
+                    break;
+                case ObjectType.otTask:
+                    name = ((EA.Task)rep.GetContextObject()).Name;
+                    break;
+                case ObjectType.otScenario:
+                    name = ((EA.Scenario)rep.GetContextObject()).Name;
+                    break;
+                case ObjectType.otClient:
+                    name = ((EA.Client)rep.GetContextObject()).Name;
+                    break;
+                case ObjectType.otAuthor:
+                    name = ((EA.Author)rep.GetContextObject()).Name;
+                    break;
+                case ObjectType.otProjectResource:
+                    name = ((EA.ProjectResource)rep.GetContextObject()).Name;
+                    break;
+                case ObjectType.otRequirement:
+                    name = ((EA.Requirement)rep.GetContextObject()).Name;
+                    break;
+                case ObjectType.otRisk:
+                    name = ((EA.Risk)rep.GetContextObject()).Name;
+                    break;
+                case ObjectType.otEffort:
+                    name = ((EA.Effort)rep.GetContextObject()).Name;
+                    break;
+                case ObjectType.otMetric:
+                    name = ((EA.Metric)rep.GetContextObject()).Name;
+                    break;
+            }
+            return name;
         }
 
         #region About
