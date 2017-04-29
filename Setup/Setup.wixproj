@@ -35,6 +35,7 @@
   <ItemGroup>
     <Content Include="ActiveX.dll.config" />
     <Content Include="License.rtf" />
+    <Content Include="Settings.json" />
     <Content Include="UserSearches.json" />
   </ItemGroup>
   <ItemGroup>

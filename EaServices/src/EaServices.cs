@@ -70,6 +70,8 @@ namespace hoTools.EaServices
     {
         // configuration as singleton
         static HoToolsGlobalCfg _globalCfg;
+        // remember Diagram Style Settings
+        public static DiagramStyle DiagramStyle;
 
         // define menu constants
         public enum DisplayMode
@@ -529,19 +531,18 @@ namespace hoTools.EaServices
                 // use string to use recursive call of function
                 if (dlg0.User == "") return;
                 liParameter[0] = dlg0.User;
-                liParameter[1] = changeScope.ToString();
                 foreach (EA.Element el in lEl)
                 {
                     if (el.Type == "Package")
                     {
                         EA.Package pkg1 = rep.GetPackageByGuid(el.ElementGUID);
                         RecursivePackages.DoRecursivePkg(rep, pkg1, ChangeAuthorPackage, ChangeAuthorElement,
-                                ChangeAuthorDiagram, liParameter);
+                                ChangeAuthorDiagram, liParameter, changeScope);
 
                     }
                     else
                     {
-                            RecursivePackages.DoRecursiveEl(rep, el, ChangeAuthorElement, ChangeAuthorDiagram, liParameter);
+                            RecursivePackages.DoRecursiveEl(rep, el, ChangeAuthorElement, ChangeAuthorDiagram, liParameter, changeScope);
                        
                     }
                 }
@@ -591,11 +592,11 @@ namespace hoTools.EaServices
                 {
                     case ObjectType.otPackage:
                         RecursivePackages.DoRecursivePkg(rep, pkg, ChangeAuthorPackage, ChangeAuthorElement,
-                            ChangeAuthorDiagram, liParameter);
+                            ChangeAuthorDiagram, liParameter, changeScope);
                         MessageBox.Show($@"New author:'{dlg.User}'", $@"Author changed for package '{pkg.Name}', recursive");
                         break;
                     case ObjectType.otElement:
-                        RecursivePackages.DoRecursiveEl(rep, el, ChangeAuthorElement, ChangeAuthorDiagram, liParameter);
+                        RecursivePackages.DoRecursiveEl(rep, el, ChangeAuthorElement, ChangeAuthorDiagram, liParameter, changeScope);
                         MessageBox.Show($@"New author:'{dlg.User}'", $@"Author changed for element '{el.Name}', recursive");
                         break;
                     case ObjectType.otDiagram:

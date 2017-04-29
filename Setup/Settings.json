@@ -1,0 +1,50 @@
+﻿{
+  'DiagramStyle':
+  [
+    // List of Diagram Styles to assign to diagram types
+    // see:: https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/DiagramStyles
+    { 
+      "Name": "Default 1 (simple, with Notes)",
+      "Description": "Simple:\r\n-Notes\r\n- no Attributes\r\n- no Operations",
+      "Type": "",
+      "PDATA": "HideAtts=1, HideOps=1, PPgs.cx=1, PPgs.cy=1, ScalePI=1",
+      "StyleEX": "ShowNotes=1"
+    },
+    { 
+      "Name": "Default 2 (elaborate, without Notes)",
+      "Description": "No Attributes, Notes",
+      "Type": "",
+      "PDATA": "HideAtts=1, HideOps=1, OpParams=2, ShowOpRetType=1, PPgs.cx=1, PPgs.cy=1, ScalePI=1",
+      "StyleEX": "ShowNotes=0"
+    },
+    { 
+      "Name": "My Requirements",
+      "Description": "No Attributes, Notes",
+      "Type": "Cust=Requirements",
+      "PDATA": "HideAtts=0, HideOps=0, OpParams=2, ShowOpRetType=1, PPgs.cx=1, PPgs.cy=1, ScalePI=1",
+      "StyleEX": "ShowNotes=1"
+    },
+    {
+      "Name": "My Test Domain",
+      "Description": "Theme=Parchment: Font, Color, Background Image, Element Shadows\r\nNo Notes",
+      "Type": "Cust=Test",
+      "Pdata": "HideAtts=1, HideOps=1, PPgs.cx=1, PPgs.cy=1, ScalePI=1, Theme=Parchment:113",
+      "StyleEX": "ShowNotes=0"
+    },
+    {
+      "Name": "My special Diagrams (User, Documents)",
+      "Description": "My special Diagrams:\r\n-User\r\n-Documents",
+      "Type": "Cust=User, Cust=Document",
+      "Pdata": "HideAtts=1, HideOps=1, PPgs.cx=1, PPgs.cy=1, ScalePI=1",
+      "StyleEX": "ShowNotes=1"
+    },
+    {
+      "Name": "My special Diagrams (User, Documents)",
+      "Description": "My special Diagrams:\r\n-User\r\n-Documents",
+      "Type": "Cust=User, Cust=Document",
+      "Pdata": "HideAtts=1, HideOps=1, PPgs.cx=1, PPgs.cy=1, ScalePI=1",
+      "StyleEX": "ShowNotes=1"
+    }
+  ]
+}
+

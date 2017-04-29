@@ -37,6 +37,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{71383584
 		hoToolsRemove.ps1 = hoToolsRemove.ps1
 		Setup\src\Product.wxs = Setup\src\Product.wxs
 		README.md = README.md
+		Addin\Settings.json = Addin\Settings.json
 		Setup\bin\Release\Setup.msi = Setup\bin\Release\Setup.msi
 	EndProjectSection
 EndProject

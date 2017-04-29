@@ -58,7 +58,7 @@
         <File Id="DuoVia.FuzzyStrings" KeyPath="yes" Name="DuoVia.FuzzyStrings.dll"  Source="$(var.DuoVia.FuzzyStrings.TargetPath)" />
       </Component>
        <Component Id="Newtonsoft.Json" Guid="48483AD6-80C5-41C6-87DB-CE36684E4ACD">
-        <File Id="Newtonsoft.Json" KeyPath="yes" Name="Newtonsoft.Json.dll"  Source="..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll" />
+        <File Id="Newtonsoft.Json" KeyPath="yes" Name="Newtonsoft.Json.dll"  Source="..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll" />
       </Component>
       <Component Id="KBCsv" Guid="30620E70-7C9D-45E4-BEC8-6A3B8D5107EA">
         <File Id="KBCsv" KeyPath="yes" Name="KBCsv.dll"  Source="..\packages\KBCsv.5.0.0\lib\netstandard1.0\KBCsv.dll" />
@@ -388,6 +388,10 @@
       <!-- User Searches, copy them into the roaming folder of hoTools                                    -->
       <Component Id="UserSearches.json" Guid="FCF9AF3B-36BD-4EFC-8A7E-3129FB0D2E3B">
         <File Id="UserSearches.json" Name="UserSearches.json" KeyPath="yes" Source="..\Setup\UserSearches.json" />
+      </Component>
+      <!-- Settings.json                                            -->
+      <Component Id="Settings.json" Guid="BD28E104-6CD6-4D24-9F3A-44CA5054429E">
+        <File Id="Settings.json" Name="Settings.json" KeyPath="yes" Source="..\Setup\Settings.json" />
       </Component>
       <Component Id="hoToolsBasic.xml" Guid="DD837398-1240-45E4-A5BE-D218A42E2E5B">
         <File Id="hoToolsBasic.xml" Name="hoToolsBasic.xml" KeyPath="yes" Source="..\Addin\hoToolsBasic.xml" />

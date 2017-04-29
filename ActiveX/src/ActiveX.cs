@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Reflection;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
@@ -17,7 +18,7 @@ using hoTools.EaServices.WiKiRefs;
 using hoTools.Utils.SQL;
 using hoTools.Utils;
 using hoTools.Utils.Configuration;
-
+using hoTools.Utils.Diagram;
 using hoTools.Utils.Excel;
 
 
@@ -50,8 +51,10 @@ namespace hoTools.ActiveX
 
         // configuration as singleton
         readonly HoToolsGlobalCfg _globalCfg = HoToolsGlobalCfg.Instance;
-        
 
+        private const string JasonFile = @"Settings.json";
+        private string _jasonFilePath;
+        private DiagramStyle _diagramStyle;
 
         #region Generated
 
@@ -213,6 +216,8 @@ namespace hoTools.ActiveX
         private ToolStripSeparator toolStripSeparator9;
         private ToolStripMenuItem resetFactorySettingsToolStripMenuItem;
         private ToolStripSeparator toolStripSeparator10;
+        private ToolStripMenuItem settingsDiagramStylesToolStripMenuItem;
+        private ToolStripSeparator toolStripSeparator11;
         private TextBox _txtSearchText;
         #endregion
 
@@ -298,7 +303,7 @@ namespace hoTools.ActiveX
         /// </summary>
         private void IntializeSearches()
         {
-             Search.LoadAllSearches(Repository,AddinSettings.ConfigPath, AddinSettings.GetAutoLoadMdgFileName());
+             Search.LoadAllSearches(Repository,AddinSettings.ConfigFolderPath, AddinSettings.GetAutoLoadMdgFileName());
             _txtSearchName.AutoCompleteCustomSource = Search.GetSearchAutoCompleteSuggestion();
 
         } 
@@ -1291,6 +1296,8 @@ namespace hoTools.ActiveX
             this._panelQuickSearch = new System.Windows.Forms.TableLayoutPanel();
             this._toolTipRtfListOfSearches = new System.Windows.Forms.ToolTip(this.components);
             this._panelConveyedItems = new System.Windows.Forms.Panel();
+            this.settingsDiagramStylesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
             this._toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this._toolStripContainer1.SuspendLayout();
             this._toolStripQuery.SuspendLayout();
@@ -1947,6 +1954,8 @@ namespace hoTools.ActiveX
             this._settingsGlobalKeysToolStripMenuItem,
             this._settingsToolbarToolStripMenuItem,
             this._settingsQueryAndSctipToolStripMenuItem,
+            this.settingsDiagramStylesToolStripMenuItem,
+            this.toolStripSeparator11,
             this._updateScriptsToolStripMenuItem,
             this.toolStripSeparator10,
             this.resetFactorySettingsToolStripMenuItem});
@@ -2494,6 +2503,17 @@ namespace hoTools.ActiveX
             this._panelConveyedItems.Controls.Add(this._btnConveyedItem);
             resources.ApplyResources(this._panelConveyedItems, "_panelConveyedItems");
             this._panelConveyedItems.Name = "_panelConveyedItems";
+            // 
+            // settingsDiagramStylesToolStripMenuItem
+            // 
+            this.settingsDiagramStylesToolStripMenuItem.Name = "settingsDiagramStylesToolStripMenuItem";
+            resources.ApplyResources(this.settingsDiagramStylesToolStripMenuItem, "settingsDiagramStylesToolStripMenuItem");
+            this.settingsDiagramStylesToolStripMenuItem.Click += new System.EventHandler(this.settingsDiagramStylesToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator11
+            // 
+            this.toolStripSeparator11.Name = "toolStripSeparator11";
+            resources.ApplyResources(this.toolStripSeparator11, "toolStripSeparator11");
             // 
             // AddinControlGui
             // 
@@ -3216,6 +3236,52 @@ namespace hoTools.ActiveX
 
         }
         /// <summary>
+        /// Get the values from the 'Settings.json' file and update the File Menu to accomplish bulk change be Menu
+        /// - DiagramTypes
+        /// </summary>
+
+        private void GetValueSettingsFromJson()
+        {
+            try
+            {
+                // If Settings.json don't exists: Copy delivery Setting.json file to settings folder
+                // ReSharper disable once AssignNullToNotNullAttribute
+                string sourceSettingsPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
+                    JasonFile);
+                string targetSettingsPath = AddinSettings.ConfigFolderPath + "Settings.json";
+
+                // Copy delivery Setting.json file to settings folder 
+                if (!File.Exists(targetSettingsPath))
+                {
+                    File.Copy(sourceSettingsPath, targetSettingsPath);
+                }
+
+                // Add Diagram Style 
+                // ReSharper disable once AssignNullToNotNullAttribute
+                _jasonFilePath = targetSettingsPath;
+                _diagramStyle = new DiagramStyle(_jasonFilePath);
+                EaService.DiagramStyle = _diagramStyle;
+
+                _doToolStripMenuItem.DropDownItems.Add(new ToolStripSeparator());
+                _doToolStripMenuItem.DropDownItems.Add(_diagramStyle.GetToolStripMenu(
+                    "DiagramStyleRecursive",
+                    "Bulk Change the Diagram Style recursive",
+                    ChangeStyleRecursiv_Click));
+                _doToolStripMenuItem.DropDownItems.Add(_diagramStyle.GetToolStripMenu(
+                    "DiagramStyle",
+                    "Bulk Change the Diagram Style",
+                    ChangeStylePackage_Click));
+            }
+            catch (Exception e1)
+            {
+                MessageBox.Show($@"'{_jasonFilePath}'
+
+{e1}", "Error loading 'Settings.json'");
+            }
+        }
+
+
+        /// <summary>
         /// Get Search Item for line in rtf
         /// </summary>
         /// <returns></returns>
@@ -3342,6 +3408,62 @@ namespace hoTools.ActiveX
         private void setFolderToolStripMenuItem_Click(object sender, EventArgs e)
         {
             EaService.SetFolder(Repository);
+        }
+
+        // Change style recursive
+        void ChangeStyleRecursiv_Click(object sender, EventArgs e)
+        {
+            ChangeStyle(sender, ChangeScope.PackageRecursive);
+        }
+        void ChangeStylePackage_Click(object sender, EventArgs e)
+        {
+            ChangeStyle(sender, ChangeScope.Package);
+        }
+        /// <summary>
+        /// Bulk change Diagram Style according to:
+        /// liParameter[0]  styles
+        /// liParameter[1]  diagram types as comma, semicolon separated list
+        /// </summary>
+        /// <param name="liParameter"></param>
+        /// <param name="changeScope"></param>
+        private void ChangeDiagramStyle(string[] liParameter, ChangeScope changeScope = ChangeScope.PackageRecursive)
+        {
+            switch (Repository.GetContextItemType())
+            {
+                case EA.ObjectType.otDiagram:
+                    EA.Diagram dia = (EA.Diagram)Repository.GetContextObject();
+                    DiagramStyle.SetDiagramStyle(Repository, dia, liParameter);
+                    break;
+                case EA.ObjectType.otPackage:
+                    EA.Package pkg = (EA.Package)Repository.GetContextObject();
+                    RecursivePackages.DoRecursivePkg(Repository, pkg, null, null, DiagramStyle.SetDiagramStyle,
+                        liParameter,
+                        ChangeScope.PackageRecursive);
+                    break;
+                case EA.ObjectType.otElement:
+                    EA.Element el = (EA.Element)Repository.GetContextObject();
+                    RecursivePackages.DoRecursiveEl(Repository, el, null, DiagramStyle.SetDiagramStyle, liParameter,
+                        ChangeScope.PackageRecursive);
+                    break;
+            }
+        }
+
+        private void ChangeStyle(object sender, ChangeScope changeScope)
+        {
+            ToolStripMenuItem item = sender as ToolStripMenuItem; //((ToolStripMenuItem) sender).Tag; DiagramStyleItem
+            DiagramStyleItem style = (DiagramStyleItem)item.Tag;
+
+            // [0] styles
+            // [1] diagram types
+            string[] styleEx = { "", "" };
+            styleEx[0] = $@"{style.Pdata};{style.StyleEx};";
+            styleEx[1] = style.Type;
+            ChangeDiagramStyle(styleEx, changeScope);
+        }
+
+        private void settingsDiagramStylesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Util.StartFile(_jasonFilePath);
         }
 
         private void resetFactorySettingsToolStripMenuItem_Click(object sender, EventArgs e)

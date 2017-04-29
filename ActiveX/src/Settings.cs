@@ -36,7 +36,7 @@ namespace hoTools.Settings
         // File path of configuration file
         // %APPDATA%ho\hoTools\user.config
         public string ConfigFilePath { get; }
-        public string ConfigPath { get; }
+        public string ConfigFolderPath { get; }
 
         /// <summary>
         /// List of history sql files (recent 20 used sql files)
@@ -127,8 +127,8 @@ namespace hoTools.Settings
 
             }
             // remember 
-            ConfigPath = configDirectory + path;
-            ConfigFilePath = ConfigPath + configFileName;
+            ConfigFolderPath = configDirectory + path;
+            ConfigFilePath = ConfigFolderPath + configFileName;
 
             // Map the roaming configuration file. This
             // enables the application to access 

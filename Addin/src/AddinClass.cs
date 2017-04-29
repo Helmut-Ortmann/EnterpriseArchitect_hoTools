@@ -175,7 +175,7 @@ namespace hoTools
             globalCfg.SetExtensionPaths(_addinSettings.CodeExtensionsPath);
             globalCfg.Extensions = new hoTools.Utils.Extensions.Extension();
 
-            globalCfg.ConfigPath = _addinSettings.ConfigPath;
+            globalCfg.ConfigPath = _addinSettings.ConfigFolderPath;
 
 
 
