@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using EA;
 
-namespace hoTools.Utils
+// ReSharper disable once CheckNamespace
+namespace hoTools.Utils.Diagram
 {
     /// <summary>
     /// The current diagram with the selected objects (first element=context=last selected element):
@@ -89,7 +90,7 @@ namespace hoTools.Utils
 
         public bool IsSelectedObjects { get; }
 
-        public Diagram Dia => _dia;
+        public EA.Diagram Dia => _dia;
         public int SelectedObjectsCount => _dia.SelectedObjects.Count;
         public EA.Connector SelectedConnector => _selectedConnector;
 
@@ -216,7 +217,7 @@ namespace hoTools.Utils
         /// <param name="dia"></param>
         /// <param name="par">par[0] contains the values as a semicolon separated list</param>
         // ReSharper disable once UnusedMember.Global
-        public static void SetDiagramStyle(EA.Repository rep, Diagram dia, string[] par)
+        public static void SetDiagramStyle(EA.Repository rep, EA.Diagram dia, string[] par)
         {
             string[] styleEx = par[0].Split(';');
             string diaStyle = dia.StyleEx;

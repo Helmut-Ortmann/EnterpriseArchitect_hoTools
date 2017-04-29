@@ -4,6 +4,7 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using EA;
 using hoTools.Utils;
+using hoTools.Utils.Diagram;
 using hoTools.Utils.SQL;
 using DiagramObject = EA.DiagramObject;
 using Element = EA.Element;

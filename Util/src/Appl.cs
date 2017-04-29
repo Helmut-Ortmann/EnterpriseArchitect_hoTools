@@ -53,7 +53,7 @@ namespace hoTools.Utils.Appls
             pkgSrc.Packages.Refresh();
 
             // create Class Sequence Diagram in target package
-            var pkgSeqDia = (Diagram)pkgTrg.Diagrams.AddNew("Operation:" + m.Name + " Content", "Sequence");
+            var pkgSeqDia = (EA.Diagram)pkgTrg.Diagrams.AddNew("Operation:" + m.Name + " Content", "Sequence");
             pkgSeqDia.Update();
             pkgTrg.Diagrams.Refresh();
 
@@ -75,7 +75,7 @@ namespace hoTools.Utils.Appls
             pkgTrg.Elements.Refresh();
 
             // create sequence diagram beneath Interaction
-            var seqDia = (Diagram)seq.Diagrams.AddNew(m.Name, "Sequence");
+            var seqDia = (EA.Diagram)seq.Diagrams.AddNew(m.Name, "Sequence");
             seqDia.Update();
             seq.Diagrams.Refresh();
 
@@ -129,7 +129,7 @@ namespace hoTools.Utils.Appls
         // final
         // transition from init to 'State1'
 
-        private static bool CreateDefaultElementsForStateDiagram(Repository rep, Diagram dia, EA.Element stateChart)
+        private static bool CreateDefaultElementsForStateDiagram(Repository rep, EA.Diagram dia, EA.Element stateChart)
         {
 
             // check if init and final node are available
@@ -222,7 +222,7 @@ namespace hoTools.Utils.Appls
             pkgSrc.Packages.Refresh();
 
             // create Class StateMachine Diagram in target package
-            var pkgSeqDia = (Diagram)pkgTrg.Diagrams.AddNew("Operation:" + m.Name + " Content", "Statechart");
+            var pkgSeqDia = (EA.Diagram)pkgTrg.Diagrams.AddNew("Operation:" + m.Name + " Content", "Statechart");
             pkgSeqDia.Update();
             pkgTrg.Diagrams.Refresh();
 
@@ -244,7 +244,7 @@ namespace hoTools.Utils.Appls
             pkgTrg.Elements.Refresh();
 
             // create Statechart diagram beneath Statemachine
-            var chartDia = (Diagram)stateMachine.Diagrams.AddNew(m.Name, "Statechart");
+            var chartDia = (EA.Diagram)stateMachine.Diagrams.AddNew(m.Name, "Statechart");
             chartDia.Update();
             stateMachine.Diagrams.Refresh();
 

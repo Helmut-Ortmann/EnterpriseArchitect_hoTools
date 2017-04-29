@@ -24,6 +24,7 @@ using Package = EA.Package;
 using TaggedValue = hoTools.Utils.TaggedValue;
 using hoTools.EAServicesPort;
 using hoTools.Utils.Configuration;
+using hoTools.Utils.Diagram;
 
 // ReSharper disable RedundantArgumentDefaultValue
 // ReSharper disable ArgumentsStyleLiteral
@@ -1767,7 +1768,7 @@ from %APPDATA%Local\Apps\hoTools\
                 elTarget.Update();
                 if (basicType == "Activity" & extension.ToLower() == "comp=yes")
                 {
-                    Diagram actDia = ActivityPar.CreateActivityCompositeDiagram(rep, elTarget);
+                    EA.Diagram actDia = ActivityPar.CreateActivityCompositeDiagram(rep, elTarget);
                     Util.SetActivityCompositeDiagram(rep, elTarget, actDia.DiagramID.ToString());
                     //elTarget.
                 }

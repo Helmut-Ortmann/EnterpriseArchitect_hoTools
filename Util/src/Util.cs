@@ -83,7 +83,7 @@ namespace hoTools.Utils
                     el = rep.GetElementByGuid(pkg.PackageGUID);
                     break;
                 case ObjectType.otNone:
-                    Diagram dia = rep.GetCurrentDiagram();
+                    EA.Diagram dia = rep.GetCurrentDiagram();
                     if (dia?.SelectedObjects.Count == 1)
                     {
                         var objSelected = (EA.DiagramObject) dia.SelectedObjects.GetAt(0);
@@ -160,7 +160,7 @@ namespace hoTools.Utils
             return "%";
         }
 
-        public static void SetSequenceNumber(Repository rep, Diagram dia,
+        public static void SetSequenceNumber(Repository rep, EA.Diagram dia,
             EA.DiagramObject obj, string sequence)
         {
             if (obj != null)
@@ -174,7 +174,7 @@ namespace hoTools.Utils
             }
         }
 
-        public static void AddSequenceNumber(Repository rep, Diagram dia)
+        public static void AddSequenceNumber(Repository rep, EA.Diagram dia)
         {
 
             string updateStr = @"update t_DiagramObjects set sequence = sequence + 1 " +
@@ -183,7 +183,7 @@ namespace hoTools.Utils
             rep.Execute(updateStr);
         }
 
-        public static int GetHighestSequenceNoFromDiagram(Repository rep, Diagram dia)
+        public static int GetHighestSequenceNoFromDiagram(Repository rep, EA.Diagram dia)
         {
             int sequenceNumber = 0;
             string query = @"select sequence from t_diagramobjects do " +
@@ -202,7 +202,7 @@ namespace hoTools.Utils
         }
 
         // replace of API-function getDiagramObjectByID which isn't available in EA 9.
-        public static EA.DiagramObject GetDiagramObjectById(Repository rep, Diagram dia, int elementId)
+        public static EA.DiagramObject GetDiagramObjectById(Repository rep, EA.Diagram dia, int elementId)
         {
             if (rep.LibraryVersion > 999)
             {
@@ -272,7 +272,7 @@ namespace hoTools.Utils
         // C =               Customer 
         // B =               Bezier
         // R =               Reverse direction of connector
-        public static void SetLineStyleDiagramObjectsAndConnectors(Repository rep, Diagram d, string lineStyle)
+        public static void SetLineStyleDiagramObjectsAndConnectors(Repository rep, EA.Diagram d, string lineStyle)
         {
             Collection selectedObjects = d.SelectedObjects;
             Connector selectedConnector = d.SelectedConnector;
@@ -332,7 +332,7 @@ namespace hoTools.Utils
         // R =  Reverse direction of connector     
 
 
-        public static void SetLineStyleDiagram(Repository rep, Diagram d, string lineStyle)
+        public static void SetLineStyleDiagram(Repository rep, EA.Diagram d, string lineStyle)
         {
             // store current diagram
             rep.SaveDiagram(d.DiagramID);
@@ -784,7 +784,7 @@ namespace hoTools.Utils
             return true;
         }
 
-        public static bool SetFrameLinksToDiagram(Repository rep, EA.Element frm, Diagram dia)
+        public static bool SetFrameLinksToDiagram(Repository rep, EA.Element frm, EA.Diagram dia)
         {
             string updateStr = @"update t_object set pdata1 = " + dia.DiagramID +
                                " where object_ID = " + frm.ElementID;
@@ -1479,7 +1479,7 @@ namespace hoTools.Utils
             if (el.Diagrams.Count > 0)
             {
                 // get the diagram
-                var dia = (Diagram) el.Diagrams.GetAt(0);
+                var dia = (EA.Diagram) el.Diagrams.GetAt(0);
                 // open diagram
                 repository.OpenDiagram(dia.DiagramID);
             }
@@ -1523,7 +1523,7 @@ namespace hoTools.Utils
         /// <param name="port"></param>
         /// <param name="interf"></param>
         /// <param name="portBoundTo"></param>
-        public static void VisualizePortForDiagramobject(EA.Repository rep, int pos, Diagram dia, EA.DiagramObject diaObjSource,
+        public static void VisualizePortForDiagramobject(EA.Repository rep, int pos, EA.Diagram dia, EA.DiagramObject diaObjSource,
             EA.Element port,
             EA.Element interf, string portBoundTo = "right")
         {
@@ -1610,7 +1610,7 @@ PortType: {port.Type}
 
         #endregion
 
-        public static DiagramLink GetDiagramLinkFromConnector(Diagram dia, int connectorId)
+        public static DiagramLink GetDiagramLinkFromConnector(EA.Diagram dia, int connectorId)
         {
             foreach (DiagramLink link in dia.DiagramLinks)
             {

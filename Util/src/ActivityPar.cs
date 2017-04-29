@@ -21,7 +21,7 @@ namespace hoTools.Utils.ActivityParameter
 
         // ReSharper disable once UnusedMethodReturnValue.Local
         private static bool CreateDefaultElementsForActivity(Repository rep, 
-                                Diagram dia, EA.Element act)
+                                EA.Diagram dia, EA.Element act)
         {
             // create init node
             CreateInitFinalNode(rep, dia, act, 100, @"l=350;r=370;t=70;b=90;");
@@ -37,7 +37,7 @@ namespace hoTools.Utils.ActivityParameter
         // subtype=101 final node
 
         // ReSharper disable once UnusedMethodReturnValue.Global
-        public static EA.DiagramObject CreateInitFinalNode(Repository rep, Diagram dia, EA.Element act, 
+        public static EA.DiagramObject CreateInitFinalNode(Repository rep, EA.Diagram dia, EA.Element act, 
                                       int subType, string position)
         {
             var initNode = (EA.Element)act.Elements.AddNew("", "StateNode");
@@ -77,7 +77,7 @@ namespace hoTools.Utils.ActivityParameter
             if (ActivityIsSimple == false)
             {
                 // create Class Activity Diagram in target package
-                var pkgActDia = (Diagram)pkgTrg.Diagrams.AddNew("Operation:" + m.Name + " Content", "Activity");
+                var pkgActDia = (EA.Diagram)pkgTrg.Diagrams.AddNew("Operation:" + m.Name + " Content", "Activity");
                 pkgActDia.Update();
                 pkgTrg.Diagrams.Refresh();
 
@@ -103,7 +103,7 @@ namespace hoTools.Utils.ActivityParameter
             pkgTrg.Elements.Refresh();
 
             // create activity diagram beneath Activity
-            var actDia = (Diagram)act.Diagrams.AddNew(m.Name, "Activity");
+            var actDia = (EA.Diagram)act.Diagrams.AddNew(m.Name, "Activity");
             // update diagram properties
             actDia.ShowDetails = 0; // hide details
             // scale page to din A4
@@ -175,9 +175,9 @@ namespace hoTools.Utils.ActivityParameter
         }
       
 
-        public static Diagram CreateActivityCompositeDiagram(Repository rep, EA.Element act) {
+        public static EA.Diagram CreateActivityCompositeDiagram(Repository rep, EA.Element act) {
             // create activity diagram beneath Activity
-            var actDia = (Diagram)act.Diagrams.AddNew(act.Name, "Activity");
+            var actDia = (EA.Diagram)act.Diagrams.AddNew(act.Name, "Activity");
             // update diagram properties
             actDia.ShowDetails = 0; // hide details
             // scale page to din A4
@@ -344,7 +344,7 @@ namespace hoTools.Utils.ActivityParameter
             return true;
         }
         // ReSharper disable once UnusedMember.Global
-        public static void VisualizePortForDiagramobject(int pos, Diagram dia, EA.DiagramObject diaObjSource, EA.Element port, EA.Element interf)
+        public static void VisualizePortForDiagramobject(int pos, EA.Diagram dia, EA.DiagramObject diaObjSource, EA.Element port, EA.Element interf)
         {
             // check if port already exists
             foreach (EA.DiagramObject diaObj in dia.DiagramObjects)

@@ -627,7 +627,7 @@ For: Package, Element, Diagram, Attribute, Operation"
             if (sql.Contains(template))
             {
                 // get the diagram
-                Diagram dia;
+                EA.Diagram dia;
                 if (rep.GetContextItemType() == ObjectType.otDiagram)
                 {
                     dia = (EA.Diagram)rep.GetContextObject();
@@ -669,7 +669,7 @@ For: Package, Element, Diagram, Attribute, Operation"
             if (sql.Contains(template))
             {
                 // get the diagram
-                Diagram dia;
+                EA.Diagram dia;
                 if (rep.GetContextItemType() == ObjectType.otDiagram)
                 {
                     dia = (EA.Diagram)rep.GetContextObject();
@@ -764,7 +764,7 @@ For: Package, Element, Diagram, Attribute, Operation"
                         id = el.ElementID;
                         break;
                     case ObjectType.otDiagram:
-                        Diagram dia = (Diagram)rep.GetContextObject();
+                        EA.Diagram dia = (EA.Diagram)rep.GetContextObject();
                         id = dia.DiagramID;
                         break;
                     case ObjectType.otPackage:
@@ -818,7 +818,7 @@ For: Package, Element, Diagram, Attribute, Operation"
                         guid = el.ElementGUID;
                         break;
                     case ObjectType.otDiagram:
-                        Diagram dia = (Diagram)rep.GetContextObject();
+                        EA.Diagram dia = (EA.Diagram)rep.GetContextObject();
                         guid = dia.DiagramGUID;
                         break;
                     case ObjectType.otPackage:
@@ -891,7 +891,7 @@ For: Package, Element, Diagram, Attribute, Operation"
             switch (objectType)
             {
                 case ObjectType.otDiagram:
-                    Diagram dia = (Diagram)rep.GetContextObject();
+                    EA.Diagram dia = (EA.Diagram)rep.GetContextObject();
                     id = dia.PackageID;
                     break;
                 case ObjectType.otElement:
@@ -1072,7 +1072,7 @@ For: Package, Element, Diagram, Attribute, Operation"
                 {
                     // use Package of diagram
                     case ObjectType.otDiagram:
-                        Diagram dia = (Diagram)rep.GetContextObject();
+                        EA.Diagram dia = (EA.Diagram)rep.GetContextObject();
                         id = dia.PackageID;
                         break;
                     // use Package of element
@@ -1172,7 +1172,7 @@ For: Package, Element, Diagram, Attribute, Operation"
                 {
                     // use Package of diagram
                     case ObjectType.otDiagram:
-                        Diagram dia = (Diagram)rep.GetContextObject();
+                        EA.Diagram dia = (EA.Diagram)rep.GetContextObject();
                         id = dia.PackageID;
                         break;
                     // use Package of element

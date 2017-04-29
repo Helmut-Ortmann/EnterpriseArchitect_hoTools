@@ -67,7 +67,7 @@ namespace hoTools.Utils
     {
         public delegate void SetPackage(Repository rep, EA.Package pkg, string[] parameterStrings);
         public delegate void SetElement(Repository rep, EA.Element el, string[] parameterStrings);
-        public delegate void SetDiagram(Repository rep, Diagram dia, string[] parameterStrings);
+        public delegate void SetDiagram(Repository rep, EA.Diagram dia, string[] parameterStrings);
 
         public static void DoRecursivePkg(Repository rep, EA.Package pkg, SetPackage setPkg,
             SetElement setEl, SetDiagram setDia, string[] parameterStrings)
@@ -82,7 +82,7 @@ namespace hoTools.Utils
                 if (changeScope == ChangeScope.Item) return;
 
                 // perform diagrams of package
-                foreach (Diagram dia in pkg.Diagrams)
+                foreach (EA.Diagram dia in pkg.Diagrams)
                 {
                     if (dia != null) setDia?.Invoke(rep, dia, parameterStrings);
                 }
