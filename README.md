@@ -32,6 +32,7 @@ Collection of useful tools (see also [WiKi](https://github.com/Helmut-Ortmann/En
   - Favorites
   - Export SQL query results to Excel (hoTools, SQL, Script)
   - Clipboard CSV to Excel
+  - Diagram Style/Theme
   - ..
 - [SQL](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/SQL) with tabbed Windows
     - Select, Insert, Delete, Update
@@ -118,11 +119,16 @@ Some features:
 
 # Releases
 ## Release 2.1.6
-- Hybrid Scripting for *.exe (Using C#, Java,.. instead of VB Script & co)
-- Hybrid Scripting for *.dll (Using C# dll,.. instead of VB Script & co)
+- Diagram Styles, configurable via 'Settings.jason'
+- Hybrid Scripting for *.exe (Using C#, Java,.. instead of VB Script & co), Example
+- Hybrid Scripting for *.dll (Using C# dll,.. instead of VB Script & co), Example
 - Service Added: Copy Name to Clipboard
-- Service Added: Copy Name to Clipboard and search with "Quick Search" for item name 
-- Remember Services can be bound to Keys or Buttons 
+- Service Added: Copy Name to Clipboard and search with "Quick Search" for item name
+- Service Added: Diagram Style 1
+- Service Added: Diagram Style 2
+- Error fixing
+
+- Remember: Services can be bound to Keys or Buttons 
 
 ## Release 2.1.5
 - hoTools inventarize loaded MDGs (hoBasicMDG,..)
