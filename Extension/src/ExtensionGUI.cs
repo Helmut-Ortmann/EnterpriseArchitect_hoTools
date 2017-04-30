@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
-using AddinFramework.Util.Script;
-using EAAddinFramework.Utils;
 using hoTools.ActiveX;
 using hoTools.Settings;
 using hoTools.Utils.Configuration;

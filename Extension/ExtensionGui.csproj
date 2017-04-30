@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>hoTools.Extensions</RootNamespace>
     <AssemblyName>ExtensionGui</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -47,11 +47,9 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
@@ -76,14 +74,6 @@
     <ProjectReference Include="..\ActiveX\ActiveX.csproj">
       <Project>{c9ebcebb-71e4-4e87-b92c-7aeb8f62b69a}</Project>
       <Name>ActiveX</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\AddinFramework\AddinFramework.csproj">
-      <Project>{b08ae89b-5e8d-46fd-a5d8-b3db4d33fb46}</Project>
-      <Name>AddinFramework</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\EaServices\EaServices.csproj">
-      <Project>{dfbedf5e-fc7f-4269-a0a6-f9b9e86dac90}</Project>
-      <Name>EaServices</Name>
     </ProjectReference>
     <ProjectReference Include="..\Util\Util.csproj">
       <Project>{9376680e-9420-4fc1-8de8-4311fca18efc}</Project>

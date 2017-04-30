@@ -175,11 +175,11 @@ namespace hoTools.Settings
         {
             _model = model;
 
-            
-            // update Services of type Call and Script
-            UpdateKeysAndToolbarsServices();
             // get all services of type Call and Script which are available 
             GetAllServicesAndScripts();
+            // update Services of type Call and Script
+            UpdateKeysAndToolbarsServices();
+
 
 
         }

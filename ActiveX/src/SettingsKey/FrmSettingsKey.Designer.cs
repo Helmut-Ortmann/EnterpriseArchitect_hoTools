@@ -132,7 +132,7 @@
             // btnOK
             // 
             this.btnOK.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnOK.Location = new System.Drawing.Point(16, 598);
+            this.btnOK.Location = new System.Drawing.Point(15, 546);
             this.btnOK.Margin = new System.Windows.Forms.Padding(2);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(72, 27);
@@ -145,7 +145,7 @@
             // btnCancel
             // 
             this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancel.Location = new System.Drawing.Point(100, 598);
+            this.btnCancel.Location = new System.Drawing.Point(99, 546);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(2);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 27);
@@ -624,7 +624,7 @@
             // 
             this.cmbGlobalKeySearch5Mod4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeySearch5Mod4.FormattingEnabled = true;
-            this.cmbGlobalKeySearch5Mod4.Location = new System.Drawing.Point(280, 490);
+            this.cmbGlobalKeySearch5Mod4.Location = new System.Drawing.Point(279, 438);
             this.cmbGlobalKeySearch5Mod4.Name = "cmbGlobalKeySearch5Mod4";
             this.cmbGlobalKeySearch5Mod4.Size = new System.Drawing.Size(44, 23);
             this.cmbGlobalKeySearch5Mod4.TabIndex = 187;
@@ -644,7 +644,7 @@
             // 
             this.cmbGlobalKeySearch5Mod2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeySearch5Mod2.FormattingEnabled = true;
-            this.cmbGlobalKeySearch5Mod2.Location = new System.Drawing.Point(180, 490);
+            this.cmbGlobalKeySearch5Mod2.Location = new System.Drawing.Point(179, 438);
             this.cmbGlobalKeySearch5Mod2.Name = "cmbGlobalKeySearch5Mod2";
             this.cmbGlobalKeySearch5Mod2.Size = new System.Drawing.Size(44, 23);
             this.cmbGlobalKeySearch5Mod2.TabIndex = 186;
@@ -665,7 +665,7 @@
             // 
             this.cmbGlobalKeySearch5Mod3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeySearch5Mod3.FormattingEnabled = true;
-            this.cmbGlobalKeySearch5Mod3.Location = new System.Drawing.Point(230, 490);
+            this.cmbGlobalKeySearch5Mod3.Location = new System.Drawing.Point(229, 438);
             this.cmbGlobalKeySearch5Mod3.Name = "cmbGlobalKeySearch5Mod3";
             this.cmbGlobalKeySearch5Mod3.Size = new System.Drawing.Size(44, 23);
             this.cmbGlobalKeySearch5Mod3.TabIndex = 185;
@@ -685,7 +685,7 @@
             // 
             this.cmbGlobalKeySearch5Mod1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeySearch5Mod1.FormattingEnabled = true;
-            this.cmbGlobalKeySearch5Mod1.Location = new System.Drawing.Point(131, 490);
+            this.cmbGlobalKeySearch5Mod1.Location = new System.Drawing.Point(130, 438);
             this.cmbGlobalKeySearch5Mod1.Name = "cmbGlobalKeySearch5Mod1";
             this.cmbGlobalKeySearch5Mod1.Size = new System.Drawing.Size(44, 23);
             this.cmbGlobalKeySearch5Mod1.TabIndex = 184;
@@ -706,7 +706,7 @@
             // 
             this.cmbGlobalKeySearch5Key.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeySearch5Key.FormattingEnabled = true;
-            this.cmbGlobalKeySearch5Key.Location = new System.Drawing.Point(23, 490);
+            this.cmbGlobalKeySearch5Key.Location = new System.Drawing.Point(22, 438);
             this.cmbGlobalKeySearch5Key.Name = "cmbGlobalKeySearch5Key";
             this.cmbGlobalKeySearch5Key.Size = new System.Drawing.Size(88, 23);
             this.cmbGlobalKeySearch5Key.TabIndex = 183;
@@ -726,7 +726,7 @@
             // 
             this.cmbGlobalKeySearch4Mod4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeySearch4Mod4.FormattingEnabled = true;
-            this.cmbGlobalKeySearch4Mod4.Location = new System.Drawing.Point(280, 466);
+            this.cmbGlobalKeySearch4Mod4.Location = new System.Drawing.Point(279, 414);
             this.cmbGlobalKeySearch4Mod4.Name = "cmbGlobalKeySearch4Mod4";
             this.cmbGlobalKeySearch4Mod4.Size = new System.Drawing.Size(44, 23);
             this.cmbGlobalKeySearch4Mod4.TabIndex = 182;
@@ -747,7 +747,7 @@
             // 
             this.cmbGlobalKeySearch4Mod2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeySearch4Mod2.FormattingEnabled = true;
-            this.cmbGlobalKeySearch4Mod2.Location = new System.Drawing.Point(180, 466);
+            this.cmbGlobalKeySearch4Mod2.Location = new System.Drawing.Point(179, 414);
             this.cmbGlobalKeySearch4Mod2.Name = "cmbGlobalKeySearch4Mod2";
             this.cmbGlobalKeySearch4Mod2.Size = new System.Drawing.Size(44, 23);
             this.cmbGlobalKeySearch4Mod2.TabIndex = 181;
@@ -767,7 +767,7 @@
             // 
             this.cmbGlobalKeySearch4Mod3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeySearch4Mod3.FormattingEnabled = true;
-            this.cmbGlobalKeySearch4Mod3.Location = new System.Drawing.Point(230, 466);
+            this.cmbGlobalKeySearch4Mod3.Location = new System.Drawing.Point(229, 414);
             this.cmbGlobalKeySearch4Mod3.Name = "cmbGlobalKeySearch4Mod3";
             this.cmbGlobalKeySearch4Mod3.Size = new System.Drawing.Size(44, 23);
             this.cmbGlobalKeySearch4Mod3.TabIndex = 180;
@@ -788,7 +788,7 @@
             // 
             this.cmbGlobalKeySearch4Mod1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeySearch4Mod1.FormattingEnabled = true;
-            this.cmbGlobalKeySearch4Mod1.Location = new System.Drawing.Point(131, 466);
+            this.cmbGlobalKeySearch4Mod1.Location = new System.Drawing.Point(130, 414);
             this.cmbGlobalKeySearch4Mod1.Name = "cmbGlobalKeySearch4Mod1";
             this.cmbGlobalKeySearch4Mod1.Size = new System.Drawing.Size(44, 23);
             this.cmbGlobalKeySearch4Mod1.TabIndex = 179;
@@ -798,7 +798,7 @@
             // 
             this.cmbGlobalKeySearch4Key.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeySearch4Key.FormattingEnabled = true;
-            this.cmbGlobalKeySearch4Key.Location = new System.Drawing.Point(23, 466);
+            this.cmbGlobalKeySearch4Key.Location = new System.Drawing.Point(22, 414);
             this.cmbGlobalKeySearch4Key.Name = "cmbGlobalKeySearch4Key";
             this.cmbGlobalKeySearch4Key.Size = new System.Drawing.Size(88, 23);
             this.cmbGlobalKeySearch4Key.TabIndex = 178;
@@ -808,7 +808,7 @@
             // 
             this.cmbGlobalKeySearch3Mod4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeySearch3Mod4.FormattingEnabled = true;
-            this.cmbGlobalKeySearch3Mod4.Location = new System.Drawing.Point(280, 442);
+            this.cmbGlobalKeySearch3Mod4.Location = new System.Drawing.Point(279, 390);
             this.cmbGlobalKeySearch3Mod4.Name = "cmbGlobalKeySearch3Mod4";
             this.cmbGlobalKeySearch3Mod4.Size = new System.Drawing.Size(44, 23);
             this.cmbGlobalKeySearch3Mod4.TabIndex = 177;
@@ -818,7 +818,7 @@
             // 
             this.cmbGlobalKeySearch3Mod2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeySearch3Mod2.FormattingEnabled = true;
-            this.cmbGlobalKeySearch3Mod2.Location = new System.Drawing.Point(180, 442);
+            this.cmbGlobalKeySearch3Mod2.Location = new System.Drawing.Point(179, 390);
             this.cmbGlobalKeySearch3Mod2.Name = "cmbGlobalKeySearch3Mod2";
             this.cmbGlobalKeySearch3Mod2.Size = new System.Drawing.Size(44, 23);
             this.cmbGlobalKeySearch3Mod2.TabIndex = 176;
@@ -828,7 +828,7 @@
             // 
             this.cmbGlobalKeySearch3Mod3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeySearch3Mod3.FormattingEnabled = true;
-            this.cmbGlobalKeySearch3Mod3.Location = new System.Drawing.Point(230, 442);
+            this.cmbGlobalKeySearch3Mod3.Location = new System.Drawing.Point(229, 390);
             this.cmbGlobalKeySearch3Mod3.Name = "cmbGlobalKeySearch3Mod3";
             this.cmbGlobalKeySearch3Mod3.Size = new System.Drawing.Size(44, 23);
             this.cmbGlobalKeySearch3Mod3.TabIndex = 175;
@@ -838,7 +838,7 @@
             // 
             this.cmbGlobalKeySearch3Mod1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeySearch3Mod1.FormattingEnabled = true;
-            this.cmbGlobalKeySearch3Mod1.Location = new System.Drawing.Point(131, 442);
+            this.cmbGlobalKeySearch3Mod1.Location = new System.Drawing.Point(130, 390);
             this.cmbGlobalKeySearch3Mod1.Name = "cmbGlobalKeySearch3Mod1";
             this.cmbGlobalKeySearch3Mod1.Size = new System.Drawing.Size(44, 23);
             this.cmbGlobalKeySearch3Mod1.TabIndex = 174;
@@ -848,7 +848,7 @@
             // 
             this.cmbGlobalKeySearch3Key.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeySearch3Key.FormattingEnabled = true;
-            this.cmbGlobalKeySearch3Key.Location = new System.Drawing.Point(23, 442);
+            this.cmbGlobalKeySearch3Key.Location = new System.Drawing.Point(22, 390);
             this.cmbGlobalKeySearch3Key.Name = "cmbGlobalKeySearch3Key";
             this.cmbGlobalKeySearch3Key.Size = new System.Drawing.Size(88, 23);
             this.cmbGlobalKeySearch3Key.TabIndex = 173;
@@ -858,7 +858,7 @@
             // 
             this.cmbGlobalKeySearch2Mod4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeySearch2Mod4.FormattingEnabled = true;
-            this.cmbGlobalKeySearch2Mod4.Location = new System.Drawing.Point(280, 418);
+            this.cmbGlobalKeySearch2Mod4.Location = new System.Drawing.Point(279, 366);
             this.cmbGlobalKeySearch2Mod4.Name = "cmbGlobalKeySearch2Mod4";
             this.cmbGlobalKeySearch2Mod4.Size = new System.Drawing.Size(44, 23);
             this.cmbGlobalKeySearch2Mod4.TabIndex = 172;
@@ -868,7 +868,7 @@
             // 
             this.cmbGlobalKeySearch2Mod2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeySearch2Mod2.FormattingEnabled = true;
-            this.cmbGlobalKeySearch2Mod2.Location = new System.Drawing.Point(180, 418);
+            this.cmbGlobalKeySearch2Mod2.Location = new System.Drawing.Point(179, 366);
             this.cmbGlobalKeySearch2Mod2.Name = "cmbGlobalKeySearch2Mod2";
             this.cmbGlobalKeySearch2Mod2.Size = new System.Drawing.Size(44, 23);
             this.cmbGlobalKeySearch2Mod2.TabIndex = 171;
@@ -878,7 +878,7 @@
             // 
             this.cmbGlobalKeySearch2Mod3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeySearch2Mod3.FormattingEnabled = true;
-            this.cmbGlobalKeySearch2Mod3.Location = new System.Drawing.Point(230, 418);
+            this.cmbGlobalKeySearch2Mod3.Location = new System.Drawing.Point(229, 366);
             this.cmbGlobalKeySearch2Mod3.Name = "cmbGlobalKeySearch2Mod3";
             this.cmbGlobalKeySearch2Mod3.Size = new System.Drawing.Size(44, 23);
             this.cmbGlobalKeySearch2Mod3.TabIndex = 170;
@@ -888,7 +888,7 @@
             // 
             this.cmbGlobalKeySearch2Mod1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeySearch2Mod1.FormattingEnabled = true;
-            this.cmbGlobalKeySearch2Mod1.Location = new System.Drawing.Point(131, 418);
+            this.cmbGlobalKeySearch2Mod1.Location = new System.Drawing.Point(130, 366);
             this.cmbGlobalKeySearch2Mod1.Name = "cmbGlobalKeySearch2Mod1";
             this.cmbGlobalKeySearch2Mod1.Size = new System.Drawing.Size(44, 23);
             this.cmbGlobalKeySearch2Mod1.TabIndex = 169;
@@ -897,7 +897,7 @@
             // cmbGlobalKeySearch2Key
             // 
             this.cmbGlobalKeySearch2Key.FormattingEnabled = true;
-            this.cmbGlobalKeySearch2Key.Location = new System.Drawing.Point(23, 418);
+            this.cmbGlobalKeySearch2Key.Location = new System.Drawing.Point(22, 366);
             this.cmbGlobalKeySearch2Key.Name = "cmbGlobalKeySearch2Key";
             this.cmbGlobalKeySearch2Key.Size = new System.Drawing.Size(88, 21);
             this.cmbGlobalKeySearch2Key.TabIndex = 168;
@@ -907,7 +907,7 @@
             // 
             this.cmbGlobalKeySearch1Mod4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeySearch1Mod4.FormattingEnabled = true;
-            this.cmbGlobalKeySearch1Mod4.Location = new System.Drawing.Point(280, 394);
+            this.cmbGlobalKeySearch1Mod4.Location = new System.Drawing.Point(279, 342);
             this.cmbGlobalKeySearch1Mod4.Name = "cmbGlobalKeySearch1Mod4";
             this.cmbGlobalKeySearch1Mod4.Size = new System.Drawing.Size(44, 23);
             this.cmbGlobalKeySearch1Mod4.TabIndex = 167;
@@ -917,7 +917,7 @@
             // 
             this.cmbGlobalKeySearch1Mod2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeySearch1Mod2.FormattingEnabled = true;
-            this.cmbGlobalKeySearch1Mod2.Location = new System.Drawing.Point(180, 394);
+            this.cmbGlobalKeySearch1Mod2.Location = new System.Drawing.Point(179, 342);
             this.cmbGlobalKeySearch1Mod2.Name = "cmbGlobalKeySearch1Mod2";
             this.cmbGlobalKeySearch1Mod2.Size = new System.Drawing.Size(44, 23);
             this.cmbGlobalKeySearch1Mod2.TabIndex = 166;
@@ -927,7 +927,7 @@
             // 
             this.cmbGlobalKeySearch1Mod3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeySearch1Mod3.FormattingEnabled = true;
-            this.cmbGlobalKeySearch1Mod3.Location = new System.Drawing.Point(230, 394);
+            this.cmbGlobalKeySearch1Mod3.Location = new System.Drawing.Point(229, 342);
             this.cmbGlobalKeySearch1Mod3.Name = "cmbGlobalKeySearch1Mod3";
             this.cmbGlobalKeySearch1Mod3.Size = new System.Drawing.Size(44, 23);
             this.cmbGlobalKeySearch1Mod3.TabIndex = 165;
@@ -937,7 +937,7 @@
             // 
             this.cmbGlobalKeySearch1Mod1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeySearch1Mod1.FormattingEnabled = true;
-            this.cmbGlobalKeySearch1Mod1.Location = new System.Drawing.Point(131, 394);
+            this.cmbGlobalKeySearch1Mod1.Location = new System.Drawing.Point(130, 342);
             this.cmbGlobalKeySearch1Mod1.Name = "cmbGlobalKeySearch1Mod1";
             this.cmbGlobalKeySearch1Mod1.Size = new System.Drawing.Size(44, 23);
             this.cmbGlobalKeySearch1Mod1.TabIndex = 164;
@@ -947,7 +947,7 @@
             // 
             this.cmbGlobalKeySearch1Key.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbGlobalKeySearch1Key.FormattingEnabled = true;
-            this.cmbGlobalKeySearch1Key.Location = new System.Drawing.Point(23, 394);
+            this.cmbGlobalKeySearch1Key.Location = new System.Drawing.Point(22, 342);
             this.cmbGlobalKeySearch1Key.Name = "cmbGlobalKeySearch1Key";
             this.cmbGlobalKeySearch1Key.Size = new System.Drawing.Size(88, 23);
             this.cmbGlobalKeySearch1Key.TabIndex = 163;
@@ -969,7 +969,7 @@
             this.groupBox5.Controls.Add(this.cmbGlobalKeySearch1SearchName);
             this.groupBox5.Controls.Add(this.cmbGlobalKeySearch2SearchName);
             this.groupBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox5.Location = new System.Drawing.Point(16, 333);
+            this.groupBox5.Location = new System.Drawing.Point(15, 281);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(1091, 188);
             this.groupBox5.TabIndex = 195;
@@ -1014,7 +1014,7 @@
             // chkShortKeySupport
             // 
             this.chkShortKeySupport.AutoSize = true;
-            this.chkShortKeySupport.Location = new System.Drawing.Point(205, 563);
+            this.chkShortKeySupport.Location = new System.Drawing.Point(204, 511);
             this.chkShortKeySupport.Margin = new System.Windows.Forms.Padding(2);
             this.chkShortKeySupport.Name = "chkShortKeySupport";
             this.chkShortKeySupport.Size = new System.Drawing.Size(15, 14);
@@ -1026,7 +1026,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(19, 559);
+            this.label4.Location = new System.Drawing.Point(18, 507);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(164, 20);
@@ -1038,7 +1038,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(21, 537);
+            this.label3.Location = new System.Drawing.Point(20, 485);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(284, 20);
             this.label3.TabIndex = 235;
@@ -1050,7 +1050,7 @@
             // txtSqlSearchPath
             // 
             this.txtSqlSearchPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSqlSearchPath.Location = new System.Drawing.Point(311, 537);
+            this.txtSqlSearchPath.Location = new System.Drawing.Point(310, 485);
             this.txtSqlSearchPath.Name = "txtSqlSearchPath";
             this.txtSqlSearchPath.Size = new System.Drawing.Size(791, 24);
             this.txtSqlSearchPath.TabIndex = 234;
@@ -1133,7 +1133,7 @@
             this.groupBox4.Controls.Add(this.cmbGlobalKeyService4Mod4);
             this.groupBox4.Controls.Add(this.cmbGlobalKeyService4Mod2);
             this.groupBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox4.Location = new System.Drawing.Point(16, 122);
+            this.groupBox4.Location = new System.Drawing.Point(15, 70);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(1091, 205);
             this.groupBox4.TabIndex = 150;
@@ -1144,7 +1144,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(292, 91);
+            this.label1.Location = new System.Drawing.Point(291, 39);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(256, 29);
             this.label1.TabIndex = 196;
@@ -1154,7 +1154,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(307, 583);
+            this.label2.Location = new System.Drawing.Point(306, 531);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(441, 24);
             this.label2.TabIndex = 233;
@@ -1224,7 +1224,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1125, 683);
+            this.ClientSize = new System.Drawing.Size(1125, 600);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtSqlSearchPath);
             this.Controls.Add(this.label2);

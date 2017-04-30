@@ -11,6 +11,7 @@ using AddinFramework.Extension;
 using EA;
 using hoTools.EaServices.Dlg;
 using hoTools.Utils;
+using hoTools.Utils.Abouts;
 using hoTools.Utils.ActivityParameter;
 using hoTools.Utils.Appls;
 using hoTools.Utils.Favorites;
@@ -71,7 +72,7 @@ namespace hoTools.EaServices
         // configuration as singleton
         static HoToolsGlobalCfg _globalCfg;
         // remember Diagram Style Settings
-        public static DiagramStyle DiagramStyle;
+        public static EAAddinFramework.Utils.DiagramStyle DiagramStyle;
 
         // define menu constants
         public enum DisplayMode
@@ -365,6 +366,71 @@ namespace hoTools.EaServices
         }
 
         #endregion
+
+        /// <summary>
+        /// Bulk change Diagram Styles 1 according to Settings.Json 
+        /// </summary>
+        [ServiceOperation("{7D3B03FD-399B-4D39-9F54-5E7CB2CDBBBF}", "Bulk change Diagram to 'Style 1'",
+            "Select Package, Element, Diagram (see Settings.Json, 1. entry)", isTextRequired: false)]
+        public static void DiagramStyle1(EA.Repository rep)
+        {
+            DiagramStyleWrapper(rep, 0);
+        }
+        /// <summary>
+        /// Bulk change Diagram Styles 2 according to Settings.Json 
+        /// </summary>
+        [ServiceOperation("{FD79F3ED-1345-4CF6-AB43-9EF34571CA52}", "Bulk change Diagram to 'Style 2'",
+            "Select Package, Element, Diagram (see Settings.Json, 2. entry)", isTextRequired: false)]
+        public static void DiagramStyle2(EA.Repository rep)
+        {
+            DiagramStyleWrapper(rep, 1);
+        }
+        private static void DiagramStyleWrapper(Repository rep, int pos)
+        {
+            if (DiagramStyle == null && DiagramStyle.DiagramStyleItems.Count <= pos)
+            {
+                MessageBox.Show("", "No Diagram style in 'Settings.json' found");
+                return;
+            }
+            //
+            // [0] styles
+            // [1] diagram types
+            string[] styleEx = { "", "" };
+            styleEx[0] = $@"{DiagramStyle.DiagramStyleItems[pos].Pdata};{DiagramStyle.DiagramStyleItems[pos].StyleEx};";
+            styleEx[1] = DiagramStyle.DiagramStyleItems[pos].Type;
+            ChangeDiagramStyle(rep, styleEx, ChangeScope.PackageRecursive);
+        }
+        /// <summary>
+        /// Bulk Change Diagram Style according to:
+        /// liParameter[0]  styles
+        /// liParameter[1]  diagram types as comma, semicolon separated list
+        /// </summary>
+        /// <param name="liParameter"></param>
+        /// <param name="changeScope"></param>
+        public static void ChangeDiagramStyle(EA.Repository rep, string[] liParameter, ChangeScope changeScope = ChangeScope.PackageRecursive)
+        {
+            switch (rep.GetContextItemType())
+            {
+                case EA.ObjectType.otDiagram:
+                    EA.Diagram dia = (EA.Diagram)rep.GetContextObject();
+                    EAAddinFramework.Utils.DiagramStyle.SetDiagramStyle(rep, dia, liParameter);
+                    break;
+                case EA.ObjectType.otPackage:
+                    EA.Package pkg = (EA.Package)rep.GetContextObject();
+                    RecursivePackages.DoRecursivePkg(rep, pkg, null, null, EAAddinFramework.Utils.DiagramStyle.SetDiagramStyle,
+                        liParameter,
+                        ChangeScope.PackageRecursive);
+                    break;
+                case EA.ObjectType.otElement:
+                    EA.Element el = (EA.Element)rep.GetContextObject();
+                    RecursivePackages.DoRecursiveEl(rep, el, null, EAAddinFramework.Utils.DiagramStyle.SetDiagramStyle, liParameter,
+                        ChangeScope.PackageRecursive);
+                    break;
+            }
+        }
+
+
+       
 
         //-------------------------------------------------------------------------------------------
 
@@ -5828,29 +5894,51 @@ from %APPDATA%Local\Apps\hoTools\
         /// <param name="configFilePath"></param>
         public static void About(string release, string configFilePath)
         {
-            string installDir = Path.GetDirectoryName(Assembly.GetAssembly(typeof(EaService)).CodeBase);
-            string s1 = @"!!!Make live with EA easier and more efficient!!!
 
-Helmut.Ortmann@t-online.de
-Helmut.Ortmann@hoModeler.de
-(+49) 172 / 51 79 16 7
-Workshops, Training Coaching, Project Work
-- Processes (SPICE / Functional Safety)
-- Requirements
-- Enterprise Architect
- -- UML / SysML, also integration Modelica
- -- Method- development and -implementation
- -- Addin
- -- Query & Script
- !!!Make live with EA easier and more efficient!!!
-";
+            string[] dllNames = new string[]
+            {
+                "ActiveX.dll",
+                "AddinClass.dll",
+                "AddinFramework.dll",
+                "ClosedXml.dll",
+                "DocumentFormat.OpenXml.dll",
+                "DuoVia.FuzzyStrings.dll",
+                "EaServices.dll",
+                "ExtensionGui.dll",
+                "FindAndReplace.dll",
+                "KBCsv.dll",
+                "KBCsv.Extensions.Data.dll",
+                "Newtonsoft.Json.dll",
+                "QueryGui.dll",
+                "Utils.dll",
+                };
+
+            hoTools.Utils.Abouts.About.AboutMessage("hoTools", "Keeps things simple", dllNames);
 
 
-            string s2 =
-                $"\nInstall:\t {installDir}\nConfig:\t {configFilePath}\n\n\nhoTools  {release} (AddinClass.dll AssemblyFileVersion)";
+//            string installDir = Path.GetDirectoryName(Assembly.GetAssembly(typeof(EaService)).CodeBase);
+//            string s1 = @"!!!Make live with EA easier and more efficient!!!
+
+//Helmut.Ortmann@t-online.de
+//Helmut.Ortmann@hoModeler.de
+//(+49) 172 / 51 79 16 7
+//Workshops, Training Coaching, Project Work
+//- Processes (SPICE / Functional Safety)
+//- Requirements
+//- Enterprise Architect
+// -- UML / SysML, also integration Modelica
+// -- Method- development and -implementation
+// -- Addin
+// -- Query & Script
+// !!!Make live with EA easier and more efficient!!!
+//";
 
 
-            MessageBox.Show(s1 + s2, @"hoTools");
+//            string s2 =
+//                $"\nInstall:\t {installDir}\nConfig:\t {configFilePath}\n\n\nhoTools  {release} (AddinClass.dll AssemblyFileVersion)";
+
+
+//            MessageBox.Show(s1 + s2, @"hoTools");
         }
 
         #endregion

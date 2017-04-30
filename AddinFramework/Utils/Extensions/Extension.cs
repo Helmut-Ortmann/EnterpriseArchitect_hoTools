@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using EAAddinFramework.Utils;
+﻿using System.Collections.Generic;
 using hoTools.Utils.Configuration;
 
 
+// ReSharper disable once CheckNamespace
 namespace AddinFramework.Utils.ExtensionsDummy
 {
     public static class Extension
