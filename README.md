@@ -118,6 +118,8 @@ Some features:
 
 
 # Releases
+## Release 2.1.7
+
 ## Release 2.1.6
 - Diagram Styles, configurable via 'Settings.jason'
 - Hybrid Scripting for *.exe (Using C#, Java,.. instead of VB Script & co), Example
