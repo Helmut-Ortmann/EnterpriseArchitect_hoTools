@@ -35,31 +35,72 @@ namespace EAAddinFramework.Utils
             StyleEx = styleEx;
         }
     }
+    /// <summary>
+    /// Item to specify the style of an EA DiagramObject
+    /// </summary>
+    // ReSharper disable once ClassNeverInstantiated.Global
+    public class DiagramObjectStyleItem
+    {
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public string Type { get; set; }
+        public string Style { get; set; }
+
+        [JsonConstructor]
+        public DiagramObjectStyleItem(string name, string description, string type, string style)
+        {
+            Name = name;
+            Description = description;
+            Type = type;
+            Style = style;
+        }
+    }
 
     public class DiagramStyle
     {
         public List<DiagramStyleItem> DiagramStyleItems { get;  }
+        public List<DiagramObjectStyleItem> DiagramObjectStyleItems { get; }
 
         public DiagramStyle(string jasonFilePath)
         {
+            // use 'Deserializing Partial JSON Fragments'
             try
             {
+                // Read JSON
                 string text = System.IO.File.ReadAllText(jasonFilePath);
                 JObject search = JObject.Parse(text);
+
+                // Deserialize "DiagramStyle"
                 // get JSON result objects into a list
                 IList<JToken> results = search["DiagramStyle"].Children().ToList();
-
                 // serialize JSON results into .NET objects
                 IList<DiagramStyleItem> searchResults = new List<DiagramStyleItem>();
                 foreach (JToken result in results)
                     {
-                    // JToken.ToObject is a helper method that uses JsonSerializer internally
+                        // JToken.ToObject is a helper method that uses JsonSerializer internally
                         DiagramStyleItem searchResult = result.ToObject<DiagramStyleItem>();
                         if (searchResult == null) continue;
                         searchResults.Add(searchResult);
                     }
                 DiagramStyleItems = searchResults.ToList<DiagramStyleItem>();
-                
+
+                // Deserialize "DiagramObjectStyle"
+                // get JSON result objects into a list
+                IList<JToken> diaObjects = search["DiagramObjectStyle"].Children().ToList();
+                // serialize JSON results into .NET objects
+                IList<DiagramObjectStyleItem> resultsDiaObject = new List<DiagramObjectStyleItem>();
+
+                foreach (JToken diaObject in diaObjects)
+                {
+                    // JToken.ToObject is a helper method that uses JsonSerializer internally
+                    DiagramObjectStyleItem searchResult = diaObject.ToObject<DiagramObjectStyleItem>();
+                    if (searchResult == null) continue;
+                    resultsDiaObject.Add(searchResult);
+                }
+                DiagramObjectStyleItems = resultsDiaObject.ToList<DiagramObjectStyleItem>();
+
+
+
             }
             catch (Exception e)
             {

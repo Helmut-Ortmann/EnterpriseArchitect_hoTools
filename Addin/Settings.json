@@ -3,21 +3,21 @@
   [
     // List of Diagram Styles to assign to diagram types
     // see:: https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/DiagramStyles
-    { 
+    {
       "Name": "Default 1 (simple, with Notes)",
       "Description": "Simple:\r\n-Notes\r\n- no Attributes\r\n- no Operations",
       "Type": "",
       "PDATA": "HideAtts=1, HideOps=1, PPgs.cx=1, PPgs.cy=1, ScalePI=1",
       "StyleEX": "ShowNotes=1"
     },
-    { 
+    {
       "Name": "Default 2 (elaborate, without Notes)",
       "Description": "No Attributes, Notes",
       "Type": "",
       "PDATA": "HideAtts=1, HideOps=1, OpParams=2, ShowOpRetType=1, PPgs.cx=1, PPgs.cy=1, ScalePI=1",
       "StyleEX": "ShowNotes=0"
     },
-    { 
+    {
       "Name": "My Requirements",
       "Description": "No Attributes, Notes",
       "Type": "Cust=Requirements",
@@ -46,5 +46,21 @@
       "StyleEX": "ShowNotes=1"
     }
   ]
+},
+{
+  'DiagramObjectStyle':
+  [
+    // List of DiagramObject Styles
+    // AttPro=0;AttPri=0;AttPub=0;AttPkg=0;Tag=1;AttCustom=0;OpCustom=0;
+    // OpPro=0;OpPri=0;OpPub=0;OpPkg=0;
+    // HideIcon=0;Constraint=1;PType=1;Notes=1000;Formatted=1;RzO=1;Runstate=1;
+    {
+      "Name": "Default1",
+      "Description": "Simple",
+      "Type": "",
+      "Style": ""
+    }
+  ]
+}
 }
 
