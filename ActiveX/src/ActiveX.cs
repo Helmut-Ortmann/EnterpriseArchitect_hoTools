@@ -3484,7 +3484,7 @@ namespace hoTools.ActiveX
 
 
         /// <summary>
-        /// Change diagram object style
+        /// Change diagram object style for selected diagram objects or all diagram objects if nothing selected
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="changeScope"></param>
