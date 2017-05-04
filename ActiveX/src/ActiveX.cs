@@ -3284,24 +3284,40 @@ namespace hoTools.ActiveX
                 // check if the menu entries already exists
                 if (_doMenuDiagramStyleInserted)
                 {
-                    int index = _doToolStripMenuItem.DropDownItems.Count - 1;
-                    _doToolStripMenuItem.DropDownItems.RemoveAt(index);
-                    index = index - 1;
-                    _doToolStripMenuItem.DropDownItems.RemoveAt(index);
+                    for (int i = 0; i < 4; i++)
+                    {
+                        int index = _doToolStripMenuItem.DropDownItems.Count - 1;
+                        _doToolStripMenuItem.DropDownItems.RemoveAt(index);
+
+                    }
+                    
 
                 }
                 else
                 {
                     _doToolStripMenuItem.DropDownItems.Add(new ToolStripSeparator());
                 }
-                _doToolStripMenuItem.DropDownItems.Add(_diagramStyle.GetToolStripMenu(
+                // Diagram Style/Theme
+                _doToolStripMenuItem.DropDownItems.Add(_diagramStyle.GetToolStripMenuDiagramStyle(
                     "Bulk Diagram Style/Theme Recursive",
                     "Bulk Change the Diagram Style/Theme recursive\r\nSelect\r\n-Package \r\n-Element \r\n-Diagrams",
                     ChangeStyleRecursiv_Click));
-                _doToolStripMenuItem.DropDownItems.Add(_diagramStyle.GetToolStripMenu(
+                _doToolStripMenuItem.DropDownItems.Add(_diagramStyle.GetToolStripMenuDiagramStyle(
                     "Bulk Change Diagram Style/Theme",
                     "Bulk Change the Diagram/Theme Style\r\nSelect\r\n-Package \r\n-Element \r\n-Diagrams",
                     ChangeStylePackage_Click));
+
+                // DiagramObject Style
+                _doToolStripMenuItem.DropDownItems.Add(new ToolStripSeparator());
+                _doToolStripMenuItem.DropDownItems.Add(_diagramStyle.GetToolStripMenuDiagramObjectStyle(
+                    "Bulk Change DiagramObject Style",
+                    "Bulk Change the DiagramObject Style\r\nSelect\r\n-Diagram \r\n-DiagramObject/Node",
+                    ChangeStylePackage_Click));
+
+
+
+
+
                 _doMenuDiagramStyleInserted = true;
             }
             catch (Exception e1)
@@ -3445,13 +3461,15 @@ namespace hoTools.ActiveX
         // Change style recursive
         void ChangeStyleRecursiv_Click(object sender, EventArgs e)
         {
-            ChangeStyle(sender, ChangeScope.PackageRecursive);
+            ChangeDiagramStyle(sender, ChangeScope.PackageRecursive);
         }
         void ChangeStylePackage_Click(object sender, EventArgs e)
         {
-            ChangeStyle(sender, ChangeScope.Package);
+            ChangeDiagramStyle(sender, ChangeScope.Package);
         }
-        public void ChangeStyle(object sender, ChangeScope changeScope)
+
+
+        public void ChangeDiagramStyle(object sender, ChangeScope changeScope)
         {
             ToolStripMenuItem item = sender as ToolStripMenuItem; //((ToolStripMenuItem) sender).Tag; DiagramStyleItem
             DiagramStyleItem style = (DiagramStyleItem)item.Tag;
@@ -3462,6 +3480,31 @@ namespace hoTools.ActiveX
             styleEx[0] = $@"{style.Pdata};{style.StyleEx};";
             styleEx[1] = style.Type;
             EaService.ChangeDiagramStyle(Repository, styleEx, changeScope);
+        }
+
+
+        /// <summary>
+        /// Change diagram object style
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="changeScope"></param>
+        public void ChangeDiagramObjectStyle(object sender, ChangeScope changeScope)
+        {
+
+
+            ToolStripMenuItem item = sender as ToolStripMenuItem; 
+            DiagramObjectStyleItem style = (DiagramObjectStyleItem)item.Tag;
+            EaDiagram eaDia = new EaDiagram(Repository);
+            if (eaDia.Dia == null) return;
+
+
+            foreach (var diaObj in eaDia.SelObjects)
+            {
+                DiagramStyle.SetDiagramObjectStyle(Repository, diaObj, style.Style);
+            }
+
+
+           
         }
 
 

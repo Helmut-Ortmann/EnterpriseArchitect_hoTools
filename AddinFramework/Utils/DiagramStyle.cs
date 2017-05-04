@@ -118,7 +118,7 @@ namespace EAAddinFramework.Utils
         /// <param name="toolTip"></param>
         /// <param name="eventHandler"></param>
         /// <returns></returns>
-        public ToolStripMenuItem GetToolStripMenu(string name, string toolTip, EventHandler eventHandler)
+        public ToolStripMenuItem GetToolStripMenuDiagramStyle(string name, string toolTip, EventHandler eventHandler)
         {
             ToolStripMenuItem insertTemplateMenuItem = new ToolStripMenuItem
             {
@@ -140,6 +140,40 @@ namespace EAAddinFramework.Utils
             return insertTemplateMenuItem;
 
         }
+        /// <summary>
+        /// Create a ToolStripItem with DropDownitems for each DiagramStyle.
+        /// The Tag property contains the style.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="toolTip"></param>
+        /// <param name="eventHandler"></param>
+        /// <returns></returns>
+        public ToolStripMenuItem GetToolStripMenuDiagramObjectStyle(string name, string toolTip, EventHandler eventHandler)
+        {
+            ToolStripMenuItem insertTemplateMenuItem = new ToolStripMenuItem
+            {
+                Text = name,
+                ToolTipText = toolTip
+            };
+            // Add item of possible style as items in drop down
+            foreach (var style in DiagramObjectStyleItems)
+            {
+                ToolStripMenuItem item = new ToolStripMenuItem
+                {
+                    Text = style.Name,
+                    ToolTipText = style.Description,
+                    Tag = style
+                };
+                item.Click += eventHandler;
+                insertTemplateMenuItem.DropDownItems.Add(item);
+            }
+            return insertTemplateMenuItem;
+
+        }
+
+
+
+
         /// <summary>
         /// Set Diagram styles in PDATA and StyleEx. It simply updates the parameters in both field.
         /// 
@@ -183,6 +217,20 @@ namespace EAAddinFramework.Utils
             dia.StyleEx = diaStyle.Replace(";   ", ";").Replace(";  ", ";").Replace("; ", ";").Trim(); 
             dia.Update();
             rep.ReloadDiagram(dia.DiagramID);
+
+        }
+
+        /// <summary>
+        /// Set DiagramObject style. 
+        /// 
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <param name="diaObject"></param>
+        /// <param name="style"></param>
+        public static void SetDiagramObjectStyle(EA.Repository rep, EA.DiagramObject diaObject, string style)
+        {
+            diaObject.Style = style.Replace(",", ";").Replace("   ","").Replace("  ", "").Replace(" ", "").Trim();
+            diaObject.Update();
 
         }
         /// <summary>

@@ -45,22 +45,46 @@
       "Pdata": "HideAtts=1, HideOps=1, PPgs.cx=1, PPgs.cy=1, ScalePI=1",
       "StyleEX": "ShowNotes=1"
     }
-  ]
-},
-{
+  ],
   'DiagramObjectStyle':
   [
+    // Best: check 'select Object_ID, ObjectStyle from t_diagramobjects'' 
+    // EA Default: HideIcon=0;AttPri=0;AttPkg=0;AttPro=0;AttPub=0;AttCustom=0;OpCustom=0;PType=0;RzO=1;Constraint=1;
+    //
+    // There is only an entry if not shown
     // List of DiagramObject Styles
     // AttPro=0;AttPri=0;AttPub=0;AttPkg=0;Tag=1;AttCustom=0;OpCustom=0;
     // OpPro=0;OpPri=0;OpPub=0;OpPkg=0;
     // HideIcon=0;Constraint=1;PType=1;Notes=1000;Formatted=1;RzO=1;Runstate=1;
+    // AttCustom=0 no custom Attributes (always)
+    // Attrxxx=0  Not shown, 
+    // Opxxx=0    Not shown, 
+    // Tag=1      Not shown, 
+    // Notes=1000 Shown, nothing not shown
     {
-      "Name": "Default1",
-      "Description": "Simple",
+      "Name": "Default1, no Notes",
+      "Description": "EA Default, show Constraints",
       "Type": "",
-      "Style": ""
+      "Style": "HideIcon=0;AttPri=0;AttPkg=0;AttPro=0;AttPub=0;AttCustom=0;OpCustom=0;PType=0;RzO=1;Constraint=1;"
+    },
+    {
+      "Name": "Default2, Notes",
+      "Description": "No public Features",
+      "Type": "",
+      "Style": "HideIcon=0;AttPri=0;AttPkg=0;AttPro=0;AttPub=0;AttCustom=0;OpCustom=0;PType=0;RzO=1;Constraint=1;Notes=1000;"
+    },
+    {
+      "Name": "Notes, Public Operations",
+      "Description": "Notes, Public Operations",
+      "Type": "",
+      "Style": "HideIcon=0;AttPri=0;AttPkg=0;AttPro=0;AttPub=0;AttCustom=0;OpCustom=0;PType=0;RzO=1;Constraint=1;Notes=1000;OpPro=0;OpPri=0;OpPkg=0"
+    },
+    {
+      "Name": "Public Operations",
+      "Description": "No Notes, Public Operations",
+      "Type": "",
+      "Style": "HideIcon=0;AttPri=0;AttPkg=0;AttPro=0;AttPub=0;AttCustom=0;OpCustom=0;PType=0;RzO=1;Constraint=1;OpPro=0;OpPri=0;OpPkg=0"
     }
   ]
-}
 }
 
