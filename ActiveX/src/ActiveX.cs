@@ -3301,18 +3301,18 @@ namespace hoTools.ActiveX
                 _doToolStripMenuItem.DropDownItems.Add(_diagramStyle.GetToolStripMenuDiagramStyle(
                     "Bulk Diagram Style/Theme Recursive",
                     "Bulk Change the Diagram Style/Theme recursive\r\nSelect\r\n-Package \r\n-Element \r\n-Diagrams",
-                    ChangeStyleRecursiv_Click));
+                    ChangeDiagramStyleRecursiv_Click));
                 _doToolStripMenuItem.DropDownItems.Add(_diagramStyle.GetToolStripMenuDiagramStyle(
                     "Bulk Change Diagram Style/Theme",
                     "Bulk Change the Diagram/Theme Style\r\nSelect\r\n-Package \r\n-Element \r\n-Diagrams",
-                    ChangeStylePackage_Click));
+                    ChangeDiagramStylePackage_Click));
 
                 // DiagramObject Style
                 _doToolStripMenuItem.DropDownItems.Add(new ToolStripSeparator());
                 _doToolStripMenuItem.DropDownItems.Add(_diagramStyle.GetToolStripMenuDiagramObjectStyle(
                     "Bulk Change DiagramObject Style",
                     "Bulk Change the DiagramObject Style\r\nSelect\r\n-Diagram \r\n-DiagramObject/Node",
-                    ChangeStylePackage_Click));
+                    ChangeDiagramObjectStylePackage_Click));
 
 
 
@@ -3458,18 +3458,24 @@ namespace hoTools.ActiveX
             EaService.SetFolder(Repository);
         }
 
-        // Change style recursive
-        void ChangeStyleRecursiv_Click(object sender, EventArgs e)
+        // Change diagram style recursive
+        void ChangeDiagramStyleRecursiv_Click(object sender, EventArgs e)
         {
             ChangeDiagramStyle(sender, ChangeScope.PackageRecursive);
         }
-        void ChangeStylePackage_Click(object sender, EventArgs e)
+        // Change diagram style recursive
+        void ChangeDiagramStylePackage_Click(object sender, EventArgs e)
         {
             ChangeDiagramStyle(sender, ChangeScope.Package);
         }
+        // Change diagram style recursive
+        void ChangeDiagramObjectStylePackage_Click(object sender, EventArgs e)
+        {
+            ChangeDiagramObjectStyle(sender, ChangeScope.Package);
+        }
 
 
-        public void ChangeDiagramStyle(object sender, ChangeScope changeScope)
+        private void ChangeDiagramStyle(object sender, ChangeScope changeScope)
         {
             ToolStripMenuItem item = sender as ToolStripMenuItem; //((ToolStripMenuItem) sender).Tag; DiagramStyleItem
             DiagramStyleItem style = (DiagramStyleItem)item.Tag;
@@ -3488,23 +3494,15 @@ namespace hoTools.ActiveX
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="changeScope"></param>
-        public void ChangeDiagramObjectStyle(object sender, ChangeScope changeScope)
+        private void ChangeDiagramObjectStyle(object sender, ChangeScope changeScope)
         {
 
 
             ToolStripMenuItem item = sender as ToolStripMenuItem; 
             DiagramObjectStyleItem style = (DiagramObjectStyleItem)item.Tag;
-            EaDiagram eaDia = new EaDiagram(Repository);
-            if (eaDia.Dia == null) return;
 
-
-            foreach (var diaObj in eaDia.SelObjects)
-            {
-                DiagramStyle.SetDiagramObjectStyle(Repository, diaObj, style.Style);
-            }
-
-
-           
+            EaService.DiagramObjectStyleWrapper(Repository, style.Style);
+        
         }
 
 

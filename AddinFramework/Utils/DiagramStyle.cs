@@ -156,7 +156,7 @@ namespace EAAddinFramework.Utils
                 ToolTipText = toolTip
             };
             // Add item of possible style as items in drop down
-            foreach (var style in DiagramObjectStyleItems)
+            foreach (DiagramObjectStyleItem style in DiagramObjectStyleItems)
             {
                 ToolStripMenuItem item = new ToolStripMenuItem
                 {
@@ -230,7 +230,17 @@ namespace EAAddinFramework.Utils
         public static void SetDiagramObjectStyle(EA.Repository rep, EA.DiagramObject diaObject, string style)
         {
             diaObject.Style = style.Replace(",", ";").Replace("   ","").Replace("  ", "").Replace(" ", "").Trim();
-            diaObject.Update();
+            try
+            {
+                diaObject.Update();
+            }
+            catch (Exception e)
+            {
+                // Probably style is to long to contain all features
+                MessageBox.Show($@"EA has a restriction of the length of the Database field.
+{e}
+", @"Style is to long, make it shorter!");
+            }
 
         }
         /// <summary>

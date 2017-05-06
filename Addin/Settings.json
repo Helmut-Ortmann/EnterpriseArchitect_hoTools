@@ -48,42 +48,63 @@
   ],
   'DiagramObjectStyle':
   [
-    // Best: check 'select Object_ID, ObjectStyle from t_diagramobjects'' 
-    // EA Default: HideIcon=0;AttPri=0;AttPkg=0;AttPro=0;AttPub=0;AttCustom=0;OpCustom=0;PType=0;RzO=1;Constraint=1;
+
+    // Hiding  Styles:  AttPro=0;AttPri=0;AttPub=0;AttPkg=0;OpPro=0;OpPri=0;OpPub=0;OpPkg=0;
+    // Showing Styles:  Tag=1;Constraint=1;PType=1;Notes=1000;Formatted=1;RzO=1;Runstate=1;Responsibility;FQTag=1;OpInh=1;AttInh=1;RzO=n;
+    // Pro=0:            Hide Protected (Attribute/Operation)
+    // Pri=0:            Hide Private (Attribute/Operation)
+    // Pub=0:            Hide Public (Attribute/Operation)
+    // Pkg=0:            Hide Package (Attribute/Operation)
+    // PType=1:          Show Property Type 
+    // FQTag=1;          Show Full Qualified Tag
+    // TagInh=1;         Show Inherited Tagged Values
+    // SC=1;             Structured Compartment
+    // Responsibility=1; Internal Requirement of a Requirement
+    // Inh=1             Inherited Operation, Attribute, Constraint
+    // RzO=n;            Resize Object: 1= Resize to longest Feature;2=Wrap Features;3=Truncate Features;     
     //
-    // There is only an entry if not shown
-    // List of DiagramObject Styles
-    // AttPro=0;AttPri=0;AttPub=0;AttPkg=0;Tag=1;AttCustom=0;OpCustom=0;
-    // OpPro=0;OpPri=0;OpPub=0;OpPkg=0;
-    // HideIcon=0;Constraint=1;PType=1;Notes=1000;Formatted=1;RzO=1;Runstate=1;
-    // AttCustom=0 no custom Attributes (always)
-    // Attrxxx=0  Not shown, 
-    // Opxxx=0    Not shown, 
-    // Tag=1      Not shown, 
-    // Notes=1000 Shown, nothing not shown
+    // select name, objectStyle from t_diagramobjects d inner join t_object o on d.object_id = o.object_id
+    //
+    // Note:   The Database Field has a length constraint. If you get an error you have to reduce the Style content. 
+ 
+//
+    // Type: Currently not supported
     {
       "Name": "Default1, no Notes",
-      "Description": "EA Default, show Constraints",
+      "Description": "No Notes\r\nNo Attributres\r\nShow Constraints",
       "Type": "",
       "Style": "HideIcon=0;AttPri=0;AttPkg=0;AttPro=0;AttPub=0;AttCustom=0;OpCustom=0;PType=0;RzO=1;Constraint=1;"
     },
     {
       "Name": "Default2, Notes",
-      "Description": "No public Features",
+      "Description": "Notes\r\nNo Attributres\r\nShow Constraints",
       "Type": "",
       "Style": "HideIcon=0;AttPri=0;AttPkg=0;AttPro=0;AttPub=0;AttCustom=0;OpCustom=0;PType=0;RzO=1;Constraint=1;Notes=1000;"
     },
     {
       "Name": "Notes, Public Operations",
-      "Description": "Notes, Public Operations",
+      "Description": "Notes\r\nNo Protected,Private Operations\r\nTags",
       "Type": "",
-      "Style": "HideIcon=0;AttPri=0;AttPkg=0;AttPro=0;AttPub=0;AttCustom=0;OpCustom=0;PType=0;RzO=1;Constraint=1;Notes=1000;OpPro=0;OpPri=0;OpPkg=0"
+      "Style": "Notes=1000;OpPro=0;OpPri=0;OpPkg=0"
     },
     {
-      "Name": "Public Operations",
-      "Description": "No Notes, Public Operations",
-      "Type": "",
-      "Style": "HideIcon=0;AttPri=0;AttPkg=0;AttPro=0;AttPub=0;AttCustom=0;OpCustom=0;PType=0;RzO=1;Constraint=1;OpPro=0;OpPri=0;OpPkg=0"
+      "Name": "Tags",
+      "Description": "No Notes\r\nNo Operations\r\nNo Attributes\r\nTags",
+      "Type": "", 
+      "Style": "HideIcon=0;AttPri=0;AttPkg=0;AttPro=0;AttPub=0;AttCustom=0;OpCustom=0;OpPro=0;OpPri=0;OpPkg=0;PType=0;RzO=1;"
+    },
+    {
+      "Name": "Wrap Features",
+      "Description": "Wrap Features",
+      "Type": "", 
+      "Style": "HideIcon=0;RzO=2;"
+    },
+    {
+
+      "Name": "Resize Features",
+      "Description": "Resize Features",
+      "Type": "", 
+      "Style": "HideIcon=0;RzO=1;"
     }
   ]
 }

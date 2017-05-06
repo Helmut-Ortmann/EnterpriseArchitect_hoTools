@@ -385,9 +385,14 @@ namespace hoTools.EaServices
         {
             DiagramStyleWrapper(rep, 1);
         }
+        /// <summary>
+        /// Wrapper to change Diagram style
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <param name="pos"></param>
         private static void DiagramStyleWrapper(Repository rep, int pos)
         {
-            if (DiagramStyle == null && DiagramStyle.DiagramStyleItems.Count <= pos)
+            if (DiagramStyle.DiagramStyleItems == null && DiagramStyle.DiagramStyleItems.Count <= pos)
             {
                 MessageBox.Show("", "No Diagram style in 'Settings.json' found");
                 return;
@@ -400,6 +405,94 @@ namespace hoTools.EaServices
             styleEx[1] = DiagramStyle.DiagramStyleItems[pos].Type;
             ChangeDiagramStyle(rep, styleEx, ChangeScope.PackageRecursive);
         }
+
+
+
+
+        /// <summary>
+        /// Bulk change DiagramObject Styles 0 according to Settings.Json 
+        /// </summary>
+        [ServiceOperation("{8AE78FFE-15BD-47E0-B823-C9AC4B02B794}", "Bulk change DiagramObjects to 'Style 1'",
+            "Select Diagram or Diagram Objects (see Settings.Json, 1. entry)", isTextRequired: false)]
+        public static void DiagramObjectStyle1(EA.Repository rep)
+        {
+            DiagramStyleWrapper(rep, 0);
+        }
+        /// <summary>
+        /// Bulk change DiagramObject Styles 0 according to Settings.Json 
+        /// </summary>
+        [ServiceOperation("{94F8855F-22BB-4BD7-BCEE-FC8D64E63B83}", "Bulk change DiagramObjects to 'Style 2'",
+            "Select Diagram or Diagram Objects (see Settings.Json, 2. entry)", isTextRequired: false)]
+        public static void DiagramObjectStyle2(EA.Repository rep)
+        {
+            DiagramStyleWrapper(rep, 1);
+        }
+        /// <summary>
+        /// Bulk change DiagramObject Styles 0 according to Settings.Json 
+        /// </summary>
+        [ServiceOperation("{98B0661C-DEB0-453D-BD30-3FB900228B38}", "Bulk change DiagramObjects to 'Style 3'",
+            "Select Diagram or Diagram Objects (see Settings.Json, 3. entry)", isTextRequired: false)]
+        public static void DiagramObjectStyle3(EA.Repository rep)
+        {
+            DiagramStyleWrapper(rep, 2);
+        }
+        /// <summary>
+        /// Bulk change DiagramObject Styles 0 according to Settings.Json 
+        /// </summary>
+        [ServiceOperation("{BFD60FFD-2244-4320-8AB2-57858DA6817F}", "Bulk change DiagramObjects to 'Style 4'",
+            "Select Diagram or Diagram Objects (see Settings.Json, 4. entry)", isTextRequired: false)]
+        public static void DiagramObjectStyle4(EA.Repository rep)
+        {
+            DiagramStyleWrapper(rep, 3);
+        }
+        /// <summary>
+        /// Bulk change DiagramObject Styles 0 according to Settings.Json 
+        /// </summary>
+        [ServiceOperation("{DD52FE95-51DB-4619-AF5E-39EE7AA2CF4A}", "Bulk change DiagramObjects to 'Style 5'",
+            "Select Diagram or Diagram Objects (see Settings.Json, 5. entry)", isTextRequired: false)]
+        public static void DiagramObjectStyle5(EA.Repository rep)
+        {
+            DiagramStyleWrapper(rep, 4);
+        }
+
+
+
+
+        /// <summary>
+        /// Wrapper to change DiagramObject style
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <param name="pos"></param>
+        public static void DiagramObjectStyleWrapper(Repository rep, int pos)
+        {
+            if (DiagramStyle.DiagramStyleItems == null && DiagramStyle.DiagramStyleItems.Count <= pos)
+            {
+                MessageBox.Show("", "No DiagramObject style in 'Settings.json' found");
+                return;
+            }
+            string style = $@"{DiagramStyle.DiagramObjectStyleItems[pos].Style}";
+            DiagramObjectStyleWrapper(rep, style);
+        }
+        /// <summary>
+        /// Wrapper to change DiagramObject style
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <param name="style"></param>
+        public static void DiagramObjectStyleWrapper(Repository rep, string style)
+        {
+            EaDiagram eaDia = new EaDiagram(rep, getAllDiagramObject: true);
+            if (eaDia.Dia == null) return;
+            foreach (var diaObj in eaDia.SelObjects)
+            {
+                EAAddinFramework.Utils.DiagramStyle.SetDiagramObjectStyle(rep, diaObj, style);
+            }
+
+
+        }
+
+
+
+
         /// <summary>
         /// Bulk Change Diagram Style according to:
         /// liParameter[0]  styles
