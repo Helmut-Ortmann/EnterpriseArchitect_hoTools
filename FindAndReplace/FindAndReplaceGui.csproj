@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{5089F046-2F1A-49F2-BF76-F8DDA89FD0BE}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FindAndReplace</RootNamespace>
+    <AssemblyName>FindAndReplace</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <RegisterForComInterop>true</RegisterForComInterop>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <Prefer32Bit>false</Prefer32Bit>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <RegisterForComInterop>true</RegisterForComInterop>
+    <Prefer32Bit>false</Prefer32Bit>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>hoKeyPair.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Interop.EA">
+      <HintPath>..\EA\Interop.EA.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Source\FindAndReplaceItem\FindAndReplaceItem.cs" />
+    <Compile Include="Source\FindAndReplaceItem\FindAndReplaceItemAttribute.cs" />
+    <Compile Include="Source\FindAndReplaceItem\FindAndReplaceItemMethod.cs" />
+    <Compile Include="Source\FindAndReplaceItem\FindAndReplaceItemDiagram.cs" />
+    <Compile Include="Source\FindAndReplaceItem\FindAndReplaceItemElement.cs" />
+    <Compile Include="Source\FindAndReplaceItem\FindAndReplaceItemPackage.cs" />
+    <Compile Include="Source\FindAndReplaceItem\FindAndReplaceItemTag.cs" />
+    <Compile Include="Source\GUI\FindAndReplaceGUI.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Source\GUI\FindAndReplaceGUI.Designer.cs">
+      <DependentUpon>FindAndReplaceGUI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Source\FindAndReplace.cs" />
+    <Compile Include="Source\GUI\IFindAndReplaceGUI.cs" />
+    <Compile Include="Source\RecursivePackagesFind.cs" />
+    <Compile Include="Source\GUI\RegularExpression.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Source\GUI\RegularExpression.Designer.cs">
+      <DependentUpon>RegularExpression.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Source\GUI\ShowAndChangeItemGUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Source\GUI\ShowAndChangeItemGUI.Designer.cs">
+      <DependentUpon>ShowAndChangeItemGUI.cs</DependentUpon>
+    </Compile>
+    <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Source\GUI\FindAndReplaceGUI.resx">
+      <DependentUpon>FindAndReplaceGUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Source\GUI\RegularExpression.resx">
+      <DependentUpon>RegularExpression.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Source\GUI\ShowAndChangeItemGUI.resx">
+      <DependentUpon>ShowAndChangeItemGUI.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ActiveX\hoToolsGui.csproj">
+      <Project>{c9ebcebb-71e4-4e87-b92c-7aeb8f62b69a}</Project>
+      <Name>hoToolsGui</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EaServices\EaServices.csproj">
+      <Project>{dfbedf5e-fc7f-4269-a0a6-f9b9e86dac90}</Project>
+      <Name>EaServices</Name>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="hoKeyPair.snk" />
+    <None Include="Source\Diagrams\Find.cd" />
+    <None Include="Source\Diagrams\Overview.cd" />
+    <None Include="Source\Diagrams\RecursiveSearch.cd" />
+    <None Include="Source\Diagrams\TaggedValue.cd" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

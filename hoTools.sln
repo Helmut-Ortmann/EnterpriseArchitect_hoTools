@@ -3,16 +3,16 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26403.7
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddinClass", "Addin\AddinClass.csproj", "{6D5DEEEF-0897-4494-9857-5BEE2BF0D0AF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "hoToolsRoot", "Addin\hoToolsRoot.csproj", "{6D5DEEEF-0897-4494-9857-5BEE2BF0D0AF}"
 	ProjectSection(ProjectDependencies) = postProject
 		{29385A2D-EAC1-4777-BC01-C060C2002307} = {29385A2D-EAC1-4777-BC01-C060C2002307}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ActiveX", "ActiveX\ActiveX.csproj", "{C9EBCEBB-71E4-4E87-B92C-7AEB8F62B69A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "hoToolsGui", "ActiveX\hoToolsGui.csproj", "{C9EBCEBB-71E4-4E87-B92C-7AEB8F62B69A}"
 EndProject
 Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "Setup", "Setup\Setup.wixproj", "{6F57C7F7-5B30-4720-BCF6-8C21C2D09009}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindAndReplace", "FindAndReplace\FindAndReplace.csproj", "{5089F046-2F1A-49F2-BF76-F8DDA89FD0BE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindAndReplaceGui", "FindAndReplace\FindAndReplaceGui.csproj", "{5089F046-2F1A-49F2-BF76-F8DDA89FD0BE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EaServices", "EaServices\EaServices.csproj", "{DFBEDF5E-FC7F-4269-A0A6-F9B9E86DAC90}"
 EndProject
@@ -58,7 +58,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Advanced", "Advanced", "{A9
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddinFramework", "AddinFramework\AddinFramework.csproj", "{B08AE89B-5E8D-46FD-A5D8-B3DB4D33FB46}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QueryGui", "QueryGui\QueryGui.csproj", "{D83C4D98-7AA9-4B1A-ABED-EA8A9EAC210C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SqlGui", "QueryGui\SqlGui.csproj", "{D83C4D98-7AA9-4B1A-ABED-EA8A9EAC210C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Reuse", "Reuse", "{F1F0E6B1-5463-4DBB-9120-282C921427E0}"
 	ProjectSection(SolutionItems) = preProject

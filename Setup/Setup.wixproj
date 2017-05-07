@@ -39,8 +39,8 @@
     <Content Include="UserSearches.json" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ActiveX\ActiveX.csproj">
-      <Name>ActiveX</Name>
+    <ProjectReference Include="..\ActiveX\hoToolsGui.csproj">
+      <Name>hoToolsGui</Name>
       <Project>{c9ebcebb-71e4-4e87-b92c-7aeb8f62b69a}</Project>
       <Private>True</Private>
       <DoNotHarvest>True</DoNotHarvest>
@@ -55,8 +55,8 @@
       <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
       <RefTargetDir>INSTALLFOLDER</RefTargetDir>
     </ProjectReference>
-    <ProjectReference Include="..\Addin\AddinClass.csproj">
-      <Name>AddinClass</Name>
+    <ProjectReference Include="..\Addin\hoToolsRoot.csproj">
+      <Name>hoToolsRoot</Name>
       <Project>{6d5deeef-0897-4494-9857-5bee2bf0d0af}</Project>
       <Private>True</Private>
       <DoNotHarvest>True</DoNotHarvest>
@@ -87,16 +87,16 @@
       <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
       <RefTargetDir>INSTALLFOLDER</RefTargetDir>
     </ProjectReference>
-    <ProjectReference Include="..\FindAndReplace\FindAndReplace.csproj">
-      <Name>FindAndReplace</Name>
+    <ProjectReference Include="..\FindAndReplace\FindAndReplaceGui.csproj">
+      <Name>FindAndReplaceGui</Name>
       <Project>{5089f046-2f1a-49f2-bf76-f8dda89fd0be}</Project>
       <Private>True</Private>
       <DoNotHarvest>True</DoNotHarvest>
       <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
       <RefTargetDir>INSTALLFOLDER</RefTargetDir>
     </ProjectReference>
-    <ProjectReference Include="..\QueryGui\QueryGui.csproj">
-      <Name>QueryGui</Name>
+    <ProjectReference Include="..\QueryGui\SqlGui.csproj">
+      <Name>SqlGui</Name>
       <Project>{d83c4d98-7aa9-4b1a-abed-ea8a9eac210c}</Project>
       <Private>True</Private>
       <DoNotHarvest>True</DoNotHarvest>
