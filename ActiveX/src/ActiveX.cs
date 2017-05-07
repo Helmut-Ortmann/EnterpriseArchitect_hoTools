@@ -2774,6 +2774,11 @@ namespace hoTools.ActiveX
             _toolStripSearchBtn3.Visible = AddinSettings.IsShowQueryButton;
             _toolStripSearchBtn4.Visible = AddinSettings.IsShowQueryButton;
             _toolStripSearchBtn5.Visible = AddinSettings.IsShowQueryButton;
+            //_toolStripSearchBtn6.Visible = AddinSettings.IsShowQueryButton;
+            //_toolStripSearchBtn7.Visible = AddinSettings.IsShowQueryButton;
+            //_toolStripSearchBtn8.Visible = AddinSettings.IsShowQueryButton;
+            //_toolStripSearchBtn9.Visible = AddinSettings.IsShowQueryButton;
+            //_toolStripSearchBtn10.Visible = AddinSettings.IsShowQueryButton;
 
             for (int pos = 0; pos < AddinSettings.ButtonsConfigSearch.Length; pos++)
             {
@@ -2841,6 +2846,12 @@ namespace hoTools.ActiveX
             _toolStripServiceBtn3.Visible = AddinSettings.IsShowServiceButton;
             _toolStripServiceBtn4.Visible = AddinSettings.IsShowServiceButton;
             _toolStripServiceBtn5.Visible = AddinSettings.IsShowServiceButton;
+            //_toolStripServiceBtn6.Visible = AddinSettings.IsShowServiceButton;
+            //_toolStripServiceBtn7.Visible = AddinSettings.IsShowServiceButton;
+            //_toolStripServiceBtn8.Visible = AddinSettings.IsShowServiceButton;
+            //_toolStripServiceBtn9.Visible = AddinSettings.IsShowServiceButton;
+            //_toolStripServiceBtn10.Visible = AddinSettings.IsShowServiceButton;
+
             for (int pos = 0; pos < AddinSettings.ButtonsServiceConfig.Count; pos++)
             {
                 bool empty = false;

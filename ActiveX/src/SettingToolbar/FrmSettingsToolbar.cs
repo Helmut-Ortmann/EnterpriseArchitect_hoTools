@@ -126,6 +126,24 @@ namespace hoTools.Settings.Toolbar
             txtBtn5SearchTerm.Text = sh.KeySearchTerm;
             txtBtn5SearchTooltip.Text = sh.KeySearchTooltip;
 
+            sh = (EaAddinShortcutSearch)_settings.ButtonsConfigSearch[5];
+            txtBtn6Text.Text = sh.KeyText;
+            txtBtn6SearchName.Text = sh.KeySearchName;
+            txtBtn6SearchTerm.Text = sh.KeySearchTerm;
+            txtBtn6SearchTooltip.Text = sh.KeySearchTooltip;
+
+            sh = (EaAddinShortcutSearch)_settings.ButtonsConfigSearch[6];
+            txtBtn7Text.Text = sh.KeyText;
+            txtBtn7SearchName.Text = sh.KeySearchName;
+            txtBtn7SearchTerm.Text = sh.KeySearchTerm;
+            txtBtn7SearchTooltip.Text = sh.KeySearchTooltip;
+
+            sh = (EaAddinShortcutSearch)_settings.ButtonsConfigSearch[7];
+            txtBtn8Text.Text = sh.KeyText;
+            txtBtn8SearchName.Text = sh.KeySearchName;
+            txtBtn8SearchTerm.Text = sh.KeySearchTerm;
+            txtBtn8SearchTooltip.Text = sh.KeySearchTooltip;
+
             #endregion
 
             #region load possible services
