@@ -1292,7 +1292,7 @@ namespace hoTools.Settings
         #endregion
         #region GetButtonsSearch from Configuration
         /// <summary>
-        /// Get 5 Searches
+        /// Get 10 Searches
         /// </summary>
         /// <returns></returns>
         private EaAddinButtons[] GetButtonsSearch()
@@ -1344,7 +1344,7 @@ namespace hoTools.Settings
         #region getShortcutsServices
 
         /// <summary>
-        /// Get 5 services of type Call or Script from configuration
+        /// Get 10 services of type Call or Script from configuration
         /// </summary>
         /// <returns></returns>
         private List<ServicesConfig> GetButtonsService()

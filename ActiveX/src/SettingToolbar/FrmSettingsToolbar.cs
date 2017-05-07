@@ -136,6 +136,11 @@ namespace hoTools.Settings.Toolbar
             var lServices3 = new List<Service>();
             var lServices4 = new List<Service>();
             var lServices5 = new List<Service>();
+            var lServices6 = new List<Service>();
+            var lServices7 = new List<Service>();
+            var lServices8 = new List<Service>();
+            var lServices9 = new List<Service>();
+            var lServices10 = new List<Service>();
 
 
             // 
@@ -146,10 +151,15 @@ namespace hoTools.Settings.Toolbar
                 lServices3.Add(service);
                 lServices4.Add(service);
                 lServices5.Add(service);
+                lServices6.Add(service);
+                lServices7.Add(service);
+                lServices8.Add(service);
+                lServices9.Add(service);
+                lServices10.Add(service);
             }
 
             
-            #region set services
+            #region set Toolbar Button Services
 
             cmbService1.DataSource = lServices1;
             cmbService1.DisplayMember = "Description";
@@ -187,16 +197,61 @@ namespace hoTools.Settings.Toolbar
             cmbService5.SelectedValue = _settings.ButtonsServiceConfig[4].Id;
             txtButton5TextService.Text = _settings.ButtonsServiceConfig[4].ButtonText;
             txtServiceTooltip5.Text = _settings.ButtonsServiceConfig[4].Help;
-            #endregion
+
+            cmbService6.DataSource = lServices6;
+            cmbService6.DisplayMember = "Description";
+            cmbService6.ValueMember = "Id";
+            cmbService6.SelectedValue = _settings.ButtonsServiceConfig[5].Id;
+            txtButton6TextService.Text = _settings.ButtonsServiceConfig[5].ButtonText;
+            txtServiceTooltip6.Text = _settings.ButtonsServiceConfig[5].Help;
+
+            cmbService7.DataSource = lServices7;
+            cmbService7.DisplayMember = "Description";
+            cmbService7.ValueMember = "Id";
+            cmbService7.SelectedValue = _settings.ButtonsServiceConfig[6].Id;
+            txtButton7TextService.Text = _settings.ButtonsServiceConfig[6].ButtonText;
+            txtServiceTooltip7.Text = _settings.ButtonsServiceConfig[6].Help;
+
+            cmbService8.DataSource = lServices8;
+            cmbService8.DisplayMember = "Description";
+            cmbService8.ValueMember = "Id";
+            cmbService8.SelectedValue = _settings.ButtonsServiceConfig[7].Id;
+            txtButton8TextService.Text = _settings.ButtonsServiceConfig[7].ButtonText;
+            txtServiceTooltip8.Text = _settings.ButtonsServiceConfig[7].Help;
+
+            cmbService9.DataSource = lServices9;
+            cmbService9.DisplayMember = "Description";
+            cmbService9.ValueMember = "Id";
+            cmbService9.SelectedValue = _settings.ButtonsServiceConfig[8].Id;
+            txtButton9TextService.Text = _settings.ButtonsServiceConfig[8].ButtonText;
+            txtServiceTooltip9.Text = _settings.ButtonsServiceConfig[8].Help;
+
+            cmbService10.DataSource = lServices10;
+            cmbService10.DisplayMember = "Description";
+            cmbService10.ValueMember = "Id";
+            cmbService10.SelectedValue = _settings.ButtonsServiceConfig[9].Id;
+            txtButton10TextService.Text = _settings.ButtonsServiceConfig[9].ButtonText;
+            txtServiceTooltip10.Text = _settings.ButtonsServiceConfig[9].Help;
+
+
+
+
+
 
             #endregion
 
-            // Button Texts
+            #endregion
+
+            // Button Search Texts
             lblSearchButton1.SetTooltip(SearchButtonRowTooltip);
             lblSearchButton2.SetTooltip(SearchButtonRowTooltip);
             lblSearchButton3.SetTooltip(SearchButtonRowTooltip);
             lblSearchButton4.SetTooltip(SearchButtonRowTooltip);
             lblSearchButton5.SetTooltip(SearchButtonRowTooltip);
+            //lblSearchButton6.SetTooltip(SearchButtonRowTooltip);
+            //lblSearchButton7.SetTooltip(SearchButtonRowTooltip);
+            //lblSearchButton8.SetTooltip(SearchButtonRowTooltip);
+            //lblSearchButton9.SetTooltip(SearchButtonRowTooltip);
 
             // Search Button Text
             lblSearchButtonText.SetTooltip(SearchButtonTextTooltip);
@@ -205,6 +260,12 @@ namespace hoTools.Settings.Toolbar
             txtBtn3Text.SetTooltip(SearchButtonTextTooltip);
             txtBtn4Text.SetTooltip(SearchButtonTextTooltip);
             txtBtn5Text.SetTooltip(SearchButtonTextTooltip);
+            txtBtn6Text.SetTooltip(SearchButtonTextTooltip);
+            txtBtn7Text.SetTooltip(SearchButtonTextTooltip);
+            txtBtn8Text.SetTooltip(SearchButtonTextTooltip);
+            //txtBtn9Text.SetTooltip(SearchButtonTextTooltip);
+            //txtBtn10Text.SetTooltip(SearchButtonTextTooltip);
+
 
             // Search Name / SQL file name
             lblSearchSearchName.SetTooltip(SearchButtonSearchNameTooltip);
@@ -213,6 +274,13 @@ namespace hoTools.Settings.Toolbar
             txtBtn3SearchName.SetTooltip(SearchButtonSearchNameTooltip);
             txtBtn4SearchName.SetTooltip(SearchButtonSearchNameTooltip);
             txtBtn5SearchName.SetTooltip(SearchButtonSearchNameTooltip);
+            txtBtn6SearchName.SetTooltip(SearchButtonSearchNameTooltip);
+            txtBtn7SearchName.SetTooltip(SearchButtonSearchNameTooltip);
+            txtBtn8SearchName.SetTooltip(SearchButtonSearchNameTooltip);
+            //txtBtn9SearchName.SetTooltip(SearchButtonSearchNameTooltip);
+            //txtBtn10SearchName.SetTooltip(SearchButtonSearchNameTooltip);
+
+
 
             // Search term
             lblSearchSearchTerm.SetTooltip(SearchButtonSearchTermTooltip);
@@ -221,6 +289,12 @@ namespace hoTools.Settings.Toolbar
             txtBtn3SearchTerm.SetTooltip(SearchButtonSearchTermTooltip);
             txtBtn4SearchTerm.SetTooltip(SearchButtonSearchTermTooltip);
             txtBtn5SearchTerm.SetTooltip(SearchButtonSearchTermTooltip);
+            txtBtn6SearchTerm.SetTooltip(SearchButtonSearchTermTooltip);
+            txtBtn7SearchTerm.SetTooltip(SearchButtonSearchTermTooltip);
+            txtBtn8SearchTerm.SetTooltip(SearchButtonSearchTermTooltip);
+            //txtBtn9SearchTerm.SetTooltip(SearchButtonSearchTermTooltip);
+            //txtBtn10SearchTerm.SetTooltip(SearchButtonSearchTermTooltip);
+
 
             // Search Tooltip
             lblSearchTooltip.SetTooltip(SearchButtonTooltipTooltip);
@@ -229,6 +303,12 @@ namespace hoTools.Settings.Toolbar
             txtBtn3SearchTooltip.SetTooltip(SearchButtonTooltipTooltip);
             txtBtn4SearchTooltip.SetTooltip(SearchButtonTooltipTooltip);
             txtBtn5SearchTooltip.SetTooltip(SearchButtonTooltipTooltip);
+            txtBtn6SearchTooltip.SetTooltip(SearchButtonTooltipTooltip);
+            txtBtn7SearchTooltip.SetTooltip(SearchButtonTooltipTooltip);
+            txtBtn8SearchTooltip.SetTooltip(SearchButtonTooltipTooltip);
+            //txtBtn9SearchTooltip.SetTooltip(SearchButtonTooltipTooltip);
+            //txtBtn10SearchTooltip.SetTooltip(SearchButtonTooltipTooltip);
+
 
 
             // Service Button rows
@@ -237,6 +317,11 @@ namespace hoTools.Settings.Toolbar
             lblServiceButton3.SetTooltip(ServiceButtonRowTooltip);
             lblServiceButton4.SetTooltip(ServiceButtonRowTooltip);
             lblServiceButton5.SetTooltip(ServiceButtonRowTooltip);
+            //lblServiceButton6.SetTooltip(ServiceButtonRowTooltip);
+            //lblServiceButton7.SetTooltip(ServiceButtonRowTooltip);
+            //lblServiceButton8.SetTooltip(ServiceButtonRowTooltip);
+            //lblServiceButton9.SetTooltip(ServiceButtonRowTooltip);
+            //lblServiceButton10.SetTooltip(ServiceButtonRowTooltip);
 
 
             // Service Button Text
@@ -246,6 +331,11 @@ namespace hoTools.Settings.Toolbar
             txtButton3TextService.SetTooltip(ServiceButtonTextTooltip);
             txtButton4TextService.SetTooltip(ServiceButtonTextTooltip);
             txtButton5TextService.SetTooltip(ServiceButtonTextTooltip);
+            txtButton6TextService.SetTooltip(ServiceButtonTextTooltip);
+            txtButton7TextService.SetTooltip(ServiceButtonTextTooltip);
+            txtButton8TextService.SetTooltip(ServiceButtonTextTooltip);
+            txtButton9TextService.SetTooltip(ServiceButtonTextTooltip);
+            txtButton10TextService.SetTooltip(ServiceButtonTextTooltip);
 
             // Service Name Tooltip
             lblServiceButtonName.SetTooltip(ServiceButtonServiceTooltip);
@@ -254,6 +344,11 @@ namespace hoTools.Settings.Toolbar
             cmbService3.SetTooltip(ServiceButtonServiceTooltip);
             cmbService4.SetTooltip(ServiceButtonServiceTooltip);
             cmbService5.SetTooltip(ServiceButtonServiceTooltip);
+            cmbService6.SetTooltip(ServiceButtonServiceTooltip);
+            cmbService7.SetTooltip(ServiceButtonServiceTooltip);
+            cmbService8.SetTooltip(ServiceButtonServiceTooltip);
+            cmbService9.SetTooltip(ServiceButtonServiceTooltip);
+            cmbService10.SetTooltip(ServiceButtonServiceTooltip);
 
             // Service Button Tooltip
             lblServiceButtonTooltip.SetTooltip(ServiceButtonTooltipTooltip);
@@ -262,6 +357,11 @@ namespace hoTools.Settings.Toolbar
             txtServiceTooltip3.SetTooltip(ServiceButtonTooltipTooltip);
             txtServiceTooltip4.SetTooltip(ServiceButtonTooltipTooltip);
             txtServiceTooltip5.SetTooltip(ServiceButtonTooltipTooltip);
+            txtServiceTooltip6.SetTooltip(ServiceButtonTooltipTooltip);
+            txtServiceTooltip7.SetTooltip(ServiceButtonTooltipTooltip);
+            txtServiceTooltip8.SetTooltip(ServiceButtonTooltipTooltip);
+            txtServiceTooltip9.SetTooltip(ServiceButtonTooltipTooltip);
+            txtServiceTooltip10.SetTooltip(ServiceButtonTooltipTooltip);
         }
         #endregion
 
@@ -312,9 +412,30 @@ namespace hoTools.Settings.Toolbar
             sh.KeySearchTooltip = txtBtn5SearchTooltip.Text;
             _settings.ButtonsConfigSearch[4] = sh;
 
+            sh = (EaAddinShortcutSearch)_settings.ButtonsConfigSearch[5];
+            sh.KeyText = txtBtn6Text.Text;
+            sh.KeySearchName = txtBtn6SearchName.Text;
+            sh.KeySearchTerm = txtBtn6SearchTerm.Text;
+            sh.KeySearchTooltip = txtBtn6SearchTooltip.Text;
+            _settings.ButtonsConfigSearch[5] = sh;
+
+            sh = (EaAddinShortcutSearch)_settings.ButtonsConfigSearch[6];
+            sh.KeyText = txtBtn7Text.Text;
+            sh.KeySearchName = txtBtn7SearchName.Text;
+            sh.KeySearchTerm = txtBtn7SearchTerm.Text;
+            sh.KeySearchTooltip = txtBtn7SearchTooltip.Text;
+            _settings.ButtonsConfigSearch[6] = sh;
+
+            sh = (EaAddinShortcutSearch)_settings.ButtonsConfigSearch[7];
+            sh.KeyText = txtBtn8Text.Text;
+            sh.KeySearchName = txtBtn8SearchName.Text;
+            sh.KeySearchTerm = txtBtn8SearchTerm.Text;
+            sh.KeySearchTooltip = txtBtn8SearchTooltip.Text;
+            _settings.ButtonsConfigSearch[7] = sh;
+
             #endregion
 
-            #region store shortcut services
+            #region store Toolbar Buttons Services
 
             _settings.ButtonsServiceConfig[0].Id = cmbService1.SelectedValue.ToString();
             _settings.ButtonsServiceConfig[0].ButtonText = txtButton1TextService.Text;
@@ -326,6 +447,17 @@ namespace hoTools.Settings.Toolbar
             _settings.ButtonsServiceConfig[3].ButtonText = txtButton4TextService.Text;
             _settings.ButtonsServiceConfig[4].Id = cmbService5.SelectedValue.ToString();
             _settings.ButtonsServiceConfig[4].ButtonText = txtButton5TextService.Text;
+
+            _settings.ButtonsServiceConfig[5].Id = cmbService6.SelectedValue.ToString();
+            _settings.ButtonsServiceConfig[5].ButtonText = txtButton6TextService.Text;
+            _settings.ButtonsServiceConfig[6].Id = cmbService7.SelectedValue.ToString();
+            _settings.ButtonsServiceConfig[6].ButtonText = txtButton7TextService.Text;
+            _settings.ButtonsServiceConfig[7].Id = cmbService8.SelectedValue.ToString();
+            _settings.ButtonsServiceConfig[7].ButtonText = txtButton8TextService.Text;
+            _settings.ButtonsServiceConfig[8].Id = cmbService9.SelectedValue.ToString();
+            _settings.ButtonsServiceConfig[8].ButtonText = txtButton9TextService.Text;
+            _settings.ButtonsServiceConfig[9].Id = cmbService10.SelectedValue.ToString();
+            _settings.ButtonsServiceConfig[9].ButtonText = txtButton10TextService.Text;
 
             #endregion
 
@@ -379,6 +511,11 @@ namespace hoTools.Settings.Toolbar
             if (sender == cmbService3) txtServiceTooltip3.Text = tooltip;
             if (sender == cmbService4) txtServiceTooltip4.Text = tooltip;
             if (sender == cmbService5) txtServiceTooltip5.Text = tooltip;
+            if (sender == cmbService6) txtServiceTooltip6.Text = tooltip;
+            if (sender == cmbService7) txtServiceTooltip7.Text = tooltip;
+            if (sender == cmbService8) txtServiceTooltip8.Text = tooltip;
+            if (sender == cmbService9) txtServiceTooltip9.Text = tooltip;
+            if (sender == cmbService10) txtServiceTooltip10.Text = tooltip;
 
 
         }
