@@ -68,12 +68,12 @@
     </Compile>
     <Compile Include="src\FileMonitor.cs" />
     <Compile Include="src\GuiFunction.cs" />
-    <Compile Include="src\IQueryGUI.cs" />
-    <Compile Include="src\QueryGUI.cs">
+    <Compile Include="src\ISqlGui.cs" />
+    <Compile Include="src\SqlGui.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="src\QueryGUI.Designer.cs">
-      <DependentUpon>QueryGUI.cs</DependentUpon>
+    <Compile Include="src\SqlGui.Designer.cs">
+      <DependentUpon>SqlGui.cs</DependentUpon>
     </Compile>
     <Compile Include="src\SqlFile.cs" />
     <Compile Include="src\SqlTabPagesCntrl.cs" />
@@ -110,8 +110,8 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Scripts.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="src\QueryGUI.resx">
-      <DependentUpon>QueryGUI.cs</DependentUpon>
+    <EmbeddedResource Include="src\SqlGui.resx">
+      <DependentUpon>SqlGui.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

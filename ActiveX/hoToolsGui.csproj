@@ -70,7 +70,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="src\ActiveX.cs">
+    <Compile Include="src\hoToolsGui.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="src\AddinGUI.cs">
@@ -123,8 +123,8 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="src\ActiveX.resx">
-      <DependentUpon>ActiveX.cs</DependentUpon>
+    <EmbeddedResource Include="src\hoToolsGui.resx">
+      <DependentUpon>hoToolsGui.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="src\SettingToolbar\FrmSettingsToolbar.resx">
       <DependentUpon>FrmSettingsToolbar.cs</DependentUpon>

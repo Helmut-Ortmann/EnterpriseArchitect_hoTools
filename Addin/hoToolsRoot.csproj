@@ -73,7 +73,7 @@
     </Compile>
     <Compile Include="src\About.Designer.cs" />
     <Compile Include="src\ea\EAAddinBasic.cs" />
-    <Compile Include="src\AddinClass.cs" />
+    <Compile Include="src\hoToolsRoot.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ActiveX\hoToolsGui.csproj">
