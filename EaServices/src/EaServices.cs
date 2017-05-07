@@ -416,7 +416,7 @@ namespace hoTools.EaServices
             "Select Diagram or Diagram Objects (see Settings.Json, 1. entry)", isTextRequired: false)]
         public static void DiagramObjectStyle1(EA.Repository rep)
         {
-            DiagramStyleWrapper(rep, 0);
+            DiagramObjectStyleWrapper(rep, 0);
         }
         /// <summary>
         /// Bulk change DiagramObject Styles 0 according to Settings.Json 
@@ -425,7 +425,7 @@ namespace hoTools.EaServices
             "Select Diagram or Diagram Objects (see Settings.Json, 2. entry)", isTextRequired: false)]
         public static void DiagramObjectStyle2(EA.Repository rep)
         {
-            DiagramStyleWrapper(rep, 1);
+            DiagramObjectStyleWrapper(rep, 1);
         }
         /// <summary>
         /// Bulk change DiagramObject Styles 0 according to Settings.Json 
@@ -434,7 +434,7 @@ namespace hoTools.EaServices
             "Select Diagram or Diagram Objects (see Settings.Json, 3. entry)", isTextRequired: false)]
         public static void DiagramObjectStyle3(EA.Repository rep)
         {
-            DiagramStyleWrapper(rep, 2);
+            DiagramObjectStyleWrapper(rep, 2);
         }
         /// <summary>
         /// Bulk change DiagramObject Styles 0 according to Settings.Json 
@@ -443,7 +443,7 @@ namespace hoTools.EaServices
             "Select Diagram or Diagram Objects (see Settings.Json, 4. entry)", isTextRequired: false)]
         public static void DiagramObjectStyle4(EA.Repository rep)
         {
-            DiagramStyleWrapper(rep, 3);
+            DiagramObjectStyleWrapper(rep, 3);
         }
         /// <summary>
         /// Bulk change DiagramObject Styles 0 according to Settings.Json 
