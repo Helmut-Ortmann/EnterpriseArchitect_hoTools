@@ -229,7 +229,13 @@ namespace EAAddinFramework.Utils
         /// <param name="style"></param>
         public static void SetDiagramObjectStyle(EA.Repository rep, EA.DiagramObject diaObject, string style)
         {
-            diaObject.Style = style.Replace(",", ";").Replace("   ","").Replace("  ", "").Replace(" ", "").Trim();
+            // preserve DUID Diagram Unit Identifier
+            string s = (string)diaObject.Style;
+            Match match = Regex.Match(s, @"DUID=[A-Z0-9a-z]+;");
+            string duid = "";
+            if (match.Success) duid = match.Groups[0].Value;
+
+            diaObject.Style = duid + style.Replace(",", ";").Replace("   ","").Replace("  ", "").Replace(" ", "").Trim();
             try
             {
                 diaObject.Update();
