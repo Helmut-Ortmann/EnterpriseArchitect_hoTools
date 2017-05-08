@@ -38,10 +38,10 @@
     <Folder Include="src" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ActiveX.dll.config" />
     <Content Include="Collect\Collect.bat" />
     <Content Include="License.rtf" />
     <Content Include="Settings.json" />
+    <Content Include="src\hoToolsGui.dll.config" />
     <Content Include="UserSearches.json" />
   </ItemGroup>
   <ItemGroup>

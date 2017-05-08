@@ -344,8 +344,8 @@
         
       
       <!-- Configuration  ActiveX.dll.config  -->
-      <Component Id="ActiveX.dll.config" Guid="357C0398-047E-4E8A-957C-C2F0607ED8E1">
-        <File Id="ActiveX.dll.config" Name="ActiveX.dll.config" KeyPath="yes" Source="..\Setup\ActiveX.dll.config" />
+      <Component Id="HoToolsGui.dll.config" Guid="0A3B18B4-1459-4748-8B5E-64F82E2310D7">
+        <File Id="HoToolsGui.dll.config" Name="HoToolsGui.dll.config" KeyPath="yes" Source="..\Setup\HoToolsGui.dll.config" />
       </Component>
       <!-- User Searches, copy them into the roaming folder of hoTools                                    -->
       <Component Id="UserSearches.json" Guid="FCF9AF3B-36BD-4EFC-8A7E-3129FB0D2E3B">
