@@ -7,6 +7,7 @@ using hoTools.hoToolsGui;
 using hoTools.EaServices.WiKiRefs;
 
 
+// ReSharper disable once CheckNamespace
 namespace hoTools.Find
 {
     /// <summary>

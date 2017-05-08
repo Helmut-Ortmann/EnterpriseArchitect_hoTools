@@ -3,26 +3,6 @@
   <folders />
   <favorites>
     <Favorite>
-      <name>ActiveX.cs</name>
-      <path>activex\src\activex.cs</path>
-      <absolutePath>d:\hodata\development\github\enterprisearchitect_hotools\activex\src\activex.cs</absolutePath>
-      <position>
-        <line>1</line>
-        <column>1</column>
-        <lineHash>+C3wS7Ft5DyHeLCyPV9r1wsaOWkxFdQYa1IzhmbnvNw=</lineHash>
-      </position>
-    </Favorite>
-    <Favorite>
-      <name>QueryGUI.cs</name>
-      <path>querygui\src\querygui.cs</path>
-      <absolutePath>d:\hodata\development\github\enterprisearchitect_hotools\querygui\src\querygui.cs</absolutePath>
-      <position>
-        <line>97</line>
-        <column>22</column>
-        <lineHash>Zv/ZvoFLBbcocj07QqCdt9IYYn5L//sfLnHMnPfoaHg=</lineHash>
-      </position>
-    </Favorite>
-    <Favorite>
       <name>SqlTabPagesCntrl.cs</name>
       <path>querygui\src\sqltabpagescntrl.cs</path>
       <absolutePath>d:\hodata\development\github\enterprisearchitect_hotools\querygui\src\sqltabpagescntrl.cs</absolutePath>
@@ -53,17 +33,6 @@
       </position>
     </Favorite>
     <Favorite>
-      <name>QueryGUI.cs [Design]</name>
-      <path>querygui\src\querygui.cs</path>
-      <absolutePath>d:\hodata\development\github\enterprisearchitect_hotools\querygui\src\querygui.cs</absolutePath>
-      <viewKind>7651a702-06e5-11d1-8ebd-00a0c90f26ea</viewKind>
-      <position>
-        <line>59</line>
-        <column>10</column>
-        <lineHash>xckYJ56bTkozVo0nvYj02iADPs48qxBKFCjQ7paffyM=</lineHash>
-      </position>
-    </Favorite>
-    <Favorite>
       <name>SqlError.cs</name>
       <path>Util\src\SqlError.cs</path>
       <absolutePath>D:\hoData\Development\GitHub\EnterpriseArchitect_hoTools\Util\src\SqlError.cs</absolutePath>
@@ -91,17 +60,6 @@
         <line>23</line>
         <column>5</column>
         <lineHash>uD0z6/4Gimz211bpZGlmR+7A0WzHv2T8Ocp9dpyO3XE=</lineHash>
-      </position>
-    </Favorite>
-    <Favorite>
-      <name>ActiveX.cs [Design]</name>
-      <path>activex\src\activex.cs</path>
-      <absolutePath>d:\hodata\development\github\enterprisearchitect_hotools\activex\src\activex.cs</absolutePath>
-      <viewKind>7651a702-06e5-11d1-8ebd-00a0c90f26ea</viewKind>
-      <position>
-        <line>2113</line>
-        <column>50</column>
-        <lineHash>farFJy5Vs3DOdcR0p8BnNIdIcEJcS2VKtPQD0XHgPSE=</lineHash>
       </position>
     </Favorite>
     <Favorite>

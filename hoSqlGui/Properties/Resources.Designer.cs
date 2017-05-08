@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace hoTools.hoSqlGuis.Properties {
+namespace hoTools.hoSqlGui.Properties {
     using System;
     
     

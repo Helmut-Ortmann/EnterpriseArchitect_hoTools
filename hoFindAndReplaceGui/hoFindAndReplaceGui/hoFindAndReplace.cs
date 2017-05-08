@@ -4,7 +4,6 @@ using System.Windows.Forms;
 using System.Drawing;
 using System.Text.RegularExpressions;
 
-// ReSharper disable once CheckNamespace
 namespace hoTools.Find
 {
     public class FindAndReplace
@@ -14,21 +13,21 @@ namespace hoTools.Find
          string _findString = "";
          string _replaceString = "";
          string[] _taggedValueNames;
-         bool _isRegularExpression;
-         bool _isCaseSensitive;
-         bool _isIgnoreWhiteSpace;
-         FindAndReplaceItem.FieldType _searchFieldTypes;
-         bool _isPackageSearch;
-         bool _isElementSearch;
-         bool _isDiagramSearch;
-         bool _isAttributeSearch;
-         bool _isOperationSearch;
-         bool _isTagSearch;
+        readonly bool _isRegularExpression;
+        readonly bool _isCaseSensitive;
+        readonly bool _isIgnoreWhiteSpace;
+        readonly FindAndReplaceItem.FieldType _searchFieldTypes;
+        readonly bool _isPackageSearch;
+        readonly bool _isElementSearch;
+        readonly bool _isDiagramSearch;
+        readonly bool _isAttributeSearch;
+        readonly bool _isOperationSearch;
+        readonly bool _isTagSearch;
          Regex _regExPattern;
          int _index = -1;
 
         // list of all items with loaded values, expected changes and values as loaded
-        private readonly List<FindAndReplaceItem> _l_items = new List<FindAndReplaceItem>();
+        private readonly List<FindAndReplaceItem> _lItems = new List<FindAndReplaceItem>();
 
         #region Constructor
         public FindAndReplace(EA.Repository rep, EA.Package pkg, string findString, 
@@ -85,7 +84,7 @@ namespace hoTools.Find
             get { return _pkg; }
             set { _pkg = value; }
         }
-        public List<FindAndReplaceItem> l_items => _l_items;
+        public List<FindAndReplaceItem> l_items => _lItems;
         public string findString
         {
             get { return _findString; }
@@ -130,41 +129,41 @@ namespace hoTools.Find
         {
             _index = -1;
             RecursivePackageFind.doRecursivePkg(_rep, _pkg,  this);
-            if (_l_items.Count > 0) {_index = 0;}
+            if (_lItems.Count > 0) {_index = 0;}
             //else {MessageBox.Show("No found element", String.Format("{0} elements found", _l_items.Count));}
         }
         #endregion
         #region FindNext
         public void FindNext()
         {
-            if (_l_items.Count == 0)
+            if (_lItems.Count == 0)
             {
                 _index = -1;
-                MessageBox.Show("No found element", String.Format("{0} elements found", _l_items.Count));
+                MessageBox.Show("No found element", String.Format("{0} elements found", _lItems.Count));
                 return;
             }
             _index = _index + 1;
-            if (_index >= _l_items.Count)
+            if (_index >= _lItems.Count)
             {
-                _index = _l_items.Count - 1;
-                MessageBox.Show("Last element found", String.Format("{0} elements found", _l_items.Count));
+                _index = _lItems.Count - 1;
+                MessageBox.Show("Last element found", String.Format("{0} elements found", _lItems.Count));
             }
         }
         #endregion
         #region FindPrevious
         public void FindPrevious()
         {
-            if (_l_items.Count == 0)
+            if (_lItems.Count == 0)
             {
                 _index = -1;
-                MessageBox.Show("No found element", String.Format("{0} elements found", _l_items.Count));
+                MessageBox.Show("No found element", String.Format("{0} elements found", _lItems.Count));
                 return;
             }
             _index = _index - 1;
             if (_index < 0)
             {
                 _index = 0;
-                MessageBox.Show("First element found", String.Format("{0} elements found", _l_items.Count));
+                MessageBox.Show("First element found", String.Format("{0} elements found", _lItems.Count));
             }
             
         }
@@ -179,7 +178,7 @@ namespace hoTools.Find
             }
             else
             {
-                FindAndReplaceItem frItem = _l_items[_index];
+                FindAndReplaceItem frItem = _lItems[_index];
                 frItem.locate(_rep);
             }
         }
@@ -188,7 +187,7 @@ namespace hoTools.Find
         public FindAndReplaceItem currentItem() 
         {
             if (this._index == 0) return null;
-            return this._l_items[_index];
+            return this._lItems[_index];
         }
         #endregion
         #region lastItem
@@ -206,7 +205,7 @@ namespace hoTools.Find
         public int ReplaceItem()
         {
             if (_index < 0) return 0;
-            FindAndReplaceItem item = _l_items[_index];// get item
+            FindAndReplaceItem item = _lItems[_index];// get item
             item.load(_rep);
             
             // search for name
@@ -252,11 +251,11 @@ namespace hoTools.Find
         public void ReplaceAll()
         {
             int indexOld = _index;
-            for (int i = 0; i < _l_items.Count; i= i+1 )
+            for (int i = 0; i < _lItems.Count; i= i+1 )
             {
                 _index = i;
                 // already changed
-                if (_l_items[_index].isUpdated) continue;
+                if (_lItems[_index].isUpdated) continue;
                 ReplaceItem();
                 LocateCurrentElement();
 
@@ -395,7 +394,7 @@ namespace hoTools.Find
         public string ItemShortDescription()
         {
             if (_index < 0) return "0\0";
-            return string.Format(@"{0}\{1}: {2}", _index+1, _l_items.Count, _l_items[_index]);
+            return string.Format(@"{0}\{1}: {2}", _index+1, _lItems.Count, _lItems[_index]);
         }
         #endregion
 

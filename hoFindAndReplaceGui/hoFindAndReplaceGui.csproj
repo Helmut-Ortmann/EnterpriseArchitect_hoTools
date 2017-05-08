@@ -60,45 +60,45 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Source\FindAndReplaceItem\FindAndReplaceItem.cs" />
-    <Compile Include="Source\FindAndReplaceItem\FindAndReplaceItemAttribute.cs" />
-    <Compile Include="Source\FindAndReplaceItem\FindAndReplaceItemMethod.cs" />
-    <Compile Include="Source\FindAndReplaceItem\FindAndReplaceItemDiagram.cs" />
-    <Compile Include="Source\FindAndReplaceItem\FindAndReplaceItemElement.cs" />
-    <Compile Include="Source\FindAndReplaceItem\FindAndReplaceItemPackage.cs" />
-    <Compile Include="Source\FindAndReplaceItem\FindAndReplaceItemTag.cs" />
-    <Compile Include="Source\GUI\FindAndReplaceGUI.cs">
+    <Compile Include="hoFindAndReplaceGui\FindAndReplaceItem\FindAndReplaceItem.cs" />
+    <Compile Include="hoFindAndReplaceGui\FindAndReplaceItem\FindAndReplaceItemAttribute.cs" />
+    <Compile Include="hoFindAndReplaceGui\FindAndReplaceItem\FindAndReplaceItemMethod.cs" />
+    <Compile Include="hoFindAndReplaceGui\FindAndReplaceItem\FindAndReplaceItemDiagram.cs" />
+    <Compile Include="hoFindAndReplaceGui\FindAndReplaceItem\FindAndReplaceItemElement.cs" />
+    <Compile Include="hoFindAndReplaceGui\FindAndReplaceItem\FindAndReplaceItemPackage.cs" />
+    <Compile Include="hoFindAndReplaceGui\FindAndReplaceItem\FindAndReplaceItemTag.cs" />
+    <Compile Include="hoFindAndReplaceGui\GUI\FindAndReplaceGUI.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Source\GUI\FindAndReplaceGUI.Designer.cs">
+    <Compile Include="hoFindAndReplaceGui\GUI\FindAndReplaceGUI.Designer.cs">
       <DependentUpon>FindAndReplaceGUI.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Source\FindAndReplace.cs" />
-    <Compile Include="Source\GUI\IFindAndReplaceGUI.cs" />
-    <Compile Include="Source\RecursivePackagesFind.cs" />
-    <Compile Include="Source\GUI\RegularExpression.cs">
+    <Compile Include="hoFindAndReplaceGui\hoFindAndReplace.cs" />
+    <Compile Include="hoFindAndReplaceGui\GUI\IFindAndReplaceGUI.cs" />
+    <Compile Include="hoFindAndReplaceGui\RecursivePackagesFind.cs" />
+    <Compile Include="hoFindAndReplaceGui\GUI\RegularExpression.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Source\GUI\RegularExpression.Designer.cs">
+    <Compile Include="hoFindAndReplaceGui\GUI\RegularExpression.Designer.cs">
       <DependentUpon>RegularExpression.cs</DependentUpon>
     </Compile>
-    <Compile Include="Source\GUI\ShowAndChangeItemGUI.cs">
+    <Compile Include="hoFindAndReplaceGui\GUI\ShowAndChangeItemGUI.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Source\GUI\ShowAndChangeItemGUI.Designer.cs">
+    <Compile Include="hoFindAndReplaceGui\GUI\ShowAndChangeItemGUI.Designer.cs">
       <DependentUpon>ShowAndChangeItemGUI.cs</DependentUpon>
     </Compile>
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Source\GUI\FindAndReplaceGUI.resx">
+    <EmbeddedResource Include="hoFindAndReplaceGui\GUI\FindAndReplaceGUI.resx">
       <DependentUpon>FindAndReplaceGUI.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Source\GUI\RegularExpression.resx">
+    <EmbeddedResource Include="hoFindAndReplaceGui\GUI\RegularExpression.resx">
       <DependentUpon>RegularExpression.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Source\GUI\ShowAndChangeItemGUI.resx">
+    <EmbeddedResource Include="hoFindAndReplaceGui\GUI\ShowAndChangeItemGUI.resx">
       <DependentUpon>ShowAndChangeItemGUI.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
@@ -115,10 +115,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="hoKeyPair.snk" />
-    <None Include="Source\Diagrams\Find.cd" />
-    <None Include="Source\Diagrams\Overview.cd" />
-    <None Include="Source\Diagrams\RecursiveSearch.cd" />
-    <None Include="Source\Diagrams\TaggedValue.cd" />
+    <None Include="hoFindAndReplaceGui\Diagrams\Find.cd" />
+    <None Include="hoFindAndReplaceGui\Diagrams\Overview.cd" />
+    <None Include="hoFindAndReplaceGui\Diagrams\RecursiveSearch.cd" />
+    <None Include="hoFindAndReplaceGui\Diagrams\TaggedValue.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

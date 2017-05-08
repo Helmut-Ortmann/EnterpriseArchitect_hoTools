@@ -19,7 +19,7 @@ namespace hoTools.Settings.Key
     public partial class FrmSettingsKey : Form
     {
         readonly AddinSettings _settings;
-        readonly AddinControlGui _addinControl ;
+        readonly HoToolsGui _hoToolsGui ;
         private readonly Model _model;
 
         #region Constructor
@@ -27,14 +27,14 @@ namespace hoTools.Settings.Key
         /// Constructor with
         /// </summary>
         /// <param name="settings">Object with settings</param>
-        /// <param name="addinControl">Object with Control</param>
-        public FrmSettingsKey(AddinSettings settings, AddinControlGui addinControl)
+        /// <param name="hoToolsGui">Object with Control</param>
+        public FrmSettingsKey(AddinSettings settings, HoToolsGui hoToolsGui)
         {
             InitializeComponent();
 
             _settings = settings;
-            _addinControl = addinControl;
-            _model = addinControl.Model;
+            _hoToolsGui = hoToolsGui;
+            _model = hoToolsGui.Model;
 
             
 
@@ -416,12 +416,12 @@ namespace hoTools.Settings.Key
 
             SaveSearch();
 
-            _addinControl.ParameterizeMenusAndButtons(); // hide / unhide Menus & Buttons
+            _hoToolsGui.ParameterizeMenusAndButtons(); // hide / unhide Menus & Buttons
 
             _settings.UpdateKeysAndToolbarsServices(); // update dynamic informations like method, texts from configuration
 
-            _addinControl.ParameterizeToolbarSearchButton(); // sets the SearchButtoms
-            _addinControl.ParameterizeToolbarServiceButton(); // sets the ServiceButtons
+            _hoToolsGui.ParameterizeToolbarSearchButton(); // sets the SearchButtoms
+            _hoToolsGui.ParameterizeToolbarServiceButton(); // sets the ServiceButtons
 
 
             _settings.Save();

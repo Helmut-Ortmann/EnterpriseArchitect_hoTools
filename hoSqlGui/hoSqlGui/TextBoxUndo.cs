@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace hoTools.hoSqlGuis
+namespace hoTools.hoSqlGui
 {
     /// <summary>
     /// Text Box with UnDo/ReDo functionality by

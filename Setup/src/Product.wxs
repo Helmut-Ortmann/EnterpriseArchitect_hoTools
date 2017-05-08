@@ -13,9 +13,9 @@
          A new Assembly Version requires a new DLL-Registration
       3. Product ID is handled by WIX
       4. Check ActivreX.dll.config (configuration) in:
-         - ..\setup\ActiveX.dll.config
-         - AddinClass\bin\debug\ActiveX.dll.config (only debug)
-         (details in file ActiveX.dll.config). 
+         - ..\setup\hoToolsGui.dll.config
+         - AddinClass\bin\debug\hoToolsGui.dll.config (only debug)
+         (details in file hoToolsGui.dll.config). 
      
  -->
   <!-- Also: Update AssemblyFileVersion in AddinClass AssemblyInfo.cs properties !!!

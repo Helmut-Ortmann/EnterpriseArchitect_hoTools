@@ -5,7 +5,7 @@ using System.Threading;
 using FileSystem;
 
 
-namespace hoTools.hoSqlGuis
+namespace hoTools.hoSqlGui
 {
     /// <summary>
     /// Information of a *.sql file:

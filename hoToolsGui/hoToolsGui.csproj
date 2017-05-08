@@ -110,8 +110,8 @@
     </Compile>
     <Compile Include="src\Keys.cs" />
     <Compile Include="src\Settings.cs" />
-    <Compile Include="src\IActiveX.cs" />
-    <Compile Include="src\IActiveXSafety.cs" />
+    <Compile Include="src\IHoToolsGui.cs" />
+    <Compile Include="src\IHoToolsSafety.cs" />
     <Compile Include="src\SettingsGeneral\FrmSettingsGeneral.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Runtime.InteropServices;
 
+// ReSharper disable once CheckNamespace
 namespace hoTools.hoToolsGui
 {
     [ComImport]

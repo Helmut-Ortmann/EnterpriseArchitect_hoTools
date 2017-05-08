@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using hoTools.Utils.Favorites;
 using hoTools.hoToolsGui;
 using hoTools.Settings;
-using hoTools.hoSqlGuis;
+using hoTools.hoSqlGui;
 
 using hoTools.EaServices;
 using hoTools.Utils;
@@ -27,8 +27,8 @@ using File = System.IO.File;
 //Tools developed by Helmut Ortmann
 //---------------------------------------------------------------
 //Configuration:
-//hoTools:    ..\Setup\ActiveXdll.config.xml 
-//VAR1:        ..\SetpVAR1\ActiveXdll.config.xml 
+//hoTools:    ..\Setup\HoToolsGui.dll.config.xml 
+//VAR1:        ..\SetpVAR1\HoToolsGui.dll.config.xml 
 //
 //Customer=hoTools: "14F09211-3460-47A6-B837-A477491F0A67"
 //         VAR1:    "F52AB09A-8ED0-4159-9AB4-FFD986983280"
@@ -43,7 +43,7 @@ using File = System.IO.File;
 //1. Build in release mode        (only once to establish correct configuration)
 //2. (De)Install Addin            (only once to establish correct configuration)
 //3. Rebuild in debug mode
-//4. Copy the correct ActiveXdll.config.xml into the ..\AddinClass\src\.. !!
+//4. Copy the correct HoToolsGui.dll.config.xml into the ..\AddinClass\src\.. !!
 //5. Possibly delete old config file (%APPDATA%ho\hoTools or %APPDATA%ho\hoTools_VAR1)
 //---------------------------------------------------------------
 #endregion
@@ -53,8 +53,7 @@ namespace hoTools
     /// <summary>
     /// The main Addin class which calls the other tasks
     /// </summary>
-    // ReSharper disable once UnusedMember.Global
-    public class hoToolsRoot : EAAddinFramework.EAAddinBase
+    public class HoToolsRoot : EAAddinFramework.EAAddinBase
     {
         // Overwritten by AdinClass AssemblyFileVersion
         // This should be identical to installed product version from WIX installer (ProductVersion)
@@ -67,20 +66,20 @@ namespace hoTools
         // ReSharper disable once InconsistentNaming
         static AddinSettings _AddinSettings;
         // ReSharper disable once InconsistentNaming
-        static AddinControlGui _AddinControlGui;
+        static HoToolsGui _HoToolsGui;
         // ReSharper disable once InconsistentNaming
         static FindAndReplaceGUI _FindAndReplaceGUI;
         // ReSharper disable once InconsistentNaming
-        static hoSqlGui _ScriptGUI;
+        static HoSqlGui _ScriptGUI;
         // ReSharper disable once InconsistentNaming
-        static hoSqlGui _HoSqlGui;
+        static HoSqlGui _HoSqlGui;
         static ExtensionGui _extensionGui2;
 
         // ActiveX Controls
-        AddinControlGui _myControlGui; // hoTools main window
+        HoToolsGui _myControlGui; // hoTools main window
         FindAndReplaceGUI _findAndReplaceGui;
-        hoSqlGui _scriptGui;
-        hoSqlGui _hoSqlGui;
+        HoSqlGui _scriptGui;
+        HoSqlGui _hoSqlGui;
         ExtensionGui _extensionGui;
 
         private static Model _model;        // to run SQL query file from global key
@@ -146,7 +145,7 @@ namespace hoTools
         /// <summary>
         /// Constructor: Reade settings, set the menu header and menuOptions
         /// </summary>
-        public hoToolsRoot()
+        public HoToolsRoot()
         {
             try
             {
@@ -321,7 +320,7 @@ namespace hoTools
                 {
                     GlobalKeysConfigService keyConfigService = keyConfig as GlobalKeysConfigService;
                     if (keyConfigService.Method == null) return;
-                    keyConfigService.Invoke(_model, _AddinControlGui.GetText());
+                    keyConfigService.Invoke(_model, _HoToolsGui.GetText());
                 }
                 if (keyConfig is GlobalKeysConfigScript)
                 {
@@ -1101,11 +1100,11 @@ namespace hoTools
                     // LineStyle and more
                     if (_addinSettings.LineStyleAndMoreWindow != AddinSettings.ShowInWindow.Disabled)
                     {
-                        _AddinControlGui = AddAddinControl<AddinControlGui>(
+                        _HoToolsGui = AddAddinControl<HoToolsGui>(
                             _addinSettings.ProductName, // Tab Name
-                            AddinControlGui.Progid, null,
+                            HoToolsGui.Progid, null,
                             AddinSettings.ShowInWindow.AddinWindow);
-                        _myControlGui = _AddinControlGui; // static + instance
+                        _myControlGui = _HoToolsGui; // static + instance
                     }
                 }
                 catch (Exception e)
@@ -1136,8 +1135,8 @@ namespace hoTools
                     if (_addinSettings.OnlyQueryWindow != AddinSettings.ShowInWindow.Disabled)
                     {
                         // Run as Query
-                        _hoSqlGui = AddAddinControl<hoSqlGuis.hoSqlGui>(hoSqlGuis.hoSqlGui.TabulatorSql,
-                            hoSqlGuis.hoSqlGui.Progid, hoSqlGuis.hoSqlGui.TabulatorSql,
+                        _hoSqlGui = AddAddinControl<hoSqlGui.HoSqlGui>(hoSqlGui.HoSqlGui.TabulatorSql,
+                            hoSqlGui.HoSqlGui.Progid, hoSqlGui.HoSqlGui.TabulatorSql,
                             _addinSettings.OnlyQueryWindow);
                         _HoSqlGui = _hoSqlGui; // static + instance
                     }
@@ -1153,8 +1152,8 @@ namespace hoTools
                     if (_addinSettings.ScriptAndQueryWindow != AddinSettings.ShowInWindow.Disabled)
                     {
                         // Run as Script
-                        _ScriptGUI = AddAddinControl<hoSqlGuis.hoSqlGui>(hoSqlGuis.hoSqlGui.TabulatorScript, 
-                            hoSqlGuis.hoSqlGui.Progid, hoSqlGuis.hoSqlGui.TabulatorScript, 
+                        _ScriptGUI = AddAddinControl<hoSqlGui.HoSqlGui>(hoSqlGui.HoSqlGui.TabulatorScript, 
+                            hoSqlGui.HoSqlGui.Progid, hoSqlGui.HoSqlGui.TabulatorScript, 
                             _addinSettings.ScriptAndQueryWindow);
                     _scriptGui = _ScriptGUI; // static + instance
                     }

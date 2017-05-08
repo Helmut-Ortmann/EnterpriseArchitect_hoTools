@@ -6,8 +6,8 @@ using hoTools;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("ActiveX")]
-[assembly: AssemblyDescription("ActiveX of hoTools")]
+[assembly: AssemblyTitle("hoToolsGui")]
+[assembly: AssemblyDescription("hoToolsGui of hoTools")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Helmut Ortmann")]
 [assembly: AssemblyProduct("hoTools")]

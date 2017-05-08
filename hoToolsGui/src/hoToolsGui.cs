@@ -24,7 +24,7 @@ using DiagramStyle = EAAddinFramework.Utils.DiagramStyle;
 using DiagramStyleItem = EAAddinFramework.Utils.DiagramStyleItem;
 
 
-// ReSharper disable once CheckNamespace
+
 namespace hoTools.hoToolsGui
 {
 
@@ -32,9 +32,9 @@ namespace hoTools.hoToolsGui
     [ClassInterface(ClassInterfaceType.None)]
     [Guid("82A06E9C-7568-4E4B-8D2C-A53B8D9A7272")]
     [ProgId("hoTools.hoToolsGui")]
-    [ComDefaultInterface(typeof(IAddinControl))]
+    [ComDefaultInterface(typeof(IHoToolsGui))]
 
-    public class AddinControlGui : AddinGui, IAddinControl
+    public class HoToolsGui : AddinGui, IHoToolsGui
     {
         public const string Progid = "hoTools.hoToolsGui";
 
@@ -223,11 +223,16 @@ namespace hoTools.hoToolsGui
         private ToolStripMenuItem settingsDiagramStylesToolStripMenuItem;
         private ToolStripSeparator toolStripSeparator11;
         private ToolStripSeparator toolStripSeparator12;
+        private ToolStripButton _toolStripServiceBtn6;
+        private ToolStripButton _toolStripServiceBtn7;
+        private ToolStripButton _toolStripServiceBtn8;
+        private ToolStripButton _toolStripServiceBtn9;
+        private ToolStripButton _toolStripServiceBtn10;
         private TextBox _txtSearchText;
         #endregion
 
         #region Constructor
-        public AddinControlGui()
+        public HoToolsGui()
         {
             try
             {
@@ -263,7 +268,7 @@ namespace hoTools.hoToolsGui
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show(e.ToString(), @"ActiveX: Error Initialization");
+                    MessageBox.Show(e.ToString(), @"hoToolsRoot: Error Initialization");
                 }
 
             }
@@ -333,7 +338,7 @@ namespace hoTools.hoToolsGui
         #endregion
 
         #region IActiveX Members
-        public string getName() => "hoTools.AddinControl";
+        public string GetName() => "hoTools.AddinControl";
 
 
         #endregion
@@ -556,6 +561,26 @@ namespace hoTools.hoToolsGui
         void toolStripServiceBtn5_Click(object sender, EventArgs e)
         {
             RunService(4);
+        }
+        void toolStripServiceBtn6_Click(object sender, EventArgs e)
+        {
+            RunService(5);
+        }
+        void toolStripServiceBtn7_Click(object sender, EventArgs e)
+        {
+            RunService(6);
+        }
+        void toolStripServiceBtn8_Click(object sender, EventArgs e)
+        {
+            RunService(7);
+        }
+        void toolStripServiceBtn9_Click(object sender, EventArgs e)
+        {
+            RunService(8);
+        }
+        void toolStripServiceBtn10_Click(object sender, EventArgs e)
+        {
+            RunService(9);
         }
 
         void toolStripSearchBtn1_Click(object sender, EventArgs e)
@@ -1146,7 +1171,7 @@ namespace hoTools.hoToolsGui
         void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddinControlGui));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HoToolsGui));
             this._toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this._toolStripQuery = new System.Windows.Forms.ToolStrip();
             this._toolStripSearchBtn1 = new System.Windows.Forms.ToolStripButton();
@@ -1160,6 +1185,11 @@ namespace hoTools.hoToolsGui
             this._toolStripServiceBtn3 = new System.Windows.Forms.ToolStripButton();
             this._toolStripServiceBtn4 = new System.Windows.Forms.ToolStripButton();
             this._toolStripServiceBtn5 = new System.Windows.Forms.ToolStripButton();
+            this._toolStripServiceBtn6 = new System.Windows.Forms.ToolStripButton();
+            this._toolStripServiceBtn7 = new System.Windows.Forms.ToolStripButton();
+            this._toolStripServiceBtn8 = new System.Windows.Forms.ToolStripButton();
+            this._toolStripServiceBtn9 = new System.Windows.Forms.ToolStripButton();
+            this._toolStripServiceBtn10 = new System.Windows.Forms.ToolStripButton();
             this._toolTip = new System.Windows.Forms.ToolTip(this.components);
             this._txtSearchText = new System.Windows.Forms.TextBox();
             this._contextMenuStripSearch = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -1356,7 +1386,12 @@ namespace hoTools.hoToolsGui
             this._toolStripServiceBtn2,
             this._toolStripServiceBtn3,
             this._toolStripServiceBtn4,
-            this._toolStripServiceBtn5});
+            this._toolStripServiceBtn5,
+            this._toolStripServiceBtn6,
+            this._toolStripServiceBtn7,
+            this._toolStripServiceBtn8,
+            this._toolStripServiceBtn9,
+            this._toolStripServiceBtn10});
             this._toolStripQuery.Name = "_toolStripQuery";
             // 
             // _toolStripSearchBtn1
@@ -1433,6 +1468,41 @@ namespace hoTools.hoToolsGui
             resources.ApplyResources(this._toolStripServiceBtn5, "_toolStripServiceBtn5");
             this._toolStripServiceBtn5.Name = "_toolStripServiceBtn5";
             this._toolStripServiceBtn5.Click += new System.EventHandler(this.toolStripServiceBtn5_Click);
+            // 
+            // _toolStripServiceBtn6
+            // 
+            this._toolStripServiceBtn6.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            resources.ApplyResources(this._toolStripServiceBtn6, "_toolStripServiceBtn6");
+            this._toolStripServiceBtn6.Name = "_toolStripServiceBtn6";
+            this._toolStripServiceBtn6.Click += new System.EventHandler(this.toolStripServiceBtn6_Click);
+            // 
+            // _toolStripServiceBtn7
+            // 
+            this._toolStripServiceBtn7.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            resources.ApplyResources(this._toolStripServiceBtn7, "_toolStripServiceBtn7");
+            this._toolStripServiceBtn7.Name = "_toolStripServiceBtn7";
+            this._toolStripServiceBtn7.Click += new System.EventHandler(this.toolStripServiceBtn7_Click);
+            // 
+            // _toolStripServiceBtn8
+            // 
+            this._toolStripServiceBtn8.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            resources.ApplyResources(this._toolStripServiceBtn8, "_toolStripServiceBtn8");
+            this._toolStripServiceBtn8.Name = "_toolStripServiceBtn8";
+            this._toolStripServiceBtn8.Click += new System.EventHandler(this.toolStripServiceBtn8_Click);
+            // 
+            // _toolStripServiceBtn9
+            // 
+            this._toolStripServiceBtn9.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            resources.ApplyResources(this._toolStripServiceBtn9, "_toolStripServiceBtn9");
+            this._toolStripServiceBtn9.Name = "_toolStripServiceBtn9";
+            this._toolStripServiceBtn9.Click += new System.EventHandler(this.toolStripServiceBtn9_Click);
+            // 
+            // _toolStripServiceBtn10
+            // 
+            this._toolStripServiceBtn10.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            resources.ApplyResources(this._toolStripServiceBtn10, "_toolStripServiceBtn10");
+            this._toolStripServiceBtn10.Name = "_toolStripServiceBtn10";
+            this._toolStripServiceBtn10.Click += new System.EventHandler(this.toolStripServiceBtn10_Click);
             // 
             // _txtSearchText
             // 
@@ -2531,7 +2601,7 @@ namespace hoTools.hoToolsGui
             resources.ApplyResources(this._panelConveyedItems, "_panelConveyedItems");
             this._panelConveyedItems.Name = "_panelConveyedItems";
             // 
-            // AddinControlGui
+            // HoToolsGui
             // 
             resources.ApplyResources(this, "$this");
             this.Controls.Add(this._rtfListOfSearches);
@@ -2546,7 +2616,7 @@ namespace hoTools.hoToolsGui
             this.Controls.Add(this._panelQuickSearch);
             this.Controls.Add(this._panelButtons);
             this.Controls.Add(this._menuStrip1);
-            this.Name = "AddinControlGui";
+            this.Name = "HoToolsGui";
             this.Resize += new System.EventHandler(this.AddinControlGui_Resize);
             this._toolStripContainer1.TopToolStripPanel.ResumeLayout(false);
             this._toolStripContainer1.TopToolStripPanel.PerformLayout();
@@ -2845,11 +2915,11 @@ namespace hoTools.hoToolsGui
             _toolStripServiceBtn3.Visible = AddinSettings.IsShowServiceButton;
             _toolStripServiceBtn4.Visible = AddinSettings.IsShowServiceButton;
             _toolStripServiceBtn5.Visible = AddinSettings.IsShowServiceButton;
-            //_toolStripServiceBtn6.Visible = AddinSettings.IsShowServiceButton;
-            //_toolStripServiceBtn7.Visible = AddinSettings.IsShowServiceButton;
-            //_toolStripServiceBtn8.Visible = AddinSettings.IsShowServiceButton;
-            //_toolStripServiceBtn9.Visible = AddinSettings.IsShowServiceButton;
-            //_toolStripServiceBtn10.Visible = AddinSettings.IsShowServiceButton;
+            _toolStripServiceBtn6.Visible = AddinSettings.IsShowServiceButton;
+            _toolStripServiceBtn7.Visible = AddinSettings.IsShowServiceButton;
+            _toolStripServiceBtn8.Visible = AddinSettings.IsShowServiceButton;
+            _toolStripServiceBtn9.Visible = AddinSettings.IsShowServiceButton;
+            _toolStripServiceBtn10.Visible = AddinSettings.IsShowServiceButton;
 
             for (int pos = 0; pos < AddinSettings.ButtonsServiceConfig.Count; pos++)
             {
@@ -2900,6 +2970,31 @@ namespace hoTools.hoToolsGui
                         _toolStripServiceBtn5.Visible = !empty;
                         _toolStripServiceBtn5.Text = buttonText; 
                         _toolStripServiceBtn5.ToolTipText = helpText;
+                        break;
+                    case 5:
+                        _toolStripServiceBtn6.Visible = !empty;
+                        _toolStripServiceBtn6.Text = buttonText;
+                        _toolStripServiceBtn6.ToolTipText = helpText;
+                        break;
+                    case 6:
+                        _toolStripServiceBtn7.Visible = !empty;
+                        _toolStripServiceBtn7.Text = buttonText;
+                        _toolStripServiceBtn7.ToolTipText = helpText;
+                        break;
+                    case 7:
+                        _toolStripServiceBtn8.Visible = !empty;
+                        _toolStripServiceBtn8.Text = buttonText;
+                        _toolStripServiceBtn8.ToolTipText = helpText;
+                        break;
+                    case 8:
+                        _toolStripServiceBtn9.Visible = !empty;
+                        _toolStripServiceBtn9.Text = buttonText;
+                        _toolStripServiceBtn9.ToolTipText = helpText;
+                        break;
+                    case 9:
+                        _toolStripServiceBtn10.Visible = !empty;
+                        _toolStripServiceBtn10.Text = buttonText;
+                        _toolStripServiceBtn10.ToolTipText = helpText;
                         break;
 
                 }

@@ -1,7 +1,7 @@
 ﻿
-namespace hoTools.hoSqlGuis
+namespace hoTools.hoSqlGui
 {
-    partial class hoSqlGui
+    partial class HoSqlGui
     {
         /// <summary> 
         /// Required designer variable.
@@ -30,7 +30,7 @@ namespace hoTools.hoSqlGuis
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(hoSqlGui));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HoSqlGui));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -305,7 +305,7 @@ namespace hoTools.hoSqlGuis
             // btnUndo
             // 
             this.btnUndo.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnUndo.Image = global::hoTools.hoSqlGuis.Properties.Resources.icon_undo_h;
+            this.btnUndo.Image = global::hoTools.hoSqlGui.Properties.Resources.icon_undo_h;
             this.btnUndo.Location = new System.Drawing.Point(189, 0);
             this.btnUndo.Margin = new System.Windows.Forms.Padding(0);
             this.btnUndo.Name = "btnUndo";
@@ -318,7 +318,7 @@ namespace hoTools.hoSqlGuis
             // btnRedo
             // 
             this.btnRedo.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnRedo.Image = global::hoTools.hoSqlGuis.Properties.Resources.icon_redo_h;
+            this.btnRedo.Image = global::hoTools.hoSqlGui.Properties.Resources.icon_redo_h;
             this.btnRedo.Location = new System.Drawing.Point(222, 1);
             this.btnRedo.Margin = new System.Windows.Forms.Padding(1);
             this.btnRedo.Name = "btnRedo";
@@ -764,7 +764,7 @@ namespace hoTools.hoSqlGuis
             this.AutoSize = true;
             this.Controls.Add(this.splitContainer);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Name = "hoSqlGui";
+            this.Name = "HoSqlGui";
             this.Size = new System.Drawing.Size(769, 538);
             this.Resize += new System.EventHandler(this.QueryGUI_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewScripts)).EndInit();

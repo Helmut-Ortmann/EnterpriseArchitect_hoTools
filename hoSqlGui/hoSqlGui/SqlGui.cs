@@ -20,11 +20,7 @@ using EA;
 using hoTools.EaServices.WiKiRefs;
 using hoTools.Utils.Excel;
 
-// Resource Manager
-
-
-
-namespace hoTools.hoSqlGuis
+namespace hoTools.hoSqlGui
 {
 
 
@@ -38,8 +34,8 @@ namespace hoTools.hoSqlGuis
     [ClassInterface(ClassInterfaceType.None)]
     [Guid("3F23B705-62F1-43D7-9F6F-085105FDF752")]
     [ProgId(Progid)]
-    [ComDefaultInterface(typeof(IQueryGui))]
-    public partial class hoSqlGui : AddinGui, IQueryGui
+    [ComDefaultInterface(typeof(IHoSqlGui))]
+    public partial class HoSqlGui : AddinGui, IHoSqlGui
     {
         public const string Progid = "hoTools.sqlGui";
         public const string TabulatorScript = "Script";
@@ -86,7 +82,7 @@ namespace hoTools.hoSqlGuis
         /// The real initialization is done after Setting the Repository in setter of property:
         /// 'Repository'
         /// </summary>
-        public hoSqlGui()
+        public HoSqlGui()
         {
             InitializeComponent();
 

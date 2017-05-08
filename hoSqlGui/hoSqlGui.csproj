@@ -69,18 +69,18 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Scripts.resx</DependentUpon>
     </Compile>
-    <Compile Include="src\FileMonitor.cs" />
-    <Compile Include="src\GuiFunction.cs" />
-    <Compile Include="src\ISqlGui.cs" />
-    <Compile Include="src\SqlGui.cs">
+    <Compile Include="hoSqlGui\FileMonitor.cs" />
+    <Compile Include="hoSqlGui\GuiFunction.cs" />
+    <Compile Include="hoSqlGui\ISqlGui.cs" />
+    <Compile Include="hoSqlGui\SqlGui.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="src\SqlGui.Designer.cs">
+    <Compile Include="hoSqlGui\SqlGui.Designer.cs">
       <DependentUpon>SqlGui.cs</DependentUpon>
     </Compile>
-    <Compile Include="src\SqlFile.cs" />
-    <Compile Include="src\SqlTabPagesCntrl.cs" />
-    <Compile Include="src\TextBoxUndo.cs">
+    <Compile Include="hoSqlGui\SqlFile.cs" />
+    <Compile Include="hoSqlGui\SqlTabPagesCntrl.cs" />
+    <Compile Include="hoSqlGui\TextBoxUndo.cs">
       <SubType>Component</SubType>
     </Compile>
   </ItemGroup>
@@ -113,7 +113,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Scripts.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="src\SqlGui.resx">
+    <EmbeddedResource Include="hoSqlGui\SqlGui.resx">
       <DependentUpon>SqlGui.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>

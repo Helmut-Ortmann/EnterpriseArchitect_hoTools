@@ -26,6 +26,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Collect\hoExtensionGui.wxs" />
+    <Compile Include="Collect\hoFindAndReplaceGui.wxs" />
     <Compile Include="Collect\hoSqlGui.wxs" />
     <Compile Include="Collect\hoToolsGui.wxs" />
     <Compile Include="Collect\hoToolsRoot.wxs" />

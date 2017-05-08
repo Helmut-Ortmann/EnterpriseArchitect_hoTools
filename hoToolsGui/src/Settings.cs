@@ -18,11 +18,11 @@ namespace hoTools.Settings
 {
     /// <summary>
     /// Settings for hoTools.
-    /// It merges default settings (ActiveX.dll.config) with current settings in install directory to the current settings. 
+    /// It merges default settings (hoToolsGui.dll.config) with current settings in install directory to the current settings. 
     /// </summary>
     /// <code>
-    /// Default:         ..\Addin\ActiveX.dll.config   with copy to output directory       
-    /// Current Debug:   Addin\ActiveX.dll.config      (With copy to output directory) 
+    /// Default:         ..\Addin\AhoToolsGuictiveX.dll.config   with copy to output directory       
+    /// Current Debug:   Addin\hoToolsGui.dll.config      (With copy to output directory) 
     /// Current Release: APPData\Local\Apps\hoTools\   (App DLL-Install library) 
     /// </code>
     public class AddinSettings
@@ -73,7 +73,7 @@ namespace hoTools.Settings
 
         /// <summary>
         /// Configuration delivered with the installation in the install directory
-        /// <para/>c:\Users\user\AppData\Local\Apps\hoTools\ActiveX.dll.config
+        /// <para/>c:\Users\user\AppData\Local\Apps\hoTools\hoToolsGui.dll.config
         /// </summary>
         private Configuration DefaultConfig { get; set; }
 

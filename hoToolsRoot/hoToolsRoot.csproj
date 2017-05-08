@@ -71,12 +71,12 @@
   <ItemGroup>
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="src\About.cs">
+    <Compile Include="hoToolsRoot\About.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="src\About.Designer.cs" />
-    <Compile Include="src\ea\EAAddinBasic.cs" />
-    <Compile Include="src\hoToolsRoot.cs" />
+    <Compile Include="hoToolsRoot\About.Designer.cs" />
+    <Compile Include="hoToolsRoot\ea\EAAddinBasic.cs" />
+    <Compile Include="hoToolsRoot\hoToolsRoot.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\hoExtensionGui\hoExtensionGui.csproj">
@@ -109,7 +109,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="src\About.resx" />
+    <EmbeddedResource Include="hoToolsRoot\About.resx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="hoToolsBasic.xml">

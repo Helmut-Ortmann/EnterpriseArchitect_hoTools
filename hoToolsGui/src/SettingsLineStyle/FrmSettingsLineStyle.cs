@@ -15,20 +15,20 @@ namespace hoTools.Settings
     public partial class FrmSettingsLineStyle : Form
     {   
         AddinSettings _settings;
-        AddinControlGui _addinControl;
+        HoToolsGui _hoToolsGui;
 
         #region Constructor
         /// <summary>
         /// Constructor with
         /// </summary>
         /// <param name="settings">Object with settings</param>
-        /// <param name="addinControl">Object with Control</param>
-        public FrmSettingsLineStyle(AddinSettings settings, AddinControlGui addinControl)
+        /// <param name="hoToolsGui">Object with Control</param>
+        public FrmSettingsLineStyle(AddinSettings settings, HoToolsGui hoToolsGui)
         {
             InitializeComponent();
 
             _settings = settings;
-            _addinControl = addinControl;
+            _hoToolsGui = hoToolsGui;
 
           
             #region line style

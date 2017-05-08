@@ -61,7 +61,7 @@ namespace hoTools.Settings.Toolbar
             @"Every service has a tooltip. This Tooltip is visualized here and later on the Service Button";
 
         readonly AddinSettings _settings;
-        readonly AddinControlGui _addinControl;
+        readonly HoToolsGui _hoToolsGui;
         readonly Model _model;
 
         #region Constructor
@@ -70,14 +70,14 @@ namespace hoTools.Settings.Toolbar
         /// Constructor with
         /// </summary>
         /// <param name="settings">Object with settings</param>
-        /// <param name="addinControl">Object with Control</param>
-        public FrmSettingsToolbar(AddinSettings settings, AddinControlGui addinControl)
+        /// <param name="hoToolsGui">Object with Control</param>
+        public FrmSettingsToolbar(AddinSettings settings, HoToolsGui hoToolsGui)
         {
             InitializeComponent();
 
             _settings = settings;
-            _addinControl = addinControl;
-            _model = addinControl.Model;
+            _hoToolsGui = hoToolsGui;
+            _model = hoToolsGui.Model;
 
         }
         #endregion
@@ -479,12 +479,12 @@ namespace hoTools.Settings.Toolbar
 
             #endregion
 
-            _addinControl.ParameterizeMenusAndButtons(); // hide / unhide Menus & Buttons
+            _hoToolsGui.ParameterizeMenusAndButtons(); // hide / unhide Menus & Buttons
                                                          // Toolbar
             _settings.UpdateKeysAndToolbarsServices(); // update dynamic informations like method, texts from configuration
 
-            _addinControl.ParameterizeToolbarSearchButton(); // sets the EA Model Search Buttons on Toolbar
-            _addinControl.ParameterizeToolbarServiceButton(); // sets the Services Buttons on Toolbar
+            _hoToolsGui.ParameterizeToolbarSearchButton(); // sets the EA Model Search Buttons on Toolbar
+            _hoToolsGui.ParameterizeToolbarServiceButton(); // sets the Services Buttons on Toolbar
 
 
 
