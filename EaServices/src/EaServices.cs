@@ -5990,19 +5990,19 @@ from %APPDATA%Local\Apps\hoTools\
 
             string[] dllNames = new string[]
             {
-                "ActiveX.dll",
-                "AddinClass.dll",
+                "hoToolsRoot.dll",
+                "hoToolsGui.dll",
+                "hoSqlGui.dll",
+                "hoExtensionGui.dll",
+                "hoFindAndReplace.dll",
                 "AddinFramework.dll",
                 "ClosedXml.dll",
                 "DocumentFormat.OpenXml.dll",
                 "DuoVia.FuzzyStrings.dll",
                 "EaServices.dll",
-                "ExtensionGui.dll",
-                "FindAndReplace.dll",
                 "KBCsv.dll",
                 "KBCsv.Extensions.Data.dll",
                 "Newtonsoft.Json.dll",
-                "QueryGui.dll",
                 "Utils.dll",
                 };
 

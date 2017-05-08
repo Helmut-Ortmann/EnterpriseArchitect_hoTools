@@ -1,0 +1,182 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C9EBCEBB-71E4-4E87-B92C-7AEB8F62B69A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ActiveX</RootNamespace>
+    <AssemblyName>hoToolsGui</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <RegisterForComInterop>true</RegisterForComInterop>
+    <FileAlignment>512</FileAlignment>
+    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
+    <Prefer32Bit>false</Prefer32Bit>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>hoKeyPair.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DocumentFormat.OpenXml">
+      <HintPath>..\packages\DocumentFormat.OpenXml.2.5\lib\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
+    <Reference Include="Interop.EA">
+      <HintPath>..\EA\Interop.EA.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="src\hoToolsGui.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="src\AddinGUI.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="src\GlobalKeysConfig.cs" />
+    <Compile Include="src\GlobalKeysConfigScript.cs" />
+    <Compile Include="src\GlobalKeysConfigSearch.cs" />
+    <Compile Include="src\GlobalKeysConfigService.cs" />
+    <Compile Include="src\SettingToolbar\FrmSettingsToolbar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="src\SettingToolbar\FrmSettingsToolbar.Designer.cs">
+      <DependentUpon>FrmSettingsToolbar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\SettingsQuery\FrmQueryAndScript.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="src\SettingsQuery\FrmQueryAndScript.Designer.cs">
+      <DependentUpon>FrmQueryAndScript.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\HistoryFile.cs" />
+    <Compile Include="src\SettingsKey\FrmSettingsKey.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="src\SettingsKey\FrmSettingsKey.Designer.cs">
+      <DependentUpon>FrmSettingsKey.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\SettingsLineStyle\FrmSettingsLineStyle.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="src\SettingsLineStyle\FrmSettingsLineStyle.Designer.cs">
+      <DependentUpon>FrmSettingsLineStyle.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\Keys.cs" />
+    <Compile Include="src\Settings.cs" />
+    <Compile Include="src\IActiveX.cs" />
+    <Compile Include="src\IActiveXSafety.cs" />
+    <Compile Include="src\SettingsGeneral\FrmSettingsGeneral.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="src\SettingsGeneral\FrmSettingsGeneral.Designer.cs">
+      <DependentUpon>FrmSettingsGeneral.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\SqlLastOpenedFilesCfg.cs" />
+    <Compile Include="src\SqlHistoryFilesCfg.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\hoToolsGui.resx">
+      <DependentUpon>hoToolsGui.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\SettingToolbar\FrmSettingsToolbar.resx">
+      <DependentUpon>FrmSettingsToolbar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\SettingsQuery\FrmQueryAndScript.resx">
+      <DependentUpon>FrmQueryAndScript.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\SettingsKey\FrmSettingsKey.resx">
+      <DependentUpon>FrmSettingsKey.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\SettingsLineStyle\FrmSettingsLineStyle.resx">
+      <DependentUpon>FrmSettingsLineStyle.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\SettingsGeneral\FrmSettingsGeneral.resx">
+      <DependentUpon>FrmSettingsGeneral.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resource\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AddinFramework\AddinFramework.csproj">
+      <Project>{b08ae89b-5e8d-46fd-a5d8-b3db4d33fb46}</Project>
+      <Name>AddinFramework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EaServices\EaServices.csproj">
+      <Project>{dfbedf5e-fc7f-4269-a0a6-f9b9e86dac90}</Project>
+      <Name>EaServices</Name>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\Util\Util.csproj">
+      <Project>{9376680e-9420-4fc1-8de8-4311fca18efc}</Project>
+      <Name>Util</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="hoKeyPair.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

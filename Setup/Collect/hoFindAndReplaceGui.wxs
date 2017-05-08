@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+    <Fragment>
+        <DirectoryRef Id="TARGETDIR">
+            <Directory Id="dirA622272A3642906C114F843D2FDC5552" Name="release" />
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <DirectoryRef Id="dirA622272A3642906C114F843D2FDC5552">
+            <Component Id="cmp28B2327A2A980C943C7C1F3FC0E50C7E" Guid="*">
+                <Class Id="{2703ED16-2C93-4B13-83DC-F72FB6EDBA9E}" Context="InprocServer32" Description="hoTools.Find.FindAndReplaceGUI" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="hoTools.FindAndReplaceGUI" Description="hoTools.Find.FindAndReplaceGUI" />
+                </Class>
+                <Class Id="{67324A4C-48A4-3304-9FF8-D71FBC8FF6F0}" Context="InprocServer32" Description="hoTools.Find.RegularExpression" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="hoTools.Find.RegularExpression" Description="hoTools.Find.RegularExpression" />
+                </Class>
+                <Class Id="{D5EAB488-4E76-3AC1-983F-7F203AEDA0C0}" Context="InprocServer32" Description="hoTools.Find.FindAndReplaceGUI+EnterTextBox" ThreadingModel="both" ForeignServer="mscoree.dll">
+                    <ProgId Id="hoTools.Find.FindAndReplaceGUI+EnterTextBox" Description="hoTools.Find.FindAndReplaceGUI+EnterTextBox" />
+                </Class>
+                <File Id="filA035CBAA0CDCAB5363C54609C4E4C661" KeyPath="yes" Source="SourceDir\release\hoFindAndReplaceGui.dll" />
+                <ProgId Id="Record" />
+                <RegistryValue Root="HKCR" Key="CLSID\{2703ED16-2C93-4B13-83DC-F72FB6EDBA9E}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{2703ED16-2C93-4B13-83DC-F72FB6EDBA9E}\InprocServer32\3.0.0.0" Name="Class" Value="hoTools.Find.FindAndReplaceGUI" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{2703ED16-2C93-4B13-83DC-F72FB6EDBA9E}\InprocServer32\3.0.0.0" Name="Assembly" Value="hoFindAndReplaceGui, Version=3.0.0.0, Culture=neutral, PublicKeyToken=37ea3d95ffcb87e1" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{2703ED16-2C93-4B13-83DC-F72FB6EDBA9E}\InprocServer32\3.0.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{2703ED16-2C93-4B13-83DC-F72FB6EDBA9E}\InprocServer32\3.0.0.0" Name="CodeBase" Value="file:///[#filA035CBAA0CDCAB5363C54609C4E4C661]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{2703ED16-2C93-4B13-83DC-F72FB6EDBA9E}\InprocServer32" Name="Class" Value="hoTools.Find.FindAndReplaceGUI" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{2703ED16-2C93-4B13-83DC-F72FB6EDBA9E}\InprocServer32" Name="Assembly" Value="hoFindAndReplaceGui, Version=3.0.0.0, Culture=neutral, PublicKeyToken=37ea3d95ffcb87e1" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{2703ED16-2C93-4B13-83DC-F72FB6EDBA9E}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{2703ED16-2C93-4B13-83DC-F72FB6EDBA9E}\InprocServer32" Name="CodeBase" Value="file:///[#filA035CBAA0CDCAB5363C54609C4E4C661]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{67324A4C-48A4-3304-9FF8-D71FBC8FF6F0}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{67324A4C-48A4-3304-9FF8-D71FBC8FF6F0}\InprocServer32\3.0.0.0" Name="Class" Value="hoTools.Find.RegularExpression" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{67324A4C-48A4-3304-9FF8-D71FBC8FF6F0}\InprocServer32\3.0.0.0" Name="Assembly" Value="hoFindAndReplaceGui, Version=3.0.0.0, Culture=neutral, PublicKeyToken=37ea3d95ffcb87e1" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{67324A4C-48A4-3304-9FF8-D71FBC8FF6F0}\InprocServer32\3.0.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{67324A4C-48A4-3304-9FF8-D71FBC8FF6F0}\InprocServer32\3.0.0.0" Name="CodeBase" Value="file:///[#filA035CBAA0CDCAB5363C54609C4E4C661]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{67324A4C-48A4-3304-9FF8-D71FBC8FF6F0}\InprocServer32" Name="Class" Value="hoTools.Find.RegularExpression" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{67324A4C-48A4-3304-9FF8-D71FBC8FF6F0}\InprocServer32" Name="Assembly" Value="hoFindAndReplaceGui, Version=3.0.0.0, Culture=neutral, PublicKeyToken=37ea3d95ffcb87e1" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{67324A4C-48A4-3304-9FF8-D71FBC8FF6F0}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{67324A4C-48A4-3304-9FF8-D71FBC8FF6F0}\InprocServer32" Name="CodeBase" Value="file:///[#filA035CBAA0CDCAB5363C54609C4E4C661]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{D5EAB488-4E76-3AC1-983F-7F203AEDA0C0}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{D5EAB488-4E76-3AC1-983F-7F203AEDA0C0}\InprocServer32\3.0.0.0" Name="Class" Value="hoTools.Find.FindAndReplaceGUI+EnterTextBox" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{D5EAB488-4E76-3AC1-983F-7F203AEDA0C0}\InprocServer32\3.0.0.0" Name="Assembly" Value="hoFindAndReplaceGui, Version=3.0.0.0, Culture=neutral, PublicKeyToken=37ea3d95ffcb87e1" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{D5EAB488-4E76-3AC1-983F-7F203AEDA0C0}\InprocServer32\3.0.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{D5EAB488-4E76-3AC1-983F-7F203AEDA0C0}\InprocServer32\3.0.0.0" Name="CodeBase" Value="file:///[#filA035CBAA0CDCAB5363C54609C4E4C661]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{D5EAB488-4E76-3AC1-983F-7F203AEDA0C0}\InprocServer32" Name="Class" Value="hoTools.Find.FindAndReplaceGUI+EnterTextBox" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{D5EAB488-4E76-3AC1-983F-7F203AEDA0C0}\InprocServer32" Name="Assembly" Value="hoFindAndReplaceGui, Version=3.0.0.0, Culture=neutral, PublicKeyToken=37ea3d95ffcb87e1" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{D5EAB488-4E76-3AC1-983F-7F203AEDA0C0}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{D5EAB488-4E76-3AC1-983F-7F203AEDA0C0}\InprocServer32" Name="CodeBase" Value="file:///[#filA035CBAA0CDCAB5363C54609C4E4C661]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{BA4845EA-3D56-38FB-B467-7C4AC1069202}\3.0.0.0" Name="Class" Value="hoTools.Find.FindAndReplaceItem+FieldType" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{BA4845EA-3D56-38FB-B467-7C4AC1069202}\3.0.0.0" Name="Assembly" Value="hoFindAndReplaceGui, Version=3.0.0.0, Culture=neutral, PublicKeyToken=37ea3d95ffcb87e1" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{BA4845EA-3D56-38FB-B467-7C4AC1069202}\3.0.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="Record\{BA4845EA-3D56-38FB-B467-7C4AC1069202}\3.0.0.0" Name="CodeBase" Value="file:///[#filA035CBAA0CDCAB5363C54609C4E4C661]" Type="string" Action="write" />
+            </Component>
+        </DirectoryRef>
+    </Fragment>
+</Wix>

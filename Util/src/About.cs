@@ -33,8 +33,9 @@ Helmut.Ortmann@t-online.de
                 string pathDll = Path.Combine(new[] { pathRoot, dllName });
                 try
                 {
+                    // proportional font, no easy formatting
                     description =
-                        $"{description}- {dllName,-26}\t: V{FileVersionInfo.GetVersionInfo(pathDll).FileVersion}{Environment.NewLine}";
+                        $"{description}- {dllName,-50}\t: V{FileVersionInfo.GetVersionInfo(pathDll).FileVersion}{Environment.NewLine}";
                 }
                 catch (Exception e)
                 {

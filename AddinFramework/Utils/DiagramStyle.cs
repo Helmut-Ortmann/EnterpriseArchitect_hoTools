@@ -43,10 +43,10 @@ namespace EAAddinFramework.Utils
     {
         public string Name { get; set; }
         public string Description { get; set; }
-        public string Type { get; set; }
         public string Style { get; set; }
 
-        [JsonConstructor]
+         public string Type { get; set; }
+       [JsonConstructor]
         public DiagramObjectStyleItem(string name, string description, string type, string style)
         {
             Name = name;
@@ -58,7 +58,9 @@ namespace EAAddinFramework.Utils
 
     public class DiagramStyle
     {
+        // Diagram Styles
         public List<DiagramStyleItem> DiagramStyleItems { get;  }
+        // Diagram Object Styles
         public List<DiagramObjectStyleItem> DiagramObjectStyleItems { get; }
 
         public DiagramStyle(string jasonFilePath)

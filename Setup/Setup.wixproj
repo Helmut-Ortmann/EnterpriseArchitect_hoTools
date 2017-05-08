@@ -25,39 +25,29 @@
     <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Collect\hoExtensionGui.wxs" />
+    <Compile Include="Collect\hoSqlGui.wxs" />
+    <Compile Include="Collect\hoToolsGui.wxs" />
+    <Compile Include="Collect\hoToolsRoot.wxs" />
     <Compile Include="src\Directories.wxs" />
     <Compile Include="src\Files.wxs" />
     <Compile Include="src\Product.wxs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Collect" />
     <Folder Include="src" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="ActiveX.dll.config" />
+    <Content Include="Collect\Collect.bat" />
     <Content Include="License.rtf" />
     <Content Include="Settings.json" />
     <Content Include="UserSearches.json" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ActiveX\hoToolsGui.csproj">
-      <Name>hoToolsGui</Name>
-      <Project>{c9ebcebb-71e4-4e87-b92c-7aeb8f62b69a}</Project>
-      <Private>True</Private>
-      <DoNotHarvest>True</DoNotHarvest>
-      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
-      <RefTargetDir>INSTALLFOLDER</RefTargetDir>
-    </ProjectReference>
     <ProjectReference Include="..\AddinFramework\AddinFramework.csproj">
       <Name>AddinFramework</Name>
       <Project>{b08ae89b-5e8d-46fd-a5d8-b3db4d33fb46}</Project>
-      <Private>True</Private>
-      <DoNotHarvest>True</DoNotHarvest>
-      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
-      <RefTargetDir>INSTALLFOLDER</RefTargetDir>
-    </ProjectReference>
-    <ProjectReference Include="..\Addin\hoToolsRoot.csproj">
-      <Name>hoToolsRoot</Name>
-      <Project>{6d5deeef-0897-4494-9857-5bee2bf0d0af}</Project>
       <Private>True</Private>
       <DoNotHarvest>True</DoNotHarvest>
       <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
@@ -79,25 +69,41 @@
       <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
       <RefTargetDir>INSTALLFOLDER</RefTargetDir>
     </ProjectReference>
-    <ProjectReference Include="..\Extension\ExtensionGui.csproj">
-      <Name>ExtensionGui</Name>
+    <ProjectReference Include="..\hoExtensionGui\hoExtensionGui.csproj">
+      <Name>hoExtensionGui</Name>
       <Project>{da1287e7-d076-4b08-85dd-7c8440317b94}</Project>
       <Private>True</Private>
       <DoNotHarvest>True</DoNotHarvest>
       <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
       <RefTargetDir>INSTALLFOLDER</RefTargetDir>
     </ProjectReference>
-    <ProjectReference Include="..\FindAndReplace\FindAndReplaceGui.csproj">
-      <Name>FindAndReplaceGui</Name>
+    <ProjectReference Include="..\hoFindAndReplaceGui\hoFindAndReplaceGui.csproj">
+      <Name>hoFindAndReplaceGui</Name>
       <Project>{5089f046-2f1a-49f2-bf76-f8dda89fd0be}</Project>
       <Private>True</Private>
       <DoNotHarvest>True</DoNotHarvest>
       <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
       <RefTargetDir>INSTALLFOLDER</RefTargetDir>
     </ProjectReference>
-    <ProjectReference Include="..\QueryGui\SqlGui.csproj">
-      <Name>SqlGui</Name>
+    <ProjectReference Include="..\hoSqlGui\hoSqlGui.csproj">
+      <Name>hoSqlGui</Name>
       <Project>{d83c4d98-7aa9-4b1a-abed-ea8a9eac210c}</Project>
+      <Private>True</Private>
+      <DoNotHarvest>True</DoNotHarvest>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLFOLDER</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\hoToolsGui\hoToolsGui.csproj">
+      <Name>hoToolsGui</Name>
+      <Project>{c9ebcebb-71e4-4e87-b92c-7aeb8f62b69a}</Project>
+      <Private>True</Private>
+      <DoNotHarvest>True</DoNotHarvest>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLFOLDER</RefTargetDir>
+    </ProjectReference>
+    <ProjectReference Include="..\hoToolsRoot\hoToolsRoot.csproj">
+      <Name>hoToolsRoot</Name>
+      <Project>{6d5deeef-0897-4494-9857-5bee2bf0d0af}</Project>
       <Private>True</Private>
       <DoNotHarvest>True</DoNotHarvest>
       <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>

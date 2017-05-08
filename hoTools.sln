@@ -3,16 +3,14 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26403.7
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "hoToolsRoot", "Addin\hoToolsRoot.csproj", "{6D5DEEEF-0897-4494-9857-5BEE2BF0D0AF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "hoToolsRoot", "hoToolsRoot\hoToolsRoot.csproj", "{6D5DEEEF-0897-4494-9857-5BEE2BF0D0AF}"
 	ProjectSection(ProjectDependencies) = postProject
 		{29385A2D-EAC1-4777-BC01-C060C2002307} = {29385A2D-EAC1-4777-BC01-C060C2002307}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "hoToolsGui", "ActiveX\hoToolsGui.csproj", "{C9EBCEBB-71E4-4E87-B92C-7AEB8F62B69A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "hoToolsGui", "hoToolsGui\hoToolsGui.csproj", "{C9EBCEBB-71E4-4E87-B92C-7AEB8F62B69A}"
 EndProject
 Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "Setup", "Setup\Setup.wixproj", "{6F57C7F7-5B30-4720-BCF6-8C21C2D09009}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FindAndReplaceGui", "FindAndReplace\FindAndReplaceGui.csproj", "{5089F046-2F1A-49F2-BF76-F8DDA89FD0BE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EaServices", "EaServices\EaServices.csproj", "{DFBEDF5E-FC7F-4269-A0A6-F9B9E86DAC90}"
 EndProject
@@ -22,43 +20,28 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution", "Solution", "{20
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EA", "EA", "{2ABA072D-FD07-4FC5-82E8-3AC5704BDD5F}"
 	ProjectSection(SolutionItems) = preProject
-		Addin\hoModelViewsMDG.xml = Addin\hoModelViewsMDG.xml
+		hoToolsRoot\hoModelViewsMDG.xml = hoToolsRoot\hoModelViewsMDG.xml
 		EA\hoTools.eap = EA\hoTools.eap
 		EA\hoTools.mts = EA\hoTools.mts
-		Addin\hoToolsBasic.xml = Addin\hoToolsBasic.xml
-		Addin\hoToolsCompilation.xml = Addin\hoToolsCompilation.xml
+		hoToolsRoot\hoToolsBasic.xml = hoToolsRoot\hoToolsBasic.xml
+		hoToolsRoot\hoToolsCompilation.xml = hoToolsRoot\hoToolsCompilation.xml
 		EA\hoToolsSearch.xml = EA\hoToolsSearch.xml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{71383584-777C-46C1-84EF-C4DA7F692189}"
 	ProjectSection(SolutionItems) = preProject
-		Addin\ActiveX.dll.config = Addin\ActiveX.dll.config
-		Addin\Properties\AssemblyInfo.cs = Addin\Properties\AssemblyInfo.cs
+		hoToolsRoot\Properties\AssemblyInfo.cs = hoToolsRoot\Properties\AssemblyInfo.cs
+		hoToolsRoot\hoToolsGui.dll.config = hoToolsRoot\hoToolsGui.dll.config
 		hoToolsRemove.ps1 = hoToolsRemove.ps1
 		Setup\src\Product.wxs = Setup\src\Product.wxs
 		README.md = README.md
-		Addin\Settings.json = Addin\Settings.json
+		hoToolsRoot\Settings.json = hoToolsRoot\Settings.json
 		Setup\bin\Release\Setup.msi = Setup\bin\Release\Setup.msi
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Advanced", "Advanced", "{A9B0B204-36DD-466D-B5C1-A9FD55ED7A4B}"
-	ProjectSection(SolutionItems) = preProject
-		ActiveX\bin\Release\ActiveX.wxs = ActiveX\bin\Release\ActiveX.wxs
-		ActiveX\bin\Release\ActiveXCollectRegistrationInfo.bat = ActiveX\bin\Release\ActiveXCollectRegistrationInfo.bat
-		Addin\bin\Release\AddinClass.wxs = Addin\bin\Release\AddinClass.wxs
-		Addin\bin\Release\AddinClassCollectRegistrationInfo.bat = Addin\bin\Release\AddinClassCollectRegistrationInfo.bat
-		AddinFramework\bin\Release\AddinFramework.wxs = AddinFramework\bin\Release\AddinFramework.wxs
-		AddinFramework\bin\Release\AddinFrameworkCollectRegistrationInfo.bat = AddinFramework\bin\Release\AddinFrameworkCollectRegistrationInfo.bat
-		Setup\src\Files.wxs = Setup\src\Files.wxs
-		FindAndReplace\bin\Release\FindAndReplace.wxs = FindAndReplace\bin\Release\FindAndReplace.wxs
-		FindAndReplace\bin\Release\FindAndReplaceCollectRegistrationInfo.bat = FindAndReplace\bin\Release\FindAndReplaceCollectRegistrationInfo.bat
-		QueryGui\bin\Release\QueryGUI.wxs = QueryGui\bin\Release\QueryGUI.wxs
-		QueryGui\bin\Release\QueryGUICollectRegistrationInfo.bat = QueryGui\bin\Release\QueryGUICollectRegistrationInfo.bat
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddinFramework", "AddinFramework\AddinFramework.csproj", "{B08AE89B-5E8D-46FD-A5D8-B3DB4D33FB46}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SqlGui", "QueryGui\SqlGui.csproj", "{D83C4D98-7AA9-4B1A-ABED-EA8A9EAC210C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Reuse", "Reuse", "{F1F0E6B1-5463-4DBB-9120-282C921427E0}"
 	ProjectSection(SolutionItems) = preProject
@@ -67,17 +50,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Reuse", "Reuse", "{F1F0E6B1
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DuoVia.FuzzyStrings", "DuoVia.FuzzyStrings\DuoVia.FuzzyStrings.csproj", "{29385A2D-EAC1-4777-BC01-C060C2002307}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExtensionGui", "Extension\ExtensionGui.csproj", "{DA1287E7-D076-4B08-85DD-7C8440317B94}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Properties", "Properties", "{940FF7B9-412F-4399-981C-9E841BEF6F6C}"
 	ProjectSection(SolutionItems) = preProject
-		ActiveX\Properties\AssemblyInfo.cs = ActiveX\Properties\AssemblyInfo.cs
-		Addin\Properties\AssemblyInfo.cs = Addin\Properties\AssemblyInfo.cs
+		hoToolsGui\Properties\AssemblyInfo.cs = hoToolsGui\Properties\AssemblyInfo.cs
+		hoToolsRoot\Properties\AssemblyInfo.cs = hoToolsRoot\Properties\AssemblyInfo.cs
 		AddinFramework\Properties\AssemblyInfo.cs = AddinFramework\Properties\AssemblyInfo.cs
 		DuoVia.FuzzyStrings\Properties\AssemblyInfo.cs = DuoVia.FuzzyStrings\Properties\AssemblyInfo.cs
 		EaServices\Properties\AssemblyInfo.cs = EaServices\Properties\AssemblyInfo.cs
-		Extension\Properties\AssemblyInfo.cs = Extension\Properties\AssemblyInfo.cs
-		FindAndReplace\Properties\AssemblyInfo.cs = FindAndReplace\Properties\AssemblyInfo.cs
+		hoExtensionGui\Properties\AssemblyInfo.cs = hoExtensionGui\Properties\AssemblyInfo.cs
+		hoFindAndReplaceGui\Properties\AssemblyInfo.cs = hoFindAndReplaceGui\Properties\AssemblyInfo.cs
 		Util\Properties\AssemblyInfo.cs = Util\Properties\AssemblyInfo.cs
 	EndProjectSection
 EndProject
@@ -89,6 +70,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		commands.json = commands.json
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "hoSqlGui", "hoSqlGui\hoSqlGui.csproj", "{D83C4D98-7AA9-4B1A-ABED-EA8A9EAC210C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "hoExtensionGui", "hoExtensionGui\hoExtensionGui.csproj", "{DA1287E7-D076-4B08-85DD-7C8440317B94}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "hoFindAndReplaceGui", "hoFindAndReplaceGui\hoFindAndReplaceGui.csproj", "{5089F046-2F1A-49F2-BF76-F8DDA89FD0BE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -133,18 +120,6 @@ Global
 		{6F57C7F7-5B30-4720-BCF6-8C21C2D09009}.Release|Mixed Platforms.Build.0 = Release|x86
 		{6F57C7F7-5B30-4720-BCF6-8C21C2D09009}.Release|x86.ActiveCfg = Release|x86
 		{6F57C7F7-5B30-4720-BCF6-8C21C2D09009}.Release|x86.Build.0 = Release|x86
-		{5089F046-2F1A-49F2-BF76-F8DDA89FD0BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5089F046-2F1A-49F2-BF76-F8DDA89FD0BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5089F046-2F1A-49F2-BF76-F8DDA89FD0BE}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{5089F046-2F1A-49F2-BF76-F8DDA89FD0BE}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{5089F046-2F1A-49F2-BF76-F8DDA89FD0BE}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{5089F046-2F1A-49F2-BF76-F8DDA89FD0BE}.Debug|x86.Build.0 = Debug|Any CPU
-		{5089F046-2F1A-49F2-BF76-F8DDA89FD0BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5089F046-2F1A-49F2-BF76-F8DDA89FD0BE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5089F046-2F1A-49F2-BF76-F8DDA89FD0BE}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{5089F046-2F1A-49F2-BF76-F8DDA89FD0BE}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{5089F046-2F1A-49F2-BF76-F8DDA89FD0BE}.Release|x86.ActiveCfg = Release|Any CPU
-		{5089F046-2F1A-49F2-BF76-F8DDA89FD0BE}.Release|x86.Build.0 = Release|Any CPU
 		{DFBEDF5E-FC7F-4269-A0A6-F9B9E86DAC90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DFBEDF5E-FC7F-4269-A0A6-F9B9E86DAC90}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DFBEDF5E-FC7F-4269-A0A6-F9B9E86DAC90}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -181,18 +156,6 @@ Global
 		{B08AE89B-5E8D-46FD-A5D8-B3DB4D33FB46}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{B08AE89B-5E8D-46FD-A5D8-B3DB4D33FB46}.Release|x86.ActiveCfg = Release|Any CPU
 		{B08AE89B-5E8D-46FD-A5D8-B3DB4D33FB46}.Release|x86.Build.0 = Release|Any CPU
-		{D83C4D98-7AA9-4B1A-ABED-EA8A9EAC210C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D83C4D98-7AA9-4B1A-ABED-EA8A9EAC210C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D83C4D98-7AA9-4B1A-ABED-EA8A9EAC210C}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{D83C4D98-7AA9-4B1A-ABED-EA8A9EAC210C}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{D83C4D98-7AA9-4B1A-ABED-EA8A9EAC210C}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{D83C4D98-7AA9-4B1A-ABED-EA8A9EAC210C}.Debug|x86.Build.0 = Debug|Any CPU
-		{D83C4D98-7AA9-4B1A-ABED-EA8A9EAC210C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D83C4D98-7AA9-4B1A-ABED-EA8A9EAC210C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D83C4D98-7AA9-4B1A-ABED-EA8A9EAC210C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{D83C4D98-7AA9-4B1A-ABED-EA8A9EAC210C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{D83C4D98-7AA9-4B1A-ABED-EA8A9EAC210C}.Release|x86.ActiveCfg = Release|Any CPU
-		{D83C4D98-7AA9-4B1A-ABED-EA8A9EAC210C}.Release|x86.Build.0 = Release|Any CPU
 		{29385A2D-EAC1-4777-BC01-C060C2002307}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{29385A2D-EAC1-4777-BC01-C060C2002307}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{29385A2D-EAC1-4777-BC01-C060C2002307}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -205,18 +168,6 @@ Global
 		{29385A2D-EAC1-4777-BC01-C060C2002307}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{29385A2D-EAC1-4777-BC01-C060C2002307}.Release|x86.ActiveCfg = Release|Any CPU
 		{29385A2D-EAC1-4777-BC01-C060C2002307}.Release|x86.Build.0 = Release|Any CPU
-		{DA1287E7-D076-4B08-85DD-7C8440317B94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DA1287E7-D076-4B08-85DD-7C8440317B94}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DA1287E7-D076-4B08-85DD-7C8440317B94}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{DA1287E7-D076-4B08-85DD-7C8440317B94}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{DA1287E7-D076-4B08-85DD-7C8440317B94}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{DA1287E7-D076-4B08-85DD-7C8440317B94}.Debug|x86.Build.0 = Debug|Any CPU
-		{DA1287E7-D076-4B08-85DD-7C8440317B94}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DA1287E7-D076-4B08-85DD-7C8440317B94}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DA1287E7-D076-4B08-85DD-7C8440317B94}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{DA1287E7-D076-4B08-85DD-7C8440317B94}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{DA1287E7-D076-4B08-85DD-7C8440317B94}.Release|x86.ActiveCfg = Release|Any CPU
-		{DA1287E7-D076-4B08-85DD-7C8440317B94}.Release|x86.Build.0 = Release|Any CPU
 		{D8F1743A-FD36-411B-897C-647DB82D5B88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D8F1743A-FD36-411B-897C-647DB82D5B88}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D8F1743A-FD36-411B-897C-647DB82D5B88}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -241,6 +192,42 @@ Global
 		{DF6BDF31-C850-4C54-B4F2-BA73E18743C7}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{DF6BDF31-C850-4C54-B4F2-BA73E18743C7}.Release|x86.ActiveCfg = Release|Any CPU
 		{DF6BDF31-C850-4C54-B4F2-BA73E18743C7}.Release|x86.Build.0 = Release|Any CPU
+		{D83C4D98-7AA9-4B1A-ABED-EA8A9EAC210C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D83C4D98-7AA9-4B1A-ABED-EA8A9EAC210C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D83C4D98-7AA9-4B1A-ABED-EA8A9EAC210C}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{D83C4D98-7AA9-4B1A-ABED-EA8A9EAC210C}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{D83C4D98-7AA9-4B1A-ABED-EA8A9EAC210C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D83C4D98-7AA9-4B1A-ABED-EA8A9EAC210C}.Debug|x86.Build.0 = Debug|Any CPU
+		{D83C4D98-7AA9-4B1A-ABED-EA8A9EAC210C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D83C4D98-7AA9-4B1A-ABED-EA8A9EAC210C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D83C4D98-7AA9-4B1A-ABED-EA8A9EAC210C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{D83C4D98-7AA9-4B1A-ABED-EA8A9EAC210C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{D83C4D98-7AA9-4B1A-ABED-EA8A9EAC210C}.Release|x86.ActiveCfg = Release|Any CPU
+		{D83C4D98-7AA9-4B1A-ABED-EA8A9EAC210C}.Release|x86.Build.0 = Release|Any CPU
+		{DA1287E7-D076-4B08-85DD-7C8440317B94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA1287E7-D076-4B08-85DD-7C8440317B94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA1287E7-D076-4B08-85DD-7C8440317B94}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{DA1287E7-D076-4B08-85DD-7C8440317B94}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{DA1287E7-D076-4B08-85DD-7C8440317B94}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{DA1287E7-D076-4B08-85DD-7C8440317B94}.Debug|x86.Build.0 = Debug|Any CPU
+		{DA1287E7-D076-4B08-85DD-7C8440317B94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA1287E7-D076-4B08-85DD-7C8440317B94}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA1287E7-D076-4B08-85DD-7C8440317B94}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{DA1287E7-D076-4B08-85DD-7C8440317B94}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{DA1287E7-D076-4B08-85DD-7C8440317B94}.Release|x86.ActiveCfg = Release|Any CPU
+		{DA1287E7-D076-4B08-85DD-7C8440317B94}.Release|x86.Build.0 = Release|Any CPU
+		{5089F046-2F1A-49F2-BF76-F8DDA89FD0BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5089F046-2F1A-49F2-BF76-F8DDA89FD0BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5089F046-2F1A-49F2-BF76-F8DDA89FD0BE}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{5089F046-2F1A-49F2-BF76-F8DDA89FD0BE}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{5089F046-2F1A-49F2-BF76-F8DDA89FD0BE}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5089F046-2F1A-49F2-BF76-F8DDA89FD0BE}.Debug|x86.Build.0 = Debug|Any CPU
+		{5089F046-2F1A-49F2-BF76-F8DDA89FD0BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5089F046-2F1A-49F2-BF76-F8DDA89FD0BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5089F046-2F1A-49F2-BF76-F8DDA89FD0BE}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{5089F046-2F1A-49F2-BF76-F8DDA89FD0BE}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{5089F046-2F1A-49F2-BF76-F8DDA89FD0BE}.Release|x86.ActiveCfg = Release|Any CPU
+		{5089F046-2F1A-49F2-BF76-F8DDA89FD0BE}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
