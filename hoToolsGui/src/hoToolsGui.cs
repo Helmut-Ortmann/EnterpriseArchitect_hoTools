@@ -20,8 +20,8 @@ using hoTools.Utils;
 using hoTools.Utils.Configuration;
 using hoTools.Utils.Diagram;
 using hoTools.Utils.Excel;
-using DiagramStyle = EAAddinFramework.Utils.DiagramStyle;
-using DiagramStyleItem = EAAddinFramework.Utils.DiagramStyleItem;
+using hoTools.Utils.Diagram;
+
 
 
 
@@ -55,7 +55,7 @@ namespace hoTools.hoToolsGui
 
         private const string JasonFile = @"Settings.json";
         private string _jasonFilePath;
-        private EAAddinFramework.Utils.DiagramStyle _diagramStyle;
+        private DiagramStyle _diagramStyle;
 
         // Do Menu entries already inserted
         private bool _doMenuDiagramStyleInserted = false;
@@ -3382,7 +3382,7 @@ namespace hoTools.hoToolsGui
                 // Add Diagram Style 
                 // ReSharper disable once AssignNullToNotNullAttribute
                 _jasonFilePath = targetSettingsPath;
-                _diagramStyle = new EAAddinFramework.Utils.DiagramStyle(_jasonFilePath);
+                _diagramStyle = new DiagramStyle(_jasonFilePath);
                 EaService.DiagramStyle = _diagramStyle;
 
 

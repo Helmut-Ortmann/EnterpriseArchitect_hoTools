@@ -11,10 +11,10 @@ using EAAddinFramework.Utils;
 using hoTools.Utils.Configuration;
 using hoTools.Utils.SQL;
 using Microsoft.Win32;
-using Newtonsoft.Json;
 using AddinFramework.Extension;
 
 using DuoVia.FuzzyStrings;
+using Newtonsoft.Json;
 
 // ReSharper disable once CheckNamespace
 namespace AddinFramework.Util

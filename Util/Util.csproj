@@ -65,6 +65,9 @@
       <HintPath>..\packages\KBCsv.Extensions.Data.5.0.0\lib\net45\KBCsv.Extensions.Data.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -91,7 +94,8 @@
     <Compile Include="src\Configuration\HoToolsGlobalCfg.cs" />
     <Compile Include="src\Configuration\IHoToolsGlobalCfg.cs" />
     <Compile Include="src\Connector.cs" />
-    <Compile Include="src\Diagram.cs" />
+    <Compile Include="src\Diagram\Diagram.cs" />
+    <Compile Include="src\Diagram\DiagramStyle.cs" />
     <Compile Include="src\Element.cs" />
     <Compile Include="src\Excel.cs" />
     <Compile Include="src\Extensions\Extension.cs" />

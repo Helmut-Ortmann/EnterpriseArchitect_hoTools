@@ -3,19 +3,30 @@
   [
     // List of Diagram Styles to assign to diagram types
     // see:: https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/DiagramStyles
+    // Preferred styles, you may additionally use the data from the column PDATA, StyleEx
+    // cx=nnn; (default = 800)
+    // cy=nnn; (default = 1100)
+    // HighLightImports=bool; (true or false)
+    // Orientation=x;  (L=Landscape, P=Portrait)
+    // Scale=nnn; (default=100=100%)
+    // ShowDetails=n; (1=Show, 0=Hide)
+    // ShowPackageContents=bool; (true, false)
+    // ShowPrivate=bool; (true, false)
+    // ShowProtected=bool; (true, false)
+    // ShowPublic=bool; (true, false)
     {
       "Name": "Default 1 (simple, with Notes)",
       "Description": "Simple:\r\n-Notes\r\n- no Attributes\r\n- no Operations",
       "Type": "",
       "PDATA": "HideAtts=1, HideOps=1, PPgs.cx=1, PPgs.cy=1, ScalePI=1",
-      "StyleEX": "ShowNotes=1"
+      "StyleEX": "ShowNotes=1, Orientation=P, cx=800, cy=1100"
     },
     {
       "Name": "Default 2 (elaborate, without Notes)",
       "Description": "No Attributes, Notes",
       "Type": "",
       "PDATA": "HideAtts=1, HideOps=1, OpParams=2, ShowOpRetType=1, PPgs.cx=1, PPgs.cy=1, ScalePI=1",
-      "StyleEX": "ShowNotes=0"
+      "StyleEX": "ShowNotes=0, Orientation=P, cx=800, cy=1100"
     },
     {
       "Name": "My Requirements",
