@@ -62,9 +62,9 @@
     // Name:         Template name
     // Description:  Description for e.g. Tooltip
     // Type:         Type to apply to 
-    //               Use either Style or Property. hoTools only applies one.
-    // Style:        The Style according to rules in DiagramObject property Style / column ObjectStyle
-    // Property:     The EA property to directly modify (ShowFormattedNotes,..)
+    //               Use either Style/none Style and/or Property. hoTools first applies Style if not 'none' than applies Property.
+    // Style:        The Style according to rules in DiagramObject property Style / column ObjectStyle. Style overwrites all settings
+    // Property:     The EA property to directly modify (ShowFormattedNotes,..). It overwrites Styles
     //               
     //
     // Hiding  Styles:  AttPro=0;AttPri=0;AttPub=0;AttPkg=0;OpPro=0;OpPri=0;OpPub=0;OpPkg=0;
@@ -91,14 +91,14 @@
       "Name": "Default1, no Notes",
       "Description": "No Notes\r\nNo Attributres",
       "Type": "",
-      "Style": "",
+      "Style": "none",
       "Property":  "ShowNotes=false, ShowPrivateAttributes=false, ShowProtectedAttributes=false, ShowPublicAttributes=false, ShowPrivateOperations=false, ShowProtectedOperations=false, ShowPublicOperations=false" 
     },
     {
       "Name": "Default2, Notes",
       "Description": "Notes\r\nNo Attributres",
       "Type": "",
-      "Style": "",
+      "Style": "none",
       "Property":  "ShowNotes=true, ShowFormattedNotes, ShowPrivateAttributes=false, ShowProtectedAttributes=false, ShowPublicAttributes=false " 
     },
     {
