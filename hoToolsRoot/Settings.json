@@ -62,9 +62,10 @@
     // Name:         Template name
     // Description:  Description for e.g. Tooltip
     // Type:         Type to apply to 
+    //               Use either Style or Property. hoTools only applies one.
     // Style:        The Style according to rules in DiagramObject property Style / column ObjectStyle
     // Property:     The EA property to directly modify (ShowFormattedNotes,..)
-    //               Be careful with mixing Style and Property
+    //               
     //
     // Hiding  Styles:  AttPro=0;AttPri=0;AttPub=0;AttPkg=0;OpPro=0;OpPri=0;OpPub=0;OpPkg=0;
     // Showing Styles:  Tag=1;Constraint=1;PType=1;Notes=1000;Formatted=1;RzO=1;Runstate=1;Responsibility;FQTag=1;OpInh=1;AttInh=1;RzO=n;

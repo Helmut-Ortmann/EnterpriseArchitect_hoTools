@@ -70,58 +70,6 @@ namespace hoTools.Utils.Diagram
         // Diagram Object Styles
         public List<DiagramObjectStyleItem> DiagramObjectStyleItems { get; }
 
-        static readonly Dictionary<String, PropertyType> DiagramObjectStyles = new Dictionary<String, PropertyType>
-            {
-                {"BackgroundColor",  PropertyType.PropertyInteger},
-                {@"BorderColor",    PropertyType.PropertyInteger},
-                {@"BorderLineWidth", PropertyType.PropertyInteger},
-                {@"DiagramDisplayMode", PropertyType.PropertyInteger},
-                {@"FeatureStereotypesToHide", PropertyType.PropertyString},
-                {@"FontBold", PropertyType.PropertyBool},
-                {@"FontColor", PropertyType.PropertyInteger},
-                {@"FontItalic", PropertyType.PropertyBool},
-                {@"FontName", PropertyType.PropertyString},
-                {@"FontSize", PropertyType.PropertyString},
-                {@"FontUnderline", PropertyType.PropertyBool},
-                {@"IsSelectable", PropertyType.PropertyBool},
-                {@"Sequence", PropertyType.PropertyInteger},
-                {@"ShowComposedDiagram", PropertyType.PropertyBool},
-                {@"ShowConstraint", PropertyType.PropertyBool},
-
-                {@"ShowFormattedNotes", PropertyType.PropertyBool},
-                {@"ShowFullyQualifiedTags", PropertyType.PropertyBool},
-                {@"ShowInheritedAttributes", PropertyType.PropertyBool},
-                {@"ShowInheritedConstraints", PropertyType.PropertyBool},
-
-                {@"ShowInheritedOperations", PropertyType.PropertyBool},
-                {@"ShowInheritedResponsibilities", PropertyType.PropertyBool},
-                {@"ShowInheritedTags", PropertyType.PropertyBool},
-                {@"ShowNotes", PropertyType.PropertyBool},
-
-                {@"ShowPackageOperations", PropertyType.PropertyBool},
-                {@"ShowPackageAttributes", PropertyType.PropertyBool},
-
-                {@"ShowPortType", PropertyType.PropertyBool},
-                {@"ShowPrivateAttributes", PropertyType.PropertyBool},
-                {@"ShowPrivateOperations", PropertyType.PropertyBool},
-                {@"ShowProtectedAttributes", PropertyType.PropertyBool},
-                {@"ShowProtectedOperations", PropertyType.PropertyBool},
-
-                {@"ShowPublicAttributes", PropertyType.PropertyBool},
-                {@"ShowPublicOperations", PropertyType.PropertyBool},
-                {@"ShowResponsibilities", PropertyType.PropertyBool},
-                {@"ShowRunstates", PropertyType.PropertyBool},
-                {@"ShowStructuredCompartments", PropertyType.PropertyBool},
-
-                {@"ShowTags", PropertyType.PropertyBool},
-                {@"TextAlign", PropertyType.PropertyInteger}
-            };
-
-        private delegate void EaDiaObjectBoolProperty(EA.DiagramObject diaObject, bool boolProperty);
-        // Set Object Diagram Property for an integer
-        private delegate void EaDiaObjectIntProperty(EA.DiagramObject diaObject, int intProperty);
-        // Set Object Diagram Property for an integer
-        private delegate void EaDiaObjectStringProperty(EA.DiagramObject diaObject, string stringProperty);
         /// <summary>
         /// Constructor
         /// </summary>
@@ -240,10 +188,10 @@ namespace hoTools.Utils.Diagram
             return insertTemplateMenuItem;
 
         }
-       
-       
+
+
         /// <summary>
-        /// Set Ea Diagram Object Style
+        /// Set Ea Diagram Object Style according to properties passed in the form 'properyName=propertyValue'
         /// </summary>
         /// <param name="rep"></param>
         /// <param name="diaObj"></param>
@@ -251,65 +199,161 @@ namespace hoTools.Utils.Diagram
         private static void SetDiagramObjectStyle(Repository rep, EA.DiagramObject diaObj, string style)
         {
             // extract name and value
-            Match match = Regex.Match(style, $@"(\w+)=(\w+);");
+            Match match = Regex.Match(style, $@"(\w+)=(\w+)");
             if (!match.Success)
-            {
-                MessageBox.Show($"PropertyStyle='{style}', should be 'Property=xxxx;'","Invalid Property DiagramObject Style");
-                return;
-            }
-            if (match.Groups.Count != 2)
             {
                 MessageBox.Show($"PropertyStyle='{style}', should be 'Property=xxxx;'",
                     "Invalid Property DiagramObject Style");
+                return;
+            }
+            if (match.Groups.Count != 3)
+            {
+                MessageBox.Show($"PropertyStyle='{style}', should be 'Property=xxxx;'",
+                    "Invalid Property DiagramObject Style");
+                return;
             }
 
 
             string propertyName = match.Groups[1].Value;
-            PropertyType typeProperty;
-            if (! DiagramObjectStyles.TryGetValue(propertyName, out typeProperty))
+            string propertyValue = match.Groups[2].Value;
+
+            var p = diaObj.GetType().GetProperty(propertyName);
+            if (p == null)
             {
-                MessageBox.Show($"PropertyStyle='{style}'", "Not supported Property DiagramObject Style");
+                MessageBox.Show($"PropertyStyle='{style}'",
+                    $@"No valid DiagramObject Property '{propertyName}'");
                 return;
+            }
+            string propertyTyp = p.PropertyType.Name;
+            if (! (propertyTyp == "Boolean" ||
+                propertyTyp == "String"  ||
+                propertyTyp == "Int32"))        
+            {
+                //MessageBox.Show($"PropertyType '{propertyTyp}' not supported.\r\nOnly: Int32=long, Boolean, String\r\nPropertyStyle='{style}'",
+                //    $@"No valid DiagramObject Property Type '{propertyName}:{propertyTyp}'");
+                // Most things works well with Int32
+                propertyTyp = "Int32";
+                //return;
             }
 
 
-            MethodInfo method = typeof(EA.DiagramObject).GetMethod(propertyName,
-                BindingFlags.Public | BindingFlags.Instance,
-                null,
-                CallingConventions.Any,
-                new System.Type[] { typeof(int) },
-                null);
+ 
             try
             {
-                string propertyValue = match.Groups[2].Value;
-                switch (typeProperty)
+                switch (propertyTyp)
                 {
                         
-                        case PropertyType.PropertyBool:
-                            var setPropertyBool = (EaDiaObjectBoolProperty)Delegate.CreateDelegate(typeof(EaDiaObjectIntProperty), 0, method);
+                        case "Boolean":
                             bool boolProperty;
-                            if (!Boolean.TryParse(propertyValue, out boolProperty))
+                            if (!bool.TryParse(propertyValue, out boolProperty))
                             {
                                 MessageBox.Show($"Property='{propertyValue}', should be Bool",
                                     "Property DiagramObject Style isn't Bool");
                                 return;
                             }
-                        setPropertyBool.Invoke(diaObj, boolProperty);
-                        break;
-                        case PropertyType.PropertyInteger:
-                            var setPropertyInt = (EaDiaObjectIntProperty)Delegate.CreateDelegate(typeof(EaDiaObjectIntProperty), 0, method);
-                            int intProperty;
-                            if (!Int32.TryParse(propertyValue, out intProperty))
+                            diaObj.ShowConstraints = true;
+
+                        // set property of type Boolean by PropertyName. The Property Name is case insensitive (ignore case)
+                        //object[] o = new object[] { boolProperty };
+                        //diaObj.GetType().InvokeMember("ShowConstraints", BindingFlags.PutRefDispProperty | BindingFlags.IgnoreCase, null, diaObj, o);
+
+                            switch (propertyName)
                             {
-                                MessageBox.Show($"Property='{propertyValue}', should be Integer",
+                                case "FontBold":
+                                    diaObj.FontBold = boolProperty;
+                                    break;
+                                case "FontItalic":
+                                    diaObj.FontItalic = boolProperty;
+                                    break;
+                                case "FontUnderline":
+                                    diaObj.FontUnderline = boolProperty;
+                                    break;
+                                case "IsSelectable":
+                                    diaObj.IsSelectable = boolProperty;
+                                    break;
+                                case "ShowConstraints":
+                                    diaObj.ShowConstraints = boolProperty;
+                                    break;
+                                case "ShowFormattedNotes":
+                                    diaObj.ShowFormattedNotes = boolProperty;
+                                    break;
+                                case "ShowFullyQualifiedTags":
+                                    diaObj.ShowFullyQualifiedTags = boolProperty;
+                                    break;
+                                case "ShowInheritedAttributes":
+                                    diaObj.ShowInheritedAttributes = boolProperty;
+                                    break;
+                                case "ShowInheritedConstraints":
+                                    diaObj.ShowInheritedConstraints = boolProperty;
+                                    break;
+                                case "ShowInheritedOperations":
+                                    diaObj.ShowInheritedOperations = boolProperty;
+                                    break;
+                                case "ShowInheritedResponsibilities":
+                                    diaObj.ShowInheritedResponsibilities = boolProperty;
+                                    break;
+                                case "ShowInheritedTags":
+                                    diaObj.ShowInheritedTags = boolProperty;
+                                    break;
+                                case "ShowPortType":
+                                    diaObj.ShowPortType = boolProperty;
+                                    break;
+                                case "ShowPrivateAttributes":
+                                    diaObj.ShowPrivateAttributes = boolProperty;
+                                    break;
+                                case "ShowPublicAttributes":
+                                    diaObj.ShowPublicAttributes = boolProperty;
+                                    break;
+                                case "ShowProtectedAttributes":
+                                    diaObj.ShowProtectedAttributes = boolProperty;
+                                    break;
+                                case "ShowPrivateOperations":
+                                    diaObj.ShowPrivateOperations = boolProperty;
+                                    break;
+                                case "ShowPublicOperations":
+                                    diaObj.ShowPublicOperations = boolProperty;
+                                    break;
+                                case "ShowProtectedOperations":
+                                    diaObj.ShowProtectedOperations = boolProperty;
+                                    break;
+                                case "ShowPackageOperations":
+                                    diaObj.ShowPackageOperations = boolProperty;
+                                    break;
+                                case "ShowPackageAttributes":
+                                    diaObj.ShowPackageAttributes = boolProperty;
+                                    break;
+                                case "ShowResponsibilities":
+                                    diaObj.ShowResponsibilities = boolProperty;
+                                    break;
+                                case "ShowRunstates":
+                                    diaObj.ShowRunstates = boolProperty;
+                                    break;
+                                case "ShowStructuredCompartments":
+                                    diaObj.ShowStructuredCompartments = boolProperty;
+                                    break;
+                                case "ShowTags":
+                                    diaObj.ShowStructuredCompartments = boolProperty;
+                                    break;
+                            default:
+                                MessageBox.Show($@"Style={style}'\r\nProperty:'{propertyName}'", $@"Invalid DiagramObjectStyle '{propertyName}'");
+                                break;
+                        }
+
+                        break;
+
+                        case "Int32":
+                            int int32Property;
+                            if (!Int32.TryParse(propertyValue, out int32Property))
+                            {
+                                MessageBox.Show($"Property='{propertyValue}', should be Integer (int32, long)",
                                     "Property DiagramObject Style isn't Integer");
                                 return;
                             }
-                            setPropertyInt.Invoke(diaObj, intProperty);
+                        diaObj.GetType().InvokeMember(propertyName, System.Reflection.BindingFlags.SetProperty, null, diaObj, new object[] { int32Property });
                         break;
-                        case PropertyType.PropertyString:
-                            var setPropertyString = (EaDiaObjectStringProperty)Delegate.CreateDelegate(typeof(EaDiaObjectStringProperty), 0, method);
-                            setPropertyString.Invoke(diaObj, propertyValue);
+
+                        case "String":
+                            diaObj.GetType().InvokeMember(propertyName, System.Reflection.BindingFlags.SetProperty, null, diaObj, new object[] {propertyValue});
                         break;
                 }
                
@@ -317,10 +361,8 @@ namespace hoTools.Utils.Diagram
             }
             catch (Exception e)
             {
-                
+                MessageBox.Show($@"Property: '{style}'\r\n{e}", $@"Error from EA DiagramObject API '{propertyName}:{propertyTyp}");
             }
-
-            // Dictionary<string name, EaStyleItem> styles = new Dictionary<string name, EaStyleItem>
 
         }
 
@@ -490,9 +532,10 @@ namespace hoTools.Utils.Diagram
         }
 
         /// <summary>
-        /// Set DiagramObject style. It uses either the style or the properties.
-        /// style:    set according to style (overwrite)
-        /// properties: set the EA properties
+        /// Set DiagramObject properties. You can use 'style' and/or 'properties'. 'style' can be 'none' to not use the style.
+        /// First set style (overwrite all styles or none) than update styles by properties.
+        /// style:      set according to style (overwrite everything)
+        /// properties: set the EA properties (only the chosen properties)
         /// 
         /// </summary>
         /// <param name="rep"></param>
@@ -501,37 +544,46 @@ namespace hoTools.Utils.Diagram
         /// <param name="properties"></param>
         public static void SetDiagramObjectStyle(Repository rep, EA.DiagramObject diaObject, string style, string properties)
         {
-            if (properties != "")
+            
+            if (!String.IsNullOrEmpty(style))
+            {
+                // only use style if not 'none'
+                if (style.ToLower() != "none")
+                {
+                    // preserve DUID Diagram Unit Identifier
+                    string s = (string) diaObject.Style;
+                    Match match = Regex.Match(s, @"DUID=[A-Z0-9a-z]+;");
+                    string duid = "";
+                    if (match.Success) duid = match.Groups[0].Value;
+
+                    diaObject.Style = duid + style.Replace(",", ";").Replace("   ", "").Replace("  ", "")
+                                          .Replace(" ", "")
+                                          .Trim();
+                    try
+                    {
+                        diaObject.Update();
+                    }
+                    catch (Exception e)
+                    {
+                        // Probably style is to long to contain all features
+                        MessageBox.Show($@"EA has a restriction of the length of the Database field.
+{e}
+", @"Style is to long, make it shorter!");
+                    }
+                }
+            }
+
+            // always use properties
+            if (!String.IsNullOrEmpty(properties))
             {
                 // Check if there is a DiagramObject property to use
                 properties = properties.Replace(",", ";").Replace("   ", "").Replace("  ", "").Replace(" ", "").Trim();
                 foreach (var property in properties.Split(';'))
                 {
-                    SetDiagramObjectStyle(rep, diaObject, property);
+                    SetDiagramObjectStyle(rep, diaObject, property.Trim());
                 }
+                diaObject.Update();
 
-            }
-            else
-            {
-                // preserve DUID Diagram Unit Identifier
-                string s = (string) diaObject.Style;
-                Match match = Regex.Match(s, @"DUID=[A-Z0-9a-z]+;");
-                string duid = "";
-                if (match.Success) duid = match.Groups[0].Value;
-
-                diaObject.Style = duid + style.Replace(",", ";").Replace("   ", "").Replace("  ", "").Replace(" ", "")
-                                      .Trim();
-                try
-                {
-                    diaObject.Update();
-                }
-                catch (Exception e)
-                {
-                    // Probably style is to long to contain all features
-                    MessageBox.Show($@"EA has a restriction of the length of the Database field.
-{e}
-", @"Style is to long, make it shorter!");
-                }
             }
 
         }
