@@ -1,10 +1,14 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using EA;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using File = System.IO.File;
 
 // ReSharper disable MemberCanBePrivate.Global
 // ReSharper disable AutoPropertyCanBeMadeGetOnly.Global
@@ -45,15 +49,17 @@ namespace hoTools.Utils.Diagram
         public string Name { get; set; }
         public string Description { get; set; }
         public string Style { get; set; }
+        public string Property { get; set; }
 
-         public string Type { get; set; }
+        public string Type { get; set; }
        [JsonConstructor]
-        public DiagramObjectStyleItem(string name, string description, string type, string style)
+        public DiagramObjectStyleItem(string name, string description, string type, string style, string property)
         {
             Name = name;
             Description = description;
             Type = type;
             Style = style;
+            Property = property;
         }
     }
 
@@ -64,15 +70,75 @@ namespace hoTools.Utils.Diagram
         // Diagram Object Styles
         public List<DiagramObjectStyleItem> DiagramObjectStyleItems { get; }
 
+        static readonly Dictionary<String, PropertyType> DiagramObjectStyles = new Dictionary<String, PropertyType>
+            {
+                {"BackgroundColor",  PropertyType.PropertyInteger},
+                {@"BorderColor",    PropertyType.PropertyInteger},
+                {@"BorderLineWidth", PropertyType.PropertyInteger},
+                {@"DiagramDisplayMode", PropertyType.PropertyInteger},
+                {@"FeatureStereotypesToHide", PropertyType.PropertyString},
+                {@"FontBold", PropertyType.PropertyBool},
+                {@"FontColor", PropertyType.PropertyInteger},
+                {@"FontItalic", PropertyType.PropertyBool},
+                {@"FontName", PropertyType.PropertyString},
+                {@"FontSize", PropertyType.PropertyString},
+                {@"FontUnderline", PropertyType.PropertyBool},
+                {@"IsSelectable", PropertyType.PropertyBool},
+                {@"Sequence", PropertyType.PropertyInteger},
+                {@"ShowComposedDiagram", PropertyType.PropertyBool},
+                {@"ShowConstraint", PropertyType.PropertyBool},
+
+                {@"ShowFormattedNotes", PropertyType.PropertyBool},
+                {@"ShowFullyQualifiedTags", PropertyType.PropertyBool},
+                {@"ShowInheritedAttributes", PropertyType.PropertyBool},
+                {@"ShowInheritedConstraints", PropertyType.PropertyBool},
+
+                {@"ShowInheritedOperations", PropertyType.PropertyBool},
+                {@"ShowInheritedResponsibilities", PropertyType.PropertyBool},
+                {@"ShowInheritedTags", PropertyType.PropertyBool},
+                {@"ShowNotes", PropertyType.PropertyBool},
+
+                {@"ShowPackageOperations", PropertyType.PropertyBool},
+                {@"ShowPackageAttributes", PropertyType.PropertyBool},
+
+                {@"ShowPortType", PropertyType.PropertyBool},
+                {@"ShowPrivateAttributes", PropertyType.PropertyBool},
+                {@"ShowPrivateOperations", PropertyType.PropertyBool},
+                {@"ShowProtectedAttributes", PropertyType.PropertyBool},
+                {@"ShowProtectedOperations", PropertyType.PropertyBool},
+
+                {@"ShowPublicAttributes", PropertyType.PropertyBool},
+                {@"ShowPublicOperations", PropertyType.PropertyBool},
+                {@"ShowResponsibilities", PropertyType.PropertyBool},
+                {@"ShowRunstates", PropertyType.PropertyBool},
+                {@"ShowStructuredCompartments", PropertyType.PropertyBool},
+
+                {@"ShowTags", PropertyType.PropertyBool},
+                {@"TextAlign", PropertyType.PropertyInteger}
+            };
+
+        private delegate void EaDiaObjectBoolProperty(EA.DiagramObject diaObject, bool boolProperty);
+        // Set Object Diagram Property for an integer
+        private delegate void EaDiaObjectIntProperty(EA.DiagramObject diaObject, int intProperty);
+        // Set Object Diagram Property for an integer
+        private delegate void EaDiaObjectStringProperty(EA.DiagramObject diaObject, string stringProperty);
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="jasonFilePath"></param>
+
         public DiagramStyle(string jasonFilePath)
         {
+            // Set Object Diagram Property for a bool
+            
             // use 'Deserializing Partial JSON Fragments'
             try
             {
                 // Read JSON
-                string text = System.IO.File.ReadAllText(jasonFilePath);
+                string text = File.ReadAllText(jasonFilePath);
                 JObject search = JObject.Parse(text);
 
+                //----------------------------------------------------------------------
                 // Deserialize "DiagramStyle"
                 // get JSON result objects into a list
                 IList<JToken> results = search["DiagramStyle"].Children().ToList();
@@ -87,6 +153,7 @@ namespace hoTools.Utils.Diagram
                     }
                 DiagramStyleItems = searchResults.ToList<DiagramStyleItem>();
 
+                //----------------------------------------------------------------------
                 // Deserialize "DiagramObjectStyle"
                 // get JSON result objects into a list
                 IList<JToken> diaObjects = search["DiagramObjectStyle"].Children().ToList();
@@ -173,8 +240,89 @@ namespace hoTools.Utils.Diagram
             return insertTemplateMenuItem;
 
         }
+       
+       
+        /// <summary>
+        /// Set Ea Diagram Object Style
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <param name="diaObj"></param>
+        /// <param name="style"></param>
+        private static void SetDiagramObjectStyle(Repository rep, EA.DiagramObject diaObj, string style)
+        {
+            // extract name and value
+            Match match = Regex.Match(style, $@"(\w+)=(\w+);");
+            if (!match.Success)
+            {
+                MessageBox.Show($"PropertyStyle='{style}', should be 'Property=xxxx;'","Invalid Property DiagramObject Style");
+                return;
+            }
+            if (match.Groups.Count != 2)
+            {
+                MessageBox.Show($"PropertyStyle='{style}', should be 'Property=xxxx;'",
+                    "Invalid Property DiagramObject Style");
+            }
 
 
+            string propertyName = match.Groups[1].Value;
+            PropertyType typeProperty;
+            if (! DiagramObjectStyles.TryGetValue(propertyName, out typeProperty))
+            {
+                MessageBox.Show($"PropertyStyle='{style}'", "Not supported Property DiagramObject Style");
+                return;
+            }
+
+
+            MethodInfo method = typeof(EA.DiagramObject).GetMethod(propertyName,
+                BindingFlags.Public | BindingFlags.Instance,
+                null,
+                CallingConventions.Any,
+                new System.Type[] { typeof(int) },
+                null);
+            try
+            {
+                string propertyValue = match.Groups[2].Value;
+                switch (typeProperty)
+                {
+                        
+                        case PropertyType.PropertyBool:
+                            var setPropertyBool = (EaDiaObjectBoolProperty)Delegate.CreateDelegate(typeof(EaDiaObjectIntProperty), 0, method);
+                            bool boolProperty;
+                            if (!Boolean.TryParse(propertyValue, out boolProperty))
+                            {
+                                MessageBox.Show($"Property='{propertyValue}', should be Bool",
+                                    "Property DiagramObject Style isn't Bool");
+                                return;
+                            }
+                        setPropertyBool.Invoke(diaObj, boolProperty);
+                        break;
+                        case PropertyType.PropertyInteger:
+                            var setPropertyInt = (EaDiaObjectIntProperty)Delegate.CreateDelegate(typeof(EaDiaObjectIntProperty), 0, method);
+                            int intProperty;
+                            if (!Int32.TryParse(propertyValue, out intProperty))
+                            {
+                                MessageBox.Show($"Property='{propertyValue}', should be Integer",
+                                    "Property DiagramObject Style isn't Integer");
+                                return;
+                            }
+                            setPropertyInt.Invoke(diaObj, intProperty);
+                        break;
+                        case PropertyType.PropertyString:
+                            var setPropertyString = (EaDiaObjectStringProperty)Delegate.CreateDelegate(typeof(EaDiaObjectStringProperty), 0, method);
+                            setPropertyString.Invoke(diaObj, propertyValue);
+                        break;
+                }
+               
+                
+            }
+            catch (Exception e)
+            {
+                
+            }
+
+            // Dictionary<string name, EaStyleItem> styles = new Dictionary<string name, EaStyleItem>
+
+        }
 
 
         /// <summary>
@@ -189,7 +337,7 @@ namespace hoTools.Utils.Diagram
         /// <param name="dia"></param>
         /// <param name="par">par[0] contains the values as a semicolon/comma separated types</param>
         /// <param name="par">par[1] contains the possible diagram types</param>
-        public static void SetDiagramStyle(EA.Repository rep, EA.Diagram dia, string[] par)
+        public static void SetDiagramStyle(Repository rep, EA.Diagram dia, string[] par)
         {
             // Make '; as delimiter for types
             string styles = par[0].Replace(",", ";");
@@ -232,7 +380,7 @@ namespace hoTools.Utils.Diagram
         /// <param name="dia"></param>
         /// <param name="name"></param>
         /// <param name="value"></param>
-        private static void SetAdvancedStyle(EA.Repository rep, EA.Diagram dia, string name, string value)
+        private static void SetAdvancedStyle(Repository rep, EA.Diagram dia, string name, string value)
         {
             switch (name.ToLower().Trim())
             {
@@ -342,31 +490,48 @@ namespace hoTools.Utils.Diagram
         }
 
         /// <summary>
-        /// Set DiagramObject style. 
+        /// Set DiagramObject style. It uses either the style or the properties.
+        /// style:    set according to style (overwrite)
+        /// properties: set the EA properties
         /// 
         /// </summary>
         /// <param name="rep"></param>
         /// <param name="diaObject"></param>
-        /// <param name="style"></param>
-        public static void SetDiagramObjectStyle(EA.Repository rep, EA.DiagramObject diaObject, string style)
+        /// <param name="style">Either style or properties</param>
+        /// <param name="properties"></param>
+        public static void SetDiagramObjectStyle(Repository rep, EA.DiagramObject diaObject, string style, string properties)
         {
-            // preserve DUID Diagram Unit Identifier
-            string s = (string)diaObject.Style;
-            Match match = Regex.Match(s, @"DUID=[A-Z0-9a-z]+;");
-            string duid = "";
-            if (match.Success) duid = match.Groups[0].Value;
+            if (properties != "")
+            {
+                // Check if there is a DiagramObject property to use
+                properties = properties.Replace(",", ";").Replace("   ", "").Replace("  ", "").Replace(" ", "").Trim();
+                foreach (var property in properties.Split(';'))
+                {
+                    SetDiagramObjectStyle(rep, diaObject, property);
+                }
 
-            diaObject.Style = duid + style.Replace(",", ";").Replace("   ","").Replace("  ", "").Replace(" ", "").Trim();
-            try
-            {
-                diaObject.Update();
             }
-            catch (Exception e)
+            else
             {
-                // Probably style is to long to contain all features
-                MessageBox.Show($@"EA has a restriction of the length of the Database field.
+                // preserve DUID Diagram Unit Identifier
+                string s = (string) diaObject.Style;
+                Match match = Regex.Match(s, @"DUID=[A-Z0-9a-z]+;");
+                string duid = "";
+                if (match.Success) duid = match.Groups[0].Value;
+
+                diaObject.Style = duid + style.Replace(",", ";").Replace("   ", "").Replace("  ", "").Replace(" ", "")
+                                      .Trim();
+                try
+                {
+                    diaObject.Update();
+                }
+                catch (Exception e)
+                {
+                    // Probably style is to long to contain all features
+                    MessageBox.Show($@"EA has a restriction of the length of the Database field.
 {e}
 ", @"Style is to long, make it shorter!");
+                }
             }
 
         }
@@ -434,8 +599,12 @@ namespace hoTools.Utils.Diagram
         }
 
 
-
-
+        private enum PropertyType
+        {
+            PropertyBool,
+            PropertyInteger,
+            PropertyString
+        }
     }
 }
 

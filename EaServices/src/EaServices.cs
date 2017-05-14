@@ -463,28 +463,31 @@ namespace hoTools.EaServices
         /// </summary>
         /// <param name="rep"></param>
         /// <param name="pos"></param>
-        public static void DiagramObjectStyleWrapper(Repository rep, int pos)
+        private static void DiagramObjectStyleWrapper(Repository rep, int pos)
         {
             if (DiagramStyle.DiagramStyleItems == null && DiagramStyle.DiagramStyleItems.Count <= pos)
             {
                 MessageBox.Show("", "No DiagramObject style in 'Settings.json' found");
                 return;
             }
-            string style = $@"{DiagramStyle.DiagramObjectStyleItems[pos].Style}";
-            DiagramObjectStyleWrapper(rep, style);
+            string style = $@"{DiagramStyle.DiagramObjectStyleItems[pos].Style}".Trim();
+            string property  = $@"{DiagramStyle.DiagramObjectStyleItems[pos].Property}".Trim();
+            DiagramObjectStyleWrapper(rep, style, property);
         }
+
         /// <summary>
         /// Wrapper to change DiagramObject style
         /// </summary>
         /// <param name="rep"></param>
         /// <param name="style"></param>
-        public static void DiagramObjectStyleWrapper(Repository rep, string style)
+        /// <param name="property"></param>
+        public static void DiagramObjectStyleWrapper(Repository rep, string style, string property)
         {
             EaDiagram eaDia = new EaDiagram(rep, getAllDiagramObject: true);
             if (eaDia.Dia == null) return;
             foreach (var diaObj in eaDia.SelObjects)
             {
-                DiagramStyle.SetDiagramObjectStyle(rep, diaObj, style);
+                DiagramStyle.SetDiagramObjectStyle(rep, diaObj, style, property);
             }
 
 

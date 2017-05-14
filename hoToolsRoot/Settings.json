@@ -59,7 +59,13 @@
   ],
   'DiagramObjectStyle':
   [
-
+    // Name:         Template name
+    // Description:  Description for e.g. Tooltip
+    // Type:         Type to apply to 
+    // Style:        The Style according to rules in DiagramObject property Style / column ObjectStyle
+    // Property:     The EA property to directly modify (ShowFormattedNotes,..)
+    //               Be careful with mixing Style and Property
+    //
     // Hiding  Styles:  AttPro=0;AttPri=0;AttPub=0;AttPkg=0;OpPro=0;OpPri=0;OpPub=0;OpPkg=0;
     // Showing Styles:  Tag=1;Constraint=1;PType=1;Notes=1000;Formatted=1;RzO=1;Runstate=1;Responsibility;FQTag=1;OpInh=1;AttInh=1;RzO=n;
     // Pro=0:            Hide Protected (Attribute/Operation)
@@ -82,40 +88,46 @@
     // Type: Currently not supported
     {
       "Name": "Default1, no Notes",
-      "Description": "No Notes\r\nNo Attributres\r\nShow Constraints",
+      "Description": "No Notes\r\nNo Attributres",
       "Type": "",
-      "Style": "HideIcon=0;AttPri=0;AttPkg=0;AttPro=0;AttPub=0;AttCustom=0;OpCustom=0;PType=0;RzO=1;Constraint=1;"
+      "Style": "",
+      "Property":  "ShowNotes=false, ShowPrivateAttributes=false, ShowProtectedAttributes=false, ShowPublicAttributes=false, ShowPrivateOperations=false, ShowProtectedOperations=false, ShowPublicOperations=false" 
     },
     {
       "Name": "Default2, Notes",
-      "Description": "Notes\r\nNo Attributres\r\nShow Constraints",
+      "Description": "Notes\r\nNo Attributres",
       "Type": "",
-      "Style": "HideIcon=0;AttPri=0;AttPkg=0;AttPro=0;AttPub=0;AttCustom=0;OpCustom=0;PType=0;RzO=1;Constraint=1;Notes=1000;"
+      "Style": "",
+      "Property":  "ShowNotes=true, ShowFormattedNotes, ShowPrivateAttributes=false, ShowProtectedAttributes=false, ShowPublicAttributes=false " 
     },
     {
       "Name": "Notes, Public Operations",
       "Description": "Notes\r\nNo Protected,Private Operations\r\nTags",
       "Type": "",
-      "Style": "Notes=1000;OpPro=0;OpPri=0;OpPkg=0"
+      "Style": "Notes=1000;OpPro=0;OpPri=0;OpPkg=0",
+      "Property":  ""
     },
     {
       "Name": "Tags",
       "Description": "No Notes\r\nNo Operations\r\nNo Attributes\r\nTags",
       "Type": "", 
-      "Style": "HideIcon=0;AttPri=0;AttPkg=0;AttPro=0;AttPub=0;AttCustom=0;OpCustom=0;OpPro=0;OpPri=0;OpPkg=0;PType=0;RzO=1;"
+      "Style": "HideIcon=0;AttPri=0;AttPkg=0;AttPro=0;AttPub=0;AttCustom=0;OpCustom=0;OpPro=0;OpPri=0;OpPkg=0;PType=0;RzO=1;",
+      "Property":  ""
     },
     {
       "Name": "Wrap Features",
       "Description": "Wrap Features",
       "Type": "", 
-      "Style": "HideIcon=0;RzO=2;"
+      "Style": "HideIcon=0;RzO=2;",
+      "Property":  ""
     },
     {
 
       "Name": "Resize Features",
       "Description": "Resize Features",
       "Type": "", 
-      "Style": "HideIcon=0;RzO=1;"
+      "Style": "HideIcon=0;RzO=1;",
+      "Property": ""
     }
   ]
 }
