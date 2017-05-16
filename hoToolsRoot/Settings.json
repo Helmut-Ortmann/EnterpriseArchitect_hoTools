@@ -85,18 +85,18 @@
     //
     // Note:   The Database Field has a length constraint. If you get an error you have to reduce the Style content. 
  
-//
+    //
     // Type: Currently not supported
     {
       "Name": "Default1, no Notes",
-      "Description": "No Notes\r\nNo Attributres",
+      "Description": "No Notes\r\nNo Attributes",
       "Type": "",
       "Style": "none",
       "Property":  "ShowNotes=false, ShowPrivateAttributes=false, ShowProtectedAttributes=false, ShowPublicAttributes=false, ShowPrivateOperations=false, ShowProtectedOperations=false, ShowPublicOperations=false" 
     },
     {
       "Name": "Default2, Notes",
-      "Description": "Notes\r\nNo Attributres",
+      "Description": "Notes\r\nNo Attributes",
       "Type": "",
       "Style": "none",
       "Property":  "ShowNotes=true, ShowFormattedNotes, ShowPrivateAttributes=false, ShowProtectedAttributes=false, ShowPublicAttributes=false " 

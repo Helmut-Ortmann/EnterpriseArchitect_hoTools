@@ -9,6 +9,7 @@ using EA;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using File = System.IO.File;
+using hoTools.Utils.COM;
 
 // ReSharper disable MemberCanBePrivate.Global
 // ReSharper disable AutoPropertyCanBeMadeGetOnly.Global
@@ -251,13 +252,8 @@ namespace hoTools.Utils.Diagram
                                     "Property DiagramObject Style isn't Bool");
                                 return;
                             }
-                            diaObj.ShowConstraints = true;
-
-                        // set property of type Boolean by PropertyName. The Property Name is case insensitive (ignore case)
-                        //object[] o = new object[] { boolProperty };
-                        //diaObj.GetType().InvokeMember("ShowConstraints", BindingFlags.PutRefDispProperty | BindingFlags.IgnoreCase, null, diaObj, o);
-
-                            switch (propertyName)
+                        // Com.SetProperty(diaObj, propertyName, boolProperty);
+                        switch (propertyName)
                             {
                                 case "FontBold":
                                     diaObj.FontBold = boolProperty;
@@ -349,11 +345,13 @@ namespace hoTools.Utils.Diagram
                                     "Property DiagramObject Style isn't Integer");
                                 return;
                             }
-                        diaObj.GetType().InvokeMember(propertyName, System.Reflection.BindingFlags.SetProperty, null, diaObj, new object[] { int32Property });
+                            Com.SetProperty(diaObj, propertyName, int32Property);
+                            //diaObj.GetType().InvokeMember(propertyName, System.Reflection.BindingFlags.SetProperty, null, diaObj, new object[] { int32Property });
                         break;
 
                         case "String":
-                            diaObj.GetType().InvokeMember(propertyName, System.Reflection.BindingFlags.SetProperty, null, diaObj, new object[] {propertyValue});
+                            Com.SetProperty(diaObj, propertyName, propertyValue);
+                            //diaObj.GetType().InvokeMember(propertyName, System.Reflection.BindingFlags.SetProperty, null, diaObj, new object[] {propertyValue});
                         break;
                 }
                
