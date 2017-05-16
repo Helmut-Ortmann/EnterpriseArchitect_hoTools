@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Forms;
 using System.Xml.Linq;
 using EA;
 
@@ -139,5 +140,37 @@ namespace hoTools.Utils.SQL
             return l;
         }
         #endregion
+        /// <summary>
+        /// Get list of strings from a SQL
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <param name="columnName"></param>
+        /// <returns></returns>
+        public List<string> GetListOfStringFromSql(string sql, string columnName)
+        {
+            List<string> l = new List<string>();
+            string str = _rep.SQLQuery(sql);
+            XElement xelement = XElement.Parse(str);
+            foreach (XElement xEle in xelement.Descendants("Row"))
+            {
+                l.Add(xEle.Element(columnName).Value);
+            }
+
+            return l;
+        }
+
+        public static bool SqlUpdate(EA.Repository rep, string updateString)
+        {
+            try
+            {
+                rep.Execute(updateString);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($@"Update:\r\n{updateString}\r\n\r\n{e}", "Error update SQL");
+                return false;
+            }
+            return true;
+        }
     }
 }

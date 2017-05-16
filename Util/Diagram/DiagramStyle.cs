@@ -1,8 +1,6 @@
 ﻿using System;
-using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using EA;
@@ -29,16 +27,17 @@ namespace hoTools.Utils.Diagram
         public string Type { get; set; }
         public string Pdata { get; set; }
         public string StyleEx { get; set; }
-        public string Advanced { get; set; }
+        public string Property { get; set; }
 
         [JsonConstructor]
-        public DiagramStyleItem(string name, string description, string type, string pdata, string styleEx)
+        public DiagramStyleItem(string name, string description, string type, string pdata, string styleEx, string property)
         {
             Name = name;
             Description = description;
             Type = type;
             Pdata = pdata;
             StyleEx = styleEx;
+            Property = property;
         }
     }
     /// <summary>
@@ -53,7 +52,7 @@ namespace hoTools.Utils.Diagram
         public string Property { get; set; }
 
         public string Type { get; set; }
-       [JsonConstructor]
+        [JsonConstructor]
         public DiagramObjectStyleItem(string name, string description, string type, string style, string property)
         {
             Name = name;
@@ -67,7 +66,7 @@ namespace hoTools.Utils.Diagram
     public class DiagramStyle
     {
         // Diagram Styles
-        public List<DiagramStyleItem> DiagramStyleItems { get;  }
+        public List<DiagramStyleItem> DiagramStyleItems { get; }
         // Diagram Object Styles
         public List<DiagramObjectStyleItem> DiagramObjectStyleItems { get; }
 
@@ -79,12 +78,12 @@ namespace hoTools.Utils.Diagram
         public DiagramStyle(string jasonFilePath)
         {
             // Set Object Diagram Property for a bool
-            
+
             // use 'Deserializing Partial JSON Fragments'
             try
             {
                 // Read JSON
-                string text = File.ReadAllText(jasonFilePath);
+                string text = System.IO.File.ReadAllText(jasonFilePath);
                 JObject search = JObject.Parse(text);
 
                 //----------------------------------------------------------------------
@@ -94,13 +93,13 @@ namespace hoTools.Utils.Diagram
                 // serialize JSON results into .NET objects
                 IList<DiagramStyleItem> searchResults = new List<DiagramStyleItem>();
                 foreach (JToken result in results)
-                    {
-                        // JToken.ToObject is a helper method that uses JsonSerializer internally
-                        DiagramStyleItem searchResult = result.ToObject<DiagramStyleItem>();
-                        if (searchResult == null) continue;
-                        searchResults.Add(searchResult);
-                    }
-                DiagramStyleItems = searchResults.ToList<DiagramStyleItem>();
+                {
+                    // JToken.ToObject is a helper method that uses JsonSerializer internally
+                    DiagramStyleItem searchResult = result.ToObject<DiagramStyleItem>();
+                    if (searchResult == null) continue;
+                    searchResults.Add(searchResult);
+                }
+                DiagramStyleItems = searchResults.ToList();
 
                 //----------------------------------------------------------------------
                 // Deserialize "DiagramObjectStyle"
@@ -226,9 +225,9 @@ namespace hoTools.Utils.Diagram
                 return;
             }
             string propertyTyp = p.PropertyType.Name;
-            if (! (propertyTyp == "Boolean" ||
-                propertyTyp == "String"  ||
-                propertyTyp == "Int32"))        
+            if (!(propertyTyp == "Boolean" ||
+                  propertyTyp == "String" ||
+                  propertyTyp == "Int32"))
             {
                 //MessageBox.Show($"PropertyType '{propertyTyp}' not supported.\r\nOnly: Int32=long, Boolean, String\r\nPropertyStyle='{style}'",
                 //    $@"No valid DiagramObject Property Type '{propertyName}:{propertyTyp}'");
@@ -238,98 +237,98 @@ namespace hoTools.Utils.Diagram
             }
 
 
- 
+
             try
             {
                 switch (propertyTyp)
                 {
-                        
-                        case "Boolean":
-                            bool boolProperty;
-                            if (!bool.TryParse(propertyValue, out boolProperty))
-                            {
-                                MessageBox.Show($"Property='{propertyValue}', should be Bool",
-                                    "Property DiagramObject Style isn't Bool");
-                                return;
-                            }
+
+                    case "Boolean":
+                        bool boolProperty;
+                        if (!bool.TryParse(propertyValue, out boolProperty))
+                        {
+                            MessageBox.Show($"Property='{propertyValue}', should be Bool",
+                                "Property DiagramObject Style isn't Bool");
+                            return;
+                        }
                         // Com.SetProperty(diaObj, propertyName, boolProperty);
                         switch (propertyName)
-                            {
-                                case "FontBold":
-                                    diaObj.FontBold = boolProperty;
-                                    break;
-                                case "FontItalic":
-                                    diaObj.FontItalic = boolProperty;
-                                    break;
-                                case "FontUnderline":
-                                    diaObj.FontUnderline = boolProperty;
-                                    break;
-                                case "IsSelectable":
-                                    diaObj.IsSelectable = boolProperty;
-                                    break;
-                                case "ShowConstraints":
-                                    diaObj.ShowConstraints = boolProperty;
-                                    break;
-                                case "ShowFormattedNotes":
-                                    diaObj.ShowFormattedNotes = boolProperty;
-                                    break;
-                                case "ShowFullyQualifiedTags":
-                                    diaObj.ShowFullyQualifiedTags = boolProperty;
-                                    break;
-                                case "ShowInheritedAttributes":
-                                    diaObj.ShowInheritedAttributes = boolProperty;
-                                    break;
-                                case "ShowInheritedConstraints":
-                                    diaObj.ShowInheritedConstraints = boolProperty;
-                                    break;
-                                case "ShowInheritedOperations":
-                                    diaObj.ShowInheritedOperations = boolProperty;
-                                    break;
-                                case "ShowInheritedResponsibilities":
-                                    diaObj.ShowInheritedResponsibilities = boolProperty;
-                                    break;
-                                case "ShowInheritedTags":
-                                    diaObj.ShowInheritedTags = boolProperty;
-                                    break;
-                                case "ShowPortType":
-                                    diaObj.ShowPortType = boolProperty;
-                                    break;
-                                case "ShowPrivateAttributes":
-                                    diaObj.ShowPrivateAttributes = boolProperty;
-                                    break;
-                                case "ShowPublicAttributes":
-                                    diaObj.ShowPublicAttributes = boolProperty;
-                                    break;
-                                case "ShowProtectedAttributes":
-                                    diaObj.ShowProtectedAttributes = boolProperty;
-                                    break;
-                                case "ShowPrivateOperations":
-                                    diaObj.ShowPrivateOperations = boolProperty;
-                                    break;
-                                case "ShowPublicOperations":
-                                    diaObj.ShowPublicOperations = boolProperty;
-                                    break;
-                                case "ShowProtectedOperations":
-                                    diaObj.ShowProtectedOperations = boolProperty;
-                                    break;
-                                case "ShowPackageOperations":
-                                    diaObj.ShowPackageOperations = boolProperty;
-                                    break;
-                                case "ShowPackageAttributes":
-                                    diaObj.ShowPackageAttributes = boolProperty;
-                                    break;
-                                case "ShowResponsibilities":
-                                    diaObj.ShowResponsibilities = boolProperty;
-                                    break;
-                                case "ShowRunstates":
-                                    diaObj.ShowRunstates = boolProperty;
-                                    break;
-                                case "ShowStructuredCompartments":
-                                    diaObj.ShowStructuredCompartments = boolProperty;
-                                    break;
-                                case "ShowTags":
-                                    diaObj.ShowStructuredCompartments = boolProperty;
-                                    break;
+                        {
+                            case "FontBold":
+                                diaObj.FontBold = boolProperty;
+                                break;
+                            case "FontItalic":
+                                diaObj.FontItalic = boolProperty;
+                                break;
+                            case "FontUnderline":
+                                diaObj.FontUnderline = boolProperty;
+                                break;
+                            case "IsSelectable":
+                                diaObj.IsSelectable = boolProperty;
+                                break;
+                            case "ShowConstraints":
+                                diaObj.ShowConstraints = boolProperty;
+                                break;
+                            case "ShowFormattedNotes":
+                                diaObj.ShowFormattedNotes = boolProperty;
+                                break;
+                            case "ShowFullyQualifiedTags":
+                                diaObj.ShowFullyQualifiedTags = boolProperty;
+                                break;
+                            case "ShowInheritedAttributes":
+                                diaObj.ShowInheritedAttributes = boolProperty;
+                                break;
+                            case "ShowInheritedConstraints":
+                                diaObj.ShowInheritedConstraints = boolProperty;
+                                break;
+                            case "ShowInheritedOperations":
+                                diaObj.ShowInheritedOperations = boolProperty;
+                                break;
+                            case "ShowInheritedResponsibilities":
+                                diaObj.ShowInheritedResponsibilities = boolProperty;
+                                break;
+                            case "ShowInheritedTags":
+                                diaObj.ShowInheritedTags = boolProperty;
+                                break;
+                            case "ShowPortType":
+                                diaObj.ShowPortType = boolProperty;
+                                break;
+                            case "ShowPrivateAttributes":
+                                diaObj.ShowPrivateAttributes = boolProperty;
+                                break;
+                            case "ShowPublicAttributes":
+                                diaObj.ShowPublicAttributes = boolProperty;
+                                break;
+                            case "ShowProtectedAttributes":
+                                diaObj.ShowProtectedAttributes = boolProperty;
+                                break;
+                            case "ShowPrivateOperations":
+                                diaObj.ShowPrivateOperations = boolProperty;
+                                break;
+                            case "ShowPublicOperations":
+                                diaObj.ShowPublicOperations = boolProperty;
+                                break;
+                            case "ShowProtectedOperations":
+                                diaObj.ShowProtectedOperations = boolProperty;
+                                break;
+                            case "ShowPackageOperations":
+                                diaObj.ShowPackageOperations = boolProperty;
+                                break;
+                            case "ShowPackageAttributes":
+                                diaObj.ShowPackageAttributes = boolProperty;
+                                break;
+                            case "ShowResponsibilities":
+                                diaObj.ShowResponsibilities = boolProperty;
+                                break;
+                            case "ShowRunstates":
+                                diaObj.ShowRunstates = boolProperty;
+                                break;
+                            case "ShowStructuredCompartments":
+                                diaObj.ShowStructuredCompartments = boolProperty;
+                                break;
+                            case "ShowTags":
+                                diaObj.ShowStructuredCompartments = boolProperty;
+                                break;
                             default:
                                 MessageBox.Show($@"Style={style}'\r\nProperty:'{propertyName}'", $@"Invalid DiagramObjectStyle '{propertyName}'");
                                 break;
@@ -337,25 +336,25 @@ namespace hoTools.Utils.Diagram
 
                         break;
 
-                        case "Int32":
-                            int int32Property;
-                            if (!Int32.TryParse(propertyValue, out int32Property))
-                            {
-                                MessageBox.Show($"Property='{propertyValue}', should be Integer (int32, long)",
-                                    "Property DiagramObject Style isn't Integer");
-                                return;
-                            }
-                            Com.SetProperty(diaObj, propertyName, int32Property);
-                            //diaObj.GetType().InvokeMember(propertyName, System.Reflection.BindingFlags.SetProperty, null, diaObj, new object[] { int32Property });
+                    case "Int32":
+                        int int32Property;
+                        if (!Int32.TryParse(propertyValue, out int32Property))
+                        {
+                            MessageBox.Show($"Property='{propertyValue}', should be Integer (int32, long)",
+                                "Property DiagramObject Style isn't Integer");
+                            return;
+                        }
+                        Com.SetProperty(diaObj, propertyName, int32Property);
+                        //diaObj.GetType().InvokeMember(propertyName, System.Reflection.BindingFlags.SetProperty, null, diaObj, new object[] { int32Property });
                         break;
 
-                        case "String":
-                            Com.SetProperty(diaObj, propertyName, propertyValue);
-                            //diaObj.GetType().InvokeMember(propertyName, System.Reflection.BindingFlags.SetProperty, null, diaObj, new object[] {propertyValue});
+                    case "String":
+                        Com.SetProperty(diaObj, propertyName, propertyValue);
+                        //diaObj.GetType().InvokeMember(propertyName, System.Reflection.BindingFlags.SetProperty, null, diaObj, new object[] {propertyValue});
                         break;
                 }
-               
-                
+
+
             }
             catch (Exception e)
             {
@@ -376,14 +375,19 @@ namespace hoTools.Utils.Diagram
         /// <param name="rep"></param>
         /// <param name="dia"></param>
         /// <param name="par">par[0] contains the values as a semicolon/comma separated types</param>
-        /// <param name="par">par[1] contains the possible diagram types</param>
+        /// <param name="par">par[1] contains the values as a semicolon/comma separated properties</param>
+        /// <param name="par">par[2] contains the possible diagram types</param>
+
         public static void SetDiagramStyle(Repository rep, EA.Diagram dia, string[] par)
         {
             // Make '; as delimiter for types
             string styles = par[0].Replace(",", ";");
-            string dStyles = par[1].Replace(",", ";");
+            string properties = par[1].Replace(",", ";");
+            string dStyles = par[2].Replace(",", ";");
+
 
             string[] styleEx = styles.Split(';');
+            string[] propertyL = properties.Split(';');
             string diaStyle = dia.StyleEx;
             string diaExtendedStyle = dia.ExtendedStyle.Trim();
             if (!DiagramIsToChange(dia, dStyles)) return;
@@ -395,6 +399,13 @@ namespace hoTools.Utils.Diagram
             // find: Name=value
             Regex rx = new Regex(@"([^=]*)=(.*)");
             rep.SaveDiagram(dia.DiagramID);
+
+            // update the ExtendedStyle, StyleEX with PDATA1, StyleEX
+            // Steps of update:
+            // 1. StyleEx, ExtendedStyleEx
+            // 2. Properties which represents EA Properties
+            // 3. Properties which are set by SQL
+            // Don't change order, Update()
             foreach (string style in styleEx)
             {
                 if (style.Trim() == "") continue;
@@ -404,128 +415,211 @@ namespace hoTools.Utils.Diagram
                 diaStyle = Regex.Replace(diaStyle, patternFind, $@"{style};");
                 diaExtendedStyle = Regex.Replace(diaExtendedStyle, patternFind, $@"{style};");
                 // advanced styles
-                SetAdvancedStyle(rep, dia, match.Groups[1].Value, match.Groups[2].Value);
+                //SetAdvancedStyle(rep, dia, match.Groups[1].Value, match.Groups[2].Value);
+                //var schowForeign0 = rep.GetStringsBySql($@"select ShowForeign from t_diagram where Diagram_ID = {dia.DiagramID}");
             }
             // delete spaces to avoid sql exception (string to long) 
-            dia.ExtendedStyle = diaExtendedStyle.Replace(";   ",";").Replace(";  ", ";").Replace("; ", ";").Trim();
-            dia.StyleEx = diaStyle.Replace(";   ", ";").Replace(";  ", ";").Replace("; ", ";").Trim(); 
+            dia.ExtendedStyle = diaExtendedStyle.Replace(";   ", ";").Replace(";  ", ";").Replace("; ", ";").Trim();
+            dia.StyleEx = diaStyle.Replace(";   ", ";").Replace(";  ", ";").Replace("; ", ";").Trim();
             dia.Update();
-            rep.ReloadDiagram(dia.DiagramID);
 
+            // update non SQL Diagram properties
+            foreach (string property in properties.Split(';'))
+            {
+                if (property.Trim() == "") continue;
+                Match match = rx.Match(property.Trim());
+                if (!match.Success) continue;
+                // advanced styles
+                SetDiagramProperty(rep, dia, match.Groups[1].Value, match.Groups[2].Value, withSql: false);
+            }
+            dia.Update();
+
+            // update SQL Diagram properties
+            foreach (string property in properties.Split(';'))
+            {
+                if (property.Trim() == "") continue;
+                Match match = rx.Match(property.Trim());
+                if (!match.Success) continue;
+                // advanced styles
+                SetDiagramProperty(rep, dia, match.Groups[1].Value, match.Groups[2].Value, withSql: true);
+            }
+            rep.ReloadDiagram(dia.DiagramID);
         }
+
         /// <summary>
-        /// Handle styles like: Orientation=L/P, Scale=100 (100%)
+        /// Handle Diagram Properties like: Orientation=L/P, Scale=100 (100%) which are independent of the general styles in PDATA, StyleEX.
+        /// Sequence:!!
+        /// 1 Non SQL Diagram Properties
+        /// 2.SQL Diagram Properties
+        /// 
+        /// Rational: It looks as if the EA Update process overwrites SQL changes if not separated!
         /// </summary>
         /// <param name="rep"></param>
         /// <param name="dia"></param>
         /// <param name="name"></param>
         /// <param name="value"></param>
-        private static void SetAdvancedStyle(Repository rep, EA.Diagram dia, string name, string value)
+        /// <param name="withSql">false non SQL, true with SQL</param>
+        private static void SetDiagramProperty(Repository rep, EA.Diagram dia, string name, string value, bool withSql = false)
         {
-            switch (name.ToLower().Trim())
+            if (!withSql)
             {
-                case "orientation":
-                    dia.Orientation = value.Trim();
-                    break;
-                case "scale":
-                    int scale;
-                    if (Int32.TryParse(value.Trim(), out scale))
-                    {
-                        dia.Scale = scale;
-                    }
-                    else
-                    {
-                        MessageBox.Show( $"Invalid Diagram Style 'Scale={value};' in Settings.json");
-                    }
-                    break;
-                case @"cx":
-                    int cx;
-                    if (Int32.TryParse(value.Trim(), out cx))
-                    {
-                        dia.cx = cx;
-                    }
-                    else
-                    {
-                        MessageBox.Show("Should be Integer", $"Invalid Diagram Style 'cx={value};' in Settings.json");
-                    }
-                    break;
-                case @"cy":
-                    int cy;
-                    if (Int32.TryParse(value.Trim(), out cy))
-                    {
-                        dia.cy = cy;
-                    }
-                    else
-                    {
-                        MessageBox.Show("Should be Integer", $"Invalid Diagram Style 'cy={value};' in Settings.json");
-                    }
-                    break;
-                case @"showdetails":
-                    int showDetails;
-                    if (Int32.TryParse(value.Trim(), out showDetails))
-                    {
-                        dia.ShowDetails = showDetails;
-                    }
-                    else
-                    {
-                        MessageBox.Show("Should be 0=Hide/1=Show", $"Invalid Diagram Style 'ShowDetails={value};' in Settings.json");
-                    }
-                    break;
-                case @"showpublic":
-                    bool showPublic;
-                    if (Boolean.TryParse(value.Trim(), out showPublic))
-                    {
-                        dia.ShowPublic = showPublic;
-                    }
-                    else
-                    {
-                        MessageBox.Show("Should be 'true' or 'false'", $"Invalid Diagram Style 'ShowPublic={value};' in Settings.json");
-                    }
-                    break;
-                case @"showprivate":
-                    bool showPrivate;
-                    if (Boolean.TryParse(value.Trim(), out showPrivate))
-                    {
-                        dia.ShowPrivate = showPrivate;
-                    }
-                    else
-                    {
-                        MessageBox.Show("Should be 'true' or 'false'", $"Invalid Diagram Style 'ShowPrivate={value};' in Settings.json");
-                    }
-                    break;
-                case @"showprotected":
-                    bool showProtected;
-                    if (Boolean.TryParse(value.Trim(), out showProtected))
-                    {
-                        dia.ShowProtected = showProtected;
-                    }
-                    else
-                    {
-                        MessageBox.Show("Should be 'true' or 'false'", $"Invalid Diagram Style 'ShowProtected={value};' in Settings.json");
-                    }
-                    break;
-                case @"showpackagecontents":
-                    bool showPackageContents;
-                    if (Boolean.TryParse(value.Trim(), out showPackageContents))
-                    {
-                        dia.ShowPackageContents = showPackageContents;
-                    }
-                    else
-                    {
-                        MessageBox.Show("Should be 'true' or 'false'", $"Invalid Diagram Style 'ShowPackageContents={value};' in Settings.json");
-                    }
-                    break;
-                case @"highlightimports":
-                    bool highLightImports;
-                    if (Boolean.TryParse(value.Trim(), out highLightImports))
-                    {
-                        dia.HighlightImports = highLightImports;
-                    }
-                    else
-                    {
-                        MessageBox.Show("Should be 'true' or 'false'", $"Invalid Diagram Style 'HighLightImports={value};' in Settings.json");
-                    }
-                    break;
+                switch (name.ToLower().Trim())
+                {
+                    case "orientation":
+                        dia.Orientation = value.Trim();
+                        break;
+                    case "scale":
+                        int scale;
+                        if (Int32.TryParse(value.Trim(), out scale))
+                        {
+                            dia.Scale = scale;
+                        }
+                        else
+                        {
+                            MessageBox.Show($"Invalid Diagram Style 'Scale={value};' in Settings.json");
+                        }
+                        break;
+                    case @"cx":
+                        int cx;
+                        if (Int32.TryParse(value.Trim(), out cx))
+                        {
+                            dia.cx = cx;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Should be Integer",
+                                $"Invalid Diagram Style 'cx={value};' in Settings.json");
+                        }
+                        break;
+                    case @"cy":
+                        int cy;
+                        if (Int32.TryParse(value.Trim(), out cy))
+                        {
+                            dia.cy = cy;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Should be Integer",
+                                $"Invalid Diagram Style 'cy={value};' in Settings.json");
+                        }
+                        break;
+                    case @"showdetails":
+                        int showDetails;
+                        if (Int32.TryParse(value.Trim(), out showDetails))
+                        {
+                            dia.ShowDetails = showDetails;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Should be 0=Hide/1=Show",
+                                $"Invalid Diagram Style 'ShowDetails={value};' in Settings.json");
+                        }
+                        break;
+                    case @"showpublic":
+                        bool showPublic;
+                        if (Boolean.TryParse(value.Trim(), out showPublic))
+                        {
+                            dia.ShowPublic = showPublic;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Should be 'true' or 'false'",
+                                $"Invalid Diagram Style 'ShowPublic={value};' in Settings.json");
+                        }
+                        break;
+                    case @"showprivate":
+                        bool showPrivate;
+                        if (Boolean.TryParse(value.Trim(), out showPrivate))
+                        {
+                            dia.ShowPrivate = showPrivate;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Should be 'true' or 'false'",
+                                $"Invalid Diagram Style 'ShowPrivate={value};' in Settings.json");
+                        }
+                        break;
+                    case @"showprotected":
+                        bool showProtected;
+                        if (Boolean.TryParse(value.Trim(), out showProtected))
+                        {
+                            dia.ShowProtected = showProtected;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Should be 'true' or 'false'",
+                                $"Invalid Diagram Style 'ShowProtected={value};' in Settings.json");
+                        }
+                        break;
+                    case @"showpackagecontents":
+                        bool showPackageContents;
+                        if (Boolean.TryParse(value.Trim(), out showPackageContents))
+                        {
+                            dia.ShowPackageContents = showPackageContents;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Should be 'true' or 'false'",
+                                $"Invalid Diagram Style 'ShowPackageContents={value};' in Settings.json");
+                        }
+                        break;
+                    case @"highlightimports":
+                        bool highLightImports;
+                        if (Boolean.TryParse(value.Trim(), out highLightImports))
+                        {
+                            dia.HighlightImports = highLightImports;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Should be 'true' or 'false'",
+                                $"Invalid Diagram Style 'HighLightImports={value};' in Settings.json");
+                        }
+                        break;
+                }
+
+            }
+            else
+            {   // with SQL
+                switch (name.ToLower().Trim())
+                {
+                    case @"showforeign":
+                        //dia.Update();
+                        //rep.ReloadDiagram(dia.DiagramID);
+                        bool showForeign;
+                        if (Boolean.TryParse(value.Trim(), out showForeign))
+                        {
+                            string updateStr = $@"update t_diagram set ShowForeign = {value.Trim()} 
+                                                                          where Diagram_ID = {dia.DiagramID}";
+                            SQL.UtilSql.SqlUpdate(rep, updateStr);
+                            //rep.ReloadDiagram(dia.DiagramID);
+                            //var schowForeign = rep.GetStringsBySql($@"select ShowForeign from t_diagram where Diagram_ID = {dia.DiagramID}");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Should be 'true' or 'false'",
+                                $"Invalid Diagram Style 'ShowForeign={value};' in Settings.json");
+                        }
+                        break;
+                    case @"showborder":
+                        //dia.Update();
+                        //rep.ReloadDiagram(dia.DiagramID);
+                        bool showBorder;
+                        if (Boolean.TryParse(value.Trim(), out showForeign))
+                        {
+                            string updateStr = $@"update t_diagram set ShowBorder = {value.Trim()} 
+                                                                          where Diagram_ID = {dia.DiagramID}";
+                            SQL.UtilSql.SqlUpdate(rep, updateStr);
+                            //rep.ReloadDiagram(dia.DiagramID);
+                            //var schowForeign = rep.GetStringsBySql($@"select ShowForeign from t_diagram where Diagram_ID = {dia.DiagramID}");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Should be 'true' or 'false'",
+                                $"Invalid Diagram Style 'ShowBorder={value};' in Settings.json");
+                        }
+                        break;
+                }
+
             }
         }
 
@@ -542,14 +636,14 @@ namespace hoTools.Utils.Diagram
         /// <param name="properties"></param>
         public static void SetDiagramObjectStyle(Repository rep, EA.DiagramObject diaObject, string style, string properties)
         {
-            
+
             if (!String.IsNullOrEmpty(style))
             {
                 // only use style if not 'none'
                 if (style.ToLower() != "none")
                 {
                     // preserve DUID Diagram Unit Identifier
-                    string s = (string) diaObject.Style;
+                    string s = (string)diaObject.Style;
                     Match match = Regex.Match(s, @"DUID=[A-Z0-9a-z]+;");
                     string duid = "";
                     if (match.Success) duid = match.Groups[0].Value;
@@ -648,13 +742,6 @@ namespace hoTools.Utils.Diagram
             else return "";
         }
 
-
-        private enum PropertyType
-        {
-            PropertyBool,
-            PropertyInteger,
-            PropertyString
-        }
     }
 }
 

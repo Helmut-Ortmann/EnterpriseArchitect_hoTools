@@ -207,44 +207,7 @@ namespace hoTools.Utils.Diagram
         #endregion
 
 
-        /// <summary>
-        /// Set Diagram styles:
-        /// HideQuals=1 HideQualifiers: 
-        /// OpParams=2  Show full Operation Parameter
-        /// ScalePI=1   Scale to fit page
-        /// </summary>
-        /// <param name="rep"></param>
-        /// <param name="dia"></param>
-        /// <param name="par">par[0] contains the values as a semicolon separated list</param>
-        // ReSharper disable once UnusedMember.Global
-        public static void SetDiagramStyle(EA.Repository rep, EA.Diagram dia, string[] par)
-        {
-            string[] styleEx = par[0].Split(';');
-            string diaStyle = dia.StyleEx;
-            string diaExtendedStyle = dia.ExtendedStyle.Trim();
-            // no distinguishing between StyleEx and ExtendedStayle, may cause of trouble
-            if (dia.StyleEx == "") diaStyle = par[0]+";";
-            if (dia.ExtendedStyle == "") diaExtendedStyle = par[0] + ";"; 
-
-            Regex rx = new Regex(@"([^=]*)=.*");
-            rep.SaveDiagram(dia.DiagramID);
-            foreach (string style in styleEx)
-            {
-                Match match = rx.Match(style);
-                string patternFind = $@"{match.Groups[1].Value}=[^;]*;";
-                diaStyle = Regex.Replace(diaStyle, patternFind, $@"{style};");
-                diaExtendedStyle = Regex.Replace(diaExtendedStyle, patternFind, $@"{style};");
-            }
-            dia.ExtendedStyle = diaExtendedStyle;
-            dia.StyleEx = diaStyle;
-            dia.Update();
-            rep.ReloadDiagram(dia.DiagramID);
-
-        }
-       
-
-
-
+        
     }
     public class DiagramObject
     {

@@ -3585,11 +3585,13 @@ namespace hoTools.hoToolsGui
             ToolStripMenuItem item = sender as ToolStripMenuItem; //((ToolStripMenuItem) sender).Tag; DiagramStyleItem
             DiagramStyleItem style = (DiagramStyleItem)item.Tag;
 
-            // [0] styles
-            // [1] diagram types
-            string[] styleEx = { "", "" };
+            // [0] Styles
+            // [1] Properties
+            // [2] Diagram types
+            string[] styleEx = new string[3];
             styleEx[0] = $@"{style.Pdata};{style.StyleEx};";
-            styleEx[1] = style.Type;
+            styleEx[1] = style.Property;
+            styleEx[2] = style.Type;
             EaService.ChangeDiagramStyle(Repository, styleEx, changeScope);
         }
 
