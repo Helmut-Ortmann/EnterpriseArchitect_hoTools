@@ -6,7 +6,6 @@ using System.Windows.Forms;
 using EA;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using File = System.IO.File;
 using hoTools.Utils.COM;
 
 // ReSharper disable MemberCanBePrivate.Global
@@ -115,7 +114,7 @@ namespace hoTools.Utils.Diagram
                     if (searchResult == null) continue;
                     resultsDiaObject.Add(searchResult);
                 }
-                DiagramObjectStyleItems = resultsDiaObject.ToList<DiagramObjectStyleItem>();
+                DiagramObjectStyleItems = resultsDiaObject.ToList();
 
 
 
@@ -216,24 +215,28 @@ namespace hoTools.Utils.Diagram
 
             string propertyName = match.Groups[1].Value;
             string propertyValue = match.Groups[2].Value;
+            string propertyTyp;
 
-            var p = diaObj.GetType().GetProperty(propertyName);
-            if (p == null)
+            var propertyInfo = diaObj.GetType().GetProperty(propertyName);
+            if (propertyInfo == null)
             {
-                MessageBox.Show($"PropertyStyle='{style}'",
-                    $@"No valid DiagramObject Property '{propertyName}'");
-                return;
-            }
-            string propertyTyp = p.PropertyType.Name;
-            if (!(propertyTyp == "Boolean" ||
-                  propertyTyp == "String" ||
-                  propertyTyp == "Int32"))
-            {
-                //MessageBox.Show($"PropertyType '{propertyTyp}' not supported.\r\nOnly: Int32=long, Boolean, String\r\nPropertyStyle='{style}'",
-                //    $@"No valid DiagramObject Property Type '{propertyName}:{propertyTyp}'");
-                // Most things works well with Int32
-                propertyTyp = "Int32";
+                // don't know why it doesn't work
+                propertyTyp = "Boolean";
+                //MessageBox.Show($"PropertyStyle='{style}'",
+                //    $@"No valid DiagramObject Property '{propertyName}'");
                 //return;
+            }
+            else
+            {
+                propertyTyp = propertyInfo.PropertyType.Name;
+                if (!(propertyTyp == "Boolean" ||
+                      propertyTyp == "String" ||
+                      propertyTyp == "Int32"))
+                {
+                    // Most things works well with Int32
+                    propertyTyp = "Int32";
+                    //return;
+                }
             }
 
 
@@ -251,6 +254,7 @@ namespace hoTools.Utils.Diagram
                                 "Property DiagramObject Style isn't Bool");
                             return;
                         }
+                        
                         // Com.SetProperty(diaObj, propertyName, boolProperty);
                         switch (propertyName)
                         {
@@ -289,6 +293,9 @@ namespace hoTools.Utils.Diagram
                                 break;
                             case "ShowInheritedTags":
                                 diaObj.ShowInheritedTags = boolProperty;
+                                break;
+                            case "ShowNotes":
+                                diaObj.ShowNotes = boolProperty;
                                 break;
                             case "ShowPortType":
                                 diaObj.ShowPortType = boolProperty;
@@ -387,7 +394,6 @@ namespace hoTools.Utils.Diagram
 
 
             string[] styleEx = styles.Split(';');
-            string[] propertyL = properties.Split(';');
             string diaStyle = dia.StyleEx;
             string diaExtendedStyle = dia.ExtendedStyle.Trim();
             if (!DiagramIsToChange(dia, dStyles)) return;
@@ -604,7 +610,7 @@ namespace hoTools.Utils.Diagram
                         //dia.Update();
                         //rep.ReloadDiagram(dia.DiagramID);
                         bool showBorder;
-                        if (Boolean.TryParse(value.Trim(), out showForeign))
+                        if (Boolean.TryParse(value.Trim(), out showBorder))
                         {
                             string updateStr = $@"update t_diagram set ShowBorder = {value.Trim()} 
                                                                           where Diagram_ID = {dia.DiagramID}";
@@ -648,9 +654,12 @@ namespace hoTools.Utils.Diagram
                     string duid = "";
                     if (match.Success) duid = match.Groups[0].Value;
 
-                    diaObject.Style = duid + style.Replace(",", ";").Replace("   ", "").Replace("  ", "")
+                    s = duid + style.Replace(",", ";").Replace("   ", "").Replace("  ", "")
                                           .Replace(" ", "")
                                           .Trim();
+                    // ensure string ends with ";"
+                    if (s.Trim() != "" & (! s.EndsWith(";")) ) {s = s + ";";}
+                    diaObject.Style = s;
                     try
                     {
                         diaObject.Update();
