@@ -254,7 +254,6 @@ namespace hoTools.Utils.Diagram
                                 "Property DiagramObject Style isn't Bool");
                             return;
                         }
-                        
                         // Com.SetProperty(diaObj, propertyName, boolProperty);
                         switch (propertyName)
                         {
@@ -334,7 +333,7 @@ namespace hoTools.Utils.Diagram
                                 diaObj.ShowStructuredCompartments = boolProperty;
                                 break;
                             case "ShowTags":
-                                diaObj.ShowStructuredCompartments = boolProperty;
+                                diaObj.ShowTags = boolProperty;
                                 break;
                             default:
                                 MessageBox.Show($@"Style={style}'\r\nProperty:'{propertyName}'", $@"Invalid DiagramObjectStyle '{propertyName}'");

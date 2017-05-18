@@ -3,47 +3,140 @@
   [
     // List of Diagram Styles to assign to diagram types
     // see:: https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/DiagramStyles
-    { 
+    // Preferred styles, you may additionally use the data from the column PDATA, StyleEx
+	//
+	// Some properties:
+    // cx=nnn; (default = 800)
+    // cy=nnn; (default = 1100)
+    // HighLightImports=bool; (true or false)
+    // Orientation=x;  (L=Landscape, P=Portrait)
+    // Scale=nnn; (default=100=100%)
+    // ShowDetails=n; (1=Show, 0=Hide)
+    // ShowPackageContents=bool; (true, false)
+    // ShowPrivate=bool; (true, false)
+    // ShowProtected=bool; (true, false)
+    // ShowPublic=bool; (true, false)
+    {
       "Name": "Default 1 (simple, with Notes)",
-      "Description": "Simple:\r\n-Notes\r\n- no Attributes\r\n- no Operations",
+      "Description": "Simple:\r\n-Notes\r\n-No Attributes\r\n-No Operations\r\n-Don't show Namespace\r\n- Alias",
       "Type": "",
-      "PDATA": "HideAtts=1, HideOps=1, PPgs.cx=1, PPgs.cy=1, ScalePI=1",
-      "StyleEX": "ShowNotes=1"
+      "PDATA": "ShowNotes=1,PPgs.cx=1, PPgs.cy=1, ScalePI=1,PSize=1, HideAttr=1, HideOps=1, UseAlias=1",
+      "StyleEX": "",
+      "Property": "ShowForeign=False;Orientation=P;ShowBorder=True;ShowDetails=1;"
     },
-    { 
+    {
       "Name": "Default 2 (elaborate, without Notes)",
-      "Description": "No Attributes, Notes",
+      "Description": "No Attributes, Notes\r\n- Show Namespace\r\n- No Alias",
       "Type": "",
-      "PDATA": "HideAtts=1, HideOps=1, OpParams=2, ShowOpRetType=1, PPgs.cx=1, PPgs.cy=1, ScalePI=1",
-      "StyleEX": "ShowNotes=0"
+      "PDATA": "ShowNotes=0, HideAttr=1, HideOps=0, UseAlias=0",
+      "StyleEX": "",
+      "Property": "Orientation=P;ShowForeign=True;ShowBorder=False,cx=160,cy=220;ShowDetails=0;"
     },
-    { 
+    {
       "Name": "My Requirements",
       "Description": "No Attributes, Notes",
       "Type": "Cust=Requirements",
       "PDATA": "HideAtts=0, HideOps=0, OpParams=2, ShowOpRetType=1, PPgs.cx=1, PPgs.cy=1, ScalePI=1",
-      "StyleEX": "ShowNotes=1"
+      "StyleEX": "ShowNotes=1",
+      "Property": ""
     },
     {
       "Name": "My Test Domain",
       "Description": "Theme=Parchment: Font, Color, Background Image, Element Shadows\r\nNo Notes",
       "Type": "Cust=Test",
       "Pdata": "HideAtts=1, HideOps=1, PPgs.cx=1, PPgs.cy=1, ScalePI=1, Theme=Parchment:113",
-      "StyleEX": "ShowNotes=0"
+      "StyleEX": "ShowNotes=0",
+      "Property": ""
     },
     {
       "Name": "My special Diagrams (User, Documents)",
       "Description": "My special Diagrams:\r\n-User\r\n-Documents",
       "Type": "Cust=User, Cust=Document",
       "Pdata": "HideAtts=1, HideOps=1, PPgs.cx=1, PPgs.cy=1, ScalePI=1",
-      "StyleEX": "ShowNotes=1"
+      "StyleEX": "ShowNotes=1",
+      "Property": ""
     },
     {
       "Name": "My special Diagrams (User, Documents)",
       "Description": "My special Diagrams:\r\n-User\r\n-Documents",
       "Type": "Cust=User, Cust=Document",
       "Pdata": "HideAtts=1, HideOps=1, PPgs.cx=1, PPgs.cy=1, ScalePI=1",
-      "StyleEX": "ShowNotes=1"
+      "StyleEX": "",
+      "Property": ""
+    }
+  ],
+  'DiagramObjectStyle':
+  [
+    // Name:         Template name
+    // Description:  Description for e.g. Tooltip
+    // Type:         Type to apply to 
+    //               Use either Style/none Style and/or Property. hoTools first applies Style if not 'none' than applies Property.
+    // Style:        The Style according to rules in DiagramObject property Style / column ObjectStyle. Style overwrites all settings
+    // Property:     The EA property to directly modify (ShowFormattedNotes,..). It overwrites Styles
+    //               
+    //
+    // Hiding  Styles:  AttPro=0;AttPri=0;AttPub=0;AttPkg=0;OpPro=0;OpPri=0;OpPub=0;OpPkg=0;
+    // Showing Styles:  Tag=1;Constraint=1;PType=1;Notes=1000;Formatted=1;RzO=1;Runstate=1;Responsibility;FQTag=1;OpInh=1;AttInh=1;RzO=n;
+    // Pro=0:            Hide Protected (Attribute/Operation)
+    // Pri=0:            Hide Private (Attribute/Operation)
+    // Pub=0:            Hide Public (Attribute/Operation)
+    // Pkg=0:            Hide Package (Attribute/Operation)
+    // PType=1:          Show Property Type 
+    // FQTag=1;          Show Full Qualified Tag
+    // TagInh=1;         Show Inherited Tagged Values
+    // SC=1;             Structured Compartment
+    // Responsibility=1; Internal Requirement of a Requirement
+    // Inh=1             Inherited Operation, Attribute, Constraint
+    // RzO=n;            Resize Object: 1= Resize to longest Feature;2=Wrap Features;3=Truncate Features;     
+    //
+    // select name, objectStyle from t_diagramobjects d inner join t_object o on d.object_id = o.object_id
+    //
+    // Note:   The Database Field has a length constraint. If you get an error you have to reduce the Style content. 
+ 
+    //
+    // Type: Currently not supported
+   {
+      "Name":        "Default1, no Notes",
+      "Description": "No Notes\r\nNo Attributres",
+      "Type":        "",
+      "Style":       "none",
+      "Property":    "ShowNotes=False, ShowPackageAttributes=False, ShowPrivateAttributes=false, ShowProtectedAttributes=false, ShowPublicAttributes=false" 
+    },
+    {
+      "Name":        "Default2, Notes",
+      "Description": "Notes\r\nNo Attributes",
+      "Type":        "",
+      "Style":       "Notes=1000",
+      "Property":    "ShowPackageAttributes=True; ShowPrivateAttributes=false, ShowProtectedAttributes=false, ShowPublicAttributes=false" 
+    },
+    {
+      "Name":        "Notes, Public Operations",
+      "Description": "Notes\r\nNo Protected,Private Operations\r\nTags",
+      "Type":        "",
+      "Style":       "Notes=1000;OpPro=0;OpPri=0;OpPkg=0;",
+      "Property":     ""
+    },
+    {
+      "Name":        "Tags",
+      "Description": "No Notes\r\nNo Operations\r\nNo Attributes\r\nTags",
+      "Type":        "", 
+      "Style":       "HideIcon=0;AttPri=0;AttPkg=0;AttPro=0;AttPub=0;AttCustom=0;OpCustom=0;OpPro=0;OpPri=0;OpPkg=0;PType=0;RzO=1;",
+      "Property":    ""
+    },
+    {
+      "Name": "Wrap Features",
+      "Description": "Wrap Features",
+      "Type": "", 
+      "Style": "HideIcon=0;RzO=2;",
+      "Property": ""
+    },
+    {
+
+      "Name": "Resize Features",
+      "Description": "Resize Features",
+      "Type": "", 
+      "Style": "HideIcon=0;RzO=1;",
+      "Property": ""
     }
   ]
 }

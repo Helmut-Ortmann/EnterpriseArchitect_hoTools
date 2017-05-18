@@ -4,6 +4,8 @@
     // List of Diagram Styles to assign to diagram types
     // see:: https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/DiagramStyles
     // Preferred styles, you may additionally use the data from the column PDATA, StyleEx
+	//
+	// Some properties:
     // cx=nnn; (default = 800)
     // cy=nnn; (default = 1100)
     // HighLightImports=bool; (true or false)
@@ -16,45 +18,51 @@
     // ShowPublic=bool; (true, false)
     {
       "Name": "Default 1 (simple, with Notes)",
-      "Description": "Simple:\r\n-Notes\r\n- no Attributes\r\n- no Operations",
+      "Description": "Simple:\r\n-Notes\r\n-No Attributes\r\n-No Operations\r\n-Don't show Namespace\r\n- Alias",
       "Type": "",
-      "PDATA": "HideAtts=1, HideOps=1, PPgs.cx=1, PPgs.cy=1, ScalePI=1",
-      "StyleEX": "ShowNotes=1, Orientation=P, cx=800, cy=1100"
+      "PDATA": "ShowNotes=1,PPgs.cx=1, PPgs.cy=1, ScalePI=1,PSize=1, HideAttr=1, HideOps=1, UseAlias=1",
+      "StyleEX": "",
+      "Property": "ShowForeign=False;Orientation=P;ShowBorder=True;ShowDetails=1;"
     },
     {
       "Name": "Default 2 (elaborate, without Notes)",
-      "Description": "No Attributes, Notes",
+      "Description": "No Attributes, Notes\r\n- Show Namespace\r\n- No Alias",
       "Type": "",
-      "PDATA": "HideAtts=1, HideOps=1, OpParams=2, ShowOpRetType=1, PPgs.cx=1, PPgs.cy=1, ScalePI=1",
-      "StyleEX": "ShowNotes=0, Orientation=P, cx=800, cy=1100"
+      "PDATA": "ShowNotes=0, HideAttr=1, HideOps=0, UseAlias=0",
+      "StyleEX": "",
+      "Property": "Orientation=P;ShowForeign=True;ShowBorder=False,cx=160,cy=220;ShowDetails=0;"
     },
     {
       "Name": "My Requirements",
       "Description": "No Attributes, Notes",
       "Type": "Cust=Requirements",
       "PDATA": "HideAtts=0, HideOps=0, OpParams=2, ShowOpRetType=1, PPgs.cx=1, PPgs.cy=1, ScalePI=1",
-      "StyleEX": "ShowNotes=1"
+      "StyleEX": "ShowNotes=1",
+      "Property": ""
     },
     {
       "Name": "My Test Domain",
       "Description": "Theme=Parchment: Font, Color, Background Image, Element Shadows\r\nNo Notes",
       "Type": "Cust=Test",
       "Pdata": "HideAtts=1, HideOps=1, PPgs.cx=1, PPgs.cy=1, ScalePI=1, Theme=Parchment:113",
-      "StyleEX": "ShowNotes=0"
+      "StyleEX": "ShowNotes=0",
+      "Property": ""
     },
     {
       "Name": "My special Diagrams (User, Documents)",
       "Description": "My special Diagrams:\r\n-User\r\n-Documents",
       "Type": "Cust=User, Cust=Document",
       "Pdata": "HideAtts=1, HideOps=1, PPgs.cx=1, PPgs.cy=1, ScalePI=1",
-      "StyleEX": "ShowNotes=1"
+      "StyleEX": "ShowNotes=1",
+      "Property": ""
     },
     {
       "Name": "My special Diagrams (User, Documents)",
       "Description": "My special Diagrams:\r\n-User\r\n-Documents",
       "Type": "Cust=User, Cust=Document",
       "Pdata": "HideAtts=1, HideOps=1, PPgs.cx=1, PPgs.cy=1, ScalePI=1",
-      "StyleEX": "ShowNotes=1"
+      "StyleEX": "",
+      "Property": ""
     }
   ],
   'DiagramObjectStyle':
@@ -87,40 +95,40 @@
  
     //
     // Type: Currently not supported
-    {
-      "Name": "Default1, no Notes",
-      "Description": "No Notes\r\nNo Attributes",
-      "Type": "",
-      "Style": "none",
-      "Property":  "ShowNotes=false, ShowPrivateAttributes=false, ShowProtectedAttributes=false, ShowPublicAttributes=false, ShowPrivateOperations=false, ShowProtectedOperations=false, ShowPublicOperations=false" 
+   {
+      "Name":        "Default1, no Notes",
+      "Description": "No Notes\r\nNo Attributres",
+      "Type":        "",
+      "Style":       "none",
+      "Property":    "ShowNotes=False, ShowPackageAttributes=False, ShowPrivateAttributes=false, ShowProtectedAttributes=false, ShowPublicAttributes=false" 
     },
     {
-      "Name": "Default2, Notes",
+      "Name":        "Default2, Notes",
       "Description": "Notes\r\nNo Attributes",
-      "Type": "",
-      "Style": "none",
-      "Property":  "ShowNotes=true, ShowFormattedNotes, ShowPrivateAttributes=false, ShowProtectedAttributes=false, ShowPublicAttributes=false " 
+      "Type":        "",
+      "Style":       "Notes=1000",
+      "Property":    "ShowPackageAttributes=True; ShowPrivateAttributes=false, ShowProtectedAttributes=false, ShowPublicAttributes=false" 
     },
     {
-      "Name": "Notes, Public Operations",
+      "Name":        "Notes, Public Operations",
       "Description": "Notes\r\nNo Protected,Private Operations\r\nTags",
-      "Type": "",
-      "Style": "Notes=1000;OpPro=0;OpPri=0;OpPkg=0",
-      "Property":  ""
+      "Type":        "",
+      "Style":       "Notes=1000;OpPro=0;OpPri=0;OpPkg=0;",
+      "Property":     ""
     },
     {
-      "Name": "Tags",
+      "Name":        "Tags",
       "Description": "No Notes\r\nNo Operations\r\nNo Attributes\r\nTags",
-      "Type": "", 
-      "Style": "HideIcon=0;AttPri=0;AttPkg=0;AttPro=0;AttPub=0;AttCustom=0;OpCustom=0;OpPro=0;OpPri=0;OpPkg=0;PType=0;RzO=1;",
-      "Property":  ""
+      "Type":        "", 
+      "Style":       "HideIcon=0;AttPri=0;AttPkg=0;AttPro=0;AttPub=0;AttCustom=0;OpCustom=0;OpPro=0;OpPri=0;OpPkg=0;PType=0;RzO=1;",
+      "Property":    ""
     },
     {
       "Name": "Wrap Features",
       "Description": "Wrap Features",
       "Type": "", 
       "Style": "HideIcon=0;RzO=2;",
-      "Property":  ""
+      "Property": ""
     },
     {
 
