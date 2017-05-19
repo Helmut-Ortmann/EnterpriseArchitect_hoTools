@@ -81,6 +81,7 @@
   <ItemGroup>
     <Compile Include="COM\Com.cs" />
     <Compile Include="Diagram\Diagram.cs" />
+    <Compile Include="Diagram\DiagramGeneralStyle.cs" />
     <Compile Include="Diagram\DiagramLinkStyle.cs" />
     <Compile Include="Diagram\DiagramLinkStyleItem.cs" />
     <Compile Include="Diagram\DiagramObjectStyle.cs" />

@@ -1,7 +1,7 @@
 ﻿namespace hoTools.Utils.Diagram
 {
     /// <summary>
-    /// General item to specify the style of an EA stylable item. See the subtypes. 
+    /// General item to specify the style of an EA item. See the subtypes. 
     /// </summary>
     public class DiagramGeneralStyleItem
     {
