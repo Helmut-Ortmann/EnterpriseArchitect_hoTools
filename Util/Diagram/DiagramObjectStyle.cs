@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace hoTools.Utils.Diagram
 {
-    class DiagramStyle
+    class DiagramObjectStyle
     {
     }
 }

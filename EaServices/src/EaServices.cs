@@ -72,7 +72,7 @@ namespace hoTools.EaServices
         // configuration as singleton
         static HoToolsGlobalCfg _globalCfg;
         // remember Diagram Style Settings
-        public static DiagramStyle DiagramStyle;
+        public static DiagramFormat DiagramStyle;
 
         // define menu constants
         public enum DisplayMode
@@ -488,7 +488,7 @@ namespace hoTools.EaServices
             if (eaDia.Dia == null) return;
             foreach (var diaObj in eaDia.SelObjects)
             {
-                DiagramStyle.SetDiagramObjectStyle(rep, diaObj, style, property);
+                DiagramFormat.SetDiagramObjectStyle(rep, diaObj, style, property);
             }
 
 
@@ -511,17 +511,17 @@ namespace hoTools.EaServices
             {
                 case EA.ObjectType.otDiagram:
                     EA.Diagram dia = (EA.Diagram)rep.GetContextObject();
-                    DiagramStyle.SetDiagramStyle(rep, dia, liParameter);
+                    DiagramFormat.SetDiagramStyle(rep, dia, liParameter);
                     break;
                 case EA.ObjectType.otPackage:
                     EA.Package pkg = (EA.Package)rep.GetContextObject();
-                    RecursivePackages.DoRecursivePkg(rep, pkg, null, null, DiagramStyle.SetDiagramStyle,
+                    RecursivePackages.DoRecursivePkg(rep, pkg, null, null, DiagramFormat.SetDiagramStyle,
                         liParameter,
                         ChangeScope.PackageRecursive);
                     break;
                 case EA.ObjectType.otElement:
                     EA.Element el = (EA.Element)rep.GetContextObject();
-                    RecursivePackages.DoRecursiveEl(rep, el, null, DiagramStyle.SetDiagramStyle, liParameter,
+                    RecursivePackages.DoRecursiveEl(rep, el, null, DiagramFormat.SetDiagramStyle, liParameter,
                         ChangeScope.PackageRecursive);
                     break;
             }

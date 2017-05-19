@@ -138,6 +138,37 @@
       "Style": "HideIcon=0;RzO=1;",
       "Property": ""
     }
+  ],
+  'DiagramLinkStyle':
+  [
+    // Name:         Template name
+    // Description:  Description for e.g. Tooltip
+    // Type:         Connector Type to apply to, a comma/semicolon delimited list of connector types and <<stereotypes>> 
+    // Style:        The Style according to rules in DiagramLinks property Style / column ObjectStyle. Style overwrites all settings
+    // Property:     The EA property to directly modify. It overwrites Styles
+    //               
+    //
+    //
+    // select name, objectStyle from t_diagramobjects d inner join t_object o on d.object_id = o.object_id
+    //
+    // Note:   The Database Field has a length constraint. If you get an error you have to reduce the Style content. 
+ 
+    //
+    // Type: Currently not supported
+   {
+      "Name":        "Default1",
+      "Description": "All Properties",
+      "Type":        "",
+      "Style":       "",
+      "Property":    "LineStyle=9, IsHidden=False, LineColor=-1, HiddenLabels=false, ShowPublicAttributes=false" 
+    },
+    {
+      "Name":        "Default2",
+      "Description": "All Properties",
+      "Type":        "",
+      "Style":       "Association, Dependency, <<stereo1>>, <<stereo2>>",
+      "Property":    "LineStyle=9, IsHidden=False, LineColor=-1, HiddenLabels=false, ShowPublicAttributes=false" 
+    }
   ]
 }
 

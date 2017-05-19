@@ -55,7 +55,7 @@ namespace hoTools.hoToolsGui
 
         private const string JasonFile = @"Settings.json";
         private string _jasonFilePath;
-        private DiagramStyle _diagramStyle;
+        private DiagramFormat _diagramStyle;
 
         // Do Menu entries already inserted
         private bool _doMenuDiagramStyleInserted = false;
@@ -3382,7 +3382,7 @@ namespace hoTools.hoToolsGui
                 // Add Diagram Style 
                 // ReSharper disable once AssignNullToNotNullAttribute
                 _jasonFilePath = targetSettingsPath;
-                _diagramStyle = new DiagramStyle(_jasonFilePath);
+                _diagramStyle = new DiagramFormat(_jasonFilePath);
                 EaService.DiagramStyle = _diagramStyle;
 
 

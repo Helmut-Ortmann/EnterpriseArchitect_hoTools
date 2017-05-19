@@ -81,7 +81,14 @@
   <ItemGroup>
     <Compile Include="COM\Com.cs" />
     <Compile Include="Diagram\Diagram.cs" />
+    <Compile Include="Diagram\DiagramLinkStyle.cs" />
+    <Compile Include="Diagram\DiagramLinkStyleItem.cs" />
+    <Compile Include="Diagram\DiagramObjectStyle.cs" />
+    <Compile Include="Diagram\DiagramFormat.cs" />
+    <Compile Include="Diagram\DiagramObjectStyleItem.cs" />
     <Compile Include="Diagram\DiagramStyle.cs" />
+    <Compile Include="Diagram\DiagramStyleItem.cs" />
+    <Compile Include="Diagram\DiagramGeneralStyleItem.cs" />
     <Compile Include="Extension\EaExtensionClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Strings.Designer.cs">
