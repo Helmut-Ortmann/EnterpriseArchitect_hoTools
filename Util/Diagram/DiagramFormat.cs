@@ -34,72 +34,103 @@ namespace hoTools.Utils.Diagram
 
         public DiagramFormat(string jasonFilePath)
         {
-            // Set Object Diagram Property for a bool
 
             // use 'Deserializing Partial JSON Fragments'
+            JObject search;
             try
             {
                 // Read JSON
                 string text = System.IO.File.ReadAllText(jasonFilePath);
-                JObject search = JObject.Parse(text);
-
-                //----------------------------------------------------------------------
-                // Deserialize "DiagramStyle"
-                // get JSON result objects into a list
-                IList<JToken> results = search["DiagramStyle"].Children().ToList();
-                // serialize JSON results into .NET objects
-                IList<DiagramStyleItem> searchResults = new List<DiagramStyleItem>();
-                foreach (JToken result in results)
-                {
-                    // JToken.ToObject is a helper method that uses JsonSerializer internally
-                    DiagramStyleItem searchResult = result.ToObject<DiagramStyleItem>();
-                    if (searchResult == null) continue;
-                    searchResults.Add(searchResult);
-                }
-                DiagramStyleItems = searchResults.ToList();
-
-                //----------------------------------------------------------------------
-                // Deserialize "DiagramObjectStyle"
-                // get JSON result objects into a list
-                IList<JToken> diaObjects = search["DiagramObjectStyle"].Children().ToList();
-                // serialize JSON results into .NET objects
-                IList<DiagramObjectStyleItem> resultsDiaObject = new List<DiagramObjectStyleItem>();
-
-                foreach (JToken diaObject in diaObjects)
-                {
-                    // JToken.ToObject is a helper method that uses JsonSerializer internally
-                    DiagramObjectStyleItem searchResult = diaObject.ToObject<DiagramObjectStyleItem>();
-                    if (searchResult == null) continue;
-                    resultsDiaObject.Add(searchResult);
-                }
-                DiagramObjectStyleItems = resultsDiaObject.ToList();
-
-                //----------------------------------------------------------------------
-                // Deserialize "DiagramLinkStyle"
-                // get JSON result objects into a list
-                IList<JToken> diaLinks = search["DiagramLinkStyle"].Children().ToList();
-                // serialize JSON results into .NET objects
-                IList<DiagramLinkStyleItem> resultsDiaLink = new List<DiagramLinkStyleItem>();
-
-                foreach (JToken diaLink in diaLinks)
-                {
-                    // JToken.ToObject is a helper method that uses JsonSerializer internally
-                    DiagramLinkStyleItem searchResult = diaLink.ToObject<DiagramLinkStyleItem>();
-                    if (searchResult == null) continue;
-                    resultsDiaLink.Add(searchResult);
-                }
-                DiagramLinkStyleItems = resultsDiaLink.ToList();
-
-
-
+                search = JObject.Parse(text);
             }
             catch (Exception e)
             {
-                MessageBox.Show($@"Try importing from '{jasonFilePath}'
-{e}", "Can't import Diagram Styles");
+                MessageBox.Show($@"Can't read '{jasonFilePath}'
+
+{e}", "Can't import Diagram Styles from Settings.json");
+                return;
             }
 
+            //----------------------------------------------------------------------
+            // Deserialize "DiagramStyle", "DiagramObjectStyle",""DiagramLinkStyle"
+            // get JSON result objects into a list
+            DiagramStyleItems = (List < DiagramStyleItem > )GetConfigurationStyleItems<DiagramStyleItem>(search, "DiagramStyle");
+            DiagramObjectStyleItems = (List<DiagramObjectStyleItem>)GetConfigurationStyleItems<DiagramObjectStyleItem>(search, "DiagramObjectStyle");
+            DiagramLinkStyleItems = (List<DiagramLinkStyleItem>)GetConfigurationStyleItems<DiagramLinkStyleItem>(search, "DiagramLinkStyle");
+            
+
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="type"></param>
+        /// <param name="search"></param>
+        /// <param name="jsonChapter">"DiagramStyle", "DiagramObjectStyle","DiagramLinkStyle"</param>
+        private IList<T> GetConfigurationStyleItems<T>(JObject search, string jsonChapter)
+        {
+            try
+            {
+
+                IList<JToken> results = search[jsonChapter].Children().ToList();
+                
+                // serialize JSON results into .NET objects
+                IList<T> searchResults = new List<T>();
+                foreach (JToken result in results)
+                {
+                    // JToken.ToObject is a helper method that uses JsonSerializer internally
+                    T searchResult = result.ToObject<T>();
+                    if (searchResult == null) continue;
+                    searchResults.Add(searchResult);
+                }
+                return searchResults.ToList();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($@"Cant import '{jsonChapter}' from 'Settings.json'
+
+{e}", 
+                                $@"Can't import Diagram Styles '{jsonChapter}'");
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Create a ToolStripItem with DropDownitems for each Style (Subtypes of DiagramGeneralStyleItem) .
+        /// The Tag property contains the style.
+        /// </summary>
+        /// <param name="items"></param>
+        /// <param name="nameRoot"></param>
+        /// <param name="toolTipRoot"></param>
+        /// <param name="eventHandler"></param>
+        /// <returns></returns>
+        public ToolStripMenuItem ConstructStyleToolStripMenuDiagram(List<DiagramGeneralStyleItem>  items, string nameRoot, string toolTipRoot, EventHandler eventHandler)
+        {
+            ToolStripMenuItem insertTemplateMenuItem = new ToolStripMenuItem
+            {
+                Text = nameRoot,
+                ToolTipText = toolTipRoot
+            };
+            // Add item of possible style as items in drop down
+            foreach (var style in items)
+            {
+                ToolStripMenuItem item = new ToolStripMenuItem
+                {
+                    Text = style.Name,
+                    ToolTipText = style.Description,
+                    Tag = style
+                };
+                item.Click += eventHandler;
+                insertTemplateMenuItem.DropDownItems.Add(item);
+            }
+            return insertTemplateMenuItem;
+
+        }
+
+
+
+
 
         /// <summary>
         /// Create a ToolStripItem with DropDownitems for each DiagramStyle.

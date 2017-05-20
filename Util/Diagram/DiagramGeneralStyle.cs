@@ -12,11 +12,20 @@ namespace hoTools.Utils.Diagram
     {
         public string[] Style;
         public string[] Property;
+        public string[] Type;
+        public EA.Repository Rep;
+        public string Description;
+        public string Name;
 
-        public DiagramGeneralStyle(string style, string property)
+
+        public DiagramGeneralStyle(EA.Repository rep, string name, string description, string type, string style, string property)
         {
             Style = style.Replace(",", ";").Replace(";;", ";").Split(';');
             Property = property.Replace(",", ";").Replace(";;", ";").Split(';');
+            Type = type.Replace(",", ";").Replace(";;", ";").Split(';');
+            Rep = rep;
+            Name = name;
+            Description = description;
         }
 
         protected static bool GetNameValueFromStyle(string link, out string name, out string value)
@@ -67,6 +76,8 @@ namespace hoTools.Utils.Diagram
             }
             return oldStyle;
         }
+
+        
 
     }
 }

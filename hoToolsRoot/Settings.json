@@ -165,7 +165,7 @@
     {
       "Name":        "Default2",
       "Description": "All Properties",
-      "Type":        "",
+      "Type":        "Types=Association,Dependency;Stereotypes=a,b;",
       "Style":       "Association, Dependency, <<stereo1>>, <<stereo2>>",
       "Property":    "LineStyle=9, IsHidden=False, LineColor=-1, HiddenLabels=false, ShowPublicAttributes=false" 
     }

@@ -1,20 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Data.SqlTypes;
 using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using ClosedXML.Excel;
 
 namespace hoTools.Utils.Diagram
 {
     public class DiagramLinkStyle : DiagramGeneralStyle
     {
         private readonly EA.DiagramLink _link;
-
-        public DiagramLinkStyle(EA.DiagramLink link, string style, string property)
-            : base(style, property)
+        public DiagramLinkStyle(EA.Repository rep, EA.DiagramLink link, DiagramLinkStyleItem styleItem,  string type, string style, string property)
+            : base(rep, styleItem.Name, styleItem.Description, styleItem.Type, styleItem.Style, property)
         {
             
             _link = link;
@@ -69,6 +63,62 @@ namespace hoTools.Utils.Diagram
             string oldStyle = _link.Style;
             oldStyle = UpdateStyles(oldStyle);
             _link.Style = oldStyle;
+
+        }
+
+        public bool IsToProcess()
+        {
+            if (Type.Length == 0) return true;
+            bool isToProcessType = false;
+            bool isToProcessStereotype = false;
+            EA.Connector con = Rep.GetConnectorByID(_link.ConnectorID); 
+            foreach (var type in Type)
+            {
+                
+                string name;
+                string value;
+                if (GetNameValueFromStyle(type, out name, out value)) continue;
+                switch (name)
+                {
+                    case "Types":
+                        string nameType;
+                        string valueTypes;
+                        if (GetNameValueFromStyle(type, out nameType, out valueTypes)) continue;
+                        foreach (var conType in valueTypes.Split(','))
+                        {
+                            if (conType == "") continue;
+                            if (conType == con.Type)
+                            {
+                                isToProcessType = true;
+                                break;
+                            }
+                        }
+
+                        break;
+                    case "Stereotypes":
+                        string nameStereotype;
+                        string valueStereotypes;
+                        if (GetNameValueFromStyle(type, out nameStereotype, out valueStereotypes)) continue;
+
+                        foreach (var conStereo in valueStereotypes.Split(','))
+                        {
+                            if (conStereo == "") continue;
+
+                            // check if stereotype exists
+                            var a = con.StereotypeEx.Split(','); //.ToArray().
+                            if (Array.IndexOf(con.StereotypeEx.Split(','),conStereo) > -1)
+                            {
+                                isToProcessStereotype = true;
+                                break;
+                            }
+                        }
+
+
+                        break;
+                }
+
+            }
+            return isToProcessType && isToProcessStereotype;
 
         }
 
