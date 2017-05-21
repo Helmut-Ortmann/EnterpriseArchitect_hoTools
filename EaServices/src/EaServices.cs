@@ -407,18 +407,26 @@ namespace hoTools.EaServices
             styleEx[2] = DiagramStyle.DiagramStyleItems[pos].Type;
             ChangeDiagramStyle(rep, styleEx, ChangeScope.PackageRecursive);
         }
-
+        /// <summary>
+        /// Bulk change DiagramLink Styles 0 according to Settings.Json 
+        /// </summary>
+        [ServiceOperation("{B1227872-4968-439A-A926-7FE70F022F09}", "Change DiagramLinks to 'Style 1'",
+            "Select Diagram, Diagram Objects or Diagram link (see Settings.Json, 1. entry)", isTextRequired: false)]
+        public static void DiagramLinkStyle1(EA.Repository rep)
+        {
+            DiagramLinkStyleWrapper(rep, 0);
+        }
 
 
 
         /// <summary>
-        /// Bulk change DiagramObject Styles 0 according to Settings.Json 
+        /// Bulk change DiagramObject Styles 1 according to Settings.Json 
         /// </summary>
-        [ServiceOperation("{8AE78FFE-15BD-47E0-B823-C9AC4B02B794}", "Bulk change DiagramObjects to 'Style 1'",
-            "Select Diagram or Diagram Objects (see Settings.Json, 1. entry)", isTextRequired: false)]
-        public static void DiagramObjectStyle1(EA.Repository rep)
+        [ServiceOperation("{FF7B370C-8D64-4919-9121-3571AA433B7C}", "Change DiagramLinks to 'Style 2'",
+            "Select Diagram, Diagram Objects or Diagram link (see Settings.Json, 2. entry)", isTextRequired: false)]
+        public static void DiagramLinkStyle2(EA.Repository rep)
         {
-            DiagramObjectStyleWrapper(rep, 0);
+            DiagramLinkStyleWrapper(rep, 1);
         }
         /// <summary>
         /// Bulk change DiagramObject Styles 0 according to Settings.Json 
@@ -467,7 +475,7 @@ namespace hoTools.EaServices
         /// <param name="pos"></param>
         private static void DiagramObjectStyleWrapper(Repository rep, int pos)
         {
-            if (DiagramStyle.DiagramStyleItems == null && DiagramStyle.DiagramStyleItems.Count <= pos)
+            if (DiagramStyle.DiagramStyleItems == null && DiagramStyle.DiagramObjectStyleItems.Count <= pos)
             {
                 MessageBox.Show("", "No DiagramObject style in 'Settings.json' found");
                 return;
@@ -494,6 +502,29 @@ namespace hoTools.EaServices
 
 
         }
+
+        /// <summary>
+        /// Wrapper to change DiagramLink style
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <param name="pos"></param>
+        public static void DiagramLinkStyleWrapper(Repository rep, int pos)
+        {
+            if (DiagramStyle.DiagramStyleItems == null && DiagramStyle.DiagramLinkStyleItems.Count <= pos)
+            {
+                MessageBox.Show("", "No DiagramLink style in 'Settings.json' found");
+                return;
+            }
+            string type = $@"{DiagramStyle.DiagramLinkStyleItems[pos].Type}".Trim();
+            string style = $@"{DiagramStyle.DiagramLinkStyleItems[pos].Style}".Trim();
+            string property = $@"{DiagramStyle.DiagramLinkStyleItems[pos].Property}".Trim();
+            DiagramLinkStyleWrapper(rep, type, style, property);
+
+
+
+
+        }
+
         /// <summary>
         /// Wrapper to change DiagramLink style
         /// </summary>
