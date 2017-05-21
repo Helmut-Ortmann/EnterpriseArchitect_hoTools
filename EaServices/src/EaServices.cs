@@ -442,7 +442,7 @@ namespace hoTools.EaServices
         /// </summary>
         [ServiceOperation("{1D838C4B-634C-490B-8CFE-2CC418133984}", "Change DiagramLinks to 'Style 4'",
             "Select Diagram, Diagram Objects or Diagram link (see Settings.Json, 4. entry)", isTextRequired: false)]
-        public static void DiagramLinkStyle2(EA.Repository rep)
+        public static void DiagramLinkStyle4(EA.Repository rep)
         {
             DiagramLinkStyleWrapper(rep, 4);
         }
