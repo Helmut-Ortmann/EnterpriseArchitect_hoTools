@@ -84,13 +84,13 @@ namespace hoTools.Utils.Diagram
                 
                 string name;
                 string value;
-                if (GetNameValueFromStyle(type, out name, out value)) continue;
+                if (! GetNameValueFromStyle(type, out name, out value)) continue;
                 switch (name)
                 {
                     case "Types":
                         string nameType;
                         string valueTypes;
-                        if (GetNameValueFromStyle(type, out nameType, out valueTypes)) continue;
+                        if (! GetNameValueFromStyle(type, out nameType, out valueTypes)) continue;
                         if (valueTypes.Trim() == "") continue;
 
                         // must be a supported Type value
@@ -109,7 +109,7 @@ namespace hoTools.Utils.Diagram
                     case "Stereotypes":
                         string nameStereotype;
                         string valueStereotypes;
-                        if (GetNameValueFromStyle(type, out nameStereotype, out valueStereotypes)) continue;
+                        if (! GetNameValueFromStyle(type, out nameStereotype, out valueStereotypes)) continue;
                         if (valueStereotypes.Trim() == "") continue;
 
                         // must be a supported Stereotype value
@@ -119,7 +119,6 @@ namespace hoTools.Utils.Diagram
                             if (conStereo == "") continue;
 
                             // check if stereotype exists
-                            var a = con.StereotypeEx.Split(','); //.ToArray().
                             if (Array.IndexOf(con.StereotypeEx.Split(','),conStereo) > -1)
                             {
                                 isToProcessStereotype = true;
