@@ -4,6 +4,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.Remoting.Messaging;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml.Linq;
@@ -490,6 +491,36 @@ namespace hoTools.EaServices
             {
                 DiagramFormat.SetDiagramObjectStyle(rep, diaObj, style, property);
             }
+
+
+        }
+        /// <summary>
+        /// Wrapper to change DiagramLink style
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <param name="style"></param>
+        /// <param name="property"></param>
+        public static void DiagramLinkStyleWrapper(Repository rep, string type, string style, string property)
+        {
+            List<EA.DiagramLink> links = new List<EA.DiagramLink>();
+
+            EaDiagram eaDia = new EaDiagram(rep, getAllDiagramObject: false);
+            if (eaDia.Dia == null) return;
+ 
+            rep.SaveDiagram(eaDia.Dia.DiagramID);
+            // over all links
+            foreach (var link in eaDia.GetSelectedLinks())
+            {
+                var linkStyle = new DiagramLinkStyle(rep,link, type, style, property );
+                if (linkStyle.IsToProcess())
+                {
+                    linkStyle.UpdateStyles();
+                    linkStyle.SetProperties();
+                }
+
+            }
+            eaDia.ReloadSelectedObjectsAndConnector(SaveDiagram:false);
+
 
 
         }
@@ -1612,7 +1643,14 @@ from %APPDATA%Local\Apps\hoTools\
         {
             SetLineStyle(rep, "B");
         }
-
+        /// <summary>
+        /// Set line style:
+        /// - Nothing selected: All visible links
+        /// - Connector/Objects selected: Connector + Objects with their in and outgoing links
+        /// - Objects selected: Objects with their in and outgoing links 
+        /// </summary>
+        /// <param name="repository"></param>
+        /// <param name="lineStyle"></param>
         public static void SetLineStyle(Repository repository, string lineStyle)
         {
             Connector con = null;

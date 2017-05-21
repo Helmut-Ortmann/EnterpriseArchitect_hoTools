@@ -20,9 +20,6 @@ using hoTools.Utils;
 using hoTools.Utils.Configuration;
 using hoTools.Utils.Diagram;
 using hoTools.Utils.Excel;
-using hoTools.Utils.Diagram;
-
-
 
 
 namespace hoTools.hoToolsGui
@@ -3389,7 +3386,7 @@ namespace hoTools.hoToolsGui
                 // check if the menu entries already exists
                 if (_doMenuDiagramStyleInserted)
                 {
-                    for (int i = 0; i < 4; i++)
+                    for (int i = 0; i < 5; i++)
                     {
                         int index = _doToolStripMenuItem.DropDownItems.Count - 1;
                         _doToolStripMenuItem.DropDownItems.RemoveAt(index);
@@ -3402,22 +3399,47 @@ namespace hoTools.hoToolsGui
                 {
                     _doToolStripMenuItem.DropDownItems.Add(new ToolStripSeparator());
                 }
-                // Diagram Style/Theme
-                _doToolStripMenuItem.DropDownItems.Add(_diagramStyle.GetToolStripMenuDiagramStyle(
+                // Change Diagram Styles
+                _doToolStripMenuItem.DropDownItems.Add(_diagramStyle.ConstructStyleToolStripMenuDiagram(
+                    _diagramStyle.DiagramStyleItems,
                     "Bulk Diagram Style/Theme Recursive",
                     "Bulk Change the Diagram Style/Theme recursive\r\nSelect\r\n-Package \r\n-Element \r\n-Diagrams",
                     ChangeDiagramStyleRecursiv_Click));
-                _doToolStripMenuItem.DropDownItems.Add(_diagramStyle.GetToolStripMenuDiagramStyle(
+                _doToolStripMenuItem.DropDownItems.Add(_diagramStyle.ConstructStyleToolStripMenuDiagram(
+                    _diagramStyle.DiagramStyleItems,
                     "Bulk Change Diagram Style/Theme",
                     "Bulk Change the Diagram/Theme Style\r\nSelect\r\n-Package \r\n-Element \r\n-Diagrams",
                     ChangeDiagramStylePackage_Click));
-
-                // DiagramObject Style
                 _doToolStripMenuItem.DropDownItems.Add(new ToolStripSeparator());
-                _doToolStripMenuItem.DropDownItems.Add(_diagramStyle.GetToolStripMenuDiagramObjectStyle(
+                // Change Diagram Object Styles
+                _doToolStripMenuItem.DropDownItems.Add(_diagramStyle.ConstructStyleToolStripMenuDiagram(
+                    _diagramStyle.DiagramObjectStyleItems,
                     "Change DiagramObject Style",
                     "Change the DiagramObject Style\r\nSelect\r\n-Diagram \r\n-DiagramObject/Node",
                     ChangeDiagramObjectStylePackage_Click));
+                // Change Diagram Link Styles
+                _doToolStripMenuItem.DropDownItems.Add(_diagramStyle.ConstructStyleToolStripMenuDiagram(
+                    _diagramStyle.DiagramLinkStyleItems,
+                    "Change DiagramLink Style",
+                    "Change the DiagramLink Style\r\nSelect\r\n-Diagram \r\n-DiagramLink",
+                    ChangeDiagramLinkStylePackage_Click));
+
+                //// Diagram Style/Theme
+                //_doToolStripMenuItem.DropDownItems.Add(_diagramStyle.GetToolStripMenuDiagramStyle(
+                //    "Bulk Diagram Style/Theme Recursive",
+                //    "Bulk Change the Diagram Style/Theme recursive\r\nSelect\r\n-Package \r\n-Element \r\n-Diagrams",
+                //    ChangeDiagramStyleRecursiv_Click));
+                //_doToolStripMenuItem.DropDownItems.Add(_diagramStyle.GetToolStripMenuDiagramStyle(
+                //    "Bulk Change Diagram Style/Theme",
+                //    "Bulk Change the Diagram/Theme Style\r\nSelect\r\n-Package \r\n-Element \r\n-Diagrams",
+                //    ChangeDiagramStylePackage_Click));
+
+                //// DiagramObject Style
+                //_doToolStripMenuItem.DropDownItems.Add(new ToolStripSeparator());
+                //_doToolStripMenuItem.DropDownItems.Add(_diagramStyle.GetToolStripMenuDiagramObjectStyle(
+                //    "Change DiagramObject Style",
+                //    "Change the DiagramObject Style\r\nSelect\r\n-Diagram \r\n-DiagramObject/Node",
+                //    ChangeDiagramObjectStylePackage_Click));
 
 
 
@@ -3578,6 +3600,11 @@ namespace hoTools.hoToolsGui
         {
             ChangeDiagramObjectStyle(sender, ChangeScope.Package);
         }
+        // Change diagram style recursive
+        void ChangeDiagramLinkStylePackage_Click(object sender, EventArgs e)
+        {
+            ChangeDiagramLinkStyle(sender, ChangeScope.Package);
+        }
 
 
         private void ChangeDiagramStyle(object sender, ChangeScope changeScope)
@@ -3628,6 +3655,24 @@ and deleted.
 Please restart EA. During restart hoTools loads the default settings.
 You may copy the saved file to 'user.config' in the same folder", "Configuration reset to default. Please Restart!");
         }
+        /// <summary>
+        /// Change diagram link style for selected diagram links 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="changeScope"></param>
+        private void ChangeDiagramLinkStyle(object sender, ChangeScope changeScope)
+        {
+
+
+            ToolStripMenuItem item = sender as ToolStripMenuItem;
+            DiagramLinkStyleItem style = (DiagramLinkStyleItem)item.Tag;
+
+            EaService.DiagramLinkStyleWrapper(Repository, style.Type, style.Style, style.Property);
+
+        }
+
+
+        
     }
 
 

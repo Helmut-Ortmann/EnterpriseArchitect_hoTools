@@ -105,7 +105,7 @@ namespace hoTools.Utils.Diagram
         /// <param name="toolTipRoot"></param>
         /// <param name="eventHandler"></param>
         /// <returns></returns>
-        public ToolStripMenuItem ConstructStyleToolStripMenuDiagram(List<DiagramGeneralStyleItem>  items, string nameRoot, string toolTipRoot, EventHandler eventHandler)
+        public ToolStripMenuItem ConstructStyleToolStripMenuDiagram<T>(List<T>  items, string nameRoot, string toolTipRoot, EventHandler eventHandler)
         {
             ToolStripMenuItem insertTemplateMenuItem = new ToolStripMenuItem
             {
@@ -113,13 +113,14 @@ namespace hoTools.Utils.Diagram
                 ToolTipText = toolTipRoot
             };
             // Add item of possible style as items in drop down
-            foreach (var style in items)
+            foreach (T style in items)
             {
+                DiagramGeneralStyleItem style1 = style as DiagramGeneralStyleItem;
                 ToolStripMenuItem item = new ToolStripMenuItem
                 {
-                    Text = style.Name,
-                    ToolTipText = style.Description,
-                    Tag = style
+                    Text = style1.Name,
+                    ToolTipText = style1.Description,
+                    Tag = style1
                 };
                 item.Click += eventHandler;
                 insertTemplateMenuItem.DropDownItems.Add(item);

@@ -19,6 +19,7 @@ namespace hoTools.Utils.Diagram
         readonly EA.DiagramObject _conTextDiagramObject;
 
 
+
         readonly Connector _selectedConnector;
         #region Constructor
 
@@ -98,11 +99,14 @@ namespace hoTools.Utils.Diagram
 
         #region ReloadSelectedObjectsAndConnector
         /// <summary>
-        /// Reload previously stored selected diagram objects and diagram links
+        /// Store, Reload diagram and select everything was selected (Object+Connector)
+        /// - store diagram
+        /// - refresh 
+        /// - set selections (Objects+Connectors)
         /// </summary>
-        public void ReloadSelectedObjectsAndConnector()
+        public void ReloadSelectedObjectsAndConnector(bool SaveDiagram=true)
         {
-            Save();
+            if (SaveDiagram) Save();
             _rep.ReloadDiagram(_dia.DiagramID);
             if (_selectedConnector != null) _dia.SelectedConnector = _selectedConnector;
             foreach (EA.DiagramObject dObj in _selectedObjects)
@@ -149,6 +153,43 @@ namespace hoTools.Utils.Diagram
             }
             Dia.SelectedObjects.Refresh();
 
+        }
+        /// GetSelectedLinks:
+        /// - Nothing selected: All visible links
+        /// - Connector/Objects selected: Connector + Objects with their in and outgoing links
+        /// - Objects selected: Objects with their in and outgoing links 
+        public List<EA.DiagramLink> GetSelectedLinks(bool withSelectedObjects=true)
+        {
+            var links = new List<EA.DiagramLink>();
+            Connector selectedConnector = _dia.SelectedConnector;
+
+
+            foreach (DiagramLink link in _dia.DiagramLinks)
+            {
+                if (link.IsHidden == false)
+                {
+                    // also consider selected objects
+                    if (withSelectedObjects)
+                    {
+                        // check if connector is connected with diagram object
+                        Connector c = _rep.GetConnectorByID(link.ConnectorID);
+                        foreach (EA.DiagramObject dObject in _dia.SelectedObjects)
+                        {
+                            if (c.ClientID == dObject.ElementID | c.SupplierID == dObject.ElementID)
+                            {
+                                links.Add(link);
+                            }
+                        }
+
+                        // add selected connector
+                        if (c.ConnectorID == selectedConnector?.ConnectorID)
+                        {
+                            links.Add(link);
+                        }
+                    }
+                }
+            }
+            return links;
         }
 
         #region sortSelectedObjects

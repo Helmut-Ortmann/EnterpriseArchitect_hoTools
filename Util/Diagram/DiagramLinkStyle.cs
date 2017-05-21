@@ -1,29 +1,29 @@
 ﻿using System;
-using System.Data.SqlTypes;
-using System.Linq;
 
 namespace hoTools.Utils.Diagram
 {
     public class DiagramLinkStyle : DiagramGeneralStyle
     {
         private readonly EA.DiagramLink _link;
-        public DiagramLinkStyle(EA.Repository rep, EA.DiagramLink link, DiagramLinkStyleItem styleItem,  string type, string style, string property)
-            : base(rep, styleItem.Name, styleItem.Description, styleItem.Type, styleItem.Style, property)
+        public DiagramLinkStyle(EA.Repository rep, EA.DiagramLink link,  string type, string style, string property)
+            : base(rep, type, style, property)
         {
-            
             _link = link;
         }
 
-        public void SetProperty()
+        /// <summary>
+        /// Set all properties
+        /// </summary>
+        public void SetProperties()
         {
-            foreach (var link in Style)
+            foreach (var link in Property)
             {
                 string name;
                 string value;
-                if (GetNameValueFromStyle(link, out name, out value)) continue;
+                if (! GetNameValueFromStyle(link, out name, out value)) continue;
 
 
-                switch (link)
+                switch (name)
                 {
                     case "HiddenLabels":
                         bool hiddenLabels;
@@ -40,6 +40,12 @@ namespace hoTools.Utils.Diagram
                         if (! ConvertInteger(name, value, out lineStyle)) continue;
                         _link.LineStyle = (EA.LinkLineStyle)lineStyle;
                         break;
+                    case "LineColor":
+                        int lineColor;
+                        if (!ConvertInteger(name, value, out lineColor)) continue;
+                        _link.LineColor = lineColor;
+                        break;
+
                     case "LineWidth":
                         int lineWidth;
                         if (!ConvertInteger(name, value, out lineWidth)) continue;
@@ -56,21 +62,22 @@ namespace hoTools.Utils.Diagram
             _link.Update();
         }
         /// <summary>
-        /// Update style
+        /// Update styles
         /// </summary>
-        public void UpdateStyle()
+        public void UpdateStyles()
         {
             string oldStyle = _link.Style;
-            oldStyle = UpdateStyles(oldStyle);
+            oldStyle = base.UpdateStyles(oldStyle);
             _link.Style = oldStyle;
+            _link.Update();
 
         }
 
         public bool IsToProcess()
         {
             if (Type.Length == 0) return true;
-            bool isToProcessType = false;
-            bool isToProcessStereotype = false;
+            bool isToProcessType = true;
+            bool isToProcessStereotype = true;
             EA.Connector con = Rep.GetConnectorByID(_link.ConnectorID); 
             foreach (var type in Type)
             {
@@ -84,6 +91,10 @@ namespace hoTools.Utils.Diagram
                         string nameType;
                         string valueTypes;
                         if (GetNameValueFromStyle(type, out nameType, out valueTypes)) continue;
+                        if (valueTypes.Trim() == "") continue;
+
+                        // must be a supported Type value
+                        isToProcessType = false;
                         foreach (var conType in valueTypes.Split(','))
                         {
                             if (conType == "") continue;
@@ -99,7 +110,10 @@ namespace hoTools.Utils.Diagram
                         string nameStereotype;
                         string valueStereotypes;
                         if (GetNameValueFromStyle(type, out nameStereotype, out valueStereotypes)) continue;
+                        if (valueStereotypes.Trim() == "") continue;
 
+                        // must be a supported Stereotype value
+                        isToProcessStereotype = false;
                         foreach (var conStereo in valueStereotypes.Split(','))
                         {
                             if (conStereo == "") continue;
