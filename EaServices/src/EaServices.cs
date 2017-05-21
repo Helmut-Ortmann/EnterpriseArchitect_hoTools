@@ -501,7 +501,8 @@ namespace hoTools.EaServices
             }
             string style = $@"{DiagramStyle.DiagramObjectStyleItems[pos].Style}".Trim();
             string property  = $@"{DiagramStyle.DiagramObjectStyleItems[pos].Property}".Trim();
-            DiagramObjectStyleWrapper(rep, style, property);
+            string type = $@"{DiagramStyle.DiagramObjectStyleItems[pos].Type}".Trim();
+            DiagramObjectStyleWrapper(rep, type, style, property);
         }
 
         /// <summary>
@@ -510,14 +511,21 @@ namespace hoTools.EaServices
         /// <param name="rep"></param>
         /// <param name="style"></param>
         /// <param name="property"></param>
-        public static void DiagramObjectStyleWrapper(Repository rep, string style, string property)
+        public static void DiagramObjectStyleWrapper(Repository rep, string type, string style, string property)
         {
             EaDiagram eaDia = new EaDiagram(rep, getAllDiagramObject: true);
             if (eaDia.Dia == null) return;
+            rep.SaveDiagram(eaDia.Dia.DiagramID);
             foreach (var diaObj in eaDia.SelObjects)
             {
-                DiagramFormat.SetDiagramObjectStyle(rep, diaObj, style, property);
+                var linkStyle = new DiagramObjectStyle(rep, diaObj, type, style, property);
+                if (linkStyle.IsToProcess())
+                {
+                    linkStyle.UpdateStyles();
+                    linkStyle.SetProperties();
+                }
             }
+            eaDia.ReloadSelectedObjectsAndConnector(SaveDiagram: false);
 
 
         }

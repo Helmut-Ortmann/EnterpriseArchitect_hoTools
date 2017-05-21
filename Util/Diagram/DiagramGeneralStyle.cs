@@ -68,7 +68,7 @@ namespace hoTools.Utils.Diagram
                 $"Invalid Boolean Style/Property in Settings.json");
             return false;
         }
-        protected string UpdateStyles(string oldStyle)
+        protected string UpdateStyles(string oldStyle, bool withInsert=true)
         {
             string newStyle = oldStyle;
             foreach (var s in Style)
@@ -85,7 +85,7 @@ namespace hoTools.Utils.Diagram
                 else
                 {
                     // insert style
-                    newStyle = $"{newStyle};{style};";
+                    if (withInsert) newStyle = $"{newStyle};{style};";
                 }
             }
             return newStyle;

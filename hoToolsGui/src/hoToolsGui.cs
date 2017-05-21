@@ -3635,7 +3635,7 @@ namespace hoTools.hoToolsGui
             ToolStripMenuItem item = sender as ToolStripMenuItem; 
             DiagramObjectStyleItem style = (DiagramObjectStyleItem)item.Tag;
 
-            EaService.DiagramObjectStyleWrapper(Repository, style.Style, style.Property);
+            EaService.DiagramObjectStyleWrapper(Repository, style.Type, style.Style, style.Property);
         
         }
 
