@@ -429,6 +429,25 @@ namespace hoTools.EaServices
             DiagramLinkStyleWrapper(rep, 1);
         }
         /// <summary>
+        /// Bulk change DiagramObject Styles 2 according to Settings.Json 
+        /// </summary>
+        [ServiceOperation("{6AA996AD-640D-4615-886F-EC29062B2695}", "Change DiagramLinks to 'Style 4'",
+            "Select Diagram, Diagram Objects or Diagram link (see Settings.Json, 2. entry)", isTextRequired: false)]
+        public static void DiagramLinkStyle3(EA.Repository rep)
+        {
+            DiagramLinkStyleWrapper(rep, 3);
+        }
+        /// <summary>
+        /// Bulk change DiagramObject Styles 3 according to Settings.Json 
+        /// </summary>
+        [ServiceOperation("{1D838C4B-634C-490B-8CFE-2CC418133984}", "Change DiagramLinks to 'Style 4'",
+            "Select Diagram, Diagram Objects or Diagram link (see Settings.Json, 4. entry)", isTextRequired: false)]
+        public static void DiagramLinkStyle2(EA.Repository rep)
+        {
+            DiagramLinkStyleWrapper(rep, 4);
+        }
+
+        /// <summary>
         /// Bulk change DiagramObject Styles 0 according to Settings.Json 
         /// </summary>
         [ServiceOperation("{94F8855F-22BB-4BD7-BCEE-FC8D64E63B83}", "Bulk change DiagramObjects to 'Style 2'",
