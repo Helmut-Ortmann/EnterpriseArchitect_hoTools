@@ -85,9 +85,9 @@ namespace hoTools.Utils.Diagram
                 string name;
                 string value;
                 if (! GetNameValueFromStyle(type, out name, out value)) continue;
-                switch (name)
+                switch (name.Substring(1, 4).ToLower())
                 {
-                    case "Types":
+                    case "type":
                         string nameType;
                         string valueTypes;
                         if (! GetNameValueFromStyle(type, out nameType, out valueTypes)) continue;
@@ -106,7 +106,7 @@ namespace hoTools.Utils.Diagram
                         }
 
                         break;
-                    case "Stereotypes":
+                    case @"ster":
                         string nameStereotype;
                         string valueStereotypes;
                         if (! GetNameValueFromStyle(type, out nameStereotype, out valueStereotypes)) continue;

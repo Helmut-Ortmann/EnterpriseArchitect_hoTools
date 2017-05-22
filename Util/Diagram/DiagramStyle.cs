@@ -205,7 +205,7 @@ namespace hoTools.Utils.Diagram
                             if (objStereo == "") continue;
 
                             // check if stereotype exists
-                            if (Array.IndexOf(_dia.StereotypeEx.Split(','), objStereo) > -1)
+                            if ((Array.IndexOf(_dia.StereotypeEx.Split(','), objStereo) > -1) || (_dia.Stereotype == objStereo))
                             {
                                 isToProcessStereotype = true;
                                 break;
@@ -231,7 +231,7 @@ namespace hoTools.Utils.Diagram
         private string GetCustomDiagramType()
         {
 
-            Match m = Regex.Match(_dia.Type, @"MDGDgm=([^;]+);");
+            Match m = Regex.Match(_dia.StyleEx, @"MDGDgm=([^;]+);");
             if (m.Success)
             {
                 if (m.Groups.Count > 0) return m.Groups[1].Value;

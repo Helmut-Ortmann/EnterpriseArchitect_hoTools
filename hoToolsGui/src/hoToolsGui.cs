@@ -3615,7 +3615,7 @@ namespace hoTools.hoToolsGui
             // [0] Styles
             // [1] Properties
             // [2] Diagram types
-            string[] styleEx = new string[3];
+            string[] styleEx = new string[4];
             styleEx[0] = style.StyleEx;
             styleEx[1] = style.Pdata;
             styleEx[2] = style.Property;

@@ -398,10 +398,11 @@ namespace hoTools.EaServices
                 MessageBox.Show("", "No Diagram style in 'Settings.json' found");
                 return;
             }
-            // [0] Styles
-            // [1] Properties
-            // [2] Diagram types
-            string[] styleEx = new string[3];
+            // [0] StyleEx
+            // [1] PDATA
+            // [2] Properties
+            // [3] Diagram types
+            string[] styleEx = new string[4];
             styleEx[0] = DiagramStyle.DiagramStyleItems[pos].StyleEx;
             styleEx[1] = DiagramStyle.DiagramStyleItems[pos].Pdata;
             styleEx[2] = DiagramStyle.DiagramStyleItems[pos].Property;
@@ -644,7 +645,7 @@ namespace hoTools.EaServices
         /// <param name="par">par[3] contains the possible diagram types</param>
         public static void SetDiagramStyle(Repository rep, EA.Diagram dia, string[] par)
         {
-            EaDiagram eaDia = new EaDiagram(rep, getAllDiagramObject: true);
+            EaDiagram eaDia = new EaDiagram(rep, getAllDiagramObject: false);
             if (eaDia.Dia == null) return;
             rep.SaveDiagram(eaDia.Dia.DiagramID);
 
