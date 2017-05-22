@@ -610,24 +610,65 @@ namespace hoTools.EaServices
             {
                 case EA.ObjectType.otDiagram:
                     EA.Diagram dia = (EA.Diagram)rep.GetContextObject();
-                    DiagramFormat.SetDiagramStyle(rep, dia, liParameter);
+                    SetDiagramStyle(rep, dia, liParameter);
                     break;
                 case EA.ObjectType.otPackage:
                     EA.Package pkg = (EA.Package)rep.GetContextObject();
-                    RecursivePackages.DoRecursivePkg(rep, pkg, null, null, DiagramFormat.SetDiagramStyle,
+                    RecursivePackages.DoRecursivePkg(rep, pkg, null, null, SetDiagramStyle,
                         liParameter,
                         ChangeScope.PackageRecursive);
                     break;
                 case EA.ObjectType.otElement:
                     EA.Element el = (EA.Element)rep.GetContextObject();
-                    RecursivePackages.DoRecursiveEl(rep, el, null, DiagramFormat.SetDiagramStyle, liParameter,
+                    RecursivePackages.DoRecursiveEl(rep, el, null, SetDiagramStyle, liParameter,
                         ChangeScope.PackageRecursive);
                     break;
             }
         }
 
 
-       
+        /// <summary>
+        /// Set Diagram styles in PDATA and StyleEx. 
+        /// 
+        /// HideQuals=1 HideQualifiers: 
+        /// OpParams=2  Show full Operation Parameter
+        /// ScalePI=1   Scale to fit page
+        /// Theme=:119  Set the diagram theme and the used features of the theme (here 119, see StyleEx of t_diagram)
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <param name="dia"></param>
+        /// <param name="par">par[0] contains the values as a semicolon/comma separated Style</param>
+        /// <param name="par">par[1] contains the values as a semicolon/comma separated PDATA</param>
+        /// <param name="par">par[2] contains the values as a semicolon/comma separated properties</param>
+        /// <param name="par">par[3] contains the possible diagram types</param>
+        public static void SetDiagramStyle(Repository rep, EA.Diagram dia, string[] par)
+        {
+            EaDiagram eaDia = new EaDiagram(rep, getAllDiagramObject: true);
+            if (eaDia.Dia == null) return;
+            rep.SaveDiagram(eaDia.Dia.DiagramID);
+
+            string styles = par[0].Replace(",", ";");
+            string pdatas = par[1].Replace(",", ";");
+            string properties = par[2].Replace(",", ";");
+            string types = par[3];
+
+
+
+                var diagramStyle = new DiagramStyle(rep, dia, types, styles, pdatas, properties);
+                if (diagramStyle.IsToProcess())
+                {
+                    diagramStyle.UpdateStyles();
+                    diagramStyle.SetProperties(withSql:false);
+                    diagramStyle.SetProperties(withSql: true);
+            }
+
+            eaDia.ReloadSelectedObjectsAndConnector(SaveDiagram: false);
+
+
+        }
+
+
+
 
         //-------------------------------------------------------------------------------------------
 

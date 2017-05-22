@@ -68,10 +68,30 @@ namespace hoTools.Utils.Diagram
                 $"Invalid Boolean Style/Property in Settings.json");
             return false;
         }
+
+        /// <summary>
+        /// Update local Styles (standard)
+        /// </summary>
+        /// <param name="oldStyle"></param>
+        /// <param name="withInsert"></param>
+        /// <returns></returns>
         protected string UpdateStyles(string oldStyle, bool withInsert=true)
         {
+            return UpdateStyles(oldStyle, Style, withInsert);
+           
+        }
+
+        /// <summary>
+        /// Update arbitrary Style (used for diagram style which has an additional PDATA style
+        /// </summary>
+        /// <param name="oldStyle"></param>
+        /// <param name="newStyles"></param>
+        /// <param name="withInsert"></param>
+        /// <returns></returns>
+        protected string UpdateStyles(string oldStyle, string[] newStyles, bool withInsert = true)
+        {
             string newStyle = oldStyle;
-            foreach (var s in Style)
+            foreach (var s in newStyles)
             {
                 string style = s.Trim();
                 string name;
@@ -88,10 +108,10 @@ namespace hoTools.Utils.Diagram
                     if (withInsert) newStyle = $"{newStyle};{style};";
                 }
             }
-            return newStyle.Replace(";;;", ";").Replace(";;;",";").Replace(";;", ";");
+            return newStyle.Replace(";;;", ";").Replace(";;;", ";").Replace(";;", ";");
         }
 
-        
+
 
     }
 }

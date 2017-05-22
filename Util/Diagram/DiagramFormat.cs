@@ -390,7 +390,7 @@ namespace hoTools.Utils.Diagram
         /// <param name="par">par[1] contains the values as a semicolon/comma separated properties</param>
         /// <param name="par">par[2] contains the possible diagram types</param>
 
-        public static void SetDiagramStyle(Repository rep, EA.Diagram dia, string[] par)
+        public static void SetDiagramStyleDeleteMe(Repository rep, EA.Diagram dia, string[] par)
         {
             // Make '; as delimiter for types
             string styles = par[0].Replace(",", ";");
