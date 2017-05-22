@@ -88,7 +88,7 @@ namespace hoTools.Utils.Diagram
                     if (withInsert) newStyle = $"{newStyle};{style};";
                 }
             }
-            return newStyle;
+            return newStyle.Replace(";;;", ";").Replace(";;;",";").Replace(";;", ";");
         }
 
         

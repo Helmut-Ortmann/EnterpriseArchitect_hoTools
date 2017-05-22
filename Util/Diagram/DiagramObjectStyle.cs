@@ -29,13 +29,13 @@ namespace hoTools.Utils.Diagram
             bool underline = false;
 
 
-            foreach (var link in Property)
+            foreach (var property in Property)
             {
                 string name;
                 string value;
                 int iValue = 0;
                 bool bValue = false;
-                if (!GetNameValueFromStyle(link, out name, out value)) continue;
+                if (!GetNameValueFromStyle(property, out name, out value)) continue;
 
 
 
@@ -260,10 +260,11 @@ namespace hoTools.Utils.Diagram
 
                         // must be a supported Type value
                         isToProcessType = false;
-                        foreach (var elType in valueTypes.Split(','))
+                        foreach (var t in valueTypes.Split(','))
                         {
+                            string elType = t.Trim();
                             if (elType == "") continue;
-                            if (elType == el.Type)
+                            if (elType.Equals(el.Type))
                             {
                                 isToProcessType = true;
                                 break;

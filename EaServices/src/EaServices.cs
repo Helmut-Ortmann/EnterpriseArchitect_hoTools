@@ -450,34 +450,44 @@ namespace hoTools.EaServices
         /// <summary>
         /// Bulk change DiagramObject Styles 0 according to Settings.Json 
         /// </summary>
-        [ServiceOperation("{94F8855F-22BB-4BD7-BCEE-FC8D64E63B83}", "Bulk change DiagramObjects to 'Style 2'",
+        [ServiceOperation("{7FBCA44B-5DEA-4BFA-8948-EAFD17D60D83}", "Change DiagramObjects to 'Style 1'",
+            "Select Diagram or Diagram Objects (see Settings.Json, 1. entry)", isTextRequired: false)]
+        public static void DiagramObjectStyle1(EA.Repository rep)
+        {
+            DiagramObjectStyleWrapper(rep, 0);
+        }
+
+        /// <summary>
+        /// Bulk change DiagramObject Styles 1 according to Settings.Json 
+        /// </summary>
+        [ServiceOperation("{94F8855F-22BB-4BD7-BCEE-FC8D64E63B83}", "Change DiagramObjects to 'Style 2'",
             "Select Diagram or Diagram Objects (see Settings.Json, 2. entry)", isTextRequired: false)]
         public static void DiagramObjectStyle2(EA.Repository rep)
         {
             DiagramObjectStyleWrapper(rep, 1);
         }
         /// <summary>
-        /// Bulk change DiagramObject Styles 0 according to Settings.Json 
+        /// Bulk change DiagramObject Styles 3 according to Settings.Json 
         /// </summary>
-        [ServiceOperation("{98B0661C-DEB0-453D-BD30-3FB900228B38}", "Bulk change DiagramObjects to 'Style 3'",
+        [ServiceOperation("{98B0661C-DEB0-453D-BD30-3FB900228B38}", "Change DiagramObjects to 'Style 3'",
             "Select Diagram or Diagram Objects (see Settings.Json, 3. entry)", isTextRequired: false)]
         public static void DiagramObjectStyle3(EA.Repository rep)
         {
             DiagramObjectStyleWrapper(rep, 2);
         }
         /// <summary>
-        /// Bulk change DiagramObject Styles 0 according to Settings.Json 
+        /// Bulk change DiagramObject Styles 4 according to Settings.Json 
         /// </summary>
-        [ServiceOperation("{BFD60FFD-2244-4320-8AB2-57858DA6817F}", "Bulk change DiagramObjects to 'Style 4'",
+        [ServiceOperation("{BFD60FFD-2244-4320-8AB2-57858DA6817F}", "Change DiagramObjects to 'Style 4'",
             "Select Diagram or Diagram Objects (see Settings.Json, 4. entry)", isTextRequired: false)]
         public static void DiagramObjectStyle4(EA.Repository rep)
         {
             DiagramObjectStyleWrapper(rep, 3);
         }
         /// <summary>
-        /// Bulk change DiagramObject Styles 0 according to Settings.Json 
+        /// Bulk change DiagramObject Styles 5 according to Settings.Json 
         /// </summary>
-        [ServiceOperation("{DD52FE95-51DB-4619-AF5E-39EE7AA2CF4A}", "Bulk change DiagramObjects to 'Style 5'",
+        [ServiceOperation("{DD52FE95-51DB-4619-AF5E-39EE7AA2CF4A}", "Change DiagramObjects to 'Style 5'",
             "Select Diagram or Diagram Objects (see Settings.Json, 5. entry)", isTextRequired: false)]
         public static void DiagramObjectStyle5(EA.Repository rep)
         {
@@ -518,11 +528,11 @@ namespace hoTools.EaServices
             rep.SaveDiagram(eaDia.Dia.DiagramID);
             foreach (var diaObj in eaDia.SelObjects)
             {
-                var linkStyle = new DiagramObjectStyle(rep, diaObj, type, style, property);
-                if (linkStyle.IsToProcess())
+                var objectStyle = new DiagramObjectStyle(rep, diaObj, type, style, property);
+                if (objectStyle.IsToProcess())
                 {
-                    linkStyle.UpdateStyles();
-                    linkStyle.SetProperties();
+                    objectStyle.UpdateStyles();
+                    objectStyle.SetProperties();
                 }
             }
             eaDia.ReloadSelectedObjectsAndConnector(SaveDiagram: false);
