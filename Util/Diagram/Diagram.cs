@@ -104,9 +104,9 @@ namespace hoTools.Utils.Diagram
         /// - refresh 
         /// - set selections (Objects+Connectors)
         /// </summary>
-        public void ReloadSelectedObjectsAndConnector(bool SaveDiagram=true)
+        public void ReloadSelectedObjectsAndConnector(bool saveDiagram=true)
         {
-            if (SaveDiagram) Save();
+            if (saveDiagram) Save();
             _rep.ReloadDiagram(_dia.DiagramID);
             if (_selectedConnector != null) _dia.SelectedConnector = _selectedConnector;
             foreach (EA.DiagramObject dObj in _selectedObjects)

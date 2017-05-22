@@ -7,12 +7,12 @@ namespace hoTools.Utils.Diagram
     public class DiagramStyle : DiagramGeneralStyle
     {
         private readonly EA.Diagram _dia;
-        private string[] _pdatas;
+        private readonly string[] _pdatas;
         public DiagramStyle(EA.Repository rep, EA.Diagram dia, string type, string style, string pdata, string property)
             : base(rep, type, style, property)
         {
             _dia = dia;
-            _pdatas = pdata.Trim().Replace(",", ";").Replace(";;", ";").TrimEnd(';').Split(';'); ;
+            _pdatas = pdata.Trim().Replace(",", ";").Replace(";;", ";").TrimEnd(';').Split(';'); 
         }
 
         /// <summary>

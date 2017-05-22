@@ -521,6 +521,7 @@ namespace hoTools.EaServices
         /// Wrapper to change DiagramObject style
         /// </summary>
         /// <param name="rep"></param>
+        /// <param name="type"></param>
         /// <param name="style"></param>
         /// <param name="property"></param>
         public static void DiagramObjectStyleWrapper(Repository rep, string type, string style, string property)
@@ -537,7 +538,7 @@ namespace hoTools.EaServices
                     objectStyle.SetProperties();
                 }
             }
-            eaDia.ReloadSelectedObjectsAndConnector(SaveDiagram: false);
+            eaDia.ReloadSelectedObjectsAndConnector(saveDiagram: false);
 
 
         }
@@ -589,7 +590,7 @@ namespace hoTools.EaServices
                 }
 
             }
-            eaDia.ReloadSelectedObjectsAndConnector(SaveDiagram:false);
+            eaDia.ReloadSelectedObjectsAndConnector(saveDiagram:false);
 
 
 
@@ -664,7 +665,7 @@ namespace hoTools.EaServices
                     diagramStyle.SetProperties(withSql: true);
             }
 
-            eaDia.ReloadSelectedObjectsAndConnector(SaveDiagram: false);
+            eaDia.ReloadSelectedObjectsAndConnector(saveDiagram: false);
 
 
         }

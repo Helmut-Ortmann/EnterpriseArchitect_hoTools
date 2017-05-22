@@ -3424,23 +3424,7 @@ namespace hoTools.hoToolsGui
                     "Change the DiagramLink Style\r\nSelect\r\n-Diagram \r\n-DiagramLink",
                     ChangeDiagramLinkStylePackage_Click));
 
-                //// Diagram Style/Theme
-                //_doToolStripMenuItem.DropDownItems.Add(_diagramStyle.GetToolStripMenuDiagramStyle(
-                //    "Bulk Diagram Style/Theme Recursive",
-                //    "Bulk Change the Diagram Style/Theme recursive\r\nSelect\r\n-Package \r\n-Element \r\n-Diagrams",
-                //    ChangeDiagramStyleRecursiv_Click));
-                //_doToolStripMenuItem.DropDownItems.Add(_diagramStyle.GetToolStripMenuDiagramStyle(
-                //    "Bulk Change Diagram Style/Theme",
-                //    "Bulk Change the Diagram/Theme Style\r\nSelect\r\n-Package \r\n-Element \r\n-Diagrams",
-                //    ChangeDiagramStylePackage_Click));
-
-                //// DiagramObject Style
-                //_doToolStripMenuItem.DropDownItems.Add(new ToolStripSeparator());
-                //_doToolStripMenuItem.DropDownItems.Add(_diagramStyle.GetToolStripMenuDiagramObjectStyle(
-                //    "Change DiagramObject Style",
-                //    "Change the DiagramObject Style\r\nSelect\r\n-Diagram \r\n-DiagramObject/Node",
-                //    ChangeDiagramObjectStylePackage_Click));
-
+                
 
 
 
@@ -3612,9 +3596,10 @@ namespace hoTools.hoToolsGui
             ToolStripMenuItem item = sender as ToolStripMenuItem; //((ToolStripMenuItem) sender).Tag; DiagramStyleItem
             DiagramStyleItem style = (DiagramStyleItem)item.Tag;
 
-            // [0] Styles
-            // [1] Properties
-            // [2] Diagram types
+            // [0] StyleEx
+            // [1] PDATA
+            // [2] Properties
+            // [3] Diagram types
             string[] styleEx = new string[4];
             styleEx[0] = style.StyleEx;
             styleEx[1] = style.Pdata;
