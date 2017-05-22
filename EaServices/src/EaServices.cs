@@ -402,9 +402,10 @@ namespace hoTools.EaServices
             // [1] Properties
             // [2] Diagram types
             string[] styleEx = new string[3];
-            styleEx[0] = $@"{DiagramStyle.DiagramStyleItems[pos].Pdata};{DiagramStyle.DiagramStyleItems[pos].StyleEx};";
-            styleEx[1] = DiagramStyle.DiagramStyleItems[pos].Property;
-            styleEx[2] = DiagramStyle.DiagramStyleItems[pos].Type;
+            styleEx[0] = DiagramStyle.DiagramStyleItems[pos].StyleEx;
+            styleEx[1] = DiagramStyle.DiagramStyleItems[pos].Pdata;
+            styleEx[2] = DiagramStyle.DiagramStyleItems[pos].Property;
+            styleEx[3] = DiagramStyle.DiagramStyleItems[pos].Type;
             ChangeDiagramStyle(rep, styleEx, ChangeScope.PackageRecursive);
         }
         /// <summary>
@@ -594,14 +595,14 @@ namespace hoTools.EaServices
         }
 
 
-
-
         /// <summary>
         /// Bulk Change Diagram Style according to:
-        /// liParameter[0]  Styles
-        /// liParameter[1]  Properties
-        /// liParameter[2]  Diagram types as comma, semicolon separated list
+        /// liParameter[0]  Styles/StyleEx
+        /// liParameter[1]  PDATA/ExtendedStyle
+        /// liParameter[2]  Properties
+        /// liParameter[3]  Diagram types as comma, semicolon separated list
         /// </summary>
+        /// <param name="rep"></param>
         /// <param name="liParameter"></param>
         /// <param name="changeScope"></param>
         public static void ChangeDiagramStyle(EA.Repository rep, string[] liParameter, ChangeScope changeScope = ChangeScope.PackageRecursive)

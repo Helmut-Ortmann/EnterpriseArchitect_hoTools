@@ -3616,9 +3616,10 @@ namespace hoTools.hoToolsGui
             // [1] Properties
             // [2] Diagram types
             string[] styleEx = new string[3];
-            styleEx[0] = $@"{style.Pdata};{style.StyleEx};";
-            styleEx[1] = style.Property;
-            styleEx[2] = style.Type;
+            styleEx[0] = style.StyleEx;
+            styleEx[1] = style.Pdata;
+            styleEx[2] = style.Property;
+            styleEx[3] = style.Type;
             EaService.ChangeDiagramStyle(Repository, styleEx, changeScope);
         }
 
