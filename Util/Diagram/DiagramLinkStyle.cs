@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Forms;
 
 namespace hoTools.Utils.Diagram
 {
@@ -59,7 +60,7 @@ namespace hoTools.Utils.Diagram
                       
                 }
             }
-            _link.Update();
+            Update();
         }
         /// <summary>
         /// Update styles
@@ -69,10 +70,24 @@ namespace hoTools.Utils.Diagram
             string oldStyle = _link.Style;
             oldStyle = base.UpdateStyles(oldStyle);
             _link.Style = oldStyle;
-            _link.Update();
+            Update();
 
         }
 
+        /// <summary>
+        /// Update Diagram Link
+        /// </summary>
+        private void Update()
+        {
+            try
+            {
+                _link.Update();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($@"Style is possibly to long for DB field\r\n\r\e{e}", "Cant write Diagram Styles!");
+            }
+        }
         public bool IsToProcess()
         {
             if (Type.Length == 0) return true;

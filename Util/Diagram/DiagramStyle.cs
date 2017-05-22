@@ -85,32 +85,32 @@ namespace hoTools.Utils.Diagram
 
                     }
                 } else
-            {
-                switch (name) {
-                    case @"showforeign":
-                        bool showForeign;
-                        if (!ConvertBool(name, value, out showForeign))
-                        {
-                            string updateStr = $@"update t_diagram set ShowForeign = {value.Trim()} 
-                                                                                where Diagram_ID = {_dia.DiagramID}";
-                            SQL.UtilSql.SqlUpdate(Rep, updateStr);
-                        }
-                        break;
+                {
+                    switch (name) {
+                        case @"showforeign":
+                            bool showForeign;
+                            if (!ConvertBool(name, value, out showForeign))
+                            {
+                                string updateStr = $@"update t_diagram set ShowForeign = {value.Trim()} 
+                                                                                    where Diagram_ID = {_dia.DiagramID}";
+                                SQL.UtilSql.SqlUpdate(Rep, updateStr);
+                            }
+                            break;
 
-                    case @"showborder":
-                        bool showBorder;
-                        if (!ConvertBool(name, value, out showBorder))
-                        {
-                            string updateStr = $@"update t_diagram set ShowBorder = {value.Trim()} 
-                                                                          where Diagram_ID = {_dia.DiagramID}";
-                            SQL.UtilSql.SqlUpdate(Rep, updateStr);
-                        }
-                        break;
+                        case @"showborder":
+                            bool showBorder;
+                            if (!ConvertBool(name, value, out showBorder))
+                            {
+                                string updateStr = $@"update t_diagram set ShowBorder = {value.Trim()} 
+                                                                              where Diagram_ID = {_dia.DiagramID}";
+                                SQL.UtilSql.SqlUpdate(Rep, updateStr);
+                            }
+                            break;
+                    }
+
                 }
-
             }
-        }
-            _dia.Update();
+            Update();
         }
         /// <summary>
         /// Update styles
@@ -128,9 +128,23 @@ namespace hoTools.Utils.Diagram
             string extendedStyle = _dia.ExtendedStyle;
             extendedStyle = base.UpdateStyles(extendedStyle, _pdatas);
             _dia.ExtendedStyle = extendedStyle;
+            Update();
 
-            _dia.Update();
 
+        }
+        /// <summary>
+        /// Update Diagram
+        /// </summary>
+        private void Update()
+        {
+            try
+            {
+                _dia.Update();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($@"Style is possibly to long for DB field\r\n\r\e{e}", "Cant write Diagram Styles!");
+            }
         }
 
         public bool IsToProcess()

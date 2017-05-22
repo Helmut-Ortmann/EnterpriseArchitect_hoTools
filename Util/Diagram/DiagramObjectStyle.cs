@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Forms;
 using EA;
 
 namespace hoTools.Utils.Diagram
@@ -224,7 +225,7 @@ namespace hoTools.Utils.Diagram
                 if (isFontSize && isFontName && isBold && isItalic && isUnderline)
                     _diaObj.SetFontStyle(fontName, fontSize, bold, italic, underline);
             }
-            _diaObj.Update();
+            Update();
         }
         /// <summary>
         /// Update styles
@@ -234,8 +235,22 @@ namespace hoTools.Utils.Diagram
             string oldStyle = (string)_diaObj.Style;
             oldStyle = base.UpdateStyles(oldStyle );
             _diaObj.Style = oldStyle;
-            _diaObj.Update();
+            Update();
 
+        }
+        /// <summary>
+        /// Update Diagram Object
+        /// </summary>
+        private void Update()
+        {
+            try
+            {
+                _diaObj.Update();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($@"Style is possibly to long for DB field\r\n\r\e{e}", "Cant write Diagram Styles!");
+            }
         }
 
         public bool IsToProcess()
