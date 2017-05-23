@@ -23,15 +23,32 @@ namespace hoTools.Utils.Diagram
             Rep = rep;
         }
 
-        protected static bool GetNameValueFromStyle(string link, out string name, out string value)
+        /// <summary>
+        /// Get value from string: Name=Value; extracts name and value. You can change the default delimiter "=" to whatever character you like
+        /// </summary>
+        /// <param name="myString"></param>
+        /// <param name="name"></param>
+        /// <param name="value"></param>
+        /// <param name="delimiter"></param>
+        /// <returns></returns>
+        protected static bool GetNameValueFromStyle(string myString, out string name, out string value, char delimiter='=')
         {
-            Regex rx = new Regex(@"([^=]*)=(.*)");
-            Match match = rx.Match(link.Trim());
             name = "";
             value = "";
-            if (!match.Success) return false;
-            name = match.Groups[1].Value;
-            value = match.Groups[2].Value;
+            string[] s = myString.Split(delimiter);
+            if (s.Length != 2) return false;
+            name = s[0];
+            value = s[1];
+            return true;
+
+
+            //Regex rx = new Regex(@"([^=]*)=(.*)");
+            //Match match = rx.Match(link.Trim());
+            //name = "";
+            //value = "";
+            //if (!match.Success) return false;
+            //name = match.Groups[1].Value;
+            //value = match.Groups[2].Value;
             return true;
         }
         /// <summary>

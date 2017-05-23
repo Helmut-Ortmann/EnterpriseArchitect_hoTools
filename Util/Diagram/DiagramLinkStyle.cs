@@ -21,7 +21,7 @@ namespace hoTools.Utils.Diagram
             {
                 string name;
                 string value;
-                if (! GetNameValueFromStyle(link, out name, out value)) continue;
+                if (! GetNameValueFromString(link, out name, out value)) continue;
 
 
                 switch (name)
@@ -56,6 +56,31 @@ namespace hoTools.Utils.Diagram
                         int suppressSegment;
                         if (!ConvertInteger(name, value, out suppressSegment)) continue;
                         _link.SuppressSegment = suppressSegment;
+                        break;
+                    // handle labels
+                    case "LLB":
+                        // extract tags
+                        string[] tags = value.Split(':');
+                        foreach (var tag in tags)
+                        {
+                            string tagName;
+                            string tagValue;
+                            if (!GetNameValueFromString(link, out tagName, out tagValue,':')) continue;
+
+
+                            switch (name)
+                            {
+                                case "HiddenLabels":
+                                    bool hiddenLabels;
+                                    if (!ConvertBool(name, value, out hiddenLabels)) continue;
+                                    _link.HiddenLabels = hiddenLabels;
+                                    break;
+                                case "IsHidden":
+                                    bool isHidden;
+                                    if (!ConvertBool(name, value, out isHidden)) continue;
+                                    _link.IsHidden = isHidden;
+                                    break;
+                            }
                         break;
                       
                 }
@@ -99,13 +124,13 @@ namespace hoTools.Utils.Diagram
                 
                 string name;
                 string value;
-                if (! GetNameValueFromStyle(type, out name, out value)) continue;
+                if (! GetNameValueFromString(type, out name, out value)) continue;
                 switch (name.Substring(1, 4).ToLower())
                 {
                     case "type":
                         string nameType;
                         string valueTypes;
-                        if (! GetNameValueFromStyle(type, out nameType, out valueTypes)) continue;
+                        if (! GetNameValueFromString(type, out nameType, out valueTypes)) continue;
                         if (valueTypes.Trim() == "") continue;
 
                         // must be a supported Type value
@@ -124,7 +149,7 @@ namespace hoTools.Utils.Diagram
                     case @"ster":
                         string nameStereotype;
                         string valueStereotypes;
-                        if (! GetNameValueFromStyle(type, out nameStereotype, out valueStereotypes)) continue;
+                        if (! GetNameValueFromString(type, out nameStereotype, out valueStereotypes)) continue;
                         if (valueStereotypes.Trim() == "") continue;
 
                         // must be a supported Stereotype value

@@ -119,6 +119,9 @@ Some features:
 
 # Releases
 ## Release 2.1.7
+- Diagram Styles (Diagram, Diagram Objects, Diagram Links)
+- Amount of Buttons extended to 10
+- Code restructuring
 
 ## Release 2.1.6
 - Diagram Styles, configurable via 'Settings.jason'
