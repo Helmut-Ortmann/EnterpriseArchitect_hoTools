@@ -261,11 +261,11 @@ namespace hoTools.Utils.Diagram
             EA.Element el = Rep.GetElementByID(_diaObj.ElementID);
             foreach (var type in Type)
             {
-
+                if (String.IsNullOrWhiteSpace(type)) continue;
                 string name;
                 string value;
                 if (!GetNameValueFromString(type, out name, out value)) continue;
-                switch (name.Substring(1,4).ToLower())
+                switch (name.Substring(0,4).ToLower())
                 {
                     case "type":
                         string nameType;

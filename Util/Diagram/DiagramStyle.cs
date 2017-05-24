@@ -156,7 +156,7 @@ namespace hoTools.Utils.Diagram
 
             foreach (var type in Type)
             {
-
+                if (String.IsNullOrWhiteSpace(type)) continue;
                 string name;
                 string value;
                 if (!GetNameValueFromString(type, out name, out value)) continue;

@@ -1,4 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
@@ -11,8 +15,7 @@ namespace hoTools.Utils.Diagram
         public string[] Type;
         public EA.Repository Rep;
 
-
-
+        
         public DiagramGeneralStyle(EA.Repository rep, string type, string style, string property)
         {
             Style = style.Trim().Replace(",", ";").Replace(";;", ";").TrimEnd(';').Split(';');
@@ -33,15 +36,28 @@ namespace hoTools.Utils.Diagram
         /// <returns></returns>
         protected static bool GetNameValueFromString(string myString, out string name, out string value, char delimiter='=')
         {
-            name = "";
-            value = "";
 
-
+            myString = myString.Trim();
             Regex rx = new Regex($@"([^=]*){delimiter}(.*)");
             Match match = rx.Match(myString.Trim());
             name = "";
             value = "";
-            if (!match.Success) return false;
+            if (!match.Success && match.Groups.Count != 3)
+            {
+                MessageBox.Show($@"Tag: '{myString}'
+
+Examples:
+'LLB=HDN=1;'    Update tag HDN to 1 (hide) in Property LLB
+'LLB=Set=;'     Reset LLB Property
+'LLB=SET=HDN=1; Reset LLB Property to 'LLB=HDN=1';
+
+Edit Setting.json:
+- in %APPDATA%\ho\hoTools\Setting.json
+- File, Setting
+
+",$@"Invalid tag, has to be 'TagName=TagValue'!");
+                return false;
+            }
             name = match.Groups[1].Value;
             value = match.Groups[2].Value;
             return true;
@@ -58,13 +74,28 @@ namespace hoTools.Utils.Diagram
             // ReSharper disable once RedundantAssignment
             intValue = 0;
             value = value.Trim().ToLower();
+            // simple integer
             if (Int32.TryParse(value, out intValue)) return true;
-            if (value.Substring(0,2)=="0x") 
-                if (Int32.TryParse(value.Substring(2), System.Globalization.NumberStyles.HexNumber, null, out intValue)) return true;
-            if (value.Substring(0, 1) == "#")
-                if (Int32.TryParse(value.Substring(1), System.Globalization.NumberStyles.HexNumber, null, out intValue)) return true;
-            else
+
+            // more complex types like: Hexa, Color
+            if (value.Length > 2)
+            {
+                if (value.Substring(0, 2) == "0x")
+                    if (Int32.TryParse(value.Substring(2), System.Globalization.NumberStyles.HexNumber, null,
+                        out intValue)) return true;
+                if (value.Substring(0, 1) == "#")
+                    if (Int32.TryParse(value.Substring(1), System.Globalization.NumberStyles.HexNumber, null,
+                        out intValue)) return true;
                 if (Int32.TryParse(value, System.Globalization.NumberStyles.HexNumber, null, out intValue)) return true;
+
+                // handle colors like green
+                string htmlColor = ColorHtmlFromName(value);
+                if (htmlColor != "")
+                {
+                    return Int32.TryParse(htmlColor.Substring(1), System.Globalization.NumberStyles.HexNumber, null, out intValue);
+
+                }
+            }
 
 
             MessageBox.Show($"Value '{value}' of Style/Property '{name}' must be Integer or Hexadecimal (e.g. 0xFA or #FA)",
@@ -109,19 +140,51 @@ namespace hoTools.Utils.Diagram
                 string name;
                 string value;
                 if (!GetNameValueFromString(style, out name, out value)) continue;
+                // substitutes colors
+                value = ColorIntegerFromName(value);
+
                 if (newStyle.Contains($"{name}="))
                 {
                     // update style 
-                    newStyle = Regex.Replace(newStyle, $@"{name}=[^;]*;", $"{style};");
+                    newStyle = Regex.Replace(newStyle, $@"{name}=[^;]*;", $"{name}={value};");
                 }
                 else
                 {
                     // insert style
-                    if (withInsert) newStyle = $"{newStyle};{style};";
+                    if (withInsert) newStyle = $"{newStyle};{name}={value};";
                 }
             }
             return newStyle.Replace(";;;", ";").Replace(";;;", ";").Replace(";;", ";");
         }
+
+        /// <summary>
+        /// Returns the hexadecimal color (html color) like '#FFEEDD' or 'red'). If the value is a simple integer nothing is done
+        /// </summary>
+        /// <param name="htmlColor"></param>
+        /// <returns></returns>
+        protected static string ColorHtmlFromName(string htmlColor)
+        {
+            int dummy;
+            if (int.TryParse(htmlColor, out dummy)) return htmlColor;
+            var color = Color.FromName(htmlColor);
+            if (color.IsEmpty) return htmlColor;
+            return $@"#{color.B:X2}{color.G:X2}{color.R:X2}";
+        }
+        /// <summary>
+        /// Returns the decimal color code from a (html color) like '#FFEEDD' or 'red'). If the value is a simple integer nothing is done
+        /// </summary>
+        /// <param name="htmlColor"></param>
+        /// <returns></returns>
+        protected static string ColorIntegerFromName(string htmlColor)
+        {
+
+            int dummy;
+            if (int.TryParse(htmlColor, out dummy)) return htmlColor;
+            var color = Color.FromName(htmlColor);
+            if (color.IsEmpty) return htmlColor;
+            return (color.B*(256*256) + color.G*256 + color.R).ToString();
+        }
+
 
 
 

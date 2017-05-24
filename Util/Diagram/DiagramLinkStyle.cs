@@ -91,27 +91,55 @@ namespace hoTools.Utils.Diagram
                                     if (!ConvertInteger(tagName, tagValue, out intValue)) continue;
                                     // replace geometry, find LabelName with labelTag (tagName=tagValue
                                     // possible tag values: integer, hexadecimal like #FE or 0xFE
-                                    string regex111 = $@"{name}=[^;]*?({tagName}=([0-9ABCDEFabcdef#Xx]*))[^;]*;";
                                     string findProperty = $@"{name}=[^;]*;";
                                     Match matchFoundProperty = Regex.Match(linkGeometry, findProperty);
                                     if (matchFoundProperty.Success)
                                     {
                                         string oldProperty = matchFoundProperty.Groups[0].Value;
                                         string newProperty;
-                                        if (oldProperty.Contains($"{tagName}="))
+                                        // ensure default settings
+                                        string defaultPropertyLabel =
+                                            "CX=25:CY=13:OX=0:OY=0:HDN=1:BLD=0:ITA=0:UND=0:CLR=-1:ALN=1:DIR=0:ROT=0;";
+                                        if (oldProperty.Substring(oldProperty.Length - 2) == "=;")
                                         {
-                                            // update style 
-                                            newProperty = Regex.Replace(oldProperty, $@"{tagName}=[0-9A-Fa-f#xX]*", $"{tagName}={intValue}");
+                                            newProperty = $@"{name}={defaultPropertyLabel}";
+                                            linkGeometry = linkGeometry.Replace(oldProperty, newProperty);
+                                            oldProperty = newProperty;
                                         }
-                                        else
-                                        {
-                                            // insert style
-                                            // Check if there are already tags: append tag with delimiter 
-                                            string delimiter = ":";
-                                            if (oldProperty.Substring(oldProperty.Length - 2) == "=;") delimiter = "";
-                                            newProperty = $"{oldProperty.Substring(0,oldProperty.Length-1)}{delimiter}{tagName}={intValue};";
-                                        }
+
+                                        // update style 
+                                        newProperty = Regex.Replace(oldProperty, $@"{tagName}=[0-9A-Fa-f#xX]*", $"{tagName}={intValue}");
+                                        
+                                       
+                                        //// insert style
+                                        //// Check if there are already tags: append tag with delimiter 
+                                        //string delimiter = ":";
+                                        //if (oldProperty.Substring(oldProperty.Length - 2) == "=;") delimiter = "";
+                                        //newProperty = $"{oldProperty.Substring(0,oldProperty.Length-1)}{delimiter}{tagName}={intValue};";
+                                        
                                         linkGeometry = linkGeometry.Replace(oldProperty, newProperty);
+                                    }
+                                    break;
+                                    // set to an arbitrary property value, be careful
+                                    // LLT=SET=; makes the default 'LLT=;'
+                                case "SET":
+                                    string findSetProperty = $@"{name}=[^;]*;";
+                                    Match matchFoundSetProperty = Regex.Match(linkGeometry, findSetProperty);
+
+                                    if (matchFoundSetProperty.Success)
+                                    {
+                                        string oldSetProperty = matchFoundSetProperty.Groups[0].Value;
+                                        // update style 
+                                        string newSetProperty = $@"{name}={tagValue};";
+
+
+                                        //// insert style
+                                        //// Check if there are already tags: append tag with delimiter 
+                                        //string delimiter = ":";
+                                        //if (oldProperty.Substring(oldProperty.Length - 2) == "=;") delimiter = "";
+                                        //newProperty = $"{oldProperty.Substring(0,oldProperty.Length-1)}{delimiter}{tagName}={intValue};";
+
+                                        linkGeometry = linkGeometry.Replace(oldSetProperty, newSetProperty);
                                     }
                                     break;
 
@@ -155,15 +183,20 @@ namespace hoTools.Utils.Diagram
             if (Type.Length == 0) return true;
             bool isToProcessType = true;
             bool isToProcessStereotype = true;
+            bool isToProcessHidden = false;
+            bool isToProcessColor = true;
+
+
             EA.Connector con = Rep.GetConnectorByID(_link.ConnectorID); 
             foreach (var type in Type)
             {
-                
+                if (String.IsNullOrWhiteSpace(type)) continue;
                 string name;
                 string value;
                 if (! GetNameValueFromString(type, out name, out value)) continue;
-                switch (name.Substring(1, 4).ToLower())
+                switch (name.Substring(0, 4).ToLower())
                 {
+                    // Type/LinkType: first 4 characters lower case
                     case "type":
                         string nameType;
                         string valueTypes;
@@ -183,6 +216,7 @@ namespace hoTools.Utils.Diagram
                         }
 
                         break;
+                    // Stereotype: first 4 characters lower case
                     case @"ster":
                         string nameStereotype;
                         string valueStereotypes;
@@ -202,13 +236,29 @@ namespace hoTools.Utils.Diagram
                                 break;
                             }
                         }
-
-
                         break;
+                    // Hidden: first 4 characters lower case
+                    case @"hidd":
+                        if ( value.ToLower() == "true") isToProcessHidden = true;
+                        break;
+                    // Color: first 4 characters lower case
+                    case @"colo":
+                        isToProcessColor = false;
+                        int color;
+                        if (Int32.TryParse(ColorIntegerFromName(value), out color))
+                        {
+                            if (color == _link.LineColor) isToProcessColor = true;
+                        }
+                        else
+                        {
+                            MessageBox.Show($@"Type: '{type}'", "Type for color isn't correct");
+                        }
+                        break;
+
                 }
 
             }
-            return isToProcessType && isToProcessStereotype;
+            return isToProcessType && isToProcessStereotype && (isToProcessHidden == _link.IsHidden) && isToProcessColor;
 
         }
 

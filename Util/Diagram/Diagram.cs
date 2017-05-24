@@ -154,11 +154,11 @@ namespace hoTools.Utils.Diagram
             Dia.SelectedObjects.Refresh();
 
         }
-        /// GetSelectedLinks:
+        /// GetSelectedLinks (with or without hidden links):
         /// - Nothing selected: All visible links
         /// - Connector/Objects selected: Connector + Objects with their in and outgoing links
         /// - Objects selected: Objects with their in and outgoing links 
-        public List<EA.DiagramLink> GetSelectedLinks(bool withSelectedObjects=true)
+        public List<EA.DiagramLink> GetSelectedLinks(bool withSelectedObjects=true, bool includeHidden=true)
         {
             var links = new List<EA.DiagramLink>();
             Connector selectedConnector = _dia.SelectedConnector;
@@ -166,8 +166,14 @@ namespace hoTools.Utils.Diagram
 
             foreach (DiagramLink link in _dia.DiagramLinks)
             {
-                if (link.IsHidden == false)
+                if (link.IsHidden == false | includeHidden == true)
                 {
+                    // no object selected than use all links
+                    if (!IsSelectedObjects)
+                    {
+                        links.Add(link);
+                        continue;
+                    }
                     // also consider selected objects
                     if (withSelectedObjects)
                     {
@@ -180,7 +186,6 @@ namespace hoTools.Utils.Diagram
                                 links.Add(link);
                             }
                         }
-
                         // add selected connector
                         if (c.ConnectorID == selectedConnector?.ConnectorID)
                         {
