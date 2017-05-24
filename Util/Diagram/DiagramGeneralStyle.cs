@@ -31,24 +31,19 @@ namespace hoTools.Utils.Diagram
         /// <param name="value"></param>
         /// <param name="delimiter"></param>
         /// <returns></returns>
-        protected static bool GetNameValueFromStyle(string myString, out string name, out string value, char delimiter='=')
+        protected static bool GetNameValueFromString(string myString, out string name, out string value, char delimiter='=')
         {
             name = "";
             value = "";
-            string[] s = myString.Split(delimiter);
-            if (s.Length != 2) return false;
-            name = s[0];
-            value = s[1];
-            return true;
 
 
-            //Regex rx = new Regex(@"([^=]*)=(.*)");
-            //Match match = rx.Match(link.Trim());
-            //name = "";
-            //value = "";
-            //if (!match.Success) return false;
-            //name = match.Groups[1].Value;
-            //value = match.Groups[2].Value;
+            Regex rx = new Regex($@"([^=]*){delimiter}(.*)");
+            Match match = rx.Match(myString.Trim());
+            name = "";
+            value = "";
+            if (!match.Success) return false;
+            name = match.Groups[1].Value;
+            value = match.Groups[2].Value;
             return true;
         }
         /// <summary>
@@ -99,7 +94,7 @@ namespace hoTools.Utils.Diagram
         }
 
         /// <summary>
-        /// Update arbitrary Style (used for diagram style which has an additional PDATA style
+        /// Update arbitrary Style (used for e.g. diagram style which has an additional PDATA style
         /// </summary>
         /// <param name="oldStyle"></param>
         /// <param name="newStyles"></param>
@@ -113,7 +108,7 @@ namespace hoTools.Utils.Diagram
                 string style = s.Trim();
                 string name;
                 string value;
-                if (!GetNameValueFromStyle(style, out name, out value)) continue;
+                if (!GetNameValueFromString(style, out name, out value)) continue;
                 if (newStyle.Contains($"{name}="))
                 {
                     // update style 

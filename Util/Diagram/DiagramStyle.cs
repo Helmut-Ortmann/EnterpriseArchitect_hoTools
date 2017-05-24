@@ -26,7 +26,7 @@ namespace hoTools.Utils.Diagram
                 string property = p.Trim().ToLower();
                 string name;
                 string value;
-                if (!GetNameValueFromStyle(property, out name, out value)) continue;
+                if (!GetNameValueFromString(property, out name, out value)) continue;
 
                 if (!withSql)
                 { 
@@ -159,14 +159,14 @@ namespace hoTools.Utils.Diagram
 
                 string name;
                 string value;
-                if (!GetNameValueFromStyle(type, out name, out value)) continue;
+                if (!GetNameValueFromString(type, out name, out value)) continue;
                 switch (name.Substring(0,4).ToLower())
                 {
                     // Standard Diagram Types
                     case @"type":
                         string nameTypes;
                         string valueTypes;
-                        if (!GetNameValueFromStyle(type, out nameTypes, out valueTypes)) continue;
+                        if (!GetNameValueFromString(type, out nameTypes, out valueTypes)) continue;
                         if (valueTypes.Trim() == "") continue;
 
                         // must be a supported Diagram Type value
@@ -188,7 +188,7 @@ namespace hoTools.Utils.Diagram
                     case @"cust":
                         string nameCust;
                         string valueCust;
-                        if (!GetNameValueFromStyle(type, out nameCust, out valueCust)) continue;
+                        if (!GetNameValueFromString(type, out nameCust, out valueCust)) continue;
                         if (valueCust.Trim() == "") continue;
 
                         // must be a supported Type value
@@ -209,7 +209,7 @@ namespace hoTools.Utils.Diagram
                     case @"ster":
                         string nameStereotype;
                         string valueStereotypes;
-                        if (!GetNameValueFromStyle(type, out nameStereotype, out valueStereotypes)) continue;
+                        if (!GetNameValueFromString(type, out nameStereotype, out valueStereotypes)) continue;
                         if (valueStereotypes.Trim() == "") continue;
 
                         // must be a supported Stereotype value

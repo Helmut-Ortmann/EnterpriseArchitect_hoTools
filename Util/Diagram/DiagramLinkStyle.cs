@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace hoTools.Utils.Diagram
@@ -17,6 +18,7 @@ namespace hoTools.Utils.Diagram
         /// </summary>
         public void SetProperties()
         {
+            string linkGeometry = _link.Geometry;
             foreach (var link in Property)
             {
                 string name;
@@ -57,34 +59,69 @@ namespace hoTools.Utils.Diagram
                         if (!ConvertInteger(name, value, out suppressSegment)) continue;
                         _link.SuppressSegment = suppressSegment;
                         break;
-                    // handle labels
+                    // handle labels, geometry label definition
+
                     case "LLB":
+                    case "LLT":
+                    case "LMB":
+                    case "LMT":
+                    case "LRT":
+                    case "LRB":
+                    case "IRHS":
+                    case "ILHS":
                         // extract tags
                         string[] tags = value.Split(':');
                         foreach (var tag in tags)
                         {
                             string tagName;
                             string tagValue;
-                            if (!GetNameValueFromString(link, out tagName, out tagValue,':')) continue;
+                            if (!GetNameValueFromString(tag, out tagName, out tagValue, delimiter:'=')) continue;
 
-
-                            switch (name)
+                            // possible tags inside geometry label definition
+                            switch (tagName)
                             {
-                                case "HiddenLabels":
-                                    bool hiddenLabels;
-                                    if (!ConvertBool(name, value, out hiddenLabels)) continue;
-                                    _link.HiddenLabels = hiddenLabels;
+                                case "BLD":
+                                case "HDN":
+                                case "ITA":
+                                case "CLR":
+                                case "ALN":
+                                case "ROT":
+                                case "DIR":
+                                    int intValue;
+                                    if (!ConvertInteger(tagName, tagValue, out intValue)) continue;
+                                    // replace geometry, find LabelName with labelTag (tagName=tagValue
+                                    // possible tag values: integer, hexadecimal like #FE or 0xFE
+                                    string regex111 = $@"{name}=[^;]*?({tagName}=([0-9ABCDEFabcdef#Xx]*))[^;]*;";
+                                    string findProperty = $@"{name}=[^;]*;";
+                                    Match matchFoundProperty = Regex.Match(linkGeometry, findProperty);
+                                    if (matchFoundProperty.Success)
+                                    {
+                                        string oldProperty = matchFoundProperty.Groups[0].Value;
+                                        string newProperty;
+                                        if (oldProperty.Contains($"{tagName}="))
+                                        {
+                                            // update style 
+                                            newProperty = Regex.Replace(oldProperty, $@"{tagName}=[0-9A-Fa-f#xX]*", $"{tagName}={intValue}");
+                                        }
+                                        else
+                                        {
+                                            // insert style
+                                            // Check if there are already tags: append tag with delimiter 
+                                            string delimiter = ":";
+                                            if (oldProperty.Substring(oldProperty.Length - 2) == "=;") delimiter = "";
+                                            newProperty = $"{oldProperty.Substring(0,oldProperty.Length-1)}{delimiter}{tagName}={intValue};";
+                                        }
+                                        linkGeometry = linkGeometry.Replace(oldProperty, newProperty);
+                                    }
                                     break;
-                                case "IsHidden":
-                                    bool isHidden;
-                                    if (!ConvertBool(name, value, out isHidden)) continue;
-                                    _link.IsHidden = isHidden;
-                                    break;
+
                             }
+                        }
                         break;
                       
                 }
             }
+            _link.Geometry = linkGeometry;
             Update();
         }
         /// <summary>

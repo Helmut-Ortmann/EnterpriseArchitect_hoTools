@@ -36,7 +36,7 @@ namespace hoTools.Utils.Diagram
                 string value;
                 int iValue;
                 bool bValue = false;
-                if (!GetNameValueFromStyle(property, out name, out value)) continue;
+                if (!GetNameValueFromString(property, out name, out value)) continue;
 
 
 
@@ -264,13 +264,13 @@ namespace hoTools.Utils.Diagram
 
                 string name;
                 string value;
-                if (!GetNameValueFromStyle(type, out name, out value)) continue;
+                if (!GetNameValueFromString(type, out name, out value)) continue;
                 switch (name.Substring(1,4).ToLower())
                 {
                     case "type":
                         string nameType;
                         string valueTypes;
-                        if (!GetNameValueFromStyle(type, out nameType, out valueTypes)) continue;
+                        if (!GetNameValueFromString(type, out nameType, out valueTypes)) continue;
                         if (valueTypes.Trim() == "") continue;
 
                         // must be a supported Type value
@@ -290,7 +290,7 @@ namespace hoTools.Utils.Diagram
                     case @"ster":
                         string nameStereotype;
                         string valueStereotypes;
-                        if (!GetNameValueFromStyle(type, out nameStereotype, out valueStereotypes)) continue;
+                        if (!GetNameValueFromString(type, out nameStereotype, out valueStereotypes)) continue;
                         if (valueStereotypes.Trim() == "") continue;
 
                         // must be a supported Stereotype value
