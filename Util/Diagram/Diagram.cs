@@ -186,7 +186,7 @@ namespace hoTools.Utils.Diagram
                                 links.Add(link);
                             }
                         }
-                        // add selected connector
+                                                // add selected connector
                         if (c.ConnectorID == selectedConnector?.ConnectorID)
                         {
                             links.Add(link);

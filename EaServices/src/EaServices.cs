@@ -576,25 +576,77 @@ namespace hoTools.EaServices
             List<EA.DiagramLink> links = new List<EA.DiagramLink>();
 
             EaDiagram eaDia = new EaDiagram(rep, getAllDiagramObject: false);
-            if (eaDia.Dia == null) return;
- 
-            rep.SaveDiagram(eaDia.Dia.DiagramID);
-            // over all links
-            foreach (var link in eaDia.GetSelectedLinks())
+            if (eaDia.Dia != null)
             {
-                var linkStyle = new DiagramLinkStyle(rep,link, type, style, property );
+                rep.SaveDiagram(eaDia.Dia.DiagramID);
+                // over all links
+                foreach (var link in eaDia.GetSelectedLinks())
+                {
+                    var linkStyle = new DiagramLinkStyle(rep, link, type, style, property);
+                    if (linkStyle.IsToProcess())
+                    {
+                        linkStyle.UpdateStyles();
+                        linkStyle.SetProperties();
+                    }
+
+                }
+                eaDia.ReloadSelectedObjectsAndConnector(saveDiagram: false);
+                return;
+            }
+            var liParameter = new string[4];
+            liParameter[0] = type;
+            liParameter[1] = style;
+            liParameter[2] = property;
+
+            switch (rep.GetContextItemType())
+            {
+
+                case EA.ObjectType.otPackage:
+                    EA.Package pkg = (EA.Package) rep.GetContextObject();
+                    RecursivePackages.DoRecursivePkg(rep, pkg, null, null,
+                        SetDiagramLinkStyle,
+                        liParameter,
+                        ChangeScope.Package);
+                    break;
+                case EA.ObjectType.otElement:
+                    EA.Element el = (EA.Element) rep.GetContextObject();
+                    RecursivePackages.DoRecursiveEl(rep, el, null,
+                        SetDiagramLinkStyle,
+                        liParameter,
+                        ChangeScope.Package);
+                    break;
+
+            }
+        }
+        /// <summary>
+        /// Update all DiagramLinks of diagram
+        /// - liParameter[0] = type;
+        /// - liParameter[1] = style;</summary>
+        /// - liParameter[2] = property;
+        /// <param name="rep"></param>
+        /// <param name="dia"></param>
+        /// <param name="liParameter"></param>
+        private static void SetDiagramLinkStyle(EA.Repository rep, EA.Diagram dia, string[] liParameter)
+        {
+            rep.SaveDiagram(dia.DiagramID);
+
+            string types = liParameter[0];
+            string styles = liParameter[1];
+            string properties = liParameter[2];
+            foreach (EA.DiagramLink link in dia.DiagramLinks)
+            {
+                var linkStyle = new DiagramLinkStyle(rep, link, types, styles, properties);
                 if (linkStyle.IsToProcess())
                 {
                     linkStyle.UpdateStyles();
                     linkStyle.SetProperties();
                 }
-
             }
-            eaDia.ReloadSelectedObjectsAndConnector(saveDiagram:false);
-
-
+            rep.ReloadDiagram(dia.DiagramID);
 
         }
+
+
 
 
         /// <summary>
