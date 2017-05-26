@@ -12,7 +12,7 @@ namespace hoTools.Utils.Diagram
         protected readonly string[] Property;
         protected readonly string[] Type;
         protected readonly EA.Repository Rep;
-        protected readonly string[] EaTextStyle; // The EA Text Style stored in t_txtref
+        protected readonly string[] EaLayoutStyle; // The EA Text Style stored in t_txtref
 
 
         protected DiagramGeneralStyle(EA.Repository rep, string type, string style, string property)
@@ -24,26 +24,26 @@ namespace hoTools.Utils.Diagram
             Type = type.Split(';');
             Rep = rep;
 
-
-            Regex rgx = new Regex(@"EaTextStyle=([^;]*)");
+            // handle EA Layout Styles
+            Regex rgx = new Regex(@"EaLayoutStyle=([^;]*)");
             Match match = rgx.Match(property);
             if (match.Success && match.Groups.Count == 2)
             {
                 // handle EA Styles
-                string eaTextStyle = match.Groups[1].Value.Trim();
-                string sql = $@"select Notes as [STYLE] from t_trxtypes  where TRX='{eaTextStyle}'";
-                var eaStyles = UtilSql.GetListOfStringFromSql(Rep, sql, "STYLE");
-                if (eaStyles.Count == 0)
+                string layoutStyleName = match.Groups[1].Value.Trim();
+                string sql = $@"select Notes as [STYLE] from t_trxtypes  where TRX='{layoutStyleName}'";
+                var layoutStyleValue = UtilSql.GetListOfStringFromSql(Rep, sql, "STYLE");
+                if (layoutStyleValue.Count == 0)
                 {
-                    MessageBox.Show($"EA Text Style '{eaTextStyle}' not available in EA.", $"Can't read EA Text Style '{eaTextStyle}'.");
+                    MessageBox.Show($"EA Text Style '{layoutStyleName}' not available in EA.", $"Can't read EA Text Style '{layoutStyleName}'.");
                 }
-                if (eaStyles.Count > 1)
+                if (layoutStyleValue.Count > 1)
                 {
                     MessageBox.Show(
-                        $"EA Text Style '{eaTextStyle}'\r\nCount: {eaStyles.Count}. EA Text styles are a little tricky with names! Check list box of styles in EA!",
-                        $"More than one srtyle with name '{eaTextStyle}'.");
+                        $"EA Text Style '{EaLayoutStyle}'\r\nCount: {layoutStyleValue.Count}. EA Text styles are a little tricky with names! Check list box of styles in EA!",
+                        $"More than one srtyle with name '{layoutStyleName}'.");
                 }
-                EaTextStyle = eaStyles[0].Split(';');
+                EaLayoutStyle = layoutStyleValue[0].Split(';');
             }
             
         }

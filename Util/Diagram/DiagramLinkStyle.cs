@@ -86,38 +86,6 @@ namespace hoTools.Utils.Diagram
                         con.Update();
                         break;
 
-                    case "EaStyle":
-                        string sql = $@"select Notes as [STYLE] from t_trxtypes  where TRX='{value.Trim()}'";
-                        var eaStyles = UtilSql.GetListOfStringFromSql(Rep, sql, "STYLE");
-                        if (eaStyles.Count == 0)
-                        {
-                            MessageBox.Show($"Style '{value}' not available in EA.", $"Can't read EA Style '{value}'.");
-                            continue;
-                        }
-                        if (eaStyles.Count > 1)
-                        {
-                            MessageBox.Show($"Style '{value}'\r\nCount: {eaStyles.Count}. EA is a little tricky with names! Check list box of styles in EA!", $"More than one srtyle with name '{value}'.");
-                            continue;
-                        }
-                        // map general EA style to LINK styles:
-                        // Color, Width
-                        foreach (var s in eaStyles[0].Split(';'))
-                        {
-                            string style = s.Trim();
-                            if (style == "") continue;
-                            if (!GetNameValueFromString(style, out name, out value)) continue;
-                            switch (name)
-                            {
-                                case "Border":
-                                    _link.LineColor = Int32.Parse(value);
-                                    break;
-                                case @"Line":
-                                    _link.LineWidth = Int32.Parse(value);
-                                    break;
-                            }
-                        }
-                        break;
-
                     // handle labels, geometry label definition
 
                     case "LLB":
@@ -217,10 +185,10 @@ namespace hoTools.Utils.Diagram
         /// <summary>
         /// Set according ti EA Text Styles
         /// </summary>
-        public void SetEaTextStyles()
+        public void SetEaLayoutStyles()
         {
-            if (EaTextStyle == null) return;
-            foreach (var s in EaTextStyle)
+            if (EaLayoutStyle == null) return;
+            foreach (var s in EaLayoutStyle)
             {
                 string style = s.Trim();
                 if (style == "") continue;

@@ -230,10 +230,10 @@ namespace hoTools.Utils.Diagram
         /// <summary>
         /// Set according ti EA Text Styles
         /// </summary>
-        public void SetEaTextStyles()
+        public void SetEaLayoutStyles()
         {
-            if (EaTextStyle == null) return;
-            foreach (var s in EaTextStyle)
+            if (EaLayoutStyle == null) return;
+            foreach (var s in EaLayoutStyle)
             {
                 string style = s.Trim();
                 if (style == "") continue;

@@ -537,7 +537,7 @@ namespace hoTools.EaServices
                 {
                     objectStyle.UpdateStyles();
                     objectStyle.SetProperties();
-                    objectStyle.SetEaTextStyles();
+                    objectStyle.SetEaLayoutStyles();
                 }
             }
             eaDia.ReloadSelectedObjectsAndConnector(saveDiagram: false);
@@ -591,7 +591,7 @@ namespace hoTools.EaServices
                     {
                         linkStyle.UpdateStyles();
                         linkStyle.SetProperties();
-                        linkStyle.SetEaTextStyles();
+                        linkStyle.SetEaLayoutStyles();
                     }
 
                 }
@@ -646,7 +646,7 @@ namespace hoTools.EaServices
                 {
                     linkStyle.UpdateStyles();
                     linkStyle.SetProperties();
-                    linkStyle.SetEaTextStyles();
+                    linkStyle.SetEaLayoutStyles();
                 }
             }
             rep.ReloadDiagram(dia.DiagramID);
