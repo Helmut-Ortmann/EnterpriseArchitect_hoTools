@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using hoTools.Utils.SQL;
 
 namespace hoTools.Utils.Diagram
 {
@@ -14,6 +15,7 @@ namespace hoTools.Utils.Diagram
         public string[] Property;
         public string[] Type;
         public EA.Repository Rep;
+        public string[] EaTextStyle; // The EA style stored in t_txtref
 
         
         public DiagramGeneralStyle(EA.Repository rep, string type, string style, string property)
@@ -24,6 +26,28 @@ namespace hoTools.Utils.Diagram
             type = type.Trim().TrimEnd(';').Replace(";;", ";");
             Type = type.Split(';');
             Rep = rep;
+
+
+            Regex rgx = new Regex(@"EaTextStyle=([^;]*)");
+            Match match = rgx.Match(property);
+            if (match.Success && match.Groups.Count == 1)
+            {
+                // handle EA Styles
+                string eaTextStyle = match.Groups[1].Value.Trim();
+                string sql = $@"select Notes as [STYLE] from t_trxtypes  where TRX='{eaTextStyle}'";
+                var eaStyles = UtilSql.GetListOfStringFromSql(Rep, sql, "STYLE");
+                if (eaStyles.Count == 0)
+                {
+                    MessageBox.Show($"EA Text Style '{eaTextStyle}' not available in EA.", $"Can't read EA Text Style '{eaTextStyle}'.");
+                }
+                if (eaStyles.Count > 1)
+                {
+                    MessageBox.Show(
+                        $"EA Text Style '{eaTextStyle}'\r\nCount: {eaStyles.Count}. EA Text styles are a little tricky with names! Check list box of styles in EA!",
+                        $"More than one srtyle with name '{eaTextStyle}'.");
+                }
+                EaTextStyle = eaStyles[1].Split(';');
+            }
         }
 
         /// <summary>

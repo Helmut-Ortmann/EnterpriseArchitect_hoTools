@@ -158,6 +158,24 @@ namespace hoTools.Utils.SQL
 
             return l;
         }
+        /// <summary>
+        /// Get list of strings from a SQL
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <param name="columnName"></param>
+        /// <returns></returns>
+        public static List<string> GetListOfStringFromSql(EA.Repository rep, string sql, string columnName)
+        {
+            List<string> l = new List<string>();
+            string str = rep.SQLQuery(sql);
+            XElement xelement = XElement.Parse(str);
+            foreach (XElement xEle in xelement.Descendants("Row"))
+            {
+                l.Add(xEle.Element(columnName).Value);
+            }
+
+            return l;
+        }
 
         public static bool SqlUpdate(EA.Repository rep, string updateString)
         {

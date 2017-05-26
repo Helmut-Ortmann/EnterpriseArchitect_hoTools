@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Data;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using hoTools.Utils.SQL;
 
 namespace hoTools.Utils.Diagram
 {
@@ -69,8 +71,8 @@ namespace hoTools.Utils.Diagram
                         int connectorLineWidth;
                         if (!ConvertInteger(name, value, out connectorLineWidth)) continue;
                         con = Rep.GetConnectorByID(_link.ConnectorID);
-                        con.Color = connectorLineWidth;
-
+                        con.Width = connectorLineWidth;
+                        con.Update();
                         break;
 
                     // change the default style for connector, link is set to -1
@@ -80,8 +82,42 @@ namespace hoTools.Utils.Diagram
                         int connectorLineColor;
                         if (!ConvertInteger(name, value, out connectorLineColor)) continue;
                         con = Rep.GetConnectorByID(_link.ConnectorID);
-                        con.Color = connectorLineColor; 
+                        con.Color = connectorLineColor;
+                        con.Update();
                         break;
+
+                    case "EaStyle":
+                        string sql = $@"select Notes as [STYLE] from t_trxtypes  where TRX='{value.Trim()}'";
+                        var eaStyles = UtilSql.GetListOfStringFromSql(Rep, sql, "STYLE");
+                        if (eaStyles.Count == 0)
+                        {
+                            MessageBox.Show($"Style '{value}' not available in EA.", $"Can't read EA Style '{value}'.");
+                            continue;
+                        }
+                        if (eaStyles.Count > 1)
+                        {
+                            MessageBox.Show($"Style '{value}'\r\nCount: {eaStyles.Count}. EA is a little tricky with names! Check list box of styles in EA!", $"More than one srtyle with name '{value}'.");
+                            continue;
+                        }
+                        // map general EA style to LINK styles:
+                        // Color, Width
+                        foreach (var s in eaStyles[0].Split(';'))
+                        {
+                            string style = s.Trim();
+                            if (style == "") continue;
+                            if (!GetNameValueFromString(style, out name, out value)) continue;
+                            switch (name)
+                            {
+                                case "Border":
+                                    _link.LineColor = Int32.Parse(value);
+                                    break;
+                                case @"Line":
+                                    _link.LineWidth = Int32.Parse(value);
+                                    break;
+                            }
+                        }
+                        break;
+
                     // handle labels, geometry label definition
 
                     case "LLB":
@@ -177,6 +213,30 @@ namespace hoTools.Utils.Diagram
             }
             _link.Geometry = linkGeometry;
             Update();
+        }
+        /// <summary>
+        /// Set according ti EA Text Styles
+        /// </summary>
+        public void SetEaTextStyles()
+        {
+            foreach (var s in EaTextStyle)
+            {
+                string style = s.Trim();
+                if (style == "") continue;
+                string name;
+                string value;
+                if (!GetNameValueFromString(style, out name, out value)) continue;
+                switch (name)
+                {
+                    case "Border":
+                        _link.LineColor = Int32.Parse(value);
+                        break;
+                    case @"Line":
+                        _link.LineWidth = Int32.Parse(value);
+                        break;
+                }
+            }
+            _link.Update();
         }
         /// <summary>
         /// Update styles

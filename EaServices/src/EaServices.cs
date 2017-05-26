@@ -590,6 +590,7 @@ namespace hoTools.EaServices
                     {
                         linkStyle.UpdateStyles();
                         linkStyle.SetProperties();
+                        linkStyle.SetEaTextStyles();
                     }
 
                 }
@@ -644,6 +645,7 @@ namespace hoTools.EaServices
                 {
                     linkStyle.UpdateStyles();
                     linkStyle.SetProperties();
+                    linkStyle.SetEaTextStyles();
                 }
             }
             rep.ReloadDiagram(dia.DiagramID);
