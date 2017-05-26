@@ -28,7 +28,7 @@ namespace hoTools.Utils.Diagram
                 string value;
                 if (! GetNameValueFromString(link, out name, out value)) continue;
 
-
+                EA.Connector con;
                 switch (name)
                 {
                     case "HiddenLabels":
@@ -61,6 +61,26 @@ namespace hoTools.Utils.Diagram
                         int suppressSegment;
                         if (!ConvertInteger(name, value, out suppressSegment)) continue;
                         _link.SuppressSegment = suppressSegment;
+                        break;
+
+                    // change the default style for connector, link is set to -1
+                    case "ConnectorWidth":
+                        _link.LineWidth = -1;
+                        int connectorLineWidth;
+                        if (!ConvertInteger(name, value, out connectorLineWidth)) continue;
+                        con = Rep.GetConnectorByID(_link.ConnectorID);
+                        con.Color = connectorLineWidth;
+
+                        break;
+
+                    // change the default style for connector, link is set to -1
+                    case "ConnectorColor":
+                        _link.LineColor = -1;
+
+                        int connectorLineColor;
+                        if (!ConvertInteger(name, value, out connectorLineColor)) continue;
+                        con = Rep.GetConnectorByID(_link.ConnectorID);
+                        con.Color = connectorLineColor; 
                         break;
                     // handle labels, geometry label definition
 

@@ -7,6 +7,7 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
+
 namespace hoTools.hoSqlGui.Resources {
     using System;
     
@@ -71,7 +72,7 @@ namespace hoTools.hoSqlGui.Resources {
         ///&apos; - Create VB Object 
         ///&apos;----------------------------------------------------------------------
         ///&apos; hoTools Script Environment
-        ///&apos; Dim doesn&apos;t work (syntax error, used in EA for intelisense)
+        ///&apos; Dim doesn&apos;t work (syntax error, used in EA for intellissense)
         ///&apos; Object &apos;Session&apos; doesn&apos;t exist (use  Repository.Wri [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string Clipboard {

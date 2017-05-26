@@ -326,7 +326,7 @@ namespace EAAddinFramework.Utils
         {
             // replace templates
             sql = SqlTemplates.ReplaceMacro(Repository, sql, searchText);
-            if (sql == "") return "";
+            if (String.IsNullOrWhiteSpace(sql)) return "";
 
             // check whether select or update, delete, insert sql
             if (Regex.IsMatch(sql, @"^\s*select ", RegexOptions.IgnoreCase | RegexOptions.Multiline))

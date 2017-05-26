@@ -604,11 +604,11 @@ For: Package, Element, Diagram, Attribute, Operation"
             // ? for greedy behavior (find shortest matching string)
             string s = Regex.Replace(sql, @"/\*.*?\*/", "", RegexOptions.Singleline);
             // delete comments //....
-            s = Regex.Replace(s, @"//[^\n]*\n", "\r\n");
+            s = Regex.Replace(s, @"//.*$", "", RegexOptions.Multiline);// ^$ for each line
             // delete comments /*....
             s = Regex.Replace(s, @"/\*[^\n]*\n", "\r\n");
             // delete empty lines
-            s = Regex.Replace(s, "(\r\n){2,100}", "\r\n");
+            s = Regex.Replace(s, "(\r\n){2,200}", "");
             return s;
         }
         #endregion

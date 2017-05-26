@@ -758,7 +758,7 @@ namespace hoTools.hoSqlGui
             this.tableLayoutPanel1.Size = new System.Drawing.Size(769, 25);
             this.tableLayoutPanel1.TabIndex = 12;
             // 
-            // SqlGui
+            // HoSqlGui
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
