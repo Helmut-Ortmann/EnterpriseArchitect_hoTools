@@ -537,6 +537,7 @@ namespace hoTools.EaServices
                 {
                     objectStyle.UpdateStyles();
                     objectStyle.SetProperties();
+                    objectStyle.SetEaTextStyles();
                 }
             }
             eaDia.ReloadSelectedObjectsAndConnector(saveDiagram: false);

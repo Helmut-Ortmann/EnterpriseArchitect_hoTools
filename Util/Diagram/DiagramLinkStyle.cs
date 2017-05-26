@@ -219,6 +219,7 @@ namespace hoTools.Utils.Diagram
         /// </summary>
         public void SetEaTextStyles()
         {
+            if (EaTextStyle == null) return;
             foreach (var s in EaTextStyle)
             {
                 string style = s.Trim();
@@ -236,7 +237,7 @@ namespace hoTools.Utils.Diagram
                         break;
                 }
             }
-            _link.Update();
+            Update();
         }
         /// <summary>
         /// Update styles

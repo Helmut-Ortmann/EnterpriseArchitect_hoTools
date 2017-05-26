@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
 using EA;
 
 
@@ -187,7 +186,7 @@ namespace hoTools.Utils.Diagram
                 if (link.IsHidden == false | includeHidden == true)
                 {
                     // no object selected than use all links
-                    if (!IsSelectedObjects)
+                    if (IsSelectedObjects == false && SelectedConnector == null )
                     {
                         links.Add(link);
                         continue;

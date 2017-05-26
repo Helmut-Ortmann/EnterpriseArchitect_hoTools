@@ -228,6 +228,58 @@ namespace hoTools.Utils.Diagram
             Update();
         }
         /// <summary>
+        /// Set according ti EA Text Styles
+        /// </summary>
+        public void SetEaTextStyles()
+        {
+            if (EaTextStyle == null) return;
+            foreach (var s in EaTextStyle)
+            {
+                string style = s.Trim();
+                if (style == "") continue;
+                string name;
+                string value;
+                if (!GetNameValueFromString(style, out name, out value)) continue;
+                switch (name)
+                {
+                    // Backgroundcolor
+                    case "Fill":
+                        _diaObj.SetStyleEx("BCol", value);
+                        break;
+                    // Linewidth
+                    case @"Line":
+                        _diaObj.SetStyleEx("LWth", value);
+                        break;
+                        //Font color
+                    case @"Font":
+                        _diaObj.SetStyleEx(@"BFol", value);
+                        break;
+                    // Border or Lincolor
+                    case "Border":
+                        _diaObj.SetStyleEx("LCol", value);
+                        break;
+                    // fontname
+                    case @"fontname":
+                        _diaObj.SetStyleEx(@"font", value);
+                        break;
+                    // 
+                    case @"fontsz":
+                        _diaObj.SetStyleEx(@"fontsz", value);
+                        break;
+                    case "italic":
+                        _diaObj.SetStyleEx("italic", value);
+                        break;
+                    case "bold":
+                        _diaObj.SetStyleEx("bold", value);
+                        break;
+                    case @"ul":  // underline
+                        _diaObj.SetStyleEx(@"ul", value);
+                        break;
+                }
+            }
+           Update();
+        }
+        /// <summary>
         /// Update styles
         /// </summary>
         public void UpdateStyles()

@@ -12,7 +12,7 @@ namespace hoTools.Utils.Diagram
         protected readonly string[] Property;
         protected readonly string[] Type;
         protected readonly EA.Repository Rep;
-        protected readonly string[] EaTextStyle; // The EA style stored in t_txtref
+        protected readonly string[] EaTextStyle; // The EA Text Style stored in t_txtref
 
 
         protected DiagramGeneralStyle(EA.Repository rep, string type, string style, string property)
@@ -27,7 +27,7 @@ namespace hoTools.Utils.Diagram
 
             Regex rgx = new Regex(@"EaTextStyle=([^;]*)");
             Match match = rgx.Match(property);
-            if (match.Success && match.Groups.Count == 1)
+            if (match.Success && match.Groups.Count == 2)
             {
                 // handle EA Styles
                 string eaTextStyle = match.Groups[1].Value.Trim();
@@ -43,8 +43,9 @@ namespace hoTools.Utils.Diagram
                         $"EA Text Style '{eaTextStyle}'\r\nCount: {eaStyles.Count}. EA Text styles are a little tricky with names! Check list box of styles in EA!",
                         $"More than one srtyle with name '{eaTextStyle}'.");
                 }
-                EaTextStyle = eaStyles[1].Split(';');
+                EaTextStyle = eaStyles[0].Split(';');
             }
+            
         }
 
         /// <summary>
