@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.IO;
-using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using hoTools.Utils.SQL;
@@ -11,14 +8,14 @@ namespace hoTools.Utils.Diagram
 {
     public class DiagramGeneralStyle
     {
-        public string[] Style;
-        public string[] Property;
-        public string[] Type;
-        public EA.Repository Rep;
-        public string[] EaTextStyle; // The EA style stored in t_txtref
+        protected readonly string[] Style;
+        protected readonly string[] Property;
+        protected readonly string[] Type;
+        protected readonly EA.Repository Rep;
+        protected readonly string[] EaTextStyle; // The EA style stored in t_txtref
 
-        
-        public DiagramGeneralStyle(EA.Repository rep, string type, string style, string property)
+
+        protected DiagramGeneralStyle(EA.Repository rep, string type, string style, string property)
         {
             Style = style.Trim().Replace(",", ";").Replace(";;", ";").TrimEnd(';').Split(';');
             Property = property.Trim().Replace(",", ";").Replace(";;", ";").TrimEnd(';').Split(';');
@@ -123,7 +120,7 @@ Edit Setting.json:
 
 
             MessageBox.Show($"Value '{value}' of Style/Property '{name}' must be Integer or Hexadecimal (e.g. 0xFA or #FA)",
-                $"Invalid Integer/Hexa Style/Property in Settings.json");
+                "Invalid Integer/Hexa Style/Property in Settings.json");
             return false;
         }
         protected static bool ConvertBool(string name, string value, out bool boolValue)
@@ -132,7 +129,7 @@ Edit Setting.json:
             boolValue = false;
             if (Boolean.TryParse(value.Trim(), out boolValue)) return true;
             MessageBox.Show($"Value '{value}' of Style/Property '{name}' must be Boolean",
-                $"Invalid Boolean Style/Property in Settings.json");
+                "Invalid Boolean Style/Property in Settings.json");
             return false;
         }
 
