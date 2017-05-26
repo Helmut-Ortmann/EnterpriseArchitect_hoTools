@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("QueryGUI")]
-[assembly: AssemblyDescription("hoTools, run your own Query / Scripts")]
+[assembly: AssemblyTitle("SqlGUI")]
+[assembly: AssemblyDescription("hoTools, run your own SQL / Scripts")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Helmut Ortmann")]
-[assembly: AssemblyProduct("hoTools, QueryGUI")]
+[assembly: AssemblyProduct("hoTools, SqlGui")]
 [assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

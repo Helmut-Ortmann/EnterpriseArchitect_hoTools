@@ -121,6 +121,7 @@ Some features:
 ## Release 2.1.7
 - Diagram Styles (Diagram, Diagram Objects, Diagram Links)
 - Amount of Buttons extended to 10
+- Fix error context diagram (leads to exception if current diagram and context diagram differ)
 - Code restructuring
 
 ## Release 2.1.6

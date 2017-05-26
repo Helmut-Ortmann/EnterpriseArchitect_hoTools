@@ -55,7 +55,7 @@ Edit Setting.json:
 - in %APPDATA%\ho\hoTools\Setting.json
 - File, Setting
 
-",$@"Invalid tag, has to be 'TagName=TagValue'!");
+",$@"Invalid tag '{myString}', has to be 'TagName=TagValue'!");
                 return false;
             }
             name = match.Groups[1].Value;
@@ -136,7 +136,10 @@ Edit Setting.json:
             string newStyle = oldStyle;
             foreach (var s in newStyles)
             {
+
                 string style = s.Trim();
+                if (style == "") continue;
+
                 string name;
                 string value;
                 if (!GetNameValueFromString(style, out name, out value)) continue;

@@ -25,7 +25,7 @@ namespace hoTools.hoSqlGui
 
 
     /// <summary>
-    /// ActiveX COM Component 'hoTools.QueryGUI' to show as tab in the EA Addin window
+    /// ActiveX COM Component 'hoTools.SqlGui' to show as tab in the EA Addin window
     /// this.Tag object with string of:
     /// <para/>- TABULATOR_QUERY if Query mode is used
     /// <para/>- TABULATOR_SCRPT if Script mode is used
@@ -78,7 +78,7 @@ namespace hoTools.hoSqlGui
         #region Constructor
 
         /// <summary>
-        /// Constructor QueryGUI. Constructor make the basic initialization. 
+        /// Constructor HoSqlGui. Constructor make the basic initialization. 
         /// The real initialization is done after Setting the Repository in setter of property:
         /// 'Repository'
         /// </summary>
@@ -128,8 +128,8 @@ namespace hoTools.hoSqlGui
 
         #endregion
 
-        // Interface IQueryGUI implementation
-        public string GetName() => "hoTools.QueryGUI";
+        // Interface IhoSqlGui implementation
+        public string GetName() => "hoTools.hoSqlGUI";
 
         #region Set Repository
 
@@ -832,7 +832,7 @@ namespace hoTools.hoSqlGui
             if (!group.Exists()) group.Save();
 
             // get scripts to create
-            ResourceManager rm = new ResourceManager("hoTools.Query.Resources.Scripts", Assembly.GetExecutingAssembly());
+            ResourceManager rm = new ResourceManager("hoTools.hoSqlGui.Resources.Scripts", Assembly.GetExecutingAssembly());
 
             // new script for script group "hoTools"
             string code = rm.GetString("hoDemo2ParScript");

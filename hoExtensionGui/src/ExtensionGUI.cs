@@ -41,7 +41,7 @@ namespace hoTools.Extensions
         #region Constructor
 
         /// <summary>
-        /// Constructor QueryGUI. Constructor make the basic initialization. 
+        /// Constructor. Constructor make the basic initialization. 
         /// The real initialization is done after Setting the Repository in setter of property:
         /// 'Repository'
         /// </summary>
@@ -54,7 +54,7 @@ namespace hoTools.Extensions
 
         #endregion
 
-        // Interface IQueryGUI implementation
+        // Interface IExtensionGUI implementation
         public string GetName() => "hoTools.ExtensionGUI";
 
         #region Set Repository

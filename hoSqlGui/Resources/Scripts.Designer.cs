@@ -7,7 +7,6 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-
 namespace hoTools.hoSqlGui.Resources {
     using System;
     
@@ -39,7 +38,7 @@ namespace hoTools.hoSqlGui.Resources {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("hoTools.Query.Resources.Scripts", typeof(Scripts).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("hoTools.hoSqlGui.Resources.Scripts", typeof(Scripts).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -72,7 +71,7 @@ namespace hoTools.hoSqlGui.Resources {
         ///&apos; - Create VB Object 
         ///&apos;----------------------------------------------------------------------
         ///&apos; hoTools Script Environment
-        ///&apos; Dim doesn&apos;t work (syntax error, used in EA for intellissense)
+        ///&apos; Dim doesn&apos;t work (syntax error, used in EA for intelisense)
         ///&apos; Object &apos;Session&apos; doesn&apos;t exist (use  Repository.Wri [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string Clipboard {

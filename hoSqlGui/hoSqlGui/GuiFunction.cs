@@ -8,7 +8,7 @@ using EAAddinFramework.Utils;
 namespace hoTools.hoSqlGui
 {
     /// <summary>
-    /// GUI Layer for QueryGUI
+    /// GUI Layer for hoSqlGui
     /// </summary>
     public static class GuiFunction
     {

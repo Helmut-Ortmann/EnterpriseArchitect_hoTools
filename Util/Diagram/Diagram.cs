@@ -7,20 +7,40 @@ using EA;
 namespace hoTools.Utils.Diagram
 {
     /// <summary>
-    /// The current diagram with the selected objects (first element=context=last selected element):
+    /// The context diagram with the selected objects/connector (first element=context=last selected element):
+    /// - The diagram is in context/treeSelectedItem
+    /// - Nodes and links may also be selected
+    /// 
+    /// Note: Don't use current diagram because that may not be in context
+    /// 
     /// <para/>Selected DiagramObjects if selected, all DiagramObjects if nothing selected. Check IsElementSelectedObjects. The first element is the last selected!
     /// <para/>Selected Connector
     /// </summary>
     public class EaDiagram
     {
+
+        #region Properties
+        public List<EA.DiagramObject> SelObjects => _selectedObjects;
+        // ReSharper disable once CollectionNeverQueried.Global
+        // ReSharper disable once MemberCanBePrivate.Global
+        public List<EA.Element> SelElements { get; } = new List<EA.Element>();
+
+        public bool IsSelectedObjects { get; }
+
+        public EA.Diagram Dia => _dia;
+        public int SelectedObjectsCount => _dia.SelectedObjects.Count;
+        public EA.Connector SelectedConnector => _selectedConnector;
+
+        #endregion
+
+
         readonly Repository _rep;
         readonly EA.Diagram _dia;
         readonly List<EA.DiagramObject> _selectedObjects = new List<EA.DiagramObject>();
+        // the diagram object which represents the context (the last selected element in the diagram)
         readonly EA.DiagramObject _conTextDiagramObject;
-
-
-
         readonly Connector _selectedConnector;
+
         #region Constructor
 
         /// <summary>
@@ -31,7 +51,18 @@ namespace hoTools.Utils.Diagram
         public EaDiagram(Repository rep, bool  getAllDiagramObject= false)
         {
             _rep = rep;
-            _dia = _rep.GetCurrentDiagram();
+
+            object o;
+            EA.ObjectType oType = rep.GetTreeSelectedItem(out o);
+            if (oType != ObjectType.otDiagram)
+            {
+                _dia = null;
+                _selectedConnector = null;
+                IsSelectedObjects = false;
+                return;
+            }
+            // context diagram, selected in tree, possible links and objects are also selected
+            _dia = (EA.Diagram)o;
             IsSelectedObjects = false;
             if (_dia == null) return;
             if (_dia.SelectedObjects.Count == 0 && getAllDiagramObject)
@@ -82,19 +113,6 @@ namespace hoTools.Utils.Diagram
 
 
         }
-        #endregion
-        #region Properties
-        public List<EA.DiagramObject> SelObjects =>_selectedObjects;
-        // ReSharper disable once CollectionNeverQueried.Global
-        // ReSharper disable once MemberCanBePrivate.Global
-        public List<EA.Element> SelElements { get; } = new List<EA.Element>();
-
-        public bool IsSelectedObjects { get; }
-
-        public EA.Diagram Dia => _dia;
-        public int SelectedObjectsCount => _dia.SelectedObjects.Count;
-        public EA.Connector SelectedConnector => _selectedConnector;
-
         #endregion
 
         #region ReloadSelectedObjectsAndConnector

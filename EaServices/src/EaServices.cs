@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -573,11 +574,13 @@ namespace hoTools.EaServices
         /// <param name="property"></param>
         public static void DiagramLinkStyleWrapper(Repository rep, string type, string style, string property)
         {
-            List<EA.DiagramLink> links = new List<EA.DiagramLink>();
 
             EaDiagram eaDia = new EaDiagram(rep, getAllDiagramObject: false);
+
+            // Handle selected diagram and its selected items (connector/objects)
             if (eaDia.Dia != null)
             {
+                List<EA.DiagramLink> links = new List<EA.DiagramLink>();
                 rep.SaveDiagram(eaDia.Dia.DiagramID);
                 // over all links
                 foreach (var link in eaDia.GetSelectedLinks())
@@ -591,31 +594,32 @@ namespace hoTools.EaServices
 
                 }
                 eaDia.ReloadSelectedObjectsAndConnector(saveDiagram: false);
-                return;
             }
-            var liParameter = new string[4];
-            liParameter[0] = type;
-            liParameter[1] = style;
-            liParameter[2] = property;
-
-            switch (rep.GetContextItemType())
+            else
             {
+                var liParameter = new string[4];
+                liParameter[0] = type;
+                liParameter[1] = style;
+                liParameter[2] = property;
 
-                case EA.ObjectType.otPackage:
-                    EA.Package pkg = (EA.Package) rep.GetContextObject();
-                    RecursivePackages.DoRecursivePkg(rep, pkg, null, null,
-                        SetDiagramLinkStyle,
-                        liParameter,
-                        ChangeScope.Package);
-                    break;
-                case EA.ObjectType.otElement:
-                    EA.Element el = (EA.Element) rep.GetContextObject();
-                    RecursivePackages.DoRecursiveEl(rep, el, null,
-                        SetDiagramLinkStyle,
-                        liParameter,
-                        ChangeScope.Package);
-                    break;
+                switch (rep.GetContextItemType())
+                {
+                    case EA.ObjectType.otPackage:
+                        EA.Package pkg = (EA.Package) rep.GetContextObject();
+                        RecursivePackages.DoRecursivePkg(rep, pkg, null, null,
+                            SetDiagramLinkStyle,
+                            liParameter,
+                            ChangeScope.Package);
+                        break;
+                    case EA.ObjectType.otElement:
+                        EA.Element el = (EA.Element) rep.GetContextObject();
+                        RecursivePackages.DoRecursiveEl(rep, el, null,
+                            SetDiagramLinkStyle,
+                            liParameter,
+                            ChangeScope.Package);
+                        break;
 
+                }
             }
         }
         /// <summary>

@@ -19,8 +19,11 @@ namespace hoTools.Utils.Diagram
         public void SetProperties()
         {
             string linkGeometry = _link.Geometry;
-            foreach (var link in Property)
+            foreach (var l in Property)
             {
+                string link = l.Trim();
+                if (link == "") continue;
+
                 string name;
                 string value;
                 if (! GetNameValueFromString(link, out name, out value)) continue;
@@ -71,8 +74,11 @@ namespace hoTools.Utils.Diagram
                     case "ILHS":
                         // extract tags
                         string[] tags = value.Split(':');
-                        foreach (var tag in tags)
+                        foreach (var t in tags)
                         {
+                            string tag = t.Trim();
+                            if (tag == "") return;
+
                             string tagName;
                             string tagValue;
                             if (!GetNameValueFromString(tag, out tagName, out tagValue, delimiter:'=')) continue;
