@@ -39,6 +39,6 @@ using hoTools;
 // Assembly version is used to output release information for an assembly
 [assembly: AssemblyVersion("3.0.0.1")] 
 // possibly make same as ProductVersion in Product.wxs
-[assembly: AssemblyFileVersion("3.0.0")]
+[assembly: AssemblyFileVersion("3.0.1")]
 [assembly: NeutralResourcesLanguage("en")]
 

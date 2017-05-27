@@ -118,6 +118,7 @@ Some features:
 
 
 # Releases
+## Release 3.0.1
 ## Release 3.0.0
 - Bulk change Diagram Styles (Diagram, Diagram Objects, Diagram Links)
 
