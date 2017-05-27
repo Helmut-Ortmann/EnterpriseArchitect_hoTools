@@ -78,8 +78,8 @@ namespace hoTools.Settings
         private Configuration DefaultConfig { get; set; }
 
         /// <summary>
-        /// Configuration stored in Roaming of the user
-        /// <para/>c:\Users\user\AppData\Roaming\ho\hoTools\user.config
+        /// File path of the configuration stored in Roaming (%APPDATA%) of the user
+        /// c:\Users\user\AppData\Roaming\ho\hoTools\user.config
         /// </summary>
         private Configuration CurrentConfig { get; set; }
 
@@ -1224,15 +1224,29 @@ namespace hoTools.Settings
         #endregion
 
         /// <summary>
-        /// Reset configuration to default settings. The old configuration is stored to 'user.config.tmp'.
-        /// This is done by deleting the configuration file.
+        /// Reset configuration to default settings.
+        /// - User.config
+        /// - Settings.json 
+        /// The old configurations are stored to '*.tmp'.
+        /// 
+        /// This is done by deleting the above configuration files.
+        /// 
+        /// You have to restart EA!
         /// </summary>
         /// <returns></returns>
         public string Reset()
         {
+            // .net standard configuration file
             string filePath = CurrentConfig.FilePath;
             CurrentConfig.SaveAs($@"{filePath}.tmp");
             File.Delete(filePath);
+
+            // Settings.json
+            string fileSource = Path.Combine(Path.GetDirectoryName(filePath), "Settings.json");
+            string fileTarget = Path.Combine(Path.GetDirectoryName(filePath), "Settings.json.tmp");
+            File.Copy(fileSource, fileTarget);
+            File.Delete(fileSource);
+
             return filePath;
         }
         #region save

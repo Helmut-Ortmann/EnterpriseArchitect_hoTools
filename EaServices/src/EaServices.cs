@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.Remoting.Messaging;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml.Linq;
@@ -13,7 +11,6 @@ using AddinFramework.Extension;
 using EA;
 using hoTools.EaServices.Dlg;
 using hoTools.Utils;
-using hoTools.Utils.Abouts;
 using hoTools.Utils.ActivityParameter;
 using hoTools.Utils.Appls;
 using hoTools.Utils.Favorites;
@@ -520,6 +517,9 @@ namespace hoTools.EaServices
 
         /// <summary>
         /// Wrapper to change DiagramObject style
+        /// - Selected Diagramobjects
+        /// - Package (Diagrams and their DiagramObjects in package and below Elements)
+        /// - Element (Diagrams and their DiagramObjects below Elements)
         /// </summary>
         /// <param name="rep"></param>
         /// <param name="type"></param>
@@ -528,19 +528,50 @@ namespace hoTools.EaServices
         public static void DiagramObjectStyleWrapper(Repository rep, string type, string style, string property)
         {
             EaDiagram eaDia = new EaDiagram(rep, getAllDiagramObject: true);
-            if (eaDia.Dia == null) return;
-            rep.SaveDiagram(eaDia.Dia.DiagramID);
-            foreach (var diaObj in eaDia.SelObjects)
-            {
-                var objectStyle = new DiagramObjectStyle(rep, diaObj, type, style, property);
-                if (objectStyle.IsToProcess())
+            if (eaDia.Dia != null)
+            { 
+                rep.SaveDiagram(eaDia.Dia.DiagramID);
+                foreach (var diaObj in eaDia.SelObjects)
                 {
-                    objectStyle.UpdateStyles();
-                    objectStyle.SetProperties();
-                    objectStyle.SetEaLayoutStyles();
+                    var objectStyle = new DiagramObjectStyle(rep, diaObj, type, style, property);
+                    if (objectStyle.IsToProcess())
+                    {
+                        objectStyle.UpdateStyles();
+                        objectStyle.SetProperties();
+                        objectStyle.SetEaLayoutStyles();
+                    }
+                }
+                eaDia.ReloadSelectedObjectsAndConnector(saveDiagram: false);
+            
+            }
+            else
+            {
+                var liParameter = new string[4];
+                liParameter[0] = type;
+                liParameter[1] = style;
+                liParameter[2] = property;
+
+                switch (rep.GetContextItemType())
+                {
+                    case EA.ObjectType.otPackage:
+                        EA.Package pkg = (EA.Package)rep.GetContextObject();
+                        RecursivePackages.DoRecursivePkg(rep, pkg, null, null,
+                            SetDiagramObjectStyle,
+                            liParameter,
+                            ChangeScope.Package);
+                        break;
+                    case EA.ObjectType.otElement:
+                        EA.Element el = (EA.Element)rep.GetContextObject();
+                        RecursivePackages.DoRecursiveEl(rep, el, null,
+                            SetDiagramObjectStyle,
+                            liParameter,
+                            ChangeScope.Package);
+                        break;
+
                 }
             }
-            eaDia.ReloadSelectedObjectsAndConnector(saveDiagram: false);
+
+
 
 
         }
@@ -647,6 +678,35 @@ namespace hoTools.EaServices
                     linkStyle.UpdateStyles();
                     linkStyle.SetProperties();
                     linkStyle.SetEaLayoutStyles();
+                }
+            }
+            rep.ReloadDiagram(dia.DiagramID);
+
+        }
+        /// <summary>
+        /// Update all DiagramObjects of diagram
+        /// - liParameter[0] = type;
+        /// - liParameter[1] = style;
+        /// - liParameter[2] = property;
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <param name="dia"></param>
+        /// <param name="liParameter"></param>
+        private static void SetDiagramObjectStyle(EA.Repository rep, EA.Diagram dia, string[] liParameter)
+        {
+            rep.SaveDiagram(dia.DiagramID);
+
+            string types = liParameter[0];
+            string styles = liParameter[1];
+            string properties = liParameter[2];
+            foreach (EA.DiagramObject obj in dia.DiagramObjects)
+            {
+                var objStyle = new DiagramObjectStyle(rep, obj, types, styles, properties);
+                if (objStyle.IsToProcess())
+                {
+                    objStyle.UpdateStyles();
+                    objStyle.SetProperties();
+                    objStyle.SetEaLayoutStyles();
                 }
             }
             rep.ReloadDiagram(dia.DiagramID);

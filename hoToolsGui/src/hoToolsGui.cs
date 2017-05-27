@@ -22,6 +22,7 @@ using hoTools.Utils.Diagram;
 using hoTools.Utils.Excel;
 
 
+// ReSharper disable once CheckNamespace
 namespace hoTools.hoToolsGui
 {
 
@@ -55,7 +56,7 @@ namespace hoTools.hoToolsGui
         private DiagramFormat _diagramStyle;
 
         // Do Menu entries already inserted
-        private bool _doMenuDiagramStyleInserted = false;
+        private bool _doMenuDiagramStyleInserted;
 
         #region Generated
 
@@ -3631,15 +3632,20 @@ namespace hoTools.hoToolsGui
             Util.StartFile(_jasonFilePath);
         }
 
+
+        /// <summary>
+        /// Copy configuration files 'User.config' and 'Settings.json' to *.tmp. Then delete them.
+        /// After Restart hoTools reload the default settings.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void resetFactorySettingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string filePath = AddinSettings.Reset();
-            MessageBox.Show($@"Configuration saved to 
-'{filePath}'
-and deleted.
+            MessageBox.Show($@"'User.config' and 'Settings.json' from {Path.GetDirectoryName(filePath)} saved to *.tmp´and deleted.
 
-Please restart EA. During restart hoTools loads the default settings.
-You may copy the saved file to 'user.config' in the same folder", "Configuration reset to default. Please Restart!");
+Please restart EA. During restart hoTools loads the default settings.", 
+                            "Configuration reset to default. Please Restart!");
         }
         /// <summary>
         /// Change diagram link style for selected diagram links 

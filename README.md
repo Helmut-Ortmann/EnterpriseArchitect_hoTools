@@ -6,8 +6,8 @@ Addin with Tools for SPARX Enterprise Architect (EA)
 
 # Requirements
 - Windows
-- .NET 4.5 or greater
-- EA 9.0 or greater
+- .NET 4.5.2 or greater
+- EA 10.0 or greater
 - Local administration rights for installation (register COM dll)
 
 # Known issues
@@ -118,11 +118,20 @@ Some features:
 
 
 # Releases
-## Release 2.1.7
-- Diagram Styles (Diagram, Diagram Objects, Diagram Links)
+## Release 3.0.0
+- Bulk change Diagram Styles (Diagram, Diagram Objects, Diagram Links)
+
+One Click and:
+- Show hidden links
+- Let them disappear
+- Change Style of Diagram (recursive, conditional, ..)
+- Change Style of Diagram Objects (Package, Elements,..., conditional)
+- Change Style of Diagram Links (Package, Elements,..., conditional)
+- Apply EA Layout Styles (Font, Colors, Linewidth, bold) for a bunch of Diagram Nodes or Links
 - Amount of Buttons extended to 10
+
 - Fix error context diagram (leads to exception if current diagram and context diagram differ)
-- Code restructuring
+- Code refactoring
 
 ## Release 2.1.6
 - Diagram Styles, configurable via 'Settings.jason'

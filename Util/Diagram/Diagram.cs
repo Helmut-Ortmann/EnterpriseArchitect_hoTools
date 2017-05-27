@@ -20,8 +20,7 @@ namespace hoTools.Utils.Diagram
 
         #region Properties
         public List<EA.DiagramObject> SelObjects => _selectedObjects;
-        // ReSharper disable once CollectionNeverQueried.Global
-        // ReSharper disable once MemberCanBePrivate.Global
+        // List of selected Elements (Note: Element can also be a package)
         public List<EA.Element> SelElements { get; } = new List<EA.Element>();
 
         public bool IsSelectedObjects { get; }
@@ -84,7 +83,20 @@ namespace hoTools.Utils.Diagram
                     type == EA.ObjectType.otNone)
                 {
                     // 1. store context element/ last selected element
-                    EA.Element elContext = (EA.Element) rep.GetContextObject();
+                    // Context Element may be a Package. EA also stores the package as Element 
+                    EA.Element elContext = null;
+                    switch (rep.GetContextItemType())
+                    {
+                        case EA.ObjectType.otElement:
+                            elContext = (EA.Element)rep.GetContextObject();
+                            break;
+                        case EA.ObjectType.otPackage:
+                            var pkg = (EA.Package)rep.GetContextObject();
+                            elContext = rep.GetElementByGuid(pkg.PackageGUID);
+                            break;
+
+                    }
+                    
                     // no context element available, take first element
                     if (elContext == null)
                     {

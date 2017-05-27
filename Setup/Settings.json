@@ -1,80 +1,78 @@
 ﻿{
+  // Styles:
+  // Name:          Short description
+  // Description:   Long description, used as helptext
+  // Type:          Rules to decide for which items the t´style is to apply (EA Type, Stereotype and more)
+  // Style:         The EA style in EA internal format. You may have to dig to find out details
+  // Property:      EA Properties defined by EA API. 
+  //                For Diagram Node/Objects or Links/Connectors you can use EA Layout Styles to define:
+  //                - Font, Colors, LineWidth,.. etc.
+  //                - see: http://sparxsystems.com/enterprise_architect_user_guide/13.0/user_interface/using_the_style_panel.html 
+  //                "Property": "EaLayoutStyle=ObjStyle2;"
+  // Color:         You can use the Integer Value, Hexa Value or simple the colorname 
   'DiagramStyle':
   [
     // List of Diagram Styles to assign to diagram types
     // see:: https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/DiagramStyles
-    // Preferred styles, you may additionally use the data from the column PDATA, StyleEx
-	//
-	// Some properties:
-    // cx=nnn; (default = 800)
-    // cy=nnn; (default = 1100)
-    // HighLightImports=bool; (true or false)
-    // Orientation=x;  (L=Landscape, P=Portrait)
-    // Scale=nnn; (default=100=100%)
-    // ShowDetails=n; (1=Show, 0=Hide)
-    // ShowPackageContents=bool; (true, false)
-    // ShowPrivate=bool; (true, false)
-    // ShowProtected=bool; (true, false)
-    // ShowPublic=bool; (true, false)
+    // PData: HideRel=0;ShowTags=0;ShowReqs=0;ShowCons=0;OpParams=1;ShowSN=0;ScalePI=0;PPgs.cx=1;PPgs.cy=1;PSize=9;
+    //        ShowIcons=1;SuppCN=0;HideProps=0;HideParents=0;UseAlias=0;HideAtts=0;HideOps=0;HideStereo=0;HideEStereo=0;ShowShape=1;FormName=;
+    // StyleEx: ExcludeRTF=0;DocAll=0;HideQuals=0;AttPkg=1;ShowTests=0;ShowMaint=0;SuppressFOC=1;MatrixActive=0;SwimlanesActive=1;
+    //          KanbanActive=0;MatrixLineWidth=1;MatrixLineClr=0;MatrixLocked=0;TConnectorNotation=UML 2.1;TExplicitNavigability=0;
+    //          AdvancedElementProps=1;AdvancedFeatureProps=1; AdvancedConnectorProps=1;m_bElementClassifier=1;ProfileData=;
+    //          MDGDgm=;STBLDgm=;ShowNotes=0;VisibleAttributeDetail=0;ShowOpRetType=1;
+    //          SuppressBrackets=0;SuppConnectorLabels=0;PrintPageHeadFoot=0;ShowAsList=0;SuppressedCompartments=;Theme=:119;SaveTag=797D23E0;; 
+    // Color:   You can note colors by their name like 'crimson', 'red',.. (https://www.w3schools.com/colors/colors_names.asp)
     {
-      "Name": "Default 1 (simple, with Notes)",
-      "Description": "Simple:\r\n-Notes\r\n-No Attributes\r\n-No Operations\r\n-Don't show Namespace\r\n- Alias",
-      "Type": "",
-      "PDATA": "ShowNotes=1,PPgs.cx=1, PPgs.cy=1, ScalePI=1,PSize=1, HideAttr=1, HideOps=1, UseAlias=1",
-      "StyleEX": "",
-      "Property": "ShowForeign=False;Orientation=P;ShowBorder=True;ShowDetails=1;"
+      "Name":         "Diagr1 (simple, with Notes)",
+      "Description":  "Simple:\r\n-Notes\r\n-No Attributes\r\n-No Operations\r\n-Don't show Namespace\r\n- Alias\r\n- Scale diagram to fit one page",
+      "Type":         "Types=Component,Logical; Stereo=ab; Cust=Block;",
+      "PDATA":        "PPgs.cx=1, PPgs.cy=1, ScalePI=1,PSize=1, HideAttr=1, HideOps=1, UseAlias=1",
+      "StyleEX":      "ShowNotes=1;",
+      "Property":     "ShowForeign=False;Orientation=P;ShowBorder=True;ShowDetails=1;"
     },
     {
-      "Name": "Default 2 (elaborate, without Notes)",
-      "Description": "No Attributes, Notes\r\n- Show Namespace\r\n- No Alias",
-      "Type": "",
-      "PDATA": "ShowNotes=0, HideAttr=1, HideOps=0, UseAlias=0",
-      "StyleEX": "",
-      "Property": "Orientation=P;ShowForeign=True;ShowBorder=False,cx=160,cy=220;ShowDetails=0;"
+      "Name":         "Diagr2 (elaborate, without Notes)",
+      "Description":  "No Attributes, Notes\r\n- Show Namespace\r\n- No Alias",
+      "Type":         "Types=Component,Logical;  Cust=Block;",
+      "PDATA":        "HideAttr=1, HideOps=0, UseAlias=0",
+      "StyleEX":      "ShowNotes=0",
+      "Property":     "Orientation=P;ShowForeign=True;ShowBorder=False,cx=160,cy=220;ShowDetails=0;"
     },
     {
-      "Name": "My Requirements",
-      "Description": "No Attributes, Notes",
-      "Type": "Cust=Requirements",
-      "PDATA": "HideAtts=0, HideOps=0, OpParams=2, ShowOpRetType=1, PPgs.cx=1, PPgs.cy=1, ScalePI=1",
-      "StyleEX": "ShowNotes=1",
-      "Property": ""
+      "Name":         "My Requirements",
+      "Description":  "No Attributes, Notes",
+      "Type":         "Cust=Requirements",
+      "PDATA":        "HideAtts=0, HideOps=0, OpParams=2, ShowOpRetType=1, PPgs.cx=1, PPgs.cy=1, ScalePI=1",
+      "StyleEX":      "ShowNotes=1",
+      "Property":     ""
     },
     {
-      "Name": "My Test Domain",
-      "Description": "Theme=Parchment: Font, Color, Background Image, Element Shadows\r\nNo Notes",
-      "Type": "Cust=Test",
-      "Pdata": "HideAtts=1, HideOps=1, PPgs.cx=1, PPgs.cy=1, ScalePI=1, Theme=Parchment:113",
-      "StyleEX": "ShowNotes=0",
-      "Property": ""
+      "Name":         "My Test Domain",
+      "Description":  "Theme=Parchment\r\n- Hide operation\r\n- Scale to fit one page\r\n- No Notes",
+      "Type":         "Cust=Test",
+      "Pdata":        "HideAtts=1, HideOps=1, PPgs.cx=1, PPgs.cy=1, ScalePI=1, Theme=Parchment:113",
+      "StyleEX":      "ShowNotes=0",
+      "Property":     ""
     },
     {
-      "Name": "My special Diagrams (User, Documents)",
+      "Name":         "My special Diagrams (User, Documents)",
+      "Description":  "My special Diagrams:\r\n-User\r\n-Documents",
+      "Type":         "Cust=User, Cust=Document",
+      "Pdata":        "HideAtts=1, HideOps=1, PPgs.cx=1, PPgs.cy=1, ScalePI=1",
+      "StyleEX":      "ShowNotes=1",
+      "Property":     ""
+    },
+    {
+      "Name":        "My special Diagrams (User, Documents)",
       "Description": "My special Diagrams:\r\n-User\r\n-Documents",
-      "Type": "Cust=User, Cust=Document",
-      "Pdata": "HideAtts=1, HideOps=1, PPgs.cx=1, PPgs.cy=1, ScalePI=1",
-      "StyleEX": "ShowNotes=1",
-      "Property": ""
-    },
-    {
-      "Name": "My special Diagrams (User, Documents)",
-      "Description": "My special Diagrams:\r\n-User\r\n-Documents",
-      "Type": "Cust=User, Cust=Document",
-      "Pdata": "HideAtts=1, HideOps=1, PPgs.cx=1, PPgs.cy=1, ScalePI=1",
-      "StyleEX": "",
-      "Property": ""
+      "Type":        "Cust=User, Cust=Document",
+      "Pdata":       "HideAtts=1, HideOps=1, PPgs.cx=1, PPgs.cy=1, ScalePI=1",
+      "StyleEX":     "",
+      "Property":    ""
     }
   ],
   'DiagramObjectStyle':
   [
-    // Name:         Template name
-    // Description:  Description for e.g. Tooltip
-    // Type:         Type to apply to 
-    //               Use either Style/none Style and/or Property. hoTools first applies Style if not 'none' than applies Property.
-    // Style:        The Style according to rules in DiagramObject property Style / column ObjectStyle. Style overwrites all settings
-    // Property:     The EA property to directly modify (ShowFormattedNotes,..). It overwrites Styles
-    //               
-    //
     // Hiding  Styles:  AttPro=0;AttPri=0;AttPub=0;AttPkg=0;OpPro=0;OpPri=0;OpPub=0;OpPkg=0;
     // Showing Styles:  Tag=1;Constraint=1;PType=1;Notes=1000;Formatted=1;RzO=1;Runstate=1;Responsibility;FQTag=1;OpInh=1;AttInh=1;RzO=n;
     // Pro=0:            Hide Protected (Attribute/Operation)
@@ -91,26 +89,28 @@
     //
     // select name, objectStyle from t_diagramobjects d inner join t_object o on d.object_id = o.object_id
     //
-    // Note:   The Database Field has a length constraint. If you get an error you have to reduce the Style content. 
- 
-    //
-    // Type: Currently not supported
-   {
+    // Note:            The Database Field has a length constraint. If you get an error you have to reduce the Style content. 
+    // Color:           You can note colors by their name like 'crimson', 'red',..  (https://www.w3schools.com/colors/colors_names.asp)
+    // EA Layout Style  Use EA Layout Styles to define Font, Colors, LineWidth,..
+    //                  - see: http://sparxsystems.com/enterprise_architect_user_guide/13.0/user_interface/using_the_style_panel.html
+    //                  "Property": "EaLayoutStyle=ObjStyle2;"
+
+    {
       "Name":        "Default1, no Notes",
       "Description": "No Notes\r\nNo Attributres",
-      "Type":        "",
-      "Style":       "none",
-      "Property":    "ShowNotes=False, ShowPackageAttributes=False, ShowPrivateAttributes=false, ShowProtectedAttributes=false, ShowPublicAttributes=false" 
+      "Type":        "Types=Component, aaa, Class;Stereotypes=a,b",
+      "Style":       "",
+      "Property":    "ShowNotes=false;ShowPackageAttributes=False, ShowPrivateAttributes=false, ShowProtectedAttributes=false, ShowPublicAttributes=false" 
     },
     {
       "Name":        "Default2, Notes",
       "Description": "Notes\r\nNo Attributes",
-      "Type":        "",
-      "Style":       "Notes=1000",
+      "Type":        "Types=Component, aaaa, Class;Stereotypes=a,b",
+      "Style":       "Notes=1000,Formatted=1",
       "Property":    "ShowPackageAttributes=True; ShowPrivateAttributes=false, ShowProtectedAttributes=false, ShowPublicAttributes=false" 
     },
     {
-      "Name":        "Notes, Public Operations",
+      "Name":        "Notes, Public Operations, Class",
       "Description": "Notes\r\nNo Protected,Private Operations\r\nTags",
       "Type":        "",
       "Style":       "Notes=1000;OpPro=0;OpPri=0;OpPkg=0;",
@@ -124,19 +124,159 @@
       "Property":    ""
     },
     {
-      "Name": "Wrap Features",
+      "Name":        "Wrap Features",
       "Description": "Wrap Features",
-      "Type": "", 
-      "Style": "HideIcon=0;RzO=2;",
-      "Property": ""
+      "Type":         "", 
+      "Style":        "HideIcon=0;RzO=2;",
+      "Property":     ""
     },
     {
 
-      "Name": "Resize Features",
-      "Description": "Resize Features",
-      "Type": "", 
-      "Style": "HideIcon=0;RzO=1;",
-      "Property": ""
+      "Name":         "Resize Features",
+      "Description":  "Resize Features",
+      "Type":         "", 
+      "Style":        "HideIcon=0;RzO=1;",
+      "Property":     ""
+    },
+    {
+
+      "Name":        "ObjStyle1",
+      "Description": "According to EA ObjStyle1",
+      "Type":        "", 
+      "Style":       "",
+      "Property":    "EaLayoutStyle=ObjStyle1;"
+    },
+    {
+
+      "Name":        "ObjStyle2",
+      "Description": "According to EA ObjStyle2",
+      "Type":        "", 
+      "Style":       "",
+      "Property":    "EaLayoutStyle=ObjStyle2;"
+    }
+    
+  ],
+  'DiagramLinkStyle':
+  [
+    // Name:         Template name
+    // Description:  Description for e.g. Tooltip
+    // Type:         Define for which type you want to apply this Style. 
+    //               ConnectorType (see: select * from t_connectortypes), Stereotype, Hidden, Color
+    // Style:        The Style according to: select Style from t_DiagramLinks
+    // Property:     The EA Properties to modify: https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/Settings-Global-Keys
+    // Color:        You can note colours by their name like 'crimson', 'red',..   (https://www.w3schools.com/colors/colors_names.asp)           
+    //
+    //
+    // select name, objectStyle from t_diagramobjects d inner join t_object o on d.object_id = o.object_id
+    //
+    // Note:   The Database Field has a length constraint. If you get an error you have to reduce the Style content. 
+    // EA Layout Style  Use EA Layout Styles to define Font, Colors, LineWidth,..
+    //                  - see: http://sparxsystems.com/enterprise_architect_user_guide/13.0/user_interface/using_the_style_panel.html
+    //  
+   {
+      "Name":        "Default1",
+      "Description": "All Properties",
+      "Type":        "",
+      "Style":       "",
+      "Property":    "LineStyle=9, IsHidden=False, LineColor=Chocolate, HiddenLabels=false, LineWidth=2" 
+    },
+    {
+      "Name":        "Default2",
+      "Description": "Test Type (LineStyle)",
+      "Type":        "Types=Association,Dependency;",
+      "Style":       "",
+      "Property":    "LineStyle=5, IsHidden=False, LineColor=DarkMagenta, HiddenLabels=true, LineWidth=3" 
+    },
+    {
+      "Name":        "LineStyle+Stereotypes",
+      "Description": "Test Type (LineStyle+Stereotypes)",
+      "Type":        "Types=Association,Dependency;Stereotypes=a,b;",
+      "Style":       "",
+      "Property":    "LineStyle=5, IsHidden=false, LineColor=0x8500, HiddenLabels=true, LineWidth=3" 
+    },
+    {
+      "Name":        "Stereotype a,b",
+      "Description": "Test Type (Stereotypes)",
+      "Type":        "Stereotypes=a,b;",
+      "Style":       "",
+      "Property":    "LineStyle=3, IsHidden=false, LineColor=30000, HiddenLabels=false, LineWidth=2" 
+    },
+    {
+      "Name":        "Hide dependency",
+      "Description": "Hide dependency",
+      "Type":        "Types=Association,Dependency;",
+      "Style":       "",
+      "Property":    "IsHidden=True" 
+    },
+    {
+      "Name":        "Style",
+      "Description": "Hide dependency",
+      "Type":        "",
+      "Style":       "LWidth=3, Color=#5800 ",
+      "Property":    "IsHidden=False" 
+    },
+    {
+      "Name":        "Label Top Visible",
+      "Description": "Make Label top visible, , different colors, bold",
+      "Type":        "",
+      "Style":       "LWidth=3, Color=#5800 ",
+      "Property":    "LLT=HDN=0:BLD=1:ITA=1:CLR=0x16000;LMT=HDN=0:BLD=1:ITA=0:CLR=#8000;LRT=HDN=0:BLD=0:ITA=0:CLR=green;" 
+    },
+    {
+      "Name":        "Label Top not Visible",
+      "Description": "Make Label top invisible",
+      "Type":        "",
+      "Style":       "LWidth=3, Color=#5800 ",
+      "Property":    "LLT=HDN=1;LMT=HDN=1;LRT=HDN=1;" 
+    },
+    {
+      "Name":        "Label Reset",
+      "Description": "Reset Labels to their default",
+      "Type":        "",
+      "Style":       "LWidth=3, Color=#5800 ",
+      "Property":    "LLB=SET=;LMB=SET=;LLT=SET=;LMT=SET=;LRB=SET=;LRT=SET=;IRHS=SET=;ILHS=SET=HDN=1;" 
+    },
+    {
+      "Name":        "Show Hidden Links in crimson",
+      "Description": "Show hidden links in crimson to later easily hide them, see next Style",
+      "Type":        "Hidden=True;",
+      "Style":       "LWidth=3, Color=crimson",
+      "Property":    "IsHidden=false;LLB=SET=;LMB=SET=;LLT=SET=;LMT=SET=;LRB=SET=;LRT=SET=;IRHS=SET=;ILHS=SET=HDN=1;" 
+    },
+    {
+      "Name":        "Hide crimson Links",
+      "Description": "Just switch hidden links on and off, hide links which you have shown again.",
+      "Type":        "Color=crimson;",
+      "Style":       "LWidth=3, Color=crimson",
+      "Property":    "IsHidden=true;LLB=SET=;LMB=SET=;LLT=SET=;LMT=SET=;LRB=SET=;LRT=SET=;IRHS=SET=;ILHS=SET=HDN=1;" 
+    },
+    {
+      "Name":        "Reset",
+      "Description": "Reset to defaults",
+      "Type":        "",
+      "Style":       "LWidth=-1, Color=-1 ",
+      "Property":    "IsHidden=False" 
+    },
+    {
+      "Name":        "EA style1",
+      "Description": "Sets the default according to default style 1",
+      "Type":        "",
+      "Style":       "",
+      "Property":    "EaLayoutStyle=Style1"  // Use the EA style1 of table t_txtref 
+    },
+    {
+      "Name":        "EA style2",
+      "Description": "Sets the default according to default style 1",
+      "Type":        "",
+      "Style":       "",
+      "Property":    "EaLayoutStyle=Style2"  // Use the EA style2 of table t_txtref 
+    },
+    {
+      "Name":        "Set Default Style",
+      "Description": "Sets the default style for the connector",
+      "Type":        "",
+      "Style":       "",
+      "Property":    "ConnectorColor=green, ConnectorWidth=3"  // default for links 
     }
   ]
 }
