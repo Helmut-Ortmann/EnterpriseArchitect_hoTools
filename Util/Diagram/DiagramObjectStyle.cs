@@ -229,6 +229,62 @@ namespace hoTools.Utils.Diagram
             }
             Update();
         }
+
+       
+
+        /// <summary>
+        /// Set completeness marker for object
+        /// 
+        /// </summary>
+        public void SetCompleteNessMarker()
+        {
+            foreach (var property in Property)
+            {
+                if (property.StartsWith("CompleteDiagram="))
+                {
+                    // Completeness marker detected
+                    string[] parameters = property.Substring(15).Split(',');
+                    string propertyName = parameters[0];
+                    bool isCompleteDiagram = IsCompleteDiagram();
+                    bool isCompleteGlobal = IsCompleteGlobal();
+                    string par;
+                    if (isCompleteGlobal)
+                    {
+                        par = parameters[1];  // Complete
+                    }
+                    else
+                    {
+                        if (isCompleteDiagram) par = parameters[2]; // Complete in Diagram
+                        else par = parameters[3];  // Incomplete in Diagram 
+                    }
+                    int iValue;
+                    switch (propertyName)
+                    {
+                        case "BorderColor":
+                            if (!ConvertInteger(propertyName, par, out iValue)) continue;
+                            _diaObj.BorderColor = iValue;
+                            break;
+                        case "BackgroundColor":
+                            if (!ConvertInteger(propertyName, par, out iValue)) continue;
+                            _diaObj.BackgroundColor = iValue;
+                            break;
+                        case "BorderLineWidth":
+                            if (!ConvertInteger(propertyName, par, out iValue)) continue;
+                            _diaObj.BorderLineWidth = iValue;
+                            break;
+                        case "FontColor":
+                            if (!ConvertInteger(propertyName, par, out iValue)) continue;
+                            _diaObj.FontColor = iValue;
+                            break;
+                    }
+
+
+                }
+            }
+            return;
+        }
+
+
         /// <summary>
         /// Set according ti EA Text Styles
         /// </summary>
