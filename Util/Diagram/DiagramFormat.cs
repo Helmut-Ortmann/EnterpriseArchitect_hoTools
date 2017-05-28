@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using EA;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using hoTools.Utils.SQL;
 using hoTools.Utils.COM;
 
 // ReSharper disable MemberCanBePrivate.Global
@@ -601,7 +601,7 @@ namespace hoTools.Utils.Diagram
                         {
                             string updateStr = $@"update t_diagram set ShowForeign = {value.Trim()} 
                                                                           where Diagram_ID = {dia.DiagramID}";
-                            SQL.UtilSql.SqlUpdate(rep, updateStr);
+                            UtilSql.SqlUpdate(rep, updateStr);
                             //rep.ReloadDiagram(dia.DiagramID);
                             //var schowForeign = rep.GetStringsBySql($@"select ShowForeign from t_diagram where Diagram_ID = {dia.DiagramID}");
                         }
@@ -619,7 +619,7 @@ namespace hoTools.Utils.Diagram
                         {
                             string updateStr = $@"update t_diagram set ShowBorder = {value.Trim()} 
                                                                           where Diagram_ID = {dia.DiagramID}";
-                            SQL.UtilSql.SqlUpdate(rep, updateStr);
+                            UtilSql.SqlUpdate(rep, updateStr);
                             //rep.ReloadDiagram(dia.DiagramID);
                             //var schowForeign = rep.GetStringsBySql($@"select ShowForeign from t_diagram where Diagram_ID = {dia.DiagramID}");
                         }
