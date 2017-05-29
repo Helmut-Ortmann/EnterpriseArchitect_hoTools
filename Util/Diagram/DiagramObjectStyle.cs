@@ -238,12 +238,13 @@ namespace hoTools.Utils.Diagram
         /// </summary>
         public void SetCompleteNessMarker()
         {
+            string completeDiagram = "CompleteDiagram=";
             foreach (var property in Property)
             {
-                if (property.StartsWith("CompleteDiagram="))
+                if (property.StartsWith(completeDiagram))
                 {
                     // Completeness marker detected
-                    string[] parameters = property.Substring(15).Split(',');
+                    string[] parameters = property.Substring(completeDiagram.Length).Split(':');
                     string propertyName = parameters[0];
                     bool isCompleteDiagram = IsCompleteDiagram();
                     bool isCompleteGlobal = IsCompleteGlobal();
@@ -281,6 +282,7 @@ namespace hoTools.Utils.Diagram
 
                 }
             }
+            Update();
             return;
         }
 
@@ -446,13 +448,15 @@ namespace hoTools.Utils.Diagram
            
             foreach (EA.DiagramLink l in dia.DiagramLinks)
             {
-                if (l.IsHidden == false)
+                if (l.IsHidden == true)
                 {
                     var con = Rep.GetConnectorByID(l.ConnectorID);
                     var sourceObject = dia.GetDiagramObjectByID(con.SupplierID, "");
                     var targetObject = dia.GetDiagramObjectByID(con.ClientID, "");
-                    if (sourceObject != _diaObj || targetObject != _diaObj) return false;
-                }
+                    if ( (sourceObject.ElementID == _diaObj.ElementID && sourceObject.ObjectType == _diaObj.ObjectType) ||
+                         (targetObject.ElementID == _diaObj.ElementID && targetObject.ObjectType == _diaObj.ObjectType) )
+                          return false;
+                } 
             }
             return true;
 
@@ -467,19 +471,20 @@ namespace hoTools.Utils.Diagram
             EA.Diagram dia = Rep.GetDiagramByID(_diaObj.DiagramID);
 
             List<int> globalIds = new List<int>();
+            globalIds.AddRange(from Connector c in Rep.GetElementByID(_diaObj.ElementID).Connectors select c.ConnectorID);
             // get all connectors of object
-            switch (_diaObj.ObjectType)
-            {
-                case EA.ObjectType.otElement:
+            //switch (_diaObj.ObjectType)
+            //{
+            //    case EA.ObjectType.otElement:
 
-                    globalIds.AddRange(from Connector c in Rep.GetElementByID(_diaObj.ElementID).Connectors select c.ConnectorID);
-                    break;
+            //        globalIds.AddRange(from Connector c in Rep.GetElementByID(_diaObj.ElementID).Connectors select c.ConnectorID);
+            //        break;
 
-                case EA.ObjectType.otPackage:
-                    globalIds.AddRange(from Connector c in Rep.GetPackageByID(_diaObj.ElementID).Connectors select c.ConnectorID);
-                    break;
-            }
-            
+            //    case EA.ObjectType.otPackage:
+            //        globalIds.AddRange(from Connector c in Rep.GetPackageByID(_diaObj.ElementID).Connectors select c.ConnectorID);
+            //        break;
+            //}
+
             List<int> diagramIds = new List<int>();
             foreach (EA.DiagramLink l in dia.DiagramLinks)
             {

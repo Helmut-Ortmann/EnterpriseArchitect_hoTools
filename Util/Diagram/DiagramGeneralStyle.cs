@@ -55,16 +55,17 @@ namespace hoTools.Utils.Diagram
         /// <param name="name"></param>
         /// <param name="value"></param>
         /// <param name="delimiter"></param>
+        /// <param name="checkCount"></param>
         /// <returns></returns>
-        protected static bool GetNameValueFromString(string myString, out string name, out string value, char delimiter='=')
+        protected static bool GetNameValueFromString(string myString, out string name, out string value, char delimiter='=', bool checkCount=true)
         {
 
             myString = myString.Trim();
-            Regex rx = new Regex($@"([^=]*){delimiter}(.*)");
+            Regex rx = new Regex($@"([^{delimiter}]*){delimiter}(.*)");
             Match match = rx.Match(myString.Trim());
             name = "";
             value = "";
-            if (!match.Success && match.Groups.Count != 3)
+            if (!match.Success && ( match.Groups.Count != 3 ))
             {
                 MessageBox.Show($@"Tag: '{myString}'
 

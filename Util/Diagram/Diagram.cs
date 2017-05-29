@@ -49,20 +49,24 @@ namespace hoTools.Utils.Diagram
         public EaDiagram(Repository rep, bool  getAllDiagramObject= false)
         {
             _rep = rep;
-
-            object o;
-            EA.ObjectType oType = rep.GetTreeSelectedItem(out o);
-            if (oType != ObjectType.otDiagram)
-            {
-                _dia = null;
-                _selectedConnector = null;
-                IsSelectedObjects = false;
-                return;
-            }
-            // context diagram, selected in tree, possible links and objects are also selected
-            _dia = (EA.Diagram)o;
+            _dia = null;
+            _selectedConnector = null;
             IsSelectedObjects = false;
-            if (_dia == null) return;
+
+            EA.Diagram dia = rep.GetCurrentDiagram();
+            if (dia == null) return;
+
+            EA.ObjectType contextObjectType = _rep.GetContextItemType();
+
+
+            // Check if context is diagram or something inside the current diagram is selected (selected things are never old)
+            if (contextObjectType != ObjectType.otDiagram && dia.SelectedObjects.Count == 0 &&
+                dia.SelectedConnector == null) return;
+
+
+            // Diagram is context or something inside the diagram is selected
+            _dia = dia;
+            IsSelectedObjects = false;
             if (_dia.SelectedObjects.Count == 0 && getAllDiagramObject)
             {
                 // overall diagram objects
@@ -76,11 +80,10 @@ namespace hoTools.Utils.Diagram
             // If an context element exists than this is the last selected element
             if (_dia.SelectedObjects.Count > 0)
             {
-                EA.ObjectType type = _rep.GetContextItemType();
                 // only package and object makes sense, or no context element (than go for selected elements)
-                if (type == EA.ObjectType.otElement ||
-                    type == EA.ObjectType.otPackage ||
-                    type == EA.ObjectType.otNone)
+                if (contextObjectType == EA.ObjectType.otElement ||
+                    contextObjectType == EA.ObjectType.otPackage ||
+                    contextObjectType == EA.ObjectType.otNone)
                 {
                     // 1. store context element/ last selected element
                     // Context Element may be a Package. EA also stores the package as Element 
