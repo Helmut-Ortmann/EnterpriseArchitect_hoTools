@@ -119,6 +119,10 @@ Some features:
 
 # Releases
 ## Release 3.0.1
+- Error fix Diagram selection handling (LineStyle and more)
+- Diagram Object + Link Style recursive
+- Completeness Marker for Diagram objects (complete global, complete Diagram, incomplete Diagram)
+
 ## Release 3.0.0
 - Bulk change Diagram Styles (Diagram, Diagram Objects, Diagram Links)
 

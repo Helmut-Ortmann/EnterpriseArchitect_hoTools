@@ -1,34 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Text.RegularExpressions;
+﻿using System.Collections.Generic;
 using System.Windows.Forms;
-using System.Xml.Linq;
-using AddinFramework.Extension;
 using EA;
-using hoTools.EaServices.Dlg;
 using hoTools.Utils;
-using hoTools.Utils.ActivityParameter;
-using hoTools.Utils.Appls;
-using hoTools.Utils.Favorites;
-using hoTools.Utils.svnUtil;
-using hoTools.Utils.SQL;
-using Attribute = System.Attribute;
-using DiagramObject = EA.DiagramObject;
-using Element = EA.Element;
-using File = EA.File;
-using Package = EA.Package;
-using TaggedValue = hoTools.Utils.TaggedValue;
-using hoTools.EAServicesPort;
-using hoTools.Utils.Configuration;
 using hoTools.Utils.Diagram;
 
-// ReSharper disable RedundantArgumentDefaultValue
-// ReSharper disable ArgumentsStyleLiteral
 
+// ReSharper disable once CheckNamespace
 namespace hoTools.EaServices
 {
 
@@ -165,13 +142,12 @@ namespace hoTools.EaServices
         }
 
 
-
-
         /// <summary>
         /// Wrapper to change DiagramObject style
         /// </summary>
         /// <param name="rep"></param>
         /// <param name="pos"></param>
+        /// <param name="changeScope"></param>
         private static void DiagramObjectStyleWrapper(Repository rep, int pos, ChangeScope changeScope)
         {
             if (DiagramStyle.DiagramStyleItems == null && DiagramStyle.DiagramObjectStyleItems.Count <= pos)
@@ -251,6 +227,7 @@ namespace hoTools.EaServices
         /// <param name="rep"></param>
         /// <param name="pos"></param>
         /// <param name="changeScope"></param>
+        // ReSharper disable once MemberCanBePrivate.Global
         public static void DiagramLinkStyleWrapper(Repository rep, int pos, ChangeScope changeScope)
         {
             if (DiagramStyle.DiagramStyleItems == null && DiagramStyle.DiagramLinkStyleItems.Count <= pos)
@@ -269,6 +246,7 @@ namespace hoTools.EaServices
         /// Wrapper to change DiagramLink style
         /// </summary>
         /// <param name="rep"></param>
+        /// <param name="type"></param>
         /// <param name="style"></param>
         /// <param name="property"></param>
         /// <param name="changeScope"></param>
@@ -279,7 +257,6 @@ namespace hoTools.EaServices
             // Handle selected diagram and its selected items (connector/objects)
             if (eaDia.Dia != null)
             {
-                List<EA.DiagramLink> links = new List<EA.DiagramLink>();
                 rep.SaveDiagram(eaDia.Dia.DiagramID);
                 // over all links
                 foreach (var link in eaDia.GetSelectedLinks())
@@ -406,12 +383,12 @@ namespace hoTools.EaServices
                     EA.Package pkg = (EA.Package)rep.GetContextObject();
                     RecursivePackages.DoRecursivePkg(rep, pkg, null, null, SetDiagramStyle,
                         liParameter,
-                        ChangeScope.PackageRecursive);
+                        changeScope);
                     break;
                 case EA.ObjectType.otElement:
                     EA.Element el = (EA.Element)rep.GetContextObject();
                     RecursivePackages.DoRecursiveEl(rep, el, null, SetDiagramStyle, liParameter,
-                        ChangeScope.PackageRecursive);
+                        changeScope);
                     break;
             }
         }
@@ -424,14 +401,16 @@ namespace hoTools.EaServices
         /// OpParams=2  Show full Operation Parameter
         /// ScalePI=1   Scale to fit page
         /// Theme=:119  Set the diagram theme and the used features of the theme (here 119, see StyleEx of t_diagram)
+        /// 
+        /// par[0] contains the values as a semicolon/comma separated Style
+        /// par[1] contains the values as a semicolon/comma separated PDATA
+        /// par[2] contains the values as a semicolon/comma separated properties
+        /// par[3] contains the possible diagram types
         /// </summary>
         /// <param name="rep"></param>
         /// <param name="dia"></param>
-        /// <param name="par">par[0] contains the values as a semicolon/comma separated Style</param>
-        /// <param name="par">par[1] contains the values as a semicolon/comma separated PDATA</param>
-        /// <param name="par">par[2] contains the values as a semicolon/comma separated properties</param>
-        /// <param name="par">par[3] contains the possible diagram types</param>
-        public static void SetDiagramStyle(Repository rep, EA.Diagram dia, string[] par)
+        /// <param name="par">par[] </param>
+        private static void SetDiagramStyle(Repository rep, EA.Diagram dia, string[] par)
         {
             EaDiagram eaDia = new EaDiagram(rep, getAllDiagramObject: false);
             if (eaDia.Dia == null) return;
