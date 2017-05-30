@@ -414,7 +414,7 @@ namespace hoTools.EaServices
             "Select Diagram, Diagram Objects or Diagram link (see Settings.Json, 1. entry)", isTextRequired: false)]
         public static void DiagramLinkStyle1(EA.Repository rep)
         {
-            DiagramLinkStyleWrapper(rep, 0);
+            DiagramLinkStyleWrapper(rep, 0, ChangeScope.Package);
         }
 
 
@@ -426,7 +426,7 @@ namespace hoTools.EaServices
             "Select Diagram, Diagram Objects or Diagram link (see Settings.Json, 2. entry)", isTextRequired: false)]
         public static void DiagramLinkStyle2(EA.Repository rep)
         {
-            DiagramLinkStyleWrapper(rep, 1);
+            DiagramLinkStyleWrapper(rep, 1, ChangeScope.Package);
         }
         /// <summary>
         /// Bulk change DiagramObject Styles 2 according to Settings.Json 
@@ -435,7 +435,7 @@ namespace hoTools.EaServices
             "Select Diagram, Diagram Objects or Diagram link (see Settings.Json, 2. entry)", isTextRequired: false)]
         public static void DiagramLinkStyle3(EA.Repository rep)
         {
-            DiagramLinkStyleWrapper(rep, 3);
+            DiagramLinkStyleWrapper(rep, 3, ChangeScope.Package);
         }
         /// <summary>
         /// Bulk change DiagramObject Styles 3 according to Settings.Json 
@@ -444,7 +444,7 @@ namespace hoTools.EaServices
             "Select Diagram, Diagram Objects or Diagram link (see Settings.Json, 4. entry)", isTextRequired: false)]
         public static void DiagramLinkStyle4(EA.Repository rep)
         {
-            DiagramLinkStyleWrapper(rep, 4);
+            DiagramLinkStyleWrapper(rep, 4, ChangeScope.Package);
         }
 
         /// <summary>
@@ -454,7 +454,7 @@ namespace hoTools.EaServices
             "Select Diagram or Diagram Objects (see Settings.Json, 1. entry)", isTextRequired: false)]
         public static void DiagramObjectStyle1(EA.Repository rep)
         {
-            DiagramObjectStyleWrapper(rep, 0);
+            DiagramObjectStyleWrapper(rep, 0, ChangeScope.Package);
         }
 
         /// <summary>
@@ -464,7 +464,7 @@ namespace hoTools.EaServices
             "Select Diagram or Diagram Objects (see Settings.Json, 2. entry)", isTextRequired: false)]
         public static void DiagramObjectStyle2(EA.Repository rep)
         {
-            DiagramObjectStyleWrapper(rep, 1);
+            DiagramObjectStyleWrapper(rep, 1, ChangeScope.Package);
         }
         /// <summary>
         /// Bulk change DiagramObject Styles 3 according to Settings.Json 
@@ -473,7 +473,7 @@ namespace hoTools.EaServices
             "Select Diagram or Diagram Objects (see Settings.Json, 3. entry)", isTextRequired: false)]
         public static void DiagramObjectStyle3(EA.Repository rep)
         {
-            DiagramObjectStyleWrapper(rep, 2);
+            DiagramObjectStyleWrapper(rep, 2, ChangeScope.Package);
         }
         /// <summary>
         /// Bulk change DiagramObject Styles 4 according to Settings.Json 
@@ -482,7 +482,7 @@ namespace hoTools.EaServices
             "Select Diagram or Diagram Objects (see Settings.Json, 4. entry)", isTextRequired: false)]
         public static void DiagramObjectStyle4(EA.Repository rep)
         {
-            DiagramObjectStyleWrapper(rep, 3);
+            DiagramObjectStyleWrapper(rep, 3, ChangeScope.Package);
         }
         /// <summary>
         /// Bulk change DiagramObject Styles 5 according to Settings.Json 
@@ -502,7 +502,7 @@ namespace hoTools.EaServices
         /// </summary>
         /// <param name="rep"></param>
         /// <param name="pos"></param>
-        private static void DiagramObjectStyleWrapper(Repository rep, int pos)
+        private static void DiagramObjectStyleWrapper(Repository rep, int pos, ChangeScope changeScope)
         {
             if (DiagramStyle.DiagramStyleItems == null && DiagramStyle.DiagramObjectStyleItems.Count <= pos)
             {
@@ -512,7 +512,7 @@ namespace hoTools.EaServices
             string style = $@"{DiagramStyle.DiagramObjectStyleItems[pos].Style}".Trim();
             string property  = $@"{DiagramStyle.DiagramObjectStyleItems[pos].Property}".Trim();
             string type = $@"{DiagramStyle.DiagramObjectStyleItems[pos].Type}".Trim();
-            DiagramObjectStyleWrapper(rep, type, style, property);
+            DiagramObjectStyleWrapper(rep, type, style, property, changeScope);
         }
 
         /// <summary>
@@ -525,7 +525,8 @@ namespace hoTools.EaServices
         /// <param name="type"></param>
         /// <param name="style"></param>
         /// <param name="property"></param>
-        public static void DiagramObjectStyleWrapper(Repository rep, string type, string style, string property)
+        /// <param name="changeScope"></param>
+        public static void DiagramObjectStyleWrapper(Repository rep, string type, string style, string property, ChangeScope changeScope)
         {
             EaDiagram eaDia = new EaDiagram(rep, getAllDiagramObject: true);
             if (eaDia.Dia != null)
@@ -559,14 +560,14 @@ namespace hoTools.EaServices
                         RecursivePackages.DoRecursivePkg(rep, pkg, null, null,
                             SetDiagramObjectStyle,
                             liParameter,
-                            ChangeScope.Package);
+                            changeScope);
                         break;
                     case EA.ObjectType.otElement:
                         EA.Element el = (EA.Element)rep.GetContextObject();
                         RecursivePackages.DoRecursiveEl(rep, el, null,
                             SetDiagramObjectStyle,
                             liParameter,
-                            ChangeScope.Package);
+                            changeScope);
                         break;
 
                 }
@@ -582,7 +583,8 @@ namespace hoTools.EaServices
         /// </summary>
         /// <param name="rep"></param>
         /// <param name="pos"></param>
-        public static void DiagramLinkStyleWrapper(Repository rep, int pos)
+        /// <param name="changeScope"></param>
+        public static void DiagramLinkStyleWrapper(Repository rep, int pos, ChangeScope changeScope)
         {
             if (DiagramStyle.DiagramStyleItems == null && DiagramStyle.DiagramLinkStyleItems.Count <= pos)
             {
@@ -592,7 +594,7 @@ namespace hoTools.EaServices
             string type = $@"{DiagramStyle.DiagramLinkStyleItems[pos].Type}".Trim();
             string style = $@"{DiagramStyle.DiagramLinkStyleItems[pos].Style}".Trim();
             string property = $@"{DiagramStyle.DiagramLinkStyleItems[pos].Property}".Trim();
-            DiagramLinkStyleWrapper(rep, type, style, property);
+            DiagramLinkStyleWrapper(rep, type, style, property, changeScope);
 
 
 
@@ -605,7 +607,8 @@ namespace hoTools.EaServices
         /// <param name="rep"></param>
         /// <param name="style"></param>
         /// <param name="property"></param>
-        public static void DiagramLinkStyleWrapper(Repository rep, string type, string style, string property)
+        /// <param name="changeScope"></param>
+        public static void DiagramLinkStyleWrapper(Repository rep, string type, string style, string property, ChangeScope changeScope)
         {
 
             EaDiagram eaDia = new EaDiagram(rep, getAllDiagramObject: false);
@@ -643,14 +646,14 @@ namespace hoTools.EaServices
                         RecursivePackages.DoRecursivePkg(rep, pkg, null, null,
                             SetDiagramLinkStyle,
                             liParameter,
-                            ChangeScope.Package);
+                            changeScope);
                         break;
                     case EA.ObjectType.otElement:
                         EA.Element el = (EA.Element) rep.GetContextObject();
                         RecursivePackages.DoRecursiveEl(rep, el, null,
                             SetDiagramLinkStyle,
                             liParameter,
-                            ChangeScope.Package);
+                            changeScope);
                         break;
 
                 }

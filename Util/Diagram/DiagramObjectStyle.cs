@@ -472,28 +472,16 @@ namespace hoTools.Utils.Diagram
 
             List<int> globalIds = new List<int>();
             globalIds.AddRange(from Connector c in Rep.GetElementByID(_diaObj.ElementID).Connectors select c.ConnectorID);
-            // get all connectors of object
-            //switch (_diaObj.ObjectType)
-            //{
-            //    case EA.ObjectType.otElement:
-
-            //        globalIds.AddRange(from Connector c in Rep.GetElementByID(_diaObj.ElementID).Connectors select c.ConnectorID);
-            //        break;
-
-            //    case EA.ObjectType.otPackage:
-            //        globalIds.AddRange(from Connector c in Rep.GetPackageByID(_diaObj.ElementID).Connectors select c.ConnectorID);
-            //        break;
-            //}
-
-            List<int> diagramIds = new List<int>();
+            
+            List<int> diagramConnectorIds = new List<int>();
             foreach (EA.DiagramLink l in dia.DiagramLinks)
             {
-                if (l.IsHidden == false) diagramIds.Add(l.ConnectorID);
+                if (l.IsHidden == false) diagramConnectorIds.Add(l.ConnectorID);
             }
 
             foreach (int id in globalIds)
             {
-                if (! diagramIds.Contains(id)) return false;
+                if (! diagramConnectorIds.Contains(id)) return false;
             }
             return true;
 
