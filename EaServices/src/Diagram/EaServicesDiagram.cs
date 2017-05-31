@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 using EA;
 using hoTools.Utils;
 using hoTools.Utils.Diagram;

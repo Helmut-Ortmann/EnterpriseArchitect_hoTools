@@ -120,6 +120,7 @@ Some features:
 # Releases
 ## Release 3.0.1
 - Error fix Diagram selection handling (LineStyle and more)
+- Error fix non recursive change for package
 - Diagram Object + Link Style recursive
 - Completeness Marker for Diagram objects (complete global, complete Diagram, incomplete Diagram)
 

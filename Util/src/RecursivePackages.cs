@@ -94,7 +94,7 @@ namespace hoTools.Utils
                 if (changeScope == ChangeScope.Package)
                 {
                     // inside package only the items
-                    parameterStrings[1] = ChangeScope.Item.ToString();
+                    changeScope = ChangeScope.Item;
                 }
                 foreach (EA.Package pkgTrgt in pkg.Packages)
                 {
