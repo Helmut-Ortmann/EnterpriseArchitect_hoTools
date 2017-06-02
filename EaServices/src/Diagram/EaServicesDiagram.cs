@@ -11,22 +11,40 @@ namespace hoTools.EaServices
     public static partial class EaService
     {
         /// <summary>
-        /// Bulk change Diagram Styles 1 according to Settings.Json 
+        /// Change Diagram Styles 1 according to Settings.Json 
         /// </summary>
-        [ServiceOperation("{7D3B03FD-399B-4D39-9F54-5E7CB2CDBBBF}", "Bulk change Diagram to 'Style 1'",
+        [ServiceOperation("{7D3B03FD-399B-4D39-9F54-5E7CB2CDBBBF}", "Change Diagram to 'Style 1'",
             "Select Package, Element, Diagram (see Settings.Json, 1. entry)", isTextRequired: false)]
         public static void DiagramStyle1(EA.Repository rep)
         {
             DiagramStyleWrapper(rep, 0);
         }
         /// <summary>
-        /// Bulk change Diagram Styles 2 according to Settings.Json 
+        /// Change Diagram Styles 2 according to Settings.Json 
         /// </summary>
-        [ServiceOperation("{FD79F3ED-1345-4CF6-AB43-9EF34571CA52}", "Bulk change Diagram to 'Style 2'",
+        [ServiceOperation("{FD79F3ED-1345-4CF6-AB43-9EF34571CA52}", "Change Diagram to 'Style 2'",
             "Select Package, Element, Diagram (see Settings.Json, 2. entry)", isTextRequired: false)]
         public static void DiagramStyle2(EA.Repository rep)
         {
             DiagramStyleWrapper(rep, 1);
+        }
+        /// <summary>
+        /// Change Diagram Styles 3 according to Settings.Json 
+        /// </summary>
+        [ServiceOperation("{B36E7496-5B24-437E-90E7-6B7F1CB3410F}", "Change Diagram to 'Style 3'",
+            "Select Package, Element, Diagram (see Settings.Json, 3. entry)", isTextRequired: false)]
+        public static void DiagramStyle3(EA.Repository rep)
+        {
+            DiagramStyleWrapper(rep, 2);
+        }
+        /// <summary>
+        /// Change Diagram Styles 4 according to Settings.Json 
+        /// </summary>
+        [ServiceOperation("{E363FAAB-ED50-4579-BB19-64A09F209D30}", "Change Diagram to 'Style 4'",
+            "Select Package, Element, Diagram (see Settings.Json, 4. entry)", isTextRequired: false)]
+        public static void DiagramStyle4(EA.Repository rep)
+        {
+            DiagramStyleWrapper(rep, 3);
         }
         /// <summary>
         /// Wrapper to change Diagram style

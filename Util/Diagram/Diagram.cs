@@ -42,7 +42,7 @@ namespace hoTools.Utils.Diagram
         #region Constructor
 
         /// <summary>
-        /// Get the current Diagram with it's selected objects and connectors.
+        /// Get the context Diagram with it's selected objects and connectors.
         /// </summary>
         /// <param name="rep"></param>
         /// <param name="getAllDiagramObject">True if you want all diagram objects if nothing no diagram object is selected</param>

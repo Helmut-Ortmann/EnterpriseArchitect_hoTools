@@ -8,7 +8,7 @@
   //                For Diagram Node/Objects or Links/Connectors you can use EA Layout Styles to define:
   //                - Font, Colors, LineWidth,.. etc.
   //                - see: http://sparxsystems.com/enterprise_architect_user_guide/13.0/user_interface/using_the_style_panel.html 
-  //                "Property": "EaLayoutStyle=ObjStyle2;"
+  //                - "Property": "EaLayoutStyle=ObjStyle2;"
   // Color:         You can use the Integer Value, Hexa Value or simple the colorname 
   'DiagramStyle':
   [
@@ -25,7 +25,7 @@
     {
       "Name":         "Diagr1 (simple, with Notes)",
       "Description":  "Simple:\r\n-Notes\r\n-No Attributes\r\n-No Operations\r\n-Don't show Namespace\r\n- Alias\r\n- Scale diagram to fit one page",
-      "Type":         "Types=Component,Logical; Stereo=ab; Cust=Block;",
+      "Type":         "",
       "PDATA":        "PPgs.cx=1, PPgs.cy=1, ScalePI=1,PSize=1, HideAttr=1, HideOps=1, UseAlias=1",
       "StyleEX":      "ShowNotes=1;",
       "Property":     "ShowForeign=False;Orientation=P;ShowBorder=True;ShowDetails=1;"
@@ -33,7 +33,7 @@
     {
       "Name":         "Diagr2 (elaborate, without Notes)",
       "Description":  "No Attributes, Notes\r\n- Show Namespace\r\n- No Alias",
-      "Type":         "Types=Component,Logical;  Cust=Block;",
+      "Type":         "",
       "PDATA":        "HideAttr=1, HideOps=0, UseAlias=0",
       "StyleEX":      "ShowNotes=0",
       "Property":     "Orientation=P;ShowForeign=True;ShowBorder=False,cx=160,cy=220;ShowDetails=0;"
@@ -94,18 +94,24 @@
     // EA Layout Style  Use EA Layout Styles to define Font, Colors, LineWidth,..
     //                  - see: http://sparxsystems.com/enterprise_architect_user_guide/13.0/user_interface/using_the_style_panel.html
     //                  "Property": "EaLayoutStyle=ObjStyle2;"
+    // CompleteDiagram=Property,valueComplete:valueCompleteDiagram:valueIncompleteDiagram;
+    // Property: BackgroundColor, BorderColor, BorderLineWidth, or FontColor;
+    // valueComplete:         All links are visible
+    // valueCompleteDiagram   All links in Diagram are visible (non diagram links are missing)
+    // valueIncompleteDiagram Links in Diagram are hidden
+    // Example: "CompleteDiagram=BorderColor, Black, Black, Red;"        
 
     {
       "Name":        "Default1, no Notes",
       "Description": "No Notes\r\nNo Attributres",
-      "Type":        "Types=Component, aaa, Class;Stereotypes=a,b",
+      "Type":        "",
       "Style":       "",
       "Property":    "ShowNotes=false;ShowPackageAttributes=False, ShowPrivateAttributes=false, ShowProtectedAttributes=false, ShowPublicAttributes=false" 
     },
     {
       "Name":        "Default2, Notes",
       "Description": "Notes\r\nNo Attributes",
-      "Type":        "Types=Component, aaaa, Class;Stereotypes=a,b",
+      "Type":        "",
       "Style":       "Notes=1000,Formatted=1",
       "Property":    "ShowPackageAttributes=True; ShowPrivateAttributes=false, ShowProtectedAttributes=false, ShowPublicAttributes=false" 
     },
@@ -142,7 +148,7 @@
 
       "Name":        "ObjStyle1",
       "Description": "According to EA ObjStyle1",
-      "Type":        "", 
+      "Type":        "Stereotype=block", 
       "Style":       "",
       "Property":    "EaLayoutStyle=ObjStyle1;"
     },
@@ -151,8 +157,16 @@
       "Name":        "ObjStyle2",
       "Description": "According to EA ObjStyle2",
       "Type":        "", 
-      "Style":       "",
+      "Style":       "Stereotype=block",
       "Property":    "EaLayoutStyle=ObjStyle2;"
+    },
+    {
+
+      "Name":        "CompleteNessMarker",
+      "Description": "Set marker if object links aren't complete",
+      "Type":        "", 
+      "Style":       "",
+      "Property":    "CompleteDiagram=BorderColor: Black: Yellow: Red;"
     }
     
   ],
@@ -178,14 +192,14 @@
       "Description": "All Properties",
       "Type":        "",
       "Style":       "",
-      "Property":    "LineStyle=9, IsHidden=False, LineColor=Chocolate, HiddenLabels=false, LineWidth=2" 
+      "Property":    "LineStyle=9, IsHidden=False, LineColor=Chocolate,  LineWidth=2" 
     },
     {
       "Name":        "Default2",
       "Description": "Test Type (LineStyle)",
-      "Type":        "Types=Association,Dependency;",
+      "Type":        "",
       "Style":       "",
-      "Property":    "LineStyle=5, IsHidden=False, LineColor=DarkMagenta, HiddenLabels=true, LineWidth=3" 
+      "Property":    "LineStyle=5, IsHidden=False, LineColor=DarkMagenta, LineWidth=3" 
     },
     {
       "Name":        "LineStyle+Stereotypes",

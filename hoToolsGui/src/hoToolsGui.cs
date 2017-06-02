@@ -3682,11 +3682,26 @@ namespace hoTools.hoToolsGui
         /// <param name="e"></param>
         private void resetFactorySettingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string filePath = AddinSettings.Reset();
-            MessageBox.Show($@"'User.config' and 'Settings.json' from {Path.GetDirectoryName(filePath)} saved to *.tmp´and deleted.
 
-Please restart EA. During restart hoTools loads the default settings.", 
-                            "Configuration reset to default. Please Restart!");
+            var result = MessageBox.Show(
+                $@"hoTools deletes 'User.config' and 'Settings.json'. After Restart hoTools, you have the initial settings.
+
+You find the saved settings in: '{Path.GetDirectoryName(AddinSettings.CurrentConfig.FilePath)}':
+- User.Config.tmp
+- Settings.Json.tmp
+", "Do you want to reset your configuration?", MessageBoxButtons.OKCancel);
+
+            if (result == DialogResult.OK)
+            {
+                string filePath = AddinSettings.Reset();
+                MessageBox.Show(
+                    $@"'User.config' and 'Settings.json' from {
+                            Path.GetDirectoryName(filePath)
+                        } saved to *.tmp´and deleted.
+
+Please restart EA. During restart hoTools loads the default settings.",
+                    "Configuration reset to default. Please Restart!");
+            }
         }
         
 

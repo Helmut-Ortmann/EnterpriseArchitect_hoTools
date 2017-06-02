@@ -81,7 +81,7 @@ namespace hoTools.Settings
         /// File path of the configuration stored in Roaming (%APPDATA%) of the user
         /// c:\Users\user\AppData\Roaming\ho\hoTools\user.config
         /// </summary>
-        private Configuration CurrentConfig { get; set; }
+        public Configuration CurrentConfig { get; set; }
 
 
 
@@ -1238,13 +1238,13 @@ namespace hoTools.Settings
         {
             // .net standard configuration file
             string filePath = CurrentConfig.FilePath;
-            CurrentConfig.SaveAs($@"{filePath}.tmp");
+            CurrentConfig.SaveAs($@"{filePath}.tmp",ConfigurationSaveMode.Full,forceSaveAll:true);
             File.Delete(filePath);
 
             // Settings.json
             string fileSource = Path.Combine(Path.GetDirectoryName(filePath), "Settings.json");
             string fileTarget = Path.Combine(Path.GetDirectoryName(filePath), "Settings.json.tmp");
-            File.Copy(fileSource, fileTarget);
+            File.Copy(fileSource, fileTarget, true);
             File.Delete(fileSource);
 
             return filePath;
