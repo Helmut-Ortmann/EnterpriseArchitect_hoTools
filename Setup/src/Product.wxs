@@ -22,7 +22,7 @@
   !!!Warning: If you update AssemblyVersion you must update the registration info!!!!!!!!
   // Change AssemblyFileVersion accordingly
   -->
-  <?define ProductVersion="3.0.1" ?> 
+  <?define ProductVersion="3.0.2" ?> 
   <?define UpgradeCode="3543ED18-28F6-484C-AD8C-FA1A3B72C911" ?>
   <?define Manufacturer="hoModeler.de" ?>
   <?define ProductName="hoTools" ?>
