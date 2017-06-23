@@ -14,6 +14,8 @@ using hoTools.Utils.ActionPins;
 using EAAddinFramework.Utils;
 
 using System.Reflection;
+using System.Text.RegularExpressions;
+using EA;
 using hoTools.Find;
 using hoTools.Utils.Configuration;
 using GlobalHotkeys;
@@ -466,6 +468,72 @@ namespace hoTools
             }
         }
         #endregion
+        public override bool EA_OnPostNewElement(EA.Repository rep, EA.EventProperties info)
+        {
+            int elementId;
+            EA.EventProperty eventProperty = info.Get(0);
+            var s = (string)eventProperty.Value;
+            // get element ID
+            if (Int32.TryParse(s, out elementId) == false)
+            {
+                return false;
+            }
+            EA.Element el = rep.GetElementByID(elementId);
+
+            string sql = $@"select top 1 t1.Object_ID
+            from t_object t1
+                where t1.object_Type = 'Requirement' AND t1.stereotype = 'FunctionalRequirement'
+                order by t1.name desc";
+            EA.Collection maxElements = rep.GetElementSet(sql, 2);
+            // set initial value
+            string elName;
+            if (maxElements.Count == 0)
+            {
+                elName = "Req0001";
+            }
+            else
+            {
+                EA.Element el1 = (EA.Element) maxElements.GetAt(0);
+                elName = el1.Name;
+            }
+            string sRegEx = @"(\d)";
+            Regex regex = new Regex(sRegEx);
+            Match match = regex.Match(elName);
+            if (match.Success && match.Groups.Count == 2)
+            {
+                int value; // match.Groups[1].Value;
+
+                if (Int32.TryParse(match.Groups[1].Value, out value) == false)
+                {
+                    return false;
+                }
+                value = value + 1;
+                int length = match.Groups[1].Length;
+                string sValue = value.ToString().PadLeft(length, '0');
+                el.Name = elName.Replace(match.Groups[1].Value, sValue);
+                el.Update();
+
+            }
+
+
+
+            return true;
+        }
+
+        private static bool isValid(string s)
+        {
+            return true;
+        }
+
+        private static int getNumber(string s)
+        {
+            return 0;
+        }
+        private static int setString(string s)
+        {
+            return 0;
+        }
+
         #endregion
         #region EA_ Connect File Open/Close
         #region EA_Connect
