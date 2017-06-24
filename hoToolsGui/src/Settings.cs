@@ -38,6 +38,8 @@ namespace hoTools.Settings
         public string ConfigFilePath { get; }
         public string ConfigFolderPath { get; }
 
+        public string JasonFilePath { get; }
+
         /// <summary>
         /// List of history sql files (recent 20 used sql files)
         /// </summary>
@@ -126,9 +128,27 @@ namespace hoTools.Settings
                 break;
 
             }
-            // remember 
+            // remember Configuration
             ConfigFolderPath = configDirectory + path;
             ConfigFilePath = ConfigFolderPath + configFileName;
+
+            // Handling jason file
+            string jasonFileName = @"Settings.json";
+            // If Settings.json don't exists: Copy delivery Setting.json file to settings folder
+            // ReSharper disable once AssignNullToNotNullAttribute
+            string sourceSettingsPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
+            jasonFileName);
+            string targetSettingsPath = ConfigFolderPath + jasonFileName;
+
+            // Copy delivery Setting.json file to settings folder 
+            if (!File.Exists(targetSettingsPath))
+            {
+                File.Copy(sourceSettingsPath, targetSettingsPath);
+            }
+            JasonFilePath = targetSettingsPath;
+
+
+
 
             // Map the roaming configuration file. This
             // enables the application to access 

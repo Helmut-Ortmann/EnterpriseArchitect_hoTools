@@ -3365,22 +3365,7 @@ namespace hoTools.hoToolsGui
         {
             try
             {
-                // If Settings.json don't exists: Copy delivery Setting.json file to settings folder
-                // ReSharper disable once AssignNullToNotNullAttribute
-                string sourceSettingsPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
-                    JasonFile);
-                string targetSettingsPath = AddinSettings.ConfigFolderPath + "Settings.json";
-
-                // Copy delivery Setting.json file to settings folder 
-                if (!File.Exists(targetSettingsPath))
-                {
-                    File.Copy(sourceSettingsPath, targetSettingsPath);
-                }
-
-                // Add Diagram Style 
-                // ReSharper disable once AssignNullToNotNullAttribute
-                _jasonFilePath = targetSettingsPath;
-                _diagramStyle = new DiagramFormat(_jasonFilePath);
+                _diagramStyle = new DiagramFormat(AddinSettings.JasonFilePath);
                 EaService.DiagramStyle = _diagramStyle;
 
 

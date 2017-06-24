@@ -297,14 +297,17 @@
     {
       "ObjectType": "Requirement",
       "Stereotype": "FunctionalRequirement",
-      "NameRegex": "FREQ(\\d{4})_DUMMY",
-      "AliasRegEx": ""
+      "SqlTopMost": "select top 1 t1.Object_ID from t_object t1 where t1.object_Type = 'Requirement' AND t1.stereotype = 'FunctionalRequirement' AND t.name like 'F_*' AND NOT t.name like 'FunctionalRequirement*' order by t1.name desc",
+      "NumberProxyChar": "0",
+      "NumberStartValue": "1",
+      "FormatString": "F_0.00.0.0"
     },
-    {
-      "ObjectType": "Requirement",
-      "Stereotype": "Functional",
-      "NameRegex": "FREQ([0-9}{4})_DUMMY",
-      "AliasRegEx": ""
+    {"ObjectType": "Risk",
+      "Stereotype": "",
+      "SqlTopMost": "select top 1 t1.Object_ID from t_object t1 where t1.object_Type = 'Risk' AND t1.stereotype = '' AND t.name like 'F_*' AND NOT t.name like 'FunctionalRequirement*' order by t1.name desc",
+      "NumberProxyChar": "0",
+      "NumberStartValue": "1",
+      "FormatString": "Risk:0.00.0.0"
     }
   ]
 }

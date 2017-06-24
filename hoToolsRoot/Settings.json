@@ -292,6 +292,25 @@
       "Style":       "",
       "Property":    "ConnectorColor=green, ConnectorWidth=3"  // default for links 
     }
+  ] ,
+  'AutoIncrement':
+  // Use Regular Expression to define the new value
+  [
+    {
+      "ObjectType": "Requirement",
+      "Stereotype": "FunctionalRequirement",
+      "SqlTopMost": "select top 1 t1.Object_ID from t_object t1 where t1.object_Type = 'Requirement' AND t1.stereotype = 'FunctionalRequirement' AND t.name like 'F_*' AND NOT t.name like 'FunctionalRequirement*' order by t1.name desc",
+      "NumberProxyChar": "0",
+      "NumberStartValue": "1",
+      "FormatString": "F_0.00.0.0"
+    },
+    {"ObjectType": "Risk",
+      "Stereotype": "",
+      "SqlTopMost": "select top 1 t1.Object_ID from t_object t1 where t1.object_Type = 'Risk' AND t1.stereotype = '' AND t.name like 'F_*' AND NOT t.name like 'FunctionalRequirement*' order by t1.name desc",
+      "NumberProxyChar": "0",
+      "NumberStartValue": "1",
+      "FormatString": "Risk:0.00.0.0"
+    }
   ]
 }
 

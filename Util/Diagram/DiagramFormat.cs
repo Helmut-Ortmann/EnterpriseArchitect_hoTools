@@ -7,6 +7,8 @@ using EA;
 using Newtonsoft.Json.Linq;
 using hoTools.Utils.SQL;
 using hoTools.Utils.COM;
+using hoTools.Utils.Json;
+using hoTools.Utils.Names;
 
 // ReSharper disable MemberCanBePrivate.Global
 // ReSharper disable AutoPropertyCanBeMadeGetOnly.Global
@@ -26,6 +28,8 @@ namespace hoTools.Utils.Diagram
         public List<DiagramObjectStyleItem> DiagramObjectStyleItems { get; }
         // Diagram Link Styles
         public List<DiagramLinkStyleItem> DiagramLinkStyleItems { get; }
+
+
 
         /// <summary>
         /// Constructor
@@ -54,47 +58,14 @@ namespace hoTools.Utils.Diagram
             //----------------------------------------------------------------------
             // Deserialize "DiagramStyle", "DiagramObjectStyle",""DiagramLinkStyle"
             // get JSON result objects into a list
-            DiagramStyleItems = (List < DiagramStyleItem > )GetConfigurationStyleItems<DiagramStyleItem>(search, "DiagramStyle");
-            DiagramObjectStyleItems = (List<DiagramObjectStyleItem>)GetConfigurationStyleItems<DiagramObjectStyleItem>(search, "DiagramObjectStyle");
-            DiagramLinkStyleItems = (List<DiagramLinkStyleItem>)GetConfigurationStyleItems<DiagramLinkStyleItem>(search, "DiagramLinkStyle");
-            
+            DiagramStyleItems = (List < DiagramStyleItem > )JasonHelper.GetConfigurationStyleItems<DiagramStyleItem>(search, "DiagramStyle");
+            DiagramObjectStyleItems = (List<DiagramObjectStyleItem>)JasonHelper.GetConfigurationStyleItems<DiagramObjectStyleItem>(search, "DiagramObjectStyle");
+            DiagramLinkStyleItems = (List<DiagramLinkStyleItem>)JasonHelper.GetConfigurationStyleItems<DiagramLinkStyleItem>(search, "DiagramLinkStyle");
+
 
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="type"></param>
-        /// <param name="search"></param>
-        /// <param name="jsonChapter">"DiagramStyle", "DiagramObjectStyle","DiagramLinkStyle"</param>
-        private IList<T> GetConfigurationStyleItems<T>(JObject search, string jsonChapter)
-        {
-            try
-            {
-
-                IList<JToken> results = search[jsonChapter].Children().ToList();
-                
-                // serialize JSON results into .NET objects
-                IList<T> searchResults = new List<T>();
-                foreach (JToken result in results)
-                {
-                    // JToken.ToObject is a helper method that uses JsonSerializer internally
-                    T searchResult = result.ToObject<T>();
-                    if (searchResult == null) continue;
-                    searchResults.Add(searchResult);
-                }
-                return searchResults.ToList();
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show($@"Cant import '{jsonChapter}' from 'Settings.json'
-
-{e}", 
-                                $@"Can't import Diagram Styles '{jsonChapter}'");
-                return null;
-            }
-        }
+        
 
         /// <summary>
         /// Create a ToolStripItem with DropDownitems for each Style (Subtypes of DiagramGeneralStyleItem) .

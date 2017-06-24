@@ -20,6 +20,7 @@ using hoTools.Find;
 using hoTools.Utils.Configuration;
 using GlobalHotkeys;
 using hoTools.Extensions;
+using hoTools.Utils.Names;
 using File = System.IO.File;
 
 #region description
@@ -139,10 +140,10 @@ namespace hoTools
         const string MenuUsage = "Find Usage";
         const string MenuAbout = "About + Help";
 
-        const string MenuDevider = "-----------------------------------------------"; 
+        const string MenuDevider = "-----------------------------------------------";
 
+        private NamesGenerator _nameGenerator;
 
-       
         #region Constructor
         /// <summary>
         /// Constructor: Reade settings, set the menu header and menuOptions
@@ -160,7 +161,11 @@ namespace hoTools
                 _addinSettings = new AddinSettings();
                 _AddinSettings = _addinSettings; // static
 
-               
+                // Initialize the names generator
+                _nameGenerator = new NamesGenerator(_addinSettings.JasonFilePath);
+
+
+
 
             }
             catch (Exception e)
@@ -482,10 +487,14 @@ namespace hoTools
 
             string sql = $@"select top 1 t1.Object_ID
             from t_object t1
-                where t1.object_Type = 'Requirement' AND t1.stereotype = 'FunctionalRequirement'
+                where t1.object_Type = 'Requirement' AND t1.stereotype = 'FunctionalRequirement' AND
+                      t.name like 'REF_*'
+
                 order by t1.name desc";
             EA.Collection maxElements = rep.GetElementSet(sql, 2);
             // set initial value
+
+
             string elName;
             if (maxElements.Count == 0)
             {
@@ -496,6 +505,11 @@ namespace hoTools
                 EA.Element el1 = (EA.Element) maxElements.GetAt(0);
                 elName = el1.Name;
             }
+            //NamesGenerator nameGenerator = new NamesGenerator(elName, "0",0, @"REF_0.00.0_AA");
+
+
+
+
             string sRegEx = @"(\d)";
             Regex regex = new Regex(sRegEx);
             Match match = regex.Match(elName);

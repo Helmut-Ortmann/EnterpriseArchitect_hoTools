@@ -1,64 +1,158 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Collections.Specialized;
+using System.Windows.Forms;
+using hoTools.Utils.Diagram;
+using hoTools.Utils.Json;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace hoTools.Utils.Names
 {
-    public class NamesGenerator
+    public class NamesGeneratorItem
     {
-        private char _numberProxy;
-        private int _startValue;
-        private string _format;
+        private readonly string _objectType;
+        private readonly string _stereotype;
+        private readonly string _sqlTopMost;
 
-        private string _value;
-        public NamesGenerator(string initial)
+        private readonly char _numberProxyChar;
+        private readonly int _numberStartValue;
+        private readonly string _formatString;
+
+        public string ObjectType => _objectType;
+        public string Stereotype => _stereotype;
+        public string SqlTopMost => _sqlTopMost;
+
+        public char NumberProxyChar => _numberProxyChar;
+        public int NumberStartValue => _numberStartValue;
+        public string FormatString => _formatString;
+
+        [JsonConstructor]
+        public NamesGeneratorItem(string objectType, string stereotype, string sqlTopMost, string numberProxyChar, int numberStartValue, string formatString)
         {
-            init(@"0", 0, @"REF_0.00.0_AA", initial);
-
+            _objectType = objectType;
+            _stereotype = stereotype;
+            _sqlTopMost = sqlTopMost;
+            _numberProxyChar = Convert.ToChar(numberProxyChar);
+            _numberStartValue = numberStartValue;
+            _formatString = formatString;
         }
-
-        private void init(string proxy, int start, string format, string initial)
-        {
-            _numberProxy = Convert.ToChar(proxy);
-            _startValue = start;
-            _format = format;
-            _value = initial;
-        }
-
         /// <summary>
         /// Check if value is according to format
         /// </summary>
         /// <returns></returns>
-        private bool isValid()
+        private bool IsValid(string name)
         {
-            bool valid = true;
             int pos = 0;
-            foreach (char c in _format)
+            foreach (char c in _formatString)
             {
-                if (c == _numberProxy)
+                if (c == _numberProxyChar)
                 {
-                    if (! Char.IsNumber(_value[pos] )) return false;
+                    if (!Char.IsNumber(name[pos])) return false;
                 }
                 else
                 {
-                    if (_value[pos] != c) return false;
+                    if (name[pos] != c) return false;
 
                 }
                 pos = pos + 1;
 
             }
-            return valid;
+            return true;
         }
 
-        private int getNumber()
+        /// <summary>
+        /// Get the number according to format from the string value
+        /// </summary>
+        /// <returns></returns>
+        public int GetNumber(string name)
         {
-            return 0;
+            int pos = 0;
+            string sValue = "";
+            foreach (char c in _formatString)
+            {
+                if (c == _numberProxyChar)
+                {
+                    if (Char.IsNumber(name[pos]) && Char.IsNumber(_formatString[pos]))
+                    {
+                        sValue = sValue + name[pos];
+                    }
+                }
+                pos = pos + 1;
+
+            }
+            return Int32.Parse(name);
         }
-        private string getString()
+        /// <summary>
+        /// Get the resulting string from format and from integer value
+        /// </summary>
+        /// <param name="number"></param>
+        /// <returns></returns>
+        public string GetString(int number)
         {
-            return "";
+            int pos = 0;
+            string sValue = "";
+            for (int i = _formatString.Length - 1; i >= 0; i--)
+            {
+                char c = _formatString[pos];
+                if (c == _numberProxyChar)
+                {
+                    int r = number % 10;
+                    sValue = sValue + r;
+                    number = number / 10;
+                }
+                else
+                {
+                    sValue = sValue + c;
+                }
+
+            }
+
+
+            return sValue;
         }
+
+
+    }
+
+    public class NamesGenerator
+    {
+        // AutoIncrement counter
+        public List<NamesGeneratorItem> NameGeneratorItems { get; }
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="jasonFilePath"></param>
+
+        public NamesGenerator(string jasonFilePath)
+        {
+
+            // use 'Deserializing Partial JSON Fragments'
+            JObject search;
+            try
+            {
+                // Read JSON
+                string text = System.IO.File.ReadAllText(jasonFilePath);
+                search = JObject.Parse(text);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($@"Can't read '{jasonFilePath}'
+
+{e}", "Can't import Auto Increment settings from Settings.json. ");
+                return;
+            }
+
+            //----------------------------------------------------------------------
+            // Deserialize "AutoIncrement"
+            // get JSON result objects into a list
+
+            NameGeneratorItems = (List<NamesGeneratorItem>)JasonHelper.GetConfigurationStyleItems<NamesGeneratorItem>(search, "AutoIncrement");
+
+
+        }
+
+
     }
 }
