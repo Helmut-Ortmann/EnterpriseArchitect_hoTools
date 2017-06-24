@@ -51,8 +51,6 @@ namespace hoTools.hoToolsGui
         // configuration as singleton
         readonly HoToolsGlobalCfg _globalCfg = HoToolsGlobalCfg.Instance;
 
-        private const string JasonFile = @"Settings.json";
-        private string _jasonFilePath;
         private DiagramFormat _diagramStyle;
 
         // Do Menu entries already inserted
@@ -226,6 +224,7 @@ namespace hoTools.hoToolsGui
         private ToolStripButton _toolStripServiceBtn8;
         private ToolStripButton _toolStripServiceBtn9;
         private ToolStripButton _toolStripServiceBtn10;
+        private ToolStripMenuItem settingsDiagramStylesToolStripMenuItemDekivery;
         private TextBox _txtSearchText;
         #endregion
 
@@ -1336,6 +1335,7 @@ namespace hoTools.hoToolsGui
             this._panelQuickSearch = new System.Windows.Forms.TableLayoutPanel();
             this._toolTipRtfListOfSearches = new System.Windows.Forms.ToolTip(this.components);
             this._panelConveyedItems = new System.Windows.Forms.Panel();
+            this.settingsDiagramStylesToolStripMenuItemDekivery = new System.Windows.Forms.ToolStripMenuItem();
             this._toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this._toolStripContainer1.SuspendLayout();
             this._toolStripQuery.SuspendLayout();
@@ -2034,6 +2034,7 @@ namespace hoTools.hoToolsGui
             this._settingsQueryAndSctipToolStripMenuItem,
             this.toolStripSeparator12,
             this.settingsDiagramStylesToolStripMenuItem,
+            this.settingsDiagramStylesToolStripMenuItemDekivery,
             this.toolStripSeparator11,
             this._updateScriptsToolStripMenuItem,
             this.toolStripSeparator10,
@@ -2598,6 +2599,12 @@ namespace hoTools.hoToolsGui
             this._panelConveyedItems.Controls.Add(this._btnConveyedItem);
             resources.ApplyResources(this._panelConveyedItems, "_panelConveyedItems");
             this._panelConveyedItems.Name = "_panelConveyedItems";
+            // 
+            // settingsDiagramStylesToolStripMenuItemDekivery
+            // 
+            this.settingsDiagramStylesToolStripMenuItemDekivery.Name = "settingsDiagramStylesToolStripMenuItemDekivery";
+            resources.ApplyResources(this.settingsDiagramStylesToolStripMenuItemDekivery, "settingsDiagramStylesToolStripMenuItemDekivery");
+            this.settingsDiagramStylesToolStripMenuItemDekivery.Click += new System.EventHandler(this.settingsDiagramStylesToolStripMenuItemDelivery_Click);
             // 
             // HoToolsGui
             // 
@@ -3433,7 +3440,7 @@ namespace hoTools.hoToolsGui
             }
             catch (Exception e1)
             {
-                MessageBox.Show($@"'{_jasonFilePath}'
+                MessageBox.Show($@"'{AddinSettings.JasonFilePath}'
 
 {e1}", "Error loading 'Settings.json'");
             }
@@ -3655,9 +3662,12 @@ namespace hoTools.hoToolsGui
 
         private void settingsDiagramStylesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Util.StartFile(_jasonFilePath);
+            Util.StartFile(AddinSettings.JasonFilePath);
         }
-
+        private void settingsDiagramStylesToolStripMenuItemDelivery_Click(object sender, EventArgs e)
+        {
+            Util.StartFile(AddinSettings.JasonFilePath);
+        }
 
         /// <summary>
         /// Copy configuration files 'User.config' and 'Settings.json' to *.tmp. Then delete them.

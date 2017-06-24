@@ -81,7 +81,7 @@ namespace hoTools.Utils.Names
                 pos = pos + 1;
 
             }
-            return Int32.Parse(name);
+            return Int32.Parse(sValue);
         }
         /// <summary>
         /// Get the resulting string from format and from integer value
@@ -94,16 +94,16 @@ namespace hoTools.Utils.Names
             string sValue = "";
             for (int i = _formatString.Length - 1; i >= 0; i--)
             {
-                char c = _formatString[pos];
+                char c = _formatString[i];
                 if (c == _numberProxyChar)
                 {
                     int r = number % 10;
-                    sValue = sValue + r;
+                    sValue = r + sValue;
                     number = number / 10;
                 }
                 else
                 {
-                    sValue = sValue + c;
+                    sValue = c + sValue;
                 }
 
             }

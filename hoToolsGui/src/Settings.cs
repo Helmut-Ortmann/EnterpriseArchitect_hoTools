@@ -39,6 +39,7 @@ namespace hoTools.Settings
         public string ConfigFolderPath { get; }
 
         public string JasonFilePath { get; }
+        public string JasonFilePathDelivery { get; }
 
         /// <summary>
         /// List of history sql files (recent 20 used sql files)
@@ -146,6 +147,7 @@ namespace hoTools.Settings
                 File.Copy(sourceSettingsPath, targetSettingsPath);
             }
             JasonFilePath = targetSettingsPath;
+            JasonFilePathDelivery = sourceSettingsPath;
 
 
 
