@@ -118,6 +118,10 @@ Some features:
 
 
 # Releases
+## Release 3.0.2
+- Error fixing Find & Replace (Some buttons weren't visible')
+- Code HyperScripting without/own get Model added (Example for own replacemenent of GetObject(,"EA.App"))
+
 ## Release 3.0.1
 - Error fix Diagram selection handling (LineStyle and more)
 - Error fix non recursive change for package
@@ -140,7 +144,7 @@ One Click and:
 - Code refactoring
 
 ## Release 2.1.6
-- Diagram Styles, configurable via 'Settings.jason'
+- Diagram Styles, configurable via 'Settings.json'
 - Hybrid Scripting for *.exe (Using C#, Java,.. instead of VB Script & co), Example
 - Hybrid Scripting for *.dll (Using C# dll,.. instead of VB Script & co), Example
 - Service Added: Copy Name to Clipboard

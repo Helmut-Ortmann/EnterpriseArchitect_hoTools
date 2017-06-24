@@ -90,10 +90,10 @@
             // 
             // btnFindNext
             // 
-            this.btnFindNext.Location = new System.Drawing.Point(28, 274);
+            this.btnFindNext.Location = new System.Drawing.Point(10, 315);
             this.btnFindNext.Margin = new System.Windows.Forms.Padding(2);
             this.btnFindNext.Name = "btnFindNext";
-            this.btnFindNext.Size = new System.Drawing.Size(40, 0);
+            this.btnFindNext.Size = new System.Drawing.Size(69, 24);
             this.btnFindNext.TabIndex = 2;
             this.btnFindNext.Text = "Next";
             this.toolTip1.SetToolTip(this.btnFindNext, "Find next item like:\r\n- Package\r\n- Element\r\n- Duiagram\r\n- Attribute\r\n- Operation");
@@ -102,10 +102,10 @@
             // 
             // btnReplace
             // 
-            this.btnReplace.Location = new System.Drawing.Point(184, 274);
+            this.btnReplace.Location = new System.Drawing.Point(169, 315);
             this.btnReplace.Margin = new System.Windows.Forms.Padding(2);
             this.btnReplace.Name = "btnReplace";
-            this.btnReplace.Size = new System.Drawing.Size(56, 0);
+            this.btnReplace.Size = new System.Drawing.Size(69, 24);
             this.btnReplace.TabIndex = 3;
             this.btnReplace.Text = "Replace";
             this.toolTip1.SetToolTip(this.btnReplace, "Replace \"Find string\" by \"Replace string\" in selected item like:\r\n- Package\r\n- El" +
@@ -116,10 +116,10 @@
             // 
             // btnReplaceAll
             // 
-            this.btnReplaceAll.Location = new System.Drawing.Point(271, 274);
+            this.btnReplaceAll.Location = new System.Drawing.Point(242, 315);
             this.btnReplaceAll.Margin = new System.Windows.Forms.Padding(2);
             this.btnReplaceAll.Name = "btnReplaceAll";
-            this.btnReplaceAll.Size = new System.Drawing.Size(74, 0);
+            this.btnReplaceAll.Size = new System.Drawing.Size(69, 24);
             this.btnReplaceAll.TabIndex = 4;
             this.btnReplaceAll.Text = "Replace all";
             this.toolTip1.SetToolTip(this.btnReplaceAll, "Replace all \"Find string\" by \"Replace string\" in all found items like:\r\n- Package" +
@@ -129,10 +129,10 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(374, 275);
+            this.btnCancel.Location = new System.Drawing.Point(391, 315);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(2);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(56, 0);
+            this.btnCancel.Size = new System.Drawing.Size(69, 24);
             this.btnCancel.TabIndex = 5;
             this.btnCancel.Text = "Cancel";
             this.toolTip1.SetToolTip(this.btnCancel, "Cancel the current Find operation to start a new one.");
@@ -185,7 +185,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(475, 25);
+            this.menuStrip1.Size = new System.Drawing.Size(483, 25);
             this.menuStrip1.TabIndex = 10;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -231,10 +231,10 @@
             // 
             // btnFindPrevious
             // 
-            this.btnFindPrevious.Location = new System.Drawing.Point(98, 274);
+            this.btnFindPrevious.Location = new System.Drawing.Point(83, 315);
             this.btnFindPrevious.Margin = new System.Windows.Forms.Padding(2);
             this.btnFindPrevious.Name = "btnFindPrevious";
-            this.btnFindPrevious.Size = new System.Drawing.Size(57, 0);
+            this.btnFindPrevious.Size = new System.Drawing.Size(69, 24);
             this.btnFindPrevious.TabIndex = 24;
             this.btnFindPrevious.Text = "Previous";
             this.toolTip1.SetToolTip(this.btnFindPrevious, "Find previous item like:\r\n- Package\r\n- Element\r\n- Duiagram\r\n- Attribute\r\n- Operat" +
@@ -516,7 +516,7 @@
             this.Controls.Add(this.Filter);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "FindAndReplaceGUI";
-            this.Size = new System.Drawing.Size(475, 310);
+            this.Size = new System.Drawing.Size(483, 343);
             this.toolTip1.SetToolTip(this, "Show details and allow changes");
             this.Load += new System.EventHandler(this.FindAndReplaceGUI_Load);
             this.menuStrip1.ResumeLayout(false);
