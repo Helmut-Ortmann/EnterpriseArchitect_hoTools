@@ -476,43 +476,10 @@ namespace hoTools
 
         public override bool EA_OnPreNewElement(EA.Repository rep, EA.EventProperties info)
         {
+            // to suppress EA Dialog after change
             rep.SuppressEADialogs = true;
 
             return true;
-            //int elementId;
-            //EA.EventProperty eventProperty = info.Get(0);
-            //var s = (string)eventProperty.Value;
-            //// get element ID
-            //if (Int32.TryParse(s, out elementId) == false)
-            //{
-            //    return false;
-            //}
-            //EA.Element el = rep.GetElementByID(elementId);
-            //// Find the correct AutoIncrement configuration
-            //foreach (NamesGeneratorItem item in _nameGenerator.NameGeneratorItems)
-            //{
-            //    if (item.ObjectType == el.Type && item.Stereotype == el.Stereotype)
-            //    {
-            //        EA.Collection maxElement = rep.GetElementSet(item.SqlTopMost, 2);
-            //        // no old element found
-            //        if (maxElement.Count == 0)
-            //        {
-            //            el.Name = item.GetString(item.NumberStartValue);
-            //        }
-            //        else
-            //        {
-
-            //            // update to max value
-            //            EA.Element el1 = (EA.Element)maxElement.GetAt(0);
-            //            int highValue = item.GetNumber(el1.Name);
-            //            el.Name = item.GetString(highValue + 1);
-
-            //        }
-            //        el.Update();
-            //        return true;
-            //    }
-            //}
-            //return false;
         }
 
         /// <summary>
@@ -552,8 +519,9 @@ namespace hoTools
                         el.Name = item.GetString(highValue + 1);
                         
                     }
-                    rep.SuppressEADialogs = true;
                     el.Update();
+                    // Enable EA Property Dialog
+                    rep.SuppressEADialogs = false;
                     return true;
                 }
             }

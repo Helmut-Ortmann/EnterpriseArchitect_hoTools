@@ -6,7 +6,7 @@ using EA;
 namespace HybridScriptingDll
 {
     /// <summary>
-    /// Example of a c# Hybrid Script Server 
+    /// Example of a C# Hybrid Script Server (it also works with EA before 13., you only need SparxSystems.Repository.dll)
     /// - Assessable by EA Scripting
     /// 
     /// Procedure to use (example vb script):
@@ -25,6 +25,11 @@ namespace HybridScriptingDll
     /// - HybridScriptingDll.dll
     /// - Interop.EA.dll
     /// - SparxSystems.Repository.dll
+    /// 
+    /// Requirements: 'Needs: SparxSystems.Repository.dll' as reference
+    /// SparxSystems.Repository.dll gets a connection to the EA instance according to passed process id
+    /// It gets the EA.App object from the EA instance according to the passed process id. After doing so you have full access to API.
+    /// 
     /// </summary>
     [ComVisible(true)]
     [Guid("15A3C485-6A97-4785-A74C-567B0B3EE7E7")]

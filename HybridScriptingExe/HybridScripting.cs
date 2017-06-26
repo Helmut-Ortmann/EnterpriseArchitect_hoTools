@@ -3,6 +3,13 @@ using System;
 // ReSharper disable once CheckNamespace
 namespace hoHybridScript
 {
+    /// <summary>
+    /// It also works with EA before 13., you only need SparxSystems.Repository.dll
+    /// 
+    /// Requirements: 'Needs: SparxSystems.Repository.dll' as reference
+    /// SparxSystems.Repository.dll gets a connection to the EA instance according to passed process id
+    /// It gets the EA.App object from the EA instance according to the passed process id. After doing so you have full access to API.
+    /// </summary>
     class HybridScript
     {
         private readonly EA.Repository _repository;

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.6
+VisualStudioVersion = 15.0.26430.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "hoToolsRoot", "hoToolsRoot\hoToolsRoot.csproj", "{6D5DEEEF-0897-4494-9857-5BEE2BF0D0AF}"
 	ProjectSection(ProjectDependencies) = postProject
