@@ -225,6 +225,8 @@ namespace hoTools.hoToolsGui
         private ToolStripButton _toolStripServiceBtn9;
         private ToolStripButton _toolStripServiceBtn10;
         private ToolStripMenuItem settingsDiagramStylesToolStripMenuItemDekivery;
+        private ToolStripSeparator toolStripSeparator13;
+        private ToolStripMenuItem applyAllAutoCounterToolStripMenuItem;
         private TextBox _txtSearchText;
         #endregion
 
@@ -1260,6 +1262,7 @@ namespace hoTools.hoToolsGui
             this._settingsQueryAndSctipToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
             this.settingsDiagramStylesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.settingsDiagramStylesToolStripMenuItemDekivery = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
             this._updateScriptsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
@@ -1335,7 +1338,8 @@ namespace hoTools.hoToolsGui
             this._panelQuickSearch = new System.Windows.Forms.TableLayoutPanel();
             this._toolTipRtfListOfSearches = new System.Windows.Forms.ToolTip(this.components);
             this._panelConveyedItems = new System.Windows.Forms.Panel();
-            this.settingsDiagramStylesToolStripMenuItemDekivery = new System.Windows.Forms.ToolStripMenuItem();
+            this.applyAllAutoCounterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
             this._toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this._toolStripContainer1.SuspendLayout();
             this._toolStripQuery.SuspendLayout();
@@ -2083,6 +2087,12 @@ namespace hoTools.hoToolsGui
             resources.ApplyResources(this.settingsDiagramStylesToolStripMenuItem, "settingsDiagramStylesToolStripMenuItem");
             this.settingsDiagramStylesToolStripMenuItem.Click += new System.EventHandler(this.settingsDiagramStylesToolStripMenuItem_Click);
             // 
+            // settingsDiagramStylesToolStripMenuItemDekivery
+            // 
+            this.settingsDiagramStylesToolStripMenuItemDekivery.Name = "settingsDiagramStylesToolStripMenuItemDekivery";
+            resources.ApplyResources(this.settingsDiagramStylesToolStripMenuItemDekivery, "settingsDiagramStylesToolStripMenuItemDekivery");
+            this.settingsDiagramStylesToolStripMenuItemDekivery.Click += new System.EventHandler(this.settingsDiagramStylesToolStripMenuItemDelivery_Click);
+            // 
             // toolStripSeparator11
             // 
             this.toolStripSeparator11.Name = "toolStripSeparator11";
@@ -2121,7 +2131,9 @@ namespace hoTools.hoToolsGui
             this._toolStripSeparator1,
             this.changeAuthorPackagestandardToolStripMenuItem,
             this._changeAuthorRecursiveToolStripMenuItem,
-            this._changeAuthorToolStripMenuItem});
+            this._changeAuthorToolStripMenuItem,
+            this.toolStripSeparator13,
+            this.applyAllAutoCounterToolStripMenuItem});
             this._doToolStripMenuItem.Name = "_doToolStripMenuItem";
             resources.ApplyResources(this._doToolStripMenuItem, "_doToolStripMenuItem");
             // 
@@ -2600,11 +2612,16 @@ namespace hoTools.hoToolsGui
             resources.ApplyResources(this._panelConveyedItems, "_panelConveyedItems");
             this._panelConveyedItems.Name = "_panelConveyedItems";
             // 
-            // settingsDiagramStylesToolStripMenuItemDekivery
+            // applyAllAutoCounterToolStripMenuItem
             // 
-            this.settingsDiagramStylesToolStripMenuItemDekivery.Name = "settingsDiagramStylesToolStripMenuItemDekivery";
-            resources.ApplyResources(this.settingsDiagramStylesToolStripMenuItemDekivery, "settingsDiagramStylesToolStripMenuItemDekivery");
-            this.settingsDiagramStylesToolStripMenuItemDekivery.Click += new System.EventHandler(this.settingsDiagramStylesToolStripMenuItemDelivery_Click);
+            this.applyAllAutoCounterToolStripMenuItem.Name = "applyAllAutoCounterToolStripMenuItem";
+            resources.ApplyResources(this.applyAllAutoCounterToolStripMenuItem, "applyAllAutoCounterToolStripMenuItem");
+            this.applyAllAutoCounterToolStripMenuItem.Click += new System.EventHandler(this.applyAllAutoCounterToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator13
+            // 
+            this.toolStripSeparator13.Name = "toolStripSeparator13";
+            resources.ApplyResources(this.toolStripSeparator13, "toolStripSeparator13");
             // 
             // HoToolsGui
             // 
@@ -3698,10 +3715,11 @@ Please restart EA. During restart hoTools loads the default settings.",
                     "Configuration reset to default. Please Restart!");
             }
         }
-        
 
+        private void applyAllAutoCounterToolStripMenuItem_Click(object sender, EventArgs e)
+        {
 
-        
+        }
     }
 
 

@@ -162,7 +162,7 @@ namespace hoTools
                 _AddinSettings = _addinSettings; // static
 
                 // Initialize the names generator
-                _nameGenerator = new NamesGenerator(_addinSettings.JasonFilePath);
+                _nameGenerator = new NamesGenerator(_repository, _addinSettings.JasonFilePath);
 
 
 

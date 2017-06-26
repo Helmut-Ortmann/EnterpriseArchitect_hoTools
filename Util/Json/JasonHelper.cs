@@ -38,10 +38,14 @@ namespace hoTools.Utils.Json
                 MessageBox.Show($@"Cant import '{jsonChapter}' from 'Settings.json'
 
 {e}
-A chapter in Settings.JSON is missing!
-Consider resetting to Factory Settings. File, .....
+The chapter '{jsonChapter}' in Settings.json is missing!
+Consider:
+- resetting to Factory Settings. File, .....
+- compare your Settings.JSON with delivered/factory settings
+-- Settings.json 'Diagram Styles && more' (current)
+-- Settings.json 'Diagram Styles && more' (delivery)
 ",
-                    $@"Can't import JSON Chapter '{jsonChapter}'");
+                    $@"Can't import JSON Chapter '{jsonChapter}' in Settings.json");
                 return null;
             }
         }

@@ -119,14 +119,18 @@ namespace hoTools.Utils.Names
     {
         // AutoIncrement counter
         public List<NamesGeneratorItem> NameGeneratorItems { get; }
+        private EA.Repository _rep;
+        private string _jasonFilePath;
 
         /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="jasonFilePath"></param>
 
-        public NamesGenerator(string jasonFilePath)
+        public NamesGenerator(EA.Repository rep, string jasonFilePath)
         {
+            _rep = rep;
+            _jasonFilePath = jasonFilePath;
 
             // use 'Deserializing Partial JSON Fragments'
             JObject search;
@@ -151,6 +155,50 @@ namespace hoTools.Utils.Names
             NameGeneratorItems = (List<NamesGeneratorItem>)JasonHelper.GetConfigurationStyleItems<NamesGeneratorItem>(search, "AutoIncrement");
 
 
+        }
+        /// <summary>
+        /// Gets the current high number for the item
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        public int GetMost(NamesGeneratorItem item)
+        {
+            int highNumber = -1;
+            EA.Collection maxElement = _rep.GetElementSet(item.SqlTopMost, 2);
+            // no old element found
+            if (maxElement.Count == 0)
+            {
+                highNumber = item.NumberStartValue;
+            }
+            else
+            {
+
+                // update to max value
+                EA.Element el1 = (EA.Element)maxElement.GetAt(0);
+                highNumber =  item.GetNumber(el1.Name) + 1;
+
+            }
+            return highNumber;
+        }
+
+        /// <summary>
+        /// Apply the naming conventions for all elements
+        /// </summary>
+        public void ApplyAll()
+        {
+            foreach (NamesGeneratorItem item in NameGeneratorItems)
+            {
+                string sql = $@"select t1.Object_ID 
+from t_object t1 
+where t1.object_Type = '{item.ObjectType}' AND 
+      t1.stereotype  = '{item.Stereotype}' order by t1.CreatedDate";
+                EA.Collection elements = _rep.GetElementSet(item.SqlTopMost, 2);
+                foreach (EA.Element el in elements)
+                {
+
+                }
+
+            }
         }
 
 
