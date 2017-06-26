@@ -157,11 +157,11 @@ namespace hoTools.Utils.Names
 
         }
         /// <summary>
-        /// Gets the current high number for the item
+        /// Gets the next high number for the item
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
-        public int GetMost(NamesGeneratorItem item)
+        public int GetNextMost(NamesGeneratorItem item)
         {
             int highNumber = -1;
             EA.Collection maxElement = _rep.GetElementSet(item.SqlTopMost, 2);
@@ -188,11 +188,14 @@ namespace hoTools.Utils.Names
         {
             foreach (NamesGeneratorItem item in NameGeneratorItems)
             {
+                // get high number
+                int highNumber = GetNextMost(item);
+
                 string sql = $@"select t1.Object_ID 
 from t_object t1 
 where t1.object_Type = '{item.ObjectType}' AND 
       t1.stereotype  = '{item.Stereotype}' order by t1.CreatedDate";
-                EA.Collection elements = _rep.GetElementSet(item.SqlTopMost, 2);
+                EA.Collection elements = _rep.GetElementSet(sql,2);
                 foreach (EA.Element el in elements)
                 {
 

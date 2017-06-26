@@ -192,51 +192,6 @@
   <data name="_toolStripQuery.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>None</value>
   </data>
-  <data name="_toolStripQuery.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 0</value>
-  </data>
-  <data name="_toolStripQuery.Size" type="System.Drawing.Size, System.Drawing">
-    <value>384, 27</value>
-  </data>
-  <data name="_toolStripQuery.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;_toolStripQuery.Name" xml:space="preserve">
-    <value>_toolStripQuery</value>
-  </data>
-  <data name="&gt;&gt;_toolStripQuery.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;_toolStripQuery.Parent" xml:space="preserve">
-    <value>_toolStripContainer1.TopToolStripPanel</value>
-  </data>
-  <data name="&gt;&gt;_toolStripQuery.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;_toolStripContainer1.TopToolStripPanel.Name" xml:space="preserve">
-    <value>_toolStripContainer1.TopToolStripPanel</value>
-  </data>
-  <data name="&gt;&gt;_toolStripContainer1.TopToolStripPanel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;_toolStripContainer1.TopToolStripPanel.Parent" xml:space="preserve">
-    <value>_toolStripContainer1</value>
-  </data>
-  <data name="&gt;&gt;_toolStripContainer1.TopToolStripPanel.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;_toolStripContainer1.Name" xml:space="preserve">
-    <value>_toolStripContainer1</value>
-  </data>
-  <data name="&gt;&gt;_toolStripContainer1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripContainer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;_toolStripContainer1.Parent" xml:space="preserve">
-    <value>_panelButtons</value>
-  </data>
-  <data name="&gt;&gt;_toolStripContainer1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="_toolStripSearchBtn1.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
     <value>Magenta</value>
   </data>
@@ -432,14 +387,121 @@
   <data name="_toolStripServiceBtn10.Text" xml:space="preserve">
     <value>10</value>
   </data>
+  <data name="_toolStripQuery.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 0</value>
+  </data>
+  <data name="_toolStripQuery.Size" type="System.Drawing.Size, System.Drawing">
+    <value>384, 27</value>
+  </data>
+  <data name="_toolStripQuery.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;_toolStripQuery.Name" xml:space="preserve">
+    <value>_toolStripQuery</value>
+  </data>
+  <data name="&gt;&gt;_toolStripQuery.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;_toolStripQuery.Parent" xml:space="preserve">
+    <value>_toolStripContainer1.TopToolStripPanel</value>
+  </data>
+  <data name="&gt;&gt;_toolStripQuery.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;_toolStripContainer1.TopToolStripPanel.Name" xml:space="preserve">
+    <value>_toolStripContainer1.TopToolStripPanel</value>
+  </data>
+  <data name="&gt;&gt;_toolStripContainer1.TopToolStripPanel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;_toolStripContainer1.TopToolStripPanel.Parent" xml:space="preserve">
+    <value>_toolStripContainer1</value>
+  </data>
+  <data name="&gt;&gt;_toolStripContainer1.TopToolStripPanel.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;_toolStripContainer1.Name" xml:space="preserve">
+    <value>_toolStripContainer1</value>
+  </data>
+  <data name="&gt;&gt;_toolStripContainer1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripContainer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;_toolStripContainer1.Parent" xml:space="preserve">
+    <value>_panelButtons</value>
+  </data>
+  <data name="&gt;&gt;_toolStripContainer1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <metadata name="_toolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>339, 17</value>
   </metadata>
   <metadata name="_contextMenuStripSearch.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>693, 17</value>
   </metadata>
+  <data name="editSQLSearchToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>317, 26</value>
+  </data>
+  <data name="editSQLSearchToolStripMenuItem.Text" xml:space="preserve">
+    <value>Edit SQL</value>
+  </data>
+  <data name="editSQLSearchToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Edit hoTools SQL Script file in your Editor.
+
+hoTools starts the application which is associated to "*.sql".</value>
+  </data>
+  <data name="showFolderToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>317, 26</value>
+  </data>
+  <data name="showFolderToolStripMenuItem.Text" xml:space="preserve">
+    <value>Show SQL Folder</value>
+  </data>
+  <data name="showFolderToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Show SQL folder of hoTools SQL Script file (*.sql)</value>
+  </data>
+  <data name="showSQLPathToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>317, 26</value>
+  </data>
+  <data name="showSQLPathToolStripMenuItem.Text" xml:space="preserve">
+    <value>Show SQL Path</value>
+  </data>
+  <data name="showSQLPathToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Show the SQL path where hoTools seaches for possible SQL Scripts.
+
+You can set SQL path:
+- File, Setting SQL and Script</value>
+  </data>
+  <data name="toolStripSeparator4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>314, 6</value>
+  </data>
+  <data name="runQueryToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>317, 26</value>
+  </data>
+  <data name="runQueryToolStripMenuItem.Text" xml:space="preserve">
+    <value>Run</value>
+  </data>
+  <data name="runSQLAndExportToExcelToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>317, 26</value>
+  </data>
+  <data name="runSQLAndExportToExcelToolStripMenuItem.Text" xml:space="preserve">
+    <value>Run and export SQL results to Excel</value>
+  </data>
+  <data name="runSQLAndExportToExcelToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Execute SQL Query and export results to Excel (*.xlsx). 
+The &lt;Search Name&gt; has to contain a valid SQL Query. 
+
+No Excel is required.</value>
+  </data>
+  <data name="toolStripSeparator5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>314, 6</value>
+  </data>
+  <data name="clipboardTocsvToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>317, 26</value>
+  </data>
+  <data name="clipboardTocsvToolStripMenuItem.Text" xml:space="preserve">
+    <value>Export csv of Clipboard to Excel</value>
+  </data>
   <data name="_contextMenuStripSearch.Size" type="System.Drawing.Size, System.Drawing">
-    <value>312, 160</value>
+    <value>318, 172</value>
   </data>
   <data name="_contextMenuStripSearch.ToolTip" xml:space="preserve">
     <value>Export the Clipboard content as csv to Excel</value>
@@ -495,68 +557,6 @@ e.g.: 'myString*' Everything starting with 'myString' (db independent)
   </data>
   <data name="&gt;&gt;_txtSearchText.ZOrder" xml:space="preserve">
     <value>1</value>
-  </data>
-  <data name="editSQLSearchToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>311, 24</value>
-  </data>
-  <data name="editSQLSearchToolStripMenuItem.Text" xml:space="preserve">
-    <value>Edit SQL</value>
-  </data>
-  <data name="editSQLSearchToolStripMenuItem.ToolTipText" xml:space="preserve">
-    <value>Edit hoTools SQL Script file in your Editor.
-
-hoTools starts the application which is associated to "*.sql".</value>
-  </data>
-  <data name="showFolderToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>311, 24</value>
-  </data>
-  <data name="showFolderToolStripMenuItem.Text" xml:space="preserve">
-    <value>Show SQL Folder</value>
-  </data>
-  <data name="showFolderToolStripMenuItem.ToolTipText" xml:space="preserve">
-    <value>Show SQL folder of hoTools SQL Script file (*.sql)</value>
-  </data>
-  <data name="showSQLPathToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>311, 24</value>
-  </data>
-  <data name="showSQLPathToolStripMenuItem.Text" xml:space="preserve">
-    <value>Show SQL Path</value>
-  </data>
-  <data name="showSQLPathToolStripMenuItem.ToolTipText" xml:space="preserve">
-    <value>Show the SQL path where hoTools seaches for possible SQL Scripts.
-
-You can set SQL path:
-- File, Setting SQL and Script</value>
-  </data>
-  <data name="toolStripSeparator4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>308, 6</value>
-  </data>
-  <data name="runQueryToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>311, 24</value>
-  </data>
-  <data name="runQueryToolStripMenuItem.Text" xml:space="preserve">
-    <value>Run</value>
-  </data>
-  <data name="runSQLAndExportToExcelToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>311, 24</value>
-  </data>
-  <data name="runSQLAndExportToExcelToolStripMenuItem.Text" xml:space="preserve">
-    <value>Run and export SQL results to Excel</value>
-  </data>
-  <data name="runSQLAndExportToExcelToolStripMenuItem.ToolTipText" xml:space="preserve">
-    <value>Execute SQL Query and export results to Excel (*.xlsx). 
-The &lt;Search Name&gt; has to contain a valid SQL Query. 
-
-No Excel is required.</value>
-  </data>
-  <data name="toolStripSeparator5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>308, 6</value>
-  </data>
-  <data name="clipboardTocsvToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>311, 24</value>
-  </data>
-  <data name="clipboardTocsvToolStripMenuItem.Text" xml:space="preserve">
-    <value>Export csv of Clipboard to Excel</value>
   </data>
   <data name="_btnLabelRight.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 9.75pt</value>
@@ -1464,110 +1464,6 @@ Procedure:
   <data name="&gt;&gt;_btnConveyedItem.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="&gt;&gt;_btnHidePortType.Name" xml:space="preserve">
-    <value>_btnHidePortType</value>
-  </data>
-  <data name="&gt;&gt;_btnHidePortType.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;_btnHidePortType.Parent" xml:space="preserve">
-    <value>_panelPortButtons</value>
-  </data>
-  <data name="&gt;&gt;_btnHidePortType.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;_btnShowPortType.Name" xml:space="preserve">
-    <value>_btnShowPortType</value>
-  </data>
-  <data name="&gt;&gt;_btnShowPortType.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;_btnShowPortType.Parent" xml:space="preserve">
-    <value>_panelPortButtons</value>
-  </data>
-  <data name="&gt;&gt;_btnShowPortType.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;_btnShowPortLabel.Name" xml:space="preserve">
-    <value>_btnShowPortLabel</value>
-  </data>
-  <data name="&gt;&gt;_btnShowPortLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;_btnShowPortLabel.Parent" xml:space="preserve">
-    <value>_panelPortButtons</value>
-  </data>
-  <data name="&gt;&gt;_btnShowPortLabel.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;_btnHidePortLabel.Name" xml:space="preserve">
-    <value>_btnHidePortLabel</value>
-  </data>
-  <data name="&gt;&gt;_btnHidePortLabel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;_btnHidePortLabel.Parent" xml:space="preserve">
-    <value>_panelPortButtons</value>
-  </data>
-  <data name="&gt;&gt;_btnHidePortLabel.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;_btnHidePort.Name" xml:space="preserve">
-    <value>_btnHidePort</value>
-  </data>
-  <data name="&gt;&gt;_btnHidePort.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;_btnHidePort.Parent" xml:space="preserve">
-    <value>_panelPortButtons</value>
-  </data>
-  <data name="&gt;&gt;_btnHidePort.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;_btnShowPort.Name" xml:space="preserve">
-    <value>_btnShowPort</value>
-  </data>
-  <data name="&gt;&gt;_btnShowPort.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;_btnShowPort.Parent" xml:space="preserve">
-    <value>_panelPortButtons</value>
-  </data>
-  <data name="&gt;&gt;_btnShowPort.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="_panelPortButtons.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Top</value>
-  </data>
-  <data name="_panelPortButtons.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 130</value>
-  </data>
-  <data name="_panelPortButtons.Size" type="System.Drawing.Size, System.Drawing">
-    <value>461, 25</value>
-  </data>
-  <data name="_panelPortButtons.TabIndex" type="System.Int32, mscorlib">
-    <value>45</value>
-  </data>
-  <data name="_panelPortButtons.ToolTip" xml:space="preserve">
-    <value>Supprt of CI (Conceyed items) on a connector:
-- Get Connector from selected Element
-- Get Elements from selected Connector</value>
-  </data>
-  <data name="_panelPortButtons.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;_panelPortButtons.Name" xml:space="preserve">
-    <value>_panelPortButtons</value>
-  </data>
-  <data name="&gt;&gt;_panelPortButtons.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;_panelPortButtons.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;_panelPortButtons.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
   <data name="_btnHidePortType.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -1781,6 +1677,38 @@ Ports,Parameter,Pins are also called:
   </data>
   <data name="&gt;&gt;_btnShowPort.ZOrder" xml:space="preserve">
     <value>5</value>
+  </data>
+  <data name="_panelPortButtons.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="_panelPortButtons.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 130</value>
+  </data>
+  <data name="_panelPortButtons.Size" type="System.Drawing.Size, System.Drawing">
+    <value>461, 25</value>
+  </data>
+  <data name="_panelPortButtons.TabIndex" type="System.Int32, mscorlib">
+    <value>45</value>
+  </data>
+  <data name="_panelPortButtons.ToolTip" xml:space="preserve">
+    <value>Supprt of CI (Conceyed items) on a connector:
+- Get Connector from selected Element
+- Get Elements from selected Connector</value>
+  </data>
+  <data name="_panelPortButtons.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;_panelPortButtons.Name" xml:space="preserve">
+    <value>_panelPortButtons</value>
+  </data>
+  <data name="&gt;&gt;_panelPortButtons.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;_panelPortButtons.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;_panelPortButtons.ZOrder" xml:space="preserve">
+    <value>9</value>
   </data>
   <data name="_btnReverseConnector.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1999,8 +1927,90 @@ Always remember:
   <metadata name="contextMenuRtf.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>554, 17</value>
   </metadata>
+  <data name="editSQLToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>295, 26</value>
+  </data>
+  <data name="editSQLToolStripMenuItem.Text" xml:space="preserve">
+    <value>Edit SQL</value>
+  </data>
+  <data name="editSQLToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Edit hoTools SQL Script file in your Editor.
+
+hoTools starts the application which is associated to "*.sql".</value>
+  </data>
+  <data name="showSQLFolderToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>295, 26</value>
+  </data>
+  <data name="showSQLFolderToolStripMenuItem.Text" xml:space="preserve">
+    <value>Show SQL folder</value>
+  </data>
+  <data name="showSQLFolderToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Show SQL folder of hoTools SQL Script file (*.sql)</value>
+  </data>
+  <data name="showSQLPathToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>295, 26</value>
+  </data>
+  <data name="showSQLPathToolStripMenuItem1.Text" xml:space="preserve">
+    <value>Show SQL path</value>
+  </data>
+  <data name="showSQLPathToolStripMenuItem1.ToolTipText" xml:space="preserve">
+    <value>Show the SQL path where hoTools seaches for possible SQL Scripts.
+
+You can set SQL path:
+- File, Setting SQL and Script</value>
+  </data>
+  <data name="showDescriptionToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>295, 26</value>
+  </data>
+  <data name="showDescriptionToolStripMenuItem.Text" xml:space="preserve">
+    <value>Show Description</value>
+  </data>
+  <data name="showDescriptionToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Show the description of the Search:
+- EA Standard Searches are documented in file: EaStandardSearches.json
+- SQL Searches are described via '// My documentation with exactly one leading blank at th beginning of file.</value>
+  </data>
+  <data name="toolStripSeparator6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>292, 6</value>
+  </data>
+  <data name="runToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>295, 26</value>
+  </data>
+  <data name="runToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Run</value>
+  </data>
+  <data name="runToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Run the Search.
+Results are shown in the EA Model Search Window.
+
+You may have inserted a &lt;Search Term&gt;.</value>
+  </data>
+  <data name="runAndExportSQLToExcelToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>295, 26</value>
+  </data>
+  <data name="runAndExportSQLToExcelToolStripMenuItem.Text" xml:space="preserve">
+    <value>Run and export SQL to Excel</value>
+  </data>
+  <data name="runAndExportSQLToExcelToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Execute SQL Query and export results to Excel (*.xlsx). 
+The &lt;Search Name&gt; has to contain a valid SQL Query. 
+
+No Excel is required.</value>
+  </data>
+  <data name="toolStripSeparator7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>292, 6</value>
+  </data>
+  <data name="exportCsvOfClipboardToExcelToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>295, 26</value>
+  </data>
+  <data name="exportCsvOfClipboardToExcelToolStripMenuItem1.Text" xml:space="preserve">
+    <value>Export csv of Clipboard to Excel</value>
+  </data>
+  <data name="exportCsvOfClipboardToExcelToolStripMenuItem1.ToolTipText" xml:space="preserve">
+    <value>Export the Clipboard content as csv to Excel</value>
+  </data>
   <data name="contextMenuRtf.Size" type="System.Drawing.Size, System.Drawing">
-    <value>290, 184</value>
+    <value>296, 198</value>
   </data>
   <data name="contextMenuRtf.ToolTip" xml:space="preserve">
     <value>Edit SQL Search in your Editor.
@@ -2013,92 +2023,10 @@ hoTools starts the application which is associated to "*.sql".</value>
   <data name="&gt;&gt;contextMenuRtf.Type" xml:space="preserve">
     <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="editSQLToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>289, 24</value>
-  </data>
-  <data name="editSQLToolStripMenuItem.Text" xml:space="preserve">
-    <value>Edit SQL</value>
-  </data>
-  <data name="editSQLToolStripMenuItem.ToolTipText" xml:space="preserve">
-    <value>Edit hoTools SQL Script file in your Editor.
-
-hoTools starts the application which is associated to "*.sql".</value>
-  </data>
-  <data name="showSQLFolderToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>289, 24</value>
-  </data>
-  <data name="showSQLFolderToolStripMenuItem.Text" xml:space="preserve">
-    <value>Show SQL folder</value>
-  </data>
-  <data name="showSQLFolderToolStripMenuItem.ToolTipText" xml:space="preserve">
-    <value>Show SQL folder of hoTools SQL Script file (*.sql)</value>
-  </data>
-  <data name="showSQLPathToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>289, 24</value>
-  </data>
-  <data name="showSQLPathToolStripMenuItem1.Text" xml:space="preserve">
-    <value>Show SQL path</value>
-  </data>
-  <data name="showSQLPathToolStripMenuItem1.ToolTipText" xml:space="preserve">
-    <value>Show the SQL path where hoTools seaches for possible SQL Scripts.
-
-You can set SQL path:
-- File, Setting SQL and Script</value>
-  </data>
-  <data name="showDescriptionToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>289, 24</value>
-  </data>
-  <data name="showDescriptionToolStripMenuItem.Text" xml:space="preserve">
-    <value>Show Description</value>
-  </data>
-  <data name="showDescriptionToolStripMenuItem.ToolTipText" xml:space="preserve">
-    <value>Show the description of the Search:
-- EA Standard Searches are documented in file: EaStandardSearches.json
-- SQL Searches are described via '// My documentation with exactly one leading blank at th beginning of file.</value>
-  </data>
-  <data name="toolStripSeparator6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>286, 6</value>
-  </data>
-  <data name="runToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>289, 24</value>
-  </data>
-  <data name="runToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Run</value>
-  </data>
-  <data name="runToolStripMenuItem.ToolTipText" xml:space="preserve">
-    <value>Run the Search.
-Results are shown in the EA Model Search Window.
-
-You may have inserted a &lt;Search Term&gt;.</value>
-  </data>
-  <data name="runAndExportSQLToExcelToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>289, 24</value>
-  </data>
-  <data name="runAndExportSQLToExcelToolStripMenuItem.Text" xml:space="preserve">
-    <value>Run and export SQL to Excel</value>
-  </data>
-  <data name="runAndExportSQLToExcelToolStripMenuItem.ToolTipText" xml:space="preserve">
-    <value>Execute SQL Query and export results to Excel (*.xlsx). 
-The &lt;Search Name&gt; has to contain a valid SQL Query. 
-
-No Excel is required.</value>
-  </data>
-  <data name="toolStripSeparator7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>286, 6</value>
-  </data>
-  <data name="exportCsvOfClipboardToExcelToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>289, 24</value>
-  </data>
-  <data name="exportCsvOfClipboardToExcelToolStripMenuItem1.Text" xml:space="preserve">
-    <value>Export csv of Clipboard to Excel</value>
-  </data>
-  <data name="exportCsvOfClipboardToExcelToolStripMenuItem1.ToolTipText" xml:space="preserve">
-    <value>Export the Clipboard content as csv to Excel</value>
-  </data>
   <data name="_btnFeatureDown.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABEAAAASCAIAAAAym6IDAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        wQAADsEBuJFr7QAAAMpJREFUOE9j2EE6oJIehQMNUNTgoODgABVFAtj1BNyfbLmrULXZhQQ9ttcm628r
+        vwAADr8BOAVTJAAAAMpJREFUOE9j2EE6oJIehQMNUNTgoODgABVFAtj1BNyfbLmrULXZhQQ9ttcm628r
         VG5yIkGP8YMGrW2FSo2k6NF60KC6LV2xkRT/KDxoUNiWTloYEKUHqg4ZQfSEOSj4gnRCEEQxwh50bRA9
         2Qg9UHVobgNq+////95vN32fzYTqAaJwFA1AgO4fiLbe93t9j7ZC9UT5QuVgAHsYALUVXl8L0lAcBRVF
         Alj0AAFQW+/9vQqTMqF8VIBdDxAAtUFZGACnHjyAdD07dgAATNFHaoyIyjIAAAAASUVORK5CYII=
@@ -2137,7 +2065,7 @@ In configuration/settings you have to disable the automatic feature (Attribut/Me
   <data name="_btnFeatureUp.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAAwAAAASCAIAAADgy6hbAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        wQAADsEBuJFr7QAAAMtJREFUKFNj2EEEIF2RwoEGKAsVIBQBVfTe36uwoADKRwJQRUAV////L7y+VqHB
+        vwAADr8BOAVTJAAAAMtJREFUKFNj2EEEIF2RwoEGKAsVIBQBVfTe36uwoADKRwJQRUAV////L7y+VqHB
         QaEhASIIByBFEBW97/f6Hm0FK3JQiPKFSEMAA0TF3m83fZ/NVNiWDlUU7qDg4ABVAlR0/seTyjebFR40
         gBBEUbaDgi9IEVwdg8LZBoWLDQpXkRSFIRRB1CEcjlCEZBEEkKhI60GD6rZ0xUa8iowfNGhtK1RqdMKn
         yPbaZP1thcpNeBUF3J9suatQtdkFr8MPNAAV4XM4fkCEoh07ALdYiUUFESZ3AAAAAElFTkSuQmCC
@@ -2211,39 +2139,6 @@ In configuration/settings you have to disable the automatic feature (Attribut/Me
   <metadata name="_menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>434, 17</value>
   </metadata>
-  <data name="_menuStrip1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="_menuStrip1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>461, 31</value>
-  </data>
-  <data name="_menuStrip1.TabIndex" type="System.Int32, mscorlib">
-    <value>22</value>
-  </data>
-  <data name="_menuStrip1.Text" xml:space="preserve">
-    <value>menuStrip1</value>
-  </data>
-  <data name="&gt;&gt;_menuStrip1.Name" xml:space="preserve">
-    <value>_menuStrip1</value>
-  </data>
-  <data name="&gt;&gt;_menuStrip1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.MenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;_menuStrip1.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;_menuStrip1.ZOrder" xml:space="preserve">
-    <value>13</value>
-  </data>
-  <data name="_fileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>44, 27</value>
-  </data>
-  <data name="_fileToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;File</value>
-  </data>
-  <data name="_fileToolStripMenuItem.ToolTipText" xml:space="preserve">
-    <value>If a Script is added or changed you have to use this command.</value>
-  </data>
   <data name="_settingGeneralToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>458, 26</value>
   </data>
@@ -2376,14 +2271,14 @@ You may also restart EA (more secure).</value>
   <data name="resetFactorySettingsToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>Resets the Settings to the dafault hoTools settings </value>
   </data>
-  <data name="_doToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>41, 27</value>
+  <data name="_fileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>44, 27</value>
   </data>
-  <data name="_doToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Do</value>
+  <data name="_fileToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;File</value>
   </data>
-  <data name="_doToolStripMenuItem.ToolTipText" xml:space="preserve">
-    <value>Change Author of selected Package / Element</value>
+  <data name="_fileToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>If a Script is added or changed you have to use this command.</value>
   </data>
   <data name="exportExcelToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>343, 26</value>
@@ -2554,14 +2449,14 @@ Be aware:
 The changes are project global.
 </value>
   </data>
-  <data name="_versionControlToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>39, 27</value>
+  <data name="_doToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>41, 27</value>
   </data>
-  <data name="_versionControlToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;VC</value>
+  <data name="_doToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Do</value>
   </data>
-  <data name="_versionControlToolStripMenuItem.ToolTipText" xml:space="preserve">
-    <value>Functions related to Version Control</value>
+  <data name="_doToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Change Author of selected Package / Element</value>
   </data>
   <data name="_changeXmlFileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>359, 26</value>
@@ -2645,17 +2540,14 @@ Select a package to proceed all recursive package.</value>
   <data name="_setSvnModuleTaggedValuesrecursiveToolStripMenuItem.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="_portToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>48, 27</value>
+  <data name="_versionControlToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>39, 27</value>
   </data>
-  <data name="_portToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Port</value>
+  <data name="_versionControlToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;VC</value>
   </data>
-  <data name="_portToolStripMenuItem.ToolTipText" xml:space="preserve">
-    <value>Functions related to port like:
-- Visibility
-- Move
-- Connect</value>
+  <data name="_versionControlToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Functions related to Version Control</value>
   </data>
   <data name="_movePortsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>461, 26</value>
@@ -2853,11 +2745,17 @@ Tip:
     <value>Order selected Diagram objects alphabetically.
 </value>
   </data>
-  <data name="_helpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>53, 27</value>
+  <data name="_portToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 27</value>
   </data>
-  <data name="_helpToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Help</value>
+  <data name="_portToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Port</value>
+  </data>
+  <data name="_portToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Functions related to port like:
+- Visibility
+- Move
+- Connect</value>
   </data>
   <data name="_getLastSqlErrorToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>206, 26</value>
@@ -2931,6 +2829,12 @@ Tip:
   <data name="_aboutToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>Information about hoTools</value>
   </data>
+  <data name="_helpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>53, 27</value>
+  </data>
+  <data name="_helpToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Help</value>
+  </data>
   <data name="toolStripMenuIHome.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 9.75pt</value>
   </data>
@@ -2939,6 +2843,30 @@ Tip:
   </data>
   <data name="toolStripMenuIHome.Text" xml:space="preserve">
     <value>?</value>
+  </data>
+  <data name="_menuStrip1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="_menuStrip1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>461, 31</value>
+  </data>
+  <data name="_menuStrip1.TabIndex" type="System.Int32, mscorlib">
+    <value>22</value>
+  </data>
+  <data name="_menuStrip1.Text" xml:space="preserve">
+    <value>menuStrip1</value>
+  </data>
+  <data name="&gt;&gt;_menuStrip1.Name" xml:space="preserve">
+    <value>_menuStrip1</value>
+  </data>
+  <data name="&gt;&gt;_menuStrip1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.MenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;_menuStrip1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;_menuStrip1.ZOrder" xml:space="preserve">
+    <value>13</value>
   </data>
   <data name="_panelButtons.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>
@@ -3051,6 +2979,24 @@ Tip:
   <data name="&gt;&gt;_panelNote.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
+  <data name="_lblPorts.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="_lblPorts.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 12pt</value>
+  </data>
+  <data name="_lblPorts.Location" type="System.Drawing.Point, System.Drawing">
+    <value>80, 7</value>
+  </data>
+  <data name="_lblPorts.Size" type="System.Drawing.Size, System.Drawing">
+    <value>57, 25</value>
+  </data>
+  <data name="_lblPorts.TabIndex" type="System.Int32, mscorlib">
+    <value>38</value>
+  </data>
+  <data name="_lblPorts.Text" xml:space="preserve">
+    <value>Ports</value>
+  </data>
   <data name="&gt;&gt;_lblPorts.Name" xml:space="preserve">
     <value>_lblPorts</value>
   </data>
@@ -3089,36 +3035,6 @@ Tip:
   </data>
   <data name="&gt;&gt;_panelPort.ZOrder" xml:space="preserve">
     <value>4</value>
-  </data>
-  <data name="_lblPorts.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="_lblPorts.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 12pt</value>
-  </data>
-  <data name="_lblPorts.Location" type="System.Drawing.Point, System.Drawing">
-    <value>80, 7</value>
-  </data>
-  <data name="_lblPorts.Size" type="System.Drawing.Size, System.Drawing">
-    <value>57, 25</value>
-  </data>
-  <data name="_lblPorts.TabIndex" type="System.Int32, mscorlib">
-    <value>38</value>
-  </data>
-  <data name="_lblPorts.Text" xml:space="preserve">
-    <value>Ports</value>
-  </data>
-  <data name="&gt;&gt;_lblPorts.Name" xml:space="preserve">
-    <value>_lblPorts</value>
-  </data>
-  <data name="&gt;&gt;_lblPorts.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;_lblPorts.Parent" xml:space="preserve">
-    <value>_panelPort</value>
-  </data>
-  <data name="&gt;&gt;_lblPorts.ZOrder" xml:space="preserve">
-    <value>0</value>
   </data>
   <data name="_panelAdvanced.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>

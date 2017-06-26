@@ -20,6 +20,7 @@ using hoTools.Utils;
 using hoTools.Utils.Configuration;
 using hoTools.Utils.Diagram;
 using hoTools.Utils.Excel;
+using hoTools.Utils.Names;
 
 
 // ReSharper disable once CheckNamespace
@@ -1282,6 +1283,8 @@ namespace hoTools.hoToolsGui
             this.changeAuthorPackagestandardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._changeAuthorRecursiveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._changeAuthorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
+            this.applyAllAutoCounterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._versionControlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._changeXmlFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._showFolderVCorCodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -1338,8 +1341,6 @@ namespace hoTools.hoToolsGui
             this._panelQuickSearch = new System.Windows.Forms.TableLayoutPanel();
             this._toolTipRtfListOfSearches = new System.Windows.Forms.ToolTip(this.components);
             this._panelConveyedItems = new System.Windows.Forms.Panel();
-            this.applyAllAutoCounterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
             this._toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this._toolStripContainer1.SuspendLayout();
             this._toolStripQuery.SuspendLayout();
@@ -2217,6 +2218,17 @@ namespace hoTools.hoToolsGui
             resources.ApplyResources(this._changeAuthorToolStripMenuItem, "_changeAuthorToolStripMenuItem");
             this._changeAuthorToolStripMenuItem.Click += new System.EventHandler(this.changeAuthorToolStripMenuItem_Click);
             // 
+            // toolStripSeparator13
+            // 
+            this.toolStripSeparator13.Name = "toolStripSeparator13";
+            resources.ApplyResources(this.toolStripSeparator13, "toolStripSeparator13");
+            // 
+            // applyAllAutoCounterToolStripMenuItem
+            // 
+            this.applyAllAutoCounterToolStripMenuItem.Name = "applyAllAutoCounterToolStripMenuItem";
+            resources.ApplyResources(this.applyAllAutoCounterToolStripMenuItem, "applyAllAutoCounterToolStripMenuItem");
+            this.applyAllAutoCounterToolStripMenuItem.Click += new System.EventHandler(this.applyAllAutoCounterToolStripMenuItem_Click);
+            // 
             // _versionControlToolStripMenuItem
             // 
             this._versionControlToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -2611,17 +2623,6 @@ namespace hoTools.hoToolsGui
             this._panelConveyedItems.Controls.Add(this._btnConveyedItem);
             resources.ApplyResources(this._panelConveyedItems, "_panelConveyedItems");
             this._panelConveyedItems.Name = "_panelConveyedItems";
-            // 
-            // applyAllAutoCounterToolStripMenuItem
-            // 
-            this.applyAllAutoCounterToolStripMenuItem.Name = "applyAllAutoCounterToolStripMenuItem";
-            resources.ApplyResources(this.applyAllAutoCounterToolStripMenuItem, "applyAllAutoCounterToolStripMenuItem");
-            this.applyAllAutoCounterToolStripMenuItem.Click += new System.EventHandler(this.applyAllAutoCounterToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator13
-            // 
-            this.toolStripSeparator13.Name = "toolStripSeparator13";
-            resources.ApplyResources(this.toolStripSeparator13, "toolStripSeparator13");
             // 
             // HoToolsGui
             // 
@@ -3718,7 +3719,8 @@ Please restart EA. During restart hoTools loads the default settings.",
 
         private void applyAllAutoCounterToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            NamesGenerator nameGenerator = new NamesGenerator(Repository, AddinSettings.JasonFilePath);
+            nameGenerator.ApplyAll();
         }
     }
 
