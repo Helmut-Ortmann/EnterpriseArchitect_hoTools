@@ -1,19 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Windows.Forms;
-using hoTools.Utils.Diagram;
 using hoTools.Utils.Json;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace hoTools.Utils.Names
 {
+    // ReSharper disable once ClassNeverInstantiated.Global
     public class NamesGeneratorItem
     {
         private readonly string _objectType;
         private readonly string _stereotype;
         private readonly string _sqlTopMost;
+        private readonly string _sqlTopMostAlias;
 
         private readonly char _numberProxyChar;
         private readonly int _numberStartValue;
@@ -22,17 +22,20 @@ namespace hoTools.Utils.Names
         public string ObjectType => _objectType;
         public string Stereotype => _stereotype;
         public string SqlTopMost => _sqlTopMost;
+        public string SqlTopMostAlias => _sqlTopMostAlias;
 
         public char NumberProxyChar => _numberProxyChar;
         public int NumberStartValue => _numberStartValue;
         public string FormatString => _formatString;
 
         [JsonConstructor]
-        public NamesGeneratorItem(string objectType, string stereotype, string sqlTopMost, string numberProxyChar, int numberStartValue, string formatString)
+        public NamesGeneratorItem(string objectType, string stereotype, string sqlTopMost, string sqlTopMostAlias, 
+                            string numberProxyChar, int numberStartValue, string formatString)
         {
             _objectType = objectType;
             _stereotype = stereotype;
             _sqlTopMost = sqlTopMost;
+            _sqlTopMostAlias = sqlTopMostAlias;
             _numberProxyChar = Convert.ToChar(numberProxyChar);
             _numberStartValue = numberStartValue;
             _formatString = formatString;
@@ -41,7 +44,7 @@ namespace hoTools.Utils.Names
         /// Check if value is according to format
         /// </summary>
         /// <returns></returns>
-        private bool IsValid(string name)
+        public bool IsValid(string name)
         {
             int pos = 0;
             foreach (char c in _formatString)
@@ -90,7 +93,6 @@ namespace hoTools.Utils.Names
         /// <returns></returns>
         public string GetString(int number)
         {
-            int pos = 0;
             string sValue = "";
             for (int i = _formatString.Length - 1; i >= 0; i--)
             {
@@ -115,18 +117,23 @@ namespace hoTools.Utils.Names
 
     }
 
+
+    /// <summary>
+    /// Generates auto increment names for Requirements and so
+    /// Settings.Json contains the generation configuration
+    /// </summary>
     public class NamesGenerator
     {
         // AutoIncrement counter
         public List<NamesGeneratorItem> NameGeneratorItems { get; }
-        private EA.Repository _rep;
+        private readonly EA.Repository _rep;
         private string _jasonFilePath;
 
         /// <summary>
         /// Constructor
         /// </summary>
+        /// <param name="rep"></param>
         /// <param name="jasonFilePath"></param>
-
         public NamesGenerator(EA.Repository rep, string jasonFilePath)
         {
             _rep = rep;
@@ -157,14 +164,14 @@ namespace hoTools.Utils.Names
 
         }
         /// <summary>
-        /// Gets the next high number for the item
+        /// Gets the next high number for the item. This may be for Name or Alias.
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
         public int GetNextMost(NamesGeneratorItem item)
         {
-            int highNumber = -1;
-            EA.Collection maxElement = _rep.GetElementSet(item.SqlTopMost, 2);
+            int highNumber;
+            var maxElement = _rep.GetElementSet(item.SqlTopMost.Trim() != "" ? item.SqlTopMost : item.SqlTopMostAlias, 2);
             // no old element found
             if (maxElement.Count == 0)
             {
@@ -172,11 +179,11 @@ namespace hoTools.Utils.Names
             }
             else
             {
-
                 // update to max value
                 EA.Element el1 = (EA.Element)maxElement.GetAt(0);
-                highNumber =  item.GetNumber(el1.Name) + 1;
-
+                if (item.SqlTopMost.Trim() != "") highNumber = item.GetNumber(el1.Name) + 1;
+                else
+                    highNumber =  item.GetNumber(el1.Alias) + 1;
             }
             return highNumber;
         }
@@ -186,24 +193,45 @@ namespace hoTools.Utils.Names
         /// </summary>
         public void ApplyAll()
         {
+            _rep.BatchAppend = true;
             foreach (NamesGeneratorItem item in NameGeneratorItems)
             {
-                // get high number
+                // get next high number
                 int highNumber = GetNextMost(item);
 
-                string sql = $@"select t1.Object_ID 
+                // Get list of Elements ordered by creation date
+                string sql = $@"
+select t1.Object_ID 
 from t_object t1 
 where t1.object_Type = '{item.ObjectType}' AND 
-      t1.stereotype  = '{item.Stereotype}' order by t1.CreatedDate";
-                EA.Collection elements = _rep.GetElementSet(sql,2);
+      t1.stereotype  = '{item.Stereotype}' 
+order by t1.CreatedDate";
+                EA.Collection elements = _rep.GetElementSet(sql.Trim(),2);
                 foreach (EA.Element el in elements)
                 {
+                    if (item.SqlTopMost.Trim() != "")
+                    {
+                        string name = el.Name;
+                        if (!item.IsValid(name))
+                        {
+                            el.Name = item.GetString(highNumber);
+                        }
+                    }
+                    else
+                    {
+                        string alias = el.Alias;
+                        if (!item.IsValid(alias))
+                        {
+                            el.Alias = item.GetString(highNumber);
 
+                        }
+                    }
+                    highNumber = highNumber + 1;
+                    el.Update();
                 }
 
             }
+            _rep.BatchAppend = false;
         }
-
-
     }
 }

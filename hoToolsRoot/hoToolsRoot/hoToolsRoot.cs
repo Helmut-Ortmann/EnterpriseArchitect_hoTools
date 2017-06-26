@@ -142,7 +142,7 @@ namespace hoTools
 
         const string MenuDevider = "-----------------------------------------------";
 
-        private NamesGenerator _nameGenerator;
+        private readonly NamesGenerator _nameGenerator;
 
         #region Constructor
         /// <summary>
@@ -483,7 +483,7 @@ namespace hoTools
         }
 
         /// <summary>
-        /// AutoIncrement counter.
+        /// AutoIncrement generated elements.
         /// </summary>
         /// <param name="rep"></param>
         /// <param name="info"></param>
@@ -504,21 +504,10 @@ namespace hoTools
             {
                 if (item.ObjectType == el.Type && item.Stereotype == el.Stereotype)
                 {
-                    EA.Collection maxElement = rep.GetElementSet(item.SqlTopMost, 2);
-                    // no old element found
-                    if (maxElement.Count == 0)
-                    {
-                        el.Name = item.GetString(item.NumberStartValue);
-                    }
-                    else
-                    {
+                    int highNumber = _nameGenerator.GetNextMost(item);
+                    if (item.SqlTopMost != "")  el.Name = item.GetString(highNumber);
+                    else el.Alias = item.GetString(highNumber);
 
-                        // update to max value
-                        EA.Element el1 = (EA.Element) maxElement.GetAt(0);
-                        int highValue = item.GetNumber(el1.Name);
-                        el.Name = item.GetString(highValue + 1);
-                        
-                    }
                     el.Update();
                     // Enable EA Property Dialog
                     rep.SuppressEADialogs = false;
