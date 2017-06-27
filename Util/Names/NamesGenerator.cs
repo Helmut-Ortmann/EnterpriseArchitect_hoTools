@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using EA;
 using hoTools.Utils.Json;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -65,13 +66,14 @@ namespace hoTools.Utils.Names
         }
 
         /// <summary>
-        /// Get the number according to format from the string value
+        /// Get the number according to format from the string value. It returns -1 is was impossible to determine the number from the name.
         /// </summary>
         /// <returns></returns>
         public int GetNumber(string name)
         {
             int pos = 0;
             string sValue = "";
+            if (name.Length != _formatString.Length) return -1;
             foreach (char c in _formatString)
             {
                 if (c == _numberProxyChar)
@@ -126,8 +128,11 @@ namespace hoTools.Utils.Names
     {
         // AutoIncrement counter
         public List<NamesGeneratorItem> NameGeneratorItems { get; }
-        private readonly EA.Repository _rep;
+        public Repository Rep { get => _rep; set => _rep = value; }
+
+        private EA.Repository _rep;
         private string _jasonFilePath;
+
 
         /// <summary>
         /// Constructor
@@ -136,7 +141,7 @@ namespace hoTools.Utils.Names
         /// <param name="jasonFilePath"></param>
         public NamesGenerator(EA.Repository rep, string jasonFilePath)
         {
-            _rep = rep;
+            Rep = rep;
             _jasonFilePath = jasonFilePath;
 
             // use 'Deserializing Partial JSON Fragments'
@@ -168,22 +173,41 @@ namespace hoTools.Utils.Names
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
+        public int GetNextMost(EA.Repository rep, NamesGeneratorItem item)
+        {
+            _rep = rep;
+            return GetNextMost(item);
+        }
+        /// <summary>
+        /// Gets the next high number for the item. This may be for Name or Alias.
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
         public int GetNextMost(NamesGeneratorItem item)
         {
-            int highNumber;
-            var maxElement = _rep.GetElementSet(item.SqlTopMost.Trim() != "" ? item.SqlTopMost : item.SqlTopMostAlias, 2);
-            // no old element found
-            if (maxElement.Count == 0)
+            int highNumber = -1;
+            string sql = String.IsNullOrWhiteSpace(item.SqlTopMostAlias.Trim()) ? item.SqlTopMost : item.SqlTopMostAlias;
+            if (String.IsNullOrWhiteSpace(sql))
             {
-                highNumber = item.NumberStartValue;
+                MessageBox.Show($@"ObjectType: '{item.ObjectType}'\r\nStereotype: '{item.Stereotype}",
+                    "Invalid AutoCounter definition, no SQL defined for Name or Alias");
+                return -1;
             }
-            else
-            {
-                // update to max value
-                EA.Element el1 = (EA.Element)maxElement.GetAt(0);
-                if (item.SqlTopMost.Trim() != "") highNumber = item.GetNumber(el1.Name) + 1;
+            else { 
+                EA.Collection maxElements = Rep.GetElementSet(sql, 2);
+                // no old element found
+                if (maxElements.Count == 0)
+                {
+                    highNumber = item.NumberStartValue;
+                }
                 else
-                    highNumber =  item.GetNumber(el1.Alias) + 1;
+                {
+                    // update to max value
+                    EA.Element el1 = (EA.Element)maxElements.GetAt(0);
+                    if (item.SqlTopMost.Trim() != "") highNumber = item.GetNumber(el1.Name) + 1;
+                    else
+                        highNumber = item.GetNumber(el1.Alias) + 1;
+                }
             }
             return highNumber;
         }
@@ -193,7 +217,7 @@ namespace hoTools.Utils.Names
         /// </summary>
         public void ApplyAll()
         {
-            _rep.BatchAppend = true;
+            //_rep.BatchAppend = true;
             foreach (NamesGeneratorItem item in NameGeneratorItems)
             {
                 // get next high number
@@ -206,32 +230,39 @@ from t_object t1
 where t1.object_Type = '{item.ObjectType}' AND 
       t1.stereotype  = '{item.Stereotype}' 
 order by t1.CreatedDate";
-                EA.Collection elements = _rep.GetElementSet(sql.Trim(),2);
+                EA.Collection elements = Rep.GetElementSet(sql.Trim(),2);
                 foreach (EA.Element el in elements)
                 {
-                    if (item.SqlTopMost.Trim() != "")
+                    bool update = false; ;
+                    if (! String.IsNullOrWhiteSpace(item.SqlTopMost))
                     {
-                        string name = el.Name;
-                        if (!item.IsValid(name))
+                        if (!item.IsValid(el.Name))
                         {
                             el.Name = item.GetString(highNumber);
+                            update = true;
                         }
                     }
                     else
                     {
-                        string alias = el.Alias;
-                        if (!item.IsValid(alias))
+                        if (!String.IsNullOrWhiteSpace(item.SqlTopMostAlias))
                         {
-                            el.Alias = item.GetString(highNumber);
+                            if (!item.IsValid(el.Alias))
+                            {
+                                el.Alias = item.GetString(highNumber);
+                                update = true;
 
+                            }
                         }
                     }
-                    highNumber = highNumber + 1;
-                    el.Update();
+                    if (update)
+                    {
+                        highNumber = highNumber + 1;
+                        el.Update();
+                    }
                 }
 
             }
-            _rep.BatchAppend = false;
+            //_rep.BatchAppend = false;
         }
     }
 }

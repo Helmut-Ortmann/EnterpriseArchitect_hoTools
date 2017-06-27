@@ -500,6 +500,7 @@ namespace hoTools
             }
             EA.Element el = rep.GetElementByID(elementId);
             // Find the correct AutoIncrement configuration
+            _nameGenerator.Rep = rep; // update repository in kind of repository change
             foreach (NamesGeneratorItem item in _nameGenerator.NameGeneratorItems)
             {
                 if (item.ObjectType == el.Type && item.Stereotype == el.Stereotype)

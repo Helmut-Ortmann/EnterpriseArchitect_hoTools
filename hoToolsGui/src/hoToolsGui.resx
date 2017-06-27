@@ -439,7 +439,7 @@
     <value>693, 17</value>
   </metadata>
   <data name="editSQLSearchToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>317, 26</value>
+    <value>311, 24</value>
   </data>
   <data name="editSQLSearchToolStripMenuItem.Text" xml:space="preserve">
     <value>Edit SQL</value>
@@ -450,7 +450,7 @@
 hoTools starts the application which is associated to "*.sql".</value>
   </data>
   <data name="showFolderToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>317, 26</value>
+    <value>311, 24</value>
   </data>
   <data name="showFolderToolStripMenuItem.Text" xml:space="preserve">
     <value>Show SQL Folder</value>
@@ -459,7 +459,7 @@ hoTools starts the application which is associated to "*.sql".</value>
     <value>Show SQL folder of hoTools SQL Script file (*.sql)</value>
   </data>
   <data name="showSQLPathToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>317, 26</value>
+    <value>311, 24</value>
   </data>
   <data name="showSQLPathToolStripMenuItem.Text" xml:space="preserve">
     <value>Show SQL Path</value>
@@ -471,16 +471,16 @@ You can set SQL path:
 - File, Setting SQL and Script</value>
   </data>
   <data name="toolStripSeparator4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>314, 6</value>
+    <value>308, 6</value>
   </data>
   <data name="runQueryToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>317, 26</value>
+    <value>311, 24</value>
   </data>
   <data name="runQueryToolStripMenuItem.Text" xml:space="preserve">
     <value>Run</value>
   </data>
   <data name="runSQLAndExportToExcelToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>317, 26</value>
+    <value>311, 24</value>
   </data>
   <data name="runSQLAndExportToExcelToolStripMenuItem.Text" xml:space="preserve">
     <value>Run and export SQL results to Excel</value>
@@ -492,16 +492,16 @@ The &lt;Search Name&gt; has to contain a valid SQL Query.
 No Excel is required.</value>
   </data>
   <data name="toolStripSeparator5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>314, 6</value>
+    <value>308, 6</value>
   </data>
   <data name="clipboardTocsvToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>317, 26</value>
+    <value>311, 24</value>
   </data>
   <data name="clipboardTocsvToolStripMenuItem.Text" xml:space="preserve">
     <value>Export csv of Clipboard to Excel</value>
   </data>
   <data name="_contextMenuStripSearch.Size" type="System.Drawing.Size, System.Drawing">
-    <value>318, 172</value>
+    <value>312, 160</value>
   </data>
   <data name="_contextMenuStripSearch.ToolTip" xml:space="preserve">
     <value>Export the Clipboard content as csv to Excel</value>
@@ -1928,7 +1928,7 @@ Always remember:
     <value>554, 17</value>
   </metadata>
   <data name="editSQLToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>295, 26</value>
+    <value>289, 24</value>
   </data>
   <data name="editSQLToolStripMenuItem.Text" xml:space="preserve">
     <value>Edit SQL</value>
@@ -1939,7 +1939,7 @@ Always remember:
 hoTools starts the application which is associated to "*.sql".</value>
   </data>
   <data name="showSQLFolderToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>295, 26</value>
+    <value>289, 24</value>
   </data>
   <data name="showSQLFolderToolStripMenuItem.Text" xml:space="preserve">
     <value>Show SQL folder</value>
@@ -1948,7 +1948,7 @@ hoTools starts the application which is associated to "*.sql".</value>
     <value>Show SQL folder of hoTools SQL Script file (*.sql)</value>
   </data>
   <data name="showSQLPathToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>295, 26</value>
+    <value>289, 24</value>
   </data>
   <data name="showSQLPathToolStripMenuItem1.Text" xml:space="preserve">
     <value>Show SQL path</value>
@@ -1960,7 +1960,7 @@ You can set SQL path:
 - File, Setting SQL and Script</value>
   </data>
   <data name="showDescriptionToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>295, 26</value>
+    <value>289, 24</value>
   </data>
   <data name="showDescriptionToolStripMenuItem.Text" xml:space="preserve">
     <value>Show Description</value>
@@ -1971,10 +1971,10 @@ You can set SQL path:
 - SQL Searches are described via '// My documentation with exactly one leading blank at th beginning of file.</value>
   </data>
   <data name="toolStripSeparator6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>292, 6</value>
+    <value>286, 6</value>
   </data>
   <data name="runToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>295, 26</value>
+    <value>289, 24</value>
   </data>
   <data name="runToolStripMenuItem.Text" xml:space="preserve">
     <value>&amp;Run</value>
@@ -1986,7 +1986,7 @@ Results are shown in the EA Model Search Window.
 You may have inserted a &lt;Search Term&gt;.</value>
   </data>
   <data name="runAndExportSQLToExcelToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>295, 26</value>
+    <value>289, 24</value>
   </data>
   <data name="runAndExportSQLToExcelToolStripMenuItem.Text" xml:space="preserve">
     <value>Run and export SQL to Excel</value>
@@ -1998,10 +1998,10 @@ The &lt;Search Name&gt; has to contain a valid SQL Query.
 No Excel is required.</value>
   </data>
   <data name="toolStripSeparator7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>292, 6</value>
+    <value>286, 6</value>
   </data>
   <data name="exportCsvOfClipboardToExcelToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>295, 26</value>
+    <value>289, 24</value>
   </data>
   <data name="exportCsvOfClipboardToExcelToolStripMenuItem1.Text" xml:space="preserve">
     <value>Export csv of Clipboard to Excel</value>
@@ -2010,7 +2010,7 @@ No Excel is required.</value>
     <value>Export the Clipboard content as csv to Excel</value>
   </data>
   <data name="contextMenuRtf.Size" type="System.Drawing.Size, System.Drawing">
-    <value>296, 198</value>
+    <value>290, 184</value>
   </data>
   <data name="contextMenuRtf.ToolTip" xml:space="preserve">
     <value>Edit SQL Search in your Editor.
@@ -2026,7 +2026,7 @@ hoTools starts the application which is associated to "*.sql".</value>
   <data name="_btnFeatureDown.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABEAAAASCAIAAAAym6IDAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        vwAADr8BOAVTJAAAAMpJREFUOE9j2EE6oJIehQMNUNTgoODgABVFAtj1BNyfbLmrULXZhQQ9ttcm628r
+        vgAADr4B6kKxwAAAAMpJREFUOE9j2EE6oJIehQMNUNTgoODgABVFAtj1BNyfbLmrULXZhQQ9ttcm628r
         VG5yIkGP8YMGrW2FSo2k6NF60KC6LV2xkRT/KDxoUNiWTloYEKUHqg4ZQfSEOSj4gnRCEEQxwh50bRA9
         2Qg9UHVobgNq+////95vN32fzYTqAaJwFA1AgO4fiLbe93t9j7ZC9UT5QuVgAHsYALUVXl8L0lAcBRVF
         Alj0AAFQW+/9vQqTMqF8VIBdDxAAtUFZGACnHjyAdD07dgAATNFHaoyIyjIAAAAASUVORK5CYII=
@@ -2065,7 +2065,7 @@ In configuration/settings you have to disable the automatic feature (Attribut/Me
   <data name="_btnFeatureUp.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAAwAAAASCAIAAADgy6hbAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        vwAADr8BOAVTJAAAAMtJREFUKFNj2EEEIF2RwoEGKAsVIBQBVfTe36uwoADKRwJQRUAV////L7y+VqHB
+        vgAADr4B6kKxwAAAAMtJREFUKFNj2EEEIF2RwoEGKAsVIBQBVfTe36uwoADKRwJQRUAV////L7y+VqHB
         QaEhASIIByBFEBW97/f6Hm0FK3JQiPKFSEMAA0TF3m83fZ/NVNiWDlUU7qDg4ABVAlR0/seTyjebFR40
         gBBEUbaDgi9IEVwdg8LZBoWLDQpXkRSFIRRB1CEcjlCEZBEEkKhI60GD6rZ0xUa8iowfNGhtK1RqdMKn
         yPbaZP1thcpNeBUF3J9suatQtdkFr8MPNAAV4XM4fkCEoh07ALdYiUUFESZ3AAAAAElFTkSuQmCC
@@ -2140,7 +2140,7 @@ In configuration/settings you have to disable the automatic feature (Attribut/Me
     <value>434, 17</value>
   </metadata>
   <data name="_settingGeneralToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>458, 26</value>
+    <value>402, 26</value>
   </data>
   <data name="_settingGeneralToolStripMenuItem.Text" xml:space="preserve">
     <value>Settings &amp;General</value>
@@ -2153,7 +2153,7 @@ In configuration/settings you have to disable the automatic feature (Attribut/Me
 - MDG to load</value>
   </data>
   <data name="_settingsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>458, 26</value>
+    <value>402, 26</value>
   </data>
   <data name="_settingsToolStripMenuItem.Text" xml:space="preserve">
     <value>Settings Default &amp;Linestyle</value>
@@ -2162,7 +2162,7 @@ In configuration/settings you have to disable the automatic feature (Attribut/Me
     <value>Setting the default linestyle of Diagram Types</value>
   </data>
   <data name="_settingsGlobalKeysToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>458, 26</value>
+    <value>402, 26</value>
   </data>
   <data name="_settingsGlobalKeysToolStripMenuItem.Text" xml:space="preserve">
     <value>Settings Global Keys (Searches, Services, Scripts)</value>
@@ -2173,7 +2173,7 @@ In configuration/settings you have to disable the automatic feature (Attribut/Me
 - Services (fix implemented in hoTools)</value>
   </data>
   <data name="_settingsToolbarToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>458, 26</value>
+    <value>402, 26</value>
   </data>
   <data name="_settingsToolbarToolStripMenuItem.Text" xml:space="preserve">
     <value>Settings Toolbar (Searches, Services, Scripts)</value>
@@ -2184,7 +2184,7 @@ In configuration/settings you have to disable the automatic feature (Attribut/Me
 - at max 5 Services or Scripts</value>
   </data>
   <data name="_settingsQueryAndSctipToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>458, 26</value>
+    <value>402, 26</value>
   </data>
   <data name="_settingsQueryAndSctipToolStripMenuItem.Text" xml:space="preserve">
     <value>Settings SQL and Script</value>
@@ -2196,10 +2196,10 @@ In configuration/settings you have to disable the automatic feature (Attribut/Me
 - Disable</value>
   </data>
   <data name="toolStripSeparator12.Size" type="System.Drawing.Size, System.Drawing">
-    <value>455, 6</value>
+    <value>399, 6</value>
   </data>
   <data name="settingsDiagramStylesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>458, 26</value>
+    <value>402, 26</value>
   </data>
   <data name="settingsDiagramStylesToolStripMenuItem.Text" xml:space="preserve">
     <value>Settings.json 'Diagram Styles &amp;&amp; more' (current)</value>
@@ -2222,10 +2222,10 @@ Auto Counter for Requirements &amp; more
 Force hoTools to update it's Settings.json with 'Settings.json updated. </value>
   </data>
   <data name="settingsDiagramStylesToolStripMenuItemDekivery.Size" type="System.Drawing.Size, System.Drawing">
-    <value>458, 26</value>
+    <value>402, 26</value>
   </data>
   <data name="settingsDiagramStylesToolStripMenuItemDekivery.Text" xml:space="preserve">
-    <value>Settings.json 'Diagram Styles &amp;&amp; more' (current) (delivery)</value>
+    <value>Settings.json 'Diagram Styles &amp;&amp; more' (delivery)</value>
   </data>
   <data name="settingsDiagramStylesToolStripMenuItemDekivery.ToolTipText" xml:space="preserve">
     <value>Change settings 'Change Diagram Style', &amp; more with Editor:
@@ -2246,10 +2246,10 @@ Don't make changes! You can change your current settings.
 </value>
   </data>
   <data name="toolStripSeparator11.Size" type="System.Drawing.Size, System.Drawing">
-    <value>455, 6</value>
+    <value>399, 6</value>
   </data>
   <data name="_updateScriptsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>458, 26</value>
+    <value>402, 26</value>
   </data>
   <data name="_updateScriptsToolStripMenuItem.Text" xml:space="preserve">
     <value>Settings.json updated (Searches, Styles &amp;&amp; more)</value>
@@ -2260,10 +2260,10 @@ Don't make changes! You can change your current settings.
 You may also restart EA (more secure).</value>
   </data>
   <data name="toolStripSeparator10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>455, 6</value>
+    <value>399, 6</value>
   </data>
   <data name="resetFactorySettingsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>458, 26</value>
+    <value>402, 26</value>
   </data>
   <data name="resetFactorySettingsToolStripMenuItem.Text" xml:space="preserve">
     <value>Reset factory settings</value>

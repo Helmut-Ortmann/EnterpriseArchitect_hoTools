@@ -3684,7 +3684,7 @@ namespace hoTools.hoToolsGui
         }
         private void settingsDiagramStylesToolStripMenuItemDelivery_Click(object sender, EventArgs e)
         {
-            Util.StartFile(AddinSettings.JasonFilePath);
+            Util.StartFile(AddinSettings.JasonFilePathDelivery);
         }
 
         /// <summary>
