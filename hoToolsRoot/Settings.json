@@ -320,14 +320,14 @@
       "FormatString": "F_0.00.0.0"
     },
     {
-      "ObjectType": "Requirement",
-      "Stereotype": "BusinessRequirement",
-      "SqlTopMost": "",
-      "SqlTopMostAlias": "select top 1 t1.Object_ID from t_object t1 where t1.object_Type = 'Requirement' AND t1.stereotype = 'BusinessRequirement' AND t1.alias like 'F_*' AND NOT t1.alias like 'FunctionalRequirement*' order by t1.name desc",
-      "NumberProxyChar": "0",
-      "NumberStartValue": "99",
-      "FormatString": "F_0.00.0.0"
-    },
+  "ObjectType": "Requirement",
+  "Stereotype": "BusinessRequirement",
+  "SqlTopMost": "",
+  "SqlTopMostAlias": "select top 1 t1.Object_ID from t_object t1 where t1.object_Type = 'Requirement' AND t1.stereotype = 'BusinessRequirement' AND t1.alias like 'F_*' AND NOT t1.alias like 'FunctionalRequirement*' order by t1.alias desc",
+  "NumberProxyChar": "0",
+  "NumberStartValue": "99",
+  "FormatString": "F_0.00.0.0"
+  },
     {
       "ObjectType": "Risk",
       "Stereotype": "",
@@ -341,10 +341,10 @@
       "ObjectType": "Feature",
       "Stereotype": "",
       "SqlTopMost": "",
-      "SqlTopMostAlias": "select top 1 t1.Object_ID from t_object t1 where t1.object_Type = 'Feature' AND t1.stereotype = NULL AND t1.name like 'FE:*' AND NOT t1.name like 'Feature*' order by t1.name desc",
+      "SqlTopMostAlias": "select top 1 t1.Object_ID from t_object t1 where t1.object_Type = 'Feature' AND t1.stereotype = NULL AND t1.alias like 'FE:*' AND NOT t1.alias like 'Feature*' order by t1.alias desc",
       "NumberProxyChar": "4",
       "NumberStartValue": "1",
-      "FormatString": "FE:0.00.0.0"
+      "FormatString": "FE:4.44.4.4"
     }
   ]
 }

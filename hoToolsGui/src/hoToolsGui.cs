@@ -227,6 +227,7 @@ namespace hoTools.hoToolsGui
         private ToolStripButton _toolStripServiceBtn10;
         private ToolStripMenuItem settingsDiagramStylesToolStripMenuItemDekivery;
         private ToolStripSeparator toolStripSeparator13;
+        private ToolStripMenuItem specToolStripMenuItem;
         private ToolStripMenuItem applyAllAutoCounterToolStripMenuItem;
         private TextBox _txtSearchText;
         #endregion
@@ -1284,7 +1285,6 @@ namespace hoTools.hoToolsGui
             this._changeAuthorRecursiveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._changeAuthorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
-            this.applyAllAutoCounterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._versionControlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._changeXmlFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._showFolderVCorCodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -1341,6 +1341,8 @@ namespace hoTools.hoToolsGui
             this._panelQuickSearch = new System.Windows.Forms.TableLayoutPanel();
             this._toolTipRtfListOfSearches = new System.Windows.Forms.ToolTip(this.components);
             this._panelConveyedItems = new System.Windows.Forms.Panel();
+            this.specToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.applyAllAutoCounterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this._toolStripContainer1.SuspendLayout();
             this._toolStripQuery.SuspendLayout();
@@ -2022,6 +2024,7 @@ namespace hoTools.hoToolsGui
             this._menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this._fileToolStripMenuItem,
             this._doToolStripMenuItem,
+            this.specToolStripMenuItem,
             this._versionControlToolStripMenuItem,
             this._portToolStripMenuItem,
             this._helpToolStripMenuItem,
@@ -2133,8 +2136,7 @@ namespace hoTools.hoToolsGui
             this.changeAuthorPackagestandardToolStripMenuItem,
             this._changeAuthorRecursiveToolStripMenuItem,
             this._changeAuthorToolStripMenuItem,
-            this.toolStripSeparator13,
-            this.applyAllAutoCounterToolStripMenuItem});
+            this.toolStripSeparator13});
             this._doToolStripMenuItem.Name = "_doToolStripMenuItem";
             resources.ApplyResources(this._doToolStripMenuItem, "_doToolStripMenuItem");
             // 
@@ -2222,12 +2224,6 @@ namespace hoTools.hoToolsGui
             // 
             this.toolStripSeparator13.Name = "toolStripSeparator13";
             resources.ApplyResources(this.toolStripSeparator13, "toolStripSeparator13");
-            // 
-            // applyAllAutoCounterToolStripMenuItem
-            // 
-            this.applyAllAutoCounterToolStripMenuItem.Name = "applyAllAutoCounterToolStripMenuItem";
-            resources.ApplyResources(this.applyAllAutoCounterToolStripMenuItem, "applyAllAutoCounterToolStripMenuItem");
-            this.applyAllAutoCounterToolStripMenuItem.Click += new System.EventHandler(this.applyAllAutoCounterToolStripMenuItem_Click);
             // 
             // _versionControlToolStripMenuItem
             // 
@@ -2623,6 +2619,19 @@ namespace hoTools.hoToolsGui
             this._panelConveyedItems.Controls.Add(this._btnConveyedItem);
             resources.ApplyResources(this._panelConveyedItems, "_panelConveyedItems");
             this._panelConveyedItems.Name = "_panelConveyedItems";
+            // 
+            // specToolStripMenuItem
+            // 
+            this.specToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.applyAllAutoCounterToolStripMenuItem});
+            this.specToolStripMenuItem.Name = "specToolStripMenuItem";
+            resources.ApplyResources(this.specToolStripMenuItem, "specToolStripMenuItem");
+            // 
+            // applyAllAutoCounterToolStripMenuItem
+            // 
+            this.applyAllAutoCounterToolStripMenuItem.Name = "applyAllAutoCounterToolStripMenuItem";
+            resources.ApplyResources(this.applyAllAutoCounterToolStripMenuItem, "applyAllAutoCounterToolStripMenuItem");
+            this.applyAllAutoCounterToolStripMenuItem.Click += new System.EventHandler(this.applyAllAutoCounterToolStripMenuItem_Click);
             // 
             // HoToolsGui
             // 
@@ -3220,6 +3229,8 @@ namespace hoTools.hoToolsGui
             IntializeSearches();
             AddinSettings.UpdateModel(_model);
             GetValueSettingsFromJson();
+            // Load Autogenerate settings from Settings.json
+            AddinSettings.NameGenerator = new NamesGenerator(Repository, AddinSettings.JasonFilePath);
         }
 
         /// <summary>

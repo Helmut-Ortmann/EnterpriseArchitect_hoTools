@@ -142,8 +142,6 @@ namespace hoTools
 
         const string MenuDevider = "-----------------------------------------------";
 
-        private readonly NamesGenerator _nameGenerator;
-
         #region Constructor
         /// <summary>
         /// Constructor: Reade settings, set the menu header and menuOptions
@@ -162,7 +160,7 @@ namespace hoTools
                 _AddinSettings = _addinSettings; // static
 
                 // Initialize the names generator
-                _nameGenerator = new NamesGenerator(_repository, _addinSettings.JasonFilePath);
+                _addinSettings.NameGenerator = new NamesGenerator(_repository, _addinSettings.JasonFilePath);
 
 
 
@@ -500,13 +498,13 @@ namespace hoTools
             }
             EA.Element el = rep.GetElementByID(elementId);
             // Find the correct AutoIncrement configuration
-            _nameGenerator.Rep = rep; // update repository in kind of repository change
-            foreach (NamesGeneratorItem item in _nameGenerator.NameGeneratorItems)
+            _addinSettings.NameGenerator.Rep = rep; // update repository in kind of repository change
+            foreach (NamesGeneratorItem item in _addinSettings.NameGenerator.NameGeneratorItems)
             {
                 if (item.ObjectType == el.Type && item.Stereotype == el.Stereotype)
                 {
-                    int highNumber = _nameGenerator.GetNextMost(item);
-                    if (item.SqlTopMost != "")  el.Name = item.GetString(highNumber);
+                    int highNumber = _addinSettings.NameGenerator.GetNextMost(item);
+                    if (item.IsNameUpdate()) el.Name = item.GetString(highNumber);
                     else el.Alias = item.GetString(highNumber);
 
                     el.Update();

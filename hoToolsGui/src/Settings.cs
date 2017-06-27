@@ -12,6 +12,7 @@ using System.Text.RegularExpressions;
 using AddinFramework.Util.Script;
 using EAAddinFramework.Utils;
 using GlobalHotkeys;
+using hoTools.Utils.Names;
 
 // ReSharper disable once CheckNamespace
 namespace hoTools.Settings
@@ -40,6 +41,7 @@ namespace hoTools.Settings
 
         public string JasonFilePath { get; }
         public string JasonFilePathDelivery { get; }
+        public NamesGenerator NameGenerator { get; set; }
 
         /// <summary>
         /// List of history sql files (recent 20 used sql files)

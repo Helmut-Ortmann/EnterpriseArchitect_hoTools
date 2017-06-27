@@ -148,7 +148,7 @@ namespace hoTools.Utils.Names
     public class NamesGenerator
     {
         // AutoIncrement counter
-        public List<NamesGeneratorItem> NameGeneratorItems { get; }
+        public List<NamesGeneratorItem> NameGeneratorItems { get; set; }
         public Repository Rep { get => _rep; set => _rep = value; }
 
         private EA.Repository _rep;
@@ -226,54 +226,60 @@ namespace hoTools.Utils.Names
             return highNumber;
         }
 
-        /// <summary>
-        /// Apply the naming conventions for all elements
-        /// </summary>
-        public void ApplyAll()
+        public void ApplyItem(NamesGeneratorItem item)
         {
-            //_rep.BatchAppend = true;
-            foreach (NamesGeneratorItem item in NameGeneratorItems)
-            {
-                // get next high number
-                int highNumber = GetNextMost(item);
+            // get next high number
+            int highNumber = GetNextMost(item);
 
-                // Get list of Elements ordered by creation date
-                string stereoType = "NULL";
-                if (! String.IsNullOrWhiteSpace(item.Stereotype)) stereoType = $"'{item.Stereotype}'";
-                string sql = $@"
+            // Get list of Elements ordered by creation date
+            string stereoType = "NULL";
+            if (!String.IsNullOrWhiteSpace(item.Stereotype)) stereoType = $"'{item.Stereotype}'";
+            string sql = $@"
 select t1.Object_ID 
 from t_object t1 
 where t1.object_Type = '{item.ObjectType}' AND 
       t1.stereotype  = {stereoType} 
 order by t1.CreatedDate";
-                EA.Collection elements = Rep.GetElementSet(sql.Trim(),2);
-                foreach (EA.Element el in elements)
-                {
-                    bool update = false; ;
-                    if (! item.IsNameUpdate())
+            EA.Collection elements = Rep.GetElementSet(sql.Trim(), 2);
+            foreach (EA.Element el in elements)
+            {
+                bool update = false; ;
+                if (item.IsNameUpdate())
+                {   // Update Name
+                    if (!item.IsValid(el.Name))
                     {
-                        if (!item.IsValid(el.Name))
-                        {
-                            el.Name = item.GetString(highNumber);
-                            update = true;
-                        }
-                    }
-                    else
-                    {
-                        if (!item.IsValid(el.Alias))
-                        {
-                            el.Alias = item.GetString(highNumber);
-                            update = true;
-
-                        }
-
-                    }
-                    if (update)
-                    {
-                        highNumber = highNumber + 1;
-                        el.Update();
+                        el.Name = item.GetString(highNumber);
+                        update = true;
                     }
                 }
+                else
+                {
+                    // update Alias
+                    if (!item.IsValid(el.Alias))
+                    {
+                        el.Alias = item.GetString(highNumber);
+                        update = true;
+
+                    }
+
+                }
+                if (update)
+                {
+                    highNumber = highNumber + 1;
+                    el.Update();
+                }
+            }
+        }
+
+        /// <summary>
+            /// Apply the naming conventions for all elements
+            /// </summary>
+            public void ApplyAll()
+        {
+            //_rep.BatchAppend = true;
+            foreach (NamesGeneratorItem item in NameGeneratorItems)
+            {
+                ApplyItem(item);
 
             }
             //_rep.BatchAppend = false;
