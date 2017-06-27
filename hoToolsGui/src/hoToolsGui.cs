@@ -3496,8 +3496,8 @@ namespace hoTools.hoToolsGui
             //--------------------------------------------------------------------------------------
             // Change Diagram Styles
             applyAutoCounterToolStripMenuItem.DropDownItems.Clear();
-            applyAutoCounterToolStripMenuItem.DropDownItems.Add(AddinSettings.NameGenerator.GetToolStripMenu(
-            applyAutoCounterToolStripMenuItem, ChangeDiagramObjectStylePackage_Click));
+            AddinSettings.NameGenerator.AddToolStripDropDowns(applyAutoCounterToolStripMenuItem,
+                applyAutoCounterToolStripMenuItem_Click);
             
         }
         /// <summary>
@@ -3512,7 +3512,7 @@ namespace hoTools.hoToolsGui
             NamesGeneratorItem item = (NamesGeneratorItem)menuItem.Tag;
 
 
-            AddinSettings.NameGenerator.ApplyItem(item);
+            AddinSettings.NameGenerator.ApplyItem(Repository, item);
 
         }
 

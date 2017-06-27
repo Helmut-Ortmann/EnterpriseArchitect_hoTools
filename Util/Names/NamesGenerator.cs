@@ -226,7 +226,13 @@ namespace hoTools.Utils.Names
             return highNumber;
         }
 
-        public void ApplyItem(NamesGeneratorItem item)
+        public void ApplyItem(EA.Repository rep, NamesGeneratorItem item)
+        {
+            _rep = rep;
+            ApplyItem(item);
+        }
+
+            public void ApplyItem(NamesGeneratorItem item)
         {
             // get next high number
             int highNumber = GetNextMost(item);
@@ -286,13 +292,13 @@ order by t1.CreatedDate";
         }
 
         /// <summary>
-        /// Create a ToolStripItem with DropDownitems for each AutoIncrement Definition in Settings.JSON.
+        /// Add DropDownItem for each AutoIncrement Definition in Settings.JSON.
         /// The Tag property contains the NamesGeneratorItem.
         /// </summary>
-        /// <param name="insertTemplateMenuItem"></param>
+        /// <param name="insertTemplateMenuItem">Where to add the DropDownItems</param>
         /// <param name="eventHandler"></param>
         /// <returns></returns>
-        public ToolStripMenuItem GetToolStripMenu(ToolStripMenuItem insertTemplateMenuItem, EventHandler eventHandler)
+        public void AddToolStripDropDowns(ToolStripMenuItem insertTemplateMenuItem, EventHandler eventHandler)
         {
             // Add item of possible style as items in drop down
             foreach (NamesGeneratorItem item in NameGeneratorItems)
@@ -300,13 +306,15 @@ order by t1.CreatedDate";
                 ToolStripMenuItem menuItem = new ToolStripMenuItem
                 {
                     Text = $@"{item.FormatString} {item.ObjectType} {item.Stereotype}",
-                    ToolTipText = $@"Autogenerate Format: {item.FormatString}\r\nType{item.ObjectType}\r\nStereotype {item.Stereotype}",
+                    ToolTipText = $@"Auto generate Format: {item.FormatString}
+Type{item.ObjectType}
+Stereotype {item.Stereotype}",
                     Tag = item
                 };
                 menuItem.Click += eventHandler;
                 insertTemplateMenuItem.DropDownItems.Add(menuItem);
             }
-            return insertTemplateMenuItem;
+            return;
 
         }
     }
