@@ -229,6 +229,7 @@ namespace hoTools.hoToolsGui
         private ToolStripSeparator toolStripSeparator13;
         private ToolStripMenuItem specToolStripMenuItem;
         private ToolStripMenuItem applyAllAutoCounterToolStripMenuItem;
+        private ToolStripMenuItem applyAutoCounterToolStripMenuItem;
         private TextBox _txtSearchText;
         #endregion
 
@@ -309,6 +310,7 @@ namespace hoTools.hoToolsGui
 
 
             GetValueSettingsFromJson();
+            AddAutoCounterSettingsMenu();
 
 
 
@@ -1285,6 +1287,8 @@ namespace hoTools.hoToolsGui
             this._changeAuthorRecursiveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._changeAuthorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
+            this.specToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.applyAllAutoCounterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._versionControlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._changeXmlFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._showFolderVCorCodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -1341,8 +1345,7 @@ namespace hoTools.hoToolsGui
             this._panelQuickSearch = new System.Windows.Forms.TableLayoutPanel();
             this._toolTipRtfListOfSearches = new System.Windows.Forms.ToolTip(this.components);
             this._panelConveyedItems = new System.Windows.Forms.Panel();
-            this.specToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.applyAllAutoCounterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.applyAutoCounterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this._toolStripContainer1.SuspendLayout();
             this._toolStripQuery.SuspendLayout();
@@ -2225,6 +2228,20 @@ namespace hoTools.hoToolsGui
             this.toolStripSeparator13.Name = "toolStripSeparator13";
             resources.ApplyResources(this.toolStripSeparator13, "toolStripSeparator13");
             // 
+            // specToolStripMenuItem
+            // 
+            this.specToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.applyAllAutoCounterToolStripMenuItem,
+            this.applyAutoCounterToolStripMenuItem});
+            this.specToolStripMenuItem.Name = "specToolStripMenuItem";
+            resources.ApplyResources(this.specToolStripMenuItem, "specToolStripMenuItem");
+            // 
+            // applyAllAutoCounterToolStripMenuItem
+            // 
+            this.applyAllAutoCounterToolStripMenuItem.Name = "applyAllAutoCounterToolStripMenuItem";
+            resources.ApplyResources(this.applyAllAutoCounterToolStripMenuItem, "applyAllAutoCounterToolStripMenuItem");
+            this.applyAllAutoCounterToolStripMenuItem.Click += new System.EventHandler(this.applyAllAutoCounterToolStripMenuItem_Click);
+            // 
             // _versionControlToolStripMenuItem
             // 
             this._versionControlToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -2620,18 +2637,10 @@ namespace hoTools.hoToolsGui
             resources.ApplyResources(this._panelConveyedItems, "_panelConveyedItems");
             this._panelConveyedItems.Name = "_panelConveyedItems";
             // 
-            // specToolStripMenuItem
+            // applyAutoCounterToolStripMenuItem
             // 
-            this.specToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.applyAllAutoCounterToolStripMenuItem});
-            this.specToolStripMenuItem.Name = "specToolStripMenuItem";
-            resources.ApplyResources(this.specToolStripMenuItem, "specToolStripMenuItem");
-            // 
-            // applyAllAutoCounterToolStripMenuItem
-            // 
-            this.applyAllAutoCounterToolStripMenuItem.Name = "applyAllAutoCounterToolStripMenuItem";
-            resources.ApplyResources(this.applyAllAutoCounterToolStripMenuItem, "applyAllAutoCounterToolStripMenuItem");
-            this.applyAllAutoCounterToolStripMenuItem.Click += new System.EventHandler(this.applyAllAutoCounterToolStripMenuItem_Click);
+            this.applyAutoCounterToolStripMenuItem.Name = "applyAutoCounterToolStripMenuItem";
+            resources.ApplyResources(this.applyAutoCounterToolStripMenuItem, "applyAutoCounterToolStripMenuItem");
             // 
             // HoToolsGui
             // 
@@ -3231,6 +3240,7 @@ namespace hoTools.hoToolsGui
             GetValueSettingsFromJson();
             // Load Autogenerate settings from Settings.json
             AddinSettings.NameGenerator = new NamesGenerator(Repository, AddinSettings.JasonFilePath);
+            AddAutoCounterSettingsMenu();
         }
 
         /// <summary>
@@ -3474,6 +3484,40 @@ namespace hoTools.hoToolsGui
 {e1}", "Error loading 'Settings.json'");
             }
         }
+
+
+        /// <summary>
+        /// Get the values from the 'Settings.json' file and update the File Menu to accomplish bulk change be Menu
+        /// - DiagramTypes
+        /// </summary>
+
+        private void AddAutoCounterSettingsMenu()
+        {
+            //--------------------------------------------------------------------------------------
+            // Change Diagram Styles
+            applyAutoCounterToolStripMenuItem.DropDownItems.Clear();
+            applyAutoCounterToolStripMenuItem.DropDownItems.Add(AddinSettings.NameGenerator.GetToolStripMenu(
+            applyAutoCounterToolStripMenuItem, ChangeDiagramObjectStylePackage_Click));
+            
+        }
+        /// <summary>
+        /// Auto generate Name+Alias items handler
+        /// The Tag from the sendet contains the NamesGeneratorItem 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void applyAutoCounterToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem menuItem = sender as ToolStripMenuItem;
+            NamesGeneratorItem item = (NamesGeneratorItem)menuItem.Tag;
+
+
+            AddinSettings.NameGenerator.ApplyItem(item);
+
+        }
+
+
+
 
 
         /// <summary>

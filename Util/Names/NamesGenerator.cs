@@ -284,5 +284,30 @@ order by t1.CreatedDate";
             }
             //_rep.BatchAppend = false;
         }
+
+        /// <summary>
+        /// Create a ToolStripItem with DropDownitems for each AutoIncrement Definition in Settings.JSON.
+        /// The Tag property contains the NamesGeneratorItem.
+        /// </summary>
+        /// <param name="insertTemplateMenuItem"></param>
+        /// <param name="eventHandler"></param>
+        /// <returns></returns>
+        public ToolStripMenuItem GetToolStripMenu(ToolStripMenuItem insertTemplateMenuItem, EventHandler eventHandler)
+        {
+            // Add item of possible style as items in drop down
+            foreach (NamesGeneratorItem item in NameGeneratorItems)
+            {
+                ToolStripMenuItem menuItem = new ToolStripMenuItem
+                {
+                    Text = $@"{item.FormatString} {item.ObjectType} {item.Stereotype}",
+                    ToolTipText = $@"Autogenerate Format: {item.FormatString}\r\nType{item.ObjectType}\r\nStereotype {item.Stereotype}",
+                    Tag = item
+                };
+                menuItem.Click += eventHandler;
+                insertTemplateMenuItem.DropDownItems.Add(menuItem);
+            }
+            return insertTemplateMenuItem;
+
+        }
     }
 }
