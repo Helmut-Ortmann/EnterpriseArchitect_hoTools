@@ -42,12 +42,33 @@ namespace hoTools.Utils.Names
             _formatString = formatString;
         }
         /// <summary>
-        /// Check if value is according to format
+        /// Check if update of name or alias
+        /// </summary>
+        /// <returns></returns>
+        public bool IsNameUpdate()
+        {
+            if (! String.IsNullOrWhiteSpace(_sqlTopMost)) return true;
+            if (!String.IsNullOrWhiteSpace(_sqlTopMostAlias)) return false;
+            MessageBox.Show("ObjectType: '{_objectType}'\r\nStereoType: '{stereotype}'", @"Autogenerate features are fault in Settings.json");
+            return true;
+        }
+        /// <summary>
+        /// Return SQL for Name or Alias
+        /// </summary>
+        /// <returns></returns>
+        public string GetSqlTopMost()
+        { 
+            if (IsNameUpdate()) return _sqlTopMost;
+            return _sqlTopMostAlias;
+        }
+        /// <summary>
+        /// Check if value is according to format.
         /// </summary>
         /// <returns></returns>
         public bool IsValid(string name)
         {
             int pos = 0;
+            if (name.Length != _formatString.Length) return false;
             foreach (char c in _formatString)
             {
                 if (c == _numberProxyChar)
@@ -186,29 +207,22 @@ namespace hoTools.Utils.Names
         public int GetNextMost(NamesGeneratorItem item)
         {
             int highNumber = -1;
-            string sql = String.IsNullOrWhiteSpace(item.SqlTopMostAlias.Trim()) ? item.SqlTopMost : item.SqlTopMostAlias;
-            if (String.IsNullOrWhiteSpace(sql))
+        
+            EA.Collection maxElements = Rep.GetElementSet(item.GetSqlTopMost(), 2);
+            // no old element found
+            if (maxElements.Count == 0)
             {
-                MessageBox.Show($@"ObjectType: '{item.ObjectType}'\r\nStereotype: '{item.Stereotype}",
-                    "Invalid AutoCounter definition, no SQL defined for Name or Alias");
-                return -1;
+                highNumber = item.NumberStartValue;
             }
-            else { 
-                EA.Collection maxElements = Rep.GetElementSet(sql, 2);
-                // no old element found
-                if (maxElements.Count == 0)
-                {
-                    highNumber = item.NumberStartValue;
-                }
+            else
+            {
+                // update to max value
+                EA.Element el1 = (EA.Element)maxElements.GetAt(0);
+                if (item.IsNameUpdate()) highNumber = item.GetNumber(el1.Name) + 1;
                 else
-                {
-                    // update to max value
-                    EA.Element el1 = (EA.Element)maxElements.GetAt(0);
-                    if (item.SqlTopMost.Trim() != "") highNumber = item.GetNumber(el1.Name) + 1;
-                    else
-                        highNumber = item.GetNumber(el1.Alias) + 1;
-                }
+                    highNumber = item.GetNumber(el1.Alias) + 1;
             }
+            
             return highNumber;
         }
 
@@ -224,17 +238,19 @@ namespace hoTools.Utils.Names
                 int highNumber = GetNextMost(item);
 
                 // Get list of Elements ordered by creation date
+                string stereoType = "NULL";
+                if (! String.IsNullOrWhiteSpace(item.Stereotype)) stereoType = $"'{item.Stereotype}'";
                 string sql = $@"
 select t1.Object_ID 
 from t_object t1 
 where t1.object_Type = '{item.ObjectType}' AND 
-      t1.stereotype  = '{item.Stereotype}' 
+      t1.stereotype  = {stereoType} 
 order by t1.CreatedDate";
                 EA.Collection elements = Rep.GetElementSet(sql.Trim(),2);
                 foreach (EA.Element el in elements)
                 {
                     bool update = false; ;
-                    if (! String.IsNullOrWhiteSpace(item.SqlTopMost))
+                    if (! item.IsNameUpdate())
                     {
                         if (!item.IsValid(el.Name))
                         {
@@ -244,15 +260,13 @@ order by t1.CreatedDate";
                     }
                     else
                     {
-                        if (!String.IsNullOrWhiteSpace(item.SqlTopMostAlias))
+                        if (!item.IsValid(el.Alias))
                         {
-                            if (!item.IsValid(el.Alias))
-                            {
-                                el.Alias = item.GetString(highNumber);
-                                update = true;
+                            el.Alias = item.GetString(highNumber);
+                            update = true;
 
-                            }
                         }
+
                     }
                     if (update)
                     {

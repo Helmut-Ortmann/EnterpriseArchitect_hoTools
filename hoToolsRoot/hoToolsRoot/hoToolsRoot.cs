@@ -511,7 +511,7 @@ namespace hoTools
 
                     el.Update();
                     // Enable EA Property Dialog
-                    rep.SuppressEADialogs = false;
+                    rep.SuppressEADialogs = true;
                     return true;
                 }
             }
