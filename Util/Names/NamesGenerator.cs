@@ -94,7 +94,7 @@ namespace hoTools.Utils.Names
         {
             int pos = 0;
             string sValue = "";
-            if (name.Length != _formatString.Length) return -1;
+            if (name.Length < _formatString.Length) return _numberStartValue;
             foreach (char c in _formatString)
             {
                 if (c == _numberProxyChar)
@@ -226,13 +226,25 @@ namespace hoTools.Utils.Names
             return highNumber;
         }
 
+        /// <summary>
+        /// Apply the number format to all items which don't conform to the rules.
+        /// Only invalid names are corrected!
+        /// If you want to apply full new numbering than choose ApplyItemNew.
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <param name="item"></param>
         public void ApplyItem(EA.Repository rep, NamesGeneratorItem item)
         {
             _rep = rep;
             ApplyItem(item);
         }
-
-            public void ApplyItem(NamesGeneratorItem item)
+        /// <summary>
+        /// Apply the number format to all items which don't conform to the rules.
+        /// Only invalid names are corrected!
+        /// If you want to apply full new numbering than choose ApplyItemNew.
+        /// </summary>
+        /// <param name="item"></param>
+        public void ApplyItem(NamesGeneratorItem item)
         {
             // get next high number
             int highNumber = GetNextMost(item);
@@ -276,16 +288,76 @@ order by t1.CreatedDate";
                 }
             }
         }
+        /// <summary>
+        /// Make the Name/Alias new according to creation date. 
+        /// </summary>
+        /// <param name="item"></param>
+        public void ApplyItemNew(EA.Repository rep, NamesGeneratorItem item)
+        {
+            _rep = rep;
+            ApplyItemNew(item);
+        }
+        /// <summary>
+        /// Make the Name/Alias new according to creation date
+        /// </summary>
+        /// <param name="item"></param>
+        public void ApplyItemNew(NamesGeneratorItem item)
+        {
+            // get next high number
+            int highNumber = item.NumberStartValue;
+
+            // Get list of Elements ordered by creation date
+            string stereoType = "NULL";
+            if (!String.IsNullOrWhiteSpace(item.Stereotype)) stereoType = $"'{item.Stereotype}'";
+            string sql = $@"
+select t1.Object_ID 
+from t_object t1 
+where t1.object_Type = '{item.ObjectType}' AND 
+      t1.stereotype  = {stereoType} 
+order by t1.CreatedDate";
+            EA.Collection elements = Rep.GetElementSet(sql.Trim(), 2);
+            foreach (EA.Element el in elements)
+            {
+                if (item.IsNameUpdate())
+                {   // Update Name
+                    el.Name = item.GetString(highNumber);
+                }
+                else
+                {
+                    // update Alias
+                        el.Alias = item.GetString(highNumber);
+                }
+
+                highNumber = highNumber + 1;
+                el.Update();
+
+            }
+        }
 
         /// <summary>
-            /// Apply the naming conventions for all elements
-            /// </summary>
-            public void ApplyAll()
+        /// Apply the number format to all items which don't conform to the rules. All Names/Alias are untouched if conforms to the rules.
+        /// Only invalid names are corrected!
+        /// If you want to apply full new numbering than choose ApplyAllNew.
+        /// </summary>
+        public void ApplyAll()
         {
             //_rep.BatchAppend = true;
             foreach (NamesGeneratorItem item in NameGeneratorItems)
             {
                 ApplyItem(item);
+
+            }
+            //_rep.BatchAppend = false;
+        }
+        /// <summary>
+        /// Apply the number format to all items. hoTools use the creationDate to build the numbers 
+        /// </summary>
+        public void ApplyAllNew()
+        {
+            //_rep.BatchAppend = true;
+            foreach (NamesGeneratorItem item in NameGeneratorItems)
+            {
+                ApplyItemNew(item);
 
             }
             //_rep.BatchAppend = false;
