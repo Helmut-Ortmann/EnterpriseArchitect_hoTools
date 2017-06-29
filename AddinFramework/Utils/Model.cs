@@ -313,7 +313,7 @@ namespace EAAddinFramework.Utils
 
         /// <summary>
         /// Run an SQL string and if query output the result in EA Search Window. If update, insert, delete execute SQL.
-        /// Ir return "" for nothing found or the SQL result string.
+        /// It return "" for nothing found or the SQL result string.
         /// <para/>- replacement of macros
         /// <para/>- run query
         /// <para/>- format to output
