@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using EA;
@@ -8,7 +7,7 @@ using Newtonsoft.Json.Linq;
 using hoTools.Utils.SQL;
 using hoTools.Utils.COM;
 using hoTools.Utils.Json;
-using hoTools.Utils.Names;
+
 
 // ReSharper disable MemberCanBePrivate.Global
 // ReSharper disable AutoPropertyCanBeMadeGetOnly.Global
@@ -17,8 +16,8 @@ using hoTools.Utils.Names;
 
 namespace hoTools.Utils.Diagram
 {
-   
-   
+
+
 
     public class DiagramFormat
     {

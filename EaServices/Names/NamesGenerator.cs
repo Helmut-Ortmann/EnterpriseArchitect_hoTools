@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using EA;
+using EAAddinFramework.Utils;
 using hoTools.Utils.Json;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace hoTools.Utils.Names
+namespace hoTools.EaServices.Names
 {
     // ReSharper disable once ClassNeverInstantiated.Global
     public class NamesGeneratorItem
@@ -152,17 +153,19 @@ namespace hoTools.Utils.Names
         public Repository Rep { get => _rep; set => _rep = value; }
 
         private EA.Repository _rep;
+        private Model _model;
         private string _jasonFilePath;
 
 
         /// <summary>
         /// Constructor
         /// </summary>
-        /// <param name="rep"></param>
+        /// <param name="model"></param>
         /// <param name="jasonFilePath"></param>
-        public NamesGenerator(EA.Repository rep, string jasonFilePath)
+        public NamesGenerator(Model model, string jasonFilePath)
         {
-            Rep = rep;
+            _model = model;
+            Rep = model.Repository;
             _jasonFilePath = jasonFilePath;
 
             // use 'Deserializing Partial JSON Fragments'
@@ -194,21 +197,12 @@ namespace hoTools.Utils.Names
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
-        public int GetNextMost(EA.Repository rep, NamesGeneratorItem item)
-        {
-            _rep = rep;
-            return GetNextMost(item);
-        }
-        /// <summary>
-        /// Gets the next high number for the item. This may be for Name or Alias.
-        /// </summary>
-        /// <param name="item"></param>
-        /// <returns></returns>
         public int GetNextMost(NamesGeneratorItem item)
         {
             int highNumber = -1;
-        
-            EA.Collection maxElements = Rep.GetElementSet(item.GetSqlTopMost(), 2);
+
+            string sql = _model.ReplaceSqlWildCards(item.GetSqlTopMost());
+            EA.Collection maxElements = Rep.GetElementSet(_model.ReplaceSqlWildCards(sql), 2);
             // no old element found
             if (maxElements.Count == 0)
             {
@@ -231,18 +225,6 @@ namespace hoTools.Utils.Names
         /// Only invalid names are corrected!
         /// If you want to apply full new numbering than choose ApplyItemNew.
         /// </summary>
-        /// <param name="rep"></param>
-        /// <param name="item"></param>
-        public void ApplyItem(EA.Repository rep, NamesGeneratorItem item)
-        {
-            _rep = rep;
-            ApplyItem(item);
-        }
-        /// <summary>
-        /// Apply the number format to all items which don't conform to the rules.
-        /// Only invalid names are corrected!
-        /// If you want to apply full new numbering than choose ApplyItemNew.
-        /// </summary>
         /// <param name="item"></param>
         public void ApplyItem(NamesGeneratorItem item)
         {
@@ -258,10 +240,10 @@ from t_object t1
 where t1.object_Type = '{item.ObjectType}' AND 
       t1.stereotype  = {stereoType} 
 order by t1.CreatedDate";
-            EA.Collection elements = Rep.GetElementSet(sql.Trim(), 2);
+            EA.Collection elements = Rep.GetElementSet(_model.ReplaceSqlWildCards(sql), 2);
             foreach (EA.Element el in elements)
             {
-                bool update = false; ;
+                bool update = false; 
                 if (item.IsNameUpdate())
                 {   // Update Name
                     if (!item.IsValid(el.Name))
@@ -289,15 +271,6 @@ order by t1.CreatedDate";
             }
         }
         /// <summary>
-        /// Make the Name/Alias new according to creation date. 
-        /// </summary>
-        /// <param name="item"></param>
-        public void ApplyItemNew(EA.Repository rep, NamesGeneratorItem item)
-        {
-            _rep = rep;
-            ApplyItemNew(item);
-        }
-        /// <summary>
         /// Make the Name/Alias new according to creation date
         /// </summary>
         /// <param name="item"></param>
@@ -315,7 +288,7 @@ from t_object t1
 where t1.object_Type = '{item.ObjectType}' AND 
       t1.stereotype  = {stereoType} 
 order by t1.CreatedDate";
-            EA.Collection elements = Rep.GetElementSet(sql.Trim(), 2);
+            EA.Collection elements = Rep.GetElementSet(_model.ReplaceSqlWildCards(sql), 2);
             foreach (EA.Element el in elements)
             {
                 if (item.IsNameUpdate())

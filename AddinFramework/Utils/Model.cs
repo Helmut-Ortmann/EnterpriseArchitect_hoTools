@@ -919,7 +919,7 @@ namespace EAAddinFramework.Utils
         /// </summary>
         /// <param name="sqlQuery">the sql string to edit</param>
         /// <returns>the same sql query, but with its wild cards replaced according to the required syntax</returns>
-       string ReplaceSqlWildCards(string sqlQuery)
+       public string ReplaceSqlWildCards(string sqlQuery)
         {
             bool msAccess = repositoryType == RepositoryType.AdoJet;
             int beginLike = sqlQuery.IndexOf("like", StringComparison.InvariantCultureIgnoreCase);
@@ -958,7 +958,7 @@ namespace EAAddinFramework.Utils
                     }
                 }
             }
-            return sqlQuery;
+            return sqlQuery.Trim();
         }
         /// <summary>
         /// returns true if security is enabled in this model

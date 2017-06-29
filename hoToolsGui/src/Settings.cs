@@ -12,7 +12,7 @@ using System.Text.RegularExpressions;
 using AddinFramework.Util.Script;
 using EAAddinFramework.Utils;
 using GlobalHotkeys;
-using hoTools.Utils.Names;
+using hoTools.EaServices.Names;
 
 // ReSharper disable once CheckNamespace
 namespace hoTools.Settings

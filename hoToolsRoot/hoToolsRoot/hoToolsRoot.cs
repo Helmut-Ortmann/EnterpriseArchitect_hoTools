@@ -14,13 +14,11 @@ using hoTools.Utils.ActionPins;
 using EAAddinFramework.Utils;
 
 using System.Reflection;
-using System.Text.RegularExpressions;
-using EA;
 using hoTools.Find;
 using hoTools.Utils.Configuration;
 using GlobalHotkeys;
 using hoTools.Extensions;
-using hoTools.Utils.Names;
+using hoTools.EaServices.Names;
 using File = System.IO.File;
 
 #region description
@@ -160,7 +158,7 @@ namespace hoTools
                 _AddinSettings = _addinSettings; // static
 
                 // Initialize the names generator
-                _addinSettings.NameGenerator = new NamesGenerator(_repository, _addinSettings.JasonFilePath);
+                _addinSettings.NameGenerator = new NamesGenerator(_model, _addinSettings.JasonFilePath);
 
 
 

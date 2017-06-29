@@ -20,7 +20,7 @@ using hoTools.Utils;
 using hoTools.Utils.Configuration;
 using hoTools.Utils.Diagram;
 using hoTools.Utils.Excel;
-using hoTools.Utils.Names;
+using hoTools.EaServices.Names;
 
 
 // ReSharper disable once CheckNamespace
@@ -3262,7 +3262,7 @@ namespace hoTools.hoToolsGui
             AddinSettings.UpdateModel(_model);
             GetValueSettingsFromJson();
             // Load Autogenerate settings from Settings.json
-            AddinSettings.NameGenerator = new NamesGenerator(Repository, AddinSettings.JasonFilePath);
+            AddinSettings.NameGenerator = new NamesGenerator(_model, AddinSettings.JasonFilePath);
             AddAutoCounterSettingsMenu();
         }
 
@@ -3539,8 +3539,8 @@ namespace hoTools.hoToolsGui
             ToolStripMenuItem menuItem = sender as ToolStripMenuItem;
             NamesGeneratorItem item = (NamesGeneratorItem)menuItem.Tag;
 
-
-            AddinSettings.NameGenerator.ApplyItem(Repository, item);
+            
+            AddinSettings.NameGenerator.ApplyItem(item);
 
         }
         /// <summary>
@@ -3555,7 +3555,7 @@ namespace hoTools.hoToolsGui
             NamesGeneratorItem item = (NamesGeneratorItem)menuItem.Tag;
 
 
-            AddinSettings.NameGenerator.ApplyItemNew(Repository, item);
+            AddinSettings.NameGenerator.ApplyItemNew(item);
 
         }
 
@@ -3817,7 +3817,7 @@ Please restart EA. During restart hoTools loads the default settings.",
 
         private void applyAllNewAutoCounterToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            NamesGenerator nameGenerator = new NamesGenerator(Repository, AddinSettings.JasonFilePath);
+            NamesGenerator nameGenerator = new NamesGenerator(_model, AddinSettings.JasonFilePath);
             nameGenerator.ApplyAllNew();
         }
     }
