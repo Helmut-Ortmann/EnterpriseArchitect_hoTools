@@ -49,6 +49,8 @@ namespace hoTools.Settings
             chkSvnSupport.Checked = settings.IsSvnSupport;
             chkVcSupport.Checked = settings.IsVcSupport;
 
+            chkAutoCounterSupport.Checked = _settings.IsAutoCounter;
+
             // Port support
             chkAdvancedPort.Checked = settings.IsAdvancedPort;
             chkPortBasicSupport.Checked = settings.IsPortBasic;
@@ -146,6 +148,8 @@ namespace hoTools.Settings
             _settings.IsShowQueryButton = chkShowQueryButtons.Checked;
             _settings.IsFavoriteSupport = chkFavoriteSupport.Checked;
             _settings.IsConveyedItemsSupport = chkConveyedItemSupport.Checked;
+
+            _settings.IsAutoCounter = chkAutoCounterSupport.Checked;
 
             _settings.IsSvnSupport = chkSvnSupport.Checked;
             _settings.IsVcSupport = chkVcSupport.Checked;

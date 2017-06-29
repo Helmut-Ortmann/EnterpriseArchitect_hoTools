@@ -357,6 +357,30 @@ namespace hoTools.Settings
         #endregion
 
 
+        #region Property: IsAutoCounter
+        public bool IsAutoCounter
+        {
+            get
+            {
+                bool result;
+                var p = CurrentConfig.AppSettings.Settings["isAutoCounter"];
+                if (p == null) return true;
+                if (bool.TryParse(p.Value, out result))
+                {
+                    return result;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            set
+            {
+                CurrentConfig.AppSettings.Settings["isAutoCounter"].Value = value.ToString();
+            }
+        }
+        #endregion
+
         #region Property: isLineStyleSupport
         public bool IsLineStyleSupport
         {

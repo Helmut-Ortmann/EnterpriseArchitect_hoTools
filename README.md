@@ -118,9 +118,20 @@ Some features:
 
 
 # Releases
+## Release 3.0.3
+- Auto Numbering for Name/Alias for type/stereotype
+  - Setting.json: Define format, object_types, stereotype, ..
+  - Drag and Drop Diagram
+  - New numbering according to createtedDate
+  - Correct numbering according for formal incorrect Name/Alias
+  - EA 13.0 Specification Manager don't calls EA_OnNewPostElememnt (known EA bug)
+    Roundabout: Use Auto Number New of dialog in Menu Spec
+- Fixing error with empty SQL <Search Term>
+
 ## Release 3.0.2
 - Error fixing Find & Replace (Some buttons weren't visible')
 - Code HyperScripting without/own get Model added (Example for own replacemenent of GetObject(,"EA.App"))
+
 
 ## Release 3.0.1
 - Error fix Diagram selection handling (LineStyle and more)

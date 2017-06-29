@@ -1674,7 +1674,8 @@ Useful to quickly test:
 
             // get TextBox
             var textBox = (TextBox)tabPage.Controls[0];
-            _model.SqlRun(tabPage.Text, textBox.Text, _sqlTextBoxSearchTerm.Text);
+            string searchTerm = _sqlTextBoxSearchTerm.Text == "<Search Term>" ? "" : _sqlTextBoxSearchTerm.Text;
+            _model.SqlRun(tabPage.Text, textBox.Text, searchTerm);
             Cursor.Current = Cursors.Default;
         }
         #endregion

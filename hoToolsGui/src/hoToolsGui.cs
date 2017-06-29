@@ -2253,7 +2253,7 @@ namespace hoTools.hoToolsGui
             this.applyAutoCounterNewToolStripMenuItem.Name = "applyAutoCounterNewToolStripMenuItem";
             resources.ApplyResources(this.applyAutoCounterNewToolStripMenuItem, "applyAutoCounterNewToolStripMenuItem");
             // 
-            // applyAutoCounterToolStripMenuItem
+            // applyAutoCounterCorrectToolStripMenuItem
             // 
             this.applyAutoCounterCorrectToolStripMenuItem.Name = "applyAutoCounterCorrectToolStripMenuItem";
             resources.ApplyResources(this.applyAutoCounterCorrectToolStripMenuItem, "applyAutoCounterCorrectToolStripMenuItem");
@@ -2803,6 +2803,8 @@ namespace hoTools.hoToolsGui
             // Line style Panel
             _panelLineStyle.Visible = AddinSettings.IsLineStyleSupport;
 
+
+
             // no quick search defined
             _panelQuickSearch.Visible = AddinSettings.IsQuickSearchSupport;
  
@@ -2881,6 +2883,11 @@ namespace hoTools.hoToolsGui
 
             // Advance features
             _btnDisplayBehavior.Visible = AddinSettings.IsAdvancedFeatures;
+
+            // Auto Counter / Auto Naming
+            applyAllAutoCounterToolStripMenuItem.Visible = AddinSettings.IsAutoCounter;
+            applyAutoCounterNewToolStripMenuItem.Visible = AddinSettings.IsAutoCounter;
+            applyAutoCounterCorrectToolStripMenuItem.Visible = AddinSettings.IsAutoCounter;
 
             //boolean visibleDiagramNote = false || _addinSettings.isAdvancedDiagramNote;
 

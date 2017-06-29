@@ -488,6 +488,7 @@ namespace hoTools
         /// <returns></returns>
         public override bool EA_OnPostNewElement(EA.Repository rep, EA.EventProperties info)
         {
+            if (!_AddinSettings.IsAutoCounter) return false; 
             int elementId;
             EA.EventProperty eventProperty = info.Get(0);
             var s = (string)eventProperty.Value;

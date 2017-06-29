@@ -120,9 +120,6 @@
   <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
   <data name="chkAdvancedFeatures.ToolTip" xml:space="preserve">
     <value>Add advanved features:
 - Display Behavior (Display related Behavior of Operation)
@@ -221,18 +218,6 @@ You can easily implement such functions by search and macros like:
 - If you mostly use a "your Search" enter the name
 - If you prefer to use autocomplete and Fuzzy Search leave it blank</value>
   </data>
-  <data name="groupBox4.ToolTip" xml:space="preserve">
-    <value>hoTools provides features to update the ports of a Part by its Class/Block. 
-
-
-The following is possible for a Part:
-- Off: No synchronization
-- Only add new Ports: Ports are added, no Port is deleted or marked
-- Mark Port as to delete: A Port not available in Class/Block is suffixed by '_DeleteMe'
-- Delete Port: A Port not available in Block is deleted from Part
-
-</value>
-  </data>
   <data name="_rbPortSynchronizationDelete.ToolTip" xml:space="preserve">
     <value>hoTools provides features to update the ports of a Part by its Class/Block. 
 
@@ -272,6 +257,18 @@ The following is possible for a Part:
 - Only add new Ports: Ports are added, no Port is deleted or marked
 - Mark Port as to delete: A Port not available in Class/Block is suffixed by '_DeleteMe'
 - Delete Port: A Port not available in Block is deleted from Part</value>
+  </data>
+  <data name="groupBox4.ToolTip" xml:space="preserve">
+    <value>hoTools provides features to update the ports of a Part by its Class/Block. 
+
+
+The following is possible for a Part:
+- Off: No synchronization
+- Only add new Ports: Ports are added, no Port is deleted or marked
+- Mark Port as to delete: A Port not available in Class/Block is suffixed by '_DeleteMe'
+- Delete Port: A Port not available in Block is deleted from Part
+
+</value>
   </data>
   <data name="label14.ToolTip" xml:space="preserve">
     <value>Add advanved features:

@@ -87,6 +87,8 @@
             this._rbPortSynchronizationOff = new System.Windows.Forms.RadioButton();
             this.label14 = new System.Windows.Forms.Label();
             this.label34 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.chkFeatureOrdering = new System.Windows.Forms.CheckBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
@@ -96,8 +98,8 @@
             this.generalSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.hoToolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.label16 = new System.Windows.Forms.Label();
-            this.chkFeatureOrdering = new System.Windows.Forms.CheckBox();
+            this.chkAutoCounterSupport = new System.Windows.Forms.CheckBox();
+            this.label17 = new System.Windows.Forms.Label();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -108,7 +110,7 @@
             // btnOk
             // 
             this.btnOk.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnOk.Location = new System.Drawing.Point(14, 691);
+            this.btnOk.Location = new System.Drawing.Point(24, 749);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(91, 33);
             this.btnOk.TabIndex = 0;
@@ -119,7 +121,7 @@
             // btnCancel
             // 
             this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancel.Location = new System.Drawing.Point(111, 691);
+            this.btnCancel.Location = new System.Drawing.Point(122, 749);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(91, 33);
             this.btnCancel.TabIndex = 1;
@@ -780,6 +782,33 @@
             this.label34.Text = "Path File Manager : Explorer/Totalcmd  to show folder";
             this.toolTip1.SetToolTip(this.label34, "ter");
             // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.Location = new System.Drawing.Point(238, 366);
+            this.label16.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(116, 18);
+            this.label16.TabIndex = 248;
+            this.label16.Text = "Feature ordering";
+            this.toolTip1.SetToolTip(this.label16, "Support Feature (Attribute, Method)  ordering (down/up Feature button)\r\n\r\nNote:\r\n" +
+        "You need to switch of automatic Feature (Attribut/Method) ordering in settings/c" +
+        "onfiguration.");
+            // 
+            // chkFeatureOrdering
+            // 
+            this.chkFeatureOrdering.AutoSize = true;
+            this.chkFeatureOrdering.Location = new System.Drawing.Point(361, 369);
+            this.chkFeatureOrdering.Margin = new System.Windows.Forms.Padding(2);
+            this.chkFeatureOrdering.Name = "chkFeatureOrdering";
+            this.chkFeatureOrdering.Size = new System.Drawing.Size(15, 14);
+            this.chkFeatureOrdering.TabIndex = 249;
+            this.toolTip1.SetToolTip(this.chkFeatureOrdering, "Support Feature (Attribute, Method) ordering (down/up Attribute/Method button)\r\n\r" +
+        "\nNote:\r\nYou need to switch of automatic Feature (Attribute, Method) ordering in " +
+        "settings/configuration.");
+            this.chkFeatureOrdering.UseVisualStyleBackColor = true;
+            // 
             // label8
             // 
             this.label8.AutoSize = true;
@@ -864,32 +893,32 @@
             this.toolStripMenuItem2.Text = "?";
             this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuWiki_Click);
             // 
-            // label16
+            // chkAutoCounterSupport
             // 
-            this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.Location = new System.Drawing.Point(238, 366);
-            this.label16.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(116, 18);
-            this.label16.TabIndex = 248;
-            this.label16.Text = "Feature ordering";
-            this.toolTip1.SetToolTip(this.label16, "Support Feature (Attribute, Method)  ordering (down/up Feature button)\r\n\r\nNote:\r\n" +
-        "You need to switch of automatic Feature (Attribut/Method) ordering in settings/c" +
-        "onfiguration.");
+            this.chkAutoCounterSupport.AutoSize = true;
+            this.chkAutoCounterSupport.Location = new System.Drawing.Point(198, 682);
+            this.chkAutoCounterSupport.Margin = new System.Windows.Forms.Padding(2);
+            this.chkAutoCounterSupport.Name = "chkAutoCounterSupport";
+            this.chkAutoCounterSupport.Size = new System.Drawing.Size(15, 14);
+            this.chkAutoCounterSupport.TabIndex = 258;
+            this.toolTip1.SetToolTip(this.chkAutoCounterSupport, "Add Auto Counter  support\r\n- Automated name Name/Alias after Creation\r\n- Generate" +
+        " name of Name/Alias\r\n- Define rules for ObjectType and Stereotype\r\n- Configurati" +
+        "on in Settings.json\r\n");
+            this.chkAutoCounterSupport.UseVisualStyleBackColor = true;
             // 
-            // chkFeatureOrdering
+            // label17
             // 
-            this.chkFeatureOrdering.AutoSize = true;
-            this.chkFeatureOrdering.Location = new System.Drawing.Point(361, 369);
-            this.chkFeatureOrdering.Margin = new System.Windows.Forms.Padding(2);
-            this.chkFeatureOrdering.Name = "chkFeatureOrdering";
-            this.chkFeatureOrdering.Size = new System.Drawing.Size(15, 14);
-            this.chkFeatureOrdering.TabIndex = 249;
-            this.toolTip1.SetToolTip(this.chkFeatureOrdering, "Support Feature (Attribute, Method) ordering (down/up Attribute/Method button)\r\n\r" +
-        "\nNote:\r\nYou need to switch of automatic Feature (Attribute, Method) ordering in " +
-        "settings/configuration.");
-            this.chkFeatureOrdering.UseVisualStyleBackColor = true;
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.Location = new System.Drawing.Point(13, 678);
+            this.label17.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(149, 18);
+            this.label17.TabIndex = 257;
+            this.label17.Text = "Auto Counter support";
+            this.toolTip1.SetToolTip(this.label17, "Add Auto Counter  support\r\n- Automated name Name/Alias after Creation\r\n- Generate" +
+        " name of Name/Alias\r\n- Define rules for ObjectType and Stereotype\r\n- Configurati" +
+        "on in Settings.json");
             // 
             // FrmSettingsGeneral
             // 
@@ -897,6 +926,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(785, 810);
+            this.Controls.Add(this.chkAutoCounterSupport);
+            this.Controls.Add(this.label17);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.chkPortTypeSupport);
@@ -1036,5 +1067,7 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.CheckBox chkFeatureOrdering;
+        private System.Windows.Forms.CheckBox chkAutoCounterSupport;
+        private System.Windows.Forms.Label label17;
     }
 }
