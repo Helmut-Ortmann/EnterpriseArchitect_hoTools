@@ -2038,6 +2038,7 @@ namespace hoTools.hoToolsGui
             this.toolStripMenuIHome});
             resources.ApplyResources(this._menuStrip1, "_menuStrip1");
             this._menuStrip1.Name = "_menuStrip1";
+            this._menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this._menuStrip1_ItemClicked);
             // 
             // _fileToolStripMenuItem
             // 
@@ -3819,6 +3820,11 @@ Please restart EA. During restart hoTools loads the default settings.",
         {
             NamesGenerator nameGenerator = new NamesGenerator(_model, AddinSettings.JasonFilePath);
             nameGenerator.ApplyAllNew();
+        }
+
+        private void _menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
         }
     }
 
