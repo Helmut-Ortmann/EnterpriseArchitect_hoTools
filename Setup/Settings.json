@@ -292,7 +292,24 @@
     }
   ],
   'AutoIncrement':
-  // Use Regular Expression to define the new value
+  // Define the rules for autogenerate increment names for ObjectType, StereoType
+  // - MY_0.00.0.1 then MY_0.00.0.2 then MY_0.00.0.2 ..
+  //
+  // "ObjectType"        The EA Objectype like "Requirement"
+  // "Stereotype":       The EA Stereotype like "FunctionalRequirement"
+  // "SqlTopMost":       The SQL to determine the top most element name with the highest number  or Blank XOR
+  // "SqlTopMostAlias":  The SQL to determine the top most element alias with the highest number or Blank
+  //  "NumberProxyChar": Proxy/Paceholder for the number in the format string "0" for "MY_0_0:000" or "X" for "MY_X_X:XXX"
+  //  "FormatString":    Format string which contains the number (see NumberProxyChar)
+  //
+  // SQL Wildcards hoTools converts between Databases:
+  // - % or * or #WC# Any characters
+  // - _ or ? a single character
+  // "SqlTopMost":  
+  // -  "select top 1 t1.Object_ID from t_object t1 where t1.object_Type = 'Requirement' AND t1.stereotype = 'FunctionalRequirement' AND t1.name like 'F_*' AND NOT t1.name like 'FunctionalRequirement*' order by t1.name desc",
+  // "SqlTopMostAlias":  SQL to determine alias top most
+  // -  "select top 1 t1.Object_ID from t_object t1 where t1.object_Type = 'Requirement' AND t1.stereotype = 'FunctionalRequirement' AND t1.alias like 'F_*' AND NOT t1.alias like 'FunctionalRequirement*' order by t1.name desc",
+  //    "NumberProxyChar": "0",
   [
     {
       "ObjectType": "Requirement",
