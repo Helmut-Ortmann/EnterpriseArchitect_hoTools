@@ -310,6 +310,7 @@
   // "SqlTopMostAlias":  SQL to determine alias top most
   // -  "select top 1 t1.Object_ID from t_object t1 where t1.object_Type = 'Requirement' AND t1.stereotype = 'FunctionalRequirement' AND t1.alias like 'F_*' AND NOT t1.alias like 'FunctionalRequirement*' order by t1.name desc",
   //    "NumberProxyChar": "0",
+[
     { // Functional Requirements, Counter for name
       "ObjectType": "Requirement",
       "Stereotype": "FunctionalRequirement",
@@ -346,5 +347,6 @@
       "NumberStartValue": "1",
       "FormatString": "FE:4.44.4.4"
     }
+  ]
 }
 
