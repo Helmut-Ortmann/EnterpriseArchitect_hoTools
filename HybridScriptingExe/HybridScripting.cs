@@ -16,7 +16,7 @@ namespace hoHybridScript
     /// Requirements: 'Needs: SparxSystems.Repository.dll' as reference
     /// 
     /// Principle:
-    /// Call C# exe and pass the EA process id. The C# uses the process id to connect to the Repository of the EA Instance.
+    /// Call C# .exe and pass the EA process id. The C# uses the process id to connect to the Repository of the EA Instance.
     /// C# uses the SPARX DLL 'SparxSystems.Repository.dll' to connect to the Repository. C# can then use the full EA API. 
     /// 
     /// SparxSystems.Repository.dll gets a connection to the EA instance according to passed process id

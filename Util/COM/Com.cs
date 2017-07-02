@@ -4,6 +4,22 @@ namespace hoTools.Utils.COM
 {
     /// <summary>
     /// Utilities to dynamically communicate with COM via interop.dll
+    /// It get's a connection to an EA instance by their process id. After that you can use th EA API.
+    /// It's somehow like the VB Script snippet: Set App = GetObject(,"EA.App")
+    /// 
+    /// Usually communication from EA via Script is done:
+    /// - EA calls your Script (VBScript, JScrip, JavaScript), usually as chosen from a Context Menu
+    /// - You call C# *.exe file and pass the EA process id
+    /// - C# get's the process id and connects to the correct EA model
+    /// - C# does it's work
+    /// - C# returns the result via standard output
+    /// 
+    /// Note: 
+    /// - This is a skeleton to show how it might work
+    /// - Easier is the off the shelf SPARX DLL 'SparxSystems.Repository.dll':
+    /// 
+    /// See also: 
+    /// https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/HybridScripting
     /// </summary>
     public class Com
     {
