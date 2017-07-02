@@ -4,11 +4,27 @@ using System;
 namespace hoHybridScript
 {
     /// <summary>
-    /// It also works with EA before 13., you only need SparxSystems.Repository.dll
+    /// Example for a C# Script which can be called from 
+    /// - VBScript
+    /// - JScript
+    /// - JavaScript
+    /// from within EA.
+    /// 
+    /// With EA since 13. it's called HybridScripting and EA provides an IDE with Debugging features.
+    /// It also works with EA before 13., you only need SparxSystems.Repository.dll to attach to EA Repository. 
     /// 
     /// Requirements: 'Needs: SparxSystems.Repository.dll' as reference
+    /// 
+    /// Principle:
+    /// Call C# exe and pass the EA process id. The C# uses the process id to connect to the Repository of the EA Instance.
+    /// C# uses the SPARX DLL 'SparxSystems.Repository.dll' to connect to the Repository. C# can then use the full EA API. 
+    /// 
     /// SparxSystems.Repository.dll gets a connection to the EA instance according to passed process id
     /// It gets the EA.App object from the EA instance according to the passed process id. After doing so you have full access to API.
+    /// 
+    /// References:
+    /// https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/HybridScripting
+    /// http://community.sparxsystems.com/community-resources/1065-use-c-java-for-your-vb-script
     /// </summary>
     class HybridScript
     {

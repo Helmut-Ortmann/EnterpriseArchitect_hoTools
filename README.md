@@ -118,7 +118,9 @@ Some features:
 
 
 # Releases
-## Release 3.0.3
+## Release 3.0.5
+
+## Release 3.0.3 + 3.0.4
 - Auto Numbering for Name/Alias for type/stereotype
   - Setting.json: Define format, object_types, stereotype, ..
   - Drag and Drop Diagram
