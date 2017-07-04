@@ -1057,6 +1057,8 @@ namespace hoTools.hoToolsGui
                     _rtfListOfSearches.Visible = false;
                     e.Handled = true;
                     break;
+
+                // Show matching sort of searches according to entered string
                 case Keys.Up:
                 case Keys.Down:
                 case Keys.Space:
@@ -1068,9 +1070,8 @@ namespace hoTools.hoToolsGui
                     }
                     else
                     {
-                        Search.CalulateAndSort(_txtSearchName.Text.Trim());
-                        _rtfListOfSearches.Text = Search.GetRtf();
                         _rtfListOfSearches.Clear();
+                        Search.CalulateAndSort(_txtSearchName.Text.Trim());
                         ColorCharacters(_rtfListOfSearches, Search.GetRtf(), _txtSearchName.Text, Color.Yellow);
                     }
 

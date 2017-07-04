@@ -96,16 +96,16 @@ namespace AddinFramework.Util
         /// <summary>
         /// Calculate score, sort and visualize rtf field. Upper/Lower cases are not considered.
         /// </summary>
-        /// <param name="pattern"></param>
-        public static void CalulateAndSort(string pattern)
+        /// <param name="searchPattern">The pattern the search was for</param>
+        public static void CalulateAndSort(string searchPattern)
         {
-            pattern = pattern.ToLower();
+            searchPattern = searchPattern.ToLower();
 
             foreach (SearchItem item in _staticAllSearches)
             {
-                item.Score = pattern.LongestCommonSubsequence(item.Name.ToLower()).Item2;
+                item.Score = searchPattern.LongestCommonSubsequence(item.Name.ToLower()).Item2;
             }
-           // sort list
+           // sort list according to score of each line (score against pattern)
             _staticAllSearches = _staticAllSearches.OrderByDescending(a => a.Score).ToList();
 
         }
