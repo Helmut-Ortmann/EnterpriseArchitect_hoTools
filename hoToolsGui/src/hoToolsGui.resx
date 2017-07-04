@@ -438,6 +438,64 @@
   <metadata name="_contextMenuStripSearch.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>693, 17</value>
   </metadata>
+  <data name="_contextMenuStripSearch.Size" type="System.Drawing.Size, System.Drawing">
+    <value>259, 148</value>
+  </data>
+  <data name="_contextMenuStripSearch.ToolTip" xml:space="preserve">
+    <value>Export the Clipboard content as csv to Excel</value>
+  </data>
+  <data name="&gt;&gt;_contextMenuStripSearch.Name" xml:space="preserve">
+    <value>_contextMenuStripSearch</value>
+  </data>
+  <data name="&gt;&gt;_contextMenuStripSearch.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="_txtSearchText.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="_txtSearchText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>247, 1</value>
+  </data>
+  <data name="_txtSearchText.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>1, 1, 1, 1</value>
+  </data>
+  <data name="_txtSearchText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>213, 20</value>
+  </data>
+  <data name="_txtSearchText.TabIndex" type="System.Int32, mscorlib">
+    <value>27</value>
+  </data>
+  <data name="_txtSearchText.Text" xml:space="preserve">
+    <value>&lt;Search Term&gt;</value>
+  </data>
+  <data name="_txtSearchText.ToolTip" xml:space="preserve">
+    <value>&lt;Search Term&gt; if needed for your SQL / EA Model Search:
+
+With enter you can run your Search.
+
+Enter your &lt;Search Term&gt; to further specify your search.
+
+If you use hoTools SQL the following wild cards are supported and converted according to your database:
+- #WC# EA wild card (works also in hoToolsQuery like '*' or '%'
+- % or * (no or any amount of arbitrary characters, transformed to the used database)
+- ? or _ (single character, transformed to the used database)
+- ! or ^ (shortcut for XOR)
+
+e.g.: 'myString*' Everything starting with 'myString' (db independent)
+</value>
+  </data>
+  <data name="&gt;&gt;_txtSearchText.Name" xml:space="preserve">
+    <value>_txtSearchText</value>
+  </data>
+  <data name="&gt;&gt;_txtSearchText.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;_txtSearchText.Parent" xml:space="preserve">
+    <value>_panelQuickSearch</value>
+  </data>
+  <data name="&gt;&gt;_txtSearchText.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <data name="editSQLSearchToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>258, 22</value>
   </data>
@@ -501,64 +559,6 @@ No Excel is required.</value>
   </data>
   <data name="clipboardTocsvToolStripMenuItem.Text" xml:space="preserve">
     <value>Export csv of Clipboard to Excel</value>
-  </data>
-  <data name="_contextMenuStripSearch.Size" type="System.Drawing.Size, System.Drawing">
-    <value>259, 170</value>
-  </data>
-  <data name="_contextMenuStripSearch.ToolTip" xml:space="preserve">
-    <value>Export the Clipboard content as csv to Excel</value>
-  </data>
-  <data name="&gt;&gt;_contextMenuStripSearch.Name" xml:space="preserve">
-    <value>_contextMenuStripSearch</value>
-  </data>
-  <data name="&gt;&gt;_contextMenuStripSearch.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="_txtSearchText.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="_txtSearchText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>247, 1</value>
-  </data>
-  <data name="_txtSearchText.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>1, 1, 1, 1</value>
-  </data>
-  <data name="_txtSearchText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>213, 20</value>
-  </data>
-  <data name="_txtSearchText.TabIndex" type="System.Int32, mscorlib">
-    <value>27</value>
-  </data>
-  <data name="_txtSearchText.Text" xml:space="preserve">
-    <value>&lt;Search Term&gt;</value>
-  </data>
-  <data name="_txtSearchText.ToolTip" xml:space="preserve">
-    <value>&lt;Search Term&gt; if needed for your SQL / EA Model Search:
-
-With enter you can run your Search.
-
-Enter your &lt;Search Term&gt; to further specify your search.
-
-If you use hoTools SQL the following wild cards are supported and converted according to your database:
-- #WC# EA wild card (works also in hoToolsQuery like '*' or '%'
-- % or * (no or any amount of arbitrary characters, transformed to the used database)
-- ? or _ (single character, transformed to the used database)
-- ! or ^ (shortcut for XOR)
-
-e.g.: 'myString*' Everything starting with 'myString' (db independent)
-</value>
-  </data>
-  <data name="&gt;&gt;_txtSearchText.Name" xml:space="preserve">
-    <value>_txtSearchText</value>
-  </data>
-  <data name="&gt;&gt;_txtSearchText.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;_txtSearchText.Parent" xml:space="preserve">
-    <value>_panelQuickSearch</value>
-  </data>
-  <data name="&gt;&gt;_txtSearchText.ZOrder" xml:space="preserve">
-    <value>1</value>
   </data>
   <data name="_btnLabelRight.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 9.75pt</value>

@@ -16,7 +16,10 @@ namespace HybridScriptingConnectEA
     /// </summary>
     public class ROT
     {
-        void Main()
+        /// <summary>
+        /// Test Main: Get all EA Instances and get the connection string from the repository.
+        /// </summary>
+        public static void Main()
         {
             List<EAAppInstance> l = GetEAInstances();
             foreach (EAAppInstance el in l)
@@ -46,6 +49,11 @@ namespace HybridScriptingConnectEA
         [DllImport("user32.dll")]
         private static extern bool IsIconic(IntPtr hWnd);
 
+
+        /// <summary>
+        /// Return all EA Instances from the ROT (Running Object Table) of COM. 
+        /// </summary>
+        /// <returns></returns>
         public static List<EAAppInstance> GetEAInstances()
         {
             List<EAAppInstance> result = new List<EAAppInstance>();
