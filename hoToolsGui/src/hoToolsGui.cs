@@ -1176,6 +1176,7 @@ namespace hoTools.hoToolsGui
         #region InitializeComponent
         void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HoToolsGui));
             this._toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this._toolStripQuery = new System.Windows.Forms.ToolStrip();
@@ -1195,9 +1196,9 @@ namespace hoTools.hoToolsGui
             this._toolStripServiceBtn8 = new System.Windows.Forms.ToolStripButton();
             this._toolStripServiceBtn9 = new System.Windows.Forms.ToolStripButton();
             this._toolStripServiceBtn10 = new System.Windows.Forms.ToolStripButton();
-            this._toolTip = new System.Windows.Forms.ToolTip();
+            this._toolTip = new System.Windows.Forms.ToolTip(this.components);
             this._txtSearchText = new System.Windows.Forms.TextBox();
-            this._contextMenuStripSearch = new System.Windows.Forms.ContextMenuStrip();
+            this._contextMenuStripSearch = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.editSQLSearchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showSQLPathToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -1246,7 +1247,7 @@ namespace hoTools.hoToolsGui
             this._btnAddNoteAndLink = new System.Windows.Forms.Button();
             this._btnAddNote = new System.Windows.Forms.Button();
             this._btnAddConstraint = new System.Windows.Forms.Button();
-            this.contextMenuRtf = new System.Windows.Forms.ContextMenuStrip();
+            this.contextMenuRtf = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.editSQLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showSQLFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showSQLPathToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -1348,7 +1349,7 @@ namespace hoTools.hoToolsGui
             this._lblPorts = new System.Windows.Forms.Label();
             this._panelAdvanced = new System.Windows.Forms.Panel();
             this._panelQuickSearch = new System.Windows.Forms.TableLayoutPanel();
-            this._toolTipRtfListOfSearches = new System.Windows.Forms.ToolTip();
+            this._toolTipRtfListOfSearches = new System.Windows.Forms.ToolTip(this.components);
             this._panelConveyedItems = new System.Windows.Forms.Panel();
             this._toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this._toolStripContainer1.SuspendLayout();

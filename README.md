@@ -119,6 +119,7 @@ Some features:
 
 # Releases
 ## Release 3.0.5
+- Service Copy GUID to Cliboard
 
 ## Release 3.0.3 + 3.0.4
 - Auto Numbering for Name/Alias for type/stereotype

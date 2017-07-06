@@ -366,9 +366,53 @@ namespace hoTools.EaServices
 
         #endregion
 
-        
 
 
+        /// <summary>
+        /// UnLock Package (Package, Diagram, Element may be selected)
+        /// </summary>
+        /// <param name="rep"></param>
+        [ServiceOperation("{02ECEF56-5EF8-45D7-9CB8-4A67B5D9AC2F}", "Copy GUID to Clipboard",
+            "Copy GUID to Clipboard (Package, Element, Diagram, Attribute, Operation, Connector, Parameter)", isTextRequired: false)]
+        // ReSharper disable once UnusedMember.Global
+        // dynamical usage as configurable service by reflection
+        public static void CopyGuidToClipboard(Repository rep)
+        {
+            string strGuid = ""; 
+            object o;
+            EA.ObjectType type = rep.GetContextItem(out o);
+            switch (type)
+            {
+                case EA.ObjectType.otElement:
+                    strGuid = ((EA.Element) o).ElementGUID;
+                    break;
+                case EA.ObjectType.otPackage:
+                    strGuid = ((EA.Package)o).PackageGUID;
+                    break;
+                case EA.ObjectType.otDiagram:
+                    strGuid = ((EA.Diagram)o).DiagramGUID;
+                    break;
+                case EA.ObjectType.otAttribute:
+                    strGuid = ((EA.Attribute)o).AttributeGUID;
+                    break;
+                case EA.ObjectType.otMethod:
+                    strGuid = ((EA.Method)o).MethodGUID;
+                    break;
+
+                case EA.ObjectType.otConnector:
+                    strGuid = ((EA.Connector)o).ConnectorGUID;
+                    break;
+                case EA.ObjectType.otModel:
+                    strGuid = ((EA.Package)o).PackageGUID;
+                    break;
+                case EA.ObjectType.otParameter:
+                    strGuid = ((EA.Parameter)o).ParameterGUID;
+                    break;
+                
+            }
+
+            Clipboard.SetText(strGuid);
+        }
 
 
         //-------------------------------------------------------------------------------------------
@@ -5604,7 +5648,7 @@ from %APPDATA%Local\Apps\hoTools\
         /// <summary>
         /// Move Feature (Attribute/Operation) up. EA automatic ordering has to be disabled in the configuration
         /// </summary>
-        /// [ServiceOperation("{7DEB5894-1B07-4743-B97E-95C71FDC7614}", "Move Feature (Attribute/Operation) up", "Select Feature", isTextRequired: false)]
+        [ServiceOperation("{7DEB5894-1B07-4743-B97E-95C71FDC7614}", "Move Feature (Attribute/Operation) up", "Select Feature", isTextRequired: false)]
         public static void FeatureUp(EA.Repository rep)
         {
             switch (rep.GetContextItemType())
@@ -5664,7 +5708,7 @@ from %APPDATA%Local\Apps\hoTools\
         /// <summary>
         /// Move feature (Attribute/Operation) down. EA automatic ordering has to be disabled in the configuration
         /// </summary>
-        /// [ServiceOperation("{8A54BF0E-F901-4D74-A8C4-D66B5A2508AE}", "Move Attribute down", "Select attribute", isTextRequired: false)]
+        [ServiceOperation("{8A54BF0E-F901-4D74-A8C4-D66B5A2508AE}", "Move Attribute down", "Select attribute", isTextRequired: false)]
         public static void FeatureDown(EA.Repository rep)
         {
             switch (rep.GetContextItemType())
