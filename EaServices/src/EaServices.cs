@@ -183,6 +183,41 @@ namespace hoTools.EaServices
 
         #endregion
 
+        /// <summary>
+        /// UpdateHyperlinks in descriptions
+        /// </summary>
+        /// <param name="rep"></param>
+        [ServiceOperation("{CBAF828B-3C3C-4D11-8983-1D3960193154}",
+            "Update Hyperlinks in Notes", // Description
+            "Update Hyperlinks in Notes", //Tooltip
+            isTextRequired: false)]
+        // ReSharper disable once UnusedMember.Global
+        // dynamical usage as configurable service by reflection
+        public static void UpdateHyperLinks(Repository rep)
+        {
+            string sql = @"select name, note from t_object where note like '*a href=""$element://{*'";
+            Regex rgx = new Regex(@"a href=""\$element://({[ABCDEF0123456789-]+})[^u]*u&gt;([^&]*)");
+            foreach (EA.Element el in rep.GetElementSet(sql, 2))
+            {
+                string s = el.Notes;
+                Match m = rgx.Match(s);
+                while (m.Success)
+                {
+                    string guid = m.Groups[1].Value;
+                    string replaceString = m.Groups[1].Value;
+                    EA.Element elReplace = rep.GetElementByGuid(guid);
+                    // Replace string
+                    s = s.Replace($"u&gt;{replaceString}&lt;/u", $"u&gt;{elReplace.Name}&lt;/u");
+
+
+                    m.NextMatch();
+                }
+            }
+            ;
+        }
+
+
+
         #region LockSelected
 
         /// <summary>
