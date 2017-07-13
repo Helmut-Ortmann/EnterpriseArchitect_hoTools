@@ -455,26 +455,26 @@ namespace hoTools.Settings.Toolbar
 
             #region store Toolbar Buttons Services
 
-            _settings.ButtonsServiceConfig[0].Id = cmbService1.SelectedValue.ToString();
+            _settings.ButtonsServiceConfig[0].Id = cmbService1.SelectedValue?.ToString() ?? "";
             _settings.ButtonsServiceConfig[0].ButtonText = txtButton1TextService.Text;
-            _settings.ButtonsServiceConfig[1].Id = cmbService2.SelectedValue.ToString();
+            _settings.ButtonsServiceConfig[1].Id = cmbService2.SelectedValue?.ToString() ?? "";
             _settings.ButtonsServiceConfig[1].ButtonText = txtButton2TextService.Text;
-            _settings.ButtonsServiceConfig[2].Id = cmbService3.SelectedValue.ToString();
+            _settings.ButtonsServiceConfig[2].Id = cmbService3.SelectedValue?.ToString() ?? "";
             _settings.ButtonsServiceConfig[2].ButtonText = txtButton3TextService.Text;
-            _settings.ButtonsServiceConfig[3].Id = cmbService4.SelectedValue.ToString();
+            _settings.ButtonsServiceConfig[3].Id = cmbService4.SelectedValue?.ToString() ?? "";
             _settings.ButtonsServiceConfig[3].ButtonText = txtButton4TextService.Text;
-            _settings.ButtonsServiceConfig[4].Id = cmbService5.SelectedValue.ToString();
+            _settings.ButtonsServiceConfig[4].Id = cmbService5.SelectedValue?.ToString() ?? "";
             _settings.ButtonsServiceConfig[4].ButtonText = txtButton5TextService.Text;
 
-            _settings.ButtonsServiceConfig[5].Id = cmbService6.SelectedValue.ToString();
+            _settings.ButtonsServiceConfig[5].Id = cmbService6.SelectedValue?.ToString() ?? "";
             _settings.ButtonsServiceConfig[5].ButtonText = txtButton6TextService.Text;
-            _settings.ButtonsServiceConfig[6].Id = cmbService7.SelectedValue.ToString();
+            _settings.ButtonsServiceConfig[6].Id = cmbService7.SelectedValue?.ToString() ?? "";
             _settings.ButtonsServiceConfig[6].ButtonText = txtButton7TextService.Text;
-            _settings.ButtonsServiceConfig[7].Id = cmbService8.SelectedValue.ToString();
+            _settings.ButtonsServiceConfig[7].Id = cmbService8.SelectedValue?.ToString() ?? "";
             _settings.ButtonsServiceConfig[7].ButtonText = txtButton8TextService.Text;
-            _settings.ButtonsServiceConfig[8].Id = cmbService9.SelectedValue.ToString();
+            _settings.ButtonsServiceConfig[8].Id = cmbService9.SelectedValue?.ToString() ?? "";
             _settings.ButtonsServiceConfig[8].ButtonText = txtButton9TextService.Text;
-            _settings.ButtonsServiceConfig[9].Id = cmbService10.SelectedValue.ToString();
+            _settings.ButtonsServiceConfig[9].Id = cmbService10.SelectedValue?.ToString() ?? "";
             _settings.ButtonsServiceConfig[9].ButtonText = txtButton10TextService.Text;
 
             #endregion

@@ -5783,7 +5783,7 @@ from %APPDATA%Local\Apps\hoTools\
         }
 
         [ServiceOperation("{0B719197-81AF-4B7A-9E2E-2E2B96C101DB}", "Copy name of selected item to Clipboard",
-            "Select Package, Element, Attribute, Operation.", isTextRequired: false)]
+            "Select Package, Element, Attribute, Operation, Connector. If connector copy Guard (Flow, Transition)", isTextRequired: false)]
         // ReSharper disable once UnusedMember.Global
         public static void CopyContextNameToClipboard(EA.Repository rep)
         {
@@ -5836,7 +5836,10 @@ from %APPDATA%Local\Apps\hoTools\
                     name = ((EA.Datatype)rep.GetContextObject()).Name;
                     break;
                 case ObjectType.otConnector:
-                    name = ((EA.Connector)rep.GetContextObject()).Name;
+                    EA.Connector con = (EA.Connector) rep.GetContextObject();
+                    string guard = con.TransitionGuard.Trim();
+                    if ("ControlFlow ObjectFlow StateFlow".Contains(con.Type) && guard != "") name = guard;
+                    else name = con.Name;
                     break;
                 case ObjectType.otIssue:
                     name = ((EA.Issue)rep.GetContextObject()).Name;

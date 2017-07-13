@@ -120,6 +120,8 @@ Some features:
 # Releases
 ## Release 3.0.5
 - Service Copy GUID to Cliboard
+- Item/Connector name to Cliboard
+- Error configuration Toolbar services fixed
 
 ## Release 3.0.3 + 3.0.4
 - Auto Numbering for Name/Alias for type/stereotype

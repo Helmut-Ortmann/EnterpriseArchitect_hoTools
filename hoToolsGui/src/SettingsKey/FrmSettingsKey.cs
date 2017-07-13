@@ -435,43 +435,43 @@ namespace hoTools.Settings.Key
         private void SaveSearch()
         {
             // Global Searches via hot key
-            _settings.GlobalKeysConfigSearch[0].Key = cmbGlobalKeySearch1Key.SelectedValue.ToString();
-            _settings.GlobalKeysConfigSearch[0].Modifier1 = cmbGlobalKeySearch1Mod1.SelectedValue.ToString();
-            _settings.GlobalKeysConfigSearch[0].Modifier2 = cmbGlobalKeySearch1Mod2.SelectedValue.ToString();
-            _settings.GlobalKeysConfigSearch[0].Modifier3 = cmbGlobalKeySearch1Mod3.SelectedValue.ToString();
-            _settings.GlobalKeysConfigSearch[0].Modifier4 = cmbGlobalKeySearch1Mod4.SelectedValue.ToString();
+            _settings.GlobalKeysConfigSearch[0].Key = cmbGlobalKeySearch1Key?.SelectedValue.ToString() ?? "";
+            _settings.GlobalKeysConfigSearch[0].Modifier1 = cmbGlobalKeySearch1Mod1?.SelectedValue.ToString() ?? "";
+            _settings.GlobalKeysConfigSearch[0].Modifier2 = cmbGlobalKeySearch1Mod2?.SelectedValue.ToString() ?? "";
+            _settings.GlobalKeysConfigSearch[0].Modifier3 = cmbGlobalKeySearch1Mod3?.SelectedValue.ToString() ?? "";
+            _settings.GlobalKeysConfigSearch[0].Modifier4 = cmbGlobalKeySearch1Mod4?.SelectedValue.ToString() ?? "";
             _settings.GlobalKeysConfigSearch[0].SearchName = cmbGlobalKeySearch1SearchName.Text;
             _settings.GlobalKeysConfigSearch[0].SearchTerm = cmbGlobalKeySearch1SearchTerm.Text;
 
-            _settings.GlobalKeysConfigSearch[1].Key = cmbGlobalKeySearch2Key.SelectedValue.ToString();
-            _settings.GlobalKeysConfigSearch[1].Modifier1 = cmbGlobalKeySearch2Mod1.SelectedValue.ToString();
-            _settings.GlobalKeysConfigSearch[1].Modifier2 = cmbGlobalKeySearch2Mod2.SelectedValue.ToString();
-            _settings.GlobalKeysConfigSearch[1].Modifier3 = cmbGlobalKeySearch2Mod3.SelectedValue.ToString();
-            _settings.GlobalKeysConfigSearch[1].Modifier4 = cmbGlobalKeySearch2Mod4.SelectedValue.ToString();
+            _settings.GlobalKeysConfigSearch[1].Key = cmbGlobalKeySearch2Key?.SelectedValue.ToString() ?? "";
+            _settings.GlobalKeysConfigSearch[1].Modifier1 = cmbGlobalKeySearch2Mod1?.SelectedValue.ToString() ?? "";
+            _settings.GlobalKeysConfigSearch[1].Modifier2 = cmbGlobalKeySearch2Mod2?.SelectedValue.ToString() ?? "";
+            _settings.GlobalKeysConfigSearch[1].Modifier3 = cmbGlobalKeySearch2Mod3?.SelectedValue.ToString() ?? "";
+            _settings.GlobalKeysConfigSearch[1].Modifier4 = cmbGlobalKeySearch2Mod4?.SelectedValue.ToString() ?? "";
             _settings.GlobalKeysConfigSearch[1].SearchName = cmbGlobalKeySearch2SearchName.Text;
             _settings.GlobalKeysConfigSearch[1].SearchTerm = cmbGlobalKeySearch2SearchTerm.Text;
 
-            _settings.GlobalKeysConfigSearch[2].Key = cmbGlobalKeySearch3Key.SelectedValue.ToString();
-            _settings.GlobalKeysConfigSearch[2].Modifier1 = cmbGlobalKeySearch3Mod1.SelectedValue.ToString();
-            _settings.GlobalKeysConfigSearch[2].Modifier2 = cmbGlobalKeySearch3Mod2.SelectedValue.ToString();
-            _settings.GlobalKeysConfigSearch[2].Modifier3 = cmbGlobalKeySearch3Mod3.SelectedValue.ToString();
-            _settings.GlobalKeysConfigSearch[2].Modifier4 = cmbGlobalKeySearch3Mod4.SelectedValue.ToString();
+            _settings.GlobalKeysConfigSearch[2].Key = cmbGlobalKeySearch3Key?.SelectedValue.ToString() ?? "";
+            _settings.GlobalKeysConfigSearch[2].Modifier1 = cmbGlobalKeySearch3Mod1?.SelectedValue.ToString() ?? "";
+            _settings.GlobalKeysConfigSearch[2].Modifier2 = cmbGlobalKeySearch3Mod2?.SelectedValue.ToString() ?? "";
+            _settings.GlobalKeysConfigSearch[2].Modifier3 = cmbGlobalKeySearch3Mod3?.SelectedValue.ToString() ?? "";
+            _settings.GlobalKeysConfigSearch[2].Modifier4 = cmbGlobalKeySearch3Mod4?.SelectedValue.ToString() ?? "";
             _settings.GlobalKeysConfigSearch[2].SearchName = cmbGlobalKeySearch3SearchName.Text;
             _settings.GlobalKeysConfigSearch[2].SearchTerm = cmbGlobalKeySearch3SearchTerm.Text;
 
-            _settings.GlobalKeysConfigSearch[3].Key = cmbGlobalKeySearch4Key.SelectedValue.ToString();
-            _settings.GlobalKeysConfigSearch[3].Modifier1 = cmbGlobalKeySearch4Mod1.SelectedValue.ToString();
-            _settings.GlobalKeysConfigSearch[3].Modifier2 = cmbGlobalKeySearch4Mod2.SelectedValue.ToString();
-            _settings.GlobalKeysConfigSearch[3].Modifier3 = cmbGlobalKeySearch4Mod3.SelectedValue.ToString();
-            _settings.GlobalKeysConfigSearch[3].Modifier4 = cmbGlobalKeySearch4Mod4.SelectedValue.ToString();
+            _settings.GlobalKeysConfigSearch[3].Key = cmbGlobalKeySearch4Key?.SelectedValue.ToString() ?? "";
+            _settings.GlobalKeysConfigSearch[3].Modifier1 = cmbGlobalKeySearch4Mod1?.SelectedValue.ToString() ?? "";
+            _settings.GlobalKeysConfigSearch[3].Modifier2 = cmbGlobalKeySearch4Mod2?.SelectedValue.ToString() ?? "";
+            _settings.GlobalKeysConfigSearch[3].Modifier3 = cmbGlobalKeySearch4Mod3?.SelectedValue.ToString() ?? "";
+            _settings.GlobalKeysConfigSearch[3].Modifier4 = cmbGlobalKeySearch4Mod4?.SelectedValue.ToString() ?? "";
             _settings.GlobalKeysConfigSearch[3].SearchName = cmbGlobalKeySearch4SearchName.Text;
             _settings.GlobalKeysConfigSearch[3].SearchTerm = cmbGlobalKeySearch4SearchTerm.Text;
 
-            _settings.GlobalKeysConfigSearch[4].Key = cmbGlobalKeySearch5Key.SelectedValue.ToString();
-            _settings.GlobalKeysConfigSearch[4].Modifier1 = cmbGlobalKeySearch5Mod1.SelectedValue.ToString();
-            _settings.GlobalKeysConfigSearch[4].Modifier2 = cmbGlobalKeySearch5Mod2.SelectedValue.ToString();
-            _settings.GlobalKeysConfigSearch[4].Modifier3 = cmbGlobalKeySearch5Mod3.SelectedValue.ToString();
-            _settings.GlobalKeysConfigSearch[4].Modifier4 = cmbGlobalKeySearch5Mod4.SelectedValue.ToString();
+            _settings.GlobalKeysConfigSearch[4].Key = cmbGlobalKeySearch5Key?.SelectedValue.ToString() ?? "";
+            _settings.GlobalKeysConfigSearch[4].Modifier1 = cmbGlobalKeySearch5Mod1?.SelectedValue.ToString() ?? "";
+            _settings.GlobalKeysConfigSearch[4].Modifier2 = cmbGlobalKeySearch5Mod2?.SelectedValue.ToString() ?? "";
+            _settings.GlobalKeysConfigSearch[4].Modifier3 = cmbGlobalKeySearch5Mod3?.SelectedValue.ToString() ?? "";
+            _settings.GlobalKeysConfigSearch[4].Modifier4 = cmbGlobalKeySearch5Mod4?.SelectedValue.ToString() ?? "";
             _settings.GlobalKeysConfigSearch[4].SearchName = cmbGlobalKeySearch5SearchName.Text;
             _settings.GlobalKeysConfigSearch[4].SearchTerm = cmbGlobalKeySearch5SearchTerm.Text;
 
@@ -487,44 +487,44 @@ namespace hoTools.Settings.Key
 
 
             // Global Services via hot key
-            _settings.GlobalKeysConfig[0].Key = cmbGlobalKeyService1Key.SelectedValue.ToString();
-            _settings.GlobalKeysConfig[0].Modifier1 = cmbGlobalKeyService1Mod1.SelectedValue.ToString();
-            _settings.GlobalKeysConfig[0].Modifier2 = cmbGlobalKeyService1Mod2.SelectedValue.ToString();
-            _settings.GlobalKeysConfig[0].Modifier3 = cmbGlobalKeyService1Mod3.SelectedValue.ToString();
-            _settings.GlobalKeysConfig[0].Modifier4 = cmbGlobalKeyService1Mod4.SelectedValue.ToString();
-            _settings.GlobalKeysConfig[0].Id = cmbGlobalKey1Service.SelectedValue.ToString();
+            _settings.GlobalKeysConfig[0].Key = cmbGlobalKeyService1Key?.SelectedValue.ToString() ?? "";
+            _settings.GlobalKeysConfig[0].Modifier1 = cmbGlobalKeyService1Mod1?.SelectedValue.ToString() ?? "";
+            _settings.GlobalKeysConfig[0].Modifier2 = cmbGlobalKeyService1Mod2?.SelectedValue.ToString() ?? "";
+            _settings.GlobalKeysConfig[0].Modifier3 = cmbGlobalKeyService1Mod3?.SelectedValue.ToString() ?? "";
+            _settings.GlobalKeysConfig[0].Modifier4 = cmbGlobalKeyService1Mod4?.SelectedValue.ToString() ?? "";
+            _settings.GlobalKeysConfig[0].Id = cmbGlobalKey1Service?.SelectedValue.ToString() ?? "";
             _settings.GlobalKeysConfig[0].Description = cmbGlobalKey1Tooltip.Text;
 
-            _settings.GlobalKeysConfig[1].Key = cmbGlobalKeyService2Key.SelectedValue.ToString();
-            _settings.GlobalKeysConfig[1].Modifier1 = cmbGlobalKeyService2Mod1.SelectedValue.ToString();
-            _settings.GlobalKeysConfig[1].Modifier2 = cmbGlobalKeyService2Mod2.SelectedValue.ToString();
-            _settings.GlobalKeysConfig[1].Modifier3 = cmbGlobalKeyService2Mod3.SelectedValue.ToString();
-            _settings.GlobalKeysConfig[1].Modifier4 = cmbGlobalKeyService2Mod4.SelectedValue.ToString();
-            _settings.GlobalKeysConfig[1].Id = cmbGlobalKey2Service.SelectedValue.ToString();
+            _settings.GlobalKeysConfig[1].Key = cmbGlobalKeyService2Key?.SelectedValue.ToString() ?? "";
+            _settings.GlobalKeysConfig[1].Modifier1 = cmbGlobalKeyService2Mod1?.SelectedValue.ToString() ?? "";
+            _settings.GlobalKeysConfig[1].Modifier2 = cmbGlobalKeyService2Mod2?.SelectedValue.ToString() ?? "";
+            _settings.GlobalKeysConfig[1].Modifier3 = cmbGlobalKeyService2Mod3?.SelectedValue.ToString() ?? "";
+            _settings.GlobalKeysConfig[1].Modifier4 = cmbGlobalKeyService2Mod4?.SelectedValue.ToString() ?? "";
+            _settings.GlobalKeysConfig[1].Id = cmbGlobalKey2Service?.SelectedValue.ToString() ?? "";
             _settings.GlobalKeysConfig[1].Description = cmbGlobalKey2Tooltip.Text;
 
-            _settings.GlobalKeysConfig[2].Key = cmbGlobalKeyService3Key.SelectedValue.ToString();
-            _settings.GlobalKeysConfig[2].Modifier1 = cmbGlobalKeyService3Mod1.SelectedValue.ToString();
-            _settings.GlobalKeysConfig[2].Modifier2 = cmbGlobalKeyService3Mod2.SelectedValue.ToString();
-            _settings.GlobalKeysConfig[2].Modifier3 = cmbGlobalKeyService3Mod3.SelectedValue.ToString();
-            _settings.GlobalKeysConfig[2].Modifier4 = cmbGlobalKeyService3Mod4.SelectedValue.ToString();
-            _settings.GlobalKeysConfig[2].Id = cmbGlobalKey3Service.SelectedValue.ToString();
+            _settings.GlobalKeysConfig[2].Key = cmbGlobalKeyService3Key?.SelectedValue.ToString() ?? "";
+            _settings.GlobalKeysConfig[2].Modifier1 = cmbGlobalKeyService3Mod1?.SelectedValue.ToString() ?? "";
+            _settings.GlobalKeysConfig[2].Modifier2 = cmbGlobalKeyService3Mod2?.SelectedValue.ToString() ?? "";
+            _settings.GlobalKeysConfig[2].Modifier3 = cmbGlobalKeyService3Mod3?.SelectedValue.ToString() ?? "";
+            _settings.GlobalKeysConfig[2].Modifier4 = cmbGlobalKeyService3Mod4?.SelectedValue.ToString() ?? "";
+            _settings.GlobalKeysConfig[2].Id = cmbGlobalKey3Service?.SelectedValue.ToString() ?? "";
             _settings.GlobalKeysConfig[2].Description = cmbGlobalKey3Tooltip.Text;
 
-            _settings.GlobalKeysConfig[3].Key = cmbGlobalKeyService4Key.SelectedValue.ToString();
-            _settings.GlobalKeysConfig[3].Modifier1 = cmbGlobalKeyService4Mod1.SelectedValue.ToString();
-            _settings.GlobalKeysConfig[3].Modifier2 = cmbGlobalKeyService4Mod2.SelectedValue.ToString();
-            _settings.GlobalKeysConfig[3].Modifier3 = cmbGlobalKeyService4Mod3.SelectedValue.ToString();
-            _settings.GlobalKeysConfig[3].Modifier4 = cmbGlobalKeyService4Mod4.SelectedValue.ToString();
-            _settings.GlobalKeysConfig[3].Id = cmbGlobalKey4Service.SelectedValue.ToString();
+            _settings.GlobalKeysConfig[3].Key = cmbGlobalKeyService4Key?.SelectedValue.ToString() ?? "";
+            _settings.GlobalKeysConfig[3].Modifier1 = cmbGlobalKeyService4Mod1?.SelectedValue.ToString() ?? "";
+            _settings.GlobalKeysConfig[3].Modifier2 = cmbGlobalKeyService4Mod2?.SelectedValue.ToString() ?? "";
+            _settings.GlobalKeysConfig[3].Modifier3 = cmbGlobalKeyService4Mod3?.SelectedValue.ToString() ?? "";
+            _settings.GlobalKeysConfig[3].Modifier4 = cmbGlobalKeyService4Mod4?.SelectedValue.ToString() ?? "";
+            _settings.GlobalKeysConfig[3].Id = cmbGlobalKey4Service?.SelectedValue.ToString() ?? "";
             _settings.GlobalKeysConfig[3].Description = cmbGlobalKey4Tooltip.Text;
 
-            _settings.GlobalKeysConfig[4].Key = cmbGlobalKeyService5Key.SelectedValue.ToString();
-            _settings.GlobalKeysConfig[4].Modifier1 = cmbGlobalKeyService5Mod1.SelectedValue.ToString();
-            _settings.GlobalKeysConfig[4].Modifier2 = cmbGlobalKeyService5Mod2.SelectedValue.ToString();
-            _settings.GlobalKeysConfig[4].Modifier3 = cmbGlobalKeyService5Mod3.SelectedValue.ToString();
-            _settings.GlobalKeysConfig[4].Modifier4 = cmbGlobalKeyService5Mod4.SelectedValue.ToString();
-            _settings.GlobalKeysConfig[4].Id = cmbGlobalKey5Service.SelectedValue.ToString();
+            _settings.GlobalKeysConfig[4].Key = cmbGlobalKeyService5Key?.SelectedValue.ToString() ?? "";
+            _settings.GlobalKeysConfig[4].Modifier1 = cmbGlobalKeyService5Mod1?.SelectedValue.ToString() ?? "";
+            _settings.GlobalKeysConfig[4].Modifier2 = cmbGlobalKeyService5Mod2?.SelectedValue.ToString() ?? "";
+            _settings.GlobalKeysConfig[4].Modifier3 = cmbGlobalKeyService5Mod3?.SelectedValue.ToString() ?? "";
+            _settings.GlobalKeysConfig[4].Modifier4 = cmbGlobalKeyService5Mod4?.SelectedValue.ToString() ?? "";
+            _settings.GlobalKeysConfig[4].Id = cmbGlobalKey5Service?.SelectedValue.ToString() ?? "";
             _settings.GlobalKeysConfig[4].Description = cmbGlobalKey5Tooltip.Text;
 
             #endregion
