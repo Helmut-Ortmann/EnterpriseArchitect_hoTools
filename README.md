@@ -119,7 +119,7 @@ Some features:
 
 # Releases
 ## Release 3.0.5
-- Update Hyperlinks of Notes in Diagram, Package, Element, Attribute, Operation
+- [Update Hyperlinks of Notes in Diagram, Package, Element, Attribute, Operation](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/UpdateHyperlinksInNotes)
 - Service Copy GUID to Cliboard
 - Item/Connector name to Cliboard
 - Error configuration Toolbar services fixed

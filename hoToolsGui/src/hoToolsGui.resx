@@ -2471,7 +2471,7 @@ Note:
     <value>277, 22</value>
   </data>
   <data name="updateHyperLinksToolStripMenuItem.Text" xml:space="preserve">
-    <value>UpdateHyperLinks</value>
+    <value>UpdateHyperLinks in Notes</value>
   </data>
   <data name="updateHyperLinksToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>Update Hyperlinks in Notes:
