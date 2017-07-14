@@ -2,6 +2,8 @@
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using EA;
+using File = System.IO.File;
 
 namespace hoTools.Utils.Configuration
 {

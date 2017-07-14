@@ -232,6 +232,11 @@ namespace hoTools.hoToolsGui
         private ToolStripMenuItem applyAutoCounterCorrectToolStripMenuItem;
         private ToolStripMenuItem applyAutoCounterNewToolStripMenuItem;
         private ToolStripSeparator toolStripSeparator14;
+        private ToolStripMenuItem updateHyperLinksToolStripMenuItem;
+        private ToolStripMenuItem updateDiagramHyperlinksToolStripMenuItem1;
+        private ToolStripMenuItem updateElementHyperlinksToolStripMenuItem;
+        private ToolStripMenuItem updateFeatureHyperlinksToolStripMenuItem;
+        private ToolStripMenuItem updateHyperlinksToolStripMenuItem1;
         private TextBox _txtSearchText;
         #endregion
 
@@ -1290,6 +1295,7 @@ namespace hoTools.hoToolsGui
             this._changeAuthorRecursiveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._changeAuthorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
+            this.updateHyperLinksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.specToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.applyAllAutoCounterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.applyAutoCounterNewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -1351,6 +1357,10 @@ namespace hoTools.hoToolsGui
             this._panelQuickSearch = new System.Windows.Forms.TableLayoutPanel();
             this._toolTipRtfListOfSearches = new System.Windows.Forms.ToolTip(this.components);
             this._panelConveyedItems = new System.Windows.Forms.Panel();
+            this.updateDiagramHyperlinksToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.updateElementHyperlinksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.updateFeatureHyperlinksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.updateHyperlinksToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this._toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this._toolStripContainer1.SuspendLayout();
             this._toolStripQuery.SuspendLayout();
@@ -2145,7 +2155,8 @@ namespace hoTools.hoToolsGui
             this.changeAuthorPackagestandardToolStripMenuItem,
             this._changeAuthorRecursiveToolStripMenuItem,
             this._changeAuthorToolStripMenuItem,
-            this.toolStripSeparator13});
+            this.toolStripSeparator13,
+            this.updateHyperLinksToolStripMenuItem});
             this._doToolStripMenuItem.Name = "_doToolStripMenuItem";
             resources.ApplyResources(this._doToolStripMenuItem, "_doToolStripMenuItem");
             // 
@@ -2233,6 +2244,16 @@ namespace hoTools.hoToolsGui
             // 
             this.toolStripSeparator13.Name = "toolStripSeparator13";
             resources.ApplyResources(this.toolStripSeparator13, "toolStripSeparator13");
+            // 
+            // updateHyperLinksToolStripMenuItem
+            // 
+            this.updateHyperLinksToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.updateDiagramHyperlinksToolStripMenuItem1,
+            this.updateElementHyperlinksToolStripMenuItem,
+            this.updateFeatureHyperlinksToolStripMenuItem,
+            this.updateHyperlinksToolStripMenuItem1});
+            this.updateHyperLinksToolStripMenuItem.Name = "updateHyperLinksToolStripMenuItem";
+            resources.ApplyResources(this.updateHyperLinksToolStripMenuItem, "updateHyperLinksToolStripMenuItem");
             // 
             // specToolStripMenuItem
             // 
@@ -2659,6 +2680,28 @@ namespace hoTools.hoToolsGui
             this._panelConveyedItems.Controls.Add(this._btnConveyedItem);
             resources.ApplyResources(this._panelConveyedItems, "_panelConveyedItems");
             this._panelConveyedItems.Name = "_panelConveyedItems";
+            // 
+            // updateDiagramHyperlinksToolStripMenuItem1
+            // 
+            this.updateDiagramHyperlinksToolStripMenuItem1.Name = "updateDiagramHyperlinksToolStripMenuItem1";
+            resources.ApplyResources(this.updateDiagramHyperlinksToolStripMenuItem1, "updateDiagramHyperlinksToolStripMenuItem1");
+            this.updateDiagramHyperlinksToolStripMenuItem1.Click += new System.EventHandler(this.updateDiagramHyperlinksToolStripMenuItem1_Click);
+            // 
+            // updateElementHyperlinksToolStripMenuItem
+            // 
+            this.updateElementHyperlinksToolStripMenuItem.Name = "updateElementHyperlinksToolStripMenuItem";
+            resources.ApplyResources(this.updateElementHyperlinksToolStripMenuItem, "updateElementHyperlinksToolStripMenuItem");
+            this.updateElementHyperlinksToolStripMenuItem.Click += new System.EventHandler(this.updateElementHyperLinksToolStripMenuItem_Click);
+            // 
+            // updateFeatureHyperlinksToolStripMenuItem
+            // 
+            this.updateFeatureHyperlinksToolStripMenuItem.Name = "updateFeatureHyperlinksToolStripMenuItem";
+            resources.ApplyResources(this.updateFeatureHyperlinksToolStripMenuItem, "updateFeatureHyperlinksToolStripMenuItem");
+            // 
+            // updateHyperlinksToolStripMenuItem1
+            // 
+            this.updateHyperlinksToolStripMenuItem1.Name = "updateHyperlinksToolStripMenuItem1";
+            resources.ApplyResources(this.updateHyperlinksToolStripMenuItem1, "updateHyperlinksToolStripMenuItem1");
             // 
             // HoToolsGui
             // 
@@ -3826,6 +3869,16 @@ Please restart EA. During restart hoTools loads the default settings.",
         private void _menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
 
+        }
+
+        private void updateElementHyperLinksToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EaService.UpdateElementHyperLinks(Repository);
+        }
+
+        private void updateDiagramHyperlinksToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            EaService.UpdateDiagramHyperLinks(Repository);
         }
     }
 

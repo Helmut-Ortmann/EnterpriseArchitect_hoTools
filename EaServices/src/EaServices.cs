@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.Xml.Linq;
 using AddinFramework.Extension;
 using EA;
+using EAAddinFramework.Utils;
 using hoTools.EaServices.Dlg;
 using hoTools.Utils;
 using hoTools.Utils.ActivityParameter;
@@ -189,33 +190,207 @@ namespace hoTools.EaServices
         /// <param name="rep"></param>
         [ServiceOperation("{CBAF828B-3C3C-4D11-8983-1D3960193154}",
             "Update Hyperlinks in Notes", // Description
-            "Update Hyperlinks in Notes", //Tooltip
+            "Update Hyperlinks in Notes from Elements. It updates Hyperlinks to Package, Diagram, Element, Attribute, Operation.", //Tooltip
             isTextRequired: false)]
         // ReSharper disable once UnusedMember.Global
         // dynamical usage as configurable service by reflection
-        public static void UpdateHyperLinks(Repository rep)
+        public static void UpdateElementHyperLinks(Repository rep)
         {
-            string sql = @"select name, note from t_object where note like '*a href=""$element://{*'";
-            Regex rgx = new Regex(@"a href=""\$element://({[ABCDEF0123456789-]+})[^u]*u&gt;([^&]*)");
-            foreach (EA.Element el in rep.GetElementSet(sql, 2))
+
+            Model model = new Model(rep);
+            // < a href = "$element://{8A6488BC-0DFD-45f2-8506-4D0A77626E63}" >< font color = "#0000ff" >< u > Action1 </ u ></ font ></ a >
+            // element
+            // diagram  Name: 'PackageName : DiagramName'
+            // package
+            // feature (Attribute or Operation)
+            string sql = @"select object_id from t_object where note like '*a href=""*://{*'";
+            sql =  model.ReplaceSqlWildCards(sql);
+            //
+            
+            EA.Collection elList = rep.GetElementSet(sql, 2);
+            foreach (EA.Element el in elList)
             {
                 string s = el.Notes;
-                Match m = rgx.Match(s);
-                while (m.Success)
+
+                var changeNote = ChangeHyperLinksInNote(rep, ref s);
+                // Notes complete updated
+                if (changeNote)
                 {
-                    string guid = m.Groups[1].Value;
-                    string replaceString = m.Groups[1].Value;
-                    EA.Element elReplace = rep.GetElementByGuid(guid);
-                    // Replace string
-                    s = s.Replace($"u&gt;{replaceString}&lt;/u", $"u&gt;{elReplace.Name}&lt;/u");
-
-
-                    m.NextMatch();
+                    el.Notes = s;
+                    el.Update();
                 }
             }
             ;
         }
+        /// <summary>
+        /// UpdateHyperlinks in descriptions
+        /// </summary>
+        /// <param name="rep"></param>
+        [ServiceOperation("{3EABC1ED-C471-4F4E-9719-E9762C92FE6A}",
+            "Update Diagram Hyperlinks in Notes", // Description
+            "Update Hyperlinks in Notes from Diagram. It updates Hyperlinks to Package, Diagram, Element, Attribute, Operation.", //Tooltip
+            isTextRequired: false)]
+        // ReSharper disable once UnusedMember.Global
+        // dynamical usage as configurable service by reflection
+        public static void UpdateDiagramHyperLinks(Repository rep)
+        {
 
+            Model model = new Model(rep);
+            // < a href = "$element://{8A6488BC-0DFD-45f2-8506-4D0A77626E63}" >< font color = "#0000ff" >< u > Action1 </ u ></ font ></ a >
+            // element
+            // diagram  Name: 'PackageName : DiagramName'
+            // package
+            // feature (Attribute or Operation)
+            string sql = @"select diagram_id As id from t_diagram where notes like '*a href=""*://{*'";
+            sql = model.ReplaceSqlWildCards(sql);
+
+            UtilSql utilSql = new UtilSql(rep);
+            List<string> idList = utilSql.GetListOfStringFromSql(sql, "id");
+            foreach (string id in idList)
+            {
+                EA.Diagram dia = rep.GetDiagramByID(Int32.Parse(id));
+                string s = dia.Notes;
+
+                var changeNote = ChangeHyperLinksInNote(rep, ref s);
+                // Notes complete updated
+                if (changeNote)
+                {
+                    dia.Notes = s;
+                    dia.Update();
+                }
+            }
+            ;
+        }
+        /// <summary>
+        /// UpdateHyperlinks in descriptions
+        /// </summary>
+        /// <param name="rep"></param>
+        [ServiceOperation("{4AD31F72-C1BB-4216-9FE8-1BCB77CE3F82}",
+            "Update Feature Hyperlinks in Notes", // Description
+            "Update Feature Hyperlinks in Notes from Features (Attributes, Operations). It updates Hyperlinks to Package, Diagram, Element, Attribute, Operation.", //Tooltip
+            isTextRequired: false)]
+        // ReSharper disable once UnusedMember.Global
+        // dynamical usage as configurable service by reflection
+        public static void UpdateFeatureHyperLinks(Repository rep)
+        {
+
+            Model model = new Model(rep);
+            // < a href = "$element://{8A6488BC-0DFD-45f2-8506-4D0A77626E63}" >< font color = "#0000ff" >< u > Action1 </ u ></ font ></ a >
+            // element
+            // diagram  Name: 'PackageName : DiagramName'
+            // package
+            // feature (Attribute or Operation)
+            string sql = @"select ea_guid As guids  from t_attribute where notes like '*a href=""*://{*'";
+            sql = model.ReplaceSqlWildCards(sql);
+
+            UtilSql utilSql = new UtilSql(rep);
+            List<string> guidList = utilSql.GetListOfStringFromSql(sql, "guids");
+            foreach (string guid in guidList)
+            {
+                EA.Attribute a = rep.GetAttributeByGuid(guid);
+                string s = a.Notes;
+
+                var changeNote = ChangeHyperLinksInNote(rep, ref s);
+                // Notes complete updated
+                if (changeNote)
+                {
+                    a.Notes = s;
+                    a.Update();
+                }
+            }
+            // Operations
+            sql = @"select ea_guid As guids  from t_operation where notes like '*a href=""*://{*'";
+            sql = model.ReplaceSqlWildCards(sql);
+
+            guidList = utilSql.GetListOfStringFromSql(sql, "guids");
+            foreach (string guid in guidList)
+            {
+                EA.Method m = rep.GetMethodByGuid(guid);
+                string s = m.Notes;
+
+                var changeNote = ChangeHyperLinksInNote(rep, ref s);
+                // Notes complete updated
+                if (changeNote)
+                {
+                    m.Notes = s;
+                    m.Update();
+                }
+            }
+            ;
+        }
+        /// <summary>
+        /// Change EA Hyperlinks of type package, element, diagram, attribute, operation in notes string.
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <param name="s">Reference to the Notes string</param>
+        /// <returns>True if string is changed</returns>
+        private static bool ChangeHyperLinksInNote(Repository rep, ref string s)
+        {
+            // Possible replacements for element, package, feature(Attribute or Operation)
+            Regex rgx = new Regex(@"(a href=""\$(element|diagram|package|feature)://({[ABCDEF0123456789-]+})[^u]*u>)([^<]*)",
+                RegexOptions.IgnoreCase);
+            Match m = rgx.Match(s);
+            bool changeNote = false;
+            while (m.Success)
+            {
+                bool changeNoteItem = false;
+                string guid = m.Groups[3].Value;
+                string type = m.Groups[2].Value;
+                string name = "don't exists";
+                switch (type)
+                {
+                    case "package":
+                    case "element":
+                        EA.Element elReplace = rep.GetElementByGuid(guid);
+                        if (elReplace != null) name = $"{elReplace.Name}";
+                        changeNote = true;
+                        changeNoteItem = true;
+                        break;
+
+                    // Operation/Attribute
+                    case "feature":
+
+                        EA.Attribute aReplace = rep.GetAttributeByGuid(guid);
+                        if (aReplace != null)
+                        {
+                            name = aReplace.Name;
+                        }
+                        else
+                        {
+                            EA.Method mReplace = rep.GetMethodByGuid(guid);
+                            if (mReplace != null) name = mReplace.Name;
+                        }
+                        changeNote = true;
+                        changeNoteItem = true;
+                        break;
+
+
+                    // EntryName:   'PackageName' : 'DiagramName'
+                    case "diagram":
+                        EA.Diagram diaReplace = (EA.Diagram) rep.GetDiagramByGuid(guid);
+                        if (diaReplace != null)
+                        {
+                            EA.Package pkg = rep.GetPackageByID(diaReplace.PackageID);
+                            name = $"{pkg.Name} : {diaReplace.Name}";
+                        }
+                        changeNote = true;
+                        changeNoteItem = true;
+                        break;
+                    // do nothing
+                    default:
+                        break;
+                }
+                // current item changed
+                if (changeNoteItem)
+                {
+                    s = s.Replace($"{m.Groups[0].Value}", $"{m.Groups[1].Value}{name}");
+                }
+
+
+                m = m.NextMatch();
+            }
+            return changeNote;
+        }
 
 
         #region LockSelected
