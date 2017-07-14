@@ -119,6 +119,7 @@ Some features:
 
 # Releases
 ## Release 3.0.5
+- Update Hyperlinks of Notes in Diagram, Package, Element, Attribute, Operation
 - Service Copy GUID to Cliboard
 - Item/Connector name to Cliboard
 - Error configuration Toolbar services fixed

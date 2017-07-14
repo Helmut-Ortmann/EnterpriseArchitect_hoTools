@@ -2391,7 +2391,9 @@ It works for the following Hyperlink types:
 - Attribute
 - Operation
 
-Note: EA don't update the Hyperlinks Name if the reference changes its name.
+Note: 
+- You may have to refresh the model
+- EA don't update the Hyperlinks Name if the reference changes its name.
 </value>
   </data>
   <data name="updateElementHyperlinksToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
@@ -2412,7 +2414,9 @@ It works for the following Hyperlink types:
 - Attribute
 - Operation
 
-Note: EA don't update the Hyperlinks Name if the reference changes its name.</value>
+Note: 
+- You may have to refresh the model
+- EA don't update the Hyperlinks Name if the reference changes its name.</value>
   </data>
   <data name="updateFeatureHyperlinksToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>213, 22</value>
@@ -2432,14 +2436,36 @@ It works for the following Hyperlink types:
 - Attribute
 - Operation
 
-Note: EA don't update the Hyperlinks Name if the reference changes its name.
+Note: 
+- You may have to refresh the model
+- EA don't update the Hyperlinks Name if the reference changes its name.
 </value>
   </data>
   <data name="updateHyperlinksToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
     <value>213, 22</value>
   </data>
   <data name="updateHyperlinksToolStripMenuItem1.Text" xml:space="preserve">
-    <value>UpdateHyperlinks</value>
+    <value>UpdateHyperlinks All</value>
+  </data>
+  <data name="updateHyperlinksToolStripMenuItem1.ToolTipText" xml:space="preserve">
+    <value>Update all Hyperlinks Notes/Description in:
+- Diagrams
+- Elements
+- Packages
+- Attribute
+- Operation
+
+It works for the following Hyperlink types:
+- Diagram
+- Package
+- Element
+- Attribute
+- Operation
+
+Note: 
+- You may have to refresh the model
+- EA don't update the Hyperlinks Name if the reference changes its name.
+</value>
   </data>
   <data name="updateHyperLinksToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>277, 22</value>
@@ -2448,10 +2474,15 @@ Note: EA don't update the Hyperlinks Name if the reference changes its name.
     <value>UpdateHyperLinks</value>
   </data>
   <data name="updateHyperLinksToolStripMenuItem.ToolTipText" xml:space="preserve">
-    <value>Update Hyperlinks of type:
+    <value>Update Hyperlinks in Notes:
 - Element
+- Packages
+- Diagrams
+- Features (Operation, Attribute)
 
-Note: EA don't update the name element of Hyperlinks if it change.</value>
+Note: 
+- You may have to refresh the model
+- EA don't update the name element of Hyperlinks if it change.</value>
   </data>
   <data name="_doToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>34, 21</value>
@@ -3722,6 +3753,30 @@ Tip:
   <data name="&gt;&gt;updateHyperLinksToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;updateDiagramHyperlinksToolStripMenuItem1.Name" xml:space="preserve">
+    <value>updateDiagramHyperlinksToolStripMenuItem1</value>
+  </data>
+  <data name="&gt;&gt;updateDiagramHyperlinksToolStripMenuItem1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;updateElementHyperlinksToolStripMenuItem.Name" xml:space="preserve">
+    <value>updateElementHyperlinksToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;updateElementHyperlinksToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;updateFeatureHyperlinksToolStripMenuItem.Name" xml:space="preserve">
+    <value>updateFeatureHyperlinksToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;updateFeatureHyperlinksToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;updateHyperlinksToolStripMenuItem1.Name" xml:space="preserve">
+    <value>updateHyperlinksToolStripMenuItem1</value>
+  </data>
+  <data name="&gt;&gt;updateHyperlinksToolStripMenuItem1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;specToolStripMenuItem.Name" xml:space="preserve">
     <value>specToolStripMenuItem</value>
   </data>
@@ -4033,30 +4088,6 @@ Tip:
   </data>
   <data name="&gt;&gt;_toolTipRtfListOfSearches.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;updateDiagramHyperlinksToolStripMenuItem1.Name" xml:space="preserve">
-    <value>updateDiagramHyperlinksToolStripMenuItem1</value>
-  </data>
-  <data name="&gt;&gt;updateDiagramHyperlinksToolStripMenuItem1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;updateElementHyperlinksToolStripMenuItem.Name" xml:space="preserve">
-    <value>updateElementHyperlinksToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;updateElementHyperlinksToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;updateFeatureHyperlinksToolStripMenuItem.Name" xml:space="preserve">
-    <value>updateFeatureHyperlinksToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;updateFeatureHyperlinksToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;updateHyperlinksToolStripMenuItem1.Name" xml:space="preserve">
-    <value>updateHyperlinksToolStripMenuItem1</value>
-  </data>
-  <data name="&gt;&gt;updateHyperlinksToolStripMenuItem1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>HoToolsGui</value>

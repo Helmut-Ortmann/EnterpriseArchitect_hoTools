@@ -188,6 +188,26 @@ namespace hoTools.EaServices
         /// UpdateHyperlinks in descriptions
         /// </summary>
         /// <param name="rep"></param>
+        [ServiceOperation("{6B2525B3-4123-4387-877E-8550FC2F065C}",
+            "Update all Hyperlinks in Notes", // Description
+            "Update Hyperlinks in Notes from Diagram, Elements, Packages, Attributes, Operations. It updates Hyperlinks to Package, Diagram, Element, Attribute, Operation.", //Tooltip
+            isTextRequired: false)]
+        // ReSharper disable once UnusedMember.Global
+        // dynamical usage as configurable service by reflection
+        public static void UpdateAllHyperLinks(Repository rep)
+        {
+            Cursor.Current = Cursors.WaitCursor;
+            UpdateElementHyperLinks(rep);
+            UpdateDiagramHyperLinks(rep);
+            UpdateFeatureHyperLinks(rep);
+            rep.RefreshOpenDiagrams(false);
+            Cursor.Current = Cursors.Default;
+        }
+
+        /// <summary>
+        /// UpdateHyperlinks in descriptions
+        /// </summary>
+        /// <param name="rep"></param>
         [ServiceOperation("{CBAF828B-3C3C-4D11-8983-1D3960193154}",
             "Update Hyperlinks in Notes", // Description
             "Update Hyperlinks in Notes from Elements. It updates Hyperlinks to Package, Diagram, Element, Attribute, Operation.", //Tooltip
@@ -196,7 +216,7 @@ namespace hoTools.EaServices
         // dynamical usage as configurable service by reflection
         public static void UpdateElementHyperLinks(Repository rep)
         {
-
+            Cursor.Current = Cursors.WaitCursor;
             Model model = new Model(rep);
             // < a href = "$element://{8A6488BC-0DFD-45f2-8506-4D0A77626E63}" >< font color = "#0000ff" >< u > Action1 </ u ></ font ></ a >
             // element
@@ -220,6 +240,8 @@ namespace hoTools.EaServices
                     el.Update();
                 }
             }
+            rep.RefreshOpenDiagrams(false);
+            Cursor.Current = Cursors.Default;
             ;
         }
         /// <summary>
@@ -234,6 +256,7 @@ namespace hoTools.EaServices
         // dynamical usage as configurable service by reflection
         public static void UpdateDiagramHyperLinks(Repository rep)
         {
+            Cursor.Current = Cursors.WaitCursor;
 
             Model model = new Model(rep);
             // < a href = "$element://{8A6488BC-0DFD-45f2-8506-4D0A77626E63}" >< font color = "#0000ff" >< u > Action1 </ u ></ font ></ a >
@@ -259,7 +282,8 @@ namespace hoTools.EaServices
                     dia.Update();
                 }
             }
-            ;
+            rep.RefreshOpenDiagrams(false);
+            Cursor.Current = Cursors.Default;
         }
         /// <summary>
         /// UpdateHyperlinks in descriptions
@@ -273,7 +297,7 @@ namespace hoTools.EaServices
         // dynamical usage as configurable service by reflection
         public static void UpdateFeatureHyperLinks(Repository rep)
         {
-
+            Cursor.Current = Cursors.WaitCursor;
             Model model = new Model(rep);
             // < a href = "$element://{8A6488BC-0DFD-45f2-8506-4D0A77626E63}" >< font color = "#0000ff" >< u > Action1 </ u ></ font ></ a >
             // element
@@ -316,7 +340,8 @@ namespace hoTools.EaServices
                     m.Update();
                 }
             }
-            ;
+            rep.RefreshOpenDiagrams(false);
+            Cursor.Current = Cursors.Default;
         }
         /// <summary>
         /// Change EA Hyperlinks of type package, element, diagram, attribute, operation in notes string.
