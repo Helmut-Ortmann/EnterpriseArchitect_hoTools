@@ -118,10 +118,11 @@ Some features:
 
 
 # Releases
+## Release 3.0.6
 ## Release 3.0.5
 - [Update Hyperlinks of Notes in Diagram, Package, Element, Attribute, Operation](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/UpdateHyperlinksInNotes)
-- Service Copy GUID to Cliboard
-- Item/Connector name to Cliboard
+- Service Copy GUID to Clipboard
+- Item/Connector name to Clipboard
 - Error configuration Toolbar services fixed
 
 ## Release 3.0.3 + 3.0.4
