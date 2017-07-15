@@ -1100,7 +1100,8 @@ namespace EAAddinFramework.Utils
         // ReSharper disable once UnusedMember.Global
         public void ClipboardSetText(object text)
         {
-            Clipboard.SetText((string)text);
+            if (String.IsNullOrWhiteSpace((string)text)) Clipboard.Clear();
+            else Clipboard.SetText((string)text);
         }
         /// <summary>
         /// Exposes ClipboardGetText(TestDataFormat);

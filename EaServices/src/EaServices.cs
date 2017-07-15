@@ -601,10 +601,110 @@ namespace hoTools.EaServices
 
         #endregion
 
+        /// <summary>
+        /// Copy FQ (Full Qualified) Name to ClipBoard
+        /// </summary>
+        /// <param name="rep"></param>
+        [ServiceOperation("{B48B4D01-2BC5-4C2E-A9E2-4DB6336D4CCE}", "Copy FQ to Clipboard",
+            "Copy FQ (Full Qualified) Name to Clipboard (Package, Element, Diagram, Attribute, Operation)", isTextRequired: false)]
+        // ReSharper disable once UnusedMember.Global
+        // dynamical usage as configurable service by reflection
+        public static void CopyFqToClipboard(Repository rep)
+        {
+            string strFQ = "";
+            object o;
+            EA.ObjectType type = rep.GetContextItem(out o);
+            switch (type)
+            {
+                case EA.ObjectType.otElement:
+                    strFQ = ((EA.Element)o).FQName;
+                    break;
 
+                case EA.ObjectType.otModel:
+                    strFQ = ((EA.Package)o).Name;
+                    break;
+
+                case EA.ObjectType.otPackage:
+                    EA.Element el = rep.GetElementByGuid(((EA.Package)o).PackageGUID);
+                    if (el == null) strFQ = ((EA.Package)o).Name;
+                    else strFQ = el.FQName;
+                    break;
+
+                case EA.ObjectType.otDiagram:
+                    EA.Diagram dia = (EA.Diagram) o;
+                    if (dia.ParentID != 0)
+                    {
+                        strFQ = $"{rep.GetElementByID(dia.ParentID).FQName}.{dia.Name}";
+                    }
+                    else
+                    {
+                        string guid = rep.GetPackageByID(dia.PackageID).PackageGUID;
+                        strFQ = $"{rep.GetElementByGuid(guid).FQName}.{dia.Name}";
+                    }
+                    break;
+                case EA.ObjectType.otAttribute:
+                    EA.Attribute a = (EA.Attribute) o;
+                    strFQ = $"{rep.GetElementByID(a.ParentID).FQName}.{a.Name}";
+                    break;
+                case EA.ObjectType.otMethod:
+                    EA.Method m = (EA.Method)o;
+                    strFQ = $"{rep.GetElementByID(m.ParentID).FQName}.{m.Name}";
+                    break;
+          }
+
+            if (String.IsNullOrWhiteSpace(strFQ)) Clipboard.Clear();
+            else Clipboard.SetText(strFQ);
+        }
+        /// <summary>
+        /// Copy Stereotypes to ClipBoard
+        /// </summary>
+        /// <param name="rep"></param>
+        [ServiceOperation("{484BEAF5-C72C-4ABA-8202-08230B4D2AAA}", "Copy Stereotypes to ClipBoard",
+            "Copy Stereotypes (FDStereotype+StereotypeEx) to ClipBoard", isTextRequired: false)]
+        // ReSharper disable once UnusedMember.Global
+        // dynamical usage as configurable service by reflection
+        public static void CopyStereotypesToClipboard(Repository rep)
+        {
+            EA.Element el;
+            string strStereo = "";
+            EA.ObjectType type = rep.GetContextItem(out object o);
+            switch (type)
+            {
+                case EA.ObjectType.otElement:
+                    el = (EA.Element) o;
+                    strStereo = el.FQStereotype + "\r\n" + el.StereotypeEx;
+                    break;
+
+                case EA.ObjectType.otModel:
+                    strStereo = ((EA.Package) o).StereotypeEx;
+                    break;
+
+                case EA.ObjectType.otPackage:
+                    el = rep.GetElementByGuid(((EA.Package)o).PackageGUID);
+                    strStereo = el == null ? ((EA.Package)o).StereotypeEx : el.FQStereotype + "\r\n" + el.StereotypeEx;
+                    break;
+                case EA.ObjectType.otDiagram:
+                    strStereo = ((EA.Diagram)o).StereotypeEx;
+                    break;
+                case EA.ObjectType.otAttribute:
+                    strStereo = ((EA.Attribute)o).FQStereotype + "\r\n" + ((EA.Attribute)o).StereotypeEx;
+                    break;
+                case EA.ObjectType.otMethod:
+                    strStereo = ((EA.Method)o).FQStereotype + "\r\n" + ((EA.Method)o).StereotypeEx;
+                    break;
+
+                case EA.ObjectType.otConnector:
+                    EA.Connector con = (EA.Connector) o;
+                    strStereo = con.FQStereotype + "\r\n" + con.StereotypeEx; ;
+                    break;
+            }
+
+            if (String.IsNullOrWhiteSpace(strStereo)) Clipboard.Clear();
+            else Clipboard.SetText(strStereo);
+        }
 
         /// <summary>
-        /// UnLock Package (Package, Diagram, Element may be selected)
+        /// Copy GUID to ClipBoard
         /// </summary>
         /// <param name="rep"></param>
         [ServiceOperation("{02ECEF56-5EF8-45D7-9CB8-4A67B5D9AC2F}", "Copy GUID to Clipboard",
@@ -646,7 +746,8 @@ namespace hoTools.EaServices
                 
             }
 
-            Clipboard.SetText(strGuid);
+            if (String.IsNullOrWhiteSpace(strGuid)) Clipboard.Clear();
+            else Clipboard.SetText(strGuid);
         }
 
 
@@ -3472,7 +3573,8 @@ from %APPDATA%Local\Apps\hoTools\
                       "\r\n   where op.ea_guid = '" + op.MethodGUID + "' " +
                       "\r\n  Order by par.Pos ";
             }
-            Clipboard.SetText(str);
+            if (String.IsNullOrWhiteSpace(str)) Clipboard.Clear();
+            else Clipboard.SetText(str);
         }
 
         #region createSharedMemoryFromText
@@ -5295,7 +5397,8 @@ from %APPDATA%Local\Apps\hoTools\
                 txt = txt + nl + AddReleaseInformation(rep, elTarget);
                 nl = "\r\n";
             }
-            Clipboard.SetText(txt);
+            if (String.IsNullOrWhiteSpace(txt)) Clipboard.Clear();
+            else Clipboard.SetText(txt);
         }
 
         static string AddReleaseInformation(Repository rep, Element el)
@@ -6023,7 +6126,8 @@ from %APPDATA%Local\Apps\hoTools\
         public static void CopyContextNameToClipboard(EA.Repository rep)
         {
             string txt = GetNameFromContextItem(rep);
-            Clipboard.SetText(txt);
+            if (String.IsNullOrWhiteSpace(txt)) Clipboard.Clear();
+            else Clipboard.SetText(txt);
         }
 
         /// <summary>

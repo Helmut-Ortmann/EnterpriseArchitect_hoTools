@@ -119,6 +119,8 @@ Some features:
 
 # Releases
 ## Release 3.0.6
+- Service Copy FQ (Package, Element, Diagram, Attribut, Operation, Stereotypes) to ClipBoard
+
 ## Release 3.0.5
 - [Update Hyperlinks of Notes in Diagram, Package, Element, Attribute, Operation](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/UpdateHyperlinksInNotes)
 - Service Copy GUID to Clipboard

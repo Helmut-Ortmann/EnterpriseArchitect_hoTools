@@ -1113,10 +1113,9 @@ namespace hoTools
                             if (con.SupplierID == el.ElementID) conStr = conStr + "Supplier\r\n";
 
                         }
-                        if (conStr.Length > 0)
-                        {
-                            Clipboard.SetText(conStr);
-                        }
+                        if (String.IsNullOrWhiteSpace(conStr)) Clipboard.Clear();
+                        else Clipboard.SetText(conStr);
+                        
                     }
                     break;
 
