@@ -2,6 +2,8 @@
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
      xmlns:complus="http://schemas.microsoft.com/wix/ComPlusExtension">
  <!-- New release:
+      0. Ensure you have a reference to WixUIExtension
+         (e.g.: c:\Program Files (x86)\WiX Toolset v3.11\bin\WixUIExtension.dll)
       1. Product.wxs:   Update ProductVersion (Major.Minor.Build.Revision not used )
          The last number is always 0 
          This number is used for the installer and is shown as the installed product version
@@ -22,10 +24,10 @@
   !!!Warning: If you update AssemblyVersion you must update the registration info!!!!!!!!
   // Change AssemblyFileVersion accordingly
   -->
-  <?define ProductVersion="3.0.6" ?> 
-  <?define UpgradeCode="3543ED18-28F6-484C-AD8C-FA1A3B72C911" ?>
+  <?define ProductVersion="1.0.1" ?> 
+  <?define UpgradeCode="{CA42D098-1AA3-4357-A7F6-CAB9A995BC54}" ?>
   <?define Manufacturer="hoModeler.de" ?>
-  <?define ProductName="hoTools" ?>
+  <?define ProductName="AddInSimple" ?>
 
   <Product Id="*"
            Name="$(var.ProductName)"

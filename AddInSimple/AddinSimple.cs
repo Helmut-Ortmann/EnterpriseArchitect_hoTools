@@ -1,12 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using AddInSimple.EABasic;
 
 namespace AddInSimple
 {
-    class AddinSimpleClass : EaAddInBase
+    // Make sure Project Properties for Release has the Entry: 'Register for COM interop'
+    // You may check registration with: https://exploringea.com/2015/11/18/ea-installation-inspectorv2/
+    [ComVisible(true)]
+    [ClassInterface(ClassInterfaceType.None)]
+    [Guid("58E7B70F-16C4-4538-A4E8-AF4EAC27519B")]
+    // ProgID is the same as the string to register for EA in 'Sparx Systems:EAAddins:AddInSimple:Default'
+    // In description: 'Namespace.ClassName'
+    // EA uses always the ProId.
+    [ProgId("AddInSimple.AddInSimpleClass")]
+    public class AddInSimpleClass : EaAddInBase
     {
         // define menu constants
         const string MenuName = "-&AddInSimple";
@@ -20,7 +30,7 @@ namespace AddInSimple
         /// <summary>
         /// constructor where we set the menu header and menuOptions
         /// </summary>
-        public AddinSimpleClass()
+        public AddInSimpleClass()
         {
             this.menuHeader = MenuName;
             this.menuOptions = new[] { MenuHello, MenuGoodbye, MenuOpenProperties };
@@ -145,6 +155,51 @@ namespace AddInSimple
         {
             int diagramID = repository.GetCurrentDiagram().DiagramID;
             repository.OpenDiagramPropertyDlg(diagramID);
+        }
+
+
+        /// <summary>
+        /// Example for Addin which can be used from a ShapeScript (Origin: Aaron Bell, SPARX System)
+        /// The script adds for every entry in theParams (array of Parameters):
+        /// 'Stereotype' the Stereotype
+        /// 'Alias'      the Alias
+        /// 
+        /// shape main
+        ///{
+        ///    //Draw the rect
+        ///    rectangle(0,0,100,100);
+        ///    //Replace CS_AddinFramework with your addin name and GetValueForShape with the function name you wish to call in your addin.
+        ///    print("#ADDIN:CS_AddinFramework, GetValueForShape, Stereotype, Alias#");
+        ///}
+    /// </summary>
+    /// <param name="repository"></param>
+    /// <param name="eaGuid"></param>
+    /// <param name="theParams"></param>
+    /// <returns></returns>
+    public string GetValueForShape(EA.Repository repository, string eaGuid, object theParams)
+        {
+            //Convert the parameters passed in into a string array.
+            string[] args = (string[])theParams;
+
+            //Get the element calling this addin
+            EA.Element element = repository.GetElementByGuid(eaGuid);
+            string ret = "";
+            //Create the name modified element name
+            if (args.Length > 0 && element != null)
+            {
+                ret += element.Name;
+
+                for (int i = 0; i < args.Length; i++)
+                {
+                    if (args[i] == "Stereotype")
+                        ret += " " + element.Stereotype;
+
+                    if (args[i] == "Alias")
+                        ret += " " + element.Alias;
+                }
+            }
+
+            return ret;
         }
 
 

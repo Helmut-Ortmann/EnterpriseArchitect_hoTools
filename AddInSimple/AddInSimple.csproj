@@ -46,7 +46,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <RegisterForComInterop>false</RegisterForComInterop>
+    <RegisterForComInterop>true</RegisterForComInterop>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject />
@@ -73,7 +73,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddinSimple.cs" />
+    <Compile Include="AddInSimple.cs" />
     <Compile Include="EABasic\EAAddinBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
