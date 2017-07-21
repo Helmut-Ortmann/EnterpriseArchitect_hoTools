@@ -1,9 +1,11 @@
 ﻿using System;
+using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using AddInSimple.EABasic;
+using EA;
 
 namespace AddInSimple
 {
@@ -201,7 +203,165 @@ namespace AddInSimple
 
             return ret;
         }
+        /// <summary>
+        /// GetParentProperties:
+        /// - TAG=TagName
+        /// - NAME
+        /// - ALIAS
+        /// - STEREOTYPE
+        /// - TYPE
+        /// - COMPLEXITY
+        /// - VERSION
+        /// - PHASE
+        /// - Language
+        /// - Filename
+        /// - AUTHOR
+        /// - STATUS
+        /// - KEYWORDS
+        /// - GUID
+        /// </summary>
+        /// <param name="repository"></param>
+        /// <param name="eaGuid"></param>
+        /// <param name="theParams"></param>
+        /// <returns></returns>
+        public string GetParentProperty(EA.Repository repository, string eaGuid, object theParams)
+        {
+            //Convert the parameters passed in into a string array.
+            string[] args = (string[])theParams;
 
+            //Get the element calling this addin
+            EA.Element element = repository.GetElementByGuid(eaGuid);
+            string ret = "";
+            if (element.ParentID == 0) return "";
+            EA.Element el = repository.GetElementByID(element.ParentID);
+            if (el == null) return "";
+            if (args.Length != 1) return "";
+            string type = args[0].Split('=')[0].ToUpper();
+            string tagName;
+            string[] par;
+            switch (type)
+            {
+                case "KEYWORDS":
+                    ret = el.Tag;
+                    break;
+                case "ALIAS":
+                    ret = el.Alias;
+                    break;
+                case "NAME":
+                    ret = el.Name;
+                    break;
+                case "STEREOTYPE":
+                    ret = el.Stereotype;
+                    break;
+                case "Type":
+                    ret = el.Type;
+                    break;
+                case "COMPLEXITY":
+                    ret = el.Complexity;
+                    break;
+                case "VERSION":
+                    ret = el.Version;
+                    break;
+                case "PHASE":
+                    ret = el.Phase;
+                    break;
+                case "Language":
+                    ret = el.Gentype;
+                    break;
+
+                case "Status":
+                    ret = el.Status;
+                    break;
+
+                case "RUNSTATE":
+                    ret = el.RunState;
+                    break;
+
+                case "TAG":
+                     par = args[0].Split('=');
+                     if (par.Length != 2) return "";
+                     tagName = par[1];
+                     foreach (EA.TaggedValue tag in el.TaggedValuesEx)
+                     {
+                         if (tagName == tag.Name)
+                         {
+                             ret = tag.Value;
+                             break;
+                         }
+                     }
+
+                    break;
+
+                // Testresult for a test
+                case "TEST":
+                    par = args[0].Split('=');
+                    if (par.Length != 2) return "";
+                    tagName = par[1];
+                    foreach (EA.Test test in el.Tests)
+                    {
+                        if (tagName == test.Name)
+                        {
+                            ret = test.TestResults;
+                            break;
+                        }
+                    }
+
+                    break;
+
+                // Role for a Resource
+                case "RESOURCE":
+                    par = args[0].Split('=');
+                    if (par.Length != 2) return "";
+                    tagName = par[1];
+                    foreach (EA.Resource resource in el.Resources)
+                    {
+                        if (tagName == resource.Name)
+                        {
+                            ret = resource.Role;
+                            break;
+                        }
+                    }
+
+                    break;
+
+                // Issues 
+                case "ISSUE":
+                    par = args[0].Split('=');
+                    if (par.Length != 2) return "";
+                    tagName = par[1];
+                    foreach (EA.Issue issue in el.Issues)
+                    {
+                        if (tagName == issue.Name)
+                        {
+                            ret = issue.Reporter;
+                            break;
+                        }
+                    }
+
+                    break;
+
+                // Role for a Resource
+                case "RISK":
+                    par = args[0].Split('=');
+                    if (par.Length != 2) return "";
+                    tagName = par[1];
+                    foreach (EA.Risk risk in el.Risks)
+                    {
+                        if (tagName == risk.Name)
+                        {
+                            ret = risk.Weight.ToString();
+                            break;
+                        }
+                    }
+
+                    break;
+
+            }
+
+            return ret;
+        }
+
+       
 
 
     }
