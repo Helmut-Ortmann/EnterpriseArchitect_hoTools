@@ -1,12 +1,46 @@
 ﻿using System;
-using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using AddInSimple.EABasic;
-using EA;
 
+
+//------------------------------------------------------------------------------------
+// AddInSimple Simple Add-in
+//------------------------------------------------------------------------------------
+// Shows:
+// - Create a little menu
+// - React to user input
+// - Two functions to call from Shape Script
+// -- GetValueForShape()
+// -- GetParentProperty()
+// - Setup Project to install Add-In with an *.msi File
+// -- See Project: AddInSimpleSetup
+//
+// Remarks:
+// Add-Ins are Windows COM Objects which EA integrates in its visual and runtime environment. The Add-In may:
+// - Have a standard menu to interact
+// - Have a full EA view for easy interaction with the user (Shown in EA Add-In Window or as standalone view)
+// - React to EA Events.
+// - The Add-In has to obey the COM rules and has to register it's COM dll in Windows (this main dll and all view dll (shown in EA Add-In Window)). Other helpers don't need registration.
+// - Add features like:
+// -- Shape Script print (a simple public method which returns a string)
+// -- Searches (a simple public method that returns a XML string to visualize by EA in the Search Window)
+//
+// Deployment
+// - Registry entry to tell EA that there is an AddIn to integrate
+// -- Key:    HKEY_CURRENT_USER\SOFTWARE\Sparx Systems\EAAddins\
+// -- Value:  AddInSimple.AddInSimpleClass  (The COM ProgID, usually <Namespace>.<Classname>), case sensitive
+// -- Same value as: [ProgId("AddInSimple.AddInSimpleClass")]
+// - Install DLL as COM object
+// -- Make COM Visible
+// -- Register as COM
+// -- Advice: Use WiX toolset (see AddInSimpleSetup Project)
+//
+// Debug (Visual Studio)
+// -  Ensure Registry entry 'HKEY_CURRENT_USER\SOFTWARE\Sparx Systems\EAAddins\ 'AddInSimple.AddInSimpleClass'
+// - Parametrize DEBUG Mode: COM Visible, COM register, Enable Unsafe code DEBUG
 namespace AddInSimple
 {
     // Make sure Project Properties for Release has the Entry: 'Register for COM interop'
