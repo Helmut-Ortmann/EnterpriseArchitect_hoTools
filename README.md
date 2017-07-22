@@ -101,7 +101,7 @@ Some features:
 
 # Installation 
 - Uninstall hoTools
-- hoTools.msi  (Setup\bin\Release\hoTools.msi )
+- hoTools.msi  (Setup\bin\Release\hoTools.msi)
 - In EA: Extension, Addin Windows is selected
 - In EA: Manage Addins, MDG: hoTools is selected
 - hoToolsRemove.ps1 (deinstall with PowerShell)
@@ -120,6 +120,7 @@ Some features:
 # Releases
 ## Release 3.0.6
 - Service Copy FQ (Package, Element, Diagram, Attribut, Operation, Stereotypes) to ClipBoard
+- AddInSimple V1.0.1 added (AddInSimple to show Add-In and how to use Add-In for Shape Scripts )
 
 ## Release 3.0.5
 - [Update Hyperlinks of Notes in Diagram, Package, Element, Attribute, Operation](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/UpdateHyperlinksInNotes)

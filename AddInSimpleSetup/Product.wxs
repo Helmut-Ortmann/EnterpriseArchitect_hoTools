@@ -2,22 +2,24 @@
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
      xmlns:complus="http://schemas.microsoft.com/wix/ComPlusExtension">
  <!-- New release:
+      Basics:
+      - WIX Toolset installed
+      - WIX Toolset VS2017 Extension installed 
       0. Ensure you have a reference to WixUIExtension
          (e.g.: c:\Program Files (x86)\WiX Toolset v3.11\bin\WixUIExtension.dll)
-      1. Product.wxs:   Update ProductVersion (Major.Minor.Build.Revision not used )
+      1. Product.wxs:   Update ProductVersion (Major.Minor.Build (Revision not used ))
          The last number is always 0 
          This number is used for the installer and is shown as the installed product version
-         Note: Each *.dll has a AssemblyVersion which is defined in AssembleInfo.cs
-         Note: If you change the AssemblyVersion the registry is changed
-               You have to collect registry information and copy it in files.wxs
+         Note: Each *.dll has a AssemblyVersionwhich is defined in AssembleInfo.cs
+         Note: If you change the AssemblyVersion  of a COM dll you have to harvest the registration information with Collect.Bat. Then you have to update file.wxs
+      2. Harvest DLL registration for COM Objects
+         - Run script Collect.bat
+         - Insert Component content in Files.wxs (between <Component> </Component>
+         - Don't forget to update location (is described in Files.wxs)
       2. Update File-Version of Addin.DLL File (Properties Assembly) but not Assembly-Version 
          (new registry of Assembly required)
          A new Assembly Version requires a new DLL-Registration
       3. Product ID is handled by WIX
-      4. Check ActivreX.dll.config (configuration) in:
-         - ..\setup\hoToolsGui.dll.config
-         - AddinClass\bin\debug\hoToolsGui.dll.config (only debug)
-         (details in file hoToolsGui.dll.config). 
      
  -->
   <!-- Also: Update AssemblyFileVersion in AddinClass AssemblyInfo.cs properties !!!
