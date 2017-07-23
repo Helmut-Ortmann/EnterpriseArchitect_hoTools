@@ -470,12 +470,29 @@ namespace AddInSimple
 
         }
 
+        /// <summary>
+        /// Test Query
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <returns></returns>
         private string QueryAndMakeXml(DataTable dt)
         {
+            // Make a LINQ query (WHERE, JOIN, ORDER,)
             OrderedEnumerableRowCollection<DataRow> rows = from row in dt.AsEnumerable()
-                orderby row.Field<string>("Name") descending
+                orderby row.Field<string>("Sex") descending
                 select row;
 
+            return MakeXml(dt, rows);
+        }
+        /// <summary>
+        /// Make EA xml from a DataTable (for column names) and the ordered Enumeration provided by LINQ. Set the Captions in DataTable to ensure column names. 
+        /// 
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <param name="rows"></param>
+        /// <returns></returns>
+        private static string MakeXml(DataTable dt, OrderedEnumerableRowCollection<DataRow> rows)
+        {
             XElement xFields = new XElement("Fields");
             foreach (DataColumn col in dt.Columns)
             {
@@ -486,7 +503,7 @@ namespace AddInSimple
             try
             {
                 XElement xRows = new XElement("Rows");
-                
+
                 foreach (var row in rows)
                 {
                     XElement xRow = new XElement("Row");
@@ -498,10 +515,8 @@ namespace AddInSimple
                         xField.Add(new XAttribute("name", col.Caption));
                         xRow.Add(xField);
                         i = i + 1;
-
                     }
                     xRows.Add(xRow);
-                    
                 }
                 XElement xDoc = new XElement("ReportViewData");
                 xDoc.Add(xFields);
@@ -510,10 +525,9 @@ namespace AddInSimple
             }
             catch (Exception e)
             {
-                MessageBox.Show($"{e}","Error generating XML from table");
+                MessageBox.Show($"{e}", "Error generating XML from table");
                 return "";
             }
-           
         }
     }
 
