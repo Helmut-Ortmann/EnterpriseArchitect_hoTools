@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using System.Xml.Linq;
 using AddInSimple.EABasic;
 
 
@@ -63,6 +65,7 @@ namespace AddInSimple
         const string MenuHello = "&Say Hello";
         const string MenuGoodbye = "&Say Goodbye";
         const string MenuOpenProperties = "&Open Properties";
+        const string MenuRunDemoSearch = "&DemoSearch";
 
         // remember if we have to say hello or goodbye
         private bool _shouldWeSayHello = true;
@@ -73,7 +76,7 @@ namespace AddInSimple
         public AddInSimpleClass()
         {
             this.menuHeader = MenuName;
-            this.menuOptions = new[] { MenuHello, MenuGoodbye, MenuOpenProperties };
+            this.menuOptions = new[] { MenuHello, MenuGoodbye, MenuOpenProperties, MenuRunDemoSearch };
         }
         /// <summary>
         /// EA_Connect events enable Add-Ins to identify their type and to respond to Enterprise Architect start up.
@@ -116,6 +119,11 @@ namespace AddInSimple
                     case MenuOpenProperties:
                         isEnabled = true;
                         break;
+
+                    // Test Add-In Search
+                    case MenuRunDemoSearch:
+                        isEnabled = true;
+                        break;
                     // there shouldn't be any other, but just in case disable it.
                     default:
                         isEnabled = false;
@@ -151,6 +159,16 @@ namespace AddInSimple
                     break;
                 case MenuOpenProperties:
                     this.testPropertiesDialog(repository);
+                    break;
+                
+                // Test the Search and output the results to EA Search Window
+                case MenuRunDemoSearch:
+                    // 1. Collect data
+                    DataTable dt = SetTable();
+                    // 2. Order, Filter, Join, Format to XML
+                    string xml = QueryAndMakeXml(dt);
+                    // 3. Out put to EA
+                    repository.RunModelSearch("", "", "", xml);
                     break;
             }
         }
@@ -195,6 +213,8 @@ namespace AddInSimple
         public void testPropertiesDialog(EA.Repository repository)
         {
             int diagramID = repository.GetCurrentDiagram().DiagramID;
+            // there is no current diagram
+            if (diagramID == 0) return;
             repository.OpenDiagramPropertyDlg(diagramID);
         }
 
@@ -418,59 +438,83 @@ namespace AddInSimple
         /// <param name="searchText"></param>
         /// <param name="xmlResults"></param>
         /// <returns></returns>
-        public void AddInSearchSample(EA.Repository repository, string searchText, out string xmlResults)
+        public object AddInSearchSample(EA.Repository repository, string searchText, out string xmlResults)
         {
-            xmlResults = "";
-        }
-        public void AddInSearchSampleRef(EA.Repository repository, string searchText, ref string xmlResults)
-        {
-            xmlResults = "";
-        }
-        public string AddInSearchSample2(EA.Repository repository, string searchText, out string xmlResults)
-        {
-            xmlResults = "";
+            // 1. Collect data into a data table
+            DataTable dt = SetTable();
+            // 2. Order, Filter, Join, Format to XML
+            xmlResults = QueryAndMakeXml(dt);
             return "ok";
         }
-        public string AddInSearchSampleRef3(EA.Repository repository, string searchText, ref string xmlResults)
+        
+
+        /// <summary>
+        /// Set DataTable with test data
+        /// </summary>
+        /// <returns></returns>
+        private DataTable SetTable()
         {
-            xmlResults = "";
-            return "ok";
-        }
-        public object AddInSearchSample4(EA.Repository repository, string searchText, out string xmlResults)
-        {
-            xmlResults = "";
-            return "ok";
-        }
-        public object AddInSearchSampleRef5(EA.Repository repository, string searchText, ref string xmlResults)
-        {
-            xmlResults = "";
-            return "ok";
-        }
-        public object AddInSearchSampleRef6(EA.Repository repository, object searchText, ref string xmlResults)
-        {
-            xmlResults = "";
-            return "ok";
-        }
-        public object AddInSearchSampleRef7(EA.Repository repository, object searchText, ref object xmlResults)
-        {
-            xmlResults = "";
-            return "ok";
-        }
-        public object AddInSearchSampleRef7(EA.Repository repository, string searchText, ref object xmlResults)
-        {
-            xmlResults = "";
-            return "ok";
-        }
-        public string AddInSearchSampleRef7(EA.Repository repository, string searchText, object xmlResults)
-        {
-            xmlResults = "";
-            return "ok";
+            // Here we create a DataTable with three columns.
+            DataTable table = new DataTable();
+            table.Columns.Add("Name", typeof(string));
+            table.Columns.Add("Sex", typeof(string));
+            table.Columns.Add("Address", typeof(string));
+
+            // Here we add five DataRows.
+            table.Rows.Add("Helmut", "male", "Hamburg");
+            table.Rows.Add("Daniel", "male", "London");
+            table.Rows.Add("Sofy", "female", "Cologne");
+            table.Rows.Add("Lena", "female", "Petersburg");
+            table.Rows.Add("Joker", "unknown", "??????");
+            return table;
+
         }
 
+        private string QueryAndMakeXml(DataTable dt)
+        {
+            OrderedEnumerableRowCollection<DataRow> rows = from row in dt.AsEnumerable()
+                orderby row.Field<string>("Name") descending
+                select row;
 
+            XElement xFields = new XElement("Fields");
+            foreach (DataColumn col in dt.Columns)
+            {
+                XElement xField = new XElement("Field");
+                xField.Add(new XAttribute("name", col.Caption));
+                xFields.Add(xField);
+            }
+            try
+            {
+                XElement xRows = new XElement("Rows");
+                
+                foreach (var row in rows)
+                {
+                    XElement xRow = new XElement("Row");
+                    int i = 0;
+                    foreach (DataColumn col in dt.Columns)
+                    {
+                        XElement xField = new XElement("Field");
+                        xField.Add(new XAttribute("value", row[i].ToString()));
+                        xField.Add(new XAttribute("name", col.Caption));
+                        xRow.Add(xField);
+                        i = i + 1;
 
-
-
+                    }
+                    xRows.Add(xRow);
+                    
+                }
+                XElement xDoc = new XElement("ReportViewData");
+                xDoc.Add(xFields);
+                xDoc.Add(xRows);
+                return xDoc.ToString();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($"{e}","Error generating XML from table");
+                return "";
+            }
+           
+        }
     }
 
     /// <summary>

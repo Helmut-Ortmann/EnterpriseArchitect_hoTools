@@ -216,6 +216,17 @@ namespace hoTools
         }
         #endregion
 
+        public object HoAddInSearchSample4(EA.Repository repository, String searchText, out String xmlResults)
+        {
+            xmlResults = "";
+            return "";
+        }
+        public object HoAddInSearchSample5(EA.Repository repository, string searchText, out string xmlResults)
+        {
+            xmlResults = "";
+            return "";
+        }
+
         #region HotkeyHandlers
         /// <summary>
         /// Handle Global Keys
