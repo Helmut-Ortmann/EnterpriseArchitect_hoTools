@@ -477,12 +477,21 @@ namespace AddInSimple
         /// <returns></returns>
         private string QueryAndMakeXml(DataTable dt)
         {
-            // Make a LINQ query (WHERE, JOIN, ORDER,)
-            OrderedEnumerableRowCollection<DataRow> rows = from row in dt.AsEnumerable()
-                orderby row.Field<string>("Sex") descending
-                select row;
+            try
+            {
+                // Make a LINQ query (WHERE, JOIN, ORDER,)
+                OrderedEnumerableRowCollection<DataRow> rows = from row in dt.AsEnumerable()
+                    orderby row.Field<string>("Name") descending
+                    select row;
 
-            return MakeXml(dt, rows);
+                return MakeXml(dt, rows);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($"{e}", "Error LINQ query");
+                return "";
+
+            }
         }
         /// <summary>
         /// Make EA xml from a DataTable (for column names) and the ordered Enumeration provided by LINQ. Set the Captions in DataTable to ensure column names. 
@@ -525,7 +534,7 @@ namespace AddInSimple
             }
             catch (Exception e)
             {
-                MessageBox.Show($"{e}", "Error generating XML from table");
+                MessageBox.Show($"{e}", "Error enumerating through LINQ query");
                 return "";
             }
         }
