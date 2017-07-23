@@ -41,6 +41,10 @@ using AddInSimple.EABasic;
 // Debug (Visual Studio)
 // -  Ensure Registry entry 'HKEY_CURRENT_USER\SOFTWARE\Sparx Systems\EAAddins\ 'AddInSimple.AddInSimpleClass'
 // - Parametrize DEBUG Mode: COM Visible, COM register, Enable Unsafe code DEBUG
+//
+// Credit: 
+// - Geert Bellekens
+// - https://bellekens.com/2011/01/29/tutorial-create-your-first-c-enterprise-architect-addin-in-10-minutes/
 namespace AddInSimple
 {
     // Make sure Project Properties for Release has the Entry: 'Register for COM interop'
@@ -150,6 +154,7 @@ namespace AddInSimple
                     break;
             }
         }
+
         /// <summary>
         /// Called when EA start model validation. Just shows a message box
         /// </summary>
@@ -394,11 +399,83 @@ namespace AddInSimple
 
             return ret;
         }
+        /// <summary>
+        /// Add-In Search: Sample
+        /// See: http://sparxsystems.com/enterprise_architect_user_guide/13.5/automation/add-in_search.html
+        /// 
+        /// Who it's works:
+        /// 1. Create a Table and fill it with your code
+        /// 2. Adapt LINQ to output the table (powerful)
+        ///    -- Where to select only certain rows
+        ///    -- Order By to order the result set
+        ///    -- Grouping
+        ///    -- Filter
+        ///    -- JOIN
+        ///    -- etc.
+        /// 3. Deploy and test 
+        /// </summary>
+        /// <param name="repository"></param>
+        /// <param name="searchText"></param>
+        /// <param name="xmlResults"></param>
+        /// <returns></returns>
+        public void AddInSearchSample(EA.Repository repository, string searchText, out string xmlResults)
+        {
+            xmlResults = "";
+        }
+        public void AddInSearchSampleRef(EA.Repository repository, string searchText, ref string xmlResults)
+        {
+            xmlResults = "";
+        }
+        public string AddInSearchSample2(EA.Repository repository, string searchText, out string xmlResults)
+        {
+            xmlResults = "";
+            return "ok";
+        }
+        public string AddInSearchSampleRef3(EA.Repository repository, string searchText, ref string xmlResults)
+        {
+            xmlResults = "";
+            return "ok";
+        }
+        public object AddInSearchSample4(EA.Repository repository, string searchText, out string xmlResults)
+        {
+            xmlResults = "";
+            return "ok";
+        }
+        public object AddInSearchSampleRef5(EA.Repository repository, string searchText, ref string xmlResults)
+        {
+            xmlResults = "";
+            return "ok";
+        }
+        public object AddInSearchSampleRef6(EA.Repository repository, object searchText, ref string xmlResults)
+        {
+            xmlResults = "";
+            return "ok";
+        }
+        public object AddInSearchSampleRef7(EA.Repository repository, object searchText, ref object xmlResults)
+        {
+            xmlResults = "";
+            return "ok";
+        }
+        public object AddInSearchSampleRef7(EA.Repository repository, string searchText, ref object xmlResults)
+        {
+            xmlResults = "";
+            return "ok";
+        }
+        public string AddInSearchSampleRef7(EA.Repository repository, string searchText, object xmlResults)
+        {
+            xmlResults = "";
+            return "ok";
+        }
 
-       
+
+
 
 
     }
+
+    /// <summary>
+    /// Some stuff I don't really understand
+    /// </summary>
     public class InternalHelpers
     {
         static public IWin32Window GetMainWindow()

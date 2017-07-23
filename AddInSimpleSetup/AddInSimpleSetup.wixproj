@@ -21,6 +21,7 @@
     <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Collect\AddInSimple.wxs" />
     <Compile Include="Directories.wxs" />
     <Compile Include="Files.wxs" />
     <Compile Include="Product.wxs" />
