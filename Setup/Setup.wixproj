@@ -40,9 +40,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Collect\Collect.bat" />
+    <Content Include="hoToolsGui.dll.config" />
     <Content Include="License.rtf" />
     <Content Include="Settings.json" />
-    <Content Include="src\hoToolsGui.dll.config" />
     <Content Include="UserSearches.json" />
   </ItemGroup>
   <ItemGroup>

@@ -118,6 +118,11 @@ Some features:
 
 
 # Releases
+## Release 3.0.7
+- Error fixed: hoTools installer doesn't create AppDataFolder'
+- Default setting Linestyle. Activity corrected to 'no'
+- Error fixed: hoTools configuration isAutoCounter = false
+
 ## Release 3.0.6
 - Service Copy FQ (Package, Element, Diagram, Attribut, Operation, Stereotypes) to ClipBoard
 - AddInSimple V1.0.1 added (AddInSimple to show Add-In and how to use Add-In for Shape Scripts )

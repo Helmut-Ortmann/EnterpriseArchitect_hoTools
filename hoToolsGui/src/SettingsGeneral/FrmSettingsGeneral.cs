@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Windows.Forms;
 using hoTools.hoToolsGui;
 using hoTools.EaServices;
 using hoTools.EaServices.WiKiRefs;
@@ -132,66 +133,84 @@ namespace hoTools.Settings
 
         private void btnOk_Click(object sender, System.EventArgs e)
         {
-            // SQL paths
-            _settings.SqlPaths = txtSqlSearchPath.Text;
-            _settings.AddinTabToFirstActivate = txtAddinTabToFirstActivate.Text;
+            try
+            {
+                // SQL paths
+                _settings.SqlPaths = txtSqlSearchPath.Text;
+                _settings.AddinTabToFirstActivate = txtAddinTabToFirstActivate.Text;
 
-            _settings.QuickSearchName = txtQuickSearch.Text;
-            _settings.FileManagerPath = txtFileManagerPath.Text;
+                _settings.QuickSearchName = txtQuickSearch.Text;
+                _settings.FileManagerPath = txtFileManagerPath.Text;
 
-            _settings.IsOrderFeatures = chkFeatureOrdering.Checked;
-            _settings.IsReverseEdgeDirection = chkReverseEdgeDirection.Checked;
-            _settings.IsLineStyleSupport = chkLineStyleSupport.Checked;
-            _settings.IsShortKeySupport = chkShortKeySupport.Checked;
-            _settings.IsQuickSearchSupport = _chkQuickSearchSupport.Checked;
-            _settings.IsShowServiceButton = chkShowServiceButtons.Checked ;
-            _settings.IsShowQueryButton = chkShowQueryButtons.Checked;
-            _settings.IsFavoriteSupport = chkFavoriteSupport.Checked;
-            _settings.IsConveyedItemsSupport = chkConveyedItemSupport.Checked;
+                _settings.IsOrderFeatures = chkFeatureOrdering.Checked;
+                _settings.IsReverseEdgeDirection = chkReverseEdgeDirection.Checked;
+                _settings.IsLineStyleSupport = chkLineStyleSupport.Checked;
+                _settings.IsShortKeySupport = chkShortKeySupport.Checked;
+                _settings.IsQuickSearchSupport = _chkQuickSearchSupport.Checked;
+                _settings.IsShowServiceButton = chkShowServiceButtons.Checked;
+                _settings.IsShowQueryButton = chkShowQueryButtons.Checked;
+                _settings.IsFavoriteSupport = chkFavoriteSupport.Checked;
+                _settings.IsConveyedItemsSupport = chkConveyedItemSupport.Checked;
 
-            _settings.IsAutoCounter = chkAutoCounterSupport.Checked;
+                _settings.IsAutoCounter = chkAutoCounterSupport.Checked;
 
-            _settings.IsSvnSupport = chkSvnSupport.Checked;
-            _settings.IsVcSupport = chkVcSupport.Checked;
-            _settings.IsAdvancedFeatures = chkAdvancedFeatures.Checked;
-            // Port
-            _settings.IsPortBasic = chkPortBasicSupport.Checked;
-            _settings.IsPortType = chkPortTypeSupport.Checked;
-            _settings.IsAdvancedPort = chkAdvancedPort.Checked;
+                _settings.IsSvnSupport = chkSvnSupport.Checked;
+                _settings.IsVcSupport = chkVcSupport.Checked;
+                _settings.IsAdvancedFeatures = chkAdvancedFeatures.Checked;
+                // Port
+                _settings.IsPortBasic = chkPortBasicSupport.Checked;
+                _settings.IsPortType = chkPortTypeSupport.Checked;
+                _settings.IsAdvancedPort = chkAdvancedPort.Checked;
 
-            // Block to Part Port synchronization
-            _settings.PartPortSyncho = EaService.PartPortSynchronization.Off;
-            if (_rbPortSynchronizationDelete.Checked)
-                _settings.PartPortSyncho = EaService.PartPortSynchronization.Delete;
-            if (_rbPortSynchronizationMark.Checked)
-                _settings.PartPortSyncho = EaService.PartPortSynchronization.Mark;
-            if (_rbPortSynchronizationNew.Checked)
-                _settings.PartPortSyncho = EaService.PartPortSynchronization.New;
+                // Block to Part Port synchronization
+                _settings.PartPortSyncho = EaService.PartPortSynchronization.Off;
+                if (_rbPortSynchronizationDelete.Checked)
+                    _settings.PartPortSyncho = EaService.PartPortSynchronization.Delete;
+                if (_rbPortSynchronizationMark.Checked)
+                    _settings.PartPortSyncho = EaService.PartPortSynchronization.Mark;
+                if (_rbPortSynchronizationNew.Checked)
+                    _settings.PartPortSyncho = EaService.PartPortSynchronization.New;
 
-            _settings.IsAdvancedDiagramNote = chkAdvancedDiagramNote.Checked;
+                _settings.IsAdvancedDiagramNote = chkAdvancedDiagramNote.Checked;
 
-            #region AutoLoadMdg
-            _settings.AutoLoadMdgXml = AddinSettings.AutoLoadMdg.No;
-            if (rbAutoLoadMdgBasic.Checked) _settings.AutoLoadMdgXml = AddinSettings.AutoLoadMdg.Basic;
-            if (rbAutoLoadMdgCompilation.Checked) _settings.AutoLoadMdgXml = AddinSettings.AutoLoadMdg.Compilation;
-            #endregion
+                #region AutoLoadMdg
 
-            #region LineStyleAndMoreWindow
-            _settings.LineStyleAndMoreWindow = AddinSettings.ShowInWindow.Disabled;
-            if (rbLineStyleAndMoreAddinWindow.Checked) _settings.LineStyleAndMoreWindow = AddinSettings.ShowInWindow.AddinWindow;
-            if (rbLineStyleAndMoreTabWindow.Checked) _settings.LineStyleAndMoreWindow = AddinSettings.ShowInWindow.TabWindow;
-            #endregion
+                _settings.AutoLoadMdgXml = AddinSettings.AutoLoadMdg.No;
+                if (rbAutoLoadMdgBasic.Checked) _settings.AutoLoadMdgXml = AddinSettings.AutoLoadMdg.Basic;
+                if (rbAutoLoadMdgCompilation.Checked) _settings.AutoLoadMdgXml = AddinSettings.AutoLoadMdg.Compilation;
 
-            #region SearchAndReplaceWindow
-            _settings.SearchAndReplaceWindow = AddinSettings.ShowInWindow.Disabled;
-            if (rbSearchAndReplaceAddinWindow.Checked) _settings.SearchAndReplaceWindow = AddinSettings.ShowInWindow.AddinWindow;
-            if (rbSearchAndReplaceTabWindow.Checked) _settings.SearchAndReplaceWindow = AddinSettings.ShowInWindow.TabWindow;
-            #endregion
+                #endregion
 
-            // save setting
-            _settings.Save();
-            _hoToolsGui.InitializeSettings(); // update settings
-            Close();
+                #region LineStyleAndMoreWindow
+
+                _settings.LineStyleAndMoreWindow = AddinSettings.ShowInWindow.Disabled;
+                if (rbLineStyleAndMoreAddinWindow.Checked)
+                    _settings.LineStyleAndMoreWindow = AddinSettings.ShowInWindow.AddinWindow;
+                if (rbLineStyleAndMoreTabWindow.Checked)
+                    _settings.LineStyleAndMoreWindow = AddinSettings.ShowInWindow.TabWindow;
+
+                #endregion
+
+                #region SearchAndReplaceWindow
+
+                _settings.SearchAndReplaceWindow = AddinSettings.ShowInWindow.Disabled;
+                if (rbSearchAndReplaceAddinWindow.Checked)
+                    _settings.SearchAndReplaceWindow = AddinSettings.ShowInWindow.AddinWindow;
+                if (rbSearchAndReplaceTabWindow.Checked)
+                    _settings.SearchAndReplaceWindow = AddinSettings.ShowInWindow.TabWindow;
+
+                #endregion
+
+                // save setting
+                _settings.Save();
+                _hoToolsGui.InitializeSettings(); // update settings
+                Close();
+            }
+            catch (Exception e1)
+
+            {
+                MessageBox.Show($"{e1}","Can't store settings!");
+            }
         }
 
         private void btnCancel_Click(object sender, System.EventArgs e)

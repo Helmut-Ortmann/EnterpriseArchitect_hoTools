@@ -8,29 +8,29 @@
     <Fragment>
         <DirectoryRef Id="dirA622272A3642906C114F843D2FDC5552">
             <Component Id="cmpAC8B040BBB0645E999205714FCDE95F3" Guid="*">
-                <Class Id="{16D0F158-23FB-3886-B3C3-9CCD8F7EE453}" Context="InprocServer32" Description="hoTools.hoSqlGui.HoSqlGui+EnterTextBox" ThreadingModel="both" ForeignServer="mscoree.dll">
+                <Class Id="{26B5B659-A894-3FB2-BC9D-585182F17166}" Context="InprocServer32" Description="hoTools.hoSqlGui.HoSqlGui+EnterTextBox" ThreadingModel="both" ForeignServer="mscoree.dll">
                     <ProgId Id="hoTools.hoSqlGui.HoSqlGui+EnterTextBox" Description="hoTools.hoSqlGui.HoSqlGui+EnterTextBox" />
                 </Class>
                 <Class Id="{3F23B705-62F1-43D7-9F6F-085105FDF752}" Context="InprocServer32" Description="hoTools.hoSqlGui.HoSqlGui" ThreadingModel="both" ForeignServer="mscoree.dll">
                     <ProgId Id="hoTools.sqlGui" Description="hoTools.hoSqlGui.HoSqlGui" />
                 </Class>
                 <File Id="fil8A8E84B2B5466816B97375A6AD9CE534" KeyPath="yes" Source="SourceDir\release\hoSqlGui.dll" />
-                <RegistryValue Root="HKCR" Key="CLSID\{16D0F158-23FB-3886-B3C3-9CCD8F7EE453}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{16D0F158-23FB-3886-B3C3-9CCD8F7EE453}\InprocServer32\3.0.0.0" Name="Class" Value="hoTools.hoSqlGui.HoSqlGui+EnterTextBox" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{16D0F158-23FB-3886-B3C3-9CCD8F7EE453}\InprocServer32\3.0.0.0" Name="Assembly" Value="hoSqlGui, Version=3.0.0.0, Culture=neutral, PublicKeyToken=37ea3d95ffcb87e1" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{16D0F158-23FB-3886-B3C3-9CCD8F7EE453}\InprocServer32\3.0.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{16D0F158-23FB-3886-B3C3-9CCD8F7EE453}\InprocServer32\3.0.0.0" Name="CodeBase" Value="file:///[#fil8A8E84B2B5466816B97375A6AD9CE534]" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{16D0F158-23FB-3886-B3C3-9CCD8F7EE453}\InprocServer32" Name="Class" Value="hoTools.hoSqlGui.HoSqlGui+EnterTextBox" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{16D0F158-23FB-3886-B3C3-9CCD8F7EE453}\InprocServer32" Name="Assembly" Value="hoSqlGui, Version=3.0.0.0, Culture=neutral, PublicKeyToken=37ea3d95ffcb87e1" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{16D0F158-23FB-3886-B3C3-9CCD8F7EE453}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{16D0F158-23FB-3886-B3C3-9CCD8F7EE453}\InprocServer32" Name="CodeBase" Value="file:///[#fil8A8E84B2B5466816B97375A6AD9CE534]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{26B5B659-A894-3FB2-BC9D-585182F17166}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{26B5B659-A894-3FB2-BC9D-585182F17166}\InprocServer32\3.0.7.0" Name="Class" Value="hoTools.hoSqlGui.HoSqlGui+EnterTextBox" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{26B5B659-A894-3FB2-BC9D-585182F17166}\InprocServer32\3.0.7.0" Name="Assembly" Value="hoSqlGui, Version=3.0.7.0, Culture=neutral, PublicKeyToken=37ea3d95ffcb87e1" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{26B5B659-A894-3FB2-BC9D-585182F17166}\InprocServer32\3.0.7.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{26B5B659-A894-3FB2-BC9D-585182F17166}\InprocServer32\3.0.7.0" Name="CodeBase" Value="file:///[#fil8A8E84B2B5466816B97375A6AD9CE534]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{26B5B659-A894-3FB2-BC9D-585182F17166}\InprocServer32" Name="Class" Value="hoTools.hoSqlGui.HoSqlGui+EnterTextBox" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{26B5B659-A894-3FB2-BC9D-585182F17166}\InprocServer32" Name="Assembly" Value="hoSqlGui, Version=3.0.7.0, Culture=neutral, PublicKeyToken=37ea3d95ffcb87e1" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{26B5B659-A894-3FB2-BC9D-585182F17166}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{26B5B659-A894-3FB2-BC9D-585182F17166}\InprocServer32" Name="CodeBase" Value="file:///[#fil8A8E84B2B5466816B97375A6AD9CE534]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{3F23B705-62F1-43D7-9F6F-085105FDF752}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{3F23B705-62F1-43D7-9F6F-085105FDF752}\InprocServer32\3.0.0.0" Name="Class" Value="hoTools.hoSqlGui.HoSqlGui" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{3F23B705-62F1-43D7-9F6F-085105FDF752}\InprocServer32\3.0.0.0" Name="Assembly" Value="hoSqlGui, Version=3.0.0.0, Culture=neutral, PublicKeyToken=37ea3d95ffcb87e1" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{3F23B705-62F1-43D7-9F6F-085105FDF752}\InprocServer32\3.0.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{3F23B705-62F1-43D7-9F6F-085105FDF752}\InprocServer32\3.0.0.0" Name="CodeBase" Value="file:///[#fil8A8E84B2B5466816B97375A6AD9CE534]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{3F23B705-62F1-43D7-9F6F-085105FDF752}\InprocServer32\3.0.7.0" Name="Class" Value="hoTools.hoSqlGui.HoSqlGui" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{3F23B705-62F1-43D7-9F6F-085105FDF752}\InprocServer32\3.0.7.0" Name="Assembly" Value="hoSqlGui, Version=3.0.7.0, Culture=neutral, PublicKeyToken=37ea3d95ffcb87e1" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{3F23B705-62F1-43D7-9F6F-085105FDF752}\InprocServer32\3.0.7.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{3F23B705-62F1-43D7-9F6F-085105FDF752}\InprocServer32\3.0.7.0" Name="CodeBase" Value="file:///[#fil8A8E84B2B5466816B97375A6AD9CE534]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{3F23B705-62F1-43D7-9F6F-085105FDF752}\InprocServer32" Name="Class" Value="hoTools.hoSqlGui.HoSqlGui" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{3F23B705-62F1-43D7-9F6F-085105FDF752}\InprocServer32" Name="Assembly" Value="hoSqlGui, Version=3.0.0.0, Culture=neutral, PublicKeyToken=37ea3d95ffcb87e1" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{3F23B705-62F1-43D7-9F6F-085105FDF752}\InprocServer32" Name="Assembly" Value="hoSqlGui, Version=3.0.7.0, Culture=neutral, PublicKeyToken=37ea3d95ffcb87e1" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{3F23B705-62F1-43D7-9F6F-085105FDF752}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{3F23B705-62F1-43D7-9F6F-085105FDF752}\InprocServer32" Name="CodeBase" Value="file:///[#fil8A8E84B2B5466816B97375A6AD9CE534]" Type="string" Action="write" />
             </Component>

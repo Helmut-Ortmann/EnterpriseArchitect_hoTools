@@ -135,26 +135,8 @@ namespace hoTools.Settings
             ConfigFolderPath = configDirectory + path;
             ConfigFilePath = ConfigFolderPath + configFileName;
 
-            // Handling jason file
-            string jasonFileName = @"Settings.json";
-            // If Settings.json don't exists: Copy delivery Setting.json file to settings folder
-            // ReSharper disable once AssignNullToNotNullAttribute
-            string sourceSettingsPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
-            jasonFileName);
-            string targetSettingsPath = ConfigFolderPath + jasonFileName;
 
-            // Copy delivery Setting.json file to settings folder 
-            if (!File.Exists(targetSettingsPath))
-            {
-                File.Copy(sourceSettingsPath, targetSettingsPath);
-            }
-            JasonFilePath = targetSettingsPath;
-            JasonFilePathDelivery = sourceSettingsPath;
-
-
-
-
-            // Map the roaming configuration file. This
+           // Map the roaming configuration file. This
             // enables the application to access 
             // the configuration file using the
             // System.Configuration.Configuration class
@@ -167,6 +149,23 @@ namespace hoTools.Settings
             // - For simple values that's all to do
             //   they uses Getter/Setter, no special handling here
             MergeDefaultSettings();
+
+            // Handling jason file
+            string jasonFileName = @"Settings.json";
+            // If Settings.json don't exists: Copy delivery Setting.json file to settings folder
+            // ReSharper disable once AssignNullToNotNullAttribute
+            string sourceSettingsPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
+                jasonFileName);
+            string targetSettingsPath = ConfigFolderPath + jasonFileName;
+
+            // Copy delivery Setting.json file to settings folder 
+            if (!File.Exists(targetSettingsPath))
+            {
+                File.Copy(sourceSettingsPath, targetSettingsPath);
+            }
+            JasonFilePath = targetSettingsPath;
+            JasonFilePathDelivery = sourceSettingsPath;
+
 
             // get list from config
             // for simple values nothing is to do here (there exists only a getter/setter)
@@ -189,6 +188,8 @@ namespace hoTools.Settings
             //-------------------------------------------
             // Simple values uses Getter/Setter, no special handling here
         }
+
+
         #endregion
 
         /// <summary>

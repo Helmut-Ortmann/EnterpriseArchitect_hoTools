@@ -40,7 +40,7 @@
       <!--
       Replace: Source="SourceDir\release\AddInSimple.dll" /> by
       Name="AddInSimple.dll" Source="$(var.AddInSimple.TargetPath)" />
-      Update if Assembly, Visual Studio Version changed
+      If you change AssemblyVersion also update all Version=.. in the beneath associated registry - or run the collect.bat
       
       Run first: Collect.bat to reap the Component registration information with WIX
       Insert the content of the reaped *.wxs file between 

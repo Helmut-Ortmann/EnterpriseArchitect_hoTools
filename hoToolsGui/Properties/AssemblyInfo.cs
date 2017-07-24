@@ -37,8 +37,8 @@ using hoTools;
 // If you change something you have to update the component information in Files.wxs
 // If not: you get registration error and the Addin isn't loaded in EA
 // Assembly version is used to output release information for an assembly
-[assembly: AssemblyVersion("3.0.0.1")] 
+[assembly: AssemblyVersion("3.0.7")] 
 // possibly make same as ProductVersion in Product.wxs
-[assembly: AssemblyFileVersion("3.0.5")]
+[assembly: AssemblyFileVersion("3.0.7")]
 [assembly: NeutralResourcesLanguage("en")]
 
