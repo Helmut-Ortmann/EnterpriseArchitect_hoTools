@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Windows.Forms;
 using System.Xml.Linq;
@@ -157,9 +158,119 @@ namespace hoTools.Utils.SQL
             }
             return sqlQuery.Trim();
         }
+        /// <summary>
+        /// Make EA xml from a DataTable (for column names) and the ordered Enumeration provided by LINQ. Set the Captions in DataTable to ensure column names. 
+        /// 
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <param name="rows"></param>
+        /// <returns></returns>
+        public static string MakeXml(DataTable dt, OrderedEnumerableRowCollection<DataRow> rows)
+        {
+            XElement xFields = new XElement("Fields");
+            foreach (DataColumn col in dt.Columns)
+            {
+                XElement xField = new XElement("Field");
+                xField.Add(new XAttribute("name", col.Caption));
+                xFields.Add(xField);
+            }
+            try
+            {
+                XElement xRows = new XElement("Rows");
+
+                foreach (var row in rows)
+                {
+                    XElement xRow = new XElement("Row");
+                    int i = 0;
+                    foreach (DataColumn col in dt.Columns)
+                    {
+                        XElement xField = new XElement("Field");
+                        xField.Add(new XAttribute("value", row[i].ToString()));
+                        xField.Add(new XAttribute("name", col.Caption));
+                        xRow.Add(xField);
+                        i = i + 1;
+                    }
+                    xRows.Add(xRow);
+                }
+                XElement xDoc = new XElement("ReportViewData");
+                xDoc.Add(xFields);
+                xDoc.Add(xRows);
+                return xDoc.ToString();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($"{e}", "Error enumerating through LINQ query");
+                return "";
+            }
+        }
+        #region Empty Query Result
+
+        /// <summary>
+        /// Empty Query Result
+        /// </summary>
+        /// <returns></returns>
+        static string EmptyQueryResult()
+        {
+            return new XDocument(
+                new XElement("ReportViewData",
+                    new XElement("Fields",
+                        new XElement("Field", new XAttribute("name", "Empty"))
+                    ),
+                    new XElement("Rows",
+                        new XElement("Row",
+                            new XElement("Field",
+                                new XAttribute("name", "Empty"),
+                                new XAttribute("value", "__empty___")))
+
+                    )
+                )).ToString();
+            #endregion
+        }
+        public static DataTable MakeDataTableFromSqlXml(string sqlXml)
+        {
+
+            DataTable dt = new DataTable();
+
+            XDocument x = XDocument.Parse(sqlXml);
+            //---------------------------------------------------------------------
+            // From Query:
+            //<EADATA><Dataset_0>
+            // <Data>
+            //  <Row>
+            //    <Name1>value1</name1>
+            //    <Name2>value2</name2>
+            //  </Row>
+            //  <Row>
+            //    <Name1>value1</name1>
+            //    <Name2>value2</name2>
+            //  </Row>
+            // </Data>
+            //</Dataset_0><EADATA>
+            //
+            var fields = from field in x.Descendants("Row").FirstOrDefault().Descendants()
+                select field;
+            int i = 0;
+            foreach (var field in fields)
+            {
+                dt.Columns[i].Caption = field.Value;
+                i = i + 1;
+            }
+
+            var rows = from row in x.Descendants("Row")
+                select row;
+            i = 0;
+            foreach (var row in rows)
+            {
+                
+                ffff
+            }
 
 
-        #region getAndSortEmbeddedElements
+
+            return dt;
+        }
+
+    #region getAndSortEmbeddedElements
         /// <summary>
         /// Get embedded elements and sort them according to name (ASC)
         /// - objectType which embedded element is selected
