@@ -15,6 +15,31 @@ namespace hoTools.Utils.SQL
     /// </summary>
     public class UtilSql
     {
+        /// <summary>
+        /// List of databases supported as backend for an EA repository
+        /// 0 - MySql
+        ///	1 - SqlSvr
+        /// 2 - AdoJet
+        /// 3 - ORACLE
+        /// 4 - POSTGRES
+        /// 5 - Asa
+        /// 7 - OPENEDGE
+        /// 8 - ACCESS2007
+        /// 9 - FireBird
+        /// </summary>
+        public enum RepositoryType
+        {
+            MySql,
+            SqlSvr,
+            AdoJet,
+            Oracle,
+            Postgres,
+            Asa,
+            Openedge,
+            Access2007,
+            Firebird,
+            Unknown
+        }
         readonly Repository _rep;
         #region Constructor
         public UtilSql(Repository rep)
@@ -22,6 +47,118 @@ namespace hoTools.Utils.SQL
             _rep = rep;
         }
         #endregion
+
+        /// <summary>
+        /// Gets the rep type for this model
+        /// </summary>
+        /// <returns></returns>
+        public static RepositoryType GetRepositoryType(EA.Repository rep)
+        {
+            string connectionString = rep.ConnectionString;
+            RepositoryType repoType = RepositoryType.AdoJet; //default to .eap file
+
+            // if it is a .feap file then it surely is a Firebird db
+            if (connectionString.ToLower().EndsWith(".feap", StringComparison.Ordinal))
+            {
+                repoType = RepositoryType.Firebird;
+            }
+            else
+            {
+                //if it is a .eap file we check the size of it. if less then 1 MB then it is a shortcut file and we have to open it as a text file to find the actual connection string
+                if (connectionString.ToLower().EndsWith(".eap", StringComparison.CurrentCulture))
+                {
+                    var fileInfo = new System.IO.FileInfo(connectionString);
+                    if (fileInfo.Length > 1000)
+                    {
+                        //local .eap file, ms access syntax
+                        repoType = RepositoryType.AdoJet;
+                    }
+                    else
+                    {
+                        //open the file as a text file to find the connection string.
+                        var fileStream = new System.IO.FileStream(connectionString, System.IO.FileMode.Open,
+                            System.IO.FileAccess.Read, System.IO.FileShare.ReadWrite);
+                        var reader = new System.IO.StreamReader(fileStream);
+                        //replace connection string with the file contents
+                        connectionString = reader.ReadToEnd();
+                        reader.Close();
+                    }
+                }
+                if (!connectionString.ToLower().EndsWith(".eap", StringComparison.CurrentCulture))
+                {
+                    string dbTypeString = "DBType=";
+                    int dbIndex = connectionString.IndexOf(dbTypeString, StringComparison.CurrentCulture) +
+                                  dbTypeString.Length;
+                    if (dbIndex > dbTypeString.Length)
+                    {
+                        int dbNumber;
+                        string dbNumberString = connectionString.Substring(dbIndex, 1);
+                        if (int.TryParse(dbNumberString, out dbNumber))
+                        {
+                            repoType = (RepositoryType)dbNumber;
+                        }
+                    }
+                }
+            }
+            return repoType;
+        }
+
+        /// <summary>
+        /// Replace the wild cards in the given sql query string to match either MSAccess or ANSI syntax. It works for:
+        /// <para />
+        /// % or * or #WC# Any character
+        /// <para />
+        /// _ or ? a single character
+        /// <para />
+        /// '^' or '!' a shortcut for XOR
+        /// </summary>
+        /// <param name="sqlQuery">the sql string to edit</param>
+        /// <param name="repositoryType"></param>
+        /// <returns>the same sql query, but with its wild cards replaced according to the required syntax</returns>
+        public static string ReplaceSqlWildCards(EA.Repository rep, string sqlQuery, RepositoryType repositoryType = RepositoryType.Unknown)
+        {
+            if (repositoryType == RepositoryType.Unknown) repositoryType = GetRepositoryType(rep);
+            bool msAccess = repositoryType == RepositoryType.AdoJet;
+            int beginLike = sqlQuery.IndexOf("like", StringComparison.InvariantCultureIgnoreCase);
+            if (beginLike > 1)
+            {
+                int beginString = sqlQuery.IndexOf("'", beginLike + "like".Length, StringComparison.CurrentCulture);
+                if (beginString > 0)
+                {
+                    int endString = sqlQuery.IndexOf("'", beginString + 1, StringComparison.CurrentCulture);
+                    if (endString > beginString)
+                    {
+                        string originalLikeString = sqlQuery.Substring(beginString + 1, endString - beginString);
+                        string likeString = originalLikeString;
+                        if (msAccess)
+                        {
+                            likeString = likeString.Replace('%', '*');
+                            likeString = likeString.Replace('_', '?');
+                            likeString = likeString.Replace('^', '!');
+                            likeString = likeString.Replace("#WC#", "*");
+                        }
+                        else
+                        {
+                            likeString = likeString.Replace('*', '%');
+                            likeString = likeString.Replace('?', '_');
+                            likeString = likeString.Replace('#', '_');
+                            likeString = likeString.Replace('^', '!');
+                            likeString = likeString.Replace("#WC#", "%");
+                        }
+                        string next = string.Empty;
+                        if (endString < sqlQuery.Length)
+                        {
+                            next = ReplaceSqlWildCards(rep, sqlQuery.Substring(endString + 1), repositoryType);
+                        }
+                        sqlQuery = sqlQuery.Substring(0, beginString + 1) + likeString + next;
+
+                    }
+                }
+            }
+            return sqlQuery.Trim();
+        }
+
+
         #region getAndSortEmbeddedElements
         /// <summary>
         /// Get embedded elements and sort them according to name (ASC)

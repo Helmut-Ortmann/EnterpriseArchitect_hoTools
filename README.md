@@ -118,6 +118,10 @@ Some features:
 
 
 # Releases
+## Release 3.0.8
+- AddInSimple: Add-In Search 'AddInSearchSamplePackageContent' corrected
+- hoTools: Reorganisation ReplaceWildCard
+
 ## Release 3.0.7
 - Error fixed: hoTools installer doesn't create AppDataFolder'
 - Default setting Linestyle. Activity corrected to 'no'

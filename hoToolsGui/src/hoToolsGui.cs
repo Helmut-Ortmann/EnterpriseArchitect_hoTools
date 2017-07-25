@@ -3307,7 +3307,7 @@ namespace hoTools.hoToolsGui
             AddinSettings.UpdateModel(_model);
             GetValueSettingsFromJson();
             // Load Autogenerate settings from Settings.json
-            AddinSettings.NameGenerator = new NamesGenerator(_model, AddinSettings.JasonFilePath);
+            AddinSettings.NameGenerator = new NamesGenerator(_model.Repository, AddinSettings.JasonFilePath);
             AddAutoCounterSettingsMenu();
         }
 
@@ -3862,7 +3862,7 @@ Please restart EA. During restart hoTools loads the default settings.",
 
         private void applyAllNewAutoCounterToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            NamesGenerator nameGenerator = new NamesGenerator(_model, AddinSettings.JasonFilePath);
+            NamesGenerator nameGenerator = new NamesGenerator(_model.Repository, AddinSettings.JasonFilePath);
             nameGenerator.ApplyAllNew();
         }
 

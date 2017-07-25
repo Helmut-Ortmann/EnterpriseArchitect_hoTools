@@ -66,6 +66,7 @@ namespace AddInSimple
         const string MenuGoodbye = "&Say Goodbye";
         const string MenuOpenProperties = "&Open Properties";
         const string MenuRunDemoSearch = "&DemoSearch";
+        const string MenuRunDemoPackageContent = "&DemoSearchPackageContent";
 
         // remember if we have to say hello or goodbye
         private bool _shouldWeSayHello = true;
@@ -76,7 +77,7 @@ namespace AddInSimple
         public AddInSimpleClass()
         {
             this.menuHeader = MenuName;
-            this.menuOptions = new[] { MenuHello, MenuGoodbye, MenuOpenProperties, MenuRunDemoSearch };
+            this.menuOptions = new[] { MenuHello, MenuGoodbye, MenuOpenProperties, MenuRunDemoSearch, MenuRunDemoPackageContent };
         }
         /// <summary>
         /// EA_Connect events enable Add-Ins to identify their type and to respond to Enterprise Architect start up.
@@ -124,6 +125,12 @@ namespace AddInSimple
                     case MenuRunDemoSearch:
                         isEnabled = true;
                         break;
+
+                    // Test Add-In Search output package elements
+                    case MenuRunDemoPackageContent:
+                        isEnabled = true;
+                        break;
+
                     // there shouldn't be any other, but just in case disable it.
                     default:
                         isEnabled = false;
@@ -147,6 +154,8 @@ namespace AddInSimple
         /// <param name="itemName">the name of the selected menu item</param>
         public override void EA_MenuClick(EA.Repository repository, string location, string menuName, string itemName)
         {
+            string xml;
+            DataTable dt;
             switch (itemName)
             {
                 // user has clicked the menuHello menu option
@@ -157,6 +166,8 @@ namespace AddInSimple
                 case MenuGoodbye:
                     this.SayGoodbye();
                     break;
+
+
                 case MenuOpenProperties:
                     this.testPropertiesDialog(repository);
                     break;
@@ -164,9 +175,18 @@ namespace AddInSimple
                 // Test the Search and output the results to EA Search Window
                 case MenuRunDemoSearch:
                     // 1. Collect data
-                    DataTable dt = SetTable();
+                    dt = SetTable();
                     // 2. Order, Filter, Join, Format to XML
-                    string xml = QueryAndMakeXml(dt);
+                    xml = QueryAndMakeXml(dt);
+                    // 3. Out put to EA
+                    repository.RunModelSearch("", "", "", xml);
+                    break;
+
+                case MenuRunDemoPackageContent:
+                    // 1. Collect data into a data table
+                    dt = SetTableFromContext(repository);
+                    // 2. Order, Filter, Join, Format to XML
+                    xml = QueryAndMakeXmlFromContext(dt);
                     // 3. Out put to EA
                     repository.RunModelSearch("", "", "", xml);
                     break;
@@ -423,7 +443,7 @@ namespace AddInSimple
         /// Add-In Search: Sample
         /// See: http://sparxsystems.com/enterprise_architect_user_guide/13.5/automation/add-in_search.html
         /// 
-        /// Who it's works:
+        /// how it's works:
         /// 1. Create a Table and fill it with your code
         /// 2. Adapt LINQ to output the table (powerful)
         ///    -- Where to select only certain rows
@@ -446,7 +466,35 @@ namespace AddInSimple
             xmlResults = QueryAndMakeXml(dt);
             return "ok";
         }
-        
+
+        /// <summary>
+        /// Add-In Search: Sample
+        /// See: http://sparxsystems.com/enterprise_architect_user_guide/13.5/automation/add-in_search.html
+        /// 
+        /// How it's works:
+        /// 1. Create a Table and fill it with your code
+        /// 2. Adapt LINQ to output the table (powerful)
+        ///    -- Where to select only certain rows
+        ///    -- Order By to order the result set
+        ///    -- Grouping
+        ///    -- Filter
+        ///    -- JOIN
+        ///    -- etc.
+        /// 3. Deploy and test 
+        /// </summary>
+        /// <param name="repository"></param>
+        /// <param name="searchText"></param>
+        /// <param name="xmlResults"></param>
+        /// <returns></returns>
+        public object AddInSearchSamplePackageContent(EA.Repository repository, string searchText, out string xmlResults)
+        {
+            // 1. Collect data into a data table
+            DataTable dt = SetTableFromContext(repository);
+            // 2. Order, Filter, Join, Format to XML
+            xmlResults = QueryAndMakeXmlFromContext(dt);
+            return "ok";
+        }
+
 
         /// <summary>
         /// Set DataTable with test data
@@ -466,6 +514,39 @@ namespace AddInSimple
             table.Rows.Add("Sofy", "female", "Cologne");
             table.Rows.Add("Lena", "female", "Petersburg");
             table.Rows.Add("Joker", "unknown", "??????");
+            return table;
+
+        }
+        /// <summary>
+        /// Set DataTable with test data
+        /// </summary>
+        /// <returns></returns>
+        private DataTable SetTableFromContext(EA.Repository rep)
+        {
+            // Here we create a more realistic DataTable with:
+            // - CLASSGUID for easy navigation within EA Model Search Window
+            // - CLASSTYPE for easy navigation within EA Model Search Window
+            DataTable table = new DataTable();
+            table.Columns.Add("CLASSGUID", typeof(string));
+            table.Columns.Add("CLASSTYPE", typeof(string));
+            table.Columns.Add("Name", typeof(string));
+            table.Columns.Add("Stereotype", typeof(string));
+            table.Columns.Add("Type", typeof(string));
+            table.Columns.Add("Alias", typeof(string));
+
+            // Switch according to context object type
+            object oContext;
+            EA.ObjectType type = rep.GetContextItem(out oContext);
+            switch (type)
+            {
+                 case EA.ObjectType.otPackage:
+                     EA.Package pkg = (EA.Package) oContext;
+                     foreach (EA.Element el in pkg.Elements)
+                     {
+                         table.Rows.Add(el.ElementGUID, type,  el.Name, el.Stereotype, el.Type, el.Alias);
+                     }
+                     break;
+            }
             return table;
 
         }
@@ -493,6 +574,30 @@ namespace AddInSimple
 
             }
         }
+        /// <summary>
+        /// Test Query
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <returns></returns>
+        private string QueryAndMakeXmlFromContext(DataTable dt)
+        {
+            try
+            {
+                // Make a LINQ query (WHERE, JOIN, ORDER,)
+                OrderedEnumerableRowCollection<DataRow> rows = from row in dt.AsEnumerable()
+                    orderby row.Field<string>("Name") descending
+                    select row;
+
+                return MakeXml(dt, rows);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($"{e}", "Error LINQ query");
+                return "";
+
+            }
+        }
+
         /// <summary>
         /// Make EA xml from a DataTable (for column names) and the ordered Enumeration provided by LINQ. Set the Captions in DataTable to ensure column names. 
         /// 

@@ -217,14 +217,13 @@ namespace hoTools.EaServices
         public static void UpdateElementHyperLinks(Repository rep)
         {
             Cursor.Current = Cursors.WaitCursor;
-            Model model = new Model(rep);
             // < a href = "$element://{8A6488BC-0DFD-45f2-8506-4D0A77626E63}" >< font color = "#0000ff" >< u > Action1 </ u ></ font ></ a >
             // element
             // diagram  Name: 'PackageName : DiagramName'
             // package
             // feature (Attribute or Operation)
             string sql = @"select object_id from t_object where note like '*a href=""*://{*'";
-            sql =  model.ReplaceSqlWildCards(sql);
+            sql =  UtilSql.ReplaceSqlWildCards(rep, sql);
             //
             
             EA.Collection elList = rep.GetElementSet(sql, 2);
@@ -258,14 +257,13 @@ namespace hoTools.EaServices
         {
             Cursor.Current = Cursors.WaitCursor;
 
-            Model model = new Model(rep);
             // < a href = "$element://{8A6488BC-0DFD-45f2-8506-4D0A77626E63}" >< font color = "#0000ff" >< u > Action1 </ u ></ font ></ a >
             // element
             // diagram  Name: 'PackageName : DiagramName'
             // package
             // feature (Attribute or Operation)
             string sql = @"select diagram_id As id from t_diagram where notes like '*a href=""*://{*'";
-            sql = model.ReplaceSqlWildCards(sql);
+            sql = UtilSql.ReplaceSqlWildCards(rep, sql);
 
             UtilSql utilSql = new UtilSql(rep);
             List<string> idList = utilSql.GetListOfStringFromSql(sql, "id");
@@ -298,14 +296,13 @@ namespace hoTools.EaServices
         public static void UpdateFeatureHyperLinks(Repository rep)
         {
             Cursor.Current = Cursors.WaitCursor;
-            Model model = new Model(rep);
             // < a href = "$element://{8A6488BC-0DFD-45f2-8506-4D0A77626E63}" >< font color = "#0000ff" >< u > Action1 </ u ></ font ></ a >
             // element
             // diagram  Name: 'PackageName : DiagramName'
             // package
             // feature (Attribute or Operation)
             string sql = @"select ea_guid As guids  from t_attribute where notes like '*a href=""*://{*'";
-            sql = model.ReplaceSqlWildCards(sql);
+            sql = UtilSql.ReplaceSqlWildCards(rep, sql);
 
             UtilSql utilSql = new UtilSql(rep);
             List<string> guidList = utilSql.GetListOfStringFromSql(sql, "guids");
@@ -324,7 +321,7 @@ namespace hoTools.EaServices
             }
             // Operations
             sql = @"select ea_guid As guids  from t_operation where notes like '*a href=""*://{*'";
-            sql = model.ReplaceSqlWildCards(sql);
+            sql = UtilSql.ReplaceSqlWildCards(rep, sql);
 
             guidList = utilSql.GetListOfStringFromSql(sql, "guids");
             foreach (string guid in guidList)

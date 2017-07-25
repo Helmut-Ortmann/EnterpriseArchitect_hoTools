@@ -199,7 +199,7 @@ namespace hoTools.Settings
         public void UpdateModel(Model model)
         {
             _model = model;
-            NameGenerator.EaModel = model;
+            NameGenerator.Rep = model.Repository;
 
             // get all services of type Call and Script which are available 
             GetAllServicesAndScripts();

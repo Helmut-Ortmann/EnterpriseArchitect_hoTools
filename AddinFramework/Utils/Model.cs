@@ -25,36 +25,13 @@ namespace EAAddinFramework.Utils
         public EA.App EaApp { get; }
         static string _applicationFullPath;
         IWin32Window _mainEaWindow;
-        RepositoryType? _repositoryType; // a null able type
+        UtilSql.RepositoryType? _repositoryType; // a null able type
 
         // configuration as singleton
         readonly HoToolsGlobalCfg _globalCfg = HoToolsGlobalCfg.Instance;
 
 
-        /// <summary>
-        /// List of databases supported as backend for an EA repository
-        /// 0 - MySql
-        ///	1 - SqlSvr
-        /// 2 - AdoJet
-        /// 3 - ORACLE
-        /// 4 - POSTGRES
-        /// 5 - Asa
-        /// 7 - OPENEDGE
-        /// 8 - ACCESS2007
-        /// 9 - FireBird
-        /// </summary>
-        public enum RepositoryType
-        {
-            MySql,
-            SqlSvr,
-            AdoJet,
-            Oracle,
-            Postgres,
-            Asa,
-            Openedge,
-            Access2007,
-            Firebird
-        }
+        
 
         #region Constructor
 
@@ -113,13 +90,13 @@ namespace EAAddinFramework.Utils
         /// returns the type of repository backend.
         /// This is mostly needed to adjust to sql to the specific sql dialect
         /// </summary>
-        public RepositoryType repositoryType
+        public UtilSql.RepositoryType RepositoryType
         {
             get
             {
                 if (!_repositoryType.HasValue)
                 {
-                    _repositoryType = GetRepositoryType();
+                    _repositoryType = UtilSql.GetRepositoryType(Repository);
                 }
                 return _repositoryType.Value;
             }
@@ -153,60 +130,7 @@ namespace EAAddinFramework.Utils
             }
         }
 
-        /// <summary>
-        /// Gets the rep type for this model
-        /// </summary>
-        /// <returns></returns>
-        public RepositoryType GetRepositoryType()
-        {
-            string connectionString = Repository.ConnectionString;
-            RepositoryType repoType = RepositoryType.AdoJet; //default to .eap file
-
-            // if it is a .feap file then it surely is a Firebird db
-            if (connectionString.ToLower().EndsWith(".feap", StringComparison.Ordinal))
-            {
-                repoType = RepositoryType.Firebird;
-            }
-            else
-            {
-                //if it is a .eap file we check the size of it. if less then 1 MB then it is a shortcut file and we have to open it as a text file to find the actual connection string
-                if (connectionString.ToLower().EndsWith(".eap", StringComparison.CurrentCulture))
-                {
-                    var fileInfo = new System.IO.FileInfo(connectionString);
-                    if (fileInfo.Length > 1000)
-                    {
-                        //local .eap file, ms access syntax
-                        repoType = RepositoryType.AdoJet;
-                    }
-                    else
-                    {
-                        //open the file as a text file to find the connection string.
-                        var fileStream = new System.IO.FileStream(connectionString, System.IO.FileMode.Open,
-                            System.IO.FileAccess.Read, System.IO.FileShare.ReadWrite);
-                        var reader = new System.IO.StreamReader(fileStream);
-                        //replace connection string with the file contents
-                        connectionString = reader.ReadToEnd();
-                        reader.Close();
-                    }
-                }
-                if (!connectionString.ToLower().EndsWith(".eap", StringComparison.CurrentCulture))
-                {
-                    string dbTypeString = "DBType=";
-                    int dbIndex = connectionString.IndexOf(dbTypeString, StringComparison.CurrentCulture) +
-                                  dbTypeString.Length;
-                    if (dbIndex > dbTypeString.Length)
-                    {
-                        int dbNumber;
-                        string dbNumberString = connectionString.Substring(dbIndex, 1);
-                        if (int.TryParse(dbNumberString, out dbNumber))
-                        {
-                            repoType = (RepositoryType) dbNumber;
-                        }
-                    }
-                }
-            }
-            return repoType;
-        }
+        
 
         /// <summary>
         /// Execute SQL and catch Exception
@@ -234,13 +158,13 @@ namespace EAAddinFramework.Utils
         /// <returns>the formatted xpath</returns>
         public string FormatXPath(string xpath)
         {
-            switch (repositoryType)
+            switch (RepositoryType)
             {
 
-                case RepositoryType.Oracle:
-                case RepositoryType.Firebird:
+                case UtilSql.RepositoryType.Oracle:
+                case UtilSql.RepositoryType.Firebird:
                     return xpath.ToUpper();
-                case RepositoryType.Postgres:
+                case UtilSql.RepositoryType.Postgres:
                     return xpath.ToLower();
                 default:
                     return xpath;
@@ -255,10 +179,10 @@ namespace EAAddinFramework.Utils
         public string EscapeSqlString(string sqlString)
         {
             string escapedString = sqlString;
-            switch (repositoryType)
+            switch (RepositoryType)
             {
-                case RepositoryType.MySql:
-                case RepositoryType.Postgres:
+                case UtilSql.RepositoryType.MySql:
+                case UtilSql.RepositoryType.Postgres:
                     // replace backslash "\" by double backslash "\\"
                     escapedString = escapedString.Replace(@"\", @"\\");
                     break;
@@ -287,7 +211,7 @@ namespace EAAddinFramework.Utils
                 string sqlString = _globalCfg.ReadSqlFile(searchName);
 
                 // run search
-                searchTerm = ReplaceSqlWildCards(searchTerm);
+                searchTerm = UtilSql.ReplaceSqlWildCards(Repository, searchTerm, RepositoryType);
                 return SqlRun(searchName, sqlString, searchTerm, exportToExcel);
 
 
@@ -767,7 +691,7 @@ namespace EAAddinFramework.Utils
         /// <returns>the fixed query</returns>
         private string FormatSql(string sqlQuery)
         {
-            sqlQuery = ReplaceSqlWildCards(sqlQuery);
+            sqlQuery = UtilSql.ReplaceSqlWildCards(Repository, sqlQuery, RepositoryType);
             sqlQuery = FormatSqlTop(sqlQuery);
             sqlQuery = FormatSqlFunctions(sqlQuery);
             sqlQuery = FormatSqldBspecific(sqlQuery); // DB specifics like #DB=ORACLE#.... #DB=ORACLE#
@@ -786,11 +710,11 @@ namespace EAAddinFramework.Utils
         {
             string formattedSql = sqlQuery;
             //lcase -> lower in T-SQL (SqlSvr and Asa and Oracle and FireBird)
-            if (repositoryType == RepositoryType.SqlSvr ||
-                repositoryType == RepositoryType.Asa ||
-                repositoryType == RepositoryType.Oracle ||
-                repositoryType == RepositoryType.Firebird ||
-                repositoryType == RepositoryType.Postgres)
+            if (RepositoryType == UtilSql.RepositoryType.SqlSvr ||
+                RepositoryType == UtilSql.RepositoryType.Asa ||
+                RepositoryType == UtilSql.RepositoryType.Oracle ||
+                RepositoryType == UtilSql.RepositoryType.Firebird ||
+                RepositoryType == UtilSql.RepositoryType.Postgres)
             {
                 formattedSql = formattedSql.Replace(@"lcase(", "lower(");
             }
@@ -830,9 +754,9 @@ namespace EAAddinFramework.Utils
                 {
                     string N = sqlQuery.ToLower().Substring(beginN, endN - beginN);
                     string selectTopN = sqlQuery.Substring(begintop, endN);
-                    switch (repositoryType)
+                    switch (RepositoryType)
                     {
-                        case RepositoryType.Oracle:
+                        case UtilSql.RepositoryType.Oracle:
                             // remove "top N" clause
                             formattedQuery = formattedQuery.Replace(selectTopN, "select ");
                             // find where clause
@@ -842,15 +766,15 @@ namespace EAAddinFramework.Utils
                             // add the row count condition
                             formattedQuery = formattedQuery.Insert(beginWhere + whereString.Length, rowcountCondition);
                             break;
-                        case RepositoryType.MySql:
-                        case RepositoryType.Postgres:
+                        case UtilSql.RepositoryType.MySql:
+                        case UtilSql.RepositoryType.Postgres:
                             // remove "top N" clause
                             formattedQuery = formattedQuery.Replace(selectTopN, "select ");
                             string limitString = " limit " + N;
                             // add limit clause
                             formattedQuery = formattedQuery + limitString;
                             break;
-                        case RepositoryType.Firebird:
+                        case UtilSql.RepositoryType.Firebird:
                             // in Firebird top becomes first
                             formattedQuery = formattedQuery.Replace(selectTopN, selectTopN.Replace("top", "first"));
                             break;
@@ -874,18 +798,18 @@ namespace EAAddinFramework.Utils
         //#DB=SqlSvr#             DB specif SQL for SQL Server
         string FormatSqldBspecific(string sql) {
             // available DBs
-            var dbs = new Dictionary<RepositoryType, string>()
+            var dbs = new Dictionary<UtilSql.RepositoryType, string>()
             {
-                { RepositoryType.Access2007, "#DB=ACCESS2007#" },
-                { RepositoryType.Asa, "#DB=Asa#" },
-                { RepositoryType.Firebird, "#DB=FIREBIRD#" },
-                { RepositoryType.AdoJet, "#DB=JET#" },
-                { RepositoryType.MySql, "#DB=MySql#" },
-                { RepositoryType.Oracle, "#DB=ORACLE#" },
-                { RepositoryType.Postgres, "#DB=POSTGRES#" },
-                { RepositoryType.SqlSvr, "#DB=SqlSvr#" },
+                { UtilSql.RepositoryType.Access2007, "#DB=ACCESS2007#" },
+                { UtilSql.RepositoryType.Asa, "#DB=Asa#" },
+                { UtilSql.RepositoryType.Firebird, "#DB=FIREBIRD#" },
+                { UtilSql.RepositoryType.AdoJet, "#DB=JET#" },
+                { UtilSql.RepositoryType.MySql, "#DB=MySql#" },
+                { UtilSql.RepositoryType.Oracle, "#DB=ORACLE#" },
+                { UtilSql.RepositoryType.Postgres, "#DB=POSTGRES#" },
+                { UtilSql.RepositoryType.SqlSvr, "#DB=SqlSvr#" },
             };
-            RepositoryType dbType = GetRepositoryType();
+            UtilSql.RepositoryType dbType = UtilSql.GetRepositoryType(Repository);
             string s = sql;
             foreach (var curDb in dbs )
             {
@@ -908,58 +832,7 @@ namespace EAAddinFramework.Utils
         }
 
 
-        /// <summary>
-        /// Replace the wild cards in the given sql query string to match either MSAccess or ANSI syntax. It works for:
-        /// <para />
-        /// % or * or #WC# Any character
-        /// <para />
-        /// _ or ? a single character
-        /// <para />
-        /// '^' or '!' a shortcut for XOR
-        /// </summary>
-        /// <param name="sqlQuery">the sql string to edit</param>
-        /// <returns>the same sql query, but with its wild cards replaced according to the required syntax</returns>
-       public string ReplaceSqlWildCards(string sqlQuery)
-        {
-            bool msAccess = repositoryType == RepositoryType.AdoJet;
-            int beginLike = sqlQuery.IndexOf("like", StringComparison.InvariantCultureIgnoreCase);
-            if (beginLike > 1)
-            {
-                int beginString = sqlQuery.IndexOf("'", beginLike + "like".Length, StringComparison.CurrentCulture);
-                if (beginString > 0)
-                {
-                    int endString = sqlQuery.IndexOf("'", beginString + 1, StringComparison.CurrentCulture);
-                    if (endString > beginString)
-                    {
-                        string originalLikeString = sqlQuery.Substring(beginString + 1, endString - beginString);
-                        string likeString = originalLikeString;
-                        if (msAccess)
-                        {
-                            likeString = likeString.Replace('%', '*');
-                            likeString = likeString.Replace('_', '?');
-                            likeString = likeString.Replace('^', '!');
-                            likeString = likeString.Replace("#WC#", "*");
-                        }
-                        else
-                        {
-                            likeString = likeString.Replace('*', '%');
-                            likeString = likeString.Replace('?', '_');
-                            likeString = likeString.Replace('#', '_');
-                            likeString = likeString.Replace('^', '!');
-                            likeString = likeString.Replace("#WC#", "%");
-                        }
-                        string next = string.Empty;
-                        if (endString < sqlQuery.Length)
-                        {
-                            next = ReplaceSqlWildCards(sqlQuery.Substring(endString + 1));
-                        }
-                        sqlQuery = sqlQuery.Substring(0, beginString + 1) + likeString + next;
-
-                    }
-                }
-            }
-            return sqlQuery.Trim();
-        }
+        
         /// <summary>
         /// returns true if security is enabled in this model
         /// </summary>

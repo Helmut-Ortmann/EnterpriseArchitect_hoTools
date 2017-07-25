@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
   <!-- Registry:
-  Note: Each time you change the AssemblyVersion of a registered *.dll (AddinClass.dll,ActiveX.dll, FindAndReplace.dll)
+  Note: Each time you change the AssemblyVersion of a registered *.dll 
     you have to update the registry information in this file!!!!
+    either by run Collect.bat and inserting everything between <Component> and </Component> or 
+    by simply replacing the AssemblyVersion with the correct value (multiple times)
          
   
   1. Generate mit Wix Tool heat the registry entry for Addin.dll (in bin\release folder of Addin

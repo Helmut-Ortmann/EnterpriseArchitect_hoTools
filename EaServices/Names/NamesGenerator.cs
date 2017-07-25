@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using EA;
 using EAAddinFramework.Utils;
 using hoTools.Utils.Json;
+using hoTools.Utils.SQL;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -152,29 +153,19 @@ namespace hoTools.EaServices.Names
         public List<NamesGeneratorItem> NameGeneratorItems { get; set; }
         public Repository Rep { get => _rep; set => _rep = value; }
 
-        public Model EaModel
-        {
-            get { return _model; }
-            set { _model = value; }
-        }
-
+        
         private EA.Repository _rep;
-        private Model _model;
         private string _jasonFilePath;
 
 
         /// <summary>
         /// Constructor
         /// </summary>
-        /// <param name="model"></param>
+        /// <param name="rep"></param>
         /// <param name="jasonFilePath"></param>
-        public NamesGenerator(Model model, string jasonFilePath)
+        public NamesGenerator(EA.Repository rep, string jasonFilePath)
         {
-            if (model != null)
-            {
-                EaModel = model;
-                Rep = model.Repository;
-            }
+            _rep = rep;
             _jasonFilePath = jasonFilePath;
 
             // use 'Deserializing Partial JSON Fragments'
@@ -210,8 +201,8 @@ namespace hoTools.EaServices.Names
         {
             int highNumber = -1;
 
-            string sql = EaModel.ReplaceSqlWildCards(item.GetSqlTopMost());
-            EA.Collection maxElements = Rep.GetElementSet(EaModel.ReplaceSqlWildCards(sql), 2);
+            string sql = UtilSql.ReplaceSqlWildCards(Rep, item.GetSqlTopMost());
+            EA.Collection maxElements = Rep.GetElementSet(UtilSql.ReplaceSqlWildCards(Rep, sql), 2);
             // no old element found
             if (maxElements.Count == 0)
             {
@@ -249,7 +240,7 @@ from t_object t1
 where t1.object_Type = '{item.ObjectType}' AND 
       t1.stereotype  = {stereoType} 
 order by t1.CreatedDate";
-            EA.Collection elements = Rep.GetElementSet(EaModel.ReplaceSqlWildCards(sql), 2);
+            EA.Collection elements = Rep.GetElementSet(UtilSql.ReplaceSqlWildCards(Rep, sql), 2);
             foreach (EA.Element el in elements)
             {
                 bool update = false; 
@@ -297,7 +288,7 @@ from t_object t1
 where t1.object_Type = '{item.ObjectType}' AND 
       t1.stereotype  = {stereoType} 
 order by t1.CreatedDate";
-            EA.Collection elements = Rep.GetElementSet(EaModel.ReplaceSqlWildCards(sql), 2);
+            EA.Collection elements = Rep.GetElementSet(UtilSql.ReplaceSqlWildCards(Rep, sql), 2);
             foreach (EA.Element el in elements)
             {
                 if (item.IsNameUpdate())
