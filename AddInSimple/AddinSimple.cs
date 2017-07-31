@@ -4,8 +4,8 @@ using System.Data;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
-using System.Xml.Linq;
 using AddInSimple.EABasic;
+using AddInSimple.Utils;
 
 
 //------------------------------------------------------------------------------------
@@ -67,6 +67,8 @@ namespace AddInSimple
         const string MenuOpenProperties = "&Open Properties";
         const string MenuRunDemoSearch = "&DemoSearch";
         const string MenuRunDemoPackageContent = "&DemoSearchPackageContent";
+        const string MenuRunDemoSqlToDataTable = "DemoSqlToDataTable";
+        const string MenuShowConnectionString = "DemoConnectionString";
 
         // remember if we have to say hello or goodbye
         private bool _shouldWeSayHello = true;
@@ -77,7 +79,7 @@ namespace AddInSimple
         public AddInSimpleClass()
         {
             this.menuHeader = MenuName;
-            this.menuOptions = new[] { MenuHello, MenuGoodbye, MenuOpenProperties, MenuRunDemoSearch, MenuRunDemoPackageContent };
+            this.menuOptions = new[] { MenuHello, MenuGoodbye, MenuOpenProperties, MenuRunDemoSearch, MenuRunDemoPackageContent, MenuRunDemoSqlToDataTable, MenuShowConnectionString };
         }
         /// <summary>
         /// EA_Connect events enable Add-Ins to identify their type and to respond to Enterprise Architect start up.
@@ -131,6 +133,17 @@ namespace AddInSimple
                         isEnabled = true;
                         break;
 
+                    // Test Run SQL and transform to DataTable
+                    case MenuRunDemoSqlToDataTable:
+                        isEnabled = true;
+                        break;
+
+                    // Test Run SQL and transform to DataTable
+                    case MenuShowConnectionString:
+                        isEnabled = true;
+                        break;
+
+                        
                     // there shouldn't be any other, but just in case disable it.
                     default:
                         isEnabled = false;
@@ -183,6 +196,7 @@ namespace AddInSimple
                     break;
 
                 case MenuRunDemoPackageContent:
+                    string connection = repository.ConnectionString;
                     // 1. Collect data into a data table
                     dt = SetTableFromContext(repository);
                     // 2. Order, Filter, Join, Format to XML
@@ -190,6 +204,35 @@ namespace AddInSimple
                     // 3. Out put to EA
                     repository.RunModelSearch("", "", "", xml);
                     break;
+                
+                    // Example to run SQL, convert to DataTable and output in EA Search Window
+                case MenuRunDemoSqlToDataTable:
+                    // 1. Run SQL
+                    string sql = "select ea_guid AS CLASSGUID, object_type AS CLASSTYPE, name, stereotype, object_type from t_object order by name";
+                    xml = repository.SQLQuery(sql);
+                    // 2. Convert to DataTable
+                    dt = Util.MakeDataTableFromSqlXml(xml);
+                    // 2. Order, Filter, Join, Format to XML
+                    xml = QueryAndMakeXmlFromContext(dt);
+                    // 3. Out put to EA
+                    repository.RunModelSearch("", "", "", xml);
+                    break;
+
+                
+                case MenuShowConnectionString:
+                    string connectionString = repository.ConnectionString;
+                    if (connectionString != null)
+                    {
+                        Clipboard.SetText(connectionString);
+                        MessageBox.Show($"ConnectionString='{connectionString}'", "Connection string copied to clipboard");
+                    }
+                    break;
+
+
+
+
+
+
             }
         }
 
@@ -371,7 +414,7 @@ namespace AddInSimple
 
                     break;
 
-                // Testresult for a test
+                // Test result for a test
                 case "TEST":
                     par = args[0].Split('=');
                     if (par.Length != 2) return "";
@@ -565,7 +608,7 @@ namespace AddInSimple
                     orderby row.Field<string>("Name") descending
                     select row;
 
-                return MakeXml(dt, rows);
+                return Util.MakeXml(dt, rows);
             }
             catch (Exception e)
             {
@@ -588,7 +631,7 @@ namespace AddInSimple
                     orderby row.Field<string>("Name") descending
                     select row;
 
-                return MakeXml(dt, rows);
+                return Util.MakeXml(dt, rows);
             }
             catch (Exception e)
             {
@@ -598,52 +641,9 @@ namespace AddInSimple
             }
         }
 
-        /// <summary>
-        /// Make EA xml from a DataTable (for column names) and the ordered Enumeration provided by LINQ. Set the Captions in DataTable to ensure column names. 
-        /// 
-        /// </summary>
-        /// <param name="dt"></param>
-        /// <param name="rows"></param>
-        /// <returns></returns>
-        private static string MakeXml(DataTable dt, OrderedEnumerableRowCollection<DataRow> rows)
-        {
-            XElement xFields = new XElement("Fields");
-            foreach (DataColumn col in dt.Columns)
-            {
-                XElement xField = new XElement("Field");
-                xField.Add(new XAttribute("name", col.Caption));
-                xFields.Add(xField);
-            }
-            try
-            {
-                XElement xRows = new XElement("Rows");
-
-                foreach (var row in rows)
-                {
-                    XElement xRow = new XElement("Row");
-                    int i = 0;
-                    foreach (DataColumn col in dt.Columns)
-                    {
-                        XElement xField = new XElement("Field");
-                        xField.Add(new XAttribute("value", row[i].ToString()));
-                        xField.Add(new XAttribute("name", col.Caption));
-                        xRow.Add(xField);
-                        i = i + 1;
-                    }
-                    xRows.Add(xRow);
-                }
-                XElement xDoc = new XElement("ReportViewData");
-                xDoc.Add(xFields);
-                xDoc.Add(xRows);
-                return xDoc.ToString();
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show($"{e}", "Error enumerating through LINQ query");
-                return "";
-            }
-        }
+       
     }
+   
 
     /// <summary>
     /// Some stuff I don't really understand

@@ -185,6 +185,26 @@ namespace hoTools.EaServices
         #endregion
 
         /// <summary>
+        /// Copy 'Connection string' to clipboard
+        /// </summary>
+        /// <param name="rep"></param>
+        [ServiceOperation("{9FC521F2-3E1A-4000-8350-D8C9F04F69D7}",
+            "Copy connection string to Clipboard", // Description
+            "Copy Connectionstring to Clipboard", //Tooltip
+            isTextRequired: false)]
+        // ReSharper disable once UnusedMember.Global
+        // dynamical usage as configurable service by reflection
+        public static void CopyConnectionString(Repository rep)
+        {
+            string connectionString = rep.ConnectionString;
+            if (connectionString != null)
+            {
+                Clipboard.SetText(connectionString);
+                MessageBox.Show($"ConnectionString='{connectionString}'", "Connection string copied to clipboard");
+            }
+        }
+
+        /// <summary>
         /// UpdateHyperlinks in descriptions
         /// </summary>
         /// <param name="rep"></param>
@@ -2858,9 +2878,8 @@ from %APPDATA%Local\Apps\hoTools\
         /// <param name="rep"></param>
         /// <param name="elementType"></param>
         /// <param name="connectorType"></param>
-        /// <param name="attachNote"></param>
         public static void AddElementsToDiagram(Repository rep,
-            string elementType = "Note", string connectorType = "NoteLink", Boolean attachNote = false)
+            string elementType = "Note", string connectorType = "NoteLink")
         {
             // handle multiple selected elements
             Diagram diaCurrent = rep.GetCurrentDiagram();
@@ -2874,8 +2893,7 @@ from %APPDATA%Local\Apps\hoTools\
                     AddDiagramNote(rep);
                     break;
                 case ObjectType.otConnector:
-                    AddElementWithLinkToConnector(rep, diaCurrent.SelectedConnector, elementType, connectorType,
-                       attachNote);
+                    AddElementWithLinkToConnector(rep, diaCurrent.SelectedConnector, elementType, connectorType);
                     break;
                 case ObjectType.otElement:
                     // check for selected DiagramObjects
@@ -2884,16 +2902,14 @@ from %APPDATA%Local\Apps\hoTools\
                     {
                         foreach (EA.DiagramObject obj in objCol)
                         {
-                            AddElementWithLink(rep, obj, elementType, connectorType, attachNote);
+                            AddElementWithLink(rep, obj, elementType, connectorType);
                         }
                     }
                     break;
                 case ObjectType.otMethod:
-                    if (attachNote == false) return;
                     AddFeatureWithNoteLink(rep, (EA.Method)rep.GetContextObject());
                     break;
                 case ObjectType.otAttribute:
-                    if (attachNote == false) return;
                     AddFeatureWithNoteLink(rep, (EA.Attribute)rep.GetContextObject());
                     break;
             }
@@ -3077,10 +3093,9 @@ from %APPDATA%Local\Apps\hoTools\
         /// <param name="con"></param>
         /// <param name="elementType">Default Note</param>
         /// <param name="connectorType">Default: null</param>
-        /// <param name="isAttachedLink"></param>
         // ReSharper disable once MemberCanBePrivate.Global
         public static void AddElementWithLinkToConnector(Repository rep, Connector con,
-            string elementType = @"Note", string connectorType = "NoteLink", bool isAttachedLink = false)
+            string elementType = @"Note", string connectorType = "NoteLink")
         {
             Diagram dia = rep.GetCurrentDiagram();
             Package pkg = rep.GetPackageByID(dia.PackageID);
@@ -3119,7 +3134,7 @@ from %APPDATA%Local\Apps\hoTools\
             diaObject.Update();
             pkg.Elements.Refresh();
 
-            Util.SetElementHasAttachedConnectorLink(rep, con, elNewElement, isAttachedLink);
+            Util.SetElementHasAttachedConnectorLink(rep, con, elNewElement);
             elNewElement.Refresh();
             diaObject.Update();
             dia.Update();

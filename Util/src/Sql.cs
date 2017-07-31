@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using System.Xml.Linq;
@@ -226,48 +227,17 @@ namespace hoTools.Utils.SQL
                 )).ToString();
             #endregion
         }
+        /// <summary>
+        /// Make DataTable from EA sql results
+        /// </summary>
+        /// <param name="sqlXml"></param>
+        /// <returns></returns>
         public static DataTable MakeDataTableFromSqlXml(string sqlXml)
         {
 
-            DataTable dt = new DataTable();
-
-            XDocument x = XDocument.Parse(sqlXml);
-            //---------------------------------------------------------------------
-            // From Query:
-            //<EADATA><Dataset_0>
-            // <Data>
-            //  <Row>
-            //    <Name1>value1</name1>
-            //    <Name2>value2</name2>
-            //  </Row>
-            //  <Row>
-            //    <Name1>value1</name1>
-            //    <Name2>value2</name2>
-            //  </Row>
-            // </Data>
-            //</Dataset_0><EADATA>
-            //
-            var fields = from field in x.Descendants("Row").FirstOrDefault().Descendants()
-                select field;
-            int i = 0;
-            foreach (var field in fields)
-            {
-                dt.Columns[i].Caption = field.Value;
-                i = i + 1;
-            }
-
-            var rows = from row in x.Descendants("Row")
-                select row;
-            i = 0;
-            foreach (var row in rows)
-            {
-                
-                ffff
-            }
-
-
-
-            return dt;
+            DataSet dataSet = new DataSet();
+            dataSet.ReadXml(new StringReader(XElement.Parse(sqlXml).Descendants("Data").FirstOrDefault().ToString()));
+            return dataSet.Tables[0];
         }
 
     #region getAndSortEmbeddedElements
@@ -376,6 +346,7 @@ namespace hoTools.Utils.SQL
             }
             else {
                 // all used authors
+                query = @"select distinct Author As [User] from t_object order by 1";
                 query = @"select distinct Author As [User] from t_object order by 1";
             }
             string str = _rep.SQLQuery(query);

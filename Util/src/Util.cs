@@ -847,10 +847,10 @@ namespace hoTools.Utils
             return true;
         }
         
-        public static bool SetElementHasAttachedConnectorLink(Repository rep, Connector con, EA.Element elNote, bool isAttachedLink=false)
+        public static bool SetElementHasAttachedConnectorLink(Repository rep, Connector con, EA.Element elNote)
         {
             string attachedLink = "";
-            if (isAttachedLink) attachedLink = "Link Notes";
+            attachedLink = "Link Notes";
             return SetElementLink(rep, elNote.ElementID, attachedLink, 0,"",  $@"idref1={con.ConnectorID}",1);
         }
         /// <summary>
