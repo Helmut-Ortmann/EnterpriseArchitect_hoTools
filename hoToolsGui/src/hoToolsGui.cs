@@ -377,7 +377,7 @@ namespace hoTools.hoToolsGui
         /// <param name="e"></param>
         void btnAddNoteAndLinkDescription_Click(object sender, EventArgs e)
         {
-            EaService.AddElementsToDiagram(Repository,"Note","NoteLink");
+            EaService.AddElementsToDiagram(Repository,"Note", connectorLinkType:"Element Note");
         }
         /// <summary>
         /// Add Note to the selected elements:<para/>
@@ -388,7 +388,7 @@ namespace hoTools.hoToolsGui
         /// <param name="e"></param>
         void btnAddNote_Click(object sender, EventArgs e)
         {
-            EaService.AddElementsToDiagram(Repository, "Note" );
+            EaService.AddElementsToDiagram(Repository, "Note", connectorLinkType:"" );
         }
         /// <summary>
         /// Add Constraint to the selected elements:<para/>
@@ -399,7 +399,7 @@ namespace hoTools.hoToolsGui
         /// <param name="e"></param>
         void btnAddConstraint_Click(object sender, EventArgs e)
         {
-            EaService.AddElementsToDiagram(Repository, "Constraint");
+            EaService.AddElementsToDiagram(Repository, "Constraint", connectorLinkType:"");
         }
 
 
@@ -3620,14 +3620,23 @@ namespace hoTools.hoToolsGui
         }
 
         /// <summary>
-        /// Export current SQL to Excel and show it
+        /// Export current SQL to Excel and show it. 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void exportExcelToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            _model.SearchRun(GetSearchName(), GetSearchTerm(), exportToExcel:true);
+            string searchName = GetSearchName();
+            if (!Path.HasExtension(searchName)) searchName = searchName.Trim() + ".sql";
+            if (_globalCfg.ReadSqlFile(searchName, withErrMessage: false) == "")
+            {
+                MessageBox.Show($"SearchName/File: '{searchName}'\r\nSQL-Search-Path:\r\n{_globalCfg.GetSqlPaths()}\r\n\r\nUsual extension is '.sql'","No sql file available in SQL-Search-Path or absolute path");
+                return;
+            }
+            Cursor.Current = Cursors.WaitCursor;
+            _model.SearchRun(searchName, GetSearchTerm(), exportToExcel:true);
             _rtfListOfSearches.Visible = false;
+            Cursor.Current = Cursors.Default;
         }
 
         private void exportCsvOfClipboardToExcelToolStripMenuItem_Click(object sender, EventArgs e)

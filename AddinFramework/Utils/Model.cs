@@ -193,8 +193,10 @@ namespace EAAddinFramework.Utils
         }
 
         /// <summary>
-        /// Runs the search (EA search or hoTools SQL file if it's a *.sql file). It handles the exceptions.
+        /// Runs the search (hoTools SQL file or EA search or) if it's a *.sql file). It handles the exceptions.
         /// It converts wild cards of the &lt;Search Term>. 
+        /// - First search for SQL-File
+        /// - If no SQL file found run EA Search
         /// </summary>
         /// <param name="searchName">EA Search name or SQL file name (uses path to find absolute path)</param>
         /// <param name="searchTerm"></param>
@@ -204,9 +206,10 @@ namespace EAAddinFramework.Utils
             searchName = searchName.Trim();
             if (searchName == "") return "";
 
+            
             // SQL file?
-            Regex pattern = new Regex(@"\.sql", RegexOptions.IgnoreCase);
-            if (pattern.IsMatch(searchName))
+            if (_globalCfg.ReadSqlFile(searchName, withErrMessage: false) != "")
+               
             {
                 string sqlString = _globalCfg.ReadSqlFile(searchName);
 

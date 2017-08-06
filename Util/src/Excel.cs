@@ -14,7 +14,7 @@ namespace hoTools.Utils.Excel
     {
         /// <summary>
         /// Make Excel file from *.csv stored in Clipboard.
-        /// It uses the List Sepaerator of the current culture. Usually it's ';' but might differ.
+        /// It uses the List Separator of the current culture. Usually it's ';' but might differ.
         /// The ValueDelimiter of the CSV converter is with it's default value. EA don't support Value Delimiter.
         /// </summary>
         /// <param name="fileName"></param>
@@ -26,7 +26,8 @@ namespace hoTools.Utils.Excel
             {
                 var csv = Clipboard.GetText(TextDataFormat.Text);
                 var dt = new DataTable();
-                char seperator =
+                // get the separator according to current culture
+                char separator =
                             Convert.ToChar(CultureInfo.CurrentCulture.TextInfo.ListSeparator);
                 try
                 {
@@ -35,7 +36,7 @@ namespace hoTools.Utils.Excel
                     using (var reader = CsvReader.FromCsvString(csv))
                     {
                         
-                        reader.ValueSeparator = seperator; // this will be used between each value
+                        reader.ValueSeparator = separator; // this will be used between each value
                         //reader.ValueDelimiter = ';';   // this will be used to wrap values that require it (because they contain the separator or a linefeed character)
                         reader.ReadHeaderRecord();
 
@@ -45,7 +46,7 @@ namespace hoTools.Utils.Excel
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show($"Seperator:'{seperator}'\r\n {e.Message}","Cant't convert Clipboard content to Excel");
+                    MessageBox.Show($"Seperator:'{separator}'\r\n {e.Message}","Cant't convert Clipboard content to Excel");
                     return false;
                 }
             }

@@ -2873,44 +2873,54 @@ from %APPDATA%Local\Apps\hoTools\
 
         /// <summary>
         /// Add Elements (Note, Constraint,..) to diagram and link to selected Nodes in Diagram.
-        /// If nothing selected add the wanted Element to the diagram
+        /// If nothing selected add the wanted Element to the diagram.
+        /// 
+        /// ConnectorLinkType contains the feature to link the note to 
+        /// - "" no visualization
+        /// - "Element Note", "Diagram Note", "Link Notes", "Attribute", "Operation" 
         /// </summary>
         /// <param name="rep"></param>
         /// <param name="elementType"></param>
-        /// <param name="connectorType"></param>
+        /// <param name="connectorLinkType"></param>
         public static void AddElementsToDiagram(Repository rep,
-            string elementType = "Note", string connectorType = "NoteLink")
+            string elementType = "Note", string connectorLinkType = "Element Note")
         {
             // handle multiple selected elements
             Diagram diaCurrent = rep.GetCurrentDiagram();
             if (diaCurrent == null) return;
             var eaDia = new EaDiagram(rep);
             rep.SaveDiagram(diaCurrent.DiagramID);
-
+            EA.Collection diaCurrentSelectedObjects;
             switch (rep.GetContextItemType())
             {
                 case ObjectType.otDiagram:
                     AddDiagramNote(rep);
                     break;
                 case ObjectType.otConnector:
-                    AddElementWithLinkToConnector(rep, diaCurrent.SelectedConnector, elementType, connectorType);
+                    if (!String.IsNullOrWhiteSpace(connectorLinkType)) connectorLinkType = "Link Notes";
+                    AddElementWithLinkToConnector(rep, diaCurrent.SelectedConnector, elementType, connectorLinkType);
                     break;
+
+                case ObjectType.otPackage:
                 case ObjectType.otElement:
                     // check for selected DiagramObjects
-                    var objCol = diaCurrent.SelectedObjects;
-                    if (objCol?.Count > 0)
+                    diaCurrentSelectedObjects = diaCurrent.SelectedObjects;
+                    if (diaCurrentSelectedObjects?.Count > 0)
                     {
-                        foreach (EA.DiagramObject obj in objCol)
+                        foreach (EA.DiagramObject diaObj in diaCurrentSelectedObjects)
                         {
-                            AddElementWithLink(rep, obj, elementType, connectorType);
+                            AddElementWithLink(rep, diaObj, elementType, connectorLinkType);
                         }
                     }
                     break;
+
+                
+                    
                 case ObjectType.otMethod:
-                    AddFeatureWithNoteLink(rep, (EA.Method)rep.GetContextObject());
+                    AddFeatureWithNoteLink(rep, (EA.Method)rep.GetContextObject(), connectorLinkType);
                     break;
                 case ObjectType.otAttribute:
-                    AddFeatureWithNoteLink(rep, (EA.Attribute)rep.GetContextObject());
+                    AddFeatureWithNoteLink(rep, (EA.Attribute)rep.GetContextObject(), connectorLinkType);
                     break;
             }
             eaDia.ReloadSelectedObjectsAndConnector();
@@ -2921,7 +2931,7 @@ from %APPDATA%Local\Apps\hoTools\
         /// </summary>
         /// <param name="rep"></param>
         /// <param name="attr"></param>
-        private static void AddFeatureWithNoteLink(EA.Repository rep, EA.Attribute attr)
+        private static void AddFeatureWithNoteLink(EA.Repository rep, EA.Attribute attr, string connectorLinkType= "")
         {
 
             string featureType = "Attribute";
@@ -2929,7 +2939,7 @@ from %APPDATA%Local\Apps\hoTools\
             string featureName = attr.Name;
             EA.Element elNote = rep.GetElementByID(attr.ParentID);
 
-            SetFeatureLink(rep, elNote, featureType, featureId, featureName);
+            SetFeatureLink(rep, elNote, featureType, featureId, featureName, connectorLinkType);
         }
         /// <summary>
         /// Add Operation Link to Note (Feature Link)
@@ -2937,7 +2947,7 @@ from %APPDATA%Local\Apps\hoTools\
         /// </summary>
         /// <param name="rep"></param>
         /// <param name="op"></param>
-        private static void AddFeatureWithNoteLink(EA.Repository rep, EA.Method op)
+        private static void AddFeatureWithNoteLink(EA.Repository rep, EA.Method op, string connectorLinkType = "")
         {
 
             string featureType = "Operation";
@@ -2945,8 +2955,9 @@ from %APPDATA%Local\Apps\hoTools\
             string featureName = op.Name;
             EA.Element elNote = rep.GetElementByID(op.ParentID);
 
-            SetFeatureLink(rep, elNote, featureType, featureId, featureName);
+            SetFeatureLink(rep, elNote, featureType, featureId, featureName, connectorLinkType);
         }
+
         /// <summary>
         /// Set Link Feature to Note. The link is stored inside the note object.
         /// - Attribute
@@ -2957,8 +2968,9 @@ from %APPDATA%Local\Apps\hoTools\
         /// <param name="featureType"></param>
         /// <param name="featureId"></param>
         /// <param name="featureName"></param>
+        /// <param name="connectorLinkType"></param>
         private static void SetFeatureLink(Repository rep, EA.Element elNote, string featureType,
-            int featureId, string featureName)
+            int featureId, string featureName, string connectorLinkType="")
         {
             string connectorType = "NoteLink";
 
@@ -3000,13 +3012,15 @@ from %APPDATA%Local\Apps\hoTools\
                 if (!String.IsNullOrWhiteSpace(connectorType))
                 {
                     // make a connector
-                    EA.Connector con = (EA.Connector)elNote.Connectors.AddNew("test", connectorType);
+                    EA.Connector con = (EA.Connector)elNote.Connectors.AddNew("", "NoteLink");
                     con.SupplierID = elNewNote.ElementID;
                     con.Update();
                     elNote.Connectors.Refresh();
 
-                    // set attached link to feature (Attribute/Operation)
-                    Util.SetElementLink(rep, elNewNote.ElementID, featureType, featureId, featureName, "Yes", 0);
+                    // Lint to a feature
+                    if (! String.IsNullOrWhiteSpace(connectorLinkType))
+                        // set attached link to feature (Attribute/Operation)
+                        Util.SetElementLink(rep, elNewNote.ElementID, featureType, featureId, featureName, "Yes", 0);
                 }
             }
         }
@@ -3014,18 +3028,18 @@ from %APPDATA%Local\Apps\hoTools\
 
         /// <summary>
         /// Add Element and optionally link to  Object from:<para/>
-        /// Element, Attribute, Operation, Package
+        /// Element, Package
         /// 
         /// </summary>
         /// <param name="rep"></param>
         /// <param name="diaObj"></param>
         /// <param name="elementType">Default Note</param>
         /// <param name="connectorType">Default: null</param>
-        /// <param name="isAttchedLink"></param>
         // ReSharper disable once MemberCanBePrivate.Global
         public static void AddElementWithLink(Repository rep, DiagramObject diaObj,
-            string elementType = @"Note", string connectorType = "NoteLink", bool isAttchedLink = false)
+            string elementType = @"Note", string connectorType = "Element Link")
         {
+            
             Element el = rep.GetElementByID(diaObj.ElementID);
             if (el != null)
             {
@@ -3061,21 +3075,17 @@ from %APPDATA%Local\Apps\hoTools\
                 diaObject.Update();
                 pkg.Elements.Refresh();
 
-                // connect Element to node
-                if (!String.IsNullOrWhiteSpace(connectorType))
-                {
-                    // make a connector
-                    var con = (Connector) el.Connectors.AddNew("test", connectorType);
-                    con.SupplierID = elNewElement.ElementID;
-                    con.Update();
-                    el.Connectors.Refresh();
+                // make a connector
+                var con = (Connector) el.Connectors.AddNew("", "NoteLink");
+                con.SupplierID = elNewElement.ElementID;
+                con.Update();
+                el.Connectors.Refresh();
 
-                    // set attached link
-                    if (isAttchedLink)
-                    {
+                // Attach Element to an Feature (Note, Attribute, Operation, ..)
+                if (! String.IsNullOrWhiteSpace(connectorType))
                         Util.SetElementHasAttachedElementLink(rep, el, elNewElement);
-                    }
-                }
+
+
             }
 
         }
@@ -3092,10 +3102,10 @@ from %APPDATA%Local\Apps\hoTools\
         /// <param name="rep"></param>
         /// <param name="con"></param>
         /// <param name="elementType">Default Note</param>
-        /// <param name="connectorType">Default: null</param>
+        /// <param name="connectorLinkType">Default: null</param>
         // ReSharper disable once MemberCanBePrivate.Global
         public static void AddElementWithLinkToConnector(Repository rep, Connector con,
-            string elementType = @"Note", string connectorType = "NoteLink")
+            string elementType = @"Note", string connectorLinkType = "Link Notes")
         {
             Diagram dia = rep.GetCurrentDiagram();
             Package pkg = rep.GetPackageByID(dia.PackageID);
@@ -3134,7 +3144,8 @@ from %APPDATA%Local\Apps\hoTools\
             diaObject.Update();
             pkg.Elements.Refresh();
 
-            Util.SetElementHasAttachedConnectorLink(rep, con, elNewElement);
+            //if (! String.IsNullOrWhiteSpace(connectorLinkType))
+            Util.SetElementHasAttachedConnectorLink(rep, con, elNewElement, connectorLinkType:connectorLinkType);
             elNewElement.Refresh();
             diaObject.Update();
             dia.Update();
