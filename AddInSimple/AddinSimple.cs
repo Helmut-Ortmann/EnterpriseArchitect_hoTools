@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Odbc;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
@@ -220,11 +221,40 @@ namespace AddInSimple
 
                 
                 case MenuShowConnectionString:
-                    string connectionString = repository.ConnectionString;
-                    if (connectionString != null)
+                    string eaConnectionString = repository.ConnectionString;
+                    string connectionString = "";
+                    if (eaConnectionString != null)
                     {
-                        Clipboard.SetText(connectionString);
-                        MessageBox.Show($"ConnectionString='{connectionString}'", "Connection string copied to clipboard");
+                        Clipboard.SetText(eaConnectionString);
+                        MessageBox.Show($"ConnectionString='{eaConnectionString}'", "Connection string copied to clipboard");
+
+                        connectionString = GetConnectionString(repository);
+                        if (connectionString == "") return;
+                        ADODB.Connection conn = new ADODB.Connection();
+                        try
+                            {
+                                
+                                conn.Open(connectionString, "", "", -1);  // connection Open synchronously
+                                MessageBox.Show($@"EA ConnectionString:    '{eaConnectionString}'
+ConnectionString:
+- '{connectionString}'
+Mode:             
+- '{conn.Mode}' 
+State:
+- '{conn.State}'", "ODBC Connection established ");
+                            }
+                                catch (Exception e)
+                            {
+                                MessageBox.Show($@"EA ConnectionString:    '{eaConnectionString}'
+ConnectionString:
+- '{connectionString}'
+Mode:             
+- '{conn.Mode}' 
+State:
+- '{conn.State}'
+
+{ e}", "ODBC Connection error ");
+                            }
                     }
                     break;
 
@@ -640,8 +670,30 @@ namespace AddInSimple
 
             }
         }
+        /// <summary>
+        /// Get connection string of database
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <returns></returns>
+        /// string dsnName = "DSN=MySqlEa;Trusted_Connection=Yes;";
+        //  dsnName = "DSN=MySqlEa;";
+        private static string GetConnectionString(EA.Repository rep)
+        {
+            string eaConnectionString = rep.ConnectionString;
+            // EAP file 
+            // Provider=Microsoft.Jet.OLEDB.4.0;Data Source=d:\hoData\Work.eap;"
+ 
+            if (eaConnectionString.ToLower().EndsWith(".eap"))
+            {
+                return $"Provider=Microsoft.Jet.OLEDB.4.0;Data Source={eaConnectionString};";
+            }
+            // DRIVER=Firebird/InterBase(r) driver;d:\temp\codeGeneration.feap; User =SYSDBA;Password=masterkey
+            // DRIVER=Firebird/InterBase(r) driver;DBNAME=Database=d:\temp\codeGeneration.feap; User =SYSDBA;Password=masterkey;
+            //if (eaConnectionString.ToLower().EndsWith(".feap"))
+            //if (rep.RepositoryType() == "JET")
+            return "";
+        }
 
-       
     }
    
 

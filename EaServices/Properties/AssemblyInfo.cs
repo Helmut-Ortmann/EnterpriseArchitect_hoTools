@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("EaServices")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("ho")]
+[assembly: AssemblyCompany("hoModeler.de")]
 [assembly: AssemblyProduct("EaServices")]
 [assembly: AssemblyCopyright("Copyright © Helmut Ortmann 2017")]
 [assembly: AssemblyTrademark("")]
