@@ -3,12 +3,16 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Odbc;
 using System.Diagnostics;
+using System.Linq;
 using System.Runtime.InteropServices;
+using System.Runtime.Remoting.Messaging;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using AddInSimple.EABasic;
 using AddInSimple.Utils;
 
-using DataModels;
+using DataModelAccess;
+using EA;
 using LinqToDB.Configuration;
 using LinqToDB.Data;
 using LinqToDB.DataProvider.Access;
@@ -75,6 +79,7 @@ namespace AddInSimple
         const string MenuRunDemoPackageContent = "&DemoSearchPackageContent";
         const string MenuRunDemoSqlToDataTable = "DemoSqlToDataTable";
         const string MenuShowConnectionString = "DemoConnectionString";
+        const string MenuShowRunLinq2Db = "DemoRunLinq2dbQuery";
 
         // remember if we have to say hello or goodbye
         private bool _shouldWeSayHello = true;
@@ -85,7 +90,7 @@ namespace AddInSimple
         public AddInSimpleClass()
         {
             this.menuHeader = MenuName;
-            this.menuOptions = new[] { MenuHello, MenuGoodbye, MenuOpenProperties, MenuRunDemoSearch, MenuRunDemoPackageContent, MenuRunDemoSqlToDataTable, MenuShowConnectionString };
+            this.menuOptions = new[] { MenuHello, MenuGoodbye, MenuOpenProperties, MenuRunDemoSearch, MenuRunDemoPackageContent, MenuRunDemoSqlToDataTable, MenuShowConnectionString, MenuShowRunLinq2Db };
         }
         /// <summary>
         /// EA_Connect events enable Add-Ins to identify their type and to respond to Enterprise Architect start up.
@@ -149,7 +154,12 @@ namespace AddInSimple
                         isEnabled = true;
                         break;
 
-                        
+                    // Test Run Linq2db Query
+                    case MenuShowRunLinq2Db:
+                        isEnabled = true;
+                        break;
+
+
                     // there shouldn't be any other, but just in case disable it.
                     default:
                         isEnabled = false;
@@ -233,7 +243,8 @@ namespace AddInSimple
                         Clipboard.SetText(eaConnectionString);
                         MessageBox.Show($"ConnectionString='{eaConnectionString}'", "Connection string copied to clipboard");
 
-                        connectionString = GetConnectionString(repository);
+                        string provider = "";
+                        connectionString = GetConnectionString(repository, out provider);
                         if (connectionString == "") return;
                         ADODB.Connection conn = new ADODB.Connection();
                         try
@@ -264,9 +275,15 @@ State:
                     break;
 
 
+                case MenuShowRunLinq2Db:
+                    string provider1 = "";
+                    connectionString = GetConnectionString(repository, out provider1);
+                    //string provider = "Access";
+                    runLinq2Db(provider1, connectionString);
+                    break;
+                    
 
-
-
+                    
 
             }
         }
@@ -675,6 +692,7 @@ State:
 
             }
         }
+
         /// <summary>
         /// Get connection string of database
         /// </summary>
@@ -682,21 +700,68 @@ State:
         /// <returns></returns>
         /// string dsnName = "DSN=MySqlEa;Trusted_Connection=Yes;";
         //  dsnName = "DSN=MySqlEa;";
-        private static string GetConnectionString(EA.Repository rep)
+        private static string GetConnectionString(EA.Repository rep, out string provider)
         {
+            provider = "";
             string eaConnectionString = rep.ConnectionString;
             // EAP file 
             // Provider=Microsoft.Jet.OLEDB.4.0;Data Source=d:\hoData\Work.eap;"
- 
-            if (eaConnectionString.ToLower().EndsWith(".eap"))
-            {
-                return $"Provider=Microsoft.Jet.OLEDB.4.0;Data Source={eaConnectionString};";
-            }
-            // DRIVER=Firebird/InterBase(r) driver;d:\temp\codeGeneration.feap; User =SYSDBA;Password=masterkey
-            // DRIVER=Firebird/InterBase(r) driver;DBNAME=Database=d:\temp\codeGeneration.feap; User =SYSDBA;Password=masterkey;
-            //if (eaConnectionString.ToLower().EndsWith(".feap"))
-            //if (rep.RepositoryType() == "JET")
+            switch (rep.RepositoryType())
+                {
+
+                    case "JET":
+                        string dsn = getDsnName(eaConnectionString);
+                        if (eaConnectionString.ToLower().EndsWith(".eap"))
+                        {
+                            provider = "Access";   
+                            return $"Provider=Microsoft.Jet.OLEDB.4.0;Data Source={eaConnectionString};";
+                        }
+                        break;
+                    case "SQLSRV":
+                    case "MYSQL":
+                        break;
+
+                }
             return "";
+        }
+
+        private static string getDsnName(string connectionString)
+        {
+            Regex rgx = new Regex("DSN=[^;]*;");
+            Match match = rgx.Match(connectionString);
+            if (match.Success)
+            {
+
+                return match.Value;
+
+            }
+            else
+            {
+                return "";
+            }
+        }
+        // DRIVER=Firebird/InterBase(r) driver;d:\temp\codeGeneration.feap; User =SYSDBA;Password=masterkey
+        // DRIVER=Firebird/InterBase(r) driver;DBNAME=Database=d:\temp\codeGeneration.feap; User =SYSDBA;Password=masterkey;
+        //if (eaConnectionString.ToLower().EndsWith(".feap"))
+        //if (rep.RepositoryType() == "JET")
+        
+
+
+        private string runLinq2Db(string provider, string connectionString)
+        {
+            DataConnection.DefaultSettings = new MySettings(provider, connectionString);
+            string ret = "";
+            using (var db = new DataModelAccess.EaModelDB())
+            {
+                    var q =
+                        from c in db.TObject
+                        select c;
+
+                    foreach (var c in q)
+                        Console.WriteLine(c.Name);
+            }
+            return ret;
+
         }
 
     }
@@ -798,6 +863,10 @@ State:
         }
     }
 
+
+    /// <summary>
+    /// Set connection string
+    /// </summary>
     public class ConnectionStringSettings : IConnectionStringSettings
     {
         public string ConnectionString { get; set; }
@@ -808,6 +877,16 @@ State:
 
     public class MySettings : ILinqToDBSettings
     {
+        readonly string _provider;
+        private readonly string _connectionString;
+
+        public MySettings(string provider, string connectionString)
+        {
+            _provider = provider;
+            _connectionString = connectionString;
+        }
+
+
         public IEnumerable<IDataProviderSettings> DataProviders
         {
             get { yield break; }
@@ -824,8 +903,8 @@ State:
                     new ConnectionStringSettings
                     {
                         Name = "AccessForEA",      // only name to show
-                        ProviderName = "Access", // has to be correct driver name
-                        ConnectionString = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=c:\Users\helmu_000\Downloads\Global Carbon Market Model.EAP;"
+                        ProviderName = _provider, // has to be correct driver name
+                        ConnectionString = _connectionString
                     };
             }
         }

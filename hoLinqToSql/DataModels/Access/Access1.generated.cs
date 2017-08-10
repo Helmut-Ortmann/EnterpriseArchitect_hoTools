@@ -10,14 +10,14 @@ using System.Linq;
 using LinqToDB;
 using LinqToDB.Mapping;
 
-namespace DataModels
+namespace DataModelAccess
 {
     /// <summary>
     /// Database       : EaModel
     /// Data Source    : c:\Users\helmu_000\Downloads\EaModel.mdb
     /// Server Version : 04.00.0000
     /// </summary>
-    public partial class EaAccessModelDB : LinqToDB.Data.DataConnection
+    public partial class EaModelDB : LinqToDB.Data.DataConnection
 	{
 		public ITable<QAttribute>            QAttribute            { get { return this.GetTable<QAttribute>(); } }
 		public ITable<QConnections>          QConnections          { get { return this.GetTable<QConnections>(); } }
@@ -143,12 +143,12 @@ namespace DataModels
 		public ITable<ZzQImplements2>        ZzQImplements2        { get { return this.GetTable<ZzQImplements2>(); } }
 		public ITable<ZzQOrphans>            ZzQOrphans            { get { return this.GetTable<ZzQOrphans>(); } }
 
-		public EaAccessModelDB()
+		public EaModelDB()
 		{
 			InitDataContext();
 		}
 
-		public EaAccessModelDB(string configuration)
+		public EaModelDB(string configuration)
 			: base(configuration)
 		{
 			InitDataContext();
