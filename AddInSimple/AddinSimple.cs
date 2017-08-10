@@ -8,6 +8,11 @@ using System.Windows.Forms;
 using AddInSimple.EABasic;
 using AddInSimple.Utils;
 
+using DataModels;
+using LinqToDB.Configuration;
+using LinqToDB.Data;
+using LinqToDB.DataProvider.Access;
+
 
 //------------------------------------------------------------------------------------
 // AddInSimple Simple Add-in
@@ -790,6 +795,39 @@ State:
         public static void OpenDiagramPropertyDlg(this EA.Repository rep, int diagramId)
         {
             rep.OpenEaPropertyDlg(diagramId, EaType.Diagram);
+        }
+    }
+
+    public class ConnectionStringSettings : IConnectionStringSettings
+    {
+        public string ConnectionString { get; set; }
+        public string Name { get; set; }
+        public string ProviderName { get; set; }
+        public bool IsGlobal => false;
+    }
+
+    public class MySettings : ILinqToDBSettings
+    {
+        public IEnumerable<IDataProviderSettings> DataProviders
+        {
+            get { yield break; }
+        }
+
+        public string DefaultConfiguration => "AccessForEA";    //??
+        public string DefaultDataProvider => "Access";//??
+
+        public IEnumerable<IConnectionStringSettings> ConnectionStrings
+        {
+            get
+            {
+                yield return
+                    new ConnectionStringSettings
+                    {
+                        Name = "AccessForEA",      // only name to show
+                        ProviderName = "Access", // has to be correct driver name
+                        ConnectionString = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=c:\Users\helmu_000\Downloads\Global Carbon Market Model.EAP;"
+                    };
+            }
         }
     }
 
