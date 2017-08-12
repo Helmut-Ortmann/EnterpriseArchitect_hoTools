@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Windows.Forms;
 using System.Xml.Linq;
 
@@ -10,14 +12,15 @@ namespace AddInSimple.Utils
     /// <summary>
     /// Utilities for general use
     /// </summary>
-    public class Util
+    public static class Util
     {
+
         /// <summary>
         /// Make EA xml from a DataTable (for column names) and the ordered Enumeration provided by LINQ. Set the Captions in DataTable to ensure column names. 
         /// 
         /// </summary>
         /// <param name="dt"></param>
-        /// <param name="rows"></param>
+        /// <param name="rows">LINQ Query for the data to get</param>
         /// <returns></returns>
         public static string MakeXml(DataTable dt, OrderedEnumerableRowCollection<DataRow> rows)
         {

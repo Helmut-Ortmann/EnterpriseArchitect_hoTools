@@ -10,7 +10,7 @@ using System.Linq;
 using LinqToDB;
 using LinqToDB.Mapping;
 
-namespace DataModelAccess
+namespace hoLinqToSql.DataModelAccess
 {
     /// <summary>
     /// Database       : EaModel

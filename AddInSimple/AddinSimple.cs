@@ -11,8 +11,10 @@ using System.Windows.Forms;
 using AddInSimple.EABasic;
 using AddInSimple.Utils;
 
-using DataModelAccess;
-using EA;
+
+using hoLinqToSql.DataModelAccess;
+using hoLinqToSql.Utils;
+
 using LinqToDB.Configuration;
 using LinqToDB.Data;
 using LinqToDB.DataProvider.Access;
@@ -206,7 +208,7 @@ namespace AddInSimple
                     // 1. Collect data
                     dt = SetTable();
                     // 2. Order, Filter, Join, Format to XML
-                    xml = QueryAndMakeXml(dt);
+                    xml = QueryAndMakeXmlFromTable(dt);
                     // 3. Out put to EA
                     repository.RunModelSearch("", "", "", xml);
                     break;
@@ -216,7 +218,7 @@ namespace AddInSimple
                     // 1. Collect data into a data table
                     dt = SetTableFromContext(repository);
                     // 2. Order, Filter, Join, Format to XML
-                    xml = QueryAndMakeXmlFromContext(dt);
+                    xml = QueryAndMakeXmlFromTable(dt);
                     // 3. Out put to EA
                     repository.RunModelSearch("", "", "", xml);
                     break;
@@ -229,7 +231,7 @@ namespace AddInSimple
                     // 2. Convert to DataTable
                     dt = Util.MakeDataTableFromSqlXml(xml);
                     // 2. Order, Filter, Join, Format to XML
-                    xml = QueryAndMakeXmlFromContext(dt);
+                    xml = QueryAndMakeXmlFromTable(dt);
                     // 3. Out put to EA
                     repository.RunModelSearch("", "", "", xml);
                     break;
@@ -240,20 +242,29 @@ namespace AddInSimple
                     string connectionString = "";
                     if (eaConnectionString != null)
                     {
-                        Clipboard.SetText(eaConnectionString);
-                        MessageBox.Show($"ConnectionString='{eaConnectionString}'", "Connection string copied to clipboard");
+
+
 
                         string provider = "";
-                        connectionString = GetConnectionString(repository, out provider);
+                        connectionString = SqlUtil.GetConnectionString(repository, out provider);
+
+                        string lConnectionString = $@"{eaConnectionString}\r\n\r\nProvider for Linq for SQL:\r\n'{provider}\r\n{connectionString}";
+                        Clipboard.SetText(lConnectionString);
+                        MessageBox.Show($"{lConnectionString}", "Connection string (EA+LINQ + SQL) copied to clipboard");
                         if (connectionString == "") return;
+
+
                         ADODB.Connection conn = new ADODB.Connection();
                         try
                             {
-                                
-                                conn.Open(connectionString, "", "", -1);  // connection Open synchronously
+                            conn.Open(connectionString, "", "", -1);  // connection Open synchronously
+                            
+                            //conn.Open(connectionString, "", "", -1);  // connection Open synchronously
                                 MessageBox.Show($@"EA ConnectionString:    '{eaConnectionString}'
 ConnectionString:
 - '{connectionString}'
+Provider:
+-  '{provider}'
 Mode:             
 - '{conn.Mode}' 
 State:
@@ -277,9 +288,19 @@ State:
 
                 case MenuShowRunLinq2Db:
                     string provider1 = "";
-                    connectionString = GetConnectionString(repository, out provider1);
-                    //string provider = "Access";
-                    runLinq2Db(provider1, connectionString);
+                    // get connection string of repository
+                    connectionString = SqlUtil.GetConnectionString(repository, out provider1);
+                    
+                    // Run LINQS query to dataTable
+                    dt = SqlUtil.RunLinq2Db(provider1, connectionString);
+                    // Make EA xml
+                    OrderedEnumerableRowCollection<DataRow> rows = from row in dt.AsEnumerable()
+                        orderby row.Field<string>(dt.Columns[0].Caption) 
+                        select row;
+                    xml = Util.MakeXml(dt, rows);
+
+                    // Output to EA
+                    repository.RunModelSearch("", "", "", xml);
                     break;
                     
 
@@ -558,7 +579,7 @@ State:
             // 1. Collect data into a data table
             DataTable dt = SetTable();
             // 2. Order, Filter, Join, Format to XML
-            xmlResults = QueryAndMakeXml(dt);
+            xmlResults = QueryAndMakeXmlFromTable(dt);
             return "ok";
         }
 
@@ -586,7 +607,7 @@ State:
             // 1. Collect data into a data table
             DataTable dt = SetTableFromContext(repository);
             // 2. Order, Filter, Join, Format to XML
-            xmlResults = QueryAndMakeXmlFromContext(dt);
+            xmlResults = QueryAndMakeXmlFromTable(dt);
             return "ok";
         }
 
@@ -646,12 +667,13 @@ State:
 
         }
 
+        
         /// <summary>
-        /// Test Query
+        /// Test Query to show making EA xml from a Data table by using MakeXml. It queries the data table, orders the content according to Name columen and outputs it in EA xml format
         /// </summary>
         /// <param name="dt"></param>
         /// <returns></returns>
-        private string QueryAndMakeXml(DataTable dt)
+        private string QueryAndMakeXmlFromTable(DataTable dt)
         {
             try
             {
@@ -664,82 +686,13 @@ State:
             }
             catch (Exception e)
             {
-                MessageBox.Show($"{e}", "Error LINQ query");
-                return "";
-
-            }
-        }
-        /// <summary>
-        /// Test Query
-        /// </summary>
-        /// <param name="dt"></param>
-        /// <returns></returns>
-        private string QueryAndMakeXmlFromContext(DataTable dt)
-        {
-            try
-            {
-                // Make a LINQ query (WHERE, JOIN, ORDER,)
-                OrderedEnumerableRowCollection<DataRow> rows = from row in dt.AsEnumerable()
-                    orderby row.Field<string>("Name") descending
-                    select row;
-
-                return Util.MakeXml(dt, rows);
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show($"{e}", "Error LINQ query");
+                MessageBox.Show($"{e}", "Error LINQ query Test query to show Table to EA xml format");
                 return "";
 
             }
         }
 
-        /// <summary>
-        /// Get connection string of database
-        /// </summary>
-        /// <param name="rep"></param>
-        /// <returns></returns>
-        /// string dsnName = "DSN=MySqlEa;Trusted_Connection=Yes;";
-        //  dsnName = "DSN=MySqlEa;";
-        private static string GetConnectionString(EA.Repository rep, out string provider)
-        {
-            provider = "";
-            string eaConnectionString = rep.ConnectionString;
-            // EAP file 
-            // Provider=Microsoft.Jet.OLEDB.4.0;Data Source=d:\hoData\Work.eap;"
-            switch (rep.RepositoryType())
-                {
-
-                    case "JET":
-                        string dsn = getDsnName(eaConnectionString);
-                        if (eaConnectionString.ToLower().EndsWith(".eap"))
-                        {
-                            provider = "Access";   
-                            return $"Provider=Microsoft.Jet.OLEDB.4.0;Data Source={eaConnectionString};";
-                        }
-                        break;
-                    case "SQLSRV":
-                    case "MYSQL":
-                        break;
-
-                }
-            return "";
-        }
-
-        private static string getDsnName(string connectionString)
-        {
-            Regex rgx = new Regex("DSN=[^;]*;");
-            Match match = rgx.Match(connectionString);
-            if (match.Success)
-            {
-
-                return match.Value;
-
-            }
-            else
-            {
-                return "";
-            }
-        }
+        
         // DRIVER=Firebird/InterBase(r) driver;d:\temp\codeGeneration.feap; User =SYSDBA;Password=masterkey
         // DRIVER=Firebird/InterBase(r) driver;DBNAME=Database=d:\temp\codeGeneration.feap; User =SYSDBA;Password=masterkey;
         //if (eaConnectionString.ToLower().EndsWith(".feap"))
@@ -747,22 +700,7 @@ State:
         
 
 
-        private string runLinq2Db(string provider, string connectionString)
-        {
-            DataConnection.DefaultSettings = new MySettings(provider, connectionString);
-            string ret = "";
-            using (var db = new DataModelAccess.EaModelDB())
-            {
-                    var q =
-                        from c in db.TObject
-                        select c;
-
-                    foreach (var c in q)
-                        Console.WriteLine(c.Name);
-            }
-            return ret;
-
-        }
+       
 
     }
    
