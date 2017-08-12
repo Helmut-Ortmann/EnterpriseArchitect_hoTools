@@ -12,7 +12,7 @@ using AddInSimple.EABasic;
 using AddInSimple.Utils;
 
 
-using hoLinqToSql.DataModelAccess;
+using DataModels;
 using hoLinqToSql.Utils;
 
 using LinqToDB.Configuration;
@@ -246,7 +246,7 @@ namespace AddInSimple
 
 
                         string provider = "";
-                        connectionString = SqlUtil.GetConnectionString(repository, out provider);
+                        connectionString = LinqlUtil.GetConnectionString(repository, out provider);
 
                         string lConnectionString = $@"{eaConnectionString}\r\n\r\nProvider for Linq for SQL:\r\n'{provider}\r\n{connectionString}";
                         Clipboard.SetText(lConnectionString);
@@ -289,10 +289,10 @@ State:
                 case MenuShowRunLinq2Db:
                     string provider1 = "";
                     // get connection string of repository
-                    connectionString = SqlUtil.GetConnectionString(repository, out provider1);
+                    connectionString = LinqlUtil.GetConnectionString(repository, out provider1);
                     
                     // Run LINQS query to dataTable
-                    dt = SqlUtil.RunLinq2Db(provider1, connectionString);
+                    dt = LinqlUtil.RunLinq2Db(provider1, connectionString);
                     // Make EA xml
                     OrderedEnumerableRowCollection<DataRow> rows = from row in dt.AsEnumerable()
                         orderby row.Field<string>(dt.Columns[0].Caption) 

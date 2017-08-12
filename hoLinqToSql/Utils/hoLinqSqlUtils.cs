@@ -3,18 +3,14 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using LinqToDB.Data;
-
-using    hoLinqToSql.DataModelAccess;
 using Microsoft.Win32;
 
 namespace hoLinqToSql.Utils
 {
-    public static class SqlUtil
+    public static class LinqlUtil
     {
 
         /// <summary>
@@ -57,11 +53,11 @@ namespace hoLinqToSql.Utils
             {
                 {
                     
-                    using (var db = new DataModelAccess.EaModelDB())
+                    using (var db = new DataModels.EaDataModel())
                     {
                         var q =
-                        (from c in db.TObject.AsEnumerable()
-                            group c by c.ObjectType into g
+                        (from c in db.t_object.AsEnumerable()
+                            group c by c.Object_Type into g
                             orderby g.Key
 
                             select new
