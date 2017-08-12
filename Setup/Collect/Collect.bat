@@ -26,4 +26,6 @@ del *.wxs
 "%WIX%" file ..\..\hoExtensionGui\bin\release\hoExtensionGui.dll -ag -template fragment -out hoExtensionGui.wxs
 "%WIX%" file ..\..\hoFindAndReplaceGui\bin\release\hoFindAndReplaceGui.dll -ag -template fragment -out hoFindAndReplaceGui.wxs
 
+rem "%WIX%" dir "$(TargetDir)." -var var.Setup.TargetDir -dr APPLICATIONFOLDER -cg Binaries -ag -scom -sreg -sfrag -srd -o "Binaries.wxs"
+
 dir

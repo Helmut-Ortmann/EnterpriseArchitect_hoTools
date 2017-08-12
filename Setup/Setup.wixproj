@@ -86,6 +86,14 @@
       <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
       <RefTargetDir>INSTALLFOLDER</RefTargetDir>
     </ProjectReference>
+    <ProjectReference Include="..\hoLinqToSql\hoLinqToSql.csproj">
+      <Name>hoLinqToSql</Name>
+      <Project>{fed206af-e583-48c6-9952-bad2c41b3aa4}</Project>
+      <Private>True</Private>
+      <DoNotHarvest>True</DoNotHarvest>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLFOLDER</RefTargetDir>
+    </ProjectReference>
     <ProjectReference Include="..\hoSqlGui\hoSqlGui.csproj">
       <Name>hoSqlGui</Name>
       <Project>{d83c4d98-7aa9-4b1a-abed-ea8a9eac210c}</Project>

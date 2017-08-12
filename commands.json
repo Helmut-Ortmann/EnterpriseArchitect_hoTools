@@ -14,6 +14,11 @@
       "fileName": "cmd.exe",
       "workingDirectory": ".",
       "arguments": "/c HybridScriptingDll\\RegisterAsCom.bat"
+    },
+    "Collect": {
+      "fileName": "cmd.exe",
+      "workingDirectory": ".",
+      "arguments": "/c Setup\\Collect\\Collect.bat"
     }
   }
 }

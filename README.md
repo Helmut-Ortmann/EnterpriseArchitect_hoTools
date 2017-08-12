@@ -118,6 +118,11 @@ Some features:
 
 
 # Releases
+## Release 3.0.9
+- LINQ for SQL integrated (JET, SQLSVR, MySQL, other DBs implemented but not tested)
+  Project: hoLinqToSql
+- AddinSimple 1.0.3 With query example implemented with LINQ for SQL
+
 ## Release 3.0.8
 - AddInSimple: Add-In Search 'AddInSearchSamplePackageContent' corrected
 - hoTools: Reorganisation ReplaceWildCard

@@ -5,10 +5,17 @@ using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using LinqToDB.Data;
 using Microsoft.Win32;
 
-namespace hoLinqToSql.Utils
+using LinqToDB.DataProvider;
+using LinqToDB.DataProvider.Access;
+using LinqToDB.DataProvider.MySql;
+using LinqToDB.DataProvider.Oracle;
+using LinqToDB.DataProvider.PostgreSQL;
+using LinqToDB.DataProvider.SqlServer;
+using LinqToDB.DataProvider.Sybase;
+
+namespace hoLinqToSql.LinqUtils
 {
     public static class LinqUtil
     {
@@ -55,14 +62,14 @@ namespace hoLinqToSql.Utils
         /// <param name="provider"></param>
         /// <param name="connectionString"></param>
         /// <returns></returns>
-        public static DataTable RunLinq2Db(string provider, string connectionString)
+        public static DataTable RunLinq2Db(IDataProvider provider, string connectionString)
         {
-            DataConnection.DefaultSettings = new hoLinq2DBSettings(provider, connectionString);
+            //DataConnection.DefaultSettings = new hoLinq2DBSettings(provider, connectionString);
             try
             {
                 {
                     
-                    using (var db = new DataModels.EaDataModel())
+                    using (var db = new DataModels.EaDataModel(provider, connectionString))
                     {
                         var count = db.t_object.Count();
                         var q = (from c in db.t_object.AsEnumerable()
@@ -107,17 +114,18 @@ namespace hoLinqToSql.Utils
         /// <param name="provider"></param>
         /// <param name="connectionString"></param>
         /// <returns></returns>
-        public static DataTable RunLinq2DbComplex(string provider, string connectionString)
+        public static DataTable RunLinq2DbAdvanced(IDataProvider provider, string connectionString)
         {
-            DataConnection.DefaultSettings = new hoLinq2DBSettings(provider, connectionString);
+            // set provider and connection string
+            // DataConnection.DefaultSettings = new hoLinq2DBSettings(provider, connectionString);
             try
             {
                 {
 
-                    using (var db = new DataModels.EaDataModel())
+                    using (var db = new DataModels.EaDataModel(provider, connectionString))
                     {
                         // Total amount of Object_Types
-                        var count = db.t_object.Count();
+                        var countObjectTypes = db.t_object.Count();
 
                         // All object_types summary:
                         // - Type
@@ -132,9 +140,9 @@ namespace hoLinqToSql.Utils
                             select new
                             {
                                 Type = $"{g.Key}",
-                                Prozent = $"{ (float)g.Count() * 100 / count:00.00}%",
+                                Prozent = $"{ (float)g.Count() * 100 / countObjectTypes:00.00}%",
                                 Count = g.Count(),
-                                Total = count
+                                Total = countObjectTypes
                             });
 
 
@@ -161,7 +169,7 @@ namespace hoLinqToSql.Utils
                         // Concatenate Object Types with Requirement Types
                         var sum = q.Concat(q1);
 
-                        return q.ToDataTable();
+                        return sum.ToDataTable();
 
                     }
                 }
@@ -183,18 +191,18 @@ namespace hoLinqToSql.Utils
         /// <returns></returns>
         /// string dsnName = "DSN=MySqlEa;Trusted_Connection=Yes;";
         //  dsnName = "DSN=MySqlEa;";
-        public static string GetConnectionString(EA.Repository rep, out string provider)
+        public static string GetConnectionString(EA.Repository rep, out IDataProvider provider)
         {
-            provider = "";
+            provider = null;
             string connectionString = rep.ConnectionString;
-            string dsnConnectionString = "";
+            string dsnConnectionString;
             // EAP file 
             // Provider=Microsoft.Jet.OLEDB.4.0;Data Source=d:\hoData\Work.eap;"
             switch (rep.RepositoryType())
             {
 
                 case "JET":
-                    provider = "Access";
+                    provider = new AccessDataProvider();
                     dsnConnectionString = GetConnectionStringForDsn(connectionString);
                     if (dsnConnectionString != "") return dsnConnectionString;
                     if (connectionString.ToLower().EndsWith(".eap"))
@@ -203,10 +211,8 @@ namespace hoLinqToSql.Utils
                         return $"Provider=Microsoft.Jet.OLEDB.4.0;Data Source={connectionString};";
                     }
                     break;
-                case "SQLSVR":
-                // EA: 'EAExample --- DBType=1;Connect=Provider=SQLOLEDB.1;Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=EAExample;Data Source=localhost\SQLEXPRESS;LazyLoad=1;'
-                // Linq2DB: Server=localhost\SQLEXPRESS;Database=<dataBase>;Trusted_Connection=True;
-                    provider = "System.Data.SqlClient";
+                case @"SQLSVR":
+                    provider = new SqlServerDataProvider("", SqlServerVersion.v2012);
                     dsnConnectionString = GetConnectionStringForDsn(connectionString);
                     if (dsnConnectionString != "") return dsnConnectionString;
                     return FilterConnectionString(connectionString);
@@ -214,11 +220,38 @@ namespace hoLinqToSql.Utils
 
 
                 case "MYSQL":
-                    provider = "MySql.Data.MySqlClient";
+                    provider = new MySqlDataProvider();
                     dsnConnectionString = GetConnectionStringForDsn(connectionString);
                     if (dsnConnectionString != "") return dsnConnectionString;
-                    //return @"Server = localhost; Port = 3306; Database = eaexamplemysql; Uid = root; Pwd = m6655inden; charset = utf8;";
                     return FilterConnectionString(connectionString);
+
+                case "ACCESS2007":
+                    provider = new AccessDataProvider();
+                    dsnConnectionString = GetConnectionStringForDsn(connectionString);
+                    if (dsnConnectionString != "") return dsnConnectionString;
+                    return FilterConnectionString(connectionString);
+
+
+                case "ASA":
+                    provider = new SybaseDataProvider();
+                    dsnConnectionString = GetConnectionStringForDsn(connectionString);
+                    if (dsnConnectionString != "") return dsnConnectionString;
+                    return FilterConnectionString(connectionString);
+
+                case "ORACLE":
+                    provider = new OracleDataProvider();
+                    dsnConnectionString = GetConnectionStringForDsn(connectionString);
+                    if (dsnConnectionString != "") return dsnConnectionString;
+                    return FilterConnectionString(connectionString);
+
+
+                case "POSTGRES":
+                    provider = new PostgreSQLDataProvider();
+                    dsnConnectionString = GetConnectionStringForDsn(connectionString);
+                    if (dsnConnectionString != "") return dsnConnectionString;
+                    return FilterConnectionString(connectionString);
+
+
 
                 default:
                     MessageBox.Show($@"Database: {rep.RepositoryType()}\r\nConnectionString:{connectionString} ","DataBase not supported for hoTools, only Access, SqlServer and MySQL");
@@ -291,7 +324,6 @@ namespace hoLinqToSql.Utils
                 {
                     Value = k + "=" + key.GetValue(k) + ";"
                 };
-            var a = l.ToArray();
             return String.Join("", l.Select(i => i.Value).ToArray());
         }
     }

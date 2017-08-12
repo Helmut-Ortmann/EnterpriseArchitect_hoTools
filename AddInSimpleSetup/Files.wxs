@@ -36,8 +36,38 @@
           <RegistryValue Type="string" Value="AddInSimple.AddInSimpleClass" KeyPath="yes" />
         </RegistryKey>
       </Component>
-      
-      
+      <Component Id="hoLinqToSql" Guid="{615EA76B-EE2B-44FD-AB59-770355DC9AD9}">
+        <File Id="hoLinqToSql" KeyPath="yes" Name="hoLinqToSql.dll" Source="$(var.hoLinqToSql.TargetPath)" />
+      </Component>
+
+      <!-- linq2db                   -->
+      <Component Id="linq2db" Guid="{5CA0CC2D-0922-4CC3-B8AF-DF397EF6FB60}">
+        <File Id="linq2db" KeyPath="yes" Name="linq2db.dll" Source="d:\hoData\Development\GitHub\EnterpriseArchitect_hoTools\packages\linq2db.1.8.3\lib\net45\linq2db.dll" />
+      </Component>
+      <!-- multiple installed ??
+      <Component Id="MySql.Data" Guid="{8E9F0885-9BC8-4BCD-854F-69E1E5516838}">
+        <File Id="MySql.Data" KeyPath="yes" Name="MySql.Data.dll" Source="d:\hoData\Development\GitHub\EnterpriseArchitect_hoTools\packages\linq2db.MySql.1.8.3\tools\MySql.Data.dll" />
+      </Component>
+        -->
+      <Component Id="Microsoft.SqlServer.Types.dll" Guid="{EABD70B2-374E-4959-AB91-38863D06ABFA}">
+        <File Id="Microsoft.SqlServer.Types.dll" KeyPath="yes" Name="MySql.Data.dll" Source="d:\hoData\Development\GitHub\EnterpriseArchitect_hoTools\packages\linq2db.SqlServer.1.8.3\tools\Microsoft.SqlServer.Types.dll" />
+      </Component>
+      <Component Id="Oracle.ManagedDataAccess.dll" Guid="{48EE033C-4B86-4195-84CA-0BF89DAF7CC3}">
+        <File Id="Oracle.ManagedDataAccess.dll" KeyPath="yes" Name="Oracle.ManagedDataAccess.dll" Source="d:\hoData\Development\GitHub\EnterpriseArchitect_hoTools\packages\linq2db.Oracle.x86.1.8.3\tools\Oracle.ManagedDataAccess.dll" />
+      </Component>
+      <Component Id="Npgsql.dll" Guid="{2EFF6EB5-E946-4B52-9ACC-2AB5D9564D8D}">
+        <File Id="Npgsql.dll" KeyPath="yes" Name="Npgsqldll" Source="d:\hoData\Development\GitHub\EnterpriseArchitect_hoTools\packages\linq2db.PostgreSQL.1.8.3\tools\Npgsql.dll" />
+      </Component>
+      <Component Id="Sybase.AdoNet2.AseClient.dll" Guid="{BF034025-BCEA-4A40-870E-25F1158DD17B}">
+        <File Id="Sybase.AdoNet2.AseClient.dll" KeyPath="yes" Name="Sybase.AdoNet2.AseClient.dll" Source="d:\hoData\Development\GitHub\EnterpriseArchitect_hoTools\packages\linq2db.Sybase.1.8.3\tools\Sybase.AdoNet2.AseClient.dll" />
+      </Component>
+      <Component Id="sybdrvado20.dll" Guid="{0F614AA1-5202-4C1A-B4A7-07B97FD09372}">
+        <File Id="sybdrvado20.dll" KeyPath="yes" Name="sybdrvado20.dll" Source="d:\hoData\Development\GitHub\EnterpriseArchitect_hoTools\packages\linq2db.Sybase.1.8.3\tools\sybdrvado20.dll" />
+      </Component>
+
+
+
+
       
       <!--
       Replace: Source="SourceDir\release\AddInSimple.dll" /> by
@@ -60,31 +90,31 @@
         <File Id="filB7ACB0AA302E14C4B5BC103FF525B9EE" KeyPath="yes" Name="AddInSimple.dll" Source="$(var.AddInSimple.TargetPath)" />
         <ProgId Id="Record" />
         <RegistryValue Root="HKCR" Key="CLSID\{58E7B70F-16C4-4538-A4E8-AF4EAC27519B}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
-        <RegistryValue Root="HKCR" Key="CLSID\{58E7B70F-16C4-4538-A4E8-AF4EAC27519B}\InprocServer32\1.0.2" Name="Class" Value="AddInSimple.AddInSimpleClass" Type="string" Action="write" />
-        <RegistryValue Root="HKCR" Key="CLSID\{58E7B70F-16C4-4538-A4E8-AF4EAC27519B}\InprocServer32\1.0.2" Name="Assembly" Value="AddInSimple, Version=1.0.2, Culture=neutral, PublicKeyToken=37ea3d95ffcb87e1" Type="string" Action="write" />
-        <RegistryValue Root="HKCR" Key="CLSID\{58E7B70F-16C4-4538-A4E8-AF4EAC27519B}\InprocServer32\1.0.2" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-        <RegistryValue Root="HKCR" Key="CLSID\{58E7B70F-16C4-4538-A4E8-AF4EAC27519B}\InprocServer32\1.0.2" Name="CodeBase" Value="file:///[#filB7ACB0AA302E14C4B5BC103FF525B9EE]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{58E7B70F-16C4-4538-A4E8-AF4EAC27519B}\InprocServer32\1.0.3" Name="Class" Value="AddInSimple.AddInSimpleClass" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{58E7B70F-16C4-4538-A4E8-AF4EAC27519B}\InprocServer32\1.0.3" Name="Assembly" Value="AddInSimple, Version=1.0.2, Culture=neutral, PublicKeyToken=37ea3d95ffcb87e1" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{58E7B70F-16C4-4538-A4E8-AF4EAC27519B}\InprocServer32\1.0.3" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{58E7B70F-16C4-4538-A4E8-AF4EAC27519B}\InprocServer32\1.0.3" Name="CodeBase" Value="file:///[#filB7ACB0AA302E14C4B5BC103FF525B9EE]" Type="string" Action="write" />
         <RegistryValue Root="HKCR" Key="CLSID\{58E7B70F-16C4-4538-A4E8-AF4EAC27519B}\InprocServer32" Name="Class" Value="AddInSimple.AddInSimpleClass" Type="string" Action="write" />
         <RegistryValue Root="HKCR" Key="CLSID\{58E7B70F-16C4-4538-A4E8-AF4EAC27519B}\InprocServer32" Name="Assembly" Value="AddInSimple, Version=1.0.2, Culture=neutral, PublicKeyToken=37ea3d95ffcb87e1" Type="string" Action="write" />
         <RegistryValue Root="HKCR" Key="CLSID\{58E7B70F-16C4-4538-A4E8-AF4EAC27519B}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
         <RegistryValue Root="HKCR" Key="CLSID\{58E7B70F-16C4-4538-A4E8-AF4EAC27519B}\InprocServer32" Name="CodeBase" Value="file:///[#filB7ACB0AA302E14C4B5BC103FF525B9EE]" Type="string" Action="write" />
         <RegistryValue Root="HKCR" Key="CLSID\{FCE68F15-F7B2-3C7B-991B-5EB1D31FA88A}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
-        <RegistryValue Root="HKCR" Key="CLSID\{FCE68F15-F7B2-3C7B-991B-5EB1D31FA88A}\InprocServer32\1.0.2" Name="Class" Value="AddInSimple.InternalHelpers" Type="string" Action="write" />
-        <RegistryValue Root="HKCR" Key="CLSID\{FCE68F15-F7B2-3C7B-991B-5EB1D31FA88A}\InprocServer32\1.0.2" Name="Assembly" Value="AddInSimple, Version=1.0.2, Culture=neutral, PublicKeyToken=37ea3d95ffcb87e1" Type="string" Action="write" />
-        <RegistryValue Root="HKCR" Key="CLSID\{FCE68F15-F7B2-3C7B-991B-5EB1D31FA88A}\InprocServer32\1.0.2" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-        <RegistryValue Root="HKCR" Key="CLSID\{FCE68F15-F7B2-3C7B-991B-5EB1D31FA88A}\InprocServer32\1.0.2" Name="CodeBase" Value="file:///[#filB7ACB0AA302E14C4B5BC103FF525B9EE]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{FCE68F15-F7B2-3C7B-991B-5EB1D31FA88A}\InprocServer32\1.0.3" Name="Class" Value="AddInSimple.InternalHelpers" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{FCE68F15-F7B2-3C7B-991B-5EB1D31FA88A}\InprocServer32\1.0.3" Name="Assembly" Value="AddInSimple, Version=1.0.2, Culture=neutral, PublicKeyToken=37ea3d95ffcb87e1" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{FCE68F15-F7B2-3C7B-991B-5EB1D31FA88A}\InprocServer32\1.0.3" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{FCE68F15-F7B2-3C7B-991B-5EB1D31FA88A}\InprocServer32\1.0.3" Name="CodeBase" Value="file:///[#filB7ACB0AA302E14C4B5BC103FF525B9EE]" Type="string" Action="write" />
         <RegistryValue Root="HKCR" Key="CLSID\{FCE68F15-F7B2-3C7B-991B-5EB1D31FA88A}\InprocServer32" Name="Class" Value="AddInSimple.InternalHelpers" Type="string" Action="write" />
         <RegistryValue Root="HKCR" Key="CLSID\{FCE68F15-F7B2-3C7B-991B-5EB1D31FA88A}\InprocServer32" Name="Assembly" Value="AddInSimple, Version=1.0.2, Culture=neutral, PublicKeyToken=37ea3d95ffcb87e1" Type="string" Action="write" />
         <RegistryValue Root="HKCR" Key="CLSID\{FCE68F15-F7B2-3C7B-991B-5EB1D31FA88A}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
         <RegistryValue Root="HKCR" Key="CLSID\{FCE68F15-F7B2-3C7B-991B-5EB1D31FA88A}\InprocServer32" Name="CodeBase" Value="file:///[#filB7ACB0AA302E14C4B5BC103FF525B9EE]" Type="string" Action="write" />
-        <RegistryValue Root="HKCR" Key="Record\{5E1E504C-95C7-4B14-A0F6-70329F70084A}\1.0.2" Name="Class" Value="EA.ObjectType" Type="string" Action="write" />
-        <RegistryValue Root="HKCR" Key="Record\{5E1E504C-95C7-4B14-A0F6-70329F70084A}\1.0.2" Name="Assembly" Value="AddInSimple, Version=1.0.2, Culture=neutral, PublicKeyToken=37ea3d95ffcb87e1" Type="string" Action="write" />
-        <RegistryValue Root="HKCR" Key="Record\{5E1E504C-95C7-4B14-A0F6-70329F70084A}\1.0.2" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-        <RegistryValue Root="HKCR" Key="Record\{5E1E504C-95C7-4B14-A0F6-70329F70084A}\1.0.2" Name="CodeBase" Value="file:///[#filB7ACB0AA302E14C4B5BC103FF525B9EE]" Type="string" Action="write" />
-        <RegistryValue Root="HKCR" Key="Record\{E4647791-51BD-3B9C-9138-9B6B528BC838}\1.0.2" Name="Class" Value="AddInSimple.EaType" Type="string" Action="write" />
-        <RegistryValue Root="HKCR" Key="Record\{E4647791-51BD-3B9C-9138-9B6B528BC838}\1.0.2" Name="Assembly" Value="AddInSimple, Version=1.0.2, Culture=neutral, PublicKeyToken=37ea3d95ffcb87e1" Type="string" Action="write" />
-        <RegistryValue Root="HKCR" Key="Record\{E4647791-51BD-3B9C-9138-9B6B528BC838}\1.0.2" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-        <RegistryValue Root="HKCR" Key="Record\{E4647791-51BD-3B9C-9138-9B6B528BC838}\1.0.2" Name="CodeBase" Value="file:///[#filB7ACB0AA302E14C4B5BC103FF525B9EE]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="Record\{5E1E504C-95C7-4B14-A0F6-70329F70084A}\1.0.3" Name="Class" Value="EA.ObjectType" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="Record\{5E1E504C-95C7-4B14-A0F6-70329F70084A}\1.0.3" Name="Assembly" Value="AddInSimple, Version=1.0.2, Culture=neutral, PublicKeyToken=37ea3d95ffcb87e1" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="Record\{5E1E504C-95C7-4B14-A0F6-70329F70084A}\1.0.3" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="Record\{5E1E504C-95C7-4B14-A0F6-70329F70084A}\1.0.3" Name="CodeBase" Value="file:///[#filB7ACB0AA302E14C4B5BC103FF525B9EE]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="Record\{E4647791-51BD-3B9C-9138-9B6B528BC838}\1.0.3" Name="Class" Value="AddInSimple.EaType" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="Record\{E4647791-51BD-3B9C-9138-9B6B528BC838}\1.0.3" Name="Assembly" Value="AddInSimple, Version=1.0.2, Culture=neutral, PublicKeyToken=37ea3d95ffcb87e1" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="Record\{E4647791-51BD-3B9C-9138-9B6B528BC838}\1.0.3" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="Record\{E4647791-51BD-3B9C-9138-9B6B528BC838}\1.0.3" Name="CodeBase" Value="file:///[#filB7ACB0AA302E14C4B5BC103FF525B9EE]" Type="string" Action="write" />
       </Component>
     </ComponentGroup>
   </Fragment>

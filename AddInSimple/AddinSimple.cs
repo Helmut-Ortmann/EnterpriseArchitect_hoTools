@@ -1,23 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.Odbc;
 using System.Diagnostics;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Runtime.Remoting.Messaging;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using AddInSimple.EABasic;
 using AddInSimple.Utils;
-
-
-using DataModels;
-using hoLinqToSql.Utils;
+using hoLinqToSql.LinqUtils;
 
 using LinqToDB.Configuration;
-using LinqToDB.Data;
-using LinqToDB.DataProvider.Access;
+using LinqToDB.DataProvider;
 
 
 //------------------------------------------------------------------------------------
@@ -70,7 +62,7 @@ namespace AddInSimple
     // In description: 'Namespace.ClassName'
     // EA uses always the ProId.
     [ProgId("AddInSimple.AddInSimpleClass")]
-    public class AddInSimpleClass : EaAddInBase
+    public sealed class AddInSimpleClass : EaAddInBase
     {
         // define menu constants
         const string MenuName = "-&AddInSimple";
@@ -92,23 +84,24 @@ namespace AddInSimple
         /// </summary>
         public AddInSimpleClass()
         {
-            this.menuHeader = MenuName;
-            this.menuOptions = new[] { MenuHello, MenuGoodbye, MenuOpenProperties, MenuRunDemoSearch, MenuRunDemoPackageContent, MenuRunDemoSqlToDataTable, MenuShowConnectionString, MenuShowRunLinq2Db, MenuShowRunLinq2DbAdvanced };
+            menuHeader = MenuName;
+            menuOptions = new[] { MenuHello, MenuGoodbye, MenuOpenProperties, MenuRunDemoSearch, MenuRunDemoPackageContent, MenuRunDemoSqlToDataTable, MenuShowConnectionString, MenuShowRunLinq2Db, MenuShowRunLinq2DbAdvanced };
         }
+        // ReSharper disable once RedundantOverriddenMember
         /// <summary>
         /// EA_Connect events enable Add-Ins to identify their type and to respond to Enterprise Architect start up.
         /// This event occurs when Enterprise Architect first loads your Add-In. Enterprise Architect itself is loading at this time so that while a Repository object is supplied, there is limited information that you can extract from it.
         /// The chief uses for EA_Connect are in initializing global Add-In data and for identifying the Add-In as an MDG Add-In.
         /// Also look at EA_Disconnect.
         /// </summary>
-        /// <param name="Repository">An EA.Repository object representing the currently open Enterprise Architect model.
+        /// <param name="repository">An EA.Repository object representing the currently open Enterprise Architect model.
         /// Poll its members to retrieve model data and user interface status information.</param>
         /// <returns>String identifying a specialized type of Add-In: 
         /// - "MDG" : MDG Add-Ins receive MDG Events and extra menu options.
         /// - "" : None-specialized Add-In.</returns>
-        public override string EA_Connect(EA.Repository Repository)
+        public override string EA_Connect(EA.Repository repository)
         {
-            return base.EA_Connect(Repository);
+            return base.EA_Connect(repository);
         }
         /// <summary>
         /// Called once Menu has been opened to see what menu items should active.
@@ -117,7 +110,7 @@ namespace AddInSimple
         /// <param name="location">the location of the menu</param>
         /// <param name="menuName">the name of the menu</param>
         /// <param name="itemName">the name of the menu item</param>
-        /// <param name="isEnabled">boolean indicating whethe the menu item is enabled</param>
+        /// <param name="isEnabled">boolean indicating whether the menu item is enabled</param>
         /// <param name="isChecked">boolean indicating whether the menu is checked</param>
         public override void EA_GetMenuState(EA.Repository repository, string location, string menuName, string itemName, ref bool isEnabled, ref bool isChecked)
         {
@@ -152,13 +145,18 @@ namespace AddInSimple
                         isEnabled = true;
                         break;
 
-                    // Test Run SQL and transform to DataTable
+                    // Show connection string, copy connection string to database and try to establish a connection with ADODB
                     case MenuShowConnectionString:
                         isEnabled = true;
                         break;
 
                     // Test Run Linq2db Query
                     case MenuShowRunLinq2Db:
+                        isEnabled = true;
+                        break;
+
+                    // Test Run Linq2db Query
+                    case MenuShowRunLinq2DbAdvanced:
                         isEnabled = true;
                         break;
 
@@ -190,7 +188,7 @@ namespace AddInSimple
             DataTable dt;
 
             // for LINQ to SQL
-            string provider;  // the provider to connect to database like Access, ..
+            IDataProvider provider;  // the provider to connect to database like Access, ..
             string connectionString; // The connection string to connect to database
 
             switch (itemName)
@@ -220,7 +218,6 @@ namespace AddInSimple
                     break;
 
                 case MenuRunDemoPackageContent:
-                    string connection = repository.ConnectionString;
                     // 1. Collect data into a data table
                     dt = SetTableFromContext(repository);
                     // 2. Order, Filter, Join, Format to XML
@@ -293,8 +290,8 @@ State:
                     // get connection string of repository
                     connectionString = LinqUtil.GetConnectionString(repository, out provider);
                     
-                    // Run LINQS query to dataTable
-                    dt = LinqUtil.RunLinq2Db(provider, connectionString);
+                    // Run LINQ query to dataTable
+                    dt = LinqUtil.RunLinq2DbAdvanced(provider, connectionString);
                     // Make EA xml
                     OrderedEnumerableRowCollection<DataRow> rows = from row in dt.AsEnumerable()
                         orderby row.Field<string>(dt.Columns[0].Caption) 
@@ -305,13 +302,13 @@ State:
                     repository.RunModelSearch("", "", "", xml);
                     break;
 
-                // Adanavced LINQ to SQL example
+                // Advanced LINQ to SQL example
                 case MenuShowRunLinq2DbAdvanced:
                     // get connection string of repository
                     connectionString = LinqUtil.GetConnectionString(repository, out provider);
 
-                    // Run LINQS query to dataTable
-                    dt = LinqUtil.RunLinq2Db(provider, connectionString);
+                    // Run LINQ query to dataTable
+                    dt = LinqUtil.RunLinq2DbAdvanced(provider, connectionString);
                     // Make EA xml
                     OrderedEnumerableRowCollection<DataRow> rowsAdvanced = from row in dt.AsEnumerable()
                         orderby row.Field<string>(dt.Columns[0].Caption)
@@ -365,12 +362,12 @@ State:
             this._shouldWeSayHello = true;
         }
 
-        public void testPropertiesDialog(EA.Repository repository)
+        private void testPropertiesDialog(EA.Repository repository)
         {
-            int diagramID = repository.GetCurrentDiagram().DiagramID;
+            int diagramId = repository.GetCurrentDiagram().DiagramID;
             // there is no current diagram
-            if (diagramID == 0) return;
-            repository.OpenDiagramPropertyDlg(diagramID);
+            if (diagramId == 0) return;
+            repository.OpenDiagramPropertyDlg(diagramId);
         }
 
 

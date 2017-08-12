@@ -59,6 +59,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DataModelEA.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataModels\EaDataModel.cs" />
     <Compile Include="DataModels\MySql\DataModelMySql.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -87,6 +88,8 @@
     <None Include="LinqToDB.Templates\LinqToDB.MySql.Tools.ttinclude" />
     <None Include="LinqToDB.Templates\LinqToDB.MySql.ttinclude" />
     <None Include="LinqToDB.Templates\LinqToDB.Oracle.ttinclude" />
+    <None Include="LinqToDB.Templates\LinqToDB.Oracle.x86.Tools.ttinclude" />
+    <None Include="LinqToDB.Templates\LinqToDB.PostgreSQL.Tools.ttinclude" />
     <None Include="LinqToDB.Templates\LinqToDB.PostgreSQL.ttinclude" />
     <None Include="LinqToDB.Templates\LinqToDB.SapHana.ttinclude" />
     <None Include="LinqToDB.Templates\LinqToDB.SqlCe.ttinclude" />
@@ -95,6 +98,7 @@
     <None Include="LinqToDB.Templates\LinqToDB.SqlServer.SqlTypes.ttinclude" />
     <None Include="LinqToDB.Templates\LinqToDB.SqlServer.Tools.ttinclude" />
     <None Include="LinqToDB.Templates\LinqToDB.SqlServer.ttinclude" />
+    <None Include="LinqToDB.Templates\LinqToDB.Sybase.Tools.ttinclude" />
     <None Include="LinqToDB.Templates\LinqToDB.Sybase.ttinclude" />
     <None Include="LinqToDB.Templates\LinqToDB.Tools.ttinclude" />
     <None Include="LinqToDB.Templates\LinqToDB.ttinclude" />
@@ -121,11 +125,14 @@
       <LastGenOutput>DataModelSqlServer1.generated.cs</LastGenOutput>
     </Content>
     <Content Include="LinqToDB.Templates\CopyMe.MySql.tt.txt" />
+    <Content Include="LinqToDB.Templates\CopyMe.Oracle.x86.tt.txt" />
+    <Content Include="LinqToDB.Templates\CopyMe.PostgreSQL.tt.txt" />
     <Content Include="LinqToDB.Templates\CopyMe.SqlServer.tt.txt" />
     <Content Include="LinqToDB.Templates\CopyMe.Access.tt.txt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>CopyMe.Access.tt.generated.cs</LastGenOutput>
     </Content>
+    <Content Include="LinqToDB.Templates\CopyMe.Sybase.tt.txt" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

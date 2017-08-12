@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using LinqToDB.Configuration;
 
-namespace hoLinqToSql.Utils
+namespace hoLinqToSql.LinqUtils
 {
-        /// <summary>
-        /// Set connection string
-        /// </summary>
-        public class ConnectionStringSettings : IConnectionStringSettings
+    /// <summary>
+    /// Set connection string before the first usage. It only sets the default configurarion.
+    /// Mostly it's better to use the Context Constructor to set provider and connectionString.
+    /// - using (var db = new DataModels.EaDataModel(provider, connectionString)) 
+    /// 
+    /// </summary>
+    public class ConnectionStringSettings : IConnectionStringSettings
         {
             public string ConnectionString { get; set; }
             public string Name { get; set; }
@@ -22,7 +21,7 @@ namespace hoLinqToSql.Utils
         /// - Provider
         /// - ConnectionString
         /// </summary>
-        public class hoLinq2DBSettings : ILinqToDBSettings
+        public class HoLinq2DbSettings : ILinqToDBSettings
         {
             readonly string _provider;
             private readonly string _connectionString;
@@ -32,22 +31,22 @@ namespace hoLinqToSql.Utils
             /// </summary>
             /// <param name="provider"></param>
             /// <param name="connectionString"></param>
-            public hoLinq2DBSettings(string provider, string connectionString)
+            public HoLinq2DbSettings(string provider, string connectionString)
             {
                 _provider = provider;
                 _connectionString = connectionString;
             }
 
             /// <summary>
-            /// Linq2db internal sue to set connectionString
+            /// Linq2db internal due to set connectionString
             /// </summary>
             public IEnumerable<IDataProviderSettings> DataProviders
             {
                 get { yield break; }
             }
 
-            public string DefaultConfiguration => "AccessForEA";    //??
-            public string DefaultDataProvider => "Access";//??
+            public string DefaultConfiguration => _connectionString;   
+            public string DefaultDataProvider => _provider;
 
             /// <summary>
             /// Linq2db internal sue to set connectionString

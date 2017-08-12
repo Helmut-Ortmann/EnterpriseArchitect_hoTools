@@ -77,6 +77,9 @@
       <Component Id="AddinFramework" Guid="03862F5A-C4CB-4234-B744-14DDE1454E0F">
         <File Id="AddinFramework" KeyPath="yes" Name="AddinFramework.dll" Source="$(var.AddinFramework.TargetPath)" />
       </Component>
+      <Component Id="hoLinqToSql" Guid="{79DD6C2E-E306-4318-A840-F80A4A833E1D}">
+        <File Id="hoLinqToSql" KeyPath="yes" Name="hoLinqToSql.dll" Source="$(var.hoLinqToSql.TargetPath)" />
+      </Component>
       
       
       <!--
@@ -303,6 +306,32 @@
       </Component>
       <Component Id="hoModelViewsMDG.xml" Guid="58558A7B-1F88-43CD-93BC-0863A82D88EE">
         <File Id="hoModelViewsMDG.xml" Name="hoModelViewsMDG.xml" KeyPath="yes" Source="..\hoToolsRoot\hoModelViewsMDG.xml" />
+      </Component>
+
+
+      <!-- linq2db                   -->
+      <Component Id="linq2db" Guid="{7F7E0442-6625-451E-841E-E4D304EFBCBA}">
+        <File Id="linq2db" KeyPath="yes" Name="linq2db.dll" Source="d:\hoData\Development\GitHub\EnterpriseArchitect_hoTools\packages\linq2db.1.8.3\lib\net45\linq2db.dll" />
+      </Component>
+      <!-- multiple installed ??
+      <Component Id="MySql.Data" Guid="{D632400E-4DBC-483A-A132-464D902262C0}">
+        <File Id="MySql.Data" KeyPath="yes" Name="MySql.Data.dll" Source="d:\hoData\Development\GitHub\EnterpriseArchitect_hoTools\packages\linq2db.MySql.1.8.3\tools\MySql.Data.dll" />
+      </Component>
+        -->
+      <Component Id="Microsoft.SqlServer.Types.dll" Guid="{EABD70B2-374E-4959-AB91-38863D06ABFA}">
+        <File Id="Microsoft.SqlServer.Types.dll" KeyPath="yes" Name="MySql.Data.dll" Source="d:\hoData\Development\GitHub\EnterpriseArchitect_hoTools\packages\linq2db.SqlServer.1.8.3\tools\Microsoft.SqlServer.Types.dll" />
+      </Component>
+      <Component Id="Oracle.ManagedDataAccess.dll" Guid="{1BE3E59F-3CA1-4725-8FB6-086E0DAD8D03}">
+        <File Id="Oracle.ManagedDataAccess.dll" KeyPath="yes" Name="Oracle.ManagedDataAccess.dll" Source="d:\hoData\Development\GitHub\EnterpriseArchitect_hoTools\packages\linq2db.Oracle.x86.1.8.3\tools\Oracle.ManagedDataAccess.dll" />
+      </Component>
+      <Component Id="Npgsql.dll" Guid="{B63E7AC0-5F42-49A3-8ABD-4B84B8C9160D}">
+        <File Id="Npgsql.dll" KeyPath="yes" Name="Npgsqldll" Source="d:\hoData\Development\GitHub\EnterpriseArchitect_hoTools\packages\linq2db.PostgreSQL.1.8.3\tools\Npgsql.dll" />
+      </Component>
+      <Component Id="Sybase.AdoNet2.AseClient.dll" Guid="{A3853976-5D6F-430E-AB0D-D87648B009D3}">
+        <File Id="Sybase.AdoNet2.AseClient.dll" KeyPath="yes" Name="Sybase.AdoNet2.AseClient.dll" Source="d:\hoData\Development\GitHub\EnterpriseArchitect_hoTools\packages\linq2db.Sybase.1.8.3\tools\Sybase.AdoNet2.AseClient.dll" />
+      </Component>
+      <Component Id="sybdrvado20.dll" Guid="{66897A7E-5F3D-41CE-9E3F-F2F36CF4C50D}">
+        <File Id="sybdrvado20.dll" KeyPath="yes" Name="sybdrvado20.dll" Source="d:\hoData\Development\GitHub\EnterpriseArchitect_hoTools\packages\linq2db.Sybase.1.8.3\tools\sybdrvado20.dll" />
       </Component>
     </ComponentGroup>
   </Fragment>
