@@ -10,7 +10,7 @@ using Microsoft.Win32;
 
 namespace hoLinqToSql.Utils
 {
-    public static class LinqlUtil
+    public static class LinqUtil
     {
 
         /// <summary>
@@ -19,6 +19,7 @@ namespace hoLinqToSql.Utils
         /// <typeparam name="T"></typeparam>
         /// <param name="source"></param>
         /// <returns></returns>
+        // ReSharper disable once MemberCanBePrivate.Global
         public static DataTable ToDataTable<T>(this IEnumerable<T> source)
         {
             PropertyInfo[] properties = typeof(T).GetProperties();
@@ -44,27 +45,37 @@ namespace hoLinqToSql.Utils
 
             return output;
         }
-
+        /// <summary>
+        /// Example LINQ to SQL
+        /// - All object object types
+        /// - Count of object types
+        /// - Percentage of object types
+        /// - Total count
+        /// </summary>
+        /// <param name="provider"></param>
+        /// <param name="connectionString"></param>
+        /// <returns></returns>
         public static DataTable RunLinq2Db(string provider, string connectionString)
         {
             DataConnection.DefaultSettings = new hoLinq2DBSettings(provider, connectionString);
-            string ret = "";
             try
             {
                 {
                     
                     using (var db = new DataModels.EaDataModel())
                     {
-                        var q =
-                        (from c in db.t_object.AsEnumerable()
+                        var count = db.t_object.Count();
+                        var q = (from c in db.t_object.AsEnumerable()
                             group c by c.Object_Type into g
                             orderby g.Key
 
                             select new
                             {
                                 Type = g.Key,
-                                Count = g.Count()
-                            }) ;
+                                Prozent = $"{ (float)g.Count() * 100 / count:00.00}%",
+                                Count = g.Count(),
+                                Total = count
+                            });
 
                         return q.ToDataTable();
 
@@ -78,6 +89,90 @@ namespace hoLinqToSql.Utils
                 return new DataTable();
             }
             
+
+        }
+        /// <summary>
+        /// Example LINQ to SQL
+        /// All object types and all Requirement Types
+        /// - First object types than requirement types
+        /// - Count of object types
+        /// - Percentage of object types
+        /// - Total count
+        /// 
+        /// Strategies to see:
+        /// - Write multiple queries
+        /// - Combine multiple queries
+        /// - Use C# code for advanced features 
+        /// </summary>
+        /// <param name="provider"></param>
+        /// <param name="connectionString"></param>
+        /// <returns></returns>
+        public static DataTable RunLinq2DbComplex(string provider, string connectionString)
+        {
+            DataConnection.DefaultSettings = new hoLinq2DBSettings(provider, connectionString);
+            try
+            {
+                {
+
+                    using (var db = new DataModels.EaDataModel())
+                    {
+                        // Total amount of Object_Types
+                        var count = db.t_object.Count();
+
+                        // All object_types summary:
+                        // - Type
+                        // - Count
+                        // - Percentage
+                        // - Total count of object_types
+                        var q =
+                        (from c in db.t_object.AsEnumerable()
+                            group c by c.Object_Type into g
+                            orderby g.Key
+
+                            select new
+                            {
+                                Type = $"{g.Key}",
+                                Prozent = $"{ (float)g.Count() * 100 / count:00.00}%",
+                                Count = g.Count(),
+                                Total = count
+                            });
+
+
+                        // Requirement summary:
+                        // - Type
+                        // - Count
+                        // - Percentage
+                        // - Total count of requirements
+                        var countReq = db.t_object.Where(e => e.Object_Type == "Requirement").Count();
+                        var q1 =
+                        (from c in db.t_object.AsEnumerable()
+                            where c.Object_Type == "Requirement"
+                            group c by c.Stereotype into g
+                            orderby g.Key
+
+                            select new
+                            {
+                                Type = $"Req:<<{g.Key}>>",
+                                Prozent = $"{ (float)g.Count() * 100 / countReq:00.00}%",
+                                Count = g.Count(),
+                                Total = countReq
+                            });
+
+                        // Concatenate Object Types with Requirement Types
+                        var sum = q.Concat(q1);
+
+                        return q.ToDataTable();
+
+                    }
+                }
+
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($"Provider: {provider}\r\nConnection: {connectionString}\r\n\r\n{e}", "Error Linq2DB");
+                return new DataTable();
+            }
+
 
         }
         /// <summary>
@@ -167,7 +262,11 @@ namespace hoLinqToSql.Utils
             }
         }
         /// <summary>
-        /// Get ConnectionString vom ODBC DSN
+        /// Get ConnectionString vom ODBC DSN (System, User, no file DSN)
+        /// - Supports ODBC System and User DSN
+        /// - Concatenates all of the registry entries of the odbc dsn definition 
+        /// - Ignores the entries for: Driver, Lastuser
+        /// Tested with: Access, SqlServer, MySql
         /// </summary>
         /// <param name="dsn"></param>
         /// <returns></returns>
@@ -187,7 +286,7 @@ namespace hoLinqToSql.Utils
             if (key == null) return "";
 
             var l = from k in key.GetValueNames()
-                where k != "Driver"
+                where k.ToLower() != "driver" && k.ToLower() != "lastuser"
                 select new
                 {
                     Value = k + "=" + key.GetValue(k) + ";"

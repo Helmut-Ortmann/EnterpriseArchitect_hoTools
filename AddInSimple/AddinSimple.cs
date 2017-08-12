@@ -82,6 +82,7 @@ namespace AddInSimple
         const string MenuRunDemoSqlToDataTable = "DemoSqlToDataTable";
         const string MenuShowConnectionString = "DemoConnectionString";
         const string MenuShowRunLinq2Db = "DemoRunLinq2dbQuery";
+        const string MenuShowRunLinq2DbAdvanced = "DemoRunLinq2dbQueryAdvanced";
 
         // remember if we have to say hello or goodbye
         private bool _shouldWeSayHello = true;
@@ -92,7 +93,7 @@ namespace AddInSimple
         public AddInSimpleClass()
         {
             this.menuHeader = MenuName;
-            this.menuOptions = new[] { MenuHello, MenuGoodbye, MenuOpenProperties, MenuRunDemoSearch, MenuRunDemoPackageContent, MenuRunDemoSqlToDataTable, MenuShowConnectionString, MenuShowRunLinq2Db };
+            this.menuOptions = new[] { MenuHello, MenuGoodbye, MenuOpenProperties, MenuRunDemoSearch, MenuRunDemoPackageContent, MenuRunDemoSqlToDataTable, MenuShowConnectionString, MenuShowRunLinq2Db, MenuShowRunLinq2DbAdvanced };
         }
         /// <summary>
         /// EA_Connect events enable Add-Ins to identify their type and to respond to Enterprise Architect start up.
@@ -187,6 +188,11 @@ namespace AddInSimple
         {
             string xml;
             DataTable dt;
+
+            // for LINQ to SQL
+            string provider;  // the provider to connect to database like Access, ..
+            string connectionString; // The connection string to connect to database
+
             switch (itemName)
             {
                 // user has clicked the menuHello menu option
@@ -237,16 +243,13 @@ namespace AddInSimple
                     break;
 
                 
+                    // Read connection string from EA and try an ADODB Connection
+                    // Copy connection string to clipboard
                 case MenuShowConnectionString:
                     string eaConnectionString = repository.ConnectionString;
-                    string connectionString = "";
                     if (eaConnectionString != null)
                     {
-
-
-
-                        string provider = "";
-                        connectionString = LinqlUtil.GetConnectionString(repository, out provider);
+                        connectionString = LinqUtil.GetConnectionString(repository, out provider);
 
                         string lConnectionString = $@"{eaConnectionString}\r\n\r\nProvider for Linq for SQL:\r\n'{provider}\r\n{connectionString}";
                         Clipboard.SetText(lConnectionString);
@@ -285,14 +288,13 @@ State:
                     }
                     break;
 
-
+                // Basis LINQ to SQL example
                 case MenuShowRunLinq2Db:
-                    string provider1 = "";
                     // get connection string of repository
-                    connectionString = LinqlUtil.GetConnectionString(repository, out provider1);
+                    connectionString = LinqUtil.GetConnectionString(repository, out provider);
                     
                     // Run LINQS query to dataTable
-                    dt = LinqlUtil.RunLinq2Db(provider1, connectionString);
+                    dt = LinqUtil.RunLinq2Db(provider, connectionString);
                     // Make EA xml
                     OrderedEnumerableRowCollection<DataRow> rows = from row in dt.AsEnumerable()
                         orderby row.Field<string>(dt.Columns[0].Caption) 
@@ -302,9 +304,26 @@ State:
                     // Output to EA
                     repository.RunModelSearch("", "", "", xml);
                     break;
-                    
 
-                    
+                // Adanavced LINQ to SQL example
+                case MenuShowRunLinq2DbAdvanced:
+                    // get connection string of repository
+                    connectionString = LinqUtil.GetConnectionString(repository, out provider);
+
+                    // Run LINQS query to dataTable
+                    dt = LinqUtil.RunLinq2Db(provider, connectionString);
+                    // Make EA xml
+                    OrderedEnumerableRowCollection<DataRow> rowsAdvanced = from row in dt.AsEnumerable()
+                        orderby row.Field<string>(dt.Columns[0].Caption)
+                        select row;
+                    xml = Util.MakeXml(dt, rowsAdvanced);
+
+                    // Output to EA
+                    repository.RunModelSearch("", "", "", xml);
+                    break;
+
+
+
 
             }
         }
