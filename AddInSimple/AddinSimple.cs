@@ -291,7 +291,7 @@ State:
                     connectionString = LinqUtil.GetConnectionString(repository, out provider);
                     
                     // Run LINQ query to dataTable
-                    dt = LinqUtil.RunLinq2DbAdvanced(provider, connectionString);
+                    dt = LinqUtil.RunLinq2Db(provider, connectionString);
                     // Make EA xml
                     OrderedEnumerableRowCollection<DataRow> rows = from row in dt.AsEnumerable()
                         orderby row.Field<string>(dt.Columns[0].Caption) 
