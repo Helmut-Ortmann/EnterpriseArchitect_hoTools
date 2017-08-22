@@ -9,7 +9,6 @@ using System.Windows.Forms;
 using System.Xml.Linq;
 using AddinFramework.Extension;
 using EA;
-using EAAddinFramework.Utils;
 using hoTools.EaServices.Dlg;
 using hoTools.Utils;
 using hoTools.Utils.ActivityParameter;
@@ -71,6 +70,7 @@ namespace hoTools.EaServices
     {
         // configuration as singleton
         static HoToolsGlobalCfg _globalCfg;
+
         // remember Diagram Style Settings
         public static DiagramFormat DiagramStyle;
 
@@ -243,9 +243,9 @@ namespace hoTools.EaServices
             // package
             // feature (Attribute or Operation)
             string sql = @"select object_id from t_object where note like '*a href=""*://{*'";
-            sql =  UtilSql.ReplaceSqlWildCards(rep, sql);
+            sql = UtilSql.ReplaceSqlWildCards(rep, sql);
             //
-            
+
             EA.Collection elList = rep.GetElementSet(sql, 2);
             foreach (EA.Element el in elList)
             {
@@ -261,8 +261,9 @@ namespace hoTools.EaServices
             }
             rep.RefreshOpenDiagrams(false);
             Cursor.Current = Cursors.Default;
-            ;
+
         }
+
         /// <summary>
         /// UpdateHyperlinks in descriptions
         /// </summary>
@@ -303,6 +304,7 @@ namespace hoTools.EaServices
             rep.RefreshOpenDiagrams(false);
             Cursor.Current = Cursors.Default;
         }
+
         /// <summary>
         /// UpdateHyperlinks in descriptions
         /// </summary>
@@ -360,6 +362,7 @@ namespace hoTools.EaServices
             rep.RefreshOpenDiagrams(false);
             Cursor.Current = Cursors.Default;
         }
+
         /// <summary>
         /// Change EA Hyperlinks of type package, element, diagram, attribute, operation in notes string.
         /// </summary>
@@ -369,7 +372,8 @@ namespace hoTools.EaServices
         private static bool ChangeHyperLinksInNote(Repository rep, ref string s)
         {
             // Possible replacements for element, package, feature(Attribute or Operation)
-            Regex rgx = new Regex(@"(a href=""\$(element|diagram|package|feature)://({[ABCDEF0123456789-]+})[^u]*u>)([^<]*)",
+            Regex rgx = new Regex(
+                @"(a href=""\$(element|diagram|package|feature)://({[ABCDEF0123456789-]+})[^u]*u>)([^<]*)",
                 RegexOptions.IgnoreCase);
             Match m = rgx.Match(s);
             bool changeNote = false;
@@ -623,55 +627,57 @@ namespace hoTools.EaServices
         /// </summary>
         /// <param name="rep"></param>
         [ServiceOperation("{B48B4D01-2BC5-4C2E-A9E2-4DB6336D4CCE}", "Copy FQ to Clipboard",
-            "Copy FQ (Full Qualified) Name to Clipboard (Package, Element, Diagram, Attribute, Operation)", isTextRequired: false)]
+            "Copy FQ (Full Qualified) Name to Clipboard (Package, Element, Diagram, Attribute, Operation)",
+            isTextRequired: false)]
         // ReSharper disable once UnusedMember.Global
         // dynamical usage as configurable service by reflection
         public static void CopyFqToClipboard(Repository rep)
         {
-            string strFQ = "";
+            string strFq = "";
             object o;
             EA.ObjectType type = rep.GetContextItem(out o);
             switch (type)
             {
                 case EA.ObjectType.otElement:
-                    strFQ = ((EA.Element)o).FQName;
+                    strFq = ((EA.Element) o).FQName;
                     break;
 
                 case EA.ObjectType.otModel:
-                    strFQ = ((EA.Package)o).Name;
+                    strFq = ((EA.Package) o).Name;
                     break;
 
                 case EA.ObjectType.otPackage:
-                    EA.Element el = rep.GetElementByGuid(((EA.Package)o).PackageGUID);
-                    if (el == null) strFQ = ((EA.Package)o).Name;
-                    else strFQ = el.FQName;
+                    EA.Element el = rep.GetElementByGuid(((EA.Package) o).PackageGUID);
+                    if (el == null) strFq = ((EA.Package) o).Name;
+                    else strFq = el.FQName;
                     break;
 
                 case EA.ObjectType.otDiagram:
                     EA.Diagram dia = (EA.Diagram) o;
                     if (dia.ParentID != 0)
                     {
-                        strFQ = $"{rep.GetElementByID(dia.ParentID).FQName}.{dia.Name}";
+                        strFq = $"{rep.GetElementByID(dia.ParentID).FQName}.{dia.Name}";
                     }
                     else
                     {
                         string guid = rep.GetPackageByID(dia.PackageID).PackageGUID;
-                        strFQ = $"{rep.GetElementByGuid(guid).FQName}.{dia.Name}";
+                        strFq = $"{rep.GetElementByGuid(guid).FQName}.{dia.Name}";
                     }
                     break;
                 case EA.ObjectType.otAttribute:
                     EA.Attribute a = (EA.Attribute) o;
-                    strFQ = $"{rep.GetElementByID(a.ParentID).FQName}.{a.Name}";
+                    strFq = $"{rep.GetElementByID(a.ParentID).FQName}.{a.Name}";
                     break;
                 case EA.ObjectType.otMethod:
-                    EA.Method m = (EA.Method)o;
-                    strFQ = $"{rep.GetElementByID(m.ParentID).FQName}.{m.Name}";
+                    EA.Method m = (EA.Method) o;
+                    strFq = $"{rep.GetElementByID(m.ParentID).FQName}.{m.Name}";
                     break;
-          }
+            }
 
-            if (String.IsNullOrWhiteSpace(strFQ)) Clipboard.Clear();
-            else Clipboard.SetText(strFQ);
+            if (String.IsNullOrWhiteSpace(strFq)) Clipboard.Clear();
+            else Clipboard.SetText(strFq);
         }
+
         /// <summary>
         /// Copy Stereotypes to ClipBoard
         /// </summary>
@@ -697,22 +703,22 @@ namespace hoTools.EaServices
                     break;
 
                 case EA.ObjectType.otPackage:
-                    el = rep.GetElementByGuid(((EA.Package)o).PackageGUID);
-                    strStereo = el == null ? ((EA.Package)o).StereotypeEx : el.FQStereotype + "\r\n" + el.StereotypeEx;
+                    el = rep.GetElementByGuid(((EA.Package) o).PackageGUID);
+                    strStereo = el == null ? ((EA.Package) o).StereotypeEx : el.FQStereotype + "\r\n" + el.StereotypeEx;
                     break;
                 case EA.ObjectType.otDiagram:
-                    strStereo = ((EA.Diagram)o).StereotypeEx;
+                    strStereo = ((EA.Diagram) o).StereotypeEx;
                     break;
                 case EA.ObjectType.otAttribute:
-                    strStereo = ((EA.Attribute)o).FQStereotype + "\r\n" + ((EA.Attribute)o).StereotypeEx;
+                    strStereo = ((EA.Attribute) o).FQStereotype + "\r\n" + ((EA.Attribute) o).StereotypeEx;
                     break;
                 case EA.ObjectType.otMethod:
-                    strStereo = ((EA.Method)o).FQStereotype + "\r\n" + ((EA.Method)o).StereotypeEx;
+                    strStereo = ((EA.Method) o).FQStereotype + "\r\n" + ((EA.Method) o).StereotypeEx;
                     break;
 
                 case EA.ObjectType.otConnector:
                     EA.Connector con = (EA.Connector) o;
-                    strStereo = con.FQStereotype + "\r\n" + con.StereotypeEx; ;
+                    strStereo = con.FQStereotype + "\r\n" + con.StereotypeEx;
                     break;
             }
 
@@ -725,12 +731,13 @@ namespace hoTools.EaServices
         /// </summary>
         /// <param name="rep"></param>
         [ServiceOperation("{02ECEF56-5EF8-45D7-9CB8-4A67B5D9AC2F}", "Copy GUID to Clipboard",
-            "Copy GUID to Clipboard (Package, Element, Diagram, Attribute, Operation, Connector, Parameter)", isTextRequired: false)]
+            "Copy GUID to Clipboard (Package, Element, Diagram, Attribute, Operation, Connector, Parameter)",
+            isTextRequired: false)]
         // ReSharper disable once UnusedMember.Global
         // dynamical usage as configurable service by reflection
         public static void CopyGuidToClipboard(Repository rep)
         {
-            string strGuid = ""; 
+            string strGuid = "";
             object o;
             EA.ObjectType type = rep.GetContextItem(out o);
             switch (type)
@@ -739,28 +746,28 @@ namespace hoTools.EaServices
                     strGuid = ((EA.Element) o).ElementGUID;
                     break;
                 case EA.ObjectType.otPackage:
-                    strGuid = ((EA.Package)o).PackageGUID;
+                    strGuid = ((EA.Package) o).PackageGUID;
                     break;
                 case EA.ObjectType.otDiagram:
-                    strGuid = ((EA.Diagram)o).DiagramGUID;
+                    strGuid = ((EA.Diagram) o).DiagramGUID;
                     break;
                 case EA.ObjectType.otAttribute:
-                    strGuid = ((EA.Attribute)o).AttributeGUID;
+                    strGuid = ((EA.Attribute) o).AttributeGUID;
                     break;
                 case EA.ObjectType.otMethod:
-                    strGuid = ((EA.Method)o).MethodGUID;
+                    strGuid = ((EA.Method) o).MethodGUID;
                     break;
 
                 case EA.ObjectType.otConnector:
-                    strGuid = ((EA.Connector)o).ConnectorGUID;
+                    strGuid = ((EA.Connector) o).ConnectorGUID;
                     break;
                 case EA.ObjectType.otModel:
-                    strGuid = ((EA.Package)o).PackageGUID;
+                    strGuid = ((EA.Package) o).PackageGUID;
                     break;
                 case EA.ObjectType.otParameter:
-                    strGuid = ((EA.Parameter)o).ParameterGUID;
+                    strGuid = ((EA.Parameter) o).ParameterGUID;
                     break;
-                
+
             }
 
             if (String.IsNullOrWhiteSpace(strGuid)) Clipboard.Clear();
@@ -859,8 +866,10 @@ namespace hoTools.EaServices
                     return null;
             }
         }
-        [ServiceOperation("{4FF89921-595B-4F16-8813-39789EB53730}", "Change Author Package (selected Items + Package content)",
-           "Select Package, Element or Diagram in Browser or Diagram", isTextRequired: false)]
+
+        [ServiceOperation("{4FF89921-595B-4F16-8813-39789EB53730}",
+            "Change Author Package (selected Items + Package content)",
+            "Select Package, Element or Diagram in Browser or Diagram", isTextRequired: false)]
         public static void ChangeAuthorPackage(Repository rep)
         {
             ChangeAuthor(rep, ChangeScope.Package);
@@ -879,6 +888,7 @@ namespace hoTools.EaServices
         #endregion
 
         #region Change Author recursive
+
         /// <summary>
         /// Change Author recursive for the selected items (Package, Element, Diagram)
         /// Use:
@@ -894,6 +904,7 @@ namespace hoTools.EaServices
         {
             ChangeAuthor(rep, ChangeScope.PackageRecursive);
         }
+
         /// <summary>
         /// Changes the Author of selected items and the chosen 'DlgAuthor.ChangeScope'.
         /// - Selected items
@@ -910,7 +921,7 @@ namespace hoTools.EaServices
             // Parameter for change
             // - [0]Author to change to
             // - [1]changeScope
-            string[] liParameter = { "", changeScope.ToString() };
+            string[] liParameter = {"", changeScope.ToString()};
 
             // Get Elements of type Element and Package
             List<Element> lEl = GetSelectedElements(rep);
@@ -928,7 +939,7 @@ namespace hoTools.EaServices
                     lToChange.Add(el0.Name);
                 }
 
-                var dlg0 = new DlgAuthor(rep, changeScope, lToChange) { User = lEl[0].Author };
+                var dlg0 = new DlgAuthor(rep, changeScope, lToChange) {User = lEl[0].Author};
                 dlg0.ShowDialog(_globalCfg.Owner);
                 // use string to use recursive call of function
                 if (dlg0.User == "") return;
@@ -939,22 +950,23 @@ namespace hoTools.EaServices
                     {
                         EA.Package pkg1 = rep.GetPackageByGuid(el.ElementGUID);
                         RecursivePackages.DoRecursivePkg(rep, pkg1, ChangeAuthorPackage, ChangeAuthorElement,
-                                ChangeAuthorDiagram, liParameter, changeScope);
+                            ChangeAuthorDiagram, liParameter, changeScope);
 
                     }
                     else
                     {
-                            RecursivePackages.DoRecursiveEl(rep, el, ChangeAuthorElement, ChangeAuthorDiagram, liParameter, changeScope);
-                       
+                        RecursivePackages.DoRecursiveEl(rep, el, ChangeAuthorElement, ChangeAuthorDiagram, liParameter,
+                            changeScope);
+
                     }
                 }
                 string items = string.Join($"{Environment.NewLine}", lToChange.ToArray());
-                MessageBox.Show($@"New author:'{dlg0.User}'{Environment.NewLine}{items}", 
+                MessageBox.Show($@"New author:'{dlg0.User}'{Environment.NewLine}{items}",
                     $@"Author changed, {changeScope.ToString()}");
             }
             else
-            // No selected item (Diagram or Project Browser)
-            // Use Context Element
+                // No selected item (Diagram or Project Browser)
+                // Use Context Element
             {
                 EA.Element el = null;
                 EA.Package pkg = null;
@@ -967,17 +979,17 @@ namespace hoTools.EaServices
                 switch (oType)
                 {
                     case ObjectType.otPackage:
-                        pkg = (Package)rep.GetContextObject();
+                        pkg = (Package) rep.GetContextObject();
                         oldAuthor = rep.GetElementByGuid(pkg.PackageGUID).Author;
                         liAuthors.Add(pkg.Name);
                         break;
                     case ObjectType.otElement:
-                        el = (Element)rep.GetContextObject();
+                        el = (Element) rep.GetContextObject();
                         oldAuthor = el.Author;
                         liAuthors.Add(el.Name);
                         break;
                     case ObjectType.otDiagram:
-                        dia = (Diagram)rep.GetContextObject();
+                        dia = (Diagram) rep.GetContextObject();
                         oldAuthor = dia.Author;
                         liAuthors.Add(dia.Name);
                         break;
@@ -985,7 +997,7 @@ namespace hoTools.EaServices
                         return;
                 }
                 // ask for new user
-                var dlg = new DlgAuthor(rep, ChangeScope.PackageRecursive, liAuthors) { User = oldAuthor };
+                var dlg = new DlgAuthor(rep, ChangeScope.PackageRecursive, liAuthors) {User = oldAuthor};
                 dlg.ShowDialog(_globalCfg.Owner);
                 // use string to use recursive call of function
                 liParameter[0] = dlg.User;
@@ -995,11 +1007,14 @@ namespace hoTools.EaServices
                     case ObjectType.otPackage:
                         RecursivePackages.DoRecursivePkg(rep, pkg, ChangeAuthorPackage, ChangeAuthorElement,
                             ChangeAuthorDiagram, liParameter, changeScope);
-                        MessageBox.Show($@"New author:'{dlg.User}'", $@"Author changed for package '{pkg.Name}', recursive");
+                        MessageBox.Show($@"New author:'{dlg.User}'",
+                            $@"Author changed for package '{pkg.Name}', recursive");
                         break;
                     case ObjectType.otElement:
-                        RecursivePackages.DoRecursiveEl(rep, el, ChangeAuthorElement, ChangeAuthorDiagram, liParameter, changeScope);
-                        MessageBox.Show($@"New author:'{dlg.User}'", $@"Author changed for element '{el.Name}', recursive");
+                        RecursivePackages.DoRecursiveEl(rep, el, ChangeAuthorElement, ChangeAuthorDiagram, liParameter,
+                            changeScope);
+                        MessageBox.Show($@"New author:'{dlg.User}'",
+                            $@"Author changed for element '{el.Name}', recursive");
                         break;
                     case ObjectType.otDiagram:
                         ChangeAuthorDiagram(rep, dia, liParameter);
@@ -1012,7 +1027,9 @@ namespace hoTools.EaServices
         }
 
         #endregion
+
         #region Get selected Elements
+
         /// <summary>
         /// Get selected Elements from:
         /// - Diagram
@@ -1026,7 +1043,7 @@ namespace hoTools.EaServices
             List<Element> lEl = new List<Element>();
             var eaDia = new EaDiagram(rep);
             // nothing selected
-            if (! eaDia.IsSelectedObjects && eaDia.SelectedConnector == null)
+            if (!eaDia.IsSelectedObjects && eaDia.SelectedConnector == null)
             {
                 // get all tree selected elements
                 foreach (EA.Element el1 in rep.GetTreeSelectedElements())
@@ -1042,9 +1059,10 @@ namespace hoTools.EaServices
         }
 
         #endregion
+
         // Set folder of package for easy access of implementation:
         [ServiceOperation("{7D0298DF-3AC2-4563-9593-699138657018}", "Set folder of implementation",
-                "Select package to set the implementation folder", isTextRequired: false)]
+            "Select package to set the implementation folder", isTextRequired: false)]
         public static void SetFolder(Repository rep)
         {
 
@@ -1052,7 +1070,7 @@ namespace hoTools.EaServices
             {
                 case EA.ObjectType.otPackage:
 
-                    EA.Package pkg = (EA.Package)rep.GetContextObject();
+                    EA.Package pkg = (EA.Package) rep.GetContextObject();
                     string folderPath = pkg.CodePath;
                     // try to infer the right folder from package class/interfaces
                     if (folderPath.Trim() == "")
@@ -1102,7 +1120,7 @@ namespace hoTools.EaServices
             switch (oType)
             {
                 case EA.ObjectType.otPackage:
-                    EA.Package pkg = (EA.Package)rep.GetContextObject();
+                    EA.Package pkg = (EA.Package) rep.GetContextObject();
                     if (pkg.CodePath.Trim() != "")
                     {
                         // consider gentype (C,C++,..)
@@ -1133,7 +1151,7 @@ namespace hoTools.EaServices
                     break;
 
                 case EA.ObjectType.otElement:
-                    EA.Element el = (EA.Element)rep.GetContextObject();
+                    EA.Element el = (EA.Element) rep.GetContextObject();
                     pathFolder = Util.GetGenFilePathElement(rep, el);
                     // remove filename
                     pathFolder = Regex.Replace(pathFolder, @"[a-zA-Z0-9\s_:.]*\.[a-zA-Z0-9]{0,4}$", "");
@@ -1248,6 +1266,46 @@ namespace hoTools.EaServices
             }
             return false;
         }
+
+        /// <summary>
+        /// Copy port from Source to target
+        /// </summary>
+        /// <param name="rep"></param>
+        [ServiceOperation("{3BB7EAF2-8F31-44E4-8565-A0B40FFFCD49}", "Copy Port(s) from Source to Target",
+            "Selected first source Class, Component, Block, or Ports, then target (no Part, Property)", isTextRequired: false)]
+        public static void CopyPorts(
+            Repository rep)
+        {
+            var port = new PortServices(rep);
+            port.CopyPortsGui();
+
+        }
+        /// <summary>
+        /// Delete port(s) from selected Class, Component, Block or Port
+        /// </summary>
+        /// <param name="rep"></param>
+        [ServiceOperation("{3BB7EAF2-8F31-44E4-8565-A0B40FFFCD49}", "Delete selected Port(s) from Class/Port",
+            "Selected Class, Component, Block, or Ports", isTextRequired: false)]
+        public static void Ports(
+            Repository rep)
+        {
+            EaService.HideEmbeddedElements(rep);
+
+        }
+        /// <summary>
+        /// Connect ports between Components
+        /// </summary>
+        /// <param name="rep"></param>
+        [ServiceOperation("{63B681BE-2650-4519-AF85-713B4A2CEE65}", "Connect ports between Components",
+            "Selected Component 1 + 2", isTextRequired: false)]
+        public static void ConnectComponentPorts(
+            Repository rep)
+        {
+            var port = new PortServices(rep);
+            port.ConnectPortsGui();
+
+        }
+        
 
         #region showAllEmbeddedElements
 
@@ -2925,12 +2983,14 @@ from %APPDATA%Local\Apps\hoTools\
             }
             eaDia.ReloadSelectedObjectsAndConnector();
         }
+
         /// <summary>
         /// Add Attribute Link to Note (Feature Link)
         /// 
         /// </summary>
         /// <param name="rep"></param>
         /// <param name="attr"></param>
+        /// <param name="connectorLinkType"></param>
         private static void AddFeatureWithNoteLink(EA.Repository rep, EA.Attribute attr, string connectorLinkType= "")
         {
 
@@ -6266,6 +6326,13 @@ from %APPDATA%Local\Apps\hoTools\
                 "KBCsv.Extensions.Data.dll",
                 "Newtonsoft.Json.dll",
                 "Utils.dll",
+                "linq2db.dll",
+                "MySql.Data.dll",
+                "Microsoft.SqlServer.Types.dll",
+                "Oracle.ManagedDataAccess.dll",
+                "Npgsql.dll",
+                "Sybase.AdoNet2.AseClient.dll",
+                "sybdrvado20.dll"
                 };
 
             hoTools.Utils.Abouts.About.AboutMessage("hoTools", "Keeps things simple", dllNames);

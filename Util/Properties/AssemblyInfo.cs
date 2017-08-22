@@ -32,11 +32,9 @@ using System.Runtime.InteropServices;
 // by using the '*' as shown below:
 //[assembly: AssemblyVersion("1.2.*")] // this will cause the registration to change after every build
 
-// If you change something you have to update the component information in Files.wxs
-// If not: you get registration error and the Addin isn't loaded in EA
-// Assembly version is used to output release information for an assembly
-[assembly: AssemblyVersion("2.0.0.1")]
+// No COM dll, therefore you can change version as you like without considering a changed COM registration 
+[assembly: AssemblyVersion("3.1.0")]
 // possibly make same as ProductVersion in Product.wxs
-[assembly: AssemblyFileVersion("3.0.3")]
+[assembly: AssemblyFileVersion("3.1.0")]
 [assembly: NeutralResourcesLanguage("en")]
 

@@ -17,8 +17,8 @@ namespace hoTools.Utils.Abouts
         /// <param name="lDllNames"></param>
         public static void AboutMessage(string description, string caption, string[] lDllNames)
         {
-            string pathRoot = Assembly.GetExecutingAssembly().Location;
-            pathRoot = Path.GetDirectoryName(pathRoot);
+
+           
 
             description = $@"{description}
 
@@ -27,6 +27,15 @@ Helmut.Ortmann@t-online.de
 (+49) 172 / 51 79 16 7
 
 ";
+            // get product version
+            Assembly assembly = Assembly.GetExecutingAssembly();
+            FileVersionInfo fileVersionInfo = FileVersionInfo.GetVersionInfo(assembly.Location);
+            description =
+                $"{description}{"Product-Version:",-50}\t: V{fileVersionInfo.ProductVersion}{Environment.NewLine}";
+
+            // Get file-version of every dll
+            string pathRoot = Assembly.GetExecutingAssembly().Location;
+            pathRoot = Path.GetDirectoryName(pathRoot);
             foreach (string dllName in lDllNames)
             {
                 

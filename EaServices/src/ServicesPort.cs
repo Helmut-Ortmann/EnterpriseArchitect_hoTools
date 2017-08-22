@@ -74,7 +74,7 @@ namespace hoTools.EAServicesPort
             var trgEl = (Element)_rep.GetContextObject();
             if (trgEl.Type != "Class" && trgEl.Type != "Component")
             {
-                MessageBox.Show(@"Target element has to be Class or Component", "");
+                MessageBox.Show($"Target Element is '{trgEl.Type}'",@"Target element for copy Port has to be Class or Component");
                 return 0;
             }
            
@@ -126,7 +126,7 @@ namespace hoTools.EAServicesPort
             
             foreach (Element trgtPort in trgEl.EmbeddedElements)
             {
-                // the target port already exists in source (Target Port PDATA3 contains ea_guid of source port the port is dependant from)
+                // the target port already exists in source (Target Port PDATA3 contains ea_guid of source port the port is dependent from)
                 if (srcPort.ElementGUID == trgtPort.MiscData[2])
                 {
                    isUpdated = true;
@@ -144,8 +144,12 @@ namespace hoTools.EAServicesPort
                 newPort.Notes = srcPort.Notes;
                 newPort.PropertyType = srcPort.PropertyType;
                 newPort.Update();
-                // Link Port to the source Port of property type
-                Util.SetElementPdata3(rep, newPort, srcPort.ElementGUID);
+                if (trgEl.Type == "Property" || trgEl.Type == "Part")
+                {
+                    // Link new Port to the source Port GUID (only if property/part which inherits from it's block)
+                    Util.SetElementPdata3(rep, newPort, srcPort.ElementGUID);
+                }
+                newPort.Refresh();
                 //newPort.Locked = true;
             }
             

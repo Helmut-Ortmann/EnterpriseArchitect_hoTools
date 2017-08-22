@@ -369,6 +369,7 @@ namespace hoTools.hoToolsGui
             EaService.DisplayOperationForSelectedElement(Repository, EaService.DisplayMode.Method);
         }
         /// <summary>
+        /// Show Feature:
         /// Add Note to the selected elements and link this Note to the description:<para/>
         /// - Element<para/>
         /// - Diagram
@@ -380,8 +381,9 @@ namespace hoTools.hoToolsGui
             EaService.AddElementsToDiagram(Repository,"Note", connectorLinkType:"Element Note");
         }
         /// <summary>
-        /// Add Note to the selected elements:<para/>
-        /// - Elements<para/>
+        /// Show Notes
+        /// Add Note to the selected items:<para/>
+        /// - Elements/Packages<para/>
         /// - Diagram (nothing selected)
         /// </summary>
         /// <param name="sender"></param>
@@ -391,8 +393,9 @@ namespace hoTools.hoToolsGui
             EaService.AddElementsToDiagram(Repository, "Note", connectorLinkType:"" );
         }
         /// <summary>
-        /// Add Constraint to the selected elements:<para/>
-        /// - Elements<para/>
+        /// Show Constraints
+        /// Add Constraint to the selected items:<para/>
+        /// - Elements/Packages<para/>
         /// - Diagram (nothing selected)
         /// </summary>
         /// <param name="sender"></param>

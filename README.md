@@ -118,6 +118,10 @@ Some features:
 
 
 # Releases
+## Release 3.1.0
+- About with product version and linq2db version
+- Port Services added
+- Fix copy Port
 ## Release 3.0.9
 - LINQ for SQL integrated (JET, SQLSVR, MySQL tested, other DBs implemented but not tested)
   Project: hoLinqToSql
