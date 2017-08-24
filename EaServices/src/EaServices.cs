@@ -6331,8 +6331,8 @@ from %APPDATA%Local\Apps\hoTools\
                 "Microsoft.SqlServer.Types.dll",
                 "Oracle.ManagedDataAccess.dll",
                 "Npgsql.dll",
-                "Sybase.AdoNet2.AseClient.dll",
-                "sybdrvado20.dll"
+                "Sybase.AdoNet2.AseClient.dll"
+                //"sybdrvado20.dll"
                 };
 
             hoTools.Utils.Abouts.About.AboutMessage("hoTools", "Keeps things simple", dllNames);

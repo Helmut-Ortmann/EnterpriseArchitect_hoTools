@@ -31,20 +31,27 @@ Helmut.Ortmann@t-online.de
             Assembly assembly = Assembly.GetExecutingAssembly();
             FileVersionInfo fileVersionInfo = FileVersionInfo.GetVersionInfo(assembly.Location);
             description =
-                $"{description}{"Product-Version:",-50}\t: V{fileVersionInfo.ProductVersion}{Environment.NewLine}";
+                    $"{description}{"Product-Version:",-32}\t: V{fileVersionInfo.ProductVersion}{Environment.NewLine}";
 
             // Get file-version of every dll
             string pathRoot = Assembly.GetExecutingAssembly().Location;
             pathRoot = Path.GetDirectoryName(pathRoot);
             foreach (string dllName in lDllNames)
             {
-                
+
                 string pathDll = Path.Combine(new[] { pathRoot, dllName });
                 try
                 {
+                    
+                    string version = FileVersionInfo.GetVersionInfo(pathDll).FileVersion;
+                    // proportional font, no easy formatting
+                    if (dllName.Length > 23 )
+                    description =
+                        $"{description}- {dllName,-50}: V{version}{Environment.NewLine}";
+                    else
                     // proportional font, no easy formatting
                     description =
-                        $"{description}- {dllName,-50}\t: V{FileVersionInfo.GetVersionInfo(pathDll).FileVersion}{Environment.NewLine}";
+                        $"{description}- {dllName,-50}\t: V{version}{Environment.NewLine}";
                 }
                 catch (Exception e)
                 {
@@ -57,4 +64,5 @@ Helmut.Ortmann@t-online.de
             MessageBox.Show(description, caption);
         }
     }
+    
 }

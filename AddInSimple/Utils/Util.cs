@@ -14,6 +14,36 @@ namespace AddInSimple.Utils
     /// </summary>
     public static class Util
     {
+        /// <summary>
+        /// Make ea xml from data table. The xml is ready for out put by 'repository.RunModelSearch("", "", "", xml);' 
+        /// If DataTable is empty it returns the empty EA xml string.
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <returns></returns>
+        public static string MakeXmlFromDataTable(DataTable dt)
+        {
+            if (dt == null) return MakeEmptyXml();
+            // Make EA xml
+            OrderedEnumerableRowCollection<DataRow> rowsDt = from row in dt.AsEnumerable()
+                orderby row.Field<string>(dt.Columns[0].Caption)
+                select row;
+            return MakeXml(dt, rowsDt);
+        }
+        /// <summary>
+        /// Returns an Empty query result
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public static string MakeEmptyXml(string name="Empty")
+        {
+
+            XElement x = new XElement("ReportViewData",
+                             new XElement("Fields",
+                                 new XElement("Field", new XAttribute("name", "Empty"))));
+            return x.ToString();
+        }
+
+        
 
         /// <summary>
         /// Make EA xml from a DataTable (for column names) and the ordered Enumeration provided by LINQ. Set the Captions in DataTable to ensure column names. 

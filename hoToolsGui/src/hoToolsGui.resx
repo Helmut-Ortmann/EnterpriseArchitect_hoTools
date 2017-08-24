@@ -2218,270 +2218,6 @@ In configuration/settings you have to disable the automatic feature (Attribut/Me
   <metadata name="_menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>434, 17</value>
   </metadata>
-  <data name="_fileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>37, 21</value>
-  </data>
-  <data name="_fileToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;File</value>
-  </data>
-  <data name="_fileToolStripMenuItem.ToolTipText" xml:space="preserve">
-    <value>If a Script is added or changed you have to use this command.</value>
-  </data>
-  <data name="_doToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>34, 21</value>
-  </data>
-  <data name="_doToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Do</value>
-  </data>
-  <data name="_doToolStripMenuItem.ToolTipText" xml:space="preserve">
-    <value>Change Author of selected Package / Element</value>
-  </data>
-  <data name="specToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>44, 21</value>
-  </data>
-  <data name="specToolStripMenuItem.Text" xml:space="preserve">
-    <value>Spec</value>
-  </data>
-  <data name="specToolStripMenuItem.ToolTipText" xml:space="preserve">
-    <value>Support Specifications
-- Auto Number Counter (switch Function on in Setting General)</value>
-  </data>
-  <data name="_versionControlToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>34, 21</value>
-  </data>
-  <data name="_versionControlToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;VC</value>
-  </data>
-  <data name="_versionControlToolStripMenuItem.ToolTipText" xml:space="preserve">
-    <value>Functions related to Version Control</value>
-  </data>
-  <data name="_movePortsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>375, 22</value>
-  </data>
-  <data name="_movePortsToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Copy ports</value>
-  </data>
-  <data name="_movePortsToolStripMenuItem.ToolTipText" xml:space="preserve">
-    <value>Copy Ports from selected sources to last selected target.
-Sources:
-- 1 or more Classes/Components
-- 1 or more Ports
-Target (last selected item): 
-- Class
-- Component
-
-You have to update embedded features to see the newly created ports.
-
-Note: Don't copy ports of Parts/Properties because they are usually inherited from Class/Component/Block</value>
-  </data>
-  <data name="_toolStripSeparator7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>372, 6</value>
-  </data>
-  <data name="_deletePortsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>375, 22</value>
-  </data>
-  <data name="_deletePortsToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Delete Ports</value>
-  </data>
-  <data name="_deletePortsToolStripMenuItem.ToolTipText" xml:space="preserve">
-    <value>Delete Ports
-- selected Ports
-- all Ports of selected Elements 
--- Class, Component</value>
-  </data>
-  <data name="_toolStripSeparator3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>372, 6</value>
-  </data>
-  <data name="_connectPortsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>375, 22</value>
-  </data>
-  <data name="_connectPortsToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Connect Ports between Components</value>
-  </data>
-  <data name="_connectPortsToolStripMenuItem.ToolTipText" xml:space="preserve">
-    <value>Connect all Ports with the same name between selected Elements or Ports:
-- Selected Elements
-- Selected Ports
-
-to each selected Class / Component / port with the same port name.
-</value>
-  </data>
-  <data name="_connectPortsInsideComponentsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>375, 22</value>
-  </data>
-  <data name="_connectPortsInsideComponentsToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Connect Ports inside Components</value>
-  </data>
-  <data name="_connectPortsInsideComponentsToolStripMenuItem.ToolTipText" xml:space="preserve">
-    <value>Connect ports with the same name inside an Element</value>
-  </data>
-  <data name="_toolStripSeparator8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>372, 6</value>
-  </data>
-  <data name="_makeConnectorsUnspecifiedDirectionToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>375, 22</value>
-  </data>
-  <data name="_makeConnectorsUnspecifiedDirectionToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Make Connectors: Unspecified direction</value>
-  </data>
-  <data name="_makeConnectorsUnspecifiedDirectionToolStripMenuItem.ToolTipText" xml:space="preserve">
-    <value>Make all directions of connections of Port / Element unspecified.
-
-Select Elements to make direction of all Port connections to unspecified.</value>
-  </data>
-  <data name="_toolStripSeparator4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>372, 6</value>
-  </data>
-  <data name="_showPortsInDiagramObjectsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>375, 22</value>
-  </data>
-  <data name="_showPortsInDiagramObjectsToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Show Ports on Diagram</value>
-  </data>
-  <data name="_showPortsInDiagramObjectsToolStripMenuItem.ToolTipText" xml:space="preserve">
-    <value>Show the ports on diagram of:
-- Selected Class / Component
-</value>
-  </data>
-  <data name="_showSendingPortsLeftRecievingPortsRightToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>375, 22</value>
-  </data>
-  <data name="_showSendingPortsLeftRecievingPortsRightToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Show receiving Ports left, sending Ports right on Diagram</value>
-  </data>
-  <data name="_showSendingPortsLeftRecievingPortsRightToolStripMenuItem.ToolTipText" xml:space="preserve">
-    <value>Show receiving Ports left, sending Ports right for selected Elements in Diagram
-
-</value>
-  </data>
-  <data name="_hidePortsInDiagramToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>375, 22</value>
-  </data>
-  <data name="_hidePortsInDiagramToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Remove Ports from Diagram</value>
-  </data>
-  <data name="_hidePortsInDiagramToolStripMenuItem.ToolTipText" xml:space="preserve">
-    <value>Remove ports from Diagram:
-- Ports from selected Diagram Elements
-- Selected ports</value>
-  </data>
-  <data name="_toolStripSeparator5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>372, 6</value>
-  </data>
-  <data name="_unhidePortsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>375, 22</value>
-  </data>
-  <data name="_unhidePortsToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Show Ports Labels</value>
-  </data>
-  <data name="_unhidePortsToolStripMenuItem.ToolTipText" xml:space="preserve">
-    <value>Show Port labels of selected:
-- Class / Component
-- Ports (embedded Elements)</value>
-  </data>
-  <data name="_hidePortsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>375, 22</value>
-  </data>
-  <data name="_hidePortsToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Hide Ports Labels</value>
-  </data>
-  <data name="_hidePortsToolStripMenuItem.ToolTipText" xml:space="preserve">
-    <value>Hide Port labels of selected:
-- Class / Component
-- Ports (embedded Elements)</value>
-  </data>
-  <data name="_toolStripSeparator11.Size" type="System.Drawing.Size, System.Drawing">
-    <value>372, 6</value>
-  </data>
-  <data name="_movePortLabelLeftToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>375, 22</value>
-  </data>
-  <data name="_movePortLabelLeftToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Move Port Labels left to a Left Position</value>
-  </data>
-  <data name="_movePortLabelLeftToolStripMenuItem.ToolTipText" xml:space="preserve">
-    <value>Select Ports: It Moves Port Labels to a Left Position from the Port.
-
-Tip:
-- Select Ports
-- Move Port Labels to Left Position
-- Fine tune position by a step/bit left or right</value>
-  </data>
-  <data name="_movePortLabelRightPositionToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>375, 22</value>
-  </data>
-  <data name="_movePortLabelRightPositionToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Move Port Labels to a Right Position </value>
-  </data>
-  <data name="_movePortLabelRightPositionToolStripMenuItem.ToolTipText" xml:space="preserve">
-    <value>Select Ports: It Moves Port Labels to a Right Position from the Port
-
-Tip:
-- Select Ports
-- Move Port Labels to Righ Position
-- Fine tune position by a step/bit left or right</value>
-  </data>
-  <data name="_toolStripSeparator12.Size" type="System.Drawing.Size, System.Drawing">
-    <value>372, 6</value>
-  </data>
-  <data name="_movePortLabelLeftToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>375, 22</value>
-  </data>
-  <data name="_movePortLabelLeftToolStripMenuItem1.Text" xml:space="preserve">
-    <value>&amp;Move Port Labels a step left</value>
-  </data>
-  <data name="_movePortLabelLeftToolStripMenuItem1.ToolTipText" xml:space="preserve">
-    <value>Ports selected: It moves the selected Ports a little left</value>
-  </data>
-  <data name="_movePortLabelRightToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>375, 22</value>
-  </data>
-  <data name="_movePortLabelRightToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Move Port Labels a step right</value>
-  </data>
-  <data name="_movePortLabelRightToolStripMenuItem.ToolTipText" xml:space="preserve">
-    <value>Ports selected: It moves the selected Ports a little right</value>
-  </data>
-  <data name="_toolStripSeparator9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>372, 6</value>
-  </data>
-  <data name="_orderDiagramItemsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>375, 22</value>
-  </data>
-  <data name="_orderDiagramItemsToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Order Diagram items</value>
-  </data>
-  <data name="_orderDiagramItemsToolStripMenuItem.ToolTipText" xml:space="preserve">
-    <value>Order selected Diagram objects alphabetically.
-</value>
-  </data>
-  <data name="_portToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>41, 21</value>
-  </data>
-  <data name="_portToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Port</value>
-  </data>
-  <data name="_portToolStripMenuItem.ToolTipText" xml:space="preserve">
-    <value>Functions related to port like:
-- Visibility
-- Move
-- Connect</value>
-  </data>
-  <data name="_helpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>44, 21</value>
-  </data>
-  <data name="_helpToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Help</value>
-  </data>
-  <data name="toolStripMenuIHome.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Segoe UI, 9.75pt</value>
-  </data>
-  <data name="toolStripMenuIHome.Size" type="System.Drawing.Size, System.Drawing">
-    <value>26, 21</value>
-  </data>
-  <data name="toolStripMenuIHome.Text" xml:space="preserve">
-    <value>?</value>
-  </data>
   <data name="_menuStrip1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
@@ -2505,6 +2241,15 @@ Tip:
   </data>
   <data name="&gt;&gt;_menuStrip1.ZOrder" xml:space="preserve">
     <value>13</value>
+  </data>
+  <data name="_fileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>37, 21</value>
+  </data>
+  <data name="_fileToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;File</value>
+  </data>
+  <data name="_fileToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>If a Script is added or changed you have to use this command.</value>
   </data>
   <data name="_settingGeneralToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>326, 22</value>
@@ -2637,6 +2382,15 @@ You may also restart EA (more secure).</value>
   </data>
   <data name="resetFactorySettingsToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>Resets the Settings to the dafault hoTools settings </value>
+  </data>
+  <data name="_doToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>34, 21</value>
+  </data>
+  <data name="_doToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Do</value>
+  </data>
+  <data name="_doToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Change Author of selected Package / Element</value>
   </data>
   <data name="exportExcelToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>277, 22</value>
@@ -2904,6 +2658,16 @@ Note:
 - EA don't update the Hyperlinks Name if the reference changes its name.
 </value>
   </data>
+  <data name="specToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>44, 21</value>
+  </data>
+  <data name="specToolStripMenuItem.Text" xml:space="preserve">
+    <value>Spec</value>
+  </data>
+  <data name="specToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Support Specifications
+- Auto Number Counter (switch Function on in Setting General)</value>
+  </data>
   <data name="applyAllAutoCounterToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>222, 22</value>
   </data>
@@ -2945,6 +2709,15 @@ See also: Apply Auto Counter New</value>
   </data>
   <data name="toolStripSeparator14.Size" type="System.Drawing.Size, System.Drawing">
     <value>219, 6</value>
+  </data>
+  <data name="_versionControlToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>34, 21</value>
+  </data>
+  <data name="_versionControlToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;VC</value>
+  </data>
+  <data name="_versionControlToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Functions related to Version Control</value>
   </data>
   <data name="_changeXmlFileToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>291, 22</value>
@@ -3028,6 +2801,224 @@ Select a package to proceed all recursive package.</value>
   <data name="_setSvnModuleTaggedValuesrecursiveToolStripMenuItem.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
+  <data name="_portToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>41, 21</value>
+  </data>
+  <data name="_portToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Port</value>
+  </data>
+  <data name="_portToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Functions related to port like:
+- Visibility
+- Move
+- Connect</value>
+  </data>
+  <data name="_movePortsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>375, 22</value>
+  </data>
+  <data name="_movePortsToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Copy ports</value>
+  </data>
+  <data name="_movePortsToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Copy Ports from selected sources to last selected target.
+Sources:
+- 1 or more Classes/Components
+- 1 or more Ports
+Target (last selected item): 
+- Class
+- Component
+
+You have to update embedded features to see the newly created ports.
+
+Note: Don't copy ports of Parts/Properties because they are usually inherited from Class/Component/Block</value>
+  </data>
+  <data name="_toolStripSeparator7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>372, 6</value>
+  </data>
+  <data name="_deletePortsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>375, 22</value>
+  </data>
+  <data name="_deletePortsToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Hide Ports, Embedded Elements</value>
+  </data>
+  <data name="_deletePortsToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Hide Ports, Embedded Elements
+- selected Ports, Class, Component, Block
+- all Ports of selected Elements 
+</value>
+  </data>
+  <data name="_toolStripSeparator3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>372, 6</value>
+  </data>
+  <data name="_connectPortsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>375, 22</value>
+  </data>
+  <data name="_connectPortsToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Connect Ports between Components</value>
+  </data>
+  <data name="_connectPortsToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Connect all Ports with the same name between selected Elements or Ports:
+- Selected Elements
+- Selected Ports
+
+to each selected Class / Component / port with the same port name.
+</value>
+  </data>
+  <data name="_connectPortsInsideComponentsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>375, 22</value>
+  </data>
+  <data name="_connectPortsInsideComponentsToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Connect Ports inside Components</value>
+  </data>
+  <data name="_connectPortsInsideComponentsToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Connect ports with the same name inside an Element</value>
+  </data>
+  <data name="_toolStripSeparator8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>372, 6</value>
+  </data>
+  <data name="_makeConnectorsUnspecifiedDirectionToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>375, 22</value>
+  </data>
+  <data name="_makeConnectorsUnspecifiedDirectionToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Make Connectors: Unspecified direction</value>
+  </data>
+  <data name="_makeConnectorsUnspecifiedDirectionToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Make all directions of connections of Port / Element unspecified.
+
+Select Elements to make direction of all Port connections to unspecified.</value>
+  </data>
+  <data name="_toolStripSeparator4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>372, 6</value>
+  </data>
+  <data name="_showPortsInDiagramObjectsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>375, 22</value>
+  </data>
+  <data name="_showPortsInDiagramObjectsToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Show Ports on Diagram</value>
+  </data>
+  <data name="_showPortsInDiagramObjectsToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Show the ports on diagram of:
+- Selected Class / Component
+</value>
+  </data>
+  <data name="_showSendingPortsLeftRecievingPortsRightToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>375, 22</value>
+  </data>
+  <data name="_showSendingPortsLeftRecievingPortsRightToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Show receiving Ports left, sending Ports right on Diagram</value>
+  </data>
+  <data name="_showSendingPortsLeftRecievingPortsRightToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Show receiving Ports left, sending Ports right for selected Elements in Diagram
+
+</value>
+  </data>
+  <data name="_hidePortsInDiagramToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>375, 22</value>
+  </data>
+  <data name="_hidePortsInDiagramToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Remove Ports from Diagram</value>
+  </data>
+  <data name="_hidePortsInDiagramToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Remove ports from Diagram:
+- Ports from selected Diagram Elements
+- Selected ports</value>
+  </data>
+  <data name="_toolStripSeparator5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>372, 6</value>
+  </data>
+  <data name="_unhidePortsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>375, 22</value>
+  </data>
+  <data name="_unhidePortsToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Show Ports Labels</value>
+  </data>
+  <data name="_unhidePortsToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Show Port labels of selected:
+- Class / Component
+- Ports (embedded Elements)</value>
+  </data>
+  <data name="_hidePortsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>375, 22</value>
+  </data>
+  <data name="_hidePortsToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Hide Ports Labels</value>
+  </data>
+  <data name="_hidePortsToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Hide Port labels of selected:
+- Class / Component
+- Ports (embedded Elements)</value>
+  </data>
+  <data name="_toolStripSeparator11.Size" type="System.Drawing.Size, System.Drawing">
+    <value>372, 6</value>
+  </data>
+  <data name="_movePortLabelLeftToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>375, 22</value>
+  </data>
+  <data name="_movePortLabelLeftToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Move Port Labels left to a Left Position</value>
+  </data>
+  <data name="_movePortLabelLeftToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Select Ports: It Moves Port Labels to a Left Position from the Port.
+
+Tip:
+- Select Ports
+- Move Port Labels to Left Position
+- Fine tune position by a step/bit left or right</value>
+  </data>
+  <data name="_movePortLabelRightPositionToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>375, 22</value>
+  </data>
+  <data name="_movePortLabelRightPositionToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Move Port Labels to a Right Position </value>
+  </data>
+  <data name="_movePortLabelRightPositionToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Select Ports: It Moves Port Labels to a Right Position from the Port
+
+Tip:
+- Select Ports
+- Move Port Labels to Righ Position
+- Fine tune position by a step/bit left or right</value>
+  </data>
+  <data name="_toolStripSeparator12.Size" type="System.Drawing.Size, System.Drawing">
+    <value>372, 6</value>
+  </data>
+  <data name="_movePortLabelLeftToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>375, 22</value>
+  </data>
+  <data name="_movePortLabelLeftToolStripMenuItem1.Text" xml:space="preserve">
+    <value>&amp;Move Port Labels a step left</value>
+  </data>
+  <data name="_movePortLabelLeftToolStripMenuItem1.ToolTipText" xml:space="preserve">
+    <value>Ports selected: It moves the selected Ports a little left</value>
+  </data>
+  <data name="_movePortLabelRightToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>375, 22</value>
+  </data>
+  <data name="_movePortLabelRightToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Move Port Labels a step right</value>
+  </data>
+  <data name="_movePortLabelRightToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Ports selected: It moves the selected Ports a little right</value>
+  </data>
+  <data name="_toolStripSeparator9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>372, 6</value>
+  </data>
+  <data name="_orderDiagramItemsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>375, 22</value>
+  </data>
+  <data name="_orderDiagramItemsToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Order Diagram items</value>
+  </data>
+  <data name="_orderDiagramItemsToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Order selected Diagram objects alphabetically.
+</value>
+  </data>
+  <data name="_helpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>44, 21</value>
+  </data>
+  <data name="_helpToolStripMenuItem.Text" xml:space="preserve">
+    <value>&amp;Help</value>
+  </data>
   <data name="_getLastSqlErrorToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>171, 22</value>
   </data>
@@ -3099,6 +3090,15 @@ Select a package to proceed all recursive package.</value>
   </data>
   <data name="_aboutToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>Information about hoTools</value>
+  </data>
+  <data name="toolStripMenuIHome.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Segoe UI, 9.75pt</value>
+  </data>
+  <data name="toolStripMenuIHome.Size" type="System.Drawing.Size, System.Drawing">
+    <value>26, 21</value>
+  </data>
+  <data name="toolStripMenuIHome.Text" xml:space="preserve">
+    <value>?</value>
   </data>
   <data name="_panelButtons.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>

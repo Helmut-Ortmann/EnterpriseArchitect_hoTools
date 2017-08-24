@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using System.Xml.Linq;
 using AddInSimple.EABasic;
 using AddInSimple.Utils;
 using hoLinqToSql.LinqUtils;
@@ -75,6 +77,8 @@ namespace AddInSimple
         const string MenuShowConnectionString = "DemoConnectionString";
         const string MenuShowRunLinq2Db = "DemoRunLinq2dbQuery";
         const string MenuShowRunLinq2DbAdvanced = "DemoRunLinq2dbQueryAdvanced";
+        const string MenuShowRunLinq2DbToHtml = "DemoRunLinq2dbQueryToHtml";
+        const string MenuShowRunLinqXml = "DemoRunLinqXmlAllOwnQueries";
 
         // remember if we have to say hello or goodbye
         private bool _shouldWeSayHello = true;
@@ -85,7 +89,10 @@ namespace AddInSimple
         public AddInSimpleClass()
         {
             menuHeader = MenuName;
-            menuOptions = new[] { MenuHello, MenuGoodbye, MenuOpenProperties, MenuRunDemoSearch, MenuRunDemoPackageContent, MenuRunDemoSqlToDataTable, MenuShowConnectionString, MenuShowRunLinq2Db, MenuShowRunLinq2DbAdvanced };
+            menuOptions = new[] { MenuHello, MenuGoodbye, MenuOpenProperties, MenuRunDemoSearch,
+                MenuRunDemoPackageContent, MenuRunDemoSqlToDataTable, MenuShowConnectionString, MenuShowRunLinq2Db, MenuShowRunLinq2DbAdvanced,
+                MenuShowRunLinq2DbToHtml,
+                MenuShowRunLinqXml};
         }
         // ReSharper disable once RedundantOverriddenMember
         /// <summary>
@@ -157,6 +164,16 @@ namespace AddInSimple
 
                     // Test Run Linq2db Query
                     case MenuShowRunLinq2DbAdvanced:
+                        isEnabled = true;
+                        break;
+
+                    // Test Run Linq2db Query
+                    case MenuShowRunLinq2DbToHtml:
+                        isEnabled = true;
+                        break;
+
+                    // Test Run Linq from XML for own EA Queries
+                    case MenuShowRunLinqXml:
                         isEnabled = true;
                         break;
 
@@ -309,20 +326,96 @@ State:
 
                     // Run LINQ query to dataTable
                     dt = LinqUtil.RunLinq2DbAdvanced(provider, connectionString);
+
                     // Make EA xml
-                    OrderedEnumerableRowCollection<DataRow> rowsAdvanced = from row in dt.AsEnumerable()
-                        orderby row.Field<string>(dt.Columns[0].Caption)
-                        select row;
-                    xml = Util.MakeXml(dt, rowsAdvanced);
+                    xml = Util.MakeXmlFromDataTable(dt);
+                    // Output to EA
+                    repository.RunModelSearch("", "", "", xml);
+                    break;
+
+                // run LINQPad query to HTML (uses lprun.exe)
+                case MenuShowRunLinq2DbToHtml:
+                    break;
+
+
+                // run LINQ XML query for own EA queries which are stored in *.xml
+                case MenuShowRunLinqXml:
+                    // Make DataTable with LINQ Search/Query
+                    dt = EaSearches();
+
+                    // Make 
+                    xml = Util.MakeXmlFromDataTable(dt);
 
                     // Output to EA
                     repository.RunModelSearch("", "", "", xml);
                     break;
 
+                    
+
 
 
 
             }
+        }
+        /// <summary>
+        /// Parse all local defined Filter and Searches from %APPDATA%Sparx Systems\EA\Search Data\EA_Search.xml
+        /// </summary>
+        /// <returns></returns>
+        private DataTable EaSearches()
+        {
+            XDocument xelement;
+            string filePath = $@"c:\Users\{Environment.UserName}\AppData\Roaming\Sparx Systems\EA\Search Data\EA_Search.xml";
+            try
+            {
+                string t = System.IO.File.ReadAllText(filePath);
+                xelement = XDocument.Parse(t);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($"Tried to xml parse '{filePath}'\r\n{e}","Cant read EA_Search.xml");
+                return null;
+            }
+
+            // SQL Searches
+            var sql = from el in xelement.Descendants("Search")
+                where el.Attribute("CustomSearch").Value == "1"
+                where el.Descendants("RootTable").First().Attribute("Filter") != null
+                orderby (string)el.Attribute("Name")
+                //Type="0" LnksToObj="0" CustomSearch="1" AddinAndMethodName=""
+                select new
+                {
+                    QueryName = el.Attribute("Name").Value,
+                    Type = "SQL",
+                    Sql = el.Descendants("RootTable").First().Attribute("Filter").Value.Substring(0, 100)
+                };
+            // EA Filter
+            var eaFilter = from el in xelement.Descendants("Search")
+                where el.Attribute("CustomSearch").Value == "0"
+                where el.Attribute("AddinAndMethodName").Value == ""
+                orderby (string)el.Attribute("Name")
+                //Type="0" LnksToObj="0" CustomSearch="1" AddinAndMethodName=""
+                select new
+                {
+                    QueryName = el.Attribute("Name").Value,
+                    Type = "Filter",
+                    Sql = ""
+                };
+            // All Add-In Searches
+            var addIn = from el in xelement.Descendants("Search")
+                where el.Attribute("CustomSearch").Value == "0"
+                where el.Attribute("AddinAndMethodName").Value != ""
+                orderby (string)el.Attribute("Name")
+                //Type="0" LnksToObj="0" CustomSearch="1" AddinAndMethodName=""
+                select new
+                {
+                    QueryName = el.Attribute("Name").Value,
+                    Type = "Add-In",
+                    Sql = el.Attribute("AddinAndMethodName").Value
+                };
+            // Concatenate queries
+            var sum = addIn.Concat(sql).Concat(eaFilter).OrderBy(n => n.QueryName);
+            return sum.ToDataTable();
+
         }
 
         /// <summary>
