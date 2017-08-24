@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
@@ -334,7 +335,57 @@ State:
                     break;
 
                 // run LINQPad query to HTML (uses lprun.exe)
+                // - lprun installed at standard location (c:\Program Files (x86)\LINQPad5\lprun.exe)
+                // - output to 'c:\temp\EaBasicQuery.html'
+                // - EA standard installation (used for EAExample database)
                 case MenuShowRunLinq2DbToHtml:
+                    // Run query with lprun.exe 
+                    string parametersToPassToQuery = @"""Test query EaBasicQuery.linq""";
+                    string linqQueryFileName = "EaBasicQuery.linq";
+                    string linqQueryFilePath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\" + linqQueryFileName;
+
+                    string linqLPRun = @"c:\Program Files (x86)\LINQPad5\lprun.exe";
+                    string targetHtml = @"c:\temp\EaBasicQuery.html";
+                    // Command for lprun.exe (see http://www.linqpad.net/lprun.aspx)
+                    // -format=html
+                    // -format=csv
+                    // -format=text
+                    string arg = $@"-lang=program -format=html {linqQueryFilePath}  parametersToPassToQuery ";
+
+                    ProcessStartInfo startInfo = new ProcessStartInfo();
+                    startInfo.CreateNoWindow = false;
+                    startInfo.UseShellExecute = false;
+                    startInfo.FileName = linqLPRun;
+                    startInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                    startInfo.Arguments = arg;
+                    startInfo.RedirectStandardOutput = true;
+                    startInfo.RedirectStandardError = true;
+
+                    try
+                    {
+                        using (Process exeProcess = Process.Start(startInfo))
+                        {
+                            //* Read the output (or the error)
+                            string output = exeProcess.StandardOutput.ReadToEnd();
+                            string err = exeProcess.StandardError.ReadToEnd();
+                            exeProcess.WaitForExit();
+                            // Retrieve the app's exit code
+                            int exitCode = exeProcess.ExitCode;
+                            File.WriteAllText(targetHtml, output);
+
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        MessageBox.Show($"Query:{linqQueryFilePath}\r\nLPRun.exe{linqLPRun}\r\nTarget:{targetHtml}{e}", " Error running LINQ query");
+                    }
+
+                    System.Diagnostics.Process.Start(targetHtml);
+
+
+
+
+
                     break;
 
 

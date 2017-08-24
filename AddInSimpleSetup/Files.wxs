@@ -39,6 +39,12 @@
       <Component Id="hoLinqToSql" Guid="{615EA76B-EE2B-44FD-AB59-770355DC9AD9}">
         <File Id="hoLinqToSql.dll" KeyPath="yes" Name="hoLinqToSql.dll" Source="$(var.hoLinqToSql.TargetPath)" />
       </Component>
+      
+      <!-- LINQPad query example     -->
+      <Component Id="EaBasicQuery.linq" Guid="{E84836DC-52EF-47FB-8FEA-41DFDEB145DD}">
+        <File Id="EaBasicQuery.linq" KeyPath="yes" Name="EaBasicQuery.linq" Source="$(var.AddInSimple.TargetPath)" />
+      </Component>
+      
 
       <!-- linq2db                   -->
       <!-- Supported databases Access, MySQL, SqlServer, Oracle, Sybase, Postgres (tested: Access, MySQL, SqlServer) -->
