@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using HtmlAgilityPack;
 
 namespace hoLinqToSql.LinqUtils
 {
@@ -137,6 +139,69 @@ namespace hoLinqToSql.LinqUtils
 
             }
             
+        }
+
+
+        /// <summary>
+        /// ReadHtml table from specified file
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <param name="tableName"></param>
+        /// <returns></returns>
+        public DataTable ReadHtml(string fileName, string tableName )
+        {
+            HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+            if (File.Exists(fileName))
+            {
+                MessageBox.Show($@"File: '{fileName}'","HTML File doesn't exists, Break!!!");
+
+            }
+            doc.LoadHtml(fileName);
+
+            if (String.IsNullOrWhiteSpace(tableName)) tableName = "t1";
+
+            DataTable dt = new DataTable();
+            var nodeFirstTable = doc.DocumentNode.SelectNodes($@"/table[@id='{tableName}']");
+            if (nodeFirstTable.Any())
+            {
+                MessageBox.Show($@"File: '{fileName}'\r\nTableName: '{tableName}'", "Can't find HTML table");
+                return dt;
+            }
+            //var headers = from table1 in doc.DocumentNode.SelectNodes("//table[@id='t1']").Cast<HtmlNode>()
+            var headers = from table1 in nodeFirstTable.Cast<HtmlNode>()
+
+                from row in table1.SelectNodes("tr").Cast<HtmlNode>().Skip(1) // skip heading
+                from cell in row.SelectNodes("th|td").Cast<HtmlNode>()//"th|td"
+                where cell.Name == "th"
+                select new { Name = HtmlEntity.DeEntitize(cell.InnerText) };
+            foreach (var header in headers)
+            {
+                dt.Columns.Add(header.Name);
+            }
+
+            //-----------------------------------------------
+            var node = nodeFirstTable.Elements("tr");
+            // Skip LINQPad Heading and Column heading
+            var rows = nodeFirstTable.Elements("tr").Skip(2).Select(tr => tr
+                .Elements(@"td")
+                .Select(td => HtmlEntity.DeEntitize(td.InnerText.Trim()))
+                .ToArray());
+            //Fill DataTable
+            foreach (var row in rows)
+            {
+                dt.Rows.Add(row);
+            }
+            return dt;
+
+        }
+        /// <summary>
+        /// Read HTML from LINQPad into DataTable. It uses the stored file from generating via LINQPad
+        /// </summary>
+        /// <param name="tableName"></param>
+        /// <returns></returns>
+        public DataTable ReadHtml(string tableName = "t1")
+        {
+            return ReadHtml(_targetFile, tableName);
         }
         /// <summary>
         /// Delete target

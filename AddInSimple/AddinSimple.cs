@@ -346,10 +346,19 @@ State:
                     string linqQueryFilePath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\" + linqQueryFileName;
 
                     LinqPad linqPad = new LinqPad();
+                    // Output as html with read back table and out put to EA Search Window
                     linqPad.Run(linqQueryFilePath, @"html", parametersToPassToQuery);
+                    DataTable dtHtml = linqPad.ReadHtml();
+
+                    // Make EA xml
+                    xml = Util.MakeXmlFromDataTable(dtHtml);
+                    // Output to EA
+                    repository.RunModelSearch("", "", "", xml);
                     linqPad.Show();
+                    // csv
                     linqPad.Run(linqQueryFilePath, @"csv", parametersToPassToQuery);
                     linqPad.Show();
+                    // text
                     linqPad.Run(linqQueryFilePath, @"text", parametersToPassToQuery);
                     linqPad.Show();
                     break;

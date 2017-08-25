@@ -6331,7 +6331,8 @@ from %APPDATA%Local\Apps\hoTools\
                 "Microsoft.SqlServer.Types.dll",
                 "Oracle.ManagedDataAccess.dll",
                 "Npgsql.dll",
-                "Sybase.AdoNet2.AseClient.dll"
+                "Sybase.AdoNet2.AseClient.dll",
+                "HtmlAgilityPack.dll"
                 //"sybdrvado20.dll"
                 };
 
