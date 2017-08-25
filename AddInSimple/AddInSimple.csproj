@@ -91,6 +91,7 @@
     <None Include="EaBasicQuery.linq">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="EaBasicQuery.linq.vsspell" />
     <None Include="hoKeyPair.snk" />
     <None Include="LinqToDB.Templates\DataAnnotations.ttinclude" />
     <None Include="LinqToDB.Templates\DataModel.ttinclude" />

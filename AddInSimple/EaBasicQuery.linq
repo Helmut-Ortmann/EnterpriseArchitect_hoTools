@@ -16,65 +16,73 @@
   </Connection>
 </Query>
 
+
+//---------------------------------------------------------
+// LINQ Query to send to LINQPad via lprun.exe
+//---------------------------------------------------------
+// See: http://www.linqpad.net/lprun.aspx
+//
+// You can pass arguments by args[]. This is useful to define the context with a GUID. The arguments are split by space.
+// The XML at the beginng specifies the connection and more LINQPad settings for this query.
+//
+// The easyist way is to create and edit it by LINQ. 
 void Main(string[] args)
 {
 string showString = "";
 #if   CMD
 if (args != null && args.Length > 0)
-showString = $"Batch: '{args[0]}";
+    showString = $"Batch: '{args[0]}";
 
 #else
 
-showString = "Dialog:";
+    showString = "Dialog:";
 
 #endif
 
 
-// Total amount of Object_Types
-var count = t_object.Count();
+    // Total amount of Object_Types
+    var count = t_object.Count();
 
-// All object_types summary:
-// - Type
-// - Count
-// - Percentage
-// - Total count of object_types
-var q =
-(from c in t_object.AsEnumerable()
-group c by c.Object_Type into g
-orderby g.Key
+    // All object_types summary:
+    // - Type
+    // - Count
+    // - Percentage
+    // - Total count of object_types
+    var q =
+          (from c in t_object.AsEnumerable()
+          group c by c.Object_Type into g
+          orderby g.Key
 
-select new
-{
-Type = $"{g.Key}",
-Prozent = $"{ (float)g.Count()*100/count:00.00}%",
-Count = g.Count(),
-Total = count
-});
+          select new
+          {
+                Type = $"{g.Key}",
+                Prozent = $"{ (float)g.Count()*100/count:00.00}%",
+                Count = g.Count(),
+                Total = count
+          });
 
 
-// Requirement summary:
-// - Type
-// - Count
-// - Percentage
-// - Total count of requirements
-var countReq = t_object.Where(e => e.Object_Type == "Requirement").Count();
-var q1 =
-(from c in t_object.AsEnumerable()
-where c.Object_Type == "Requirement"
-group c by c.Stereotype into g
-orderby g.Key
+          // Requirement summary:
+          // - Type
+          // - Count
+          // - Percentage
+          // - Total count of requirements
+          var countReq = t_object.Where(e => e.Object_Type == "Requirement").Count();
+          var q1 =
+                  (from c in t_object.AsEnumerable()
+                  where c.Object_Type == "Requirement"
+                  group c by c.Stereotype into g
+                  orderby g.Key
 
-select new
-{
-Type = (g.Key == null) ? "Simple" : $"<<{g.Key}>>",
-  Prozent = $"{ (float)g.Count() * 100 / countReq:00.00}%",
-  Count = g.Count(),
-  Total = countReq
-  });
-  q1.Dump($"{showString} Requirement types");
-  // Total requirements
-  var sum = q.Concat(q1);
-  sum.Dump($"{showString}: Object types");
-  }
-
-  // Define other methods and classes here
+                  select new
+                  {
+                      Type = (g.Key == null) ? "Simple" : $"<<{g.Key}>>",
+                      Prozent = $"{ (float)g.Count() * 100 / countReq:00.00}%",
+                      Count = g.Count(),
+                      Total = countReq
+                  });
+          q1.Dump($"{showString} Requirement types");
+          // Total requirements
+          var sum = q.Concat(q1);
+          sum.Dump($"{showString}: Object types");
+}

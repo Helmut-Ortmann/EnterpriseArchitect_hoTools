@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.16
+VisualStudioVersion = 15.0.26730.10
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "hoToolsRoot", "hoToolsRoot\hoToolsRoot.csproj", "{6D5DEEEF-0897-4494-9857-5BEE2BF0D0AF}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -292,5 +292,8 @@ Global
 		{A9B0B204-36DD-466D-B5C1-A9FD55ED7A4B} = {71383584-777C-46C1-84EF-C4DA7F692189}
 		{F1F0E6B1-5463-4DBB-9120-282C921427E0} = {2015668A-5B2E-43C9-9E24-F93D54600512}
 		{940FF7B9-412F-4399-981C-9E841BEF6F6C} = {71383584-777C-46C1-84EF-C4DA7F692189}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8700ECB2-AE48-4126-85ED-61595811EAB2}
 	EndGlobalSection
 EndGlobal

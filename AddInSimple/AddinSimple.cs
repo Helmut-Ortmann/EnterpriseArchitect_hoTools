@@ -78,7 +78,7 @@ namespace AddInSimple
         const string MenuShowConnectionString = "DemoConnectionString";
         const string MenuShowRunLinq2Db = "DemoRunLinq2dbQuery";
         const string MenuShowRunLinq2DbAdvanced = "DemoRunLinq2dbQueryAdvanced";
-        const string MenuShowRunLinq2DbToHtml = "DemoRunLinq2dbQueryToHtml";
+        const string MenuShowRunLinqPadToHtml = "DemoRunLinqPadQueryToHtmlCsvText";
         const string MenuShowRunLinqXml = "DemoRunLinqXmlAllOwnQueries";
 
         // remember if we have to say hello or goodbye
@@ -92,7 +92,7 @@ namespace AddInSimple
             menuHeader = MenuName;
             menuOptions = new[] { MenuHello, MenuGoodbye, MenuOpenProperties, MenuRunDemoSearch,
                 MenuRunDemoPackageContent, MenuRunDemoSqlToDataTable, MenuShowConnectionString, MenuShowRunLinq2Db, MenuShowRunLinq2DbAdvanced,
-                MenuShowRunLinq2DbToHtml,
+                MenuShowRunLinqPadToHtml,
                 MenuShowRunLinqXml};
         }
         // ReSharper disable once RedundantOverriddenMember
@@ -169,7 +169,7 @@ namespace AddInSimple
                         break;
 
                     // Test Run Linq2db Query
-                    case MenuShowRunLinq2DbToHtml:
+                    case MenuShowRunLinqPadToHtml:
                         isEnabled = true;
                         break;
 
@@ -334,59 +334,27 @@ State:
                     repository.RunModelSearch("", "", "", xml);
                     break;
 
-                // run LINQPad query to HTML (uses lprun.exe)
+                // run LINQPad query to HTML,csv, text (uses lprun.exe)
+                // - !!!!You need a LINQPad license to run!!!!!!
                 // - lprun installed at standard location (c:\Program Files (x86)\LINQPad5\lprun.exe)
                 // - output to 'c:\temp\EaBasicQuery.html'
                 // - EA standard installation (used for EAExample database)
-                case MenuShowRunLinq2DbToHtml:
+                case MenuShowRunLinqPadToHtml:
                     // Run query with lprun.exe 
                     string parametersToPassToQuery = @"""Test query EaBasicQuery.linq""";
                     string linqQueryFileName = "EaBasicQuery.linq";
                     string linqQueryFilePath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\" + linqQueryFileName;
 
-                    string linqLPRun = @"c:\Program Files (x86)\LINQPad5\lprun.exe";
-                    string targetHtml = @"c:\temp\EaBasicQuery.html";
-                    // Command for lprun.exe (see http://www.linqpad.net/lprun.aspx)
-                    // -format=html
-                    // -format=csv
-                    // -format=text
-                    string arg = $@"-lang=program -format=html {linqQueryFilePath}  parametersToPassToQuery ";
-
-                    ProcessStartInfo startInfo = new ProcessStartInfo();
-                    startInfo.CreateNoWindow = false;
-                    startInfo.UseShellExecute = false;
-                    startInfo.FileName = linqLPRun;
-                    startInfo.WindowStyle = ProcessWindowStyle.Hidden;
-                    startInfo.Arguments = arg;
-                    startInfo.RedirectStandardOutput = true;
-                    startInfo.RedirectStandardError = true;
-
-                    try
-                    {
-                        using (Process exeProcess = Process.Start(startInfo))
-                        {
-                            //* Read the output (or the error)
-                            string output = exeProcess.StandardOutput.ReadToEnd();
-                            string err = exeProcess.StandardError.ReadToEnd();
-                            exeProcess.WaitForExit();
-                            // Retrieve the app's exit code
-                            int exitCode = exeProcess.ExitCode;
-                            File.WriteAllText(targetHtml, output);
-
-                        }
-                    }
-                    catch (Exception e)
-                    {
-                        MessageBox.Show($"Query:{linqQueryFilePath}\r\nLPRun.exe{linqLPRun}\r\nTarget:{targetHtml}{e}", " Error running LINQ query");
-                    }
-
-                    System.Diagnostics.Process.Start(targetHtml);
-
-
-
-
-
+                    LinqPad linqPad = new LinqPad();
+                    linqPad.Run(linqQueryFilePath, @"html", parametersToPassToQuery);
+                    linqPad.Show();
+                    linqPad.Run(linqQueryFilePath, @"csv", parametersToPassToQuery);
+                    linqPad.Show();
+                    linqPad.Run(linqQueryFilePath, @"text", parametersToPassToQuery);
+                    linqPad.Show();
                     break;
+
+                    
 
 
                 // run LINQ XML query for own EA queries which are stored in *.xml
