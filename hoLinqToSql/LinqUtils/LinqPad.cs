@@ -151,18 +151,28 @@ namespace hoLinqToSql.LinqUtils
         public DataTable ReadHtml(string fileName, string tableName )
         {
             HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
-            if (File.Exists(fileName))
+            if (! File.Exists(fileName))
             {
                 MessageBox.Show($@"File: '{fileName}'","HTML File doesn't exists, Break!!!");
+                return null;
 
             }
-            doc.LoadHtml(fileName);
+            try
+            {
+                doc.LoadHtml(File.ReadAllText(fileName));
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($@"File: '{fileName}'\r\n{e}", "Error scan HTML File, Break!!!");
+                return null;
+
+            }
 
             if (String.IsNullOrWhiteSpace(tableName)) tableName = "t1";
 
             DataTable dt = new DataTable();
-            var nodeFirstTable = doc.DocumentNode.SelectNodes($@"/table[@id='{tableName}']");
-            if (nodeFirstTable.Any())
+            var nodeFirstTable = doc.DocumentNode.SelectNodes($@"//table[@id='{tableName}']");
+            if (nodeFirstTable == null || ! nodeFirstTable.Any())
             {
                 MessageBox.Show($@"File: '{fileName}'\r\nTableName: '{tableName}'", "Can't find HTML table");
                 return dt;

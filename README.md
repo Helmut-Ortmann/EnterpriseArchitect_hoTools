@@ -122,8 +122,10 @@ Some features:
 - About with product version and linq2db version
 - Port Services added
 - Fix copy Port
-- Improve LINQ to SQL and LINQPad support
-- AddInSimple: Example run LINQPad and output html, csv, text
+- Improved LINQ to SQL and LINQPad support
+-- Run Query to html, csv, text
+-- Output query results in EA Model Search
+- AddInSimple: Example run LINQPad and output html, csv, text and output results to EA Search Window
 ## Release 3.0.9
 - LINQ for SQL integrated (JET, SQLSVR, MySQL tested, other DBs implemented but not tested)
   Project: hoLinqToSql

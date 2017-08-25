@@ -26,7 +26,7 @@
   !!!Warning: If you update AssemblyVersion you must update the registration info!!!!!!!!
   // Change AssemblyFileVersion accordingly
   -->
-  <?define ProductVersion="1.0.3" ?> 
+  <?define ProductVersion="1.0.4" ?> 
   <?define UpgradeCode="{CA42D098-1AA3-4357-A7F6-CAB9A995BC54}" ?>
   <?define Manufacturer="hoModeler.de" ?>
   <?define ProductName="AddInSimple" ?>

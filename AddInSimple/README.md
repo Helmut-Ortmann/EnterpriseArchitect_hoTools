@@ -6,11 +6,16 @@ Simple AddIn to see basic EA AddIn features:
 - AddIn ShapeScript
 - LINQ to SQL
 - Run LINQPad Query from AddIn (output as html)
+- Output LINQPad results in EA Model Search Window
 - Deployment 
 
 Details see in: https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/AddinSimple
 
+# Release
 
+- 1.0.4 LINQ to SQL
+  - LINQ to SQL
+  - LINQPad
  
 
 # Feedback
@@ -18,6 +23,5 @@ Details see in: https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wi
 I appreciate your feedback!!
 
 Helmut.Ortmann@t-online.de
-
 Helmut.Ortmann@hoModeler.de
 
