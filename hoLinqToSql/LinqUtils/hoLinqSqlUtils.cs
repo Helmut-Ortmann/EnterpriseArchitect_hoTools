@@ -254,7 +254,7 @@ namespace hoLinqToSql.LinqUtils
 
 
                 default:
-                    MessageBox.Show($@"Database: {rep.RepositoryType()}\r\nConnectionString:{connectionString} ","DataBase not supported for hoTools, only Access, SqlServer and MySQL");
+                    MessageBox.Show($"Database: {rep.RepositoryType()}\r\nConnectionString:{connectionString} ","DataBase not supported for hoTools, only Access, SqlServer and MySQL");
                     break;
 
             }

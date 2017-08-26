@@ -106,12 +106,12 @@ namespace hoLinqToSql.LinqUtils
                     Process.Start(_targetFile);
                 else
                 {
-                    MessageBox.Show($@"File:\r\n{_targetFile}", "File to show doesn't exists");
+                    MessageBox.Show($"File:\r\n{_targetFile}", "File to show doesn't exists");
                 }
             }
             catch (Exception e)
             {
-                MessageBox.Show($@"File:\r\n{_targetFile}\r\n{e}", "Error showing file");
+                MessageBox.Show($"File:\r\n{_targetFile}\r\n{e}", "Error showing file");
             }
         }
         /// <summary>
@@ -133,7 +133,7 @@ namespace hoLinqToSql.LinqUtils
                 case @"text":
                     return "text";
                 default:
-                    MessageBox.Show($@"Possible LPRun format values: 'htm','html', 'csv', 'txt', 'txt'\r\nCurrent value='{format}'",
+                    MessageBox.Show($"Possible LPRun format values: 'htm','html', 'csv', 'txt', 'txt'\r\nCurrent value='{format}'",
                         "Can't understand format value");
                     return "";
 
@@ -153,7 +153,7 @@ namespace hoLinqToSql.LinqUtils
             HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
             if (! File.Exists(fileName))
             {
-                MessageBox.Show($@"File: '{fileName}'","HTML File doesn't exists, Break!!!");
+                MessageBox.Show($"File: '{fileName}'","HTML File doesn't exists, Break!!!");
                 return null;
 
             }
@@ -163,7 +163,7 @@ namespace hoLinqToSql.LinqUtils
             }
             catch (Exception e)
             {
-                MessageBox.Show($@"File: '{fileName}'\r\n{e}", "Error scan HTML File, Break!!!");
+                MessageBox.Show($"File: '{fileName}'\r\n{e}", "Error scan HTML File, Break!!!");
                 return null;
 
             }
@@ -174,7 +174,7 @@ namespace hoLinqToSql.LinqUtils
             var nodeFirstTable = doc.DocumentNode.SelectNodes($@"//table[@id='{tableName}']");
             if (nodeFirstTable == null || ! nodeFirstTable.Any())
             {
-                MessageBox.Show($@"File: '{fileName}'\r\nTableName: '{tableName}'", "Can't find HTML table");
+                MessageBox.Show($"File: '{fileName}'\r\nTableName: '{tableName}'", "Can't find HTML table");
                 return dt;
             }
             //var headers = from table1 in doc.DocumentNode.SelectNodes("//table[@id='t1']").Cast<HtmlNode>()
@@ -226,7 +226,7 @@ namespace hoLinqToSql.LinqUtils
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show($@"File:\r\n{_targetFile}\r\n{e}", "Error deleting target file");
+                    MessageBox.Show($"File:\r\n{_targetFile}\r\n{e}", "Error deleting target file");
                 }
             }
 
