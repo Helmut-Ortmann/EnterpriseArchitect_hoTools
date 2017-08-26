@@ -2,7 +2,6 @@
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
-using EA;
 using File = System.IO.File;
 
 namespace hoTools.Utils.Configuration
@@ -11,6 +10,9 @@ namespace hoTools.Utils.Configuration
     {
         string _sqlPaths;
         string[] _lSqlPaths;
+        string _linqPaths;
+        string[] _lLinqPaths;
+
 
         string _extensionPaths;
         string[] _lExtensionPaths;
@@ -36,6 +38,22 @@ namespace hoTools.Utils.Configuration
         /// The owner of all windows. Used to prevent modal windows stuck in background.
         /// </summary>
         public Control Owner { get; set; }
+
+
+        /// <summary>
+        /// IsLinqSupported
+        /// </summary>
+        public bool IsLinqPadSupported { get; set; }
+
+        /// <summary>
+        /// LINQPad LPRun.exe path to run a query from hoTools
+        /// </summary>
+        public string LprunPath { get; set; }
+
+        /// <summary>
+        /// Temp folder hoTools for e.g storing temporary query results from LINQPad
+        /// </summary>
+        public string TempFolder { get; set; }
 
         /// <summary>
         /// hoTools config path (..user\&lt;users>\AppData\Roaming\ho\hoTools\)
@@ -138,7 +156,32 @@ namespace hoTools.Utils.Configuration
             _sqlPaths = paths;
             _lSqlPaths = paths.Split(';');
         }
-       
+        #endregion
+
+        #region LinqPath
+        public string GetLinqPaths()
+        {
+            return _linqPaths;
+        }
+        /// <summary>
+        /// Get list of sql paths
+        /// </summary>
+        /// <returns></returns>
+        public List<string> GetListLinqPaths()
+        {
+            return _lLinqPaths.ToList();
+        }
+        /// <summary>
+        ///  Set hoTools SQL path from Settings to search for SQL files. 
+        /// </summary>
+        /// <param name="paths"></param>
+        public void SetLinqPadQueryPaths(string paths)
+        {
+            _linqPaths = paths;
+            _lLinqPaths = paths.Split(';');
+        }
+        
+
         /// <summary>
         /// Read the SQL file. If it is an absolute path it uses this. If not it uses the SQL Path to find the complete sql file name. 
         /// <para />
@@ -161,7 +204,7 @@ namespace hoTools.Utils.Configuration
             return "";
 
         }
-
+       
         /// <summary>
         /// Get the absolute file name. It searches according to the in settings specified SQL path. If the file don't exists it return "".
         /// </summary>
@@ -169,20 +212,33 @@ namespace hoTools.Utils.Configuration
         /// <returns></returns>
         public string GetSqlFileName(string sqlFileName)
         {
-            return GetFileNameFromPath(_lSqlPaths, sqlFileName);
+            return GetFileNameFromPath(_lSqlPaths, sqlFileName, ".sql");
             
         }
 
         /// <summary>
+        /// Get the absolute file name. It searches according to the in settings specified LinqPadQuery path. If the file don't exists it return "".
+        /// </summary>
+        /// <param name="linqPadQueryFileName"></param>
+        /// <returns></returns>
+        public string GetLinqPadQueryFileName(string linqPadQueryFileName)
+        {
+            if (!IsLinqPadSupported) return "";
+            return GetFileNameFromPath(_lLinqPaths, linqPadQueryFileName, ".linq");
+
+        }
+
+        /// <summary>
         /// Get the absolute file name. It searches according to the in settings specified path. If the file don't exists it return "".
-        /// - If the file name doesn't contain an extension ".sql" is added
+        /// - If the file name doesn't contain the fileExtension (default=".sql") is added
         /// </summary>
         /// <param name="lPaths"></param>
         /// <param name="fileName"></param>
+        /// <param name="fileExtension"></param>
         /// <returns></returns>
-        private string GetFileNameFromPath(string[] lPaths, string fileName)
+        private string GetFileNameFromPath(string[] lPaths, string fileName, string fileExtension= ".sql")
         {
-            if (!Path.HasExtension(fileName)) fileName = fileName.Trim() + ".sql";
+            if (!Path.HasExtension(fileName)) fileName = fileName.Trim() + fileExtension;
             // Absolute path
             if (Path.IsPathRooted(fileName))
             {

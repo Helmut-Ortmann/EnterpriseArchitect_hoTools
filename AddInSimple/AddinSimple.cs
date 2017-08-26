@@ -8,7 +8,6 @@ using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using AddInSimple.EABasic;
-using AddInSimple.Utils;
 using hoLinqToSql.LinqUtils;
 
 using LinqToDB.Configuration;
@@ -250,7 +249,7 @@ namespace AddInSimple
                     string sql = "select ea_guid AS CLASSGUID, object_type AS CLASSTYPE, name, stereotype, object_type from t_object order by name";
                     xml = repository.SQLQuery(sql);
                     // 2. Convert to DataTable
-                    dt = Util.MakeDataTableFromSqlXml(xml);
+                    dt = Xml.MakeDataTableFromSqlXml(xml);
                     // 2. Order, Filter, Join, Format to XML
                     xml = QueryAndMakeXmlFromTable(dt);
                     // 3. Out put to EA
@@ -314,7 +313,7 @@ State:
                     OrderedEnumerableRowCollection<DataRow> rows = from row in dt.AsEnumerable()
                         orderby row.Field<string>(dt.Columns[0].Caption) 
                         select row;
-                    xml = Util.MakeXml(dt, rows);
+                    xml = Xml.MakeXml(dt, rows);
 
                     // Output to EA
                     repository.RunModelSearch("", "", "", xml);
@@ -329,7 +328,7 @@ State:
                     dt = LinqUtil.RunLinq2DbAdvanced(provider, connectionString);
 
                     // Make EA xml
-                    xml = Util.MakeXmlFromDataTable(dt);
+                    xml = Xml.MakeXmlFromDataTable(dt);
                     // Output to EA
                     repository.RunModelSearch("", "", "", xml);
                     break;
@@ -351,7 +350,7 @@ State:
                     DataTable dtHtml = linqPad.ReadHtml();
 
                     // Make EA xml
-                    xml = Util.MakeXmlFromDataTable(dtHtml);
+                    xml = Xml.MakeXmlFromDataTable(dtHtml);
                     // Output to EA
                     repository.RunModelSearch("", "", "", xml);
                     linqPad.Show();
@@ -372,7 +371,7 @@ State:
                     dt = EaSearches();
 
                     // Make 
-                    xml = Util.MakeXmlFromDataTable(dt);
+                    xml = Xml.MakeXmlFromDataTable(dt);
 
                     // Output to EA
                     repository.RunModelSearch("", "", "", xml);
@@ -819,7 +818,7 @@ State:
                     orderby row.Field<string>("Name") descending
                     select row;
 
-                return Util.MakeXml(dt, rows);
+                return Xml.MakeXml(dt, rows);
             }
             catch (Exception e)
             {

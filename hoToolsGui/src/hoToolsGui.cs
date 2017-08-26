@@ -319,6 +319,8 @@ namespace hoTools.hoToolsGui
             GetValueSettingsFromJson();
             AddAutoCounterSettingsMenu();
 
+            UpdateGlobalCfg();
+
 
 
         }
@@ -1537,6 +1539,7 @@ namespace hoTools.hoToolsGui
             this._txtSearchText.ForeColor = System.Drawing.SystemColors.ControlDark;
             this._txtSearchText.Name = "_txtSearchText";
             this._toolTip.SetToolTip(this._txtSearchText, resources.GetString("_txtSearchText.ToolTip"));
+            this._txtSearchText.TextChanged += new System.EventHandler(this._txtSearchText_TextChanged);
             this._txtSearchText.Enter += new System.EventHandler(this._txtSearchText_Enter);
             this._txtSearchText.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtUserText_KeyDown);
             this._txtSearchText.Leave += new System.EventHandler(this._txtSearchText_Leave);
@@ -3556,6 +3559,20 @@ namespace hoTools.hoToolsGui
 {e1}", "Error loading 'Settings.json'");
             }
         }
+        /// <summary>
+        /// Updata global settings 'HoToolsGlobalCfg'
+        /// </summary>
+        private void UpdateGlobalCfg()
+        {
+            // global configuration parameters independent from EA-Instance and used by services
+            var globalCfg = HoToolsGlobalCfg.Instance;
+             
+            globalCfg.SetSqlPaths(AddinSettings.SqlPaths);
+            globalCfg.SetLinqPadQueryPaths(AddinSettings.LinqPadQueryPath);
+            globalCfg.TempFolder = AddinSettings.TempFolder;
+            globalCfg.LprunPath = AddinSettings.LprunPath;
+            globalCfg.IsLinqPadSupported = AddinSettings.IsLinqPadSupport;
+        }
 
 
         /// <summary>
@@ -3898,6 +3915,11 @@ Please restart EA. During restart hoTools loads the default settings.",
         private void updateFeatureHyperlinksToolStripMenuItem_Click(object sender, EventArgs e)
         {
             EaService.UpdateFeatureHyperLinks(Repository);
+        }
+
+        private void _txtSearchText_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 

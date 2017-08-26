@@ -1,13 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using EA;
 using HtmlAgilityPack;
+using File = System.IO.File;
 
 namespace hoLinqToSql.LinqUtils
 {
@@ -50,7 +49,20 @@ namespace hoLinqToSql.LinqUtils
             get => _lprunExe;
             set => _lprunExe = value;
         }
+        /// <summary>
+        /// Initialize LinqPad with parameters
+        /// </summary>
+        /// <param name="lprun"></param>
+        /// <param name="targetDir"></param>
+        /// <param name="format"></param>
+        public LinqPad(string lprun, string targetDir, string format)
+        {
+            LinqPadIni(lprun, targetDir, format);
+        }
 
+        /// <summary>
+        /// Initialize LinqPad with default values
+        /// </summary>
         public LinqPad()
         {
             LinqPadIni();
@@ -73,7 +85,7 @@ namespace hoLinqToSql.LinqUtils
             string linqFile = Path.Combine(_targetDir, file);
             _targetFile = Path.Combine(_targetDir, outFile);
             DelTarget();
-            string arg = $@"-lang=program -format={lprunFormat} {linqFile}  args ";
+            string arg = $@"-lang=program -format={lprunFormat} ""{linqFile}""  {args} ";
             _startInfo.Arguments = arg;
             try
             {
@@ -184,9 +196,12 @@ namespace hoLinqToSql.LinqUtils
                 from cell in row.SelectNodes("th|td").Cast<HtmlNode>()//"th|td"
                 where cell.Name == "th"
                 select new { Name = HtmlEntity.DeEntitize(cell.InnerText) };
+            // it's possible that there is no header
+            int countColumn = 0;
             foreach (var header in headers)
             {
                 dt.Columns.Add(header.Name);
+                countColumn++;
             }
 
             //-----------------------------------------------
@@ -197,8 +212,17 @@ namespace hoLinqToSql.LinqUtils
                 .Select(td => HtmlEntity.DeEntitize(td.InnerText.Trim()))
                 .ToArray());
             //Fill DataTable
-            foreach (var row in rows)
+            foreach (object[] row in rows)
             {
+                // if there is no header
+                if (countColumn == 0)
+                {
+                    countColumn = row.Length;
+                    for (int i = 0; i < countColumn; i++)
+                    {
+                        dt.Columns.Add(" ");
+                    }
+                }
                 dt.Rows.Add(row);
             }
             return dt;
@@ -256,6 +280,92 @@ namespace hoLinqToSql.LinqUtils
 
 
             
+        }
+
+        /// <summary>
+        /// Get the args parameter to pass to LINQ with the EA context information
+        /// - Element
+        /// - Diagram
+        /// - Selected Diagram connector
+        /// - Selected Diagram items
+        /// - Tree Selected elements
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <param name="SearchTerm"></param>
+        /// <returns></returns>
+        public string GetArg(EA.Repository rep, string searchTerm)
+        {
+            string arg = "";
+
+            //---------
+            // 1. Context Element
+            object item;
+            EA.ObjectType type = rep.GetContextItem(out item);
+            switch (type)
+            {
+                case ObjectType.otPackage:
+                    arg = $"ContextPackage={((EA.Package)item).PackageGUID}";
+                    break;
+
+                case ObjectType.otAttribute:
+                    arg = $"ContextAttribute={((EA.Attribute)item).AttributeGUID}";
+                    break;
+
+                case ObjectType.otConnector:
+                    arg = $"ContextConnector={((EA.Attribute)item).AttributeGUID}";
+                    break;
+                case ObjectType.otMethod:
+                    arg = $"ContextMethod={((EA.Method)item).MethodGUID}";
+                    break;
+                case ObjectType.otModel:
+                    arg = $"ContextModel={((EA.Package)item).PackageGUID}";
+                    break;
+                case ObjectType.otElement:
+                    arg = $"ContextElement={((EA.Element) item).ElementGUID}";
+                    break;
+                    // not defined
+                default:
+                    arg = $"Context=";
+                    break;
+
+
+            }
+            string els = "";
+            string delimiter = "";
+            // Diagram Info
+            EA.Diagram dia = rep.GetCurrentDiagram();
+            if (dia != null)
+            {
+                arg = $"{arg} CurrentDiagram={dia.DiagramGUID}";
+                if (dia.SelectedConnector != null)
+                    arg = $"{arg} SelectedConnectorId={dia.SelectedConnector.ConnectorID}";
+                else
+                    arg = $"{arg} SelectedConnectorId=";
+                foreach (EA.Element el in dia.SelectedObjects)
+                {
+                    els = $"{els}{el.ElementID}{delimiter}";
+                    delimiter = ",";
+                }
+                arg = $"{arg} SelectedElementIds={els}";
+            }
+            else
+            {
+                arg = $"{arg} CurrentDiagram=";
+                arg = $"{arg} SelectedConnectorId=";
+                arg = $"{arg} SelectedElementIds=";
+            }
+
+            // Tree Selected
+            els = "";
+            delimiter = "";
+            EA.Collection lel = rep.GetTreeSelectedElements();
+            foreach (EA.Element el in rep.GetTreeSelectedElements())
+            {
+                els = $"{els}{el.ElementID}{delimiter}";
+                delimiter = ",";
+            }
+            arg = $"{arg} SelectedElementIds={els} SearchTerm={searchTerm}";
+            return arg;
         }
     }
 }

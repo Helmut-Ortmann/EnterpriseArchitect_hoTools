@@ -10,11 +10,14 @@ using System.Text.RegularExpressions;
 using System.Xml.Linq;
 using hoTools.Utils.Configuration;
 using hoTools.Utils.Excel;
+using hoLinqToSql.LinqUtils;
 
 
 using hoTools.Utils.SQL;
 using System.IO;
 using hoTools.Utils;
+using Microsoft.Office.Interop.Excel;
+
 
 namespace EAAddinFramework.Utils
 {
@@ -193,9 +196,10 @@ namespace EAAddinFramework.Utils
         }
 
         /// <summary>
-        /// Runs the search (hoTools SQL file or EA search or) if it's a *.sql file). It handles the exceptions.
+        /// Runs the search (hoTools SQL file, EA search or LINQ Search). It handles the exceptions.
         /// It converts wild cards of the &lt;Search Term>. 
         /// - First search for SQL-File
+        /// - Search the LINQ Search if LINQ is supported
         /// - If no SQL file found run EA Search
         /// </summary>
         /// <param name="searchName">EA Search name or SQL file name (uses path to find absolute path)</param>
@@ -217,6 +221,20 @@ namespace EAAddinFramework.Utils
                 searchTerm = UtilSql.ReplaceSqlWildCards(Repository, searchTerm, RepositoryType);
                 return SqlRun(searchName, sqlString, searchTerm, exportToExcel);
 
+
+            }
+            string linqPadFileName = _globalCfg.GetLinqPadQueryFileName(searchName);
+            if (linqPadFileName != "")
+            {
+                LinqPad linqPad = new LinqPad(_globalCfg.LprunPath, _globalCfg.TempFolder, "html");
+                linqPad.Run(linqPadFileName, "html", linqPad.GetArg(Repository, searchTerm));
+                System.Data.DataTable dtHtml = linqPad.ReadHtml();
+
+                // Make EA xml
+                string xml = Xml.MakeXmlFromDataTable(dtHtml);
+                // Output to EA
+                Repository.RunModelSearch("", "", "", xml);
+                return "";
 
             }
             else

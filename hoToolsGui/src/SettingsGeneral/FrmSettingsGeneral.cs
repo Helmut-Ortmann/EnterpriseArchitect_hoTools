@@ -74,6 +74,12 @@ namespace hoTools.Settings
                     _rbPortSynchronizationOff.Checked = true;
                     break;
             }
+            // LINQPad support
+            chkIsLinqPadSupport.Checked = _settings.IsLinqPadSupport;
+            txtLinqPadQueryPath.Text = _settings.LinqPadQueryPath;
+            txtTempFolder.Text = _settings.TempFolder;
+            txtLprunPath.Text = _settings.LprunPath;
+
 
 
             chkAdvancedDiagramNote.Checked = settings.IsAdvancedDiagramNote;
@@ -180,6 +186,12 @@ namespace hoTools.Settings
                 if (rbAutoLoadMdgCompilation.Checked) _settings.AutoLoadMdgXml = AddinSettings.AutoLoadMdg.Compilation;
 
                 #endregion
+
+                // LINQPad support
+                _settings.IsLinqPadSupport = chkIsLinqPadSupport.Checked ;
+                _settings.LinqPadQueryPath = txtLinqPadQueryPath.Text;
+                _settings.TempFolder = txtTempFolder.Text;
+                _settings.LprunPath = txtLprunPath.Text;
 
                 #region LineStyleAndMoreWindow
 

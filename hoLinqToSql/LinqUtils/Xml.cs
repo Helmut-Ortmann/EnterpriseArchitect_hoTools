@@ -1,18 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Windows.Forms;
 using System.Xml.Linq;
 
-namespace AddInSimple.Utils
+namespace hoLinqToSql.LinqUtils
 {
-    /// <summary>
-    /// Utilities for general use
-    /// </summary>
-    public static class Util
+    public class Xml
     {
         /// <summary>
         /// Make ea xml from data table. The xml is ready for out put by 'repository.RunModelSearch("", "", "", xml);' 
@@ -34,16 +29,16 @@ namespace AddInSimple.Utils
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        public static string MakeEmptyXml(string name="Empty")
+        public static string MakeEmptyXml(string name = "Empty")
         {
 
             XElement x = new XElement("ReportViewData",
-                             new XElement("Fields",
-                                 new XElement("Field", new XAttribute("name", "Empty"))));
+                new XElement("Fields",
+                    new XElement("Field", new XAttribute("name", "Empty"))));
             return x.ToString();
         }
 
-        
+
 
         /// <summary>
         /// Make EA xml from a DataTable (for column names) and the ordered Enumeration provided by LINQ. Set the Captions in DataTable to ensure column names. 

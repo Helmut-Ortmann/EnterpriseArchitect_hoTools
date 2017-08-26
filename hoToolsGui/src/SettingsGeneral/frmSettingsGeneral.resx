@@ -283,6 +283,15 @@ The following is possible for a Part:
   <metadata name="menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>114, 17</value>
   </metadata>
+  <data name="txtLinqPadQueryPath.ToolTip" xml:space="preserve">
+    <value>Paths hoTools searches for LINQPad Queries to run:
+
+A semicolon separated parts of path hoTools searches for the LINQPad  query to execute.
+
+Note: 
+LINQPad is a powerful interactive Scratchpad to run SQL queries and code like C', F#, VB.
+You need a license to use it. It's not part of hoTools.</value>
+  </data>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>25</value>
   </metadata>

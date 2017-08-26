@@ -75,6 +75,7 @@
     </Compile>
     <Compile Include="hoLinqToSql.cs" />
     <Compile Include="LinqUtils\LinqPad.cs" />
+    <Compile Include="LinqUtils\Xml.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="LinqUtils\hoLinqSqlUtils.cs" />
     <Compile Include="LinqUtils\Linq2dbSettings.cs" />

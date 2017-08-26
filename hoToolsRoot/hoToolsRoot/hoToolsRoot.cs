@@ -172,6 +172,10 @@ namespace hoTools
             // global configuration parameters independent from EA-Instance and used by services
             var globalCfg = HoToolsGlobalCfg.Instance;
             globalCfg.SetSqlPaths(_addinSettings.SqlPaths);
+            globalCfg.SetLinqPadQueryPaths(_addinSettings.LinqPadQueryPath);
+            globalCfg.TempFolder = _addinSettings.TempFolder;
+            globalCfg.LprunPath = _addinSettings.LprunPath;
+            globalCfg.IsLinqPadSupported = _addinSettings.IsLinqPadSupport;
 
             // Extensions: c# Assemblies (*.dll, *.exe)
             globalCfg.SetExtensionPaths(_addinSettings.CodeExtensionsPath);

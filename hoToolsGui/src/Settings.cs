@@ -297,6 +297,53 @@ namespace hoTools.Settings
         }
         #endregion
 
+        #region Property: LinqPadPath
+        /// <summary>
+        /// Comma separated list of paths to search for LINQPad Queries (License needed)
+        /// </summary>
+        public string LinqPadQueryPath
+        {
+            get
+            {
+                var p = CurrentConfig.AppSettings.Settings["LinqPadPath"];
+                if (p == null) return "";// default
+                return p.Value;
+            }
+            set { SetStringConfigValue("LinqPadPath", value); }
+        }
+        #endregion
+        #region Property: LprunPath
+        /// <summary>
+        /// Comma separated list of paths to search for LINQPad Queries (License needed)
+        /// </summary>
+        public string LprunPath
+        {
+            get
+            {
+                var p = CurrentConfig.AppSettings.Settings["LprunPath"];
+                if (p == null) return "";// default
+                return p.Value;
+            }
+            set { SetStringConfigValue("LprunPath", value); }
+        }
+        #endregion
+
+        #region Property: TempFolder
+        /// <summary>
+        /// Comma separated list of paths to search for LINQPad Queries (License needed)
+        /// </summary>
+        public string TempFolder
+        {
+            get
+            {
+                var p = CurrentConfig.AppSettings.Settings["TempFolder"];
+                if (p == null) return "";// default
+                return p.Value;
+            }
+            set { SetStringConfigValue("TempFolder", value); }
+        }
+        #endregion
+
 
 
         #region Property: SqlEditor
@@ -359,6 +406,30 @@ namespace hoTools.Settings
         #endregion
 
 
+
+        #region Property: isLinqPadSupport
+        public bool IsLinqPadSupport
+        {
+            get
+            {
+                bool result;
+                var p = CurrentConfig.AppSettings.Settings["isLinqPadSupport"];
+                if (p == null) return true;
+                if (bool.TryParse(p.Value, out result))
+                {
+                    return result;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            set
+            {
+                CurrentConfig.AppSettings.Settings["isLinqPadSupport"].Value = value.ToString();
+            }
+        }
+        #endregion
         #region Property: IsAutoCounter
         public bool IsAutoCounter
         {

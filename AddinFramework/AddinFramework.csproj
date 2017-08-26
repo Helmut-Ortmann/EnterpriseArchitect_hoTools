@@ -71,6 +71,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
@@ -145,6 +146,10 @@
     <ProjectReference Include="..\DuoVia.FuzzyStrings\DuoVia.FuzzyStrings.csproj">
       <Project>{29385a2d-eac1-4777-bc01-c060c2002307}</Project>
       <Name>DuoVia.FuzzyStrings</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\hoLinqToSql\hoLinqToSql.csproj">
+      <Project>{fed206af-e583-48c6-9952-bad2c41b3aa4}</Project>
+      <Name>hoLinqToSql</Name>
     </ProjectReference>
     <ProjectReference Include="..\Util\Util.csproj">
       <Project>{9376680e-9420-4fc1-8de8-4311fca18efc}</Project>
