@@ -227,7 +227,8 @@ namespace EAAddinFramework.Utils
             if (linqPadFileName != "")
             {
                 LinqPad linqPad = new LinqPad(_globalCfg.LprunPath, _globalCfg.TempFolder, "html");
-                linqPad.Run(linqPadFileName, "html", linqPad.GetArg(Repository, searchTerm));
+                Boolean result = linqPad.Run(linqPadFileName, "html", linqPad.GetArg(Repository, searchTerm));
+                if (!result) return "";
                 System.Data.DataTable dtHtml = linqPad.ReadHtml();
 
                 // Make EA xml

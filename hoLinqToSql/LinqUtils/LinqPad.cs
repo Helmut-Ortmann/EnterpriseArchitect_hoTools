@@ -71,41 +71,53 @@ namespace hoLinqToSql.LinqUtils
         /// Run the LINQPad query via lprun.exe. It supports:
         /// - format: (html, csv, text)
         /// - arg: to pass information like GUID,..
+        /// LinqPad outputs errors to MessageBox. 
         /// </summary>
-        /// <param name="file">The LINQPad file, usually *.linq</param>
-        /// <param name="format">"html", "csv", "text"</param>
+        /// <param name="linqPadQueryFile">The LINQPad file, usually *.linq</param>
+        /// <param name="outputFormat">"html", "csv", "text"</param>
         /// <param name="args">Things you want to pass to the LINQPad query, split by space</param>
         /// <returns></returns>
-        public string Run(string file, string format, string args)
+        public bool Run(string linqPadQueryFile, string outputFormat, string args)
         {
-            string lprunFormat = GetFormat(format);
-            if (lprunFormat == "") return "";
+            string lprunFormat = GetFormat(outputFormat);
+            if (lprunFormat == "") return false;
 
-            string outFile = Path.GetFileNameWithoutExtension(file) + "." + format; 
-            string linqFile = Path.Combine(_targetDir, file);
+            string outFile = Path.GetFileNameWithoutExtension(linqPadQueryFile) + "." + outputFormat; 
+            string linqFile = Path.Combine(_targetDir, linqPadQueryFile);
             _targetFile = Path.Combine(_targetDir, outFile);
             DelTarget();
-            string arg = $@"-lang=program -format={lprunFormat} ""{linqFile}""  {args} ";
-            _startInfo.Arguments = arg;
+            _startInfo.Arguments = $@"-lang=program -format={lprunFormat} ""{linqFile}""  {args} "; 
             try
             {
                 using (Process exeProcess = Process.Start(_startInfo))
                 {
                     //* Read the output (or the error)
                     string output = exeProcess.StandardOutput.ReadToEnd();
-                    string err = exeProcess.StandardError.ReadToEnd();
+                    exeProcess.BeginErrorReadLine();
+                    //string errOutput = exeProcess.StandardError.ReadToEnd();
                     exeProcess.WaitForExit();
                     // Retrieve the app's exit code
                     int exitCode = exeProcess.ExitCode;
+                    if (exitCode != 0)
+                    {
+                        MessageBox.Show($"Query: '{linqPadQueryFile}'\r\nCommand: '{_startInfo.Arguments}'\r\n\r\nError:\r\n{exeProcess.StandardError.ReadToEnd()}","Error returned from LINQPad via LPRun.exe");
+                        return false;
+
+                    }
                     File.WriteAllText(_targetFile, output);
 
                 }
             }
             catch (Exception e)
             {
-                MessageBox.Show($"Query:{linqFile}\r\nLPRun.exe{_lprunExe}\r\nTarget:{_targetFile}{e}", " Error running LINQ query");
+                MessageBox.Show($"Query:{linqFile}\r\nLPRun.exe{_lprunExe}\r\nTarget:{_targetFile}\r\n{e}", " Error running LINQ query");
+                return false;
             }
-            return "";
+            return true;
+        }
+        static void CaptureError(object sender, DataReceivedEventArgs e)
+        {
+            MessageBox.Show($"e.Data", "Error returned from LINQPad via LPRun.exe");
         }
         /// <summary>
         /// Shows the generated file
@@ -189,25 +201,26 @@ namespace hoLinqToSql.LinqUtils
                 MessageBox.Show($"File: '{fileName}'\r\nTableName: '{tableName}'", "Can't find HTML table");
                 return dt;
             }
-            //var headers = from table1 in doc.DocumentNode.SelectNodes("//table[@id='t1']").Cast<HtmlNode>()
-            var headers = from table1 in nodeFirstTable.Cast<HtmlNode>()
 
-                from row in table1.SelectNodes("tr").Cast<HtmlNode>().Skip(1) // skip heading
-                from cell in row.SelectNodes("th|td").Cast<HtmlNode>()//"th|td"
-                where cell.Name == "th"
-                select new { Name = HtmlEntity.DeEntitize(cell.InnerText) };
-            // it's possible that there is no header
+
+            // determine columns header, they may not be defined.
             int countColumn = 0;
-            foreach (var header in headers)
+            var nodeHeader = doc.DocumentNode.SelectNodes(@"//table[@id='t1']//th");
+            if (nodeHeader != null)
             {
-                dt.Columns.Add(header.Name);
-                countColumn++;
+                foreach (var row in nodeHeader)
+                {
+                    dt.Columns.Add(row.InnerText);
+                    countColumn = countColumn + 1;
+                }
             }
 
             //-----------------------------------------------
             var node = nodeFirstTable.Elements("tr");
-            // Skip LINQPad Heading and Column heading
-            var rows = nodeFirstTable.Elements("tr").Skip(2).Select(tr => tr
+            // Skip LINQPad Heading and filter not td child elements
+            var rows = nodeFirstTable.Elements("tr").Skip(1)
+                .Where(x => x.FirstChild.Name == "td")
+                .Select(tr => tr
                 .Elements(@"td")
                 .Select(td => HtmlEntity.DeEntitize(td.InnerText.Trim()))
                 .ToArray());
