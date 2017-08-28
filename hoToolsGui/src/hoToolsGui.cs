@@ -3420,7 +3420,7 @@ namespace hoTools.hoToolsGui
         }
 
         /// <summary>
-        /// Context Menu rtf: Edit the file under the Mouse
+        /// Context Menu rtf: Edit the file under the Mouse (SQL + LINQ)
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -3439,7 +3439,8 @@ namespace hoTools.hoToolsGui
         {
             SearchItem searchItem = GetSearchItemFromRtfLine();
             if (searchItem is EaSearchItem) return;
-            ShowFolderForSql(searchItem.Name);
+            if (searchItem is SqlSearchItem) ShowFolderForSql(searchItem.Name);
+            if (searchItem is LinqSearchItem) ShowFolderForLinqPad(searchItem.Name);
         }
         private void runAndExportSQLToExcelRtfToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -3727,6 +3728,22 @@ namespace hoTools.hoToolsGui
                         "No SQL path in settings defined!");
             }
         }
+        private void ShowFolderForLinqPad(string file)
+        {
+            string linqPadAbsFileName = _globalCfg.GetLinqPadQueryFileName(file);
+
+
+            // Show folder
+            if (linqPadAbsFileName != "") Util.ShowFolder(linqPadAbsFileName);
+            else
+            {
+                List<string> sqlList = _globalCfg.GetListSqlPaths();
+                if (sqlList.Count > 0) Util.ShowFolder(sqlList[0]);
+                else
+                    MessageBox.Show($"Configure LINQPath path in:{Environment.NewLine}File, Settings SQL, LINQPad and Script",
+                        "No LINQPad path in settings defined!");
+            }
+        }
 
         /// <summary>
         /// Show the SQL path
@@ -3735,11 +3752,23 @@ namespace hoTools.hoToolsGui
         /// <param name="e"></param>
         private void showSQLPathToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string sqlPath = _globalCfg.GetSqlPaths();
-            MessageBox.Show(
-                $"The SQL path is:{Environment.NewLine}{sqlPath}{Environment.NewLine}{Environment.NewLine}"+
-                       $"Change SQL path with 'File, Settings SQL and Script'",
-                "The SQL path to search for scripts");
+            SearchItem searchItem = GetSearchItemFromRtfLine();
+            if (searchItem is SqlSearchItem)
+            {
+                string sqlPath = _globalCfg.GetSqlPaths();
+                MessageBox.Show(
+                    $"The SQL path is:{Environment.NewLine}{sqlPath}{Environment.NewLine}{Environment.NewLine}" +
+                    $"Change SQL path with 'File, Settings SQL and Script'",
+                    "The SQL path to search for scripts");
+            }
+            if (searchItem is LinqSearchItem)
+            {
+                string linqPath = _globalCfg.GetLinqPaths();
+                MessageBox.Show(
+                    $"The LINQPad path is:{Environment.NewLine}{linqPath}{Environment.NewLine}{Environment.NewLine}" +
+                    $"Change LINQPad path with 'File, Settings SQL and Script'",
+                    "The LINQPad path to search for scripts");
+            }
         }
 
         private void toolStripMenuIHome_Click(object sender, EventArgs e)

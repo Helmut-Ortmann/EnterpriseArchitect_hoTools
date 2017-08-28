@@ -1938,7 +1938,7 @@ The link isn't connected to a feature.</value>
     <value>239, 22</value>
   </data>
   <data name="editSQLToolStripMenuItem.Text" xml:space="preserve">
-    <value>Edit SQL</value>
+    <value>Edit SQL / LINQPad</value>
   </data>
   <data name="editSQLToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>Edit hoTools SQL Script file in your Editor.
@@ -1949,7 +1949,7 @@ hoTools starts the application which is associated to "*.sql".</value>
     <value>239, 22</value>
   </data>
   <data name="showSQLFolderToolStripMenuItem.Text" xml:space="preserve">
-    <value>Show SQL folder</value>
+    <value>Show SQL / LINQPad folder</value>
   </data>
   <data name="showSQLFolderToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>Show SQL folder of hoTools SQL Script file (*.sql)</value>
@@ -1958,12 +1958,12 @@ hoTools starts the application which is associated to "*.sql".</value>
     <value>239, 22</value>
   </data>
   <data name="showSQLPathToolStripMenuItem1.Text" xml:space="preserve">
-    <value>Show SQL path</value>
+    <value>Show SQL / LINQPad path</value>
   </data>
   <data name="showSQLPathToolStripMenuItem1.ToolTipText" xml:space="preserve">
-    <value>Show the SQL path where hoTools seaches for possible SQL Scripts.
+    <value>Show the SQL / LINQPad path where hoTools seaches for possible SQL/LINQPad  Scripts.
 
-You can set SQL path:
+You can set SQL / LINQPad path:
 - File, Setting SQL and Script</value>
   </data>
   <data name="showDescriptionToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
@@ -2017,7 +2017,7 @@ No Excel is required.</value>
     <value>Export the Clipboard content as csv to Excel</value>
   </data>
   <data name="contextMenuRtf.Size" type="System.Drawing.Size, System.Drawing">
-    <value>240, 192</value>
+    <value>240, 170</value>
   </data>
   <data name="contextMenuRtf.ToolTip" xml:space="preserve">
     <value>Edit SQL Search in your Editor.
