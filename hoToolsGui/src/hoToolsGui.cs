@@ -3465,16 +3465,26 @@ namespace hoTools.hoToolsGui
                                 $@"Info EA-Search: '{searchItem.Name}'");
 
             }
-            else
-            {   // SQL-File Search
+            // SQL-File Search
+            if (searchItem is SqlSearchItem)
+            {   
                 string sqlString = _globalCfg.ReadSqlFile(searchItem.Name);
 
                 MessageBox.Show($@"{ _globalCfg.GetSqlFileLong(searchItem.Name)}" +
-                                $@"{Environment.NewLine}Category: {searchItem.Category}{Environment.NewLine}{sqlString}",
+                                $@"{Environment.NewLine}Category: {searchItem.Category}{Environment.NewLine}{searchItem.Description}{Environment.NewLine}{sqlString}",
                                 $@"Info SQL-File: '{Path.GetFileName(searchItem.Name)}'");
 
             }
-            
+            // LINQPad-File Search
+            if (searchItem is LinqSearchItem)
+            {   
+                
+                MessageBox.Show($@"{ _globalCfg.GetLinqPadQueryFileName(searchItem.Name)}" +
+                                $@"{Environment.NewLine}Category: {searchItem.Category}{Environment.NewLine}{searchItem.Description}",
+                    $@"Info LINQPad-File: '{Path.GetFileName(searchItem.Name)}'");
+
+            }
+
 
         }
         /// <summary>

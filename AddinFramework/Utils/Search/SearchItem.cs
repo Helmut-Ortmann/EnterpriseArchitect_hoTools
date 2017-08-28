@@ -1,14 +1,13 @@
 ﻿
- // ReSharper disable once CheckNamespace
+// ReSharper disable once CheckNamespace
 
-using System;
 using System.IO;
 using Newtonsoft.Json;
 
 namespace AddinFramework.Util
 {
     /// <summary>
-    /// A Search Item to define a Search like EA Model Search or SQL. 
+    /// A Search Item to define a Search like EA Model Search, SQL or LINQPad. 
     /// </summary>
     public class SearchItem
     {
@@ -105,6 +104,37 @@ namespace AddinFramework.Util
         {
             LongName = longName;
             Category = "SQL-File";
+            Description = description;
+
+        }
+
+    }
+    /// <summary>
+    /// An SQL Search Item with name, longName.
+    /// </summary>
+    public class LinqSearchItem : SearchItem
+    {
+        public string LongName { get; set; }
+
+        public LinqSearchItem(string longName) : base(Path.GetFileName(longName))
+        {
+            Init(longName, "");
+        }
+
+        public LinqSearchItem(string name, string longName) : base(name)
+        {
+            Init(longName, "");
+        }
+
+        public LinqSearchItem(string name, string longName, string description) : base(name)
+        {
+            Init(longName, description);
+        }
+
+        void Init(string longName, string description)
+        {
+            LongName = longName;
+            Category = "LINQPad";
             Description = description;
 
         }

@@ -128,7 +128,7 @@ namespace AddinFramework.Util
         static void LoadSearches(EA.Repository rep)
         {
             // Load possible SQL searches from SQL Path
-            LoadSqlSearches();
+            LoadFileBaseSearches();
 
             //local scripts
             LoadLocalSearches(rep);
@@ -306,21 +306,60 @@ namespace AddinFramework.Util
         /// <para/>File, Description of SQL
         /// </summary>
         /// <returns></returns>
-        private static void LoadSqlSearches()
+        private static void LoadFileBaseSearches()
+        {
+            if (GlobalCfg.IsLinqPadSupported)  GetLinqPadSearches();
+            GetSqlSearches();
+        }
+
+        private static void GetSqlSearches()
         {
             foreach (string file in GlobalCfg.GetSqlListFileCompleteName())
             {
                 string description = SqlGetDescription(file);
                 string name = Path.GetFileName(file);
-                _staticAllSearches.Add( new SqlSearchItem(name, file,description)); 
+                _staticAllSearches.Add(new SqlSearchItem(name, file, description));
             }
         }
+        private static void GetLinqPadSearches()
+        {
+            foreach (string file in GlobalCfg.GetLinqPadQueryListFileCompleteName())
+            {
+                string description = GetLinqPadDescription(file);
+                string name = Path.GetFileName(file);
+                _staticAllSearches.Add(new LinqSearchItem(name, file, description));
+            }
+        }
+
         /// <summary>
-        /// Get Description from SQL file. The comments from the SQL file are used as description.
+        /// Get Description from LINQPad file. The comments from the LINQPad file are used as description.
         /// </summary>
         /// <param name="file"></param>
         /// <returns></returns>
-        private static string SqlGetDescription(string file)
+        private static string GetLinqPadDescription(string file)
+        {
+            string sqlText = File.ReadAllText(file);
+            Regex regex = new Regex(@"(^[ \t]*// \S[^\n]*\n)+", RegexOptions.Multiline);
+            Match match = regex.Match(sqlText);
+            Char[] c = { '\r', '\n' };
+
+            if (match.Success)
+            {
+                // delete '// ' from start of line
+                string pattern = "^[ \t]*// ";
+                string s = match.Value.Trim(c);
+                s = Regex.Replace(s, pattern, "", RegexOptions.Multiline);
+                return s;
+            }
+            else return "";
+        }
+
+            /// <summary>
+            /// Get Description from SQL file. The comments from the SQL file are used as description.
+            /// </summary>
+            /// <param name="file"></param>
+            /// <returns></returns>
+            private static string SqlGetDescription(string file)
         {
             string sqlText = File.ReadAllText(file);
             Regex regex = new Regex(@"(^[ \t]*// \S[^\n]*\n)+", RegexOptions.Multiline);

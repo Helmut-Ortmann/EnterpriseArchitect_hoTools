@@ -301,18 +301,34 @@ namespace hoTools.Utils.Configuration
         /// <returns></returns>
         public List<string> GetSqlListFileCompleteName()
         {
-            return SqlFiles(_lSqlPaths);
+            return FileBasedQueryFiles(_lSqlPaths);
+
+        }
+        /// <summary>
+        /// Get list of *.sql files of SQL path
+        /// </summary>
+        /// <returns></returns>
+        public List<string> GetLinqPadQueryListFileCompleteName()
+        {
+            if (!IsLinqPadSupported) return new List<string>();
+            return FileBasedQueryFiles(_lLinqPaths, "*.linq");
 
         }
 
-        private List<string> SqlFiles(string[] lPaths)
+        /// <summary>
+        /// Get list of file based query files
+        /// </summary>
+        /// <param name="lPaths"></param>
+        /// <param name="fileExtension"></param>
+        /// <returns></returns>
+        private List<string> FileBasedQueryFiles(string[] lPaths, string fileExtension= "*.sql")
         {
             List<string> files = new List<string>();
             // over all files
             foreach (string path in lPaths)
             {
                 if (Directory.Exists(path))
-                    files.AddRange(Directory.GetFiles(path, "*.sql"));
+                    files.AddRange(Directory.GetFiles(path, fileExtension));
             }
             return files;
         }
