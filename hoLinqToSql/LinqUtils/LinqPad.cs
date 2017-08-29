@@ -354,9 +354,9 @@ namespace hoLinqToSql.LinqUtils
                     arg = $"{arg} SelectedConnectorId={dia.SelectedConnector.ConnectorID}";
                 else
                     arg = $"{arg} SelectedConnectorId=";
-                foreach (EA.Element el in dia.SelectedObjects)
+                foreach (EA.DiagramObject diaObj in dia.SelectedObjects)
                 {
-                    els = $"{els}{el.ElementID}{delimiter}";
+                    els = $"{els}{delimiter}{diaObj.ElementID}";
                     delimiter = ",";
                 }
                 arg = $"{arg} SelectedElementIds={els}";
@@ -374,7 +374,7 @@ namespace hoLinqToSql.LinqUtils
             EA.Collection lel = rep.GetTreeSelectedElements();
             foreach (EA.Element el in rep.GetTreeSelectedElements())
             {
-                els = $"{els}{el.ElementID}{delimiter}";
+                els = $"{els}{delimiter}{el.ElementID}";
                 delimiter = ",";
             }
             arg = $"{arg} SelectedElementIds={els} SearchTerm={searchTerm}";

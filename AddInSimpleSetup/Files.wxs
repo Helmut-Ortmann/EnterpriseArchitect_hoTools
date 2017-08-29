@@ -40,6 +40,11 @@
         <File Id="hoLinqToSql.dll" KeyPath="yes" Name="hoLinqToSql.dll" Source="$(var.hoLinqToSql.TargetPath)" />
       </Component>
       
+      <!-- LINQPad: Receive EA context information via Parameter  -->
+      <Component Id="TestCallLinqWithParameter.linq" Guid="{A1296864-9AD1-4E56-89CA-18C8CAC51C57}">
+        <File Id="TestCallLinqWithParameter.linq" KeyPath="yes" Name="TestCallLinqWithParameter.linq" Source="$(var.AddInSimple.TargetPath)" />
+      </Component>
+      
       <!-- LINQPad query example     -->
       <Component Id="EaBasicQuery.linq" Guid="{E84836DC-52EF-47FB-8FEA-41DFDEB145DD}">
         <File Id="EaBasicQuery.linq" KeyPath="yes" Name="EaBasicQuery.linq" Source="$(var.AddInSimple.TargetPath)" />
@@ -73,7 +78,7 @@
 
 
 
-
+      
       
       <!--
       Replace: Source="SourceDir\release\AddInSimple.dll" /> by

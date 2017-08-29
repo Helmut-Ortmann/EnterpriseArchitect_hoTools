@@ -79,6 +79,7 @@ namespace AddInSimple
         const string MenuShowRunLinq2DbAdvanced = "DemoRunLinq2dbQueryAdvanced";
         const string MenuShowRunLinqPadToHtml = "DemoRunLinqPadQueryToHtmlCsvText";
         const string MenuShowRunLinqXml = "DemoRunLinqXmlAllOwnQueries";
+        const string MenuShowRunLinqPadEaContext = "DemoRunLinqPadAndShowEaContextInformation";
 
         // remember if we have to say hello or goodbye
         private bool _shouldWeSayHello = true;
@@ -91,7 +92,7 @@ namespace AddInSimple
             menuHeader = MenuName;
             menuOptions = new[] { MenuHello, MenuGoodbye, MenuOpenProperties, MenuRunDemoSearch,
                 MenuRunDemoPackageContent, MenuRunDemoSqlToDataTable, MenuShowConnectionString, MenuShowRunLinq2Db, MenuShowRunLinq2DbAdvanced,
-                MenuShowRunLinqPadToHtml,
+                MenuShowRunLinqPadToHtml, MenuShowRunLinqPadEaContext,
                 MenuShowRunLinqXml};
         }
         // ReSharper disable once RedundantOverriddenMember
@@ -177,7 +178,12 @@ namespace AddInSimple
                         isEnabled = true;
                         break;
 
+                    // Run LINQPad and output EA context information
+                    case MenuShowRunLinqPadEaContext:
+                        isEnabled = true;
+                        break;
 
+                        
                     // there shouldn't be any other, but just in case disable it.
                     default:
                         isEnabled = false;
@@ -207,6 +213,11 @@ namespace AddInSimple
             // for LINQ to SQL
             IDataProvider provider;  // the provider to connect to database like Access, ..
             string connectionString; // The connection string to connect to database
+            string parametersToPassToQuery;
+            string linqQueryFileName;
+            string linqQueryFilePath;
+            LinqPad linqPad;
+            DataTable dtHtml;
 
             switch (itemName)
             {
@@ -340,14 +351,14 @@ State:
                 // - EA standard installation (used for EAExample database)
                 case MenuShowRunLinqPadToHtml:
                     // Run query with lprun.exe 
-                    string parametersToPassToQuery = @"""Test query EaBasicQuery.linq""";
-                    string linqQueryFileName = "EaBasicQuery.linq";
-                    string linqQueryFilePath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\" + linqQueryFileName;
+                    parametersToPassToQuery = @"""Test query EaBasicQuery.linq""";
+                    linqQueryFileName = "EaBasicQuery.linq";
+                    linqQueryFilePath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\" + linqQueryFileName;
 
-                    LinqPad linqPad = new LinqPad();
+                    linqPad = new LinqPad();
                     // Output as html with read back table and out put to EA Search Window
                     linqPad.Run(linqQueryFilePath, @"html", parametersToPassToQuery);
-                    DataTable dtHtml = linqPad.ReadHtml();
+                    dtHtml = linqPad.ReadHtml();
 
                     // Make EA xml
                     xml = Xml.MakeXmlFromDataTable(dtHtml);
@@ -362,7 +373,21 @@ State:
                     linqPad.Show();
                     break;
 
-                    
+                // Run LINQPad and output EA context information
+                case MenuShowRunLinqPadEaContext:
+                    linqQueryFileName = "TestCallLinqWithParameter.linq";
+                    linqQueryFilePath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\" + linqQueryFileName;
+
+                    linqPad = new LinqPad();
+                    // Output as html with read back table and out put to EA Search Window
+                    linqPad.Run(linqQueryFilePath, @"html", linqPad.GetArg(repository, "mySearchTerm"));
+                    dtHtml = linqPad.ReadHtml();
+
+                    // Make EA xml
+                    xml = Xml.MakeXmlFromDataTable(dtHtml);
+                    // Output to EA
+                    repository.RunModelSearch("", "", "", xml);
+                    break;
 
 
                 // run LINQ XML query for own EA queries which are stored in *.xml
