@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using System.Xml.Linq;
@@ -80,6 +81,7 @@ namespace AddInSimple
         const string MenuShowRunLinqPadToHtml = "DemoRunLinqPadQueryToHtmlCsvText";
         const string MenuShowRunLinqXml = "DemoRunLinqXmlAllOwnQueries";
         const string MenuShowRunLinqPadEaContext = "DemoRunLinqPadAndShowEaContextInformation";
+        const string MenuAbout = "About";
 
         // remember if we have to say hello or goodbye
         private bool _shouldWeSayHello = true;
@@ -93,7 +95,8 @@ namespace AddInSimple
             menuOptions = new[] { MenuHello, MenuGoodbye, MenuOpenProperties, MenuRunDemoSearch,
                 MenuRunDemoPackageContent, MenuRunDemoSqlToDataTable, MenuShowConnectionString, MenuShowRunLinq2Db, MenuShowRunLinq2DbAdvanced,
                 MenuShowRunLinqPadToHtml, MenuShowRunLinqPadEaContext,
-                MenuShowRunLinqXml};
+                MenuShowRunLinqXml,
+                MenuAbout};
         }
         // ReSharper disable once RedundantOverriddenMember
         /// <summary>
@@ -183,7 +186,12 @@ namespace AddInSimple
                         isEnabled = true;
                         break;
 
-                        
+                    // About information
+                    case MenuAbout:
+                        isEnabled = true;
+                        break;
+
+
                     // there shouldn't be any other, but just in case disable it.
                     default:
                         isEnabled = false;
@@ -402,7 +410,28 @@ State:
                     repository.RunModelSearch("", "", "", xml);
                     break;
 
-                    
+                // run LINQ XML query for own EA queries which are stored in *.xml
+                case MenuAbout:
+
+                    // get product version
+                    Assembly assembly = Assembly.GetExecutingAssembly();
+                    FileVersionInfo fileVersionInfo = FileVersionInfo.GetVersionInfo(assembly.Location);
+
+                    // Get file-version of dll
+                    string pathRoot = Assembly.GetExecutingAssembly().Location;
+                    pathRoot = Path.GetDirectoryName(pathRoot);
+
+                    string productVersion = "{fileVersionInfo.ProductVersion}{Environment.NewLine}";
+                    string pathAddInSimpleVersion = Path.Combine(new[] { pathRoot, "AddInSimple.dll" });
+                    string pathHoLinqToSql = Path.Combine(new[] { pathRoot, "hoLinqToSql.dll" });
+
+                    MessageBox.Show($@"Product version: {productVersion}
+AddInSimple.dll  {FileVersionInfo.GetVersionInfo(pathAddInSimpleVersion).FileVersion}
+hoLinqToSql.dll  {FileVersionInfo.GetVersionInfo(pathHoLinqToSql).FileVersion}
+","AddInSimple the example Add-In");
+                    break;
+
+
 
 
 

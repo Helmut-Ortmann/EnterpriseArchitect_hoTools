@@ -118,6 +118,12 @@ Some features:
 
 
 # Releases
+## Release 3.1.1
+- AddInSimple:
+-- Example EA context information for LINQPad
+- hoTools
+-- LINQPad queries from hoTools
+-- Send context information to LINQ
 ## Release 3.1.0
 - About with product version and linq2db version
 - Port Services added

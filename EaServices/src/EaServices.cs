@@ -6317,6 +6317,7 @@ from %APPDATA%Local\Apps\hoTools\
                 "hoSqlGui.dll",
                 "hoExtensionGui.dll",
                 "hoFindAndReplaceGui.dll",
+                "hoLinqToSql.dll",
                 "AddinFramework.dll",
                 "ClosedXml.dll",
                 "DocumentFormat.OpenXml.dll",
