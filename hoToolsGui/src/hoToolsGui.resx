@@ -546,6 +546,11 @@ If you use hoTools SQL the following wild cards are supported and converted acco
 - ! or ^ (shortcut for XOR)
 
 e.g.: 'myString*' Everything starting with 'myString' (db independent)
+
+hoTools supports:
+- EA Searches
+- SQL searches stored in files with advanced features
+- LINQ queries for complex searches (LINQPad needed)
 </value>
   </data>
   <data name="&gt;&gt;_txtSearchText.Name" xml:space="preserve">
@@ -1811,7 +1816,9 @@ An SQL Query you can export to Excel by:
 
 *.csv in Clipboard you can export to Excel by:
 - Do
-- Export clipboared to CSV </value>
+- Export clipboared to CSV 
+
+A LINQPad Query to run complex queries (*.linq)</value>
   </data>
   <data name="&gt;&gt;_txtSearchName.Name" xml:space="preserve">
     <value>_txtSearchName</value>
@@ -2124,9 +2131,14 @@ In configuration/settings you have to disable the automatic feature (Attribut/Me
     <value>46</value>
   </data>
   <data name="_rtfListOfSearches.Text" xml:space="preserve">
-    <value>List of available Searches (EA + SQL)
+    <value>List of available Searches (EA + SQL + LINQPad)
 1. Double Click to run Search
-2. Mouse Down to show description of search</value>
+2. Mouse Down to show description of search
+
+hoTools searches queries in the following sequence:
+- SQL (*.sql files)
+- LINQPad (*.linq files)
+- EA </value>
   </data>
   <data name="_rtfListOfSearches.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
