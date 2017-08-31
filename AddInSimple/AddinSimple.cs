@@ -81,6 +81,10 @@ namespace AddInSimple
         const string MenuShowRunLinqPadToHtml = "DemoRunLinqPadQueryToHtmlCsvText";
         const string MenuShowRunLinqXml = "DemoRunLinqXmlAllOwnQueries";
         const string MenuShowRunLinqPadEaContext = "DemoRunLinqPadAndShowEaContextInformation";
+        private const string separatorLINQPad = "-----------------------------------------------------";
+        private const string separatorLinq2Db = "-----------------------------------------------------";
+        private const string separatorXml = "-----------------------------------------------------";
+        private const string separatorAbout = "-----------------------------------------------------";
         const string MenuAbout = "About";
 
         // remember if we have to say hello or goodbye
@@ -93,9 +97,20 @@ namespace AddInSimple
         {
             menuHeader = MenuName;
             menuOptions = new[] { MenuHello, MenuGoodbye, MenuOpenProperties, MenuRunDemoSearch,
-                MenuRunDemoPackageContent, MenuRunDemoSqlToDataTable, MenuShowConnectionString, MenuShowRunLinq2Db, MenuShowRunLinq2DbAdvanced,
-                MenuShowRunLinqPadToHtml, MenuShowRunLinqPadEaContext,
+                MenuRunDemoPackageContent, MenuRunDemoSqlToDataTable, MenuShowConnectionString,
+
+                separatorLinq2Db,
+                MenuShowRunLinq2Db,
+                MenuShowRunLinq2DbAdvanced,
+
+                separatorLINQPad, 
+                MenuShowRunLinqPadToHtml,
+                MenuShowRunLinqPadEaContext,
+
+                separatorXml,
                 MenuShowRunLinqXml,
+
+                separatorAbout,
                 MenuAbout};
         }
         // ReSharper disable once RedundantOverriddenMember
@@ -421,14 +436,20 @@ State:
                     string pathRoot = Assembly.GetExecutingAssembly().Location;
                     pathRoot = Path.GetDirectoryName(pathRoot);
 
-                    string productVersion = "{fileVersionInfo.ProductVersion}{Environment.NewLine}";
+                    string productVersion = $"{fileVersionInfo.ProductVersion}{Environment.NewLine}";
                     string pathAddInSimpleVersion = Path.Combine(new[] { pathRoot, "AddInSimple.dll" });
                     string pathHoLinqToSql = Path.Combine(new[] { pathRoot, "hoLinqToSql.dll" });
+                    string pathLinq2Db = Path.Combine(new[] { pathRoot, "linq2db.dll" });
 
                     MessageBox.Show($@"Product version: {productVersion}
 AddInSimple.dll  {FileVersionInfo.GetVersionInfo(pathAddInSimpleVersion).FileVersion}
-hoLinqToSql.dll  {FileVersionInfo.GetVersionInfo(pathHoLinqToSql).FileVersion}
-","AddInSimple the example Add-In");
+hoLinqToSql.dll   {FileVersionInfo.GetVersionInfo(pathHoLinqToSql).FileVersion}
+linq2db.dll           {FileVersionInfo.GetVersionInfo(pathLinq2Db).FileVersion}
+
+hoTools
+Helmut.Ortmann@t-online.de
++49 172 51 79 16 7
+","AddInSimple, the example Add-In");
                     break;
 
 
