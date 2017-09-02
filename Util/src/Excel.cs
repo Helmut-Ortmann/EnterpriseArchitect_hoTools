@@ -107,12 +107,12 @@ namespace hoTools.Utils.Excel
             }
         }
         /// <summary>
-        /// Save Data Table to Excel
+        /// Save Data Table to Excel. It's enough to pass the filename without extension
         /// </summary>
-        /// <param name="fileName"></param>
+        /// <param name="fileName">File name without extension</param>
         /// <param name="dt"></param>
         /// <returns></returns>
-        private static bool SaveTableToExcel(ref string fileName, DataTable dt)
+        public static bool SaveTableToExcel(ref string fileName, DataTable dt)
         {
             using (XLWorkbook wb = new XLWorkbook())
             {

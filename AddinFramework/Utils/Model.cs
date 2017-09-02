@@ -19,6 +19,7 @@ using hoTools.Utils;
 using Microsoft.Office.Interop.Excel;
 
 
+// ReSharper disable once CheckNamespace
 namespace EAAddinFramework.Utils
 {
     // Represents the current EA Model 
@@ -212,7 +213,8 @@ namespace EAAddinFramework.Utils
 
             
             // SQL file?
-            if (_globalCfg.ReadSqlFile(searchName, withErrMessage: false) != "")
+            string sqlFile = _globalCfg.GetSqlFileName(searchName);
+            if (sqlFile != "")
                
             {
                 string sqlString = _globalCfg.ReadSqlFile(searchName);
@@ -223,13 +225,23 @@ namespace EAAddinFramework.Utils
 
 
             }
-            string linqPadFileName = _globalCfg.GetLinqPadQueryFileName(searchName);
-            if (linqPadFileName != "")
+            // LINQPad
+            string linqPadFile = _globalCfg.GetLinqPadQueryFileName(searchName);
+            if (linqPadFile != "")
             {
-                LinqPad linqPad = new LinqPad(_globalCfg.LprunPath, _globalCfg.TempFolder, "html");
-                Boolean result = linqPad.Run(linqPadFileName, "html", linqPad.GetArg(Repository, searchTerm));
+                LinqPad linqPad = new LinqPad(Repository, _globalCfg.LprunPath, _globalCfg.TempFolder, @"html");
+                Boolean result = linqPad.Run(linqPadFile, @"html", linqPad.GetArg(Repository, searchTerm));
                 if (!result) return "";
+                // HTML to DataTable
                 System.Data.DataTable dtHtml = linqPad.ReadHtml();
+
+                if (exportToExcel)
+                {
+                    // DataTable to Excel
+                    string excelFile = Path.Combine(_globalCfg.TempFolder,
+                        $"{Path.GetFileNameWithoutExtension(linqPadFile)}");
+                    Excel.SaveTableToExcel(ref excelFile, dtHtml);
+                }
 
                 // Make EA xml
                 string xml = Xml.MakeXmlFromDataTable(dtHtml);
@@ -249,7 +261,7 @@ namespace EAAddinFramework.Utils
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show(e.ToString(),
+                    MessageBox.Show($"Can't find search:\r\n- *.sql in path '{_globalCfg.GetSqlPaths()}'\r\n- *.linq in path '{_globalCfg.GetLinqPaths()}'\r\n- EA Search\r\n\r\nNote:\r\n- Define path in File, Settings\r\n- LINQPad needs a license and has to be installed!",
                         $@"Error start search '{searchName} {searchTerm}'");
                     return "";
                 }
@@ -267,6 +279,7 @@ namespace EAAddinFramework.Utils
         /// <param name="sqlName"></param>
         /// <param name="sql"></param>
         /// <param name="searchText">Search Text to replace 'Search Term' macro</param>
+        /// <param name="exportToExcel"></param>
         /// <returns>"" for nothing found or the EA SQL XML string with the found information</returns>
         public string SqlRun(string sqlName, string sql, string searchText, bool exportToExcel=false)
         {

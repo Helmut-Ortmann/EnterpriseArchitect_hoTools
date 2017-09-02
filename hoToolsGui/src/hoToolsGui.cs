@@ -3651,19 +3651,31 @@ namespace hoTools.hoToolsGui
         }
 
         /// <summary>
-        /// Export current SQL to Excel and show it. 
+        /// Export current SQL to Excel and show it. It supports:
+        /// - SQL stored in file system (*.sql files)
+        /// - LINQPad queries stored in file system (*.linq files)
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void exportExcelToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string searchName = GetSearchName();
-            if (!Path.HasExtension(searchName)) searchName = searchName.Trim() + ".sql";
-            if (_globalCfg.ReadSqlFile(searchName, withErrMessage: false) == "")
+
+            if (String.IsNullOrWhiteSpace(_globalCfg.GetSqlFileName(searchName)) &&
+                String.IsNullOrWhiteSpace(_globalCfg.GetLinqPadQueryFileName(searchName)))
             {
-                MessageBox.Show($"SearchName/File: '{searchName}'\r\nSQL-Search-Path:\r\n{_globalCfg.GetSqlPaths()}\r\n\r\nUsual extension is '.sql'","No sql file available in SQL-Search-Path or absolute path");
+                MessageBox.Show(
+                    $"Search: '{searchName}'\r\nSQL-Path:\r\n{_globalCfg.GetSqlPaths()}\r\nLINQ-Path:\r\n{_globalCfg.GetLinqPaths()}\r\nUsual extension is '.sql' or '.linq'\r\n\r\nLINQPad has to be enabled and licensed.",
+                    "No *.sql or *.linq file found.");
                 return;
             }
+
+            //if (!Path.HasExtension(searchName)) searchName = searchName.Trim() + ".sql";
+            //if (_globalCfg.ReadSqlFile(searchName, withErrMessage: false) == "")
+            //{
+            //    MessageBox.Show($"SearchName/File: '{searchName}'\r\nSQL-Search-Path:\r\n{_globalCfg.GetSqlPaths()}\r\n\r\nUsual extension is '.sql'","No sql file available in SQL-Search-Path or absolute path");
+            //    return;
+            //}
             Cursor.Current = Cursors.WaitCursor;
             _model.SearchRun(searchName, GetSearchTerm(), exportToExcel:true);
             _rtfListOfSearches.Visible = false;

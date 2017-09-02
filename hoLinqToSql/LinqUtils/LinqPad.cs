@@ -3,9 +3,12 @@ using System.Data;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using System.Xml.Linq;
 using EA;
 using HtmlAgilityPack;
+using LinqToDB.DataProvider;
 using File = System.IO.File;
 
 namespace hoLinqToSql.LinqUtils
@@ -20,7 +23,10 @@ namespace hoLinqToSql.LinqUtils
         private string _targetDir;
         private string _targetFile;
         private string _format;
+        private EA.Repository _rep;
         private ProcessStartInfo _startInfo;
+
+        private string _linqPadConnectionName;
 
         public string TargetFile
         {
@@ -55,17 +61,17 @@ namespace hoLinqToSql.LinqUtils
         /// <param name="lprun"></param>
         /// <param name="targetDir"></param>
         /// <param name="format"></param>
-        public LinqPad(string lprun, string targetDir, string format)
+        public LinqPad(EA.Repository rep, string lprun, string targetDir, string format)
         {
-            LinqPadIni(lprun, targetDir, format);
+            LinqPadIni(rep, lprun, targetDir, format);
         }
 
         /// <summary>
         /// Initialize LinqPad with default values
         /// </summary>
-        public LinqPad()
+        public LinqPad(EA.Repository rep)
         {
-            LinqPadIni();
+            LinqPadIni(rep);
         }
         /// <summary>
         /// Run the LINQPad query via lprun.exe. It supports:
@@ -79,6 +85,8 @@ namespace hoLinqToSql.LinqUtils
         /// <returns></returns>
         public bool Run(string linqPadQueryFile, string outputFormat, string args)
         {
+            if (String.IsNullOrWhiteSpace(_linqPadConnectionName)) return false;
+
             string lprunFormat = GetFormat(outputFormat);
             if (lprunFormat == "") return false;
 
@@ -86,7 +94,13 @@ namespace hoLinqToSql.LinqUtils
             string linqFile = Path.Combine(_targetDir, linqPadQueryFile);
             _targetFile = Path.Combine(_targetDir, outFile);
             DelTarget();
-            _startInfo.Arguments = $@"-lang=program -format={lprunFormat} ""{linqFile}""  {args} "; 
+            // connection name  (Server.DB-Name)
+            // Server: Server or file name (e.g. if JET/ACCESS)
+            // .DB-Name optional
+            string cxName = @"-cxname=d:\hoData\Projects\00Current\ZF\Work\Software_Architekturdesign_WLE_Work";
+            cxName = $"-cxname={_linqPadConnectionName}";
+
+            _startInfo.Arguments = $@"-lang=program -format={lprunFormat} ""{cxName}"" ""{linqFile}""  {args} "; 
             try
             {
                 using (Process exeProcess = Process.Start(_startInfo))
@@ -100,7 +114,20 @@ namespace hoLinqToSql.LinqUtils
                     int exitCode = exeProcess.ExitCode;
                     if (exitCode != 0)
                     {
-                        MessageBox.Show($"Query: '{linqPadQueryFile}'\r\nCommand: '{_startInfo.Arguments}'\r\n\r\nError:\r\n{exeProcess.StandardError.ReadToEnd()}","Error returned from LINQPad via LPRun.exe");
+                        MessageBox.Show($@"Query: '{linqPadQueryFile}'
+EA Connection: '{_rep.ConnectionString}'
+EA DB Type:       '{_rep.RepositoryType()}'
+Command: '{_startInfo.Arguments}'
+
+Tips for LINQPad connections:
+- Try the query with LINQPad and the designated LINQPad driver
+- Have you specified the database (no Display all in a tree view)
+- Deselect: Pluralize EntitySet and table properties
+- Capitalize property names
+
+
+Error:    '{output}",
+                        "Error returned from LINQPad via LPRun.exe");
                         return false;
 
                     }
@@ -137,6 +164,91 @@ namespace hoLinqToSql.LinqUtils
             {
                 MessageBox.Show($"File:\r\n{_targetFile}\r\n{e}", "Error showing file");
             }
+        }
+        /// <summary>
+        /// Get LINQPad connection name:
+        /// - FileBased:  DataSourceName
+        /// - DB: Server.Database
+        /// </summary>
+        /// <returns></returns>
+        public string GetLinqPadName()
+        {
+            IDataProvider provider;
+            string connectionString = LinqUtil.GetConnectionString(_rep, out provider);
+            string server = "";
+            string db = null;
+            string dataSource = null;
+            // File based
+            Regex rgx = new Regex("(Data Source|Server|DataBase|Catalog)=([^;]*)",RegexOptions.IgnoreCase);
+            Match match = rgx.Match(connectionString);
+            while (match.Success)
+            {
+
+                switch (match.Groups[1].Value.ToLower())
+                {
+                    
+                    case @"data source":
+                    case "server":
+                        server = $"{match.Groups[2].Value}";
+                        break;
+                    case "catalog":
+                    case "database":
+                        db = $"{match.Groups[2].Value}";
+                        break;
+                }
+                match = match.NextMatch();
+            }
+            string linqPadConnectionsV2 = @"C:\Users\helmu_000\AppData\Roaming\LINQPad\ConnectionsV2.xml";
+            XDocument xConnection = XDocument.Load(linqPadConnectionsV2);
+            var connection = (from c in xConnection.Descendants("Connection")
+                where c.Element("Server")?.Value == server &&
+                      (String.IsNullOrWhiteSpace(db) || c.Element("Database")?.Value == db)
+                //&& c.Element("DriverData")?.Element("providerName")?.Value == provider
+                select new
+                {
+                    Provider = c.Element("DriverData")?.Element("providerName")?.Value == null ? "" : $"[{c.Element("DriverData").Element("providerName").Value}]",
+                    Server = c.Element("Server")?.Value,
+                    DataBase = c.Element("Database")?.Value == null ? "" : $"{c.Element("Database")?.Value}",
+                    DbVersion = c.Element("DbVersion")?.Value == null ? "" : $"(v.{c.Element("DbVersion").Value})"
+                }).FirstOrDefault();
+            string linqPadConnectionName = "";
+            if (connection == null)
+            {
+                MessageBox.Show($@"Do you have a valid LINQPad connection for your EA Model
+ConnectionServer:    '{_rep.ConnectionString}'
+Database type:       '{_rep.RepositoryType()}'
+Server:                     '{server}'
+Database:                 '{db}'
+LINQPad connections: '{linqPadConnectionsV2}'",
+                    "Can't determine LINQPad connection name.");
+                return "";
+            }
+            linqPadConnectionName = $@"{connection.Provider} {connection.Server}\{connection.DataBase} {connection.DbVersion}";
+            // adapt string to special provider needs
+            switch (connection.Provider)
+            {
+                // LINQPad standard driver
+                case "":
+                case null:
+                    linqPadConnectionName = $@"{connection.Server}.{connection.DataBase}";
+                    break;
+            }
+            return linqPadConnectionName;
+
+
+
+
+
+
+            if (server == "" || db == "")
+            {
+                MessageBox.Show($"ConnectionString: '{connectionString}'\r\nServer:  '{server}'\r\n'{db}'", "Can't determine LINQPad connection from EA connection string");
+                return "";
+            }
+
+            return $"{server}.{db}";
+
+
         }
         /// <summary>
         /// Check format
@@ -268,15 +380,17 @@ namespace hoLinqToSql.LinqUtils
             }
 
         }
+
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="rep"></param>
         /// <param name="lprunExe"></param>
         /// <param name="targetDir"></param>
         /// <param name="format"></param>
-
-        private void LinqPadIni(string lprunExe=lprunExeDefault, string targetDir=targetDirDefault, string format="html")
+        private void LinqPadIni(EA.Repository rep, string lprunExe=lprunExeDefault, string targetDir=targetDirDefault, string format=@"html")
         {
+            _rep = rep;
             _lprunExe = lprunExe;
             _targetDir = targetDir;
             _format = format;
@@ -291,8 +405,8 @@ namespace hoLinqToSql.LinqUtils
             _startInfo.RedirectStandardOutput = true;
             _startInfo.RedirectStandardError = true;
 
-
-            
+            // get LinqPad connection name
+            _linqPadConnectionName = GetLinqPadName();
         }
 
         /// <summary>

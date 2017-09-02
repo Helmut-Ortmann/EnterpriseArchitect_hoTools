@@ -3,14 +3,14 @@ using LinqToDB.Configuration;
 
 namespace hoLinqToSql.LinqUtils
 {
-    /// <summary>
-    /// Set connection string before the first usage. It only sets the default configurarion.
-    /// Mostly it's better to use the Context Constructor to set provider and connectionString.
-    /// - using (var db = new DataModels.EaDataModel(provider, connectionString)) 
-    /// 
-    /// </summary>
-    public class ConnectionStringSettings : IConnectionStringSettings
-        {
+        /// <summary>
+        /// Set connection string before the first usage. It only sets the default configuration.
+        /// Mostly it's better to use the Context Constructor to set provider and connectionString.
+        /// - using (var db = new DataModels.EaDataModel(provider, connectionString)) 
+        /// 
+        /// </summary>
+        public class ConnectionStringSettings : IConnectionStringSettings
+            {
             public string ConnectionString { get; set; }
             public string Name { get; set; }
             public string ProviderName { get; set; }

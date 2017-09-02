@@ -180,8 +180,9 @@ namespace hoTools.Utils.Configuration
             _linqPaths = paths;
             _lLinqPaths = paths.Split(';');
         }
-        
 
+
+       
         /// <summary>
         /// Read the SQL file. If it is an absolute path it uses this. If not it uses the SQL Path to find the complete sql file name. 
         /// <para />

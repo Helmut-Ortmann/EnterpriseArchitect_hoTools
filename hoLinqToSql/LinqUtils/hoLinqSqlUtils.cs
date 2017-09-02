@@ -295,7 +295,7 @@ namespace hoLinqToSql.LinqUtils
             }
         }
         /// <summary>
-        /// Get ConnectionString vom ODBC DSN (System, User, no file DSN)
+        /// Get ConnectionString from ODBC DSN (System, User, no file DSN)
         /// - Supports ODBC System and User DSN
         /// - Concatenates all of the registry entries of the odbc dsn definition 
         /// - Ignores the entries for: Driver, Lastuser

@@ -9,6 +9,7 @@ using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using AddInSimple.EABasic;
+using EA;
 using hoLinqToSql.LinqUtils;
 
 using LinqToDB.Configuration;
@@ -378,7 +379,7 @@ State:
                     linqQueryFileName = "EaBasicQuery.linq";
                     linqQueryFilePath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\" + linqQueryFileName;
 
-                    linqPad = new LinqPad();
+                    linqPad = new LinqPad(repository);
                     // Output as html with read back table and out put to EA Search Window
                     linqPad.Run(linqQueryFilePath, @"html", parametersToPassToQuery);
                     dtHtml = linqPad.ReadHtml();
@@ -401,7 +402,7 @@ State:
                     linqQueryFileName = "TestCallLinqWithParameter.linq";
                     linqQueryFilePath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\" + linqQueryFileName;
 
-                    linqPad = new LinqPad();
+                    linqPad = new LinqPad(repository);
                     // Output as html with read back table and out put to EA Search Window
                     linqPad.Run(linqQueryFilePath, @"html", linqPad.GetArg(repository, "mySearchTerm"));
                     dtHtml = linqPad.ReadHtml();
