@@ -293,10 +293,38 @@ namespace hoTools.Settings
                 if (p == null) return "";// default
                 return p.Value;
             }
-            set { SetStringConfigValue("SqlPaths", value); }
+            set => SetStringConfigValue("SqlPaths", value);
         }
         #endregion
 
+        #region Property: UseLinqPadConnection
+        public bool UseLinqPadConnection
+        {
+            get
+            {
+                return GetBoolConfigValue("UseLinqPadConnection");
+            }
+            set
+            {
+                SetBoolConfigValue("UseLinqPadConnection", value);
+            }
+        }
+        #endregion
+        #region Property: LinqPadConnectionPath
+        /// <summary>
+        /// The path to thew LINQPad connections xml file
+        /// </summary>
+        public string LinqPadConnectionPath
+        {
+            get
+            {
+                var p = CurrentConfig.AppSettings.Settings["LinqPadConnectionPath"];
+                if (p == null) return "";// default
+                return p.Value;
+            }
+            set => SetStringConfigValue("LinqPadConnectionPath", value);
+        }
+        #endregion
         #region Property: LinqPadPath
         /// <summary>
         /// Comma separated list of paths to search for LINQPad Queries (License needed)
@@ -309,7 +337,7 @@ namespace hoTools.Settings
                 if (p == null) return "";// default
                 return p.Value;
             }
-            set { SetStringConfigValue("LinqPadPath", value); }
+            set => SetStringConfigValue("LinqPadPath", value);
         }
         #endregion
         #region Property: LprunPath
@@ -324,7 +352,7 @@ namespace hoTools.Settings
                 if (p == null) return "";// default
                 return p.Value;
             }
-            set { SetStringConfigValue("LprunPath", value); }
+            set => SetStringConfigValue("LprunPath", value);
         }
         #endregion
 
@@ -340,7 +368,7 @@ namespace hoTools.Settings
                 if (p == null) return "";// default
                 return p.Value;
             }
-            set { SetStringConfigValue("TempFolder", value); }
+            set => SetStringConfigValue("TempFolder", value);
         }
         #endregion
 
@@ -353,10 +381,7 @@ namespace hoTools.Settings
             {
                 return GetStringConfigValue("SqlEditor");
             }
-            set
-            {
-                SetStringConfigValue("SqlEditor", value);
-            }
+            set => SetStringConfigValue("SqlEditor", value);
         }
 
         #region Property: AddinTabToFirstActivate

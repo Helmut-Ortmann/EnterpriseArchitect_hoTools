@@ -3583,6 +3583,8 @@ namespace hoTools.hoToolsGui
             globalCfg.TempFolder = AddinSettings.TempFolder;
             globalCfg.LprunPath = AddinSettings.LprunPath;
             globalCfg.IsLinqPadSupported = AddinSettings.IsLinqPadSupport;
+            globalCfg.UseLinqPadConnection = AddinSettings.UseLinqPadConnection;
+            globalCfg.LinqPadConnectionPath = AddinSettings.LinqPadConnectionPath;
         }
 
 

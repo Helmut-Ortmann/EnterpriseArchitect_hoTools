@@ -46,6 +46,16 @@ namespace hoTools.Utils.Configuration
         public bool IsLinqPadSupported { get; set; }
 
         /// <summary>
+        /// Use the LINQPad connection and not the EA connection
+        /// </summary>
+        public bool UseLinqPadConnection { get; set; }
+
+        /// <summary>
+        /// Use the LINQPad connection and not the EA connection
+        /// </summary>
+        public string LinqPadConnectionPath { get; set; }
+
+        /// <summary>
         /// LINQPad LPRun.exe path to run a query from hoTools
         /// </summary>
         public string LprunPath { get; set; }

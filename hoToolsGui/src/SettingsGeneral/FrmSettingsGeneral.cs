@@ -79,6 +79,8 @@ namespace hoTools.Settings
             txtLinqPadQueryPath.Text = _settings.LinqPadQueryPath;
             txtTempFolder.Text = _settings.TempFolder;
             txtLprunPath.Text = _settings.LprunPath;
+            txtLinqPadConnectionXmlFile.Text = _settings.LinqPadConnectionPath;
+            chkUseLinqPadConnection.Checked = _settings.UseLinqPadConnection;
 
 
 
@@ -192,6 +194,9 @@ namespace hoTools.Settings
                 _settings.LinqPadQueryPath = txtLinqPadQueryPath.Text;
                 _settings.TempFolder = txtTempFolder.Text;
                 _settings.LprunPath = txtLprunPath.Text;
+                _settings.LinqPadConnectionPath = txtLinqPadConnectionXmlFile.Text;
+                _settings.UseLinqPadConnection = chkUseLinqPadConnection.Checked;
+
 
                 #region LineStyleAndMoreWindow
 

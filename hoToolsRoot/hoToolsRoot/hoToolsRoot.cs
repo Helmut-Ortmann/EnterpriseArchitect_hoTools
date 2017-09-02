@@ -176,6 +176,8 @@ namespace hoTools
             globalCfg.TempFolder = _addinSettings.TempFolder;
             globalCfg.LprunPath = _addinSettings.LprunPath;
             globalCfg.IsLinqPadSupported = _addinSettings.IsLinqPadSupport;
+            globalCfg.UseLinqPadConnection = _addinSettings.UseLinqPadConnection;
+            globalCfg.LinqPadConnectionPath = _addinSettings.LinqPadConnectionPath;
 
             // Extensions: c# Assemblies (*.dll, *.exe)
             globalCfg.SetExtensionPaths(_addinSettings.CodeExtensionsPath);

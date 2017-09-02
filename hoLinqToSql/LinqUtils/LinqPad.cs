@@ -17,6 +17,7 @@ namespace hoLinqToSql.LinqUtils
     {
         const string  lprunExeDefault = @"c:\Program Files (x86)\LINQPad5\lprun.exe";
         const string targetDirDefault = @"c:\temp\";
+        const string linqPadConnectionsV2Default = @"C:\Users\helmu_000\AppData\Roaming\LINQPad\ConnectionsV2.xml";
 
         private string _lprunExe;
         private string _linqDir;
@@ -27,6 +28,11 @@ namespace hoLinqToSql.LinqUtils
         private ProcessStartInfo _startInfo;
 
         private string _linqPadConnectionName;
+
+        public string LinqPadConnections { get; set; }
+
+        public bool UseLinqPadConnections { get; set; }
+
 
         public string TargetFile
         {
@@ -97,8 +103,7 @@ namespace hoLinqToSql.LinqUtils
             // connection name  (Server.DB-Name)
             // Server: Server or file name (e.g. if JET/ACCESS)
             // .DB-Name optional
-            string cxName = @"-cxname=d:\hoData\Projects\00Current\ZF\Work\Software_Architekturdesign_WLE_Work";
-            cxName = $"-cxname={_linqPadConnectionName}";
+            string cxName = $"-cxname={_linqPadConnectionName}";
 
             _startInfo.Arguments = $@"-lang=program -format={lprunFormat} ""{cxName}"" ""{linqFile}""  {args} "; 
             try
@@ -121,9 +126,10 @@ Command: '{_startInfo.Arguments}'
 
 Tips for LINQPad connections:
 - Try the query with LINQPad and the designated LINQPad driver
-- Have you specified the database (no Display all in a tree view)
+- Have you specified the database (don't select Display all in a tree view)
 - Deselect: Pluralize EntitySet and table properties
-- Capitalize property names
+- Deselect: Capitalize property names
+
 
 
 Error:    '{output}",
@@ -198,10 +204,10 @@ Error:    '{output}",
                 }
                 match = match.NextMatch();
             }
-            string linqPadConnectionsV2 = @"C:\Users\helmu_000\AppData\Roaming\LINQPad\ConnectionsV2.xml";
-            XDocument xConnection = XDocument.Load(linqPadConnectionsV2);
+
+            XDocument xConnection = XDocument.Load(linqPadConnectionsV2Default);
             var connection = (from c in xConnection.Descendants("Connection")
-                where c.Element("Server")?.Value == server &&
+                where c.Element("Server")?.Value.ToLower() == server.ToLower() &&
                       (String.IsNullOrWhiteSpace(db) || c.Element("Database")?.Value == db)
                 //&& c.Element("DriverData")?.Element("providerName")?.Value == provider
                 select new
@@ -219,7 +225,7 @@ ConnectionServer:    '{_rep.ConnectionString}'
 Database type:       '{_rep.RepositoryType()}'
 Server:                     '{server}'
 Database:                 '{db}'
-LINQPad connections: '{linqPadConnectionsV2}'",
+LINQPad connections: '{linqPadConnectionsV2Default}'",
                     "Can't determine LINQPad connection name.");
                 return "";
             }
@@ -394,6 +400,8 @@ LINQPad connections: '{linqPadConnectionsV2}'",
             _lprunExe = lprunExe;
             _targetDir = targetDir;
             _format = format;
+            UseLinqPadConnections = false;
+            LinqPadConnections = linqPadConnectionsV2Default;
 
             // initialize ProzessInfo
             _startInfo = new ProcessStartInfo();
@@ -418,7 +426,7 @@ LINQPad connections: '{linqPadConnectionsV2}'",
         /// - Tree Selected elements
         /// </summary>
         /// <param name="rep"></param>
-        /// <param name="SearchTerm"></param>
+        /// <param name="searchTerm"></param>
         /// <returns></returns>
         public string GetArg(EA.Repository rep, string searchTerm)
         {

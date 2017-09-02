@@ -230,6 +230,9 @@ namespace EAAddinFramework.Utils
             if (linqPadFile != "")
             {
                 LinqPad linqPad = new LinqPad(Repository, _globalCfg.LprunPath, _globalCfg.TempFolder, @"html");
+                linqPad.UseLinqPadConnections = _globalCfg.UseLinqPadConnection;
+                linqPad.LinqPadConnections = _globalCfg.LinqPadConnectionPath;
+
                 Boolean result = linqPad.Run(linqPadFile, @"html", linqPad.GetArg(Repository, searchTerm));
                 if (!result) return "";
                 // HTML to DataTable
