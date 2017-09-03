@@ -127,7 +127,7 @@ namespace hoLinqToSql.LinqUtils
                 {
                     //* Read the output (or the error)
                     string output = exeProcess.StandardOutput.ReadToEnd();
-                    exeProcess.BeginErrorReadLine();
+                    //exeProcess.BeginErrorReadLine();
                     exeProcess.WaitForExit();
                     // Retrieve the app's exit code
                     var exitCode = exeProcess.ExitCode;
@@ -152,8 +152,6 @@ Tips for LINQPad connections:
 
 
 Error:    
-{errText}
-
 {output}",
                             "Error returned from LINQPad via LPRun.exe");
                         return false;
@@ -363,38 +361,54 @@ Change File, Settings General to Use LINQPAd connection.
 
             // determine columns header, they may not be defined.
             int countColumn = 0;
-            var nodeHeader = doc.DocumentNode.SelectNodes(@"//table[@id='t1']//th");
-            if (nodeHeader != null)
+            try
             {
-                foreach (var row in nodeHeader)
+                var nodeHeader = doc.DocumentNode.SelectNodes(@"//table[@id='t1']//th");
+                if (nodeHeader != null)
                 {
-                    dt.Columns.Add(row.InnerText);
-                    countColumn = countColumn + 1;
-                }
-            }
-
-            //-----------------------------------------------
-            var node = nodeFirstTable.Elements("tr");
-            // Skip LINQPad Heading and filter not td child elements
-            var rows = nodeFirstTable.Elements("tr").Skip(1)
-                .Where(x => x.FirstChild.Name == "td")
-                .Select(tr => tr
-                .Elements(@"td")
-                .Select(td => HtmlEntity.DeEntitize(td.InnerText.Trim()))
-                .ToArray());
-            //Fill DataTable
-            foreach (object[] row in rows)
-            {
-                // if there is no header
-                if (countColumn == 0)
-                {
-                    countColumn = row.Length;
-                    for (int i = 0; i < countColumn; i++)
+                    foreach (var row in nodeHeader)
                     {
-                        dt.Columns.Add(" ");
+                        dt.Columns.Add(row.InnerText);
+                        countColumn = countColumn + 1;
                     }
                 }
-                dt.Rows.Add(row);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("hoTools only supports simple tables. It looks as if the table 't1' / hierarchy is to complex", "Can't decode HTML table!");
+                return dt;
+            }
+
+            try
+            {
+                //-----------------------------------------------
+                var node = nodeFirstTable.Elements("tr");
+                // Skip LINQPad Heading and filter not td child elements
+                var rows = nodeFirstTable.Elements("tr").Skip(1)
+                    .Where(x => x.FirstChild.Name == "td")
+                    .Select(tr => tr
+                        .Elements(@"td")
+                        .Select(td => HtmlEntity.DeEntitize(td.InnerText.Trim()))
+                        .ToArray());
+                //Fill DataTable
+                foreach (object[] row in rows)
+                {
+                    // if there is no header
+                    if (countColumn == 0)
+                    {
+                        countColumn = row.Length;
+                        for (int i = 0; i < countColumn; i++)
+                        {
+                            dt.Columns.Add(" ");
+                        }
+                    }
+                    dt.Rows.Add(row);
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("hoTools only supports simple tables. hoToolls can't understand table 't1'", "Can't decode HTML table!");
+                return dt;
             }
             return dt;
 
