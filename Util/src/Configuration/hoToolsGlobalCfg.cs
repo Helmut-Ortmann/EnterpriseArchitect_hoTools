@@ -242,17 +242,19 @@ namespace hoTools.Utils.Configuration
         /// <summary>
         /// Get the absolute file name. It searches according to the in settings specified path. If the file don't exists it return "".
         /// - If the file name doesn't contain the fileExtension (default=".sql") is added
+        /// - If the path contains an absolute file path the extension has to match to wanted
         /// </summary>
         /// <param name="lPaths"></param>
         /// <param name="fileName"></param>
         /// <param name="fileExtension"></param>
-        /// <returns></returns>
+        /// <returns>"" if noting found or file extension doesn't match</returns>
         private string GetFileNameFromPath(string[] lPaths, string fileName, string fileExtension= ".sql")
         {
             if (!Path.HasExtension(fileName)) fileName = fileName.Trim() + fileExtension;
             // Absolute path
             if (Path.IsPathRooted(fileName))
             {
+                if (Path.GetExtension(fileName) != fileExtension) return "";
                 if (File.Exists(fileName)) return fileName;
                 else return "";
                 

@@ -237,6 +237,8 @@ namespace hoTools.hoToolsGui
         private ToolStripMenuItem updateElementHyperlinksToolStripMenuItem;
         private ToolStripMenuItem updateFeatureHyperlinksToolStripMenuItem;
         private ToolStripMenuItem updateHyperlinksToolStripMenuItem1;
+        private ToolStripSeparator toolStripSeparator15;
+        private ToolStripMenuItem showLINQPadConnectionsToolStripMenuItem;
         private TextBox _txtSearchText;
         #endregion
 
@@ -1207,7 +1209,6 @@ namespace hoTools.hoToolsGui
             this._toolStripServiceBtn9 = new System.Windows.Forms.ToolStripButton();
             this._toolStripServiceBtn10 = new System.Windows.Forms.ToolStripButton();
             this._toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this._txtSearchText = new System.Windows.Forms.TextBox();
             this._contextMenuStripSearch = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.editSQLSearchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -1217,46 +1218,6 @@ namespace hoTools.hoToolsGui
             this.runSQLAndExportToExcelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.clipboardTocsvToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this._btnLabelRight = new System.Windows.Forms.Button();
-            this._btnLabelLeft = new System.Windows.Forms.Button();
-            this._btnUp = new System.Windows.Forms.Button();
-            this._btnDown = new System.Windows.Forms.Button();
-            this._btnLeft = new System.Windows.Forms.Button();
-            this._btnRight = new System.Windows.Forms.Button();
-            this._btnShowFavorites = new System.Windows.Forms.Button();
-            this._btnRemoveFavorite = new System.Windows.Forms.Button();
-            this._btnAddFavorite = new System.Windows.Forms.Button();
-            this._btnBezier = new System.Windows.Forms.Button();
-            this._btnUpdateActivityParameter = new System.Windows.Forms.Button();
-            this._btnC = new System.Windows.Forms.Button();
-            this._btnD = new System.Windows.Forms.Button();
-            this._btnA = new System.Windows.Forms.Button();
-            this._btnOr = new System.Windows.Forms.Button();
-            this._btnComposite = new System.Windows.Forms.Button();
-            this._btnDisplaySpecification = new System.Windows.Forms.Button();
-            this._btnFindUsage = new System.Windows.Forms.Button();
-            this._btnLocateType = new System.Windows.Forms.Button();
-            this._btnLocateOperation = new System.Windows.Forms.Button();
-            this._btnDisplayBehavior = new System.Windows.Forms.Button();
-            this._btnOs = new System.Windows.Forms.Button();
-            this._btnTv = new System.Windows.Forms.Button();
-            this._btnTh = new System.Windows.Forms.Button();
-            this._btnLv = new System.Windows.Forms.Button();
-            this._btnLh = new System.Windows.Forms.Button();
-            this._btnConveyedItem = new System.Windows.Forms.Button();
-            this._panelPortButtons = new System.Windows.Forms.Panel();
-            this._btnHidePortType = new System.Windows.Forms.Button();
-            this._btnShowPortType = new System.Windows.Forms.Button();
-            this._btnShowPortLabel = new System.Windows.Forms.Button();
-            this._btnHidePortLabel = new System.Windows.Forms.Button();
-            this._btnHidePort = new System.Windows.Forms.Button();
-            this._btnShowPort = new System.Windows.Forms.Button();
-            this._btnReverseConnector = new System.Windows.Forms.Button();
-            this._cmbSearchName = new System.Windows.Forms.ComboBox();
-            this._txtSearchName = new System.Windows.Forms.TextBox();
-            this._btnAddNoteAndLink = new System.Windows.Forms.Button();
-            this._btnAddNote = new System.Windows.Forms.Button();
-            this._btnAddConstraint = new System.Windows.Forms.Button();
             this.contextMenuRtf = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.editSQLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showSQLFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -1267,9 +1228,60 @@ namespace hoTools.hoToolsGui
             this.runAndExportSQLToExcelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.exportCsvOfClipboardToExcelToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this._cmbSearchName = new System.Windows.Forms.ComboBox();
+            this._btnLeft = new System.Windows.Forms.Button();
+            this._btnUp = new System.Windows.Forms.Button();
+            this._btnRight = new System.Windows.Forms.Button();
+            this._btnDown = new System.Windows.Forms.Button();
+            this._btnLabelLeft = new System.Windows.Forms.Button();
+            this._btnLabelRight = new System.Windows.Forms.Button();
+            this._btnAddConstraint = new System.Windows.Forms.Button();
+            this._btnAddNote = new System.Windows.Forms.Button();
+            this._btnAddNoteAndLink = new System.Windows.Forms.Button();
+            this._btnComposite = new System.Windows.Forms.Button();
+            this._btnFindUsage = new System.Windows.Forms.Button();
+            this._btnUpdateActivityParameter = new System.Windows.Forms.Button();
+            this._btnLocateType = new System.Windows.Forms.Button();
+            this._btnLocateOperation = new System.Windows.Forms.Button();
+            this._btnDisplaySpecification = new System.Windows.Forms.Button();
+            this._btnAddFavorite = new System.Windows.Forms.Button();
+            this._btnRemoveFavorite = new System.Windows.Forms.Button();
+            this._btnShowFavorites = new System.Windows.Forms.Button();
+            this._btnDisplayBehavior = new System.Windows.Forms.Button();
             this._btnFeatureDown = new System.Windows.Forms.Button();
             this._btnFeatureUp = new System.Windows.Forms.Button();
+            this._btnReverseConnector = new System.Windows.Forms.Button();
+            this._btnConveyedItem = new System.Windows.Forms.Button();
+            this._panelPortButtons = new System.Windows.Forms.Panel();
+            this._btnHidePortType = new System.Windows.Forms.Button();
+            this._btnShowPortType = new System.Windows.Forms.Button();
+            this._btnShowPortLabel = new System.Windows.Forms.Button();
+            this._btnHidePortLabel = new System.Windows.Forms.Button();
+            this._btnHidePort = new System.Windows.Forms.Button();
+            this._btnShowPort = new System.Windows.Forms.Button();
+            this._btnLv = new System.Windows.Forms.Button();
+            this._btnLh = new System.Windows.Forms.Button();
+            this._btnTv = new System.Windows.Forms.Button();
+            this._btnTh = new System.Windows.Forms.Button();
+            this._btnC = new System.Windows.Forms.Button();
+            this._btnBezier = new System.Windows.Forms.Button();
+            this._btnOs = new System.Windows.Forms.Button();
+            this._btnOr = new System.Windows.Forms.Button();
+            this._btnA = new System.Windows.Forms.Button();
+            this._btnD = new System.Windows.Forms.Button();
+            this._txtSearchName = new System.Windows.Forms.TextBox();
+            this._txtSearchText = new System.Windows.Forms.TextBox();
+            this._toolTipRtfListOfSearches = new System.Windows.Forms.ToolTip(this.components);
             this._rtfListOfSearches = new System.Windows.Forms.RichTextBox();
+            this._panelPort = new System.Windows.Forms.Panel();
+            this._lblPorts = new System.Windows.Forms.Label();
+            this._panelNote = new System.Windows.Forms.Panel();
+            this._panelAdvanced = new System.Windows.Forms.Panel();
+            this._panelFavorite = new System.Windows.Forms.Panel();
+            this._panelConveyedItems = new System.Windows.Forms.Panel();
+            this._panelLineStyle = new System.Windows.Forms.Panel();
+            this._panelQuickSearch = new System.Windows.Forms.TableLayoutPanel();
+            this._panelButtons = new System.Windows.Forms.Panel();
             this._menuStrip1 = new System.Windows.Forms.MenuStrip();
             this._fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._settingGeneralToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -1352,35 +1364,27 @@ namespace hoTools.hoToolsGui
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this._helpToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.gitHubToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator15 = new System.Windows.Forms.ToolStripSeparator();
+            this.showLINQPadConnectionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.readMeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuIHome = new System.Windows.Forms.ToolStripMenuItem();
-            this._panelButtons = new System.Windows.Forms.Panel();
-            this._panelLineStyle = new System.Windows.Forms.Panel();
-            this._panelFavorite = new System.Windows.Forms.Panel();
-            this._panelNote = new System.Windows.Forms.Panel();
-            this._panelPort = new System.Windows.Forms.Panel();
-            this._lblPorts = new System.Windows.Forms.Label();
-            this._panelAdvanced = new System.Windows.Forms.Panel();
-            this._panelQuickSearch = new System.Windows.Forms.TableLayoutPanel();
-            this._toolTipRtfListOfSearches = new System.Windows.Forms.ToolTip(this.components);
-            this._panelConveyedItems = new System.Windows.Forms.Panel();
             this._toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this._toolStripContainer1.SuspendLayout();
             this._toolStripQuery.SuspendLayout();
             this._contextMenuStripSearch.SuspendLayout();
-            this._panelPortButtons.SuspendLayout();
             this.contextMenuRtf.SuspendLayout();
-            this._menuStrip1.SuspendLayout();
-            this._panelButtons.SuspendLayout();
-            this._panelLineStyle.SuspendLayout();
-            this._panelFavorite.SuspendLayout();
-            this._panelNote.SuspendLayout();
+            this._panelPortButtons.SuspendLayout();
             this._panelPort.SuspendLayout();
+            this._panelNote.SuspendLayout();
             this._panelAdvanced.SuspendLayout();
-            this._panelQuickSearch.SuspendLayout();
+            this._panelFavorite.SuspendLayout();
             this._panelConveyedItems.SuspendLayout();
+            this._panelLineStyle.SuspendLayout();
+            this._panelQuickSearch.SuspendLayout();
+            this._panelButtons.SuspendLayout();
+            this._menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // _toolStripContainer1
@@ -1532,20 +1536,6 @@ namespace hoTools.hoToolsGui
             this._toolStripServiceBtn10.Name = "_toolStripServiceBtn10";
             this._toolStripServiceBtn10.Click += new System.EventHandler(this.toolStripServiceBtn10_Click);
             // 
-            // _txtSearchText
-            // 
-            this._txtSearchText.ContextMenuStrip = this._contextMenuStripSearch;
-            resources.ApplyResources(this._txtSearchText, "_txtSearchText");
-            this._txtSearchText.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this._txtSearchText.Name = "_txtSearchText";
-            this._toolTip.SetToolTip(this._txtSearchText, resources.GetString("_txtSearchText.ToolTip"));
-            this._txtSearchText.TextChanged += new System.EventHandler(this._txtSearchText_TextChanged);
-            this._txtSearchText.Enter += new System.EventHandler(this._txtSearchText_Enter);
-            this._txtSearchText.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtUserText_KeyDown);
-            this._txtSearchText.Leave += new System.EventHandler(this._txtSearchText_Leave);
-            this._txtSearchText.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.txtSearchText_MouseDoubleClick);
-            this._txtSearchText.MouseLeave += new System.EventHandler(this._txtSearchText_MouseLeave);
-            // 
             // _contextMenuStripSearch
             // 
             this._contextMenuStripSearch.ImageScalingSize = new System.Drawing.Size(20, 20);
@@ -1607,343 +1597,6 @@ namespace hoTools.hoToolsGui
             this.clipboardTocsvToolStripMenuItem.Name = "clipboardTocsvToolStripMenuItem";
             resources.ApplyResources(this.clipboardTocsvToolStripMenuItem, "clipboardTocsvToolStripMenuItem");
             this.clipboardTocsvToolStripMenuItem.Click += new System.EventHandler(this.exportCsvOfClipboardToExcelToolStripMenuItem_Click);
-            // 
-            // _btnLabelRight
-            // 
-            resources.ApplyResources(this._btnLabelRight, "_btnLabelRight");
-            this._btnLabelRight.Name = "_btnLabelRight";
-            this._toolTip.SetToolTip(this._btnLabelRight, resources.GetString("_btnLabelRight.ToolTip"));
-            this._btnLabelRight.UseVisualStyleBackColor = true;
-            this._btnLabelRight.Click += new System.EventHandler(this.movePortLablePlusPositionToolStripMenuItem_Click);
-            // 
-            // _btnLabelLeft
-            // 
-            resources.ApplyResources(this._btnLabelLeft, "_btnLabelLeft");
-            this._btnLabelLeft.Name = "_btnLabelLeft";
-            this._toolTip.SetToolTip(this._btnLabelLeft, resources.GetString("_btnLabelLeft.ToolTip"));
-            this._btnLabelLeft.UseVisualStyleBackColor = true;
-            this._btnLabelLeft.Click += new System.EventHandler(this.movePortLableMinusPositionToolStripMenuItem_Click);
-            // 
-            // _btnUp
-            // 
-            resources.ApplyResources(this._btnUp, "_btnUp");
-            this._btnUp.Name = "_btnUp";
-            this._toolTip.SetToolTip(this._btnUp, resources.GetString("_btnUp.ToolTip"));
-            this._btnUp.UseVisualStyleBackColor = true;
-            this._btnUp.Click += new System.EventHandler(this.btnUp_Click);
-            // 
-            // _btnDown
-            // 
-            resources.ApplyResources(this._btnDown, "_btnDown");
-            this._btnDown.Name = "_btnDown";
-            this._toolTip.SetToolTip(this._btnDown, resources.GetString("_btnDown.ToolTip"));
-            this._btnDown.UseVisualStyleBackColor = true;
-            this._btnDown.Click += new System.EventHandler(this.btnDown_Click);
-            // 
-            // _btnLeft
-            // 
-            resources.ApplyResources(this._btnLeft, "_btnLeft");
-            this._btnLeft.Name = "_btnLeft";
-            this._toolTip.SetToolTip(this._btnLeft, resources.GetString("_btnLeft.ToolTip"));
-            this._btnLeft.UseVisualStyleBackColor = true;
-            this._btnLeft.Click += new System.EventHandler(this.btnLeft_Click);
-            // 
-            // _btnRight
-            // 
-            resources.ApplyResources(this._btnRight, "_btnRight");
-            this._btnRight.Name = "_btnRight";
-            this._toolTip.SetToolTip(this._btnRight, resources.GetString("_btnRight.ToolTip"));
-            this._btnRight.UseVisualStyleBackColor = true;
-            this._btnRight.Click += new System.EventHandler(this.btnRight_Click);
-            // 
-            // _btnShowFavorites
-            // 
-            resources.ApplyResources(this._btnShowFavorites, "_btnShowFavorites");
-            this._btnShowFavorites.Name = "_btnShowFavorites";
-            this._toolTip.SetToolTip(this._btnShowFavorites, resources.GetString("_btnShowFavorites.ToolTip"));
-            this._btnShowFavorites.UseVisualStyleBackColor = true;
-            this._btnShowFavorites.Click += new System.EventHandler(this.btnFavorites_Click);
-            // 
-            // _btnRemoveFavorite
-            // 
-            resources.ApplyResources(this._btnRemoveFavorite, "_btnRemoveFavorite");
-            this._btnRemoveFavorite.Name = "_btnRemoveFavorite";
-            this._toolTip.SetToolTip(this._btnRemoveFavorite, resources.GetString("_btnRemoveFavorite.ToolTip"));
-            this._btnRemoveFavorite.UseVisualStyleBackColor = true;
-            this._btnRemoveFavorite.Click += new System.EventHandler(this.btnRemoveFavorite_Click);
-            // 
-            // _btnAddFavorite
-            // 
-            resources.ApplyResources(this._btnAddFavorite, "_btnAddFavorite");
-            this._btnAddFavorite.Name = "_btnAddFavorite";
-            this._toolTip.SetToolTip(this._btnAddFavorite, resources.GetString("_btnAddFavorite.ToolTip"));
-            this._btnAddFavorite.UseVisualStyleBackColor = true;
-            this._btnAddFavorite.Click += new System.EventHandler(this.btnAddFavorite_Click);
-            // 
-            // _btnBezier
-            // 
-            resources.ApplyResources(this._btnBezier, "_btnBezier");
-            this._btnBezier.Name = "_btnBezier";
-            this._toolTip.SetToolTip(this._btnBezier, resources.GetString("_btnBezier.ToolTip"));
-            this._btnBezier.UseVisualStyleBackColor = true;
-            this._btnBezier.Click += new System.EventHandler(this.btnBezier_Click);
-            // 
-            // _btnUpdateActivityParameter
-            // 
-            resources.ApplyResources(this._btnUpdateActivityParameter, "_btnUpdateActivityParameter");
-            this._btnUpdateActivityParameter.Name = "_btnUpdateActivityParameter";
-            this._toolTip.SetToolTip(this._btnUpdateActivityParameter, resources.GetString("_btnUpdateActivityParameter.ToolTip"));
-            this._btnUpdateActivityParameter.UseVisualStyleBackColor = true;
-            this._btnUpdateActivityParameter.Click += new System.EventHandler(this.btnUpdateActivityParametzer_Click);
-            // 
-            // _btnC
-            // 
-            resources.ApplyResources(this._btnC, "_btnC");
-            this._btnC.Name = "_btnC";
-            this._toolTip.SetToolTip(this._btnC, resources.GetString("_btnC.ToolTip"));
-            this._btnC.UseVisualStyleBackColor = true;
-            this._btnC.Click += new System.EventHandler(this.btnC_Click);
-            // 
-            // _btnD
-            // 
-            resources.ApplyResources(this._btnD, "_btnD");
-            this._btnD.Name = "_btnD";
-            this._toolTip.SetToolTip(this._btnD, resources.GetString("_btnD.ToolTip"));
-            this._btnD.UseVisualStyleBackColor = true;
-            this._btnD.Click += new System.EventHandler(this.btnD_Click);
-            // 
-            // _btnA
-            // 
-            resources.ApplyResources(this._btnA, "_btnA");
-            this._btnA.Name = "_btnA";
-            this._toolTip.SetToolTip(this._btnA, resources.GetString("_btnA.ToolTip"));
-            this._btnA.UseVisualStyleBackColor = true;
-            this._btnA.Click += new System.EventHandler(this.btnA_Click);
-            // 
-            // _btnOr
-            // 
-            resources.ApplyResources(this._btnOr, "_btnOr");
-            this._btnOr.Name = "_btnOr";
-            this._toolTip.SetToolTip(this._btnOr, resources.GetString("_btnOr.ToolTip"));
-            this._btnOr.UseVisualStyleBackColor = true;
-            this._btnOr.Click += new System.EventHandler(this.btnOR_Click);
-            // 
-            // _btnComposite
-            // 
-            resources.ApplyResources(this._btnComposite, "_btnComposite");
-            this._btnComposite.Name = "_btnComposite";
-            this._toolTip.SetToolTip(this._btnComposite, resources.GetString("_btnComposite.ToolTip"));
-            this._btnComposite.UseVisualStyleBackColor = true;
-            this._btnComposite.Click += new System.EventHandler(this.btnComposite_Click);
-            // 
-            // _btnDisplaySpecification
-            // 
-            resources.ApplyResources(this._btnDisplaySpecification, "_btnDisplaySpecification");
-            this._btnDisplaySpecification.Name = "_btnDisplaySpecification";
-            this._toolTip.SetToolTip(this._btnDisplaySpecification, resources.GetString("_btnDisplaySpecification.ToolTip"));
-            this._btnDisplaySpecification.UseVisualStyleBackColor = true;
-            this._btnDisplaySpecification.Click += new System.EventHandler(this.btnShowSpecification_Click);
-            // 
-            // _btnFindUsage
-            // 
-            resources.ApplyResources(this._btnFindUsage, "_btnFindUsage");
-            this._btnFindUsage.Name = "_btnFindUsage";
-            this._toolTip.SetToolTip(this._btnFindUsage, resources.GetString("_btnFindUsage.ToolTip"));
-            this._btnFindUsage.UseVisualStyleBackColor = true;
-            this._btnFindUsage.Click += new System.EventHandler(this.btnFindUsage_Click);
-            // 
-            // _btnLocateType
-            // 
-            resources.ApplyResources(this._btnLocateType, "_btnLocateType");
-            this._btnLocateType.Name = "_btnLocateType";
-            this._toolTip.SetToolTip(this._btnLocateType, resources.GetString("_btnLocateType.ToolTip"));
-            this._btnLocateType.UseVisualStyleBackColor = true;
-            this._btnLocateType.Click += new System.EventHandler(this.btnLocateType_Click);
-            // 
-            // _btnLocateOperation
-            // 
-            resources.ApplyResources(this._btnLocateOperation, "_btnLocateOperation");
-            this._btnLocateOperation.Name = "_btnLocateOperation";
-            this._toolTip.SetToolTip(this._btnLocateOperation, resources.GetString("_btnLocateOperation.ToolTip"));
-            this._btnLocateOperation.UseVisualStyleBackColor = true;
-            this._btnLocateOperation.Click += new System.EventHandler(this.btnLocateOperation_Click);
-            // 
-            // _btnDisplayBehavior
-            // 
-            resources.ApplyResources(this._btnDisplayBehavior, "_btnDisplayBehavior");
-            this._btnDisplayBehavior.Name = "_btnDisplayBehavior";
-            this._toolTip.SetToolTip(this._btnDisplayBehavior, resources.GetString("_btnDisplayBehavior.ToolTip"));
-            this._btnDisplayBehavior.UseVisualStyleBackColor = true;
-            this._btnDisplayBehavior.Click += new System.EventHandler(this.btnDisplayBehavior_Click);
-            // 
-            // _btnOs
-            // 
-            resources.ApplyResources(this._btnOs, "_btnOs");
-            this._btnOs.Name = "_btnOs";
-            this._toolTip.SetToolTip(this._btnOs, resources.GetString("_btnOs.ToolTip"));
-            this._btnOs.UseVisualStyleBackColor = true;
-            this._btnOs.Click += new System.EventHandler(this.btnOS_Click);
-            // 
-            // _btnTv
-            // 
-            resources.ApplyResources(this._btnTv, "_btnTv");
-            this._btnTv.Name = "_btnTv";
-            this._toolTip.SetToolTip(this._btnTv, resources.GetString("_btnTv.ToolTip"));
-            this._btnTv.UseVisualStyleBackColor = true;
-            this._btnTv.Click += new System.EventHandler(this.btnTV_Click);
-            // 
-            // _btnTh
-            // 
-            resources.ApplyResources(this._btnTh, "_btnTh");
-            this._btnTh.Name = "_btnTh";
-            this._toolTip.SetToolTip(this._btnTh, resources.GetString("_btnTh.ToolTip"));
-            this._btnTh.UseVisualStyleBackColor = true;
-            this._btnTh.Click += new System.EventHandler(this.btnTH_Click);
-            // 
-            // _btnLv
-            // 
-            resources.ApplyResources(this._btnLv, "_btnLv");
-            this._btnLv.Name = "_btnLv";
-            this._toolTip.SetToolTip(this._btnLv, resources.GetString("_btnLv.ToolTip"));
-            this._btnLv.UseVisualStyleBackColor = true;
-            this._btnLv.Click += new System.EventHandler(this.btnLV_Click);
-            // 
-            // _btnLh
-            // 
-            resources.ApplyResources(this._btnLh, "_btnLh");
-            this._btnLh.Name = "_btnLh";
-            this._toolTip.SetToolTip(this._btnLh, resources.GetString("_btnLh.ToolTip"));
-            this._btnLh.UseVisualStyleBackColor = true;
-            this._btnLh.Click += new System.EventHandler(this.btnLH_Click);
-            // 
-            // _btnConveyedItem
-            // 
-            resources.ApplyResources(this._btnConveyedItem, "_btnConveyedItem");
-            this._btnConveyedItem.Name = "_btnConveyedItem";
-            this._toolTip.SetToolTip(this._btnConveyedItem, resources.GetString("_btnConveyedItem.ToolTip"));
-            this._btnConveyedItem.UseVisualStyleBackColor = true;
-            this._btnConveyedItem.Click += new System.EventHandler(this.btnConveyedItem_Click);
-            // 
-            // _panelPortButtons
-            // 
-            this._panelPortButtons.Controls.Add(this._btnHidePortType);
-            this._panelPortButtons.Controls.Add(this._btnShowPortType);
-            this._panelPortButtons.Controls.Add(this._btnShowPortLabel);
-            this._panelPortButtons.Controls.Add(this._btnHidePortLabel);
-            this._panelPortButtons.Controls.Add(this._btnHidePort);
-            this._panelPortButtons.Controls.Add(this._btnShowPort);
-            resources.ApplyResources(this._panelPortButtons, "_panelPortButtons");
-            this._panelPortButtons.Name = "_panelPortButtons";
-            this._toolTip.SetToolTip(this._panelPortButtons, resources.GetString("_panelPortButtons.ToolTip"));
-            // 
-            // _btnHidePortType
-            // 
-            resources.ApplyResources(this._btnHidePortType, "_btnHidePortType");
-            this._btnHidePortType.Name = "_btnHidePortType";
-            this._toolTip.SetToolTip(this._btnHidePortType, resources.GetString("_btnHidePortType.ToolTip"));
-            this._btnHidePortType.UseVisualStyleBackColor = true;
-            this._btnHidePortType.Click += new System.EventHandler(this._btnHidePortType_Click);
-            // 
-            // _btnShowPortType
-            // 
-            resources.ApplyResources(this._btnShowPortType, "_btnShowPortType");
-            this._btnShowPortType.Name = "_btnShowPortType";
-            this._toolTip.SetToolTip(this._btnShowPortType, resources.GetString("_btnShowPortType.ToolTip"));
-            this._btnShowPortType.UseVisualStyleBackColor = true;
-            this._btnShowPortType.Click += new System.EventHandler(this._btnShowPortType_Click);
-            // 
-            // _btnShowPortLabel
-            // 
-            resources.ApplyResources(this._btnShowPortLabel, "_btnShowPortLabel");
-            this._btnShowPortLabel.Name = "_btnShowPortLabel";
-            this._toolTip.SetToolTip(this._btnShowPortLabel, resources.GetString("_btnShowPortLabel.ToolTip"));
-            this._btnShowPortLabel.UseVisualStyleBackColor = true;
-            this._btnShowPortLabel.Click += new System.EventHandler(this._btnShowPortLabel_Click);
-            // 
-            // _btnHidePortLabel
-            // 
-            resources.ApplyResources(this._btnHidePortLabel, "_btnHidePortLabel");
-            this._btnHidePortLabel.Name = "_btnHidePortLabel";
-            this._toolTip.SetToolTip(this._btnHidePortLabel, resources.GetString("_btnHidePortLabel.ToolTip"));
-            this._btnHidePortLabel.UseVisualStyleBackColor = true;
-            this._btnHidePortLabel.Click += new System.EventHandler(this._btnHidePortLabel_Click);
-            // 
-            // _btnHidePort
-            // 
-            resources.ApplyResources(this._btnHidePort, "_btnHidePort");
-            this._btnHidePort.Name = "_btnHidePort";
-            this._toolTip.SetToolTip(this._btnHidePort, resources.GetString("_btnHidePort.ToolTip"));
-            this._btnHidePort.UseVisualStyleBackColor = true;
-            this._btnHidePort.Click += new System.EventHandler(this.removePortsInDiagramToolStripMenuItem_Click);
-            // 
-            // _btnShowPort
-            // 
-            resources.ApplyResources(this._btnShowPort, "_btnShowPort");
-            this._btnShowPort.Name = "_btnShowPort";
-            this._toolTip.SetToolTip(this._btnShowPort, resources.GetString("_btnShowPort.ToolTip"));
-            this._btnShowPort.UseVisualStyleBackColor = true;
-            this._btnShowPort.Click += new System.EventHandler(this.showPortsInDiagramObjectsToolStripMenuItem_Click);
-            // 
-            // _btnReverseConnector
-            // 
-            resources.ApplyResources(this._btnReverseConnector, "_btnReverseConnector");
-            this._btnReverseConnector.Name = "_btnReverseConnector";
-            this._toolTip.SetToolTip(this._btnReverseConnector, resources.GetString("_btnReverseConnector.ToolTip"));
-            this._btnReverseConnector.UseVisualStyleBackColor = true;
-            this._btnReverseConnector.Click += new System.EventHandler(this._btnReverseConnector_Click);
-            // 
-            // _cmbSearchName
-            // 
-            this._cmbSearchName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this._cmbSearchName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            resources.ApplyResources(this._cmbSearchName, "_cmbSearchName");
-            this._cmbSearchName.FormattingEnabled = true;
-            this._cmbSearchName.Name = "_cmbSearchName";
-            this._toolTip.SetToolTip(this._cmbSearchName, resources.GetString("_cmbSearchName.ToolTip"));
-            this._cmbSearchName.TextUpdate += new System.EventHandler(this._txtSearchName_TextUpdate);
-            this._cmbSearchName.TextChanged += new System.EventHandler(this._txtSearchName_TextChanged);
-            this._cmbSearchName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbSearchName_KeyDown);
-            this._cmbSearchName.KeyUp += new System.Windows.Forms.KeyEventHandler(this._txtSearchName_KeyUp);
-            this._cmbSearchName.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.cmbSearchName_MouseDoubleClick);
-            // 
-            // _txtSearchName
-            // 
-            this._txtSearchName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this._txtSearchName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this._txtSearchName.ContextMenuStrip = this._contextMenuStripSearch;
-            resources.ApplyResources(this._txtSearchName, "_txtSearchName");
-            this._txtSearchName.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this._txtSearchName.Name = "_txtSearchName";
-            this._toolTip.SetToolTip(this._txtSearchName, resources.GetString("_txtSearchName.ToolTip"));
-            this._txtSearchName.Enter += new System.EventHandler(this._txtSearchName_Enter);
-            this._txtSearchName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbSearchName_KeyDown);
-            this._txtSearchName.KeyUp += new System.Windows.Forms.KeyEventHandler(this._txtSearchName_KeyUp);
-            this._txtSearchName.Leave += new System.EventHandler(this._txtSearchName_Leave);
-            this._txtSearchName.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.cmbSearchName_MouseDoubleClick);
-            // 
-            // _btnAddNoteAndLink
-            // 
-            resources.ApplyResources(this._btnAddNoteAndLink, "_btnAddNoteAndLink");
-            this._btnAddNoteAndLink.Name = "_btnAddNoteAndLink";
-            this._toolTip.SetToolTip(this._btnAddNoteAndLink, resources.GetString("_btnAddNoteAndLink.ToolTip"));
-            this._btnAddNoteAndLink.UseVisualStyleBackColor = true;
-            this._btnAddNoteAndLink.Click += new System.EventHandler(this.btnAddNoteAndLinkDescription_Click);
-            // 
-            // _btnAddNote
-            // 
-            resources.ApplyResources(this._btnAddNote, "_btnAddNote");
-            this._btnAddNote.Name = "_btnAddNote";
-            this._toolTip.SetToolTip(this._btnAddNote, resources.GetString("_btnAddNote.ToolTip"));
-            this._btnAddNote.UseVisualStyleBackColor = true;
-            this._btnAddNote.Click += new System.EventHandler(this.btnAddNote_Click);
-            // 
-            // _btnAddConstraint
-            // 
-            resources.ApplyResources(this._btnAddConstraint, "_btnAddConstraint");
-            this._btnAddConstraint.Name = "_btnAddConstraint";
-            this._toolTip.SetToolTip(this._btnAddConstraint, resources.GetString("_btnAddConstraint.ToolTip"));
-            this._btnAddConstraint.UseVisualStyleBackColor = true;
-            this._btnAddConstraint.Click += new System.EventHandler(this.btnAddConstraint_Click);
             // 
             // contextMenuRtf
             // 
@@ -2014,6 +1667,172 @@ namespace hoTools.hoToolsGui
             resources.ApplyResources(this.exportCsvOfClipboardToExcelToolStripMenuItem1, "exportCsvOfClipboardToExcelToolStripMenuItem1");
             this.exportCsvOfClipboardToExcelToolStripMenuItem1.Click += new System.EventHandler(this.runAndExportCsvToExcelRtfToolStripMenuItem_Click);
             // 
+            // _cmbSearchName
+            // 
+            this._cmbSearchName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this._cmbSearchName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            resources.ApplyResources(this._cmbSearchName, "_cmbSearchName");
+            this._cmbSearchName.FormattingEnabled = true;
+            this._cmbSearchName.Name = "_cmbSearchName";
+            this._toolTip.SetToolTip(this._cmbSearchName, resources.GetString("_cmbSearchName.ToolTip"));
+            this._cmbSearchName.TextUpdate += new System.EventHandler(this._txtSearchName_TextUpdate);
+            this._cmbSearchName.TextChanged += new System.EventHandler(this._txtSearchName_TextChanged);
+            this._cmbSearchName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbSearchName_KeyDown);
+            this._cmbSearchName.KeyUp += new System.Windows.Forms.KeyEventHandler(this._txtSearchName_KeyUp);
+            this._cmbSearchName.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.cmbSearchName_MouseDoubleClick);
+            // 
+            // _btnLeft
+            // 
+            resources.ApplyResources(this._btnLeft, "_btnLeft");
+            this._btnLeft.Name = "_btnLeft";
+            this._toolTip.SetToolTip(this._btnLeft, resources.GetString("_btnLeft.ToolTip"));
+            this._btnLeft.UseVisualStyleBackColor = true;
+            this._btnLeft.Click += new System.EventHandler(this.btnLeft_Click);
+            // 
+            // _btnUp
+            // 
+            resources.ApplyResources(this._btnUp, "_btnUp");
+            this._btnUp.Name = "_btnUp";
+            this._toolTip.SetToolTip(this._btnUp, resources.GetString("_btnUp.ToolTip"));
+            this._btnUp.UseVisualStyleBackColor = true;
+            this._btnUp.Click += new System.EventHandler(this.btnUp_Click);
+            // 
+            // _btnRight
+            // 
+            resources.ApplyResources(this._btnRight, "_btnRight");
+            this._btnRight.Name = "_btnRight";
+            this._toolTip.SetToolTip(this._btnRight, resources.GetString("_btnRight.ToolTip"));
+            this._btnRight.UseVisualStyleBackColor = true;
+            this._btnRight.Click += new System.EventHandler(this.btnRight_Click);
+            // 
+            // _btnDown
+            // 
+            resources.ApplyResources(this._btnDown, "_btnDown");
+            this._btnDown.Name = "_btnDown";
+            this._toolTip.SetToolTip(this._btnDown, resources.GetString("_btnDown.ToolTip"));
+            this._btnDown.UseVisualStyleBackColor = true;
+            this._btnDown.Click += new System.EventHandler(this.btnDown_Click);
+            // 
+            // _btnLabelLeft
+            // 
+            resources.ApplyResources(this._btnLabelLeft, "_btnLabelLeft");
+            this._btnLabelLeft.Name = "_btnLabelLeft";
+            this._toolTip.SetToolTip(this._btnLabelLeft, resources.GetString("_btnLabelLeft.ToolTip"));
+            this._btnLabelLeft.UseVisualStyleBackColor = true;
+            this._btnLabelLeft.Click += new System.EventHandler(this.movePortLableMinusPositionToolStripMenuItem_Click);
+            // 
+            // _btnLabelRight
+            // 
+            resources.ApplyResources(this._btnLabelRight, "_btnLabelRight");
+            this._btnLabelRight.Name = "_btnLabelRight";
+            this._toolTip.SetToolTip(this._btnLabelRight, resources.GetString("_btnLabelRight.ToolTip"));
+            this._btnLabelRight.UseVisualStyleBackColor = true;
+            this._btnLabelRight.Click += new System.EventHandler(this.movePortLablePlusPositionToolStripMenuItem_Click);
+            // 
+            // _btnAddConstraint
+            // 
+            resources.ApplyResources(this._btnAddConstraint, "_btnAddConstraint");
+            this._btnAddConstraint.Name = "_btnAddConstraint";
+            this._toolTip.SetToolTip(this._btnAddConstraint, resources.GetString("_btnAddConstraint.ToolTip"));
+            this._btnAddConstraint.UseVisualStyleBackColor = true;
+            this._btnAddConstraint.Click += new System.EventHandler(this.btnAddConstraint_Click);
+            // 
+            // _btnAddNote
+            // 
+            resources.ApplyResources(this._btnAddNote, "_btnAddNote");
+            this._btnAddNote.Name = "_btnAddNote";
+            this._toolTip.SetToolTip(this._btnAddNote, resources.GetString("_btnAddNote.ToolTip"));
+            this._btnAddNote.UseVisualStyleBackColor = true;
+            this._btnAddNote.Click += new System.EventHandler(this.btnAddNote_Click);
+            // 
+            // _btnAddNoteAndLink
+            // 
+            resources.ApplyResources(this._btnAddNoteAndLink, "_btnAddNoteAndLink");
+            this._btnAddNoteAndLink.Name = "_btnAddNoteAndLink";
+            this._toolTip.SetToolTip(this._btnAddNoteAndLink, resources.GetString("_btnAddNoteAndLink.ToolTip"));
+            this._btnAddNoteAndLink.UseVisualStyleBackColor = true;
+            this._btnAddNoteAndLink.Click += new System.EventHandler(this.btnAddNoteAndLinkDescription_Click);
+            // 
+            // _btnComposite
+            // 
+            resources.ApplyResources(this._btnComposite, "_btnComposite");
+            this._btnComposite.Name = "_btnComposite";
+            this._toolTip.SetToolTip(this._btnComposite, resources.GetString("_btnComposite.ToolTip"));
+            this._btnComposite.UseVisualStyleBackColor = true;
+            this._btnComposite.Click += new System.EventHandler(this.btnComposite_Click);
+            // 
+            // _btnFindUsage
+            // 
+            resources.ApplyResources(this._btnFindUsage, "_btnFindUsage");
+            this._btnFindUsage.Name = "_btnFindUsage";
+            this._toolTip.SetToolTip(this._btnFindUsage, resources.GetString("_btnFindUsage.ToolTip"));
+            this._btnFindUsage.UseVisualStyleBackColor = true;
+            this._btnFindUsage.Click += new System.EventHandler(this.btnFindUsage_Click);
+            // 
+            // _btnUpdateActivityParameter
+            // 
+            resources.ApplyResources(this._btnUpdateActivityParameter, "_btnUpdateActivityParameter");
+            this._btnUpdateActivityParameter.Name = "_btnUpdateActivityParameter";
+            this._toolTip.SetToolTip(this._btnUpdateActivityParameter, resources.GetString("_btnUpdateActivityParameter.ToolTip"));
+            this._btnUpdateActivityParameter.UseVisualStyleBackColor = true;
+            this._btnUpdateActivityParameter.Click += new System.EventHandler(this.btnUpdateActivityParametzer_Click);
+            // 
+            // _btnLocateType
+            // 
+            resources.ApplyResources(this._btnLocateType, "_btnLocateType");
+            this._btnLocateType.Name = "_btnLocateType";
+            this._toolTip.SetToolTip(this._btnLocateType, resources.GetString("_btnLocateType.ToolTip"));
+            this._btnLocateType.UseVisualStyleBackColor = true;
+            this._btnLocateType.Click += new System.EventHandler(this.btnLocateType_Click);
+            // 
+            // _btnLocateOperation
+            // 
+            resources.ApplyResources(this._btnLocateOperation, "_btnLocateOperation");
+            this._btnLocateOperation.Name = "_btnLocateOperation";
+            this._toolTip.SetToolTip(this._btnLocateOperation, resources.GetString("_btnLocateOperation.ToolTip"));
+            this._btnLocateOperation.UseVisualStyleBackColor = true;
+            this._btnLocateOperation.Click += new System.EventHandler(this.btnLocateOperation_Click);
+            // 
+            // _btnDisplaySpecification
+            // 
+            resources.ApplyResources(this._btnDisplaySpecification, "_btnDisplaySpecification");
+            this._btnDisplaySpecification.Name = "_btnDisplaySpecification";
+            this._toolTip.SetToolTip(this._btnDisplaySpecification, resources.GetString("_btnDisplaySpecification.ToolTip"));
+            this._btnDisplaySpecification.UseVisualStyleBackColor = true;
+            this._btnDisplaySpecification.Click += new System.EventHandler(this.btnShowSpecification_Click);
+            // 
+            // _btnAddFavorite
+            // 
+            resources.ApplyResources(this._btnAddFavorite, "_btnAddFavorite");
+            this._btnAddFavorite.Name = "_btnAddFavorite";
+            this._toolTip.SetToolTip(this._btnAddFavorite, resources.GetString("_btnAddFavorite.ToolTip"));
+            this._btnAddFavorite.UseVisualStyleBackColor = true;
+            this._btnAddFavorite.Click += new System.EventHandler(this.btnAddFavorite_Click);
+            // 
+            // _btnRemoveFavorite
+            // 
+            resources.ApplyResources(this._btnRemoveFavorite, "_btnRemoveFavorite");
+            this._btnRemoveFavorite.Name = "_btnRemoveFavorite";
+            this._toolTip.SetToolTip(this._btnRemoveFavorite, resources.GetString("_btnRemoveFavorite.ToolTip"));
+            this._btnRemoveFavorite.UseVisualStyleBackColor = true;
+            this._btnRemoveFavorite.Click += new System.EventHandler(this.btnRemoveFavorite_Click);
+            // 
+            // _btnShowFavorites
+            // 
+            resources.ApplyResources(this._btnShowFavorites, "_btnShowFavorites");
+            this._btnShowFavorites.Name = "_btnShowFavorites";
+            this._toolTip.SetToolTip(this._btnShowFavorites, resources.GetString("_btnShowFavorites.ToolTip"));
+            this._btnShowFavorites.UseVisualStyleBackColor = true;
+            this._btnShowFavorites.Click += new System.EventHandler(this.btnFavorites_Click);
+            // 
+            // _btnDisplayBehavior
+            // 
+            resources.ApplyResources(this._btnDisplayBehavior, "_btnDisplayBehavior");
+            this._btnDisplayBehavior.Name = "_btnDisplayBehavior";
+            this._toolTip.SetToolTip(this._btnDisplayBehavior, resources.GetString("_btnDisplayBehavior.ToolTip"));
+            this._btnDisplayBehavior.UseVisualStyleBackColor = true;
+            this._btnDisplayBehavior.Click += new System.EventHandler(this.btnDisplayBehavior_Click);
+            // 
             // _btnFeatureDown
             // 
             resources.ApplyResources(this._btnFeatureDown, "_btnFeatureDown");
@@ -2030,6 +1849,198 @@ namespace hoTools.hoToolsGui
             this._btnFeatureUp.UseVisualStyleBackColor = true;
             this._btnFeatureUp.Click += new System.EventHandler(this._btnFeatureUp_Click);
             // 
+            // _btnReverseConnector
+            // 
+            resources.ApplyResources(this._btnReverseConnector, "_btnReverseConnector");
+            this._btnReverseConnector.Name = "_btnReverseConnector";
+            this._toolTip.SetToolTip(this._btnReverseConnector, resources.GetString("_btnReverseConnector.ToolTip"));
+            this._btnReverseConnector.UseVisualStyleBackColor = true;
+            this._btnReverseConnector.Click += new System.EventHandler(this._btnReverseConnector_Click);
+            // 
+            // _btnConveyedItem
+            // 
+            resources.ApplyResources(this._btnConveyedItem, "_btnConveyedItem");
+            this._btnConveyedItem.Name = "_btnConveyedItem";
+            this._toolTip.SetToolTip(this._btnConveyedItem, resources.GetString("_btnConveyedItem.ToolTip"));
+            this._btnConveyedItem.UseVisualStyleBackColor = true;
+            this._btnConveyedItem.Click += new System.EventHandler(this.btnConveyedItem_Click);
+            // 
+            // _panelPortButtons
+            // 
+            this._panelPortButtons.Controls.Add(this._btnHidePortType);
+            this._panelPortButtons.Controls.Add(this._btnShowPortType);
+            this._panelPortButtons.Controls.Add(this._btnShowPortLabel);
+            this._panelPortButtons.Controls.Add(this._btnHidePortLabel);
+            this._panelPortButtons.Controls.Add(this._btnHidePort);
+            this._panelPortButtons.Controls.Add(this._btnShowPort);
+            resources.ApplyResources(this._panelPortButtons, "_panelPortButtons");
+            this._panelPortButtons.Name = "_panelPortButtons";
+            this._toolTip.SetToolTip(this._panelPortButtons, resources.GetString("_panelPortButtons.ToolTip"));
+            // 
+            // _btnHidePortType
+            // 
+            resources.ApplyResources(this._btnHidePortType, "_btnHidePortType");
+            this._btnHidePortType.Name = "_btnHidePortType";
+            this._toolTip.SetToolTip(this._btnHidePortType, resources.GetString("_btnHidePortType.ToolTip"));
+            this._btnHidePortType.UseVisualStyleBackColor = true;
+            this._btnHidePortType.Click += new System.EventHandler(this._btnHidePortType_Click);
+            // 
+            // _btnShowPortType
+            // 
+            resources.ApplyResources(this._btnShowPortType, "_btnShowPortType");
+            this._btnShowPortType.Name = "_btnShowPortType";
+            this._toolTip.SetToolTip(this._btnShowPortType, resources.GetString("_btnShowPortType.ToolTip"));
+            this._btnShowPortType.UseVisualStyleBackColor = true;
+            this._btnShowPortType.Click += new System.EventHandler(this._btnShowPortType_Click);
+            // 
+            // _btnShowPortLabel
+            // 
+            resources.ApplyResources(this._btnShowPortLabel, "_btnShowPortLabel");
+            this._btnShowPortLabel.Name = "_btnShowPortLabel";
+            this._toolTip.SetToolTip(this._btnShowPortLabel, resources.GetString("_btnShowPortLabel.ToolTip"));
+            this._btnShowPortLabel.UseVisualStyleBackColor = true;
+            this._btnShowPortLabel.Click += new System.EventHandler(this._btnShowPortLabel_Click);
+            // 
+            // _btnHidePortLabel
+            // 
+            resources.ApplyResources(this._btnHidePortLabel, "_btnHidePortLabel");
+            this._btnHidePortLabel.Name = "_btnHidePortLabel";
+            this._toolTip.SetToolTip(this._btnHidePortLabel, resources.GetString("_btnHidePortLabel.ToolTip"));
+            this._btnHidePortLabel.UseVisualStyleBackColor = true;
+            this._btnHidePortLabel.Click += new System.EventHandler(this._btnHidePortLabel_Click);
+            // 
+            // _btnHidePort
+            // 
+            resources.ApplyResources(this._btnHidePort, "_btnHidePort");
+            this._btnHidePort.Name = "_btnHidePort";
+            this._toolTip.SetToolTip(this._btnHidePort, resources.GetString("_btnHidePort.ToolTip"));
+            this._btnHidePort.UseVisualStyleBackColor = true;
+            this._btnHidePort.Click += new System.EventHandler(this.removePortsInDiagramToolStripMenuItem_Click);
+            // 
+            // _btnShowPort
+            // 
+            resources.ApplyResources(this._btnShowPort, "_btnShowPort");
+            this._btnShowPort.Name = "_btnShowPort";
+            this._toolTip.SetToolTip(this._btnShowPort, resources.GetString("_btnShowPort.ToolTip"));
+            this._btnShowPort.UseVisualStyleBackColor = true;
+            this._btnShowPort.Click += new System.EventHandler(this.showPortsInDiagramObjectsToolStripMenuItem_Click);
+            // 
+            // _btnLv
+            // 
+            resources.ApplyResources(this._btnLv, "_btnLv");
+            this._btnLv.Name = "_btnLv";
+            this._toolTip.SetToolTip(this._btnLv, resources.GetString("_btnLv.ToolTip"));
+            this._btnLv.UseVisualStyleBackColor = true;
+            this._btnLv.Click += new System.EventHandler(this.btnLV_Click);
+            // 
+            // _btnLh
+            // 
+            resources.ApplyResources(this._btnLh, "_btnLh");
+            this._btnLh.Name = "_btnLh";
+            this._toolTip.SetToolTip(this._btnLh, resources.GetString("_btnLh.ToolTip"));
+            this._btnLh.UseVisualStyleBackColor = true;
+            this._btnLh.Click += new System.EventHandler(this.btnLH_Click);
+            // 
+            // _btnTv
+            // 
+            resources.ApplyResources(this._btnTv, "_btnTv");
+            this._btnTv.Name = "_btnTv";
+            this._toolTip.SetToolTip(this._btnTv, resources.GetString("_btnTv.ToolTip"));
+            this._btnTv.UseVisualStyleBackColor = true;
+            this._btnTv.Click += new System.EventHandler(this.btnTV_Click);
+            // 
+            // _btnTh
+            // 
+            resources.ApplyResources(this._btnTh, "_btnTh");
+            this._btnTh.Name = "_btnTh";
+            this._toolTip.SetToolTip(this._btnTh, resources.GetString("_btnTh.ToolTip"));
+            this._btnTh.UseVisualStyleBackColor = true;
+            this._btnTh.Click += new System.EventHandler(this.btnTH_Click);
+            // 
+            // _btnC
+            // 
+            resources.ApplyResources(this._btnC, "_btnC");
+            this._btnC.Name = "_btnC";
+            this._toolTip.SetToolTip(this._btnC, resources.GetString("_btnC.ToolTip"));
+            this._btnC.UseVisualStyleBackColor = true;
+            this._btnC.Click += new System.EventHandler(this.btnC_Click);
+            // 
+            // _btnBezier
+            // 
+            resources.ApplyResources(this._btnBezier, "_btnBezier");
+            this._btnBezier.Name = "_btnBezier";
+            this._toolTip.SetToolTip(this._btnBezier, resources.GetString("_btnBezier.ToolTip"));
+            this._btnBezier.UseVisualStyleBackColor = true;
+            this._btnBezier.Click += new System.EventHandler(this.btnBezier_Click);
+            // 
+            // _btnOs
+            // 
+            resources.ApplyResources(this._btnOs, "_btnOs");
+            this._btnOs.Name = "_btnOs";
+            this._toolTip.SetToolTip(this._btnOs, resources.GetString("_btnOs.ToolTip"));
+            this._btnOs.UseVisualStyleBackColor = true;
+            this._btnOs.Click += new System.EventHandler(this.btnOS_Click);
+            // 
+            // _btnOr
+            // 
+            resources.ApplyResources(this._btnOr, "_btnOr");
+            this._btnOr.Name = "_btnOr";
+            this._toolTip.SetToolTip(this._btnOr, resources.GetString("_btnOr.ToolTip"));
+            this._btnOr.UseVisualStyleBackColor = true;
+            this._btnOr.Click += new System.EventHandler(this.btnOR_Click);
+            // 
+            // _btnA
+            // 
+            resources.ApplyResources(this._btnA, "_btnA");
+            this._btnA.Name = "_btnA";
+            this._toolTip.SetToolTip(this._btnA, resources.GetString("_btnA.ToolTip"));
+            this._btnA.UseVisualStyleBackColor = true;
+            this._btnA.Click += new System.EventHandler(this.btnA_Click);
+            // 
+            // _btnD
+            // 
+            resources.ApplyResources(this._btnD, "_btnD");
+            this._btnD.Name = "_btnD";
+            this._toolTip.SetToolTip(this._btnD, resources.GetString("_btnD.ToolTip"));
+            this._btnD.UseVisualStyleBackColor = true;
+            this._btnD.Click += new System.EventHandler(this.btnD_Click);
+            // 
+            // _txtSearchName
+            // 
+            this._txtSearchName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this._txtSearchName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this._txtSearchName.ContextMenuStrip = this._contextMenuStripSearch;
+            resources.ApplyResources(this._txtSearchName, "_txtSearchName");
+            this._txtSearchName.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this._txtSearchName.Name = "_txtSearchName";
+            this._toolTip.SetToolTip(this._txtSearchName, resources.GetString("_txtSearchName.ToolTip"));
+            this._txtSearchName.Enter += new System.EventHandler(this._txtSearchName_Enter);
+            this._txtSearchName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbSearchName_KeyDown);
+            this._txtSearchName.KeyUp += new System.Windows.Forms.KeyEventHandler(this._txtSearchName_KeyUp);
+            this._txtSearchName.Leave += new System.EventHandler(this._txtSearchName_Leave);
+            this._txtSearchName.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.cmbSearchName_MouseDoubleClick);
+            // 
+            // _txtSearchText
+            // 
+            this._txtSearchText.ContextMenuStrip = this._contextMenuStripSearch;
+            resources.ApplyResources(this._txtSearchText, "_txtSearchText");
+            this._txtSearchText.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this._txtSearchText.Name = "_txtSearchText";
+            this._toolTip.SetToolTip(this._txtSearchText, resources.GetString("_txtSearchText.ToolTip"));
+            this._txtSearchText.TextChanged += new System.EventHandler(this._txtSearchText_TextChanged);
+            this._txtSearchText.Enter += new System.EventHandler(this._txtSearchText_Enter);
+            this._txtSearchText.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtUserText_KeyDown);
+            this._txtSearchText.Leave += new System.EventHandler(this._txtSearchText_Leave);
+            this._txtSearchText.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.txtSearchText_MouseDoubleClick);
+            this._txtSearchText.MouseLeave += new System.EventHandler(this._txtSearchText_MouseLeave);
+            // 
+            // _toolTipRtfListOfSearches
+            // 
+            this._toolTipRtfListOfSearches.AutomaticDelay = 0;
+            this._toolTipRtfListOfSearches.OwnerDraw = true;
+            this._toolTipRtfListOfSearches.Draw += new System.Windows.Forms.DrawToolTipEventHandler(this._toolTipRtfListOfSearches_Draw);
+            this._toolTipRtfListOfSearches.Popup += new System.Windows.Forms.PopupEventHandler(this._toolTipRtfListOfSearches_Popup);
+            // 
             // _rtfListOfSearches
             // 
             this._rtfListOfSearches.ContextMenuStrip = this.contextMenuRtf;
@@ -2041,6 +2052,88 @@ namespace hoTools.hoToolsGui
             this._rtfListOfSearches.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.rtfListOfSearches_MouseDoubleClick);
             this._rtfListOfSearches.MouseDown += new System.Windows.Forms.MouseEventHandler(this.rtfListOfSearches_MouseDown);
             this._rtfListOfSearches.MouseUp += new System.Windows.Forms.MouseEventHandler(this.rtfListOfSearches_MouseUp);
+            // 
+            // _panelPort
+            // 
+            this._panelPort.Controls.Add(this._lblPorts);
+            this._panelPort.Controls.Add(this._btnLeft);
+            this._panelPort.Controls.Add(this._btnUp);
+            this._panelPort.Controls.Add(this._btnRight);
+            this._panelPort.Controls.Add(this._btnDown);
+            this._panelPort.Controls.Add(this._btnLabelLeft);
+            this._panelPort.Controls.Add(this._btnLabelRight);
+            resources.ApplyResources(this._panelPort, "_panelPort");
+            this._panelPort.Name = "_panelPort";
+            // 
+            // _lblPorts
+            // 
+            resources.ApplyResources(this._lblPorts, "_lblPorts");
+            this._lblPorts.Name = "_lblPorts";
+            // 
+            // _panelNote
+            // 
+            this._panelNote.Controls.Add(this._btnAddConstraint);
+            this._panelNote.Controls.Add(this._btnAddNote);
+            this._panelNote.Controls.Add(this._btnAddNoteAndLink);
+            resources.ApplyResources(this._panelNote, "_panelNote");
+            this._panelNote.Name = "_panelNote";
+            // 
+            // _panelAdvanced
+            // 
+            this._panelAdvanced.Controls.Add(this._btnComposite);
+            this._panelAdvanced.Controls.Add(this._btnFindUsage);
+            this._panelAdvanced.Controls.Add(this._btnUpdateActivityParameter);
+            this._panelAdvanced.Controls.Add(this._btnLocateType);
+            this._panelAdvanced.Controls.Add(this._btnLocateOperation);
+            this._panelAdvanced.Controls.Add(this._btnDisplaySpecification);
+            resources.ApplyResources(this._panelAdvanced, "_panelAdvanced");
+            this._panelAdvanced.Name = "_panelAdvanced";
+            // 
+            // _panelFavorite
+            // 
+            this._panelFavorite.Controls.Add(this._btnAddFavorite);
+            this._panelFavorite.Controls.Add(this._btnRemoveFavorite);
+            this._panelFavorite.Controls.Add(this._btnShowFavorites);
+            this._panelFavorite.Controls.Add(this._btnDisplayBehavior);
+            resources.ApplyResources(this._panelFavorite, "_panelFavorite");
+            this._panelFavorite.Name = "_panelFavorite";
+            // 
+            // _panelConveyedItems
+            // 
+            this._panelConveyedItems.Controls.Add(this._btnFeatureDown);
+            this._panelConveyedItems.Controls.Add(this._btnFeatureUp);
+            this._panelConveyedItems.Controls.Add(this._btnReverseConnector);
+            this._panelConveyedItems.Controls.Add(this._btnConveyedItem);
+            resources.ApplyResources(this._panelConveyedItems, "_panelConveyedItems");
+            this._panelConveyedItems.Name = "_panelConveyedItems";
+            // 
+            // _panelLineStyle
+            // 
+            this._panelLineStyle.Controls.Add(this._btnLv);
+            this._panelLineStyle.Controls.Add(this._btnLh);
+            this._panelLineStyle.Controls.Add(this._btnTv);
+            this._panelLineStyle.Controls.Add(this._btnTh);
+            this._panelLineStyle.Controls.Add(this._btnC);
+            this._panelLineStyle.Controls.Add(this._btnBezier);
+            this._panelLineStyle.Controls.Add(this._btnOs);
+            this._panelLineStyle.Controls.Add(this._btnOr);
+            this._panelLineStyle.Controls.Add(this._btnA);
+            this._panelLineStyle.Controls.Add(this._btnD);
+            resources.ApplyResources(this._panelLineStyle, "_panelLineStyle");
+            this._panelLineStyle.Name = "_panelLineStyle";
+            // 
+            // _panelQuickSearch
+            // 
+            resources.ApplyResources(this._panelQuickSearch, "_panelQuickSearch");
+            this._panelQuickSearch.Controls.Add(this._txtSearchName, 0, 0);
+            this._panelQuickSearch.Controls.Add(this._txtSearchText, 1, 0);
+            this._panelQuickSearch.Name = "_panelQuickSearch";
+            // 
+            // _panelButtons
+            // 
+            this._panelButtons.Controls.Add(this._toolStripContainer1);
+            resources.ApplyResources(this._panelButtons, "_panelButtons");
+            this._panelButtons.Name = "_panelButtons";
             // 
             // _menuStrip1
             // 
@@ -2551,6 +2644,8 @@ namespace hoTools.hoToolsGui
             this.toolStripSeparator2,
             this._helpToolStripMenuItem1,
             this.gitHubToolStripMenuItem,
+            this.toolStripSeparator15,
+            this.showLINQPadConnectionsToolStripMenuItem,
             this.toolStripSeparator8,
             this.readMeToolStripMenuItem,
             this._aboutToolStripMenuItem});
@@ -2598,6 +2693,17 @@ namespace hoTools.hoToolsGui
             resources.ApplyResources(this.gitHubToolStripMenuItem, "gitHubToolStripMenuItem");
             this.gitHubToolStripMenuItem.Click += new System.EventHandler(this.githubToolStripMenuItem1_Click);
             // 
+            // toolStripSeparator15
+            // 
+            this.toolStripSeparator15.Name = "toolStripSeparator15";
+            resources.ApplyResources(this.toolStripSeparator15, "toolStripSeparator15");
+            // 
+            // showLINQPadConnectionsToolStripMenuItem
+            // 
+            this.showLINQPadConnectionsToolStripMenuItem.Name = "showLINQPadConnectionsToolStripMenuItem";
+            resources.ApplyResources(this.showLINQPadConnectionsToolStripMenuItem, "showLINQPadConnectionsToolStripMenuItem");
+            this.showLINQPadConnectionsToolStripMenuItem.Click += new System.EventHandler(this.showLINQPadConnectionsToolStripMenuItem_Click);
+            // 
             // toolStripSeparator8
             // 
             this.toolStripSeparator8.Name = "toolStripSeparator8";
@@ -2620,95 +2726,6 @@ namespace hoTools.hoToolsGui
             resources.ApplyResources(this.toolStripMenuIHome, "toolStripMenuIHome");
             this.toolStripMenuIHome.Name = "toolStripMenuIHome";
             this.toolStripMenuIHome.Click += new System.EventHandler(this.toolStripMenuIHome_Click);
-            // 
-            // _panelButtons
-            // 
-            this._panelButtons.Controls.Add(this._toolStripContainer1);
-            resources.ApplyResources(this._panelButtons, "_panelButtons");
-            this._panelButtons.Name = "_panelButtons";
-            // 
-            // _panelLineStyle
-            // 
-            this._panelLineStyle.Controls.Add(this._btnLv);
-            this._panelLineStyle.Controls.Add(this._btnLh);
-            this._panelLineStyle.Controls.Add(this._btnTv);
-            this._panelLineStyle.Controls.Add(this._btnTh);
-            this._panelLineStyle.Controls.Add(this._btnC);
-            this._panelLineStyle.Controls.Add(this._btnBezier);
-            this._panelLineStyle.Controls.Add(this._btnOs);
-            this._panelLineStyle.Controls.Add(this._btnOr);
-            this._panelLineStyle.Controls.Add(this._btnA);
-            this._panelLineStyle.Controls.Add(this._btnD);
-            resources.ApplyResources(this._panelLineStyle, "_panelLineStyle");
-            this._panelLineStyle.Name = "_panelLineStyle";
-            // 
-            // _panelFavorite
-            // 
-            this._panelFavorite.Controls.Add(this._btnAddFavorite);
-            this._panelFavorite.Controls.Add(this._btnRemoveFavorite);
-            this._panelFavorite.Controls.Add(this._btnShowFavorites);
-            this._panelFavorite.Controls.Add(this._btnDisplayBehavior);
-            resources.ApplyResources(this._panelFavorite, "_panelFavorite");
-            this._panelFavorite.Name = "_panelFavorite";
-            // 
-            // _panelNote
-            // 
-            this._panelNote.Controls.Add(this._btnAddConstraint);
-            this._panelNote.Controls.Add(this._btnAddNote);
-            this._panelNote.Controls.Add(this._btnAddNoteAndLink);
-            resources.ApplyResources(this._panelNote, "_panelNote");
-            this._panelNote.Name = "_panelNote";
-            // 
-            // _panelPort
-            // 
-            this._panelPort.Controls.Add(this._lblPorts);
-            this._panelPort.Controls.Add(this._btnLeft);
-            this._panelPort.Controls.Add(this._btnUp);
-            this._panelPort.Controls.Add(this._btnRight);
-            this._panelPort.Controls.Add(this._btnDown);
-            this._panelPort.Controls.Add(this._btnLabelLeft);
-            this._panelPort.Controls.Add(this._btnLabelRight);
-            resources.ApplyResources(this._panelPort, "_panelPort");
-            this._panelPort.Name = "_panelPort";
-            // 
-            // _lblPorts
-            // 
-            resources.ApplyResources(this._lblPorts, "_lblPorts");
-            this._lblPorts.Name = "_lblPorts";
-            // 
-            // _panelAdvanced
-            // 
-            this._panelAdvanced.Controls.Add(this._btnComposite);
-            this._panelAdvanced.Controls.Add(this._btnFindUsage);
-            this._panelAdvanced.Controls.Add(this._btnUpdateActivityParameter);
-            this._panelAdvanced.Controls.Add(this._btnLocateType);
-            this._panelAdvanced.Controls.Add(this._btnLocateOperation);
-            this._panelAdvanced.Controls.Add(this._btnDisplaySpecification);
-            resources.ApplyResources(this._panelAdvanced, "_panelAdvanced");
-            this._panelAdvanced.Name = "_panelAdvanced";
-            // 
-            // _panelQuickSearch
-            // 
-            resources.ApplyResources(this._panelQuickSearch, "_panelQuickSearch");
-            this._panelQuickSearch.Controls.Add(this._txtSearchName, 0, 0);
-            this._panelQuickSearch.Controls.Add(this._txtSearchText, 1, 0);
-            this._panelQuickSearch.Name = "_panelQuickSearch";
-            // 
-            // _toolTipRtfListOfSearches
-            // 
-            this._toolTipRtfListOfSearches.AutomaticDelay = 0;
-            this._toolTipRtfListOfSearches.OwnerDraw = true;
-            this._toolTipRtfListOfSearches.Draw += new System.Windows.Forms.DrawToolTipEventHandler(this._toolTipRtfListOfSearches_Draw);
-            this._toolTipRtfListOfSearches.Popup += new System.Windows.Forms.PopupEventHandler(this._toolTipRtfListOfSearches_Popup);
-            // 
-            // _panelConveyedItems
-            // 
-            this._panelConveyedItems.Controls.Add(this._btnFeatureDown);
-            this._panelConveyedItems.Controls.Add(this._btnFeatureUp);
-            this._panelConveyedItems.Controls.Add(this._btnReverseConnector);
-            this._panelConveyedItems.Controls.Add(this._btnConveyedItem);
-            resources.ApplyResources(this._panelConveyedItems, "_panelConveyedItems");
-            this._panelConveyedItems.Name = "_panelConveyedItems";
             // 
             // HoToolsGui
             // 
@@ -2734,20 +2751,20 @@ namespace hoTools.hoToolsGui
             this._toolStripQuery.ResumeLayout(false);
             this._toolStripQuery.PerformLayout();
             this._contextMenuStripSearch.ResumeLayout(false);
-            this._panelPortButtons.ResumeLayout(false);
             this.contextMenuRtf.ResumeLayout(false);
-            this._menuStrip1.ResumeLayout(false);
-            this._menuStrip1.PerformLayout();
-            this._panelButtons.ResumeLayout(false);
-            this._panelLineStyle.ResumeLayout(false);
-            this._panelFavorite.ResumeLayout(false);
-            this._panelNote.ResumeLayout(false);
+            this._panelPortButtons.ResumeLayout(false);
             this._panelPort.ResumeLayout(false);
             this._panelPort.PerformLayout();
+            this._panelNote.ResumeLayout(false);
             this._panelAdvanced.ResumeLayout(false);
+            this._panelFavorite.ResumeLayout(false);
+            this._panelConveyedItems.ResumeLayout(false);
+            this._panelLineStyle.ResumeLayout(false);
             this._panelQuickSearch.ResumeLayout(false);
             this._panelQuickSearch.PerformLayout();
-            this._panelConveyedItems.ResumeLayout(false);
+            this._panelButtons.ResumeLayout(false);
+            this._menuStrip1.ResumeLayout(false);
+            this._menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -3709,11 +3726,20 @@ namespace hoTools.hoToolsGui
             EditSqlFile(GetSearchName());
         }
 
+        /// <summary>
+        /// Edit SQL or LINQPad file name
+        /// </summary>
+        /// <param name="fileName"></param>
         private void EditSqlFile(string fileName)
         {
             string sqlAbsFileName = _globalCfg.GetSqlFileName(fileName);
             // run editor
             if (sqlAbsFileName != "") Util.StartFile(sqlAbsFileName);
+            else
+            {
+                string linqAbsFileName = _globalCfg.GetLinqPadQueryFileName(fileName);
+                if (linqAbsFileName != "") Util.StartFile(linqAbsFileName);
+            }
         }
 
         /// <summary>
@@ -3726,21 +3752,21 @@ namespace hoTools.hoToolsGui
             ShowFolderForSql(GetSearchName());
         }
 
-        private void ShowFolderForSql(string file)
+        /// <summary>
+        /// Show folder for SQL Script according to patch
+        /// </summary>
+        /// <param name="fileName"></param>
+        private void ShowFolderForSql(string fileName)
         {
-            string sqlAbsFileName = _globalCfg.GetSqlFileName(file);
-
-
-            // Show folder
+            string sqlAbsFileName = _globalCfg.GetSqlFileName(fileName);
+            // run editor
             if (sqlAbsFileName != "") Util.ShowFolder(sqlAbsFileName);
             else
             {
-                List<string> sqlList = _globalCfg.GetListSqlPaths();
-                if (sqlList.Count > 0) Util.ShowFolder(sqlList[0]);
-                else
-                    MessageBox.Show($"Configure SQL path in:{Environment.NewLine}File, Settings SQL and Script",
-                        "No SQL path in settings defined!");
+                string linqAbsFileName = _globalCfg.GetLinqPadQueryFileName(fileName);
+                if (linqAbsFileName != "") Util.ShowFolder(linqAbsFileName);
             }
+           
         }
         private void ShowFolderForLinqPad(string file)
         {
@@ -3760,11 +3786,32 @@ namespace hoTools.hoToolsGui
         }
 
         /// <summary>
-        /// Show the SQL path
+        /// Show the SQL/LINQPad path
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void showSQLPathToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+                string sqlPath = _globalCfg.GetSqlPaths();
+                string linqPath = _globalCfg.GetLinqPaths();
+                MessageBox.Show(
+                    $"The SQL path is:{Environment.NewLine}{sqlPath}{Environment.NewLine}{Environment.NewLine}" +
+                    $"The LINQPad path is:{Environment.NewLine}{linqPath}{Environment.NewLine}{Environment.NewLine}" +
+                    $"Change SQL/LINQPath path with 'File, General Settings",
+                    "The SQL/LINQPad path.");
+              
+             
+        }
+        
+
+
+
+        /// <summary>
+        /// Show the SQL path for the rtf search list
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void showSQLPathToolStripMenuItemxx_Click(object sender, EventArgs e)
         {
             SearchItem searchItem = GetSearchItemFromRtfLine();
             if (searchItem is SqlSearchItem)
@@ -3973,6 +4020,19 @@ Please restart EA. During restart hoTools loads the default settings.",
         private void _txtSearchText_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+
+        /// <summary>
+        /// Show all LINQPad connections
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void showLINQPadConnectionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string linqQueryFile = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\" + "LinqPadConnections.linq";
+            _model.SearchRun(linqQueryFile, "");
+            
         }
     }
 

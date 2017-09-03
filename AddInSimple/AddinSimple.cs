@@ -82,6 +82,7 @@ namespace AddInSimple
         const string MenuShowRunLinqPadToHtml = "DemoRunLinqPadQueryToHtmlCsvText";
         const string MenuShowRunLinqXml = "DemoRunLinqXmlAllOwnQueries";
         const string MenuShowRunLinqPadEaContext = "DemoRunLinqPadAndShowEaContextInformation";
+        const string MenuShowShowLinqPadConnections = "DemoShowLinqPadConnections";
         private const string separatorLINQPad = "-----------------------------------------------------";
         private const string separatorLinq2Db = "-----------------------------------------------------";
         private const string separatorXml = "-----------------------------------------------------";
@@ -107,6 +108,7 @@ namespace AddInSimple
                 separatorLINQPad, 
                 MenuShowRunLinqPadToHtml,
                 MenuShowRunLinqPadEaContext,
+                MenuShowShowLinqPadConnections,
 
                 separatorXml,
                 MenuShowRunLinqXml,
@@ -199,6 +201,13 @@ namespace AddInSimple
 
                     // Run LINQPad and output EA context information
                     case MenuShowRunLinqPadEaContext:
+                        isEnabled = true;
+                        break;
+
+                        
+
+                    // Show LINQPad connections
+                    case MenuShowShowLinqPadConnections:
                         isEnabled = true;
                         break;
 
@@ -422,6 +431,21 @@ State:
                     // Make 
                     xml = Xml.MakeXmlFromDataTable(dt);
 
+                    // Output to EA
+                    repository.RunModelSearch("", "", "", xml);
+                    break;
+
+                case MenuShowShowLinqPadConnections:
+                    linqQueryFileName = "LinqPadConnections.linq";
+                    linqQueryFilePath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\" + linqQueryFileName;
+
+                    linqPad = new LinqPad(repository);
+                    // Output as html with read back table and out put to EA Search Window, don't use a connection
+                    linqPad.Run(linqQueryFilePath, @"html", linqPad.GetArg(repository, ""),noConnection:true);
+                    dtHtml = linqPad.ReadHtml();
+
+                    // Make EA xml
+                    xml = Xml.MakeXmlFromDataTable(dtHtml);
                     // Output to EA
                     repository.RunModelSearch("", "", "", xml);
                     break;

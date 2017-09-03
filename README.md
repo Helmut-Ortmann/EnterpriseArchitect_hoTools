@@ -118,6 +118,11 @@ Some features:
 
 
 # Releases
+## Release 3.1.3
+- LINQPad support error fixing
+- LINQPad additional example queries (show LINPad connections)
+- LINQPad find connection according to EA connection string
+
 ## Release 3.1.1
 - AddInSimple (1.0.5):
 -- Example EA context information for LINQPad

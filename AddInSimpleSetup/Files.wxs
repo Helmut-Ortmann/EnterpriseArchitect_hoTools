@@ -42,12 +42,16 @@
       
       <!-- LINQPad: Receive EA context information via Parameter  -->
       <Component Id="TestCallLinqWithParameter.linq" Guid="{A1296864-9AD1-4E56-89CA-18C8CAC51C57}">
-        <File Id="TestCallLinqWithParameter.linq" KeyPath="yes" Name="TestCallLinqWithParameter.linq" Source="$(var.AddInSimple.TargetPath)" />
+        <File Id="TestCallLinqWithParameter.linq" KeyPath="yes" Name="TestCallLinqWithParameter.linq" Source="..\AddInSimple\TestCallLinqWithParameter.linq" />
       </Component>
       
       <!-- LINQPad query example     -->
       <Component Id="EaBasicQuery.linq" Guid="{E84836DC-52EF-47FB-8FEA-41DFDEB145DD}">
-        <File Id="EaBasicQuery.linq" KeyPath="yes" Name="EaBasicQuery.linq" Source="$(var.AddInSimple.TargetPath)" />
+        <File Id="EaBasicQuery.linq" KeyPath="yes" Name="EaBasicQuery.linq" Source="..\AddInSimple\EaBasicQuery.linq" />
+      </Component>
+      <!-- LINQPad query example     -->
+      <Component Id="LinqPadConnections.linq" Guid="{35377251-D9D2-4678-BF3B-055175F00BE7}">
+        <File Id="LinqPadConnections.linq" KeyPath="yes" Name="LinqPadConnections.linq" Source="..\AddInSimple\LinqPadConnections.linq" />
       </Component>
       
 

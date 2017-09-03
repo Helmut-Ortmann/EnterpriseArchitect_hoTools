@@ -60,6 +60,7 @@
             this.scriptToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.label4 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -68,7 +69,7 @@
             // btnOk
             // 
             this.btnOk.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnOk.Location = new System.Drawing.Point(35, 532);
+            this.btnOk.Location = new System.Drawing.Point(25, 476);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(105, 31);
             this.btnOk.TabIndex = 0;
@@ -79,7 +80,7 @@
             // btnCancel
             // 
             this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancel.Location = new System.Drawing.Point(146, 532);
+            this.btnCancel.Location = new System.Drawing.Point(136, 476);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(105, 31);
             this.btnCancel.TabIndex = 1;
@@ -269,7 +270,7 @@
             // 
             // txtAddinTabToFirstActivate
             // 
-            this.txtAddinTabToFirstActivate.Location = new System.Drawing.Point(236, 339);
+            this.txtAddinTabToFirstActivate.Location = new System.Drawing.Point(236, 354);
             this.txtAddinTabToFirstActivate.Name = "txtAddinTabToFirstActivate";
             this.txtAddinTabToFirstActivate.Size = new System.Drawing.Size(260, 20);
             this.txtAddinTabToFirstActivate.TabIndex = 248;
@@ -280,7 +281,7 @@
             // txtExtensionPath
             // 
             this.txtExtensionPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtExtensionPath.Location = new System.Drawing.Point(28, 425);
+            this.txtExtensionPath.Location = new System.Drawing.Point(28, 411);
             this.txtExtensionPath.Name = "txtExtensionPath";
             this.txtExtensionPath.Size = new System.Drawing.Size(536, 24);
             this.txtExtensionPath.TabIndex = 251;
@@ -295,7 +296,7 @@
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(502, 339);
+            this.label12.Location = new System.Drawing.Point(502, 354);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(173, 18);
             this.label12.TabIndex = 249;
@@ -305,7 +306,7 @@
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(25, 341);
+            this.label11.Location = new System.Drawing.Point(25, 356);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(205, 18);
             this.label11.TabIndex = 247;
@@ -318,7 +319,7 @@
             this.toolStripMenuItem1});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(716, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(776, 28);
             this.menuStrip1.TabIndex = 250;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -366,18 +367,27 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(28, 406);
+            this.label4.Location = new System.Drawing.Point(28, 392);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(290, 18);
             this.label4.TabIndex = 252;
             this.label4.Text = "Path to hoTools .NET Extensions (e.g.:C#)";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(128, 79);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(481, 20);
+            this.textBox1.TabIndex = 253;
+            this.textBox1.Text = "More settings: File, Settings General (LINQPad and more)";
             // 
             // FrmQueryAndScript
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(716, 603);
+            this.ClientSize = new System.Drawing.Size(776, 571);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.txtExtensionPath);
             this.Controls.Add(this.label12);
@@ -442,5 +452,6 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.TextBox txtExtensionPath;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
