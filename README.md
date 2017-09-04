@@ -118,6 +118,7 @@ Some features:
 
 
 # Releases
+## Release 3.1.4
 ## Release 3.1.3
 - LINQPad support error fixing
 - LINQPad additional example queries (show LINPad connections)
