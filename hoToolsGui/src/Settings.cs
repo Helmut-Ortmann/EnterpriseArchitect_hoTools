@@ -337,7 +337,7 @@ namespace hoTools.Settings
                 var p = CurrentConfig.AppSettings.Settings["LinqPadConnectionPath"];
                 // swap /user/ against the current user
                 if (p == null) return "";// default
-                p.Value = Regex.Replace(p.Value, @"\\user\\", $@"\\{Environment.UserName}\\", RegexOptions.IgnoreCase);
+                p.Value = Regex.Replace(p.Value, @"\\user\\", $@"\{Environment.UserName}\", RegexOptions.IgnoreCase);
 
                 return p.Value;
             }
@@ -355,7 +355,7 @@ namespace hoTools.Settings
                 var p = CurrentConfig.AppSettings.Settings["LinqPadPath"];
                 // swap /user/ against the current user
                 if (p == null) return "";// default
-                p.Value = Regex.Replace(p.Value, @"\\user\\", $@"\\{Environment.UserName}\\", RegexOptions.IgnoreCase);
+                p.Value = Regex.Replace(p.Value, @"\\user\\", $@"\{Environment.UserName}\", RegexOptions.IgnoreCase);
                 return p.Value;
             }
             set => SetStringConfigValue("LinqPadPath", value);
