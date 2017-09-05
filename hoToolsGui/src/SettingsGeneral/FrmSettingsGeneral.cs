@@ -221,6 +221,7 @@ namespace hoTools.Settings
                 #endregion
 
                 // save setting
+                _settings.UpdateGlobalCfg();
                 _settings.Save();
                 _hoToolsGui.InitializeSettings(); // update settings
                 Close();

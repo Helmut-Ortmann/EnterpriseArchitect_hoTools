@@ -321,7 +321,7 @@ namespace hoTools.hoToolsGui
             GetValueSettingsFromJson();
             AddAutoCounterSettingsMenu();
 
-            UpdateGlobalCfg();
+            AddinSettings.UpdateGlobalCfg();
 
 
 
@@ -3587,26 +3587,7 @@ namespace hoTools.hoToolsGui
 {e1}", "Error loading 'Settings.json'");
             }
         }
-        /// <summary>
-        /// Updata global settings 'HoToolsGlobalCfg'
-        /// </summary>
-        private void UpdateGlobalCfg()
-        {
-            // global configuration parameters independent from EA-Instance and used by services
-            var globalCfg = HoToolsGlobalCfg.Instance;
-             
-            globalCfg.SetSqlPaths(AddinSettings.SqlPaths);
-            globalCfg.SetLinqPadQueryPaths(AddinSettings.LinqPadQueryPath);
-            globalCfg.TempFolder = AddinSettings.TempFolder;
-            globalCfg.LprunPath = AddinSettings.LprunPath;
-            globalCfg.IsLinqPadSupported = AddinSettings.IsLinqPadSupport;
-            globalCfg.UseLinqPadConnection = AddinSettings.UseLinqPadConnection;
-            globalCfg.LinqPadConnectionPath = AddinSettings.LinqPadConnectionPath;
-            globalCfg.LinqPadOutputHtml = AddinSettings.LinqPadOutputHtml;
-
-
-
-        }
+        
 
 
         /// <summary>

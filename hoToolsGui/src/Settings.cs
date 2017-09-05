@@ -13,6 +13,7 @@ using AddinFramework.Util.Script;
 using EAAddinFramework.Utils;
 using GlobalHotkeys;
 using hoTools.EaServices.Names;
+using hoTools.Utils.Configuration;
 
 // ReSharper disable once CheckNamespace
 namespace hoTools.Settings
@@ -352,7 +353,9 @@ namespace hoTools.Settings
             get
             {
                 var p = CurrentConfig.AppSettings.Settings["LinqPadPath"];
+                // swap /user/ against the current user
                 if (p == null) return "";// default
+                p.Value = Regex.Replace(p.Value, @"\\user\\", $@"\\{Environment.UserName}\\", RegexOptions.IgnoreCase);
                 return p.Value;
             }
             set => SetStringConfigValue("LinqPadPath", value);
@@ -2059,6 +2062,26 @@ namespace hoTools.Settings
             {
                 MessageConfigValueNotExists(name, value);
             }
+        }
+        /// <summary>
+        /// Updata global settings 'HoToolsGlobalCfg'
+        /// </summary>
+        public void UpdateGlobalCfg()
+        {
+            // global configuration parameters independent from EA-Instance and used by services
+            var globalCfg = HoToolsGlobalCfg.Instance;
+
+            globalCfg.SetSqlPaths(SqlPaths);
+            globalCfg.SetLinqPadQueryPaths(LinqPadQueryPath);
+            globalCfg.TempFolder = TempFolder;
+            globalCfg.LprunPath = LprunPath;
+            globalCfg.IsLinqPadSupported = IsLinqPadSupport;
+            globalCfg.UseLinqPadConnection = UseLinqPadConnection;
+            globalCfg.LinqPadConnectionPath =LinqPadConnectionPath;
+            globalCfg.LinqPadOutputHtml = LinqPadOutputHtml;
+
+
+
         }
 
         /// <summary>
