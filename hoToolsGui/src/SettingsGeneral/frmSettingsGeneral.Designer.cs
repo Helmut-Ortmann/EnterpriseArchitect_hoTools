@@ -94,9 +94,13 @@
             this.chkIsLinqPadSupport = new System.Windows.Forms.CheckBox();
             this.txtTempFolder = new System.Windows.Forms.TextBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.chkUseLinqPadConnection = new System.Windows.Forms.CheckBox();
+            this.label23 = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
+            this.txtLinqPadConnectionXmlFile = new System.Windows.Forms.TextBox();
             this.txtLprunPath = new System.Windows.Forms.TextBox();
             this.label20 = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
             this.txtLinqPadQueryPath = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -109,10 +113,8 @@
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.label18 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
-            this.label22 = new System.Windows.Forms.Label();
-            this.chkUseLinqPadConnection = new System.Windows.Forms.CheckBox();
-            this.label23 = new System.Windows.Forms.Label();
-            this.txtLinqPadConnectionXmlFile = new System.Windows.Forms.TextBox();
+            this.label24 = new System.Windows.Forms.Label();
+            this.chkOutputLinqPadHtml = new System.Windows.Forms.CheckBox();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -873,6 +875,7 @@
             // 
             // groupBox5
             // 
+            this.groupBox5.Controls.Add(this.chkOutputLinqPadHtml);
             this.groupBox5.Controls.Add(this.chkUseLinqPadConnection);
             this.groupBox5.Controls.Add(this.chkIsLinqPadSupport);
             this.groupBox5.Controls.Add(this.label23);
@@ -881,6 +884,7 @@
             this.groupBox5.Controls.Add(this.txtLprunPath);
             this.groupBox5.Controls.Add(this.label20);
             this.groupBox5.Controls.Add(this.txtTempFolder);
+            this.groupBox5.Controls.Add(this.label24);
             this.groupBox5.Controls.Add(this.label22);
             this.groupBox5.Location = new System.Drawing.Point(16, 345);
             this.groupBox5.Name = "groupBox5";
@@ -891,6 +895,29 @@
             this.toolTip1.SetToolTip(this.groupBox5, "LINQPad is a powerful interactive Scratchpad to:\r\n- run SQL queries\r\n- run code\r\n" +
         "- test ans debug\r\n\r\nNote:\r\nYou have to get a license to run it");
             // 
+            // chkUseLinqPadConnection
+            // 
+            this.chkUseLinqPadConnection.AutoSize = true;
+            this.chkUseLinqPadConnection.Location = new System.Drawing.Point(431, 22);
+            this.chkUseLinqPadConnection.Name = "chkUseLinqPadConnection";
+            this.chkUseLinqPadConnection.Size = new System.Drawing.Size(15, 14);
+            this.chkUseLinqPadConnection.TabIndex = 259;
+            this.toolTip1.SetToolTip(this.chkUseLinqPadConnection, "If selected use the connection in LINQPad.\r\n\r\nDeselect it if you want hoTools to " +
+        "use the connection according to EA connection string.");
+            this.chkUseLinqPadConnection.UseVisualStyleBackColor = true;
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label23.Location = new System.Drawing.Point(6, 105);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(198, 18);
+            this.label23.TabIndex = 243;
+            this.label23.Text = "LINQPad connection xml file:";
+            this.toolTip1.SetToolTip(this.label23, "Path to the LINQPad connections xml file.\r\n\r\nDefault: C:\\Users\\helmu_000\\AppData\\" +
+        "Roaming\\LINQPad\\ConnectionsV2.xml");
+            // 
             // label21
             // 
             this.label21.AutoSize = true;
@@ -900,6 +927,16 @@
             this.label21.Size = new System.Drawing.Size(84, 18);
             this.label21.TabIndex = 243;
             this.label21.Text = "LPRun.exe:";
+            // 
+            // txtLinqPadConnectionXmlFile
+            // 
+            this.txtLinqPadConnectionXmlFile.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtLinqPadConnectionXmlFile.Location = new System.Drawing.Point(210, 102);
+            this.txtLinqPadConnectionXmlFile.Name = "txtLinqPadConnectionXmlFile";
+            this.txtLinqPadConnectionXmlFile.Size = new System.Drawing.Size(538, 24);
+            this.txtLinqPadConnectionXmlFile.TabIndex = 242;
+            this.toolTip1.SetToolTip(this.txtLinqPadConnectionXmlFile, "Path to the LINQPad connections xml file.\r\n\r\nDefault: C:\\Users\\helmu_000\\AppData\\" +
+        "Roaming\\LINQPad\\ConnectionsV2.xml");
             // 
             // txtLprunPath
             // 
@@ -921,6 +958,18 @@
             this.label20.Size = new System.Drawing.Size(91, 18);
             this.label20.TabIndex = 243;
             this.label20.Text = "Temp folder:";
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label22.Location = new System.Drawing.Point(234, 19);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(180, 18);
+            this.label22.TabIndex = 243;
+            this.label22.Text = "Use LINQPad connection:";
+            this.toolTip1.SetToolTip(this.label22, "If selected use the connection in LINQPad.\r\n\r\nDeselect it if you want hoTools to " +
+        "use the connection according to EA connection string.\r\n");
             // 
             // txtLinqPadQueryPath
             // 
@@ -1034,50 +1083,26 @@
             this.label19.TabIndex = 243;
             this.label19.Text = "LINQPad path:";
             // 
-            // label22
+            // label24
             // 
-            this.label22.AutoSize = true;
-            this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label22.Location = new System.Drawing.Point(234, 19);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(180, 18);
-            this.label22.TabIndex = 243;
-            this.label22.Text = "Use LINQPad connection:";
-            this.toolTip1.SetToolTip(this.label22, "If selected use the connection in LINQPad.\r\n\r\nDeselect it if you want hoTools to " +
-        "use the connection according to EA connection string.\r\n");
+            this.label24.AutoSize = true;
+            this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label24.Location = new System.Drawing.Point(464, 19);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(165, 18);
+            this.label24.TabIndex = 243;
+            this.label24.Text = "Output LINQPad HTML:";
+            this.toolTip1.SetToolTip(this.label24, "Output the LINQPad HTML");
             // 
-            // chkUseLinqPadConnection
+            // chkOutputLinqPadHtml
             // 
-            this.chkUseLinqPadConnection.AutoSize = true;
-            this.chkUseLinqPadConnection.Location = new System.Drawing.Point(431, 22);
-            this.chkUseLinqPadConnection.Name = "chkUseLinqPadConnection";
-            this.chkUseLinqPadConnection.Size = new System.Drawing.Size(15, 14);
-            this.chkUseLinqPadConnection.TabIndex = 259;
-            this.toolTip1.SetToolTip(this.chkUseLinqPadConnection, "If selected use the connection in LINQPad.\r\n\r\nDeselect it if you want hoTools to " +
-        "use the connection according to EA connection string.");
-            this.chkUseLinqPadConnection.UseVisualStyleBackColor = true;
-            // 
-            // label23
-            // 
-            this.label23.AutoSize = true;
-            this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label23.Location = new System.Drawing.Point(6, 105);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(198, 18);
-            this.label23.TabIndex = 243;
-            this.label23.Text = "LINQPad connection xml file:";
-            this.toolTip1.SetToolTip(this.label23, "Path to the LINQPad connections xml file.\r\n\r\nDefault: C:\\Users\\helmu_000\\AppData\\" +
-        "Roaming\\LINQPad\\ConnectionsV2.xml");
-            // 
-            // txtLinqPadConnectionXmlFile
-            // 
-            this.txtLinqPadConnectionXmlFile.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtLinqPadConnectionXmlFile.Location = new System.Drawing.Point(210, 102);
-            this.txtLinqPadConnectionXmlFile.Name = "txtLinqPadConnectionXmlFile";
-            this.txtLinqPadConnectionXmlFile.Size = new System.Drawing.Size(538, 24);
-            this.txtLinqPadConnectionXmlFile.TabIndex = 242;
-            this.toolTip1.SetToolTip(this.txtLinqPadConnectionXmlFile, "Path to the LINQPad connections xml file.\r\n\r\nDefault: C:\\Users\\helmu_000\\AppData\\" +
-        "Roaming\\LINQPad\\ConnectionsV2.xml");
+            this.chkOutputLinqPadHtml.AutoSize = true;
+            this.chkOutputLinqPadHtml.Location = new System.Drawing.Point(635, 23);
+            this.chkOutputLinqPadHtml.Name = "chkOutputLinqPadHtml";
+            this.chkOutputLinqPadHtml.Size = new System.Drawing.Size(15, 14);
+            this.chkOutputLinqPadHtml.TabIndex = 259;
+            this.toolTip1.SetToolTip(this.chkOutputLinqPadHtml, "Output the LINQPad HTML");
+            this.chkOutputLinqPadHtml.UseVisualStyleBackColor = true;
             // 
             // FrmSettingsGeneral
             // 
@@ -1247,5 +1272,7 @@
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.TextBox txtLinqPadConnectionXmlFile;
         private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.CheckBox chkOutputLinqPadHtml;
+        private System.Windows.Forms.Label label24;
     }
 }

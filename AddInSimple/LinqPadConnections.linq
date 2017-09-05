@@ -17,12 +17,14 @@ void Main(string[] args)
 	//'[Access] c:\programme\...EAExample.eap\ (v.04.00.000)'
 	//'[SqlServer] localhost\SQLEXPRESS\EAExample (v.13.00.4001)'
 	string LINQPadConnectionFile = @"c:\Users\helmu_000\AppData\Roaming\LINQPad\ConnectionsV2.xml";
-	string server = $@"C:\Users\helmu_000\AppData\Roaming\Sparx Systems\EA\EAExample.eap";
+	string server = $@"C:\Users\user\AppData\Roaming\Sparx Systems\EA\EAExample.eap";
 	string db = null;
-	
+
+
+	// swap \user\ against the current user
+	LINQPadConnectionFile = Regex.Replace(LINQPadConnectionFile, @"\\user\\", $@"\\{Environment.UserName}\\", RegexOptions.IgnoreCase);
 	XDocument xConnections = XDocument.Load(LINQPadConnectionFile);
-
-
+	
 	var connections = from c in xConnections.Descendants("Connection")
 					  orderby c.Element("Server").Value, c.Element("Database")?.Value, c.Element("DriverData")?.Element("providerName")?.Value
 					  select new
@@ -34,10 +36,8 @@ void Main(string[] args)
 						  DBVersion = c.Element("DbVersion")?.Value,
 						  ID = c.Element("ID").Value
 					  };
-	connections.Dump("LINQPad Connections");
-
 	string[] connectionSearch = new string[] { $"Connections:  {LINQPadConnectionFile}", $"Server:          {server}", $"Database:       {db}" };
-    connectionSearch.Dump("LINQPad search for in list of LINQPad connections");
+    //connectionSearch.Dump("LINQPad search for in list of LINQPad connections");
 	
 	string provider = null;
 	string linqPadConnectionsV2 = @"C:\Users\helmu_000\AppData\Roaming\LINQPad\ConnectionsV2.xml";
@@ -54,17 +54,21 @@ void Main(string[] args)
 						  DbVersion = c.Element("DbVersion")?.Value == null ? "" : $"(v.{c.Element("DbVersion").Value})"
 					  }).FirstOrDefault();
 	string linqPadConnectionName = "";
-	connection.Dump("LINQPad current connection details");
-	linqPadConnectionName = $@"{connection.Provider} {connection.Server}\{connection.DataBase} {connection.DbVersion}";
+	//connection.Dump("LINQPad current connection details");
+	//linqPadConnectionName = $@"{connection.Provider} {connection.Server}\{connection.DataBase} {connection.DbVersion}";
 	// adapt string to special provider needs
-	switch (connection.Provider)
+	if (connection != null)
 	{
-		// LINQPad standard driver
-		case null:
-			linqPadConnectionName = $@"{connection.Server}.{connection.DataBase}";
-			break;
+		switch (connection.Provider)
+		{
+			// LINQPad standard driver
+			case null:
+				linqPadConnectionName = $@"{connection.Server}.{connection.DataBase}";
+				break;
+		}
+		linqPadConnectionName.Dump("LINQPad current connection cxname to use with LPRUn.exe");
 	}
-	linqPadConnectionName.Dump("LINQPad current connection cxname to use with LPRUn.exe");
+	else "NoConnectionExists".Dump("No LINQPad connection exists");
 	//startLprun(linqPadConnectionName);
 }
 	// run LPRun.exe

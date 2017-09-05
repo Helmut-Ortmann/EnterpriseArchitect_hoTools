@@ -10,6 +10,7 @@ using EA;
 using HtmlAgilityPack;
 using LinqToDB.DataProvider;
 using File = System.IO.File;
+using HtmlDocument = HtmlAgilityPack.HtmlDocument;
 
 namespace hoLinqToSql.LinqUtils
 {
@@ -131,9 +132,9 @@ namespace hoLinqToSql.LinqUtils
                     exeProcess.WaitForExit();
                     // Retrieve the app's exit code
                     var exitCode = exeProcess.ExitCode;
-                    if (exitCode != 0)
+                    if (! output.StartsWith("<!DOCTYPE HTML>")   )
                     {
-                        string errText = exeProcess.StandardError.ReadToEnd();
+                        //string errText = exeProcess.StandardError.ReadToEnd();
                         MessageBox.Show($@"Query: '{linqPadQueryFile}'
 EA Connection: '{_rep.ConnectionString}'
 EA DB Type:       '{_rep.RepositoryType()}'
@@ -158,13 +159,30 @@ Error:
 
                     }
                     File.WriteAllText(_targetFile, output);
+                    // Error is visualized in Error code
+                    if (exitCode != 0)
+                    {
+                        // Show html
+                        Process.Start(_targetFile);
+                        
+                        var doc = new HtmlDocument();
+                        doc.LoadHtml(output);
+                        string errorMessage = doc.DocumentNode.ChildNodes?.Nodes()?.ElementAt(3)?.InnerText;
+                        if (errorMessage == null) errorMessage = "No error message found, see browser!";
+                        MessageBox.Show($"Find error message also in browser\r\nFile: '{_targetFile}'\r\nLINQPad-File:'{linqFile}'\n\r\n\r{HtmlEntity.DeEntitize(errorMessage)}", 
+                            "Error LINQPad");
 
+                        return false;
+                    }
+                         
                 }
             }
             catch (Exception e)
             {
                 MessageBox.Show($"Query:{linqFile}\r\nLPRun.exe{_lprunExe}\r\nTarget:{_targetFile}\r\n{e}",
                     " Error running LINQ query");
+
+               
                 return false;
             }
             return true;

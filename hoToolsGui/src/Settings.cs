@@ -310,6 +310,21 @@ namespace hoTools.Settings
             }
         }
         #endregion
+
+
+        #region Property: LinqPadOutputHtml
+        public bool LinqPadOutputHtml
+        {
+            get
+            {
+                return GetBoolConfigValue("LinqPadOutputHtml");
+            }
+            set
+            {
+                SetBoolConfigValue("LinqPadOutputHtml", value);
+            }
+        }
+        #endregion
         #region Property: LinqPadConnectionPath
         /// <summary>
         /// The path to thew LINQPad connections xml file
@@ -319,7 +334,10 @@ namespace hoTools.Settings
             get
             {
                 var p = CurrentConfig.AppSettings.Settings["LinqPadConnectionPath"];
+                // swap /user/ against the current user
                 if (p == null) return "";// default
+                p.Value = Regex.Replace(p.Value, @"\\user\\", $@"\\{Environment.UserName}\\", RegexOptions.IgnoreCase);
+
                 return p.Value;
             }
             set => SetStringConfigValue("LinqPadConnectionPath", value);

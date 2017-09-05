@@ -81,6 +81,7 @@ namespace hoTools.Settings
             txtLprunPath.Text = _settings.LprunPath;
             txtLinqPadConnectionXmlFile.Text = _settings.LinqPadConnectionPath;
             chkUseLinqPadConnection.Checked = _settings.UseLinqPadConnection;
+            chkOutputLinqPadHtml.Checked = _settings.LinqPadOutputHtml;
 
 
 
@@ -196,6 +197,7 @@ namespace hoTools.Settings
                 _settings.LprunPath = txtLprunPath.Text;
                 _settings.LinqPadConnectionPath = txtLinqPadConnectionXmlFile.Text;
                 _settings.UseLinqPadConnection = chkUseLinqPadConnection.Checked;
+                _settings.LinqPadOutputHtml = chkOutputLinqPadHtml.Checked;
 
 
                 #region LineStyleAndMoreWindow

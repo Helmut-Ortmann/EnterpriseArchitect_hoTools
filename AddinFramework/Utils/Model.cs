@@ -235,6 +235,9 @@ namespace EAAddinFramework.Utils
 
                 Boolean result = linqPad.Run(linqPadFile, @"html", linqPad.GetArg(Repository, searchTerm));
                 if (!result) return "";
+
+                // output target to browser
+                if (_globalCfg.LinqPadOutputHtml) Process.Start(linqPad.TargetFile);
                 // HTML to DataTable
                 System.Data.DataTable dtHtml = linqPad.ReadHtml();
 

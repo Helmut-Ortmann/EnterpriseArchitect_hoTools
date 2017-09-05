@@ -3602,6 +3602,10 @@ namespace hoTools.hoToolsGui
             globalCfg.IsLinqPadSupported = AddinSettings.IsLinqPadSupport;
             globalCfg.UseLinqPadConnection = AddinSettings.UseLinqPadConnection;
             globalCfg.LinqPadConnectionPath = AddinSettings.LinqPadConnectionPath;
+            globalCfg.LinqPadOutputHtml = AddinSettings.LinqPadOutputHtml;
+
+
+
         }
 
 

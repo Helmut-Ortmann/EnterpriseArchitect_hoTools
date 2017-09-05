@@ -54,6 +54,12 @@ namespace hoTools.Utils.Configuration
         /// Use the LINQPad connection and not the EA connection
         /// </summary>
         public string LinqPadConnectionPath { get; set; }
+        
+
+        /// <summary>
+        /// Output LINQPad results to HTML
+        /// </summary>
+        public bool LinqPadOutputHtml { get; set; }
 
         /// <summary>
         /// LINQPad LPRun.exe path to run a query from hoTools
