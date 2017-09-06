@@ -420,6 +420,7 @@ State:
                     xml = Xml.MakeXmlFromDataTable(dtHtml);
                     // Output to EA
                     repository.RunModelSearch("", "", "", xml);
+                    linqPad.Show();
                     break;
 
 
@@ -433,6 +434,7 @@ State:
 
                     // Output to EA
                     repository.RunModelSearch("", "", "", xml);
+                    //linqPad.Show();
                     break;
 
                 case MenuShowShowLinqPadConnections:
@@ -448,6 +450,7 @@ State:
                     xml = Xml.MakeXmlFromDataTable(dtHtml);
                     // Output to EA
                     repository.RunModelSearch("", "", "", xml);
+                    linqPad.Show();
                     break;
 
                 // run LINQ XML query for own EA queries which are stored in *.xml
