@@ -94,12 +94,14 @@
             this.chkIsLinqPadSupport = new System.Windows.Forms.CheckBox();
             this.txtTempFolder = new System.Windows.Forms.TextBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.chkOutputLinqPadHtml = new System.Windows.Forms.CheckBox();
             this.chkUseLinqPadConnection = new System.Windows.Forms.CheckBox();
             this.label23 = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
             this.txtLinqPadConnectionXmlFile = new System.Windows.Forms.TextBox();
             this.txtLprunPath = new System.Windows.Forms.TextBox();
             this.label20 = new System.Windows.Forms.Label();
+            this.label24 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
             this.txtLinqPadQueryPath = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
@@ -113,8 +115,6 @@
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.label18 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
-            this.label24 = new System.Windows.Forms.Label();
-            this.chkOutputLinqPadHtml = new System.Windows.Forms.CheckBox();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -315,7 +315,7 @@
             this.txtQuickSearch.Location = new System.Drawing.Point(271, 275);
             this.txtQuickSearch.Margin = new System.Windows.Forms.Padding(2);
             this.txtQuickSearch.Name = "txtQuickSearch";
-            this.txtQuickSearch.Size = new System.Drawing.Size(496, 24);
+            this.txtQuickSearch.Size = new System.Drawing.Size(628, 24);
             this.txtQuickSearch.TabIndex = 213;
             this.toolTip1.SetToolTip(this.txtQuickSearch, resources.GetString("txtQuickSearch.ToolTip"));
             // 
@@ -344,10 +344,10 @@
             // txtFileManagerPath
             // 
             this.txtFileManagerPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtFileManagerPath.Location = new System.Drawing.Point(232, 835);
+            this.txtFileManagerPath.Location = new System.Drawing.Point(229, 847);
             this.txtFileManagerPath.Margin = new System.Windows.Forms.Padding(2);
             this.txtFileManagerPath.Name = "txtFileManagerPath";
-            this.txtFileManagerPath.Size = new System.Drawing.Size(314, 24);
+            this.txtFileManagerPath.Size = new System.Drawing.Size(452, 24);
             this.txtFileManagerPath.TabIndex = 226;
             this.toolTip1.SetToolTip(this.txtFileManagerPath, resources.GetString("txtFileManagerPath.ToolTip"));
             // 
@@ -600,7 +600,7 @@
             this.txtSqlSearchPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSqlSearchPath.Location = new System.Drawing.Point(210, 324);
             this.txtSqlSearchPath.Name = "txtSqlSearchPath";
-            this.txtSqlSearchPath.Size = new System.Drawing.Size(557, 24);
+            this.txtSqlSearchPath.Size = new System.Drawing.Size(689, 24);
             this.txtSqlSearchPath.TabIndex = 242;
             this.toolTip1.SetToolTip(this.txtSqlSearchPath, "Paths hoTools searches for SQL Queries to run:\r\n\r\nA semicolon separated parts of " +
         "path hoTools searches for the SQL query to execute.");
@@ -719,7 +719,7 @@
             this.groupBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox4.Location = new System.Drawing.Point(518, 679);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(250, 142);
+            this.groupBox4.Size = new System.Drawing.Size(250, 129);
             this.groupBox4.TabIndex = 254;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Part: Port synchronization mode";
@@ -790,7 +790,7 @@
             // 
             this.label34.AutoSize = true;
             this.label34.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label34.Location = new System.Drawing.Point(229, 812);
+            this.label34.Location = new System.Drawing.Point(226, 824);
             this.label34.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label34.Name = "label34";
             this.label34.Size = new System.Drawing.Size(362, 18);
@@ -868,7 +868,7 @@
             this.txtTempFolder.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTempFolder.Location = new System.Drawing.Point(191, 141);
             this.txtTempFolder.Name = "txtTempFolder";
-            this.txtTempFolder.Size = new System.Drawing.Size(557, 24);
+            this.txtTempFolder.Size = new System.Drawing.Size(692, 24);
             this.txtTempFolder.TabIndex = 242;
             this.toolTip1.SetToolTip(this.txtTempFolder, "Temp folder to store LINQPad results to show and view them.\r\n\r\nc:\\temp\\ is usuall" +
         "y a good choice.");
@@ -888,12 +888,22 @@
             this.groupBox5.Controls.Add(this.label22);
             this.groupBox5.Location = new System.Drawing.Point(16, 345);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(773, 180);
+            this.groupBox5.Size = new System.Drawing.Size(889, 180);
             this.groupBox5.TabIndex = 260;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "LINQPad";
             this.toolTip1.SetToolTip(this.groupBox5, "LINQPad is a powerful interactive Scratchpad to:\r\n- run SQL queries\r\n- run code\r\n" +
         "- test ans debug\r\n\r\nNote:\r\nYou have to get a license to run it");
+            // 
+            // chkOutputLinqPadHtml
+            // 
+            this.chkOutputLinqPadHtml.AutoSize = true;
+            this.chkOutputLinqPadHtml.Location = new System.Drawing.Point(635, 23);
+            this.chkOutputLinqPadHtml.Name = "chkOutputLinqPadHtml";
+            this.chkOutputLinqPadHtml.Size = new System.Drawing.Size(15, 14);
+            this.chkOutputLinqPadHtml.TabIndex = 259;
+            this.toolTip1.SetToolTip(this.chkOutputLinqPadHtml, "Output the LINQPad HTML");
+            this.chkOutputLinqPadHtml.UseVisualStyleBackColor = true;
             // 
             // chkUseLinqPadConnection
             // 
@@ -933,7 +943,7 @@
             this.txtLinqPadConnectionXmlFile.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtLinqPadConnectionXmlFile.Location = new System.Drawing.Point(210, 102);
             this.txtLinqPadConnectionXmlFile.Name = "txtLinqPadConnectionXmlFile";
-            this.txtLinqPadConnectionXmlFile.Size = new System.Drawing.Size(538, 24);
+            this.txtLinqPadConnectionXmlFile.Size = new System.Drawing.Size(673, 24);
             this.txtLinqPadConnectionXmlFile.TabIndex = 242;
             this.toolTip1.SetToolTip(this.txtLinqPadConnectionXmlFile, "Path to the LINQPad connections xml file.\r\n\r\nDefault: C:\\Users\\helmu_000\\AppData\\" +
         "Roaming\\LINQPad\\ConnectionsV2.xml");
@@ -943,7 +953,7 @@
             this.txtLprunPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtLprunPath.Location = new System.Drawing.Point(190, 73);
             this.txtLprunPath.Name = "txtLprunPath";
-            this.txtLprunPath.Size = new System.Drawing.Size(557, 24);
+            this.txtLprunPath.Size = new System.Drawing.Size(693, 24);
             this.txtLprunPath.TabIndex = 242;
             this.toolTip1.SetToolTip(this.txtLprunPath, "Path to LPRun.exe from LINQPad to run LINQ queries from command.\r\n\r\nI\'s usually: " +
         "\r\nc:\\Program Files (x86)\\LINQPad5\\lprun.exe\r\n\r\nNote: You need a license to use L" +
@@ -958,6 +968,17 @@
             this.label20.Size = new System.Drawing.Size(91, 18);
             this.label20.TabIndex = 243;
             this.label20.Text = "Temp folder:";
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label24.Location = new System.Drawing.Point(464, 19);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(165, 18);
+            this.label24.TabIndex = 243;
+            this.label24.Text = "Output LINQPad HTML:";
+            this.toolTip1.SetToolTip(this.label24, "Output the LINQPad HTML");
             // 
             // label22
             // 
@@ -976,7 +997,7 @@
             this.txtLinqPadQueryPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtLinqPadQueryPath.Location = new System.Drawing.Point(206, 388);
             this.txtLinqPadQueryPath.Name = "txtLinqPadQueryPath";
-            this.txtLinqPadQueryPath.Size = new System.Drawing.Size(557, 24);
+            this.txtLinqPadQueryPath.Size = new System.Drawing.Size(693, 24);
             this.txtLinqPadQueryPath.TabIndex = 242;
             // 
             // label8
@@ -1027,7 +1048,7 @@
             this.toolStripMenuItem2});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(849, 25);
+            this.menuStrip1.Size = new System.Drawing.Size(930, 25);
             this.menuStrip1.TabIndex = 255;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -1083,33 +1104,12 @@
             this.label19.TabIndex = 243;
             this.label19.Text = "LINQPad path:";
             // 
-            // label24
-            // 
-            this.label24.AutoSize = true;
-            this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label24.Location = new System.Drawing.Point(464, 19);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(165, 18);
-            this.label24.TabIndex = 243;
-            this.label24.Text = "Output LINQPad HTML:";
-            this.toolTip1.SetToolTip(this.label24, "Output the LINQPad HTML");
-            // 
-            // chkOutputLinqPadHtml
-            // 
-            this.chkOutputLinqPadHtml.AutoSize = true;
-            this.chkOutputLinqPadHtml.Location = new System.Drawing.Point(635, 23);
-            this.chkOutputLinqPadHtml.Name = "chkOutputLinqPadHtml";
-            this.chkOutputLinqPadHtml.Size = new System.Drawing.Size(15, 14);
-            this.chkOutputLinqPadHtml.TabIndex = 259;
-            this.toolTip1.SetToolTip(this.chkOutputLinqPadHtml, "Output the LINQPad HTML");
-            this.chkOutputLinqPadHtml.UseVisualStyleBackColor = true;
-            // 
             // FrmSettingsGeneral
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(849, 934);
+            this.ClientSize = new System.Drawing.Size(930, 934);
             this.Controls.Add(this.chkAutoCounterSupport);
             this.Controls.Add(this.label17);
             this.Controls.Add(this.label14);
