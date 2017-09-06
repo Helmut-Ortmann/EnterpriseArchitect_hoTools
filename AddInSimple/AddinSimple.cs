@@ -249,6 +249,7 @@ namespace AddInSimple
             string parametersToPassToQuery;
             string linqQueryFileName;
             string linqQueryFilePath;
+            bool result;
             LinqPad linqPad;
             DataTable dtHtml;
 
@@ -390,7 +391,8 @@ State:
 
                     linqPad = new LinqPad(repository);
                     // Output as html with read back table and out put to EA Search Window
-                    linqPad.Run(linqQueryFilePath, @"html", parametersToPassToQuery);
+                    result = linqPad.Run(linqQueryFilePath, @"html", parametersToPassToQuery);
+                    if (!result) return;
                     dtHtml = linqPad.ReadHtml();
 
                     // Make EA xml
@@ -399,10 +401,12 @@ State:
                     repository.RunModelSearch("", "", "", xml);
                     linqPad.Show();
                     // csv
-                    linqPad.Run(linqQueryFilePath, @"csv", parametersToPassToQuery);
+                    result = linqPad.Run(linqQueryFilePath, @"csv", parametersToPassToQuery);
+                    if (!result) return;
                     linqPad.Show();
                     // text
-                    linqPad.Run(linqQueryFilePath, @"text", parametersToPassToQuery);
+                    result = linqPad.Run(linqQueryFilePath, @"text", parametersToPassToQuery);
+                    if (!result) return;
                     linqPad.Show();
                     break;
 
@@ -413,7 +417,8 @@ State:
 
                     linqPad = new LinqPad(repository);
                     // Output as html with read back table and out put to EA Search Window
-                    linqPad.Run(linqQueryFilePath, @"html", linqPad.GetArg(repository, "mySearchTerm"));
+                    result = linqPad.Run(linqQueryFilePath, @"html", linqPad.GetArg(repository, "mySearchTerm"));
+                    if (!result) return;
                     dtHtml = linqPad.ReadHtml();
 
                     // Make EA xml
@@ -443,7 +448,8 @@ State:
 
                     linqPad = new LinqPad(repository);
                     // Output as html with read back table and out put to EA Search Window, don't use a connection
-                    linqPad.Run(linqQueryFilePath, @"html", linqPad.GetArg(repository, ""),noConnection:true);
+                    result = linqPad.Run(linqQueryFilePath, @"html", linqPad.GetArg(repository, ""),noConnection:true);
+                    if (!result) return;
                     dtHtml = linqPad.ReadHtml();
 
                     // Make EA xml

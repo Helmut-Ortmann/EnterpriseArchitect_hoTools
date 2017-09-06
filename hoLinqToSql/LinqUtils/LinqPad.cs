@@ -101,10 +101,10 @@ namespace hoLinqToSql.LinqUtils
         {
 
             
-            string lprunFormat = GetFormat(outputFormat);
-            if (lprunFormat == "") return false;
+            string _format = GetFormat(outputFormat);
+            if (_format == "") return false;
 
-            string outFile = Path.GetFileNameWithoutExtension(linqPadQueryFile) + "." + outputFormat;
+            string outFile = Path.GetFileNameWithoutExtension(linqPadQueryFile) + "." + _format;
             string linqFile = Path.Combine(_targetDir, linqPadQueryFile);
             _targetFile = Path.Combine(_targetDir, outFile);
             DelTarget();
@@ -121,7 +121,7 @@ namespace hoLinqToSql.LinqUtils
 
             }
 
-            _startInfo.Arguments = $@"-lang=program -format={lprunFormat} {cxName} ""{linqFile}""  {args} ";
+            _startInfo.Arguments = $@"-lang=program -format={_format} {cxName} ""{linqFile}""  {args} ";
             try
             {
                 using (Process exeProcess = Process.Start(_startInfo))
@@ -132,7 +132,8 @@ namespace hoLinqToSql.LinqUtils
                     exeProcess.WaitForExit();
                     // Retrieve the app's exit code
                     var exitCode = exeProcess.ExitCode;
-                    if (! output.StartsWith("<!DOCTYPE HTML>")   )
+                    // the error handling is optimized and tested for html, other formats might not be covered best
+                    if (_format== @"html" && (! output.StartsWith("<!DOCTYPE HTML>")) )
                     {
                         //string errText = exeProcess.StandardError.ReadToEnd();
                         MessageBox.Show($@"Query: '{linqPadQueryFile}'
@@ -160,7 +161,8 @@ Error:
                     }
                     File.WriteAllText(_targetFile, output);
                     // Error is visualized in Error code
-                    if (exitCode != 0)
+                    // optimized for html
+                    if (_format == @"html" & exitCode != 0)
                     {
                         // Show html
                         Process.Start(_targetFile);
