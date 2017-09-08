@@ -28,7 +28,7 @@
   -->
   <!-- Look that Project AddInSimple has the same version as product version 
   -->
-  <?define ProductVersion="1.0.6" ?> 
+  <?define ProductVersion="1.0.7" ?> 
   <?define UpgradeCode="{CA42D098-1AA3-4357-A7F6-CAB9A995BC54}" ?>
   <?define Manufacturer="hoModeler.de" ?>
   <?define ProductName="AddInSimple" ?>
