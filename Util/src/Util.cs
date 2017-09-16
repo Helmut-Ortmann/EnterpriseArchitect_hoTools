@@ -1533,28 +1533,53 @@ namespace hoTools.Utils
                 if (diaObjPort.ElementID == port.ElementID) return;
             }
 
+
             // visualize ports
-            int length = 12;
+            string type = rep.GetElementByID(diaObjSource.ElementID).Type;
+            int portLableLength = 20;
+            int portLabelDistance = 35;
+            int portLableStart = 35;
+            int portLabelOffset = 10;
+            switch (type) 
+            {
+                case "Port":
+                    portLabelOffset = 0;
+                    portLabelDistance = 25;
+                    portLableLength = 20;
+                    break;
+                case "Pin":
+                    portLabelOffset = 0;
+                    portLabelDistance = 25;
+                    portLableLength = 20;
+                    break;
+                case "Parameter":
+                    portLableLength = 30;
+                    portLabelDistance = 35;
+                    portLableStart = 35;
+                    portLabelOffset = 10;
+                    break;
+            }
+           
             int leftPort;
             int rightPort;
             // calculate target position of port
             if (portBoundTo == "right" || portBoundTo == "")
             {
-                leftPort = diaObjSource.right - length/2;
-                rightPort = leftPort + length;
+                leftPort = diaObjSource.right - portLableLength/2 - portLabelOffset;
+                rightPort = leftPort + portLableLength;
             }
             else
             {
-                leftPort = diaObjSource.left - length/2;
-                rightPort = leftPort + length;
+                leftPort = diaObjSource.left - portLableLength/2 - portLabelOffset;
+                rightPort = leftPort + portLableLength;
 
             }
 
             int top = diaObjSource.top;
 
 
-            int topPort = top - 35 - pos*20;
-            int bottomPort = topPort - length;
+            int topPort = top - portLableStart - pos* portLabelDistance; 
+            int bottomPort = topPort - portLableLength;
 
             // diagram object can't host port (not tall enough)
             // make diagram object taller to host all ports

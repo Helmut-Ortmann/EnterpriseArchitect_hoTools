@@ -752,7 +752,7 @@ namespace hoTools.hoToolsGui
 
 
         /// <summary>
-        /// Remove ports from elements by:
+        /// Show ports from elements by:
         /// - Selected Elements
         /// - Selected Ports
         /// 

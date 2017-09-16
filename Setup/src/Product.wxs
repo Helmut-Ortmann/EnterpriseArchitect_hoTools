@@ -24,7 +24,7 @@
   -->
   <!-- Look that Project Util has the same version as product version 
   -->
-  <?define ProductVersion="3.1.4" ?> 
+  <?define ProductVersion="3.1.5" ?> 
   <?define UpgradeCode="3543ED18-28F6-484C-AD8C-FA1A3B72C911" ?>
   <?define Manufacturer="hoModeler.de" ?>
   <?define ProductName="hoTools" ?>
