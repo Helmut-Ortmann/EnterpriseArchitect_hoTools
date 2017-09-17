@@ -120,6 +120,7 @@ Some features:
 # Releases
 ## Release 3.1.5
 - Fix errors Port, Pin, Parameter, Label Handling
+- Move all usages of source element to target element 
 ## Release 3.1.4
 - Error fixing
 - LINQPad output html supported

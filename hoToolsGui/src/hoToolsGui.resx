@@ -2837,10 +2837,10 @@ Note:
     <value>277, 22</value>
   </data>
   <data name="moveLinksToolStripMenuItem.Text" xml:space="preserve">
-    <value>MoveLinks</value>
+    <value>Move usage to element</value>
   </data>
   <data name="moveLinksToolStripMenuItem.ToolTipText" xml:space="preserve">
-    <value>Move all links and appearances from source to target element
+    <value>Move all usages from source to target element
 - Source: Fist selected Element in Diagram
 - Target: Second selected Element in Diagram
 
