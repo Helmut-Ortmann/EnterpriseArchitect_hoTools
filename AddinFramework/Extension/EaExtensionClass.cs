@@ -42,18 +42,26 @@ namespace AddinFramework.Extension
         /// - Port
         /// - Activity Parameter
         /// - Parameter
-        /// - ExpansionNode
+        /// - ExpansionNode (not Action)
         /// - Pin
         /// </summary>
         /// <param name="el"></param>
         /// <returns>EA Version</returns>
-        public static bool IsEmbeddedElement(this EA.Element el)
+        public static bool IsEmbeddedElement(this EA.Element el, EA.Repository rep)
         {
-            return el.Type == "Port" || 
-                   el.Type == "ActivityParameter" || 
-                   el.Type == "Parameter" || 
-                   el.Type == "ExpansionNode" ||
-                   el.Type == "ActionPin";
+            if (el.Type == "ExpansionNode")
+            {
+                EA.Element elAction = rep.GetElementByID(el.ParentID);
+                if (elAction.Type == "Action") return false;
+            }
+            
+            return el.Type == "Port" ||
+                    el.Type == "ActivityParameter" ||
+                    el.Type == "Parameter" ||
+                    el.Type == "ExpansionNode" ||
+                    el.Type == "ActionPin" ||
+                    el.Type == "ObjectNode";
+
         }
     }
 }

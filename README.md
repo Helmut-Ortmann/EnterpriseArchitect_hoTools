@@ -118,6 +118,8 @@ Some features:
 
 
 # Releases
+## Release 3.1.5
+- Fix errors Port, Pin, Parameter, Label Handling
 ## Release 3.1.4
 - Error fixing
 - LINQPad output html supported

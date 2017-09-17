@@ -1380,7 +1380,7 @@ namespace hoTools.EaServices
                     foreach (int i in lEmbeddedElements)
                     {
                         Element portEmbedded = rep.GetElementByID(i);
-                        if (portEmbedded.IsEmbeddedElement())
+                        if (portEmbedded.IsEmbeddedElement(rep))
                         {
                             // only ports / parameters (port has no further embedded elements
                             if (portEmbedded.Type == "ActivityParameter" | portEmbedded.EmbeddedElements.Count == 0)
@@ -1548,19 +1548,19 @@ namespace hoTools.EaServices
             {
                 count = count + 1;
                 var elSource = eaDia.SelElements[count];
-                if (elSource.IsEmbeddedElement())
+                if (elSource.IsEmbeddedElement(rep))
                 {
                     // selected element was port
-                    RemoveEmbeddedElementFromDiagram(eaDia.Dia, elSource);
+                    RemoveEmbeddedElementFromDiagram(rep, eaDia.Dia, elSource);
                 }
                 else
                 {
                     // selected element was "Element"
                     foreach (Element embeddedElement in elSource.EmbeddedElements)
                     {
-                        if (embeddedElement.IsEmbeddedElement())
+                        if (embeddedElement.IsEmbeddedElement(rep))
                         {
-                            RemoveEmbeddedElementFromDiagram(eaDia.Dia, embeddedElement);
+                            RemoveEmbeddedElementFromDiagram(rep, eaDia.Dia, embeddedElement);
                         }
                     }
                 }
@@ -1663,7 +1663,7 @@ namespace hoTools.EaServices
                 count = count + 1;
                 var elSource = eaDia.SelElements[count];
                 // Update Embedded Element, RequiredInterface, ProvidedInterface
-                if (elSource.IsEmbeddedElement() |
+                if (elSource.IsEmbeddedElement(rep) |
                     "ProvidedInterface RequiredInterface".Contains(elSource.Type))
                 {
                     
@@ -1674,7 +1674,7 @@ namespace hoTools.EaServices
                     // selected element was "Element"
                     foreach (Element embeddedElement in elSource.EmbeddedElements)
                     {
-                        if (embeddedElement.IsEmbeddedElement())
+                        if (embeddedElement.IsEmbeddedElement(rep))
                         {
                             var diagramObject = eaDia.Dia.GetDiagramObjectByID(embeddedElement.ElementID, "");
                             if (diagramObject == null) continue;
@@ -1702,9 +1702,9 @@ namespace hoTools.EaServices
         /// </summary>
         /// <param name="dia"></param>
         /// <param name="embeddedElement"></param>
-        private static void RemoveEmbeddedElementFromDiagram(Diagram dia, EA.Element embeddedElement)
+        private static void RemoveEmbeddedElementFromDiagram(EA.Repository rep, Diagram dia, EA.Element embeddedElement)
         {
-            if (!embeddedElement.IsEmbeddedElement()) return;
+            if (!embeddedElement.IsEmbeddedElement(rep)) return;
             for (int i = dia.DiagramObjects.Count - 1; i >= 0; i -= 1)
             {
                 var obj = (DiagramObject) dia.DiagramObjects.GetAt((short) i);
@@ -5832,7 +5832,7 @@ from %APPDATA%Local\Apps\hoTools\
             {
                 // filter ports, at least one port, pin, parameter
                 EA.Element embeddedEl = rep.GetElementByID(objPort.ElementID);
-                if ("PortPinParameter".Contains(embeddedEl.Type))
+                if (embeddedEl.IsEmbeddedElement(rep))
                 {
                     EA.Element elPort = rep.GetElementByID(objPort.ElementID);
                     elParent = rep.GetElementByID(elPort.ParentID);
@@ -5856,7 +5856,7 @@ from %APPDATA%Local\Apps\hoTools\
             {
                 // filter ports, at least one port, pin, parameter
                 EA.Element embeddedEl = rep.GetElementByID(objPort.ElementID);
-                if ("PortPinParameter".Contains(embeddedEl.Type))
+                if (embeddedEl.IsEmbeddedElement(rep))
                 {
                     if (!isRightLimitCrossed)
                     {
@@ -5903,7 +5903,7 @@ from %APPDATA%Local\Apps\hoTools\
             {
                 // filter ports, at least one port, pin, parameter
                 EA.Element embeddedEl = rep.GetElementByID(objPort.ElementID);
-                if ("PortPinParameter".Contains(embeddedEl.Type))
+                if (embeddedEl.IsEmbeddedElement(rep))
                 {
                     EA.Element elPort = rep.GetElementByID(objPort.ElementID);
                     elParent = rep.GetElementByID(elPort.ParentID);
@@ -5928,7 +5928,7 @@ from %APPDATA%Local\Apps\hoTools\
             {
                 // filter ports, at least one port, pin, parameter
                 EA.Element embeddedEl = rep.GetElementByID(objPort.ElementID);
-                if ("PortPinParameter".Contains(embeddedEl.Type))
+                if (embeddedEl.IsEmbeddedElement(rep))
                 {
                     if (!isRightLimitCrossed)
                     {
@@ -5977,7 +5977,7 @@ from %APPDATA%Local\Apps\hoTools\
             {
                 // filter ports, at least one port, pin, parameter
                 EA.Element embeddedEl = rep.GetElementByID(objPort.ElementID);
-                if ("PortPinParameter".Contains(embeddedEl.Type))
+                if (embeddedEl.IsEmbeddedElement(rep))
                 {
                     EA.Element elPort = rep.GetElementByID(objPort.ElementID);
                     elParent = rep.GetElementByID(elPort.ParentID);
@@ -6001,7 +6001,7 @@ from %APPDATA%Local\Apps\hoTools\
             {
                 // filter ports, at least one port, pin, parameter
                 EA.Element embeddedEl = rep.GetElementByID(objPort.ElementID);
-                if ("PortPinParameter".Contains(embeddedEl.Type))
+                if (embeddedEl.IsEmbeddedElement(rep))
                 {
                     if (!isLowerLimitCrossed)
                     {
@@ -6048,7 +6048,7 @@ from %APPDATA%Local\Apps\hoTools\
             {
                 // filter ports, at least one port, pin, parameter
                 EA.Element embeddedEl = rep.GetElementByID(objPort.ElementID);
-                if ("PortPinParameter".Contains(embeddedEl.Type))
+                if (embeddedEl.IsEmbeddedElement(rep))
                 {
                     EA.Element elPort = rep.GetElementByID(objPort.ElementID);
                     elParent = rep.GetElementByID(elPort.ParentID);
@@ -6074,7 +6074,7 @@ from %APPDATA%Local\Apps\hoTools\
             {
                 // filter ports, at least one port, pin, parameter
                 EA.Element embeddedEl = rep.GetElementByID(objPort.ElementID);
-                if ("PortPinParameter".Contains(embeddedEl.Type))
+                if (embeddedEl.IsEmbeddedElement(rep))
                 {
                     if (!isUpperLimitCrossed)
                     {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Reflection;
+using hoTools.Utils.ODBC;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
@@ -21,6 +22,7 @@ using hoTools.Utils.Configuration;
 using hoTools.Utils.Diagram;
 using hoTools.Utils.Excel;
 using hoTools.EaServices.Names;
+using hoTools.EaServices.MOVE;
 
 
 // ReSharper disable once CheckNamespace
@@ -240,6 +242,9 @@ namespace hoTools.hoToolsGui
         private ToolStripSeparator toolStripSeparator15;
         private ToolStripMenuItem showLINQPadConnectionsToolStripMenuItem;
         private Label label1;
+        private ToolStripSeparator toolStripSeparator16;
+        private ToolStripMenuItem moveLinksToolStripMenuItem;
+        private ToolStripSeparator toolStripSeparator17;
         private TextBox _txtSearchText;
         #endregion
 
@@ -856,7 +861,7 @@ namespace hoTools.hoToolsGui
         void hidePortLabelToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var port = new PortServices(Repository);
-            port.ChangeLabelGui(PortServices.LabelStyle.IsHidden);
+            port.ChangeLabelGui(Repository, PortServices.LabelStyle.IsHidden);
         }
         #endregion
 
@@ -864,14 +869,14 @@ namespace hoTools.hoToolsGui
         void viewPortLabelToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var port = new PortServices(Repository);
-            port.ChangeLabelGui(PortServices.LabelStyle.IsShown);
+            port.ChangeLabelGui(Repository, PortServices.LabelStyle.IsShown);
         }
         #endregion
         #region movePortLableLeftPositionToolStripMenuItem_Click
         void movePortLableLeftPositionToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var port = new PortServices(Repository);
-            port.ChangeLabelGui(PortServices.LabelStyle.PositionLeft);
+            port.ChangeLabelGui(Repository, PortServices.LabelStyle.PositionLeft);
         }
         #endregion
 
@@ -879,7 +884,7 @@ namespace hoTools.hoToolsGui
         void movePortLableRightPositionToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var port = new PortServices(Repository);
-            port.ChangeLabelGui(PortServices.LabelStyle.PositionRight);
+            port.ChangeLabelGui(Repository, PortServices.LabelStyle.PositionRight);
         }
         #endregion
 
@@ -888,7 +893,7 @@ namespace hoTools.hoToolsGui
         void movePortLablePlusPositionToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var port = new PortServices(Repository);
-            port.ChangeLabelGui(PortServices.LabelStyle.PositionPlus);
+            port.ChangeLabelGui(Repository, PortServices.LabelStyle.PositionPlus);
         }
         #endregion
 
@@ -897,7 +902,7 @@ namespace hoTools.hoToolsGui
         void movePortLableMinusPositionToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var port = new PortServices(Repository);
-            port.ChangeLabelGui(PortServices.LabelStyle.PositionMinus);
+            port.ChangeLabelGui(Repository, PortServices.LabelStyle.PositionMinus);
         }
         #endregion
 
@@ -1319,6 +1324,9 @@ namespace hoTools.hoToolsGui
             this.updateElementHyperlinksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.updateFeatureHyperlinksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.updateHyperlinksToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator16 = new System.Windows.Forms.ToolStripSeparator();
+            this.moveLinksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator17 = new System.Windows.Forms.ToolStripSeparator();
             this.specToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.applyAllAutoCounterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.applyAutoCounterNewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -2263,7 +2271,10 @@ namespace hoTools.hoToolsGui
             this._changeAuthorRecursiveToolStripMenuItem,
             this._changeAuthorToolStripMenuItem,
             this.toolStripSeparator13,
-            this.updateHyperLinksToolStripMenuItem});
+            this.updateHyperLinksToolStripMenuItem,
+            this.toolStripSeparator16,
+            this.moveLinksToolStripMenuItem,
+            this.toolStripSeparator17});
             this._doToolStripMenuItem.Name = "_doToolStripMenuItem";
             resources.ApplyResources(this._doToolStripMenuItem, "_doToolStripMenuItem");
             // 
@@ -2385,6 +2396,22 @@ namespace hoTools.hoToolsGui
             this.updateHyperlinksToolStripMenuItem1.Name = "updateHyperlinksToolStripMenuItem1";
             resources.ApplyResources(this.updateHyperlinksToolStripMenuItem1, "updateHyperlinksToolStripMenuItem1");
             this.updateHyperlinksToolStripMenuItem1.Click += new System.EventHandler(this.updateAllHyperlinksToolStripMenuItem1_Click);
+            // 
+            // toolStripSeparator16
+            // 
+            this.toolStripSeparator16.Name = "toolStripSeparator16";
+            resources.ApplyResources(this.toolStripSeparator16, "toolStripSeparator16");
+            // 
+            // moveLinksToolStripMenuItem
+            // 
+            this.moveLinksToolStripMenuItem.Name = "moveLinksToolStripMenuItem";
+            resources.ApplyResources(this.moveLinksToolStripMenuItem, "moveLinksToolStripMenuItem");
+            this.moveLinksToolStripMenuItem.Click += new System.EventHandler(this.moveLinksToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator17
+            // 
+            this.toolStripSeparator17.Name = "toolStripSeparator17";
+            resources.ApplyResources(this.toolStripSeparator17, "toolStripSeparator17");
             // 
             // specToolStripMenuItem
             // 
@@ -4027,6 +4054,34 @@ Please restart EA. During restart hoTools loads the default settings.",
             string linqQueryFile = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\" + "LinqPadConnections.linq";
             _model.SearchRun(linqQueryFile, "");
             
+        }
+        /// <summary>
+        /// Move links + appearances from source to target. After that you can delete source.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void moveLinksToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EaDiagram curDiagram = new EaDiagram(Repository);
+            if (curDiagram.Dia == null) return;
+
+            Repository.SaveDiagram(curDiagram.Dia.DiagramID);
+            // two objects selected
+            if (curDiagram.SelectedObjectsCount != 2 || curDiagram.SelElements.Count !=2)
+            {
+                MessageBox.Show(@"First Element: Source of move connections and appearances
+Second Element: Target of move connections and appearances", "Select two elements on the diagram!");
+                return;
+            }
+            EA.Element source = curDiagram.SelElements[1];
+            EA.Element target = curDiagram.SelElements[0];
+
+            Odbc odbc = new Odbc(Repository);
+
+            EaServices.MOVE.Move.MoveClassifier(Repository, curDiagram.Dia, source, target);
+            odbc.Close();
+            // update current diagram
+            Repository.ReloadDiagram(curDiagram.Dia.DiagramID);
         }
     }
 

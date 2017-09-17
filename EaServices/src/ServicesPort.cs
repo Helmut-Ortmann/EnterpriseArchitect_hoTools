@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using AddinFramework.Extension;
 using EA;
 using hoTools.Utils;
 using hoTools.Utils.Diagram;
 using hoTools.Utils.SQL;
+using hoTools.EaServices;
+using hoTools.Utils.Extension;
 using DiagramObject = EA.DiagramObject;
 using Element = EA.Element;
 using Package = EA.Package;
@@ -16,8 +19,7 @@ namespace hoTools.EAServicesPort
     {
         private readonly Repository _rep;
         int _count; // a variable to count the amount of something
-        const string EmbeddedElementTypes ="Port Parameter Pin";
-              
+          
         
 
         #region Constructor
@@ -227,12 +229,12 @@ namespace hoTools.EAServicesPort
         ///   hoTools updates: DiagramObjects.Styles 
         /// </summary>
         /// <param name="style"></param>
-        public void ChangeLabelGui(LabelStyle style)
+        public void ChangeLabelGui(EA.Repository rep,  LabelStyle style)
         {
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
-                DoChangeLabelGui(style);
+                DoChangeLabelGui(rep, style);
                 Cursor.Current = Cursors.Default;
             }
             catch (Exception e11)
@@ -255,7 +257,7 @@ namespace hoTools.EAServicesPort
         ///   hoTools updates: DiagramObjects.Styles 
         /// </summary>
         /// <param name="style"></param>
-        private void DoChangeLabelGui(LabelStyle style)
+        private void DoChangeLabelGui(EA.Repository rep, LabelStyle style)
         {
             Diagram dia = _rep.GetCurrentDiagram();
             if (dia == null) return;
@@ -267,7 +269,7 @@ namespace hoTools.EAServicesPort
             foreach (DiagramObject obj in dia.SelectedObjects)
             {
                 var el = _rep.GetElementByID(obj.ElementID);
-                if (EmbeddedElementTypes.Contains(el.Type) )
+                if (el.IsEmbeddedElement(rep))
                 {
                     
                     DiagramObject portObj = dia.GetDiagramObjectByID(el.ElementID, "");
@@ -278,8 +280,8 @@ namespace hoTools.EAServicesPort
                 {   // all element like Class, Component,..
                     foreach (Element p in el.EmbeddedElements)
                     {
-                        if (! (EmbeddedElementTypes.Contains(p.Type))) continue;
-                        DiagramObject portObj = dia.GetDiagramObjectByID(el.ElementID, "");
+                        if (! p.IsEmbeddedElement(rep)) continue;
+                        DiagramObject portObj = dia.GetDiagramObjectByID(p.ElementID, "");
                         if (portObj != null) {
                             //EA.DiagramObject portObj = dia.GetDiagramObjectByID(p.ElementID, "");
                             // HDN=1;  Label hidden
