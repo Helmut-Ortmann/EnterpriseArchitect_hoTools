@@ -239,6 +239,7 @@ namespace hoTools.hoToolsGui
         private ToolStripMenuItem updateHyperlinksToolStripMenuItem1;
         private ToolStripSeparator toolStripSeparator15;
         private ToolStripMenuItem showLINQPadConnectionsToolStripMenuItem;
+        private Label label1;
         private TextBox _txtSearchText;
         #endregion
 
@@ -1271,10 +1272,11 @@ namespace hoTools.hoToolsGui
             this._btnD = new System.Windows.Forms.Button();
             this._txtSearchName = new System.Windows.Forms.TextBox();
             this._txtSearchText = new System.Windows.Forms.TextBox();
+            this._lblPorts = new System.Windows.Forms.Label();
             this._toolTipRtfListOfSearches = new System.Windows.Forms.ToolTip(this.components);
             this._rtfListOfSearches = new System.Windows.Forms.RichTextBox();
             this._panelPort = new System.Windows.Forms.Panel();
-            this._lblPorts = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this._panelNote = new System.Windows.Forms.Panel();
             this._panelAdvanced = new System.Windows.Forms.Panel();
             this._panelFavorite = new System.Windows.Forms.Panel();
@@ -2034,6 +2036,12 @@ namespace hoTools.hoToolsGui
             this._txtSearchText.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.txtSearchText_MouseDoubleClick);
             this._txtSearchText.MouseLeave += new System.EventHandler(this._txtSearchText_MouseLeave);
             // 
+            // _lblPorts
+            // 
+            resources.ApplyResources(this._lblPorts, "_lblPorts");
+            this._lblPorts.Name = "_lblPorts";
+            this._toolTip.SetToolTip(this._lblPorts, resources.GetString("_lblPorts.ToolTip"));
+            // 
             // _toolTipRtfListOfSearches
             // 
             this._toolTipRtfListOfSearches.AutomaticDelay = 0;
@@ -2055,6 +2063,7 @@ namespace hoTools.hoToolsGui
             // 
             // _panelPort
             // 
+            this._panelPort.Controls.Add(this.label1);
             this._panelPort.Controls.Add(this._lblPorts);
             this._panelPort.Controls.Add(this._btnLeft);
             this._panelPort.Controls.Add(this._btnUp);
@@ -2065,10 +2074,10 @@ namespace hoTools.hoToolsGui
             resources.ApplyResources(this._panelPort, "_panelPort");
             this._panelPort.Name = "_panelPort";
             // 
-            // _lblPorts
+            // label1
             // 
-            resources.ApplyResources(this._lblPorts, "_lblPorts");
-            this._lblPorts.Name = "_lblPorts";
+            resources.ApplyResources(this.label1, "label1");
+            this.label1.Name = "label1";
             // 
             // _panelNote
             // 

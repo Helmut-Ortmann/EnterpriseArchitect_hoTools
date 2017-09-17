@@ -5827,15 +5827,17 @@ from %APPDATA%Local\Apps\hoTools\
             // check if left limit element is crossed
             bool isRightLimitCrossed = false;
             Element elParent = null;
-            DiagramObject obj = null;
+            DiagramObject objParent = null;
             foreach (DiagramObject objPort in dia.SelectedObjects)
             {
                 // filter ports, at least one port, pin, parameter
                 EA.Element embeddedEl = rep.GetElementByID(objPort.ElementID);
                 if ("PortPinParameter".Contains(embeddedEl.Type))
                 {
-                    obj = objPort;
-                    var leftLimit = obj.left - 0;
+                    EA.Element elPort = rep.GetElementByID(objPort.ElementID);
+                    elParent = rep.GetElementByID(elPort.ParentID);
+                    objParent = dia.GetDiagramObjectByID(elParent.ElementID, "");
+                    var leftLimit = objParent.left - 0;
                     elParent = rep.GetElementByID(embeddedEl.ElementID);
                     if (objPort.left < leftLimit)
                     {
@@ -5847,8 +5849,8 @@ from %APPDATA%Local\Apps\hoTools\
             // no port, pin, parameter selected
             if (elParent == null) return;
             // move all to left upper corner of element
-            int startValueTop = obj.top - 8;
-            int startValueLeft = obj.left - 8;
+            int startValueTop = objParent.top - 8;
+            int startValueLeft = objParent.left - 8;
             int pos = 0;
             foreach (DiagramObject objPort in dia.SelectedObjects)
             {
@@ -5896,15 +5898,17 @@ from %APPDATA%Local\Apps\hoTools\
             // check if left limit element is crossed
             bool isRightLimitCrossed = false;
             Element elParent = null;
-            DiagramObject obj = null;
+            DiagramObject objParent = null;
             foreach (DiagramObject objPort in dia.SelectedObjects)
             {
                 // filter ports, at least one port, pin, parameter
                 EA.Element embeddedEl = rep.GetElementByID(objPort.ElementID);
                 if ("PortPinParameter".Contains(embeddedEl.Type))
                 {
-                    obj = objPort;
-                    var rightLimit = obj.right - 16; // limit cross over right 
+                    EA.Element elPort = rep.GetElementByID(objPort.ElementID);
+                    elParent = rep.GetElementByID(elPort.ParentID);
+                    objParent = dia.GetDiagramObjectByID(elParent.ElementID, "");
+                    var rightLimit = objParent.right - 16; // limit cross over right 
                     elParent = rep.GetElementByID(embeddedEl.ElementID);
                     if (objPort.left > rightLimit)
                     {
@@ -5917,8 +5921,8 @@ from %APPDATA%Local\Apps\hoTools\
             if (elParent == null) return;
 
             // move all to left upper corner of element
-            int startValueTop = obj.top - 8;
-            int startValueLeft = obj.right - 8;
+            int startValueTop = objParent.top - 8;
+            int startValueLeft = objParent.right - 8;
             int pos = 0;
             foreach (DiagramObject objPort in dia.SelectedObjects)
             {
@@ -5950,7 +5954,8 @@ from %APPDATA%Local\Apps\hoTools\
 
         /// <summary>
         /// Move the selected ports down
-        /// - If lower level is crossed it locates ports to bottom left corners.
+        /// - If parent lowest level is crossed it locates ports to bottom left corners of parent level.
+        /// - It works for the following embedded elements: Part, Parameter, Pins 
         /// </summary>
         /// <param name="rep"></param>
         [ServiceOperation("{1F5BA798-F9AC-4F80-8004-A8E8236AF629}", "Embedded Elements down", "Select embedded elements",
@@ -5966,16 +5971,18 @@ from %APPDATA%Local\Apps\hoTools\
             // check if left limit element is crossed
             bool isLowerLimitCrossed = false;
             Element elParent = null;
-            DiagramObject obj = null;
+            DiagramObject objParent = null;
+            // check if one embedded element is lower than the bottom of the parent element
             foreach (DiagramObject objPort in dia.SelectedObjects)
             {
                 // filter ports, at least one port, pin, parameter
                 EA.Element embeddedEl = rep.GetElementByID(objPort.ElementID);
                 if ("PortPinParameter".Contains(embeddedEl.Type))
                 {
-                    obj = objPort;
-                    var lowerLimit = obj.bottom + 12; // limit cross over upper 
-                    elParent = rep.GetElementByID(embeddedEl.ElementID);
+                    EA.Element elPort = rep.GetElementByID(objPort.ElementID);
+                    elParent = rep.GetElementByID(elPort.ParentID);
+                    objParent = dia.GetDiagramObjectByID(elParent.ElementID,"");
+                    var lowerLimit = objParent.bottom + 12; // limit cross over upper 
                     if (objPort.bottom < lowerLimit)
                     {
                         isLowerLimitCrossed = true;
@@ -5987,8 +5994,8 @@ from %APPDATA%Local\Apps\hoTools\
             if (elParent == null) return;
 
             // move all to left upper corner of element
-            int startValueTop = obj.bottom + 8;
-            int startValueLeft = obj.left + 8;
+            int startValueTop = objParent.bottom + 8;
+            int startValueLeft = objParent.left + 8;
             int pos = 0;
             foreach (DiagramObject objPort in dia.SelectedObjects)
             {
@@ -6036,15 +6043,17 @@ from %APPDATA%Local\Apps\hoTools\
             // check if left limit element is crossed
             bool isUpperLimitCrossed = false;
             Element elParent = null;
-            DiagramObject obj = null;
+            DiagramObject objParent = null;
             foreach (DiagramObject objPort in dia.SelectedObjects)
             {
                 // filter ports, at least one port, pin, parameter
                 EA.Element embeddedEl = rep.GetElementByID(objPort.ElementID);
                 if ("PortPinParameter".Contains(embeddedEl.Type))
                 {
-                    obj = objPort;
-                    var upLimit = obj.top - 10; // limit cross over upper 
+                    EA.Element elPort = rep.GetElementByID(objPort.ElementID);
+                    elParent = rep.GetElementByID(elPort.ParentID);
+                    objParent = dia.GetDiagramObjectByID(elParent.ElementID, "");
+                    var upLimit = objParent.top - 10; // limit cross over upper 
                     elParent = rep.GetElementByID(embeddedEl.ElementID);
                     if (objPort.top > upLimit)
                     {
@@ -6058,8 +6067,8 @@ from %APPDATA%Local\Apps\hoTools\
 
 
             // move all to left upper corner of element
-            int startValueTop = obj.top + 8;
-            int startValueLeft = obj.left + 8;
+            int startValueTop = objParent.top + 8;
+            int startValueLeft = objParent.left + 8;
             int pos = 0;
             foreach (DiagramObject objPort in dia.SelectedObjects)
             {
