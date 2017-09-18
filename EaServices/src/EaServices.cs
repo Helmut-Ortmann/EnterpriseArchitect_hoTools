@@ -25,6 +25,7 @@ using TaggedValue = hoTools.Utils.TaggedValue;
 using hoTools.EAServicesPort;
 using hoTools.Utils.Configuration;
 using hoTools.Utils.Diagram;
+using hoTools.Utils.ODBC;
 
 // ReSharper disable RedundantArgumentDefaultValue
 // ReSharper disable ArgumentsStyleLiteral
@@ -184,13 +185,50 @@ namespace hoTools.EaServices
 
         #endregion
 
+
+        /// <summary>
+        /// Move usage of source element to target element
+        /// </summary>
+        /// <param name="rep"></param>
+        [ServiceOperation("{BB133FEA-AEDD-4C8F-BBC1-A59F85F4624C}",
+            "Move usage to element", // Description
+            "Click source Element, then target Element to move usage to target", //Tooltip
+            isTextRequired: false)]
+        // ReSharper disable once UnusedMember.Global
+        // dynamical usage as configurable service by reflection
+        public static void MoveUsage(Repository rep)
+        {
+            EaDiagram curDiagram = new EaDiagram(rep);
+            if (curDiagram.Dia == null) return;
+
+           rep.SaveDiagram(curDiagram.Dia.DiagramID);
+            // two objects selected
+            if (curDiagram.SelectedObjectsCount != 2 || curDiagram.SelElements.Count != 2)
+            {
+                MessageBox.Show(@"First Element: Source of move connections and appearances
+Second Element: Target of move connections and appearances", "Select two elements on the diagram!");
+                return;
+            }
+            EA.Element source = curDiagram.SelElements[1];
+            EA.Element target = curDiagram.SelElements[0];
+
+            Odbc odbc = new Odbc(rep);
+
+            EaServices.MOVE.Move.MoveClassifier(rep, curDiagram.Dia, source, target);
+            odbc.Close();
+            // update current diagram
+            rep.ReloadDiagram(curDiagram.Dia.DiagramID);
+
+        }
+
+       
         /// <summary>
         /// Copy 'Connection string' to clipboard
         /// </summary>
         /// <param name="rep"></param>
         [ServiceOperation("{9FC521F2-3E1A-4000-8350-D8C9F04F69D7}",
             "Copy connection string to Clipboard", // Description
-            "Copy Connectionstring to Clipboard", //Tooltip
+            "Copy Connection string to Clipboard", //Tooltip
             isTextRequired: false)]
         // ReSharper disable once UnusedMember.Global
         // dynamical usage as configurable service by reflection

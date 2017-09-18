@@ -64,24 +64,16 @@ namespace hoTools.EaServices.MOVE
             // search for all description fields in xref where the source GUID is used
             string sql = "SELECT x.description, x.xrefID " +
                   " FROM t_xref x" +
-                  $" WHERE x.description like '{odbc.Wc}{srcGUID}{odbc.Wc}' ;";
-            odbc.Rs.Open(sql, odbc.Cn, ADODB.CursorTypeEnum.adOpenStatic, ADODB.LockTypeEnum.adLockReadOnly, 0);
+                         $" WHERE x.description like '%{srcGUID}%' ;";
+            odbc.Rs.Open(sql, odbc.Cn, ADODB.CursorTypeEnum.adOpenForwardOnly, 
+                                    ADODB.LockTypeEnum.adLockOptimistic, -1);
             while (odbc.Rs.EOF == false)
             {
                 // replace the source ID by the target ID
                 string description = odbc.Rs.Fields[0].Value.ToString();
                 description = description.Replace(srcGUID, targetGUID);
-                // change source class to target of found elements
-                sql = "Update t_xref" +
-                    " set description = '" + description + "' " +
-                    "  where xrefID = '" + odbc.Rs.Fields[1].Value.ToString() + "' " +
-                    " ;";
-
-                if (odbc.OdbcCmd(sql) == false)
-                {
-                    odbc.Rs.Close();
-                    return false;
-                }
+                odbc.Rs.Update("description", description);
+                
                 odbc.Rs.MoveNext();
             }
             odbc.Rs.Close();
@@ -169,7 +161,7 @@ namespace hoTools.EaServices.MOVE
             // search for all description fields in xref where the source GUID is used
             string sql = "SELECT x.description, x.xrefID " +
                   " FROM t_xref x" +
-                  $" WHERE x.description like '{odbc.Wc}{srcGUID.Trim()}{ odbc.Wc}';";
+                  $" WHERE x.description like '%{srcGUID.Trim()}%';";
             try
             { odbc.Rs.Close(); }
             catch (Exception e)

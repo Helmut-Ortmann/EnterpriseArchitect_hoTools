@@ -4056,32 +4056,13 @@ Please restart EA. During restart hoTools loads the default settings.",
             
         }
         /// <summary>
-        /// Move links + appearances from source to target. After that you can delete source.
+        /// Move usage (links + appearances from source to target). After that you can delete source.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void moveLinksToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            EaDiagram curDiagram = new EaDiagram(Repository);
-            if (curDiagram.Dia == null) return;
-
-            Repository.SaveDiagram(curDiagram.Dia.DiagramID);
-            // two objects selected
-            if (curDiagram.SelectedObjectsCount != 2 || curDiagram.SelElements.Count !=2)
-            {
-                MessageBox.Show(@"First Element: Source of move connections and appearances
-Second Element: Target of move connections and appearances", "Select two elements on the diagram!");
-                return;
-            }
-            EA.Element source = curDiagram.SelElements[1];
-            EA.Element target = curDiagram.SelElements[0];
-
-            Odbc odbc = new Odbc(Repository);
-
-            EaServices.MOVE.Move.MoveClassifier(Repository, curDiagram.Dia, source, target);
-            odbc.Close();
-            // update current diagram
-            Repository.ReloadDiagram(curDiagram.Dia.DiagramID);
+            EaService.MoveUsage(Repository);
         }
     }
 

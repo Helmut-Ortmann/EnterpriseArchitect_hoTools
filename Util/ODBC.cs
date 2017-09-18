@@ -6,20 +6,24 @@ using ADODB;
 // ReSharper disable once CheckNamespace
 namespace hoTools.Utils.ODBC
 {
+    /// <summary>
+    /// ODBC connection. Note: Wildcard is '%', also for Access
+    /// </summary>
     public class Odbc
     {
         EA.Repository _rep;
         ADODB.Connection _cn;
         ADODB.Command _cmd;
         ADODB.Recordset _rs;
-        private string _wc;
 
         public Connection Cn { get => _cn; set => _cn = value; }
         public Command Cmd { get => _cmd; set => _cmd = value; }
         public Recordset Rs { get => _rs; set => _rs = value; }
-        public string Wc { get => _wc; set => _wc = value; }
 
-
+        /// <summary>
+        /// ODBC connection. Note: Wildcard is '%', also for Access
+        /// </summary>
+        /// <param name="rep"></param>
         public Odbc(EA.Repository rep)
         {
             _rep = rep;
@@ -28,7 +32,6 @@ namespace hoTools.Utils.ODBC
             _cmd.CommandTimeout = 180;
             int start;
 
-            _wc =  (rep.RepositoryType() == "JET")?  "*" : "%";
             string connectionString = _rep.ConnectionString;
             if (connectionString.Contains("Connect="))
             {
