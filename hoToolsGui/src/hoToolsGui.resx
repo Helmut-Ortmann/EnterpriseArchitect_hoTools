@@ -3000,6 +3000,19 @@ It updates:
   <data name="toolStripSeparator17.Size" type="System.Drawing.Size, System.Drawing">
     <value>274, 6</value>
   </data>
+  <data name="orderAlphapeticToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>277, 22</value>
+  </data>
+  <data name="orderAlphapeticToolStripMenuItem.Text" xml:space="preserve">
+    <value>Order alphapetic</value>
+  </data>
+  <data name="orderAlphapeticToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Order the selected elements in alphabetic order:
+- Ports, Pins, Parameters</value>
+  </data>
+  <data name="toolStripSeparator18.Size" type="System.Drawing.Size, System.Drawing">
+    <value>274, 6</value>
+  </data>
   <data name="_doToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>34, 21</value>
   </data>
@@ -3935,6 +3948,18 @@ If you want to use LINQPad with EA you need:
     <value>toolStripSeparator17</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator17.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;orderAlphapeticToolStripMenuItem.Name" xml:space="preserve">
+    <value>orderAlphapeticToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;orderAlphapeticToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator18.Name" xml:space="preserve">
+    <value>toolStripSeparator18</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator18.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;specToolStripMenuItem.Name" xml:space="preserve">

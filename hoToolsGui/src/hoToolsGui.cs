@@ -245,6 +245,8 @@ namespace hoTools.hoToolsGui
         private ToolStripSeparator toolStripSeparator16;
         private ToolStripMenuItem moveLinksToolStripMenuItem;
         private ToolStripSeparator toolStripSeparator17;
+        private ToolStripMenuItem orderAlphapeticToolStripMenuItem;
+        private ToolStripSeparator toolStripSeparator18;
         private TextBox _txtSearchText;
         #endregion
 
@@ -1327,6 +1329,8 @@ namespace hoTools.hoToolsGui
             this.toolStripSeparator16 = new System.Windows.Forms.ToolStripSeparator();
             this.moveLinksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator17 = new System.Windows.Forms.ToolStripSeparator();
+            this.orderAlphapeticToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator18 = new System.Windows.Forms.ToolStripSeparator();
             this.specToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.applyAllAutoCounterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.applyAutoCounterNewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -2274,7 +2278,9 @@ namespace hoTools.hoToolsGui
             this.updateHyperLinksToolStripMenuItem,
             this.toolStripSeparator16,
             this.moveLinksToolStripMenuItem,
-            this.toolStripSeparator17});
+            this.toolStripSeparator17,
+            this.orderAlphapeticToolStripMenuItem,
+            this.toolStripSeparator18});
             this._doToolStripMenuItem.Name = "_doToolStripMenuItem";
             resources.ApplyResources(this._doToolStripMenuItem, "_doToolStripMenuItem");
             // 
@@ -2412,6 +2418,17 @@ namespace hoTools.hoToolsGui
             // 
             this.toolStripSeparator17.Name = "toolStripSeparator17";
             resources.ApplyResources(this.toolStripSeparator17, "toolStripSeparator17");
+            // 
+            // orderAlphapeticToolStripMenuItem
+            // 
+            this.orderAlphapeticToolStripMenuItem.Name = "orderAlphapeticToolStripMenuItem";
+            resources.ApplyResources(this.orderAlphapeticToolStripMenuItem, "orderAlphapeticToolStripMenuItem");
+            this.orderAlphapeticToolStripMenuItem.Click += new System.EventHandler(this.orderAlphapeticToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator18
+            // 
+            this.toolStripSeparator18.Name = "toolStripSeparator18";
+            resources.ApplyResources(this.toolStripSeparator18, "toolStripSeparator18");
             // 
             // specToolStripMenuItem
             // 
@@ -4063,6 +4080,11 @@ Please restart EA. During restart hoTools loads the default settings.",
         private void moveLinksToolStripMenuItem_Click(object sender, EventArgs e)
         {
             EaService.MoveUsage(Repository);
+        }
+
+        private void orderAlphapeticToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EaService.OrderAlphabetic(Repository);
         }
     }
 

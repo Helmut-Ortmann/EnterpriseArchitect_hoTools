@@ -26,6 +26,7 @@ using hoTools.EAServicesPort;
 using hoTools.Utils.Configuration;
 using hoTools.Utils.Diagram;
 using hoTools.Utils.ODBC;
+using hoTools.Utils.EaCollections;
 
 // ReSharper disable RedundantArgumentDefaultValue
 // ReSharper disable ArgumentsStyleLiteral
@@ -220,8 +221,35 @@ Second Element: Target of move connections and appearances", "Select two element
             rep.ReloadDiagram(curDiagram.Dia.DiagramID);
 
         }
+        /// <summary>
+        /// Move usage of source element to target element
+        /// </summary>
+        /// <param name="rep"></param>
+        [ServiceOperation("{52298A07-AA0E-459C-9DBA-22CCBE0EA838}",
+            "Order Elements in alphabetic order", // Description
+            "Select all Elements to order", //Tooltip
+            isTextRequired: false)]
+        // ReSharper disable once UnusedMember.Global
+        // dynamical usage as configurable service by reflection
+        public static void OrderAlphabetic(Repository rep)
+        {
+            EaDiagram curDiagram = new EaDiagram(rep);
+            if (curDiagram.Dia == null) return;
 
-       
+            rep.SaveDiagram(curDiagram.Dia.DiagramID);
+            // two objects selected
+            if (curDiagram.SelectedObjectsCount < 2 || curDiagram.SelElements.Count < 2)
+            {
+                MessageBox.Show(@"Ports, Parameter, Pins supported", "Select at least two elements on the diagram!");
+                return;
+            }
+            EaCollectionDiagramObjects diaCol = new EaCollectionDiagramObjects(curDiagram);
+            diaCol.OrderAlphabetic();
+            rep.ReloadDiagram(curDiagram.Dia.DiagramID);
+
+        }
+
+
         /// <summary>
         /// Copy 'Connection string' to clipboard
         /// </summary>

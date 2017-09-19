@@ -29,6 +29,8 @@ namespace hoTools.Utils.Diagram
         public int SelectedObjectsCount => _dia.SelectedObjects.Count;
         public EA.Connector SelectedConnector => _selectedConnector;
 
+        public Repository Rep { get { return _rep; } }
+
         #endregion
 
 
@@ -56,7 +58,7 @@ namespace hoTools.Utils.Diagram
             EA.Diagram dia = rep.GetCurrentDiagram();
             if (dia == null) return;
 
-            EA.ObjectType contextObjectType = _rep.GetContextItemType();
+            EA.ObjectType contextObjectType = Rep.GetContextItemType();
 
 
             // Check if context is diagram or something inside the current diagram is selected (selected things are never old)
@@ -139,7 +141,7 @@ namespace hoTools.Utils.Diagram
         public void ReloadSelectedObjectsAndConnector(bool saveDiagram=true)
         {
             if (saveDiagram) Save();
-            _rep.ReloadDiagram(_dia.DiagramID);
+            Rep.ReloadDiagram(_dia.DiagramID);
             if (_selectedConnector != null) _dia.SelectedConnector = _selectedConnector;
             foreach (EA.DiagramObject dObj in _selectedObjects)
             {
@@ -156,7 +158,7 @@ namespace hoTools.Utils.Diagram
         {
             Unselect();
             Save();
-            _rep.ReloadDiagram(_dia.DiagramID);
+            Rep.ReloadDiagram(_dia.DiagramID);
 
             _dia.SelectedObjects.AddNew(_conTextDiagramObject.ElementID.ToString(), _conTextDiagramObject.ObjectType.ToString());
         }
@@ -167,7 +169,7 @@ namespace hoTools.Utils.Diagram
         {
             Unselect();
             Save();
-            _rep.ReloadDiagram(_dia.DiagramID);
+            Rep.ReloadDiagram(_dia.DiagramID);
 
 
             EA.DiagramObject diaObj = _dia.GetDiagramObjectByID(con.SupplierID,"");
@@ -210,7 +212,7 @@ namespace hoTools.Utils.Diagram
                     if (withSelectedObjects)
                     {
                         // check if connector is connected with diagram object
-                        Connector c = _rep.GetConnectorByID(link.ConnectorID);
+                        Connector c = Rep.GetConnectorByID(link.ConnectorID);
                         foreach (EA.DiagramObject dObject in _dia.SelectedObjects)
                         {
                             if (c.ClientID == dObject.ElementID | c.SupplierID == dObject.ElementID)
@@ -245,7 +247,7 @@ namespace hoTools.Utils.Diagram
             var lObjByPosition = new List<DiagramObjectSelected>();
             foreach (EA.DiagramObject obj in _selectedObjects)
             {
-                EA.Element el= _rep.GetElementByID(obj.ElementID);
+                EA.Element el= Rep.GetElementByID(obj.ElementID);
                 lIdsByName.Add(new DiagramObject(el.Name, el.ElementID) );
                 int position = obj.left;
                 if (isVerticalSorted) position = obj.top;
@@ -280,7 +282,7 @@ namespace hoTools.Utils.Diagram
         // ReSharper disable once MemberCanBePrivate.Global
         public void Save()
         {
-            _rep.SaveDiagram(_dia.DiagramID);
+            Rep.SaveDiagram(_dia.DiagramID);
         }
         #endregion
 
