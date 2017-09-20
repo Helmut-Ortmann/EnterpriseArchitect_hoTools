@@ -79,7 +79,7 @@ namespace hoTools.Utils.EaCollections
                 // horizontal
                 int leftItem = llist.Max(t => t.left);
                 int rightItem = llist.Min(t => t.right);
-                int sum = llist.Sum(t => t.top - t.bottom);
+                int sum = llist.Sum(t => t.left - t.right);
                 int diff = (leftItem - rightItem - sum) / llist.Count;
                 int left = leftItem;
                 foreach (var item in llist)
