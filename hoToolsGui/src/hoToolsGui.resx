@@ -3004,11 +3004,16 @@ It updates:
     <value>277, 22</value>
   </data>
   <data name="orderAlphapeticToolStripMenuItem.Text" xml:space="preserve">
-    <value>Order alphapetic</value>
+    <value>Sort alphapetic</value>
   </data>
   <data name="orderAlphapeticToolStripMenuItem.ToolTipText" xml:space="preserve">
-    <value>Order the selected elements in alphabetic order:
-- Ports, Pins, Parameters</value>
+    <value>Sort the selected diagram elements in alphabetic order:
+- Ports, Pins, Parameters
+- Elements, Packages
+
+It ignores:
+- ProvidedInterface
+- RequiredInterface</value>
   </data>
   <data name="toolStripSeparator18.Size" type="System.Drawing.Size, System.Drawing">
     <value>274, 6</value>
@@ -3078,10 +3083,16 @@ See also: Apply Auto Counter New</value>
     <value>291, 22</value>
   </data>
   <data name="_changeXmlFileToolStripMenuItem.Text" xml:space="preserve">
-    <value>&amp;Change XML file</value>
+    <value>&amp;Set / change VC *.xml file</value>
   </data>
   <data name="_changeXmlFileToolStripMenuItem.ToolTipText" xml:space="preserve">
-    <value>Change the *.xml file path for a Version controlled package</value>
+    <value>Set/Change the *.xml file path for a VC (Version Controlled) package
+1. Check-In the package
+2. Move the *.xml file to the new location and check it in
+3. Click on Set/Change VC *.xml file
+4. Enter new *.xml filepath
+
+</value>
   </data>
   <data name="_showFolderVCorCodeToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>291, 22</value>

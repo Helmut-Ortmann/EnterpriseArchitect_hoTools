@@ -27,6 +27,7 @@ using hoTools.Utils.Configuration;
 using hoTools.Utils.Diagram;
 using hoTools.Utils.ODBC;
 using hoTools.Utils.EaCollections;
+using hoTools.Utils.VC;
 
 // ReSharper disable RedundantArgumentDefaultValue
 // ReSharper disable ArgumentsStyleLiteral
@@ -222,16 +223,16 @@ Second Element: Target of move connections and appearances", "Select two element
 
         }
         /// <summary>
-        /// Move usage of source element to target element
+        /// Sort diagram elements alphabetic
         /// </summary>
         /// <param name="rep"></param>
         [ServiceOperation("{52298A07-AA0E-459C-9DBA-22CCBE0EA838}",
-            "Order Elements in alphabetic order", // Description
-            "Select all Elements to order", //Tooltip
+            "Sort diagram elements in alphabetic order", // Description
+            "Select all Elements/Packages/Embedded Elements to sort", //Tooltip
             isTextRequired: false)]
         // ReSharper disable once UnusedMember.Global
         // dynamical usage as configurable service by reflection
-        public static void OrderAlphabetic(Repository rep)
+        public static void SortAlphabetic(Repository rep)
         {
             EaDiagram curDiagram = new EaDiagram(rep);
             if (curDiagram.Dia == null) return;
@@ -244,7 +245,7 @@ Second Element: Target of move connections and appearances", "Select two element
                 return;
             }
             EaCollectionDiagramObjects diaCol = new EaCollectionDiagramObjects(curDiagram);
-            diaCol.OrderAlphabetic();
+            diaCol.SortAlphabetic();
             rep.ReloadDiagram(curDiagram.Dia.DiagramID);
 
         }
@@ -4718,6 +4719,13 @@ from %APPDATA%Local\Apps\hoTools\
         public static string GetAssemblyPath() => Path.GetDirectoryName(
             Assembly.GetAssembly(typeof(EaService)).CodeBase);
 
+
+
+        /// <summary>
+        /// Set/Change *.xml file of controlled package (VC package)
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <returns></returns>
         // ReSharper disable once UnusedMethodReturnValue.Global
         public static bool SetNewXmlPath(Repository rep)
         {
@@ -4726,10 +4734,12 @@ from %APPDATA%Local\Apps\hoTools\
                 var pkg = (Package) rep.GetContextObject();
                 string guid = pkg.PackageGUID;
 
+                string fileName = Util.GetVccFilePath(rep, pkg);
                 var openFileDialogXml = new OpenFileDialog
                 {
                     Filter = @"xml files (*.xml)|*.xml",
-                    FileName = Util.GetVccFilePath(rep, pkg)
+                    FileName = Path.GetFileName(fileName),
+                    InitialDirectory = Path.GetDirectoryName(fileName)
                 };
                 if (openFileDialogXml.ShowDialog() == DialogResult.OK)
                 {
@@ -4830,14 +4840,13 @@ from %APPDATA%Local\Apps\hoTools\
             pkg = Util.GetFirstControlledPackage(rep, pkg);
             if (pkg == null) return;
 
-            var svnHandle = new Svn(rep, pkg);
-            string userNameLockedPackage = svnHandle.GetLockingUser();
-            if (userNameLockedPackage != "")
+            if ((Vc.EnumCheckOutStatus)pkg.VersionControlGetStatus() != Vc.EnumCheckOutStatus.CsCheckedIn)
             {
-                MessageBox.Show($@"Package is checked out by '{userNameLockedPackage}'");
+                MessageBox.Show(@"Package isn't checked in");
                 return;
             }
 
+            
             //
             try
             {
@@ -4928,11 +4937,9 @@ from %APPDATA%Local\Apps\hoTools\
             pkg = Util.GetFirstControlledPackage(rep, pkg);
             if (pkg == null) return;
 
-            var svnHandle = new Svn(rep, pkg);
-            string userNameLockedPackage = svnHandle.GetLockingUser();
-            if (userNameLockedPackage == "")
+            if ((Vc.EnumCheckOutStatus)pkg.VersionControlGetStatus() != Vc.EnumCheckOutStatus.CsCheckedOutToThisUser)
             {
-                MessageBox.Show(@"Package isn't checked out");
+                MessageBox.Show(@"Package isn't checked out by you");
                 return;
             }
 
@@ -5092,13 +5099,14 @@ from %APPDATA%Local\Apps\hoTools\
             if (IsTaggedValuesComplete(el)) return;
             if (pkg.IsVersionControlled)
             {
-                int state = pkg.VersionControlGetStatus();
-                if (state == 4)
+                Vc.EnumCheckOutStatus state = (Vc.EnumCheckOutStatus)pkg.VersionControlGetStatus();
+
+                if (state == Vc.EnumCheckOutStatus.CsCheckedOutToAnotherUser)
                 {
                     MessageBox.Show("", @"Package checked out by another user, break");
                     return;
                 }
-                if (state == 1) // checked in
+                if (state == Vc.EnumCheckOutStatus.CsCheckedIn) // checked in
                 {
                     CheckOut(rep, pkg);
                     withCheckIn = true;
@@ -5135,8 +5143,8 @@ from %APPDATA%Local\Apps\hoTools\
 
             if (pkg.IsVersionControlled)
             {
-                int state = pkg.VersionControlGetStatus();
-                if (state == 2 & withCheckIn) // checked out to this user
+                Vc.EnumCheckOutStatus state = (Vc.EnumCheckOutStatus)pkg.VersionControlGetStatus();
+                if (state == Vc.EnumCheckOutStatus.CsCheckedOutToThisUser & withCheckIn) // checked out to this user
                 {
                     //EaService.checkIn(rep, pkg, "");
                     CheckIn(rep, pkg, withGetLatest: true, comment: @"svn tags added");

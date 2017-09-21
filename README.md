@@ -119,6 +119,9 @@ Some features:
 
 # Releases
 ## release 3.1.6
+- Error CheckIn/CheckOut fixed
+- VC Set *.xml file optimized
+- Sort Diagram Elements alphabetic (also packages in Diagram)
 
 ## Release 3.1.5
 - Fix errors Port, Pin, Parameter, Label Handling

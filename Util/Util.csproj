@@ -156,6 +156,7 @@
     <Compile Include="src\svn.cs" />
     <Compile Include="src\TaggedValue.cs" />
     <Compile Include="src\Util.cs" />
+    <Compile Include="VC\Vc.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Strings.resx">

@@ -530,8 +530,12 @@ namespace hoTools.hoToolsGui
             }
 
         }
-
-        void changeXMLFileToolStripMenuItem_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Set *.xml file path
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void SetXmlFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
             EaService.SetNewXmlPath(Repository);
         }
@@ -2423,7 +2427,7 @@ namespace hoTools.hoToolsGui
             // 
             this.orderAlphapeticToolStripMenuItem.Name = "orderAlphapeticToolStripMenuItem";
             resources.ApplyResources(this.orderAlphapeticToolStripMenuItem, "orderAlphapeticToolStripMenuItem");
-            this.orderAlphapeticToolStripMenuItem.Click += new System.EventHandler(this.orderAlphapeticToolStripMenuItem_Click);
+            this.orderAlphapeticToolStripMenuItem.Click += new System.EventHandler(this.sortAlphapeticToolStripMenuItem_Click);
             // 
             // toolStripSeparator18
             // 
@@ -2480,7 +2484,7 @@ namespace hoTools.hoToolsGui
             // 
             this._changeXmlFileToolStripMenuItem.Name = "_changeXmlFileToolStripMenuItem";
             resources.ApplyResources(this._changeXmlFileToolStripMenuItem, "_changeXmlFileToolStripMenuItem");
-            this._changeXmlFileToolStripMenuItem.Click += new System.EventHandler(this.changeXMLFileToolStripMenuItem_Click);
+            this._changeXmlFileToolStripMenuItem.Click += new System.EventHandler(this.SetXmlFileToolStripMenuItem_Click);
             // 
             // _showFolderVCorCodeToolStripMenuItem
             // 
@@ -4082,9 +4086,9 @@ Please restart EA. During restart hoTools loads the default settings.",
             EaService.MoveUsage(Repository);
         }
 
-        private void orderAlphapeticToolStripMenuItem_Click(object sender, EventArgs e)
+        private void sortAlphapeticToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            EaService.OrderAlphabetic(Repository);
+            EaService.SortAlphabetic(Repository);
         }
     }
 

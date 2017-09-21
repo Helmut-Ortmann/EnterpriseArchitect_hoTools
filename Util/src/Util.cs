@@ -1377,11 +1377,21 @@ namespace hoTools.Utils
             var path = rootPath + @"\" + pkg.XMLPath;
             return path;
         }
-
+        /// <summary>
+        /// Get latest for all checked in packages. It is possible to use it recursive
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <param name="pkg"></param>
+        /// <param name="recursive"></param>
+        /// <param name="count"></param>
+        /// <param name="level"></param>
+        /// <param name="errorCount"></param>
+        /// <returns></returns>
         public static bool GetLatest(Repository rep, EA.Package pkg, bool recursive, ref int count, int level,
             ref int errorCount)
         {
-            if (pkg.IsControlled)
+            var pkgState = (VC.Vc.EnumCheckOutStatus) pkg.VersionControlGetStatus();
+            if (pkg.IsControlled && pkgState == VC.Vc.EnumCheckOutStatus.CsCheckedIn)
             {
                 level = level + 1;
                 // check if checked out
@@ -1399,8 +1409,9 @@ namespace hoTools.Utils
                     try
                     {
                         var fileInfo = new FileInfo(path);
-                        var attributes = (FileAttributes) (fileInfo.Attributes - FileAttributes.ReadOnly);
-                        File.SetAttributes(fileInfo.FullName, attributes);
+                        fileInfo.IsReadOnly = false;
+
+                        // delete old file to get the new one
                         File.Delete(path);
                     }
                     catch (FileNotFoundException e)
@@ -1501,14 +1512,9 @@ namespace hoTools.Utils
 
         public static void SetReadOnlyAttribute(string fullName, bool readOnly)
         {
-            var filePath = new FileInfo(fullName);
-            FileAttributes attribute;
-            if (readOnly)
-                attribute = filePath.Attributes | FileAttributes.ReadOnly;
-            else
-                attribute = (FileAttributes) (filePath.Attributes - FileAttributes.ReadOnly);
-
-            File.SetAttributes(filePath.FullName, attribute);
+            var fileInfo = new FileInfo(fullName);
+            fileInfo.IsReadOnly = readOnly;
+            
         }
 
         #region visualizePortForDiagramobject
