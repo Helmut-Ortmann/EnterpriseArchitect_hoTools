@@ -118,6 +118,9 @@ Some features:
 
 
 # Releases
+## Release 3.1.7
+-  WIX Setup names the *.msi file according to ProductVersion in Product.wxs 
+
 ## release 3.1.6
 - Error CheckIn/CheckOut fixed
 - VC Set *.xml file optimized

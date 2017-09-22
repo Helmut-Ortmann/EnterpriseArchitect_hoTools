@@ -26,7 +26,10 @@
   !!!Warning: If you update AssemblyVersion you must update the registration info!!!!!!!!
   // Change AssemblyFileVersion accordingly
   -->
-  <!-- Look that Project AddInSimple has the same version as product version 
+  <!-- The post processing of the WIX Setup projects changes the *.msi file name to:
+       'AddInSimple 1.0.7.msi' (1.0.7=ProductVersion)
+       The Scripts you find in: Setup\Script\..
+       see also: http://kentie.net/article/wixnameversion/index.htm
   -->
   <?define ProductVersion="1.0.7" ?> 
   <?define UpgradeCode="{CA42D098-1AA3-4357-A7F6-CAB9A995BC54}" ?>

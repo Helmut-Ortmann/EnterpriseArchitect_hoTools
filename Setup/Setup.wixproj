@@ -36,12 +36,15 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Collect" />
+    <Folder Include="Scripts" />
     <Folder Include="src" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Collect\Collect.bat" />
     <Content Include="hoToolsGui.dll.config" />
     <Content Include="License.rtf" />
+    <Content Include="Scripts\getmsiversion.vbs" />
+    <Content Include="Scripts\RenameMsi.bat" />
     <Content Include="Settings.json" />
     <Content Include="UserSearches.json" />
   </ItemGroup>
@@ -134,6 +137,9 @@
     </WixExtension>
   </ItemGroup>
   <Import Project="$(WixTargetsPath)" />
+  <PropertyGroup>
+    <PostBuildEvent>"$(SolutionDir)\Setup\Scripts\renamemsi.bat" "$(targetPath)"</PostBuildEvent>
+  </PropertyGroup>
   <!--
 	To modify your build process, add your task inside one of the targets below and uncomment it.
 	Other similar extension points exist, see Wix.targets.
