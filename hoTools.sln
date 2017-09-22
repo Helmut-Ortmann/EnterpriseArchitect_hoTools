@@ -18,6 +18,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Util", "Util\Util.csproj", "{9376680E-9420-4FC1-8DE8-4311FCA18EFC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution", "Solution", "{2015668A-5B2E-43C9-9E24-F93D54600512}"
+	ProjectSection(SolutionItems) = preProject
+		Setup\bin\Release\hoTools.msi = Setup\bin\Release\hoTools.msi
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EA", "EA", "{2ABA072D-FD07-4FC5-82E8-3AC5704BDD5F}"
 	ProjectSection(SolutionItems) = preProject
@@ -38,7 +41,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{71383584
 		Setup\src\Product.wxs = Setup\src\Product.wxs
 		README.md = README.md
 		hoToolsRoot\Settings.json = hoToolsRoot\Settings.json
-		Setup\bin\Release\Setup.msi = Setup\bin\Release\Setup.msi
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Advanced", "Advanced", "{A9B0B204-36DD-466D-B5C1-A9FD55ED7A4B}"

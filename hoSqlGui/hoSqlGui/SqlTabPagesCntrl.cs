@@ -738,9 +738,13 @@ Useful to quickly test:
             id = SqlTemplates.SqlTemplateId.DeletedTreeSelectedItems;
             ToolStripMenuItem deleteTreeSelectedItemsMenuItem = ToolstripMenuItemInsertTemplateFromId(id, @"Insert Delete Template");
 
+            //  Show SearchItems
+            id = SqlTemplates.SqlTemplateId.ShowSearchItems;
+            ToolStripMenuItem showSearchItemsTreeSelectedItemsMenuItem = ToolstripMenuItemInsertTemplateFromId(id, @"Insert Icons to navigate (e_guid As..)");
 
 
-           
+
+
             //---------------------------------------------------------------------------------------------------------
             // DB Templates
             ToolStripMenuItem insertDbTemplateMenuItem = new ToolStripMenuItem {Text = @"Insert DB dependent"};
@@ -838,6 +842,8 @@ Useful to quickly test:
                 insertItemIntoPackageMenuItem,
                 updateCurrentElementMenuItem,
                 deleteTreeSelectedItemsMenuItem,
+                new ToolStripSeparator(),
+                showSearchItemsTreeSelectedItemsMenuItem,
                 new ToolStripSeparator(),
                 insertDemoRunScriptTemplateMenuItem,
                 insertDbTemplateMenuItem

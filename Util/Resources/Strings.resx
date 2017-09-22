@@ -316,4 +316,8 @@ update t_object set
    name = 'XXXClass55'
 where object_ID = #CurrentItemID#</value>
   </data>
+  <data name="ShowSearchItemsTemplate" xml:space="preserve">
+    <value>ea_guid As CLASSGUID, object_type As CLASSTYPE, 't_connector' As CLASSTABLE</value>
+    <comment>Output Icon to navigate in EA Search Windows. CLASSTABLE is only used for connectors</comment>
+  </data>
 </root>

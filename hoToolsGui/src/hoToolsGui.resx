@@ -3090,7 +3090,7 @@ See also: Apply Auto Counter New</value>
 1. Check-In the package
 2. Move the *.xml file to the new location and check it in
 3. Click on Set/Change VC *.xml file
-4. Enter new *.xml filepath
+4. Enter new *.xml file path
 
 </value>
   </data>
@@ -4295,6 +4295,6 @@ If you want to use LINQPad with EA you need:
     <value>HoToolsGui</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>hoTools.hoToolsGui.AddinGui, hoToolsGui, Version=3.1.5.0, Culture=neutral, PublicKeyToken=37ea3d95ffcb87e1</value>
+    <value>hoTools.hoToolsGui.AddinGui, hoToolsGui, Version=3.1.6.0, Culture=neutral, PublicKeyToken=37ea3d95ffcb87e1</value>
   </data>
 </root>

@@ -6,7 +6,7 @@
     <ProductVersion>3.8</ProductVersion>
     <ProjectGuid>6f57c7f7-5b30-4720-bcf6-8c21c2d09009</ProjectGuid>
     <SchemaVersion>2.0</SchemaVersion>
-    <OutputName>Setup</OutputName>
+    <OutputName>hoTools</OutputName>
     <OutputType>Package</OutputType>
     <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' AND '$(MSBuildExtensionsPath32)' != '' ">$(MSBuildExtensionsPath32)\Microsoft\WiX\v3.x\Wix.targets</WixTargetsPath>
     <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' ">$(MSBuildExtensionsPath)\Microsoft\WiX\v3.x\Wix.targets</WixTargetsPath>

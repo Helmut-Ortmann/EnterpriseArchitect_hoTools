@@ -72,6 +72,13 @@ namespace hoTools.Utils.SQL
                     "Demo delete SQL to delete the selected Items in browser (Diagram, Element, Attribute, Operation). Be careful! This might cause damage! ",
                     isResource:true
                     ) },
+            
+            {  SqlTemplateId.ShowSearchItems,
+            new SqlTemplate("Insert Icons to navigate ",    // Name
+                "ShowSearchItemsTemplate",          // String ID of Resource
+                "Insert 'ea_guid As CLASSGUID. object_type As CLASSTYPE, 't_connector' As CLASSTABLE' to show the icons in the EA Search Window (CLASSTABLE is only used for connectors) ",
+                isResource:true
+            ) },
              {  SqlTemplateId.UpdateItemTemplate,
                 new SqlTemplate("Demo Update current selected Item ",    // Name
                     "UpdateCurrentSelectedItemTemplate",          // String ID of Resource
@@ -407,6 +414,8 @@ For: Package, Element, Diagram, Attribute, Operation"
             AttributeTemplate,
             OperationTemplate,
             SearchTerm,
+
+            ShowSearchItems,  // insert ea_guid
 
             // SQL modifying
             InsertItemInPackageTemplate,
