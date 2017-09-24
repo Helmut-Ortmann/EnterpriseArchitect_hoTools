@@ -31,7 +31,7 @@
        The Scripts you find in: Setup\Script\..
        see also: http://kentie.net/article/wixnameversion/index.htm
   -->
-  <?define ProductVersion="1.0.7" ?> 
+  <?define ProductVersion="1.0.8" ?> 
   <?define UpgradeCode="{CA42D098-1AA3-4357-A7F6-CAB9A995BC54}" ?>
   <?define Manufacturer="hoModeler.de" ?>
   <?define ProductName="AddInSimple" ?>
