@@ -118,12 +118,14 @@ Some features:
 
 
 # Releases
+### Release 3.1.8
+
 ## Release 3.1.7
 -  WIX Setup names the *.msi file according to ProductVersion in Product.wxs 
 -  MIT License
--  Advamced error checking in EA_OnPostNewConnector
+-  Advanced error checking in EA_OnPostNewConnector
 
-## release 3.1.6
+## Release 3.1.6
 - Error CheckIn/CheckOut fixed
 - VC Set *.xml file optimized
 - Sort Diagram Elements alphabetic (also packages in Diagram)
