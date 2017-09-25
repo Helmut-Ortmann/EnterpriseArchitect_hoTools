@@ -1174,7 +1174,7 @@ namespace hoTools.Settings
         {
             get
             {
-                if (CurrentConfig.AppSettings.Settings["ActivityLineStyle"].Value == null)
+                if (CurrentConfig.AppSettings.Settings["ActivityLineStyle"]?.Value == null)
                 {
                     return "LV";
                 }
@@ -1195,7 +1195,7 @@ namespace hoTools.Settings
         {
             get
             {
-                if (CurrentConfig.AppSettings.Settings["StatechartLineStyle"].Value == null)
+                if (CurrentConfig.AppSettings.Settings["StatechartLineStyle"]?.Value == null)
                 {
                     return "B";
                 }
@@ -1216,7 +1216,7 @@ namespace hoTools.Settings
         {
             get
             {
-                if (CurrentConfig.AppSettings.Settings["CustomLineStyle"].Value == null)
+                if (CurrentConfig.AppSettings.Settings["CustomLineStyle"]?.Value == null)
                 {
                     return "no";
                 }
@@ -1237,7 +1237,7 @@ namespace hoTools.Settings
         {
             get
             {
-                if (CurrentConfig.AppSettings.Settings["ClassLineStyle"].Value == null)
+                if (CurrentConfig.AppSettings.Settings["ClassLineStyle"]?.Value == null)
                 {
                     return "no";
                 }
@@ -1258,7 +1258,7 @@ namespace hoTools.Settings
         {
             get
             {
-                if (CurrentConfig.AppSettings.Settings["PackageLineStyle"].Value == null)
+                if (CurrentConfig.AppSettings.Settings["PackageLineStyle"]?.Value == null)
                 {
                     return "no";
                 }
@@ -1279,7 +1279,7 @@ namespace hoTools.Settings
         {
             get
             {
-                if (CurrentConfig.AppSettings.Settings["UseCaseLineStyle"].Value == null)
+                if (CurrentConfig.AppSettings.Settings["UseCaseLineStyle"]?.Value == null)
                 {
                     return "no";
                 }
@@ -1300,7 +1300,7 @@ namespace hoTools.Settings
         {
             get
             {
-                if (CurrentConfig.AppSettings.Settings["DeploymentLineStyle"].Value == null)
+                if (CurrentConfig.AppSettings.Settings["DeploymentLineStyle"]?.Value == null)
                 {
                     return "B";
                 }
@@ -1321,7 +1321,7 @@ namespace hoTools.Settings
         {
             get
             {
-                if (CurrentConfig.AppSettings.Settings["CompositeStructureLineStyle"].Value == null)
+                if (CurrentConfig.AppSettings.Settings["CompositeStructureLineStyle"]?.Value == null)
                 {
                     return "no";
                 }
@@ -1342,7 +1342,7 @@ namespace hoTools.Settings
         {
             get
             {
-                if (CurrentConfig.AppSettings.Settings["ComponentLineStyle"].Value == null)
+                if (CurrentConfig.AppSettings.Settings["ComponentLineStyle"]?.Value == null)
                 {
                     return "no";
                 }

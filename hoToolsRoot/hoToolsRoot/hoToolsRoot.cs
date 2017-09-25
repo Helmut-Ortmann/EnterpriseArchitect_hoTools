@@ -434,6 +434,7 @@ namespace hoTools
 
         public override bool EA_OnPostNewConnector(EA.Repository rep, EA.EventProperties info)
         {
+            if (rep == null) return false;
             int connectorId;
             EA.EventProperty eventProperty = info.Get(0);
             var s = (string) eventProperty.Value;
@@ -446,43 +447,49 @@ namespace hoTools
 
             var dia = rep.GetCurrentDiagram();
             if (dia == null) return false; // e.g. Matrix has a diagram id but no diagram object
-            
-            switch (dia.Type)
+            if (connectorId == 0) return false;
+
+            // unidentified error, exception in creating a connector in a relationship matrix.
+            try
             {
-                case "Activity":
-                    return UpdateLineStyle(rep, dia, connectorId, _addinSettings.ActivityLineStyle);
+                switch (dia.Type)
+                {
+                    case "Activity":
+                        return UpdateLineStyle(rep, dia, connectorId, _addinSettings.ActivityLineStyle);
 
 
-                case "Statechart":
-                    return UpdateLineStyle(rep, dia, connectorId, _addinSettings.StatechartLineStyle);
+                    case "Statechart":
+                        return UpdateLineStyle(rep, dia, connectorId, _addinSettings.StatechartLineStyle);
 
-                case "Logical":
-                    return UpdateLineStyle(rep, dia, connectorId, _addinSettings.ClassLineStyle);
-
-
-                case "Custom":
-                    return UpdateLineStyle(rep, dia, connectorId, _addinSettings.CustomLineStyle);
-
-                case "Component":
-                    return UpdateLineStyle(rep, dia, connectorId, _addinSettings.ComponentLineStyle);
-
-                case "Deployment":
-                    return UpdateLineStyle(rep, dia, connectorId, _addinSettings.DeploymentLineStyle);
-
-                case "Package":
-                    return UpdateLineStyle(rep, dia, connectorId, _addinSettings.PackageLineStyle);
-
-                case "Use Case":
-                    return UpdateLineStyle(rep, dia, connectorId, _addinSettings.UseCaseLineStyle);
-
-                case "CompositeStructure":
-                    return UpdateLineStyle(rep, dia, connectorId, _addinSettings.CompositeStructureLineStyle);
-
-                default:
-                    return false;
+                    case "Logical":
+                        return UpdateLineStyle(rep, dia, connectorId, _addinSettings.ClassLineStyle);
 
 
+                    case "Custom":
+                        return UpdateLineStyle(rep, dia, connectorId, _addinSettings.CustomLineStyle);
 
+                    case "Component":
+                        return UpdateLineStyle(rep, dia, connectorId, _addinSettings.ComponentLineStyle);
+
+                    case "Deployment":
+                        return UpdateLineStyle(rep, dia, connectorId, _addinSettings.DeploymentLineStyle);
+
+                    case "Package":
+                        return UpdateLineStyle(rep, dia, connectorId, _addinSettings.PackageLineStyle);
+
+                    case "Use Case":
+                        return UpdateLineStyle(rep, dia, connectorId, _addinSettings.UseCaseLineStyle);
+
+                    case "CompositeStructure":
+                        return UpdateLineStyle(rep, dia, connectorId, _addinSettings.CompositeStructureLineStyle);
+
+                    default:
+                        return false;
+                }
+            }
+            catch
+            {
+                return false;
             }
         }
         #endregion
