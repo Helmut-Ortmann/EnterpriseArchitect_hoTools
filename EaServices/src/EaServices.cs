@@ -5905,56 +5905,12 @@ from %APPDATA%Local\Apps\hoTools\
             if (selCount == 0) return;
             rep.SaveDiagram(dia.DiagramID);
 
-            // check if left limit element is crossed
-            bool isRightLimitCrossed = false;
-            Element elParent = null;
-            DiagramObject objParent = null;
-            foreach (DiagramObject objPort in dia.SelectedObjects)
-            {
-                // filter ports, at least one port, pin, parameter
-                EA.Element embeddedEl = rep.GetElementByID(objPort.ElementID);
-                if (embeddedEl.IsEmbeddedElement(rep))
-                {
-                    EA.Element elPort = rep.GetElementByID(objPort.ElementID);
-                    elParent = rep.GetElementByID(elPort.ParentID);
-                    objParent = dia.GetDiagramObjectByID(elParent.ElementID, "");
-                    var leftLimit = objParent.left - 0;
-                    elParent = rep.GetElementByID(embeddedEl.ElementID);
-                    if (objPort.left < leftLimit)
-                    {
-                        isRightLimitCrossed = true;
-                        break;
-                    }
-                }
-            }
-            // no port, pin, parameter selected
-            if (elParent == null) return;
-            // move all to left upper corner of element
-            int startValueTop = objParent.top - 8;
-            int startValueLeft = objParent.left - 8;
-            int pos = 0;
-            foreach (DiagramObject objPort in dia.SelectedObjects)
-            {
-                // filter ports, at least one port, pin, parameter
-                EA.Element embeddedEl = rep.GetElementByID(objPort.ElementID);
-                if (embeddedEl.IsEmbeddedElement(rep))
-                {
-                    if (!isRightLimitCrossed)
-                    {
-                        // move to right
-                        objPort.left = objPort.left - 10;
-                        objPort.Update();
-                    }
-                    else
-                    {
-                        // move from top to down
-                        objPort.top = startValueTop - pos * 20;
-                        objPort.left = startValueLeft;
-                        objPort.Update();
-                        pos = pos + 1;
-                    }
-                }
-            }
+
+            EaDiagram eaDia = new EaDiagram(rep);
+            EaCollectionDiagramObjects llist = new EaCollectionDiagramObjects(eaDia);
+
+            llist.MoveLeft();
+            
         }
 
         #endregion
@@ -5975,6 +5931,12 @@ from %APPDATA%Local\Apps\hoTools\
             int selCount = dia.SelectedObjects.Count;
             if (selCount == 0) return;
             rep.SaveDiagram(dia.DiagramID);
+
+            EaDiagram eaDia = new EaDiagram(rep);
+            EaCollectionDiagramObjects llist = new EaCollectionDiagramObjects(eaDia);
+
+            llist.MoveRight();
+            return;
 
             // check if left limit element is crossed
             bool isRightLimitCrossed = false;
@@ -6043,63 +6005,78 @@ from %APPDATA%Local\Apps\hoTools\
             isTextRequired: false)]
         public static void MoveEmbeddedDownGui(Repository rep)
         {
+
             Diagram dia = rep.GetCurrentDiagram();
             if (dia == null) return;
             int selCount = dia.SelectedObjects.Count;
             if (selCount == 0) return;
             rep.SaveDiagram(dia.DiagramID);
 
-            // check if left limit element is crossed
-            bool isLowerLimitCrossed = false;
-            Element elParent = null;
-            DiagramObject objParent = null;
-            // check if one embedded element is lower than the bottom of the parent element
-            foreach (DiagramObject objPort in dia.SelectedObjects)
-            {
-                // filter ports, at least one port, pin, parameter
-                EA.Element embeddedEl = rep.GetElementByID(objPort.ElementID);
-                if (embeddedEl.IsEmbeddedElement(rep))
-                {
-                    EA.Element elPort = rep.GetElementByID(objPort.ElementID);
-                    elParent = rep.GetElementByID(elPort.ParentID);
-                    objParent = dia.GetDiagramObjectByID(elParent.ElementID,"");
-                    var lowerLimit = objParent.bottom + 12; // limit cross over upper 
-                    if (objPort.bottom < lowerLimit)
-                    {
-                        isLowerLimitCrossed = true;
-                        break;
-                    }
-                }
-            }
-            // no port, pin, parameter selected
-            if (elParent == null) return;
+            EaDiagram eaDia = new EaDiagram(rep);
+            EaCollectionDiagramObjects llist = new EaCollectionDiagramObjects(eaDia);
 
-            // move all to left upper corner of element
-            int startValueTop = objParent.bottom + 8;
-            int startValueLeft = objParent.left + 8;
-            int pos = 0;
-            foreach (DiagramObject objPort in dia.SelectedObjects)
-            {
-                // filter ports, at least one port, pin, parameter
-                EA.Element embeddedEl = rep.GetElementByID(objPort.ElementID);
-                if (embeddedEl.IsEmbeddedElement(rep))
-                {
-                    if (!isLowerLimitCrossed)
-                    {
-                        // move to bottom
-                        objPort.top = objPort.top - 10;
-                        objPort.Update();
-                    }
-                    else
-                    {
-                        // move from left to right
-                        objPort.top = startValueTop;
-                        objPort.left = startValueLeft + pos * 20;
-                        objPort.Update();
-                        pos = pos + 1;
-                    }
-                }
-            }
+            llist.MoveDown();
+            return;
+
+
+
+            //Diagram dia = rep.GetCurrentDiagram();
+            //if (dia == null) return;
+            //int selCount = dia.SelectedObjects.Count;
+            //if (selCount == 0) return;
+            //rep.SaveDiagram(dia.DiagramID);
+
+            //// check if left limit element is crossed
+            //bool isLowerLimitCrossed = false;
+            //Element elParent = null;
+            //DiagramObject objParent = null;
+            //// check if one embedded element is lower than the bottom of the parent element
+            //foreach (DiagramObject objPort in dia.SelectedObjects)
+            //{
+            //    // filter ports, at least one port, pin, parameter
+            //    EA.Element embeddedEl = rep.GetElementByID(objPort.ElementID);
+            //    if (embeddedEl.IsEmbeddedElement(rep))
+            //    {
+            //        EA.Element elPort = rep.GetElementByID(objPort.ElementID);
+            //        elParent = rep.GetElementByID(elPort.ParentID);
+            //        objParent = dia.GetDiagramObjectByID(elParent.ElementID,"");
+            //        var lowerLimit = objParent.bottom + 12; // limit cross over upper 
+            //        if (objPort.bottom < lowerLimit)
+            //        {
+            //            isLowerLimitCrossed = true;
+            //            break;
+            //        }
+            //    }
+            //}
+            //// no port, pin, parameter selected
+            //if (elParent == null) return;
+
+            //// move all to left upper corner of element
+            //int startValueTop = objParent.bottom + 8;
+            //int startValueLeft = objParent.left + 8;
+            //int pos = 0;
+            //foreach (DiagramObject objPort in dia.SelectedObjects)
+            //{
+            //    // filter ports, at least one port, pin, parameter
+            //    EA.Element embeddedEl = rep.GetElementByID(objPort.ElementID);
+            //    if (embeddedEl.IsEmbeddedElement(rep))
+            //    {
+            //        if (!isLowerLimitCrossed)
+            //        {
+            //            // move to bottom
+            //            objPort.top = objPort.top - 10;
+            //            objPort.Update();
+            //        }
+            //        else
+            //        {
+            //            // move from left to right
+            //            objPort.top = startValueTop;
+            //            objPort.left = startValueLeft + pos * 20;
+            //            objPort.Update();
+            //            pos = pos + 1;
+            //        }
+            //    }
+            //}
         }
 
         #endregion
@@ -6115,64 +6092,80 @@ from %APPDATA%Local\Apps\hoTools\
             isTextRequired: false)]
         public static void MoveEmbeddedUpGui(Repository rep)
         {
+
             Diagram dia = rep.GetCurrentDiagram();
             if (dia == null) return;
             int selCount = dia.SelectedObjects.Count;
             if (selCount == 0) return;
             rep.SaveDiagram(dia.DiagramID);
 
-            // check if left limit element is crossed
-            bool isUpperLimitCrossed = false;
-            Element elParent = null;
-            DiagramObject objParent = null;
-            foreach (DiagramObject objPort in dia.SelectedObjects)
-            {
-                // filter ports, at least one port, pin, parameter
-                EA.Element embeddedEl = rep.GetElementByID(objPort.ElementID);
-                if (embeddedEl.IsEmbeddedElement(rep))
-                {
-                    EA.Element elPort = rep.GetElementByID(objPort.ElementID);
-                    elParent = rep.GetElementByID(elPort.ParentID);
-                    objParent = dia.GetDiagramObjectByID(elParent.ElementID, "");
-                    var upLimit = objParent.top - 10; // limit cross over upper 
-                    elParent = rep.GetElementByID(embeddedEl.ElementID);
-                    if (objPort.top > upLimit)
-                    {
-                        isUpperLimitCrossed = true;
-                        break;
-                    }
-                }
-            }
-            // no port, pin, parameter selected
-            if (elParent == null) return;
+            EaDiagram eaDia = new EaDiagram(rep);
+            EaCollectionDiagramObjects llist = new EaCollectionDiagramObjects(eaDia);
+
+            llist.MoveUp();
+            return;
 
 
-            // move all to left upper corner of element
-            int startValueTop = objParent.top + 8;
-            int startValueLeft = objParent.left + 8;
-            int pos = 0;
-            foreach (DiagramObject objPort in dia.SelectedObjects)
-            {
-                // filter ports, at least one port, pin, parameter
-                EA.Element embeddedEl = rep.GetElementByID(objPort.ElementID);
-                if (embeddedEl.IsEmbeddedElement(rep))
-                {
-                    if (!isUpperLimitCrossed)
-                    {
-                        // move to top
-                        objPort.top = objPort.top + 10;
-                        objPort.Update();
-                    }
-                    else
-                    {
-                        // move from left to right
-                        objPort.top = startValueTop;
-                        objPort.left = startValueLeft + pos * 20;
-                        objPort.Update();
-                        pos = pos + 1;
-                    }
-                }
-            }
+
+
+            //Diagram dia = rep.GetCurrentDiagram();
+            //if (dia == null) return;
+            //int selCount = dia.SelectedObjects.Count;
+            //if (selCount == 0) return;
+            //rep.SaveDiagram(dia.DiagramID);
+
+            //// check if left limit element is crossed
+            //bool isUpperLimitCrossed = false;
+            //Element elParent = null;
+            //DiagramObject objParent = null;
+            //foreach (DiagramObject objPort in dia.SelectedObjects)
+            //{
+            //    // filter ports, at least one port, pin, parameter
+            //    EA.Element embeddedEl = rep.GetElementByID(objPort.ElementID);
+            //    if (embeddedEl.IsEmbeddedElement(rep))
+            //    {
+            //        EA.Element elPort = rep.GetElementByID(objPort.ElementID);
+            //        elParent = rep.GetElementByID(elPort.ParentID);
+            //        objParent = dia.GetDiagramObjectByID(elParent.ElementID, "");
+            //        var upLimit = objParent.top - 10; // limit cross over upper 
+            //        elParent = rep.GetElementByID(embeddedEl.ElementID);
+            //        if (objPort.top > upLimit)
+            //        {
+            //            isUpperLimitCrossed = true;
+            //            break;
+            //        }
+            //    }
+            //}
+            //// no port, pin, parameter selected
+            //if (elParent == null) return;
+
+
+            //// move all to left upper corner of element
+            //int startValueTop = objParent.top + 8;
+            //int startValueLeft = objParent.left + 8;
+            //int pos = 0;
+            //foreach (DiagramObject objPort in dia.SelectedObjects)
+            //{
+            //    // filter ports, at least one port, pin, parameter
+            //    EA.Element embeddedEl = rep.GetElementByID(objPort.ElementID);
+            //    if (embeddedEl.IsEmbeddedElement(rep))
+            //    {
+            //        if (!isUpperLimitCrossed)
+            //        {
+            //            // move to top
+            //            objPort.top = objPort.top + 10;
+            //            objPort.Update();
+            //        }
+            //        else
+            //        {
+            //            // move from left to right
+            //            objPort.top = startValueTop;
+            //            objPort.left = startValueLeft + pos * 20;
+            //            objPort.Update();
+            //            pos = pos + 1;
+            //        }
+            //    }
+            //}
         }
 
         #endregion
