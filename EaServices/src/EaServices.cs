@@ -1772,7 +1772,13 @@ Second Element: Target of move connections and appearances", "Select two element
         /// <param name="embeddedElement"></param>
         private static void RemoveEmbeddedElementFromDiagram(EA.Repository rep, Diagram dia, EA.Element embeddedElement)
         {
-            if (!embeddedElement.IsEmbeddedElement(rep)) return;
+
+            // delete recursive embedded elements
+            foreach (EA.Element el in embeddedElement.EmbeddedElements)
+            {
+                RemoveEmbeddedElementFromDiagram(rep, dia, el);
+            }
+            // delete the embedded element from diagram
             for (int i = dia.DiagramObjects.Count - 1; i >= 0; i -= 1)
             {
                 var obj = (DiagramObject) dia.DiagramObjects.GetAt((short) i);

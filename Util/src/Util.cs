@@ -1621,13 +1621,14 @@ namespace hoTools.Utils
             diaObjectPort.ElementID = port.ElementID;
             diaObjectPort.Update();
             dia.DiagramObjects.Refresh();// first update element than refresh collection 
+            rep.ReloadDiagram(dia.DiagramID);
 
             //----------------------------------------------------------------------------
             // Show of port: Embedded Interface/Port
             if (portInterface == null) return true;
 
             // visualize interface
-            position = $"l={leftPort-15};r={rightPort-15};t={topPort};b={bottomPort};";
+            position = $"l={leftPort-5};r={rightPort-10};t={topPort};b={bottomPort};";
             EA.DiagramObject diaObjectPortInterface =
                 (EA.DiagramObject)dia.DiagramObjects.AddNew(position, "");
 
@@ -1639,7 +1640,14 @@ namespace hoTools.Utils
             // OX = nn; Label Position, -nn = Left, +nn = Right
             diaObjectPortInterface.Style = "LBL=CX=69:CY=13:OX=45:OY=0:HDN=0:BLD=0:ITA=0:UND=0:CLR=-1:ALN=0:ALT=0:ROT=0;";
             diaObjectPortInterface.ElementID = portInterface.ElementID;
-            diaObjectPortInterface.Update();
+            try
+            {
+                bool r = diaObjectPortInterface.Update();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($"poss='{position}'\r\nName='{portInterface.Name}'\r\n{e}", "Error update Required/ProvidedInterface");
+            }
             dia.DiagramObjects.Refresh(); // first update element than refresh collection 
             return true;
 
