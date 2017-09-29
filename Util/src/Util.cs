@@ -1520,49 +1520,52 @@ namespace hoTools.Utils
         #region visualizePortForDiagramobject
 
         /// <summary>
-        /// Visualize port with or without interface (required/provided) for diagramobject
+        /// Visualize port with or without interface (required/provided) for diagram object
+        /// return: true = port was newly shown
+        ///         false= part was already shown
         /// </summary>
         /// <param name="rep"></param>
         /// <param name="pos"></param>
         /// <param name="dia"></param>
         /// <param name="diaObjSource"></param>
         /// <param name="port"></param>
-        /// <param name="interf"></param>
+        /// <param name="portInterface"></param>
         /// <param name="portBoundTo"></param>
-        public static void VisualizePortForDiagramobject(EA.Repository rep, int pos, EA.Diagram dia, EA.DiagramObject diaObjSource,
+        public static bool VisualizePortForDiagramobject(EA.Repository rep, int pos, EA.Diagram dia, EA.DiagramObject diaObjSource,
             EA.Element port,
-            EA.Element interf, string portBoundTo = "right")
+            EA.Element portInterface, 
+            string portBoundTo = "right")
         {
             // check if port already exists
             foreach (EA.DiagramObject diaObjPort in dia.DiagramObjects)
             {
-                if (diaObjPort.ElementID == port.ElementID) return;
+                if (diaObjPort.ElementID == port.ElementID) return false;
             }
 
 
             // visualize ports
             string type = rep.GetElementByID(diaObjSource.ElementID).Type;
-            int portLableLength = 20;
-            int portLabelDistance = 35;
-            int portLableStart = 35;
-            int portLabelOffset = 10;
+            int portPosLength = 20;
+            int portPosDistance = 35;
+            int portPosStart = 35;
+            int portPosOffset = 15;
             switch (type) 
             {
                 case "Port":
-                    portLabelOffset = 0;
-                    portLabelDistance = 25;
-                    portLableLength = 20;
+                    portPosOffset = 10;
+                    portPosDistance = 25;
+                    portPosLength = 20;
                     break;
                 case "Pin":
-                    portLabelOffset = 0;
-                    portLabelDistance = 25;
-                    portLableLength = 20;
+                    portPosOffset = 0;
+                    portPosDistance = 25;
+                    portPosLength = 20;
                     break;
                 case "Parameter":
-                    portLableLength = 30;
-                    portLabelDistance = 35;
-                    portLableStart = 35;
-                    portLabelOffset = 10;
+                    portPosLength = 30;
+                    portPosDistance = 35;
+                    portPosStart = 35;
+                    portPosOffset = 10;
                     break;
             }
            
@@ -1571,21 +1574,21 @@ namespace hoTools.Utils
             // calculate target position of port
             if (portBoundTo == "right" || portBoundTo == "")
             {
-                leftPort = diaObjSource.right - portLableLength/2 - portLabelOffset;
-                rightPort = leftPort + portLableLength;
+                leftPort = diaObjSource.right - portPosLength/2 + portPosOffset;
+                rightPort = leftPort + portPosLength;
             }
             else
             {
-                leftPort = diaObjSource.left - portLableLength/2 - portLabelOffset;
-                rightPort = leftPort + portLableLength;
+                leftPort = diaObjSource.left - portPosLength/2 + portPosOffset;
+                rightPort = leftPort + portPosLength;
 
             }
 
             int top = diaObjSource.top;
 
 
-            int topPort = top - portLableStart - pos* portLabelDistance; 
-            int bottomPort = topPort - portLableLength;
+            int topPort = top - portPosStart - pos* portPosDistance; 
+            int bottomPort = topPort - portPosLength;
 
             // diagram object can't host port (not tall enough)
             // make diagram object taller to host all ports
@@ -1595,13 +1598,14 @@ namespace hoTools.Utils
                 diaObjSource.Update();
             }
 
+            //string position = $"l={leftPort};r={rightPort};t={Math.Abs(topPort)};b={Math.Abs(bottomPort)};";
             string position = $"l={leftPort};r={rightPort};t={topPort};b={bottomPort};";
             var diaObjectPort = (EA.DiagramObject) dia.DiagramObjects.AddNew(position, "");
             if (port.Type.Equals("Port"))
             {
                 string hdn = "HDN=0:"; // Port without interface, visualize name, label
                 string ox = "OX=23:";  // Port without interface, visualize name, label
-                if (port.EmbeddedElements.Count > 0 || interf != null)
+                if (port.EmbeddedElements.Count > 0 || portInterface != null)
                 {  // port with interface
                     ox = "OX=60:"; // more to the right side
                     hdn = "HDN=1:";// without label
@@ -1615,27 +1619,29 @@ namespace hoTools.Utils
                 diaObjectPort.Style = "LBL=CX=97:CY=13:OX=39:OY=0:HDN=0:BLD=0:ITA=0:UND=0:CLR=-1:ALN=0:ALT=0:ROT=0;";
             }
             diaObjectPort.ElementID = port.ElementID;
-            try
-            {
-                diaObjectPort.Update();
-            }
-            catch 
-            {
-                MessageBox.Show($@"VisualPort for:
-SourceNodeID: {diaObjSource.InstanceID}
-SourceElementID: {diaObjSource.ElementID}
-SourceName: {rep.GetElementByID(diaObjSource.ElementID).Name}
-SourceType: {rep.GetElementByID(diaObjSource.ElementID).Type}
-NodeID: {diaObjectPort.InstanceID}
-ElementID: {diaObjectPort.ElementID}
-DiagramID: {diaObjectPort.DiagramID}
-Port: {port.Name}
-PortParent: {port.ParentID}
-PortPackage: {port.PackageID}
-PortType: {port.Type}
-", "Exception updating Port node!");
-            }
+            diaObjectPort.Update();
             dia.DiagramObjects.Refresh();// first update element than refresh collection 
+
+            //----------------------------------------------------------------------------
+            // Show of port: Embedded Interface/Port
+            if (portInterface == null) return true;
+
+            // visualize interface
+            position = $"l={leftPort-15};r={rightPort-15};t={topPort};b={bottomPort};";
+            EA.DiagramObject diaObjectPortInterface =
+                (EA.DiagramObject)dia.DiagramObjects.AddNew(position, "");
+
+            // diaObject2.Style = "LBL=CX=69:CY=13:OX=45:OY=0:HDN=0:BLD=0:ITA=0:UND=0:CLR=-1:ALN=0:ALT=0:ROT=0;";
+            // HDN=0 Label visible
+            // HDN=1 Label invisible
+            // PType=1: Type Shown
+            // CX = nn; Name Position
+            // OX = nn; Label Position, -nn = Left, +nn = Right
+            diaObjectPortInterface.Style = "LBL=CX=69:CY=13:OX=45:OY=0:HDN=0:BLD=0:ITA=0:UND=0:CLR=-1:ALN=0:ALT=0:ROT=0;";
+            diaObjectPortInterface.ElementID = portInterface.ElementID;
+            diaObjectPortInterface.Update();
+            dia.DiagramObjects.Refresh(); // first update element than refresh collection 
+            return true;
 
         }
 

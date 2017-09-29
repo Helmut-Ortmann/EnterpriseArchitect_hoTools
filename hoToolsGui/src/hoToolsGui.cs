@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.Reflection;
-using hoTools.Utils.ODBC;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
@@ -22,7 +20,6 @@ using hoTools.Utils.Configuration;
 using hoTools.Utils.Diagram;
 using hoTools.Utils.Excel;
 using hoTools.EaServices.Names;
-using hoTools.EaServices.MOVE;
 
 
 // ReSharper disable once CheckNamespace
@@ -247,6 +244,8 @@ namespace hoTools.hoToolsGui
         private ToolStripSeparator toolStripSeparator17;
         private ToolStripMenuItem orderAlphapeticToolStripMenuItem;
         private ToolStripSeparator toolStripSeparator18;
+        private ToolStripMenuItem showRepositoryPropertiesToolStripMenuItem;
+        private ToolStripSeparator toolStripSeparator19;
         private TextBox _txtSearchText;
         #endregion
 
@@ -1383,10 +1382,12 @@ namespace hoTools.hoToolsGui
             this._helpToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.gitHubToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator15 = new System.Windows.Forms.ToolStripSeparator();
+            this.showRepositoryPropertiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showLINQPadConnectionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.readMeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator19 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuIHome = new System.Windows.Forms.ToolStripMenuItem();
             this._toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this._toolStripContainer1.SuspendLayout();
@@ -2702,10 +2703,12 @@ namespace hoTools.hoToolsGui
             this._helpToolStripMenuItem1,
             this.gitHubToolStripMenuItem,
             this.toolStripSeparator15,
+            this.showRepositoryPropertiesToolStripMenuItem,
             this.showLINQPadConnectionsToolStripMenuItem,
             this.toolStripSeparator8,
             this.readMeToolStripMenuItem,
-            this._aboutToolStripMenuItem});
+            this._aboutToolStripMenuItem,
+            this.toolStripSeparator19});
             this._helpToolStripMenuItem.Name = "_helpToolStripMenuItem";
             resources.ApplyResources(this._helpToolStripMenuItem, "_helpToolStripMenuItem");
             this._helpToolStripMenuItem.Click += new System.EventHandler(this.helpToolStripMenuItem_Click);
@@ -2755,6 +2758,12 @@ namespace hoTools.hoToolsGui
             this.toolStripSeparator15.Name = "toolStripSeparator15";
             resources.ApplyResources(this.toolStripSeparator15, "toolStripSeparator15");
             // 
+            // showRepositoryPropertiesToolStripMenuItem
+            // 
+            this.showRepositoryPropertiesToolStripMenuItem.Name = "showRepositoryPropertiesToolStripMenuItem";
+            resources.ApplyResources(this.showRepositoryPropertiesToolStripMenuItem, "showRepositoryPropertiesToolStripMenuItem");
+            this.showRepositoryPropertiesToolStripMenuItem.Click += new System.EventHandler(this.showRepositoryPropertiesToolStripMenuItem_Click);
+            // 
             // showLINQPadConnectionsToolStripMenuItem
             // 
             this.showLINQPadConnectionsToolStripMenuItem.Name = "showLINQPadConnectionsToolStripMenuItem";
@@ -2777,6 +2786,11 @@ namespace hoTools.hoToolsGui
             this._aboutToolStripMenuItem.Name = "_aboutToolStripMenuItem";
             resources.ApplyResources(this._aboutToolStripMenuItem, "_aboutToolStripMenuItem");
             this._aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator19
+            // 
+            this.toolStripSeparator19.Name = "toolStripSeparator19";
+            resources.ApplyResources(this.toolStripSeparator19, "toolStripSeparator19");
             // 
             // toolStripMenuIHome
             // 
@@ -4089,6 +4103,33 @@ Please restart EA. During restart hoTools loads the default settings.",
         private void sortAlphapeticToolStripMenuItem_Click(object sender, EventArgs e)
         {
             EaService.SortAlphabetic(Repository);
+        }
+
+        private void showRepositoryPropertiesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string type = Repository.RepositoryType();
+            string connectionString = Repository.ConnectionString;
+            string eaEdition = Repository.EAEdition.ToString();
+            string projectGuid = Repository.ProjectGUID;
+            string instanceGuid = Repository.InstanceGUID;
+            string eAEditionEx = Repository.EAEditionEx.ToString();
+            int libraryVersion = Repository.LibraryVersion;
+            bool isSecurityEnabled = Repository.IsSecurityEnabled;
+
+
+            MessageBox.Show($@"
+Type                 = {type}
+Connection        = {connectionString}
+EAEdition         = {eaEdition}
+EAEditionEx       = {eAEditionEx}
+ProjectGuid       = {projectGuid}
+InstanceGuid      = {instanceGuid}
+LibraryVersion    = {libraryVersion}
+IsSecurityEnabled = {isSecurityEnabled}
+
+Copy to clipboard with CTRL+C, ignore beep!!!!
+
+", "Repository Information");
         }
     }
 

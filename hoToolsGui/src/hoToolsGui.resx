@@ -3442,6 +3442,17 @@ Tip:
   <data name="toolStripSeparator15.Size" type="System.Drawing.Size, System.Drawing">
     <value>217, 6</value>
   </data>
+  <data name="showRepositoryPropertiesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>220, 22</value>
+  </data>
+  <data name="showRepositoryPropertiesToolStripMenuItem.Text" xml:space="preserve">
+    <value>Show Repository properties</value>
+  </data>
+  <data name="showRepositoryPropertiesToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Show the repository properties:
+- Connection String
+- Database Type</value>
+  </data>
   <data name="showLINQPadConnectionsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>220, 22</value>
   </data>
@@ -3477,6 +3488,9 @@ If you want to use LINQPad with EA you need:
   </data>
   <data name="_aboutToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>Information about hoTools</value>
+  </data>
+  <data name="toolStripSeparator19.Size" type="System.Drawing.Size, System.Drawing">
+    <value>217, 6</value>
   </data>
   <data name="_helpToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>44, 21</value>
@@ -4261,6 +4275,12 @@ If you want to use LINQPad with EA you need:
   <data name="&gt;&gt;toolStripSeparator15.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;showRepositoryPropertiesToolStripMenuItem.Name" xml:space="preserve">
+    <value>showRepositoryPropertiesToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;showRepositoryPropertiesToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;showLINQPadConnectionsToolStripMenuItem.Name" xml:space="preserve">
     <value>showLINQPadConnectionsToolStripMenuItem</value>
   </data>
@@ -4285,6 +4305,12 @@ If you want to use LINQPad with EA you need:
   <data name="&gt;&gt;_aboutToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;toolStripSeparator19.Name" xml:space="preserve">
+    <value>toolStripSeparator19</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator19.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;toolStripMenuIHome.Name" xml:space="preserve">
     <value>toolStripMenuIHome</value>
   </data>
@@ -4295,6 +4321,6 @@ If you want to use LINQPad with EA you need:
     <value>HoToolsGui</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>hoTools.hoToolsGui.AddinGui, hoToolsGui, Version=3.1.6.0, Culture=neutral, PublicKeyToken=37ea3d95ffcb87e1</value>
+    <value>hoTools.hoToolsGui.AddinGui, hoToolsGui, Version=3.1.8.0, Culture=neutral, PublicKeyToken=37ea3d95ffcb87e1</value>
   </data>
 </root>

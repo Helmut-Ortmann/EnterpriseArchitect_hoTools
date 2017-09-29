@@ -247,6 +247,7 @@ Second Element: Target of move connections and appearances", "Select two element
             EaCollectionDiagramObjects diaCol = new EaCollectionDiagramObjects(curDiagram);
             diaCol.SortAlphabetic();
             rep.ReloadDiagram(curDiagram.Dia.DiagramID);
+            curDiagram.ReloadSelectedObjectsAndConnector();
 
         }
 
@@ -1472,17 +1473,17 @@ Second Element: Target of move connections and appearances", "Select two element
                                     pos = pos + 1; // make a gap
                                     oldStereotype = portEmbedded.Stereotype;
                                 }
-                                Util.VisualizePortForDiagramobject(rep, pos, eaDia.Dia, diaObj, portEmbedded, null,
+                                bool newShown = Util.VisualizePortForDiagramobject(rep, pos, eaDia.Dia, diaObj, portEmbedded, null,
                                     portBoundTo);
-                                pos = pos + 1;
+                                if (newShown) pos = pos + 1;
                             }
                             else
                             {
                                 // Port: Visualize Port + Interface
                                 foreach (Element interf in portEmbedded.EmbeddedElements)
                                 {
-                                    Util.VisualizePortForDiagramobject(rep, pos, eaDia.Dia, diaObj, portEmbedded, interf);
-                                    pos = pos + 1;
+                                    bool newShown = Util.VisualizePortForDiagramobject(rep, pos, eaDia.Dia, diaObj, portEmbedded, interf);
+                                   if (newShown) pos = pos + 1;
                                 }
                             }
                         }
