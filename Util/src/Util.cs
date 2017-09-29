@@ -1544,43 +1544,23 @@ namespace hoTools.Utils
 
 
             // visualize ports
-            string type = rep.GetElementByID(diaObjSource.ElementID).Type;
-            int portPosLength = 20;
             int portPosDistance = 35;
             int portPosStart = 35;
-            int portPosOffset = 15;
-            switch (type) 
-            {
-                case "Port":
-                    portPosOffset = 10;
-                    portPosDistance = 25;
-                    portPosLength = 20;
-                    break;
-                case "Pin":
-                    portPosOffset = 0;
-                    portPosDistance = 25;
-                    portPosLength = 20;
-                    break;
-                case "Parameter":
-                    portPosLength = 30;
-                    portPosDistance = 35;
-                    portPosStart = 35;
-                    portPosOffset = 10;
-                    break;
-            }
+            int portLength = 15;  // fix
+            
            
             int leftPort;
             int rightPort;
             // calculate target position of port
             if (portBoundTo == "right" || portBoundTo == "")
             {
-                leftPort = diaObjSource.right - portPosLength/2 + portPosOffset;
-                rightPort = leftPort + portPosLength;
+                leftPort = diaObjSource.right - portLength/2;
+                rightPort = leftPort + portLength;
             }
             else
             {
-                leftPort = diaObjSource.left - portPosLength/2 + portPosOffset;
-                rightPort = leftPort + portPosLength;
+                leftPort = diaObjSource.left - portLength/2 ;
+                rightPort = leftPort + portLength;
 
             }
 
@@ -1588,7 +1568,7 @@ namespace hoTools.Utils
 
 
             int topPort = top - portPosStart - pos* portPosDistance; 
-            int bottomPort = topPort - portPosLength;
+            int bottomPort = topPort - portLength;
 
             // diagram object can't host port (not tall enough)
             // make diagram object taller to host all ports
@@ -1599,8 +1579,8 @@ namespace hoTools.Utils
             }
 
             //string position = $"l={leftPort};r={rightPort};t={Math.Abs(topPort)};b={Math.Abs(bottomPort)};";
-            string position = $"l={leftPort};r={rightPort};t={topPort};b={bottomPort};";
-            var diaObjectPort = (EA.DiagramObject) dia.DiagramObjects.AddNew(position, "");
+            string positionPort = $"l={leftPort};r={rightPort};t={topPort};b={bottomPort};";
+            var diaObjectPort = (EA.DiagramObject) dia.DiagramObjects.AddNew(positionPort, "");
             if (port.Type.Equals("Port"))
             {
                 string hdn = "HDN=0:"; // Port without interface, visualize name, label
@@ -1628,9 +1608,9 @@ namespace hoTools.Utils
             if (portInterface == null) return true;
 
             // visualize interface
-            position = $"l={leftPort-5};r={rightPort-10};t={topPort};b={bottomPort};";
+            string positionInterface = $"l={rightPort-2};r={rightPort+40};t={topPort-1};b={bottomPort-1};";
             EA.DiagramObject diaObjectPortInterface =
-                (EA.DiagramObject)dia.DiagramObjects.AddNew(position, "");
+                (EA.DiagramObject)dia.DiagramObjects.AddNew(positionInterface, "");
 
             // diaObject2.Style = "LBL=CX=69:CY=13:OX=45:OY=0:HDN=0:BLD=0:ITA=0:UND=0:CLR=-1:ALN=0:ALT=0:ROT=0;";
             // HDN=0 Label visible
@@ -1646,7 +1626,7 @@ namespace hoTools.Utils
             }
             catch (Exception e)
             {
-                MessageBox.Show($"poss='{position}'\r\nName='{portInterface.Name}'\r\n{e}", "Error update Required/ProvidedInterface");
+                MessageBox.Show($"poss='{positionPort}'\r\nName='{portInterface.Name}'\r\n{e}", "Error update Required/ProvidedInterface");
             }
             dia.DiagramObjects.Refresh(); // first update element than refresh collection 
             return true;
