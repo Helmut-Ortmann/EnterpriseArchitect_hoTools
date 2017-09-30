@@ -107,7 +107,7 @@ namespace hoTools.Utils.EaCollections
         }
 
         /// <summary>
-        /// Move left
+        /// Move left around the corner
         /// </summary>
         /// <returns></returns>
         public bool MoveLeft()
@@ -123,9 +123,19 @@ namespace hoTools.Utils.EaCollections
 
             if (llist.Count < 2) return false;
             // get parent element
-            EA.DiagramObject diaObj = _eaDia.Dia.GetDiagramObjectByID(llist[0].el.ParentID, "");
-            int leftLimit = diaObj.left;
-            int topLimit = diaObj.top;
+            EA.DiagramObject diaParentObj = _eaDia.Dia.GetDiagramObjectByID(llist[0].el.ParentID, "");
+            int leftLimit = diaParentObj.left;
+
+            // top alignment /  top bound
+            int topLimit = diaParentObj.top - (llist.Count - 1) * (Distant2Element + 15);
+            int direction = -1;
+            // start bottom bound or bottom bound
+            if (_eaDia.SelObjects[0].top + 30 < diaParentObj.top)
+            {
+                // right alignment / right bound
+                topLimit = diaParentObj.bottom + (llist.Count - 1) * (Distant2Element + 15);
+                direction = 1;
+            }
 
 
             // estimate the mode to shift 
@@ -150,13 +160,13 @@ namespace hoTools.Utils.EaCollections
                 if (llist[0].left < leftLimit + OffsetFirstElement)
                 {
                     // position top left, sequence down
-                    int top = topLimit - OffsetFirstElement;
+                    int top = topLimit;
                     int pos = 0;
                     foreach (var el in llist)
                     {
                         el.item.left = leftLimit - 7;
                         el.item.right = leftLimit + 8;
-                        el.item.top = top - (pos * Distant2Element);
+                        el.item.top = top - (pos * Distant2Element) * direction;
                         el.item.bottom = el.item.top - 15;
                         el.item.Update();
                         pos = pos + 1;
@@ -197,9 +207,19 @@ namespace hoTools.Utils.EaCollections
 
             if (llist.Count < 2) return false;
             // get parent element
-            EA.DiagramObject diaObj = _eaDia.Dia.GetDiagramObjectByID(llist[0].el.ParentID, "");
-            int rightLimit = diaObj.right;
-            int topLimit = diaObj.top;
+            EA.DiagramObject diaParentObj = _eaDia.Dia.GetDiagramObjectByID(llist[0].el.ParentID, "");
+            int rightLimit = diaParentObj.right;
+
+            // top alignment /  top bound
+            int topLimit = diaParentObj.top - (llist.Count - 1) * (Distant2Element + 15);
+            int direction = -1;
+            // start bottom bound or bottom bound
+            if (_eaDia.SelObjects[0].top + 30 < diaParentObj.top)
+            {
+                // right alignment / right bound
+                topLimit = diaParentObj.bottom + (llist.Count - 1) * (Distant2Element + 15);
+                direction = 1;
+            }
 
 
             // estimate the mode to shift 
@@ -224,13 +244,13 @@ namespace hoTools.Utils.EaCollections
                 if (llist[0].right > rightLimit - OffsetFirstElement)
                 {
                     // position top left, sequence down
-                    int top = topLimit - OffsetFirstElement;
+                    int top = topLimit ;
                     int pos = 0;
                     foreach (var el in llist)
                     {
                         el.item.left = rightLimit - 7;
                         el.item.right = rightLimit + 8;
-                        el.item.top = top - (pos * Distant2Element);
+                        el.item.top = top - (pos * Distant2Element) * direction;
                         el.item.bottom = el.item.top - 15;
                         el.item.Update();
                         pos = pos + 1;
@@ -271,9 +291,19 @@ namespace hoTools.Utils.EaCollections
 
             if (llist.Count < 2) return false;
             // get parent element
-            EA.DiagramObject diaObj = _eaDia.Dia.GetDiagramObjectByID(llist[0].el.ParentID, "");
-            int topLimit = diaObj.top;
-            int leftLimit = diaObj.left;
+            EA.DiagramObject diaParentObj = _eaDia.Dia.GetDiagramObjectByID(llist[0].el.ParentID, "");
+            int topLimit = diaParentObj.top;
+
+            // left alignment /  left bound
+            int leftLimit = diaParentObj.left + (llist.Count - 1) * (Distant2Element + 15);
+            int direction = -1;
+            // start left bound or right bound
+            if (_eaDia.SelObjects[0].left - 30 > diaParentObj.left)
+            {
+                // right alignment / right bound
+                leftLimit = diaParentObj.right - (llist.Count - 1) * (Distant2Element + 15);
+                direction = 1;
+            }
 
 
             // estimate the mode to shift 
@@ -300,13 +330,13 @@ namespace hoTools.Utils.EaCollections
                 if (llist[0].top > topLimit - OffsetFirstElement)
                 {
                     // position top left, sequence down
-                    int left = leftLimit + OffsetFirstElement;
+                    int left = leftLimit;
                     int pos = 0;
                     foreach (var el in llist)
                     {
                         el.item.top = topLimit + 7;
                         el.item.bottom = topLimit - 8;
-                        el.item.left = left + (pos * Distant2Element);
+                        el.item.left = left + (pos * Distant2Element) * direction;
                         el.item.right = el.item.top + 15;
                         el.item.Update();
                         pos = pos + 1;
@@ -341,15 +371,26 @@ namespace hoTools.Utils.EaCollections
                        select new { item.ElementID, el.Name, el, el.Type, item.left, item.right, item.top, item.bottom, item }
                           into temp
                        where temp.el.IsEmbeddedElement(_eaDia.Rep)
-                       orderby temp.bottom 
+                       orderby temp.bottom  
                        select temp;
             var llist = list.ToList();
 
             if (llist.Count < 2) return false;
             // get parent element
-            EA.DiagramObject diaObj = _eaDia.Dia.GetDiagramObjectByID(llist[0].el.ParentID, "");
-            int bottomLimit = diaObj.bottom;
-            int leftLimit = diaObj.left;
+            EA.DiagramObject diaParentObj = _eaDia.Dia.GetDiagramObjectByID(llist[0].el.ParentID, "");
+            int bottomLimit = diaParentObj.bottom;
+
+            // left alignment /  left bound
+            int leftLimit = diaParentObj.left + (llist.Count - 1) * (Distant2Element + 15);
+            int direction = -1;
+            // start left bound or right bound
+            if (_eaDia.SelObjects[0].left - 30 > diaParentObj.left)
+            {
+                // right alignment / right bound
+                leftLimit = diaParentObj.right - (llist.Count - 1) * (Distant2Element + 15) ;
+                direction = 1;
+            }
+           
 
 
             // estimate the mode to shift 
@@ -372,17 +413,17 @@ namespace hoTools.Utils.EaCollections
             }
             else
             {
-                // shift up, bottom element found, line them on top edge from left to right
-                if (llist[0].bottom < bottomLimit - OffsetFirstElement)
-                {
+                // shift up, bottom element found, line them on left/right edge 
+                if (llist[0].bottom < bottomLimit + OffsetFirstElement)
+                {   
                     // position top left, sequence down
-                    int left = leftLimit + OffsetFirstElement;
+                    int left = leftLimit ;
                     int pos = 0;
                     foreach (var el in llist)
                     {
                         el.item.bottom = bottomLimit - 7;
                         el.item.top = bottomLimit + 8;
-                        el.item.left = left + (pos * Distant2Element);
+                        el.item.left = left + (pos * Distant2Element)  * direction;
                         el.item.right = el.item.left + 15;
                         el.item.Update();
                         pos = pos + 1;
@@ -403,7 +444,6 @@ namespace hoTools.Utils.EaCollections
                 }
                 return true;
             }
-            return false;
         }
     }
 
