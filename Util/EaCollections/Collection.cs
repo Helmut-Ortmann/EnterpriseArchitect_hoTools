@@ -31,7 +31,8 @@ namespace hoTools.Utils.EaCollections
         readonly EaDiagram _eaDia;
 
         const int OffsetFirstElement = 20;
-        private const int Distant2Element = 25;
+        const int Distant2Element = 25;
+        private const int DistantToMove = 25;
 
         public EaCollectionDiagramObjects(EaDiagram eaDia) : base(eaDia.Rep)
         {
@@ -169,8 +170,8 @@ namespace hoTools.Utils.EaCollections
                     // shift to left
                     foreach (var el in llist)
                     {
-                        el.item.left = el.item.left - OffsetFirstElement;
-                        el.item.right = el.item.right - OffsetFirstElement;
+                        el.item.left = el.item.left - DistantToMove;
+                        el.item.right = el.item.right - DistantToMove;
                         el.item.Update();
                     }
                 }
@@ -243,8 +244,8 @@ namespace hoTools.Utils.EaCollections
                     // shift to right
                     foreach (var el in llist)
                     {
-                        el.item.left = el.item.left + OffsetFirstElement;
-                        el.item.right = el.item.right + OffsetFirstElement;
+                        el.item.left = el.item.left + DistantToMove;
+                        el.item.right = el.item.right + DistantToMove;
                         el.item.Update();
                     }
                 }
@@ -284,6 +285,7 @@ namespace hoTools.Utils.EaCollections
                     : false;
             if (isAccross)
             {
+                // jump to top left -> to right lined
                 foreach (var el in llist)
                 {
                     el.item.top = topLimit + 8;
@@ -294,15 +296,16 @@ namespace hoTools.Utils.EaCollections
             }
             else
             {
-                if (llist[0].left > leftLimit - OffsetFirstElement)
+                // shift up, top element found
+                if (llist[0].top > topLimit - OffsetFirstElement)
                 {
                     // position top left, sequence down
                     int left = leftLimit + OffsetFirstElement;
                     int pos = 0;
                     foreach (var el in llist)
                     {
-                        el.item.top = topLimit - 7;
-                        el.item.bottom = topLimit + 8;
+                        el.item.top = topLimit + 7;
+                        el.item.bottom = topLimit - 8;
                         el.item.left = left + (pos * Distant2Element);
                         el.item.right = el.item.top + 15;
                         el.item.Update();
@@ -314,11 +317,11 @@ namespace hoTools.Utils.EaCollections
                 else
                 {
 
-                    // shift to right
+                    // shift to top
                     foreach (var el in llist)
                     {
-                        el.item.top = el.item.top + OffsetFirstElement;
-                        el.item.bottom = el.item.right - OffsetFirstElement;
+                        el.item.top = el.item.top + DistantToMove;
+                        el.item.bottom = el.item.top - DistantToMove;
                         el.item.Update();
                     }
                 }
@@ -328,12 +331,78 @@ namespace hoTools.Utils.EaCollections
         }
 
         /// <summary>
-        /// Move left
+        /// Move down
         /// </summary>
         /// <returns></returns>
         public bool MoveDown()
         {
+            var list = from item in _eaDia.SelObjects
+                       let el = Rep.GetElementByID(item.ElementID)
+                       select new { item.ElementID, el.Name, el, el.Type, item.left, item.right, item.top, item.bottom, item }
+                          into temp
+                       where temp.el.IsEmbeddedElement(_eaDia.Rep)
+                       orderby temp.bottom 
+                       select temp;
+            var llist = list.ToList();
 
+            if (llist.Count < 2) return false;
+            // get parent element
+            EA.DiagramObject diaObj = _eaDia.Dia.GetDiagramObjectByID(llist[0].el.ParentID, "");
+            int bottomLimit = diaObj.bottom;
+            int leftLimit = diaObj.left;
+
+
+            // estimate the mode to shift 
+            // 
+            bool isAccross =
+                (Math.Abs(_eaDia.SelObjects[0].bottom - _eaDia.SelObjects[1].bottom)) <
+                (Math.Abs(_eaDia.SelObjects[0].left - _eaDia.SelObjects[1].left))
+                    ? true
+                    : false;
+            if (isAccross)
+            {
+                // jump to bottom left -> to right lined
+                foreach (var el in llist)
+                {
+                    el.item.top = bottomLimit + 8;
+                    el.item.bottom = bottomLimit - 7;
+                    el.item.Update();
+                }
+                return true;
+            }
+            else
+            {
+                // shift up, bottom element found, line them on top edge from left to right
+                if (llist[0].bottom < bottomLimit - OffsetFirstElement)
+                {
+                    // position top left, sequence down
+                    int left = leftLimit + OffsetFirstElement;
+                    int pos = 0;
+                    foreach (var el in llist)
+                    {
+                        el.item.bottom = bottomLimit - 7;
+                        el.item.top = bottomLimit + 8;
+                        el.item.left = left + (pos * Distant2Element);
+                        el.item.right = el.item.left + 15;
+                        el.item.Update();
+                        pos = pos + 1;
+
+                    }
+
+                }
+                else
+                {
+
+                    // shift one step to top
+                    foreach (var el in llist)
+                    {
+                        el.item.top = el.item.top - DistantToMove;
+                        el.item.bottom = el.item.bottom - DistantToMove;
+                        el.item.Update();
+                    }
+                }
+                return true;
+            }
             return false;
         }
     }
