@@ -1774,35 +1774,5 @@ namespace hoTools.Utils
                 return false;
             }
         }
-
-        /// <summary>
-        /// Return true if Element is an Embedded Element Type
-        /// - Port
-        /// - Activity Parameter
-        /// - Parameter
-        /// - ExpansionNode (not Action)
-        /// - Pin
-        /// </summary>
-        /// <param name="el"></param>
-        /// <param name="rep"></param>
-        /// <returns>EA Version</returns>
-        public static bool IsEmbeddedElement(this EA.Element el, EA.Repository rep)
-        {
-            if (el.Type == "ExpansionNode")
-            {
-                EA.Element elAction = rep.GetElementByID(el.ParentID);
-                if (elAction.Type == "Action") return false;
-            }
-
-            return el.Type == "Port" ||
-                   el.Type == "ActivityParameter" ||
-                   el.Type == "Parameter" ||
-                   el.Type == "ExpansionNode" ||
-                   el.Type == "ActionPin" ||
-                   el.Type == "ObjectNode";
-
-        }
-
-
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using hoTools.Utils.Diagram;
+using hoTools.Utils.Extension;
 
 namespace hoTools.Utils.EaCollections
 {
@@ -139,6 +140,7 @@ namespace hoTools.Utils.EaCollections
 
 
             // estimate the mode to shift 
+            // isAccross: jump from right edge to left edge
             // 
             bool isAccross =
                 (Math.Abs(_eaDia.SelObjects[0].top - _eaDia.SelObjects[1].top)) >

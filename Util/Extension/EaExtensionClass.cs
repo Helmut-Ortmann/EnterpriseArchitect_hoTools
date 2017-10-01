@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
+using EA;
 
 namespace hoTools.Utils.Extension
 {
@@ -17,10 +18,10 @@ namespace hoTools.Utils.Extension
         /// <param name="sql">SQL which select ea_guid</param>
         /// <returns>List of connectors</returns>
         // ReSharper disable once UnusedMember.Global
-        public static List<EA.Connector> GetConnectorsBySql(this EA.Repository rep, string sql)
+        public static List<Connector> GetConnectorsBySql(this Repository rep, string sql)
         {
 
-            var lCon = new List<EA.Connector>();
+            var lCon = new List<Connector>();
             // run query into XDocument to proceed with LinQ
             string xml =rep.SQLQuery(sql);
             var x = new XDocument(XDocument.Parse(xml));
@@ -31,7 +32,7 @@ namespace hoTools.Utils.Extension
 
             foreach (var row in node)
             {
-                EA.Connector con = rep.GetConnectorByGuid(row.Value);
+                Connector con = rep.GetConnectorByGuid(row.Value);
                 lCon.Add(con);
             }
     
@@ -43,7 +44,7 @@ namespace hoTools.Utils.Extension
         /// <param name="rep"></param>
         /// <param name="sql">SQL which one column</param>
         /// <returns>List of strings</returns>
-        public static List<string> GetStringsBySql(this EA.Repository rep, string sql)
+        public static List<string> GetStringsBySql(this Repository rep, string sql)
         {
 
             var lCon = new List<string>();
@@ -62,6 +63,7 @@ namespace hoTools.Utils.Extension
 
             return lCon;
         }
+
         /// <summary>
         /// Return true if Element is an Embedded Element Type
         /// - Port
@@ -71,17 +73,111 @@ namespace hoTools.Utils.Extension
         /// - Pin
         /// </summary>
         /// <param name="el"></param>
+        /// <param name="rep"></param>
+        /// <param name="alsoEmbeddedInterfaces"></param>
         /// <returns>EA Version</returns>
         // ReSharper disable once UnusedMember.Global
-        public static bool IsEmbeddedElement(this EA.Element el)
+        public static bool IsEmbeddedElement(this EA.Element el, Repository rep, bool alsoEmbeddedInterfaces=false)
         {
-            return el.Type == "Port" ||
-                   el.Type == "ActivityParameter" ||
-                   el.Type == "Parameter" ||
-                   el.Type == "ExpansionNode" ||
-                   el.Type == "ActionPin";
+            if (el.ParentID == 0) return false;
+            if (alsoEmbeddedInterfaces)
+            {
+                return el.Type == "Port" ||
+                       el.Type == "ActivityParameter" ||
+                       el.Type == "Parameter" ||
+                       el.Type == "ExpansionNode" ||
+                       el.Type == "ActionPin" ||
+                       el.Type == "RequiredInterface" || 
+                       el.Type == "ProvidedInterface";
+            }
+            else
+            {
+                if (el.Type == "ExpansionNode" && rep != null)
+                {
+                    EA.Element elAction = rep.GetElementByID(el.ParentID);
+                    if (elAction.Type == "Action") return false;
+                }
+                return el.Type == "Port" ||
+                       el.Type == "ActivityParameter" ||
+                       el.Type == "Parameter" ||
+                       el.Type == "ExpansionNode" ||
+                       el.Type == "ActionPin";
+            }
+        }
+        /// <summary>
+        /// Get parent of an Embedded Element which isn't an embedded element. Returns null if not found
+        /// </summary>
+        /// <param name="el"></param>
+        /// <param name="rep"></param>
+        /// <returns></returns>
+
+        public static EA.Element GetParentOfEmbedded(this EA.Element el, EA.Repository rep)
+        {
+            if (!el.IsEmbeddedElement(rep, true))
+            {
+                return el;
+            }
+            if (el.ParentID == 0) return null;
+            EA.Element elParent = rep.GetElementByID(el.ParentID);
+            if (elParent.IsEmbeddedElement(rep, true))
+            {
+                return elParent.GetParentOfEmbedded(rep);
+            }
+            return elParent;
+            
+
+
+        }
+        /// <summary>
+        /// Returns the edge an embedded element is bound to (left, right, top, bottom)
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <param name="rep"></param>
+        /// <returns></returns>
+        public static EmbeddedPosition Edge(this EA.DiagramObject obj, EA.Repository rep)
+        {
+            EA.Element el = rep.GetElementByID(obj.ElementID);
+
+
+            EA.Element elParent = el.GetParentOfEmbedded(rep);
+            if (elParent == null) return  EmbeddedPosition.undefined;
+            // for Required/Required Interface use the owning Port for the position
+            if (el.Type == "ProvidedInterface" ||
+                el.Type == "RequiredInterface")
+            {
+                if (el.ParentID == 0 ) return EmbeddedPosition.undefined;
+                el = rep.GetElementByID(el.ParentID);
+            }
+
+
+                EA.Diagram dia = rep.GetDiagramByID(obj.DiagramID);
+            EA.DiagramObject objParent = dia.GetDiagramObjectByID(elParent.ElementID, "");
+            EA.DiagramObject objFirstEmbedded = dia.GetDiagramObjectByID(el.ElementID, "");
+            if (objParent == null) return EmbeddedPosition.undefined;
+
+            int horicontalCenter = objFirstEmbedded.left + (objFirstEmbedded.right - objFirstEmbedded.left) / 2;
+            int verticalCenter = objFirstEmbedded.top - (objFirstEmbedded.top - objFirstEmbedded.bottom ) / 2;
+
+            if (horicontalCenter < objParent.left + 10 && horicontalCenter > objParent.left -10 ) return EmbeddedPosition.left;
+            if (horicontalCenter < objParent.right + 10 && horicontalCenter > objParent.right - 10) return EmbeddedPosition.right;
+
+
+            if (verticalCenter < objParent.top + 10 && verticalCenter > objParent.top - 10) return EmbeddedPosition.top;
+            if (verticalCenter < objParent.bottom + 10 && verticalCenter > objParent.bottom - 10) return EmbeddedPosition.bottom;
+            return EmbeddedPosition.undefined;
+
         }
 
-
+        /// <summary>
+        /// Embedded position is an extension method to see on with edge it is located
+        /// </summary>
+        public enum EmbeddedPosition
+        {
+            left,
+            right,
+            top,
+            bottom,
+            undefined
+        }
     }
 }

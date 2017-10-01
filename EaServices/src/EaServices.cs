@@ -7,7 +7,6 @@ using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml.Linq;
-using AddinFramework.Extension;
 using EA;
 using hoTools.EaServices.Dlg;
 using hoTools.Utils;
@@ -27,6 +26,7 @@ using hoTools.Utils.Configuration;
 using hoTools.Utils.Diagram;
 using hoTools.Utils.ODBC;
 using hoTools.Utils.EaCollections;
+using hoTools.Utils.Extension;
 using hoTools.Utils.VC;
 
 // ReSharper disable RedundantArgumentDefaultValue
@@ -1724,6 +1724,8 @@ Second Element: Target of move connections and appearances", "Select two element
             // Save to avoid indifferent states
             rep.SaveDiagram(eaDia.Dia.DiagramID);
 
+            PortServices portServices = new PortServices(rep);
+
             // over all selected elements
             int count = -1;
             foreach (DiagramObject diaObj in eaDia.SelObjects)
@@ -1735,7 +1737,7 @@ Second Element: Target of move connections and appearances", "Select two element
                     "ProvidedInterface RequiredInterface".Contains(elSource.Type))
                 {
                     
-                    PortServices.DoChangeLabelStyle(diaObj, style);
+                    portServices.DoChangeLabelStyle(elSource, diaObj, style);
                 }
                 else
                 {
@@ -1746,7 +1748,7 @@ Second Element: Target of move connections and appearances", "Select two element
                         {
                             var diagramObject = eaDia.Dia.GetDiagramObjectByID(embeddedElement.ElementID, "");
                             if (diagramObject == null) continue;
-                            PortServices.DoChangeLabelStyle(diagramObject, style);
+                            portServices.DoChangeLabelStyle(embeddedElement, diagramObject, style);
                         }
                     }
                 }

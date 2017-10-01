@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using AddinFramework.Extension;
 using EA;
 using hoTools.Utils;
 using hoTools.Utils.Diagram;
 using hoTools.Utils.SQL;
-using hoTools.EaServices;
 using hoTools.Utils.Extension;
 using DiagramObject = EA.DiagramObject;
 using Element = EA.Element;
@@ -214,13 +212,18 @@ namespace hoTools.EAServicesPort
             IsShown = 2,         // HDN=0; Show Label/Name
             PositionLeft = 4,
             PositionRight = 8,
-            PositionPlus = 16,
-            PositionMinus = 32,
+            PositionPlus = 16,    // Label position right
+            PositionMinus = 32,   // Label position left
             IsTypeHidden = 64, // PType=0;
             IsTypeShown = 128,  // PType=1;
             IsPortResizable = 256, // PortResizable=1;
-            IsNotPortResizable = 512 // PortResizable=0;
+            IsNotPortResizable = 512, // PortResizable=0;
+            RotateLabel = 1024,     // Rotate Label
+            AllignLable = 2048,  // Allign Label to default settings
+            PositionUpPlus = 4096, // Label position up
+            PositionDownPlus = 9128 // Label position down
         }
+
         /// <summary>
         /// Change the type of nodes:
         /// - All nodes
@@ -229,12 +232,13 @@ namespace hoTools.EAServicesPort
         ///   hoTools updates: DiagramObjects.Styles 
         /// </summary>
         /// <param name="style"></param>
-        public void ChangeLabelGui(EA.Repository rep,  LabelStyle style)
+        /// <param name="embeddedCheckSub">true: If port check also Required- and Provided Interface</param>
+        public void ChangeLabelGui(EA.Repository rep,  LabelStyle style, bool embeddedCheckSub=false)
         {
             try
             {
                 Cursor.Current = Cursors.WaitCursor;
-                DoChangeLabelGui(rep, style);
+                DoChangeLabelGui(rep, style, embeddedCheckSub);
                 Cursor.Current = Cursors.Default;
             }
             catch (Exception e11)
@@ -249,6 +253,7 @@ namespace hoTools.EAServicesPort
         }
         #endregion
         #region doChangeLabelGUI
+
         /// <summary>
         /// Worker for change the type of nodes:
         /// - All nodes
@@ -257,7 +262,8 @@ namespace hoTools.EAServicesPort
         ///   hoTools updates: DiagramObjects.Styles 
         /// </summary>
         /// <param name="style"></param>
-        private void DoChangeLabelGui(EA.Repository rep, LabelStyle style)
+        /// <param name="embeddedCheckSub"></param>
+        private void DoChangeLabelGui(EA.Repository rep, LabelStyle style, bool embeddedCheckSub = false)
         {
             Diagram dia = _rep.GetCurrentDiagram();
             if (dia == null) return;
@@ -269,24 +275,41 @@ namespace hoTools.EAServicesPort
             foreach (DiagramObject obj in dia.SelectedObjects)
             {
                 var el = _rep.GetElementByID(obj.ElementID);
-                if (el.IsEmbeddedElement(rep))
+                if (el.IsEmbeddedElement(rep, true))
                 {
                     
                     DiagramObject portObj = dia.GetDiagramObjectByID(el.ElementID, "");
                     //EA.DiagramObject portObj = dia.GetDiagramObjectByID(el.ElementID, "");
-                    DoChangeLabelStyle(portObj, style);
+                    DoChangeLabelStyle(el, portObj, style);
                 }
                 else
                 {   // all element like Class, Component,..
                     foreach (Element p in el.EmbeddedElements)
                     {
-                        if (! p.IsEmbeddedElement(rep)) continue;
-                        DiagramObject portObj = dia.GetDiagramObjectByID(p.ElementID, "");
-                        if (portObj != null) {
-                            //EA.DiagramObject portObj = dia.GetDiagramObjectByID(p.ElementID, "");
-                            // HDN=1;  Label hidden
-                            // HDN=0;  Label visible
-                            DoChangeLabelStyle(portObj, style);
+                        if (p.IsEmbeddedElement(rep, true) )
+                        {
+                            DiagramObject portObj = dia.GetDiagramObjectByID(p.ElementID, "");
+                            if (portObj != null)
+                            {
+                                //EA.DiagramObject portObj = dia.GetDiagramObjectByID(p.ElementID, "");
+                                // HDN=1;  Label hidden
+                                // HDN=0;  Label visible
+                                DoChangeLabelStyle(p, portObj, style);
+                                if (p.Type == "Port" && embeddedCheckSub)
+                                {
+                                    // Check if embedded interface
+                                    foreach (EA.Element p1 in p.EmbeddedElements)
+                                    {
+                                        DiagramObject portObj1 = dia.GetDiagramObjectByID(p1.ElementID, "");
+                                        if (portObj1 != null)
+                                        {
+                                            DoChangeLabelStyle(p, portObj, style);
+                                        }
+
+
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -303,8 +326,9 @@ namespace hoTools.EAServicesPort
         /// </summary>
         /// <param name="portObj"></param>
         /// <param name="style"></param>
-        public static void DoChangeLabelStyle(EA.DiagramObject portObj, LabelStyle style)
+        public void DoChangeLabelStyle(EA.Element el, EA.DiagramObject portObj, LabelStyle style)
         {
+            Match match;
             switch (style)
             {
                 case LabelStyle.IsHidden:
@@ -336,24 +360,84 @@ namespace hoTools.EAServicesPort
                     ChangeDiagramObjectStyle(portObj, @"OX=[\+\-0-9]*", @"OX=24");
                     break;
 
+                case LabelStyle.PositionDownPlus:
+                    MoveLabel(portObj, "OY", 15);
+                    break;
+                case LabelStyle.PositionUpPlus:
+                    MoveLabel(portObj, "OY", -15);
+                    break;
+
                 case LabelStyle.PositionMinus:
                     // get old x position
-                    Match match = Regex.Match((string)portObj.Style, @"OX=([\+\-0-9]*)");
-                    if (match.Success)
-                    {
-                        int xPos = Convert.ToInt32(match.Groups[1].Value) - 15;
-                        ChangeDiagramObjectStyle(portObj, @"OX=[\+\-0-9]*", $@"OX={xPos}");
-                    }
+                    MoveLabel(portObj, "OX", -15);
+                   
                     break;
+
                 // add offset to position
                 case LabelStyle.PositionPlus:
-                    // get old x position
-                    match = Regex.Match((string)portObj.Style, @"OX=([\+\-0-9]*)");
+                    MoveLabel(portObj, "OX", +15);
+                    break;
+
+
+                // Round robin Rotation settings (no, clockwise, anti clockwise)
+                case LabelStyle.RotateLabel:
+                    // get old rotation
+                    string newRotationValue = "";
+                    match = Regex.Match((string)portObj.Style, @"ROT=(0|-1|1)");
                     if (match.Success)
                     {
-                        int xPos = Convert.ToInt32(match.Groups[1].Value) + 15;
-                        ChangeDiagramObjectStyle(portObj, @"OX=[\+\-0-9]*", $@"OX={xPos}"  );
+                        string oldRotationValue = match.Value;
+                        switch (oldRotationValue)
+                        {
+                            case "ROT=0":
+                                newRotationValue = "ROT=1";
+                                break;
+                            case "ROT=-1":
+                                newRotationValue = "ROT=0";
+
+                                break;
+                            case "ROT=1":
+                                newRotationValue = "ROT=-1";
+                                break;
+
+                        }
+                        if (newRotationValue != "") ChangeDiagramObjectStyle(portObj, oldRotationValue, newRotationValue);
                     }
+                    break;
+
+                // Allign Label to default position
+                case LabelStyle.AllignLable:
+                    var edge = portObj.Edge(_rep);
+                    switch (edge)
+                    {
+                        case EaExtensionClass.EmbeddedPosition.top:
+                            ChangeDiagramObjectStyle(portObj, @"OX=[\+\-0-9]*", @"OX=0");
+                            ChangeDiagramObjectStyle(portObj, @"OY=[\+\-0-9]*", @"OY=-50");
+                            ChangeDiagramObjectStyle(portObj, "ROT=(0|-1|1)", "ROT=1");
+
+                            break;
+                        case EaExtensionClass.EmbeddedPosition.bottom:
+                            ChangeDiagramObjectStyle(portObj, @"OX=[\+\-0-9]*", @"OX=0");
+                            ChangeDiagramObjectStyle(portObj, @"OY=[\+\-0-9]*", @"OY=+50");
+                            ChangeDiagramObjectStyle(portObj, "ROT=(0|-1|1)", "ROT=1");
+
+                            break;
+
+                        case EaExtensionClass.EmbeddedPosition.right:
+                            ChangeDiagramObjectStyle(portObj, @"OX=[\+\-0-9]*", @"OX=50");
+                            ChangeDiagramObjectStyle(portObj, @"OY=[\+\-0-9]*", @"OY=0");
+                            ChangeDiagramObjectStyle(portObj, "ROT=(0|-1|1)", "ROT=0");
+
+                                break;
+                        case EaExtensionClass.EmbeddedPosition.left:
+                            ChangeDiagramObjectStyle(portObj, @"OX=[\+\-0-9]*", @"OX=80");
+                            ChangeDiagramObjectStyle(portObj, @"OY=[\+\-0-9]*", @"OY=0");
+                            ChangeDiagramObjectStyle(portObj, "ROT=(0|-1|1)", "ROT=0");
+
+                            break;
+                    }
+                    
+
                     break;
             }
 
@@ -363,6 +447,24 @@ namespace hoTools.EAServicesPort
             //portObj.Style = style;
         }
         #endregion
+
+        /// <summary>
+        /// MoveLabel amount Pixels according to EA coordinate system. Give the type as 'OX' (horizontal) or 'OY' (vertical)
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <param name="type">'OX' or 'OY'</param>
+        /// <param name="amountPixels"></param>
+        private void MoveLabel(EA.DiagramObject obj, string type, int  amountPixels)
+        {
+            Match match = Regex.Match((string)obj.Style, $@"{type}=([\+\-0-9]*)");
+            if (match.Success)
+            {
+                int xPos = Convert.ToInt32(match.Groups[1].Value) + amountPixels;
+                ChangeDiagramObjectStyle(obj, $@"{type}=[\+\-0-9]*", $@"{type}={xPos}");
+            }
+
+        }
+        
         #region ChangeDiagramObjectStyle
         /// <summary>
         /// Change Style of a DiagramObject. 
@@ -388,6 +490,26 @@ namespace hoTools.EAServicesPort
             // update style
             portObj.Style = style;
             portObj.Update();
+        }
+        #endregion
+        #region GetDiagramObjectStyle
+
+        /// <summary>
+        /// Get Style of a DiagramObject. 
+        /// </summary>
+        /// <param name="portObj"></param>
+        /// <param name="styleName"></param>
+        private static string GetDiagramObjectStyle(DiagramObject portObj, string styleName)
+        {
+            var style = (string)portObj.Style;
+
+            Match match = Regex.Match(style, $"{styleName}=[;]*;");
+
+            if (match.Success)
+            {
+                return match.Value;
+            }
+            return "";
         }
         #endregion
 
