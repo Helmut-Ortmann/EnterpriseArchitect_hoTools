@@ -4,12 +4,15 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using EA;
 using hoTools.Utils;
+using hoTools.Utils.Configuration;
 using hoTools.Utils.Diagram;
 using hoTools.Utils.SQL;
 using hoTools.Utils.Extension;
 using DiagramObject = EA.DiagramObject;
 using Element = EA.Element;
 using Package = EA.Package;
+using hoTools.Utils.Json;
+using Newtonsoft.Json.Linq;
 
 namespace hoTools.EAServicesPort
 {
@@ -17,8 +20,8 @@ namespace hoTools.EAServicesPort
     {
         private readonly Repository _rep;
         int _count; // a variable to count the amount of something
-          
-        
+
+        private List<PortAlignmentItem> _portAlignmentItems; 
 
         #region Constructor
         /// <summary>
@@ -30,7 +33,47 @@ namespace hoTools.EAServicesPort
             _rep = rep;
             _count = 0;
 
-            
+
+            // global configuration parameters independent from EA-Instance and used by services
+            var globalCfg = HoToolsGlobalCfg.Instance;
+
+            // use 'Deserializing Partial JSON Fragments'
+            JObject search;
+            try
+            {
+                // Read JSON
+                string text = System.IO.File.ReadAllText(globalCfg.JasonFilePath);
+                search = JObject.Parse(text);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($@"Can't read '{globalCfg.JasonFilePath}'
+
+{e}", "Can't import 'PortAlignment' settings from Settings.json. ");
+                return;
+            }
+
+            _portAlignmentItems = (List<PortAlignmentItem>)JasonHelper.GetConfigurationStyleItems<PortAlignmentItem>(search, "PortAlignment", ignoreError:true);
+
+            // nothing imported, use default values
+            if (_portAlignmentItems == null)
+            {
+                _portAlignmentItems = new List<PortAlignmentItem>();
+                _portAlignmentItems.Add(new PortAlignmentItem("Port",  
+                    "-80","0","0","0",    
+                    "50", "0", "0", "0",   
+                    "0", "-90", "0", "1",
+                    "0", "50", "0", "1"
+                    ));
+                _portAlignmentItems.Add(new PortAlignmentItem("Interface",
+                    "-80", "0", "0", "0",
+                    "50", "0", "0", "0",
+                    "0", "-80", "0", "1",
+                    "0", "70", "0", "1"
+                ));
+            }
+
+
         }
         #endregion
        
@@ -405,38 +448,59 @@ namespace hoTools.EAServicesPort
                     }
                     break;
 
-                // Allign Label to default position
+                // Align Label to default position
                 case LabelStyle.AllignLable:
                     var edge = portObj.Edge(_rep);
-                    switch (edge)
-                    {
-                        case EaExtensionClass.EmbeddedPosition.top:
-                            ChangeDiagramObjectStyle(portObj, @"OX=[\+\-0-9]*", @"OX=0");
-                            ChangeDiagramObjectStyle(portObj, @"OY=[\+\-0-9]*", @"OY=-50");
-                            ChangeDiagramObjectStyle(portObj, "ROT=(0|-1|1)", "ROT=1");
+                    if (el.Type.Contains("Interface"))
+                    {   // Required / Provided Interface
+                        PortAlignmentItem settingsInterface = _portAlignmentItems.Find(x => x.Type == "Interface");
+                        switch (edge)
+                        {
+                            case EaExtensionClass.EmbeddedPosition.top:
+                                //ChangeDiagramObjectLabel(portObj, x: "0", y: "-80", rotation: "1");
+                                ChangeDiagramObjectLabel(portObj, x: settingsInterface.XTop, y: settingsInterface.YTop, rotation: settingsInterface.RotationTop);
+                                break;
+                            case EaExtensionClass.EmbeddedPosition.bottom:
+                                //ChangeDiagramObjectLabel(portObj, x: "0", y: "70", rotation: "1");
+                                ChangeDiagramObjectLabel(portObj, x: settingsInterface.XBottom, y: settingsInterface.YBottom, rotation: settingsInterface.RotationBottom);
+                                break;
 
-                            break;
-                        case EaExtensionClass.EmbeddedPosition.bottom:
-                            ChangeDiagramObjectStyle(portObj, @"OX=[\+\-0-9]*", @"OX=0");
-                            ChangeDiagramObjectStyle(portObj, @"OY=[\+\-0-9]*", @"OY=+50");
-                            ChangeDiagramObjectStyle(portObj, "ROT=(0|-1|1)", "ROT=1");
-
-                            break;
-
-                        case EaExtensionClass.EmbeddedPosition.right:
-                            ChangeDiagramObjectStyle(portObj, @"OX=[\+\-0-9]*", @"OX=50");
-                            ChangeDiagramObjectStyle(portObj, @"OY=[\+\-0-9]*", @"OY=0");
-                            ChangeDiagramObjectStyle(portObj, "ROT=(0|-1|1)", "ROT=0");
+                            case EaExtensionClass.EmbeddedPosition.right:
+                                ChangeDiagramObjectLabel(portObj, x: settingsInterface.XRight, y: settingsInterface.XRight, rotation: settingsInterface.RotationRight);
+                                //ChangeDiagramObjectLabel(portObj, x: "50", y: "0", rotation: "0");
+                                break;
+                            case EaExtensionClass.EmbeddedPosition.left:
+                                ChangeDiagramObjectLabel(portObj, x: settingsInterface.XLeft, y: settingsInterface.YLeft, rotation: settingsInterface.RotationLeft);
+                                //ChangeDiagramObjectLabel(portObj, x: "-80", y: "0", rotation: "0");
+                                break;
+                        }
+                    }
+                    else
+                    {   // Ports, Pins,..
+                        PortAlignmentItem settingsPort = _portAlignmentItems.Find(x => x.Type == "Port");
+                        switch (edge)
+                        {
+                            case EaExtensionClass.EmbeddedPosition.top:
+                                ChangeDiagramObjectLabel(portObj, x: settingsPort.XTop, y: settingsPort.YTop, rotation: settingsPort.RotationTop);
+                                //ChangeDiagramObjectLabel(portObj, x: "0", y: "-90", rotation: "1");
 
                                 break;
-                        case EaExtensionClass.EmbeddedPosition.left:
-                            ChangeDiagramObjectStyle(portObj, @"OX=[\+\-0-9]*", @"OX=80");
-                            ChangeDiagramObjectStyle(portObj, @"OY=[\+\-0-9]*", @"OY=0");
-                            ChangeDiagramObjectStyle(portObj, "ROT=(0|-1|1)", "ROT=0");
+                            case EaExtensionClass.EmbeddedPosition.bottom:
+                                ChangeDiagramObjectLabel(portObj, x: settingsPort.XBottom, y: settingsPort.YBottom, rotation: settingsPort.RotationBottom);
+                                //ChangeDiagramObjectLabel(portObj, x: "0", y: "50", rotation: "1");
+                                break;
 
-                            break;
+                            case EaExtensionClass.EmbeddedPosition.right:
+                                ChangeDiagramObjectLabel(portObj, x: settingsPort.XRight, y: settingsPort.YRight, rotation: settingsPort.RotationRight);
+                                //ChangeDiagramObjectLabel(portObj, x: "50", y: "0", rotation: "0");
+                                break;
+                            case EaExtensionClass.EmbeddedPosition.left:
+                                ChangeDiagramObjectLabel(portObj, x: settingsPort.XLeft, y: settingsPort.YLeft, rotation: settingsPort.RotationLeft);
+                                //ChangeDiagramObjectLabel(portObj, x: "-80", y: "0", rotation: "0");
+                                break;
+                        }
                     }
-                    
+
 
                     break;
             }
@@ -447,6 +511,19 @@ namespace hoTools.EAServicesPort
             //portObj.Style = style;
         }
         #endregion
+        /// <summary>
+        /// Change Diagram Object Label (x, y, rotation)
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="rotation">0=none, 1=clockwise, -1 anti clockwise</param>
+        private void ChangeDiagramObjectLabel(EA.DiagramObject obj, string x, string y, string rotation)
+        {
+            ChangeDiagramObjectStyle(obj, @"OX=[\+\-0-9]*", $@"OX={x}");
+            ChangeDiagramObjectStyle(obj, @"OY=[\+\-0-9]*", $@"OY={y}");
+            ChangeDiagramObjectStyle(obj, "ROT=(0|-1|1)", $"ROT={rotation}");
+        }
 
         /// <summary>
         /// MoveLabel amount Pixels according to EA coordinate system. Give the type as 'OX' (horizontal) or 'OY' (vertical)

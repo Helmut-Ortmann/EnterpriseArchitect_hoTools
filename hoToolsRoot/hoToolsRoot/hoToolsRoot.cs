@@ -178,6 +178,7 @@ namespace hoTools
             globalCfg.IsLinqPadSupported = _addinSettings.IsLinqPadSupport;
             globalCfg.UseLinqPadConnection = _addinSettings.UseLinqPadConnection;
             globalCfg.LinqPadConnectionPath = _addinSettings.LinqPadConnectionPath;
+            globalCfg.JasonFilePath = _addinSettings.JasonFilePath;
 
             // Extensions: c# Assemblies (*.dll, *.exe)
             globalCfg.SetExtensionPaths(_addinSettings.CodeExtensionsPath);

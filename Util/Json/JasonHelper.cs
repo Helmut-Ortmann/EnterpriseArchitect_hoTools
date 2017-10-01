@@ -8,14 +8,14 @@ namespace hoTools.Utils.Json
 {
     public class JasonHelper
     {
-        
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <param name="search"></param>
-    /// <param name="jsonChapter">"DiagramStyle", "DiagramObjectStyle","DiagramLinkStyle", "AutoIncrement"</param>
-    public static  IList<T> GetConfigurationStyleItems<T>(JObject search, string jsonChapter)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="search"></param>
+        /// <param name="jsonChapter">"DiagramStyle", "DiagramObjectStyle","DiagramLinkStyle", "AutoIncrement"</param>
+        /// <param name="ignoreError"></param>
+        public static  IList<T> GetConfigurationStyleItems<T>(JObject search, string jsonChapter, bool ignoreError=false)
         {
             try
             {
@@ -35,7 +35,9 @@ namespace hoTools.Utils.Json
             }
             catch (Exception e)
             {
-                MessageBox.Show($@"Cant import '{jsonChapter}' from 'Settings.json'
+                if (!ignoreError)
+                {
+                    MessageBox.Show($@"Cant import '{jsonChapter}' from 'Settings.json'
 
 {e}
 The chapter '{jsonChapter}' in Settings.json is missing!
@@ -45,7 +47,9 @@ Consider:
 -- Settings.json 'Diagram Styles && more' (current)
 -- Settings.json 'Diagram Styles && more' (delivery)
 ",
-                    $@"Can't import JSON Chapter '{jsonChapter}' in Settings.json");
+                        $@"Can't import JSON Chapter '{jsonChapter}' in Settings.json");
+                   
+                }
                 return null;
             }
         }

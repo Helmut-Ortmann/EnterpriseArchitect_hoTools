@@ -76,6 +76,12 @@ namespace hoTools.Utils.Configuration
         /// </summary>
         public string ConfigPath { get; set; }
 
+
+        /// <summary>
+        /// JasonFilePath to load configurations
+        /// </summary>
+        public string JasonFilePath { get; set; }
+
         #region ExtensionPath
 
         /// <summary>
