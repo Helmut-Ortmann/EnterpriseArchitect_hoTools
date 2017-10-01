@@ -10,7 +10,7 @@
   //                - see: http://sparxsystems.com/enterprise_architect_user_guide/13.0/user_interface/using_the_style_panel.html 
   //                - "Property": "EaLayoutStyle=ObjStyle2;"
   // Color:         You can use the Integer Value, Hexa Value or simple the colorname 
- "DiagramStyle":
+  'DiagramStyle':
   [
     // List of Diagram Styles to assign to diagram types
     // see:: https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/DiagramStyles
@@ -72,7 +72,7 @@
       "Property": ""
     }
   ],
-  "DiagramObjectStyle":
+  'DiagramObjectStyle':
   [
     // Hiding  Styles:  AttPro=0;AttPri=0;AttPub=0;AttPkg=0;OpPro=0;OpPri=0;OpPub=0;OpPkg=0;
     // Showing Styles:  Tag=1;Constraint=1;PType=1;Notes=1000;Formatted=1;RzO=1;Runstate=1;Responsibility;FQTag=1;OpInh=1;AttInh=1;RzO=n;
@@ -168,7 +168,7 @@
       "Property": "CompleteDiagram=BorderColor: Black: Yellow: Red;"
     }
   ],
-  "DiagramLinkStyle":
+  'DiagramLinkStyle':
   [
     // Name:         Template name
     // Description:  Description for e.g. Tooltip
@@ -291,82 +291,79 @@
       "Property": "ConnectorColor=green, ConnectorWidth=3" // default for links 
     }
   ],
- 
-  "AutoIncrement":
-  [
-    // Define the rules for autogenerate increment names for ObjectType, StereoType
-    // - MY_0.00.0.1 then MY_0.00.0.2 then MY_0.00.0.2 ..
-    //
-    // "ObjectType"        The EA Objectype like "Requirement"
-    // "Stereotype":       The EA Stereotype like "FunctionalRequirement"
-    // "SqlTopMost":       The SQL to determine the top most element name with the highest number  or Blank XOR
-    // "SqlTopMostAlias":  The SQL to determine the top most element alias with the highest number or Blank
-    //  "NumberProxyChar": Proxy/Paceholder for the number in the format string "0" for "MY_0_0:000" or "X" for "MY_X_X:XXX"
-    //  "FormatString":    Format string which contains the number (see NumberProxyChar)
-    //
-    // SQL Wildcards hoTools converts between Databases:
-    // - % or * or #WC# Any characters
-    // - _ or ? a single character
-    // "SqlTopMost":  
-    // -  "select top 1 t1.Object_ID from t_object t1 where t1.object_Type = 'Requirement' AND t1.stereotype = 'FunctionalRequirement' AND t1.name like 'F_*' AND NOT t1.name like 'FunctionalRequirement*' order by t1.name desc",
-    // "SqlTopMostAlias":  SQL to determine alias top most
-    // -  "select top 1 t1.Object_ID from t_object t1 where t1.object_Type = 'Requirement' AND t1.stereotype = 'FunctionalRequirement' AND t1.alias like 'F_*' AND NOT t1.alias like 'FunctionalRequirement*' order by t1.name desc",
-    //    "NumberProxyChar": "0",
-
-      { // Functional Requirements, Counter for name
-        "ObjectType": "Requirement",
-        "Stereotype": "FunctionalRequirement",
-        "SqlTopMost":
-          "select top 1 t1.Object_ID from t_object t1 where t1.object_Type = 'Requirement' AND t1.stereotype = 'FunctionalRequirement' AND t1.name like 'F_#WC#' AND NOT t1.name like 'FunctionalRequirement*' order by t1.name desc",
-        "SqlTopMostAlias": "",
-        "NumberProxyChar": "0",
-        "NumberStartValue": "1",
-        "FormatString": "F_0.00.0.0"
-      },
-      {
-        "ObjectType": "Requirement",
-        "Stereotype": "BusinessRequirement",
-        "SqlTopMost": "",
-        "SqlTopMostAlias":
-          "select top 1 t1.Object_ID from t_object t1 where t1.object_Type = 'Requirement' AND t1.stereotype = 'BusinessRequirement' AND t1.alias like 'F_*' AND NOT t1.alias like 'FunctionalRequirement*' order by t1.alias desc",
-        "NumberProxyChar": "0",
-        "NumberStartValue": "99",
-        "FormatString": "F_0.00.0.0"
-      },
-      {
-        "ObjectType": "Risk",
-        "Stereotype": "",
-        "SqlTopMost":
-          "select top 1 t1.Object_ID from t_object t1 where t1.object_Type = 'Risk' AND t1.stereotype = NULL AND t1.name like 'R:*' AND NOT t1.name like 'Risk*' order by t1.name desc",
-        "SqlTopMostAlias": "",
-        "NumberProxyChar": "0",
-        "NumberStartValue": "3",
-        "FormatString": "R:0.00.0.0"
-      },
-      {
-        "ObjectType": "Feature",
-        "Stereotype": "",
-        "SqlTopMost": "",
-        "SqlTopMostAlias":
-          "select top 1 t1.Object_ID from t_object t1 where t1.object_Type = 'Feature' AND t1.stereotype = NULL AND t1.alias like 'FE:*' AND NOT t1.alias like 'Feature*' order by t1.alias desc",
-        "NumberProxyChar": "4",
-        "NumberStartValue": "1",
-        "FormatString": "FE:4.44.4.4"
-      }
+  'AutoIncrement':
+  // Define the rules for autogenerate increment names for ObjectType, StereoType
+  // - MY_0.00.0.1 then MY_0.00.0.2 then MY_0.00.0.2 ..
+  //
+  // "ObjectType"        The EA Objectype like "Requirement"
+  // "Stereotype":       The EA Stereotype like "FunctionalRequirement"
+  // "SqlTopMost":       The SQL to determine the top most element name with the highest number  or Blank XOR
+  // "SqlTopMostAlias":  The SQL to determine the top most element alias with the highest number or Blank
+  //  "NumberProxyChar": Proxy/Paceholder for the number in the format string "0" for "MY_0_0:000" or "X" for "MY_X_X:XXX"
+  //  "FormatString":    Format string which contains the number (see NumberProxyChar)
+  //
+  // SQL Wildcards hoTools converts between Databases:
+  // - % or * or #WC# Any characters
+  // - _ or ? a single character
+  // "SqlTopMost":  
+  // -  "select top 1 t1.Object_ID from t_object t1 where t1.object_Type = 'Requirement' AND t1.stereotype = 'FunctionalRequirement' AND t1.name like 'F_*' AND NOT t1.name like 'FunctionalRequirement*' order by t1.name desc",
+  // "SqlTopMostAlias":  SQL to determine alias top most
+  // -  "select top 1 t1.Object_ID from t_object t1 where t1.object_Type = 'Requirement' AND t1.stereotype = 'FunctionalRequirement' AND t1.alias like 'F_*' AND NOT t1.alias like 'FunctionalRequirement*' order by t1.name desc",
+  //    "NumberProxyChar": "0",
+[
+    { // Functional Requirements, Counter for name
+      "ObjectType": "Requirement",
+      "Stereotype": "FunctionalRequirement",
+      "SqlTopMost": "select top 1 t1.Object_ID from t_object t1 where t1.object_Type = 'Requirement' AND t1.stereotype = 'FunctionalRequirement' AND t1.name like 'F_#WC#' AND NOT t1.name like 'FunctionalRequirement*' order by t1.name desc",
+      "SqlTopMostAlias": "",
+      "NumberProxyChar": "0",
+      "NumberStartValue": "1",
+      "FormatString": "F_0.00.0.0"
+    },
+  {
+  "ObjectType": "Requirement",
+  "Stereotype": "BusinessRequirement",
+  "SqlTopMost": "",
+  "SqlTopMostAlias": "select top 1 t1.Object_ID from t_object t1 where t1.object_Type = 'Requirement' AND t1.stereotype = 'BusinessRequirement' AND t1.alias like 'F_*' AND NOT t1.alias like 'FunctionalRequirement*' order by t1.alias desc",
+      "NumberProxyChar": "0",
+      "NumberStartValue": "99",
+      "FormatString": "F_0.00.0.0"
+    },
+    {
+      "ObjectType": "Risk",
+      "Stereotype": "",
+      "SqlTopMost": "select top 1 t1.Object_ID from t_object t1 where t1.object_Type = 'Risk' AND t1.stereotype = NULL AND t1.name like 'R:*' AND NOT t1.name like 'Risk*' order by t1.name desc",
+      "SqlTopMostAlias": "",
+      "NumberProxyChar": "0",
+      "NumberStartValue": "3",
+      "FormatString": "R:0.00.0.0"
+    },
+    {
+      "ObjectType": "Feature",
+      "Stereotype": "",
+      "SqlTopMost": "",
+      "SqlTopMostAlias": "select top 1 t1.Object_ID from t_object t1 where t1.object_Type = 'Feature' AND t1.stereotype = NULL AND t1.alias like 'FE:*' AND NOT t1.alias like 'Feature*' order by t1.alias desc",
+      "NumberProxyChar": "4",
+      "NumberStartValue": "1",
+      "FormatString": "FE:4.44.4.4"
+    }
   ],
   "PortAlignment": 
   [
+    // Port alignment settings. Two sets consistent of:
+    // - Port
+    // - Interface (RequiredInterface, ProvidedInterface)
     // Alignment of Port and RequiredInterface, ProvidedInterface
     // Alignment of labels to set the label position
     // Alignment: 0=left, 1=center, 2=right
     // Rotation: 0=none, 1=clockwise, -1=anti clockwise
-    {
+    { 
       "Type":  "Port",
       "XLeft":  "-80",
       "YLeft":  "0",
       "AlignmentLeft": "0",
       "RotationLeft": "0",
-      "XRight":  "50",
+      "XRight":  "20",
       "YRight":  "0",
       "AlignmentRight": "0",
       "RotationRight": "0",
@@ -395,6 +392,44 @@
       "RotationTop": "1",
       "XBottom":  "0",
       "YBottom":  "70",
+      "AlignmentBottom": "0",
+      "RotationBottom": "1"
+    }, // second set of default values, usually inside/outside parent classifier
+    { 
+      "Type":  "Port1",
+      "XLeft":  "25",
+      "YLeft":  "0",
+      "AlignmentLeft": "0",
+      "RotationLeft": "0",
+      "XRight":  "-140",
+      "YRight":  "0",
+      "AlignmentRight": "0",
+      "RotationRight": "0",
+      "XTop":  "0",
+      "YTop":  "30",
+      "AlignmentTop": "0",
+      "RotationTop": "1",
+      "XBottom":  "0",
+      "YBottom":  "-105",
+      "AlignmentBottom": "0",
+      "RotationBottom": "1"
+    },
+    { 
+      "Type":  "Interface1",
+      "XLeft":  "60",
+      "YLeft":  "0",
+      "AlignmentLeft": "0",
+      "RotationLeft": "0",
+      "XRight":  "-100",
+      "YRight":  "0",
+      "AlignmentRight": "0",
+      "RotationRight": "0",
+      "XTop":  "0",
+      "YTop":  "65",
+      "AlignmentTop": "0",
+      "RotationTop": "1",
+      "XBottom":  "0",
+      "YBottom":  "-120",
       "AlignmentBottom": "0",
       "RotationBottom": "1"
     }

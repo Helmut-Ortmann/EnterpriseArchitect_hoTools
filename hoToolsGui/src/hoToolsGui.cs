@@ -250,6 +250,7 @@ namespace hoTools.hoToolsGui
         private Button btnAlignLabel;
         private Button _btnLabelUp;
         private Button _btnLabelDown;
+        private Button btnAlignLabel2;
         private TextBox _txtSearchText;
         #endregion
 
@@ -915,7 +916,12 @@ namespace hoTools.hoToolsGui
         private void btnAlignLabel_Click(object sender, EventArgs e)
         {
             var port = new PortServices(Repository);
-            port.ChangeLabelGui(Repository, PortServices.LabelStyle.AllignLable, embeddedCheckSub:true);
+            port.ChangeLabelGui(Repository, PortServices.LabelStyle.AlignLabel1, embeddedCheckSub:true);
+        }
+        private void btnAlignLabel2_Click(object sender, EventArgs e)
+        {
+            var port = new PortServices(Repository);
+            port.ChangeLabelGui(Repository, PortServices.LabelStyle.AlignLabel2, embeddedCheckSub: true);
         }
 
 
@@ -1316,9 +1322,10 @@ namespace hoTools.hoToolsGui
             this._lblPorts = new System.Windows.Forms.Label();
             this.btnRotateLabel = new System.Windows.Forms.Button();
             this.btnAlignLabel = new System.Windows.Forms.Button();
-            this._toolTipRtfListOfSearches = new System.Windows.Forms.ToolTip(this.components);
             this._btnLabelDown = new System.Windows.Forms.Button();
             this._btnLabelUp = new System.Windows.Forms.Button();
+            this.btnAlignLabel2 = new System.Windows.Forms.Button();
+            this._toolTipRtfListOfSearches = new System.Windows.Forms.ToolTip(this.components);
             this._rtfListOfSearches = new System.Windows.Forms.RichTextBox();
             this._panelPort = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
@@ -2110,18 +2117,11 @@ namespace hoTools.hoToolsGui
             this.btnAlignLabel.UseVisualStyleBackColor = true;
             this.btnAlignLabel.Click += new System.EventHandler(this.btnAlignLabel_Click);
             // 
-            // _toolTipRtfListOfSearches
-            // 
-            this._toolTipRtfListOfSearches.AutomaticDelay = 0;
-            this._toolTipRtfListOfSearches.OwnerDraw = true;
-            this._toolTipRtfListOfSearches.Draw += new System.Windows.Forms.DrawToolTipEventHandler(this._toolTipRtfListOfSearches_Draw);
-            this._toolTipRtfListOfSearches.Popup += new System.Windows.Forms.PopupEventHandler(this._toolTipRtfListOfSearches_Popup);
-            // 
             // _btnLabelDown
             // 
             resources.ApplyResources(this._btnLabelDown, "_btnLabelDown");
             this._btnLabelDown.Name = "_btnLabelDown";
-            this._toolTipRtfListOfSearches.SetToolTip(this._btnLabelDown, resources.GetString("_btnLabelDown.ToolTip"));
+            this._toolTip.SetToolTip(this._btnLabelDown, resources.GetString("_btnLabelDown.ToolTip"));
             this._btnLabelDown.UseVisualStyleBackColor = true;
             this._btnLabelDown.Click += new System.EventHandler(this.movePortLableDownPositionToolStripMenuItem_Click);
             // 
@@ -2129,9 +2129,24 @@ namespace hoTools.hoToolsGui
             // 
             resources.ApplyResources(this._btnLabelUp, "_btnLabelUp");
             this._btnLabelUp.Name = "_btnLabelUp";
-            this._toolTipRtfListOfSearches.SetToolTip(this._btnLabelUp, resources.GetString("_btnLabelUp.ToolTip"));
+            this._toolTip.SetToolTip(this._btnLabelUp, resources.GetString("_btnLabelUp.ToolTip"));
             this._btnLabelUp.UseVisualStyleBackColor = true;
             this._btnLabelUp.Click += new System.EventHandler(this.movePortLableUpPositionToolStripMenuItem_Click);
+            // 
+            // btnAlignLabel2
+            // 
+            resources.ApplyResources(this.btnAlignLabel2, "btnAlignLabel2");
+            this.btnAlignLabel2.Name = "btnAlignLabel2";
+            this._toolTip.SetToolTip(this.btnAlignLabel2, resources.GetString("btnAlignLabel2.ToolTip"));
+            this.btnAlignLabel2.UseVisualStyleBackColor = true;
+            this.btnAlignLabel2.Click += new System.EventHandler(this.btnAlignLabel2_Click);
+            // 
+            // _toolTipRtfListOfSearches
+            // 
+            this._toolTipRtfListOfSearches.AutomaticDelay = 0;
+            this._toolTipRtfListOfSearches.OwnerDraw = true;
+            this._toolTipRtfListOfSearches.Draw += new System.Windows.Forms.DrawToolTipEventHandler(this._toolTipRtfListOfSearches_Draw);
+            this._toolTipRtfListOfSearches.Popup += new System.Windows.Forms.PopupEventHandler(this._toolTipRtfListOfSearches_Popup);
             // 
             // _rtfListOfSearches
             // 
@@ -2147,6 +2162,7 @@ namespace hoTools.hoToolsGui
             // 
             // _panelPort
             // 
+            this._panelPort.Controls.Add(this.btnAlignLabel2);
             this._panelPort.Controls.Add(this.btnAlignLabel);
             this._panelPort.Controls.Add(this.btnRotateLabel);
             this._panelPort.Controls.Add(this.label1);

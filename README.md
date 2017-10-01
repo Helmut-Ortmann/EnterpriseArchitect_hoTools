@@ -120,6 +120,10 @@ Some features:
 # Releases
 ### Release 3.1.8
 - Output Repository information
+- Port handling optimized
+-- Default port position 1+2
+-- Round robin ports around parend classifier
+-- cofigurable with settings.json
 
 ## Release 3.1.7
 -  WIX Setup names the *.msi file according to ProductVersion in Product.wxs 

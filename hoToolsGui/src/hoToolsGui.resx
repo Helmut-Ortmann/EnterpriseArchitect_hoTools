@@ -673,7 +673,13 @@ hoTools starts the application which is associated to "*.sql".</value>
     <value>&lt;</value>
   </data>
   <data name="_btnLeft.ToolTip" xml:space="preserve">
-    <value>Move selected Ports left (also round the corner)</value>
+    <value>Move selected Ports left (also round the corner)
+
+Works for
+- Port
+- Required/Provided Interface
+
+You have to select the right one (Port and/oder Interface)</value>
   </data>
   <data name="&gt;&gt;_btnLeft.Name" xml:space="preserve">
     <value>_btnLeft</value>
@@ -685,7 +691,7 @@ hoTools starts the application which is associated to "*.sql".</value>
     <value>_panelPort</value>
   </data>
   <data name="&gt;&gt;_btnLeft.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="_btnUp.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -703,7 +709,13 @@ hoTools starts the application which is associated to "*.sql".</value>
     <value>/\</value>
   </data>
   <data name="_btnUp.ToolTip" xml:space="preserve">
-    <value>Move selected Ports up (also round the corner)</value>
+    <value>Move selected Ports up (also round the corner)
+
+Works for
+- Port
+- Required/Provided Interface
+
+You have to select the right one (Port and/oder Interface)</value>
   </data>
   <data name="&gt;&gt;_btnUp.Name" xml:space="preserve">
     <value>_btnUp</value>
@@ -715,7 +727,7 @@ hoTools starts the application which is associated to "*.sql".</value>
     <value>_panelPort</value>
   </data>
   <data name="&gt;&gt;_btnUp.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="_btnRight.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 12pt</value>
@@ -736,7 +748,13 @@ hoTools starts the application which is associated to "*.sql".</value>
     <value>&gt;</value>
   </data>
   <data name="_btnRight.ToolTip" xml:space="preserve">
-    <value>Move selected Portsright (also round the corner)</value>
+    <value>Move selected Portsright (also round the corner)
+
+Works for
+- Port
+- Required/Provided Interface
+
+You have to select the right one (Port and/oder Interface)</value>
   </data>
   <data name="&gt;&gt;_btnRight.Name" xml:space="preserve">
     <value>_btnRight</value>
@@ -748,7 +766,7 @@ hoTools starts the application which is associated to "*.sql".</value>
     <value>_panelPort</value>
   </data>
   <data name="&gt;&gt;_btnRight.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="_btnDown.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -766,7 +784,13 @@ hoTools starts the application which is associated to "*.sql".</value>
     <value>\/</value>
   </data>
   <data name="_btnDown.ToolTip" xml:space="preserve">
-    <value>Move selected Ports down (also round the corner)</value>
+    <value>Move selected Ports down (also round the corner)
+
+Works for
+- Port
+- Required/Provided Interface
+
+You have to select the right one (Port and/oder Interface)</value>
   </data>
   <data name="&gt;&gt;_btnDown.Name" xml:space="preserve">
     <value>_btnDown</value>
@@ -778,7 +802,7 @@ hoTools starts the application which is associated to "*.sql".</value>
     <value>_panelPort</value>
   </data>
   <data name="&gt;&gt;_btnDown.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="_btnLabelLeft.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 9.75pt</value>
@@ -790,10 +814,10 @@ hoTools starts the application which is associated to "*.sql".</value>
     <value>NoControl</value>
   </data>
   <data name="_btnLabelLeft.Location" type="System.Drawing.Point, System.Drawing">
-    <value>164, 3</value>
+    <value>157, 3</value>
   </data>
   <data name="_btnLabelLeft.Size" type="System.Drawing.Size, System.Drawing">
-    <value>42, 23</value>
+    <value>35, 23</value>
   </data>
   <data name="_btnLabelLeft.TabIndex" type="System.Int32, mscorlib">
     <value>36</value>
@@ -825,7 +849,7 @@ Select:
     <value>_panelPort</value>
   </data>
   <data name="&gt;&gt;_btnLabelLeft.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>11</value>
   </data>
   <data name="_btnLabelRight.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 9.75pt</value>
@@ -834,10 +858,10 @@ Select:
     <value>NoControl</value>
   </data>
   <data name="_btnLabelRight.Location" type="System.Drawing.Point, System.Drawing">
-    <value>212, 3</value>
+    <value>197, 2</value>
   </data>
   <data name="_btnLabelRight.Size" type="System.Drawing.Size, System.Drawing">
-    <value>42, 23</value>
+    <value>35, 23</value>
   </data>
   <data name="_btnLabelRight.TabIndex" type="System.Int32, mscorlib">
     <value>37</value>
@@ -869,7 +893,7 @@ Select:
     <value>_panelPort</value>
   </data>
   <data name="&gt;&gt;_btnLabelRight.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>12</value>
   </data>
   <data name="_btnAddConstraint.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -2264,7 +2288,7 @@ hoTools supports:
     <value>_panelPort</value>
   </data>
   <data name="&gt;&gt;_lblPorts.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="btnRotateLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>268, 3</value>
@@ -2291,16 +2315,16 @@ hoTools supports:
     <value>_panelPort</value>
   </data>
   <data name="&gt;&gt;btnRotateLabel.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="btnAlignLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="btnAlignLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>267, 24</value>
+    <value>233, 24</value>
   </data>
   <data name="btnAlignLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>32, 23</value>
+    <value>33, 23</value>
   </data>
   <data name="btnAlignLabel.TabIndex" type="System.Int32, mscorlib">
     <value>39</value>
@@ -2309,13 +2333,21 @@ hoTools supports:
     <value>AL</value>
   </data>
   <data name="btnAlignLabel.ToolTip" xml:space="preserve">
-    <value>Align Lable default
+    <value>Align Lable default 1
 Align label text of selected embedded element according to edge of its owning element.
 
 Left         (text right, no rotation)
 Right      (text right, no rotation)
 Top        (text above, clockwise)
-Bottom  (text above, clockwise)</value>
+Bottom  (text above, clockwise)
+
+The settings.json contains two default settings. I usually use:
+- one for label inside parent classifier
+- one for label outside parent classifier
+
+Each set consists of values for:
+- Port and
+- Required, Provided Interfaces</value>
   </data>
   <data name="&gt;&gt;btnAlignLabel.Name" xml:space="preserve">
     <value>btnAlignLabel</value>
@@ -2327,11 +2359,8 @@ Bottom  (text above, clockwise)</value>
     <value>_panelPort</value>
   </data>
   <data name="&gt;&gt;btnAlignLabel.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
-  <metadata name="_toolTipRtfListOfSearches.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>154, 17</value>
-  </metadata>
   <data name="_btnLabelDown.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 9.75pt</value>
   </data>
@@ -2339,10 +2368,10 @@ Bottom  (text above, clockwise)</value>
     <value>NoControl</value>
   </data>
   <data name="_btnLabelDown.Location" type="System.Drawing.Point, System.Drawing">
-    <value>210, 24</value>
+    <value>198, 24</value>
   </data>
   <data name="_btnLabelDown.Size" type="System.Drawing.Size, System.Drawing">
-    <value>42, 23</value>
+    <value>35, 23</value>
   </data>
   <data name="_btnLabelDown.TabIndex" type="System.Int32, mscorlib">
     <value>37</value>
@@ -2362,7 +2391,8 @@ Select:
 - Parameter(s)
 - Pins(s)
 - Required Interface
-- Provided Interface</value>
+- Provided Interface
+</value>
   </data>
   <data name="&gt;&gt;_btnLabelDown.Name" xml:space="preserve">
     <value>_btnLabelDown</value>
@@ -2374,7 +2404,7 @@ Select:
     <value>_panelPort</value>
   </data>
   <data name="&gt;&gt;_btnLabelDown.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>10</value>
   </data>
   <data name="_btnLabelUp.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 9.75pt</value>
@@ -2386,10 +2416,10 @@ Select:
     <value>NoControl</value>
   </data>
   <data name="_btnLabelUp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>163, 24</value>
+    <value>156, 24</value>
   </data>
   <data name="_btnLabelUp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>43, 23</value>
+    <value>35, 23</value>
   </data>
   <data name="_btnLabelUp.TabIndex" type="System.Int32, mscorlib">
     <value>36</value>
@@ -2409,7 +2439,8 @@ Select:
 - Parameter(s)
 - Pins(s)
 - Required Interface
-- Provided Interface</value>
+- Provided Interface
+</value>
   </data>
   <data name="&gt;&gt;_btnLabelUp.Name" xml:space="preserve">
     <value>_btnLabelUp</value>
@@ -2421,8 +2452,56 @@ Select:
     <value>_panelPort</value>
   </data>
   <data name="&gt;&gt;_btnLabelUp.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
+  <data name="btnAlignLabel2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="btnAlignLabel2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>267, 24</value>
+  </data>
+  <data name="btnAlignLabel2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>34, 23</value>
+  </data>
+  <data name="btnAlignLabel2.TabIndex" type="System.Int32, mscorlib">
+    <value>39</value>
+  </data>
+  <data name="btnAlignLabel2.Text" xml:space="preserve">
+    <value>AL2</value>
+  </data>
+  <data name="btnAlignLabel2.ToolTip" xml:space="preserve">
+    <value>Align Lable default 2
+Align label text of selected embedded element according to edge of its owning element.
+
+Left         (text right, no rotation)
+Right      (text right, no rotation)
+Top        (text above, clockwise)
+Bottom  (text above, clockwise)
+
+The settings.json contains two default settings. I usually use:
+- one for label inside parent classifier
+- one for label outside parent classifier
+
+Each set consists of values for:
+- Port and
+- Required, Provided Interfaces
+</value>
+  </data>
+  <data name="&gt;&gt;btnAlignLabel2.Name" xml:space="preserve">
+    <value>btnAlignLabel2</value>
+  </data>
+  <data name="&gt;&gt;btnAlignLabel2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnAlignLabel2.Parent" xml:space="preserve">
+    <value>_panelPort</value>
+  </data>
+  <data name="&gt;&gt;btnAlignLabel2.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <metadata name="_toolTipRtfListOfSearches.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>154, 17</value>
+  </metadata>
   <data name="_rtfListOfSearches.Font" type="System.Drawing.Font, System.Drawing">
     <value>Courier New, 8.25pt</value>
   </data>
@@ -2494,7 +2573,7 @@ hoTools searches queries in the following sequence:
     <value>_panelPort</value>
   </data>
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="_panelPort.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>

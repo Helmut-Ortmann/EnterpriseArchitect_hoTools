@@ -61,7 +61,7 @@ namespace hoTools.EAServicesPort
                 _portAlignmentItems = new List<PortAlignmentItem>();
                 _portAlignmentItems.Add(new PortAlignmentItem("Port",  
                     "-80","0","0","0",    
-                    "50", "0", "0", "0",   
+                    "20", "0", "0", "0",   
                     "0", "-90", "0", "1",
                     "0", "50", "0", "1"
                     ));
@@ -70,6 +70,18 @@ namespace hoTools.EAServicesPort
                     "50", "0", "0", "0",
                     "0", "-80", "0", "1",
                     "0", "70", "0", "1"
+                ));
+                _portAlignmentItems.Add(new PortAlignmentItem("Port1",
+                    "25", "0", "0", "0",
+                    "-140", "0", "0", "0",
+                    "0", "30", "0", "1",
+                    "0", "-105", "0", "1"
+                ));
+                _portAlignmentItems.Add(new PortAlignmentItem("Interface1",
+                    "60", "0", "0", "0",
+                    "-100", "0", "0", "0",
+                    "0", "65", "0", "1",
+                    "0", "-120", "0", "1"
                 ));
             }
 
@@ -262,9 +274,10 @@ namespace hoTools.EAServicesPort
             IsPortResizable = 256, // PortResizable=1;
             IsNotPortResizable = 512, // PortResizable=0;
             RotateLabel = 1024,     // Rotate Label
-            AllignLable = 2048,  // Allign Label to default settings
+            AlignLabel1 = 2048,  // Align Label to default settings 1
             PositionUpPlus = 4096, // Label position up
-            PositionDownPlus = 9128 // Label position down
+            PositionDownPlus = 9128, // Label position down
+            AlignLabel2 = 18356       // Align Label 2 (default set 2)
         }
 
         /// <summary>
@@ -449,59 +462,36 @@ namespace hoTools.EAServicesPort
                     break;
 
                 // Align Label to default position
-                case LabelStyle.AllignLable:
+                case LabelStyle.AlignLabel1:
                     var edge = portObj.Edge(_rep);
                     if (el.Type.Contains("Interface"))
-                    {   // Required / Provided Interface
+                    {
+                        // Required / Provided Interface
                         PortAlignmentItem settingsInterface = _portAlignmentItems.Find(x => x.Type == "Interface");
-                        switch (edge)
-                        {
-                            case EaExtensionClass.EmbeddedPosition.top:
-                                //ChangeDiagramObjectLabel(portObj, x: "0", y: "-80", rotation: "1");
-                                ChangeDiagramObjectLabel(portObj, x: settingsInterface.XTop, y: settingsInterface.YTop, rotation: settingsInterface.RotationTop);
-                                break;
-                            case EaExtensionClass.EmbeddedPosition.bottom:
-                                //ChangeDiagramObjectLabel(portObj, x: "0", y: "70", rotation: "1");
-                                ChangeDiagramObjectLabel(portObj, x: settingsInterface.XBottom, y: settingsInterface.YBottom, rotation: settingsInterface.RotationBottom);
-                                break;
-
-                            case EaExtensionClass.EmbeddedPosition.right:
-                                ChangeDiagramObjectLabel(portObj, x: settingsInterface.XRight, y: settingsInterface.XRight, rotation: settingsInterface.RotationRight);
-                                //ChangeDiagramObjectLabel(portObj, x: "50", y: "0", rotation: "0");
-                                break;
-                            case EaExtensionClass.EmbeddedPosition.left:
-                                ChangeDiagramObjectLabel(portObj, x: settingsInterface.XLeft, y: settingsInterface.YLeft, rotation: settingsInterface.RotationLeft);
-                                //ChangeDiagramObjectLabel(portObj, x: "-80", y: "0", rotation: "0");
-                                break;
-                        }
+                        AlignLabel(portObj, edge, settingsInterface);
                     }
                     else
                     {   // Ports, Pins,..
                         PortAlignmentItem settingsPort = _portAlignmentItems.Find(x => x.Type == "Port");
-                        switch (edge)
-                        {
-                            case EaExtensionClass.EmbeddedPosition.top:
-                                ChangeDiagramObjectLabel(portObj, x: settingsPort.XTop, y: settingsPort.YTop, rotation: settingsPort.RotationTop);
-                                //ChangeDiagramObjectLabel(portObj, x: "0", y: "-90", rotation: "1");
-
-                                break;
-                            case EaExtensionClass.EmbeddedPosition.bottom:
-                                ChangeDiagramObjectLabel(portObj, x: settingsPort.XBottom, y: settingsPort.YBottom, rotation: settingsPort.RotationBottom);
-                                //ChangeDiagramObjectLabel(portObj, x: "0", y: "50", rotation: "1");
-                                break;
-
-                            case EaExtensionClass.EmbeddedPosition.right:
-                                ChangeDiagramObjectLabel(portObj, x: settingsPort.XRight, y: settingsPort.YRight, rotation: settingsPort.RotationRight);
-                                //ChangeDiagramObjectLabel(portObj, x: "50", y: "0", rotation: "0");
-                                break;
-                            case EaExtensionClass.EmbeddedPosition.left:
-                                ChangeDiagramObjectLabel(portObj, x: settingsPort.XLeft, y: settingsPort.YLeft, rotation: settingsPort.RotationLeft);
-                                //ChangeDiagramObjectLabel(portObj, x: "-80", y: "0", rotation: "0");
-                                break;
-                        }
+                        AlignLabel(portObj, edge, settingsPort);
+                        
                     }
+                    break;
+                // Align Label to default position 2
+                case LabelStyle.AlignLabel2:
+                    edge = portObj.Edge(_rep);
+                    if (el.Type.Contains("Interface"))
+                    {
+                        // Required / Provided Interface
+                        PortAlignmentItem settingsInterface = _portAlignmentItems.Find(x => x.Type == "Interface1");
+                        AlignLabel(portObj, edge, settingsInterface);
+                    }
+                    else
+                    {   // Ports, Pins,..
+                        PortAlignmentItem settingsPort = _portAlignmentItems.Find(x => x.Type == "Port1");
+                        AlignLabel(portObj, edge, settingsPort);
 
-
+                    }
                     break;
             }
 
@@ -510,6 +500,36 @@ namespace hoTools.EAServicesPort
             //else style = style.Replace("HDN=1", "HDN=0");
             //portObj.Style = style;
         }
+        /// <summary>
+        /// Align Label
+        /// </summary>
+        /// <param name="portObj"></param>
+        /// <param name="edge"></param>
+        /// <param name="settingsInterface"></param>
+        private void AlignLabel(DiagramObject portObj, EaExtensionClass.EmbeddedPosition edge, PortAlignmentItem settingsInterface)
+        {
+            switch (edge)
+            {
+                case EaExtensionClass.EmbeddedPosition.top:
+                    ChangeDiagramObjectLabel(portObj, x: settingsInterface.XTop, y: settingsInterface.YTop,
+                        rotation: settingsInterface.RotationTop);
+                    break;
+                case EaExtensionClass.EmbeddedPosition.bottom:
+                    ChangeDiagramObjectLabel(portObj, x: settingsInterface.XBottom, y: settingsInterface.YBottom,
+                        rotation: settingsInterface.RotationBottom);
+                    break;
+
+                case EaExtensionClass.EmbeddedPosition.right:
+                    ChangeDiagramObjectLabel(portObj, x: settingsInterface.XRight, y: settingsInterface.YRight,
+                        rotation: settingsInterface.RotationRight);
+                    break;
+                case EaExtensionClass.EmbeddedPosition.left:
+                    ChangeDiagramObjectLabel(portObj, x: settingsInterface.XLeft, y: settingsInterface.YLeft,
+                        rotation: settingsInterface.RotationLeft);
+                    break;
+            }
+        }
+
         #endregion
         /// <summary>
         /// Change Diagram Object Label (x, y, rotation)
