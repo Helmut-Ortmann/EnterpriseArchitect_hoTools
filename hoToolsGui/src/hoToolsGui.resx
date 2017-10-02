@@ -673,7 +673,7 @@ hoTools starts the application which is associated to "*.sql".</value>
     <value>&lt;</value>
   </data>
   <data name="_btnLeft.ToolTip" xml:space="preserve">
-    <value>Move selected Ports left (also round the corner)
+    <value>Move selected Ports left (also round the corner). You have to select at least 2 ports.
 
 Works for
 - Port
@@ -709,7 +709,7 @@ You have to select the right one (Port and/oder Interface)</value>
     <value>/\</value>
   </data>
   <data name="_btnUp.ToolTip" xml:space="preserve">
-    <value>Move selected Ports up (also round the corner)
+    <value>Move selected Ports up (also round the corner). You have to select at least 2 ports.
 
 Works for
 - Port
@@ -748,7 +748,7 @@ You have to select the right one (Port and/oder Interface)</value>
     <value>&gt;</value>
   </data>
   <data name="_btnRight.ToolTip" xml:space="preserve">
-    <value>Move selected Portsright (also round the corner)
+    <value>Move selected Portsright (also round the corner). You have to select at least 2 ports.
 
 Works for
 - Port
@@ -784,7 +784,7 @@ You have to select the right one (Port and/oder Interface)</value>
     <value>\/</value>
   </data>
   <data name="_btnDown.ToolTip" xml:space="preserve">
-    <value>Move selected Ports down (also round the corner)
+    <value>Move selected Ports down (also round the corner). You have to select at least 2 ports.
 
 Works for
 - Port

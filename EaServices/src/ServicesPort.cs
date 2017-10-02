@@ -321,14 +321,15 @@ namespace hoTools.EAServicesPort
         /// <param name="embeddedCheckSub"></param>
         private void DoChangeLabelGui(EA.Repository rep, LabelStyle style, bool embeddedCheckSub = false)
         {
-            Diagram dia = _rep.GetCurrentDiagram();
+            EaDiagram eaDia = new EaDiagram(rep);
+            Diagram dia =eaDia.Dia;
             if (dia == null) return;
             _rep.SaveDiagram(dia.DiagramID);
 
             // target object/element
 
             // for each selected element
-            foreach (DiagramObject obj in dia.SelectedObjects)
+            foreach (DiagramObject obj in eaDia.SelObjects)
             {
                 var el = _rep.GetElementByID(obj.ElementID);
                 if (el.IsEmbeddedElement(rep, true))
@@ -370,6 +371,9 @@ namespace hoTools.EAServicesPort
                     }
                 }
             }
+            _rep.ReloadDiagram(dia.DiagramID);
+            eaDia.ReloadSelectedObjectsAndConnector();
+
         }
         #endregion
 
@@ -540,6 +544,10 @@ namespace hoTools.EAServicesPort
         /// <param name="rotation">0=none, 1=clockwise, -1 anti clockwise</param>
         private void ChangeDiagramObjectLabel(EA.DiagramObject obj, string x, string y, string rotation)
         {
+           // make one line (works for horizontal and vertical)
+           ChangeDiagramObjectStyle(obj, @"CX=[\+\-0-9]*", $@"CX=100");
+           ChangeDiagramObjectStyle(obj, @"CY=[\+\-0-9]*", $@"CY=13");
+           
             ChangeDiagramObjectStyle(obj, @"OX=[\+\-0-9]*", $@"OX={x}");
             ChangeDiagramObjectStyle(obj, @"OY=[\+\-0-9]*", $@"OY={y}");
             ChangeDiagramObjectStyle(obj, "ROT=(0|-1|1)", $"ROT={rotation}");

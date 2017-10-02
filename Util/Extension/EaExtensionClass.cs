@@ -65,16 +65,19 @@ namespace hoTools.Utils.Extension
         }
 
         /// <summary>
-        /// Return true if Element is an Embedded Element Type
+        /// Return true if Element is an Embedded Element Type. With the parameter 
+        /// 'alsoEmbeddedInterfaces' you can decide whether to use Required/Provide -Interface as embedded element
         /// - Port
         /// - Activity Parameter
         /// - Parameter
         /// - ExpansionNode
         /// - Pin
+        /// - RequiredInterface Only if alsoEmbeddedInterfaces=true
+        /// - ProvidedInterface Only if alsoEmbeddedInterfaces=true
         /// </summary>
         /// <param name="el"></param>
         /// <param name="rep"></param>
-        /// <param name="alsoEmbeddedInterfaces"></param>
+        /// <param name="alsoEmbeddedInterfaces">Handle Provided, Required Interface as Embedded</param>
         /// <returns>EA Version</returns>
         // ReSharper disable once UnusedMember.Global
         public static bool IsEmbeddedElement(this EA.Element el, Repository rep, bool alsoEmbeddedInterfaces=false)
@@ -105,7 +108,7 @@ namespace hoTools.Utils.Extension
             }
         }
         /// <summary>
-        /// Get parent of an Embedded Element which isn't an embedded element. Returns null if not found
+        /// Get parent Element of an Embedded Element which isn't an embedded element. Returns null if not found
         /// </summary>
         /// <param name="el"></param>
         /// <param name="rep"></param>
@@ -128,6 +131,21 @@ namespace hoTools.Utils.Extension
 
 
         }
+        /// <summary>
+        /// Get parent DiagramObject from DiagramObject
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <param name="rep"></param>
+        /// <param name="dia"></param>
+        /// <returns></returns>
+        public static EA.DiagramObject GetParentOfEmbedded(this EA.DiagramObject obj, EA.Repository rep, EA.Diagram dia)
+        {
+            EA.Element elParent = rep.GetElementByID(obj.ElementID).GetParentOfEmbedded(rep);
+            return dia.GetDiagramObjectByID(elParent.ElementID, "");
+
+        }
+
+
         /// <summary>
         /// Returns the edge an embedded element is bound to (left, right, top, bottom)
         /// </summary>

@@ -46,11 +46,11 @@ namespace hoTools.Utils.EaCollections
         /// - Classifier
         /// - Port, Parameter, Pin
         /// - Packages
+        /// If it sorts for Ports, it ignores other element types.
         /// </summary>
         /// <returns></returns>
         public override bool SortAlphabetic()
         {
-
             var list = from item in _eaDia.SelObjects
                 let el = Rep.GetElementByID(item.ElementID)
                 select new {item.ElementID, el.Name, el.Type, item.left, item.right, item.top, item.bottom, item}
@@ -58,7 +58,15 @@ namespace hoTools.Utils.EaCollections
                 where temp.Type != "RequiredInterface" && temp.Type != "ProvidedInterface"
                 orderby temp.Name
                 select temp;
-            var llist = list.ToList();
+            var llist = list.ToList();  // run query
+            // sort only Port, Pin, Parameter
+            if (llist.Count(t => t.Type == "Port" || t.Type == "Pin" || t.Type == "Parameter") > 0)
+            {
+                llist = llist.Where(t => t.Type == "Port" || t.Type == "Pin" || t.Type == "Parameter").ToList();
+            }
+            // nothing to sort
+            if (llist.Count() < 2) return false;
+            
 
             // estimate the direction 
             bool isVertical =
@@ -113,25 +121,28 @@ namespace hoTools.Utils.EaCollections
         /// <returns></returns>
         public bool MoveLeft()
         {
+            EA.Repository rep = _eaDia.Rep;
+            EA.Diagram dia = _eaDia.Dia;
+            // order all embedded elements, only ports, pins,..
             var list = from item in _eaDia.SelObjects
                 let el = Rep.GetElementByID(item.ElementID)
                 select new {item.ElementID, el.Name, el, el.Type, item.left, item.right, item.top, item.bottom, item}
                 into temp
-                where temp.el.IsEmbeddedElement(_eaDia.Rep)
+                where temp.el.IsEmbeddedElement(rep)
                 orderby temp.left
                 select temp;
             var llist = list.ToList();
 
             if (llist.Count < 2) return false;
             // get parent element
-            EA.DiagramObject diaParentObj = _eaDia.Dia.GetDiagramObjectByID(llist[0].el.ParentID, "");
+            EA.DiagramObject diaParentObj = llist[0].item.GetParentOfEmbedded(rep, dia);
             int leftLimit = diaParentObj.left;
 
             // top alignment /  top bound
             int topLimit = diaParentObj.top - (llist.Count - 1) * (Distant2Element + 15);
             int direction = -1;
             // start bottom bound or bottom bound
-            if (_eaDia.SelObjects[0].top + 30 < diaParentObj.top)
+            if (llist[0].top + 30 < diaParentObj.top)
             {
                 // right alignment / right bound
                 topLimit = diaParentObj.bottom + (llist.Count - 1) * (Distant2Element + 15);
@@ -141,10 +152,9 @@ namespace hoTools.Utils.EaCollections
 
             // estimate the mode to shift 
             // isAccross: jump from right edge to left edge
-            // 
-            bool isAccross =
-                (Math.Abs(_eaDia.SelObjects[0].top - _eaDia.SelObjects[1].top)) >
-                (Math.Abs(_eaDia.SelObjects[0].left - _eaDia.SelObjects[1].left))
+           bool isAccross =
+                (Math.Abs(llist[0].top - llist[1].top)) >
+                (Math.Abs(llist[0].left - llist[1].left))
                     ? true
                     : false;
             if (isAccross)
@@ -198,25 +208,27 @@ namespace hoTools.Utils.EaCollections
         /// <returns></returns>
         public bool MoveRight()
         {
+            EA.Repository rep = _eaDia.Rep;
+            EA.Diagram dia = _eaDia.Dia;
             var list = from item in _eaDia.SelObjects
                 let el = Rep.GetElementByID(item.ElementID)
                 select new {item.ElementID, el.Name, el, el.Type, item.left, item.right, item.top, item.bottom, item}
                 into temp
-                where temp.el.IsEmbeddedElement(_eaDia.Rep)
+                where temp.el.IsEmbeddedElement(rep)
                 orderby temp.right descending
                 select temp;
             var llist = list.ToList();
 
             if (llist.Count < 2) return false;
             // get parent element
-            EA.DiagramObject diaParentObj = _eaDia.Dia.GetDiagramObjectByID(llist[0].el.ParentID, "");
+            EA.DiagramObject diaParentObj = llist[0].item.GetParentOfEmbedded(rep, dia);
             int rightLimit = diaParentObj.right;
 
             // top alignment /  top bound
             int topLimit = diaParentObj.top - (llist.Count - 1) * (Distant2Element + 15);
             int direction = -1;
             // start bottom bound or bottom bound
-            if (_eaDia.SelObjects[0].top + 30 < diaParentObj.top)
+            if (llist[0].top + 30 < diaParentObj.top)
             {
                 // right alignment / right bound
                 topLimit = diaParentObj.bottom + (llist.Count - 1) * (Distant2Element + 15);
@@ -227,8 +239,8 @@ namespace hoTools.Utils.EaCollections
             // estimate the mode to shift 
             // 
             bool isAccross =
-                (Math.Abs(_eaDia.SelObjects[0].top - _eaDia.SelObjects[1].top)) >
-                (Math.Abs(_eaDia.SelObjects[0].left - _eaDia.SelObjects[1].left))
+                (Math.Abs(llist[0].top - llist[1].top)) >
+                (Math.Abs(llist[0].left - llist[1].left))
                     ? true
                     : false;
             if (isAccross)
@@ -282,25 +294,27 @@ namespace hoTools.Utils.EaCollections
         /// <returns></returns>
         public bool MoveUp()
         {
+            EA.Repository rep = _eaDia.Rep;
+            EA.Diagram dia = _eaDia.Dia;
             var list = from item in _eaDia.SelObjects
                 let el = Rep.GetElementByID(item.ElementID)
                 select new {item.ElementID, el.Name, el, el.Type, item.left, item.right, item.top, item.bottom, item}
                 into temp
-                where temp.el.IsEmbeddedElement(_eaDia.Rep)
+                where temp.el.IsEmbeddedElement(rep)
                 orderby temp.top descending
                 select temp;
             var llist = list.ToList();
 
             if (llist.Count < 2) return false;
             // get parent element
-            EA.DiagramObject diaParentObj = _eaDia.Dia.GetDiagramObjectByID(llist[0].el.ParentID, "");
+            EA.DiagramObject diaParentObj = llist[0].item.GetParentOfEmbedded(rep, dia);
             int topLimit = diaParentObj.top;
 
             // left alignment /  left bound
             int leftLimit = diaParentObj.left + (llist.Count - 1) * (Distant2Element + 15);
             int direction = -1;
             // start left bound or right bound
-            if (_eaDia.SelObjects[0].left - 30 > diaParentObj.left)
+            if (llist[0].left - 30 > diaParentObj.left)
             {
                 // right alignment / right bound
                 leftLimit = diaParentObj.right - (llist.Count - 1) * (Distant2Element + 15);
@@ -311,8 +325,8 @@ namespace hoTools.Utils.EaCollections
             // estimate the mode to shift 
             // 
             bool isAccross =
-                (Math.Abs(_eaDia.SelObjects[0].top - _eaDia.SelObjects[1].top)) <
-                (Math.Abs(_eaDia.SelObjects[0].left - _eaDia.SelObjects[1].left))
+                (Math.Abs(llist[0].top - llist[1].top)) <
+                (Math.Abs(llist[0].left - llist[1].left))
                     ? true
                     : false;
             if (isAccross)
@@ -368,25 +382,27 @@ namespace hoTools.Utils.EaCollections
         /// <returns></returns>
         public bool MoveDown()
         {
+            EA.Repository rep = _eaDia.Rep;
+            EA.Diagram dia = _eaDia.Dia;
             var list = from item in _eaDia.SelObjects
                        let el = Rep.GetElementByID(item.ElementID)
                        select new { item.ElementID, el.Name, el, el.Type, item.left, item.right, item.top, item.bottom, item }
                           into temp
-                       where temp.el.IsEmbeddedElement(_eaDia.Rep)
+                       where temp.el.IsEmbeddedElement(rep)
                        orderby temp.bottom  
                        select temp;
             var llist = list.ToList();
 
             if (llist.Count < 2) return false;
             // get parent element
-            EA.DiagramObject diaParentObj = _eaDia.Dia.GetDiagramObjectByID(llist[0].el.ParentID, "");
+            EA.DiagramObject diaParentObj = llist[0].item.GetParentOfEmbedded(rep, dia);
             int bottomLimit = diaParentObj.bottom;
 
             // left alignment /  left bound
             int leftLimit = diaParentObj.left + (llist.Count - 1) * (Distant2Element + 15);
             int direction = -1;
             // start left bound or right bound
-            if (_eaDia.SelObjects[0].left - 30 > diaParentObj.left)
+            if (llist[0].left - 30 > diaParentObj.left)
             {
                 // right alignment / right bound
                 leftLimit = diaParentObj.right - (llist.Count - 1) * (Distant2Element + 15) ;
@@ -398,8 +414,8 @@ namespace hoTools.Utils.EaCollections
             // estimate the mode to shift 
             // 
             bool isAccross =
-                (Math.Abs(_eaDia.SelObjects[0].bottom - _eaDia.SelObjects[1].bottom)) <
-                (Math.Abs(_eaDia.SelObjects[0].left - _eaDia.SelObjects[1].left))
+                (Math.Abs(llist[0].bottom - llist[1].bottom)) <
+                (Math.Abs(llist[0].left - llist[1].left))
                     ? true
                     : false;
             if (isAccross)
