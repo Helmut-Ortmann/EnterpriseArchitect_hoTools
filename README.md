@@ -13,6 +13,9 @@ Addin with Tools for SPARX Enterprise Architect (EA)
 # Known issues
 - No
 
+# News
+- [Port, Move, Label, Rotate,..](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/Port)
+
 # Abstract
 Collection of useful tools (see also [WiKi](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/home)):
 
@@ -123,7 +126,8 @@ Some features:
 - Port handling optimized
 -- Default port position 1+2
 -- Round robin ports around parend classifier
--- cofigurable with settings.json
+-- Rotate Port Label
+-- Cofigurable with settings.json
 
 ## Release 3.1.7
 -  WIX Setup names the *.msi file according to ProductVersion in Product.wxs 

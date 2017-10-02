@@ -28,7 +28,7 @@
        see also: http://kentie.net/article/wixnameversion/index.htm
   -->
   <?define ProductVersion="3.1.8" ?> 
-  <?define UpgradeCode="3543ED18-28F6-484C-AD8C-FA1A3B72C911" ?>
+  <?define UpgradeCode="DA1E41B5-1035-4989-AF5E-5CB7F66D68CA" ?>
   <?define Manufacturer="hoModeler.de" ?>
   <?define ProductName="hoTools" ?>
 
