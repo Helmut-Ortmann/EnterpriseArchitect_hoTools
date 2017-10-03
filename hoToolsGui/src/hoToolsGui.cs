@@ -4208,9 +4208,11 @@ Please restart EA. During restart hoTools loads the default settings.",
             string eAEditionEx = Repository.EAEditionEx.ToString();
             int libraryVersion = Repository.LibraryVersion;
             bool isSecurityEnabled = Repository.IsSecurityEnabled;
+            string loginUser = "";
+            if (isSecurityEnabled) loginUser = Repository.GetCurrentLoginUser(false);
 
 
-            MessageBox.Show($@"
+                MessageBox.Show($@"
 Type                 = {type}
 Connection        = {connectionString}
 EAEdition         = {eaEdition}
@@ -4219,6 +4221,7 @@ ProjectGuid       = {projectGuid}
 InstanceGuid      = {instanceGuid}
 LibraryVersion    = {libraryVersion}
 IsSecurityEnabled = {isSecurityEnabled}
+User                  = {loginUser}
 
 Copy to clipboard with CTRL+C, ignore beep!!!!
 

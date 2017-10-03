@@ -121,6 +121,10 @@ Some features:
 
 
 # Releases
+
+### Release 3.1.9
+- Fixing error with Deployment
+-- hoTools (3.1.8) has to be installed manually
 ### Release 3.1.8
 - Output Repository information
 - Port handling optimized
