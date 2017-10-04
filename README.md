@@ -122,6 +122,10 @@ Some features:
 
 # Releases
 
+### Release 3.2
+
+- Fix some minor errors (locate type)
+
 ### Release 3.1.9
 - Fixing error with Deployment
 -- hoTools (3.1.8) has to be installed manually

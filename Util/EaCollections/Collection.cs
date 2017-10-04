@@ -70,8 +70,8 @@ namespace hoTools.Utils.EaCollections
 
             // estimate the direction 
             bool isVertical =
-                (Math.Abs(_eaDia.SelObjects[0].top - _eaDia.SelObjects[1].top)) >
-                (Math.Abs(_eaDia.SelObjects[0].left - _eaDia.SelObjects[1].left))
+                (Math.Abs(llist[0].top - llist[1].top)) >
+                (Math.Abs(llist[0].left - llist[1].left))
                     ? true
                     : false;
             if (isVertical)

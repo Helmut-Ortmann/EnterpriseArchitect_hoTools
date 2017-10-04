@@ -1156,7 +1156,8 @@ The feature: Create Activity for Operation creates everything.
   </data>
   <data name="_btnLocateType.ToolTip" xml:space="preserve">
     <value>Locates the Type of a selected item:
-- Type if object / instance / part
+- Type if object / instance / part / port
+- Interface if Provided or Required Interface
 - Type if Method
 - Trigger if selected on Statemachine
 - Signal if selected ????</value>

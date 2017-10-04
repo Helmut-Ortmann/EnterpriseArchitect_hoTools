@@ -3431,7 +3431,7 @@ from %APPDATA%Local\Apps\hoTools\
                         if (id > 0)
                         {
                             el = rep.GetElementByID(id);
-                            rep.ShowInProjectView(el);
+                            if (el != null) rep.ShowInProjectView(el);
                         }
                     }
                     break;
@@ -3443,14 +3443,17 @@ from %APPDATA%Local\Apps\hoTools\
                     if (id > 0)
                     {
                         el = rep.GetElementByID(attr.ClassifierID);
-                        if (el.Type.Equals("Package"))
+                        if (el != null)
                         {
-                            Package pkg = rep.GetPackageByID(Convert.ToInt32(el.MiscData[0]));
-                            rep.ShowInProjectView(pkg);
-                        }
-                        else
-                        {
-                            rep.ShowInProjectView(el);
+                            if (el.Type.Equals("Package"))
+                            {
+                                Package pkg = rep.GetPackageByID(Convert.ToInt32(el.MiscData[0]));
+                                if (pkg != null) rep.ShowInProjectView(pkg);
+                            }
+                            else
+                            {
+                                rep.ShowInProjectView(el);
+                            }
                         }
                     }
                     break;
@@ -3458,7 +3461,7 @@ from %APPDATA%Local\Apps\hoTools\
                 // Locate Diagram (e.g. from Search Window)
                 case ObjectType.otDiagram:
                     var d = (Diagram) rep.GetContextObject();
-                    rep.ShowInProjectView(d);
+                    if (d != null) rep.ShowInProjectView(d);
                     break;
 
 
@@ -3467,12 +3470,12 @@ from %APPDATA%Local\Apps\hoTools\
                     if (el.ClassfierID > 0)
                     {
                         el = rep.GetElementByID(el.ClassfierID);
-                        rep.ShowInProjectView(el);
+                        if (el != null) rep.ShowInProjectView(el);
                     }
                     else
                     {
                         //MiscData(0) PDATA1,PDATA2,
-                        // pdata1 Id for parts, UmlElement
+                        // pdata1 Id for parts, UmlElement, Port
                         // object_id   for text with Hyper link to diagram
 
                         // locate text or frame
@@ -3482,7 +3485,7 @@ from %APPDATA%Local\Apps\hoTools\
                         if (guid.EndsWith("}", StringComparison.Ordinal))
                         {
                             el = rep.GetElementByGuid(guid);
-                            rep.ShowInProjectView(el);
+                            if (el != null) rep.ShowInProjectView(el);
                         }
                         else
                         {
@@ -3498,7 +3501,7 @@ from %APPDATA%Local\Apps\hoTools\
                                             triggerGuid.EndsWith("}", StringComparison.Ordinal))
                                         {
                                             Element trigger = rep.GetElementByGuid(triggerGuid);
-                                            rep.ShowInProjectView(trigger);
+                                            if (trigger != null) rep.ShowInProjectView(trigger);
                                             break;
                                         }
                                     }
@@ -3511,13 +3514,13 @@ from %APPDATA%Local\Apps\hoTools\
                                 if (signalGuid.StartsWith("RefGUID={", StringComparison.Ordinal))
                                 {
                                     Element signal = rep.GetElementByGuid(signalGuid.Substring(8, 38));
-                                    rep.ShowInProjectView(signal);
+                                    if (signal != null) rep.ShowInProjectView(signal);
                                 }
                             }
 
                             if (el.Type.Equals("RequiredInterface") || el.Type.Equals("ProvidedInterface"))
                             {
-                                rep.ShowInProjectView(el);
+                                if (el != null) rep.ShowInProjectView(el);
                             }
                         }
                     }

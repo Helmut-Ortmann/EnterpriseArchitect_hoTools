@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Reflection;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
@@ -4211,8 +4212,7 @@ Please restart EA. During restart hoTools loads the default settings.",
             string loginUser = "";
             if (isSecurityEnabled) loginUser = Repository.GetCurrentLoginUser(false);
 
-
-                MessageBox.Show($@"
+            string properties = $@"
 Type                 = {type}
 Connection        = {connectionString}
 EAEdition         = {eaEdition}
@@ -4223,9 +4223,16 @@ LibraryVersion    = {libraryVersion}
 IsSecurityEnabled = {isSecurityEnabled}
 User                  = {loginUser}
 
-Copy to clipboard with CTRL+C, ignore beep!!!!
+Settings          = {Path.GetDirectoryName(AddinSettings.ConfigFilePath)}
+Installed         = {Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}
+SQL Path          = {_globalCfg.GetSqlPaths()}
+LINQ Path         = {_globalCfg.GetLinqPaths()}
 
-", "Repository Information");
+Information are Copied to Clipboard!
+";
+
+                Clipboard.SetText(properties);
+                MessageBox.Show(properties, "Repository Information");
         }
 
         
