@@ -217,6 +217,7 @@ namespace EAAddinFramework.Utils
             if (sqlFile != "")
                
             {
+                // ---------------------SQL Search----------------------------
                 string sqlString = _globalCfg.ReadSqlFile(searchName);
 
                 // run search

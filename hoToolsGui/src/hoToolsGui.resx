@@ -4561,6 +4561,6 @@ If you want to use LINQPad with EA you need:
     <value>HoToolsGui</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>hoTools.hoToolsGui.AddinGui, hoToolsGui, Version=3.1.9.0, Culture=neutral, PublicKeyToken=37ea3d95ffcb87e1</value>
+    <value>hoTools.hoToolsGui.AddinGui, hoToolsGui, Version=3.2.0.0, Culture=neutral, PublicKeyToken=37ea3d95ffcb87e1</value>
   </data>
 </root>

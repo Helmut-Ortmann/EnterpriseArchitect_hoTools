@@ -4568,11 +4568,11 @@ from %APPDATA%Local\Apps\hoTools\
 
         // update the types of operations
 
-        #region CreateActivityForOperation
+        #region UpdateOperationTypes
 
         [ServiceOperation("{AC0111AB-10AE-4FC6-92DE-CD58F610C4E6}",
-            "Update Activity Parameter from Operation, Class/Interface",
-            "Select Package, Class/Interface or operation", isTextRequired: false)]
+            "Update Operation type",
+            "Select Package, Class/Interface, Activity or operation", isTextRequired: false)]
         public static void UpdateOperationTypes(Repository rep)
         {
             ObjectType oType = rep.GetContextItemType();

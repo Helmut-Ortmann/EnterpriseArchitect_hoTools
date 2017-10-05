@@ -487,6 +487,7 @@ namespace hoTools.hoToolsGui
 
         void updateActivityFromOperationToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            EaService.UpdateActivityParameter(Repository);
             EaService.UpdateOperationTypes(Repository);
         }
 
