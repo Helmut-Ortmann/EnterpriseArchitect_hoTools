@@ -49,6 +49,8 @@ namespace hoTools.hoToolsGui
 
         Model _model;
 
+        private bool inTxtSearchName = false;
+
         // configuration as singleton
         readonly HoToolsGlobalCfg _globalCfg = HoToolsGlobalCfg.Instance;
 
@@ -1096,11 +1098,34 @@ namespace hoTools.hoToolsGui
             //RtfSearchNameProcessKeys(e);
 
         }
+        /// <summary>
+        /// Handle search input and search rtf list for string
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void _txtSearchName_KeyUp(object sender, KeyEventArgs e)
         {
             RtfSearchNameProcessKeys(e);
         }
 
+        /// <summary>
+        /// Handle keys in forms
+        /// - Tab = process auto complete
+        /// </summary>
+        /// <param name="msg"></param>
+        /// <param name="keyData"></param>
+        /// <returns></returns>
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (! inTxtSearchName && _txtSearchName.Text.Length > 2) base.ProcessCmdKey(ref msg, keyData);
+            if (keyData == Keys.Tab || (keyData & Keys.Modifiers) == Keys.Alt)
+            {
+                ProcessAutoComplete();
+                return true;
+
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
         /// <summary>
         /// Process Keys for Textbox Search Name:
         /// <para />
@@ -1111,42 +1136,59 @@ namespace hoTools.hoToolsGui
         /// <param name="e"></param>
         private void RtfSearchNameProcessKeys(KeyEventArgs e)
         {
-            switch (e.KeyCode)
+            if (e.KeyCode == Keys.Space && e.Modifiers == Keys.Alt)
             {
-                // run the SQL
-                case Keys.Enter:
-                    _model.SearchRun(GetSearchName(), GetSearchTerm() );
-                    _rtfListOfSearches.Visible = false;
-                    e.Handled = true;
-                    break;
+                ProcessAutoComplete();
+            }
+            else
+            {
 
-                // Show matching sort of searches according to entered string
-                case Keys.Up:
-                case Keys.Down:
-                case Keys.Space:
-                    if (_txtSearchName.Text.Trim() == "")
-                    {
-                        // Reset sort order of Searches
-                        Search.ResetSort();
-                        _rtfListOfSearches.Text = Search.GetRtf();
-                    }
-                    else
-                    {
-                        _rtfListOfSearches.Clear();
-                        Search.CalulateAndSort(_txtSearchName.Text.Trim());
-                        ColorCharacters(_rtfListOfSearches, Search.GetRtf(), _txtSearchName.Text, Color.Yellow);
-                    }
+                switch (e.KeyCode)
+                {
+                    // run the SQL
+                    case Keys.Enter:
+                        _model.SearchRun(GetSearchName(), GetSearchTerm());
+                        _rtfListOfSearches.Visible = false;
+                        e.Handled = true;
+                        break;
 
-                    _rtfListOfSearches.BringToFront();
-                    _rtfListOfSearches.Visible = true;
-                    e.Handled = true;
-                    break;
-                case Keys.Escape:
-                case Keys.Back:
-                    _rtfListOfSearches.Visible = false;
-                    break;
+                    // Show matching sort of searches according to entered string
+                    //if (e.Modifiers == Keys.Shift && e.KeyCode == Keys.Up)
+                    case Keys.Tab:
+                    case Keys.Up:
+                    case Keys.Down:
+                    case Keys.Space:
+                        ProcessAutoComplete();
+                        e.Handled = true;
+                        break;
+                    case Keys.Escape:
+                    case Keys.Back:
+                        _rtfListOfSearches.Visible = false;
+                        break;
+                }
             }
         }
+
+        private void ProcessAutoComplete()
+        {
+            if (_txtSearchName.Text.Trim() == "")
+            {
+                // Reset sort order of Searches
+                Search.ResetSort();
+                _rtfListOfSearches.Text = Search.GetRtf();
+            }
+            else
+            {
+                _rtfListOfSearches.Clear();
+                Search.CalulateAndSort(_txtSearchName.Text.Trim());
+                ColorCharacters(_rtfListOfSearches, Search.GetRtf(), _txtSearchName.Text, Color.Yellow);
+            }
+
+            _rtfListOfSearches.BringToFront();
+            _rtfListOfSearches.Visible = true;
+           
+        }
+
         /// <summary>
         /// Color find the found search string in rtf textbox. The string has to exactly match.
         /// </summary>
@@ -3454,10 +3496,12 @@ namespace hoTools.hoToolsGui
             _txtSearchName.ForeColor = SystemColors.WindowText;
             if (_txtSearchName.Text.Equals("<Search Name>")) _txtSearchName.Text = "";
             //IntializeSearches();
+            inTxtSearchName = true;
             _rtfListOfSearches.Visible = false;
         }
         private void _txtSearchText_Leave(object sender, EventArgs e)
         {
+            inTxtSearchName = false;
             _txtSearchText.ForeColor = SystemColors.WindowText;
             if (_txtSearchText.Text.Trim().Equals(""))
             {
@@ -3468,10 +3512,12 @@ namespace hoTools.hoToolsGui
         }
         private void _txtSearchText_MouseLeave(object sender, EventArgs e)
         {
-           _rtfListOfSearches.Visible = false;
+            inTxtSearchName = false;
+            _rtfListOfSearches.Visible = false;
         }
         private void _txtSearchText_Enter(object sender, EventArgs e)
         {
+            inTxtSearchName = false;
             _txtSearchText.ForeColor = SystemColors.WindowText;
             if (_txtSearchText.Text.Contains("<Search Term>")) _txtSearchText.Text = "";
             _rtfListOfSearches.Visible = false;

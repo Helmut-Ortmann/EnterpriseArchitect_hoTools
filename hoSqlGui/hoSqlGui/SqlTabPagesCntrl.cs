@@ -1423,10 +1423,12 @@ Useful to quickly test:
                 }
 
 
-            }
+            }                
+            // get initial sql directory
+            
             OpenFileDialog openFileDialog = new OpenFileDialog
-            {
-                InitialDirectory = @"c:\temp\sql",
+            {   
+                InitialDirectory = _globalCfg.GetInitialSqlPath(),
                 RestoreDirectory = true,
                 Filter = @"sql files (*.sql)|*.sql|All files (*.*)|*.*",
                 FilterIndex = 1

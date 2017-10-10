@@ -63,6 +63,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ComparePhraseEngine\Phrase.cs" />
+    <Compile Include="ComparePhraseEngine\Processor.cs" />
+    <Compile Include="ComparePhraseEngine\RankedItem.cs" />
     <Compile Include="DiceCoefficientExtensions.cs" />
     <Compile Include="DoubleMetaphoneExtensions.cs" />
     <Compile Include="LevenshteinDistanceExtensions.cs" />
@@ -74,8 +77,10 @@
     <EmbeddedResource Include="_license.txt" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="ComparePhraseEngine\Readme.md" />
     <None Include="hoKeyPair.snk" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

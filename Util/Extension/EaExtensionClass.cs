@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Xml.Linq;
 using EA;
+using JetBrains.Annotations;
 
 namespace hoTools.Utils.Extension
 {
@@ -18,7 +19,7 @@ namespace hoTools.Utils.Extension
         /// <param name="sql">SQL which select ea_guid</param>
         /// <returns>List of connectors</returns>
         // ReSharper disable once UnusedMember.Global
-        public static List<Connector> GetConnectorsBySql(this Repository rep, string sql)
+        public static List<Connector> GetConnectorsBySql(this Repository rep, [NotNull] string sql)
         {
 
             var lCon = new List<Connector>();
@@ -158,12 +159,12 @@ namespace hoTools.Utils.Extension
 
 
             EA.Element elParent = el.GetParentOfEmbedded(rep);
-            if (elParent == null) return  EmbeddedPosition.undefined;
+            if (elParent == null) return  EmbeddedPosition.Undefined;
             // for Required/Required Interface use the owning Port for the position
             if (el.Type == "ProvidedInterface" ||
                 el.Type == "RequiredInterface")
             {
-                if (el.ParentID == 0 ) return EmbeddedPosition.undefined;
+                if (el.ParentID == 0 ) return EmbeddedPosition.Undefined;
                 el = rep.GetElementByID(el.ParentID);
             }
 
@@ -171,18 +172,18 @@ namespace hoTools.Utils.Extension
                 EA.Diagram dia = rep.GetDiagramByID(obj.DiagramID);
             EA.DiagramObject objParent = dia.GetDiagramObjectByID(elParent.ElementID, "");
             EA.DiagramObject objFirstEmbedded = dia.GetDiagramObjectByID(el.ElementID, "");
-            if (objParent == null) return EmbeddedPosition.undefined;
+            if (objParent == null) return EmbeddedPosition.Undefined;
 
             int horicontalCenter = objFirstEmbedded.left + (objFirstEmbedded.right - objFirstEmbedded.left) / 2;
             int verticalCenter = objFirstEmbedded.top - (objFirstEmbedded.top - objFirstEmbedded.bottom ) / 2;
 
-            if (horicontalCenter < objParent.left + 10 && horicontalCenter > objParent.left -10 ) return EmbeddedPosition.left;
-            if (horicontalCenter < objParent.right + 10 && horicontalCenter > objParent.right - 10) return EmbeddedPosition.right;
+            if (horicontalCenter < objParent.left + 10 && horicontalCenter > objParent.left -10 ) return EmbeddedPosition.Left;
+            if (horicontalCenter < objParent.right + 10 && horicontalCenter > objParent.right - 10) return EmbeddedPosition.Right;
 
 
-            if (verticalCenter < objParent.top + 10 && verticalCenter > objParent.top - 10) return EmbeddedPosition.top;
-            if (verticalCenter < objParent.bottom + 10 && verticalCenter > objParent.bottom - 10) return EmbeddedPosition.bottom;
-            return EmbeddedPosition.undefined;
+            if (verticalCenter < objParent.top + 10 && verticalCenter > objParent.top - 10) return EmbeddedPosition.Top;
+            if (verticalCenter < objParent.bottom + 10 && verticalCenter > objParent.bottom - 10) return EmbeddedPosition.Bottom;
+            return EmbeddedPosition.Undefined;
 
         }
 
@@ -191,11 +192,11 @@ namespace hoTools.Utils.Extension
         /// </summary>
         public enum EmbeddedPosition
         {
-            left,
-            right,
-            top,
-            bottom,
-            undefined
+            Left,
+            Right,
+            Top,
+            Bottom,
+            Undefined
         }
     }
 }

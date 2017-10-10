@@ -124,7 +124,10 @@ Some features:
 
 ### Release 3.2
 
-- Fix some minor errors (locate type)
+- Fix some minor errors 
+-- locate type
+-- update Activity from operation)
+- Repository informations (Help, Show Repository Properties)
 
 ### Release 3.1.9
 - Fixing error with Deployment

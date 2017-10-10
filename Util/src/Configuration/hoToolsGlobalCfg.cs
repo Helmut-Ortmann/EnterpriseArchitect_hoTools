@@ -170,6 +170,15 @@ namespace hoTools.Utils.Configuration
             return _lSqlPaths.ToList();
         }
         /// <summary>
+        /// Get initial SQL path
+        /// </summary>
+        /// <returns></returns>
+        public string GetInitialSqlPath()
+        {
+            if (_lSqlPaths.Length == 0) return @"c:\temp\";
+            return _lSqlPaths[0];
+        }
+        /// <summary>
         ///  Set hoTools SQL path from Settings to search for SQL files. 
         /// </summary>
         /// <param name="paths"></param>

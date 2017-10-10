@@ -12,7 +12,8 @@ namespace hoTools.Utils.EaCollections
     public class EaCollection
     {
         protected readonly EA.Repository Rep;
-        public EaCollection(EA.Repository rep)
+
+        protected EaCollection(EA.Repository rep)
         {
             Rep = rep;
         }
@@ -47,6 +48,8 @@ namespace hoTools.Utils.EaCollections
         /// - Port, Parameter, Pin
         /// - Packages
         /// If it sorts for Ports, it ignores other element types.
+        /// 
+        /// Note: It doesn't sort for Required/Provided Interface
         /// </summary>
         /// <returns></returns>
         public override bool SortAlphabetic()
@@ -65,15 +68,13 @@ namespace hoTools.Utils.EaCollections
                 llist = llist.Where(t => t.Type == "Port" || t.Type == "Pin" || t.Type == "Parameter").ToList();
             }
             // nothing to sort
-            if (llist.Count() < 2) return false;
+            if (llist.Count < 2) return false;
             
 
             // estimate the direction 
             bool isVertical =
                 (Math.Abs(llist[0].top - llist[1].top)) >
-                (Math.Abs(llist[0].left - llist[1].left))
-                    ? true
-                    : false;
+                (Math.Abs(llist[0].left - llist[1].left));
             if (isVertical)
             {
                 // vertical
@@ -154,9 +155,7 @@ namespace hoTools.Utils.EaCollections
             // isAccross: jump from right edge to left edge
            bool isAccross =
                 (Math.Abs(llist[0].top - llist[1].top)) >
-                (Math.Abs(llist[0].left - llist[1].left))
-                    ? true
-                    : false;
+                (Math.Abs(llist[0].left - llist[1].left));
             if (isAccross)
             {
                 foreach (var el in llist)
@@ -240,9 +239,7 @@ namespace hoTools.Utils.EaCollections
             // 
             bool isAccross =
                 (Math.Abs(llist[0].top - llist[1].top)) >
-                (Math.Abs(llist[0].left - llist[1].left))
-                    ? true
-                    : false;
+                (Math.Abs(llist[0].left - llist[1].left));
             if (isAccross)
             {
                 foreach (var el in llist)
@@ -326,9 +323,7 @@ namespace hoTools.Utils.EaCollections
             // 
             bool isAccross =
                 (Math.Abs(llist[0].top - llist[1].top)) <
-                (Math.Abs(llist[0].left - llist[1].left))
-                    ? true
-                    : false;
+                (Math.Abs(llist[0].left - llist[1].left));
             if (isAccross)
             {
                 // jump to top left -> to right lined
@@ -415,9 +410,7 @@ namespace hoTools.Utils.EaCollections
             // 
             bool isAccross =
                 (Math.Abs(llist[0].bottom - llist[1].bottom)) <
-                (Math.Abs(llist[0].left - llist[1].left))
-                    ? true
-                    : false;
+                (Math.Abs(llist[0].left - llist[1].left));
             if (isAccross)
             {
                 // jump to bottom left -> to right lined

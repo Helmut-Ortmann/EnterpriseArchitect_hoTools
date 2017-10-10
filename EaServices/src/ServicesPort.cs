@@ -514,20 +514,20 @@ namespace hoTools.EAServicesPort
         {
             switch (edge)
             {
-                case EaExtensionClass.EmbeddedPosition.top:
+                case EaExtensionClass.EmbeddedPosition.Top:
                     ChangeDiagramObjectLabel(portObj, x: settingsInterface.XTop, y: settingsInterface.YTop,
                         rotation: settingsInterface.RotationTop);
                     break;
-                case EaExtensionClass.EmbeddedPosition.bottom:
+                case EaExtensionClass.EmbeddedPosition.Bottom:
                     ChangeDiagramObjectLabel(portObj, x: settingsInterface.XBottom, y: settingsInterface.YBottom,
                         rotation: settingsInterface.RotationBottom);
                     break;
 
-                case EaExtensionClass.EmbeddedPosition.right:
+                case EaExtensionClass.EmbeddedPosition.Right:
                     ChangeDiagramObjectLabel(portObj, x: settingsInterface.XRight, y: settingsInterface.YRight,
                         rotation: settingsInterface.RotationRight);
                     break;
-                case EaExtensionClass.EmbeddedPosition.left:
+                case EaExtensionClass.EmbeddedPosition.Left:
                     ChangeDiagramObjectLabel(portObj, x: settingsInterface.XLeft, y: settingsInterface.YLeft,
                         rotation: settingsInterface.RotationLeft);
                     break;
