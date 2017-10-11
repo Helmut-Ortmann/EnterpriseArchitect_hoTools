@@ -14,6 +14,7 @@ using Microsoft.Win32;
 using AddinFramework.Extension;
 
 using DuoVia.FuzzyStrings;
+using DuoVia.FuzzyStrings.ComparePhraseEngine;
 using Newtonsoft.Json;
 
 // ReSharper disable once CheckNamespace
@@ -93,20 +94,49 @@ namespace AddinFramework.Util
             return _staticSearchesSuggestions;
         }
 
+        public enum FuzzyAlgo
+        {
+            LongestCommonSubsequences,
+            PhraseSimilarity
+
+        }
+
         /// <summary>
         /// Calculate score, sort and visualize rtf field. Upper/Lower cases are not considered.
         /// </summary>
         /// <param name="searchPattern">The pattern the search was for</param>
-        public static void CalulateAndSort(string searchPattern)
+        /// <param name="fuzzyAlgo"></param>
+        public static void CalulateAndSort(string searchPattern, FuzzyAlgo fuzzyAlgo = FuzzyAlgo.PhraseSimilarity)
         {
-            searchPattern = searchPattern.ToLower();
 
-            foreach (SearchItem item in _staticAllSearches)
+            switch (fuzzyAlgo)
             {
-                item.Score = searchPattern.LongestCommonSubsequence(item.Name.ToLower()).Item2;
+                case FuzzyAlgo.LongestCommonSubsequences:
+                    searchPattern = searchPattern.ToLower();
+
+                    foreach (SearchItem item in _staticAllSearches)
+                    {
+                        item.Score = searchPattern.LongestCommonSubsequence(item.Name.ToLower()).Item2;
+                    }
+                    // sort list according to score of each line (score against pattern)
+                    _staticAllSearches = _staticAllSearches.OrderByDescending(a => a.Score).ToList();
+                    break;
+
+                case FuzzyAlgo.PhraseSimilarity:
+                    var processor = new Processor();
+
+
+                    foreach (SearchItem item in _staticAllSearches)
+                    {
+                        item.Score = processor.CalculateRank(item.Name, searchPattern);
+                    }
+                    // sort list according to score of each line (score against pattern)
+                    _staticAllSearches = _staticAllSearches.OrderByDescending(a => a.Score).ToList();
+                    //var auto completion = new Processor(_staticAllSearches);
+                    //var lst = autocompletion.Search(searchPattern);
+                    break;
             }
-           // sort list according to score of each line (score against pattern)
-            _staticAllSearches = _staticAllSearches.OrderByDescending(a => a.Score).ToList();
+            
 
         }
         /// <summary>

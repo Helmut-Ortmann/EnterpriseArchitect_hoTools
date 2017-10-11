@@ -127,6 +127,7 @@ Some features:
 - Fix some minor errors 
 -- locate type
 -- update Activity from operation)
+- Change Fuzzy Algorithm to find Search (EA+SQL)
 - Repository informations (Help, Show Repository Properties)
 
 ### Release 3.1.9

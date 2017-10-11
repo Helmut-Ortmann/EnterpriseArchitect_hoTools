@@ -1,7 +1,10 @@
-﻿using System;
+﻿using hoTools.Utils.Extension;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Text.RegularExpressions;
+
 
 namespace DuoVia.FuzzyStrings.ComparePhraseEngine
 {
@@ -19,7 +22,7 @@ namespace DuoVia.FuzzyStrings.ComparePhraseEngine
                 AddPossibleValue(possibleValue);
             }
         }
-
+       
 
         /// <summary>
         /// To add another PossibleValue into the internal storage.
@@ -48,6 +51,13 @@ namespace DuoVia.FuzzyStrings.ComparePhraseEngine
                 throw new ArgumentOutOfRangeException(string.Format("No PossibleValue {0} is found",
                         item));
             _queries.Remove(found);
+        }
+
+        public double CalculateRank(string hayString, string needleString)
+        {
+            var needlePhraseh = MakePhrase(needleString);
+            var hayPhrase = MakePhrase(hayString);
+            return CalcRank(hayPhrase.Words, needlePhraseh.Words);
         }
 
         /// <summary>
@@ -96,12 +106,13 @@ namespace DuoVia.FuzzyStrings.ComparePhraseEngine
         
 
         /// <summary>
-        /// Splits the input string on seperate words using a pre-defined separators list
+        /// Splits the input string on separate words using a pre-defined separators list
         /// </summary>
         /// <param name="text"></param>
         /// <returns></returns>
         private static Word[] SplitToWords(string text)
         {
+            text = text.SplitCamelCase();
             var tokens = text.Split(new[] {' ', '\t', '!', '.', ',', ';', '(', ')', '\\', '/', '+', '-', ':', '\'', '"', '[', ']',
                 '{', '}', '|', 
                 '?', '—' /*the Long Dash*/, '–'/*the Short Dash*/},
@@ -112,6 +123,7 @@ namespace DuoVia.FuzzyStrings.ComparePhraseEngine
 
             return ret;
         }
+        
 
         private static Phrase MakePhrase(string originalQueryStr)
         {
@@ -134,9 +146,9 @@ namespace DuoVia.FuzzyStrings.ComparePhraseEngine
         private static double CalcWordsSimilarityRank(Word left, Word right)
         {
             if (right.Canonical.Length > left.Canonical.Length)
-                return 0.0; // The mininal requirement is: the right word should be a prefix the left word
+                return 0.0; // The minimal requirement is: the right word should be a prefix the left word
             if (right.Canonical != left.Canonical.Substring(0, right.Canonical.Length)/*the Canonical string provides the case-insensitive comparison*/)
-                return 0.0; // The mininal requirement is: the right word should be a [case-insensitive] prefix of the left word
+                return 0.0; // The minimal requirement is: the right word should be a [case-insensitive] prefix of the left word
             #region "words length factor": the closer are their lengths, the more "similar" are the words
             var ret = (double)right.Canonical.Length / left.Canonical.Length;
             #endregion

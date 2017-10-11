@@ -80,7 +80,12 @@
     <None Include="ComparePhraseEngine\Readme.md" />
     <None Include="hoKeyPair.snk" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Util\Util.csproj">
+      <Project>{9376680E-9420-4FC1-8DE8-4311FCA18EFC}</Project>
+      <Name>Util</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

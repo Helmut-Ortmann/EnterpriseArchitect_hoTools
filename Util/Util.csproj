@@ -116,6 +116,7 @@
     <Compile Include="Diagram\DiagramStyleItem.cs" />
     <Compile Include="Diagram\DiagramGeneralStyleItem.cs" />
     <Compile Include="Extension\EaExtensionClass.cs" />
+    <Compile Include="Extension\StringExtension.cs" />
     <Compile Include="Json\JasonHelper.cs" />
     <Compile Include="Json\PortAlignment.cs" />
     <Compile Include="ODBC.cs" />
