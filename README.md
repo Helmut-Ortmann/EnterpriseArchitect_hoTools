@@ -129,6 +129,7 @@ Some features:
 -- update Activity from operation)
 - Change Fuzzy Algorithm to find Search (EA+SQL)
 - Repository informations (Help, Show Repository Properties)
+- About with path of dll's and settings'
 
 ### Release 3.1.9
 - Fixing error with Deployment

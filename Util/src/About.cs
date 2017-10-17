@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
+using JetBrains.Annotations;
 
 // ReSharper disable once CheckNamespace
 namespace hoTools.Utils.Abouts
@@ -15,10 +16,10 @@ namespace hoTools.Utils.Abouts
         /// <param name="description"></param>
         /// <param name="caption"></param>
         /// <param name="lDllNames"></param>
-        public static void AboutMessage(string description, string caption, string[] lDllNames)
+        /// <param name="pathSettings"></param>
+        public static void AboutMessage([NotNull] string description, [NotNull] string caption, string[] lDllNames, [NotNull] string pathSettings="No")
         {
-
-           
+        
 
             description = $@"{description}
 
@@ -61,6 +62,7 @@ Helmut.Ortmann@t-online.de
 {e}","Can't find file");
                 }
             }
+            description = $"{description}\r\n\r\nInstalled at:\t {pathRoot}\r\nSettings:\t\t{pathSettings}";
             MessageBox.Show(description, caption);
         }
     }

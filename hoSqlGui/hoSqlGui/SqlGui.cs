@@ -622,10 +622,10 @@ namespace hoTools.hoSqlGui
                     EaService.AboutVar1(Release, configFilePath);
                     break;
                 case AddinSettings.CustomerCfg.HoTools:
-                    EaService.About(Release, configFilePath);
+                    EaService.About(Release, configFilePath, AddinSettings.ConfigFolderPath);
                     break;
                 default:
-                    EaService.About(Release, configFilePath);
+                    EaService.About(Release, configFilePath, AddinSettings.ConfigFolderPath);
                     break;
             }
         }

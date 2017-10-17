@@ -94,7 +94,14 @@ namespace hoLinqToSql.LinqUtils
         {
 
             DataSet dataSet = new DataSet();
-            dataSet.ReadXml(new StringReader(XElement.Parse(sqlXml).Descendants("Data").FirstOrDefault().ToString()));
+            var xml = XElement.Parse(sqlXml).Descendants("Data")?.FirstOrDefault()?.ToString();
+            if (xml == null)
+            {
+                DataTable dt = new DataTable("Empty");
+                dt.Columns.Add("Empty");
+                return dt;
+            }
+            dataSet.ReadXml(new StringReader(xml));
             return dataSet.Tables[0];
         }
     }

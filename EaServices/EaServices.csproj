@@ -77,6 +77,9 @@
       <EmbedInteropTypes>False</EmbedInteropTypes>
       <Private>False</Private>
     </Reference>
+    <Reference Include="JetBrains.Annotations">
+      <HintPath>C:\Users\helmu_000\AppData\Local\JetBrains\Transient\ReSharperPlatformVs15\v09_dbdd44f3\ReSharperTutorials\Tutorials\T5\packages\JetBrains.Annotations.11.0.0\lib\net20\JetBrains.Annotations.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>

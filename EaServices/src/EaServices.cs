@@ -28,6 +28,7 @@ using hoTools.Utils.ODBC;
 using hoTools.Utils.EaCollections;
 using hoTools.Utils.Extension;
 using hoTools.Utils.VC;
+using JetBrains.Annotations;
 
 // ReSharper disable RedundantArgumentDefaultValue
 // ReSharper disable ArgumentsStyleLiteral
@@ -490,9 +491,7 @@ Second Element: Target of move connections and appearances", "Select two element
                         changeNote = true;
                         changeNoteItem = true;
                         break;
-                    // do nothing
-                    default:
-                        break;
+                    
                 }
                 // current item changed
                 if (changeNoteItem)
@@ -6242,7 +6241,8 @@ from %APPDATA%Local\Apps\hoTools\
         /// </summary>
         /// <param name="release"></param>
         /// <param name="configFilePath"></param>
-        public static void About(string release, string configFilePath)
+        /// <param name="settingsPath"></param>
+        public static void About(string release, [NotNull] string configFilePath, [NotNull] string settingsPath = "No")
         {
 
             string[] dllNames = new string[]
@@ -6272,7 +6272,7 @@ from %APPDATA%Local\Apps\hoTools\
                 //"sybdrvado20.dll"
                 };
 
-            hoTools.Utils.Abouts.About.AboutMessage("hoTools", "Keeps things simple", dllNames);
+            hoTools.Utils.Abouts.About.AboutMessage("hoTools", "Keeps things simple", dllNames, pathSettings: settingsPath);
 
 
 //            string installDir = Path.GetDirectoryName(Assembly.GetAssembly(typeof(EaService)).CodeBase);
