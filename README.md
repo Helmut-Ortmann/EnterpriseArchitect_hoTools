@@ -122,6 +122,8 @@ Some features:
 
 # Releases
 
+### Release 3.2.1
+
 ### Release 3.2
 
 - Fix some minor errors 

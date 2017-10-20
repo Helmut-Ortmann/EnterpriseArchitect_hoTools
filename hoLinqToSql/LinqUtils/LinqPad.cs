@@ -68,6 +68,7 @@ namespace hoLinqToSql.LinqUtils
         /// <summary>
         /// Initialize LinqPad with parameters
         /// </summary>
+        /// <param name="rep"></param>
         /// <param name="lprun"></param>
         /// <param name="targetDir"></param>
         /// <param name="format"></param>
@@ -113,7 +114,7 @@ namespace hoLinqToSql.LinqUtils
             // .DB-Name optional
             // get LinqPad connection name
             string cxName = "";
-            if (!(UseLinqPadConnections || noConnection == true || IsConnectionRequired(linqFile) == false))
+            if (!(UseLinqPadConnections || noConnection || IsConnectionRequired(linqFile) == false))
             {
                 _linqPadConnectionName = GetLinqPadName();
                 if (String.IsNullOrWhiteSpace(_linqPadConnectionName)) return false;
@@ -238,7 +239,6 @@ Error:
             string connectionString = LinqUtil.GetConnectionString(_rep, out provider);
             string server = "";
             string db = null;
-            string dataSource = null;
             // File based
             Regex rgx = new Regex("(Data Source|Server|DataBase|Catalog)=([^;]*)",RegexOptions.IgnoreCase);
             Match match = rgx.Match(connectionString);
@@ -272,7 +272,6 @@ Error:
                     DataBase = c.Element("Database")?.Value == null ? "" : $"{c.Element("Database")?.Value}",
                     DbVersion = c.Element("DbVersion")?.Value == null ? "" : $"(v.{c.Element("DbVersion").Value})"
                 }).FirstOrDefault();
-            string linqPadConnectionName = "";
             if (connection == null)
             {
                 MessageBox.Show($@"Do you have a valid LINQPad connection for your EA Model
@@ -287,7 +286,7 @@ Change File, Settings General to Use LINQPAd connection.
                     "Query needs a connection, can't determine LINQPad connection name.");
                 return "";
             }
-            linqPadConnectionName = $@"{connection.Provider} {connection.Server}\{connection.DataBase} {connection.DbVersion}";
+            var linqPadConnectionName = $@"{connection.Provider} {connection.Server}\{connection.DataBase} {connection.DbVersion}";
             // adapt string to special provider needs
             switch (connection.Provider)
             {
@@ -298,20 +297,7 @@ Change File, Settings General to Use LINQPAd connection.
                     break;
             }
             return linqPadConnectionName;
-
-
-
-
-
-
-            if (server == "" || db == "")
-            {
-                MessageBox.Show($"ConnectionString: '{connectionString}'\r\nServer:  '{server}'\r\n'{db}'", "Can't determine LINQPad connection from EA connection string");
-                return "";
-            }
-
-            return $"{server}.{db}";
-
+            
 
         }
         /// <summary>
@@ -395,14 +381,14 @@ Change File, Settings General to Use LINQPAd connection.
             }
             catch (Exception e)
             {
-                MessageBox.Show("hoTools only supports simple tables. It looks as if the table 't1' / hierarchy is to complex", "Can't decode HTML table!");
+                MessageBox.Show($"hoTools only supports simple tables. It looks as if the table 't1' / hierarchy is to complex\r\n\r\n{e}", 
+                    "Can't decode HTML table!");
                 return dt;
             }
 
             try
             {
                 //-----------------------------------------------
-                var node = nodeFirstTable.Elements("tr");
                 // Skip LINQPad Heading and filter not td child elements
                 var rows = nodeFirstTable.Elements("tr").Skip(1)
                     .Where(x => x.FirstChild.Name == "td")
@@ -427,7 +413,7 @@ Change File, Settings General to Use LINQPAd connection.
             }
             catch (Exception e)
             {
-                MessageBox.Show("hoTools only supports simple tables. hoToolls can't understand table 't1'", "Can't decode HTML table!");
+                MessageBox.Show($"hoTools only supports simple tables. hoToolls can't understand table 't1'\r\n\r\n{e}", "Can't decode HTML table!");
                 return dt;
             }
             return dt;
@@ -504,7 +490,7 @@ Change File, Settings General to Use LINQPAd connection.
         /// <returns></returns>
         public string GetArg(EA.Repository rep, string searchTerm)
         {
-            string arg = "";
+            string arg;
 
             //---------
             // 1. Context Element
@@ -567,7 +553,6 @@ Change File, Settings General to Use LINQPAd connection.
             // Tree Selected
             els = "";
             delimiter = "";
-            EA.Collection lel = rep.GetTreeSelectedElements();
             foreach (EA.Element el in rep.GetTreeSelectedElements())
             {
                 els = $"{els}{delimiter}{el.ElementID}";

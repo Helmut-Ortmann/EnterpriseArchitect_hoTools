@@ -114,6 +114,7 @@ namespace hoTools.Utils.SQL
         /// <para />
         /// '^' or '!' a shortcut for XOR
         /// </summary>
+        /// <param name="rep"></param>
         /// <param name="sqlQuery">the sql string to edit</param>
         /// <param name="repositoryType"></param>
         /// <returns>the same sql query, but with its wild cards replaced according to the required syntax</returns>
@@ -236,7 +237,7 @@ namespace hoTools.Utils.SQL
         {
 
             DataSet dataSet = new DataSet();
-            dataSet.ReadXml(new StringReader(XElement.Parse(sqlXml).Descendants("Data").FirstOrDefault().ToString()));
+            dataSet.ReadXml(new StringReader(XElement.Parse(sqlXml).Descendants("Data").FirstOrDefault()?.ToString()));
             return dataSet.Tables[0];
         }
 
@@ -293,8 +294,7 @@ namespace hoTools.Utils.SQL
         #region userHasPermission
         public Boolean UserHasPermission(string userGuid)
         {
-         bool result  =false;
-         string query = @"SELECT 'Group' As PermissionType " +
+            string query = @"SELECT 'Group' As PermissionType " +
                         @"from (t_secgrouppermission p inner join t_secusergroup grp on (p.GroupID = grp.GroupID)) " +
                         @"where grp.UserID = '" + userGuid + "' " +
                         @"UNION " +
@@ -304,7 +304,7 @@ namespace hoTools.Utils.SQL
             string str = _rep.SQLQuery(query);
             XElement xelement = XElement.Parse(str);
             // something found????
-            result = xelement.Descendants("Row").Any();
+            var result = xelement.Descendants("Row").Any();
             
             return result;
         }
@@ -312,7 +312,6 @@ namespace hoTools.Utils.SQL
         #region isConnectionAvailable
         public Boolean IsConnectionAvailable(EA.Element srcEl, EA.Element trgtEl)
         {
-            bool result = false;
             string sql = "SELECT Start_Object_ID  " +
                          " From t_connector " +
                          " where Start_Object_ID in ( {0},{1} ) AND " +
@@ -323,7 +322,7 @@ namespace hoTools.Utils.SQL
             string str = _rep.SQLQuery(query);
             XElement xelement = XElement.Parse(str);
             // something found????
-            result = xelement.Descendants("Row").Any();
+            var result = xelement.Descendants("Row").Any();
 
             return result;
         }
@@ -346,7 +345,6 @@ namespace hoTools.Utils.SQL
             }
             else {
                 // all used authors
-                query = @"select distinct Author As [User] from t_object order by 1";
                 query = @"select distinct Author As [User] from t_object order by 1";
             }
             string str = _rep.SQLQuery(query);
