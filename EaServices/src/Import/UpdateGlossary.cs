@@ -97,7 +97,7 @@ namespace hoTools.EaServices.Import
                 )
                 select new {termNew};
             // update EA Glossary
-            int updateCount = 0;
+            int insertCount = 0;
             foreach (var item in newTerms)
             {
                 EA.Term term = (EA.Term) rep.Terms.AddNew((string) item.termNew[col1NameTerm], "Term");
@@ -105,9 +105,10 @@ namespace hoTools.EaServices.Import
                 term.Term = (string) item.termNew[col1NameTerm];
                 term.Meaning = (string) item.termNew[col2NameMeaning];
                 term.Update();
+                insertCount += 1;
             }
             rep.Terms.Refresh();
-            return updateCount;
+            return insertCount;
         }
 
         /// <summary>
@@ -133,16 +134,16 @@ namespace hoTools.EaServices.Import
                 select new {itemNew = termNew, Index = termOld.Item4};
 
             // update EA Glossary
-            int appendCount = 0;
+            int updateCount = 0;
             foreach (var item in updateTerms)
             {
                 EA.Term term = (EA.Term) rep.Terms.GetAt(item.Index);
                 term.Meaning = (string) item.itemNew[col2NameMeaning];
                 term.Update();
-                appendCount += 1;
+                updateCount += 1;
             }
             rep.Terms.Refresh();
-            return appendCount;
+            return updateCount;
         }
 
         /// <summary>
