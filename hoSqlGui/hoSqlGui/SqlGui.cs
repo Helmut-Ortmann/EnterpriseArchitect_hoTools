@@ -18,7 +18,7 @@ using AddinFramework.Util;
 using AddinFramework.Util.Script;
 using EA;
 using hoTools.EaServices.WiKiRefs;
-using hoTools.Utils.Excel;
+using hoTools.Utils.EXCEL;
 
 namespace hoTools.hoSqlGui
 {

@@ -9,7 +9,7 @@ using System.Xml;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
 using hoTools.Utils.Configuration;
-using hoTools.Utils.Excel;
+using hoTools.Utils.EXCEL;
 using hoLinqToSql.LinqUtils;
 
 
