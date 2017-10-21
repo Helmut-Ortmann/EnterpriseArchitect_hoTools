@@ -5,18 +5,15 @@ using System.Linq;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.Xml;
-//using System.Xml.Linq;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
 using hoTools.Utils.Configuration;
-using hoTools.Utils.EXCEL;
+using hoTools.Utils.Export;
 using hoLinqToSql.LinqUtils;
 
 
 using hoTools.Utils.SQL;
 using System.IO;
-using hoTools.Utils;
-using Microsoft.Office.Interop.Excel;
 
 
 // ReSharper disable once CheckNamespace
@@ -268,7 +265,7 @@ namespace EAAddinFramework.Utils
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show($"Can't find search, is LINQPad support enabled (Settings General)? :\r\n'{searchName}' '{searchTerm}'\r\n- *.sql in path '{_globalCfg.GetSqlPaths()}'\r\n- *.linq in path '{_globalCfg.GetLinqPaths()}'\r\n- EA Search\r\n\r\nNote:\r\n- Define path in File, Settings\r\n- LINQPad needs a license and has to be installed!",
+                    MessageBox.Show($"Can't find search, is LINQPad support enabled (Settings General)? :\r\n'{searchName}' '{searchTerm}'\r\n- *.sql in path '{_globalCfg.GetSqlPaths()}'\r\n- *.linq in path '{_globalCfg.GetLinqPaths()}'\r\n- EA Search\r\n\r\nNote:\r\n- Define path in File, Settings\r\n- LINQPad needs a license and has to be installed!\r\n\r\n{e}",
                         $@"Error start search.");
                     return "";
                 }
@@ -451,95 +448,7 @@ namespace EAAddinFramework.Utils
             return ExecuteSql(sqlExecute); // no error, only no result rows
         }
 
-        /// <summary>
-        /// Make EA Excel File from EA SQLQuery format (string)
-        /// </summary>
-        /// <param name="x"></param>
-        /// <param name="fileName"></param>
-        /// <returns>string</returns>
-        public bool MakeExcelFile(string x, string fileName = @"d:\temp\sql\sql.xlsx")
-        {
-
-            if (string.IsNullOrEmpty(x)) return false;
-            XDocument xDoc = XDocument.Parse(x);
-
-            // get field names
-            var fieldNames = xDoc.Descendants("Row").FirstOrDefault()?.Descendants();
-            if (fieldNames == null) return false;
-
-            TryToDeleteFile(fileName);
-            Cursor.Current = Cursors.WaitCursor;
-            try
-            {
-
-                //Excel.Application xlApp = new Excel.Application();
-
-
-                object misValue = System.Reflection.Missing.Value;
-
-                //var xlWorkBook = xlApp.Workbooks.Add(misValue);
-                //var xlWorkSheet = (Excel.Worksheet) xlWorkBook.Worksheets.Item[1];
-
-                int column = 1;
-                int row = 1;
-                foreach (var field in fieldNames)
-                {
-                    //xlWorkSheet.Cells[row, column] = field.Name.ToString();
-                    column = column + 1;
-                }
-
-
-                var xRows = xDoc.Descendants("Row");
-                foreach (var xRow in xRows)
-                {
-                    Console.WriteLine(@"New Record found");
-                    row = row + 1;
-                    column = 1;
-                    foreach (var value in xRow.Elements())
-                    {
-                        //xlWorkSheet.Cells[row, column] = value.Value;
-                        column = column + 1;
-
-                    }
-                }
-                //xlWorkBook.SaveAs(fileName, Excel.XlFileFormat.xlWorkbookNormal, misValue, misValue, misValue, misValue,
-                //    Excel.XlSaveAsAccessMode.xlExclusive, misValue, misValue, misValue, misValue, misValue);
-                //xlWorkBook.Close(true, misValue, misValue);
-                //xlApp.Quit();
-
-                // release objects
-                //Marshal.ReleaseComObject(xlWorkSheet);
-                //Marshal.ReleaseComObject(xlWorkBook);
-                //Marshal.ReleaseComObject(xlApp);
-                Cursor.Current = Cursors.Default;
-                var ret = MessageBox.Show($@"Yes: Open Excel File\r\nNo: Open Folder\r\nCancel",
-                    $"Excel File '{fileName}' created!", MessageBoxButtons.YesNoCancel);
-                switch (ret)
-                {
-                        case DialogResult.Yes:
-                            Util.StartFile(fileName);
-                            break;
-                        case DialogResult.No:
-                            Util.ShowFolder(Path.GetDirectoryName(fileName));
-                        break;
-                        default:
-                        break;
-
-                }
-                return true;
-            }
-            catch (Exception e)
-            {
-                Cursor.Current = Cursors.Default;
-                MessageBox.Show($@"Error {e.Message}\r\n{e.Source}");
-                return false;
-            }
-        }
-
-       
-
-
-
+        
         #region MakeEaXmlOutput
         /// <summary>
         /// Make EA XML output format from EA SQLQuery format (string)
@@ -599,7 +508,7 @@ namespace EAAddinFramework.Utils
                 return new XDocument(
                     new XElement("ReportViewData",
                         new XElement("Fields",
-                               from field in x.Descendants("Row").FirstOrDefault().Descendants()
+                               from field in x.Descendants("Row").FirstOrDefault()?.Descendants()
                                select new XElement("Field", new XAttribute("name", field.Name))
                         ),
                         new XElement("Rows",
@@ -895,7 +804,7 @@ namespace EAAddinFramework.Utils
                     }
                     else
                     {
-                        throw e;
+                        throw;
                     }
                 }
             }

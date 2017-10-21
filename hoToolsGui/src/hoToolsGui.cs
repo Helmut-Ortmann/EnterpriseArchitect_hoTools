@@ -13,7 +13,6 @@ using hoTools.Settings;
 using hoTools.EaServices;
 using hoTools.EAServicesPort;
 using Control.EaAddinShortcuts;
-using EA;
 using hoTools.Settings.Key;
 using hoTools.Settings.Toolbar;
 using EAAddinFramework.Utils;
@@ -22,7 +21,7 @@ using hoTools.Utils.SQL;
 using hoTools.Utils;
 using hoTools.Utils.Configuration;
 using hoTools.Utils.Diagram;
-using hoTools.Utils.EXCEL;
+using hoTools.Utils.Export;
 using hoTools.EaServices.Names;
 
 
@@ -52,7 +51,7 @@ namespace hoTools.hoToolsGui
 
         Model _model;
 
-        private bool inTxtSearchName = false;
+        private bool _inTxtSearchName;
 
         // configuration as singleton
         readonly HoToolsGlobalCfg _globalCfg = HoToolsGlobalCfg.Instance;
@@ -1122,7 +1121,7 @@ namespace hoTools.hoToolsGui
         /// <returns></returns>
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
-            if (! inTxtSearchName && _txtSearchName.Text.Length > 2) base.ProcessCmdKey(ref msg, keyData);
+            if (! _inTxtSearchName && _txtSearchName.Text.Length > 2) base.ProcessCmdKey(ref msg, keyData);
             if (keyData == Keys.Tab || (keyData & Keys.Modifiers) == Keys.Alt)
             {
                 ProcessAutoComplete();
@@ -1399,6 +1398,8 @@ namespace hoTools.hoToolsGui
             this._updateScriptsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
             this.resetFactorySettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator20 = new System.Windows.Forms.ToolStripSeparator();
+            this.makeGlossaryXmlFromcsvToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._doToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportExcelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportCsvOfClipboardToExcelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -1480,8 +1481,6 @@ namespace hoTools.hoToolsGui
             this._aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator19 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuIHome = new System.Windows.Forms.ToolStripMenuItem();
-            this.makeGlossaryXmlFromcsvToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator20 = new System.Windows.Forms.ToolStripSeparator();
             this._toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this._toolStripContainer1.SuspendLayout();
             this._toolStripQuery.SuspendLayout();
@@ -2402,6 +2401,17 @@ namespace hoTools.hoToolsGui
             resources.ApplyResources(this.resetFactorySettingsToolStripMenuItem, "resetFactorySettingsToolStripMenuItem");
             this.resetFactorySettingsToolStripMenuItem.Click += new System.EventHandler(this.resetFactorySettingsToolStripMenuItem_Click);
             // 
+            // toolStripSeparator20
+            // 
+            this.toolStripSeparator20.Name = "toolStripSeparator20";
+            resources.ApplyResources(this.toolStripSeparator20, "toolStripSeparator20");
+            // 
+            // makeGlossaryXmlFromcsvToolStripMenuItem
+            // 
+            this.makeGlossaryXmlFromcsvToolStripMenuItem.Name = "makeGlossaryXmlFromcsvToolStripMenuItem";
+            resources.ApplyResources(this.makeGlossaryXmlFromcsvToolStripMenuItem, "makeGlossaryXmlFromcsvToolStripMenuItem");
+            this.makeGlossaryXmlFromcsvToolStripMenuItem.Click += new System.EventHandler(this.makeGlossaryXmlFromcsvToolStripMenuItem_Click);
+            // 
             // _doToolStripMenuItem
             // 
             this._doToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -2937,17 +2947,6 @@ namespace hoTools.hoToolsGui
             resources.ApplyResources(this.toolStripMenuIHome, "toolStripMenuIHome");
             this.toolStripMenuIHome.Name = "toolStripMenuIHome";
             this.toolStripMenuIHome.Click += new System.EventHandler(this.toolStripMenuIHome_Click);
-            // 
-            // makeGlossaryXmlFromcsvToolStripMenuItem
-            // 
-            this.makeGlossaryXmlFromcsvToolStripMenuItem.Name = "makeGlossaryXmlFromcsvToolStripMenuItem";
-            resources.ApplyResources(this.makeGlossaryXmlFromcsvToolStripMenuItem, "makeGlossaryXmlFromcsvToolStripMenuItem");
-            this.makeGlossaryXmlFromcsvToolStripMenuItem.Click += new System.EventHandler(this.makeGlossaryXmlFromcsvToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator20
-            // 
-            this.toolStripSeparator20.Name = "toolStripSeparator20";
-            resources.ApplyResources(this.toolStripSeparator20, "toolStripSeparator20");
             // 
             // HoToolsGui
             // 
@@ -3516,12 +3515,12 @@ namespace hoTools.hoToolsGui
             _txtSearchName.ForeColor = SystemColors.WindowText;
             if (_txtSearchName.Text.Equals("<Search Name>")) _txtSearchName.Text = "";
             //IntializeSearches();
-            inTxtSearchName = true;
+            _inTxtSearchName = true;
             _rtfListOfSearches.Visible = false;
         }
         private void _txtSearchText_Leave(object sender, EventArgs e)
         {
-            inTxtSearchName = false;
+            _inTxtSearchName = false;
             _txtSearchText.ForeColor = SystemColors.WindowText;
             if (_txtSearchText.Text.Trim().Equals(""))
             {
@@ -3532,12 +3531,12 @@ namespace hoTools.hoToolsGui
         }
         private void _txtSearchText_MouseLeave(object sender, EventArgs e)
         {
-            inTxtSearchName = false;
+            _inTxtSearchName = false;
             _rtfListOfSearches.Visible = false;
         }
         private void _txtSearchText_Enter(object sender, EventArgs e)
         {
-            inTxtSearchName = false;
+            _inTxtSearchName = false;
             _txtSearchText.ForeColor = SystemColors.WindowText;
             if (_txtSearchText.Text.Contains("<Search Term>")) _txtSearchText.Text = "";
             _rtfListOfSearches.Visible = false;
@@ -4304,90 +4303,10 @@ Information are Copied to Clipboard!
 
         private void makeGlossaryXmlFromcsvToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var openFileDialogCsv = new OpenFileDialog
-            {
-                Filter = @"csv files (*.csv)|*.csv",
-            };
-            if (openFileDialogCsv.ShowDialog() != DialogResult.OK && openFileDialogCsv.CheckFileExists) return;
-
-            string fileName = openFileDialogCsv.FileName;
-
-            DataTable dt = Excel.MakeDataTableFromCsvFile(fileName);
-            // Check Data table
-            if (dt.Columns.Count < 3)
-            {
-                MessageBox.Show($"FileName:\t{fileName}", "*.csv file needs at least 3 columns, 'Type','Term','Meaning' !!");
-                return;
-            }
-            string col0NameTyp = dt.Columns[0].ColumnName;
-            string col1NameTerm = dt.Columns[1].ColumnName;
-            string col2NameMeaning = dt.Columns[2].ColumnName;
-            if (!(col0NameTyp.ToLower() == "type" &&
-                  col1NameTerm.ToLower() == "term" &&
-                  col2NameMeaning.ToLower() == "meaning"))
-            {
-                MessageBox.Show($"FileName:\t{fileName}\r\nColumn0:{col0NameTyp}\r\nColumn1:{col1NameTerm}\r\nColumn2:{col2NameMeaning}", 
-                    "*.csv file needs at least 3 columns, 'Type','Term','Meaning' !!");
-                return;
-            }
-
-
-            // Import to EA as Glossary (Type, Term, Meaning)
-            Repository.BatchAppend = true;
-            // get data dictionary
-            var lTerms = new List<Tuple<string, string, string, int, short>>();
-            for (int i=Repository.Terms.Count-1; i >=0; i--)
-            {
-                EA.Term term = (Term) Repository.Terms.GetAt((short) i);
-                lTerms.Add(new Tuple<string, string, string, int, short>(term.Type, term.Term, term.Meaning, term.TermID, (short)i));
-            }
-            var a = from Tuple<string, string, string, int, short>  t in lTerms
-                where t.Item1 == ""
-                select t;
-
-            // Find records to update
-            var updateTerms = from DataRow termNew in dt.Rows
-                from termOld in lTerms
-                where (string)termNew[col0NameTyp] == termOld.Item1 &&
-                      (string)termNew[col1NameTerm] == termOld.Item2 &&
-                      (string)termNew[col2NameMeaning] != termOld.Item3
-                select new {itemNew=termNew, Index=termOld.Item5};
-
-            // update EA Glossary
-            foreach (var item in updateTerms)
-            {
-                EA.Term term = (EA.Term)Repository.Terms.GetAt(item.Index);
-                term.Meaning = (string)item.itemNew[col2NameMeaning];
-                term.Update();
-            }
-            Repository.Terms.Refresh();
-
-            //join termOld in lTerms 
-            // new
-            //from item1 in List1
-            //    where !(list2.Any(item2 => item2.Email == item1.Email))
-            //    select item1;
-            var newTerms = from DataRow termNew in dt.Rows
-                where !(lTerms.Any(i1 => i1.Item1 == (string) termNew[col0NameTyp] &&
-                                         i1.Item2 == (string) termNew[col1NameTerm]
-                ))
-                select new {termNew};
-            // update EA Glossary
-            foreach (var item in newTerms)
-            {
-                EA.Term term = (EA.Term)Repository.Terms.AddNew((string)item.termNew[col1NameTerm], "Term");
-                term.Type = col0NameTyp;
-                term.Term = col1NameTerm;
-                term.Meaning = col2NameMeaning;
-                term.Update();
-            }
-            Repository.Terms.Refresh();
-
-
-
-
-            Repository.BatchAppend = false;
+            hoTools.EaServices.Import.UpdateGlossary.UpdateGlossaryFromCsv(Repository);
         }
+
+        
     }
 
 

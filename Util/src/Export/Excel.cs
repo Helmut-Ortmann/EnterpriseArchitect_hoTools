@@ -8,7 +8,7 @@ using System.Xml.Linq;
 using ClosedXML.Excel;
 using KBCsv;
 
-namespace hoTools.Utils.EXCEL
+namespace hoTools.Utils.Export
 {
     public static class Excel
     {
