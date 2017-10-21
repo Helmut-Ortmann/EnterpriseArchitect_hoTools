@@ -71,9 +71,11 @@ namespace hoTools.EaServices.Import
                 EA.Term term = (EA.Term)rep.Terms.GetAt((short)i);
                 lTerms.Add(new Tuple<string, string, string, short>(term.Type, term.Term, term.Meaning.FormatMeaning(), (short)i));
             }
-            UpdateGlossaryTerms(rep, dt, lTerms, col0NameTyp, col1NameTerm, col2NameMeaning);
-            AppendGlossaryTerms(rep, dt, lTerms, col0NameTyp, col1NameTerm, col2NameMeaning);
+            int updateCount = UpdateGlossaryTerms(rep, dt, lTerms, col0NameTyp, col1NameTerm, col2NameMeaning);
+            int insertCount = AppendGlossaryTerms(rep, dt, lTerms, col0NameTyp, col1NameTerm, col2NameMeaning);
             rep.BatchAppend = false;
+
+            MessageBox.Show($"File:\t{fileName}\r\nUpdated:\t{updateCount}\r\nInserted:\t{insertCount}\r\n",$"Glossary updated with {updateCount+ insertCount}");
         }
 
         /// <summary>
@@ -85,7 +87,7 @@ namespace hoTools.EaServices.Import
         /// <param name="col0NameTyp">Column name of 'Type'</param>
         /// <param name="col1NameTerm">Column name of 'Term'</param>
         /// <param name="col2NameMeaning">Column name of 'Meaning'</param>
-        private static void AppendGlossaryTerms(Repository rep, DataTable dt, List<Tuple<string, string, string, short>> lTerms, string col0NameTyp,
+        private static int  AppendGlossaryTerms(Repository rep, DataTable dt, List<Tuple<string, string, string, short>> lTerms, string col0NameTyp,
             string col1NameTerm, string col2NameMeaning)
         {
 // New Glossary items
@@ -95,6 +97,7 @@ namespace hoTools.EaServices.Import
                 )
                 select new {termNew};
             // update EA Glossary
+            int updateCount = 0;
             foreach (var item in newTerms)
             {
                 EA.Term term = (EA.Term) rep.Terms.AddNew((string) item.termNew[col1NameTerm], "Term");
@@ -104,6 +107,7 @@ namespace hoTools.EaServices.Import
                 term.Update();
             }
             rep.Terms.Refresh();
+            return updateCount;
         }
 
         /// <summary>
@@ -115,7 +119,7 @@ namespace hoTools.EaServices.Import
         /// <param name="col0NameTyp">Column name of 'Type'</param>
         /// <param name="col1NameTerm">Column name of 'Term'</param>
         /// <param name="col2NameMeaning">Column name of 'Meaning'</param>
-        private static void UpdateGlossaryTerms(Repository rep, DataTable dt, List<Tuple<string, string, string, short>> lTerms, 
+        private static int UpdateGlossaryTerms(Repository rep, DataTable dt, List<Tuple<string, string, string, short>> lTerms, 
             string col0NameTyp, 
             string col1NameTerm,
             string col2NameMeaning)
@@ -129,13 +133,16 @@ namespace hoTools.EaServices.Import
                 select new {itemNew = termNew, Index = termOld.Item4};
 
             // update EA Glossary
+            int appendCount = 0;
             foreach (var item in updateTerms)
             {
                 EA.Term term = (EA.Term) rep.Terms.GetAt(item.Index);
                 term.Meaning = (string) item.itemNew[col2NameMeaning];
                 term.Update();
+                appendCount += 1;
             }
             rep.Terms.Refresh();
+            return appendCount;
         }
 
         /// <summary>

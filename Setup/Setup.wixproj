@@ -30,14 +30,14 @@
     <Compile Include="Collect\hoSqlGui.wxs" />
     <Compile Include="Collect\hoToolsGui.wxs" />
     <Compile Include="Collect\hoToolsRoot.wxs" />
-    <Compile Include="src\Directories.wxs" />
-    <Compile Include="src\Files.wxs" />
-    <Compile Include="src\Product.wxs" />
+    <Compile Include="Wxs\Directories.wxs" />
+    <Compile Include="Wxs\Files.wxs" />
+    <Compile Include="Wxs\Product.wxs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Collect" />
     <Folder Include="Scripts" />
-    <Folder Include="src" />
+    <Folder Include="Wxs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Collect\Collect.bat" />

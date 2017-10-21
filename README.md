@@ -124,6 +124,9 @@ Some features:
 
 ### Release 3.2.1
 
+-  Update Glossary via *.csv
+-  Update linq2db to 1.9
+
 ### Release 3.2
 
 - Fix some minor errors 
