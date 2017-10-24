@@ -402,7 +402,7 @@ namespace hoTools.Utils.SQL
             }
             catch (Exception e)
             {
-                MessageBox.Show($@"Update:\r\n{updateString}\r\n\r\n{e}", "Error update SQL");
+                MessageBox.Show($"Update:\r\n{updateString}\r\n\r\n{e}", "Error update SQL");
                 return false;
             }
             return true;

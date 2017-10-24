@@ -38,6 +38,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{71383584
 		hoToolsRoot\Properties\AssemblyInfo.cs = hoToolsRoot\Properties\AssemblyInfo.cs
 		hoToolsRoot\hoToolsGui.dll.config = hoToolsRoot\hoToolsGui.dll.config
 		hoToolsRemove.ps1 = hoToolsRemove.ps1
+		Setup\Wxs\Product.wxs = Setup\Wxs\Product.wxs
 		README.md = README.md
 		hoToolsRoot\Settings.json = hoToolsRoot\Settings.json
 	EndProjectSection

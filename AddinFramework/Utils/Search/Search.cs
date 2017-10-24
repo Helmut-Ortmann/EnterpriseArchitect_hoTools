@@ -325,7 +325,7 @@ namespace AddinFramework.Util
             }
             catch (Exception e)
             {
-                MessageBox.Show($@"URL='{url}' skipped (see: Extensions, MDGTechnology,Advanced).\r\n{e.Message}",
+                MessageBox.Show($"URL='{url}' skipped (see: Extensions, MDGTechnology,Advanced).\r\n{e.Message}",
                     @"Error in load *.xml MDGSearches from url! ");
             }
         }

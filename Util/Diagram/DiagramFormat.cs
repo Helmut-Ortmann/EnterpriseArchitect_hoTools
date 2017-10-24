@@ -312,7 +312,7 @@ namespace hoTools.Utils.Diagram
                                 diaObj.ShowTags = boolProperty;
                                 break;
                             default:
-                                MessageBox.Show($@"Style={style}'\r\nProperty:'{propertyName}'", $@"Invalid DiagramObjectStyle '{propertyName}'");
+                                MessageBox.Show($"Style={style}'\r\nProperty:'{propertyName}'", $@"Invalid DiagramObjectStyle '{propertyName}'");
                                 break;
                         }
 
@@ -340,7 +340,7 @@ namespace hoTools.Utils.Diagram
             }
             catch (Exception e)
             {
-                MessageBox.Show($@"Property: '{style}'\r\n{e}", $@"Error from EA DiagramObject API '{propertyName}:{propertyTyp}");
+                MessageBox.Show($"Property: '{style}'\r\n{e}", $@"Error from EA DiagramObject API '{propertyName}:{propertyTyp}");
             }
 
         }

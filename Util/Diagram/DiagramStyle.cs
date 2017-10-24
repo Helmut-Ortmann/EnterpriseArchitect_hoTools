@@ -143,7 +143,7 @@ namespace hoTools.Utils.Diagram
             }
             catch (Exception e)
             {
-                MessageBox.Show($@"Style is possibly to long for DB field\r\n\r\e{e}", "Cant write Diagram Styles!");
+                MessageBox.Show($"Style is possibly to long for DB field\r\n\r\n{e}", "Can't write Diagram Styles!");
             }
         }
 
@@ -229,7 +229,7 @@ namespace hoTools.Utils.Diagram
 
                         break;
                     default:
-                        MessageBox.Show($@"Type '{name}' invalid.\r\n First 4 or more characters of (Type, Custom, Stereotype)",
+                        MessageBox.Show($"Type '{name}' invalid.\r\n First 4 or more characters of (Type, Custom, Stereotype)",
                                         "Invalid Diagram Type (Type, Custom, Stereotype)");
                         break;
                 }

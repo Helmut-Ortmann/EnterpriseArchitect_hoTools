@@ -121,6 +121,7 @@ Some features:
 
 
 # Releases
+### Release 3.2.2
 
 ### Release 3.2.1
 

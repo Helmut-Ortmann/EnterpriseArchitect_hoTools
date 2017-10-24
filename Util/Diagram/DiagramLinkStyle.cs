@@ -230,7 +230,7 @@ namespace hoTools.Utils.Diagram
             }
             catch (Exception e)
             {
-                MessageBox.Show($@"Style is possibly to long for DB field\r\n\r\e{e}", "Cant write Diagram Styles!");
+                MessageBox.Show($"Style is possibly to long for DB field\r\n\r\n{e}", "Cant write Diagram Styles!");
             }
         }
         public bool IsToProcess()

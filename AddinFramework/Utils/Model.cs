@@ -146,7 +146,7 @@ namespace EAAddinFramework.Utils
             }
             catch (Exception e)
             {
-                MessageBox.Show($@"SQL execute:\r\n{sqlString}\r\n{e.Message}", @"Error SQL execute");
+                MessageBox.Show($"SQL execute:\r\n{sqlString}\r\n{e.Message}", @"Error SQL execute");
                 return false;
             }
         }
@@ -369,7 +369,7 @@ namespace EAAddinFramework.Utils
             }
             catch (Exception ex)
             {
-                MessageBox.Show($@"SQL:\r\n{query}\r\n{ex.Message}", @"Error SQL");
+                MessageBox.Show($"SQL:\r\n{query}\r\n{ex.Message}", @"Error SQL");
                 return null;
             }
         }
@@ -405,7 +405,7 @@ namespace EAAddinFramework.Utils
             }
             catch (Exception ex)
             {
-                MessageBox.Show($@"SQL:\r\n{sql}\r\n{ex.Message}", @"Error SQL");
+                MessageBox.Show($"SQL:\r\n{sql}\r\n{ex.Message}", @"Error SQL");
                 return false;
             }
 

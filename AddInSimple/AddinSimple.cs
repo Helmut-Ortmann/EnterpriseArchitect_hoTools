@@ -310,7 +310,7 @@ namespace AddInSimple
                     {
                         connectionString = LinqUtil.GetConnectionString(repository, out provider);
 
-                        string lConnectionString = $@"{eaConnectionString}\r\n\r\nProvider for Linq for SQL:\r\n'{provider}\r\n{connectionString}";
+                        string lConnectionString = $"{eaConnectionString}\r\n\r\nProvider for Linq for SQL:\r\n'{provider}\r\n{connectionString}";
                         Clipboard.SetText(lConnectionString);
                         MessageBox.Show($"{lConnectionString}", "Connection string (EA+LINQ + SQL) copied to clipboard");
                         if (connectionString == "") return;
