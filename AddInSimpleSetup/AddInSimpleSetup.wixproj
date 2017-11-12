@@ -48,6 +48,7 @@
     <Content Include="AddInSimpleRemove.ps1" />
     <Content Include="Collect\Collect.bat" />
     <Content Include="License.rtf" />
+    <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Collect" />

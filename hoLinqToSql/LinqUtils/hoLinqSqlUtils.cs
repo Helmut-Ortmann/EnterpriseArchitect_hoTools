@@ -13,6 +13,7 @@ using LinqToDB.DataProvider.MySql;
 using LinqToDB.DataProvider.Oracle;
 using LinqToDB.DataProvider.PostgreSQL;
 using LinqToDB.DataProvider.SqlServer;
+using LinqToDB.DataProvider.SQLite;
 using LinqToDB.DataProvider.Sybase;
 
 namespace hoLinqToSql.LinqUtils
@@ -184,7 +185,18 @@ namespace hoLinqToSql.LinqUtils
 
         }
         /// <summary>
-        /// Get connection string of database
+        /// Get connection string for VC Code Symbol table
+        /// </summary>
+        /// <param name="vcCodeFolderPath">Folder of VC Code C/C++ Source Code</param>
+        /// <param name="provider"></param>
+        /// <returns></returns>
+        public static string GetConnectionString(string vcCodeFolderPath, out IDataProvider provider)
+        {
+            provider = new SQLiteDataProvider();
+            return VcDbUtilities.GetConnectionString(vcCodeFolderPath);
+        }
+        /// <summary>
+        /// Get connection string of EA database
         /// </summary>
         /// <param name="rep"></param>
         /// <param name="provider"></param>

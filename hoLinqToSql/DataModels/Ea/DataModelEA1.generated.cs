@@ -541,12 +541,12 @@ namespace DataModels
 	[Table("q_ucmetrics", IsView=true)]
 	public partial class q_ucmetrics
 	{
-		[Column(),                 Nullable] public string  Object_Type    { get; set; } // text(255)
-		[Column("t_object.Name"),  Nullable] public string  t_object_Name  { get; set; } // text(255)
-		[Column(),                 Nullable] public double? Complexity     { get; set; } // Double
-		[Column("t_package.Name"), Nullable] public string  t_package_Name { get; set; } // text(255)
-		[Column(),                 Identity] public int     Package_ID     { get; set; } // Long
-		[Column(),                 Nullable] public string  Phase          { get; set; } // text(50)
+		[Column(),                  Nullable] public string  Object_Type    { get; set; } // text(255)
+		[Column(@"t_object.Name"),  Nullable] public string  t_object_Name  { get; set; } // text(255)
+		[Column(),                  Nullable] public double? Complexity     { get; set; } // Double
+		[Column(@"t_package.Name"), Nullable] public string  t_package_Name { get; set; } // text(255)
+		[Column(),                  Identity] public int     Package_ID     { get; set; } // Long
+		[Column(),                  Nullable] public string  Phase          { get; set; } // text(50)
 	}
 
 	[Table("q_visibleobject", IsView=true)]
@@ -617,26 +617,26 @@ namespace DataModels
 	[Table("rptqryObjectNotes", IsView=true)]
 	public partial class rptqryObjectNote
 	{
-		[Column("t_package Name"), Nullable] public string T_packageName { get; set; } // text(255)
-		[Column("t_diagram Name"), Nullable] public string T_diagramName { get; set; } // text(255)
-		[Column(),                 Nullable] public string Diagram_Type  { get; set; } // text(50)
-		[Column(),                 Nullable] public string Object_Type   { get; set; } // text(255)
-		[Column(),                 Nullable] public string Name          { get; set; } // text(255)
-		[Column(),                 Nullable] public string Note          { get; set; } // text(0)
-		[Column(),                 Nullable] public string Complexity    { get; set; } // text(50)
+		[Column(@"t_package Name"), Nullable] public string T_packageName { get; set; } // text(255)
+		[Column(@"t_diagram Name"), Nullable] public string T_diagramName { get; set; } // text(255)
+		[Column(),                  Nullable] public string Diagram_Type  { get; set; } // text(50)
+		[Column(),                  Nullable] public string Object_Type   { get; set; } // text(255)
+		[Column(),                  Nullable] public string Name          { get; set; } // text(255)
+		[Column(),                  Nullable] public string Note          { get; set; } // text(0)
+		[Column(),                  Nullable] public string Complexity    { get; set; } // text(50)
 	}
 
 	[Table("rptUseCases", IsView=true)]
 	public partial class rptUseCase
 	{
-		[Column("t_package Name"), Nullable] public string T_packageName { get; set; } // text(255)
-		[Column("t_diagram Name"), Nullable] public string T_diagramName { get; set; } // text(255)
-		[Column(),                 Nullable] public string Diagram_Type  { get; set; } // text(50)
-		[Column(),                 Nullable] public string Object_Type   { get; set; } // text(255)
-		[Column(),                 Nullable] public string Name          { get; set; } // text(255)
-		[Column(),                 Nullable] public string Note          { get; set; } // text(0)
-		[Column(),                 Nullable] public string Complexity    { get; set; } // text(50)
-		[Column(),                 Nullable] public string Tag           { get; set; } // text(255)
+		[Column(@"t_package Name"), Nullable] public string T_packageName { get; set; } // text(255)
+		[Column(@"t_diagram Name"), Nullable] public string T_diagramName { get; set; } // text(255)
+		[Column(),                  Nullable] public string Diagram_Type  { get; set; } // text(50)
+		[Column(),                  Nullable] public string Object_Type   { get; set; } // text(255)
+		[Column(),                  Nullable] public string Name          { get; set; } // text(255)
+		[Column(),                  Nullable] public string Note          { get; set; } // text(0)
+		[Column(),                  Nullable] public string Complexity    { get; set; } // text(50)
+		[Column(),                  Nullable] public string Tag           { get; set; } // text(255)
 	}
 
 	[Table("t_attribute")]
@@ -1943,29 +1943,89 @@ namespace DataModels
 	{
 		#region q_datatypes
 
+		public static int q_datatypes(this DataConnection dataConnection)
+		{
+			return dataConnection.ExecuteProc("[q_datatypes]");
+		}
+
 		#endregion
 
 		#region qdf_attribute
+
+		public static int qdf_attribute(this DataConnection dataConnection, int? Object)
+		{
+			return dataConnection.ExecuteProc("[qdf_attribute]",
+				new DataParameter("Object", Object, DataType.Int32));
+		}
 
 		#endregion
 
 		#region qdf_diagramlink
 
+		public static int qdf_diagramlink(this DataConnection dataConnection, int? Dgm_ID, int? Con_ID)
+		{
+			return dataConnection.ExecuteProc("[qdf_diagramlink]",
+				new DataParameter("Dgm_ID", Dgm_ID, DataType.Int32),
+				new DataParameter("Con_ID", Con_ID, DataType.Int32));
+		}
+
 		#endregion
 
 		#region qdf_object
+
+		public static int qdf_object(this DataConnection dataConnection, int? Object)
+		{
+			return dataConnection.ExecuteProc("[qdf_object]",
+				new DataParameter("Object", Object, DataType.Int32));
+		}
 
 		#endregion
 
 		#region qdf_operation
 
+		public static int qdf_operation(this DataConnection dataConnection, int? Object)
+		{
+			return dataConnection.ExecuteProc("[qdf_operation]",
+				new DataParameter("Object", Object, DataType.Int32));
+		}
+
 		#endregion
 
 		#region qdf_relatesto
 
+		public static int qdf_relatesto(this DataConnection dataConnection, int? ID)
+		{
+			return dataConnection.ExecuteProc("[qdf_relatesto]",
+				new DataParameter("ID", ID, DataType.Int32));
+		}
+
 		#endregion
 
 		#region qdf_simpleobject
+
+		public static int qdf_simpleobject(this DataConnection dataConnection, int? ID)
+		{
+			return dataConnection.ExecuteProc("[qdf_simpleobject]",
+				new DataParameter("ID", ID, DataType.Int32));
+		}
+
+		#endregion
+
+		#region rptUseCaseNotes
+
+		public static int rptUseCaseNotes(this DataConnection dataConnection)
+		{
+			return dataConnection.ExecuteProc("[rptUseCaseNotes]");
+		}
+
+		#endregion
+
+		#region rptUseCasesbyActor
+
+		public static int rptUseCasesbyActor(this DataConnection dataConnection)
+		{
+			return dataConnection.ExecuteProc("[rptUseCasesbyActor]");
+		}
 
 		#endregion
 	}

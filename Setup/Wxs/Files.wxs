@@ -331,6 +331,13 @@
         <File Id="sybdrvado20.dll" KeyPath="yes" Name="sybdrvado20.dll" Source="..\packages\linq2db.Sybase.1.9.0\tools\sybdrvado20.dll" />
       </Component>
 
+      <Component Id="SQLite.Interop.dll" Guid="{3DFC900E-8BD6-4B50-ACFC-7DF08040ECC2}">
+        <File Id="SQLite.Interop.dll" KeyPath="yes" Name="SQLite.Interop.dll" Source="..\packages\System.Data.SQLite.Core.1.0.106.0\build\net451\x86\SQLite.Interop.dll" />
+      </Component>
+      <Component Id="System.Data.SQLite.dll" Guid="{B161BBE0-0A9C-4570-AE7A-91E10F380ACD}">
+        <File Id="System.Data.SQLite.dll" KeyPath="yes" Name="System.Data.SQLite.dll" Source="..\packages\System.Data.SQLite.Core.1.0.106.0\lib\net451\System.Data.SQLite.dll" />
+      </Component>
+
 
       <!-- LINQPad query example     -->
       <Component Id="LinqPadConnections.linq" Guid="{B21562FD-F3CE-4D49-945D-93810108F4EE}">

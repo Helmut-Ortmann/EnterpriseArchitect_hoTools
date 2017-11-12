@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -180,7 +181,7 @@ namespace hoTools.EaServices
 
         #region changeAuthorDiagram
 
-        private static void ChangeAuthorDiagram(Repository rep, Diagram dia, string[] args)
+        private static void ChangeAuthorDiagram([NotNull] Repository rep, [NotNull] Diagram dia, string[] args)
         {
             dia.Author = args[0];
             dia.Update();
@@ -981,7 +982,7 @@ Second Element: Target of move connections and appearances", "Select two element
         /// </summary>
         /// <param name="rep"></param>
         /// <param name="changeScope"></param>
-        static void ChangeAuthor(Repository rep, ChangeScope changeScope)
+        static void ChangeAuthor([NotNull] Repository rep, ChangeScope changeScope)
         {
             // configuration as singleton
             _globalCfg = HoToolsGlobalCfg.Instance;
@@ -1072,18 +1073,21 @@ Second Element: Target of move connections and appearances", "Select two element
                 switch (oType)
                 {
                     case ObjectType.otPackage:
+                        Debug.Assert(pkg != null, nameof(pkg) + " != null");
                         RecursivePackages.DoRecursivePkg(rep, pkg, ChangeAuthorPackage, ChangeAuthorElement,
                             ChangeAuthorDiagram, liParameter, changeScope);
                         MessageBox.Show($@"New author:'{dlg.User}'",
                             $@"Author changed for package '{pkg.Name}', recursive");
                         break;
                     case ObjectType.otElement:
+                        Debug.Assert(el != null, nameof(el) + " != null");
                         RecursivePackages.DoRecursiveEl(rep, el, ChangeAuthorElement, ChangeAuthorDiagram, liParameter,
                             changeScope);
                         MessageBox.Show($@"New author:'{dlg.User}'",
                             $@"Author changed for element '{el.Name}', recursive");
                         break;
                     case ObjectType.otDiagram:
+                        Debug.Assert(dia != null, nameof(dia) + " != null");
                         ChangeAuthorDiagram(rep, dia, liParameter);
                         MessageBox.Show($@"New author:'{dlg.User}'", $@"Author changed for diagram '{dia.Name}'");
                         break;
@@ -4158,8 +4162,10 @@ from %APPDATA%Local\Apps\hoTools\
                     pkg.Elements.Refresh();
                 }
             }
+            Debug.Assert(elTypedef != null, nameof(elTypedef) + " != null");
             if (isStruct)
             {
+                
                 elTypedef.Stereotype = @"struct";
                 EA.TaggedValue tag = TaggedValue.AddTaggedValue(elTypedef, "typedef");
                 tag.Value = "true";
@@ -5940,7 +5946,6 @@ from %APPDATA%Local\Apps\hoTools\
             EaCollectionDiagramObjects llist = new EaCollectionDiagramObjects(eaDia);
 
             llist.MoveRight();
-            return;
             }
 
         #endregion
@@ -6126,7 +6131,7 @@ from %APPDATA%Local\Apps\hoTools\
         // ReSharper disable once UnusedMember.Global
         public static void SearchForName(EA.Repository rep)
         {
-            string name = GetNameFromContextItem(rep);
+            string name = GetNamesFromSelectedItems(rep);
             // run search if name found
             if (name != "")
             {
@@ -6137,100 +6142,152 @@ from %APPDATA%Local\Apps\hoTools\
 
         }
 
-        [ServiceOperation("{0B719197-81AF-4B7A-9E2E-2E2B96C101DB}", "Copy name of selected item to Clipboard",
-            "Select Package, Element, Attribute, Operation, Connector. If connector copy Guard (Flow, Transition)", isTextRequired: false)]
+        [ServiceOperation("{0B719197-81AF-4B7A-9E2E-2E2B96C101DB}", "Copy sorted name(s) of selected item(s) to Clipboard",
+            "Select Package(s), Element(s), Attribute, Operation, Connector. If connector copy Guard (Flow, Transition). Multiple selection is only possible in Diagrams.", isTextRequired: false)]
         // ReSharper disable once UnusedMember.Global
         public static void CopyContextNameToClipboard(EA.Repository rep)
         {
-            string txt = GetNameFromContextItem(rep);
+            string txt = GetNamesFromSelectedItems(rep);
             if (String.IsNullOrWhiteSpace(txt)) Clipboard.Clear();
             else Clipboard.SetText(txt);
         }
+       
+
+
 
         /// <summary>
-        /// Get name from context element
+        /// Get name from context element or the selected diagram items. 
+        /// If Diagram items (Element or Package) then sort them
         /// If Action try to extract the operation name.
+        /// If Connector use Name or Guard if ControlFlow, DataFlow or transition
         /// </summary>
         /// <param name="rep"></param>
         /// <returns></returns>
-        private static string GetNameFromContextItem(EA.Repository rep)
+        private static string GetNamesFromSelectedItems(EA.Repository rep)
         {
-            string name = "";
-            switch (rep.GetContextItemType())
+            string names = "";
+            EA.ObjectType type = rep.GetContextItemType();
+            switch (type)
             {
-                case ObjectType.otElement:
-                    EA.Element el = (EA.Element)rep.GetContextObject();
-                    name = el.Name;
-                    // possible Action which contains a function
-                    if (el.Type == "Action" && el.Name.EndsWith(")") && el.Name.Contains("("))
-                    {
-                        // xxxxx( , , ) // extract function name
-                        Regex rx = new Regex(@"\s*(\w*)\s*\([^\)]*\)");
-                        Match match = rx.Match(name);
-                        if (match.Groups.Count == 2)
-                        {
-                            name = match.Groups[1].Value;
-                        }
-                    }
+                case EA.ObjectType.otElement:
+                    names = NamensFromSelectedElements(rep, type);
                     break;
-                case ObjectType.otDiagram:
-                    name = ((EA.Diagram)rep.GetContextObject()).Name;
+                case EA.ObjectType.otDiagram:
+                    names = ((EA.Diagram)rep.GetContextObject()).Name;
                     break;
-                case ObjectType.otPackage:
-                    name = ((EA.Package)rep.GetContextObject()).Name;
+                case EA.ObjectType.otPackage:
+                    names = NamensFromSelectedElements(rep, type);
                     break;
-                case ObjectType.otAttribute:
-                    name = ((EA.Attribute)rep.GetContextObject()).Name;
+                case EA.ObjectType.otAttribute:
+                    names = ((EA.Attribute)rep.GetContextObject()).Name;
                     break;
-                case ObjectType.otMethod:
-                    name = ((EA.Method)rep.GetContextObject()).Name;
+                case EA.ObjectType.otMethod:
+                    names = ((EA.Method)rep.GetContextObject()).Name;
                     break;
-                case ObjectType.otParameter:
-                    name = ((EA.Parameter)rep.GetContextObject()).Name;
+                case EA.ObjectType.otParameter:
+                    names = ((EA.Parameter)rep.GetContextObject()).Name;
                     break;
-                case ObjectType.otDatatype:
-                    name = ((EA.Datatype)rep.GetContextObject()).Name;
+                case EA.ObjectType.otDatatype:
+                    names = ((EA.Datatype)rep.GetContextObject()).Name;
                     break;
-                case ObjectType.otConnector:
-                    EA.Connector con = (EA.Connector) rep.GetContextObject();
+
+                case EA.ObjectType.otConnector:
+                    EA.Connector con = (EA.Connector)rep.GetContextObject();
                     string guard = con.TransitionGuard.Trim();
-                    if ("ControlFlow ObjectFlow StateFlow".Contains(con.Type) && guard != "") name = guard;
-                    else name = con.Name;
+                    if ("ControlFlow ObjectFlow StateFlow".Contains(con.Type) && guard != "") names = guard;
+                    else names = con.Name;
                     break;
-                case ObjectType.otIssue:
-                    name = ((EA.Issue)rep.GetContextObject()).Name;
+
+                case EA.ObjectType.otIssue:
+                    names = ((EA.Issue)rep.GetContextObject()).Name;
                     break;
-                case ObjectType.otTest:
-                    name = ((EA.Test)rep.GetContextObject()).Name;
+                case EA.ObjectType.otTest:
+                    names = ((EA.Test)rep.GetContextObject()).Name;
                     break;
-                case ObjectType.otTask:
-                    name = ((EA.Task)rep.GetContextObject()).Name;
+                case EA.ObjectType.otTask:
+                    names = ((EA.Task)rep.GetContextObject()).Name;
                     break;
-                case ObjectType.otScenario:
-                    name = ((EA.Scenario)rep.GetContextObject()).Name;
+                case EA.ObjectType.otScenario:
+                    names = ((EA.Scenario)rep.GetContextObject()).Name;
                     break;
-                case ObjectType.otClient:
-                    name = ((EA.Client)rep.GetContextObject()).Name;
+                case EA.ObjectType.otClient:
+                    names = ((EA.Client)rep.GetContextObject()).Name;
                     break;
-                case ObjectType.otAuthor:
-                    name = ((EA.Author)rep.GetContextObject()).Name;
+                case EA.ObjectType.otAuthor:
+                    names = ((EA.Author)rep.GetContextObject()).Name;
                     break;
-                case ObjectType.otProjectResource:
-                    name = ((EA.ProjectResource)rep.GetContextObject()).Name;
+                case EA.ObjectType.otProjectResource:
+                    names = ((EA.ProjectResource)rep.GetContextObject()).Name;
                     break;
-                case ObjectType.otRequirement:
-                    name = ((EA.Requirement)rep.GetContextObject()).Name;
+                case EA.ObjectType.otRequirement:
+                    names = ((EA.Requirement)rep.GetContextObject()).Name;
                     break;
-                case ObjectType.otRisk:
-                    name = ((EA.Risk)rep.GetContextObject()).Name;
+                case EA.ObjectType.otRisk:
+                    names = ((EA.Risk)rep.GetContextObject()).Name;
                     break;
-                case ObjectType.otEffort:
-                    name = ((EA.Effort)rep.GetContextObject()).Name;
+                case EA.ObjectType.otEffort:
+                    names = ((EA.Effort)rep.GetContextObject()).Name;
                     break;
-                case ObjectType.otMetric:
-                    name = ((EA.Metric)rep.GetContextObject()).Name;
+                case EA.ObjectType.otMetric:
+                    names = ((EA.Metric)rep.GetContextObject()).Name;
                     break;
             }
+            return names;
+        }
+
+
+        /// <summary>
+        /// Get names from selected item(s) and sort them alphabetic
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        private static string NamensFromSelectedElements(EA.Repository rep, EA.ObjectType type)
+        {
+            var eaDia = new EaDiagram(rep);
+            var names = "";
+            if (eaDia.SelectedObjectsCount > 1)
+            {
+                // sort names
+                var r = from o in eaDia.SelObjects
+                        orderby NameFromElement(rep.GetElementByID(o.ElementID))
+                        select NameFromElement(rep.GetElementByID(o.ElementID));
+                string delimiter = "";
+                foreach (var name in r)
+                {
+                    names = $"{names}{delimiter}{name}";
+                    delimiter = "\r\n";
+                }
+            }
+            else
+            {
+                names = type == EA.ObjectType.otElement
+                    ? NameFromElement((EA.Element)rep.GetContextObject())
+                    : ((EA.Package)rep.GetContextObject()).Name;
+            }
+            return names;
+        }
+
+        /// <summary>
+        /// Get name from Element. If Action it handles CallOperation action by not copying the braces
+        /// </summary>
+        /// <param name="el"></param>
+        /// <returns></returns>
+        private static string NameFromElement(EA.Element el)
+        {
+            // possible Action which contains a function
+            string name = el.Name;
+            if (el.Type == "Action" && el.Name.EndsWith(")") && el.Name.Contains("("))
+            {
+                // xxxxx( , , ) // extract function name
+                Regex rx = new Regex(@"\s*(\w*)\s*\([^\)]*\)");
+                Match match = rx.Match(name);
+                if (match.Groups.Count == 2)
+                {
+                    name = match.Groups[1].Value;
+                }
+            }
+
             return name;
         }
 
@@ -6268,6 +6325,8 @@ from %APPDATA%Local\Apps\hoTools\
                 "Oracle.ManagedDataAccess.dll",
                 "Npgsql.dll",
                 "Sybase.AdoNet2.AseClient.dll",
+                "SQLite.Interop.dll",
+                "System.Data.SQLite.dll",
                 "HtmlAgilityPack.dll"
                 //"sybdrvado20.dll"
                 };

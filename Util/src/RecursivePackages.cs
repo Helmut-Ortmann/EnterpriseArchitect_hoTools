@@ -1,5 +1,6 @@
 ﻿using EA;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 
 namespace hoTools.Utils
 {
@@ -67,7 +68,7 @@ namespace hoTools.Utils
         public delegate void SetElement(Repository rep, EA.Element el, string[] parameterStrings);
         public delegate void SetDiagram(Repository rep, EA.Diagram dia, string[] parameterStrings);
 
-        public static void DoRecursivePkg(Repository rep, EA.Package pkg, SetPackage setPkg,
+        public static void DoRecursivePkg([NotNull] Repository rep, [NotNull] EA.Package pkg, SetPackage setPkg,
             SetElement setEl, SetDiagram setDia, string[] parameterStrings, ChangeScope changeScope)
         {
             
@@ -115,7 +116,7 @@ namespace hoTools.Utils
         /// <param name="setDia"></param>
         /// <param name="parameterStrings"></param>
         /// <param name="changeScope"></param>
-        public static void DoRecursiveEl(Repository rep, EA.Element el, SetElement setEl, SetDiagram setDia,
+        public static void DoRecursiveEl([NotNull] Repository rep, [NotNull] EA.Element el, SetElement setEl, SetDiagram setDia,
             string[] parameterStrings, ChangeScope changeScope)
         {
               // perform change for element

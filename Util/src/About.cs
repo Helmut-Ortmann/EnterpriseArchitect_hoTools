@@ -54,12 +54,10 @@ Helmut.Ortmann@t-online.de
                     description =
                         $"{description}- {dllName,-50}\t: V{version}{Environment.NewLine}";
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
-                    MessageBox.Show($@"File:
-'{pathDll}'
-
-{e}","Can't find file");
+                    description =
+                        $"{description}- {dllName,-50}\t: dll not found!{Environment.NewLine}";
                 }
             }
             description = $"{description}\r\n\r\nInstalled at:\t {pathRoot}\r\nSettings:\t\t{pathSettings}";
