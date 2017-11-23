@@ -124,6 +124,7 @@ Some features:
 ### Release 3.2.2
 -  Integrate SQLite
 -  Integrate access to VS Code C/C++ Symbol Database
+-  Minor fixes error handling
 
 ### Release 3.2.1
 

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Fragment>
+      <Directory Id="TARGETDIR" Name="SourceDir">
+          <Directory Id="ProgramFilesFolder">
+            <Directory Id="Apps" Name="apps" >
+              <Directory Id="APPLICATIONFOLDER" Name="AddInSimple"  >
+              </Directory>
+            </Directory>
+          </Directory>
+        <Directory Id="Keys">
+        </Directory>
+       </Directory>
+	     <SetProperty Id="ProgramFilesFolder" Value="[LocalAppDataFolder]" Before="CostFinalize"><![CDATA[NOT Privileged]]></SetProperty>
+  </Fragment>
+ </Wix>

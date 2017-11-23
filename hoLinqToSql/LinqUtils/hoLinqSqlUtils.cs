@@ -189,11 +189,11 @@ namespace hoLinqToSql.LinqUtils
         /// </summary>
         /// <param name="vcCodeFolderPath">Folder of VC Code C/C++ Source Code</param>
         /// <param name="provider"></param>
-        /// <returns></returns>
-        public static string GetConnectionString(string vcCodeFolderPath, out IDataProvider provider)
+        /// <returns>"" = No connection found</returns>
+        public static string GetConnectionString(string vcCodeFolderPath, out IDataProvider provider, bool withErrorMessage= true)
         {
             provider = new SQLiteDataProvider();
-            return VcDbUtilities.GetConnectionString(vcCodeFolderPath);
+            return VcDbUtilities.GetConnectionString(vcCodeFolderPath, withErrorMessage );
         }
         /// <summary>
         /// Get connection string of EA database
@@ -279,7 +279,7 @@ namespace hoLinqToSql.LinqUtils
         /// - Last Element delete: (LazyLoad=1;)
         /// </summary>
         /// <param name="connectionString"></param>
-        /// <returns></returns>
+        /// <returns>"" no connection found</returns>
         private static string FilterConnectionString(string connectionString)
         {
             string[] c = connectionString.Split(';').Skip(2).ToArray();

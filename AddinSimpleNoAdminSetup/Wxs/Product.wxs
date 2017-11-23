@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
+     xmlns:complus="http://schemas.microsoft.com/wix/ComPlusExtension">
+ <!-- New release:
+      Basics:
+      - WIX Toolset installed
+      - WIX Toolset VS2017 Extension installed 
+      0. Ensure you have a reference to WixUIExtension
+         (e.g.: c:\Program Files (x86)\WiX Toolset v3.11\bin\WixUIExtension.dll)
+      1. Product.wxs:   Update ProductVersion (Major.Minor.Build (Revision not used ))
+         The last number is always 0 
+         This number is used for the installer and is shown as the installed product version
+         Note: Each *.dll has a AssemblyVersionwhich is defined in AssembleInfo.cs
+         Note: If you change the AssemblyVersion  of a COM dll you have to harvest the registration information with Collect.Bat. Then you have to update file.wxs
+      2. Harvest DLL registration for COM Objects
+         - Run script Collect.bat
+         - Insert Component content in Files.wxs (between <Component> </Component>
+         - Don't forget to update location (is described in Files.wxs)
+      2. Update File-Version of Addin.DLL File (Properties Assembly) but not Assembly-Version 
+         (new registry of Assembly required)
+         A new Assembly Version requires a new DLL-Registration
+      3. Product ID is handled by WIX
+     
+ -->
+  <!-- Also: Update AssemblyFileVersion in AddinClass AssemblyInfo.cs properties !!!
+  !!!Warning: If you update AssemblyVersion you must update the registration info!!!!!!!!
+  // Change AssemblyFileVersion accordingly
+  -->
+  <!-- The post processing of the WIX Setup projects changes the *.msi file name to:
+       'AddInSimple 1.0.9.msi' (1.0.9=ProductVersion)
+       The Scripts you find in: Setup\Script\..
+       see also: http://kentie.net/article/wixnameversion/index.htm
+  -->
+  <?define ProductVersion="1.0.9" ?> 
+  <?define UpgradeCode="{CA42D098-1AA3-4357-A7F6-CAB9A995BC54}" ?>
+  <?define Manufacturer="hoModeler.de" ?>
+  <?define ProductName="AddInSimple" ?>
+
+  <Product Id="*"
+           Name="$(var.ProductName)"
+           Language="1033"
+           Version="$(var.ProductVersion)"
+            Manufacturer="$(var.Manufacturer)"
+           UpgradeCode="$(var.UpgradeCode)" >
+    <Package
+             Description="Windows installer for hoTools $(var.ProductVersion)"
+             Comments="Execute to install hoTools $(var.ProductVersion)"
+             InstallerVersion="200"
+             SummaryCodepage="1252"
+             Compressed="yes"  
+             AdminImage="no"
+             ReadOnly="yes"
+             InstallScope='perUser'
+             InstallPrivileges='limited'
+             Keywords="Installer, MSI, Database"/>
+
+    <!--InstallPrivileges="elevated"-->
+
+    <Media Id="1"
+           Cabinet="Contents.cab"
+           EmbedCab="yes"
+           CompressionLevel="medium"/>
+
+
+
+    <Upgrade Id="$(var.UpgradeCode)" >
+      <UpgradeVersion   Minimum="$(var.ProductVersion)"
+                        IncludeMinimum="no"
+                        OnlyDetect="yes"
+                        Language="1033"
+                         Property="NEWPRODUCTFOUND" />
+      <UpgradeVersion Minimum="1.0.0.0"
+                      IncludeMinimum="yes"
+                      Maximum="$(var.ProductVersion)"
+                      IncludeMaximum="no"
+                      Language="1033"
+                      Property="UPGRADEFOUND" />
+    </Upgrade>
+
+
+    <Feature Id="Complete"
+              Description="Enterprise Architect hoTools"
+              Title="hoTools"
+              Level="1"
+              Display="expand"
+              ConfigurableDirectory="APPLICATIONFOLDER" >
+      <ComponentGroupRef Id="ProductComponents"/>
+    </Feature>
+    
+    <!-- Check for .Net framework 4.0 Client-->
+    <Property Id="NETFRAMEWORK40CL">
+      <RegistrySearch Id="NetFramework40Cl"
+                      Root="HKLM"
+                      Key="SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Client"
+                  Name="Install"
+                      Type="raw" />
+    </Property>
+    <!-- Check for .Net framework 4.0 Full-->
+    <Property Id="NETFRAMEWORK40FULL">
+      <RegistrySearch Id="NetFramework40FULL"
+                      Root="HKLM"
+                      Key="SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Client"
+                  Name="Install"
+                      Type="raw" />
+    </Property>
+
+    <Condition Message="This application requires .NET Framework v4. Please install the .NET Framework then run this installer again.">
+      <![CDATA[Installed OR NETFRAMEWORK40CL OR NETFRAMEWORK40FULL]]>
+    </Condition>
+    
+    <!--
+     UI: 
+    
+    <Property Id="WIXUI_INSTALLDIR" Value="INSTALLDIR" />
+    -->
+
+    <!-- Prevent downgrading -->
+    <MajorUpgrade Schedule="afterInstallInitialize"
+                DowngradeErrorMessage="A later version of hoReverse is already installed"
+                AllowSameVersionUpgrades="yes" />
+
+  </Product>
+
+</Wix>

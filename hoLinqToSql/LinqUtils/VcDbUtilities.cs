@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Forms;
 using DataModels.VcSymbols;
-using LinqToDB.DataProvider;
 using LinqToDB.DataProvider.SQLite;
 using File = System.IO.File;
 
@@ -14,13 +12,13 @@ namespace hoLinqToSql.LinqUtils
     /// <summary>
     /// Utilities to handle VC Code Symbol database
     /// </summary>
-    public class VcDbUtilities
+    public static class VcDbUtilities
     {
         /// <summary>
         /// Get path of source folder VC Code SQLite Symbol table
         /// </summary>
         /// <param name="folderPathSource"></param>
-        /// <returns></returns>
+        /// <returns>"" if nothing found</returns>
         private static string GetPath(string folderPathSource)
         {
             // Define other methods and classes here
@@ -53,15 +51,21 @@ namespace hoLinqToSql.LinqUtils
             }
             return "";
         }
+
         /// <summary>
         /// Get connection string for C/C++ VC Code source folder
         /// </summary>
         /// <param name="folderPathSource"></param>
-        /// <returns></returns>
-        public static string GetConnectionString(string folderPathSource)
+        /// <param name="withErrorMessage"></param>
+        /// <returns>"" if nothing found</returns>
+        public static string GetConnectionString(string folderPathSource, bool withErrorMessage = true)
         {
             string dbFilePath = GetPath(folderPathSource);
-            return $"DataSource={dbFilePath};Read Only=True;";
+            if (withErrorMessage && dbFilePath == "")
+            {
+                MessageBox.Show($"SourceFolder:'{folderPathSource}'\r\nDatabase in appData\\Roaming\\Code\\..\\.BROWSE.VC.DB", "Can't find VC Code Symbol database, VS Code C/C++ installed and used?");
+            }
+            return dbFilePath == "" ? "" : $"DataSource={dbFilePath};Read Only=True;";
         }
     }
 }

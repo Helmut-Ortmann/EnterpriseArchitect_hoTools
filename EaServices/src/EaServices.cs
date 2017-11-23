@@ -4044,7 +4044,7 @@ from %APPDATA%Local\Apps\hoTools\
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show($@"{e}\n\n {elPar.GetLastError()}", $@"Error creating parameter: {type} {name}");
+                    MessageBox.Show($"{e}\n\n {elPar.GetLastError()}", $@"Error creating parameter: {type} {name}");
                 }
                 pos = pos + 1;
             }
@@ -4461,7 +4461,7 @@ from %APPDATA%Local\Apps\hoTools\
                 }
                 else
                 {
-                    MessageBox.Show($@"{s}\n\n+{sCompact}", @"Couldn't understand attribute syntax");
+                    MessageBox.Show($"{s}\n\n+{sCompact}", @"Couldn't understand attribute syntax");
                 }
             }
         }
@@ -4813,7 +4813,7 @@ from %APPDATA%Local\Apps\hoTools\
             }
             catch (Exception e)
             {
-                MessageBox.Show($@"{e}\n\n", @"Error VC reconcile");
+                MessageBox.Show($"{e}\n\n", @"Error VC reconcile");
             }
             finally
             {
@@ -4873,7 +4873,7 @@ from %APPDATA%Local\Apps\hoTools\
             }
             catch (Exception e)
             {
-                MessageBox.Show($@"{e}\n\n{pkg.GetLastError()}", @"Error Checkout");
+                MessageBox.Show($"{e}\n\n{pkg.GetLastError()}", @"Error Checkout");
             }
             finally
             {
@@ -4972,7 +4972,7 @@ from %APPDATA%Local\Apps\hoTools\
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show($@"{e} \n\n {pkg.GetLastError()}", @"Error Checkin");
+                    MessageBox.Show($"{e} \n\n {pkg.GetLastError()}", @"Error Checkin");
                     return;
                 }
                 finally
@@ -4991,7 +4991,7 @@ from %APPDATA%Local\Apps\hoTools\
                         pkg.VersionControlResynchPkgStatus(false);
                         if (pkg.Flags.Contains("Checkout"))
                         {
-                            MessageBox.Show($@"Flags={pkg.Flags}", @"Package Checked out, Break!");
+                            MessageBox.Show($"Flags={pkg.Flags}", @"Package Checked out, Break!");
                             return;
                         }
                         pkg.VersionControlGetLatest(true);
@@ -5704,7 +5704,7 @@ from %APPDATA%Local\Apps\hoTools\
             catch (Exception e)
             {
                 Clipboard.SetText(e.ToString());
-                MessageBox.Show($@"{e}\n\nsee Clipboard!", $@"Error Reading file '{el.Name}':{el.Type}");
+                MessageBox.Show($"{e}\n\nsee Clipboard!", $@"Error Reading file '{el.Name}':{el.Type}");
                 return lEl;
             }
             lEl = GetInterfacesFromText(rep, null, text, createWarningNote: false);
@@ -5728,7 +5728,7 @@ from %APPDATA%Local\Apps\hoTools\
                 {
                     string pkgState = Util.GetVCstate(rep, pkg, true);
                     DialogResult result =
-                        MessageBox.Show($@"Package is {pkgState}\nPath={pkg.XMLPath}\nFlags={pkg.Flags}",
+                        MessageBox.Show($"Package is {pkgState}\r\nPath={pkg.XMLPath}\nFlags={pkg.Flags}",
                             @"Update package state?", MessageBoxButtons.YesNo);
                     if (result == DialogResult.Yes) Util.UpdateVc(rep, pkg);
                 }

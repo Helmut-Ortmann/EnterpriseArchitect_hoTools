@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Fragment>
+      <Directory Id="TARGETDIR" Name="SourceDir">
+          <Directory Id="ProgramFilesFolder">
+            <Directory Id="Apps" Name="apps" >
+              <Directory Id="APPLICATIONFOLDER" Name="hoTools"  >
+              </Directory>
+            </Directory>
+          </Directory>
+        <!-- Preparation for Roaming folder
+          <Directory Id="AppDataFolder">
+              <Directory Id="ho" Name="ho">
+                     <Directory Id="hoToolsData" Name="hoTools" >
+                     </Directory>
+         
+             </Directory>
+          </Directory>
+         -->
+      </Directory>
+	  <SetProperty Id="ProgramFilesFolder" Value="[LocalAppDataFolder]" Before="CostFinalize"><![CDATA[NOT Privileged]]></SetProperty>  
+	</Fragment>
+ </Wix>
