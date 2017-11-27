@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using EA;
 
 
@@ -26,7 +27,18 @@ namespace hoTools.Utils.Diagram
         public bool IsSelectedObjects { get; }
 
         public EA.Diagram Dia => _dia;
-        public int SelectedObjectsCount => _dia.SelectedObjects.Count;
+
+        public int SelectedObjectsCount
+        {
+            get
+            {
+                if (! IsSelectedObjects)
+                    return 0;
+                Debug.Assert(_dia != null, nameof(_dia) + " != null");
+                return _dia.SelectedObjects.Count;
+            }
+        }
+
         public EA.Connector SelectedConnector => _selectedConnector;
 
         public Repository Rep { get { return _rep; } }

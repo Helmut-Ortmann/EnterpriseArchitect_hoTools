@@ -122,6 +122,8 @@ Some features:
 
 # Releases
 ### Release 3.2.2
+-  Setup for per-user and per-user (Single Package authoring, per user without admin right)
+-  NoAdmin install to show a simple per-user without admin rights and without dialog
 -  Integrate SQLite
 -  Integrate access to VS Code C/C++ Symbol Database
 -  Minor fixes error handling

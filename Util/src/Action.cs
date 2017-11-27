@@ -34,6 +34,14 @@ namespace hoTools.Utils
               
             return true;
         }
+        public static bool SetClassifierId(Repository rep, EA.Element el, string guid)
+        {
+            // add ClassifierGUID to target action
+            string updateStr = @"update t_object set classifier_GUID = '" + guid +
+                               "' where ea_guid = '" + el.ElementGUID + "' ";
+            rep.Execute(updateStr);
+            return true;
+        }
 
         public static string RemoveFirstParenthesisPairFromString(string s)
         {
@@ -189,14 +197,16 @@ namespace hoTools.Utils
             }
             return "";
         }
-        public static Method GetMethodFromMethodName(Repository rep, string methodName)
+        public static Method GetMethodFromMethodName(Repository rep, string methodName, bool isNoExtern = false)
         {
             Method method = null;
-            string query = @"select op.ea_guid AS EA_GUID
-                      from t_operation op 
-                      where op.name = '" + methodName + "' ";
+            string externStereotype = "";
+            if (isNoExtern) externStereotype = " AND (stereotype = NULL OR stereotype <> 'extern')";
+            string query = $@"select op.ea_guid AS EA_GUID
+                                from t_operation op 
+                                where op.name = '{methodName}' {externStereotype}";
             string str = rep.SQLQuery(query);
-            var xmlDoc = new XmlDocument();
+            XmlDocument xmlDoc = new XmlDocument();
             xmlDoc.LoadXml(str);
 
             XmlNode operationGuidNode = xmlDoc.SelectSingleNode("//EA_GUID");

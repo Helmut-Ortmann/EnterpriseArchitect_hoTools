@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Forms;
 using EA;
 using hoTools.Utils.Parameter;
 
@@ -55,17 +56,35 @@ namespace hoTools.Utils.ActivityParameter
             }
             return null;
         }
-        //--------------------------------------------------------------------------------
-        // createActivityForOperation
-        //--------------------------------------------------------------------------------
-        // Create an Activity Diagram for the operation
-
-        // ReSharper disable once UnusedMethodReturnValue.Global
+        /// <summary>
+        ///  Create/Update an Activity Diagram for the operation
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <param name="m"></param>
+        /// <param name="treePos">If a new package is created the new tree position to show the package in the correct order</param>
+        /// <returns></returns>
         public static bool CreateActivityForOperation(Repository rep, Method m, int treePos=100)
         {
             // get class
             EA.Element elClass = rep.GetElementByID(m.ParentID);
             EA.Package pkgSrc = rep.GetPackageByID(elClass.PackageID);
+
+            // Check if update behavior, behavior exists
+            string behaviorGuid = m.Behavior;
+            if (behaviorGuid.StartsWith("{") && behaviorGuid.EndsWith("}"))
+            {
+                //behaviorGuid = behaviorGuid.Substring(1, behaviorGuid.Length-2);
+                EA.Element actForUpdate = rep.GetElementByGuid(behaviorGuid);
+                if (actForUpdate == null)
+                {
+                    MessageBox.Show($"", "Can't update activity for operation, no valid link found");
+                    return false;
+                }
+                UpdateParameterFromOperation(rep, actForUpdate, m);// update parameters from Operation for Activity
+
+
+                return true;
+            }
 
             // create a package with the name of the operation
             var pkgTrg = (EA.Package)pkgSrc.Packages.AddNew(m.Name, "");

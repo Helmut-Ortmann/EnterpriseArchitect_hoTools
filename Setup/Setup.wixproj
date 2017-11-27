@@ -23,6 +23,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <OutputPath>bin\$(Configuration)\</OutputPath>
     <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
+    <SuppressIces>ICE61</SuppressIces>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Collect\hoExtensionGui.wxs" />
@@ -33,6 +34,7 @@
     <Compile Include="Wxs\Directories.wxs" />
     <Compile Include="Wxs\Files.wxs" />
     <Compile Include="Wxs\Product.wxs" />
+    <Compile Include="Wxs\WixUI_Advanced.wxs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Collect" />
@@ -138,9 +140,12 @@
       <Name>WixUIExtension</Name>
     </WixExtension>
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Wxs\Localization.wxl" />
+  </ItemGroup>
   <Import Project="$(WixTargetsPath)" />
   <PropertyGroup>
-    <PostBuildEvent>"$(SolutionDir)\Setup\Scripts\renamemsi.bat" "$(targetPath)"</PostBuildEvent>
+    <PostBuildEvent>"$(SolutionDir)\Setup\Scripts\renamemsi.bat" "$(SolutionDir)\Setup\bin\Release\en-us\hoTools.msi"</PostBuildEvent>
   </PropertyGroup>
   <!--
 	To modify your build process, add your task inside one of the targets below and uncomment it.

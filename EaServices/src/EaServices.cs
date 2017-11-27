@@ -1261,6 +1261,25 @@ Second Element: Target of move connections and appearances", "Select two element
                     break;
 
                 case ObjectType.otElement:
+                    el = (Element)rep.GetContextObject();
+                    if (el.Locked) return;
+
+                    if (el.Type == "Activity")
+                    {
+                        UpdateActivityMethodParameterWrapper(rep);
+
+                    }
+                    else
+                    {
+
+                        CreateActivityForOperationsInElement(rep, el);
+                        rep.Models.Refresh();
+                        rep.RefreshModelView(0);
+                        rep.ShowInProjectView(el);
+                    }
+
+
+
                     el = (Element) rep.GetContextObject();
                     if (el.Locked) return;
 
@@ -1376,7 +1395,46 @@ Second Element: Target of move connections and appearances", "Select two element
             port.ConnectPortsGui();
 
         }
-        
+        [ServiceOperation("{63618EE6-BA1D-41AD-98C4-4B53B9E19F51}", "Update CallOperation Action", "Select Action", isTextRequired: false)]
+        public static bool UpdateAction(Repository rep)
+        {
+            switch (rep.GetContextItemType())
+            {
+                case ObjectType.otElement:
+                    Element el = (Element)rep.GetContextObject();
+                    if (el.Type != "Action") return true;
+
+
+
+                    string methodName = CallOperationAction.GetMethodNameFromCallString(el.Name);
+                    // Operation Find
+                    Method m = CallOperationAction.GetMethodFromMethodName(rep, methodName, isNoExtern: true) ??
+                               CallOperationAction.GetMethodFromMethodName(rep, methodName, isNoExtern: false);
+                    if (m == null) return true;
+
+                    Diagram diaCurrent = rep.GetCurrentDiagram();
+                    if (diaCurrent == null) return true;
+                    var eaDia = new EaDiagram(rep);
+                    rep.SaveDiagram(diaCurrent.DiagramID);
+
+                    // try to make a callBehavior
+                    hoUtils.CustomProperty customProperty = new hoUtils.CustomProperty(rep, el);
+                    // no custom property available
+                    if (customProperty.GetValueEx("kind") == "")
+                    {
+                        customProperty.Create("kind", "ActionKind", "CallOperation");
+                    }
+                    else
+                    {
+                        customProperty.Update("kind", "ActionKind", "CallOperation");
+                    }
+                    CallOperationAction.SetClassifierId(rep, el, m.MethodGUID);
+                    eaDia.ReloadSelectedObjectsAndConnector();
+                    break;
+
+            }
+            return true;
+        }
 
         #region showAllEmbeddedElements
 
@@ -3312,28 +3370,31 @@ from %APPDATA%Local\Apps\hoTools\
 
         #region UpdateActivityParameter
 
+        /// <summary>
+        /// Update Activity types (return, parameter) according to Operation
+        /// </summary>
+        /// <param name="rep"></param>
         public static void UpdateActivityParameter(Repository rep)
         {
             ObjectType oType = rep.GetContextItemType();
             if (oType.Equals(ObjectType.otElement))
             {
-                var el = (Element) rep.GetContextObject();
+
+                Element el = (Element)rep.GetContextObject();
                 if (el.Type.Equals("Activity"))
                 {
                     // get the associated operation
                     Method m = Util.GetOperationFromBrehavior(rep, el);
                     if (el.Locked) return;
                     if (m == null) return;
-                    ActivityPar.UpdateParameterFromOperation(rep, el, m); // get parameters from Operation for Activity
+                    ActivityPar.UpdateParameterFromOperation(rep, el, m);// get parameters from Operation for Activity
                     Diagram dia = rep.GetCurrentDiagram();
-                    if (dia == null) return;
-
-                    DiagramObject diaObj = Util.GetDiagramObjectById(rep, dia, el.ElementID);
-                    //EA.DiagramObject diaObj = dia.GetDiagramObjectByID(el.ElementID,"");
+                    DiagramObject diaObj = dia?.GetDiagramObjectByID(el.ElementID, "");
                     if (diaObj == null) return;
 
                     int pos = 0;
                     rep.SaveDiagram(dia.DiagramID);
+
                     foreach (Element actPar in el.EmbeddedElements)
                     {
                         if (!actPar.Type.Equals("ActivityParameter")) continue;
@@ -3349,15 +3410,15 @@ from %APPDATA%Local\Apps\hoTools\
             }
             if (oType.Equals(ObjectType.otMethod))
             {
-                var m = (Method) rep.GetContextObject();
+                Method m = (Method)rep.GetContextObject();
                 Element act = Appl.GetBehaviorForOperation(rep, m);
                 if (act == null) return;
                 if (act.Locked) return;
-                ActivityPar.UpdateParameterFromOperation(rep, act, m); // get parameters from Operation for Activity
+                ActivityPar.UpdateParameterFromOperation(rep, act, m);// get parameters from Operation for Activity
             }
             if (oType.Equals(ObjectType.otPackage))
             {
-                var pkg = (Package) rep.GetContextObject();
+                Package pkg = (Package)rep.GetContextObject();
                 UpdateActivityParameterForPackage(rep, pkg);
             }
         }
@@ -6234,8 +6295,7 @@ from %APPDATA%Local\Apps\hoTools\
             }
             return names;
         }
-
-
+       
         /// <summary>
         /// Get names from selected item(s) and sort them alphabetic
         /// </summary>
@@ -6266,6 +6326,32 @@ from %APPDATA%Local\Apps\hoTools\
                     : ((EA.Package)rep.GetContextObject()).Name;
             }
             return names;
+        }
+        /// <summary>
+        /// Update Activity parameter and linkage
+        /// </summary>
+        public static void UpdateActivityMethodParameterWrapper(EA.Repository rep)
+        {
+            
+            try
+            {
+                Cursor.Current = Cursors.WaitCursor;
+
+                // if action update link to operation
+                EaService.UpdateAction(rep);
+
+                EaService.UpdateActivityParameter(rep);
+                EaService.UpdateOperationTypes(rep);
+                Cursor.Current = Cursors.Default;
+            }
+            catch (Exception e10)
+            {
+                MessageBox.Show(e10.ToString(), "Error insert Attributes");
+            }
+            finally
+            {
+                Cursor.Current = Cursors.Default;
+            }
         }
 
         /// <summary>

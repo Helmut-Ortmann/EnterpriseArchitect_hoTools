@@ -153,6 +153,7 @@
     <Compile Include="src\Configuration\HoToolsGlobalCfg.cs" />
     <Compile Include="src\Configuration\IHoToolsGlobalCfg.cs" />
     <Compile Include="src\Connector.cs" />
+    <Compile Include="src\CustomProperty.cs" />
     <Compile Include="src\Element.cs" />
     <Compile Include="src\Export\Excel.cs" />
     <Compile Include="src\Extensions\Extension.cs" />

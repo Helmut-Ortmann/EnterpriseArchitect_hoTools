@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WixLocalization Culture="en-us" xmlns="http://schemas.microsoft.com/wix/2006/localization">
+  <!--For the IDs and the default strings see:
+  https://raw.githubusercontent.com/wixtoolset/wix3/develop/src/ext/UIExtension/wixlib/WixUI_en-us.wxl
+  -->
+  <String Id="AdvancedWelcomeEulaDlgDescriptionPerUser">Click Install to install [ProductName] just for you. Admin rights needed. "Advanced" doesn't need admin rights for per user install!!</String>
+  <String Id="AdvancedWelcomeEulaDlgDescriptionPerMachine">Click Install to install [ProductName] for all users. Click Advanced to install without Admin rights or for all users.</String>
+  <String Id="MaintenanceWelcomeDlgDescription" Overridable="yes">The Setup Wizard allows you to change the way [ProductName] features are installed on your computer or to remove it from your computer. Click Next to continue or Cancel to exit the Setup Wizard. Advanced Setting to install without admin rights.</String>
+</WixLocalization>

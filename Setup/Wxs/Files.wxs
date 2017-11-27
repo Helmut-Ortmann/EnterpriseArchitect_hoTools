@@ -39,7 +39,7 @@
       </Component>
       
       <Component Id="RegisterEA" Guid="08CCFB79-BA02-4B57-BE8B-795754A6113F">
-        <RegistryKey Root="HKCU" Key="Software\Sparx Systems\EAAddins\hoTools">
+        <RegistryKey Root="HKMU" Key="Software\Sparx Systems\EAAddins\hoTools">
           <RegistryValue Type="string" Value="hoTools.HoToolsRoot" KeyPath="yes" />
         </RegistryKey>
       </Component>
@@ -84,7 +84,7 @@
       Update if Assembly, Visual Studio Version changed
       If you change AssemblyVersion also update all Version=.. in the beneath associated registry - or run the collect.bat
       -->
-      <Component Id="cmp31940B54CF312110947FB4C57021C05C" Guid="*">
+      <Component Id="cmp31940B54CF312110947FB4C57021C05C" Guid="{B437B833-AC3D-4401-8450-12C5D4DC3F2F}">
         <Class Id="{24C07752-9837-3B2F-80CD-A1747150F9E1}" Context="InprocServer32" Description="hoTools.HoToolsRoot" ThreadingModel="both" ForeignServer="mscoree.dll">
           <ProgId Id="hoTools.HoToolsRoot" Description="hoTools.HoToolsRoot" />
         </Class>
@@ -116,7 +116,7 @@
       Update if Assembly, Visual Studio Version changed
       If you change AssemblyVersion also update all Version=.. in the beneath associated registry - or run the collect.bat
       -->
-      <Component Id="cmp7418A9F88625553929E4E28D82354AE8" Guid="*">
+      <Component Id="cmp7418A9F88625553929E4E28D82354AE8" Guid="{846927B2-4AD2-42E2-99C3-8C6680D40A8F}">
         <Class Id="{1B8C6EA1-B38B-3530-95D8-12EB6DB36346}" Context="InprocServer32" Description="hoTools.hoToolsGui.AddinGui" ThreadingModel="both" ForeignServer="mscoree.dll">
           <ProgId Id="hoTools.hoToolsGui.AddinGui" Description="hoTools.hoToolsGui.AddinGui" />
         </Class>
@@ -185,7 +185,7 @@
       Update if Assembly, Visual Studio Version changed
       If you change AssemblyVersion also update all Version=.. in the beneath associated registry - or run the collect.bat
       -->
-      <Component Id="cmp28B2327A2A980C943C7C1F3FC0E50C7E" Guid="*">
+      <Component Id="cmp28B2327A2A980C943C7C1F3FC0E50C7E" Guid="{548A72C8-160A-4973-B350-CBEE189FA3ED}">
         <Class Id="{2703ED16-2C93-4B13-83DC-F72FB6EDBA9E}" Context="InprocServer32" Description="hoTools.Find.FindAndReplaceGUI" ThreadingModel="both" ForeignServer="mscoree.dll">
           <ProgId Id="hoTools.FindAndReplaceGUI" Description="hoTools.Find.FindAndReplaceGUI" />
         </Class>
@@ -234,7 +234,7 @@
       Update if Assembly, Visual Studio Version changed
       If you change AssemblyVersion also update all Version=.. in the beneath associated registry - or run the collect.bat
       -->
-      <Component Id="cmpAC8B040BBB0645E999205714FCDE95F3" Guid="*">
+      <Component Id="cmpAC8B040BBB0645E999205714FCDE95F3" Guid="{D8D812B4-037E-43CC-97F2-89F8E2A7260A}">
         <Class Id="{26B5B659-A894-3FB2-BC9D-585182F17166}" Context="InprocServer32" Description="hoTools.hoSqlGui.HoSqlGui+EnterTextBox" ThreadingModel="both" ForeignServer="mscoree.dll">
           <ProgId Id="hoTools.hoSqlGui.HoSqlGui+EnterTextBox" Description="hoTools.hoSqlGui.HoSqlGui+EnterTextBox" />
         </Class>
@@ -266,7 +266,7 @@
       Update if Assembly, Visual Studio Version changed
       If you change AssemblyVersion also update all Version=.. in the beneath associated registry - or run the collect.bat
       -->
-      <Component Id="cmp5F935FA914105189E55B8F7E9C2A3543" Guid="*">
+      <Component Id="cmp5F935FA914105189E55B8F7E9C2A3543" Guid="{EBC3E103-72BF-4F29-BFB6-1EE480041AA6}">
         <Class Id="{07081FF7-5B36-4487-994B-B69DA4D4C530}" Context="InprocServer32" Description="hoTools.Extensions.ExtensionGui" ThreadingModel="both" ForeignServer="mscoree.dll">
           <ProgId Id="hoTools.ExtensionGUI" Description="hoTools.Extensions.ExtensionGui" />
         </Class>

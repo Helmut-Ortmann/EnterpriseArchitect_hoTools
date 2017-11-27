@@ -11,6 +11,7 @@
       2. Update File-Version of Addin.DLL File (Properties Assembly) but not Assembly-Version 
          (new registry of Assembly required)
          A new Assembly Version requires a new DLL-Registration
+         You may change the registration by editor (that's the way I do it)
       3. Product ID is handled by WIX
       4. Check ActivreX.dll.config (configuration) in:
          - ..\setup\hoToolsGui.dll.config
@@ -107,7 +108,13 @@
     <Property Id="WIXUI_INSTALLDIR" Value="INSTALLDIR" />
     -->
     <WixVariable Id="WixUILicenseRtf" Value="License.rtf"/>
-    <UIRef Id="WixUI_Advanced" />
+    <UIRef Id="WixUI_MySetup" /> <!--WixUI_Advanced WixUI_MySetup -->
+    <!--
+      Guidelines Single Package Authoring (per user/per machine install)
+      https://msdn.microsoft.com/en-us/library/windows/desktop/dd408068(v=vs.85).aspx
+      http://uvinw.com/per-machine-and-per-user-without-UAC-in-WiX/
+        -->
+    <Property Id="WixAppFolder" Value= "WixPerUserFolder" />
     <UIRef Id="WixUI_ErrorProgressText" />
 
     <!-- Prevent downgrading -->
