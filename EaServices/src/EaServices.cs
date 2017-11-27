@@ -1277,10 +1277,6 @@ Second Element: Target of move connections and appearances", "Select two element
                         rep.RefreshModelView(0);
                         rep.ShowInProjectView(el);
                     }
-
-
-
-                    el = (Element) rep.GetContextObject();
                     if (el.Locked) return;
 
                     CreateActivityForOperationsInElement(rep, el);
