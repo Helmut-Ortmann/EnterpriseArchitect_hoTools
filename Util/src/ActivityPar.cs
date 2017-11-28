@@ -77,7 +77,7 @@ namespace hoTools.Utils.ActivityParameter
                 EA.Element actForUpdate = rep.GetElementByGuid(behaviorGuid);
                 if (actForUpdate == null)
                 {
-                    MessageBox.Show($"", "Can't update activity for operation, no valid link found");
+                    MessageBox.Show($"Behavior GUID ={behaviorGuid}. Unable to find Activity for this GUIID", "Can't update Activity for Operation, no valid link found");
                     return false;
                 }
                 UpdateParameterFromOperation(rep, actForUpdate, m);// update parameters from Operation for Activity
@@ -289,6 +289,7 @@ namespace hoTools.Utils.ActivityParameter
 
             // over all parameters
             string guids = "";
+            int pos = 0;
             foreach (EA.Parameter parSrc in m.Parameters)
             {
                 // create an Parameter for Activity (in fact an element with properties)
@@ -302,7 +303,8 @@ namespace hoTools.Utils.ActivityParameter
                 if (parSrc.IsConst) prefixTyp = " const";
                 var postfixName = "";
                 if (parSrc.Kind.Contains("out")) postfixName = "*";
-                parName = parSrc.Position + ":" + parSrc.Name + postfixName + prefixTyp + direction;
+                //parName = parSrc.Position + ":" + parSrc.Name + postfixName + prefixTyp + direction;
+                parName = $"{pos}:{parSrc.Name}{postfixName}{prefixTyp}{direction}";
 
                 // check if parameter already exists (last parameter = false)
                 parTrgt = Util.GetParameterFromActivity(rep, parSrc, act);
@@ -342,7 +344,8 @@ namespace hoTools.Utils.ActivityParameter
                 if (parSrc.IsConst)  par.SetParameterProperties("constant", "true");
                 par.Save();
                 parTrgt.Update();
-               
+                pos += 1;
+
 
 
             }

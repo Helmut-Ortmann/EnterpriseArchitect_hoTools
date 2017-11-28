@@ -88,7 +88,9 @@ Todo:
 
         
       <Publish Dialog="InstallScopeDlg" Control="Back" Event="NewDialog" Value="AdvancedWelcomeEulaDlg">1</Publish>
-      <!-- override default WixAppFolder of WixPerMachineFolder as standard user won't be shown the radio group to set WixAppFolder -->
+      
+
+      <!-- Handle next button in Advanced UI dialog -->
       <Publish Dialog="InstallScopeDlg" Control="Next" Property="WixAppFolder" Value="WixPerUserFolder" Order="1">!(wix.WixUISupportPerUser) AND NOT Privileged</Publish>
       <Publish Dialog="InstallScopeDlg" Control="Next" Property="ALLUSERS" Value="{}" Order="2">WixAppFolder = "WixPerUserFolder"</Publish>
       <Publish Dialog="InstallScopeDlg" Control="Next" Property="ALLUSERS" Value="1" Order="3">WixAppFolder = "WixPerMachineFolder"</Publish>
