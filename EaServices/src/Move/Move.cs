@@ -56,7 +56,7 @@ namespace hoTools.EaServices.MOVE
             return true;
         }
 
-        private static bool Change_t_xref(Odbc odbc, string srcGUID, string targetGUID)
+        private static bool Change_t_xref(Odbc odbc, string srcGuid, string targetGuid)
         {   // Change GUID in description
             // Change GUID in client
             // for the following types of behavior
@@ -64,14 +64,14 @@ namespace hoTools.EaServices.MOVE
             // search for all description fields in xref where the source GUID is used
             string sql = "SELECT x.description, x.xrefID " +
                   " FROM t_xref x" +
-                         $" WHERE x.description like '%{srcGUID}%' ;";
+                         $" WHERE x.description like '%{srcGuid}%' ;";
             odbc.Rs.Open(sql, odbc.Cn, ADODB.CursorTypeEnum.adOpenForwardOnly, 
                                     ADODB.LockTypeEnum.adLockOptimistic, -1);
             while (odbc.Rs.EOF == false)
             {
                 // replace the source ID by the target ID
                 string description = odbc.Rs.Fields[0].Value.ToString();
-                description = description.Replace(srcGUID, targetGUID);
+                description = description.Replace(srcGuid, targetGuid);
                 odbc.Rs.Update("description", description);
                 
                 odbc.Rs.MoveNext();
@@ -79,8 +79,8 @@ namespace hoTools.EaServices.MOVE
             odbc.Rs.Close();
             // replace the client ID by the target ID
             sql = "Update t_xref" +
-                " set client = '" + targetGUID + "' " +
-                "  where client = '" + srcGUID + "' " +
+                " set client = '" + targetGuid + "' " +
+                "  where client = '" + srcGuid + "' " +
                 " ;";
 
             if (odbc.OdbcCmd(sql) == false) return false;
@@ -103,15 +103,17 @@ namespace hoTools.EaServices.MOVE
             string description = "";
             try
             { odbc.Rs.Close(); }
-            catch (Exception e)
+
+            catch (Exception)
             {
+                // ignored
             }
             odbc.Rs.Open(sql, odbc.Cn, ADODB.CursorTypeEnum.adOpenStatic, ADODB.LockTypeEnum.adLockReadOnly, 0);
             while (odbc.Rs.EOF == false)
             {
-                string srcGUID = odbc.Rs.Fields[0].Value.ToString().Trim();
+                string srcGuid = odbc.Rs.Fields[0].Value.ToString().Trim();
                 //check GUID is a GUID
-                if (srcGUID.Length != 38 | srcGUID.Substring(0, 1) != "{")
+                if (srcGuid.Length != 38 | srcGuid.Substring(0, 1) != "{")
                 {
                     odbc.Rs.MoveNext();
                     continue;
@@ -127,9 +129,9 @@ namespace hoTools.EaServices.MOVE
                 if (description.Length <= 7990)
                 {
 
-                    description = description.Replace("," + srcGUID, "");
-                    description = description.Replace(srcGUID + ",", "");
-                    description = description.Replace(srcGUID, "");
+                    description = description.Replace("," + srcGuid, "");
+                    description = description.Replace(srcGuid + ",", "");
+                    description = description.Replace(srcGuid, "");
 
                     // change source class to target of found elements if there are still signals on flow
                     // if no signals on flow delete t_xref entry
@@ -156,25 +158,26 @@ namespace hoTools.EaServices.MOVE
             odbc.Rs.Close();
             return true;
         }
-        private static bool Delete_t_xref(Odbc odbc, string srcGUID)
+        private static bool Delete_t_xref(Odbc odbc, string srcGuid)
         {   // delete GUID in description
             // search for all description fields in xref where the source GUID is used
             string sql = "SELECT x.description, x.xrefID " +
                   " FROM t_xref x" +
-                  $" WHERE x.description like '%{srcGUID.Trim()}%';";
+                  $" WHERE x.description like '%{srcGuid.Trim()}%';";
             try
             { odbc.Rs.Close(); }
-            catch (Exception e)
+            catch (Exception)
             {
+                // ignored
             }
             odbc.Rs.Open(sql, odbc.Cn, ADODB.CursorTypeEnum.adOpenStatic, ADODB.LockTypeEnum.adLockReadOnly, 0);
             while (odbc.Rs.EOF == false)
             {
                 // delete the source ID
                 string description = odbc.Rs.Fields[0].Value.ToString();
-                description = description.Replace("," + srcGUID, "");
-                description = description.Replace(srcGUID + ",", "");
-                description = description.Replace(srcGUID, "");
+                description = description.Replace("," + srcGuid, "");
+                description = description.Replace(srcGuid + ",", "");
+                description = description.Replace(srcGuid, "");
                 // change source class to target of found elements if there are still signals on flow
                 // if no signals on flow delete t_xref entry
                 if (description == "")
@@ -268,10 +271,10 @@ namespace hoTools.EaServices.MOVE
         {
             EA.Package pkg = rep.GetPackageByID(srcEl.PackageID);
             short i = 0;
-            int srcID = srcEl.ElementID;
+            int srcId = srcEl.ElementID;
             foreach (EA.Element el in pkg.Elements)
             {
-                if (srcID == el.ElementID)
+                if (srcId == el.ElementID)
                 {
                     pkg.Elements.DeleteAt(i, true);
                     return true;

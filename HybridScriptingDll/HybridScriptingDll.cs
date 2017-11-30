@@ -64,7 +64,7 @@ namespace HybridScriptingDll
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show($@"e", $@"ProcessId={value}");
+                    MessageBox.Show($@"{e}", $@"ProcessId={value}");
                 }
                 _processId = value;
                 MessageBox.Show($@"ProcessId={value}");

@@ -841,6 +841,71 @@ Second Element: Target of move connections and appearances", "Select two element
             if (String.IsNullOrWhiteSpace(strGuid)) Clipboard.Clear();
             else Clipboard.SetText(strGuid);
         }
+        /// <summary>
+        /// Copy GUID to ClipBoard
+        /// </summary>
+        /// <param name="rep"></param>
+        [ServiceOperation("{28A7501A-ADDC-4250-9E05-E3561840CF3B}", "Copy Type, Name, GUID to Clipboard",
+            "Select (Package, Element, Diagram, Attribute, Operation, Connector, Parameter)",
+            isTextRequired: false)]
+        // ReSharper disable once UnusedMember.Global
+        // dynamical usage as configurable service by reflection
+        public static void CopyNamweTypeGuidToClipboard(Repository rep)
+        {
+            string strGuid = "";
+            string type = "";
+            string name = "";
+            object o;
+            EA.ObjectType objType = rep.GetContextItem(out o);
+            switch (objType)
+            {
+                case EA.ObjectType.otElement:
+                    strGuid = ((EA.Element)o).ElementGUID;
+                    type = ((EA.Element) o).Type;
+                    name = ((EA.Element)o).Name;
+                    break;
+                case EA.ObjectType.otPackage:
+                    strGuid = ((EA.Package)o).PackageGUID;
+                    type = "Package";
+                    name = ((EA.Package)o).Name;
+                    break;
+                case EA.ObjectType.otDiagram:
+                    strGuid = ((EA.Diagram)o).DiagramGUID;
+                    type = $"Diagram {((EA.Diagram)o).Type}";
+                    name = $"{((EA.Diagram)o).Name}";
+                    break;
+                case EA.ObjectType.otAttribute:
+                    strGuid = ((EA.Attribute)o).AttributeGUID;
+                    name = $"{((EA.Attribute)o).Name}";
+                    type = "Attribute";
+                    break;
+                case EA.ObjectType.otMethod:
+                    strGuid = ((EA.Method)o).MethodGUID;
+                    name = $"{((EA.Method)o).Name}";
+                    type = "Method";
+                    break;
+
+                case EA.ObjectType.otConnector:
+                    strGuid = ((EA.Connector)o).ConnectorGUID;
+                    type = $"{((EA.Connector)o).Type}";
+                    name = $"{((EA.Connector)o).Name}";
+                    break;
+                case EA.ObjectType.otModel:
+                    strGuid = ((EA.Package)o).PackageGUID;
+                    name = $"{((EA.Package)o).Name}";
+                    type = "Model";
+                    break;
+                case EA.ObjectType.otParameter:
+                    strGuid = ((EA.Parameter)o).ParameterGUID;
+                    name = $"{((EA.Parameter)o).Name}";
+                    type = "Parameter";
+                    break;
+
+            }
+
+            if (String.IsNullOrWhiteSpace(strGuid)) Clipboard.Clear();
+            else Clipboard.SetText($"{type}='{name}' {strGuid}");
+        }
 
 
         //-------------------------------------------------------------------------------------------

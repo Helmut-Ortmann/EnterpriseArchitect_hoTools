@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
 using ADODB;
@@ -58,7 +59,7 @@ namespace hoTools.Utils.ODBC
                 connectionString = connectionString.ToUpper();
                 if (connectionString.Contains(".EAP"))
                 {
-                    start = connectionString.IndexOf("DATA SOURCE=") + 12;
+                    start = connectionString.IndexOf(@"DATA SOURCE=", StringComparison.Ordinal) + 12;
                     connectionString = connectionString.Substring(start);
                     TextReader tr = new StreamReader(connectionString);
 
@@ -66,6 +67,7 @@ namespace hoTools.Utils.ODBC
                     string shortcut = tr.ReadLine();
                     tr.Close();
 
+                    Debug.Assert(shortcut != null, nameof(shortcut) + " != null");
                     if (shortcut.Contains("Connect="))
                     {
                         start = shortcut.IndexOf("Connect=", StringComparison.Ordinal) + 8;
@@ -107,7 +109,7 @@ namespace hoTools.Utils.ODBC
             object dummy = Type.Missing;
             try
             {
-                rs1 = _cmd.Execute(out dummy, ref dummy, 0);
+                _cmd.Execute(out dummy, ref dummy, 0);
             }
 
             catch (Exception ex)
@@ -124,7 +126,10 @@ namespace hoTools.Utils.ODBC
             if (_cn != null)
             {
                 try { _cn.Close(); }
-                catch (Exception e) { }
+                catch (Exception)
+                {
+                    // ignored
+                }
             }
             _cn = null;
             _rs = null;
