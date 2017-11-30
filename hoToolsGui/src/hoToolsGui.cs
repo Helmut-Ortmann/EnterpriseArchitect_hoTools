@@ -649,6 +649,7 @@ namespace hoTools.hoToolsGui
         }
         /// <summary>
         /// Run search according to configuration.
+        /// - If 'Search Term' of configuration is '&gt;Search Term>' the use Search term from GUI
         /// </summary>
         /// <param name="pos"></param>
         void RunSearch(int pos)
@@ -661,7 +662,11 @@ namespace hoTools.hoToolsGui
                 string searchName = button.KeySearchName.Trim();
                 if (searchName == "") return;
 
-               _model.SearchRun(searchName, button.KeySearchTerm.Trim() );
+                // Use Search Term from Configuration or from GUI
+                string searchTerm = button.KeySearchTerm.Trim();
+                if (searchTerm.Equals("<Search Term>")) searchTerm = _txtSearchText.Text;
+
+               _model.SearchRun(searchName, searchTerm);
 
             }
         }

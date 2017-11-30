@@ -181,7 +181,12 @@ e.g.: 'myString*' Everything starting with 'myString' (db independent)
 </value>
   </data>
   <data name="txtBtn1SearchTerm.ToolTip" xml:space="preserve">
-    <value>Enter &lt;Search Term&gt; to specify your Search more specific.
+    <value>The Search Term to use:
+- Static/Fix, just enter string
+- From GUI, enter the string '&lt;Search Term&gt;' 
+
+Enter your static &lt;Search Term&gt; to specify your Search more specific or
+Enter the string '&lt;Search Term&gt;' to use the GUI.
 
 The following wild cards are supported and converted according to your database:
 - #WC# EA wild card (works also in hoToolsQuery like '*' or '%'

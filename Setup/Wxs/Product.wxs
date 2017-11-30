@@ -28,7 +28,7 @@
        The Scripts you find in: Setup\Script\..
        see also: http://kentie.net/article/wixnameversion/index.htm
   -->
-  <?define ProductVersion="3.2.2" ?> 
+  <?define ProductVersion="3.2.3" ?> 
   <?define UpgradeCode="3543ED18-28F6-484C-AD8C-FA1A3B72C911" ?>
   <?define Manufacturer="hoModeler.de" ?>
   <?define ProductName="hoTools" ?>
