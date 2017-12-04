@@ -14,7 +14,11 @@ rem - Main DLL
 rem - Every DLL which is registered to EA to run in AddIn Window or as own Window
 rem - Replace: Source="SourceDir\release\AddInSimple.dll" /> by
 rem            Name="AddInSimple.dll" Source="$(var.AddInSimple.TargetPath)" />
-rem            Change name accrdingly
+rem            Change name accordingly
+rem
+rem If you change the assembly version you have to:
+rem - change the version information manually   OR
+rem - run Heat once more and integrate it in files.wxs
 
 
 SET WIX=C:\Program Files (x86)\WiX Toolset v3.11\bin\heat

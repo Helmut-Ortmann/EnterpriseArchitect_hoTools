@@ -28,8 +28,8 @@ Todo:
     <WixVariable Id="WixUISupportPerMachine" Value="1" Overridable="yes" />
 
 
-    <CustomAction Id="MyWixSetDefaultPerUserFolder" Property="WixPerUserFolder" Value="[LocalAppDataFolder]Apps\ho\[ProductName]\" Execute="immediate" />
-    <CustomAction Id="MyWixSetDefaultPerMachineFolder" Property="WixPerMachineFolder" Value="[ProgramFilesFolder]\ho\[ProductName]\" Execute="immediate" />
+    <CustomAction Id="MyWixSetDefaultPerUserFolder" Property="WixPerUserFolder" Value="[LocalAppDataFolder]Apps\[Manufacturer]\[ProductName]\" Execute="immediate" />
+    <CustomAction Id="MyWixSetDefaultPerMachineFolder" Property="WixPerMachineFolder" Value="[ProgramFilesFolder]\[Manufacturer]\[ProductName]\" Execute="immediate" />
     <CustomAction Id="MyWixSetPerUserFolder" Property="APPLICATIONFOLDER" Value="[WixPerUserFolder]" Execute="immediate" />
     <CustomAction Id="MyWixSetPerMachineFolder" Property="APPLICATIONFOLDER" Value="[WixPerMachineFolder]" Execute="immediate" />
 

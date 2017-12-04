@@ -30,7 +30,7 @@
   -->
   <?define ProductVersion="3.2.3" ?> 
   <?define UpgradeCode="3543ED18-28F6-484C-AD8C-FA1A3B72C911" ?>
-  <?define Manufacturer="hoModeler.de" ?>
+  <?define Manufacturer="ho" ?>
   <?define ProductName="hoTools" ?>
 
   <Product Id="*"
