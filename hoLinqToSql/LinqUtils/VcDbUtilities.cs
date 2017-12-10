@@ -15,19 +15,25 @@ namespace hoLinqToSql.LinqUtils
     public static class VcDbUtilities
     {
         /// <summary>
+        /// Get file path of the VC Symbol database
+        /// </summary>
+        /// <returns></returns>
+        public static string GetVcPathSymbolDataBases()
+        {
+            return $@"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\Code\User\workspaceStorage\";
+        }
+        /// <summary>
         /// Get path of source folder VC Code SQLite Symbol table
         /// </summary>
         /// <param name="folderPathSource"></param>
         /// <returns>"" if nothing found</returns>
         private static string GetPath(string folderPathSource)
         {
-            // Define other methods and classes here
-            string fileSqlRoot = $@"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\Code\User\workspaceStorage\";
-
+           
             // get the newest db paths as string
             // - of every release history 
             // - of every source folder supported by VS Code
-            IEnumerable<string> vcDbs = (from f in Directory.GetFiles(fileSqlRoot, "*.DB", SearchOption.AllDirectories)
+            IEnumerable<string> vcDbs = (from f in Directory.GetFiles(GetVcPathSymbolDataBases(), "*.DB", SearchOption.AllDirectories)
                 group f by Path.GetDirectoryName(f) into grpDir
                 let newest = grpDir.Max(d => File.GetLastWriteTime(d))
                 from n in grpDir
