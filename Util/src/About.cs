@@ -13,11 +13,12 @@ namespace hoTools.Utils.Abouts
         /// <summary>
         /// OutputAboutMessage.
         /// </summary>
+        /// <param name="rep"></param>
         /// <param name="description"></param>
         /// <param name="caption"></param>
         /// <param name="lDllNames"></param>
         /// <param name="pathSettings"></param>
-        public static void AboutMessage([NotNull] string description, [NotNull] string caption, string[] lDllNames, [NotNull] string pathSettings="No")
+        public static void AboutMessage(EA.Repository rep, [NotNull] string description, [NotNull] string caption, string[] lDllNames, [NotNull] string pathSettings="No")
         {
         
 
@@ -28,11 +29,17 @@ Helmut.Ortmann@t-online.de
 (+49) 172 / 51 79 16 7
 
 ";
+
+
             // get product version
             Assembly assembly = Assembly.GetExecutingAssembly();
             FileVersionInfo fileVersionInfo = FileVersionInfo.GetVersionInfo(assembly.Location);
             description =
-                    $"{description}{"Product-Version:",-32}\t: V{fileVersionInfo.ProductVersion}{Environment.NewLine}";
+                    $"{description}{"Product-Version:",-32}\t\tV{fileVersionInfo.ProductVersion}{Environment.NewLine}"+
+                    $"{"EA Library Version:",-32}\t\t{ rep.LibraryVersion}{Environment.NewLine}" +
+                    $"{"ConnectionString:", -32}\t\t{ rep.ConnectionString}{Environment.NewLine}";
+
+
 
             // Get file-version of every dll
             string pathRoot = Assembly.GetExecutingAssembly().Location;

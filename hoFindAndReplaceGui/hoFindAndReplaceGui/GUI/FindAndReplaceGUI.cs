@@ -205,10 +205,10 @@ namespace hoTools.Find
                     EaService.AboutVar1(Release, configFilePath);
                     break;
                 case AddinSettings.CustomerCfg.HoTools:
-                    EaService.About(Release, configFilePath, AddinSettings.ConfigFolderPath);
+                    EaService.About(Repository, Release, configFilePath, AddinSettings.ConfigFolderPath);
                     break;
                 default:
-                    EaService.About(Release, configFilePath, AddinSettings.ConfigFolderPath);
+                    EaService.About(Repository, Release, configFilePath, AddinSettings.ConfigFolderPath);
                     break;
             }
         }

@@ -6445,8 +6445,9 @@ from %APPDATA%Local\Apps\hoTools\
         /// </summary>
         /// <param name="release"></param>
         /// <param name="configFilePath"></param>
+        /// <param name="rep"></param>
         /// <param name="settingsPath"></param>
-        public static void About(string release, [NotNull] string configFilePath, [NotNull] string settingsPath = "No")
+        public static void About(EA.Repository rep, string release, [NotNull] string configFilePath,  [NotNull] string settingsPath = "No")
         {
 
             string[] dllNames = new string[]
@@ -6478,7 +6479,7 @@ from %APPDATA%Local\Apps\hoTools\
                 //"sybdrvado20.dll"
                 };
 
-            hoTools.Utils.Abouts.About.AboutMessage("hoTools", "Keeps things simple", dllNames, pathSettings: settingsPath);
+            hoTools.Utils.Abouts.About.AboutMessage(rep, "hoTools", "Keeps things simple", dllNames, pathSettings: settingsPath);
 
 
 //            string installDir = Path.GetDirectoryName(Assembly.GetAssembly(typeof(EaService)).CodeBase);
