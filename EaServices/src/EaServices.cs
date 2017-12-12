@@ -845,7 +845,7 @@ Second Element: Target of move connections and appearances", "Select two element
         /// Copy GUID to ClipBoard
         /// </summary>
         /// <param name="rep"></param>
-        [ServiceOperation("{28A7501A-ADDC-4250-9E05-E3561840CF3B}", "Copy Type, Name, GUID to Clipboard",
+        [ServiceOperation("{28A7501A-ADDC-4250-9E05-E3561840CF3B}", "Copy Review Info: Type, Name, GUID to Clipboard",
             "Select (Package, Element, Diagram, Attribute, Operation, Connector, Parameter)",
             isTextRequired: false)]
         // ReSharper disable once UnusedMember.Global
