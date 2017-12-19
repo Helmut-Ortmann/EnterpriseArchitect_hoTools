@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Text.RegularExpressions;
 
 
 namespace DuoVia.FuzzyStrings.ComparePhraseEngine
@@ -53,11 +52,18 @@ namespace DuoVia.FuzzyStrings.ComparePhraseEngine
             _queries.Remove(found);
         }
 
+
+        /// <summary>
+        /// Caluculate rank from needle in haystack
+        /// </summary>
+        /// <param name="hayString"></param>
+        /// <param name="needleString"></param>
+        /// <returns></returns>
         public double CalculateRank(string hayString, string needleString)
         {
-            var needlePhraseh = MakePhrase(needleString);
+            var needlePhrase = MakePhrase(needleString);
             var hayPhrase = MakePhrase(hayString);
-            return CalcRank(hayPhrase.Words, needlePhraseh.Words);
+            return CalcRank(hayPhrase.Words, needlePhrase.Words);
         }
 
         /// <summary>
@@ -124,11 +130,17 @@ namespace DuoVia.FuzzyStrings.ComparePhraseEngine
             return ret;
         }
         
-
+        /// <summary>
+        /// Makes a Phrase consisted of Text=Whole string, Words= array of words
+        /// </summary>
+        /// <param name="originalQueryStr"></param>
+        /// <returns></returns>
         private static Phrase MakePhrase(string originalQueryStr)
         {
-            var ret = new Phrase {Text = originalQueryStr, 
-                    Words = SplitToWords(originalQueryStr)};
+            var ret = new Phrase {
+                        Text = originalQueryStr, 
+                        Words = SplitToWords(originalQueryStr)
+                     };
             return ret;
         }
 

@@ -112,14 +112,7 @@ namespace AddinFramework.Util
             switch (fuzzyAlgo)
             {
                 case FuzzyAlgo.LongestCommonSubsequences:
-                    searchPattern = searchPattern.ToLower();
-
-                    foreach (SearchItem item in _staticAllSearches)
-                    {
-                        item.Score = searchPattern.LongestCommonSubsequence(item.Name.ToLower()).Item2;
-                    }
-                    // sort list according to score of each line (score against pattern)
-                    _staticAllSearches = _staticAllSearches.OrderByDescending(a => a.Score).ToList();
+                    LongestCommonSubsequenceExtensions(searchPattern);
                     break;
 
                 case FuzzyAlgo.PhraseSimilarity:
@@ -132,12 +125,29 @@ namespace AddinFramework.Util
                     }
                     // sort list according to score of each line (score against pattern)
                     _staticAllSearches = _staticAllSearches.OrderByDescending(a => a.Score).ToList();
+
+                    // Algorithm without valuable result
+                    if (_staticAllSearches.Count > 0 && _staticAllSearches[0].Score < 0.1 )
+                        LongestCommonSubsequenceExtensions(searchPattern);
+
+
                     //var auto completion = new Processor(_staticAllSearches);
                     //var lst = autocompletion.Search(searchPattern);
                     break;
             }
             
 
+        }
+
+        private static void LongestCommonSubsequenceExtensions(string searchPattern)
+        {
+            searchPattern = searchPattern.ToLower();
+            foreach (SearchItem item in _staticAllSearches)
+            {
+                item.Score = searchPattern.LongestCommonSubsequence(item.Name.ToLower()).Item2;
+            }
+            // sort list according to score of each line (score against pattern)
+            _staticAllSearches = _staticAllSearches.OrderByDescending(a => a.Score).ToList();
         }
         /// <summary>
         /// Reset sort in rtf by default order (Name field of SearchItem).

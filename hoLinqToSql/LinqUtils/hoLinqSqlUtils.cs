@@ -185,10 +185,22 @@ namespace hoLinqToSql.LinqUtils
 
         }
         /// <summary>
+        /// Get data source from connection string
+        /// </summary>
+        /// <param name="connectionString"></param>
+        /// <returns></returns>
+        public static string  GetDataSourceFromConnectionString(string connectionString)
+        {
+            Regex rx = new Regex("DataSource=([^;]*)");
+            Match match =  rx.Match(connectionString);
+            return match.Success ? match.Groups[1].Value : "";
+        }
+        /// <summary>
         /// Get connection string for VC Code Symbol table
         /// </summary>
         /// <param name="vcCodeFolderPath">Folder of VC Code C/C++ Source Code</param>
         /// <param name="provider"></param>
+        /// <param name="withErrorMessage"></param>
         /// <returns>"" = No connection found</returns>
         public static string GetConnectionString(string vcCodeFolderPath, out IDataProvider provider, bool withErrorMessage= true)
         {

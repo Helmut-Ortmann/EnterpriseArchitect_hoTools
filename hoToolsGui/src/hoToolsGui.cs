@@ -1198,14 +1198,15 @@ namespace hoTools.hoToolsGui
         }
 
         /// <summary>
-        /// Color find the found search string in rtf textbox. The string has to exactly match.
+        /// Color the found search string in rtf textbox. 
+        /// If onlyFull=true the text has to completely match. If onlyFull=false the matching characters are colored.
         /// </summary>
         /// <param name="rtf"></param>
         /// <param name="fromText"></param>
         /// <param name="stringToColor"></param>
         /// <param name="color"></param>
-
-        void ColorCharacters(RichTextBox rtf, string fromText, string stringToColor, Color color)
+        /// <param name="onlyFull"></param>
+        void ColorCharacters(RichTextBox rtf, string fromText, string stringToColor, Color color, bool onlyFull = false)
         {
             int posInText = 0;
             if (stringToColor.Trim() == "")
@@ -1217,7 +1218,15 @@ namespace hoTools.hoToolsGui
             {
 
                 string from = fromText;
-                Regex pattern = new Regex($"{stringToColor.Trim()}",RegexOptions.IgnoreCase);
+                string startString = "";
+                string endString = "";
+                if (!onlyFull)
+                {
+                    startString = "[";
+                    endString = "]";
+                }
+                Regex pattern = new Regex($"{startString}{stringToColor.Trim()}{endString}",RegexOptions.IgnoreCase);
+
                 Match match = pattern.Match(from);
                 while (match.Success)
                 {
