@@ -649,7 +649,7 @@ namespace hoTools.hoToolsGui
         }
         /// <summary>
         /// Run search according to configuration.
-        /// - If 'Search Term' of configuration is '&gt;Search Term>' the use Search term from GUI
+        /// - If 'Search Term' of configuration is '&gt;Search Term>' the Search uses the search term from GUI
         /// </summary>
         /// <param name="pos"></param>
         void RunSearch(int pos)

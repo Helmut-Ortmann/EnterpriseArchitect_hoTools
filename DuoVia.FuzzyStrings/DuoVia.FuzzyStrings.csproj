@@ -82,7 +82,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ComparePhraseEngine\Phrase.cs" />
-    <Compile Include="ComparePhraseEngine\Processor.cs" />
+    <Compile Include="ComparePhraseEngine\FuzzyProcessor.cs" />
     <Compile Include="ComparePhraseEngine\RankedItem.cs" />
     <Compile Include="DiceCoefficientExtensions.cs" />
     <Compile Include="DoubleMetaphoneExtensions.cs" />

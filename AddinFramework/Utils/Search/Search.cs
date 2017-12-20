@@ -116,7 +116,7 @@ namespace AddinFramework.Util
                     break;
 
                 case FuzzyAlgo.PhraseSimilarity:
-                    var processor = new Processor();
+                    var processor = new FuzzyProcessor();
 
 
                     foreach (SearchItem item in _staticAllSearches)

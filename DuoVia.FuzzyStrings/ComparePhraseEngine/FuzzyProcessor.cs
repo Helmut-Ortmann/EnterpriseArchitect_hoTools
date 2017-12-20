@@ -7,14 +7,14 @@ using System.Linq;
 
 namespace DuoVia.FuzzyStrings.ComparePhraseEngine
 {
-    public class Processor
+    public class FuzzyProcessor
     {
         #region Public methods
-        public Processor()
+        public FuzzyProcessor()
         {
         }
 
-        public Processor(IEnumerable<string> possibleValues)
+        public FuzzyProcessor(IEnumerable<string> possibleValues)
         {
             foreach (var possibleValue in possibleValues)
             {
@@ -27,7 +27,7 @@ namespace DuoVia.FuzzyStrings.ComparePhraseEngine
         /// To add another PossibleValue into the internal storage.
         /// </summary>
         /// <param name="item"></param>
-        public void AddPossibleValue(string item)
+        private void AddPossibleValue(string item)
         {
             if (string.IsNullOrEmpty(item))
                 throw new ArgumentOutOfRangeException();
@@ -47,14 +47,14 @@ namespace DuoVia.FuzzyStrings.ComparePhraseEngine
 
             var found = _queries.FirstOrDefault(query => query.Text == item);
             if (found == null)
-                throw new ArgumentOutOfRangeException(string.Format("No PossibleValue {0} is found",
+                throw new ArgumentOutOfRangeException(string.Format($"No PossibleValue {0} is found",
                         item));
             _queries.Remove(found);
         }
 
 
         /// <summary>
-        /// Caluculate rank from needle in haystack
+        /// Calculate rank from needle in haystack
         /// </summary>
         /// <param name="hayString"></param>
         /// <param name="needleString"></param>
@@ -71,7 +71,7 @@ namespace DuoVia.FuzzyStrings.ComparePhraseEngine
         /// </summary>
         /// <param name="queryStr"></param>
         /// <returns>
-        /// List of found auto-suggestions ordered by decreasing of their "relevancу"
+        /// List of found auto-suggestions ordered by decreasing of their "relevance"
         /// </returns>
         public IList<string> Search(string queryStr)
         {
@@ -96,10 +96,10 @@ namespace DuoVia.FuzzyStrings.ComparePhraseEngine
         {
             return _queries.Select(q => q.Text).ToList();
         }
-        #endregion 
+        #endregion
 
-        IList<Phrase> _queries = new List<Phrase>();
-        private const double Dif = 0.00000001;
+        readonly IList<Phrase> _queries = new List<Phrase>();
+        private const double Dif = 0.00000001;              // minimal value to comare with 0.0
         private const double MaxQueryRelativeWeight = 1.0; //In ]0, 1] range
         private const double MinQueryRelativeWeight = 0.5; //In ]0, MinQueryRelativeWeight[ range
         private const double IncreasingForUppercases = 1.1;
@@ -112,7 +112,9 @@ namespace DuoVia.FuzzyStrings.ComparePhraseEngine
         
 
         /// <summary>
-        /// Splits the input string on separate words using a pre-defined separators list
+        /// Splits the input string on separate words using:
+        /// - a pre-defined separators list
+        /// - Camel Case notation
         /// </summary>
         /// <param name="text"></param>
         /// <returns></returns>
@@ -146,7 +148,7 @@ namespace DuoVia.FuzzyStrings.ComparePhraseEngine
 
         /// <summary>
         /// Calculates a "degree of similarity" between the 2 specified words. 
-        /// The mininal requirement is: the right word should be a prefix the left word
+        /// The minimal requirement is: the right word should be a prefix the left word
         /// The algorithm of the "words similarity" uses the following factors: 
         ///     - the "words length factor": the closer are their lengths, the more "similar" are the words;
         ///     - the "capital letters factor": if a Query has capital letter(s) and the PossibleValue matches them case-sensitively, it increases the "similarity"
@@ -196,7 +198,7 @@ namespace DuoVia.FuzzyStrings.ComparePhraseEngine
             var phraseLengthFactor = CalcPhraseLengthFactor(weightOfPossibleValuePhrase, weightOfQueryPhrase);
             #endregion 
 
-            //-Enumerate all the possible "occurences" of queryWords within possibleValueWords; calculate SimlarityRank for each of them; choose one with highest SimlarityRank
+            //-Enumerate all the possible "occurrences" of queryWords within possibleValueWords; calculate SimlarityRank for each of them; choose one with highest SimlarityRank
             for (var i = 0; i <= possibleValueWords.Count() - queryWords.Count(); ++i)
             {
                 var similarityRankOfTheOccurence = FindOccurenceAndCalcRank(possibleValueWords, i, queryWords,
@@ -207,7 +209,7 @@ namespace DuoVia.FuzzyStrings.ComparePhraseEngine
         }
 
         /// <summary>
-        /// Looks for an "occurence" of queryWords within possibleValueWords starting with position startPositionInPossibleValue.
+        /// Looks for an "occurrence" of queryWords within possibleValueWords starting with position startPositionInPossibleValue.
         /// NOTE: if possibleValueWords[startPositionInPossibleValue] does not match to queryWords[0], we immediately stop the search and return 0. A calling code should then increment the startPositionInPossibleValue and call the method again; etc.
         /// </summary>
         /// <param name="possibleValueWords"></param>
@@ -215,8 +217,8 @@ namespace DuoVia.FuzzyStrings.ComparePhraseEngine
         /// <param name="queryWords"></param>
         /// <param name="phraseLengthFactor"></param>
         /// <returns>
-        ///     0 when no occurence is found
-        ///     > 0 when an occurence is found; in this case the returned value is the SimilarityRank of the found occurence
+        ///     0 when no occurrence is found
+        ///     > 0 when an occurrence is found; in this case the returned value is the SimilarityRank of the found occurrence
         /// </returns>
         private double FindOccurenceAndCalcRank(Word[] possibleValueWords, int startPositionInPossibleValue, Word[] queryWords, double phraseLengthFactor)
         {
@@ -238,8 +240,8 @@ namespace DuoVia.FuzzyStrings.ComparePhraseEngine
                 ++indxLeft;
             }
             if (indxRight < queryWords.Count())
-                return 0.0; //not ALL the queryWords were found in the possibleValueWords; so "no occurence" is found here
-            //all the queryWords were found in the possibleValueWords; we have found an "occurence" 
+                return 0.0; //not ALL the queryWords were found in the possibleValueWords; so "no occurrence" is found here
+            //all the queryWords were found in the possibleValueWords; we have found an "occurrence" 
             ret *= phraseLengthFactor;
             return ret;
         }

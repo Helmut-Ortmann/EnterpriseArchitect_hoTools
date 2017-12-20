@@ -3359,10 +3359,11 @@ See also: Apply Auto Counter New</value>
   <data name="_changeXmlFileToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>Set/Change the *.xml file path for a VC (Version Controlled) package
 1. Check-In the package
-2. Move the *.xml file to the new location and check it in
-3. Click on Set/Change VC *.xml file
-4. Enter new *.xml file path
-
+2. Checkout the parent package
+3. Move the *.xml file to the new location and check it in
+4. Click on Set/Change VC *.xml file
+5. Enter new *.xml file path
+6. Check-in the parent Package
 </value>
   </data>
   <data name="_showFolderVCorCodeToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
