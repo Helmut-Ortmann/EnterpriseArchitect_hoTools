@@ -124,7 +124,9 @@ Some features:
 ### Release 3.2.3
 -  Toolbar searches configurable to use <Search Term> from configuration or from GUI
    '<Search Term>' in configuration to use GUI <Search term>
--  Service Copy Type, Name, GUID to Clipboard (for e.g. review)
+-  Service Copy Type, Name, GUID, Review to Clipboard (for e.g. review)
+- Fix Find Search
+- Generating Activcity from Operation with combined create/update
 
 ### Release 3.2.2
 -  Setup for per-user and per-user (Single Package authoring, per user without admin right)
