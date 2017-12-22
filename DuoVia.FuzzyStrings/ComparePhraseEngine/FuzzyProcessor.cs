@@ -102,10 +102,12 @@ namespace DuoVia.FuzzyStrings.ComparePhraseEngine
         private const double Dif = 0.00000001;              // minimal value to comare with 0.0
         private const double MaxQueryRelativeWeight = 1.0; //In ]0, 1] range
         private const double MinQueryRelativeWeight = 0.5; //In ]0, MinQueryRelativeWeight[ range
-        private const double IncreasingForUppercases = 1.1;
+        private const double IncreasingForUppercases = 1.0;
+        //private const double IncreasingForUppercases = 1.1;
         private const double DecreasingFor2NdClassWord = 0.2;
         private const double AddendForWordWeightCalculation = 10;
-        private const double WordPositionFactorBonusFor1StWord = 2.0; //must be > 1.0
+        private const double WordPositionFactorBonusFor1StWord = 1.0001; //must be > 1.0
+        //private const double WordPositionFactorBonusFor1StWord = 2.0; //must be > 1.0
         private const double WordPositionFactorAddendForCalculation = 10;
         private const double WordPositionFactorMinValue = 0.3; //In ]0, 1[ range
         
@@ -230,8 +232,9 @@ namespace DuoVia.FuzzyStrings.ComparePhraseEngine
                 var similarityRank = CalcWordsSimilarityRank(possibleValueWords[indxLeft], queryWords[indxRight]);
                 if (similarityRank <= 0.0)
                 {
-                    if (indxLeft == startPositionInPossibleValue)
-                        return 0.0; //if the very 1st tried word of the possibleValueWords does not match to queryWords - we can return immediately. 
+                    // consider comment out
+                    //if (indxLeft == startPositionInPossibleValue)
+                    //    return 0.0; //if the very 1st tried word of the possibleValueWords does not match to queryWords - we can return immediately. 
                     ++indxLeft;
                     continue;
                 }
@@ -239,8 +242,9 @@ namespace DuoVia.FuzzyStrings.ComparePhraseEngine
                 ++indxRight;
                 ++indxLeft;
             }
-            if (indxRight < queryWords.Count())
-                return 0.0; //not ALL the queryWords were found in the possibleValueWords; so "no occurrence" is found here
+            // Consider comment out
+            //if (indxRight < queryWords.Count())
+            //    return 0.0; //not ALL the queryWords were found in the possibleValueWords; so "no occurrence" is found here
             //all the queryWords were found in the possibleValueWords; we have found an "occurrence" 
             ret *= phraseLengthFactor;
             return ret;
@@ -307,6 +311,7 @@ namespace DuoVia.FuzzyStrings.ComparePhraseEngine
         
         private static double CalcWordPositionFactor(int positionInPossibleValue)
         {
+            return 1;
             double ret = WordPositionFactorAddendForCalculation / (WordPositionFactorAddendForCalculation + positionInPossibleValue);
             if (positionInPossibleValue == 0)
                 ret *= WordPositionFactorBonusFor1StWord;

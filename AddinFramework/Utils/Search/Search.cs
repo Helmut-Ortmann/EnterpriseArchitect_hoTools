@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -15,6 +16,7 @@ using AddinFramework.Extension;
 
 using DuoVia.FuzzyStrings;
 using DuoVia.FuzzyStrings.ComparePhraseEngine;
+using hoLinqToSql.LinqUtils;
 using Newtonsoft.Json;
 
 // ReSharper disable once CheckNamespace
@@ -127,6 +129,7 @@ namespace AddinFramework.Util
                     _staticAllSearches = _staticAllSearches.OrderByDescending(a => a.Score).ToList();
 
                     // Algorithm without valuable result
+                    DataTable dt = _staticAllSearches.ToDataTable();
                     if (_staticAllSearches.Count > 0 && _staticAllSearches[0].Score < 0.1 )
                         LongestCommonSubsequenceExtensions(searchPattern);
 

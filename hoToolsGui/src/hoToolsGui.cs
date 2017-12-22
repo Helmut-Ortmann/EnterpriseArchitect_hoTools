@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Data;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
@@ -1189,7 +1187,7 @@ namespace hoTools.hoToolsGui
             {
                 _rtfListOfSearches.Clear();
                 Search.CalulateAndSort(_txtSearchName.Text.Trim());
-                ColorCharacters(_rtfListOfSearches, Search.GetRtf(), _txtSearchName.Text, Color.Yellow);
+            ColorCharacters(_rtfListOfSearches, Search.GetRtf(), _txtSearchName.Text, Color.Yellow);
             }
 
             _rtfListOfSearches.BringToFront();
@@ -1206,7 +1204,10 @@ namespace hoTools.hoToolsGui
         /// <param name="stringToColor"></param>
         /// <param name="color"></param>
         /// <param name="onlyFull"></param>
-        void ColorCharacters(RichTextBox rtf, string fromText, string stringToColor, Color color, bool onlyFull = false)
+        /// <param name="ignoreBlank"></param>
+        void ColorCharacters(RichTextBox rtf, string fromText, string stringToColor, Color color, 
+            bool onlyFull = false, 
+            bool ignoreBlank = true)
         {
             int posInText = 0;
             if (stringToColor.Trim() == "")
@@ -1224,8 +1225,12 @@ namespace hoTools.hoToolsGui
                 {
                     startString = "[";
                     endString = "]";
+                    if (ignoreBlank) stringToColor = stringToColor.Replace("   ","").Replace("  ","").
+                    Replace("  ", "").Replace(" ", "");
                 }
-                Regex pattern = new Regex($"{startString}{stringToColor.Trim()}{endString}",RegexOptions.IgnoreCase);
+
+                string multiplicity = @"{3,}";
+                Regex pattern = new Regex($"{startString}{stringToColor.Trim()}{endString}{multiplicity}",RegexOptions.IgnoreCase);
 
                 Match match = pattern.Match(from);
                 while (match.Success)
