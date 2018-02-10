@@ -91,7 +91,7 @@ namespace hoTools.Utils.Diagram
             // Add item of possible style as items in drop down
             foreach (T style in items)
             {
-                DiagramGeneralStyleItem style1 = style as DiagramGeneralStyleItem;
+                IMenuItem style1 = style as IMenuItem;
                 ToolStripMenuItem item = new ToolStripMenuItem
                 {
                     Text = style1.Name,
