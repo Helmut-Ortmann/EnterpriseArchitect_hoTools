@@ -3128,33 +3128,36 @@ from %APPDATA%Local\Apps\hoTools\
         #region AddElementsToDiagram
 
         /// <summary>
-        /// Add Elements (Note, Constraint,..) to diagram and link to selected Nodes in Diagram.
+        /// Add Elements (Note, Constraint,..) to diagram and link to selected Nodes, Edge in Diagram.
         /// If nothing selected add the wanted Element to the diagram.
         /// 
         /// ConnectorLinkType contains the feature to link the note to 
-        /// - "" no visualization
+        /// - "" not bound to feature (Note, Attribute, Operation,..)
         /// - "Element Note", "Diagram Note", "Link Notes", "Attribute", "Operation" 
         /// </summary>
         /// <param name="rep"></param>
         /// <param name="elementType"></param>
         /// <param name="connectorLinkType"></param>
+        /// <param name="bound">Only for notes to bound to description</param>
         public static void AddElementsToDiagram(Repository rep,
-            string elementType = "Note", string connectorLinkType = "Element Note")
+            string elementType = "Note", string connectorLinkType = "Element Note", 
+            bool bound = true)
         {
             // handle multiple selected elements
+            ObjectType objectType = rep.GetContextItemType();
             Diagram diaCurrent = rep.GetCurrentDiagram();
             if (diaCurrent == null) return;
             var eaDia = new EaDiagram(rep);
             rep.SaveDiagram(diaCurrent.DiagramID);
             EA.Collection diaCurrentSelectedObjects;
-            switch (rep.GetContextItemType())
+            switch (objectType)
             {
                 case ObjectType.otDiagram:
                     AddDiagramNote(rep);
                     break;
                 case ObjectType.otConnector:
-                    if (!String.IsNullOrWhiteSpace(connectorLinkType)) connectorLinkType = "Link Notes";
-                    AddElementWithLinkToConnector(rep, diaCurrent.SelectedConnector, elementType, connectorLinkType);
+                    AddElementWithLinkToConnector(rep, diaCurrent.SelectedConnector, elementType, 
+                        bound);
                     break;
 
                 case ObjectType.otPackage:
@@ -3360,11 +3363,14 @@ from %APPDATA%Local\Apps\hoTools\
         /// <param name="rep"></param>
         /// <param name="con"></param>
         /// <param name="elementType">Default Note</param>
-        /// <param name="connectorLinkType">Default: null</param>
+        /// <param name="bound"></param>
         // ReSharper disable once MemberCanBePrivate.Global
         public static void AddElementWithLinkToConnector(Repository rep, Connector con,
-            string elementType = @"Note", string connectorLinkType = "Link Notes")
+            string elementType = @"Note", 
+            bool bound = true)
         {
+            
+
             Diagram dia = rep.GetCurrentDiagram();
             Package pkg = rep.GetPackageByID(dia.PackageID);
             if (pkg.IsProtected || dia.IsLocked) return;
@@ -3402,8 +3408,11 @@ from %APPDATA%Local\Apps\hoTools\
             diaObject.Update();
             pkg.Elements.Refresh();
 
-            //if (! String.IsNullOrWhiteSpace(connectorLinkType))
-            Util.SetElementHasAttachedConnectorLink(rep, con, elNewElement, connectorLinkType:connectorLinkType);
+            
+            // Link to connector
+            Util.SetElementHasAttachedConnectorLink(rep, con, elNewElement, bound);
+
+
             elNewElement.Refresh();
             diaObject.Update();
             dia.Update();

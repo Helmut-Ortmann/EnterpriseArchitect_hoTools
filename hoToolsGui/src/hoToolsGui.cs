@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Reflection;
@@ -21,6 +22,7 @@ using hoTools.Utils.Configuration;
 using hoTools.Utils.Diagram;
 using hoTools.Utils.Export;
 using hoTools.EaServices.Names;
+using hoTools.Utils.BulkChange;
 
 
 // ReSharper disable once CheckNamespace
@@ -256,6 +258,7 @@ namespace hoTools.hoToolsGui
         private Button btnAlignLabel2;
         private ToolStripSeparator toolStripSeparator20;
         private ToolStripMenuItem makeGlossaryXmlFromcsvToolStripMenuItem;
+        private ToolStripMenuItem mySearchesToolStripMenuItem;
         private TextBox _txtSearchText;
         #endregion
 
@@ -399,7 +402,7 @@ namespace hoTools.hoToolsGui
         /// <param name="e"></param>
         void btnAddNoteAndLinkDescription_Click(object sender, EventArgs e)
         {
-            EaService.AddElementsToDiagram(Repository,"Note", connectorLinkType:"Element Note");
+            EaService.AddElementsToDiagram(Repository,"Note", connectorLinkType:"Element Note", bound:true);
         }
         /// <summary>
         /// Show Notes
@@ -411,7 +414,7 @@ namespace hoTools.hoToolsGui
         /// <param name="e"></param>
         void btnAddNote_Click(object sender, EventArgs e)
         {
-            EaService.AddElementsToDiagram(Repository, "Note", connectorLinkType:"" );
+            EaService.AddElementsToDiagram(Repository, "Note", connectorLinkType:"", bound:false );
         }
         /// <summary>
         /// Show Constraints
@@ -423,7 +426,7 @@ namespace hoTools.hoToolsGui
         /// <param name="e"></param>
         void btnAddConstraint_Click(object sender, EventArgs e)
         {
-            EaService.AddElementsToDiagram(Repository, "Constraint", connectorLinkType:"");
+            EaService.AddElementsToDiagram(Repository, "Constraint", connectorLinkType:"", bound:false);
         }
 
 
@@ -1412,6 +1415,7 @@ namespace hoTools.hoToolsGui
             this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
             this.settingsDiagramStylesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsDiagramStylesToolStripMenuItemDekivery = new System.Windows.Forms.ToolStripMenuItem();
+            this.mySearchesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator11 = new System.Windows.Forms.ToolStripSeparator();
             this._updateScriptsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
@@ -2341,6 +2345,7 @@ namespace hoTools.hoToolsGui
             this.toolStripSeparator12,
             this.settingsDiagramStylesToolStripMenuItem,
             this.settingsDiagramStylesToolStripMenuItemDekivery,
+            this.mySearchesToolStripMenuItem,
             this.toolStripSeparator11,
             this._updateScriptsToolStripMenuItem,
             this.toolStripSeparator10,
@@ -2396,6 +2401,12 @@ namespace hoTools.hoToolsGui
             this.settingsDiagramStylesToolStripMenuItemDekivery.Name = "settingsDiagramStylesToolStripMenuItemDekivery";
             resources.ApplyResources(this.settingsDiagramStylesToolStripMenuItemDekivery, "settingsDiagramStylesToolStripMenuItemDekivery");
             this.settingsDiagramStylesToolStripMenuItemDekivery.Click += new System.EventHandler(this.settingsDiagramStylesToolStripMenuItemDelivery_Click);
+            // 
+            // mySearchesToolStripMenuItem
+            // 
+            this.mySearchesToolStripMenuItem.Name = "mySearchesToolStripMenuItem";
+            resources.ApplyResources(this.mySearchesToolStripMenuItem, "mySearchesToolStripMenuItem");
+            this.mySearchesToolStripMenuItem.Click += new System.EventHandler(this.mySearchesToolStripMenuItem_Click);
             // 
             // toolStripSeparator11
             // 
@@ -3821,6 +3832,13 @@ namespace hoTools.hoToolsGui
                     "Change DiagramLink Style",
                     "Change the DiagramLink Style\r\nSelect\r\n-Package \r\n-Element \r\n-Diagrams\r\n-DiagramLink", 
                     ChangeDiagramLinkStylePackage_Click));
+                //-------------------------------------------------------------------------------------
+                // Bulk change EA items
+                _doToolStripMenuItem.DropDownItems.Add(_diagramStyle.ConstructStyleToolStripMenuDiagram(
+                    _diagramStyle.BulkElementItems,
+                    "Bulk item change",
+                    "Change selected EA items\r\nSelect\r\n-Diagram objects",
+                    BulkChangeEaItems_Click));
 
                 
 
@@ -4133,6 +4151,77 @@ namespace hoTools.hoToolsGui
         {
             ChangeDiagramLinkStyle(sender, ChangeScope.Package);
         }
+        // Bulk change EA items 
+        void BulkChangeEaItems_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem item = sender as ToolStripMenuItem;
+            Debug.Assert(item != null, nameof(item) + " != null");
+            BulkElement bulkElement = (BulkElement)item.Tag;
+            BulkChange(bulkElement);
+        }
+        /// <summary>
+        /// Bulk change selected Diagram objects
+        /// </summary>
+        /// <param name="bulkElement"></param>
+        private void BulkChange(BulkElement bulkElement)
+        {
+            var eaDia = new EaDiagram(Repository);
+            foreach (EA.DiagramObject diaObj in eaDia.SelObjects)
+            {
+                EA.Element el = Repository.GetElementByID(diaObj.ElementID);
+                // Check if bulk change is to apply for the current element
+                if (BulkChangeCheck(bulkElement, el) )
+                {
+                    // Apply changes to the current element
+                    el.StereotypeEx = String.Join(",", bulkElement.StereotypesApply);
+                    el.Update();
+                    foreach (var tag in bulkElement.TaggedValuesApply)
+                    {
+                        string name = tag.Name;
+                        string value = tag.Value;
+                        foreach (EA.TaggedValue tg in el.TaggedValues)
+                        {
+                            if (tg.FQName == name)
+                            {
+                                tg.Value = value;
+                            }
+
+                            tg.Update();
+                        }
+
+                        el.TaggedValues.Refresh();
+                    }
+
+                    el.Update();
+                }
+               
+            }
+
+        }
+        /// <summary>
+        /// Check of for current element an bulk change is to apply. It checks Stereotype and Type.
+        /// </summary>
+        /// <param name="bulkElement">Checking rules</param>
+        /// <param name="el">Current EA element to check</param>
+        /// <returns></returns>
+        private bool BulkChangeCheck(BulkElement bulkElement, EA.Element el)
+        {
+            // Check if for the current element type the change is to apply
+            if (bulkElement.TypesCheck == null ||
+                bulkElement.TypesCheck.Count == 0 ||
+                (bulkElement.TypesCheck.Count == 1 && bulkElement.TypesCheck[0].Trim() == "") ||
+                bulkElement.TypesCheck.Contains(el.Type))
+            {
+                // Check if for the current element stereotype the change is to apply
+                if (bulkElement.StereotypesCheck == null || 
+                    bulkElement.StereotypesCheck.Count == 0 ||
+                    (bulkElement.StereotypesCheck.Count == 1 && bulkElement.StereotypesCheck[0].Trim() == "") ||
+                    bulkElement.StereotypesCheck.Contains(el.Stereotype))
+                    return true;
+            }
+
+            return false;
+        }
 
 
         private void ChangeDiagramStyle(object sender, ChangeScope changeScope)
@@ -4192,6 +4281,15 @@ namespace hoTools.hoToolsGui
         private void settingsDiagramStylesToolStripMenuItemDelivery_Click(object sender, EventArgs e)
         {
             Util.StartFile(AddinSettings.JasonFilePathDelivery);
+        }
+        /// <summary>
+        /// Edit the inventory of your searches
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void mySearchesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
 
         /// <summary>
@@ -4324,7 +4422,7 @@ Information are Copied to Clipboard!
             hoTools.EaServices.Import.UpdateGlossary.UpdateGlossaryFromCsv(Repository);
         }
 
-        
+       
     }
 
 

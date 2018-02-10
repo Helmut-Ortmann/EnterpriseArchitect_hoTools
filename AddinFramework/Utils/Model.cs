@@ -217,7 +217,7 @@ namespace EAAddinFramework.Utils
                 // ---------------------SQL Search----------------------------
                 string sqlString = _globalCfg.ReadSqlFile(searchName);
 
-                // run search
+                // run sql search
                 searchTerm = UtilSql.ReplaceSqlWildCards(Repository, searchTerm, RepositoryType);
                 return SqlRun(searchName, sqlString, searchTerm, exportToExcel);
 
@@ -290,6 +290,9 @@ namespace EAAddinFramework.Utils
             // replace templates
             sql = SqlTemplates.ReplaceMacro(Repository, sql, searchText);
             if (String.IsNullOrWhiteSpace(sql)) return "";
+
+            // normalize according to linefeed
+            sql = Regex.Replace(sql, @"\r\n |\r\n|\n\r|\n|\r", "\r\n ");
 
             // check whether select or update, delete, insert sql
             if (Regex.IsMatch(sql, @"^\s*select ", RegexOptions.IgnoreCase | RegexOptions.Multiline))

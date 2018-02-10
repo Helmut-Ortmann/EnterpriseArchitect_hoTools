@@ -7,6 +7,8 @@ using Newtonsoft.Json.Linq;
 using hoTools.Utils.SQL;
 using hoTools.Utils.COM;
 using hoTools.Utils.Json;
+using hoTools.Utils.BulkChange;
+using hoTools.Utils.Gui;
 
 
 // ReSharper disable MemberCanBePrivate.Global
@@ -28,6 +30,9 @@ namespace hoTools.Utils.Diagram
         // Diagram Link Styles
         public List<DiagramLinkStyleItem> DiagramLinkStyleItems { get; }
 
+        // Bulk Item Change
+        public List<BulkElement> BulkElementItems { get; }
+
 
 
         /// <summary>
@@ -39,12 +44,12 @@ namespace hoTools.Utils.Diagram
         {
 
             // use 'Deserializing Partial JSON Fragments'
-            JObject search;
+            JObject jObject;
             try
             {
                 // Read JSON
                 string text = System.IO.File.ReadAllText(jasonFilePath);
-                search = JObject.Parse(text);
+                jObject = JObject.Parse(text);
             }
             catch (Exception e)
             {
@@ -57,9 +62,10 @@ namespace hoTools.Utils.Diagram
             //----------------------------------------------------------------------
             // Deserialize "DiagramStyle", "DiagramObjectStyle",""DiagramLinkStyle"
             // get JSON result objects into a list
-            DiagramStyleItems = (List < DiagramStyleItem > )JasonHelper.GetConfigurationStyleItems<DiagramStyleItem>(search, "DiagramStyle");
-            DiagramObjectStyleItems = (List<DiagramObjectStyleItem>)JasonHelper.GetConfigurationStyleItems<DiagramObjectStyleItem>(search, "DiagramObjectStyle");
-            DiagramLinkStyleItems = (List<DiagramLinkStyleItem>)JasonHelper.GetConfigurationStyleItems<DiagramLinkStyleItem>(search, "DiagramLinkStyle");
+            DiagramStyleItems = (List < DiagramStyleItem > )JasonHelper.GetConfigurationStyleItems<DiagramStyleItem>(jObject, "DiagramStyle");
+            DiagramObjectStyleItems = (List<DiagramObjectStyleItem>)JasonHelper.GetConfigurationStyleItems<DiagramObjectStyleItem>(jObject, "DiagramObjectStyle");
+            DiagramLinkStyleItems = (List<DiagramLinkStyleItem>)JasonHelper.GetConfigurationStyleItems<DiagramLinkStyleItem>(jObject, "DiagramLinkStyle");
+            BulkElementItems = (List<BulkElement>)JasonHelper.GetConfigurationStyleItems<BulkElement>(jObject, "BulkItems");
 
 
         }
@@ -121,6 +127,7 @@ namespace hoTools.Utils.Diagram
             // Add item of possible style as items in drop down
             foreach (var style in DiagramStyleItems)
             {
+                var style1 = style as IMenuItem;
                 ToolStripMenuItem item = new ToolStripMenuItem
                 {
                     Text = style.Name,

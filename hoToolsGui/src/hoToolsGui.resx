@@ -915,6 +915,9 @@ Select:
 - Elements
 - Connector
 - Diagram if nothing selected
+
+
+The link isn't connected to a feature. The note content is independent of the linked item.
 </value>
   </data>
   <data name="&gt;&gt;_btnAddConstraint.Name" xml:space="preserve">
@@ -952,7 +955,8 @@ Select:
 - Attribute
 - Operation
 
-The link isn't connected to a feature.</value>
+The link isn't connected to a feature. The note content is independent of the linked item.
+</value>
   </data>
   <data name="&gt;&gt;_btnAddNote.Name" xml:space="preserve">
     <value>_btnAddNote</value>
@@ -991,6 +995,8 @@ The link isn't connected to a feature.</value>
 - Connector 
 - Attribute
 - Operation
+
+The Note content is bound to the feature and not editable.
 
 Always remember: 
 - Diagrams are for the reader
@@ -1752,13 +1758,17 @@ Ports,Parameter,Pins are also called:
     <value>SP</value>
   </data>
   <data name="_btnShowPort.ToolTip" xml:space="preserve">
-    <value>Show Ports,Parameter,Pins of selected
+    <value>Show Ports,Parameter,Pins of selected + Synchronize Part-Ports vom SysML Block
 - Diagram
 - Nodes
 
 Ports,Parameter,Pins are also called:
 - Structural Elements
-- Embedded Elements</value>
+- Embedded Elements
+
+Synchronize Part/Instance Port vom owning Block/Class:
+- If enabled in Settings
+- Synchronize Ports from Part/Instance with its owning Block/Class</value>
   </data>
   <data name="&gt;&gt;_btnShowPort.Name" xml:space="preserve">
     <value>_btnShowPort</value>
@@ -2909,6 +2919,29 @@ Auto Counter for Requirements &amp; more
 
 Don't make changes! You can change your current settings.
 </value>
+  </data>
+  <data name="mySearchesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>326, 22</value>
+  </data>
+  <data name="mySearchesToolStripMenuItem.Text" xml:space="preserve">
+    <value>MySearches</value>
+  </data>
+  <data name="mySearchesToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Inventory your Searches to easily find them.
+
+- EA Searches (SQL + Query Builder)
+- File based *.sql searches
+
+In UserSearches.json you can inventory your searches to easily find them.
+
+Then you can use:
+- Autocomplete
+- Fuzzy Search
+to find your search.
+</value>
+  </data>
+  <data name="mySearchesToolStripMenuItem.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="toolStripSeparator11.Size" type="System.Drawing.Size, System.Drawing">
     <value>323, 6</value>
@@ -4077,6 +4110,12 @@ If you want to use LINQPad with EA you need:
     <value>settingsDiagramStylesToolStripMenuItemDekivery</value>
   </data>
   <data name="&gt;&gt;settingsDiagramStylesToolStripMenuItemDekivery.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mySearchesToolStripMenuItem.Name" xml:space="preserve">
+    <value>mySearchesToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;mySearchesToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator11.Name" xml:space="preserve">

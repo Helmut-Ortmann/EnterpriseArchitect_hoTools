@@ -1,9 +1,11 @@
-﻿namespace hoTools.Utils.Diagram
+﻿using hoTools.Utils.Gui;
+
+namespace hoTools.Utils.Diagram
 {
     /// <summary>
     /// General item to specify the style of an EA item. See the subtypes. 
     /// </summary>
-    public class DiagramGeneralStyleItem
+    public class DiagramGeneralStyleItem : IMenuItem
     {
         public string Name { get; }
         public string Description { get; }

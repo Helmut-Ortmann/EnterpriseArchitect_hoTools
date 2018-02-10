@@ -153,6 +153,12 @@ namespace hoTools.Settings
 
             // Handling jason file
             string jasonFileName = @"Settings.json";
+            // User searches
+            // - Usually you don't need them because hoTools inventories from
+            // - MDGs
+            // - EA: MySearches
+            // - hoTools SQL Path
+            string jasonFileNameMySearches = @"UserSearches.json";
             // If Settings.json don't exists: Copy delivery Setting.json file to settings folder
             // ReSharper disable once AssignNullToNotNullAttribute
             string sourceSettingsPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),

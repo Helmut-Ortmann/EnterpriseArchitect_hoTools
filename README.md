@@ -123,6 +123,7 @@ Some features:
 # Releases
 ### Release 3.2.5
 -  Find search: Coloring of matching characters optimized
+-  Fix create Note linked to connector (Feature, Note)
 
 ### Release 3.2.4
 -  Service Copy Type, Name, GUID, Review to Clipboard (for e.g. review)

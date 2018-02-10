@@ -122,6 +122,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BulkChange\BulkElement.cs" />
     <Compile Include="COM\Com.cs" />
     <Compile Include="Diagram\Diagram.cs" />
     <Compile Include="Diagram\DiagramGeneralStyle.cs" />
@@ -135,6 +136,7 @@
     <Compile Include="Diagram\DiagramGeneralStyleItem.cs" />
     <Compile Include="Extension\EaExtensionClass.cs" />
     <Compile Include="Extension\StringExtension.cs" />
+    <Compile Include="Gui\IMenuItem.cs" />
     <Compile Include="Json\JasonHelper.cs" />
     <Compile Include="Json\PortAlignment.cs" />
     <Compile Include="ODBC.cs" />

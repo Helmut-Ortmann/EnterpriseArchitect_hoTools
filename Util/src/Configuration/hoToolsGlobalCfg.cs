@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using File = System.IO.File;
 
@@ -226,9 +227,14 @@ namespace hoTools.Utils.Configuration
         public string ReadSqlFile(string sqlFileName, bool withErrMessage = true)
         {
             string absFileName = GetSqlFileName(sqlFileName);
-            if (absFileName != "") return File.ReadAllText(absFileName);
+            // normalize newline, insert a blank
+            if (absFileName != "" || File.Exists(absFileName))
+            {
+                string  originalString = File.ReadAllText(absFileName);
+                // normalize according to linefeed
+                return Regex.Replace(originalString, @"\r\n |\r\n|\n\r|\n|\r", "\r\n ");
+            }
             if ( absFileName == ""  ) return "";
-
             if (withErrMessage)
             {
                MessageBox.Show($@"Error reading sql file '{sqlFileName}'", @"Error Reading *.sql file");
