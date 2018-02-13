@@ -122,7 +122,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BulkChange\BulkElement.cs" />
+    <Compile Include="BulkChange\BulkElementItem.cs" />
+    <Compile Include="BulkChange\BulkItemChange.cs" />
     <Compile Include="COM\Com.cs" />
     <Compile Include="Diagram\Diagram.cs" />
     <Compile Include="Diagram\DiagramGeneralStyle.cs" />

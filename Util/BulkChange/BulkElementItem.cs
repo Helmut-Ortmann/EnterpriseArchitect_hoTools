@@ -11,7 +11,7 @@ namespace hoTools.Utils.BulkChange
     /// <summary>
     /// Deserialize json for bulk change of EA items
     /// </summary>
-    public class BulkElement : IMenuItem
+    public class BulkElementItem : IMenuItem
     {
         public string Name { get; set; }
         public string Description { get; set; }
@@ -19,6 +19,7 @@ namespace hoTools.Utils.BulkChange
         public IList<string> StereotypesCheck { get; set; }
         public IList<string> StereotypesApply { get; set; }
         public IList<Tv> TaggedValuesApply { get; set; }
+        public IList<string> PropertiesApply { get; set; }
     }
     /// <summary>
     /// Tagged Value

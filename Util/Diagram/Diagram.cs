@@ -28,6 +28,9 @@ namespace hoTools.Utils.Diagram
 
         public EA.Diagram Dia => _dia;
 
+        public List<EA.Element> TreeSelectedElements = new List<EA.Element>();
+        public EA.Package TreeSelectedPackage;
+
         public int SelectedObjectsCount
         {
             get
@@ -62,13 +65,18 @@ namespace hoTools.Utils.Diagram
         /// <param name="getAllDiagramObject">True if you want all diagram objects if nothing no diagram object is selected</param>
         public EaDiagram(Repository rep, bool  getAllDiagramObject= false)
         {
-            _rep = rep;
+           _rep = rep;
             _dia = null;
             _selectedConnector = null;
             IsSelectedObjects = false;
 
             EA.Diagram dia = rep.GetCurrentDiagram();
-            if (dia == null) return;
+            // Nothing selected
+            if (dia == null || (dia.SelectedConnector == null && dia.SelectedObjects.Count == 0) )
+            {
+                GetTreeSelected();
+                return;
+            }
 
             EA.ObjectType contextObjectType = Rep.GetContextItemType();
 
@@ -113,7 +121,7 @@ namespace hoTools.Utils.Diagram
                             break;
 
                     }
-                    
+
                     // no context element available, take first element
                     if (elContext == null)
                     {
@@ -297,6 +305,21 @@ namespace hoTools.Utils.Diagram
             Rep.SaveDiagram(_dia.DiagramID);
         }
         #endregion
+        /// <summary>
+        /// Get tree selected elements. These are the selected elements or the selected package
+        /// </summary>
+        private void GetTreeSelected()
+        {
+            EA.Collection col = _rep.GetTreeSelectedElements();
+            if (col.Count == 0) TreeSelectedPackage = _rep.GetTreeSelectedPackage();
+            else
+            {
+                foreach (EA.Element c in col)
+                {
+                    TreeSelectedElements.Add(c);
+                }
+            }
+        }
 
 
         

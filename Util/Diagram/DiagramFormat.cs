@@ -31,7 +31,7 @@ namespace hoTools.Utils.Diagram
         public List<DiagramLinkStyleItem> DiagramLinkStyleItems { get; }
 
         // Bulk Item Change
-        public List<BulkElement> BulkElementItems { get; }
+        public List<BulkElementItem> BulkElementItems { get; }
 
 
 
@@ -65,7 +65,7 @@ namespace hoTools.Utils.Diagram
             DiagramStyleItems = (List < DiagramStyleItem > )JasonHelper.GetConfigurationStyleItems<DiagramStyleItem>(jObject, "DiagramStyle");
             DiagramObjectStyleItems = (List<DiagramObjectStyleItem>)JasonHelper.GetConfigurationStyleItems<DiagramObjectStyleItem>(jObject, "DiagramObjectStyle");
             DiagramLinkStyleItems = (List<DiagramLinkStyleItem>)JasonHelper.GetConfigurationStyleItems<DiagramLinkStyleItem>(jObject, "DiagramLinkStyle");
-            BulkElementItems = (List<BulkElement>)JasonHelper.GetConfigurationStyleItems<BulkElement>(jObject, "BulkItems");
+            BulkElementItems = (List<BulkElementItem>)JasonHelper.GetConfigurationStyleItems<BulkElementItem>(jObject, "BulkItems");
 
 
         }

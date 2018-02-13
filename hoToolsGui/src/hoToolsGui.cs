@@ -3832,14 +3832,18 @@ namespace hoTools.hoToolsGui
                     "Change DiagramLink Style",
                     "Change the DiagramLink Style\r\nSelect\r\n-Package \r\n-Element \r\n-Diagrams\r\n-DiagramLink", 
                     ChangeDiagramLinkStylePackage_Click));
-                //-------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------
                 // Bulk change EA items
                 _doToolStripMenuItem.DropDownItems.Add(_diagramStyle.ConstructStyleToolStripMenuDiagram(
                     _diagramStyle.BulkElementItems,
                     "Bulk item change",
                     "Change selected EA items\r\nSelect\r\n-Diagram objects",
                     BulkChangeEaItems_Click));
-
+                _doToolStripMenuItem.DropDownItems.Add(_diagramStyle.ConstructStyleToolStripMenuDiagram(
+                    _diagramStyle.BulkElementItems,
+                    "Bulk item change Package recursive",
+                    "Change selected EA items in Package (recursive)\r\nSelect\r\n-Package",
+                    BulkChangeEaItemsRecursive_Click));
                 
 
 
@@ -4151,77 +4155,41 @@ namespace hoTools.hoToolsGui
         {
             ChangeDiagramLinkStyle(sender, ChangeScope.Package);
         }
+        
         // Bulk change EA items 
         void BulkChangeEaItems_Click(object sender, EventArgs e)
         {
             ToolStripMenuItem item = sender as ToolStripMenuItem;
             Debug.Assert(item != null, nameof(item) + " != null");
-            BulkElement bulkElement = (BulkElement)item.Tag;
-            BulkChange(bulkElement);
+            BulkElementItem bulkElement = (BulkElementItem)item.Tag;
+            BulkItemChange.BulkChange(Repository,  bulkElement);
+        }
+        void BulkChangeEaItemsRecursive_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem item = sender as ToolStripMenuItem;
+            Debug.Assert(item != null, nameof(item) + " != null");
+            BulkElementItem bulkElement = (BulkElementItem)item.Tag;
+            BulkChangeRecursive(bulkElement);
+
         }
         /// <summary>
-        /// Bulk change selected Diagram objects
+        /// Bulk change Element properties for package recursive
         /// </summary>
         /// <param name="bulkElement"></param>
-        private void BulkChange(BulkElement bulkElement)
+        private void BulkChangeRecursive(BulkElementItem bulkElement)
         {
-            var eaDia = new EaDiagram(Repository);
-            foreach (EA.DiagramObject diaObj in eaDia.SelObjects)
+            if (Repository.GetContextItem(out var contextItem) == EA.ObjectType.otPackage)
             {
-                EA.Element el = Repository.GetElementByID(diaObj.ElementID);
-                // Check if bulk change is to apply for the current element
-                if (BulkChangeCheck(bulkElement, el) )
-                {
-                    // Apply changes to the current element
-                    el.StereotypeEx = String.Join(",", bulkElement.StereotypesApply);
-                    el.Update();
-                    foreach (var tag in bulkElement.TaggedValuesApply)
-                    {
-                        string name = tag.Name;
-                        string value = tag.Value;
-                        foreach (EA.TaggedValue tg in el.TaggedValues)
-                        {
-                            if (tg.FQName == name)
-                            {
-                                tg.Value = value;
-                            }
-
-                            tg.Update();
-                        }
-
-                        el.TaggedValues.Refresh();
-                    }
-
-                    el.Update();
-                }
-               
+                BulkItemChange.BulkChangePackage(bulkElement, (EA.Package)contextItem, pkgRecursive: true, elRecursive: true);
+                return;
             }
 
+            
         }
-        /// <summary>
-        /// Check of for current element an bulk change is to apply. It checks Stereotype and Type.
-        /// </summary>
-        /// <param name="bulkElement">Checking rules</param>
-        /// <param name="el">Current EA element to check</param>
-        /// <returns></returns>
-        private bool BulkChangeCheck(BulkElement bulkElement, EA.Element el)
-        {
-            // Check if for the current element type the change is to apply
-            if (bulkElement.TypesCheck == null ||
-                bulkElement.TypesCheck.Count == 0 ||
-                (bulkElement.TypesCheck.Count == 1 && bulkElement.TypesCheck[0].Trim() == "") ||
-                bulkElement.TypesCheck.Contains(el.Type))
-            {
-                // Check if for the current element stereotype the change is to apply
-                if (bulkElement.StereotypesCheck == null || 
-                    bulkElement.StereotypesCheck.Count == 0 ||
-                    (bulkElement.StereotypesCheck.Count == 1 && bulkElement.StereotypesCheck[0].Trim() == "") ||
-                    bulkElement.StereotypesCheck.Contains(el.Stereotype))
-                    return true;
-            }
 
-            return false;
-        }
+
+
+        
 
 
         private void ChangeDiagramStyle(object sender, ChangeScope changeScope)
