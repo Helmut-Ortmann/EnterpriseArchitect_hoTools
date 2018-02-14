@@ -98,6 +98,7 @@
   <ItemGroup>
     <Compile Include="Names\NamesGenerator.cs" />
     <Compile Include="src\Diagram\EaServicesDiagram.cs" />
+    <Compile Include="src\Element\EaServicesElement.cs" />
     <Compile Include="src\Import\UpdateGlossary.cs" />
     <Compile Include="src\Move\Move.cs" />
     <Compile Include="src\WiKiRefs\WiKiRef.cs" />

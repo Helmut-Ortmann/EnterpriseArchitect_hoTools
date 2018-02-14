@@ -7,6 +7,22 @@ namespace hoTools.Utils.BulkChange
 {
     public class BulkItemChange
     {
+
+        /// <summary>
+        /// Bulk change Element properties for package recursive
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <param name="bulkElement"></param>
+        public static void BulkChangeRecursive(EA.Repository rep, BulkElementItem bulkElement)
+        {
+            if (rep.GetContextItem(out var contextItem) == EA.ObjectType.otPackage)
+            {
+                BulkItemChange.BulkChangePackage(bulkElement, (EA.Package)contextItem, pkgRecursive: true, elRecursive: true);
+                return;
+            }
+
+            
+        }
         /// <summary>
         /// Bulk change all Elements in package. It also supports recursion of package and elements
         /// </summary>
