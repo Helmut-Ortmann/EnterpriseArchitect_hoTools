@@ -10,11 +10,11 @@ namespace hoTools.EaServices
     public static partial class EaService
     {
 
-        /// <summary>
+         /// <summary>
         /// Bulk change Element in Package recursive 1 according to Settings.Json, first entry 
         /// </summary>
-        [ServiceOperation("{32B75793-B369-4443-B497-61E50BAB359B}", "Bulk change Elements to 1",
-            "Select Browser Package (see Settings.Json: 'BulkItems: 1. entry)", isTextRequired: false)]
+        [ServiceOperation("{32B75793-B369-4443-B497-61E50BAB359B}", "Bulk change Elements Package recursive to 1",
+            "Select Browser Package, recursive (see Settings.Json: 'BulkItems: 1. entry)", isTextRequired: false)]
         public static void BulkElementChangeRecursive1(EA.Repository rep)
         {
             BulkElementChangeRecursiveWrapper(rep, 0);
@@ -22,8 +22,8 @@ namespace hoTools.EaServices
         /// <summary>
         /// Bulk change Element in Package recursive 1 according to Settings.Json, first entry 
         /// </summary>
-        [ServiceOperation("{E30A7EC0-C443-453F-A31E-A62766EAA082}", "Bulk change Elements to 2",
-            "Select Browser Package (see Settings.Json: 'BulkItems: 2. entry)", isTextRequired: false)]
+        [ServiceOperation("{E30A7EC0-C443-453F-A31E-A62766EAA082}", "Bulk change Elements Package recursive to 2",
+            "Select Browser Package, recursive (see Settings.Json: 'BulkItems: 2. entry)", isTextRequired: false)]
         public static void BulkElementChangeRecursive2(EA.Repository rep)
         {
             BulkElementChangeRecursiveWrapper(rep, 1);
@@ -31,8 +31,8 @@ namespace hoTools.EaServices
         /// <summary>
         /// Bulk change Element in Package recursive 1 according to Settings.Json, first entry 
         /// </summary>
-        [ServiceOperation("{6483D0C7-6B47-4844-8E7E-5E1A8CA02463}", "Bulk change Elements to 3",
-            "Select Browser Package (see Settings.Json: 'BulkItems: 3. entry)", isTextRequired: false)]
+        [ServiceOperation("{6483D0C7-6B47-4844-8E7E-5E1A8CA02463}", "Bulk change Elements Package recursive to 3",
+            "Select Browser Package, recursive (see Settings.Json: 'BulkItems: 3. entry)", isTextRequired: false)]
         public static void BulkElementChangeRecursive3(EA.Repository rep)
         {
             BulkElementChangeRecursiveWrapper(rep, 2);
@@ -40,8 +40,8 @@ namespace hoTools.EaServices
         /// <summary>
         /// Bulk change Element in Package recursive 1 according to Settings.Json, first entry 
         /// </summary>
-        [ServiceOperation("{1B693D4E-43DD-4041-B3F4-9A18B3748FD0}", "Bulk change Elements to 4",
-            "Select Browser Package (see Settings.Json: 'BulkItems: 4. entry)", isTextRequired: false)]
+        [ServiceOperation("{1B693D4E-43DD-4041-B3F4-9A18B3748FD0}", "Bulk change Elements Package recursive to 4",
+            "Select Browser Package, recursive (see Settings.Json: 'BulkItems: 4. entry)", isTextRequired: false)]
         public static void BulkElementChangeRecursive4(EA.Repository rep)
         {
             BulkElementChangeRecursiveWrapper(rep, 3);
@@ -49,8 +49,8 @@ namespace hoTools.EaServices
         /// <summary>
         /// Bulk change Element in Package recursive 1 according to Settings.Json, first entry 
         /// </summary>
-        [ServiceOperation("{E9CF4F77-8204-48CC-8CD9-A42B99935D51}", "Bulk change Elements to 5",
-            "Select Browser Package (see Settings.Json: 'BulkItems: 5. entry)", isTextRequired: false)]
+        [ServiceOperation("{E9CF4F77-8204-48CC-8CD9-A42B99935D51}", "Bulk change Elements Package recursive to 5",
+            "Select Browser Package,recursive (see Settings.Json: 'BulkItems: 5. entry)", isTextRequired: false)]
         public static void BulkElementChangeRecursive5(EA.Repository rep)
         {
             BulkElementChangeRecursiveWrapper(rep, 4);
