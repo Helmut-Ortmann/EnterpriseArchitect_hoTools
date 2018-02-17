@@ -122,6 +122,7 @@ Some features:
 
 # Releases
 ### Release 3.2.5
+-  [Bulk change of Elements](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/BulkEaItemChange)
 -  Find search: Coloring of matching characters optimized
 -  Fix create Note linked to connector (Feature, Note)
 

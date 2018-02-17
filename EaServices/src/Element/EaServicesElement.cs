@@ -70,8 +70,8 @@ namespace hoTools.EaServices
         /// <summary>
         /// Bulk change Elements 2 according to Settings.Json, second entry 
         /// </summary>
-        [ServiceOperation("{87F4044A-6401-4BF4-8DC5-9739064775A6}", "Bulk change Elements to 1",
-            "Select Diagram Elements, Browser Package, Browser Elements (see Settings.Json: 'BulkItems: 1. entry)", isTextRequired: false)]
+        [ServiceOperation("{87F4044A-6401-4BF4-8DC5-9739064775A6}", "Bulk change Elements to 2",
+            "Select Diagram Elements, Browser Package, Browser Elements (see Settings.Json: 'BulkItems: 2. entry)", isTextRequired: false)]
         public static void BulkElementChange2(EA.Repository rep)
         {
             BulkElementChangeWrapper(rep, 1);
@@ -79,8 +79,8 @@ namespace hoTools.EaServices
         /// <summary>
         /// Bulk change Elements 4 according to Settings.Json, third entry 
         /// </summary>
-        [ServiceOperation("{5AE828EC-2DFD-4842-8EA9-7E60A64A2F45}", "Bulk change Elements to 1",
-            "Select Diagram Elements, Browser Package, Browser Elements (see Settings.Json: 'BulkItems: 1. entry)", isTextRequired: false)]
+        [ServiceOperation("{5AE828EC-2DFD-4842-8EA9-7E60A64A2F45}", "Bulk change Elements to 3",
+            "Select Diagram Elements, Browser Package, Browser Elements (see Settings.Json: 'BulkItems: 3. entry)", isTextRequired: false)]
         public static void BulkElementChange3(EA.Repository rep)
         {
             BulkElementChangeWrapper(rep, 2);
@@ -88,8 +88,8 @@ namespace hoTools.EaServices
         /// <summary>
         /// Bulk change Elements 4 according to Settings.Json, fourth entry 
         /// </summary>
-        [ServiceOperation("{5406AEA8-D17F-4B69-800B-715D6AF3B00B}", "Bulk change Elements to 1",
-            "Select Diagram Elements, Browser Package, Browser Elements (see Settings.Json: 'BulkItems: 1. entry)", isTextRequired: false)]
+        [ServiceOperation("{5406AEA8-D17F-4B69-800B-715D6AF3B00B}", "Bulk change Elements to 4",
+            "Select Diagram Elements, Browser Package, Browser Elements (see Settings.Json: 'BulkItems: 4. entry)", isTextRequired: false)]
         public static void BulkElementChange4(EA.Repository rep)
         {
             BulkElementChangeWrapper(rep, 3);
@@ -97,8 +97,8 @@ namespace hoTools.EaServices
         /// <summary>
         /// Bulk change Elements 1 according to Settings.Json, first entry 
         /// </summary>
-        [ServiceOperation("{4D0947E2-0C4D-41A8-8D85-B1D935EF532B}", "Bulk change Elements to 1",
-            "Select Diagram Elements, Browser Package, Browser Elements (see Settings.Json: 'BulkItems: 1. entry)", isTextRequired: false)]
+        [ServiceOperation("{4D0947E2-0C4D-41A8-8D85-B1D935EF532B}", "Bulk change Elements to 5",
+            "Select Diagram Elements, Browser Package, Browser Elements (see Settings.Json: 'BulkItems: 5. entry)", isTextRequired: false)]
         public static void BulkElementChange5(EA.Repository rep)
         {
             BulkElementChangeWrapper(rep, 4);

@@ -1,4 +1,15 @@
-﻿{
+﻿//---------------------------------------------------------------------------------------------------------------
+// Settings.json
+//---------------------------------------------------------------------------------------------------------------
+// Settings for:
+// - Set Diagram styles
+// - Bulk change of EA items
+//
+// Distribution::
+// - Original/Factory Settings:                 Project Setup
+// - Debug:                                     Project hoToolsRoot
+// - Current:                                   %appdata%Roaming\ho\hoTools  Debug + Operating mode
+{
   // Styles:
   // Name:          Short description
   // Description:   Long description, used as helptext
@@ -435,44 +446,75 @@
     }
   ],
   // Bulk changes of EA elements
+  // - Check if the element is to change (apply the specified changes) 
+  // - Apply the specified changes to the elements which fulfill the check rules. 
   //
-  // TypesCheck:         The EA-Types to apply the bulk change
-  // StereotypeCheck:    The Stereotypes to apply the change
-  // StereotypesApply:   List of Stereotypes to set, you may use full qualified named like 'ZF_LE::LE Action'
-  // TaggedValuesApply:  List of Tagged Values to set, you may use full qualified named like 'ZF_LE::LE Action::Criticality' 
+  // Name:               The Name of the Check/Apply combination to change specied elements
+  // Description:        Tooltip for further information and to better understand the intended changes
+  //
+  // Check: 
+  // TypesCheck:         Rule checked before applying the change: The EA-Types to apply the bulk change
+  // StereotypeCheck:    Rule checked before applying the change: The Stereotypes to apply the change
+  //
+  // Apply:
+  // StereotypesApply:   Comma separated list of Stereotypes to set, you may use full qualified named like 'ZF_LE::LE Action'
+  // TaggedValuesApply:  The Tagged Values to set, you may use full qualified named like 'ZF_LE::LE Action::Criticality' or simple 'Criticality'
+  // PropertiesApply:    Properties in the form 'name=value'. Name: Difficulty, Efforts, GenFile, GenType, Multiplicity, Phase, Priority, RunState, Status, StyleEx, Tag,Version, Visibility
   "BulkItems" :
   [
 	 {
-        "Name"              : "Action ASIL B",
+        "Name"              : "Test: Set Action to ASIL B",
         "Description"       : "Set Stereotype and ASIL B for Action", 
         "TypesCheck"        : ["Action"],
         "StereotypesCheck"  : [""],
         "StereotypesApply"  : ["ZF_LE::LE Action"], 
-        "TaggedValuesApply" : [ {"Name" : "ZF_LE::LE Action::Criticality", "Value" : "ASIL B" } ]
+        "TaggedValuesApply" : [ {"Name" : "ZF_LE::LE Action::Criticality", "Value" : "ASIL B" } ],
+        "PropertiesApply"   : []
     },
-	  {
-        "Name"              : "Activity ASIL B",
+	{
+        "Name"              : "Test: Set Activity to ASIL B",
         "Description"       : "Set Stereotype and ASIL B for Activity", 
         "TypesCheck"        : ["Activity"],
         "StereotypesCheck"  : [""],
         "StereotypesApply"  : ["ZF_LE::LE Activity"], 
-        "TaggedValuesApply" : [ {"Name" : "ZF_LE::LE Activity::Criticality", "Value" : "ASIL B" } ]
+        "TaggedValuesApply" : [ {"Name" : "ZF_LE::LE Activity::Criticality", "Value" : "ASIL B" } ],
+        "PropertiesApply"   : []
     },
     {
-        "Name"              : "Action ASIL C",
+        "Name"              : "Test: Set Action to ASIL C",
         "Description"       : "Set Stereotype and ASIL C for Action", 
         "TypesCheck"        : ["Action"],
         "StereotypesCheck"  : [""],
         "StereotypesApply"  : ["ZF_LE::LE Action"], 
-        "TaggedValuesApply" : [ {"Name" : "ZF_LE::LE Action::Criticality", "Value" : "ASIL C" } ]
+        "TaggedValuesApply" : [ {"Name" : "ZF_LE::LE Action::Criticality", "Value" : "ASIL C" } ],
+        "PropertiesApply"   : []
     },
     {
-        "Name"              : "Activity ASIL C",
+        "Name"              : "Test: Set Activity to ASIL C",
         "Description"       : "Set Stereotype and ASIL C for Activity", 
         "TypesCheck"        : ["Activity"],
         "StereotypesCheck"  : [""],
         "StereotypesApply"  : ["ZF_LE::LE Activity"], 
-        "TaggedValuesApply" : [ {"Name" : "ZF_LE::LE Activity::Criticality", "Value" : "ASIL C" } ]
+        "TaggedValuesApply" : [ {"Name" : "ZF_LE::LE Activity::Criticality", "Value" : "ASIL C" } ],
+        "PropertiesApply"   : []
+    },
+    {
+        "Name"              : "Test: Set Requirements to Functional Requirements, and more",
+        "Description"       : "Set Prio to Medium and more, just test. Select Package, Browser Element or Diagram Element", 
+        "TypesCheck"        : ["Requirement"],
+        "StereotypesCheck"  : [""],
+        "StereotypesApply"  : ["FunctionalRequirement"], 
+        "TaggedValuesApply" : [ {"Name" : "EAREQ::FunctionalRequirement::priority", "Value" : "Medium" } ],
+        "PropertiesApply"   : ["Difficulty=Medium","Status=Proposed","Keywords=Test", "Priority=High", "Version=1.1", "Phase=1.1", "Tag=MyTag", "Alias=MyAlias"]
+    },
+    {
+        "Name"              : "Test: Set FunctionalRequirements to ordinary Requirements, and more",
+        "Description"       : "Set Prio to High and more, just test. Select Package, Browser Element or Diagram Element", 
+        "TypesCheck"        : ["Requirement"],
+        "StereotypesCheck"  : [""],
+        "StereotypesApply"  : [""], 
+        "TaggedValuesApply" : [ {"Name" : "", "Value" : "" } ],
+        "PropertiesApply"   : ["Difficulty=High","Status=Approved","Keywords=Test", "Priority=High", "Version=2.1", "Phase=2.1", "Tag=MySecondTag", "Alias=MySecondAlias"]
     }
 	
   ]
