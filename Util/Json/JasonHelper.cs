@@ -46,8 +46,10 @@ Consider:
 - compare your Settings.JSON with delivered/factory settings
 -- Settings.json 'Diagram Styles && more' (current)
 -- Settings.json 'Diagram Styles && more' (delivery)
+
+The other features should work!
 ",
-                        $@"Can't import JSON Chapter '{jsonChapter}' in Settings.json");
+                        $@"Can't import JSON Chapter '{jsonChapter}' in Settings.json.");
                    
                 }
                 return null;

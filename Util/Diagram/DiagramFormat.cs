@@ -53,9 +53,9 @@ namespace hoTools.Utils.Diagram
             }
             catch (Exception e)
             {
-                MessageBox.Show($@"Can't read '{jasonFilePath}'
+                MessageBox.Show($@"Can't read '{jasonFilePath}!'
 
-{e}", "Can't import Diagram Styles from Settings.json");
+{e}", "Can't import Diagram Styles and Bulk change Element definitions from Settings.json\r\nConsider resetting to Factory Settings.");
                 return;
             }
 
