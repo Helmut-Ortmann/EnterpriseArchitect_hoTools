@@ -62,6 +62,9 @@ namespace hoTools.Utils.Diagram
             //----------------------------------------------------------------------
             // Deserialize "DiagramStyle", "DiagramObjectStyle",""DiagramLinkStyle"
             // get JSON result objects into a list
+            // Don't throw an error if the json settings aren't available!!!!
+            // - Reason: To much error messages which aren't understandable and are annoying.
+
             DiagramStyleItems = (List < DiagramStyleItem > )JasonHelper.GetConfigurationStyleItems<DiagramStyleItem>(jObject, "DiagramStyle");
             DiagramObjectStyleItems = (List<DiagramObjectStyleItem>)JasonHelper.GetConfigurationStyleItems<DiagramObjectStyleItem>(jObject, "DiagramObjectStyle");
             DiagramLinkStyleItems = (List<DiagramLinkStyleItem>)JasonHelper.GetConfigurationStyleItems<DiagramLinkStyleItem>(jObject, "DiagramLinkStyle");
@@ -74,7 +77,7 @@ namespace hoTools.Utils.Diagram
 
         /// <summary>
         /// Create a ToolStripItem with DropDownitems for each Style (Subtypes of DiagramGeneralStyleItem) .
-        /// The Tag property contains the style.
+        /// The Tag property contains the style. If no configuration is available insert a text as a hint to a missing configuration.
         /// </summary>
         /// <param name="items"></param>
         /// <param name="nameRoot"></param>
@@ -89,87 +92,40 @@ namespace hoTools.Utils.Diagram
                 ToolTipText = toolTipRoot
             };
             // Add item of possible style as items in drop down
-            foreach (T style in items)
+            if (items == null)
             {
-                IMenuItem style1 = style as IMenuItem;
                 ToolStripMenuItem item = new ToolStripMenuItem
                 {
-                    Text = style1.Name,
-                    ToolTipText = style1.Description,
-                    Tag = style1
+                    Text = $"Settings for '{typeof(T)}' not found!",
+                    ToolTipText = $"Setting Settings.Json not available\r\nChapter: '{typeof(T)}'\r\nConsider resetting to factory settings or create your own styles\r\nFile: '%appdata%\\ho\\hoTools\\Settings.Json'",
+
                 };
                 item.Click += eventHandler;
                 insertTemplateMenuItem.DropDownItems.Add(item);
+
             }
+            else
+            {
+                foreach (T style in items)
+                {
+                    IMenuItem style1 = style as IMenuItem;
+                    ToolStripMenuItem item = new ToolStripMenuItem
+                    {
+                        Text = style1.Name,
+                        ToolTipText = style1.Description,
+                        Tag = style1
+                    };
+                    item.Click += eventHandler;
+                    insertTemplateMenuItem.DropDownItems.Add(item);
+                }
+            }
+
             return insertTemplateMenuItem;
 
         }
 
 
 
-
-
-        /// <summary>
-        /// Create a ToolStripItem with DropDownitems for each DiagramStyle.
-        /// The Tag property contains the style.
-        /// </summary>
-        /// <param name="name"></param>
-        /// <param name="toolTip"></param>
-        /// <param name="eventHandler"></param>
-        /// <returns></returns>
-        public ToolStripMenuItem GetToolStripMenuDiagramStyle(string name, string toolTip, EventHandler eventHandler)
-        {
-            ToolStripMenuItem insertTemplateMenuItem = new ToolStripMenuItem
-            {
-                Text = name,
-                ToolTipText = toolTip
-            };
-            // Add item of possible style as items in drop down
-            foreach (var style in DiagramStyleItems)
-            {
-                var style1 = style as IMenuItem;
-                ToolStripMenuItem item = new ToolStripMenuItem
-                {
-                    Text = style.Name,
-                    ToolTipText = style.Description,
-                    Tag = style
-                };
-                item.Click += eventHandler;
-                insertTemplateMenuItem.DropDownItems.Add(item);
-            }
-            return insertTemplateMenuItem;
-
-        }
-        /// <summary>
-        /// Create a ToolStripItem with DropDownitems for each DiagramStyle.
-        /// The Tag property contains the style.
-        /// </summary>
-        /// <param name="name"></param>
-        /// <param name="toolTip"></param>
-        /// <param name="eventHandler"></param>
-        /// <returns></returns>
-        public ToolStripMenuItem GetToolStripMenuDiagramObjectStyle(string name, string toolTip, EventHandler eventHandler)
-        {
-            ToolStripMenuItem insertTemplateMenuItem = new ToolStripMenuItem
-            {
-                Text = name,
-                ToolTipText = toolTip
-            };
-            // Add item of possible style as items in drop down
-            foreach (DiagramObjectStyleItem style in DiagramObjectStyleItems)
-            {
-                ToolStripMenuItem item = new ToolStripMenuItem
-                {
-                    Text = style.Name,
-                    ToolTipText = style.Description,
-                    Tag = style
-                };
-                item.Click += eventHandler;
-                insertTemplateMenuItem.DropDownItems.Add(item);
-            }
-            return insertTemplateMenuItem;
-
-        }
 
 
         /// <summary>

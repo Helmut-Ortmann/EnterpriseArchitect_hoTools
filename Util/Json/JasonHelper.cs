@@ -9,13 +9,13 @@ namespace hoTools.Utils.Json
     public class JasonHelper
     {
         /// <summary>
-        /// 
+        /// Get configuration from json. Usually it's advisable not to throw an error.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="search"></param>
         /// <param name="jsonChapter">"DiagramStyle", "DiagramObjectStyle","DiagramLinkStyle", "AutoIncrement"</param>
         /// <param name="ignoreError"></param>
-        public static  IList<T> GetConfigurationStyleItems<T>(JObject search, string jsonChapter, bool ignoreError=false)
+        public static  IList<T> GetConfigurationStyleItems<T>(JObject search, string jsonChapter, bool ignoreError=true)
         {
             try
             {
@@ -49,7 +49,7 @@ Consider:
 
 The other features should work!
 ",
-                        $@"Can't import JSON Chapter '{jsonChapter}' in Settings.json.");
+                        $@"t JSON Chapter '{jsonChapter}' in Settings.json.");
                    
                 }
                 return null;

@@ -3889,6 +3889,7 @@ namespace hoTools.hoToolsGui
         void applyAutoCounterCorrectToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ToolStripMenuItem menuItem = sender as ToolStripMenuItem;
+            if (menuItem?.Tag == null) return;
             NamesGeneratorItem item = (NamesGeneratorItem)menuItem.Tag;
 
             
@@ -3904,6 +3905,7 @@ namespace hoTools.hoToolsGui
         void applyAutoCounterNewToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ToolStripMenuItem menuItem = sender as ToolStripMenuItem;
+            if (menuItem?.Tag == null) return;
             NamesGeneratorItem item = (NamesGeneratorItem)menuItem.Tag;
 
 
@@ -4161,6 +4163,7 @@ namespace hoTools.hoToolsGui
         {
             ToolStripMenuItem item = sender as ToolStripMenuItem;
             Debug.Assert(item != null, nameof(item) + " != null");
+            if (item?.Tag == null) return;
             BulkElementItem bulkElement = (BulkElementItem)item.Tag;
             BulkItemChange.BulkChange(Repository,  bulkElement);
         }
@@ -4168,6 +4171,7 @@ namespace hoTools.hoToolsGui
         {
             ToolStripMenuItem item = sender as ToolStripMenuItem;
             Debug.Assert(item != null, nameof(item) + " != null");
+            if (item?.Tag == null) return;
             BulkElementItem bulkElement = (BulkElementItem)item.Tag;
             BulkItemChange.BulkChangeRecursive(Repository, bulkElement);
 
@@ -4183,6 +4187,7 @@ namespace hoTools.hoToolsGui
         private void ChangeDiagramStyle(object sender, ChangeScope changeScope)
         {
             ToolStripMenuItem item = sender as ToolStripMenuItem; //((ToolStripMenuItem) sender).Tag; DiagramStyleItem
+            if (item?.Tag == null) return;
             DiagramStyleItem style = (DiagramStyleItem)item.Tag;
 
             // [0] StyleEx
@@ -4208,6 +4213,7 @@ namespace hoTools.hoToolsGui
 
 
             ToolStripMenuItem item = sender as ToolStripMenuItem; 
+            if (item?.Tag == null) return;
             DiagramObjectStyleItem style = (DiagramObjectStyleItem)item.Tag;
 
             EaService.DiagramObjectStyleWrapper(Repository, style.Type, style.Style, style.Property, changeScope);
@@ -4223,6 +4229,7 @@ namespace hoTools.hoToolsGui
 
 
             ToolStripMenuItem item = sender as ToolStripMenuItem;
+            if (item?.Tag == null) return;
             DiagramLinkStyleItem style = (DiagramLinkStyleItem)item.Tag;
 
             EaService.DiagramLinkStyleWrapper(Repository, style.Type, style.Style, style.Property, changeScope);

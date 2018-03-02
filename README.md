@@ -121,6 +121,11 @@ Some features:
 
 
 # Releases
+### Release 3.2.6 
+- Settings were't accessable fixed
+- No Error message if Settings.Json doesn't contain configuration chapter for Styles, Bulk changes and more
+  - Menu entry shows the information of missing configuration
+
 ### Release 3.2.5
 -  [Bulk change of Elements](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/BulkEaItemChange)
 -  Find search: Coloring of matching characters optimized
