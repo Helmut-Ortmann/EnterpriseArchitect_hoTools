@@ -121,6 +121,8 @@ Some features:
 
 
 # Releases
+### Release 3.2.7
+
 ### Release 3.2.6 
 - Settings were't accessable fixed
 - No Error message if Settings.Json doesn't contain configuration chapter for Styles, Bulk changes and more
