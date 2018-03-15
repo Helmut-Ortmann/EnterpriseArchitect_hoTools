@@ -391,7 +391,7 @@
     <value>3, 0</value>
   </data>
   <data name="_toolStripQuery.Size" type="System.Drawing.Size, System.Drawing">
-    <value>394, 25</value>
+    <value>363, 25</value>
   </data>
   <data name="_toolStripQuery.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -4649,6 +4649,6 @@ If you want to use LINQPad with EA you need:
     <value>HoToolsGui</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>hoTools.hoToolsGui.AddinGui, hoToolsGui, Version=3.2.4.0, Culture=neutral, PublicKeyToken=37ea3d95ffcb87e1</value>
+    <value>hoTools.hoToolsGui.AddinGui, hoToolsGui, Version=3.2.6.0, Culture=neutral, PublicKeyToken=37ea3d95ffcb87e1</value>
   </data>
 </root>

@@ -1082,7 +1082,7 @@ namespace hoTools.hoToolsGui
         /// <param name="e"></param>
         void txtSearchText_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            _txtSearchText.Text = Clipboard.GetText();
+            _txtSearchText.Text = Clipboard.GetText().Trim();
             _model.SearchRun(GetSearchName(), GetSearchTerm());
         }
 

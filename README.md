@@ -122,6 +122,8 @@ Some features:
 
 # Releases
 ### Release 3.2.7
+- New service "Copy ID of Package, Element, Diagram,.. to Clipboard"
+- Minor bug fixing/improvements
 
 ### Release 3.2.6 
 - Settings were't accessable fixed
