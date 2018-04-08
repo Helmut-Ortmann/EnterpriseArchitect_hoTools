@@ -265,7 +265,7 @@ namespace EAAddinFramework.Utils
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show($"Can't find search, is LINQPad support enabled (Settings General)? :\r\n'{searchName}' '{searchTerm}'\r\n- *.sql in path '{_globalCfg.GetSqlPaths()}'\r\n- *.linq in path '{_globalCfg.GetLinqPaths()}'\r\n- EA Search\r\n\r\nNote:\r\n- Define path in File, Settings\r\n- LINQPad needs a license and has to be installed!\r\n\r\n{e}",
+                    MessageBox.Show($"Can't find search!\r\n\r\n- MDG hoTools.. enabled?\r\n- SQL path in Settings correct?\r\n- LINQPad support enabled (Settings General)? :\r\n'{searchName}' '{searchTerm}'\r\n- *.sql in path '{_globalCfg.GetSqlPaths()}'\r\n- *.linq in path '{_globalCfg.GetLinqPaths()}'\r\n- EA Search\r\n\r\nNote:\r\n- Define path in File, Settings\r\n- LINQPad needs a license and has to be installed!\r\n\r\n{e}",
                         $@"Error start search.");
                     return "";
                 }

@@ -1364,6 +1364,10 @@ Second Element: Target of move connections and appearances", "Select two element
             "Select Package, Class/Interface or operation", isTextRequired: false)]
         public static void CreateActivityForOperation(Repository rep)
         {
+            // boost processing
+            rep.EnableUIUpdates = false;
+            rep.BatchAppend = true;
+
             ObjectType oType = rep.GetContextItemType();
             switch (oType)
             {
@@ -1375,8 +1379,11 @@ Second Element: Target of move connections and appearances", "Select two element
                     Package pkg = rep.GetPackageByID(el.PackageID);
                     int pos = pkg.Packages.Count + 1;
                     ActivityPar.CreateActivityForOperation(rep, m, pos);
-                    rep.Models.Refresh();
-                    rep.RefreshModelView(0);
+
+                    rep.BatchAppend = false;
+                    rep.EnableUIUpdates = true;
+                    rep.RefreshModelView(el.PackageID);
+
                     rep.ShowInProjectView(m);
                     break;
 
@@ -1400,20 +1407,28 @@ Second Element: Target of move connections and appearances", "Select two element
                     if (el.Locked) return;
 
                     CreateActivityForOperationsInElement(rep, el);
-                    rep.Models.Refresh();
-                    rep.RefreshModelView(0);
+
+                    rep.BatchAppend = false;
+                    rep.EnableUIUpdates = true;
+                    rep.RefreshModelView(el.PackageID);
+
                     rep.ShowInProjectView(el);
                     break;
 
                 case ObjectType.otPackage:
                     pkg = (Package) rep.GetContextObject();
                     CreateActivityForOperationsInPackage(rep, pkg);
+
                     // update sort order of packages
-                    rep.Models.Refresh();
-                    rep.RefreshModelView(0);
+                    rep.BatchAppend = false;
+                    rep.EnableUIUpdates = true;
+                    rep.RefreshModelView(pkg.PackageID);
+
                     rep.ShowInProjectView(pkg);
                     break;
             }
+            rep.BatchAppend = false;
+            rep.EnableUIUpdates = true;
         }
 
         #endregion
