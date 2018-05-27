@@ -59,7 +59,7 @@ namespace hoTools.Utils.SQL
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.ToString(), $"Error writing file '{path}'");
+                MessageBox.Show(e.ToString(), $@"Error writing file '{path}'");
             }
         }
         /// <summary>
@@ -75,7 +75,7 @@ namespace hoTools.Utils.SQL
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.ToString(), $"Error reading from file '{path}'");
+                MessageBox.Show(e.ToString(), $@"Error reading from file '{path}'");
                 return "";
             }
         }

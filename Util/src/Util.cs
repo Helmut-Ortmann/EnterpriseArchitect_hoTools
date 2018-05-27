@@ -1803,5 +1803,24 @@ namespace hoTools.Utils
                 return false;
             }
         }
+        /// <summary>
+        /// Read file according to filePath.
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <returns></returns>
+        public static string ReadAllText(string filePath)
+        {
+            try
+            {
+                return File.ReadAllText(filePath);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($@"Can't read '{filePath}'
+
+{e}", @"Can't read file");
+                return "";
+            }
+        }
     }
 }

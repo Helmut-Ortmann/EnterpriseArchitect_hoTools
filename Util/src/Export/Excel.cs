@@ -16,11 +16,13 @@ namespace hoTools.Utils.Export
         /// Make Data Table from *.csv file. It uses the delimiter from Windows settings
         /// </summary>
         /// <param name="fileName"></param>
+        /// <param name="separator">default: curent TextInfo.ListSeparator</param>
         /// <returns></returns>
-        public static DataTable MakeDataTableFromCsvFile(string fileName)
+        public static DataTable MakeDataTableFromCsvFile(string fileName, char separator='\0')
         {
             // get the separator according to current culture
-            char separator =
+            if (separator == '\0')
+                separator =
                 Convert.ToChar(CultureInfo.CurrentCulture.TextInfo.ListSeparator);
 
             var table = new DataTable();

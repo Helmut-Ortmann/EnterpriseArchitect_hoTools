@@ -17,6 +17,7 @@ using System.Xml;
 using AddinFramework.Util.Script;
 using Microsoft.Win32;
 using MSScriptControl;
+using hoTools.Utils;
 //using EAWrappers = TSF.UmlToolingFramework.Wrappers.EA;
 
 
@@ -305,18 +306,22 @@ namespace EAAddinFramework.Utils
 		/// <param name="folderPath">the path to the directory</param>
 		static void LoadMdgScriptsFromFolder(string folderPath)
 		{
-            string[] mdgFiles = Directory.GetFiles(folderPath, "*.xml", SearchOption.TopDirectoryOnly);
+		    if (! Directory.Exists(folderPath)) { 
+		        MessageBox.Show($@"Folder '{folderPath}' doesn't exists, skipped loading MdgScripts from folder", @"Can't read from folder!");
+		        return;
+		    }
+		    string[] mdgFiles = Directory.GetFiles(folderPath, "*.xml", SearchOption.TopDirectoryOnly);
             try
 			{
 				
 				foreach(string mdgFile in mdgFiles)
 				{
-					LoadMdgScripts(File.ReadAllText(mdgFile));
+					LoadMdgScripts(Util.ReadAllText(mdgFile));
 				}
 			}
 			catch (Exception e)
 			{
-                MessageBox.Show($"Folder '{folderPath}' skipped\r\n{e.Message}",
+                MessageBox.Show($@"Folder '{folderPath}' skipped{Environment.NewLine}{e.Message}",
                     @"Error in load *.xml MDGScripts from file! " );
                 
 			}

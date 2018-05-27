@@ -55,7 +55,7 @@ namespace hoTools.Utils.Diagram
             {
                 MessageBox.Show($@"Can't read '{jasonFilePath}!'
 
-{e}", "Can't import Diagram Styles and Bulk change Element definitions from Settings.json\r\nConsider resetting to Factory Settings.");
+{e}", $@"Can't import Diagram Styles and Bulk change Element definitions from Settings.json{Environment.NewLine}Consider resetting to Factory Settings.");
                 return;
             }
 
@@ -96,7 +96,7 @@ namespace hoTools.Utils.Diagram
             {
                 ToolStripMenuItem item = new ToolStripMenuItem
                 {
-                    Text = $"Settings for '{typeof(T)}' not found!",
+                    Text = $@"Settings for '{typeof(T)}' not found!",
                     ToolTipText = $"Setting Settings.Json not available\r\nChapter: '{typeof(T)}'\r\nConsider resetting to factory settings or create your own styles\r\nFile: '%appdata%\\ho\\hoTools\\Settings.Json'",
 
                 };
