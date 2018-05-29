@@ -66,13 +66,12 @@ namespace hoTools.Utils.Diagram
         public EaDiagram(Repository rep, bool  getAllDiagramObject= false)
         {
            _rep = rep;
-            _dia = null;
             _selectedConnector = null;
             IsSelectedObjects = false;
 
-            EA.Diagram dia = rep.GetCurrentDiagram();
+            _dia = rep.GetCurrentDiagram();
             // Nothing selected
-            if (dia == null || (dia.SelectedConnector == null && dia.SelectedObjects.Count == 0) )
+            if (_dia == null || (_dia.SelectedConnector == null && _dia.SelectedObjects.Count == 0) )
             {
                 GetTreeSelected();
                 return;
@@ -82,12 +81,11 @@ namespace hoTools.Utils.Diagram
 
 
             // Check if context is diagram or something inside the current diagram is selected (selected things are never old)
-            if (contextObjectType != ObjectType.otDiagram && dia.SelectedObjects.Count == 0 &&
-                dia.SelectedConnector == null) return;
+            if (contextObjectType != ObjectType.otDiagram && _dia.SelectedObjects.Count == 0 &&
+                _dia.SelectedConnector == null) return;
 
 
             // Diagram is context or something inside the diagram is selected
-            _dia = dia;
             IsSelectedObjects = false;
             if (_dia.SelectedObjects.Count == 0 && getAllDiagramObject)
             {
@@ -302,7 +300,7 @@ namespace hoTools.Utils.Diagram
         // ReSharper disable once MemberCanBePrivate.Global
         public void Save()
         {
-            Rep.SaveDiagram(_dia.DiagramID);
+            if (_dia != null) Rep.SaveDiagram(_dia.DiagramID);
         }
         #endregion
         /// <summary>

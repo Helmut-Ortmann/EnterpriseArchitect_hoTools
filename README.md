@@ -125,6 +125,8 @@ Some features:
 - New service "Copy ID of Package, Element, Diagram,.. to Clipboard"
 - Minor bug fixing/improvements
 - Improve speed of creating/updating Activities from operations.
+- Exception adding note to diagram fixed
+- Nuget packages updated
 
 ### Release 3.2.6 
 - Settings were't accessable fixed

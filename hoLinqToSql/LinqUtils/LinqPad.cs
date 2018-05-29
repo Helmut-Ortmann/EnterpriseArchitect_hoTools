@@ -7,7 +7,6 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using EA;
-using hoTools.hoUtils;
 using HtmlAgilityPack;
 using LinqToDB.DataProvider;
 using File = System.IO.File;
@@ -466,16 +465,18 @@ Change File, Settings General to Use LINQPAd connection.
             LinqPadConnections = LinqPadConnectionsV2Default;
 
             // initialize ProzessInfo
-            _startInfo = new ProcessStartInfo();
-            _startInfo.CreateNoWindow = false;
-            _startInfo.UseShellExecute = false;
-            _startInfo.FileName = _lprunExe;
-            _startInfo.WindowStyle = ProcessWindowStyle.Hidden;
-            _startInfo.Arguments = "";
-            _startInfo.RedirectStandardOutput = true;
-            _startInfo.RedirectStandardError = true;
+            _startInfo = new ProcessStartInfo
+            {
+                CreateNoWindow = false,
+                UseShellExecute = false,
+                FileName = _lprunExe,
+                WindowStyle = ProcessWindowStyle.Hidden,
+                Arguments = "",
+                RedirectStandardOutput = true,
+                RedirectStandardError = true
+            };
 
-            
+
         }
 
         /// <summary>
