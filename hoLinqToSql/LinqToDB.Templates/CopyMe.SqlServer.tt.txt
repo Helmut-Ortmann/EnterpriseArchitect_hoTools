@@ -1,7 +1,9 @@
 <#@ template language="C#" debug="True" hostSpecific="True"                           #>
 <#@ output extension=".generated.cs"                                                  #>
-<#@ include file="$(ProjectDir)LinqToDB.Templates\LinqToDB.SqlServer.Tools.ttinclude" #>
-<#@ include file="$(ProjectDir)LinqToDB.Templates\PluralizationService.ttinclude"     #>
+<#@ include file="$(LinqToDBT4SqlServerTemplatesDirectory)LinqToDB.SqlServer.Tools.ttinclude" #>
+<#@ include file="$(LinqToDBT4SqlServerTemplatesDirectory)PluralizationService.ttinclude"     #>
+<# //@ include file="$(ProjectDir)LinqToDB.Templates\LinqToDB.SqlServer.Tools.ttinclude" #>
+<# //@ include file="$(ProjectDir)LinqToDB.Templates\PluralizationService.ttinclude"     #>
 <#
 	/*
 		1. Copy this file to a folder where you would like to generate your data model,
@@ -16,7 +18,7 @@
 		3. Add connection string to the web/app.config file:
 
 			<connectionStrings>
-				<add name="MyDatabase" providerName="System.Data.SqlClient" 
+				<add name="MyDatabase" providerName="System.Data.SqlClient"
 					connectionString="Data Source=.;Database=MyDatabase;User Id=User;Password=TestPassword;" />
 			</connectionStrings>
 
@@ -34,7 +36,7 @@
 
 		5. See more at https://github.com/linq2db/t4models
 
-		If you need to use the Microsoft.SqlServer.Types namespace, install the Microsoft.SqlServer.Types nuget, 
+		If you need to use the Microsoft.SqlServer.Types namespace, install the Microsoft.SqlServer.Types nuget,
 		and replace the following include at the top of this file:
 
 			"$(ProjectDir)LinqToDB.Templates\LinqToDB.SqlServer.Tools.ttinclude"

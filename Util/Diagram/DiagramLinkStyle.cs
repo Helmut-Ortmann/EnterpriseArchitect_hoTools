@@ -25,10 +25,7 @@ namespace hoTools.Utils.Diagram
             {
                 string link = l.Trim();
                 if (link == "") continue;
-
-                string name;
-                string value;
-                if (! GetNameValueFromString(link, out name, out value)) continue;
+                if (!GetNameValueFromString(link, out string name, out string value)) continue;
 
                 EA.Connector con;
                 switch (name)
@@ -102,10 +99,7 @@ namespace hoTools.Utils.Diagram
                         {
                             string tag = t.Trim();
                             if (tag == "") return;
-
-                            string tagName;
-                            string tagValue;
-                            if (!GetNameValueFromString(tag, out tagName, out tagValue, delimiter:'=')) continue;
+                            if (!GetNameValueFromString(tag, out string tagName, out string tagValue, delimiter: '=')) continue;
 
                             // possible tags inside geometry label definition
                             switch (tagName)
@@ -192,9 +186,7 @@ namespace hoTools.Utils.Diagram
             {
                 string style = s.Trim();
                 if (style == "") continue;
-                string name;
-                string value;
-                if (!GetNameValueFromString(style, out name, out value)) continue;
+                if (!GetNameValueFromString(style, out string name, out string value)) continue;
                 switch (name)
                 {
                     case "Border":
@@ -246,9 +238,7 @@ namespace hoTools.Utils.Diagram
             foreach (var type in Type)
             {
                 if (String.IsNullOrWhiteSpace(type)) continue;
-                string name;
-                string value;
-                if (! GetNameValueFromString(type, out name, out value)) continue;
+                if (!GetNameValueFromString(type, out string name, out string value)) continue;
                 switch (name.Substring(0, 4).ToLower())
                 {
                     // Type/LinkType: first 4 characters lower case

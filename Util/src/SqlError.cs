@@ -71,7 +71,7 @@ namespace hoTools.Utils.SQL
             try
             {
 
-                return File.ReadAllText(path);
+                return Util.ReadAllText(path);
             }
             catch (Exception e)
             {

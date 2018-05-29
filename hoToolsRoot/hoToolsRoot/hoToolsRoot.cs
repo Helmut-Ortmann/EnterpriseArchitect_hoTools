@@ -436,12 +436,11 @@ namespace hoTools
         public override bool EA_OnPostNewConnector(EA.Repository rep, EA.EventProperties info)
         {
             if (rep == null) return false;
-            int connectorId;
             EA.EventProperty eventProperty = info.Get(0);
             var s = (string) eventProperty.Value;
             // check if it is a diagram
 
-            if (Int32.TryParse(s, out connectorId) == false)
+            if (Int32.TryParse(s, out int connectorId) == false)
             {
                 return false;
             }
@@ -623,7 +622,7 @@ namespace hoTools
             string fileNameMdg = _AddinSettings.GetAutoLoadMdgFileName();
             try
             {
-                return File.ReadAllText(fileNameMdg);
+                return Util.ReadAllText(fileNameMdg);
             } catch (Exception e)
             {
                 MessageBox.Show($@"MDG file='{fileNameMdg}'{Environment.NewLine}{e}", 

@@ -230,7 +230,7 @@ namespace hoTools.Utils.Configuration
             // normalize newline, insert a blank
             if (absFileName != "" || File.Exists(absFileName))
             {
-                string  originalString = File.ReadAllText(absFileName);
+                string  originalString = Util.ReadAllText(absFileName);
                 // normalize according to linefeed
                 return Regex.Replace(originalString, @"\r\n |\r\n|\n\r|\n|\r", "\r\n ");
             }

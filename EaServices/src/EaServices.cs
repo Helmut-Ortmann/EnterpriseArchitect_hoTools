@@ -702,8 +702,7 @@ Second Element: Target of move connections and appearances", "Select two element
         public static void CopyFqToClipboard(Repository rep)
         {
             string strFq = "";
-            object o;
-            EA.ObjectType type = rep.GetContextItem(out o);
+            EA.ObjectType type = rep.GetContextItem(out object o);
             switch (type)
             {
                 case EA.ObjectType.otElement:
@@ -806,8 +805,7 @@ Second Element: Target of move connections and appearances", "Select two element
         public static void CopyGuidToClipboard(Repository rep)
         {
             string strGuid = "";
-            object o;
-            EA.ObjectType type = rep.GetContextItem(out o);
+            EA.ObjectType type = rep.GetContextItem(out object o);
             switch (type)
             {
                 case EA.ObjectType.otElement:
@@ -856,8 +854,7 @@ Second Element: Target of move connections and appearances", "Select two element
         public static void CopyIdToClipboard(Repository rep)
         {
             string id = "";
-            object o;
-            EA.ObjectType type = rep.GetContextItem(out o);
+            EA.ObjectType type = rep.GetContextItem(out object o);
             switch (type)
             {
                 case EA.ObjectType.otElement:
@@ -910,8 +907,7 @@ Second Element: Target of move connections and appearances", "Select two element
             string strGuid = "";
             string type = "";
             string name = "";
-            object o;
-            EA.ObjectType objType = rep.GetContextItem(out o);
+            EA.ObjectType objType = rep.GetContextItem(out object o);
             switch (objType)
             {
                 case EA.ObjectType.otElement:
@@ -4976,7 +4972,7 @@ from %APPDATA%Local\Apps\hoTools\
                         // set readonly attribute to false
                         System.IO.File.SetAttributes(path, FileAttributes.Normal);
 
-                        string strFile = System.IO.File.ReadAllText(path);
+                        string strFile = Util.ReadAllText(path);
                         string replace = @"value=[.0-9a-zA-Z_\\-]*\.xml";
                         string replacement = shortPath;
                         strFile = Regex.Replace(strFile, replace, replacement);
@@ -5787,7 +5783,7 @@ from %APPDATA%Local\Apps\hoTools\
             }
             try
             {
-                txt = System.IO.File.ReadAllText(path);
+                txt = Util.ReadAllText(path);
             }
             catch (Exception e)
             {
@@ -5900,12 +5896,12 @@ from %APPDATA%Local\Apps\hoTools\
             string text;
             try
             {
-                text = System.IO.File.ReadAllText(path);
+                text = Util.ReadAllText(path);
             }
             catch (Exception e)
             {
                 Clipboard.SetText(e.ToString());
-                MessageBox.Show($"{e}\n\nsee Clipboard!", $@"Error Reading file '{el.Name}':{el.Type}");
+                MessageBox.Show($@"{e}{Environment.NewLine}see Clipboard!", $@"Error Reading file '{el.Name}':{el.Type}");
                 return lEl;
             }
             lEl = GetInterfacesFromText(rep, null, text, createWarningNote: false);

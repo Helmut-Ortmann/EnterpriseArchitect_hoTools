@@ -1437,8 +1437,7 @@ namespace hoTools.Utils
                     // delete a potential write protection
                     try
                     {
-                        var fileInfo = new FileInfo(path);
-                        fileInfo.IsReadOnly = false;
+                        var fileInfo = new FileInfo(path) {IsReadOnly = false};
 
                         // delete old file to get the new one
                         File.Delete(path);
@@ -1510,7 +1509,7 @@ namespace hoTools.Utils
             {
                 return s;
             }
-            return File.ReadAllText(s);
+            return Util.ReadAllText(s);
         }
 
         public static void OpenBehaviorForElement(Repository repository, EA.Element el)
@@ -1541,9 +1540,8 @@ namespace hoTools.Utils
 
         public static void SetReadOnlyAttribute(string fullName, bool readOnly)
         {
-            var fileInfo = new FileInfo(fullName);
-            fileInfo.IsReadOnly = readOnly;
-            
+            var fileInfo = new FileInfo(fullName) {IsReadOnly = readOnly};
+
         }
 
         #region visualizePortForDiagramobject

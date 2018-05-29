@@ -64,27 +64,29 @@
       <!-- linq2db                   -->
       <!-- Supported databases Access, MySQL, SqlServer, Oracle, Sybase, Postgres (tested: Access, MySQL, SqlServer) -->
       <Component Id="linq2db.dll" Guid="{5E6D0EF2-280D-4B80-AF56-993C1A02B8C9}">
-        <File Id="linq2db.dll" KeyPath="yes" Name="linq2db.dll" Source="..\packages\linq2db.1.9.0\lib\net45\linq2db.dll" />
+        <File Id="linq2db.dll" KeyPath="yes" Name="linq2db.dll" Source="..\packages\linq2db.2.0.0\lib\net45\linq2db.dll" />
       </Component>
       <!-- Separate install MySql.Data.dll-->
       <Component Id="MySql.Data.dll" Guid="{CEEE4DA8-D2F3-4924-A922-8D894E4156D1}">
-        <File Id="MySql.Data.dll" KeyPath="yes" Name="MySql.Data.dll" Source="..\packages\MySql.Data.6.9.9\lib\net45\MySql.Data.dll" />
+        <File Id="MySql.Data.dll" KeyPath="yes" Name="MySql.Data.dll" Source="..\packages\MySql.Data.8.0.11\lib\net452\MySql.Data.dll" />
       </Component>
       <Component Id="Microsoft.SqlServer.Types.dll" Guid="{EABD70B2-374E-4959-AB91-38863D06ABFA}">
-        <File Id="Microsoft.SqlServer.Types.dll" KeyPath="yes" Name="Microsoft.SqlServer.Typess.dll" Source="..\packages\linq2db.SqlServer.1.9.0\tools\Microsoft.SqlServer.Types.dll" />
+        <File Id="Microsoft.SqlServer.Types.dll" KeyPath="yes" Name="Microsoft.SqlServer.Typess.dll" Source="..\packages\linq2db.SqlServer.2.0.0\tools\Microsoft.SqlServer.Types.dll" />
       </Component>
       <Component Id="Oracle.ManagedDataAccess.dll" Guid="{48EE033C-4B86-4195-84CA-0BF89DAF7CC3}">
-        <File Id="Oracle.ManagedDataAccess.dll" KeyPath="yes" Name="Oracle.ManagedDataAccess.dll" Source="..\packages\linq2db.Oracle.x86.1.9.0\tools\Oracle.ManagedDataAccess.dll" />
+        <File Id="Oracle.ManagedDataAccess.dll" KeyPath="yes" Name="Oracle.ManagedDataAccess.dll" Source="..\packages\linq2db.Oracle.x86.1.10.0\tools\Oracle.ManagedDataAccess.dll" />
       </Component>
       <Component Id="Npgsql.dll" Guid="{2EFF6EB5-E946-4B52-9ACC-2AB5D9564D8D}">
-        <File Id="Npgsql.dll" KeyPath="yes" Name="Npgsql.dll" Source="..\packages\linq2db.PostgreSQL.1.9.0\tools\Npgsql.dll" />
+        <File Id="Npgsql.dll" KeyPath="yes" Name="Npgsql.dll" Source="..\packages\linq2db.PostgreSQL.2.0.0\tools\Npgsql.dll" />
       </Component>
       <Component Id="Sybase.AdoNet2.AseClient.dll" Guid="{BF034025-BCEA-4A40-870E-25F1158DD17B}">
-        <File Id="Sybase.AdoNet2.AseClient.dll" KeyPath="yes" Name="Sybase.AdoNet2.AseClient.dll" Source="..\packages\linq2db.Sybase.1.9.0\tools\Sybase.AdoNet2.AseClient.dll" />
+        <File Id="Sybase.AdoNet2.AseClient.dll" KeyPath="yes" Name="Sybase.AdoNet2.AseClient.dll" Source="..\packages\linq2db.Sybase.2.0.0\tools\Sybase.AdoNet45.AseClient.dll" />
       </Component>
+      <!--
       <Component Id="sybdrvado20.dll" Guid="{0F614AA1-5202-4C1A-B4A7-07B97FD09372}">
-        <File Id="sybdrvado20.dll" KeyPath="yes" Name="sybdrvado20.dll" Source="..\packages\linq2db.Sybase.1.9.0\tools\sybdrvado20.dll" />
+        <File Id="sybdrvado20.dll" KeyPath="yes" Name="sybdrvado20.dll" Source="..\packages\linq2db.Sybase.2.0.0\tools\sybdrvado20.dll" />
       </Component>
+      -->
 
 
 
@@ -139,7 +141,7 @@
       </Component>
       <!-- HtmlAgilityPack -->
       <Component Id="HtmlAgilityPack.dll" Guid="{70C34202-0279-44B9-9B4F-9E55D37D8822}">
-        <File Id="HtmlAgilityPack.dll" KeyPath="yes" Name="HtmlAgilityPack.dll" Source="..\packages\HtmlAgilityPack.1.6.1\lib\Net45\HtmlAgilityPack.dll" />
+        <File Id="HtmlAgilityPack.dll" KeyPath="yes" Name="HtmlAgilityPack.dll" Source="..\packages\HtmlAgilityPack.1.8.4\lib\Net45\HtmlAgilityPack.dll" />
       </Component>
     </ComponentGroup>
   </Fragment>

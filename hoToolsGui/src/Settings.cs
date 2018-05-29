@@ -438,10 +438,9 @@ namespace hoTools.Settings
         {
             get
             {
-                bool result;
                 var p = CurrentConfig.AppSettings.Settings["IsReverseEdgeDirection"];
                 if (p == null) return true;
-                if (bool.TryParse(p.Value, out result))
+                if (bool.TryParse(p.Value, out bool result))
                 {
                     return result;
                 }
@@ -464,10 +463,9 @@ namespace hoTools.Settings
         {
             get
             {
-                bool result;
                 var p = CurrentConfig.AppSettings.Settings["isLinqPadSupport"];
                 if (p == null) return true;
-                if (bool.TryParse(p.Value, out result))
+                if (bool.TryParse(p.Value, out bool result))
                 {
                     return result;
                 }
@@ -487,10 +485,9 @@ namespace hoTools.Settings
         {
             get
             {
-                bool result;
                 var p = CurrentConfig.AppSettings.Settings["isAutoCounter"];
                 if (p == null) return true;
-                if (bool.TryParse(p.Value, out result))
+                if (bool.TryParse(p.Value, out bool result))
                 {
                     return result;
                 }
@@ -511,10 +508,9 @@ namespace hoTools.Settings
         {
             get
             {
-                bool result;
                 var p = CurrentConfig.AppSettings.Settings["isLineStyleSupport"];
                 if (p == null) return true;
-                if (bool.TryParse(p.Value, out result))
+                if (bool.TryParse(p.Value, out bool result))
                 {
                     return result;
                 }
@@ -535,8 +531,7 @@ namespace hoTools.Settings
         {
             get
             {
-                bool result;
-                if (bool.TryParse(CurrentConfig.AppSettings.Settings["isQuickSearchSupport"].Value, out result))
+                if (bool.TryParse(CurrentConfig.AppSettings.Settings["isQuickSearchSupport"].Value, out bool result))
                 {
                     return result;
                 }
@@ -556,8 +551,7 @@ namespace hoTools.Settings
         {
             get
             {
-                bool result;
-                if (bool.TryParse(CurrentConfig.AppSettings.Settings["isShortKeySupport"].Value, out result))
+                if (bool.TryParse(CurrentConfig.AppSettings.Settings["isShortKeySupport"].Value, out bool result))
                 {
                     return result;
                 }
@@ -577,8 +571,7 @@ namespace hoTools.Settings
         {
             get
             {
-                bool result;
-                if (bool.TryParse(CurrentConfig.AppSettings.Settings["isShowServiceButton"].Value, out result))
+                if (bool.TryParse(CurrentConfig.AppSettings.Settings["isShowServiceButton"].Value, out bool result))
                 {
                     return result;
                 }
@@ -598,8 +591,7 @@ namespace hoTools.Settings
         {
             get
             {
-                bool result;
-                if (bool.TryParse(CurrentConfig.AppSettings.Settings["isShowQueryButton"].Value, out result))
+                if (bool.TryParse(CurrentConfig.AppSettings.Settings["isShowQueryButton"].Value, out bool result))
                 {
                     return result;
                 }
@@ -619,8 +611,7 @@ namespace hoTools.Settings
         {
             get
             {
-                bool result;
-                if (bool.TryParse(CurrentConfig.AppSettings.Settings["isFavoriteSupport"].Value, out result))
+                if (bool.TryParse(CurrentConfig.AppSettings.Settings["isFavoriteSupport"].Value, out bool result))
                 {
                     return result;
                 }
@@ -668,8 +659,7 @@ namespace hoTools.Settings
         {
             get
             {
-                bool result;
-                if (bool.TryParse(CurrentConfig.AppSettings.Settings["isAdvancedFeatures"].Value, out result))
+                if (bool.TryParse(CurrentConfig.AppSettings.Settings["isAdvancedFeatures"].Value, out bool result))
                 {
                     return result;
                 }
@@ -690,8 +680,7 @@ namespace hoTools.Settings
         {
             get
             {
-                bool result;
-                if (bool.TryParse(CurrentConfig.AppSettings.Settings["isAdvancedPort"].Value, out result))
+                if (bool.TryParse(CurrentConfig.AppSettings.Settings["isAdvancedPort"].Value, out bool result))
                 {
                     return result;
                 }
@@ -716,8 +705,7 @@ namespace hoTools.Settings
         {
             get
             {
-                bool result;
-                if (bool.TryParse(CurrentConfig.AppSettings.Settings["isPortBasic"].Value, out result))
+                if (bool.TryParse(CurrentConfig.AppSettings.Settings["isPortBasic"].Value, out bool result))
                 {
                     return result;
                 }
@@ -742,8 +730,7 @@ namespace hoTools.Settings
         {
             get
             {
-                bool result;
-                if (bool.TryParse(CurrentConfig.AppSettings.Settings["isPortType"].Value, out result))
+                if (bool.TryParse(CurrentConfig.AppSettings.Settings["isPortType"].Value, out bool result))
                 {
                     return result;
                 }
@@ -766,8 +753,7 @@ namespace hoTools.Settings
         {
             get
             {
-                bool result;
-                if (bool.TryParse(CurrentConfig.AppSettings.Settings["isAdvancedDiagramNote"].Value, out result))
+                if (bool.TryParse(CurrentConfig.AppSettings.Settings["isAdvancedDiagramNote"].Value, out bool result))
                 {
                     return result;
                 }
@@ -789,8 +775,7 @@ namespace hoTools.Settings
         {
             get
             {
-                bool result;
-                if (bool.TryParse(CurrentConfig.AppSettings.Settings["isOrderFeatures"].Value, out result))
+                if (bool.TryParse(CurrentConfig.AppSettings.Settings["isOrderFeatures"].Value, out bool result))
                 {
                     return result;
                 }
@@ -814,8 +799,7 @@ namespace hoTools.Settings
         {
             get
             {
-                ShowInWindow result;
-                if (Enum.TryParse(CurrentConfig.AppSettings.Settings["ScriptAndQueryWindow"].Value, out result))
+                if (Enum.TryParse(CurrentConfig.AppSettings.Settings["ScriptAndQueryWindow"].Value, out ShowInWindow result))
                 {
                     return result;
                 }
@@ -872,8 +856,7 @@ namespace hoTools.Settings
         {
             get
             {
-                AutoLoadMdg result;
-                if (Enum.TryParse(CurrentConfig.AppSettings.Settings["AutoLoadMdg"].Value, out result))
+                if (Enum.TryParse(CurrentConfig.AppSettings.Settings["AutoLoadMdg"].Value, out AutoLoadMdg result))
                 {
                     return result;
                 }
@@ -902,8 +885,7 @@ namespace hoTools.Settings
         {
             get
             {
-                ShowInWindow result;
-                if (Enum.TryParse(CurrentConfig.AppSettings.Settings["ExtensionWindow"].Value, out result))
+                if (Enum.TryParse(CurrentConfig.AppSettings.Settings["ExtensionWindow"].Value, out ShowInWindow result))
                 {
                     return result;
                 }
@@ -934,8 +916,7 @@ namespace hoTools.Settings
         {
             get
             {
-                ShowInWindow result;
-                if (Enum.TryParse(CurrentConfig.AppSettings.Settings["OnlyQueryWindow"].Value, out result))
+                if (Enum.TryParse(CurrentConfig.AppSettings.Settings["OnlyQueryWindow"].Value, out ShowInWindow result))
                 {
                     return result;
                 }
@@ -965,8 +946,7 @@ namespace hoTools.Settings
         {
             get
             {
-                EaService.PartPortSynchronization result;
-                if (Enum.TryParse(CurrentConfig.AppSettings.Settings["PartPortSynchronization"].Value, out result))
+                if (Enum.TryParse(CurrentConfig.AppSettings.Settings["PartPortSynchronization"].Value, out EaService.PartPortSynchronization result))
                 {
                     return result;
                 }
@@ -996,8 +976,7 @@ namespace hoTools.Settings
         {
             get
             {
-                ShowInWindow result;
-                if (Enum.TryParse(CurrentConfig.AppSettings.Settings["SearchAndReplaceWindow"].Value, out result))
+                if (Enum.TryParse(CurrentConfig.AppSettings.Settings["SearchAndReplaceWindow"].Value, out ShowInWindow result))
                 {
                     return result;
                 }
@@ -1019,8 +998,7 @@ namespace hoTools.Settings
         {
             get
             {
-                ShowInWindow result;
-                if (Enum.TryParse(CurrentConfig.AppSettings.Settings["LineStyleAndMoreWindow"].Value, out result))
+                if (Enum.TryParse(CurrentConfig.AppSettings.Settings["LineStyleAndMoreWindow"].Value, out ShowInWindow result))
                 {
                     return result;
                 }
@@ -1044,8 +1022,7 @@ namespace hoTools.Settings
         {
             get
             {
-                bool result;
-                if (bool.TryParse(CurrentConfig.AppSettings.Settings["isVcSupport"].Value, out result))
+                if (bool.TryParse(CurrentConfig.AppSettings.Settings["isVcSupport"].Value, out bool result))
                 {
                     return result;
                 }
@@ -1068,8 +1045,7 @@ namespace hoTools.Settings
         {
             get
             {
-                bool result;
-                if (bool.TryParse(CurrentConfig.AppSettings.Settings["isSvnSupport"].Value, out result))
+                if (bool.TryParse(CurrentConfig.AppSettings.Settings["isSvnSupport"].Value, out bool result))
                 {
                     return result;
                 }
@@ -2011,10 +1987,9 @@ namespace hoTools.Settings
         /// <returns></returns>
         bool GetBoolConfigValue(string name)
         {
-            bool result;
             var p = CurrentConfig.AppSettings.Settings[name];
             if (p == null) return false;// default
-            if (bool.TryParse(p.Value, out result))
+            if (bool.TryParse(p.Value, out var result))
             {
                 return result;
             }

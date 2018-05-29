@@ -3,6 +3,7 @@ using System.IO;
 using System.Windows.Forms;
 using System.Threading;
 using FileSystem;
+using hoTools.Utils;
 
 
 namespace hoTools.hoSqlGui
@@ -195,14 +196,14 @@ namespace hoTools.hoSqlGui
         {
             try
             {
-                string s = File.ReadAllText(_fullName).Trim();
+                string s = Util.ReadAllText(_fullName).Trim();
                 _readTime = DateTime.Now; // avoid 
                 IsChanged = false;
                 return s;
             }
             catch (Exception e)
             {
-                MessageBox.Show($"File '{_fullName}'\r\n{e}", @"Error reading file!");
+                MessageBox.Show($@"File '{_fullName}'{Environment.NewLine}{e}", @"Error reading file!");
                 return "";
             }
         }

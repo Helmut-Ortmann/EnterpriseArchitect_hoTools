@@ -36,7 +36,7 @@
 
 	NamespaceName = "DataModels.VcSymbols";
 
-	LoadSQLiteMetadata(@"c:\Users\helmu_000\AppData\Roaming\Code\User\workspaceStorage\aa695e4b2b69e4df2595f987547a5da3\ms-vscode.cpptools", 
+	LoadSQLiteMetadata(@"c:\Users\helmu\AppData\Roaming\Code\User\workspaceStorage\f287300138bf5354e5874a72bbb5f691\ms-vscode.cpptools\", 
 	".BROWSE.VC.DB");
 //	LoadSQLiteMetadata(string connectionString);
 

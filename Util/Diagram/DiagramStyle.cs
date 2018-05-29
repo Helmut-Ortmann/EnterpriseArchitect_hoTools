@@ -24,9 +24,7 @@ namespace hoTools.Utils.Diagram
             foreach (var p in Property)
             {
                 string property = p.Trim().ToLower();
-                string name;
-                string value;
-                if (!GetNameValueFromString(property, out name, out value)) continue;
+                if (!GetNameValueFromString(property, out string name, out string value)) continue;
 
                 if (!withSql)
                 { 
@@ -157,9 +155,7 @@ namespace hoTools.Utils.Diagram
             foreach (var type in Type)
             {
                 if (String.IsNullOrWhiteSpace(type)) continue;
-                string name;
-                string value;
-                if (!GetNameValueFromString(type, out name, out value)) continue;
+                if (!GetNameValueFromString(type, out string name, out string value)) continue;
                 switch (name.Substring(0,4).ToLower())
                 {
                     // Standard Diagram Types

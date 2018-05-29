@@ -56,12 +56,11 @@ namespace EAAddinFramework.Utils
         /// <returns></returns>
         public static object GetEaObject(this EA.Repository rep, string  sqlObjectType, string guid, out EA.ObjectType objectType)
         {
-           
-            EA.ObjectType eaObjectType;
+
             objectType = EA.ObjectType.otNone;
 
             // eaObjectType found in dictionary
-            if ( EaObjectTypes.TryGetValue(sqlObjectType, out eaObjectType) )
+            if ( EaObjectTypes.TryGetValue(sqlObjectType, out EA.ObjectType eaObjectType) )
             {
                 switch (eaObjectType)
                 {

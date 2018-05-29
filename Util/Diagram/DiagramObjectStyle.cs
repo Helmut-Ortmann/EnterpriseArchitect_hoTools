@@ -34,11 +34,9 @@ namespace hoTools.Utils.Diagram
 
             foreach (var property in Property)
             {
-                string name;
-                string value;
                 int iValue;
                 bool bValue = false;
-                if (!GetNameValueFromString(property, out name, out value)) continue;
+                if (!GetNameValueFromString(property, out string name, out string value)) continue;
 
 
 
@@ -297,9 +295,7 @@ namespace hoTools.Utils.Diagram
             {
                 string style = s.Trim();
                 if (style == "") continue;
-                string name;
-                string value;
-                if (!GetNameValueFromString(style, out name, out value)) continue;
+                if (!GetNameValueFromString(style, out string name, out string value)) continue;
                 switch (name)
                 {
                     // Backgroundcolor
@@ -376,9 +372,7 @@ namespace hoTools.Utils.Diagram
             foreach (var type in Type)
             {
                 if (String.IsNullOrWhiteSpace(type)) continue;
-                string name;
-                string value;
-                if (!GetNameValueFromString(type, out name, out value)) continue;
+                if (!GetNameValueFromString(type, out string name, out string value)) continue;
                 switch (name.Substring(0,4).ToLower())
                 {
                     case "type":

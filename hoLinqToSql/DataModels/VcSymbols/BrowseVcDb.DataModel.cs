@@ -1,4 +1,5 @@
-﻿using LinqToDB.DataProvider;
+﻿using System;
+using LinqToDB.DataProvider;
 
 // ReSharper disable once CheckNamespace
 namespace DataModels.VcSymbols
@@ -17,6 +18,6 @@ namespace DataModels.VcSymbols
         }
 
 
-
+        
     }
 }

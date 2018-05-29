@@ -11,7 +11,7 @@ using System.Xml.Linq;
 using AddInSimple.EABasic;
 using EA;
 using hoLinqToSql.LinqUtils;
-
+using hoTools.Utils;
 using LinqToDB.Configuration;
 using LinqToDB.DataProvider;
 
@@ -266,7 +266,7 @@ namespace AddInSimple
 
 
                 case MenuOpenProperties:
-                    this.testPropertiesDialog(repository);
+                    this.TestPropertiesDialog(repository);
                     break;
                 
                 // Test the Search and output the results to EA Search Window
@@ -503,12 +503,13 @@ Helmut.Ortmann@t-online.de
             string filePath = $@"c:\Users\{Environment.UserName}\AppData\Roaming\Sparx Systems\EA\Search Data\EA_Search.xml";
             try
             {
-                string t = System.IO.File.ReadAllText(filePath);
+                string t = Util.ReadAllText(filePath);
                 xelement = XDocument.Parse(t);
             }
             catch (Exception e)
             {
-                MessageBox.Show($"Tried to xml parse '{filePath}'\r\n{e}","Cant read EA_Search.xml");
+                MessageBox.Show($@"Tried to xml parse '{filePath}'{Environment.NewLine}{e}",
+                    @"Cant read EA_Search.xml");
                 return null;
             }
 
@@ -544,9 +545,9 @@ Helmut.Ortmann@t-online.de
                 //Type="0" LnksToObj="0" CustomSearch="1" AddinAndMethodName=""
                 select new
                 {
-                    QueryName = el.Attribute("Name").Value,
+                    QueryName = el.Attribute(@"Name").Value,
                     Type = "Add-In",
-                    Sql = el.Attribute("AddinAndMethodName").Value
+                    Sql = el.Attribute(@"AddinAndMethodName").Value
                 };
             // Concatenate queries
             var sum = addIn.Concat(sql).Concat(eaFilter).OrderBy(n => n.QueryName);
@@ -561,7 +562,7 @@ Helmut.Ortmann@t-online.de
         /// <param name="args">the arguments</param>
         public override void EA_OnStartValidation(EA.Repository repository, object args)
         {
-            MessageBox.Show("Validation started");
+            MessageBox.Show(@"Validation started");
         }
         /// <summary>
         /// Called when EA ends model validation. Just shows a message box
@@ -570,7 +571,7 @@ Helmut.Ortmann@t-online.de
         /// <param name="args">the arguments</param>
         public override void EA_OnEndValidation(EA.Repository repository, object args)
         {
-            MessageBox.Show("Validation ended");
+            MessageBox.Show(@"Validation ended");
         }
         
         /// <summary>
@@ -578,7 +579,7 @@ Helmut.Ortmann@t-online.de
         /// </summary>
         private void SayHello()
         {
-            MessageBox.Show("Hello World");
+            MessageBox.Show(@"Hello World");
             this._shouldWeSayHello = false;
         }
 
@@ -587,11 +588,11 @@ Helmut.Ortmann@t-online.de
         /// </summary>
         private void SayGoodbye()
         {
-            MessageBox.Show("Goodbye World");
+            MessageBox.Show(@"Goodbye World");
             this._shouldWeSayHello = true;
         }
 
-        private void testPropertiesDialog(EA.Repository repository)
+        private void TestPropertiesDialog(EA.Repository repository)
         {
             int diagramId = repository.GetCurrentDiagram().DiagramID;
             // there is no current diagram
@@ -896,8 +897,7 @@ Helmut.Ortmann@t-online.de
             table.Columns.Add("Alias", typeof(string));
 
             // Switch according to context object type
-            object oContext;
-            EA.ObjectType type = rep.GetContextItem(out oContext);
+            EA.ObjectType type = rep.GetContextItem(out var oContext);
             switch (type)
             {
                  case EA.ObjectType.otPackage:
@@ -978,7 +978,7 @@ Helmut.Ortmann@t-online.de
                 get { return _hwnd; }
             }
 
-            private IntPtr _hwnd;
+            private readonly IntPtr _hwnd;
         }
     }
 

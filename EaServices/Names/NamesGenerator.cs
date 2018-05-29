@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using EA;
-using EAAddinFramework.Utils;
+using hoTools.Utils;
 using hoTools.Utils.Json;
 using hoTools.Utils.SQL;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+
 
 namespace hoTools.EaServices.Names
 {
@@ -51,7 +52,7 @@ namespace hoTools.EaServices.Names
         {
             if (! String.IsNullOrWhiteSpace(_sqlTopMost)) return true;
             if (!String.IsNullOrWhiteSpace(_sqlTopMostAlias)) return false;
-            MessageBox.Show("ObjectType: '{_objectType}'\r\nStereoType: '{stereotype}'", @"Autogenerate features are fault in Settings.json");
+            MessageBox.Show($@"ObjectType: '{_objectType}'{Environment.NewLine} StereoType: '{_stereotype}'", @"Autogenerate features are fault in Settings.json");
             return true;
         }
         /// <summary>
@@ -173,24 +174,21 @@ namespace hoTools.EaServices.Names
             try
             {
                 // Read JSON
-                string text = System.IO.File.ReadAllText(jasonFilePath);
+                string text =Util.ReadAllText(jasonFilePath);
                 search = JObject.Parse(text);
             }
             catch (Exception e)
             {
                 MessageBox.Show($@"Can't read '{jasonFilePath}'
 
-{e}", "Can't import Auto Increment settings from Settings.json. ");
+{e}", @"Can't import Auto Increment settings from Settings.json. ");
                 return;
             }
 
             //----------------------------------------------------------------------
             // Deserialize "AutoIncrement"
             // get JSON result objects into a list
-
             NameGeneratorItems = (List<NamesGeneratorItem>)JasonHelper.GetConfigurationStyleItems<NamesGeneratorItem>(search, "AutoIncrement");
-
-
         }
         /// <summary>
         /// Gets the next high number for the item. This may be for Name or Alias.

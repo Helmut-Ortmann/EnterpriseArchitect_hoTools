@@ -29,8 +29,8 @@ namespace EAAddinFramework.Utils
     /// </summary>
     public class Script
 	{
-		static string _scriptLanguageIndicator = "Language=\"";
-		static string _scriptNameIndicator = "Script Name=\"";
+		static readonly string _scriptLanguageIndicator = "Language=\"";
+		static readonly string _scriptNameIndicator = "Script Name=\"";
         static int _scriptHash;
         private static List<Script> _allScripts = new List<Script>();
         static Dictionary<string, string> _includableScripts;
@@ -128,8 +128,7 @@ namespace EAAddinFramework.Utils
             //remove all functions
             Functions.Clear();
             //create new script controller
-            _scriptController = new ScriptControl();
-            _scriptController.Language = _language.Name;
+            _scriptController = new ScriptControl {Language = _language.Name};
             // Objects available in Script
             _scriptController.AddObject("Repository", _model.Repository);
             _scriptController.AddObject("EAModel", _model);
@@ -215,7 +214,7 @@ namespace EAAddinFramework.Utils
             string[] scriptFiles = Directory.GetFiles(scriptsDirectory, "*.*", SearchOption.AllDirectories);
             foreach (string scriptfile in scriptFiles)
             {
-                string scriptcode = File.ReadAllText(scriptfile);
+                string scriptcode = Util.ReadAllText(scriptfile);
                 string scriptName = Path.GetFileNameWithoutExtension(scriptfile);
                 string scriptLanguage = GetLanguageFromPath(scriptfile);
                 _staticIncludableScripts.Add("!INC Local Scripts." + scriptName, scriptcode);

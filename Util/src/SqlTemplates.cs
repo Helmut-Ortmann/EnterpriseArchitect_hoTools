@@ -464,8 +464,7 @@ For: Package, Element, Diagram, Attribute, Operation"
         /// <returns></returns>
         public static SqlTemplate GetTemplate(SqlTemplateId templateId)
         {
-            SqlTemplate template;
-            if (SqlTemplate.TryGetValue(templateId, out template))
+            if (SqlTemplate.TryGetValue(templateId, out SqlTemplate template))
             {
                 return template;
             }
@@ -479,14 +478,13 @@ For: Package, Element, Diagram, Attribute, Operation"
         /// <returns></returns>
         public static string GetTemplateText(SqlTemplateId templateId)
         {
-            SqlTemplate template;
-            if (SqlTemplate.TryGetValue(templateId, out template))
+            if (SqlTemplate.TryGetValue(templateId, out SqlTemplate template))
             {
                 // get string from class or from resource
                 if (template.IsResource)
                 {
                     ResourceManager rm = new ResourceManager("hoTools.Utils.Resources.Strings", Assembly.GetExecutingAssembly());
-                    return rm.GetString(template.TemplateText); 
+                    return rm.GetString(template.TemplateText);
                 }
                 return template.TemplateText;
             }
@@ -500,8 +498,7 @@ For: Package, Element, Diagram, Attribute, Operation"
         /// <returns></returns>
         public static string GetTooltip(SqlTemplateId templateId)
         {
-            SqlTemplate template;
-            if (SqlTemplate.TryGetValue(templateId, out template))
+            if (SqlTemplate.TryGetValue(templateId, out SqlTemplate template))
             {
                 return template.ToolTip;
             }
@@ -515,8 +512,7 @@ For: Package, Element, Diagram, Attribute, Operation"
         /// <returns></returns>
         public static string GetTemplateName(SqlTemplateId templateId)
         {
-            SqlTemplate template;
-            if (SqlTemplate.TryGetValue(templateId, out template))
+            if (SqlTemplate.TryGetValue(templateId, out SqlTemplate template))
             {
                 return template.TemplateName;
             }

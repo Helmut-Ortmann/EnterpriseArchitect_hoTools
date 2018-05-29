@@ -18,6 +18,7 @@ using DuoVia.FuzzyStrings;
 using DuoVia.FuzzyStrings.ComparePhraseEngine;
 using hoLinqToSql.LinqUtils;
 using Newtonsoft.Json;
+using hoTools.Utils;
 
 // ReSharper disable once CheckNamespace
 namespace AddinFramework.Util
@@ -77,7 +78,7 @@ namespace AddinFramework.Util
 
             _staticAllSearches = new List<SearchItem>();
 
-            LoadMdgSearches(rep, File.ReadAllText(mdgLoadDuringStartUp));
+            LoadMdgSearches(rep, hoTools.Utils.Util.ReadAllText(mdgLoadDuringStartUp));
 
             // Load EA Standard Search Names for current release  
             LoadEaStandardSearchesFromJason(rep.GetRelease(), configFilePath);
@@ -233,7 +234,7 @@ namespace AddinFramework.Util
             string[] searchFiles = Directory.GetFiles(folder, "*.xml", SearchOption.AllDirectories);
             foreach (string searchFile in searchFiles)
             {
-                LoadMdgSearches(rep, File.ReadAllText(searchFile));
+                LoadMdgSearches(rep, hoTools.Utils.Util.ReadAllText(searchFile));
             }
 
         }
@@ -381,7 +382,7 @@ namespace AddinFramework.Util
         /// <returns></returns>
         private static string GetLinqPadDescription(string file)
         {
-            string sqlText = File.ReadAllText(file);
+            string sqlText = hoTools.Utils.Util.ReadAllText(file);
             Regex regex = new Regex(@"(^[ \t]*// \S[^\n]*\n)+", RegexOptions.Multiline);
             Match match = regex.Match(sqlText);
             Char[] c = { '\r', '\n' };
@@ -404,7 +405,7 @@ namespace AddinFramework.Util
             /// <returns></returns>
             private static string SqlGetDescription(string file)
         {
-            string sqlText = File.ReadAllText(file);
+            string sqlText = hoTools.Utils.Util.ReadAllText(file);
             Regex regex = new Regex(@"(^[ \t]*// \S[^\n]*\n)+", RegexOptions.Multiline);
             Match match = regex.Match(sqlText);
             Char[] c =  { '\r','\n' };

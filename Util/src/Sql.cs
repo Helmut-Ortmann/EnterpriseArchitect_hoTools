@@ -93,9 +93,8 @@ namespace hoTools.Utils.SQL
                                   dbTypeString.Length;
                     if (dbIndex > dbTypeString.Length)
                     {
-                        int dbNumber;
                         string dbNumberString = connectionString.Substring(dbIndex, 1);
-                        if (int.TryParse(dbNumberString, out dbNumber))
+                        if (int.TryParse(dbNumberString, out int dbNumber))
                         {
                             repoType = (RepositoryType)dbNumber;
                         }

@@ -42,14 +42,14 @@ namespace hoTools.EAServicesPort
             try
             {
                 // Read JSON
-                string text = System.IO.File.ReadAllText(globalCfg.JasonFilePath);
+                string text = Util.ReadAllText(globalCfg.JasonFilePath);
                 search = JObject.Parse(text);
             }
             catch (Exception e)
             {
                 MessageBox.Show($@"Can't read '{globalCfg.JasonFilePath}'
 
-{e}", "Can't import 'PortAlignment' settings from Settings.json. ");
+{e}", @"Can't import 'PortAlignment' settings from Settings.json. ");
                 return;
             }
 

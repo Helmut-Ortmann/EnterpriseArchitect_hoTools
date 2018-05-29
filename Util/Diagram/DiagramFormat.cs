@@ -48,7 +48,7 @@ namespace hoTools.Utils.Diagram
             try
             {
                 // Read JSON
-                string text = System.IO.File.ReadAllText(jasonFilePath);
+                string text = Util.ReadAllText(jasonFilePath);
                 jObject = JObject.Parse(text);
             }
             catch (Exception e)

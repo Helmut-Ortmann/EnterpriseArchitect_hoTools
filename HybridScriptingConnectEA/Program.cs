@@ -89,24 +89,19 @@ namespace HybridScriptingConnectEA
 
             IntPtr numFetched = new IntPtr();
             ;
-            IRunningObjectTable runningObjectTable;
-            IEnumMoniker monikerEnumerator;
             IMoniker[] monikers = new IMoniker[1];
 
-            GetRunningObjectTable(0, out runningObjectTable);
-            runningObjectTable.EnumRunning(out monikerEnumerator);
+            GetRunningObjectTable(0, out IRunningObjectTable runningObjectTable);
+            runningObjectTable.EnumRunning(out IEnumMoniker monikerEnumerator);
             monikerEnumerator.Reset();
 
             while (monikerEnumerator.Next(1, monikers, numFetched) == 0)
             {
-                IBindCtx ctx;
-                CreateBindCtx(0, out ctx);
+                CreateBindCtx(0, out IBindCtx ctx);
 
-                string runningObjectName;
-                monikers[0].GetDisplayName(ctx, null, out runningObjectName);
+                monikers[0].GetDisplayName(ctx, null, out string runningObjectName);
 
-                object runningObjectVal;
-                runningObjectTable.GetObject(monikers[0], out runningObjectVal);
+                runningObjectTable.GetObject(monikers[0], out object runningObjectVal);
 
                 result[runningObjectName] = runningObjectVal;
             }

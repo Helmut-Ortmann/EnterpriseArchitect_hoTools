@@ -162,10 +162,7 @@ Edit Setting.json:
 
                 string style = s.Trim();
                 if (style == "") continue;
-
-                string name;
-                string value;
-                if (!GetNameValueFromString(style, out name, out value)) continue;
+                if (!GetNameValueFromString(style, out string name, out string value)) continue;
                 // substitutes colors
                 value = ColorIntegerFromName(value);
 
@@ -190,8 +187,7 @@ Edit Setting.json:
         /// <returns></returns>
         protected static string ColorHtmlFromName(string htmlColor)
         {
-            int dummy;
-            if (int.TryParse(htmlColor, out dummy)) return htmlColor;
+            if (int.TryParse(htmlColor, out int dummy)) return htmlColor;
             var color = Color.FromName(htmlColor);
             if (color.IsEmpty) return htmlColor;
             return $@"#{color.B:X2}{color.G:X2}{color.R:X2}";
@@ -204,8 +200,7 @@ Edit Setting.json:
         protected static string ColorIntegerFromName(string htmlColor)
         {
 
-            int dummy;
-            if (int.TryParse(htmlColor, out dummy)) return htmlColor;
+            if (int.TryParse(htmlColor, out int dummy)) return htmlColor;
             var color = Color.FromName(htmlColor);
             if (color.IsEmpty) return htmlColor;
             return (color.B*(256*256) + color.G*256 + color.R).ToString();
