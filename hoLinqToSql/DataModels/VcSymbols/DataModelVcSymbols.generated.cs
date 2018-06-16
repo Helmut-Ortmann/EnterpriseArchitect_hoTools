@@ -13,12 +13,12 @@ using LinqToDB.Mapping;
 
 namespace DataModels.VcSymbols
 {
-	/// <summary>
-	/// Database       : .BROWSE.VC
-	/// Data Source    : .BROWSE.VC
-	/// Server Version : 3.19.3
-	/// </summary>
-	public partial class BROWSEVCDB : LinqToDB.Data.DataConnection
+    /// <summary>
+    /// Database       : .BROWSE.VC
+    /// Data Source    : .BROWSE.VC
+    /// Server Version : 3.19.3
+    /// </summary>BROWSEVCDB/BrowseVcDB
+    public partial class BROWSEVCDB : LinqToDB.Data.DataConnection
 	{
 		public ITable<AssocSpans>       AssocSpans       { get { return this.GetTable<AssocSpans>(); } }
 		public ITable<AssocText>        AssocText        { get { return this.GetTable<AssocText>(); } }

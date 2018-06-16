@@ -35,8 +35,8 @@ using System.Runtime.InteropServices;
 
 // If you change the AssemblyVersion you have to update the component information in FileHistory.wxs
 // If not: you get registration error and the Addin isn't loaded in EA
-[assembly: AssemblyVersion("3.1.9")]
+[assembly: AssemblyVersion("3.2.7")]
 // possibly make same as ProductVersion in Product.wxs
-[assembly: AssemblyFileVersion("3.1.9")]
+[assembly: AssemblyFileVersion("3.2.7")]
 [assembly: NeutralResourcesLanguage("en")]
 

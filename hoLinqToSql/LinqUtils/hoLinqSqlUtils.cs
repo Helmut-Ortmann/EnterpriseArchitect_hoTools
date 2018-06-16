@@ -204,7 +204,7 @@ namespace hoLinqToSql.LinqUtils
         /// <returns>"" = No connection found</returns>
         public static string GetConnectionString(string vcCodeFolderPath, out IDataProvider provider, bool withErrorMessage= true)
         {
-            provider = new SQLiteDataProvider();
+            provider = new SQLiteDataProvider("SQLite.Classic");
             return VcDbUtilities.GetConnectionString(vcCodeFolderPath, withErrorMessage );
         }
         /// <summary>
