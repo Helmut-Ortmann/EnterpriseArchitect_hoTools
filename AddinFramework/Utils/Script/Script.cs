@@ -1,4 +1,5 @@
 ﻿/*
+ * Adapted to hoTools
  * Created by SharpDevelop.
  * User: Geert
  * Date: 7/10/2014
@@ -390,28 +391,39 @@ namespace EAAddinFramework.Utils
         /// <param name="code">the code containing the include parameters</param>
         /// <param name="parentIncludeStatement"></param>
         /// <returns>the code including the included code</returns>
-        private string IncludeScripts(string code,string parentIncludeStatement = null)
-		{
-			string includedCode = code;
-			//find all lines starting with !INC
-			foreach (string includeString in GetIncludes(code)) 
-			{
-				if (includeString != parentIncludeStatement) //prevent eternal loop
-				{
-					//then replace with the contents of the included script
-					includedCode = includedCode.Replace(includeString,IncludeScripts(GetIncludedcode(includeString),includeString));
-				}
-			}
-			
-			return includedCode;
-			
-		}
-		/// <summary>
-		/// gets the code to be included based on the include string. !INC statements
-		/// </summary>
-		/// <param name="includeString">the include statement</param>
-		/// <returns>the code to be included</returns>
-		private string GetIncludedcode(string includeString)
+        private string IncludeScripts(string code, List<string> includedScripts = null)
+        {
+            string includedCode = code;
+            if (includedScripts == null)
+            {
+                includedScripts = new List<string>();
+
+            }
+            //find all lines starting with !INC
+            foreach (string includeString in GetIncludes(code))
+            {
+                if (!includedScripts.Contains(includeString)) //prevent including code twice
+                {
+                    includedScripts.Add(includeString);
+                    //then replace with the contents of the included script
+                    includedCode = includedCode.Replace(includeString + Environment.NewLine, this.IncludeScripts(GetIncludedcode(includeString), includedScripts));
+                }
+                else
+                {
+                    //remove the included string because the script was already included
+                    includedCode = includedCode.Replace(includeString + Environment.NewLine, string.Empty);
+                }
+            }
+
+            return includedCode;
+
+        }
+        /// <summary>
+        /// gets the code to be included based on the include string. !INC statements
+        /// </summary>
+        /// <param name="includeString">the include statement</param>
+        /// <returns>the code to be included</returns>
+        private string GetIncludedcode(string includeString)
 		{
 			string includedCode = string.Empty;
 			if (IncludableScripts.ContainsKey(includeString))
@@ -486,42 +498,46 @@ namespace EAAddinFramework.Utils
 		 	  _modelIncludableScripts = new Dictionary<string, string>();
 		 	  
 		 	  XmlNodeList scriptNodes = xmlScripts.SelectNodes("//Row");
-              foreach (XmlNode scriptNode in scriptNodes)
-              {
-              	//get the <notes> node. If it contains "Group Type=" then it is a group. Else we need to find "Language=" 
-              	XmlNode notesNode = scriptNode.SelectSingleNode(model.FormatXPath("Notes"));
-              	if (notesNode.InnerText.Contains(_scriptLanguageIndicator))
-          	    {
-          	    	//we have an actual script.
-          	    	//the name of the script
-          	    	string scriptName = GetValueByName(notesNode.InnerText, _scriptNameIndicator);
-					//now figure out the language
-					string language = GetValueByName(notesNode.InnerText, _scriptLanguageIndicator);
-					//get the ID
-					XmlNode idNode = scriptNode.SelectSingleNode(model.FormatXPath("ScriptID"));
-					string scriptId = idNode.InnerText;
-					//get the group
-					XmlNode groupNode = scriptNode.SelectSingleNode(model.FormatXPath("SCRIPTGROUP"));
-					string groupName = groupNode.InnerText;
-					//then get the code
-					XmlNode codeNode = scriptNode.SelectSingleNode(model.FormatXPath("Script"));	
-					if (codeNode != null && language != string.Empty)
-					{
-						//if the script is still empty EA returns NULL
-						string scriptCode = codeNode.InnerText;
-						if (scriptCode.Equals("NULL",StringComparison.InvariantCultureIgnoreCase))
-						{
-							scriptCode = string.Empty;
-						}
-						var script = new Script(scriptId,scriptName,groupName,scriptCode, language,model); 
-						//and create the script if both code and language are found
-						_allScripts.Add(script);
-						//also add the script to the include dictionary
-						_modelIncludableScripts.Add("!INC "+ script.GroupName + "." + script.Name,script.Code);
-					}
-          	    }
-              }
-              //Add the static EA-Matic scripts to allScripts
+			     foreach (XmlNode scriptNode in scriptNodes)
+			     {
+			         //get the <notes> node. If it contains "Group Type=" then it is a group. Else we need to find "Language=" 
+			         XmlNode notesNode = scriptNode.SelectSingleNode(model.FormatXPath("Notes"));
+			         if (notesNode.InnerText.Contains(_scriptLanguageIndicator))
+			         {
+			             //we have an actual script.
+			             //the name of the script
+			             string scriptName = GetValueByName(notesNode.InnerText, _scriptNameIndicator);
+			             //now figure out the language
+			             string language = GetValueByName(notesNode.InnerText, _scriptLanguageIndicator);
+			             //get the ID
+			             XmlNode idNode = scriptNode.SelectSingleNode(model.FormatXPath("ScriptID"));
+			             string scriptId = idNode.InnerText;
+			             //get the group
+			             XmlNode groupNode = scriptNode.SelectSingleNode(model.FormatXPath("SCRIPTGROUP"));
+			             string groupName = groupNode.InnerText;
+			             //then get the code
+			             XmlNode codeNode = scriptNode.SelectSingleNode(model.FormatXPath("Script"));
+			             if (codeNode != null && language != string.Empty)
+			             {
+			                 //if the script is still empty EA returns NULL
+			                 string scriptCode = codeNode.InnerText;
+			                 if (scriptCode.Equals("NULL", StringComparison.InvariantCultureIgnoreCase))
+			                 {
+			                     scriptCode = string.Empty;
+			                 }
+
+			                 var script = new Script(scriptId, scriptName, groupName, scriptCode, language, model);
+			                 //and create the script if both code and language are found
+			                 _allScripts.Add(script);
+			                 //also add the script to the include dictionary
+			                 string scriptKey = "!INC " + script.GroupName + "." + script.Name;
+			                 if (!_modelIncludableScripts.ContainsKey(scriptKey))
+			                     _modelIncludableScripts.Add(scriptKey, script.Code);
+			             }
+			         }
+			     }
+
+			     //Add the static EA-Matic scripts to allScripts
               foreach (Script staticScript in StaticEaMaticScripts)
               {
               	//add the model to the static script first

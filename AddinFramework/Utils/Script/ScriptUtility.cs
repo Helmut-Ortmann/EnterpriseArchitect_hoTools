@@ -30,7 +30,7 @@ namespace AddinFramework.Util
                     object[] par3 = { oContext, oType, model };
                     return new ScriptFuntionWrapper(function).Execute(par3);
                 default:
-                    MessageBox.Show($"Script {function.FullName}  has {function.NumberOfParameters} parameter",
+                    MessageBox.Show($@"Script {function.FullName}  has {function.NumberOfParameters} parameter",
                         @"Script function parameter count not 2 or 3, Break!");
                     return false;
             }
@@ -72,7 +72,9 @@ namespace AddinFramework.Util
             }
             catch (Exception e)
             {
-                if (_isErrorOutput) MessageBox.Show($"Have you updated the Scripts (File, Update Scripts)??\r\n\r\n{e.ToString()}", $"Error run Script  '{_function.FullName}()'");
+                if (_isErrorOutput) MessageBox.Show($@"Have you updated the Scripts (File, Update Scripts)??
+
+{e}", $@"Error run Script  '{_function.FullName}()'");
                 return false;
 
             }

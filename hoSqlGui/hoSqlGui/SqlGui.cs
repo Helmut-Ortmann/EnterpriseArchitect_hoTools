@@ -456,7 +456,7 @@ Error:
         /// <param name="e"></param>
         void showScriptToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            if (_rowScriptsIndex < 0) return;
             DataGridViewRow rowToRun = dataGridViewScripts.Rows[_rowScriptsIndex];
             DataRowView row = rowToRun.DataBoundItem as DataRowView;
             if (row == null)
