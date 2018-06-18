@@ -121,6 +121,11 @@ Some features:
 
 
 # Releases
+### Release 3.2.8
+
+- Show errors of Script engine
+
+
 ### Release 3.2.7
 - New service "Copy ID of Package, Element, Diagram,.. to Clipboard"
 - Minor bug fixing/improvements

@@ -286,7 +286,7 @@ namespace EAAddinFramework.Utils
 			}
 			catch (Exception e)
 			{
-                MessageBox.Show($"URL='{url}' skipped (see: Extensions, MDGTechnology,Advanced).\r\n{e.Message}", 
+                MessageBox.Show($@"URL='{url}' skipped (see: Extensions, MDGTechnology,Advanced).{Environment.NewLine}{e.Message}", 
                     @"Error in load *.xml MDGScripts from url! ");
             }
 		}

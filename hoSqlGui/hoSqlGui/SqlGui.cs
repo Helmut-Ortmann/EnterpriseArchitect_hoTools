@@ -41,6 +41,8 @@ namespace hoTools.hoSqlGui
         public const string TabulatorScript = "Script";
         public const string TabulatorSql = "SQL";
 
+        public const string Tab = "\t";
+
         /// <summary>
         /// Type of Addin. Use the same string for enum as the string to visualize
         /// </summary>
@@ -209,7 +211,7 @@ namespace hoTools.hoSqlGui
             }
             else // run for Script (includes SQL / Query)
             {
-                float distance = (float) splitContainer.Height * (float)0.5;
+                float distance =  splitContainer.Height * (float)0.5;
                 try
                 {
                     splitContainer.SplitterDistance = (int) distance;
@@ -376,6 +378,16 @@ namespace hoTools.hoSqlGui
             // fill list
             foreach (Script script in _lscripts)
             {
+                if ( !String.IsNullOrEmpty(script.ErrorMessage)   )
+                {
+                    MessageBox.Show($@"Script:{Tab}'{script.DisplayName}'
+Group:{Tab}'{script.GroupName}'
+
+Error:
+'{script.ErrorMessage}'
+", @"Error in Script, Script skipped!");
+                    continue;
+                }
 
                 foreach (ScriptFunction function in script.Functions)
                 {
@@ -414,11 +426,11 @@ namespace hoTools.hoSqlGui
             string err = row.Cells["Err"].Value as string;
             if (String.IsNullOrWhiteSpace(err))
             {
-                MessageBox.Show("", $"Function compiled fine {scriptName}.{functionName}");
+                MessageBox.Show("", $@"Function compiled fine {scriptName}.{functionName}");
             }
             else
             {
-                MessageBox.Show($"Error:\r\n'{err}'", $"Error {scriptName}:{functionName}");
+                MessageBox.Show($@"Error:{Environment.NewLine}'{err}'", $@"Error {scriptName}:{functionName}");
             }
 
 
@@ -447,10 +459,19 @@ namespace hoTools.hoSqlGui
 
             DataGridViewRow rowToRun = dataGridViewScripts.Rows[_rowScriptsIndex];
             DataRowView row = rowToRun.DataBoundItem as DataRowView;
-
+            if (row == null)
+            {
+                MessageBox.Show($@"Index: {_rowScriptsIndex}", @"Can't find Script, break!");
+                return;
+            }
 
             var script = row["ScriptObj"] as Script;
-            MessageBox.Show(script.Code, $"Code of {script.DisplayName}");
+            if (script == null)
+            {
+                MessageBox.Show($@"Index: {_rowScriptsIndex}", @"Can't find Script, break!");
+                return;
+            }
+            MessageBox.Show(script.Code, $@"Code of {script.DisplayName}");
 
         }
 
@@ -463,7 +484,15 @@ namespace hoTools.hoSqlGui
         /// <param name="e"></param>
         void btnRunScriptForSql_Click(object sender, EventArgs e)
         {
-            RunScriptWithAskGui(isWithAsk: false);
+            try
+            {
+                RunScriptWithAskGui(isWithAsk: false);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($@"{ex}", @"Error running Script!");
+            }
+            
 
         }
 
@@ -474,7 +503,15 @@ namespace hoTools.hoSqlGui
         /// <param name="e"></param>
         void btnRunScriptForSqlWithAsk_Click(object sender, EventArgs e)
         {
-            RunScriptWithAskGui(isWithAsk: true);
+            try
+            { 
+                RunScriptWithAskGui(isWithAsk: true);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($@"{ex}", @"Error running Script!");
+            }
+   
         }
 
         /// <summary>
@@ -494,14 +531,22 @@ namespace hoTools.hoSqlGui
             // get Script and its parameter to run
             DataGridViewRow rowToRun = dataGridViewScripts.Rows[_rowScriptsIndex];
             DataRowView row = rowToRun.DataBoundItem as DataRowView;
-            var scriptFunction = row["FunctionObj"] as ScriptFunction;
+            if (row == null)
+            {
+                MessageBox.Show($@"Index: {_rowScriptsIndex}", @"Can't find Script, break!");
+            }
+            else
+            {
 
-            // replace templates, search term and more
-            string sql = SqlTemplates.ReplaceMacro(Repository, textBox.Text, GetSearchTerm());
-            if (sql == "") return;
+                var scriptFunction = row["FunctionObj"] as ScriptFunction;
 
-            // run SQL, Script and ask whether to execute, skip script or break all together
-            GuiFunction.RunScriptWithAsk(Model, sql, scriptFunction, isWithAsk: isWithAsk);
+                // replace templates, search term and more
+                string sql = SqlTemplates.ReplaceMacro(Repository, textBox.Text, GetSearchTerm());
+                if (sql == "") return;
+
+                // run SQL, Script and ask whether to execute, skip script or break all together
+                GuiFunction.RunScriptWithAsk(Model, sql, scriptFunction, isWithAsk: isWithAsk);
+            }
 
             Cursor.Current = Cursors.Default;
         }
@@ -1002,7 +1047,7 @@ Open EA Scripting Window, Update (3th Button from left) and the Script Group app
         /// <returns></returns>
         private string GetSearchTerm()
         {
-            if (txtSearchTerm.Text == "<Search Term>") return "";
+            if (txtSearchTerm.Text == @"<Search Term>") return "";
             return txtSearchTerm.Text;
         }
         /// <summary>
@@ -1014,7 +1059,7 @@ Open EA Scripting Window, Update (3th Button from left) and the Script Group app
         {
             if (txtSearchTerm.Text == "")
             {
-                txtSearchTerm.Text = "<Search Term>";
+                txtSearchTerm.Text = @"<Search Term>";
                 txtSearchTerm.ForeColor = SystemColors.ControlDark;
             }
             else txtSearchTerm.ForeColor = SystemColors.WindowText;
@@ -1027,7 +1072,7 @@ Open EA Scripting Window, Update (3th Button from left) and the Script Group app
         private void txtSearchTerm_Enter(object sender, EventArgs e)
         {
             txtSearchTerm.ForeColor = SystemColors.WindowText;
-            if (txtSearchTerm.Text == "<Search Term>")
+            if (txtSearchTerm.Text == @"<Search Term>")
             {
                 txtSearchTerm.Text = "";
             }
