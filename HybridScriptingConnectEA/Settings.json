@@ -1,0 +1,522 @@
+﻿//---------------------------------------------------------------------------------------------------------------
+// Settings.json
+//---------------------------------------------------------------------------------------------------------------
+// Settings for:
+// - Set Diagram styles
+// - Bulk change of EA items
+//
+// Distribution::
+// - Original/Factory Settings:                 Project Setup
+// - Debug:                                     Project hoToolsRoot
+// - Current:                                   %appdata%Roaming\ho\hoTools  Debug + Operating mode
+{
+  // Styles:
+  // Name:          Short description
+  // Description:   Long description, used as helptext
+  // Type:          Rules to decide for which items the t´style is to apply (EA Type, Stereotype and more)
+  // Style:         The EA style in EA internal format. You may have to dig to find out details
+  // Property:      EA Properties defined by EA API. 
+  //                For Diagram Node/Objects or Links/Connectors you can use EA Layout Styles to define:
+  //                - Font, Colors, LineWidth,.. etc.
+  //                - see: http://sparxsystems.com/enterprise_architect_user_guide/13.0/user_interface/using_the_style_panel.html 
+  //                - "Property": "EaLayoutStyle=ObjStyle2;"
+  // Color:         You can use the Integer Value, Hexa Value or simple the colorname 
+  "DiagramStyle":
+  [
+    // List of Diagram Styles to assign to diagram types
+    // see:: https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/DiagramStyles
+    // PData: HideRel=0;ShowTags=0;ShowReqs=0;ShowCons=0;OpParams=1;ShowSN=0;ScalePI=0;PPgs.cx=1;PPgs.cy=1;PSize=9;
+    //        ShowIcons=1;SuppCN=0;HideProps=0;HideParents=0;UseAlias=0;HideAtts=0;HideOps=0;HideStereo=0;HideEStereo=0;ShowShape=1;FormName=;
+    // StyleEx: ExcludeRTF=0;DocAll=0;HideQuals=0;AttPkg=1;ShowTests=0;ShowMaint=0;SuppressFOC=1;MatrixActive=0;SwimlanesActive=1;
+    //          KanbanActive=0;MatrixLineWidth=1;MatrixLineClr=0;MatrixLocked=0;TConnectorNotation=UML 2.1;TExplicitNavigability=0;
+    //          AdvancedElementProps=1;AdvancedFeatureProps=1; AdvancedConnectorProps=1;m_bElementClassifier=1;ProfileData=;
+    //          MDGDgm=;STBLDgm=;ShowNotes=0;VisibleAttributeDetail=0;ShowOpRetType=1;
+    //          SuppressBrackets=0;SuppConnectorLabels=0;PrintPageHeadFoot=0;ShowAsList=0;SuppressedCompartments=;Theme=:119;SaveTag=797D23E0;; 
+    // Color:   You can note colors by their name like 'crimson', 'red',.. (https://www.w3schools.com/colors/colors_names.asp)
+    {
+      "Name": "Diagr1 (simple, with Notes)",
+      "Description":
+        "Simple:\r\n-Notes\r\n-No Attributes\r\n-No Operations\r\n-Don't show Namespace\r\n- Alias\r\n- Scale diagram to fit one page",
+      "Type": "",
+      "PDATA": "PPgs.cx=1, PPgs.cy=1, ScalePI=1,PSize=1, HideAttr=1, HideOps=1, UseAlias=1",
+      "StyleEX": "ShowNotes=1;",
+      "Property": "ShowForeign=False;Orientation=P;ShowBorder=True;ShowDetails=1;"
+    },
+    {
+      "Name": "Diagr2 (elaborate, without Notes)",
+      "Description": "No Attributes, Notes\r\n- Show Namespace\r\n- No Alias",
+      "Type": "",
+      "PDATA": "HideAttr=1, HideOps=0, UseAlias=0",
+      "StyleEX": "ShowNotes=0",
+      "Property": "Orientation=P;ShowForeign=True;ShowBorder=False,cx=160,cy=220;ShowDetails=0;"
+    },
+    {
+      "Name": "My Requirements",
+      "Description": "No Attributes, Notes",
+      "Type": "Cust=Requirements",
+      "PDATA": "HideAtts=0, HideOps=0, OpParams=2, ShowOpRetType=1, PPgs.cx=1, PPgs.cy=1, ScalePI=1",
+      "StyleEX": "ShowNotes=1",
+      "Property": ""
+    },
+    {
+      "Name": "My Test Domain",
+      "Description": "Theme=Parchment\r\n- Hide operation\r\n- Scale to fit one page\r\n- No Notes",
+      "Type": "Cust=Test",
+      "Pdata": "HideAtts=1, HideOps=1, PPgs.cx=1, PPgs.cy=1, ScalePI=1, Theme=Parchment:113",
+      "StyleEX": "ShowNotes=0",
+      "Property": ""
+    },
+    {
+      "Name": "My special Diagrams (User, Documents)",
+      "Description": "My special Diagrams:\r\n-User\r\n-Documents",
+      "Type": "Cust=User, Cust=Document",
+      "Pdata": "HideAtts=1, HideOps=1, PPgs.cx=1, PPgs.cy=1, ScalePI=1",
+      "StyleEX": "ShowNotes=1",
+      "Property": ""
+    },
+    {
+      "Name": "My special Diagrams (User, Documents)",
+      "Description": "My special Diagrams:\r\n-User\r\n-Documents",
+      "Type": "Cust=User, Cust=Document",
+      "Pdata": "HideAtts=1, HideOps=1, PPgs.cx=1, PPgs.cy=1, ScalePI=1",
+      "StyleEX": "",
+      "Property": ""
+    }
+  ],
+  "DiagramObjectStyle":
+  [
+    // Hiding  Styles:  AttPro=0;AttPri=0;AttPub=0;AttPkg=0;OpPro=0;OpPri=0;OpPub=0;OpPkg=0;
+    // Showing Styles:  Tag=1;Constraint=1;PType=1;Notes=1000;Formatted=1;RzO=1;Runstate=1;Responsibility;FQTag=1;OpInh=1;AttInh=1;RzO=n;
+    // Pro=0:            Hide Protected (Attribute/Operation)
+    // Pri=0:            Hide Private (Attribute/Operation)
+    // Pub=0:            Hide Public (Attribute/Operation)
+    // Pkg=0:            Hide Package (Attribute/Operation)
+    // PType=1:          Show Property Type 
+    // FQTag=1;          Show Full Qualified Tag
+    // TagInh=1;         Show Inherited Tagged Values
+    // SC=1;             Structured Compartment
+    // Responsibility=1; Internal Requirement of a Requirement
+    // Inh=1             Inherited Operation, Attribute, Constraint
+    // RzO=n;            Resize Object: 1= Resize to longest Feature;2=Wrap Features;3=Truncate Features;     
+    //
+    // select name, objectStyle from t_diagramobjects d inner join t_object o on d.object_id = o.object_id
+    //
+    // Note:            The Database Field has a length constraint. If you get an error you have to reduce the Style content. 
+    // Color:           You can note colors by their name like 'crimson', 'red',..  (https://www.w3schools.com/colors/colors_names.asp)
+    // EA Layout Style  Use EA Layout Styles to define Font, Colors, LineWidth,..
+    //                  - see: http://sparxsystems.com/enterprise_architect_user_guide/13.0/user_interface/using_the_style_panel.html
+    //                  "Property": "EaLayoutStyle=ObjStyle2;"
+    // CompleteDiagram=Property,valueComplete:valueCompleteDiagram:valueIncompleteDiagram;
+    // Property: BackgroundColor, BorderColor, BorderLineWidth, or FontColor;
+    // valueComplete:         All links are visible
+    // valueCompleteDiagram   All links in Diagram are visible (non diagram links are missing)
+    // valueIncompleteDiagram Links in Diagram are hidden
+    // Example: "CompleteDiagram=BorderColor, Black, Black, Red;"        
+    {
+      "Name": "Default1, no Notes",
+      "Description": "No Notes\r\nNo Attributres",
+      "Type": "",
+      "Style": "",
+      "Property":
+        "ShowNotes=false;ShowPackageAttributes=False, ShowPrivateAttributes=false, ShowProtectedAttributes=false, ShowPublicAttributes=false"
+    },
+    {
+      "Name": "Default2, Notes",
+      "Description": "Notes\r\nNo Attributes",
+      "Type": "",
+      "Style": "Notes=1000,Formatted=1",
+      "Property":
+        "ShowPackageAttributes=True; ShowPrivateAttributes=false, ShowProtectedAttributes=false, ShowPublicAttributes=false"
+    },
+    {
+      "Name": "Notes, Public Operations, Class",
+      "Description": "Notes\r\nNo Protected,Private Operations\r\nTags",
+      "Type": "",
+      "Style": "Notes=1000;OpPro=0;OpPri=0;OpPkg=0;",
+      "Property": ""
+    },
+    {
+      "Name": "Tags",
+      "Description": "No Notes\r\nNo Operations\r\nNo Attributes\r\nTags",
+      "Type": "",
+      "Style":
+        "HideIcon=0;AttPri=0;AttPkg=0;AttPro=0;AttPub=0;AttCustom=0;OpCustom=0;OpPro=0;OpPri=0;OpPkg=0;PType=0;RzO=1;",
+      "Property": ""
+    },
+    {
+      "Name": "Wrap Features",
+      "Description": "Wrap Features",
+      "Type": "",
+      "Style": "HideIcon=0;RzO=2;",
+      "Property": ""
+    },
+    {
+      "Name": "Resize Features",
+      "Description": "Resize Features",
+      "Type": "",
+      "Style": "HideIcon=0;RzO=1;",
+      "Property": ""
+    },
+    {
+      "Name": "ObjStyle1",
+      "Description": "According to EA ObjStyle1",
+      "Type": "Stereotype=block",
+      "Style": "",
+      "Property": "EaLayoutStyle=ObjStyle1;"
+    },
+    {
+      "Name": "ObjStyle2",
+      "Description": "According to EA ObjStyle2",
+      "Type": "",
+      "Style": "Stereotype=block",
+      "Property": "EaLayoutStyle=ObjStyle2;"
+    },
+    {
+      "Name": "CompleteNessMarker",
+      "Description": "Set marker if object links aren't complete",
+      "Type": "",
+      "Style": "",
+      "Property": "CompleteDiagram=BorderColor: Black: Yellow: Red;"
+    }
+  ],
+  "DiagramLinkStyle":
+  [
+    // Name:         Template name
+    // Description:  Description for e.g. Tooltip
+    // Type:         Define for which type you want to apply this Style. 
+    //               ConnectorType (see: select * from t_connectortypes), Stereotype, Hidden, Color
+    // Style:        The Style according to: select Style from t_DiagramLinks
+    // Property:     The EA Properties to modify: https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/Settings-Global-Keys
+    // Color:        You can note colours by their name like 'crimson', 'red',..   (https://www.w3schools.com/colors/colors_names.asp)           
+    //
+    //
+    // select name, objectStyle from t_diagramobjects d inner join t_object o on d.object_id = o.object_id
+    //
+    // Note:   The Database Field has a length constraint. If you get an error you have to reduce the Style content. 
+    // EA Layout Style  Use EA Layout Styles to define Font, Colors, LineWidth,..
+    //                  - see: http://sparxsystems.com/enterprise_architect_user_guide/13.0/user_interface/using_the_style_panel.html
+    //  
+    {
+      "Name": "Default1",
+      "Description": "All Properties",
+      "Type": "",
+      "Style": "",
+      "Property": "LineStyle=9, IsHidden=False, LineColor=Chocolate,  LineWidth=2"
+    },
+    {
+      "Name": "Default2",
+      "Description": "Test Type (LineStyle)",
+      "Type": "",
+      "Style": "",
+      "Property": "LineStyle=5, IsHidden=False, LineColor=DarkMagenta, LineWidth=3"
+    },
+    {
+      "Name": "LineStyle+Stereotypes",
+      "Description": "Test Type (LineStyle+Stereotypes)",
+      "Type": "Types=Association,Dependency;Stereotypes=a,b;",
+      "Style": "",
+      "Property": "LineStyle=5, IsHidden=false, LineColor=0x8500, HiddenLabels=true, LineWidth=3"
+    },
+    {
+      "Name": "Stereotype a,b",
+      "Description": "Test Type (Stereotypes)",
+      "Type": "Stereotypes=a,b;",
+      "Style": "",
+      "Property": "LineStyle=3, IsHidden=false, LineColor=30000, HiddenLabels=false, LineWidth=2"
+    },
+    {
+      "Name": "Hide dependency",
+      "Description": "Hide dependency",
+      "Type": "Types=Association,Dependency;",
+      "Style": "",
+      "Property": "IsHidden=True"
+    },
+    {
+      "Name": "Style",
+      "Description": "Hide dependency",
+      "Type": "",
+      "Style": "LWidth=3, Color=#5800 ",
+      "Property": "IsHidden=False"
+    },
+    {
+      "Name": "Label Top Visible",
+      "Description": "Make Label top visible, , different colors, bold",
+      "Type": "",
+      "Style": "LWidth=3, Color=#5800 ",
+      "Property": "LLT=HDN=0:BLD=1:ITA=1:CLR=0x16000;LMT=HDN=0:BLD=1:ITA=0:CLR=#8000;LRT=HDN=0:BLD=0:ITA=0:CLR=green;"
+    },
+    {
+      "Name": "Label Top not Visible",
+      "Description": "Make Label top invisible",
+      "Type": "",
+      "Style": "LWidth=3, Color=#5800 ",
+      "Property": "LLT=HDN=1;LMT=HDN=1;LRT=HDN=1;"
+    },
+    {
+      "Name": "Label Reset",
+      "Description": "Reset Labels to their default",
+      "Type": "",
+      "Style": "LWidth=3, Color=#5800 ",
+      "Property": "LLB=SET=;LMB=SET=;LLT=SET=;LMT=SET=;LRB=SET=;LRT=SET=;IRHS=SET=;ILHS=SET=HDN=1;"
+    },
+    {
+      "Name": "Show Hidden Links in crimson",
+      "Description": "Show hidden links in crimson to later easily hide them, see next Style",
+      "Type": "Hidden=True;",
+      "Style": "LWidth=3, Color=crimson",
+      "Property": "IsHidden=false;LLB=SET=;LMB=SET=;LLT=SET=;LMT=SET=;LRB=SET=;LRT=SET=;IRHS=SET=;ILHS=SET=HDN=1;"
+    },
+    {
+      "Name": "Hide crimson Links",
+      "Description": "Just switch hidden links on and off, hide links which you have shown again.",
+      "Type": "Color=crimson;",
+      "Style": "LWidth=3, Color=crimson",
+      "Property": "IsHidden=true;LLB=SET=;LMB=SET=;LLT=SET=;LMT=SET=;LRB=SET=;LRT=SET=;IRHS=SET=;ILHS=SET=HDN=1;"
+    },
+    {
+      "Name": "Reset",
+      "Description": "Reset to defaults",
+      "Type": "",
+      "Style": "LWidth=-1, Color=-1 ",
+      "Property": "IsHidden=False"
+    },
+    {
+      "Name": "EA style1",
+      "Description": "Sets the default according to default style 1",
+      "Type": "",
+      "Style": "",
+      "Property": "EaLayoutStyle=Style1" // Use the EA style1 of table t_txtref 
+    },
+    {
+      "Name": "EA style2",
+      "Description": "Sets the default according to default style 1",
+      "Type": "",
+      "Style": "",
+      "Property": "EaLayoutStyle=Style2" // Use the EA style2 of table t_txtref 
+    },
+    {
+      "Name": "Set Default Style",
+      "Description": "Sets the default style for the connector",
+      "Type": "",
+      "Style": "",
+      "Property": "ConnectorColor=green, ConnectorWidth=3" // default for links 
+    }
+  ],
+  "AutoIncrement":
+  // Define the rules for autogenerate increment names for ObjectType, StereoType
+  // - MY_0.00.0.1 then MY_0.00.0.2 then MY_0.00.0.2 ..
+  //
+  // "ObjectType"        The EA Objectype like "Requirement"
+  // "Stereotype":       The EA Stereotype like "FunctionalRequirement"
+  // "SqlTopMost":       The SQL to determine the top most element name with the highest number  or Blank XOR
+  // "SqlTopMostAlias":  The SQL to determine the top most element alias with the highest number or Blank
+  //  "NumberProxyChar": Proxy/Paceholder for the number in the format string "0" for "MY_0_0:000" or "X" for "MY_X_X:XXX"
+  //  "FormatString":    Format string which contains the number (see NumberProxyChar)
+  //
+  // SQL Wildcards hoTools converts between Databases:
+  // - % or * or #WC# Any characters
+  // - _ or ? a single character
+  // "SqlTopMost":  
+  // -  "select top 1 t1.Object_ID from t_object t1 where t1.object_Type = 'Requirement' AND t1.stereotype = 'FunctionalRequirement' AND t1.name like 'F_*' AND NOT t1.name like 'FunctionalRequirement*' order by t1.name desc",
+  // "SqlTopMostAlias":  SQL to determine alias top most
+  // -  "select top 1 t1.Object_ID from t_object t1 where t1.object_Type = 'Requirement' AND t1.stereotype = 'FunctionalRequirement' AND t1.alias like 'F_*' AND NOT t1.alias like 'FunctionalRequirement*' order by t1.name desc",
+  //    "NumberProxyChar": "0",
+[
+    { // Functional Requirements, Counter for name
+      "ObjectType": "Requirement",
+      "Stereotype": "FunctionalRequirement",
+      "SqlTopMost": "select top 1 t1.Object_ID from t_object t1 where t1.object_Type = 'Requirement' AND t1.stereotype = 'FunctionalRequirement' AND t1.name like 'F_#WC#' AND NOT t1.name like 'FunctionalRequirement*' order by t1.name desc",
+      "SqlTopMostAlias": "",
+      "NumberProxyChar": "0",
+      "NumberStartValue": "1",
+      "FormatString": "F_0.00.0.0"
+    },
+  {
+  "ObjectType": "Requirement",
+  "Stereotype": "BusinessRequirement",
+  "SqlTopMost": "",
+  "SqlTopMostAlias": "select top 1 t1.Object_ID from t_object t1 where t1.object_Type = 'Requirement' AND t1.stereotype = 'BusinessRequirement' AND t1.alias like 'F_*' AND NOT t1.alias like 'FunctionalRequirement*' order by t1.alias desc",
+      "NumberProxyChar": "0",
+      "NumberStartValue": "99",
+      "FormatString": "F_0.00.0.0"
+    },
+    {
+      "ObjectType": "Risk",
+      "Stereotype": "",
+      "SqlTopMost": "select top 1 t1.Object_ID from t_object t1 where t1.object_Type = 'Risk' AND t1.stereotype = NULL AND t1.name like 'R:*' AND NOT t1.name like 'Risk*' order by t1.name desc",
+      "SqlTopMostAlias": "",
+      "NumberProxyChar": "0",
+      "NumberStartValue": "3",
+      "FormatString": "R:0.00.0.0"
+    },
+    {
+      "ObjectType": "Feature",
+      "Stereotype": "",
+      "SqlTopMost": "",
+      "SqlTopMostAlias": "select top 1 t1.Object_ID from t_object t1 where t1.object_Type = 'Feature' AND t1.stereotype = NULL AND t1.alias like 'FE:*' AND NOT t1.alias like 'Feature*' order by t1.alias desc",
+      "NumberProxyChar": "4",
+      "NumberStartValue": "1",
+      "FormatString": "FE:4.44.4.4"
+    }
+  ],
+  "PortAlignment": 
+  [
+    // Port alignment settings. Two sets consistent of:
+    // - Port
+    // - Interface (RequiredInterface, ProvidedInterface)
+    // Alignment of Port and RequiredInterface, ProvidedInterface
+    // Alignment of labels to set the label position
+    // Alignment: 0=left, 1=center, 2=right
+    // Rotation: 0=none, 1=clockwise, -1=anti clockwise
+    { 
+      "Type":  "Port",
+      "XLeft":  "-80",
+      "YLeft":  "0",
+      "AlignmentLeft": "0",
+      "RotationLeft": "0",
+      "XRight":  "20",
+      "YRight":  "0",
+      "AlignmentRight": "0",
+      "RotationRight": "0",
+      "XTop":  "0",
+      "YTop":  "-90",
+      "AlignmentTop": "0",
+      "RotationTop": "1",
+      "XBottom":  "0",
+      "YBottom":  "50",
+      "AlignmentBottom": "0",
+      "RotationBottom": "1"
+    },
+    { 
+      "Type":  "Interface",
+      "XLeft":  "-80",
+      "YLeft":  "0",
+      "AlignmentLeft": "0",
+      "RotationLeft": "0",
+      "XRight":  "50",
+      "YRight":  "0",
+      "AlignmentRight": "0",
+      "RotationRight": "0",
+      "XTop":  "0",
+      "YTop":  "-80",
+      "AlignmentTop": "0",
+      "RotationTop": "1",
+      "XBottom":  "0",
+      "YBottom":  "70",
+      "AlignmentBottom": "0",
+      "RotationBottom": "1"
+    }, // second set of default values, usually inside/outside parent classifier
+    { 
+      "Type":  "Port1",
+      "XLeft":  "25",
+      "YLeft":  "0",
+      "AlignmentLeft": "0",
+      "RotationLeft": "0",
+      "XRight":  "-140",
+      "YRight":  "0",
+      "AlignmentRight": "0",
+      "RotationRight": "0",
+      "XTop":  "0",
+      "YTop":  "30",
+      "AlignmentTop": "0",
+      "RotationTop": "1",
+      "XBottom":  "0",
+      "YBottom":  "-105",
+      "AlignmentBottom": "0",
+      "RotationBottom": "1"
+    },
+    { 
+      "Type":  "Interface1",
+      "XLeft":  "60",
+      "YLeft":  "0",
+      "AlignmentLeft": "0",
+      "RotationLeft": "0",
+      "XRight":  "-100",
+      "YRight":  "0",
+      "AlignmentRight": "0",
+      "RotationRight": "0",
+      "XTop":  "0",
+      "YTop":  "65",
+      "AlignmentTop": "0",
+      "RotationTop": "1",
+      "XBottom":  "0",
+      "YBottom":  "-120",
+      "AlignmentBottom": "0",
+      "RotationBottom": "1"
+    }
+  ],
+  // Bulk changes of EA elements
+  // - Check if the element is to change (apply the specified changes) 
+  // - Apply the specified changes to the elements which fulfill the check rules. 
+  //
+  // Name:               The Name of the Check/Apply combination to change specied elements
+  // Description:        Tooltip for further information and to better understand the intended changes
+  //
+  // Check: 
+  // TypesCheck:         Rule checked before applying the change: The EA-Types to apply the bulk change
+  // StereotypeCheck:    Rule checked before applying the change: The Stereotypes to apply the change
+  //
+  // Apply:
+  // StereotypesApply:   Comma separated list of Stereotypes to set, you may use full qualified named like 'ZF_LE::LE Action'
+  // TaggedValuesApply:  The Tagged Values to set, you may use full qualified named like 'ZF_LE::LE Action::Criticality' or simple 'Criticality'
+  // PropertiesApply:    Properties in the form 'name=value'. Name: Difficulty, Efforts, GenFile, GenType, Multiplicity, Phase, Priority, RunState, Status, StyleEx, Tag,Version, Visibility
+  "BulkItems" :
+  [
+	 {
+        "Name"              : "Test: Set Action to ASIL B",
+        "Description"       : "Set Stereotype and ASIL B for Action", 
+        "TypesCheck"        : ["Action"],
+        "StereotypesCheck"  : [""],
+        "StereotypesApply"  : ["ZF_LE::LE Action"], 
+        "TaggedValuesApply" : [ {"Name" : "ZF_LE::LE Action::Criticality", "Value" : "ASIL B" } ],
+        "PropertiesApply"   : []
+    },
+	{
+        "Name"              : "Test: Set Activity to ASIL B",
+        "Description"       : "Set Stereotype and ASIL B for Activity", 
+        "TypesCheck"        : ["Activity"],
+        "StereotypesCheck"  : [""],
+        "StereotypesApply"  : ["ZF_LE::LE Activity"], 
+        "TaggedValuesApply" : [ {"Name" : "ZF_LE::LE Activity::Criticality", "Value" : "ASIL B" } ],
+        "PropertiesApply"   : []
+    },
+    {
+        "Name"              : "Test: Set Action to ASIL C",
+        "Description"       : "Set Stereotype and ASIL C for Action", 
+        "TypesCheck"        : ["Action"],
+        "StereotypesCheck"  : [""],
+        "StereotypesApply"  : ["ZF_LE::LE Action"], 
+        "TaggedValuesApply" : [ {"Name" : "ZF_LE::LE Action::Criticality", "Value" : "ASIL C" } ],
+        "PropertiesApply"   : []
+    },
+    {
+        "Name"              : "Test: Set Activity to ASIL C",
+        "Description"       : "Set Stereotype and ASIL C for Activity", 
+        "TypesCheck"        : ["Activity"],
+        "StereotypesCheck"  : [""],
+        "StereotypesApply"  : ["ZF_LE::LE Activity"], 
+        "TaggedValuesApply" : [ {"Name" : "ZF_LE::LE Activity::Criticality", "Value" : "ASIL C" } ],
+        "PropertiesApply"   : []
+    },
+    {
+        "Name"              : "Test: Set Requirements to Functional Requirements, and more",
+        "Description"       : "Set Prio to Medium and more, just test. Select Package, Browser Element or Diagram Element", 
+        "TypesCheck"        : ["Requirement"],
+        "StereotypesCheck"  : [""],
+        "StereotypesApply"  : ["FunctionalRequirement"], 
+        "TaggedValuesApply" : [ {"Name" : "EAREQ::FunctionalRequirement::priority", "Value" : "Medium" } ],
+        "PropertiesApply"   : ["Difficulty=Medium","Status=Proposed","Keywords=Test", "Priority=High", "Version=1.1", "Phase=1.1", "Tag=MyTag", "Alias=MyAlias"]
+    },
+    {
+        "Name"              : "Test: Set FunctionalRequirements to ordinary Requirements, and more",
+        "Description"       : "Set Prio to High and more, just test. Select Package, Browser Element or Diagram Element", 
+        "TypesCheck"        : ["Requirement"],
+        "StereotypesCheck"  : [""],
+        "StereotypesApply"  : [""], 
+        "TaggedValuesApply" : [ {"Name" : "", "Value" : "" } ],
+        "PropertiesApply"   : ["Difficulty=High","Status=Approved","Keywords=Test", "Priority=High", "Version=2.1", "Phase=2.1", "Tag=MySecondTag", "Alias=MySecondAlias"]
+    }
+	
+  ]
+}
+

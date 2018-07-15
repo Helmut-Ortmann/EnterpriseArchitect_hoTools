@@ -8,6 +8,10 @@ namespace hoTools.EaServices.WiKiRefs
         {
             Process.Start("https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/blob/master/README.md");
         }
+        public static void Wildcard()
+        {
+            Process.Start("https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/WildCards");
+        }
         public static void WikiSql()
         {
             Process.Start("https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/SQL");

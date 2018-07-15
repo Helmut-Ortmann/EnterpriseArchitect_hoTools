@@ -30,17 +30,16 @@ namespace hoTools.hoSqlGui
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HoSqlGui));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.toolTip1 = new System.Windows.Forms.ToolTip();
             this.txtSearchTerm = new System.Windows.Forms.TextBox();
             this.btnRunScriptForSql = new System.Windows.Forms.Button();
             this.btnRunScriptForSqlWithAsk = new System.Windows.Forms.Button();
             this.dataGridViewScripts = new System.Windows.Forms.DataGridView();
-            this.contextMenuStripDataGrid = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.contextMenuStripDataGrid = new System.Windows.Forms.ContextMenuStrip();
             this.runTreeSelectedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.runScriptSelectedItemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();

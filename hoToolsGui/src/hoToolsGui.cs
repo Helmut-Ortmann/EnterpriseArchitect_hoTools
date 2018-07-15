@@ -173,7 +173,7 @@ namespace hoTools.hoToolsGui
         private RichTextBox _rtfListOfSearches;
         private TextBox _txtSearchName;
         private ToolStripMenuItem _updateScriptsToolStripMenuItem;
-        private ToolStripMenuItem gitHubToolStripMenuItem;
+        private ToolStripMenuItem _gitHubToolStripMenuItem;
         private ToolStripSeparator toolStripSeparator1;
         private ToolStripSeparator toolStripSeparator2;
         private ToolTip _toolTipRtfListOfSearches;
@@ -217,7 +217,7 @@ namespace hoTools.hoToolsGui
         private ToolStripMenuItem readMeToolStripMenuItem;
         private Button _btnFeatureDown;
         private Button _btnFeatureUp;
-        private ToolStripMenuItem setFolderToolStripMenuItem;
+        private ToolStripMenuItem _setFolderToolStripMenuItem;
         private ToolStripSeparator toolStripSeparator9;
         private ToolStripMenuItem resetFactorySettingsToolStripMenuItem;
         private ToolStripSeparator toolStripSeparator10;
@@ -231,8 +231,8 @@ namespace hoTools.hoToolsGui
         private ToolStripButton _toolStripServiceBtn10;
         private ToolStripMenuItem settingsDiagramStylesToolStripMenuItemDekivery;
         private ToolStripSeparator toolStripSeparator13;
-        private ToolStripMenuItem specToolStripMenuItem;
-        private ToolStripMenuItem applyAllAutoCounterToolStripMenuItem;
+        private ToolStripMenuItem _specToolStripMenuItem;
+        private ToolStripMenuItem _applyAllAutoCounterToolStripMenuItem;
         private ToolStripMenuItem applyAutoCounterCorrectToolStripMenuItem;
         private ToolStripMenuItem applyAutoCounterNewToolStripMenuItem;
         private ToolStripSeparator toolStripSeparator14;
@@ -247,7 +247,7 @@ namespace hoTools.hoToolsGui
         private ToolStripSeparator toolStripSeparator16;
         private ToolStripMenuItem moveLinksToolStripMenuItem;
         private ToolStripSeparator toolStripSeparator17;
-        private ToolStripMenuItem orderAlphapeticToolStripMenuItem;
+        private ToolStripMenuItem _orderAlphapeticToolStripMenuItem;
         private ToolStripSeparator toolStripSeparator18;
         private ToolStripMenuItem showRepositoryPropertiesToolStripMenuItem;
         private ToolStripSeparator toolStripSeparator19;
@@ -259,6 +259,8 @@ namespace hoTools.hoToolsGui
         private ToolStripSeparator toolStripSeparator20;
         private ToolStripMenuItem makeGlossaryXmlFromcsvToolStripMenuItem;
         private ToolStripMenuItem mySearchesToolStripMenuItem;
+        private ToolStripMenuItem sQLWildcardsToolStripMenuItem;
+        private ToolStripSeparator toolStripSeparator21;
         private TextBox _txtSearchText;
         #endregion
 
@@ -273,7 +275,7 @@ namespace hoTools.hoToolsGui
             }
             catch (Exception e)
             {
-                MessageBox.Show($"{e}", @"Error Constructor hoTools");
+                MessageBox.Show($@"{e}", @"Error Constructor hoTools");
             }
 
         }
@@ -318,7 +320,7 @@ namespace hoTools.hoToolsGui
             _txtSearchName.Text = AddinSettings.QuickSearchName;
             if (_txtSearchName.Text.Trim().Equals(""))
             {
-                _txtSearchName.Text = "<Search Name>";
+                _txtSearchName.Text = @"<Search Name>";
                 _txtSearchName.ForeColor = SystemColors.ControlDark;
             }
             IntializeSearches();
@@ -1430,7 +1432,7 @@ namespace hoTools.hoToolsGui
             this._updateActivityFromOperationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
             this._showFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.setFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this._setFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
             this._copyGuidsqlToClipboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -1446,10 +1448,10 @@ namespace hoTools.hoToolsGui
             this.toolStripSeparator16 = new System.Windows.Forms.ToolStripSeparator();
             this.moveLinksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator17 = new System.Windows.Forms.ToolStripSeparator();
-            this.orderAlphapeticToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this._orderAlphapeticToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator18 = new System.Windows.Forms.ToolStripSeparator();
-            this.specToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.applyAllAutoCounterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this._specToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this._applyAllAutoCounterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.applyAutoCounterNewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.applyAutoCounterCorrectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
@@ -1494,7 +1496,7 @@ namespace hoTools.hoToolsGui
             this.settingsGeneralToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this._helpToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.gitHubToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this._gitHubToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator15 = new System.Windows.Forms.ToolStripSeparator();
             this.showRepositoryPropertiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showLINQPadConnectionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -1503,6 +1505,8 @@ namespace hoTools.hoToolsGui
             this._aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator19 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuIHome = new System.Windows.Forms.ToolStripMenuItem();
+            this.sQLWildcardsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator21 = new System.Windows.Forms.ToolStripSeparator();
             this._toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this._toolStripContainer1.SuspendLayout();
             this._toolStripQuery.SuspendLayout();
@@ -2326,7 +2330,7 @@ namespace hoTools.hoToolsGui
             this._menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this._fileToolStripMenuItem,
             this._doToolStripMenuItem,
-            this.specToolStripMenuItem,
+            this._specToolStripMenuItem,
             this._versionControlToolStripMenuItem,
             this._portToolStripMenuItem,
             this._helpToolStripMenuItem,
@@ -2451,7 +2455,7 @@ namespace hoTools.hoToolsGui
             this._updateActivityFromOperationToolStripMenuItem,
             this._toolStripSeparator10,
             this._showFolderToolStripMenuItem,
-            this.setFolderToolStripMenuItem,
+            this._setFolderToolStripMenuItem,
             this.toolStripSeparator9,
             this._copyGuidsqlToClipboardToolStripMenuItem,
             this._toolStripSeparator1,
@@ -2463,7 +2467,7 @@ namespace hoTools.hoToolsGui
             this.toolStripSeparator16,
             this.moveLinksToolStripMenuItem,
             this.toolStripSeparator17,
-            this.orderAlphapeticToolStripMenuItem,
+            this._orderAlphapeticToolStripMenuItem,
             this.toolStripSeparator18});
             this._doToolStripMenuItem.Name = "_doToolStripMenuItem";
             resources.ApplyResources(this._doToolStripMenuItem, "_doToolStripMenuItem");
@@ -2510,9 +2514,9 @@ namespace hoTools.hoToolsGui
             // 
             // setFolderToolStripMenuItem
             // 
-            this.setFolderToolStripMenuItem.Name = "setFolderToolStripMenuItem";
-            resources.ApplyResources(this.setFolderToolStripMenuItem, "setFolderToolStripMenuItem");
-            this.setFolderToolStripMenuItem.Click += new System.EventHandler(this.setFolderToolStripMenuItem_Click);
+            this._setFolderToolStripMenuItem.Name = "_setFolderToolStripMenuItem";
+            resources.ApplyResources(this._setFolderToolStripMenuItem, "_setFolderToolStripMenuItem");
+            this._setFolderToolStripMenuItem.Click += new System.EventHandler(this.setFolderToolStripMenuItem_Click);
             // 
             // toolStripSeparator9
             // 
@@ -2605,9 +2609,9 @@ namespace hoTools.hoToolsGui
             // 
             // orderAlphapeticToolStripMenuItem
             // 
-            this.orderAlphapeticToolStripMenuItem.Name = "orderAlphapeticToolStripMenuItem";
-            resources.ApplyResources(this.orderAlphapeticToolStripMenuItem, "orderAlphapeticToolStripMenuItem");
-            this.orderAlphapeticToolStripMenuItem.Click += new System.EventHandler(this.sortAlphapeticToolStripMenuItem_Click);
+            this._orderAlphapeticToolStripMenuItem.Name = "_orderAlphapeticToolStripMenuItem";
+            resources.ApplyResources(this._orderAlphapeticToolStripMenuItem, "_orderAlphapeticToolStripMenuItem");
+            this._orderAlphapeticToolStripMenuItem.Click += new System.EventHandler(this.sortAlphapeticToolStripMenuItem_Click);
             // 
             // toolStripSeparator18
             // 
@@ -2616,19 +2620,19 @@ namespace hoTools.hoToolsGui
             // 
             // specToolStripMenuItem
             // 
-            this.specToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.applyAllAutoCounterToolStripMenuItem,
+            this._specToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this._applyAllAutoCounterToolStripMenuItem,
             this.applyAutoCounterNewToolStripMenuItem,
             this.applyAutoCounterCorrectToolStripMenuItem,
             this.toolStripSeparator14});
-            this.specToolStripMenuItem.Name = "specToolStripMenuItem";
-            resources.ApplyResources(this.specToolStripMenuItem, "specToolStripMenuItem");
+            this._specToolStripMenuItem.Name = "_specToolStripMenuItem";
+            resources.ApplyResources(this._specToolStripMenuItem, "_specToolStripMenuItem");
             // 
             // applyAllAutoCounterToolStripMenuItem
             // 
-            this.applyAllAutoCounterToolStripMenuItem.Name = "applyAllAutoCounterToolStripMenuItem";
-            resources.ApplyResources(this.applyAllAutoCounterToolStripMenuItem, "applyAllAutoCounterToolStripMenuItem");
-            this.applyAllAutoCounterToolStripMenuItem.Click += new System.EventHandler(this.applyAllNewAutoCounterToolStripMenuItem_Click);
+            this._applyAllAutoCounterToolStripMenuItem.Name = "_applyAllAutoCounterToolStripMenuItem";
+            resources.ApplyResources(this._applyAllAutoCounterToolStripMenuItem, "_applyAllAutoCounterToolStripMenuItem");
+            this._applyAllAutoCounterToolStripMenuItem.Click += new System.EventHandler(this.applyAllNewAutoCounterToolStripMenuItem_Click);
             // 
             // applyAutoCounterNewToolStripMenuItem
             // 
@@ -2880,11 +2884,13 @@ namespace hoTools.hoToolsGui
             this.settingsGeneralToolStripMenuItem,
             this.toolStripSeparator2,
             this._helpToolStripMenuItem1,
-            this.gitHubToolStripMenuItem,
+            this._gitHubToolStripMenuItem,
             this.toolStripSeparator15,
             this.showRepositoryPropertiesToolStripMenuItem,
             this.showLINQPadConnectionsToolStripMenuItem,
             this.toolStripSeparator8,
+            this.sQLWildcardsToolStripMenuItem,
+            this.toolStripSeparator21,
             this.readMeToolStripMenuItem,
             this._aboutToolStripMenuItem,
             this.toolStripSeparator19});
@@ -2928,9 +2934,9 @@ namespace hoTools.hoToolsGui
             // 
             // gitHubToolStripMenuItem
             // 
-            this.gitHubToolStripMenuItem.Name = "gitHubToolStripMenuItem";
-            resources.ApplyResources(this.gitHubToolStripMenuItem, "gitHubToolStripMenuItem");
-            this.gitHubToolStripMenuItem.Click += new System.EventHandler(this.githubToolStripMenuItem1_Click);
+            this._gitHubToolStripMenuItem.Name = "_gitHubToolStripMenuItem";
+            resources.ApplyResources(this._gitHubToolStripMenuItem, "_gitHubToolStripMenuItem");
+            this._gitHubToolStripMenuItem.Click += new System.EventHandler(this.githubToolStripMenuItem1_Click);
             // 
             // toolStripSeparator15
             // 
@@ -2976,6 +2982,17 @@ namespace hoTools.hoToolsGui
             resources.ApplyResources(this.toolStripMenuIHome, "toolStripMenuIHome");
             this.toolStripMenuIHome.Name = "toolStripMenuIHome";
             this.toolStripMenuIHome.Click += new System.EventHandler(this.toolStripMenuIHome_Click);
+            // 
+            // sQLWildcardsToolStripMenuItem
+            // 
+            this.sQLWildcardsToolStripMenuItem.Name = "sQLWildcardsToolStripMenuItem";
+            resources.ApplyResources(this.sQLWildcardsToolStripMenuItem, "sQLWildcardsToolStripMenuItem");
+            this.sQLWildcardsToolStripMenuItem.Click += new System.EventHandler(this.sQLWildcardsToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator21
+            // 
+            this.toolStripSeparator21.Name = "toolStripSeparator21";
+            resources.ApplyResources(this.toolStripSeparator21, "toolStripSeparator21");
             // 
             // HoToolsGui
             // 
@@ -3210,7 +3227,7 @@ namespace hoTools.hoToolsGui
             _btnDisplayBehavior.Visible = AddinSettings.IsAdvancedFeatures;
 
             // Auto Counter / Auto Naming
-            applyAllAutoCounterToolStripMenuItem.Visible = AddinSettings.IsAutoCounter;
+            _applyAllAutoCounterToolStripMenuItem.Visible = AddinSettings.IsAutoCounter;
             applyAutoCounterNewToolStripMenuItem.Visible = AddinSettings.IsAutoCounter;
             applyAutoCounterCorrectToolStripMenuItem.Visible = AddinSettings.IsAutoCounter;
 
@@ -3855,7 +3872,7 @@ namespace hoTools.hoToolsGui
             {
                 MessageBox.Show($@"'{AddinSettings.JasonFilePath}'
 
-{e1}", "Error loading 'Settings.json'");
+{e1}", @"Error loading 'Settings.json'");
             }
         }
         
@@ -3942,8 +3959,15 @@ namespace hoTools.hoToolsGui
                 String.IsNullOrWhiteSpace(_globalCfg.GetLinqPadQueryFileName(searchName)))
             {
                 MessageBox.Show(
-                    $"Search: '{searchName}'\r\nSQL-Path:\r\n{_globalCfg.GetSqlPaths()}\r\nLINQ-Path:\r\n{_globalCfg.GetLinqPaths()}\r\nUsual extension is '.sql' or '.linq'\r\n\r\nLINQPad has to be enabled and licensed.",
-                    "No *.sql or *.linq file found.");
+                    $@"Search: '{searchName}'
+SQL-Path:
+{_globalCfg.GetSqlPaths()}
+LINQ-Path:
+{_globalCfg.GetLinqPaths()}
+Usual extension is '.sql' or '.linq'
+
+LINQPad has to be enabled and licensed.",
+                    @"No *.sql or *.linq file found.");
                 return;
             }
 
@@ -4038,8 +4062,9 @@ namespace hoTools.hoToolsGui
                 List<string> sqlList = _globalCfg.GetListSqlPaths();
                 if (sqlList.Count > 0) Util.ShowFolder(sqlList[0]);
                 else
-                    MessageBox.Show($"Configure LINQPath path in:{Environment.NewLine}File, Settings SQL, LINQPad and Script",
-                        "No LINQPad path in settings defined!");
+                    MessageBox.Show($@"Configure LINQPath path in:
+File, Settings SQL, LINQPad and Script",
+                        @"No LINQPad path in settings defined!");
             }
         }
 
@@ -4053,10 +4078,15 @@ namespace hoTools.hoToolsGui
                 string sqlPath = _globalCfg.GetSqlPaths();
                 string linqPath = _globalCfg.GetLinqPaths();
                 MessageBox.Show(
-                    $"The SQL path is:{Environment.NewLine}{sqlPath}{Environment.NewLine}{Environment.NewLine}" +
-                    $"The LINQPad path is:{Environment.NewLine}{linqPath}{Environment.NewLine}{Environment.NewLine}" +
-                    $"Change SQL/LINQPath path with 'File, General Settings",
-                    "The SQL/LINQPad path.");
+                    $@"The SQL path is:
+{sqlPath}
+
+The LINQPad path is:
+{linqPath}
+
+
+Change SQL/LINQPath path with 'File, General Settings",
+                    @"The SQL/LINQPad path.");
               
              
         }
@@ -4076,17 +4106,21 @@ namespace hoTools.hoToolsGui
             {
                 string sqlPath = _globalCfg.GetSqlPaths();
                 MessageBox.Show(
-                    $"The SQL path is:{Environment.NewLine}{sqlPath}{Environment.NewLine}{Environment.NewLine}" +
-                    $"Change SQL path with 'File, Settings SQL and Script'",
-                    "The SQL path to search for scripts");
+                    $@"The SQL path is:
+'{sqlPath}'
+
+Change SQL path with 'File, Settings SQL and Script'",
+                    @"The SQL path to search for scripts");
             }
             if (searchItem is LinqSearchItem)
             {
                 string linqPath = _globalCfg.GetLinqPaths();
                 MessageBox.Show(
-                    $"The LINQPad path is:{Environment.NewLine}{linqPath}{Environment.NewLine}{Environment.NewLine}" +
-                    $"Change LINQPad path with 'File, Settings SQL and Script'",
-                    "The LINQPad path to search for scripts");
+                    $@"The LINQPad path is:
+'{linqPath}'
+
+Change LINQPad path with 'File, Settings SQL and Script'",
+                    @"The LINQPad path to search for scripts");
             }
         }
 
@@ -4270,7 +4304,7 @@ namespace hoTools.hoToolsGui
 You find the saved settings in: '{Path.GetDirectoryName(AddinSettings.CurrentConfig.FilePath)}':
 - User.Config.tmp
 - Settings.Json.tmp
-", "Do you want to reset your configuration?", MessageBoxButtons.OKCancel);
+", @"Do you want to reset your configuration?", MessageBoxButtons.OKCancel);
 
             if (result == DialogResult.OK)
             {
@@ -4281,7 +4315,7 @@ You find the saved settings in: '{Path.GetDirectoryName(AddinSettings.CurrentCon
                         } saved to *.tmp´and deleted.
 
 Please restart EA. During restart hoTools loads the default settings.",
-                    "Configuration reset to default. Please Restart!");
+                    @"Configuration reset to default. Please Restart!");
             }
         }
 
@@ -4377,7 +4411,7 @@ Information are Copied to Clipboard!
 ";
 
                 Clipboard.SetText(properties);
-                MessageBox.Show(properties, "Repository Information");
+                MessageBox.Show(properties, @"Repository Information");
         }
 
         private void makeGlossaryXmlFromcsvToolStripMenuItem_Click(object sender, EventArgs e)
@@ -4385,7 +4419,10 @@ Information are Copied to Clipboard!
             hoTools.EaServices.Import.UpdateGlossary.UpdateGlossaryFromCsv(Repository);
         }
 
-       
+        private void sQLWildcardsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            WikiRef.Wildcard();
+        }
     }
 
 
