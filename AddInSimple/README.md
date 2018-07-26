@@ -13,6 +13,7 @@ Details see in: https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wi
 
 # Release
 
+- 1.1.0 Without signing
 - 1.0.8 MIT License
 - 1.0.7 Error fixing
 - 1.0.6 LINQPad integration (LINQPad isn't included in hoTools)

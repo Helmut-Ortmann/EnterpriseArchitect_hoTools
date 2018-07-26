@@ -229,7 +229,7 @@ namespace hoLinqToSql.LinqUtils
                     provider = new AccessDataProvider();
                     dsnConnectionString = GetConnectionStringForDsn(connectionString);
                     if (dsnConnectionString != "") return dsnConnectionString;
-                    if (connectionString.ToLower().EndsWith(".eap"))
+                    if (connectionString.ToLower().EndsWith(".eap") || connectionString.ToLower().EndsWith(".eapx"))
                     {
                         
                         return $"Provider=Microsoft.Jet.OLEDB.4.0;Data Source={connectionString};";
@@ -274,14 +274,8 @@ namespace hoLinqToSql.LinqUtils
                     dsnConnectionString = GetConnectionStringForDsn(connectionString);
                     if (dsnConnectionString != "") return dsnConnectionString;
                     return FilterConnectionString(connectionString);
-
-
-
-                default:
-                    MessageBox.Show($"Database: {rep.RepositoryType()}\r\nConnectionString:{connectionString} ","DataBase not supported for hoTools, only Access, SqlServer and MySQL");
-                    break;
-
             }
+            MessageBox.Show($"Database: {rep.RepositoryType()}\r\nConnectionString:{connectionString} ", "DataBase not supported, only Access (*.eap/*.eapx), SqlServer and MySQL");
             return "";
         }
 

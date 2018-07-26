@@ -1501,12 +1501,12 @@ namespace hoTools.hoToolsGui
             this.showRepositoryPropertiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showLINQPadConnectionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
+            this.sQLWildcardsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator21 = new System.Windows.Forms.ToolStripSeparator();
             this.readMeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator19 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuIHome = new System.Windows.Forms.ToolStripMenuItem();
-            this.sQLWildcardsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator21 = new System.Windows.Forms.ToolStripSeparator();
             this._toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this._toolStripContainer1.SuspendLayout();
             this._toolStripQuery.SuspendLayout();
@@ -2512,7 +2512,7 @@ namespace hoTools.hoToolsGui
             resources.ApplyResources(this._showFolderToolStripMenuItem, "_showFolderToolStripMenuItem");
             this._showFolderToolStripMenuItem.Click += new System.EventHandler(this.showFolderToolStripMenuItem_Click);
             // 
-            // setFolderToolStripMenuItem
+            // _setFolderToolStripMenuItem
             // 
             this._setFolderToolStripMenuItem.Name = "_setFolderToolStripMenuItem";
             resources.ApplyResources(this._setFolderToolStripMenuItem, "_setFolderToolStripMenuItem");
@@ -2607,7 +2607,7 @@ namespace hoTools.hoToolsGui
             this.toolStripSeparator17.Name = "toolStripSeparator17";
             resources.ApplyResources(this.toolStripSeparator17, "toolStripSeparator17");
             // 
-            // orderAlphapeticToolStripMenuItem
+            // _orderAlphapeticToolStripMenuItem
             // 
             this._orderAlphapeticToolStripMenuItem.Name = "_orderAlphapeticToolStripMenuItem";
             resources.ApplyResources(this._orderAlphapeticToolStripMenuItem, "_orderAlphapeticToolStripMenuItem");
@@ -2618,7 +2618,7 @@ namespace hoTools.hoToolsGui
             this.toolStripSeparator18.Name = "toolStripSeparator18";
             resources.ApplyResources(this.toolStripSeparator18, "toolStripSeparator18");
             // 
-            // specToolStripMenuItem
+            // _specToolStripMenuItem
             // 
             this._specToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this._applyAllAutoCounterToolStripMenuItem,
@@ -2628,7 +2628,7 @@ namespace hoTools.hoToolsGui
             this._specToolStripMenuItem.Name = "_specToolStripMenuItem";
             resources.ApplyResources(this._specToolStripMenuItem, "_specToolStripMenuItem");
             // 
-            // applyAllAutoCounterToolStripMenuItem
+            // _applyAllAutoCounterToolStripMenuItem
             // 
             this._applyAllAutoCounterToolStripMenuItem.Name = "_applyAllAutoCounterToolStripMenuItem";
             resources.ApplyResources(this._applyAllAutoCounterToolStripMenuItem, "_applyAllAutoCounterToolStripMenuItem");
@@ -2932,7 +2932,7 @@ namespace hoTools.hoToolsGui
             resources.ApplyResources(this._helpToolStripMenuItem1, "_helpToolStripMenuItem1");
             this._helpToolStripMenuItem1.Click += new System.EventHandler(this.helpToolStripMenuItem1_Click);
             // 
-            // gitHubToolStripMenuItem
+            // _gitHubToolStripMenuItem
             // 
             this._gitHubToolStripMenuItem.Name = "_gitHubToolStripMenuItem";
             resources.ApplyResources(this._gitHubToolStripMenuItem, "_gitHubToolStripMenuItem");
@@ -2960,6 +2960,17 @@ namespace hoTools.hoToolsGui
             this.toolStripSeparator8.Name = "toolStripSeparator8";
             resources.ApplyResources(this.toolStripSeparator8, "toolStripSeparator8");
             // 
+            // sQLWildcardsToolStripMenuItem
+            // 
+            this.sQLWildcardsToolStripMenuItem.Name = "sQLWildcardsToolStripMenuItem";
+            resources.ApplyResources(this.sQLWildcardsToolStripMenuItem, "sQLWildcardsToolStripMenuItem");
+            this.sQLWildcardsToolStripMenuItem.Click += new System.EventHandler(this.sQLWildcardsToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator21
+            // 
+            this.toolStripSeparator21.Name = "toolStripSeparator21";
+            resources.ApplyResources(this.toolStripSeparator21, "toolStripSeparator21");
+            // 
             // readMeToolStripMenuItem
             // 
             this.readMeToolStripMenuItem.Name = "readMeToolStripMenuItem";
@@ -2982,17 +2993,6 @@ namespace hoTools.hoToolsGui
             resources.ApplyResources(this.toolStripMenuIHome, "toolStripMenuIHome");
             this.toolStripMenuIHome.Name = "toolStripMenuIHome";
             this.toolStripMenuIHome.Click += new System.EventHandler(this.toolStripMenuIHome_Click);
-            // 
-            // sQLWildcardsToolStripMenuItem
-            // 
-            this.sQLWildcardsToolStripMenuItem.Name = "sQLWildcardsToolStripMenuItem";
-            resources.ApplyResources(this.sQLWildcardsToolStripMenuItem, "sQLWildcardsToolStripMenuItem");
-            this.sQLWildcardsToolStripMenuItem.Click += new System.EventHandler(this.sQLWildcardsToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator21
-            // 
-            this.toolStripSeparator21.Name = "toolStripSeparator21";
-            resources.ApplyResources(this.toolStripSeparator21, "toolStripSeparator21");
             // 
             // HoToolsGui
             // 

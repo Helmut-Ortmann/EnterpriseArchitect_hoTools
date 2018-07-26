@@ -107,37 +107,57 @@
         <Class Id="{58E7B70F-16C4-4538-A4E8-AF4EAC27519B}" Context="InprocServer32" Description="AddInSimple.AddInSimpleClass" ThreadingModel="both" ForeignServer="mscoree.dll">
           <ProgId Id="AddInSimple.AddInSimpleClass" Description="AddInSimple.AddInSimpleClass" />
         </Class>
-        <Class Id="{FCE68F15-F7B2-3C7B-991B-5EB1D31FA88A}" Context="InprocServer32" Description="AddInSimple.InternalHelpers" ThreadingModel="both" ForeignServer="mscoree.dll">
+        <Class Id="{B3058A39-84E3-31ED-BEEB-7B845D5D3195}" Context="InprocServer32" Description="AddInSimple.InternalHelpers" ThreadingModel="both" ForeignServer="mscoree.dll">
           <ProgId Id="AddInSimple.InternalHelpers" Description="AddInSimple.InternalHelpers" />
         </Class>
-        <File Id="filB7ACB0AA302E14C4B5BC103FF525B9EE" KeyPath="yes" Name="AddInSimple.dll" Source="$(var.AddInSimple.TargetPath)" />
+        <Class Id="{C988E1AE-9987-3759-B872-B924BB4767D5}" Context="InprocServer32" Description="AddInSimple.ConnectionStringSettings" ThreadingModel="both" ForeignServer="mscoree.dll">
+          <ProgId Id="AddInSimple.ConnectionStringSettings" Description="AddInSimple.ConnectionStringSettings" />
+        </Class>
+        <File Id="filB7ACB0AA302E14C4B5BC103FF525B9EE" KeyPath="yes"  Name="AddInSimple.dll" Source="$(var.AddInSimple.TargetPath)" />
         <ProgId Id="Record" />
         <RegistryValue Root="HKCR" Key="CLSID\{58E7B70F-16C4-4538-A4E8-AF4EAC27519B}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
-        <RegistryValue Root="HKCR" Key="CLSID\{58E7B70F-16C4-4538-A4E8-AF4EAC27519B}\InprocServer32\1.0.6" Name="Class" Value="AddInSimple.AddInSimpleClass" Type="string" Action="write" />
-        <RegistryValue Root="HKCR" Key="CLSID\{58E7B70F-16C4-4538-A4E8-AF4EAC27519B}\InprocServer32\1.0.6" Name="Assembly" Value="AddInSimple, Version=1.0.6, Culture=neutral, PublicKeyToken=37ea3d95ffcb87e1" Type="string" Action="write" />
-        <RegistryValue Root="HKCR" Key="CLSID\{58E7B70F-16C4-4538-A4E8-AF4EAC27519B}\InprocServer32\1.0.6" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-        <RegistryValue Root="HKCR" Key="CLSID\{58E7B70F-16C4-4538-A4E8-AF4EAC27519B}\InprocServer32\1.0.6" Name="CodeBase" Value="file:///[#filB7ACB0AA302E14C4B5BC103FF525B9EE]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{58E7B70F-16C4-4538-A4E8-AF4EAC27519B}\InprocServer32\1.0.7.0" Name="Class" Value="AddInSimple.AddInSimpleClass" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{58E7B70F-16C4-4538-A4E8-AF4EAC27519B}\InprocServer32\1.0.7.0" Name="Assembly" Value="AddInSimple, Version=1.0.7.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{58E7B70F-16C4-4538-A4E8-AF4EAC27519B}\InprocServer32\1.0.7.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{58E7B70F-16C4-4538-A4E8-AF4EAC27519B}\InprocServer32\1.0.7.0" Name="CodeBase" Value="file:///[#filB7ACB0AA302E14C4B5BC103FF525B9EE]" Type="string" Action="write" />
         <RegistryValue Root="HKCR" Key="CLSID\{58E7B70F-16C4-4538-A4E8-AF4EAC27519B}\InprocServer32" Name="Class" Value="AddInSimple.AddInSimpleClass" Type="string" Action="write" />
-        <RegistryValue Root="HKCR" Key="CLSID\{58E7B70F-16C4-4538-A4E8-AF4EAC27519B}\InprocServer32" Name="Assembly" Value="AddInSimple, Version=1.0.6, Culture=neutral, PublicKeyToken=37ea3d95ffcb87e1" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{58E7B70F-16C4-4538-A4E8-AF4EAC27519B}\InprocServer32" Name="Assembly" Value="AddInSimple, Version=1.0.7.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
         <RegistryValue Root="HKCR" Key="CLSID\{58E7B70F-16C4-4538-A4E8-AF4EAC27519B}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
         <RegistryValue Root="HKCR" Key="CLSID\{58E7B70F-16C4-4538-A4E8-AF4EAC27519B}\InprocServer32" Name="CodeBase" Value="file:///[#filB7ACB0AA302E14C4B5BC103FF525B9EE]" Type="string" Action="write" />
-        <RegistryValue Root="HKCR" Key="CLSID\{FCE68F15-F7B2-3C7B-991B-5EB1D31FA88A}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
-        <RegistryValue Root="HKCR" Key="CLSID\{FCE68F15-F7B2-3C7B-991B-5EB1D31FA88A}\InprocServer32\1.0.6" Name="Class" Value="AddInSimple.InternalHelpers" Type="string" Action="write" />
-        <RegistryValue Root="HKCR" Key="CLSID\{FCE68F15-F7B2-3C7B-991B-5EB1D31FA88A}\InprocServer32\1.0.6" Name="Assembly" Value="AddInSimple, Version=1.0.6, Culture=neutral, PublicKeyToken=37ea3d95ffcb87e1" Type="string" Action="write" />
-        <RegistryValue Root="HKCR" Key="CLSID\{FCE68F15-F7B2-3C7B-991B-5EB1D31FA88A}\InprocServer32\1.0.6" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-        <RegistryValue Root="HKCR" Key="CLSID\{FCE68F15-F7B2-3C7B-991B-5EB1D31FA88A}\InprocServer32\1.0.6" Name="CodeBase" Value="file:///[#filB7ACB0AA302E14C4B5BC103FF525B9EE]" Type="string" Action="write" />
-        <RegistryValue Root="HKCR" Key="CLSID\{FCE68F15-F7B2-3C7B-991B-5EB1D31FA88A}\InprocServer32" Name="Class" Value="AddInSimple.InternalHelpers" Type="string" Action="write" />
-        <RegistryValue Root="HKCR" Key="CLSID\{FCE68F15-F7B2-3C7B-991B-5EB1D31FA88A}\InprocServer32" Name="Assembly" Value="AddInSimple, Version=1.0.6, Culture=neutral, PublicKeyToken=37ea3d95ffcb87e1" Type="string" Action="write" />
-        <RegistryValue Root="HKCR" Key="CLSID\{FCE68F15-F7B2-3C7B-991B-5EB1D31FA88A}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-        <RegistryValue Root="HKCR" Key="CLSID\{FCE68F15-F7B2-3C7B-991B-5EB1D31FA88A}\InprocServer32" Name="CodeBase" Value="file:///[#filB7ACB0AA302E14C4B5BC103FF525B9EE]" Type="string" Action="write" />
-        <RegistryValue Root="HKCR" Key="Record\{5E1E504C-95C7-4B14-A0F6-70329F70084A}\1.0.6" Name="Class" Value="EA.ObjectType" Type="string" Action="write" />
-        <RegistryValue Root="HKCR" Key="Record\{5E1E504C-95C7-4B14-A0F6-70329F70084A}\1.0.6" Name="Assembly" Value="AddInSimple, Version=1.0.6, Culture=neutral, PublicKeyToken=37ea3d95ffcb87e1" Type="string" Action="write" />
-        <RegistryValue Root="HKCR" Key="Record\{5E1E504C-95C7-4B14-A0F6-70329F70084A}\1.0.6" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-        <RegistryValue Root="HKCR" Key="Record\{5E1E504C-95C7-4B14-A0F6-70329F70084A}\1.0.6" Name="CodeBase" Value="file:///[#filB7ACB0AA302E14C4B5BC103FF525B9EE]" Type="string" Action="write" />
-        <RegistryValue Root="HKCR" Key="Record\{E4647791-51BD-3B9C-9138-9B6B528BC838}\1.0.6" Name="Class" Value="AddInSimple.EaType" Type="string" Action="write" />
-        <RegistryValue Root="HKCR" Key="Record\{E4647791-51BD-3B9C-9138-9B6B528BC838}\1.0.6" Name="Assembly" Value="AddInSimple, Version=1.0.6, Culture=neutral, PublicKeyToken=37ea3d95ffcb87e1" Type="string" Action="write" />
-        <RegistryValue Root="HKCR" Key="Record\{E4647791-51BD-3B9C-9138-9B6B528BC838}\1.0.6" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-        <RegistryValue Root="HKCR" Key="Record\{E4647791-51BD-3B9C-9138-9B6B528BC838}\1.0.6" Name="CodeBase" Value="file:///[#filB7ACB0AA302E14C4B5BC103FF525B9EE]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{B3058A39-84E3-31ED-BEEB-7B845D5D3195}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{B3058A39-84E3-31ED-BEEB-7B845D5D3195}\InprocServer32\1.0.7.0" Name="Class" Value="AddInSimple.InternalHelpers" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{B3058A39-84E3-31ED-BEEB-7B845D5D3195}\InprocServer32\1.0.7.0" Name="Assembly" Value="AddInSimple, Version=1.0.7.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{B3058A39-84E3-31ED-BEEB-7B845D5D3195}\InprocServer32\1.0.7.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{B3058A39-84E3-31ED-BEEB-7B845D5D3195}\InprocServer32\1.0.7.0" Name="CodeBase" Value="file:///[#filB7ACB0AA302E14C4B5BC103FF525B9EE]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{B3058A39-84E3-31ED-BEEB-7B845D5D3195}\InprocServer32" Name="Class" Value="AddInSimple.InternalHelpers" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{B3058A39-84E3-31ED-BEEB-7B845D5D3195}\InprocServer32" Name="Assembly" Value="AddInSimple, Version=1.0.7.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{B3058A39-84E3-31ED-BEEB-7B845D5D3195}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{B3058A39-84E3-31ED-BEEB-7B845D5D3195}\InprocServer32" Name="CodeBase" Value="file:///[#filB7ACB0AA302E14C4B5BC103FF525B9EE]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{C988E1AE-9987-3759-B872-B924BB4767D5}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{C988E1AE-9987-3759-B872-B924BB4767D5}\InprocServer32\1.0.7.0" Name="Class" Value="AddInSimple.ConnectionStringSettings" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{C988E1AE-9987-3759-B872-B924BB4767D5}\InprocServer32\1.0.7.0" Name="Assembly" Value="AddInSimple, Version=1.0.7.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{C988E1AE-9987-3759-B872-B924BB4767D5}\InprocServer32\1.0.7.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{C988E1AE-9987-3759-B872-B924BB4767D5}\InprocServer32\1.0.7.0" Name="CodeBase" Value="file:///[#filB7ACB0AA302E14C4B5BC103FF525B9EE]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{C988E1AE-9987-3759-B872-B924BB4767D5}\InprocServer32" Name="Class" Value="AddInSimple.ConnectionStringSettings" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{C988E1AE-9987-3759-B872-B924BB4767D5}\InprocServer32" Name="Assembly" Value="AddInSimple, Version=1.0.7.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{C988E1AE-9987-3759-B872-B924BB4767D5}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{C988E1AE-9987-3759-B872-B924BB4767D5}\InprocServer32" Name="CodeBase" Value="file:///[#filB7ACB0AA302E14C4B5BC103FF525B9EE]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="Record\{00000521-0000-0010-8000-00AA006D2EA4}\1.0.7.0" Name="Class" Value="ADODB.ConnectModeEnum" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="Record\{00000521-0000-0010-8000-00AA006D2EA4}\1.0.7.0" Name="Assembly" Value="AddInSimple, Version=1.0.7.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="Record\{00000521-0000-0010-8000-00AA006D2EA4}\1.0.7.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="Record\{00000521-0000-0010-8000-00AA006D2EA4}\1.0.7.0" Name="CodeBase" Value="file:///[#filB7ACB0AA302E14C4B5BC103FF525B9EE]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="Record\{00000530-0000-0010-8000-00AA006D2EA4}\1.0.7.0" Name="Class" Value="ADODB.EventStatusEnum" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="Record\{00000530-0000-0010-8000-00AA006D2EA4}\1.0.7.0" Name="Assembly" Value="AddInSimple, Version=1.0.7.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="Record\{00000530-0000-0010-8000-00AA006D2EA4}\1.0.7.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="Record\{00000530-0000-0010-8000-00AA006D2EA4}\1.0.7.0" Name="CodeBase" Value="file:///[#filB7ACB0AA302E14C4B5BC103FF525B9EE]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="Record\{5E1E504C-95C7-4B14-A0F6-70329F70084A}\1.0.7.0" Name="Class" Value="EA.ObjectType" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="Record\{5E1E504C-95C7-4B14-A0F6-70329F70084A}\1.0.7.0" Name="Assembly" Value="AddInSimple, Version=1.0.7.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="Record\{5E1E504C-95C7-4B14-A0F6-70329F70084A}\1.0.7.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="Record\{5E1E504C-95C7-4B14-A0F6-70329F70084A}\1.0.7.0" Name="CodeBase" Value="file:///[#filB7ACB0AA302E14C4B5BC103FF525B9EE]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="Record\{7754D73C-F034-3587-8590-13139C3B8F89}\1.0.7.0" Name="Class" Value="AddInSimple.EaType" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="Record\{7754D73C-F034-3587-8590-13139C3B8F89}\1.0.7.0" Name="Assembly" Value="AddInSimple, Version=1.0.7.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="Record\{7754D73C-F034-3587-8590-13139C3B8F89}\1.0.7.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="Record\{7754D73C-F034-3587-8590-13139C3B8F89}\1.0.7.0" Name="CodeBase" Value="file:///[#filB7ACB0AA302E14C4B5BC103FF525B9EE]" Type="string" Action="write" />
       </Component>
       <!-- HtmlAgilityPack -->
       <Component Id="HtmlAgilityPack.dll" Guid="{70C34202-0279-44B9-9B4F-9E55D37D8822}">

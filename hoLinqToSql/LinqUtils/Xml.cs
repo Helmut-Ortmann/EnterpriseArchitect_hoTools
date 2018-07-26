@@ -37,7 +37,51 @@ namespace hoLinqToSql.LinqUtils
                     new XElement("Field", new XAttribute("name", "Empty"))));
             return x.ToString();
         }
+        /// <summary>
+        /// Make EA xml from a DataTable (for column names) and the ordered Enumeration provided by LINQ. Set the Captions in DataTable to ensure column names. 
+        /// 
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <param name="rows">LINQ Query for the data to get</param>
+        /// <returns></returns>
+        public static string MakeXml(DataTable dt, OrderedEnumerableRowCollection<DataRow> rows)
+        {
+            XElement xFields = new XElement("Fields");
+            foreach (DataColumn col in dt.Columns)
+            {
+                XElement xField = new XElement("Field");
+                xField.Add(new XAttribute("name", col.Caption));
+                xFields.Add(xField);
+            }
+            try
+            {
+                XElement xRows = new XElement("Rows");
 
+                foreach (var row in rows)
+                {
+                    XElement xRow = new XElement("Row");
+                    int i = 0;
+                    foreach (DataColumn col in dt.Columns)
+                    {
+                        XElement xField = new XElement("Field");
+                        xField.Add(new XAttribute("value", row[i].ToString()));
+                        xField.Add(new XAttribute("name", col.Caption));
+                        xRow.Add(xField);
+                        i = i + 1;
+                    }
+                    xRows.Add(xRow);
+                }
+                XElement xDoc = new XElement("ReportViewData");
+                xDoc.Add(xFields);
+                xDoc.Add(xRows);
+                return xDoc.ToString();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($"{e}", "Error enumerating through LINQ query");
+                return "";
+            }
+        }
 
 
         /// <summary>
@@ -47,7 +91,7 @@ namespace hoLinqToSql.LinqUtils
         /// <param name="dt"></param>
         /// <param name="rows">LINQ Query for the data to get</param>
         /// <returns></returns>
-        public static string MakeXml(DataTable dt, OrderedEnumerableRowCollection<DataRow> rows)
+        public static string MakeXml(DataTable dt, EnumerableRowCollection<DataRow> rows)
         {
             XElement xFields = new XElement("Fields");
             foreach (DataColumn col in dt.Columns)

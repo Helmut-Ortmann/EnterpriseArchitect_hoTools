@@ -9,7 +9,6 @@ using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using AddInSimple.EABasic;
-using EA;
 using hoLinqToSql.LinqUtils;
 using hoTools.Utils;
 using LinqToDB.Configuration;
@@ -312,7 +311,7 @@ namespace AddInSimple
 
                         string lConnectionString = $"{eaConnectionString}\r\n\r\nProvider for Linq for SQL:\r\n'{provider}\r\n{connectionString}";
                         Clipboard.SetText(lConnectionString);
-                        MessageBox.Show($"{lConnectionString}", "Connection string (EA+LINQ + SQL) copied to clipboard");
+                        MessageBox.Show($@"{lConnectionString}", @"Connection string (EA+LINQ + SQL) copied to clipboard");
                         if (connectionString == "") return;
 
 
@@ -330,7 +329,7 @@ Provider:
 Mode:             
 - '{conn.Mode}' 
 State:
-- '{conn.State}'", "ODBC Connection established ");
+- '{conn.State}'", @"ODBC Connection established ");
                             }
                                 catch (Exception e)
                             {
@@ -342,7 +341,7 @@ Mode:
 State:
 - '{conn.State}'
 
-{ e}", "ODBC Connection error ");
+{ e}", @"ODBC Connection error ");
                             }
                     }
                     break;
@@ -483,7 +482,7 @@ linq2db.dll           {FileVersionInfo.GetVersionInfo(pathLinq2Db).FileVersion}
 hoTools
 Helmut.Ortmann@t-online.de
 +49 172 51 79 16 7
-","AddInSimple, the example Add-In");
+",@"AddInSimple, the example Add-In");
                     break;
 
 
@@ -804,6 +803,8 @@ Helmut.Ortmann@t-online.de
         /// <summary>
         /// Add-In Search: Sample
         /// See: http://sparxsystems.com/enterprise_architect_user_guide/13.5/automation/add-in_search.html
+        /// hoTools:
+        /// https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/AddInModelSearch
         /// 
         /// how it's works:
         /// 1. Create a Table and fill it with your code
@@ -832,6 +833,8 @@ Helmut.Ortmann@t-online.de
         /// <summary>
         /// Add-In Search: Sample
         /// See: http://sparxsystems.com/enterprise_architect_user_guide/13.5/automation/add-in_search.html
+        /// hoTools:
+        /// https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/AddInModelSearch
         /// 
         /// How it's works:
         /// 1. Create a Table and fill it with your code
@@ -931,7 +934,7 @@ Helmut.Ortmann@t-online.de
             }
             catch (Exception e)
             {
-                MessageBox.Show($"{e}", "Error LINQ query Test query to show Table to EA xml format");
+                MessageBox.Show($@"{e}", @"Error LINQ query Test query to show Table to EA xml format");
                 return "";
 
             }
