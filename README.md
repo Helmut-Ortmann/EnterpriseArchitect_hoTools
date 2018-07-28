@@ -125,9 +125,14 @@ Some features:
 
 ### Release 3.2.8
 
-- AddInSearch for NestedElements like Requirements for selected Package/Element or GUID in SearchText
-  - New Service Search NestedElements like Requirements for selected Package/Element or GUID in SearchText
+- AddInSearch for [NestedElements](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/ShowNestedElements) like Requirements for selected Package/Element or GUID in SearchText
+  - New Service Search/Show NestedElements like Requirements for selected Package/Element or GUID in SearchText
+    -  New Service 'Search nested elements like requirements'
+     - Show the nested requirements in Search windows with indentation
+  - See also [ReqIF for EA](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoReverse/wiki/ReqIF)
 - Show errors of Script engine
+- fixing
+- AddInSimple fixed
 
 
 ### Release 3.2.7

@@ -912,7 +912,7 @@ Second Element: Target of move connections and appearances", "Select two element
             isTextRequired: false)]
         // ReSharper disable once UnusedMember.Global
         // dynamical usage as configurable service by reflection
-        public static void CopyNamweTypeGuidToClipboard(Repository rep)
+        public static void CopyNameTypeGuidToClipboard(Repository rep)
         {
             string strGuid = "";
             string type = "";
