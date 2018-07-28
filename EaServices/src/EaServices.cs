@@ -30,6 +30,7 @@ using hoTools.Utils.EaCollections;
 using hoTools.Utils.Extension;
 using hoTools.Utils.VC;
 using JetBrains.Annotations;
+using hoTools.EaServices.AddInSearch;
 
 // ReSharper disable RedundantArgumentDefaultValue
 // ReSharper disable ArgumentsStyleLiteral
@@ -189,7 +190,16 @@ namespace hoTools.EaServices
 
         #endregion
 
+        [ServiceOperation("{39B10A37-025F-43A6-A986-8343CD4E63E7}", "Search nested elements like requirements",
+            "Select Package, Element, all nested Elements and their Tagged Values are shown", isTextRequired: false)]
 
+        public static void SearchNestedElements(Repository rep)
+        {
+
+            string xmlString = AddInSearches.SearchObjectsNested(rep, "");
+            rep.RunModelSearch("", "", "", xmlString);
+
+        }
         /// <summary>
         /// Move usage of source element to target element
         /// </summary>

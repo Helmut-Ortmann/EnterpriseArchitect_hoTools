@@ -88,6 +88,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
@@ -96,6 +97,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Names\NamesGenerator.cs" />
+    <Compile Include="src\AddInSearch\AddInSearch.cs" />
     <Compile Include="src\Diagram\EaServicesDiagram.cs" />
     <Compile Include="src\Element\EaServicesElement.cs" />
     <Compile Include="src\Import\UpdateGlossary.cs" />
@@ -127,6 +129,10 @@
     <ProjectReference Include="..\AddinFramework\AddinFramework.csproj">
       <Project>{b08ae89b-5e8d-46fd-a5d8-b3db4d33fb46}</Project>
       <Name>AddinFramework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\hoLinqToSql\hoLinqToSql.csproj">
+      <Project>{fed206af-e583-48c6-9952-bad2c41b3aa4}</Project>
+      <Name>hoLinqToSql</Name>
     </ProjectReference>
     <ProjectReference Include="..\Util\Util.csproj">
       <Project>{9376680e-9420-4fc1-8de8-4311fca18efc}</Project>

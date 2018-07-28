@@ -125,6 +125,8 @@ Some features:
 
 ### Release 3.2.8
 
+- AddInSearch for NestedElements like Requirements for selected Package/Element or GUID in SearchText
+  - New Service Search NestedElements like Requirements for selected Package/Element or GUID in SearchText
 - Show errors of Script engine
 
 

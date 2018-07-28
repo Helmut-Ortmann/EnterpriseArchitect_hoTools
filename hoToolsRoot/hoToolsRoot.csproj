@@ -93,6 +93,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="hoToolsRoot\hoToolsRootAddInSearch.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="hoToolsRoot\About.cs">
       <SubType>Form</SubType>

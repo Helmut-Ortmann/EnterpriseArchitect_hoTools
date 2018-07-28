@@ -54,7 +54,7 @@ namespace hoTools
     /// <summary>
     /// The main Addin class which calls the other tasks
     /// </summary>
-    public class HoToolsRoot : EAAddinFramework.EAAddinBase
+    public partial class HoToolsRoot : EAAddinFramework.EAAddinBase
     {
         // Overwritten by AdinClass AssemblyFileVersion
         // This should be identical to installed product version from WIX installer (ProductVersion)
