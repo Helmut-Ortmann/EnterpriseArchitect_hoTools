@@ -82,6 +82,9 @@
     <Reference Include="JetBrains.Annotations, Version=11.1.0.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
       <HintPath>..\packages\JetBrains.Annotations.11.1.0\lib\net20\JetBrains.Annotations.dll</HintPath>
     </Reference>
+    <Reference Include="linq2db, Version=2.0.0.0, Culture=neutral, PublicKeyToken=e41013125f9e410a, processorArchitecture=MSIL">
+      <HintPath>..\packages\linq2db.2.0.0\lib\net45\linq2db.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -98,6 +101,8 @@
   <ItemGroup>
     <Compile Include="Names\NamesGenerator.cs" />
     <Compile Include="src\AddInSearch\AddInSearch.cs" />
+    <Compile Include="src\AddInSearch\NestedObject.cs" />
+    <Compile Include="src\AddInSearch\Tv.cs" />
     <Compile Include="src\Diagram\EaServicesDiagram.cs" />
     <Compile Include="src\Element\EaServicesElement.cs" />
     <Compile Include="src\Import\UpdateGlossary.cs" />

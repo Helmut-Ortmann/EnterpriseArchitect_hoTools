@@ -122,6 +122,9 @@ Some features:
 
 # Releases
 
+### Release 3.2.9 Add-In Search by LinqToSql instead of EA API (rearly fast)
+
+- [NestedElements](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/ShowNestedElements)
 
 ### Release 3.2.8
 
