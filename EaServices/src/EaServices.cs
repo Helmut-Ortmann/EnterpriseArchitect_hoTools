@@ -811,18 +811,29 @@ Second Element: Target of move connections and appearances", @"Select two elemen
 
             Package pkg = GetContextPackage(rep);
             if (pkg == null) return;
-            pkg.ApplyGroupLock(group); // lock current group
-            bool success = pkg.ApplyGroupLockRecursive(group, true, true, false); // lock sub elements/diagrams without sub package
-            if (!success)
-                MessageBox.Show($@"Error:'{rep.GetLastError()}'", @"Error group lock whole Package recursive");
 
+            LockWholePackage(pkg, group, toLock:true);
+        }
+        /// <summary>
+        /// Lock whole package
+        /// </summary>
+        /// <param name="pkg"></param>
+        /// <param name="group"></param>
+        /// <param name="toLock"></param>
+        private static void LockWholePackage(EA.Package pkg, string group = "", bool toLock = true)
+        {
+            LockPackage(pkg, group, toLock);
             // check recursive/embedded elements
             foreach (EA.Element el in pkg.Elements)
             {
-                LockElementRecursive(el, group:group, toLock:true);
+                LockElementRecursive(el, group, toLock);
+            }
+            // check diagrams
+            foreach (EA.Diagram dia in pkg.Diagrams)
+            {
+                LockDiagram(dia, group, toLock);
             }
         }
-
 
         /// <summary>
         /// Lock/Unlock elements recursive. 
@@ -832,33 +843,62 @@ Second Element: Target of move connections and appearances", @"Select two elemen
         /// <param name="toLock"></param>
         private static void LockElementRecursive(EA.Element el, string group="", bool toLock = true)
         {
+            LockElement(el, group, toLock);
             foreach (EA.Element child in el.Elements)
             {
-                if (group == "" && toLock)
-                    child.ApplyUserLock();
-                if (group == "" && ! toLock) child.ReleaseUserLock();
-                if (group != "" && toLock)
-                    child.ApplyGroupLock(group);
                 LockElementRecursive(child, group, toLock);
-             }
+            }
             foreach (EA.Element embEl in el.EmbeddedElements)
             {
-                if (group == "" && toLock)
-                    embEl.ApplyUserLock();
-                if (group == "" && !toLock) embEl.ReleaseUserLock();
-                if (group != "" && toLock)
-                    embEl.ApplyGroupLock(group);
                 LockElementRecursive(embEl, group, toLock);
             }
 
             foreach (EA.Diagram dia in el.Diagrams)
             {
-                if (group == "" && toLock)
-                    dia.ApplyUserLock();
-                if (group == "" && !toLock) dia.ReleaseUserLock();
-                if (group != "" && toLock)
-                    dia.ApplyGroupLock(group);
+                LockDiagram(dia, group, toLock);
             }
+        }
+        /// <summary>
+        /// Lock/unlock the element recursiv
+        /// </summary>
+        /// <param name="el"></param>
+        /// <param name="group"></param>
+        /// <param name="toLock"></param>
+        private static void LockElement(EA.Element el, string group = "", bool toLock = true)
+        {
+            if (group == "" && toLock)
+               el.ApplyUserLock();
+            if (group == "" && !toLock) el.ReleaseUserLock();
+            if (group != "" && toLock)
+                el.ApplyGroupLock(group);
+        }
+        /// <summary>
+        /// Lock/unlock the element recursiv
+        /// </summary>
+        /// <param name="pkg"></param>
+        /// <param name="group"></param>
+        /// <param name="toLock"></param>
+        private static void LockPackage(EA.Package pkg, string group = "", bool toLock = true)
+        {
+            if (group == "" && toLock)
+                pkg.ApplyUserLock();
+            if (group == "" && !toLock) pkg.ReleaseUserLock();
+            if (group != "" && toLock)
+                pkg.ApplyGroupLock(group);
+        }
+        /// <summary>
+        /// Lock/unlock the diagram
+        /// </summary>
+        /// <param name="dia"></param>
+        /// <param name="group"></param>
+        /// <param name="toLock"></param>
+        private static void LockDiagram(EA.Diagram dia, string group = "", bool toLock = true)
+        {
+            if (group == "" && toLock)
+                dia.ApplyUserLock();
+            if (group == "" && !toLock) dia.ReleaseUserLock();
+            if (group != "" && toLock)
+               dia.ApplyGroupLock(group);
         }
 
 
@@ -1173,14 +1213,8 @@ Second Element: Target of move connections and appearances", @"Select two elemen
             Package pkg = GetContextPackage(rep);
             if (pkg == null) return;
             pkg.ReleaseUserLock(); // the current package
-            if (!pkg.ReleaseUserLockRecursive(true, true, false))  // release no sub packages
-                MessageBox.Show($@"Error:'{rep.GetLastError()}'", @"Error Unlock Package");
-
-            // check recursive/embedded elements
-            foreach (EA.Element el in pkg.Elements)
-            {
-                LockElementRecursive(el, group: "", toLock: false);
-            }
+            
+            LockWholePackage(pkg,"", toLock:false);
         }
 
         /// <summary>
@@ -1219,15 +1253,8 @@ Second Element: Target of move connections and appearances", @"Select two elemen
             if (!IsSecurityEnabled(rep)) return;
             Package pkg = GetContextPackage(rep);
             if (pkg == null) return;
-            pkg.ApplyUserLock(); // the current package
-            if (!pkg.ApplyUserLockRecursive(true, true, false)) // no sub packages
-                MessageBox.Show($@"Error:'{rep.GetLastError()}'", @"Error lock package");
 
-            // check recursive/embedded elements
-            foreach (EA.Element el in pkg.Elements)
-            {
-                LockElementRecursive(el, group: "", toLock: true);
-            }
+            LockWholePackage(pkg,"",toLock:true);
         }
 
         #endregion

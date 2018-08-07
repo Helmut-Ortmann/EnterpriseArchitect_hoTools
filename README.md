@@ -122,7 +122,9 @@ Some features:
 
 # Releases
 
-### Release 3.2.10 Group lock
+### Release 3.2.10 Group (Un)lock
+
+-  Group (Un)Lock for Package, Package Recursive and element
 
 
 
