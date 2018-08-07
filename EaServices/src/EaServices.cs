@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
@@ -31,6 +32,8 @@ using hoTools.Utils.Extension;
 using hoTools.Utils.VC;
 using JetBrains.Annotations;
 using hoTools.EaServices.AddInSearch;
+using hoTools.Utils.Dialog;
+using hoTools.Utils.User;
 
 // ReSharper disable RedundantArgumentDefaultValue
 // ReSharper disable ArgumentsStyleLiteral
@@ -220,7 +223,7 @@ namespace hoTools.EaServices
             if (curDiagram.SelectedObjectsCount != 2 || curDiagram.SelElements.Count != 2)
             {
                 MessageBox.Show(@"First Element: Source of move connections and appearances
-Second Element: Target of move connections and appearances", "Select two elements on the diagram!");
+Second Element: Target of move connections and appearances", @"Select two elements on the diagram!");
                 return;
             }
             EA.Element source = curDiagram.SelElements[1];
@@ -280,7 +283,7 @@ Second Element: Target of move connections and appearances", "Select two element
             if (connectionString != null)
             {
                 Clipboard.SetText(connectionString);
-                MessageBox.Show($"ConnectionString='{connectionString}'", "Connection string copied to clipboard");
+                MessageBox.Show($@"ConnectionString='{connectionString}'", @"Connection string copied to clipboard");
             }
         }
 
@@ -557,6 +560,65 @@ Second Element: Target of move connections and appearances", "Select two element
 
         #endregion
 
+        /// <summary>
+        /// Group Lock selected item (Package, Diagram, Element)
+        /// </summary>
+        /// <param name="rep"></param>
+        [ServiceOperation("{E6732652-2F50-4C83-B009-9BD78B25EA27}",
+            "Group Lock Item (Package, Diagram or Element)", // Description
+            "Group Lock Item (select Package, Diagram or Element). Security has to be enabled!", //Tooltip
+            isTextRequired: false)]
+        // ReSharper disable once UnusedMember.Global
+        // dynamical usage as configurable service by reflection
+        public static void LockGroupSelected(Repository rep)
+        {
+            if (!IsSecurityEnabled(rep)) return;
+            bool success;
+            // ask for possible group
+            EaGroup eaGroup = new EaGroup(rep);
+            if (eaGroup.Groups.Rows.Count == 0) return;
+
+            DataTable dt =eaGroup.Groups;
+            string group;
+            // Dialog is more than one column
+            if (dt.Rows.Count > 1)
+            {
+                string columnName = dt.Columns[0].ColumnName;
+                group = DlgComboBox.DialogCombo("Enter group", dt, columnName, columnName);
+            }
+            else
+            {
+                group = dt.Rows[0][0].ToString();
+            }
+
+            if (String.IsNullOrWhiteSpace(group)) return;
+
+
+            switch (rep.GetContextItemType())
+            {
+                case ObjectType.otPackage:
+                    Package pkg = (Package)rep.GetContextObject();
+                    pkg.ApplyGroupLock(group);
+                    success = pkg.ApplyUserLock();
+                    break;
+                case ObjectType.otElement:
+                    Element el = (Element)rep.GetContextObject();
+                    success = el.ApplyGroupLock(group);
+                    break;
+                case ObjectType.otDiagram:
+                    Diagram dia = (Diagram)rep.GetContextObject();
+                    success = dia.ApplyGroupLock(group);
+                    break;
+                default:
+                    return;
+            }
+            if (success) return;
+            MessageBox.Show($@"Error:'{rep.GetLastError()}'", @"Error group lock item");
+        }
+
+
+
+
         #region UnLockAllForCurrentUser
 
         /// <summary>
@@ -633,7 +695,7 @@ Second Element: Target of move connections and appearances", "Select two element
             {
                 case ObjectType.otPackage:
                     Package pkg = (Package) rep.GetContextObject();
-                    pkg.ReleaseUserLockRecursive(true, true, false);
+                    pkg.ReleaseUserLock();
                     success = pkg.ReleaseUserLock();
                     break;
                 case ObjectType.otElement:
@@ -680,6 +742,129 @@ Second Element: Target of move connections and appearances", "Select two element
         #region LockPackageRecursive
 
         /// <summary>
+        /// Group UnLock Package recursive (Package, Diagram or Element selected)
+        /// </summary>
+        /// <param name="rep"></param>
+        [ServiceOperation("{C747DA62-E655-4E77-8114-899C7D4EDDAB}", "Group Lock Package recursive",
+            "Group Lock Package recursive (select Package, Element or Diagram). Security has to be enabled!",
+            isTextRequired: false)]
+        // ReSharper disable once UnusedMember.Global
+        // dynamical usage as configurable service by reflection
+        public static void LockGroupPackageRecursive(Repository rep)
+        {
+            if (!IsSecurityEnabled(rep)) return;
+            // ask for possible group
+            EaGroup eaGroup = new EaGroup(rep);
+            if (eaGroup.Groups.Rows.Count == 0) return;
+
+            DataTable dt = eaGroup.Groups;
+            string group;
+            // Dialog is more than one column
+            if (dt.Rows.Count > 1)
+            {
+                string columnName = dt.Columns[0].ColumnName;
+                group = DlgComboBox.DialogCombo("Enter group", dt, columnName, columnName);
+            }
+            else
+            {
+                group = dt.Rows[0][0].ToString();
+            }
+            if (String.IsNullOrWhiteSpace(group)) return;
+
+            Package pkg = GetContextPackage(rep);
+            if (pkg == null) return;
+            bool success = pkg.ApplyGroupLockRecursive(group, true, true, true);
+            if (!success)
+                MessageBox.Show($@"Error:'{rep.GetLastError()}'", @"Error group lock Package recursive");
+        }
+
+        #endregion
+        /// <summary>
+        /// Group UnLock Package recursive (Package, Diagram or Element selected)
+        /// </summary>
+        /// <param name="rep"></param>
+        [ServiceOperation("{699B2E1A-5DCA-4EE7-80D7-E492268A6886}", "Group Lock whole Package",
+            "Group Lock whole Package(select Package). Security has to be enabled!",
+            isTextRequired: false)]
+        // ReSharper disable once UnusedMember.Global
+        // dynamical usage as configurable service by reflection
+        public static void LockGroupPackage(Repository rep)
+        {
+            if (!IsSecurityEnabled(rep)) return;
+            // ask for possible group
+            EaGroup eaGroup = new EaGroup(rep);
+            if (eaGroup.Groups.Rows.Count == 0) return;
+
+            DataTable dt = eaGroup.Groups;
+            string group;
+            // Dialog is more than one column
+            if (dt.Rows.Count > 1)
+            {
+                string columnName = dt.Columns[0].ColumnName;
+                group = DlgComboBox.DialogCombo("Enter group", dt, columnName, columnName);
+            }
+            else
+            {
+                group = dt.Rows[0][0].ToString();
+            }
+            if (String.IsNullOrWhiteSpace(group)) return;
+
+            Package pkg = GetContextPackage(rep);
+            if (pkg == null) return;
+            pkg.ApplyGroupLock(group); // lock current group
+            bool success = pkg.ApplyGroupLockRecursive(group, true, true, false); // lock sub elements/diagrams without sub package
+            if (!success)
+                MessageBox.Show($@"Error:'{rep.GetLastError()}'", @"Error group lock whole Package recursive");
+
+            // check recursive/embedded elements
+            foreach (EA.Element el in pkg.Elements)
+            {
+                LockElementRecursive(el, group:group, toLock:true);
+            }
+        }
+
+
+        /// <summary>
+        /// Lock/Unlock elements recursive. 
+        /// </summary>
+        /// <param name="el"></param>
+        /// <param name="group"></param>
+        /// <param name="toLock"></param>
+        private static void LockElementRecursive(EA.Element el, string group="", bool toLock = true)
+        {
+            foreach (EA.Element child in el.Elements)
+            {
+                if (group == "" && toLock)
+                    child.ApplyUserLock();
+                if (group == "" && ! toLock) child.ReleaseUserLock();
+                if (group != "" && toLock)
+                    child.ApplyGroupLock(group);
+                LockElementRecursive(child, group, toLock);
+             }
+            foreach (EA.Element embEl in el.EmbeddedElements)
+            {
+                if (group == "" && toLock)
+                    embEl.ApplyUserLock();
+                if (group == "" && !toLock) embEl.ReleaseUserLock();
+                if (group != "" && toLock)
+                    embEl.ApplyGroupLock(group);
+                LockElementRecursive(embEl, group, toLock);
+            }
+
+            foreach (EA.Diagram dia in el.Diagrams)
+            {
+                if (group == "" && toLock)
+                    dia.ApplyUserLock();
+                if (group == "" && !toLock) dia.ReleaseUserLock();
+                if (group != "" && toLock)
+                    dia.ApplyGroupLock(group);
+            }
+        }
+
+
+        #region LockPackageRecursive
+
+        /// <summary>
         /// UnLock Package recursive (Package, Diagram or Element selected)
         /// </summary>
         /// <param name="rep"></param>
@@ -693,7 +878,8 @@ Second Element: Target of move connections and appearances", "Select two element
             if (!IsSecurityEnabled(rep)) return;
             Package pkg = GetContextPackage(rep);
             if (pkg == null) return;
-            bool success = pkg.ApplyUserLockRecursive(true, true, true);
+            pkg.ApplyUserLock();  // the current package
+            bool success = pkg.ApplyUserLockRecursive(true, true, true); // all nested
             if (!success)
                 MessageBox.Show($@"Error:'{rep.GetLastError()}'", @"Error lock Package recursive");
         }
@@ -974,11 +1160,11 @@ Second Element: Target of move connections and appearances", "Select two element
         #region UnLockPackage
 
         /// <summary>
-        /// UnLock Package (Package, Diagram, Element may be selected)
+        /// UnLock whole package (Package may be selected)
         /// </summary>
         /// <param name="rep"></param>
-        [ServiceOperation("{06FD450C-9B18-453A-821F-955CFFE299DA}", "UnLock Package",
-            "UnLock Package (select Package, Element or Diagram). Security has to be enabled!", isTextRequired: false)]
+        [ServiceOperation("{06FD450C-9B18-453A-821F-955CFFE299DA}", "UnLock whole Package",
+            "UnLock whole Package (Package). Security has to be enabled!", isTextRequired: false)]
         // ReSharper disable once UnusedMember.Global
         // dynamical usage as configurable service by reflection
         public static void UnLockPackage(Repository rep)
@@ -986,10 +1172,15 @@ Second Element: Target of move connections and appearances", "Select two element
             if (!IsSecurityEnabled(rep)) return;
             Package pkg = GetContextPackage(rep);
             if (pkg == null) return;
-
-            pkg.ReleaseUserLock();
-            if (!pkg.ReleaseUserLockRecursive(true, true, false))
+            pkg.ReleaseUserLock(); // the current package
+            if (!pkg.ReleaseUserLockRecursive(true, true, false))  // release no sub packages
                 MessageBox.Show($@"Error:'{rep.GetLastError()}'", @"Error Unlock Package");
+
+            // check recursive/embedded elements
+            foreach (EA.Element el in pkg.Elements)
+            {
+                LockElementRecursive(el, group: "", toLock: false);
+            }
         }
 
         /// <summary>
@@ -1016,11 +1207,11 @@ Second Element: Target of move connections and appearances", "Select two element
         #region LockPackage
 
         /// <summary>
-        /// Lock Package (Package, Diagram, Element may be selected)
+        /// Lock whole Package (Package may be selected)
         /// </summary>
         /// <param name="rep"></param>
-        [ServiceOperation("{BA09245C-21E3-4A3C-A9AF-5DF6ED703201}", "Lock Package",
-            "Lock Package (select Package, Element, Diagram). Security has to be enabled!", isTextRequired: false)]
+        [ServiceOperation("{BA09245C-21E3-4A3C-A9AF-5DF6ED703201}", "Lock whole Package with content",
+            "Lock whole Package with content (select Package). Security has to be enabled!", isTextRequired: false)]
         // ReSharper disable once UnusedMember.Global
         // dynamical usage as configurable service by reflection
         public static void LockPackage(Repository rep)
@@ -1028,9 +1219,15 @@ Second Element: Target of move connections and appearances", "Select two element
             if (!IsSecurityEnabled(rep)) return;
             Package pkg = GetContextPackage(rep);
             if (pkg == null) return;
-            pkg.ApplyUserLock();
-            if (!pkg.ApplyUserLockRecursive(true, true, false))
+            pkg.ApplyUserLock(); // the current package
+            if (!pkg.ApplyUserLockRecursive(true, true, false)) // no sub packages
                 MessageBox.Show($@"Error:'{rep.GetLastError()}'", @"Error lock package");
+
+            // check recursive/embedded elements
+            foreach (EA.Element el in pkg.Elements)
+            {
+                LockElementRecursive(el, group: "", toLock: true);
+            }
         }
 
         #endregion

@@ -98,6 +98,9 @@
     <Reference Include="KBCsv.Extensions.Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc96fa93a217f7a1, processorArchitecture=MSIL">
       <HintPath>..\packages\KBCsv.Extensions.Data.5.0.0\lib\net45\KBCsv.Extensions.Data.dll</HintPath>
     </Reference>
+    <Reference Include="linq2db, Version=2.0.0.0, Culture=neutral, PublicKeyToken=e41013125f9e410a, processorArchitecture=MSIL">
+      <HintPath>..\packages\linq2db.2.0.0\lib\net45\linq2db.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Win32.Primitives, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Win32.Primitives.4.3.0\lib\net46\Microsoft.Win32.Primitives.dll</HintPath>
     </Reference>
@@ -202,6 +205,7 @@
     <Compile Include="Diagram\DiagramStyle.cs" />
     <Compile Include="Diagram\DiagramStyleItem.cs" />
     <Compile Include="Diagram\DiagramGeneralStyleItem.cs" />
+    <Compile Include="Dialog\DlgCombox.cs" />
     <Compile Include="Extension\EaExtensionClass.cs" />
     <Compile Include="Extension\StringExtension.cs" />
     <Compile Include="Gui\IMenuItem.cs" />
@@ -250,6 +254,7 @@
     <Compile Include="src\svn.cs" />
     <Compile Include="src\TaggedValue.cs" />
     <Compile Include="src\Util.cs" />
+    <Compile Include="User\Group.cs" />
     <Compile Include="VC\Vc.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -263,7 +268,12 @@
     <None Include="hoKeyPair.snk" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\hoLinqToSql\hoLinqToSql.csproj">
+      <Project>{FED206AF-E583-48C6-9952-BAD2C41B3AA4}</Project>
+      <Name>hoLinqToSql</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

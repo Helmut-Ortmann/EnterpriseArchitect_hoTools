@@ -19,7 +19,6 @@ using hoTools.Utils.Configuration;
 using GlobalHotkeys;
 using hoTools.Extensions;
 using hoTools.EaServices.Names;
-using File = System.IO.File;
 
 #region description
 //---------------------------------------------------------------
