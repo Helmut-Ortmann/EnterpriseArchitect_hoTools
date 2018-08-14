@@ -45,18 +45,19 @@ namespace hoLinqToSql.LinqUtils
                 string connectionString = $"DataSource={vcDb};Read Only=True;";
 
                 //newConnectionString = vcDb;
+                //using (BROWSEVCDB dc = new BROWSEVCDB(new SQLiteDataProvider("SQLite.Classic"), connectionString))
                 using (BROWSEVCDB dc = new BROWSEVCDB(new SQLiteDataProvider("SQLite.Classic"), connectionString))
-                
+
                 {
                     try
                     {
 
 
                         var path = (from f in dc.Files
-                            where f.Name.ToLower().Contains(folderPathSource.ToLower())
-                            where f.LeafName.EndsWith("c")
-                            orderby f.Name.Length
-                            select f.Name).FirstOrDefault();
+                                    where f.Name.ToLower().Contains(folderPathSource.ToLower())
+                                    where f.LeafName.EndsWith("c")
+                                    orderby f.Name.Length
+                                    select f.Name).FirstOrDefault();
                         if (path != null) return vcDb;
                     }
                     catch (Exception e)

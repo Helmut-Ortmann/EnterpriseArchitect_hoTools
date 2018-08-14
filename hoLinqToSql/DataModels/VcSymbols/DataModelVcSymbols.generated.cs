@@ -18,7 +18,7 @@ namespace DataModels.VcSymbols
 	/// Data Source    : .BROWSE.VC
 	/// Server Version : 3.19.3
 	/// </summary>
-	public partial class BrowseVcDB : LinqToDB.Data.DataConnection
+	public partial class BROWSEVCDB : LinqToDB.Data.DataConnection
 	{
 		public ITable<AssocSpans>       AssocSpans       { get { return this.GetTable<AssocSpans>(); } }
 		public ITable<AssocText>        AssocText        { get { return this.GetTable<AssocText>(); } }
@@ -41,13 +41,13 @@ namespace DataModels.VcSymbols
 		{
 		}
 
-		public BrowseVcDB()
+		public BROWSEVCDB()
 		{
 			InitDataContext();
 			InitMappingSchema();
 		}
 
-		public BrowseVcDB(string configuration)
+		public BROWSEVCDB(string configuration)
 			: base(configuration)
 		{
 			InitDataContext();

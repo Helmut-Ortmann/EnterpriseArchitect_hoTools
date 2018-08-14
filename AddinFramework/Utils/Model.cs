@@ -227,9 +227,12 @@ namespace EAAddinFramework.Utils
             string linqPadFile = _globalCfg.GetLinqPadQueryFileName(searchName);
             if (linqPadFile != "")
             {
-                LinqPad linqPad = new LinqPad(Repository, _globalCfg.LprunPath, _globalCfg.TempFolder, @"html",_globalCfg.UseLinqPadConnection);
-                linqPad.UseLinqPadConnections = _globalCfg.UseLinqPadConnection;
-                linqPad.LinqPadConnections = _globalCfg.LinqPadConnectionPath;
+                LinqPad linqPad = new LinqPad(Repository, _globalCfg.LprunPath, _globalCfg.TempFolder, @"html",
+                    _globalCfg.UseLinqPadConnection)
+                {
+                    UseLinqPadConnections = _globalCfg.UseLinqPadConnection,
+                    LinqPadConnections = _globalCfg.LinqPadConnectionPath
+                };
 
                 Boolean result = linqPad.Run(linqPadFile, @"html", linqPad.GetArg(Repository, searchTerm));
                 if (!result) return "";

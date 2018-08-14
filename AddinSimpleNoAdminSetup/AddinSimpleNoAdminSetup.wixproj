@@ -29,7 +29,7 @@
     </ProjectReference>
     <ProjectReference Include="..\hoLinqToSql\hoLinqToSql.csproj">
       <Name>hoLinqToSql</Name>
-      <Project>{fed206af-e583-48c6-9952-bad2c41b3aa4}</Project>
+      <Project>{8df4f058-9e5e-42ff-b9f5-f6b826983e97}</Project>
       <Private>True</Private>
       <DoNotHarvest>True</DoNotHarvest>
       <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>

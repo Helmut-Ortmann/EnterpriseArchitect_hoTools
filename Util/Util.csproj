@@ -270,7 +270,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\hoLinqToSql\hoLinqToSql.csproj">
-      <Project>{FED206AF-E583-48C6-9952-BAD2C41B3AA4}</Project>
+      <Project>{8df4f058-9e5e-42ff-b9f5-f6b826983e97}</Project>
       <Name>hoLinqToSql</Name>
     </ProjectReference>
   </ItemGroup>
