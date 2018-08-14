@@ -13,12 +13,12 @@ using LinqToDB.Mapping;
 
 namespace DataModels.VcSymbols
 {
-    /// <summary>
-    /// Database       : .BROWSE.VC
-    /// Data Source    : .BROWSE.VC
-    /// Server Version : 3.19.3
-    /// </summary>BROWSEVCDB/BrowseVcDB
-    public partial class BROWSEVCDB : LinqToDB.Data.DataConnection
+	/// <summary>
+	/// Database       : .BROWSE.VC
+	/// Data Source    : .BROWSE.VC
+	/// Server Version : 3.19.3
+	/// </summary>
+	public partial class BrowseVcDB : LinqToDB.Data.DataConnection
 	{
 		public ITable<AssocSpans>       AssocSpans       { get { return this.GetTable<AssocSpans>(); } }
 		public ITable<AssocText>        AssocText        { get { return this.GetTable<AssocText>(); } }
@@ -37,15 +37,21 @@ namespace DataModels.VcSymbols
 		public ITable<Property>         Properties       { get { return this.GetTable<Property>(); } }
 		public ITable<SharedText>       SharedText       { get { return this.GetTable<SharedText>(); } }
 
-		public BROWSEVCDB()
+		public void InitMappingSchema()
 		{
-			InitDataContext();
 		}
 
-		public BROWSEVCDB(string configuration)
+		public BrowseVcDB()
+		{
+			InitDataContext();
+			InitMappingSchema();
+		}
+
+		public BrowseVcDB(string configuration)
 			: base(configuration)
 		{
 			InitDataContext();
+			InitMappingSchema();
 		}
 
 		partial void InitDataContext();
@@ -66,8 +72,8 @@ namespace DataModels.VcSymbols
 		/// <summary>
 		/// FK_assoc_spans_0_0
 		/// </summary>
-		[Association(ThisKey="CodeItemId", OtherKey="Id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="FK_assoc_spans_0_0", BackReferenceName="assocspans")]
-		public CodeItems code_item_ { get; set; }
+		[Association(ThisKey="CodeItemId", OtherKey="Id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="FK_assoc_spans_0_0", BackReferenceName="Assocspans")]
+		public CodeItems CodeItem { get; set; }
 
 		#endregion
 	}
@@ -84,8 +90,8 @@ namespace DataModels.VcSymbols
 		/// <summary>
 		/// FK_assoc_text_0_0
 		/// </summary>
-		[Association(ThisKey="CodeItemId", OtherKey="Id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="FK_assoc_text_0_0", BackReferenceName="assoctexts")]
-		public CodeItems code_item_ { get; set; }
+		[Association(ThisKey="CodeItemId", OtherKey="Id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="FK_assoc_text_0_0", BackReferenceName="Assoctexts")]
+		public CodeItems CodeItem { get; set; }
 
 		#endregion
 	}
@@ -101,14 +107,14 @@ namespace DataModels.VcSymbols
 		/// <summary>
 		/// FK_base_class_parents_1_0
 		/// </summary>
-		[Association(ThisKey="BaseCodeItemId", OtherKey="Id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="FK_base_class_parents_1_0", BackReferenceName="FK_base_class_parents_1_0_BackReferences")]
-		public CodeItems base_code_item_ { get; set; }
+		[Association(ThisKey="BaseCodeItemId", OtherKey="Id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="FK_base_class_parents_1_0", BackReferenceName="FkBaseClassParents10BackReferences")]
+		public CodeItems BaseCodeItem { get; set; }
 
 		/// <summary>
 		/// FK_base_class_parents_0_0
 		/// </summary>
-		[Association(ThisKey="ParentCodeItemId", OtherKey="Id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="FK_base_class_parents_0_0", BackReferenceName="baseclassparents")]
-		public CodeItems parent_code_item_ { get; set; }
+		[Association(ThisKey="ParentCodeItemId", OtherKey="Id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="FK_base_class_parents_0_0", BackReferenceName="Baseclassparents")]
+		public CodeItems ParentCodeItem { get; set; }
 
 		#endregion
 	}
@@ -125,8 +131,8 @@ namespace DataModels.VcSymbols
 		/// <summary>
 		/// FK_code_item_kinds_0_0
 		/// </summary>
-		[Association(ThisKey="ParserGuid", OtherKey="ParserGuid", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="FK_code_item_kinds_0_0", BackReferenceName="codeitemkinds")]
-		public Parser parser_gu { get; set; }
+		[Association(ThisKey="ParserGuid", OtherKey="ParserGuid", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="FK_code_item_kinds_0_0", BackReferenceName="Codeitemkinds")]
+		public Parser ParserGu { get; set; }
 
 		#endregion
 	}
@@ -163,25 +169,25 @@ namespace DataModels.VcSymbols
 		/// FK_assoc_spans_0_0_BackReference
 		/// </summary>
 		[Association(ThisKey="Id", OtherKey="CodeItemId", CanBeNull=true, Relationship=Relationship.OneToMany, IsBackReference=true)]
-		public IEnumerable<AssocSpans> assocspans { get; set; }
+		public IEnumerable<AssocSpans> Assocspans { get; set; }
 
 		/// <summary>
 		/// FK_assoc_text_0_0_BackReference
 		/// </summary>
 		[Association(ThisKey="Id", OtherKey="CodeItemId", CanBeNull=true, Relationship=Relationship.OneToMany, IsBackReference=true)]
-		public IEnumerable<AssocText> assoctexts { get; set; }
+		public IEnumerable<AssocText> Assoctexts { get; set; }
 
 		/// <summary>
 		/// FK_base_class_parents_0_0_BackReference
 		/// </summary>
 		[Association(ThisKey="Id", OtherKey="ParentCodeItemId", CanBeNull=true, Relationship=Relationship.OneToMany, IsBackReference=true)]
-		public IEnumerable<BaseClassParents> baseclassparents { get; set; }
+		public IEnumerable<BaseClassParents> Baseclassparents { get; set; }
 
 		/// <summary>
 		/// FK_base_class_parents_1_0_BackReference
 		/// </summary>
 		[Association(ThisKey="Id", OtherKey="BaseCodeItemId", CanBeNull=true, Relationship=Relationship.OneToMany, IsBackReference=true)]
-		public IEnumerable<BaseClassParents> FK_base_class_parents_1_0_BackReferences { get; set; }
+		public IEnumerable<BaseClassParents> FkBaseClassParents10BackReferences { get; set; }
 
 		#endregion
 	}
@@ -208,19 +214,19 @@ namespace DataModels.VcSymbols
 		/// FK_config_files_1_0_BackReference
 		/// </summary>
 		[Association(ThisKey="Id", OtherKey="ConfigId", CanBeNull=true, Relationship=Relationship.OneToMany, IsBackReference=true)]
-		public IEnumerable<ConfigFiles> configfiles { get; set; }
+		public IEnumerable<ConfigFiles> Configfiles { get; set; }
 
 		/// <summary>
 		/// FK_configs_0_0
 		/// </summary>
-		[Association(ThisKey="ProjectId", OtherKey="Id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="FK_configs_0_0", BackReferenceName="configs")]
-		public Project project_ { get; set; }
+		[Association(ThisKey="ProjectId", OtherKey="Id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="FK_configs_0_0", BackReferenceName="Configs")]
+		public Project Project { get; set; }
 
 		/// <summary>
 		/// FK_project_refs_0_0_BackReference
 		/// </summary>
 		[Association(ThisKey="Id", OtherKey="ConfigId", CanBeNull=true, Relationship=Relationship.OneToMany, IsBackReference=true)]
-		public IEnumerable<ProjectRefs> projectrefs { get; set; }
+		public IEnumerable<ProjectRefs> Projectrefs { get; set; }
 
 		#endregion
 	}
@@ -247,14 +253,14 @@ namespace DataModels.VcSymbols
 		/// <summary>
 		/// FK_config_files_1_0
 		/// </summary>
-		[Association(ThisKey="ConfigId", OtherKey="Id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="FK_config_files_1_0", BackReferenceName="configfiles")]
-		public Config config_ { get; set; }
+		[Association(ThisKey="ConfigId", OtherKey="Id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="FK_config_files_1_0", BackReferenceName="Configfiles")]
+		public Config Config { get; set; }
 
 		/// <summary>
 		/// FK_config_files_0_0
 		/// </summary>
-		[Association(ThisKey="FileId", OtherKey="Id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="FK_config_files_0_0", BackReferenceName="configs")]
-		public File file_ { get; set; }
+		[Association(ThisKey="FileId", OtherKey="Id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="FK_config_files_0_0", BackReferenceName="Configs")]
+		public File File { get; set; }
 
 		#endregion
 	}
@@ -278,19 +284,19 @@ namespace DataModels.VcSymbols
 		/// FK_config_files_0_0_BackReference
 		/// </summary>
 		[Association(ThisKey="Id", OtherKey="FileId", CanBeNull=true, Relationship=Relationship.OneToMany, IsBackReference=true)]
-		public IEnumerable<ConfigFiles> configs { get; set; }
+		public IEnumerable<ConfigFiles> Configs { get; set; }
 
 		/// <summary>
 		/// FK_file_signatures_0_0_BackReference
 		/// </summary>
 		[Association(ThisKey="Id", OtherKey="FileId", CanBeNull=true, Relationship=Relationship.OneToMany, IsBackReference=true)]
-		public IEnumerable<FileSignatures> filesignatures { get; set; }
+		public IEnumerable<FileSignatures> Filesignatures { get; set; }
 
 		/// <summary>
 		/// FK_files_0_0
 		/// </summary>
-		[Association(ThisKey="ParserGuid", OtherKey="ParserGuid", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="FK_files_0_0", BackReferenceName="files")]
-		public Parser parser_gu { get; set; }
+		[Association(ThisKey="ParserGuid", OtherKey="ParserGuid", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="FK_files_0_0", BackReferenceName="Files")]
+		public Parser ParserGu { get; set; }
 
 		#endregion
 	}
@@ -315,8 +321,8 @@ namespace DataModels.VcSymbols
 		/// <summary>
 		/// FK_file_signatures_0_0
 		/// </summary>
-		[Association(ThisKey="FileId", OtherKey="Id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="FK_file_signatures_0_0", BackReferenceName="filesignatures")]
-		public File file_ { get; set; }
+		[Association(ThisKey="FileId", OtherKey="Id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="FK_file_signatures_0_0", BackReferenceName="Filesignatures")]
+		public File File { get; set; }
 
 		#endregion
 	}
@@ -342,13 +348,13 @@ namespace DataModels.VcSymbols
 		/// FK_code_item_kinds_0_0_BackReference
 		/// </summary>
 		[Association(ThisKey="ParserGuid", OtherKey="ParserGuid", CanBeNull=true, Relationship=Relationship.OneToMany, IsBackReference=true)]
-		public IEnumerable<CodeItemKinds> codeitemkinds { get; set; }
+		public IEnumerable<CodeItemKinds> Codeitemkinds { get; set; }
 
 		/// <summary>
 		/// FK_files_0_0_BackReference
 		/// </summary>
 		[Association(ThisKey="ParserGuid", OtherKey="ParserGuid", CanBeNull=true, Relationship=Relationship.OneToMany, IsBackReference=true)]
-		public IEnumerable<File> files { get; set; }
+		public IEnumerable<File> Files { get; set; }
 
 		#endregion
 	}
@@ -367,7 +373,7 @@ namespace DataModels.VcSymbols
 		/// FK_configs_0_0_BackReference
 		/// </summary>
 		[Association(ThisKey="Id", OtherKey="ProjectId", CanBeNull=true, Relationship=Relationship.OneToMany, IsBackReference=true)]
-		public IEnumerable<Config> configs { get; set; }
+		public IEnumerable<Config> Configs { get; set; }
 
 		#endregion
 	}
@@ -385,8 +391,8 @@ namespace DataModels.VcSymbols
 		/// <summary>
 		/// FK_project_refs_0_0
 		/// </summary>
-		[Association(ThisKey="ConfigId", OtherKey="Id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="FK_project_refs_0_0", BackReferenceName="projectrefs")]
-		public Config config_ { get; set; }
+		[Association(ThisKey="ConfigId", OtherKey="Id", CanBeNull=false, Relationship=Relationship.ManyToOne, KeyName="FK_project_refs_0_0", BackReferenceName="Projectrefs")]
+		public Config Config { get; set; }
 
 		#endregion
 	}

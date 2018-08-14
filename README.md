@@ -122,6 +122,10 @@ Some features:
 
 # Releases
 
+### Release 3.2.11
+
+-  Fixed error nested query
+
 ### Release 3.2.10 Group (Un)lock
 
 -  Group (Un)Lock for Package, Package Recursive and element

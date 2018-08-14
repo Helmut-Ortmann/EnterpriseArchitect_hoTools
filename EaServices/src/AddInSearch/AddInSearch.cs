@@ -9,6 +9,9 @@ using LinqToDB.DataProvider;
 
 namespace hoTools.EaServices.AddInSearch
 {
+    /// <summary>
+    /// Add-In Searches 
+    /// </summary>
     public class AddInSearches
     {
         // Dictionary of all TaggedValues of a search
@@ -224,8 +227,9 @@ namespace hoTools.EaServices.AddInSearch
                 // - The first query make the db acccess and writes to array
                 // - The second query makes the grouping
                 var reqTvAll0 = (from r in db.t_object
+                                 join tv2 in db.t_objectproperties on r.Object_ID equals tv2.Object_ID into tv1
+                                 from tv in tv1.DefaultIfEmpty()
                                  join pkg in db.t_package on r.Package_ID equals pkg.Package_ID
-                                 join tv in db.t_objectproperties on r.Object_ID equals tv.Object_ID
                                  where pkg.ea_guid == guid
                                  orderby r.Object_ID, tv.Property
                                  select new { r, tv }).ToArray();
@@ -236,17 +240,17 @@ namespace hoTools.EaServices.AddInSearch
                         {
                             Id = grp1.Key.Object_ID,
                             Property = new NestedObject(
-                                (int)grp1.Key.ParentID,
-                                (int)grp1.Key.TPos,
-                                grp1.Key.Name,
-                                grp1.Key.Alias,
-                                grp1.Key.Note,
-                                grp1.Key.ea_guid,
-                                grp1.Key.Object_Type,
+                                grp1.Key.ParentID ?? 0,
+                                grp1.Key.TPos ?? 0,
+                                grp1.Key.Name ?? "",
+                                grp1.Key.Alias ?? "",
+                                grp1.Key.Note ?? "",
+                                grp1.Key.ea_guid ?? "",
+                                grp1.Key.Object_Type ?? "",
                                 // Tagged Value
                                 grp1.Select(g => new Tv(
-                                    g.tv.Property,
-                                    ((g.tv.Value ?? "") == "<memo>") ? g.tv.Notes : g.tv.Value)
+                                    g?.tv?.Property ?? "",
+                                    ((g?.tv?.Value ?? "") == "<memo>") ? g?.tv?.Notes ?? "" : g?.tv?.Value ?? "")
                                 ).ToList())
                         }).ToDictionary(ta => ta.Id, ta => ta.Property);
             }
@@ -281,8 +285,8 @@ namespace hoTools.EaServices.AddInSearch
                         {
                             Id = grp1.Key.Object_ID,
                             Property = new NestedObject(
-                                (int)grp1.Key.ParentID,
-                                (int)grp1.Key.TPos,
+                                grp1.Key.ParentID ?? 0,
+                                grp1.Key.TPos ?? 0,
                                 grp1.Key.Name,
                                 grp1.Key.Alias,
                                 grp1.Key.Note,
@@ -339,6 +343,7 @@ namespace hoTools.EaServices.AddInSearch
             row["Note"] = nestedObject.Value.Notes;
             foreach (Tv tv in nestedObject.Value.Tv)
             {
+                if (tv.Property == "") continue;
                 if (!_tv.ContainsKey(tv.Property))
                 {
                     _tv.Add(tv.Property, null);
@@ -415,9 +420,7 @@ namespace hoTools.EaServices.AddInSearch
                     dt.Columns.Add(tv.Name, typeof(string));
                 }
 
-                string value = tv.Value;
-                if (value.StartsWith("<memo>")) value = tv.Notes;
-                dataRow[$"{tv.Name}"] = value;
+                dataRow[$"{tv.Name}"] = GetEaTaggedValue(tv.Value, tv.Notes);
             }
         }
         /// <summary>
@@ -437,5 +440,16 @@ namespace hoTools.EaServices.AddInSearch
 
             return commaSeparated.Split(',');
         }
+        /// <summary>
+        /// Get Tagged EA Tagged Value. It handles memo fileds
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="note"></param>
+        /// <returns></returns>
+        public static string GetEaTaggedValue(string value, string note)
+        {
+            return (value ?? "").StartsWith("<memo>") ? note ?? "" : value ?? "";
+        }
     }
 }
+
