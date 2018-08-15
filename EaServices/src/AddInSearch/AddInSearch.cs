@@ -294,8 +294,8 @@ namespace hoTools.EaServices.AddInSearch
                                 grp1.Key.Object_Type,
                                 // Tagged Value
                                 grp1.Select(g => new Tv(
-                                    g.tv.Property,
-                                    ((g.tv.Value ?? "") == "<memo>") ? g.tv.Notes : g.tv.Value)
+                                    g?.tv?.Property??"",
+                                    ((g?.tv?.Value ?? "") == "<memo>") ? g?.tv?.Notes??"" : g?.tv?.Value??"")
                                 ).ToList())
                         }).ToDictionary(ta => ta.Id, ta => ta.Property);
             }

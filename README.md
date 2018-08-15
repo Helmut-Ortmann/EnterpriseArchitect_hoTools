@@ -125,6 +125,7 @@ Some features:
 ### Release 3.2.11
 
 -  Fixed error nested query
+-  linq2db 2.20 updated
 
 ### Release 3.2.10 Group (Un)lock
 

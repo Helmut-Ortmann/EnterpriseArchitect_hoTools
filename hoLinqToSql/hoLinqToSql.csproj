@@ -1,5 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\..\EnterpriseArchitect_hoReverse\packages\linq2db.PostgreSQL.2.2.0\build\linq2db.PostgreSQL.props" Condition="Exists('..\..\EnterpriseArchitect_hoReverse\packages\linq2db.PostgreSQL.2.2.0\build\linq2db.PostgreSQL.props')" />
+  <Import Project="..\..\EnterpriseArchitect_hoReverse\packages\linq2db.Sybase.DataAction.2.2.0\build\linq2db.Sybase.DataAction.props" Condition="Exists('..\..\EnterpriseArchitect_hoReverse\packages\linq2db.Sybase.DataAction.2.2.0\build\linq2db.Sybase.DataAction.props')" />
+  <Import Project="..\..\EnterpriseArchitect_hoReverse\packages\linq2db.Oracle.Managed.2.2.0\build\linq2db.Oracle.Managed.props" Condition="Exists('..\..\EnterpriseArchitect_hoReverse\packages\linq2db.Oracle.Managed.2.2.0\build\linq2db.Oracle.Managed.props')" />
   <Import Project="..\packages\linq2db.SQLite.2.2.0\build\linq2db.SQLite.props" Condition="Exists('..\packages\linq2db.SQLite.2.2.0\build\linq2db.SQLite.props')" />
   <Import Project="..\packages\linq2db.MySql.2.2.0\build\linq2db.MySql.props" Condition="Exists('..\packages\linq2db.MySql.2.2.0\build\linq2db.MySql.props')" />
   <Import Project="..\packages\linq2db.SqlServer.2.2.0\build\linq2db.SqlServer.props" Condition="Exists('..\packages\linq2db.SqlServer.2.2.0\build\linq2db.SqlServer.props')" />
@@ -39,6 +42,9 @@
     <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AdoNetCore.AseClient, Version=0.10.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\EnterpriseArchitect_hoReverse\packages\AdoNetCore.AseClient.0.10.1\lib\net46\AdoNetCore.AseClient.dll</HintPath>
+    </Reference>
     <Reference Include="HtmlAgilityPack, Version=1.8.6.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
       <HintPath>..\packages\HtmlAgilityPack.1.8.6\lib\Net45\HtmlAgilityPack.dll</HintPath>
     </Reference>
@@ -55,6 +61,12 @@
     <Reference Include="MySql.Data, Version=6.10.7.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>..\packages\MySql.Data.6.10.7\lib\net452\MySql.Data.dll</HintPath>
     </Reference>
+    <Reference Include="Npgsql, Version=3.2.5.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
+      <HintPath>..\..\EnterpriseArchitect_hoReverse\packages\Npgsql.3.2.5\lib\net451\Npgsql.dll</HintPath>
+    </Reference>
+    <Reference Include="Oracle.ManagedDataAccess, Version=4.122.1.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
+      <HintPath>..\..\EnterpriseArchitect_hoReverse\packages\Oracle.ManagedDataAccess.12.2.1100\lib\net40\Oracle.ManagedDataAccess.dll</HintPath>
+    </Reference>
     <Reference Include="SQLitePCLRaw.batteries_green, Version=1.1.11.121, Culture=neutral, PublicKeyToken=a84b7dcfb1391f7f, processorArchitecture=MSIL">
       <HintPath>..\packages\SQLitePCLRaw.bundle_green.1.1.11\lib\net45\SQLitePCLRaw.batteries_green.dll</HintPath>
     </Reference>
@@ -66,6 +78,9 @@
     </Reference>
     <Reference Include="SQLitePCLRaw.provider.e_sqlite3, Version=1.1.11.121, Culture=neutral, PublicKeyToken=9c301db686d0bd12, processorArchitecture=MSIL">
       <HintPath>..\packages\SQLitePCLRaw.provider.e_sqlite3.net45.1.1.11\lib\net45\SQLitePCLRaw.provider.e_sqlite3.dll</HintPath>
+    </Reference>
+    <Reference Include="Sybase.AdoNet4.AseClient, Version=4.157.104.0, Culture=neutral, PublicKeyToken=95d94fac46c88e1e, processorArchitecture=MSIL">
+      <HintPath>..\..\EnterpriseArchitect_hoReverse\packages\Sybase.AdoNet4.AseClient.1.0.0\lib\net46\Sybase.AdoNet4.AseClient.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel" />
@@ -79,6 +94,9 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Drawing.Design" />
     <Reference Include="System.Management" />
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.1.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\EnterpriseArchitect_hoReverse\packages\System.Threading.Tasks.Extensions.4.3.0\lib\portable-net45+win8+wp8+wpa81\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
     <Reference Include="System.Transactions" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
@@ -146,13 +164,17 @@
     </Content>
     <Content Include="LinqToDB.Templates\CopyMe.Access.tt.txt" />
     <Content Include="LinqToDB.Templates\CopyMe.MySql.tt.txt" />
+    <Content Include="LinqToDB.Templates\CopyMe.Oracle.tt.txt" />
+    <Content Include="LinqToDB.Templates\CopyMe.PostgreSQL.tt.txt" />
     <Content Include="LinqToDB.Templates\CopyMe.SQLite.tt.txt" />
     <Content Include="LinqToDB.Templates\CopyMe.SqlServer.tt.txt" />
+    <Content Include="LinqToDB.Templates\CopyMe.Sybase.DataAction.tt.txt" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="LinqToDB.Templates\DataAnnotations.ttinclude" />
     <None Include="LinqToDB.Templates\DataModel.ttinclude" />
     <None Include="LinqToDB.Templates\EditableObject.ttinclude" />
@@ -161,11 +183,20 @@
     <None Include="LinqToDB.Templates\LinqToDB.Access.ttinclude" />
     <None Include="LinqToDB.Templates\LinqToDB.MySql.Tools.ttinclude" />
     <None Include="LinqToDB.Templates\LinqToDB.MySql.ttinclude" />
+    <None Include="LinqToDB.Templates\LinqToDB.Oracle.Managed.Tools.ttinclude" />
+    <None Include="LinqToDB.Templates\LinqToDB.Oracle.Tools.ttinclude" />
+    <None Include="LinqToDB.Templates\LinqToDB.Oracle.ttinclude" />
+    <None Include="LinqToDB.Templates\LinqToDB.Oracle.x64.Tools.ttinclude" />
+    <None Include="LinqToDB.Templates\LinqToDB.Oracle.x86.Tools.ttinclude" />
+    <None Include="LinqToDB.Templates\LinqToDB.PostgreSQL.Tools.ttinclude" />
+    <None Include="LinqToDB.Templates\LinqToDB.PostgreSQL.ttinclude" />
     <None Include="LinqToDB.Templates\LinqToDB.SQLite.Tools.ttinclude" />
     <None Include="LinqToDB.Templates\LinqToDB.SQLite.ttinclude" />
     <None Include="LinqToDB.Templates\LinqToDB.SqlServer.SqlTypes.Tools.ttinclude" />
     <None Include="LinqToDB.Templates\LinqToDB.SqlServer.Tools.ttinclude" />
     <None Include="LinqToDB.Templates\LinqToDB.SqlServer.ttinclude" />
+    <None Include="LinqToDB.Templates\LinqToDB.Sybase.DataAction.Tools.ttinclude" />
+    <None Include="LinqToDB.Templates\LinqToDB.Sybase.ttinclude" />
     <None Include="LinqToDB.Templates\LinqToDB.Tools.ttinclude" />
     <None Include="LinqToDB.Templates\LinqToDB.ttinclude" />
     <None Include="LinqToDB.Templates\MultipleFiles.ttinclude" />
@@ -191,6 +222,9 @@
     <Error Condition="!Exists('..\packages\SQLitePCLRaw.lib.e_sqlite3.v110_xp.1.1.11\build\net35\SQLitePCLRaw.lib.e_sqlite3.v110_xp.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SQLitePCLRaw.lib.e_sqlite3.v110_xp.1.1.11\build\net35\SQLitePCLRaw.lib.e_sqlite3.v110_xp.targets'))" />
     <Error Condition="!Exists('..\packages\System.Data.SQLite.Core.1.0.109.0\build\net46\System.Data.SQLite.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\System.Data.SQLite.Core.1.0.109.0\build\net46\System.Data.SQLite.Core.targets'))" />
     <Error Condition="!Exists('..\packages\linq2db.SQLite.2.2.0\build\linq2db.SQLite.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\linq2db.SQLite.2.2.0\build\linq2db.SQLite.props'))" />
+    <Error Condition="!Exists('..\..\EnterpriseArchitect_hoReverse\packages\linq2db.Oracle.Managed.2.2.0\build\linq2db.Oracle.Managed.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\EnterpriseArchitect_hoReverse\packages\linq2db.Oracle.Managed.2.2.0\build\linq2db.Oracle.Managed.props'))" />
+    <Error Condition="!Exists('..\..\EnterpriseArchitect_hoReverse\packages\linq2db.Sybase.DataAction.2.2.0\build\linq2db.Sybase.DataAction.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\EnterpriseArchitect_hoReverse\packages\linq2db.Sybase.DataAction.2.2.0\build\linq2db.Sybase.DataAction.props'))" />
+    <Error Condition="!Exists('..\..\EnterpriseArchitect_hoReverse\packages\linq2db.PostgreSQL.2.2.0\build\linq2db.PostgreSQL.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\EnterpriseArchitect_hoReverse\packages\linq2db.PostgreSQL.2.2.0\build\linq2db.PostgreSQL.props'))" />
   </Target>
   <Import Project="..\packages\SQLitePCLRaw.lib.e_sqlite3.linux.1.1.11\build\net35\SQLitePCLRaw.lib.e_sqlite3.linux.targets" Condition="Exists('..\packages\SQLitePCLRaw.lib.e_sqlite3.linux.1.1.11\build\net35\SQLitePCLRaw.lib.e_sqlite3.linux.targets')" />
   <Import Project="..\packages\SQLitePCLRaw.lib.e_sqlite3.osx.1.1.11\build\net35\SQLitePCLRaw.lib.e_sqlite3.osx.targets" Condition="Exists('..\packages\SQLitePCLRaw.lib.e_sqlite3.osx.1.1.11\build\net35\SQLitePCLRaw.lib.e_sqlite3.osx.targets')" />
