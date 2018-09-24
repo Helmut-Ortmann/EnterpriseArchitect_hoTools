@@ -81,7 +81,7 @@ namespace AddinFramework.Util
             LoadMdgSearches(rep, hoTools.Utils.Util.ReadAllText(mdgLoadDuringStartUp));
 
             // Load EA Standard Search Names for current release  
-            LoadEaStandardSearchesFromJason(rep.GetRelease(), configFilePath);
+            LoadEaStandardSearchesFromJson(rep.GetRelease(), configFilePath);
             // Load stored searches like MDGs from different sources
             LoadSearches(rep);
    
@@ -423,12 +423,12 @@ namespace AddinFramework.Util
 
         /// <summary>
         /// Load all EA Standard Searches from JSON for an EA Release. The Standard searches are stored in: 'EaStandardSearches.json'.
-        /// Possible EA Releases are: "9, 10, 11, 12, 12.1, 13\"
+        /// Possible EA Releases are: "9, 10, 11, 12, 12.1, 13, 13.5, 14"
         /// 
         /// </summary>
         /// <param name="eaRelease">The release of EA</param>
         /// <param name="configFilePath"></param>
-        static void LoadEaStandardSearchesFromJason(string eaRelease, string configFilePath)
+        static void LoadEaStandardSearchesFromJson(string eaRelease, string configFilePath)
         {
 
             // ReSharper disable once AssignNullToNotNullAttribute
@@ -462,7 +462,7 @@ namespace AddinFramework.Util
                     }
                     else
                     {
-                        MessageBox.Show($@"Like: ""EARelease"": ""9, 10, 11, 12, 12.1, 13""
+                        MessageBox.Show($@"Like: ""EARelease"": ""9, 10, 11, 12, 12.1, 13.5, 13,14""
 File:
 '{jasonPath}'",
                             @"Error JSON, no release defined");

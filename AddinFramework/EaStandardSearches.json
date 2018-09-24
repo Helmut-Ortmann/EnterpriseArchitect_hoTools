@@ -28,35 +28,35 @@
         "Description": "Searches the 'Name', 'Alias' and 'Notes' fields of all elements for the given Search Term.",
         "Category": "EACommon",
         "Favorite": "true",
-        "EARelease": "9,10,11,12,12.1,13"
+        "EARelease": "9,10,11,12,12.1,13,13.5,14"
     },
     {
         "Name": "Extended",
         "Description": "Searches many additional fields relating to the element, including Attributes, Operations, Tagged Values and Test Cases.",
         "Category": "EACommon",
         "Favorite": "true",
-        "EARelease": "9,10,11,12,12.1,13"
+        "EARelease": "9,10,11,12,12.1,13,13.5,14"
     },
     {
         "Name": "Element Name",
         "Description": "Searches for an exact match against the element name, alias, method or operation; the default search in the 'Search in Model' menu option in the Code Editor.",
         "Category": "EACommon",
         "Favorite": "true",
-        "EARelease": "9,10,11,12,12.1,13"
+        "EARelease": "9,10,11,12,12.1,13,13.5,14"
     },
     {
         "Name": "Attribute Details",
         "Description": "Searches for elements with attributes relating to the search term, including Tagged Values, constraints, and common attribute data fields.",
         "Category": "EACommon",
         "Favorite": "true",
-        "EARelease": "9,10,11,12,12.1,13"
+        "EARelease": "9,10,11,12,12.1,13,13.5,14"
     },
     {
         "Name": "Method Details",
         "Description": "Searches for elements with operations and methods relating to the search term, including Tagged Values, constraints and common operation and method data fields.",
         "Category": "EACommon",
         "Favorite": "true",
-        "EARelease": "9,10,11,12,12.1,13"
+        "EARelease": "9,10,11,12,12.1,13,13.5,14"
     },
 
     {
@@ -64,91 +64,91 @@
         "Description": "Searches for elements that have been recently modified, anywhere in the project. The default is to show elements modified in the last three days, but you can set an alternative interval by typing the appropriate number of days in the 'Search Term' field.",
         "Category": "EACommon",
         "Favorite": "true",
-        "EARelease": "9,10,11,12,12.1,13"
+        "EARelease": "9,10,11,12,12.1,13,13.5,14"
     },
     {
         "Name": "Find Attributes by Name",
         "Description": "Searches for the use of a named attribute anywhere in the model.",
         "Category": "EACommon",
         "Favorite": "true",
-        "EARelease": "9,10,11,12,12.1,13"
+        "EARelease": "9,10,11,12,12.1,13,13.5,14"
     },
     {
         "Name": "Find Operations by Name",
         "Description": "Searches for the use of a named operation anywhere in the model.",
         "Category": "EACommon",
         "Favorite": "true",
-        "EARelease": "9,10,11,12,12.1,13"
+        "EARelease": "9,10,11,12,12.1,13,13.5,14"
     },
     {
         "Name": "Find Package",
         "Description": "Searches for a named Package in the model.",
         "Category": "EACommon",
         "Favorite": "true",
-        "EARelease": "9,10,11,12,12.1,13"
+        "EARelease": "9,10,11,12,12.1,13,13.5,14"
     },
     {
         "Name": "Find Scenarios",
         "Description": "Searches for Scenarios.",
         "Category": "EACommon",
         "Favorite": "true",
-        "EARelease": "13"
+        "EARelease": "13,13.5,14"
     },
     {
         "Name": "Schema Profiles",
         "Description": "Find Schema Profiles.",
         "Category": "EACommon",
         "Favorite": "true",
-        "EARelease": "13"
+        "EARelease": "13,13.5,14"
     },
     {
         "Name": "Recently Modified Schema Profiles",
         "Description": "Find Recently Modified Schema Profiles.",
         "Category": "EACommon",
         "Favorite": "true",
-        "EARelease": "13"
+        "EARelease": "13,13.5,14"
     },
     {
         "Name": "Recently Modified Linked Documents",
         "Description": "Find Recently Modified Schema Profiles.",
         "Category": "EACommon",
         "Favorite": "true",
-        "EARelease": "13"
+        "EARelease": "13,13.5,14"
     },
     {
         "Name": "Recently Modified Decision Tables",
         "Description": "Find Recently Modified Decision Tables.",
         "Category": "EACommon",
         "Favorite": "true",
-        "EARelease": "13"
+        "EARelease": "13,13.5,14"
     },
     {
         "Name": "Linked Documents",
         "Description": "Find Linked Documents.",
         "Category": "EACommon",
         "Favorite": "true",
-        "EARelease": "13"
+        "EARelease": "13,13.5,14"
     },
     {
         "Name": "Decision Tables",
         "Description": "Find Decision Tables.",
         "Category": "EACommon",
         "Favorite": "true",
-        "EARelease": "13"
+        "EARelease": "13,13.5,14"
     },
     {
         "Name": "Find Baselines",
         "Description": "Find Baselines.",
         "Category": "EACommon",
         "Favorite": "true",
-        "EARelease": "13"
+        "EARelease": "13,13.5,14"
     },
     {
         "Name": "Recent Model Chat",
         "Description": "Find Recent Model Chats.",
         "Category": "EACommon",
         "Favorite": "true",
-        "EARelease": "13"
+        "EARelease": "13,13.5,14"
     },
 
     /* EA Diagram Searches */
@@ -157,51 +157,44 @@
         "Description": "Searches for orphaned elements throughout the model, with the ability to filter on common element fields using a search term. An 'orphaned' element is an element that does not appear on any diagram in the model.",
         "Category": "EADiagram",
         "Favorite": "true",
-        "EARelease": "9,10,11,12,12.1,13"
+        "EARelease": "9,10,11,12,12.1,13,13.5,14"
     },
     {
         "Name": "Find Bookmarked Elements",
         "Description": "Searches for elements that have been bookmarked, anywhere in the project.",
         "Category": "EADiagram",
         "Favorite": "true",
-        "EARelease": "9,10,11,12,12.1,13"
+        "EARelease": "9,10,11,12,12.1,13,13.5,14"
     },
     {
         "Name": "Recently Modified Diagrams",
         "Description": "Searches for diagrams that have been recently modified, anywhere in the project. The default is to show diagrams modified in the last three days, but you can set an alternative interval by typing the appropriate number of days in the 'Search Term' field.",
         "Category": "EADiagram",
         "Favorite": "true",
-        "EARelease": "9,10,11,12,12.1,13"
+        "EARelease": "9,10,11,12,12.1,13,13.5,14"
     },
     {
         "Name": "Diagram Details",
         "Description": "Find Diagram Details.",
         "Category": "EADiagram",
         "Favorite": "true",
-        "EARelease": "13"
+        "EARelease": "13,13.5,14"
     },
     {
         "Name": "Diagram Name",
         "Description": "Find Diagram Name.",
         "Category": "EADiagram",
         "Favorite": "true",
-        "EARelease": "13"
+        "EARelease": "13,13.5,14"
     },
     {
         "Name": "FindKanban Diagrams",
         "Description": "Lists all Kanban diagrams in the model and identifies who created them, when they were created and when they were last modified.",
         "Category": "EADiagram",
         "Favorite": "true",
-        "EARelease": "9,10,11,12,12.1"
+        "EARelease": "9,10,11,12,12.1,13,13.5,14"
     },
-    {
-        "Name": "Find Kanban Diagrams",
-        "Description": "Lists all Kanban diagrams in the model and identifies who created them, when they were created and when they were last modified.",
-        "Category": "EADiagram",
-        "Favorite": "true",
-        "EARelease": "13"
-    },
-
+   
     {
         "Name": "Activity Diagrams",
         "Description": "Activity Diagrams",
@@ -237,56 +230,56 @@
         "Description": "Searches the project for elements containing one or more internal test cases where the 'Status' value is 'Fail' and the search term is in any common Test Case field. The output lists the elements and shows their properties; use the 'Element | Testing' menu option to examine the test records for a selected element.",
         "Category": "EATest&Ver",
         "Favorite": "true",
-        "EARelease": "9,10,11,12,12.1,13"
+        "EARelease": "9,10,11,12,12.1,13,13.5,14"
     },
     {
         "Name": "Tests on Recently Modified Elements",
         "Description": "Searches the project for recently modified elements that have test records. In the 'Search Term' field you can specify the number of days over which to check back. If you do not specify a number of days, the search uses a value of 1 day. The output lists the elements that have test records and that have been modified during the specified period, and shows the details of each test record on each element. Double-click on an item to display the 'Test Details' dialog for that test.",
         "Category": "EATest&Ver",
         "Favorite": "true",
-        "EARelease": "9,10,11,12,12.1,13"
+        "EARelease": "9,10,11,12,12.1,13,13.5,14"
     },
     {
         "Name": "Tests not Run",
         "Description": "Searches the project for elements having test records where the 'Status value' is any of: 'Not Run', 'Cancelled' or 'Deferred'. In the 'Search Term' field you can specify the number of days over which to check back. If you do not specify a number of days, the search uses a value of 1 day (you can use your own value in Search Term)",
         "Category": "EATest&Ver",
         "Favorite": "true",
-        "EARelease": "9,10,11,12,12.1,13"
+        "EARelease": "9,10,11,12,12.1,13,13.5,14"
     },
     {
         "Name": "Tests not Checked",
         "Description": "Searches the project for elements having test records that have no 'Checked By' value. In the 'Search Term' field you can specify the number of days over which to check back. If you do not specify a number of days, the search uses a value of 1 day or the value in Search Term",
         "Category": "EATest&Ver",
         "Favorite": "true",
-        "EARelease": "9,10,11,12,12.1,13"
+        "EARelease": "9,10,11,12,12.1,13,13.5,14"
     },
     {
         "Name": "Passed Tests",
         "Description": "Searches the project for elements having test records where the 'Status' value is 'Pass'. In the 'Search Term' field you can specify the number of days over which to check back. If you do not specify a number of days, the search uses a value of 1 day or the value in Search Term",
         "Category": "EATest&Ver",
         "Favorite": "true",
-        "EARelease": "9,10,11,12,12.1,13"
+        "EARelease": "9,10,11,12,12.1,13,13.5,14"
     },
     {
         "Name": "Failed Tests",
         "Description": "Searches the project for elements having test records where the 'Status' value is 'Fail'. In the 'Search Term' field you can specify the number of days over which to check back. If you do not specify a number of days, the search uses a value of 1 day or the value in Search Term.",
         "Category": "EATest&Ver",
         "Favorite": "true",
-        "EARelease": "9,10,11,12,12.1,13"
+        "EARelease": "9,10,11,12,12.1,13,13.5,14"
     },
     {
         "Name": "Deferred Tests",
         "Description": "Searches the project for elements having test records where the 'Status' value is 'Deferred'. In the 'Search Term' field you can specify the number of days over which to check back. If you do not specify a number of days, the search uses a value of 1 day or the value in Search Term. ",
         "Category": "EATest&Ver",
         "Favorite": "true",
-        "EARelease": "9,10,11,12,12.1,13"
+        "EARelease": "9,10,11,12,12.1,13,13.5,14"
     },
     {
         "Name": "Recently Run Tests",
         "Description": "Searches the project for elements having test records where the 'Run Date' field has a value. In the 'Search Term' field you can specify the number of days over which to check back. If you do not specify a number of days, the search uses a value of 1 day or the value in Search Term. ",
         "Category": "EATest&Ver",
         "Favorite": "true",
-        "EARelease": "9,10,11,12,12.1,13"
+        "EARelease": "9,10,11,12,12.1,13,13.5,14"
     },
     /* Requirements */
     {
@@ -296,12 +289,19 @@
         "Favorite": "true",
         "EARelease": "9,10,11,12,12.1,13"
     },
+	{
+		"Name": "Internal Requirements",
+		"Description": "Searches the project for Internal Requirement element types where the search term occurs in any common element field. ",
+		"Category": "EATest&Ver",
+		"Favorite": "true",
+		"EARelease": "9,10,11,12,12.1,13,13.5,14"
+	},
     {
         "Name": "Requirements",
         "Description": "Searches the project for Requirement element types where the search term occurs in any common element field. ",
         "Category": "EATest&Ver",
         "Favorite": "true",
-        "EARelease": "9,10,11,12,12.1,13"
+        "EARelease": "9,10,11,12,12.1,13,13.5,14"
     },
     {
         "Name": "Recently Discussed Elements",
@@ -325,7 +325,7 @@
         "Description": "Searches the project for elements with assigned resources, where the search term is the value of any common Resource field. ",
         "Category": "Resource",
         "Favorite": "true",
-        "EARelease": "9,10,11,12,12.1,13"
+        "EARelease": "9,10,11,12,12.1,13,13.5,14"
 
     },
     {
@@ -333,49 +333,49 @@
         "Description": "Searches the project for elements with assigned resources, where the end date is in the past and the percentage completion is less than 100. ",
         "Category": "Resource",
         "Favorite": "true",
-        "EARelease": "9,10,11,12,12.1,13"
+        "EARelease": "9,10,11,12,12.1,13,13.5,14"
     },
     {
         "Name": "Active Tasks",
         "Description": "Searches the project for elements with assigned resources, where the end date is in the future and the percentage completion is less than 100. ",
         "Category": "Resource",
         "Favorite": "true",
-        "EARelease": "9,10,11,12,12.1,13"
+        "EARelease": "9,10,11,12,12.1,13,13.5,14"
     },
     {
         "Name": "Tasks Completed",
         "Description": "Searches the project for elements with assigned resources, where the percentage completion is 100. ",
         "Category": "Resource",
         "Favorite": "true",
-        "EARelease": "9,10,11,12,12.1,13"
+        "EARelease": "9,10,11,12,12.1,13,13.5,14"
     },
     {
         "Name": "Recently Finished Tasks",
         "Description": "Searches the project for elements with assigned resources, where the end date is in the recent past and the percentage completion is 100. In the 'Search Term' field, specify the number of days over which to check back. ",
         "Category": "Resource",
         "Favorite": "true",
-        "EARelease": "9,10,11,12,12.1,13"
+        "EARelease": "9,10,11,12,12.1,13,13.5,14"
     },
     {
         "Name": "Tasks Ending Today",
         "Description": "Searches the project for elements with assigned resources, where the task end date is today. ",
         "Category": "Resource",
         "Favorite": "true",
-        "EARelease": "9,10,11,12,12.1,13"
+        "EARelease": "9,10,11,12,12.1,13,13.5,14"
     },
     {
         "Name": "Tasks Starting Today",
         "Description": "Searches the project for elements with assigned resources, where the task start date is today. ",
         "Category": "Resource",
         "Favorite": "true",
-        "EARelease": "9,10,11,12,12.1,13"
+        "EARelease": "9,10,11,12,12.1,13,13.5,14"
     },
     {
         "Name": "Authors with no Active Tasks",
         "Description": "Searches the project for authors who have not been assigned as a resource to any task  that is currently active. ",
         "Category": "Resource",
         "Favorite": "true",
-        "EARelease": "9,10,11,12,12.1,13"
+        "EARelease": "9,10,11,12,12.1,13,13.5,14"
     },
     {
 
@@ -383,7 +383,7 @@
         "Description": "30 Days Task Summary (Simplified) ",
         "Category": "Resource",
         "Favorite": "true",
-        "EARelease": "13"
+        "EARelease": "13,13.5,14"
     },
     {
 
@@ -391,7 +391,7 @@
         "Description": "30 Days Task Summary (Full) ",
         "Category": "Resource",
         "Favorite": "true",
-        "EARelease": "13"
+        "EARelease": "13,13.5,14"
     },
     {
 
@@ -399,7 +399,7 @@
         "Description": "30 Days Resources",
         "Category": "Resource",
         "Favorite": "true",
-        "EARelease": "13"
+        "EARelease": "13,13.5,14"
     },
     {
 
@@ -407,15 +407,101 @@
         "Description": "30 Days Roles",
         "Category": "Resource",
         "Favorite": "true",
-        "EARelease": "13"
+        "EARelease": "13,13.5,14"
     },
+	/* External Models */
+	{
+		"Name": "Recently Modified Elements",
+		"Description": "",
+		"Category": "ExternalModels",
+		"Favorite": "true",
+		"EARelease": "14"
+	},
+	{
+		"Name": "Recently Discussed Elements",
+		"Description": "",
+		"Category": "ExternalModels",
+		"Favorite": "true",
+		"EARelease": "14"
+	},
+	{
+		"Name": "Use Cases",
+		"Description": "",
+		"Category": "ExternalModels",
+		"Favorite": "true",
+		"EARelease": "14"
+	},
+	{
+		"Name": "User Stories",
+		"Description": "User Stories",
+		"Category": "ExternalModels",
+		"Favorite": "true",
+		"EARelease": "14"
+	},
+	{
+		"Name": "Recently Modified Use Cases",
+		"Description": "Recently Modified Use Cases",
+		"Category": "ExternalModels",
+		"Favorite": "true",
+		"EARelease": "14"
+	},
+	{
+		"Name": "Recently Modified User Stories",
+		"Description": "Recently Modified User Stories",
+		"Category": "ExternalModels",
+		"Favorite": "true",
+		"EARelease": "14"
+	},
+	/* Discussions */
+	{
+		"Name": "Recently Discussed Elements",
+		"Description": "Recently Discussed Elements",
+		"Category": "Discussions",
+		"Favorite": "true",
+		"EARelease": "13.5,14"
+	},
+	{
+		"Name": "Recent Element Posts",
+		"Description": "Recently Element Posts",
+		"Category": "Discussions",
+		"Favorite": "true",
+		"EARelease": "13.5,14"
+	},
+	{
+		"Name": "Review",
+		"Description": "Review",
+		"Category": "Discussions",
+		"Favorite": "true",
+		"EARelease": "13.5,14"
+	},
+	{
+		"Name": "Recently Modified Elements",
+		"Description": "Recently Modified Elements",
+		"Category": "Discussions",
+		"Favorite": "true",
+		"EARelease": "13.5,14"
+	},
+	{
+		"Name": "Recently Discussed Reviews",
+		"Description": "Recently Discussed Reviews",
+		"Category": "Discussions",
+		"Favorite": "true",
+		"EARelease": "13.5,14"
+	},
+	{
+		"Name": "Open Reviews",
+		"Description": "Open Reviews",
+		"Category": "Discussions",
+		"Favorite": "true",
+		"EARelease": "13.5,14"
+	},
     /* Project Status */
     {
         "Name": "My Checked Out Packages",
         "Description": "Searches the project for Packages under version control that are marked as checked out under your user ID.",
         "Category": "Project",
         "Favorite": "true",
-        "EARelease": "9,10,11,12,12.1,13"
+        "EARelease": "9,10,11,12,12.1,13,13.5,14"
     },
     /* Simulation */
     {
@@ -423,63 +509,63 @@
         "Description": "StateMachine Diagrams",
         "Category": "Simulation",
         "Favorite": "true",
-        "EARelease": "13"
+        "EARelease": "13,13.5,14"
     },
     {
         "Name": "Activity Diagrams",
         "Description": "Activity Diagrams",
         "Category": "Simulation",
         "Favorite": "true",
-        "EARelease": "13"
+        "EARelease": "13,13.5,14"
     },
     {
         "Name": "Recent StateMachine Diagrams",
         "Description": "Recently StateMachine Diagrams",
         "Category": "Simulation",
         "Favorite": "true",
-        "EARelease": "13"
+        "EARelease": "13,13.5,14",
     },
     {
         "Name": "Recent Activity Diagrams",
         "Description": "Recent Activity Diagrams",
         "Category": "Simulation",
         "Favorite": "true",
-        "EARelease": "13"
+        "EARelease": "13,13.5,14"
     },
     {
         "Name": "Executable Statemachines",
         "Description": "Executable Statemachines",
         "Category": "Simulation",
         "Favorite": "true",
-        "EARelease": "13"
+        "EARelease": "13,13.5,14"
     },
     {
         "Name": "SysMLSim Configuration",
         "Description": "SysMLSim Configuration",
         "Category": "Simulation",
         "Favorite": "true",
-        "EARelease": "13"
+        "EARelease": "13,13.5,14"
     },
     {
         "Name": "BPSim Report",
         "Description": "BPSim Report",
         "Category": "Simulation",
         "Favorite": "true",
-        "EARelease": "13"
+        "EARelease": "13,13.5,14"
     },
     {
         "Name": "BPSim Chart",
         "Description": "BPSim Chart",
         "Category": "Simulation",
         "Favorite": "true",
-        "EARelease": "13"
+        "EARelease": "13,13.5,14"
     },
     {
         "Name": "BPSim",
         "Description": "BPSim",
         "Category": "Simulation",
         "Favorite": "true",
-        "EARelease": "13"
+        "EARelease": "13,13.5,14"
     },
     /* Changes */
     {
@@ -487,35 +573,35 @@
         "Description": "Verified Changes",
         "Category": "Change",
         "Favorite": "true",
-        "EARelease": "13"
+        "EARelease": "13,13.5,14"
     },
     {
         "Name": "Recently Reported Changes",
         "Description": "Recently Reported Changes",
         "Category": "Change",
         "Favorite": "true",
-        "EARelease": "13"
+        "EARelease": "13,13.5,14"
     },
     {
         "Name": "Recently Completed Changes",
         "Description": "Recently Completed Changes",
         "Category": "Change",
         "Favorite": "true",
-        "EARelease": "13"
+        "EARelease": "13,13.5,14"
     },
     {
         "Name": "New Changes",
         "Description": "New Changes",
         "Category": "Change",
         "Favorite": "true",
-        "EARelease": "13"
+        "EARelease": "13,13.5,14"
     },
     {
         "Name": "Incomplete Changes",
         "Description": "Incomplete Changes",
         "Category": "Change",
         "Favorite": "true",
-        "EARelease": "13"
+        "EARelease": "13,13.5,14"
     },
     /* Defects */
     {
@@ -523,35 +609,35 @@
         "Description": "Verified Defects",
         "Category": "Defect",
         "Favorite": "true",
-        "EARelease": "13"
+        "EARelease": "13,13.5,14"
     },
     {
         "Name": "Recently Reported Defects",
         "Description": "Recently Reported Defects",
         "Category": "Defect",
         "Favorite": "true",
-        "EARelease": "13"
+        "EARelease": "13,13.5,14"
     },
     {
         "Name": "Recently Resolved Defects",
         "Description": "Recently Resolved Defects",
         "Category": "Defect",
         "Favorite": "true",
-        "EARelease": "13"
+        "EARelease": "13,13.5,14"
     },
     {
         "Name": "New Defects",
         "Description": "New Defects",
         "Category": "Defect",
         "Favorite": "true",
-        "EARelease": "13"
+        "EARelease": "13,13.5,14"
     },
     {
         "Name": "Unresolved Defects",
         "Description": "Unresolved Defects",
         "Category": "Defect",
         "Favorite": "true",
-        "EARelease": "13"
+        "EARelease": "13,13.5,14"
     },
     /* Issues */
     {
@@ -559,35 +645,35 @@
         "Description": "Verified Tasks",
         "Category": "Issue",
         "Favorite": "true",
-        "EARelease": "13"
+        "EARelease": "13,13.5,14"
     },
     {
         "Name": "Recently Reported Issues",
         "Description": "Recently Reported Issues",
         "Category": "Issue",
         "Favorite": "true",
-        "EARelease": "13"
+        "EARelease": "13,13.5,14"
     },
     {
         "Name": "Recently Resolved Issues",
         "Description": "Recently Resolved Issues",
         "Category": "Issue",
         "Favorite": "true",
-        "EARelease": "13"
+        "EARelease": "13,13.5,14"
     },
     {
         "Name": "New Issues",
         "Description": "New Issues",
         "Category": "Issue",
         "Favorite": "true",
-        "EARelease": "13"
+        "EARelease": "13,13.5,14"
     },
     {
         "Name": "Unresolved Issues",
         "Description": "Unresolved Issues",
         "Category": "Issue",
         "Favorite": "true",
-        "EARelease": "13"
+        "EARelease": "13,13.5,14"
     },
     /* Tasks */
     {
@@ -595,35 +681,35 @@
         "Description": "Verified Tasks",
         "Category": "Task",
         "Favorite": "true",
-        "EARelease": "13"
+        "EARelease": "13,13.5,14"
     },
     {
         "Name": "Recently Requested Tasks",
         "Description": "Recently Requested Tasks",
         "Category": "Task",
         "Favorite": "true",
-        "EARelease": "13"
+        "EARelease": "13,13.5,14"
     },
     {
         "Name": "Recently Completed Tasks",
         "Description": "Recently Completed Tasks",
         "Category": "Task",
         "Favorite": "true",
-        "EARelease": "13"
+        "EARelease": "13,13.5,14"
     },
     {
         "Name": "New Tasks",
         "Description": "New Tasks",
         "Category": "Task",
         "Favorite": "true",
-        "EARelease": "13"
+        "EARelease": "13,13.5,14"
     },
     {
         "Name": "Incomplete Tasks",
         "Description": "Incomplete Tasks",
         "Category": "Task",
         "Favorite": "true",
-        "EARelease": "13"
+        "EARelease": "13,13.5,14"
     },
     /* Events */
     {
@@ -631,28 +717,28 @@
         "Description": "Recently Reported Events",
         "Category": "Event",
         "Favorite": "true",
-        "EARelease": "13"
+        "EARelease": "13,13.5,14"
     },
     {
         "Name": "Recently Completed Events",
         "Description": "Recently Completed Events",
         "Category": "Event",
         "Favorite": "true",
-        "EARelease": "13"
+        "EARelease": "13,13.5,14"
     },
     {
         "Name": "High Priority Events",
         "Description": "High Priority Events",
         "Category": "Event",
         "Favorite": "true",
-        "EARelease": "13"
+        "EARelease": "13,13.5,14"
     },
     {
         "Name": "Open Events",
         "Description": "Open Events",
         "Category": "Event",
         "Favorite": "true",
-        "EARelease": "13"
+        "EARelease": "13,13.5,14"
     },
     /* Decisions */
     {
@@ -660,35 +746,35 @@
         "Description": "Verified Decisions",
         "Category": "Decision",
         "Favorite": "true",
-        "EARelease": "13"
+        "EARelease": "13,13.5,14"
     },
     {
         "Name": "Recently Created Decisions",
         "Description": "Recently Created Decisions",
         "Category": "Decision",
         "Favorite": "true",
-        "EARelease": "13"
+        "EARelease": "13,13.5,14"
     },
     {
         "Name": "Recently Effective Decisions",
         "Description": "Recently Effective Decisions",
         "Category": "Decision",
         "Favorite": "true",
-        "EARelease": "13"
+        "EARelease": "13,13.5,14"
     },
     {
         "Name": "New Decisions",
         "Description": "New Decisions",
         "Category": "Decision",
         "Favorite": "true",
-        "EARelease": "13"
+        "EARelease": "13,13.5,14"
     },
     {
         "Name": "Unresolved Decisions",
         "Description": "Unresolved Decisions",
         "Category": "Decision",
         "Favorite": "true",
-        "EARelease": "13"
+        "EARelease": "13,13.5,14"
     },
     /* Test Points */
     {
@@ -696,20 +782,20 @@
         "Description": "Test Suites",
         "Category": "TestPoint",
         "Favorite": "true",
-        "EARelease": "13"
+        "EARelease": "13,13.5,14"
     },
     {
         "Name": "Test Sets",
         "Description": "Test Sets",
         "Category": "TestPoint",
         "Favorite": "true",
-        "EARelease": "13"
+        "EARelease": "13,13.5,14"
     },
     {
         "Name": "Test Cuts",
         "Description": "Test Cuts",
         "Category": "TestPoint",
         "Favorite": "true",
-        "EARelease": "13"
+        "EARelease": "13,13.5,14"
     }
 ]

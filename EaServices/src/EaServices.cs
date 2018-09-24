@@ -9,6 +9,7 @@ using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml.Linq;
+using DataModels;
 using EA;
 using hoTools.EaServices.Dlg;
 using hoTools.Utils;
@@ -140,12 +141,31 @@ namespace hoTools.EaServices
                 // "l=200;r=400;t=200;b=600;"
 
                 // get the position of the Element
-
                 int left = (dia.cx / 2) - 100;
                 int right = left + 200;
                 int top = dia.cy - 150;
                 int bottom = top + 120;
-                //int right = diaObj.right + 2 * (diaObj.right - diaObj.left);
+                if (dia.DiagramObjects.Count > 0)
+                {
+                    List<EA.DiagramObject> lDiaObj = EaDiagram.MakeObjectListFrmCollection(dia.DiagramObjects);
+                    
+                    right = (from r in lDiaObj
+                             select r.right).Max();
+                    left = (from r in lDiaObj
+                        select r.left).Min();
+                    //left = right - 200 > 0? right - 200:0 ;
+                    left = (left + (right - left) / 2) - 100;
+                    left = left < 0 ? 20 : left;
+                    right = left + 220;
+
+                    top = (from r in lDiaObj
+                        select r.bottom).Min() -30;
+                    bottom = top - 120;
+
+                }
+               
+                    //int right = diaObj.right + 2 * (diaObj.right - diaObj.left);
+
 
                 string position = "l=" + left + ";r=" + right + ";t=" + top + ";b=" + bottom + ";";
 

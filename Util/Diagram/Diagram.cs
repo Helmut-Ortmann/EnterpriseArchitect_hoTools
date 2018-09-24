@@ -249,6 +249,8 @@ namespace hoTools.Utils.Diagram
             return links;
         }
 
+        
+
         #region sortSelectedObjects
         // ReSharper disable once UnusedMember.Global
         public void SortSelectedObjects()
@@ -318,9 +320,24 @@ namespace hoTools.Utils.Diagram
                 }
             }
         }
+        /// <summary>
+        /// Make EA.DiagramObject list from collection
+        /// </summary>
+        /// <param name="col"></param>
+        /// <returns></returns>
+        public static List<EA.DiagramObject> MakeObjectListFrmCollection(EA.Collection col)
+        {
+            List<EA.DiagramObject> lDiaObj = new List<EA.DiagramObject>();
+            foreach (EA.DiagramObject diaObj in col)
+            {
+                lDiaObj.Add(diaObj);
+            }
+
+            return lDiaObj;
+        }
 
 
-        
+
     }
     public class DiagramObject
     {

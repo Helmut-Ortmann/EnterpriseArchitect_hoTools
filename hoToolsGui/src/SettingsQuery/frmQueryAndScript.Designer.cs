@@ -287,6 +287,7 @@
             this.txtExtensionPath.TabIndex = 251;
             this.toolTip1.SetToolTip(this.txtExtensionPath, "Paths hoTools Extensions developed in C#:\r\n\r\nA semicolon seperated list of paths " +
         "hoTools Extensions.\r\n\r\nLike: c:\\hoToolsExtensions;d:\\hoToolsExtension");
+            this.txtExtensionPath.Visible = false;
             // 
             // openFileDialog1
             // 
@@ -372,6 +373,7 @@
             this.label4.Size = new System.Drawing.Size(290, 18);
             this.label4.TabIndex = 252;
             this.label4.Text = "Path to hoTools .NET Extensions (e.g.:C#)";
+            this.label4.Visible = false;
             // 
             // textBox1
             // 

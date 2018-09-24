@@ -25,7 +25,7 @@ namespace AddinFramework.Extension
         }
 
         /// <summary>
-        /// get EA Release as string in the form: "9","10","11","12","12.1","13"
+        /// get EA Release as string in the form: "9","10","11","12","12.1","13","14"
         /// </summary>
         /// <param name="rep"></param>
         /// <returns>EA Version</returns>

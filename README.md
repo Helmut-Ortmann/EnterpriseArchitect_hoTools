@@ -17,7 +17,7 @@ Addin with Tools for SPARX Enterprise Architect (EA)
 - [Port, Move, Label, Rotate,..](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/Port)
 
 # Abstract
-Collection of useful tools (see also [WiKi](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/home)):
+Collection of useful tools (see also [Wiki](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/home)):
 
 - [hoTools](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/hoTools) Assortment of tools
   - Toolbar for Searches, [SQL](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/SQL), [Services](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/Services) and [Scripts](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/Scripts)
@@ -62,7 +62,7 @@ Collection of useful tools (see also [WiKi](https://github.com/Helmut-Ortmann/En
 - Administration of EA
    - Version Control
 - Intuitive GUI
-- [WiKi](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/home)
+- [Wiki](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/home)
 
 
 
@@ -72,7 +72,7 @@ Collection of useful tools (see also [WiKi](https://github.com/Helmut-Ortmann/En
 - Tabbed Editor or use your own editor
 - Macro replacement (ID, GUID, Branch, DiagramSelectObject, ConveyedItem,..)
 - DB specific (#DB=ORACLE#,..)
-- Comment your sql
+- Comment your SQL
 - Easy find SQL error
 - Load / Save to file
 - History / Last opened
@@ -122,6 +122,10 @@ Some features:
 
 # Releases
 
+### Release 3.2.12
+
+- Standard searches to search for updated to release 14. 
+
 ### Release 3.2.11
 
 -  Fixed error nested query
@@ -163,7 +167,7 @@ Some features:
 
 ### Release 3.2.5
 -  [Bulk change of Elements](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/BulkEaItemChange)
--  Find search: Coloring of matching characters optimized
+-  Find search: Coloring of matching characters optimised
 -  Fix create Note linked to connector (Feature, Note)
 
 ### Release 3.2.4
@@ -204,7 +208,7 @@ Some features:
 -- hoTools (3.1.8) has to be installed manually
 ### Release 3.1.8
 - Output Repository information
-- Port handling optimized
+- Port handling optimised
 -- Default port position 1+2
 -- Round robin ports around parend classifier
 -- Rotate Port Label
@@ -217,7 +221,7 @@ Some features:
 
 ## Release 3.1.6
 - Error CheckIn/CheckOut fixed
-- VC Set *.xml file optimized
+- VC Set *.xml file optimised
 - Sort Diagram Elements alphabetic (also packages in Diagram)
 
 ## Release 3.1.5
@@ -257,7 +261,7 @@ Some features:
 - AddInSimple: Add-In Search 'AddInSearchSamplePackageContent' corrected
 - hoTools: Reorganisation ReplaceWildCard
 - Fix: Feature, Notes, Constraint for Diagram, Element, Package, Connector, Attribute, Operation
-- Optimize SQL to Excel (Check if sql-file is available)
+- optimise SQL to Excel (Check if SQL-file is available)
 
 ## Release 3.0.7
 - Error fixed: hoTools installer doesn't create AppDataFolder'
@@ -307,7 +311,7 @@ One Click and:
 - Apply EA Layout Styles (Font, Colors, Linewidth, bold) for a bunch of Diagram Nodes or Links
 - Amount of Buttons extended to 10
 
-- Fix error context diagram (leads to exception if current diagram and context diagram differ)
+- Fix error context diagram (leads to an exception if current diagram and context diagram differ)
 - Code refactoring
 
 ## Release 2.1.6
@@ -323,13 +327,13 @@ One Click and:
 - Remember: Services can be bound to Keys or Buttons 
 
 ## Release 2.1.5
-- hoTools inventarize loaded MDGs (hoBasicMDG,..)
+- hoTools inventaries loaded MDGs (hoBasicMDG,..)
 - Fixing error in Searches (CLASSID->CLASSGUID)
 - Linestyle TH (Tree Horizontal) was implemented as Lateral Horizontal)
 - Sorting Features (Attributes, Operations)
 - Link features to a Note
-- Preparation enventarize C# Extenssions to use as Scripts
-- Error in Diagram.class fixed (last selected element is the first in collection)
+- Preparation inventories C# Extensions to use as Scripts
+- Error in Diagram.class fixed (last selected element is the first in the collection)
 - Default line style StateMachine 'no' (need to delete configuration, %APPDATA%ho\hoTools\user.config, change per configuration)
 - Reset settings to default settings
 - Error fixing
@@ -341,32 +345,32 @@ One Click and:
 - Find Usage (o.CLASSIFIER_ID=>o.CLASSIFIER_GUID, o1.CLASSIFIER_ID=>o1.CLASSIFIER_GUID corrected)
 - Missing try catch in Show Specification
 - Script: Catch error set SplitterDistance (I can't reproduce but it will do no harm)
-- [Change Author optimized](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/ChangeAuthor)
+- [Change Author optimised](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/ChangeAuthor)
 - Fixed: Modale windows stuck behind main window
 
 ## Release 2.1.2.1
 - Wrong installation file 2.1.2 corrected
 - Attribute up and down
-- Set and view package folder optimized
+- Set and view package folder optimised
 
 ## Release 2.1.2
-- Synchronization Part Ports with its Type, usually a Class/Block
--- 'Show Ports' also synchronizes ports between block and its properties/parts (add/delete)
--- Synchronized are the following information
+- synchronisation Part Ports with its Type, usually a Class/Block
+-- 'Show Ports' also synchronises ports between a block and its properties/parts (add/delete)
+-- synchronised is the following information
 --- Name
 --- Stereotype
 --- Notes
 - Search with Context Menu (Right Click)
 -- Edit current hoTools SQL Search with Editor
--- Open folder of current hoTools SQL Search
+-- Open the folder of current hoTools SQL Search
 -- Run Search and export results to Excel (no Excel required)
 -- Export Clipboard with csv data to Excel (no Excel required)
 - SQL Context Menu contains
 -- Edit current hoTools SQL Search with Editor
--- Open folder of current hoTools SQL Search
--  Fixed error in example Script hoDemoRunSQL (leads to error message during initialization)
+-- Open the folder of current hoTools SQL Search
+-  Fixed error in example Script hoDemoRunSQL (leads to error message during initialisation)
 -- Delete Script 'hoDemoRunSQL' in EA ScriptWindow
--- Comment last line by inserting a ' at start of line
+-- Comment the last line by inserting a ' character at start of a line
 
 
 ## Release 2.1.1
@@ -384,7 +388,7 @@ One Click and:
 - SQL Searches of MDG, 'My Searches' are now inventoried.
 - Searches were faulty (ea_id instead of ea_guid), fixed in hoToolsBasic.xml,..
 - File error "d:\temp\sql\Branch.sql" fixed, cause unclear
-- Jump between composite diagram and owning diagram fixed (null value)
+- Jump between a composite diagram and owning diagram fixed (null value)
 - Wiki updated
 
 
@@ -399,23 +403,23 @@ One Click and:
 
 
 ## Release 2.0.10
-- Favorites (Show Favorites didn't work)
+- Favourites (Show Favourites didn't work)
 - SysML Locate Part for Sequence Call by name
 - Add Load Scripts (if a Script is changed the user has to update the Script in hoTools before using it)
 - Script Examples for JavaScript
 - EAModel with Clipboard functions (for usage in Scripts)
-- Default Line style all none (delete *.xml file required, or File, Settings,..)
+- Default Line style all none (delete *.xml file required, or File, Settings,)
   It's possible that Activity Diagrams and Statechart have a default Line style
   You may want to change it by
   File, Settings, Default Line style
 
 ## Release 2.0.9
 
-- Consolidate Tag with release (skip 2.0.8)    
-- Fix: Conveyed Items for Information Flow and for Connector
+- Consolidate Tag of release (skip 2.0.8)    
+- Fix: Conveyed Items for Information Flow and Connector
 - Fix: Opened tabbed were duplicated by opening another repository
-- Optimization: Only one Button Conveyed Items (former two, function decides from selected element/connector/flow)
-- Optimization: Only one Button Notes (former two, function decides from selected element/diagram what to do)
+- optimisation: Only one Button Conveyed Items (former two, function decides from selected element/connector/flow)
+- optimisation: Only one Button Notes (former two, function decides from selected element/diagram what to do)
 - Switch off annoying Tooltip in SQL window
 - Search description adapted to EA 13
 
@@ -428,19 +432,15 @@ One Click and:
 
 
 ## Release 2.0.6
-  - QuickSearch selection with auto complete for available Searches
+  - QuickSearch selection with autocomplete for available Searches
   - SQL Searches (multiple folders are possible, file name should be unique)
   - MDG
   - Own Searches
   - Standard Searches
   - Determine Search
-    - Auto complete (.NET standard feature)
-    - Find part of string after Up, Down, Blank Key
+    - Autocomplete (.NET standard feature)
+    - Find the part of the string after Up, Down, Blank Key
       - Double Click in find starts Search
-
-
-
-
 
 
 
@@ -448,7 +448,7 @@ One Click and:
 ## Not yet scheduled 
 - Search Management (for Quick Search)
   - Enable Category (Settings)
-  - Favorites (configuration via JSON)
+  - Favourites (configuration via JSON)
   - EA Standard Searches (configurable via JSON, my EA Standard Searches) 
 
 # Feedback
