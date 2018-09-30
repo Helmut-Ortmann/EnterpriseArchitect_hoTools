@@ -125,6 +125,7 @@ Some features:
 ### Release 3.2.12
 
 - Standard searches to search for updated to release 14. 
+- Simplified GUI for generation Activities for Operation, workaround EA error for inherited operations
 
 ### Release 3.2.11
 

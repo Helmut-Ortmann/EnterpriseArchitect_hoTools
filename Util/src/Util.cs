@@ -954,6 +954,20 @@ namespace hoTools.Utils
 
             return GetSingleSqlValue(rep, query, attributeName);
         }
+        /// <summary>
+        /// Set Diagram Style to fit into a page.
+        /// </summary>
+        /// <param name="dia"></param>
+        public static void SetDiagramStyleFitToPage(EA.Diagram dia)
+        {
+            // set Diagram Style = scale to fit one page
+            string t = dia.ExtendedStyle;
+            t = Regex.Replace(t, "PPgs.cx=[0-9]", "PPgs.cx=1");
+            t = Regex.Replace(t, "PPgs.cy=[0-9]", "PPgs.cy=1");
+            t = Regex.Replace(t, "ScalePI=[0-9]", "ScalePI=1");
+            dia.ExtendedStyle = t;
+            dia.Update();
+        }
 
         private static string GetSingleSqlValue(Repository rep, string query, string attributeName)
         {
