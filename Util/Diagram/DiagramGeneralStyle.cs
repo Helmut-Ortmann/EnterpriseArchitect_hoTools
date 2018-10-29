@@ -61,6 +61,12 @@ namespace hoTools.Utils.Diagram
         {
 
             myString = myString.Trim();
+            if (String.IsNullOrWhiteSpace(myString))
+            {
+                name = "";
+                value = "";
+                return false;
+            }
             Regex rx = new Regex($@"([^{delimiter}]*){delimiter}(.*)");
             Match match = rx.Match(myString.Trim());
             name = "";

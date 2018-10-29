@@ -122,6 +122,8 @@ Some features:
 
 # Releases
 
+### Release 3.2.13
+
 ### Release 3.2.12
 
 - Standard searches to search for updated to release 14. 
