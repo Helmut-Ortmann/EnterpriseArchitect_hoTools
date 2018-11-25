@@ -123,6 +123,9 @@ Some features:
 # Releases
 
 ### Release 3.2.13
+-  Fix Style Properties without nothing to change is now possible
+-  Fix export nach Excel
+-  Fix Find & Replace (TaggedValue with <memo> and from MDG)
 
 ### Release 3.2.12
 

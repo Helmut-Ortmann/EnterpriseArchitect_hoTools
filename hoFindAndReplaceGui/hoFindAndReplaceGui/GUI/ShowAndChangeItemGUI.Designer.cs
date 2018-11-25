@@ -62,102 +62,114 @@
             // 
             // rtfNotes
             // 
-            this.rtfNotes.Location = new System.Drawing.Point(36, 136);
+            this.rtfNotes.Location = new System.Drawing.Point(27, 110);
+            this.rtfNotes.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.rtfNotes.Name = "rtfNotes";
-            this.rtfNotes.Size = new System.Drawing.Size(679, 247);
+            this.rtfNotes.Size = new System.Drawing.Size(510, 201);
             this.rtfNotes.TabIndex = 0;
             this.rtfNotes.Text = "";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(33, 66);
+            this.label1.Location = new System.Drawing.Point(25, 54);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(45, 17);
+            this.label1.Size = new System.Drawing.Size(35, 13);
             this.label1.TabIndex = 2;
             this.label1.Text = "Name";
             // 
             // txtType
             // 
             this.txtType.Enabled = false;
-            this.txtType.Location = new System.Drawing.Point(116, 38);
+            this.txtType.Location = new System.Drawing.Point(87, 31);
+            this.txtType.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtType.Name = "txtType";
-            this.txtType.Size = new System.Drawing.Size(100, 22);
+            this.txtType.Size = new System.Drawing.Size(76, 20);
             this.txtType.TabIndex = 3;
             // 
             // txtSubType
             // 
             this.txtSubType.Enabled = false;
-            this.txtSubType.Location = new System.Drawing.Point(329, 38);
+            this.txtSubType.Location = new System.Drawing.Point(247, 31);
+            this.txtSubType.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtSubType.Name = "txtSubType";
-            this.txtSubType.Size = new System.Drawing.Size(171, 22);
+            this.txtSubType.Size = new System.Drawing.Size(129, 20);
             this.txtSubType.TabIndex = 4;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(33, 38);
+            this.label2.Location = new System.Drawing.Point(25, 31);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(40, 17);
+            this.label2.Size = new System.Drawing.Size(31, 13);
             this.label2.TabIndex = 5;
             this.label2.Text = "Type";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(263, 37);
+            this.label3.Location = new System.Drawing.Point(197, 30);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(60, 17);
+            this.label3.Size = new System.Drawing.Size(46, 13);
             this.label3.TabIndex = 6;
             this.label3.Text = "Subtype";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(33, 94);
+            this.label4.Location = new System.Drawing.Point(25, 76);
+            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(77, 17);
+            this.label4.Size = new System.Drawing.Size(58, 13);
             this.label4.TabIndex = 8;
             this.label4.Text = "Stereotype";
             // 
             // txtFrom
             // 
             this.txtFrom.Enabled = false;
-            this.txtFrom.Location = new System.Drawing.Point(116, 407);
+            this.txtFrom.Location = new System.Drawing.Point(87, 331);
+            this.txtFrom.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtFrom.Name = "txtFrom";
-            this.txtFrom.Size = new System.Drawing.Size(146, 22);
+            this.txtFrom.Size = new System.Drawing.Size(110, 20);
             this.txtFrom.TabIndex = 9;
             // 
             // txtTo
             // 
-            this.txtTo.Location = new System.Drawing.Point(305, 407);
+            this.txtTo.Location = new System.Drawing.Point(229, 331);
+            this.txtTo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtTo.Name = "txtTo";
-            this.txtTo.Size = new System.Drawing.Size(171, 22);
+            this.txtTo.Size = new System.Drawing.Size(129, 20);
             this.txtTo.TabIndex = 10;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(36, 411);
+            this.label5.Location = new System.Drawing.Point(27, 334);
+            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(40, 17);
+            this.label5.Size = new System.Drawing.Size(30, 13);
             this.label5.TabIndex = 11;
             this.label5.Text = "From";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(279, 407);
+            this.label6.Location = new System.Drawing.Point(209, 331);
+            this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(20, 17);
+            this.label6.Size = new System.Drawing.Size(16, 13);
             this.label6.TabIndex = 12;
             this.label6.Text = "to";
             // 
             // btnChange
             // 
-            this.btnChange.Location = new System.Drawing.Point(39, 443);
+            this.btnChange.Location = new System.Drawing.Point(29, 360);
+            this.btnChange.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnChange.Name = "btnChange";
-            this.btnChange.Size = new System.Drawing.Size(75, 23);
+            this.btnChange.Size = new System.Drawing.Size(56, 19);
             this.btnChange.TabIndex = 13;
             this.btnChange.Text = "Replace";
             this.toolTip1.SetToolTip(this.btnChange, "Replace find string by replace string in current item. Store is needed to make it" +
@@ -167,9 +179,10 @@
             // 
             // btnNext
             // 
-            this.btnNext.Location = new System.Drawing.Point(401, 443);
+            this.btnNext.Location = new System.Drawing.Point(301, 360);
+            this.btnNext.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnNext.Name = "btnNext";
-            this.btnNext.Size = new System.Drawing.Size(75, 23);
+            this.btnNext.Size = new System.Drawing.Size(56, 19);
             this.btnNext.TabIndex = 14;
             this.btnNext.Text = "Next";
             this.toolTip1.SetToolTip(this.btnNext, "Show next found item. Not stored changes are lost.");
@@ -178,9 +191,10 @@
             // 
             // btnPrevious
             // 
-            this.btnPrevious.Location = new System.Drawing.Point(320, 443);
+            this.btnPrevious.Location = new System.Drawing.Point(240, 360);
+            this.btnPrevious.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnPrevious.Name = "btnPrevious";
-            this.btnPrevious.Size = new System.Drawing.Size(75, 23);
+            this.btnPrevious.Size = new System.Drawing.Size(56, 19);
             this.btnPrevious.TabIndex = 15;
             this.btnPrevious.Text = "Previous";
             this.toolTip1.SetToolTip(this.btnPrevious, "Show previous found item. Not stored changes are lost.");
@@ -189,9 +203,10 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(482, 443);
+            this.btnCancel.Location = new System.Drawing.Point(362, 360);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.Size = new System.Drawing.Size(56, 19);
             this.btnCancel.TabIndex = 16;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -199,9 +214,10 @@
             // 
             // btnStore
             // 
-            this.btnStore.Location = new System.Drawing.Point(231, 443);
+            this.btnStore.Location = new System.Drawing.Point(173, 360);
+            this.btnStore.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnStore.Name = "btnStore";
-            this.btnStore.Size = new System.Drawing.Size(75, 23);
+            this.btnStore.Size = new System.Drawing.Size(56, 19);
             this.btnStore.TabIndex = 17;
             this.btnStore.Text = "Store";
             this.toolTip1.SetToolTip(this.btnStore, "Store the visualized item (make changes permanent).");
@@ -210,29 +226,32 @@
             // 
             // rtfName
             // 
-            this.rtfName.Location = new System.Drawing.Point(116, 66);
+            this.rtfName.Location = new System.Drawing.Point(87, 54);
+            this.rtfName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.rtfName.Multiline = false;
             this.rtfName.Name = "rtfName";
             this.rtfName.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
-            this.rtfName.Size = new System.Drawing.Size(384, 22);
+            this.rtfName.Size = new System.Drawing.Size(289, 19);
             this.rtfName.TabIndex = 18;
             this.rtfName.Text = "";
             // 
             // rtfStereotype
             // 
-            this.rtfStereotype.Location = new System.Drawing.Point(116, 94);
+            this.rtfStereotype.Location = new System.Drawing.Point(87, 76);
+            this.rtfStereotype.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.rtfStereotype.Multiline = false;
             this.rtfStereotype.Name = "rtfStereotype";
             this.rtfStereotype.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
-            this.rtfStereotype.Size = new System.Drawing.Size(384, 22);
+            this.rtfStereotype.Size = new System.Drawing.Size(289, 19);
             this.rtfStereotype.TabIndex = 19;
             this.rtfStereotype.Text = "";
             // 
             // btnChangeAll
             // 
-            this.btnChangeAll.Location = new System.Drawing.Point(120, 443);
+            this.btnChangeAll.Location = new System.Drawing.Point(90, 360);
+            this.btnChangeAll.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnChangeAll.Name = "btnChangeAll";
-            this.btnChangeAll.Size = new System.Drawing.Size(105, 23);
+            this.btnChangeAll.Size = new System.Drawing.Size(79, 19);
             this.btnChangeAll.TabIndex = 20;
             this.btnChangeAll.Text = "ReplaceAll";
             this.toolTip1.SetToolTip(this.btnChangeAll, "Replace all findings in all choosen\r\n- Field Types\r\n- Field Items\r\nof the found i" +
@@ -244,9 +263,10 @@
             // 
             this.chkIsChanged.AutoSize = true;
             this.chkIsChanged.Enabled = false;
-            this.chkIsChanged.Location = new System.Drawing.Point(508, 420);
+            this.chkIsChanged.Location = new System.Drawing.Point(381, 341);
+            this.chkIsChanged.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.chkIsChanged.Name = "chkIsChanged";
-            this.chkIsChanged.Size = new System.Drawing.Size(87, 21);
+            this.chkIsChanged.Size = new System.Drawing.Size(69, 17);
             this.chkIsChanged.TabIndex = 22;
             this.chkIsChanged.Text = "Changed";
             this.toolTip1.SetToolTip(this.chkIsChanged, "Indicates that the item is changed by:\r\n- Store\r\n- ChangeAll\r\n- Change in overvie" +
@@ -255,10 +275,11 @@
             // 
             // txtState
             // 
-            this.txtState.Location = new System.Drawing.Point(39, 473);
+            this.txtState.Location = new System.Drawing.Point(29, 384);
+            this.txtState.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtState.Name = "txtState";
             this.txtState.ReadOnly = true;
-            this.txtState.Size = new System.Drawing.Size(518, 22);
+            this.txtState.Size = new System.Drawing.Size(390, 20);
             this.txtState.TabIndex = 21;
             // 
             // gridTags
@@ -267,10 +288,11 @@
             this.gridTags.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ColumnName,
             this.ColumnValue});
-            this.gridTags.Location = new System.Drawing.Point(721, 136);
+            this.gridTags.Location = new System.Drawing.Point(541, 110);
+            this.gridTags.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.gridTags.Name = "gridTags";
             this.gridTags.RowTemplate.Height = 24;
-            this.gridTags.Size = new System.Drawing.Size(297, 247);
+            this.gridTags.Size = new System.Drawing.Size(223, 201);
             this.gridTags.TabIndex = 23;
             // 
             // ColumnName
@@ -290,35 +312,38 @@
             // lblTaggedValues
             // 
             this.lblTaggedValues.AutoSize = true;
-            this.lblTaggedValues.Location = new System.Drawing.Point(718, 94);
+            this.lblTaggedValues.Location = new System.Drawing.Point(538, 76);
+            this.lblTaggedValues.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblTaggedValues.Name = "lblTaggedValues";
-            this.lblTaggedValues.Size = new System.Drawing.Size(104, 17);
+            this.lblTaggedValues.Size = new System.Drawing.Size(79, 13);
             this.lblTaggedValues.TabIndex = 24;
             this.lblTaggedValues.Text = "Tagged Values";
             // 
             // lblDescription
             // 
             this.lblDescription.AutoSize = true;
-            this.lblDescription.Location = new System.Drawing.Point(31, 116);
+            this.lblDescription.Location = new System.Drawing.Point(23, 94);
+            this.lblDescription.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblDescription.Name = "lblDescription";
-            this.lblDescription.Size = new System.Drawing.Size(79, 17);
+            this.lblDescription.Size = new System.Drawing.Size(60, 13);
             this.lblDescription.TabIndex = 25;
             this.lblDescription.Text = "Description";
             // 
             // txtTaggedValueNames
             // 
             this.txtTaggedValueNames.Enabled = false;
-            this.txtTaggedValueNames.Location = new System.Drawing.Point(721, 113);
+            this.txtTaggedValueNames.Location = new System.Drawing.Point(541, 92);
+            this.txtTaggedValueNames.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtTaggedValueNames.Name = "txtTaggedValueNames";
             this.txtTaggedValueNames.ReadOnly = true;
-            this.txtTaggedValueNames.Size = new System.Drawing.Size(297, 22);
+            this.txtTaggedValueNames.Size = new System.Drawing.Size(224, 20);
             this.txtTaggedValueNames.TabIndex = 26;
             // 
             // ShowAndChangeItemGUI
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1056, 521);
+            this.ClientSize = new System.Drawing.Size(880, 423);
             this.Controls.Add(this.txtTaggedValueNames);
             this.Controls.Add(this.lblDescription);
             this.Controls.Add(this.lblTaggedValues);
@@ -344,6 +369,7 @@
             this.Controls.Add(this.txtType);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.rtfNotes);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "ShowAndChangeItemGUI";
             this.Text = "Show and change item";
             ((System.ComponentModel.ISupportInitialize)(this.gridTags)).EndInit();

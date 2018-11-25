@@ -7,6 +7,7 @@ namespace hoTools.Find
 {
     class FindAndReplaceItemPackage : FindAndReplaceItem
     {
+        private readonly string _guid;
         EA.Package _pkg;
         EA.Element _el ;
         #region Contructor
@@ -15,12 +16,13 @@ namespace hoTools.Find
         /// element specific things like tagged values.
         /// </summary>
         /// <param name="rep"></param>
-        /// <param name="GUID"></param>
-        public  FindAndReplaceItemPackage(EA.Repository rep, string GUID)  :base( rep, GUID)
+        /// <param name="guid"></param>
+        public  FindAndReplaceItemPackage(EA.Repository rep, string guid)  :base( rep, guid)
         {
-            this._el = rep.GetElementByGuid(GUID);
-            this._pkg = rep.GetPackageByGuid(GUID);
-            this.load(rep);
+            _guid = guid;
+            this._el = rep.GetElementByGuid(guid);
+            this._pkg = rep.GetPackageByGuid(guid);
+            this.Load(rep);
         }
         #endregion
         #region Property
@@ -28,8 +30,12 @@ namespace hoTools.Find
         public EA.Package Package => _pkg;
 
         #endregion
-        #region load
-        public override void load(EA.Repository rep)
+        #region Load
+        /// <summary>
+        /// Load 
+        /// </summary>
+        /// <param name="rep"></param>
+        public sealed override void Load(EA.Repository rep)
         {
 
             _Name = _pkg.Name;
@@ -45,8 +51,8 @@ namespace hoTools.Find
             }
         }
         #endregion
-        #region save
-        public override void save(EA.Repository rep, FindAndReplaceItem.FieldType fieldType)
+        #region Save
+        public override void Save(EA.Repository rep, FindAndReplaceItem.FieldType fieldType)
         {
             _pkg = rep.GetPackageByGuid(GUID);
             if ((fieldType & FindAndReplaceItem.FieldType.Description) > 0)
@@ -67,13 +73,13 @@ namespace hoTools.Find
             _pkg.Update();
         }
         #endregion
-        #region locate
-        public override void locate(EA.Repository rep)
+        #region Locate
+        public override void Locate(EA.Repository rep)
         {
             rep.ShowInProjectView(_pkg);
         }
         #endregion
-        public override string getType() => "Package";
-        public override string getSubType() => "Package";
+        public override string GetSearchType() => "Package";
+        public override string GetSubType() => "Package";
     }
 }

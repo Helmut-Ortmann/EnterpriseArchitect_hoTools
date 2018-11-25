@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace hoTools.Find
@@ -23,14 +18,14 @@ namespace hoTools.Find
             // Element with tags
             
 
-            txtState.Text = StateCurrentItem() + " found.";
+            txtState.Text = StateCurrentItem() + @" found.";
         }
         #endregion
         #region StateCurrentItem
         private string StateCurrentItem()
         {
-            chkIsChanged.Checked = _frItem.isUpdated;
-             return String.Format(@"Item {0} of {1}", _fr.Index + 1, _fr.l_items.Count);
+            chkIsChanged.Checked = _frItem.IsUpdated;
+             return String.Format(@"Item {0} of {1}", _fr.Index + 1, _fr.LItems.Count);
         }
         #endregion
         #region ShowItem
@@ -40,29 +35,29 @@ namespace hoTools.Find
         private void ShowItem()
         {
             // fill information
-            _frItem = _fr.l_items[_fr.Index];
-            _frItem.load(_fr.rep);
+            _frItem = _fr.LItems[_fr.Index];
+            _frItem.Load(_fr.Rep);
             
-            txtType.Text = _frItem.getType();
-            txtSubType.Text = _frItem.getSubType();
-            txtFrom.Text = _fr.findString;
-            txtTo.Text = _fr.replaceString;
+            txtType.Text = _frItem.GetSearchType();
+            txtSubType.Text = _frItem.GetSubType();
+            txtFrom.Text = _fr.FindString;
+            txtTo.Text = _fr.ReplaceString;
 
             // rtf fields 
             _fr.SetRtfBoxText(rtfName, _frItem.Name);
             _fr.SetRtfBoxText(rtfStereotype, _frItem.Stereotype);
             _fr.SetRtfBoxText(rtfNotes, _frItem.Description);
 
-            if (_fr.isTagSearch)
+            if (_fr.IsTagSearch)
             {
-                txtTaggedValueNames.Text = string.Join(",", _fr.tagValueNames);
+                txtTaggedValueNames.Text = string.Join(",", _fr.TagValueNames);
                 txtTaggedValueNames.Visible = true;
                 lblTaggedValues.Visible = true;
                 gridTags.Visible = true;
                 gridTags.DataSource = null;
                 gridTags.AutoGenerateColumns = false;
                 // load tags
-                gridTags.DataSource = _frItem.l_itemTag;
+                gridTags.DataSource = _frItem.LItemTag;
             }
             else
             {
@@ -72,27 +67,27 @@ namespace hoTools.Find
                 gridTags.Visible = false;
             }
 
-            txtState.Text = StateCurrentItem() + " found" ;
+            txtState.Text = StateCurrentItem() + @" found" ;
         }
         #endregion
         #region SaveItem
         private void SaveItem()
         {
-            FindAndReplaceItem frItem = _fr.l_items[_fr.Index];
+            FindAndReplaceItem frItem = _fr.LItems[_fr.Index];
             frItem.Name = rtfName.Text;
             frItem.Description = rtfNotes.Text.Replace("\n", "\r\n");
             frItem.Stereotype = rtfStereotype.Text;
-            if (frItem.isUpdated) chkIsChanged.Checked = true;
+            if (frItem.IsUpdated) chkIsChanged.Checked = true;
             else chkIsChanged.Checked = false;
-            frItem.save(_fr.rep, FindAndReplaceItem.FieldType.Description | FindAndReplaceItem.FieldType.Name | FindAndReplaceItem.FieldType.Stereotype);
+            frItem.Save(_fr.Rep, FindAndReplaceItem.FieldType.Description | FindAndReplaceItem.FieldType.Name | FindAndReplaceItem.FieldType.Stereotype);
             
             // tagged values for elements
-            if (_fr.isTagSearch && (gridTags != null) )
+            if (_fr.IsTagSearch && (gridTags != null) )
             {
 
-                foreach (FindAndReplaceItemTag tag in frItem.l_itemTag)
+                foreach (FindAndReplaceItemTag tag in frItem.LItemTag)
                 {
-                    tag.save();
+                    tag.Save();
                 }
             }
            
@@ -109,7 +104,7 @@ namespace hoTools.Find
         private void btnStore_Click(object sender, EventArgs e)
         {
             SaveItem();
-            txtState.Text = txtState.Text = StateCurrentItem() + " stored";
+            txtState.Text = txtState.Text = StateCurrentItem() + @" stored";
         }
         #endregion
         #region btnNext_Click
@@ -118,7 +113,7 @@ namespace hoTools.Find
             _fr.FindNext();
             _fr.LocateCurrentElement();
             ShowItem();
-            txtState.Text = StateCurrentItem() + " next found.";
+            txtState.Text = StateCurrentItem() + @" next found.";
         }
         #endregion
         #region btnPrevious_Click
@@ -127,28 +122,28 @@ namespace hoTools.Find
             _fr.FindPrevious();
             _fr.LocateCurrentElement();
             ShowItem();
-            txtState.Text = StateCurrentItem() + " previous found.";
+            txtState.Text = StateCurrentItem() + @" previous found.";
         }
         #endregion
         #region btnCancelAll_Click
         private void btnChangeAll_Click(object sender, EventArgs e)
         {
-            foreach (FindAndReplaceItem frItem in _fr.l_items)
+            foreach (FindAndReplaceItem frItem in _fr.LItems)
             {
                 frItem.Name = _fr.ChangeString(frItem.Name, txtTo.Text);
                 frItem.Description = _fr.ChangeString(frItem.Description, txtTo.Text);
-                frItem.save(_fr.rep, _fr.searchFieldType);
+                frItem.Save(_fr.Rep, _fr.searchFieldType);
             }
 
             ShowItem();
-            txtState.Text = StateCurrentItem() + " all found items changed.";
+            txtState.Text = StateCurrentItem() + @" all found items changed.";
         }
         #endregion
         #region btnChange_Click
         private void btnChange_Click(object sender, EventArgs e)
         {
             if (_fr.Index >= 0) { 
-                FindAndReplaceItem item = _fr.l_items[_fr.Index];
+                FindAndReplaceItem item = _fr.LItems[_fr.Index];
                 item.Name = _fr.ChangeString(item.Name,txtTo.Text);
                 item.Description = _fr.ChangeString(item.Description, txtTo.Text);
                 item.Stereotype = _fr.ChangeString(item.Stereotype, txtTo.Text);
@@ -158,21 +153,21 @@ namespace hoTools.Find
                 rtfStereotype.Text = item.Stereotype;
 
                 // 
-                if (_fr.isTagSearch && (gridTags != null) )
+                if (_fr.IsTagSearch && (gridTags != null) )
                 {
                     gridTags.DataSource = null;
                     //FindAndReplaceItemElement itemEl = (FindAndReplaceItemElement)item;
-                    foreach (FindAndReplaceItemTag tag in item.l_itemTag)
+                    foreach (FindAndReplaceItemTag tag in item.LItemTag)
                     {
                         tag.Value = _fr.ChangeString(tag.Value, txtTo.Text);
                     }
                     gridTags.AutoGenerateColumns = false;
-                    gridTags.DataSource = item.l_itemTag;
+                    gridTags.DataSource = item.LItemTag;
 
                 }
 
             }
-            txtState.Text = StateCurrentItem() + " changed temporary, store if you want it permanently.";
+            txtState.Text = StateCurrentItem() + @" changed temporary, store if you want it permanently.";
         }
         #endregion
       }

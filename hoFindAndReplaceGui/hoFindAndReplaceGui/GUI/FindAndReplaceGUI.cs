@@ -62,8 +62,8 @@ namespace hoTools.Find
         {
             if (txtFindString.Text.Length < 3)
             {
-                DialogResult result = MessageBox.Show("Yes=Continue",
-                                            "Short find string (<3 characters)", MessageBoxButtons.OKCancel);
+                DialogResult result = MessageBox.Show(@"Yes=Continue",
+                                            @"Short find string (<3 characters)", MessageBoxButtons.OKCancel);
                 if (result == DialogResult.Cancel) return;
             }
             EA.Package pkg = Repository.GetTreeSelectedPackage();
@@ -125,19 +125,19 @@ namespace hoTools.Find
         #region btnReplace
         private void btnReplace_Click(object sender, EventArgs e)
         {
-            if (_fr == null || _fr.l_items.Count == 0 )
+            if (_fr == null || _fr.LItems.Count == 0 )
             {
                 MessageBox.Show("Start search with 'Find'");
                 return;
             }
-            if (_fr.l_items[_fr.Index].isUpdated)
+            if (_fr.LItems[_fr.Index].IsUpdated)
             {
                 MessageBox.Show("Changes already done!");
                 return;
             }
             
             // update replace string
-            _fr.replaceString = txtReplaceString.Text;
+            _fr.ReplaceString = txtReplaceString.Text;
             if (txtReplaceString.Text.Trim() == "")
             {
                 DialogResult result = MessageBox.Show("", "Replace with string empty?", MessageBoxButtons.YesNo);
@@ -183,7 +183,7 @@ namespace hoTools.Find
             }
             _fr.ReplaceAll();
             txtStatus.Text = _fr.ItemShortDescription();
-            MessageBox.Show(String.Format("{0} items updated",_fr.l_items.Count),"All findings replaced");
+            MessageBox.Show(String.Format("{0} items updated",_fr.LItems.Count),"All findings replaced");
         }
 #endregion
         #region btnShow_Click

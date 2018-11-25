@@ -12,14 +12,14 @@ namespace hoTools.Find
         public  FindAndReplaceItemAttribute(EA.Repository rep, string GUID)  :base(rep, GUID)
         {
             this._attr = rep.GetAttributeByGuid(GUID);
-            this.load(rep);
+            this.Load(rep);
         }
         #endregion
         #region Property
         public EA.Attribute Attr => _attr;
         #endregion
         #region load
-        public override void load(EA.Repository rep)
+        public override void Load(EA.Repository rep)
         {
             _attr = rep.GetAttributeByGuid(GUID);
             _Name = _attr.Name;
@@ -29,7 +29,7 @@ namespace hoTools.Find
         }
         #endregion
         #region save
-        public override void save(EA.Repository rep, FindAndReplaceItem.FieldType fieldType)
+        public override void Save(EA.Repository rep, FindAndReplaceItem.FieldType fieldType)
         {
 
             if ((fieldType & FindAndReplaceItem.FieldType.Description) > 0)
@@ -43,12 +43,12 @@ namespace hoTools.Find
         }
         #endregion
         #region locate
-        public override void locate(EA.Repository rep)
+        public override void Locate(EA.Repository rep)
         {
             rep.ShowInProjectView(_attr);
         }
         #endregion
-        public override string getType() => "Attribute";
-        public override string getSubType() => "Attribute";
+        public override string GetSearchType() => "Attribute";
+        public override string GetSubType() => "Attribute";
     }
 }

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace hoTools.Find
+﻿namespace hoTools.Find
 {
     public class FindAndReplaceItemTag
     {
@@ -31,11 +26,11 @@ namespace hoTools.Find
 
         #endregion
         #region save
-        public virtual void save() { return; }
+        public virtual void Save() { }
         #endregion
         #region load
-        public virtual void load() { return; }
-        protected void load(string name, string value)
+        public virtual void Load() { }
+        protected void Load(string name, string value)
         {
             _name = name;
             _value = value;
@@ -59,17 +54,16 @@ namespace hoTools.Find
             set { _tag = value; }
         }
         #endregion
-        #region load
-        public override void load()
+        #region Load
+        public override void Load()
         {
-            load(_tag.Name, _tag.Value);
+            Load(_tag.Name, _tag.Value);
         }
         #endregion
         #region save
-        public override void save()
+        public override void Save()
         {
-            _tag.Value = this._value;
-            _tag.Update();
+            Utils.TaggedValue.SetTaggedValue(_tag,_value);
         }
         #endregion
     }
@@ -89,14 +83,14 @@ namespace hoTools.Find
             set { _tag = value; }
         }
         #endregion
-        #region load
-        public override void load()
+        #region Load
+        public override void Load()
         {
             
         }
         #endregion
         #region save
-        public override void save()
+        public override void Save()
         {
             _tag.Value = Value;
             _tag.Update();
@@ -120,14 +114,14 @@ namespace hoTools.Find
             set { _tag = value; }
         }
         #endregion
-        #region load
-        public override void load()
+        #region lLoad
+        public override void Load()
         {
             
         }
         #endregion
-        #region save
-        public override void save()
+        #region Save
+        public override void Save()
         {
             _tag.Value = Value;
             _tag.Update();
@@ -139,7 +133,7 @@ namespace hoTools.Find
         private EA.TaggedValue _tag;
         #region Constructor
         public FindAndReplaceItemTagPackage(EA.TaggedValue tag)
-            : base(tag.Name, tag.Value)
+            : base(tag.Name, Utils.TaggedValue.GetTaggedValue(tag))
         {
             _tag = tag;
         }
@@ -147,18 +141,18 @@ namespace hoTools.Find
         #region Properties
         public EA.TaggedValue Tag
         {
-            get { return _tag; }
-            set { _tag = value; }
+            get => _tag;
+            set => _tag = value;
         }
         #endregion
-        #region load
-        public override void load()
+        #region Load
+        public override void Load()
         {
 
         }
         #endregion
-        #region save
-        public override void save()
+        #region Save
+        public override void Save()
         {
             _tag.Value = Value;
             _tag.Update();

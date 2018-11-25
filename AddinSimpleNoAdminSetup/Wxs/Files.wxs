@@ -154,7 +154,7 @@
       </Component>
       <!-- HtmlAgilityPack -->
       <Component Id="HtmlAgilityPack.dll" Guid="{70C34202-0279-44B9-9B4F-9E55D37D8822}">
-        <File Id="HtmlAgilityPack.dll" KeyPath="yes" Name="HtmlAgilityPack.dll" Source="..\packages\HtmlAgilityPack.1.8.6\lib\Net45\HtmlAgilityPack.dll" />
+        <File Id="HtmlAgilityPack.dll" KeyPath="yes" Name="HtmlAgilityPack.dll" Source="..\packages\HtmlAgilityPack.1.8.10\lib\Net45\HtmlAgilityPack.dll" />
       </Component>
     </ComponentGroup>
   </Fragment>

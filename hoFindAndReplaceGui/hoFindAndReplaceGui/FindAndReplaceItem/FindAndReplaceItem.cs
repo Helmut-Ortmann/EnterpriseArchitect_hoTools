@@ -9,7 +9,7 @@ namespace hoTools.Find
     #endregion
     public class FindAndReplaceItem
     {
-        protected string _GUID;
+        protected string Guid;
         protected string _Name;
         protected string _Description;
         protected string _Stereotype; // from .Sterotype.Ex
@@ -39,7 +39,7 @@ namespace hoTools.Find
             string Stereotype,
             int CountChanges)
         {
-            _GUID = GUID;
+            Guid = GUID;
             _Name = Name;
             _Description = Description;
             _Stereotype = Stereotype;
@@ -48,14 +48,14 @@ namespace hoTools.Find
         }
         public FindAndReplaceItem( EA.Repository rep, string GUID)
         {
-            _GUID = GUID;
+            Guid = GUID;
             _countChanges = 0;
             _isUpdated = false;
 
         }
         #endregion
         #region Properties
-        public string GUID => _GUID;
+        public string GUID => Guid;
         public string Name
         {
             get { return _Name; }
@@ -72,7 +72,7 @@ namespace hoTools.Find
             set { _Stereotype = value; }
         }
 
-        public List<FindAndReplaceItemTag> l_itemTag => _l_itemTag;
+        public List<FindAndReplaceItemTag> LItemTag => _l_itemTag;
 
         public int CountChanges
         {
@@ -80,7 +80,7 @@ namespace hoTools.Find
             set { _countChanges = value; }
         }
        
-        public bool isUpdated
+        public bool IsUpdated
         {
             get { return _isUpdated; }
             set { _isUpdated = value; }
@@ -90,14 +90,14 @@ namespace hoTools.Find
         public int findCount(Regex regExPattern, FieldType fieldType)
         {
             int count = 0;
-            if ( (fieldType & FieldType.Name) >0 )  count = count + findCountForType(regExPattern, _Name);
-            if ( (fieldType & FieldType.Description) > 0)  count = count + findCountForType(regExPattern, _Description);
-            if ((fieldType & FieldType.Stereotype) > 0) count = count + findCountForType(regExPattern, _Stereotype);
+            if ( (fieldType & FieldType.Name) >0 )  count = count + FindCountForType(regExPattern, _Name);
+            if ( (fieldType & FieldType.Description) > 0)  count = count + FindCountForType(regExPattern, _Description);
+            if ((fieldType & FieldType.Stereotype) > 0) count = count + FindCountForType(regExPattern, _Stereotype);
             return count;
         }
         #endregion 
         #region findCountForType
-        public static int findCountForType(Regex regExPattern, string value)
+        public static int FindCountForType(Regex regExPattern, string value)
         {
             int count = 0;
             Match match = regExPattern.Match(value);
@@ -117,36 +117,36 @@ namespace hoTools.Find
 
             string stereotype = "";
             if (_Stereotype != "") stereotype = "<<" +_Stereotype + ">>"; 
-            return String.Format("{4} '{0}:{1}'{2} {3} changes in item found ", getSubType(), _Name, stereotype,  _countChanges, isUpdated);
+            return String.Format("{4} '{0}:{1}'{2} {3} changes in item found ", GetSubType(), _Name, stereotype,  _countChanges, isUpdated);
 
         }
         #endregion
-        public virtual void locate(EA.Repository rep) {}
-        public virtual void load(EA.Repository rep){}
-        public virtual void save(EA.Repository rep, FieldType fieldType) {}
-        public virtual string getType() => "unknown";
-        public virtual string getSubType() => "unknown";
+        public virtual void Locate(EA.Repository rep) {}
+        public virtual void Load(EA.Repository rep){}
+        public virtual void Save(EA.Repository rep, FieldType fieldType) {}
+        public virtual string GetSearchType() => "unknown";
+        public virtual string GetSubType() => "unknown";
 
 
         #region static Factory
-        public static FindAndReplaceItem Factory(EA.Repository rep, EA.ObjectType objectType, string GUID)
+        public static FindAndReplaceItem Factory(EA.Repository rep, EA.ObjectType objectType, string guid)
         {
             switch (objectType)
             {
                 case EA.ObjectType.otPackage:
-                    return new FindAndReplaceItemPackage(rep, GUID);
+                    return new FindAndReplaceItemPackage(rep, guid);
 
                 case EA.ObjectType.otElement:
-                    return new FindAndReplaceItemElement(rep, GUID);
+                    return new FindAndReplaceItemElement(rep, guid);
 
                 case EA.ObjectType.otDiagram:
-                    return new FindAndReplaceItemDiagram(rep, GUID);
+                    return new FindAndReplaceItemDiagram(rep, guid);
 
                 case EA.ObjectType.otAttribute:
-                    return new FindAndReplaceItemAttribute(rep, GUID);
+                    return new FindAndReplaceItemAttribute(rep, guid);
 
                 case EA.ObjectType.otMethod:
-                    return new FindAndReplaceItemMethod(rep, GUID);
+                    return new FindAndReplaceItemMethod(rep, guid);
 
                 default: return null;
             }

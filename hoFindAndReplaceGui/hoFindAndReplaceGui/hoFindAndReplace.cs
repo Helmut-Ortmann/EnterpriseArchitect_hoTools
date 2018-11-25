@@ -10,8 +10,8 @@ namespace hoTools.Find
     {
         EA.Repository _rep;
          EA.Package _pkg;
-         string _findString = "";
-         string _replaceString = "";
+         string _findString;
+         string _replaceString;
          string[] _taggedValueNames;
         readonly bool _isRegularExpression;
         readonly bool _isCaseSensitive;
@@ -24,7 +24,7 @@ namespace hoTools.Find
         readonly bool _isOperationSearch;
         readonly bool _isTagSearch;
          Regex _regExPattern;
-         int _index = -1;
+         int _index;
 
         // list of all items with loaded values, expected changes and values as loaded
         private readonly List<FindAndReplaceItem> _lItems = new List<FindAndReplaceItem>();
@@ -53,7 +53,7 @@ namespace hoTools.Find
             
             // tagged value names
             string s = taggedValueNames.Replace(' ',','); // remove blanks
-            _taggedValueNames = s.Split(new Char[] { ',', ';',':',' ' }, System.StringSplitOptions.RemoveEmptyEntries);
+            _taggedValueNames = s.Split(new Char[] { ',', ';',' ' }, System.StringSplitOptions.RemoveEmptyEntries);
 
 
             _isPackageSearch = isPackageSearch;
@@ -69,23 +69,23 @@ namespace hoTools.Find
         }
         #endregion
         #region Properties
-        public string[] tagValueNames
+        public string[] TagValueNames
         {
             get { return _taggedValueNames; }
             set { _taggedValueNames = value; }
         }
-        public EA.Repository rep
+        public EA.Repository Rep
         {
             get { return _rep; }
             set { _rep = value; }
         }
-        public EA.Package pkg
+        public EA.Package Pkg
         {
             get { return _pkg; }
             set { _pkg = value; }
         }
-        public List<FindAndReplaceItem> l_items => _lItems;
-        public string findString
+        public List<FindAndReplaceItem> LItems => _lItems;
+        public string FindString
         {
             get { return _findString; }
             set { _findString = value;
@@ -93,7 +93,7 @@ namespace hoTools.Find
             }
         }
       
-        public string replaceString
+        public string ReplaceString
         {
             get { return _replaceString; }
             set
@@ -105,18 +105,18 @@ namespace hoTools.Find
                 }
             }
         }
-        public Regex regexPattern => _regExPattern;
-        public bool isCaseSensitive => _isCaseSensitive;
-        public bool isIgnoreWhiteSpace => _isIgnoreWhiteSpace;
-        public bool isRegularExpression => _isRegularExpression;
+        public Regex RegexPattern => _regExPattern;
+        public bool IsCaseSensitive => _isCaseSensitive;
+        public bool IsIgnoreWhiteSpace => _isIgnoreWhiteSpace;
+        public bool IsRegularExpression => _isRegularExpression;
         public FindAndReplaceItem.FieldType searchFieldType => _searchFieldTypes;
 
-        public bool isPackageSearch => _isPackageSearch;
-        public bool isElementSearch => _isElementSearch;
-        public bool isDiagramSearch => _isDiagramSearch;
-        public bool isAttributeSearch => _isAttributeSearch;
-        public bool isOperationSearch => _isOperationSearch;
-        public bool isTagSearch => _isTagSearch;
+        public bool IsPackageSearch => _isPackageSearch;
+        public bool IsElementSearch => _isElementSearch;
+        public bool IsDiagramSearch => _isDiagramSearch;
+        public bool IsAttributeSearch => _isAttributeSearch;
+        public bool IsOperationSearch => _isOperationSearch;
+        public bool IsTagSearch => _isTagSearch;
         public int Index => _index;
         #endregion
         #region FindInPackageRecursive
@@ -128,7 +128,7 @@ namespace hoTools.Find
         public void FindInPackageRecursive()
         {
             _index = -1;
-            RecursivePackageFind.doRecursivePkg(_rep, _pkg,  this);
+            RecursivePackageFind.DoRecursivePkg(_rep, _pkg,  this);
             if (_lItems.Count > 0) {_index = 0;}
             //else {MessageBox.Show("No found element", String.Format("{0} elements found", _l_items.Count));}
         }
@@ -139,14 +139,14 @@ namespace hoTools.Find
             if (_lItems.Count == 0)
             {
                 _index = -1;
-                MessageBox.Show("No found element", String.Format("{0} elements found", _lItems.Count));
+                MessageBox.Show(@"No found element", $@"{_lItems.Count} elements found");
                 return;
             }
             _index = _index + 1;
             if (_index >= _lItems.Count)
             {
                 _index = _lItems.Count - 1;
-                MessageBox.Show("Last element found", String.Format("{0} elements found", _lItems.Count));
+                MessageBox.Show(@"Last element found", $@"{_lItems.Count} elements found");
             }
         }
         #endregion
@@ -156,14 +156,14 @@ namespace hoTools.Find
             if (_lItems.Count == 0)
             {
                 _index = -1;
-                MessageBox.Show("No found element", String.Format("{0} elements found", _lItems.Count));
+                MessageBox.Show(@"No found element", $@"{_lItems.Count} elements found");
                 return;
             }
             _index = _index - 1;
             if (_index < 0)
             {
                 _index = 0;
-                MessageBox.Show("First element found", String.Format("{0} elements found", _lItems.Count));
+                MessageBox.Show(@"First element found", $@"{_lItems.Count} elements found");
             }
             
         }
@@ -173,30 +173,28 @@ namespace hoTools.Find
         {
             if (_index < 0)
             {
-                MessageBox.Show("Nothing found beneath selected package (recursive)", "No search results");
-                return;
+                MessageBox.Show(@"Nothing found beneath selected package (recursive)", @"No search results");
             }
             else
             {
                 FindAndReplaceItem frItem = _lItems[_index];
-                frItem.locate(_rep);
+                frItem.Locate(_rep);
             }
         }
         #endregion
         #region currentItem
-        public FindAndReplaceItem currentItem() 
+        public FindAndReplaceItem CurrentItem() 
         {
-            if (this._index == 0) return null;
-            return this._lItems[_index];
+            if (_index == 0) return null;
+            return _lItems[_index];
         }
         #endregion
-        #region lastItem
-        public FindAndReplaceItem lastItem()
+
+        public FindAndReplaceItem LastItem()
         {
-            if (l_items.Count == 0 ) return null;
-            return l_items[l_items.Count-1];
+            if (LItems.Count == 0 ) return null;
+            return LItems[LItems.Count-1];
         }
-        #endregion
 
         #region Replaceitem
         /// <summary>
@@ -206,7 +204,7 @@ namespace hoTools.Find
         {
             if (_index < 0) return 0;
             FindAndReplaceItem item = _lItems[_index];// get item
-            item.load(_rep);
+            item.Load(_rep);
             
             // search for name
             if ((_searchFieldTypes & FindAndReplaceItem.FieldType.Name) > 0)
@@ -231,15 +229,15 @@ namespace hoTools.Find
 
             if ((_searchFieldTypes & FindAndReplaceItem.FieldType.Tag) > 0 )
             {
-                foreach (FindAndReplaceItemTag tag in item.l_itemTag)
+                foreach (FindAndReplaceItemTag tag in item.LItemTag)
                 {
                        tag.Value = ChangeString(tag.Value);
-                       tag.save();
+                       tag.Save();
                 }
             }
 
             // set to changed
-            item.save(_rep, _searchFieldTypes);
+            item.Save(_rep, _searchFieldTypes);
             return item.CountChanges;
             
 
@@ -255,7 +253,7 @@ namespace hoTools.Find
             {
                 _index = i;
                 // already changed
-                if (_lItems[_index].isUpdated) continue;
+                if (_lItems[_index].IsUpdated) continue;
                 ReplaceItem();
                 LocateCurrentElement();
 
@@ -342,20 +340,16 @@ namespace hoTools.Find
         /// - update item to l_items if item is already available
         /// 
         /// </summary>
-        /// <param name="object_type"></param>
-        /// <param name="GUID"></param>
-        public int FindStringInItem(EA.ObjectType object_type, string GUID)
+        /// <param name="objectType"></param>
+        /// <param name="guid"></param>
+        public int FindStringInItem(EA.ObjectType objectType, string guid)
         {
-            int count = 0;
-            FindAndReplaceItem    frItem = null;
-            
-           
-            frItem = FindAndReplaceItem.Factory(_rep, object_type, GUID);
-            count = frItem.findCount(_regExPattern, _searchFieldTypes);
+            var frItem = FindAndReplaceItem.Factory(_rep, objectType, guid);
+            var count = frItem.findCount(_regExPattern, _searchFieldTypes);
             if (count > 0)
             {
                 frItem.CountChanges = count;
-                this.l_items.Add(frItem);
+                LItems.Add(frItem);
             }
            
             return count;
@@ -369,8 +363,8 @@ namespace hoTools.Find
         /// <returns></returns>
         private Regex PrepareRegexp()
         {
-            string regPattern = this.findString;
-            if (this.isRegularExpression == false)
+            string regPattern = FindString;
+            if (IsRegularExpression == false)
             {
                 regPattern = regPattern.Replace(".", "\\.");
                 regPattern = regPattern.Replace("+", "\\+");
@@ -385,8 +379,8 @@ namespace hoTools.Find
                 regPattern = regPattern.Replace(")", "\\)");
             }
             RegexOptions options = RegexOptions.Multiline;
-            if (this.isIgnoreWhiteSpace) options = options | RegexOptions.IgnorePatternWhitespace;
-            if (this.isCaseSensitive == false) options = options | RegexOptions.IgnoreCase;
+            if (IsIgnoreWhiteSpace) options = options | RegexOptions.IgnorePatternWhitespace;
+            if (IsCaseSensitive == false) options = options | RegexOptions.IgnoreCase;
             return new Regex(regPattern, options);
         }
         #endregion

@@ -16,7 +16,7 @@ namespace hoTools.Utils.Diagram
         }
 
         /// <summary>
-        /// Set all properties
+        /// Set all properties, a property might be empty to not change the value
         /// </summary>
         public void SetProperties(bool withSql = false)
         {
@@ -24,6 +24,7 @@ namespace hoTools.Utils.Diagram
             foreach (var p in Property)
             {
                 string property = p.Trim().ToLower();
+                // Check if Property has something to change
                 if (!GetNameValueFromString(property, out string name, out string value)) continue;
 
                 if (!withSql)

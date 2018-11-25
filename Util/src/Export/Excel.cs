@@ -47,7 +47,7 @@ namespace hoTools.Utils.Export
             }
             catch (Exception e)
             {
-                MessageBox.Show($"Seperator:'{separator}'\r\n {e.Message}", @"Cant't convert file content to Excel");
+                MessageBox.Show($@"Separator:'{separator}'\r\n {e.Message}", @"Cannot convert file content to Excel");
                 return null;
             }
             
@@ -87,7 +87,7 @@ namespace hoTools.Utils.Export
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show($"Seperator:'{separator}'\r\n {e.Message}","Cant't convert Clipboard content to Excel");
+                    MessageBox.Show($@"Separator:'{separator}'\r\n {e.Message}",@"Cant't convert Clipboard content to Excel");
                     return false;
                 }
             }
@@ -143,7 +143,9 @@ namespace hoTools.Utils.Export
             catch (Exception e)
             {
                 Cursor.Current = Cursors.Default;
-                MessageBox.Show($"Error {e.Message}\r\n{e.Source}");
+                MessageBox.Show($@"Error {e.Message} 
+
+Module: {e.Source}");
                 return false;
             }
         }
@@ -179,7 +181,7 @@ namespace hoTools.Utils.Export
         {
             Cursor.Current = Cursors.Default;
             var ret = MessageBox.Show($"Excel File '{fileName}' with {dt.Rows.Count} rows and {dt.Columns.Count} column created!\r\n\r\nYes: Open Excel File\r\nNo: Open Folder\r\nCancel: Do nothing",
-                "Excel File created!", MessageBoxButtons.YesNoCancel);
+                @"Excel File created!", MessageBoxButtons.YesNoCancel);
             switch (ret)
             {
                 case DialogResult.Yes:

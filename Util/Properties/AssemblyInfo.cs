@@ -33,8 +33,8 @@ using System.Runtime.InteropServices;
 //[assembly: AssemblyVersion("1.2.*")] // this will cause the registration to change after every build
 
 // No COM dll, therefore you can change version as you like without considering a changed COM registration 
-[assembly: AssemblyVersion("3.2.9")]
+[assembly: AssemblyVersion("3.2.13")]
 // possibly make same as ProductVersion in Product.wxs
-[assembly: AssemblyFileVersion("3.2.9")]
+[assembly: AssemblyFileVersion("3.2.13")]
 [assembly: NeutralResourcesLanguage("en")]
 

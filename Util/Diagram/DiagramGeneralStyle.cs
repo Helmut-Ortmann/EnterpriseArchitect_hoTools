@@ -35,13 +35,13 @@ namespace hoTools.Utils.Diagram
                 var layoutStyleValue = UtilSql.GetListOfStringFromSql(Rep, sql, "STYLE");
                 if (layoutStyleValue.Count == 0)
                 {
-                    MessageBox.Show($"EA Text Style '{layoutStyleName}' not available in EA.", $"Can't read EA Text Style '{layoutStyleName}'.");
+                    MessageBox.Show($@"EA Text Style '{layoutStyleName}' not available in EA.", $@"Can't read EA Text Style '{layoutStyleName}'.");
                 }
                 if (layoutStyleValue.Count > 1)
                 {
                     MessageBox.Show(
-                        $"EA Text Style '{EaLayoutStyle}'\r\nCount: {layoutStyleValue.Count}. EA Text styles are a little tricky with names! Check list box of styles in EA!",
-                        $"More than one srtyle with name '{layoutStyleName}'.");
+                        $@"EA Text Style '{EaLayoutStyle}'\r\nCount: {layoutStyleValue.Count}. EA Text styles are a little tricky with names! Check list box of styles in EA!",
+                        $@"More than one style with name '{layoutStyleName}'.");
                 }
                 EaLayoutStyle = layoutStyleValue[0].Split(';');
             }
@@ -49,14 +49,15 @@ namespace hoTools.Utils.Diagram
         }
 
         /// <summary>
-        /// Get value from string: Name=Value; extracts name and value. You can change the default delimiter "=" to whatever character you like
+        /// Get value from string: Name=Value; extracts name and value. You can change the default delimiter "=" to whatever character you like.
+        /// It returns 'false' if no property found.
         /// </summary>
         /// <param name="myString"></param>
         /// <param name="name"></param>
         /// <param name="value"></param>
         /// <param name="delimiter"></param>
         /// <param name="checkCount"></param>
-        /// <returns></returns>
+        /// <returns>Ttrue Property found, false: no property found</returns>
         protected static bool GetNameValueFromString(string myString, out string name, out string value, char delimiter='=', bool checkCount=true)
         {
 
@@ -127,8 +128,8 @@ Edit Setting.json:
             }
 
 
-            MessageBox.Show($"Value '{value}' of Style/Property '{name}' must be Integer or Hexadecimal (e.g. 0xFA or #FA)",
-                "Invalid Integer/Hexa Style/Property in Settings.json");
+            MessageBox.Show($@"Value '{value}' of Style/Property '{name}' must be Integer or Hexadecimal (e.g. 0xFA or #FA)",
+                @"Invalid Integer/Hexa Style/Property in Settings.json");
             return false;
         }
         protected static bool ConvertBool(string name, string value, out bool boolValue)
@@ -136,8 +137,8 @@ Edit Setting.json:
             // ReSharper disable once RedundantAssignment
             boolValue = false;
             if (Boolean.TryParse(value.Trim(), out boolValue)) return true;
-            MessageBox.Show($"Value '{value}' of Style/Property '{name}' must be Boolean",
-                "Invalid Boolean Style/Property in Settings.json");
+            MessageBox.Show($@"Value '{value}' of Style/Property '{name}' must be Boolean",
+                @"Invalid Boolean Style/Property in Settings.json");
             return false;
         }
 

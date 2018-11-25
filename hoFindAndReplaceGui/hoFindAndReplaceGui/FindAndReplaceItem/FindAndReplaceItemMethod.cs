@@ -12,7 +12,7 @@ namespace hoTools.Find
         public  FindAndReplaceItemMethod(EA.Repository rep, string GUID)  :base(rep, GUID)
         {
             this._meth = rep.GetMethodByGuid(GUID);
-            this.load(rep);
+            this.Load(rep);
         }
         #endregion
         #region Property
@@ -23,7 +23,7 @@ namespace hoTools.Find
         //}
         #endregion
         #region load
-        public override void load(EA.Repository rep)
+        public override void Load(EA.Repository rep)
         {
 
             _Name = _meth.Name;
@@ -33,7 +33,7 @@ namespace hoTools.Find
         }
         #endregion
         #region save
-        public override void save(EA.Repository rep, FindAndReplaceItem.FieldType fieldType)
+        public override void Save(EA.Repository rep, FindAndReplaceItem.FieldType fieldType)
         {
             EA.Method meth = rep.GetMethodByGuid(GUID);
             if ((fieldType & FindAndReplaceItem.FieldType.Description) > 0)
@@ -47,12 +47,12 @@ namespace hoTools.Find
         }
         #endregion
         #region locate
-        public override void locate(EA.Repository rep)
+        public override void Locate(EA.Repository rep)
         {
             rep.ShowInProjectView(_meth);
         }
         #endregion
-        public override string getType() => "Method";
-        public override string getSubType() => "Method";
+        public override string GetSearchType() => "Method";
+        public override string GetSubType() => "Method";
     }
 }
