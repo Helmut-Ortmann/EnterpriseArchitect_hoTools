@@ -17,6 +17,24 @@ namespace hoTools.Utils
         {
             return tg.Value == MemoString ? tg.Notes : tg.Value;
         }
+        /// <summary>
+        /// Get the value of an element tagged value. It handles Memo field with a lang of > 255
+        /// </summary>
+        /// <param name="tg"></param>
+        /// <returns></returns>
+        public static string GetTaggedValue(EA.AttributeTag tg)
+        {
+            return tg.Value == MemoString ? tg.Notes : tg.Value;
+        }
+        /// <summary>
+        /// Get the value of an element tagged value. It handles Memo field with a lang of > 255
+        /// </summary>
+        /// <param name="tg"></param>
+        /// <returns></returns>
+        public static string GetTaggedValue(EA.MethodTag tg)
+        {
+            return tg.Value == MemoString ? tg.Notes : tg.Value;
+        }
 
         /// <summary>
         /// Check if the tagged value exists
@@ -167,7 +185,7 @@ namespace hoTools.Utils
 
             EA.TaggedValue tg = Add(el, name);
             string value = tg.Value;
-            if (value.ToLower() == "<memo>") return tg;
+            if (value.ToLower() == MemoString) return tg;
             tg.Value = MemoString;
             tg.Notes = value;
             tg.Update();
@@ -365,6 +383,30 @@ namespace hoTools.Utils
         /// <param name="value"></param>
         /// <returns></returns>
         public static void SetTaggedValue(EA.TaggedValue tag, string value)
+        {
+            tag.Value = value.Length > 255 ? MemoString : value;
+            tag.Notes = value;
+            tag.Update();
+        }
+        /// <summary>
+        /// Set Tagged Value with 'Name' to a value. It handles long memo fields.
+        /// </summary>
+        /// <param name="tag"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static void SetTaggedValue(EA.AttributeTag tag, string value)
+        {
+            tag.Value = value.Length > 255 ? MemoString : value;
+            tag.Notes = value;
+            tag.Update();
+        }
+        /// <summary>
+        /// Set Tagged Value with 'Name' to a value. It handles long memo fields.
+        /// </summary>
+        /// <param name="tag"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static void SetTaggedValue(EA.MethodTag tag, string value)
         {
             tag.Value = value.Length > 255 ? MemoString : value;
             tag.Notes = value;

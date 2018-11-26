@@ -170,5 +170,21 @@ namespace hoTools.Find
             txtState.Text = StateCurrentItem() + @" changed temporary, store if you want it permanently.";
         }
         #endregion
-      }
+        private void ChangeItem(FindAndReplaceItem item)
+        {
+            item.Name = _fr.ChangeString(item.Name, txtTo.Text);
+            item.Description = _fr.ChangeString(item.Description, txtTo.Text);
+            item.Stereotype = _fr.ChangeString(item.Stereotype, txtTo.Text);
+
+            if (_fr.IsTagSearch && (gridTags != null))
+            {
+                foreach (FindAndReplaceItemTag itemTag in item.LItemTag)
+                {
+                    itemTag.Value = _fr.ChangeString(itemTag.Value, txtTo.Text);
+                }
+            }
+
+        }
+    }
+   
 }

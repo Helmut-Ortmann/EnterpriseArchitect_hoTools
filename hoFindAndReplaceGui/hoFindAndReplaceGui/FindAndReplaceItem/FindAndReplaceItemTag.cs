@@ -1,9 +1,12 @@
 ﻿namespace hoTools.Find
 {
+    /// <summary>
+    /// SearchReplace item with all possible values to change in it.
+    /// </summary>
     public class FindAndReplaceItemTag
     {
-        protected string _name ;
-        protected string _value;
+        private string _name ;
+        private string _value;
         #region Constructor
         public FindAndReplaceItemTag(string name, string value)
         {
@@ -14,13 +17,13 @@
         #region Properties
         public string Name
         {
-            get { return _name; }
-            set { _name = value; }
+            get => _name;
+            set => _name = value;
         }
         public string Value
         {
-            get { return _value; }
-            set { _value = value; }
+            get => _value;
+            set => _value = value;
         }
     
 
@@ -42,7 +45,7 @@
     {
         private EA.TaggedValue _tag ;
         #region Constructor
-        public FindAndReplaceItemTagElement(EA.TaggedValue tag) :base(tag.Name, tag.Value)
+        public FindAndReplaceItemTagElement(EA.TaggedValue tag) :base(tag.Name, Utils.TaggedValue.GetTaggedValue(tag))
         {
             _tag = tag;
         }
@@ -63,7 +66,7 @@
         #region save
         public override void Save()
         {
-            Utils.TaggedValue.SetTaggedValue(_tag,_value);
+            Utils.TaggedValue.SetTaggedValue(_tag,Value);
         }
         #endregion
     }
@@ -71,7 +74,7 @@
     {
         EA.AttributeTag _tag;
         #region Constructor
-        public FindAndReplaceItemTagAttribute(EA.AttributeTag tag) :base(tag.Name, tag.Value)
+        public FindAndReplaceItemTagAttribute(EA.AttributeTag tag) :base(tag.Name, Utils.TaggedValue.GetTaggedValue(tag))
         {
             _tag = tag;
         }

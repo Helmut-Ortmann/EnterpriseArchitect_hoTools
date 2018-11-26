@@ -107,13 +107,14 @@ namespace hoTools.Find
                     if (count > 0)
                     {
                         FindAndReplaceItem frItem = fr.LastItem();
-                        if ((frItem == null) || (frItem.GUID != el.ElementGUID))
+                        if ((frItem == null) || (frItem.Guid != el.ElementGUID))
                         {
                             frItem = FindAndReplaceItem.Factory(rep, EA.ObjectType.otElement, el.ElementGUID);
                             fr.LItems.Add(frItem);
 
 
                         }
+                        // find tagged value
                         var frItemEl = (FindAndReplaceItemElement)frItem;
                         frItemEl.LItemTag.Add(new FindAndReplaceItemTagElement(tag));
                         frItemEl.CountChanges = frItemEl.CountChanges + count;
@@ -145,7 +146,7 @@ namespace hoTools.Find
                     {
                         // Create the searchers
                         FindAndReplaceItem frItem = fr.LastItem();
-                        if ((frItem == null) || (frItem.GUID != el.ElementGUID))
+                        if ((frItem == null) || (frItem.Guid != el.ElementGUID))
                         {
                             frItem = FindAndReplaceItem.Factory(rep, EA.ObjectType.otPackage, el.ElementGUID);
                             fr.LItems.Add(frItem);
@@ -182,14 +183,14 @@ namespace hoTools.Find
                     if (count > 0)
                     {
                         FindAndReplaceItem frItem = fr.LastItem();
-                        if ((frItem == null) || (frItem.GUID != attr.AttributeGUID))
+                        if ((frItem == null) || (frItem.Guid != attr.AttributeGUID))
                         {
                             frItem = FindAndReplaceItem.Factory(rep, EA.ObjectType.otAttribute, attr.AttributeGUID);
                             fr.LItems.Add(frItem);
 
 
                         }
-
+                        // find tagged value
                         var frItemAttr = (FindAndReplaceItemAttribute)frItem;
                         frItemAttr.LItemTag.Add(new FindAndReplaceItemTagAttribute(tag));
                         frItemAttr.CountChanges = frItemAttr.CountChanges + count;
@@ -218,7 +219,7 @@ namespace hoTools.Find
                     if (count > 0)
                     {
                         FindAndReplaceItem frItem = fr.LastItem();
-                        if ((frItem == null) || (frItem.GUID != method.MethodGUID))
+                        if ((frItem == null) || (frItem.Guid != method.MethodGUID))
                         {
                             frItem = FindAndReplaceItem.Factory(rep, EA.ObjectType.otMethod, method.MethodGUID);
                             fr.LItems.Add(frItem);

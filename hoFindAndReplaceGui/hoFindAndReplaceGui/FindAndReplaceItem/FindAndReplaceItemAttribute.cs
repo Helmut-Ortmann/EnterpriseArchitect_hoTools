@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace hoTools.Find
+﻿namespace hoTools.Find
 {
     class FindAndReplaceItemAttribute : FindAndReplaceItem
     {
         EA.Attribute _attr ;
         #region Constructor
-        public  FindAndReplaceItemAttribute(EA.Repository rep, string GUID)  :base(rep, GUID)
+        public  FindAndReplaceItemAttribute(EA.Repository rep, string guid)  :base(rep, guid)
         {
-            this._attr = rep.GetAttributeByGuid(GUID);
-            this.Load(rep);
+            _attr = rep.GetAttributeByGuid(guid);
+            Load(rep);
         }
         #endregion
         #region Property
@@ -21,28 +16,28 @@ namespace hoTools.Find
         #region load
         public override void Load(EA.Repository rep)
         {
-            _attr = rep.GetAttributeByGuid(GUID);
-            _Name = _attr.Name;
-            _Description = _attr.Notes;
-            _Stereotype = _attr.StereotypeEx;
+            _attr = rep.GetAttributeByGuid(Guid);
+            Name = _attr.Name;
+            Description = _attr.Notes;
+            Stereotype = _attr.StereotypeEx;
          
         }
         #endregion
-        #region save
+        #region Save
         public override void Save(EA.Repository rep, FindAndReplaceItem.FieldType fieldType)
         {
 
             if ((fieldType & FindAndReplaceItem.FieldType.Description) > 0)
-            { _attr.Notes = _Description; }
+            { _attr.Notes = Description; }
             if ((fieldType & FindAndReplaceItem.FieldType.Stereotype) > 0)
-            { _attr.StereotypeEx = _Stereotype; }
+            { _attr.StereotypeEx = Stereotype; }
             if ((fieldType & FindAndReplaceItem.FieldType.Name) > 0)
-            {   _attr.Name = _Name; }
-            _isUpdated = true;
+            {   _attr.Name = Name; }
+            IsUpdated = true;
             _attr.Update();
         }
         #endregion
-        #region locate
+        #region Locate
         public override void Locate(EA.Repository rep)
         {
             rep.ShowInProjectView(_attr);

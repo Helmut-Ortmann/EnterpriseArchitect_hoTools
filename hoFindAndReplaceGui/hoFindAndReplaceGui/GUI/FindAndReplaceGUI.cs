@@ -16,14 +16,19 @@ namespace hoTools.Find
     [ComVisible(true)]
     [ClassInterface(ClassInterfaceType.None)]
     [Guid("2703ED16-2C93-4B13-83DC-F72FB6EDBA9E")]
-    [ProgId(PROGID)]
+    [ProgId(ProgId)]
     [ComDefaultInterface(typeof(IFindAndReplaceGUI))]
 
     public partial class FindAndReplaceGUI : AddinGui, IFindAndReplaceGUI
     {
-        public const string PROGID = "hoTools.FindAndReplaceGUI";
-        public const string TABULATOR = "Find";
+        public const string ProgId = "hoTools.FindAndReplaceGUI";
+        public const string Tabulator = "Find";
 
+        /// <summary>
+        /// Definition of the Search & Replace contract. It contains all the find items to replace.
+        /// See: <see cref="FindAndReplace"/>
+        /// <see cref="FindAndReplace"/>
+        /// </summary>
         FindAndReplace _fr ;
 
 
@@ -40,7 +45,7 @@ namespace hoTools.Find
             chkDiagram.Checked = true;
             txtStatus.Text = "";
 
-            activateFindChangeParameters(true);
+            ActivateFindChangeParameters(true);
 
 
         }
@@ -81,7 +86,7 @@ namespace hoTools.Find
             if (_fr.Index >= 0)
             {
                 txtStatus.Text = _fr.ItemShortDescription();
-                activateFindChangeParameters(false);
+                ActivateFindChangeParameters(false);
             }
 
         }
@@ -91,7 +96,7 @@ namespace hoTools.Find
         {
             if (_fr == null)
             {
-                MessageBox.Show("Start search with 'Find'");
+                MessageBox.Show(@"Start search with 'Find'");
                 return;
             }
             _fr.FindNext();
@@ -104,7 +109,7 @@ namespace hoTools.Find
         {
             if (_fr == null)
             {
-                MessageBox.Show("Start search with 'Find'");
+                MessageBox.Show(@"Start search with 'Find'");
                 return;
             }
             
@@ -119,7 +124,7 @@ namespace hoTools.Find
         {
             _fr = null;
             txtStatus.Text = "";
-            activateFindChangeParameters(true);
+            ActivateFindChangeParameters(true);
         }
         #endregion
         #region btnReplace
@@ -127,12 +132,12 @@ namespace hoTools.Find
         {
             if (_fr == null || _fr.LItems.Count == 0 )
             {
-                MessageBox.Show("Start search with 'Find'");
+                MessageBox.Show(@"Start search with 'Find'");
                 return;
             }
             if (_fr.LItems[_fr.Index].IsUpdated)
             {
-                MessageBox.Show("Changes already done!");
+                MessageBox.Show(@"Changes already done!");
                 return;
             }
             
@@ -140,7 +145,7 @@ namespace hoTools.Find
             _fr.ReplaceString = txtReplaceString.Text;
             if (txtReplaceString.Text.Trim() == "")
             {
-                DialogResult result = MessageBox.Show("", "Replace with string empty?", MessageBoxButtons.YesNo);
+                DialogResult result = MessageBox.Show("", @"Replace with string empty?", MessageBoxButtons.YesNo);
                 if (result == DialogResult.No) return;
             }
             _fr.ReplaceItem();
@@ -151,7 +156,7 @@ namespace hoTools.Find
         }
         #endregion
         #region activateFindChangeParameters
-        private void activateFindChangeParameters (bool activate){
+        private void ActivateFindChangeParameters (bool activate){
             btnFind.Enabled = activate;
             chkAttribute.Enabled = activate;
             chkCaseSensetive.Enabled = activate;
@@ -178,12 +183,12 @@ namespace hoTools.Find
         {
             if (txtReplaceString.Text.Trim() == "")
             {
-                DialogResult result = MessageBox.Show("", "Replace with string empty?", MessageBoxButtons.YesNo);
+                DialogResult result = MessageBox.Show("", @"Replace with string empty?", MessageBoxButtons.YesNo);
                 if (result == DialogResult.No) return;
             }
             _fr.ReplaceAll();
             txtStatus.Text = _fr.ItemShortDescription();
-            MessageBox.Show(String.Format("{0} items updated",_fr.LItems.Count),"All findings replaced");
+            MessageBox.Show($@"{_fr.LItems.Count} items updated",@"All findings replaced");
         }
 #endregion
         #region btnShow_Click

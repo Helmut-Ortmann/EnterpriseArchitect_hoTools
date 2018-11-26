@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace hoTools.Find
+﻿namespace hoTools.Find
 {
     class FindAndReplaceItemMethod : FindAndReplaceItem
     {
         EA.Method _meth;
         #region Constructor
-        public  FindAndReplaceItemMethod(EA.Repository rep, string GUID)  :base(rep, GUID)
+        public  FindAndReplaceItemMethod(EA.Repository rep, string guid)  :base(rep, guid)
         {
-            this._meth = rep.GetMethodByGuid(GUID);
-            this.Load(rep);
+            _meth = rep.GetMethodByGuid(guid);
+            Load(rep);
         }
         #endregion
         #region Property
@@ -22,31 +17,31 @@ namespace hoTools.Find
         //    get { return _l_itemTag; }
         //}
         #endregion
-        #region load
+        #region Load
         public override void Load(EA.Repository rep)
         {
 
-            _Name = _meth.Name;
-            _Description = _meth.Notes;
-            _Stereotype = _meth.StereotypeEx;
+            Name = _meth.Name;
+            Description = _meth.Notes;
+            Stereotype = _meth.StereotypeEx;
          
         }
         #endregion
         #region save
         public override void Save(EA.Repository rep, FindAndReplaceItem.FieldType fieldType)
         {
-            EA.Method meth = rep.GetMethodByGuid(GUID);
+            EA.Method meth = rep.GetMethodByGuid(Guid);
             if ((fieldType & FindAndReplaceItem.FieldType.Description) > 0)
-            { meth.Notes = _Description; }
+            { meth.Notes = Description; }
             if ((fieldType & FindAndReplaceItem.FieldType.Name) > 0)
-            {   meth.Name = _Name; }
+            {   meth.Name = Name; }
             if ((fieldType & FindAndReplaceItem.FieldType.Stereotype) > 0)
-            { meth.StereotypeEx = _Stereotype; }
-            _isUpdated = true;
+            { meth.StereotypeEx = Stereotype; }
+            IsUpdated = true;
             meth.Update();
         }
         #endregion
-        #region locate
+        #region Locate
         public override void Locate(EA.Repository rep)
         {
             rep.ShowInProjectView(_meth);

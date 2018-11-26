@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace hoTools.Find
+﻿namespace hoTools.Find
 {
     class FindAndReplaceItemPackage : FindAndReplaceItem
     {
-        private readonly string _guid;
         EA.Package _pkg;
-        EA.Element _el ;
+        readonly EA.Element _el ;
         #region Contructor
         /// <summary>
         /// Create a package element. Be aware that a package element also contains an element to support
@@ -19,10 +13,9 @@ namespace hoTools.Find
         /// <param name="guid"></param>
         public  FindAndReplaceItemPackage(EA.Repository rep, string guid)  :base( rep, guid)
         {
-            _guid = guid;
-            this._el = rep.GetElementByGuid(guid);
-            this._pkg = rep.GetPackageByGuid(guid);
-            this.Load(rep);
+            _el = rep.GetElementByGuid(guid);
+            _pkg = rep.GetPackageByGuid(guid);
+            Load(rep);
         }
         #endregion
         #region Property
@@ -38,38 +31,38 @@ namespace hoTools.Find
         public sealed override void Load(EA.Repository rep)
         {
 
-            _Name = _pkg.Name;
-            _Description = _pkg.Notes;
-            _Stereotype = _pkg.StereotypeEx;
+            Name = _pkg.Name;
+            Description = _pkg.Notes;
+            Stereotype = _pkg.StereotypeEx;
 
 
             // Model don't have an element
             if (_pkg.ParentID != 0)
             {
-                EA.Element elPkg = rep.GetElementByGuid(GUID);
-                _Stereotype = elPkg.StereotypeEx;
+                EA.Element elPkg = rep.GetElementByGuid(Guid);
+                Stereotype = elPkg.StereotypeEx;
             }
         }
         #endregion
         #region Save
         public override void Save(EA.Repository rep, FindAndReplaceItem.FieldType fieldType)
         {
-            _pkg = rep.GetPackageByGuid(GUID);
+            _pkg = rep.GetPackageByGuid(Guid);
             if ((fieldType & FindAndReplaceItem.FieldType.Description) > 0)
-            { _pkg.Notes = _Description; }
+            { _pkg.Notes = Description; }
             if ((fieldType & (FindAndReplaceItem.FieldType.Name | FindAndReplaceItem.FieldType.Stereotype) ) > 0)
             {
                 // model don't have an element
                 if (_pkg.ParentID != 0)
                 {
-                    EA.Element el = rep.GetElementByGuid(GUID);
-                    el.StereotypeEx = _Stereotype;
-                    el.Name = _Name;
+                    EA.Element el = rep.GetElementByGuid(Guid);
+                    el.StereotypeEx = Stereotype;
+                    el.Name = Name;
                     el.Update();
                 }
-                _pkg.Name = _Name;
+                _pkg.Name = Name;
             }
-            _isUpdated = true;
+            IsUpdated = true;
             _pkg.Update();
         }
         #endregion

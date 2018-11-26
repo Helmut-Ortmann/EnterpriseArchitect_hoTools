@@ -1189,8 +1189,8 @@ namespace hoTools
                     if (_addinSettings.SearchAndReplaceWindow != AddinSettings.ShowInWindow.Disabled)
                     {
                         _FindAndReplaceGUI = AddAddinControl<FindAndReplaceGUI>(
-                            FindAndReplaceGUI.TABULATOR,
-                            FindAndReplaceGUI.PROGID, null,
+                            FindAndReplaceGUI.Tabulator,
+                            FindAndReplaceGUI.ProgId, null,
                             AddinSettings.ShowInWindow.AddinWindow);
                         _findAndReplaceGui = _FindAndReplaceGUI; // static + instance
                     }

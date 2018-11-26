@@ -1,38 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace hoTools.Find
+﻿namespace hoTools.Find
 {
     class FindAndReplaceItemDiagram : FindAndReplaceItem
     {
         readonly EA.Diagram _dia;
-        public  FindAndReplaceItemDiagram(EA.Repository rep, string GUID)  :base( rep, GUID)
+        public  FindAndReplaceItemDiagram(EA.Repository rep, string guid)  :base( rep, guid)
         {
-            this._dia = (EA.Diagram)rep.GetDiagramByGuid(GUID);
-            this.Load(rep);
+            _dia = (EA.Diagram)rep.GetDiagramByGuid(guid);
+            Load(rep);
         }
         #region load
         public override void Load(EA.Repository rep)
         {
-            _Name = _dia.Name;
-            _Description = _dia.Notes;
-            _Stereotype = _dia.StereotypeEx;
+            Name = _dia.Name;
+            Description = _dia.Notes;
+            Stereotype = _dia.StereotypeEx;
          
         }
         #endregion
         #region save
         public override void Save(EA.Repository rep, FindAndReplaceItem.FieldType fieldType)
         {
-            EA.Diagram dia = (EA.Diagram)rep.GetDiagramByGuid(GUID);
+            EA.Diagram dia = (EA.Diagram)rep.GetDiagramByGuid(Guid);
             if ((fieldType & FindAndReplaceItem.FieldType.Description) > 0)
-            { dia.Notes = _Description; }
+            { dia.Notes = Description; }
             if ((fieldType & FindAndReplaceItem.FieldType.Name) > 0)
-            {   dia.Name = _Name; }
+            {   dia.Name = Name; }
             if ((fieldType & FindAndReplaceItem.FieldType.Stereotype) > 0)
-            { dia.StereotypeEx = _Stereotype; }
-            _isUpdated = true;            
+            { dia.StereotypeEx = Stereotype; }
+            IsUpdated = true;            
             dia.Update();
         }
         #endregion

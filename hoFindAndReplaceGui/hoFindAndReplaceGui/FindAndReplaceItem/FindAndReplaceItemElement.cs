@@ -17,9 +17,9 @@
         #region Load
         public override void Load(EA.Repository rep)
         {
-            _Name = _el.Name;
-            _Description = _el.Notes;
-            _Stereotype = _el.StereotypeEx;
+            Name = _el.Name;
+            Description = _el.Notes;
+            Stereotype = _el.StereotypeEx;
          
         }
         #endregion
@@ -30,12 +30,12 @@
         {
             
             if ((fieldType & FindAndReplaceItem.FieldType.Description) > 0)
-            { _el.Notes = _Description; }
+            { _el.Notes = Description; }
             if ((fieldType & FindAndReplaceItem.FieldType.Stereotype) > 0)
-            { _el.StereotypeEx = _Stereotype; }
+            { _el.StereotypeEx = Stereotype; }
             if ((fieldType & FindAndReplaceItem.FieldType.Name) > 0)
-            {   _el.Name = _Name; }
-            _isUpdated = true;
+            {   _el.Name = Name; }
+            IsUpdated = true;
             _el.Update();
         }
         #endregion

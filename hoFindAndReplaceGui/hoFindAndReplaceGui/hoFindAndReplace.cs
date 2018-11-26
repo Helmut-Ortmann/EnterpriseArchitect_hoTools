@@ -6,6 +6,11 @@ using System.Text.RegularExpressions;
 
 namespace hoTools.Find
 {
+    /// <summary>
+    /// The find and replace contract with:
+    /// - The GUI content of Find & Replace
+    /// - The list of found matches of find <see cref="FindAndReplaceItem"/>
+    /// </summary>
     public class FindAndReplace
     {
         EA.Repository _rep;
@@ -345,7 +350,7 @@ namespace hoTools.Find
         public int FindStringInItem(EA.ObjectType objectType, string guid)
         {
             var frItem = FindAndReplaceItem.Factory(_rep, objectType, guid);
-            var count = frItem.findCount(_regExPattern, _searchFieldTypes);
+            var count = frItem.FindCount(_regExPattern, _searchFieldTypes);
             if (count > 0)
             {
                 frItem.CountChanges = count;
