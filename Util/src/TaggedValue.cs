@@ -120,7 +120,7 @@ namespace hoTools.Utils
         /// <returns></returns>
         public static string GetTaggedValue(EA.Attribute attr, string name, bool caseSensitive = true)
         {
-            foreach (EA.TaggedValue taggedValue in attr.TaggedValues)
+            foreach (EA.AttributeTag taggedValue in attr.TaggedValues)
             {
                 if (caseSensitive)
                 {
@@ -152,7 +152,7 @@ namespace hoTools.Utils
         /// <returns></returns>
         public static string GetTaggedValue(EA.Method method, string name, bool caseSensitive = true)
         {
-            foreach (EA.TaggedValue taggedValue in method.TaggedValues)
+            foreach (EA.MethodTag taggedValue in method.TaggedValues)
             {
                 if (caseSensitive)
                 {

@@ -95,8 +95,7 @@
         #region save
         public override void Save()
         {
-            _tag.Value = Value;
-            _tag.Update();
+            Utils.TaggedValue.SetTaggedValue(_tag, Value);
         }
         #endregion
     }
@@ -157,8 +156,7 @@
         #region Save
         public override void Save()
         {
-            _tag.Value = Value;
-            _tag.Update();
+            Utils.TaggedValue.SetTaggedValue(_tag, Value);
         }
         #endregion
     }

@@ -36,7 +36,7 @@
             Stereotype = _pkg.StereotypeEx;
 
 
-            // Model don't have an element
+            // package has an object
             if (_pkg.ParentID != 0)
             {
                 EA.Element elPkg = rep.GetElementByGuid(Guid);
@@ -52,7 +52,7 @@
             { _pkg.Notes = Description; }
             if ((fieldType & (FindAndReplaceItem.FieldType.Name | FindAndReplaceItem.FieldType.Stereotype) ) > 0)
             {
-                // model don't have an element
+                // package has an object
                 if (_pkg.ParentID != 0)
                 {
                     EA.Element el = rep.GetElementByGuid(Guid);

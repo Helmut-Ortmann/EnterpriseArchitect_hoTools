@@ -28,7 +28,9 @@ namespace hoTools.Find
             Name = 1,
             Description = 2,
             Tag = 4,
-            Stereotype = 8
+            Stereotype = 8,
+            Attribute = 16,
+            Method = 32
         }
         #endregion
         #region Constructor

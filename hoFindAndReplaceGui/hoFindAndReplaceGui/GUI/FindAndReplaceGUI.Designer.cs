@@ -90,40 +90,40 @@
             // 
             // btnFindNext
             // 
-            this.btnFindNext.Location = new System.Drawing.Point(10, 315);
+            this.btnFindNext.Location = new System.Drawing.Point(83, 315);
             this.btnFindNext.Margin = new System.Windows.Forms.Padding(2);
             this.btnFindNext.Name = "btnFindNext";
             this.btnFindNext.Size = new System.Drawing.Size(69, 24);
             this.btnFindNext.TabIndex = 2;
             this.btnFindNext.Text = "Next";
-            this.toolTip1.SetToolTip(this.btnFindNext, "Find next item like:\r\n- Package\r\n- Element\r\n- Duiagram\r\n- Attribute\r\n- Operation");
+            this.toolTip1.SetToolTip(this.btnFindNext, "Find next item like:\r\n- Package\r\n- Element\r\n- Diagram\r\n- Attribute\r\n- Operation");
             this.btnFindNext.UseVisualStyleBackColor = true;
             this.btnFindNext.Click += new System.EventHandler(this.btnFindNext_Click);
             // 
             // btnReplace
             // 
-            this.btnReplace.Location = new System.Drawing.Point(169, 315);
+            this.btnReplace.Location = new System.Drawing.Point(156, 315);
             this.btnReplace.Margin = new System.Windows.Forms.Padding(2);
             this.btnReplace.Name = "btnReplace";
             this.btnReplace.Size = new System.Drawing.Size(69, 24);
             this.btnReplace.TabIndex = 3;
             this.btnReplace.Text = "Replace";
             this.toolTip1.SetToolTip(this.btnReplace, "Replace \"Find string\" by \"Replace string\" in selected item like:\r\n- Package\r\n- El" +
-        "ement\r\n- Diagram\r\n- Attribute\r\n- Operation\r\n\r\nUse \"Show\" to decide which item in" +
-        " element to change.");
+        "ement\r\n- Diagram\r\n- Attribute\r\n- Operation\r\n- TaggedValues\r\n\r\nUse \"Show\" to deci" +
+        "de which item in element to change.");
             this.btnReplace.UseVisualStyleBackColor = true;
             this.btnReplace.Click += new System.EventHandler(this.btnReplace_Click);
             // 
             // btnReplaceAll
             // 
-            this.btnReplaceAll.Location = new System.Drawing.Point(242, 315);
+            this.btnReplaceAll.Location = new System.Drawing.Point(273, 315);
             this.btnReplaceAll.Margin = new System.Windows.Forms.Padding(2);
             this.btnReplaceAll.Name = "btnReplaceAll";
             this.btnReplaceAll.Size = new System.Drawing.Size(69, 24);
             this.btnReplaceAll.TabIndex = 4;
             this.btnReplaceAll.Text = "Replace all";
             this.toolTip1.SetToolTip(this.btnReplaceAll, "Replace all \"Find string\" by \"Replace string\" in all found items like:\r\n- Package" +
-        "s\r\n- Elements\r\n- Diagrams\r\n- Attributes\r\n- Operations");
+        "s\r\n- Elements\r\n- Diagrams\r\n- Attributes\r\n- Operations\r\n- TaggedValues");
             this.btnReplaceAll.UseVisualStyleBackColor = true;
             this.btnReplaceAll.Click += new System.EventHandler(this.btnReplaceAll_Click);
             // 
@@ -231,14 +231,14 @@
             // 
             // btnFindPrevious
             // 
-            this.btnFindPrevious.Location = new System.Drawing.Point(83, 315);
+            this.btnFindPrevious.Location = new System.Drawing.Point(10, 315);
             this.btnFindPrevious.Margin = new System.Windows.Forms.Padding(2);
             this.btnFindPrevious.Name = "btnFindPrevious";
             this.btnFindPrevious.Size = new System.Drawing.Size(69, 24);
             this.btnFindPrevious.TabIndex = 24;
             this.btnFindPrevious.Text = "Previous";
-            this.toolTip1.SetToolTip(this.btnFindPrevious, "Find previous item like:\r\n- Package\r\n- Element\r\n- Duiagram\r\n- Attribute\r\n- Operat" +
-        "ion");
+            this.toolTip1.SetToolTip(this.btnFindPrevious, "Find previous item like:\r\n- Package\r\n- Element\r\n- Diagram\r\n- Attribute\r\n- Operati" +
+        "on");
             this.btnFindPrevious.UseVisualStyleBackColor = true;
             this.btnFindPrevious.Click += new System.EventHandler(this.btnFindPrevious_Click);
             // 
@@ -440,7 +440,7 @@
             // chkOperation
             // 
             this.chkOperation.AutoSize = true;
-            this.chkOperation.Location = new System.Drawing.Point(204, 61);
+            this.chkOperation.Location = new System.Drawing.Point(217, 61);
             this.chkOperation.Margin = new System.Windows.Forms.Padding(2);
             this.chkOperation.Name = "chkOperation";
             this.chkOperation.Size = new System.Drawing.Size(95, 20);
@@ -451,7 +451,7 @@
             // chkAttribute
             // 
             this.chkAttribute.AutoSize = true;
-            this.chkAttribute.Location = new System.Drawing.Point(204, 39);
+            this.chkAttribute.Location = new System.Drawing.Point(217, 39);
             this.chkAttribute.Margin = new System.Windows.Forms.Padding(2);
             this.chkAttribute.Name = "chkAttribute";
             this.chkAttribute.Size = new System.Drawing.Size(84, 20);

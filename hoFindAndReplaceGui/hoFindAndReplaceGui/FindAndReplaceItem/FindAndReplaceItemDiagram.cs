@@ -31,7 +31,7 @@
             dia.Update();
         }
         #endregion
-        #region locate
+        #region Locate
         public override void Locate(EA.Repository rep)
         {
             rep.ShowInProjectView(_dia);

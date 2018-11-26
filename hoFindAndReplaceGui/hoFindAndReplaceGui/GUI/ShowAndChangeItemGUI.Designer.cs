@@ -64,6 +64,7 @@
             this.lblTaggedValues = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.gridTags)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -176,7 +177,7 @@
             // 
             // btnChange
             // 
-            this.btnChange.Location = new System.Drawing.Point(29, 360);
+            this.btnChange.Location = new System.Drawing.Point(150, 361);
             this.btnChange.Margin = new System.Windows.Forms.Padding(2);
             this.btnChange.Name = "btnChange";
             this.btnChange.Size = new System.Drawing.Size(56, 19);
@@ -189,7 +190,7 @@
             // 
             // btnNext
             // 
-            this.btnNext.Location = new System.Drawing.Point(301, 360);
+            this.btnNext.Location = new System.Drawing.Point(90, 361);
             this.btnNext.Margin = new System.Windows.Forms.Padding(2);
             this.btnNext.Name = "btnNext";
             this.btnNext.Size = new System.Drawing.Size(56, 19);
@@ -201,7 +202,7 @@
             // 
             // btnPrevious
             // 
-            this.btnPrevious.Location = new System.Drawing.Point(240, 360);
+            this.btnPrevious.Location = new System.Drawing.Point(30, 360);
             this.btnPrevious.Margin = new System.Windows.Forms.Padding(2);
             this.btnPrevious.Name = "btnPrevious";
             this.btnPrevious.Size = new System.Drawing.Size(56, 19);
@@ -213,7 +214,7 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(362, 360);
+            this.btnCancel.Location = new System.Drawing.Point(381, 360);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(2);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(56, 19);
@@ -224,7 +225,7 @@
             // 
             // btnStore
             // 
-            this.btnStore.Location = new System.Drawing.Point(173, 360);
+            this.btnStore.Location = new System.Drawing.Point(200, 360);
             this.btnStore.Margin = new System.Windows.Forms.Padding(2);
             this.btnStore.Name = "btnStore";
             this.btnStore.Size = new System.Drawing.Size(56, 19);
@@ -258,7 +259,7 @@
             // 
             // btnChangeAll
             // 
-            this.btnChangeAll.Location = new System.Drawing.Point(90, 360);
+            this.btnChangeAll.Location = new System.Drawing.Point(298, 360);
             this.btnChangeAll.Margin = new System.Windows.Forms.Padding(2);
             this.btnChangeAll.Name = "btnChangeAll";
             this.btnChangeAll.Size = new System.Drawing.Size(79, 19);
@@ -339,7 +340,7 @@
             this.txtState.Margin = new System.Windows.Forms.Padding(2);
             this.txtState.Name = "txtState";
             this.txtState.ReadOnly = true;
-            this.txtState.Size = new System.Drawing.Size(390, 20);
+            this.txtState.Size = new System.Drawing.Size(408, 20);
             this.txtState.TabIndex = 21;
             // 
             // lblDescription
@@ -362,6 +363,12 @@
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.BackColor = System.Drawing.SystemColors.Control;
+            this.splitContainer1.Panel1.Controls.Add(this.btnChangeAll);
+            this.splitContainer1.Panel1.Controls.Add(this.btnChange);
+            this.splitContainer1.Panel1.Controls.Add(this.btnPrevious);
+            this.splitContainer1.Panel1.Controls.Add(this.btnStore);
+            this.splitContainer1.Panel1.Controls.Add(this.btnNext);
+            this.splitContainer1.Panel1.Controls.Add(this.btnCancel);
             this.splitContainer1.Panel1.ForeColor = System.Drawing.Color.DarkBlue;
             // 
             // splitContainer1.Panel2
@@ -426,15 +433,9 @@
             this.ClientSize = new System.Drawing.Size(880, 423);
             this.Controls.Add(this.lblDescription);
             this.Controls.Add(this.chkIsChanged);
-            this.Controls.Add(this.btnChangeAll);
             this.Controls.Add(this.rtfStereotype);
             this.Controls.Add(this.txtState);
             this.Controls.Add(this.rtfName);
-            this.Controls.Add(this.btnStore);
-            this.Controls.Add(this.btnCancel);
-            this.Controls.Add(this.btnPrevious);
-            this.Controls.Add(this.btnNext);
-            this.Controls.Add(this.btnChange);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.txtTo);
@@ -451,6 +452,7 @@
             this.Name = "ShowAndChangeItemGUI";
             this.Text = "Show and change item";
             ((System.ComponentModel.ISupportInitialize)(this.gridTags)).EndInit();
+            this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);

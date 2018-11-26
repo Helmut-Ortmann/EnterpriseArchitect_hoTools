@@ -76,23 +76,23 @@ namespace hoTools.Find
         #region Properties
         public string[] TagValueNames
         {
-            get { return _taggedValueNames; }
-            set { _taggedValueNames = value; }
+            get => _taggedValueNames;
+            set => _taggedValueNames = value;
         }
         public EA.Repository Rep
         {
-            get { return _rep; }
-            set { _rep = value; }
+            get => _rep;
+            set => _rep = value;
         }
         public EA.Package Pkg
         {
-            get { return _pkg; }
-            set { _pkg = value; }
+            get => _pkg;
+            set => _pkg = value;
         }
         public List<FindAndReplaceItem> LItems => _lItems;
         public string FindString
         {
-            get { return _findString; }
+            get => _findString;
             set { _findString = value;
                   _regExPattern = PrepareRegexp();
             }
@@ -100,7 +100,7 @@ namespace hoTools.Find
       
         public string ReplaceString
         {
-            get { return _replaceString; }
+            get => _replaceString;
             set
             {
                 if (value != _replaceString)
@@ -126,7 +126,7 @@ namespace hoTools.Find
         #endregion
         #region FindInPackageRecursive
         /// <summary>
-        /// Find all choosen items beneath selected package (recursive).
+        /// Find all chosen items beneath selected package (recursive).
         /// - Create item list (l_items)
         /// The task is delegated doRecursivePackage
         /// </summary>
@@ -135,7 +135,6 @@ namespace hoTools.Find
             _index = -1;
             RecursivePackageFind.DoRecursivePkg(_rep, _pkg,  this);
             if (_lItems.Count > 0) {_index = 0;}
-            //else {MessageBox.Show("No found element", String.Format("{0} elements found", _l_items.Count));}
         }
         #endregion
         #region FindNext
@@ -203,7 +202,7 @@ namespace hoTools.Find
 
         #region Replaceitem
         /// <summary>
-        /// Replace all occurences of "Search string" by "Replace String" in current selected item.
+        /// Replace all occurrence of "Search string" by "Replace String" in current selected item.
         /// </summary>
         public int ReplaceItem()
         {
@@ -229,15 +228,27 @@ namespace hoTools.Find
                 item.Stereotype = ChangeString(item.Stereotype);
 
             }
+            // search for Attribute
+            if ((_searchFieldTypes & FindAndReplaceItem.FieldType.Attribute) > 0)
+            {
+                item.Stereotype = ChangeString(item.Stereotype);
+
+            }
+            // search for Method
+            if ((_searchFieldTypes & FindAndReplaceItem.FieldType.Method) > 0)
+            {
+                item.Stereotype = ChangeString(item.Stereotype);
+
+            }
 
 
-
+            // Change tagged values 
             if ((_searchFieldTypes & FindAndReplaceItem.FieldType.Tag) > 0 )
             {
-                foreach (FindAndReplaceItemTag tag in item.LItemTag)
+                foreach (FindAndReplaceItemTag itemTag in item.LItemTag)
                 {
-                       tag.Value = ChangeString(tag.Value);
-                       tag.Save();
+                       itemTag.Value = ChangeString(itemTag.Value);
+                       itemTag.Save();
                 }
             }
 
@@ -251,6 +262,9 @@ namespace hoTools.Find
         }
         #endregion
         #region ReplaceAll
+        /// <summary>
+        /// Replace all findings in all items by the replacement string
+        /// </summary>
         public void ReplaceAll()
         {
             int indexOld = _index;

@@ -128,12 +128,13 @@ namespace hoTools.Find
         #region btnCancelAll_Click
         private void btnChangeAll_Click(object sender, EventArgs e)
         {
-            foreach (FindAndReplaceItem frItem in _fr.LItems)
-            {
-                frItem.Name = _fr.ChangeString(frItem.Name, txtTo.Text);
-                frItem.Description = _fr.ChangeString(frItem.Description, txtTo.Text);
-                frItem.Save(_fr.Rep, _fr.searchFieldType);
-            }
+            _fr.ReplaceAll();
+            //foreach (FindAndReplaceItem frItem in _fr.LItems)
+            //{
+            //    frItem.Name = _fr.ChangeString(frItem.Name, txtTo.Text);
+            //    frItem.Description = _fr.ChangeString(frItem.Description, txtTo.Text);
+            //    frItem.Save(_fr.Rep, _fr.searchFieldType);
+            //}
 
             ShowItem();
             txtState.Text = StateCurrentItem() + @" all found items changed.";
