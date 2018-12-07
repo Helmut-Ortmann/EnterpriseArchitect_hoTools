@@ -9,7 +9,6 @@ using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml.Linq;
-using DataModels;
 using EA;
 using hoTools.EaServices.Dlg;
 using hoTools.Utils;
@@ -76,6 +75,10 @@ namespace hoTools.EaServices
 
     #endregion
 
+
+    /// <summary>
+    /// The services provided by EA. A service is identified by a GUID and can be configured and used with Keys and Buttons. Each service has also a description to understand it.
+    /// </summary>
     public static partial class EaService
     {
         // configuration as singleton
@@ -215,12 +218,108 @@ namespace hoTools.EaServices
 
         [ServiceOperation("{39B10A37-025F-43A6-A986-8343CD4E63E7}", "Search nested elements like requirements",
             "Select Package, Element, all nested Elements and their Tagged Values are shown", isTextRequired: false)]
-
         public static void SearchNestedElements(Repository rep)
         {
 
             string xmlString = AddInSearches.SearchObjectsNested(rep, "");
             rep.RunModelSearch("", "", "", xmlString);
+
+        }
+
+        /// <summary>
+        /// Move Clipboard items to selected package
+        /// </summary>
+        /// <param name="rep"></param>
+        [ServiceOperation("{BB133FEA-AEDD-4C8F-BBC1-A59F85F4624C}",
+            "Move EA clipboard items to selected Package", // Description
+            "Select the package to move the EA clipboard items into. The clipboard items must contain A GUID or Object-ID.", //Tooltip
+            isTextRequired: false)]
+        public static void MoveClipboardItemsToPackage(Repository rep)
+        {
+            if (rep.GetContextItemType() != EA.ObjectType.otPackage) return;
+            EA.Package pkg = (EA.Package) rep.GetContextObject();
+
+            string[] clipboardText = Clipboard.GetText().Split(new[] {Environment.NewLine},
+                StringSplitOptions.RemoveEmptyEntries);
+            if (clipboardText.Length < 2)
+            {
+                MessageBox.Show("", @"Clipboard doesn't contain a row");
+                return;
+            }
+
+            // skip heading
+            clipboardText = clipboardText.Skip(1).Take(clipboardText.Length - 1).ToArray();
+            string []  del = new [] {System.Globalization.CultureInfo.CurrentCulture.TextInfo.ListSeparator };
+
+            var firstLine = clipboardText.FirstOrDefault();
+            if (String.IsNullOrEmpty(firstLine))
+            {
+                MessageBox.Show("", @"Clipboard empty");
+                return;
+            }
+            var firstLineAsArray = firstLine.Split(del, StringSplitOptions.None);
+            bool found = false;
+            bool isObjectId = false;
+            int column = -1;
+            foreach (var col in firstLineAsArray)
+            {
+                column += 1;
+                // Check GUID 
+                if (col.StartsWith("{") && col.EndsWith("}"))
+                {
+                    isObjectId = false;
+                    found = true;
+                    break;
+                }
+                if (Int32.TryParse(col, out int j))
+                {
+                    isObjectId = true;
+                    found = true;
+                    break;
+
+                }
+            }
+
+            if (found == false)
+            {
+                MessageBox.Show($@"Delimiter: '{del[0]}'
+
+Clipboard first data line:
+{firstLine}", @"Can't read an object_id or a GUID from Clipboard");
+                return;
+            }
+
+            int countCopied = 0;
+            foreach (var row in clipboardText)
+            {
+                var rowAsArray = row.Split(del, StringSplitOptions.None);
+                if (isObjectId)
+                {
+                    if (int.TryParse(rowAsArray[column], out int id))
+                    {
+                        EA.Element el = rep.GetElementByID(id);
+                        if (el == null) continue;
+                        el.PackageID = pkg.PackageID;
+                        el.Update();
+                        countCopied += 1;
+                    }
+                }
+                else
+                {
+                    if (rowAsArray[column].StartsWith("{") && rowAsArray[column].EndsWith("}"))
+                    {
+                        EA.Element el = rep.GetElementByGuid(rowAsArray[column]);
+                        if (el == null) continue;
+                        el.PackageID = pkg.PackageID;
+                        el.Update();
+                        countCopied += 1;
+                    }
+
+                }
+            }
+            // update package viewS
+            rep.RefreshModelView(pkg.PackageID);
+            MessageBox.Show($@"Package: {pkg.Name}",$@"{countCopied} elements from Clipboard copied to selected/contect package");
 
         }
         /// <summary>
@@ -238,7 +337,7 @@ namespace hoTools.EaServices
             EaDiagram curDiagram = new EaDiagram(rep);
             if (curDiagram.Dia == null) return;
 
-           rep.SaveDiagram(curDiagram.Dia.DiagramID);
+            rep.SaveDiagram(curDiagram.Dia.DiagramID);
             // two objects selected
             if (curDiagram.SelectedObjectsCount != 2 || curDiagram.SelElements.Count != 2)
             {
@@ -276,7 +375,7 @@ Second Element: Target of move connections and appearances", @"Select two elemen
             // two objects selected
             if (curDiagram.SelectedObjectsCount < 2 || curDiagram.SelElements.Count < 2)
             {
-                MessageBox.Show(@"Ports, Parameter, Pins supported", "Select at least two elements on the diagram!");
+                MessageBox.Show(@"Ports, Parameter, Pins supported", @"Select at least two elements on the diagram!");
                 return;
             }
             EaCollectionDiagramObjects diaCol = new EaCollectionDiagramObjects(curDiagram);
@@ -1568,7 +1667,7 @@ Second Element: Target of move connections and appearances", @"Select two elemen
                         EA.Element el1 = rep.GetElementByGuid(pkg.PackageGUID);
                         if (el1.Gentype == "")
                         {
-                            MessageBox.Show("Package has no language configured. Please select a language!");
+                            MessageBox.Show(@"Package has no language configured. Please select a language!");
                             return;
                         }
                         pathFolder = Util.GetFilePath(rep, el1.Gentype, pkg.CodePath);
@@ -1760,7 +1859,7 @@ Second Element: Target of move connections and appearances", @"Select two elemen
         public static void Ports(
             Repository rep)
         {
-            EaService.HideEmbeddedElements(rep);
+            HideEmbeddedElements(rep);
 
         }
         /// <summary>
@@ -2208,10 +2307,10 @@ Second Element: Target of move connections and appearances", @"Select two elemen
         #endregion
 
 
-
         /// <summary>
         /// Delete the embedded element from Diagram (Port, Parameter, Pin)
         /// </summary>
+        /// <param name="rep"></param>
         /// <param name="dia"></param>
         /// <param name="embeddedElement"></param>
         private static void RemoveEmbeddedElementFromDiagram(EA.Repository rep, Diagram dia, EA.Element embeddedElement)
@@ -2293,7 +2392,7 @@ from %APPDATA%Local\Apps\hoTools\
                 }
                 catch
                 {
-                    MessageBox.Show(errorMessageSearchNotFind, "Search 'Element usage not defined' missing, Break!!");
+                    MessageBox.Show(errorMessageSearchNotFind, @"Search 'Element usage not defined' missing, Break!!");
                 }
             }
             if (oType.Equals(ObjectType.otMethod))
@@ -2305,7 +2404,7 @@ from %APPDATA%Local\Apps\hoTools\
                 }
                     catch
                 {
-                    MessageBox.Show(errorMessageSearchNotFind, "Search 'Element usage not defined' missing, Break!!");
+                    MessageBox.Show(errorMessageSearchNotFind, @"Search 'Element usage not defined' missing, Break!!");
                 }
             }
             if (oType.Equals(ObjectType.otDiagram))
@@ -2316,7 +2415,7 @@ from %APPDATA%Local\Apps\hoTools\
                 }
                         catch
                 {
-                    MessageBox.Show(errorMessageSearchNotFind, "Search 'Diagram usage' missing, Break!!");
+                    MessageBox.Show(errorMessageSearchNotFind, @"Search 'Diagram usage' missing, Break!!");
                 }
             }
             if (oType.Equals(ObjectType.otConnector))
@@ -2328,7 +2427,7 @@ from %APPDATA%Local\Apps\hoTools\
                  }
                         catch
                     {
-                        MessageBox.Show(errorMessageSearchNotFind, "Search 'Connector is visible in Diagrams', Break!!");
+                        MessageBox.Show(errorMessageSearchNotFind, @"Search 'Connector is visible in Diagrams', Break!!");
                     }
                 }
             }
@@ -3522,12 +3621,14 @@ from %APPDATA%Local\Apps\hoTools\
 
             SetFeatureLink(rep, elNote, featureType, featureId, featureName, connectorLinkType);
         }
+
         /// <summary>
         /// Add Operation Link to Note (Feature Link)
         /// 
         /// </summary>
         /// <param name="rep"></param>
         /// <param name="op"></param>
+        /// <param name="connectorLinkType"></param>
         private static void AddFeatureWithNoteLink(EA.Repository rep, EA.Method op, string connectorLinkType = "")
         {
 
@@ -4244,7 +4345,7 @@ from %APPDATA%Local\Apps\hoTools\
                 bool found = false;
                 foreach (Connector c in shm.Connectors)
                 {
-                    if (c.SupplierID == ishm.ElementID & c.Type == "Realisation")
+                    if (c.SupplierID == ishm.ElementID & c.Type == @"Realisation")
                     {
                         found = false;
                         break;
@@ -4253,7 +4354,7 @@ from %APPDATA%Local\Apps\hoTools\
                 // currently switched off
                 if (found == false)
                 {
-                    var con = (Connector) shm.Connectors.AddNew("", "Realisation");
+                    var con = (Connector) shm.Connectors.AddNew("", @"Realisation");
                     con.SupplierID = ishm.ElementID;
                     try
                     {
@@ -4912,7 +5013,7 @@ from %APPDATA%Local\Apps\hoTools\
                 }
                 else
                 {
-                    MessageBox.Show($"{s}\n\n+{sCompact}", @"Couldn't understand attribute syntax");
+                    MessageBox.Show($@"{s}{Environment.NewLine}+{sCompact}", @"Couldn't understand attribute syntax");
                 }
             }
         }
@@ -5264,7 +5365,7 @@ from %APPDATA%Local\Apps\hoTools\
             }
             catch (Exception e)
             {
-                MessageBox.Show($"{e}\n\n", @"Error VC reconcile");
+                MessageBox.Show($@"{e}{Environment.NewLine}", @"Error VC reconcile");
             }
             finally
             {
@@ -5324,7 +5425,7 @@ from %APPDATA%Local\Apps\hoTools\
             }
             catch (Exception e)
             {
-                MessageBox.Show($"{e}\n\n{pkg.GetLastError()}", @"Error Checkout");
+                MessageBox.Show($@"{e}{Environment.NewLine}{pkg.GetLastError()}", @"Error Checkout");
             }
             finally
             {
@@ -5423,7 +5524,7 @@ from %APPDATA%Local\Apps\hoTools\
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show($"{e} \n\n {pkg.GetLastError()}", @"Error Checkin");
+                    MessageBox.Show($@"{e}{Environment.NewLine}{pkg.GetLastError()}", @"Error Checkin");
                     return;
                 }
                 finally
@@ -5442,7 +5543,7 @@ from %APPDATA%Local\Apps\hoTools\
                         pkg.VersionControlResynchPkgStatus(false);
                         if (pkg.Flags.Contains("Checkout"))
                         {
-                            MessageBox.Show($"Flags={pkg.Flags}", @"Package Checked out, Break!");
+                            MessageBox.Show($@"Flags={pkg.Flags}", @"Package Checked out, Break!");
                             return;
                         }
                         pkg.VersionControlGetLatest(true);
@@ -6179,7 +6280,7 @@ from %APPDATA%Local\Apps\hoTools\
                 {
                     string pkgState = Util.GetVCstate(rep, pkg, true);
                     DialogResult result =
-                        MessageBox.Show($"Package is {pkgState}\r\nPath={pkg.XMLPath}\nFlags={pkg.Flags}",
+                        MessageBox.Show($@"Package is {pkgState}{Environment.NewLine}Path={pkg.XMLPath}{Environment.NewLine}Flags={pkg.Flags}",
                             @"Update package state?", MessageBoxButtons.YesNo);
                     if (result == DialogResult.Yes) Util.UpdateVc(rep, pkg);
                 }

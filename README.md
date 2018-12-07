@@ -122,6 +122,10 @@ Some features:
 
 # Releases
 
+### Release 3.3
+
+-  Service Move Copied Search elements to selected package
+
 ### Release 3.2.13
 -  Fix Style Properties without nothing to change is now possible
 -  Fix export SQL results to Excel
