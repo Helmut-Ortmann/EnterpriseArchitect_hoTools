@@ -124,7 +124,8 @@ Some features:
 
 ### Release 3.3
 
--  Service Move Copied Search elements to selected package
+-  Service Move Copied Search elements of clipboard to selected package
+-  Update nuget packages
 
 ### Release 3.2.13
 -  Fix Style Properties without nothing to change is now possible
