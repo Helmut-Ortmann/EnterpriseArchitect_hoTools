@@ -1,7 +1,7 @@
 using System;
 
 // ReSharper disable once CheckNamespace
-namespace hoHybridScript
+namespace hoHybridScriptAdvanced
 {
     /// <summary>
     /// Example for a C# Script which can be called from 

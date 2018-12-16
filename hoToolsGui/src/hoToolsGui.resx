@@ -2426,7 +2426,7 @@ It sets the linesytyle for the Diagram Connectors:
     <value>1, 1, 1, 1</value>
   </data>
   <data name="_txtSearchName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>244, 20</value>
+    <value>182, 20</value>
   </data>
   <data name="_txtSearchName.TabIndex" type="System.Int32, mscorlib">
     <value>47</value>
@@ -2466,13 +2466,13 @@ A LINQPad Query to run complex queries (*.linq)</value>
     <value>Fill</value>
   </data>
   <data name="_txtSearchText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>247, 1</value>
+    <value>185, 1</value>
   </data>
   <data name="_txtSearchText.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>1, 1, 1, 1</value>
   </data>
   <data name="_txtSearchText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>213, 20</value>
+    <value>275, 20</value>
   </data>
   <data name="_txtSearchText.TabIndex" type="System.Int32, mscorlib">
     <value>27</value>
@@ -2782,7 +2782,7 @@ hoTools searches queries in the following sequence:
     <value>11</value>
   </data>
   <data name="_panelQuickSearch.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="_txtSearchName" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="_txtSearchText" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,100,Absolute,215,Absolute,20" /&gt;&lt;Rows Styles="Percent,100,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="_txtSearchName" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="_txtSearchText" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,40,Percent,60" /&gt;&lt;Rows Styles="Percent,100,Absolute,20" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <data name="_panelButtons.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Top</value>

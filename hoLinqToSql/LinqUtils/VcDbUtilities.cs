@@ -44,8 +44,6 @@ namespace hoLinqToSql.LinqUtils
             {
                 string connectionString = $"DataSource={vcDb};Read Only=True;";
 
-                //newConnectionString = vcDb;
-                //using (BROWSEVCDB dc = new BROWSEVCDB(new SQLiteDataProvider("SQLite.Classic"), connectionString))
                 using (BROWSEVCDB dc = new BROWSEVCDB(new SQLiteDataProvider("SQLite.Classic"), connectionString))
 
                 {
@@ -62,7 +60,11 @@ namespace hoLinqToSql.LinqUtils
                     }
                     catch (Exception e)
                     {
-                        MessageBox.Show($@"{e}", "Can't install SQLite database driver");
+                        MessageBox.Show($@"Data Source: '{vcDb}'
+Connection:
+{connectionString}
+
+{e}", "Can't install SQLite database driver");
                     }
                 }
             }

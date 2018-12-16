@@ -227,12 +227,12 @@ namespace hoTools.EaServices
         }
 
         /// <summary>
-        /// Move Clipboard items to selected package
+        /// Move Clipboard items to selected package. Use a Search and copy the search results to clipboard.
         /// </summary>
         /// <param name="rep"></param>
         [ServiceOperation("{BB133FEA-AEDD-4C8F-BBC1-A59F85F4624C}",
-            "Move EA clipboard items to selected Package", // Description
-            "Select the package to move the EA clipboard items into. The clipboard items must contain A GUID or Object-ID.", //Tooltip
+            "Move EA clipboard items form Search to selected Package", // Description
+            "Select the package to move the EA clipboard items into. The clipboard items must contain a GUID or an Object-ID (left columns).", //Tooltip
             isTextRequired: false)]
         public static void MoveClipboardItemsToPackage(Repository rep)
         {

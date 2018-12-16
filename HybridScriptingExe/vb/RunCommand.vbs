@@ -272,4 +272,4 @@ Function RunJava(baseFolder, eaClass, param1, param2, param3)
 ' To use or not use this test functionality remove/insert beneath apostrophe before 'Test' or 'TestJava'
 '
 'Test
-TestJava
+'TestJava
