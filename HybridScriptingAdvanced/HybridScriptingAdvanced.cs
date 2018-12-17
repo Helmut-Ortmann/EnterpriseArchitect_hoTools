@@ -1,9 +1,8 @@
 using System;
-using System.Data;
 using System.Linq;
 using System.Windows.Forms;
-using hoLinqToSql;
 using hoLinqToSql.LinqUtils;
+using System.Data;
 
 // ReSharper disable once CheckNamespace
 namespace hoHybridScriptAdvanced
@@ -15,7 +14,7 @@ namespace hoHybridScriptAdvanced
     /// - JavaScript
     /// from within EA.
     ///
-    /// It uses the hoTools library hoSqlGui to simplify SQL access by LINQ2DB (https://github.com/linq2db/linq2db).
+    /// It uses the hoTools library hoLinqToSql to simplify SQL access by LINQ2DB (https://github.com/linq2db/linq2db).
     /// linq2db offers a db independent access and is highly integrated with LINQ.
     /// 
     /// With EA since 13. it's called HybridScripting and EA provides an IDE with Debugging features.
@@ -62,6 +61,11 @@ namespace hoHybridScriptAdvanced
             _repository = SparxSystems.Services.GetRepository(_processId);
 			Trace("Running C# Console Application 'HybridScriptingAdvanced.exe'");
         }
+
+        /// <summary>
+        /// Print all packages and locate each package
+        /// </summary>
+        /// <param name="package"></param>
         private void PrintPackage(EA.Package package)
         {
             Trace(package.Name);
@@ -73,7 +77,54 @@ namespace hoHybridScriptAdvanced
                 PrintPackage(child);
             }
         }
+        /// <summary>
+        /// Get the object count of all t_object
+        /// </summary>
+        /// <returns></returns>
+        private int GetObjectCount()
+        {
+            int count;
+            // get connection string of repository
+            string connectionString = LinqUtil.GetConnectionString(_repository, out var provider);
+            using (var db = new DataModels.EaDataModel(provider, connectionString))
+            {
+                count = (from o in db.t_object
+                    select o.Name).Count();
+            }
 
+            return count;
+        }
+        /// <summary>
+        /// Query the EA model and returns the results in the EA Search Window
+        /// </summary>
+        /// <returns></returns>
+        private bool QueryModel()
+        {
+            // get connection string of repository
+            string connectionString = LinqUtil.GetConnectionString(_repository, out var provider);
+            DataTable dt;
+            using (var db = new DataModels.EaDataModel(provider, connectionString))
+            {
+                dt = (from o in db.t_object
+                        orderby new {o.Name, o.Object_Type,o.Stereotype}
+                        select new {CLASSGUID = o.ea_guid, CLASSTYPE = o.Object_Type, Name = o.Name,Type=o.Object_Type, Stereotype=o.Stereotype}
+                      ).Distinct()
+                      .ToDataTable();
+
+            }
+            // 2. Order, Filter, Join, Format to XML
+            string xml = LinqUtil.QueryAndMakeXmlFromTable(dt);
+            // 3. Out put to EA
+            _repository.RunModelSearch("", "", "", xml);
+            return true;
+        }
+        /// <summary>
+        /// Show some basic technics
+        /// - Got through packages
+        /// - SQL with Aggregate to get something
+        /// - SQL query with output to EA Search Window  
+        /// </summary>
+        /// <returns></returns>
         private bool PrintModel()
         {
             if (_repository == null)
@@ -81,6 +132,7 @@ namespace hoHybridScriptAdvanced
 				Trace($"Repository unavailable for pid {_processId}");
                 return false;
             }
+            // 1. Walk through package structure
 			Trace($"Target repository process pid {_processId}");
             EA.Collection packages = _repository.Models;
             for (short ip = 0; ip < packages.Count; ip++)
@@ -89,14 +141,12 @@ namespace hoHybridScriptAdvanced
                 PrintPackage(child);
             }
 
-            // get connection string of repository
-            string connectionString = LinqUtil.GetConnectionString(_repository, out var provider);
-            using (var db = new DataModels.EaDataModel(provider, connectionString))
-            {
-                int count = (from o in db.t_object
-                    select o.Name).Count();
-                Trace($"Count={count} objects");
-            }
+            // 2. Output the count of objects
+            Trace($"Count={GetObjectCount()} objects");
+
+            // 3. Query and output to EA Search Windows
+            QueryModel();
+
             return true;
         }
 
@@ -105,7 +155,7 @@ namespace hoHybridScriptAdvanced
         /// args[0] contains the process id to connect to the correct repository
         /// args[1-] are free for individual uses, note only string or value types
         ///          here:
-        ///          arg[1] C 
+        ///          arg[1] Commands to distinguish different tasks 
         /// 
         /// The folder vb contains the VBScript source file to call this C# exe from EA VBScript
         /// </summary>
@@ -113,21 +163,21 @@ namespace hoHybridScriptAdvanced
         /// <returns>Standard Output or Error Output</returns>
         static void Main(string[] args)
         {
-            int pid = 0;
+            int pid;
             string command = "Unknown";
             if (args.Length > 0)
             {
-                if (Int32.TryParse(args[0], out pid))
+                if (! Int32.TryParse(args[0], out pid))
                 {
                     MessageBox.Show($"pid: {args[0]}", "Can't read pid (process id) from the first parameter");
-                    Console.WriteLine("Error");
+                    ReturnError();
                     return;
                 }
             }
             else
             {
                 MessageBox.Show($"No first parameter available. Process ID required", "Can't read pid (process id) from the first parameter");
-                Console.WriteLine("Error");
+                ReturnError();
                 return;
 
             }
@@ -160,11 +210,19 @@ Command: {command}
 
 
 {e}", "Error detected, break!");
-                    Console.WriteLine("Error");
+                    ReturnError();
                 }
 
             }
 
+        }
+        /// <summary>
+        /// Return error
+        /// </summary>
+        /// <param name="msg"></param>
+        private static void ReturnError(string msg = "")
+        {
+            Console.WriteLine("Error");
         }
     }
 }

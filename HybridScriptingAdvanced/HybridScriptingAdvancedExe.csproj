@@ -61,6 +61,8 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="readme.md" />
+    <None Include="Scripts\Install.bat" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="SparxSystems.Repository.dll" />
@@ -72,4 +74,11 @@
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>"$(SolutionDir)HybridScriptingAdvanced\Scripts\Install.bat" "$(SolutionDir)HybridScriptingAdvanced\bin\Release" "c:\temp\EaScripts"</PostBuildEvent>
+  </PropertyGroup>
 </Project>

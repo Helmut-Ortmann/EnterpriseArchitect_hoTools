@@ -54,6 +54,29 @@ namespace hoLinqToSql.LinqUtils
             return output;
         }
         /// <summary>
+        /// Test Query to show making EA xml from a Data table by using MakeXml. It queries the data table, orders the content according to Name columen and outputs it in EA xml format
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <returns></returns>
+        public static string QueryAndMakeXmlFromTable(DataTable dt)
+        {
+            try
+            {
+                // Make a LINQ query (WHERE, JOIN, ORDER,)
+                OrderedEnumerableRowCollection<DataRow> rows = from row in dt.AsEnumerable()
+                    orderby row.Field<string>("Name") descending
+                    select row;
+
+                return Xml.MakeXml(dt, rows);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($@"{e}", @"Error LINQ query Test query to show Table to EA xml format");
+                return "";
+
+            }
+        }
+        /// <summary>
         /// Example LINQ to SQL
         /// - All object object types
         /// - Count of object types
