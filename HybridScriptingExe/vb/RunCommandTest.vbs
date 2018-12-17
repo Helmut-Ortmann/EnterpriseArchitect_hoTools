@@ -28,23 +28,25 @@ option explicit
 !INC Local Scripts.EAConstants-VBScript
 !INC HybridScripting.RunCommand
 
-
 sub main
     Dim result
-	Dim command
-	command = "c:\temp\Hybrid\RepositoryInterface 4.0\ConsoleApplication.exe"
-	result = RunCommand(command, "", " ")
+	Dim script
+	' Productive
+	script = "c:\Temp\EaScripts\HybridScriptingAdvanced.exe"
+	' Debug
+	'script = "c:\hoData\Development\GitHub\EnterpriseArchitect_hoTools\HybridScriptingAdvanced\bin\Debug\HybridScriptingAdvanced.exe"
+	result = RunCommand(script, "", " ")
 	
 	Session.Output vbCRLF & vbCRLF & vbCRLF 
 	Session.Output "------------------------------------------------"
     Session.Output "RunCommand(..,..), Return value:" & vbCRLF & result
 	Session.Output "------------------------------------------------"
 	
-	MsgBox "Command:'"  & vbCRLF & command & _
+	MsgBox "Command:'"  & vbCRLF & script & _
      	  "'" & vbCRLF & vbCRLF & _
-		  "first 10000 charactrers of return" & _
-		  vbCRLF & _
-		  Mid(result,1,10000), _
+		  "first 10000 characters of return" & _
+		  vbCRLF & "'" & _
+		  Mid(result,1,10000) & "'" & vbCRLF, _
     	  65, _
 		  "Command run!"
 end sub

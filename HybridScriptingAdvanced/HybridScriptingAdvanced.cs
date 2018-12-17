@@ -1,5 +1,7 @@
 using System;
+using System.Data;
 using System.Linq;
+using System.Windows.Forms;
 using hoLinqToSql;
 using hoLinqToSql.LinqUtils;
 
@@ -37,12 +39,18 @@ namespace hoHybridScriptAdvanced
         private readonly EA.Repository _repository;
         private readonly int _processId;
 
+
+        /// <summary>
+        /// Output to calling process vio stdout and via EA output window, tab 'Script'
+        /// </summary>
+        /// <param name="msg"></param>
         private void Trace( string msg)
 		{
 			if(_repository != null)
 			{
 				// Displays the message in the 'Script' tab of Enterprise Architect System Output Window
 				_repository.WriteOutput( "Script", msg, 0);
+               
 			}
             // output to standard output, can be read by EA vb script
 			Console.WriteLine(msg);
@@ -52,7 +60,7 @@ namespace hoHybridScriptAdvanced
         {
             _processId = pid;
             _repository = SparxSystems.Services.GetRepository(_processId);
-			Trace("Running C# Console Application AppPattern .NET 4.0");
+			Trace("Running C# Console Application 'HybridScriptingAdvanced.exe'");
         }
         private void PrintPackage(EA.Package package)
         {
@@ -89,13 +97,15 @@ namespace hoHybridScriptAdvanced
                     select o.Name).Count();
                 Trace($"Count={count} objects");
             }
-                return true;
+            return true;
         }
 
         /// <summary>
         /// Entry for calling the *.exe from vbscript in a Hybrid Scripting EA-Environment
         /// args[0] contains the process id to connect to the correct repository
         /// args[1-] are free for individual uses, note only string or value types
+        ///          here:
+        ///          arg[1] C 
         /// 
         /// The folder vb contains the VBScript source file to call this C# exe from EA VBScript
         /// </summary>
@@ -104,14 +114,55 @@ namespace hoHybridScriptAdvanced
         static void Main(string[] args)
         {
             int pid = 0;
+            string command = "Unknown";
             if (args.Length > 0)
             {
-                pid = Int32.Parse(args[0]);
+                if (Int32.TryParse(args[0], out pid))
+                {
+                    MessageBox.Show($"pid: {args[0]}", "Can't read pid (process id) from the first parameter");
+                    Console.WriteLine("Error");
+                    return;
+                }
+            }
+            else
+            {
+                MessageBox.Show($"No first parameter available. Process ID required", "Can't read pid (process id) from the first parameter");
+                Console.WriteLine("Error");
+                return;
+
+            }
+            // Handle commands
+            if (args.Length > 1)
+            {
+                command = args[1];
+                switch (command)
+                {
+                    case "Message":
+                        MessageBox.Show($"Command: {command}", "Message command");
+                        break;
+                    default:
+                        MessageBox.Show($"Command: {command}", "Unknown command");
+                        break;
+                }
             }
             if (pid > 0)
             {
-                HybridScriptAdvanced p = new HybridScriptAdvanced(pid);
-                p.PrintModel();
+                try
+                {
+                    HybridScriptAdvanced p = new HybridScriptAdvanced(pid);
+                    p.PrintModel();
+
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show($@"PID: {pid}
+Command: {command}
+
+
+{e}", "Error detected, break!");
+                    Console.WriteLine("Error");
+                }
+
             }
 
         }
