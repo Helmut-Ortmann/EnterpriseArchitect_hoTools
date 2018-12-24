@@ -50,7 +50,7 @@ Collection of useful tools (see also [Wiki](https://github.com/Helmut-Ortmann/En
   - Easy handling of SQL errors
   - Conveyed Items
   - *.sql files in file system (you may use favorite Editor)
-  - [Find Search](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/Find Search)
+  - [Find Search](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/FindSearch)
 - [Script](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/Script) which runs for [SQL](https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/SQL) results
   - All EA script languages (vbScript, JScript, JavaScript)
   - Compatible to Geert Bellekens great VBScript Library
@@ -120,12 +120,12 @@ Some features:
 
 ### Install folders
 
-- c:\Users\&lt;user>\AppData\Local\Apps\hoTools\
+- c:\Users&lt;user>\AppData\Local\Apps\hoTools\
   - The application installation folder
   - Sql.zip  Examples SQL files
-- c:\Users\&lt;user>\AppData\Roaming\ho\hoTools\
+- c:\Users&lt;user>\AppData\Roaming\ho\hoTools\
   - Data folder
-  - user.config Configuration 
+  - user.config Configuration
 
 ## Releases
 
