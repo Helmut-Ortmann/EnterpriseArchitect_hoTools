@@ -120,7 +120,7 @@ Some features:
 
 ### Install folders
 
-- c:\Users&lt;user>\AppData\Local\Apps\hoTools\
+- c:\Users/&lt;user>\AppData\Local\Apps\hoTools\
   - The application installation folder
   - Sql.zip  Examples SQL files
 - c:\Users&lt;user>\AppData\Roaming\ho\hoTools\
