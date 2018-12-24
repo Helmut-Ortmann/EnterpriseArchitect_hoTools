@@ -309,23 +309,23 @@
       <!-- linq2db                   -->
       <!-- Supported databases Access, MySQL, SqlServer, Oracle, Sybase, Postgres (tested: Access, MySQL, SqlServer) -->
       <Component Id="linq2db.dll" Guid="{7F7E0442-6625-451E-841E-E4D304EFBCBA}">
-        <File Id="linq2db.dll" KeyPath="yes" Name="linq2db.dll" Source="..\packages\linq2db.2.5.4\lib\net45\linq2db.dll" />
+        <File Id="linq2db.dll" KeyPath="yes" Name="linq2db.dll" Source="..\packages\linq2db.2.6.1\lib\net45\linq2db.dll" />
       </Component>
       <!-- Separate install MySql.Data.dll-->
       <Component Id="MySql.Data.dll" Guid="{1D9AF997-5EFF-4F2A-9410-72EAA69473CC}">
         <File Id="MySql.Data.dll" KeyPath="yes" Name="MySql.Data.dll" Source="..\packages\MySql.Data.8.0.12\lib\net452\MySql.Data.dll" />
       </Component>
       <Component Id="Microsoft.SqlServer.Types.dll" Guid="{EABD70B2-374E-4959-AB91-38863D06ABFA}">
-        <File Id="Microsoft.SqlServer.Types.dll" KeyPath="yes" Name="Microsoft.SqlServer.Types.dll" Source="..\packages\linq2db.SqlServer.2.5.4\tools\Microsoft.SqlServer.Types.dll" />
+        <File Id="Microsoft.SqlServer.Types.dll" KeyPath="yes" Name="Microsoft.SqlServer.Types.dll" Source="..\packages\linq2db.SqlServer.2.6.1\tools\Microsoft.SqlServer.Types.dll" />
       </Component>
       <Component Id="Oracle.ManagedDataAccess.dll" Guid="{1BE3E59F-3CA1-4725-8FB6-086E0DAD8D03}">
         <File Id="Oracle.ManagedDataAccess.dll" KeyPath="yes" Name="Oracle.ManagedDataAccess.dll" Source="..\packages\linq2db.Oracle.x86.1.10.0\tools\Oracle.ManagedDataAccess.dll" />
       </Component>
       <Component Id="Npgsql.dll" Guid="{B63E7AC0-5F42-49A3-8ABD-4B84B8C9160D}">
-        <File Id="Npgsql.dll" KeyPath="yes" Name="Npgsql.dll" Source="..\packages\linq2db.PostgreSQL.2.5.4\tools\Npgsql.dll" />
+        <File Id="Npgsql.dll" KeyPath="yes" Name="Npgsql.dll" Source="..\packages\linq2db.PostgreSQL.2.6.1\tools\Npgsql.dll" />
       </Component>
-      <Component Id="Sybase.AdoNet2.AseClient.dll" Guid="{A3853976-5D6F-430E-AB0D-D87648B009D3}">
-        <File Id="Sybase.AdoNet2.AseClient.dll" KeyPath="yes" Name="Sybase.AdoNet2.AseClient.dll" Source="..\packages\linq2db.Sybase.2.2.0\tools\Sybase.AdoNet45.AseClient.dll" />
+      <Component Id="AdoNetCore.AseClient.dll" Guid="{A3853976-5D6F-430E-AB0D-D87648B009D3}">
+        <File Id="AdoNetCore.AseClient.dll" KeyPath="yes" Name="AdoNetCore.AseClient.dll" Source="..\packages\AdoNetCore.AseClient.0.13.1\lib\net46\AdoNetCore.AseClient.dll" />
       </Component>
       <!--
       <Component Id="sybdrvado20.dll" Guid="{66897A7E-5F3D-41CE-9E3F-F2F36CF4C50D}">

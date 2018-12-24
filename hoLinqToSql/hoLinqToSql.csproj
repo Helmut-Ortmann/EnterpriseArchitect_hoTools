@@ -1,12 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\..\EnterpriseArchitect_hoReverse\packages\linq2db.Sybase.DataAction.2.6.1\build\linq2db.Sybase.DataAction.props" Condition="Exists('..\..\EnterpriseArchitect_hoReverse\packages\linq2db.Sybase.DataAction.2.6.1\build\linq2db.Sybase.DataAction.props')" />
+  <Import Project="..\..\EnterpriseArchitect_hoReverse\packages\linq2db.Sybase.2.6.1\build\linq2db.Sybase.props" Condition="Exists('..\..\EnterpriseArchitect_hoReverse\packages\linq2db.Sybase.2.6.1\build\linq2db.Sybase.props')" />
+  <Import Project="..\..\EnterpriseArchitect_hoReverse\packages\linq2db.PostgreSQL.2.6.1\build\linq2db.PostgreSQL.props" Condition="Exists('..\..\EnterpriseArchitect_hoReverse\packages\linq2db.PostgreSQL.2.6.1\build\linq2db.PostgreSQL.props')" />
+  <Import Project="..\..\EnterpriseArchitect_hoReverse\packages\linq2db.SQLite.2.6.1\build\linq2db.SQLite.props" Condition="Exists('..\..\EnterpriseArchitect_hoReverse\packages\linq2db.SQLite.2.6.1\build\linq2db.SQLite.props')" />
+  <Import Project="..\..\EnterpriseArchitect_hoReverse\packages\linq2db.Oracle.Managed.2.6.1\build\linq2db.Oracle.Managed.props" Condition="Exists('..\..\EnterpriseArchitect_hoReverse\packages\linq2db.Oracle.Managed.2.6.1\build\linq2db.Oracle.Managed.props')" />
+  <Import Project="..\..\EnterpriseArchitect_hoReverse\packages\linq2db.MySql.2.6.1\build\linq2db.MySql.props" Condition="Exists('..\..\EnterpriseArchitect_hoReverse\packages\linq2db.MySql.2.6.1\build\linq2db.MySql.props')" />
+  <Import Project="..\..\EnterpriseArchitect_hoReverse\packages\linq2db.SqlServer.2.6.1\build\linq2db.SqlServer.props" Condition="Exists('..\..\EnterpriseArchitect_hoReverse\packages\linq2db.SqlServer.2.6.1\build\linq2db.SqlServer.props')" />
+  <Import Project="..\..\EnterpriseArchitect_hoReverse\packages\linq2db.Access.2.6.1\build\linq2db.Access.props" Condition="Exists('..\..\EnterpriseArchitect_hoReverse\packages\linq2db.Access.2.6.1\build\linq2db.Access.props')" />
   <Import Project="..\packages\linq2db.PostgreSQL.2.5.4\build\linq2db.PostgreSQL.props" Condition="Exists('..\packages\linq2db.PostgreSQL.2.5.4\build\linq2db.PostgreSQL.props')" />
   <Import Project="..\packages\linq2db.SQLite.2.5.4\build\linq2db.SQLite.props" Condition="Exists('..\packages\linq2db.SQLite.2.5.4\build\linq2db.SQLite.props')" />
   <Import Project="..\packages\linq2db.Oracle.Managed.2.5.4\build\linq2db.Oracle.Managed.props" Condition="Exists('..\packages\linq2db.Oracle.Managed.2.5.4\build\linq2db.Oracle.Managed.props')" />
   <Import Project="..\packages\linq2db.MySql.2.5.4\build\linq2db.MySql.props" Condition="Exists('..\packages\linq2db.MySql.2.5.4\build\linq2db.MySql.props')" />
   <Import Project="..\packages\linq2db.Sybase.DataAction.2.5.4\build\linq2db.Sybase.DataAction.props" Condition="Exists('..\packages\linq2db.Sybase.DataAction.2.5.4\build\linq2db.Sybase.DataAction.props')" />
   <Import Project="..\packages\linq2db.SqlServer.2.5.4\build\linq2db.SqlServer.props" Condition="Exists('..\packages\linq2db.SqlServer.2.5.4\build\linq2db.SqlServer.props')" />
-  <Import Project="..\packages\linq2db.Access.2.5.4\build\linq2db.Access.props" Condition="Exists('..\packages\linq2db.Access.2.5.4\build\linq2db.Access.props')" />
   <Import Project="..\..\EnterpriseArchitect_hoReverse\packages\linq2db.PostgreSQL.2.2.0\build\linq2db.PostgreSQL.props" Condition="Exists('..\..\EnterpriseArchitect_hoReverse\packages\linq2db.PostgreSQL.2.2.0\build\linq2db.PostgreSQL.props')" />
   <Import Project="..\..\EnterpriseArchitect_hoReverse\packages\linq2db.Sybase.DataAction.2.2.0\build\linq2db.Sybase.DataAction.props" Condition="Exists('..\..\EnterpriseArchitect_hoReverse\packages\linq2db.Sybase.DataAction.2.2.0\build\linq2db.Sybase.DataAction.props')" />
   <Import Project="..\..\EnterpriseArchitect_hoReverse\packages\linq2db.Oracle.Managed.2.2.0\build\linq2db.Oracle.Managed.props" Condition="Exists('..\..\EnterpriseArchitect_hoReverse\packages\linq2db.Oracle.Managed.2.2.0\build\linq2db.Oracle.Managed.props')" />
@@ -46,47 +53,56 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AdoNetCore.AseClient, Version=0.11.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\AdoNetCore.AseClient.0.13.1\lib\net46\AdoNetCore.AseClient.dll</HintPath>
+      <HintPath>..\..\EnterpriseArchitect_hoReverse\packages\AdoNetCore.AseClient.0.13.1\lib\net46\AdoNetCore.AseClient.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Google.Protobuf, Version=3.6.1.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
-      <HintPath>..\packages\Google.Protobuf.3.6.1\lib\net45\Google.Protobuf.dll</HintPath>
+      <HintPath>..\..\EnterpriseArchitect_hoReverse\packages\Google.Protobuf.3.6.1\lib\net45\Google.Protobuf.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="HtmlAgilityPack, Version=1.8.11.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
-      <HintPath>..\packages\HtmlAgilityPack.1.8.11\lib\Net45\HtmlAgilityPack.dll</HintPath>
+      <HintPath>..\..\EnterpriseArchitect_hoReverse\packages\HtmlAgilityPack.1.8.11\lib\Net45\HtmlAgilityPack.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Interop.EA">
       <HintPath>..\..\..\..\..\Program Files (x86)\Sparx Systems\EA\Interop.EA.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
-    <Reference Include="linq2db, Version=2.5.4.0, Culture=neutral, PublicKeyToken=e41013125f9e410a, processorArchitecture=MSIL">
-      <HintPath>..\packages\linq2db.2.5.4\lib\net45\linq2db.dll</HintPath>
+    <Reference Include="linq2db, Version=2.6.1.0, Culture=neutral, PublicKeyToken=e41013125f9e410a, processorArchitecture=MSIL">
+      <HintPath>..\..\EnterpriseArchitect_hoReverse\packages\linq2db.2.6.1\lib\net46\linq2db.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Data.Sqlite, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Data.Sqlite.Core.2.2.0\lib\netstandard2.0\Microsoft.Data.Sqlite.dll</HintPath>
+      <HintPath>..\..\EnterpriseArchitect_hoReverse\packages\Microsoft.Data.Sqlite.Core.2.2.0\lib\netstandard2.0\Microsoft.Data.Sqlite.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="MySql.Data, Version=8.0.13.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
-      <HintPath>..\packages\MySql.Data.8.0.13\lib\net452\MySql.Data.dll</HintPath>
+      <HintPath>..\..\EnterpriseArchitect_hoReverse\packages\MySql.Data.8.0.13\lib\net452\MySql.Data.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Npgsql, Version=4.0.4.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Npgsql.4.0.4\lib\net451\Npgsql.dll</HintPath>
+      <HintPath>..\..\EnterpriseArchitect_hoReverse\packages\Npgsql.4.0.4\lib\net451\Npgsql.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Oracle.ManagedDataAccess, Version=4.122.18.3, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
-      <HintPath>..\packages\Oracle.ManagedDataAccess.18.3.0\lib\net40\Oracle.ManagedDataAccess.dll</HintPath>
+      <HintPath>..\..\EnterpriseArchitect_hoReverse\packages\Oracle.ManagedDataAccess.18.3.0\lib\net40\Oracle.ManagedDataAccess.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="SQLitePCLRaw.batteries_green, Version=1.1.11.121, Culture=neutral, PublicKeyToken=a84b7dcfb1391f7f, processorArchitecture=MSIL">
-      <HintPath>..\packages\SQLitePCLRaw.bundle_green.1.1.11\lib\net45\SQLitePCLRaw.batteries_green.dll</HintPath>
+      <HintPath>..\..\EnterpriseArchitect_hoReverse\packages\SQLitePCLRaw.bundle_green.1.1.11\lib\net45\SQLitePCLRaw.batteries_green.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="SQLitePCLRaw.batteries_v2, Version=1.1.11.121, Culture=neutral, PublicKeyToken=8226ea5df37bcae9, processorArchitecture=MSIL">
-      <HintPath>..\packages\SQLitePCLRaw.bundle_green.1.1.11\lib\net45\SQLitePCLRaw.batteries_v2.dll</HintPath>
+      <HintPath>..\..\EnterpriseArchitect_hoReverse\packages\SQLitePCLRaw.bundle_green.1.1.11\lib\net45\SQLitePCLRaw.batteries_v2.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="SQLitePCLRaw.core, Version=1.1.11.121, Culture=neutral, PublicKeyToken=1488e028ca7ab535, processorArchitecture=MSIL">
-      <HintPath>..\packages\SQLitePCLRaw.core.1.1.11\lib\net45\SQLitePCLRaw.core.dll</HintPath>
+      <HintPath>..\..\EnterpriseArchitect_hoReverse\packages\SQLitePCLRaw.core.1.1.11\lib\net45\SQLitePCLRaw.core.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="SQLitePCLRaw.provider.e_sqlite3, Version=1.1.11.121, Culture=neutral, PublicKeyToken=9c301db686d0bd12, processorArchitecture=MSIL">
-      <HintPath>..\packages\SQLitePCLRaw.provider.e_sqlite3.net45.1.1.11\lib\net45\SQLitePCLRaw.provider.e_sqlite3.dll</HintPath>
-    </Reference>
-    <Reference Include="Sybase.AdoNet4.AseClient, Version=4.157.104.0, Culture=neutral, PublicKeyToken=95d94fac46c88e1e, processorArchitecture=MSIL">
-      <HintPath>..\..\EnterpriseArchitect_hoReverse\packages\Sybase.AdoNet4.AseClient.1.0.0\lib\net46\Sybase.AdoNet4.AseClient.dll</HintPath>
+      <HintPath>..\..\EnterpriseArchitect_hoReverse\packages\SQLitePCLRaw.provider.e_sqlite3.net45.1.1.11\lib\net45\SQLitePCLRaw.provider.e_sqlite3.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel" />
@@ -95,20 +111,24 @@
     <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.SQLite, Version=1.0.109.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Data.SQLite.Core.1.0.109.2\lib\net46\System.Data.SQLite.dll</HintPath>
+      <HintPath>..\..\EnterpriseArchitect_hoReverse\packages\System.Data.SQLite.Core.1.0.109.2\lib\net46\System.Data.SQLite.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.Drawing.Design" />
     <Reference Include="System.Management" />
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+      <HintPath>..\..\EnterpriseArchitect_hoReverse\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.1\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
+      <HintPath>..\..\EnterpriseArchitect_hoReverse\packages\System.Threading.Tasks.Extensions.4.5.1\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Transactions" />
     <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
+      <HintPath>..\..\EnterpriseArchitect_hoReverse\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
@@ -131,6 +151,11 @@
     </Compile>
     <Compile Include="DataModels\Ea\EaDataModel.cs" />
     <Compile Include="DataModels\MySql\DataModelMySql.generated.cs" />
+    <Compile Include="DataModels\MySql\DataModelMySql1.generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataModelMySql.tt</DependentUpon>
+    </Compile>
     <Compile Include="DataModels\SqlServer\DataModelSqlServer.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -182,6 +207,11 @@
     <Content Include="LinqToDB.Templates\CopyMe.SQLite.tt.txt" />
     <Content Include="LinqToDB.Templates\CopyMe.SqlServer.tt.txt" />
     <Content Include="LinqToDB.Templates\CopyMe.Sybase.DataAction.tt.txt" />
+    <Content Include="LinqToDB.Templates\CopyMe.Sybase.tt.txt" />
+    <Content Include="Scripts\jquery-2.1.1.intellisense.js" />
+    <Content Include="Scripts\jquery-2.1.1.js" />
+    <Content Include="Scripts\jquery-2.1.1.min.js" />
+    <Content Include="Scripts\nugetexample.js" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -209,6 +239,7 @@
     <None Include="LinqToDB.Templates\LinqToDB.SqlServer.Tools.ttinclude" />
     <None Include="LinqToDB.Templates\LinqToDB.SqlServer.ttinclude" />
     <None Include="LinqToDB.Templates\LinqToDB.Sybase.DataAction.Tools.ttinclude" />
+    <None Include="LinqToDB.Templates\LinqToDB.Sybase.Tools.ttinclude" />
     <None Include="LinqToDB.Templates\LinqToDB.Sybase.ttinclude" />
     <None Include="LinqToDB.Templates\LinqToDB.Tools.ttinclude" />
     <None Include="LinqToDB.Templates\LinqToDB.ttinclude" />
@@ -220,7 +251,10 @@
     <None Include="LinqToDB.Templates\T4Model.ttinclude" />
     <None Include="LinqToDB.Templates\Validation.ttinclude" />
     <None Include="LinqUtils\sql.sqlite" />
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Scripts\jquery-2.1.1.min.map" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
@@ -233,7 +267,6 @@
     <Error Condition="!Exists('..\..\EnterpriseArchitect_hoReverse\packages\linq2db.Oracle.Managed.2.2.0\build\linq2db.Oracle.Managed.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\EnterpriseArchitect_hoReverse\packages\linq2db.Oracle.Managed.2.2.0\build\linq2db.Oracle.Managed.props'))" />
     <Error Condition="!Exists('..\..\EnterpriseArchitect_hoReverse\packages\linq2db.Sybase.DataAction.2.2.0\build\linq2db.Sybase.DataAction.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\EnterpriseArchitect_hoReverse\packages\linq2db.Sybase.DataAction.2.2.0\build\linq2db.Sybase.DataAction.props'))" />
     <Error Condition="!Exists('..\..\EnterpriseArchitect_hoReverse\packages\linq2db.PostgreSQL.2.2.0\build\linq2db.PostgreSQL.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\EnterpriseArchitect_hoReverse\packages\linq2db.PostgreSQL.2.2.0\build\linq2db.PostgreSQL.props'))" />
-    <Error Condition="!Exists('..\packages\linq2db.Access.2.5.4\build\linq2db.Access.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\linq2db.Access.2.5.4\build\linq2db.Access.props'))" />
     <Error Condition="!Exists('..\packages\linq2db.SqlServer.2.5.4\build\linq2db.SqlServer.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\linq2db.SqlServer.2.5.4\build\linq2db.SqlServer.props'))" />
     <Error Condition="!Exists('..\packages\linq2db.Sybase.DataAction.2.5.4\build\linq2db.Sybase.DataAction.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\linq2db.Sybase.DataAction.2.5.4\build\linq2db.Sybase.DataAction.props'))" />
     <Error Condition="!Exists('..\packages\linq2db.MySql.2.5.4\build\linq2db.MySql.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\linq2db.MySql.2.5.4\build\linq2db.MySql.props'))" />
@@ -241,9 +274,25 @@
     <Error Condition="!Exists('..\packages\System.Data.SQLite.Core.1.0.109.2\build\net46\System.Data.SQLite.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\System.Data.SQLite.Core.1.0.109.2\build\net46\System.Data.SQLite.Core.targets'))" />
     <Error Condition="!Exists('..\packages\linq2db.SQLite.2.5.4\build\linq2db.SQLite.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\linq2db.SQLite.2.5.4\build\linq2db.SQLite.props'))" />
     <Error Condition="!Exists('..\packages\linq2db.PostgreSQL.2.5.4\build\linq2db.PostgreSQL.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\linq2db.PostgreSQL.2.5.4\build\linq2db.PostgreSQL.props'))" />
+    <Error Condition="!Exists('..\..\EnterpriseArchitect_hoReverse\packages\linq2db.Access.2.6.1\build\linq2db.Access.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\EnterpriseArchitect_hoReverse\packages\linq2db.Access.2.6.1\build\linq2db.Access.props'))" />
+    <Error Condition="!Exists('..\..\EnterpriseArchitect_hoReverse\packages\linq2db.SqlServer.2.6.1\build\linq2db.SqlServer.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\EnterpriseArchitect_hoReverse\packages\linq2db.SqlServer.2.6.1\build\linq2db.SqlServer.props'))" />
+    <Error Condition="!Exists('..\..\EnterpriseArchitect_hoReverse\packages\linq2db.MySql.2.6.1\build\linq2db.MySql.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\EnterpriseArchitect_hoReverse\packages\linq2db.MySql.2.6.1\build\linq2db.MySql.props'))" />
+    <Error Condition="!Exists('..\..\EnterpriseArchitect_hoReverse\packages\linq2db.Oracle.Managed.2.6.1\build\linq2db.Oracle.Managed.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\EnterpriseArchitect_hoReverse\packages\linq2db.Oracle.Managed.2.6.1\build\linq2db.Oracle.Managed.props'))" />
+    <Error Condition="!Exists('..\..\EnterpriseArchitect_hoReverse\packages\SQLitePCLRaw.lib.e_sqlite3.linux.1.1.11\build\net35\SQLitePCLRaw.lib.e_sqlite3.linux.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\EnterpriseArchitect_hoReverse\packages\SQLitePCLRaw.lib.e_sqlite3.linux.1.1.11\build\net35\SQLitePCLRaw.lib.e_sqlite3.linux.targets'))" />
+    <Error Condition="!Exists('..\..\EnterpriseArchitect_hoReverse\packages\SQLitePCLRaw.lib.e_sqlite3.osx.1.1.11\build\net35\SQLitePCLRaw.lib.e_sqlite3.osx.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\EnterpriseArchitect_hoReverse\packages\SQLitePCLRaw.lib.e_sqlite3.osx.1.1.11\build\net35\SQLitePCLRaw.lib.e_sqlite3.osx.targets'))" />
+    <Error Condition="!Exists('..\..\EnterpriseArchitect_hoReverse\packages\SQLitePCLRaw.lib.e_sqlite3.v110_xp.1.1.11\build\net35\SQLitePCLRaw.lib.e_sqlite3.v110_xp.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\EnterpriseArchitect_hoReverse\packages\SQLitePCLRaw.lib.e_sqlite3.v110_xp.1.1.11\build\net35\SQLitePCLRaw.lib.e_sqlite3.v110_xp.targets'))" />
+    <Error Condition="!Exists('..\..\EnterpriseArchitect_hoReverse\packages\System.Data.SQLite.Core.1.0.109.2\build\net46\System.Data.SQLite.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\EnterpriseArchitect_hoReverse\packages\System.Data.SQLite.Core.1.0.109.2\build\net46\System.Data.SQLite.Core.targets'))" />
+    <Error Condition="!Exists('..\..\EnterpriseArchitect_hoReverse\packages\linq2db.SQLite.2.6.1\build\linq2db.SQLite.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\EnterpriseArchitect_hoReverse\packages\linq2db.SQLite.2.6.1\build\linq2db.SQLite.props'))" />
+    <Error Condition="!Exists('..\..\EnterpriseArchitect_hoReverse\packages\linq2db.PostgreSQL.2.6.1\build\linq2db.PostgreSQL.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\EnterpriseArchitect_hoReverse\packages\linq2db.PostgreSQL.2.6.1\build\linq2db.PostgreSQL.props'))" />
+    <Error Condition="!Exists('..\..\EnterpriseArchitect_hoReverse\packages\linq2db.Sybase.2.6.1\build\linq2db.Sybase.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\EnterpriseArchitect_hoReverse\packages\linq2db.Sybase.2.6.1\build\linq2db.Sybase.props'))" />
+    <Error Condition="!Exists('..\..\EnterpriseArchitect_hoReverse\packages\linq2db.Sybase.DataAction.2.6.1\build\linq2db.Sybase.DataAction.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\EnterpriseArchitect_hoReverse\packages\linq2db.Sybase.DataAction.2.6.1\build\linq2db.Sybase.DataAction.props'))" />
   </Target>
   <Import Project="..\packages\SQLitePCLRaw.lib.e_sqlite3.linux.1.1.11\build\net35\SQLitePCLRaw.lib.e_sqlite3.linux.targets" Condition="Exists('..\packages\SQLitePCLRaw.lib.e_sqlite3.linux.1.1.11\build\net35\SQLitePCLRaw.lib.e_sqlite3.linux.targets')" />
   <Import Project="..\packages\SQLitePCLRaw.lib.e_sqlite3.osx.1.1.11\build\net35\SQLitePCLRaw.lib.e_sqlite3.osx.targets" Condition="Exists('..\packages\SQLitePCLRaw.lib.e_sqlite3.osx.1.1.11\build\net35\SQLitePCLRaw.lib.e_sqlite3.osx.targets')" />
   <Import Project="..\packages\SQLitePCLRaw.lib.e_sqlite3.v110_xp.1.1.11\build\net35\SQLitePCLRaw.lib.e_sqlite3.v110_xp.targets" Condition="Exists('..\packages\SQLitePCLRaw.lib.e_sqlite3.v110_xp.1.1.11\build\net35\SQLitePCLRaw.lib.e_sqlite3.v110_xp.targets')" />
   <Import Project="..\packages\System.Data.SQLite.Core.1.0.109.2\build\net46\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.109.2\build\net46\System.Data.SQLite.Core.targets')" />
+  <Import Project="..\..\EnterpriseArchitect_hoReverse\packages\SQLitePCLRaw.lib.e_sqlite3.linux.1.1.11\build\net35\SQLitePCLRaw.lib.e_sqlite3.linux.targets" Condition="Exists('..\..\EnterpriseArchitect_hoReverse\packages\SQLitePCLRaw.lib.e_sqlite3.linux.1.1.11\build\net35\SQLitePCLRaw.lib.e_sqlite3.linux.targets')" />
+  <Import Project="..\..\EnterpriseArchitect_hoReverse\packages\SQLitePCLRaw.lib.e_sqlite3.osx.1.1.11\build\net35\SQLitePCLRaw.lib.e_sqlite3.osx.targets" Condition="Exists('..\..\EnterpriseArchitect_hoReverse\packages\SQLitePCLRaw.lib.e_sqlite3.osx.1.1.11\build\net35\SQLitePCLRaw.lib.e_sqlite3.osx.targets')" />
+  <Import Project="..\..\EnterpriseArchitect_hoReverse\packages\SQLitePCLRaw.lib.e_sqlite3.v110_xp.1.1.11\build\net35\SQLitePCLRaw.lib.e_sqlite3.v110_xp.targets" Condition="Exists('..\..\EnterpriseArchitect_hoReverse\packages\SQLitePCLRaw.lib.e_sqlite3.v110_xp.1.1.11\build\net35\SQLitePCLRaw.lib.e_sqlite3.v110_xp.targets')" />
+  <Import Project="..\..\EnterpriseArchitect_hoReverse\packages\System.Data.SQLite.Core.1.0.109.2\build\net46\System.Data.SQLite.Core.targets" Condition="Exists('..\..\EnterpriseArchitect_hoReverse\packages\System.Data.SQLite.Core.1.0.109.2\build\net46\System.Data.SQLite.Core.targets')" />
 </Project>

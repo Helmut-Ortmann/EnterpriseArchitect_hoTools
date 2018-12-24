@@ -37,8 +37,8 @@
       <HintPath>..\..\..\..\..\Program Files (x86)\Sparx Systems\EA\Interop.EA.dll</HintPath>
       <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
-    <Reference Include="linq2db, Version=2.5.4.0, Culture=neutral, PublicKeyToken=e41013125f9e410a, processorArchitecture=MSIL">
-      <HintPath>..\packages\linq2db.2.5.4\lib\net45\linq2db.dll</HintPath>
+    <Reference Include="linq2db, Version=2.6.1.0, Culture=neutral, PublicKeyToken=e41013125f9e410a, processorArchitecture=MSIL">
+      <HintPath>..\packages\linq2db.2.6.1\lib\net46\linq2db.dll</HintPath>
     </Reference>
     <Reference Include="SparxSystems.Repository, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
