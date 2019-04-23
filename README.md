@@ -133,6 +133,7 @@ Some features:
 
 - Service Move Copied Search elements of clipboard to selected package
 - Update nuget packages
+- AddInSimple 1.2 Example AddinSearch with SQL (Requirements with LIKE '*<Search Term>*')
 
 ### Release 3.2.13
 

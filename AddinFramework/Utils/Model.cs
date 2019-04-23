@@ -146,7 +146,7 @@ namespace EAAddinFramework.Utils
             }
             catch (Exception e)
             {
-                MessageBox.Show($"SQL execute:\r\n{sqlString}\r\n{e.Message}", @"Error SQL execute");
+                MessageBox.Show($@"SQL execute:{Environment.NewLine}{sqlString}{Environment.NewLine}{e.Message}", @"Error SQL execute");
                 return false;
             }
         }
@@ -268,7 +268,7 @@ namespace EAAddinFramework.Utils
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show($"Can't find search!\r\n\r\n- MDG hoTools.. enabled?\r\n- SQL path in Settings correct?\r\n- LINQPad support enabled (Settings General)? :\r\n'{searchName}' '{searchTerm}'\r\n- *.sql in path '{_globalCfg.GetSqlPaths()}'\r\n- *.linq in path '{_globalCfg.GetLinqPaths()}'\r\n- EA Search\r\n\r\nNote:\r\n- Define path in File, Settings\r\n- LINQPad needs a license and has to be installed!\r\n\r\n{e}",
+                    MessageBox.Show($@"Can't find search!{Environment.NewLine}{Environment.NewLine}- MDG hoTools.. enabled?{Environment.NewLine}- SQL path in Settings correct?{Environment.NewLine}- LINQPad support enabled (Settings General)? :{Environment.NewLine}'{searchName}' '{searchTerm}'{Environment.NewLine}- *.sql in path '{_globalCfg.GetSqlPaths()}'{Environment.NewLine}- *.linq in path '{_globalCfg.GetLinqPaths()}'{Environment.NewLine}- EA Search{Environment.NewLine}{Environment.NewLine}Note:{Environment.NewLine}- Define path in File, Settings{Environment.NewLine}- LINQPad needs a license and has to be installed!{Environment.NewLine}{Environment.NewLine}{e}",
                         $@"Error start search.");
                     return "";
                 }
@@ -303,7 +303,7 @@ namespace EAAddinFramework.Utils
                 // run the SQL select query
                 var xmlSqlQueryResult = SqlQueryWithException(sql) ?? "";
 
-                // output the query in EA Search Window
+                // output the query in EA Search Window format
                 string xmlEaOutput = MakeEaXmlOutput(xmlSqlQueryResult);
                 if (exportToExcel)
                     Excel.MakeExcelFileFromSqlResult(xmlSqlQueryResult,
@@ -375,7 +375,7 @@ namespace EAAddinFramework.Utils
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"SQL:\r\n{query}\r\n{ex.Message}", @"Error SQL");
+                MessageBox.Show($@"SQL:{Environment.NewLine}{query}{Environment.NewLine}{ex.Message}", @"Error SQL");
                 return null;
             }
         }
@@ -411,7 +411,7 @@ namespace EAAddinFramework.Utils
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"SQL:\r\n{sql}\r\n{ex.Message}", @"Error SQL");
+                MessageBox.Show($@"SQL:{Environment.NewLine}{sql}{Environment.NewLine}{ex.Message}", @"Error SQL");
                 return false;
             }
 

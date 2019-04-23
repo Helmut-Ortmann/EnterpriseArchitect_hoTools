@@ -271,7 +271,7 @@ namespace AddInSimple
                 // Test the Search and output the results to EA Search Window
                 case MenuRunDemoSearch:
                     // 1. Collect data
-                    dt = SetTable();
+                    dt = SetTableSimpleFixTable();
                     // 2. Order, Filter, Join, Format to XML
                     xml = QueryAndMakeXmlFromTable(dt);
                     // 3. Out put to EA
@@ -824,7 +824,7 @@ Helmut.Ortmann@t-online.de
         public object AddInSearchSample(EA.Repository repository, string searchText, out string xmlResults)
         {
             // 1. Collect data into a data table
-            DataTable dt = SetTable();
+            DataTable dt = SetTableSimpleFixTable();
             // 2. Order, Filter, Join, Format to XML
             xmlResults = QueryAndMakeXmlFromTable(dt);
             return "ok";
@@ -859,13 +859,63 @@ Helmut.Ortmann@t-online.de
             xmlResults = QueryAndMakeXmlFromTable(dt);
             return "ok";
         }
+        /// <summary>
+        /// Add-In Search: Sample for reading requirements
+        /// See: http://sparxsystems.com/enterprise_architect_user_guide/13.5/automation/add-in_search.html
+        /// hoTools:
+        /// https://github.com/Helmut-Ortmann/EnterpriseArchitect_hoTools/wiki/AddInModelSearch
+        /// 
+        /// How it's works:
+        /// 1. Create a Table and fill it with your code
+        /// 2. Adapt LINQ to output the table (powerful)
+        ///    -- Where to select only certain rows
+        ///    -- Order By to order the result set
+        ///    -- Grouping
+        ///    -- Filter
+        ///    -- JOIN
+        ///    -- etc.
+        /// 3. Deploy and test 
+        /// </summary>
+        /// <param name="repository"></param>
+        /// <param name="searchText"></param>
+        /// <param name="xmlResults"></param>
+        /// <returns></returns>
+        public object AddInSearchSampleRequirements(EA.Repository repository, string searchText, out string xmlResults)
+        {
+            // 1. Collect data into a data table
+            DataTable dt = SetTableForRequirements(repository, searchText);
+            // 2. Order, Filter, Join, Format to XML
+            xmlResults = QueryAndMakeXmlFromTable(dt);
+            return "ok";
+        }
+        /// <summary>
+        /// Set the data table to the found requirements
+        /// </summary>
+        /// <param name="repository"></param>
+        /// <param name="searchString"></param>
+        /// <returns></returns>
+        private DataTable SetTableForRequirements(EA.Repository repository, string searchString)
+        {
+            // 1. Run SQL
+            string predicateName = String.IsNullOrWhiteSpace(searchString) ? " " : $" AND o.name LIKE '*{searchString}*'";
+            string sql = $@"select o.ea_guid AS [CLASSGUID], o.object_type AS [CLASSTYPE], 't_object' AS [CLASSTABLE],
+                                o.name, o.stereotype, o.object_type 
+                           from t_object o 
+                           where o.object_type = 'Requirement' {predicateName}
+                           order by o.name";
+            //repository.WriteOutput("Search",sql, 0);
+            string xml = repository.SQLQuery(sql);
+            // 2. Convert to DataTable
+            DataTable dt = Xml.MakeDataTableFromSqlXml(xml);
+            return dt;
+        }
 
 
         /// <summary>
         /// Set DataTable with test data
         /// </summary>
         /// <returns></returns>
-        private DataTable SetTable()
+        private DataTable SetTableSimpleFixTable()
         {
             // Here we create a DataTable with three columns.
             DataTable table = new DataTable();
