@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\linq2db.Access.2.6.1\build\linq2db.Access.props" Condition="Exists('..\packages\linq2db.Access.2.6.1\build\linq2db.Access.props')" />
+  <Import Project="..\packages\linq2db.Access.2.6.4\build\linq2db.Access.props" Condition="Exists('..\packages\linq2db.Access.2.6.4\build\linq2db.Access.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -87,8 +87,8 @@
       <HintPath>C:\Program Files (x86)\Sparx Systems\EA\Interop.EA.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
-    <Reference Include="linq2db, Version=2.6.1.0, Culture=neutral, PublicKeyToken=e41013125f9e410a, processorArchitecture=MSIL">
-      <HintPath>..\packages\linq2db.2.6.1\lib\net46\linq2db.dll</HintPath>
+    <Reference Include="linq2db, Version=2.6.4.0, Culture=neutral, PublicKeyToken=e41013125f9e410a, processorArchitecture=MSIL">
+      <HintPath>..\packages\linq2db.2.6.4\lib\net46\linq2db.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel" />
@@ -197,6 +197,6 @@
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\linq2db.Access.2.6.1\build\linq2db.Access.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\linq2db.Access.2.6.1\build\linq2db.Access.props'))" />
+    <Error Condition="!Exists('..\packages\linq2db.Access.2.6.4\build\linq2db.Access.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\linq2db.Access.2.6.4\build\linq2db.Access.props'))" />
   </Target>
 </Project>

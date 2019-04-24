@@ -344,10 +344,10 @@
       -->
 
       <Component Id="SQLite.Interop.dll" Guid="{3DFC900E-8BD6-4B50-ACFC-7DF08040ECC2}">
-        <File Id="SQLite.Interop.dll" KeyPath="yes" Name="SQLite.Interop.dll" Source="..\packages\System.Data.SQLite.Core.1.0.109.2\build\net46\x86\SQLite.Interop.dll" />
+        <File Id="SQLite.Interop.dll" KeyPath="yes" Name="SQLite.Interop.dll" Source="..\packages\System.Data.SQLite.Core.1.0.110.0\build\net46\x86\SQLite.Interop.dll" />
       </Component>
       <Component Id="System.Data.SQLite.dll" Guid="{B161BBE0-0A9C-4570-AE7A-91E10F380ACD}">
-        <File Id="System.Data.SQLite.dll" KeyPath="yes" Name="System.Data.SQLite.dll" Source="..\packages\System.Data.SQLite.Core.1.0.109.2\lib\net46\System.Data.SQLite.dll" />
+        <File Id="System.Data.SQLite.dll" KeyPath="yes" Name="System.Data.SQLite.dll" Source="..\packages\System.Data.SQLite.Core.1.0.110.0\lib\net46\System.Data.SQLite.dll" />
       </Component>
 
 
