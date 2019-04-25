@@ -66,7 +66,7 @@
         <File Id="KBCsv.Extensions.Data" KeyPath="yes" Name="KBCsv.Extensions.Data.dll"  Source="..\packages\KBCsv.Extensions.Data.5.0.0\lib\net45\KBCsv.Extensions.Data.dll" />
       </Component>
       <Component Id="DocumentFormat.OpenXml" Guid="F6FBBA69-A929-413B-A13B-BBDD7851D1F7">
-        <File Id="DocumentFormat.OpenXml" KeyPath="yes" Name="DocumentFormat.OpenXml.dll"  Source="..\packages\DocumentFormat.OpenXml.2.7.2\lib\net46\DocumentFormat.OpenXml.dll" />
+        <File Id="DocumentFormat.OpenXml" KeyPath="yes" Name="DocumentFormat.OpenXml.dll"  Source="..\packages\DocumentFormat.OpenXml.2.9.1\lib\net46\DocumentFormat.OpenXml.dll" />
       </Component>
       <Component Id="ClosedXml" Guid="969900BC-0842-4E36-B550-35AA37682D19">
         <File Id="ClosedXml" KeyPath="yes" Name="ClosedXml.dll"  Source="..\packages\ClosedXML.0.94.2\lib\net46\ClosedXML.dll" />
