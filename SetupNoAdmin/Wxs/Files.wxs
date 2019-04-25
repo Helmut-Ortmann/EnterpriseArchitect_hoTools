@@ -57,7 +57,7 @@
         <File Id="DuoVia.FuzzyStrings" KeyPath="yes" Name="DuoVia.FuzzyStrings.dll"  Source="$(var.DuoVia.FuzzyStrings.TargetPath)" />
       </Component>
        <Component Id="Newtonsoft.Json" Guid="48483AD6-80C5-41C6-87DB-CE36684E4ACD">
-        <File Id="Newtonsoft.Json" KeyPath="yes" Name="Newtonsoft.Json.dll"  Source="..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll" />
+        <File Id="Newtonsoft.Json" KeyPath="yes" Name="Newtonsoft.Json.dll"  Source="..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll" />
       </Component>
       <Component Id="KBCsv" Guid="30620E70-7C9D-45E4-BEC8-6A3B8D5107EA">
         <File Id="KBCsv" KeyPath="yes" Name="KBCsv.dll"  Source="..\packages\KBCsv.5.0.0\lib\netstandard1.0\KBCsv.dll" />
@@ -69,7 +69,7 @@
         <File Id="DocumentFormat.OpenXml" KeyPath="yes" Name="DocumentFormat.OpenXml.dll"  Source="..\packages\DocumentFormat.OpenXml.2.7.2\lib\net46\DocumentFormat.OpenXml.dll" />
       </Component>
       <Component Id="ClosedXml" Guid="969900BC-0842-4E36-B550-35AA37682D19">
-        <File Id="ClosedXml" KeyPath="yes" Name="ClosedXml.dll"  Source="..\packages\ClosedXML.0.93.1\lib\net46\ClosedXML.dll" />
+        <File Id="ClosedXml" KeyPath="yes" Name="ClosedXml.dll"  Source="..\packages\ClosedXML.0.94.2\lib\net46\ClosedXML.dll" />
       </Component>
       <Component Id="AddinFramework" Guid="03862F5A-C4CB-4234-B744-14DDE1454E0F">
         <File Id="AddinFramework" KeyPath="yes" Name="AddinFramework.dll" Source="$(var.AddinFramework.TargetPath)" />
