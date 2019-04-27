@@ -309,7 +309,7 @@
       <!-- linq2db                   -->
       <!-- Supported databases Access, MySQL, SqlServer, Oracle, Sybase, Postgres (tested: Access, MySQL, SqlServer) -->
       <Component Id="linq2db.dll" Guid="{7F7E0442-6625-451E-841E-E4D304EFBCBA}">
-        <File Id="linq2db.dll" KeyPath="yes" Name="linq2db.dll" Source="..\packages\linq2db.2.6.4\lib\net45\linq2db.dll" />
+        <File Id="linq2db.dll" KeyPath="yes" Name="linq2db.dll" Source="..\packages\linq2db.2.7.0\lib\net45\linq2db.dll" />
       </Component>
       <!-- Separate install MySql.Data.dll-->
       <Component Id="MySql.Data.dll" Guid="{1D9AF997-5EFF-4F2A-9410-72EAA69473CC}">
@@ -322,7 +322,7 @@
         <File Id="Oracle.ManagedDataAccess.dll" KeyPath="yes" Name="Oracle.ManagedDataAccess.dll" Source="..\packages\linq2db.Oracle.x86.1.10.0\tools\Oracle.ManagedDataAccess.dll" />
       </Component>
       <Component Id="Npgsql.dll" Guid="{B63E7AC0-5F42-49A3-8ABD-4B84B8C9160D}">
-        <File Id="Npgsql.dll" KeyPath="yes" Name="Npgsql.dll" Source="..\packages\linq2db.PostgreSQL.2.6.1\tools\Npgsql.dll" />
+        <File Id="Npgsql.dll" KeyPath="yes" Name="Npgsql.dll" Source="..\packages\linq2db.PostgreSQL.2.7.0\tools\Npgsql.dll" />
       </Component>
       <Component Id="AdoNetCore.AseClient.dll" Guid="{A3853976-5D6F-430E-AB0D-D87648B009D3}">
         <File Id="AdoNetCore.AseClient.dll" KeyPath="yes" Name="AdoNetCore.AseClient.dll" Source="..\packages\AdoNetCore.AseClient.0.13.1\lib\net46\AdoNetCore.AseClient.dll" />

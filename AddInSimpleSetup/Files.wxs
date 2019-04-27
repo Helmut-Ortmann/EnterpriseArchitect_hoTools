@@ -58,7 +58,7 @@
       <!-- linq2db                   -->
       <!-- Supported databases Access, MySQL, SqlServer, Oracle, Sybase, Postgres (tested: Access, MySQL, SqlServer) -->
       <Component Id="linq2db.dll" Guid="{5E6D0EF2-280D-4B80-AF56-993C1A02B8C9}">
-        <File Id="linq2db.dll" KeyPath="yes" Name="linq2db.dll" Source="..\packages\linq2db.2.6.4\lib\net45\linq2db.dll" />
+        <File Id="linq2db.dll" KeyPath="yes" Name="linq2db.dll" Source="..\packages\linq2db.2.7.0\lib\net45\linq2db.dll" />
       </Component>
       <!-- Separate install MySql.Data.dll-->
       <Component Id="MySql.Data.dll" Guid="{CEEE4DA8-D2F3-4924-A922-8D894E4156D1}">

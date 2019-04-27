@@ -1,5 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\linq2db.PostgreSQL.2.7.0\build\linq2db.PostgreSQL.props" Condition="Exists('..\packages\linq2db.PostgreSQL.2.7.0\build\linq2db.PostgreSQL.props')" />
+  <Import Project="..\packages\linq2db.SQLite.2.7.0\build\linq2db.SQLite.props" Condition="Exists('..\packages\linq2db.SQLite.2.7.0\build\linq2db.SQLite.props')" />
+  <Import Project="..\packages\linq2db.Oracle.Managed.2.7.0\build\linq2db.Oracle.Managed.props" Condition="Exists('..\packages\linq2db.Oracle.Managed.2.7.0\build\linq2db.Oracle.Managed.props')" />
+  <Import Project="..\packages\linq2db.MySql.2.7.0\build\linq2db.MySql.props" Condition="Exists('..\packages\linq2db.MySql.2.7.0\build\linq2db.MySql.props')" />
+  <Import Project="..\packages\linq2db.Sybase.DataAction.2.7.0\build\linq2db.Sybase.DataAction.props" Condition="Exists('..\packages\linq2db.Sybase.DataAction.2.7.0\build\linq2db.Sybase.DataAction.props')" />
+  <Import Project="..\packages\linq2db.Sybase.2.7.0\build\linq2db.Sybase.props" Condition="Exists('..\packages\linq2db.Sybase.2.7.0\build\linq2db.Sybase.props')" />
+  <Import Project="..\packages\linq2db.SqlServer.2.7.0\build\linq2db.SqlServer.props" Condition="Exists('..\packages\linq2db.SqlServer.2.7.0\build\linq2db.SqlServer.props')" />
+  <Import Project="..\packages\linq2db.Access.2.7.0\build\linq2db.Access.props" Condition="Exists('..\packages\linq2db.Access.2.7.0\build\linq2db.Access.props')" />
   <Import Project="..\..\EnterpriseArchitect_hoReverse\packages\linq2db.Sybase.2.6.4\build\linq2db.Sybase.props" Condition="Exists('..\..\EnterpriseArchitect_hoReverse\packages\linq2db.Sybase.2.6.4\build\linq2db.Sybase.props')" />
   <Import Project="..\..\EnterpriseArchitect_hoReverse\packages\linq2db.PostgreSQL.2.6.4\build\linq2db.PostgreSQL.props" Condition="Exists('..\..\EnterpriseArchitect_hoReverse\packages\linq2db.PostgreSQL.2.6.4\build\linq2db.PostgreSQL.props')" />
   <Import Project="..\..\EnterpriseArchitect_hoReverse\packages\linq2db.SQLite.2.6.4\build\linq2db.SQLite.props" Condition="Exists('..\..\EnterpriseArchitect_hoReverse\packages\linq2db.SQLite.2.6.4\build\linq2db.SQLite.props')" />
@@ -52,6 +60,9 @@
     <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.5.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
+      <HintPath>..\packages\BouncyCastle.1.8.5\lib\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
     <Reference Include="Interop.EA">
       <HintPath>..\..\..\..\..\Program Files (x86)\Sparx Systems\EA\Interop.EA.dll</HintPath>
     </Reference>
@@ -228,6 +239,14 @@
     <Error Condition="!Exists('..\..\EnterpriseArchitect_hoReverse\packages\SQLitePCLRaw.lib.e_sqlite3.linux.1.1.13\build\net35\SQLitePCLRaw.lib.e_sqlite3.linux.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\EnterpriseArchitect_hoReverse\packages\SQLitePCLRaw.lib.e_sqlite3.linux.1.1.13\build\net35\SQLitePCLRaw.lib.e_sqlite3.linux.targets'))" />
     <Error Condition="!Exists('..\..\EnterpriseArchitect_hoReverse\packages\SQLitePCLRaw.lib.e_sqlite3.osx.1.1.13\build\net35\SQLitePCLRaw.lib.e_sqlite3.osx.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\EnterpriseArchitect_hoReverse\packages\SQLitePCLRaw.lib.e_sqlite3.osx.1.1.13\build\net35\SQLitePCLRaw.lib.e_sqlite3.osx.targets'))" />
     <Error Condition="!Exists('..\..\EnterpriseArchitect_hoReverse\packages\SQLitePCLRaw.lib.e_sqlite3.v110_xp.1.1.13\build\net35\SQLitePCLRaw.lib.e_sqlite3.v110_xp.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\EnterpriseArchitect_hoReverse\packages\SQLitePCLRaw.lib.e_sqlite3.v110_xp.1.1.13\build\net35\SQLitePCLRaw.lib.e_sqlite3.v110_xp.targets'))" />
+    <Error Condition="!Exists('..\packages\linq2db.Access.2.7.0\build\linq2db.Access.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\linq2db.Access.2.7.0\build\linq2db.Access.props'))" />
+    <Error Condition="!Exists('..\packages\linq2db.SqlServer.2.7.0\build\linq2db.SqlServer.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\linq2db.SqlServer.2.7.0\build\linq2db.SqlServer.props'))" />
+    <Error Condition="!Exists('..\packages\linq2db.Sybase.2.7.0\build\linq2db.Sybase.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\linq2db.Sybase.2.7.0\build\linq2db.Sybase.props'))" />
+    <Error Condition="!Exists('..\packages\linq2db.Sybase.DataAction.2.7.0\build\linq2db.Sybase.DataAction.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\linq2db.Sybase.DataAction.2.7.0\build\linq2db.Sybase.DataAction.props'))" />
+    <Error Condition="!Exists('..\packages\linq2db.MySql.2.7.0\build\linq2db.MySql.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\linq2db.MySql.2.7.0\build\linq2db.MySql.props'))" />
+    <Error Condition="!Exists('..\packages\linq2db.Oracle.Managed.2.7.0\build\linq2db.Oracle.Managed.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\linq2db.Oracle.Managed.2.7.0\build\linq2db.Oracle.Managed.props'))" />
+    <Error Condition="!Exists('..\packages\linq2db.SQLite.2.7.0\build\linq2db.SQLite.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\linq2db.SQLite.2.7.0\build\linq2db.SQLite.props'))" />
+    <Error Condition="!Exists('..\packages\linq2db.PostgreSQL.2.7.0\build\linq2db.PostgreSQL.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\linq2db.PostgreSQL.2.7.0\build\linq2db.PostgreSQL.props'))" />
   </Target>
   <Import Project="..\packages\SQLitePCLRaw.lib.e_sqlite3.linux.1.1.11\build\net35\SQLitePCLRaw.lib.e_sqlite3.linux.targets" Condition="Exists('..\packages\SQLitePCLRaw.lib.e_sqlite3.linux.1.1.11\build\net35\SQLitePCLRaw.lib.e_sqlite3.linux.targets')" />
   <Import Project="..\packages\SQLitePCLRaw.lib.e_sqlite3.osx.1.1.11\build\net35\SQLitePCLRaw.lib.e_sqlite3.osx.targets" Condition="Exists('..\packages\SQLitePCLRaw.lib.e_sqlite3.osx.1.1.11\build\net35\SQLitePCLRaw.lib.e_sqlite3.osx.targets')" />
