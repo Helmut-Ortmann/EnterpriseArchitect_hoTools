@@ -157,24 +157,40 @@ Module: {e.Source}");
         /// <returns></returns>
         public static bool SaveTableToExcel(ref string fileName, DataTable dt)
         {
-            using (XLWorkbook wb = new XLWorkbook())
+            try
             {
-                wb.Worksheets.Add(dt, Path.GetFileNameWithoutExtension(fileName));
-                if (!Directory.Exists(fileName))
+                using (XLWorkbook wb = new XLWorkbook())
                 {
-                    SaveFileDialog saveFile = new SaveFileDialog
+                    wb.Worksheets.Add(dt, Path.GetFileNameWithoutExtension(fileName));
+                    if (!Directory.Exists(fileName))
                     {
-                        FileName = Path.GetFileNameWithoutExtension(fileName),
-                        Filter = @"Excel file|*.xlsx|Excel file with macro|*.xlsm"
-                    };
-                    if (saveFile.ShowDialog() == DialogResult.OK) fileName = saveFile.FileName;
-                    else return false;
+                        SaveFileDialog saveFile = new SaveFileDialog
+                        {
+                            FileName = Path.GetFileNameWithoutExtension(fileName),
+                            Filter = @"Excel file|*.xlsx|Excel file with macro|*.xlsm"
+                        };
+                        if (saveFile.ShowDialog() == DialogResult.OK) fileName = saveFile.FileName;
+                        else return false;
+                    }
+
+                    //Util.TryToDeleteFile(fileName);
+                    wb.SaveAs(fileName);
+                    HandleExcelFileByUser(fileName, dt);
                 }
-                //Util.TryToDeleteFile(fileName);
-                wb.SaveAs(fileName);
-                HandleExcelFileByUser(fileName, dt);
+
+                return true;
             }
-            return true;
+            catch (Exception e)
+            {
+                MessageBox.Show($@"Maintenance message:
+
+File: {fileName}
+
+{e}", @"Can't run Excel dll ");
+                return false;
+            }
+
+
         }
 
         private static void HandleExcelFileByUser(string fileName, DataTable dt)

@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <packages>
   <package id="ClosedXML" version="0.94.2" targetFramework="net462" />
-  <package id="DocumentFormat.OpenXml" version="2.7.2" targetFramework="net462" />
+  <package id="DocumentFormat.OpenXml" version="2.9.1" targetFramework="net462" />
   <package id="ExcelNumberFormat" version="1.0.5" targetFramework="net462" />
   <package id="FastMember" version="1.4.1" targetFramework="net462" />
   <package id="FastMember.Signed" version="1.4.1" targetFramework="net462" />
