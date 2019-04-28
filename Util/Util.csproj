@@ -267,7 +267,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="hoKeyPair.snk" />
     <None Include="packages.config" />
   </ItemGroup>

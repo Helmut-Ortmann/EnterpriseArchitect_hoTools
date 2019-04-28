@@ -65,7 +65,9 @@
       <Component Id="KBCsv.Extensions.Data" Guid="97618C61-D0E0-41B0-8A2D-F82ECC5AF35E">
         <File Id="KBCsv.Extensions.Data" KeyPath="yes" Name="KBCsv.Extensions.Data.dll"  Source="..\packages\KBCsv.Extensions.Data.5.0.0\lib\net45\KBCsv.Extensions.Data.dll" />
       </Component>
-      <Component Id="DocumentFormat.OpenXml" Guid="F6FBBA69-A929-413B-A13B-BBDD7851D1F7">
+     <!--   Nuget: Get-Project –All | Add-BindingRedirect    -->
+     <!-- DocumentFormat.OpenXml.2.9.1 / DocumentFormat.OpenXml.2.9.1 -->
+       <Component Id="DocumentFormat.OpenXml" Guid="F6FBBA69-A929-413B-A13B-BBDD7851D1F7">
         <File Id="DocumentFormat.OpenXml" KeyPath="yes" Name="DocumentFormat.OpenXml.dll"  Source="..\packages\DocumentFormat.OpenXml.2.7.2\lib\net46\DocumentFormat.OpenXml.dll" />
       </Component>
       <Component Id="ClosedXml" Guid="969900BC-0842-4E36-B550-35AA37682D19">
