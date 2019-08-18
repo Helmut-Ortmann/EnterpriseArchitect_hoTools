@@ -315,7 +315,8 @@ namespace EAAddinFramework.Utils
 			{
 				
 				foreach(string mdgFile in mdgFiles)
-				{
+                {
+                    if (String.IsNullOrWhiteSpace(mdgFile)) continue;
 					LoadMdgScripts(Util.ReadAllText(mdgFile));
 				}
 			}

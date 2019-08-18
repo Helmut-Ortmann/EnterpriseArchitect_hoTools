@@ -1822,6 +1822,7 @@ namespace hoTools.Utils
         /// <returns></returns>
         public static string ReadAllText(string filePath)
         {
+            if (String.IsNullOrEmpty(filePath)) return "";
             try
             {
                 return File.ReadAllText(filePath);

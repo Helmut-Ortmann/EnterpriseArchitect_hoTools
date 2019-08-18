@@ -215,9 +215,15 @@ namespace AddinFramework.Util
         /// </summary>
         static void LoadLocalSearches(EA.Repository rep)
         {
-            
-            string searchFolder = SqlError.GetEaSqlErrorPath() + @"\Search Data"; 
-            LoadSearchFromFolder(rep, searchFolder);
+            try
+            {
+                string searchFolder = SqlError.GetEaSqlErrorPath() + @"\Search Data";
+                LoadSearchFromFolder(rep, searchFolder);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($@"{e.Message}", @"Error in load Local Searches");
+            }
 
         }
         /// <summary>
@@ -225,8 +231,15 @@ namespace AddinFramework.Util
         /// </summary>
         static void LoadLocalMdgSearches(EA.Repository rep)
         {
-            string searchFolder = Path.GetDirectoryName(Model.ApplicationFullPath) + "\\MDGTechnologies";
-            LoadSearchFromFolder(rep, searchFolder);
+            try
+            {
+                string searchFolder = Path.GetDirectoryName(Model.ApplicationFullPath) + "\\MDGTechnologies";
+                LoadSearchFromFolder(rep, searchFolder);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($@"{e.Message}", @"Error in load MDG Searches");
+            }
         }
 
         static void LoadSearchFromFolder(EA.Repository rep, string folder)
@@ -234,7 +247,16 @@ namespace AddinFramework.Util
             string[] searchFiles = Directory.GetFiles(folder, "*.xml", SearchOption.AllDirectories);
             foreach (string searchFile in searchFiles)
             {
-                LoadMdgSearches(rep, hoTools.Utils.Util.ReadAllText(searchFile));
+                if (String.IsNullOrEmpty(searchFile)) continue;
+                try
+                {
+                    LoadMdgSearches(rep, hoTools.Utils.Util.ReadAllText(searchFile));
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show($@"{e.Message}", @"Error in load MDG Searches from file");
+                }
+                
             }
 
         }
@@ -245,9 +267,11 @@ namespace AddinFramework.Util
         /// </summary>
         static void LoadOtherMdgSearches(EA.Repository rep)
         {
-
+            try
+            {
                 //read the registry key to find the locations
-                var pathList = Registry.GetValue(@"HKEY_CURRENT_USER\Software\Sparx Systems\EA400\EA\OPTIONS", "MDGTechnology PathList", null) as string;
+                var pathList = Registry.GetValue(@"HKEY_CURRENT_USER\Software\Sparx Systems\EA400\EA\OPTIONS",
+                    "MDGTechnology PathList", null) as string;
                 if (pathList != null)
                 {
                     string[] mdgPaths = pathList.Split(',');
@@ -255,18 +279,31 @@ namespace AddinFramework.Util
                     {
                         if (mdgPath.Trim() == "") continue;
                         //figure out it we have a folder path or an URL
-                        if (mdgPath.StartsWith("http", StringComparison.InvariantCultureIgnoreCase))
+                        try
                         {
-                            //URL
-                            LoadMdgSearchFromUrl(rep, mdgPath);
+                            if (mdgPath.StartsWith("http", StringComparison.InvariantCultureIgnoreCase))
+                            {
+                                //URL
+                                LoadMdgSearchFromUrl(rep, mdgPath);
+                            }
+                            else
+                            {
+                                //directory
+                                LoadSearchFromFolder(rep, mdgPath);
+                            }
                         }
-                        else
+                        catch (Exception e)
                         {
-                            //directory
-                            LoadSearchFromFolder(rep, mdgPath);
+                            MessageBox.Show($@"{e.Message}", @"Error in load other MDG Searches");
+                            continue;
                         }
                     }
                 }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($@"{e.Message}", @"Error in load other MDG Searches");
+            }
 
         }
 
@@ -276,7 +313,7 @@ namespace AddinFramework.Util
         /// </summary>
         /// <param name="rep"></param>
         /// <param name="mdgXmlContent">the string content of the MDG file</param>
-        static void LoadMdgSearches(EA.Repository rep, string mdgXmlContent)
+        static bool LoadMdgSearches(EA.Repository rep, string mdgXmlContent)
         {
             try
             {
@@ -295,11 +332,11 @@ namespace AddinFramework.Util
                 if (documentation != null)
                 {
                     string id = documentation.Attribute("id")?.Value;
-                    if (id == null) return;
+                    if (id == null) return true;
                     //name = documentation.Attribute("name").Value;
                     //notes = documentation.Attribute("notes").Value;
                     // check if Technology is enabled
-                    if (rep.IsTechnologyEnabled(id) == false && rep.IsTechnologyLoaded(id)) return;
+                    if (rep.IsTechnologyEnabled(id) == false && rep.IsTechnologyLoaded(id)) return true;
                     category = id;
 
                     //----------------------------------------
@@ -315,14 +352,16 @@ namespace AddinFramework.Util
                 {
                     // ReSharper disable once PossibleNullReferenceException
                     string searchName = search.Attribute("Name").Value;
+                    if (String.IsNullOrWhiteSpace(searchName)) continue;
                     _staticAllSearches.Add(new SearchItem(searchName, searchName, category));
                 }
 
-
+                return true;
             }
             catch (Exception e)
             {
-                MessageBox.Show($@"{e.Message}", @"Error in loadMDGScripts: " );
+                MessageBox.Show($@"{e.Message}", @"Error in load MDG Searches: " );
+                return false;
             }
         }
 

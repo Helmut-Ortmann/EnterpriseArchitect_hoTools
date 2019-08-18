@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Windows.Forms;
 using hoTools.Utils.Diagram;
 
 namespace hoTools.Utils.BulkChange
@@ -88,7 +89,7 @@ namespace hoTools.Utils.BulkChange
         /// - Tagged Value
         /// </summary>
         /// <param name="bulkElement"></param>
-        /// <param name="el"></param>
+        /// <param name="el">The element to change, current element</param>
         /// <param name="recursive"></param>
         private static void BulkChangeElement(BulkElementItem bulkElement, EA.Element el, bool recursive=false)
         {
@@ -97,83 +98,108 @@ namespace hoTools.Utils.BulkChange
             {
                 // Apply changes to the current element
                 // Stereotype
-                el.StereotypeEx = String.Join(",", bulkElement.StereotypesApply);
-                el.Update();
+                // If a full qualified Tagged value is used: The Profile has to be available or the stereotype will not inserted
+                // If you use non quaified stereotypes no check is performed
+                String newStereotype = String.Join(",", bulkElement.StereotypesApply);
+                el.StereotypeEx = newStereotype;
+                if (bulkElement.StereotypesApply.Count > 0 && el.StereotypeEx.Trim() == "")
+                {
+                    MessageBox.Show($@"Stereotype not updated, probably invalid stereotype
+Wrong or missing profile? 
+If you use a qualified Stereotype: The Stereotype has to be available.
+This also applies to TaggedValues.
+
+Note: A tagged value you might also want to change may not be available because of the not accepted Stereotype.
+
+First Stereotype to set:
+'{newStereotype}' ", @"Error: Stereotype not changed");
+                }
+                else
+                {
+                    el.Update();
+                }
 
                 // Tagged Values
-                foreach (var tag in bulkElement.TaggedValuesApply)
+                if (bulkElement.TaggedValuesApply != null)
                 {
-                    string name = tag.Name.Trim();
-                    string value = tag.Value.Trim();
-                    if (name == "") continue;
-                    foreach (EA.TaggedValue tg in el.TaggedValues)
+                    foreach (var tag in bulkElement.TaggedValuesApply)
                     {
-                        // Check complete name and name without namespace
-                        char[] c = {':', ':'};
-                        string nameWithoutNamespace = tg.FQName.Split(c).Last();
-                        if (tg.FQName == name || nameWithoutNamespace == name)
+                        string name = tag.Name.Trim();
+                        string value = tag.Value.Trim();
+                        if (name == "") continue;
+                        foreach (EA.TaggedValue tg in el.TaggedValues)
                         {
-                            tg.Value = value;
+                            // Check complete name and name without namespace
+                            char[] c = {':', ':'};
+                            string nameWithoutNamespace = tg.FQName.Split(c).Last();
+                            if (tg.FQName == name || nameWithoutNamespace == name)
+                            {
+                                tg.Value = value;
+                            }
+
+                            tg.Update();
                         }
 
-                        tg.Update();
+                        el.TaggedValues.Refresh();
                     }
-
-                    el.TaggedValues.Refresh();
                 }
-                // Properties
-                foreach (string s in bulkElement.PropertiesApply)
-                {
-                    var l = s.Split('=');
-                    string propertyName = l[0];
-                    string propertyValue = l[1];
-                    switch (propertyName)
-                    {
-                        case "Priority":
-                            el.Priority = propertyValue;
-                            break;
-                        case "Complexity":
-                            el.Complexity = propertyValue;
-                            break;
-                        case "GenFile":
-                            el.Genfile = propertyValue;
-                            break;
-                        case "Version":
-                            el.Version = propertyValue;
-                            break;
-                        case "Phase":
-                            el.Phase = propertyValue;
-                            break;
-                        case "Difficulty":
-                            el.Difficulty = propertyValue;
-                            break;
-                        case "Alias":
-                            el.Alias = propertyValue;
-                            break;
-                        case "Status":
-                            el.Status = propertyValue;
-                            break;
-                        case "Tag":
-                            el.Tag = propertyValue;
-                            break;
-                        case "Author":
-                            el.Author = propertyValue;
-                            break;
-                        case "GenType":
-                            el.Gentype = propertyValue;
-                            break;
-                        case "Multiplicity":
-                            el.Multiplicity = propertyValue;
-                            break;
-                        case "Visibility":
-                            el.Visibility = propertyValue;
-                            break;
-                        case "StyleEx":
-                            el.StyleEx = propertyValue;
-                            break;
-                    
-                    }
 
+                // Properties
+                if (bulkElement.PropertiesApply != null)
+                {
+                    foreach (string s in bulkElement.PropertiesApply)
+                    {
+                        var l = s.Split('=');
+                        string propertyName = l[0];
+                        string propertyValue = l[1];
+                        switch (propertyName)
+                        {
+                            case "Priority":
+                                el.Priority = propertyValue;
+                                break;
+                            case "Complexity":
+                                el.Complexity = propertyValue;
+                                break;
+                            case "GenFile":
+                                el.Genfile = propertyValue;
+                                break;
+                            case "Version":
+                                el.Version = propertyValue;
+                                break;
+                            case "Phase":
+                                el.Phase = propertyValue;
+                                break;
+                            case "Difficulty":
+                                el.Difficulty = propertyValue;
+                                break;
+                            case "Alias":
+                                el.Alias = propertyValue;
+                                break;
+                            case "Status":
+                                el.Status = propertyValue;
+                                break;
+                            case "Tag":
+                                el.Tag = propertyValue;
+                                break;
+                            case "Author":
+                                el.Author = propertyValue;
+                                break;
+                            case "GenType":
+                                el.Gentype = propertyValue;
+                                break;
+                            case "Multiplicity":
+                                el.Multiplicity = propertyValue;
+                                break;
+                            case "Visibility":
+                                el.Visibility = propertyValue;
+                                break;
+                            case "StyleEx":
+                                el.StyleEx = propertyValue;
+                                break;
+
+                        }
+
+                    }
                 }
 
                 el.Update();

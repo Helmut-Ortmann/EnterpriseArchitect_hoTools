@@ -129,11 +129,25 @@ Some features:
 
 ## Releases
 
+
+
+### Release 3.5
+
+Bulk change Stereotype/Tagged Value: EA checks profile of qualified Stereotypes.
+A message is added if no change of stereotype is done.
+
+### Release 3.4
+
+Handle error loading Searches, MDG gracefully. Store settings should work also in case of errors.
+
 ### Release 3.3
 
 - Service Move Copied Search elements of clipboard to selected package
 - Update nuget packages
 - AddInSimple 1.2 Example AddinSearch with SQL (Requirements with LIKE '*<Search Term>*')
+- Migration to VS2019
+- Nuget changed from Package to reference
+- Nuget packages updated and simplified installation with a NugetCollectorProject
 
 ### Release 3.2.13
 

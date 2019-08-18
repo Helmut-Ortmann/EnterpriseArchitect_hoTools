@@ -229,7 +229,8 @@ namespace hoTools.Settings
             catch (Exception e1)
 
             {
-                MessageBox.Show($"{e1}","Can't store settings!");
+                MessageBox.Show($@"{e1}",@"Can't store settings!");
+                Close();
             }
         }
 

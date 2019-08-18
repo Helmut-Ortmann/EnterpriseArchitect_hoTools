@@ -460,63 +460,120 @@
   // StereotypesApply:   Comma separated list of Stereotypes to set, you may use full qualified named like 'ZF_LE::LE Action'
   // TaggedValuesApply:  The Tagged Values to set, you may use full qualified named like 'ZF_LE::LE Action::Criticality' or simple 'Criticality'
   // PropertiesApply:    Properties in the form 'name=value'. Name: Difficulty, Efforts, GenFile, GenType, Multiplicity, Phase, Priority, RunState, Status, StyleEx, Tag,Version, Visibility
-  "BulkItems" :
-  [
-	 {
-        "Name"              : "Test: Set Action to ASIL B",
-        "Description"       : "Set Stereotype and ASIL B for Action", 
-        "TypesCheck"        : ["Action"],
-        "StereotypesCheck"  : [""],
-        "StereotypesApply"  : ["ZF_LE::LE Action"], 
-        "TaggedValuesApply" : [ {"Name" : "ZF_LE::LE Action::Criticality", "Value" : "ASIL B" } ],
-        "PropertiesApply"   : []
-    },
-	{
-        "Name"              : "Test: Set Activity to ASIL B",
-        "Description"       : "Set Stereotype and ASIL B for Activity", 
-        "TypesCheck"        : ["Activity"],
-        "StereotypesCheck"  : [""],
-        "StereotypesApply"  : ["ZF_LE::LE Activity"], 
-        "TaggedValuesApply" : [ {"Name" : "ZF_LE::LE Activity::Criticality", "Value" : "ASIL B" } ],
-        "PropertiesApply"   : []
+  "BulkItems": [
+    {
+      "Name": "Test: Set Action to ASIL A",
+      "Description": "Set Stereotype and ASIL A for Action",
+      "TypesCheck": [ "Action" ],
+      "StereotypesCheck": [ "" ],
+      "StereotypesApply": [ "ZF_LE::LE Action" ],
+      "TaggedValuesApply": [
+        {
+          "Name": "ZF_LE::LE Action::Criticality",
+          "Value": "ASIL B"
+        }
+      ],
+      "PropertiesApply": []
     },
     {
-        "Name"              : "Test: Set Action to ASIL C",
-        "Description"       : "Set Stereotype and ASIL C for Action", 
-        "TypesCheck"        : ["Action"],
-        "StereotypesCheck"  : [""],
-        "StereotypesApply"  : ["ZF_LE::LE Action"], 
-        "TaggedValuesApply" : [ {"Name" : "ZF_LE::LE Action::Criticality", "Value" : "ASIL C" } ],
-        "PropertiesApply"   : []
+      "Name": "Test: Set Activity to ASIL A",
+      "Description": "Set Stereotype and ASIL A for Activity",
+      "TypesCheck": [ "Activity" ],
+      "StereotypesCheck": [ "" ],
+      "StereotypesApply": [ "ZF_LE::LE Activity" ],
+      "TaggedValuesApply": [
+        {
+          "Name": "ZF_LE::LE Activity::Criticality",
+          "Value": "ASIL B"
+        }
+      ],
+      "PropertiesApply": []
     },
     {
-        "Name"              : "Test: Set Activity to ASIL C",
-        "Description"       : "Set Stereotype and ASIL C for Activity", 
-        "TypesCheck"        : ["Activity"],
-        "StereotypesCheck"  : [""],
-        "StereotypesApply"  : ["ZF_LE::LE Activity"], 
-        "TaggedValuesApply" : [ {"Name" : "ZF_LE::LE Activity::Criticality", "Value" : "ASIL C" } ],
-        "PropertiesApply"   : []
+      "Name": "Test: Set Action to ASIL B",
+      "Description": "Set Stereotype and ASIL B for Action",
+      "TypesCheck": [ "Action" ],
+      "StereotypesCheck": [ "" ],
+      "StereotypesApply": [ "ZF_LE::LE Action" ],
+      "TaggedValuesApply": [
+        {
+          "Name": "ZF_LE::LE Action::Criticality",
+          "Value": "ASIL B"
+        }
+      ],
+      "PropertiesApply": []
     },
     {
-        "Name"              : "Test: Set Requirements to Functional Requirements, and more",
-        "Description"       : "Set Prio to Medium and more, just test. Select Package, Browser Element or Diagram Element", 
-        "TypesCheck"        : ["Requirement"],
-        "StereotypesCheck"  : [""],
-        "StereotypesApply"  : ["FunctionalRequirement"], 
-        "TaggedValuesApply" : [ {"Name" : "EAREQ::FunctionalRequirement::priority", "Value" : "Medium" } ],
-        "PropertiesApply"   : ["Difficulty=Medium","Status=Proposed","Keywords=Test", "Priority=High", "Version=1.1", "Phase=1.1", "Tag=MyTag", "Alias=MyAlias"]
+      "Name": "Test: Set Activity to ASIL B",
+      "Description": "Set Stereotype and ASIL B for Activity",
+      "TypesCheck": [ "Activity" ],
+      "StereotypesCheck": [ "" ],
+      "StereotypesApply": [ "ZF_LE::LE Activity" ],
+      "TaggedValuesApply": [
+        {
+          "Name": "ZF_LE::LE Activity::Criticality",
+          "Value": "ASIL B"
+        }
+      ],
+      "PropertiesApply": []
     },
     {
-        "Name"              : "Test: Set FunctionalRequirements to ordinary Requirements, and more",
-        "Description"       : "Set Prio to High and more, just test. Select Package, Browser Element or Diagram Element", 
-        "TypesCheck"        : ["Requirement"],
-        "StereotypesCheck"  : [""],
-        "StereotypesApply"  : [""], 
-        "TaggedValuesApply" : [ {"Name" : "", "Value" : "" } ],
-        "PropertiesApply"   : ["Difficulty=High","Status=Approved","Keywords=Test", "Priority=High", "Version=2.1", "Phase=2.1", "Tag=MySecondTag", "Alias=MySecondAlias"]
+      "Name": "Test: Set Action to ASIL C",
+      "Description": "Set Stereotype and ASIL C for Action",
+      "TypesCheck": [ "Action" ],
+      "StereotypesCheck": [ "" ],
+      "StereotypesApply": [ "ZF_LE::LE Action" ],
+      "TaggedValuesApply": [
+        {
+          "Name": "ZF_LE::LE Action::Criticality",
+          "Value": "ASIL C"
+        }
+      ],
+      "PropertiesApply": []
+    },
+    {
+      "Name": "Test: Set Activity to ASIL C",
+      "Description": "Set Stereotype and ASIL C for Activity",
+      "TypesCheck": [ "Activity" ],
+      "StereotypesCheck": [ "" ],
+      "StereotypesApply": [ "ZF_LE::LE Activity" ],
+      "TaggedValuesApply": [
+        {
+          "Name": "ZF_LE::LE Activity::Criticality",
+          "Value": "ASIL C"
+        }
+      ],
+      "PropertiesApply": []
+    },
+    {
+      "Name": "Test: Set Requirements to Functional Requirements, and more",
+      "Description": "Set Prio to Medium and more, just test. Select Package, Browser Element or Diagram Element",
+      "TypesCheck": [ "Requirement" ],
+      "StereotypesCheck": [ "" ],
+      "StereotypesApply": [ "FunctionalRequirement" ],
+      "TaggedValuesApply": [
+        {
+          "Name": "EAREQ::FunctionalRequirement::priority",
+          "Value": "Medium"
+        }
+      ],
+      "PropertiesApply": [ "Difficulty=Medium", "Status=Proposed", "Keywords=Test", "Priority=High", "Version=1.1", "Phase=1.1", "Tag=MyTag", "Alias=MyAlias" ]
+    },
+    {
+      "Name": "Test: Set FunctionalRequirements to ordinary Requirements, and more",
+      "Description": "Set Prio to High and more, just test. Select Package, Browser Element or Diagram Element",
+      "TypesCheck": [ "Requirement" ],
+      "StereotypesCheck": [ "" ],
+      "StereotypesApply": [ "" ],
+      "TaggedValuesApply": [
+        {
+          "Name": "",
+          "Value": ""
+        }
+      ],
+      "PropertiesApply": [ "Difficulty=High", "Status=Approved", "Keywords=Test", "Priority=High", "Version=2.1", "Phase=2.1", "Tag=MySecondTag", "Alias=MySecondAlias" ]
     }
-	
+
   ]
 }
 

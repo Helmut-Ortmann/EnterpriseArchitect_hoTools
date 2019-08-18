@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27004.2009
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.352
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "hoToolsRoot", "hoToolsRoot\hoToolsRoot.csproj", "{6D5DEEEF-0897-4494-9857-5BEE2BF0D0AF}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -94,6 +94,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "hoLinqToSql", "hoLinqToSql\hoLinqToSql.csproj", "{8DF4F058-9E5E-42FF-B9F5-F6B826983E97}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HybridScriptingAdvancedExe", "HybridScriptingAdvanced\HybridScriptingAdvancedExe.csproj", "{4A388164-7FD5-41F5-BB25-71A1802D45E4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NugetCollectorProject", "Nuget\NugetCollectorProject.csproj", "{B0AAC083-F31F-41B8-A2DE-B6A5B3DD1A6F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -323,6 +325,18 @@ Global
 		{4A388164-7FD5-41F5-BB25-71A1802D45E4}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{4A388164-7FD5-41F5-BB25-71A1802D45E4}.Release|x86.ActiveCfg = Release|Any CPU
 		{4A388164-7FD5-41F5-BB25-71A1802D45E4}.Release|x86.Build.0 = Release|Any CPU
+		{B0AAC083-F31F-41B8-A2DE-B6A5B3DD1A6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0AAC083-F31F-41B8-A2DE-B6A5B3DD1A6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0AAC083-F31F-41B8-A2DE-B6A5B3DD1A6F}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{B0AAC083-F31F-41B8-A2DE-B6A5B3DD1A6F}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{B0AAC083-F31F-41B8-A2DE-B6A5B3DD1A6F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B0AAC083-F31F-41B8-A2DE-B6A5B3DD1A6F}.Debug|x86.Build.0 = Debug|Any CPU
+		{B0AAC083-F31F-41B8-A2DE-B6A5B3DD1A6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0AAC083-F31F-41B8-A2DE-B6A5B3DD1A6F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0AAC083-F31F-41B8-A2DE-B6A5B3DD1A6F}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{B0AAC083-F31F-41B8-A2DE-B6A5B3DD1A6F}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{B0AAC083-F31F-41B8-A2DE-B6A5B3DD1A6F}.Release|x86.ActiveCfg = Release|Any CPU
+		{B0AAC083-F31F-41B8-A2DE-B6A5B3DD1A6F}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

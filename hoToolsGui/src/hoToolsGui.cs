@@ -310,40 +310,50 @@ namespace hoTools.hoToolsGui
         /// <summary>
         /// Initialize Setting (not Keys). Be sure Repository is loaded! Also don't change the sequence of hide/visible.
         /// </summary>
-        public void InitializeSettings()
+        public bool InitializeSettings()
         {
-            // get global settings
-            _model = new Model(Repository);
-            AddinSettings.UpdateModel(_model);
-
-            _txtSearchName.ForeColor = SystemColors.WindowText;
-            _txtSearchName.Text = AddinSettings.QuickSearchName;
-            if (_txtSearchName.Text.Trim().Equals(""))
+            try
             {
-                _txtSearchName.Text = @"<Search Name>";
-                _txtSearchName.ForeColor = SystemColors.ControlDark;
+                // get global settings
+                _model = new Model(Repository);
+                AddinSettings.UpdateModel(_model);
+
+                _txtSearchName.ForeColor = SystemColors.WindowText;
+                _txtSearchName.Text = AddinSettings.QuickSearchName;
+                if (_txtSearchName.Text.Trim().Equals(""))
+                {
+                    _txtSearchName.Text = @"<Search Name>";
+                    _txtSearchName.ForeColor = SystemColors.ControlDark;
+                }
+
+                IntializeSearches();
+
+
+                ParameterizeMenusAndButtons();
+                // parameterize 5 Buttons to quickly run search
+                ParameterizeToolbarSearchButton();
+                // parameterize 5 Buttons to quickly run services
+                ParameterizeToolbarServiceButton();
+                //
+                //_txtSearchName.DataSource = _globalCfg.getListFileCompleteName();
+
+                //
+                ResizeRtfListOfChanges();
+
+                _rtfListOfSearches.Text = Search.GetRtf();
+
+
+                GetValueSettingsFromJson();
+                AddAutoCounterSettingsMenu();
+
+                AddinSettings.UpdateGlobalCfg();
+                return true;
             }
-            IntializeSearches();
-
-           
-            ParameterizeMenusAndButtons();
-            // parameterize 5 Buttons to quickly run search
-            ParameterizeToolbarSearchButton();
-            // parameterize 5 Buttons to quickly run services
-            ParameterizeToolbarServiceButton();
-            //
-            //_txtSearchName.DataSource = _globalCfg.getListFileCompleteName();
-
-            //
-            ResizeRtfListOfChanges();
-
-            _rtfListOfSearches.Text = Search.GetRtf();
-
-
-            GetValueSettingsFromJson();
-            AddAutoCounterSettingsMenu();
-
-            AddinSettings.UpdateGlobalCfg();
+            catch (Exception e)
+            {
+                MessageBox.Show($@"{e}", @"Error initialising hoTools!");
+                return false;
+            }
 
 
 
@@ -351,10 +361,20 @@ namespace hoTools.hoToolsGui
         /// <summary>
         /// Initializes all Searches. Load all searches and fill AutoSuggestionCollection
         /// </summary>
-        private void IntializeSearches()
+        private bool IntializeSearches()
         {
-             Search.LoadAllSearches(Repository,AddinSettings.ConfigFolderPath, AddinSettings.GetAutoLoadMdgFileName());
-            _txtSearchName.AutoCompleteCustomSource = Search.GetSearchAutoCompleteSuggestion();
+            try
+            {
+     
+                 Search.LoadAllSearches(Repository,AddinSettings.ConfigFolderPath, AddinSettings.GetAutoLoadMdgFileName());
+                _txtSearchName.AutoCompleteCustomSource = Search.GetSearchAutoCompleteSuggestion();
+                return true;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($@"{e}", @"Can't initializes Searches");
+                return false;
+            }
 
         } 
 

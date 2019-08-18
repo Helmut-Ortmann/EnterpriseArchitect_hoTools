@@ -20,7 +20,7 @@ namespace hoTools.EaServices
             BulkElementChangeRecursiveWrapper(rep, 0);
         }
         /// <summary>
-        /// Bulk change Element in Package recursive 1 according to Settings.Json, first entry 
+        /// Bulk change Element in Package recursive 1 according to Settings.Json, second entry 
         /// </summary>
         [ServiceOperation("{E30A7EC0-C443-453F-A31E-A62766EAA082}", "Bulk change Elements Package recursive to 2",
             "Select Browser Package, recursive (see Settings.Json: 'BulkItems: 2. entry)", isTextRequired: false)]
@@ -29,7 +29,7 @@ namespace hoTools.EaServices
             BulkElementChangeRecursiveWrapper(rep, 1);
         }
         /// <summary>
-        /// Bulk change Element in Package recursive 1 according to Settings.Json, first entry 
+        /// Bulk change Element in Package recursive 1 according to Settings.Json, third entry 
         /// </summary>
         [ServiceOperation("{6483D0C7-6B47-4844-8E7E-5E1A8CA02463}", "Bulk change Elements Package recursive to 3",
             "Select Browser Package, recursive (see Settings.Json: 'BulkItems: 3. entry)", isTextRequired: false)]
@@ -38,7 +38,7 @@ namespace hoTools.EaServices
             BulkElementChangeRecursiveWrapper(rep, 2);
         }
         /// <summary>
-        /// Bulk change Element in Package recursive 1 according to Settings.Json, first entry 
+        /// Bulk change Element in Package recursive 1 according to Settings.Json, forth entry 
         /// </summary>
         [ServiceOperation("{1B693D4E-43DD-4041-B3F4-9A18B3748FD0}", "Bulk change Elements Package recursive to 4",
             "Select Browser Package, recursive (see Settings.Json: 'BulkItems: 4. entry)", isTextRequired: false)]
@@ -47,7 +47,7 @@ namespace hoTools.EaServices
             BulkElementChangeRecursiveWrapper(rep, 3);
         }
         /// <summary>
-        /// Bulk change Element in Package recursive 1 according to Settings.Json, first entry 
+        /// Bulk change Element in Package recursive 1 according to Settings.Json, fifth entry 
         /// </summary>
         [ServiceOperation("{E9CF4F77-8204-48CC-8CD9-A42B99935D51}", "Bulk change Elements Package recursive to 5",
             "Select Browser Package,recursive (see Settings.Json: 'BulkItems: 5. entry)", isTextRequired: false)]
@@ -113,7 +113,7 @@ namespace hoTools.EaServices
             Debug.Assert(DiagramStyle.BulkElementItems != null, "DiagramStyle.BulkElementItems != null");
             if (DiagramStyle.BulkElementItems == null && DiagramStyle.BulkElementItems.Count <= pos)
             {
-                MessageBox.Show($"Element number(rel 1): {pos+1} missing", $"No Bulk Element style in 'Settings.json' found");
+                MessageBox.Show($@"Element number(rel 1): {pos+1} missing", $@"No Bulk Element style in 'Settings.json' found");
                 return;
             }
 
@@ -130,7 +130,7 @@ namespace hoTools.EaServices
             Debug.Assert(DiagramStyle.BulkElementItems != null, "DiagramStyle.BulkElementItems != null");
             if (DiagramStyle.BulkElementItems == null && DiagramStyle.BulkElementItems.Count <= pos)
             {
-                MessageBox.Show($"Element number(rel 1): {pos+1} missing", $"No Bulk Element style in 'Settings.json' found");
+                MessageBox.Show($@"Element number(rel 1): {pos+1} missing", $@"No Bulk Element style in 'Settings.json' found");
                 return;
             }
 

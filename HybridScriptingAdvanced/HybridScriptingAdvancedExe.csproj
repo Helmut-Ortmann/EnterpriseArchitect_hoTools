@@ -37,9 +37,6 @@
       <HintPath>..\..\..\..\..\Program Files (x86)\Sparx Systems\EA\Interop.EA.dll</HintPath>
       <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
-    <Reference Include="linq2db, Version=2.7.0.0, Culture=neutral, PublicKeyToken=e41013125f9e410a, processorArchitecture=MSIL">
-      <HintPath>..\packages\linq2db.2.7.0\lib\net46\linq2db.dll</HintPath>
-    </Reference>
     <Reference Include="SparxSystems.Repository, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\Program Files (x86)\Sparx Systems\EA\SparxSystems.Repository.dll</HintPath>
@@ -60,7 +57,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="packages.config" />
     <None Include="readme.md" />
     <None Include="Scripts\Install.bat" />
   </ItemGroup>
@@ -72,6 +68,11 @@
       <Project>{8df4f058-9e5e-42ff-b9f5-f6b826983e97}</Project>
       <Name>hoLinqToSql</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="linq2db">
+      <Version>2.7.0</Version>
+    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
