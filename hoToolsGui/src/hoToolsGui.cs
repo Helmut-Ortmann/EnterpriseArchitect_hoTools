@@ -25,6 +25,7 @@ using hoTools.EaServices.Names;
 using hoTools.Utils.BulkChange;
 
 
+
 // ReSharper disable once CheckNamespace
 namespace hoTools.hoToolsGui
 {
@@ -261,6 +262,22 @@ namespace hoTools.hoToolsGui
         private ToolStripMenuItem mySearchesToolStripMenuItem;
         private ToolStripMenuItem sQLWildcardsToolStripMenuItem;
         private ToolStripSeparator toolStripSeparator21;
+        private ContextMenuStrip contextMenuStrip1;
+        private ContextMenuStrip _cntxInputFieldMenuStrip;
+        private ToolStripMenuItem quickSearchToolStripMenuItem;
+        private ToolStripMenuItem simpleSearchToolStripMenuItem;
+        private ToolStripMenuItem diagramSearchToolStripMenuItem;
+        private ToolStripMenuItem modifiedDiagramsSearchToolStripMenuItem;
+        private ToolStripMenuItem simpleSearchToolStripMenuItem1;
+        private ToolStripMenuItem quickSearchToolStripMenuItem1;
+        private ToolStripMenuItem diagramSearchToolStripMenuItem1;
+        private ToolStripMenuItem modifiedDiagramsToolStripMenuItem;
+        private ToolStripSeparator toolStripSeparator22;
+        private ToolStripMenuItem qMToolStripMenuItem;
+        private ToolStripMenuItem aSILAToolStripMenuItem;
+        private ToolStripMenuItem aSILBToolStripMenuItem;
+        private ToolStripMenuItem aSILCToolStripMenuItem;
+        private ToolStripSeparator toolStripSeparator23;
         private TextBox _txtSearchText;
         #endregion
 
@@ -1349,6 +1366,16 @@ namespace hoTools.hoToolsGui
             this._toolStripServiceBtn10 = new System.Windows.Forms.ToolStripButton();
             this._toolTip = new System.Windows.Forms.ToolTip(this.components);
             this._contextMenuStripSearch = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.simpleSearchToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.quickSearchToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.diagramSearchToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.modifiedDiagramsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator22 = new System.Windows.Forms.ToolStripSeparator();
+            this.qMToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aSILAToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aSILBToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aSILCToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator23 = new System.Windows.Forms.ToolStripSeparator();
             this.editSQLSearchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showSQLPathToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -1527,6 +1554,12 @@ namespace hoTools.hoToolsGui
             this._aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator19 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuIHome = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this._cntxInputFieldMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.quickSearchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.simpleSearchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.diagramSearchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.modifiedDiagramsSearchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this._toolStripContainer1.SuspendLayout();
             this._toolStripQuery.SuspendLayout();
@@ -1542,6 +1575,7 @@ namespace hoTools.hoToolsGui
             this._panelQuickSearch.SuspendLayout();
             this._panelButtons.SuspendLayout();
             this._menuStrip1.SuspendLayout();
+            this._cntxInputFieldMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // _toolStripContainer1
@@ -1697,6 +1731,16 @@ namespace hoTools.hoToolsGui
             // 
             this._contextMenuStripSearch.ImageScalingSize = new System.Drawing.Size(20, 20);
             this._contextMenuStripSearch.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.simpleSearchToolStripMenuItem1,
+            this.quickSearchToolStripMenuItem1,
+            this.diagramSearchToolStripMenuItem1,
+            this.modifiedDiagramsToolStripMenuItem,
+            this.toolStripSeparator22,
+            this.qMToolStripMenuItem,
+            this.aSILAToolStripMenuItem,
+            this.aSILBToolStripMenuItem,
+            this.aSILCToolStripMenuItem,
+            this.toolStripSeparator23,
             this.editSQLSearchToolStripMenuItem,
             this.showFolderToolStripMenuItem,
             this.showSQLPathToolStripMenuItem,
@@ -1708,6 +1752,64 @@ namespace hoTools.hoToolsGui
             this._contextMenuStripSearch.Name = "_contextMenuStripSearch";
             resources.ApplyResources(this._contextMenuStripSearch, "_contextMenuStripSearch");
             this._toolTip.SetToolTip(this._contextMenuStripSearch, resources.GetString("_contextMenuStripSearch.ToolTip"));
+            // 
+            // simpleSearchToolStripMenuItem1
+            // 
+            this.simpleSearchToolStripMenuItem1.Name = "simpleSearchToolStripMenuItem1";
+            resources.ApplyResources(this.simpleSearchToolStripMenuItem1, "simpleSearchToolStripMenuItem1");
+            this.simpleSearchToolStripMenuItem1.Click += new System.EventHandler(this.SimpleSearchToolStripMenuItem_Click);
+            // 
+            // quickSearchToolStripMenuItem1
+            // 
+            this.quickSearchToolStripMenuItem1.Name = "quickSearchToolStripMenuItem1";
+            resources.ApplyResources(this.quickSearchToolStripMenuItem1, "quickSearchToolStripMenuItem1");
+            this.quickSearchToolStripMenuItem1.Click += new System.EventHandler(this.quickSearchToolStripMenuItem_Click);
+            // 
+            // diagramSearchToolStripMenuItem1
+            // 
+            this.diagramSearchToolStripMenuItem1.Name = "diagramSearchToolStripMenuItem1";
+            resources.ApplyResources(this.diagramSearchToolStripMenuItem1, "diagramSearchToolStripMenuItem1");
+            this.diagramSearchToolStripMenuItem1.Click += new System.EventHandler(this.DiagramSearchToolStripMenuItem_Click);
+            // 
+            // modifiedDiagramsToolStripMenuItem
+            // 
+            this.modifiedDiagramsToolStripMenuItem.Name = "modifiedDiagramsToolStripMenuItem";
+            resources.ApplyResources(this.modifiedDiagramsToolStripMenuItem, "modifiedDiagramsToolStripMenuItem");
+            this.modifiedDiagramsToolStripMenuItem.Click += new System.EventHandler(this.RecentlyModifedDiagramsToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator22
+            // 
+            this.toolStripSeparator22.Name = "toolStripSeparator22";
+            resources.ApplyResources(this.toolStripSeparator22, "toolStripSeparator22");
+            // 
+            // qMToolStripMenuItem
+            // 
+            this.qMToolStripMenuItem.Name = "qMToolStripMenuItem";
+            resources.ApplyResources(this.qMToolStripMenuItem, "qMToolStripMenuItem");
+            this.qMToolStripMenuItem.Click += new System.EventHandler(this.QmMenuItem_Click);
+            // 
+            // aSILAToolStripMenuItem
+            // 
+            this.aSILAToolStripMenuItem.Name = "aSILAToolStripMenuItem";
+            resources.ApplyResources(this.aSILAToolStripMenuItem, "aSILAToolStripMenuItem");
+            this.aSILAToolStripMenuItem.Click += new System.EventHandler(this.AsilAMenuItem_Click);
+            // 
+            // aSILBToolStripMenuItem
+            // 
+            this.aSILBToolStripMenuItem.Name = "aSILBToolStripMenuItem";
+            resources.ApplyResources(this.aSILBToolStripMenuItem, "aSILBToolStripMenuItem");
+            this.aSILBToolStripMenuItem.Click += new System.EventHandler(this.AsilBMenuItem_Click);
+            // 
+            // aSILCToolStripMenuItem
+            // 
+            this.aSILCToolStripMenuItem.Name = "aSILCToolStripMenuItem";
+            resources.ApplyResources(this.aSILCToolStripMenuItem, "aSILCToolStripMenuItem");
+            this.aSILCToolStripMenuItem.Click += new System.EventHandler(this.AsilCMenuItem_Click);
+            // 
+            // toolStripSeparator23
+            // 
+            this.toolStripSeparator23.Name = "toolStripSeparator23";
+            resources.ApplyResources(this.toolStripSeparator23, "toolStripSeparator23");
             // 
             // editSQLSearchToolStripMenuItem
             // 
@@ -3014,6 +3116,47 @@ namespace hoTools.hoToolsGui
             this.toolStripMenuIHome.Name = "toolStripMenuIHome";
             this.toolStripMenuIHome.Click += new System.EventHandler(this.toolStripMenuIHome_Click);
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            resources.ApplyResources(this.contextMenuStrip1, "contextMenuStrip1");
+            // 
+            // _cntxInputFieldMenuStrip
+            // 
+            this._cntxInputFieldMenuStrip.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this._cntxInputFieldMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.quickSearchToolStripMenuItem,
+            this.simpleSearchToolStripMenuItem,
+            this.diagramSearchToolStripMenuItem,
+            this.modifiedDiagramsSearchToolStripMenuItem});
+            this._cntxInputFieldMenuStrip.Name = "_cntxInputFieldMenuStrip";
+            resources.ApplyResources(this._cntxInputFieldMenuStrip, "_cntxInputFieldMenuStrip");
+            // 
+            // quickSearchToolStripMenuItem
+            // 
+            this.quickSearchToolStripMenuItem.Name = "quickSearchToolStripMenuItem";
+            resources.ApplyResources(this.quickSearchToolStripMenuItem, "quickSearchToolStripMenuItem");
+            this.quickSearchToolStripMenuItem.Click += new System.EventHandler(this.quickSearchToolStripMenuItem_Click);
+            // 
+            // simpleSearchToolStripMenuItem
+            // 
+            this.simpleSearchToolStripMenuItem.Name = "simpleSearchToolStripMenuItem";
+            resources.ApplyResources(this.simpleSearchToolStripMenuItem, "simpleSearchToolStripMenuItem");
+            this.simpleSearchToolStripMenuItem.Click += new System.EventHandler(this.SimpleSearchToolStripMenuItem_Click);
+            // 
+            // diagramSearchToolStripMenuItem
+            // 
+            this.diagramSearchToolStripMenuItem.Name = "diagramSearchToolStripMenuItem";
+            resources.ApplyResources(this.diagramSearchToolStripMenuItem, "diagramSearchToolStripMenuItem");
+            this.diagramSearchToolStripMenuItem.Click += new System.EventHandler(this.DiagramSearchToolStripMenuItem_Click);
+            // 
+            // modifiedDiagramsSearchToolStripMenuItem
+            // 
+            this.modifiedDiagramsSearchToolStripMenuItem.Name = "modifiedDiagramsSearchToolStripMenuItem";
+            resources.ApplyResources(this.modifiedDiagramsSearchToolStripMenuItem, "modifiedDiagramsSearchToolStripMenuItem");
+            this.modifiedDiagramsSearchToolStripMenuItem.Click += new System.EventHandler(this.RecentlyModifedDiagramsToolStripMenuItem_Click);
+            // 
             // HoToolsGui
             // 
             resources.ApplyResources(this, "$this");
@@ -3052,6 +3195,7 @@ namespace hoTools.hoToolsGui
             this._panelButtons.ResumeLayout(false);
             this._menuStrip1.ResumeLayout(false);
             this._menuStrip1.PerformLayout();
+            this._cntxInputFieldMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -4443,6 +4587,83 @@ Information are Copied to Clipboard!
         {
             WikiRef.Wildcard();
         }
+
+        //--------------------------------------------------------------------------
+        // Context
+        // Searches from Context 
+        private void quickSearchToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EaService.RunQuickSearch(Repository, AddinSettings.QuickSearchName, _txtSearchText.Text);
+
+        }
+        private void DiagramSearchToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EaService.RunQuickSearch(Repository, "Diagram Name", _txtSearchText.Text);
+        }
+        private void SimpleSearchToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EaService.RunQuickSearch(Repository, "Simple", _txtSearchText.Text);
+        }
+        private void RecentlyModifedDiagramsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EaService.RunQuickSearch(Repository, "Recently Modified Diagrams", "");
+
+        }
+
+        /// <summary>
+        /// Set the Action/Activity to QM
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void QmMenuItem_Click(object sender, EventArgs e)
+        {
+            SetCriticality("Action", "QM");
+            SetCriticality("Activity", "QM");
+        }
+        /// <summary>
+        /// Set the Action/Activity to QM
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void AsilAMenuItem_Click(object sender, EventArgs e)
+        {
+            SetCriticality("Action", "ASIL-A");
+            SetCriticality("Activity", "ASIL-A");
+        }
+        /// <summary>
+        /// Set the Action/Activity to QM
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void AsilBMenuItem_Click(object sender, EventArgs e)
+        {
+            SetCriticality("Action", "ASIL-B");
+            SetCriticality("Activity", "ASIL-B");
+        }
+        /// <summary>
+        /// Set the Action/Activity to QM
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void AsilCMenuItem_Click(object sender, EventArgs e)
+        {
+            SetCriticality("Action", "ASIL-C");
+            SetCriticality("Activity", "ASIL-C");
+        }
+
+        private void SetCriticality(string type, string criticality)
+        {
+            string stereotype = $"ZF_LE::LE {type}";
+            Tv t1 = new Tv { Name = $"ZF_LE::LE {type}::Criticality", Value = criticality };
+
+            EaService.BulkElementChangeWrapper(Repository,
+                new List<string>(new[] { $"{type}" }),
+                new List<string>(new[] { "" }),
+                new List<string>(new[] { $"{stereotype}" }),
+                new List<Tv>(new[] { t1 }),
+                new List<string>(new[] { "" }));
+        }
+
     }
 
 

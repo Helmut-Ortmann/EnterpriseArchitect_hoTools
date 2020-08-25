@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Windows.Forms;
 using EA;
 using hoTools.Utils.BulkChange;
@@ -56,7 +57,13 @@ namespace hoTools.EaServices
             BulkElementChangeRecursiveWrapper(rep, 4);
         }
 
+        public static void BulkElementChangeWrapper(Repository rep, IList<string> typesCheck, IList<string> stereotypesCheck, IList<string> stereotypesApply, IList<Tv> taggedValuesApply, IList<string> propertiesApply)
+        {
 
+
+            BulkElementItem bulkElement = new BulkElementItem { Name = "", Description = "", TypesCheck = typesCheck, StereotypesCheck = stereotypesCheck, StereotypesApply = stereotypesApply, TaggedValuesApply = taggedValuesApply, PropertiesApply = propertiesApply };
+            BulkItemChange.BulkChange(rep, bulkElement);
+        }
 
         /// <summary>
         /// Bulk change Elements 1 according to Settings.Json, first entry 

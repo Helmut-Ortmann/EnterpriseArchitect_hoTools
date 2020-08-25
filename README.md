@@ -129,7 +129,18 @@ Some features:
 
 ## Releases
 
+### Release 3.7
 
+- Searches in Context Menu:
+  - Quick Seach
+  - Simple
+  - Diagram
+  - Modified Diagrams
+- ASIL Level for ZF projects in Context Menu
+
+### Release 3.6
+
+Update libraries.
 
 ### Release 3.5
 

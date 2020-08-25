@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
@@ -241,11 +242,13 @@ namespace hoLinqToSql.LinqUtils
         public static string GetConnectionString(EA.Repository rep, out IDataProvider provider)
         {
             provider = null;
-            string connectionString = rep.ConnectionString;
+
+                
+            var (connectionString, dbType)   = GetConnectionStringFromRepository(rep);
             string dsnConnectionString;
             // EAP file 
             // Provider=Microsoft.Jet.OLEDB.4.0;Data Source=d:\hoData\Work.eap;"
-            switch (rep.RepositoryType())
+            switch (dbType)
             {
 
                 case "JET":
@@ -304,19 +307,39 @@ namespace hoLinqToSql.LinqUtils
 
         /// <summary>
         /// Filter connection string:
-        /// - First 2 elements delete (e.g.:'EAExample --- DBType=1;Connect=Provider=SQLOLEDB.1'
+        /// - First 2 elements delete (e.g.:'EAExample --- DBType=1;Connect=Provider=SQLOLEDB.1')
         /// - Last Element delete: (LazyLoad=1;)
         /// </summary>
         /// <param name="connectionString"></param>
         /// <returns>"" no connection found</returns>
         private static string FilterConnectionString(string connectionString)
         {
-            string[] c = connectionString.Split(';').Skip(2).ToArray();
-            Array.Resize(ref c, c.Length - 2);
-            return String.Join(";", c) + ";";
+            try
+            {
+                // skip first two entries of connection string (Name/DBType;Provider;)
+                string[] c = connectionString.Split(';').Skip(2).ToArray();
+                if (c.Length < 3)
+                {
+                    MessageBox.Show($"Connection string: '{connectionString}'\r\n\r\n", "Can't detect correct connection string, empty?");
+                    return "";
+                }
+                string s = String.Join(";", c) + ";";
+                // remove LazyLoad=0;
+                s = s.Replace("LazyLoad=1", "");
+                return s.Replace("LazyLoad=0", "");
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($"Connection string: '{connectionString}'\r\n\r\n{e.Message} ", "Can't decode connection string");
+                return "";
+            }
+            //string[] c = connectionString.Split(';').Skip(2).ToArray();
+            //Array.Resize(ref c, c.Length - 2);
+            //return String.Join(";", c) + ";";
         } 
         /// <summary>
         /// Get connectionString if a DSN is part of the connectionString or "" if no DSN available.
+        /// DSN is Data Source=...;
         /// </summary>
         /// <param name="connectionString"></param>
         /// <returns></returns>
@@ -351,12 +374,18 @@ namespace hoLinqToSql.LinqUtils
             return con;
 
         }
+        /// <summary>
+        /// Fix from Andreas Nebenführ, not used rootKey
+        /// </summary>
+        /// <param name="rootKey"></param>
+        /// <param name="dsn"></param>
+        /// <returns></returns>
         static string GetConnectionString(RegistryKey rootKey, string dsn)
         {
             string registryKey = $@"Software\ODBC\ODBC.INI\{dsn}";
 
             RegistryKey key =
-                Registry.CurrentUser.OpenSubKey(registryKey);
+                rootKey.OpenSubKey(registryKey);
             if (key == null) return "";
 
             var l = from k in key.GetValueNames()
@@ -366,6 +395,96 @@ namespace hoLinqToSql.LinqUtils
                     Value = k + "=" + key.GetValue(k) + ";"
                 };
             return String.Join("", l.Select(i => i.Value).ToArray());
+        }
+        /// <summary>
+        /// Get connection string from Repository
+        /// Note: The type of repository isn't currently evaluated
+        ///
+        /// Connection String: 'EAExample --- DBType=1;Connect=Provider=SQLOLEDB.1')
+        /// 
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <returns>ConnectionString, Type of connection as defined by EA</returns>
+        static Tuple<string,string> GetConnectionStringFromRepository(EA.Repository rep)
+        {
+            string cnString = rep.ConnectionString.ToUpper();
+            // Check if shortcut in the *.eap
+            if (cnString.EndsWith(".EAP") || cnString.Contains(".EAPX"))
+            {
+                FileInfo f = new FileInfo(cnString);
+
+                // Just a normal *.eap file
+                if (f.Length > 1024) return new Tuple<string, string>(rep.ConnectionString, "JET"); 
+
+                // Shortcut file: Should contain the file name or a connection string
+                TextReader tr = new StreamReader(cnString);
+                // ReSharper disable once PossibleNullReferenceException
+                string shortcut = tr.ReadLine().ToUpper();
+                tr.Close();
+
+                // find start of connectionstring
+                string magicStart = @"EACONNECTSTRING:";
+                if (!shortcut.StartsWith(magicStart)) return new Tuple<string, string>(rep.ConnectionString, "JET");
+
+                string connectionString = shortcut.Substring(magicStart.Length);
+                string dbType = "";
+
+                // link to *.eap file
+                if (!connectionString.Contains(@"DBTYPE=") || connectionString.Contains(".EAP") )
+                {
+                    dbType = "JET";
+                }
+                else
+                {
+                    // get Type Database 0-99
+                    Match matchDbType = Regex.Match(connectionString, @"DBTYPE=([0-9]*);");
+                    if (matchDbType.Success && matchDbType.Groups.Count == 2)
+                    {
+                        dbType = OdbcTypeToString(matchDbType.Groups[1].Value);
+                    }
+                }
+                // Estimate DBType from stored number
+                
+                return new Tuple<string, string>(connectionString, dbType);
+
+            }
+            // no shortcut, just return EA values
+            return new Tuple<string, string>(rep.ConnectionString, rep.RepositoryType());
+        }
+        /// <summary>
+        /// Convert the ODBC dbType to the string dbtype of EA
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        static string OdbcTypeToString(string type)
+        {
+            
+            switch (type.Trim())
+            {
+                case "0":
+                    return "MYSQL";
+                case "1":
+                    return @"SQLSVR";
+                case "2":
+                    return "ADOJET";
+                case "3":
+                    return "ORACLE";
+                case "4":
+                    return "POSTGRES";
+                case "5":
+                    return "ASA";
+                case "6":
+                    return "";
+                case "7":
+                    return "";
+                case "8":
+                    return "ACCESS2007";
+                case "9":
+                    return "FIREBIRD";
+                default:
+                    return "";
+            }
+            
         }
     }
 }
