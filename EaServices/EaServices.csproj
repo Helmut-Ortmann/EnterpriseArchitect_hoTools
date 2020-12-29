@@ -94,6 +94,7 @@
     <Compile Include="src\AddInSearch\AddInSearch.cs" />
     <Compile Include="src\AddInSearch\NestedObject.cs" />
     <Compile Include="src\AddInSearch\Tv.cs" />
+    <Compile Include="src\CopyTag\ElTag.cs" />
     <Compile Include="src\Diagram\EaServicesDiagram.cs" />
     <Compile Include="src\Element\EaServicesElement.cs" />
     <Compile Include="src\Import\UpdateGlossary.cs" />
@@ -150,6 +151,7 @@
       <Version>12.0.2</Version>
     </PackageReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

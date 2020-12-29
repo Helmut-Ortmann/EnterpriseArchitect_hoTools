@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Xml;
 
@@ -411,6 +412,37 @@ namespace hoTools.Utils
             tag.Value = value.Length > 255 ? MemoString : value;
             tag.Notes = value;
             tag.Update();
+        }
+    }
+    public class ElTagValue
+    {
+        private readonly List<EA.TaggedValue> _lTv = new List<EA.TaggedValue>();
+        private readonly List<EA.TaggedValue> _lTvEx = new List<EA.TaggedValue>();
+        private EA.Element _el;
+        public ElTagValue(EA.Element el)
+        {
+            _el = el;
+            foreach (EA.TaggedValue tvEx in el.TaggedValuesEx)
+            {
+                _lTvEx.Add(tvEx);
+            }
+            foreach (EA.TaggedValue tv in el.TaggedValues)
+            {
+                _lTv.Add(tv);
+            }
+        }
+        /// <summary>
+        /// Copy TV to current element
+        /// </summary>
+        /// <param name="el"></param>
+        public void Copy(EA.Element el)
+        {
+            foreach (EA.TaggedValue tv in _lTv)
+            {
+                var tvNew = TaggedValue.Add(el, tv.Name);
+                TaggedValue.SetTaggedValue(tvNew, tv.Value);
+                tv.Update();
+            }
         }
     }
 }

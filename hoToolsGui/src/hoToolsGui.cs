@@ -278,6 +278,7 @@ namespace hoTools.hoToolsGui
         private ToolStripMenuItem aSILBToolStripMenuItem;
         private ToolStripMenuItem aSILCToolStripMenuItem;
         private ToolStripSeparator toolStripSeparator23;
+        private ToolStripMenuItem copyTVToolStripMenuItem;
         private TextBox _txtSearchText;
         #endregion
 
@@ -1371,6 +1372,7 @@ namespace hoTools.hoToolsGui
             this.diagramSearchToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.modifiedDiagramsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator22 = new System.Windows.Forms.ToolStripSeparator();
+            this.copyTVToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.qMToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aSILAToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aSILBToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -1736,6 +1738,7 @@ namespace hoTools.hoToolsGui
             this.diagramSearchToolStripMenuItem1,
             this.modifiedDiagramsToolStripMenuItem,
             this.toolStripSeparator22,
+            this.copyTVToolStripMenuItem,
             this.qMToolStripMenuItem,
             this.aSILAToolStripMenuItem,
             this.aSILBToolStripMenuItem,
@@ -1781,6 +1784,12 @@ namespace hoTools.hoToolsGui
             // 
             this.toolStripSeparator22.Name = "toolStripSeparator22";
             resources.ApplyResources(this.toolStripSeparator22, "toolStripSeparator22");
+            // 
+            // copyTVToolStripMenuItem
+            // 
+            this.copyTVToolStripMenuItem.Name = "copyTVToolStripMenuItem";
+            resources.ApplyResources(this.copyTVToolStripMenuItem, "copyTVToolStripMenuItem");
+            this.copyTVToolStripMenuItem.Click += new System.EventHandler(this.copyTVToolStripMenuItem_Click);
             // 
             // qMToolStripMenuItem
             // 
@@ -1934,6 +1943,7 @@ namespace hoTools.hoToolsGui
             this._cmbSearchName.FormattingEnabled = true;
             this._cmbSearchName.Name = "_cmbSearchName";
             this._toolTip.SetToolTip(this._cmbSearchName, resources.GetString("_cmbSearchName.ToolTip"));
+            this._cmbSearchName.SelectedIndexChanged += new System.EventHandler(this._cmbSearchName_SelectedIndexChanged);
             this._cmbSearchName.TextUpdate += new System.EventHandler(this._txtSearchName_TextUpdate);
             this._cmbSearchName.TextChanged += new System.EventHandler(this._txtSearchName_TextChanged);
             this._cmbSearchName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbSearchName_KeyDown);
@@ -4663,7 +4673,37 @@ Information are Copied to Clipboard!
                 new List<Tv>(new[] { t1 }),
                 new List<string>(new[] { "" }));
         }
+        /// <summary>
+        /// Copy Properties of last selected elements to the other selected elements
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void copyTVToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // over all selected elements
+            EaDiagram curDiagram = new EaDiagram(Repository);
+            if (curDiagram.Dia == null) return;
+            int indexLast = curDiagram.SelElements.Count - 1;
+            if (indexLast < 1) return;
+            
+            EA.Element elLast = curDiagram.SelElements[indexLast];
+            string stereoEx = elLast.StereotypeEx;
+            
+            
+            ElTagValue elTagValues = new ElTagValue(elLast);
+            // over all elements
+            for (int i = 0; i < indexLast-1; i++)
+            {
+                curDiagram.SelElements[i].StereotypeEx = stereoEx;
+                curDiagram.SelElements[i].Update();
+                elTagValues.Copy(curDiagram.SelElements[i]);
+            }
+        }
 
+        private void _cmbSearchName_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 
 

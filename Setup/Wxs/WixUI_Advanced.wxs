@@ -124,6 +124,7 @@ Todo:
       <Publish Dialog="FeaturesDlg" Control="Back" Event="NewDialog" Value="InstallScopeDlg">NOT Installed AND WixAppFolder = "WixPerUserFolder"</Publish>
       <Publish Dialog="FeaturesDlg" Control="Back" Event="NewDialog" Value="InstallDirDlg">NOT Installed AND WixAppFolder = "WixPerMachineFolder"</Publish>
       <Publish Dialog="FeaturesDlg" Control="Back" Event="NewDialog" Value="MaintenanceTypeDlg">Installed</Publish>
+      <Publish Dialog="FeaturesDlg" Control="Install" Event="DoAction" Value="FindRelatedProducts">1</Publish>
 
       <Publish Dialog="MaintenanceWelcomeDlg" Control="Next" Event="NewDialog" Value="MaintenanceTypeDlg">1</Publish>
 
