@@ -4686,17 +4686,20 @@ Information are Copied to Clipboard!
             int indexLast = curDiagram.SelElements.Count - 1;
             if (indexLast < 1) return;
             
-            EA.Element elLast = curDiagram.SelElements[indexLast];
+            EA.Element elLast = curDiagram.SelElements[0];
             string stereoEx = elLast.StereotypeEx;
             
             
             ElTagValue elTagValues = new ElTagValue(elLast);
-            // over all elements
-            for (int i = 0; i < indexLast-1; i++)
+            // over all elements, skip first element because that is the property template 
+            for (int i = 1; i <= indexLast; i++)
             {
-                curDiagram.SelElements[i].StereotypeEx = stereoEx;
+                // Set stereotypes if changed
+                if (curDiagram.SelElements[i].StereotypeEx != stereoEx) curDiagram.SelElements[i].StereotypeEx = stereoEx;
+                var error = Repository.GetLastError();
                 curDiagram.SelElements[i].Update();
                 elTagValues.Copy(curDiagram.SelElements[i]);
+                curDiagram.SelElements[i].Update();
             }
         }
 

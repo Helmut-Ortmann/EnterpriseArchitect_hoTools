@@ -468,6 +468,16 @@
   <data name="copyTVToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>308, 22</value>
   </data>
+  <data name="copyTVToolStripMenuItem.Text" xml:space="preserve">
+    <value>Copy Properties </value>
+  </data>
+  <data name="copyTVToolStripMenuItem.ToolTipText" xml:space="preserve">
+    <value>Copy properties from last selcted
+- Stereotype
+- Tagged Values
+
+The last selected element is the template to copy the other properties</value>
+  </data>
   <data name="qMToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>308, 22</value>
   </data>

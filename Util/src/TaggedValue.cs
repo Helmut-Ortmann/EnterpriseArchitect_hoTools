@@ -414,6 +414,10 @@ namespace hoTools.Utils
             tag.Update();
         }
     }
+    /// <summary>
+    /// Element Tagged Values
+    /// - Copy Tagged Values from a template (constructor)
+    /// </summary>
     public class ElTagValue
     {
         private readonly List<EA.TaggedValue> _lTv = new List<EA.TaggedValue>();
@@ -441,8 +445,11 @@ namespace hoTools.Utils
             {
                 var tvNew = TaggedValue.Add(el, tv.Name);
                 TaggedValue.SetTaggedValue(tvNew, tv.Value);
-                tv.Update();
+                tvNew.Update();
             }
+
+            el.Update();
+            el.TaggedValues.Refresh();
         }
     }
 }
