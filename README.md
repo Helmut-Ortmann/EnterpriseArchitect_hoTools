@@ -132,7 +132,8 @@ Some features:
 ### Release 3.8
 
 - Fix *.msi package for all users to delete everything after deinstallation (    <Publish Dialog="FeaturesDlg" Control="Install" Event="DoAction" Value="FindRelatedProducts">1</Publish>)
-- Copy Tags from, .. to
+- Copy properties from last selected elements to the other selected elements
+  - implements an update of Tagged Values by its used stereotypes.
 
 ### Release 3.7
 

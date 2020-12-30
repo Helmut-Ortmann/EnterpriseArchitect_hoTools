@@ -1,8 +1,10 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml;
+using EA;
 
 namespace hoTools.Utils
 {
@@ -259,7 +261,7 @@ namespace hoTools.Utils
         /// </summary>
         /// <param name="el"></param>
         /// <returns></returns>
-        public static bool DeleteTaggedValuesForElement(EA.Element el)
+        public static bool DeleteTaggedValuesForElement( EA.Element el)
         {
             for (int i = el.TaggedValues.Count - 1; i >= 0; i--)
             {
@@ -422,10 +424,18 @@ namespace hoTools.Utils
     {
         private readonly List<EA.TaggedValue> _lTv = new List<EA.TaggedValue>();
         private readonly List<EA.TaggedValue> _lTvEx = new List<EA.TaggedValue>();
+        private readonly List<string> _lStereotype = new List<string>();
         private EA.Element _el;
-        public ElTagValue(EA.Element el)
+        public ElTagValue(EA.Element el, string stereotypeEx = null)
         {
             _el = el;
+            if (stereotypeEx != null)
+            {
+                foreach (var s in stereotypeEx.Split(','))
+                {
+                    _lStereotype.Add(s);
+                }
+            }
             foreach (EA.TaggedValue tvEx in el.TaggedValuesEx)
             {
                 _lTvEx.Add(tvEx);
@@ -441,15 +451,52 @@ namespace hoTools.Utils
         /// <param name="el"></param>
         public void Copy(EA.Element el)
         {
+            //var done = SyncTaggedValues(el);
             foreach (EA.TaggedValue tv in _lTv)
             {
                 var tvNew = TaggedValue.Add(el, tv.Name);
+               
                 TaggedValue.SetTaggedValue(tvNew, tv.Value);
                 tvNew.Update();
+
             }
 
             el.Update();
             el.TaggedValues.Refresh();
+            
+        }
+        /// <summary>
+        /// Synchronize all Tagged Values of an Element with its profile/stereotypes
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <param name="el"></param>
+        /// <returns></returns>
+        public bool SyncTaggedValues(EA.Repository rep, EA.Element el)
+        {
+            foreach (EA.TaggedValue tv in _el.TaggedValues)
+            {
+                // synchronize stereotypes/tagged vales
+                var lFqName = Regex.Split(tv.FQName, "::");
+                if (lFqName.Length == 3)
+                {
+                    var sProfile = lFqName[0];
+                    var sStereotype = lFqName[1];
+                    //seems not to work
+                    //ret = ret || el.SynchTaggedValues(sProfile, sStereotype);
+                    string par = $"Profile={sProfile};Stereotype={sStereotype};";
+                    var ret1 = rep.CustomCommand("Repository", "SynchProfile", par);
+                    if (ret1 != "True")
+                    {
+                        MessageBox.Show($@"{par}", @"Error synchronize EA.Element");
+                        return false;
+                    }
+                     
+                }
+               
+            }
+            return true;
+
         }
     }
+    
 }

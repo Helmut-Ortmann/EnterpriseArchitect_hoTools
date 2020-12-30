@@ -1943,7 +1943,7 @@ namespace hoTools.hoToolsGui
             this._cmbSearchName.FormattingEnabled = true;
             this._cmbSearchName.Name = "_cmbSearchName";
             this._toolTip.SetToolTip(this._cmbSearchName, resources.GetString("_cmbSearchName.ToolTip"));
-            this._cmbSearchName.SelectedIndexChanged += new System.EventHandler(this._cmbSearchName_SelectedIndexChanged);
+            //this._cmbSearchName.SelectedIndexChanged += new System.EventHandler(this._cmbSearchName_SelectedIndexChanged);
             this._cmbSearchName.TextUpdate += new System.EventHandler(this._txtSearchName_TextUpdate);
             this._cmbSearchName.TextChanged += new System.EventHandler(this._txtSearchName_TextChanged);
             this._cmbSearchName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbSearchName_KeyDown);
@@ -4690,7 +4690,7 @@ Information are Copied to Clipboard!
             string stereoEx = elLast.StereotypeEx;
             
             
-            ElTagValue elTagValues = new ElTagValue(elLast);
+            ElTagValue elTagValues = new ElTagValue(elLast, stereoEx);
             // over all elements, skip first element because that is the property template 
             for (int i = 1; i <= indexLast; i++)
             {
@@ -4701,12 +4701,14 @@ Information are Copied to Clipboard!
                 elTagValues.Copy(curDiagram.SelElements[i]);
                 curDiagram.SelElements[i].Update();
             }
+            // synchronize all stereotypes
+            elTagValues.SyncTaggedValues(Repository, elLast);
         }
 
-        private void _cmbSearchName_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
+        //private void _cmbSearchName_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+        //
+        //}
     }
 
 
