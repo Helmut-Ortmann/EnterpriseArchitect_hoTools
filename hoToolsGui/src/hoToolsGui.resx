@@ -476,7 +476,9 @@
 - Stereotype
 - Tagged Values
 
-The last selected element is the template to copy the other properties</value>
+The last selected element is the template to copy the other properties
+
+If only one element is selected hoTools synchronizes the Tagged Values according to the Stereotypes.</value>
   </data>
   <data name="qMToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>308, 22</value>
@@ -488,19 +490,19 @@ The last selected element is the template to copy the other properties</value>
     <value>308, 22</value>
   </data>
   <data name="aSILAToolStripMenuItem.Text" xml:space="preserve">
-    <value>ASIL-A</value>
+    <value>ASIL A</value>
   </data>
   <data name="aSILBToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>308, 22</value>
   </data>
   <data name="aSILBToolStripMenuItem.Text" xml:space="preserve">
-    <value>ASIL-B</value>
+    <value>ASIL B</value>
   </data>
   <data name="aSILCToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>308, 22</value>
   </data>
   <data name="aSILCToolStripMenuItem.Text" xml:space="preserve">
-    <value>ASIL-C</value>
+    <value>ASIL C</value>
   </data>
   <data name="toolStripSeparator23.Size" type="System.Drawing.Size, System.Drawing">
     <value>305, 6</value>
@@ -578,7 +580,7 @@ No Excel is required.</value>
     <value>Export csv of Clipboard to Excel</value>
   </data>
   <data name="_contextMenuStripSearch.Size" type="System.Drawing.Size, System.Drawing">
-    <value>309, 358</value>
+    <value>309, 380</value>
   </data>
   <data name="_contextMenuStripSearch.ToolTip" xml:space="preserve">
     <value>Export the Clipboard content as csv to Excel</value>

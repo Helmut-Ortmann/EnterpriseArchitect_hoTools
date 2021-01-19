@@ -1943,7 +1943,6 @@ namespace hoTools.hoToolsGui
             this._cmbSearchName.FormattingEnabled = true;
             this._cmbSearchName.Name = "_cmbSearchName";
             this._toolTip.SetToolTip(this._cmbSearchName, resources.GetString("_cmbSearchName.ToolTip"));
-            //this._cmbSearchName.SelectedIndexChanged += new System.EventHandler(this._cmbSearchName_SelectedIndexChanged);
             this._cmbSearchName.TextUpdate += new System.EventHandler(this._txtSearchName_TextUpdate);
             this._cmbSearchName.TextChanged += new System.EventHandler(this._txtSearchName_TextChanged);
             this._cmbSearchName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbSearchName_KeyDown);
@@ -4637,8 +4636,8 @@ Information are Copied to Clipboard!
         /// <param name="e"></param>
         private void AsilAMenuItem_Click(object sender, EventArgs e)
         {
-            SetCriticality("Action", "ASIL-A");
-            SetCriticality("Activity", "ASIL-A");
+            SetCriticality("Action", "ASIL A");
+            SetCriticality("Activity", "ASIL A");
         }
         /// <summary>
         /// Set the Action/Activity to QM
@@ -4647,8 +4646,8 @@ Information are Copied to Clipboard!
         /// <param name="e"></param>
         private void AsilBMenuItem_Click(object sender, EventArgs e)
         {
-            SetCriticality("Action", "ASIL-B");
-            SetCriticality("Activity", "ASIL-B");
+            SetCriticality("Action", "ASIL B");
+            SetCriticality("Activity", "ASIL B");
         }
         /// <summary>
         /// Set the Action/Activity to QM
@@ -4657,10 +4656,14 @@ Information are Copied to Clipboard!
         /// <param name="e"></param>
         private void AsilCMenuItem_Click(object sender, EventArgs e)
         {
-            SetCriticality("Action", "ASIL-C");
-            SetCriticality("Activity", "ASIL-C");
+            SetCriticality("Action", "ASIL C");
+            SetCriticality("Activity", "ASIL C");
         }
-
+        /// <summary>
+        /// Set criticality
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="criticality"></param>
         private void SetCriticality(string type, string criticality)
         {
             string stereotype = $"ZF_LE::LE {type}";
@@ -4672,6 +4675,8 @@ Information are Copied to Clipboard!
                 new List<string>(new[] { $"{stereotype}" }),
                 new List<Tv>(new[] { t1 }),
                 new List<string>(new[] { "" }));
+            // synchronize tagged values
+            EaService.SynchronizeTaggedValues(Repository);
         }
         /// <summary>
         /// Copy Properties of last selected elements to the other selected elements
@@ -4680,35 +4685,10 @@ Information are Copied to Clipboard!
         /// <param name="e"></param>
         private void copyTVToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // over all selected elements
-            EaDiagram curDiagram = new EaDiagram(Repository);
-            if (curDiagram.Dia == null) return;
-            int indexLast = curDiagram.SelElements.Count - 1;
-            if (indexLast < 1) return;
+            EaService.CopyTaggedValues(Repository);
             
-            EA.Element elLast = curDiagram.SelElements[0];
-            string stereoEx = elLast.StereotypeEx;
-            
-            
-            ElTagValue elTagValues = new ElTagValue(elLast, stereoEx);
-            // over all elements, skip first element because that is the property template 
-            for (int i = 1; i <= indexLast; i++)
-            {
-                // Set stereotypes if changed
-                if (curDiagram.SelElements[i].StereotypeEx != stereoEx) curDiagram.SelElements[i].StereotypeEx = stereoEx;
-                var error = Repository.GetLastError();
-                curDiagram.SelElements[i].Update();
-                elTagValues.Copy(curDiagram.SelElements[i]);
-                curDiagram.SelElements[i].Update();
-            }
-            // synchronize all stereotypes
-            elTagValues.SyncTaggedValues(Repository, elLast);
         }
-
-        //private void _cmbSearchName_SelectedIndexChanged(object sender, EventArgs e)
-        //{
-        //
-        //}
+        
     }
 
 

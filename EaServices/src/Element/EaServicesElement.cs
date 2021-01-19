@@ -2,7 +2,9 @@
 using System.Diagnostics;
 using System.Windows.Forms;
 using EA;
+using hoTools.Utils;
 using hoTools.Utils.BulkChange;
+using hoTools.Utils.Diagram;
 
 
 // ReSharper disable once CheckNamespace
@@ -10,8 +12,74 @@ namespace hoTools.EaServices
 {
     public static partial class EaService
     {
+        /// <summary>
+        /// Synchronize Tagged Values for the selected diagram elements
+        /// </summary>
+        [ServiceOperation("{7BCDA439-5F61-47A4-B95E-D03AA6EA7D06}", "Synchronize tagged values for stereotypes",
+            "Select EA Diagram elements to synchronize tagged values with stereotype", isTextRequired: false)]
+        public static void SynchronizeTaggedValues(EA.Repository rep)
+        {
+            // over all selected elements
+            EaDiagram curDiagram = new EaDiagram(rep);
+            if (curDiagram.Dia == null) return;
+            int indexLast = curDiagram.SelElements.Count - 1;
+            if (indexLast < 0) return;
 
-         /// <summary>
+            EA.Element elLast = curDiagram.SelElements[0];
+            string stereoEx = "";
+
+
+
+            // over all elements, skip first element because that is the property template 
+            for (int i = 1; i <= indexLast; i++)
+            {
+
+                // synchronize all stereotypes
+                if (stereoEx != curDiagram.SelElements[i].StereotypeEx)
+                {
+                    stereoEx = curDiagram.SelElements[i].StereotypeEx;
+                    ElTagValue elTagValues = new ElTagValue(elLast, stereoEx);
+                    elTagValues.SyncTaggedValues(rep, curDiagram.SelElements[i]);
+                }
+            }
+        }
+        /// <summary>
+        /// Copy Properties (Tagged Values) of last selected elements to the other selected elements
+        /// </summary>
+        [ServiceOperation("{627894BD-21AF-4F78-90E5-FA28BBF30313}", "Copy Tagged Values last selected element",
+            "Select EA Diagram elements to copy Tagged Values from last selected element according to stereotypes", isTextRequired: false)]
+        public static void CopyTaggedValues(EA.Repository rep)
+        {
+            // over all selected elements
+            EaDiagram curDiagram = new EaDiagram(rep);
+            if (curDiagram.Dia == null) return;
+            int indexLast = curDiagram.SelElements.Count - 1;
+            // only synchronize TaggedValues
+            if (indexLast == 0) EaService.SynchronizeTaggedValues(rep);
+            if (indexLast < 1) return;
+
+            EA.Element elLast = curDiagram.SelElements[0];
+            string stereoEx = elLast.StereotypeEx;
+
+
+            ElTagValue elTagValues = new ElTagValue(elLast, stereoEx);
+            // over all elements, skip first element because that is the property template 
+            for (int i = 1; i <= indexLast; i++)
+            {
+                // Set stereotypes if changed
+                if (curDiagram.SelElements[i].StereotypeEx != stereoEx) curDiagram.SelElements[i].StereotypeEx = stereoEx;
+                var error = rep.GetLastError();
+                curDiagram.SelElements[i].Update();
+                elTagValues.Copy(curDiagram.SelElements[i]);
+                curDiagram.SelElements[i].Update();
+            }
+            // synchronize all stereotypes
+            elTagValues.SyncTaggedValues(rep, elLast);
+        }
+
+
+
+        /// <summary>
         /// Bulk change Element in Package recursive 1 according to Settings.Json, first entry 
         /// </summary>
         [ServiceOperation("{32B75793-B369-4443-B497-61E50BAB359B}", "Bulk change Elements Package recursive to 1",

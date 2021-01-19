@@ -317,11 +317,11 @@ namespace AddInSimple
 
                         ADODB.Connection conn = new ADODB.Connection();
                         try
-                            {
+                        {
                             conn.Open(connectionString, "", "", -1);  // connection Open synchronously
                             
                             //conn.Open(connectionString, "", "", -1);  // connection Open synchronously
-                                MessageBox.Show($@"EA ConnectionString:    '{eaConnectionString}'
+                            MessageBox.Show($@"EA ConnectionString:    '{eaConnectionString}'
 ConnectionString:
 - '{connectionString}'
 Provider:
@@ -330,10 +330,10 @@ Mode:
 - '{conn.Mode}' 
 State:
 - '{conn.State}'", @"ODBC Connection established ");
-                            }
-                                catch (Exception e)
-                            {
-                                MessageBox.Show($@"EA ConnectionString:    '{eaConnectionString}'
+                        }
+                        catch (Exception e)
+                        {
+                            MessageBox.Show($@"EA ConnectionString:    '{eaConnectionString}'
 ConnectionString:
 - '{connectionString}'
 Mode:             
@@ -342,7 +342,7 @@ State:
 - '{conn.State}'
 
 { e}", @"ODBC Connection error ");
-                            }
+                        }
                     }
                     break;
 

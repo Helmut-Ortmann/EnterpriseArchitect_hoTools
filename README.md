@@ -129,11 +129,12 @@ Some features:
 
 ## Releases
 
-### Release 3.8
+### Release 3.8.1
 
 - Fix *.msi package for all users to delete everything after deinstallation (    <Publish Dialog="FeaturesDlg" Control="Install" Event="DoAction" Value="FindRelatedProducts">1</Publish>)
 - Copy properties from last selected elements to the other selected elements
   - implements an update of Tagged Values by its used stereotypes.
+  - you may select only one element: hoTools just synchronizes the TaggedValues of all stereotypes of the selected element
 
 ### Release 3.7
 
