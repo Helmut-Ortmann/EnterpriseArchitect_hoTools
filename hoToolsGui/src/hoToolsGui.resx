@@ -580,7 +580,7 @@ No Excel is required.</value>
     <value>Export csv of Clipboard to Excel</value>
   </data>
   <data name="_contextMenuStripSearch.Size" type="System.Drawing.Size, System.Drawing">
-    <value>309, 380</value>
+    <value>309, 358</value>
   </data>
   <data name="_contextMenuStripSearch.ToolTip" xml:space="preserve">
     <value>Export the Clipboard content as csv to Excel</value>
@@ -3085,7 +3085,8 @@ The &lt;Search Name&gt; has to contain a valid SQL QueryFile name. hoTools searc
 No Excel is required.
 
 Note:
-hoTools uses EA to perform SQL. There are SQL-Searches which don't work properly with EA. Usually the Note ist the cause of the problem.</value>
+hoTools uses EA to perform SQL. There are SQL-Searches which don't work properly with EA. Usually the Note ist the cause of the problem.
+Try to use a substring of the note or avoid critical notes alltogether. </value>
   </data>
   <data name="exportCsvOfClipboardToExcelToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>280, 22</value>
@@ -3096,7 +3097,9 @@ hoTools uses EA to perform SQL. There are SQL-Searches which don't work properly
   <data name="exportCsvOfClipboardToExcelToolStripMenuItem.ToolTipText" xml:space="preserve">
     <value>Export *.csv content of Clipboard to Excel.
 
-No Excel is required.</value>
+No Excel is required.
+
+Be awar: Due to limitation of the *.csv there might be issues with delimiters. This usually happens with comments/notes.</value>
   </data>
   <data name="toolStripSeparator3.Size" type="System.Drawing.Size, System.Drawing">
     <value>277, 6</value>
@@ -4892,6 +4895,6 @@ If you want to use LINQPad with EA you need:
     <value>HoToolsGui</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>hoTools.hoToolsGui.AddinGui, hoToolsGui, Version=3.8.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>hoTools.hoToolsGui.AddinGui, hoToolsGui, Version=3.9.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>
