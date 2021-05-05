@@ -132,7 +132,7 @@ First Stereotype to set:
                             // Check complete name and name without namespace
                             char[] c = {':', ':'};
                             string nameWithoutNamespace = tg.FQName.Split(c).Last();
-                            if (tg.FQName == name || nameWithoutNamespace == name)
+                            if (tg.FQName == name || tg.Name == name || nameWithoutNamespace == name)
                             {
                                 tg.Value = value;
                             }

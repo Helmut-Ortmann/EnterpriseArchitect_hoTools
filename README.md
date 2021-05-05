@@ -129,6 +129,9 @@ Some features:
 
 ## Releases
 
+### Release 3.8.2
+- Fix error in Bulk Element Change
+
 ### Release 3.8.1
 
 - Fix *.msi package for all users to delete everything after deinstallation (    <Publish Dialog="FeaturesDlg" Control="Install" Event="DoAction" Value="FindRelatedProducts">1</Publish>)
