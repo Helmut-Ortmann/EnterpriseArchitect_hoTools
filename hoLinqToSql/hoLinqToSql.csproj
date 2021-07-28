@@ -154,6 +154,15 @@
     <None Include="LinqUtils\sql.sqlite" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="ADO.Net.Client">
+      <Version>1.4.1.1</Version>
+    </PackageReference>
+    <PackageReference Include="ADO.Net.Client.Core">
+      <Version>1.4.2.1</Version>
+    </PackageReference>
+    <PackageReference Include="AdoNetCore.AseClient">
+      <Version>0.13.1</Version>
+    </PackageReference>
     <PackageReference Include="BLToolkit.Sybase">
       <Version>4.3.9</Version>
     </PackageReference>
@@ -176,7 +185,7 @@
       <Version>2.9.8</Version>
     </PackageReference>
     <PackageReference Include="linq2db.MySql">
-      <Version>3.1.0</Version>
+      <Version>2.9.8</Version>
     </PackageReference>
     <PackageReference Include="linq2db.Oracle.Managed">
       <Version>2.9.8</Version>
@@ -185,10 +194,10 @@
       <Version>2.9.8</Version>
     </PackageReference>
     <PackageReference Include="linq2db.SQLite">
-      <Version>3.1.0</Version>
+      <Version>2.9.8</Version>
     </PackageReference>
     <PackageReference Include="linq2db.SqlServer">
-      <Version>3.1.0</Version>
+      <Version>2.9.8</Version>
     </PackageReference>
     <PackageReference Include="linq2db.Sybase">
       <Version>2.9.8</Version>
@@ -239,7 +248,7 @@
       <Version>4.5.1</Version>
     </PackageReference>
     <PackageReference Include="System.Data.SQLite.Core">
-      <Version>1.0.113.7</Version>
+      <Version>1.0.114.3</Version>
     </PackageReference>
     <PackageReference Include="System.Numerics.Vectors">
       <Version>4.5.0</Version>

@@ -115,7 +115,7 @@ namespace hoTools.EaServices
 
         #region AddDiagramNote
 
-        public static void AddDiagramNote(Repository rep)
+        public static void AddDiagramNote(Repository rep, string text="")
         {
             ObjectType oType = rep.GetContextItemType();
             if (oType.Equals(ObjectType.otDiagram))
@@ -132,6 +132,7 @@ namespace hoTools.EaServices
                 try
                 {
                     elNote = (Element) pkg.Elements.AddNew("", "Note");
+                    elNote.Notes = text;
                     elNote.Update();
                     pkg.Update();
                 }
@@ -3558,9 +3559,11 @@ from %APPDATA%Local\Apps\hoTools\
         /// <param name="elementType"></param>
         /// <param name="connectorLinkType"></param>
         /// <param name="bound">Only for notes to bound to description</param>
+        /// <param name="text"></param>
         public static void AddElementsToDiagram(Repository rep,
             string elementType = "Note", string connectorLinkType = "Element Note", 
-            bool bound = true)
+            bool bound = true,
+            string text = "")
         {
             // handle multiple selected elements
             ObjectType objectType = rep.GetContextItemType();
@@ -3572,11 +3575,11 @@ from %APPDATA%Local\Apps\hoTools\
             switch (objectType)
             {
                 case ObjectType.otDiagram:
-                    AddDiagramNote(rep);
+                    AddDiagramNote(rep, text);
                     break;
                 case ObjectType.otConnector:
                     AddElementWithLinkToConnector(rep, diaCurrent.SelectedConnector, elementType, 
-                        bound);
+                        bound, text);
                     break;
 
                 case ObjectType.otPackage:
@@ -3785,10 +3788,12 @@ from %APPDATA%Local\Apps\hoTools\
         /// <param name="con"></param>
         /// <param name="elementType">Default Note</param>
         /// <param name="bound"></param>
+        /// <param name="text"></param>
         // ReSharper disable once MemberCanBePrivate.Global
         public static void AddElementWithLinkToConnector(Repository rep, Connector con,
             string elementType = @"Note", 
-            bool bound = true)
+            bool bound = true,
+            string text = "")
         {
             
 
@@ -3800,6 +3805,7 @@ from %APPDATA%Local\Apps\hoTools\
             try
             {
                 elNewElement = (Element) pkg.Elements.AddNew("", elementType);
+                elNewElement.Notes = text;
                 elNewElement.Update();
                 pkg.Update();
             }
