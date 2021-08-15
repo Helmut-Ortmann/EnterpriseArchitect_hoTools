@@ -252,7 +252,7 @@ namespace hoLinqToSql.LinqUtils
             {
 
                 case "JET":
-                    provider = new AccessDataProvider();
+                    provider = new AccessOleDbDataProvider();
                     dsnConnectionString = GetConnectionStringForDsn(connectionString);
                     if (dsnConnectionString != "") return dsnConnectionString;
                     if (connectionString.ToLower().EndsWith(".eap") || connectionString.ToLower().EndsWith(".eapx"))
@@ -270,26 +270,26 @@ namespace hoLinqToSql.LinqUtils
 
 
                 case "MYSQL":
-                    provider = new MySqlDataProvider();
+                    provider = new MySqlDataProvider("MySQL");
                     dsnConnectionString = GetConnectionStringForDsn(connectionString);
                     if (dsnConnectionString != "") return dsnConnectionString;
                     return FilterConnectionString(connectionString);
 
                 case "ACCESS2007":
-                    provider = new AccessDataProvider();
+                    provider = new AccessOleDbDataProvider();
                     dsnConnectionString = GetConnectionStringForDsn(connectionString);
                     if (dsnConnectionString != "") return dsnConnectionString;
                     return FilterConnectionString(connectionString);
 
 
                 case "ASA":
-                    provider = new SybaseDataProvider();
+                    provider = new SybaseDataProvider("Sybase");
                     dsnConnectionString = GetConnectionStringForDsn(connectionString);
                     if (dsnConnectionString != "") return dsnConnectionString;
                     return FilterConnectionString(connectionString);
 
                 case "ORACLE":
-                    provider = new OracleDataProvider();
+                    provider = new OracleDataProvider("Oracle");
                     dsnConnectionString = GetConnectionStringForDsn(connectionString);
                     if (dsnConnectionString != "") return dsnConnectionString;
                     return FilterConnectionString(connectionString);

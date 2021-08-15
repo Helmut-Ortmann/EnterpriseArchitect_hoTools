@@ -129,6 +129,8 @@ Some features:
 
 ## Releases
 
+### 3.9 Update linq2db libraries to 3.4.3
+
 ### Release 3.8.2
 - Fix error in Bulk Element Change
 

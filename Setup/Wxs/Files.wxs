@@ -356,6 +356,7 @@
       </Component>
       -->
 
+
       <Component Id="SQLite.Interop.dll" Guid="{3DFC900E-8BD6-4B50-ACFC-7DF08040ECC2}">
         <File Id="SQLite.Interop.dll" KeyPath="yes" Name="SQLite.Interop.dll" Source="$(var.NugetCollectorProject.TargetDir)\x86\SQLite.Interop.dll" />
       </Component>
@@ -363,7 +364,12 @@
         <File Id="System.Data.SQLite.dll" KeyPath="yes" Name="System.Data.SQLite.dll" Source="$(var.NugetCollectorProject.TargetDir)\System.Data.SQLite.dll" />
       </Component>
 
-
+     <Component Id="Microsoft.Bcl.AsyncInterfaces.dll" Guid="{02AC05C3-9F5F-4E64-8C9E-4DCD6E96AEE9}">
+       <File Id="Microsoft.Bcl.AsyncInterfaces.dll" KeyPath="yes" Name="Microsoft.Bcl.AsyncInterfaces.dll" Source="$(var.NugetCollectorProject.TargetDir)\Microsoft.Bcl.AsyncInterfaces.dll" />
+     </Component>
+     <Component Id="System.Threading.Tasks.Extensions.dll" Guid="{CCD414C7-C80A-4075-B048-77CEBB520D6C}">
+       <File Id="System.Threading.Tasks.Extensions.dll" KeyPath="yes" Name="System.Threading.Tasks.Extensions.dll" Source="$(var.NugetCollectorProject.TargetDir)\System.Threading.Tasks.Extensions.dll" />
+     </Component>
       <!-- HtmlAgilityPack -->
       <Component Id="HtmlAgilityPack.dll" Guid="{3783B4A7-6591-4783-AFD5-FB7F4E70A2D5}">
         <File Id="HtmlAgilityPack.dll" KeyPath="yes" Name="HtmlAgilityPack.dll" Source="$(var.NugetCollectorProject.TargetDir)\HtmlAgilityPack.dll" />
