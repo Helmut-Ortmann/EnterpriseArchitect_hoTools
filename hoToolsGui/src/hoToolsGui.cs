@@ -2457,7 +2457,6 @@ namespace hoTools.hoToolsGui
             // 
             // _menuStrip1
             // 
-            this._menuStrip1.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
             this._menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this._menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this._fileToolStripMenuItem,
@@ -3170,6 +3169,7 @@ namespace hoTools.hoToolsGui
             // HoToolsGui
             // 
             resources.ApplyResources(this, "$this");
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.Controls.Add(this._rtfListOfSearches);
             this.Controls.Add(this._cmbSearchName);
             this.Controls.Add(this._panelPort);

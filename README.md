@@ -130,6 +130,7 @@ Some features:
 ## Releases
 
 ### 3.9 Update linq2db libraries to 3.4.3
+        Set autoscale to DPI. Avoid issues with scaling in running application
 
 ### Release 3.8.2
 - Fix error in Bulk Element Change
