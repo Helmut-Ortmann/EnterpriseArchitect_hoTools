@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Forms;
 using EA;
 using hoTools.Utils.Resources;
 
@@ -40,7 +41,16 @@ namespace hoTools.Utils.Favorites
         /// <returns></returns>
         public static bool InstallSearches(Repository rep)
         {
-            rep.AddDefinedSearches(Strings.SearchFavorite);
+            try
+            {
+                // doesn't work for x64
+                if (! Environment.Is64BitProcess)
+                    rep.AddDefinedSearches(Strings.SearchFavorite);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($@"{e}", @"Can't install Searches");
+            }
             return true;
         }
         #endregion

@@ -129,6 +129,20 @@ Some features:
 
 ## Releases
 
+### 3.10 Add Setup for EA 16. 64 Bit
+
+- See project: SetupX64 (WIX installation)
+  - Procedure to create an X64 environment
+    - VS: Create Configuration for x64
+    - Copy existing x86 WIX Setup project to a new folder
+      - *.WixProj: Change Project GUID to a new value
+      - *.WixProj: Change Project Name to a new name
+      - *.WixProj: Change EA Registry key Addin to EAAddins64
+      - Change Install-Directory (e.g. xxx64)
+      - Change Output-Name (e.g. xxx64.msi)
+    - Build x64
+    - Run new xxx64.msi
+
 ### 3.9 Update linq2db libraries to 3.4.3
         Set autoscale to DPI. Avoid issues with scaling in running application
 

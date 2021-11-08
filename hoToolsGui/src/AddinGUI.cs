@@ -52,6 +52,7 @@ namespace hoTools.hoToolsGui
         }
         #endregion
         #region Release
+        //public string Release { get; }
         public string Release { set; protected get; }
 
         #endregion

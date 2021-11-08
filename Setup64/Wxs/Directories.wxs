@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Fragment>
+    <!--
+      Guidelines Single Package Authoring (per user/per machine install)
+      https://msdn.microsoft.com/en-us/library/windows/desktop/dd408068(v=vs.85).aspx
+      -->
+      <Directory Id="TARGETDIR" Name="SourceDir">
+        <Directory Id="LocalAppData"> <!--Prevent using UAC (User Access Control)-->
+              <Directory Id="APPLICATIONFOLDER" Name="hoToolsX64"  >
+              </Directory>
+          </Directory>
+      </Directory>
+    <Property Id="ApplicationFolderName" Value="hoToolsX64" />
+	</Fragment>
+ </Wix>
