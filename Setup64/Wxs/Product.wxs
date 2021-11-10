@@ -24,11 +24,11 @@
   // Change AssemblyFileVersion accordingly
   -->
   <!-- The post processing of the WIX Setup projects changes the *.msi file name to:
-       'hoTools 3.10.0.msi' (3.9.1=ProductVersion)
+       'hoTools 3.11.0.msi' (3.11.0=ProductVersion)
        The Scripts you find in: Setup\Script\..
        see also: http://kentie.net/article/wixnameversion/index.htm
   -->
-  <?define ProductVersion="3.10.1" ?> 
+  <?define ProductVersion="3.11.0" ?> 
   <?define UpgradeCode="307AA3B0-18F4-4DC4-9E82-3B60DE424434" ?>
   <?define Manufacturer="ho" ?>
   <?define ProductName="hoToolsX64" ?>

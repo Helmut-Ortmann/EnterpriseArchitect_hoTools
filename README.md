@@ -129,6 +129,9 @@ Some features:
 
 ## Releases
 
+### 3.11 Searches in hoToolsBasic.xml adapted to SQLite
+
+
 ### 3.10 Add Setup for EA 16. 64 Bit
 
 - See project: SetupX64 (WIX installation)
