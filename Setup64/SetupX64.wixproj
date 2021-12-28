@@ -21,7 +21,7 @@
     <DefineConstants>Debug</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
-    <OutputPath>bin\$(Configuration)\</OutputPath>
+    <OutputPath>bin\x64\Release\</OutputPath>
     <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
     <SuppressIces>ICE61</SuppressIces>
     <CompilerAdditionalOptions>-platform x64</CompilerAdditionalOptions>
@@ -51,7 +51,6 @@
     <Content Include="Scripts\getmsiversion.vbs" />
     <Content Include="Scripts\HoTools.reg" />
     <Content Include="Scripts\HoTools64bit.reg" />
-    <Content Include="Scripts\Readme.md" />
     <Content Include="Scripts\RenameMsi.bat" />
     <Content Include="Settings.json" />
     <Content Include="UserSearches.json" />
@@ -168,7 +167,7 @@
     <CompilerAdditionalOptions>--</CompilerAdditionalOptions>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent>"$(SolutionDir)Setup64\Scripts\renamemsi.bat" "$(SolutionDir)Setup64\bin\Release\en-us\hoToolsX64.msi"</PostBuildEvent>
+    <PostBuildEvent>"$(SolutionDir)Setup64\Scripts\renamemsi.bat" "$(SolutionDir)Setup64\bin\x64\Release\en-us\hoToolsX64.msi" "$(SolutionDir)readme.md"</PostBuildEvent>
   </PropertyGroup>
   <!--
 	To modify your build process, add your task inside one of the targets below and uncomment it.

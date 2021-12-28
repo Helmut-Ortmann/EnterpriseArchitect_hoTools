@@ -16,12 +16,12 @@
     <SccLocalPath>SAK</SccLocalPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
-    <OutputPath>bin\$(Configuration)\</OutputPath>
+    <OutputPath>bin\x86\Debug\</OutputPath>
     <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
     <DefineConstants>Debug</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
-    <OutputPath>bin\$(Configuration)\</OutputPath>
+    <OutputPath>bin\x86\Release\</OutputPath>
     <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
     <SuppressIces>ICE61</SuppressIces>
   </PropertyGroup>
@@ -49,7 +49,6 @@
     <Content Include="Scripts\getmsiversion.vbs" />
     <Content Include="Scripts\HoTools.reg" />
     <Content Include="Scripts\HoTools64bit.reg" />
-    <Content Include="Scripts\Readme.md" />
     <Content Include="Scripts\RenameMsi.bat" />
     <Content Include="Settings.json" />
     <Content Include="UserSearches.json" />
@@ -154,18 +153,20 @@
     <EmbeddedResource Include="Wxs\Localization.wxl" />
   </ItemGroup>
   <Import Project="$(WixTargetsPath)" />
-  <PropertyGroup>
-    <PostBuildEvent>"$(SolutionDir)\Setup\Scripts\renamemsi.bat" "$(SolutionDir)\Setup\bin\Release\en-us\hoTools.msi"</PostBuildEvent>
-  </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
     <DefineConstants>Debug</DefineConstants>
-    <OutputPath>bin\$(Platform)\$(Configuration)\</OutputPath>
+    <OutputPath>bin\x64\debug\</OutputPath>
     <IntermediateOutputPath>obj\$(Platform)\$(Configuration)\</IntermediateOutputPath>
+    <LeaveTemporaryFiles>True</LeaveTemporaryFiles>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
     <SuppressIces>ICE61</SuppressIces>
-    <OutputPath>bin\$(Platform)\$(Configuration)\</OutputPath>
+    <OutputPath>bin\x64\debug\</OutputPath>
     <IntermediateOutputPath>obj\$(Platform)\$(Configuration)\</IntermediateOutputPath>
+    <VerboseOutput>True</VerboseOutput>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>"$(SolutionDir)\Setup\Scripts\renamemsi.bat" "$(SolutionDir)\Setup\bin\x86\Release\en-us\hoTools.msi" "$(SolutionDir)readme.md"</PostBuildEvent>
   </PropertyGroup>
   <!--
 	To modify your build process, add your task inside one of the targets below and uncomment it.

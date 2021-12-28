@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using hoTools.Utils;
 
-namespace hoTools.EaServices.src.CopyTag
+namespace hoTools.EaServices.CopyTag
 {
     public class ElTag
     {
-        private List<EA.TaggedValue> _lTv;
-        private List<EA.TaggedValue> _lTvEx;
+        private List<EA.TaggedValue> _lTv = new List<EA.TaggedValue>();
+        private List<EA.TaggedValue> _lTvEx = new List<EA.TaggedValue>();
         private EA.Element _el;
         public ElTag(EA.Element el)
         {

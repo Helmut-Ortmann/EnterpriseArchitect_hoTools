@@ -14,7 +14,7 @@ namespace hoTools.hoSqlGui
     public class TextBoxUndo : TextBox
     {
         readonly TabPage _tabPage;
-        private static readonly int UndoLimit;
+        private static readonly int UndoLimit=0;
         readonly List<Item> _lastData = new List<Item>();
         int _undoCount;
         bool _undo;
