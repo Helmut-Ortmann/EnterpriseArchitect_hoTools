@@ -17,6 +17,7 @@ using System.Reflection;
 using hoTools.Find;
 using hoTools.Utils.Configuration;
 using GlobalHotkeys;
+using hoTools.ea;
 using hoTools.Extensions;
 using hoTools.EaServices.Names;
 
@@ -53,7 +54,7 @@ namespace hoTools
     /// <summary>
     /// The main Addin class which calls the other tasks
     /// </summary>
-    public partial class HoToolsRoot : EAAddinFramework.EAAddinBase
+    public partial class HoToolsRoot : EaAddinBase
     {
         // Overwritten by AdinClass AssemblyFileVersion
         // This should be identical to installed product version from WIX installer (ProductVersion)

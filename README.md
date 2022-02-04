@@ -129,7 +129,13 @@ Some features:
 
 ## Releases
 
-### 3.11 Searches in hoToolsBasic.xml adapted to SQLite
+### 3.11 Searches in hoToolsBasic.xml adapted to SQLite (EA 16), Fix import Glossary
+
+- Searches in hoToolsBasic.xml adapted to SQLite (EA 16)
+- Fix import Glossary
+- Fix WildCard Handling of SQL, supporting ' and " for string constants
+- Fix DB Handling (#DB=Other# EA 16)
+- Some searches adapted to MySql
 
 
 ### 3.10 Add Setup for EA 16. 64 Bit

@@ -84,7 +84,7 @@
       <Version>1.4.1.1</Version>
     </PackageReference>
     <PackageReference Include="ADO.Net.Client.Core">
-      <Version>1.4.2.1</Version>
+      <Version>1.4.3</Version>
     </PackageReference>
     <PackageReference Include="AdoNetCore.AseClient">
       <Version>0.19.2</Version>

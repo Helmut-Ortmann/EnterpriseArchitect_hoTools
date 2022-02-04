@@ -40,6 +40,7 @@ namespace hoTools.Utils.SQL
             Openedge,
             Access2007,
             Firebird,
+            Other,
             Unknown
         }
         readonly Repository _rep;
@@ -67,12 +68,13 @@ namespace hoTools.Utils.SQL
             else
             {
                 //if it is a .eap file we check the size of it. if less then 1 MB then it is a shortcut file and we have to open it as a text file to find the actual connection string
-                if (connectionString.ToLower().EndsWith(".eap", StringComparison.CurrentCulture))
+                if (connectionString.ToLower().EndsWith(".eap", StringComparison.CurrentCulture) ||
+                    connectionString.ToLower().EndsWith(".eapx", StringComparison.CurrentCulture))
                 {
                     var fileInfo = new System.IO.FileInfo(connectionString);
                     if (fileInfo.Length > 1000)
                     {
-                        //local .eap file, ms access syntax
+                        //local .eap / *.eapx file, ms access syntax
                         repoType = RepositoryType.AdoJet;
                     }
                     else
@@ -86,7 +88,9 @@ namespace hoTools.Utils.SQL
                         reader.Close();
                     }
                 }
-                if (!connectionString.ToLower().EndsWith(".eap", StringComparison.CurrentCulture))
+                if (! (connectionString.ToLower().EndsWith(".eap", StringComparison.CurrentCulture) ||
+                       connectionString.ToLower().EndsWith(".eapx", StringComparison.CurrentCulture)
+                       ))
                 {
                     string dbTypeString = "DBType=";
                     int dbIndex = connectionString.IndexOf(dbTypeString, StringComparison.CurrentCulture) +
@@ -124,28 +128,35 @@ namespace hoTools.Utils.SQL
             int beginLike = sqlQuery.IndexOf("like", StringComparison.InvariantCultureIgnoreCase);
             if (beginLike > 1)
             {
-                int beginString = sqlQuery.IndexOf("'", beginLike + "like".Length, StringComparison.CurrentCulture);
+                // Handle ' and " to encapsulate strings
+                int beginString1 = sqlQuery.IndexOf("'", beginLike + "like".Length, StringComparison.CurrentCulture);
+                int beginString2 = sqlQuery.IndexOf(@"""", beginLike + "like".Length, StringComparison.CurrentCulture);
+                int beginString = beginString1 > -1 ? beginString1 : beginString2;
                 if (beginString > 0)
                 {
-                    int endString = sqlQuery.IndexOf("'", beginString + 1, StringComparison.CurrentCulture);
+                    int endString1 = sqlQuery.IndexOf("'", beginString + 1, StringComparison.CurrentCulture);
+                    int endString2 = sqlQuery.IndexOf(@"""", beginString + 1, StringComparison.CurrentCulture);
+                    int endString = beginString1 > 0 ? endString1 : endString2;
                     if (endString > beginString)
                     {
                         string originalLikeString = sqlQuery.Substring(beginString + 1, endString - beginString);
                         string likeString = originalLikeString;
                         if (msAccess)
                         {
+                            likeString = likeString.Replace("#WC#", "*");
                             likeString = likeString.Replace('%', '*');
                             likeString = likeString.Replace('_', '?');
                             likeString = likeString.Replace('^', '!');
-                            likeString = likeString.Replace("#WC#", "*");
+                            
                         }
                         else
                         {
+                            likeString = likeString.Replace("#WC#", "%");
                             likeString = likeString.Replace('*', '%');
                             likeString = likeString.Replace('?', '_');
                             likeString = likeString.Replace('#', '_');
                             likeString = likeString.Replace('^', '!');
-                            likeString = likeString.Replace("#WC#", "%");
+
                         }
                         string next = string.Empty;
                         if (endString < sqlQuery.Length)

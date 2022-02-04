@@ -218,7 +218,7 @@ namespace EAAddinFramework.Utils
                 string sqlString = _globalCfg.ReadSqlFile(searchName);
 
                 // run sql search
-                searchTerm = UtilSql.ReplaceSqlWildCards(Repository, searchTerm, RepositoryType);
+                sqlString = UtilSql.ReplaceSqlWildCards(Repository, sqlString, RepositoryType);
                 return SqlRun(searchName, sqlString, searchTerm, exportToExcel);
 
 
@@ -433,6 +433,7 @@ namespace EAAddinFramework.Utils
         {
             sqlQuery = FormatSql(sqlQuery);
             // store final/last query which is executed
+            
             SqlError.WriteHoToolsLastSql(sqlQuery);
 
             return Repository.SQLQuery(sqlQuery); // no error, only no result rows
@@ -765,6 +766,7 @@ namespace EAAddinFramework.Utils
                 { UtilSql.RepositoryType.Oracle, "#DB=ORACLE#" },
                 { UtilSql.RepositoryType.Postgres, "#DB=POSTGRES#" },
                 { UtilSql.RepositoryType.SqlSvr, "#DB=SqlSvr#" },
+                { UtilSql.RepositoryType.Other, "#DB=Other#" }
             };
             UtilSql.RepositoryType dbType = UtilSql.GetRepositoryType(Repository);
             string s = sql;

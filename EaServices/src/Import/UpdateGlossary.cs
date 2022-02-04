@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
 using EA;
@@ -8,12 +9,15 @@ using hoTools.Utils.Export;
 
 namespace hoTools.EaServices.Import
 {
+
     /// <summary>
     /// Update Glossary 
     /// - from *.csv
     /// </summary>
     public static class UpdateGlossary
     {
+        static char TAB = '\t';
+
         /// <summary>
         /// Update Glossary from *.csv file (tested with Excel). It:
         /// - Updates existing terms
@@ -38,44 +42,68 @@ namespace hoTools.EaServices.Import
             if (openFileDialogCsv.ShowDialog() != DialogResult.OK && openFileDialogCsv.CheckFileExists) return;
 
             string fileName = openFileDialogCsv.FileName;
+            char eaDelimiter =
+                Convert.ToChar(CultureInfo.CurrentCulture.TextInfo.ListSeparator);
 
             // Get Table of Terms of *.csv files (Type, Term, Meaning)
-            DataTable dt = Excel.MakeDataTableFromCsvFile(fileName);
+            DataTable dt = Excel.MakeDataTableFromCsvFile(fileName, eaDelimiter);
             // Check Data table
             if (dt.Columns.Count < 3)
             {
-                MessageBox.Show($"FileName:\t{fileName}", "*.csv file needs at least 3 columns, 'Type','Term','Meaning' !!");
+                MessageBox.Show($@"FileName:{TAB}{fileName}
+Columns:{TAB}{dt.Columns.Count}
+Separator:{TAB}{eaDelimiter}", @"*.csv file needs at least 3 columns, 'Type','Term','Meaning' !!");
                 return;
             }
+
             // Get Column names
             string col0NameTyp = dt.Columns[0].ColumnName;
             string col1NameTerm = dt.Columns[1].ColumnName;
             string col2NameMeaning = dt.Columns[2].ColumnName;
-            if (!(col0NameTyp.ToLower() == "type" &&
-                  col1NameTerm.ToLower() == "term" &&
-                  col2NameMeaning.ToLower() == "meaning"))
+            if (!
+                    ((col0NameTyp == "Type" && col1NameTerm == "Term") ||
+                     (col0NameTyp == "Term" && col1NameTerm == "Type")) &&
+                col2NameMeaning == "Meaning"
+               )
             {
                 MessageBox.Show(
-                    $"FileName:\t{fileName}\r\nColumn0:{col0NameTyp}\r\nColumn1:{col1NameTerm}\r\nColumn2:{col2NameMeaning}",
-                    "*.csv file needs at least 3 columns, 'Type','Term','Meaning' !!");
+                    $@"FileName:{TAB}{fileName}
+Column0:{TAB}'{col0NameTyp}', must be 'Type' or 'Term'
+Column1:{TAB}'{col1NameTerm}', must be 'Term' or 'Type'
+Column2:{TAB}'{col2NameMeaning}', must be 'Meaning",
+                    @"*.csv file needs at least 3 columns, 'Type','Term','Meaning' !!");
                 return;
             }
 
 
             // Import to EA as Glossary (Type, Term, Meaning)
             rep.BatchAppend = true;
-            // get Glossary
-            var lTerms = new List<Tuple<string, string, string, short>>();
-            for (int i = rep.Terms.Count - 1; i >= 0; i--)
+            // get EA Glossary Item
+            int updateCount;
+            int insertCount;
+            try
             {
-                EA.Term term = (EA.Term)rep.Terms.GetAt((short)i);
-                lTerms.Add(new Tuple<string, string, string, short>(term.Type, term.Term, term.Meaning.FormatMeaning(), (short)i));
+                var lEaTerms = new List<EA.Term>();
+                rep.Terms.Refresh();
+                for (int i = rep.Terms.Count - 1; i >= 0; i--)
+                {
+                    EA.Term term = (EA.Term)rep.Terms.GetAt((short)i);
+                    lEaTerms.Add(term);
+                }
+                updateCount = UpdateGlossaryTerms(rep, dt, lEaTerms, "Type", "Term", "Meaning");
+                insertCount = AppendGlossaryTerms(rep, dt, lEaTerms, "Type", "Term", "Meaning");
             }
-            int updateCount = UpdateGlossaryTerms(rep, dt, lTerms, col0NameTyp, col1NameTerm, col2NameMeaning);
-            int insertCount = AppendGlossaryTerms(rep, dt, lTerms, col0NameTyp, col1NameTerm, col2NameMeaning);
+            catch (Exception e)
+            {
+                MessageBox.Show($@"{e}", @"Error update glossary");
+                return;
+            }
+
             rep.BatchAppend = false;
 
-            MessageBox.Show($"File:\t{fileName}\r\nUpdated:\t{updateCount}\r\nInserted:\t{insertCount}\r\n",$"Glossary updated with {updateCount+ insertCount}");
+            MessageBox.Show($@"File:{TAB}{fileName}
+Updated:{TAB}{updateCount}
+Inserted:{TAB}{insertCount}",$@"Glossary updated with {updateCount+ insertCount}");
         }
 
         /// <summary>
@@ -84,30 +112,45 @@ namespace hoTools.EaServices.Import
         /// <param name="rep"></param>
         /// <param name="dt">Table with terms to append</param>
         /// <param name="lTerms">Type, Term, Meaning</param>
-        /// <param name="col0NameTyp">Column name of 'Type'</param>
-        /// <param name="col1NameTerm">Column name of 'Term'</param>
-        /// <param name="col2NameMeaning">Column name of 'Meaning'</param>
-        private static int  AppendGlossaryTerms(Repository rep, DataTable dt, List<Tuple<string, string, string, short>> lTerms, string col0NameTyp,
-            string col1NameTerm, string col2NameMeaning)
+        /// <param name="colNameType">Column name of 'Type'</param>
+        /// <param name="colNameTerm">Column name of 'Term'</param>
+        /// <param name="colNameMeaning">Column name of 'Meaning'</param>
+        private static int  AppendGlossaryTerms(Repository rep, DataTable dt, List<EA.Term> lTerms, string colNameType,
+            string colNameTerm, string colNameMeaning)
         {
-// New Glossary items
-            var newTerms = from DataRow termNew in dt.Rows
-                where !lTerms.Any(i1 => i1.Item1 == (string) termNew[col0NameTyp] &&
-                                        i1.Item2 == (string) termNew[col1NameTerm]
-                )
-                select new {termNew};
-            // update EA Glossary
             int insertCount = 0;
-            foreach (var item in newTerms)
+            try
             {
-                EA.Term term = (EA.Term) rep.Terms.AddNew((string) item.termNew[col1NameTerm], "Term");
-                term.Type = (string) item.termNew[col0NameTyp];
-                term.Term = (string) item.termNew[col1NameTerm];
-                term.Meaning = (string) item.termNew[col2NameMeaning];
-                term.Update();
-                insertCount += 1;
+                // New Glossary items
+
+                var newTerms = from DataRow termNew in dt.Rows
+                    where !lTerms.Any(t =>
+                        t.Type == termNew?[colNameType].ToString() &&
+                        t.Term == termNew[colNameTerm].ToString()
+                    )
+                    select new { termNew };
+                // update EA Glossary
+
+                foreach (var item in newTerms)
+                {
+                    if (String.IsNullOrEmpty(item.termNew[colNameTerm].ToString())) continue;
+                    if (String.IsNullOrEmpty(item.termNew[colNameType].ToString())) continue;
+
+                    EA.Term term = (EA.Term)rep.Terms.AddNew(item.termNew[colNameTerm].ToString(), "Term");
+                    term.Type = item.termNew[colNameType].ToString();
+                    term.Term = item.termNew[colNameTerm].ToString();
+                    term.Meaning = item.termNew[colNameMeaning].ToString();
+                    term.Update();
+                    insertCount += 1;
+                }
+
+                rep.Terms.Refresh();
             }
-            rep.Terms.Refresh();
+            catch (Exception e)
+            {
+                MessageBox.Show($@"{e}",@"Exception Append Glossary Item");
+            }
+
             return insertCount;
         }
 
@@ -117,32 +160,57 @@ namespace hoTools.EaServices.Import
         /// <param name="rep"></param>
         /// <param name="dt">Table with terms to update</param>
         /// <param name="lTerms">Type, Term, Meaning</param>
-        /// <param name="col0NameTyp">Column name of 'Type'</param>
-        /// <param name="col1NameTerm">Column name of 'Term'</param>
-        /// <param name="col2NameMeaning">Column name of 'Meaning'</param>
-        private static int UpdateGlossaryTerms(Repository rep, DataTable dt, List<Tuple<string, string, string, short>> lTerms, 
-            string col0NameTyp, 
-            string col1NameTerm,
-            string col2NameMeaning)
+        /// <param name="colNameTyp">Column name of 'Type'</param>
+        /// <param name="colNameTerm">Column name of 'Term'</param>
+        /// <param name="colNameMeaning">Column name of 'Meaning'</param>
+        private static int UpdateGlossaryTerms(Repository rep, DataTable dt, List<EA.Term> lTerms, 
+            string colNameTyp, 
+            string colNameTerm,
+            string colNameMeaning)
         {
-// Find records to update
-            var updateTerms = from DataRow termNew in dt.Rows
-                from termOld in lTerms
-                where (string) termNew[col0NameTyp] == termOld.Item1 &&
-                      (string) termNew[col1NameTerm] == termOld.Item2 &&
-                      (string) termNew[col2NameMeaning] != termOld.Item3
-                select new {itemNew = termNew, Index = termOld.Item4};
-
-            // update EA Glossary
             int updateCount = 0;
-            foreach (var item in updateTerms)
-            {
-                EA.Term term = (EA.Term) rep.Terms.GetAt(item.Index);
-                term.Meaning = (string) item.itemNew[col2NameMeaning];
-                term.Update();
-                updateCount += 1;
+            try {
+                // Find records to update
+                var updateTerms = from DataRow termNew in dt.Rows
+                    from termEa in lTerms
+                    where 
+                          termNew?[colNameTyp] != null &&
+                          termNew[colNameTerm] != null &&
+                          termNew[colNameMeaning] != null &&
+                          termNew[colNameTyp].ToString() == (termEa.Type ?? "") &&
+                          termNew[colNameTerm].ToString()  == (termEa.Term ?? "") &&
+                          termNew[colNameMeaning].ToString() != (termEa.Meaning ?? "")
+                    select new {ItemNew = termNew, ItemEa = termEa};
+
+                // update EA Glossary
+              
+                foreach (var item in updateTerms)
+                {
+                    EA.Term term = item.ItemEa;
+                    term.Meaning = item.ItemNew[colNameMeaning].ToString();
+                    try
+                    {
+                        term.Update();
+                        updateCount += 1;
+                    }
+                    catch (Exception e)
+                    {
+                        MessageBox.Show($@"Term={item.ItemEa}
+Meaning={item.ItemNew[colNameMeaning]}
+
+{e}", @"Exception Update Glossary Item");
+
+                    }
+                }
+
+
+                rep.Terms.Refresh();
             }
-            rep.Terms.Refresh();
+            catch (Exception e)
+            {
+                MessageBox.Show($@"{e}",@"Exception Update Glossary Items");
+            }
+
             return updateCount;
         }
 
@@ -156,4 +224,5 @@ namespace hoTools.EaServices.Import
             return txt.Replace("\n", "\r\n");
         }
     }
+ 
 }
