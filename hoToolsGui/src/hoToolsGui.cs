@@ -3639,7 +3639,7 @@ namespace hoTools.hoToolsGui
                              t_object d  // destination element
 
                         where  x.description like  '#WC##CurrentItemGUID##WC#' AND
-                               x.Behavior = 'conveyed' AND
+                               x.Behavior in ( 'conveyed', 'abstraction') AND
                                c.ea_guid = x.client    
 
                         and    c.ea_guid = x.client
@@ -3648,7 +3648,7 @@ namespace hoTools.hoToolsGui
                         ORDER BY 3,4
                     ";
                     // Run SQL with macro replacement
-                    Model.SqlRun("ConveyeyItems", sql, "");
+                    Model.SqlRun("ConveyedItems", sql, "");
                     break;
 
                 case EA.ObjectType.otConnector:

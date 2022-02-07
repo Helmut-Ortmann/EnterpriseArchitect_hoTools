@@ -136,6 +136,7 @@ Some features:
 - Fix WildCard Handling of SQL, supporting ' and " for string constants
 - Fix DB Handling (#DB=Other# EA 16)
 - Some searches adapted to MySql
+- Conveyed Elements also supports Sequence (Sequence Diagrams)
 
 
 ### 3.10 Add Setup for EA 16. 64 Bit

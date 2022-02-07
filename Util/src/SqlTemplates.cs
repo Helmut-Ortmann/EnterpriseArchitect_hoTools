@@ -961,7 +961,7 @@ For: Package, Element, Diagram, Attribute, Operation"
                         string conveyedItems = "0";
 
                         // first get "InformationFlows" which carries the conveyed items
-                        if (con.MetaType == "Connector")
+                        if (con.MetaType == "Connector" || con.MetaType == "Sequence")
                         {
                             // get semicolon delimiter list of information flow guids
                             string sqlInformationFlows = "select x.description " +
