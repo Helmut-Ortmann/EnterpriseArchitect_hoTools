@@ -145,8 +145,10 @@
     </Compile>
     <Compile Include="DataModels\VcSymbols\BrowseVcDb.DataModel.cs" />
     <Compile Include="DataModels\VcSymbols\DataModelVcSymbols.generated.cs" />
+    <Compile Include="LinqUtils\ConnectionString.cs" />
     <Compile Include="LinqUtils\hoLinqSqlUtils.cs" />
     <Compile Include="LinqUtils\Linq2dbSettings.cs" />
+    <Compile Include="LinqUtils\LinqExtensions.cs" />
     <Compile Include="LinqUtils\LinqPad.cs" />
     <Compile Include="LinqUtils\PredicatBuilder.cs" />
     <Compile Include="LinqUtils\VcDbUtilities.cs" />

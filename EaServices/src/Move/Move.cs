@@ -48,7 +48,7 @@ namespace hoTools.EaServices.MOVE
 
             //Repository.GetProjectInterface().ReloadProject();
             string msg = "Delete source element '" + srcEl.Name + "'  " + srcEl.Type + "'  " + srcEl.Stereotype + " ?";
-            if (MessageBox.Show(msg, "Proceed with delete?", MessageBoxButtons.YesNo)
+            if (MessageBox.Show(msg, @"Proceed with delete?", MessageBoxButtons.YesNo)
                                    == DialogResult.No) return true;
             // update project to ensure that EA notice all changes
 
@@ -325,19 +325,23 @@ namespace hoTools.EaServices.MOVE
 
             // object is target of connector
             string sql = "Update t_connector set end_Object_ID = " + targetId + " where EXISTS (" +
-                " Select * " +
+                         " Select id from (" +  // MySQL Workaround (https://www.inforbiro.com/blog/mysql-cant-specify-target-table-for-update-in-from-clause)
+
+                " Select c.connector_id As id " +
                 " From  t_object o, t_connector c " +
                 " Where  " +
                 "        c.Connector_type <> 'Dependency' " +
                 "  AND   c.End_Object_ID =  " + srcId +
                 "  AND   o.object_id     = c.start_object_id " +
-                "  AND   c.connector_ID  = t_connector.connector_id " +
+                "  AND   c.connector_ID  = t_connector.connector_id " + 
+                         " ) as t1 " +          // MySQL Workaround (https://www.inforbiro.com/blog/mysql-cant-specify-target-table-for-update-in-from-clause)
                 " );";
             if (odbc.OdbcCmd(sql) == false) return false;
 
             // object is source of connector
             sql = "Update t_connector set start_Object_ID = " + targetId + " where EXISTS (" +
-                        " Select * " +
+                        " Select id from (" +  // MySQL Workaround (https://www.inforbiro.com/blog/mysql-cant-specify-target-table-for-update-in-from-clause)
+                        " Select c.connector_ID As Id " +
                         " From  t_object o, t_connector c " +
                         " Where  " +
                         "        c.Connector_type <> 'Dependency' " +
@@ -345,6 +349,7 @@ namespace hoTools.EaServices.MOVE
                         "  AND   o.object_id     = c.end_object_id " +
                         "  AND   c.connector_ID  = t_connector.connector_id " +
                         "  AND   c.Connector_Type <> 'Generalization' " +
+                        " ) as t1 " +       // MySQL Workaround (https://www.inforbiro.com/blog/mysql-cant-specify-target-table-for-update-in-from-clause)
                         " );";
             if (odbc.OdbcCmd(sql) == false) return false;
 

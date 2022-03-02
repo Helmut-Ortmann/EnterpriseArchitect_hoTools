@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
+using hoLinqToSql.LinqUtils;
 using ADODB;
 
 // ReSharper disable once CheckNamespace
@@ -33,7 +34,9 @@ namespace hoTools.Utils.ODBC
             _cmd.CommandTimeout = 180;
             int start;
 
-            string connectionString = _rep.ConnectionString;
+            EaConnectionString eaConnectionString = new hoLinqToSql.LinqUtils.EaConnectionString(rep);
+
+            string connectionString = eaConnectionString.DbConnectionString;
             if (connectionString.Contains("Connect="))
             {
                 start = connectionString.IndexOf("Connect=", StringComparison.Ordinal) + 8;
@@ -82,15 +85,15 @@ namespace hoTools.Utils.ODBC
                         }
                         catch (Exception ex1)
                         {
-                            MessageBox.Show("Error in ADODB connect: '" + connectionString + "'\n" + "Don't start EA with a shortcut like SDTL.eap!\n\n" + ex1.Message);
+                            MessageBox.Show(@"Error in ADODB connect: '" + connectionString + @"'\n" + @"Don't start EA with a shortcut like SDTL.eap!\n\n" + ex1.Message);
                         }
                     }
                 }
 
-                MessageBox.Show("Error in ADODB connect: '" + connectionString + "'\n" + "Don't start EA with a shortcut like SDTL.eap!\n\n" + ex.Message);
+                MessageBox.Show(@"Error in ADODB connect: '" + connectionString + @"'\n" + @"Don't start EA with a shortcut like SDTL.eap!\n\n" + ex.Message);
 
             }
-           _cmd.ActiveConnection = _cn;
+            _cmd.ActiveConnection = _cn;
             _rs.ActiveConnection = _cn;
 
         }
@@ -114,7 +117,7 @@ namespace hoTools.Utils.ODBC
 
             catch (Exception ex)
             {
-                MessageBox.Show("Error in ADODB Execute" + _rep.ConnectionString + "\n'" + _cmd.CommandText + "'\n'" + ex.Message + "'");
+                MessageBox.Show(@"Error in ADODB Execute" + _rep.ConnectionString + @"\n'" + _cmd.CommandText + @"'\n'" + ex.Message + @"'");
                 return false;
             }
 

@@ -137,6 +137,7 @@ Some features:
 - Fix DB Handling (#DB=Other# EA 16)
 - Some searches adapted to MySql
 - Conveyed Elements also supports Sequence (Sequence Diagrams)
+- Bug fixing
 
 
 ### 3.10 Add Setup for EA 16. 64 Bit

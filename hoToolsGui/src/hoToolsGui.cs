@@ -3630,7 +3630,9 @@ namespace hoTools.hoToolsGui
                 case EA.ObjectType.otElement:
 
                      sql = @"
-                        select  s.ea_guid AS CLASSGUID, s.object_type AS CLASSTYPE, 
+                        //select  s.ea_guid AS CLASSGUID, s.object_type AS CLASSTYPE, 
+                          select  c.ea_guid AS CLASSGUID, c.connector_type AS CLASSTYPE,
+                                        't_connector' As CLASSTABLE,
                                         s.name As [Source],     s.Object_Type As [SourceType],
                                         d.name As [Destination], d.object_Type As [DestinationType]
                         from t_xref x,   // a lot of things like properties,..
