@@ -19,6 +19,7 @@ using AddinFramework.Util.Script;
 using EA;
 using hoTools.EaServices.WiKiRefs;
 using hoTools.Utils.Export;
+using hoTools.Utils.Sql;
 
 namespace hoTools.hoSqlGui
 {

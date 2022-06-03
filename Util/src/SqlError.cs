@@ -42,7 +42,7 @@ namespace hoTools.Utils.SQL
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.ToString(), $"Error delete file '{path}'");
+                MessageBox.Show(e.ToString(), $@"Error delete file '{path}'");
             }
         }
         /// <summary>

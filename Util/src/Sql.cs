@@ -211,7 +211,7 @@ namespace hoTools.Utils.SQL
             }
             catch (Exception e)
             {
-                MessageBox.Show($"{e}", "Error enumerating through LINQ query");
+                MessageBox.Show($@"{e}", @"Error enumerating through LINQ query");
                 return "";
             }
         }
@@ -385,9 +385,11 @@ namespace hoTools.Utils.SQL
 
             return l;
         }
+
         /// <summary>
         /// Get list of strings from a SQL
         /// </summary>
+        /// <param name="rep"></param>
         /// <param name="sql"></param>
         /// <param name="columnName"></param>
         /// <returns></returns>
@@ -412,7 +414,7 @@ namespace hoTools.Utils.SQL
             }
             catch (Exception e)
             {
-                MessageBox.Show($"Update:\r\n{updateString}\r\n\r\n{e}", "Error update SQL");
+                MessageBox.Show($"Update:\r\n{updateString}\r\n\r\n{e}", @"Error update SQL");
                 return false;
             }
             return true;

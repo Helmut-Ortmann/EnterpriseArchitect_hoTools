@@ -8,6 +8,7 @@ using File = System.IO.File;
 using System.Text.RegularExpressions;
 using hoTools.Utils;
 using hoTools.Utils.Configuration;
+using hoTools.Utils.Sql;
 using Element = EA.Element;
 using Package = EA.Package;
 

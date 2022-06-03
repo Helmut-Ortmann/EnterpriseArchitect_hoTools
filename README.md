@@ -129,6 +129,11 @@ Some features:
 
 ## Releases
 
+### 3.12 New SQL macros, SQL error is copied to Clipboard
+
+- Macros: Concat, ToString, Left, Right, ToLower, Substring, If, Instr (JET+MySQL)
+- 
+
 ### 3.11 Searches in hoToolsBasic.xml adapted to SQLite (EA 16), Fix import Glossary
 
 - Searches in hoToolsBasic.xml adapted to SQLite (EA 16)
