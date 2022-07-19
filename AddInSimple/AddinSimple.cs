@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Xml.Linq;
 using AddInSimple.EABasic;
 using hoLinqToSql.LinqUtils;
+using hoLinqToSql.LinqUtils.Extensions;
 using hoTools.Utils;
 using LinqToDB.Configuration;
 using LinqToDB.DataProvider;
@@ -244,6 +245,7 @@ namespace AddInSimple
 
             // for LINQ to SQL
             IDataProvider provider;  // the provider to connect to database like Access, ..
+            string providerName;     // The anme of the provider
             string connectionString; // The connection string to connect to database
             string parametersToPassToQuery;
             string linqQueryFileName;
@@ -307,7 +309,7 @@ namespace AddInSimple
                     string eaConnectionString = repository.ConnectionString;
                     if (eaConnectionString != null)
                     {
-                        connectionString = LinqUtil.GetConnectionString(repository, out provider);
+                        connectionString = LinqUtil.GetConnectionString(repository, out provider, out providerName);
 
                         string lConnectionString = $"{eaConnectionString}\r\n\r\nProvider for Linq for SQL:\r\n'{provider}\r\n{connectionString}";
                         Clipboard.SetText(lConnectionString);
@@ -349,10 +351,10 @@ State:
                 // Basis LINQ to SQL example
                 case MenuShowRunLinq2Db:
                     // get connection string of repository
-                    connectionString = LinqUtil.GetConnectionString(repository, out provider);
+                    connectionString = LinqUtil.GetConnectionString(repository, out provider, out providerName);
                     
                     // Run LINQ query to dataTable
-                    dt = LinqUtil.RunLinq2Db(provider, connectionString);
+                    dt = LinqUtil.RunLinq2Db(provider,  providerName, connectionString);
                     // Make EA xml
                     OrderedEnumerableRowCollection<DataRow> rows = from row in dt.AsEnumerable()
                         orderby row.Field<string>(dt.Columns[0].Caption) 
@@ -366,10 +368,10 @@ State:
                 // Advanced LINQ to SQL example
                 case MenuShowRunLinq2DbAdvanced:
                     // get connection string of repository
-                    connectionString = LinqUtil.GetConnectionString(repository, out provider);
+                    connectionString = LinqUtil.GetConnectionString(repository, out provider, out providerName);
 
                     // Run LINQ query to dataTable
-                    dt = LinqUtil.RunLinq2DbAdvanced(provider, connectionString);
+                    dt = LinqUtil.RunLinq2DbAdvanced(provider, providerName, connectionString);
 
                     // Make EA xml
                     xml = Xml.MakeXmlFromDataTable(dt);

@@ -12,7 +12,7 @@ using LinqToDB.DataProvider;
 using File = System.IO.File;
 using HtmlDocument = HtmlAgilityPack.HtmlDocument;
 
-namespace hoLinqToSql.LinqUtils
+namespace LinqToSql.LinqUtils
 {
     public class LinqPad
     {
@@ -156,7 +156,7 @@ Tips for LINQPad connections:
 
 Error:    
 {output}",
-                            @"Error returned from LINQPad via LPRun.exe");
+                            "Error returned from LINQPad via LPRun.exe");
                         return false;
 
                     }
@@ -172,8 +172,8 @@ Error:
                         doc.LoadHtml(output);
                         string errorMessage = doc.DocumentNode.ChildNodes?.Nodes()?.ElementAt(3)?.InnerText;
                         if (errorMessage == null) errorMessage = "No error message found, see browser!";
-                        MessageBox.Show($@"Find error message also in browser{Environment.NewLine}File: '{_targetFile}'{Environment.NewLine}LINQPad-File:'{linqFile}'{Environment.NewLine}{Environment.NewLine}{HtmlEntity.DeEntitize(errorMessage)}", 
-                            @"Error LINQPad");
+                        MessageBox.Show($"Find error message also in browser\r\nFile: '{_targetFile}'\r\nLINQPad-File:'{linqFile}'\n\r\n\r{HtmlEntity.DeEntitize(errorMessage)}", 
+                            "Error LINQPad");
 
                         return false;
                     }
@@ -182,8 +182,8 @@ Error:
             }
             catch (Exception e)
             {
-                MessageBox.Show($@"Query:{linqFile}{Environment.NewLine}LPRun.exe{_lprunExe}{Environment.NewLine}Target:{_targetFile}{Environment.NewLine}{Environment.NewLine}{e}",
-                    @"Error running LINQ query");
+                MessageBox.Show($"Query:{linqFile}\r\nLPRun.exe{_lprunExe}\r\nTarget:{_targetFile}\r\n{e}",
+                    " Error running LINQ query");
 
                
                 return false;
@@ -193,7 +193,7 @@ Error:
 
         static void CaptureError(object sender, DataReceivedEventArgs e)
         {
-            MessageBox.Show($@"{e.Data}", @"Error returned from LINQPad via LPRun.exe");
+            MessageBox.Show($"e.Data", "Error returned from LINQPad via LPRun.exe");
         }
 
         /// <summary>
@@ -207,12 +207,12 @@ Error:
                     Process.Start(_targetFile);
                 else
                 {
-                    MessageBox.Show($@"File:{Environment.NewLine}{_targetFile}", @"File to show doesn't exists");
+                    MessageBox.Show($"File:\r\n{_targetFile}", "File to show doesn't exists");
                 }
             }
             catch (Exception e)
             {
-                MessageBox.Show($@"File:{Environment.NewLine}{_targetFile}{Environment.NewLine}{Environment.NewLine}{e}", @"Error showing file");
+                MessageBox.Show($"File:\r\n{_targetFile}\r\n{e}", "Error showing file");
             }
         }
         /// <summary>
@@ -235,7 +235,7 @@ Error:
         /// <returns></returns>
         public string GetLinqPadName()
         {
-            string connectionString = LinqUtil.GetConnectionString(_rep, out IDataProvider provider, out string providerName);
+            string connectionString = LinqUtil.GetConnectionString(_rep, out IDataProvider? provider, out string providerName);
             string server = "";
             string db = null;
             // File based
@@ -282,7 +282,7 @@ LINQPad connections: '{LinqPadConnections}'
 
 Change File, Settings General to Use LINQPAd connection.
 ",
-                    @"Query needs a connection, can't determine LINQPad connection name.");
+                    "Query needs a connection, can't determine LINQPad connection name.");
                 return "";
             }
             var linqPadConnectionName = $@"{connection.Provider} {connection.Server}\{connection.DataBase} {connection.DbVersion}";
@@ -318,8 +318,8 @@ Change File, Settings General to Use LINQPAd connection.
                 case @"text":
                     return "text";
                 default:
-                    MessageBox.Show($@"Possible LPRun format values: 'htm','html', 'csv', 'txt', 'txt'{Environment.NewLine}Current value='{format}'",
-                        @"Can't understand format value");
+                    MessageBox.Show($"Possible LPRun format values: 'htm','html', 'csv', 'txt', 'txt'\r\nCurrent value='{format}'",
+                        "Can't understand format value");
                     return "";
 
             }
@@ -338,7 +338,7 @@ Change File, Settings General to Use LINQPAd connection.
             HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
             if (! File.Exists(fileName))
             {
-                MessageBox.Show($@"File: '{fileName}'",@"HTML File doesn't exists, Break!!!");
+                MessageBox.Show($"File: '{fileName}'","HTML File doesn't exists, Break!!!");
                 return null;
 
             }
@@ -348,7 +348,7 @@ Change File, Settings General to Use LINQPAd connection.
             }
             catch (Exception e)
             {
-                MessageBox.Show($@"File: '{fileName}'{Environment.NewLine}{e}", @"Error scan HTML File, Break!!!");
+                MessageBox.Show($"File: '{fileName}'\r\n{e}", "Error scan HTML File, Break!!!");
                 return null;
 
             }
@@ -359,7 +359,7 @@ Change File, Settings General to Use LINQPAd connection.
             var nodeFirstTable = doc.DocumentNode.SelectNodes($@"//table[@id='{tableName}']");
             if (nodeFirstTable == null || ! nodeFirstTable.Any())
             {
-                MessageBox.Show($@"File: '{fileName}'{Environment.NewLine}TableName: '{tableName}'", @"Can't find HTML table");
+                MessageBox.Show($"File: '{fileName}'\r\nTableName: '{tableName}'", "Can't find HTML table");
                 return dt;
             }
 
@@ -380,8 +380,8 @@ Change File, Settings General to Use LINQPAd connection.
             }
             catch (Exception e)
             {
-                MessageBox.Show($@"hoTools only supports simple tables. It looks as if the table 't1' / hierarchy is to complex{Environment.NewLine}{Environment.NewLine}{e}", 
-                    @"Can't decode HTML table!");
+                MessageBox.Show($"hoTools only supports simple tables. It looks as if the table 't1' / hierarchy is to complex\r\n\r\n{e}", 
+                    "Can't decode HTML table!");
                 return dt;
             }
 
@@ -412,8 +412,7 @@ Change File, Settings General to Use LINQPAd connection.
             }
             catch (Exception e)
             {
-                MessageBox.Show($@"hoTools only supports simple tables. hoToolls can't understand table 't1'{Environment.NewLine}{Environment.NewLine}{e}", 
-                    @"Can't decode HTML table!");
+                MessageBox.Show($"hoTools only supports simple tables. hoToolls can't understand table 't1'\r\n\r\n{e}", "Can't decode HTML table!");
                 return dt;
             }
             return dt;
@@ -441,7 +440,7 @@ Change File, Settings General to Use LINQPAd connection.
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show($@"File:{Environment.NewLine}{_targetFile}{Environment.NewLine}{e}", @"Error deleting target file");
+                    MessageBox.Show($"File:\r\n{_targetFile}\r\n{e}", "Error deleting target file");
                 }
             }
 
@@ -465,18 +464,16 @@ Change File, Settings General to Use LINQPAd connection.
             LinqPadConnections = LinqPadConnectionsV2Default;
 
             // initialize ProzessInfo
-            _startInfo = new ProcessStartInfo
-            {
-                CreateNoWindow = false,
-                UseShellExecute = false,
-                FileName = _lprunExe,
-                WindowStyle = ProcessWindowStyle.Hidden,
-                Arguments = "",
-                RedirectStandardOutput = true,
-                RedirectStandardError = true
-            };
+            _startInfo = new ProcessStartInfo();
+            _startInfo.CreateNoWindow = false;
+            _startInfo.UseShellExecute = false;
+            _startInfo.FileName = _lprunExe;
+            _startInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            _startInfo.Arguments = "";
+            _startInfo.RedirectStandardOutput = true;
+            _startInfo.RedirectStandardError = true;
 
-
+            
         }
 
         /// <summary>
@@ -496,7 +493,8 @@ Change File, Settings General to Use LINQPAd connection.
 
             //---------
             // 1. Context Element
-            EA.ObjectType type = rep.GetContextItem(out object item);
+            object item;
+            EA.ObjectType type = rep.GetContextItem(out item);
             switch (type)
             {
                 case ObjectType.otPackage:

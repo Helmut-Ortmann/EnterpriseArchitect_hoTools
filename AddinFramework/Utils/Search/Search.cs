@@ -17,6 +17,7 @@ using AddinFramework.Extension;
 using DuoVia.FuzzyStrings;
 using DuoVia.FuzzyStrings.ComparePhraseEngine;
 using hoLinqToSql.LinqUtils;
+using hoLinqToSql.LinqUtils.Extensions;
 using Newtonsoft.Json;
 using hoTools.Utils;
 

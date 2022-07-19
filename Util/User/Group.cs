@@ -1,6 +1,7 @@
 ﻿using System.Data;
 using System.Linq;
 using hoLinqToSql.LinqUtils;
+using hoLinqToSql.LinqUtils.Extensions;
 
 namespace hoTools.Utils.User
 {
@@ -29,7 +30,7 @@ namespace hoTools.Utils.User
 
             string user = rep.GetCurrentLoginUser();
             // get connection string of repository
-            string connectionString = LinqUtil.GetConnectionString(rep, out var provider);
+            string connectionString = LinqUtil.GetConnectionString(rep, out var provider,out string providerName);
             using (var db = new DataModels.EaDataModel(provider, connectionString))
             {
                 Groups = (from grp in db.t_secgroup

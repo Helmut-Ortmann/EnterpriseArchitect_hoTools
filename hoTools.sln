@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.0.32002.185
+VisualStudioVersion = 17.2.32602.215
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "hoToolsRoot", "hoToolsRoot\hoToolsRoot.csproj", "{6D5DEEEF-0897-4494-9857-5BEE2BF0D0AF}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -98,6 +98,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NugetCollectorProject", "Nuget\NugetCollectorProject.csproj", "{B0AAC083-F31F-41B8-A2DE-B6A5B3DD1A6F}"
 EndProject
 Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "SetupX64", "Setup64\SetupX64.wixproj", "{70300FDF-45E9-472B-9C46-812AA2D08BAC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Linq4NetCore6", "Linq4NetCore6\Linq4NetCore6.csproj", "{AB199D3F-0181-4FF7-8AD9-55BAC676B8BD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -405,6 +407,22 @@ Global
 		{70300FDF-45E9-472B-9C46-812AA2D08BAC}.Release|x64.ActiveCfg = Release|x64
 		{70300FDF-45E9-472B-9C46-812AA2D08BAC}.Release|x64.Build.0 = Release|x64
 		{70300FDF-45E9-472B-9C46-812AA2D08BAC}.Release|x86.ActiveCfg = Release|x64
+		{AB199D3F-0181-4FF7-8AD9-55BAC676B8BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB199D3F-0181-4FF7-8AD9-55BAC676B8BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB199D3F-0181-4FF7-8AD9-55BAC676B8BD}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{AB199D3F-0181-4FF7-8AD9-55BAC676B8BD}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{AB199D3F-0181-4FF7-8AD9-55BAC676B8BD}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{AB199D3F-0181-4FF7-8AD9-55BAC676B8BD}.Debug|x64.Build.0 = Debug|Any CPU
+		{AB199D3F-0181-4FF7-8AD9-55BAC676B8BD}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{AB199D3F-0181-4FF7-8AD9-55BAC676B8BD}.Debug|x86.Build.0 = Debug|Any CPU
+		{AB199D3F-0181-4FF7-8AD9-55BAC676B8BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB199D3F-0181-4FF7-8AD9-55BAC676B8BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB199D3F-0181-4FF7-8AD9-55BAC676B8BD}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{AB199D3F-0181-4FF7-8AD9-55BAC676B8BD}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{AB199D3F-0181-4FF7-8AD9-55BAC676B8BD}.Release|x64.ActiveCfg = Release|Any CPU
+		{AB199D3F-0181-4FF7-8AD9-55BAC676B8BD}.Release|x64.Build.0 = Release|Any CPU
+		{AB199D3F-0181-4FF7-8AD9-55BAC676B8BD}.Release|x86.ActiveCfg = Release|Any CPU
+		{AB199D3F-0181-4FF7-8AD9-55BAC676B8BD}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

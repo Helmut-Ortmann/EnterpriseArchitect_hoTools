@@ -141,7 +141,7 @@ namespace hoTools.EaServices.AddInSearch
         private static DataTable AddinSearchObjectsNestedInitTable(EA.Repository rep, string searchText)
         {
             // get connection string of repository
-            string connectionString = LinqUtil.GetConnectionString(rep, out var provider);
+            string connectionString = LinqUtil.GetConnectionString(rep, out var provider, out string providerName);
 
             _tv = new Dictionary<string, string>();
             DataTable dt = new DataTable();

@@ -3,6 +3,7 @@ using System.Linq;
 using System.Windows.Forms;
 using hoLinqToSql.LinqUtils;
 using System.Data;
+using hoLinqToSql.LinqUtils.Extensions;
 
 // ReSharper disable once CheckNamespace
 namespace hoHybridScriptAdvanced
@@ -85,7 +86,7 @@ namespace hoHybridScriptAdvanced
         {
             int count;
             // get connection string of repository
-            string connectionString = LinqUtil.GetConnectionString(_repository, out var provider);
+            string connectionString = LinqUtil.GetConnectionString(_repository, out var provider, out string providerName);
             using (var db = new DataModels.EaDataModel(provider, connectionString))
             {
                 count = (from o in db.t_object
@@ -101,7 +102,7 @@ namespace hoHybridScriptAdvanced
         private bool QueryModel()
         {
             // get connection string of repository
-            string connectionString = LinqUtil.GetConnectionString(_repository, out var provider);
+            string connectionString = LinqUtil.GetConnectionString(_repository, out var provider, out string providerName);
             DataTable dt;
             using (var db = new DataModels.EaDataModel(provider, connectionString))
             {
@@ -113,7 +114,7 @@ namespace hoHybridScriptAdvanced
 
             }
             // 2. Order, Filter, Join, Format to XML
-            string xml = LinqUtil.QueryAndMakeXmlFromTable(dt);
+            string xml = Xml.MakeXmlFromDataTable(dt);
             // 3. Out put to EA
             _repository.RunModelSearch("", "", "", xml);
             return true;

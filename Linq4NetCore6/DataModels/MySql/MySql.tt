@@ -1,8 +1,8 @@
 ﻿<#@ template language="C#" debug="True" hostSpecific="True" #>
 <#@ output extension=".generated.cs"                        #>
 
-<#@ include file="$(LinqToDBT4SQLiteTemplatesPath)LinqToDB.SQLite.Tools.ttinclude" once="true" #>
-<#@ include file="$(LinqToDBT4SQLiteTemplatesPath)PluralizationService.ttinclude"  once="true" #>
+<#@ include file="$(LinqToDBT4MySqlTemplatesPath)LinqToDB.MySql.Tools.ttinclude" once="true" #>
+<#@ include file="$(LinqToDBT4MySqlTemplatesPath)PluralizationService.ttinclude" once="true" #>
 <#
 	/*
 		1. Create new *.tt file (e.g. MyDatabase.tt) in a folder where you would like to generate your data model
@@ -17,7 +17,7 @@
 		3. Add connection string to the web/app.config file:
 
 			<connectionStrings>
-				<add name="MyDatabase" connectionString="Data Source=MyDatabase.sqlite" providerName="SQLite" />
+				<add name="MyDatabase" connectionString="Server=MyServer;Port=3306;Database=MyDatabase;Uid=root;Pwd=TestPassword;" providerName="MySql.Data.MySqlClient" />
 			</connectionStrings>
 
 		4. To access your database use the following code:
@@ -40,11 +40,18 @@
 		Custom tool must be set to TextTemplatingFileGenerator, not TextTemplatingFilePreprocessor or any other value.
 	*/
 
-	NamespaceName = "DataModels.VcSymbols";
 
-	
-	LoadSQLiteMetadata(@"c:\Users\Helmut Ortmann\AppData\Roaming\Code\User\workspaceStorage\6c00ca903b5beb52763cf590f0f3923e\ms-vscode.cpptools\", 
-	".BROWSE.VC.DB");
-//	LoadSQLiteMetadata(string connectionString);
+	// to configure GetSchemaOptions properties, add them here, before load metadata call
+	NamespaceName = "DataModels.MySql";
+	// Configuration for EA
+    DataContextName          = "EaMySqlDataModel";  // DataContext class name. If null - database name + "DB".
+	NormalizeNames           = false;               // convert some_name to SomeName for types and members
+    PluralizeClassNames                 = true;   // If true, pluralizes table class names. Access is made by interface which are not pluralized
+
+	LoadMySqlMetadata("localhost", "mod4_20.12.21", "ho", "m6655inden");
+//	LoadMySqlMetadata(string connectionString);
+
+	// to adjust loaded database model before generation, add your code here, after load metadata, but before GenerateModel() call
+
 	GenerateModel();
 #>

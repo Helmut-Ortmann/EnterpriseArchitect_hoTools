@@ -374,6 +374,44 @@
       <Component Id="HtmlAgilityPack.dll" Guid="{3783B4A7-6591-4783-AFD5-FB7F4E70A2D5}">
         <File Id="HtmlAgilityPack.dll" KeyPath="yes" Name="HtmlAgilityPack.dll" Source="$(var.NugetCollectorProject.TargetDir)\HtmlAgilityPack.dll" />
       </Component>
+
+     <!-- Meta files for DEBUG
+	 	 -->
+     <Component Id="HoTools_WIXPBD" Guid="{2E424076-968B-470B-940D-87D2B76CC52B}">
+	     <File Id="HoTools_WIXPBD" KeyPath="yes" Name="HoTools.wixpdb" Source="..\Setup\bin\x86\Release\en-us\hoTools.wixpdb" />
+     </Component>
+     <Component Id="HoToolsGUI_PDB" Guid="{4D253EED-00C0-4041-9ECC-3796345A0C34}">
+	     <File Id="HoToolsGUI_PDB" KeyPath="yes" Name="HoToolsGUI.pdb" Source="$(var.hoToolsGui.TargetDir)$(var.hoToolsGui.TargetName).pdb" />
+     </Component>
+
+     <Component Id="HoToolsRoot_PDB" Guid="{FABD9F3E-DDCE-49F2-89FC-CFF7D8A1B359}">
+	     <File Id="HoToolsRoot_PDB" KeyPath="yes" Name="HoToolsRoot.pdb" Source="$(var.hoToolsRoot.TargetDir)$(var.hoToolsRoot.TargetName).pdb" />
+     </Component>
+     <Component Id="Utils_PDB" Guid="{3942DE98-7D42-46B0-81E8-89E01EE40F50}">
+	     <File Id="Utils_PDB" KeyPath="yes" Name="Utils.pdb" Source="$(var.Util.TargetDir)$(var.Util.TargetName).pdb" />
+     </Component>
+
+     <Component Id="HoLinqToSql_PDB" Guid="{35F1F10B-7CC9-4DEE-B4FA-3E0F842C0FD5}">
+	     <File Id="HoLinqToSql_PDB" KeyPath="yes" Name="HoLinqToSql.pdb" Source="$(var.hoLinqToSql.TargetDir)$(var.hoLinqToSql.TargetName).pdb" />
+     </Component>
+
+     <Component Id="EaServices_PDB" Guid="{E7E3F81C-A2BE-4AAF-BF62-F40BDD32A6A5}">
+	     <File Id="EaServices_PDB" KeyPath="yes" Name="EaServices.pdb" Source="$(var.EaServices.TargetDir)$(var.EaServices.TargetName).pdb" />
+     </Component>
+     <Component Id="HoSqlGUI_PDB" Guid="{E39C3296-AE0C-40BA-935F-6B494D4F5681}">
+	     <File Id="HoSqlGUI_PDB" KeyPath="yes" Name="HoSqlGUI.pdb" Source="$(var.hoSqlGui.TargetDir)$(var.hoSqlGui.TargetName).pdb" />
+     </Component>
+     <Component Id="HoFindAndReplaceGui_PDB" Guid="{22823829-2ED2-440C-BBC4-3D6DA7A501D6}">
+	     <File Id="HoFindAndReplaceGui_PDB" KeyPath="yes" Name="HoFindAndReplaceGui.pdb" Source="$(var.hoFindAndReplaceGui.TargetDir)$(var.hoFindAndReplaceGui.TargetName).pdb" />
+     </Component>
+     <Component Id="HoExtensionGui_PDB" Guid="{2F0750E7-65C3-4828-BAAF-7A6A0187219C}">
+	     <File Id="HoExtensionGui_PDB" KeyPath="yes" Name="HoExtensionGui.pdb" Source="$(var.hoExtensionGui.TargetDir)$(var.hoExtensionGui.TargetName).pdb" />
+     </Component>
+
+     <Component Id="DuoVia.FuzzyStrings_PDB" Guid="{6D72102E-B802-4131-B3D8-19D0A1F90B5E}">
+	     <File Id="DuoVia.FuzzyStrings_PDB" KeyPath="yes" Name="DuoVia.FuzzyStrings.pdb" Source="$(var.DuoVia.FuzzyStrings.TargetDir)$(var.DuoVia.FuzzyStrings.TargetName).pdb" />
+     </Component>
+
       
     </ComponentGroup>
   </Fragment>

@@ -1,4 +1,4 @@
-<#@ template language="C#" debug="True" hostSpecific="True" #>
+﻿<#@ template language="C#" debug="True" hostSpecific="True" #>
 <#@ output extension=".generated.cs"                        #>
 <#@ include file="$(LinqToDBT4AccessTemplatesPath)LinqToDB.Access.Tools.ttinclude" once="true" #>
 <#@ include file="$(LinqToDBT4AccessTemplatesPath)PluralizationService.ttinclude"  once="true" #>
@@ -20,7 +20,7 @@
                 connectionString="Provider=Microsoft.Jet.OLEDB.4.0;Data Source=MyDatabase.mdb;Locale Identifier=1033;Jet OLEDB:Engine Type=5;Persist Security Info=True" />
         </connectionStrings>
 
-    4. To access your database use the following code:Sorr
+    4. To access your database use the following code:
 
         using (var db = new MyDatabaseDB())
         {

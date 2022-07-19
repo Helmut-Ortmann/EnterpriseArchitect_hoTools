@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
+﻿using System.Data;
 using System.Reflection;
 using System.Text.RegularExpressions;
-using System.Windows.Forms;
-using hoLinqToSql.LinqUtils.Extensions;
 using LinqToDB.Configuration;
 using LinqToDB.DataProvider;
 using LinqToDB.DataProvider.Access;
+using LinqToSql.LinqUtils.Extensions;
 using Microsoft.Win32;
 
-namespace hoLinqToSql.LinqUtils
+namespace LinqToSql.LinqUtils
 {
     public static class LinqUtil
     {
@@ -84,7 +80,7 @@ namespace hoLinqToSql.LinqUtils
         /// <param name="providerName"></param>
         /// <param name="connectionString"></param>
         /// <returns></returns>
-        public static DataTable RunLinq2Db(IDataProvider provider, string providerName, string connectionString)
+        public static DataTable RunLinq2Db(IDataProvider? provider, string providerName, string connectionString)
         {
             //DataConnection.DefaultSettings = new hoLinq2DBSettings(provider, connectionString);
             try
@@ -98,9 +94,8 @@ namespace hoLinqToSql.LinqUtils
 
                     var conOption = new LinqToDBConnectionOptions(new LinqToDBConnectionOptionsBuilder());
 
-                    using (var db = new DataModels.EaDataModel(conOption)) {
-
-                        var count = db.t_object.Count();
+                    using var db = new DataModels.EaDataModel(conOption);
+                    var count = db.t_object.Count();
                     var q = (from c in db.t_object.AsEnumerable()
                         group c by c.Object_Type into g
                         orderby g.Key
@@ -114,7 +109,6 @@ namespace hoLinqToSql.LinqUtils
                         });
 
                     return q.ToDataTable();
-                    }
                 }
                 
             }
@@ -144,7 +138,7 @@ namespace hoLinqToSql.LinqUtils
         /// <param name="providerName"></param>
         /// <param name="connectionString"></param>
         /// <returns></returns>
-        public static DataTable RunLinq2DbAdvanced(IDataProvider provider, string providerName, string connectionString)
+        public static DataTable RunLinq2DbAdvanced(IDataProvider? provider, string providerName, string connectionString)
         {
             // set provider and connection string
             // DataConnection.DefaultSettings = new hoLinq2DBSettings(provider, connectionString);
@@ -157,9 +151,9 @@ namespace hoLinqToSql.LinqUtils
                     else
                         conBuilder.UseConnectionString(providerName, connectionString);
                     var conOption = new LinqToDBConnectionOptions(new LinqToDBConnectionOptionsBuilder());
-                    using (var db = new DataModels.EaDataModel(conOption)) {
-                        // Total amount of Object_Types
-                        var countObjectTypes = db.t_object.Count();
+                    using var db = new DataModels.EaDataModel(conOption);
+                    // Total amount of Object_Types
+                    var countObjectTypes = db.t_object.Count();
 
                     // All object_types summary:
                     // - Type
@@ -180,32 +174,30 @@ namespace hoLinqToSql.LinqUtils
                             });
 
 
-                        // Requirement summary:
-                        // - Type
-                        // - Count
-                        // - Percentage
-                        // - Total count of requirements
-                        var countReq = db.t_object.Where(e => e.Object_Type == "Requirement").Count();
-                        var q1 =
-                            (from c in db.t_object.AsEnumerable()
-                                where c.Object_Type == "Requirement"
-                                group c by c.Stereotype into g
-                                orderby g.Key
+                    // Requirement summary:
+                    // - Type
+                    // - Count
+                    // - Percentage
+                    // - Total count of requirements
+                    var countReq = db.t_object.Where(e => e.Object_Type == "Requirement").Count();
+                    var q1 =
+                        (from c in db.t_object.AsEnumerable()
+                            where c.Object_Type == "Requirement"
+                            group c by c.Stereotype into g
+                            orderby g.Key
 
-                                select new
-                                {
-                                    Type = $"Req:<<{g.Key}>>",
-                                    Prozent = $"{ (float)g.Count() * 100 / countReq:00.00}%",
-                                    Count = g.Count(),
-                                    Total = countReq
-                                });
+                            select new
+                            {
+                                Type = $"Req:<<{g.Key}>>",
+                                Prozent = $"{ (float)g.Count() * 100 / countReq:00.00}%",
+                                Count = g.Count(),
+                                Total = countReq
+                            });
 
-                        // Concatenate Object Types with Requirement Types
-                        var sum = q.Concat(q1);
+                    // Concatenate Object Types with Requirement Types
+                    var sum = q.Concat(q1);
 
                     return sum.ToDataTable();
-                    }
-
                 }
 
             }
@@ -239,7 +231,7 @@ namespace hoLinqToSql.LinqUtils
         /// <returns></returns>
         /// string dsnName = "DSN=MySqlEa;Trusted_Connection=Yes;";
         //  dsnName = "DSN=MySqlEa;";
-        public static string GetConnectionString(EA.Repository rep, out IDataProvider provider, out string providerName)
+        public static string GetConnectionString(EA.Repository rep, out IDataProvider? provider, out string providerName)
         {
             provider = null;
             providerName = "";
@@ -328,7 +320,7 @@ namespace hoLinqToSql.LinqUtils
 
 
                     default:
-                        MessageBox.Show($@"Database: '{rep.RepositoryType()}'
+                        MessageBox.Show(@$"Database: '{rep.RepositoryType()}'
 ConnectionString: '{connectionString}'",
                             "DataBase not supported for hoTools, only Access, SqlServer and MySQL");
                         break;

@@ -1,0 +1,74 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<TargetFramework>net6.0-windows</TargetFramework>
+		<UseWindowsForms>true</UseWindowsForms>
+		<PlatformTarget>x86</PlatformTarget>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <None Remove="DataModels\SqlServer\DataModelSqlServer.tt" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Include="DataModels\SqlServer\DataModelSqlServer.tt">
+	    <LastGenOutput>DataModelSqlServer.generated.cs</LastGenOutput>
+	    <Generator>TextTemplatingFileGenerator</Generator>
+	  </Content>
+	</ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="HtmlAgilityPack" Version="1.11.43" />
+    <PackageReference Include="linq2db" Version="4.1.1" />
+    <PackageReference Include="linq2db.Access" Version="4.1.1" />
+    <PackageReference Include="linq2db.MySql" Version="4.1.1" />
+    <PackageReference Include="linq2db.t4models" Version="4.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Interop.EA">
+      <HintPath>..\..\..\..\..\Program Files (x86)\Sparx Systems\EA\Interop.EA.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="DataModels\EaDataModel\EaDataModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>EaDataModel.generated.cs</LastGenOutput>
+    </None>
+    <None Update="DataModels\MySql\MySql.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>MySql.generated.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="DataModels\EaDataModel\EaDataModel.generated.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>EaDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Update="DataModels\MySql\MySql.generated.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>MySql.tt</DependentUpon>
+    </Compile>
+    <Compile Update="DataModels\SqlServer\DataModelSqlServer.generated.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>DataModelSqlServer.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+</Project>

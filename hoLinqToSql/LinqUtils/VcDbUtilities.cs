@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using DataModels.VcSymbols;
+using LinqToDB.Configuration;
 using LinqToDB.DataProvider.SQLite;
 using File = System.IO.File;
 
@@ -44,28 +45,34 @@ namespace hoLinqToSql.LinqUtils
             {
                 string connectionString = $"DataSource={vcDb};Read Only=True;";
 
-                using (BROWSEVCDB dc = new BROWSEVCDB(new SQLiteDataProvider("SQLite.Classic"), connectionString))
+                var conBuilder = new LinqToDBConnectionOptionsBuilder();
+                conBuilder.UseConnectionString("System.Data.SQLite.Core", connectionString);
 
+
+                var conOption = new LinqToDBConnectionOptions(conBuilder);
+
+                try
                 {
-                    try
+
+                    using (BrowseVcDB dc = new BrowseVcDB(conOption))
                     {
-
-
                         var path = (from f in dc.Files
                                     where f.Name.ToLower().Contains(folderPathSource.ToLower())
                                     where f.LeafName.EndsWith("c")
                                     orderby f.Name.Length
-                                    select f.Name).FirstOrDefault();
+                                    select f.Name)
+                        .FirstOrDefault();
                         if (path != null) return vcDb;
+
                     }
-                    catch (Exception e)
-                    {
-                        MessageBox.Show($@"Data Source: '{vcDb}'
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show($@"Data Source: '{vcDb}'
 Connection:
 {connectionString}
 
 {e}", "Can't install SQLite database driver");
-                    }
                 }
             }
             return "";
