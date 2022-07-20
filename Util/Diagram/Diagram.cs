@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using EA;
 
 
@@ -21,8 +22,11 @@ namespace hoTools.Utils.Diagram
 
         #region Properties
         public List<EA.DiagramObject> SelObjects => _selectedObjects;
+        public List<EA.DiagramLink> SelLinks => _selectedLinks;
+
         // List of selected Elements (Note: Element can also be a package)
         public List<EA.Element> SelElements { get; } = new List<EA.Element>();
+        public List<EA.Connector> SelConnectors { get; } = new List<EA.Connector>();
 
         public bool IsSelectedObjects { get; }
 
@@ -35,7 +39,7 @@ namespace hoTools.Utils.Diagram
         {
             get
             {
-                if (! IsSelectedObjects)
+                if (!IsSelectedObjects)
                     return 0;
                 Debug.Assert(_dia != null, nameof(_dia) + " != null");
                 return _dia.SelectedObjects.Count;
@@ -52,6 +56,8 @@ namespace hoTools.Utils.Diagram
         readonly Repository _rep;
         readonly EA.Diagram _dia;
         readonly List<EA.DiagramObject> _selectedObjects = new List<EA.DiagramObject>();
+        readonly List<EA.DiagramLink> _selectedLinks = new List<EA.DiagramLink>();
+
         // the diagram object which represents the context (the last selected element in the diagram)
         readonly EA.DiagramObject _conTextDiagramObject;
         readonly Connector _selectedConnector;
@@ -63,21 +69,25 @@ namespace hoTools.Utils.Diagram
         /// </summary>
         /// <param name="rep"></param>
         /// <param name="getAllDiagramObject">True if you want all diagram objects if nothing no diagram object is selected</param>
-        public EaDiagram(Repository rep, bool  getAllDiagramObject= false)
+        public EaDiagram(Repository rep, bool getAllDiagramObject = false)
         {
-           _rep = rep;
+            _rep = rep;
             _selectedConnector = null;
             IsSelectedObjects = false;
 
             _dia = rep.GetCurrentDiagram();
-            // Nothing selected
-            if (_dia == null || (_dia.SelectedConnector == null && _dia.SelectedObjects.Count == 0) )
+            EA.Collection col = _rep.GetTreeSelectedElements();
+            EA.ObjectType contextObjectType = Rep.GetContextItemType();
+
+            // Nothing in diagram selected
+            if (_dia == null || (contextObjectType != ObjectType.otDiagram && _dia.SelectedConnector == null && _dia.SelectedObjects.Count == 0))
             {
+                _dia = null;
                 GetTreeSelected();
                 return;
             }
 
-            EA.ObjectType contextObjectType = Rep.GetContextItemType();
+
 
 
             // Check if context is diagram or something inside the current diagram is selected (selected things are never old)
@@ -87,7 +97,7 @@ namespace hoTools.Utils.Diagram
 
             // Diagram is context or something inside the diagram is selected
             IsSelectedObjects = false;
-            if (_dia.SelectedObjects.Count == 0 && getAllDiagramObject)
+            if (_dia.SelectedObjects.Count == 0 && _dia.SelectedConnector == null && getAllDiagramObject)
             {
                 // overall diagram objects
                 foreach (EA.DiagramObject obj in _dia.DiagramObjects)
@@ -95,6 +105,19 @@ namespace hoTools.Utils.Diagram
                     _selectedObjects.Add(obj);
                     SelElements.Add(rep.GetElementByID(obj.ElementID));
                 }
+                // order by name
+                _selectedObjects = _selectedObjects.OrderBy(x => _rep.GetElementByID(x.ElementID).Name).ToList();
+                SelConnectors = SelConnectors.OrderBy(x => x.Name).ToList();
+
+                // overall diagram Links
+                foreach (EA.DiagramLink lnk in _dia.DiagramLinks)
+                {
+                    _selectedLinks.Add(lnk);
+                    SelConnectors.Add(rep.GetConnectorByID(lnk.ConnectorID));
+                }
+                // Order by supplier
+                _selectedLinks = _selectedLinks.OrderBy(GetSupplierNameOfLink).ToList();
+
 
             }
             // If an context element exists than this is the last selected element
@@ -143,11 +166,35 @@ namespace hoTools.Utils.Diagram
                     }
                 }
             }
+            // Handle Link/Connector
             _selectedConnector = _dia.SelectedConnector;
+            if (SelConnectors.Count == 0 && _dia.SelectedConnector != null)
+            {
+                SelConnectors.Add(_dia.SelectedConnector);
+                foreach (EA.DiagramLink l in _dia.DiagramLinks)
+                {
+
+                    if (l.ConnectorID == _dia.SelectedConnector.ConnectorID)
+                    {
+                        _selectedLinks.Add(l);
+                        break;
+                    }
+                }
+            }
 
 
         }
         #endregion
+
+        private string GetSupplierNameOfLink(EA.DiagramLink l)
+        {
+            if (l.ConnectorID == 0) return " ";
+            var c = _rep.GetConnectorByID(l.ConnectorID);
+            if (c == null) return "";
+            return _rep.GetElementByID(c.SupplierID).Name;
+
+
+        }
 
         #region ReloadSelectedObjectsAndConnector
         /// <summary>
@@ -156,14 +203,14 @@ namespace hoTools.Utils.Diagram
         /// - refresh 
         /// - set selections (Objects+Connectors)
         /// </summary>
-        public void ReloadSelectedObjectsAndConnector(bool saveDiagram=true)
+        public void ReloadSelectedObjectsAndConnector(bool saveDiagram = true)
         {
             if (saveDiagram) Save();
             Rep.ReloadDiagram(_dia.DiagramID);
             if (_selectedConnector != null) _dia.SelectedConnector = _selectedConnector;
             foreach (EA.DiagramObject dObj in _selectedObjects)
             {
-              _dia.SelectedObjects.AddNew(dObj.ElementID.ToString(), dObj.ObjectType.ToString());
+                _dia.SelectedObjects.AddNew(dObj.ElementID.ToString(), dObj.ObjectType.ToString());
             }
             _dia.SelectedObjects.Refresh();
 
@@ -190,7 +237,7 @@ namespace hoTools.Utils.Diagram
             Rep.ReloadDiagram(_dia.DiagramID);
 
 
-            EA.DiagramObject diaObj = _dia.GetDiagramObjectByID(con.SupplierID,"");
+            EA.DiagramObject diaObj = _dia.GetDiagramObjectByID(con.SupplierID, "");
             _dia.SelectedObjects.AddNew(diaObj.ElementID.ToString(), diaObj.ObjectType.ToString());
         }
         /// <summary>
@@ -199,7 +246,7 @@ namespace hoTools.Utils.Diagram
         private void Unselect()
         {
             Dia.SelectedConnector = null;
-            for (int i = _dia.SelectedObjects.Count - 1; i >= 0; i=i-1)
+            for (int i = _dia.SelectedObjects.Count - 1; i >= 0; i = i - 1)
             {
                 _dia.SelectedObjects.DeleteAt((short)i, true);
             }
@@ -210,7 +257,7 @@ namespace hoTools.Utils.Diagram
         /// - Nothing selected: All visible links
         /// - Connector/Objects selected: Connector + Objects with their in and outgoing links
         /// - Objects selected: Objects with their in and outgoing links 
-        public List<EA.DiagramLink> GetSelectedLinks(bool withSelectedObjects=true, bool includeHidden=true)
+        public List<EA.DiagramLink> GetSelectedLinks(bool withSelectedObjects = true, bool includeHidden = true)
         {
             var links = new List<EA.DiagramLink>();
             Connector selectedConnector = _dia.SelectedConnector;
@@ -221,7 +268,7 @@ namespace hoTools.Utils.Diagram
                 if (link.IsHidden == false | includeHidden == true)
                 {
                     // no object selected than use all links
-                    if (IsSelectedObjects == false && SelectedConnector == null )
+                    if (IsSelectedObjects == false && SelectedConnector == null)
                     {
                         links.Add(link);
                         continue;
@@ -238,7 +285,7 @@ namespace hoTools.Utils.Diagram
                                 links.Add(link);
                             }
                         }
-                                                // add selected connector
+                        // add selected connector
                         if (c.ConnectorID == selectedConnector?.ConnectorID)
                         {
                             links.Add(link);
@@ -249,7 +296,7 @@ namespace hoTools.Utils.Diagram
             return links;
         }
 
-        
+
 
         #region sortSelectedObjects
         // ReSharper disable once UnusedMember.Global
@@ -267,13 +314,13 @@ namespace hoTools.Utils.Diagram
             var lObjByPosition = new List<DiagramObjectSelected>();
             foreach (EA.DiagramObject obj in _selectedObjects)
             {
-                EA.Element el= Rep.GetElementByID(obj.ElementID);
-                lIdsByName.Add(new DiagramObject(el.Name, el.ElementID) );
+                EA.Element el = Rep.GetElementByID(obj.ElementID);
+                lIdsByName.Add(new DiagramObject(el.Name, el.ElementID));
                 int position = obj.left;
                 if (isVerticalSorted) position = obj.top;
                 lObjByPosition.Add(new DiagramObjectSelected(obj, position, obj.left));
             }
-            
+
             // sort name list and position list
             lIdsByName.Sort(new DiagramObjectComparer());
             // sort diagram objects according to position and vertical / horizontal sorting
@@ -293,7 +340,7 @@ namespace hoTools.Utils.Diagram
                 obj.right = obj.left + length;
                 obj.top = obj.bottom + high;
                 obj.Update();
-           }
+            }
 
         }
         #endregion
@@ -320,6 +367,8 @@ namespace hoTools.Utils.Diagram
                 }
             }
         }
+
+
         /// <summary>
         /// Make EA.DiagramObject list from collection
         /// </summary>

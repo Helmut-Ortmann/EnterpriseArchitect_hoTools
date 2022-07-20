@@ -21,6 +21,7 @@ using GlobalHotkeys;
 using hoTools.ea;
 using hoTools.Extensions;
 using hoTools.EaServices.Names;
+using VwTools_Utils.General;
 
 #region description
 //---------------------------------------------------------------
@@ -194,7 +195,8 @@ namespace hoTools
             MenuHeader = "-" + _addinSettings.ProductName;
             // ReSharper disable once VirtualMemberCallInConstructor
             // ReSharper disable once RedundantExplicitArrayCreation
-            menuOptions = new string[] { 
+            menuOptions = new string[] {
+                MenuGetContextInfo,
                 //-------------------------- General  --------------------------//
                 //    menuLocateCompositeElementorDiagram,
                 //-------------------------- LineStyle --------------------------//
@@ -217,7 +219,7 @@ namespace hoTools
 
                 //-------------------------- Move links ---------------------------//
                 MenuDeviderCopyPast,
-                MenuChangeXmlFile,MenuGetContextInfo, MenuCopyLinksToClipboard, MenuPasteLinksFromClipboard, 
+                MenuChangeXmlFile, MenuCopyLinksToClipboard, MenuPasteLinksFromClipboard, 
 
                 MenuShowWindow,    
                 //---------------------------- About -------------------------------//
@@ -808,6 +810,9 @@ namespace hoTools
                     case MenuAbout:
                         isChecked = false;
                         break;
+                    case MenuGetContextInfo:
+                        isChecked = false;
+                        break;
 
                     // there shouldn't be any other, but just in case disable it.
                     default:
@@ -885,8 +890,10 @@ namespace hoTools
                     break;
 
                 case MenuGetContextInfo:
-                    WriteInfoContext();
+                    WriteInfoContext(repository);
                     break;
+
+               
 
 
 
@@ -1330,113 +1337,14 @@ namespace hoTools
         /// - Type 
         /// </summary>
         /// <returns></returns>
-        public string WriteInfoContext()
+        public string WriteInfoContext(EA.Repository rep)
         {
 
             if (_repository == null) return "";
-            string strGuid = "";
-            string type = "";
-            int id = 0;
-            string name = "";
-            string description = "";
-            EA.ObjectType objType = _repository.GetContextItem(out object o);
-            switch (objType)
-            {
-                case EA.ObjectType.otElement:
-                    var el = (EA.Element)o;
-                    strGuid = el.ElementGUID;
-                    type = el.Type;
-                    name = el.Name;
-                    id = el.ElementID;
+            var contrEaInfo = new EaInfo(rep);
+            contrEaInfo.WriteInfoContext();
+            return "";
 
-                    if (el.ClassifierID != 0)
-                    {
-                        var classifier = _repository.GetElementByID(el.ClassifierID);
-                        description = $@"Classifier: {classifier.ElementID},{classifier.ElementGUID} {classifier.Name}:{classifier.ObjectType} ";
-                    }
-
-                    break;
-                case EA.ObjectType.otPackage:
-                    strGuid = ((EA.Package)o).PackageGUID;
-                    type = "Package";
-                    name = ((EA.Package)o).Name;
-                    break;
-                case EA.ObjectType.otDiagram:
-                    strGuid = ((EA.Diagram)o).DiagramGUID;
-                    type = $"Diagram {((EA.Diagram)o).Type}";
-                    name = $"{((EA.Diagram)o).Name}";
-                    id = ((EA.Diagram)o).DiagramID;
-                    break;
-                case EA.ObjectType.otAttribute:
-                    strGuid = ((EA.Attribute)o).AttributeGUID;
-                    name = $"{((EA.Attribute)o).Name}";
-                    type = "Attribute";
-                    id = ((EA.Attribute)o).AttributeID;
-                    break;
-                case EA.ObjectType.otMethod:
-                    strGuid = ((EA.Method)o).MethodGUID;
-                    name = $"{((EA.Method)o).Name}";
-                    type = "Method";
-                    id = ((EA.Method)o).MethodID;
-                    break;
-
-                case EA.ObjectType.otConnector:
-                    var c = (EA.Connector)o;
-                    strGuid = c.ConnectorGUID;
-                    type = $"{c.Type}";
-                    name = $"{c.Name}";
-                    id = ((EA.Connector)o).ConnectorID;
-                    var sourceId = c.ClientID;
-                    var targetId = c.SupplierID;
-                    var sourceEl = _repository.GetElementByID(sourceId);
-                    var targetEl = _repository.GetElementByID(targetId);
-
-                    var dia = _repository.GetCurrentDiagram();
-                    var diaLinkDescr = "Link:";
-                    if (dia != null)
-                    {
-                        foreach (var lt in dia.DiagramLinks)
-                        {
-                            var l = (DiagramLink)lt;
-                            if (l.ConnectorID == id)
-                            {
-                                diaLinkDescr = $@"Link: {l.InstanceID}";
-                                break;
-                            }
-                        }
-                    }
-                    description = $@"Client={sourceId}/{sourceEl.Name} Supplier={targetId}/{targetEl.Name}
-DiagramId: {dia?.DiagramID}, {dia?.DiagramGUID} {diaLinkDescr}";
-
-
-                    break;
-                case EA.ObjectType.otModel:
-                    strGuid = ((EA.Package)o).PackageGUID;
-                    name = $"{((EA.Package)o).Name}";
-                    type = "Model";
-                    id = ((EA.Package)o).PackageID;
-                    break;
-                case EA.ObjectType.otParameter:
-                    strGuid = ((EA.Parameter)o).ParameterGUID;
-                    name = $"{((EA.Parameter)o).Name}";
-                    type = "Parameter";
-                    id = 0;
-                    break;
-
-            }
-
-            string txt = "";
-            if (String.IsNullOrWhiteSpace(strGuid)) Clipboard.Clear();
-            else
-            {
-                txt = $"'{name}:{type}' {strGuid}/{id} {description}";
-                Clipboard.SetText(txt);
-                _repository.CreateOutputTab("Debug");
-                _repository.EnsureOutputVisible("Debug");
-                _repository.WriteOutput("Debug", txt, 0);
-            }
-
-            return txt;
         }
 
 

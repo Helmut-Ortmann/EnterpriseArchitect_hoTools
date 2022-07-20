@@ -129,6 +129,8 @@ Some features:
 
 ## Releases
 
+### 3.13 linq2db to 4.0, advanced context-info in Right Click, Spezialize,..
+
 ### 3.12 New SQL macros, SQL error is copied to Clipboard
 
 - Macros: Concat, ToString, Left, Right, ToLower, Substring, If, Instr (JET+MySQL)
