@@ -143,6 +143,8 @@ namespace hoTools
 
         const string MenuDevider = "-----------------------------------------------";
 
+        private bool _initFavoriteSearches = false;
+
         #region Constructor
         /// <summary>
         /// Constructor: Reade settings, set the menu header and menuOptions
@@ -559,20 +561,31 @@ namespace hoTools
         /// - "" : None-specialized Add-In.</returns>
         public override string EA_Connect(EA.Repository repository)
         {
-            // register only if configured
-            if (_AddinSettings.IsShortKeySupport) HotkeyHandlers.SetupGlobalHotkeys();
             _repository = repository;
-            if (repository.IsSecurityEnabled)
+            try
             {
-                //logInUser = rep.GetCurrentLoginUser(false);
-                //if ((logInUser.Contains("ho")) ||
-                //     (logInUser.Contains("admin")) ||
-                //     (logInUser.Equals(""))
-                //    ) logInUserRights = UserRights.ADMIN;
+                // register only if configured
+                if (_AddinSettings.IsShortKeySupport) HotkeyHandlers.SetupGlobalHotkeys();
+
+                if (repository.IsSecurityEnabled)
+                {
+                    //logInUser = rep.GetCurrentLoginUser(false);
+                    //if ((logInUser.Contains("ho")) ||
+                    //     (logInUser.Contains("admin")) ||
+                    //     (logInUser.Equals(""))
+                    //    ) logInUserRights = UserRights.ADMIN;
+                }
+              
+                // get all services of type Call and Script which are available 
+                return "a string";
+
             }
-            Favorite.InstallSearches(repository); // install searches
-            // get all services of type Call and Script which are available 
-            return "a string";
+            catch (Exception)
+            {
+                MessageBox.Show(@"{e]", @"hoTools: Error EA Connect");
+                return "a string";
+            }
+           
         }
         #endregion
         // ReSharper disable once InconsistentNaming
@@ -657,6 +670,12 @@ namespace hoTools
             } catch (Exception e)
             {
                 MessageBox.Show($@"{e.Message}",@"hoTools: Error initializing Addin Tabs with repository");
+            }
+
+            if (_initFavoriteSearches)
+            {
+                Favorite.InstallSearches(_repository); // install searches
+                _initFavoriteSearches = true;
             }
 
 

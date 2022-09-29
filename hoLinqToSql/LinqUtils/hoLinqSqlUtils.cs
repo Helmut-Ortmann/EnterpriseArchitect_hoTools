@@ -96,24 +96,24 @@ namespace hoLinqToSql.LinqUtils
                     else
                         conBuilder.UseConnectionString(providerName, connectionString);
 
-                    var conOption = new LinqToDBConnectionOptions(new LinqToDBConnectionOptionsBuilder());
+                    var conOption = new LinqToDBConnectionOptions(conBuilder);
 
                     using (var db = new DataModels.EaDataModel(conOption)) {
 
                         var count = db.t_object.Count();
-                    var q = (from c in db.t_object.AsEnumerable()
-                        group c by c.Object_Type into g
-                        orderby g.Key
+                        var q = from c in db.t_object.AsEnumerable()
+                            group c by c.Object_Type into g
+                            orderby g.Key
 
-                        select new
-                        {
-                            Type = g.Key,
-                            Prozent = $"{ (float)g.Count() * 100 / count:00.00}%",
-                            Count = g.Count(),
-                            Total = count
-                        });
+                            select new
+                            {
+                                Type = g.Key,
+                                Prozent = $"{ (float)g.Count() * 100 / count:00.00}%",
+                                Count = g.Count(),
+                                Total = count
+                            };
 
-                    return q.ToDataTable();
+                        return q.ToDataTable();
                     }
                 }
                 
@@ -267,11 +267,15 @@ namespace hoLinqToSql.LinqUtils
 
                         break;
                     case @"SQLSVR":
-                        provider = null; //new SqlServerDataProvider("", SqlServerVersion.v2012);
+                        provider = null;
                         providerName = "Microsoft.Data.SqlClient";
                         dsnConnectionString = GetConnectionStringForDsn(connectionString);
-                        if (dsnConnectionString != "") return dsnConnectionString;
-                        return FilterConnectionString(connectionString);
+                        // Add Encrypt=False;
+                        if (dsnConnectionString != "")
+                        {
+                            return $@"{dsnConnectionString};Encrypt=False;";
+                        }
+                        return $@"{FilterConnectionString(connectionString)};Encrypt=False;";
 
 
 
@@ -296,13 +300,8 @@ namespace hoLinqToSql.LinqUtils
                         }
 
                         break;
-
-                        provider = new AccessOleDbDataProvider();
-                        dsnConnectionString = GetConnectionStringForDsn(connectionString);
-                        if (dsnConnectionString != "") return dsnConnectionString;
-                        return FilterConnectionString(connectionString);
-
-
+                        
+                      
                     case "ASA":
                         provider = null; //new SybaseDataProvider("Sybase");
                         providerName = "AdoNetCore.AseClient";
@@ -325,12 +324,20 @@ namespace hoLinqToSql.LinqUtils
                         if (dsnConnectionString != "") return dsnConnectionString;
                         return FilterConnectionString(connectionString);
 
+                    case "SQLITE":
+                    case "SL3":
+                        provider = null; //new SqlServerDataProvider("", SqlServerVersion.v2012);
+                        providerName = "System.Data.Sqlite.Core";
+                        dsnConnectionString = GetConnectionStringForDsn(connectionString);
+                        if (dsnConnectionString != "") return dsnConnectionString;
+                        return $@"DataSource={connectionString};";
+
 
 
                     default:
                         MessageBox.Show($@"Database: '{rep.RepositoryType()}'
 ConnectionString: '{connectionString}'",
-                            "DataBase not supported for hoTools, only Access, SqlServer and MySQL");
+                            "DataBase not supported for hoTools, only Access, SqlServer, MySQL, SQLite/SL3 (*.qea)");
                         break;
 
                 }
@@ -339,7 +346,6 @@ ConnectionString: '{connectionString}'",
             {
                 MessageBox.Show($@"Type: {rep.RepositoryType()}
 ConnectionString: '{connectionString}'
-RepositoryType:   '{rep.RepositoryType()}'
 
 {ex}", "VW Tools: Error connections string");
             }
@@ -357,6 +363,8 @@ RepositoryType:   '{rep.RepositoryType()}'
         private static string FilterConnectionString(string connectionString)
         {
             string[] c = connectionString.Split(';').Skip(2).ToArray();
+            // no connection string, e.g. Access and SQLite uses a path
+            if (c.Length == 0) return connectionString;
             Array.Resize(ref c, c.Length - 2);
             return String.Join(";", c) + ";";
         }
@@ -410,7 +418,7 @@ RepositoryType:   '{rep.RepositoryType()}'
             if (key == null) return "";
 
             var l = from k in key.GetValueNames()
-                where k.ToLower() != "driver" && k.ToLower() != "last-user"
+                where k.ToLower() != "driver" && (k.ToLower() != "last-user" && k.ToLower() != "lastuser")
                 select new
                 {
                     Value = k + "=" + key.GetValue(k) + ";"

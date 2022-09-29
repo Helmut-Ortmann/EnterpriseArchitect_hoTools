@@ -26,10 +26,13 @@ namespace hoLinqToSql.LinqUtils
                 _eaConnectionString = _rep.ConnectionString;
                 _dbConnectionString = _rep.ConnectionString; // default
 
-                //if it is a .eap file we check the size of it. if less then 1 MB then it is a shortcut file and we have to open it as a text file to find the actual connection string
-                if (_eaConnectionString.ToLower().EndsWith(@".eap", StringComparison.CurrentCulture) ||
-                    _eaConnectionString.ToLower().EndsWith(@".eapx", StringComparison.CurrentCulture))
-                {
+            //if it is a *.eap/*.qea file we check the size of it. if less then 1 MB then it is a shortcut file and we have to open it as a text file to find the actual connection string
+            if (_eaConnectionString.ToLower().EndsWith(@".eap", StringComparison.CurrentCulture) ||
+                _eaConnectionString.ToLower().EndsWith(@".eapx", StringComparison.CurrentCulture) ||
+                _eaConnectionString.ToLower().EndsWith(@".qea", StringComparison.CurrentCulture) ||
+                _eaConnectionString.ToLower().EndsWith(@".qeax", StringComparison.CurrentCulture)
+               )
+            {
                     var fileInfo = new System.IO.FileInfo(_eaConnectionString);
                     if (fileInfo.Length > 1000)
                     {

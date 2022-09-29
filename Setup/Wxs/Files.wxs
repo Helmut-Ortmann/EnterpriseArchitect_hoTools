@@ -68,6 +68,9 @@
       Name="hoToolsRoot.dll" Source="$(var.hoToolsRoot.TargetPath)" />
       Update if Assembly, Visual Studio Version changed
       If you change AssemblyVersion also update all Version=.. in the beneath associated registry - or run the collect.bat
+	  
+	  Be aware: 32bit and 64 bit should have different CLSIDs, so change CLSID manually: her: 
+	  from {24C07752-9837-3B2F-80CD-A1747150F9E1} to {A002759F-C8C6-497A-B183-07CED1F0BCCE}
       -->
       <Component Id="cmp31940B54CF312110947FB4C57021C05C" Guid="{B437B833-AC3D-4401-8450-12C5D4DC3F2F}">
         <Class Id="{24C07752-9837-3B2F-80CD-A1747150F9E1}" Context="InprocServer32" Description="hoTools.HoToolsRoot" ThreadingModel="both" ForeignServer="mscoree.dll">
@@ -331,10 +334,30 @@
       <Component Id="linq2db.dll" Guid="{7F7E0442-6625-451E-841E-E4D304EFBCBA}">
         <File Id="linq2db.dll" KeyPath="yes" Name="linq2db.dll" Source="$(var.NugetCollectorProject.TargetDir)\linq2db.dll" />
       </Component>
+
+     <!-- Separate install MySqlConnector.dll for MySQL-->
+     <Component Id="MySqlConnector.dll" Guid="{BB284DBF-F06C-4522-9F33-BB1316C2ECDE}">
+	     <File Id="MySqlConnector.dll" KeyPath="yes" Name="MySqlConnector.dll" Source="$(var.NugetCollectorProject.TargetDir)MySqlConnector.dll" />
+     </Component>
+
+	 
+	 <!-- Separate install Microsoft.Data.SqlClient.dll for SQLServer-->
+     <Component Id="Microsoft.Data.SqlClient.dll" Guid="{F6BCE9FB-B940-4FB3-953E-DE0C270F251F}">
+	     <File Id="Microsoft.Data.SqlClient.dll" KeyPath="yes" Name="Microsoft.Data.SqlClient.dll" Source="$(var.NugetCollectorProject.TargetDir)\Microsoft.Data.SqlClient.dll" />
+     </Component>
+
+     <!-- Separate install Microsoft.Data.SqlClient.dll for SQLite-->
+     <Component Id="System.Data.SQLite.dll" Guid="{B161BBE0-0A9C-4570-AE7A-91E10F380ACD}">
+	     <File Id="System.Data.SQLite.dll" KeyPath="yes" Name="System.Data.SQLite.dll" Source="$(var.NugetCollectorProject.TargetDir)\System.Data.SQLite.dll" />
+     </Component>
+
+
       <!-- Separate install MySql.Data.dll-->
-      <Component Id="MySql.Data.dll" Guid="{1D9AF997-5EFF-4F2A-9410-72EAA69473CC}">
+     <Component Id="MySql.Data.dll" Guid="{1D9AF997-5EFF-4F2A-9410-72EAA69473CC}">
         <File Id="MySql.Data.dll" KeyPath="yes" Name="MySql.Data.dll" Source="$(var.NugetCollectorProject.TargetDir)\MySql.Data.dll" />
       </Component>
+
+
       <Component Id="Microsoft.SqlServer.Types.dll" Guid="{EABD70B2-374E-4959-AB91-38863D06ABFA}">
         <File Id="Microsoft.SqlServer.Types.dll" KeyPath="yes" Name="Microsoft.SqlServer.Types.dll" Source="$(var.NugetCollectorProject.TargetDir)\Microsoft.SqlServer.Types.dll" />
       </Component>
@@ -357,12 +380,12 @@
       -->
 
 
+
+
       <Component Id="SQLite.Interop.dll" Guid="{3DFC900E-8BD6-4B50-ACFC-7DF08040ECC2}">
         <File Id="SQLite.Interop.dll" KeyPath="yes" Name="SQLite.Interop.dll" Source="$(var.NugetCollectorProject.TargetDir)\x86\SQLite.Interop.dll" />
       </Component>
-      <Component Id="System.Data.SQLite.dll" Guid="{B161BBE0-0A9C-4570-AE7A-91E10F380ACD}">
-        <File Id="System.Data.SQLite.dll" KeyPath="yes" Name="System.Data.SQLite.dll" Source="$(var.NugetCollectorProject.TargetDir)\System.Data.SQLite.dll" />
-      </Component>
+      
 
      <Component Id="Microsoft.Bcl.AsyncInterfaces.dll" Guid="{02AC05C3-9F5F-4E64-8C9E-4DCD6E96AEE9}">
        <File Id="Microsoft.Bcl.AsyncInterfaces.dll" KeyPath="yes" Name="Microsoft.Bcl.AsyncInterfaces.dll" Source="$(var.NugetCollectorProject.TargetDir)\Microsoft.Bcl.AsyncInterfaces.dll" />
@@ -377,9 +400,7 @@
 
      <!-- Meta files for DEBUG
 	 	 -->
-     <Component Id="HoTools_WIXPBD" Guid="{2E424076-968B-470B-940D-87D2B76CC52B}">
-	     <File Id="HoTools_WIXPBD" KeyPath="yes" Name="HoTools.wixpdb" Source="..\Setup\bin\x86\Release\en-us\hoTools.wixpdb" />
-     </Component>
+    
      <Component Id="HoToolsGUI_PDB" Guid="{4D253EED-00C0-4041-9ECC-3796345A0C34}">
 	     <File Id="HoToolsGUI_PDB" KeyPath="yes" Name="HoToolsGUI.pdb" Source="$(var.hoToolsGui.TargetDir)$(var.hoToolsGui.TargetName).pdb" />
      </Component>

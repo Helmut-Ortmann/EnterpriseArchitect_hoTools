@@ -1,4 +1,6 @@
-﻿using System;
+﻿using hoLinqToSql.LinqUtils.Extensions;
+using System;
+using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
@@ -20,8 +22,8 @@ namespace hoLinqToSql.LinqUtils
             if (dt == null) return MakeEmptyXml();
             // Make EA xml
             OrderedEnumerableRowCollection<DataRow> rowsDt = from row in dt.AsEnumerable()
-                orderby row.Field<string>(dt.Columns[0].Caption)
-                select row;
+                                                             orderby row.Field<string>(dt.Columns[0].Caption)
+                                                             select row;
             return MakeXml(dt, rowsDt);
         }
         /// <summary>
@@ -37,6 +39,9 @@ namespace hoLinqToSql.LinqUtils
                     new XElement("Field", new XAttribute("name", "Empty"))));
             return x.ToString();
         }
+
+
+
         /// <summary>
         /// Make EA xml from a DataTable (for column names) and the ordered Enumeration provided by LINQ. Set the Captions in DataTable to ensure column names. 
         /// 
@@ -83,7 +88,66 @@ namespace hoLinqToSql.LinqUtils
             }
         }
 
+        /// <summary>
+        /// Make DataTable from EA sql results
+        /// 
+        /// Remark:   For great tables use MakeDataTableFromSqlXmlBd
+        /// Rational: DataSet.ReadXML might split xml in multiple DataTables
+        /// </summary>
+        /// <param name="sqlXml"></param>
+        /// <param name="sql">sql string to output in error message</param>
+        /// <param name="debug"></param>
+        /// <param name="rep"></param>
+        /// <returns></returns>
+        public static DataTable MakeDataTableFromSqlXml(string sqlXml, string sql = null, bool debug = false, EA.Repository rep = null)
+        {
+            string sqlText = "";
+            if (!String.IsNullOrEmpty(sql)) sqlText = $@"SQL: {sql}{Environment.NewLine}";
+            try
+            {
+                DataSet dataSet = new DataSet();
+                var xml = XElement.Parse(sqlXml).Descendants("Data").FirstOrDefault()?.ToString();
 
+                // check if
+                if (xml == null)
+                {
+                    DataTable dt = new DataTable("Empty");
+                    dt.Columns.Add("Empty");
+                    if (debug && rep != null)
+                    {
+                        rep.WriteOutput("TRACE", $@"{DateTime.Now} MakeDataTableFromSqlXml: Collect rows and columns, empty '{sqlXml.Prefix(200)}'", 0);
+                        rep.EnsureOutputVisible("TRACE");
+                    }
+                    return dt;
+                }
+                if (debug && rep != null)
+                {
+                    rep.WriteOutput("TRACE", $@"{DateTime.Now} MakeDataTableFromSqlXml: Collect rows and columns, '{sqlXml.Prefix(200)}'", 0);
+                    rep.EnsureOutputVisible("TRACE");
+                }
+
+                dataSet.ReadXml(new StringReader(xml));
+                // Read xml makes more than one table from XML, use different solution
+                if (dataSet.Tables.Count > 1)
+                {
+                    return MakeDataTableFromSqlXmlBd(sqlXml, sqlText);
+                }
+                return dataSet.Tables[0];
+
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($@"{sqlText} 
+
+Xml:
+{sqlXml?.Prefix(500)}
+
+{e}", "Exception MakeDataTableFromSqlXml");
+                if (debug) Utils.SaveTextToXml("DebugToXml", sqlXml);
+                return GetEmptyDataTable();
+            }
+            
+        }
         /// <summary>
         /// Make EA xml from a DataTable (for column names) and the ordered Enumeration provided by LINQ. Set the Captions in DataTable to ensure column names. 
         /// 
@@ -130,23 +194,95 @@ namespace hoLinqToSql.LinqUtils
             }
         }
         /// <summary>
-        /// Make DataTable from EA sql results
+        /// Get an empty DataTable
+        /// </summary>
+        /// <returns></returns>
+        public static DataTable GetEmptyDataTable()
+        {
+            DataTable dt = new DataTable("Empty");
+            dt.Columns.Add("Empty");
+            return dt;
+        }
+
+        /// <summary>
+        /// Make DataTable from EA sql results for Big Data 
+        /// 
+        /// Remark:   For small tables use MakeDataTableFromSqlXml
+        /// Rational: DataSet.ReadXML might split xml in multiple DataTables
         /// </summary>
         /// <param name="sqlXml"></param>
+        /// <param name="sql">sql string to output in error message</param>
+        /// <param name="debug"></param>
+        /// <param name="rep"></param>
         /// <returns></returns>
-        public static DataTable MakeDataTableFromSqlXml(string sqlXml)
+        public static DataTable MakeDataTableFromSqlXmlBd(string sqlXml, string sql = null, bool debug = false, EA.Repository rep = null)
         {
-
-            DataSet dataSet = new DataSet();
-            var xml = XElement.Parse(sqlXml).Descendants("Data").FirstOrDefault()?.ToString();
-            if (xml == null)
+            string sqlText = "";
+            if (!String.IsNullOrEmpty(sql)) sqlText = $@"SQL: {sql}{Environment.NewLine}";
+            try
             {
-                DataTable dt = new DataTable("Empty");
-                dt.Columns.Add("Empty");
-                return dt;
+                if (debug && rep != null)
+                {
+                    rep.WriteOutput("TRACE", $@"{DateTime.Now} MakeDataTableFromSqlXmlBd: Calculate columns {sqlXml.Prefix(200)}", 0);
+                    rep.EnsureOutputVisible("TRACE");
+                }
+                // Columns
+                var columns = XElement.Parse(sqlXml).Descendants("Row").FirstOrDefault();
+                if (columns == null)
+                {
+                    if (debug) Utils.SaveTextToXml("DebugToXml", sqlXml);
+                    return GetEmptyDataTable();
+                }
+
+                // create rows, columns in table
+                var dt1 = new DataTable();
+                foreach (var column in columns.Elements())
+                {
+                    dt1.Columns.Add(column.Name.ToString(), typeof(string));
+                }
+
+
+                if (debug && rep != null)
+                {
+                    rep.WriteOutput("TRACE", $@"{DateTime.Now} MakeDataTableFromSqlXmlB: Collect rows and columns, '{sqlXml.Prefix(200)}'", 0);
+                    rep.EnsureOutputVisible("TRACE");
+                }
+                // capture rows and their columns
+                var rows = XElement.Parse(sqlXml).Descendants("Row");
+                int rowCount = 0;
+                foreach (XElement row in rows)
+                {
+                    List<string> rContent = new List<string>();
+                    foreach (var col in row.Descendants())
+                    {
+                        rContent.Add(col.Value);
+                    }
+                    dt1.Rows.Add(rContent.ToArray());
+                    rContent.Clear();
+                    ++rowCount;
+                    if (rowCount % 5000 == 0)
+                    {
+                        if (debug && rep != null)
+                        {
+                            rep.WriteOutput("TRACE", $@"{DateTime.Now} Calculate rows {rowCount}", 0);
+                            rep.EnsureOutputVisible("TRACE");
+                        }
+                    }
+                }
+                return dt1;
+
             }
-            dataSet.ReadXml(new StringReader(xml));
-            return dataSet.Tables[0];
+            catch (Exception e)
+            {
+                MessageBox.Show($@"{sqlText}
+
+{e}", "Exception MakeDataTableFromSqlXmlBd");
+                if (debug) Utils.SaveTextToXml("DebugToXmlBd", sqlXml);
+                return GetEmptyDataTable();
+            }
+
+
+
         }
     }
 }

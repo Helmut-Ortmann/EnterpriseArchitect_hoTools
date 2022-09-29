@@ -213,43 +213,43 @@
       <Version>1.8.9</Version>
     </PackageReference>
     <PackageReference Include="Google.Protobuf">
-      <Version>3.21.2</Version>
+      <Version>3.21.6</Version>
     </PackageReference>
     <PackageReference Include="HtmlAgilityPack">
-      <Version>1.11.43</Version>
+      <Version>1.11.46</Version>
     </PackageReference>
     <PackageReference Include="jQuery">
       <Version>3.6.0</Version>
     </PackageReference>
     <PackageReference Include="linq2db">
-      <Version>4.1.1</Version>
+      <Version>4.2.0</Version>
     </PackageReference>
     <PackageReference Include="linq2db.Access">
-      <Version>4.1.1</Version>
+      <Version>4.2.0</Version>
     </PackageReference>
     <PackageReference Include="linq2db.MySql">
-      <Version>4.1.1</Version>
+      <Version>4.2.0</Version>
     </PackageReference>
     <PackageReference Include="linq2db.Oracle.Managed">
-      <Version>4.1.1</Version>
+      <Version>4.2.0</Version>
     </PackageReference>
     <PackageReference Include="linq2db.PostgreSQL">
-      <Version>4.1.1</Version>
+      <Version>4.2.0</Version>
     </PackageReference>
     <PackageReference Include="linq2db.SQLite">
-      <Version>4.1.1</Version>
+      <Version>4.2.0</Version>
     </PackageReference>
     <PackageReference Include="linq2db.SqlServer">
-      <Version>4.1.1</Version>
+      <Version>4.2.0</Version>
     </PackageReference>
     <PackageReference Include="linq2db.Sybase">
-      <Version>4.1.1</Version>
+      <Version>4.2.0</Version>
     </PackageReference>
     <PackageReference Include="linq2db.Sybase.DataAction">
-      <Version>4.1.1</Version>
+      <Version>4.2.0</Version>
     </PackageReference>
-    <PackageReference Include="Microsoft.Data.Sqlite">
-      <Version>6.0.7</Version>
+    <PackageReference Include="Microsoft.Data.SqlClient">
+      <Version>5.0.0</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.SqlServer.Types">
       <Version>14.0.1016.290</Version>
@@ -257,14 +257,14 @@
     <PackageReference Include="morelinq">
       <Version>3.3.2</Version>
     </PackageReference>
-    <PackageReference Include="MySql.Data">
-      <Version>8.0.29</Version>
+    <PackageReference Include="MySqlConnector">
+      <Version>2.1.13</Version>
     </PackageReference>
     <PackageReference Include="Npgsql">
-      <Version>6.0.5</Version>
+      <Version>6.0.7</Version>
     </PackageReference>
     <PackageReference Include="Oracle.ManagedDataAccess">
-      <Version>21.6.1</Version>
+      <Version>21.7.0</Version>
     </PackageReference>
     <PackageReference Include="SampleDependency">
       <Version>1.0.0</Version>
@@ -273,7 +273,7 @@
       <Version>1.0.0</Version>
     </PackageReference>
     <PackageReference Include="SQLitePCLRaw.bundle_green">
-      <Version>2.1.0</Version>
+      <Version>2.1.2</Version>
     </PackageReference>
     <PackageReference Include="SQLitePCLRaw.lib.e_sqlite3.linux">
       <Version>1.1.14</Version>
@@ -289,9 +289,6 @@
     </PackageReference>
     <PackageReference Include="System.Buffers">
       <Version>4.5.1</Version>
-    </PackageReference>
-    <PackageReference Include="System.Data.SQLite.Core">
-      <Version>1.0.116</Version>
     </PackageReference>
     <PackageReference Include="System.Numerics.Vectors">
       <Version>4.5.0</Version>

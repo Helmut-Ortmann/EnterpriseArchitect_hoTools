@@ -39,7 +39,7 @@
       </Component>
       
       <Component Id="RegisterEA" Guid="08CCFB79-BA02-4B57-BE8B-795754A6113F">
-        <RegistryKey Root="HKMU" Key="Software\Sparx Systems\EAAddins\hoTools">
+        <RegistryKey Root="HKMU" Key="Software\Sparx Systems\EAAddinsX64\hoTools">
           <RegistryValue Type="string" Value="hoTools.HoToolsRoot" KeyPath="yes" />
         </RegistryKey>
       </Component>
@@ -70,8 +70,8 @@
       If you change AssemblyVersion also update all Version=.. in the beneath associated registry - or run the collect.bat
       -->
       <Component Id="cmp31940B54CF312110947FB4C57021C05C" Guid="{B437B833-AC3D-4401-8450-12C5D4DC3F2F}">
-        <Class Id="{24C07752-9837-3B2F-80CD-A1747150F9E1}" Context="InprocServer32" Description="hoTools.HoToolsRoot" ThreadingModel="both" ForeignServer="mscoree.dll">
-          <ProgId Id="hoTools.HoToolsRoot" Description="hoTools.HoToolsRoot" />
+        <Class Id="{24C07752-9837-3B2F-80CD-A1747150F9E1}" Context="InprocServer32" Description="hoTools.HoToolsRootX64" ThreadingModel="both" ForeignServer="mscoree.dll">
+          <ProgId Id="hoTools.HoToolsRoot" Description="hoTools.HoToolsRootX64" />
         </Class>
         <Class Id="{8AB7C74D-D767-3D1A-801B-82DA0C10E523}" Context="InprocServer32" Description="hoTools.About" ThreadingModel="both" ForeignServer="mscoree.dll">
           <ProgId Id="hoTools.About" Description="hoTools.About" />
@@ -327,6 +327,18 @@
      </Component>
 
       <!-- linq2db                   -->
+     <!-- Separate install MySqlConnector.dll for MySQL-->
+     <Component Id="MySqlConnector.dll" Guid="{BB284DBF-F06C-4522-9F33-BB1316C2ECDE}">
+	     <File Id="MySqlConnector.dll" KeyPath="yes" Name="MySqlConnector.dll" Source="$(var.NugetCollectorProject.TargetDir)MySqlConnector.dll" />
+     </Component>
+
+
+     <!-- Separate install Microsoft.Data.SqlClient.dll for SQLServer-->
+     <Component Id="Microsoft.Data.SqlClient.dll" Guid="{F6BCE9FB-B940-4FB3-953E-DE0C270F251F}">
+	     <File Id="Microsoft.Data.SqlClient.dll" KeyPath="yes" Name="Microsoft.Data.SqlClient.dll" Source="$(var.NugetCollectorProject.TargetDir)\Microsoft.Data.SqlClient.dll" />
+     </Component>
+
+
       <!-- Supported databases Access, MySQL, SqlServer, Oracle, Sybase, Postgres (tested: Access, MySQL, SqlServer) -->
       <Component Id="linq2db.dll" Guid="{7F7E0442-6625-451E-841E-E4D304EFBCBA}">
         <File Id="linq2db.dll" KeyPath="yes" Name="linq2db.dll" Source="$(var.NugetCollectorProject.TargetDir)\linq2db.dll" />
@@ -374,7 +386,34 @@
       <Component Id="HtmlAgilityPack.dll" Guid="{3783B4A7-6591-4783-AFD5-FB7F4E70A2D5}">
         <File Id="HtmlAgilityPack.dll" KeyPath="yes" Name="HtmlAgilityPack.dll" Source="$(var.NugetCollectorProject.TargetDir)\HtmlAgilityPack.dll" />
       </Component>
-      
-    </ComponentGroup>
+
+
+     <!-- Meta files for DEBUG
+	 	 -->
+     <!-- Not Working
+     <Component Id="VwTools_WIXPBD" Guid="{E42B966E-D098-4DAE-A1DE-879557C453C6}">
+	     <File Id="VwTools_WIXPBD" KeyPath="yes" Name="VwTools.wixpdb" Source="..\VwTools_Setup\bin\Release\en-us\VwTools.wixpdb" />
+     </Component>
+    -->
+     <Component Id="VwTools_GUI_PDB" Guid="{CE7F7A6F-AF8B-4599-9DCB-7D73E877900F}">
+	     <File Id="VwTools_GUI_PDB" KeyPath="yes" Name="VwTools_GUI.pdb" Source="$(var.VwTools_Gui.TargetDir)$(var.VwTools_Gui.TargetName).pdb" />
+     </Component>
+     <Component Id="VwTools_Root_PDB" Guid="{02D53555-72D7-4D92-BEE1-900F8BDC3558}">
+	     <File Id="VwTools_Root_PDB" KeyPath="yes" Name="VwTools_Root.pdb" Source="$(var.VwTools_Root.TargetDir)$(var.VwTools_Root.TargetName).pdb" />
+     </Component>
+     <Component Id="VwTools_Utils_PDB" Guid="{3386E71B-3CD3-4D8D-BD2E-7C1B0B675CD7}">
+	     <File Id="VwTools_Utils_PDB" KeyPath="yes" Name="VwTools_Utils.pdb" Source="$(var.VwTools_Utils.TargetDir)$(var.LinqToSql.TargetName).pdb" />
+     </Component>
+
+     <Component Id="VwTools_LinqToSql_PDB" Guid="{BA40E3DC-37F3-469D-A494-5B03FEBD57DB}">
+	     <File Id="LinqToSql_PDB" KeyPath="yes" Name="LinqToSql.pdb" Source="$(var.LinqToSql.TargetDir)$(var.LinqToSql.TargetName).pdb" />
+     </Component>
+
+     <Component Id="VwTools_Services_PDB" Guid="{D6F20681-D1D3-4FE1-AD13-BA82ABFF22AE}">
+	     <File Id="VwTools_Services_PDB" KeyPath="yes" Name="VwTools_Services.pdb" Source="$(var.VwTools_Services.TargetDir)$(var.VwTools_Services.TargetName).pdb" />
+     </Component>
+
+
+	</ComponentGroup>
   </Fragment>
 </Wix>
