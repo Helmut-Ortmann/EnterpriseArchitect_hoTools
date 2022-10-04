@@ -5,7 +5,6 @@ using System.Linq;
 using System.Windows.Forms;
 using DataModels.VcSymbols;
 using LinqToDB.Configuration;
-using LinqToDB.DataProvider.SQLite;
 using File = System.IO.File;
 
 namespace hoLinqToSql.LinqUtils

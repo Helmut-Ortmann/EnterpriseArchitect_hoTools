@@ -156,7 +156,7 @@ namespace hoLinqToSql.LinqUtils
                         conBuilder.UseConnectionString(provider, connectionString);
                     else
                         conBuilder.UseConnectionString(providerName, connectionString);
-                    var conOption = new LinqToDBConnectionOptions(new LinqToDBConnectionOptionsBuilder());
+                    var conOption = new LinqToDBConnectionOptions(conBuilder);
                     using (var db = new DataModels.EaDataModel(conOption)) {
                         // Total amount of Object_Types
                         var countObjectTypes = db.t_object.Count();
@@ -374,10 +374,30 @@ ConnectionString: '{connectionString}'
             return $"Provider=Microsoft.Jet.OLEDB.4.0;Data Source={path};";
         }
         /// <summary>
+        /// Get ConnectionOptions
+        ///
+        /// From the path it gets the LINQDB options.
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        public static LinqToDBConnectionOptions GetConnectionOptions(string path)
+        {
+
+            var conBuilder = new LinqToDBConnectionOptionsBuilder();
+            var providerName = "Microsoft.Jet.OLEDB.4.0";
+            if (path.ToLower().EndsWith(".qea") || path.ToLower().EndsWith(".qeax")) providerName = "System.Data.Sqlite.Core";
+            conBuilder.UseConnectionString(providerName, path);
+            var conOption = new LinqToDBConnectionOptions(conBuilder);
+            return conOption;
+        }
+
+
+        /// <summary>
         /// Get connectionString if a DSN is part of the connectionString or "" if no DSN available.
         /// </summary>
         /// <param name="connectionString"></param>
         /// <returns></returns>
+        /// 
         public static string GetConnectionStringForDsn(string connectionString)
         {
             Regex rgx = new Regex("Data Source=([^;]*);");

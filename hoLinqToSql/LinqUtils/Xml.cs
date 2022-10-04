@@ -149,6 +149,16 @@ Xml:
             
         }
         /// <summary>
+        /// Get an empty DataTable
+        /// </summary>
+        /// <returns></returns>
+        public static DataTable GetEmptyDataTable()
+        {
+            DataTable dt = new DataTable("Empty");
+            dt.Columns.Add("Empty");
+            return dt;
+        }
+        /// <summary>
         /// Make EA xml from a DataTable (for column names) and the ordered Enumeration provided by LINQ. Set the Captions in DataTable to ensure column names. 
         /// 
         /// </summary>
@@ -193,16 +203,7 @@ Xml:
                 return "";
             }
         }
-        /// <summary>
-        /// Get an empty DataTable
-        /// </summary>
-        /// <returns></returns>
-        public static DataTable GetEmptyDataTable()
-        {
-            DataTable dt = new DataTable("Empty");
-            dt.Columns.Add("Empty");
-            return dt;
-        }
+        
 
         /// <summary>
         /// Make DataTable from EA sql results for Big Data 

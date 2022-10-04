@@ -129,6 +129,10 @@ Some features:
 
 ## Releases
 
+### 4.0  EA16 *.qea files, Support X86+X64, Linq 4.2, Bugfixing
+
+- X64 has naming with X64 to indentify them
+
 ### 3.13 linq2db to 4.0, advanced context-info in Right Click, Spezialize,..
 
 ### 3.12 New SQL macros, SQL error is copied to Clipboard

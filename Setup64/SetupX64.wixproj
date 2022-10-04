@@ -33,9 +33,9 @@
     <Compile Include="Collect\hoSqlGui.wxs" />
     <Compile Include="Collect\hoToolsGui.wxs" />
     <Compile Include="Collect\hoToolsRoot.wxs" />
-    <Compile Include="Wxs\Directories.wxs" />
-    <Compile Include="Wxs\Files.wxs" />
-    <Compile Include="Wxs\Product.wxs" />
+    <Compile Include="Wxs\DirectoriesX64.wxs" />
+    <Compile Include="Wxs\FilesX64.wxs" />
+    <Compile Include="Wxs\ProductX64.wxs" />
     <Compile Include="Wxs\WixUI_Advanced.wxs" />
   </ItemGroup>
   <ItemGroup>
@@ -152,7 +152,7 @@
     </WixExtension>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Wxs\Localization.wxl" />
+    <EmbeddedResource Include="Wxs\LocalizationX64.wxl" />
   </ItemGroup>
   <Import Project="$(WixTargetsPath)" />
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">

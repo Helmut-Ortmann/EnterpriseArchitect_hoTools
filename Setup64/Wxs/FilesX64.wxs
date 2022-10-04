@@ -16,10 +16,10 @@
      - For files which need to register as COM / ActiveX
      - copy the content of the component in the component entry of this file
      - If AssemblyVersion (Major, Minor) is changed you need to update the registration information
-     - HoToolsGui.dll, AddinClass.dll, FindAndReplace.dll
+     - hoToolsGui.dll, AddinClass.dll, FindAndReplace.dll
     // Update the following entries to use WIX variables to find the files in their right location
     Name="AddinClass.dll" Source="$(var.AddinClass.TargetPath)" />
-    Name="HoToolsGui.dll" Source="$(var.HoToolsGui.TargetPath)" />
+    Name="hoToolsGui.dll" Source="$(var.hoToolsGui.TargetPath)" />
     Name="FindAndReplace.dll" Source="$(var.FindAndReplace.TargetPath)" />
   4. A component for every file
   
@@ -39,10 +39,12 @@
       </Component>
       
       <Component Id="RegisterEA" Guid="08CCFB79-BA02-4B57-BE8B-795754A6113F">
-        <RegistryKey Root="HKMU" Key="Software\Sparx Systems\EAAddinsX64\hoTools">
+        <RegistryKey Root="HKMU" Key="Software\Sparx Systems\EAAddins64\hoToolsX64">
           <RegistryValue Type="string" Value="hoTools.HoToolsRoot" KeyPath="yes" />
         </RegistryKey>
       </Component>
+
+
      <!-- EA Standard Searches Configuration                   -->
       <Component Id="EaStandardSearches.json" Guid="{BDC7CABC-176C-4F01-8E11-926724F50A48}">
         <File Id="EaStandardSearches.json" Name="EaStandardSearches.json" Source="..\AddinFramework\EaStandardSearches.json" KeyPath="yes" />
@@ -70,29 +72,29 @@
       If you change AssemblyVersion also update all Version=.. in the beneath associated registry - or run the collect.bat
       -->
       <Component Id="cmp31940B54CF312110947FB4C57021C05C" Guid="{B437B833-AC3D-4401-8450-12C5D4DC3F2F}">
-        <Class Id="{24C07752-9837-3B2F-80CD-A1747150F9E1}" Context="InprocServer32" Description="hoTools.HoToolsRootX64" ThreadingModel="both" ForeignServer="mscoree.dll">
-          <ProgId Id="hoTools.HoToolsRoot" Description="hoTools.HoToolsRootX64" />
+        <Class Id="{24C07752-9837-3B2F-80CD-A1747150F9E1}" Context="InprocServer32" Description="hoTools Root X64" ThreadingModel="both" ForeignServer="mscoree.dll">
+          <ProgId Id="hoTools.HoToolsRoot" Description="hoToolsRoot X64" />
         </Class>
         <Class Id="{8AB7C74D-D767-3D1A-801B-82DA0C10E523}" Context="InprocServer32" Description="hoTools.About" ThreadingModel="both" ForeignServer="mscoree.dll">
           <ProgId Id="hoTools.About" Description="hoTools.About" />
         </Class>
         <File Id="filCA8A52E7876A339B3756985923353460" KeyPath="yes"  Name="hoToolsRoot.dll" Source="$(var.hoToolsRoot.TargetPath)" />
         <RegistryValue Root="HKCR" Key="CLSID\{24C07752-9837-3B2F-80CD-A1747150F9E1}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
-        <RegistryValue Root="HKCR" Key="CLSID\{24C07752-9837-3B2F-80CD-A1747150F9E1}\InprocServer32\3.10.0" Name="Class" Value="hoTools.HoToolsRoot" Type="string" Action="write" />
-        <RegistryValue Root="HKCR" Key="CLSID\{24C07752-9837-3B2F-80CD-A1747150F9E1}\InprocServer32\3.10.0" Name="Assembly" Value="hoToolsRoot, Version=3.10.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
-        <RegistryValue Root="HKCR" Key="CLSID\{24C07752-9837-3B2F-80CD-A1747150F9E1}\InprocServer32\3.10.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-        <RegistryValue Root="HKCR" Key="CLSID\{24C07752-9837-3B2F-80CD-A1747150F9E1}\InprocServer32\3.10.0" Name="CodeBase" Value="file:///[#filCA8A52E7876A339B3756985923353460]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{24C07752-9837-3B2F-80CD-A1747150F9E1}\InprocServer32\4.0.0" Name="Class" Value="hoTools.HoToolsRoot" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{24C07752-9837-3B2F-80CD-A1747150F9E1}\InprocServer32\4.0.0" Name="Assembly" Value="hoToolsRoot, Version=4.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{24C07752-9837-3B2F-80CD-A1747150F9E1}\InprocServer32\4.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{24C07752-9837-3B2F-80CD-A1747150F9E1}\InprocServer32\4.0.0" Name="CodeBase" Value="file:///[#filCA8A52E7876A339B3756985923353460]" Type="string" Action="write" />
         <RegistryValue Root="HKCR" Key="CLSID\{24C07752-9837-3B2F-80CD-A1747150F9E1}\InprocServer32" Name="Class" Value="hoTools.HoToolsRoot" Type="string" Action="write" />
-        <RegistryValue Root="HKCR" Key="CLSID\{24C07752-9837-3B2F-80CD-A1747150F9E1}\InprocServer32" Name="Assembly" Value="hoToolsRoot, Version=3.10.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{24C07752-9837-3B2F-80CD-A1747150F9E1}\InprocServer32" Name="Assembly" Value="hoToolsRoot, Version=4.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
         <RegistryValue Root="HKCR" Key="CLSID\{24C07752-9837-3B2F-80CD-A1747150F9E1}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
         <RegistryValue Root="HKCR" Key="CLSID\{24C07752-9837-3B2F-80CD-A1747150F9E1}\InprocServer32" Name="CodeBase" Value="file:///[#filCA8A52E7876A339B3756985923353460]" Type="string" Action="write" />
         <RegistryValue Root="HKCR" Key="CLSID\{8AB7C74D-D767-3D1A-801B-82DA0C10E523}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
-        <RegistryValue Root="HKCR" Key="CLSID\{8AB7C74D-D767-3D1A-801B-82DA0C10E523}\InprocServer32\3.10.0" Name="Class" Value="hoTools.About" Type="string" Action="write" />
-        <RegistryValue Root="HKCR" Key="CLSID\{8AB7C74D-D767-3D1A-801B-82DA0C10E523}\InprocServer32\3.10.0" Name="Assembly" Value="hoToolsRoot, Version=3.10.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
-        <RegistryValue Root="HKCR" Key="CLSID\{8AB7C74D-D767-3D1A-801B-82DA0C10E523}\InprocServer32\3.10.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-        <RegistryValue Root="HKCR" Key="CLSID\{8AB7C74D-D767-3D1A-801B-82DA0C10E523}\InprocServer32\3.10.0" Name="CodeBase" Value="file:///[#filCA8A52E7876A339B3756985923353460]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{8AB7C74D-D767-3D1A-801B-82DA0C10E523}\InprocServer32\4.0.0" Name="Class" Value="hoTools.About" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{8AB7C74D-D767-3D1A-801B-82DA0C10E523}\InprocServer32\4.0.0" Name="Assembly" Value="hoToolsRoot, Version=4.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{8AB7C74D-D767-3D1A-801B-82DA0C10E523}\InprocServer32\4.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{8AB7C74D-D767-3D1A-801B-82DA0C10E523}\InprocServer32\4.0.0" Name="CodeBase" Value="file:///[#filCA8A52E7876A339B3756985923353460]" Type="string" Action="write" />
         <RegistryValue Root="HKCR" Key="CLSID\{8AB7C74D-D767-3D1A-801B-82DA0C10E523}\InprocServer32" Name="Class" Value="hoTools.About" Type="string" Action="write" />
-        <RegistryValue Root="HKCR" Key="CLSID\{8AB7C74D-D767-3D1A-801B-82DA0C10E523}\InprocServer32" Name="Assembly" Value="hoToolsRoot, Version=3.10.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{8AB7C74D-D767-3D1A-801B-82DA0C10E523}\InprocServer32" Name="Assembly" Value="hoToolsRoot, Version=4.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
         <RegistryValue Root="HKCR" Key="CLSID\{8AB7C74D-D767-3D1A-801B-82DA0C10E523}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
         <RegistryValue Root="HKCR" Key="CLSID\{8AB7C74D-D767-3D1A-801B-82DA0C10E523}\InprocServer32" Name="CodeBase" Value="file:///[#filCA8A52E7876A339B3756985923353460]" Type="string" Action="write" />
       </Component>
@@ -102,8 +104,8 @@
       If you change AssemblyVersion also update all Version=.. in the beneath associated registry - or run the collect.bat
       -->
       <Component Id="cmp7418A9F88625553929E4E28D82354AE8" Guid="{846927B2-4AD2-42E2-99C3-8C6680D40A8F}">
-        <Class Id="{1B8C6EA1-B38B-3530-95D8-12EB6DB36346}" Context="InprocServer32" Description="hoTools.hoToolsGui.AddinGui" ThreadingModel="both" ForeignServer="mscoree.dll">
-          <ProgId Id="hoTools.hoToolsGui.AddinGui" Description="hoTools.hoToolsGui.AddinGui" />
+        <Class Id="{1B8C6EA1-B38B-3530-95D8-12EB6DB36346}" Context="InprocServer32" Description="hoTools.hoToolsGui.AddinGui x64" ThreadingModel="both" ForeignServer="mscoree.dll">
+          <ProgId Id="hoTools.hoToolsGui.AddinGui" Description="hoTools.hoToolsGui.AddinGui x64" />
         </Class>
         <Class Id="{82A06E9C-7568-4E4B-8D2C-A53B8D9A7272}" Context="InprocServer32" Description="hoTools.hoToolsGui.HoToolsGui" ThreadingModel="both" ForeignServer="mscoree.dll">
           <ProgId Id="hoTools.hoToolsGui" Description="hoTools.hoToolsGui.HoToolsGui" />
@@ -391,26 +393,36 @@
      <!-- Meta files for DEBUG
 	 	 -->
      <!-- Not Working
-     <Component Id="VwTools_WIXPBD" Guid="{E42B966E-D098-4DAE-A1DE-879557C453C6}">
-	     <File Id="VwTools_WIXPBD" KeyPath="yes" Name="VwTools.wixpdb" Source="..\VwTools_Setup\bin\Release\en-us\VwTools.wixpdb" />
+     <Component Id="HoToolsWIXPBD" Guid="{E42B966E-D098-4DAE-A1DE-879557C453C6}">
+	     <File Id="HoToolsWIXPBD" KeyPath="yes" Name="HoTools.wixpdb" Source="..\HoToolsSetup\bin\Release\en-us\HoTools.wixpdb" />
      </Component>
     -->
-     <Component Id="VwTools_GUI_PDB" Guid="{CE7F7A6F-AF8B-4599-9DCB-7D73E877900F}">
-	     <File Id="VwTools_GUI_PDB" KeyPath="yes" Name="VwTools_GUI.pdb" Source="$(var.VwTools_Gui.TargetDir)$(var.VwTools_Gui.TargetName).pdb" />
+     <Component Id="hoToolsGUI_PDB" Guid="{CE7F7A6F-AF8B-4599-9DCB-7D73E877900F}">
+	     <File Id="hoToolsGUI_PDB" KeyPath="yes" Name="hoToolsGUI.pdb" Source="$(var.hoToolsGui.TargetDir)$(var.hoToolsGui.TargetName).pdb" />
      </Component>
-     <Component Id="VwTools_Root_PDB" Guid="{02D53555-72D7-4D92-BEE1-900F8BDC3558}">
-	     <File Id="VwTools_Root_PDB" KeyPath="yes" Name="VwTools_Root.pdb" Source="$(var.VwTools_Root.TargetDir)$(var.VwTools_Root.TargetName).pdb" />
+     <Component Id="hoToolsRoot_PDB" Guid="{02D53555-72D7-4D92-BEE1-900F8BDC3558}">
+	     <File Id="hoToolsRoot_PDB" KeyPath="yes" Name="hoToolsRoot.pdb" Source="$(var.hoToolsRoot.TargetDir)$(var.hoToolsRoot.TargetName).pdb" />
      </Component>
-     <Component Id="VwTools_Utils_PDB" Guid="{3386E71B-3CD3-4D8D-BD2E-7C1B0B675CD7}">
-	     <File Id="VwTools_Utils_PDB" KeyPath="yes" Name="VwTools_Utils.pdb" Source="$(var.VwTools_Utils.TargetDir)$(var.LinqToSql.TargetName).pdb" />
-     </Component>
-
-     <Component Id="VwTools_LinqToSql_PDB" Guid="{BA40E3DC-37F3-469D-A494-5B03FEBD57DB}">
-	     <File Id="LinqToSql_PDB" KeyPath="yes" Name="LinqToSql.pdb" Source="$(var.LinqToSql.TargetDir)$(var.LinqToSql.TargetName).pdb" />
+     <Component Id="EaServices_PDB" Guid="{3386E71B-3CD3-4D8D-BD2E-7C1B0B675CD7}">
+	     <File Id="EaServices_PDB" KeyPath="yes" Name="EaServices.pdb" Source="$(var.EaServices.TargetDir)$(var.EaServices.TargetName).pdb" />
      </Component>
 
-     <Component Id="VwTools_Services_PDB" Guid="{D6F20681-D1D3-4FE1-AD13-BA82ABFF22AE}">
-	     <File Id="VwTools_Services_PDB" KeyPath="yes" Name="VwTools_Services.pdb" Source="$(var.VwTools_Services.TargetDir)$(var.VwTools_Services.TargetName).pdb" />
+     <Component Id="hoLinqToSql_PDB" Guid="{BA40E3DC-37F3-469D-A494-5B03FEBD57DB}">
+	     <File Id="hoLinqToSql_PDB" KeyPath="yes" Name="hoLinqToSql.pdb" Source="$(var.hoLinqToSql.TargetDir)$(var.hoLinqToSql.TargetName).pdb" />
+     </Component>
+
+     <Component Id="hoExtensionGui_PDB" Guid="{D6F20681-D1D3-4FE1-AD13-BA82ABFF22AE}">
+	     <File Id="hoExtensionGui_PDB" KeyPath="yes" Name="hoExtensionGui.pdb" Source="$(var.hoExtensionGui.TargetDir)$(var.hoExtensionGui.TargetName).pdb" />
+     </Component>
+     <Component Id="HoSqlGUI_PDB" Guid="{34BAE529-186B-434B-81EC-07394046197A}">
+	     <File Id="HoSqlGUI_PDB" KeyPath="yes" Name="HoSqlGUI.pdb" Source="$(var.hoSqlGui.TargetDir)$(var.hoSqlGui.TargetName).pdb" />
+     </Component>
+     <Component Id="HoFindAndReplaceGui_PDB" Guid="{56A3B471-210D-4DAA-B87D-483E880319A6}">
+	     <File Id="HoFindAndReplaceGui_PDB" KeyPath="yes" Name="HoFindAndReplaceGui.pdb" Source="$(var.hoFindAndReplaceGui.TargetDir)$(var.hoFindAndReplaceGui.TargetName).pdb" />
+     </Component>
+     
+     <Component Id="DuoVia.FuzzyStrings_PDB" Guid="{68A13212-0147-4F1E-BE20-DA7525923ED3}">
+	     <File Id="DuoVia.FuzzyStrings_PDB" KeyPath="yes" Name="DuoVia.FuzzyStrings.pdb" Source="$(var.DuoVia.FuzzyStrings.TargetDir)$(var.DuoVia.FuzzyStrings.TargetName).pdb" />
      </Component>
 
 

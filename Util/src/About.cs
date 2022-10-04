@@ -56,7 +56,7 @@ Helmut.Ortmann@t-online.de
                     string version = FileVersionInfo.GetVersionInfo(pathDll).FileVersion;
                     // proportional font, no easy formatting
                     if (dllName.Length > 23 )
-                    description =
+                        description =
                         $"{description}- {dllName,-50}: V{version}{Environment.NewLine}";
                     else
                     // proportional font, no easy formatting
