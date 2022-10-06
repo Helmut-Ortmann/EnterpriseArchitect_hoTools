@@ -40,7 +40,7 @@
         <File Id="Sql.zip" Name="Sql.zip" Source="sql.zip"  KeyPath="yes" />
       </Component>
       
-      <Component Id="RegisterEA" Guid="08CCFB79-BA02-4B57-BE8B-795754A6113F">
+      <Component Id="RegisterEA" Guid="{3571762F-B72C-41B8-8D65-6F26DA1AF6DE}">
         <RegistryKey Root="HKMU" Key="Software\Sparx Systems\EAAddins\hoTools">
           <RegistryValue Type="string" Value="hoTools.HoToolsRoot" KeyPath="yes" />
         </RegistryKey>
