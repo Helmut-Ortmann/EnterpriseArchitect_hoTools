@@ -74,7 +74,7 @@
 	  Be aware: 32bit and 64 bit should have different CLSIDs, so change CLSID manually: her: 
 	  from {24C07752-9837-3B2F-80CD-A1747150F9E1} to {A002759F-C8C6-497A-B183-07CED1F0BCCE}
       -->
-      <Component Id="cmp31940B54CF312110947FB4C57021C05C" Guid="{B437B833-AC3D-4401-8450-12C5D4DC3F2F}">
+      <!--<Component Id="cmp31940B54CF312110947FB4C57021C05C" Guid="{B437B833-AC3D-4401-8450-12C5D4DC3F2F}">
         <Class Id="{24C07752-9837-3B2F-80CD-A1747150F9E1}" Context="InprocServer32" Description="hoToolsRoot x86" ThreadingModel="both" ForeignServer="mscoree.dll">
           <ProgId Id="hoTools.HoToolsRoot" Description="hoToolsRoot x86" />
         </Class>
@@ -100,13 +100,13 @@
         <RegistryValue Root="HKCR" Key="CLSID\{8AB7C74D-D767-3D1A-801B-82DA0C10E523}\InprocServer32" Name="Assembly" Value="hoToolsRoot, Version=4.0.0.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
         <RegistryValue Root="HKCR" Key="CLSID\{8AB7C74D-D767-3D1A-801B-82DA0C10E523}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
         <RegistryValue Root="HKCR" Key="CLSID\{8AB7C74D-D767-3D1A-801B-82DA0C10E523}\InprocServer32" Name="CodeBase" Value="file:///[#filCA8A52E7876A339B3756985923353460]" Type="string" Action="write" />
-      </Component>
+      </Component>-->
       <!--
       Name="hoToolsGui.dll" Source="$(var.hoToolsGui.TargetPath)" />
       Update if Assembly, Visual Studio Version changed
       If you change AssemblyVersion also update all Version=.. in the beneath associated registry - or run the collect.bat
       -->
-      <Component Id="cmp7418A9F88625553929E4E28D82354AE8" Guid="{846927B2-4AD2-42E2-99C3-8C6680D40A8F}">
+      <!--<Component Id="cmp7418A9F88625553929E4E28D82354AE8" Guid="{846927B2-4AD2-42E2-99C3-8C6680D40A8F}">
         <Class Id="{1B8C6EA1-B38B-3530-95D8-12EB6DB36346}" Context="InprocServer32" Description="hoToolsGui AddinGui x86" ThreadingModel="both" ForeignServer="mscoree.dll">
           <ProgId Id="hoTools.hoToolsGui.AddinGui" Description="hoToolsGui AddinGui x86" />
         </Class>
@@ -169,7 +169,7 @@
         <RegistryValue Root="HKCR" Key="Record\{AB39B458-0EDC-3FE7-BF3A-F4E44AC353E2}\3.11.0" Name="Assembly" Value="hoToolsGui, Version=3.11.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
         <RegistryValue Root="HKCR" Key="Record\{AB39B458-0EDC-3FE7-BF3A-F4E44AC353E2}\3.11.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
         <RegistryValue Root="HKCR" Key="Record\{AB39B458-0EDC-3FE7-BF3A-F4E44AC353E2}\3.11.0" Name="CodeBase" Value="file:///[#fil6A0C316308E925A60172896738742F6F]" Type="string" Action="write" />
-      </Component>
+      </Component>-->
       <!--
       Name="hoFindAndReplaceGui.dll" Source="$(var.hoFindAndReplaceGui.TargetPath)" />
       Update if Assembly, Visual Studio Version changed
@@ -352,6 +352,9 @@
      <Component Id="System.Data.SQLite.dll" Guid="{B161BBE0-0A9C-4570-AE7A-91E10F380ACD}">
 	     <File Id="System.Data.SQLite.dll" KeyPath="yes" Name="System.Data.SQLite.dll" Source="$(var.NugetCollectorProject.TargetDir)\System.Data.SQLite.dll" />
      </Component>
+     <Component Id="SQLite.Interop.dll" Guid="{3DFC900E-8BD6-4B50-ACFC-7DF08040ECC2}">
+       <File Id="SQLite.Interop.dll" KeyPath="yes" Name="SQLite.Interop.dll" Source="$(var.NugetCollectorProject.TargetDir)\x86\SQLite.Interop.dll" />
+     </Component>
 
 
       <!-- Separate install MySql.Data.dll-->
@@ -380,15 +383,6 @@
         <File Id="sybdrvado20.dll" KeyPath="yes" Name="sybdrvado20.dll" Source="..\packages\linq2db.Sybase.1.9.0\tools\sybdrvado20.dll" />
       </Component>
       -->
-
-
-
-
-      <Component Id="SQLite.Interop.dll" Guid="{3DFC900E-8BD6-4B50-ACFC-7DF08040ECC2}">
-        <File Id="SQLite.Interop.dll" KeyPath="yes" Name="SQLite.Interop.dll" Source="$(var.NugetCollectorProject.TargetDir)\x86\SQLite.Interop.dll" />
-      </Component>
-      
-
      <Component Id="Microsoft.Bcl.AsyncInterfaces.dll" Guid="{02AC05C3-9F5F-4E64-8C9E-4DCD6E96AEE9}">
        <File Id="Microsoft.Bcl.AsyncInterfaces.dll" KeyPath="yes" Name="Microsoft.Bcl.AsyncInterfaces.dll" Source="$(var.NugetCollectorProject.TargetDir)\Microsoft.Bcl.AsyncInterfaces.dll" />
      </Component>

@@ -26,6 +26,12 @@
     <SuppressIces>ICE61</SuppressIces>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="..\hoToolsRoot\bin\x86\release\hoToolsRoot.DLL.wxs">
+      <Link>VwToolsRoot.DLL.wxs</Link>
+    </Compile>
+    <Compile Include="..\hoToolsGui\bin\x86\release\hoToolsGui.DLL.wxs">
+      <Link>hoToolsGui.DLL.wxs</Link>
+    </Compile>
     <Compile Include="Collect\hoExtensionGui.wxs" />
     <Compile Include="Collect\hoFindAndReplaceGui.wxs" />
     <Compile Include="Collect\hoSqlGui.wxs" />

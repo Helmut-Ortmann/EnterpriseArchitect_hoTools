@@ -80,6 +80,8 @@
               Display="expand"
               ConfigurableDirectory="APPLICATIONFOLDER" >
       <ComponentGroupRef Id="ProductComponents"/>
+      <ComponentGroupRef Id="COM_DllRoot"/>
+      <ComponentGroupRef Id="COM_DllGui"/>
     </Feature>
     
     <!-- Check for .Net framework 4.0 Client-->
