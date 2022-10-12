@@ -167,6 +167,7 @@
     <Compile Include="src\MKS.cs" />
     <Compile Include="src\Package.cs" />
     <Compile Include="src\Param.cs" />
+    <Compile Include="src\PeArchitecture.cs" />
     <Compile Include="src\RecursivePackages.cs" />
     <Compile Include="src\Run.cs" />
     <Compile Include="src\Sql.cs" />

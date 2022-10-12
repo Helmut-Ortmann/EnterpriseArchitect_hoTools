@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
+using hoTools.Utils.src;
 using JetBrains.Annotations;
 
 // ReSharper disable once CheckNamespace
@@ -39,7 +40,8 @@ Helmut.Ortmann@t-online.de
                     $"{description}{"Product-Version:",-32}\t\tV{fileVersionInfo.ProductVersion}{Environment.NewLine}"+
                     $"{"EA Library Version:",-32}\t\t{ rep.LibraryVersion}{Environment.NewLine}" +
                     $"{"ConnectionString:", -32}\t\t{ rep.ConnectionString}{Environment.NewLine}"+
-                    $"{"Runtime:",-32}\t\t{runTimeEnvironment}{Environment.NewLine}";
+                    $"{"RepositoryType:",-32}\t\t'{rep?.RepositoryType() ?? " "}'{Environment.NewLine}" +
+                    $"{"Runtime:",-32}\t\t{runTimeEnvironment}{Environment.NewLine}{Environment.NewLine}";
 
 
 
@@ -57,11 +59,11 @@ Helmut.Ortmann@t-online.de
                     // proportional font, no easy formatting
                     if (dllName.Length > 23 )
                         description =
-                        $"{description}- {dllName,-50}: V{version}{Environment.NewLine}";
+                        $"{description,-30}- {dllName,-50}: V{version}\t{PeArchitecture.GetPeArchitecture(pathDll),-6}{Environment.NewLine}";
                     else
                     // proportional font, no easy formatting
                     description =
-                        $"{description}- {dllName,-50}\t: V{version}{Environment.NewLine}";
+                        $"{description,-30}- {dllName,-50}\t: V{version}\t {PeArchitecture.GetPeArchitecture(pathDll),-6}{Environment.NewLine}";
                 }
                 catch (Exception)
                 {

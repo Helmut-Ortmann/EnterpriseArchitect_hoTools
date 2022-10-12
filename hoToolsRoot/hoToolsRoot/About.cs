@@ -39,5 +39,16 @@ namespace hoTools
 
         }
 
+        //private void InitializeComponent()
+        //{
+        //    this.SuspendLayout();
+        //    // 
+        //    // About
+        //    // 
+        //    this.ClientSize = new System.Drawing.Size(820, 581);
+        //    this.Name = "About";
+        //    this.ResumeLayout(false);
+
+        //}
     }
 }

@@ -1214,7 +1214,7 @@ namespace hoTools
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show(e.Message, @"Error Starting hoTool main window.");
+                    MessageBox.Show($@"ProgID='{HoToolsGui.Progid}'{Environment.NewLine}{e.Message}", @"Error Starting hoTool GUI window.");
                 }
                 //-----------  hoSearchAndReplace -------------------------------------------------
                 try

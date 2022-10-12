@@ -56,7 +56,7 @@
             this.tCreated.ReadOnly = true;
             this.tCreated.Size = new System.Drawing.Size(296, 135);
             this.tCreated.TabIndex = 3;
-            this.tCreated.Text = "Helmut Ortmann\r\n- Germany\r\n- Untere Sonnenhalde 3\r\n- 88636 Illmensee\r\n\r\n(+49) 172" +
+            this.tCreated.Text = "Helmut Ortmann\r\n- Germany\r\n-Herrenstr. 29\r\n- 88383 Kisslegg\r\n\r\n(+49) 172" +
     " / 51 79 167\r\n";
             this.tCreated.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
             // 

@@ -260,7 +260,7 @@ if $(Platform) == x64 (
 
 if $(Platform) == x86 (
     echo ==== register x86
-    regedit /Sf "$(SolutionDir)Setup\Scripts\EaRegisterAddIn.reg"
+    regedit /Sf "$(SolutionDir)Setup\Scripts\hoTools.reg"
 )
 </PostBuildEvent>
   </PropertyGroup>
