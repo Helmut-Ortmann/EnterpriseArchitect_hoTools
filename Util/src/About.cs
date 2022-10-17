@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
+using hoLinqToSql.LinqUtils;
 using hoTools.Utils.src;
 using JetBrains.Annotations;
 
@@ -35,11 +36,14 @@ Helmut.Ortmann@t-online.de
             // get product version
             Assembly assembly = Assembly.GetExecutingAssembly();
             FileVersionInfo fileVersionInfo = FileVersionInfo.GetVersionInfo(assembly.Location);
+            var conString = new EaConnectionString(rep);
+
             var runTimeEnvironment = Environment.Is64BitProcess == true ? "x64" : "x86";
             description =
                     $"{description}{"Product-Version:",-32}\t\tV{fileVersionInfo.ProductVersion}{Environment.NewLine}"+
                     $"{"EA Library Version:",-32}\t\t{ rep.LibraryVersion}{Environment.NewLine}" +
-                    $"{"ConnectionString:", -32}\t\t{ rep.ConnectionString}{Environment.NewLine}"+
+                    $"{"EA ConnectionString:", -32}\t\t{ rep.ConnectionString}{Environment.NewLine}"+
+                    $"{"DB ConnectionString:",-32}\t\t'{conString.DbConnectionString ?? " "}'{Environment.NewLine}" +
                     $"{"RepositoryType:",-32}\t\t'{rep?.RepositoryType() ?? " "}'{Environment.NewLine}" +
                     $"{"Runtime:",-32}\t\t{runTimeEnvironment}{Environment.NewLine}{Environment.NewLine}";
 

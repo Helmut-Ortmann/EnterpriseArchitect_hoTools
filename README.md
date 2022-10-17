@@ -129,9 +129,14 @@ Some features:
 
 ## Releases
 
+### 4.1  About with DB-Connection string for shortcuts
+
 ### 4.0  EA16 *.qea files, Support X86+X64, Linq 4.2, Bugfixing
 
-- X64 has naming with X64 to indentify them
+- X64-Files have naming with X64 to indentify them
+- About with type of dll (x86/x64)
+- Using Build-Events to collect registry information of the two COM-Object ...Root, ...Gui (collect folder isn't used anymore))
+- error fixing
 
 ### 3.13 linq2db to 4.0, advanced context-info in Right Click, Spezialize,..
 
