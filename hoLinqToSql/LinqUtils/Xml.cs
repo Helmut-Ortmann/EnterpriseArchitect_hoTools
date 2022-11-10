@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml.Linq;
 
@@ -285,5 +286,24 @@ Xml:
 
 
         }
+        /// <summary>
+        /// Make an xml name of the string
+        /// - Starts with letter or underscore
+        /// - followed by digits or letters
+        /// </summary>
+        /// <param name="text"></param>
+        /// <returns></returns>
+        public static string MakeXmlName(string text)
+        {
+            text = Regex.Replace(text, @"[^A-Za-z0-9_.~]", "_");
+            if (!String.IsNullOrEmpty(text) && (Char.IsLetter(text[0]) || text[0] == '_'))
+            {
+                return text;
+            }
+            else return $"_{text}";
+
+
+        }
+
     }
 }

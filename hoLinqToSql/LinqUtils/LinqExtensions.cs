@@ -195,11 +195,11 @@ namespace hoLinqToSql.LinqUtils
             {
                 Declaration = new XDeclaration("1.0", "utf-8", "")
             };
-            xdoc.Add(new XElement(rootName));
+            xdoc.Add(new XElement(Xml.MakeXmlName(rootName)));
             foreach (DataRow row in dt.Rows)
             {
                 if (String.IsNullOrWhiteSpace(dt.TableName)) dt.TableName = rootName;
-                var element = new XElement(ReplaceForXmlNames(dt.TableName));
+                var element = new XElement(ReplaceForXmlNames(Xml.MakeXmlName(dt.TableName)));
                 foreach (DataColumn col in dt.Columns)
                 {
                     element.Add(new XElement(col.ColumnName, row[col].ToString().Trim(' ')));

@@ -129,6 +129,10 @@ Some features:
 
 ## Releases
 
+### 4.2 In preparation
+
+- TakeOver check XML names (Xml.MakeXmlName), integrate in ToXml()
+
 ### 4.1  About with DB-Connection string for shortcuts
 
 ### 4.0  EA16 *.qea files, Support X86+X64, Linq 4.2, Bugfixing
