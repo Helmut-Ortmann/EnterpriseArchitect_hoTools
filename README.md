@@ -129,9 +129,11 @@ Some features:
 
 ## Releases
 
-### 4.2 In preparation
+### 4.2 SQL for Diagram and selected Elements from menu.
 
 - TakeOver check XML names (Xml.MakeXmlName), integrate in ToXml()
+- SQL for Diagram
+- SQL for selected Elements in Diagram and Tree 
 
 ### 4.1  About with DB-Connection string for shortcuts
 

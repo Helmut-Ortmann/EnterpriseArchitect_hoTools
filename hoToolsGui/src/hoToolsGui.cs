@@ -279,6 +279,9 @@ namespace hoTools.hoToolsGui
         private ToolStripMenuItem aSILCToolStripMenuItem;
         private ToolStripSeparator toolStripSeparator23;
         private ToolStripMenuItem copyTVToolStripMenuItem;
+        private ToolStripMenuItem sQLDiagramToolStripMenuItem;
+        private ToolStripMenuItem sQLSelectedElementsToolStripMenuItem;
+        private ToolStripSeparator toolStripSeparator24;
         private TextBox _txtSearchText;
         #endregion
 
@@ -1562,6 +1565,9 @@ namespace hoTools.hoToolsGui
             this.simpleSearchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.diagramSearchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.modifiedDiagramsSearchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sQLDiagramToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sQLSelectedElementsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator24 = new System.Windows.Forms.ToolStripSeparator();
             this._toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this._toolStripContainer1.SuspendLayout();
             this._toolStripQuery.SuspendLayout();
@@ -2580,6 +2586,9 @@ namespace hoTools.hoToolsGui
             // _doToolStripMenuItem
             // 
             this._doToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.sQLDiagramToolStripMenuItem,
+            this.sQLSelectedElementsToolStripMenuItem,
+            this.toolStripSeparator24,
             this.exportExcelToolStripMenuItem,
             this.exportCsvOfClipboardToExcelToolStripMenuItem,
             this.toolStripSeparator3,
@@ -3166,6 +3175,23 @@ namespace hoTools.hoToolsGui
             this.modifiedDiagramsSearchToolStripMenuItem.Name = "modifiedDiagramsSearchToolStripMenuItem";
             resources.ApplyResources(this.modifiedDiagramsSearchToolStripMenuItem, "modifiedDiagramsSearchToolStripMenuItem");
             this.modifiedDiagramsSearchToolStripMenuItem.Click += new System.EventHandler(this.RecentlyModifedDiagramsToolStripMenuItem_Click);
+            // 
+            // sQLDiagramToolStripMenuItem
+            // 
+            this.sQLDiagramToolStripMenuItem.Name = "sQLDiagramToolStripMenuItem";
+            resources.ApplyResources(this.sQLDiagramToolStripMenuItem, "sQLDiagramToolStripMenuItem");
+            this.sQLDiagramToolStripMenuItem.Click += new System.EventHandler(this.sqLDiagramToolStripMenuItem_Click);
+            // 
+            // sQLSelectedElementsToolStripMenuItem
+            // 
+            this.sQLSelectedElementsToolStripMenuItem.Name = "sQLSelectedElementsToolStripMenuItem";
+            resources.ApplyResources(this.sQLSelectedElementsToolStripMenuItem, "sQLSelectedElementsToolStripMenuItem");
+            this.sQLSelectedElementsToolStripMenuItem.Click += new System.EventHandler(this.sQLSelectedElementsToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator24
+            // 
+            this.toolStripSeparator24.Name = "toolStripSeparator24";
+            resources.ApplyResources(this.toolStripSeparator24, "toolStripSeparator24");
             // 
             // HoToolsGui
             // 
@@ -4692,7 +4718,166 @@ Information are Copied to Clipboard!
             EaService.CopyTaggedValues(Repository);
             
         }
-        
+        /// <summary>
+        /// SQL for selected Elements in Diagram or Tree
+        /// - Elements
+        /// -- Element-Type
+        /// -- Parent
+        /// -- etc.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void sQLSelectedElementsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (Repository == null) return;
+            var searchText = "";
+            var sql = $@"select o.ea_guid AS CLASSGUID, o.object_type AS CLASSTYPE,
+#Concat o.Name,':', type.Name# AS Name,
+o.object_type As Type, 
+o.Object_id As ID,
+o.Stereotype As Stereotype,
+#Concat p1.Name, '(', p1.object_type, '):', p.Name,  '(', p.object_type, '):', o.Name, '(', o.object_type, ')'#  As Path,
+o.CreatedDate,
+o.ModifiedDate As ModifiedDate,
+o.Author,
+o.Classifier,
+o.Classifier_Guid,
+o.PDATA1,
+o.PDATA2,
+o.PDATA3,
+o.PDATA4,
+o.PDATA5,
+o.ParentID,
+#Left o.Note,80# As Brief
+
+from 
+((t_object o left join t_object type on o.classifier = type.object_id)
+left join t_object p on p.object_id = o.parentid)
+left join t_object p1 on p1.object_id = p.parentid
+where o.Object_id = #CurrentElementID#
+
+UNION
+// TreeSelected Items
+select o.ea_guid AS CLASSGUID, o.object_type AS CLASSTYPE,
+#Concat o.Name,':', type.Name#,
+o.object_type As Type, 
+o.Object_id As ID,
+o.Stereotype As Stereotype,
+#Concat p1.Name, '(', p1.object_type, '):', p.Name,  '(', p.object_type, '):', o.Name, '(', o.object_type, ')'#,
+o.CreatedDate,
+o.ModifiedDate As ModifiedDate,
+o.Author,
+o.Classifier,
+o.Classifier_Guid,
+o.PDATA1,
+o.PDATA2,
+o.PDATA3,
+o.PDATA4,
+o.PDATA5,
+o.ParentID,
+#Left o.Note,80# As Brief
+
+from 
+((t_object o left join t_object type on o.classifier = type.object_id)
+left join t_object p on p.object_id = o.parentid)
+left join t_object p1 on p1.object_id = p.parentid
+where o.ea_guid in (#TreeSelectedGUIDS#)
+
+UNION
+// Diagram Selected Items
+select o.ea_guid AS CLASSGUID, o.object_type AS CLASSTYPE,
+#Concat o.Name,':', type.Name#,
+o.object_type As Type, 
+o.Object_id As ID,
+o.Stereotype As Stereotype,
+#Concat p1.Name, '(', p1.object_type, '):', p.Name,  '(', p.object_type, '):', o.Name, '(', o.object_type, ')'#,
+o.CreatedDate,
+o.ModifiedDate As ModifiedDate,
+o.Author,
+o.Classifier,
+o.Classifier_Guid,
+o.PDATA1,
+o.PDATA2,
+o.PDATA3,
+o.PDATA4,
+o.PDATA5,
+o.ParentID,
+#Left o.Note,80# As Brief
+
+from 
+((t_object o left join t_object type on o.classifier = type.object_id)
+left join t_object p on p.object_id = o.parentid)
+left join t_object p1 on p1.object_id = p.parentid
+where o.object_id in (#DiagramSelectedElements_IDS#)
+
+order by 3 Desc,4,6
+            ";
+            _model.SearchRun(sql, searchText);
+        }
+        /// <summary>
+        /// SQL for current diagram
+        /// - Elements
+        /// - Links
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void sqLDiagramToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (Repository == null) return;
+            var searchText = "";
+            var sql = $@"select o.ea_guid AS CLASSGUID, o.object_type AS CLASSTYPE,
+'Diagramobjects' As DiaType,
+o.Name AS SrcName,
+o.object_type As SrcType, 
+o.Object_id As SrcObject,
+o.Stereotype As SrcSteo,
+#Concat p1.Name, '(', p1.object_type, '):', p.Name,  '(', p.object_type, '):', o.Name, '(', o.object_type, ')'#  As Path,
+do.diagram_id As DiaId,
+do.instance_id As InstandeId,
+do.sequence As Sequence,
+do.rectleft as Left_cSteo,
+do.rectright as Right_Trg,
+do.recttop As Top_TrgType,
+do.rectBottom As Bottom_TtrgId,
+objectStyle As Style_TrgSteo
+
+from (((t_diagramobjects do 
+left join t_object o on do.object_id = o.object_id)
+left join t_object type on o.classifier = type.object_id)
+left join t_object p on p.object_id = o.parentid)
+left join t_object p1 on p1.object_id = p.parentid
+
+
+where do.diagram_id = #Diagram_ID#
+
+
+UNION
+select o.ea_guid AS CLASSGUID, o.object_type AS CLASSTYPE,
+'DiagramLinks',
+o.Name AS Name,
+o.object_type As Type, o.Object_id,
+o.Stereotype,
+' ',
+l.diagramid,
+c.connector_id,
+' ',
+c.Stereotype,
+trg.Name,
+trg.Object_type,
+trg.Object_id,
+trg.Stereotype
+
+from ((t_diagramlinks l 
+inner join t_connector c on l.connectorid = c.connector_id)
+inner join t_object o on o.object_id = c.Start_Object_ID)
+inner join t_object trg on trg.object_id = c.End_Object_ID
+
+where l.diagramid = #Diagram_ID#
+order by 3 Desc,4,5,6
+            ";
+
+            _model.SearchRun(sql, searchText);
+        }
     }
 
 
