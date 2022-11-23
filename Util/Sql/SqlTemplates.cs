@@ -1308,7 +1308,7 @@ For: Package, Element, Diagram, Attribute, Operation"
         }
 
 
-        /// <summary>
+         /// <summary>
         /// macro Concatenated
         /// #Concat str1, str2,..#
         /// </summary>
@@ -1321,30 +1321,41 @@ For: Package, Element, Diagram, Attribute, Operation"
             Match match = Regex.Match(sql, @"#Concat([^#]*)#", RegexOptions.IgnoreCase);
             while (match.Success)
             {
-                var lColumns = match.Groups[1].Value.Replace(" ", "").Split(',');
+                //var lColumns = match.Groups[1].Value.Replace(" ", "").Split(',');
+                var lColumns = match.Groups[1].Value.Split(',');
 
                 string content;
-                switch (rep.RepositoryType())
+                switch (RepType(rep))
                 {
                     case "JET":
-                        content = String.Join("+", lColumns);
+                    case "ACCESS":
+                        content = String.Join("+",lColumns);
                         break;
                     case "MYSQL":
                         content = String.Join(",", lColumns);
                         break;
+                    case "SQLITE":
+                    case "SL3":
+                        content = String.Join("||", lColumns);
+                        break;
                     default:
-                        content = String.Join("+", lColumns);
+                        content = String.Join(",", lColumns);
                         break;
                 }
 
                 string replacement;
-                switch (rep.RepositoryType())
+                switch (RepType(rep))
                 {
                     case "JET":
+                    case "ACCESS":
                         replacement = content;
                         break;
                     case "MYSQL":
                         replacement = $@"Concat({content})";
+                        break;
+                    case "SQLITE":
+                    case "SL3":
+                        replacement = content;
                         break;
                     default:
                         replacement = $@"Concat({content})";
@@ -1353,7 +1364,7 @@ For: Package, Element, Diagram, Attribute, Operation"
                 sql = sql.Replace(match.Groups[0].Value, replacement);
                 match = match.NextMatch();
             }
-
+           
             return sql;
         }
         /// <summary>
@@ -1364,6 +1375,7 @@ For: Package, Element, Diagram, Attribute, Operation"
         /// <param name="sql"></param>
         /// <returns></returns>
 
+        // ReSharper disable once InconsistentNaming
         static string macroToString(Repository rep, string sql)
         {
             Match match = Regex.Match(sql, @"#ToString\s+([^#]*)#", RegexOptions.IgnoreCase);
@@ -1371,9 +1383,10 @@ For: Package, Element, Diagram, Attribute, Operation"
             {
 
                 string replacement;
-                switch (rep.RepositoryType())
+                switch (RepType(rep))
                 {
                     case "JET":
+                    case "ACCESS":
                         replacement = $"Format({match.Groups[1].Value.Trim()})";
                         break;
                     case "MYSQL":
@@ -1381,6 +1394,44 @@ For: Package, Element, Diagram, Attribute, Operation"
                         break;
                     default:
                         replacement = $"{match.Groups[1].Value.Trim()}";
+                        break;
+                }
+                sql = sql.Replace(match.Groups[0].Value, replacement);
+                match = match.NextMatch();
+            }
+
+            return sql;
+        }
+        /// <summary>
+        /// macro ToBool
+        /// #ToBool string#
+        /// Returns the string 'TRUE', or 'FALSE'
+        /// MySQL: 0=FALSE, #0=TRUE
+        /// 
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <param name="sql"></param>
+        /// <returns>'true','false'</returns>
+
+        // ReSharper disable once InconsistentNaming
+        static string macroToBool(Repository rep, string sql)
+        {
+            Match match = Regex.Match(sql, @"#ToBool\s+([^#]*)#", RegexOptions.IgnoreCase);
+            while (match.Success)
+            {
+
+                string replacement;
+                switch (RepType(rep))
+                {
+                    case "JET":
+                    case "ACCESS":
+                        replacement = match.Groups[1].Value.Trim().ToLower();
+                        break;
+                    case "MYSQL":
+                        replacement = $"if({match.Groups[1].Value.Trim()} = 0,'FALSE','TRUE')";
+                        break;
+                    default:
+                        replacement = match.Groups[1].Value.Trim().ToLower();
                         break;
                 }
                 sql = sql.Replace(match.Groups[0].Value, replacement);
@@ -1406,16 +1457,21 @@ For: Package, Element, Diagram, Attribute, Operation"
             {
 
                 string replacement;
-                switch (rep.RepositoryType())
+                switch (RepType(rep))
                 {
                     case "JET":
+                    case "ACCESS":
                         replacement = $"Left({match.Groups[1].Value.Trim()},{match.Groups[2].Value.Trim()})";
                         break;
                     case "MYSQL":
                         replacement = $"Left({match.Groups[1].Value.Trim()},{match.Groups[2].Value.Trim()})";
                         break;
+                    case "SQLITE":
+                    case "SL3":
+                        replacement = $"Substr({match.Groups[1].Value.Trim()},1,{match.Groups[2].Value.Trim()})";
+                        break;
                     default:
-                        replacement = $"Substr({match.Groups[1].Value.Trim()},0,{match.Groups[2].Value.Trim()})";
+                        replacement = $"Substr({match.Groups[1].Value.Trim()},1,{match.Groups[2].Value.Trim()})";
                         break;
                 }
                 sql = sql.Replace(match.Groups[0].Value, replacement);
@@ -1440,20 +1496,21 @@ For: Package, Element, Diagram, Attribute, Operation"
                 {
 
                     string replacement;
-                    switch (rep.RepositoryType())
-                    {
-                        case "JET":
+                switch (RepType(rep))
+                {
+                    case "JET":
+                    case "ACCESS":
                             replacement = $"LCase({match.Groups[1].Value.Trim()})";
-                            break;
-                        case "MYSQL":
-                            replacement = $"Lower({match.Groups[1].Value.Trim()})";
-                            break;
-                        default:
-                            replacement = $"LCase({match.Groups[1].Value.Trim()})";
-                            break;
-                    }
-                    sql = sql.Replace(match.Groups[0].Value, replacement);
-                    match = match.NextMatch();
+                        break;
+                    case "MYSQL":
+                        replacement = $"Lower({match.Groups[1].Value.Trim()})";
+                        break;
+                    default:
+                        replacement = $"LCase({match.Groups[1].Value.Trim()})";
+                        break;
+                }
+                sql = sql.Replace(match.Groups[0].Value, replacement);
+                match = match.NextMatch();
                 }
             }
 
@@ -1477,14 +1534,20 @@ For: Package, Element, Diagram, Attribute, Operation"
             {
 
                 string replacement;
-                switch (rep.RepositoryType())
+                switch (RepType(rep))
                 {
                     case "JET":
+                    case "ACCESS":
                         replacement = $"Right({match.Groups[1].Value.Trim()},{match.Groups[2].Value.Trim()})";
                         break;
                     case "MYSQL":
-                        replacement = $"Right({match.Groups[1].Value.Trim()},{match.Groups[2].Value.Trim()})";
+                        replacement = $"Right({match.Groups[1].Value.Trim()}, {match.Groups[2].Value.Trim()})";
                         break;
+                    case "SQLITE":
+                    case "SL3":
+                        replacement = $"Substr({match.Groups[1].Value.Trim()}, -{match.Groups[2].Value.Trim()})";
+                        break;
+
                     default:
                         replacement = $"Right({match.Groups[1].Value.Trim()},{match.Groups[2].Value.Trim()})";
                         break;
@@ -1510,9 +1573,10 @@ For: Package, Element, Diagram, Attribute, Operation"
             {
 
                 string replacement;
-                switch (rep.RepositoryType())
+                switch (RepType(rep))
                 {
                     case "JET":
+                    case "ACCESS":
                         replacement = $"Mid({match.Groups[1].Value.Trim()},{match.Groups[2].Value.Trim()},{match.Groups[3].Value.Trim()})";
                         break;
                     case "MYSQL":
@@ -1539,18 +1603,23 @@ For: Package, Element, Diagram, Attribute, Operation"
 
         static string macroIf_ID(Repository rep, string sql)
         {
-            Match match = Regex.Match(sql, @"#If\s+([^,]*),\s*([^#]*),\s*([^#]*)#", RegexOptions.IgnoreCase);
+            Match match = Regex.Match(sql, @"#If\s+([^,]*),\s*([^#]*),\s*([^#]*)#",RegexOptions.IgnoreCase);
             while (match.Success)
             {
 
                 string replacement;
-                switch (rep.RepositoryType())
+                switch (RepType(rep))
                 {
                     case "JET":
+                    case "ACCESS":
                         replacement = $"iif({match.Groups[1].Value.Trim()},{match.Groups[2].Value.Trim()},{match.Groups[3].Value.Trim()})";
                         break;
                     case "MYSQL":
                         replacement = $"if({match.Groups[1].Value.Trim()},{match.Groups[2].Value.Trim()},{match.Groups[3].Value.Trim()})";
+                        break;
+                    case "SQLITE":
+                    case "SL3":
+                        replacement = $"iif({match.Groups[1].Value.Trim()},{match.Groups[2].Value.Trim()},{match.Groups[3].Value.Trim()})";
                         break;
                     default:
                         replacement = $"if({match.Groups[1].Value.Trim()},{match.Groups[2].Value.Trim()},{match.Groups[3].Value.Trim()})";
@@ -1565,6 +1634,8 @@ For: Package, Element, Diagram, Attribute, Operation"
         /// <summary>
         /// macro #InStr start, stack, needle#
         /// InStr: Searches for needle in stack and gives the position
+        ///
+        /// SQLITE StartPosition is always 1 (position rel. 1)
         /// </summary>
         /// <param name="rep"></param>
         /// <param name="sql"></param>
@@ -1577,15 +1648,21 @@ For: Package, Element, Diagram, Attribute, Operation"
             {
 
                 string replacement;
-                switch (rep.RepositoryType())
+                switch (RepType(rep))
                 {
                     case "JET":
+                    case "ACCESS":
                         // Instr(position,stack, needle)
                         replacement = $"InStr({match.Groups[1].Value.Trim()},{match.Groups[2].Value.Trim()},{match.Groups[3].Value.Trim()})";
                         break;
                     case "MYSQL":
                         // locate(needle, stack, needle)
                         replacement = $"locate({match.Groups[3].Value.Trim()},{match.Groups[2].Value.Trim()},{match.Groups[1].Value.Trim()})";
+                        break;
+                    case "SQLITE":
+                    case "SL3":
+                        // Instr(stack, needle)
+                        replacement = $"InStr({match.Groups[2].Value.Trim()},{match.Groups[1].Value.Trim()})";
                         break;
                     default:
                         replacement = $"InStr({match.Groups[1].Value.Trim()},{match.Groups[2].Value.Trim()},{match.Groups[3].Value.Trim()})";
@@ -1596,6 +1673,22 @@ For: Package, Element, Diagram, Attribute, Operation"
             }
 
             return sql;
+        }
+        /// <summary>
+        /// Repository type for macros
+        ///
+        /// Rational:
+        /// Adapt special Repository Types like:
+        /// - ACCESS
+        /// - ACCESS207
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <returns></returns>
+        private static string RepType(Repository rep)
+        {
+            string repType = rep.RepositoryType().ToUpper();
+            if (repType.StartsWith("ACCESS")) return "ACCESS";
+            return repType;
         }
     }
 }
