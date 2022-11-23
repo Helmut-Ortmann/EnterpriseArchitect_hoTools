@@ -711,7 +711,7 @@ For: Package, Element, Diagram, Attribute, Operation"
             // delete comments /*....
             s = Regex.Replace(s, @"/\*[^\n]*\n", "\r\n");
             // delete empty lines
-            s = Regex.Replace(s, "(\r\n){2,200}", "");
+            s = Regex.Replace(s, "(\r\n){2,200}", "\r\n");
             return s;
         }
         #endregion
@@ -742,8 +742,8 @@ For: Package, Element, Diagram, Attribute, Operation"
                 // Diagram selected?
                 if (dia == null)
                 {
-                    MessageBox.Show(sql, $@"No Diagram  for '{template}' selected!");
-                    sql = "";
+                    // replace by empty list
+                    sql = sql.Replace(template, $" 0 ");
                 }
                 else
                 {
@@ -783,8 +783,8 @@ For: Package, Element, Diagram, Attribute, Operation"
                 // Diagram selected?
                 if (dia == null)
                 {
-                    MessageBox.Show(sql, $@"No Diagram  for '{template}' selected!");
-                    sql = "";
+                    // replace by empty list
+                    sql = sql.Replace(template, $" 0 ");
                 }
                 else
                 {
@@ -824,8 +824,8 @@ For: Package, Element, Diagram, Attribute, Operation"
                 // Diagram selected?
                 if (dia == null)
                 {
-                    MessageBox.Show(sql, $@"No Diagram  for '{template}' selected!");
-                    sql = "";
+                    // Replace by empty list
+                    sql = sql.Replace(template, " 0 ");
                 }
                 else
                 {
@@ -892,8 +892,8 @@ For: Package, Element, Diagram, Attribute, Operation"
                 else
                 // no diagram, element or package selected
                 {
-                    MessageBox.Show(sql, @"No item (Package, Element, Diagram, Operation, Attribute) selected!");
-                    sql = "";
+                    // replace by empty list
+                    sql = sql.Replace(template, $" 0 ");
                 }
 
             }
@@ -946,8 +946,9 @@ For: Package, Element, Diagram, Attribute, Operation"
                 else
                 // no diagram, element or package selected
                 {
-                    MessageBox.Show(sql, @"No item (Package, Element, Diagram, Operation, Attribute) selected!");
-                    sql = "";
+                    // replace by empty list
+                    sql = sql.Replace(template, $" ' ' ");
+
                 }
 
             }
@@ -974,8 +975,8 @@ For: Package, Element, Diagram, Attribute, Operation"
                 else
                 // no diagram, element or package selected
                 {
-                    MessageBox.Show(sql, @"No element, diagram, package, attribute, operation selected!");
-                    sql = "";
+                    // replace by empty list
+                    sql = sql.Replace(currentPackageTemplate, $" 0 ");
                 }
 
             }
@@ -1094,10 +1095,10 @@ For: Package, Element, Diagram, Attribute, Operation"
                         sql = sql.Replace(currentConveyedItemTemplate, $"{conveyedItems}");
                     }
                 } else
-                // no connector selected
+                    // no connector selected
                 {
-                    MessageBox.Show(sql, @"No connector selected!");
-                    sql = "";
+                    // Replace by empty list
+                    sql = sql.Replace(currentConveyedItemTemplate, " 0 ");
                 }
             }
             return sql;
@@ -1143,8 +1144,8 @@ For: Package, Element, Diagram, Attribute, Operation"
                 }
                 else// no element in Browser selected
                 {
-                    MessageBox.Show(sql, @"No elements in browser of type Element(Class, Activity,..) selected, Break!!!!");
-                    sql = "";
+                        // Replace by empty list
+                        sql = sql.Replace(template, " ' ' ");
                 }
             }
             return sql;
@@ -1198,8 +1199,8 @@ For: Package, Element, Diagram, Attribute, Operation"
                 } else
                 // no diagram, element or package selected
                 {
-                    MessageBox.Show(sql, @"No element, diagram or package selected!");
-                    sql =  "";
+                    // Replace by empty list
+                    sql = sql.Replace(currentBranchTemplate, " 0 ");
                 }
             }
             return sql;
@@ -1238,7 +1239,7 @@ For: Package, Element, Diagram, Attribute, Operation"
                             MessageBox.Show($@"Package for GUID '{match.Groups[1].Value}' not found",
                                 @"GUID for #Branch={...}# not found, Break");
                             {
-                                return "";
+                                return sql;
                             }
                         }
                         int pkgId = pkg.PackageID;
@@ -1299,8 +1300,8 @@ For: Package, Element, Diagram, Attribute, Operation"
                 else
                 // no diagram, element or package selected
                 {
-                    MessageBox.Show(sql, @"No element, diagram or package selected!");
-                    sql = "";
+                    // Replace by empty list
+                    sql = sql.Replace(currentBranchTemplate, " 0 ");
                 }
             }
             return sql;

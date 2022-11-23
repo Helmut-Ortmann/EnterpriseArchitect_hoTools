@@ -15,6 +15,7 @@ using hoLinqToSql.LinqUtils;
 using hoTools.Utils.SQL;
 using System.IO;
 using hoTools.Utils.Sql;
+using DocumentFormat.OpenXml.Office2013.Drawing.ChartStyle;
 
 
 // ReSharper disable once CheckNamespace
@@ -209,9 +210,16 @@ namespace EAAddinFramework.Utils
             searchName = searchName.Trim();
             if (searchName == "") return "";
 
-            
+
             // SQL file?
-            string sqlFile = _globalCfg.GetSqlFileName(searchName);
+            string sqlFile = "";
+            // check valid file name
+            // contains no special character, no sql statement
+            if ( searchName.IndexOfAny(Path.GetInvalidPathChars()) == -1  && 
+                 ! searchName.Trim().ToLower().StartsWith("select") &&
+                 ! searchName.Trim().ToLower().StartsWith("delete") &&
+                 ! searchName.Trim().ToLower().StartsWith("update")
+                 ) sqlFile = _globalCfg.GetSqlFileName(searchName);
             if (sqlFile != "")
                
             {
@@ -235,7 +243,7 @@ namespace EAAddinFramework.Utils
                     LinqPadConnections = _globalCfg.LinqPadConnectionPath
                 };
 
-                Boolean result = linqPad.Run(linqPadFile, @"html", linqPad.GetArg(Repository, searchTerm));
+                bool result = linqPad.Run(linqPadFile, @"html", linqPad.GetArg(Repository, searchTerm));
                 if (!result) return "";
 
                 // output target to browser
@@ -291,6 +299,8 @@ namespace EAAddinFramework.Utils
         /// <returns>"" for nothing found or the EA SQL XML string with the found information</returns>
         public string SqlRun(string sqlName, string sql, string searchText, bool exportToExcel=false)
         {
+            // check sql name
+            if (String.IsNullOrWhiteSpace(sqlName)) sqlName = "UnnamedSql";
             // replace templates
             sql = SqlTemplates.ReplaceMacro(Repository, sql, searchText);
             if (String.IsNullOrWhiteSpace(sql)) return "";

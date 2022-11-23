@@ -3186,7 +3186,7 @@ namespace hoTools.hoToolsGui
             // 
             this.sQLSelectedElementsToolStripMenuItem.Name = "sQLSelectedElementsToolStripMenuItem";
             resources.ApplyResources(this.sQLSelectedElementsToolStripMenuItem, "sQLSelectedElementsToolStripMenuItem");
-            this.sQLSelectedElementsToolStripMenuItem.Click += new System.EventHandler(this.sQLSelectedElementsToolStripMenuItem_Click);
+            this.sQLSelectedElementsToolStripMenuItem.Click += new System.EventHandler(this.sqLSelectedElementsToolStripMenuItem_Click);
             // 
             // toolStripSeparator24
             // 
@@ -4727,7 +4727,7 @@ Information are Copied to Clipboard!
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void sQLSelectedElementsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void sqLSelectedElementsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (Repository == null) return;
             var searchText = "";
@@ -4812,7 +4812,7 @@ where o.object_id in (#DiagramSelectedElements_IDS#)
 
 order by 3 Desc,4,6
             ";
-            _model.SearchRun(sql, searchText);
+            _model.SqlRun("Show selected elements", sql, searchText);
         }
         /// <summary>
         /// SQL for current diagram
@@ -4876,7 +4876,7 @@ where l.diagramid = #Diagram_ID#
 order by 3 Desc,4,5,6
             ";
 
-            _model.SearchRun(sql, searchText);
+            _model.SqlRun( "Show Diagram content",sql, searchText);
         }
     }
 
