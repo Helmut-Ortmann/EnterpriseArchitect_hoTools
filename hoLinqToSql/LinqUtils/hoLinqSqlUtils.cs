@@ -290,13 +290,13 @@ namespace hoLinqToSql.LinqUtils
 
                     case "ACCESS2007":
                         provider = new AccessOleDbDataProvider();
-                        providerName = "Microsoft.Jet.OLEDB.4 .0";
+                        providerName = "Microsoft.ACE.OLEDB.12.0";
                         dsnConnectionString = GetConnectionStringForDsn(connectionString);
                         if (dsnConnectionString != "") return dsnConnectionString;
                         if (connectionString.ToLower().EndsWith(".eap") || connectionString.ToLower().EndsWith(".eapx"))
                         {
 
-                            return $"Provider=Microsoft.Jet.OLEDB.4.0;Data Source={connectionString};";
+                            return $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={connectionString};";
                         }
 
                         break;

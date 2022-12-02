@@ -129,6 +129,11 @@ Some features:
 
 ## Releases
 
+### 4.2.2 Fix SQL Access2007, detecting *.qea(x) files (Wildcards)
+ 
+- macro ConnectorID/Conveyed Items.
+- Debug registration of 64Bit AddIn
+
 ### 4.2.1 Fix SQL for Diagram and selected Elements from menu.
 
 ### 4.2 SQL for Diagram and selected Elements from menu.

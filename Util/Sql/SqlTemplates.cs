@@ -1051,6 +1051,7 @@ For: Package, Element, Diagram, Attribute, Operation"
                     {
                         
                         sql = sql.Replace(currentConnectorTemplate, $"{con.ConnectorID}");
+                        return sql;
                     }
                     // conveyed items are a comma separated list of elementIDs
                     if (sql.Contains(currentConveyedItemTemplate))
@@ -1099,6 +1100,7 @@ For: Package, Element, Diagram, Attribute, Operation"
                 {
                     // Replace by empty list
                     sql = sql.Replace(currentConveyedItemTemplate, " 0 ");
+                    sql = sql.Replace(currentConnectorTemplate, " 0 ");
                 }
             }
             return sql;

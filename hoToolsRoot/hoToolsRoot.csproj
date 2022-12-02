@@ -246,22 +246,26 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>if $(Configuration) == Release  (
-      echo ==== heat collect dll file
+      echo ==== heat collect dll file for x86 (needed for x86+x64)
       "C:\Program Files (x86)\WiX Toolset v3.11\bin\heat" file "$(ProjectDir)bin\x86\$(Configuration)\hoToolsRoot.DLL" -v -dr APPLICATIONFOLDER -srd -gg -g1 -cg COM_DllRoot  -sfrag -suid  -var var.hoToolsRoot.TargetDir -out "$(TargetDir)\hoToolsRoot.DLL.wxs" 
 )
 if $(Platform) == x64 (
-      echo ==== Register for x64 ===================
-      regedit /Sf "$(SolutionDir)SetupX64\Scripts\hoTools.reg"
+
       if $(Configuration) == Debug (
-         echo ==== copy $(TargetDir)x64\sqlite.interop.dll $(TargetDir)===
-         copy $(TargetDir)x64\sqlite.interop.dll $(TargetDir)
+          echo ==== Register for x64 "$(SolutionDir)SetupX64\Scripts\hoTools64Bit.reg" =======
+          regedit /Sf "$(SolutionDir)Setup64\Scripts\hoTools64Bit.reg"
+          echo ==== copy $(TargetDir)x64\sqlite.interop.dll $(TargetDir)===
+          copy $(TargetDir)x64\sqlite.interop.dll $(TargetDir)
     )
 )
 
 if $(Platform) == x86 (
-    echo ==== register x86
-    regedit /Sf "$(SolutionDir)Setup\Scripts\hoTools.reg"
+    if $(Configuration) == Debug (
+        echo ==== register x86
+        regedit /Sf "$(SolutionDir)Setup\Scripts\hoTools.reg"
+   )
 )
+
 </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

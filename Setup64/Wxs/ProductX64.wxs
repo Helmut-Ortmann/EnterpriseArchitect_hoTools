@@ -28,7 +28,7 @@
        The Scripts you find in: Setup\Script\..
        see also: http://kentie.net/article/wixnameversion/index.htm
   -->
-  <?define ProductVersion="4.2.1" ?> 
+  <?define ProductVersion="4.2.2" ?> 
   <?define UpgradeCode="307AA3B0-18F4-4DC4-9E82-3B60DE424434" ?>
   <?define Manufacturer="ho" ?>
   <?define ProductName="hoToolsX64" ?>

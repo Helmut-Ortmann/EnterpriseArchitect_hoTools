@@ -28,18 +28,20 @@ namespace hoTools.Utils.SQL
         /// 7 - OPENEDGE
         /// 8 - ACCESS2007
         /// 9 - FireBird
+        /// 10 - SQLite
         /// </summary>
         public enum RepositoryType
         {
-            MySql,
-            SqlSvr,
-            AdoJet,
-            Oracle,
-            Postgres,
-            Asa,
-            Openedge,
-            Access2007,
-            Firebird,
+            MySql,      // 0 DBType number of EA connection string
+            SqlSvr,     // 1
+            AdoJet,     // 2
+            Oracle,     // 3
+            Postgres,   // 4
+            Asa,        // 5
+            Openedge,   // 7
+            Access2007, // 8
+            Firebird,   // 9
+            SQLite,     // 10
             Other,
             Unknown
         }
@@ -104,6 +106,43 @@ namespace hoTools.Utils.SQL
                         }
                     }
                 }
+                //if it is a .qea file we check the size of it. if less then 1 MB then it is a shortcut file and we have to open it as a text file to find the actual connection string
+                if (connectionString.ToLower().EndsWith(".qea", StringComparison.CurrentCulture) ||
+                    connectionString.ToLower().EndsWith(".qeax", StringComparison.CurrentCulture))
+                {
+                    var fileInfo = new System.IO.FileInfo(connectionString);
+                    if (fileInfo.Length > 1000)
+                    {
+                        //local .qea / *.qeax file, ms access syntax
+                        repoType = RepositoryType.SQLite;
+                    }
+                    else
+                    {
+                        //open the file as a text file to find the connection string.
+                        var fileStream = new System.IO.FileStream(connectionString, System.IO.FileMode.Open,
+                            System.IO.FileAccess.Read, System.IO.FileShare.ReadWrite);
+                        var reader = new System.IO.StreamReader(fileStream);
+                        //replace connection string with the file contents
+                        connectionString = reader.ReadToEnd();
+                        reader.Close();
+                    }
+                }
+                if (!(connectionString.ToLower().EndsWith(".qea", StringComparison.CurrentCulture) ||
+                       connectionString.ToLower().EndsWith(".qeax", StringComparison.CurrentCulture)
+                       ))
+                {
+                    string dbTypeString = "DBType=";
+                    int dbIndex = connectionString.IndexOf(dbTypeString, StringComparison.CurrentCulture) +
+                                  dbTypeString.Length;
+                    if (dbIndex > dbTypeString.Length)
+                    {
+                        string dbNumberString = connectionString.Substring(dbIndex, 1);
+                        if (int.TryParse(dbNumberString, out int dbNumber))
+                        {
+                            repoType = (RepositoryType)dbNumber;
+                        }
+                    }
+                }
             }
             return repoType;
         }
@@ -124,7 +163,7 @@ namespace hoTools.Utils.SQL
         public static string ReplaceSqlWildCards(EA.Repository rep, string sqlQuery, RepositoryType repositoryType = RepositoryType.Unknown)
         {
             if (repositoryType == RepositoryType.Unknown) repositoryType = GetRepositoryType(rep);
-            bool msAccess = repositoryType == RepositoryType.AdoJet;
+            bool isJet = repositoryType == RepositoryType.AdoJet;
             int beginLike = sqlQuery.IndexOf("like", StringComparison.InvariantCultureIgnoreCase);
             if (beginLike > 1)
             {
@@ -141,7 +180,7 @@ namespace hoTools.Utils.SQL
                     {
                         string originalLikeString = sqlQuery.Substring(beginString + 1, endString - beginString);
                         string likeString = originalLikeString;
-                        if (msAccess)
+                        if (isJet)
                         {
                             likeString = likeString.Replace("#WC#", "*");
                             likeString = likeString.Replace('%', '*');
