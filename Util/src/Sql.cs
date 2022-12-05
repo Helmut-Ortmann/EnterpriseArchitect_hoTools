@@ -53,98 +53,41 @@ namespace hoTools.Utils.SQL
         }
         #endregion
 
+
+        private static string[] lRepoTypes =
+        {
+            "MYSQL", "SQLSRV","JET", "ORACLE", "POSTGRES", "unknown", "ACCESS2007", "FIREBIRD","SL3"   // SL3=SQLite 
+        };
+
+        /// <summary>
+        /// Repository type for macros
+        ///
+        /// Rational:
+        /// Adapt special Repository Types like:
+        /// - ACCESS
+        /// - ACCESS207
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <returns></returns>
+        private static string RepType(Repository rep)
+        {
+            string repType = rep.RepositoryType().ToUpper();
+            if (repType.StartsWith("ACCESS")) return "ACCESS";
+            return repType;
+        }
         /// <summary>
         /// Gets the rep type for this model
         /// </summary>
         /// <returns></returns>
         public static RepositoryType GetRepositoryType(EA.Repository rep)
         {
+            var pos = Array.FindIndex(lRepoTypes, x => x == rep.RepositoryType());
+
             string connectionString = rep.ConnectionString;
             RepositoryType repoType = RepositoryType.AdoJet; //default to .eap file
-
-            // if it is a .feap file then it surely is a Firebird db
-            if (connectionString.ToLower().EndsWith(".feap", StringComparison.Ordinal))
-            {
-                repoType = RepositoryType.Firebird;
-            }
-            else
-            {
-                //if it is a .eap file we check the size of it. if less then 1 MB then it is a shortcut file and we have to open it as a text file to find the actual connection string
-                if (connectionString.ToLower().EndsWith(".eap", StringComparison.CurrentCulture) ||
-                    connectionString.ToLower().EndsWith(".eapx", StringComparison.CurrentCulture))
-                {
-                    var fileInfo = new System.IO.FileInfo(connectionString);
-                    if (fileInfo.Length > 1000)
-                    {
-                        //local .eap / *.eapx file, ms access syntax
-                        repoType = RepositoryType.AdoJet;
-                    }
-                    else
-                    {
-                        //open the file as a text file to find the connection string.
-                        var fileStream = new System.IO.FileStream(connectionString, System.IO.FileMode.Open,
-                            System.IO.FileAccess.Read, System.IO.FileShare.ReadWrite);
-                        var reader = new System.IO.StreamReader(fileStream);
-                        //replace connection string with the file contents
-                        connectionString = reader.ReadToEnd();
-                        reader.Close();
-                    }
-                }
-                if (! (connectionString.ToLower().EndsWith(".eap", StringComparison.CurrentCulture) ||
-                       connectionString.ToLower().EndsWith(".eapx", StringComparison.CurrentCulture)
-                       ))
-                {
-                    string dbTypeString = "DBType=";
-                    int dbIndex = connectionString.IndexOf(dbTypeString, StringComparison.CurrentCulture) +
-                                  dbTypeString.Length;
-                    if (dbIndex > dbTypeString.Length)
-                    {
-                        string dbNumberString = connectionString.Substring(dbIndex, 1);
-                        if (int.TryParse(dbNumberString, out int dbNumber))
-                        {
-                            repoType = (RepositoryType)dbNumber;
-                        }
-                    }
-                }
-                //if it is a .qea file we check the size of it. if less then 1 MB then it is a shortcut file and we have to open it as a text file to find the actual connection string
-                if (connectionString.ToLower().EndsWith(".qea", StringComparison.CurrentCulture) ||
-                    connectionString.ToLower().EndsWith(".qeax", StringComparison.CurrentCulture))
-                {
-                    var fileInfo = new System.IO.FileInfo(connectionString);
-                    if (fileInfo.Length > 1000)
-                    {
-                        //local .qea / *.qeax file, ms access syntax
-                        repoType = RepositoryType.SQLite;
-                    }
-                    else
-                    {
-                        //open the file as a text file to find the connection string.
-                        var fileStream = new System.IO.FileStream(connectionString, System.IO.FileMode.Open,
-                            System.IO.FileAccess.Read, System.IO.FileShare.ReadWrite);
-                        var reader = new System.IO.StreamReader(fileStream);
-                        //replace connection string with the file contents
-                        connectionString = reader.ReadToEnd();
-                        reader.Close();
-                    }
-                }
-                if (!(connectionString.ToLower().EndsWith(".qea", StringComparison.CurrentCulture) ||
-                       connectionString.ToLower().EndsWith(".qeax", StringComparison.CurrentCulture)
-                       ))
-                {
-                    string dbTypeString = "DBType=";
-                    int dbIndex = connectionString.IndexOf(dbTypeString, StringComparison.CurrentCulture) +
-                                  dbTypeString.Length;
-                    if (dbIndex > dbTypeString.Length)
-                    {
-                        string dbNumberString = connectionString.Substring(dbIndex, 1);
-                        if (int.TryParse(dbNumberString, out int dbNumber))
-                        {
-                            repoType = (RepositoryType)dbNumber;
-                        }
-                    }
-                }
-            }
+            if (pos > -1) repoType = (RepositoryType)pos+1;
             return repoType;
+
         }
 
         /// <summary>
@@ -162,7 +105,7 @@ namespace hoTools.Utils.SQL
         /// <returns>the same sql query, but with its wild cards replaced according to the required syntax</returns>
         public static string ReplaceSqlWildCards(EA.Repository rep, string sqlQuery, RepositoryType repositoryType = RepositoryType.Unknown)
         {
-            if (repositoryType == RepositoryType.Unknown) repositoryType = GetRepositoryType(rep);
+            repositoryType = GetRepositoryType(rep);
             bool isJet = repositoryType == RepositoryType.AdoJet;
             int beginLike = sqlQuery.IndexOf("like", StringComparison.InvariantCultureIgnoreCase);
             if (beginLike > 1)

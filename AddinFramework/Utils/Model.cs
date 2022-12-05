@@ -28,7 +28,7 @@ namespace EAAddinFramework.Utils
         public EA.App EaApp { get; }
         static string _applicationFullPath;
         IWin32Window _mainEaWindow;
-        UtilSql.RepositoryType? _repositoryType; // a null able type
+
 
         // configuration as singleton
         readonly HoToolsGlobalCfg _globalCfg = HoToolsGlobalCfg.Instance;
@@ -93,17 +93,7 @@ namespace EAAddinFramework.Utils
         /// returns the type of repository backend.
         /// This is mostly needed to adjust to sql to the specific sql dialect
         /// </summary>
-        public UtilSql.RepositoryType RepositoryType
-        {
-            get
-            {
-                if (!_repositoryType.HasValue)
-                {
-                    _repositoryType = UtilSql.GetRepositoryType(Repository);
-                }
-                return _repositoryType.Value;
-            }
-        }
+        public UtilSql.RepositoryType RepositoryType => UtilSql.GetRepositoryType(Repository);
 
         /// <summary>
         /// the main EA window to use when opening properties dialogs
@@ -765,6 +755,7 @@ namespace EAAddinFramework.Utils
         //#DB=ORACLE#             DB specif SQL for Oracle
         //#DB=POSTGRES#           DB specif SQL for POSTGRES
         //#DB=SqlSvr#             DB specif SQL for SQL Server
+        //#DB=SQLite#             DB specif SQL for SQLite
         string FormatSqldBspecific(string sql) {
             // available DBs
             var dbs = new Dictionary<UtilSql.RepositoryType, string>()
@@ -777,7 +768,9 @@ namespace EAAddinFramework.Utils
                 { UtilSql.RepositoryType.Oracle, "#DB=ORACLE#" },
                 { UtilSql.RepositoryType.Postgres, "#DB=POSTGRES#" },
                 { UtilSql.RepositoryType.SqlSvr, "#DB=SqlSvr#" },
-                { UtilSql.RepositoryType.Other, "#DB=Other#" }
+                { UtilSql.RepositoryType.Other, "#DB=Other#" },
+                { UtilSql.RepositoryType.SQLite, "#DB=SQLITE#" }
+
             };
             UtilSql.RepositoryType dbType = UtilSql.GetRepositoryType(Repository);
             string s = sql;
@@ -791,7 +784,7 @@ namespace EAAddinFramework.Utils
                 
             }
             // delete remaining DB identifying string
-            s = Regex.Replace(s, @"#DB=(Asa|FIREBIRD|JET|MySql|ORACLE|ACCESS2007|POSTGRES|SqlSvr)#", "", RegexOptions.Multiline | RegexOptions.IgnoreCase);
+            s = Regex.Replace(s, @"#DB=(Asa|FIREBIRD|JET|MySql|ORACLE|ACCESS2007|POSTGRES|SqlSvr|SQLITE)#", "", RegexOptions.Multiline | RegexOptions.IgnoreCase);
             
             // delete multiple empty lines
             for (int i = 0;  i < 4;i++)

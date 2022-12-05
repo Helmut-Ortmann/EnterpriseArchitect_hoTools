@@ -158,6 +158,7 @@ ORDER BY pkg.Name
                 "// Help to available Macros\r\n" +
                 "// - #Branch#                    Replaced by the package ID of the selected package and all nested package like '512, 31,613' \r\nTip: Select Package while inserting via Macro" +
                 "// - #Branch={...guid....}#      Replaced by the package ID of the package according to GUID and all nested package like '512, 31,613' \r\n" +
+                "// - #Concat= <value1>, <value2>,..# Provides a method of concatenating two or more SQL terms into one string, independent of the database type." +
                 "// - #ConnectorID#              Selected Connector, Replaced by ConnectorID\r\n" +
                 "// - #ConveyedItemIDS#           Selected Connector, Replaced by the Conveyed Items as comma separated list of ElementIDs like ' IN (#ConveyedItemIDS#)'\r\n" +
                 "// - #CurrentElementGUID#        Alias for #CurrentItemGUID# (compatible to EA)\r\n" +
@@ -182,6 +183,8 @@ ORDER BY pkg.Name
                 "// - DB=ORACLE#                  DB specif SQL for Oracle\r\n"+
                 "// - #DB=POSTGRES#               DB specif SQL for POSTGRES\r\n"+
                 "// - #DB=SQLSVR#                 DB specif SQL for SQL Serve\r\n"+
+                "// - #DB=SL3#                    DB specif SQL for SQLITE\r\n"+
+                "// - #DB=SQLITE#                 DB specif SQL for SQLITE\r\n"+
 
                 "//\r\n" +
                 "select o.ea_guid AS CLASSGUID, o.object_type AS CLASSTYPE,o.Name AS Name,o.object_type As Type, * \r\n" +
@@ -429,7 +432,19 @@ For: Package, Element, Diagram, Attribute, Operation"
              { SqlTemplateId.DbFirebird,
                 new SqlTemplate("DB_FIREBIRD",
                     "#DB=FIREBIRD#                             #DB=FIREBIRD#",
-                    "The SQL string for other DBs included by #DB=FIREBIRD#, #DB=FIREBIRD#     ...my db sql....#DB=FIREBIRD#") }
+                    "The SQL string for other DBs included by #DB=FIREBIRD#, #DB=FIREBIRD#     ...my db sql....#DB=FIREBIRD#") },
+             { SqlTemplateId.DbSl3,
+                 new SqlTemplate("DB_SL3",
+                     "#DB=SL3#                             #DB=SL3#",
+                     "The SQL string for other DBs included by #DB=SL3#, #DB=SL3#     ...my db sql....#DB=SL3#") },
+             { SqlTemplateId.DbSqLite,
+                 new SqlTemplate("DB_SQLITE",
+                     "#DB=SQLITE#                             #DB=SQLITE#",
+                     "The SQL string for other DBs included by #DB=SQLITE#, #DB=SQLITE#     ...my db sql....#DB=SQLITE#") },
+             { SqlTemplateId.DbOther,
+                 new SqlTemplate("DB_Other",
+                     "#DB=Other#                             #DB=Other#",
+                     "The SQL string for other DBs (EA16)") }
 
 
         };
@@ -449,6 +464,8 @@ For: Package, Element, Diagram, Attribute, Operation"
             DbPostgres,
             DbFirebird,
             DbJet,
+            DbSl3,
+            DbSqLite,
 
             BranchTemplate,   // Branch Template
             ElementTemplate,
@@ -615,13 +632,15 @@ For: Package, Element, Diagram, Attribute, Operation"
             // if #If condition, trueValue, falseValue#
             sql = macroIf_ID(rep, sql);
 
-            // if #If condition, trueValue, falseValue#
+            // if #ToString str#
             sql = macroToString(rep, sql);
 
-            // if #If condition, trueValue, falseValue#
+             // if #ToBool str#
+            sql = macroToBool(rep, sql);
+            // if #Left string count#
             sql = macroLeft_ID(rep, sql);
 
-            // #Right string, position#
+            // #Right string, count#
             sql = macroRight_ID(rep, sql);
 
             // #SubString string, start, length#
@@ -675,6 +694,9 @@ For: Package, Element, Diagram, Attribute, Operation"
             sql = MacroBranchConstant(rep, sql);
             if (sql == "") return "";
 
+            // replace #Branch={...guid....}# by a list of nested packages
+            sql = MacroBranchConstantPackage(rep, sql);
+            if (sql == "") return "";
 
             // Replace #WC# (DB wile card)
             // Later '*' is changed to the wild card of the current DB
@@ -716,601 +738,6 @@ For: Package, Element, Diagram, Attribute, Operation"
         }
         #endregion
         /// <summary>
-        /// Replace macro #Diagram_ID# by Diagram_Id of the current diagram or selected Diagram.
-        /// </summary>
-        /// <param name="rep"></param>
-        /// <param name="sql"></param>
-        /// <returns>sql string with replaced macro</returns>
-        static string macroDiagram_ID(Repository rep, string sql)
-        {
-            // get template
-            string template = GetTemplateText(SqlTemplateId.DiagramId);
-
-            // template is used
-            if (sql.Contains(template))
-            {
-                // get the diagram
-                EA.Diagram dia;
-                if (rep.GetContextItemType() == ObjectType.otDiagram)
-                {
-                    dia = (EA.Diagram)rep.GetContextObject();
-                }
-                else
-                {
-                    dia = rep.GetCurrentDiagram();
-                }
-                // Diagram selected?
-                if (dia == null)
-                {
-                    // replace by empty list
-                    sql = sql.Replace(template, $" 0 ");
-                }
-                else
-                {
-                    // replace by list of IDs
-                    sql = sql.Replace(template, $"{dia.DiagramID}");
-                }
-
-            }
-            return sql;
-        }
-
-
-        /// <summary>
-        /// Replace macro #DiagramElements_IDS# by a comma separated list of all Element IDs in diagram.
-        /// <para/>
-        /// If no Element is in the diagram it return '0' for an empty list (not existing ID).
-        /// </summary>
-        /// <param name="rep"></param>
-        /// <param name="sql">The sql string to replace the macro by the found list of Diagram Element IDs</param>
-        /// <returns>sql string with replaced macro</returns>
-        static string macroDiagramElements_IDS(Repository rep, string sql) {
-            // get template
-            string template = GetTemplateText(SqlTemplateId.DiagramElementsIds);
-
-            // template is used
-            if (sql.Contains(template))
-            {
-                // get the diagram
-                EA.Diagram dia;
-                if (rep.GetContextItemType() == ObjectType.otDiagram)
-                {
-                    dia = (EA.Diagram)rep.GetContextObject();
-                } else
-                {
-                    dia = rep.GetCurrentDiagram();
-                }
-                // Diagram selected?
-                if (dia == null)
-                {
-                    // replace by empty list
-                    sql = sql.Replace(template, $" 0 ");
-                }
-                else
-                {
-                    // make a list of comma separated IDs
-                    string listId = "0";
-                    foreach (var el in dia.DiagramObjects)
-                    {
-                        int id = ((EA.DiagramObject)el).ElementID;
-                        listId = $"{listId},{id}";
-                    }
-
-                    // replace by list of IDs
-                    sql = sql.Replace(template, $"{listId}");
-                }
-                
-            }
-            return sql;
-        }
-        /// <summary>
-        /// Replace macro #DiagramElements_IDS# by a comma separated list of all Element IDs in diagram.
-        /// <para/>
-        /// If no Element is in the diagram it return '0' for an empty list (not existing ID).
-        /// </summary>
-        /// <param name="rep"></param>
-        /// <param name="sql">The sql string to replace the macro by the found list of Diagram Element IDs</param>
-        /// <returns>sql string with replaced macro</returns>
-        static string macroDiagramSelectedElements_IDS(Repository rep, string sql)
-        {
-            // get template
-            string template = GetTemplateText(SqlTemplateId.DiagramSelectedElementsIds);
-
-            // template is used
-            if (sql.Contains(template))
-            {
-                // get the diagram
-                EA.Diagram dia = rep.GetContextItemType() == ObjectType.otDiagram ? (EA.Diagram)rep.GetContextObject() : rep.GetCurrentDiagram();
-                // Diagram selected?
-                if (dia == null)
-                {
-                    // Replace by empty list
-                    sql = sql.Replace(template, " 0 ");
-                }
-                else
-                {
-                    // make a list of comma separated IDs
-                    string listId = "0";
-                    foreach (var el in dia.SelectedObjects)
-                    {
-                        int id = ((EA.DiagramObject)el).ElementID;
-                        listId = $"{listId},{id}";
-
-                    }
-
-                    // replace by list of IDs
-                    sql = sql.Replace(template, $"{listId}");
-                }
-            }
-            return sql;
-        }
-        /// <summary>
-        /// Replace macro #CURRENT_ITEM_ID# by the ID of the currently selected Item.
-        /// Because ID is ambiguous better use #CurrentItemGuid#
-        /// Alias: #CurrentElementID#
-        /// </summary>
-        /// <param name="rep"></param>
-        /// <param name="sql">The sql string to replace the macro by the found ID</param>
-        /// <returns>sql string with replaced macro</returns>
-        static string macroItem_ID(Repository rep, string sql)
-        {
-            // replace ID
-            string template = GetTemplateText(SqlTemplateId.CurrentItemId);
-            if (sql.Contains(template) | sql.Contains("#CurrentElementID#"))
-            {
-                ObjectType objectType = rep.GetContextItemType();
-                int id = 0;
-                switch (objectType)
-                {
-                    case ObjectType.otElement:
-                        EA.Element el = (EA.Element)rep.GetContextObject();
-                        id = el.ElementID;
-                        break;
-                    case ObjectType.otDiagram:
-                        EA.Diagram dia = (EA.Diagram)rep.GetContextObject();
-                        id = dia.DiagramID;
-                        break;
-                    case ObjectType.otPackage:
-                        EA.Package pkg = (EA.Package)rep.GetContextObject();
-                        id = pkg.PackageID;
-                        break;
-                    case ObjectType.otAttribute:
-                        Attribute attr = (Attribute)rep.GetContextObject();
-                        id = attr.AttributeID;
-                        break;
-                    case ObjectType.otMethod:
-                        Method method = (Method)rep.GetContextObject();
-                        id = method.MethodID;
-                        break;
-                }
-
-                if (id > 0)
-                {
-                    sql = sql.Replace(template, $"{id}");
-                    sql = sql.Replace("#CurrentElementID#", $"{id}");// Alias for EA compatibility
-                }
-                else
-                // no diagram, element or package selected
-                {
-                    // replace by empty list
-                    sql = sql.Replace(template, $" 0 ");
-                }
-
-            }
-            return sql;
-        }
-        /// <summary>
-        /// Replace macro #CurrentItemGUID# by the GUID of the currently selected Item.
-        /// Alias: #CurrentElementGUID#
-        /// </summary>
-        /// <param name="rep"></param>
-        /// <param name="sql">The sql string to replace the macro by the found ID</param>
-        /// <returns>sql string with replaced macro</returns>
-        static string macroItem_GUID(Repository rep, string sql)
-        {
-            // replace ID
-            string template = GetTemplateText(SqlTemplateId.CurrentItemGuid);
-            if (sql.Contains(template) | sql.Contains("#CurrentElementGUID#")) 
-            {
-                ObjectType objectType = rep.GetContextItemType();
-                string guid = "";
-                switch (objectType)
-                {
-                    case ObjectType.otElement:
-                        EA.Element el = (EA.Element)rep.GetContextObject();
-                        guid = el.ElementGUID;
-                        break;
-                    case ObjectType.otDiagram:
-                        EA.Diagram dia = (EA.Diagram)rep.GetContextObject();
-                        guid = dia.DiagramGUID;
-                        break;
-                    case ObjectType.otPackage:
-                        EA.Package pkg = (EA.Package)rep.GetContextObject();
-                        guid = pkg.PackageGUID;
-                        break;
-                    case ObjectType.otAttribute:
-                        Attribute attr = (Attribute)rep.GetContextObject();
-                        guid = attr.AttributeGUID;
-                        break;
-                    case ObjectType.otMethod:
-                        Method method = (Method)rep.GetContextObject();
-                        guid = method.MethodGUID;
-                        break;
-                }
-
-                if (guid != "")
-                {
-                    sql = sql.Replace(template, $"{guid}");
-                    sql = sql.Replace("#CurrentElementGUID#", $"{guid}");// Alias for EA compatibility
-                }
-                else
-                // no diagram, element or package selected
-                {
-                    // replace by empty list
-                    sql = sql.Replace(template, $" ' ' ");
-
-                }
-
-            }
-            return sql;
-        }
-        /// <summary>
-        /// Replace macro #PackageID# of the selected Diagram, Element, Package, Attribute, Operation by the ID of the containing Package.
-        /// </summary>
-        /// <param name="rep"></param>
-        /// <param name="sql">The sql string to replace the macro by the found ID</param>
-        /// <returns>sql string with replaced macro</returns>
-        static string MacroPackageId(Repository rep, string sql)
-        {
-            // Package ID
-            string currentPackageTemplate = GetTemplateText(SqlTemplateId.PackageId);
-            if (sql.Contains(currentPackageTemplate))
-            {
-                // get Package id
-                int id = GetParentPackageIdFromContextElement(rep);
-                if (id > 0)
-                {
-                    sql = sql.Replace(currentPackageTemplate, $"{id}");
-                }
-                else
-                // no diagram, element or package selected
-                {
-                    // replace by empty list
-                    sql = sql.Replace(currentPackageTemplate, $" 0 ");
-                }
-
-            }
-            return sql;
-        }
-
-        /// <summary>
-        /// Get containing Package ID from context element of Package, Element, Diagram, Attribute, Operation
-        /// </summary>
-        /// <param name="rep"></param>
-        /// <returns></returns>
-        static int GetParentPackageIdFromContextElement(Repository rep)
-        {
-            ObjectType objectType = rep.GetContextItemType();
-            int id = 0;
-            switch (objectType)
-            {
-                case ObjectType.otDiagram:
-                    EA.Diagram dia = (EA.Diagram)rep.GetContextObject();
-                    id = dia.PackageID;
-                    break;
-                case ObjectType.otElement:
-                    EA.Element el = (EA.Element)rep.GetContextObject();
-                    id = el.PackageID;
-                    break;
-                case ObjectType.otPackage:
-                    EA.Package pkg = (EA.Package)rep.GetContextObject();
-                    id = pkg.PackageID;
-                    break;
-                case ObjectType.otAttribute:
-                    Attribute attr = (Attribute)rep.GetContextObject();
-                    EA.Element elOfAttr = rep.GetElementByID(attr.ParentID);
-                    id = elOfAttr.PackageID;
-                    break;
-                case ObjectType.otMethod:
-                    Method meth = (Method)rep.GetContextObject();
-                    EA.Element elOfMeth = rep.GetElementByID(meth.ParentID);
-                    id = elOfMeth.PackageID;
-                    break;
-            }
-
-            return id;
-        }
-
-        /// <summary>
-        /// Connector macros: ConnectorID and ConveyedItemIDS
-        /// Note: If Element connector 
-        /// <para/>
-        /// Replace macro #ConnectorID# by the ID of the selected connector.
-        /// <para/>
-        /// Replace macro #ConveyedItemIDS# by the IDs of conveyed Elements of the selected connector.
-        /// </summary>
-        /// <param name="rep"></param>
-        /// <param name="sql">The sql string to replace the macro by the found ID</param>
-        /// <returns>sql string with replaced macro</returns>
-        static string MacroConnector(Repository rep, string sql)
-        {
-            //--------------------------------------------------------------------------------------------
-            // CONNECTOR ID
-            // CONVEYED_ITEM_ID
-            string currentConnectorTemplate = GetTemplateText(SqlTemplateId.ConnectorId);
-            string currentConveyedItemTemplate = GetTemplateText(SqlTemplateId.ConveyedItemIds);
-
-            if ((sql.Contains(currentConnectorTemplate) | sql.Contains(currentConveyedItemTemplate)))
-            {
-                // connector
-                if (rep.GetContextItemType() == ObjectType.otConnector)
-                {
-                    // connector ID
-                    Connector con = (EA.Connector)rep.GetContextObject();
-                    if (sql.Contains(currentConnectorTemplate))
-                    {
-                        
-                        sql = sql.Replace(currentConnectorTemplate, $"{con.ConnectorID}");
-                        return sql;
-                    }
-                    // conveyed items are a comma separated list of elementIDs
-                    if (sql.Contains(currentConveyedItemTemplate))
-                    {
-
-                        // to avoid syntax error, 0 will never fit any conveyed item
-                        string conveyedItems = "0";
-
-                        // first get "InformationFlows" which carries the conveyed items
-                        if (con.MetaType == "Connector" || con.MetaType == "Sequence")
-                        {
-                            // get semicolon delimiter list of information flow guids
-                            string sqlInformationFlows = "select x.description " +
-                                                         "    from  t_xref x " +
-                                                         $"    where x.client = '{con.ConnectorGUID}' ";
-
-                            // get semicolon delimiter list of guids of all dependent connectors/information flows
-                            List<string> lFlows = rep.GetStringsBySql(sqlInformationFlows);
-                            foreach (string flowGuids in lFlows) { 
-                                string[] lFlowGuid = flowGuids.Split(',');
-                                foreach (string flowGuid in lFlowGuid)
-                                {
-                                    Connector flow = rep.GetConnectorByGuid(flowGuid);
-                                    foreach (EA.Element el in flow.ConveyedItems)
-                                    {
-                                        conveyedItems = $"{conveyedItems}, {el.ElementID}";
-                                    }
-                                }
-
-                            }
-                        }
-                        else
-                        {
-
-
-                            foreach (EA.Element el in con.ConveyedItems)
-                            {
-                                conveyedItems = $"{conveyedItems}, {el.ElementID}";
-                            }
-
-                        }
-                        sql = sql.Replace(currentConveyedItemTemplate, $"{conveyedItems}");
-                    }
-                } else
-                    // no connector selected
-                {
-                    // Replace by empty list
-                    sql = sql.Replace(currentConveyedItemTemplate, " 0 ");
-                    sql = sql.Replace(currentConnectorTemplate, " 0 ");
-                }
-            }
-            return sql;
-        }
-
-
-        /// <summary>
-        /// Replace macro #TreeSelectedGUIDS# by GUIDs of selected Items of Browser
-        /// </summary>
-        /// <param name="rep"></param>
-        /// <param name="sql">The sql string to replace the macro by the found ID</param>
-        /// <returns>sql string with replaced macro</returns>
-        static string MacroTreeSelected(Repository rep, string sql)
-        {
-            //--------------------------------------------------------------------------------------------
-            // Tree selected items
-            // CONVEYED_ITEM_ID
-            string template = GetTemplateText(SqlTemplateId.TreeSelectedGuids);
-
-
-            if (sql.Contains(template))
-            {
-                // get the selected elements (Element)
-                string guiDs = "";
-                string comma = "";
-                Collection col = rep.GetTreeSelectedElements();
-                foreach (var el in col)
-                {
-                    var guid = ((EA.Element)el).ElementGUID;
-
-                    // make list
-                    if (guid != "")
-                    {
-                        guiDs = $"{guiDs}{comma}'{guid}'";
-                        comma = ", ";
-                    }
-                }
-                // at least one element selected
-                if (guiDs != "")
-                {
-                    // replace by list of GUIDs
-                    sql = sql.Replace(template, $"{guiDs}");
-                }
-                else// no element in Browser selected
-                {
-                        // Replace by empty list
-                        sql = sql.Replace(template, " ' ' ");
-                }
-            }
-            return sql;
-        }
-
-        /// <summary>
-        /// Replace macro #Branch# and #InBranch# by IDs of selected packages, recursive nested. 
-        /// </summary>
-        /// <param name="rep"></param>
-        /// <param name="sql">The sql string to replace the macro by the found ID</param>
-        /// <returns>sql string with replaced macro</returns>
-        static string MacroBranch(Repository rep, string sql) { 
-        // Branch=comma separated Package IDs, Recursive:
-        // Example for 3 Packages with their PackageID 7,29,128
-        // 7,29,128
-        //
-        // Branch: complete SQL IN statement ' IN (comma separated Package IDs, Recursive):
-        // IN (7,29,128)
-            string currentBranchTemplate = GetTemplateText(SqlTemplateId.BranchIds);
-            string currrentInBranchTemplate = GetTemplateText(SqlTemplateId.InBranchIds);
-
-            
-            if (sql.Contains(currentBranchTemplate) | sql.Contains(currrentInBranchTemplate))
-            {
-                ObjectType objectType = rep.GetContextItemType();
-                int id = 0;
-                switch (objectType)
-                {
-                    // use Package of diagram
-                    case ObjectType.otDiagram:
-                        EA.Diagram dia = (EA.Diagram)rep.GetContextObject();
-                        id = dia.PackageID;
-                        break;
-                    // use Package of element
-                    case ObjectType.otElement:
-                        EA.Element el = (EA.Element)rep.GetContextObject();
-                        id = el.PackageID;
-                        break;
-                    case ObjectType.otPackage:
-                        EA.Package pkg = (EA.Package)rep.GetContextObject();
-                        id = pkg.PackageID;
-                        break;
-                }
-                // Context element available
-                if (id > 0)
-                {
-                    // get package recursive
-                    string branch = Package.GetBranch(rep, "", id);
-                    sql = sql.Replace(currentBranchTemplate, branch);
-                    sql = sql.Replace(currrentInBranchTemplate, branch);
-                } else
-                // no diagram, element or package selected
-                {
-                    // Replace by empty list
-                    sql = sql.Replace(currentBranchTemplate, " 0 ");
-                }
-            }
-            return sql;
-        }
-        /// <summary>
-        /// Replace macro '#Branch={...guid...}#' by ids of the package referenced by GUID. It selects all nested packages recursive. 
-        /// <para />
-        /// Usage: '#Branch={2BC1A31E-0F99-40CE-BE76-04E7DCEDDD87}#' is replaced by a comma separated list of the package and its recursive nested packages.
-        /// <para /> 
-        /// Result:    6,28,5,20147
-        /// </summary>
-        /// <param name="rep"></param>
-        /// <param name="sql"></param>
-        /// <returns></returns>
-        static string MacroBranchConstant(Repository rep, string sql)
-        {
-            foreach (SqlTemplateId id in new[]
-            {
-                SqlTemplateId.BranchIds,
-                SqlTemplateId.InBranchIds
-            })
-            {
-                string branchPattern = GetTemplateText(id);
-                branchPattern = branchPattern.Remove(branchPattern.Length - 1);
-                branchPattern = branchPattern + @"=({[ABCDEF0-9-]*})#";
-                Regex pattern = new Regex(branchPattern, RegexOptions.IgnoreCase);
-                MatchCollection matches = pattern.Matches(sql);
-                if (matches.Count > 0)
-                {
-                    foreach (Match match in matches)
-                    {
-                        // get Package id
-                        EA.Package pkg = rep.GetPackageByGuid(match.Groups[1].Value);
-                        if (pkg == null)
-                        {
-                            MessageBox.Show($@"Package for GUID '{match.Groups[1].Value}' not found",
-                                @"GUID for #Branch={...}# not found, Break");
-                            {
-                                return sql;
-                            }
-                        }
-                        int pkgId = pkg.PackageID;
-                        string branch = Package.GetBranch(rep, "", pkgId);
-                        sql = sql.Replace(match.Groups[0].Value, branch);
-                    }
-                }
-            }
-            return sql;
-        }
-
-        /// <summary>
-        /// Replace macro #Branch={..guid..}# and #InBranch={..guid..}# by IDs of selected packages, recursive nested. 
-        /// It uses the package of the guid and not of the selected Package
-        /// </summary>
-        /// <param name="rep"></param>
-        /// <param name="sql">The sql string to replace the macro by the found ID</param>
-        /// <returns>sql string with replaced macro</returns>
-        static string MacroBranchConstantPackage(Repository rep, string sql)
-        {
-            // Branch=comma separated Package IDs, Recursive:
-            // Example for 3 Packages with their PackageID 7,29,128
-            // 7,29,128
-            //
-            // Branch: complete SQL IN statement ' IN (comma separated Package IDs, Recursive):
-            // IN (7,29,128)
-            string currentBranchTemplate = GetTemplateText(SqlTemplateId.BranchIds);
-            string currrentInBranchTemplate = GetTemplateText(SqlTemplateId.InBranchIds);
-            if (sql.Contains(currentBranchTemplate) | sql.Contains(currrentInBranchTemplate))
-            {
-                ObjectType objectType = rep.GetContextItemType();
-                int id = 0;
-                switch (objectType)
-                {
-                    // use Package of diagram
-                    case ObjectType.otDiagram:
-                        EA.Diagram dia = (EA.Diagram)rep.GetContextObject();
-                        id = dia.PackageID;
-                        break;
-                    // use Package of element
-                    case ObjectType.otElement:
-                        EA.Element el = (EA.Element)rep.GetContextObject();
-                        id = el.PackageID;
-                        break;
-                    case ObjectType.otPackage:
-                        EA.Package pkg = (EA.Package)rep.GetContextObject();
-                        id = pkg.PackageID;
-                        break;
-                }
-                // Context element available
-                if (id > 0)
-                {
-                    // get package recursive
-                    string branch = Package.GetBranch(rep, "", id);
-                    sql = sql.Replace(currentBranchTemplate, branch);
-                    sql = sql.Replace(currrentInBranchTemplate, branch);
-                }
-                else
-                // no diagram, element or package selected
-                {
-                    // Replace by empty list
-                    sql = sql.Replace(currentBranchTemplate, " 0 ");
-                }
-            }
-            return sql;
-        }
-
-
-         /// <summary>
         /// macro Concatenated
         /// #Concat str1, str2,..#
         /// </summary>
@@ -1675,6 +1102,626 @@ For: Package, Element, Diagram, Attribute, Operation"
             }
 
             return sql;
+        }
+
+        /// <summary>
+        /// Replace macro #Diagram_ID# by Diagram_Id of the current diagram or selected Diagram.
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <param name="sql"></param>
+        /// <returns>sql string with replaced macro</returns>
+        static string macroDiagram_ID(Repository rep, string sql)
+        {
+            // get template
+            string template = GetTemplateText(SqlTemplateId.DiagramId);
+
+            // template is used
+            if (sql.Contains(template))
+            {
+                // get the diagram
+                EA.Diagram dia;
+                if (rep.GetContextItemType() == ObjectType.otDiagram)
+                {
+                    dia = (EA.Diagram)rep.GetContextObject();
+                }
+                else
+                {
+                    dia = rep.GetCurrentDiagram();
+                }
+                // Diagram selected?
+                if (dia == null)
+                {
+                    // replace by empty list of IDs
+                    sql = sql.Replace(template, $@" 0 ");
+                }
+                else
+                {
+                    // replace by list of IDs
+                    sql = sql.Replace(template, $@"{dia.DiagramID}");
+                }
+
+            }
+            return sql;
+        }
+
+
+        /// <summary>
+        /// Replace macro #DiagramElements_IDS# by a comma separated list of all Element IDs in diagram.
+        /// <para/>
+        /// If no Element is in the diagram it return '0' for an empty list (not existing ID).
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <param name="sql">The sql string to replace the macro by the found list of Diagram Element IDs</param>
+        /// <returns>sql string with replaced macro</returns>
+        static string macroDiagramElements_IDS(Repository rep, string sql) {
+            // get template
+            string template = GetTemplateText(SqlTemplateId.DiagramElementsIds);
+
+            // template is used
+            if (sql.Contains(template))
+            {
+                // get the diagram
+                EA.Diagram dia;
+                if (rep.GetContextItemType() == ObjectType.otDiagram)
+                {
+                    dia = (EA.Diagram)rep.GetContextObject();
+                } else
+                {
+                    dia = rep.GetCurrentDiagram();
+                }
+                // Diagram selected?
+                if (dia == null)
+                {
+                    // replace by empty list of IDs
+                    sql = sql.Replace(template, $" 0 ");
+                }
+                else
+                {
+                    // make a list of comma separated IDs
+                    string listId = "0";
+                    foreach (var el in dia.DiagramObjects)
+                    {
+                        int id = ((EA.DiagramObject)el).ElementID;
+                        listId = $@"{listId},{id}";
+                    }
+
+                    // replace by list of IDs
+                    sql = sql.Replace(template, $@"{listId}");
+                }
+                
+            }
+            return sql;
+        }
+        /// <summary>
+        /// Replace macro #DiagramElements_IDS# by a comma separated list of all Element IDs in diagram.
+        /// <para/>
+        /// If no Element is in the diagram it return '0' for an empty list (not existing ID).
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <param name="sql">The sql string to replace the macro by the found list of Diagram Element IDs</param>
+        /// <returns>sql string with replaced macro</returns>
+        static string macroDiagramSelectedElements_IDS(Repository rep, string sql)
+        {
+            // get template
+            string template = GetTemplateText(SqlTemplateId.DiagramSelectedElementsIds);
+
+            // template is used
+            if (sql.Contains(template))
+            {
+                // get the diagram
+                EA.Diagram dia = rep.GetContextItemType() == ObjectType.otDiagram ? (EA.Diagram)rep.GetContextObject() : rep.GetCurrentDiagram();
+                // Diagram selected?
+                if (dia == null)
+                {
+                    // Replace by empty list of IDs
+                    sql = sql.Replace(template, $@" 0 ");
+                }
+                else
+                {
+                    // make a list of comma separated IDs
+                    string listId = "0";
+                    foreach (var el in dia.SelectedObjects)
+                    {
+                        int id = ((EA.DiagramObject)el).ElementID;
+                        listId = $@"{listId},{id}";
+
+                    }
+
+                    // replace by list of IDs
+                    sql = sql.Replace(template, $@"{listId}");
+                }
+            }
+            return sql;
+        }
+        /// <summary>
+        /// Replace macro #CURRENT_ITEM_ID# by the ID of the currently selected Item.
+        /// Because ID is ambiguous better use #CurrentItemGuid#
+        /// Alias: #CurrentElementID#
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <param name="sql">The sql string to replace the macro by the found ID</param>
+        /// <returns>sql string with replaced macro</returns>
+        static string macroItem_ID(Repository rep, string sql)
+        {
+            // replace ID
+            string template = GetTemplateText(SqlTemplateId.CurrentItemId);
+            if (sql.Contains(template) | sql.Contains("#CurrentElementID#"))
+            {
+                ObjectType objectType = rep.GetContextItemType();
+                int id = 0;
+                switch (objectType)
+                {
+                    case ObjectType.otElement:
+                        EA.Element el = (EA.Element)rep.GetContextObject();
+                        id = el.ElementID;
+                        break;
+                    case ObjectType.otDiagram:
+                        EA.Diagram dia = (EA.Diagram)rep.GetContextObject();
+                        id = dia.DiagramID;
+                        break;
+                    case ObjectType.otPackage:
+                        EA.Package pkg = (EA.Package)rep.GetContextObject();
+                        id = pkg.PackageID;
+                        break;
+                    case ObjectType.otAttribute:
+                        Attribute attr = (Attribute)rep.GetContextObject();
+                        id = attr.AttributeID;
+                        break;
+                    case ObjectType.otMethod:
+                        Method method = (Method)rep.GetContextObject();
+                        id = method.MethodID;
+                        break;
+                }
+
+                if (id > 0)
+                {
+                    sql = sql.Replace(template, $@"{id}");
+                    sql = sql.Replace("#CurrentElementID#", $"{id}");// Alias for EA compatibility
+                }
+                else
+                // no diagram, element or package selected
+                {
+                    // replace by empty list of IDs
+                    sql = sql.Replace(template, $@" 0 ");
+                }
+
+            }
+            return sql;
+        }
+        /// <summary>
+        /// Replace macro #CurrentItemGUID# by the GUID of the currently selected Item.
+        /// Alias: #CurrentElementGUID#
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <param name="sql">The sql string to replace the macro by the found ID</param>
+        /// <returns>sql string with replaced macro</returns>
+        static string macroItem_GUID(Repository rep, string sql)
+        {
+            // replace ID
+            string template = GetTemplateText(SqlTemplateId.CurrentItemGuid);
+            if (sql.Contains(template) | sql.Contains("#CurrentElementGUID#")) 
+            {
+                ObjectType objectType = rep.GetContextItemType();
+                string guid = "";
+                switch (objectType)
+                {
+                    case ObjectType.otElement:
+                        EA.Element el = (EA.Element)rep.GetContextObject();
+                        guid = el.ElementGUID;
+                        break;
+                    case ObjectType.otDiagram:
+                        EA.Diagram dia = (EA.Diagram)rep.GetContextObject();
+                        guid = dia.DiagramGUID;
+                        break;
+                    case ObjectType.otPackage:
+                        EA.Package pkg = (EA.Package)rep.GetContextObject();
+                        guid = pkg.PackageGUID;
+                        break;
+                    case ObjectType.otAttribute:
+                        Attribute attr = (Attribute)rep.GetContextObject();
+                        guid = attr.AttributeGUID;
+                        break;
+                    case ObjectType.otMethod:
+                        Method method = (Method)rep.GetContextObject();
+                        guid = method.MethodGUID;
+                        break;
+                }
+
+                if (guid != "")
+                {
+                    sql = sql.Replace(template, $@"{guid}");
+                    sql = sql.Replace("#CurrentElementGUID#", $"{guid}");// Alias for EA compatibility
+                }
+                else
+                // no diagram, element or package selected
+                {
+                    // replace by empty list of IDs
+                    sql = sql.Replace(template, $@" ' ' ");
+
+                }
+
+            }
+            return sql;
+        }
+        /// <summary>
+        /// Replace macro #PackageID# of the selected Diagram, Element, Package, Attribute, Operation by the ID of the containing Package.
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <param name="sql">The sql string to replace the macro by the found ID</param>
+        /// <returns>sql string with replaced macro</returns>
+        static string MacroPackageId(Repository rep, string sql)
+        {
+            // Package ID
+            string currentPackageTemplate = GetTemplateText(SqlTemplateId.PackageId);
+            if (sql.Contains(currentPackageTemplate))
+            {
+                // get Package id
+                int id = GetParentPackageIdFromContextElement(rep);
+                if (id > 0)
+                {
+                    sql = sql.Replace(currentPackageTemplate, $@"{id}");
+                }
+                else
+                // no diagram, element or package selected
+                {
+                    // replace by empty list of IDs
+                    sql = sql.Replace(currentPackageTemplate, $@" 0 ");
+                }
+
+            }
+            return sql;
+        }
+
+        /// <summary>
+        /// Get containing Package ID from context element of Package, Element, Diagram, Attribute, Operation
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <returns></returns>
+        static int GetParentPackageIdFromContextElement(Repository rep)
+        {
+            ObjectType objectType = rep.GetContextItemType();
+            int id = 0;
+            switch (objectType)
+            {
+                case ObjectType.otDiagram:
+                    EA.Diagram dia = (EA.Diagram)rep.GetContextObject();
+                    id = dia.PackageID;
+                    break;
+                case ObjectType.otElement:
+                    EA.Element el = (EA.Element)rep.GetContextObject();
+                    id = el.PackageID;
+                    break;
+                case ObjectType.otPackage:
+                    EA.Package pkg = (EA.Package)rep.GetContextObject();
+                    id = pkg.PackageID;
+                    break;
+                case ObjectType.otAttribute:
+                    Attribute attr = (Attribute)rep.GetContextObject();
+                    EA.Element elOfAttr = rep.GetElementByID(attr.ParentID);
+                    id = elOfAttr.PackageID;
+                    break;
+                case ObjectType.otMethod:
+                    Method meth = (Method)rep.GetContextObject();
+                    EA.Element elOfMeth = rep.GetElementByID(meth.ParentID);
+                    id = elOfMeth.PackageID;
+                    break;
+            }
+
+            return id;
+        }
+
+        /// <summary>
+        /// Connector macros: ConnectorID and ConveyedItemIDS
+        /// Note: If Element connector 
+        /// <para/>
+        /// Replace macro #ConnectorID# by the ID of the selected connector.
+        /// <para/>
+        /// Replace macro #ConveyedItemIDS# by the IDs of conveyed Elements of the selected connector.
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <param name="sql">The sql string to replace the macro by the found ID</param>
+        /// <returns>sql string with replaced macro</returns>
+        static string MacroConnector(Repository rep, string sql)
+        {
+            //--------------------------------------------------------------------------------------------
+            // CONNECTOR ID
+            // CONVEYED_ITEM_ID
+            string currentConnectorTemplate = GetTemplateText(SqlTemplateId.ConnectorId);
+            string currentConveyedItemTemplate = GetTemplateText(SqlTemplateId.ConveyedItemIds);
+
+            if ((sql.Contains(currentConnectorTemplate) | sql.Contains(currentConveyedItemTemplate)))
+            {
+                // connector
+                if (rep.GetContextItemType() == ObjectType.otConnector)
+                {
+                    // connector ID
+                    Connector con = (EA.Connector)rep.GetContextObject();
+                    if (sql.Contains(currentConnectorTemplate))
+                    {
+                        
+                        sql = sql.Replace(currentConnectorTemplate, $@"{con.ConnectorID}");
+                    }
+                    // conveyed items are a comma separated list of elementIDs
+                    if (sql.Contains(currentConveyedItemTemplate))
+                    {
+
+                        // to avoid syntax error, 0 will never fit any conveyed item
+                        string conveyedItems = "0";
+
+                        // first get "InformationFlows" which carries the conveyed items
+                        if (con.MetaType == "Connector" || con.MetaType == "Sequence")
+                        {
+                            // get semicolon delimiter list of information flow guids
+                            string sqlInformationFlows = "select x.description " +
+                                                         "    from  t_xref x " +
+                                                         $"    where x.client = '{con.ConnectorGUID}' ";
+
+                            // get semicolon delimiter list of guids of all dependent connectors/information flows
+                            List<string> lFlows = rep.GetStringsBySql(sqlInformationFlows);
+                            foreach (string flowGuids in lFlows) { 
+                                string[] lFlowGuid = flowGuids.Split(',');
+                                foreach (string flowGuid in lFlowGuid)
+                                {
+                                    Connector flow = rep.GetConnectorByGuid(flowGuid);
+                                    foreach (EA.Element el in flow.ConveyedItems)
+                                    {
+                                        conveyedItems = $"{conveyedItems}, {el.ElementID}";
+                                    }
+                                }
+
+                            }
+                        }
+                        else
+                        {
+
+
+                            foreach (EA.Element el in con.ConveyedItems)
+                            {
+                                conveyedItems = $"{conveyedItems}, {el.ElementID}";
+                            }
+
+                        }
+                        sql = sql.Replace(currentConveyedItemTemplate, $"{conveyedItems}");
+                    }
+                } else
+                    // no connector selected
+                {
+                    // Replace by empty list
+
+                    if ( sql.Contains(currentConveyedItemTemplate)) sql = sql.Replace(currentConveyedItemTemplate, " 0 ");
+
+                    if (sql.Contains(currentConnectorTemplate) ) sql = sql.Replace(currentConnectorTemplate, " 0 ");
+                }
+            }
+            return sql;
+        }
+
+
+        /// <summary>
+        /// Replace macro #TreeSelectedGUIDS# by GUIDs of selected Items of Browser
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <param name="sql">The sql string to replace the macro by the found ID</param>
+        /// <returns>sql string with replaced macro</returns>
+        static string MacroTreeSelected(Repository rep, string sql)
+        {
+            //--------------------------------------------------------------------------------------------
+            // Tree selected items
+            // CONVEYED_ITEM_ID
+            string template = GetTemplateText(SqlTemplateId.TreeSelectedGuids);
+
+
+            if (sql.Contains(template))
+            {
+                // get the selected elements (Element)
+                string guiDs = "";
+                string comma = "";
+                Collection col = rep.GetTreeSelectedElements();
+                foreach (var el in col)
+                {
+                    var guid = ((EA.Element)el).ElementGUID;
+
+                    // make list
+                    if (guid != "")
+                    {
+                        guiDs = $"{guiDs}{comma}'{guid}'";
+                        comma = ", ";
+                    }
+                }
+                // at least one element selected
+                if (guiDs != "")
+                {
+                    // replace by list of GUIDs
+                    sql = sql.Replace(template, $"{guiDs}");
+                }
+                else// no element in Browser selected
+                {
+                        // Replace by empty list of IDs
+                        sql = sql.Replace(template, " ' ' ");
+                }
+            }
+            return sql;
+        }
+
+        /// <summary>
+        /// Replace macro #Branch# and #InBranch# by IDs of selected packages, recursive nested. 
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <param name="sql">The sql string to replace the macro by the found ID</param>
+        /// <returns>sql string with replaced macro</returns>
+        static string MacroBranch(Repository rep, string sql) { 
+        // Branch=comma separated Package IDs, Recursive:
+        // Example for 3 Packages with their PackageID 7,29,128
+        // 7,29,128
+        //
+        // Branch: complete SQL IN statement ' IN (comma separated Package IDs, Recursive):
+        // IN (7,29,128)
+            string currentBranchTemplate = GetTemplateText(SqlTemplateId.BranchIds);
+            string currrentInBranchTemplate = GetTemplateText(SqlTemplateId.InBranchIds);
+
+            
+            if (sql.Contains(currentBranchTemplate) | sql.Contains(currrentInBranchTemplate))
+            {
+                ObjectType objectType = rep.GetContextItemType();
+                int id = 0;
+                switch (objectType)
+                {
+                    // use Package of diagram
+                    case ObjectType.otDiagram:
+                        EA.Diagram dia = (EA.Diagram)rep.GetContextObject();
+                        id = dia.PackageID;
+                        break;
+                    // use Package of element
+                    case ObjectType.otElement:
+                        EA.Element el = (EA.Element)rep.GetContextObject();
+                        id = el.PackageID;
+                        break;
+                    case ObjectType.otPackage:
+                        EA.Package pkg = (EA.Package)rep.GetContextObject();
+                        id = pkg.PackageID;
+                        break;
+                }
+                // Context element available
+                if (id > 0)
+                {
+                    // get package recursive
+                    string branch = Package.GetBranch(rep, "", id);
+                    sql = sql.Replace(currentBranchTemplate, branch);
+                    sql = sql.Replace(currrentInBranchTemplate, branch);
+                } else
+                // no diagram, element or package selected
+                {
+                    // Replace by empty list of IDs
+                    sql = sql.Replace(currentBranchTemplate, " 0 ");
+                }
+            }
+            return sql;
+        }
+        /// <summary>
+        /// Replace macro '#Branch={...guid...}#' by ids of the package referenced by GUID. It selects all nested packages recursive. 
+        /// <para />
+        /// Usage: '#Branch={2BC1A31E-0F99-40CE-BE76-04E7DCEDDD87}#' is replaced by a comma separated list of the package and its recursive nested packages.
+        /// <para /> 
+        /// Result:    6,28,5,20147
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <param name="sql"></param>
+        /// <returns></returns>
+        static string MacroBranchConstant(Repository rep, string sql)
+        {
+            foreach (SqlTemplateId id in new[]
+            {
+                SqlTemplateId.BranchIds,
+                SqlTemplateId.InBranchIds
+            })
+            {
+                string branchPattern = GetTemplateText(id);
+                branchPattern = branchPattern.Remove(branchPattern.Length - 1);
+                branchPattern = branchPattern + @"=({[ABCDEF0-9-]*})#";
+                Regex pattern = new Regex(branchPattern, RegexOptions.IgnoreCase);
+                MatchCollection matches = pattern.Matches(sql);
+                if (matches.Count > 0)
+                {
+                    foreach (Match match in matches)
+                    {
+                        // get Package id
+                        EA.Package pkg = rep.GetPackageByGuid(match.Groups[1].Value);
+                        if (pkg == null)
+                        {
+                            sql = sql.Replace(match.Groups[0].Value, " ");
+                            
+                                return sql;
+
+                        }
+                        int pkgId = pkg.PackageID;
+                        string branch = Package.GetBranch(rep, "", pkgId);
+                        sql = sql.Replace(match.Groups[0].Value, branch);
+                    }
+                }
+            }
+            return sql;
+        }
+
+        /// <summary>
+        /// Replace macro #Branch={..guid..}# and #InBranch={..guid..}# by IDs of selected packages, recursive nested. 
+        /// It uses the package of the guid and not of the selected Package
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <param name="sql">The sql string to replace the macro by the found ID</param>
+        /// <returns>sql string with replaced macro</returns>
+        static string MacroBranchConstantPackage(Repository rep, string sql)
+        {
+            // Branch=comma separated Package IDs, Recursive:
+            // Example for 3 Packages with their PackageID 7,29,128
+            // 7,29,128
+            //
+            // Branch: complete SQL IN statement ' IN (comma separated Package IDs, Recursive):
+            // IN (7,29,128)
+            string currentBranchTemplate = GetTemplateText(SqlTemplateId.BranchIds);
+            string currrentInBranchTemplate = GetTemplateText(SqlTemplateId.InBranchIds);
+            if (sql.Contains(currentBranchTemplate) | sql.Contains(currrentInBranchTemplate))
+            {
+                ObjectType objectType = rep.GetContextItemType();
+                int id = 0;
+                switch (objectType)
+                {
+                    // use Package of diagram
+                    case ObjectType.otDiagram:
+                        EA.Diagram dia = (EA.Diagram)rep.GetContextObject();
+                        id = dia.PackageID;
+                        break;
+                    // use Package of element
+                    case ObjectType.otElement:
+                        EA.Element el = (EA.Element)rep.GetContextObject();
+                        id = el.PackageID;
+                        break;
+                    case ObjectType.otPackage:
+                        EA.Package pkg = (EA.Package)rep.GetContextObject();
+                        id = pkg.PackageID;
+                        break;
+                }
+                // Context element available
+                if (id > 0)
+                {
+                    // get package recursive
+                    string branch = Package.GetBranch(rep, "", id);
+                    sql = sql.Replace(currentBranchTemplate, branch);
+                    sql = sql.Replace(currrentInBranchTemplate, branch);
+                }
+                else
+                // no diagram, element or package selected
+                {
+                    // Replace by empty list
+                    sql = sql.Replace(currentBranchTemplate, " 0 ");
+                }
+            }
+            return sql;
+        }
+       /// <summary>
+        /// Get list of package ids as comma separated list
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <param name="branch"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static string GetBranch(Repository rep, string branch, int id)
+        {
+            if (id > 0)
+            {
+                // add current package id
+                if (branch == "") branch = id.ToString();
+                else branch = branch + ", " + id;
+
+                EA.Package pkg = rep.GetPackageByID(id);
+                foreach (EA.Package p in pkg.Packages)
+                {
+                    int pkgId = p.PackageID;
+                    branch = GetBranch(rep, branch, pkgId);
+                }
+
+
+            }
+            return branch;
         }
         /// <summary>
         /// Repository type for macros
