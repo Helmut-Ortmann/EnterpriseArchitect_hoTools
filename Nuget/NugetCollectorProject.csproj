@@ -153,7 +153,7 @@
       <Version>2.2.1</Version>
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
-      <Version>13.0.1</Version>
+      <Version>13.0.2</Version>
     </PackageReference>
     <PackageReference Include="Npgsql">
       <Version>7.0.0</Version>
