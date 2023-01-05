@@ -38,9 +38,9 @@ namespace hoTools.Utils.SQL
             Oracle,     // 3
             Postgres,   // 4
             Asa,        // 5
-            Openedge,   // 7
             Access2007, // 8
             Firebird,   // 9
+            // ReSharper disable once InconsistentNaming
             SQLite,     // 10
             Other,
             Unknown
@@ -53,10 +53,12 @@ namespace hoTools.Utils.SQL
         }
         #endregion
 
-
-        private static string[] lRepoTypes =
+        /// <summary>
+        /// Link EA RepositoryType to HoTools enum RepositoryType
+        /// </summary>
+        private static readonly string[] LRepoTypes =
         {
-            "MYSQL", "SQLSRV","JET", "ORACLE", "POSTGRES", "unknown", "ACCESS2007", "FIREBIRD","SL3"   // SL3=SQLite 
+            "MYSQL", "SQLSRV","JET", "ORACLE", "POSTGRES", "ASA", "ACCESS2007", "FIREBIRD","SL3"   // SL3=SQLite 
         };
 
         /// <summary>
@@ -81,12 +83,17 @@ namespace hoTools.Utils.SQL
         /// <returns></returns>
         public static RepositoryType GetRepositoryType(EA.Repository rep)
         {
-            var pos = Array.FindIndex(lRepoTypes, x => x == rep.RepositoryType());
+            var pos = Array.FindIndex(LRepoTypes, x => x.ToLower() == rep.RepositoryType().ToLower());
+            if (pos < 0)
+            {
 
-            string connectionString = rep.ConnectionString;
-            RepositoryType repoType = RepositoryType.AdoJet; //default to .eap file
-            if (pos > -1) repoType = (RepositoryType)pos+1;
-            return repoType;
+                MessageBox.Show($@"Type={rep.RepositoryType()}
+Supported types are: '{String.Join(", ", LRepoTypes)}'", $@"Unknown Repository type");
+                return RepositoryType.Unknown;
+            }
+
+            return (RepositoryType)pos;
+            
 
         }
 
