@@ -129,6 +129,11 @@ Some features:
 
 ## Releases
 
+### 4.2.3 Integrate macros #DB=SQLITE#,... see EA documentation
+
+- Create HoTools_x.xx.x.zip with HoTools.msi. HoTools.readme, HoToolsX64.msi
+  - Requires 7Z to add X64 msi to archieve
+
 ### 4.2.2 Fix SQL Access2007, detecting *.qea(x) files (Wildcards)
  
 - macro ConnectorID/Conveyed Items.
