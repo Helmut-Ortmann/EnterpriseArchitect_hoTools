@@ -57,7 +57,7 @@
     <Content Include="Scripts\getmsiversion.vbs" />
     <Content Include="Scripts\HoTools.reg" />
     <Content Include="Scripts\HoTools64bit.reg" />
-    <Content Include="Scripts\RenameMsi.bat" />
+    <Content Include="Scripts\RenameMsiX64.bat" />
     <Content Include="Settings.json" />
     <Content Include="UserSearches.json" />
   </ItemGroup>
@@ -173,7 +173,7 @@
     <CompilerAdditionalOptions>--</CompilerAdditionalOptions>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent>"$(SolutionDir)Setup64\Scripts\renamemsi.bat" "$(SolutionDir)Setup64\bin\x64\Release\en-us\hoToolsX64.msi" "$(SolutionDir)readme.md"</PostBuildEvent>
+    <PostBuildEvent>"$(SolutionDir)Setup64\Scripts\renamemsiX64.bat" "$(SolutionDir)Setup64\bin\x64\Release\en-us\hoToolsX64.msi" "$(SolutionDir)readme.md"</PostBuildEvent>
   </PropertyGroup>
   <!--
 	To modify your build process, add your task inside one of the targets below and uncomment it.
