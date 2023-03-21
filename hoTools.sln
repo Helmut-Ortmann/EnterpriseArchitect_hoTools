@@ -413,9 +413,7 @@ Global
 		{AB199D3F-0181-4FF7-8AD9-55BAC676B8BD}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{AB199D3F-0181-4FF7-8AD9-55BAC676B8BD}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{AB199D3F-0181-4FF7-8AD9-55BAC676B8BD}.Release|x64.ActiveCfg = Release|Any CPU
-		{AB199D3F-0181-4FF7-8AD9-55BAC676B8BD}.Release|x64.Build.0 = Release|Any CPU
 		{AB199D3F-0181-4FF7-8AD9-55BAC676B8BD}.Release|x86.ActiveCfg = Release|Any CPU
-		{AB199D3F-0181-4FF7-8AD9-55BAC676B8BD}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
