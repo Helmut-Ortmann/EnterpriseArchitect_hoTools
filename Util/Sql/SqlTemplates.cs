@@ -1287,53 +1287,7 @@ static string macroToBool(Repository rep, string sql)
 
             return sql;
         }
- /// <summary>
-        /// macro Length of a string
-        /// #Length string#
-        /// </summary>
-        /// <param name="rep"></param>
-        /// <param name="sql"></param>
-        /// <returns></returns>
-
-        static string macroLength_ID(Repository rep, string sql)
-        {
-            Match match = Regex.Match(sql, @"#Length\s+([^#]*)#", RegexOptions.IgnoreCase);
-            while (match.Success)
-            {
-
-                string replacement;
-                switch (RepType(rep))
-                {
-                    case "JET":
-                    case "ACCESS":
-                        replacement = $"Len({match.Groups[1].Value.Trim()})";
-                        break;
-                    case "MYSQL":
-                        replacement = $"Length({match.Groups[1].Value.Trim()})";
-                        break;
-                    case "SQLITE":
-                    case "SL3":
-                        replacement = $"Length({match.Groups[1].Value.Trim()})";
-                        break;
-
-                    default:
-                        replacement = $"Length({match.Groups[1].Value.Trim()})";
-                        break;
-                }
-                sql = sql.Replace(match.Groups[0].Value, replacement);
-                match = match.NextMatch();
-            }
-
-            return sql;
-        }
-        /// <summary>
-        /// macro Length of a string
-        /// #Length string#
-        /// </summary>
-        /// <param name="rep"></param>
-        /// <param name="sql"></param>
-        /// <returns></returns>
-
+        
         static string macroLength_ID(Repository rep, string sql)
         {
             Match match = Regex.Match(sql, @"#Length\s+([^#]*)#", RegexOptions.IgnoreCase);
