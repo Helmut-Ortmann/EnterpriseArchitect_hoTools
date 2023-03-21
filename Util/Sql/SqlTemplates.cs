@@ -837,6 +837,9 @@ For: Package, Element, Diagram, Attribute, Operation"
             sql = FormatSqlDbSpecific(rep, sql);
 
 
+            // replace DB specific code
+            sql = FormatSqlDbSpecific(rep, sql);
+
 
             // Find needle in hay-stack
             // #Instr start, stack, needle#
@@ -847,6 +850,7 @@ For: Package, Element, Diagram, Attribute, Operation"
             sql = macroIf_ID(rep, sql);
 
  // macro Format a number with left padding and thousand separator
+            // macro Format a number with left padding and thousand separator
             // #Format numberString, length, stringPaddingBefore#
             sql = MacroFormat(rep, sql);
 
@@ -995,18 +999,23 @@ For: Package, Element, Diagram, Attribute, Operation"
                 var lColumns = match.Groups[1].Value.Split(',');
 
                 string content;
-                switch (RepType(rep))
+  switch (RepType(rep))
                 {
                     case "JET":
                     case "ACCESS":
-                        content = String.Join("+",lColumns);
+                        content = String.Join("&",lColumns); // & supports null values
                         break;
                     case "MYSQL":
-                        content = String.Join(",", lColumns);
+                        // Null values:
+                        // IFNULL(value, '')
+                        var t = lColumns.Select(x => $@"IFNULL({x},'')");
+                        content = String.Join(",", t);
                         break;
                     case "SQLITE":
                     case "SL3":
-                        content = String.Join("||", lColumns);
+                        var t1 = lColumns.Select(x => $@"COALESCE({x},'')");
+                        content = String.Join("+", t1);
+                        //content = String.Join("||", lColumns); // || supports null values
                         break;
                     default:
                         content = String.Join(",", lColumns);
@@ -1084,7 +1093,7 @@ For: Package, Element, Diagram, Attribute, Operation"
         /// <returns>'true','false'</returns>
 
         // ReSharper disable once InconsistentNaming
-        static string macroToBool(Repository rep, string sql)
+static string macroToBool(Repository rep, string sql)
         {
             Match match = Regex.Match(sql, @"#ToBool\s+([^#]*)#", RegexOptions.IgnoreCase);
             while (match.Success)
@@ -1095,12 +1104,13 @@ For: Package, Element, Diagram, Attribute, Operation"
                 {
                     case "JET":
                     case "ACCESS":
-                        replacement = match.Groups[1].Value.Trim().ToLower();
+                        // native SQL
+                        replacement = $"{match.Groups[1]}";
                         break;
                     case "MYSQL":
                         replacement = $"if({match.Groups[1].Value.Trim()} = 0,'FALSE','TRUE')";
                         break;
-   case "SQLITE":
+                    case "SQLITE":
                     case "SL3":
                         replacement = $"iif({match.Groups[1].Value.Trim()} = 0,'FALSE','TRUE')";
                         break;
@@ -1195,7 +1205,7 @@ For: Package, Element, Diagram, Attribute, Operation"
             return sql;
         }
 
-      /// <summary>
+        /// <summary>
         /// macro ToLower
         /// #ToLower string#
         /// </summary>
@@ -1269,6 +1279,45 @@ For: Package, Element, Diagram, Attribute, Operation"
 
                     default:
                         replacement = $"Right({match.Groups[1].Value.Trim()},{match.Groups[2].Value.Trim()})";
+                        break;
+                }
+                sql = sql.Replace(match.Groups[0].Value, replacement);
+                match = match.NextMatch();
+            }
+
+            return sql;
+        }
+ /// <summary>
+        /// macro Length of a string
+        /// #Length string#
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <param name="sql"></param>
+        /// <returns></returns>
+
+        static string macroLength_ID(Repository rep, string sql)
+        {
+            Match match = Regex.Match(sql, @"#Length\s+([^#]*)#", RegexOptions.IgnoreCase);
+            while (match.Success)
+            {
+
+                string replacement;
+                switch (RepType(rep))
+                {
+                    case "JET":
+                    case "ACCESS":
+                        replacement = $"Len({match.Groups[1].Value.Trim()})";
+                        break;
+                    case "MYSQL":
+                        replacement = $"Length({match.Groups[1].Value.Trim()})";
+                        break;
+                    case "SQLITE":
+                    case "SL3":
+                        replacement = $"Length({match.Groups[1].Value.Trim()})";
+                        break;
+
+                    default:
+                        replacement = $"Length({match.Groups[1].Value.Trim()})";
                         break;
                 }
                 sql = sql.Replace(match.Groups[0].Value, replacement);
@@ -1720,6 +1769,9 @@ For: Package, Element, Diagram, Attribute, Operation"
                         Method method = (Method)rep.GetContextObject();
                         id = method.MethodID;
                         break;
+   default:
+                        id = 0;
+                        break;
                 }
 
                 if (id > 0)
@@ -2059,6 +2111,8 @@ For: Package, Element, Diagram, Attribute, Operation"
         /// <returns></returns>
         static string MacroBranchConstant(Repository rep, string sql)
         {
+
+            // The macros to support
             foreach (SqlTemplateId id in new[]
             {
                 SqlTemplateId.BranchIds,
@@ -2174,7 +2228,7 @@ For: Package, Element, Diagram, Attribute, Operation"
         /// <param name="rep"></param>
         /// <param name="sql">The sql string to replace the macro by the found ID</param>
         /// <returns>sql string with replaced macro</returns>
-        static string MacroBranchConstantPackage(Repository rep, string sql)
+ static string MacroBranchConstantPackage(Repository rep, string sql)
         {
             // Branch=comma separated Package IDs, Recursive:
             // Example for 3 Packages with their PackageID 7,29,128
@@ -2182,9 +2236,8 @@ For: Package, Element, Diagram, Attribute, Operation"
             //
             // Branch: complete SQL IN statement ' IN (comma separated Package IDs, Recursive):
             // IN (7,29,128)
-            string currentBranchTemplate = GetTemplateText(SqlTemplateId.BranchIds);
-            string currrentInBranchTemplate = GetTemplateText(SqlTemplateId.InBranchIds);
-            if (sql.Contains(currentBranchTemplate) | sql.Contains(currrentInBranchTemplate))
+            string currentBranchTemplate = GetTemplateText(SqlTemplateId.BranchIdsConstantPackage);
+            if (sql.Contains(currentBranchTemplate) )
             {
                 ObjectType objectType = rep.GetContextItemType();
                 int id = 0;
@@ -2209,15 +2262,15 @@ For: Package, Element, Diagram, Attribute, Operation"
                 if (id > 0)
                 {
                     // get package recursive
-                    string branch = Package.GetBranch(rep, "", id);
+                    string branch = GetBranch(rep, "", id);
                     sql = sql.Replace(currentBranchTemplate, branch);
                    
                 }
                 else
                 // no diagram, element or package selected
                 {
-                    // Replace by empty list
-                    sql = sql.Replace(currentBranchTemplate, " 0 ");
+                    // replace by empty list of IDs
+                    sql = sql.Replace(currentBranchTemplate, $@" 0 ");
                 }
             }
             return sql;
