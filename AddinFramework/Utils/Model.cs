@@ -291,6 +291,10 @@ namespace EAAddinFramework.Utils
         {
             // check sql name
             if (String.IsNullOrWhiteSpace(sqlName)) sqlName = "UnnamedSql";
+
+            // used for advanced SQL (with Regex to get special columns)
+            var sqlTemplatesCtrl = new SqlTemplates(Repository, sql);
+
             // replace templates
             sql = SqlTemplates.ReplaceMacro(Repository, sql, searchText);
             if (String.IsNullOrWhiteSpace(sql)) return "";
@@ -304,8 +308,17 @@ namespace EAAddinFramework.Utils
                 // run the SQL select query
                 var xmlSqlQueryResult = SqlQueryWithException(sql) ?? "";
 
-                // output the query in EA Search Window format
-                string xmlEaOutput = MakeEaXmlOutput(xmlSqlQueryResult);
+                string xmlEaOutput;
+                // SQL advanced (with Regex)
+                if (sqlTemplatesCtrl.IsAdvanced)
+                {
+                    xmlEaOutput = sqlTemplatesCtrl.PerformRegExpression(xmlSqlQueryResult);
+                }
+                else
+                {
+                    // output the query in EA Search Window format
+                    xmlEaOutput = MakeEaXmlOutput(xmlSqlQueryResult);
+                }
                 if (exportToExcel)
                     Excel.MakeExcelFileFromSqlResult(xmlSqlQueryResult,
                         @"d:\temp\sql\" + Path.GetFileNameWithoutExtension(sqlName) + ".xlsx");

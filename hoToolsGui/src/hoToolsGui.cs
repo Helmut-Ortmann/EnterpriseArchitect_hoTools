@@ -1477,6 +1477,9 @@ namespace hoTools.hoToolsGui
             this.toolStripSeparator20 = new System.Windows.Forms.ToolStripSeparator();
             this.makeGlossaryXmlFromcsvToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._doToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sQLDiagramToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sQLSelectedElementsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator24 = new System.Windows.Forms.ToolStripSeparator();
             this.exportExcelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportCsvOfClipboardToExcelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
@@ -1565,9 +1568,6 @@ namespace hoTools.hoToolsGui
             this.simpleSearchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.diagramSearchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.modifiedDiagramsSearchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.sQLDiagramToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.sQLSelectedElementsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator24 = new System.Windows.Forms.ToolStripSeparator();
             this._toolStripContainer1.TopToolStripPanel.SuspendLayout();
             this._toolStripContainer1.SuspendLayout();
             this._toolStripQuery.SuspendLayout();
@@ -2613,6 +2613,23 @@ namespace hoTools.hoToolsGui
             this._doToolStripMenuItem.Name = "_doToolStripMenuItem";
             resources.ApplyResources(this._doToolStripMenuItem, "_doToolStripMenuItem");
             // 
+            // sQLDiagramToolStripMenuItem
+            // 
+            this.sQLDiagramToolStripMenuItem.Name = "sQLDiagramToolStripMenuItem";
+            resources.ApplyResources(this.sQLDiagramToolStripMenuItem, "sQLDiagramToolStripMenuItem");
+            this.sQLDiagramToolStripMenuItem.Click += new System.EventHandler(this.sqLDiagramToolStripMenuItem_Click);
+            // 
+            // sQLSelectedElementsToolStripMenuItem
+            // 
+            this.sQLSelectedElementsToolStripMenuItem.Name = "sQLSelectedElementsToolStripMenuItem";
+            resources.ApplyResources(this.sQLSelectedElementsToolStripMenuItem, "sQLSelectedElementsToolStripMenuItem");
+            this.sQLSelectedElementsToolStripMenuItem.Click += new System.EventHandler(this.sqLSelectedElementsToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator24
+            // 
+            this.toolStripSeparator24.Name = "toolStripSeparator24";
+            resources.ApplyResources(this.toolStripSeparator24, "toolStripSeparator24");
+            // 
             // exportExcelToolStripMenuItem
             // 
             this.exportExcelToolStripMenuItem.Name = "exportExcelToolStripMenuItem";
@@ -3175,23 +3192,6 @@ namespace hoTools.hoToolsGui
             this.modifiedDiagramsSearchToolStripMenuItem.Name = "modifiedDiagramsSearchToolStripMenuItem";
             resources.ApplyResources(this.modifiedDiagramsSearchToolStripMenuItem, "modifiedDiagramsSearchToolStripMenuItem");
             this.modifiedDiagramsSearchToolStripMenuItem.Click += new System.EventHandler(this.RecentlyModifedDiagramsToolStripMenuItem_Click);
-            // 
-            // sQLDiagramToolStripMenuItem
-            // 
-            this.sQLDiagramToolStripMenuItem.Name = "sQLDiagramToolStripMenuItem";
-            resources.ApplyResources(this.sQLDiagramToolStripMenuItem, "sQLDiagramToolStripMenuItem");
-            this.sQLDiagramToolStripMenuItem.Click += new System.EventHandler(this.sqLDiagramToolStripMenuItem_Click);
-            // 
-            // sQLSelectedElementsToolStripMenuItem
-            // 
-            this.sQLSelectedElementsToolStripMenuItem.Name = "sQLSelectedElementsToolStripMenuItem";
-            resources.ApplyResources(this.sQLSelectedElementsToolStripMenuItem, "sQLSelectedElementsToolStripMenuItem");
-            this.sQLSelectedElementsToolStripMenuItem.Click += new System.EventHandler(this.sqLSelectedElementsToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator24
-            // 
-            this.toolStripSeparator24.Name = "toolStripSeparator24";
-            resources.ApplyResources(this.toolStripSeparator24, "toolStripSeparator24");
             // 
             // HoToolsGui
             // 

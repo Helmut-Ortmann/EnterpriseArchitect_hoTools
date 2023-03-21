@@ -1,18 +1,213 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Linq;
 using System.Reflection;
 using System.Resources;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using EA;
+using hoLinqToSql.LinqUtils;
 using hoTools.Utils.Extension;
 using hoTools.Utils.SQL;
 using Attribute = EA.Attribute;
 
 namespace hoTools.Utils.Sql
 {
-    public static class SqlTemplates
+    /// <summary>
+    /// Macros to add useful features to SQL:
+    /// - DB independent (SQLite, Access2007, JET, MySQL)
+    /// - EA macros
+    /// - Additional features
+    /// </summary>
+    public class SqlTemplates
     {
+        private readonly Repository _rep;
+        private readonly string _sqlString;
+        private string _repType;
+        //
+        // Show the Regex result for a Column
+        // The regex must not contain '#'
+        // #Regex#source-column#target-column#regexp#
+        private readonly Regex _regShowColumn = new Regex(@"#(Regex|RegexShowColumn)#([^#]*)#([^#]*)#([^#]*)#");
+
+        // The regex must not contain '#'
+        // #Regex#[OR|AND|NOT]#source-column#regexp#
+        private readonly Regex _regFilterRows = new Regex(@"#RegexFilterRows#([^#]*)#([^#]*)#([^#]*)#");
+        //
+        /// <summary>
+        /// Show Column content as a result of a RegExp
+        /// #Regex#source column#target column#regex#
+        /// </summary>
+        private readonly List<RegExShowColumn> _regexShowColumns = new List<RegExShowColumn>();
+
+        //
+        /// <summary>
+        /// Filter Rows where it's columns matches a RegExp
+        /// condition: [AND|OR|NOT]
+        /// #RegexFilterRows#condition#column#regex#
+        /// </summary>
+        private readonly List<RegExFilterRows> _regexFilterRows = new List<RegExFilterRows>();
+        /// <summary>
+        /// The SQL-String to output.
+        /// It doesn't contain the regex definitions
+        /// </summary>
+        public string SqlString => _sqlString;
+        /// <summary>
+        /// IsAdvanced
+        /// SQL with Regex
+        /// </summary>
+        public bool IsAdvanced => _regexShowColumns.Any() || _regexFilterRows.Any();
+
+        /// <summary>
+        /// Used for advanced SQL
+        /// - Use regex to set column content
+        /// - Use regex to filter rows based on column content
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <param name="sqlString"></param>
+        public SqlTemplates(EA.Repository rep, string sqlString)
+        {
+            _rep = rep;
+
+            _sqlString = sqlString;
+            _repType = RepType(_rep);
+            try
+            {
+                // Regular expression support
+                // #Regex#source column#target column#regex#
+                MatchCollection mc = _regShowColumn.Matches(sqlString);
+                foreach (Match match in mc)
+                {
+                    _regexShowColumns.Add(new RegExShowColumn(match.Groups[2].Value, match.Groups[3].Value, match.Groups[4].Value));
+                    // remove ReEx macros
+                    sqlString = sqlString.Replace(match.Value, "");
+                }
+
+                // Find matching Rows
+                // # RegexFilter#source column#target column#regex#
+                mc = _regFilterRows.Matches(sqlString);
+                foreach (Match match in mc)
+                {
+                    _regexFilterRows.Add(new RegExFilterRows(match.Groups[1].Value, match.Groups[2].Value, match.Groups[3].Value));
+                    // remove ReEx macros
+                    sqlString = sqlString.Replace(match.Value, "");
+                }
+
+                // removed sql, converted to _regexShowColumns
+                _sqlString = sqlString;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($@"SQL: {_sqlString}
+
+{e}
+",@"Can't apply Regex");
+                throw;
+            }
+
+           
+
+
+        }
+        /// <summary>
+        /// Perform regex
+        /// - set column content
+        /// - filter rows
+        /// </summary>
+        /// <param name="xml"></param>
+        /// <returns>xml to output via EA</returns>
+        public string PerformRegExpression(string xml)
+        {
+            try
+            {
+                var dt = Xml.MakeDataTableFromSqlXml(xml);
+
+                if (_regexShowColumns.Count > 0)
+                {
+                    foreach (var item in _regexShowColumns)
+                    {
+                        var regex = item.GetRegEx();
+
+                        // Get index of srcIndex
+                        var srcIndex = dt.Columns.IndexOf(item.SrcColumn);
+                        if (srcIndex == -1) continue;              // Source Column not available
+
+                        // Create target Column if not available
+                        if (dt.Columns.IndexOf(item.TrgColumn) < 0) dt.Columns.Add(item.TrgColumn, typeof(String));
+
+                        // over all found rows
+                        foreach (DataRow row in dt.Rows)
+                        {
+                            var srcValue = row[srcIndex].ToString();
+                            var trgValue = "";
+
+                            // extract value
+                            Match m = regex.Match(srcValue);
+                            if (m.Success)
+                            {
+                                trgValue = m.Groups[1].Value;
+                            }
+                            // Update cell
+                            row[item.TrgColumn] = trgValue;
+
+                        }
+                    }
+                }
+                // Filter rows
+                // The condition associated with a regex are sequential performed (false condition1 regexFilterRow1 condition2 regexFilterRow2 condition3 regexFilterRow3....)
+                // There are no priorities like AND before OR or so
+                if (_regexFilterRows.Count > 0)
+                {
+                    // over all found rows, allow deleting rows
+                    dt.AcceptChanges();
+
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        // over all columns
+                        bool showRow = true;
+                        foreach (var item in _regexFilterRows)
+                        {
+                            var regex = item.GetRegEx();
+                            var index = dt.Columns.IndexOf(item.Column);
+                            if (index == -1) continue;              // Column not available
+                            var value = row[index].ToString();
+
+                            // extract value
+                            Match m = regex.Match(value);
+                            // fund first match
+                            if (m.Success)
+                            {
+                                if (item.Condition == "AND") showRow = showRow & true;
+                                if (item.Condition == "OR") showRow = showRow | true;
+
+                            }
+                            else
+                            {
+                                if (item.Condition == "AND") showRow = false;
+                                if (item.Condition == "OR") showRow = showRow | false;
+
+                            }
+                        }
+                        if (showRow == false) row.Delete();
+
+
+                    }
+                    
+                }
+                // return EA xml to output with EA.
+                return dt.ToEaXml().ToString();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($@"SQL: {_sqlString}
+
+{e}", @"Error perform Regex on Column");
+                return "";
+            }
+           
+
+        }
         #region Template Dictionary SqlTemplare
         /// <summary>
         /// Dictionary of the available Templates. Note: If error like duplicate key the constructor breaks without exception.
@@ -63,6 +258,13 @@ namespace hoTools.Utils.Sql
                     "#ToLower string#  Converts to lower",
                     isResource:false
                 ) },
+            {  SqlTemplateId.Length,
+                new SqlTemplate("Length Template", // Name
+                    "ToLengthTemplate",                // String ID of Resource
+                    "#Length string#  Gives the length of a string",
+                    isResource:false
+                ) },
+
 
 
 
@@ -158,6 +360,9 @@ ORDER BY pkg.Name
                 "// Help to available Macros\r\n" +
                 "// - #Branch#                    Replaced by the package ID of the selected package and all nested package like '512, 31,613' \r\nTip: Select Package while inserting via Macro" +
                 "// - #Branch={...guid....}#      Replaced by the package ID of the package according to GUID and all nested package like '512, 31,613' \r\n" +
+                "// - #CondBranchStatement#       ' AND pkg.Package_ID in (...) ' If a package is selected in Browser: Make a SQL statement with ... comma separated list of Package_Ids of the selected package (recursive) \r\n" +
+                "// - #CondBranchStatement operation1, column, operation#  ' operation1, column, operation2 (...) ' If a package is selected in Browser: Make a SQL statement with ' ... comma separated list of Package_Ids of the selected package (recursive) \r\n" +
+                "//   Example: #CondBranchStatement AND, pkg.Package_Id, in# ' AND pkg.Package_id in (....) ' ... Package_Ids of the selected package recursive " +
                 "// - #Concat= <value1>, <value2>,..# Provides a method of concatenating two or more SQL terms into one string, independent of the database type." +
                 "// - #ConnectorID#              Selected Connector, Replaced by ConnectorID\r\n" +
                 "// - #ConveyedItemIDS#           Selected Connector, Replaced by the Conveyed Items as comma separated list of ElementIDs like ' IN (#ConveyedItemIDS#)'\r\n" +
@@ -344,6 +549,11 @@ Tip: Select Package while inserting in SQL via Insert Macro in Context Menu"
                 new SqlTemplate("IN_BRANCH_IDS",
                     "#InBranch#",
                     "Placeholder for sql in clause for the current selected package (recursive), use as PackageID\nExample: pkg.Package_ID  (#InBranch#)\nExpands to 'IN (512,513,..)' ") },
+
+            { SqlTemplateId.CondBranchStatement,
+                new SqlTemplate("IN_BRANCH_IDS",
+                    "#CondBranchStatement#",
+                    "If a Package is in the browser selected it adds: 'AND pkg.package_id in (.....) ' where ... are the beneath package ids.\nExpands to ' AND pkg.package_id IN (512,513,..)' ") },
             { SqlTemplateId.NewGuid,
                 new SqlTemplate("NewGuid",
                     "#NewGuid#",
@@ -494,6 +704,7 @@ For: Package, Element, Diagram, Attribute, Operation"
             ConnectorsFromElementTemplate, // Template to get the Connector with Conveyed Items from Element
             PackageId,      // The containing package of Package, Diagram, Element, Attribute, Operation
             Package,         // The containing package of Package, Diagram, Element, Attribute, Operation (compatible with EA)
+            CondBranchStatement, // If a package is selected: ' AND pkg.Package_id in (.....) '
             BranchIds,     // Package (nested, recursive) ids separated by ','  like '20,21,47,1'
             BranchIdsConstantPackage, // Package (nested, recursive) for the package defined by the GUID, ids separated by ','  like '20,21,47,1'
             InBranchIds,  // Package (nested, recursive), complete SQL in clause, ids separated by ','  like 'IN (20,21,47,1)', just a shortcut for #BRANCH_ID#
@@ -536,8 +747,10 @@ For: Package, Element, Diagram, Attribute, Operation"
             If,                         // #If condition, trueValue, falseValue#
             // Provides a method of concatenating two or more SQL terms into one string, independent of the database type.
             // See EA Create Search Definitions
-            ToLower                     // #ToLower string#
+            ToLower,                     // #ToLower string#
             // Coverts to lower case
+            Length                      // #Length string#
+                                        // Gives the length of a string
         }
         #endregion
 
@@ -620,9 +833,10 @@ For: Package, Element, Diagram, Attribute, Operation"
             // delete Comments
             string sql = deleteC_Comments(sqlString);
 
-            // Concatenate strings
-            // #Concat str1, str2,..#
-            sql = macroConcat_ID(rep, sql);
+ // replace DB specific code
+            sql = FormatSqlDbSpecific(rep, sql);
+
+
 
             // Find needle in hay-stack
             // #Instr start, stack, needle#
@@ -631,6 +845,18 @@ For: Package, Element, Diagram, Attribute, Operation"
 
             // if #If condition, trueValue, falseValue#
             sql = macroIf_ID(rep, sql);
+
+ // macro Format a number with left padding and thousand separator
+            // #Format numberString, length, stringPaddingBefore#
+            sql = MacroFormat(rep, sql);
+
+            // macro LPad
+            // #Lpad numberString, length, stringPaddingBefore#
+            sql = MacroLPad(rep, sql);
+
+            // macro RPad
+            // #RPad numberString, length, stringPaddingAfter#
+            sql = MacroRPad(rep, sql);
 
             // if #ToString str#
             sql = macroToString(rep, sql);
@@ -643,6 +869,8 @@ For: Package, Element, Diagram, Attribute, Operation"
             // #Right string, count#
             sql = macroRight_ID(rep, sql);
 
+   // #Length string#
+            sql = macroLength_ID(rep, sql);
             // #SubString string, start, length#
             // start rel 1
             sql = macroSubstring_ID(rep, sql);
@@ -650,6 +878,8 @@ For: Package, Element, Diagram, Attribute, Operation"
             // #ToLower string#
             sql = macroToLower_ID(rep, sql);
 
+   // #ToUpper string#
+            sql = macroToUpper_ID(rep, sql);
             // <Search Term>
             sql = sql.Replace(GetTemplateText(SqlTemplateId.SearchTerm), searchTerm);
 
@@ -698,8 +928,19 @@ For: Package, Element, Diagram, Attribute, Operation"
             sql = MacroBranchConstantPackage(rep, sql);
             if (sql == "") return "";
 
+          // replace #Branch={...guid....}# by a list of nested packages
+            sql = MacroCondBranchStatement(rep, sql);
+            if (sql == "") return "";
+
+            
+
+
+            // Concatenate strings
+            // #Concat str1, str2,..#
+            sql = macroConcat_ID(rep, sql);
             // Replace #WC# (DB wile card)
             // Later '*' is changed to the wild card of the current DB
+    // see: ReplaceSqlWildCards
             string currentTemplate = GetTemplateText(SqlTemplateId.Wc);
             if (sql.Contains(currentTemplate))
             {
@@ -859,6 +1100,10 @@ For: Package, Element, Diagram, Attribute, Operation"
                     case "MYSQL":
                         replacement = $"if({match.Groups[1].Value.Trim()} = 0,'FALSE','TRUE')";
                         break;
+   case "SQLITE":
+                    case "SL3":
+                        replacement = $"iif({match.Groups[1].Value.Trim()} = 0,'FALSE','TRUE')";
+                        break;
                     default:
                         replacement = match.Groups[1].Value.Trim().ToLower();
                         break;
@@ -934,6 +1179,10 @@ For: Package, Element, Diagram, Attribute, Operation"
                     case "MYSQL":
                         replacement = $"Lower({match.Groups[1].Value.Trim()})";
                         break;
+    case "SQLITE":
+                    case "SL3":
+                        replacement = $"Lower({match.Groups[1].Value.Trim()})";
+                            break;
                     default:
                         replacement = $"LCase({match.Groups[1].Value.Trim()})";
                         break;
@@ -946,6 +1195,47 @@ For: Package, Element, Diagram, Attribute, Operation"
             return sql;
         }
 
+      /// <summary>
+        /// macro ToLower
+        /// #ToLower string#
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <param name="sql"></param>
+        /// <returns></returns>
+
+        static string macroToUpper_ID(Repository rep, string sql)
+        {
+            Match match = Regex.Match(sql, @"#ToUpper\s+([^#]*)#", RegexOptions.IgnoreCase);
+            {
+                while (match.Success)
+                {
+
+                    string replacement;
+                    switch (RepType(rep))
+                    {
+                        case "JET":
+                        case "ACCESS":
+                            replacement = $"UCase({match.Groups[1].Value.Trim()})";
+                            break;
+                        case "MYSQL":
+                            replacement = $"Upper({match.Groups[1].Value.Trim()})";
+                            break;
+                        case "SQLITE":
+                        case "SL3":
+                            replacement = $"Upper({match.Groups[1].Value.Trim()})";
+                            break;
+                        default:
+                            replacement = $"UCase({match.Groups[1].Value.Trim()})";
+                            break;
+                    }
+
+                    sql = sql.Replace(match.Groups[0].Value, replacement);
+                    match = match.NextMatch();
+                }
+            }
+            return sql;
+
+        }
 
 
         /// <summary>
@@ -979,6 +1269,45 @@ For: Package, Element, Diagram, Attribute, Operation"
 
                     default:
                         replacement = $"Right({match.Groups[1].Value.Trim()},{match.Groups[2].Value.Trim()})";
+                        break;
+                }
+                sql = sql.Replace(match.Groups[0].Value, replacement);
+                match = match.NextMatch();
+            }
+
+            return sql;
+        }
+        /// <summary>
+        /// macro Length of a string
+        /// #Length string#
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <param name="sql"></param>
+        /// <returns></returns>
+
+        static string macroLength_ID(Repository rep, string sql)
+        {
+            Match match = Regex.Match(sql, @"#Length\s+([^#]*)#", RegexOptions.IgnoreCase);
+            while (match.Success)
+            {
+
+                string replacement;
+                switch (RepType(rep))
+                {
+                    case "JET":
+                    case "ACCESS":
+                        replacement = $"Len({match.Groups[1].Value.Trim()})";
+                        break;
+                    case "MYSQL":
+                        replacement = $"Length({match.Groups[1].Value.Trim()})";
+                        break;
+                    case "SQLITE":
+                    case "SL3":
+                        replacement = $"Length({match.Groups[1].Value.Trim()})";
+                        break;
+
+                    default:
+                        replacement = $"Length({match.Groups[1].Value.Trim()})";
                         break;
                 }
                 sql = sql.Replace(match.Groups[0].Value, replacement);
@@ -1061,6 +1390,126 @@ For: Package, Element, Diagram, Attribute, Operation"
             return sql;
         }
         /// <summary>
+ /// macro Format a number with left padding and thousand separator
+        /// #Format numberString, length, stringPaddingBefore#
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <param name="sql"></param>
+        /// <returns></returns>
+
+        static string MacroFormat(Repository rep, string sql)
+        {
+            Match match = Regex.Match(sql, @"#Format\s+([^,]*),\s*([^#]*),\s*([^#]*)#", RegexOptions.IgnoreCase);
+            while (match.Success)
+            {
+
+                string replacement;
+                var stringPaddingBefore = string.Concat(Enumerable.Repeat(match.Groups[3].Value.Trim(), 20));
+                switch (RepType(rep))
+                {
+                    case "JET":
+                    case "ACCESS":
+                         replacement = $"Right (\"{stringPaddingBefore}\" & Format({match.Groups[1].Value.Trim()}, \"#,###\"),{match.Groups[2].Value.Trim()})";
+                        break;
+                    case "MYSQL":
+                        replacement = $"Right (Concat(\"{stringPaddingBefore}\", Format({match.Groups[1].Value.Trim()}, 0)), {match.Groups[2].Value.Trim()} )";
+                        break;
+                    case "SQLITE":
+                    case "SL3":
+                        replacement = $"Substring( \"{stringPaddingBefore}\" || printf (\"%,d\",{match.Groups[1].Value.Trim()}),-{match.Groups[2].Value.Trim()}, {match.Groups[2].Value.Trim()})";
+                        break;
+                    default:
+                        replacement = $"Right (\"{stringPaddingBefore}\" & Format({match.Groups[1].Value.Trim()}, \"#,###\"),{match.Groups[2].Value.Trim()})";
+                        break;
+                }
+                sql = sql.Replace(match.Groups[0].Value, replacement);
+                match = match.NextMatch();
+            }
+
+
+            return sql;
+        }
+        /// <summary>
+        /// macro LPad Pad a string with leading string/character
+        /// #LPad string, length, stringPaddingBefore#
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <param name="sql"></param>
+        /// <returns></returns>
+
+        static string MacroLPad(Repository rep, string sql)
+        {
+            Match match = Regex.Match(sql, @"#LPad\s+([^,]*),\s*([^#]*),\s*([^#]*)#", RegexOptions.IgnoreCase);
+            while (match.Success)
+            {
+
+                string replacement;
+                var stringPaddingBefore = string.Concat(Enumerable.Repeat(match.Groups[3].Value.Trim(), 20));
+                switch (RepType(rep))
+                {
+                    case "JET":
+                    case "ACCESS":
+                        replacement = $"Right (\"{stringPaddingBefore}\" & {match.Groups[1].Value.Trim()},{match.Groups[2].Value.Trim()})";
+                        break;
+                    case "MYSQL":
+                        replacement = $"Right (Concat(\"{stringPaddingBefore}\", {match.Groups[1].Value.Trim()}), {match.Groups[2].Value.Trim()} )";
+                        break;
+                    case "SQLITE":
+                    case "SL3":
+                        replacement = $"Substring( \"{stringPaddingBefore}\" || {match.Groups[1].Value.Trim()},-{match.Groups[2].Value.Trim()}, {match.Groups[2].Value.Trim()})";
+                        break;
+                    default:
+                        replacement = $"Right (\"{stringPaddingBefore}\" & {match.Groups[1].Value.Trim()},{match.Groups[2].Value.Trim()})";
+                        break;
+                }
+                sql = sql.Replace(match.Groups[0].Value, replacement);
+                match = match.NextMatch();
+            }
+
+
+            return sql;
+        }
+        /// <summary>
+        /// macro RPad Pad a string with trailing string/character
+        /// #RPad string, length, stringPaddingAfter#
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <param name="sql"></param>
+        /// <returns></returns>
+
+        static string MacroRPad(Repository rep, string sql)
+        {
+            Match match = Regex.Match(sql, @"#RPad\s+([^,]*),\s*([^#]*),\s*([^#]*)#", RegexOptions.IgnoreCase);
+            while (match.Success)
+            {
+
+                string replacement;
+                var stringPaddingAfter = string.Concat(Enumerable.Repeat(match.Groups[3].Value.Trim(), 20));
+                switch (RepType(rep))
+                {
+                    case "JET":
+                    case "ACCESS":
+                        replacement = $"Left ({match.Groups[1].Value.Trim()} & \"{stringPaddingAfter}\",{match.Groups[2].Value.Trim()})";
+                        break;
+                    case "MYSQL":
+                        replacement = $"Left (Concat( {match.Groups[1].Value.Trim()}, \"{stringPaddingAfter}\"), {match.Groups[2].Value.Trim()} )";
+                        break;
+                    case "SQLITE":
+                    case "SL3":
+                        replacement = $"Substring(  {match.Groups[1].Value.Trim()} || \"{stringPaddingAfter}\",1, {match.Groups[2].Value.Trim()})";
+                        break;
+                    default:
+                        replacement = $"Left ({match.Groups[1].Value.Trim()} & \"{stringPaddingAfter}\",{match.Groups[2].Value.Trim()})";
+                        break;
+                }
+                sql = sql.Replace(match.Groups[0].Value, replacement);
+                match = match.NextMatch();
+            }
+
+
+            return sql;
+        }
+        /// <summary>
         /// macro #InStr start, stack, needle#
         /// InStr: Searches for needle in stack and gives the position
         ///
@@ -1091,7 +1540,7 @@ For: Package, Element, Diagram, Attribute, Operation"
                     case "SQLITE":
                     case "SL3":
                         // Instr(stack, needle)
-                        replacement = $"InStr({match.Groups[2].Value.Trim()},{match.Groups[1].Value.Trim()})";
+ replacement = $"InStr({match.Groups[2].Value.Trim()},{match.Groups[3].Value.Trim()})";
                         break;
                     default:
                         replacement = $"InStr({match.Groups[1].Value.Trim()},{match.Groups[2].Value.Trim()},{match.Groups[3].Value.Trim()})";
@@ -1276,13 +1725,14 @@ For: Package, Element, Diagram, Attribute, Operation"
                 if (id > 0)
                 {
                     sql = sql.Replace(template, $@"{id}");
-                    sql = sql.Replace("#CurrentElementID#", $"{id}");// Alias for EA compatibility
+                    sql = sql.Replace("#CurrentElementID#", $@"{id}");// Alias for EA compatibility
                 }
                 else
                 // no diagram, element or package selected
                 {
                     // replace by empty list of IDs
                     sql = sql.Replace(template, $@" 0 ");
+                    sql = sql.Replace("#CurrentElementID#", $@" 0 ");// Alias for EA compatibility
                 }
 
             }
@@ -1642,6 +2092,81 @@ For: Package, Element, Diagram, Attribute, Operation"
             return sql;
         }
 
+
+        /// <summary>
+        /// Replace macro #CondBranchStatement operator, column# by a sql statement checking the recursive IDs of the selected Browser Packages, recursive nested. 
+        /// It uses the package the Package selected in Browser tree or removes the macro all together.
+        /// ... stands for the comma separated Package ids
+        ///
+        /// Example:
+        /// - #CondBranchStatement#                         ==> 'AND pkg.Package_id in (...) '
+        /// - #CondBranchStatement AND, pkg.Package_Id, in# ==> 'AND pkg.Package_Id in (...) '
+        ///
+        /// Optional parameters:
+        /// - Operator1  (e.g. 'AND')
+        /// - Column     (e.g. 't.package_id')
+        /// - Operator2  (e.g. 'in')
+        /// Result: ' operator1 column operator 2 (...) ' 
+        /// 
+        /// If no optional parameter is used:
+        /// ' AND pkg.Package_id in (....) '
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <param name="sql">The sql string to replace the macro by the found ID</param>
+        /// <returns>sql string with replaced macro</returns>
+        static string MacroCondBranchStatement(Repository rep, string sql)
+        {
+            // Branch=comma separated Package IDs, Recursive:
+            // Example for 3 Packages with their PackageID 7,29,128
+            // 7,29,128
+            //
+            // Branch: complete SQL IN statement ' AND package_id in (comma separated Package IDs, Recursive):
+            // IN (7,29,128)
+            string currentBranchTemplate = GetTemplateText(SqlTemplateId.CondBranchStatement);
+            if (sql.Contains(currentBranchTemplate))
+            {
+                ObjectType objectTypeContext = rep.GetContextItem(out _);
+                ObjectType objectType = rep.GetTreeSelectedItem(out object obj);
+                int id = 0;
+                if (objectTypeContext != ObjectType.otPackage) return sql.Trim();
+                switch (objectType)
+                {
+                   case ObjectType.otPackage:
+                        EA.Package pkg = (EA.Package)obj;
+                        id = pkg.PackageID;
+                        break;
+                }
+                // Context element available
+                if (id > 0)
+                {
+                    // get package recursive
+                    string branch = GetBranch(rep, "", id);
+                    // find #CondBranchStatement...# with optional parameter
+                    var pattern = $@"{currentBranchTemplate.Remove(currentBranchTemplate.Length - 1)}([^#]*)#";
+                    Match match = Regex.Match(sql,pattern , RegexOptions.IgnoreCase);
+                    while (match.Success)
+                    {
+                        var lColumns = match.Groups[1].Value.Split(',');
+                        if (lColumns.Length == 3)
+                            sql = sql.Replace(match.Groups[0].Value, $@" {lColumns[0]} {lColumns[1]} {lColumns[2]} ({branch}) ");
+                        else
+                        {
+                            sql = sql.Replace(match.Groups[0].Value, $@" AND pkg.package_id in ({branch}) ");
+                        }
+                        match = match.NextMatch();
+                    }
+
+                }
+                else
+                // no diagram, element or package selected
+                {
+                    // replace by empty statement
+                    sql = sql.Replace(currentBranchTemplate, $@" ");
+                }
+            }
+            return sql.Trim();
+        }
+
         /// <summary>
         /// Replace macro #Branch={..guid..}# and #InBranch={..guid..}# by IDs of selected packages, recursive nested. 
         /// It uses the package of the guid and not of the selected Package
@@ -1686,7 +2211,7 @@ For: Package, Element, Diagram, Attribute, Operation"
                     // get package recursive
                     string branch = Package.GetBranch(rep, "", id);
                     sql = sql.Replace(currentBranchTemplate, branch);
-                    sql = sql.Replace(currrentInBranchTemplate, branch);
+                   
                 }
                 else
                 // no diagram, element or package selected
@@ -1739,5 +2264,139 @@ For: Package, Element, Diagram, Attribute, Operation"
             if (repType.StartsWith("ACCESS")) return "ACCESS";
             return repType;
         }
+     /// <summary>
+        /// Format DB specific by removing unnecessary DB specific string parts.
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <returns></returns>
+        //#DB=Asa#                DB specif SQL for Asa
+        //#DB=FIREBIRD#           DB specif SQL for FIREBIRD
+        //#DB=JET#                DB specif SQL for JET
+        //#DB=MySql#              DB specif SQL for My SQL
+        //#DB=ACCESS2007#         DB specif SQL for ACCESS2007
+        //#DB=ORACLE#             DB specif SQL for Oracle
+        //#DB=POSTGRES#           DB specif SQL for POSTGRES
+        //#DB=SqlSvr#             DB specif SQL for SQL Server
+        //#DB=SQLite#             DB specif SQL for SQLite
+        private static string FormatSqlDbSpecific(Repository rep, string sql)
+        {
+            // available DBs
+            // Key: Repository.RepositoryType() 'Access2007' transformed to 'Access'
+            var dbs = new Dictionary<string, string>()
+            {
+                { "ACCESS", "#DB=ACCESS2007#" }, // documentation 
+                { "Asa", "#DB=Asa#" },
+                { "Firebird", "#DB=FIREBIRD#" },
+                { "JET", "#DB=JET#" },
+                { "MYSQL", "#DB=MySql#" },
+                { "Oracle", "#DB=ORACLE#" },
+                { "Postgres", "#DB=POSTGRES#" },
+                { "SqlSvr", "#DB=SqlSvr#" },
+                { "Other", "#DB=Other#" },
+                //{ "SQLite", "#DB=SQLITE#" },
+                { "SL3", "#DB=SQLITE#" }
+
+            };
+            var dbType = dbs.Where(x=>x.Key == RepType(rep)).Select(x=>x.Value).FirstOrDefault();
+            if (String.IsNullOrEmpty(dbType))
+            {
+                MessageBox.Show($@"DB not supported in SQL, only 'ACCESS', 'MYSQL', 'JET', 'SQLite', 'SL3'!
+{sql}",$@"DB {RepType(rep)} not supported");
+                return sql;
+            }
+            string s = sql;
+            foreach (var curDb in dbs)
+            {
+                if (curDb.Key.ToLower() != RepType(rep).ToLower())
+                {   // delete not used DBs
+                    string delete = $"{curDb.Value}.*?{curDb.Value}";
+                    s = Regex.Replace(s, delete, "", RegexOptions.Multiline | RegexOptions.IgnoreCase);
+                }
+
+            }
+            // delete remaining DB identifying string
+            s = Regex.Replace(s, @"#DB=(Asa|FIREBIRD|JET|MySql|ORACLE|ACCESS2007|POSTGRES|SqlSvr|SQLITE)#", "", RegexOptions.Multiline | RegexOptions.IgnoreCase);
+
+            // delete multiple empty lines
+            for (int i = 0; i < 4; i++)
+            {
+                s = Regex.Replace(s, "\r\n\r\n", "", RegexOptions.Multiline | RegexOptions.IgnoreCase);
+            }
+            return s;
+        }
+    }
+    /// <summary>
+    /// The RegEx show column definition
+    /// </summary>
+    public class RegExShowColumn
+    {
+        public RegExShowColumn(string srcColumn, string trgColumn, string regExString)
+        {
+            SrcColumn = srcColumn;
+            TrgColumn = trgColumn;
+            RegExString = regExString;
+
+        }
+        /// <summary>
+        /// Get the regex
+        /// </summary>
+        /// <returns></returns>
+        public Regex GetRegEx()
+        {
+            try
+            {
+                var regex = new Regex(RegExString);
+                return regex;
+
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($@"String: {RegExString}
+
+{e}", @"Error Regex");
+                return null;
+            } 
+            
+        }
+        public string SrcColumn;
+        public string TrgColumn;
+        public string RegExString;
+    }
+    /// <summary>
+    /// The RegEx to filter rows due to column content
+    /// </summary>
+    public class RegExFilterRows
+    {
+        public RegExFilterRows(string condition, string column, string regExString)
+        {
+            Condition = condition;
+            Column = column;
+            RegExString = regExString;
+
+        }
+        /// <summary>
+        /// Get the regex
+        /// </summary>
+        /// <returns></returns>
+        public Regex GetRegEx()
+        {
+            try
+            {
+                var regex = new Regex(RegExString);
+                return regex;
+
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($@"String: {RegExString}
+
+{e}", @"Error Regex");
+                return null;
+            }
+
+        }
+        public string Condition;
+        public string Column;
+        public string RegExString;
     }
 }

@@ -129,6 +129,8 @@ Some features:
 
 ## Releases
 
+### 4.2.4 fix SQL Server access fixed
+
 ### 4.2.3 fixes MySQL, DB access, integrate macros #DB=SQLITE#,... see EA documentation
 
 - Create HoTools_x.xx.x.zip with HoTools.msi. HoTools.readme, HoToolsX64.msi

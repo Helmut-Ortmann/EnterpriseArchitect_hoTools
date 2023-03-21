@@ -58,7 +58,7 @@ namespace hoTools.Utils.SQL
         /// </summary>
         private static readonly string[] LRepoTypes =
         {
-            "MYSQL", "SQLSRV","JET", "ORACLE", "POSTGRES", "ASA", "ACCESS2007", "FIREBIRD","SL3"   // SL3=SQLite 
+            "MYSQL", "SQLSVR","JET", "ORACLE", "POSTGRES", "ASA", "ACCESS2007", "FIREBIRD","SL3"   // SL3=SQLite 
         };
 
         /// <summary>

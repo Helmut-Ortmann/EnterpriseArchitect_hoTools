@@ -38,9 +38,13 @@ Helmut.Ortmann@t-online.de
             FileVersionInfo fileVersionInfo = FileVersionInfo.GetVersionInfo(assembly.Location);
             var conString = new EaConnectionString(rep);
 
+            string pathRoot = Assembly.GetExecutingAssembly().Location;
+            string pathDll = Path.Combine(new[] { Path.GetDirectoryName(pathRoot), "hoToolsRoot.dll" });
+            string versionRoot = FileVersionInfo.GetVersionInfo(pathDll).FileVersion;
+
             var runTimeEnvironment = Environment.Is64BitProcess == true ? "x64" : "x86";
             description =
-                    $"{description}{"Product-Version:",-32}\t\tV{fileVersionInfo.ProductVersion}{Environment.NewLine}"+
+                    $"{description}{"Product-Version (hoToolsRoot.dll):",-32}\tV{versionRoot}{Environment.NewLine}" +
                     $"{"EA Library Version:",-32}\t\t{ rep.LibraryVersion}{Environment.NewLine}" +
                     $"{"EA ConnectionString:", -32}\t\t{ rep.ConnectionString}{Environment.NewLine}"+
                     $"{"DB ConnectionString:",-32}\t\t'{conString.DbConnectionString ?? " "}'{Environment.NewLine}" +
@@ -50,12 +54,12 @@ Helmut.Ortmann@t-online.de
 
 
             // Get file-version of every dll
-            string pathRoot = Assembly.GetExecutingAssembly().Location;
+            pathRoot = Assembly.GetExecutingAssembly().Location;
             pathRoot = Path.GetDirectoryName(pathRoot);
             foreach (string dllName in lDllNames)
             {
 
-                string pathDll = Path.Combine(new[] { pathRoot, dllName });
+                pathDll = Path.Combine(new[] { pathRoot, dllName });
                 try
                 {
                     

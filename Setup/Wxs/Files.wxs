@@ -317,12 +317,12 @@
         <File Id="KBCsv.Extensions.Data" KeyPath="yes" Name="KBCsv.Extensions.Data.dll"  Source="$(var.NugetCollectorProject.TargetDir)\KBCsv.Extensions.Data.dll" />
       </Component>
       <!--   Nuget: Get-Project –All | Add-BindingRedirect    -->
-      <!-- DocumentFormat.OpenXml.2.9.1 / DocumentFormat.OpenXml.2.9.1 -->
+      <!-- ClosedXml 0.97 needs: DocumentFormat.OpenXml 2.16 -->
       <Component Id="DocumentFormat.OpenXml" Guid="F6FBBA69-A929-413B-A13B-BBDD7851D1F7">
         <File Id="DocumentFormat.OpenXml" KeyPath="yes" Name="DocumentFormat.OpenXml.dll"  Source="$(var.NugetCollectorProject.TargetDir)\DocumentFormat.OpenXml.dll" />
       </Component>
 
-      <!-- ClosedXml needs: DocumentFormat.OpenXml 2.7.2-->
+      <!-- ClosedXml 0.97 needs: DocumentFormat.OpenXml 2.16-->
       <Component Id="ClosedXml" Guid="969900BC-0842-4E36-B550-35AA37682D19">
         <File Id="ClosedXml" KeyPath="yes" Name="ClosedXml.dll"  Source="$(var.NugetCollectorProject.TargetDir)\ClosedXML.dll" />
       </Component>
