@@ -314,12 +314,12 @@
         <File Id="KBCsv.Extensions.Data" KeyPath="yes" Name="KBCsv.Extensions.Data.dll"  Source="$(var.NugetCollectorProject.TargetDir)\KBCsv.Extensions.Data.dll" />
       </Component>
       <!--   Nuget: Get-Project –All | Add-BindingRedirect    -->
-      <!-- DocumentFormat.OpenXml.2.9.1 / DocumentFormat.OpenXml.2.9.1 -->
+      <!-- ClosedXml 0.97 needs: DocumentFormat.OpenXml 2.16 -->
       <Component Id="DocumentFormat.OpenXml" Guid="F6FBBA69-A929-413B-A13B-BBDD7851D1F7">
         <File Id="DocumentFormat.OpenXml" KeyPath="yes" Name="DocumentFormat.OpenXml.dll"  Source="$(var.NugetCollectorProject.TargetDir)\DocumentFormat.OpenXml.dll" />
       </Component>
 
-      <!-- ClosedXml needs: DocumentFormat.OpenXml 2.7.2-->
+     <!-- ClosedXml 0.97 needs: DocumentFormat.OpenXml 2.16 -->
       <Component Id="ClosedXml" Guid="969900BC-0842-4E36-B550-35AA37682D19">
         <File Id="ClosedXml" KeyPath="yes" Name="ClosedXml.dll"  Source="$(var.NugetCollectorProject.TargetDir)\ClosedXML.dll" />
       </Component>
@@ -327,6 +327,15 @@
      <Component Id="FastMember.dll" Guid="{C5F1B203-7AA4-4ED6-9077-1E0E0FB8C9F1}">
        <File Id="FastMember.dll" KeyPath="yes" Name="FastMember.dll"  Source="$(var.NugetCollectorProject.TargetDir)\FastMember.dll" />
      </Component>
+
+     <Component Id="System.IO.Packaging.dll" Guid="{D9867A2E-606E-43CA-BAB1-C8932FF21F22}">
+       <File Id="System.IO.Packaging.dll" KeyPath="yes" Name="System.IO.Packaging.dll"  Source="$(var.NugetCollectorProject.TargetDir)\System.IO.Packaging.dll" />
+     </Component>
+
+     <Component Id="SixLabors.Fonts.dll" Guid="{D82F1106-9AE7-4C67-9E6E-146BFA7083A5}">
+       <File Id="SixLabors.Fonts.dll" KeyPath="yes" Name="SixLabors.Fonts.dll"  Source="$(var.NugetCollectorProject.TargetDir)\SixLabors.Fonts.dll" />
+     </Component>
+
 
       <!-- linq2db                   -->
      <!-- Separate install MySqlConnector.dll for MySQL-->

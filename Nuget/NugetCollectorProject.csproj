@@ -161,6 +161,9 @@
     <PackageReference Include="Npgsql">
       <Version>7.0.2</Version>
     </PackageReference>
+    <PackageReference Include="SixLabors.Fonts">
+      <Version>1.0.0-beta19</Version>
+    </PackageReference>
     <PackageReference Include="SQLite.Interop">
       <Version>1.0.0</Version>
     </PackageReference>

@@ -330,6 +330,14 @@
      <Component Id="FastMember.dll" Guid="{C5F1B203-7AA4-4ED6-9077-1E0E0FB8C9F1}">
        <File Id="FastMember.dll" KeyPath="yes" Name="FastMember.dll"  Source="$(var.NugetCollectorProject.TargetDir)\FastMember.dll" />
      </Component>
+     <Component Id="System.IO.Packaging.dll" Guid="{9C913AD7-E226-489E-B95B-83EC3397E4E4}">
+       <File Id="System.IO.Packaging.dll" KeyPath="yes" Name="System.IO.Packaging.dll"  Source="$(var.NugetCollectorProject.TargetDir)\System.IO.Packaging.dll" />
+     </Component>
+
+
+     <Component Id="SixLabors.Fonts.dll" Guid="{48807D82-921A-4FAD-8AC3-DC60F0AD1664}">
+       <File Id="SixLabors.Fonts.dll" KeyPath="yes" Name="SixLabors.Fonts.dll"  Source="$(var.NugetCollectorProject.TargetDir)\SixLabors.Fonts.dll" />
+     </Component>
 
       <!-- linq2db                   -->
       <!-- Supported databases Access, MySQL, SqlServer, Oracle, Sybase, Postgres (tested: Access, MySQL, SqlServer) -->

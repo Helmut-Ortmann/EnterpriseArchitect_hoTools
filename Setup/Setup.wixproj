@@ -172,7 +172,7 @@
     <VerboseOutput>True</VerboseOutput>
   </PropertyGroup>
   <PropertyGroup>
-    <PostBuildEvent>"$(SolutionDir)\Setup\Scripts\renamemsi.bat" "$(SolutionDir)\Setup\bin\x86\Release\en-us\hoTools.msi" "$(SolutionDir)readme.md"</PostBuildEvent>
+    <PostBuildEvent>"$(SolutionDir)\Setup\Scripts\renamemsi.bat" "$(SolutionDir)\Setup\bin\x86\Release\en-us\hoTools.msi" "$(SolutionDir)hotools_root\readme.md"</PostBuildEvent>
   </PropertyGroup>
   <!--
 	To modify your build process, add your task inside one of the targets below and uncomment it.

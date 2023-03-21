@@ -683,7 +683,7 @@ No Excel is required.</value>
     <value>Export the Clipboard content as csv to Excel</value>
   </data>
   <data name="contextMenuRtf.Size" type="System.Drawing.Size, System.Drawing">
-    <value>514, 352</value>
+    <value>514, 407</value>
   </data>
   <data name="contextMenuRtf.ToolTip" xml:space="preserve">
     <value>Edit SQL Search in your Editor.
@@ -4110,9 +4110,6 @@ If you want to use LINQPad with EA you need:
   </data>
   <data name="_menuStrip1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
-  </data>
-  <data name="_menuStrip1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 2, 0, 2</value>
   </data>
   <data name="_menuStrip1.Size" type="System.Drawing.Size, System.Drawing">
     <value>1152, 53</value>
