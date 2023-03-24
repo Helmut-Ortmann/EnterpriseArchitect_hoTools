@@ -22,8 +22,10 @@ namespace hoTools.Utils.Sql
     /// </summary>
     public class SqlTemplates
     {
+        // ReSharper disable once PrivateFieldCanBeConvertedToLocalVariable
         private readonly Repository _rep;
         private readonly string _sqlString;
+        // ReSharper disable once NotAccessedField.Local
         private string _repType;
         //
         // Show the Regex result for a Column
@@ -66,7 +68,7 @@ namespace hoTools.Utils.Sql
         /// </summary>
         /// <param name="rep"></param>
         /// <param name="sqlString"></param>
-        public SqlTemplates(EA.Repository rep, string sqlString)
+        public SqlTemplates(Repository rep, string sqlString)
         {
             _rep = rep;
 
@@ -179,7 +181,7 @@ namespace hoTools.Utils.Sql
                             if (m.Success)
                             {
                                 if (item.Condition == "AND") showRow = showRow & true;
-                                if (item.Condition == "OR") showRow = showRow | true;
+                                if (item.Condition == "OR") showRow = true;
 
                             }
                             else
@@ -1633,7 +1635,7 @@ static string macroToBool(Repository rep, string sql)
                     string listId = "0";
                     foreach (var el in dia.DiagramObjects)
                     {
-                        int id = ((EA.DiagramObject)el).ElementID;
+                        int id = ((DiagramObject)el).ElementID;
                         listId = $@"{listId},{id}";
                     }
 
@@ -1674,7 +1676,7 @@ static string macroToBool(Repository rep, string sql)
                     string listId = "0";
                     foreach (var el in dia.SelectedObjects)
                     {
-                        int id = ((EA.DiagramObject)el).ElementID;
+                        int id = ((DiagramObject)el).ElementID;
                         listId = $@"{listId},{id}";
 
                     }
@@ -1700,7 +1702,7 @@ static string macroToBool(Repository rep, string sql)
             if (sql.Contains(template) | sql.Contains("#CurrentElementID#"))
             {
                 ObjectType objectType = rep.GetContextItemType();
-                int id = 0;
+                int id;
                 switch (objectType)
                 {
                     case ObjectType.otElement:
@@ -1891,7 +1893,7 @@ static string macroToBool(Repository rep, string sql)
                 if (rep.GetContextItemType() == ObjectType.otConnector)
                 {
                     // connector ID
-                    Connector con = (EA.Connector)rep.GetContextObject();
+                    Connector con = (Connector)rep.GetContextObject();
                     if (sql.Contains(currentConnectorTemplate))
                     {
                         
@@ -2042,6 +2044,8 @@ static string macroToBool(Repository rep, string sql)
                 {
                     // get package recursive
                     string branch = Package.GetBranch(rep, "", id);
+                    // Handle empty branches
+                    branch = String.IsNullOrWhiteSpace(branch) ? " 0 " : branch;
                     sql = sql.Replace(currentBranchTemplate, branch);
                     sql = sql.Replace(currrentInBranchTemplate, branch);
                 } else
@@ -2075,7 +2079,7 @@ static string macroToBool(Repository rep, string sql)
             {
                 string branchPattern = GetTemplateText(id);
                 branchPattern = branchPattern.Remove(branchPattern.Length - 1);
-                branchPattern = branchPattern + @"=({[ABCDEF0-9-]*})#";
+                branchPattern += @"=({[ABCDEF0-9-]*})#";
                 Regex pattern = new Regex(branchPattern, RegexOptions.IgnoreCase);
                 MatchCollection matches = pattern.Matches(sql);
                 if (matches.Count > 0)
@@ -2086,13 +2090,15 @@ static string macroToBool(Repository rep, string sql)
                         EA.Package pkg = rep.GetPackageByGuid(match.Groups[1].Value);
                         if (pkg == null)
                         {
-                            sql = sql.Replace(match.Groups[0].Value, " ");
+                            sql = sql.Replace(match.Groups[0].Value, " 0 ");
                             
                                 return sql;
 
                         }
                         int pkgId = pkg.PackageID;
                         string branch = Package.GetBranch(rep, "", pkgId);
+                        // Handle empty branches
+                        branch = String.IsNullOrWhiteSpace(branch) ? " 0 " : branch;
                         sql = sql.Replace(match.Groups[0].Value, branch);
                     }
                 }
@@ -2149,6 +2155,8 @@ static string macroToBool(Repository rep, string sql)
                 {
                     // get package recursive
                     string branch = GetBranch(rep, "", id);
+                    // Handle empty branches
+                    branch = String.IsNullOrWhiteSpace(branch) ? " 0 " : branch;
                     // find #CondBranchStatement...# with optional parameter
                     var pattern = $@"{currentBranchTemplate.Remove(currentBranchTemplate.Length - 1)}([^#]*)#";
                     Match match = Regex.Match(sql,pattern , RegexOptions.IgnoreCase);
@@ -2169,7 +2177,7 @@ static string macroToBool(Repository rep, string sql)
                 // no diagram, element or package selected
                 {
                     // replace by empty statement
-                    sql = sql.Replace(currentBranchTemplate, $@" ");
+                    sql = sql.Replace(currentBranchTemplate, $@" 0 ");
                 }
             }
             return sql.Trim();
@@ -2217,6 +2225,8 @@ static string macroToBool(Repository rep, string sql)
                 {
                     // get package recursive
                     string branch = GetBranch(rep, "", id);
+                    // Handle empty branches
+                    branch = String.IsNullOrWhiteSpace(branch) ? " 0 " : branch;
                     sql = sql.Replace(currentBranchTemplate, branch);
                    
                 }
@@ -2229,8 +2239,10 @@ static string macroToBool(Repository rep, string sql)
             }
             return sql;
         }
-       /// <summary>
+        /// <summary>
         /// Get list of package ids as comma separated list
+        ///
+        /// if nothing found a 0 is returned
         /// </summary>
         /// <param name="rep"></param>
         /// <param name="branch"></param>
@@ -2271,9 +2283,11 @@ static string macroToBool(Repository rep, string sql)
             if (repType.StartsWith("ACCESS")) return "ACCESS";
             return repType;
         }
-     /// <summary>
+
+        /// <summary>
         /// Format DB specific by removing unnecessary DB specific string parts.
         /// </summary>
+        /// <param name="rep"></param>
         /// <param name="sql"></param>
         /// <returns></returns>
         //#DB=Asa#                DB specif SQL for Asa
