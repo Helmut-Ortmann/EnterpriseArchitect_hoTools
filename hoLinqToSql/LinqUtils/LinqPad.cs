@@ -8,7 +8,9 @@ using System.Windows.Forms;
 using System.Xml.Linq;
 using EA;
 using HtmlAgilityPack;
+using LinqToDB.Configuration;
 using LinqToDB.DataProvider;
+using Org.BouncyCastle.Ocsp;
 using File = System.IO.File;
 using HtmlDocument = HtmlAgilityPack.HtmlDocument;
 
@@ -235,7 +237,7 @@ Error:
         /// <returns></returns>
         public string GetLinqPadName()
         {
-            string connectionString = LinqUtil.GetConnectionString(_rep, out IDataProvider provider, out string providerName);
+            string connectionString = LinqUtil.GetConnectionString(_rep, out IDataProvider _, out string _);
             string server = "";
             string db = null;
             // File based

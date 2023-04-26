@@ -391,6 +391,22 @@ ConnectionString: '{connectionString}'
             return conOption;
         }
 
+        /// <summary>
+        /// Get ConnectionOptions
+        /// 
+        /// From the path it gets the LINQDB options.
+        /// </summary>
+        /// <returns></returns>
+        public static LinqToDBConnectionOptions GetConnectionOptions(EA.Repository rep)
+        {
+            string connectionString = GetConnectionString(rep, out IDataProvider _, out string providerName);
+
+            var conBuilder = new LinqToDBConnectionOptionsBuilder();
+            conBuilder.UseConnectionString(providerName, connectionString);
+            var conOption = new LinqToDBConnectionOptions(conBuilder);
+            return conOption;
+        }
+
 
         /// <summary>
         /// Get connectionString if a DSN is part of the connectionString or "" if no DSN available.
