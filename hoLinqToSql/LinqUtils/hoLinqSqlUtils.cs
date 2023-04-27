@@ -15,6 +15,18 @@ namespace hoLinqToSql.LinqUtils
 {
     public static class LinqUtil
     {
+        ///
+        /// ODBC Driver names
+        /// See:
+        /// https://stackoverflow.com/questions/56442152/microsoft-jet-oledb-4-0-vs-microsoft-ace-oledb-12-0-which-should-i-use
+        ///
+        /// Here: Access2007 + JET 4.0:  Microsoft.ACE.OLEDB.12.0 (32+64 Bit), maybe Microsoft.ACE.OLEDB.16.0 
+        ///       JET 3.0    + JET 4.0:  Microsoft.JET.OLEDB.4.0 (32 Bit)
+        ///       SQLite:                 System.Data.Sqlite
+        public const string SqLiteOdbcDriver = "System.Data.Sqlite";
+        public const string JetDbOdbcDriver = "Microsoft.JET.OLEDB.4.0";
+        public const string AccessDbOdbcDriver = "Microsoft.ACE.OLEDB.12.0";
+        public const string SqlServerOdbcDriver = "Microsoft.Data.SqlClient";
         /// <Summary>
         /// Convert a IEnumerable to a DataTable.
         /// <TypeParam name="T">Type representing the type to convert.</TypeParam>
@@ -256,19 +268,19 @@ namespace hoLinqToSql.LinqUtils
 
                     case "JET":
                         provider = new AccessOleDbDataProvider();
-                        providerName = "Microsoft.Jet.OLEDB.4 .0";
+                        providerName = JetDbOdbcDriver;
                         dsnConnectionString = GetConnectionStringForDsn(connectionString);
                         if (dsnConnectionString != "") return dsnConnectionString;
                         if (connectionString.ToLower().EndsWith(".eap") || connectionString.ToLower().EndsWith(".eapx"))
                         {
 
-                            return $"Provider=Microsoft.Jet.OLEDB.4.0;Data Source={connectionString};";
+                            return $"Provider={JetDbOdbcDriver};Data Source={connectionString};";
                         }
 
                         break;
                     case @"SQLSVR":
                         provider = null;
-                        providerName = "Microsoft.Data.SqlClient";
+                        providerName = SqlServerOdbcDriver;
                         dsnConnectionString = GetConnectionStringForDsn(connectionString);
                         // Add Encrypt=False;
                         if (dsnConnectionString != "")
@@ -290,13 +302,13 @@ namespace hoLinqToSql.LinqUtils
 
                     case "ACCESS2007":
                         provider = new AccessOleDbDataProvider();
-                        providerName = "Microsoft.ACE.OLEDB.12.0";
+                        providerName = AccessDbOdbcDriver;
                         dsnConnectionString = GetConnectionStringForDsn(connectionString);
                         if (dsnConnectionString != "") return dsnConnectionString;
                         if (connectionString.ToLower().EndsWith(".eap") || connectionString.ToLower().EndsWith(".eapx"))
                         {
 
-                            return $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={connectionString};";
+                            return $"{AccessDbOdbcDriver};Data Source={connectionString};";
                         }
 
                         break;
@@ -327,7 +339,7 @@ namespace hoLinqToSql.LinqUtils
                     case "SQLITE":
                     case "SL3":
                         provider = null; //new SqlServerDataProvider("", SqlServerVersion.v2012);
-                        providerName = "System.Data.Sqlite.Core";
+                        providerName = SqLiteOdbcDriver;
                         dsnConnectionString = GetConnectionStringForDsn(connectionString);
                         if (dsnConnectionString != "") return dsnConnectionString;
                         return $@"DataSource={connectionString};";
@@ -371,7 +383,7 @@ ConnectionString: '{connectionString}'
 
         public static string GetConnectionStringAccess(string path)
         {
-            return $"Provider=Microsoft.Jet.OLEDB.4.0;Data Source={path};";
+            return $"Provider={JetDbOdbcDriver};Data Source={path};";
         }
         /// <summary>
         /// Get ConnectionOptions
@@ -384,8 +396,8 @@ ConnectionString: '{connectionString}'
         {
 
             var conBuilder = new LinqToDBConnectionOptionsBuilder();
-            var providerName = "Microsoft.Jet.OLEDB.4.0";
-            if (path.ToLower().EndsWith(".qea") || path.ToLower().EndsWith(".qeax")) providerName = "System.Data.Sqlite.Core";
+            var providerName = JetDbOdbcDriver;
+            if (path.ToLower().EndsWith(".qea") || path.ToLower().EndsWith(".qeax")) providerName = SqLiteOdbcDriver;
             conBuilder.UseConnectionString(providerName, path);
             var conOption = new LinqToDBConnectionOptions(conBuilder);
             return conOption;
