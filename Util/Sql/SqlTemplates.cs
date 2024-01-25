@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Resources;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using EA;
+//using EA;
 using hoLinqToSql.LinqUtils;
 using hoTools.Utils.Extension;
 using hoTools.Utils.SQL;
@@ -23,8 +23,115 @@ namespace hoTools.Utils.Sql
     public class SqlTemplates
     {
         // ReSharper disable once PrivateFieldCanBeConvertedToLocalVariable
-        private readonly Repository _rep;
+        private readonly EA.Repository _rep;
         private readonly string _sqlString;
+
+        // Initializing the properties for different databases
+        public static readonly Dictionary<string, DatabaseProperties> DatabaseProperties = new Dictionary<string, DatabaseProperties>
+{
+    {
+        "MYSQL",
+        new DatabaseProperties
+        {
+            MacroName = "#DB=MySql#",
+            OdbcDiverName = "",  // not needed
+            LinqName = "MySql",
+            BoolStringParser = boolString => "1 true TRUE".Contains(boolString),
+            BoolToStringConverter = b => b ? "1" : "0"
+        }
+    },
+    {
+        "MySqlConnector",
+        new DatabaseProperties
+        {
+            MacroName = "#DB=MySql#",
+            OdbcDiverName = "",  // not needed
+            LinqName = "MySql",
+            BoolStringParser = boolString => "1 true TRUE".Contains(boolString),
+            BoolToStringConverter = b => b ? "1" : "0"
+        }
+    },
+    {   // SQLite
+        "SL3",
+        new DatabaseProperties
+        {
+            MacroName = "#DB=MySql#",
+            OdbcDiverName = "System.Data.Sqlite",  
+            LinqName = "System.Data.Sqlite",
+            BoolStringParser = boolString => "1 true TRUE".Contains(boolString),
+            BoolToStringConverter =  b => b ? "1" : "0"
+        }
+    },
+    {   // ACCESS2007
+        "ACCESS",
+        new DatabaseProperties
+        {
+            MacroName = "#DB=ACCESS2007#",
+            BoolStringParser = boolString => "1 true TRUE".Contains(boolString),
+            BoolToStringConverter =  b => b ? "1" : "0"
+        }
+    },
+    {   // JET
+        "JET",
+        new DatabaseProperties
+        {
+            
+            MacroName = "#DB=JET#",
+            OdbcDiverName = "Microsoft.JET.OLEDB.4.0",
+            LinqName = "Access",
+            BoolStringParser = boolString => "1 true TRUE".Contains(boolString),
+            BoolToStringConverter =  b => b ? "1" : "0"
+        }
+    },
+    {   // SQL Server
+        "SqlSvr",
+        new DatabaseProperties
+        {
+            MacroName = "#DB=SqlSvr#",
+            BoolStringParser = boolString => boolString.Equals("Y", StringComparison.OrdinalIgnoreCase),
+            BoolToStringConverter = b => b ? "Y" : "N"
+        }
+    },
+        {   // ORACLE
+        "ORACLE",
+        new DatabaseProperties
+        {
+            MacroName = "#DB=ORACLE#",
+            BoolStringParser = boolString => boolString.Equals("Y", StringComparison.OrdinalIgnoreCase),
+            BoolToStringConverter = b => b ? "Y" : "N"
+        }
+    },
+        {   // POSTGRES
+            "POSTGRES",
+            new DatabaseProperties
+            {
+                MacroName = "#DB=ORACLE#",
+                BoolStringParser = boolString => boolString.Equals("Y", StringComparison.OrdinalIgnoreCase),
+                BoolToStringConverter = b => b ? "Y" : "N"
+            }
+        },
+    {   // FIREBIRD
+            "FIREBIRD",
+            new DatabaseProperties
+            {
+                MacroName = "#DB=FIREBIRD#",
+                BoolStringParser = boolString => boolString.Equals("Y", StringComparison.OrdinalIgnoreCase),
+                BoolToStringConverter = b => b ? "Y" : "N"
+            }
+        },
+    {   // ASA
+        "ASA",
+        new DatabaseProperties
+        {
+            MacroName = "#DB=ASA#",
+            BoolStringParser = boolString => boolString.Equals("Y", StringComparison.OrdinalIgnoreCase),
+            BoolToStringConverter = b => b ? "Y" : "N"
+        }
+    }
+};
+
+
+
         // ReSharper disable once NotAccessedField.Local
         private string _repType;
         //
@@ -68,7 +175,7 @@ namespace hoTools.Utils.Sql
         /// </summary>
         /// <param name="rep"></param>
         /// <param name="sqlString"></param>
-        public SqlTemplates(Repository rep, string sqlString)
+        public SqlTemplates(EA.Repository rep, string sqlString)
         {
             _rep = rep;
 
@@ -104,13 +211,59 @@ namespace hoTools.Utils.Sql
                 MessageBox.Show($@"SQL: {_sqlString}
 
 {e}
-",@"Can't apply Regex");
+", @"Can't apply Regex");
                 throw;
             }
 
-           
 
 
+
+        }
+        /// <summary>
+        /// Get DB properties
+        /// </summary>
+        /// <returns>DatabaseProperties</returns>
+        public DatabaseProperties GetDbProperties()
+        {
+
+            var dbProperty = DatabaseProperties.Where(x => x.Key == RepType(_rep))
+                .Select(x => x.Value).FirstOrDefault();
+            if (dbProperty == null)
+            {
+
+                MessageBox.Show(
+                    $@"DB rep.RepositoryType()/RepType(rep): '{_rep.RepositoryType()}/{RepType(_rep)}' in macro #DB=...# not supported in SQL, only 'ACCESS', 'MYSQL', 'JET', 'SQLite/SL3', 'SL3'!
+
+This can happen:
+- If you use a different DB
+- EA.Repository object 'rep' with: EA Server RPC issues, Shutdown of Repository", $@"CariadTools DB {RepType(_rep)} not supported or EA Server down");
+                return null;
+            }
+            return dbProperty;
+        }
+        /// <summary>
+        /// Get a string representation from a boolean value.
+        /// </summary>
+        /// <param name="boolValue">The boolean value to convert to a string.</param>
+        /// <returns>The string representation of the boolean value.</returns>
+        public string GetStringFromBoolean(bool boolValue)
+        {
+            var p = GetDbProperties();
+            if (p == null) return " ";
+
+            return p.BoolToStringConverter(boolValue);
+        }
+        /// <summary>
+        /// Get a string representation from a bool value.
+        /// </summary>
+        /// <param name="boolString"></param>
+        /// <returns>The string representation of the boolean value.</returns>
+        public bool ParseBoolString(string boolString)
+        {
+            var p = GetDbProperties();
+            if (p == null) return false;
+
+            return p.BoolStringParser(boolString);
         }
         /// <summary>
         /// Perform regex
@@ -195,7 +348,7 @@ namespace hoTools.Utils.Sql
 
 
                     }
-                    
+
                 }
                 // return EA xml to output with EA.
                 return dt.ToEaXml().ToString();
@@ -207,7 +360,7 @@ namespace hoTools.Utils.Sql
 {e}", @"Error perform Regex on Column");
                 return "";
             }
-           
+
 
         }
         #region Template Dictionary SqlTemplare
@@ -266,6 +419,12 @@ namespace hoTools.Utils.Sql
                     "#Length string#  Gives the length of a string",
                     isResource:false
                 ) },
+            {  SqlTemplateId.QuotedName,
+                new SqlTemplate("make a quoted sql name", // Name
+                    "QuotedName",                // String ID of Resource
+                    "#QuotedName name#  Gives the quoted sql name (e.g. [name] or `name` for mySQL",
+                    isResource:false
+                ) },
 
 
 
@@ -322,7 +481,7 @@ namespace hoTools.Utils.Sql
                     "Demo delete SQL to delete the selected Items in browser (Diagram, Element, Attribute, Operation). Be careful! This might cause damage! ",
                     isResource:true
                     ) },
-            
+
             {  SqlTemplateId.ShowSearchItems,
             new SqlTemplate("Insert Icons to navigate ",    // Name
                 "ShowSearchItemsTemplate",          // String ID of Resource
@@ -483,7 +642,7 @@ ORDER BY pkg.Name
 select o.ea_guid AS CLASSGUID, o.object_type AS CLASSTYPE, o.name, o.object_type, do.Diagram_ID, do.Object_ID, 
 do.RectTop, do.RectLeft, do.RectRight, do.RectBottom,
 Sequence, ObjectStyle, Instance_ID
-from t_diagramobjects do, t_object o
+from t_diagramObjects do, t_object o
 where do.object_id = o.object_ID     AND
       do.diagram_id = #Diagram_ID#
 ORDER BY 3",
@@ -584,8 +743,8 @@ Tip: Select Package while inserting in SQL via Insert Macro in Context Menu"
                     "Placeholder for the diagram ID of the current diagram, as ID\nExample: diagramID in (#Diagram_ID#) ") },
 
             { SqlTemplateId.Wc,
-                new SqlTemplate("DB Wild Card", 
-                    "#WC#", 
+                new SqlTemplate("DB Wild Card",
+                    "#WC#",
                     "Placeholder for the Database Wild Card (% or *)\r\n"+
                     "Example like 'MyClass#WC#'\r\n " +
                     "Remark: Just for compatibility with EA Searches.You may simple use the familiar wild cards '*' or '%'\r\n " +
@@ -595,19 +754,19 @@ Tip: Select Package while inserting in SQL via Insert Macro in Context Menu"
                 new SqlTemplate("Design Time ID",
                     "ID",
                     @"Inserts the ID of the selected item at Design time. It also copies the ID to clipboard.
-For: Package, Element, Diagram, Attribute, Operation" 
+For: Package, Element, Diagram, Attribute, Operation"
                     ) },
             { SqlTemplateId.DesignGuid,
                 new SqlTemplate(@"Design Time GUID",
                     "GUID",
                     @"Inserts the GUID of the selected item at Design time. It also copies the GUID to clipboard.
-For: Package, Element, Diagram, Attribute, Operation" 
+For: Package, Element, Diagram, Attribute, Operation"
                     ) },
 
 
             { SqlTemplateId.Now,
-                new SqlTemplate("NOW date/time", 
-                    "#NOW(not implemented)#", 
+                new SqlTemplate("NOW date/time",
+                    "#NOW(not implemented)#",
                     "Placeholder date/time, not yet implemented ") },
             { SqlTemplateId.Author,
                 new SqlTemplate("Author",
@@ -696,7 +855,7 @@ For: Package, Element, Diagram, Attribute, Operation"
             InsertItemInPackageTemplate,
             UpdateItemTemplate,
             DeletedTreeSelectedItems,
-               
+
             //-------------------------
             // macros
             MacrosHelp,        // Help to macros
@@ -707,6 +866,7 @@ For: Package, Element, Diagram, Attribute, Operation"
             PackageId,      // The containing package of Package, Diagram, Element, Attribute, Operation
             Package,         // The containing package of Package, Diagram, Element, Attribute, Operation (compatible with EA)
             CondBranchStatement, // If a package is selected: ' AND pkg.Package_id in (.....) '
+            CondDiagramSelectedElementsIds, // If diagram elements are selected: 'AND o.object_id in (…,..,..)'
             BranchIds,     // Package (nested, recursive) ids separated by ','  like '20,21,47,1'
             BranchIdsConstantPackage, // Package (nested, recursive) for the package defined by the GUID, ids separated by ','  like '20,21,47,1'
             InBranchIds,  // Package (nested, recursive), complete SQL in clause, ids separated by ','  like 'IN (20,21,47,1)', just a shortcut for #BRANCH_ID#
@@ -718,9 +878,11 @@ For: Package, Element, Diagram, Attribute, Operation"
             DiagramElementsIds,        // Diagram objects (selected diagram) as a comma separated list of IDs
             DiagramElementsIdsTemplate,
             DiagramSelectedElementsIdsTemplate,
+            DiagramSelectedElementsGuids,// Guids of selected Diagram objects as a comma separated list of IDs
             DiagramId,                 // Diagram ID
             Author,
             TreeSelectedGuids, // get all the GUIDs of the selected items (otDiagram, otElement, otPackage, otAttribute, otMethod
+            TreeSelectedIds,   // get all the Ids of the selected items (otDiagram, otElement, otPackage, otAttribute, otMethod
             NewGuid,            // create a new GUIDs to use in insert statement
             Now,
             Wc,
@@ -751,8 +913,9 @@ For: Package, Element, Diagram, Attribute, Operation"
             // See EA Create Search Definitions
             ToLower,                     // #ToLower string#
             // Coverts to lower case
-            Length                      // #Length string#
-                                        // Gives the length of a string
+            Length,                      // #Length string#
+            // Gives the length of a string
+            QuotedName                   // Quote invalid SQL names 
         }
         #endregion
 
@@ -821,29 +984,104 @@ For: Package, Element, Diagram, Attribute, Operation"
             MessageBox.Show($@"ID={templateId}", @"Invalid templateID");
             return null;
         }
+        /// <summary>
+        /// Replace db specifics and macros from sql like
+        /// - Wild cards
+        /// - Macros
+        /// - Comments
+        /// - new lines
+        /// - Trim()
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <param name="sqlQuery"></param>
+        /// <param name="searchTerm"></param>
+        /// <returns></returns>
+        public static string ReplaceSqlDbSpecifics(EA.Repository rep, string sqlQuery, string searchTerm = "")
+        {
+            bool isAccess = "JET ACCESS".Contains(rep.ConnectionString);
+            var sql = ReplaceSqlWildCards(sqlQuery, isAccess);
+            sql = ReplaceMacro(rep, sql, searchTerm);
+            return sql;
+        }
+        /// <summary>
+        /// Replace the wild cards in the given sql query string to match either MSAccess or ANSI syntax. It works for:
+        /// <para />
+        /// % or * or #WC# Any character
+        /// <para />
+        /// _ or ? a single character
+        /// <para />
+        /// '^' or '!' a shortcut for XOR
+        /// </summary>
+        /// <param name="sqlQuery">the sql string to edit</param>
+        /// <param name="isAccess">is access db, default=false</param>
+        /// <returns>the same sql query, but with its wild cards replaced according to the required syntax</returns>
+        public static string ReplaceSqlWildCards(string sqlQuery, bool isAccess = false)
+        {
+            int beginLike = sqlQuery.IndexOf("like", StringComparison.InvariantCultureIgnoreCase);
+            if (beginLike > 1)
+            {
+                // Handle ' and " to encapsulate strings
+                int beginString1 = sqlQuery.IndexOf("'", beginLike + "like".Length, StringComparison.CurrentCulture);
+                int beginString2 = sqlQuery.IndexOf(@"""", beginLike + "like".Length, StringComparison.CurrentCulture);
+                int beginString = beginString1 > -1 ? beginString1 : beginString2;
+                if (beginString > 0)
+                {
+                    int endString1 = sqlQuery.IndexOf("'", beginString + 1, StringComparison.CurrentCulture);
+                    int endString2 = sqlQuery.IndexOf(@"""", beginString + 1, StringComparison.CurrentCulture);
+                    int endString = beginString1 > 0 ? endString1 : endString2;
+                    if (endString > beginString)
+                    {
+                        string originalLikeString = sqlQuery.Substring(beginString + 1, endString - beginString);
+                        string likeString = originalLikeString;
+                        if (isAccess)
+                        {
+                            likeString = likeString.Replace("#WC#", "*");
+                            likeString = likeString.Replace('%', '*');
+                            likeString = likeString.Replace('_', '?');
+                            likeString = likeString.Replace('^', '!');
+
+                        }
+                        else
+                        {
+                            likeString = likeString.Replace("#WC#", "%");
+                            likeString = likeString.Replace('*', '%');
+                            likeString = likeString.Replace('?', '_');
+                            likeString = likeString.Replace('#', '_');
+                            likeString = likeString.Replace('^', '!');
+
+                        }
+                        string next = string.Empty;
+                        if (endString < sqlQuery.Length)
+                        {
+                            next = ReplaceSqlWildCards(sqlQuery.Substring(endString + 1));
+                        }
+                        sqlQuery = sqlQuery.Substring(0, beginString + 1) + likeString + ' ' + next;
+
+                    }
+                }
+            }
+            return sqlQuery.Trim();
+        }
 
         /// <summary>
-        /// Replace Macro and 'Search Term' by value. Possible Macros are: Search Term, ID, GUID, Package ID, Branch ID,... 
+        /// Replace Macro, 'Search Term', remove Comments. Possible Macros are: Search Term, ID, GUID, Package ID, Branch ID,... 
         /// <para/>- convert all macros to lower case
         /// </summary>
         /// <param name="rep"></param>
         /// <param name="sqlString">The complete SQL string</param>
         /// <param name="searchTerm">The Search Term from the text entry field</param>
         /// <returns>"" if error occurred</returns>
-        public static string ReplaceMacro(Repository rep, string sqlString, string searchTerm)
+        public static string ReplaceMacro(EA.Repository rep, string sqlString, string searchTerm = "")
         {
             // delete Comments
             string sql = deleteC_Comments(sqlString);
-
- // replace DB specific code
-            sql = FormatSqlDbSpecific(rep, sql);
-
 
             // replace DB specific code
             sql = FormatSqlDbSpecific(rep, sql);
 
 
-            // Find needle in hay-stack
+
+            // Find needle in haystack
             // #Instr start, stack, needle#
             // start rel 1
             sql = macroInstr_ID(rep, sql);
@@ -851,8 +1089,7 @@ For: Package, Element, Diagram, Attribute, Operation"
             // if #If condition, trueValue, falseValue#
             sql = macroIf_ID(rep, sql);
 
- // macro Format a number with left padding and thousand separator
-            // macro Format a number with left padding and thousand separator
+            // macro Format a number with left padding and a thousand separator
             // #Format numberString, length, stringPaddingBefore#
             sql = MacroFormat(rep, sql);
 
@@ -867,16 +1104,21 @@ For: Package, Element, Diagram, Attribute, Operation"
             // if #ToString str#
             sql = macroToString(rep, sql);
 
-             // if #ToBool str#
+            // if #ToBool str#
             sql = macroToBool(rep, sql);
+
+            // if #QuotedName name#
+            sql = macroToQuotedName(rep, sql);
+
             // if #Left string count#
             sql = macroLeft_ID(rep, sql);
 
             // #Right string, count#
             sql = macroRight_ID(rep, sql);
 
-   // #Length string#
+            // #Length string#
             sql = macroLength_ID(rep, sql);
+
             // #SubString string, start, length#
             // start rel 1
             sql = macroSubstring_ID(rep, sql);
@@ -884,8 +1126,9 @@ For: Package, Element, Diagram, Attribute, Operation"
             // #ToLower string#
             sql = macroToLower_ID(rep, sql);
 
-   // #ToUpper string#
+            // #ToUpper string#
             sql = macroToUpper_ID(rep, sql);
+
             // <Search Term>
             sql = sql.Replace(GetTemplateText(SqlTemplateId.SearchTerm), searchTerm);
 
@@ -900,6 +1143,10 @@ For: Package, Element, Diagram, Attribute, Operation"
             sql = macroDiagramSelectedElements_IDS(rep, sql);
             if (sql == "") return "";
 
+            // replace #DiagramSelectedElements_GUIDS# by Guids of diagram
+            sql = macroDiagramSelectedElements_GUIDS(rep, sql);
+            if (sql == "") return "";
+
             // replace #CurrentItemID# by ID of the selected element
             // Alias: #CurrentElementID#
             sql = macroItem_ID(rep, sql);
@@ -909,6 +1156,10 @@ For: Package, Element, Diagram, Attribute, Operation"
             // Alias: #CurrentElementGUID#
             sql = macroItem_GUID(rep, sql);
             if (sql == "") return "";
+
+            // replace #FlowGuidInTx, guid# with
+            // guid in (..,..,..   )
+            sql = macroItem_FlowGuidInTx(rep, sql);
 
             // replace #Package# by ID of the package the selected item is contained (Element, Package, Diagram, Attribute, Operation)
             sql = MacroPackageId(rep, sql);
@@ -920,6 +1171,10 @@ For: Package, Element, Diagram, Attribute, Operation"
 
             // replace #TreeSelectedGUIDS#
             sql = MacroTreeSelected(rep, sql);
+            if (sql == "") return "";
+
+            // replace #TreeSelectedIDS#
+            sql = MacroTreeSelected(rep, sql, false);
             if (sql == "") return "";
 
             // replace #Branch#
@@ -934,23 +1189,36 @@ For: Package, Element, Diagram, Attribute, Operation"
             sql = MacroBranchConstantPackage(rep, sql);
             if (sql == "") return "";
 
-          // replace #Branch={...guid....}# by a list of nested packages
+            // replace #Branch={...guid....}# by a list of nested packages
             sql = MacroCondBranchStatement(rep, sql);
             if (sql == "") return "";
 
-            
+            // Conditional collect selected Elements in Diagram or nothing
+            // #CondDiagramSelectedElements_IDS#
+            // - AND o.object_id in (…,..,..) 
+            // #CondDiagramSelectedElements_IDS operator, alias#
+            // - operator alias.object_id in (…,..)
+            // - #CondDiagramSelectedElements_IDS AND, o#
+            // #CondDiagramSelectedElements_IDS operator, alias, columnName#
+            // - operator alias.object_id in (…,..)
+            // - #CondDiagramSelectedElements_IDS AND, o, object_id#
+            sql = MacroCondDiagramSelectedElements_IDS(rep, sql);
+            if (sql == "") return "";
+
+
 
 
             // Concatenate strings
             // #Concat str1, str2,..#
             sql = macroConcat_ID(rep, sql);
+
+
             // Replace #WC# (DB wile card)
-            // Later '*' is changed to the wild card of the current DB
-    // see: ReplaceSqlWildCards
             string currentTemplate = GetTemplateText(SqlTemplateId.Wc);
             if (sql.Contains(currentTemplate))
             {
-                sql = sql.Replace(currentTemplate, "*"); 
+                string wc = "ACCESS JET ".Contains(RepType(rep)) ? @"*" : @"%";
+                sql = sql.Replace(currentTemplate, wc);
             }
 
             // replace #NewGuid" by a newly created GUID (global unique identifier
@@ -960,9 +1228,9 @@ For: Package, Element, Diagram, Attribute, Operation"
                 sql = sql.Replace(newGuidTemplate, "{" + Guid.NewGuid() + "}");
             }
 
-            return sql;
-            
-             
+            return sql.Trim();
+
+
         }
         #region deleteC_Comments 
         /// <summary>
@@ -992,7 +1260,7 @@ For: Package, Element, Diagram, Attribute, Operation"
         /// <param name="sql"></param>
         /// <returns></returns>
 
-        static string macroConcat_ID(Repository rep, string sql)
+        static string macroConcat_ID(EA.Repository rep, string sql)
         {
             Match match = Regex.Match(sql, @"#Concat([^#]*)#", RegexOptions.IgnoreCase);
             while (match.Success)
@@ -1001,11 +1269,11 @@ For: Package, Element, Diagram, Attribute, Operation"
                 var lColumns = match.Groups[1].Value.Split(',');
 
                 string content;
-  switch (RepType(rep))
+                switch (RepType(rep))
                 {
                     case "JET":
                     case "ACCESS":
-                        content = String.Join("&",lColumns); // & supports null values
+                        content = String.Join("&", lColumns); // & supports null values
                         break;
                     case "MYSQL":
                         // Null values:
@@ -1045,7 +1313,7 @@ For: Package, Element, Diagram, Attribute, Operation"
                 sql = sql.Replace(match.Groups[0].Value, replacement);
                 match = match.NextMatch();
             }
-           
+
             return sql;
         }
         /// <summary>
@@ -1057,7 +1325,7 @@ For: Package, Element, Diagram, Attribute, Operation"
         /// <returns></returns>
 
         // ReSharper disable once InconsistentNaming
-        static string macroToString(Repository rep, string sql)
+        static string macroToString(EA.Repository rep, string sql)
         {
             Match match = Regex.Match(sql, @"#ToString\s+([^#]*)#", RegexOptions.IgnoreCase);
             while (match.Success)
@@ -1095,7 +1363,7 @@ For: Package, Element, Diagram, Attribute, Operation"
         /// <returns>'true','false'</returns>
 
         // ReSharper disable once InconsistentNaming
-static string macroToBool(Repository rep, string sql)
+        static string macroToBool(EA.Repository rep, string sql)
         {
             Match match = Regex.Match(sql, @"#ToBool\s+([^#]*)#", RegexOptions.IgnoreCase);
             while (match.Success)
@@ -1126,6 +1394,47 @@ static string macroToBool(Repository rep, string sql)
 
             return sql;
         }
+        /// <summary>
+        /// macro quote names (replace Alias name with a quoted name, MySQL: ColumnName -> 'ColumnName')
+        /// #ToQuotedName string#
+        /// MySQL: ColumnName -> 'ColumnName'
+        /// 
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <param name="sql"></param>
+        /// <returns>'true','false'</returns>
+
+        static string macroToQuotedName(EA.Repository rep, string sql)
+        {
+            Match match = Regex.Match(sql, @"#QuotedName\s+([^#]*)#", RegexOptions.IgnoreCase);
+            while (match.Success)
+            {
+
+                string replacement;
+                switch (RepType(rep))
+                {
+                    case "JET":
+                    case "ACCESS":
+                        // native SQL
+                        replacement = $"[{match.Groups[1]}]";
+                        break;
+                    case "MYSQL":
+                        replacement = $"`{match.Groups[1]}`";
+                        break;
+                    case "SQLITE":
+                    case "SL3":
+                        replacement = $"[{match.Groups[1]}]";
+                        break;
+                    default:
+                        replacement = $"[{match.Groups[1]}]";
+                        break;
+                }
+                sql = sql.Replace(match.Groups[0].Value, replacement);
+                match = match.NextMatch();
+            }
+
+            return sql;
+        }
 
 
         /// <summary>
@@ -1136,7 +1445,7 @@ static string macroToBool(Repository rep, string sql)
         /// <param name="sql"></param>
         /// <returns></returns>
 
-        static string macroLeft_ID(Repository rep, string sql)
+        static string macroLeft_ID(EA.Repository rep, string sql)
         {
             Match match = Regex.Match(sql, @"#Left\s+([^,]*),\s*([^#]*)#", RegexOptions.IgnoreCase);
             while (match.Success)
@@ -1174,7 +1483,7 @@ static string macroToBool(Repository rep, string sql)
         /// <param name="sql"></param>
         /// <returns></returns>
 
-        static string macroToLower_ID(Repository rep, string sql)
+        static string macroToLower_ID(EA.Repository rep, string sql)
         {
             Match match = Regex.Match(sql, @"#ToLower\s+([^#]*)#", RegexOptions.IgnoreCase);
             {
@@ -1182,25 +1491,25 @@ static string macroToBool(Repository rep, string sql)
                 {
 
                     string replacement;
-                switch (RepType(rep))
-                {
-                    case "JET":
-                    case "ACCESS":
+                    switch (RepType(rep))
+                    {
+                        case "JET":
+                        case "ACCESS":
                             replacement = $"LCase({match.Groups[1].Value.Trim()})";
-                        break;
-                    case "MYSQL":
-                        replacement = $"Lower({match.Groups[1].Value.Trim()})";
-                        break;
-    case "SQLITE":
-                    case "SL3":
-                        replacement = $"Lower({match.Groups[1].Value.Trim()})";
                             break;
-                    default:
-                        replacement = $"LCase({match.Groups[1].Value.Trim()})";
-                        break;
-                }
-                sql = sql.Replace(match.Groups[0].Value, replacement);
-                match = match.NextMatch();
+                        case "MYSQL":
+                            replacement = $"Lower({match.Groups[1].Value.Trim()})";
+                            break;
+                        case "SQLITE":
+                        case "SL3":
+                            replacement = $"Lower({match.Groups[1].Value.Trim()})";
+                            break;
+                        default:
+                            replacement = $"LCase({match.Groups[1].Value.Trim()})";
+                            break;
+                    }
+                    sql = sql.Replace(match.Groups[0].Value, replacement);
+                    match = match.NextMatch();
                 }
             }
 
@@ -1215,7 +1524,7 @@ static string macroToBool(Repository rep, string sql)
         /// <param name="sql"></param>
         /// <returns></returns>
 
-        static string macroToUpper_ID(Repository rep, string sql)
+        static string macroToUpper_ID(EA.Repository rep, string sql)
         {
             Match match = Regex.Match(sql, @"#ToUpper\s+([^#]*)#", RegexOptions.IgnoreCase);
             {
@@ -1258,7 +1567,7 @@ static string macroToBool(Repository rep, string sql)
         /// <param name="sql"></param>
         /// <returns></returns>
 
-        static string macroRight_ID(Repository rep, string sql)
+        static string macroRight_ID(EA.Repository rep, string sql)
         {
             Match match = Regex.Match(sql, @"#Right\s+([^,]*),\s*([^#]*)#", RegexOptions.IgnoreCase);
             while (match.Success)
@@ -1289,8 +1598,8 @@ static string macroToBool(Repository rep, string sql)
 
             return sql;
         }
-        
-        static string macroLength_ID(Repository rep, string sql)
+
+        static string macroLength_ID(EA.Repository rep, string sql)
         {
             Match match = Regex.Match(sql, @"#Length\s+([^#]*)#", RegexOptions.IgnoreCase);
             while (match.Success)
@@ -1329,7 +1638,7 @@ static string macroToBool(Repository rep, string sql)
         /// <param name="sql"></param>
         /// <returns></returns>
 
-        static string macroSubstring_ID(Repository rep, string sql)
+        static string macroSubstring_ID(EA.Repository rep, string sql)
         {
             Match match = Regex.Match(sql, @"#Substring\s+([^,]*),\s*([^#]*),\s*([^#]*)#", RegexOptions.IgnoreCase);
             while (match.Success)
@@ -1364,9 +1673,9 @@ static string macroToBool(Repository rep, string sql)
         /// <param name="sql"></param>
         /// <returns></returns>
 
-        static string macroIf_ID(Repository rep, string sql)
+        static string macroIf_ID(EA.Repository rep, string sql)
         {
-            Match match = Regex.Match(sql, @"#If\s+([^,]*),\s*([^#]*),\s*([^#]*)#",RegexOptions.IgnoreCase);
+            Match match = Regex.Match(sql, @"#If\s+([^,]*),\s*([^#]*),\s*([^#]*)#", RegexOptions.IgnoreCase);
             while (match.Success)
             {
 
@@ -1395,14 +1704,14 @@ static string macroToBool(Repository rep, string sql)
             return sql;
         }
         /// <summary>
- /// macro Format a number with left padding and thousand separator
+        /// macro Format a number with left padding and thousand separator
         /// #Format numberString, length, stringPaddingBefore#
         /// </summary>
         /// <param name="rep"></param>
         /// <param name="sql"></param>
         /// <returns></returns>
 
-        static string MacroFormat(Repository rep, string sql)
+        static string MacroFormat(EA.Repository rep, string sql)
         {
             Match match = Regex.Match(sql, @"#Format\s+([^,]*),\s*([^#]*),\s*([^#]*)#", RegexOptions.IgnoreCase);
             while (match.Success)
@@ -1414,7 +1723,7 @@ static string macroToBool(Repository rep, string sql)
                 {
                     case "JET":
                     case "ACCESS":
-                         replacement = $"Right (\"{stringPaddingBefore}\" & Format({match.Groups[1].Value.Trim()}, \"#,###\"),{match.Groups[2].Value.Trim()})";
+                        replacement = $"Right (\"{stringPaddingBefore}\" & Format({match.Groups[1].Value.Trim()}, \"#,###\"),{match.Groups[2].Value.Trim()})";
                         break;
                     case "MYSQL":
                         replacement = $"Right (Concat(\"{stringPaddingBefore}\", Format({match.Groups[1].Value.Trim()}, 0)), {match.Groups[2].Value.Trim()} )";
@@ -1442,7 +1751,7 @@ static string macroToBool(Repository rep, string sql)
         /// <param name="sql"></param>
         /// <returns></returns>
 
-        static string MacroLPad(Repository rep, string sql)
+        static string MacroLPad(EA.Repository rep, string sql)
         {
             Match match = Regex.Match(sql, @"#LPad\s+([^,]*),\s*([^#]*),\s*([^#]*)#", RegexOptions.IgnoreCase);
             while (match.Success)
@@ -1482,7 +1791,7 @@ static string macroToBool(Repository rep, string sql)
         /// <param name="sql"></param>
         /// <returns></returns>
 
-        static string MacroRPad(Repository rep, string sql)
+        static string MacroRPad(EA.Repository rep, string sql)
         {
             Match match = Regex.Match(sql, @"#RPad\s+([^,]*),\s*([^#]*),\s*([^#]*)#", RegexOptions.IgnoreCase);
             while (match.Success)
@@ -1524,7 +1833,7 @@ static string macroToBool(Repository rep, string sql)
         /// <param name="sql"></param>
         /// <returns></returns>
 
-        static string macroInstr_ID(Repository rep, string sql)
+        static string macroInstr_ID(EA.Repository rep, string sql)
         {
             Match match = Regex.Match(sql, @"#InStr\s+([^,]*),\s*([^#]*),\s*([^#]*)#", RegexOptions.IgnoreCase);
             while (match.Success)
@@ -1545,7 +1854,7 @@ static string macroToBool(Repository rep, string sql)
                     case "SQLITE":
                     case "SL3":
                         // Instr(stack, needle)
- replacement = $"InStr({match.Groups[2].Value.Trim()},{match.Groups[3].Value.Trim()})";
+                        replacement = $"InStr({match.Groups[2].Value.Trim()},{match.Groups[3].Value.Trim()})";
                         break;
                     default:
                         replacement = $"InStr({match.Groups[1].Value.Trim()},{match.Groups[2].Value.Trim()},{match.Groups[3].Value.Trim()})";
@@ -1557,6 +1866,67 @@ static string macroToBool(Repository rep, string sql)
 
             return sql;
         }
+        // replace #FlowGuidInTx# with x.description
+        // replace #FlowGuidInTx y# with y.description
+        /// <summary>
+        /// macro #FlowGuidInTx, guid#
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <param name="sql"></param>
+        /// <returns></returns>
+        static string macroItem_FlowGuidInTx(EA.Repository rep, string sql)
+        {
+            Match match = Regex.Match(sql, @"#FlowGuidInTx\s*([^#]*)#", RegexOptions.IgnoreCase);
+            while (match.Success)
+            {
+                int offset = 39;
+                int count = 10;
+                string replacement = "";
+                string delimiter = "";
+                string alias = String.IsNullOrWhiteSpace(match.Groups[1].Value)
+                    ? "x"
+                    : match.Groups[1].Value;
+                switch (RepType(rep))
+                {
+                    case "JET":
+                    case "ACCESS":
+                        for (int i = 1; i < count * offset; i = i + offset)
+                        {
+                            replacement = $@"{replacement}{delimiter} Mid({alias}.Description,{i},{offset - 1})";
+                            delimiter = ", ";
+                        }
+                        break;
+                    case "MYSQL":
+                        for (int i = 1; i < count * offset; i = i + offset)
+                        {
+                            replacement = $@"{replacement}{delimiter} Substr({alias}.Description,{i},{offset - 1})";
+                            delimiter = ", ";
+                        }
+                        break;
+                    case "SQLITE":
+                    case "SL3":
+                        for (int i = 1; i < count * offset; i = i + offset)
+                        {
+                            replacement = $@"{replacement}{delimiter} Substr({alias}.Description,{i},{offset - 1})";
+                            delimiter = ", ";
+                        }
+                        break;
+
+                    default:
+                        for (int i = 1; i < count * offset; i = i + offset)
+                        {
+                            replacement = $@"{replacement}{delimiter} Substr({alias}.Description,{i}, {offset - 1} )";
+                            delimiter = ", ";
+                        }
+                        break;
+                }
+                sql = sql.Replace(match.Groups[0].Value, replacement);
+                match = match.NextMatch();
+            }
+
+            return sql;
+
+        }
 
         /// <summary>
         /// Replace macro #Diagram_ID# by Diagram_Id of the current diagram or selected Diagram.
@@ -1564,7 +1934,7 @@ static string macroToBool(Repository rep, string sql)
         /// <param name="rep"></param>
         /// <param name="sql"></param>
         /// <returns>sql string with replaced macro</returns>
-        static string macroDiagram_ID(Repository rep, string sql)
+        static string macroDiagram_ID(EA.Repository rep, string sql)
         {
             // get template
             string template = GetTemplateText(SqlTemplateId.DiagramId);
@@ -1574,7 +1944,7 @@ static string macroToBool(Repository rep, string sql)
             {
                 // get the diagram
                 EA.Diagram dia;
-                if (rep.GetContextItemType() == ObjectType.otDiagram)
+                if (rep.GetContextItemType() == EA.ObjectType.otDiagram)
                 {
                     dia = (EA.Diagram)rep.GetContextObject();
                 }
@@ -1607,7 +1977,8 @@ static string macroToBool(Repository rep, string sql)
         /// <param name="rep"></param>
         /// <param name="sql">The sql string to replace the macro by the found list of Diagram Element IDs</param>
         /// <returns>sql string with replaced macro</returns>
-        static string macroDiagramElements_IDS(Repository rep, string sql) {
+        static string macroDiagramElements_IDS(EA.Repository rep, string sql)
+        {
             // get template
             string template = GetTemplateText(SqlTemplateId.DiagramElementsIds);
 
@@ -1616,10 +1987,11 @@ static string macroToBool(Repository rep, string sql)
             {
                 // get the diagram
                 EA.Diagram dia;
-                if (rep.GetContextItemType() == ObjectType.otDiagram)
+                if (rep.GetContextItemType() == EA.ObjectType.otDiagram)
                 {
                     dia = (EA.Diagram)rep.GetContextObject();
-                } else
+                }
+                else
                 {
                     dia = rep.GetCurrentDiagram();
                 }
@@ -1635,14 +2007,14 @@ static string macroToBool(Repository rep, string sql)
                     string listId = "0";
                     foreach (var el in dia.DiagramObjects)
                     {
-                        int id = ((DiagramObject)el).ElementID;
+                        int id = ((EA.DiagramObject)el).ElementID;
                         listId = $@"{listId},{id}";
                     }
 
                     // replace by list of IDs
                     sql = sql.Replace(template, $@"{listId}");
                 }
-                
+
             }
             return sql;
         }
@@ -1654,7 +2026,7 @@ static string macroToBool(Repository rep, string sql)
         /// <param name="rep"></param>
         /// <param name="sql">The sql string to replace the macro by the found list of Diagram Element IDs</param>
         /// <returns>sql string with replaced macro</returns>
-        static string macroDiagramSelectedElements_IDS(Repository rep, string sql)
+        static string macroDiagramSelectedElements_IDS(EA.Repository rep, string sql)
         {
             // get template
             string template = GetTemplateText(SqlTemplateId.DiagramSelectedElementsIds);
@@ -1663,7 +2035,7 @@ static string macroToBool(Repository rep, string sql)
             if (sql.Contains(template))
             {
                 // get the diagram
-                EA.Diagram dia = rep.GetContextItemType() == ObjectType.otDiagram ? (EA.Diagram)rep.GetContextObject() : rep.GetCurrentDiagram();
+                EA.Diagram dia = rep.GetContextItemType() == EA.ObjectType.otDiagram ? (EA.Diagram)rep.GetContextObject() : rep.GetCurrentDiagram();
                 // Diagram selected?
                 if (dia == null)
                 {
@@ -1676,13 +2048,55 @@ static string macroToBool(Repository rep, string sql)
                     string listId = "0";
                     foreach (var el in dia.SelectedObjects)
                     {
-                        int id = ((DiagramObject)el).ElementID;
+                        int id = ((EA.DiagramObject)el).ElementID;
                         listId = $@"{listId},{id}";
 
                     }
 
                     // replace by list of IDs
                     sql = sql.Replace(template, $@"{listId}");
+                }
+            }
+            return sql;
+        }
+        /// <summary>
+        /// Replace macro #DiagramElements_GUIDS# by a comma separated list of all Element GUIDs in diagram.
+        /// <para/>
+        /// If no Element is in the diagram it return '0' for an empty list (not existing GUID).
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <param name="sql">The sql string to replace the macro by the found list of Diagram Element GUIDs</param>
+        /// <returns>sql string with replaced macro</returns>
+        static string macroDiagramSelectedElements_GUIDS(EA.Repository rep, string sql)
+        {
+            // get template
+            string template = GetTemplateText(SqlTemplateId.DiagramSelectedElementsGuids);
+
+            // template is used
+            if (sql.Contains(template))
+            {
+                // get the diagram
+                EA.Diagram dia = rep.GetContextItemType() == EA.ObjectType.otDiagram ? (EA.Diagram)rep.GetContextObject() : rep.GetCurrentDiagram();
+                // Diagram selected?
+                if (dia == null)
+                {
+                    // replace by empty list of IDs
+                    sql = sql.Replace(template, $@" 0 ");
+                }
+                else
+                {
+                    // make a list of comma separated IDs
+                    string listGuid = "0";
+                    foreach (var el in dia.SelectedObjects)
+                    {
+                        int id = ((EA.DiagramObject)el).ElementID;
+                        var guid = rep.GetElementByID(id);
+                        listGuid = $@"{listGuid},{guid}";
+
+                    }
+
+                    // replace by list of IDs
+                    sql = sql.Replace(template, $@"{listGuid}");
                 }
             }
             return sql;
@@ -1695,37 +2109,37 @@ static string macroToBool(Repository rep, string sql)
         /// <param name="rep"></param>
         /// <param name="sql">The sql string to replace the macro by the found ID</param>
         /// <returns>sql string with replaced macro</returns>
-        static string macroItem_ID(Repository rep, string sql)
+        static string macroItem_ID(EA.Repository rep, string sql)
         {
             // replace ID
             string template = GetTemplateText(SqlTemplateId.CurrentItemId);
             if (sql.Contains(template) | sql.Contains("#CurrentElementID#"))
             {
-                ObjectType objectType = rep.GetContextItemType();
+                EA.ObjectType objectType = rep.GetContextItemType();
                 int id;
                 switch (objectType)
                 {
-                    case ObjectType.otElement:
+                    case EA.ObjectType.otElement:
                         EA.Element el = (EA.Element)rep.GetContextObject();
                         id = el.ElementID;
                         break;
-                    case ObjectType.otDiagram:
+                    case EA.ObjectType.otDiagram:
                         EA.Diagram dia = (EA.Diagram)rep.GetContextObject();
                         id = dia.DiagramID;
                         break;
-                    case ObjectType.otPackage:
+                    case EA.ObjectType.otPackage:
                         EA.Package pkg = (EA.Package)rep.GetContextObject();
                         id = pkg.PackageID;
                         break;
-                    case ObjectType.otAttribute:
+                    case EA.ObjectType.otAttribute:
                         Attribute attr = (Attribute)rep.GetContextObject();
                         id = attr.AttributeID;
                         break;
-                    case ObjectType.otMethod:
-                        Method method = (Method)rep.GetContextObject();
+                    case EA.ObjectType.otMethod:
+                        EA.Method method = (EA.Method)rep.GetContextObject();
                         id = method.MethodID;
                         break;
-   default:
+                    default:
                         id = 0;
                         break;
                 }
@@ -1753,34 +2167,34 @@ static string macroToBool(Repository rep, string sql)
         /// <param name="rep"></param>
         /// <param name="sql">The sql string to replace the macro by the found ID</param>
         /// <returns>sql string with replaced macro</returns>
-        static string macroItem_GUID(Repository rep, string sql)
+        static string macroItem_GUID(EA.Repository rep, string sql)
         {
             // replace ID
             string template = GetTemplateText(SqlTemplateId.CurrentItemGuid);
-            if (sql.Contains(template) | sql.Contains("#CurrentElementGUID#")) 
+            if (sql.Contains(template) | sql.Contains("#CurrentElementGUID#"))
             {
-                ObjectType objectType = rep.GetContextItemType();
+                EA.ObjectType objectType = rep.GetContextItemType();
                 string guid = "";
                 switch (objectType)
                 {
-                    case ObjectType.otElement:
+                    case EA.ObjectType.otElement:
                         EA.Element el = (EA.Element)rep.GetContextObject();
                         guid = el.ElementGUID;
                         break;
-                    case ObjectType.otDiagram:
+                    case EA.ObjectType.otDiagram:
                         EA.Diagram dia = (EA.Diagram)rep.GetContextObject();
                         guid = dia.DiagramGUID;
                         break;
-                    case ObjectType.otPackage:
+                    case EA.ObjectType.otPackage:
                         EA.Package pkg = (EA.Package)rep.GetContextObject();
                         guid = pkg.PackageGUID;
                         break;
-                    case ObjectType.otAttribute:
+                    case EA.ObjectType.otAttribute:
                         Attribute attr = (Attribute)rep.GetContextObject();
                         guid = attr.AttributeGUID;
                         break;
-                    case ObjectType.otMethod:
-                        Method method = (Method)rep.GetContextObject();
+                    case EA.ObjectType.otMethod:
+                        EA.Method method = (EA.Method)rep.GetContextObject();
                         guid = method.MethodGUID;
                         break;
                 }
@@ -1807,7 +2221,7 @@ static string macroToBool(Repository rep, string sql)
         /// <param name="rep"></param>
         /// <param name="sql">The sql string to replace the macro by the found ID</param>
         /// <returns>sql string with replaced macro</returns>
-        static string MacroPackageId(Repository rep, string sql)
+        static string MacroPackageId(EA.Repository rep, string sql)
         {
             // Package ID
             string currentPackageTemplate = GetTemplateText(SqlTemplateId.PackageId);
@@ -1835,31 +2249,31 @@ static string macroToBool(Repository rep, string sql)
         /// </summary>
         /// <param name="rep"></param>
         /// <returns></returns>
-        static int GetParentPackageIdFromContextElement(Repository rep)
+        static int GetParentPackageIdFromContextElement(EA.Repository rep)
         {
-            ObjectType objectType = rep.GetContextItemType();
+            EA.ObjectType objectType = rep.GetContextItemType();
             int id = 0;
             switch (objectType)
             {
-                case ObjectType.otDiagram:
+                case EA.ObjectType.otDiagram:
                     EA.Diagram dia = (EA.Diagram)rep.GetContextObject();
                     id = dia.PackageID;
                     break;
-                case ObjectType.otElement:
+                case EA.ObjectType.otElement:
                     EA.Element el = (EA.Element)rep.GetContextObject();
                     id = el.PackageID;
                     break;
-                case ObjectType.otPackage:
+                case EA.ObjectType.otPackage:
                     EA.Package pkg = (EA.Package)rep.GetContextObject();
                     id = pkg.PackageID;
                     break;
-                case ObjectType.otAttribute:
+                case EA.ObjectType.otAttribute:
                     Attribute attr = (Attribute)rep.GetContextObject();
                     EA.Element elOfAttr = rep.GetElementByID(attr.ParentID);
                     id = elOfAttr.PackageID;
                     break;
-                case ObjectType.otMethod:
-                    Method meth = (Method)rep.GetContextObject();
+                case EA.ObjectType.otMethod:
+                    EA.Method meth = (EA.Method)rep.GetContextObject();
                     EA.Element elOfMeth = rep.GetElementByID(meth.ParentID);
                     id = elOfMeth.PackageID;
                     break;
@@ -1879,7 +2293,7 @@ static string macroToBool(Repository rep, string sql)
         /// <param name="rep"></param>
         /// <param name="sql">The sql string to replace the macro by the found ID</param>
         /// <returns>sql string with replaced macro</returns>
-        static string MacroConnector(Repository rep, string sql)
+        static string MacroConnector(EA.Repository rep, string sql)
         {
             //--------------------------------------------------------------------------------------------
             // CONNECTOR ID
@@ -1890,13 +2304,13 @@ static string macroToBool(Repository rep, string sql)
             if ((sql.Contains(currentConnectorTemplate) | sql.Contains(currentConveyedItemTemplate)))
             {
                 // connector
-                if (rep.GetContextItemType() == ObjectType.otConnector)
+                if (rep.GetContextItemType() == EA.ObjectType.otConnector)
                 {
                     // connector ID
-                    Connector con = (Connector)rep.GetContextObject();
+                    EA.Connector con = (EA.Connector)rep.GetContextObject();
                     if (sql.Contains(currentConnectorTemplate))
                     {
-                        
+
                         sql = sql.Replace(currentConnectorTemplate, $@"{con.ConnectorID}");
                     }
                     // conveyed items are a comma separated list of elementIDs
@@ -1916,11 +2330,12 @@ static string macroToBool(Repository rep, string sql)
 
                             // get semicolon delimiter list of guids of all dependent connectors/information flows
                             List<string> lFlows = rep.GetStringsBySql(sqlInformationFlows);
-                            foreach (string flowGuids in lFlows) { 
+                            foreach (string flowGuids in lFlows)
+                            {
                                 string[] lFlowGuid = flowGuids.Split(',');
                                 foreach (string flowGuid in lFlowGuid)
                                 {
-                                    Connector flow = rep.GetConnectorByGuid(flowGuid);
+                                    EA.Connector flow = rep.GetConnectorByGuid(flowGuid);
                                     foreach (EA.Element el in flow.ConveyedItems)
                                     {
                                         conveyedItems = $"{conveyedItems}, {el.ElementID}";
@@ -1941,14 +2356,15 @@ static string macroToBool(Repository rep, string sql)
                         }
                         sql = sql.Replace(currentConveyedItemTemplate, $"{conveyedItems}");
                     }
-                } else
-                    // no connector selected
+                }
+                else
+                // no connector selected
                 {
                     // Replace by empty list
 
-                    if ( sql.Contains(currentConveyedItemTemplate)) sql = sql.Replace(currentConveyedItemTemplate, " 0 ");
+                    if (sql.Contains(currentConveyedItemTemplate)) sql = sql.Replace(currentConveyedItemTemplate, " 0 ");
 
-                    if (sql.Contains(currentConnectorTemplate) ) sql = sql.Replace(currentConnectorTemplate, " 0 ");
+                    if (sql.Contains(currentConnectorTemplate)) sql = sql.Replace(currentConnectorTemplate, " 0 ");
                 }
             }
             return sql;
@@ -1956,17 +2372,22 @@ static string macroToBool(Repository rep, string sql)
 
 
         /// <summary>
-        /// Replace macro #TreeSelectedGUIDS# by GUIDs of selected Items of Browser
+        /// Replace macro #TreeSelectedGUIDS# or #TreeSelectedIDS# by GUIDs/Ids of selected Items of Browser
         /// </summary>
         /// <param name="rep"></param>
         /// <param name="sql">The sql string to replace the macro by the found ID</param>
+        /// <param name="useGuid"></param>
         /// <returns>sql string with replaced macro</returns>
-        static string MacroTreeSelected(Repository rep, string sql)
+        static string MacroTreeSelected(EA.Repository rep, string sql, bool useGuid = true)
         {
             //--------------------------------------------------------------------------------------------
             // Tree selected items
-            // CONVEYED_ITEM_ID
-            string template = GetTemplateText(SqlTemplateId.TreeSelectedGuids);
+            string template = useGuid ? GetTemplateText(SqlTemplateId.TreeSelectedGuids) : GetTemplateText(SqlTemplateId.TreeSelectedIds);
+            string delimiter = useGuid ? "'" : "";
+            string emptyList = useGuid ? @" ' ' " : " 0 ";
+
+
+
 
 
             if (sql.Contains(template))
@@ -1974,29 +2395,25 @@ static string macroToBool(Repository rep, string sql)
                 // get the selected elements (Element)
                 string guiDs = "";
                 string comma = "";
-                Collection col = rep.GetTreeSelectedElements();
-                foreach (var el in col)
+                EA.Collection col = rep.GetTreeSelectedElements();
+                foreach (EA.Element el in col)
                 {
-                    var guid = ((EA.Element)el).ElementGUID;
+                    var guid = useGuid ? el.ElementGUID : el?.ElementID.ToString() ?? "";
 
                     // make list
                     if (guid != "")
                     {
-                        guiDs = $"{guiDs}{comma}'{guid}'";
+                        guiDs = $"{guiDs}{comma}{delimiter}{guid}{delimiter}";
                         comma = ", ";
                     }
                 }
                 // at least one element selected
-                if (guiDs != "")
-                {
-                    // replace by list of GUIDs
-                    sql = sql.Replace(template, $"{guiDs}");
-                }
-                else// no element in Browser selected
-                {
-                        // Replace by empty list of IDs
-                        sql = sql.Replace(template, " ' ' ");
-                }
+                // - replace by list of GUIDs
+                // no element in Browser selected
+                // - replace by empty list of IDs
+                sql = sql.Replace(template, guiDs != "" ?
+                    $"{guiDs}"
+                    : emptyList);
             }
             return sql;
         }
@@ -2007,34 +2424,35 @@ static string macroToBool(Repository rep, string sql)
         /// <param name="rep"></param>
         /// <param name="sql">The sql string to replace the macro by the found ID</param>
         /// <returns>sql string with replaced macro</returns>
-        static string MacroBranch(Repository rep, string sql) { 
-        // Branch=comma separated Package IDs, Recursive:
-        // Example for 3 Packages with their PackageID 7,29,128
-        // 7,29,128
-        //
-        // Branch: complete SQL IN statement ' IN (comma separated Package IDs, Recursive):
-        // IN (7,29,128)
+        static string MacroBranch(EA.Repository rep, string sql)
+        {
+            // Branch=comma separated Package IDs, Recursive:
+            // Example for 3 Packages with their PackageID 7,29,128
+            // 7,29,128
+            //
+            // Branch: complete SQL IN statement ' IN (comma separated Package IDs, Recursive):
+            // IN (7,29,128)
             string currentBranchTemplate = GetTemplateText(SqlTemplateId.BranchIds);
             string currrentInBranchTemplate = GetTemplateText(SqlTemplateId.InBranchIds);
 
-            
+
             if (sql.Contains(currentBranchTemplate) | sql.Contains(currrentInBranchTemplate))
             {
-                ObjectType objectType = rep.GetContextItemType();
+                EA.ObjectType objectType = rep.GetContextItemType();
                 int id = 0;
                 switch (objectType)
                 {
                     // use Package of diagram
-                    case ObjectType.otDiagram:
+                    case EA.ObjectType.otDiagram:
                         EA.Diagram dia = (EA.Diagram)rep.GetContextObject();
                         id = dia.PackageID;
                         break;
                     // use Package of element
-                    case ObjectType.otElement:
+                    case EA.ObjectType.otElement:
                         EA.Element el = (EA.Element)rep.GetContextObject();
                         id = el.PackageID;
                         break;
-                    case ObjectType.otPackage:
+                    case EA.ObjectType.otPackage:
                         EA.Package pkg = (EA.Package)rep.GetContextObject();
                         id = pkg.PackageID;
                         break;
@@ -2048,7 +2466,8 @@ static string macroToBool(Repository rep, string sql)
                     branch = String.IsNullOrWhiteSpace(branch) ? " 0 " : branch;
                     sql = sql.Replace(currentBranchTemplate, branch);
                     sql = sql.Replace(currrentInBranchTemplate, branch);
-                } else
+                }
+                else
                 // no diagram, element or package selected
                 {
                     // Replace by empty list of IDs
@@ -2067,7 +2486,7 @@ static string macroToBool(Repository rep, string sql)
         /// <param name="rep"></param>
         /// <param name="sql"></param>
         /// <returns></returns>
-        static string MacroBranchConstant(Repository rep, string sql)
+        static string MacroBranchConstant(EA.Repository rep, string sql)
         {
 
             // The macros to support
@@ -2091,8 +2510,8 @@ static string macroToBool(Repository rep, string sql)
                         if (pkg == null)
                         {
                             sql = sql.Replace(match.Groups[0].Value, " 0 ");
-                            
-                                return sql;
+
+                            return sql;
 
                         }
                         int pkgId = pkg.PackageID;
@@ -2128,7 +2547,7 @@ static string macroToBool(Repository rep, string sql)
         /// <param name="rep"></param>
         /// <param name="sql">The sql string to replace the macro by the found ID</param>
         /// <returns>sql string with replaced macro</returns>
-        static string MacroCondBranchStatement(Repository rep, string sql)
+        static string MacroCondBranchStatement(EA.Repository rep, string sql)
         {
             // Branch=comma separated Package IDs, Recursive:
             // Example for 3 Packages with their PackageID 7,29,128
@@ -2139,13 +2558,13 @@ static string macroToBool(Repository rep, string sql)
             string currentBranchTemplate = GetTemplateText(SqlTemplateId.CondBranchStatement);
             if (sql.Contains(currentBranchTemplate))
             {
-                ObjectType objectTypeContext = rep.GetContextItem(out _);
-                ObjectType objectType = rep.GetTreeSelectedItem(out object obj);
+                EA.ObjectType objectTypeContext = rep.GetContextItem(out _);
+                EA.ObjectType objectType = rep.GetTreeSelectedItem(out object obj);
                 int id = 0;
-                if (objectTypeContext != ObjectType.otPackage) return sql.Trim();
+                if (objectTypeContext != EA.ObjectType.otPackage) return sql.Trim();
                 switch (objectType)
                 {
-                   case ObjectType.otPackage:
+                    case EA.ObjectType.otPackage:
                         EA.Package pkg = (EA.Package)obj;
                         id = pkg.PackageID;
                         break;
@@ -2159,7 +2578,7 @@ static string macroToBool(Repository rep, string sql)
                     branch = String.IsNullOrWhiteSpace(branch) ? " 0 " : branch;
                     // find #CondBranchStatement...# with optional parameter
                     var pattern = $@"{currentBranchTemplate.Remove(currentBranchTemplate.Length - 1)}([^#]*)#";
-                    Match match = Regex.Match(sql,pattern , RegexOptions.IgnoreCase);
+                    Match match = Regex.Match(sql, pattern, RegexOptions.IgnoreCase);
                     while (match.Success)
                     {
                         var lColumns = match.Groups[1].Value.Split(',');
@@ -2182,6 +2601,83 @@ static string macroToBool(Repository rep, string sql)
             }
             return sql.Trim();
         }
+        /// <summary>
+        /// Conditional collect selected Elements in Diagram or nothing
+        ///
+        /// #CondDiagramSelectedElements_IDS#          ==> AND o.object_id in (…,..,..)  // or nothing if no diagram element is selected
+        ///
+        /// #CondDiagramSelectedElements_IDS operator, alias#
+        /// #CondDiagramSelectedElements_IDS AND, o#   ==> AND o.object_id in (…,..,..)  // or nothing if no diagram element is selected
+        ///
+        /// #CondDiagramSelectedElements_IDS operator, alias, columnName#
+        /// #CondDiagramSelectedElements_IDS AND, o, object_id#   ==> AND o.object_id in (…,..,..)  // or nothing if no diagram element is selected
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <param name="sql"></param>
+        /// <returns></returns>
+        private static string MacroCondDiagramSelectedElements_IDS(EA.Repository rep, string sql)
+        {
+            // get template
+            string currentCondSelectedElementsTemplate = GetTemplateText(SqlTemplateId.CondDiagramSelectedElementsIds);
+
+            string listSelectedDiagramIds = "";
+            // template is used
+            if (sql.Contains(currentCondSelectedElementsTemplate.Substring(0, currentCondSelectedElementsTemplate.Length - 1)))
+            {
+                // Estimate comma separated list of diagram ids
+                // get the diagram
+                EA.Diagram dia = rep.GetContextItemType() == EA.ObjectType.otDiagram ? (EA.Diagram)rep.GetContextObject() : rep.GetCurrentDiagram();
+                // Diagram selected?
+                if (dia != null)
+                {
+                    // make a list of comma separated IDs
+                    string delimiter = "";
+                    foreach (var el in dia.SelectedObjects)
+                    {
+                        int id = ((EA.DiagramObject)el).ElementID;
+                        listSelectedDiagramIds = $@"{listSelectedDiagramIds}{delimiter}{id}";
+                        delimiter = ", ";
+
+                    }
+                }
+                // Replace every occurrence 
+                // find #CondBranchStatement...# with optional parameter
+                var pattern = $@"{currentCondSelectedElementsTemplate.Remove(currentCondSelectedElementsTemplate.Length - 1)}([^#]*)#";
+                Match match = Regex.Match(sql, pattern, RegexOptions.IgnoreCase);
+                while (match.Success)
+                {
+                    var lColumns = match.Groups[1].Value.Split(',');
+                    if (!String.IsNullOrWhiteSpace(listSelectedDiagramIds))
+                    {
+                        // #CondBranchStatement AND, x # ==> 'AND x.object_Id in (...) '
+                        if (lColumns.Length == 2)
+                        {
+                            sql = sql.Replace(match.Groups[0].Value,
+                                $@" {lColumns[0]} {lColumns[1]}.object_Id in ({listSelectedDiagramIds}) ");
+                        }
+                        // #CondBranchStatement AND, x,yyyyyyy # ==> 'AND x.yyyyyy in (...) 
+                        if (lColumns.Length == 3)
+                        {
+                            sql = sql.Replace(match.Groups[0].Value,
+                                $@" {lColumns[0]} {lColumns[1]}.{lColumns[2]} in ({listSelectedDiagramIds}) ");
+                        }
+                        if (lColumns.Length == 0)
+                        {
+                            // #CondBranchStatement# 
+                            sql = sql.Replace(match.Groups[0].Value, $@" AND o.object_id in ({listSelectedDiagramIds}) ");
+                        }
+                    }
+                    else
+                    {
+                        // empty, because no package in browser is selected
+                        sql = sql.Replace(match.Groups[0].Value, $@" ");
+                    }
+
+                    match = match.NextMatch();
+                }
+            }
+            return sql;
+        }
 
         /// <summary>
         /// Replace macro #Branch={..guid..}# and #InBranch={..guid..}# by IDs of selected packages, recursive nested. 
@@ -2190,7 +2686,7 @@ static string macroToBool(Repository rep, string sql)
         /// <param name="rep"></param>
         /// <param name="sql">The sql string to replace the macro by the found ID</param>
         /// <returns>sql string with replaced macro</returns>
- static string MacroBranchConstantPackage(Repository rep, string sql)
+        static string MacroBranchConstantPackage(EA.Repository rep, string sql)
         {
             // Branch=comma separated Package IDs, Recursive:
             // Example for 3 Packages with their PackageID 7,29,128
@@ -2199,23 +2695,23 @@ static string macroToBool(Repository rep, string sql)
             // Branch: complete SQL IN statement ' IN (comma separated Package IDs, Recursive):
             // IN (7,29,128)
             string currentBranchTemplate = GetTemplateText(SqlTemplateId.BranchIdsConstantPackage);
-            if (sql.Contains(currentBranchTemplate) )
+            if (sql.Contains(currentBranchTemplate))
             {
-                ObjectType objectType = rep.GetContextItemType();
+                EA.ObjectType objectType = rep.GetContextItemType();
                 int id = 0;
                 switch (objectType)
                 {
                     // use Package of diagram
-                    case ObjectType.otDiagram:
+                    case EA.ObjectType.otDiagram:
                         EA.Diagram dia = (EA.Diagram)rep.GetContextObject();
                         id = dia.PackageID;
                         break;
                     // use Package of element
-                    case ObjectType.otElement:
+                    case EA.ObjectType.otElement:
                         EA.Element el = (EA.Element)rep.GetContextObject();
                         id = el.PackageID;
                         break;
-                    case ObjectType.otPackage:
+                    case EA.ObjectType.otPackage:
                         EA.Package pkg = (EA.Package)rep.GetContextObject();
                         id = pkg.PackageID;
                         break;
@@ -2228,7 +2724,7 @@ static string macroToBool(Repository rep, string sql)
                     // Handle empty branches
                     branch = String.IsNullOrWhiteSpace(branch) ? " 0 " : branch;
                     sql = sql.Replace(currentBranchTemplate, branch);
-                   
+
                 }
                 else
                 // no diagram, element or package selected
@@ -2248,7 +2744,7 @@ static string macroToBool(Repository rep, string sql)
         /// <param name="branch"></param>
         /// <param name="id"></param>
         /// <returns></returns>
-        public static string GetBranch(Repository rep, string branch, int id)
+        public static string GetBranch(EA.Repository rep, string branch, int id)
         {
             if (id > 0)
             {
@@ -2268,7 +2764,7 @@ static string macroToBool(Repository rep, string sql)
             return branch;
         }
         /// <summary>
-        /// Repository type for macros
+        /// EA.Repository type for macros
         ///
         /// Rational:
         /// Adapt special Repository Types like:
@@ -2277,7 +2773,7 @@ static string macroToBool(Repository rep, string sql)
         /// </summary>
         /// <param name="rep"></param>
         /// <returns></returns>
-        private static string RepType(Repository rep)
+        private static string RepType(EA.Repository rep)
         {
             string repType = rep.RepositoryType().ToUpper();
             if (repType.StartsWith("ACCESS")) return "ACCESS";
@@ -2299,7 +2795,7 @@ static string macroToBool(Repository rep, string sql)
         //#DB=POSTGRES#           DB specif SQL for POSTGRES
         //#DB=SqlSvr#             DB specif SQL for SQL Server
         //#DB=SQLite#             DB specif SQL for SQLite
-        private static string FormatSqlDbSpecific(Repository rep, string sql)
+        private static string FormatSqlDbSpecific(EA.Repository rep, string sql)
         {
             // available DBs
             // Key: Repository.RepositoryType() 'Access2007' transformed to 'Access'
@@ -2318,11 +2814,11 @@ static string macroToBool(Repository rep, string sql)
                 { "SL3", "#DB=SQLITE#" }
 
             };
-            var dbType = dbs.Where(x=>x.Key == RepType(rep)).Select(x=>x.Value).FirstOrDefault();
+            var dbType = dbs.Where(x => x.Key == RepType(rep)).Select(x => x.Value).FirstOrDefault();
             if (String.IsNullOrEmpty(dbType))
             {
                 MessageBox.Show($@"DB not supported in SQL, only 'ACCESS', 'MYSQL', 'JET', 'SQLite', 'SL3'!
-{sql}",$@"DB {RepType(rep)} not supported");
+{sql}", $@"DB {RepType(rep)} not supported");
                 return sql;
             }
             string s = sql;
@@ -2376,8 +2872,8 @@ static string macroToBool(Repository rep, string sql)
 
 {e}", @"Error Regex");
                 return null;
-            } 
-            
+            }
+
         }
         public string SrcColumn;
         public string TrgColumn;
@@ -2419,5 +2915,44 @@ static string macroToBool(Repository rep, string sql)
         public string Condition;
         public string Column;
         public string RegExString;
+    }
+    /// <summary>
+    /// Properties of the EA Databases
+    /// - MYSQL
+    /// - MySqlConnector
+    /// - SL3  (SQLite)
+    /// - ACCESS
+    /// - JET
+    /// - SqlSvr
+    /// - ORACLE
+    /// - POSTGRES
+    /// - FIREBIRD
+    /// - ASA
+    /// - 
+    /// </summary>
+    public class DatabaseProperties
+    {
+        /// <summary>
+        /// Name of the EA macro associated with the database
+        /// </summary>
+        public string MacroName { get; set; }
+        
+        /// <summary>
+        /// Name of the ODBC driver
+        /// </summary>
+        public string OdbcDiverName { get; set; }
+        /// <summary>
+        /// Linq driver name
+        /// </summary>
+        public string LinqName { get; set; }
+        /// <summary>
+        /// Function to parse a bool string to get the bool representation
+        /// </summary>
+        /// public string 
+        public Func<string, bool> BoolStringParser { get; set; }
+        /// <summary>
+        /// Function to convert a boolean to a string representation
+        /// </summary>
+        public Func<bool, string> BoolToStringConverter { get; set; }
     }
 }

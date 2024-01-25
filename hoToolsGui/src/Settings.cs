@@ -1563,16 +1563,24 @@ namespace hoTools.Settings
                 }
             }
 
-            // Get all suitable Scripts
-            foreach (Script script in Script.GetEaMaticScripts(_model))
+            try
             {
-                foreach (ScriptFunction scriptFunction in script.Functions)
+                // Get all suitable Scripts
+                foreach (Script script in Script.GetEaMaticScripts(_model))
                 {
-                    AllServices.Add(new ServiceScript(scriptFunction));
-                }
+                    foreach (ScriptFunction scriptFunction in script.Functions)
+                    {
+                        AllServices.Add(new ServiceScript(scriptFunction));
+                    }
 
+                }
+                AllServices.Sort(new Service.ServicesDescriptionComparer());
             }
-            AllServices.Sort(new Service.ServicesDescriptionComparer());
+            catch (Exception )
+            {
+                // do nothing
+            }
+            
         }
         #endregion
         #region UpdateKeysAndToolbarsServices

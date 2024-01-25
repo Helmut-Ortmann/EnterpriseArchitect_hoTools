@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
-
 using Microsoft.Win32;
 
-namespace EAAddinFramework.EASpecific
+namespace AddinFramework.EASpecific
 {
     /// <summary>
     /// Description of EAAddin.

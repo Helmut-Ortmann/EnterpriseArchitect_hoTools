@@ -129,6 +129,8 @@ Some features:
 
 ## Releases
 
+### 4.2.7 Refactoring SQL/Linq2db
+- Macros (quotedName)
 ### 4.2.6 Fix Branch for empty result set with '0'
 ### 4.2.5 Fix export to Excel (Search Window)
 

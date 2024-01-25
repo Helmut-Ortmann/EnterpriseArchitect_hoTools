@@ -221,7 +221,7 @@ namespace hoTools.Utils
 
 
         //--------------------------------------------------------------------------------------------------------------
-        // setLineStyleForLink  Set line style for a digram link
+        // setLineStyleForLink  Set line style for a diagram link
         //--------------------------------------------------------------------------------------------------------------
         // linestyle
         // LH = "Line Style: Lateral Horizontal";

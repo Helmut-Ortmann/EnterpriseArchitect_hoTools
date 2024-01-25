@@ -29,6 +29,7 @@ del *.wxs
 "%WIX%" file ..\..\hoSqlGui\bin\release\hoSqlGui.dll -ag -template fragment -platform x64 -out hoSqlGui.wxs
 "%WIX%" file ..\..\hoExtensionGui\bin\release\hoExtensionGui.dll -ag -template fragment -platform x64 -out hoExtensionGui.wxs
 "%WIX%" file ..\..\hoFindAndReplaceGui\bin\release\hoFindAndReplaceGui.dll -ag -template fragment -platform x64 -out hoFindAndReplaceGui.wxs
+"%WIX%" file ..\..\AddinFramework\bin\release\AddinFramework.dll -ag -template fragment -platform x64 -out AddinFramework.wxs
 
 rem "%WIX%" dir "$(TargetDir)." -var var.Setup.TargetDir -dr APPLICATIONFOLDER -cg Binaries -ag -scom -sreg -sfrag -srd -o "Binaries.wxs"
 
