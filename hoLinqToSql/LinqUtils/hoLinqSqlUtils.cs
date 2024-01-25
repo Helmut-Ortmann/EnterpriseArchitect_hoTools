@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using hoLinqToSql.LinqUtils.Extensions;
-using LinqToDB.Configuration;
+using LinqToDB;
 using LinqToDB.DataProvider;
 using LinqToDB.DataProvider.Access;
 using Microsoft.Win32;
@@ -23,10 +23,7 @@ namespace hoLinqToSql.LinqUtils
         /// Here: Access2007 + JET 4.0:  Microsoft.ACE.OLEDB.12.0 (32+64 Bit), maybe Microsoft.ACE.OLEDB.16.0 
         ///       JET 3.0    + JET 4.0:  Microsoft.JET.OLEDB.4.0 (32 Bit)
         ///       SQLite:                 System.Data.Sqlite
-        public const string SqLiteOdbcDriver = "System.Data.Sqlite";
-        public const string JetDbOdbcDriver = "Microsoft.JET.OLEDB.4.0";
-        public const string AccessDbOdbcDriver = "Microsoft.ACE.OLEDB.12.0";
-        public const string SqlServerOdbcDriver = "Microsoft.Data.SqlClient";
+        
         /// <Summary>
         /// Convert a IEnumerable to a DataTable.
         /// <TypeParam name="T">Type representing the type to convert.</TypeParam>
@@ -87,7 +84,7 @@ namespace hoLinqToSql.LinqUtils
 
         /// <summary>
         /// Example LINQ to SQL
-        /// - All object object types
+        /// - All object  types
         /// - Count of object types
         /// - Percentage of object types
         /// - Total count
@@ -102,25 +99,20 @@ namespace hoLinqToSql.LinqUtils
             try
             {
                 {
-                    var conBuilder = new LinqToDBConnectionOptionsBuilder();
-                    if (provider != null)
-                        conBuilder.UseConnectionString(provider, connectionString);
-                    else
-                        conBuilder.UseConnectionString(providerName, connectionString);
-
-                    var conOption = new LinqToDBConnectionOptions(conBuilder);
-
-                    using (var db = new DataModels.EaDataModel(conOption)) {
-
+                    // Get linq2db options
+                    var options = GetLinq2DataOptions(provider, providerName, connectionString);
+                    using (var db = new DataModels.EaDataModel(options))
+                    {
                         var count = db.t_object.Count();
                         var q = from c in db.t_object.AsEnumerable()
-                            group c by c.Object_Type into g
+                            group c by c.Object_Type
+                            into g
                             orderby g.Key
 
                             select new
                             {
                                 Type = g.Key,
-                                Prozent = $"{ (float)g.Count() * 100 / count:00.00}%",
+                                Prozent = $"{(float)g.Count() * 100 / count:00.00}%",
                                 Count = g.Count(),
                                 Total = count
                             };
@@ -132,11 +124,51 @@ namespace hoLinqToSql.LinqUtils
             }
             catch (Exception e)
             {
-                MessageBox.Show($"Provider: {provider}\r\nConnection: {connectionString}\r\n\r\n{e}", "Error Linq2DB");
+                MessageBox.Show($"Provider: {provider}\r\nConnection: {connectionString}\r\n\r\n{e}", "hoTools: Error Linq2DB");
                 return new DataTable();
             }
             
 
+        }
+        /// <summary>
+        /// Get linq2db data options
+        /// </summary>
+        /// <param name="provider"></param>
+        /// <param name="providerName"></param>
+        /// <param name="connectionString"></param>
+        /// <returns></returns>
+        public static DataOptions GetLinq2DataOptions(IDataProvider provider, string providerName, string connectionString)
+        {
+            DataOptions options = null;
+            try
+            {
+
+                if (provider != null)
+                {
+                    options = new DataOptions()
+                        .UseConnectionString(connectionString)
+                        .UseDataProvider(provider);
+
+                }
+                else
+                {
+                    options = new DataOptions()
+                        .UseConnectionString(connectionString)
+                        .UseProvider(providerName);
+                }
+
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show($@"ConnectionString {connectionString}
+ProviderName: '{providerName ?? ""}'
+Provider:     '{provider?.Name ?? ""}'
+
+{e}", "Linq2db: can't estimate connection");
+            }
+
+
+            return options;
         }
 
         /// <summary>
@@ -163,13 +195,10 @@ namespace hoLinqToSql.LinqUtils
             try
             {
                 {
-                    var conBuilder = new LinqToDBConnectionOptionsBuilder();
-                    if (provider != null)
-                        conBuilder.UseConnectionString(provider, connectionString);
-                    else
-                        conBuilder.UseConnectionString(providerName, connectionString);
-                    var conOption = new LinqToDBConnectionOptions(conBuilder);
-                    using (var db = new DataModels.EaDataModel(conOption)) {
+                    // Get linq2db options
+                    var conOption = GetLinq2DataOptions(provider, providerName, connectionString);
+                    using (var db = new DataModels.EaDataModel(conOption))
+                    {
                         // Total amount of Object_Types
                         var countObjectTypes = db.t_object.Count();
 
@@ -197,7 +226,7 @@ namespace hoLinqToSql.LinqUtils
                         // - Count
                         // - Percentage
                         // - Total count of requirements
-                        var countReq = db.t_object.Where(e => e.Object_Type == "Requirement").Count();
+                        var countReq = db.t_object.Count(e => e.Object_Type == "Requirement");
                         var q1 =
                             (from c in db.t_object.AsEnumerable()
                                 where c.Object_Type == "Requirement"
@@ -223,7 +252,7 @@ namespace hoLinqToSql.LinqUtils
             }
             catch (Exception e)
             {
-                MessageBox.Show($"Provider: {provider}\r\nConnection: {connectionString}\r\n\r\n{e}", "Error Linq2DB");
+                MessageBox.Show($"Provider: {provider}\r\nConnection: {connectionString}\r\n\r\n{e}", "hoTools: Error Linq2DB");
                 return new DataTable();
             }
 
@@ -239,6 +268,17 @@ namespace hoLinqToSql.LinqUtils
             Regex rx = new Regex("DataSource=([^;]*)");
             Match match =  rx.Match(connectionString);
             return match.Success ? match.Groups[1].Value : "";
+        }
+        /// <summary>
+        /// Remove PID from ConnectionString
+        ///
+        /// Show password as: PWD=***;
+        /// </summary>
+        /// <param name="connectionString"></param>
+        /// <returns></returns>
+        public static string RemovePasswordFromConnectionString(string connectionString)
+        {
+            return Regex.Replace(connectionString, "PWD=([^;]*)", "PWD=***", RegexOptions.IgnoreCase);
         }
 
 
@@ -263,24 +303,25 @@ namespace hoLinqToSql.LinqUtils
                 // EAP file 
                 // Provider=Microsoft.Jet.OLEDB.4.0;Data Source=d:\hoData\Work.eap;"
                 string dsnConnectionString;
-                 switch (rep.RepositoryType())
+                switch (rep.RepositoryType())
                 {
 
                     case "JET":
-                        provider = new AccessOleDbDataProvider();
-                        providerName = JetDbOdbcDriver;
+                        provider = null; // new AccessOleDbDataProvider();
+                        providerName = DataModels.DbConfig.GetDbProperties(rep).LinqName;
                         dsnConnectionString = GetConnectionStringForDsn(connectionString);
                         if (dsnConnectionString != "") return dsnConnectionString;
                         if (connectionString.ToLower().EndsWith(".eap") || connectionString.ToLower().EndsWith(".eapx"))
                         {
-
-                            return $"Provider={JetDbOdbcDriver};Data Source={connectionString};";
+                            providerName = DataModels.DbConfig.GetDbProperties(rep).LinqName;
+                            return $"Provider={DataModels.DbConfig.GetDbProperties(rep).OdbcDiverName};Data Source={connectionString};";
                         }
 
                         break;
                     case @"SQLSVR":
-                        provider = null;
-                        providerName = SqlServerOdbcDriver;
+                        provider = null; //new SqlServerDataProvider("", SqlServerVersion.v2012);
+                        //provider = new SqlServerDataProvider("", SqlServerVersion.v2012)
+                        providerName = "Microsoft.Data.SqlClient";
                         dsnConnectionString = GetConnectionStringForDsn(connectionString);
                         // Add Encrypt=False;
                         if (dsnConnectionString != "")
@@ -293,27 +334,28 @@ namespace hoLinqToSql.LinqUtils
 
                     case "MYSQL":
                         provider = null; // new MySqlDataProvider("SQL Server");
-                        providerName = "MySqlConnector";
+                        providerName = DataModels.DbConfig.GetDbProperties(rep).LinqName;
 
                         dsnConnectionString = GetConnectionStringForDsn(connectionString);
-                        dsnConnectionString = Regex.Replace(dsnConnectionString, "NO_SCHEMA=[01];","");
+                        dsnConnectionString = Regex.Replace(dsnConnectionString, "NO_SCHEMA=[01];", "");
                         if (dsnConnectionString != "") return dsnConnectionString;
                         return FilterConnectionString(connectionString);
 
                     case "ACCESS2007":
+                    case "ACCESS":
                         provider = new AccessOleDbDataProvider();
-                        providerName = AccessDbOdbcDriver;
+                        providerName = DataModels.DbConfig.GetDbProperties(rep).LinqName;
                         dsnConnectionString = GetConnectionStringForDsn(connectionString);
                         if (dsnConnectionString != "") return dsnConnectionString;
                         if (connectionString.ToLower().EndsWith(".eap") || connectionString.ToLower().EndsWith(".eapx"))
                         {
 
-                            return $"{AccessDbOdbcDriver};Data Source={connectionString};";
+                            return $"Provider={DataModels.DbConfig.GetDbProperties(rep).OdbcDiverName};Data Source={connectionString};";
                         }
 
                         break;
-                        
-                      
+
+
                     case "ASA":
                         provider = null; //new SybaseDataProvider("Sybase");
                         providerName = "AdoNetCore.AseClient";
@@ -339,17 +381,18 @@ namespace hoLinqToSql.LinqUtils
                     case "SQLITE":
                     case "SL3":
                         provider = null; //new SqlServerDataProvider("", SqlServerVersion.v2012);
-                        providerName = SqLiteOdbcDriver;
+                        providerName = DataModels.DbConfig.GetDbProperties(rep).LinqName;
                         dsnConnectionString = GetConnectionStringForDsn(connectionString);
                         if (dsnConnectionString != "") return dsnConnectionString;
                         return $@"DataSource={connectionString};";
 
 
 
+
                     default:
                         MessageBox.Show($@"Database: '{rep.RepositoryType()}'
 ConnectionString: '{connectionString}'",
-                            "DataBase not supported for hoTools, only Access, SqlServer, MySQL, SQLite/SL3 (*.qea)");
+                            "DataBase not supported, only JET, Access, SqlServer, MySQL, SQLite/SL3 (*.qea)");
                         break;
 
                 }
@@ -359,14 +402,14 @@ ConnectionString: '{connectionString}'",
                 MessageBox.Show($@"Type: {rep.RepositoryType()}
 ConnectionString: '{connectionString}'
 
-{ex}", "VW Tools: Error connections string");
+{ex}", "hoTools: Error connections string");
             }
 
             return "";
         }
 
         /// <summary>
-        /// Filter connection string:
+        /// Filter EA connection string:
         /// - First 2 elements delete (e.g.:'EAExample --- DBType=1;Connect=Provider=SQLOLEDB.1'
         /// - Last Element delete: (LazyLoad=1;)
         /// </summary>
@@ -374,51 +417,47 @@ ConnectionString: '{connectionString}'
         /// <returns>"" no connection found</returns>
         private static string FilterConnectionString(string connectionString)
         {
-            string[] c = connectionString.Split(';').Skip(2).ToArray();
-            // no connection string, e.g. Access and SQLite uses a path
-            if (c.Length == 0) return connectionString;
-            Array.Resize(ref c, c.Length - 2);
-            return String.Join(";", c) + ";";
+            if (connectionString.Contains(" --- "))
+            {
+                string[] c = connectionString.Split(';').Skip(2).ToArray();
+                // no connection string, e.g. Access and SQLite uses a path
+                if (c.Length == 0) return connectionString;
+                Array.Resize(ref c, c.Length - 2);
+                return String.Join(";", c) + ";";
+            }
+            return connectionString;
         }
 
-        public static string GetConnectionStringAccess(string path)
-        {
-            return $"Provider={JetDbOdbcDriver};Data Source={path};";
-        }
-        /// <summary>
-        /// Get ConnectionOptions
-        ///
-        /// From the path it gets the LINQDB options.
-        /// </summary>
-        /// <param name="path"></param>
-        /// <returns></returns>
-        public static LinqToDBConnectionOptions GetConnectionOptions(string path)
+        public static string GetConnectionStringAccess(EA.Repository rep, string path)
         {
 
-            var conBuilder = new LinqToDBConnectionOptionsBuilder();
-            var providerName = JetDbOdbcDriver;
-            if (path.ToLower().EndsWith(".qea") || path.ToLower().EndsWith(".qeax")) providerName = SqLiteOdbcDriver;
-            conBuilder.UseConnectionString(providerName, path);
-            var conOption = new LinqToDBConnectionOptions(conBuilder);
-            return conOption;
+            return $"Provider={DataModels.DbConfig.GetDbProperties(rep).OdbcDiverName};Data Source={path};";
         }
-
         /// <summary>
-        /// Get ConnectionOptions
+        /// Get ConnectionOptions from path of Repository
+        /// Doesn't work for MySQL or other non file based databases.
         /// 
-        /// From the path it gets the LINQDB options.
+        /// From the path it gets the LINQDB options:
+        /// - qea  "System.Data.Sqlite"
+        /// - eap  JetDbOdbcDriver      (32 bit),    JET 3
+        /// - eapx AccessDbOdbcDriver   (32+64 bit), JET 4
+        /// - eadb AccessDbOdbcDriver   (32+64 Bit)
         /// </summary>
+        /// <param name="rep"></param>
+        /// <param name="connectionString"></param>
         /// <returns></returns>
-        public static LinqToDBConnectionOptions GetConnectionOptions(EA.Repository rep)
+        public static DataOptions GetConnectionOptions(EA.Repository rep, string connectionString)
         {
-            string connectionString = GetConnectionString(rep, out IDataProvider _, out string providerName);
 
-            var conBuilder = new LinqToDBConnectionOptionsBuilder();
-            conBuilder.UseConnectionString(providerName, connectionString);
-            var conOption = new LinqToDBConnectionOptions(conBuilder);
+            var providerName = DataModels.DbConfig.GetDbProperties(rep).LinqName;
+            if (connectionString.ToLower().EndsWith(".qea") || connectionString.ToLower().EndsWith(".qeax")) providerName = DataModels.DbConfig.GetDbProperties(rep).LinqName;
+            if (connectionString.ToLower().EndsWith(".eapx") || connectionString.ToLower().EndsWith("eadb")) providerName = DataModels.DbConfig.GetDbProperties(rep).LinqName;
+            if (connectionString.ToLower().EndsWith(".eap")) providerName = DataModels.DbConfig.GetDbProperties(rep).LinqName;
+
+            // Get linq2db options
+            var conOption = GetLinq2DataOptions(null, providerName, connectionString);
             return conOption;
         }
-
 
         /// <summary>
         /// Get connectionString if a DSN is part of the connectionString or "" if no DSN available.

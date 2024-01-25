@@ -31,7 +31,7 @@ namespace hoTools.Utils.User
             string user = rep.GetCurrentLoginUser();
             // get connection string of repository
             string connectionString = LinqUtil.GetConnectionString(rep, out var provider,out string providerName);
-            using (var db = new DataModels.EaDataModel(provider, connectionString))
+            using (var db = new hoLinqToSql.DataModels.EaDataModel(provider, connectionString))
             {
                 Groups = (from grp in db.t_secgroup
                           join grpUser in db.t_secusergroup on grp.GroupID equals grpUser.GroupID

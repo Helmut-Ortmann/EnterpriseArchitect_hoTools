@@ -20,115 +20,12 @@ namespace hoTools.Utils.Sql
     /// - EA macros
     /// - Additional features
     /// </summary>
-    public class SqlTemplates
+    public class SqlMacros
     {
         // ReSharper disable once PrivateFieldCanBeConvertedToLocalVariable
         private readonly EA.Repository _rep;
         private readonly string _sqlString;
-
-        // Initializing the properties for different databases
-        public static readonly Dictionary<string, DatabaseProperties> DatabaseProperties = new Dictionary<string, DatabaseProperties>
-{
-    {
-        "MYSQL",
-        new DatabaseProperties
-        {
-            MacroName = "#DB=MySql#",
-            OdbcDiverName = "",  // not needed
-            LinqName = "MySql",
-            BoolStringParser = boolString => "1 true TRUE".Contains(boolString),
-            BoolToStringConverter = b => b ? "1" : "0"
-        }
-    },
-    {
-        "MySqlConnector",
-        new DatabaseProperties
-        {
-            MacroName = "#DB=MySql#",
-            OdbcDiverName = "",  // not needed
-            LinqName = "MySql",
-            BoolStringParser = boolString => "1 true TRUE".Contains(boolString),
-            BoolToStringConverter = b => b ? "1" : "0"
-        }
-    },
-    {   // SQLite
-        "SL3",
-        new DatabaseProperties
-        {
-            MacroName = "#DB=MySql#",
-            OdbcDiverName = "System.Data.Sqlite",  
-            LinqName = "System.Data.Sqlite",
-            BoolStringParser = boolString => "1 true TRUE".Contains(boolString),
-            BoolToStringConverter =  b => b ? "1" : "0"
-        }
-    },
-    {   // ACCESS2007
-        "ACCESS",
-        new DatabaseProperties
-        {
-            MacroName = "#DB=ACCESS2007#",
-            BoolStringParser = boolString => "1 true TRUE".Contains(boolString),
-            BoolToStringConverter =  b => b ? "1" : "0"
-        }
-    },
-    {   // JET
-        "JET",
-        new DatabaseProperties
-        {
-            
-            MacroName = "#DB=JET#",
-            OdbcDiverName = "Microsoft.JET.OLEDB.4.0",
-            LinqName = "Access",
-            BoolStringParser = boolString => "1 true TRUE".Contains(boolString),
-            BoolToStringConverter =  b => b ? "1" : "0"
-        }
-    },
-    {   // SQL Server
-        "SqlSvr",
-        new DatabaseProperties
-        {
-            MacroName = "#DB=SqlSvr#",
-            BoolStringParser = boolString => boolString.Equals("Y", StringComparison.OrdinalIgnoreCase),
-            BoolToStringConverter = b => b ? "Y" : "N"
-        }
-    },
-        {   // ORACLE
-        "ORACLE",
-        new DatabaseProperties
-        {
-            MacroName = "#DB=ORACLE#",
-            BoolStringParser = boolString => boolString.Equals("Y", StringComparison.OrdinalIgnoreCase),
-            BoolToStringConverter = b => b ? "Y" : "N"
-        }
-    },
-        {   // POSTGRES
-            "POSTGRES",
-            new DatabaseProperties
-            {
-                MacroName = "#DB=ORACLE#",
-                BoolStringParser = boolString => boolString.Equals("Y", StringComparison.OrdinalIgnoreCase),
-                BoolToStringConverter = b => b ? "Y" : "N"
-            }
-        },
-    {   // FIREBIRD
-            "FIREBIRD",
-            new DatabaseProperties
-            {
-                MacroName = "#DB=FIREBIRD#",
-                BoolStringParser = boolString => boolString.Equals("Y", StringComparison.OrdinalIgnoreCase),
-                BoolToStringConverter = b => b ? "Y" : "N"
-            }
-        },
-    {   // ASA
-        "ASA",
-        new DatabaseProperties
-        {
-            MacroName = "#DB=ASA#",
-            BoolStringParser = boolString => boolString.Equals("Y", StringComparison.OrdinalIgnoreCase),
-            BoolToStringConverter = b => b ? "Y" : "N"
-        }
-    }
-};
+       
 
 
 
@@ -175,7 +72,7 @@ namespace hoTools.Utils.Sql
         /// </summary>
         /// <param name="rep"></param>
         /// <param name="sqlString"></param>
-        public SqlTemplates(EA.Repository rep, string sqlString)
+        public SqlMacros(EA.Repository rep, string sqlString)
         {
             _rep = rep;
 
@@ -219,28 +116,7 @@ namespace hoTools.Utils.Sql
 
 
         }
-        /// <summary>
-        /// Get DB properties
-        /// </summary>
-        /// <returns>DatabaseProperties</returns>
-        public DatabaseProperties GetDbProperties()
-        {
-
-            var dbProperty = DatabaseProperties.Where(x => x.Key == RepType(_rep))
-                .Select(x => x.Value).FirstOrDefault();
-            if (dbProperty == null)
-            {
-
-                MessageBox.Show(
-                    $@"DB rep.RepositoryType()/RepType(rep): '{_rep.RepositoryType()}/{RepType(_rep)}' in macro #DB=...# not supported in SQL, only 'ACCESS', 'MYSQL', 'JET', 'SQLite/SL3', 'SL3'!
-
-This can happen:
-- If you use a different DB
-- EA.Repository object 'rep' with: EA Server RPC issues, Shutdown of Repository", $@"CariadTools DB {RepType(_rep)} not supported or EA Server down");
-                return null;
-            }
-            return dbProperty;
-        }
+        
         /// <summary>
         /// Get a string representation from a boolean value.
         /// </summary>
@@ -248,7 +124,7 @@ This can happen:
         /// <returns>The string representation of the boolean value.</returns>
         public string GetStringFromBoolean(bool boolValue)
         {
-            var p = GetDbProperties();
+            var p = hoLinqToSql.DataModels.DbConfig.GetDbProperties(_rep);
             if (p == null) return " ";
 
             return p.BoolToStringConverter(boolValue);
@@ -260,7 +136,7 @@ This can happen:
         /// <returns>The string representation of the boolean value.</returns>
         public bool ParseBoolString(string boolString)
         {
-            var p = GetDbProperties();
+            var p = hoLinqToSql.DataModels.DbConfig.GetDbProperties(_rep);
             if (p == null) return false;
 
             return p.BoolStringParser(boolString);
@@ -2918,7 +2794,7 @@ For: Package, Element, Diagram, Attribute, Operation"
         /// Name of the EA macro associated with the database
         /// </summary>
         public string MacroName { get; set; }
-        
+
         /// <summary>
         /// Name of the ODBC driver
         /// </summary>

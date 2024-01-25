@@ -39,8 +39,8 @@ namespace hoTools.hoToolsGui
     public class HoToolsGui : AddinGui, IHoToolsGui
     {
         public const string Progid = "hoTools.hoToolsGui";
-
-
+        // to output texts
+       
         // Windows/Frames
         FrmQueryAndScript _frmQueryAndScript;
         FrmSettingsGeneral _frmSettingsGeneral;

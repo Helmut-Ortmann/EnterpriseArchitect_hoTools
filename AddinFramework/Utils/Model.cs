@@ -293,10 +293,10 @@ namespace EAAddinFramework.Utils
             if (String.IsNullOrWhiteSpace(sqlName)) sqlName = "UnnamedSql";
 
             // used for advanced SQL (with Regex to get special columns)
-            var sqlTemplatesCtrl = new SqlTemplates(Repository, sql);
+            var sqlTemplatesCtrl = new SqlMacros(Repository, sql);
 
             // replace templates
-            sql = SqlTemplates.ReplaceMacro(Repository, sql, searchText);
+            sql = SqlMacros.ReplaceMacro(Repository, sql, searchText);
             if (String.IsNullOrWhiteSpace(sql)) return "";
 
             // normalize according to linefeed

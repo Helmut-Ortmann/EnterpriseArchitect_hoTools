@@ -198,7 +198,7 @@ namespace hoTools.hoSqlGui
             if (tabControlSql.TabPages.Count == 0)
             {
                 // first tab with Element Template
-                _sqlTabCntrls.AddTab(SqlTemplates.GetTemplateText(SqlTemplates.SqlTemplateId.ElementTemplate));
+                _sqlTabCntrls.AddTab(SqlMacros.GetTemplateText(SqlMacros.SqlTemplateId.ElementTemplate));
             }
 
 
@@ -542,7 +542,7 @@ Error:
                 var scriptFunction = row["FunctionObj"] as ScriptFunction;
 
                 // replace templates, search term and more
-                string sql = SqlTemplates.ReplaceMacro(Repository, textBox.Text, GetSearchTerm());
+                string sql = SqlMacros.ReplaceMacro(Repository, textBox.Text, GetSearchTerm());
                 if (sql == "") return;
 
                 // run SQL, Script and ask whether to execute, skip script or break all together
@@ -853,7 +853,7 @@ Error:
         void templatesAndMacrosToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
-            string content = SqlTemplates.GetTemplateText(SqlTemplates.SqlTemplateId.MacrosHelp);
+            string content = SqlMacros.GetTemplateText(SqlMacros.SqlTemplateId.MacrosHelp);
             // write it do EA home (%appdata%Sparx System\EA\hoTools_SqlTemplatesAndMacros.txt)
             SqlError.WriteSqlTemplatesAndMacros(content);
             // Show it in Editor

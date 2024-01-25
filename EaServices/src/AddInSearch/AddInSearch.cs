@@ -220,7 +220,7 @@ namespace hoTools.EaServices.AddInSearch
         private static Dictionary<int, NestedObject> GetPackageNestedElements(string connectionString, IDataProvider provider, string guid)
         {
 
-            using (var db = new DataModels.EaDataModel(provider, connectionString))
+            using (var db = new hoLinqToSql.DataModels.EaDataModel(provider, connectionString))
             {
                 // optimize Access to database, without this the query takes > 30 seconds
                 // Split query and group into two queries. 
@@ -252,7 +252,7 @@ namespace hoTools.EaServices.AddInSearch
                                     g?.tv?.Property ?? "",
                                     ((g?.tv?.Value ?? "") == "<memo>") ? g?.tv?.Notes ?? "" : g?.tv?.Value ?? "")
                                 ).ToList())
-                        }).ToDictionary(ta => ta.Id, ta => ta.Property);
+                        }).ToDictionary(ta => (int)ta.Id, ta => ta.Property);
             }
 
         }
@@ -266,7 +266,7 @@ namespace hoTools.EaServices.AddInSearch
         private static Dictionary<int, NestedObject> GetElementNestedElements(string connectionString, IDataProvider provider, int pkgId, IndexOutOfRangeException elId)
         {
 
-            using (var db = new DataModels.EaDataModel(provider, connectionString))
+            using (var db = new hoLinqToSql.DataModels.EaDataModel(provider, connectionString))
             {
                 // optimize Access to database, without this the query takes > 30 seconds
                 // Split query and group into two queries. 
@@ -297,7 +297,7 @@ namespace hoTools.EaServices.AddInSearch
                                     g?.tv?.Property??"",
                                     ((g?.tv?.Value ?? "") == "<memo>") ? g?.tv?.Notes??"" : g?.tv?.Value??"")
                                 ).ToList())
-                        }).ToDictionary(ta => ta.Id, ta => ta.Property);
+                        }).ToDictionary(ta => (int)ta.Id, ta => ta.Property);
             }
 
         }

@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Data;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.Collections.Generic;
+using System.Linq;
 using hoTools.Utils.Favorites;
 using hoTools.hoToolsGui;
 using hoTools.Settings;
@@ -14,13 +16,16 @@ using hoTools.Utils.ActionPins;
 using EAAddinFramework.Utils;
 
 using System.Reflection;
-using EA;
+//using EA;
 using hoTools.Find;
 using hoTools.Utils.Configuration;
 using GlobalHotkeys;
+using hoLinqToSql.LinqUtils.Extensions;
 using hoTools.ea;
 using hoTools.Extensions;
 using hoTools.EaServices.Names;
+using LinqToDB;
+using LinqToDB.DataProvider;
 using VwTools_Utils.General;
 
 #region description
@@ -114,34 +119,36 @@ namespace hoTools
         const string MenuLineStyleDiaTv = "Line Style Diagram (Object): Tree Vertical";
         const string MenuLineStyleDiaOs = "Line Style Diagram (Object): Orthogonal Square";
 
-        const string MenuDeviderActivity = "-------------Create Activity for Operation ---------------------------";
+        const string MenuDividerActivity = "-------------Create Activity for Operation ---------------------------";
         const string MenuCreateActivityForOperation = "Create Activity for Operation (select operation or class)";
         const string MenuUpdateOperationParameter = "Update Operation Parameter for Activity (select Package(recursive), Activity, Class, Interface or Operation)";
         const string MenuUpdateActionPin = "Update Action Pin for Package (recursive)";
 
-        const string MenuDeviderInteraction = "-------------Create Interaction for Operation ---------------------------";
+        const string MenuDividerInteraction = "-------------Create Interaction for Operation ---------------------------";
         const string MenuCreateInteractionForOperation = "&Create Interaction for Operation (select operation or class)  ";
 
-        const string MenuDeviderStateMachine = "-------------Create State Machine for Operation ---------------------------";
+        const string MenuDividerStateMachine = "-------------Create State Machine for Operation ---------------------------";
         const string MenuCreateStateMachineForOperation = "&Create State Machine for Operation (select operation)  ";
 
 
         // const string MenuCorrectTypes = "-------------Correct Type ---------------------------";
         const string MenuCorrectType = "Correct types of Attribute, Function (selected Attribute, Function, Class or Package)";
 
-        const string MenuDeviderCopyPast = "-------------Move links---------------------------"; 
+        const string MenuDividerCopyPast = "-------------Move links---------------------------"; 
         const string MenuCopyGuidToClipboard = "Copy Id / Select Statement to Clipboard";
         const string MenuCopyLinksToClipboard = "Copy Links to Clipboard";
         const string MenuPasteLinksFromClipboard = "Paste Links from Clipboard";
 
-        const string MenuDeviderNote = "-------------Note      ---------------------------"; 
+        const string MenuDividerNote = "-------------Note      ---------------------------"; 
         const string MenuAddLinkedNote = "Add linked Note";
         const string MenuAddLinkedDiagramNote = "Add linked Diagram Note";
+
+        const string MenuTestDbAccess = "Test DB access (JET, SQlite, MySql)";
 
         const string MenuUsage = "Find Usage";
         const string MenuAbout = "About + Help";
 
-        const string MenuDevider = "-----------------------------------------------";
+        const string MenuDivider = "-----------------------------------------------";
 
         private bool _initFavoriteSearches = false;
 
@@ -204,28 +211,31 @@ namespace hoTools
                 //-------------------------- LineStyle --------------------------//
                                         
                 //-------------------------- Activity --------------------------//
-                MenuDeviderActivity,
+                MenuDividerActivity,
                 MenuCreateActivityForOperation, MenuUpdateOperationParameter, 
                 //menuUpdateActionPin,
                 //-------------------------- Interaction --------------------------//
-                MenuDeviderInteraction,
+                MenuDividerInteraction,
                 MenuCreateInteractionForOperation,
                 //-------------------------- Interaction --------------------------//
-                MenuDeviderStateMachine,
+                MenuDividerStateMachine,
                 MenuCreateStateMachineForOperation,
                 //-------------------------- Correct Types ------------------------//
                 //menuCorrectTypes, menuCorrectType, 
                 //-------------------------- Add Note -----------------------------//
-                MenuDeviderNote,
+                MenuDividerNote,
                 MenuAddLinkedNote,MenuAddLinkedDiagramNote,
 
+                MenuDivider,
+                MenuTestDbAccess,
+
                 //-------------------------- Move links ---------------------------//
-                MenuDeviderCopyPast,
+                MenuDividerCopyPast,
                 MenuChangeXmlFile, MenuCopyLinksToClipboard, MenuPasteLinksFromClipboard, 
 
                 MenuShowWindow,    
                 //---------------------------- About -------------------------------//
-                MenuDevider, MenuAbout };
+                MenuDivider, MenuAbout };
         }
         #endregion
 
@@ -826,6 +836,11 @@ namespace hoTools
                         isChecked = false;
                         break;
 
+                    case MenuTestDbAccess:
+                        isChecked = false;
+                        isEnabled = true;
+                        break;
+
                     case MenuAbout:
                         isChecked = false;
                         break;
@@ -987,7 +1002,7 @@ namespace hoTools
                         Appl.CreateStateMachineForOperation(repository, m);
 
                     }
-                   break;
+                    break;
 
 
 
@@ -1183,10 +1198,133 @@ namespace hoTools
                     EaService.DisplayOperationForSelectedElement(repository, EaService.DisplayMode.Behavior);
                     break;
 
-                
+                // Test access via linq2db for
+                // - Current EA connection
+                // - MySQL
+                // - SQLite
+                // - Jet
+                case MenuTestDbAccess:
+                    //_myControlGui.TextBoxStatus.Text = $@"Linq DB access SQLite, JET, MySQL running";
+                    string connectionString = "";
+                    IDataProvider provider = null;
+                    string providerName = "";
+                    try
+                    {
+                        // get current EA connection 
+                        connectionString = hoLinqToSql.LinqUtils.LinqUtil.GetConnectionString(_repository, out provider, out providerName);
+                        var tests = new List<(string connectionString, string driverName, IDataProvider driver)>
+                        {
+                            (connectionString, providerName, provider),                                                                                         // current EA connection
+                            ($@"server=localhost; database=ironman_16_01_2024; user=root; password=minden;", "MySql", null),                                    // MySQL
+                            (@"Data Source=c:\Users\hoXps\AppData\Roaming\Sparx Systems\EA\EAExample.qea;Version=3;", "SQLite", null),                          // SQLite
+                            (@"Data Source=c:\Users\hoXps\AppData\Roaming\Sparx Systems\EA\EAExample.qea;", "SQLite", null),                                    // SQLite without version
+                            //(providerName == "MySql"?connectionString:null, "MySqlConnector", null),                                                          // also test MySqlConnector
+                            (@"Provider=Microsoft.JET.OLEDB.4.0; Data Source=c:\Users\hoXps\AppData\Roaming\Sparx Systems\EA\EAExample.eap;", "Access", null),  // Jet
+                            ($@"", "", null)                                                                                                                    // free
+
+                        };
+                        foreach (var (connection, driverName, driver) in tests)
+                        {
+                            //_myControlGui.TextBoxStatus.Text = $@"Linq DB access {driverName ?? ""} {connectionString} running";
+                            if (String.IsNullOrEmpty(connection)) continue;
+                            var conOption = hoLinqToSql.LinqUtils.LinqUtil.GetLinq2DataOptions(driver, driverName, connection);
+                            var dt = Load(conOption);
+                            if (dt != null) ProtTable(repository, conOption, dt);
+
+                        }
+
+                        //_myControlGui.TextBoxStatus.Text = $@"Linq DB access SQLite, JET, MySQL finished";
+                    }
+                    catch (Exception e)
+                    {
+                        MessageBox.Show($@"ConnectionString: {connectionString}
+Provider:      {provider?.Name ?? ""}
+ProviderName:  {providerName}
+{e}", @"Error linq2db access");
+                    }
+
+                    break;
+
+
             }
         }
         #endregion
+        /// <summary>
+        /// Protocol a DataTable to EA output
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <param name="options"></param>
+        /// <param name="dt"></param>
+        private static void ProtTable(EA.Repository rep, DataOptions options, DataTable dt)
+        {
+            rep.CreateOutputTab("Test");
+            rep.EnsureOutputVisible("Test");
+            rep.WriteOutput("Test", "", 0);
+            rep.WriteOutput("Test", $@"ConnectionString: '{options.ConnectionOptions.ConnectionString}'", 0);
+            rep.WriteOutput("Test", $@"ProviderName:     '{options.ConnectionOptions.ProviderName}'", 0);
+            var env = Environment.Is64BitProcess ? "x64" : "x86";
+            rep.WriteOutput("Test", $@"Environment '{env}'", 0);
+            rep.WriteOutput("Test", $"Count={dt.Rows.Count}", 0);
+            //foreach (DataRow row in dt.Rows)
+            //{
+            //    rep.WriteOutput("Test", $@"{row.Field<string>("GUID")} {row.Field<string>("ColName")}", 0);
+            //}
+            rep.WriteOutput("Test", "", 0);
+        }
+        /// <summary>
+        /// Load all components
+        /// </summary>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        private static DataTable Load(DataOptions options)
+        {
+            try
+            {
+                using (var db = new hoLinqToSql.DataModels.EaDataModel(options))
+                {
+                    try
+                    {
+                        var objects = (from o in db.t_object
+
+                                       where o.Object_Type == "Component"
+                                       select new { Guid = o.ea_guid, Name = o.Name }
+                            )
+                            .Distinct()
+                            .ToArray();
+
+                        return objects.ToDataTable();
+
+                    }
+                    catch (Exception e)
+                    {
+                        var env = Environment.Is64BitProcess ? "x64" : "x86";
+                        MessageBox.Show($@"Exception:
+ConnectionString: '{options?.ConnectionOptions.ConnectionString ?? " "}'
+DataProviderName: '{options?.ConnectionOptions.ProviderName ?? " "}' 
+Environment:      '{env}'
+            
+                    {e}", @"Error access t_object");
+                        return null;
+
+                    }
+                }
+
+            }
+            catch (Exception e)
+            {
+                var env = Environment.Is64BitProcess ? "x64" : "x86";
+                MessageBox.Show($@"Exception:
+ConnectionString: '{options?.ConnectionOptions.ConnectionString ?? " "}'
+DataProviderName: '{options?.ConnectionOptions.ProviderName ?? " "}' 
+Environment:      '{env}'
+            
+                    {e}", @"Error access t_object");
+                return null;
+
+            }
+
+
+        }
 
 
 

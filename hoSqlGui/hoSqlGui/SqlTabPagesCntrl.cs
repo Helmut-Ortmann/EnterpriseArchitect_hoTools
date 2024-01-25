@@ -220,7 +220,7 @@ CTRL+SHFT+S                     Store sql All
             // Create a text box in TabPage for the SQL string
             var sqlTextBox = new TextBoxUndo(tabPage)
             {
-                Text = SqlTemplates.GetTemplateText(SqlTemplates.SqlTemplateId.ElementTemplate)
+                Text = SqlMacros.GetTemplateText(SqlMacros.SqlTemplateId.ElementTemplate)
             };
             // load element template
             sqlFile.IsChanged = false;
@@ -402,174 +402,174 @@ Useful to quickly test:
             ToolStripMenuItem insertMacroMenuItem = new ToolStripMenuItem {Text = @"Insert &Macro"};
 
             // Insert Macro
-            var id = SqlTemplates.SqlTemplateId.SearchTerm;
+            var id = SqlMacros.SqlTemplateId.SearchTerm;
             ToolStripMenuItem insertMacroSearchTermMenuItem = new ToolStripMenuItem
             {
-                Text = @"Insert " + SqlTemplates.GetTemplateText(id),
-                ToolTipText = SqlTemplates.GetTooltip(id),
-                Tag = SqlTemplates.GetTemplate(id)
+                Text = @"Insert " + SqlMacros.GetTemplateText(id),
+                ToolTipText = SqlMacros.GetTooltip(id),
+                Tag = SqlMacros.GetTemplate(id)
             };
             insertMacroSearchTermMenuItem.Click += insertTemplate_Click;
 
             // Insert Package
-            id = SqlTemplates.SqlTemplateId.PackageId;
+            id = SqlMacros.SqlTemplateId.PackageId;
             ToolStripMenuItem insertPackageMenuItem = new ToolStripMenuItem
             {
-                Text = @"Insert " + SqlTemplates.GetTemplateText(id),
-                ToolTipText = SqlTemplates.GetTooltip(id),
-                Tag = SqlTemplates.GetTemplate(id)
+                Text = @"Insert " + SqlMacros.GetTemplateText(id),
+                ToolTipText = SqlMacros.GetTooltip(id),
+                Tag = SqlMacros.GetTemplate(id)
             };
             insertPackageMenuItem.Click += insertTemplate_Click;
 
             // Insert Branch
-            id = SqlTemplates.SqlTemplateId.BranchIds;
+            id = SqlMacros.SqlTemplateId.BranchIds;
             ToolStripMenuItem insertBranchMenuItem = new ToolStripMenuItem
             {
-                Text = @"Insert " + SqlTemplates.GetTemplateText(id),
-                ToolTipText = SqlTemplates.GetTooltip(id),
-                Tag = SqlTemplates.GetTemplate(id)
+                Text = @"Insert " + SqlMacros.GetTemplateText(id),
+                ToolTipText = SqlMacros.GetTooltip(id),
+                Tag = SqlMacros.GetTemplate(id)
             };
             insertBranchMenuItem.Click += insertTemplate_Click;
 
             // Insert Branch for constant package
-            id = SqlTemplates.SqlTemplateId.BranchIdsConstantPackage;
+            id = SqlMacros.SqlTemplateId.BranchIdsConstantPackage;
             ToolStripMenuItem insertBranchConstantPackageMenuItem = new ToolStripMenuItem
             {
-                Text = @"Insert " + SqlTemplates.GetTemplateText(id),
-                ToolTipText = SqlTemplates.GetTooltip(id),
-                Tag = SqlTemplates.GetTemplate(id)
+                Text = @"Insert " + SqlMacros.GetTemplateText(id),
+                ToolTipText = SqlMacros.GetTooltip(id),
+                Tag = SqlMacros.GetTemplate(id)
             };
             insertBranchConstantPackageMenuItem.Click += insertTemplate_Click;
 
             // Insert InBranch
-            id = SqlTemplates.SqlTemplateId.InBranchIds;
+            id = SqlMacros.SqlTemplateId.InBranchIds;
             ToolStripMenuItem insertInBranchMenuItem = new ToolStripMenuItem
             {
-                Text = @"Insert " + SqlTemplates.GetTemplateText(id),
-                ToolTipText = SqlTemplates.GetTooltip(id),
-                Tag = SqlTemplates.GetTemplate(id)
+                Text = @"Insert " + SqlMacros.GetTemplateText(id),
+                ToolTipText = SqlMacros.GetTooltip(id),
+                Tag = SqlMacros.GetTemplate(id)
             };
             insertInBranchMenuItem.Click += insertTemplate_Click;
 
             // Insert CurrentID
-            id = SqlTemplates.SqlTemplateId.CurrentItemId;
+            id = SqlMacros.SqlTemplateId.CurrentItemId;
             ToolStripMenuItem insertCurrentIdMenuItem = new ToolStripMenuItem
             {
-                Text = @"Insert " + SqlTemplates.GetTemplateText(id),
-                ToolTipText = SqlTemplates.GetTooltip(id),
-                Tag = SqlTemplates.GetTemplate(id)
+                Text = @"Insert " + SqlMacros.GetTemplateText(id),
+                ToolTipText = SqlMacros.GetTooltip(id),
+                Tag = SqlMacros.GetTemplate(id)
             };
             insertCurrentIdMenuItem.Click += insertTemplate_Click;
 
             // Insert CurrentGUID
-            id = SqlTemplates.SqlTemplateId.CurrentItemGuid;
+            id = SqlMacros.SqlTemplateId.CurrentItemGuid;
             ToolStripMenuItem insertCurrentGuidMenuItem = new ToolStripMenuItem
             {
-                Text = @"Insert " + SqlTemplates.GetTemplateText(id),
-                ToolTipText = SqlTemplates.GetTooltip(id),
-                Tag = SqlTemplates.GetTemplate(id)
+                Text = @"Insert " + SqlMacros.GetTemplateText(id),
+                ToolTipText = SqlMacros.GetTooltip(id),
+                Tag = SqlMacros.GetTemplate(id)
             };
             insertCurrentGuidMenuItem.Click += insertTemplate_Click;
 
             // Insert ConnectorID
-            id = SqlTemplates.SqlTemplateId.ConnectorId;
+            id = SqlMacros.SqlTemplateId.ConnectorId;
             ToolStripMenuItem insertConnectorIdMenuItem = new ToolStripMenuItem
             {
-                Text = @"Insert " + SqlTemplates.GetTemplateText(id),
-                ToolTipText = SqlTemplates.GetTooltip(id),
-                Tag = SqlTemplates.GetTemplate(id)
+                Text = @"Insert " + SqlMacros.GetTemplateText(id),
+                ToolTipText = SqlMacros.GetTooltip(id),
+                Tag = SqlMacros.GetTemplate(id)
             };
             insertConnectorIdMenuItem.Click += insertTemplate_Click;
 
             // Insert Conveyed Item IDs
-            id = SqlTemplates.SqlTemplateId.ConveyedItemIds;
+            id = SqlMacros.SqlTemplateId.ConveyedItemIds;
             ToolStripMenuItem insertConveyedItemIdsMenuItem = new ToolStripMenuItem
             {
-                Text = @"Insert " + SqlTemplates.GetTemplateText(id),
-                ToolTipText = SqlTemplates.GetTooltip(id),
-                Tag = SqlTemplates.GetTemplate(id)
+                Text = @"Insert " + SqlMacros.GetTemplateText(id),
+                ToolTipText = SqlMacros.GetTooltip(id),
+                Tag = SqlMacros.GetTemplate(id)
             };
             insertConveyedItemIdsMenuItem.Click += insertTemplate_Click;
 
 
             // Insert Diagram Selected Objects_IDS Item IDs
-            id = SqlTemplates.SqlTemplateId.DiagramSelectedElementsIds;
+            id = SqlMacros.SqlTemplateId.DiagramSelectedElementsIds;
             ToolStripMenuItem insertDiagramSelectedElementsIdsMenuItem = new ToolStripMenuItem
             {
-                Text = @"Insert " + SqlTemplates.GetTemplateText(id),
-                ToolTipText = SqlTemplates.GetTooltip(id),
-                Tag = SqlTemplates.GetTemplate(id)
+                Text = @"Insert " + SqlMacros.GetTemplateText(id),
+                ToolTipText = SqlMacros.GetTooltip(id),
+                Tag = SqlMacros.GetTemplate(id)
             };
             insertDiagramSelectedElementsIdsMenuItem.Click += insertTemplate_Click;
 
             // Insert Diagram Objects_IDS Item IDs
-            id = SqlTemplates.SqlTemplateId.DiagramElementsIds;
+            id = SqlMacros.SqlTemplateId.DiagramElementsIds;
             ToolStripMenuItem insertDiagramElementsIdsMenuItem = new ToolStripMenuItem
             {
-                Text = @"Insert " + SqlTemplates.GetTemplateText(id),
-                ToolTipText = SqlTemplates.GetTooltip(id),
-                Tag = SqlTemplates.GetTemplate(id)
+                Text = @"Insert " + SqlMacros.GetTemplateText(id),
+                ToolTipText = SqlMacros.GetTooltip(id),
+                Tag = SqlMacros.GetTemplate(id)
             };
             insertDiagramElementsIdsMenuItem.Click += insertTemplate_Click;
 
 
             // Insert Diagram IDs
-            id = SqlTemplates.SqlTemplateId.DiagramId;
+            id = SqlMacros.SqlTemplateId.DiagramId;
             ToolStripMenuItem insertDiagramElementsIdMenuItem = new ToolStripMenuItem
             {
-                Text = @"Insert " + SqlTemplates.GetTemplateText(id),
-                ToolTipText = SqlTemplates.GetTooltip(id),
-                Tag = SqlTemplates.GetTemplate(id)
+                Text = @"Insert " + SqlMacros.GetTemplateText(id),
+                ToolTipText = SqlMacros.GetTooltip(id),
+                Tag = SqlMacros.GetTemplate(id)
             };
             insertDiagramElementsIdMenuItem.Click += insertTemplate_Click;
 
             // Tree selected GUIDs
-            id = SqlTemplates.SqlTemplateId.TreeSelectedGuids;
+            id = SqlMacros.SqlTemplateId.TreeSelectedGuids;
             ToolStripMenuItem insertTreeSelectedGuidsMenuItem = new ToolStripMenuItem
             {
-                Text = @"Insert " + SqlTemplates.GetTemplateText(id),
-                ToolTipText = SqlTemplates.GetTooltip(id),
-                Tag = SqlTemplates.GetTemplate(id)
+                Text = @"Insert " + SqlMacros.GetTemplateText(id),
+                ToolTipText = SqlMacros.GetTooltip(id),
+                Tag = SqlMacros.GetTemplate(id)
             };
             insertTreeSelectedGuidsMenuItem.Click += insertTemplate_Click;
 
             // newGuid
-            id = SqlTemplates.SqlTemplateId.NewGuid;
+            id = SqlMacros.SqlTemplateId.NewGuid;
             ToolStripMenuItem insertNewGuid = new ToolStripMenuItem
             {
-                Text = @"Insert " + SqlTemplates.GetTemplateText(id),
-                ToolTipText = SqlTemplates.GetTooltip(id),
-                Tag = SqlTemplates.GetTemplate(id)
+                Text = @"Insert " + SqlMacros.GetTemplateText(id),
+                ToolTipText = SqlMacros.GetTooltip(id),
+                Tag = SqlMacros.GetTemplate(id)
             };
             insertNewGuid.Click += insertTemplate_Click;
 
             // Insert #WC#
-            id = SqlTemplates.SqlTemplateId.Wc;
+            id = SqlMacros.SqlTemplateId.Wc;
             ToolStripMenuItem insertWcMenuItem = new ToolStripMenuItem
             {
-                Text = @"Insert " + SqlTemplates.GetTemplateText(id),
-                ToolTipText = SqlTemplates.GetTooltip(id),
-                Tag = SqlTemplates.GetTemplate(id)
+                Text = @"Insert " + SqlMacros.GetTemplateText(id),
+                ToolTipText = SqlMacros.GetTooltip(id),
+                Tag = SqlMacros.GetTemplate(id)
             };
             insertWcMenuItem.Click += insertTemplate_Click;
 
             // Insert Design ID
-            id = SqlTemplates.SqlTemplateId.DesignId;
+            id = SqlMacros.SqlTemplateId.DesignId;
             ToolStripMenuItem insertDesignId = new ToolStripMenuItem
             {
-                Text = @"Insert " + SqlTemplates.GetTemplateText(id),
-                ToolTipText = SqlTemplates.GetTooltip(id),
-                Tag = SqlTemplates.GetTemplate(id)
+                Text = @"Insert " + SqlMacros.GetTemplateText(id),
+                ToolTipText = SqlMacros.GetTooltip(id),
+                Tag = SqlMacros.GetTemplate(id)
             };
             insertDesignId.Click += insertTemplate_Click;
 
             // Insert Design Id
-            id = SqlTemplates.SqlTemplateId.DesignGuid;
+            id = SqlMacros.SqlTemplateId.DesignGuid;
             ToolStripMenuItem insertDesignGuid = new ToolStripMenuItem
             {
-                Text = @"Insert " + SqlTemplates.GetTemplateText(id),
-                ToolTipText = SqlTemplates.GetTooltip(id),
-                Tag = SqlTemplates.GetTemplate(id)
+                Text = @"Insert " + SqlMacros.GetTemplateText(id),
+                ToolTipText = SqlMacros.GetTooltip(id),
+                Tag = SqlMacros.GetTemplate(id)
             };
             insertDesignGuid.Click += insertTemplate_Click;
 
@@ -618,108 +618,108 @@ Useful to quickly test:
             ToolStripMenuItem insertTemplateMenuItem = new ToolStripMenuItem("Insert &Template");
 
             // Insert Branch Template
-            var id = SqlTemplates.SqlTemplateId.BranchTemplate;
+            var id = SqlMacros.SqlTemplateId.BranchTemplate;
             ToolStripMenuItem insertBranchTemplateMenuItem = new ToolStripMenuItem
             {
                 Text = @"Insert Branch Template",
-                ToolTipText = SqlTemplates.GetTooltip(id),
-                Tag = SqlTemplates.GetTemplate(id)
+                ToolTipText = SqlMacros.GetTooltip(id),
+                Tag = SqlMacros.GetTemplate(id)
             };
             insertBranchTemplateMenuItem.Click += insertTemplate_Click;
 
             // Insert CurrentItemId Template
-            id = SqlTemplates.SqlTemplateId.CurrentItemIdTemplate;
+            id = SqlMacros.SqlTemplateId.CurrentItemIdTemplate;
             ToolStripMenuItem insertCurrentItemIdTemplateMenuItem = new ToolStripMenuItem
             {
                 Text = @"Insert CurrentItemId Template",
-                ToolTipText = SqlTemplates.GetTooltip(id),
-                Tag = SqlTemplates.GetTemplate(id)
+                ToolTipText = SqlMacros.GetTooltip(id),
+                Tag = SqlMacros.GetTemplate(id)
             };
             insertCurrentItemIdTemplateMenuItem.Click += insertTemplate_Click;
 
             // Insert CurrentItemGuid Template
-            id = SqlTemplates.SqlTemplateId.CurrentItemGuidTemplate;
+            id = SqlMacros.SqlTemplateId.CurrentItemGuidTemplate;
             ToolStripMenuItem insertCurrentItemGuidTemplateMenuItem = new ToolStripMenuItem
             {
                 Text = @"Insert CurrentItemGuid Template",
-                ToolTipText = SqlTemplates.GetTooltip(id),
-                Tag = SqlTemplates.GetTemplate(id)
+                ToolTipText = SqlMacros.GetTooltip(id),
+                Tag = SqlMacros.GetTemplate(id)
             };
             insertCurrentItemGuidTemplateMenuItem.Click += insertTemplate_Click;
 
             // Insert ConveyedItemIDS Template
-            id = SqlTemplates.SqlTemplateId.ConveyedItemsFromConnectorTemplate;
+            id = SqlMacros.SqlTemplateId.ConveyedItemsFromConnectorTemplate;
             ToolStripMenuItem insertConveyedtemIdsTemplateMenuItem = new ToolStripMenuItem
             {
                 Text = @"Insert ConveyedItems from selected Connector Template",
-                ToolTipText = SqlTemplates.GetTooltip(id),
-                Tag = SqlTemplates.GetTemplate(id)
+                ToolTipText = SqlMacros.GetTooltip(id),
+                Tag = SqlMacros.GetTemplate(id)
             };
             insertConveyedtemIdsTemplateMenuItem.Click += insertTemplate_Click;
 
             // Insert Connectors from Element Template
-            id = SqlTemplates.SqlTemplateId.ConnectorsFromElementTemplate;
+            id = SqlMacros.SqlTemplateId.ConnectorsFromElementTemplate;
             ToolStripMenuItem insertConnectorsFromElementTemplateMenuItem = new ToolStripMenuItem
             {
                 Text = @"Insert Connectors from Element Template",
-                ToolTipText = SqlTemplates.GetTooltip(id),
-                Tag = SqlTemplates.GetTemplate(id)
+                ToolTipText = SqlMacros.GetTooltip(id),
+                Tag = SqlMacros.GetTemplate(id)
             };
             insertConnectorsFromElementTemplateMenuItem.Click += insertTemplate_Click;
 
 
             // Insert Element Template
-            id = SqlTemplates.SqlTemplateId.ElementTemplate;
+            id = SqlMacros.SqlTemplateId.ElementTemplate;
             ToolStripMenuItem insertElementTemplateMenuItem = new ToolStripMenuItem
             {
                 Text = @"Insert Element Template",
-                ToolTipText = SqlTemplates.GetTooltip(id),
-                Tag = SqlTemplates.GetTemplate(id)
+                ToolTipText = SqlMacros.GetTooltip(id),
+                Tag = SqlMacros.GetTemplate(id)
             };
             insertElementTemplateMenuItem.Click += insertTemplate_Click;
 
             // Insert Element Type Template
-            id = SqlTemplates.SqlTemplateId.ElementTypeTemplate;
+            id = SqlMacros.SqlTemplateId.ElementTypeTemplate;
             var insertElementTypeTemplateMenuItem = ToolstripMenuItemInsertTemplateFromId(id,@"Insert Element Template");
 
 
             // Insert Diagram Elements Template
-            id = SqlTemplates.SqlTemplateId.DiagramElementsIdsTemplate;
+            id = SqlMacros.SqlTemplateId.DiagramElementsIdsTemplate;
             ToolStripMenuItem insertDiagramElementTemplateMenuItem = ToolstripMenuItemInsertTemplateFromId(id, @"Insert Diagram Elements Template");
 
 
 
             // Insert Diagram Selected Elements Template
-            id = SqlTemplates.SqlTemplateId.DiagramSelectedElementsIdsTemplate;
+            id = SqlMacros.SqlTemplateId.DiagramSelectedElementsIdsTemplate;
             ToolStripMenuItem insertDiagramSelectedElementTemplateMenuItem = ToolstripMenuItemInsertTemplateFromId(id, @"Insert Diagram selected Elements Template");
 
             // Insert Diagram Template
-            id = SqlTemplates.SqlTemplateId.DiagramTemplate;
+            id = SqlMacros.SqlTemplateId.DiagramTemplate;
             ToolStripMenuItem insertDiagramTemplateMenuItem = ToolstripMenuItemInsertTemplateFromId(id, @"Insert Diagram Template");
 
             // Insert Diagram Type Template
-            id = SqlTemplates.SqlTemplateId.DiagramTypeTemplate;
+            id = SqlMacros.SqlTemplateId.DiagramTypeTemplate;
             ToolStripMenuItem insertDiagramTypeTemplateMenuItem = ToolstripMenuItemInsertTemplateFromId(id, @"Insert Diagram Type Template");
 
 
             // Insert Package Template
-            id = SqlTemplates.SqlTemplateId.PackageTemplate;
+            id = SqlMacros.SqlTemplateId.PackageTemplate;
             ToolStripMenuItem insertPackageTemplateMenuItem = ToolstripMenuItemInsertTemplateFromId(id, @"Insert Package Template");
 
             // Insert DiagramObject Template
-            id = SqlTemplates.SqlTemplateId.DiagramObjectTemplate;
+            id = SqlMacros.SqlTemplateId.DiagramObjectTemplate;
             ToolStripMenuItem insertDiagramObjectTemplateMenuItem = ToolstripMenuItemInsertTemplateFromId(id, @"Insert Diagram Object Template");
 
             // Insert Attribute Template
-            id = SqlTemplates.SqlTemplateId.AttributeTemplate;
+            id = SqlMacros.SqlTemplateId.AttributeTemplate;
             ToolStripMenuItem insertAttributeTemplateMenuItem = ToolstripMenuItemInsertTemplateFromId(id, @"Insert Attribute Template");
 
             // Insert Operation Template
-            id = SqlTemplates.SqlTemplateId.OperationTemplate;
+            id = SqlMacros.SqlTemplateId.OperationTemplate;
             ToolStripMenuItem insertOperationTemplateMenuItem = ToolstripMenuItemInsertTemplateFromId(id, @"Insert Operation Template");
 
             // Insert Demo Run Script Template
-            id = SqlTemplates.SqlTemplateId.DemoRunScriptTemplate;
+            id = SqlMacros.SqlTemplateId.DemoRunScriptTemplate;
             ToolStripMenuItem insertDemoRunScriptTemplateMenuItem = ToolstripMenuItemInsertTemplateFromId(id, @"Insert Demo Run Script Template");
 
 
@@ -728,19 +728,19 @@ Useful to quickly test:
             //----------------------------------------------------------------------------------
             // Insert Element in current Package
             // Insert Demo Run Script Template
-            id = SqlTemplates.SqlTemplateId.InsertItemInPackageTemplate;
+            id = SqlMacros.SqlTemplateId.InsertItemInPackageTemplate;
             ToolStripMenuItem insertItemIntoPackageMenuItem = ToolstripMenuItemInsertTemplateFromId(id, @"Insert Insert Template");
 
             // Update current selected Item
-            id = SqlTemplates.SqlTemplateId.UpdateItemTemplate;
+            id = SqlMacros.SqlTemplateId.UpdateItemTemplate;
             ToolStripMenuItem updateCurrentElementMenuItem = ToolstripMenuItemInsertTemplateFromId(id, @"Insert Update Template");
 
             //  Delete tree selected Items
-            id = SqlTemplates.SqlTemplateId.DeletedTreeSelectedItems;
+            id = SqlMacros.SqlTemplateId.DeletedTreeSelectedItems;
             ToolStripMenuItem deleteTreeSelectedItemsMenuItem = ToolstripMenuItemInsertTemplateFromId(id, @"Insert Delete Template");
 
             //  Show SearchItems
-            id = SqlTemplates.SqlTemplateId.ShowSearchItems;
+            id = SqlMacros.SqlTemplateId.ShowSearchItems;
             ToolStripMenuItem showSearchItemsTreeSelectedItemsMenuItem = ToolstripMenuItemInsertTemplateFromId(id, @"Insert Icons to navigate (e_guid As..)");
 
 
@@ -751,54 +751,54 @@ Useful to quickly test:
             ToolStripMenuItem insertDbTemplateMenuItem = new ToolStripMenuItem {Text = @"Insert DB dependent"};
 
             //  DB ACESS2007
-            id = SqlTemplates.SqlTemplateId.DbAccess2007;
+            id = SqlMacros.SqlTemplateId.DbAccess2007;
             ToolStripMenuItem insertDbaccess2007TemplateMenuItem = ToolstripMenuItemInsertTemplateFromId(id, @"ACCESS2007");
 
             //  DB Asa
-            id = SqlTemplates.SqlTemplateId.DbAsa;
+            id = SqlMacros.SqlTemplateId.DbAsa;
             ToolStripMenuItem insertDbAsaTemplateMenuItem = ToolstripMenuItemInsertTemplateFromId(id, @"Asa");
 
             //  DB Firebird
-            id = SqlTemplates.SqlTemplateId.DbFirebird;
+            id = SqlMacros.SqlTemplateId.DbFirebird;
             ToolStripMenuItem insertDbFirebirdTemplateMenuItem = ToolstripMenuItemInsertTemplateFromId(id, @"Firebird");
 
             //  DB Jet
-            id = SqlTemplates.SqlTemplateId.DbJet;
+            id = SqlMacros.SqlTemplateId.DbJet;
             ToolStripMenuItem insertDbJetTemplateMenuItem = ToolstripMenuItemInsertTemplateFromId(id, @"JET");
 
             //  DB MySql
-            id = SqlTemplates.SqlTemplateId.DbMysql;
+            id = SqlMacros.SqlTemplateId.DbMysql;
             ToolStripMenuItem insertDbmySqlTemplateMenuItem = ToolstripMenuItemInsertTemplateFromId(id, @"MySql");
 
             
 
             // DB Oracle
-            id = SqlTemplates.SqlTemplateId.DbOracle;
+            id = SqlMacros.SqlTemplateId.DbOracle;
             ToolStripMenuItem insertDbOracleTemplateMenuItem = new ToolStripMenuItem
             {
                 Text = @"ORACLE",
-                ToolTipText = SqlTemplates.GetTooltip(id),
-                Tag = SqlTemplates.GetTemplate(id)
+                ToolTipText = SqlMacros.GetTooltip(id),
+                Tag = SqlMacros.GetTemplate(id)
             };
             insertDbOracleTemplateMenuItem.Click += insertTemplate_Click;
 
             // DB POSTGRES
-            id = SqlTemplates.SqlTemplateId.DbPostgres;
+            id = SqlMacros.SqlTemplateId.DbPostgres;
             ToolStripMenuItem insertDbPostgresTemplateMenuItem = new ToolStripMenuItem
             {
                 Text = @"POSTGRES",
-                ToolTipText = SqlTemplates.GetTooltip(id),
-                Tag = SqlTemplates.GetTemplate(id)
+                ToolTipText = SqlMacros.GetTooltip(id),
+                Tag = SqlMacros.GetTemplate(id)
             };
             insertDbPostgresTemplateMenuItem.Click += insertTemplate_Click;
 
             // DB SQL Server
-            id = SqlTemplates.SqlTemplateId.DbSqlsvr;
+            id = SqlMacros.SqlTemplateId.DbSqlsvr;
             ToolStripMenuItem insertDbSqlServerTemplateMenuItem = new ToolStripMenuItem
             {
                 Text = @"SQL Server",
-                ToolTipText = SqlTemplates.GetTooltip(id),
-                Tag = SqlTemplates.GetTemplate(id)
+                ToolTipText = SqlMacros.GetTooltip(id),
+                Tag = SqlMacros.GetTemplate(id)
             };
             insertDbSqlServerTemplateMenuItem.Click += insertTemplate_Click;
 
@@ -859,13 +859,13 @@ Useful to quickly test:
         /// <param name="id"></param>
         /// <param name="caption"></param>
         /// <returns></returns>
-        ToolStripMenuItem ToolstripMenuItemInsertTemplateFromId(SqlTemplates.SqlTemplateId id, string caption)
+        ToolStripMenuItem ToolstripMenuItemInsertTemplateFromId(SqlMacros.SqlTemplateId id, string caption)
         {
             ToolStripMenuItem insertElementTypeTemplateMenuItem = new ToolStripMenuItem
             {
                 Text = caption,
-                ToolTipText = SqlTemplates.GetTooltip(id),
-                Tag = SqlTemplates.GetTemplate(id)
+                ToolTipText = SqlMacros.GetTooltip(id),
+                Tag = SqlMacros.GetTemplate(id)
             };
             insertElementTypeTemplateMenuItem.Click += insertTemplate_Click;
             return insertElementTypeTemplateMenuItem;
@@ -1102,7 +1102,7 @@ Useful to quickly test:
             ObjectType objectType = _model.Repository.GetContextItemType();
             // #Branch={...guid...}#
             if (objectType == ObjectType.otPackage &&
-                template == SqlTemplates.GetTemplate(SqlTemplates.SqlTemplateId.BranchIdsConstantPackage))
+                template == SqlMacros.GetTemplate(SqlMacros.SqlTemplateId.BranchIdsConstantPackage))
             {
                 // get package Id
                 string guid = ((Package) _model.Repository.GetContextObject()).PackageGUID;
@@ -1123,7 +1123,7 @@ Useful to quickly test:
         {
 
             // #Branch={...guid...}#
-            if ( template == SqlTemplates.GetTemplate(SqlTemplates.SqlTemplateId.DesignId))
+            if ( template == SqlMacros.GetTemplate(SqlMacros.SqlTemplateId.DesignId))
             {
                 // get design ID
                 ObjectType objectType = _model.Repository.GetContextItemType();
@@ -1167,7 +1167,7 @@ Useful to quickly test:
         {
 
             // #Branch={...guid...}#
-            if (template == SqlTemplates.GetTemplate(SqlTemplates.SqlTemplateId.DesignGuid))
+            if (template == SqlMacros.GetTemplate(SqlMacros.SqlTemplateId.DesignGuid))
             {
                 // get design Id
                 ObjectType objectType = _model.Repository.GetContextItemType();

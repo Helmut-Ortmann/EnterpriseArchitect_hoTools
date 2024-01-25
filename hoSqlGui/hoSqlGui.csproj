@@ -175,6 +175,9 @@
     <PackageReference Include="AdoNetCore.AseClient">
       <Version>0.19.2</Version>
     </PackageReference>
+    <PackageReference Include="linq2db">
+      <Version>5.3.2</Version>
+    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
