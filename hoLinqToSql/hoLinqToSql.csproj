@@ -127,6 +127,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Access.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataModels\DbConfig.cs" />
     <Compile Include="DataModels\Ea\DataModelEA.generated.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

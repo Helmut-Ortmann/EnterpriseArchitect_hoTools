@@ -1012,55 +1012,37 @@ For: Package, Element, Diagram, Attribute, Operation"
         /// <para />
         /// '^' or '!' a shortcut for XOR
         /// </summary>
-        /// <param name="sqlQuery">the sql string to edit</param>
+        /// <param name="sql">the sql string to edit</param>
         /// <param name="isAccess">is access db, default=false</param>
         /// <returns>the same sql query, but with its wild cards replaced according to the required syntax</returns>
-        public static string ReplaceSqlWildCards(string sqlQuery, bool isAccess = false)
+        public static string ReplaceSqlWildCards(string sql, bool isAccess = false)
         {
-            int beginLike = sqlQuery.IndexOf("like", StringComparison.InvariantCultureIgnoreCase);
-            if (beginLike > 1)
+            // Regular expression to match LIKE statements
+            string pattern = @"like\s+'[^']*'|like\s+""[^""]*""";
+            // Use regular expressions to find LIKE statements
+            var matches = System.Text.RegularExpressions.Regex.Matches(sql, pattern, System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+            foreach (System.Text.RegularExpressions.Match match in matches)
             {
-                // Handle ' and " to encapsulate strings
-                int beginString1 = sqlQuery.IndexOf("'", beginLike + "like".Length, StringComparison.CurrentCulture);
-                int beginString2 = sqlQuery.IndexOf(@"""", beginLike + "like".Length, StringComparison.CurrentCulture);
-                int beginString = beginString1 > -1 ? beginString1 : beginString2;
-                if (beginString > 0)
+                string likeString = match.Value;
+                if (isAccess)
                 {
-                    int endString1 = sqlQuery.IndexOf("'", beginString + 1, StringComparison.CurrentCulture);
-                    int endString2 = sqlQuery.IndexOf(@"""", beginString + 1, StringComparison.CurrentCulture);
-                    int endString = beginString1 > 0 ? endString1 : endString2;
-                    if (endString > beginString)
-                    {
-                        string originalLikeString = sqlQuery.Substring(beginString + 1, endString - beginString);
-                        string likeString = originalLikeString;
-                        if (isAccess)
-                        {
-                            likeString = likeString.Replace("#WC#", "*");
-                            likeString = likeString.Replace('%', '*');
-                            likeString = likeString.Replace('_', '?');
-                            likeString = likeString.Replace('^', '!');
-
-                        }
-                        else
-                        {
-                            likeString = likeString.Replace("#WC#", "%");
-                            likeString = likeString.Replace('*', '%');
-                            likeString = likeString.Replace('?', '_');
-                            likeString = likeString.Replace('#', '_');
-                            likeString = likeString.Replace('^', '!');
-
-                        }
-                        string next = string.Empty;
-                        if (endString < sqlQuery.Length)
-                        {
-                            next = ReplaceSqlWildCards(sqlQuery.Substring(endString + 1));
-                        }
-                        sqlQuery = sqlQuery.Substring(0, beginString + 1) + likeString + ' ' + next;
-
-                    }
+                    likeString = likeString.Replace("#WC#", "*");
+                    likeString = likeString.Replace('%', '*');
+                    likeString = likeString.Replace('_', '?');
+                    likeString = likeString.Replace('^', '!');
                 }
+                else
+                {
+                    likeString = likeString.Replace("#WC#", "%");
+                    likeString = likeString.Replace('*', '%');
+                    likeString = likeString.Replace('?', '_');
+                    likeString = likeString.Replace('#', '_');
+                    likeString = likeString.Replace('^', '!');
+                }
+                // Replace the original LIKE statement with the modified one
+                sql = sql.Replace(match.Value, likeString);
             }
-            return sqlQuery.Trim();
+            return sql.Trim();
         }
 
         /// <summary>
@@ -1085,9 +1067,6 @@ For: Package, Element, Diagram, Attribute, Operation"
             // #Instr start, stack, needle#
             // start rel 1
             sql = macroInstr_ID(rep, sql);
-
-            // if #If condition, trueValue, falseValue#
-            sql = macroIf_ID(rep, sql);
 
             // macro Format a number with left padding and a thousand separator
             // #Format numberString, length, stringPaddingBefore#
@@ -1211,6 +1190,9 @@ For: Package, Element, Diagram, Attribute, Operation"
             // Concatenate strings
             // #Concat str1, str2,..#
             sql = macroConcat_ID(rep, sql);
+
+            // if #If condition, trueValue, falseValue#
+            sql = macroIf_ID(rep, sql);
 
 
             // Replace #WC# (DB wile card)
