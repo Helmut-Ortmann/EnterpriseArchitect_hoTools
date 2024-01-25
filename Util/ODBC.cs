@@ -36,7 +36,7 @@ namespace hoTools.Utils.ODBC
 
             EaConnectionString eaConnectionString = new hoLinqToSql.LinqUtils.EaConnectionString(rep);
 
-            string connectionString = eaConnectionString.DbConnectionString;
+            string connectionString = eaConnectionString.DbConnectionStr;
             if (connectionString.Contains("Connect="))
             {
                 start = connectionString.IndexOf("Connect=", StringComparison.Ordinal) + 8;

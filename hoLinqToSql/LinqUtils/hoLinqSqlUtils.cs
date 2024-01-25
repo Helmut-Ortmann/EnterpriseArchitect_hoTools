@@ -296,7 +296,7 @@ Provider:     '{provider?.Name ?? ""}'
             provider = null;
             providerName = "";
             EaConnectionString eaConnectionString = new EaConnectionString(rep);
-            string connectionString = eaConnectionString.DbConnectionString;
+            string connectionString = eaConnectionString.DbConnectionStr;
 
             try
             {
