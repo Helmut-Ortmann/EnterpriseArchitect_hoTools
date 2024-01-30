@@ -1,0 +1,14 @@
+﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+    <Fragment>
+        <DirectoryRef Id="APPLICATIONFOLDER">
+            <Component Id="hoFindAndReplaceGui.dll" Guid="87D96917-6A26-4327-92FE-E43F4AF54D8B">
+                <File Id="hoFindAndReplaceGui.dll" KeyPath="yes" Source="$(var.hoFindAndReplaceGui.TargetDir)\hoFindAndReplaceGui.dll" />
+            </Component>
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <ComponentGroup Id="COM_DllFandR">
+            <ComponentRef Id="hoFindAndReplaceGui.dll" />
+        </ComponentGroup>
+    </Fragment>
+</Wix>

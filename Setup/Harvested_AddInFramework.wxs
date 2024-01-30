@@ -1,7 +1,7 @@
 ﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
     <Fragment>
         <DirectoryRef Id="APPLICATIONFOLDER">
-            <Component Id="AddInFramework.dll" Guid="8D90018F-215A-4EA8-8975-A7206FC8B4D8">
+            <Component Id="AddInFramework.dll" Guid="84250DEF-567D-4996-A611-1DFA999782E8">
                 <Class Id="{00BC3468-756A-30FF-9110-9AF2838CFF17}" Context="InprocServer32" Description="AddinFramework.Util.ScriptUtility" ThreadingModel="both" ForeignServer="mscoree.dll">
                     <ProgId Id="AddinFramework.Util.ScriptUtility" Description="AddinFramework.Util.ScriptUtility" />
                 </Class>
@@ -17,7 +17,7 @@
                 <Class Id="{B40694D0-C515-35F7-B154-3AB3E897387C}" Context="InprocServer32" Description="EAAddinFramework.Utils.Model" ThreadingModel="both" ForeignServer="mscoree.dll">
                     <ProgId Id="EAAddinFramework.Utils.Model" Description="EAAddinFramework.Utils.Model" />
                 </Class>
-                <File Id="AddInFramework.dll" KeyPath="yes" Source="$(var.hoTools_AddInFramework.TargetDir)\AddInFramework.dll" />
+                <File Id="AddInFramework.dll" KeyPath="yes" Source="$(var.AddinFramework.TargetDir)\AddInFramework.dll" />
                 <ProgId Id="Record" />
                 <RegistryValue Root="HKCR" Key="CLSID\{00BC3468-756A-30FF-9110-9AF2838CFF17}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{00BC3468-756A-30FF-9110-9AF2838CFF17}\InprocServer32\4.2.2.0" Name="Class" Value="AddinFramework.Util.ScriptUtility" Type="string" Action="write" />

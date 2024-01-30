@@ -1,39 +1,38 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
     <Fragment>
-        <DirectoryRef Id="TARGETDIR">
-            <Directory Id="dirA622272A3642906C114F843D2FDC5552" Name="release" />
-        </DirectoryRef>
-    </Fragment>
-    <Fragment>
-        <DirectoryRef Id="dirA622272A3642906C114F843D2FDC5552">
-            <Component Id="cmp31940B54CF312110947FB4C57021C05C" Guid="*">
+        <DirectoryRef Id="APPLICATIONFOLDER">
+            <Component Id="hoToolsRoot.dll" Guid="E8911FBC-BE03-42BD-9501-4A9E2613EF27">
                 <Class Id="{31462D11-C23D-3ADF-BD03-48BDCC30C1D3}" Context="InprocServer32" Description="hoTools.About" ThreadingModel="both" ForeignServer="mscoree.dll">
                     <ProgId Id="hoTools.About" Description="hoTools.About" />
                 </Class>
                 <Class Id="{661B3D5E-F2A4-385F-BCD8-6C5E8CB56929}" Context="InprocServer32" Description="hoTools.HoToolsRoot" ThreadingModel="both" ForeignServer="mscoree.dll">
-                    <ProgId Id="hoTools.HoToolsRoot" Description="hoTools.HoToolsRoot" />
+                    <ProgId Id="hoTools.hoToolsRoot" Description="hoTools.HoToolsRoot" />
                 </Class>
-                <File Id="filCA8A52E7876A339B3756985923353460" KeyPath="yes" Source="SourceDir\release\hoToolsRoot.dll" />
+                <File Id="hoToolsRoot.dll" KeyPath="yes" Source="$(var.hoToolsRoot.TargetDir)\hoToolsRoot.dll" />
                 <RegistryValue Root="HKCR" Key="CLSID\{31462D11-C23D-3ADF-BD03-48BDCC30C1D3}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{31462D11-C23D-3ADF-BD03-48BDCC30C1D3}\InprocServer32\4.2.6.0" Name="Class" Value="hoTools.About" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{31462D11-C23D-3ADF-BD03-48BDCC30C1D3}\InprocServer32\4.2.6.0" Name="Assembly" Value="hoToolsRoot, Version=4.2.6.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{31462D11-C23D-3ADF-BD03-48BDCC30C1D3}\InprocServer32\4.2.6.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{31462D11-C23D-3ADF-BD03-48BDCC30C1D3}\InprocServer32\4.2.6.0" Name="CodeBase" Value="file:///[#filCA8A52E7876A339B3756985923353460]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{31462D11-C23D-3ADF-BD03-48BDCC30C1D3}\InprocServer32\4.2.6.0" Name="CodeBase" Value="file:///[#hoToolsRoot.dll]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{31462D11-C23D-3ADF-BD03-48BDCC30C1D3}\InprocServer32" Name="Class" Value="hoTools.About" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{31462D11-C23D-3ADF-BD03-48BDCC30C1D3}\InprocServer32" Name="Assembly" Value="hoToolsRoot, Version=4.2.6.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{31462D11-C23D-3ADF-BD03-48BDCC30C1D3}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{31462D11-C23D-3ADF-BD03-48BDCC30C1D3}\InprocServer32" Name="CodeBase" Value="file:///[#filCA8A52E7876A339B3756985923353460]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{31462D11-C23D-3ADF-BD03-48BDCC30C1D3}\InprocServer32" Name="CodeBase" Value="file:///[#hoToolsRoot.dll]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{661B3D5E-F2A4-385F-BCD8-6C5E8CB56929}\Implemented Categories\{62C8FE65-4EBB-45e7-B440-6E39B2CDBF29}" Value="" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{661B3D5E-F2A4-385F-BCD8-6C5E8CB56929}\InprocServer32\4.2.6.0" Name="Class" Value="hoTools.HoToolsRoot" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{661B3D5E-F2A4-385F-BCD8-6C5E8CB56929}\InprocServer32\4.2.6.0" Name="Assembly" Value="hoToolsRoot, Version=4.2.6.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{661B3D5E-F2A4-385F-BCD8-6C5E8CB56929}\InprocServer32\4.2.6.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{661B3D5E-F2A4-385F-BCD8-6C5E8CB56929}\InprocServer32\4.2.6.0" Name="CodeBase" Value="file:///[#filCA8A52E7876A339B3756985923353460]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{661B3D5E-F2A4-385F-BCD8-6C5E8CB56929}\InprocServer32\4.2.6.0" Name="CodeBase" Value="file:///[#hoToolsRoot.dll]" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{661B3D5E-F2A4-385F-BCD8-6C5E8CB56929}\InprocServer32" Name="Class" Value="hoTools.HoToolsRoot" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{661B3D5E-F2A4-385F-BCD8-6C5E8CB56929}\InprocServer32" Name="Assembly" Value="hoToolsRoot, Version=4.2.6.0, Culture=neutral, PublicKeyToken=null" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{661B3D5E-F2A4-385F-BCD8-6C5E8CB56929}\InprocServer32" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
-                <RegistryValue Root="HKCR" Key="CLSID\{661B3D5E-F2A4-385F-BCD8-6C5E8CB56929}\InprocServer32" Name="CodeBase" Value="file:///[#filCA8A52E7876A339B3756985923353460]" Type="string" Action="write" />
+                <RegistryValue Root="HKCR" Key="CLSID\{661B3D5E-F2A4-385F-BCD8-6C5E8CB56929}\InprocServer32" Name="CodeBase" Value="file:///[#hoToolsRoot.dll]" Type="string" Action="write" />
             </Component>
         </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <ComponentGroup Id="COM_DllRoot">
+            <ComponentRef Id="hoToolsRoot.dll" />
+        </ComponentGroup>
     </Fragment>
 </Wix>

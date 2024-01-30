@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
-     xmlns:complus="http://schemas.microsoft.com/wix/ComPlusExtension">
+﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
  <!-- New release:
       1. Product.wxs:   Update ProductVersion (Major.Minor.Build.Revision not used )
          The last number is always 0 
@@ -33,98 +31,55 @@
   <?define Manufacturer="ho" ?>
   <?define ProductName="hoToolsX64" ?>
 
-  <Product Id="*"
-           Name="$(var.ProductName)"
-           Language="1033"
-           Version="$(var.ProductVersion)"
-            Manufacturer="$(var.Manufacturer)"
-           UpgradeCode="$(var.UpgradeCode)" >
-    <Package
-             Description="Windows installer for hoTools x64 $(var.ProductVersion)"
-             Comments="Execute to install hoTools x64 $(var.ProductVersion)"
-             InstallerVersion="200"
-             SummaryCodepage="1252"
-             Compressed="yes"  
-             AdminImage="no"
-             Platform="x64"
-            ReadOnly="yes"
-            Keywords="Installer, MSI, Database"/>
+  <Package Name="$(var.ProductName)" Language="1033" Version="$(var.ProductVersion)" Manufacturer="$(var.Manufacturer)" UpgradeCode="$(var.UpgradeCode)" InstallerVersion="200">
+    <SummaryInformation Description="Windows installer for hoTools x64 $(var.ProductVersion)" Keywords="Installer, MSI, Database" />
 
     <!--InstallPrivileges="elevated"-->
 
-    <Media Id="1"
-           Cabinet="Contents.cab"
-           EmbedCab="yes"
-           CompressionLevel="medium"/>
+    <Media Id="1" Cabinet="Contents.cab" EmbedCab="yes" CompressionLevel="medium" />
 
     
 
-    <Upgrade Id="$(var.UpgradeCode)" >
-      <UpgradeVersion   Minimum="$(var.ProductVersion)"
-                        IncludeMinimum="no"
-                        OnlyDetect="yes"
-                        Language="1033"
-                         Property="NEWPRODUCTFOUND" />
-      <UpgradeVersion Minimum="1.0.0.0"
-                      IncludeMinimum="yes"
-                      Maximum="$(var.ProductVersion)"
-                      IncludeMaximum="no"
-                      Language="1033"
-                      Property="UPGRADEFOUND" />
+    <Upgrade Id="$(var.UpgradeCode)">
+      <UpgradeVersion Minimum="1.0.0.0" IncludeMinimum="yes" Maximum="$(var.ProductVersion)" IncludeMaximum="no" Language="1033" Property="UPGRADEFOUND" />
     </Upgrade>
    
-    <Feature Id="Complete"
-              Description="Enterprise Architect hoTools"
-              Title="hoTools"
-              Level="1"
-              Display="expand"
-              ConfigurableDirectory="APPLICATIONFOLDER" >
-      <ComponentGroupRef Id="ProductComponents"/>
-      <ComponentGroupRef Id="COM_DllRoot"/>
-      <ComponentGroupRef Id="COM_DllGui"/>
+    <Feature Id="Complete" Description="Enterprise Architect hoTools" Title="hoTools" Level="1" Display="expand" ConfigurableDirectory="APPLICATIONFOLDER">
+      <ComponentGroupRef Id="ProductComponents" />
+      <ComponentGroupRef Id="COM_DllRoot" />
+      <ComponentGroupRef Id="COM_DllGui" />
+      <ComponentGroupRef Id="COM_DllFramework" />
     </Feature>
     
     <!-- Check for .Net framework 4.0 Client-->
     <Property Id="NETFRAMEWORK40CL">
-      <RegistrySearch Id="NetFramework40Cl"
-                      Root="HKLM"
-                      Key="SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Client"
-                  Name="Install"
-                      Type="raw" />
+      <RegistrySearch Id="NetFramework40Cl" Root="HKLM" Key="SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Client" Name="Install" Type="raw" />
     </Property>
     <!-- Check for .Net framework 4.0 Full-->
     <Property Id="NETFRAMEWORK40FULL">
-      <RegistrySearch Id="NetFramework40FULL"
-                      Root="HKLM"
-                      Key="SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Client"
-                  Name="Install"
-                      Type="raw" />
+      <RegistrySearch Id="NetFramework40FULL" Root="HKLM" Key="SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Client" Name="Install" Type="raw" />
     </Property>
 
-    <Condition Message="This application requires .NET Framework v4. Please install the .NET Framework then run this installer again.">
-      <![CDATA[Installed OR NETFRAMEWORK40CL OR NETFRAMEWORK40FULL]]>
-    </Condition>
+    <Launch Condition="Installed OR NETFRAMEWORK40CL OR NETFRAMEWORK40FULL" Message="This application requires .NET Framework v4. Please install the .NET Framework then run this installer again." />
     
     <!--
      UI: 
     
     <Property Id="WIXUI_INSTALLDIR" Value="INSTALLDIR" />
     -->
-    <WixVariable Id="WixUILicenseRtf" Value="License.rtf"/>
+    <WixVariable Id="WixUILicenseRtf" Value="License.rtf" />
     <UIRef Id="WixUI_MySetup" /> <!--WixUI_Advanced WixUI_MySetup -->
     <!--
       Guidelines Single Package Authoring (per user/per machine install)
       https://msdn.microsoft.com/en-us/library/windows/desktop/dd408068(v=vs.85).aspx
       http://uvinw.com/per-machine-and-per-user-without-UAC-in-WiX/
         -->
-    <Property Id="WixAppFolder" Value= "WixPerUserFolder" />
+    <Property Id="WixAppFolder" Value="WixPerUserFolder" />
     <UIRef Id="WixUI_ErrorProgressText" />
 
     <!-- Prevent downgrading -->
-    <MajorUpgrade Schedule="afterInstallInitialize"
-                DowngradeErrorMessage="A later version of hoReverse is already installed"
-                AllowSameVersionUpgrades="yes" />
+    <MajorUpgrade Schedule="afterInstallInitialize" DowngradeErrorMessage="A later version of hoReverse is already installed" AllowSameVersionUpgrades="yes" />
 
-  </Product>
+  </Package>
 
 </Wix>

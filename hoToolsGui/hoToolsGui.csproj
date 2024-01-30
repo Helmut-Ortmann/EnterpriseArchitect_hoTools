@@ -221,10 +221,8 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>if $(Configuration) == Release  (
-    // heat collect x86
-  "C:\Program Files (x86)\WiX Toolset v3.11\bin\heat" file "$(ProjectDir)bin\x86\$(Configuration)\hoToolsGui.DLL" -v -dr APPLICATIONFOLDER -srd -gg -g1 -cg COM_DllGui  -sfrag -suid  -var var.hoToolsGui.TargetDir -out "$(TargetDir)hoToolsGui.DLL.wxs"
-)</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.

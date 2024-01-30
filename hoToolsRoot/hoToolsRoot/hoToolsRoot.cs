@@ -27,6 +27,7 @@ using hoTools.EaServices.Names;
 using LinqToDB;
 using LinqToDB.DataProvider;
 using VwTools_Utils.General;
+using System.Runtime.InteropServices;
 
 #region description
 //---------------------------------------------------------------
@@ -61,6 +62,10 @@ namespace hoTools
     /// <summary>
     /// The main Addin class which calls the other tasks
     /// </summary>
+    [ComVisible(true)]
+    [ClassInterface(ClassInterfaceType.None)]
+    [Guid("661B3D5E-F2A4-385F-BCD8-6C5E8CB56929")]
+    [ProgId("hoTools.hoToolsRoot")]
     public partial class HoToolsRoot : EaAddinBase
     {
         // Overwritten by AdinClass AssemblyFileVersion
@@ -1218,7 +1223,7 @@ namespace hoTools
                             ($@"server=localhost; database=ironman_16_01_2024; user=root; password=minden;", "MySql", null),                                    // MySQL
                             (@"Data Source=c:\Users\hoXps\AppData\Roaming\Sparx Systems\EA\EAExample.qea;Version=3;", "SQLite", null),                          // SQLite
                             (@"Data Source=c:\Users\hoXps\AppData\Roaming\Sparx Systems\EA\EAExample.qea;", "SQLite", null),                                    // SQLite without version
-                            //(providerName == "MySql"?connectionString:null, "MySqlConnector", null),                                                          // also test MySqlConnector
+                            (providerName == "MySql"?connectionString:null, "MySqlConnector", null),                                                          // also test MySqlConnector
                             (@"Provider=Microsoft.JET.OLEDB.4.0; Data Source=c:\Users\hoXps\AppData\Roaming\Sparx Systems\EA\EAExample.eap;", "Access", null),  // Jet
                             ($@"", "", null)                                                                                                                    // free
 

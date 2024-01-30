@@ -33,6 +33,7 @@ copy /Y %2 %README_NAME_OLD%
 copy /Y %2 %README_NAME%
 echo Copying *.readme.md: %2 to %README_NAME%
 echo Copying *.readme.md: %2 to %README_NAME_OLD%
+echo zip updated for x64
 
 
 

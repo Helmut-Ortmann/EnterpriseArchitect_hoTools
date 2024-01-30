@@ -1,0 +1,14 @@
+﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+    <Fragment>
+        <DirectoryRef Id="APPLICATIONFOLDER">
+            <Component Id="hoExtensionGui.dll" Guid="E3DF0BEF-5755-478D-B119-910A5BE00CD0">
+                <File Id="hoExtensionGui.dll" KeyPath="yes" Source="$(var.hoExtensionGui.TargetDir)\hoExtensionGui.dll" />
+            </Component>
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <ComponentGroup Id="COM_DllExtGui">
+            <ComponentRef Id="hoExtensionGui.dll" />
+        </ComponentGroup>
+    </Fragment>
+</Wix>

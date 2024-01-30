@@ -1,0 +1,14 @@
+﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+    <Fragment>
+        <DirectoryRef Id="APPLICATIONFOLDER">
+            <Component Id="hoSqlGui.dll" Guid="B434680F-6A68-4FEF-AFE5-8CE1F108B5E3">
+                <File Id="hoSqlGui.dll" KeyPath="yes" Source="$(var.hoSqlGui.TargetDir)\hoSqlGui.dll" />
+            </Component>
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <ComponentGroup Id="COM_DllSqlGui">
+            <ComponentRef Id="hoSqlGui.dll" />
+        </ComponentGroup>
+    </Fragment>
+</Wix>

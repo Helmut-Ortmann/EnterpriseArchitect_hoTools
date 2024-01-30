@@ -1,45 +1,31 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project>
+  <Import Project="Sdk.props" Sdk="WixToolset.Sdk" Version="4.0.3" />
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+  </PropertyGroup>
+  <PropertyGroup>
     <ProductVersion>3.8</ProductVersion>
-    <ProjectGuid>6f57c7f7-5b30-4720-bcf6-8c21c2d09009</ProjectGuid>
-    <SchemaVersion>2.0</SchemaVersion>
     <OutputName>hoTools</OutputName>
-    <OutputType>Package</OutputType>
-    <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' AND '$(MSBuildExtensionsPath32)' != '' ">$(MSBuildExtensionsPath32)\Microsoft\WiX\v3.x\Wix.targets</WixTargetsPath>
-    <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' ">$(MSBuildExtensionsPath)\Microsoft\WiX\v3.x\Wix.targets</WixTargetsPath>
     <SccProjectName>SAK</SccProjectName>
     <SccProvider>SAK</SccProvider>
     <SccAuxPath>SAK</SccAuxPath>
     <SccLocalPath>SAK</SccLocalPath>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <OutputPath>bin\x86\Debug\</OutputPath>
-    <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
     <DefineConstants>Debug</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <OutputPath>bin\x86\Release\</OutputPath>
-    <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
     <SuppressIces>ICE61</SuppressIces>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="..\hoToolsRoot\bin\x86\release\hoToolsRoot.DLL.wxs">
-      <Link>VwToolsRoot.DLL.wxs</Link>
-    </Compile>
-    <Compile Include="..\hoToolsGui\bin\x86\release\hoToolsGui.DLL.wxs">
-      <Link>hoToolsGui.DLL.wxs</Link>
-    </Compile>
-    <Compile Include="Collect\hoExtensionGui.wxs" />
-    <Compile Include="Collect\hoFindAndReplaceGui.wxs" />
-    <Compile Include="Collect\hoSqlGui.wxs" />
-    <Compile Include="Collect\hoToolsGui.wxs" />
-    <Compile Include="Collect\hoToolsRoot.wxs" />
-    <Compile Include="Harvested_AddInFramework.wxs" />
+    <Compile Include="Harvested_AddinFramework.wxs" />
+    <Compile Include="Harvested_hoToolsRoot.wxs" />
+    <Compile Include="Harvested_hoExtensionGui.wxs" />
+    <Compile Include="Harvested_hoToolsGui.wxs" />
+    <Compile Include="Harvested_hoFindAndReplaceGui.wxs" />
+    <Compile Include="Harvested_hoSqlGui.wxs" />
     <Compile Include="Wxs\Directories.wxs" />
     <Compile Include="Wxs\Files.wxs" />
     <Compile Include="Wxs\Product.wxs" />
@@ -54,7 +40,6 @@
     <Content Include="Collect\Collect.bat" />
     <Content Include="hoToolsGui.dll.config" />
     <Content Include="License.rtf" />
-    <Content Include="packages.config" />
     <Content Include="Scripts\getmsiversion.vbs" />
     <Content Include="Scripts\HoTools.reg" />
     <Content Include="Scripts\HoTools64bit.reg" />
@@ -131,7 +116,9 @@
       <Name>hoToolsRoot</Name>
       <Project>{6d5deeef-0897-4494-9857-5bee2bf0d0af}</Project>
       <Private>True</Private>
-      <DoNotHarvest>True</DoNotHarvest>
+      <HarvestFileSuppressCom>False</HarvestFileSuppressCom>
+      <HarvestFileVerboseOutput>True</HarvestFileVerboseOutput>
+      <DoNotHarvest>False</DoNotHarvest>
       <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
       <RefTargetDir>INSTALLFOLDER</RefTargetDir>
     </ProjectReference>
@@ -153,15 +140,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <WixExtension Include="WixUIExtension">
-      <HintPath>$(WixExtDir)\WixUIExtension.dll</HintPath>
-      <Name>WixUIExtension</Name>
-    </WixExtension>
+    <PackageReference Include="WixToolset.UI.wixext" Version="4.0.3" />
+    <PackageReference Include="System.Data.SQLite" Version="1.0.118.0" />
+    <PackageReference Include="WixToolset.Heat" Version="4.0.3" />
+    <PackageReference Include="WixToolset.UI.wixext" Version="4.0.3" />
+    <PackageReference Include="WixToolset.Util.wixext" Version="4.0.3" />
   </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Wxs\Localization.wxl" />
-  </ItemGroup>
-  <Import Project="$(WixTargetsPath)" />
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
     <DefineConstants>Debug</DefineConstants>
     <OutputPath>bin\x64\debug\</OutputPath>
@@ -174,31 +158,21 @@
     <IntermediateOutputPath>obj\$(Platform)\$(Configuration)\</IntermediateOutputPath>
     <VerboseOutput>True</VerboseOutput>
   </PropertyGroup>
+  <Import Project="Sdk.targets" Sdk="WixToolset.Sdk" Version="4.0.3" />
   <PropertyGroup>
-    <PostBuildEvent>"$(SolutionDir)\Setup\Scripts\renamemsi.bat" "$(SolutionDir)\Setup\bin\x86\Release\en-us\hoTools.msi" "$(SolutionDir)hotools_root\readme.md"</PostBuildEvent>
+    <PreBuildEvent>
+      echo ------- harvest x86 AddInFramework.dll ---------------
+
+      "%25UserProfile%25\.nuget\packages\wixtoolset.heat\4.0.3\tools\net472\x86\heat.exe" file "$(SolutionDir)AddinFramework\bin\x86\Release\AddInFramework.dll" -v -dr APPLICATIONFOLDER -srd -gg -g1 -cg COM_DllFramework  -sfrag -suid  -var var.AddinFramework.TargetDir -out   "$(SolutionDir)Setup\Harvested_AddinFramework.wxs"
+      "%25UserProfile%25\.nuget\packages\wixtoolset.heat\4.0.3\tools\net472\x86\heat.exe" file "$(SolutionDir)hoToolsRoot\bin\x86\Release\hoToolsRoot.dll" -v -dr APPLICATIONFOLDER -srd -gg -g1 -cg COM_DllRoot  -sfrag -suid  -var var.hoToolsRoot.TargetDir -out   "$(SolutionDir)Setup\Harvested_HoToolsRoot.wxs"
+      "%25UserProfile%25\.nuget\packages\wixtoolset.heat\4.0.3\tools\net472\x86\heat.exe" file "$(SolutionDir)hoToolsGui\bin\x86\Release\hoToolsGui.dll" -v -dr APPLICATIONFOLDER -srd -gg -g1 -cg COM_DllGui  -sfrag -suid  -var var.hoToolsGui.TargetDir -out   "$(SolutionDir)Setup\Harvested_HoToolsGui.wxs"
+      "%25UserProfile%25\.nuget\packages\wixtoolset.heat\4.0.3\tools\net472\x86\heat.exe" file "$(SolutionDir)hoExtensionGui\bin\x86\Release\hoExtensionGui.dll" -v -dr APPLICATIONFOLDER -srd -gg -g1 -cg COM_DllExtGui  -sfrag -suid  -var var.hoExtensionGui.TargetDir -out   "$(SolutionDir)Setup\Harvested_hoExtensionGui.wxs"
+      "%25UserProfile%25\.nuget\packages\wixtoolset.heat\4.0.3\tools\net472\x86\heat.exe" file "$(SolutionDir)hoFindAndReplaceGui\bin\x86\Release\hoFindAndReplaceGui.dll" -v -dr APPLICATIONFOLDER -srd -gg -g1 -cg COM_DllFandR  -sfrag -suid  -var var.hoFindAndReplaceGui.TargetDir -out   "$(SolutionDir)Setup\Harvested_hoFindAndReplaceGui.wxs"
+      "%25UserProfile%25\.nuget\packages\wixtoolset.heat\4.0.3\tools\net472\x86\heat.exe" file "$(SolutionDir)hoSqlGui\bin\x86\Release\hoSqlGui.dll" -v -dr APPLICATIONFOLDER -srd -gg -g1 -cg COM_DllSqlGui  -sfrag -suid  -var var.hoSqlGui.TargetDir -out   "$(SolutionDir)Setup\Harvested_hoSqlGui.wxs"
+
+    </PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PreBuildEvent>echo ------- harvest x86 AddInFramework.dll ---------------
- 
-"%25UserProfile%25\.nuget\packages\wixtoolset.heat\4.0.2\tools\net472\x86\heat.exe" file "$(SolutionDir)AddinFramework\bin\x86\Release\AddInFramework.dll" -v -dr APPLICATIONFOLDER -srd -gg -g1 -cg COM_DllFramework  -sfrag -suid  -var var.hoTools_AddInFramework.TargetDir -out   "$(SolutionDir)Setup\Harvested_AddInFramework.wxs"</PreBuildEvent>
+    <PostBuildEvent>"$(SolutionDir)\Setup\Scripts\renamemsi.bat" "$(SolutionDir)Setup\bin\x86\Release\en-us\hoTools.msi" "$(SolutionDir)hotools_root\readme.md"</PostBuildEvent>
   </PropertyGroup>
-  <Import Project="..\packages\WixToolset.Heat.4.0.3\build\WixToolset.Heat.targets" Condition="Exists('..\packages\WixToolset.Heat.4.0.3\build\WixToolset.Heat.targets')" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\WixToolset.Heat.4.0.3\build\WixToolset.Heat.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\WixToolset.Heat.4.0.3\build\WixToolset.Heat.targets'))" />
-    <Error Condition="!Exists('..\packages\WixToolset.UI.wixext.4.0.3\build\WixToolset.UI.wixext.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\WixToolset.UI.wixext.4.0.3\build\WixToolset.UI.wixext.targets'))" />
-    <Error Condition="!Exists('..\packages\WixToolset.Util.wixext.4.0.3\build\WixToolset.Util.wixext.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\WixToolset.Util.wixext.4.0.3\build\WixToolset.Util.wixext.targets'))" />
-  </Target>
-  <Import Project="..\packages\WixToolset.UI.wixext.4.0.3\build\WixToolset.UI.wixext.targets" Condition="Exists('..\packages\WixToolset.UI.wixext.4.0.3\build\WixToolset.UI.wixext.targets')" />
-  <Import Project="..\packages\WixToolset.Util.wixext.4.0.3\build\WixToolset.Util.wixext.targets" Condition="Exists('..\packages\WixToolset.Util.wixext.4.0.3\build\WixToolset.Util.wixext.targets')" />
-  <!--
-	To modify your build process, add your task inside one of the targets below and uncomment it.
-	Other similar extension points exist, see Wix.targets.
-	<Target Name="BeforeBuild">
-	</Target>
-	<Target Name="AfterBuild">
-	</Target>
-	-->
 </Project>
