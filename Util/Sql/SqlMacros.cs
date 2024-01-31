@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Resources;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using hoLinqToSql.DataModels;
 //using EA;
 using hoLinqToSql.LinqUtils;
 using hoTools.Utils.Extension;
@@ -25,7 +26,19 @@ namespace hoTools.Utils.Sql
         // ReSharper disable once PrivateFieldCanBeConvertedToLocalVariable
         private readonly EA.Repository _rep;
         private readonly string _sqlString;
-       
+
+        private static Packages.Package _package;
+        /// <summary>
+        /// Package to later estimate package branches
+        /// </summary>
+        public static Packages.Package Package
+        {
+            get => _package;
+            set => _package = value;
+        }
+
+        private static readonly bool UseSqlToEstimatePackageBranch = true;
+
 
 
 
@@ -158,7 +171,18 @@ namespace hoTools.Utils.Sql
                 {
                     foreach (var item in _regexShowColumns)
                     {
-                        var regex = item.GetRegEx();
+                        Regex regex = null;
+                        try
+                        {
+                            regex = item.GetRegEx();
+                        }
+                        catch (Exception e)
+                        {
+                            MessageBox.Show($@"Regex: '{item}'
+
+{e}",@"Error regex");
+                        }
+
 
                         // Get index of srcIndex
                         var srcIndex = dt.Columns.IndexOf(item.SrcColumn);
@@ -174,13 +198,26 @@ namespace hoTools.Utils.Sql
                             var trgValue = "";
 
                             // extract value
-                            Match m = regex.Match(srcValue);
-                            if (m.Success)
+                            try
                             {
-                                trgValue = m.Groups[1].Value;
+                                Match m = regex.Match(srcValue);
+                                if (m.Success)
+                                {
+                                    trgValue = m.Groups[1].Value;
+                                }
+                                // Update cell
+                                row[item.TrgColumn] = trgValue;
                             }
-                            // Update cell
-                            row[item.TrgColumn] = trgValue;
+                            catch (Exception e)
+                            {
+                                MessageBox.Show($@"Regex: '{item}'
+
+{e}", @"Error regex");
+                                // Update cell
+                                row[item.TrgColumn] = trgValue;
+                            }
+                            
+                            
 
                         }
                     }
@@ -209,14 +246,14 @@ namespace hoTools.Utils.Sql
                             // fund first match
                             if (m.Success)
                             {
-                                if (item.Condition == "AND") showRow = showRow & true;
+                                if (item.Condition == "AND") showRow &= true;
                                 if (item.Condition == "OR") showRow = true;
 
                             }
                             else
                             {
                                 if (item.Condition == "AND") showRow = false;
-                                if (item.Condition == "OR") showRow = showRow | false;
+                                if (item.Condition == "OR") showRow |= false;
 
                             }
                         }
@@ -400,6 +437,10 @@ ORDER BY pkg.Name
                 "// - #CondBranchStatement#       ' AND pkg.Package_ID in (...) ' If a package is selected in Browser: Make a SQL statement with ... comma separated list of Package_Ids of the selected package (recursive) \r\n" +
                 "// - #CondBranchStatement operation1, column, operation#  ' operation1, column, operation2 (...) ' If a package is selected in Browser: Make a SQL statement with ' ... comma separated list of Package_Ids of the selected package (recursive) \r\n" +
                 "//   Example: #CondBranchStatement AND, pkg.Package_Id, in# ' AND pkg.Package_id in (....) ' ... Package_Ids of the selected package recursive " +
+                "// - #CondDiagramSelectedElements_IDS#       ' AND o.Object_ID in (...) ' If diagram elements are selected: Make a SQL statement with ... comma separated list of Element Ids of the selected diagram elements \r\n" +
+                "// - #CondDiagramSelectedElements_IDS operation, alias#  ' operation, column, operation2 (...) ' If diagram elements are selected: Make a SQL statement with ... comma separated list of Element Ids of the selected diagram elements \r\n" +
+                "//   Example: #CondDiagramSelectedElements_IDS AND, o# ' AND o.Object_id in (....) ' ... ElementIds of the selected DiagramElements " +
+                "//   Example: #CondDiagramSelectedElements_IDS AND, o,Object_id# ' AND o.Object_id in (....) ' ... ElementIds of the selected DiagramElements " +
                 "// - #Concat= <value1>, <value2>,..# Provides a method of concatenating two or more SQL terms into one string, independent of the database type." +
                 "// - #ConnectorID#              Selected Connector, Replaced by ConnectorID\r\n" +
                 "// - #ConveyedItemIDS#           Selected Connector, Replaced by the Conveyed Items as comma separated list of ElementIDs like ' IN (#ConveyedItemIDS#)'\r\n" +
@@ -408,13 +449,15 @@ ORDER BY pkg.Name
                 "// - #CurrentItemGUID#           Replaced by the GUID of the selected item (Element, Diagram, Package, Attribute, Operation) \r\n" +
                 "// - #CurrentItemID#             Replaced by the ID of the selected item (Element, Diagram, Package, Attribute, Operation)\r\n" +
                 "// - #DiagramElements_IDS#         Diagram Elements of selected Diagram / current Diagram\r\n"+
-                "// - #DiagramSelectedElements_IDS# Selected Diagram Elements of selected Diagram / current Diagram \r\n" +
+                "// - #DiagramSelectedElements_IDS# Identifiers of selected Diagram Elements of selected Diagram / current Diagram \r\n" +
+                "// - #DiagramSelectedElements_GUIDS# Guids of selected Diagram Elements of selected Diagram / current Diagram \r\n" +
                 "// - #Diagram_ID                 Current Diagram or selected Diagram \r\n" +
                 "// - #InBranch#                  like Branch (nested package recursive), but with SQL IN clause like 'package_ID IN (512, 31,613)'\r\n" +
                 "// - #NewGuid#                   replace by a new GUID surrounded by brackets ('{...}'). This is useful for SQL 'insert' statements.\r\n" +
                 "// - #Package#                   Replaced by the package ID of the containing package of selected Package like: 'package_ID in (#Branch)'\r\n" +
                 "// - #PackageID#                 Replaced by the package ID of the containing package of selected Package like: 'package_ID in (#Branch)'\r\n"   +
-                "// - #TreeSelectedGUIDS#       In Browser selected Elements as a list of comma separated GUIDS like 'IN (#TreeSelectedGUIDS#)'\r\n" +
+                "// - #TreeSelectedGUIDS#       In Browser selected Elements as a list of comma separated GUIDs like 'IN (#TreeSelectedGUIDS#)'\r\n" +
+                "// - #TreeSelectedIDS#         In Browser selected Elements as a list of comma separated IDs like 'IN (#TreeSelectedIDS#)'\r\n" +
                 "// - <Search Term>               Replaced by the string in the 'Search Term' entry field\r\n" +
                 "// - #WC#  or *                  Wild card depending of the current DB. You may simple use '*'\r\n" +
                 "// - #DB=ACCESS2007#             DB specif SQL for ACCESS2007\r\n"+
@@ -425,8 +468,8 @@ ORDER BY pkg.Name
                 "// - DB=ORACLE#                  DB specif SQL for Oracle\r\n"+
                 "// - #DB=POSTGRES#               DB specif SQL for POSTGRES\r\n"+
                 "// - #DB=SQLSVR#                 DB specif SQL for SQL Serve\r\n"+
-                "// - #DB=SL3#                    DB specif SQL for SQLITE\r\n"+
-                "// - #DB=SQLITE#                 DB specif SQL for SQLITE\r\n"+
+                "// - #DB=SQLITE#                 DB specif SQL for SQLite\r\n"+
+                "// - #DB=OTHER#                  DB specif SQL for other DBs\r\n"+
 
                 "//\r\n" +
                 "select o.ea_guid AS CLASSGUID, o.object_type AS CLASSTYPE,o.Name AS Name,o.object_type As Type, * \r\n" +
@@ -561,6 +604,10 @@ ORDER BY 3",
                 new SqlTemplate("TREE_SELECTED_GUIDS",
                     "#TreeSelectedGUIDS#",
                     "Placeholder for selected Browser Elements  as comma separated list of GUIDs\nExample: ea_GUID in (#TreeSelectedGUIDS#)") },
+             { SqlTemplateId.TreeSelectedIds,
+                 new SqlTemplate("TREE_SELECTED_IDS",
+                     "#TreeSelectedIDS#",
+                     "Placeholder for selected Browser Elements  as comma separated list of IDs\nExample: object_id in (#TreeSelectedIDS#)") },
               { SqlTemplateId.PackageId,
                 new SqlTemplate("PACKAGE_ID",
                     "#Package#",
@@ -591,6 +638,10 @@ Tip: Select Package while inserting in SQL via Insert Macro in Context Menu"
                 new SqlTemplate("IN_BRANCH_IDS",
                     "#CondBranchStatement#",
                     "If a Package is in the browser selected it adds: 'AND pkg.package_id in (.....) ' where ... are the beneath package ids.\nExpands to ' AND pkg.package_id IN (512,513,..)' ") },
+            { SqlTemplateId.CondDiagramSelectedElementsIds,
+                new SqlTemplate("CondDiagramSelectedElements_IDS",
+                    "#CondDiagramSelectedElements_IDS#",
+                    "If a diagram elements are selected it adds: 'AND o.object_id in (.....) ' where ... are the selected diagram element ids.\nExpands to ' AND o.object_id IN (512,513,..)' ") },
             { SqlTemplateId.NewGuid,
                 new SqlTemplate("NewGuid",
                     "#NewGuid#",
@@ -607,6 +658,10 @@ Tip: Select Package while inserting in SQL via Insert Macro in Context Menu"
                 new SqlTemplate( "DiagramSelectedElements_IDS",
                     "#DiagramSelectedElements_IDS#",
                     "Placeholder for the current selected items in the diagram, as ID\nExample: elementID in (#DiagramSelectedElements_IDS# )") },
+            { SqlTemplateId.DiagramSelectedElementsGuids,
+                new SqlTemplate( "DiagramSelectedElements_GUIDS",
+                    "#DiagramSelectedElements_GUIDS#",
+                    "Placeholder for the current selected items in the diagram, as ID\nExample: ea_guid in (#DiagramSelectedElements_GUIDS# )") },
 
             { SqlTemplateId.DiagramElementsIds,
                 new SqlTemplate( "DiagramElements_IDS",
@@ -685,9 +740,9 @@ For: Package, Element, Diagram, Attribute, Operation"
                      "#DB=SL3#                             #DB=SL3#",
                      "The SQL string for other DBs included by #DB=SL3#, #DB=SL3#     ...my db sql....#DB=SL3#") },
              { SqlTemplateId.DbSqLite,
-                 new SqlTemplate("DB_SQLITE",
-                     "#DB=SQLITE#                             #DB=SQLITE#",
-                     "The SQL string for other DBs included by #DB=SQLITE#, #DB=SQLITE#     ...my db sql....#DB=SQLITE#") },
+                 new SqlTemplate("DBSQLITE",
+                     "#DB=DBSQLITE#                             #DB=DBSQLITE#",
+                     "The SQL string for other DBs included by #DB=DBSQLITE#, #DB=DBSQLITE#     ...my db sql....#DB=DBSQLITE#") },
              { SqlTemplateId.DbOther,
                  new SqlTemplate("DB_Other",
                      "#DB=Other#                             #DB=Other#",
@@ -750,12 +805,13 @@ For: Package, Element, Diagram, Attribute, Operation"
             CurrentItemIdTemplate,   // Template for usage of #CurrentItemId#
             CurrentItemGuidTemplate, // Template for usage of #CurrentItemGUID#
             CurrentItemGuid,  // ALIAS CURRENT_ELEMENT_GUID exists (compatible to EA)
-            DiagramSelectedElementsIds,// Selected Diagram objects as a comma separated list of IDs
+            DiagramSelectedElementsIds,// Ids of selected Diagram objects as a comma separated list of IDs
+            DiagramSelectedElementsGuids,// Guids of selected Diagram objects as a comma separated list of IDs
             DiagramElementsIds,        // Diagram objects (selected diagram) as a comma separated list of IDs
             DiagramElementsIdsTemplate,
             DiagramSelectedElementsIdsTemplate,
-            DiagramSelectedElementsGuids,// Guids of selected Diagram objects as a comma separated list of IDs
             DiagramId,                 // Diagram ID
+            FlowGuidInTx,              // Flow GUID in t_xref.Description
             Author,
             TreeSelectedGuids, // get all the GUIDs of the selected items (otDiagram, otElement, otPackage, otAttribute, otMethod
             TreeSelectedIds,   // get all the Ids of the selected items (otDiagram, otElement, otPackage, otAttribute, otMethod
@@ -1213,7 +1269,7 @@ For: Package, Element, Diagram, Attribute, Operation"
         /// macro ToBool
         /// #ToBool string#
         /// Returns the string 'TRUE', or 'FALSE'
-        /// MySQL: 0=FALSE, #0=TRUE
+        /// SQLite,MySQL: 0=FALSE, #0=TRUE
         /// 
         /// </summary>
         /// <param name="rep"></param>
@@ -1456,6 +1512,13 @@ For: Package, Element, Diagram, Attribute, Operation"
 
             return sql;
         }
+        /// <summary>
+        /// macro Length of a string
+        /// #Length string#
+        /// </summary>
+        /// <param name="rep"></param>
+        /// <param name="sql"></param>
+        /// <returns></returns>
 
         static string macroLength_ID(EA.Repository rep, string sql)
         {
@@ -1526,6 +1589,12 @@ For: Package, Element, Diagram, Attribute, Operation"
         /// macro if
         /// #If condition, trueValue, falseValue#
         /// Checks whether a condition is met, and returns one value if TRUE of another on if it is FALSE.
+        ///
+        /// Example:
+        /// #If #left infItem.Name,3# = 'Req', 'Request','Response'#  As Kind
+        ///
+        /// Note:
+        /// call this function after preparing possible inner macros
         /// </summary>
         /// <param name="rep"></param>
         /// <param name="sql"></param>
@@ -1974,7 +2043,7 @@ For: Package, Element, Diagram, Attribute, Operation"
             if (sql.Contains(template) | sql.Contains("#CurrentElementID#"))
             {
                 EA.ObjectType objectType = rep.GetContextItemType();
-                int id;
+                int id = 0;
                 switch (objectType)
                 {
                     case EA.ObjectType.otElement:
@@ -2054,6 +2123,10 @@ For: Package, Element, Diagram, Attribute, Operation"
                     case EA.ObjectType.otMethod:
                         EA.Method method = (EA.Method)rep.GetContextObject();
                         guid = method.MethodGUID;
+                        break;
+                    case EA.ObjectType.otConnector:
+                        EA.Connector con = (EA.Connector)rep.GetContextObject();
+                        guid = con.ConnectorGUID;
                         break;
                 }
 
@@ -2310,6 +2383,19 @@ For: Package, Element, Diagram, Attribute, Operation"
                         EA.Element el = (EA.Element)rep.GetContextObject();
                         id = el.PackageID;
                         break;
+                    
+                    case EA.ObjectType.otAttribute:
+                        EA.Attribute attr = (EA.Attribute)rep.GetContextObject();
+                        el = rep.GetElementByID(attr.ParentID);
+                        id = el.PackageID;
+                        break;
+                    
+                    case EA.ObjectType.otMethod:
+                        EA.Method method = (EA.Method)rep.GetContextObject();
+                        el = rep.GetElementByID(method.ParentID);
+                        id = el.PackageID;
+                        break;
+                    // use Package of element
                     case EA.ObjectType.otPackage:
                         EA.Package pkg = (EA.Package)rep.GetContextObject();
                         id = pkg.PackageID;
@@ -2319,7 +2405,7 @@ For: Package, Element, Diagram, Attribute, Operation"
                 if (id > 0)
                 {
                     // get package recursive
-                    string branch = Package.GetBranch(rep, "", id);
+                    string branch = GetBranch(rep, "", id);
                     // Handle empty branches
                     branch = String.IsNullOrWhiteSpace(branch) ? " 0 " : branch;
                     sql = sql.Replace(currentBranchTemplate, branch);
@@ -2373,7 +2459,7 @@ For: Package, Element, Diagram, Attribute, Operation"
 
                         }
                         int pkgId = pkg.PackageID;
-                        string branch = Package.GetBranch(rep, "", pkgId);
+                        string branch = GetBranch(rep, "", pkgId);
                         // Handle empty branches
                         branch = String.IsNullOrWhiteSpace(branch) ? " 0 " : branch;
                         sql = sql.Replace(match.Groups[0].Value, branch);
@@ -2414,47 +2500,45 @@ For: Package, Element, Diagram, Attribute, Operation"
             // Branch: complete SQL IN statement ' AND package_id in (comma separated Package IDs, Recursive):
             // IN (7,29,128)
             string currentBranchTemplate = GetTemplateText(SqlTemplateId.CondBranchStatement);
-            if (sql.Contains(currentBranchTemplate))
+            if (sql.Contains(currentBranchTemplate.Substring(0, currentBranchTemplate.Length - 1)))
             {
-                EA.ObjectType objectTypeContext = rep.GetContextItem(out _);
-                EA.ObjectType objectType = rep.GetTreeSelectedItem(out object obj);
-                int id = 0;
-                if (objectTypeContext != EA.ObjectType.otPackage) return sql.Trim();
-                switch (objectType)
+                // Get branch of selected package
+                EA.ObjectType objectType = rep.GetTreeSelectedItem(out object selItem);
+                string branchSelPackage = "";
+                EA.Package pkg = null;
+                if (objectType == EA.ObjectType.otPackage)
                 {
-                    case EA.ObjectType.otPackage:
-                        EA.Package pkg = (EA.Package)obj;
-                        id = pkg.PackageID;
-                        break;
-                }
-                // Context element available
-                if (id > 0)
+                    pkg = (EA.Package)selItem;
+                    // the collection of recursive package ids of the selected package
+                    branchSelPackage = GetBranch(rep, "", pkg.PackageID);
+                }  
+                
+                
+                // find #CondBranchStatement...# with optional parameter
+                var pattern = $@"{currentBranchTemplate.Remove(currentBranchTemplate.Length - 1)}([^#]*)#";
+                Match match = Regex.Match(sql,pattern , RegexOptions.IgnoreCase);
+                while (match.Success)
                 {
-                    // get package recursive
-                    string branch = GetBranch(rep, "", id);
-                    // Handle empty branches
-                    branch = String.IsNullOrWhiteSpace(branch) ? " 0 " : branch;
-                    // find #CondBranchStatement...# with optional parameter
-                    var pattern = $@"{currentBranchTemplate.Remove(currentBranchTemplate.Length - 1)}([^#]*)#";
-                    Match match = Regex.Match(sql, pattern, RegexOptions.IgnoreCase);
-                    while (match.Success)
+                    var lColumns = match.Groups[1].Value.Split(',');
+                    if (pkg != null)
                     {
-                        var lColumns = match.Groups[1].Value.Split(',');
+                        // #CondBranchStatement AND, pkg.Package_Id, in# ==> 'AND pkg.Package_Id in (...) '
                         if (lColumns.Length == 3)
-                            sql = sql.Replace(match.Groups[0].Value, $@" {lColumns[0]} {lColumns[1]} {lColumns[2]} ({branch}) ");
+                            sql = sql.Replace(match.Groups[0].Value,
+                                $@" {lColumns[0]} {lColumns[1]} {lColumns[2]} ({branchSelPackage}) ");
                         else
                         {
-                            sql = sql.Replace(match.Groups[0].Value, $@" AND pkg.package_id in ({branch}) ");
+                            // #CondBranchStatement# 
+                            sql = sql.Replace(match.Groups[0].Value, $@" AND pkg.package_id in ({branchSelPackage}) ");
                         }
-                        match = match.NextMatch();
+                    }
+                    else
+                    {
+                        // empty, because no package in browser is selected
+                        sql = sql.Replace(match.Groups[0].Value, $@" ");
                     }
 
-                }
-                else
-                // no diagram, element or package selected
-                {
-                    // replace by empty statement
-                    sql = sql.Replace(currentBranchTemplate, $@" 0 ");
+                    match = match.NextMatch();
                 }
             }
             return sql.Trim();
@@ -2594,9 +2678,9 @@ For: Package, Element, Diagram, Attribute, Operation"
             return sql;
         }
         /// <summary>
-        /// Get list of package ids as comma separated list
+        /// Get the PackageBranch for a Package id. Returns a list of package ids as comma separated list
         ///
-        /// if nothing found a 0 is returned
+        /// if nothing found "" is returned
         /// </summary>
         /// <param name="rep"></param>
         /// <param name="branch"></param>
@@ -2606,15 +2690,33 @@ For: Package, Element, Diagram, Attribute, Operation"
         {
             if (id > 0)
             {
-                // add current package id
-                if (branch == "") branch = id.ToString();
-                else branch = branch + ", " + id;
-
-                EA.Package pkg = rep.GetPackageByID(id);
-                foreach (EA.Package p in pkg.Packages)
+                if (UseSqlToEstimatePackageBranch)
                 {
-                    int pkgId = p.PackageID;
-                    branch = GetBranch(rep, branch, pkgId);
+                   
+                    // get the package recursive
+                    var t = Packages.Package.GetDescendantIds(_package.PackageItems, id);
+                    return String.Join(", ", t);
+
+                }
+                else
+                {
+
+
+                    // add current package id
+                    if (branch == "") branch = id.ToString();
+                    else branch = branch + ", " + id;
+
+                    EA.Package pkg = rep.GetPackageByID(id);
+                    //for (short i = 0; i <pkg.Packages.Count; i++)
+                    //{
+                    //    branch = GetBranch(rep, branch, ((EA.Package)pkg.Packages.GetAt(i)).PackageID);
+                    //}
+
+                    foreach (EA.Package p in pkg.Packages)
+                    {
+                        int pkgId = p.PackageID;
+                        branch = GetBranch(rep, branch, pkgId);
+                    }
                 }
 
 
@@ -2632,11 +2734,9 @@ For: Package, Element, Diagram, Attribute, Operation"
         /// <param name="rep"></param>
         /// <returns></returns>
         private static string RepType(EA.Repository rep)
-        {
-            string repType = rep.RepositoryType().ToUpper();
-            if (repType.StartsWith("ACCESS")) return "ACCESS";
-            return repType;
-        }
+ {
+     return DbConfig.RepType(rep);
+ }
 
         /// <summary>
         /// Format DB specific by removing unnecessary DB specific string parts.
@@ -2657,7 +2757,7 @@ For: Package, Element, Diagram, Attribute, Operation"
         {
             // available DBs
             // Key: Repository.RepositoryType() 'Access2007' transformed to 'Access'
-            var dbs = new Dictionary<string, string>()
+            var dbNames = new Dictionary<string, string>()
             {
                 { "ACCESS", "#DB=ACCESS2007#" }, // documentation 
                 { "Asa", "#DB=Asa#" },
@@ -2672,17 +2772,22 @@ For: Package, Element, Diagram, Attribute, Operation"
                 { "SL3", "#DB=SQLITE#" }
 
             };
-            var dbType = dbs.Where(x => x.Key == RepType(rep)).Select(x => x.Value).FirstOrDefault();
+            var dbType = dbNames.Where(x=>x.Key == hoLinqToSql.DataModels.DbConfig.RepType(rep)).Select(x=>x.Value).FirstOrDefault();
             if (String.IsNullOrEmpty(dbType))
             {
-                MessageBox.Show($@"DB not supported in SQL, only 'ACCESS', 'MYSQL', 'JET', 'SQLite', 'SL3'!
-{sql}", $@"DB {RepType(rep)} not supported");
+                MessageBox.Show($@"DB rep.RepositoryType()/RepType(rep): '{rep.RepositoryType()}/{hoLinqToSql.DataModels.DbConfig.RepType(rep)}' in macro #DB=...# not supported in SQL, only 'ACCESS', 'MYSQL', 'JET', 'SQLite', 'SL3'!
+
+This can happen:
+- If you use a different DB
+- EA.Repository object 'rep' with: EA Server RPC issues, Shutdown of Repository
+
+{sql}",$@"Cariad Tools DB {hoLinqToSql.DataModels.DbConfig.RepType(rep)} not supported or EA Server down");
                 return sql;
             }
             string s = sql;
-            foreach (var curDb in dbs)
+            foreach (var curDb in dbNames)
             {
-                if (curDb.Key.ToLower() != RepType(rep).ToLower())
+                if (curDb.Key.ToLower() != hoLinqToSql.DataModels.DbConfig.RepType(rep).ToLower())
                 {   // delete not used DBs
                     string delete = $"{curDb.Value}.*?{curDb.Value}";
                     s = Regex.Replace(s, delete, "", RegexOptions.Multiline | RegexOptions.IgnoreCase);

@@ -1,7 +1,7 @@
 ﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
     <Fragment>
         <DirectoryRef Id="APPLICATIONFOLDER">
-            <Component Id="AddInFramework.dll" Guid="84250DEF-567D-4996-A611-1DFA999782E8">
+            <Component Id="AddInFramework.dll" Guid="ED853CDD-EFC3-4F55-80FD-B2CAA538C1B3">
                 <Class Id="{00BC3468-756A-30FF-9110-9AF2838CFF17}" Context="InprocServer32" Description="AddinFramework.Util.ScriptUtility" ThreadingModel="both" ForeignServer="mscoree.dll">
                     <ProgId Id="AddinFramework.Util.ScriptUtility" Description="AddinFramework.Util.ScriptUtility" />
                 </Class>

@@ -63,9 +63,9 @@ namespace hoTools.Utils.Export
         public static bool MakeExcelFileFromCsv(string fileName = @"x:\temp\sql\csv.xlsx")
         {
 
-            if (Clipboard.ContainsText(TextDataFormat.Text))
+            if (System.Windows.Forms.Clipboard.ContainsText(TextDataFormat.Text))
             {
-                var csv = Clipboard.GetText(TextDataFormat.Text);
+                var csv = System.Windows.Forms.Clipboard.GetText(TextDataFormat.Text);
                 var dt = new DataTable();
                 // get the separator according to current culture
                 char separator =

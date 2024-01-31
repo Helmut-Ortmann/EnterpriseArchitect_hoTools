@@ -16,7 +16,6 @@ using hoTools.Utils.ActionPins;
 using EAAddinFramework.Utils;
 
 using System.Reflection;
-//using EA;
 using hoTools.Find;
 using hoTools.Utils.Configuration;
 using GlobalHotkeys;
@@ -155,7 +154,7 @@ namespace hoTools
 
         const string MenuDivider = "-----------------------------------------------";
 
-        private bool _initFavoriteSearches = false;
+        private bool _initFavoriteSearches;
 
         #region Constructor
         /// <summary>
@@ -186,7 +185,7 @@ namespace hoTools
                 MessageBox.Show($@"Error setup 'hoTools' Addin. Error:{Environment.NewLine}{e}", 
                     @"hoTools Installation error");
             }
-            // global configuration parameters independent from EA-Instance and used by services
+            // global configuration parameters independent of EA-Instance and used by services
             var globalCfg = HoToolsGlobalCfg.Instance;
             globalCfg.SetSqlPaths(_addinSettings.SqlPaths);
             globalCfg.SetLinqPadQueryPaths(_addinSettings.LinqPadQueryPath);
@@ -1383,8 +1382,8 @@ Environment:      '{env}'
                     if (_addinSettings.OnlyQueryWindow != AddinSettings.ShowInWindow.Disabled)
                     {
                         // Run as Query
-                        _hoSqlGui = AddAddinControl<hoSqlGui.HoSqlGui>(hoSqlGui.HoSqlGui.TabulatorSql,
-                            hoSqlGui.HoSqlGui.Progid, hoSqlGui.HoSqlGui.TabulatorSql,
+                        _hoSqlGui = AddAddinControl<HoSqlGui>(HoSqlGui.TabulatorSql,
+                            HoSqlGui.Progid, HoSqlGui.TabulatorSql,
                             _addinSettings.OnlyQueryWindow);
                         _HoSqlGui = _hoSqlGui; // static + instance
                     }
@@ -1400,8 +1399,8 @@ Environment:      '{env}'
                     if (_addinSettings.ScriptAndQueryWindow != AddinSettings.ShowInWindow.Disabled)
                     {
                         // Run as Script
-                        _ScriptGUI = AddAddinControl<hoSqlGui.HoSqlGui>(hoSqlGui.HoSqlGui.TabulatorScript, 
-                            hoSqlGui.HoSqlGui.Progid, hoSqlGui.HoSqlGui.TabulatorScript, 
+                        _ScriptGUI = AddAddinControl<HoSqlGui>(HoSqlGui.TabulatorScript, 
+                            HoSqlGui.Progid, HoSqlGui.TabulatorScript, 
                             _addinSettings.ScriptAndQueryWindow);
                     _scriptGui = _ScriptGUI; // static + instance
                     }
@@ -1448,7 +1447,7 @@ Environment:      '{env}'
             }
             catch (Exception e)
             {
-                MessageBox.Show($@"Tab name={tabName}{Environment.NewLine}{e}", @"Can't activate Addin Tab");
+                MessageBox.Show($@"Tab name={tabName}{Environment.NewLine}{e}", @"Can't activate Addin Tab 'SQL'");
             }
         }
 
@@ -1477,7 +1476,7 @@ Environment:      '{env}'
             AddinGui control = c as AddinGui;
             if (null == control)
             {
-                MessageBox.Show($@"Unable to start progId='{progId}', tab='{tabName}'");
+                MessageBox.Show($@"Unable to start ProgId='{progId}', tab='{tabName}'");
             }
             else
             {

@@ -1,7 +1,7 @@
 ﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
     <Fragment>
         <DirectoryRef Id="APPLICATIONFOLDER">
-            <Component Id="hoSqlGui.dll" Guid="385675A6-385E-4947-9153-5B1A1FB9DDD7">
+            <Component Id="hoSqlGui.dll" Guid="14812CE3-0090-4E25-A401-F24B6E4EC891">
                 <Class Id="{3F23B705-62F1-43D7-9F6F-085105FDF752}" Context="InprocServer32" Description="hoTools.hoSqlGui.HoSqlGui" ThreadingModel="both" ForeignServer="mscoree.dll">
                     <ProgId Id="hoTools.sqlGui" Description="hoTools.hoSqlGui.HoSqlGui" />
                 </Class>

@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Extension")]
-[assembly: AssemblyDescription("Handle Extens")]
+[assembly: AssemblyDescription("Handle Extensions")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Helmut Ortmann, hoModeler.de")]
 [assembly: AssemblyProduct("Extension")]

@@ -26,49 +26,50 @@
        The Scripts you find in: Setup\Script\..
        see also: http://kentie.net/article/wixnameversion/index.htm
   -->
-  <?define ProductVersion="4.2.7" ?> 
+  <?define ProductVersion="!(bind.FileVersion.hoToolsRoot.dll)" ?> 
   <?define UpgradeCode="307AA3B0-18F4-4DC4-9E82-3B60DE424434" ?>
   <?define Manufacturer="ho" ?>
   <?define ProductName="hoToolsX64" ?>
 
   <Package Name="$(var.ProductName)" Language="1033" Version="$(var.ProductVersion)" Manufacturer="$(var.Manufacturer)" UpgradeCode="$(var.UpgradeCode)" InstallerVersion="200">
-    <SummaryInformation Description="Windows installer for hoTools x64 $(var.ProductVersion)" Keywords="Installer, MSI, Database" />
+    <SummaryInformation Description="Windows installer for hoTools $(var.ProductVersion)" Keywords="Installer, MSI, Database" />
+    <!--  installation rules -->
+    <MajorUpgrade
+      DowngradeErrorMessage="A later version of [ProductName] is already installed. Setup will now exit."
+      AllowSameVersionUpgrades="no"
+      Schedule="afterInstallInitialize" />
+    <InstallExecuteSequence>
+      <RemoveExistingProducts After="InstallInitialize" Overridable="yes" />
+    </InstallExecuteSequence>
+    <!-- Check for .Net framework 4.7.2 Client-->
+    <Property Id="NETFRAMEWORK472">
+      <RegistrySearch Id="NetFramework461" Root="HKLM" Key="SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full" Name="Release" Type="raw" />
+    </Property>
+    <Launch Condition="Installed OR NETFRAMEWORK472CL OR NETFRAMEWORK472FULL" Message="This application requires .NET Framework v4.7.2 Please install the .NET Framework then run this installer again." />
 
     <!--InstallPrivileges="elevated"-->
 
     <Media Id="1" Cabinet="Contents.cab" EmbedCab="yes" CompressionLevel="medium" />
 
-    
-
-    <Upgrade Id="$(var.UpgradeCode)">
-      <UpgradeVersion Minimum="1.0.0.0" IncludeMinimum="yes" Maximum="$(var.ProductVersion)" IncludeMaximum="no" Language="1033" Property="UPGRADEFOUND" />
-    </Upgrade>
-   
     <Feature Id="Complete" Description="Enterprise Architect hoTools" Title="hoTools" Level="1" Display="expand" ConfigurableDirectory="APPLICATIONFOLDER">
       <ComponentGroupRef Id="ProductComponents" />
       <ComponentGroupRef Id="COM_DllRoot" />
       <ComponentGroupRef Id="COM_DllGui" />
       <ComponentGroupRef Id="COM_DllFramework" />
+      <ComponentGroupRef Id="COM_DllExtGui" />
+      <ComponentGroupRef Id="COM_DllFandR" />
+      <ComponentGroupRef Id="COM_DllSqlGui" />
     </Feature>
     
-    <!-- Check for .Net framework 4.0 Client-->
-    <Property Id="NETFRAMEWORK40CL">
-      <RegistrySearch Id="NetFramework40Cl" Root="HKLM" Key="SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Client" Name="Install" Type="raw" />
-    </Property>
-    <!-- Check for .Net framework 4.0 Full-->
-    <Property Id="NETFRAMEWORK40FULL">
-      <RegistrySearch Id="NetFramework40FULL" Root="HKLM" Key="SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Client" Name="Install" Type="raw" />
-    </Property>
-
-    <Launch Condition="Installed OR NETFRAMEWORK40CL OR NETFRAMEWORK40FULL" Message="This application requires .NET Framework v4. Please install the .NET Framework then run this installer again." />
-    
-    <!--
-     UI: 
-    
-    <Property Id="WIXUI_INSTALLDIR" Value="INSTALLDIR" />
-    -->
     <WixVariable Id="WixUILicenseRtf" Value="License.rtf" />
-    <UIRef Id="WixUI_MySetup" /> <!--WixUI_Advanced WixUI_MySetup -->
+
+    <!-- Install with or without admin rights
+      required: 
+      - Localization.wxl ((unchanged will work)
+      - WixUI_Advanced.wxl (unchanged will work)
+      -->
+    <UIRef Id="WixUI_MySetup" />
+    <!--WixUI_Advanced WixUI_MySetup -->
     <!--
       Guidelines Single Package Authoring (per user/per machine install)
       https://msdn.microsoft.com/en-us/library/windows/desktop/dd408068(v=vs.85).aspx
@@ -76,10 +77,5 @@
         -->
     <Property Id="WixAppFolder" Value="WixPerUserFolder" />
     <UIRef Id="WixUI_ErrorProgressText" />
-
-    <!-- Prevent downgrading -->
-    <MajorUpgrade Schedule="afterInstallInitialize" DowngradeErrorMessage="A later version of hoReverse is already installed" AllowSameVersionUpgrades="yes" />
-
   </Package>
-
 </Wix>

@@ -193,7 +193,7 @@ DiagramId: {dia?.DiagramID}, {dia?.DiagramGUID} {diaLinkDescr}";
             }
 
             string txt = "";
-            if (String.IsNullOrWhiteSpace(strGuid)) Clipboard.ClipboardNoException.Clear();
+            if (String.IsNullOrWhiteSpace(strGuid)) hoTools.Utils.Clipboard.ClipboardNoException.Clear();
             else
             {
                 PrepareOutput();
@@ -224,7 +224,7 @@ DiagramId: {dia?.DiagramID}, {dia?.DiagramGUID} {diaLinkDescr}";
 
         private void EndOutput()
         {
-            VwTools_Utils.Clipboard.ClipboardNoException.SetText(String.Join($@"{Environment.NewLine}",FullText));
+            hoTools.Utils.Clipboard.ClipboardNoException.SetText(String.Join($@"{Environment.NewLine}",FullText));
         }
     }
 }

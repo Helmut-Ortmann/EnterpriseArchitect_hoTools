@@ -248,7 +248,7 @@ namespace hoTools.Utils.Appls
             chartDia.Update();
             stateMachine.Diagrams.Refresh();
 
-            // put the staemachine on the diagram
+            // put the state machine on the diagram
             var chartObj = (EA.DiagramObject)chartDia.DiagramObjects.AddNew("l=50;r=600;t=100;b=800", "");
             chartObj.ElementID = stateMachine.ElementID;
             chartObj.Update();
@@ -264,7 +264,7 @@ namespace hoTools.Utils.Appls
             note.Notes = m.Visibility + " " + elClass.Name + "_" + m.Name + ":" + m.ReturnType;
             note.Update();
             noteObj.ElementID = note.ElementID;
-            noteObj.Style = "fontsz=200;pitch=34;DUID=265D32D5;font=Arial Narrow;bold=0;italic=0;ul=0;charset=0;";
+            noteObj.Style = @"fontsz=200;pitch=34;DUID=265D32D5;font=Arial Narrow;bold=0;italic=0;ul=0;charset=0;";
             noteObj.Update();
             pkgTrg.Elements.Refresh();
             chartDia.DiagramObjects.Refresh();

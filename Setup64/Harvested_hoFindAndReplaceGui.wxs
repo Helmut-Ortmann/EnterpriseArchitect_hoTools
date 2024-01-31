@@ -1,7 +1,7 @@
 ﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
     <Fragment>
         <DirectoryRef Id="APPLICATIONFOLDER">
-            <Component Id="hoFindAndReplaceGui.dll" Guid="B655AD6C-ED6A-47DE-87D2-6820488E69F8">
+            <Component Id="hoFindAndReplaceGui.dll" Guid="B62D77EF-80B0-4271-A460-5D1F42217029">
                 <Class Id="{0894113F-FF9A-3847-8542-1C70CC6B147E}" Context="InprocServer32" Description="hoTools.Find.RegularExpression" ThreadingModel="both" ForeignServer="mscoree.dll">
                     <ProgId Id="hoTools.Find.RegularExpression" Description="hoTools.Find.RegularExpression" />
                 </Class>

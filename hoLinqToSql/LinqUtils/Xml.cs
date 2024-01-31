@@ -41,8 +41,6 @@ namespace hoLinqToSql.LinqUtils
             return x.ToString();
         }
 
-
-
         /// <summary>
         /// Make EA xml from a DataTable (for column names) and the ordered Enumeration provided by LINQ. Set the Captions in DataTable to ensure column names. 
         /// 
@@ -50,7 +48,7 @@ namespace hoLinqToSql.LinqUtils
         /// <param name="dt"></param>
         /// <param name="rows">LINQ Query for the data to get</param>
         /// <returns></returns>
-        public static string MakeXml(DataTable dt, OrderedEnumerableRowCollection<DataRow> rows)
+        public static string MakeXml(DataTable dt, EnumerableRowCollection<DataRow> rows)
         {
             XElement xFields = new XElement("Fields");
             foreach (DataColumn col in dt.Columns)
@@ -88,6 +86,52 @@ namespace hoLinqToSql.LinqUtils
                 return "";
             }
         }
+
+        ///// <summary>
+        ///// Make EA xml from a DataTable (for column names) and the ordered Enumeration provided by LINQ. Set the Captions in DataTable to ensure column names. 
+        ///// 
+        ///// </summary>
+        ///// <param name="dt"></param>
+        ///// <param name="rows">LINQ Query for the data to get</param>
+        ///// <returns></returns>
+        //public static string MakeXml(DataTable dt, OrderedEnumerableRowCollection<DataRow> rows)
+        //{
+        //    XElement xFields = new XElement("Fields");
+        //    foreach (DataColumn col in dt.Columns)
+        //    {
+        //        XElement xField = new XElement("Field");
+        //        xField.Add(new XAttribute("name", col.Caption));
+        //        xFields.Add(xField);
+        //    }
+        //    try
+        //    {
+        //        XElement xRows = new XElement("Rows");
+
+        //        foreach (var row in rows)
+        //        {
+        //            XElement xRow = new XElement("Row");
+        //            int i = 0;
+        //            foreach (DataColumn col in dt.Columns)
+        //            {
+        //                XElement xField = new XElement("Field");
+        //                xField.Add(new XAttribute("value", row[i].ToString()));
+        //                xField.Add(new XAttribute("name", col.Caption));
+        //                xRow.Add(xField);
+        //                i = i + 1;
+        //            }
+        //            xRows.Add(xRow);
+        //        }
+        //        XElement xDoc = new XElement("ReportViewData");
+        //        xDoc.Add(xFields);
+        //        xDoc.Add(xRows);
+        //        return xDoc.ToString();
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        MessageBox.Show($"{e}", "Error enumerating through LINQ query");
+        //        return "";
+        //    }
+        //}
 
         /// <summary>
         /// Make DataTable from EA sql results
@@ -147,7 +191,9 @@ Xml:
                 if (debug) Utils.SaveTextToXml("DebugToXml", sqlXml);
                 return GetEmptyDataTable();
             }
-            
+
+
+
         }
         /// <summary>
         /// Get an empty DataTable
@@ -159,52 +205,6 @@ Xml:
             dt.Columns.Add("Empty");
             return dt;
         }
-        /// <summary>
-        /// Make EA xml from a DataTable (for column names) and the ordered Enumeration provided by LINQ. Set the Captions in DataTable to ensure column names. 
-        /// 
-        /// </summary>
-        /// <param name="dt"></param>
-        /// <param name="rows">LINQ Query for the data to get</param>
-        /// <returns></returns>
-        public static string MakeXml(DataTable dt, EnumerableRowCollection<DataRow> rows)
-        {
-            XElement xFields = new XElement("Fields");
-            foreach (DataColumn col in dt.Columns)
-            {
-                XElement xField = new XElement("Field");
-                xField.Add(new XAttribute("name", col.Caption));
-                xFields.Add(xField);
-            }
-            try
-            {
-                XElement xRows = new XElement("Rows");
-
-                foreach (var row in rows)
-                {
-                    XElement xRow = new XElement("Row");
-                    int i = 0;
-                    foreach (DataColumn col in dt.Columns)
-                    {
-                        XElement xField = new XElement("Field");
-                        xField.Add(new XAttribute("value", row[i].ToString()));
-                        xField.Add(new XAttribute("name", col.Caption));
-                        xRow.Add(xField);
-                        i = i + 1;
-                    }
-                    xRows.Add(xRow);
-                }
-                XElement xDoc = new XElement("ReportViewData");
-                xDoc.Add(xFields);
-                xDoc.Add(xRows);
-                return xDoc.ToString();
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show($"{e}", "Error enumerating through LINQ query");
-                return "";
-            }
-        }
-        
 
         /// <summary>
         /// Make DataTable from EA sql results for Big Data 
@@ -305,5 +305,108 @@ Xml:
 
         }
 
+        /// <summary>
+        /// Make EA XML output format from EA SQLQuery format (string)
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns>string</returns>
+        public (string xmlEaQueryResult, int rowCount) MakeEaXmlOutput(string x)
+        {
+            if (string.IsNullOrEmpty(x)) return (EmptyQueryResult(), 0);
+            var xDocument = XDocument.Parse(x);
+            var rows = xDocument.Descendants("Row").Count();
+            return (MakeEaXmlOutput(xDocument), rows);
+        }
+
+        /// <summary>
+        /// Make EA XML output format from EA SQLQuery XDocument format (LINQ to XML). If nothing found or an error has occurred nothing is displayed.
+        /// </summary>
+        /// <param name="x">Output from EA SQLQuery</param>
+        /// <returns></returns>
+#pragma warning disable CSE0003 // Use expression-bodied members
+        private string MakeEaXmlOutput(XDocument x)
+        {
+            //---------------------------------------------------------------------
+            // make the output format:
+            // From Query:
+            //<EADATA><Dataset_0>
+            // <Data>
+            //  <Row>
+            //    <Name1>value1</name1>
+            //    <Name2>value2</name2>
+            //  </Row>
+            //  <Row>
+            //    <Name1>value1</name1>
+            //    <Name2>value2</name2>
+            //  </Row>
+            // </Data>
+            //</Dataset_0><EADATA>
+            //
+            //-----------------------------------
+            // To output EA XML:
+            //<ReportViewData>
+            // <Fields>
+            //   <Field name=""/>
+            //   <Field name=""/>
+            // </Fields>
+            // <Rows>
+            //   <Row>
+            //      <Field name="" value=""/>
+            //      <Field name="" value=""/>
+            // </Rows>
+            // <Rows>
+            //   <Row>
+            //      <Field name="" value=""/>
+            //      <Field name="" value=""/>
+            // </Rows>
+            //</reportViewData>
+            try
+            {
+                return new XDocument(
+                    new XElement("ReportViewData",
+                        new XElement("Fields",
+                               from field in x.Descendants("Row").FirstOrDefault()?.Descendants()
+                               select new XElement("Field", new XAttribute("name", field.Name))
+                        ),
+                        new XElement("Rows",
+                                    from row in x.Descendants("Row")
+                                    select new XElement(row.Name,
+                                           from field in row.Nodes()
+                                           select new XElement("Field", new XAttribute("name", ((XElement)field).Name),
+                                                                        new XAttribute("value", ((XElement)field).Value)))
+
+                    )
+                )).ToString();
+            }
+            catch (Exception)
+            {
+                // empty query result
+                return EmptyQueryResult();
+
+            }
+        }
+        #region Empty Query Result
+        /// <summary>
+        /// Empty Query Result
+        /// </summary>
+        /// <returns></returns>
+        public static string EmptyQueryResult()
+        {
+            return new XDocument(
+                new XElement("ReportViewData",
+                    new XElement("Fields",
+                           new XElement("Field", new XAttribute("name", "Empty"))
+                    ),
+                    new XElement("Rows",
+                        new XElement("Row",
+                                new XElement("Field",
+                                                    new XAttribute("name", "Empty"),
+                                                    new XAttribute("value", "__empty___")))
+
+                )
+            )).ToString();
+            #endregion
+        }
     }
+
 }

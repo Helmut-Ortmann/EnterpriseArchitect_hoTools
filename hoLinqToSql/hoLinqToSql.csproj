@@ -26,10 +26,11 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>hoLinqToSql</RootNamespace>
     <AssemblyName>hoLinqToSql</AssemblyName>
-    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -195,28 +196,28 @@
       <Version>5.3.2</Version>
     </PackageReference>
     <PackageReference Include="linq2db.Access">
-      <Version>4.4.1</Version>
+      <Version>5.3.2</Version>
     </PackageReference>
     <PackageReference Include="linq2db.MySql">
-      <Version>4.4.1</Version>
+      <Version>5.3.2</Version>
     </PackageReference>
     <PackageReference Include="linq2db.Oracle.Managed">
-      <Version>4.4.1</Version>
+      <Version>5.3.2</Version>
     </PackageReference>
     <PackageReference Include="linq2db.SQLite">
-      <Version>4.4.1</Version>
+      <Version>5.3.2</Version>
     </PackageReference>
     <PackageReference Include="linq2db.SqlServer">
-      <Version>4.4.1</Version>
+      <Version>5.3.2</Version>
     </PackageReference>
     <PackageReference Include="linq2db.Sybase">
-      <Version>4.4.1</Version>
+      <Version>5.3.2</Version>
     </PackageReference>
     <PackageReference Include="linq2db.Sybase.DataAction">
-      <Version>4.4.1</Version>
+      <Version>5.3.2</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Data.SqlClient">
-      <Version>5.1.1</Version>
+      <Version>5.1.5</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.SqlServer.Types">
       <Version>160.1000.6</Version>

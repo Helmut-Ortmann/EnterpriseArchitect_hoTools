@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>hoTools.Utils</RootNamespace>
     <AssemblyName>Utils</AssemblyName>
-    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
@@ -114,6 +114,7 @@
   <ItemGroup>
     <Compile Include="BulkChange\BulkElementItem.cs" />
     <Compile Include="BulkChange\BulkItemChange.cs" />
+    <Compile Include="Clipboard\ClipboardNoException.cs" />
     <Compile Include="COM\Com.cs" />
     <Compile Include="Diagram\Diagram.cs" />
     <Compile Include="Diagram\DiagramGeneralStyle.cs" />
@@ -128,32 +129,34 @@
     <Compile Include="Dialog\DlgCombox.cs" />
     <Compile Include="Extension\EaExtensionClass.cs" />
     <Compile Include="Extension\StringExtension.cs" />
+    <Compile Include="General\Basic.cs" />
     <Compile Include="Gui\IMenuItem.cs" />
     <Compile Include="Json\JasonHelper.cs" />
     <Compile Include="Json\PortAlignment.cs" />
     <Compile Include="ODBC.cs" />
     <Compile Include="EaCollections\Collection.cs" />
+    <Compile Include="Packages\Package.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Strings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Strings.resx</DependentUpon>
     </Compile>
+    <Compile Include="Sql\EaSql.cs" />
     <Compile Include="src\About.cs" />
     <Compile Include="src\Action.cs" />
     <Compile Include="src\ActionPin.cs" />
     <Compile Include="src\ActivityPar.cs" />
     <Compile Include="src\Appl.cs" />
-    <Compile Include="src\ClipboardNoException.cs" />
-    <Compile Include="src\Configuration\HoToolsGlobalCfg.cs" />
-    <Compile Include="src\Configuration\IHoToolsGlobalCfg.cs" />
+    <Compile Include="Configuration\HoToolsGlobalCfg.cs" />
+    <Compile Include="Configuration\IHoToolsGlobalCfg.cs" />
     <Compile Include="src\Connector.cs" />
     <Compile Include="src\CustomProperty.cs" />
     <Compile Include="src\EaInfo.cs" />
     <Compile Include="src\Element.cs" />
-    <Compile Include="src\Export\Excel.cs" />
-    <Compile Include="src\Extensions\Extension.cs" />
-    <Compile Include="src\Extensions\ExtensionItem.cs" />
+    <Compile Include="Export\Excel.cs" />
+    <Compile Include="Extensions\Extension.cs" />
+    <Compile Include="Extensions\ExtensionItem.cs" />
     <Compile Include="src\Favorite.cs" />
     <Compile Include="src\FormsControl.cs" />
     <Compile Include="src\GlobalHotkeyException.cs" />
@@ -247,9 +250,6 @@
     </PackageReference>
     <PackageReference Include="linq2db.Sybase.DataAction">
       <Version>5.1.0</Version>
-    </PackageReference>
-    <PackageReference Include="Microsoft.NETCore.Platforms">
-      <Version>7.0.1</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Win32.Primitives">
       <Version>4.3.0</Version>

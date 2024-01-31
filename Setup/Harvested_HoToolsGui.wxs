@@ -1,7 +1,7 @@
 ﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
     <Fragment>
         <DirectoryRef Id="APPLICATIONFOLDER">
-            <Component Id="hoToolsGui.dll" Guid="FB525A45-0475-4D4C-9F9B-24009D8BB961">
+            <Component Id="hoToolsGui.dll" Guid="4BAF3720-D655-40A8-A4C0-A3B5AB21161C">
                 <Class Id="{10DF5075-C0B8-3ECE-959B-77D32143E4B0}" Context="InprocServer32" Description="hoTools.Settings.AddinSettings" ThreadingModel="both" ForeignServer="mscoree.dll">
                     <ProgId Id="hoTools.Settings.AddinSettings" Description="hoTools.Settings.AddinSettings" />
                 </Class>

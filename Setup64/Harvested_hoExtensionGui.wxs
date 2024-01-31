@@ -1,7 +1,7 @@
 ﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
     <Fragment>
         <DirectoryRef Id="APPLICATIONFOLDER">
-            <Component Id="hoExtensionGui.dll" Guid="78F9D940-5CB2-48E6-B632-8BA0323ECAE2">
+            <Component Id="hoExtensionGui.dll" Guid="091D27A0-4B7A-4BB3-AC40-3D0F63CEA698">
                 <Class Id="{07081FF7-5B36-4487-994B-B69DA4D4C530}" Context="InprocServer32" Description="hoTools.Extensions.ExtensionGui" ThreadingModel="both" ForeignServer="mscoree.dll">
                     <ProgId Id="hoTools.ExtensionGUI" Description="hoTools.Extensions.ExtensionGui" />
                 </Class>
