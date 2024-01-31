@@ -46,7 +46,7 @@ Helmut.Ortmann@t-online.de
             description =
                     $"{description}{"Product-Version (hoToolsRoot.dll):",-32}\tV{versionRoot}{Environment.NewLine}" +
                     $"{"EA Library Version:",-32}\t\t{ rep.LibraryVersion}{Environment.NewLine}" +
-                    $"{"EA ConnectionString:", -32}\t\t{ rep.ConnectionString}{Environment.NewLine}"+
+                    $"{"EA ConnectionString:", -32}\t\t{conString.EaConnectionStrToShow ?? ""}{Environment.NewLine}"+
                     $"{"DB ConnectionString:",-32}\t\t'{conString.DbConnectionStrToShow ?? " "}'{Environment.NewLine}" +
                     $"{"RepositoryType:",-32}\t\t'{rep?.RepositoryType() ?? " "}'{Environment.NewLine}" +
                     $"{"Runtime:",-32}\t\t{runTimeEnvironment}{Environment.NewLine}{Environment.NewLine}";

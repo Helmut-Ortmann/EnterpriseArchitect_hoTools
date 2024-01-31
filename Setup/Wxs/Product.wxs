@@ -36,17 +36,22 @@
     <!--  installation rules -->
     <MajorUpgrade
       DowngradeErrorMessage="A later version of [ProductName] is already installed. Setup will now exit."
-      AllowSameVersionUpgrades="no"
+      AllowSameVersionUpgrades="yes"
       Schedule="afterInstallInitialize" />
     <InstallExecuteSequence>
       <RemoveExistingProducts After="InstallInitialize" Overridable="yes"/>
     </InstallExecuteSequence>
     
-    <!-- Check for .Net framework 4.7.2 Client-->
-    <Property Id="NETFRAMEWORK472">
-      <RegistrySearch Id="NetFramework461" Root="HKLM" Key="SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full" Name="Release" Type="raw" />
+    <!-- Check for .Net framework 4.0 Client-->
+    <Property Id="NETFRAMEWORK40CL">
+      <RegistrySearch Id="NetFramework40Cl" Root="HKLM" Key="SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Client" Name="Install" Type="raw" />
     </Property>
-    <Launch Condition="Installed OR NETFRAMEWORK472CL OR NETFRAMEWORK472FULL" Message="This application requires .NET Framework v4.7.2 Please install the .NET Framework then run this installer again." />
+    <!-- Check for .Net framework 4.0 Full-->
+    <Property Id="NETFRAMEWORK40FULL">
+      <RegistrySearch Id="NetFramework40FULL" Root="HKLM" Key="SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Client" Name="Install" Type="raw" />
+    </Property>
+
+    <Launch Condition="Installed OR NETFRAMEWORK40CL OR NETFRAMEWORK40FULL" Message="This application requires .NET Framework v4. Please install the .NET Framework then run this installer again." />
     
 
     <Media Id="1" Cabinet="Contents.cab" EmbedCab="yes" CompressionLevel="medium" />
