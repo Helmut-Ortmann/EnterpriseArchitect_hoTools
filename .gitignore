@@ -246,3 +246,15 @@ _Pvt_Extensions
 /EA/hoModelViewsMDG.xml
 /EA/hoModelViews.xml
 /EA/hoModelView.mts
+/Setup/Harvested_AddInFramework.wxs
+/Setup/Harvested_hoExtensionGui.wxs
+/Setup/Harvested_hoFindAndReplaceGui.wxs
+/Setup/Harvested_hoSqlGui.wxs
+/Setup/Harvested_HoToolsGui.wxs
+/Setup/Harvested_HoToolsRoot.wxs
+/Setup64/Harvested_AddInFramework.wxs
+/Setup64/Harvested_hoExtensionGui.wxs
+/Setup64/Harvested_hoFindAndReplaceGui.wxs
+/Setup64/Harvested_hoSqlGui.wxs
+/Setup64/Harvested_HoToolsGui.wxs
+/Setup64/Harvested_HoToolsRoot.wxs
