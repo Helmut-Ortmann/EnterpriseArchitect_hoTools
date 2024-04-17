@@ -135,7 +135,7 @@ Todo:
     </UI>
 
     <InstallUISequence>
-      <Show Dialog="WelcomeDlg" Before="AdvancedWelcomeEulaDlg" Condition="Installed AND PATCH" />
+      <Show Dialog="override WelcomeDlg" Before="AdvancedWelcomeEulaDlg" Condition="Installed AND PATCH" />
     </InstallUISequence>
 
     <Property Id="WIXUI_INSTALLDIR" Value="APPLICATIONFOLDER" />

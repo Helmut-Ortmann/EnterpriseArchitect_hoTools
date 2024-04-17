@@ -36,12 +36,8 @@
     <!--  installation rules -->
     <MajorUpgrade
       DowngradeErrorMessage="A later version of [ProductName] is already installed. Setup will now exit."
-      AllowSameVersionUpgrades="yes"
-      Schedule="afterInstallInitialize" />
-    <InstallExecuteSequence>
-      <RemoveExistingProducts After="InstallInitialize" Overridable="yes"/>
-    </InstallExecuteSequence>
-    
+      AllowSameVersionUpgrades="yes"   />
+       
     <!-- Check for .Net framework 4.0 Client-->
     <Property Id="NETFRAMEWORK40CL">
       <RegistrySearch Id="NetFramework40Cl" Root="HKLM" Key="SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Client" Name="Install" Type="raw" />

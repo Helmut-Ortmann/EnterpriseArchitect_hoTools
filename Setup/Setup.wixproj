@@ -1,5 +1,5 @@
 ﻿<Project>
-  <Import Project="Sdk.props" Sdk="WixToolset.Sdk" Version="4.0.3" />
+  <Import Project="Sdk.props" Sdk="WixToolset.Sdk" Version="5.0.0" />
   <PropertyGroup>
     <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
   </PropertyGroup>
@@ -140,11 +140,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="WixToolset.UI.wixext" Version="4.0.3" />
     <PackageReference Include="System.Data.SQLite" Version="1.0.118.0" />
-    <PackageReference Include="WixToolset.Heat" Version="4.0.3" />
-    <PackageReference Include="WixToolset.UI.wixext" Version="4.0.3" />
-    <PackageReference Include="WixToolset.Util.wixext" Version="4.0.3" />
+    <PackageReference Include="WixToolset.Heat" Version="5.0.0" />
+    <PackageReference Include="WixToolset.UI.wixext" Version="5.0.0" />
+    <PackageReference Include="WixToolset.Util.wixext" Version="5.0.0" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
     <DefineConstants>Debug</DefineConstants>
@@ -158,16 +157,17 @@
     <IntermediateOutputPath>obj\$(Platform)\$(Configuration)\</IntermediateOutputPath>
     <VerboseOutput>True</VerboseOutput>
   </PropertyGroup>
-  <Import Project="Sdk.targets" Sdk="WixToolset.Sdk" Version="4.0.3" />
+  <Import Project="Sdk.targets" Sdk="WixToolset.Sdk" Version="5.0.0" />
   <PropertyGroup>
-    <PreBuildEvent>echo ------- harvest x86 AddInFramework.dll ---------------
+    <PreBuildEvent>
+      echo ------- harvest x86 AddInFramework.dll ---------------
 
-      "%25UserProfile%25\.nuget\packages\wixtoolset.heat\4.0.3\tools\net472\x86\heat.exe" file "$(SolutionDir)AddinFramework\bin\x86\Release\AddInFramework.dll" -v -dr APPLICATIONFOLDER -srd -gg -g1 -cg COM_DllFramework  -sfrag -suid  -var var.AddinFramework.TargetDir -out   "$(SolutionDir)Setup\Harvested_AddinFramework.wxs"
-      "%25UserProfile%25\.nuget\packages\wixtoolset.heat\4.0.3\tools\net472\x86\heat.exe" file "$(SolutionDir)hoToolsRoot\bin\x86\Release\hoToolsRoot.dll" -v -dr APPLICATIONFOLDER -srd -gg -g1 -cg COM_DllRoot  -sfrag -suid  -var var.hoToolsRoot.TargetDir -out   "$(SolutionDir)Setup\Harvested_HoToolsRoot.wxs"
-      "%25UserProfile%25\.nuget\packages\wixtoolset.heat\4.0.3\tools\net472\x86\heat.exe" file "$(SolutionDir)hoToolsGui\bin\x86\Release\hoToolsGui.dll" -v -dr APPLICATIONFOLDER -srd -gg -g1 -cg COM_DllGui  -sfrag -suid  -var var.hoToolsGui.TargetDir -out   "$(SolutionDir)Setup\Harvested_HoToolsGui.wxs"
-      "%25UserProfile%25\.nuget\packages\wixtoolset.heat\4.0.3\tools\net472\x86\heat.exe" file "$(SolutionDir)hoExtensionGui\bin\x86\Release\hoExtensionGui.dll" -v -dr APPLICATIONFOLDER -srd -gg -g1 -cg COM_DllExtGui  -sfrag -suid  -var var.hoExtensionGui.TargetDir -out   "$(SolutionDir)Setup\Harvested_hoExtensionGui.wxs"
-      "%25UserProfile%25\.nuget\packages\wixtoolset.heat\4.0.3\tools\net472\x86\heat.exe" file "$(SolutionDir)hoFindAndReplaceGui\bin\x86\Release\hoFindAndReplaceGui.dll" -v -dr APPLICATIONFOLDER -srd -gg -g1 -cg COM_DllFandR  -sfrag -suid  -var var.hoFindAndReplaceGui.TargetDir -out   "$(SolutionDir)Setup\Harvested_hoFindAndReplaceGui.wxs"
-      "%25UserProfile%25\.nuget\packages\wixtoolset.heat\4.0.3\tools\net472\x86\heat.exe" file "$(SolutionDir)hoSqlGui\bin\x86\Release\hoSqlGui.dll" -v -dr APPLICATIONFOLDER -srd -gg -g1 -cg COM_DllSqlGui  -sfrag -suid  -var var.hoSqlGui.TargetDir -out   "$(SolutionDir)Setup\Harvested_hoSqlGui.wxs"</PreBuildEvent>
+      "%25UserProfile%25\.nuget\packages\wixtoolset.heat\5.0.0\tools\net472\x86\heat.exe" file "$(SolutionDir)AddinFramework\bin\x86\Release\AddInFramework.dll" -v -dr APPLICATIONFOLDER -srd -gg -g1 -cg COM_DllFramework  -sfrag -suid  -var var.AddinFramework.TargetDir -out   "$(SolutionDir)Setup\Harvested_AddinFramework.wxs"
+      "%25UserProfile%25\.nuget\packages\wixtoolset.heat\5.0.0\tools\net472\x86\heat.exe" file "$(SolutionDir)hoToolsRoot\bin\x86\Release\hoToolsRoot.dll" -v -dr APPLICATIONFOLDER -srd -gg -g1 -cg COM_DllRoot  -sfrag -suid  -var var.hoToolsRoot.TargetDir -out   "$(SolutionDir)Setup\Harvested_HoToolsRoot.wxs"
+      "%25UserProfile%25\.nuget\packages\wixtoolset.heat\5.0.0\tools\net472\x86\heat.exe" file "$(SolutionDir)hoToolsGui\bin\x86\Release\hoToolsGui.dll" -v -dr APPLICATIONFOLDER -srd -gg -g1 -cg COM_DllGui  -sfrag -suid  -var var.hoToolsGui.TargetDir -out   "$(SolutionDir)Setup\Harvested_HoToolsGui.wxs"
+      "%25UserProfile%25\.nuget\packages\wixtoolset.heat\5.0.0\tools\net472\x86\heat.exe" file "$(SolutionDir)hoExtensionGui\bin\x86\Release\hoExtensionGui.dll" -v -dr APPLICATIONFOLDER -srd -gg -g1 -cg COM_DllExtGui  -sfrag -suid  -var var.hoExtensionGui.TargetDir -out   "$(SolutionDir)Setup\Harvested_hoExtensionGui.wxs"
+      "%25UserProfile%25\.nuget\packages\wixtoolset.heat\5.0.0\tools\net472\x86\heat.exe" file "$(SolutionDir)hoFindAndReplaceGui\bin\x86\Release\hoFindAndReplaceGui.dll" -v -dr APPLICATIONFOLDER -srd -gg -g1 -cg COM_DllFandR  -sfrag -suid  -var var.hoFindAndReplaceGui.TargetDir -out   "$(SolutionDir)Setup\Harvested_hoFindAndReplaceGui.wxs"
+      "%25UserProfile%25\.nuget\packages\wixtoolset.heat\5.0.0\tools\net472\x86\heat.exe" file "$(SolutionDir)hoSqlGui\bin\x86\Release\hoSqlGui.dll" -v -dr APPLICATIONFOLDER -srd -gg -g1 -cg COM_DllSqlGui  -sfrag -suid  -var var.hoSqlGui.TargetDir -out   "$(SolutionDir)Setup\Harvested_hoSqlGui.wxs"</PreBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PostBuildEvent>"$(SolutionDir)\Setup\Scripts\renamemsi.bat" "$(SolutionDir)Setup\bin\x86\Release\en-us\hoTools.msi" "$(SolutionDir)hotools_root\readme.md"</PostBuildEvent>
