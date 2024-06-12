@@ -217,7 +217,7 @@
       <Version>5.3.2</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Data.SqlClient">
-      <Version>5.2.0</Version>
+      <Version>5.2.1</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.SqlServer.Types">
       <Version>160.1000.6</Version>
@@ -232,7 +232,7 @@
       <Version>2.3.5</Version>
     </PackageReference>
     <PackageReference Include="Npgsql">
-      <Version>8.0.1</Version>
+      <Version>8.0.3</Version>
     </PackageReference>
     <PackageReference Include="Oracle.ManagedDataAccess">
       <Version>21.13.0</Version>

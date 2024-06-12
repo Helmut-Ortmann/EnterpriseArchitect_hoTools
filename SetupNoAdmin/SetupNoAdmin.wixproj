@@ -44,14 +44,6 @@
       <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
       <RefTargetDir>INSTALLFOLDER</RefTargetDir>
     </ProjectReference>
-    <ProjectReference Include="..\DuoVia.FuzzyStrings\DuoVia.FuzzyStrings.csproj">
-      <Name>DuoVia.FuzzyStrings</Name>
-      <Project>{29385a2d-eac1-4777-bc01-c060c2002307}</Project>
-      <Private>True</Private>
-      <DoNotHarvest>True</DoNotHarvest>
-      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
-      <RefTargetDir>INSTALLFOLDER</RefTargetDir>
-    </ProjectReference>
     <ProjectReference Include="..\EaServices\EaServices.csproj">
       <Name>EaServices</Name>
       <Project>{dfbedf5e-fc7f-4269-a0a6-f9b9e86dac90}</Project>

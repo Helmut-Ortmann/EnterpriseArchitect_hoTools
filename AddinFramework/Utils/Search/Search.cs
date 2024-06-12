@@ -15,11 +15,9 @@ using Microsoft.Win32;
 using AddinFramework.Extension;
 
 using DuoVia.FuzzyStrings;
-using DuoVia.FuzzyStrings.ComparePhraseEngine;
-using hoLinqToSql.LinqUtils;
+using DuoViaFuzzyStrings.ComparePhraseEngine;
 using hoLinqToSql.LinqUtils.Extensions;
 using Newtonsoft.Json;
-using hoTools.Utils;
 
 // ReSharper disable once CheckNamespace
 namespace AddinFramework.Util

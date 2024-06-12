@@ -164,8 +164,8 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DuoVia.FuzzyStrings\DuoVia.FuzzyStrings.csproj">
-      <Project>{29385a2d-eac1-4777-bc01-c060c2002307}</Project>
+    <ProjectReference Include="..\DuoViaFuzzyStrings\DuoVia.FuzzyStrings.csproj">
+      <Project>{28fe5ce6-4baf-4c08-a526-47b6f4051510}</Project>
       <Name>DuoVia.FuzzyStrings</Name>
     </ProjectReference>
     <ProjectReference Include="..\hoLinqToSql\hoLinqToSql.csproj">
