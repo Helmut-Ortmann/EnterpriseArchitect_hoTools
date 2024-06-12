@@ -29,12 +29,12 @@
     <Compile Include="Wxs\Directories.wxs" />
     <Compile Include="Wxs\Files.wxs" />
     <Compile Include="Wxs\Product.wxs" />
+    <Compile Include="Wxs\Registry.wxs" />
     <Compile Include="Wxs\WixUI_Advanced.wxs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Collect" />
     <Folder Include="Scripts" />
-    <Folder Include="Wxs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Collect\Collect.bat" />

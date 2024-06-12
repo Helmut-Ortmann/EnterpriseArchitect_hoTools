@@ -3,12 +3,8 @@
       Guidelines Single Package Authoring (per user/per machine install)
       https://msdn.microsoft.com/en-us/library/windows/desktop/dd408068(v=vs.85).aspx
       -->
-      
-    <Property Id="ApplicationFolderName" Value="hoToolsX64" />
-	
-        <Directory Id="LocalAppData"> <!--Prevent using UAC (User Access Control)-->
-              <Directory Id="APPLICATIONFOLDER" Name="hoToolsX64">
-              </Directory>
-          </Directory>
+
+      <Directory Id="APPLICATIONFOLDER" >
+      </Directory>
       </Fragment>
  </Wix>

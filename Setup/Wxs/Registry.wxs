@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+  <Fragment>
+    <ComponentGroup Id="RegistryEntries">
+     
+      <Component Id="RegistryEntriesPerUser" Guid="{ACA4F5D6-78B1-47F8-8089-FDC43C992021}"  Condition="NOT Privileged"> 
+        
+        <RegistryKey Root="HKCU" Key="SOFTWARE\Sparx Systems\EAAddins\hoTools" ForceDeleteOnUninstall="yes">
+          <RegistryValue Type="string" Value="hoTools.HoToolsRoot" KeyPath="yes" />
+        </RegistryKey>
+      </Component>
+      <Component Id="RegistryEntriesPerMachine" Guid="{09B651CF-62EE-4FC6-850A-1F75C423DA01}" Condition="Privileged">
+        <RegistryKey Root="HKLM" Key="SOFTWARE\Sparx Systems\EAAddins\hoTools" ForceDeleteOnUninstall="yes">
+          <RegistryValue Type="string" Value="hoTools.HoToolsRoot" KeyPath="yes" />
+        </RegistryKey>
+      </Component>
+    </ComponentGroup>
+    
+  </Fragment>
+</Wix>

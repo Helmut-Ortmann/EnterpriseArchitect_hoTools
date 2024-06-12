@@ -31,30 +31,23 @@
   <?define Manufacturer="ho" ?>
   <?define ProductName="hoToolsX64" ?>
 
-  <Package Name="$(var.ProductName)" Language="1033" Version="$(var.ProductVersion)" Manufacturer="$(var.Manufacturer)" UpgradeCode="$(var.UpgradeCode)" InstallerVersion="200">
-    <SummaryInformation Description="Windows installer for hoTools $(var.ProductVersion)" Keywords="Installer, MSI, Database" />
+ <Package Name="$(var.ProductName)"  Language="1033" Version="$(var.ProductVersion)" Manufacturer="$(var.Manufacturer)" UpgradeCode="$(var.UpgradeCode)" InstallerVersion="500" >
+   <SummaryInformation Description="Windows installer for hoTools $(var.ProductVersion)" Keywords="Installer, MSI, Database" />
+
+   <Property Id="MSIINSTALLPERUSER" Secure="yes" Value="1" />
     <!--  installation rules -->
     <MajorUpgrade
       DowngradeErrorMessage="A later version of [ProductName] is already installed. Setup will now exit."
       AllowSameVersionUpgrades="yes" />
 
-    <!-- Check for .Net framework 4.0 Client-->
-    <Property Id="NETFRAMEWORK40CL">
-      <RegistrySearch Id="NetFramework40Cl" Root="HKLM" Key="SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Client" Name="Install" Type="raw" />
-    </Property>
-    <!-- Check for .Net framework 4.0 Full-->
-    <Property Id="NETFRAMEWORK40FULL">
-      <RegistrySearch Id="NetFramework40FULL" Root="HKLM" Key="SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Client" Name="Install" Type="raw" />
-    </Property>
-
-    <Launch Condition="Installed OR NETFRAMEWORK40CL OR NETFRAMEWORK40FULL" Message="This application requires .NET Framework v4. Please install the .NET Framework then run this installer again." />
-
+    
     <!--InstallPrivileges="elevated"-->
 
     <Media Id="1" Cabinet="Contents.cab" EmbedCab="yes" CompressionLevel="medium" />
 
     <Feature Id="Complete" Description="Enterprise Architect hoTools" Title="hoTools" Level="1" Display="expand" ConfigurableDirectory="APPLICATIONFOLDER">
       <ComponentGroupRef Id="ProductComponents" />
+      <ComponentGroupRef Id="RegistryEntries" />
       <ComponentGroupRef Id="COM_DllRoot" />
       <ComponentGroupRef Id="COM_DllGui" />
       <ComponentGroupRef Id="COM_DllFramework" />
@@ -64,20 +57,23 @@
     </Feature>
     
     <WixVariable Id="WixUILicenseRtf" Value="License.rtf" />
+    <Property Id="MY_ALLUSERS" Value="PerUser" />
+
+    <UIRef Id="WixUI_MySetup" />
+    <Property Id="WixAppFolder" Value="WixPerUserFolder" />
+    <UIRef Id="WixUI_ErrorProgressText" />
 
     <!-- Install with or without admin rights
       required: 
       - Localization.wxl ((unchanged will work)
       - WixUI_Advanced.wxl (unchanged will work)
       -->
-    <UIRef Id="WixUI_MySetup" />
     <!--WixUI_Advanced WixUI_MySetup -->
     <!--
       Guidelines Single Package Authoring (per user/per machine install)
       https://msdn.microsoft.com/en-us/library/windows/desktop/dd408068(v=vs.85).aspx
       http://uvinw.com/per-machine-and-per-user-without-UAC-in-WiX/
         -->
-    <Property Id="WixAppFolder" Value="WixPerUserFolder" />
-    <UIRef Id="WixUI_ErrorProgressText" />
+
   </Package>
 </Wix>
