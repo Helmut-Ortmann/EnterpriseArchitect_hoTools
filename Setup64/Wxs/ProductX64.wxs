@@ -40,9 +40,7 @@
       DowngradeErrorMessage="A later version of [ProductName] is already installed. Setup will now exit."
       AllowSameVersionUpgrades="yes" />
 
-    
-    <!--InstallPrivileges="elevated"-->
-
+   
     <Media Id="1" Cabinet="Contents.cab" EmbedCab="yes" CompressionLevel="medium" />
 
     <Feature Id="Complete" Description="Enterprise Architect hoTools" Title="hoTools" Level="1" Display="expand" ConfigurableDirectory="APPLICATIONFOLDER">
