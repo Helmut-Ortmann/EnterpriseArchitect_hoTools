@@ -43,7 +43,6 @@
       AllowSameVersionUpgrades="yes"   />
        
    
-    <Launch Condition="Installed OR NETFRAMEWORK40CL OR NETFRAMEWORK40FULL" Message="This application requires .NET Framework v4. Please install the .NET Framework then run this installer again." />
     
 
     <Media Id="1" Cabinet="Contents.cab" EmbedCab="yes" CompressionLevel="medium" />

@@ -48,6 +48,9 @@
     <Content Include="UserSearches.json" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="scripts\DeleteRegistryKeys.bat" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\AddinFramework\AddinFramework.csproj">
       <Name>AddinFramework</Name>
       <Project>{b08ae89b-5e8d-46fd-a5d8-b3db4d33fb46}</Project>

@@ -130,6 +130,8 @@ Some features:
 ## Releases
 
 ### 4.2.8 Refactoring SQL/Linq2db
+
+- Installer: Fix admin install, registry keys
 - Macros (quotedName,..)
 - Fixes
 - linq2db 
