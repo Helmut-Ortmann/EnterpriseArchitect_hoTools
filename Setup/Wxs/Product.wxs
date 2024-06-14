@@ -69,7 +69,6 @@
       - Localization.wxl ((unchanged will work)
       - WixUI_Advanced.wxl (unchanged will work)
      -->    
-    <UIRef Id="WixUI_MySetup" /> <!--WixUI_Advanced WixUI_MySetup -->
     <!--
       Guidelines Single Package Authoring (per user/per machine install)
       https://msdn.microsoft.com/en-us/library/windows/desktop/dd408068(v=vs.85).aspx
