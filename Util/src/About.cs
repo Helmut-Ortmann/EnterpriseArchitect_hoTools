@@ -4,7 +4,6 @@ using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
 using hoLinqToSql.LinqUtils;
-using hoTools.Utils.src;
 using JetBrains.Annotations;
 
 // ReSharper disable once CheckNamespace

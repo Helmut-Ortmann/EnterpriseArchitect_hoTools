@@ -6915,7 +6915,7 @@ from %APPDATA%Local\Apps\hoTools\
                 //"sybdrvado20.dll"
                 };
 
-            hoTools.Utils.Abouts.About.AboutMessage(rep, "hoTools", "Keeps things simple", dllNames, pathSettings: settingsPath);
+            Utils.Abouts.About.AboutMessage(rep, "hoTools", "Keeps things simple", dllNames, pathSettings: settingsPath);
 
 
 //            string installDir = Path.GetDirectoryName(Assembly.GetAssembly(typeof(EaService)).CodeBase);

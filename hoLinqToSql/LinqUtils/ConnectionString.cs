@@ -8,6 +8,12 @@ namespace hoLinqToSql.LinqUtils
     ///
     /// If the EA-ConnectionString is an *.eap[x] file than:
     /// 1. If *.eap[x] file smaller than 1,000 byte ==> connectionString is file content
+    /// 2. MySQL handling
+    ///
+    /// Usage: Replace _rep. ConnectionString with:
+    ///     EaConnectionString eaConnectionString = new hoLinqToSql.LinqUtils.EaConnectionString(rep);
+    ///     string connectionString = eaConnectionString.DbConnectionStr;
+
     /// </summary>
     public class EaConnectionString
     {

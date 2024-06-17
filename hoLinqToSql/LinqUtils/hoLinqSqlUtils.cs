@@ -139,6 +139,11 @@ namespace hoLinqToSql.LinqUtils
         /// <returns></returns>
         public static DataOptions GetLinq2DataOptions(IDataProvider provider, string providerName, string connectionString)
         {
+            // Handle file based connection string which doesn't contain Data Source=
+            if (!connectionString.Contains("Data Source="))
+            {
+                connectionString = $"Data Source={connectionString};";
+            }
             DataOptions options = null;
             try
             {
@@ -384,7 +389,7 @@ Provider:     '{provider?.Name ?? ""}'
                         providerName = DataModels.DbConfig.GetDbProperties(rep).LinqName;
                         dsnConnectionString = GetConnectionStringForDsn(connectionString);
                         if (dsnConnectionString != "") return dsnConnectionString;
-                        return $@"DataSource={connectionString};";
+                        return $@"Data Source={connectionString};";
 
 
 
@@ -444,10 +449,11 @@ ConnectionString: '{connectionString}'
         /// - eadb AccessDbOdbcDriver   (32+64 Bit)
         /// </summary>
         /// <param name="rep"></param>
-        /// <param name="connectionString"></param>
         /// <returns></returns>
-        public static DataOptions GetConnectionOptions(EA.Repository rep, string connectionString)
+        public static DataOptions GetConnectionOptions(EA.Repository rep)
         {
+            EaConnectionString eaConnectionString = new EaConnectionString(rep);
+            string connectionString = eaConnectionString.DbConnectionStr;
 
             var providerName = DataModels.DbConfig.GetDbProperties(rep).LinqName;
             if (connectionString.ToLower().EndsWith(".qea") || connectionString.ToLower().EndsWith(".qeax")) providerName = DataModels.DbConfig.GetDbProperties(rep).LinqName;
