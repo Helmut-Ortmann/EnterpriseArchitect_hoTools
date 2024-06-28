@@ -119,8 +119,8 @@ namespace hoLinqToSql.DataModels
         /// <returns>DatabaseProperties</returns>
         public static DatabaseProperties GetDbProperties(EA.Repository rep)
         {
-
-            var dbProperty = DatabaseProperties.Where(x => x.Key == RepType(rep))
+            // Find Database
+            var dbProperty = DatabaseProperties.Where(x => x.Key.ToLower() == RepType(rep).ToLower())
                 .Select(x => x.Value).FirstOrDefault();
             if (dbProperty == null)
             {
@@ -130,7 +130,7 @@ namespace hoLinqToSql.DataModels
 
 This can happen:
 - If you use a different DB
-- EA.Repository object 'rep' with: EA Server RPC issues, Shutdown of Repository", $@"CariadTools DB {RepType(rep)} not supported or EA Server down");
+- EA.Repository object 'rep' with: EA Server RPC issues, Shutdown of Repository", $@"hoTools/hoReverse DB {RepType(rep)} not supported or EA Server down");
                 return null;
             }
             return dbProperty;
@@ -152,7 +152,7 @@ This can happen:
 
 This can happen:
 - If you use a different DB
-- EA.Repository object 'rep' with: EA Server RPC issues, Shutdown of Repository", $@"CariadTools DB {dbName} not supported or EA Server down");
+- EA.Repository object 'rep' with: EA Server RPC issues, Shutdown of Repository", $@"hoTools/hoReverse DB {dbName} not supported or EA Server down");
                 return null;
             }
             return dbProperty;
