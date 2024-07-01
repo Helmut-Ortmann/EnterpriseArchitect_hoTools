@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace hoLinqToSql.LinqUtils
 {
@@ -78,7 +79,7 @@ namespace hoLinqToSql.LinqUtils
                 case "ASA":
                     break;
                 case "SQLSVR":
-
+                    DbConnectionStr = GetSqlSvrConnectionString(DbConnectionStr);
                     break;
                 case "MYSQL":
                     DbConnectionStr = GetMySqlConnectionString(DbConnectionStr);
@@ -91,6 +92,32 @@ namespace hoLinqToSql.LinqUtils
             }
 
 
+        }
+
+        /// <summary>
+        /// Get SQL Server connection string from EA connection string
+        /// </summary>
+        /// <param name="eaConnectionString"></param>
+        /// <returns></returns>
+        private string GetSqlSvrConnectionString(string eaConnectionString)
+        {
+            if (eaConnectionString.Contains("DBType=1;"))
+            {
+
+                var dataSourceMatch = Regex.Match(eaConnectionString, @"Data Source=(.*?);");
+                var initialCatalogMatch = Regex.Match(eaConnectionString, @"Initial Catalog=(.*?);");
+                if (dataSourceMatch.Success && initialCatalogMatch.Success)
+                {
+                    string server = dataSourceMatch.Groups[1].Value;
+                    string database = initialCatalogMatch.Groups[1].Value;
+                    string sqlSvrConnectionString = $"Server={server};Database={database};Integrated Security=True;";
+                    return $@"Data Source=.;Database={database};Integrated Security=SSPI;";
+                }
+
+
+
+            }
+            return eaConnectionString;
         }
 
         /// <summary>

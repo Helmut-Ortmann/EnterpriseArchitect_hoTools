@@ -72,6 +72,8 @@ namespace hoLinqToSql.DataModels
         new DatabaseProperties
         {
             MacroName = "#DB=SqlSvr#",
+            OdbcDiverName = "SqlServer",
+            LinqName = "SqlServer",
             BoolStringParser = boolString => boolString.Equals("Y", StringComparison.OrdinalIgnoreCase),
             BoolToStringConverter = b => b ? "Y" : "N"
         }
